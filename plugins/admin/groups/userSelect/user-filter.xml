@@ -16,6 +16,7 @@
       <attribute>cn</attribute>
       <attribute>sn</attribute>
       <attribute>givenName</attribute>
+      <attribute>uid</attribute>
       <attribute>description</attribute>
     </query>
     <scope>auto</scope>

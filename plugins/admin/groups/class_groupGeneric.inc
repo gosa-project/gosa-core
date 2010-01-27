@@ -49,7 +49,7 @@ class group extends plugin
   var $orig_cn= "";
   var $orig_base= "";
   var $has_mailAccount= FALSE;
-  var $group_dialog= FALSE;
+  var $userSelect= FALSE;
   var $nagios_group =FALSE;
   var $sambaGroupType;
   var $dialog;
@@ -255,24 +255,32 @@ class group extends plugin
 
     /* Add objects? */
     if (isset($_POST["edit_membership"]) && preg_match("/w/",$this->getacl("memberUid"))){
-      $this->group_dialog= TRUE;
+      $this->userSelect= new userSelect($this->config, get_userinfo());
       $this->dialog= TRUE;
     }
 
     /* Add objects finished? */
-    if (isset($_POST["add_users_finish"]) || isset($_POST["add_users_cancel"])){
-      $this->group_dialog= FALSE;
+    if (isset($_POST["add_users_cancel"])){
+      $this->userSelect= NULL;
       $this->dialog= FALSE;
     }
 
     /* Add user to group */
-    if (isset($_POST['add_users_finish']) && isset($_POST['users'])){
-      foreach ($_POST['users'] as $value){
-        $this->members["$value"]= $this->allusers[$value];
-        asort($this->members);
-        $this->addUser($value);
+    if (isset($_POST['add_users_finish']) && $this->userSelect){
+  
+      $users = $this->userSelect->detectPostActions();
+      if(isset($users['targets'])){
+        $headpage = $this->userSelect->getHeadpage();
+        foreach($users['targets'] as $dn){
+          $attrs = $headpage->getEntry($dn);
+          $value = $attrs['uid'][0];
+          $this->addUser($value);
+          $this->members["$value"]= $this->allusers[$value];
+          $this->reload();
+        }
       }
-      $this->reload();
+      $this->userSelect= NULL;
+      $this->dialog= FALSE;
     }
 
     /* Base select dialog */
@@ -377,56 +385,8 @@ class group extends plugin
     }
 
     /* Manage object add dialog */
-    if ($this->group_dialog){
-
-      /* Save data */
-      $gufilter= session::get("gufilter");
-      foreach( array("dselect", "regex") as $type){
-        if (isset($_POST[$type])){
-          $gufilter[$type]= $_POST[$type];
-        }
-      }
-      if(isset($_POST['regex'])){
-        if(isset($_POST['SubSearchGroup'])){
-          $gufilter['SubSearchGroup'] = true;
-        }else{
-          $gufilter['SubSearchGroup'] = false;
-        }
-      }
-
-      if (isset($_GET['search'])){
-        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-        if ($s == "**"){
-          $s= "*";
-        }
-        $gufilter['regex']= $s;
-      }
-      session::set("gufilter", $gufilter);
-      $this->reload();
-
-      /* Show dialog */
-      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
-      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
-      $ui = get_userinfo();
-      $tmp = $ui->get_module_departments("users");
-      $deps = array();
-      foreach($this->config->idepartments as $dn => $name){
-        if(in_array($dn,$tmp)){
-          $deps[$dn] = $name;
-        }
-      }  
- 
-      $smarty->assign("deplist", $deps);
-      $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("dselect", "regex","SubSearchGroup") as $type){
-        $smarty->assign("$type", $gufilter[$type]);
-      }
-      $smarty->assign("hint", print_sizelimit_warning());
-      $smarty->assign("users", $this->displayUsers);
-      $smarty->assign("apply", apply_filter());
-      $display= $smarty->fetch (get_template_path('group_objects.tpl', TRUE, dirname(__FILE__)));
-      return ($display);
+    if ($this->userSelect){
+      return($this->userSelect->execute());
     }
 
     $smarty->assign("bases", $this->get_allowed_bases());

@@ -28,12 +28,10 @@
   </tr>
 </table>
 
-<input type="hidden" value="1" name="PosixGroupDialogPosted">
 <p class="plugbottom">
-  <input type=submit name="add_groups_finish" value="{msgPool type=addButton}">
+  <input type=submit name="add_users_finish" value="{msgPool type=addButton}">
   &nbsp;
-  <input type=submit name="add_groups_cancel" value="{msgPool type=cancelButton}">
+  <input type=submit name="add_users_cancel" value="{msgPool type=cancelButton}">
 </p>
-
 
 <input type="hidden" name="ignore">
