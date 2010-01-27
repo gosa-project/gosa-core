@@ -58,7 +58,7 @@ class baseSelector {
 
     $this->pathMapping= array();
     $selected= $this->base == $config->current['BASE']?"Selected":"";
-    $this->tree= "<a class='treeList$selected' href='#'>"._("Root")."</a><ul class='treeList'>\n";
+    $this->tree= "<div class='treeList'><a class='treeList$selected' href='#'>"._("Root")."</a><ul class='treeList'>\n";
     $first= true;
     $last_indent= 2;
 
@@ -99,6 +99,7 @@ class baseSelector {
     for ($i= 0; $i<$last_indent; $i++) {
       $this->tree.= "</li></ul>\n";
     }
+    $this->tree.= "</div>\n";
 
 echo $this->tree;
 
