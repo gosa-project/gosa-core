@@ -45,7 +45,7 @@
 
 	{if !$JS}
 
-		{if $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
+		{if $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 		<div id='e_layer{$i_ID}' class="infoMsgDialog" style='top:200px;left:200px;'>
     {else}
 		<div id='e_layer{$i_ID}' class="errorMsgDialog" style='top:200px;left:200px;'>
@@ -53,11 +53,11 @@
 
 			<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			<table><tr><td>
-		{if $i_Type == ERROR_DIALOG}
+		{if $i_Type == $smarty.const.ERROR_DIALOG}
 						<img src='images/error.png' alt='{t}Error{/t}'>
-		{elseif $i_Type == WARNING_DIALOG}
+		{elseif $i_Type == $smarty.const.WARNING_DIALOG}
 						<img src='images/warning.png'  alt='{t}Warning{/t}'>
-		{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
+		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 						<img src='images/info.png' alt='{t}Information{/t}'>
 		{/if}
 			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
@@ -72,9 +72,9 @@
 				</tr>
 				<tr>
 					<td colspan='2' align='center'>
-		{if $i_Type == ERROR_DIALOG || $i_Type == WARNING_DIALOG || $i_Type == INFO_DIALOG}
+		{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
 						<input type='button' type='submit' name='MSG_OK{$i_ID}' value='{t}Ok{/t}'> 
-		{elseif $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
+		{elseif $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 						<input type='button' type='submit' name='MSG_OK{$i_ID}' value='{t}Ok{/t}'>
 						<input type='button' type='submit' name='MSG_CANCEL{$i_ID}' value='{t}Cancel{/t}'>
 		{/if}
@@ -92,7 +92,7 @@
 		
 		{/if}
 
-    {if $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
+    {if $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
     <div id='e_layer{$i_ID}' class="infoMsgDialog" style='top:200px;left:200px;'>
     {else}
     <div id='e_layer{$i_ID}' class="errorMsgDialog" style='top:200px;left:200px;'>
@@ -100,11 +100,11 @@
 
 		<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			<table><tr><td>
-		{if $i_Type == ERROR_DIALOG}
+		{if $i_Type == $smarty.const.ERROR_DIALOG}
 						<img src='images/error.png' alt='{t}Error{/t}'>
-		{elseif $i_Type == WARNING_DIALOG}
+		{elseif $i_Type == $smarty.const.WARNING_DIALOG}
 						<img src='images/warning.png'  alt='{t}Warning{/t}'>
-		{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
+		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 						<img src='images/info.png' alt='{t}Information{/t}'>
 		{/if}
 			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
@@ -129,15 +129,15 @@
 					{else}
 					<td colspan='2' align='center' style="border-top: solid 1px #BBBBBB;">
 					{/if}
-		{if $i_Type == ERROR_DIALOG || $i_Type == WARNING_DIALOG || $i_Type == INFO_DIALOG}
+		{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
 						<input type='button' id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' 
               onClick='next_msg_dialog();' value='{t}Ok{/t}'>
-		{elseif $i_Type == CONFIRM_DIALOG}
+		{elseif $i_Type == $smarty.const.CONFIRM_DIALOG}
 						<input type='button' id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
               onClick='next_msg_dialog();' value='{t}Ok{/t}'>
 						<input type='button' type='button' name='MSG_CANCEL{$i_ID}' 
               onClick='next_msg_dialog();' value='{t}Cancel{/t}'>
-		{elseif $i_Type == OK_CANCEL_DIALOG}
+		{elseif $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 						<input type='button' id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
               onClick='next_msg_dialog();' value='{t}Ok{/t}'>
 						<input type='button' type='submit' name='MSG_CANCEL{$i_ID}' 
