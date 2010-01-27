@@ -2016,6 +2016,7 @@ ul.treeList, ul.treeList ul { list-style-type: none; background: url(../../image
 ul.treeList ul { margin-left: 10px; }
 ul.treeList a:hover { background-color: #DDD }
 a.treeList { font-weight: bold }
+a.treeListSelected { font-weight: bold; color: red; }
 ul.treeList li { margin: 0; padding: 0 12px; line-height: 20px; background: url(../../images/lists/node.png) no-repeat; font-weight: bold; }
 li.treeListSelected a {color: red}
 ul.treeList li.last { background: #fff url(../../images/lists/lastnode.png) no-repeat; }
