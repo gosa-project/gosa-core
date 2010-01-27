@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <category>users</category>
+    <template>selectUserGroup-filter.tpl</template>
+    <initial>true</initial>
+  </definition>
+
+  <search>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(|$USER $GROUP ) $NAME)</filter>
+      <attribute>dn</attribute>
+      <attribute>objectClass</attribute>
+      <attribute>cn</attribute>
+      <attribute>sn</attribute>
+      <attribute>uid</attribute>
+      <attribute>givenName</attribute>
+      <attribute>description</attribute>
+      <attribute>userPassword</attribute>
+    </query>
+    <scope>auto</scope>
+  </search>
+
+  <element>
+    <type>textfield</type>
+    <tag>NAME</tag>
+    <size>20</size>
+    <maxlength>60</maxlength>
+    <default></default>
+    <unset></unset>
+    <set>(|(cn=*$*)(sn=*$*)(givenName=*$*))</set>
+    <alphabet>true</alphabet>
+    <autocomplete>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)))</filter>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>USER</tag>
+    <default>true</default>
+    <set>(&amp;(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate)))</set>
+    <unset></unset>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>GROUP</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=posixGroup)</set>
+  </element>
+
+</filterdef>
