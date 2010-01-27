@@ -39,6 +39,7 @@ class baseSelector {
   {
     $this->setBases($bases);
     $this->setBase($base);
+    $this->update();
   }
 
 
@@ -69,11 +70,31 @@ class baseSelector {
       $elements= array_reverse($elements, true);
 
       $this->pathMapping[$base]= $base == $config->current['BASE']? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
+    }
+
+    // Save bases to session for autocompletion
+    session::global_set('pathMapping', $this->pathMapping);
+  }
+
+
+  function update()
+  {
+    global $config;
+
+    $selected= $this->base == $config->current['BASE']?"Selected":"";
+    $this->tree= "<div class='treeList'><a class='treeList$selected' href='#'>"._("Root")."</a><ul class='treeList'>\n";
+    $first= true;
+    $last_indent= 2;
+
+    foreach ($this->pathMapping as $base => $dummy) {
 
       // Skip root for tree
       if ($base == $config->current['BASE']) {
         continue;
       }
+
+      // Build path style display
+      $elements= explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
 
       $indent= count($elements);
       if (!$first && ($indent == $last_indent)) {
@@ -89,7 +110,7 @@ class baseSelector {
         $this->tree.= "</li>\n";
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
-      $this->tree.= "<li$selected><a href='#'>".ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base))."</a>";
+      $this->tree.= "<li><a$selected href='#'>".ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base))."</a>";
 
       $last_indent= $indent;
       $first= false;
@@ -102,22 +123,12 @@ class baseSelector {
     $this->tree.= "</div>\n";
 
 echo $this->tree;
-
-    // Save bases to session for autocompletion
-    session::global_set('pathMapping', $this->pathMapping);
   }
-
 
   function render()
   {
     $result= "";
     return $result;
-  }
-
-
-  function update()
-  {
-    echo "update";
   }
 
 
