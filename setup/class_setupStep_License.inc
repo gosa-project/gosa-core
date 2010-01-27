@@ -29,7 +29,7 @@ class Step_License extends setup_step
   var $attributes     = array("accepted");
   
 
-  function __construct()
+  function Step_License()
   {
     $this->update_strings();
   }

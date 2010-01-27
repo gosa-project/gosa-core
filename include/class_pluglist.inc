@@ -34,7 +34,7 @@ class pluglist {
         var $allowed_plugins = array();
         var $silly_cache= array();
 
-	function __construct(&$config, &$ui)
+	function pluglist(&$config, &$ui)
 	{
 		$this->ui= &$ui;
 		$this->config= &$config;

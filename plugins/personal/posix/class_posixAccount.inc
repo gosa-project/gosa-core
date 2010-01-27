@@ -103,7 +103,7 @@ class posixAccount extends plugin
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
-  function __construct(&$config, $dn= NULL)
+  function posixAccount (&$config, $dn= NULL)
   {
     global $class_mapping;
 

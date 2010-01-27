@@ -31,7 +31,7 @@ class Step_Schema extends setup_step
 
   var $found_ocs = 0; 
  
-  function __construct()
+  function Step_Schema()
   {
     $this->update_strings();
   }

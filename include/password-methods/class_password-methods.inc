@@ -29,7 +29,7 @@ class passwordMethod
   var $lockable = TRUE;
 
   // Konstructor
-  function __construct($config)
+  function passwordMethod($config)
   {
   }
 

@@ -35,7 +35,7 @@ class setup_step extends plugin
   var $parent       = NULL;
   var $dialog       = FALSE;
   
-  function __construct()
+  function setup_step()
   {
   }
 

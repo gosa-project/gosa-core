@@ -40,7 +40,7 @@ class SnapShotDialog extends plugin
   var $last_list = array();
 
 	
-	function __construct(&$config, $dn, &$parent)
+	function SnapShotDialog(&$config, $dn, &$parent)
 	{
     plugin::plugin($config,$dn);
     $this->parent 	= &$parent;

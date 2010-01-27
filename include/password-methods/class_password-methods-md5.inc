@@ -22,7 +22,7 @@
 
 class passwordMethodMd5 extends passwordMethod
 {
-	function __construct($config)  
+	function passwordMethodMd5($config)  
 	{
 	}
 

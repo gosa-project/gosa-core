@@ -39,7 +39,7 @@ class filter {
   var $pid;
 
 
-  function __construct($filename)
+  function filter($filename)
   {
     global $config;
 

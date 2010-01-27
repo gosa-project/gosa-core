@@ -139,7 +139,7 @@ class plugin
     \param dn Distinguished name to initialize plugin from
     \sa plugin()
    */
-  function __construct(&$config, $dn= NULL, $object= NULL)
+  function plugin (&$config, $dn= NULL, $object= NULL)
   {
     /* Configuration is fine, allways */
     $this->config= &$config;	

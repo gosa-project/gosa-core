@@ -73,7 +73,7 @@ class group extends plugin
 
   var $multiple_support = TRUE;
 
-  function __construct(&$config, $dn= NULL)
+  function group (&$config, $dn= NULL)
   {
      /* Set rfc2307bis flag */
      if ($config->get_cfg_value("rfc2307bis") == "true"){

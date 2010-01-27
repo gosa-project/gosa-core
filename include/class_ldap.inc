@@ -49,7 +49,7 @@ class LDAP{
   var $referrals= array();
   var $max_ldap_query_time = 0;   // 0, empty or negative values will disable this check 
 
-  function __construct($binddn,$bindpw, $hostname, $follow_referral= FALSE, $tls= FALSE)
+  function LDAP($binddn,$bindpw, $hostname, $follow_referral= FALSE, $tls= FALSE)
   {
     global $config;
     $this->follow_referral= $follow_referral;

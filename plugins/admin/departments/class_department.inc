@@ -56,7 +56,7 @@ class department extends plugin
   var $orig_base = "";
   var $orig_ou = "";
 
-	function __construct(&$config, $dn)
+	function department (&$config, $dn)
 	{
     /* Add the default structural obejct class 'locality' if this is a new entry
      */

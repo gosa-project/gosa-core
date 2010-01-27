@@ -56,7 +56,7 @@ class Step_Config2 extends setup_step
   var $attributes = array("mail_attrib","governmentmode","sambaidmapping","cyrusunixstyle","mail","timezone");
   var $called = FALSE;
 
-  function __construct()
+  function Step_Config2()
   {
     $this->update_strings();
     $this->mail_methods = $this->get_available_mail_classes();

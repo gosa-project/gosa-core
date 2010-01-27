@@ -22,7 +22,7 @@
 
 class passwordMethodCrypt extends passwordMethod
 {
-  function __construct($config)
+  function passwordMethodCrypt($config)
   {
   }
 

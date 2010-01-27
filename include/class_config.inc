@@ -69,7 +69,7 @@ class config  {
    *  \param string 'basedir' base directory
    *
    * */
-  function __construct($filename, $basedir= "")
+  function config($filename, $basedir= "")
   {
     $this->parser = xml_parser_create();
     $this->basedir= $basedir;

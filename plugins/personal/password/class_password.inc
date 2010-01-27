@@ -26,7 +26,7 @@ class password extends plugin
   var $plHeadline     = "Password";
   var $plDescription  = "Change user password";
 
-  function __construct(&$config, $dn= NULL, $parent= NULL)
+  function password(&$config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin($config, $dn, $parent);
   }

@@ -41,7 +41,7 @@ class divlist {
   var $fix_list_for_plugins = FALSE;
   
 	// Added php 4 constructor
-	function __construct($pageid){
+	function divlist($pageid){
 
 		$this->i_currentPage    = 0;
 		$this->i_entriesPerPage = 10;

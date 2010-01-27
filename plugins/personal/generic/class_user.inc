@@ -130,7 +130,7 @@ class user extends plugin
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
-  function __construct(&$config, $dn= NULL)
+  function user (&$config, $dn= NULL)
   {
     global $lang;
 

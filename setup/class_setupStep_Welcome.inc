@@ -26,7 +26,7 @@ class Step_Welcome  extends setup_step
   var $attributes     = array();
   var $header_image   = "images/setup/welcome.png";
 
-  function __construct()
+  function Step_Welcome()
   {
     $this->is_enabled     = TRUE;
     $this->is_active      = TRUE;

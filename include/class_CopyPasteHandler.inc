@@ -44,7 +44,7 @@ class CopyPasteHandler {
 
 
   /* Create CP handler  */
-  function __construct(&$config)
+  function CopyPasteHandler(&$config)
   {
     $this->config = &$config;	
     $this->current= NULL;

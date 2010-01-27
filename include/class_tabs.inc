@@ -43,7 +43,7 @@ class tabs
   var $hide_refs = FALSE;
   var $hide_acls = FALSE;
   
-  function __construct(&$config, $data, $dn, $acl_category= "", $hide_refs = FALSE, $hide_acls = FALSE)
+  function tabs(&$config, $data, $dn, $acl_category= "", $hide_refs = FALSE, $hide_acls = FALSE)
   {
     /* Save dn */
     $this->dn= $dn;
