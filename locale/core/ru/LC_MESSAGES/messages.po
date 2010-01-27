@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 17:26+0100\n"
+"POT-Creation-Date: 2010-01-27 15:02+0100\n"
 "PO-Revision-Date: 2005-04-18 14:35+0300\n"
 "Last-Translator: Igor Muratov <migor@altlinux.org>\n"
 "Language-Team: ALT Linux Team\n"
@@ -13,6 +13,60 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: poEdit 1.3.1\n"
+
+#: ihtml/themes/default/baseSelect-list.tpl:13
+#: include/class_baseSelectDialog.inc:29
+#: plugins/admin/ogroups/ogroup-list.tpl:13
+#: plugins/admin/ogroups/class_ogroup.inc:1084
+#: plugins/admin/ogroups/generic.tpl:26
+#: plugins/admin/groups/userSelect/user-list.tpl:13
+#: plugins/admin/groups/generic.tpl:39
+#: plugins/admin/groups/class_groupGeneric.inc:1222
+#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
+#: plugins/admin/departments/locality.tpl:28
+#: plugins/admin/departments/generic.tpl:39
+#: plugins/admin/departments/class_domain.inc:88
+#: plugins/admin/departments/class_localityGeneric.inc:89
+#: plugins/admin/departments/class_organizationGeneric.inc:121
+#: plugins/admin/departments/class_countryGeneric.inc:89
+#: plugins/admin/departments/class_dcObject.inc:88
+#: plugins/admin/departments/domain.tpl:28
+#: plugins/admin/departments/country.tpl:28
+#: plugins/admin/departments/dcObject.tpl:28
+#: plugins/admin/departments/class_department.inc:621
+#: plugins/admin/departments/dep-list.tpl:13
+#: plugins/admin/departments/organization.tpl:39
+#: plugins/admin/acl/acl-list.tpl:13 plugins/admin/acl/class_aclRole.inc:753
+#: plugins/admin/acl/acl_role.tpl:27
+#: plugins/personal/generic/class_user.inc:1622
+#: plugins/personal/generic/generic.tpl:164
+#: plugins/personal/generic/multiple_generic.tpl:47
+#: plugins/personal/posix/trustSelect/trust-list.tpl:13
+#: plugins/personal/posix/groupSelect/group-list.tpl:13
+#: setup/setup_ldap.tpl:55
+msgid "Base"
+msgstr "Ветка"
+
+#: ihtml/themes/default/baseSelect-list.tpl:13
+#: plugins/admin/ogroups/ogroup-list.tpl:13
+#: plugins/admin/groups/userSelect/user-list.tpl:13
+#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
+#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
+#: plugins/personal/posix/trustSelect/trust-list.tpl:13
+#: plugins/personal/posix/groupSelect/group-list.tpl:13
+msgid "Update"
+msgstr ""
+
+#: ihtml/themes/default/baseSelect-list.tpl:13
+#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1019
+#: plugins/admin/ogroups/ogroup-list.tpl:13
+#: plugins/admin/groups/userSelect/user-list.tpl:13
+#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
+#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
+#: plugins/personal/posix/trustSelect/trust-list.tpl:13
+#: plugins/personal/posix/groupSelect/group-list.tpl:13
+msgid "Submit"
+msgstr ""
 
 #: ihtml/themes/default/MultiSelectWindow.tpl:51
 #: ihtml/themes/default/MultiSelectWindow.tpl:92
@@ -26,6 +80,7 @@ msgstr "Информация"
 #: ihtml/themes/default/MultiSelectWindow.tpl:103
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
 #: plugins/admin/groups/group_objects.tpl:20
+#: plugins/admin/groups/trust_machines.tpl:19
 #: plugins/personal/posix/posix_groups.tpl:21
 msgid "Filters"
 msgstr "Фильтры"
@@ -34,16 +89,16 @@ msgstr "Фильтры"
 #: ihtml/themes/default/msg_dialog.tpl:106 ihtml/themes/default/islocked.tpl:6
 #: ihtml/themes/default/conflict.tpl:6 html/password.php:280 html/index.php:57
 #: html/index.php:63 html/index.php:414 html/index.php:420
-#: include/functions.inc:928 include/functions.inc:2641
-#: include/functions.inc:2645 include/functions.inc:2651
+#: include/functions.inc:929 include/functions.inc:2642
+#: include/functions.inc:2646 include/functions.inc:2652
 #: include/class_tabs.inc:268 include/utils/class_xml.inc:37
 #: plugins/admin/ogroups/remove.tpl:2 plugins/admin/groups/remove.tpl:2
-#: plugins/admin/groups/class_groupGeneric.inc:1078
+#: plugins/admin/groups/class_groupGeneric.inc:1041
 #: plugins/admin/users/remove.tpl:2 plugins/admin/departments/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/acl/remove.tpl:2
-#: plugins/personal/posix/class_posixAccount.inc:864
-#: plugins/personal/posix/class_posixAccount.inc:1017
+#: plugins/personal/posix/class_posixAccount.inc:793
+#: plugins/personal/posix/class_posixAccount.inc:946
 #: setup/class_setupStep_Migrate.inc:261 setup/class_setupStep_Migrate.inc:313
 #: setup/class_setupStep_Migrate.inc:446 setup/class_setupStep_Migrate.inc:523
 #: setup/class_setupStep_Migrate.inc:662 setup/class_setupStep_Migrate.inc:803
@@ -300,7 +355,7 @@ msgstr "Пароль"
 #: ihtml/themes/default/accountexpired.tpl:36
 #: ihtml/themes/default/password.tpl:82 ihtml/themes/default/password.tpl:83
 #: html/password.php:196 plugins/admin/users/password.tpl:13
-#: plugins/admin/users/class_userManagement.inc:248
+#: plugins/admin/users/class_userManagement.inc:249
 #: plugins/personal/generic/main.inc:97
 #: plugins/personal/generic/password.tpl:7
 #: plugins/personal/password/password.tpl:18
@@ -323,6 +378,127 @@ msgstr "Сменить пароль"
 #, fuzzy
 msgid "Click here to change your password"
 msgstr "У вас недостаточно прав для смены своего пароля."
+
+#: ihtml/themes/default/baseSelect-list.xml:11
+#: plugins/admin/departments/dep-list.xml:11
+msgid "List of departments"
+msgstr "Список подразделений"
+
+#: ihtml/themes/default/baseSelect-list.xml:15
+#: plugins/admin/departments/dep-list.xml:15
+#: plugins/admin/departments/dep-list.xml:103
+#: plugins/admin/departments/class_departmentManagement.inc:175
+#, fuzzy
+msgid "Domain"
+msgstr "в домене"
+
+#: ihtml/themes/default/baseSelect-list.xml:23
+#: plugins/admin/departments/dep-list.xml:23
+#: plugins/admin/departments/dep-list.xml:110
+#, fuzzy
+msgid "Domain component"
+msgstr "Администраторы домена"
+
+#: ihtml/themes/default/baseSelect-list.xml:31
+#: plugins/admin/departments/dep-list.xml:31
+#: plugins/admin/departments/dep-list.xml:117
+#: plugins/admin/departments/class_departmentManagement.inc:199
+#: plugins/admin/departments/class_countryGeneric.inc:78
+#: plugins/admin/departments/class_countryGeneric.inc:79
+msgid "Country"
+msgstr "Страна"
+
+#: ihtml/themes/default/baseSelect-list.xml:39
+#: plugins/admin/departments/dep-list.xml:39
+#: plugins/admin/departments/dep-list.xml:124
+#: plugins/admin/departments/class_departmentManagement.inc:211
+#: plugins/admin/departments/class_localityGeneric.inc:78
+#: plugins/admin/departments/class_localityGeneric.inc:79
+#, fuzzy
+msgid "Locality"
+msgstr "Местоположение"
+
+#: ihtml/themes/default/baseSelect-list.xml:47
+#: plugins/admin/departments/dep-list.xml:47
+#: plugins/admin/departments/dep-list.xml:131
+#: plugins/admin/departments/class_departmentManagement.inc:223
+#: plugins/admin/departments/class_organizationGeneric.inc:109
+#: plugins/admin/departments/class_organizationGeneric.inc:110
+#: plugins/personal/generic/class_user.inc:1626
+#: plugins/personal/generic/generic.tpl:285
+#: plugins/personal/generic/multiple_generic.tpl:149
+#: setup/setup_feedback.tpl:23
+msgid "Organization"
+msgstr "Организация"
+
+#: ihtml/themes/default/baseSelect-list.xml:55
+#: ihtml/themes/default/baseSelect-list.xml:71
+#: plugins/generic/references/class_reference.inc:59
+#: plugins/admin/ogroups/class_ogroupManagement.inc:186
+#: plugins/admin/departments/dep-list.xml:55
+#: plugins/admin/departments/dep-list.xml:71
+#: plugins/admin/departments/dep-list.xml:138
+#: plugins/admin/departments/class_departmentManagement.inc:235
+#: plugins/personal/generic/class_user.inc:1627
+#: plugins/personal/generic/generic.tpl:293
+#: plugins/personal/generic/multiple_generic.tpl:159
+msgid "Department"
+msgstr "Подразделение"
+
+#: ihtml/themes/default/baseSelect-list.xml:79
+#: include/class_SnapShotDialog.inc:171
+#: plugins/generic/references/contents.tpl:11
+#: plugins/admin/ogroups/class_ogroup.inc:1085
+#: plugins/admin/ogroups/generic.tpl:15
+#: plugins/admin/ogroups/ogroup-list.xml:49
+#: plugins/admin/groups/generic.tpl:24
+#: plugins/admin/groups/class_groupGeneric.inc:1221
+#: plugins/admin/groups/group-list.xml:49
+#: plugins/admin/departments/dep-list.xml:79
+#: plugins/admin/departments/locality.tpl:19
+#: plugins/admin/departments/generic.tpl:19
+#: plugins/admin/departments/class_domain.inc:59
+#: plugins/admin/departments/class_domain.inc:87
+#: plugins/admin/departments/class_localityGeneric.inc:60
+#: plugins/admin/departments/class_localityGeneric.inc:88
+#: plugins/admin/departments/class_organizationGeneric.inc:91
+#: plugins/admin/departments/class_organizationGeneric.inc:119
+#: plugins/admin/departments/class_countryGeneric.inc:59
+#: plugins/admin/departments/class_countryGeneric.inc:88
+#: plugins/admin/departments/class_dcObject.inc:59
+#: plugins/admin/departments/class_dcObject.inc:87
+#: plugins/admin/departments/domain.tpl:19
+#: plugins/admin/departments/country.tpl:19
+#: plugins/admin/departments/dcObject.tpl:19
+#: plugins/admin/departments/class_department.inc:317
+#: plugins/admin/departments/class_department.inc:619
+#: plugins/admin/departments/organization.tpl:19
+#: plugins/admin/acl/class_aclRole.inc:754 plugins/admin/acl/acl-list.xml:57
+#: plugins/admin/acl/acl_role.tpl:17
+#: plugins/personal/posix/trustSelect/trust-list.xml:64
+#: plugins/personal/posix/groupSelect/group-list.xml:49
+msgid "Description"
+msgstr "Описание"
+
+#: ihtml/themes/default/baseSelect-list.xml:87 include/class_listing.inc:1114
+#: plugins/admin/ogroups/ogroup-list.xml:62
+#: plugins/admin/groups/group-list.xml:62 plugins/admin/users/user-list.xml:78
+#: plugins/admin/departments/dep-list.xml:87 plugins/admin/acl/acl-list.xml:65
+msgid "Actions"
+msgstr "Действия"
+
+#: ihtml/themes/default/baseSelect-list.xml:104
+#: ihtml/themes/default/baseSelect-list.xml:111 include/class_acl.inc:500
+#: include/class_acl.inc:548 include/class_sortableListing.inc:192
+#: include/class_sortableListing.inc:194
+#: plugins/admin/ogroups/ogroup-list.xml:91
+#: plugins/admin/groups/group-list.xml:91
+#: plugins/admin/users/user-list.xml:114
+#: plugins/admin/departments/dep-list.xml:172
+#: plugins/admin/acl/class_aclRole.inc:399
+#: plugins/admin/acl/class_aclRole.inc:448 plugins/admin/acl/acl-list.xml:131
+msgid "Edit"
+msgstr "Изменить"
 
 #: ihtml/themes/default/logout-close.tpl:5
 msgid "Your GOsa session has been closed!"
@@ -410,22 +586,22 @@ msgstr "Продолжить"
 
 #: ihtml/themes/default/msg_dialog.tpl:57
 #: ihtml/themes/default/msg_dialog.tpl:104 html/index.php:224
-#: html/index.php:228 include/class_management.inc:446
-#: include/class_management.inc:910
+#: html/index.php:228 include/class_management.inc:447
+#: include/class_management.inc:583 include/class_management.inc:915
 #: include/password-methods/class_password-methods.inc:250
-#: include/functions.inc:3348 include/functions.inc:3362
-#: include/functions.inc:3392 include/functions.inc:3400
-#: include/functions.inc:3412 include/functions.inc:3416
-#: include/functions.inc:3431 include/functions.inc:3440
-#: include/functions.inc:3500 include/class_tabs.inc:56
+#: include/functions.inc:3349 include/functions.inc:3363
+#: include/functions.inc:3393 include/functions.inc:3401
+#: include/functions.inc:3413 include/functions.inc:3417
+#: include/functions.inc:3432 include/functions.inc:3441
+#: include/functions.inc:3501 include/class_tabs.inc:56
 #: include/class_plugin.inc:661 include/class_plugin.inc:702
 #: include/class_plugin.inc:744 include/class_plugin.inc:1598
 #: include/utils/class_xml.inc:40 include/utils/class_msgPool.inc:153
 #: include/utils/class_msgPool.inc:165 include/utils/class_msgPool.inc:183
 #: include/utils/class_msgPool.inc:453 include/utils/class_msgPool.inc:474
 #: include/utils/class_msgPool.inc:493
-#: include/class_gosaSupportDaemon.inc:1180
-#: include/class_gosaSupportDaemon.inc:1200
+#: include/class_gosaSupportDaemon.inc:1184
+#: include/class_gosaSupportDaemon.inc:1204
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:127
 #: include/class_CopyPasteHandler.inc:159
@@ -434,18 +610,18 @@ msgstr "Продолжить"
 #: include/class_CopyPasteHandler.inc:193
 #: include/class_CopyPasteHandler.inc:273
 #: include/class_CopyPasteHandler.inc:375 include/class_msg_dialog.inc:99
-#: plugins/admin/groups/class_groupGeneric.inc:617
-#: plugins/admin/groups/class_groupGeneric.inc:623
-#: plugins/admin/groups/class_groupGeneric.inc:969
-#: plugins/admin/groups/class_groupGeneric.inc:974
-#: plugins/personal/generic/class_user.inc:264
+#: plugins/admin/groups/class_groupGeneric.inc:580
+#: plugins/admin/groups/class_groupGeneric.inc:586
+#: plugins/admin/groups/class_groupGeneric.inc:932
+#: plugins/admin/groups/class_groupGeneric.inc:937
+#: plugins/personal/generic/class_user.inc:274
 #: plugins/personal/generic/class_user.inc:387
 #: plugins/personal/generic/class_user.inc:482
-#: plugins/personal/generic/class_user.inc:790
-#: plugins/personal/generic/class_user.inc:1151
-#: plugins/personal/generic/class_user.inc:1158
-#: plugins/personal/generic/class_user.inc:1176
-#: plugins/personal/generic/class_user.inc:1436
+#: plugins/personal/generic/class_user.inc:795
+#: plugins/personal/generic/class_user.inc:1156
+#: plugins/personal/generic/class_user.inc:1163
+#: plugins/personal/generic/class_user.inc:1181
+#: plugins/personal/generic/class_user.inc:1441
 #: plugins/personal/generic/main.inc:115
 #: setup/class_setupStep_Migrate.inc:1200 setup/setup_checks.tpl:30
 #: setup/setup_checks.tpl:91
@@ -488,7 +664,7 @@ msgid "Your password has been changed successfully."
 msgstr ""
 
 #: ihtml/themes/default/password.tpl:41 html/main.php:339
-#: plugins/admin/users/class_userManagement.inc:276
+#: plugins/admin/users/class_userManagement.inc:277
 #: plugins/personal/password/class_password.inc:78
 #: plugins/personal/password/class_password.inc:81
 #: plugins/personal/password/class_password.inc:84
@@ -606,6 +782,19 @@ msgstr ""
 msgid "Logout"
 msgstr "Выход"
 
+#: ihtml/themes/default/baseSelect-filter.tpl:3
+#: plugins/admin/ogroups/ogroup-filter.tpl:3
+#: plugins/admin/groups/userSelect/user-filter.tpl:3
+#: plugins/admin/groups/group-filter.tpl:3
+#: plugins/admin/users/user-filter.tpl:3
+#: plugins/admin/departments/dep-filter.tpl:3
+#: plugins/admin/acl/acl-filter.tpl:3
+#: plugins/personal/posix/trustSelect/trust-filter.tpl:3
+#: plugins/personal/posix/groupSelect/group-filter.tpl:3
+#, fuzzy
+msgid "Filter"
+msgstr "Фильтры"
+
 #: ihtml/themes/default/framework.tpl:8 ihtml/themes/default/framework.tpl:11
 #: ihtml/themes/default/framework.tpl:20 ihtml/themes/default/framework.tpl:24
 #: include/class_pluglist.inc:207
@@ -635,7 +824,7 @@ msgstr "Пользователь:"
 msgid "GOsa main menu"
 msgstr ""
 
-#: html/password.php:58 html/main.php:147 include/functions.inc:446
+#: html/password.php:58 html/main.php:147 include/functions.inc:447
 #: include/utils/class_xml.inc:43
 #: plugins/admin/departments/class_department.inc:386
 #, fuzzy
@@ -653,9 +842,9 @@ msgstr ""
 #: include/password-methods/class_password-methods-ssha.inc:51
 #: include/password-methods/class_password-methods-sha.inc:48
 #: include/class_SnapshotHandler.inc:45 include/class_SnapshotHandler.inc:58
-#: include/class_SnapshotHandler.inc:76 include/functions.inc:799
-#: include/functions.inc:3022 include/functions.inc:3054
-#: include/functions.inc:3067 include/utils/class_timezone.inc:47
+#: include/class_SnapshotHandler.inc:76 include/functions.inc:800
+#: include/functions.inc:3023 include/functions.inc:3055
+#: include/functions.inc:3068 include/utils/class_timezone.inc:47
 #: include/class_config.inc:154 include/class_config.inc:694
 #: include/class_config.inc:1144 include/class_config.inc:1157
 #: include/class_config.inc:1175 include/class_pluglist.inc:177
@@ -665,7 +854,7 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:186
 #: include/class_CopyPasteHandler.inc:194
 #: plugins/admin/groups/class_groupGeneric.inc:161
-#: plugins/admin/groups/class_groupGeneric.inc:745
+#: plugins/admin/groups/class_groupGeneric.inc:708
 #, fuzzy
 msgid "Configuration error"
 msgstr "Настроить"
@@ -684,7 +873,7 @@ msgstr "Хэширование паролей"
 msgid "Error: Password method not available!"
 msgstr ""
 
-#: html/password.php:193 plugins/admin/users/class_userManagement.inc:245
+#: html/password.php:193 plugins/admin/users/class_userManagement.inc:246
 #: plugins/personal/generic/main.inc:92
 #: plugins/personal/password/class_password.inc:82
 msgid ""
@@ -702,10 +891,10 @@ msgstr "Новый пароль слишком короткий."
 
 #: html/password.php:215 plugins/admin/users/template.tpl:32
 #: plugins/admin/users/user-list.xml:65
-#: plugins/personal/generic/class_user.inc:1274
-#: plugins/personal/generic/class_user.inc:1287
-#: plugins/personal/generic/class_user.inc:1301
-#: plugins/personal/generic/class_user.inc:1303
+#: plugins/personal/generic/class_user.inc:1279
+#: plugins/personal/generic/class_user.inc:1292
+#: plugins/personal/generic/class_user.inc:1306
+#: plugins/personal/generic/class_user.inc:1308
 #: plugins/personal/generic/generic.tpl:82
 #: plugins/personal/generic/paste_generic.tpl:15
 msgid "Login"
@@ -766,20 +955,20 @@ msgstr ""
 #: include/class_SnapshotHandler.inc:438 include/class_SnapshotHandler.inc:503
 #: include/class_SnapshotHandler.inc:518 include/class_acl.inc:1221
 #: include/class_acl.inc:1317 include/class_MultiSelectWindow.inc:553
-#: include/functions.inc:475 include/functions.inc:510
-#: include/functions.inc:518 include/functions.inc:563
-#: include/functions.inc:814 include/functions.inc:863
-#: include/functions.inc:920 include/functions.inc:973
-#: include/functions.inc:3001 include/functions.inc:3274
+#: include/functions.inc:476 include/functions.inc:511
+#: include/functions.inc:519 include/functions.inc:564
+#: include/functions.inc:815 include/functions.inc:864
+#: include/functions.inc:921 include/functions.inc:974
+#: include/functions.inc:3002 include/functions.inc:3275
 #: include/class_plugin.inc:1279 include/class_plugin.inc:1328
 #: include/class_plugin.inc:1332 include/class_plugin.inc:1347
 #: include/class_plugin.inc:1384 include/class_plugin.inc:1442
 #: include/class_plugin.inc:1508 include/class_plugin.inc:1523
 #: include/class_ldap.inc:752 include/class_ldap.inc:1218
-#: include/class_config.inc:317 plugins/admin/ogroups/class_ogroup.inc:1033
-#: plugins/admin/ogroups/class_ogroup.inc:1047
-#: plugins/admin/groups/class_groupGeneric.inc:775
-#: plugins/admin/groups/class_groupGeneric.inc:1102
+#: include/class_config.inc:317 plugins/admin/ogroups/class_ogroup.inc:996
+#: plugins/admin/ogroups/class_ogroup.inc:1010
+#: plugins/admin/groups/class_groupGeneric.inc:738
+#: plugins/admin/groups/class_groupGeneric.inc:1065
 #: plugins/admin/departments/class_department.inc:241
 #: plugins/admin/departments/class_department.inc:429
 #: plugins/admin/departments/class_department.inc:702
@@ -787,10 +976,10 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:635
 #: plugins/admin/acl/class_aclRole.inc:675
 #: plugins/admin/acl/class_aclRole.inc:689
-#: plugins/personal/generic/class_user.inc:693
-#: plugins/personal/generic/class_user.inc:1073
-#: plugins/personal/posix/class_posixAccount.inc:702
-#: plugins/personal/posix/class_posixAccount.inc:1034
+#: plugins/personal/generic/class_user.inc:692
+#: plugins/personal/generic/class_user.inc:1078
+#: plugins/personal/posix/class_posixAccount.inc:631
+#: plugins/personal/posix/class_posixAccount.inc:963
 #: setup/class_setupStep_Migrate.inc:1211
 #: setup/class_setupStep_Migrate.inc:1239
 #: setup/class_setupStep_Migrate.inc:1288
@@ -932,45 +1121,52 @@ msgstr ""
 msgid "unconfigured"
 msgstr "Не настроено"
 
-#: include/class_management.inc:144
+#: include/class_management.inc:145
 #, fuzzy
 msgid "Filter error"
 msgstr "Терминал-сервер"
 
-#: include/class_management.inc:144
+#: include/class_management.inc:145
 msgid "The filter is incomplete!"
 msgstr ""
 
-#: include/class_management.inc:291 include/class_management.inc:426
-#: include/class_management.inc:472 include/class_management.inc:509
-#: include/class_management.inc:523 include/class_plugin.inc:1546
+#: include/class_management.inc:292 include/class_management.inc:427
+#: include/class_management.inc:473 include/class_management.inc:510
+#: include/class_management.inc:524 include/class_plugin.inc:1546
 #: include/class_plugin.inc:1558 include/class_plugin.inc:1573
 #: include/class_plugin.inc:1586
-#: plugins/admin/users/class_userManagement.inc:220
-#: plugins/admin/users/class_userManagement.inc:611
+#: plugins/admin/users/class_userManagement.inc:221
+#: plugins/admin/users/class_userManagement.inc:612
 #, fuzzy
 msgid "Permission"
 msgstr "Права для членов группы"
 
-#: include/class_management.inc:352
-#: plugins/admin/users/class_userManagement.inc:570
-#: plugins/admin/users/class_userManagement.inc:574
+#: include/class_management.inc:353
+#: plugins/admin/users/class_userManagement.inc:571
+#: plugins/admin/users/class_userManagement.inc:575
 #: plugins/admin/acl/class_aclManagement.inc:98
 #, fuzzy
 msgid "Permission error"
 msgstr "Права для членов группы"
 
-#: include/class_management.inc:426 include/class_plugin.inc:1546
+#: include/class_management.inc:427 include/class_plugin.inc:1546
 #, fuzzy, php-format
 msgid "You are not allowed to create a snapshot for %s."
 msgstr "Вам не разрешено менять пароль."
 
-#: include/class_management.inc:472 include/class_management.inc:509
-#: include/class_management.inc:523 include/class_plugin.inc:1558
+#: include/class_management.inc:473 include/class_management.inc:510
+#: include/class_management.inc:524 include/class_plugin.inc:1558
 #: include/class_plugin.inc:1573 include/class_plugin.inc:1586
 #, fuzzy, php-format
 msgid "You are not allowed to restore a snapshot for %s."
 msgstr "Вам не разрешено менять пароль."
+
+#: include/class_management.inc:583
+#, php-format
+msgid ""
+"No tab declaration for '%s' found in your configuration file. Cannot create "
+"plugin instance!"
+msgstr ""
 
 #: include/class_socketClient.inc:60
 msgid "The mcrypt module was not found. Please install php5-mcrypt."
@@ -1049,12 +1245,12 @@ msgid "Use ACL defined in role"
 msgstr ""
 
 #: include/class_acl.inc:231 plugins/admin/users/class_userManagement.inc:25
-#: plugins/personal/generic/class_user.inc:1603
+#: plugins/personal/generic/class_user.inc:1608
 #: setup/class_setupStep_Migrate.inc:1039
 msgid "Users"
 msgstr "Пользователи"
 
-#: include/class_acl.inc:231 plugins/admin/groups/class_groupGeneric.inc:1254
+#: include/class_acl.inc:231 plugins/admin/groups/class_groupGeneric.inc:1217
 #: plugins/admin/groups/class_groupManagement.inc:25
 #: setup/class_setupStep_Migrate.inc:1042
 msgid "Groups"
@@ -1062,27 +1258,18 @@ msgstr "Группы"
 
 #: include/class_acl.inc:493 include/class_MultiSelectWindow.inc:258
 #: include/class_MultiSelectWindow.inc:260 include/class_listing.inc:235
-#: include/class_listing.inc:986 include/class_listing.inc:988
+#: include/class_listing.inc:1004 include/class_listing.inc:1006
+#: include/class_sortableListing.inc:225
 #: plugins/admin/acl/class_aclRole.inc:394
 msgid "Up"
 msgstr ""
 
 #: include/class_acl.inc:495 include/class_listing.inc:235
+#: include/class_sortableListing.inc:225
 #: plugins/admin/acl/class_aclRole.inc:396
 #, fuzzy
 msgid "Down"
 msgstr "Домен"
-
-#: include/class_acl.inc:500 include/class_acl.inc:548
-#: include/class_sortableListing.inc:132
-#: plugins/admin/ogroups/ogroup-list.xml:91
-#: plugins/admin/groups/group-list.xml:91
-#: plugins/admin/users/user-list.xml:114
-#: plugins/admin/departments/dep-list.xml:172
-#: plugins/admin/acl/class_aclRole.inc:399
-#: plugins/admin/acl/class_aclRole.inc:448 plugins/admin/acl/acl-list.xml:131
-msgid "Edit"
-msgstr "Изменить"
 
 #: include/class_acl.inc:500 include/class_acl.inc:504
 #: include/class_acl.inc:1253 include/class_acl.inc:1254
@@ -1094,8 +1281,8 @@ msgid "ACL"
 msgstr "Доступ"
 
 #: include/class_acl.inc:504 include/class_acl.inc:552
-#: include/class_sortableListing.inc:133 include/utils/class_msgPool.inc:338
-#: plugins/admin/acl/class_aclRole.inc:403
+#: include/class_sortableListing.inc:197 include/class_sortableListing.inc:199
+#: include/utils/class_msgPool.inc:338 plugins/admin/acl/class_aclRole.inc:403
 #: plugins/admin/acl/class_aclRole.inc:452
 #, php-format
 msgid "Delete"
@@ -1167,10 +1354,10 @@ msgstr "Включаемые объекты"
 
 #: include/class_acl.inc:954 include/class_session.inc:76
 #: include/class_session.inc:101 include/class_session.inc:127
-#: include/functions.inc:603 include/functions.inc:789
-#: include/functions.inc:907 include/functions.inc:1305
-#: include/functions.inc:2369 include/functions.inc:2403
-#: include/functions.inc:2423 include/class_ldap.inc:692
+#: include/functions.inc:604 include/functions.inc:790
+#: include/functions.inc:908 include/functions.inc:1306
+#: include/functions.inc:2370 include/functions.inc:2404
+#: include/functions.inc:2424 include/class_ldap.inc:692
 #: include/class_ldap.inc:740 include/class_log.inc:87
 #: include/class_CopyPasteHandler.inc:160
 #: include/class_CopyPasteHandler.inc:274
@@ -1229,44 +1416,37 @@ msgstr "Доступ"
 msgid "Close"
 msgstr "Выбрать"
 
-#: include/class_MultiSelectWindow.inc:250 include/class_listing.inc:978
+#: include/class_MultiSelectWindow.inc:250 include/class_listing.inc:996
 #, fuzzy
 msgid "Go to root department"
 msgstr "Список подразделений"
 
 #: include/class_MultiSelectWindow.inc:250
-#: include/class_MultiSelectWindow.inc:252 include/class_listing.inc:978
-#: include/class_listing.inc:980
+#: include/class_MultiSelectWindow.inc:252 include/class_listing.inc:996
+#: include/class_listing.inc:998
 #, fuzzy
 msgid "Root"
 msgstr "Перезагрузить"
 
-#: include/class_MultiSelectWindow.inc:258 include/class_listing.inc:986
+#: include/class_MultiSelectWindow.inc:258 include/class_listing.inc:1004
 #, fuzzy
 msgid "Go up one department"
 msgstr "Подразделение"
 
-#: include/class_MultiSelectWindow.inc:266 include/class_listing.inc:994
+#: include/class_MultiSelectWindow.inc:266 include/class_listing.inc:1012
 #, fuzzy
 msgid "Go to users department"
 msgstr "Выберите подразделение"
 
 #: include/class_MultiSelectWindow.inc:266
-#: include/class_MultiSelectWindow.inc:268 include/class_listing.inc:994
-#: include/class_listing.inc:996
+#: include/class_MultiSelectWindow.inc:268 include/class_listing.inc:1012
+#: include/class_listing.inc:1014
 #, fuzzy
 msgid "Home"
 msgstr "Имя системы"
 
-#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1001
+#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1019
 msgid "Reload list"
-msgstr ""
-
-#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1001
-#: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
-#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
-msgid "Submit"
 msgstr ""
 
 #: include/class_MultiSelectWindow.inc:553
@@ -1286,34 +1466,7 @@ msgstr ""
 msgid "Choose a base"
 msgstr "Выберите, чтобы просмотреть серверы"
 
-#: include/class_baseSelectDialog.inc:29
-#: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/ogroups/class_ogroup.inc:1121
-#: plugins/admin/ogroups/generic.tpl:26 plugins/admin/groups/generic.tpl:39
-#: plugins/admin/groups/class_groupGeneric.inc:1259
-#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
-#: plugins/admin/departments/locality.tpl:28
-#: plugins/admin/departments/generic.tpl:39
-#: plugins/admin/departments/class_domain.inc:88
-#: plugins/admin/departments/class_localityGeneric.inc:89
-#: plugins/admin/departments/class_organizationGeneric.inc:121
-#: plugins/admin/departments/class_countryGeneric.inc:89
-#: plugins/admin/departments/class_dcObject.inc:88
-#: plugins/admin/departments/domain.tpl:28
-#: plugins/admin/departments/country.tpl:28
-#: plugins/admin/departments/dcObject.tpl:28
-#: plugins/admin/departments/class_department.inc:621
-#: plugins/admin/departments/dep-list.tpl:13
-#: plugins/admin/departments/organization.tpl:39
-#: plugins/admin/acl/acl-list.tpl:13 plugins/admin/acl/class_aclRole.inc:753
-#: plugins/admin/acl/acl_role.tpl:27
-#: plugins/personal/generic/class_user.inc:1617
-#: plugins/personal/generic/generic.tpl:164
-#: plugins/personal/generic/multiple_generic.tpl:47 setup/setup_ldap.tpl:55
-msgid "Base"
-msgstr "Ветка"
-
-#: include/class_listing.inc:298 setup/setup_migrate.tpl:93
+#: include/class_listing.inc:299 setup/setup_migrate.tpl:93
 #: setup/setup_migrate.tpl:149 setup/setup_migrate.tpl:201
 #: setup/setup_migrate.tpl:368 setup/setup_migrate.tpl:421
 #: setup/setup_migrate.tpl:464 setup/setup_migrate.tpl:507
@@ -1322,77 +1475,71 @@ msgstr "Ветка"
 msgid "Select all"
 msgstr "Удалить"
 
-#: include/class_listing.inc:499
+#: include/class_listing.inc:509
 #, fuzzy
 msgid "created by"
 msgstr "Создать"
 
-#: include/class_listing.inc:1091 plugins/admin/ogroups/ogroup-list.xml:62
-#: plugins/admin/groups/group-list.xml:62 plugins/admin/users/user-list.xml:78
-#: plugins/admin/departments/dep-list.xml:87 plugins/admin/acl/acl-list.xml:65
-msgid "Actions"
-msgstr "Действия"
-
-#: include/class_listing.inc:1350 include/class_listing.inc:1400
+#: include/class_listing.inc:1379 include/class_listing.inc:1429
 #: include/class_plugin.inc:2070
 #, fuzzy
 msgid "Copy"
 msgstr "Компания"
 
-#: include/class_listing.inc:1356 include/class_listing.inc:1390
+#: include/class_listing.inc:1385 include/class_listing.inc:1419
 #: include/class_plugin.inc:2074
 #, fuzzy
 msgid "Cut"
 msgstr "Выполнить"
 
-#: include/class_listing.inc:1364 include/class_listing.inc:1366
+#: include/class_listing.inc:1393 include/class_listing.inc:1395
 #: include/class_plugin.inc:2081 include/class_plugin.inc:2084
 #: include/class_CopyPasteHandler.inc:514
 #, fuzzy
 msgid "Paste"
 msgstr "Дата"
 
-#: include/class_listing.inc:1390 include/class_plugin.inc:2028
+#: include/class_listing.inc:1419 include/class_plugin.inc:2028
 #, fuzzy
 msgid "Cut this entry"
 msgstr "Редактиовать объект"
 
-#: include/class_listing.inc:1400 include/class_plugin.inc:2036
+#: include/class_listing.inc:1429 include/class_plugin.inc:2036
 #, fuzzy
 msgid "Copy this entry"
 msgstr "Редактиовать объект"
 
-#: include/class_listing.inc:1432 include/class_listing.inc:1434
+#: include/class_listing.inc:1461 include/class_listing.inc:1463
 #, fuzzy
 msgid "Restore snapshots"
 msgstr "Создать настройки запись эл. почты"
 
-#: include/class_listing.inc:1448
+#: include/class_listing.inc:1477
 #, fuzzy
 msgid "Export list"
 msgstr "Экспорт"
 
-#: include/class_listing.inc:1483 include/class_listing.inc:1484
+#: include/class_listing.inc:1512 include/class_listing.inc:1513
 #: include/class_SnapShotDialog.inc:135 include/class_plugin.inc:2002
 msgid "Restore snapshot"
 msgstr ""
 
-#: include/class_listing.inc:1493 include/class_plugin.inc:2009
+#: include/class_listing.inc:1522 include/class_plugin.inc:2009
 #, fuzzy
 msgid "Create snapshot"
 msgstr "Создать настройки запись эл. почты"
 
-#: include/class_listing.inc:1494 include/class_plugin.inc:2010
+#: include/class_listing.inc:1523 include/class_plugin.inc:2010
 #, fuzzy
 msgid "Create a new snapshot from this object"
 msgstr "Объект группы"
 
-#: include/class_sortableListing.inc:132
+#: include/class_sortableListing.inc:194
 #, fuzzy
 msgid "Edit this entry"
 msgstr "Редактиовать объект"
 
-#: include/class_sortableListing.inc:133
+#: include/class_sortableListing.inc:199
 #, fuzzy
 msgid "Delete this entry"
 msgstr "Удалить"
@@ -1408,18 +1555,18 @@ msgid ""
 "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
 msgstr ""
 
-#: include/functions.inc:447
+#: include/functions.inc:448
 #, fuzzy, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr "Ошибка при подключении к LDAP-серверу. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:518
+#: include/functions.inc:519
 #, fuzzy
 msgid "Username / UID is not unique inside the LDAP tree!"
 msgstr ""
 "Имя/идентификатор пользователя не уникальны. Проверьте свою базу данных LDAP."
 
-#: include/functions.inc:603
+#: include/functions.inc:604
 #, fuzzy
 msgid ""
 "Username / UID is not unique inside the LDAP tree. Please contact your "
@@ -1427,11 +1574,11 @@ msgid ""
 msgstr ""
 "Имя/идентификатор пользователя не уникальны. Проверьте свою базу данных LDAP."
 
-#: include/functions.inc:789 include/functions.inc:907
+#: include/functions.inc:790 include/functions.inc:908
 msgid "Error while adding a lock. Contact the developers!"
 msgstr ""
 
-#: include/functions.inc:799
+#: include/functions.inc:800
 #, fuzzy, php-format
 msgid ""
 "Cannot create locking information in LDAP tree. Please contact your "
@@ -1440,12 +1587,12 @@ msgstr ""
 "Не удается считать блокировку в базе данных LDAP. Проверьте, раздел \"config"
 "\" в файле gosa.conf!"
 
-#: include/functions.inc:799
+#: include/functions.inc:800
 #, fuzzy, php-format
 msgid "LDAP server returned: %s"
 msgstr "LDAP-сервер"
 
-#: include/functions.inc:928
+#: include/functions.inc:929
 #, fuzzy
 msgid ""
 "Found multiple locks for object to be locked. This should not happen - "
@@ -1454,12 +1601,12 @@ msgstr ""
 "Для блокируемого объекта обнаружено несколько блокировок. Этого быть не "
 "должно, проверьте работу LDAP."
 
-#: include/functions.inc:1232
+#: include/functions.inc:1233
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "Найдено более %d объектов."
 
-#: include/functions.inc:1234
+#: include/functions.inc:1235
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -1468,218 +1615,218 @@ msgstr ""
 "Установить новое значение лимита в %s и показать мне это сообщение если "
 "лимит будет исчерпан."
 
-#: include/functions.inc:1246 plugins/personal/generic/generic.tpl:226
+#: include/functions.inc:1247 plugins/personal/generic/generic.tpl:226
 msgid "Configure"
 msgstr "Настроить"
 
-#: include/functions.inc:1251
+#: include/functions.inc:1252
 msgid "incomplete"
 msgstr "не полный"
 
-#: include/functions.inc:1641
+#: include/functions.inc:1642
 #, fuzzy
 msgid "Continue anyway"
 msgstr "Продолжить"
 
-#: include/functions.inc:1643
+#: include/functions.inc:1644
 #, fuzzy
 msgid "Edit anyway"
 msgstr "Редактиовать объект"
 
-#: include/functions.inc:1645
+#: include/functions.inc:1646
 #, fuzzy, php-format
 msgid "You're going to edit the LDAP entry/entries %s"
 msgstr "Вы собираетесь удалить объект %s."
 
-#: include/functions.inc:1885
+#: include/functions.inc:1886
 msgid "Entries per page"
 msgstr ""
 
-#: include/functions.inc:1914 include/class_filter.inc:314
+#: include/functions.inc:1915 include/class_filter.inc:314
 msgid "Apply filter"
 msgstr ""
 
-#: include/functions.inc:2226 include/class_filter.inc:280
+#: include/functions.inc:2227 include/class_filter.inc:280
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ0123456789"
 
-#: include/functions.inc:2272
+#: include/functions.inc:2273
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:2369
+#: include/functions.inc:2370
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr ""
 
-#: include/functions.inc:2403 include/functions.inc:2423
+#: include/functions.inc:2404 include/functions.inc:2424
 #, fuzzy
 msgid "Cannot write to revision file!"
 msgstr "Удалить"
 
-#: include/functions.inc:2641 include/functions.inc:2645
-#: include/functions.inc:2651
+#: include/functions.inc:2642 include/functions.inc:2646
+#: include/functions.inc:2652
 msgid "'baseIdHook' is not available. Using default base!"
 msgstr ""
 
-#: include/functions.inc:2675
+#: include/functions.inc:2676
 #, fuzzy
 msgid "LDAP warning"
 msgstr "Экспорт в LDIF"
 
-#: include/functions.inc:2675
+#: include/functions.inc:2676
 #, fuzzy
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr "Не удается получить информацию о схемах. Проверка схем невозможна!"
 
-#: include/functions.inc:2701
+#: include/functions.inc:2702
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2708
+#: include/functions.inc:2709
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2753
+#: include/functions.inc:2754
 #, fuzzy, php-format
 msgid "Missing required object class '%s'!"
 msgstr "Список подразделений"
 
-#: include/functions.inc:2756
+#: include/functions.inc:2757
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2761
+#: include/functions.inc:2762
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2764
+#: include/functions.inc:2765
 #, php-format
 msgid "Class(es) available"
 msgstr ""
 
-#: include/functions.inc:2786
+#: include/functions.inc:2787
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2787
+#: include/functions.inc:2788
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2791
+#: include/functions.inc:2792
 msgid ""
 "Your schema is configured to support the rfc2307bis group, but you have "
 "disabled this option on the 'ldap setup' step."
 msgstr ""
 
-#: include/functions.inc:2792
+#: include/functions.inc:2793
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
-#: include/functions.inc:2816
+#: include/functions.inc:2817
 msgid "German"
 msgstr "Немецкий"
 
-#: include/functions.inc:2817
+#: include/functions.inc:2818
 msgid "French"
 msgstr "Французский"
 
-#: include/functions.inc:2818
+#: include/functions.inc:2819
 msgid "Italian"
 msgstr ""
 
-#: include/functions.inc:2819
+#: include/functions.inc:2820
 msgid "Spanish"
 msgstr "Испанский"
 
-#: include/functions.inc:2820
+#: include/functions.inc:2821
 msgid "English"
 msgstr "Английский"
 
-#: include/functions.inc:2821
+#: include/functions.inc:2822
 msgid "Dutch"
 msgstr "Датский"
 
-#: include/functions.inc:2822
+#: include/functions.inc:2823
 #, fuzzy
 msgid "Polish"
 msgstr "Английский"
 
-#: include/functions.inc:2824
+#: include/functions.inc:2825
 #, fuzzy
 msgid "Chinese"
 msgstr "сброс"
 
-#: include/functions.inc:2825
+#: include/functions.inc:2826
 #, fuzzy
 msgid "Vietnamese"
 msgstr "Имя"
 
-#: include/functions.inc:2826
+#: include/functions.inc:2827
 msgid "Russian"
 msgstr "Русский"
 
-#: include/functions.inc:3021
+#: include/functions.inc:3022
 #, fuzzy, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Не удается найти команду \"%s\", указанную в поле POSTREMOVE модуля \"%s\"."
 
-#: include/functions.inc:3054
+#: include/functions.inc:3055
 msgid "Cannot generate samba hash!"
 msgstr ""
 
-#: include/functions.inc:3067
+#: include/functions.inc:3068
 #, php-format
 msgid ""
 "Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
 msgstr ""
 
-#: include/functions.inc:3348 include/functions.inc:3362
-#: include/functions.inc:3400 include/functions.inc:3412
-#: include/functions.inc:3416 include/functions.inc:3431
-#: include/functions.inc:3440
+#: include/functions.inc:3349 include/functions.inc:3363
+#: include/functions.inc:3401 include/functions.inc:3413
+#: include/functions.inc:3417 include/functions.inc:3432
+#: include/functions.inc:3441
 #, fuzzy
 msgid "Cannot allocate a free ID:"
 msgstr "Слишком много пользователей, невозможно создать идентификатор!"
 
-#: include/functions.inc:3348
+#: include/functions.inc:3349
 msgid "unknown idAllocation method!"
 msgstr ""
 
-#: include/functions.inc:3362
+#: include/functions.inc:3363
 #, php-format
 msgid "%sPoolMin >= %sPoolMax!"
 msgstr ""
 
-#: include/functions.inc:3392
+#: include/functions.inc:3393
 #, fuzzy
 msgid "Cannot create sambaUnixIdPool entry!"
 msgstr "Список подразделений"
 
-#: include/functions.inc:3400
+#: include/functions.inc:3401
 msgid "sambaUnixIdPool is not unique!"
 msgstr ""
 
-#: include/functions.inc:3412 include/functions.inc:3416
+#: include/functions.inc:3413 include/functions.inc:3417
 msgid "no ID available!"
 msgstr ""
 
-#: include/functions.inc:3440
+#: include/functions.inc:3441
 msgid "maximum tries exceeded!"
 msgstr ""
 
-#: include/functions.inc:3500
+#: include/functions.inc:3501
 #, fuzzy
 msgid "Cannot allocate a free ID!"
 msgstr "Слишком много пользователей, невозможно создать идентификатор!"
@@ -1713,38 +1860,6 @@ msgstr "Создать настройки запись эл. почты"
 #: include/class_SnapShotDialog.inc:139 include/class_SnapShotDialog.inc:159
 msgid "Y-m-d, H:i:s"
 msgstr ""
-
-#: include/class_SnapShotDialog.inc:171
-#: plugins/generic/references/contents.tpl:11
-#: plugins/admin/ogroups/class_ogroup.inc:1122
-#: plugins/admin/ogroups/generic.tpl:15
-#: plugins/admin/ogroups/ogroup-list.xml:49
-#: plugins/admin/groups/generic.tpl:24
-#: plugins/admin/groups/class_groupGeneric.inc:1258
-#: plugins/admin/groups/group-list.xml:49
-#: plugins/admin/departments/dep-list.xml:79
-#: plugins/admin/departments/locality.tpl:19
-#: plugins/admin/departments/generic.tpl:19
-#: plugins/admin/departments/class_domain.inc:59
-#: plugins/admin/departments/class_domain.inc:87
-#: plugins/admin/departments/class_localityGeneric.inc:60
-#: plugins/admin/departments/class_localityGeneric.inc:88
-#: plugins/admin/departments/class_organizationGeneric.inc:91
-#: plugins/admin/departments/class_organizationGeneric.inc:119
-#: plugins/admin/departments/class_countryGeneric.inc:59
-#: plugins/admin/departments/class_countryGeneric.inc:88
-#: plugins/admin/departments/class_dcObject.inc:59
-#: plugins/admin/departments/class_dcObject.inc:87
-#: plugins/admin/departments/domain.tpl:19
-#: plugins/admin/departments/country.tpl:19
-#: plugins/admin/departments/dcObject.tpl:19
-#: plugins/admin/departments/class_department.inc:317
-#: plugins/admin/departments/class_department.inc:619
-#: plugins/admin/departments/organization.tpl:19
-#: plugins/admin/acl/class_aclRole.inc:754 plugins/admin/acl/acl-list.xml:57
-#: plugins/admin/acl/acl_role.tpl:17
-msgid "Description"
-msgstr "Описание"
 
 #: include/exporter/class_cvsExporter.inc:48
 msgid "CSV"
@@ -2225,7 +2340,9 @@ msgstr "Значение поля \"Имя\" содержит недопусти
 msgid "Missing %s PHP extension!"
 msgstr "Удалить параметры"
 
-#: include/utils/class_msgPool.inc:332 setup/class_setupStep_Migrate.inc:2868
+#: include/utils/class_msgPool.inc:332
+#: plugins/personal/generic/generic.tpl:255
+#: setup/class_setupStep_Migrate.inc:2868
 #, php-format
 msgid "Add"
 msgstr "Добавить"
@@ -2588,12 +2705,12 @@ msgstr ""
 msgid "Cannot not parse XML!"
 msgstr "Слишком много пользователей, невозможно создать идентификатор!"
 
-#: include/class_gosaSupportDaemon.inc:1180
+#: include/class_gosaSupportDaemon.inc:1184
 #, fuzzy, php-format
 msgid "Cannot send abort event for entry %s!"
 msgstr "Удалить"
 
-#: include/class_gosaSupportDaemon.inc:1200
+#: include/class_gosaSupportDaemon.inc:1204
 #, fuzzy, php-format
 msgid "Cannot remove entry %s!"
 msgstr "состояние неизвестно"
@@ -2688,12 +2805,12 @@ msgid "Please fix the above error and reload the page."
 msgstr ""
 
 #: plugins/generic/references/class_reference.inc:41
-#: plugins/admin/ogroups/class_ogroup.inc:1111
-#: plugins/admin/groups/class_groupGeneric.inc:1248
-#: plugins/admin/users/class_userManagement.inc:737
+#: plugins/admin/ogroups/class_ogroup.inc:1074
+#: plugins/admin/groups/class_groupGeneric.inc:1211
+#: plugins/admin/users/class_userManagement.inc:738
 #: plugins/admin/departments/class_department.inc:609
 #: plugins/personal/generic/class_user.inc:37
-#: plugins/personal/generic/class_user.inc:1597
+#: plugins/personal/generic/class_user.inc:1602
 #: plugins/personal/posix/generic.tpl:4 setup/setup_feedback.tpl:55
 msgid "Generic"
 msgstr "Общее"
@@ -2706,20 +2823,22 @@ msgstr "Unix"
 #: plugins/generic/references/class_reference.inc:45
 #: plugins/admin/ogroups/tabs_ogroups.inc:148
 #: plugins/admin/groups/class_groupManagement.inc:163
-#: plugins/admin/users/class_userManagement.inc:744
+#: plugins/admin/users/class_userManagement.inc:745
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:70
 msgid "Mail"
 msgstr "Почта"
 
 #: plugins/generic/references/class_reference.inc:47
 #: plugins/generic/references/class_reference.inc:49
 #: plugins/admin/groups/class_groupManagement.inc:171
-#: plugins/admin/users/class_userManagement.inc:749
+#: plugins/admin/users/class_userManagement.inc:750
 #: plugins/personal/posix/class_posixAccount.inc:324
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:78
 msgid "Samba"
 msgstr "Samba"
 
 #: plugins/generic/references/class_reference.inc:51
-#: plugins/admin/users/class_userManagement.inc:761
+#: plugins/admin/users/class_userManagement.inc:762
 msgid "FAX"
 msgstr "Факс"
 
@@ -2736,34 +2855,24 @@ msgstr "FTP"
 #: plugins/admin/ogroups/ogroup-list.xml:79
 #: plugins/admin/groups/group-list.xml:15
 #: plugins/admin/groups/group-list.xml:79
+#: plugins/personal/posix/groupSelect/group-list.xml:15
 msgid "Group"
 msgstr "Группа"
-
-#: plugins/generic/references/class_reference.inc:59
-#: plugins/admin/ogroups/class_ogroupManagement.inc:186
-#: plugins/admin/departments/dep-list.xml:55
-#: plugins/admin/departments/dep-list.xml:71
-#: plugins/admin/departments/dep-list.xml:138
-#: plugins/admin/departments/class_departmentManagement.inc:235
-#: plugins/personal/generic/class_user.inc:1622
-#: plugins/personal/generic/generic.tpl:295
-#: plugins/personal/generic/multiple_generic.tpl:159
-msgid "Department"
-msgstr "Подразделение"
 
 #: plugins/generic/references/class_reference.inc:61
 #: plugins/admin/ogroups/class_ogroupManagement.inc:188
 #: plugins/admin/groups/class_groupManagement.inc:179
-#: plugins/admin/users/class_userManagement.inc:765
+#: plugins/admin/users/class_userManagement.inc:766
 #: plugins/admin/departments/generic.tpl:88
 #: plugins/admin/departments/class_department.inc:328
 #: plugins/admin/departments/organization.tpl:88
-#: plugins/personal/generic/class_user.inc:1312
-#: plugins/personal/generic/class_user.inc:1725
-#: plugins/personal/generic/generic.tpl:346
-#: plugins/personal/generic/generic.tpl:527
+#: plugins/personal/generic/class_user.inc:1317
+#: plugins/personal/generic/class_user.inc:1730
+#: plugins/personal/generic/generic.tpl:344
+#: plugins/personal/generic/generic.tpl:525
 #: plugins/personal/generic/multiple_generic.tpl:217
 #: plugins/personal/generic/multiple_generic.tpl:428
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:86
 msgid "Phone"
 msgstr "Телефон"
 
@@ -2774,6 +2883,7 @@ msgstr "Приложение"
 
 #: plugins/generic/references/class_reference.inc:65
 #: plugins/admin/ogroups/class_ogroupManagement.inc:187
+#: plugins/personal/posix/trustSelect/trust-list.xml:14
 #: setup/setup_config2.tpl:219 setup/setup_config2.tpl:264
 msgid "Server"
 msgstr "Сервер"
@@ -2784,6 +2894,7 @@ msgstr "Тонкий клиент"
 
 #: plugins/generic/references/class_reference.inc:69
 #: plugins/admin/ogroups/class_ogroupManagement.inc:189
+#: plugins/personal/posix/trustSelect/trust-list.xml:22
 msgid "Workstation"
 msgstr "Рабочая станция"
 
@@ -2839,12 +2950,6 @@ msgstr ""
 msgid "The GOsa team"
 msgstr "Команда разработчиков GOsa"
 
-#: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
-#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
-msgid "Update"
-msgstr ""
-
 #: plugins/admin/ogroups/remove.tpl:6
 msgid ""
 "Please double check if you really want to do this since there is no way for "
@@ -2854,7 +2959,7 @@ msgstr ""
 "сможет восстановить эти данные."
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroup.inc:1117
+#: plugins/admin/ogroups/class_ogroup.inc:1080
 msgid "Object groups"
 msgstr "Объединения"
 
@@ -2865,7 +2970,7 @@ msgstr "Название группы"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:115
 #: plugins/admin/groups/class_groupManagement.inc:98
-#: plugins/admin/users/class_userManagement.inc:188
+#: plugins/admin/users/class_userManagement.inc:189
 #, fuzzy
 msgid "Infrastructure error"
 msgstr "Ошибка LDAP:"
@@ -2876,6 +2981,7 @@ msgid "Templates"
 msgstr "Шаблон"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:183
+#: plugins/admin/groups/userSelect/user-list.xml:14
 #: plugins/admin/users/user-list.xml:23 plugins/admin/users/user-list.xml:95
 #: setup/setup_config2.tpl:228 setup/setup_config2.tpl:273
 msgid "User"
@@ -2887,6 +2993,7 @@ msgid "Windows Install"
 msgstr "Рабочая станция Windows"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:191
+#: plugins/personal/posix/trustSelect/trust-list.xml:30
 #, fuzzy
 msgid "Terminal"
 msgstr "Терминалы"
@@ -2895,142 +3002,142 @@ msgstr "Терминалы"
 msgid "You cannot combine terminals and workstations in one object group!"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:457
-#: plugins/admin/ogroups/class_ogroup.inc:459
-#: plugins/admin/ogroups/class_ogroup.inc:517
+#: plugins/admin/ogroups/class_ogroup.inc:420
+#: plugins/admin/ogroups/class_ogroup.inc:422
+#: plugins/admin/ogroups/class_ogroup.inc:480
 msgid "departments"
 msgstr "подразделения"
 
-#: plugins/admin/ogroups/class_ogroup.inc:459
-#: plugins/admin/ogroups/class_ogroup.inc:463
-#: plugins/admin/ogroups/class_ogroup.inc:467
-#: plugins/admin/ogroups/class_ogroup.inc:471
-#: plugins/admin/ogroups/class_ogroup.inc:475
-#: plugins/admin/ogroups/class_ogroup.inc:479
-#: plugins/admin/ogroups/class_ogroup.inc:483
-#: plugins/admin/ogroups/class_ogroup.inc:487
-#: plugins/admin/ogroups/class_ogroup.inc:495
+#: plugins/admin/ogroups/class_ogroup.inc:422
+#: plugins/admin/ogroups/class_ogroup.inc:426
+#: plugins/admin/ogroups/class_ogroup.inc:430
+#: plugins/admin/ogroups/class_ogroup.inc:434
+#: plugins/admin/ogroups/class_ogroup.inc:438
+#: plugins/admin/ogroups/class_ogroup.inc:442
+#: plugins/admin/ogroups/class_ogroup.inc:446
+#: plugins/admin/ogroups/class_ogroup.inc:450
+#: plugins/admin/ogroups/class_ogroup.inc:458
 #, fuzzy, php-format
 msgid "Show %s"
 msgstr "Показать группы"
 
-#: plugins/admin/ogroups/class_ogroup.inc:461
-#: plugins/admin/ogroups/class_ogroup.inc:463
+#: plugins/admin/ogroups/class_ogroup.inc:424
+#: plugins/admin/ogroups/class_ogroup.inc:426
 #, fuzzy
 msgid "people"
 msgstr "Показать людей"
 
-#: plugins/admin/ogroups/class_ogroup.inc:465
-#: plugins/admin/ogroups/class_ogroup.inc:467
-#: plugins/admin/ogroups/class_ogroup.inc:515
+#: plugins/admin/ogroups/class_ogroup.inc:428
+#: plugins/admin/ogroups/class_ogroup.inc:430
+#: plugins/admin/ogroups/class_ogroup.inc:478
 msgid "groups"
 msgstr "группы"
 
-#: plugins/admin/ogroups/class_ogroup.inc:469
-#: plugins/admin/ogroups/class_ogroup.inc:471
-#: plugins/admin/ogroups/class_ogroup.inc:518
+#: plugins/admin/ogroups/class_ogroup.inc:432
+#: plugins/admin/ogroups/class_ogroup.inc:434
+#: plugins/admin/ogroups/class_ogroup.inc:481
 msgid "servers"
 msgstr "серверы"
 
-#: plugins/admin/ogroups/class_ogroup.inc:473
-#: plugins/admin/ogroups/class_ogroup.inc:475
-#: plugins/admin/ogroups/class_ogroup.inc:519
+#: plugins/admin/ogroups/class_ogroup.inc:436
+#: plugins/admin/ogroups/class_ogroup.inc:438
+#: plugins/admin/ogroups/class_ogroup.inc:482
 msgid "workstations"
 msgstr "рабочие станции"
 
-#: plugins/admin/ogroups/class_ogroup.inc:477
-#: plugins/admin/ogroups/class_ogroup.inc:479
-#: plugins/admin/ogroups/class_ogroup.inc:521
+#: plugins/admin/ogroups/class_ogroup.inc:440
+#: plugins/admin/ogroups/class_ogroup.inc:442
+#: plugins/admin/ogroups/class_ogroup.inc:484
 msgid "terminals"
 msgstr "терминалы"
 
-#: plugins/admin/ogroups/class_ogroup.inc:481
+#: plugins/admin/ogroups/class_ogroup.inc:444
 #, fuzzy
 msgid "printer"
 msgstr "принтеры"
 
-#: plugins/admin/ogroups/class_ogroup.inc:483
-#: plugins/admin/ogroups/class_ogroup.inc:523
+#: plugins/admin/ogroups/class_ogroup.inc:446
+#: plugins/admin/ogroups/class_ogroup.inc:486
 msgid "printers"
 msgstr "принтеры"
 
+#: plugins/admin/ogroups/class_ogroup.inc:448
+#: plugins/admin/ogroups/class_ogroup.inc:450
 #: plugins/admin/ogroups/class_ogroup.inc:485
-#: plugins/admin/ogroups/class_ogroup.inc:487
-#: plugins/admin/ogroups/class_ogroup.inc:522
 msgid "phones"
 msgstr "телефоны"
 
-#: plugins/admin/ogroups/class_ogroup.inc:493
-#: plugins/admin/ogroups/class_ogroup.inc:495
-#: plugins/admin/ogroups/class_ogroup.inc:516
+#: plugins/admin/ogroups/class_ogroup.inc:456
+#: plugins/admin/ogroups/class_ogroup.inc:458
+#: plugins/admin/ogroups/class_ogroup.inc:479
 msgid "applications"
 msgstr "приложения"
 
-#: plugins/admin/ogroups/class_ogroup.inc:510
-#: plugins/admin/users/class_userManagement.inc:333
-#: plugins/admin/users/class_userManagement.inc:366
-#: plugins/admin/users/class_userManagement.inc:397
+#: plugins/admin/ogroups/class_ogroup.inc:473
+#: plugins/admin/users/class_userManagement.inc:334
+#: plugins/admin/users/class_userManagement.inc:367
+#: plugins/admin/users/class_userManagement.inc:398
 msgid "none"
 msgstr "нет"
 
-#: plugins/admin/ogroups/class_ogroup.inc:512
+#: plugins/admin/ogroups/class_ogroup.inc:475
 msgid "too many different objects!"
 msgstr "слишком много различных объектов!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:514
+#: plugins/admin/ogroups/class_ogroup.inc:477
 msgid "users"
 msgstr "пользователи"
 
-#: plugins/admin/ogroups/class_ogroup.inc:520
+#: plugins/admin/ogroups/class_ogroup.inc:483
 #, fuzzy
 msgid "winstations"
 msgstr "Рабочая станция"
 
-#: plugins/admin/ogroups/class_ogroup.inc:570
-#: plugins/admin/groups/class_groupGeneric.inc:511
-#: plugins/personal/posix/class_posixAccount.inc:644
+#: plugins/admin/ogroups/class_ogroup.inc:533
+#: plugins/admin/groups/class_groupGeneric.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:573
 #: setup/setup_config2.tpl:143
 msgid "disabled"
 msgstr "отключен"
 
-#: plugins/admin/ogroups/class_ogroup.inc:570
-#: plugins/admin/groups/class_groupGeneric.inc:511
-#: plugins/personal/posix/class_posixAccount.inc:644
+#: plugins/admin/ogroups/class_ogroup.inc:533
+#: plugins/admin/groups/class_groupGeneric.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:573
 msgid "full access"
 msgstr "полный доступ"
 
-#: plugins/admin/ogroups/class_ogroup.inc:571
-#: plugins/admin/groups/class_groupGeneric.inc:512
-#: plugins/personal/posix/class_posixAccount.inc:645
+#: plugins/admin/ogroups/class_ogroup.inc:534
+#: plugins/admin/groups/class_groupGeneric.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:574
 msgid "allow access to these hosts"
 msgstr "разрешить доступ только на эти хосты"
 
-#: plugins/admin/ogroups/class_ogroup.inc:755
+#: plugins/admin/ogroups/class_ogroup.inc:718
 #, fuzzy
 msgid "Non existing dn:"
 msgstr "Не существующий dn:"
 
-#: plugins/admin/ogroups/class_ogroup.inc:912
+#: plugins/admin/ogroups/class_ogroup.inc:875
 #, php-format
 msgid ""
 "These systems are already configured by other object groups and cannot be "
 "added:"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:922
-#: plugins/admin/ogroups/class_ogroup.inc:932
-#: plugins/admin/ogroups/class_ogroup.inc:1120
+#: plugins/admin/ogroups/class_ogroup.inc:885
+#: plugins/admin/ogroups/class_ogroup.inc:895
+#: plugins/admin/ogroups/class_ogroup.inc:1083
 #: plugins/admin/ogroups/ogroup-list.xml:41
-#: plugins/admin/groups/class_groupGeneric.inc:1129
-#: plugins/admin/groups/class_groupGeneric.inc:1135
-#: plugins/admin/groups/class_groupGeneric.inc:1137
-#: plugins/admin/groups/class_groupGeneric.inc:1149
-#: plugins/admin/groups/class_groupGeneric.inc:1163
-#: plugins/admin/groups/class_groupGeneric.inc:1170
-#: plugins/admin/groups/class_groupGeneric.inc:1257
+#: plugins/admin/groups/class_groupGeneric.inc:1092
+#: plugins/admin/groups/class_groupGeneric.inc:1098
+#: plugins/admin/groups/class_groupGeneric.inc:1100
+#: plugins/admin/groups/class_groupGeneric.inc:1112
+#: plugins/admin/groups/class_groupGeneric.inc:1126
+#: plugins/admin/groups/class_groupGeneric.inc:1133
+#: plugins/admin/groups/class_groupGeneric.inc:1220
 #: plugins/admin/groups/group-list.xml:41
-#: plugins/admin/users/class_userManagement.inc:407
-#: plugins/admin/users/class_userManagement.inc:454
+#: plugins/admin/users/class_userManagement.inc:408
+#: plugins/admin/users/class_userManagement.inc:455
 #: plugins/admin/departments/class_domain.inc:43
 #: plugins/admin/departments/class_domain.inc:45
 #: plugins/admin/departments/class_domain.inc:50
@@ -3067,31 +3174,33 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:764
 #: plugins/admin/acl/class_aclRole.inc:774 plugins/admin/acl/acl-list.xml:49
 #: plugins/admin/acl/paste_role.tpl:4 plugins/admin/acl/acl_role.tpl:7
-#: plugins/personal/generic/class_user.inc:1279
-#: plugins/personal/generic/class_user.inc:1292
-#: plugins/personal/generic/class_user.inc:1334
-#: plugins/personal/generic/class_user.inc:1740 setup/setup_migrate.tpl:283
-#: setup/setup_feedback.tpl:31
+#: plugins/personal/generic/class_user.inc:1284
+#: plugins/personal/generic/class_user.inc:1297
+#: plugins/personal/generic/class_user.inc:1339
+#: plugins/personal/generic/class_user.inc:1745
+#: plugins/personal/posix/trustSelect/trust-list.xml:56
+#: plugins/personal/posix/groupSelect/group-list.xml:41
+#: setup/setup_migrate.tpl:283 setup/setup_feedback.tpl:31
 msgid "Name"
 msgstr "Фамилия"
 
-#: plugins/admin/ogroups/class_ogroup.inc:937
+#: plugins/admin/ogroups/class_ogroup.inc:900
 #, fuzzy
 msgid "You can combine two different object types at maximum, only!"
 msgstr ""
 "Вы можете комбинировать не более двух различных классов в одном объекте!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1112
+#: plugins/admin/ogroups/class_ogroup.inc:1075
 #, fuzzy
 msgid "Object group generic"
 msgstr "Объект группы"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1123
+#: plugins/admin/ogroups/class_ogroup.inc:1086
 #, fuzzy
 msgid "Sytem trust"
 msgstr "Системные доверия"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1124
+#: plugins/admin/ogroups/class_ogroup.inc:1087
 #, fuzzy
 msgid "Member"
 msgstr "Включаемые объекты"
@@ -3130,7 +3239,7 @@ msgid "Select a base"
 msgstr "Выберите, чтобы просмотреть серверы"
 
 #: plugins/admin/ogroups/generic.tpl:41
-#: plugins/admin/groups/class_groupGeneric.inc:1265
+#: plugins/admin/groups/class_groupGeneric.inc:1228
 #: plugins/personal/posix/generic.tpl:139
 msgid "System trust"
 msgstr "Системные доверия"
@@ -3172,8 +3281,9 @@ msgstr ""
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:222
 #: plugins/admin/groups/class_groupManagement.inc:195
-#: plugins/admin/users/class_userManagement.inc:757
+#: plugins/admin/users/class_userManagement.inc:758
 #: plugins/personal/posix/class_posixAccount.inc:324
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:102
 msgid "Environment"
 msgstr "Окружение"
 
@@ -3185,15 +3295,6 @@ msgstr "Приложения"
 #, fuzzy
 msgid "Please enter the new object group name"
 msgstr "Введите адрес сервера"
-
-#: plugins/admin/ogroups/ogroup-filter.tpl:3
-#: plugins/admin/groups/group-filter.tpl:3
-#: plugins/admin/users/user-filter.tpl:3
-#: plugins/admin/departments/dep-filter.tpl:3
-#: plugins/admin/acl/acl-filter.tpl:3
-#, fuzzy
-msgid "Filter"
-msgstr "Фильтры"
 
 #: plugins/admin/ogroups/ogroup-filter.tpl:11
 #, fuzzy
@@ -3310,7 +3411,7 @@ msgstr "Показать объекты подразделения"
 #: plugins/admin/ogroups/ogroup_objects.tpl:37
 #: plugins/admin/ogroups/trust_machines.tpl:27
 #: plugins/admin/groups/group_objects.tpl:40
-#: plugins/admin/groups/trust_machines.tpl:27
+#: plugins/admin/groups/trust_machines.tpl:26
 #: plugins/personal/posix/posix_groups.tpl:35
 #: plugins/personal/posix/trust_machines.tpl:27
 msgid "Choose the department the search will be based on"
@@ -3331,19 +3432,19 @@ msgid "Select systems to add"
 msgstr "Выберите системы для добавления"
 
 #: plugins/admin/ogroups/trust_machines.tpl:26
-#: plugins/admin/groups/trust_machines.tpl:26
+#: plugins/admin/groups/trust_machines.tpl:25
 #: plugins/personal/posix/trust_machines.tpl:26
 msgid "Display systems of department"
 msgstr "Показать системы в подразделении"
 
 #: plugins/admin/ogroups/trust_machines.tpl:30
-#: plugins/admin/groups/trust_machines.tpl:30
+#: plugins/admin/groups/trust_machines.tpl:29
 #: plugins/personal/posix/trust_machines.tpl:30
 msgid "Display systems matching"
 msgstr "Показать подходяшие системы"
 
 #: plugins/admin/ogroups/trust_machines.tpl:31
-#: plugins/admin/groups/trust_machines.tpl:31
+#: plugins/admin/groups/trust_machines.tpl:30
 #: plugins/personal/posix/trust_machines.tpl:31
 msgid "Regular expression for matching addresses"
 msgstr "Регулярное выражение для поиска адреса"
@@ -3381,6 +3482,47 @@ msgstr "Фильтр"
 #: plugins/admin/groups/group_objects.tpl:47
 msgid "Regular expression for matching user names"
 msgstr "Регулярное выражение, соответствующее именам пользователей"
+
+#: plugins/admin/groups/userSelect/user-list.xml:10
+#, fuzzy
+msgid "Please select the desired entries"
+msgstr "Язык по умолчанию"
+
+#: plugins/admin/groups/userSelect/user-list.xml:40
+#: plugins/admin/users/class_userManagement.inc:411
+#: plugins/admin/users/user-list.xml:57
+#: plugins/personal/generic/class_user.inc:1289
+#: plugins/personal/generic/class_user.inc:1336
+#: plugins/personal/generic/class_user.inc:1614
+#: plugins/personal/generic/class_user.inc:1742
+msgid "Given name"
+msgstr "Имя"
+
+#: plugins/admin/groups/userSelect/user-list.xml:48
+#: plugins/admin/users/user-list.xml:49
+#: plugins/personal/generic/class_user.inc:1613
+#, fuzzy
+msgid "Surname"
+msgstr "Имя сервера"
+
+#: plugins/admin/groups/userSelect/user-filter.tpl:11
+#: plugins/admin/groups/group-filter.tpl:11
+#: plugins/personal/posix/groupSelect/group-filter.tpl:11
+msgid "Show primary groups"
+msgstr "Показать основные группы"
+
+#: plugins/admin/groups/userSelect/user-filter.tpl:12
+#: plugins/admin/groups/group-filter.tpl:12
+#: plugins/personal/posix/groupSelect/group-filter.tpl:12
+msgid "Show samba groups"
+msgstr "Показать группы samba"
+
+#: plugins/admin/groups/userSelect/user-filter.tpl:13
+#: plugins/admin/groups/group-filter.tpl:13
+#: plugins/personal/posix/groupSelect/group-filter.tpl:13
+#, fuzzy
+msgid "Show mail groups"
+msgstr "Показать группы samba"
 
 #: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:52
 #: plugins/personal/generic/generic.tpl:73
@@ -3441,116 +3583,103 @@ msgstr "Основная группа"
 msgid "Not in all groups"
 msgstr "Показать группы с эл. почтой"
 
-#: plugins/admin/groups/group-filter.tpl:11
-msgid "Show primary groups"
-msgstr "Показать основные группы"
-
-#: plugins/admin/groups/group-filter.tpl:12
-msgid "Show samba groups"
-msgstr "Показать группы samba"
-
-#: plugins/admin/groups/group-filter.tpl:13
-#, fuzzy
-msgid "Show mail groups"
-msgstr "Показать группы samba"
-
 #: plugins/admin/groups/class_groupGeneric.inc:161
 #, fuzzy
 msgid "Cannot find group SID in your configuration!"
 msgstr "Не могу найти SID в базе LDAP или в сонфигурационном файле!"
 
-#: plugins/admin/groups/class_groupGeneric.inc:478
+#: plugins/admin/groups/class_groupGeneric.inc:441
 msgid "Samba group"
 msgstr "Группа Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:478
+#: plugins/admin/groups/class_groupGeneric.inc:441
 msgid "Domain admins"
 msgstr "Администраторы домена"
 
-#: plugins/admin/groups/class_groupGeneric.inc:478
+#: plugins/admin/groups/class_groupGeneric.inc:441
 msgid "Domain users"
 msgstr "Пользователи домена"
 
-#: plugins/admin/groups/class_groupGeneric.inc:479
+#: plugins/admin/groups/class_groupGeneric.inc:442
 msgid "Domain guests"
 msgstr "Непривилегированные пользователи домена"
 
-#: plugins/admin/groups/class_groupGeneric.inc:484
+#: plugins/admin/groups/class_groupGeneric.inc:447
 #, php-format
 msgid "Special group (%d)"
 msgstr "Специальная группа (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:618
+#: plugins/admin/groups/class_groupGeneric.inc:581
 #, php-format
 msgid "Adding UID '%s' to group '%s' failed: cannot find user object!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:624
+#: plugins/admin/groups/class_groupGeneric.inc:587
 #, php-format
 msgid "Add UID '%s' to group '%s' failed: UID is used more than once!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:702
+#: plugins/admin/groups/class_groupGeneric.inc:665
 #, fuzzy
 msgid "! unknown UID"
 msgstr "состояние неизвестно"
 
-#: plugins/admin/groups/class_groupGeneric.inc:745
+#: plugins/admin/groups/class_groupGeneric.inc:708
 #, php-format
 msgid "Search returned too many results. Not displaying more than %s entries!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:969
+#: plugins/admin/groups/class_groupGeneric.inc:932
 #, fuzzy, php-format
 msgid "Cannot find any SID for '%s'!"
 msgstr "Удалить"
 
-#: plugins/admin/groups/class_groupGeneric.inc:974
+#: plugins/admin/groups/class_groupGeneric.inc:937
 #, fuzzy, php-format
 msgid "Cannot find any RIDBASE for '%s'!"
 msgstr "Удалить"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1078
+#: plugins/admin/groups/class_groupGeneric.inc:1041
 #, php-format
 msgid "The gidNumber '%s' is already in use by %s!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:1179
-#: plugins/admin/groups/class_groupGeneric.inc:1182
-#: plugins/admin/groups/class_groupGeneric.inc:1261
-#: plugins/personal/posix/class_posixAccount.inc:1116
-#: plugins/personal/posix/class_posixAccount.inc:1119
+#: plugins/admin/groups/class_groupGeneric.inc:1142
+#: plugins/admin/groups/class_groupGeneric.inc:1145
+#: plugins/admin/groups/class_groupGeneric.inc:1224
+#: plugins/personal/posix/class_posixAccount.inc:1045
+#: plugins/personal/posix/class_posixAccount.inc:1048
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/paste_generic.tpl:45
 msgid "GID"
 msgstr "GID"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1249
+#: plugins/admin/groups/class_groupGeneric.inc:1212
 #, fuzzy
 msgid "Generic group settings"
 msgstr "Общая информация о пользователе"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1263
+#: plugins/admin/groups/class_groupGeneric.inc:1226
 #, fuzzy
 msgid "Samba group type"
 msgstr "Группа Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1264
+#: plugins/admin/groups/class_groupGeneric.inc:1227
 #, fuzzy
 msgid "Samba domain name"
 msgstr "Домашний каталог Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1266
+#: plugins/admin/groups/class_groupGeneric.inc:1229
 #, fuzzy
 msgid "Phone pickup group"
 msgstr "Члены телефонной группы"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1267
+#: plugins/admin/groups/class_groupGeneric.inc:1230
 #, fuzzy
 msgid "Nagios group"
 msgstr "Контакт"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1269
+#: plugins/admin/groups/class_groupGeneric.inc:1232
 #, fuzzy
 msgid "Group member"
 msgstr "Члены группы"
@@ -3561,6 +3690,7 @@ msgid "Group settings"
 msgstr "Настройки Samba"
 
 #: plugins/admin/groups/group-list.xml:11
+#: plugins/personal/posix/groupSelect/group-list.xml:11
 msgid "List of groups"
 msgstr "Список групп"
 
@@ -3579,45 +3709,53 @@ msgid "Group administration"
 msgstr "Управление группами"
 
 #: plugins/admin/groups/class_groupManagement.inc:155
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:62
 #, fuzzy
 msgid "Posix"
 msgstr "Прокси-сервер"
 
 #: plugins/admin/groups/class_groupManagement.inc:156
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:63
 #, fuzzy
 msgid "Edit posix properties"
 msgstr "Изменить свойства"
 
 #: plugins/admin/groups/class_groupManagement.inc:164
-#: plugins/admin/users/class_userManagement.inc:746
+#: plugins/admin/users/class_userManagement.inc:747
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:71
 #, fuzzy
 msgid "Edit mail properties"
 msgstr "Изменить свойства"
 
 #: plugins/admin/groups/class_groupManagement.inc:172
-#: plugins/admin/users/class_userManagement.inc:750
+#: plugins/admin/users/class_userManagement.inc:751
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:79
 #, fuzzy
 msgid "Edit samba properties"
 msgstr "Изменить свойства"
 
 #: plugins/admin/groups/class_groupManagement.inc:180
-#: plugins/admin/users/class_userManagement.inc:766
+#: plugins/admin/users/class_userManagement.inc:767
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:87
 #, fuzzy
 msgid "Edit phone properties"
 msgstr "Изменить свойства"
 
 #: plugins/admin/groups/class_groupManagement.inc:187
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:94
 #, fuzzy
 msgid "Menu"
 msgstr "Принтер"
 
 #: plugins/admin/groups/class_groupManagement.inc:188
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:95
 #, fuzzy
 msgid "Edit start menu properties"
 msgstr "Изменить свойства"
 
 #: plugins/admin/groups/class_groupManagement.inc:196
-#: plugins/admin/users/class_userManagement.inc:758
+#: plugins/admin/users/class_userManagement.inc:759
+#: plugins/personal/posix/trustSelect/class_trustSelect.inc:103
 #, fuzzy
 msgid "Edit environment properties"
 msgstr "Изменить свойства"
@@ -3686,7 +3824,7 @@ msgstr ""
 "использовать шаблоны."
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/users/class_userManagement.inc:404
+#: plugins/admin/users/class_userManagement.inc:405
 #: plugins/admin/users/user-list.xml:15 plugins/admin/users/user-list.xml:102
 #: plugins/admin/users/templatize.tpl:15
 msgid "Template"
@@ -3709,48 +3847,39 @@ msgstr "Список"
 msgid "Manage users"
 msgstr "Пользователи домена"
 
-#: plugins/admin/users/class_userManagement.inc:277
+#: plugins/admin/users/class_userManagement.inc:278
 #, fuzzy
 msgid "You have no permission to change this users password!"
 msgstr "У вас недостаточно прав для смены своего пароля."
 
-#: plugins/admin/users/class_userManagement.inc:410
-#: plugins/admin/users/user-list.xml:57
-#: plugins/personal/generic/class_user.inc:1284
-#: plugins/personal/generic/class_user.inc:1331
-#: plugins/personal/generic/class_user.inc:1609
-#: plugins/personal/generic/class_user.inc:1737
-msgid "Given name"
-msgstr "Имя"
-
-#: plugins/admin/users/class_userManagement.inc:649
+#: plugins/admin/users/class_userManagement.inc:650
 #, fuzzy
 msgid "Account locking"
 msgstr "Учетная запись"
 
-#: plugins/admin/users/class_userManagement.inc:650
+#: plugins/admin/users/class_userManagement.inc:651
 #, php-format
 msgid ""
 "Password method '%s' does not support locking. Account (%s) has not been "
 "locked!"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:723
+#: plugins/admin/users/class_userManagement.inc:724
 #, fuzzy
 msgid "Unlock account"
 msgstr "Моя учетная запись"
 
-#: plugins/admin/users/class_userManagement.inc:725
+#: plugins/admin/users/class_userManagement.inc:726
 #, fuzzy
 msgid "Lock account"
 msgstr "Моя учетная запись"
 
-#: plugins/admin/users/class_userManagement.inc:738
+#: plugins/admin/users/class_userManagement.inc:739
 #, fuzzy
 msgid "Edit generic properties"
 msgstr "Изменить свойства"
 
-#: plugins/admin/users/class_userManagement.inc:741
+#: plugins/admin/users/class_userManagement.inc:742
 #: plugins/personal/posix/class_posixAccount.inc:304
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/class_posixAccount.inc:326
@@ -3758,21 +3887,21 @@ msgstr "Изменить свойства"
 msgid "POSIX"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:742
+#: plugins/admin/users/class_userManagement.inc:743
 #, fuzzy
 msgid "Edit POSIX properties"
 msgstr "Изменить свойства"
 
-#: plugins/admin/users/class_userManagement.inc:753
+#: plugins/admin/users/class_userManagement.inc:754
 msgid "Netatalk"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:754
+#: plugins/admin/users/class_userManagement.inc:755
 #, fuzzy
 msgid "Edit netatalk properties"
 msgstr "Изменить свойства"
 
-#: plugins/admin/users/class_userManagement.inc:762
+#: plugins/admin/users/class_userManagement.inc:763
 #, fuzzy
 msgid "Edit FAX properties"
 msgstr "Изменить свойства"
@@ -3780,12 +3909,6 @@ msgstr "Изменить свойства"
 #: plugins/admin/users/user-list.xml:11
 msgid "List of users"
 msgstr "Список пользователей"
-
-#: plugins/admin/users/user-list.xml:49
-#: plugins/personal/generic/class_user.inc:1608
-#, fuzzy
-msgid "Surname"
-msgstr "Имя сервера"
 
 #: plugins/admin/users/user-list.xml:140
 #, fuzzy
@@ -3882,52 +4005,6 @@ msgstr ""
 "файл. Если вы сделали это и действительно хотите выполнить удаление, нажмите "
 "<i>Удалить</i>, иначе нажмите <i>Отмена</i>."
 
-#: plugins/admin/departments/dep-list.xml:11
-msgid "List of departments"
-msgstr "Список подразделений"
-
-#: plugins/admin/departments/dep-list.xml:15
-#: plugins/admin/departments/dep-list.xml:103
-#: plugins/admin/departments/class_departmentManagement.inc:175
-#, fuzzy
-msgid "Domain"
-msgstr "в домене"
-
-#: plugins/admin/departments/dep-list.xml:23
-#: plugins/admin/departments/dep-list.xml:110
-#, fuzzy
-msgid "Domain component"
-msgstr "Администраторы домена"
-
-#: plugins/admin/departments/dep-list.xml:31
-#: plugins/admin/departments/dep-list.xml:117
-#: plugins/admin/departments/class_departmentManagement.inc:199
-#: plugins/admin/departments/class_countryGeneric.inc:78
-#: plugins/admin/departments/class_countryGeneric.inc:79
-msgid "Country"
-msgstr "Страна"
-
-#: plugins/admin/departments/dep-list.xml:39
-#: plugins/admin/departments/dep-list.xml:124
-#: plugins/admin/departments/class_departmentManagement.inc:211
-#: plugins/admin/departments/class_localityGeneric.inc:78
-#: plugins/admin/departments/class_localityGeneric.inc:79
-#, fuzzy
-msgid "Locality"
-msgstr "Местоположение"
-
-#: plugins/admin/departments/dep-list.xml:47
-#: plugins/admin/departments/dep-list.xml:131
-#: plugins/admin/departments/class_departmentManagement.inc:223
-#: plugins/admin/departments/class_organizationGeneric.inc:109
-#: plugins/admin/departments/class_organizationGeneric.inc:110
-#: plugins/personal/generic/class_user.inc:1621
-#: plugins/personal/generic/generic.tpl:287
-#: plugins/personal/generic/multiple_generic.tpl:149
-#: setup/setup_feedback.tpl:23
-msgid "Organization"
-msgstr "Организация"
-
 #: plugins/admin/departments/locality.tpl:11
 #: plugins/admin/departments/dcObject.tpl:11
 #, fuzzy
@@ -4014,8 +4091,8 @@ msgstr "Категория этой ветки"
 #: plugins/admin/departments/class_department.inc:624
 #: plugins/admin/departments/organization.tpl:61
 #: plugins/admin/departments/organization.tpl:73
-#: plugins/personal/generic/class_user.inc:1634
-#: plugins/personal/generic/generic.tpl:389
+#: plugins/personal/generic/class_user.inc:1639
+#: plugins/personal/generic/generic.tpl:387
 #: plugins/personal/generic/multiple_generic.tpl:265
 msgid "Location"
 msgstr "Местоположение"
@@ -4024,8 +4101,8 @@ msgstr "Местоположение"
 #: plugins/admin/departments/class_organizationGeneric.inc:123
 #: plugins/admin/departments/class_department.inc:623
 #: plugins/admin/departments/organization.tpl:65
-#: plugins/personal/generic/class_user.inc:1633
-#: plugins/personal/generic/generic.tpl:397
+#: plugins/personal/generic/class_user.inc:1638
+#: plugins/personal/generic/generic.tpl:395
 #: plugins/personal/generic/multiple_generic.tpl:275
 msgid "State"
 msgstr "Адм. единица"
@@ -4044,7 +4121,7 @@ msgstr "Местоположение ветки"
 #: plugins/admin/departments/class_department.inc:625
 #: plugins/admin/departments/organization.tpl:81
 #: plugins/personal/generic/generic.tpl:188
-#: plugins/personal/generic/generic.tpl:405
+#: plugins/personal/generic/generic.tpl:403
 #: plugins/personal/generic/multiple_generic.tpl:67
 #: plugins/personal/generic/multiple_generic.tpl:285
 msgid "Address"
@@ -4065,10 +4142,10 @@ msgstr "Основный телефонный номер для ветки"
 #: plugins/admin/departments/class_department.inc:331
 #: plugins/admin/departments/class_department.inc:627
 #: plugins/admin/departments/organization.tpl:96
-#: plugins/personal/generic/class_user.inc:1315
-#: plugins/personal/generic/class_user.inc:1728
-#: plugins/personal/generic/generic.tpl:371
-#: plugins/personal/generic/generic.tpl:539
+#: plugins/personal/generic/class_user.inc:1320
+#: plugins/personal/generic/class_user.inc:1733
+#: plugins/personal/generic/generic.tpl:369
+#: plugins/personal/generic/generic.tpl:537
 #: plugins/personal/generic/multiple_generic.tpl:247
 #: plugins/personal/generic/multiple_generic.tpl:438
 msgid "Fax"
@@ -4112,7 +4189,7 @@ msgid "Organization name"
 msgstr "Организация"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:125
-#: plugins/personal/generic/class_user.inc:1635
+#: plugins/personal/generic/class_user.inc:1640
 #, fuzzy
 msgid "Postal address"
 msgstr "Почтовый индекс"
@@ -4296,8 +4373,8 @@ msgstr ""
 
 #: plugins/admin/acl/class_aclRole.inc:744 plugins/admin/acl/acl-list.xml:23
 #: plugins/admin/acl/acl-list.xml:82
-#: plugins/personal/generic/class_user.inc:1593
-#: plugins/personal/generic/generic.tpl:456
+#: plugins/personal/generic/class_user.inc:1598
+#: plugins/personal/generic/generic.tpl:454
 #: plugins/personal/generic/multiple_generic.tpl:345
 msgid "Role"
 msgstr "Роль"
@@ -4337,7 +4414,7 @@ msgstr ""
 msgid "Edit organizational user settings"
 msgstr "Дополнительные записи в fstab"
 
-#: plugins/personal/generic/class_user.inc:264
+#: plugins/personal/generic/class_user.inc:274
 msgid "Please add a single IP address or a network/netmask combination!"
 msgstr ""
 
@@ -4387,226 +4464,226 @@ msgstr "Изменить сертификаты"
 msgid "The selected password method is no longer available."
 msgstr "У выбранного приложения нет параметров."
 
-#: plugins/personal/generic/class_user.inc:1151
+#: plugins/personal/generic/class_user.inc:1156
 msgid "Cannot build RDN: no + allowed to build sub RDN!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1158
+#: plugins/personal/generic/class_user.inc:1163
 msgid "Cannot build RDN: attribute is not defined!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1176
+#: plugins/personal/generic/class_user.inc:1181
 msgid "Cannot build RDN: invalid attribute parameters!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1247
+#: plugins/personal/generic/class_user.inc:1252
 #, fuzzy
 msgid "The selected password method requires initial configuration!"
 msgstr "У выбранного приложения нет параметров."
 
-#: plugins/personal/generic/class_user.inc:1307
-#: plugins/personal/generic/class_user.inc:1639
-#: plugins/personal/generic/class_user.inc:1722
+#: plugins/personal/generic/class_user.inc:1312
+#: plugins/personal/generic/class_user.inc:1644
+#: plugins/personal/generic/class_user.inc:1727
 #: plugins/personal/generic/generic.tpl:204
 #: plugins/personal/generic/multiple_generic.tpl:88
 msgid "Homepage"
 msgstr "Домашняя страница"
 
-#: plugins/personal/generic/class_user.inc:1318
-#: plugins/personal/generic/class_user.inc:1731
-#: plugins/personal/generic/generic.tpl:355
+#: plugins/personal/generic/class_user.inc:1323
+#: plugins/personal/generic/class_user.inc:1736
+#: plugins/personal/generic/generic.tpl:353
 #: plugins/personal/generic/multiple_generic.tpl:227
 msgid "Mobile"
 msgstr "Мобильный"
 
-#: plugins/personal/generic/class_user.inc:1321
-#: plugins/personal/generic/class_user.inc:1734
-#: plugins/personal/generic/generic.tpl:363
+#: plugins/personal/generic/class_user.inc:1326
+#: plugins/personal/generic/class_user.inc:1739
+#: plugins/personal/generic/generic.tpl:361
 #: plugins/personal/generic/multiple_generic.tpl:237
 msgid "Pager"
 msgstr "Пейджер"
 
-#: plugins/personal/generic/class_user.inc:1326
-#: plugins/personal/generic/class_user.inc:1614
+#: plugins/personal/generic/class_user.inc:1331
+#: plugins/personal/generic/class_user.inc:1619
 #: plugins/personal/generic/generic.tpl:119
 msgid "Date of birth"
 msgstr "Дата рождения"
 
-#: plugins/personal/generic/class_user.inc:1436
+#: plugins/personal/generic/class_user.inc:1441
 #, fuzzy
 msgid "Cannot open certificate!"
 msgstr "Невозможно выбрать базу данных!"
 
-#: plugins/personal/generic/class_user.inc:1582
-#: plugins/personal/generic/generic.tpl:479
+#: plugins/personal/generic/class_user.inc:1587
+#: plugins/personal/generic/generic.tpl:477
 #: plugins/personal/generic/multiple_generic.tpl:371
 msgid "Unit"
 msgstr "Подразделение"
 
-#: plugins/personal/generic/class_user.inc:1583
-#: plugins/personal/generic/generic.tpl:504
+#: plugins/personal/generic/class_user.inc:1588
+#: plugins/personal/generic/generic.tpl:502
 #: plugins/personal/generic/multiple_generic.tpl:402
 msgid "House identifier"
 msgstr "Номер дома"
 
-#: plugins/personal/generic/class_user.inc:1584
-#: plugins/personal/generic/generic.tpl:421
+#: plugins/personal/generic/class_user.inc:1589
+#: plugins/personal/generic/generic.tpl:419
 #: plugins/personal/generic/multiple_generic.tpl:302
 msgid "Vocation"
 msgstr "Специальность"
 
-#: plugins/personal/generic/class_user.inc:1585
-#: plugins/personal/generic/generic.tpl:548
+#: plugins/personal/generic/class_user.inc:1590
+#: plugins/personal/generic/generic.tpl:546
 #: plugins/personal/generic/multiple_generic.tpl:449
 msgid "Last delivery"
 msgstr "Последняя доставка"
 
-#: plugins/personal/generic/class_user.inc:1586
-#: plugins/personal/generic/generic.tpl:470
+#: plugins/personal/generic/class_user.inc:1591
+#: plugins/personal/generic/generic.tpl:468
 #: plugins/personal/generic/multiple_generic.tpl:360
 msgid "Person locality"
 msgstr "Местоположение сотрудника"
 
-#: plugins/personal/generic/class_user.inc:1587
-#: plugins/personal/generic/generic.tpl:429
+#: plugins/personal/generic/class_user.inc:1592
+#: plugins/personal/generic/generic.tpl:427
 #: plugins/personal/generic/multiple_generic.tpl:312
 msgid "Unit description"
 msgstr "Описание подразделения"
 
-#: plugins/personal/generic/class_user.inc:1588
-#: plugins/personal/generic/generic.tpl:438
+#: plugins/personal/generic/class_user.inc:1593
+#: plugins/personal/generic/generic.tpl:436
 #: plugins/personal/generic/multiple_generic.tpl:323
 msgid "Subject area"
 msgstr "Область деятельности"
 
-#: plugins/personal/generic/class_user.inc:1589
-#: plugins/personal/generic/generic.tpl:447
+#: plugins/personal/generic/class_user.inc:1594
+#: plugins/personal/generic/generic.tpl:445
 #: plugins/personal/generic/multiple_generic.tpl:334
 msgid "Functional title"
 msgstr "Должность"
 
-#: plugins/personal/generic/class_user.inc:1590
+#: plugins/personal/generic/class_user.inc:1595
 #: plugins/personal/generic/generic_certs.tpl:78
 msgid "Certificate serial number"
 msgstr "Серийный номер сертификата"
 
-#: plugins/personal/generic/class_user.inc:1591
-#: plugins/personal/generic/generic.tpl:557
+#: plugins/personal/generic/class_user.inc:1596
+#: plugins/personal/generic/generic.tpl:555
 #: plugins/personal/generic/multiple_generic.tpl:460
 msgid "Public visible"
 msgstr "Видимый всем"
 
-#: plugins/personal/generic/class_user.inc:1592
-#: plugins/personal/generic/generic.tpl:488
+#: plugins/personal/generic/class_user.inc:1597
+#: plugins/personal/generic/generic.tpl:486
 #: plugins/personal/generic/multiple_generic.tpl:382
 msgid "Street"
 msgstr "Улица"
 
-#: plugins/personal/generic/class_user.inc:1594
-#: plugins/personal/generic/generic.tpl:496
+#: plugins/personal/generic/class_user.inc:1599
+#: plugins/personal/generic/generic.tpl:494
 #: plugins/personal/generic/multiple_generic.tpl:392
 msgid "Postal code"
 msgstr "Почтовый индекс"
 
-#: plugins/personal/generic/class_user.inc:1598
+#: plugins/personal/generic/class_user.inc:1603
 #, fuzzy
 msgid "Generic user settings"
 msgstr "Общая информация о пользователе"
 
-#: plugins/personal/generic/class_user.inc:1602
-#: plugins/personal/posix/class_posixAccount.inc:1571
+#: plugins/personal/generic/class_user.inc:1607
+#: plugins/personal/posix/class_posixAccount.inc:1444
 #: plugins/personal/password/class_password.inc:150
 msgid "My account"
 msgstr "Моя учетная запись"
 
-#: plugins/personal/generic/class_user.inc:1610
+#: plugins/personal/generic/class_user.inc:1615
 #, fuzzy
 msgid "User identification"
 msgstr "Информация"
 
-#: plugins/personal/generic/class_user.inc:1611
+#: plugins/personal/generic/class_user.inc:1616
 #: plugins/personal/generic/generic.tpl:98
 msgid "Personal title"
 msgstr "Обращение"
 
-#: plugins/personal/generic/class_user.inc:1612
+#: plugins/personal/generic/class_user.inc:1617
 #: plugins/personal/generic/generic.tpl:108
 #: plugins/personal/generic/multiple_generic.tpl:23
 msgid "Academic title"
 msgstr "Академическое звание"
 
-#: plugins/personal/generic/class_user.inc:1615
+#: plugins/personal/generic/class_user.inc:1620
 #: plugins/personal/generic/generic.tpl:138
 msgid "Sex"
 msgstr "Пол"
 
-#: plugins/personal/generic/class_user.inc:1616
+#: plugins/personal/generic/class_user.inc:1621
 #, fuzzy
 msgid "Preferred language"
 msgstr "Язык по умолчанию"
 
-#: plugins/personal/generic/class_user.inc:1619
+#: plugins/personal/generic/class_user.inc:1624
 #: plugins/personal/generic/paste_generic.tpl:47
 #, fuzzy
 msgid "User picture"
 msgstr "Изображение"
 
-#: plugins/personal/generic/class_user.inc:1623
+#: plugins/personal/generic/class_user.inc:1628
 #, fuzzy
 msgid "Department number"
 msgstr "Управление подразделениями"
 
-#: plugins/personal/generic/class_user.inc:1624
+#: plugins/personal/generic/class_user.inc:1629
 #, fuzzy
 msgid "Employee number"
 msgstr "Форма трудоустройства"
 
-#: plugins/personal/generic/class_user.inc:1625
-#: plugins/personal/generic/generic.tpl:319
+#: plugins/personal/generic/class_user.inc:1630
+#: plugins/personal/generic/generic.tpl:317
 #: plugins/personal/generic/multiple_generic.tpl:189
 msgid "Employee type"
 msgstr "Форма трудоустройства"
 
-#: plugins/personal/generic/class_user.inc:1627
+#: plugins/personal/generic/class_user.inc:1632
 #, fuzzy
 msgid "Room number"
 msgstr "Телефонные номера"
 
-#: plugins/personal/generic/class_user.inc:1628
+#: plugins/personal/generic/class_user.inc:1633
 #, fuzzy
 msgid "Telefon number"
 msgstr "Телефонные номера"
 
-#: plugins/personal/generic/class_user.inc:1629
+#: plugins/personal/generic/class_user.inc:1634
 #, fuzzy
 msgid "Pager number"
 msgstr "Телефонные номера"
 
-#: plugins/personal/generic/class_user.inc:1630
+#: plugins/personal/generic/class_user.inc:1635
 #, fuzzy
 msgid "Mobile number"
 msgstr "Домашний телефон"
 
-#: plugins/personal/generic/class_user.inc:1631
+#: plugins/personal/generic/class_user.inc:1636
 #, fuzzy
 msgid "Fax number"
 msgstr "Терминал"
 
-#: plugins/personal/generic/class_user.inc:1637
+#: plugins/personal/generic/class_user.inc:1642
 msgid "Home postal address"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1638
+#: plugins/personal/generic/class_user.inc:1643
 #, fuzzy
 msgid "Home phone number"
 msgstr "Телефонные номера"
 
-#: plugins/personal/generic/class_user.inc:1640
+#: plugins/personal/generic/class_user.inc:1645
 #, fuzzy
 msgid "User password method"
 msgstr "Хэширование паролей"
 
-#: plugins/personal/generic/class_user.inc:1641
+#: plugins/personal/generic/class_user.inc:1646
 #, fuzzy
 msgid "User certificates"
 msgstr "Стандартный сертификат"
@@ -4672,33 +4749,33 @@ msgstr "Изменить сертификаты"
 msgid "Restrict login to"
 msgstr ""
 
-#: plugins/personal/generic/generic.tpl:256
+#: plugins/personal/generic/generic.tpl:254
 msgid "IP or network"
 msgstr ""
 
-#: plugins/personal/generic/generic.tpl:275
+#: plugins/personal/generic/generic.tpl:273
 #: plugins/personal/generic/multiple_generic.tpl:137
 msgid "Organizational information"
 msgstr "Информация об организации"
 
-#: plugins/personal/generic/generic.tpl:303
+#: plugins/personal/generic/generic.tpl:301
 #: plugins/personal/generic/multiple_generic.tpl:169
 msgid "Department No."
 msgstr "Номер подразделения"
 
-#: plugins/personal/generic/generic.tpl:311
+#: plugins/personal/generic/generic.tpl:309
 #: plugins/personal/generic/multiple_generic.tpl:179
 msgid "Employee No."
 msgstr "Номер работника"
 
-#: plugins/personal/generic/generic.tpl:337
-#: plugins/personal/generic/generic.tpl:519
+#: plugins/personal/generic/generic.tpl:335
+#: plugins/personal/generic/generic.tpl:517
 #: plugins/personal/generic/multiple_generic.tpl:207
 #: plugins/personal/generic/multiple_generic.tpl:418
 msgid "Room No."
 msgstr "Номер комнаты"
 
-#: plugins/personal/generic/generic.tpl:533
+#: plugins/personal/generic/generic.tpl:531
 msgid "Please use the phone tab"
 msgstr "Воспользуйтесь закладкой \"Телефон\""
 
@@ -4788,141 +4865,141 @@ msgstr "Срок действия пароля истекает"
 msgid "automatic"
 msgstr "автоматически"
 
-#: plugins/personal/posix/class_posixAccount.inc:515
+#: plugins/personal/posix/class_posixAccount.inc:444
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr "Пароль нельзя изменить в течение %s дн. с последней смены (shadowMin)"
 
-#: plugins/personal/posix/class_posixAccount.inc:519
+#: plugins/personal/posix/class_posixAccount.inc:448
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Пароль должен быть изменен по истечении %s дн. (shadowMax)"
 
-#: plugins/personal/posix/class_posixAccount.inc:523
+#: plugins/personal/posix/class_posixAccount.inc:452
 #, fuzzy, php-format
 msgid "Disable account after %s days of inactivity after password expiry"
 msgstr ""
 "Отключить учетную запись, если срок действия пароля истек и прошло %s дн. "
 "бездействия (shadowInactive)"
 
-#: plugins/personal/posix/class_posixAccount.inc:527
+#: plugins/personal/posix/class_posixAccount.inc:456
 #, fuzzy, php-format
 msgid "Warn user %s days before password expiry"
 msgstr ""
 "Предупреждать пользователей за %s дн. до истечения срока действия пароля "
 "(shadowWarning)"
 
-#: plugins/personal/posix/class_posixAccount.inc:864
+#: plugins/personal/posix/class_posixAccount.inc:793
 msgid "Timeout while waiting for lock. Ignoring lock!"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:922
-#: plugins/personal/posix/class_posixAccount.inc:1240
+#: plugins/personal/posix/class_posixAccount.inc:851
+#: plugins/personal/posix/class_posixAccount.inc:1169
 msgid "Group of user"
 msgstr "Группа пользователя"
 
-#: plugins/personal/posix/class_posixAccount.inc:1017
+#: plugins/personal/posix/class_posixAccount.inc:946
 msgid ""
 "A duplicated UID number was written for this user. If this was not intended "
 "please verify all used uidNumbers!"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1098
-#: plugins/personal/posix/class_posixAccount.inc:1101
-#: plugins/personal/posix/class_posixAccount.inc:1176
-#: plugins/personal/posix/class_posixAccount.inc:1179
-#: plugins/personal/posix/class_posixAccount.inc:1577
+#: plugins/personal/posix/class_posixAccount.inc:1027
+#: plugins/personal/posix/class_posixAccount.inc:1030
+#: plugins/personal/posix/class_posixAccount.inc:1105
+#: plugins/personal/posix/class_posixAccount.inc:1108
+#: plugins/personal/posix/class_posixAccount.inc:1450
 #: plugins/personal/posix/generic.tpl:7
 #: plugins/personal/posix/paste_generic.tpl:8
 msgid "Home directory"
 msgstr "Домашний каталог"
 
-#: plugins/personal/posix/class_posixAccount.inc:1109
-#: plugins/personal/posix/class_posixAccount.inc:1112
+#: plugins/personal/posix/class_posixAccount.inc:1038
+#: plugins/personal/posix/class_posixAccount.inc:1041
 #: plugins/personal/posix/generic.tpl:63
 #: plugins/personal/posix/paste_generic.tpl:36
 msgid "UID"
 msgstr "UID"
 
-#: plugins/personal/posix/class_posixAccount.inc:1132
-#: plugins/personal/posix/class_posixAccount.inc:1185
+#: plugins/personal/posix/class_posixAccount.inc:1061
+#: plugins/personal/posix/class_posixAccount.inc:1114
 #, fuzzy
 msgid "shadowMin"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1137
-#: plugins/personal/posix/class_posixAccount.inc:1190
+#: plugins/personal/posix/class_posixAccount.inc:1066
+#: plugins/personal/posix/class_posixAccount.inc:1119
 #, fuzzy
 msgid "shadowMax"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1142
-#: plugins/personal/posix/class_posixAccount.inc:1195
+#: plugins/personal/posix/class_posixAccount.inc:1071
+#: plugins/personal/posix/class_posixAccount.inc:1124
 #, fuzzy
 msgid "shadowWarning"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1156
-#: plugins/personal/posix/class_posixAccount.inc:1209
+#: plugins/personal/posix/class_posixAccount.inc:1085
+#: plugins/personal/posix/class_posixAccount.inc:1138
 #, fuzzy
 msgid "shadowInactive"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1567
+#: plugins/personal/posix/class_posixAccount.inc:1440
 #, fuzzy
 msgid "POSIX account"
 msgstr "Аккаунт FTP"
 
-#: plugins/personal/posix/class_posixAccount.inc:1578
+#: plugins/personal/posix/class_posixAccount.inc:1451
 #: plugins/personal/posix/generic.tpl:15
 msgid "Shell"
 msgstr "Оболочка"
 
-#: plugins/personal/posix/class_posixAccount.inc:1579
+#: plugins/personal/posix/class_posixAccount.inc:1452
 #: setup/setup_migrate.tpl:291
 msgid "User ID"
 msgstr "Идентификатор пользователя"
 
-#: plugins/personal/posix/class_posixAccount.inc:1580
+#: plugins/personal/posix/class_posixAccount.inc:1453
 #, fuzzy
 msgid "Group ID"
 msgstr "Группа"
 
-#: plugins/personal/posix/class_posixAccount.inc:1582
+#: plugins/personal/posix/class_posixAccount.inc:1455
 #, fuzzy
 msgid "Force password change on login"
 msgstr "Сменить пароль"
 
-#: plugins/personal/posix/class_posixAccount.inc:1583
+#: plugins/personal/posix/class_posixAccount.inc:1456
 #, fuzzy
 msgid "Shadow min"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1584
+#: plugins/personal/posix/class_posixAccount.inc:1457
 #, fuzzy
 msgid "Shadow max"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1585
+#: plugins/personal/posix/class_posixAccount.inc:1458
 #, fuzzy
 msgid "Shadow warning"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1586
+#: plugins/personal/posix/class_posixAccount.inc:1459
 #, fuzzy
 msgid "Shadow inactive"
 msgstr "Затенение"
 
-#: plugins/personal/posix/class_posixAccount.inc:1587
+#: plugins/personal/posix/class_posixAccount.inc:1460
 #, fuzzy
 msgid "Shadow expire"
 msgstr "Показать людей"
 
-#: plugins/personal/posix/class_posixAccount.inc:1588
+#: plugins/personal/posix/class_posixAccount.inc:1461
 msgid "Public SSH key"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1589
+#: plugins/personal/posix/class_posixAccount.inc:1462
 #, fuzzy
 msgid "System trust model"
 msgstr "Системные доверия"
@@ -5002,6 +5079,23 @@ msgstr "Показать группы пользователей"
 #: plugins/personal/posix/posix_groups.tpl:59
 msgid "User name of which groups are shown"
 msgstr "Имя пользователя, для которого перечисляются группы"
+
+#: plugins/personal/posix/trustSelect/trust-list.xml:10
+#, fuzzy
+msgid "List of systems"
+msgstr "Список пользователей"
+
+#: plugins/personal/posix/trustSelect/trust-filter.tpl:11
+msgid "Show servers"
+msgstr "Показать серверы"
+
+#: plugins/personal/posix/trustSelect/trust-filter.tpl:12
+msgid "Show workstations"
+msgstr "Показать рабочие станции"
+
+#: plugins/personal/posix/trustSelect/trust-filter.tpl:13
+msgid "Show terminals"
+msgstr "Показать терминалы"
 
 #: plugins/personal/posix/paste_generic.tpl:4
 #, fuzzy
@@ -6838,6 +6932,14 @@ msgid "Automatic"
 msgstr "автоматически"
 
 #, fuzzy
+#~ msgid "givenname"
+#~ msgstr "Имя"
+
+#, fuzzy
+#~ msgid "surename"
+#~ msgstr "Имя сервера"
+
+#, fuzzy
 #~ msgid "Edit ogroup"
 #~ msgstr "Список групп"
 
@@ -7138,10 +7240,6 @@ msgstr "автоматически"
 #, fuzzy
 #~ msgid "Delete acl role"
 #~ msgstr "Удалить"
-
-#, fuzzy
-#~ msgid "Surename"
-#~ msgstr "Имя сервера"
 
 #, fuzzy
 #~ msgid "Steps"
@@ -7707,20 +7805,11 @@ msgstr "автоматически"
 #~ msgid "Show applications"
 #~ msgstr "Показать приложения"
 
-#~ msgid "Show servers"
-#~ msgstr "Показать серверы"
-
 #~ msgid "Select to see workstations"
 #~ msgstr "Выберите чтобы посмотреть рабочие станции"
 
-#~ msgid "Show workstations"
-#~ msgstr "Показать рабочие станции"
-
 #~ msgid "Select to see terminals"
 #~ msgstr "Выберите чтобы посмотреть терминалы"
-
-#~ msgid "Show terminals"
-#~ msgstr "Показать терминалы"
 
 #~ msgid "Select to see printers"
 #~ msgstr "Выберите чтобы посмотреть принтеры"

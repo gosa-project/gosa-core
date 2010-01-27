@@ -8,7 +8,7 @@
     <multiSelect>true</multiSelect>
     <template>../plugins/personal/posix/groupSelect/group-list.tpl</template>
     <module>groups</module>
-    <label>List of groups</label>
+    <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>

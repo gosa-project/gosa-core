@@ -7,7 +7,7 @@
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
     <template>../plugins/personal/posix/trustSelect/trust-list.tpl</template>
-    <label>List of systems</label>
+    <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>

@@ -7,7 +7,7 @@
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
     <template>../plugins/admin/groups/userSelect/user-list.tpl</template>
-    <label>List of users</label>
+    <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
@@ -37,7 +37,7 @@
     </column>
 
     <column>
-      <label>givenname</label>
+      <label>Given name</label>
       <sortAttribute>givenName</sortAttribute>
       <sortType>string</sortType>
       <value>%{givenName}</value>
@@ -45,7 +45,7 @@
     </column>
 
     <column>
-      <label>surename</label>
+      <label>Surname</label>
       <sortAttribute>sn</sortAttribute>
       <sortType>string</sortType>
       <value>%{sn}</value>
