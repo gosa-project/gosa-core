@@ -24,20 +24,20 @@ class passwordMethodClear extends passwordMethod
 {
   var $lockable = FALSE;
 
-	function passwordMethodClear($config)
-	{
-	}
-
-	function is_available()
-	{
-		return true;
-	}
-
-
-	function generate_hash($pwd)
-	{
-		return $pwd;       
-	}
+  function __construct($config)
+  {
+  }
+  
+  function is_available()
+  {
+    return true;
+  }
+  
+  
+  function generate_hash($pwd)
+  {
+    return $pwd;       
+  }
 
   
   function get_hash_name()

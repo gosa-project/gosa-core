@@ -29,7 +29,7 @@ class SnapshotHandler {
 
 
   /* Create handler  */
-  function SnapshotHandler(&$config)
+  function __construct(&$config)
   {
     $this->config = &$config;	
     $config = $this->config;

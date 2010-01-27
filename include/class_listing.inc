@@ -55,7 +55,7 @@ class listing {
   var $scrollPosition= 0;
 
 
-  function listing($filename)
+  function __construct($filename)
   {
     global $config;
     global $class_mapping;

@@ -34,7 +34,7 @@ class certificate
   var $error;
 
   /* Initialize all vars*/ 
-  function certificate()
+  function __construct()
   {
     $this->data= "";
     $this->type= false;

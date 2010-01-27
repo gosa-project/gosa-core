@@ -53,7 +53,7 @@ class acl extends plugin
   var $myAclObjects = array();
   var $acl_category = "acl/";
 
-  function acl (&$config, $parent, $dn= NULL)
+  function __construct(&$config, $parent, $dn= NULL)
   {
     /* Include config object */
     plugin::plugin($config, $dn);

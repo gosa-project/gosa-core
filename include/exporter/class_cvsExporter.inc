@@ -4,7 +4,7 @@ class csvExporter
 {
   var $result;
 
-  function csvExporter($headline, $header, $entries, $columns= array()) {
+  function __construct($headline, $header, $entries, $columns= array()) {
     // If no preset, render all columns
     if (!count($columns)) {
       foreach ($header as $index => $dummy) {

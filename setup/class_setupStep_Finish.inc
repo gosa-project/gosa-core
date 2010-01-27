@@ -26,7 +26,7 @@ class Step_Finish extends setup_step
   var $cfg_file_written = FALSE;
   var $header_image = "images/setup/server.png";
 
-  function Step_Finish()
+  function __construct()
   {
     $this->update_strings();
   }

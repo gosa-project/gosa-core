@@ -58,7 +58,7 @@ class Step_Config1 extends setup_step
   var $attributes = array("compressed","peopleou","groupou","peopledn","uidbase","encryption","theme","krbsasl",
                           "base_hook","base_hook_active","account_expiration","strict","include_personal_title");
 
-  function Step_Config1()
+  function __construct()
   {
     $this->update_strings();
 

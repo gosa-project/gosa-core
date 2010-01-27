@@ -30,7 +30,7 @@ class reference extends plugin
   var $fold= array();
   var $objectCache= array();
 
-  function reference (&$config, $dn= NULL)
+  function __construct(&$config, $dn= NULL)
   {
 	/* Include config object */
 	$this->config= &$config;

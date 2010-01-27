@@ -29,8 +29,7 @@ class divSelectBox {
 	// Members for page managment
   var $height=200;
 
-	// Added php 4 constructor
-	function divSelectBox(){
+	function __construct(){
 		$this->s_summary                = "";
 		$this->a_entries                = array();
 		$this->cols                     = 0;

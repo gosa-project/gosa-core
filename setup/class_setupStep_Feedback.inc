@@ -54,7 +54,7 @@ class Step_Feedback  extends setup_step
                           "first_use","use_since","distribution","web_server","php_version","ldap_server","object_count","want_to_see_next");
   
 
-  function Step_Feedback()
+  function __construct()
   {
     $this->is_enabled     = TRUE;
     $this->is_active      = TRUE;

@@ -70,7 +70,7 @@ class Step_Config3 extends setup_step
 
   var $attributes = array("errorlvl");
 
-  function Step_Config3()
+  function __construct()
   {
     $this->update_strings();
   }

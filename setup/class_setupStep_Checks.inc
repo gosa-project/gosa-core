@@ -27,7 +27,7 @@ class Step_Checks extends setup_step
   var $is_writeable = array();
   var $header_image = "images/setup/system.png";
 
-  function Step_Checks()
+  function __construct()
   {
     $this->update_strings();
   }

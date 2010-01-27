@@ -137,7 +137,7 @@ class MultiSelectWindow{
 
 
 	/* Contrucktion */
-	function MultiSelectWindow(&$config, $filterName, $module)
+	function __construct(&$config, $filterName, $module)
 	{
 		$this->config = &$config;
 		$this->module = $module;
