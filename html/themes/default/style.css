@@ -2071,9 +2071,9 @@ div.treeList {
     border: 1px solid #AAA;
     padding: 5px;
     height: 500px;
-    display: inline-block;
-    position: absolute;
+    position: fixed;
     z-index: 500;
     overflow-y: auto;
+    float: left;
 }
 
