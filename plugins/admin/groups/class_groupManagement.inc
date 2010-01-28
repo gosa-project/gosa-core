@@ -131,7 +131,7 @@ class groupManagement extends management
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
-    management::editEntry($action,$target);
+    $str = management::editEntry($action,$target);
 
     if(preg_match("/^edit_/",$action)){
       $tab = preg_replace("/^edit_/","",$action);
@@ -141,6 +141,7 @@ class groupManagement extends management
         trigger_error("Unknown tab: ".$tab);
       }
     }
+    if(!empty($str)) return($str);
   }
 
   static function filterProperties($row, $classes)
