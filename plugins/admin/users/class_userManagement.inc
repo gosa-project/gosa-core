@@ -294,7 +294,8 @@ class userManagement extends management
    */ 
   function saveChanges()
   {
-    management::saveChanges();
+    $str = management::saveChanges();
+    if(!empty($str)) return($str);
 
     if(isset($this->last_tabObject->by_object['user']) && $this->last_tabObject->by_object['user']->password_change_needed()){
       $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
@@ -305,7 +306,8 @@ class userManagement extends management
 
   function cancelEdit()
   {
-    management::cancelEdit();
+    $str = management::cancelEdit();
+    if(!empty($str)) return($str);
 
     if(isset($this->last_tabObject->by_object['user']) && 
         $this->last_tabObject->by_object['user']->dn != "new" &&  
@@ -324,7 +326,8 @@ class userManagement extends management
   function newUserFromTemplate($action="",$target=array(),$all=array())
   {
     // Call parent method, it knows whats to do, locking and so on ...
-    management::newEntry($action,$target,$all);
+    $str = management::newEntry($action,$target,$all);
+    if(!empty($str)) return($str);
 
     // Reset uid selection.
     $this->got_uid= "";
@@ -360,7 +363,8 @@ class userManagement extends management
   {
   
     // Call parent method, it manages everything, locking, object creation...
-    management::newEntry($action,$target,$all);
+    $str = management::newEntry($action,$target,$all);
+    if(!empty($str)) return($str);
     
     // If we've at least one template, then ask the user if he wants to use one?
     $templates = array();
