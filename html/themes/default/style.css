@@ -2033,7 +2033,8 @@ a.treeList {
 
 a.treeListSelected {
     font-weight: bold;
-    color: red;
+    color: #1010AF;
+    background-color:#DDD;
     padding: 2px;
 }
 
@@ -2054,7 +2055,8 @@ ul.treeList li {
 }
 
 li.treeListSelected a {
-    color: red;
+    font-weight: bold;
+    color: #1010AF;
     padding: 2px;
 }
 
