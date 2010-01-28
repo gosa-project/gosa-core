@@ -23,6 +23,7 @@
 class baseSelector {
 
   private $base;
+  private $pid;
   protected $tree;
   protected $pathMapping;
 
@@ -37,6 +38,10 @@ class baseSelector {
 
   function __construct($bases, $base= "")
   {
+    // Initialize pid
+    $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
+
+    // Transfer data
     $this->setBases($bases);
     $this->setBase($base);
     $this->update();
@@ -59,7 +64,6 @@ class baseSelector {
 
     $this->pathMapping= array();
     $selected= $this->base == $config->current['BASE']?"Selected":"";
-    $this->tree= "<div class='treeList'><a class='treeList$selected' href='#'>"._("Root")."</a><ul class='treeList'>\n";
     $first= true;
     $last_indent= 2;
 
@@ -80,9 +84,10 @@ class baseSelector {
   function update()
   {
     global $config;
+    $this->tree= "<input type='text' size='30' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"\$('bs_".$this->pid."').show();pos = Element.positionedOffset('bs_input_".$this->pid."');\$('bs_".$this->pid."').setStyle({left: (pos[0]), top: (pos[1]+ Element.getHeight('bs_input_".$this->pid."'))});\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value='".$this->pathMapping[$this->base]."'>";
 
     $selected= $this->base == $config->current['BASE']?"Selected":"";
-    $this->tree= "<div class='treeList'><a class='treeList$selected' href='#'>"._("Root")."</a><ul class='treeList'>\n";
+    $this->tree.= "<div class='treeList' style='display:none' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' href='#'>/ ["._("Root")."]</a><ul class='treeList'>\n";
     $first= true;
     $last_indent= 2;
 
@@ -110,7 +115,7 @@ class baseSelector {
         $this->tree.= "</li>\n";
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
-      $this->tree.= "<li><a$selected href='#'>".ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base))."</a>";
+      $this->tree.= "<li><a$selected href='#'>".str_replace(' ', '&nbsp;', ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base)))."</a>";
 
       $last_indent= $indent;
       $first= false;
@@ -121,14 +126,12 @@ class baseSelector {
       $this->tree.= "</li></ul>\n";
     }
     $this->tree.= "</div>\n";
-
-echo $this->tree;
   }
 
   function render()
   {
     $result= "";
-    return $result;
+    return $this->tree;
   }
 
 

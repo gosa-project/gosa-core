@@ -2028,7 +2028,6 @@ ul.treeList a:hover {
 }
 
 a.treeList {
-    font-weight: bold;
     padding: 2px;
 }
 
@@ -2052,7 +2051,6 @@ ul.treeList li {
     padding: 0 12px;
     line-height: 20px;
     background: url(../../images/lists/node.png) no-repeat;
-    font-weight: bold;
 }
 
 li.treeListSelected a {
@@ -2074,6 +2072,8 @@ div.treeList {
     padding: 5px;
     height: 500px;
     display: inline-block;
+    position: absolute;
+    z-index: 500;
     overflow-y: auto;
 }
 

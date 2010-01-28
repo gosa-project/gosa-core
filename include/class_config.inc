@@ -739,7 +739,7 @@ class config  {
       foreach($types as $t => $data){
         if(in_array($data['OC'],$attrs['objectClass'])){
           $type_data = $data;
-          break;    
+          break;
         }
       }
 
@@ -765,7 +765,6 @@ class config  {
       if ($dn == $ignore_dn){
         continue;
       }
-
       $c_dn = convert_department_dn($dn)." (".$type_data['ATTR'].")";
 
       /* Only assign non-root departments */
