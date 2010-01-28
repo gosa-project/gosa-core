@@ -87,8 +87,7 @@ class ogroupManagement extends management
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
-    management::editEntry($action,$target);
-
+    $str = management::editEntry($action,$target);
     if(preg_match("/^edit_/",$action)){
       $tab = preg_replace("/^edit_/","",$action);
       if(isset($this->tabObject->by_object[$tab])){
@@ -97,6 +96,7 @@ class ogroupManagement extends management
         trigger_error("Unknown tab: ".$tab);
       }
     }
+    if(!empty($str)) return($str);
   }
 
 
