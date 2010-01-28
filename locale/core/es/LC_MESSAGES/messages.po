@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-28 22:24+0100\n"
-"PO-Revision-Date: 2010-01-20 00:26+0100\n"
+"PO-Revision-Date: 2010-01-28 23:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -367,9 +367,8 @@ msgstr "Dominio"
 #: ihtml/themes/default/baseSelect-list.xml:23
 #: plugins/admin/departments/dep-list.xml:23
 #: plugins/admin/departments/dep-list.xml:110
-#, fuzzy
 msgid "Domain component"
-msgstr "Componentes del dominio"
+msgstr "Componente del dominio"
 
 #: ihtml/themes/default/baseSelect-list.xml:31
 #: plugins/admin/departments/dep-list.xml:31
@@ -778,9 +777,8 @@ msgstr "Salir"
 #: plugins/admin/acl/acl-filter.tpl:3
 #: plugins/personal/posix/trustSelect/trust-filter.tpl:3
 #: plugins/personal/posix/groupSelect/group-filter.tpl:3
-#, fuzzy
 msgid "Filter"
-msgstr "Filtros"
+msgstr "Filtro"
 
 #: ihtml/themes/default/framework.tpl:8 ihtml/themes/default/framework.tpl:11
 #: ihtml/themes/default/framework.tpl:20 ihtml/themes/default/framework.tpl:24
@@ -1113,13 +1111,12 @@ msgid "unconfigured"
 msgstr "Sin configurar"
 
 #: include/class_management.inc:145
-#, fuzzy
 msgid "Filter error"
-msgstr "Error fatal"
+msgstr "Error del filtro"
 
 #: include/class_management.inc:145
 msgid "The filter is incomplete!"
-msgstr ""
+msgstr "¡El filtro está incompleto!"
 
 #: include/class_management.inc:292 include/class_management.inc:427
 #: include/class_management.inc:473 include/class_management.inc:510
@@ -1156,6 +1153,8 @@ msgid ""
 "No tab declaration for '%s' found in your configuration file. Cannot create "
 "plugin instance!"
 msgstr ""
+"No hay declaración de pestaña para '%s' en su archivo de configuración. ¡No "
+"se puede crear la instancia del plugin!"
 
 #: include/class_socketClient.inc:60
 msgid "The mcrypt module was not found. Please install php5-mcrypt."
@@ -2886,9 +2885,8 @@ msgstr "El equipo de GOsa"
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:11
 #: plugins/personal/posix/trustSelect/trust-list.xml:10
 #: plugins/personal/posix/groupSelect/group-list.xml:11
-#, fuzzy
 msgid "Please select the desired entries"
-msgstr "Por favor seleccione su idioma preferido"
+msgstr "Por favor seleccione las entradas que desee"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:39
 #: plugins/admin/ogroups/class_ogroupManagement.inc:191
@@ -2968,46 +2966,38 @@ msgid "Name"
 msgstr "Nombre"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:11
-#, fuzzy
 msgid "Show department"
-msgstr "departamento"
+msgstr "Mostrar departamento"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:12
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:11
-#, fuzzy
 msgid "Show users"
-msgstr "Mostrar servidores"
+msgstr "Mostrar usuarios"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:13
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:12
-#, fuzzy
 msgid "Show groups"
-msgstr "grupos de correo"
+msgstr "Mostrar grupos"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:15
-#, fuzzy
 msgid "Show server"
-msgstr "Mostrar servidores"
+msgstr "Mostrar servidor"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:16
-#, fuzzy
 msgid "Show workstation"
-msgstr "Mostrar estaciones de trabajo"
+msgstr "Mostrar estación de trabajo"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:17
-#, fuzzy
 msgid "Show terminal"
-msgstr "Mostrar terminales"
+msgstr "Mostrar terminal"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:19
-#, fuzzy
 msgid "Show printer"
-msgstr "impresora"
+msgstr "Mostrar impresora"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:20
-#, fuzzy
 msgid "Show phone"
-msgstr "Mostrar cambios"
+msgstr "Mostrar teléfono"
 
 #: plugins/admin/ogroups/remove.tpl:6
 msgid ""
@@ -3311,17 +3301,15 @@ msgstr "Eliminar"
 #: plugins/admin/groups/group-list.xml:106
 #: plugins/admin/users/user-list.xml:156
 msgid "Send message"
-msgstr ""
+msgstr "Enviar mensaje"
 
 #: plugins/admin/ogroups/ogroup-list.xml:142
-#, fuzzy
 msgid "Edit object group"
-msgstr "grupo de objetos"
+msgstr "Editar grupo de objetos"
 
 #: plugins/admin/ogroups/ogroup-list.xml:155
-#, fuzzy
 msgid "Remove object group"
-msgstr "Eliminar Objetos"
+msgstr "Eliminar grupo de objetos"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:6
 msgid "Select objects to add"
@@ -3453,21 +3441,18 @@ msgstr "no en todos los grupos"
 
 #: plugins/admin/groups/group-filter.tpl:11
 #: plugins/personal/posix/groupSelect/group-filter.tpl:11
-#, fuzzy
 msgid "Show primary groups"
-msgstr "grupos primarios"
+msgstr "Mostrar grupos primarios"
 
 #: plugins/admin/groups/group-filter.tpl:12
 #: plugins/personal/posix/groupSelect/group-filter.tpl:12
-#, fuzzy
 msgid "Show samba groups"
-msgstr "grupo de samba"
+msgstr "Mostrar grupos de samba"
 
 #: plugins/admin/groups/group-filter.tpl:13
 #: plugins/personal/posix/groupSelect/group-filter.tpl:13
-#, fuzzy
 msgid "Show mail groups"
-msgstr "grupos de correo"
+msgstr "Mostrar grupos de correo"
 
 #: plugins/admin/groups/class_groupGeneric.inc:161
 msgid "Cannot find group SID in your configuration!"
@@ -3575,14 +3560,12 @@ msgid "List of groups"
 msgstr "Lista de grupos"
 
 #: plugins/admin/groups/group-list.xml:138
-#, fuzzy
 msgid "Edit group"
-msgstr "grupos de impresoras"
+msgstr "Editar grupo"
 
 #: plugins/admin/groups/group-list.xml:151
-#, fuzzy
 msgid "Remove group"
-msgstr "grupos de servidor"
+msgstr "Eliminar grupo"
 
 #: plugins/admin/groups/class_groupManagement.inc:26
 msgid "Group administration"
@@ -3595,9 +3578,8 @@ msgstr "Posix"
 
 #: plugins/admin/groups/class_groupManagement.inc:157
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:63
-#, fuzzy
 msgid "Edit posix properties"
-msgstr "Editar características telefónicas"
+msgstr "Editar características posix"
 
 #: plugins/admin/groups/class_groupManagement.inc:165
 #: plugins/admin/users/class_userManagement.inc:751
@@ -3619,15 +3601,13 @@ msgstr "Editar características telefónicas"
 
 #: plugins/admin/groups/class_groupManagement.inc:188
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:94
-#, fuzzy
 msgid "Menu"
-msgstr "Impresora"
+msgstr "Menú"
 
 #: plugins/admin/groups/class_groupManagement.inc:189
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:95
-#, fuzzy
 msgid "Edit start menu properties"
-msgstr "Editar características samba"
+msgstr "Editar propiedades iniciales del menú"
 
 #: plugins/admin/groups/class_groupManagement.inc:197
 #: plugins/admin/users/class_userManagement.inc:763
@@ -3723,13 +3703,12 @@ msgstr "¡No tiene permisos para cambiar la contraseña de este usuario!"
 msgid "Account locking"
 msgstr "Bloqueo de cuenta"
 
-#: plugins/admin/users/class_userManagement.inc:655
-#, fuzzy, php-format
+#: plugins/admin/users/class_userManagement.inc:655, php-format
 msgid ""
 "Password method '%s' does not support locking. Account (%s) has not been "
 "locked!"
 msgstr ""
-"El método de contraseña '%s' no soporta bloqueo. ¡La cuenta no ha sido "
+"El método de contraseña '%s' no soporta bloqueo. ¡La cuenta (%s) no ha sido "
 "bloqueada!"
 
 #: plugins/admin/users/class_userManagement.inc:728
@@ -3773,23 +3752,20 @@ msgid "List of users"
 msgstr "Lista de usuarios"
 
 #: plugins/admin/users/user-list.xml:140
-#, fuzzy
 msgid "Lock users"
-msgstr "Lista de usuarios"
+msgstr "Bloquear usuarios"
 
 #: plugins/admin/users/user-list.xml:148
-#, fuzzy
 msgid "Unlock users"
-msgstr "Usuarios del correo"
+msgstr "Desbloquear usuarios"
 
 #: plugins/admin/users/user-list.xml:167
 msgid "Apply template"
 msgstr "Aplicar plantilla"
 
 #: plugins/admin/users/user-list.xml:199
-#, fuzzy
 msgid "New user from template"
-msgstr "Crear usuario desde plantilla"
+msgstr "Nuevo usuario desde plantilla"
 
 #: plugins/admin/users/user-list.xml:213
 msgid "Edit user"
@@ -3816,12 +3792,10 @@ msgid "Show POSIX users"
 msgstr "Mostrar usuarios POSIX"
 
 #: plugins/admin/users/user-filter.tpl:14
-#, fuzzy
 msgid "Show Mail users"
 msgstr "Mostrar los usuarios de correo"
 
 #: plugins/admin/users/user-filter.tpl:15
-#, fuzzy
 msgid "Show Samba users"
 msgstr "Mostrar los usuarios samba"
 
@@ -4027,14 +4001,14 @@ msgid "Manage Departments"
 msgstr "Gestionar Departamentos"
 
 #: plugins/admin/departments/class_departmentManagement.inc:128
-#, fuzzy
 msgid ""
 "As soon as the tag operation has finished, you can scroll down to end of the "
 "page and    press the 'Continue' button to continue with the department "
 "management dialog."
 msgstr ""
-"Tan pronto como la operación de marcado termine, puede avanzar hasta el "
-"final de la página y presionar el botón 'Continuar' para seguir al dialogo "
+"Tan pronto como la operación de etiquetado termine, puede avanzar hasta el "
+"final de la página y presionar el botón 'Continuar' para continuar al "
+"dialogo "
 "de gestión de departamento."
 
 #: plugins/admin/departments/class_organizationGeneric.inc:118
@@ -4157,14 +4131,12 @@ msgstr ""
 
 #: plugins/admin/acl/class_aclManagement.inc:25
 #: plugins/admin/acl/acl-list.xml:15
-#, fuzzy
 msgid "Acl"
-msgstr "Acl"
+msgstr "ACL"
 
 #: plugins/admin/acl/class_aclManagement.inc:154
-#, fuzzy
 msgid "ACL Assignment"
-msgstr "Administración de ACL"
+msgstr "Asignación de ACL"
 
 #: plugins/admin/acl/tabs_acl_role.inc:28
 msgid "ACL Templates"
@@ -4233,14 +4205,12 @@ msgid "List of acls"
 msgstr "Lista de acls"
 
 #: plugins/admin/acl/acl-filter.tpl:11
-#, fuzzy
 msgid "Show access control lists"
-msgstr "Lista de control de acceso"
+msgstr "Mostrar listas de control de acceso"
 
 #: plugins/admin/acl/acl-filter.tpl:12
-#, fuzzy
 msgid "Show roles"
-msgstr "¡id desconocido!"
+msgstr "Mostrar roles"
 
 #: plugins/addons/bugsubmitter/class_bugsubmitter.inc:25
 msgid "Bug submitter"
@@ -5102,9 +5072,8 @@ msgid "Government mode"
 msgstr "Modo gubernamental"
 
 #: setup/setup_config2.tpl:123
-#, fuzzy
 msgid "GOsa logging"
-msgstr "GOsa"
+msgstr "Registro de GOsa"
 
 #: setup/setup_config2.tpl:135
 msgid "Mail settings"
