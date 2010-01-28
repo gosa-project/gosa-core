@@ -1589,6 +1589,7 @@ div.autocomplete {
   border:1px solid #AAA;
   margin:0;
   padding:0;
+  z-index: 600;
 }
 
 div.autocomplete ul {

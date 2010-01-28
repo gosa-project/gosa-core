@@ -34,13 +34,34 @@ if (!session::global_is_set('ui')){
   exit;
 }
 
-$config = session::global_get('config');
-$ui = session::global_get('ui');
+/* Base completition or filter completition? */
+if (isset($_GET['type']) && $_GET['type'] == "base") {
+  if (session::is_set("pathMapping") && count($_POST) == 1) {
+    $res= "";
+    $pathMapping= session::get("pathMapping");
+    $search= current($_POST);
+    foreach ($pathMapping as $key => $value) {
+      if (mb_stristr($value, $search) !== false) {
+        $res.= "<li>$value</li>";
+      }
+    }
 
-/* Is there a filter object arround? */
-if (session::is_set("autocomplete")){
-  $filter= session::get("autocomplete");
-  $filter->processAutocomplete();
+    /* Return results */
+    if (!empty($res)) {
+      echo "<ul>$res</ul>";
+    }
+  }
+
+} else {
+
+  $config = session::global_get('config');
+  $ui = session::global_get('ui');
+
+  /* Is there a filter object arround? */
+  if (session::is_set("autocomplete")){
+    $filter= session::get("autocomplete");
+    $filter->processAutocomplete();
+  }
 }
 
 ?>

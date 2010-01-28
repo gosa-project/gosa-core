@@ -25,6 +25,7 @@ class baseSelector {
   private $base;
   private $pid;
   private $action;
+  private $submitButton= true;
   protected $tree;
   protected $pathMapping;
 
@@ -45,6 +46,12 @@ class baseSelector {
     // Transfer data
     $this->setBases($bases);
     $this->setBase($base);
+  }
+
+
+  function setSubmitButton($flag)
+  {
+    $this->submitButton= $flag;
   }
 
 
@@ -97,6 +104,16 @@ class baseSelector {
           die ("Base mismatch!");
         }
       }
+    } elseif (isset($_POST['bs_input_'.$this->pid])) {
+
+      // Check if base is available
+      foreach ($this->pathMapping as $key => $path) {
+        if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
+          $this->base= $key;
+          break;
+        }
+      }
+
     }
 
     /* Skip if there's no change */
@@ -105,7 +122,15 @@ class baseSelector {
     }
 
     $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;REBASE=".base64_encode($config->current['BASE'])."'";
-    $this->tree= "<input type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});\$('bs_".$this->pid."').show();\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value='".$this->pathMapping[$this->base]."' readonly>";
+    $this->tree= "<input type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onkeydown=\"\$('bs_".$this->pid."').hide()\" onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});\$('bs_".$this->pid."').show();\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value='".$this->pathMapping[$this->base]."'>";
+
+
+    // Autocompleter
+    $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
+                  "<script type='text/javascript'>".
+                  "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 'autocomplete.php?type=base', { minChars: 3, frequency: 0.5 });".
+                  "$('bs_input_".$this->pid."').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });".
+                  "</script>";
 
     $selected= $this->base == $config->current['BASE']?"Selected":"";
     $this->tree.= "<div class='treeList' style='display:none' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/ ["._("Root")."]</a><ul class='treeList'>\n";
@@ -148,6 +173,12 @@ class baseSelector {
       $this->tree.= "</li></ul>\n";
     }
     $this->tree.= "</div>\n";
+
+    // Draw submitter if required
+    if ($this->submitButton) {
+      $this->tree.= "&nbsp;<input class='center' type='image' src='images/lists/submit.png' align='middle' title='"._("Submit")."' name='submit_base_".$this->pid."' id='submit_base_".$this->pid."' alt='"._("Submit")."'>";
+    }
+
   }
 
   function render()
