@@ -178,7 +178,6 @@ class ogroup extends plugin
       session::set("sysfilter", $sysfilter);
     }
 
-    /* Load member data */
     $this->reload();
   }
 
@@ -208,27 +207,37 @@ class ogroup extends plugin
       }
 
       /* Add objects to group */
-      if (isset($_POST['objectSelect_save'])){
-
+      if (isset($_POST['objectSelect_save']) && $this->objectSelect instanceOf objectSelect){
         $objects = $this->objectSelect->save();
-        print_a($objects);  
-        $this->objectSelect= FALSE;
-        $this->dialog= FALSE;
-        return;
-        $tmp = "";
-        foreach($this->memberList as $obj){
-          $tmp .= $obj['type'];
-        }
         $skipped = FALSE;
-        foreach ($_POST['objects'] as $value){
-          if(preg_match("/T/",$tmp) && $this->objects[$value]['type'] == "W"){
+        foreach($objects as $object){
+
+          $tmp = "";
+          foreach($this->memberList as $obj){
+            $tmp .= $obj['type'];
+          }
+
+          $type  = $this->getObjectType($object);
+          $name= $this->getObjectName($object);
+          $dn = $object['dn'];
+
+          /* Fill array */
+          if (isset($object["description"][0])){
+            $object= array("text" => "$name [".$object["description"][0]."]", "type" => "$type");
+          } elseif (isset($object["uid"][0])) {
+            $object= array("text" => "$name [".$object["uid"][0]."]", "type" => "$type");
+          } else {
+            $object= array("text" => "$name", "type" => "$type");
+          }
+
+          if(preg_match("/T/",$tmp) && $type == "W"){
             $skipped =TRUE;
-          }elseif(preg_match("/W/",$tmp) && $this->objects[$value]['type'] == "T"){
+          }elseif(preg_match("/W/",$tmp) && $type == "T"){
             $skipped =TRUE;
           }else{
-            $this->memberList["$value"]= $this->objects[$value];
-            $this->member["$value"]= $value;
-            unset ($this->objects[$value]);
+
+            $this->memberList["$dn"]= $object;
+            $this->member["$dn"]= $dn;
             uasort ($this->memberList, 'sort_list');
             reset ($this->memberList);
           }
@@ -236,7 +245,8 @@ class ogroup extends plugin
         if($skipped){
           msg_dialog::display(_("Information"), _("You cannot combine terminals and workstations in one object group!"), INFO_DIALOG);
         }
-        $this->reload();
+        $this->objectSelect= FALSE;
+        $this->dialog= FALSE;
       }
     }
   }
