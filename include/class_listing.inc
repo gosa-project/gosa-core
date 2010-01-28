@@ -504,7 +504,9 @@ class listing {
         if (preg_match('/^department_([0-9]+)$/', validate($_GET['act']), $match)){
           if (isset($this->departments[$match[1]])){
             $this->base= $this->departments[$match[1]]['dn'];
-            $this->baseSelector->setBase($this->base);
+            if ($this->baseMode) {
+              $this->baseSelector->setBase($this->base);
+            }
             session::global_set("CurrentMainBase", $this->base);
           }
         }
@@ -593,7 +595,9 @@ class listing {
   function setBase($base)
   {
     $this->base= $base;
-    $this->baseSelector->setBase($this->base);
+    if ($this->baseMode) {
+      $this->baseSelector->setBase($this->base);
+    }
   }
 
 
@@ -1289,7 +1293,7 @@ class listing {
     }
 
     // Populate base selector if already present
-    if ($this->baseSelector) {
+    if ($this->baseSelector && $this->baseMode) {
       $this->baseSelector->setBases($this->bases);
     }
   }
