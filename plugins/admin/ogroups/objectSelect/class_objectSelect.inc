@@ -31,7 +31,6 @@ class objectSelect extends management
     $this->config = $config;
     $this->ui = $ui;
     $this->storagePoints = array(
-        "",
         get_ou("userRDN"), 
         get_ou("groupRDN"),
         get_ou("terminalRDN"),
