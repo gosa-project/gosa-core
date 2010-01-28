@@ -1584,12 +1584,13 @@ div.infoMsgDialog {
 
 div.autocomplete {
   position:absolute;
-  width:250px;
   background-color: #FFF;
   border:1px solid #AAA;
   margin:0;
   padding:0;
   z-index: 600;
+  overflow:hidden;
+  word-wrap:break-word;
 }
 
 div.autocomplete ul {
@@ -2074,7 +2075,7 @@ div.treeList {
     border: 1px solid #AAA;
     padding: 5px;
     height: 500px;
-    position: fixed;
+    position: absolute;
     z-index: 500;
     overflow-y: auto;
     float: left;
