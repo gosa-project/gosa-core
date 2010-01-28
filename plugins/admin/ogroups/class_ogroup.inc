@@ -377,6 +377,7 @@ class ogroup extends plugin
 
     /* Manage object add dialog */
     if ($this->objectSelect){
+      session::set('filterBlacklist', array('dn'=> $this->member));
       return($this->objectSelect->execute());
     }
 

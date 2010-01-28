@@ -10,7 +10,7 @@ class filterLDAPDepartmentBlacklist  extends filterLDAPBlacklist{
       $entries[$key][ $entries[$key]['count'] ]= 'cn';
       $entries[$key]['count'] ++;
     }
-    return($entries);
+    return(filterLDAPBlacklist::filterByBlacklist($entries));
   }
 }
 

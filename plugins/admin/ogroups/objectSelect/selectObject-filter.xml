@@ -60,7 +60,7 @@
   <element>
     <type>checkbox</type>
     <tag>USER</tag>
-    <default>true</default>
+    <default></default>
     <set>(&amp;(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate)))</set>
     <unset></unset>
   </element>
@@ -68,7 +68,7 @@
   <element>
     <type>checkbox</type>
     <tag>GROUP</tag>
-    <default>true</default>
+    <default></default>
     <unset></unset>
     <set>(objectClass=posixGroup)</set>
   </element>
@@ -76,7 +76,7 @@
   <element>
     <type>checkbox</type>
     <tag>DEPARTMENT</tag>
-    <default>true</default>
+    <default></default>
     <unset></unset>
     <set>(objectClass=gosaDepartment)</set>
   </element>
@@ -84,7 +84,7 @@
   <element>
     <type>checkbox</type>
     <tag>SERVER</tag>
-    <default>true</default>
+    <default></default>
     <unset></unset>
     <set>(objectClass=goServer)</set>
   </element>
@@ -92,7 +92,7 @@
   <element>
     <type>checkbox</type>
     <tag>WORKSTATION</tag>
-    <default>true</default>
+    <default></default>
     <unset></unset>
     <set>(objectClass=gotoWorkstation)</set>
   </element>
@@ -100,7 +100,7 @@
   <element>
     <type>checkbox</type>
     <tag>TERMINAL</tag>
-    <default>true</default>
+    <default></default>
     <unset></unset>
     <set>(objectClass=gotoTerminal)</set>
   </element>
@@ -108,7 +108,7 @@
   <element>
     <type>checkbox</type>
     <tag>PRINTER</tag>
-    <default>true</default>
+    <default></default>
     <unset></unset>
     <set>(objectClass=gotoPrinter)</set>
   </element>
@@ -116,7 +116,7 @@
   <element>
     <type>checkbox</type>
     <tag>PHONE</tag>
-    <default>true</default>
+    <default></default>
     <unset></unset>
     <set>(objectClass=goFonHardware)</set>
   </element>
