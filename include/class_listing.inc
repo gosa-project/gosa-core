@@ -53,6 +53,7 @@ class listing {
   var $useSpan= false;
   var $height= 0;
   var $scrollPosition= 0;
+  var $baseSelector;
 
 
   function listing($filename)
@@ -96,6 +97,9 @@ class listing {
         }
       }
     }
+
+    // Instanciate base selector
+    $this->baseSelector= new baseSelector($this->bases, $this->base);
   }
 
 
@@ -471,25 +475,28 @@ class listing {
     global $config;
     $ui= get_userinfo();
 
+    // Take care of base selector
+    $this->baseSelector->update();
+
+    // Save base
+    $refresh= false;
+    if ($this->baseMode) {
+      $this->base= $this->baseSelector->getBase();
+      session::global_set("CurrentMainBase", $this->base);
+      $refresh= true;
+    }
+
+
     // Reset object counter / DN mapping
     $this->objectTypeCount= array();
     $this->objectDnMapping= array();
 
     // Do not do anything if this is not our PID
-    if(!(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid)) {
+    if($refresh || !(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid)) {
 
       // Save position if set
       if (isset($_POST['position_'.$this->pid]) && is_numeric($_POST['position_'.$this->pid])) {
         $this->scrollPosition= $_POST['position_'.$this->pid];
-      }
-
-      // Save base
-      if (isset($_POST['BASE']) && $this->baseMode) {
-        $base= base64_decode(get_post('BASE'));
-        if (isset($this->bases[$base])) {
-          $this->base= $base;
-          session::global_set("CurrentMainBase", $this->base);
-        }
       }
 
       // Override the base if we got a message from the browser navigation
@@ -497,6 +504,7 @@ class listing {
         if (preg_match('/^department_([0-9]+)$/', validate($_GET['act']), $match)){
           if (isset($this->departments[$match[1]])){
             $this->base= $this->departments[$match[1]]['dn'];
+            $this->baseSelector->setBase($this->base);
             session::global_set("CurrentMainBase", $this->base);
           }
         }
@@ -549,17 +557,20 @@ class listing {
       if ($action == 'ROOT') {
         $deps= $ui->get_module_departments($this->categories);
         $this->base= $deps[0];
+        $this->baseSelector->setBase($this->base);
       }
       if ($action == 'BACK') {
         $deps= $ui->get_module_departments($this->categories);
         $base= preg_replace("/^[^,]+,/", "", $this->base);
         if(in_array_ics($base, $deps)){
           $this->base= $base;
+          $this->baseSelector->setBase($this->base);
         }
       }
       if ($action == 'HOME') {
         $ui= get_userinfo();
         $this->base= $this->filter->getObjectBase($ui->dn);
+        $this->baseSelector->setBase($this->base);
       }
     }
 
@@ -582,6 +593,7 @@ class listing {
   function setBase($base)
   {
     $this->base= $base;
+    $this->baseSelector->setBase($this->base);
   }
 
 
@@ -673,34 +685,7 @@ class listing {
       return;
     }
 
-    $result= "<select name='BASE' onChange='mainform.submit()' size='1'>";
-    $firstDN= null;
-    $found= false;
-    foreach ($this->bases as $key=>$value) {
-      // Keep first entry to fall back eventually
-      if(!$firstDN) {
-        $firstDN= $key;
-      }
-
-      // Prepare to render entry
-      $selected= "";
-      if ($key == $this->base) {
-        $selected= " selected";
-        $found= true;
-      }
-      // Encode key in b64 to avoid strange characters
-      $result.= "\n<option value=\"".base64_encode($key)."\"$selected>".$value."</option>";
-    }
-
-    $result.= "</select>";
-
-    // Reset the currently used base to the first DN we found if there
-    // was no match.
-    if(!$found){
-      $this->base = $firstDN;
-    }
-
-    return $result;
+    return $this->baseSelector->render();
   }
 
 
@@ -1301,6 +1286,11 @@ class listing {
     $this->bases= array();
     foreach($k_ids as $department){
       $this->bases[$department] = $ids[$department];
+    }
+
+    // Populate base selector if already present
+    if ($this->baseSelector) {
+      $this->baseSelector->setBases($this->bases);
     }
   }
 
