@@ -111,7 +111,7 @@ class aclManagement extends management
     $this->skipFooter = TRUE;
     $altTabClass = "aclroletab";
     $altTabType = "ACLROLETAB";
-    management::newEntry($action,$target,$all,$altTabClass,$altTabType,$altAclCategory);
+    return(management::newEntry($action,$target,$all,$altTabClass,$altTabType,$altAclCategory));
   }
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
@@ -129,7 +129,7 @@ class aclManagement extends management
         $altTabClass = "acltab";
         $altTabType  = "ACLTAB";
       }
-      management::editEntry($action,array($this->dn),$all,$altTabClass,$altTabType,$altAclCategory);
+      return(management::editEntry($action,array($this->dn),$all,$altTabClass,$altTabType,$altAclCategory));
     }
   }
 
