@@ -24,6 +24,7 @@ class baseSelector {
 
   private $base;
   private $pid;
+  private $action;
   protected $tree;
   protected $pathMapping;
 
@@ -44,7 +45,6 @@ class baseSelector {
     // Transfer data
     $this->setBases($bases);
     $this->setBase($base);
-    $this->update();
   }
 
 
@@ -52,6 +52,7 @@ class baseSelector {
   {
     if (isset($this->pathMapping[$base])) {
       $this->base= $base;
+      $this->update(true);
     } else {
       die("Invalid base selected");
     }
@@ -81,13 +82,35 @@ class baseSelector {
   }
 
 
-  function update()
+  function update($force= false)
   {
     global $config;
-    $this->tree= "<input type='text' size='30' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"\$('bs_".$this->pid."').show();pos = Element.positionedOffset('bs_input_".$this->pid."');\$('bs_".$this->pid."').setStyle({left: (pos[0]), top: (pos[1]+ Element.getHeight('bs_input_".$this->pid."'))});\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value='".$this->pathMapping[$this->base]."'>";
+
+    // Analyze for base changes if needed
+    $this->action= null;
+    $last_base= $this->base;
+    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] == $this->pid) {
+      if (isset($_REQUEST['REBASE'])) {
+        $new_base= base64_decode($_REQUEST['REBASE']);
+        if (isset($this->pathMapping[$new_base])) {
+          $this->base= $new_base;
+          $this->action= 'rebase';
+        } else {
+          die ("Base mismatch!");
+        }
+      }
+    }
+
+    /* Skip if there's no change */
+    if (($this->tree && $this->base == $last_base) && !$force) {
+      return;
+    }
+
+    $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;REBASE=".base64_encode($config->current['BASE'])."'";
+    $this->tree= "<input type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});\$('bs_".$this->pid."').show();\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value='".$this->pathMapping[$this->base]."'>";
 
     $selected= $this->base == $config->current['BASE']?"Selected":"";
-    $this->tree.= "<div class='treeList' style='display:none' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' href='#'>/ ["._("Root")."]</a><ul class='treeList'>\n";
+    $this->tree.= "<div class='treeList' style='display:none' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/ ["._("Root")."]</a><ul class='treeList'>\n";
     $first= true;
     $last_indent= 2;
 
@@ -115,7 +138,8 @@ class baseSelector {
         $this->tree.= "</li>\n";
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
-      $this->tree.= "<li><a$selected href='#'>".str_replace(' ', '&nbsp;', ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base)))."</a>";
+      $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;REBASE=".base64_encode($base)."'";
+      $this->tree.= "<li><a$selected $link>".str_replace(' ', '&nbsp;', ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base)))."</a>";
 
       $last_indent= $indent;
       $first= false;
@@ -130,7 +154,6 @@ class baseSelector {
 
   function render()
   {
-    $result= "";
     return $this->tree;
   }
 
@@ -144,9 +167,15 @@ class baseSelector {
   function getAction()
   {
     // Do not do anything if this is not our PID, or there's even no PID available...
-    #if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->pid) {
-    #  return;
-    #}
+    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->pid) {
+      return;
+    }
+
+    if ($this->action) {
+      return array("targets" => array($this->base), "action" => $this->action);
+    }
+
+    return null;
   }
 
 }
