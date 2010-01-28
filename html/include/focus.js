@@ -706,4 +706,6 @@ function send_menu_action(str)
 	}
 }
 
+var rtimer;
+
 // vim:ts=2:syntax
