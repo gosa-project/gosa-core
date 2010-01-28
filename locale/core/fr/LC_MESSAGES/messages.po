@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-27 15:02+0100\n"
+"POT-Creation-Date: 2010-01-28 22:24+0100\n"
 "PO-Revision-Date: 2010-01-18 22:35+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -16,12 +16,14 @@ msgstr ""
 
 #: ihtml/themes/default/baseSelect-list.tpl:13
 #: include/class_baseSelectDialog.inc:29
+#: plugins/admin/ogroups/objectSelect/selectObject-list.tpl:13
 #: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/ogroups/class_ogroup.inc:1084
+#: plugins/admin/ogroups/class_ogroup.inc:1002
 #: plugins/admin/ogroups/generic.tpl:26
 #: plugins/admin/groups/userSelect/user-list.tpl:13
 #: plugins/admin/groups/generic.tpl:39
-#: plugins/admin/groups/class_groupGeneric.inc:1222
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.tpl:13
+#: plugins/admin/groups/class_groupGeneric.inc:1182
 #: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
 #: plugins/admin/departments/locality.tpl:28
 #: plugins/admin/departments/generic.tpl:39
@@ -47,39 +49,17 @@ msgstr ""
 msgid "Base"
 msgstr ""
 
-#: ihtml/themes/default/baseSelect-list.tpl:13
-#: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/groups/userSelect/user-list.tpl:13
-#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
-#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
-#: plugins/personal/posix/trustSelect/trust-list.tpl:13
-#: plugins/personal/posix/groupSelect/group-list.tpl:13
-msgid "Update"
-msgstr "Mise à jour"
-
-#: ihtml/themes/default/baseSelect-list.tpl:13
-#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1019
-#: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/groups/userSelect/user-list.tpl:13
-#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
-#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
-#: plugins/personal/posix/trustSelect/trust-list.tpl:13
-#: plugins/personal/posix/groupSelect/group-list.tpl:13
-msgid "Submit"
-msgstr "Soumettre"
-
 #: ihtml/themes/default/MultiSelectWindow.tpl:51
 #: ihtml/themes/default/MultiSelectWindow.tpl:92
 #: ihtml/themes/default/msg_dialog.tpl:61
 #: ihtml/themes/default/msg_dialog.tpl:108
-#: plugins/admin/ogroups/class_ogroup.inc:232 setup/setup_ldap.tpl:121
+#: plugins/admin/ogroups/class_ogroup.inc:246 setup/setup_ldap.tpl:121
 msgid "Information"
 msgstr "Information"
 
 #: ihtml/themes/default/MultiSelectWindow.tpl:63
 #: ihtml/themes/default/MultiSelectWindow.tpl:103
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
-#: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/trust_machines.tpl:19
 #: plugins/personal/posix/posix_groups.tpl:21
 msgid "Filters"
@@ -93,7 +73,7 @@ msgstr "Filtres"
 #: include/functions.inc:2646 include/functions.inc:2652
 #: include/class_tabs.inc:268 include/utils/class_xml.inc:37
 #: plugins/admin/ogroups/remove.tpl:2 plugins/admin/groups/remove.tpl:2
-#: plugins/admin/groups/class_groupGeneric.inc:1041
+#: plugins/admin/groups/class_groupGeneric.inc:1001
 #: plugins/admin/users/remove.tpl:2 plugins/admin/departments/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/acl/remove.tpl:2
@@ -380,7 +360,7 @@ msgstr "Liste des départements"
 #: ihtml/themes/default/baseSelect-list.xml:15
 #: plugins/admin/departments/dep-list.xml:15
 #: plugins/admin/departments/dep-list.xml:103
-#: plugins/admin/departments/class_departmentManagement.inc:175
+#: plugins/admin/departments/class_departmentManagement.inc:177
 msgid "Domain"
 msgstr "Domaine"
 
@@ -393,7 +373,7 @@ msgstr "Composant domaine"
 #: ihtml/themes/default/baseSelect-list.xml:31
 #: plugins/admin/departments/dep-list.xml:31
 #: plugins/admin/departments/dep-list.xml:117
-#: plugins/admin/departments/class_departmentManagement.inc:199
+#: plugins/admin/departments/class_departmentManagement.inc:201
 #: plugins/admin/departments/class_countryGeneric.inc:78
 #: plugins/admin/departments/class_countryGeneric.inc:79
 msgid "Country"
@@ -402,7 +382,7 @@ msgstr "Pays"
 #: ihtml/themes/default/baseSelect-list.xml:39
 #: plugins/admin/departments/dep-list.xml:39
 #: plugins/admin/departments/dep-list.xml:124
-#: plugins/admin/departments/class_departmentManagement.inc:211
+#: plugins/admin/departments/class_departmentManagement.inc:213
 #: plugins/admin/departments/class_localityGeneric.inc:78
 #: plugins/admin/departments/class_localityGeneric.inc:79
 msgid "Locality"
@@ -411,7 +391,7 @@ msgstr "Lieu"
 #: ihtml/themes/default/baseSelect-list.xml:47
 #: plugins/admin/departments/dep-list.xml:47
 #: plugins/admin/departments/dep-list.xml:131
-#: plugins/admin/departments/class_departmentManagement.inc:223
+#: plugins/admin/departments/class_departmentManagement.inc:225
 #: plugins/admin/departments/class_organizationGeneric.inc:109
 #: plugins/admin/departments/class_organizationGeneric.inc:110
 #: plugins/personal/generic/class_user.inc:1626
@@ -424,11 +404,12 @@ msgstr "Entreprise"
 #: ihtml/themes/default/baseSelect-list.xml:55
 #: ihtml/themes/default/baseSelect-list.xml:71
 #: plugins/generic/references/class_reference.inc:59
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:15
 #: plugins/admin/ogroups/class_ogroupManagement.inc:186
 #: plugins/admin/departments/dep-list.xml:55
 #: plugins/admin/departments/dep-list.xml:71
 #: plugins/admin/departments/dep-list.xml:138
-#: plugins/admin/departments/class_departmentManagement.inc:235
+#: plugins/admin/departments/class_departmentManagement.inc:237
 #: plugins/personal/generic/class_user.inc:1627
 #: plugins/personal/generic/generic.tpl:293
 #: plugins/personal/generic/multiple_generic.tpl:159
@@ -438,11 +419,13 @@ msgstr "Département"
 #: ihtml/themes/default/baseSelect-list.xml:79
 #: include/class_SnapShotDialog.inc:171
 #: plugins/generic/references/contents.tpl:11
-#: plugins/admin/ogroups/class_ogroup.inc:1085
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:105
+#: plugins/admin/ogroups/class_ogroup.inc:1003
 #: plugins/admin/ogroups/generic.tpl:15
 #: plugins/admin/ogroups/ogroup-list.xml:49
 #: plugins/admin/groups/generic.tpl:24
-#: plugins/admin/groups/class_groupGeneric.inc:1221
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:57
+#: plugins/admin/groups/class_groupGeneric.inc:1181
 #: plugins/admin/groups/group-list.xml:49
 #: plugins/admin/departments/dep-list.xml:79
 #: plugins/admin/departments/locality.tpl:19
@@ -470,7 +453,7 @@ msgstr "Département"
 msgid "Description"
 msgstr ""
 
-#: ihtml/themes/default/baseSelect-list.xml:87 include/class_listing.inc:1114
+#: ihtml/themes/default/baseSelect-list.xml:87 include/class_listing.inc:1105
 #: plugins/admin/ogroups/ogroup-list.xml:62
 #: plugins/admin/groups/group-list.xml:62 plugins/admin/users/user-list.xml:78
 #: plugins/admin/departments/dep-list.xml:87 plugins/admin/acl/acl-list.xml:65
@@ -616,10 +599,10 @@ msgstr "Continuer"
 #: include/class_CopyPasteHandler.inc:193
 #: include/class_CopyPasteHandler.inc:273
 #: include/class_CopyPasteHandler.inc:375 include/class_msg_dialog.inc:99
-#: plugins/admin/groups/class_groupGeneric.inc:580
-#: plugins/admin/groups/class_groupGeneric.inc:586
-#: plugins/admin/groups/class_groupGeneric.inc:932
-#: plugins/admin/groups/class_groupGeneric.inc:937
+#: plugins/admin/groups/class_groupGeneric.inc:540
+#: plugins/admin/groups/class_groupGeneric.inc:546
+#: plugins/admin/groups/class_groupGeneric.inc:892
+#: plugins/admin/groups/class_groupGeneric.inc:897
 #: plugins/personal/generic/class_user.inc:274
 #: plugins/personal/generic/class_user.inc:387
 #: plugins/personal/generic/class_user.inc:482
@@ -787,9 +770,11 @@ msgid "Logout"
 msgstr "Déconnexion"
 
 #: ihtml/themes/default/baseSelect-filter.tpl:3
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:3
 #: plugins/admin/ogroups/ogroup-filter.tpl:3
 #: plugins/admin/groups/userSelect/user-filter.tpl:3
 #: plugins/admin/groups/group-filter.tpl:3
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:3
 #: plugins/admin/users/user-filter.tpl:3
 #: plugins/admin/departments/dep-filter.tpl:3
 #: plugins/admin/acl/acl-filter.tpl:3
@@ -848,15 +833,15 @@ msgstr "Le fichier de configuration %s/%s ne peut être lu. Abandon."
 #: include/functions.inc:3023 include/functions.inc:3055
 #: include/functions.inc:3068 include/utils/class_timezone.inc:47
 #: include/class_config.inc:154 include/class_config.inc:694
-#: include/class_config.inc:1144 include/class_config.inc:1157
-#: include/class_config.inc:1175 include/class_pluglist.inc:177
+#: include/class_config.inc:1143 include/class_config.inc:1156
+#: include/class_config.inc:1174 include/class_pluglist.inc:177
 #: include/class_CopyPasteHandler.inc:119
 #: include/class_CopyPasteHandler.inc:128
 #: include/class_CopyPasteHandler.inc:177
 #: include/class_CopyPasteHandler.inc:186
 #: include/class_CopyPasteHandler.inc:194
 #: plugins/admin/groups/class_groupGeneric.inc:161
-#: plugins/admin/groups/class_groupGeneric.inc:708
+#: plugins/admin/groups/class_groupGeneric.inc:668
 msgid "Configuration error"
 msgstr "Erreur de configuration"
 
@@ -974,10 +959,10 @@ msgstr ""
 #: include/class_plugin.inc:1384 include/class_plugin.inc:1442
 #: include/class_plugin.inc:1508 include/class_plugin.inc:1523
 #: include/class_ldap.inc:752 include/class_ldap.inc:1218
-#: include/class_config.inc:317 plugins/admin/ogroups/class_ogroup.inc:996
-#: plugins/admin/ogroups/class_ogroup.inc:1010
-#: plugins/admin/groups/class_groupGeneric.inc:738
-#: plugins/admin/groups/class_groupGeneric.inc:1065
+#: include/class_config.inc:317 plugins/admin/ogroups/class_ogroup.inc:914
+#: plugins/admin/ogroups/class_ogroup.inc:928
+#: plugins/admin/groups/class_groupGeneric.inc:698
+#: plugins/admin/groups/class_groupGeneric.inc:1025
 #: plugins/admin/departments/class_department.inc:241
 #: plugins/admin/departments/class_department.inc:429
 #: plugins/admin/departments/class_department.inc:702
@@ -1142,13 +1127,13 @@ msgstr "Le filtre est incomplet !"
 #: include/class_plugin.inc:1558 include/class_plugin.inc:1573
 #: include/class_plugin.inc:1586
 #: plugins/admin/users/class_userManagement.inc:221
-#: plugins/admin/users/class_userManagement.inc:612
+#: plugins/admin/users/class_userManagement.inc:616
 msgid "Permission"
 msgstr "Permissions"
 
 #: include/class_management.inc:353
-#: plugins/admin/users/class_userManagement.inc:571
 #: plugins/admin/users/class_userManagement.inc:575
+#: plugins/admin/users/class_userManagement.inc:579
 #: plugins/admin/acl/class_aclManagement.inc:98
 msgid "Permission error"
 msgstr "Erreur de permissions"
@@ -1194,7 +1179,7 @@ msgstr ""
 "passe !"
 
 #: include/class_SnapshotHandler.inc:46 include/class_SnapshotHandler.inc:77
-#: include/class_config.inc:1145 include/class_config.inc:1176
+#: include/class_config.inc:1144 include/class_config.inc:1175
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable '%s' is not "
@@ -1203,7 +1188,7 @@ msgstr ""
 "La fonctionnalité pour les copie instantanées est activée, mais la variable "
 "requise '%s' n'est pas configurée."
 
-#: include/class_SnapshotHandler.inc:59 include/class_config.inc:1158
+#: include/class_SnapshotHandler.inc:59 include/class_config.inc:1157
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required compression module "
@@ -1255,21 +1240,21 @@ msgstr "Utiliser l'ACL définie dans le rôle"
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: include/class_acl.inc:231 plugins/admin/groups/class_groupGeneric.inc:1217
+#: include/class_acl.inc:231 plugins/admin/groups/class_groupGeneric.inc:1177
 #: plugins/admin/groups/class_groupManagement.inc:25
 #: setup/class_setupStep_Migrate.inc:1042
 msgid "Groups"
 msgstr "Groupes"
 
 #: include/class_acl.inc:493 include/class_MultiSelectWindow.inc:258
-#: include/class_MultiSelectWindow.inc:260 include/class_listing.inc:235
-#: include/class_listing.inc:1004 include/class_listing.inc:1006
+#: include/class_MultiSelectWindow.inc:260 include/class_listing.inc:239
+#: include/class_listing.inc:995 include/class_listing.inc:997
 #: include/class_sortableListing.inc:225
 #: plugins/admin/acl/class_aclRole.inc:394
 msgid "Up"
 msgstr "Au dessus"
 
-#: include/class_acl.inc:495 include/class_listing.inc:235
+#: include/class_acl.inc:495 include/class_listing.inc:239
 #: include/class_sortableListing.inc:225
 #: plugins/admin/acl/class_aclRole.inc:396
 msgid "Down"
@@ -1405,33 +1390,38 @@ msgstr "Rôles ACL"
 msgid "Close"
 msgstr "Fermer"
 
-#: include/class_MultiSelectWindow.inc:250 include/class_listing.inc:996
+#: include/class_MultiSelectWindow.inc:250 include/class_listing.inc:987
 msgid "Go to root department"
 msgstr "Aller au département de base"
 
 #: include/class_MultiSelectWindow.inc:250
-#: include/class_MultiSelectWindow.inc:252 include/class_listing.inc:996
-#: include/class_listing.inc:998
+#: include/class_MultiSelectWindow.inc:252 include/class_listing.inc:987
+#: include/class_listing.inc:989 include/class_baseSelector.inc:136
 msgid "Root"
 msgstr "Racine"
 
-#: include/class_MultiSelectWindow.inc:258 include/class_listing.inc:1004
+#: include/class_MultiSelectWindow.inc:258 include/class_listing.inc:995
 msgid "Go up one department"
 msgstr "Monter d'un département"
 
-#: include/class_MultiSelectWindow.inc:266 include/class_listing.inc:1012
+#: include/class_MultiSelectWindow.inc:266 include/class_listing.inc:1003
 msgid "Go to users department"
 msgstr "Aller au département des utilisateurs"
 
 #: include/class_MultiSelectWindow.inc:266
-#: include/class_MultiSelectWindow.inc:268 include/class_listing.inc:1012
-#: include/class_listing.inc:1014
+#: include/class_MultiSelectWindow.inc:268 include/class_listing.inc:1003
+#: include/class_listing.inc:1005
 msgid "Home"
 msgstr "Accueil"
 
-#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1019
+#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1010
 msgid "Reload list"
 msgstr "Recharger la liste"
+
+#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1010
+#: include/class_baseSelector.inc:179
+msgid "Submit"
+msgstr "Soumettre"
 
 #: include/class_MultiSelectWindow.inc:553
 #, php-format
@@ -1449,7 +1439,7 @@ msgstr ""
 msgid "Choose a base"
 msgstr "Sélectionnez une base"
 
-#: include/class_listing.inc:299 setup/setup_migrate.tpl:93
+#: include/class_listing.inc:303 setup/setup_migrate.tpl:93
 #: setup/setup_migrate.tpl:149 setup/setup_migrate.tpl:201
 #: setup/setup_migrate.tpl:368 setup/setup_migrate.tpl:421
 #: setup/setup_migrate.tpl:464 setup/setup_migrate.tpl:507
@@ -1457,52 +1447,52 @@ msgstr "Sélectionnez une base"
 msgid "Select all"
 msgstr "Sélectionner tout"
 
-#: include/class_listing.inc:509
+#: include/class_listing.inc:521
 msgid "created by"
 msgstr "Crée par"
 
-#: include/class_listing.inc:1379 include/class_listing.inc:1429
+#: include/class_listing.inc:1375 include/class_listing.inc:1425
 #: include/class_plugin.inc:2070
 msgid "Copy"
 msgstr "Copier"
 
-#: include/class_listing.inc:1385 include/class_listing.inc:1419
+#: include/class_listing.inc:1381 include/class_listing.inc:1415
 #: include/class_plugin.inc:2074
 msgid "Cut"
 msgstr "Couper"
 
-#: include/class_listing.inc:1393 include/class_listing.inc:1395
+#: include/class_listing.inc:1389 include/class_listing.inc:1391
 #: include/class_plugin.inc:2081 include/class_plugin.inc:2084
 #: include/class_CopyPasteHandler.inc:514
 msgid "Paste"
 msgstr "Coller"
 
-#: include/class_listing.inc:1419 include/class_plugin.inc:2028
+#: include/class_listing.inc:1415 include/class_plugin.inc:2028
 msgid "Cut this entry"
 msgstr "Couper cette entrée"
 
-#: include/class_listing.inc:1429 include/class_plugin.inc:2036
+#: include/class_listing.inc:1425 include/class_plugin.inc:2036
 msgid "Copy this entry"
 msgstr "Copier cette entrée"
 
-#: include/class_listing.inc:1461 include/class_listing.inc:1463
+#: include/class_listing.inc:1457 include/class_listing.inc:1459
 msgid "Restore snapshots"
 msgstr "Restaurer la copie instantanée"
 
-#: include/class_listing.inc:1477
+#: include/class_listing.inc:1473
 msgid "Export list"
 msgstr "Exporter la liste"
 
-#: include/class_listing.inc:1512 include/class_listing.inc:1513
+#: include/class_listing.inc:1508 include/class_listing.inc:1509
 #: include/class_SnapShotDialog.inc:135 include/class_plugin.inc:2002
 msgid "Restore snapshot"
 msgstr "Restaurer la copie instantanée"
 
-#: include/class_listing.inc:1522 include/class_plugin.inc:2009
+#: include/class_listing.inc:1518 include/class_plugin.inc:2009
 msgid "Create snapshot"
 msgstr "Créer un snapshot"
 
-#: include/class_listing.inc:1523 include/class_plugin.inc:2010
+#: include/class_listing.inc:1519 include/class_plugin.inc:2010
 msgid "Create a new snapshot from this object"
 msgstr "Créer un nouveau snapshot depuis cet objet"
 
@@ -2287,6 +2277,8 @@ msgid "Missing %s PHP extension!"
 msgstr "Extension PHP %s manquante !"
 
 #: include/utils/class_msgPool.inc:332
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:123
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:75
 #: plugins/personal/generic/generic.tpl:255
 #: setup/class_setupStep_Migrate.inc:2868
 #, php-format
@@ -2680,11 +2672,11 @@ msgstr ""
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
 msgstr "sambaSID et/ou sambaRidBase absents de votre configuration !"
 
-#: include/class_config.inc:1103
+#: include/class_config.inc:1102
 msgid "Configuration"
 msgstr ""
 
-#: include/class_config.inc:1103
+#: include/class_config.inc:1102
 msgid ""
 "The configuration file you are using seems to be outdated. Please move the "
 "GOsa configuration file away to run the GOsa setup again."
@@ -2753,9 +2745,9 @@ msgid "Please fix the above error and reload the page."
 msgstr "Veuillez fixer l'erreur ci dessus et recharger la page."
 
 #: plugins/generic/references/class_reference.inc:41
-#: plugins/admin/ogroups/class_ogroup.inc:1074
-#: plugins/admin/groups/class_groupGeneric.inc:1211
-#: plugins/admin/users/class_userManagement.inc:738
+#: plugins/admin/ogroups/class_ogroup.inc:992
+#: plugins/admin/groups/class_groupGeneric.inc:1171
+#: plugins/admin/users/class_userManagement.inc:742
 #: plugins/admin/departments/class_department.inc:609
 #: plugins/personal/generic/class_user.inc:37
 #: plugins/personal/generic/class_user.inc:1602
@@ -2770,23 +2762,23 @@ msgstr ""
 
 #: plugins/generic/references/class_reference.inc:45
 #: plugins/admin/ogroups/tabs_ogroups.inc:148
-#: plugins/admin/groups/class_groupManagement.inc:163
-#: plugins/admin/users/class_userManagement.inc:745
+#: plugins/admin/groups/class_groupManagement.inc:164
+#: plugins/admin/users/class_userManagement.inc:749
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:70
 msgid "Mail"
 msgstr "Messagerie"
 
 #: plugins/generic/references/class_reference.inc:47
 #: plugins/generic/references/class_reference.inc:49
-#: plugins/admin/groups/class_groupManagement.inc:171
-#: plugins/admin/users/class_userManagement.inc:750
+#: plugins/admin/groups/class_groupManagement.inc:172
+#: plugins/admin/users/class_userManagement.inc:754
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:78
 msgid "Samba"
 msgstr ""
 
 #: plugins/generic/references/class_reference.inc:51
-#: plugins/admin/users/class_userManagement.inc:762
+#: plugins/admin/users/class_userManagement.inc:766
 msgid "FAX"
 msgstr ""
 
@@ -2799,8 +2791,10 @@ msgid "FTP"
 msgstr ""
 
 #: plugins/generic/references/class_reference.inc:57
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:71
 #: plugins/admin/ogroups/class_ogroupManagement.inc:184
 #: plugins/admin/ogroups/ogroup-list.xml:79
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:23
 #: plugins/admin/groups/group-list.xml:15
 #: plugins/admin/groups/group-list.xml:79
 #: plugins/personal/posix/groupSelect/group-list.xml:15
@@ -2808,9 +2802,10 @@ msgid "Group"
 msgstr "Groupes"
 
 #: plugins/generic/references/class_reference.inc:61
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:55
 #: plugins/admin/ogroups/class_ogroupManagement.inc:188
-#: plugins/admin/groups/class_groupManagement.inc:179
-#: plugins/admin/users/class_userManagement.inc:766
+#: plugins/admin/groups/class_groupManagement.inc:180
+#: plugins/admin/users/class_userManagement.inc:770
 #: plugins/admin/departments/generic.tpl:88
 #: plugins/admin/departments/class_department.inc:328
 #: plugins/admin/departments/organization.tpl:88
@@ -2830,6 +2825,7 @@ msgid "Application"
 msgstr "Applications"
 
 #: plugins/generic/references/class_reference.inc:65
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:23
 #: plugins/admin/ogroups/class_ogroupManagement.inc:187
 #: plugins/personal/posix/trustSelect/trust-list.xml:14
 #: setup/setup_config2.tpl:219 setup/setup_config2.tpl:264
@@ -2841,6 +2837,7 @@ msgid "Thin Client"
 msgstr "Clients légers"
 
 #: plugins/generic/references/class_reference.inc:69
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:31
 #: plugins/admin/ogroups/class_ogroupManagement.inc:189
 #: plugins/personal/posix/trustSelect/trust-list.xml:22
 msgid "Workstation"
@@ -2852,6 +2849,7 @@ msgid "Object group"
 msgstr "Groupes d'objets"
 
 #: plugins/generic/references/class_reference.inc:73
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:47
 #: plugins/admin/ogroups/class_ogroupManagement.inc:192
 msgid "Printer"
 msgstr "Imprimante"
@@ -2896,190 +2894,46 @@ msgstr ""
 msgid "The GOsa team"
 msgstr "L'équipe de GOsa"
 
-#: plugins/admin/ogroups/remove.tpl:6
-msgid ""
-"Please double check if you really want to do this since there is no way for "
-"GOsa to get your data back."
-msgstr ""
-"Veuillez vérifier que vous voulez effectuer cette action. Toutes les données "
-"seront perdues étant donné qu'il est impossible pour GOsa de récupérer vos "
-"données."
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:11
+#: plugins/admin/groups/userSelect/user-list.xml:10
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:11
+#: plugins/personal/posix/trustSelect/trust-list.xml:10
+#: plugins/personal/posix/groupSelect/group-list.xml:11
+#, fuzzy
+msgid "Please select the desired entries"
+msgstr "Veuillez sélectionner la langue par défaut"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroup.inc:1080
-msgid "Object groups"
-msgstr "Groupes d'objets"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:26
-msgid "Manage object groups"
-msgstr "Gestion des groupe d'objets"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:115
-#: plugins/admin/groups/class_groupManagement.inc:98
-#: plugins/admin/users/class_userManagement.inc:189
-msgid "Infrastructure error"
-msgstr "Erreur d'infrastructure"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:182
-msgid "Templates"
-msgstr "Modèles"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:183
-#: plugins/admin/groups/userSelect/user-list.xml:14
-#: plugins/admin/users/user-list.xml:23 plugins/admin/users/user-list.xml:95
-#: setup/setup_config2.tpl:228 setup/setup_config2.tpl:273
-msgid "User"
-msgstr "Utilisateur"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:190
-msgid "Windows Install"
-msgstr "Installation Windows"
-
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:39
 #: plugins/admin/ogroups/class_ogroupManagement.inc:191
 #: plugins/personal/posix/trustSelect/trust-list.xml:30
 msgid "Terminal"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:232
-msgid "You cannot combine terminals and workstations in one object group!"
-msgstr ""
-"Vous ne pouvez pas combiner des terminaux et des stations de travail dans un "
-"groupe d'objet !"
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:63
+#: plugins/admin/ogroups/class_ogroupManagement.inc:183
+#: plugins/admin/groups/userSelect/user-list.xml:14
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:15
+#: plugins/admin/users/user-list.xml:23 plugins/admin/users/user-list.xml:95
+#: setup/setup_config2.tpl:228 setup/setup_config2.tpl:273
+msgid "User"
+msgstr "Utilisateur"
 
-#: plugins/admin/ogroups/class_ogroup.inc:420
-#: plugins/admin/ogroups/class_ogroup.inc:422
-#: plugins/admin/ogroups/class_ogroup.inc:480
-msgid "departments"
-msgstr "départements"
-
-#: plugins/admin/ogroups/class_ogroup.inc:422
-#: plugins/admin/ogroups/class_ogroup.inc:426
-#: plugins/admin/ogroups/class_ogroup.inc:430
-#: plugins/admin/ogroups/class_ogroup.inc:434
-#: plugins/admin/ogroups/class_ogroup.inc:438
-#: plugins/admin/ogroups/class_ogroup.inc:442
-#: plugins/admin/ogroups/class_ogroup.inc:446
-#: plugins/admin/ogroups/class_ogroup.inc:450
-#: plugins/admin/ogroups/class_ogroup.inc:458
-#, php-format
-msgid "Show %s"
-msgstr "Afficher %s"
-
-#: plugins/admin/ogroups/class_ogroup.inc:424
-#: plugins/admin/ogroups/class_ogroup.inc:426
-msgid "people"
-msgstr "utilisateurs"
-
-#: plugins/admin/ogroups/class_ogroup.inc:428
-#: plugins/admin/ogroups/class_ogroup.inc:430
-#: plugins/admin/ogroups/class_ogroup.inc:478
-msgid "groups"
-msgstr "groupes"
-
-#: plugins/admin/ogroups/class_ogroup.inc:432
-#: plugins/admin/ogroups/class_ogroup.inc:434
-#: plugins/admin/ogroups/class_ogroup.inc:481
-msgid "servers"
-msgstr "serveurs"
-
-#: plugins/admin/ogroups/class_ogroup.inc:436
-#: plugins/admin/ogroups/class_ogroup.inc:438
-#: plugins/admin/ogroups/class_ogroup.inc:482
-msgid "workstations"
-msgstr "stations de travail"
-
-#: plugins/admin/ogroups/class_ogroup.inc:440
-#: plugins/admin/ogroups/class_ogroup.inc:442
-#: plugins/admin/ogroups/class_ogroup.inc:484
-msgid "terminals"
-msgstr "terminaux"
-
-#: plugins/admin/ogroups/class_ogroup.inc:444
-msgid "printer"
-msgstr "imprimante"
-
-#: plugins/admin/ogroups/class_ogroup.inc:446
-#: plugins/admin/ogroups/class_ogroup.inc:486
-msgid "printers"
-msgstr "imprimantes"
-
-#: plugins/admin/ogroups/class_ogroup.inc:448
-#: plugins/admin/ogroups/class_ogroup.inc:450
-#: plugins/admin/ogroups/class_ogroup.inc:485
-msgid "phones"
-msgstr "téléphones"
-
-#: plugins/admin/ogroups/class_ogroup.inc:456
-#: plugins/admin/ogroups/class_ogroup.inc:458
-#: plugins/admin/ogroups/class_ogroup.inc:479
-msgid "applications"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroup.inc:473
-#: plugins/admin/users/class_userManagement.inc:334
-#: plugins/admin/users/class_userManagement.inc:367
-#: plugins/admin/users/class_userManagement.inc:398
-msgid "none"
-msgstr "aucun"
-
-#: plugins/admin/ogroups/class_ogroup.inc:475
-msgid "too many different objects!"
-msgstr "nombre d'objets différents trop important !"
-
-#: plugins/admin/ogroups/class_ogroup.inc:477
-msgid "users"
-msgstr "utilisateurs"
-
-#: plugins/admin/ogroups/class_ogroup.inc:483
-msgid "winstations"
-msgstr "Stations Windows"
-
-#: plugins/admin/ogroups/class_ogroup.inc:533
-#: plugins/admin/groups/class_groupGeneric.inc:474
-#: plugins/personal/posix/class_posixAccount.inc:573
-#: setup/setup_config2.tpl:143
-msgid "disabled"
-msgstr "désactivé"
-
-#: plugins/admin/ogroups/class_ogroup.inc:533
-#: plugins/admin/groups/class_groupGeneric.inc:474
-#: plugins/personal/posix/class_posixAccount.inc:573
-msgid "full access"
-msgstr "accès complet"
-
-#: plugins/admin/ogroups/class_ogroup.inc:534
-#: plugins/admin/groups/class_groupGeneric.inc:475
-#: plugins/personal/posix/class_posixAccount.inc:574
-msgid "allow access to these hosts"
-msgstr "permettre l'accès a ces hôtes"
-
-#: plugins/admin/ogroups/class_ogroup.inc:718
-msgid "Non existing dn:"
-msgstr "le dn n'existe pas :"
-
-#: plugins/admin/ogroups/class_ogroup.inc:875
-#, php-format
-msgid ""
-"These systems are already configured by other object groups and cannot be "
-"added:"
-msgstr ""
-"Ces systèmes sont déjà configurés par d'autres groupes d'objets et ne "
-"peuvent pas être ajoutés :"
-
-#: plugins/admin/ogroups/class_ogroup.inc:885
-#: plugins/admin/ogroups/class_ogroup.inc:895
-#: plugins/admin/ogroups/class_ogroup.inc:1083
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:97
+#: plugins/admin/ogroups/class_ogroup.inc:803
+#: plugins/admin/ogroups/class_ogroup.inc:813
+#: plugins/admin/ogroups/class_ogroup.inc:1001
 #: plugins/admin/ogroups/ogroup-list.xml:41
-#: plugins/admin/groups/class_groupGeneric.inc:1092
-#: plugins/admin/groups/class_groupGeneric.inc:1098
-#: plugins/admin/groups/class_groupGeneric.inc:1100
-#: plugins/admin/groups/class_groupGeneric.inc:1112
-#: plugins/admin/groups/class_groupGeneric.inc:1126
-#: plugins/admin/groups/class_groupGeneric.inc:1133
-#: plugins/admin/groups/class_groupGeneric.inc:1220
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:49
+#: plugins/admin/groups/class_groupGeneric.inc:1052
+#: plugins/admin/groups/class_groupGeneric.inc:1058
+#: plugins/admin/groups/class_groupGeneric.inc:1060
+#: plugins/admin/groups/class_groupGeneric.inc:1072
+#: plugins/admin/groups/class_groupGeneric.inc:1086
+#: plugins/admin/groups/class_groupGeneric.inc:1093
+#: plugins/admin/groups/class_groupGeneric.inc:1180
 #: plugins/admin/groups/group-list.xml:41
-#: plugins/admin/users/class_userManagement.inc:408
-#: plugins/admin/users/class_userManagement.inc:455
+#: plugins/admin/users/class_userManagement.inc:412
+#: plugins/admin/users/class_userManagement.inc:459
 #: plugins/admin/departments/class_domain.inc:43
 #: plugins/admin/departments/class_domain.inc:45
 #: plugins/admin/departments/class_domain.inc:50
@@ -3126,19 +2980,182 @@ msgstr ""
 msgid "Name"
 msgstr "Nom"
 
-#: plugins/admin/ogroups/class_ogroup.inc:900
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:11
+#, fuzzy
+msgid "Show department"
+msgstr "départements"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:12
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:11
+#, fuzzy
+msgid "Show users"
+msgstr "serveurs"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:13
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:12
+#, fuzzy
+msgid "Show groups"
+msgstr "Groupes de messagerie"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:15
+#, fuzzy
+msgid "Show server"
+msgstr "serveurs"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:16
+#, fuzzy
+msgid "Show workstation"
+msgstr "stations de travail"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:17
+#, fuzzy
+msgid "Show terminal"
+msgstr "terminaux"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:19
+#, fuzzy
+msgid "Show printer"
+msgstr "imprimante"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:20
+#, fuzzy
+msgid "Show phone"
+msgstr "Montrer les changements"
+
+#: plugins/admin/ogroups/remove.tpl:6
+msgid ""
+"Please double check if you really want to do this since there is no way for "
+"GOsa to get your data back."
+msgstr ""
+"Veuillez vérifier que vous voulez effectuer cette action. Toutes les données "
+"seront perdues étant donné qu'il est impossible pour GOsa de récupérer vos "
+"données."
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:25
+#: plugins/admin/ogroups/class_ogroup.inc:998
+msgid "Object groups"
+msgstr "Groupes d'objets"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:26
+msgid "Manage object groups"
+msgstr "Gestion des groupe d'objets"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:115
+#: plugins/admin/groups/class_groupManagement.inc:98
+#: plugins/admin/users/class_userManagement.inc:189
+msgid "Infrastructure error"
+msgstr "Erreur d'infrastructure"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:182
+msgid "Templates"
+msgstr "Modèles"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:190
+msgid "Windows Install"
+msgstr "Installation Windows"
+
+#: plugins/admin/ogroups/class_ogroup.inc:246
+msgid "You cannot combine terminals and workstations in one object group!"
+msgstr ""
+"Vous ne pouvez pas combiner des terminaux et des stations de travail dans un "
+"groupe d'objet !"
+
+#: plugins/admin/ogroups/class_ogroup.inc:391
+#: plugins/admin/users/class_userManagement.inc:337
+#: plugins/admin/users/class_userManagement.inc:371
+#: plugins/admin/users/class_userManagement.inc:402
+msgid "none"
+msgstr "aucun"
+
+#: plugins/admin/ogroups/class_ogroup.inc:393
+msgid "too many different objects!"
+msgstr "nombre d'objets différents trop important !"
+
+#: plugins/admin/ogroups/class_ogroup.inc:395
+msgid "users"
+msgstr "utilisateurs"
+
+#: plugins/admin/ogroups/class_ogroup.inc:396
+msgid "groups"
+msgstr "groupes"
+
+#: plugins/admin/ogroups/class_ogroup.inc:397
+msgid "applications"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:398
+msgid "departments"
+msgstr "départements"
+
+#: plugins/admin/ogroups/class_ogroup.inc:399
+msgid "servers"
+msgstr "serveurs"
+
+#: plugins/admin/ogroups/class_ogroup.inc:400
+msgid "workstations"
+msgstr "stations de travail"
+
+#: plugins/admin/ogroups/class_ogroup.inc:401
+msgid "winstations"
+msgstr "Stations Windows"
+
+#: plugins/admin/ogroups/class_ogroup.inc:402
+msgid "terminals"
+msgstr "terminaux"
+
+#: plugins/admin/ogroups/class_ogroup.inc:403
+msgid "phones"
+msgstr "téléphones"
+
+#: plugins/admin/ogroups/class_ogroup.inc:404
+msgid "printers"
+msgstr "imprimantes"
+
+#: plugins/admin/ogroups/class_ogroup.inc:451
+#: plugins/admin/groups/class_groupGeneric.inc:434
+#: plugins/personal/posix/class_posixAccount.inc:573
+#: setup/setup_config2.tpl:143
+msgid "disabled"
+msgstr "désactivé"
+
+#: plugins/admin/ogroups/class_ogroup.inc:451
+#: plugins/admin/groups/class_groupGeneric.inc:434
+#: plugins/personal/posix/class_posixAccount.inc:573
+msgid "full access"
+msgstr "accès complet"
+
+#: plugins/admin/ogroups/class_ogroup.inc:452
+#: plugins/admin/groups/class_groupGeneric.inc:435
+#: plugins/personal/posix/class_posixAccount.inc:574
+msgid "allow access to these hosts"
+msgstr "permettre l'accès a ces hôtes"
+
+#: plugins/admin/ogroups/class_ogroup.inc:636
+msgid "Non existing dn:"
+msgstr "le dn n'existe pas :"
+
+#: plugins/admin/ogroups/class_ogroup.inc:793
+#, php-format
+msgid ""
+"These systems are already configured by other object groups and cannot be "
+"added:"
+msgstr ""
+"Ces systèmes sont déjà configurés par d'autres groupes d'objets et ne "
+"peuvent pas être ajoutés :"
+
+#: plugins/admin/ogroups/class_ogroup.inc:818
 msgid "You can combine two different object types at maximum, only!"
 msgstr "Vous pouvez combiner au maximum deux objets différents !"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1075
+#: plugins/admin/ogroups/class_ogroup.inc:993
 msgid "Object group generic"
 msgstr "Groupes d'objets"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1086
+#: plugins/admin/ogroups/class_ogroup.inc:1004
 msgid "Sytem trust"
 msgstr "Système de Confiance"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1087
+#: plugins/admin/ogroups/class_ogroup.inc:1005
 msgid "Member"
 msgstr "Membres"
 
@@ -3175,7 +3192,7 @@ msgid "Select a base"
 msgstr "Sélectionnez une base"
 
 #: plugins/admin/ogroups/generic.tpl:41
-#: plugins/admin/groups/class_groupGeneric.inc:1228
+#: plugins/admin/groups/class_groupGeneric.inc:1188
 #: plugins/personal/posix/generic.tpl:139
 msgid "System trust"
 msgstr "Système de Confiance"
@@ -3213,8 +3230,8 @@ msgid "FAI summary"
 msgstr "Sommaire FAI"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:222
-#: plugins/admin/groups/class_groupManagement.inc:195
-#: plugins/admin/users/class_userManagement.inc:758
+#: plugins/admin/groups/class_groupManagement.inc:196
+#: plugins/admin/users/class_userManagement.inc:762
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:102
 msgid "Environment"
@@ -3328,7 +3345,6 @@ msgstr "Afficher les objets du département"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:37
 #: plugins/admin/ogroups/trust_machines.tpl:27
-#: plugins/admin/groups/group_objects.tpl:40
 #: plugins/admin/groups/trust_machines.tpl:26
 #: plugins/personal/posix/posix_groups.tpl:35
 #: plugins/personal/posix/trust_machines.tpl:27
@@ -3376,37 +3392,8 @@ msgstr ""
 "assurez que vous voulez bien exécuter cette action étant donné qu'il est "
 "impossible pour GOsa de récupérer vos données."
 
-#: plugins/admin/groups/group_objects.tpl:6
-msgid "Select users to add"
-msgstr "Sélectionnez les utilisateurs à ajouter"
-
-#: plugins/admin/groups/group_objects.tpl:30
-msgid "Select to see servers"
-msgstr "Sélectionnez pour voir les serveurs"
-
-#: plugins/admin/groups/group_objects.tpl:30
-msgid "Search within subtree"
-msgstr "Chercher dans le sous arbre"
-
-#: plugins/admin/groups/group_objects.tpl:37
-msgid "Display users of department"
-msgstr "Afficher les utilisateurs du département"
-
-#: plugins/admin/groups/group_objects.tpl:46
-msgid "Display users matching"
-msgstr "Afficher les utilisateurs correspondants"
-
-#: plugins/admin/groups/group_objects.tpl:47
-msgid "Regular expression for matching user names"
-msgstr "Expression régulière concordant avec les noms des utilisateurs"
-
-#: plugins/admin/groups/userSelect/user-list.xml:10
-#, fuzzy
-msgid "Please select the desired entries"
-msgstr "Veuillez sélectionner la langue par défaut"
-
 #: plugins/admin/groups/userSelect/user-list.xml:40
-#: plugins/admin/users/class_userManagement.inc:411
+#: plugins/admin/users/class_userManagement.inc:415
 #: plugins/admin/users/user-list.xml:57
 #: plugins/personal/generic/class_user.inc:1289
 #: plugins/personal/generic/class_user.inc:1336
@@ -3420,24 +3407,6 @@ msgstr "Prénom"
 #: plugins/personal/generic/class_user.inc:1613
 msgid "Surname"
 msgstr "Nom de famille"
-
-#: plugins/admin/groups/userSelect/user-filter.tpl:11
-#: plugins/admin/groups/group-filter.tpl:11
-#: plugins/personal/posix/groupSelect/group-filter.tpl:11
-msgid "Show primary groups"
-msgstr "groupes principaux"
-
-#: plugins/admin/groups/userSelect/user-filter.tpl:12
-#: plugins/admin/groups/group-filter.tpl:12
-#: plugins/personal/posix/groupSelect/group-filter.tpl:12
-msgid "Show samba groups"
-msgstr "Groupes Samba"
-
-#: plugins/admin/groups/userSelect/user-filter.tpl:13
-#: plugins/admin/groups/group-filter.tpl:13
-#: plugins/personal/posix/groupSelect/group-filter.tpl:13
-msgid "Show mail groups"
-msgstr "Groupes de messagerie"
 
 #: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:52
 #: plugins/personal/generic/generic.tpl:73
@@ -3495,73 +3464,88 @@ msgstr "dans tout les groupes"
 msgid "Not in all groups"
 msgstr "pas dans tout les groupes"
 
+#: plugins/admin/groups/group-filter.tpl:11
+#: plugins/personal/posix/groupSelect/group-filter.tpl:11
+msgid "Show primary groups"
+msgstr "groupes principaux"
+
+#: plugins/admin/groups/group-filter.tpl:12
+#: plugins/personal/posix/groupSelect/group-filter.tpl:12
+msgid "Show samba groups"
+msgstr "Groupes Samba"
+
+#: plugins/admin/groups/group-filter.tpl:13
+#: plugins/personal/posix/groupSelect/group-filter.tpl:13
+msgid "Show mail groups"
+msgstr "Groupes de messagerie"
+
 #: plugins/admin/groups/class_groupGeneric.inc:161
 msgid "Cannot find group SID in your configuration!"
 msgstr "Impossible de trouver le SID de ce groupe dans votre configuration !"
 
-#: plugins/admin/groups/class_groupGeneric.inc:441
+#: plugins/admin/groups/class_groupGeneric.inc:401
 msgid "Samba group"
 msgstr "Groupe Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:441
+#: plugins/admin/groups/class_groupGeneric.inc:401
 msgid "Domain admins"
 msgstr "Administrateurs du domaine"
 
-#: plugins/admin/groups/class_groupGeneric.inc:441
+#: plugins/admin/groups/class_groupGeneric.inc:401
 msgid "Domain users"
 msgstr "Utilisateurs du domaine"
 
-#: plugins/admin/groups/class_groupGeneric.inc:442
+#: plugins/admin/groups/class_groupGeneric.inc:402
 msgid "Domain guests"
 msgstr "Invités du domaine"
 
-#: plugins/admin/groups/class_groupGeneric.inc:447
+#: plugins/admin/groups/class_groupGeneric.inc:407
 #, php-format
 msgid "Special group (%d)"
 msgstr "Groupe spécial (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:581
+#: plugins/admin/groups/class_groupGeneric.inc:541
 #, php-format
 msgid "Adding UID '%s' to group '%s' failed: cannot find user object!"
 msgstr ""
 "L'ajout de l'UID '%s' au groupe '%s' à échoué : Impossible de trouver "
 "l'utilisateur !"
 
-#: plugins/admin/groups/class_groupGeneric.inc:587
+#: plugins/admin/groups/class_groupGeneric.inc:547
 #, php-format
 msgid "Add UID '%s' to group '%s' failed: UID is used more than once!"
 msgstr ""
 "L'ajout de l'UID '%s' au groupe '%s' à échoué : l'UID est utilisé plus d'un "
 "fois !"
 
-#: plugins/admin/groups/class_groupGeneric.inc:665
+#: plugins/admin/groups/class_groupGeneric.inc:625
 msgid "! unknown UID"
 msgstr "! identifiant inconnu"
 
-#: plugins/admin/groups/class_groupGeneric.inc:708
+#: plugins/admin/groups/class_groupGeneric.inc:668
 #, php-format
 msgid "Search returned too many results. Not displaying more than %s entries!"
 msgstr ""
 "La recherche à retourné trop de résultats. Je n'affiche que %s entr§es !"
 
-#: plugins/admin/groups/class_groupGeneric.inc:932
+#: plugins/admin/groups/class_groupGeneric.inc:892
 #, php-format
 msgid "Cannot find any SID for '%s'!"
 msgstr "Impossible de trouver le SID pour '%s' !"
 
-#: plugins/admin/groups/class_groupGeneric.inc:937
+#: plugins/admin/groups/class_groupGeneric.inc:897
 #, php-format
 msgid "Cannot find any RIDBASE for '%s'!"
 msgstr "Impossible de trouver le RIDBASe pour '%s' !"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1041
+#: plugins/admin/groups/class_groupGeneric.inc:1001
 #, php-format
 msgid "The gidNumber '%s' is already in use by %s!"
 msgstr "L'identifiant de groupe '%s' est déjà utilisé par '%s' !"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1142
-#: plugins/admin/groups/class_groupGeneric.inc:1145
-#: plugins/admin/groups/class_groupGeneric.inc:1224
+#: plugins/admin/groups/class_groupGeneric.inc:1102
+#: plugins/admin/groups/class_groupGeneric.inc:1105
+#: plugins/admin/groups/class_groupGeneric.inc:1184
 #: plugins/personal/posix/class_posixAccount.inc:1045
 #: plugins/personal/posix/class_posixAccount.inc:1048
 #: plugins/personal/posix/generic.tpl:74
@@ -3569,27 +3553,27 @@ msgstr "L'identifiant de groupe '%s' est déjà utilisé par '%s' !"
 msgid "GID"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:1212
+#: plugins/admin/groups/class_groupGeneric.inc:1172
 msgid "Generic group settings"
 msgstr "Préférences des groupes génériques"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1226
+#: plugins/admin/groups/class_groupGeneric.inc:1186
 msgid "Samba group type"
 msgstr "Groupe Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1227
+#: plugins/admin/groups/class_groupGeneric.inc:1187
 msgid "Samba domain name"
 msgstr "Domaine Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1229
+#: plugins/admin/groups/class_groupGeneric.inc:1189
 msgid "Phone pickup group"
 msgstr "Groupe téléphonique"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1230
+#: plugins/admin/groups/class_groupGeneric.inc:1190
 msgid "Nagios group"
 msgstr "Groupe Nagios"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1232
+#: plugins/admin/groups/class_groupGeneric.inc:1192
 msgid "Group member"
 msgstr "Membre du groupe"
 
@@ -3598,7 +3582,6 @@ msgid "Group settings"
 msgstr "Préférences des groupes"
 
 #: plugins/admin/groups/group-list.xml:11
-#: plugins/personal/posix/groupSelect/group-list.xml:11
 msgid "List of groups"
 msgstr "Liste des groupes"
 
@@ -3614,46 +3597,46 @@ msgstr "Enlever le groupe"
 msgid "Group administration"
 msgstr "Administration du groupe"
 
-#: plugins/admin/groups/class_groupManagement.inc:155
+#: plugins/admin/groups/class_groupManagement.inc:156
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:62
 msgid "Posix"
 msgstr ""
 
-#: plugins/admin/groups/class_groupManagement.inc:156
+#: plugins/admin/groups/class_groupManagement.inc:157
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:63
 msgid "Edit posix properties"
 msgstr "Modifier les propriétés posix"
 
-#: plugins/admin/groups/class_groupManagement.inc:164
-#: plugins/admin/users/class_userManagement.inc:747
+#: plugins/admin/groups/class_groupManagement.inc:165
+#: plugins/admin/users/class_userManagement.inc:751
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:71
 msgid "Edit mail properties"
 msgstr "Modifier les propriétés de messagerie"
 
-#: plugins/admin/groups/class_groupManagement.inc:172
-#: plugins/admin/users/class_userManagement.inc:751
+#: plugins/admin/groups/class_groupManagement.inc:173
+#: plugins/admin/users/class_userManagement.inc:755
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:79
 msgid "Edit samba properties"
 msgstr "Modifier les propriétés samba"
 
-#: plugins/admin/groups/class_groupManagement.inc:180
-#: plugins/admin/users/class_userManagement.inc:767
+#: plugins/admin/groups/class_groupManagement.inc:181
+#: plugins/admin/users/class_userManagement.inc:771
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:87
 msgid "Edit phone properties"
 msgstr "Modifier les propriétés téléphoniques"
 
-#: plugins/admin/groups/class_groupManagement.inc:187
+#: plugins/admin/groups/class_groupManagement.inc:188
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:94
 msgid "Menu"
 msgstr ""
 
-#: plugins/admin/groups/class_groupManagement.inc:188
+#: plugins/admin/groups/class_groupManagement.inc:189
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:95
 msgid "Edit start menu properties"
 msgstr "Modifier les propriétes du menu de démarrage"
 
-#: plugins/admin/groups/class_groupManagement.inc:196
-#: plugins/admin/users/class_userManagement.inc:759
+#: plugins/admin/groups/class_groupManagement.inc:197
+#: plugins/admin/users/class_userManagement.inc:763
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:103
 msgid "Edit environment properties"
 msgstr "Modifier les propriétés d'environnement"
@@ -3718,7 +3701,7 @@ msgstr ""
 "Sélectionnez 'aucun' afin de ne pas utiliser les modèles."
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/users/class_userManagement.inc:405
+#: plugins/admin/users/class_userManagement.inc:409
 #: plugins/admin/users/user-list.xml:15 plugins/admin/users/user-list.xml:102
 #: plugins/admin/users/templatize.tpl:15
 msgid "Template"
@@ -3744,11 +3727,11 @@ msgstr ""
 "Vous n'avez pas l'autorisation pour changer le mot de passe de ce(s) "
 "utilisateurs !"
 
-#: plugins/admin/users/class_userManagement.inc:650
+#: plugins/admin/users/class_userManagement.inc:654
 msgid "Account locking"
 msgstr "Verrouillage du compte"
 
-#: plugins/admin/users/class_userManagement.inc:651
+#: plugins/admin/users/class_userManagement.inc:655
 #, php-format
 msgid ""
 "Password method '%s' does not support locking. Account (%s) has not been "
@@ -3757,19 +3740,19 @@ msgstr ""
 "La méthode '%s' ne permet pas le verrouillage du mot de passe. Le compte (%"
 "s) n'a pas été verrouillé !"
 
-#: plugins/admin/users/class_userManagement.inc:724
+#: plugins/admin/users/class_userManagement.inc:728
 msgid "Unlock account"
 msgstr "Déverrouiller le compte"
 
-#: plugins/admin/users/class_userManagement.inc:726
+#: plugins/admin/users/class_userManagement.inc:730
 msgid "Lock account"
 msgstr "Verrouiller Compte"
 
-#: plugins/admin/users/class_userManagement.inc:739
+#: plugins/admin/users/class_userManagement.inc:743
 msgid "Edit generic properties"
 msgstr "Modifier les propriétés de base"
 
-#: plugins/admin/users/class_userManagement.inc:742
+#: plugins/admin/users/class_userManagement.inc:746
 #: plugins/personal/posix/class_posixAccount.inc:304
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/class_posixAccount.inc:326
@@ -3777,19 +3760,19 @@ msgstr "Modifier les propriétés de base"
 msgid "POSIX"
 msgstr "UNIX"
 
-#: plugins/admin/users/class_userManagement.inc:743
+#: plugins/admin/users/class_userManagement.inc:747
 msgid "Edit POSIX properties"
 msgstr "Modifier les propriétés UNIX"
 
-#: plugins/admin/users/class_userManagement.inc:754
+#: plugins/admin/users/class_userManagement.inc:758
 msgid "Netatalk"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:755
+#: plugins/admin/users/class_userManagement.inc:759
 msgid "Edit netatalk properties"
 msgstr "Modifier les propriétés de Netatalk"
 
-#: plugins/admin/users/class_userManagement.inc:763
+#: plugins/admin/users/class_userManagement.inc:767
 msgid "Edit FAX properties"
 msgstr "Modifier les propriétés FAX"
 
@@ -4032,7 +4015,7 @@ msgstr "Numéro de fax de base pour cette sous-branche"
 
 #: plugins/admin/departments/class_domain.inc:77
 #: plugins/admin/departments/class_domain.inc:78
-#: plugins/admin/departments/class_departmentManagement.inc:187
+#: plugins/admin/departments/class_departmentManagement.inc:189
 #: plugins/admin/departments/class_dcObject.inc:77
 #: plugins/admin/departments/class_dcObject.inc:78
 msgid "Domain Component"
@@ -4048,7 +4031,7 @@ msgstr "Départements"
 msgid "Manage Departments"
 msgstr "Gérer les départements"
 
-#: plugins/admin/departments/class_departmentManagement.inc:126
+#: plugins/admin/departments/class_departmentManagement.inc:128
 msgid ""
 "As soon as the tag operation has finished, you can scroll down to end of the "
 "page and    press the 'Continue' button to continue with the department "
@@ -4905,11 +4888,6 @@ msgstr "Afficher les groupes contenant des utilisateurs"
 #: plugins/personal/posix/posix_groups.tpl:59
 msgid "User name of which groups are shown"
 msgstr "Utilisateur dont on montre les groupes"
-
-#: plugins/personal/posix/trustSelect/trust-list.xml:10
-#, fuzzy
-msgid "List of systems"
-msgstr "Liste des utilisateurs"
 
 #: plugins/personal/posix/trustSelect/trust-filter.tpl:11
 #, fuzzy
@@ -6724,6 +6702,37 @@ msgstr "Cette étape vous permet de sélectionner votre langue préférée."
 #: setup/class_setupStep_Language.inc:47
 msgid "Automatic"
 msgstr "Automatique"
+
+#~ msgid "Update"
+#~ msgstr "Mise à jour"
+
+#~ msgid "Show %s"
+#~ msgstr "Afficher %s"
+
+#~ msgid "people"
+#~ msgstr "utilisateurs"
+
+#~ msgid "Select users to add"
+#~ msgstr "Sélectionnez les utilisateurs à ajouter"
+
+#~ msgid "Select to see servers"
+#~ msgstr "Sélectionnez pour voir les serveurs"
+
+#~ msgid "Search within subtree"
+#~ msgstr "Chercher dans le sous arbre"
+
+#~ msgid "Display users of department"
+#~ msgstr "Afficher les utilisateurs du département"
+
+#~ msgid "Display users matching"
+#~ msgstr "Afficher les utilisateurs correspondants"
+
+#~ msgid "Regular expression for matching user names"
+#~ msgstr "Expression régulière concordant avec les noms des utilisateurs"
+
+#, fuzzy
+#~ msgid "List of systems"
+#~ msgstr "Liste des utilisateurs"
 
 #, fuzzy
 #~ msgid "givenname"

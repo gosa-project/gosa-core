@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-27 15:02+0100\n"
+"POT-Creation-Date: 2010-01-28 22:24+0100\n"
 "PO-Revision-Date: 2006-06-02 16:58+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
@@ -21,12 +21,14 @@ msgstr ""
 
 #: ihtml/themes/default/baseSelect-list.tpl:13
 #: include/class_baseSelectDialog.inc:29
+#: plugins/admin/ogroups/objectSelect/selectObject-list.tpl:13
 #: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/ogroups/class_ogroup.inc:1084
+#: plugins/admin/ogroups/class_ogroup.inc:1002
 #: plugins/admin/ogroups/generic.tpl:26
 #: plugins/admin/groups/userSelect/user-list.tpl:13
 #: plugins/admin/groups/generic.tpl:39
-#: plugins/admin/groups/class_groupGeneric.inc:1222
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.tpl:13
+#: plugins/admin/groups/class_groupGeneric.inc:1182
 #: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
 #: plugins/admin/departments/locality.tpl:28
 #: plugins/admin/departments/generic.tpl:39
@@ -52,39 +54,17 @@ msgstr ""
 msgid "Base"
 msgstr "Basis"
 
-#: ihtml/themes/default/baseSelect-list.tpl:13
-#: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/groups/userSelect/user-list.tpl:13
-#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
-#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
-#: plugins/personal/posix/trustSelect/trust-list.tpl:13
-#: plugins/personal/posix/groupSelect/group-list.tpl:13
-msgid "Update"
-msgstr ""
-
-#: ihtml/themes/default/baseSelect-list.tpl:13
-#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1019
-#: plugins/admin/ogroups/ogroup-list.tpl:13
-#: plugins/admin/groups/userSelect/user-list.tpl:13
-#: plugins/admin/groups/group-list.tpl:13 plugins/admin/users/user-list.tpl:13
-#: plugins/admin/departments/dep-list.tpl:13 plugins/admin/acl/acl-list.tpl:13
-#: plugins/personal/posix/trustSelect/trust-list.tpl:13
-#: plugins/personal/posix/groupSelect/group-list.tpl:13
-msgid "Submit"
-msgstr "Verwerk"
-
 #: ihtml/themes/default/MultiSelectWindow.tpl:51
 #: ihtml/themes/default/MultiSelectWindow.tpl:92
 #: ihtml/themes/default/msg_dialog.tpl:61
 #: ihtml/themes/default/msg_dialog.tpl:108
-#: plugins/admin/ogroups/class_ogroup.inc:232 setup/setup_ldap.tpl:121
+#: plugins/admin/ogroups/class_ogroup.inc:246 setup/setup_ldap.tpl:121
 msgid "Information"
 msgstr "Informatie"
 
 #: ihtml/themes/default/MultiSelectWindow.tpl:63
 #: ihtml/themes/default/MultiSelectWindow.tpl:103
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
-#: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/trust_machines.tpl:19
 #: plugins/personal/posix/posix_groups.tpl:21
 msgid "Filters"
@@ -98,7 +78,7 @@ msgstr "Filters"
 #: include/functions.inc:2646 include/functions.inc:2652
 #: include/class_tabs.inc:268 include/utils/class_xml.inc:37
 #: plugins/admin/ogroups/remove.tpl:2 plugins/admin/groups/remove.tpl:2
-#: plugins/admin/groups/class_groupGeneric.inc:1041
+#: plugins/admin/groups/class_groupGeneric.inc:1001
 #: plugins/admin/users/remove.tpl:2 plugins/admin/departments/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/acl/remove.tpl:2
@@ -388,7 +368,7 @@ msgstr "Lijst met afdelingen"
 #: ihtml/themes/default/baseSelect-list.xml:15
 #: plugins/admin/departments/dep-list.xml:15
 #: plugins/admin/departments/dep-list.xml:103
-#: plugins/admin/departments/class_departmentManagement.inc:175
+#: plugins/admin/departments/class_departmentManagement.inc:177
 #, fuzzy
 msgid "Domain"
 msgstr "in domein"
@@ -403,7 +383,7 @@ msgstr "Windows beheerders"
 #: ihtml/themes/default/baseSelect-list.xml:31
 #: plugins/admin/departments/dep-list.xml:31
 #: plugins/admin/departments/dep-list.xml:117
-#: plugins/admin/departments/class_departmentManagement.inc:199
+#: plugins/admin/departments/class_departmentManagement.inc:201
 #: plugins/admin/departments/class_countryGeneric.inc:78
 #: plugins/admin/departments/class_countryGeneric.inc:79
 msgid "Country"
@@ -412,7 +392,7 @@ msgstr "Land"
 #: ihtml/themes/default/baseSelect-list.xml:39
 #: plugins/admin/departments/dep-list.xml:39
 #: plugins/admin/departments/dep-list.xml:124
-#: plugins/admin/departments/class_departmentManagement.inc:211
+#: plugins/admin/departments/class_departmentManagement.inc:213
 #: plugins/admin/departments/class_localityGeneric.inc:78
 #: plugins/admin/departments/class_localityGeneric.inc:79
 #, fuzzy
@@ -422,7 +402,7 @@ msgstr "Plaats"
 #: ihtml/themes/default/baseSelect-list.xml:47
 #: plugins/admin/departments/dep-list.xml:47
 #: plugins/admin/departments/dep-list.xml:131
-#: plugins/admin/departments/class_departmentManagement.inc:223
+#: plugins/admin/departments/class_departmentManagement.inc:225
 #: plugins/admin/departments/class_organizationGeneric.inc:109
 #: plugins/admin/departments/class_organizationGeneric.inc:110
 #: plugins/personal/generic/class_user.inc:1626
@@ -435,11 +415,12 @@ msgstr "Organisatie"
 #: ihtml/themes/default/baseSelect-list.xml:55
 #: ihtml/themes/default/baseSelect-list.xml:71
 #: plugins/generic/references/class_reference.inc:59
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:15
 #: plugins/admin/ogroups/class_ogroupManagement.inc:186
 #: plugins/admin/departments/dep-list.xml:55
 #: plugins/admin/departments/dep-list.xml:71
 #: plugins/admin/departments/dep-list.xml:138
-#: plugins/admin/departments/class_departmentManagement.inc:235
+#: plugins/admin/departments/class_departmentManagement.inc:237
 #: plugins/personal/generic/class_user.inc:1627
 #: plugins/personal/generic/generic.tpl:293
 #: plugins/personal/generic/multiple_generic.tpl:159
@@ -449,11 +430,13 @@ msgstr "Afdeling"
 #: ihtml/themes/default/baseSelect-list.xml:79
 #: include/class_SnapShotDialog.inc:171
 #: plugins/generic/references/contents.tpl:11
-#: plugins/admin/ogroups/class_ogroup.inc:1085
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:105
+#: plugins/admin/ogroups/class_ogroup.inc:1003
 #: plugins/admin/ogroups/generic.tpl:15
 #: plugins/admin/ogroups/ogroup-list.xml:49
 #: plugins/admin/groups/generic.tpl:24
-#: plugins/admin/groups/class_groupGeneric.inc:1221
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:57
+#: plugins/admin/groups/class_groupGeneric.inc:1181
 #: plugins/admin/groups/group-list.xml:49
 #: plugins/admin/departments/dep-list.xml:79
 #: plugins/admin/departments/locality.tpl:19
@@ -481,7 +464,7 @@ msgstr "Afdeling"
 msgid "Description"
 msgstr "Omschrijving"
 
-#: ihtml/themes/default/baseSelect-list.xml:87 include/class_listing.inc:1114
+#: ihtml/themes/default/baseSelect-list.xml:87 include/class_listing.inc:1105
 #: plugins/admin/ogroups/ogroup-list.xml:62
 #: plugins/admin/groups/group-list.xml:62 plugins/admin/users/user-list.xml:78
 #: plugins/admin/departments/dep-list.xml:87 plugins/admin/acl/acl-list.xml:65
@@ -614,10 +597,10 @@ msgstr "Doorgaan"
 #: include/class_CopyPasteHandler.inc:193
 #: include/class_CopyPasteHandler.inc:273
 #: include/class_CopyPasteHandler.inc:375 include/class_msg_dialog.inc:99
-#: plugins/admin/groups/class_groupGeneric.inc:580
-#: plugins/admin/groups/class_groupGeneric.inc:586
-#: plugins/admin/groups/class_groupGeneric.inc:932
-#: plugins/admin/groups/class_groupGeneric.inc:937
+#: plugins/admin/groups/class_groupGeneric.inc:540
+#: plugins/admin/groups/class_groupGeneric.inc:546
+#: plugins/admin/groups/class_groupGeneric.inc:892
+#: plugins/admin/groups/class_groupGeneric.inc:897
 #: plugins/personal/generic/class_user.inc:274
 #: plugins/personal/generic/class_user.inc:387
 #: plugins/personal/generic/class_user.inc:482
@@ -791,9 +774,11 @@ msgid "Logout"
 msgstr "Uitloggen"
 
 #: ihtml/themes/default/baseSelect-filter.tpl:3
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:3
 #: plugins/admin/ogroups/ogroup-filter.tpl:3
 #: plugins/admin/groups/userSelect/user-filter.tpl:3
 #: plugins/admin/groups/group-filter.tpl:3
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:3
 #: plugins/admin/users/user-filter.tpl:3
 #: plugins/admin/departments/dep-filter.tpl:3
 #: plugins/admin/acl/acl-filter.tpl:3
@@ -854,15 +839,15 @@ msgstr "GOsa configuratie %s/gosa.conf is niet leesbaar. Geannuleerd."
 #: include/functions.inc:3023 include/functions.inc:3055
 #: include/functions.inc:3068 include/utils/class_timezone.inc:47
 #: include/class_config.inc:154 include/class_config.inc:694
-#: include/class_config.inc:1144 include/class_config.inc:1157
-#: include/class_config.inc:1175 include/class_pluglist.inc:177
+#: include/class_config.inc:1143 include/class_config.inc:1156
+#: include/class_config.inc:1174 include/class_pluglist.inc:177
 #: include/class_CopyPasteHandler.inc:119
 #: include/class_CopyPasteHandler.inc:128
 #: include/class_CopyPasteHandler.inc:177
 #: include/class_CopyPasteHandler.inc:186
 #: include/class_CopyPasteHandler.inc:194
 #: plugins/admin/groups/class_groupGeneric.inc:161
-#: plugins/admin/groups/class_groupGeneric.inc:708
+#: plugins/admin/groups/class_groupGeneric.inc:668
 #, fuzzy
 msgid "Configuration error"
 msgstr "Configuratie bestand"
@@ -977,10 +962,10 @@ msgstr ""
 #: include/class_plugin.inc:1384 include/class_plugin.inc:1442
 #: include/class_plugin.inc:1508 include/class_plugin.inc:1523
 #: include/class_ldap.inc:752 include/class_ldap.inc:1218
-#: include/class_config.inc:317 plugins/admin/ogroups/class_ogroup.inc:996
-#: plugins/admin/ogroups/class_ogroup.inc:1010
-#: plugins/admin/groups/class_groupGeneric.inc:738
-#: plugins/admin/groups/class_groupGeneric.inc:1065
+#: include/class_config.inc:317 plugins/admin/ogroups/class_ogroup.inc:914
+#: plugins/admin/ogroups/class_ogroup.inc:928
+#: plugins/admin/groups/class_groupGeneric.inc:698
+#: plugins/admin/groups/class_groupGeneric.inc:1025
 #: plugins/admin/departments/class_department.inc:241
 #: plugins/admin/departments/class_department.inc:429
 #: plugins/admin/departments/class_department.inc:702
@@ -1151,14 +1136,14 @@ msgstr ""
 #: include/class_plugin.inc:1558 include/class_plugin.inc:1573
 #: include/class_plugin.inc:1586
 #: plugins/admin/users/class_userManagement.inc:221
-#: plugins/admin/users/class_userManagement.inc:612
+#: plugins/admin/users/class_userManagement.inc:616
 #, fuzzy
 msgid "Permission"
 msgstr "Rechten"
 
 #: include/class_management.inc:353
-#: plugins/admin/users/class_userManagement.inc:571
 #: plugins/admin/users/class_userManagement.inc:575
+#: plugins/admin/users/class_userManagement.inc:579
 #: plugins/admin/acl/class_aclManagement.inc:98
 #, fuzzy
 msgid "Permission error"
@@ -1202,14 +1187,14 @@ msgid "Cannot find a suitable password method for the current hash!"
 msgstr ""
 
 #: include/class_SnapshotHandler.inc:46 include/class_SnapshotHandler.inc:77
-#: include/class_config.inc:1145 include/class_config.inc:1176
+#: include/class_config.inc:1144 include/class_config.inc:1175
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable '%s' is not "
 "set."
 msgstr ""
 
-#: include/class_SnapshotHandler.inc:59 include/class_config.inc:1158
+#: include/class_SnapshotHandler.inc:59 include/class_config.inc:1157
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required compression module "
@@ -1265,21 +1250,21 @@ msgstr ""
 msgid "Users"
 msgstr "Gebruikers"
 
-#: include/class_acl.inc:231 plugins/admin/groups/class_groupGeneric.inc:1217
+#: include/class_acl.inc:231 plugins/admin/groups/class_groupGeneric.inc:1177
 #: plugins/admin/groups/class_groupManagement.inc:25
 #: setup/class_setupStep_Migrate.inc:1042
 msgid "Groups"
 msgstr "Groepen"
 
 #: include/class_acl.inc:493 include/class_MultiSelectWindow.inc:258
-#: include/class_MultiSelectWindow.inc:260 include/class_listing.inc:235
-#: include/class_listing.inc:1004 include/class_listing.inc:1006
+#: include/class_MultiSelectWindow.inc:260 include/class_listing.inc:239
+#: include/class_listing.inc:995 include/class_listing.inc:997
 #: include/class_sortableListing.inc:225
 #: plugins/admin/acl/class_aclRole.inc:394
 msgid "Up"
 msgstr "Omhoog"
 
-#: include/class_acl.inc:495 include/class_listing.inc:235
+#: include/class_acl.inc:495 include/class_listing.inc:239
 #: include/class_sortableListing.inc:225
 #: plugins/admin/acl/class_aclRole.inc:396
 msgid "Down"
@@ -1428,33 +1413,38 @@ msgstr "Rechten"
 msgid "Close"
 msgstr "Sluiten"
 
-#: include/class_MultiSelectWindow.inc:250 include/class_listing.inc:996
+#: include/class_MultiSelectWindow.inc:250 include/class_listing.inc:987
 msgid "Go to root department"
 msgstr "Ga naar basis afdelingen"
 
 #: include/class_MultiSelectWindow.inc:250
-#: include/class_MultiSelectWindow.inc:252 include/class_listing.inc:996
-#: include/class_listing.inc:998
+#: include/class_MultiSelectWindow.inc:252 include/class_listing.inc:987
+#: include/class_listing.inc:989 include/class_baseSelector.inc:136
 msgid "Root"
 msgstr "Basis"
 
-#: include/class_MultiSelectWindow.inc:258 include/class_listing.inc:1004
+#: include/class_MultiSelectWindow.inc:258 include/class_listing.inc:995
 msgid "Go up one department"
 msgstr "Ga een afdeling omhoog"
 
-#: include/class_MultiSelectWindow.inc:266 include/class_listing.inc:1012
+#: include/class_MultiSelectWindow.inc:266 include/class_listing.inc:1003
 msgid "Go to users department"
 msgstr "Ga naar gebruikers afdeling"
 
 #: include/class_MultiSelectWindow.inc:266
-#: include/class_MultiSelectWindow.inc:268 include/class_listing.inc:1012
-#: include/class_listing.inc:1014
+#: include/class_MultiSelectWindow.inc:268 include/class_listing.inc:1003
+#: include/class_listing.inc:1005
 msgid "Home"
 msgstr "Home"
 
-#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1019
+#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1010
 msgid "Reload list"
 msgstr "Lijst herladen"
+
+#: include/class_MultiSelectWindow.inc:273 include/class_listing.inc:1010
+#: include/class_baseSelector.inc:179
+msgid "Submit"
+msgstr "Verwerk"
 
 #: include/class_MultiSelectWindow.inc:553
 #, php-format
@@ -1472,7 +1462,7 @@ msgstr "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
 msgid "Choose a base"
 msgstr "Selecteer een basis"
 
-#: include/class_listing.inc:299 setup/setup_migrate.tpl:93
+#: include/class_listing.inc:303 setup/setup_migrate.tpl:93
 #: setup/setup_migrate.tpl:149 setup/setup_migrate.tpl:201
 #: setup/setup_migrate.tpl:368 setup/setup_migrate.tpl:421
 #: setup/setup_migrate.tpl:464 setup/setup_migrate.tpl:507
@@ -1481,58 +1471,58 @@ msgstr "Selecteer een basis"
 msgid "Select all"
 msgstr "Selecteer"
 
-#: include/class_listing.inc:509
+#: include/class_listing.inc:521
 #, fuzzy
 msgid "created by"
 msgstr "Aanmaken"
 
-#: include/class_listing.inc:1379 include/class_listing.inc:1429
+#: include/class_listing.inc:1375 include/class_listing.inc:1425
 #: include/class_plugin.inc:2070
 #, fuzzy
 msgid "Copy"
 msgstr "kopieer"
 
-#: include/class_listing.inc:1385 include/class_listing.inc:1419
+#: include/class_listing.inc:1381 include/class_listing.inc:1415
 #: include/class_plugin.inc:2074
 #, fuzzy
 msgid "Cut"
 msgstr "knippen"
 
-#: include/class_listing.inc:1393 include/class_listing.inc:1395
+#: include/class_listing.inc:1389 include/class_listing.inc:1391
 #: include/class_plugin.inc:2081 include/class_plugin.inc:2084
 #: include/class_CopyPasteHandler.inc:514
 msgid "Paste"
 msgstr "Plakken"
 
-#: include/class_listing.inc:1419 include/class_plugin.inc:2028
+#: include/class_listing.inc:1415 include/class_plugin.inc:2028
 msgid "Cut this entry"
 msgstr "Deze invoer knippen"
 
-#: include/class_listing.inc:1429 include/class_plugin.inc:2036
+#: include/class_listing.inc:1425 include/class_plugin.inc:2036
 msgid "Copy this entry"
 msgstr "Deze invoer kopieren"
 
-#: include/class_listing.inc:1461 include/class_listing.inc:1463
+#: include/class_listing.inc:1457 include/class_listing.inc:1459
 #, fuzzy
 msgid "Restore snapshots"
 msgstr "Nagios account aanmaken"
 
-#: include/class_listing.inc:1477
+#: include/class_listing.inc:1473
 #, fuzzy
 msgid "Export list"
 msgstr "Exporteer"
 
-#: include/class_listing.inc:1512 include/class_listing.inc:1513
+#: include/class_listing.inc:1508 include/class_listing.inc:1509
 #: include/class_SnapShotDialog.inc:135 include/class_plugin.inc:2002
 msgid "Restore snapshot"
 msgstr ""
 
-#: include/class_listing.inc:1522 include/class_plugin.inc:2009
+#: include/class_listing.inc:1518 include/class_plugin.inc:2009
 #, fuzzy
 msgid "Create snapshot"
 msgstr "Nagios account aanmaken"
 
-#: include/class_listing.inc:1523 include/class_plugin.inc:2010
+#: include/class_listing.inc:1519 include/class_plugin.inc:2010
 #, fuzzy
 msgid "Create a new snapshot from this object"
 msgstr "Nieuw FAI object aanmaken"
@@ -2339,6 +2329,8 @@ msgid "Missing %s PHP extension!"
 msgstr "Verwijder printer mogelijkheden"
 
 #: include/utils/class_msgPool.inc:332
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:123
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:75
 #: plugins/personal/generic/generic.tpl:255
 #: setup/class_setupStep_Migrate.inc:2868
 #, php-format
@@ -2737,12 +2729,12 @@ msgstr ""
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
 msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
 
-#: include/class_config.inc:1103
+#: include/class_config.inc:1102
 #, fuzzy
 msgid "Configuration"
 msgstr "Configuratie bestand"
 
-#: include/class_config.inc:1103
+#: include/class_config.inc:1102
 msgid ""
 "The configuration file you are using seems to be outdated. Please move the "
 "GOsa configuration file away to run the GOsa setup again."
@@ -2808,9 +2800,9 @@ msgid "Please fix the above error and reload the page."
 msgstr ""
 
 #: plugins/generic/references/class_reference.inc:41
-#: plugins/admin/ogroups/class_ogroup.inc:1074
-#: plugins/admin/groups/class_groupGeneric.inc:1211
-#: plugins/admin/users/class_userManagement.inc:738
+#: plugins/admin/ogroups/class_ogroup.inc:992
+#: plugins/admin/groups/class_groupGeneric.inc:1171
+#: plugins/admin/users/class_userManagement.inc:742
 #: plugins/admin/departments/class_department.inc:609
 #: plugins/personal/generic/class_user.inc:37
 #: plugins/personal/generic/class_user.inc:1602
@@ -2825,23 +2817,23 @@ msgstr "Unix"
 
 #: plugins/generic/references/class_reference.inc:45
 #: plugins/admin/ogroups/tabs_ogroups.inc:148
-#: plugins/admin/groups/class_groupManagement.inc:163
-#: plugins/admin/users/class_userManagement.inc:745
+#: plugins/admin/groups/class_groupManagement.inc:164
+#: plugins/admin/users/class_userManagement.inc:749
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:70
 msgid "Mail"
 msgstr "E-mail"
 
 #: plugins/generic/references/class_reference.inc:47
 #: plugins/generic/references/class_reference.inc:49
-#: plugins/admin/groups/class_groupManagement.inc:171
-#: plugins/admin/users/class_userManagement.inc:750
+#: plugins/admin/groups/class_groupManagement.inc:172
+#: plugins/admin/users/class_userManagement.inc:754
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:78
 msgid "Samba"
 msgstr "Samba"
 
 #: plugins/generic/references/class_reference.inc:51
-#: plugins/admin/users/class_userManagement.inc:762
+#: plugins/admin/users/class_userManagement.inc:766
 msgid "FAX"
 msgstr "Fax"
 
@@ -2854,8 +2846,10 @@ msgid "FTP"
 msgstr "Ftp"
 
 #: plugins/generic/references/class_reference.inc:57
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:71
 #: plugins/admin/ogroups/class_ogroupManagement.inc:184
 #: plugins/admin/ogroups/ogroup-list.xml:79
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:23
 #: plugins/admin/groups/group-list.xml:15
 #: plugins/admin/groups/group-list.xml:79
 #: plugins/personal/posix/groupSelect/group-list.xml:15
@@ -2863,9 +2857,10 @@ msgid "Group"
 msgstr "Groep"
 
 #: plugins/generic/references/class_reference.inc:61
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:55
 #: plugins/admin/ogroups/class_ogroupManagement.inc:188
-#: plugins/admin/groups/class_groupManagement.inc:179
-#: plugins/admin/users/class_userManagement.inc:766
+#: plugins/admin/groups/class_groupManagement.inc:180
+#: plugins/admin/users/class_userManagement.inc:770
 #: plugins/admin/departments/generic.tpl:88
 #: plugins/admin/departments/class_department.inc:328
 #: plugins/admin/departments/organization.tpl:88
@@ -2885,6 +2880,7 @@ msgid "Application"
 msgstr "Programma"
 
 #: plugins/generic/references/class_reference.inc:65
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:23
 #: plugins/admin/ogroups/class_ogroupManagement.inc:187
 #: plugins/personal/posix/trustSelect/trust-list.xml:14
 #: setup/setup_config2.tpl:219 setup/setup_config2.tpl:264
@@ -2896,6 +2892,7 @@ msgid "Thin Client"
 msgstr "Thin Client"
 
 #: plugins/generic/references/class_reference.inc:69
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:31
 #: plugins/admin/ogroups/class_ogroupManagement.inc:189
 #: plugins/personal/posix/trustSelect/trust-list.xml:22
 msgid "Workstation"
@@ -2907,6 +2904,7 @@ msgid "Object group"
 msgstr "Objectgroep"
 
 #: plugins/generic/references/class_reference.inc:73
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:47
 #: plugins/admin/ogroups/class_ogroupManagement.inc:192
 msgid "Printer"
 msgstr "Printer"
@@ -2951,192 +2949,46 @@ msgstr ""
 msgid "The GOsa team"
 msgstr "Het GOsa team"
 
-#: plugins/admin/ogroups/remove.tpl:6
-msgid ""
-"Please double check if you really want to do this since there is no way for "
-"GOsa to get your data back."
-msgstr ""
-"Controleer a.u.b. of u dit daadwerkelijk wil doen, aangezien er geen "
-"mogelijkheid voor GOsa is om uw data terug te krijgen."
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroup.inc:1080
-msgid "Object groups"
-msgstr "Objectgroepen"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:26
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:11
+#: plugins/admin/groups/userSelect/user-list.xml:10
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:11
+#: plugins/personal/posix/trustSelect/trust-list.xml:10
+#: plugins/personal/posix/groupSelect/group-list.xml:11
 #, fuzzy
-msgid "Manage object groups"
-msgstr "Naam van objectgroepen"
+msgid "Please select the desired entries"
+msgstr "Voorkeurstaal"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:115
-#: plugins/admin/groups/class_groupManagement.inc:98
-#: plugins/admin/users/class_userManagement.inc:189
-#, fuzzy
-msgid "Infrastructure error"
-msgstr "PHP fout"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:182
-#, fuzzy
-msgid "Templates"
-msgstr "Sjabloon"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:183
-#: plugins/admin/groups/userSelect/user-list.xml:14
-#: plugins/admin/users/user-list.xml:23 plugins/admin/users/user-list.xml:95
-#: setup/setup_config2.tpl:228 setup/setup_config2.tpl:273
-msgid "User"
-msgstr "Gebruiker"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:190
-#, fuzzy
-msgid "Windows Install"
-msgstr "Windows werkstation"
-
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:39
 #: plugins/admin/ogroups/class_ogroupManagement.inc:191
 #: plugins/personal/posix/trustSelect/trust-list.xml:30
 msgid "Terminal"
 msgstr "Terminal"
 
-#: plugins/admin/ogroups/class_ogroup.inc:232
-msgid "You cannot combine terminals and workstations in one object group!"
-msgstr ""
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:63
+#: plugins/admin/ogroups/class_ogroupManagement.inc:183
+#: plugins/admin/groups/userSelect/user-list.xml:14
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:15
+#: plugins/admin/users/user-list.xml:23 plugins/admin/users/user-list.xml:95
+#: setup/setup_config2.tpl:228 setup/setup_config2.tpl:273
+msgid "User"
+msgstr "Gebruiker"
 
-#: plugins/admin/ogroups/class_ogroup.inc:420
-#: plugins/admin/ogroups/class_ogroup.inc:422
-#: plugins/admin/ogroups/class_ogroup.inc:480
-msgid "departments"
-msgstr "afdelingen"
-
-#: plugins/admin/ogroups/class_ogroup.inc:422
-#: plugins/admin/ogroups/class_ogroup.inc:426
-#: plugins/admin/ogroups/class_ogroup.inc:430
-#: plugins/admin/ogroups/class_ogroup.inc:434
-#: plugins/admin/ogroups/class_ogroup.inc:438
-#: plugins/admin/ogroups/class_ogroup.inc:442
-#: plugins/admin/ogroups/class_ogroup.inc:446
-#: plugins/admin/ogroups/class_ogroup.inc:450
-#: plugins/admin/ogroups/class_ogroup.inc:458
-#, fuzzy, php-format
-msgid "Show %s"
-msgstr "Toon groepen"
-
-#: plugins/admin/ogroups/class_ogroup.inc:424
-#: plugins/admin/ogroups/class_ogroup.inc:426
-#, fuzzy
-msgid "people"
-msgstr "Toon personen"
-
-#: plugins/admin/ogroups/class_ogroup.inc:428
-#: plugins/admin/ogroups/class_ogroup.inc:430
-#: plugins/admin/ogroups/class_ogroup.inc:478
-msgid "groups"
-msgstr "groepen"
-
-#: plugins/admin/ogroups/class_ogroup.inc:432
-#: plugins/admin/ogroups/class_ogroup.inc:434
-#: plugins/admin/ogroups/class_ogroup.inc:481
-msgid "servers"
-msgstr "servers"
-
-#: plugins/admin/ogroups/class_ogroup.inc:436
-#: plugins/admin/ogroups/class_ogroup.inc:438
-#: plugins/admin/ogroups/class_ogroup.inc:482
-msgid "workstations"
-msgstr "werkstations"
-
-#: plugins/admin/ogroups/class_ogroup.inc:440
-#: plugins/admin/ogroups/class_ogroup.inc:442
-#: plugins/admin/ogroups/class_ogroup.inc:484
-msgid "terminals"
-msgstr "terminals"
-
-#: plugins/admin/ogroups/class_ogroup.inc:444
-#, fuzzy
-msgid "printer"
-msgstr "printers"
-
-#: plugins/admin/ogroups/class_ogroup.inc:446
-#: plugins/admin/ogroups/class_ogroup.inc:486
-msgid "printers"
-msgstr "printers"
-
-#: plugins/admin/ogroups/class_ogroup.inc:448
-#: plugins/admin/ogroups/class_ogroup.inc:450
-#: plugins/admin/ogroups/class_ogroup.inc:485
-msgid "phones"
-msgstr "telefoons"
-
-#: plugins/admin/ogroups/class_ogroup.inc:456
-#: plugins/admin/ogroups/class_ogroup.inc:458
-#: plugins/admin/ogroups/class_ogroup.inc:479
-msgid "applications"
-msgstr "programma's"
-
-#: plugins/admin/ogroups/class_ogroup.inc:473
-#: plugins/admin/users/class_userManagement.inc:334
-#: plugins/admin/users/class_userManagement.inc:367
-#: plugins/admin/users/class_userManagement.inc:398
-msgid "none"
-msgstr "geen"
-
-#: plugins/admin/ogroups/class_ogroup.inc:475
-msgid "too many different objects!"
-msgstr "te veel verschillende object tpyes!"
-
-#: plugins/admin/ogroups/class_ogroup.inc:477
-msgid "users"
-msgstr "gebruikers"
-
-#: plugins/admin/ogroups/class_ogroup.inc:483
-#, fuzzy
-msgid "winstations"
-msgstr "Windows werkstation"
-
-#: plugins/admin/ogroups/class_ogroup.inc:533
-#: plugins/admin/groups/class_groupGeneric.inc:474
-#: plugins/personal/posix/class_posixAccount.inc:573
-#: setup/setup_config2.tpl:143
-msgid "disabled"
-msgstr "gedeactiveerd"
-
-#: plugins/admin/ogroups/class_ogroup.inc:533
-#: plugins/admin/groups/class_groupGeneric.inc:474
-#: plugins/personal/posix/class_posixAccount.inc:573
-msgid "full access"
-msgstr "volledige toegang"
-
-#: plugins/admin/ogroups/class_ogroup.inc:534
-#: plugins/admin/groups/class_groupGeneric.inc:475
-#: plugins/personal/posix/class_posixAccount.inc:574
-msgid "allow access to these hosts"
-msgstr "sta toegang op deze computers toe"
-
-#: plugins/admin/ogroups/class_ogroup.inc:718
-msgid "Non existing dn:"
-msgstr "Niet bestaande dn: "
-
-#: plugins/admin/ogroups/class_ogroup.inc:875
-#, php-format
-msgid ""
-"These systems are already configured by other object groups and cannot be "
-"added:"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroup.inc:885
-#: plugins/admin/ogroups/class_ogroup.inc:895
-#: plugins/admin/ogroups/class_ogroup.inc:1083
+#: plugins/admin/ogroups/objectSelect/selectObject-list.xml:97
+#: plugins/admin/ogroups/class_ogroup.inc:803
+#: plugins/admin/ogroups/class_ogroup.inc:813
+#: plugins/admin/ogroups/class_ogroup.inc:1001
 #: plugins/admin/ogroups/ogroup-list.xml:41
-#: plugins/admin/groups/class_groupGeneric.inc:1092
-#: plugins/admin/groups/class_groupGeneric.inc:1098
-#: plugins/admin/groups/class_groupGeneric.inc:1100
-#: plugins/admin/groups/class_groupGeneric.inc:1112
-#: plugins/admin/groups/class_groupGeneric.inc:1126
-#: plugins/admin/groups/class_groupGeneric.inc:1133
-#: plugins/admin/groups/class_groupGeneric.inc:1220
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:49
+#: plugins/admin/groups/class_groupGeneric.inc:1052
+#: plugins/admin/groups/class_groupGeneric.inc:1058
+#: plugins/admin/groups/class_groupGeneric.inc:1060
+#: plugins/admin/groups/class_groupGeneric.inc:1072
+#: plugins/admin/groups/class_groupGeneric.inc:1086
+#: plugins/admin/groups/class_groupGeneric.inc:1093
+#: plugins/admin/groups/class_groupGeneric.inc:1180
 #: plugins/admin/groups/group-list.xml:41
-#: plugins/admin/users/class_userManagement.inc:408
-#: plugins/admin/users/class_userManagement.inc:455
+#: plugins/admin/users/class_userManagement.inc:412
+#: plugins/admin/users/class_userManagement.inc:459
 #: plugins/admin/departments/class_domain.inc:43
 #: plugins/admin/departments/class_domain.inc:45
 #: plugins/admin/departments/class_domain.inc:50
@@ -3183,22 +3035,185 @@ msgstr ""
 msgid "Name"
 msgstr "Naam"
 
-#: plugins/admin/ogroups/class_ogroup.inc:900
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:11
+#, fuzzy
+msgid "Show department"
+msgstr "Toon afdelingen"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:12
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:11
+#, fuzzy
+msgid "Show users"
+msgstr "Toon servers"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:13
+#: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl:12
+#, fuzzy
+msgid "Show groups"
+msgstr "Toon Samba groepen"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:15
+#, fuzzy
+msgid "Show server"
+msgstr "Toon servers"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:16
+#, fuzzy
+msgid "Show workstation"
+msgstr "Toon werkstations"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:17
+#, fuzzy
+msgid "Show terminal"
+msgstr "Toon terminals"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:19
+#, fuzzy
+msgid "Show printer"
+msgstr "Toon printers"
+
+#: plugins/admin/ogroups/objectSelect/selectObject-filter.tpl:20
+#, fuzzy
+msgid "Show phone"
+msgstr "Toon pakketten"
+
+#: plugins/admin/ogroups/remove.tpl:6
+msgid ""
+"Please double check if you really want to do this since there is no way for "
+"GOsa to get your data back."
+msgstr ""
+"Controleer a.u.b. of u dit daadwerkelijk wil doen, aangezien er geen "
+"mogelijkheid voor GOsa is om uw data terug te krijgen."
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:25
+#: plugins/admin/ogroups/class_ogroup.inc:998
+msgid "Object groups"
+msgstr "Objectgroepen"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:26
+#, fuzzy
+msgid "Manage object groups"
+msgstr "Naam van objectgroepen"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:115
+#: plugins/admin/groups/class_groupManagement.inc:98
+#: plugins/admin/users/class_userManagement.inc:189
+#, fuzzy
+msgid "Infrastructure error"
+msgstr "PHP fout"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:182
+#, fuzzy
+msgid "Templates"
+msgstr "Sjabloon"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:190
+#, fuzzy
+msgid "Windows Install"
+msgstr "Windows werkstation"
+
+#: plugins/admin/ogroups/class_ogroup.inc:246
+msgid "You cannot combine terminals and workstations in one object group!"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:391
+#: plugins/admin/users/class_userManagement.inc:337
+#: plugins/admin/users/class_userManagement.inc:371
+#: plugins/admin/users/class_userManagement.inc:402
+msgid "none"
+msgstr "geen"
+
+#: plugins/admin/ogroups/class_ogroup.inc:393
+msgid "too many different objects!"
+msgstr "te veel verschillende object tpyes!"
+
+#: plugins/admin/ogroups/class_ogroup.inc:395
+msgid "users"
+msgstr "gebruikers"
+
+#: plugins/admin/ogroups/class_ogroup.inc:396
+msgid "groups"
+msgstr "groepen"
+
+#: plugins/admin/ogroups/class_ogroup.inc:397
+msgid "applications"
+msgstr "programma's"
+
+#: plugins/admin/ogroups/class_ogroup.inc:398
+msgid "departments"
+msgstr "afdelingen"
+
+#: plugins/admin/ogroups/class_ogroup.inc:399
+msgid "servers"
+msgstr "servers"
+
+#: plugins/admin/ogroups/class_ogroup.inc:400
+msgid "workstations"
+msgstr "werkstations"
+
+#: plugins/admin/ogroups/class_ogroup.inc:401
+#, fuzzy
+msgid "winstations"
+msgstr "Windows werkstation"
+
+#: plugins/admin/ogroups/class_ogroup.inc:402
+msgid "terminals"
+msgstr "terminals"
+
+#: plugins/admin/ogroups/class_ogroup.inc:403
+msgid "phones"
+msgstr "telefoons"
+
+#: plugins/admin/ogroups/class_ogroup.inc:404
+msgid "printers"
+msgstr "printers"
+
+#: plugins/admin/ogroups/class_ogroup.inc:451
+#: plugins/admin/groups/class_groupGeneric.inc:434
+#: plugins/personal/posix/class_posixAccount.inc:573
+#: setup/setup_config2.tpl:143
+msgid "disabled"
+msgstr "gedeactiveerd"
+
+#: plugins/admin/ogroups/class_ogroup.inc:451
+#: plugins/admin/groups/class_groupGeneric.inc:434
+#: plugins/personal/posix/class_posixAccount.inc:573
+msgid "full access"
+msgstr "volledige toegang"
+
+#: plugins/admin/ogroups/class_ogroup.inc:452
+#: plugins/admin/groups/class_groupGeneric.inc:435
+#: plugins/personal/posix/class_posixAccount.inc:574
+msgid "allow access to these hosts"
+msgstr "sta toegang op deze computers toe"
+
+#: plugins/admin/ogroups/class_ogroup.inc:636
+msgid "Non existing dn:"
+msgstr "Niet bestaande dn: "
+
+#: plugins/admin/ogroups/class_ogroup.inc:793
+#, php-format
+msgid ""
+"These systems are already configured by other object groups and cannot be "
+"added:"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:818
 #, fuzzy
 msgid "You can combine two different object types at maximum, only!"
 msgstr "U kunt maximaal twee verschillende object types tegelijk combineren!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1075
+#: plugins/admin/ogroups/class_ogroup.inc:993
 #, fuzzy
 msgid "Object group generic"
 msgstr "Objectgroep"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1086
+#: plugins/admin/ogroups/class_ogroup.inc:1004
 #, fuzzy
 msgid "Sytem trust"
 msgstr "Systeem vertrouwen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1087
+#: plugins/admin/ogroups/class_ogroup.inc:1005
 #, fuzzy
 msgid "Member"
 msgstr "Groepsleden"
@@ -3236,7 +3251,7 @@ msgid "Select a base"
 msgstr "Selecteer een basis"
 
 #: plugins/admin/ogroups/generic.tpl:41
-#: plugins/admin/groups/class_groupGeneric.inc:1228
+#: plugins/admin/groups/class_groupGeneric.inc:1188
 #: plugins/personal/posix/generic.tpl:139
 msgid "System trust"
 msgstr "Systeem vertrouwen"
@@ -3275,8 +3290,8 @@ msgid "FAI summary"
 msgstr "FAI samenvatting"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:222
-#: plugins/admin/groups/class_groupManagement.inc:195
-#: plugins/admin/users/class_userManagement.inc:758
+#: plugins/admin/groups/class_groupManagement.inc:196
+#: plugins/admin/users/class_userManagement.inc:762
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:102
 msgid "Environment"
@@ -3404,7 +3419,6 @@ msgstr "Toon objecten van afdeling"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:37
 #: plugins/admin/ogroups/trust_machines.tpl:27
-#: plugins/admin/groups/group_objects.tpl:40
 #: plugins/admin/groups/trust_machines.tpl:26
 #: plugins/personal/posix/posix_groups.tpl:35
 #: plugins/personal/posix/trust_machines.tpl:27
@@ -3451,37 +3465,8 @@ msgstr ""
 "Dit kan een primaire groep zijn. Verzeker uzelf ervan dat dit is wat u wilt, "
 "aangezien er geen mogelijkheid voor GOsa is om deze gegevens terug te halen."
 
-#: plugins/admin/groups/group_objects.tpl:6
-msgid "Select users to add"
-msgstr "Selecteer de toe te voegen gebruikers"
-
-#: plugins/admin/groups/group_objects.tpl:30
-msgid "Select to see servers"
-msgstr "Selecteer om servers te zien"
-
-#: plugins/admin/groups/group_objects.tpl:30
-msgid "Search within subtree"
-msgstr "Zoek binnen subtree"
-
-#: plugins/admin/groups/group_objects.tpl:37
-msgid "Display users of department"
-msgstr "Toon gebruikers van afdeling"
-
-#: plugins/admin/groups/group_objects.tpl:46
-msgid "Display users matching"
-msgstr "Toon overeenkomende gebruikers"
-
-#: plugins/admin/groups/group_objects.tpl:47
-msgid "Regular expression for matching user names"
-msgstr "Reguliere expressie voor overeenkomende gebruikersnamen"
-
-#: plugins/admin/groups/userSelect/user-list.xml:10
-#, fuzzy
-msgid "Please select the desired entries"
-msgstr "Voorkeurstaal"
-
 #: plugins/admin/groups/userSelect/user-list.xml:40
-#: plugins/admin/users/class_userManagement.inc:411
+#: plugins/admin/users/class_userManagement.inc:415
 #: plugins/admin/users/user-list.xml:57
 #: plugins/personal/generic/class_user.inc:1289
 #: plugins/personal/generic/class_user.inc:1336
@@ -3495,25 +3480,6 @@ msgstr "Naam"
 #: plugins/personal/generic/class_user.inc:1613
 msgid "Surname"
 msgstr "Achternaam"
-
-#: plugins/admin/groups/userSelect/user-filter.tpl:11
-#: plugins/admin/groups/group-filter.tpl:11
-#: plugins/personal/posix/groupSelect/group-filter.tpl:11
-msgid "Show primary groups"
-msgstr "Toon primaire groepen"
-
-#: plugins/admin/groups/userSelect/user-filter.tpl:12
-#: plugins/admin/groups/group-filter.tpl:12
-#: plugins/personal/posix/groupSelect/group-filter.tpl:12
-msgid "Show samba groups"
-msgstr "Toon Samba groepen"
-
-#: plugins/admin/groups/userSelect/user-filter.tpl:13
-#: plugins/admin/groups/group-filter.tpl:13
-#: plugins/personal/posix/groupSelect/group-filter.tpl:13
-#, fuzzy
-msgid "Show mail groups"
-msgstr "Toon Samba groepen"
 
 #: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:52
 #: plugins/personal/generic/generic.tpl:73
@@ -3573,6 +3539,22 @@ msgstr "Primaire groep"
 msgid "Not in all groups"
 msgstr "Toon E-mail groepen"
 
+#: plugins/admin/groups/group-filter.tpl:11
+#: plugins/personal/posix/groupSelect/group-filter.tpl:11
+msgid "Show primary groups"
+msgstr "Toon primaire groepen"
+
+#: plugins/admin/groups/group-filter.tpl:12
+#: plugins/personal/posix/groupSelect/group-filter.tpl:12
+msgid "Show samba groups"
+msgstr "Toon Samba groepen"
+
+#: plugins/admin/groups/group-filter.tpl:13
+#: plugins/personal/posix/groupSelect/group-filter.tpl:13
+#, fuzzy
+msgid "Show mail groups"
+msgstr "Toon Samba groepen"
+
 #: plugins/admin/groups/class_groupGeneric.inc:161
 #, fuzzy
 msgid "Cannot find group SID in your configuration!"
@@ -3580,65 +3562,65 @@ msgstr ""
 "Kan de SID van deze groep niet vinden in de LDAP database of in uw "
 "configuratie bestand."
 
-#: plugins/admin/groups/class_groupGeneric.inc:441
+#: plugins/admin/groups/class_groupGeneric.inc:401
 msgid "Samba group"
 msgstr "Samba groep"
 
-#: plugins/admin/groups/class_groupGeneric.inc:441
+#: plugins/admin/groups/class_groupGeneric.inc:401
 msgid "Domain admins"
 msgstr "Windows beheerders"
 
-#: plugins/admin/groups/class_groupGeneric.inc:441
+#: plugins/admin/groups/class_groupGeneric.inc:401
 msgid "Domain users"
 msgstr "Windows gebruikers"
 
-#: plugins/admin/groups/class_groupGeneric.inc:442
+#: plugins/admin/groups/class_groupGeneric.inc:402
 msgid "Domain guests"
 msgstr "Windows gasten"
 
-#: plugins/admin/groups/class_groupGeneric.inc:447
+#: plugins/admin/groups/class_groupGeneric.inc:407
 #, php-format
 msgid "Special group (%d)"
 msgstr "Speciale groep (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:581
+#: plugins/admin/groups/class_groupGeneric.inc:541
 #, php-format
 msgid "Adding UID '%s' to group '%s' failed: cannot find user object!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:587
+#: plugins/admin/groups/class_groupGeneric.inc:547
 #, php-format
 msgid "Add UID '%s' to group '%s' failed: UID is used more than once!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:665
+#: plugins/admin/groups/class_groupGeneric.inc:625
 #, fuzzy
 msgid "! unknown UID"
 msgstr "! onbekend id"
 
-#: plugins/admin/groups/class_groupGeneric.inc:708
+#: plugins/admin/groups/class_groupGeneric.inc:668
 #, php-format
 msgid "Search returned too many results. Not displaying more than %s entries!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:932
+#: plugins/admin/groups/class_groupGeneric.inc:892
 #, fuzzy, php-format
 msgid "Cannot find any SID for '%s'!"
 msgstr "Kan bestand '%s' niet aanmaken."
 
-#: plugins/admin/groups/class_groupGeneric.inc:937
+#: plugins/admin/groups/class_groupGeneric.inc:897
 #, fuzzy, php-format
 msgid "Cannot find any RIDBASE for '%s'!"
 msgstr "Kan bestand '%s' niet aanmaken."
 
-#: plugins/admin/groups/class_groupGeneric.inc:1041
+#: plugins/admin/groups/class_groupGeneric.inc:1001
 #, php-format
 msgid "The gidNumber '%s' is already in use by %s!"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:1142
-#: plugins/admin/groups/class_groupGeneric.inc:1145
-#: plugins/admin/groups/class_groupGeneric.inc:1224
+#: plugins/admin/groups/class_groupGeneric.inc:1102
+#: plugins/admin/groups/class_groupGeneric.inc:1105
+#: plugins/admin/groups/class_groupGeneric.inc:1184
 #: plugins/personal/posix/class_posixAccount.inc:1045
 #: plugins/personal/posix/class_posixAccount.inc:1048
 #: plugins/personal/posix/generic.tpl:74
@@ -3646,32 +3628,32 @@ msgstr ""
 msgid "GID"
 msgstr "GID"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1212
+#: plugins/admin/groups/class_groupGeneric.inc:1172
 #, fuzzy
 msgid "Generic group settings"
 msgstr "Algemene wachtrij instellingen"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1226
+#: plugins/admin/groups/class_groupGeneric.inc:1186
 #, fuzzy
 msgid "Samba group type"
 msgstr "Samba groep"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1227
+#: plugins/admin/groups/class_groupGeneric.inc:1187
 #, fuzzy
 msgid "Samba domain name"
 msgstr "Samba home"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1229
+#: plugins/admin/groups/class_groupGeneric.inc:1189
 #, fuzzy
 msgid "Phone pickup group"
 msgstr "Leden zitten in een telefoon beantwoordgroep"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1230
+#: plugins/admin/groups/class_groupGeneric.inc:1190
 #, fuzzy
 msgid "Nagios group"
 msgstr "Nagios account"
 
-#: plugins/admin/groups/class_groupGeneric.inc:1232
+#: plugins/admin/groups/class_groupGeneric.inc:1192
 #, fuzzy
 msgid "Group member"
 msgstr "Groepsleden"
@@ -3681,7 +3663,6 @@ msgid "Group settings"
 msgstr "Groep instellingen"
 
 #: plugins/admin/groups/group-list.xml:11
-#: plugins/personal/posix/groupSelect/group-list.xml:11
 msgid "List of groups"
 msgstr "Lijst met groepen"
 
@@ -3699,49 +3680,49 @@ msgstr "servers"
 msgid "Group administration"
 msgstr "Groepen beheer"
 
-#: plugins/admin/groups/class_groupManagement.inc:155
+#: plugins/admin/groups/class_groupManagement.inc:156
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:62
 msgid "Posix"
 msgstr "Posix"
 
-#: plugins/admin/groups/class_groupManagement.inc:156
+#: plugins/admin/groups/class_groupManagement.inc:157
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:63
 #, fuzzy
 msgid "Edit posix properties"
 msgstr "Bewerk telefoon eigenschappen"
 
-#: plugins/admin/groups/class_groupManagement.inc:164
-#: plugins/admin/users/class_userManagement.inc:747
+#: plugins/admin/groups/class_groupManagement.inc:165
+#: plugins/admin/users/class_userManagement.inc:751
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:71
 msgid "Edit mail properties"
 msgstr "Bewerk E-mail eigenschappen"
 
-#: plugins/admin/groups/class_groupManagement.inc:172
-#: plugins/admin/users/class_userManagement.inc:751
+#: plugins/admin/groups/class_groupManagement.inc:173
+#: plugins/admin/users/class_userManagement.inc:755
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:79
 msgid "Edit samba properties"
 msgstr "Bewerk Samba eigenschappen"
 
-#: plugins/admin/groups/class_groupManagement.inc:180
-#: plugins/admin/users/class_userManagement.inc:767
+#: plugins/admin/groups/class_groupManagement.inc:181
+#: plugins/admin/users/class_userManagement.inc:771
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:87
 msgid "Edit phone properties"
 msgstr "Bewerk telefoon eigenschappen"
 
-#: plugins/admin/groups/class_groupManagement.inc:187
+#: plugins/admin/groups/class_groupManagement.inc:188
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:94
 #, fuzzy
 msgid "Menu"
 msgstr "Printer"
 
-#: plugins/admin/groups/class_groupManagement.inc:188
+#: plugins/admin/groups/class_groupManagement.inc:189
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:95
 #, fuzzy
 msgid "Edit start menu properties"
 msgstr "Bewerk Samba eigenschappen"
 
-#: plugins/admin/groups/class_groupManagement.inc:196
-#: plugins/admin/users/class_userManagement.inc:759
+#: plugins/admin/groups/class_groupManagement.inc:197
+#: plugins/admin/users/class_userManagement.inc:763
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:103
 msgid "Edit environment properties"
 msgstr "Bewerk omgeving eigenschappen"
@@ -3806,7 +3787,7 @@ msgstr ""
 "gebruik van sjablonen over te slaan."
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/users/class_userManagement.inc:405
+#: plugins/admin/users/class_userManagement.inc:409
 #: plugins/admin/users/user-list.xml:15 plugins/admin/users/user-list.xml:102
 #: plugins/admin/users/templatize.tpl:15
 msgid "Template"
@@ -3832,33 +3813,33 @@ msgstr "Windows gebruikers"
 msgid "You have no permission to change this users password!"
 msgstr "U heeft geen toestemming om uw wachtwoord te veranderen."
 
-#: plugins/admin/users/class_userManagement.inc:650
+#: plugins/admin/users/class_userManagement.inc:654
 #, fuzzy
 msgid "Account locking"
 msgstr "Account"
 
-#: plugins/admin/users/class_userManagement.inc:651
+#: plugins/admin/users/class_userManagement.inc:655
 #, php-format
 msgid ""
 "Password method '%s' does not support locking. Account (%s) has not been "
 "locked!"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:724
+#: plugins/admin/users/class_userManagement.inc:728
 #, fuzzy
 msgid "Unlock account"
 msgstr "Mijn account"
 
-#: plugins/admin/users/class_userManagement.inc:726
+#: plugins/admin/users/class_userManagement.inc:730
 #, fuzzy
 msgid "Lock account"
 msgstr "Mijn account"
 
-#: plugins/admin/users/class_userManagement.inc:739
+#: plugins/admin/users/class_userManagement.inc:743
 msgid "Edit generic properties"
 msgstr "Bewerk algemene eigenschappen"
 
-#: plugins/admin/users/class_userManagement.inc:742
+#: plugins/admin/users/class_userManagement.inc:746
 #: plugins/personal/posix/class_posixAccount.inc:304
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/class_posixAccount.inc:326
@@ -3866,20 +3847,20 @@ msgstr "Bewerk algemene eigenschappen"
 msgid "POSIX"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:743
+#: plugins/admin/users/class_userManagement.inc:747
 #, fuzzy
 msgid "Edit POSIX properties"
 msgstr "Bewerk UNIX eigenschappen"
 
-#: plugins/admin/users/class_userManagement.inc:754
+#: plugins/admin/users/class_userManagement.inc:758
 msgid "Netatalk"
 msgstr "Netatalk"
 
-#: plugins/admin/users/class_userManagement.inc:755
+#: plugins/admin/users/class_userManagement.inc:759
 msgid "Edit netatalk properties"
 msgstr "Bewerk Netatalk eigenschappen"
 
-#: plugins/admin/users/class_userManagement.inc:763
+#: plugins/admin/users/class_userManagement.inc:767
 #, fuzzy
 msgid "Edit FAX properties"
 msgstr "Bewerk UNIX eigenschappen"
@@ -4133,7 +4114,7 @@ msgstr "Basis Fax nummer van deze subtree"
 
 #: plugins/admin/departments/class_domain.inc:77
 #: plugins/admin/departments/class_domain.inc:78
-#: plugins/admin/departments/class_departmentManagement.inc:187
+#: plugins/admin/departments/class_departmentManagement.inc:189
 #: plugins/admin/departments/class_dcObject.inc:77
 #: plugins/admin/departments/class_dcObject.inc:78
 #, fuzzy
@@ -4151,7 +4132,7 @@ msgstr "Afdelingen"
 msgid "Manage Departments"
 msgstr "Afdelingen"
 
-#: plugins/admin/departments/class_departmentManagement.inc:126
+#: plugins/admin/departments/class_departmentManagement.inc:128
 msgid ""
 "As soon as the tag operation has finished, you can scroll down to end of the "
 "page and    press the 'Continue' button to continue with the department "
@@ -5044,11 +5025,6 @@ msgstr "Toon groepen van gebruiker"
 #: plugins/personal/posix/posix_groups.tpl:59
 msgid "User name of which groups are shown"
 msgstr "Gebruikersnaam van wie de groepen getoond worden"
-
-#: plugins/personal/posix/trustSelect/trust-list.xml:10
-#, fuzzy
-msgid "List of systems"
-msgstr "Lijst met gebruikers"
 
 #: plugins/personal/posix/trustSelect/trust-filter.tpl:11
 msgid "Show servers"
@@ -6939,6 +6915,40 @@ msgid "Automatic"
 msgstr "automatisch"
 
 #, fuzzy
+#~ msgid "Show %s"
+#~ msgstr "Toon groepen"
+
+#, fuzzy
+#~ msgid "people"
+#~ msgstr "Toon personen"
+
+#, fuzzy
+#~ msgid "printer"
+#~ msgstr "printers"
+
+#~ msgid "Select users to add"
+#~ msgstr "Selecteer de toe te voegen gebruikers"
+
+#~ msgid "Select to see servers"
+#~ msgstr "Selecteer om servers te zien"
+
+#~ msgid "Search within subtree"
+#~ msgstr "Zoek binnen subtree"
+
+#~ msgid "Display users of department"
+#~ msgstr "Toon gebruikers van afdeling"
+
+#~ msgid "Display users matching"
+#~ msgstr "Toon overeenkomende gebruikers"
+
+#~ msgid "Regular expression for matching user names"
+#~ msgstr "Reguliere expressie voor overeenkomende gebruikersnamen"
+
+#, fuzzy
+#~ msgid "List of systems"
+#~ msgstr "Lijst met gebruikers"
+
+#, fuzzy
 #~ msgid "givenname"
 #~ msgstr "Naam"
 
@@ -7848,9 +7858,6 @@ msgstr "automatisch"
 #~ msgid "Select to see departments"
 #~ msgstr "Selecteer om afdelingen te zien"
 
-#~ msgid "Show departments"
-#~ msgstr "Toon afdelingen"
-
 #~ msgid "Select to see GOsa accounts"
 #~ msgstr "Selecteer om GOsa accounts te zien"
 
@@ -7871,9 +7878,6 @@ msgstr "automatisch"
 
 #~ msgid "Select to see printers"
 #~ msgstr "Selecteer om printers te zien"
-
-#~ msgid "Show printers"
-#~ msgstr "Toon printers"
 
 #~ msgid "Select to see phones"
 #~ msgstr "Selecteer om telefoons te zien"
