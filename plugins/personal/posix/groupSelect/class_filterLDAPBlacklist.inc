@@ -24,7 +24,6 @@ class filterLDAPBlacklist {
         }
       }
     }
-    session::un_set('filterBlacklist');
     return(array_values($entries));
   }
 }
