@@ -53,8 +53,6 @@ class baseSelector {
     if (isset($this->pathMapping[$base])) {
       $this->base= $base;
       $this->update(true);
-    } else {
-      die("Invalid base selected");
     }
   }
 

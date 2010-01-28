@@ -476,7 +476,9 @@ class listing {
     $ui= get_userinfo();
 
     // Take care of base selector
-    $this->baseSelector->update();
+    if ($this->baseMode) {
+      $this->baseSelector->update();
+    }
 
     // Save base
     $refresh= false;
