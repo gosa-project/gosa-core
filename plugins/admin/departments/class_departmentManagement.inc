@@ -110,7 +110,9 @@ class departmentManagement extends management
   // Overriden save handler - We've to take care about the department tagging here.
   protected function saveChanges()
   {
-    management::saveChanges();
+    $str = management::saveChanges();
+    if(!empty($str)) return($str);
+
   
     global $config; 
     $config->get_departments();
