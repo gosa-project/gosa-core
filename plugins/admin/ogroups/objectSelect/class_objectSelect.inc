@@ -50,8 +50,33 @@ class objectSelect extends management
 
     // Build headpage
     $headpage = new listing(get_template_path("selectObject-list.xml", true, dirname(__FILE__)));
+    $headpage->registerElementFilter("depLabel", "objectSelect::filterDepLabel");
+    $this->registerAction("open","openEntry");
     $headpage->setFilter($filter);
     parent::__construct($config, $ui, "object", $headpage);
+  }
+
+
+  // An action handler which enables to switch into deparmtment by clicking the names.
+  function openEntry($action,$entry)
+  {
+    $headpage = $this->getHeadpage();
+    $headpage->setBase(array_pop($entry));
+  }
+
+
+  // A filter which allows to open a department by clicking on the departments name.
+  static function filterDepLabel($row,$dn,$pid,$base,$objectClass, $cn)
+  {
+    $cn = $cn[0];
+    if(!in_array('gosaDepartment', $objectClass)){
+       return($cn);
+    }
+    if($dn == $base){
+      $cn =".";
+    }
+    $dn= LDAP::fix(func_get_arg(1));
+    return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$cn</a>");
   }
 
   function save()

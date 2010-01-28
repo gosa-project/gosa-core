@@ -50,7 +50,7 @@ class ogroup extends plugin
   var $orig_dn= "";
   var $orig_cn= "";
   var $orig_base= "";
-  var $group_dialog= FALSE;
+  var $objectSelect= FALSE;
   var $view_logged = FALSE;
 
   var $accessTo= array();
@@ -208,8 +208,13 @@ class ogroup extends plugin
       }
 
       /* Add objects to group */
-      if (isset($_POST['add_object_finish']) && isset($_POST['objects'])){
+      if (isset($_POST['objectSelect_save'])){
 
+        $objects = $this->objectSelect->save();
+        print_a($objects);  
+        $this->objectSelect= FALSE;
+        $this->dialog= FALSE;
+        return;
         $tmp = "";
         foreach($this->memberList as $obj){
           $tmp .= $obj['type'];
@@ -350,117 +355,19 @@ class ogroup extends plugin
 
     /* Add objects? */
     if (isset($_POST["edit_membership"])){
-      $this->group_dialog= TRUE;
+      $this->objectSelect= new objectSelect($this->config, get_userinfo());
       $this->dialog= TRUE;
     }
 
     /* Add objects finished? */
-    if (isset($_POST["add_object_finish"]) || isset($_POST["add_object_cancel"])){
-      $this->group_dialog= FALSE;
+    if (isset($_POST["objectSelect_cancel"])){
+      $this->objectSelect= FALSE;
       $this->dialog= FALSE;
     }
 
     /* Manage object add dialog */
-    if ($this->group_dialog){
-
-      /* Save data */
-      $ogfilter= session::get("ogfilter");
-      foreach( array("dselect", "regex") as $type){
-        if (isset($_POST[$type])){
-          $ogfilter[$type]= $_POST[$type];
-        }
-      }
-      if (isset($_POST['dselect'])){
-        foreach( array("accounts", "groups", "applications", "departments",
-              "servers", "workstations", "winstations", "terminals", "printers","subtrees",
-              "phones") as $type){
-
-          if (isset($_POST[$type])) {
-            $ogfilter[$type]= "checked";
-          } else {
-            $ogfilter[$type]= "";
-          }
-        }
-      }
-      if (isset($_GET['search'])){
-        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-        if ($s == "**"){
-          $s= "*";
-        }
-        $ogfilter['regex']= $s;
-      }
-      session::set("ogfilter", $ogfilter);
-      $this->reload();
-
-      /* Calculate actual groups / remove entries that are already inside... */
-      $strippedObjects= array();
-      foreach ($this->objects as $key => $value){
-        if (!isset($this->member[$key])){
-          $strippedObjects[$key]= $value;
-        }
-      }
-      $smarty->assign("objects", $this->convert_list($strippedObjects));
-
-      /* Show dialog */
-      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
-      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
-      $smarty->assign("deplist", $this->config->idepartments);
-      $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("dselect", "regex", "subtrees") as $type){
-        $smarty->assign("$type", $ogfilter[$type]);
-      }
-      $smarty->assign("hint", print_sizelimit_warning());
-      $smarty->assign("apply", apply_filter());
-
-      /* Build up checkboxes 
-       */
-      $ar = array(
-          "departments" => array(
-            "T" => msgPool::selectToView(_("departments")),
-            "C" => (isset($ogfilter['departments']) && ($ogfilter['departments'])),
-            "L" => sprintf(_("Show %s"),_("departments"))),
-          "accounts" => array(
-            "T" => msgPool::selectToView(_("people")),
-            "C" => (isset($ogfilter['accounts']) && ($ogfilter['accounts'])),
-            "L" => sprintf(_("Show %s"),_("people"))),
-          "groups"=> array(
-            "T" => msgPool::selectToView(_("groups")),
-            "C" => (isset($ogfilter['groups']) && ($ogfilter['groups'])),
-            "L" => sprintf(_("Show %s"),_("groups"))),
-          "servers"=> array(
-            "T" => msgPool::selectToView(_("servers")),
-            "C" => (isset($ogfilter['servers']) && ($ogfilter['servers'])),
-            "L" => sprintf(_("Show %s"),_("servers"))),
-          "workstations"=> array(
-            "T" => msgPool::selectToView(_("workstations")),
-            "C" => (isset($ogfilter['workstations']) && ($ogfilter['workstations'])),
-            "L" => sprintf(_("Show %s"),_("workstations"))),
-          "terminals"=> array(
-            "T" => msgPool::selectToView(_("terminals")),
-            "C" => (isset($ogfilter['terminals']) && ($ogfilter['terminals'])),
-            "L" => sprintf(_("Show %s"),_("terminals"))),
-          "printers"=> array(
-            "T" => msgPool::selectToView(_("printer")),
-            "C" => (isset($ogfilter['printers']) && ($ogfilter['printers'])),
-            "L" => sprintf(_("Show %s"),_("printers"))),
-          "phones"=> array(
-            "T" => msgPool::selectToView(_("phones")),
-            "C" => (isset($ogfilter['phones']) && ($ogfilter['phones'])),
-            "L" => sprintf(_("Show %s"),_("phones"))));
- 
-      /* Allow selecting applications if we are having a non 
-          release managed application storage */ 
-      if(!$this->IsReleaseManagementActivated()){
-        $ar["applications"] = array(
-            "T" => msgPool::selectToView(_("applications")),
-            "C" => (isset($ogfilter['applications']) && ($ogfilter['applications'])),
-            "L" => sprintf(_("Show %s"),_("applications")));
-      }
-
-      $smarty->assign("checkboxes",$ar);
-      $display= $smarty->fetch (get_template_path('ogroup_objects.tpl', TRUE, dirname(__FILE__)));
-      return ($display);
+    if ($this->objectSelect){
+      return($this->objectSelect->execute());
     }
 
     /* Bases / Departments */

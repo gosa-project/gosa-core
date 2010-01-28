@@ -2,7 +2,7 @@
 
 <list>
   <definition>
-    <departmentBrowser>true</departmentBrowser>
+    <departmentBrowser>false</departmentBrowser>
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
@@ -97,7 +97,7 @@
       <label>Name</label>
       <sortAttribute>cn</sortAttribute>
       <sortType>string</sortType>
-      <value>%{cn}</value>
+      <value>%{filter:depLabel(row,dn,pid,base,objectClass,cn)}</value>
       <export>true</export>
     </column>
 
