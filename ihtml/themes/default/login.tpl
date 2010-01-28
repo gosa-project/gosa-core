@@ -72,7 +72,7 @@
 		<div style='float:left; color:red; font-weight:bold'>
 		{$message}
 		</div>
-		<div style='float:right; text-align:right; background-color:blue'>
+		<div style='float:right; text-align:right;'>
 			<!-- Display error message on demand -->
 			  <input type='submit' name='login' value='{t}Sign in{/t}'
 				 title='{t}Click here to log in{/t}' onFocus="nextfield='login';" />
