@@ -25,6 +25,7 @@ class baseSelector {
   private $base;
   private $pid;
   private $action;
+  private $height= 500;
   private $submitButton= true;
   protected $tree;
   protected $pathMapping;
@@ -52,6 +53,12 @@ class baseSelector {
   function setSubmitButton($flag)
   {
     $this->submitButton= $flag;
+  }
+
+
+  function setHeight($value)
+  {
+    $this->height= $value;
   }
 
 
@@ -101,7 +108,7 @@ class baseSelector {
           $this->base= $new_base;
           $this->action= 'rebase';
         } else {
-          die ("Base mismatch!");
+          return false;
         }
       }
     } elseif (isset($_POST['bs_input_'.$this->pid])) {
@@ -118,7 +125,7 @@ class baseSelector {
 
     /* Skip if there's no change */
     if (($this->tree && $this->base == $last_base) && !$force) {
-      return;
+      return true;
     }
 
     $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;REBASE=".base64_encode($config->current['BASE'])."'";
@@ -133,7 +140,7 @@ class baseSelector {
                   "</script>";
 
     $selected= $this->base == $config->current['BASE']?"Selected":"";
-    $this->tree.= "<div class='treeList' style='display:none' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/ ["._("Root")."]</a><ul class='treeList'>\n";
+    $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/ ["._("Root")."]</a><ul class='treeList'>\n";
     $first= true;
     $last_indent= 2;
 
@@ -179,6 +186,7 @@ class baseSelector {
       $this->tree.= "&nbsp;<input class='center' type='image' src='images/lists/submit.png' align='middle' title='"._("Submit")."' name='submit_base_".$this->pid."' id='submit_base_".$this->pid."' alt='"._("Submit")."'>";
     }
 
+    return true;
   }
 
   function render()

@@ -1556,6 +1556,12 @@ class listing {
   }
 
 
+  function getEntries()
+  {
+    return $this->entries;
+  }
+
+
   function getType($dn)
   {
     if (isset($this->objectDnMapping[$dn])) {
