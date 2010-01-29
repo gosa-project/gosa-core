@@ -101,9 +101,9 @@ class baseSelector {
     // Analyze for base changes if needed
     $this->action= null;
     $last_base= $this->base;
-    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] == $this->pid) {
-      if (isset($_REQUEST['REBASE'])) {
-        $new_base= base64_decode($_REQUEST['REBASE']);
+    if(isset($_REQUEST['BPID']) && $_REQUEST['BPID'] == $this->pid) {
+      if (isset($_POST['bs_rebase_'.$this->pid]) && !empty($_POST['bs_rebase_'.$this->pid])) {
+        $new_base= base64_decode($_POST['bs_rebase_'.$this->pid]);
         if (isset($this->pathMapping[$new_base])) {
           $this->base= $new_base;
           $this->action= 'rebase';
@@ -132,7 +132,7 @@ class baseSelector {
       return true;
     }
 
-    $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;REBASE=".base64_encode($config->current['BASE'])."'";
+    $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($config->current['BASE'])."';  $('submit_tree_base_".$this->pid."').click();\"";
     $this->tree= "<input type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onkeydown=\"\$('bs_".$this->pid."').hide()\" onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});\$('bs_".$this->pid."').show();\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value=\"".preg_replace('/"/', '&quot;',$this->pathMapping[$this->base])."\">";
 
 
@@ -174,7 +174,7 @@ class baseSelector {
         $this->tree.= "</li>\n";
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
-      $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;REBASE=".base64_encode($base)."'";
+      $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
       $this->tree.= "<li><a$selected $link>".str_replace(' ', '&nbsp;', ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base)))."</a>";
 
       $last_indent= $indent;
@@ -191,6 +191,9 @@ class baseSelector {
     if ($this->submitButton) {
       $this->tree.= "&nbsp;<input class='center' type='image' src='images/lists/submit.png' align='middle' title='"._("Submit")."' name='submit_base_".$this->pid."' id='submit_base_".$this->pid."' alt='"._("Submit")."'>";
     }
+    $this->tree.= "<input type='submit' style='display:none' name='submit_tree_base_".$this->pid."' id='submit_tree_base_".$this->pid."'>";
+    $this->tree.= "<input type='hidden' name='bs_rebase_".$this->pid."' id='bs_rebase_".$this->pid."'>";
+    $this->tree.= "<input type='hidden' name='BPID' id='BPID' value='".$this->pid."'>";
 
     return true;
   }
@@ -209,8 +212,8 @@ class baseSelector {
 
   function getAction()
   {
-    // Do not do anything if this is not our PID, or there's even no PID available...
-    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->pid) {
+    // Do not do anything if this is not our BPID, or there's even no BPID available...
+    if(!isset($_REQUEST['BPID']) || $_REQUEST['BPID'] != $this->pid) {
       return;
     }
 

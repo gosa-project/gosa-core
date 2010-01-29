@@ -740,17 +740,6 @@ class user extends plugin
   /* Save data to object */
   function save_object()
   {
-    /* Refresh base */
-    if ($this->acl_is_moveable($this->base)){
-      if (!$this->baseSelector->update()) {
-        msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
-      }
-      if ($this->base != $this->baseSelector->getBase()) {
-        $this->base= $this->baseSelector->getBase();
-        $this->is_modified= TRUE;
-      }
-    }
-      
     if(isset($_POST['generic']) || isset($_POST['multiple_user_posted'])){
 
       /* Make a backup of the current selected base */
@@ -759,6 +748,17 @@ class user extends plugin
       /* Parents save function */
       plugin::save_object ();
 
+      /* Refresh base */
+      if ($this->acl_is_moveable($this->base)){
+        if (!$this->baseSelector->update()) {
+          msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+        }
+        if ($this->base != $this->baseSelector->getBase()) {
+          $this->base= $this->baseSelector->getBase();
+          $this->is_modified= TRUE;
+        }
+      }
+      
       /* Sync lists */
       $this->gosaLoginRestrictionWidget->save_object();
       if ($this->gosaLoginRestrictionWidget->isModified()) {

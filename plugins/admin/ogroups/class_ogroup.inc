@@ -466,17 +466,6 @@ class ogroup extends plugin
   /* Save data to object */
   function save_object()
   {
-    /* Refresh base */
-    if ($this->acl_is_moveable($this->base)){
-      if (!$this->baseSelector->update()) {
-        msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
-      }
-      if ($this->base != $this->baseSelector->getBase()) {
-        $this->base= $this->baseSelector->getBase();
-        $this->is_modified= TRUE;
-      }
-    }
-
     /* Save additional values for possible next step */
     if (isset($_POST['ogroupedit'])){
 
@@ -509,6 +498,18 @@ class ogroup extends plugin
       $base_tmp = $this->base;
       plugin::save_object();
       $this->base = $base_tmp;
+
+      /* Refresh base */
+      if ($this->acl_is_moveable($this->base)){
+        if (!$this->baseSelector->update()) {
+          msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+        }
+        if ($this->base != $this->baseSelector->getBase()) {
+          $this->base= $this->baseSelector->getBase();
+          $this->is_modified= TRUE;
+        }
+      }
+
     }
   }
 
