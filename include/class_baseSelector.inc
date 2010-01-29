@@ -113,11 +113,15 @@ class baseSelector {
       }
     } elseif (isset($_POST['bs_input_'.$this->pid])) {
 
-      // Check if base is available
-      foreach ($this->pathMapping as $key => $path) {
-        if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
-          $this->base= $key;
-          break;
+      // Take over input field base
+      if ($this->submitButton && isset($_POST['submit_base_'.$this->pid.'_x']) || !$this->submitButton) {
+
+        // Check if base is available
+        foreach ($this->pathMapping as $key => $path) {
+          if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
+            $this->base= $key;
+            break;
+          }
         }
       }
 
