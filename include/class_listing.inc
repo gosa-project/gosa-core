@@ -562,6 +562,7 @@ class listing {
         $deps= $ui->get_module_departments($this->categories);
         $this->base= $deps[0];
         $this->baseSelector->setBase($this->base);
+        session::global_set("CurrentMainBase", $this->base);
       }
       if ($action == 'BACK') {
         $deps= $ui->get_module_departments($this->categories);
@@ -569,12 +570,14 @@ class listing {
         if(in_array_ics($base, $deps)){
           $this->base= $base;
           $this->baseSelector->setBase($this->base);
+          session::global_set("CurrentMainBase", $this->base);
         }
       }
       if ($action == 'HOME') {
         $ui= get_userinfo();
         $this->base= get_base_from_people($ui->dn);
         $this->baseSelector->setBase($this->base);
+        session::global_set("CurrentMainBase", $this->base);
       }
     }
 
@@ -585,7 +588,6 @@ class listing {
 
     // Update filter and refresh entries
     $this->filter->setBase($this->base);
-    session::global_set("CurrentMainBase", $this->base);
     $this->entries= $this->filter->query();
 
     // Fix filter if querie returns NULL
