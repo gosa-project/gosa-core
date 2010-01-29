@@ -1169,13 +1169,13 @@ class plugin
     }
   }
 
-  function tag_attrs(&$at, $dn= "", $tag= "", $show= false)
-  {
-    /* Skip tagging? 
-  /*! \brief Get gosaUnitTag for the given DN */
+  /*! \brief Get gosaUnitTag for the given DN
        If this is called from departmentGeneric, we have to skip this
         tagging procedure. 
-     */
+    */
+  function tag_attrs(&$at, $dn= "", $tag= "", $show= false)
+  {
+    /* Skip tagging? */
     if($this->skipTagging){
       return;
     }
