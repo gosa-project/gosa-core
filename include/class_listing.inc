@@ -585,6 +585,7 @@ class listing {
 
     // Update filter and refresh entries
     $this->filter->setBase($this->base);
+    session::global_set("CurrentMainBase", $this->base);
     $this->entries= $this->filter->query();
 
     // Fix filter if querie returns NULL
