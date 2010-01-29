@@ -252,9 +252,7 @@ class plugin
   }
 
 
-  /*! \brief execute plugin
-
-    Generates the html output for this node
+  /*! \brief Generates the html output for this node
    */
   function execute()
   {
@@ -268,8 +266,7 @@ class plugin
     session::set('LOCK_VARS_USED_REQUEST',array());
   }
 
-  /*! \brief execute plugin
-     Removes object from parent
+  /*! \brief Removes object from parent
    */
   function remove_from_parent()
   {
@@ -307,7 +304,7 @@ class plugin
   }
 
 
-  /*! \brief   Save HTML posted data to object 
+  /*! \brief Save HTML posted data to object 
    */
   function save_object()
   {
@@ -345,7 +342,7 @@ class plugin
   }
 
 
-  /* Save data to LDAP, depending on is_account we save or delete */
+  /*! \brief Save data to LDAP, depending on is_account we save or delete */
   function save()
   {
     /* include global link_info */
@@ -440,7 +437,7 @@ class plugin
     }
   }
 
-  /* Check formular input */
+  /*! \brief Check formular input */
   function check()
   {
     $message= array();
@@ -564,14 +561,14 @@ class plugin
     }
   }
 
-  /* Indicate whether a password change is needed or not */
+  /* \brief Indicate whether a password change is needed or not */
   function password_change_needed()
   {
     return FALSE;
   }
 
 
-  /* Show header message for tab dialogs */
+  /*! \brief Show header message for tab dialogs */
   function show_enable_header($button_text, $text, $disabled= FALSE)
   {
     if (($disabled == TRUE) || (!$this->acl_is_createable())){
@@ -587,7 +584,7 @@ class plugin
   }
 
 
-  /* Show header message for tab dialogs */
+  /*! \brief Show header message for tab dialogs */
   function show_disable_header($button_text, $text, $disabled= FALSE)
   {
     if (($disabled == TRUE) || !$this->acl_is_removeable()){
@@ -603,7 +600,7 @@ class plugin
   }
 
 
-  /* Show header message for tab dialogs */
+  /*! \brief Show header message for tab dialogs */
   function show_header($button_text, $text, $disabled= FALSE)
   {
     echo "FIXME: show_header should be replaced by show_disable_header and show_enable_header<br>";
@@ -620,7 +617,7 @@ class plugin
     return($display);
   }
 
-
+  /*! \brief Executes commands after an object has been created */
   function postcreate($add_attrs= array())
   {
     /* Find postcreate entries for this class */
@@ -663,6 +660,7 @@ class plugin
     }
   }
 
+  /*! \brief Execute commands after an object has been modified */
   function postmodify($add_attrs= array())
   {
     /* Find postcreate entries for this class */
@@ -704,6 +702,7 @@ class plugin
     }
   }
 
+  /*! \brief Executes a command after an object has been removed */
   function postremove($add_attrs= array())
   {
     /* Find postremove entries for this class */
@@ -779,7 +778,7 @@ class plugin
   }
 
 
-  /* Create unique DN */
+  /*! \brief Create unique DN */
   function create_unique_dn($attribute, $base)
   {
     $ldap= $this->config->get_ldap_link();
@@ -947,14 +946,18 @@ class plugin
 
 
 
-  /*! \brief  Move a given ldap object indentified by $src_dn   \
-               to the given destination $dst_dn   \
-              * Ensure that all references are updated (ogroups) \
-              * Update ACLs   \
-              * Update accessTo   \
-      @param  String  The source dn.
-      @param  String  The destination dn.
-      @return Boolean TRUE on success else FALSE.
+  /*! \brief  Rename/Move a given src_dn to the given dest_dn
+   *
+   * Move a given ldap object indentified by $src_dn to the
+   * given destination $dst_dn
+   *
+   * - Ensure that all references are updated (ogroups)
+   * - Update ACLs   
+   * - Update accessTo
+   *
+   * \param  string  'src_dn' the source DN.
+   * \param  string  'dst_dn' the destination DN.
+   * \return boolean TRUE on success else FALSE.
    */
   function rename($src_dn, $dst_dn)
   {
@@ -1041,7 +1044,7 @@ class plugin
   }
 
 
-
+ 
   function move($src_dn, $dst_dn)
   {
     /* Do not copy if only upper- lowercase has changed */
@@ -1082,7 +1085,7 @@ class plugin
   }
 
 
-  /* Move/Rename complete trees */
+  /* \brief Move/Rename complete trees */
   function recursive_move($src_dn, $dst_dn)
   {
     /* Check if the destination entry exists */
@@ -1132,6 +1135,7 @@ class plugin
   }
 
 
+  /*! \brief Prepare for Copy & Paste */
   function PrepareForCopyPaste($source)
   {
     $todo = $this->attributes;
@@ -1168,6 +1172,7 @@ class plugin
   function tag_attrs(&$at, $dn= "", $tag= "", $show= false)
   {
     /* Skip tagging? 
+  /*! \brief Get gosaUnitTag for the given DN */
        If this is called from departmentGeneric, we have to skip this
         tagging procedure. 
      */
@@ -1211,7 +1216,8 @@ class plugin
         }
       }
     }
-  
+
+  /*! \brief Add unit tag */ 
     /* Remove tags that may already be here... */
     remove_objectClass("gosaAdministrativeUnitTag", $at);
     if (isset($at['gosaUnitTag'])){
@@ -1235,7 +1241,11 @@ class plugin
   }
 
 
-  /* Add possibility to stop remove process */
+  /*! \brief Test for removability of the object
+   *
+   * Allows testing of conditions for removal of object. If removal should be aborted
+   * the function needs to remove an error message.
+   * */
   function allow_remove()
   {
     $reason= "";
@@ -1243,7 +1253,7 @@ class plugin
   }
 
 
-  /* Create a snapshot of the current object */
+  /*! \brief Create a snapshot of the current object */
   function create_snapshot($type= "snapshot", $description= array())
   {
 
@@ -1335,6 +1345,7 @@ class plugin
     }
   }
 
+  /*! \brief Remove a snapshot */
   function remove_snapshot($dn)
   {
     $ui       = get_userinfo();
@@ -1350,16 +1361,19 @@ class plugin
   }
 
 
-  /* returns true if snapshots are enabled, and false if it is disalbed
-     There will also be some errors psoted, if the configuration failed */
+  /*! \brief Test if snapshotting is enabled
+   *
+   * Test weither snapshotting is enabled or not. There will also be some errors posted,
+   * if the configuration failed 
+   * \return TRUE if snapshots are enabled, and FALSE if it is disabled
+   */
   function snapshotEnabled()
   {
     return $this->config->snapshotEnabled();
   }
 
 
-  /* Return available snapshots for the given base 
-   */
+  /* \brief Return available snapshots for the given base */
   function Available_SnapsShots($dn,$raw = false)
   {
     if(!$this->snapshotEnabled()) return(array());
@@ -1485,7 +1499,7 @@ class plugin
   } 
 
 
-  /* Restore selected snapshot */
+  /* \brief Restore selected snapshot */
   function restore_snapshot($dn)
   {
     if(!$this->snapshotEnabled()) return(array());
@@ -1619,6 +1633,7 @@ class plugin
   }
 
 
+  /*! \brief Return plugin informations for acl handling */
   static function plInfo()
   {
     return array();
@@ -1692,11 +1707,12 @@ class plugin
   }
 
 
-  /*! \brief    Returns a list of all available departments for this object.  
-                If this object is new, all departments we are allowed to create a new user in are returned.
-                If this is an existing object, return all deps. we are allowed to move tis object too.
-
-      @return   Array [dn] => "..name"  // All deps. we are allowed to act on.
+  /*! \brief Returns a list of all available departments for this object.
+   * 
+   * If this object is new, all departments we are allowed to create a new user in
+   * are returned. If this is an existing object, return all deps. 
+   * We are allowed to move tis object too.
+   * \return array [dn] => "..name"  // All deps. we are allowed to act on.
   */
   function get_allowed_bases()
   {
@@ -1731,8 +1747,8 @@ class plugin
 
 
   /* This function updates ACL settings if $old_dn was used.
-   *  $old_dn   specifies the actually used dn
-   *  $new_dn   specifies the destiantion dn
+   *  \param string 'old_dn' specifies the actually used dn
+   *  \param string 'new_dn' specifies the destiantion dn
    */
   function update_acls($old_dn,$new_dn,$output_changes = FALSE)
   {
@@ -1816,9 +1832,10 @@ class plugin
 
   
 
-  /* This function enables the entry Serial ID check.
-   * If an entry was edited while we have edited the entry too,
-   *  an error message will be shown. 
+  /*! \brief Enable the Serial ID check
+   *
+   * This function enables the entry Serial ID check.  If an entry was edited while
+   * we have edited the entry too, an error message will be shown. 
    * To configure this check correctly read the FAQ.
    */    
   function enable_CSN_check()
@@ -1830,7 +1847,7 @@ class plugin
 
   /*! \brief  Prepares the plugin to be used for multiple edit
    *          Update plugin attributes with given array of attribtues.
-   *  @param  array   Array with attributes that must be updated.
+   *  \param  array   Array with attributes that must be updated.
    */
   function init_multiple_support($attrs,$all)
   {
@@ -1861,7 +1878,7 @@ class plugin
 
 
   /*! \brief  Returns all values that have been modfied in multiple edit mode.
-      @return array Cotaining all mdofied values. 
+      \return array Cotaining all modified values. 
    */
   function get_multi_edit_values()
   {
@@ -1885,10 +1902,7 @@ class plugin
   }
 
 
-  /*! \brief execute plugin
-
-    Generates the html output for this node
-   */
+  /*! \brief Generates the html output for this node for multi edit*/
   function multiple_execute()
   {
     /* This one is empty currently. Fabian - please fill in the docu code */
@@ -1904,7 +1918,7 @@ class plugin
   }
 
 
-  /*! \brief   Save HTML posted data to object for multiple edit
+  /*! \brief Save HTML posted data to object for multiple edit
    */
   function multiple_save_object()
   {
@@ -1943,7 +1957,7 @@ class plugin
   }
 
 
-  /*! \brief  Returns all attributes of this plugin, 
+  /*! \brief Returns all attributes of this plugin, 
                to be able to detect multiple used attributes 
                in multi_plugg::detect_multiple_used_attributes().
       @return array Attributes required for intialization of multi_plug
@@ -1956,7 +1970,7 @@ class plugin
 
 
   /*! \brief  Check given values in multiple edit
-      @return array Error messages
+      \return array Error messages
    */
   function multiple_check()
   {
@@ -1966,7 +1980,7 @@ class plugin
 
 
   /*! \brief  Returns the snapshot header part for "Actions" menu in management dialogs 
-      @param  $layer_menu  
+      \param  $layer_menu  
    */   
   function get_snapshot_header($base,$category)
   {
