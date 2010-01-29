@@ -84,7 +84,7 @@ class management
   protected $actions = array();
 
   // Attributes managed by this plugin, can be used in post events;
-  protected $attributes = array(); 
+  public $attributes = array(); 
 
   function  __construct(&$config,$ui,$plugname, $headpage)
   {
