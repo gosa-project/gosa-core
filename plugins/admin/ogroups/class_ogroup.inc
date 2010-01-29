@@ -42,7 +42,6 @@ class ogroup extends plugin
   var $description= "";
   var $base= "";
   var $gosaGroupObjects= "";
-  var $department= "";
   var $objects= array();
   var $objcache= array();
   var $memberList= array();
@@ -415,7 +414,6 @@ class ogroup extends plugin
 
     /* Assign variables */
     $smarty->assign("base", $this->baseSelector->render());
-    $smarty->assign("department", $this->department);
     $smarty->assign("members", $this->convert_list($this->memberList));
 
     /* Objects have to be tuned... */
