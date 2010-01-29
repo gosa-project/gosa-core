@@ -286,16 +286,6 @@ class ogroup extends plugin
       $smarty->assign($name."ACL",$this->getacl($name));
     }
 
-    /* Base select dialog */
-    $once = true;
-    foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once && $this->acl_is_moveable()){
-        $once = false;
-        $this->dialog = new baseSelectDialog($this->config,$this,$this->get_allowed_bases());
-        $this->dialog->setCurrentBase($this->base);
-      }
-    }
-
     /***********
      * Trusts 
      ***********/
@@ -513,7 +503,12 @@ class ogroup extends plugin
         Ende Trust account
        ******/
 
+      /* Create a base backup and reset the
+         base directly after calling plugin::save_object();
+         Base will be set seperatly a few lines below */
+      $base_tmp = $this->base;
       plugin::save_object();
+      $this->base = $base_tmp;
     }
   }
 

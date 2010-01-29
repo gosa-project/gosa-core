@@ -22,42 +22,43 @@
 
 class department extends plugin
 {
-	/* department attributes */
-	var $ou= "";
-	var $description= "";
-	var $base= "";
-	var $st= "";
-	var $l= "";
-	var $postalAddress= "";
-	var $businessCategory= "";
-	var $telephoneNumber= "";
-	var $facsimileTelephoneNumber= "";
-	var $is_administrational_unit= false;
-	var $gosaUnitTag= "";
+  /* department attributes */
+  var $ou= "";
+  var $description= "";
+  var $base= "";
+  var $st= "";
+  var $l= "";
+  var $postalAddress= "";
+  var $businessCategory= "";
+  var $telephoneNumber= "";
+  var $facsimileTelephoneNumber= "";
+  var $is_administrational_unit= false;
+  var $gosaUnitTag= "";
   var $view_logged = FALSE;
 
   var $type ="organizationalUnit";
   var $namingAttr = "ou";
 
-	/* Headpage attributes */
-	var $last_dep_sorting= "invalid";
-	var $departments= array();
+  /* Headpage attributes */
+  var $last_dep_sorting= "invalid";
+  var $departments= array();
   var $must_be_tagged = false;
 
-	/* attribute list for save action */
-	var $attributes= array("ou", "description", "businessCategory", "st", "l", "postalAddress",
+  /* attribute list for save action */
+  var $attributes= array("ou", "description", "businessCategory", "st", "l", "postalAddress",
 			"telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag");
 
   /* Do not append the structural object classes here, they are added dynamically in the constructor */
-	var $objectclasses= array("top", "gosaDepartment");
+  var $objectclasses= array("top", "gosaDepartment");
   var $structuralOC = array("organizationalUnit");
 
   var $initially_was_tagged = false;
   var $orig_base = "";
   var $orig_ou = "";
+  var $baseSelector;
 
-	function department (&$config, $dn)
-	{
+  function department (&$config, $dn)
+  {
     /* Add the default structural obejct class 'locality' if this is a new entry
      */
     $ldap = $config->get_ldap_link();
@@ -80,11 +81,11 @@ class department extends plugin
     }
     $this->objectclasses = array_unique($this->objectclasses);
 
-		plugin::plugin($config, $dn);
-		$this->is_account= TRUE;
-		$this->ui= get_userinfo();
-		$this->dn= $dn;
-		$this->orig_dn= $dn;
+    plugin::plugin($config, $dn);
+    $this->is_account= TRUE;
+    $this->ui= get_userinfo();
+    $this->dn= $dn;
+    $this->orig_dn= $dn;
 
     /* Save current naming attribuet 
      */
@@ -92,28 +93,34 @@ class department extends plugin
     $orig_nA = "orig_".$nA;
     $this->$orig_nA = $this->$nA;
 
-		$this->config= $config;
+    $this->config= $config;
 
-		/* Set base */
-		if ($this->dn == "new"){
-			$ui= get_userinfo();
-			if(session::is_set('CurrentMainBase')){
-				$this->base = session::get('CurrentMainBase');
-			}else{
-				$this->base= dn2base($ui->dn);
-			}
-		} else {
-			$this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
-		}
+    /* Set base */
+    if ($this->dn == "new"){
+	    $ui= get_userinfo();
+	    if(session::is_set('CurrentMainBase')){
+		    $this->base = session::get('CurrentMainBase');
+	    }else{
+		    $this->base= dn2base($ui->dn);
+	    }
+    } else {
+	    $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
+    }
 
     $this->orig_base = $this->base;
 
-		/* Is administrational Unit? */
-		if ($dn != "new" && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])){
-			$this->is_administrational_unit= true;
-      $this->initially_was_tagged = true;
-		}
-	}
+    /* Is administrational Unit? */
+    if ($dn != "new" && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])){
+	    $this->is_administrational_unit= true;
+	    $this->initially_was_tagged = true;
+    }
+
+    /* Instanciate base selector */
+    $this->baseSelector= new baseSelector($this->get_allowed_bases(), $this->base);
+    $this->baseSelector->setSubmitButton(false);
+    $this->baseSelector->setHeight(300);
+    $this->baseSelector->update(true);
+  }
 
 	function execute()
 	{
@@ -130,6 +137,7 @@ class department extends plugin
 		$this->config->get_departments($this->dn);
 		$this->config->make_idepartments();
 		$smarty= get_smarty();
+                $smarty->assign("usePrototype", "true");
 
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $translation){
@@ -145,56 +153,25 @@ class department extends plugin
       $smarty->assign($nA,$this->getacl($this->namingAttr,TRUE));
     }
 
-		/* Base select dialog */
-		$once = true;
-		foreach($_POST as $name => $value){
-			if((preg_match("/^chooseBase/",$name) && $once) && ($this->acl_is_moveable())){
-				$once = false;
-				$this->dialog = new baseSelectDialog($this->config,$this,$this->get_allowed_bases());
-				$this->dialog->setCurrentBase($this->base);
-			}
-		}
-
-		/* Dialog handling */
-		if(is_object($this->dialog)){
-			/* Must be called before save_object */
-			$this->dialog->save_object();
-
-			if($this->dialog->isClosed()){
-				$this->dialog = false;
-			}elseif($this->dialog->isSelected()){
-
-        /* A new base was selected, check if it is a valid one */
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$this->dialog->isSelected()])){
-          $this->base = $this->dialog->isSelected();
-        }
-  
-				$this->dialog= false;
-			}else{
-				return($this->dialog->execute());
-			}
-		}
-
-		/* Hide all departments, that are subtrees of this department */
+    /* Hide all departments, that are subtrees of this department */
     $bases = $this->get_allowed_bases();
-		if(($this->dn == "new")||($this->dn == "")){
-			$tmp = $bases;
-		}else{
-			$tmp	= array();	
-			foreach($bases as $dn=>$base){
-				/* Only attach departments which are not a subtree of this one */
-        if(!preg_match("/".preg_quote($this->dn)."/",$dn)){
-					$tmp[$dn]=$base;
-				}
-			}
-		}
-		$smarty->assign("bases", $tmp);
+    if(($this->dn == "new")||($this->dn == "")){
+	    $tmp = $bases;
+    }else{
+	    $tmp	= array();	
+	    foreach($bases as $dn=>$base){
+		    /* Only attach departments which are not a subtree of this one */
+		    if(!preg_match("/".preg_quote($this->dn)."/",$dn)){
+			    $tmp[$dn]=$base;
+		    }
+	    }
+    }
+    $this->baseSelector->setBases($tmp);
 
-		foreach ($this->attributes as $val){
-			$smarty->assign("$val", $this->$val);
-		}
-		$smarty->assign("base_select", $this->base);
+    foreach ($this->attributes as $val){
+      $smarty->assign("$val", $this->$val);
+    }
+    $smarty->assign("base", $this->baseSelector->render());
 
     /* Set admin unit flag */
     if ($this->is_administrational_unit) {
@@ -252,11 +229,22 @@ class department extends plugin
 
 	/* Save data to object */
 	function save_object()
-	{
-    if (isset($_POST['dep_generic_posted'])){
+	{	
+		/* Refresh base */
+		if ($this->acl_is_moveable($this->base)){
+			if (!$this->baseSelector->update()) {
+				msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+			}
+			if ($this->base != $this->baseSelector->getBase()) {
+				$this->base= $this->baseSelector->getBase();
+				$this->is_modified= TRUE;
+			}
+		}
 
-      $nA = $this->namingAttr;
-      $old_nA = $this->$nA;
+		if (isset($_POST['dep_generic_posted'])){
+
+			$nA = $this->namingAttr;
+			$old_nA = $this->$nA;
 
 
 
@@ -266,14 +254,6 @@ class department extends plugin
       $base_tmp = $this->base;
       plugin::save_object();
       $this->base = $base_tmp;
-
-      /* Set new base if allowed */
-      $tmp = $this->get_allowed_bases();
-      if(isset($_POST['base'])){
-        if(isset($tmp[$_POST['base']])){
-          $this->base= $_POST['base'];
-        }
-      }
 
       /* Save tagging flag */
       if ($this->acl_is_writeable("gosaUnitTag")){

@@ -308,16 +308,6 @@ class user extends plugin
       return($str);
     }
 
-    /* Base select dialog */
-    $once = true;
-    foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once && $this->acl_is_writeable("base")){
-        $once = false;
-        $this->dialog = new baseSelectDialog($this->config,$this,$this->allowedBasesToMoveTo());
-        $this->dialog->setCurrentBase($this->base);
-      }
-    }
-
     /* Password configure dialog handling */
     if(is_object($this->pwObject) && $this->pwObject->display){
       $output= $this->pwObject->configure();

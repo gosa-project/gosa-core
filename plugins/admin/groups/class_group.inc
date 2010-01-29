@@ -291,17 +291,6 @@ class group extends plugin
       $this->dialog= FALSE;
     }
 
-    /* Base select dialog */
-    $once = true;
-    foreach($_POST as $name => $value){
-      if((preg_match("/^chooseBase/",$name) && $once) && $this->acl_is_writeable("base")){
-          
-        $once = false;
-        $this->dialog = new baseSelectDialog($this->config,$this,$this->get_allowed_bases());
-        $this->dialog->setCurrentBase($this->base);
-      }
-    }
-
     /* Dialog handling */
     if(is_object($this->dialog)){
       /* Must be called before save_object */

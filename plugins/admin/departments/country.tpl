@@ -28,13 +28,7 @@
         <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
         <td>
 {render acl=$baseACL}
-         <select id="base" size="1" name="base" title="{t}Choose subtree to place department in{/t}"> 
-          {html_options options=$bases selected=$base_select}
-         </select>
-{/render}
-
-{render acl=$baseACL disable_picture='images/lists/folder_grey.png'}
-        <input type="image" name="chooseBase" src="images/lists/folder.png" class="center" title="{t}Select a base{/t}">
+          {$base}
 {/render}
 	  </td>
 	 </tr>
