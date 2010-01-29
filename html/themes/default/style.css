@@ -2043,10 +2043,12 @@ a.treeListSelected {
 a.treeList:hover, a.treeListSelected:hover {
     background-color: #DDD;
     padding: 2px;
+    cursor:pointer;
 }
 
 ul.treeList a {
     padding: 2px;
+    cursor:pointer;
 }
 
 ul.treeList li {
