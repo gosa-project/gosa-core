@@ -573,7 +573,7 @@ class listing {
       }
       if ($action == 'HOME') {
         $ui= get_userinfo();
-        $this->base= $this->filter->getObjectBase($ui->dn);
+        $this->base= get_base_from_people($ui->dn);
         $this->baseSelector->setBase($this->base);
       }
     }
@@ -978,7 +978,7 @@ class listing {
     $listhead ="";
 
     /* Check if we are in users home  department */
-    if(!count($deps) || $this->filter->base == $this->filter->getObjectBase($ui->dn)){
+    if(!count($deps) || $this->filter->base == get_base_from_people($ui->dn)){
       $enableHome = false;
     }
 
