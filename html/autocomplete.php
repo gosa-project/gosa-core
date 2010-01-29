@@ -39,7 +39,7 @@ if (isset($_GET['type']) && $_GET['type'] == "base") {
   if (session::is_set("pathMapping") && count($_POST) == 1) {
     $res= "";
     $pathMapping= session::get("pathMapping");
-    $search= current($_POST);
+    $search= preg_replace('/&quot;/', '"', current($_POST));
     foreach ($pathMapping as $key => $value) {
       if (mb_stristr($value, $search) !== false) {
         $res.= "<li>$value</li>";

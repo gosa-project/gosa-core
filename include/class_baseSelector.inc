@@ -133,7 +133,7 @@ class baseSelector {
     }
 
     $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;REBASE=".base64_encode($config->current['BASE'])."'";
-    $this->tree= "<input type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onkeydown=\"\$('bs_".$this->pid."').hide()\" onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});\$('bs_".$this->pid."').show();\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value=\"".htmlentities($this->pathMapping[$this->base])."\">";
+    $this->tree= "<input type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onkeydown=\"\$('bs_".$this->pid."').hide()\" onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});\$('bs_".$this->pid."').show();\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value=\"".preg_replace('/"/', '&quot;',$this->pathMapping[$this->base])."\">";
 
 
     // Autocompleter
