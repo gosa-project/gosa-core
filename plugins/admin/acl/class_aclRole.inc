@@ -54,6 +54,7 @@ class aclrole extends acl
   var $orig_dn;
   var $orig_base;
   var $base ="";
+  var $baseSelector;
 
   function aclrole (&$config,  $dn= NULL)
   {
@@ -141,6 +142,12 @@ class aclrole extends acl
     $this->orig_base = $this->base;
     $this->orig_dn = $this->dn;
     $this->orig_cn = $this->cn;
+
+    /* Instanciate base selector */
+    $this->baseSelector= new baseSelector($this->get_allowed_bases(), $this->base);
+    $this->baseSelector->setSubmitButton(false);
+    $this->baseSelector->setHeight(300);
+    $this->baseSelector->update(true);
   }
 
 
@@ -148,36 +155,6 @@ class aclrole extends acl
   {
     /* Call parent execute */
     plugin::execute();
-
-    /* Base select dialog */
-    $once = true;
-    foreach($_POST as $name => $value){
-      if((preg_match("/^chooseBase/",$name) && $once) && ($this->acl_is_moveable())){
-        $once = false;
-        $this->dialog = new baseSelectDialog($this->config,$this,$this->get_allowed_bases());
-        $this->dialog->setCurrentBase($this->base);
-      }
-    }
-
-    /* Dialog handling */
-    if(is_object($this->dialog)){
-      /* Must be called before save_object */
-      $this->dialog->save_object();
-
-      if($this->dialog->isClosed()){
-        $this->dialog = false;
-      }elseif($this->dialog->isSelected()){
-
-        /* Check if selected base is valid */
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$this->dialog->isSelected()])){
-          $this->base = $this->dialog->isSelected();
-        }
-        $this->dialog= false;
-      }else{
-        return($this->dialog->execute());
-      }
-    }
 
     $tmp= session::get('plist');
     $plist= $tmp->info;
@@ -362,9 +339,9 @@ class aclrole extends acl
 
     /* Create templating instance */
     $smarty= get_smarty();
+    $smarty->assign("usePrototype", "true");
 
-    $smarty->assign("bases", $this->get_allowed_bases());
-    $smarty->assign("base_select", $this->base);
+    $smarty->assign("base", $this->baseSelector->render());
 
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $translation){
@@ -697,11 +674,14 @@ class aclrole extends acl
     plugin::save_object();
     if(isset($_POST['acl_role_posted'])){
      
-      /* Get base selection */
-      if(isset($_POST['base'])){
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$_POST['base']])){
-          $this->base = $_POST['base'];
+      /* Refresh base */
+      if ($this->acl_is_moveable($this->base)){
+        if (!$this->baseSelector->update()) {
+          msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+        }
+        if ($this->base != $this->baseSelector->getBase()) {
+          $this->base= $this->baseSelector->getBase();
+          $this->is_modified= TRUE;
         }
       }
     }
