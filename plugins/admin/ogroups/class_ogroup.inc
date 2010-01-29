@@ -58,6 +58,7 @@ class ogroup extends plugin
   var $trustSelect = FALSE;
 
   var $was_trust_account= FALSE;
+  var $baseSelector;
 
   /* Already assigned Workstations. Will be hidden in selection. 
    */
@@ -178,6 +179,12 @@ class ogroup extends plugin
       session::set("sysfilter", $sysfilter);
     }
 
+    /* Instanciate base selector */
+    $this->baseSelector= new baseSelector($this->get_allowed_bases(), $this->base);
+    $this->baseSelector->setSubmitButton(false);
+    $this->baseSelector->setHeight(300);
+    $this->baseSelector->update(true);
+
     $this->reload();
   }
 
@@ -272,6 +279,7 @@ class ogroup extends plugin
 
     /* Load templating engine */
     $smarty= get_smarty();
+    $smarty->assign("usePrototype", "true");
 
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $translation){
@@ -416,8 +424,7 @@ class ogroup extends plugin
     }
 
     /* Assign variables */
-    $smarty->assign("bases", $this->get_allowed_bases());
-    $smarty->assign("base_select", $this->base);
+    $smarty->assign("base", $this->baseSelector->render());
     $smarty->assign("department", $this->department);
     $smarty->assign("members", $this->convert_list($this->memberList));
 
@@ -469,6 +476,17 @@ class ogroup extends plugin
   /* Save data to object */
   function save_object()
   {
+    /* Refresh base */
+    if ($this->acl_is_moveable($this->base)){
+      if (!$this->baseSelector->update()) {
+        msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+      }
+      if ($this->base != $this->baseSelector->getBase()) {
+        $this->base= $this->baseSelector->getBase();
+        $this->is_modified= TRUE;
+      }
+    }
+
     /* Save additional values for possible next step */
     if (isset($_POST['ogroupedit'])){
 
@@ -495,20 +513,7 @@ class ogroup extends plugin
         Ende Trust account
        ******/
 
-      /* Create a base backup and reset the
-         base directly after calling plugin::save_object();
-         Base will be set seperatly a few lines below */
-      $base_tmp = $this->base;
       plugin::save_object();
-      $this->base = $base_tmp;
-
-      /* Save base, since this is no LDAP attribute */
-      $tmp = $this->get_allowed_bases();
-      if(isset($_POST['base'])){
-        if(isset($tmp[$_POST['base']])){
-          $this->base= $_POST['base'];
-        }
-      }
     }
   }
 

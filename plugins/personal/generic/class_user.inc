@@ -66,6 +66,7 @@ class user extends plugin
   var $use_dob= "0";
   var $gender="0";
   var $preferredLanguage="0";
+  var $baseSelector;
 
   var $jpegPhoto= "*removed*";
   var $photoData= "";
@@ -250,6 +251,10 @@ class user extends plugin
     $this->gosaLoginRestrictionWidget->setHeight("70px");
  
     $this->orig_base = $this->base;
+    $this->baseSelector= new baseSelector($this->allowedBasesToMoveTo(), $this->base);
+    $this->baseSelector->setSubmitButton(false);
+    $this->baseSelector->setHeight(300);
+    $this->baseSelector->update(true);
   }
 
 
@@ -612,7 +617,6 @@ class user extends plugin
     $smarty->assign("pwmode_select", $this->pw_storage);
     $smarty->assign("pw_configurable", $is_configurable);
     $smarty->assign("passwordStorageACL", $this->getacl("userPassword",(!is_object($this->parent) && !session::is_set('edit'))));
-    $smarty->assign("base_select",      $this->base);
 
     if(!session::is_set('edit')){
       $smarty->assign("CertificatesACL","");
@@ -624,8 +628,7 @@ class user extends plugin
     $smarty->assign("userPicture_is_readable",   $this->acl_is_readable("userPicture",(!is_object($this->parent) && !session::is_set('edit'))));
 
     /* Create base acls */
-    $tmp = @$this->allowedBasesToMoveTo();
-    $smarty->assign("bases", $tmp);
+    $smarty->assign("base", $this->baseSelector->render());
 
     /* Save government mode attributes */
     if($this->governmentmode){
@@ -747,6 +750,17 @@ class user extends plugin
   /* Save data to object */
   function save_object()
   {
+    /* Refresh base */
+    if ($this->acl_is_moveable($this->base)){
+      if (!$this->baseSelector->update()) {
+        msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+      }
+      if ($this->base != $this->baseSelector->getBase()) {
+        $this->base= $this->baseSelector->getBase();
+        $this->is_modified= TRUE;
+      }
+    }
+      
     if(isset($_POST['generic']) || isset($_POST['multiple_user_posted'])){
 
       /* Make a backup of the current selected base */
@@ -778,23 +792,6 @@ class user extends plugin
       if ($this->is_template){
         $this->uid= strtolower($this->sn);
         $this->givenName= $this->sn;
-      }
-
-      /* Save base - its no no LDAP attribute */
-      if (isset($_POST['base'])){
-        $base= get_post('base');
-        if ($base != $this->base){
-          $tmp = $this->get_allowed_bases();
-          if(isset($tmp[$base])){
-            if ($base != $this->base){
-              $this->is_modified= TRUE;
-            }
-            $this->base= $base;
-          }else{
-            $this->base = $base_tmp;
-            msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
-          }
-        }
       }
 
       /* Get pw_storage mode */
@@ -1700,8 +1697,15 @@ class user extends plugin
         }
       }
     }
-    if(isset($_POST['base'])){
-      $this->base = get_post('base');
+
+    /* Refresh base */
+    if ($this->acl_is_moveable($this->base)){
+      if (!$this->baseSelector->update()) {
+        msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+      }
+      if ($this->base != $this->baseSelector->getBase()) {
+        $this->base= $this->baseSelector->getBase();
+      }
     }
 
     if(isset($_POST['user_mulitple_edit'])){

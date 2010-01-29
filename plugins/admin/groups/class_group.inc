@@ -58,6 +58,7 @@ class group extends plugin
   var $dnMapping= array();
   var $view_logged = FALSE;
   var $allowGroupsWithSameNameInOtherSubtrees = true;
+  var $baseSelector;
 
   /* Trustmodel/AccessTo 
    */
@@ -224,6 +225,13 @@ class group extends plugin
 
     /* This is always an account */
     $this->is_account= TRUE;
+
+    /* Instanciate base selector */
+    $this->baseSelector= new baseSelector($this->get_allowed_bases(), $this->base);
+    $this->baseSelector->setSubmitButton(false);
+    $this->baseSelector->setHeight(300);
+    $this->baseSelector->update(true);
+
     $this->reload(TRUE);
   }
 
@@ -372,6 +380,8 @@ class group extends plugin
     }
 
     $smarty= get_smarty();
+    $smarty->assign("usePrototype", "true");
+
     if($this->config->search("nagiosaccount", "CLASS",array('menu'))){
       $smarty->assign("nagios",true);
     }else{
@@ -389,8 +399,8 @@ class group extends plugin
       return($this->userSelect->execute());
     }
 
-    $smarty->assign("bases", $this->get_allowed_bases());
-    $smarty->assign("base_select", $this->base);
+    /* Create base acls */
+    $smarty->assign("base", $this->baseSelector->render());
 
     $domains= array();
     foreach($this->config->data['SERVERS']['SAMBA'] as $name => $content){
@@ -738,6 +748,17 @@ class group extends plugin
   /* Save data to object */
   function save_object()
   {
+    /* Refresh base */
+    if ($this->acl_is_moveable($this->base)){
+      if (!$this->baseSelector->update()) {
+        msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+      }
+      if ($this->base != $this->baseSelector->getBase()) {
+        $this->base= $this->baseSelector->getBase();
+        $this->is_modified= TRUE;
+      }
+    }
+
     /* Save additional values for possible next step */
     if (isset($_POST['groupedit'])){
 
@@ -753,14 +774,6 @@ class group extends plugin
       /* Only reset sambagroup flag if we are able to write this flag */
       if($this->acl_is_writeable("sambaGroupType")){
         $this->smbgroup = 0;
-      }
-
-      /* Get base selection */
-      if(isset($_POST['base'])){
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$_POST['base']])){
-          $this->base = $_POST['base'];
-        }
       }
 
       foreach (array(
@@ -1212,11 +1225,14 @@ class group extends plugin
         }
       }
 
-      /* Get base selection */
-      if(isset($_POST['base'])){
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$_POST['base']])){
-          $this->base = $_POST['base'];
+      /* Refresh base */
+      if ($this->acl_is_moveable($this->base)){
+        if (!$this->baseSelector->update()) {
+          msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
+        }
+        if ($this->base != $this->baseSelector->getBase()) {
+          $this->base= $this->baseSelector->getBase();
+          $this->is_modified= TRUE;
         }
       }
 

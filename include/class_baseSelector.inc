@@ -139,9 +139,11 @@ class baseSelector {
     // Autocompleter
     $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
                   "<script type='text/javascript'>".
-                  "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 'autocomplete.php?type=base', { minChars: 3, frequency: 0.5 });".
-                  "$('bs_input_".$this->pid."').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });".
-                  "</script>";
+                  "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 'autocomplete.php?type=base', { minChars: 3, frequency: 0.5 });";
+    if ($this->submitButton) {
+      $this->tree.= "$('bs_input_".$this->pid."').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
+    }
+    $this->tree.= "</script>";
 
     $selected= $this->base == $config->current['BASE']?"Selected":"";
     $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/ ["._("Root")."]</a><ul class='treeList'>\n";
