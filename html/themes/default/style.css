@@ -734,6 +734,7 @@ div.contentboxh {
 	border-bottom-width:0px;
 	height:26px;
 	vertical-align:middle;
+        width:100%;
 }
 
 p.contentboxh {
@@ -748,6 +749,7 @@ div.contentboxb {
 	border:1px solid #b0b0b0;
 	border-top-width:0px;
 	vertical-align:middle;
+        width:100%;
 }
 
 p.contentboxb {
@@ -1933,13 +1935,13 @@ div.listContainer {
 	max-width:500px;
 }
 
-td.nlistFooter {
+div.nlistFooter {
 	background-color:#E5E5E5;
 	border-left:1px solid #C0C0C0;
 	border-right:1px solid #C0C0C0;
 	border-bottom:1px solid #C0C0C0;
-	padding:3px;
-	height:16px;
+	padding:0;
+        width:100%;
 }
 
 /* Sortable Lists */

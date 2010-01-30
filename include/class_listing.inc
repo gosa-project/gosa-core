@@ -284,13 +284,8 @@ class listing {
       $height= $this->height;
     }
     
-    $result.= "<table cellpadding='0' cellspacing='0' border='0'><tr><td><div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;border-right:1px solid #B0B0B0;width:700px;min-height:".($height+25)."px;'>\n";
-
-    $height= "";
-    if ($switch){
-      $height= "height:100%;";
-    }
-    $result.= "<table summary='$this->headline' style='${height}width:100%; table-layout:fixed;' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
+    $result.= "<div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;border-right:1px solid #B0B0B0;width:100%;min-height:".($height+25)."px;'>\n";
+    $result.= "<table summary='$this->headline' style='width:100%; table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
     $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
@@ -410,11 +405,11 @@ class listing {
     }
 
     // Close list body
-    $result.= "</tbody></table></div></td></tr>";
+    $result.= "</tbody></table></div>";
 
     // Add the footer if requested
     if ($this->showFooter) {
-      $result.= "<tr><td class='nlistFooter'>";
+      $result.= "<div class='nlistFooter'><div style='padding:3px'>";
 
       foreach ($this->objectTypes as $objectType) {
         if (isset($this->objectTypeCount[$objectType['label']])) {
@@ -423,11 +418,10 @@ class listing {
         }
       }
 
-      $result.= "</td></tr>";
+      $result.= "</div></div>";
     }
 
     // Close list
-    $result.= "</table>";
     $result.= $switch?"<input type='hidden' id='list_workaround'>":"";
 
     // Add scroll positioner

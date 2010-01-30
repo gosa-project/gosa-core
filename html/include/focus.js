@@ -323,12 +323,6 @@ function divGOsa_toggle(element) {
 }
 
 function adjust (e) {
-	adjust_height(e);
-	adjust_width(e);
-}
-
-// Automatic resize (height) of divlists
-function adjust_height(e) {
 	if (!e) e=window.event;
 	if (document.getElementById("menucell") && document.getElementById("d_scrollbody")) {
 		var inner_height= window.innerHeight;
@@ -387,110 +381,6 @@ function adjust_height(e) {
 function absTop(e) {
 	return (e.offsetParent)?e.offsetTop+absTop(e.offsetParent) : e.offsetTop;
 }
-
-// Automatic resize (width) of divlists
-function adjust_width(e) 
-{
-	
-	/* Get event ... it seems to be unused here ...*/
-	if (!e) {
-		e=window.event;
-	}
-
-	// Known to not work with IE
-	if(document.defaultView && document.getElementById("t_scrolltable")) {
-
-		// Get current width of divlist 
-		var div_width	=	parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable"),"").getPropertyValue('width'));
-	
-		// Get window width
-		var width= parseInt(window.innerWidth);
-
-		// Resize the body cells, 470 represents the info box and the navigation part 
-                var save= 470;
-                if(document.getElementById('d_save')) {
-                  save= document.getElementById('d_save').value;
-                }
-                var space= 600;
-                if(document.getElementById('d_space')) {
-                  space= document.getElementById('d_space').value;
-                }
-		var diff= width	- div_width - save;
-
-		// window has been upscaled
-		if(div_width+diff>=space) {
-                        if (width - save > space) {
-			  document.getElementById('d_scrollbody').style.width=div_width+diff+"px";
-                          if (document.getElementById('t_scrollbody') != null) {
-  			    document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
-                          }
-	
-			  // Resize the Header cells (only the relative-width ones)
-                          if (document.getElementById('t_scrollhead') != null) {
-			    document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
-                          }
-                        } else {
-			  document.getElementById('d_scrollbody').style.width=div_width+"px";
-                          if (document.getElementById('t_scrollbody') != null) {
-			    document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
-                          }
-	
-			  // Resize the Header cells (only the relative-width ones)
-                          if (document.getElementById('t_scrollhead') != null) {
-			    document.getElementById('t_scrollhead').style.width=div_width+"px";
-                          }
-                        }
-
-		// window has been downscaled, we must reset the div to 600px
-		} else if (width < 1200) {
-			// Reset layout (set width to 600px)
-			div_width=space;
-			document.getElementById('d_scrollbody').style.width=div_width+"px";
-                        if (document.getElementById('t_scrollbody') != null) {
-			  document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
-                        }
-	
-			// Resize the Header cells (only the relative-width ones)
-                        if (document.getElementById('t_scrollhead') != null) {
-			  document.getElementById('t_scrollhead').style.width=div_width+"px";
-                        }
-		}
-	} else if(document.defaultView && document.getElementById("t_scrolltable_onlywidth")){
-		// Resize the div
-		var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable_onlywidth"),"").getPropertyValue('width'));
-		var width= parseInt(window.innerWidth);
-
-		// Resize the body cells
-		var diff= width-div_width-200;
-		
-		// window has been upscaled
-		if(div_width+diff>=600) {
-			if(document.getElementById('d_scrollbody_onlywidth')){
-				document.getElementById('d_scrollbody_onlywidth').style.width=div_width+diff+"px";
-			}
-			document.getElementById('t_scrollbody_onlywidth').style.width=(div_width-19)+diff+"px";
-	
-			// Resize the Header cells (only the relative-width ones)
-			document.getElementById('t_scrollhead_onlywidth').style.width=div_width+diff+"px";
-
-		// window has been downscaled, we must reset the div to 600px
-		} else if (width < 930) {
-			// Reset layout (set width to 600px)
-			div_width=600;
-			if(document.getElementById('d_scrollbody_onlywidth')){
-				document.getElementById('d_scrollbody_onlywidth').style.width=div_width+"px";
-			}
-			document.getElementById('t_scrollbody_onlywidth').style.width=(div_width-19)+"px";
-	
-			// Resize the Header cells (only the relative-width ones)
-			document.getElementById('t_scrollhead_onlywidth').style.width=div_width+"px";
-		}
-	} else {
-		// IE
-
-	}
-}
-
 
 /* Set focus to first valid input field
     avoid IExplorer warning about hidding or disabled fields
