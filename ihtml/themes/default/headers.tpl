@@ -31,8 +31,7 @@
 {if $iePngWorkaround}
   <script language="javascript" src="include/png.js" type="text/javascript"></script>
 {/if}
-  <script language="javascript" src="include/focus.js" type="text/javascript"></script>
-  <script language="javascript" src="include/warning.js" type="text/javascript"></script>
+  <script language="javascript" src="include/gosa.js" type="text/javascript"></script>
 {if $usePrototype == 'true'}
   <script language="javascript" src="include/prototype.js" type="text/javascript"></script>
   <script language="javascript" src="include/scriptaculous.js" type="text/javascript"></script>

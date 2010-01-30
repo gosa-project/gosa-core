@@ -19,7 +19,5 @@
   <link rel="shortcut icon" href="favicon.ico">
 
   <script language="javascript"src="include/png.js" type="text/javascript"></script>
-  <script language="javascript"src="include/calendar.js" type="text/javascript"></script>
-  <script language="javascript"src="include/focus.js" type="text/javascript"></script>
-  <script language="javascript"src="include/warning.js" type="text/javascript"></script>
+  <script language="javascript"src="include/gosa.js" type="text/javascript"></script>
 </head>

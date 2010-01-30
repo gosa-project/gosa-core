@@ -39,6 +39,20 @@ for (iln = 0; iln < len; iln++){
 netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
 
+function question(text, url)
+{
+  if(document.mainform.ignore){
+        location.href= url;
+        return true;
+  }
+  if(confirm(text)){
+        location.href= url;
+        return true;
+  }
+  return false;
+}
+
+
 /* Toggle checkbox that matches regex */
 function chk_set_all(regex,value)
 {
