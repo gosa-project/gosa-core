@@ -271,7 +271,7 @@ class listing {
     // Some browsers don't have the ability do do scrollable table bodies, filter them
     // here.
     $switch= false;
-    if (preg_match('/(Opera|Konqueror|Safari|msie)/i', $_SERVER['HTTP_USER_AGENT'])){
+    if (preg_match('/(Opera|Konqueror|Safari)/i', $_SERVER['HTTP_USER_AGENT'])){
       $switch= true;
     }
 
