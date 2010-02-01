@@ -106,13 +106,13 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
               </a>
             </td>
             <td align=right>
-              <button onClick='GOsa_toggle(\"errorbox\");'>".
+              <button onClick=\"$('errorbox').toggle();\">".
                 _("Toggle information")."
               </button>
             </td>
           </tr>
         </table>
-        <div id='errorbox' style='position:absolute; z-index:150; display: block;'>";
+        <div id='errorbox' style='position:absolute; z-index:150; display: none;'>";
     }
   }
  
