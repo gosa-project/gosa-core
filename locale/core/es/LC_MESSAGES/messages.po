@@ -2427,6 +2427,7 @@ msgstr ""
 msgid ""
 "The supplied base is not valid and has been reset to the previous value!"
 msgstr ""
+"¡La base introducida no es válida, se ha dejado el valor anterior!"
 
 #: include/class_ldap.inc:233 include/class_ldap.inc:266
 msgid "Performance warning"
