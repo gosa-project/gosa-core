@@ -380,10 +380,10 @@ class listing {
     // Complete list by sorting entries for _sort$index and appending them to the output
     $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
     foreach ($entryIterator as $row => $entry){
-      $alt++;
       $result.="<tr class='rowxp".($alt&1)."'>\n";
       $result.= $entry['_rendered'];
       $result.="</tr>\n";
+      $alt++;
     }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
