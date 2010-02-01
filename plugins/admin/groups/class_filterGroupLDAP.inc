@@ -33,7 +33,9 @@ class filterGroupLDAP {
 
     // Move menu information to menu
     foreach ($menu as $dn => $dummy) {
-      $result[$dn2index[$dn]]["objectClass"][]= "gotoMenuGroup";
+      if(isset($dn2index[$dn])){
+        $result[$dn2index[$dn]]["objectClass"][]= "gotoMenuGroup";
+      }
     }
 
     return $result;
