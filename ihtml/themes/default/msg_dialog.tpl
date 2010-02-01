@@ -119,7 +119,7 @@
 					</td>
 					{if $s_Trace != "" && $i_TraceCnt != 0}
 					<td style='width:20px; vertical-align:top; cursor:pointer;'>
-						<div onClick="GOsa_toggle('trace_{$i_ID}')"><u>Trace</u></div>
+						<div onClick="$('trace_{$i_ID}').toggle();"><u>Trace</u></div>
 					</td>
 					{/if}
 				</tr>
