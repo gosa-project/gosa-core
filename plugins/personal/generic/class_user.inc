@@ -762,7 +762,7 @@ class user extends plugin
       /* Sync lists */
       $this->gosaLoginRestrictionWidget->save_object();
       if ($this->gosaLoginRestrictionWidget->isModified()) {
-        $this->gosaLoginRestriction= $this->gosaLoginRestrictionWidget->getMaintainedData();
+        $this->gosaLoginRestriction= array_values($this->gosaLoginRestrictionWidget->getMaintainedData());
       }
 
       /* Save government mode attributes */
