@@ -221,9 +221,6 @@ if (Prototype.Browser.Gecko){
 	document.onkeydown= keyHandler;
 }
 
-function GOsa_toggle(element) {
-	$(element).toggle();
-}
 
 function popup(target, name) {
 	var mypopup= 
