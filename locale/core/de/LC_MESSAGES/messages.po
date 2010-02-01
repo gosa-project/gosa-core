@@ -6683,32 +6683,3 @@ msgstr "Dieser Schritt erlaubt es Ihnen, Ihre bevorzugte Sprache auszuwählen."
 msgid "Automatic"
 msgstr "Automatisch"
 
-#~ msgid "Update"
-#~ msgstr "Aktualisieren"
-
-#~ msgid "Show %s"
-#~ msgstr "Zeige %s"
-
-#~ msgid "people"
-#~ msgstr "Personen"
-
-#~ msgid "Select users to add"
-#~ msgstr "Wählen Sie die hinzuzufügenden Benutzer"
-
-#~ msgid "Select to see servers"
-#~ msgstr "Wählen um Server anzuzeigen"
-
-#~ msgid "Search within subtree"
-#~ msgstr "Suche im Teilbaum"
-
-#~ msgid "Display users of department"
-#~ msgstr "Zeige die Benutzer der Abteilung"
-
-#~ msgid "Display users matching"
-#~ msgstr "Zeige die Benutzer, auf die Folgendes passt"
-
-#~ msgid "Regular expression for matching user names"
-#~ msgstr "Regulärer Ausdruck zum Erkennen von Benutzernamen"
-
-#~ msgid "List of systems"
-#~ msgstr "Liste der Systeme"
