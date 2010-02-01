@@ -589,6 +589,7 @@ class userManagement extends management
    */ 
   function lockUsers($action,$target,$all)
   {
+    if(!count($target)) return;
     if($action == "lockUsers"){
       $this->lockEntry($action,$target, $all, "lock");
     }else{
