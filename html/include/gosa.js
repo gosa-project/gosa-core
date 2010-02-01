@@ -230,9 +230,9 @@ function GOsa_toggle(element) {
 		document.poppedLayer = document.layers[element];
 
 	if (document.poppedLayer.style.visibility == "visible") {
-		hide (element);
+                $(element).hide();
 	} else {
-		show (element);
+                $(element).show();
 	}
 }
 
@@ -260,11 +260,11 @@ function divGOsa_toggle(element) {
 		cell= document.getElementById(cellname);
 
 		if (document.poppedLayer.style.visibility == "visible") {
-			hide (element);
+                        $(element).hide();
 			cell.style.height="0px";
 			document.poppedLayer.style.height="0px";
 		} else {
-			show (element);
+                        $(element).show();
 			document.poppedLayer.style.height="";
 			if(document.defaultView) {
 				cell.style.height=document.defaultView.getComputedStyle(document.poppedLayer,"").getPropertyValue('height');
@@ -274,12 +274,12 @@ function divGOsa_toggle(element) {
 		document.poppedLayer = document.getElementById(element);
 		cell= document.getElementById(cellname);
 		if (document.poppedLayer.style.visibility == "visible") {
-			hide (element);
+			$(element).hide();
 			cell.style.height="0px";
 			document.poppedLayer.style.height="0px";
 			document.poppedLayer.style.position="absolute";
 		} else {
-			show (element);
+                        $(element).show();
 			cell.style.height="";
 			document.poppedLayer.style.height="";
 			document.poppedLayer.style.position="relative";
@@ -404,7 +404,7 @@ function next_msg_dialog()
 		if(cur_id != ""){
 			ele = document.getElementById('e_layer' + cur_id);
 			ele.onmousemove = "";
-			hide('e_layer' + cur_id); 	
+			$('e_layer' + cur_id).hide();
 			document.getElementById('closed_msg_dialogs').value += "," + cur_id;
 			document.getElementById('current_msg_dialogs').value= ""; 
 		}
@@ -552,16 +552,6 @@ function move_div_by_cursor(e)
 	}
 }
 
-
-function hide(element) {
-  document.poppedLayer = document.getElementById(element);
-  document.poppedLayer.style.visibility = "hidden";
-}
-
-function show(element) {
-  document.poppedLayer = document.getElementById(element);
-  document.poppedLayer.style.visibility = "visible";
-}
 
 // Global storage for baseSelector timer
 var rtimer;
