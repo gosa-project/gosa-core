@@ -29,6 +29,7 @@ class baseSelector {
   private $submitButton= true;
   protected $tree;
   protected $pathMapping;
+  protected $lastState;
 
   // It would be better to get a dn -> [name, description, type] array
   // to avoid these tasks be done several times. Skipping for the moment.
@@ -77,6 +78,12 @@ class baseSelector {
   }
 
 
+  function checkLastBaseUpdate()
+  {
+    return $this->lastState;
+  }
+
+
   function setBases($bases)
   {
     global $config;
@@ -114,22 +121,28 @@ class baseSelector {
           $this->base= $new_base;
           $this->action= 'rebase';
         } else {
+          $this->lastState= false;
           return false;
         }
       }
-    } elseif (isset($_POST['bs_input_'.$this->pid])) {
 
-      // Take over input field base
-      if ($this->submitButton && isset($_POST['submit_base_'.$this->pid.'_x']) || !$this->submitButton) {
+      // Input field set?
+      if (isset($_POST['bs_input_'.$this->pid])) {
 
-        // Check if base is available
-        foreach ($this->pathMapping as $key => $path) {
-          if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
-            $this->base= $key;
-            break;
+        // Take over input field base
+        if ($this->submitButton && isset($_POST['submit_base_'.$this->pid.'_x']) || !$this->submitButton) {
+
+          // Check if base is available
+          $this->lastState= false;
+          foreach ($this->pathMapping as $key => $path) {
+            if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
+              $this->base= $key;
+              $this->lastState= true;
+              break;
+            }
           }
         }
-      }
+      } 
 
     }
 
@@ -200,6 +213,7 @@ class baseSelector {
     $this->tree.= "<input type='hidden' name='bs_rebase_".$this->pid."' id='bs_rebase_".$this->pid."'>";
     $this->tree.= "<input type='hidden' name='BPID' id='BPID' value='".$this->pid."'>";
 
+    $this->lastState= true;
     return true;
   }
 

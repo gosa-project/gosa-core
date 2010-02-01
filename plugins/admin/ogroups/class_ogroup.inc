@@ -799,6 +799,11 @@ class ogroup extends plugin
       $message[]= msgPool::duplicated(_("Name"));
     } 
 
+    // Check if a wrong base was supplied
+    if(!$this->baseSelector->checkLastBaseUpdate()){
+      $message[]= msgPool::check_base();;
+    } 
+
     /* Set new acl base */
     if($this->dn == "new") {
       $this->set_acl_base($this->base);

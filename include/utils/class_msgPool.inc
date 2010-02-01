@@ -568,6 +568,13 @@ class msgPool
   {
     return (sprintf(_("Cannot initialize class '%s'! Maybe there is a plugin missing in your gosa setup?"), $plugin));
   }
+
+
+  public static function check_base()
+  {
+    return _("The supplied base is not valid and has been reset to the previous value!");
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
