@@ -541,6 +541,7 @@ class userManagement extends management
       // Check entry locking
       foreach($target as $dn){
         if (($user= get_lock($dn)) != ""){
+          $this->dn = $dn;
           return(gen_locked_message ($user, $dn));
         }
         $this->dns[] = $dn;
