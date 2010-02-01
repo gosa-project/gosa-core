@@ -71,6 +71,12 @@ class baseSelector {
   }
 
 
+  function checkBase($base)
+  {
+    return isset($this->pathMapping[$base]);
+  }
+
+
   function setBases($bases)
   {
     global $config;
