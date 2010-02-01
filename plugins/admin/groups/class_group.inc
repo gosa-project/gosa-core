@@ -1054,6 +1054,11 @@ class group extends plugin
       $message[]= msgPool::required(_("Name"));
     }
 
+    // Check if a wrong base was supplied
+    if(!$this->baseSelector->checkLastBaseUpdate()){
+      $message[]= msgPool::check_base();;
+    }
+
     /* Check for valid input */
     if (!tests::is_uid($this->cn)){
       if (strict_uid_mode()){
@@ -1061,6 +1066,11 @@ class group extends plugin
       } else {
         $message[]= msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9_-]/i");
       }
+    }
+
+    // Check if a wrong base was supplied
+    if(!$this->baseSelector->checkLastBaseUpdate()){
+      $message[]= msgPool::check_base();;
     }
 
     if($this->allowGroupsWithSameNameInOtherSubtrees == true){

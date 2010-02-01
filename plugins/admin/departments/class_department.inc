@@ -312,6 +312,11 @@ class department extends plugin
 			$message[]= msgPool::invalid(_("Fax"), $this->facsimileTelephoneNumber, "/[\/0-9 ()+*-]/");
 		}
 
+    // Check if a wrong base was supplied
+    if(!$this->baseSelector->checkLastBaseUpdate()){
+      $message[]= msgPool::check_base();;
+    }
+
     /* Check if we are allowed to create or move this object
      */
     if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
