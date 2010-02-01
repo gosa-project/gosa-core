@@ -193,7 +193,7 @@ class baseSelector {
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
       $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
-      $this->tree.= "<li><a$selected $link>".str_replace(' ', '&nbsp;', ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base)))."</a>";
+      $this->tree.= "<li><a$selected $link>".str_replace('-', '&#8209;', str_replace(' ', '&nbsp;', ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base))))."</a>";
 
       $last_indent= $indent;
       $first= false;
