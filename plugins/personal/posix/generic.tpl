@@ -165,9 +165,9 @@
 
 {else}
     <input type="checkbox" name="use_trustmode" {if $use_trustmode} checked {/if}
-    	class="center" onClick="GOsa_toggle('div_trustmode');">
+    	class="center" onClick="$('div_trustmode').toggle();">
    	{t}Trust mode{/t}&nbsp;
-    <div {if !$use_trustmode} style="visibility:hidden;" {/if} id="div_trustmode">
+    <div {if !$use_trustmode} style="display: none;" {/if} id="div_trustmode">
 	{render acl=$trustmodeACL}
 		<select name="trustmode" id="trustmode" size=1 
 			onChange="changeSelectState('trustmode', 'wslist'); 
