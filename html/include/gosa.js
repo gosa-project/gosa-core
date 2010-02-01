@@ -553,6 +553,16 @@ function move_div_by_cursor(e)
 }
 
 
+function hide(element) {
+  document.poppedLayer = document.getElementById(element);
+  document.poppedLayer.style.visibility = "hidden";
+}
+
+function show(element) {
+  document.poppedLayer = document.getElementById(element);
+  document.poppedLayer.style.visibility = "visible";
+}
+
 // Global storage for baseSelector timer
 var rtimer;
 
