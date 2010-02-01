@@ -86,7 +86,7 @@
 	{else}
 
 		{if $s_Trace != "" && $i_TraceCnt != 0}
-		<div id='trace_{$i_ID}' style='visibility:hidden;'>
+		<div id='trace_{$i_ID}' style='display:none;'>
 			{$s_Trace}
 		</div>
 		
