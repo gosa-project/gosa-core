@@ -1940,6 +1940,7 @@ background-color:#DDD;
 
 a.treeList {
 padding:2px;
+cursor:pointer;
 }
 
 a.treeListSelected {
@@ -1947,12 +1948,12 @@ font-weight:bold;
 color:#1010AF;
 background-color:#DDD;
 padding:2px;
+cursor:pointer;
 }
 
 a.treeList:hover,a.treeListSelected:hover {
 background-color:#DDD;
 padding:2px;
-cursor:pointer;
 }
 
 ul.treeList a {

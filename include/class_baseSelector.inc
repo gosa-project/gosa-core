@@ -124,21 +124,21 @@ class baseSelector {
           $this->lastState= false;
           return false;
         }
-      }
+      }else{
+        // Input field set?
+        if (isset($_POST['bs_input_'.$this->pid])) {
 
-      // Input field set?
-      if (isset($_POST['bs_input_'.$this->pid])) {
+          // Take over input field base
+          if ($this->submitButton && isset($_POST['submit_base_'.$this->pid.'_x']) || !$this->submitButton) {
 
-        // Take over input field base
-        if ($this->submitButton && isset($_POST['submit_base_'.$this->pid.'_x']) || !$this->submitButton) {
-
-          // Check if base is available
-          $this->lastState= false;
-          foreach ($this->pathMapping as $key => $path) {
-            if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
-              $this->base= $key;
-              $this->lastState= true;
-              break;
+            // Check if base is available
+            $this->lastState= false;
+            foreach ($this->pathMapping as $key => $path) {
+              if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
+                $this->base= $key;
+                $this->lastState= true;
+                break;
+              }
             }
           }
         }
@@ -164,7 +164,7 @@ class baseSelector {
     $this->tree.= "</script>";
 
     $selected= $this->base == $config->current['BASE']?"Selected":"";
-    $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/ ["._("Root")."]</a><ul class='treeList'>\n";
+    $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/&nbsp;["._("Root")."]</a><ul class='treeList'>\n";
     $first= true;
     $last_indent= 2;
 
