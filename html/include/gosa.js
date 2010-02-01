@@ -222,18 +222,7 @@ if (Prototype.Browser.Gecko){
 }
 
 function GOsa_toggle(element) {
-	if (Prototype.Browser.Gecko)
-		document.poppedLayer = document.getElementById(element);
-	else if (Prototype.Browser.IE)
-		document.poppedLayer = document.all[element];
-	else
-		document.poppedLayer = document.layers[element];
-
-	if (document.poppedLayer.style.visibility == "visible") {
-                $(element).hide();
-	} else {
-                $(element).show();
-	}
+	$(element).toggle();
 }
 
 function popup(target, name) {
