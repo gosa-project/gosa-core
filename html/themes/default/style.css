@@ -1910,7 +1910,7 @@ div.listContainer {
 }
 
 .listScrollContent {
-	height:100px;
+	height:100%;
 	overflow-x:hidden;
 	overflow-y:auto;
 }
@@ -1931,7 +1931,6 @@ div.listContainer {
 	border-right: 1px solid #AAA;
 	word-wrap:break-word;
 	white-space:normal;
-	overflow: hidden;
 	max-width:500px;
 }
 
