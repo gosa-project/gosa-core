@@ -439,7 +439,8 @@ class management
    *  @param  Array   'all'     A combination of both 'action' and 'target'.
    */
   function saveSnapshot($action="",$target=array(),$all=array())
-  {
+  { 
+    if(!is_object($this->dialogObject)) return;
     $this->dialogObject->save_object();
     $msgs = $this->dialogObject->check();
     if(count($msgs)){
