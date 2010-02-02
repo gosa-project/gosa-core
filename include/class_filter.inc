@@ -417,7 +417,6 @@ class filter {
           $filter= preg_replace("/\\$$tag/", $e_set, $filter);
         }
       }
-      echo $filter;
 
       $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
     }
