@@ -662,7 +662,8 @@ class LDAP{
 
       } else {
         $type= preg_replace('/^([^=]+)=.*$/', '\\1', $cdn);
-        $param= preg_replace('/^[^=]+=([^,]+).*$/', '\\1', $cdn);
+        $param= LDAP::fix(preg_replace('/^[^=]+=([^,]+).*$/', '\\1', $cdn));
+        $param=preg_replace(array('/\\\\,/','/\\\\"/'),array(',','"'),$param);
 
         $na= array();
 
