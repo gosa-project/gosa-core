@@ -408,15 +408,16 @@ class filter {
         }
 
         if ($this->elementValues[$tag] == "") {
-          $e_unset= preg_replace('/[^\\\\]\$/', normalizeLdap($this->elementValues[$tag]), $e_unset);
+          $e_unset= preg_replace('/([^\\\\])\$/', "\\1".normalizeLdap($this->elementValues[$tag]), $e_unset);
           $e_unset= preg_replace('/\\\\\$/','$', $e_unset);
           $filter= preg_replace("/\\$$tag/", $e_unset, $filter);
         } else {
-          $e_set= preg_replace('/[^\\\\]\$/', normalizeLdap($this->elementValues[$tag]), $e_set);
+          $e_set= preg_replace('/([^\\\\])\$/', "\\1".normalizeLdap($this->elementValues[$tag]), $e_set);
           $e_set= preg_replace('/\\\\\$/','$', $e_set);
           $filter= preg_replace("/\\$$tag/", $e_set, $filter);
         }
       }
+      echo $filter;
 
       $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
     }
