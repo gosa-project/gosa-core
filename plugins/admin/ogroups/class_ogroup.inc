@@ -119,7 +119,7 @@ class ogroup extends plugin
     /* Set base */
     if ($this->dn == "new"){
       $ui = get_userinfo();
-      $this->base= dn2base(session::global_is_set("CurrentMainBase")?session::global_get("CurrentMainBase"):$ui->dn);
+      $this->base= dn2base(session::global_is_set("CurrentMainBase")?"cn=dummy,".session::global_get("CurrentMainBase"):$ui->dn);
     } else {
       $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"), '/')."/i","",$this->dn);
 
