@@ -63,7 +63,7 @@ class aclrole extends acl
 
     if($this->dn == "new"){
       $ui = get_userinfo();
-      $this->base= dn2base(session::global_is_set("CurrentMainBase")?session::global_get("CurrentMainBase"):$ui->dn);
+      $this->base= dn2base(session::global_is_set("CurrentMainBase")?"cn=test,".session::global_get("CurrentMainBase"):$ui->dn);
     }else{
       $this->base = preg_replace("/^[^,]+,[^,]+,/","",$this->dn);
       new log("view","acl/".get_class($this),$this->dn);
