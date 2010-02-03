@@ -1998,8 +1998,12 @@ overflow-y:auto;
 float:left;
 }
 
-/* Max height for IE */
-* html div.treeList {
-   height: expression( this.scrollHeight > 500 ? "500px" : "auto" );
+span.informal {
+color:#444;
+font-style:italic;
 }
 
+/* Max height for IE */
+* html div.treeList {
+height: expression( this.scrollHeight > 500 ? "500px" : "auto" );
+}

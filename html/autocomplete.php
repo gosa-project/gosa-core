@@ -36,13 +36,29 @@ if (!session::global_is_set('ui')){
 
 /* Base completition or filter completition? */
 if (isset($_GET['type']) && $_GET['type'] == "base") {
+
+  // Find dn based on name and description
   if (session::is_set("pathMapping") && count($_POST) == 1) {
     $res= "";
     $pathMapping= session::get("pathMapping");
     $search= preg_replace('/&quot;/', '"', current($_POST));
-    foreach ($pathMapping as $key => $value) {
-      if (mb_stristr($value, $search) !== false) {
-        $res.= "<li>$value</li>";
+
+    $config = session::global_get('config');
+    foreach ($config->department_info as $dn => $info) {
+      if (!isset($pathMapping[$dn])) {
+        continue;
+      }
+      if (mb_stristr($info['name'], $search) !== false) {
+        $res.= "<li>".$pathMapping[$dn].($info['description']==''?"":"<span class='informal'> [".$info['description']."]</span>")."</li>";
+        continue;
+      }
+      if (mb_stristr($info['description'], $search) !== false) {
+        $res.= "<li>".$pathMapping[$dn].($info['description']==''?"":"<span class='informal'> [".$info['description']."]</span>")."</li>";
+        continue;
+      }
+      if (mb_stristr($pathMapping[$dn], $search) !== false) {
+        $res.= "<li>".$pathMapping[$dn].($info['description']==''?"":"<span class='informal'> [".$info['description']."]</span>")."</li>";
+        continue;
       }
     }
 
@@ -54,7 +70,6 @@ if (isset($_GET['type']) && $_GET['type'] == "base") {
 
 } else {
 
-  $config = session::global_get('config');
   $ui = session::global_get('ui');
 
   /* Is there a filter object arround? */
