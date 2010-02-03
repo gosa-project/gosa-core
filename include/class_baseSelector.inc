@@ -31,14 +31,6 @@ class baseSelector {
   protected $pathMapping;
   protected $lastState;
 
-  // It would be better to get a dn -> [name, description, type] array
-  // to avoid these tasks be done several times. Skipping for the moment.
-  #'dc' => 'plugins/departments/images/domain.png',
-  #'dc' => 'plugins/departments/images/dc.png',
-  #'l' => 'plugins/departments/images/locality.png',
-  #'c' => 'plugins/departments/images/country.png',
-  #'o' => 'plugins/departments/images/organization.png',
-  #'ou' => 'plugins/departments/images/folder.png',
 
   function __construct($bases, $base= "")
   {
@@ -193,7 +185,11 @@ class baseSelector {
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
       $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
-      $this->tree.= "<li><a$selected $link>".str_replace('-', '&#8209;', str_replace(' ', '&nbsp;', ldap::fix(preg_replace('/^[a-z0-9]+=([^,]+),.*$/i', '$1', $base))))."</a>";
+      $this->tree.= "<li><a$selected $link>".
+                    "<img src='".$config->department_info[$base]['img']."'>&nbsp;".
+                    str_replace('-', '&#8209;', str_replace(' ', '&nbsp;', $config->department_info[$base]['name'].
+                    ($config->department_info[$base]['description']==''?'':' ['.$config->department_info[$base]['description'].']'))).
+                    "</a>";
 
       $last_indent= $indent;
       $first= false;

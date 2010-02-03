@@ -60,6 +60,7 @@ class config  {
   var $idepartments= array();
   var $adepartments= array();
   var $tdepartments= array();
+  var $department_info= array();
   var $filename = "";
   var $last_modified = 0;
 
@@ -720,7 +721,7 @@ class config  {
     $types = departmentManagement::get_support_departments();
     
     /* Create a list of attributes to fetch */
-    $ldap_values = array("objectClass","gosaUnitTag");
+    $ldap_values = array("objectClass","gosaUnitTag", "description");
     $filter = "";
     foreach($types as $type){
       $ldap_values[] = $type['ATTR'];
@@ -743,12 +744,14 @@ class config  {
         }
       }
 
-      /* Unknown department type -> skip 
-       */
+      /* Unknown department type -> skip */
       if(!count($type_data)) continue;
 
       $dn= $ldap->getDN();
       $this->tdepartments[$dn]= "";
+      $this->department_info[$dn]= array("img" => $type_data['IMG'],
+                                         "description" => isset($attrs['description'][0])?$attrs['description'][0]:"",
+                                         "name" => $attrs[$type_data['ATTR']][0]);
 
       /* Save administrative departments */
       if (in_array_ics("gosaAdministrativeUnit", $attrs['objectClass']) &&
