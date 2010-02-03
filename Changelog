@@ -1,6 +1,11 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.8
+  - Base selector displays descriptions and icons now
+  - Base selector autocomplete
+  - Fixed gosa.conf system generation
+
 * gosa 2.6.7
   - Added more information to DHCP service dialog (thanks to Mathieu)
   - Added more checks for DNS zone records
