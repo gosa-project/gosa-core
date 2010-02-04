@@ -21,7 +21,7 @@
   </definition>
 
   <table>
-    <layout>|20px;c|||</layout>
+    <layout>|20px;c||||</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -49,6 +49,14 @@
       <sortAttribute>sn</sortAttribute>
       <sortType>string</sortType>
       <value>%{sn}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Login</label>
+      <sortAttribute>uid</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{uid}</value>
       <export>true</export>
     </column>
 

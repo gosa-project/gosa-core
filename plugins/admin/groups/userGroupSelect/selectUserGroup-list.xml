@@ -30,7 +30,7 @@
   </definition>
 
   <table>
-    <layout>|20px;c|220px||</layout>
+    <layout>|20px;c|||[200px]</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -58,6 +58,14 @@
       <sortAttribute>description</sortAttribute>
       <sortType>string</sortType>
       <value>%{description}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Login</label>
+      <sortAttribute>uid</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{uid}</value>
       <export>true</export>
     </column>
 

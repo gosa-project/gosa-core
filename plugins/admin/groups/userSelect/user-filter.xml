@@ -29,11 +29,11 @@
     <maxlength>60</maxlength>
     <default></default>
     <unset></unset>
-    <set>(|(sn=*$*)(givenName=*$*)(cn=*$*))</set>
+    <set>(|(sn=*$*)(givenName=*$*)(cn=*$*)(uid=*$*))</set>
     <alphabet>true</alphabet>
     <autocomplete>
       <backend>LDAPBlacklist</backend>
-      <filter>(&amp;(objectClass=gosaAccount)(|(sn=*$NAME*)(givenName=*$NAME*)(cn=*$NAME*)))</filter>
+      <filter>(&amp;(objectClass=gosaAccount)(|(sn=*$NAME*)(givenName=*$NAME*)(cn=*$NAME*)(uid=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
