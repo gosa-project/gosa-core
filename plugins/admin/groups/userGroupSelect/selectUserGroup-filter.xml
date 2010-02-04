@@ -34,7 +34,7 @@
     <alphabet>true</alphabet>
     <autocomplete>
       <backend>LDAPBlacklist</backend>
-      <filter>(&amp;(objectClass=gosaAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)(uid=*$NAME*)))</filter>
+      <filter>(&amp;(objectClass=posixAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)(uid=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
@@ -45,7 +45,7 @@
     <type>checkbox</type>
     <tag>USER</tag>
     <default>true</default>
-    <set>(&amp;(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate)))</set>
+    <set>(&amp;(objectClass=posixAccount)(!(objectClass=gosaUserTemplate)))</set>
     <unset></unset>
   </element>
 
