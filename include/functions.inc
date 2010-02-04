@@ -3504,5 +3504,18 @@ function get_next_id_traditional($attrib, $dn)
 }
 
 
+/* Mark the occurance of a string with a span */
+function mark($needle, $haystack, $ignorecase= true)
+{
+  $result= "";
+
+  while (preg_match('/^(.*)('.preg_quote($needle).')(.*)$/i', $haystack, $matches)) {
+    $result.= $matches[1]."<span class='mark'>".$matches[2]."</span>";
+    $haystack= $matches[3];
+  }
+
+  return $result.$haystack;
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

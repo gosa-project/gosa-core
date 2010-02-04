@@ -2007,3 +2007,7 @@ font-style:italic;
 * html div.treeList {
 height: expression( this.scrollHeight > 500 ? "500px" : "auto" );
 }
+
+span.mark {
+color:#B22;
+}

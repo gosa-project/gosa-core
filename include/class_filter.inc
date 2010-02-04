@@ -530,7 +530,7 @@ class filter {
 
         echo '<ul>';
         foreach ($result as $entry) {
-          echo '<li>'.$entry.'</li>';
+          echo '<li>'.mark($_POST[$tag], $entry).'</li>';
           if ($max-- == 0) {
             break;
           }
