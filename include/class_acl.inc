@@ -732,6 +732,7 @@ class acl extends plugin
 
     /* Build general objects */
     $list =$this->sort_by_priority($list);
+    $this->aclContents= array();
     foreach ($list as $key => $name){
 
       /* Create sub acl if it does not exist */
