@@ -391,8 +391,8 @@ class config  {
       $bases= array();
       $servers= array();
       foreach ($this->current['REFERRAL'] as $ref){
-        $server= preg_replace('%^(.*)/[^/]+$%', '\\1', $ref['URI']);
-        $base= preg_replace('%^.*/([^/]+)$%', '\\1', $ref['URI']);
+        $server= preg_replace('%^(.*://[^/]+)/.*$%', '\\1', $ref['URI']);
+        $base= preg_replace('%^.*://[^/]+/(.*)$%', '\\1', $ref['URI']);
         $bases[$base]= strlen($base);
         $servers[$base]= $server;
       }
