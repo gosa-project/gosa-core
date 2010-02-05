@@ -1615,6 +1615,8 @@ class user extends plugin
 
           "userPicture"       => _("User picture"),
 
+          "gosaLoginRestriction" => _("Login restrictions"),         
+
           "o"                 => _("Organization"),
           "ou"                => _("Department"),
           "departmentNumber"  => _("Department number"),
