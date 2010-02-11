@@ -407,12 +407,13 @@ class filter {
           $e_unset= is_array($element['unset'])?"":$element['unset'];
         }
 
+        // Do not replace escaped \$ - This is required to be able to search for e.g. windows machines.
         if ($this->elementValues[$tag] == "") {
-          $e_unset= preg_replace('/([^\\\\])\$/', "\\1".normalizeLdap($this->elementValues[$tag]), $e_unset);
+          $e_unset= preg_replace('/([^\\\\])\$/', '${1}'.normalizeLdap($this->elementValues[$tag]), $e_unset);
           $e_unset= preg_replace('/\\\\\$/','$', $e_unset);
           $filter= preg_replace("/\\$$tag/", $e_unset, $filter);
         } else {
-          $e_set= preg_replace('/([^\\\\])\$/', "\\1".normalizeLdap($this->elementValues[$tag]), $e_set);
+          $e_set= preg_replace('/([^\\\\])\$/', '${1}'.normalizeLdap($this->elementValues[$tag]), $e_set);
           $e_set= preg_replace('/\\\\\$/','$', $e_set);
           $filter= preg_replace("/\\$$tag/", $e_set, $filter);
         }
