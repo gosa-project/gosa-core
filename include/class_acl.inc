@@ -349,7 +349,8 @@ class acl extends plugin
         }
       }
 
-      if(isset($_POST['selected_role'])){
+      // Remember the selected ACL role.
+      if(isset($_POST['selected_role']) && $_POST['aclType'] == 'role'){
         $this->aclContents = "";
         $this->aclContents = base64_decode($_POST['selected_role']);
       }
