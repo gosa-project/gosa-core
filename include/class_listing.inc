@@ -1250,7 +1250,7 @@ class listing {
           $checkAcl= "";
 
           // Category or detailed permission?
-          if (strpos('/', $module) === false) {
+          if (strpos($module, '/') !== false) {
             if (preg_match('/([a-zA-Z0-9]+):([rwcdm]+)/', $sAcl, $m) ) {
               $checkAcl= $ui->get_permissions($dn, $module, $m[1]);
               $sAcl= $m[2];
