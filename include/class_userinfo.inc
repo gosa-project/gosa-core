@@ -175,6 +175,11 @@ class userinfo
             if (preg_replace('/^U:/', '', $grp) == $this->dn){
               $interresting= TRUE;
             }
+
+            /* Wildcard? */
+            if (preg_match('/^\*/',  $grp)){
+              $interresting= TRUE;
+            }
           }
         }
 

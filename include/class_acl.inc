@@ -979,24 +979,30 @@ class acl extends plugin
     /* Decode dn's, fill with informations from LDAP */
     $ldap= $config->get_ldap_link();
     foreach ($ma as $memberdn){
-      $dn= base64_decode($memberdn);
-      $ldap->cat($dn, array('cn', 'objectClass', 'description', 'uid'));
+      // Check for wildcard here
+      if ($memberdn != "*") {
+        $dn= base64_decode($memberdn);
+        $ldap->cat($dn, array('cn', 'objectClass', 'description', 'uid'));
 
-      /* Found entry... */
-      if ($ldap->count()){
-        $attrs= $ldap->fetch();
-        if (in_array_ics('gosaAccount', $attrs['objectClass'])){
-          $a['U:'.$dn]= $attrs['cn'][0]." [".$attrs['uid'][0]."]";
-        } else {
-          $a['G:'.$dn]= $attrs['cn'][0];
-          if (isset($attrs['description'][0])){
-            $a['G:'.$dn].= " [".$attrs['description'][0]."]";
+        /* Found entry... */
+        if ($ldap->count()){
+          $attrs= $ldap->fetch();
+          if (in_array_ics('gosaAccount', $attrs['objectClass'])){
+            $a['U:'.$dn]= $attrs['cn'][0]." [".$attrs['uid'][0]."]";
+          } else {
+            $a['G:'.$dn]= $attrs['cn'][0];
+            if (isset($attrs['description'][0])){
+              $a['G:'.$dn].= " [".$attrs['description'][0]."]";
+            }
           }
+
+        /* ... or not */
+        } else {
+          $a['U:'.$dn]= sprintf(_("Unknown entry '%s'!"), $dn);
         }
 
-      /* ... or not */
       } else {
-        $a['U:'.$dn]= sprintf(_("Unknown entry '%s'!"), $dn);
+        $a['*']= sprintf(_("Wildcard ACL"));
       }
     }
 
