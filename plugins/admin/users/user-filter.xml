@@ -52,7 +52,7 @@
     <tag>FUNCTIONAL</tag>
     <default>true</default>
     <unset></unset>
-    <set>(!(|(objectClass=posixAccount)(objectClass=sambaSamAccount)(objectClass=gosaMailAccount)(objectClass=gofaxAccount)(objectClass=gofonAccount)))</set>
+    <set>(!(|(objectClass=posixAccount)(objectClass=sambaSamAccount)(objectClass=gosaMailAccount)))</set>
   </element>
 
   <element>
