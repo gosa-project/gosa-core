@@ -117,6 +117,7 @@ class acl extends plugin
       }
       $this->groups['G:'.$attrs['dn']]= $attrs['cn'][0].' ['.$dsc.']';
     }
+    $this->groups['G:*']= _("All users");
     ksort($this->groups);
 
     /* Roles */
@@ -576,6 +577,9 @@ class acl extends plugin
 
       /* Generate list */
       $tmp= array();
+      if ($this->target == "group" && !isset($this->recipients["G:*"])){
+        $tmp["G:*"]= _("All users");
+      }
       foreach (array("user" => "users", "group" => "groups") as $field => $arr){
         if ($this->target == $field){
           foreach ($this->$arr as $key => $value){
@@ -980,8 +984,8 @@ class acl extends plugin
     $ldap= $config->get_ldap_link();
     foreach ($ma as $memberdn){
       // Check for wildcard here
-      if ($memberdn != "*") {
-        $dn= base64_decode($memberdn);
+      $dn= base64_decode($memberdn);
+      if ($dn != "*") {
         $ldap->cat($dn, array('cn', 'objectClass', 'description', 'uid'));
 
         /* Found entry... */
@@ -1002,7 +1006,7 @@ class acl extends plugin
         }
 
       } else {
-        $a['*']= sprintf(_("Wildcard ACL"));
+        $a['G:*']= sprintf(_("All users"));
       }
     }
 
