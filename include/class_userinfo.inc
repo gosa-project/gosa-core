@@ -177,7 +177,7 @@ class userinfo
             }
 
             /* Wildcard? */
-            if (preg_match('/^\*/',  $grp)){
+            if (preg_match('/^G:\*/',  $grp)){
               $interresting= TRUE;
             }
           }
