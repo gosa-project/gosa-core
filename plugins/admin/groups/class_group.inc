@@ -906,16 +906,7 @@ class group extends plugin
       if ($this->groupType == 0){
 
         if ($this->sambaSID == "" || $this->oldgroupType != $this->groupType){
-          $gidNumber= $this->gidNumber;
-          while(TRUE){
-            $sid= $this->SID."-".($gidNumber*2 + $this->ridBase+1);
-            $ldap->cd($this->config->current['BASE']);
-            $ldap->search("(sambaSID=$sid)",array("sambaSID"));
-            if ($ldap->count() == 0){
-              break;
-            }
-            $gidNumber++;
-          }
+          $sid = $this->getSambaSID();
           $this->attrs['sambaSID']= $sid;
           $this->sambaSID= $sid;
         }
@@ -1336,6 +1327,10 @@ class group extends plugin
   {
     plugin::PrepareForCopyPaste($source);
 
+    if ($this->smbgroup) { 
+      $this->sambaSID = $this->getSambaSID(); 
+    } 
+
     $this->memberUid = array();
     if(isset($source['memberUid'])){
       for($i = 0 ; $i < $source['memberUid']['count']; $i ++){
@@ -1370,6 +1365,26 @@ class group extends plugin
     plugin::set_multi_edit_values($attrs);
     $this->memberUid = $users;
   }
+
+
+  /*! \brief Get a new SambaSID for a group */ 
+  function getSambaSID() 
+  { 
+    $ldap = $this->config->get_ldap_link(); 
+    $gidNumber= $this->gidNumber; 
+    while(TRUE){ 
+      $sid= $this->SID."-".($gidNumber*2 + $this->ridBase+1); 
+      $ldap->cd($this->config->current['BASE']); 
+      $ldap->search("(sambaSID=$sid)",array("sambaSID")); 
+      if ($ldap->count() == 0){ 
+        break; 
+      } 
+      $gidNumber++; 
+    } 
+  
+    return $sid; 
+  } 
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
