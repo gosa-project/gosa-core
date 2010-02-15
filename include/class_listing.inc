@@ -164,7 +164,7 @@ class listing {
     // Fill objectTypes from departments and xml definition
     $types = departmentManagement::get_support_departments();
     foreach ($types as $class => $data) {
-      $this->objectTypes[]= array("label" => $data['TITLE'],
+      $this->objectTypes[$data['OC']]= array("label" => $data['TITLE'],
                                   "objectClass" => $data['OC'],
                                   "image" => $data['IMG']);
     }
@@ -174,12 +174,14 @@ class listing {
         $this->xmlData['definition']['objectType']= array($this->xmlData['definition']['objectType']);
       }
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
-        $this->objectTypes[]= $this->xmlData['definition']['objectType'][$index];
+        $tmp = $this->xmlData['definition']['objectType'][$index];
+        $this->objectTypes[$tmp['objectClass']]= $tmp;
         if (isset($this->xmlData['definition']['objectType'][$index]['category'])){
           $this->categories[]= $otype['category'];
         }
       }
     }
+    $this->objectTypes = array_values($this->objectTypes);
 
     // Parse layout per column
     $this->colprops= $this->parseLayout($this->xmlData['table']['layout']);
