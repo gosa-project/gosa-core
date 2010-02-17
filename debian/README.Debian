@@ -44,31 +44,26 @@ gosa-schema package and add at least the following lines to your
 LDAP-servers slapd.conf:
 
 Samba 2:
-include         /etc/ldap/schema/samba.schema
-include         /etc/ldap/schema/trust.schema
-include         /etc/ldap/schema/gosystem.schema
-include         /etc/ldap/schema/gofon.schema
-include         /etc/ldap/schema/goto.schema
-include         /etc/ldap/schema/gosa.schema
-include         /etc/ldap/schema/gofax.schema
-include         /etc/ldap/schema/goserver.schema
-include         /etc/ldap/schema/goto-mime.schema
+include         /etc/ldap/schema/gosa/samba.schema
+include         /etc/ldap/schema/gosa/trust.schema
+include         /etc/ldap/schema/gosa/gosystem.schema
+include         /etc/ldap/schema/gosa/gofon.schema
+include         /etc/ldap/schema/gosa/goto.schema
+include         /etc/ldap/schema/gosa/gosa.schema
+include         /etc/ldap/schema/gosa/gofax.schema
+include         /etc/ldap/schema/gosa/goserver.schema
+include         /etc/ldap/schema/gosa/goto-mime.schema
 
 Samba 3:
-include         /etc/ldap/schema/samba3.schema
-include         /etc/ldap/schema/trust.schema
-include         /etc/ldap/schema/gosystem.schema
-include         /etc/ldap/schema/gofon.schema
-include         /etc/ldap/schema/goto.schema
-include         /etc/ldap/schema/gosa+samba3.schema
-include         /etc/ldap/schema/gofax.schema
-include         /etc/ldap/schema/goserver.schema
-include         /etc/ldap/schema/goto-mime.schema
-
-Schema files for samba and trust accounts are not part of the
-gosa-schema package, but are included in:
-
-/usr/share/doc/gosa/contrib/openldap
+include         /etc/ldap/schema/gosa/samba3.schema
+include         /etc/ldap/schema/gosa/trust.schema
+include         /etc/ldap/schema/gosa/gosystem.schema
+include         /etc/ldap/schema/gosa/gofon.schema
+include         /etc/ldap/schema/gosa/goto.schema
+include         /etc/ldap/schema/gosa/gosa-samba3.schema
+include         /etc/ldap/schema/gosa/gofax.schema
+include         /etc/ldap/schema/gosa/goserver.schema
+include         /etc/ldap/schema/gosa/goto-mime.schema
 
 There's no need to have samba services up and running, GOsa only
 uses the NT/LM attributes to pre-generate samba password hashes -
