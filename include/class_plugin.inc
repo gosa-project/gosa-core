@@ -148,11 +148,13 @@ class plugin
     // Ensure that we've a valid acl_category set.
     if(empty($this->acl_category)){
       $tmp = $this->plInfo();
-      $c = key($tmp['plCategory']);
-      if(is_numeric($c)){
-        $c = $tmp['plCategory'][0];
+      if (isset($tmp['plCategory'])) {
+        $c = key($tmp['plCategory']);
+        if(is_numeric($c)){
+          $c = $tmp['plCategory'][0];
+        }
+        $this->acl_category = $c."/";
       }
-      $this->acl_category = $c."/";
     }
 
     /* Handle new accounts, don't read information from LDAP */
