@@ -43,17 +43,6 @@ into your LDAP configuration. For Debian, you should install the
 gosa-schema package and add at least the following lines to your
 LDAP-servers slapd.conf:
 
-Samba 2:
-include         /etc/ldap/schema/gosa/samba.schema
-include         /etc/ldap/schema/gosa/trust.schema
-include         /etc/ldap/schema/gosa/gosystem.schema
-include         /etc/ldap/schema/gosa/gofon.schema
-include         /etc/ldap/schema/gosa/goto.schema
-include         /etc/ldap/schema/gosa/gosa.schema
-include         /etc/ldap/schema/gosa/gofax.schema
-include         /etc/ldap/schema/gosa/goserver.schema
-include         /etc/ldap/schema/gosa/goto-mime.schema
-
 Samba 3:
 include         /etc/ldap/schema/gosa/samba3.schema
 include         /etc/ldap/schema/gosa/trust.schema
