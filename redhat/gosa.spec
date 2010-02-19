@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.6.6
+Version: 		2.6.8
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
