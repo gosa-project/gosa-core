@@ -1,7 +1,8 @@
 #!/bin/sh
 
 if [ $# -ne 2 ]; then
-	echo "Usage: RHEL/SLES/OpenSuse 2.6.4"
+	echo "Usage: $(basename $0) (RHEL|SLES|OpenSuse) svn-tag"
+        echo "        svn-tag can be 'trunk' or a version like '2.6.8'"
 	exit 1
 fi
 
