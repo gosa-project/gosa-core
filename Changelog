@@ -1,6 +1,9 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.9
+  - Fixed problem with initial phone accounts, sip type was NULL. 
+
 * gosa 2.6.8
   - Base selector displays descriptions and icons now
   - Base selector autocomplete
