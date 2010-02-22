@@ -24,6 +24,7 @@
 @require_once ("../include/php_setup.inc");
 @require_once ("functions.inc");
 error_reporting (0);
+session_cache_limiter("private");
 session::start();
 session::global_set('errorsAlreadyPosted',array());
 

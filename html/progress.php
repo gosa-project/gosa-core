@@ -20,81 +20,83 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-  /* Check for parameter completenes */
-  if (!isset($_GET['x']) || !isset($_GET['y']) || !isset($_GET['p'])){
-    die ("Missing parameters!");
-  }
-  if (!is_numeric($_GET['x']) || !is_numeric($_GET['y'])){
-    die ("Parameters must be numeric!");
-  }
+session_cache_limiter("private");
 
-  $p= (int)($_GET['p']);
-  $x= (int)($_GET['x']);
-  $y= (int)($_GET['y']);
+/* Check for parameter completenes */
+if (!isset($_GET['x']) || !isset($_GET['y']) || !isset($_GET['p'])){
+  die ("Missing parameters!");
+}
+if (!is_numeric($_GET['x']) || !is_numeric($_GET['y'])){
+  die ("Parameters must be numeric!");
+}
 
-  /* Check percentage */
-  if ($p < 0){
-    $p= 0;
-  } elseif ($p > 100){
-    $p= 100;
-  }
-  $p= intval ($p);
+$p= (int)($_GET['p']);
+$x= (int)($_GET['x']);
+$y= (int)($_GET['y']);
 
-  /* Check dimensions */
-  if ($x < 3 || $x > 1000){
-    $x= 180;
-  }
-  if ($y < 3 || $y > 700){
-    $y= 20;
-  }
+/* Check percentage */
+if ($p < 0){
+  $p= 0;
+} elseif ($p > 100){
+  $p= 100;
+}
+$p= intval ($p);
 
-  if(!function_exists("imagecreate")){
-    syslog(LOG_ERR, "GOsa is missing the gd library, please install php5-gd to be able to see progress images.");
-    echo "Please install the php5-gd library, GOsa can't create images without it.";
-    exit();
-  }else{
+/* Check dimensions */
+if ($x < 3 || $x > 1000){
+  $x= 180;
+}
+if ($y < 3 || $y > 700){
+  $y= 20;
+}
 
-    $x_matches= FALSE;
-    $y_matches= FALSE;
-    foreach (array(7,6,5,4,3,2,1,0) as $font){
-      $fx= ImageFontWidth($font) * strlen("$p%");
-      $fy= ImageFontHeight($font);
+if(!function_exists("imagecreate")){
+  syslog(LOG_ERR, "GOsa is missing the gd library, please install php5-gd to be able to see progress images.");
+  echo "Please install the php5-gd library, GOsa can't create images without it.";
+  exit();
+}else{
 
-      /* Look if font size matches image size */
-      if ($fx < ($x-2)){
-        $x_matches= TRUE;
-      }
-      if ($fy < ($y-2)){
-        $y_matches= TRUE;
-      }
-      if ($x_matches && $y_matches){
-        break;
-      }
+  $x_matches= FALSE;
+  $y_matches= FALSE;
+  foreach (array(7,6,5,4,3,2,1,0) as $font){
+    $fx= ImageFontWidth($font) * strlen("$p%");
+    $fy= ImageFontHeight($font);
+
+    /* Look if font size matches image size */
+    if ($fx < ($x-2)){
+      $x_matches= TRUE;
     }
-
-    /* Draw image in GD image stream */
-    $im = imagecreate ($x, $y)
-      or die ("Cannot Initialize new GD image stream");
-
-    /* Set colors */
-    $bg_color= imagecolorallocate ($im, 255, 255, 255);
-    $br_color= imagecolorallocate ($im, 0,0,0);
-    $fi_color= imagecolorallocate ($im, 0,0,180);
-    $tx_color= imagecolorallocate ($im, 240, 10, 90);
-
-    /* Draw progress bar */
-    imagerectangle ($im, 0, 0, $x-1, $y-1, $br_color);
-    imagefilledrectangle ($im, 1, 1, (($x - 2) * $p / 100),
-        $y - 2, $fi_color);
-
-    /* Is font to big for progress bar? */
-    if ($font != 0){
-      imagestring ($im, $font, ($x - $fx) / 2, ($y - $fy) / 2, "$p%", $tx_color);
+    if ($fy < ($y-2)){
+      $y_matches= TRUE;
     }
-
-    /* Finally draw the image and remove context */
-    header ("Content-type: image/png");
-    imagepng ($im);
-    imagedestroy ($im);
+    if ($x_matches && $y_matches){
+      break;
+    }
   }
+
+  /* Draw image in GD image stream */
+  $im = imagecreate ($x, $y)
+    or die ("Cannot Initialize new GD image stream");
+
+  /* Set colors */
+  $bg_color= imagecolorallocate ($im, 255, 255, 255);
+  $br_color= imagecolorallocate ($im, 0,0,0);
+  $fi_color= imagecolorallocate ($im, 0,0,180);
+  $tx_color= imagecolorallocate ($im, 240, 10, 90);
+
+  /* Draw progress bar */
+  imagerectangle ($im, 0, 0, $x-1, $y-1, $br_color);
+  imagefilledrectangle ($im, 1, 1, (($x - 2) * $p / 100),
+      $y - 2, $fi_color);
+
+  /* Is font to big for progress bar? */
+  if ($font != 0){
+    imagestring ($im, $font, ($x - $fx) / 2, ($y - $fy) / 2, "$p%", $tx_color);
+  }
+
+  /* Finally draw the image and remove context */
+  header ("Content-type: image/png");
+  imagepng ($im);
+  imagedestroy ($im);
+}
 ?>
