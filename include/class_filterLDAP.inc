@@ -2,7 +2,7 @@
 
 class filterLDAP {
 
-  static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "")
+  static function query($base, $scope, $filter, $attributes, $category, $objectStorage= array(""))
   {
     $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
@@ -21,16 +21,17 @@ class filterLDAP {
     if (!is_array($category)) {
       $category= array($category);
     }
-    if (!is_array($objectStorage)) {
-      $objectStorage= array($objectStorage);
-    }
-    $method= (empty($objectStorage) && !($flags & GL_SUBSEARCH))?"ls":"search";
+
+    // Store in base - i.e. is a rdn value empty?
+    $storeOnBase= count($objectStorage) == 1 && empty($objectStorage[0]);
+
+    $method= ($storeOnBase && !($flags & GL_SUBSEARCH))?"ls":"search";
 
     // Initialize search bases
     $bases= array();
     
     // Get list of sub bases to search on
-    if (count($objectStorage) == 0) {
+    if ($storeOnBase) {
       $bases[$base]= "";
     } else {
       foreach ($objectStorage as $oc) {
