@@ -114,14 +114,7 @@ class departmentManagement extends management
     $str = management::saveChanges();
     if(!empty($str)) return($str);
 
-  
-    global $config; 
-    $config->get_departments();
-    $config->make_idepartments();
-    $this->config = $config;
-    $headpage = $this->getHeadpage();
-    $headpage->refreshBasesList();
-
+    $this->refreshDeps(); 
     $plugname = $this->last_tabObject->base_name;
     if($this->last_tabObject->by_object[$plugname]->must_be_tagged()){
       $smarty = get_smarty();
@@ -129,6 +122,17 @@ class departmentManagement extends management
       $smarty->assign("message",_("As soon as the tag operation has finished, you can scroll down to end of the page and    press the 'Continue' button to continue with the department management dialog."));
       return($smarty->fetch(get_template_path("dep_iframe.tpl",TRUE)));
     }
+  }
+
+  
+  function refreshDeps()
+  {
+    global $config; 
+    $config->get_departments();
+    $config->make_idepartments();
+    $this->config = $config;
+    $headpage = $this->getHeadpage();
+    $headpage->refreshBasesList();
   }
  
 
@@ -159,6 +163,13 @@ class departmentManagement extends management
     return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$ou</a>");
   }
 
+  
+  // Finally remove departments and update departmnet browsers
+  function removeEntryConfirmed($action="",$target=array(),$all=array(),$altTabClass="",$altTabType="",$altAclCategory="")
+  {
+    management::removeEntryConfirmed($action,$target,$all, $altTabClass,$altTabType,$altAclCategory);
+    $this->refreshDeps();
+  }
 
   /*! \brief  Returns information about all container types that GOsa con handle.
     @return Array   Informations about departments supported by GOsa.
