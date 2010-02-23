@@ -348,6 +348,9 @@
 {/render}
         {if $manager!=""}
 {render acl=$managerACL}
+        <img src='images/info_small.png' title='{$manager}' class='center'>
+{/render}
+{render acl=$managerACL}
         <input type='image' src='images/lists/trash.png' name='removeManager' class='center'>
 {/render}
         {/if}
