@@ -1300,6 +1300,7 @@ class listing {
     // Populate base selector if already present
     if ($this->baseSelector && $this->baseMode) {
       $this->baseSelector->setBases($this->bases);
+      $this->baseSelector->update(TRUE);
     }
   }
 
