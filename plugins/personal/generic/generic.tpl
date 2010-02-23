@@ -320,19 +320,6 @@
      </td>
     </tr>
     <tr>
-     <td><label for="manager">{t}Manager{/t}</label></td>
-     <td>
-{render acl=$managerACL checkbox=$multiple_support checked=$use_manager}
-	<select id="manager" name="manager">
-		<option value="">None</option>
-		{foreach item=cn key=dn from=$managers}
-			<option value="{$dn}" {if $manager == $dn}selected="selected"{/if}>{$cn}</option>
-		{/foreach}>
-	</select>
-{/render}
-     </td>
-    </tr>
-    <tr>
      <td><label for="employeeNumber">{t}Employee No.{/t}</label></td>
      <td>
 {render acl=$employeeNumberACL checkbox=$multiple_support checked=$use_employeeNumber}
@@ -348,6 +335,25 @@
 {/render}
      </td>
     </tr>
+    {if !$multiple_support}
+    <tr>
+     <td><label for="manager">{t}Manager{/t}</label></td>
+     <td>
+{render acl=$managerACL}
+        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled
+          title='{$manager}'>
+{/render}
+{render acl=$managerACL}
+        <input type='image' src='images/lists/edit.png' name='editManager' class='center'>
+{/render}
+        {if $manager!=""}
+{render acl=$managerACL}
+        <input type='image' src='images/lists/trash.png' name='removeManager' class='center'>
+{/render}
+        {/if}
+     </td>
+    </tr>
+    {/if}
    </table>
   </td>
    

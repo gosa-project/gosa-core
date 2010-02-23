@@ -109,6 +109,7 @@ class user extends plugin
   var $view_logged = FALSE;
 
   var $manager = "";
+  var $manager_name = "";
 
 
   /* attribute list for save action */
@@ -258,6 +259,20 @@ class user extends plugin
     $this->baseSelector->setSubmitButton(false);
     $this->baseSelector->setHeight(300);
     $this->baseSelector->update(true);
+
+
+    // Detect the managers name
+    $this->manager_name = "";
+    $ldap = $this->config->get_ldap_link();
+    if(!empty($this->manager)){
+      $ldap->cat($this->manager, array('cn'));
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+        $this->manager_name = $attrs['cn'][0];
+      }else{
+        $this->manager_name = "("._("Unknown")."!): ".$this->manager;
+      }
+    }
   }
 
 
@@ -289,20 +304,36 @@ class user extends plugin
       new log("view","users/".get_class($this),$this->dn);
     }
 
+    // Clear manager attribute if requested
+    if(preg_match("/ removeManager/i", " ".implode(array_keys($_POST),' ')." ")){
+      $this->manager = "";
+    }
+
+    // Allow to select a new inetOrgPersion:manager 
+    if(preg_match("/ editManager/i", " ".implode(array_keys($_POST),' ')." ")){
+      $this->dialog = new singleUserSelect($this->config, get_userinfo());
+    }
+    if($this->dialog && count($this->dialog->detectPostActions())){
+      $users = $this->dialog->detectPostActions();
+      if(isset($users['targets']) && count($users['targets'])){
+
+        $headpage = $this->dialog->getHeadpage();
+        $dn = $users['targets'][0];
+        $attrs = $headpage->getEntry($dn);
+        $this->manager = $dn;
+        $this->manager_name = $attrs['cn'][0];
+        $this->dialog = NULL;
+      }
+    }
+    if(isset($_POST['add_users_cancel'])){
+      $this->dialog = NULL;
+    }
+    if($this->dialog) return($this->dialog->execute()); 
+
+
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
     $smarty->assign("gosaLoginRestrictionWidget", $this->gosaLoginRestrictionWidget->render());
-
-    /* Assign managers */
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current["BASE"]);
-    $ldap->search("(objectClass=inetOrgPerson)", array("cn", "dn"));
-    $managers = array();
-    while($attrs = $ldap->fetch()) {
-      $managers[$attrs["dn"]] = $attrs["cn"][0];
-    }
-    asort($managers);
-    $smarty->assign("managers", $managers);
 
     /* Assign sex */
     $sex= array(0 => "&nbsp;", "F" => _("female"), "M" => _("male"));
@@ -677,6 +708,7 @@ class user extends plugin
       $smarty->assign("has_phoneaccount", "false");
     }
     $smarty->assign("multiple_support" , $this->multiple_support_active);
+    $smarty->assign("manager_name",$this->manager_name);
     return($smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__))));
   }
 
