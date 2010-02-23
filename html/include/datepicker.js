@@ -407,7 +407,7 @@ DatePicker.prototype	= {
  	
 	/* hack for buggy form elements layering in IE */
 	_wrap_in_iframe : function ( content ) {
-		return	( Prototype.Browser.IE ) ? "<div style='height:167px;width:185px;background-color:white;align:left'><iframe width='100%' height='100%' marginwidth='0' marginheight='0' frameborder='0' src='about:blank' style='filter:alpha(Opacity=50);'></iframe><div style='position:absolute;background-color:white;top:2px;left:2px;width:180px'>" + content + "</div></div>" : content;
+		return	( Prototype.Browser.IE && msieversion() < 8 ) ? "<div style='height:167px;width:185px;background-color:white;align:left'><iframe width='100%' height='100%' marginwidth='0' marginheight='0' frameborder='0' src='about:blank' style='filter:alpha(Opacity=50);'></iframe><div style='position:absolute;background-color:white;top:2px;left:2px;width:180px'>" + content + "</div></div>" : content;
  	},
  	
 	/**
@@ -793,3 +793,15 @@ DatePicker.prototype	= {
 		$(this._id_datepicker_hdr).update('&nbsp;&nbsp;&nbsp;'+ this.getMonthLocale(this._current_mon) +'&nbsp;'+ this._current_year +'&nbsp;&nbsp;&nbsp;');
 	}
 };
+
+
+function msieversion()
+{
+   var ua = window.navigator.userAgent
+   var msie = ua.indexOf ( "MSIE " )
+   if ( msie > 0 )      // If Internet Explorer, return version number
+      return parseInt (ua.substring (msie+5, ua.indexOf (".", msie )))
+   else                 // If another browser, return 0
+      return 0
+}
+
