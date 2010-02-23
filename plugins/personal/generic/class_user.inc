@@ -602,7 +602,11 @@ class user extends plugin
       $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
     }
 
-    $smarty->assign("gosaLoginRestrictionACL", $this->getacl('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit'))));
+    // Special ACL for gosaLoginRestrictions - 
+    // In case of multiple edit, we need a readonly ACL for the list. 
+    $smarty->assign('gosaLoginRestriction_ONLY_R_ACL', 
+      preg_replace("/[^r]/i","", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit')))));
+
     $smarty->assign("pwmode", $pwd_methods);
     $smarty->assign("pwmode_select", $this->pw_storage);
     $smarty->assign("pw_configurable", $is_configurable);
@@ -1682,6 +1686,10 @@ class user extends plugin
       $ret['orig_base']="Changed_by_Multi_Plug";
       $ret['base']=$this->base;
     }
+
+    $ret['gosaLoginRestriction'] = $this->gosaLoginRestriction;
+    $ret['gosaLoginRestriction_some'] = $this->gosaLoginRestriction_some;
+
     return($ret); 
   }
 
@@ -1702,7 +1710,7 @@ class user extends plugin
         }
       }
     }
-
+  
     /* Refresh base */
     if ($this->acl_is_moveable($this->base)){
       if (!$this->baseSelector->update()) {
@@ -1719,6 +1727,12 @@ class user extends plugin
           $this->multi_boxes[] = $val;
         }
       }
+    }
+
+    /* Sync lists */
+    $this->gosaLoginRestrictionWidget->save_object();
+    if ($this->gosaLoginRestrictionWidget->isModified()) {
+      $this->gosaLoginRestriction= array_values($this->gosaLoginRestrictionWidget->getMaintainedData());
     }
   }
 
@@ -1764,6 +1778,76 @@ class user extends plugin
   }
 
 
+  /*! \brief  Prepares the plugin to be used for multiple edit
+   *          Update plugin attributes with given array of attribtues.
+   *  \param  array   Array with attributes that must be updated.
+   */
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    // Get login restrictions
+    if(isset($attrs['gosaLoginRestriction'])){
+      $this->gosaLoginRestriction  =array();
+      for($i =0;$i < $attrs['gosaLoginRestriction']['count']; $i++){
+        $this->gosaLoginRestriction[] = $attrs['gosaLoginRestriction'][$i];
+      }
+    }
+
+    // Detect login restriction not used in all user objects.
+    $this->gosaLoginRestriction_some = array();
+    if(isset($all['gosaLoginRestriction'])){
+      for($i=0;$i<$all['gosaLoginRestriction']['count'];$i++){
+        $this->gosaLoginRestriction_some[] = $all['gosaLoginRestriction'][$i];
+      }
+    }
+
+
+    // Reinit the login restriction list.
+    $data = $this->convertLoginRestriction();
+    if(count($data)){
+      $this->gosaLoginRestrictionWidget->setListData($data['data'], $data['displayData']);
+    }
+  }
+
+
+  function set_multi_edit_values($attrs)
+  {
+    $lR = array();
+
+    // Update loginRestrictions, keep my settings while ip is optional
+    foreach($attrs['gosaLoginRestriction_some'] as $ip){
+      if(in_array($ip, $this->gosaLoginRestriction) && in_array($ip, $attrs['gosaLoginRestriction'])){
+        $lR[] = $ip;
+      }
+    }
+
+    // Add enforced loginRestrictions 
+    foreach($attrs['gosaLoginRestriction'] as $ip){
+      $lR[] = $ip;
+    }
+
+    $lR = array_values(array_unique($lR));
+    $this->is_modified |=  array_differs($this->gosaLoginRestriction, $lR);
+    plugin::set_multi_edit_values($attrs);
+    $this->gosaLoginRestriction = $lR;
+  }
+
+
+  function convertLoginRestriction()
+  {
+    $all = array_unique(array_merge($this->gosaLoginRestriction,$this->gosaLoginRestriction_some));
+    $data = array();
+    foreach($all as $ip){
+      $data['data'][] = $ip;
+      if(!in_array($ip, $this->gosaLoginRestriction)){
+        $data['displayData'][] = array('mode' => LIST_MARKED , 'data' => array($ip.' ('._("Entries differ").')'));
+      }else{
+        $data['displayData'][] = array('mode' => 0 , 'data' => array($ip));
+      }
+    }   
+    return($data);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
