@@ -44,6 +44,7 @@ class departmentManagement extends management
     } else {
       $filter = new filter(get_template_path("dep-filter.xml", true));
     }
+    $filter->setObjectStorage(array(''));
 
     // Build headpage
     $headpage = new listing(get_template_path("dep-list.xml", true));
