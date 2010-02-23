@@ -108,12 +108,15 @@ class user extends plugin
 
   var $view_logged = FALSE;
 
+  var $manager = "";
+
+
   /* attribute list for save action */
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
       "homePostalAddress", "homePhone", "labeledURI", "ou", "o", "dateOfBirth", "gender","preferredLanguage",
       "departmentNumber", "employeeNumber", "employeeType", "l", "st","jpegPhoto",
       "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
-      "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate", "gosaLoginRestriction");
+      "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate", "gosaLoginRestriction", "manager");
 
   var $objectclasses= array("top", "person", "organizationalPerson", "inetOrgPerson",
       "gosaAccount");
@@ -289,6 +292,17 @@ class user extends plugin
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
     $smarty->assign("gosaLoginRestrictionWidget", $this->gosaLoginRestrictionWidget->render());
+
+    /* Assign managers */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current["BASE"]);
+    $ldap->search("(objectClass=inetOrgPerson)", array("cn", "dn"));
+    $managers = array();
+    while($attrs = $ldap->fetch()) {
+      $managers[$attrs["dn"]] = $attrs["cn"][0];
+    }
+    asort($managers);
+    $smarty->assign("managers", $managers);
 
     /* Assign sex */
     $sex= array(0 => "&nbsp;", "F" => _("female"), "M" => _("male"));
@@ -1632,6 +1646,7 @@ class user extends plugin
           "o"                 => _("Organization"),
           "ou"                => _("Department"),
           "departmentNumber"  => _("Department number"),
+          "manager"           => _("Manager"),
           "employeeNumber"    => _("Employee number"),
           "employeeType"      => _("Employee type"),
 
