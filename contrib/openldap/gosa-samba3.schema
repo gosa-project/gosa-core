@@ -308,7 +308,8 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.3 NAME 'gosaCacheEntry' SUP top STRUCTU
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.4 NAME 'gosaDepartment' SUP top AUXILIARY
         DESC 'Class to mark Departments for GOsa (v2.6.1)'
-	MUST  ( ou $ description ))
+	MUST  ( ou $ description )
+	MAY   ( manager ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.5 NAME 'gosaMailAccount' SUP top AUXILIARY
         DESC 'Class to mark MailAccounts for GOsa (v2.6.1)'
