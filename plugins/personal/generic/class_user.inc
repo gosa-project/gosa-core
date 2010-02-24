@@ -307,6 +307,7 @@ class user extends plugin
     // Clear manager attribute if requested
     if(preg_match("/ removeManager/i", " ".implode(array_keys($_POST),' ')." ")){
       $this->manager = "";
+      $this->manager_name = "";
     }
 
     // Allow to select a new inetOrgPersion:manager 
