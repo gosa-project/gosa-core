@@ -1295,7 +1295,11 @@ class LDAP{
                     break;
 
           case ')': if ($name != ""){
-                      $objectclasses[$ocname][$name]= $this->value2container($value);
+                      $v = $this->value2container($value);
+                      if(in_array($name, array('MUST', 'MAY')) && !is_array($v)){
+                        $v = array($v);
+                      }
+                      $objectclasses[$ocname][$name]= $v;
                     }
                     $name= "";
                     $value= "";
@@ -1310,7 +1314,11 @@ class LDAP{
           case 'MUST':
           case 'MAY':
                     if ($name != ""){
-                      $objectclasses[$ocname][$name]= $this->value2container($value);
+                      $v = $this->value2container($value);
+                      if(in_array($name, array('MUST', 'MAY')) && !is_array($v)){
+                        $v = array($v);
+                      }
+                      $objectclasses[$ocname][$name]= $v;
                     }
                     $name= $chunk;
                     $value= "";
