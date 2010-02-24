@@ -1389,10 +1389,15 @@ class user extends plugin
   /* Indicate whether a password change is needed or not */
   function password_change_needed()
   {
-    if(in_array("pw_storage",$this->multi_boxes)){
-      return(TRUE);
+    if($this->multiple_support_active){
+      return(FALSE);
+    }else{
+
+      if(in_array("pw_storage",$this->multi_boxes)){
+        return(TRUE);
+      }
+      return($this->pw_storage != $this->last_pw_storage && !$this->is_template);
     }
-    return($this->pw_storage != $this->last_pw_storage && !$this->is_template);
   }
 
 
