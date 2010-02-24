@@ -46,7 +46,7 @@ class department extends plugin
 
   /* attribute list for save action */
   var $attributes= array("ou", "description", "businessCategory", "st", "l", "postalAddress",
-			"telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag");
+			"telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag", "manager");
 
   /* Do not append the structural object classes here, they are added dynamically in the constructor */
   var $objectclasses= array("top", "gosaDepartment");
@@ -56,6 +56,10 @@ class department extends plugin
   var $orig_base = "";
   var $orig_ou = "";
   var $baseSelector;
+
+  var $manager_enabled = FALSE;
+  var $manager_name ="";
+  var $manager ="";
 
   function department (&$config, $dn)
   {
@@ -120,6 +124,28 @@ class department extends plugin
     $this->baseSelector->setSubmitButton(false);
     $this->baseSelector->setHeight(300);
     $this->baseSelector->update(true);
+
+
+
+    // If the 'manager' attribute is present in gosaDepartment allow to manage it.
+    $ldap = $this->config->get_ldap_link();
+    $ocs = $ldap->get_objectclasses();
+    if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['gosaDepartment']['MAY'])){
+      $this->manager_enabled = TRUE;
+
+      // Detect the managers name
+      $this->manager_name = "";
+      $ldap = $this->config->get_ldap_link();
+      if(!empty($this->manager)){
+        $ldap->cat($this->manager, array('cn'));
+        if($ldap->count()){
+          $attrs = $ldap->fetch();
+          $this->manager_name = $attrs['cn'][0];
+        }else{
+          $this->manager_name = "("._("Unknown")."!): ".$this->manager;
+        }
+      }
+    }
   }
 
 	function execute()
@@ -137,7 +163,42 @@ class department extends plugin
 		$this->config->get_departments($this->dn);
 		$this->config->make_idepartments();
 		$smarty= get_smarty();
-                $smarty->assign("usePrototype", "true");
+    $smarty->assign("usePrototype", "true");
+
+    // Clear manager attribute if requested
+    if(preg_match("/ removeManager/i", " ".implode(array_keys($_POST),' ')." ")){
+      $this->manager = "";
+      $this->manager_name = "";
+    }
+
+    // Allow to manager manager attribute
+    if($this->manager_enabled){
+
+      // Allow to select a new inetOrgPersion:manager
+      if(preg_match("/ editManager/i", " ".implode(array_keys($_POST),' ')." ")){
+        $this->dialog = new singleUserSelect($this->config, get_userinfo());
+      }
+      if($this->dialog && count($this->dialog->detectPostActions())){
+        $users = $this->dialog->detectPostActions();
+        if(isset($users['targets']) && count($users['targets'])){
+
+          $headpage = $this->dialog->getHeadpage();
+          $dn = $users['targets'][0];
+          $attrs = $headpage->getEntry($dn);
+          $this->manager = $dn;
+          $this->manager_name = $attrs['cn'][0];
+          $this->dialog = NULL;
+        }
+      }
+      if(isset($_POST['add_users_cancel'])){
+        $this->dialog = NULL;
+      }
+      if($this->dialog) return($this->dialog->execute());
+    }
+    $smarty->assign("manager",$this->manager);
+    $smarty->assign("manager_name",$this->manager_name);
+    $smarty->assign("manager_enabled",$this->manager_enabled);
+
 
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $translation){
@@ -611,6 +672,7 @@ class department extends plugin
                     "postalAddress"     => _("Address"),
                     "telephoneNumber"   => _("Telephone"),
                     "facsimileTelephoneNumber" => _("Fax"),
+                    "manager" => _("Manager"),
 
                     "gosaUnitTag"       => _("Administrative settings"))
                   ));
