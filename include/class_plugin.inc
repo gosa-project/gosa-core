@@ -1037,6 +1037,23 @@ class plugin
         $role->save();
       }
     }
+
+    // Update 'manager' attributes from gosaDepartment and inetOrgPerson 
+    $filter = "(&(objectClass=inetOrgPerson)(manager=".LDAP::prepare4filter(LDAP::fix($src_dn))."))";
+    $ocs = $ldap->get_objectclasses();
+    if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['gosaDepartment']['MAY'])){
+      $filter = "(|".$filter."(&(objectClass=gosaDepartment)(manager=".LDAP::prepare4filter(LDAP::fix($src_dn)).")))";
+    }
+    $leaf_deps=  get_list($filter,array("all"),$this->config->current['BASE'], 
+        array("manager","dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
+    foreach($leaf_deps as $entry){
+      $update = array('manager' => $dst_dn);
+      $ldap->cd($entry['dn']);
+      $ldap->modify($update);
+      if(!$ldap->success()){
+        trigger_error(sprintf("Failed to update manager for '%s', error was '%s'", $entry['dn'], $ldap->get_error()));
+      }
+    }
  
     /* Check if there are gosa departments moved. 
        If there were deps moved, the force reload of config->deps.
