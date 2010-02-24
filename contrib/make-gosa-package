@@ -111,11 +111,13 @@ then
 	BRANCH_REV=$(LANG=C svn info gosa-info | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
 	rm -rf gosa-info
 
-        echo "Loading svn information for goto '${BRANCH}'..."
-        svn co -N https://oss.gonicus.de/repositories/goto/${BRANCH} goto-info/ > /dev/null
-        GOTO_BRANCH_REV=$(LANG=C svn info goto-info | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
-        rm -rf goto-info
-
+	if [ "$GOTO" = "use" ]
+	        then
+	        echo "Loading svn information for goto '${BRANCH}'..."
+	        svn co -N https://oss.gonicus.de/repositories/goto/${BRANCH} goto-info/ > /dev/null
+	        GOTO_BRANCH_REV=$(LANG=C svn info goto-info | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
+	        rm -rf goto-info
+	fi
 else
         echo "Loading svn information for gosa '${BRANCH}' from local checkout ..."
 	BRANCH_REV=$(LANG=C svn info $EXTRACT/gosa-core | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
