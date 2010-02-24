@@ -23,7 +23,7 @@
 class country extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array( "c", "ou", "description","gosaUnitTag");
+	var $attributes     = array( "c", "ou", "description","gosaUnitTag", "manager");
 	var $objectclasses  = array("top", "gosaDepartment");
   var $structuralOC   = array("country");
   var $type   ="country";
@@ -31,6 +31,10 @@ class country extends department
   var $orgi_c ="";
 
   var $namingAttr = "c";
+  var $manager_enabled = FALSE;
+  var $manager_name ="";
+  var $manager ="";
+
 
   function check()
   {
@@ -86,6 +90,7 @@ class country extends department
           "plProvidedAcls" => array(
             "c"                 => _("Country name"),
             "description"       => _("Description"),
+            "manager"                 => _("Manager"),
             "base"              => _("Base"),
             "gosaUnitTag"       => _("Administrative settings"))
           ));

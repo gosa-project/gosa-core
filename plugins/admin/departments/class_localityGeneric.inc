@@ -23,7 +23,7 @@
 class locality extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array("l", "description", "ou", "gosaUnitTag");
+	var $attributes     = array("l", "description", "ou", "gosaUnitTag", "manager");
 	var $objectclasses  = array("top", "gosaDepartment");
   var $structuralOC   = array("locality");
 
@@ -32,6 +32,10 @@ class locality extends department
   var $l          = "";
   var $orig_l     = "";
   var $namingAttr = "l";
+
+  var $manager_enabled = FALSE;
+  var $manager_name ="";
+  var $manager ="";
 
   function check()
   {
@@ -86,6 +90,7 @@ class locality extends department
           "plProvidedAcls" => array(
             "l"                 => _("Location"),
             "description"       => _("Description"),
+            "manager"                 => _("Manager"),
             "base"              => _("Base"),
             "gosaUnitTag"       => _("Administrative settings"))
           ));

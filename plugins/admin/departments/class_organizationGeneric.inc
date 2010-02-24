@@ -24,7 +24,7 @@ class organization extends department
 {
 	/* attribute list for save action */
   var $attributes     = array( "o", "ou", "description","userPassword","searchGuide",
-      "seeAlso","businessCategory","x121Address","registeredAddress",
+      "seeAlso","businessCategory","x121Address","registeredAddress","manager",
       "destinationIndicator","preferredDeliveryMethod","telexNumber",
       "telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street",
       "postOfficeBox","postalCode", "postalAddress","physicalDeliveryOfficeName",
@@ -63,6 +63,10 @@ class organization extends department
   var $type         = "organization";
   var $orgi_o       = "";
   var $namingAttr   = "o";
+
+  var $manager_enabled = FALSE;
+  var $manager_name ="";
+  var $manager ="";
 
   function check()
   {
@@ -119,6 +123,8 @@ class organization extends department
             "description"             => _("Description"),
             "businessCategory"        => _("Category"),
             "base"                    => _("Base"),
+
+            "manager"                 => _("Manager"),
 
             "st"                      => _("State"),
             "l"                       => _("Location"),

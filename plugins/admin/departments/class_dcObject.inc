@@ -23,13 +23,17 @@
 class dcObject extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array( "dc", "ou", "description","gosaUnitTag");
+	var $attributes     = array( "dc", "ou", "description","gosaUnitTag", "manager");
 	var $objectclasses  = array("top", "dcObject", "gosaDepartment");
   var $structuralOC   = array("locality");
   var $type       = "dcObject";
   var $dc         = "";
   var $orgi_dc    = "";
   var $namingAttr = "dc";
+
+  var $manager_enabled = FALSE;
+  var $manager_name ="";
+  var $manager ="";
 
 
   function check()
@@ -85,6 +89,7 @@ class dcObject extends department
           "plProvidedAcls" => array(
             "dc"                => _("Name"),
             "description"       => _("Description"),
+            "manager"                 => _("Manager"),
             "base"              => _("Base"),
             "gosaUnitTag"       => _("Administrative settings"))
           ));

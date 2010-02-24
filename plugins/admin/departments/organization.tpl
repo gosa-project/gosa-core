@@ -45,6 +45,29 @@
 	</td>
        </tr>
 	{/if}
+
+  {if $manager_enabled}
+    <tr>
+     <td><label for="manager">{t}Manager{/t}</label></td>
+     <td>
+{render acl=$managerACL}
+        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled
+          title='{$manager}'>
+{/render}
+{render acl=$managerACL}
+        <input type='image' src='images/lists/edit.png' name='editManager' class='center'>
+{/render}
+        {if $manager!=""}
+{render acl=$managerACL}
+        <img src='images/info_small.png' title='{$manager}' class='center'>
+{/render}
+{render acl=$managerACL}
+        <input type='image' src='images/lists/trash.png' name='removeManager' class='center'>
+{/render}
+        {/if}
+     </td>
+    </tr>
+  {/if}
      </table>
 
    </td>
