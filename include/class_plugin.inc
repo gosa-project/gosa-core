@@ -1041,7 +1041,7 @@ class plugin
     // Update 'manager' attributes from gosaDepartment and inetOrgPerson 
     $filter = "(&(objectClass=inetOrgPerson)(manager=".LDAP::prepare4filter(LDAP::fix($src_dn))."))";
     $ocs = $ldap->get_objectclasses();
-    if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['inetOrgPerson']['MAY'])){
+    if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['gosaDepartment']['MAY'])){
       $filter = "(|".$filter."(&(objectClass=gosaDepartment)(manager=".LDAP::prepare4filter(LDAP::fix($src_dn)).")))";
     }
     $leaf_deps=  get_list($filter,array("all"),$this->config->current['BASE'], 
