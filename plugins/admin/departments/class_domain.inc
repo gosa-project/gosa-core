@@ -23,13 +23,17 @@
 class domain extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array( "dc", "ou", "description","gosaUnitTag");
+	var $attributes     = array( "dc", "ou", "description","gosaUnitTag", "manager");
 	var $objectclasses  = array("top", "domain", "gosaDepartment");
         var $structuralOC   = array("domain");
         var $type       = "domain";
         var $dc         = "";
         var $orgi_dc    = "";
         var $namingAttr = "dc";
+
+  var $manager_enabled = FALSE;
+  var $manager_name ="";
+  var $manager ="";
 
 
   function check()
@@ -86,6 +90,7 @@ class domain extends department
             "dc"                => _("Name"),
             "description"       => _("Description"),
             "base"              => _("Base"),
+            "manager"                 => _("Manager"),
             "gosaUnitTag"       => _("Administrative settings"))
           ));
   }
