@@ -215,6 +215,7 @@ class pluglist {
         $menu.= "\n </ul>";
         $menu.= "\n <div></div>\n";
         $menu.= "\n</div>\n";
+        $menu.= "\n<div></div>\n";
         $menu.= "\n<div class='v-spacer'></div>\n";
 			}
       $menu.= "\n</div>";
