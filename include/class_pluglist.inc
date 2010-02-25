@@ -150,81 +150,74 @@ class pluglist {
 		return($this->headlines);
 	}
 
+
+  function checkMenu()
+  {
+	  $cfg= &$this->config->data['MENU'];
+    foreach ($cfg as $headline => $plug){
+		  $this->menuparts[_($headline)]= array();
+      foreach ($plug as $id => $info){
+        if (!isset($info['CLASS'])){
+          msg_dialog::display(
+              _("Configuration error"), 
+              _("The configuration format has changed. Please re-run setup!"), 
+              FATAL_ERROR_DIALOG);
+          exit();
+        }
+        if (!plugin_available($info['CLASS'])){
+          unset($cfg[$headline][$id]); 
+          continue; 
+        }
+			  if (!$this->check_access($info['ACL'])){
+          unset($cfg[$headline][$id]);
+          continue; 
+        }
+      }
+    }
+    if(!session::is_set('maxC')){
+      session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
+    }
+  }
+
 	function gen_menu()
 	{
 		if ($this->menu == ""){
-			$first= TRUE;
 			$cfg= $this->config->data['MENU'];
-
-			/* Parse headlines */
+      $this->checkMenu();
+			$cfg= $this->config->data['MENU'];
+      $menu = "\n<div class='navigation'>";
 			foreach ($cfg as $headline => $plug){
-				if ($first){
-					$style= "";
-					$first= FALSE;
-				} else {
-					$style= "style='border-top:1px solid #AAA; margin-top:0.8em;'";
-				}
-				$menu= "<p class=\"menuheader\" $style>"._($headline)."</p>\n";
-				$entries= "";
-				$this->menuparts[_($headline)]= array();
 
-				/* Parse sub-plugins */
+        if(!count($plug)) continue;
+        $menu.= "\n<div class='menu'>";
+        $menu.= "\n <ul>";
+        $menu.= "\n  <li class='menu-header'>".$headline."</li>";
+        $id = 0;
 				foreach ($plug as $info){
-
-					/* Read information from class variable */
-					if (!isset($info['CLASS'])){
-						msg_dialog::display(
-								_("Configuration error"), 
-								_("The configuration format has changed. Please re-run setup!"), 
-								FATAL_ERROR_DIALOG);
-						exit();
-					}
-					if (!plugin_available($info['CLASS'])){
-						continue;
-					}
-					$vars= get_class_vars($info['CLASS']);
-					if (isset($info['NAME'])){
-  					  $plHeadline= _($info['NAME']);
-                                        } else {
-  					  $plHeadline= $vars['plHeadline'];
-                                        }
-					$plDescription= $vars['plDescription'];
-
+          $id ++;
+          $vars= get_class_vars($info['CLASS']);
+          $plHeadline = (isset($info['NAME'])) ? $info['NAME'] : $vars['plHeadline'];
+          $plDescription= $vars['plDescription'];
 					$index= $this->get_index($info['CLASS']);
 					$href= "main.php?plug=$index&amp;reset=1";
-
 					if(!$vars){
 						$plHeadline 	= _("Unknown");
 						$plDescription 	= _("Unknown");
 						$href= "main.php?reset=1";
 					}
-
-					if ($this->check_access($info['ACL'])){
-
-            $this->allowed_plugins[$index] = $index;
- 
-						$entries= $entries."<p class=\"menuitem\" ".
-							"onClick='return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\", \"$href\");'>";
-						if(session::global_get('js')){
-							$entries.= _($plHeadline)."</p>\n";
-						} else {
-							$entries.= "<a class=\"menuitem\" ".
-							"href=\"$href\">".
-							_($plHeadline)."</a></p>\n";
-						}
-
-						if(!session::is_set('maxC')){
-							session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
-						}
-					}
-				}
-
-				/* Append to menu */
-				if ($entries != ""){
-					$this->menu.= $menu.$entries;
-				}
+          $this->allowed_plugins[$index] = $index;
+          $class= "";
+          if($id == count($plug)) $class=" class='menu-last' \n   ";
+          $menu .=  "\n  <li $class onClick='return question(\"".
+            _("You are currently editing a database entry. Do you want to dismiss the changes?")."\", 
+            \"$href\");'>".$plHeadline."</li>";
+        }
+        $menu.= "\n </ul>";
+        $menu.= "\n</div>\n";
+        $menu.= "\n<div class='v-spacer'></div>\n";
 			}
-
+      $menu.= "\n</div>";
+      $this->menu = $menu;
 		}
 
 		/* Write menu output */
@@ -240,26 +233,26 @@ class pluglist {
 		}
 
 		/* Fill current array */
-		$result= "<table width=\"100%\" summary=\"\">";
+		$result= "<ul>";
 		$count= 0;
 		foreach ($this->menuparts[$this->current] as $entry){
 			if ($count == 2){
-				$result.= "</tr>";
+				$result.= "</li>";
 				$count= 0;
 			}
 			if ($count == 0){
-				$result.= "<tr>";
+				$result.= "<li>";
 			}
-			$result.= "<td>$entry</td>";
+			$result.= "$entry";
 			$count++;
 		}
 
 		/* Add missing cell? */
 		if ($count == 1){
-			$result.= "<td>&nbsp;</td>";
+			$result.= "&nbsp;";
 		}
 
-		$result.= "</table>";
+		$result.= "</ul>";
 		return $result;
 	}
 
@@ -382,19 +375,19 @@ class pluglist {
 	}
 
 	function get_index($class)
-	{
-		/* Search for plugin index (id), identify entry by path && class */
-                $data = $this->config->data['MENU'];
-                foreach($data as $section => $plugins){
-                        foreach($plugins as $key => $plugin)    {
-                                if($plugin['CLASS'] == $class){
-                                        return($key);
-                                }
-                        }
-                }
+  {
+    /* Search for plugin index (id), identify entry by path && class */
+    $data = $this->config->data['MENU'];
+    foreach($data as $section => $plugins){
+      foreach($plugins as $key => $plugin)    {
+        if($plugin['CLASS'] == $class){
+          return($key);
+        }
+      }
+    }
 
-		/* Nothing */
-                return (0);
+    /* Nothing */
+    return (0);
 
 	}
 
