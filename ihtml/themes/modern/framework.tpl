@@ -13,12 +13,22 @@
 </div>
 <!-- {$go_home} -->
 
-      {$menu}
-	{$msg_dialogs}
+{$menu}
+
+{$msg_dialogs}
+
 <!-- Plugin area -->
 <div class='plugin-area'>
-
-	 {$contents}
+  <div class='plugin-path'>
+   <ul class='path-navigation'>
+    <li class='left right-border'><div class='nav-home'></div></li>
+    <li class='left'>Welcome to GOsa</li>
+    <li class='right left-border'>Help</li>
+    <li class='right left-border'>Change password</li>
+    <li class='right left-border'>My account</li>
+   </ul>
+  </div
+  {$contents}
 </div>
 
  {if $channel != ""}
