@@ -71,7 +71,7 @@ if (isset($config)){
 }
     
 /* If GET request is posted, the logout was forced by pressing the link */
-if (isset($_GET['request'])){
+if (isset($_POST['forcedlogout'])){
   
   /* destroy old session */
   session::destroy ();
