@@ -356,6 +356,24 @@
         {/if}
      </td>
     </tr>
+    {else}
+    <tr>
+     <td><label for="manager">{t}Manager{/t}</label></td>
+     <td>
+      <input type='checkbox' value="1" name="use_manager" id="use_manager" {if $use_manager} checked {/if}
+        onClick="document.mainform.submit();">
+        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled
+          title='{$manager}'>
+        {if $use_manager}
+        <input type='image' src='images/lists/edit.png' name='editManager' class='center'>
+        {if $manager!=""}
+        <img src='images/info_small.png' title='{$manager}' class='center'>
+        <input type='image' src='images/lists/trash.png' name='removeManager' class='center'>
+        {/if}
+        {/if}
+     </td>
+    </tr>
+  
     {/if}
    </table>
   </td>
