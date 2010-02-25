@@ -1389,10 +1389,15 @@ class user extends plugin
   /* Indicate whether a password change is needed or not */
   function password_change_needed()
   {
-    if(in_array("pw_storage",$this->multi_boxes)){
-      return(TRUE);
+    if($this->multiple_support_active){
+      return(FALSE);
+    }else{
+
+      if(in_array("pw_storage",$this->multi_boxes)){
+        return(TRUE);
+      }
+      return($this->pw_storage != $this->last_pw_storage && !$this->is_template);
     }
-    return($this->pw_storage != $this->last_pw_storage && !$this->is_template);
   }
 
 
@@ -1744,6 +1749,9 @@ class user extends plugin
 
   function multiple_save_object()
   {
+
+    if(!isset($_POST['user_mulitple_edit'])) return;
+
     plugin::multiple_save_object();
 
     /* Get pw_storage mode */
@@ -1839,6 +1847,19 @@ class user extends plugin
       $this->gosaLoginRestriction  =array();
       for($i =0;$i < $attrs['gosaLoginRestriction']['count']; $i++){
         $this->gosaLoginRestriction[] = $attrs['gosaLoginRestriction'][$i];
+      }
+    }
+
+    // Detect the managers name
+    $this->manager_name = "";
+    $ldap = $this->config->get_ldap_link();
+    if(!empty($this->manager)){
+      $ldap->cat($this->manager, array('cn'));
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+        $this->manager_name = $attrs['cn'][0];
+      }else{
+        $this->manager_name = "("._("Unknown")."!): ".$this->manager;
       }
     }
 
