@@ -814,6 +814,10 @@ class ogroup extends plugin
       $message[]= msgPool::required(_("Name"));
     }
 
+    if (preg_match('/[=,+<>#;]/', $this->cn)) { 
+      $message[] = msgPool::invalid(_("Name"), $this->cn, "/[^=+,<>#;]/"); 
+    } 
+
     /* To many different object types? */
     if (strlen($this->gosaGroupObjects) > 4){
       $message[]= _("You can combine two different object types at maximum, only!");
