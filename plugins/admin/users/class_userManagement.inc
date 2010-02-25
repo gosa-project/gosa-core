@@ -295,7 +295,18 @@ class userManagement extends management
   function saveChanges()
   {
     $str = management::saveChanges();
+  
     if(!empty($str)) return($str);
+
+    if($this->last_tabObject instanceOf multi_plug){
+      foreach($this->last_tabObject->a_handles as $user){
+        if($user->password_change_needed()){
+          $this->force_hash_type[$user->dn] = $user->by_object['user']->pw_storage;
+          $this->pwd_change_queue[] = $user->dn;
+        }
+      }
+      return($this->handlePasswordQueue());
+    }
 
     if(isset($this->last_tabObject->by_object['user']) && $this->last_tabObject->by_object['user']->password_change_needed()){
       $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
