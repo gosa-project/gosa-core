@@ -757,6 +757,23 @@ class user extends plugin
       $og->save ();
     }
 
+    // Update 'manager' attributes from gosaDepartment and inetOrgPerson
+    $filter = "(&(objectClass=inetOrgPerson)(manager=".LDAP::prepare4filter($this->dn)."))";
+    $ocs = $ldap->get_objectclasses();
+    if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['gosaDepartment']['MAY'])){
+      $filter = "(|".$filter."(&(objectClass=gosaDepartment)(manager=".LDAP::prepare4filter($this->dn).")))";
+    }
+    $leaf_deps=  get_list($filter,array("all"),$this->config->current['BASE'],
+        array("manager","dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
+    foreach($leaf_deps as $entry){
+      $update = array('manager' => array());
+      $ldap->cd($entry['dn']);
+      $ldap->modify($update);
+      if(!$ldap->success()){
+        trigger_error(sprintf("Failed to update manager for '%s', error was '%s'", $entry['dn'], $ldap->get_error()));
+      }
+    }
+
     /* Delete references to roles */
     $ldap->cd ($this->config->current['BASE']);
     $ldap->search ("(&(objectClass=organizationalRole)(roleOccupant=".LDAP::prepare4filter($this->dn)."))", array("cn"));
