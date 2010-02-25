@@ -999,13 +999,14 @@ class plugin
     }
 
     // Migrate objectgroups if needed
-    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","ogroups", array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))",
+      "ogroups", array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
     // Walk through all objectGroups
     foreach($ogroups as $ogroup){
       // Migrate old to new dn
       $o_ogroup= new ogroup($this->config,$ogroup['dn']);
-      if (isset($o_group->member[$src_dn])) {
+      if (isset($o_ogroup->member[$src_dn])) {
         unset($o_ogroup->member[$src_dn]);
       }
       $o_ogroup->member[$dst_dn]= $dst_dn;
