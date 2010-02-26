@@ -57,6 +57,8 @@ class pluglist {
     $this->info['all']['plProvidedAcls']= array();
     $this->info['all']['plDescription']= _("All objects in this category");
     $this->info['all']['plSelfModify']= FALSE;
+    
+    $this->gen_menu();
   }
 
 
