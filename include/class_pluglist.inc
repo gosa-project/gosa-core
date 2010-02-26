@@ -190,20 +190,11 @@ class pluglist {
         $id = 0;
         foreach ($plug as $info){
           $id ++;
-          $vars= get_class_vars($info['CLASS']);
-          $plHeadline = _((isset($info['NAME'])) ? $info['NAME'] : $vars['plHeadline']);
-          $plDescription= $vars['plDescription'];
-          $index= $this->get_index($info['CLASS']);
-          $href= "main.php?plug=$index&amp;reset=1";
-          if(!$vars){
-            $plHeadline 	= _("Unknown");
-            $plDescription 	= _("Unknown");
-            $href= "main.php?reset=1";
-          }
+          list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
           $this->allowed_plugins[$index] = $index;
           $class= "";
           if($id == count($plug)) $class=" class='menu-last' \n   ";
-          $menu .=  "\n  <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$plHeadline."</li>";
+          $menu .=  "\n  <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title."</li>";
         }
         $menu.= "\n </ul>";
         $menu.= "\n <div></div>\n";
@@ -252,8 +243,6 @@ class pluglist {
    */
   function show_iconmenu()
   {
-    global $class_mapping;
-
     $add_hr =FALSE;
     if ($this->iconmenu == ""){
       $cfg= $this->config->data['MENU'];
@@ -270,28 +259,7 @@ class pluglist {
         foreach ($plug as $info){
 
           // Get Plugin info
-          $vars= get_class_vars($info['CLASS']);
-          $plHeadline= _($vars['plHeadline']);
-          $plDescription= _($vars['plDescription']);
-          $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon']: "plugin.png";
-          $index= $this->get_index($info['CLASS']);
-
-          /* Check if class is available. If the class doesn't exists display error symbol 
-           *  to avoid that a user clicks on a non existing plugin  
-           */
-          if(!$vars){
-            $plHeadline = $plDescription = _("Unknown");
-            $info['ICON'] = "error.png";
-            $index = '';
-          }
-
-          // Detect the correct position of the plugin icon
-          if(!preg_match("/\//",$plIcon)){
-            $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', 
-                  $class_mapping[$info['CLASS']])."/images/$plIcon");
-          }else{
-            $image = $plIcon; 
-          }
+          list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
 
           // Add a seperating row
           if (($col % 4) == 0){ 
@@ -299,9 +267,9 @@ class pluglist {
           }
 
           $this->iconmenu.= "\n  <div class='container-element' style='width: 25%;' onclick='openPlugin({$index})'> ";
-          $this->iconmenu.= "\n   <div class='icon-menu-item' style='background-image: url({$image});'>";
-          $this->iconmenu.= "\n    <h1>{$plHeadline}</h1>";
-          $this->iconmenu.= "\n    <p>{$plDescription}</p>";
+          $this->iconmenu.= "\n   <div class='icon-menu-item' style='background-image: url({$icon});'>";
+          $this->iconmenu.= "\n    <h1>{$title}</h1>";
+          $this->iconmenu.= "\n    <p>{$desc}</p>";
           $this->iconmenu.= "\n   </div>";
           $this->iconmenu.= "\n  </div>\n";
           $col++ ;
@@ -310,6 +278,59 @@ class pluglist {
       }
     }
     return ($this->iconmenu);
+  }
+
+
+  function genPathNavigator()
+  {
+    $cfg= &$this->config->data['PATHMENU'];
+
+    foreach($cfg as $plug){
+      list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
+    } 
+
+    return("    <div class='plugin-path'>
+     <ul class='path-navigation'>
+      <li class='left right-border' onClick=\"openPlugin('');\">
+        <div class='nav-home'></div>
+      </li>
+      <li class='left'>Welcome to GOsa</li>
+      <li class='right left-border'>Help</li>
+      <li class='right left-border'>Change password</li>
+      <li class='right left-border'>My account</li>
+     </ul>
+    </div>
+");
+  
+  }
+  
+
+  function getPlugData($class)
+  {
+    global $class_mapping;
+    $vars= get_class_vars($class);
+    $plHeadline= _($vars['plHeadline']);
+    $plDescription= _($vars['plDescription']);
+    $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon']: "plugin.png";
+    $index= $this->get_index($class);
+
+    /* Check if class is available. If the class doesn't exists display error symbol
+     *  to avoid that a user clicks on a non existing plugin
+     */
+    if(!$vars){
+      $plHeadline = $plDescription = _("Unknown");
+      $plIcon = "error.png";
+      $index = '';
+    } 
+
+    // Detect the correct position of the plugin icon
+    if(!preg_match("/\//",$plIcon)){
+      $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', 
+            $class_mapping[$class])."/images/$plIcon");
+    }else{
+      $image = $plIcon; 
+    }
+    return(array($index, $plHeadline, $plDescription, $image));
   }
 
 

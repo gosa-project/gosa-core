@@ -247,12 +247,19 @@ class config  {
                   }
                   break;
 
+      case 'PATHMENU':
+                  $this->data['PATHMENU']= array(); ;
+                  break;
+
                   /* Inser plugins */
       case 'PLUGIN':
                   if ($this->tags[$this->level-3] == 'MENU' &&
                       $this->tags[$this->level-2] == 'SECTION'){
 
                     $this->data['MENU'][$this->section][$this->gpc++]= $attrs;
+                  }
+                  if ($this->tags[$this->level-2] == 'PATHMENU'){
+                    $this->data['PATHMENU'][$this->gpc++]= $attrs;
                   }
                   if ($this->tags[$this->level-2] == 'SERVICEMENU'){
                     $this->data['SERVICE'][$attrs['CLASS']]= $attrs;
