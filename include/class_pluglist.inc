@@ -225,8 +225,9 @@ class pluglist {
     }
   
     // Use javascript to mark the currently selected plugin.
+    $menu = $this->menu;
     if(isset($_GET['plug'])){
-      $menu = $this->menu."
+      $menu.= "
         <script language='javascript' type='text/javascript'>
           $('plugMenuId_".$_GET['plug']."').className= 'current'
         </script>
