@@ -257,8 +257,8 @@ class pluglist {
 
           // Get Plugin info
           $vars= get_class_vars($info['CLASS']);
-          $plHeadline= $vars['plHeadline'];
-          $plDescription= $vars['plDescription'];
+          $plHeadline= _($vars['plHeadline']);
+          $plDescription= _($vars['plDescription']);
           $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon']: "plugin.png";
           $index= $this->get_index($info['CLASS']);
 
