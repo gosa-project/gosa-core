@@ -502,6 +502,7 @@ fieldset textarea:hover{
   padding:0 10px 10px 56px;
   min-height:70px;
   min-width:150px;
+  cursor:pointer;
 }
 
 .icon-menu-item:hover{
@@ -509,14 +510,14 @@ fieldset textarea:hover{
 }
 
 .icon-menu-item h1{
-  font-size:14px;
+  font-size:12px;
   font-weight:bold;
   margin:0;
   color:#222;
 }
 
-.icon-menu-title h3{
-  font-size:16px;
+h3.icon-menu-title{
+  font-size:14px;
   font-weight:bold;
   margin-top:8px;
 }
