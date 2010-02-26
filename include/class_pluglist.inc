@@ -293,18 +293,20 @@ class pluglist {
         "\n      </li>".
         "\n      <li class='left'>Welcome to GOsa</li>";
 
-      $cfg= &$this->config->data['PATHMENU'];
-      $rcfg = array_reverse($cfg);
-      foreach($rcfg as $id => $plug){
+      if(isset($this->config->data['PATHMENU'])){
+        $cfg= &$this->config->data['PATHMENU'];
+        $rcfg = array_reverse($cfg);
+        foreach($rcfg as $id => $plug){
 
-        // Do not add inaccessible plugins
-        if (!$this->check_access($plug['ACL'])){
-          unset($rcfg[$id]);
-          continue; 
+          // Do not add inaccessible plugins
+          if (!$this->check_access($plug['ACL'])){
+            unset($rcfg[$id]);
+            continue; 
+          }
+
+          list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
+          $this->pathMenu.= "\n     <li class='right left-border'>{$title}</li>";
         }
-
-        list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
-        $this->pathMenu.= "\n     <li class='right left-border'>{$title}</li>";
       }
       $this->pathMenu.= "\n    </ul>";
       $this->pathMenu.= "\n    </div>";
