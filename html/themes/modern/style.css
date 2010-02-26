@@ -25,6 +25,20 @@ hr {
   border-bottom:1px solid #CCC;
 }
 
+a:link {
+  text-decoration:none;
+  color:#000;
+}
+
+a:visited {
+  text-decoration:none;
+  color:#000;
+}
+
+input[type=checkbox]{
+  border:1px solid #CCC;
+}
+
 input[type=text]{
   border:1px solid #CCC;
   padding:3px;
@@ -37,6 +51,22 @@ input[type=text]:active, input[type=text]:focus{
 input[type=text]:hover{
   border-color:#777;
 }
+
+input[disabled] {
+color:#888;      
+background-color:#DDD;
+}                     
+
+textarea[disabled] {
+color:#000;         
+background-color:#DDD;
+}                     
+
+select[disabled] {
+color:#000;       
+background-color:#DDD;
+}                     
+
 
 h1, h2, h3 {
   margin-top:2px;
@@ -493,3 +523,585 @@ fieldset textarea:hover{
   border-color:red ! important;
 }
 
+
+/* Date picker*/
+
+div.datepicker {
+  position:absolute;
+  text-align:center;
+  border:1px #CCC solid;
+  font-family:arial;
+  background:#FFF;
+  font-size:10px;
+  padding:0;
+}
+
+div.datepicker-calendar table {
+  font-size:10px;
+  border:1px solid #FFF;
+  margin:0;
+  padding:0;
+  text-align:center;
+}
+
+div.datepicker div.datepicker-header {
+  font-size:11px;
+  font-weight:bold;
+  background:#F0F0F0;
+  border-bottom:1px solid #CCC;
+  padding:2px;
+  text-align:center;
+}
+
+div.datepicker table.header {
+  width:175px;
+  border:0;
+  padding:0;
+  text-align:center;
+}
+
+td.prev,td.prev_year,td.next,td.next_year {
+  width:8%;
+  cursor:pointer;
+  font-weight:bold;
+  line-height:16px;
+}
+
+td.prev:hover,td.prev_year:hover,td.next:hover,td.next_year:hover {
+  background-color:#DDD;
+}
+
+td.header {
+  text-align:center;
+  width:68%;
+  font-weight:bold;
+  line-height:16px;
+}
+
+div.datepicker-header {
+  height:16px;
+}
+
+div.datepicker-calendar table tbody tr {
+  border:1px solid #FFF;
+  margin:0;
+  padding:0;
+}
+
+div.datepicker-calendar table tbody tr td {
+  border:1px #EEE solid;
+  margin:0;
+  padding:0;
+  text-align:center;
+  height:16px;
+  line-height:16px;
+  width:21px;
+  cursor:pointer;
+}
+
+div.datepicker-calendar table tbody tr td:hover,div.datepicker-calendar table tbody tr td.outbound:hover,div.datepicker-calendar table tbody tr td.today:hover {
+  border:1px #CCE9FF solid;
+  background:#E9F5FF;
+  cursor:pointer;
+}
+
+div.datepicker-calendar table tbody tr td.wday {
+  border:1px #AAA solid;
+  background:#CCC;
+  cursor:text;
+  width:21px;
+  height:16px;
+  line-height:16px;
+  font-weight:bold;
+}
+
+div.datepicker-calendar table tbody tr td.outbound {
+  background:#F3F3F3;
+}
+
+div.datepicker-calendar table tbody tr td.today {
+  border:1px #CCE9FF solid;
+  background:#E9F5FF;
+  background-image:url(../../images/date_active.gif);
+  background-repeat:no-repeat;
+  position:top left;
+  width:21px;
+  height:16px;
+  line-height:16px;
+}
+
+div.datepicker-calendar table tbody tr td.today:hover {
+  border:1px #CCE9FF solid;
+  background:#E9F5FF;
+  background-image:url(../../images/date_active.gif);
+  background-repeat:no-repeat;
+  position:top left;
+}
+
+div.datepicker-calendar table tbody tr td.nclick,div.datepicker-calendar table tbody tr td.nclick_outbound {
+  cursor:default;
+  color:#aaa;
+  width:21px;
+  height:16px;
+  line-height:16px;
+}
+
+div.datepicker-calendar table tbody tr td.nclick_outbound {
+  background:#E8E4E4;
+  width:21px;
+  height:16px;
+  line-height:16px;
+}
+
+div.datepicker-calendar table tbody tr td.nclick:hover,div.datepicker-calendar table tbody tr td.nclick_outbound:hover {
+  border:1px #EAEAEA solid;
+  background:#FFF;
+}
+
+div.datepicker-calendar table tbody tr td.nclick_outbound:hover {
+  background:#E8E4E4;
+}
+
+div.datepicker div.datepicker-footer {
+  font-size:10px;
+  background:#F0F0F0;
+  border-top:1px solid #AAA;
+  cursor:pointer;
+  text-align:center;
+  padding:2px;
+}
+
+.date {
+  float:left;
+}
+
+.datepicker-opener-table {
+  border:1px solid transparent;
+  padding:0;
+  border-spacing:0;
+  margin:0 0 0 3px;
+  background:transparent url(../../images/datepicker.gif) no-repeat 0 0;
+  width:18px;
+  height:18px;
+  cursor:pointer;
+}
+
+.Opera .datepicker-opener-table {
+  float:right;
+}
+
+.IE7 .datepicker-opener-table {
+  position:relative;
+  top:0;
+  left:3px;
+}
+
+.datepicker-opener-table:hover {
+  background:transparent url(../../images/datepicker_ro.gif) no-repeat 0 0;
+}
+
+.datepicker-opener {
+  width:16px;
+  height:16px;
+  margin:0 0 0 3px;
+  cursor:pointer;
+}
+
+
+/* Lists */
+
+div.listContainer {
+  width:100%;
+  border-top:1px solid #CCC;
+  border-bottom:1px solid #CCC;
+  border-left:1px solid #CCC;
+  border-right:1px solid #CCC;
+  border-top-left-radius:2px;
+  border-top-right-radius:2px;
+  -moz-border-radius-topleft:2px;
+  -moz-border-radius-topright:2px;
+  -webkit-border-top-left-radius:2px;
+  -webkit-border-top-right-radius:2px;
+}
+
+.fixedListHeader tr {
+  position:relative;
+  height:auto;
+  font-weight:bold;
+}
+
+.fixedListHeader a {
+  color:#333;
+}
+
+.listHeaderFormat {
+  margin:3px;
+  padding:1px;
+  white-space:nowrap;
+}
+
+.listHeaderFormat tr td {
+  padding:4px;
+  background-color:#F5F5F5;
+  color:#333;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+  background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  border-right:1px solid #CCC;
+  border-bottom:1px solid #CCC;
+}
+
+.listScrollContent {
+  height:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+.listScrollContent tr {
+  height:auto;
+  white-space:nowrap;
+}
+
+.listScrollContent tr td:last-child {
+  padding-right:20px;
+}
+
+.listBodyFormat tr td {
+  color:#000;
+  margin:3px;
+  padding:2px;
+  border-right:1px solid #CCC;
+  word-wrap:break-word;
+  white-space:normal;
+  max-width:500px;
+}
+
+div.nlistFooter {
+  background-color:#F5F5F5;
+  color:#333;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+  background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  border-left:1px solid #CCC;
+  border-right:1px solid #CCC;
+  border-bottom:1px solid #CCC;
+  border-bottom-left-radius:2px;
+  border-bottom-right-radius:2px;
+  -moz-border-radius-bottomleft:2px;
+  -moz-border-radius-bottomright:2px;
+  -webkit-border-bottom-left-radius:2px;
+  -webkit-border-bottom-right-radius:2px;
+  padding:0;
+  width:100%;
+}
+
+
+/* Sortable Lists */
+
+div.sortableListContainer {
+  border:1px solid #AAA;
+  overflow:auto;
+  margin-bottom:2px;
+}
+
+.sortableListContainer th {
+  background-color:#D8D8D8;
+  padding:3px;
+  text-align:left;
+  border-left:1px solid #AAA;
+}
+
+.sortableListContainer td {
+  padding:3px;
+  text-align:left;
+  border-left:1px solid #AAA;
+}
+
+tr.sortableListItem {
+  background-color:#FFF;
+  cursor:move;
+  color:#000;
+}
+
+tr.sortableListItemFill {
+  background-color:#FFF;
+  cursor:default;
+}
+
+tr.sortableListItemOdd ::-moz-selection,tr.sortableListItem ::-moz-selection {
+  background:transparent;
+}
+
+tr.sortableListItemOdd ::selection,tr.sortableListItem ::selection {
+  background:transparent;
+}
+
+tr.sortableListItemOdd code::-moz-selection,tr.sortableListItem code::-moz-selection {
+  background:transparent;
+}
+
+tr.sortableListItemOdd code::selection,tr.sortableListItem code::selection {
+  background:transparent;
+}
+
+tr.sortableListItemOdd {
+  background-color:#F5F5F5;
+  cursor:move;
+  color:#000;
+}
+
+tr.sortableListItem:hover,tr.sortableListItemOdd:hover {
+  background-color:#EEE;
+}
+
+tr.sortableListItemDisabled {
+  cursor:default;
+  color:#CCC;
+}
+
+table.sortableListTable {
+  border:0;
+}
+
+tr.sortableListItemMarked {
+  background-color:#FFD;
+}
+
+
+/* Tree List */
+
+ul.treeList,ul.treeList ul {
+  list-style-type:none;
+  background:url(../../images/lists/vline.png) repeat-y;
+  margin:0;
+  padding:0;
+}
+
+ul.treeList ul {
+  margin-left:10px;
+}
+
+ul.treeList a:hover {
+  background-color:#DDD;
+}
+
+a.treeList {
+  padding:2px;
+  cursor:pointer;
+}
+
+a.treeListSelected {
+  font-weight:bold;
+  color:#1010AF;
+  background-color:#DDD;
+  padding:2px;
+  cursor:pointer;
+}
+
+a.treeList:hover,a.treeListSelected:hover {
+  background-color:#DDD;
+  padding:2px;
+}
+
+ul.treeList a {
+  padding:2px;
+  cursor:pointer;
+}
+
+ul.treeList li {
+  margin:0;
+  padding:0 12px;
+  line-height:20px;
+  background:url(../../images/lists/node.png) no-repeat;
+}
+
+li.treeListSelected a {
+  font-weight:bold;
+  color:#1010AF;
+  padding:2px;
+}
+
+ul.treeList li.last {
+  background:#fff url(../../images/lists/lastnode.png) no-repeat;
+}
+
+ul.treeList li:last-child {
+  background:#fff url(../../images/lists/lastnode.png) no-repeat;
+}
+
+div.treeList {
+  background-color:#FFF;
+  border:1px solid #AAA;
+  padding:5px;
+  position:absolute;
+  z-index:500;
+  overflow-y:auto;
+  float:left;
+}
+
+span.informal {
+  color:#444;
+  font-style:italic;
+}
+
+
+/* Max height for IE */
+
+* html div.treeList {
+  height: expression( this.scrollHeight > 500 ? "500px" : "auto" );
+}
+
+span.mark {
+  color:#B22;
+}
+
+
+/* Message dialog */
+
+div.errorMsgTitle {
+width:100%;        
+font-size:1.4em;   
+padding-bottom:.3em;
+padding-top:.3em;   
+font-weight:bold;   
+background-color:#F0F0F0;
+}                        
+
+div.errorMsgDialog {
+width:60%;          
+background-color:#FFF;
+border:4px solid red; 
+z-index:150;          
+display:none;         
+position:absolute;    
+}                     
+
+div.infoMsgDialog {
+width:60%;         
+background-color:#FFF;
+border:2px solid #000;
+z-index:150;          
+display:none;         
+position:absolute;    
+}                     
+
+
+/* Autocompleter */
+
+div.autocomplete {
+position:absolute;
+background-color:#FFF;
+border:1px solid #AAA;
+margin:0;             
+padding:0;            
+z-index:600;          
+overflow:hidden;      
+word-wrap:break-word; 
+}                     
+
+div.autocomplete ul {
+list-style-type:none;
+margin:0;            
+padding:0;           
+}                    
+
+div.autocomplete ul li {
+list-style-type:none;   
+display:block;          
+margin:0;               
+padding:2px;            
+padding-left:4px;       
+cursor:pointer;         
+}                       
+
+div.autocomplete li:hover {
+background-color:#F0F0F0;  
+}                          
+
+div.autocomplete ul li.selected {
+background-color:#F0F0F0;        
+}                                
+
+
+/* Pulldown menu */
+
+#pulldown {
+background:#FFF;
+height:23px;    
+border-top:1px #D0D0D0 solid;
+border-left:1px #D0D0D0 solid;
+border-bottom:1px gray solid; 
+border-right:1px gray solid;  
+}                             
+
+#pulldown ul {
+display:block;
+margin:0;     
+padding:0;    
+line-height:1em;
+list-style:none;
+z-index:90;     
+}               
+
+#pulldown ul li {
+float:left;      
+margin:0 3px 0 0;
+padding:0;       
+font-size:12px;  
+line-height:1 5em;
+list-style-type:none;
+}                    
+
+#pulldown ul li a {
+float:left;        
+display:block;     
+width:auto;        
+font-weight:normal;
+background:transparent;
+text-decoration:none;  
+margin:0;              
+padding:5px;           
+}                      
+
+#pulldown ul li a:hover {
+text-decoration:none;    
+}                        
+
+#pulldown ul li.sep {
+color:#AAA;          
+padding:.8em 0 .5em; 
+}                    
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#pulldown ul li a {                                    
+float:none;                                            
+}                                                      
+
+/* End IE5-Mac hack */
+#pulldown ul.level2,#pulldown ul.level3 {
+position:absolute;                       
+top:0;                                   
+left:0;                                  
+visibility:hidden;                       
+border-top:1px #D0D0D0 solid;            
+border-left:1px #D0D0D0 solid;           
+border-bottom:1px gray solid;            
+border-right:1px gray solid;             
+background:#FFF;                         
+}                                        
+
+#pulldown ul.level2 li,#pulldown ul.level3 li {
+border-bottom:1px solid #fff;                  
+float:none;                                    
+margin:0;                                      
+padding:0;                                     
+width:200px;                                   
+}                                              
+
+#pulldown ul.level2 li a,#pulldown ul.level3 li a {
+padding:5px 9px 5px 5px;                           
+}                                                  
+
+#pulldown ul.level2 li a:hover,#pulldown ul.level3 li a:hover {
+font-weight:normal;                                            
+background-color:#418DD4;                                      
+background-image:none;                                         
+}                       
