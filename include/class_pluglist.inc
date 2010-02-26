@@ -39,12 +39,11 @@ class pluglist {
 		$this->ui= &$ui;
 		$this->config= &$config;
 
-		/* Create dirlist for all plugins */
+		// Get list of plugin paths, this allows us to open the plugins main.inc if available.
 		$this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data['MENU']);
 
-		/* Fill info part of pluglist */
+		// Detect installed plugins and their configuration, to be able to restrict access later.
 		$classes= get_declared_classes();
-
 		foreach ($classes as $cname){
 			$cmethods = get_class_methods($cname);
 			if (in_array_ics('plInfo',$cmethods)){
@@ -52,17 +51,20 @@ class pluglist {
 			}
 		}
 
-		/* Provide field for 'all' */
+		// Reserve a special ACL will allows us to display plugins/addons whenever a user 
+    //  is able to login into gosa. E.g. some kind of welcome page. 
 		$this->info['all']= array();
 		$this->info['all']['plProvidedAcls']= array();
 		$this->info['all']['plDescription']= _("All objects in this category");
 		$this->info['all']['plSelfModify']= FALSE;
 	}
 
+
+  /*! \brief    Detect plugin installation paths, by walking through the config. 
+   */
 	function get_plugins($list, &$config)
 	{
 		global $class_mapping;
-
 		if (!isset($config['CLASS'])){
 			if (is_array($config)){
 				foreach ($config as $val){
@@ -81,21 +83,19 @@ class pluglist {
 	}
 
 
-	/*! \brief  Check whether we are allowed to modify the given acl or not..
-				This function is used to check which plugins are visible.
-				
-		@param	The acl tag to test, eg. 	"users/user:self", "systems", ...
-		@return	Boolean TRUE on success else FALSE
-     */
+  /*! \brief  Check whether we are allowed to modify the given acl or not..
+   *		This function is used to check which plugins are visible.
+   *		
+   *  @param	The acl tag to check for, eg. 	"users/user:self", "systems", ...
+   *  @return	Boolean TRUE on success else FALSE
+   */
 	function check_access($aclname)
 	{
 		if (isset($this->silly_cache[$aclname])) {
 			return $this->silly_cache[$aclname];
 		}
 
-		/* Split given acl string into an array. 
-			e.g. "user,systems" => array("users","systems");
-         */
+		// Split given acl string into an array. e.g. "user,systems" => array("users","systems");
 		$acls_to_check = array();
 		if(preg_match("/,/",$aclname)){
 			$acls_to_check = explode(",",$aclname);
@@ -106,8 +106,9 @@ class pluglist {
 		foreach($acls_to_check as $acl_to_check){
       $acl_to_check = trim($acl_to_check);
 		
-			/* Check if the given acl tag is only valid for self acl entries  
-                 <plugin acl="users/user:self" class="user"...  */	
+      /* Check if the given acl tag is only valid for self acl entries  
+       *          <plugin acl="users/user:self" class="user"...  
+       */	
 			if(preg_match("/:self$/",$acl_to_check)){
 				$acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
 				if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
@@ -118,7 +119,7 @@ class pluglist {
 				return(FALSE);
 			}else{
 		
-				/* No self acls. Check if we have any acls for the given ACL type */
+				// No self acls. Check if we have any acls for the given ACL type 
 				$deps = $this->ui->get_module_departments($acl_to_check,TRUE);
 				if(count($deps)){
 					$this->silly_cache[$aclname]= TRUE;
@@ -132,6 +133,9 @@ class pluglist {
 	}
 
 
+  /*! \brief    Generates an array containing plugin names (headlines) and theirs ids.
+   *            This is just used in the helpviewer.php  
+   */
 	function gen_headlines()
 	{
 		$ret = array();
@@ -151,6 +155,10 @@ class pluglist {
 	}
 
 
+  /*! \brief    Check the accessibility of the configured plugins.
+   *            We may simply have now permissions to access some plugins 
+   *             but some may be broken or missing!.
+   */
   function checkMenu()
   {
 	  $cfg= &$this->config->data['MENU'];
@@ -179,32 +187,40 @@ class pluglist {
     }
   }
 
-	function gen_menu()
-	{
-		if ($this->menu == ""){
-			$cfg= $this->config->data['MENU'];
+
+  /*! \brief    Generate the GOsa Main-Menu here (The menu on the left), 
+   *             this usually only done once during login.
+   *            -----------------------------------------------------------------
+   *            Do NOT add style changes here manually, use the style.css or 
+   *             if you prefer create your own theme!!
+   *            -----------------------------------------------------------------
+   */
+  function gen_menu()
+  {
+    if ($this->menu == ""){
+      $cfg= $this->config->data['MENU'];
       $this->checkMenu();
-			$cfg= $this->config->data['MENU'];
+      $cfg= $this->config->data['MENU'];
       $menu = "\n<div class='navigation'>";
-			foreach ($cfg as $headline => $plug){
+      foreach ($cfg as $headline => $plug){
 
         if(!count($plug)) continue;
         $menu.= "\n<div class='menu'>";
         $menu.= "\n <ul>";
         $menu.= "\n  <li class='menu-header'>"._($headline)."</li>";
         $id = 0;
-	foreach ($plug as $info){
+        foreach ($plug as $info){
           $id ++;
           $vars= get_class_vars($info['CLASS']);
           $plHeadline = _((isset($info['NAME'])) ? $info['NAME'] : $vars['plHeadline']);
           $plDescription= $vars['plDescription'];
-					$index= $this->get_index($info['CLASS']);
-					$href= "main.php?plug=$index&amp;reset=1";
-					if(!$vars){
-						$plHeadline 	= _("Unknown");
-						$plDescription 	= _("Unknown");
-						$href= "main.php?reset=1";
-					}
+          $index= $this->get_index($info['CLASS']);
+          $href= "main.php?plug=$index&amp;reset=1";
+          if(!$vars){
+            $plHeadline 	= _("Unknown");
+            $plDescription 	= _("Unknown");
+            $href= "main.php?reset=1";
+          }
           $this->allowed_plugins[$index] = $index;
           $class= "";
           if($id == count($plug)) $class=" class='menu-last' \n   ";
@@ -217,48 +233,23 @@ class pluglist {
         $menu.= "\n</div>\n";
         $menu.= "\n<div></div>\n";
         $menu.= "\n<div class='v-spacer'></div>\n";
-			}
+      }
       $menu.= "\n</div>";
       $this->menu = $menu;
-		}
+    }
 
-		/* Write menu output */
-		return ($this->menu);
-	}
-
-	function gen_current()
-	{
-		/* Do we have a current value? */
-		if ($this->current == ""){
-			$tmp= array_keys($this->menuparts);
-			$this->current= $tmp[0];
-		}
-
-		/* Fill current array */
-		$result= "<ul>";
-		$count= 0;
-		foreach ($this->menuparts[$this->current] as $entry){
-			if ($count == 2){
-				$result.= "</li>";
-				$count= 0;
-			}
-			if ($count == 0){
-				$result.= "<li>";
-			}
-			$result.= "$entry";
-			$count++;
-		}
-
-		/* Add missing cell? */
-		if ($count == 1){
-			$result.= "&nbsp;";
-		}
-
-		$result.= "</ul>";
-		return $result;
-	}
+    // Return the generated/cached gosa menu.
+    return ($this->menu);
+  }
 
 
+  /*! \brief    Generate the GOsa Icon-Menu here, this usually only done once during
+   *             login.
+   *            -----------------------------------------------------------------
+   *            Do NOT add style changes here manually, use the style.css or 
+   *             if you prefer create your own theme!!
+   *            -----------------------------------------------------------------
+   */
 	function show_iconmenu()
 	{
 		global $class_mapping;
@@ -368,14 +359,22 @@ class pluglist {
 		return ($this->iconmenu);
 	}
 
+
+  /*! \brief    Returns the installation path of a plugin.
+   *            e.g. '../plugins/admin/mimetypes'
+   */
 	function get_path($index)
 	{
 		if(!isset($this->dirlist[$index])){
 			return ("");
 		}
+    echo "../".$this->dirlist[$index];
 		return ("../".$this->dirlist[$index]);
 	}
 
+
+  /*! \brief    Returns the plugins id for a given class.
+   */
 	function get_index($class)
   {
     /* Search for plugin index (id), identify entry by path && class */
@@ -387,15 +386,14 @@ class pluglist {
         }
       }
     }
-
-    /* Nothing */
     return (0);
-
 	}
 
+
   /*! \brief  This function checks if we are allowed to view the plugin with the given id 
-      @param  $plug_id  Integer  The ID of the plugin.
-      @return Boolean   TRUE if we are allowed to view the plugin else FASLE
+   *
+   *  @param  $plug_id  Integer  The ID of the plugin.
+   *  @return Boolean   TRUE if we are allowed to view the plugin else FASLE
    */
   function plugin_access_allowed($plug_id)
   {
