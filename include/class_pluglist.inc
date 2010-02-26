@@ -246,11 +246,11 @@ class pluglist {
       foreach ($cfg as $headline => $plug){
         $col= 0;
 
+        $this->iconmenu .= "\n  <div class='clear'></div>\n";
         if($add_hr){
           $add_hr = FALSE;
           $this->iconmenu .= "\n  <hr>\n";
         }
-        $this->iconmenu .= "\n  <div class='clear'></div>\n";
         $this->iconmenu .= "\n  <h3 class='icon-menu-title'>". _($headline)."</h3>\n";
 
         foreach ($plug as $info){
