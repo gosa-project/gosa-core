@@ -133,28 +133,6 @@ class pluglist {
   }
 
 
-  /*! \brief    Generates an array containing plugin names (headlines) and theirs ids.
-   *            This is just used in the helpviewer.php  
-   */
-  function gen_headlines()
-  {
-    $ret = array();
-    if(count($this->headlines) == 0){
-      foreach($this->config->data['MENU'] as $headline => $plugins){
-        foreach( $plugins as $id => $plug){
-          if (plugin_available($plug['CLASS'])){
-            $attrs = (get_class_vars($plug['CLASS']));
-            $ret[$id]['HEADLINE'] = $headline;
-            $ret[$id]['NAME']	  = $attrs['plHeadline'];
-          }
-        }
-      }
-      $this->headlines = $ret;
-    }
-    return($this->headlines);
-  }
-
-
   /*! \brief    Check the accessibility of the configured plugins.
    *            We may simply have now permissions to access some plugins 
    *             but some may be broken or missing!.
@@ -224,9 +202,7 @@ class pluglist {
           $this->allowed_plugins[$index] = $index;
           $class= "";
           if($id == count($plug)) $class=" class='menu-last' \n   ";
-          $menu .=  "\n  <li $class onClick='return question(\"".
-            _("You are currently editing a database entry. Do you want to dismiss the changes?")."\", 
-            \"$href\");'>".$plHeadline."</li>";
+          $menu .=  "\n  <li $class onClick='return openPlugin({$index});'>".$plHeadline."</li>";
         }
         $menu.= "\n </ul>";
         $menu.= "\n <div></div>\n";
@@ -237,6 +213,17 @@ class pluglist {
       $menu.= "\n</div>";
       $this->menu = $menu;
     }
+
+    // Add javascript method to print out warning messages while leaving an unsaved form.
+    // We do it in here to get the string translated.
+    $this->menu .= "
+      <script language='javascript' type='text/javascript'>
+        function openPlugin(id){
+          return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\",
+            \"main.php?plug=\" + id + \"&amp;reset=1\");
+        }
+      </script>
+    "; 
 
     // Return the generated/cached gosa menu.
     return ($this->menu);
@@ -368,7 +355,6 @@ class pluglist {
     if(!isset($this->dirlist[$index])){
       return ("");
     }
-    echo "../".$this->dirlist[$index];
     return ("../".$this->dirlist[$index]);
   }
 
@@ -409,6 +395,27 @@ class pluglist {
     $this->iconmenu ="";
   }
 
+
+  /*! \brief    Generates an array containing plugin names (headlines) and theirs ids.
+   *            This is just used in the helpviewer.php  
+   */
+  function gen_headlines()
+  {
+    $ret = array();
+    if(count($this->headlines) == 0){
+      foreach($this->config->data['MENU'] as $headline => $plugins){
+        foreach( $plugins as $id => $plug){
+          if (plugin_available($plug['CLASS'])){
+            $attrs = (get_class_vars($plug['CLASS']));
+            $ret[$id]['HEADLINE'] = $headline;
+            $ret[$id]['NAME']	  = $attrs['plHeadline'];
+          }
+        }
+      }
+      $this->headlines = $ret;
+    }
+    return($this->headlines);
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
