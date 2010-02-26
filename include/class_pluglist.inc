@@ -281,27 +281,35 @@ class pluglist {
   }
 
 
-  function genPathNavigator()
+  function genPathMenu()
   {
-    $cfg= &$this->config->data['PATHMENU'];
+    if(1 | empty($this->pathMenu)){
 
-    foreach($cfg as $plug){
-      list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
+      $this->pathMenu = 
+        "\n    <div class='plugin-path'>".
+        "\n     <ul class='path-navigation'>".
+        "\n      <li class='left right-border' onClick=\"openPlugin('');\">".
+        "\n       <div class='nav-home'></div>".
+        "\n      </li>".
+        "\n      <li class='left'>Welcome to GOsa</li>";
+
+      $cfg= &$this->config->data['PATHMENU'];
+      $rcfg = array_reverse($cfg);
+      foreach($rcfg as $id => $plug){
+
+        // Do not add inaccessible plugins
+        if (!$this->check_access($plug['ACL'])){
+          unset($rcfg[$id]);
+          continue; 
+        }
+
+        list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
+        $this->pathMenu.= "\n     <li class='right left-border'>{$title}</li>";
+      }
+      $this->pathMenu.= "\n    </ul>";
+      $this->pathMenu.= "\n    </div>";
     } 
-
-    return("    <div class='plugin-path'>
-     <ul class='path-navigation'>
-      <li class='left right-border' onClick=\"openPlugin('');\">
-        <div class='nav-home'></div>
-      </li>
-      <li class='left'>Welcome to GOsa</li>
-      <li class='right left-border'>Help</li>
-      <li class='right left-border'>Change password</li>
-      <li class='right left-border'>My account</li>
-     </ul>
-    </div>
-");
-  
+    return($this->pathMenu); 
   }
   
 

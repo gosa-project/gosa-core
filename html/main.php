@@ -300,6 +300,7 @@ if($reload_navigation){
   $plist->menu="";
 }
 $smarty->assign ("menu", $plist->gen_menu());
+$smarty->assign ("pathMenu", $plist->genPathMenu());
 $smarty->assign ("plug", "$plug");
 
 $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
