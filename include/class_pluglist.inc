@@ -41,6 +41,7 @@ class pluglist {
 
     // Get list of plugin paths, this allows us to open the plugins main.inc if available.
     $this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data['MENU']);
+    $this->dirlist= array_merge($this->dirlist,$this->get_plugins ($this->dirlist, $this->config->data['MENU']));
 
     // Detect installed plugins and their configuration, to be able to restrict access later.
     $classes= get_declared_classes();
@@ -305,7 +306,8 @@ class pluglist {
           }
 
           list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
-          $this->pathMenu.= "\n     <li class='right left-border'>{$title}</li>";
+          $this->allowed_plugins[$index] = $index;
+          $this->pathMenu.= "\n     <li class='right left-border' onClick='openPlugin({$index})'>{$title}</li>";
         }
       }
       $this->pathMenu.= "\n    </ul>";
