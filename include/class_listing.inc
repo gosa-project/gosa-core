@@ -286,8 +286,8 @@ class listing {
       $height= $this->height;
     }
     
-    $result.= "<div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;border-right:1px solid #B0B0B0;width:100%;min-height:".($height+25)."px;'>\n";
-    $result.= "<table summary='$this->headline' style='width:100%; table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
+    $result.= "<div class='listContainer' id='d_scrollbody' style='min-height:".($height+25)."px;'>\n";
+    $result.= "<table summary='$this->headline' style='width:100%;table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
     $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
@@ -309,7 +309,7 @@ class listing {
 
     // No results? Just take an empty colspanned row
     if (count($this->entries) + count($this->departments) == 0) {
-      $result.= "<tr class='rowxp0'><td class='list1nohighlight' colspan='$this->numColumns' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
+      $result.= "<tr><td class='list1nohighlight' colspan='$this->numColumns' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
     }
 
     // Line color alternation
@@ -322,7 +322,7 @@ class listing {
       // Fill with department browser if configured this way
       $departmentIterator= new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
       foreach ($departmentIterator as $row => $entry){
-        $result.="<tr class='rowxp".($alt&1)."'>";
+        $result.="<tr>";
 
         // Render multi select if needed
         if ($this->multiSelect) {
@@ -382,7 +382,7 @@ class listing {
     // Complete list by sorting entries for _sort$index and appending them to the output
     $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
     foreach ($entryIterator as $row => $entry){
-      $result.="<tr class='rowxp".($alt&1)."'>\n";
+      $result.="<tr>\n";
       $result.= $entry['_rendered'];
       $result.="</tr>\n";
       $alt++;
