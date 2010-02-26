@@ -500,6 +500,8 @@ fieldset textarea:hover{
   float:left;
   background-repeat:no-repeat;
   padding:0 10px 10px 56px;
+  min-height:70px;
+  min-width:150px;
 }
 
 .icon-menu-item:hover{
