@@ -243,57 +243,46 @@ class pluglist {
     $this->iconmenu = "";
     if ($this->iconmenu == ""){
       $cfg= $this->config->data['MENU'];
-
-
       foreach ($cfg as $headline => $plug){
-        $col= 1;
+        $col= 0;
 
-       $this->iconmenu .= "\n  <div class='clear'></div>\n";
-       $this->iconmenu .= "\n  <h3>". _($headline)."</h3>\n";
+        $this->iconmenu .= "\n  <div class='clear'></div>\n";
+        $this->iconmenu .= "\n  <h3>". _($headline)."</h3>\n";
 
         foreach ($plug as $info){
 
-
-          /* Read information from class variable */
+          // Get Plugin info
           $vars= get_class_vars($info['CLASS']);
           $plHeadline= $vars['plHeadline'];
           $plDescription= $vars['plDescription'];
-          if (isset($vars['plIcon'])){
-            $plIcon= $vars['plIcon'];
-          } else {
-            $plIcon= "plugin.png";
-          }
-
+          $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon']: "plugin.png";
           $index= $this->get_index($info['CLASS']);
 
           /* Check if class is available. If the class doesn't exists display error symbol 
-             to avoid that a user clicks on a non existing plugin  */
+           *  to avoid that a user clicks on a non existing plugin  
+           */
           if(!$vars){
             $plHeadline = $plDescription = _("Unknown");
             $info['ICON'] = "error.png";
-            $href="main.php?reset=1";
+            $index = '';
           }
 
-
-          /* Load icon */
-          if (isset($info['ICON'])){
-            $image= get_template_path('images/'.$info['ICON']);
-          } else {
-            if(!preg_match("/\//",$plIcon)){
-              $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/$plIcon");
-            }else{
-              $image = $plIcon; 
-            }
+          // Detect the correct position of the plugin icon
+          if(!preg_match("/\//",$plIcon)){
+            $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', 
+                  $class_mapping[$info['CLASS']])."/images/$plIcon");
+          }else{
+            $image = $plIcon; 
           }
-          if (($col % 5) == 0){
+
+          // Add a seperating row
+          if (($col % 4) == 0){ 
             $this->iconmenu .= "\n  <div class='clear'></div>\n";
-            $col = 1;
           }
-
 
           $this->iconmenu.= 
 "
-  <div class='container-element' style='width: 25%;' onclick='alert('clicked')'> 
+  <div class='container-element' style='width: 25%;' onclick=\"openPlugin({$index})\"> 
    <div class='icon-menu-item' style='background-image: url(".$image.");'>
     <h1>".$plHeadline."</h1>
     <p>".$plDescription."</p>
@@ -304,8 +293,6 @@ class pluglist {
         }
       }
     }
-
-    /* Write menu output */
     return ($this->iconmenu);
   }
 
