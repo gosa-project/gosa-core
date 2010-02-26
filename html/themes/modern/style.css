@@ -517,17 +517,19 @@ fieldset textarea:hover{
   font-size:12px;
   font-weight:bold;
   margin:0;
-  color:#222;
+  color:#333;
 }
 
 h3.icon-menu-title{
   font-size:14px;
   font-weight:bold;
   margin-top:8px;
+  color:#333;
 }
 
 .icon-menu-item p{
   margin:0;
+  color:#777;
 }
 
 
