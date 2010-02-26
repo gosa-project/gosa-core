@@ -21,66 +21,66 @@
  */
 
 class pluglist {
-	var $index= 0;
-	var $menu= "";
-	var $iconmenu= "";
-	var $menuparts= array();
-	var $config= NULL;
-	var $dirlist= array();
-	var $ui= NULL;
-	var $current= "";
-	var $info= array();
-	var $headlines = array();
-        var $allowed_plugins = array();
-        var $silly_cache= array();
+  var $index= 0;
+  var $menu= "";
+  var $iconmenu= "";
+  var $menuparts= array();
+  var $config= NULL;
+  var $dirlist= array();
+  var $ui= NULL;
+  var $current= "";
+  var $info= array();
+  var $headlines = array();
+  var $allowed_plugins = array();
+  var $silly_cache= array();
 
-	function pluglist(&$config, &$ui)
-	{
-		$this->ui= &$ui;
-		$this->config= &$config;
+  function pluglist(&$config, &$ui)
+  {
+    $this->ui= &$ui;
+    $this->config= &$config;
 
-		// Get list of plugin paths, this allows us to open the plugins main.inc if available.
-		$this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data['MENU']);
+    // Get list of plugin paths, this allows us to open the plugins main.inc if available.
+    $this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data['MENU']);
 
-		// Detect installed plugins and their configuration, to be able to restrict access later.
-		$classes= get_declared_classes();
-		foreach ($classes as $cname){
-			$cmethods = get_class_methods($cname);
-			if (in_array_ics('plInfo',$cmethods)){
-				$this->info[$cname]= call_user_func(array($cname, 'plInfo'));
-			}
-		}
+    // Detect installed plugins and their configuration, to be able to restrict access later.
+    $classes= get_declared_classes();
+    foreach ($classes as $cname){
+      $cmethods = get_class_methods($cname);
+      if (in_array_ics('plInfo',$cmethods)){
+        $this->info[$cname]= call_user_func(array($cname, 'plInfo'));
+      }
+    }
 
-		// Reserve a special ACL will allows us to display plugins/addons whenever a user 
+    // Reserve a special ACL will allows us to display plugins/addons whenever a user 
     //  is able to login into gosa. E.g. some kind of welcome page. 
-		$this->info['all']= array();
-		$this->info['all']['plProvidedAcls']= array();
-		$this->info['all']['plDescription']= _("All objects in this category");
-		$this->info['all']['plSelfModify']= FALSE;
-	}
+    $this->info['all']= array();
+    $this->info['all']['plProvidedAcls']= array();
+    $this->info['all']['plDescription']= _("All objects in this category");
+    $this->info['all']['plSelfModify']= FALSE;
+  }
 
 
   /*! \brief    Detect plugin installation paths, by walking through the config. 
    */
-	function get_plugins($list, &$config)
-	{
-		global $class_mapping;
-		if (!isset($config['CLASS'])){
-			if (is_array($config)){
-				foreach ($config as $val){
-					$list= $this->get_plugins($list, $val);
-				}
-			}
-		} else {
-			if (is_array($config) && isset($class_mapping[$config['CLASS']])){
-				$list[$this->index++]= dirname($class_mapping[$config['CLASS']]);
-			} else {
-				$list[$this->index++]= "";
-			}
-		}
+  function get_plugins($list, &$config)
+  {
+    global $class_mapping;
+    if (!isset($config['CLASS'])){
+      if (is_array($config)){
+        foreach ($config as $val){
+          $list= $this->get_plugins($list, $val);
+        }
+      }
+    } else {
+      if (is_array($config) && isset($class_mapping[$config['CLASS']])){
+        $list[$this->index++]= dirname($class_mapping[$config['CLASS']]);
+      } else {
+        $list[$this->index++]= "";
+      }
+    }
 
-		return ($list);
-	}
+    return ($list);
+  }
 
 
   /*! \brief  Check whether we are allowed to modify the given acl or not..
@@ -89,70 +89,70 @@ class pluglist {
    *  @param	The acl tag to check for, eg. 	"users/user:self", "systems", ...
    *  @return	Boolean TRUE on success else FALSE
    */
-	function check_access($aclname)
-	{
-		if (isset($this->silly_cache[$aclname])) {
-			return $this->silly_cache[$aclname];
-		}
+  function check_access($aclname)
+  {
+    if (isset($this->silly_cache[$aclname])) {
+      return $this->silly_cache[$aclname];
+    }
 
-		// Split given acl string into an array. e.g. "user,systems" => array("users","systems");
-		$acls_to_check = array();
-		if(preg_match("/,/",$aclname)){
-			$acls_to_check = explode(",",$aclname);
-		}else{
-			$acls_to_check = array($aclname);
-		}
+    // Split given acl string into an array. e.g. "user,systems" => array("users","systems");
+    $acls_to_check = array();
+    if(preg_match("/,/",$aclname)){
+      $acls_to_check = explode(",",$aclname);
+    }else{
+      $acls_to_check = array($aclname);
+    }
 
-		foreach($acls_to_check as $acl_to_check){
+    foreach($acls_to_check as $acl_to_check){
       $acl_to_check = trim($acl_to_check);
-		
+
       /* Check if the given acl tag is only valid for self acl entries  
        *          <plugin acl="users/user:self" class="user"...  
        */	
-			if(preg_match("/:self$/",$acl_to_check)){
-				$acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
-				if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
-					$this->silly_cache[$aclname]= TRUE;
-					return(TRUE);
-				}
-				$this->silly_cache[$aclname]= FALSE;
-				return(FALSE);
-			}else{
-		
-				// No self acls. Check if we have any acls for the given ACL type 
-				$deps = $this->ui->get_module_departments($acl_to_check,TRUE);
-				if(count($deps)){
-					$this->silly_cache[$aclname]= TRUE;
-					return TRUE;
-				}
-			}
-		}
+      if(preg_match("/:self$/",$acl_to_check)){
+        $acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
+        if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
+          $this->silly_cache[$aclname]= TRUE;
+          return(TRUE);
+        }
+        $this->silly_cache[$aclname]= FALSE;
+        return(FALSE);
+      }else{
 
-		$this->silly_cache[$aclname]= FALSE;
-		return (FALSE);
-	}
+        // No self acls. Check if we have any acls for the given ACL type 
+        $deps = $this->ui->get_module_departments($acl_to_check,TRUE);
+        if(count($deps)){
+          $this->silly_cache[$aclname]= TRUE;
+          return TRUE;
+        }
+      }
+    }
+
+    $this->silly_cache[$aclname]= FALSE;
+    return (FALSE);
+  }
 
 
   /*! \brief    Generates an array containing plugin names (headlines) and theirs ids.
    *            This is just used in the helpviewer.php  
    */
-	function gen_headlines()
-	{
-		$ret = array();
-		if(count($this->headlines) == 0){
-			foreach($this->config->data['MENU'] as $headline => $plugins){
-				foreach( $plugins as $id => $plug){
-					if (plugin_available($plug['CLASS'])){
-						$attrs = (get_class_vars($plug['CLASS']));
-						$ret[$id]['HEADLINE'] = $headline;
-						$ret[$id]['NAME']	  = $attrs['plHeadline'];
-					}
-				}
-			}
-			$this->headlines = $ret;
-		}
-		return($this->headlines);
-	}
+  function gen_headlines()
+  {
+    $ret = array();
+    if(count($this->headlines) == 0){
+      foreach($this->config->data['MENU'] as $headline => $plugins){
+        foreach( $plugins as $id => $plug){
+          if (plugin_available($plug['CLASS'])){
+            $attrs = (get_class_vars($plug['CLASS']));
+            $ret[$id]['HEADLINE'] = $headline;
+            $ret[$id]['NAME']	  = $attrs['plHeadline'];
+          }
+        }
+      }
+      $this->headlines = $ret;
+    }
+    return($this->headlines);
+  }
 
 
   /*! \brief    Check the accessibility of the configured plugins.
@@ -161,9 +161,9 @@ class pluglist {
    */
   function checkMenu()
   {
-	  $cfg= &$this->config->data['MENU'];
+    $cfg= &$this->config->data['MENU'];
     foreach ($cfg as $headline => $plug){
-		  $this->menuparts[_($headline)]= array();
+      $this->menuparts[_($headline)]= array();
       foreach ($plug as $id => $info){
         if (!isset($info['CLASS'])){
           msg_dialog::display(
@@ -176,7 +176,7 @@ class pluglist {
           unset($cfg[$headline][$id]); 
           continue; 
         }
-			  if (!$this->check_access($info['ACL'])){
+        if (!$this->check_access($info['ACL'])){
           unset($cfg[$headline][$id]);
           continue; 
         }
@@ -250,132 +250,132 @@ class pluglist {
    *             if you prefer create your own theme!!
    *            -----------------------------------------------------------------
    */
-	function show_iconmenu()
-	{
-		global $class_mapping;
-		if ($this->iconmenu == ""){
-			$cfg= $this->config->data['MENU'];
+  function show_iconmenu()
+  {
+    global $class_mapping;
+    if ($this->iconmenu == ""){
+      $cfg= $this->config->data['MENU'];
 
-			if (isset($this->config->current['ICONSIZE'])){
-				list($x, $y)= explode("x", $this->config->get_cfg_value("iconsize"));
-				$isize= "width=\"$x\" height=\"$y\"";
-			} else {
-				$isize= "";
-			}
+      if (isset($this->config->current['ICONSIZE'])){
+        list($x, $y)= explode("x", $this->config->get_cfg_value("iconsize"));
+        $isize= "width=\"$x\" height=\"$y\"";
+      } else {
+        $isize= "";
+      }
 
-			/* Parse headlines */
-			foreach ($cfg as $headline => $plug){
-				$col= 1;
-				$menu= "<h1 class=\"menuheader\">".
-					_($headline)."</h1>\n<table summary=\"\" style=\"width:100%;".
-					"font-size: 14px;\" cellpadding=7 border=0>\n<tr>\n";
-				$entries= "";
+      /* Parse headlines */
+      foreach ($cfg as $headline => $plug){
+        $col= 1;
+        $menu= "<h1 class=\"menuheader\">".
+          _($headline)."</h1>\n<table summary=\"\" style=\"width:100%;".
+          "font-size: 14px;\" cellpadding=7 border=0>\n<tr>\n";
+        $entries= "";
 
-				foreach ($plug as $info){
+        foreach ($plug as $info){
 
-					if (!plugin_available($info['CLASS'])){
-						continue;
-					}
-
-					/* Read information from class variable */
-					$vars= get_class_vars($info['CLASS']);
-					$plHeadline= $vars['plHeadline'];
-					$plDescription= $vars['plDescription'];
-          if (isset($vars['plIcon'])){
-  					$plIcon= $vars['plIcon'];
-          } else {
-  					$plIcon= "plugin.png";
+          if (!plugin_available($info['CLASS'])){
+            continue;
           }
 
-					$index= $this->get_index($info['CLASS']);
+          /* Read information from class variable */
+          $vars= get_class_vars($info['CLASS']);
+          $plHeadline= $vars['plHeadline'];
+          $plDescription= $vars['plDescription'];
+          if (isset($vars['plIcon'])){
+            $plIcon= $vars['plIcon'];
+          } else {
+            $plIcon= "plugin.png";
+          }
 
-					$href = "main.php?plug=".$index."&amp;reset=1";
+          $index= $this->get_index($info['CLASS']);
 
-					/* Check if class is available. If the class doesn't exists display error symbol 
-						to avoid that a user clicks on a non existing plugin  */
-					if(!$vars){
-						$plHeadline = $plDescription = _("Unknown");
-						$info['ICON'] = "error.png";
-						$href="main.php?reset=1";
-					}
+          $href = "main.php?plug=".$index."&amp;reset=1";
+
+          /* Check if class is available. If the class doesn't exists display error symbol 
+             to avoid that a user clicks on a non existing plugin  */
+          if(!$vars){
+            $plHeadline = $plDescription = _("Unknown");
+            $info['ICON'] = "error.png";
+            $href="main.php?reset=1";
+          }
 
 
-					if ($this->check_access($info['ACL'])){
+          if ($this->check_access($info['ACL'])){
 
-						/* Load icon */
-						if (isset($info['ICON'])){
-							$image= get_template_path('images/'.$info['ICON']);
-						} else {
+            /* Load icon */
+            if (isset($info['ICON'])){
+              $image= get_template_path('images/'.$info['ICON']);
+            } else {
               if(!preg_match("/\//",$plIcon)){
-					  		$image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/$plIcon");
+                $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/$plIcon");
               }else{
                 $image = $plIcon; 
               }
-						}
-						if ($col > 5){
-							$entries= $entries."</tr><tr>";
-							$col = 1;
-						}
-						$entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"".$href."\"'".
-							">";
-							if(session::global_get('js')){
-								$entries.= "<img $isize border=0 align=middle src=\"$image".
-									"\" alt=\"*\">&nbsp;".
-									_($plHeadline);
-							} else {
-								$entries.= "<a class=\"iconmenu\" href=\"".$href."\">".
-									"<img $isize border=0 align=middle src=\"$image".
-									"\" alt=\"*\">&nbsp;".
-									_($plHeadline)."</a>";
-							}
-							$entries.= "</td>\n";
-						$col++ ;
+            }
+            if ($col > 5){
+              $entries= $entries."</tr><tr>";
+              $col = 1;
+            }
+            $entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"".$href."\"'".
+              ">";
+            if(session::global_get('js')){
+              $entries.= "<img $isize border=0 align=middle src=\"$image".
+                "\" alt=\"*\">&nbsp;".
+                _($plHeadline);
+            } else {
+              $entries.= "<a class=\"iconmenu\" href=\"".$href."\">".
+                "<img $isize border=0 align=middle src=\"$image".
+                "\" alt=\"*\">&nbsp;".
+                _($plHeadline)."</a>";
+            }
+            $entries.= "</td>\n";
+            $col++ ;
 
-					}
-				}
+          }
+        }
 
-				/* Append to menu */
-				if ($entries != ""){
-					$this->iconmenu.= $menu.$entries;
+        /* Append to menu */
+        if ($entries != ""){
+          $this->iconmenu.= $menu.$entries;
 
-					/* Fill up remaining columns */
-					if ($col != 1){
-						$col--;
-						while ($col % 5){
-							$this->iconmenu= $this->iconmenu.
-								"<td style=\"width:20%\">&nbsp;</td>\n";
-							$col++;
-						}
-					}
+          /* Fill up remaining columns */
+          if ($col != 1){
+            $col--;
+            while ($col % 5){
+              $this->iconmenu= $this->iconmenu.
+                "<td style=\"width:20%\">&nbsp;</td>\n";
+              $col++;
+            }
+          }
 
-					/* close table */
-					$this->iconmenu= $this->iconmenu."</tr>\n</table>\n";
-				}
-			}
+          /* close table */
+          $this->iconmenu= $this->iconmenu."</tr>\n</table>\n";
+        }
+      }
 
-		}
+    }
 
-		/* Write menu output */
-		return ($this->iconmenu);
-	}
+    /* Write menu output */
+    return ($this->iconmenu);
+  }
 
 
   /*! \brief    Returns the installation path of a plugin.
    *            e.g. '../plugins/admin/mimetypes'
    */
-	function get_path($index)
-	{
-		if(!isset($this->dirlist[$index])){
-			return ("");
-		}
+  function get_path($index)
+  {
+    if(!isset($this->dirlist[$index])){
+      return ("");
+    }
     echo "../".$this->dirlist[$index];
-		return ("../".$this->dirlist[$index]);
-	}
+    return ("../".$this->dirlist[$index]);
+  }
 
 
   /*! \brief    Returns the plugins id for a given class.
    */
-	function get_index($class)
+  function get_index($class)
   {
     /* Search for plugin index (id), identify entry by path && class */
     $data = $this->config->data['MENU'];
@@ -387,7 +387,7 @@ class pluglist {
       }
     }
     return (0);
-	}
+  }
 
 
   /*! \brief  This function checks if we are allowed to view the plugin with the given id 
