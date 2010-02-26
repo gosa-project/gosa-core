@@ -240,7 +240,6 @@ class pluglist {
   {
     global $class_mapping;
 
-    $this->iconmenu = "";
     if ($this->iconmenu == ""){
       $cfg= $this->config->data['MENU'];
       foreach ($cfg as $headline => $plug){
@@ -280,15 +279,12 @@ class pluglist {
             $this->iconmenu .= "\n  <div class='clear'></div>\n";
           }
 
-          $this->iconmenu.= 
-"
-  <div class='container-element' style='width: 25%;' onclick=\"openPlugin({$index})\"> 
-   <div class='icon-menu-item' style='background-image: url(".$image.");'>
-    <h1>".$plHeadline."</h1>
-    <p>".$plDescription."</p>
-   </div>
-  </div>
-";
+          $this->iconmenu.= "\n  <div class='container-element' style='width: 25%;' onclick='openPlugin({$index})'> ";
+          $this->iconmenu.= "\n   <div class='icon-menu-item' style='background-image: url({$image});'>";
+          $this->iconmenu.= "\n    <h1>{$plHeadline}</h1>";
+          $this->iconmenu.= "\n    <p>{$plDescription}</p>";
+          $this->iconmenu.= "\n   </div>";
+          $this->iconmenu.= "\n  </div>\n";
           $col++ ;
         }
       }
