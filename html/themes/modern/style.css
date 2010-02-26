@@ -496,6 +496,10 @@ fieldset textarea:hover{
 
 /* Icon menu */
 
+.icon-menu-container {
+  padding:0;
+}
+
 .icon-menu-item{
   float:left;
   background-repeat:no-repeat;

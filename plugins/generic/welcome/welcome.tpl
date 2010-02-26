@@ -1,4 +1,6 @@
-{$iconmenu}
+<div class='icon-menu-container'>
+ {$iconmenu}
+</div>
 
 <div class="clear"></div>
 
