@@ -229,7 +229,9 @@ class pluglist {
     if(isset($_GET['plug'])){
       $menu.= "
         <script language='javascript' type='text/javascript'>
-          $('plugMenuId_".$_GET['plug']."').className= 'current'
+          if($('plugMenuId_".$_GET['plug']."')){
+            $('plugMenuId_".$_GET['plug']."').className= 'current'
+          }
         </script>
         "; 
     }
