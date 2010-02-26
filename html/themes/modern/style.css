@@ -263,6 +263,14 @@ div.menu ul li {
   border-right:1px solid #C2C2C2;
 }
 
+div.menu ul li.current {
+  padding:5px; 
+  cursor:pointer;
+  background-color: #EEE;
+  border-left:1px solid #C2C2C2;
+  border-right:1px solid #C2C2C2;
+}
+
 div.menu ul li:hover {
   background-color: #E0E0E0;
 }
