@@ -207,16 +207,8 @@ class management
    */
   protected function getHeader()
   {
-    if($this->skipHeader) return("");
-
-    if (get_object_info() != ""){
-      $display= print_header(get_template_path($this->plIcon),_($this->plDescription),
-          "<img alt=\"\" class=\"center\" src=\"".get_template_path('images/lists/locked.png')."\">".
-          LDAP::fix(get_object_info()));
-    } else {
-      $display= print_header(get_template_path($this->plIcon),_($this->plDescription));
-    }
-    return($display);
+    // We do not display any headers right now.
+    if(1 || $this->skipHeader) return("");
   }
 
 
