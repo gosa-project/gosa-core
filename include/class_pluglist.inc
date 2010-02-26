@@ -176,7 +176,6 @@ class pluglist {
   function gen_menu()
   {
     if ($this->menu == ""){
-      $cfg= $this->config->data['MENU'];
       $this->checkMenu();
       $cfg= $this->config->data['MENU'];
       $menu = "\n<div class='navigation'>";
@@ -212,18 +211,18 @@ class pluglist {
       }
       $menu.= "\n</div>";
       $this->menu = $menu;
-    }
 
-    // Add javascript method to print out warning messages while leaving an unsaved form.
-    // We do it in here to get the string translated.
-    $this->menu .= "
-      <script language='javascript' type='text/javascript'>
+      // Add javascript method to print out warning messages while leaving an unsaved form.
+      // We do it in here to get the string translated.
+      $this->menu .= "
+        <script language='javascript' type='text/javascript'>
         function openPlugin(id){
           return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\",
-            \"main.php?plug=\" + id + \"&amp;reset=1\");
+              \"main.php?plug=\" + id + \"&amp;reset=1\");
         }
       </script>
-    "; 
+        "; 
+    }
 
     // Return the generated/cached gosa menu.
     return ($this->menu);
@@ -240,29 +239,20 @@ class pluglist {
   function show_iconmenu()
   {
     global $class_mapping;
+
+    $this->iconmenu = "";
     if ($this->iconmenu == ""){
       $cfg= $this->config->data['MENU'];
 
-      if (isset($this->config->current['ICONSIZE'])){
-        list($x, $y)= explode("x", $this->config->get_cfg_value("iconsize"));
-        $isize= "width=\"$x\" height=\"$y\"";
-      } else {
-        $isize= "";
-      }
 
-      /* Parse headlines */
       foreach ($cfg as $headline => $plug){
         $col= 1;
-        $menu= "<h1 class=\"menuheader\">".
-          _($headline)."</h1>\n<table summary=\"\" style=\"width:100%;".
-          "font-size: 14px;\" cellpadding=7 border=0>\n<tr>\n";
-        $entries= "";
+
+       $this->iconmenu .= "\n  <div class='clear'></div>\n";
+       $this->iconmenu .= "\n  <h3>". _($headline)."</h3>\n";
 
         foreach ($plug as $info){
 
-          if (!plugin_available($info['CLASS'])){
-            continue;
-          }
 
           /* Read information from class variable */
           $vars= get_class_vars($info['CLASS']);
@@ -276,8 +266,6 @@ class pluglist {
 
           $index= $this->get_index($info['CLASS']);
 
-          $href = "main.php?plug=".$index."&amp;reset=1";
-
           /* Check if class is available. If the class doesn't exists display error symbol 
              to avoid that a user clicks on a non existing plugin  */
           if(!$vars){
@@ -287,59 +275,34 @@ class pluglist {
           }
 
 
-          if ($this->check_access($info['ACL'])){
-
-            /* Load icon */
-            if (isset($info['ICON'])){
-              $image= get_template_path('images/'.$info['ICON']);
-            } else {
-              if(!preg_match("/\//",$plIcon)){
-                $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/$plIcon");
-              }else{
-                $image = $plIcon; 
-              }
-            }
-            if ($col > 5){
-              $entries= $entries."</tr><tr>";
-              $col = 1;
-            }
-            $entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"".$href."\"'".
-              ">";
-            if(session::global_get('js')){
-              $entries.= "<img $isize border=0 align=middle src=\"$image".
-                "\" alt=\"*\">&nbsp;".
-                _($plHeadline);
-            } else {
-              $entries.= "<a class=\"iconmenu\" href=\"".$href."\">".
-                "<img $isize border=0 align=middle src=\"$image".
-                "\" alt=\"*\">&nbsp;".
-                _($plHeadline)."</a>";
-            }
-            $entries.= "</td>\n";
-            $col++ ;
-
-          }
-        }
-
-        /* Append to menu */
-        if ($entries != ""){
-          $this->iconmenu.= $menu.$entries;
-
-          /* Fill up remaining columns */
-          if ($col != 1){
-            $col--;
-            while ($col % 5){
-              $this->iconmenu= $this->iconmenu.
-                "<td style=\"width:20%\">&nbsp;</td>\n";
-              $col++;
+          /* Load icon */
+          if (isset($info['ICON'])){
+            $image= get_template_path('images/'.$info['ICON']);
+          } else {
+            if(!preg_match("/\//",$plIcon)){
+              $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/$plIcon");
+            }else{
+              $image = $plIcon; 
             }
           }
+          if (($col % 5) == 0){
+            $this->iconmenu .= "\n  <div class='clear'></div>\n";
+            $col = 1;
+          }
 
-          /* close table */
-          $this->iconmenu= $this->iconmenu."</tr>\n</table>\n";
+
+          $this->iconmenu.= 
+"
+  <div class='container-element' style='width: 25%;' onclick='alert('clicked')'> 
+   <div class='icon-menu-item' style='background-image: url(".$image.");'>
+    <h1>".$plHeadline."</h1>
+    <p>".$plDescription."</p>
+   </div>
+  </div>
+";
+          $col++ ;
         }
       }
-
     }
 
     /* Write menu output */
