@@ -509,9 +509,16 @@ fieldset textarea:hover{
 }
 
 .icon-menu-item h1{
-  font-size:16px;
+  font-size:14px;
   font-weight:bold;
   margin:0;
+  color:#222;
+}
+
+.icon-menu-title h3{
+  font-size:16px;
+  font-weight:bold;
+  margin-top:8px;
 }
 
 .icon-menu-item p{
