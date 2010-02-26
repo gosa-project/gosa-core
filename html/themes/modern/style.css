@@ -734,7 +734,7 @@ div.listContainer {
 }
 
 .fixedListHeader a {
-  color:#333;
+  color:#444;
 }
 
 .listHeaderFormat {
@@ -746,7 +746,7 @@ div.listContainer {
 .listHeaderFormat tr td {
   padding:4px;
   background-color:#F5F5F5;
-  color:#333;
+  color:#444;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
   border-right:1px solid #CCC;
@@ -762,6 +762,18 @@ div.listContainer {
 .listScrollContent tr {
   height:auto;
   white-space:nowrap;
+}
+
+.listScrollContent tr:nth-child(odd) {
+  background-color:#FFF;
+}
+
+.listScrollContent tr:nth-child(even) {
+  background-color:#F5F5F5;
+}
+
+.listScrollContent tr:last-child {
+  background-color:#FFF;
 }
 
 .listScrollContent tr td:last-child {
@@ -780,7 +792,7 @@ div.listContainer {
 
 div.nlistFooter {
   background-color:#F5F5F5;
-  color:#333;
+  color:#444;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
   border-left:1px solid #CCC;
@@ -794,6 +806,66 @@ div.nlistFooter {
   -webkit-border-bottom-right-radius:2px;
   padding:0;
   width:100%;
+}
+
+
+/* List header, Filter, misc. */
+
+#filter {
+  position:absolute;
+  right:0;
+  width:250px;
+}
+
+#mainlist {
+  position:absolute;
+  right:265px;
+  left:0;
+}
+
+.mainlist-header {
+  background-color:#F8F8F8;
+  border:1px solid #CCC;
+  border-radius:2px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+  background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  margin-bottom:4px;
+  margin-right:-2px;
+}
+
+.mainlist-header p{
+  color:#444;
+  font-weight:bold;
+  font-size:14px;
+  margin:4px;
+}
+
+.mainlist-header div{
+  border-top:1px solid #CCC;
+  background-color:white;
+}
+
+ul.mainlist-header-nav {
+  list-style:none;
+  cursor:pointer;
+  padding:0;
+  margin:0;
+  color:#666;
+}
+
+ul.mainlist-header-nav li {
+  display:inline;
+  padding:5px;
+  padding-top:8px;
+  height:19px;
+}
+
+ul.mainlist-header-nav li:hover {
+  background-color: #E0E0E0;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#E0E0E0));
+  background: -moz-linear-gradient(top, #EEE, #E0E0E0);
 }
 
 
