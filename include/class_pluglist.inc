@@ -240,13 +240,18 @@ class pluglist {
   {
     global $class_mapping;
 
+    $add_hr =FALSE;
     if ($this->iconmenu == ""){
       $cfg= $this->config->data['MENU'];
       foreach ($cfg as $headline => $plug){
         $col= 0;
 
+        if($add_hr){
+          $add_hr = FALSE;
+          $this->iconmenu .= "\n  <hr>\n";
+        }
         $this->iconmenu .= "\n  <div class='clear'></div>\n";
-        $this->iconmenu .= "\n  <h3>". _($headline)."</h3>\n";
+        $this->iconmenu .= "\n  <h3 class='icon-menu-title'>". _($headline)."</h3>\n";
 
         foreach ($plug as $info){
 
@@ -287,6 +292,7 @@ class pluglist {
           $this->iconmenu.= "\n  </div>\n";
           $col++ ;
         }
+        $add_hr = TRUE;
       }
     }
     return ($this->iconmenu);
