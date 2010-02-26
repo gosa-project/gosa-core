@@ -20,7 +20,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class pluglist {
+class pluglist 
+{
   var $index= 0;
   var $menu= "";
   var $iconmenu= "";
@@ -31,17 +32,28 @@ class pluglist {
   var $current= "";
   var $info= array();
   var $headlines = array();
-  var $allowed_plugins = array();
   var $silly_cache= array();
+
+  var $pluginList = array();
 
   function pluglist(&$config, &$ui)
   {
     $this->ui= &$ui;
     $this->config= &$config;
 
-    // Get list of plugin paths, this allows us to open the plugins main.inc if available.
-    $this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data['MENU']);
-    $this->dirlist= array_merge($this->dirlist,$this->get_plugins ($this->dirlist, $this->config->data['MENU']));
+    // Reserve a special ACL will allows us to display plugins/addons whenever a user 
+    //  is able to login into gosa. E.g. some kind of welcome page. 
+    $this->info['all']= array();
+    $this->info['all']['plProvidedAcls']= array();
+    $this->info['all']['plDescription']= _("All objects in this category");
+    $this->info['all']['plSelfModify']= FALSE;
+    
+    $this->loadPluginList();
+  }
+
+  function loadPluginList()
+  {
+    $this->pluginList = array();
 
     // Detect installed plugins and their configuration, to be able to restrict access later.
     $classes= get_declared_classes();
@@ -51,38 +63,57 @@ class pluglist {
         $this->info[$cname]= call_user_func(array($cname, 'plInfo'));
       }
     }
-
-    // Reserve a special ACL will allows us to display plugins/addons whenever a user 
-    //  is able to login into gosa. E.g. some kind of welcome page. 
-    $this->info['all']= array();
-    $this->info['all']['plProvidedAcls']= array();
-    $this->info['all']['plDescription']= _("All objects in this category");
-    $this->info['all']['plSelfModify']= FALSE;
     
-    $this->gen_menu();
-  }
-
-
-  /*! \brief    Detect plugin installation paths, by walking through the config. 
-   */
-  function get_plugins($list, &$config)
-  {
-    global $class_mapping;
-    if (!isset($config['CLASS'])){
-      if (is_array($config)){
-        foreach ($config as $val){
-          $list= $this->get_plugins($list, $val);
+    // First load Menu Plugins 
+    if(isset($this->config->data['MENU'])){
+      foreach($this->config->data['MENU'] as $section => $plugins){
+        foreach($plugins as $id => $plug){
+          if(!$this->registerPlugin($plug)){ 
+            unset($this->config->data['MENU'][$section][$id]); 
+          }
         }
       }
-    } else {
-      if (is_array($config) && isset($class_mapping[$config['CLASS']])){
-        $list[$this->index++]= dirname($class_mapping[$config['CLASS']]);
-      } else {
-        $list[$this->index++]= "";
+    }
+    
+    // Now register pathMenu plugins
+    if(isset($this->config->data['PATHMENU'])){
+      foreach($this->config->data['PATHMENU'] as $id => $plugin){
+        if(!$this->registerPlugin($plugin)){
+          unset($this->config->data['PATHMENU'][$id]); 
+        } 
       }
     }
 
-    return ($list);
+    if(!session::is_set('maxC')){
+      session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
+    }
+    $this->gen_menu();
+    $this->show_iconmenu();
+    $this->genPathMenu();
+  }
+
+
+  function registerPlugin($plug)
+  {
+    global $class_mapping;
+
+    if (!isset($plug['CLASS'])){
+      msg_dialog::display(
+          _("Configuration error"),
+          _("The configuration format has changed. Please re-run setup!"),
+          FATAL_ERROR_DIALOG);
+      exit();
+    }
+    if (!plugin_available($plug['CLASS'])){
+      return(FALSE);
+    }
+    if (!$this->check_access($plug['ACL'])){
+      return(FALSE);
+    }
+    $this->dirlist[$this->index] = dirname($class_mapping[$plug['CLASS']]);
+    $this->pluginList[$this->index] = $plug['CLASS'];
+    $this->index++;
+    return(TRUE);
   }
 
 
@@ -136,38 +167,6 @@ class pluglist {
   }
 
 
-  /*! \brief    Check the accessibility of the configured plugins.
-   *            We may simply have now permissions to access some plugins 
-   *             but some may be broken or missing!.
-   */
-  function checkMenu()
-  {
-    $cfg= &$this->config->data['MENU'];
-    foreach ($cfg as $headline => $plug){
-      $this->menuparts[_($headline)]= array();
-      foreach ($plug as $id => $info){
-        if (!isset($info['CLASS'])){
-          msg_dialog::display(
-              _("Configuration error"), 
-              _("The configuration format has changed. Please re-run setup!"), 
-              FATAL_ERROR_DIALOG);
-          exit();
-        }
-        if (!plugin_available($info['CLASS'])){
-          unset($cfg[$headline][$id]); 
-          continue; 
-        }
-        if (!$this->check_access($info['ACL'])){
-          unset($cfg[$headline][$id]);
-          continue; 
-        }
-      }
-    }
-    if(!session::is_set('maxC')){
-      session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
-    }
-  }
-
 
   /*! \brief    Generate the GOsa Main-Menu here (The menu on the left), 
    *             this usually only done once during login.
@@ -179,12 +178,12 @@ class pluglist {
   function gen_menu()
   {
     if ($this->menu == ""){
-      $this->checkMenu();
       $cfg= $this->config->data['MENU'];
       $menu = "\n<div class='navigation'>";
       foreach ($cfg as $headline => $plug){
 
         if(!count($plug)) continue;
+
         $menu.= "\n<div class='menu'>";
         $menu.= "\n <ul>";
         $menu.= "\n  <li class='menu-header'>"._($headline)."</li>";
@@ -192,7 +191,6 @@ class pluglist {
         foreach ($plug as $info){
           $id ++;
           list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
-          $this->allowed_plugins[$index] = $index;
           $class= "";
           if($id == count($plug)) $class=" class='menu-last' \n   ";
           $menu .=  "\n  <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title."</li>";
@@ -298,15 +296,7 @@ class pluglist {
         $cfg= &$this->config->data['PATHMENU'];
         $rcfg = array_reverse($cfg);
         foreach($rcfg as $id => $plug){
-
-          // Do not add inaccessible plugins
-          if (!$this->check_access($plug['ACL'])){
-            unset($rcfg[$id]);
-            continue; 
-          }
-
           list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
-          $this->allowed_plugins[$index] = $index;
           $this->pathMenu.= "\n     <li class='right left-border' onClick='openPlugin({$index})'>{$title}</li>";
         }
       }
@@ -362,16 +352,7 @@ class pluglist {
    */
   function get_index($class)
   {
-    /* Search for plugin index (id), identify entry by path && class */
-    $data = $this->config->data['MENU'];
-    foreach($data as $section => $plugins){
-      foreach($plugins as $key => $plugin)    {
-        if($plugin['CLASS'] == $class){
-          return($key);
-        }
-      }
-    }
-    return (0);
+    return (array_search($class, $this->pluginList));
   }
 
 
@@ -382,7 +363,7 @@ class pluglist {
    */
   function plugin_access_allowed($plug_id)
   {
-    return(isset($this->allowed_plugins[$plug_id]));
+    return(isset($this->pluginList[$plug_id]));
   }
 
 
