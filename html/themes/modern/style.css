@@ -534,6 +534,9 @@ div.datepicker {
   background:#FFF;
   font-size:10px;
   padding:0;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+  -webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
+  -moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 }
 
 div.datepicker-calendar table {
@@ -1026,10 +1029,9 @@ background-color:#F0F0F0;
 #pulldown {
 background:#FFF;
 height:23px;    
-border-top:1px #D0D0D0 solid;
-border-left:1px #D0D0D0 solid;
-border-bottom:1px gray solid; 
-border-right:1px gray solid;  
+border:1px #CCC solid;
+background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+background: -moz-linear-gradient(top, #F8F8F8, #EEE);
 }                             
 
 #pulldown ul {
@@ -1081,11 +1083,11 @@ position:absolute;
 top:0;                                   
 left:0;                                  
 visibility:hidden;                       
-border-top:1px #D0D0D0 solid;            
-border-left:1px #D0D0D0 solid;           
-border-bottom:1px gray solid;            
-border-right:1px gray solid;             
+border:1px #CCC solid;            
 background:#FFF;                         
+box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+-webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
+-moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 }                                        
 
 #pulldown ul.level2 li,#pulldown ul.level3 li {
