@@ -191,12 +191,12 @@ class pluglist {
         if(!count($plug)) continue;
         $menu.= "\n<div class='menu'>";
         $menu.= "\n <ul>";
-        $menu.= "\n  <li class='menu-header'>".$headline."</li>";
+        $menu.= "\n  <li class='menu-header'>"._($headline)."</li>";
         $id = 0;
-				foreach ($plug as $info){
+	foreach ($plug as $info){
           $id ++;
           $vars= get_class_vars($info['CLASS']);
-          $plHeadline = (isset($info['NAME'])) ? $info['NAME'] : $vars['plHeadline'];
+          $plHeadline = _((isset($info['NAME'])) ? $info['NAME'] : $vars['plHeadline']);
           $plDescription= $vars['plDescription'];
 					$index= $this->get_index($info['CLASS']);
 					$href= "main.php?plug=$index&amp;reset=1";
