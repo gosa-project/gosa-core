@@ -23,18 +23,18 @@
 class pluglist 
 {
   var $index= 0;
-  var $menu= "";
-  var $iconmenu= "";
-  var $menuparts= array();
   var $config= NULL;
   var $dirlist= array();
   var $ui= NULL;
-  var $current= "";
   var $info= array();
   var $headlines = array();
   var $silly_cache= array();
 
   var $pluginList = array();
+
+  var $pathMenu = "";
+  var $menu= "";
+  var $iconmenu= "";
 
   function pluglist(&$config, &$ui)
   {
@@ -189,7 +189,10 @@ class pluglist
         $menu.= "\n  <li class='menu-header'>"._($headline)."</li>";
         $id = 0;
         foreach ($plug as $info){
+
+          // Used to detect the last element in the menu
           $id ++;
+
           list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
           $class= "";
           if($id == count($plug)) $class=" class='menu-last' \n   ";
@@ -282,8 +285,7 @@ class pluglist
 
   function genPathMenu()
   {
-    if(1 | empty($this->pathMenu)){
-
+    if(empty($this->pathMenu)){
       $this->pathMenu = 
         "\n    <div class='plugin-path'>".
         "\n     <ul class='path-navigation'>".
