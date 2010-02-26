@@ -299,8 +299,7 @@ $smarty->assign ("go_help", get_template_path('images/help.png'));
 if($reload_navigation){
   $plist->menu="";
 }
-$plist->gen_menu();
-$smarty->assign ("menu", $plist->menu);
+$smarty->assign ("menu", $plist->gen_menu());
 $smarty->assign ("plug", "$plug");
 
 $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");

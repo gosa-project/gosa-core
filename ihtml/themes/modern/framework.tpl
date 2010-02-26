@@ -32,8 +32,8 @@
   <div class='plugin-area'>
     <div class='plugin-path'>
      <ul class='path-navigation'>
-      <li class='left right-border'>
-        <div class='nav-home' onClick="openPlugin('');"></div>
+      <li class='left right-border' onClick="openPlugin('');">
+        <div class='nav-home'></div>
       </li>
       <li class='left'>Welcome to GOsa</li>
       <li class='right left-border'>Help</li>

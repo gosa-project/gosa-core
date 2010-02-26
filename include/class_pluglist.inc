@@ -201,7 +201,7 @@ class pluglist {
           $this->allowed_plugins[$index] = $index;
           $class= "";
           if($id == count($plug)) $class=" class='menu-last' \n   ";
-          $menu .=  "\n  <li $class onClick='return openPlugin({$index});'>".$plHeadline."</li>";
+          $menu .=  "\n  <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$plHeadline."</li>";
         }
         $menu.= "\n </ul>";
         $menu.= "\n <div></div>\n";
@@ -223,9 +223,18 @@ class pluglist {
       </script>
         "; 
     }
+  
+    // Use javascript to mark the currently selected plugin.
+    if(isset($_GET['plug'])){
+      $menu = $this->menu."
+        <script language='javascript' type='text/javascript'>
+          $('plugMenuId_".$_GET['plug']."').className= 'current'
+        </script>
+        "; 
+    }
 
     // Return the generated/cached gosa menu.
-    return ($this->menu);
+    return ($menu);
   }
 
 
