@@ -522,7 +522,8 @@ div.img div {
 
 .icon-menu-item{
   float:left;
-  padding:0 10px 10px 56px;
+  padding-top:10px;
+  padding-bottom:10px;
   min-height:70px;
   min-width:150px;
   cursor:pointer;
