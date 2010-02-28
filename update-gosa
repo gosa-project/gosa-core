@@ -521,6 +521,244 @@ function remove_plugin($name)
 }
 
 
+function rescan_images($path, $theme)
+{
+  $widths= array();
+  $heights= array();
+  $paths= array();
+  $posX= array();
+  $posY= array();
+  $baseLength= strlen($path);
+  $heightStats= array();
+  $warnings= array();
+  $checksums= array();
+  $styles= array();
+  $duplicates= array();
+
+  // Check for image magick convert
+  if (!function_exists("imageFilter")){
+    exec("which convert", $res, $ret);
+    if ($ret != 0) {
+      die("Your system has no bundled gd support for imageFilter function. Please install imagemagick in order to use an external command.\n");
+    }
+  }
+  
+  // Scan for images in the given path
+  echo "Scanning for images";
+  flush();
+  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $fileInfo) {
+  
+      // We're only interested in png files
+      $indexPath= substr($fileInfo->getPathname(), $baseLength + 1);
+      $path= $fileInfo->getPathname();
+      if (preg_match('/\.png$/', $indexPath) && !preg_match('/\.svn/', $path) && !preg_match('/themes\/[^\/]+\/img.png$/', $path)){
+  
+         // Grey image if it is not already one
+         if (preg_match('/grey/', $indexPath)) {
+           echo "!";
+           $warnings[]= "Warning: skipped possible grey image $path";
+           flush();
+           continue;
+         }
+
+         // Grey image if it is not already one
+         if (preg_match('/new/', $indexPath)) {
+           echo "!";
+           $warnings[]= "Warning: skipped possible grey image $path";
+           flush();
+           continue;
+         }
+
+         // Catch available themes
+         if (preg_match('/themes\//', $indexPath) && !preg_match('/themes\/'.$theme.'\//', $indexPath)) {
+           continue;
+         }
+
+         // Load image
+         $img= imageCreateFromPng($path);
+         $width= imageSX($img);
+         $height= imageSY($img);
+         imageDestroy($img);
+         $greyIndexPath= preg_replace('/\.png$/', '-grey.png', $indexPath);
+
+         // Is this image already there?
+         $checksum= md5_file($path);
+         if (in_array($checksum, $checksums)) {
+           $warnings[]= "Warning: images $indexPath seems to be a duplicate of ".array_search($checksum, $checksums);
+           $duplicates[$indexPath]= array_search($checksum, $checksums);
+           $duplicates[$greyIndexPath]= preg_replace('/\.png$/', '-grey.png', array_search($checksum, $checksums));
+           continue;
+         } else {
+           $checksums[$indexPath]= $checksum;
+         }
+
+         // Ordinary image
+         $widths[$indexPath]= $width;
+         $heights[$indexPath]= $height;
+         $paths[$indexPath]= $path;
+
+         // Grey image
+         $widths[$greyIndexPath]= $width;
+         $heights[$greyIndexPath]= $height;
+         $paths[$greyIndexPath]= $path;
+
+         // Feed height statistics
+         if (!isset($heightStats[$height])) {
+           $heightStats[$height]= 1;
+         } else {
+           $heightStats[$height]++;
+         }
+      }
+  
+    echo ".";
+    flush();
+  }
+  echo "\n";
+
+  // Do some stupid height calculation
+  arsort($heightStats, SORT_NUMERIC);
+  reset($heightStats);
+  $popular= current($heightStats);
+
+  krsort($heightStats);
+  reset($heightStats);
+  $max= current($heightStats);
+
+  $maxHeight= (floor($max / $popular) + 1) * $popular * 6;
+  
+  // Sort to get biggest values
+  arsort($widths, SORT_NUMERIC);
+  reset($widths);
+  echo "Calculating master image dimensions: ";
+  flush();
+  
+  // Build container image
+  $cursorX= 0;
+  $cursorY= 0;
+  $colWidth= 0;
+  $rowHeight= 0;
+  $colX= 0;
+  $colY= 0;
+  $maxY= 0;
+  $maxX= 0;
+
+  // Walk thru width sorted images
+  foreach ($widths as $imagePath => $imageWidth) {
+    $imageHeight= $heights[$imagePath];
+
+    // First element in this column
+    if ($colWidth == 0) {
+      $colWidth= $imageWidth;
+    }
+
+    // First element in this row
+    if ($rowHeight < $imageHeight) {
+      $rowHeight= $imageHeight;
+    }
+
+    // Does the image match here?
+    if ($cursorX + $imageWidth > $colX + $colWidth) {
+
+      if ($cursorY + $imageHeight >= $maxHeight) {
+
+        // Reached max height, move to the next column
+        $colX+= $colWidth;
+        $cursorX= $colX;
+        $colWidth= $imageWidth;
+        $rowHeight= $imageHeight;
+        $colY= $cursorY= 0;
+
+      } else {
+
+        // Next row
+        $colY+= $rowHeight;
+        $cursorY= $colY;
+        $cursorX= $colX;
+        $rowHeight= $imageHeight;
+      }
+
+      $maxY=($colY + $imageHeight > $maxY)?$colY+$imageHeight:$maxY;
+    }
+
+    // Save calculated position
+    $posX[$imagePath]= $cursorX;
+    $posY[$imagePath]= $cursorY;
+
+    // Move X cursor to the next position
+    $cursorX+= $imageWidth;
+
+    $maxX=($colX > $maxX)?$colX:$maxX;
+  }
+  
+  // Print maximum dimensions
+  echo $maxY."x".$maxX."\n";
+  echo "Processing";
+  flush();
+
+  // Create result image
+  $dst= imageCreateTrueColor($maxX, $maxY);
+  imageAlphaBlending($dst, true);
+  $transparent = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+  imageFill($dst, 0, 0, $transparent);
+  imageSaveAlpha($dst, true);
+
+  // Finally assemble picture
+  foreach ($heights as $imagePath => $imageHeight) {
+    $imageWidth= $widths[$imagePath];
+    $x= $posX[$imagePath];
+    $y= $posY[$imagePath];
+
+    // Insert source image...
+
+    // And eventually convert it to grey before
+    if (preg_match('/-grey\.png$/', $imagePath)) {
+      if (!function_exists("imageFilter")){
+        exec("convert ".$paths[$imagePath]." -colorspace Gray /tmp/grey-converted.png");
+        $src= imageCreateFromPng("/tmp/grey-converted.png");
+      } else {
+        $src= imageCreateFromPng($paths[$imagePath]);
+        imageFilter($src, IMG_FILTER_GRAYSCALE);
+      }
+    } else {
+      $src= imageCreateFromPng($paths[$imagePath]);
+    }
+
+    // Merge image
+    imageCopyResampled($dst, $src, $x, $y, 0, 0, $imageWidth, $imageHeight, $imageWidth, $imageHeight);
+    imageDestroy($src);
+
+    // Store style
+    if (isset($duplicates[$imagePath])){
+      $imageHeight= $heights[$duplicates[$imagePath]];
+      $imageWidth= $widths[$duplicates[$imagePath]];
+      $x= $posX[$duplicates[$imagePath]];
+      $y= $posY[$duplicates[$imagePath]];
+      $styles[$imagePath]= "background-position:-$x -$y;width:".$imageWidth."px;height:".$imageHeight."px";
+    } else {
+      $styles[$imagePath]= "background-position:-$x -$y;width:".$imageWidth."px;height:".$imageHeight."px";
+    }
+
+    echo ".";
+    flush();
+  }
+
+  imagePNG($dst, "html/themes/$theme/img.png", 9);
+  imageDestroy($dst);
+
+  // Show warnings images
+  foreach ($warnings as $warn) {
+    echo "$warn\n";
+  }
+
+  // Write styles
+  echo "Writing styles...";
+  $fp = fopen("ihtml/themes/$theme/img.styles", 'w');
+  fwrite($fp, serialize($styles));
+  fclose($fp);
+
+  echo "\n";
+}
+
 
 /* Fill global values */
 $description= $provides= $depends= $versions= $conflicts= array();
@@ -530,6 +768,7 @@ if ($argc < 2){
 	rescan_classes();
 	rescan_i18n();
 	rescan_guide();
+        rescan_images("html", "modern");
         exit (0);
 }
 
@@ -558,6 +797,9 @@ switch ($argv[1]){
                 break;
         case 'rescan-classes':
                 rescan_classes();
+                break;
+        case 'rescan-images':
+                rescan_images("html", "modern");
                 break;
         default:
                 echo "Error: Supplied command not known\n\n";
