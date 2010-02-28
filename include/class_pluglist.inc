@@ -268,12 +268,16 @@ class pluglist
             $this->iconmenu .= "\n  <div class='clear'></div>\n";
           }
 
-          $this->iconmenu.= "\n  <div class='container-element' style='width: 25%;' onclick='openPlugin({$index})'> ";
-          $this->iconmenu.= "\n   <div class='icon-menu-item' style='background-image: url({$icon});'>";
-          $this->iconmenu.= "\n    <h1>{$title}</h1>";
-          $this->iconmenu.= "\n    <p>{$desc}</p>";
-          $this->iconmenu.= "\n   </div>";
-          $this->iconmenu.= "\n  </div>\n";
+
+          $this->iconmenu.= "\n  <div class="icon-menu-item" style='width: 25%;' onclick='openPlugin({$index})'>
+          ##### $this->iconmenu.= "\n   ".image($icon);
+          $this->iconmenu.= "\n   <div class='img' style='width:48px;height:48px;background-image: url({$icon});'>";
+          $this->iconmenu.= "\n   <div class="dsc">
+          $this->iconmenu.= "\n    <h1>{$title}</h1>
+          $this->iconmenu.= "\n    <p>{$desc}</p>
+          $this->iconmenu.= "\n   </div>
+          $this->iconmenu.= "\n  </div>
+
           $col++ ;
         }
         $add_hr = TRUE;
