@@ -506,12 +506,14 @@ fieldset textarea:hover{
 
 /* Images */
 div.img{
-  /*background:transparent url(img-modern.png) no-repeat;*/
+  background-color:transparent;
+  background-repeat:no-repeat;
   position:relative
 }
 
 div.img div {
-  /*background:transparent url(img-modern.png) no-repeat;*/
+  background-color:transparent;
+  background-repeat:no-repeat;
   bottom:0;
   right:0;
   position:absolute;
