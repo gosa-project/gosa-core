@@ -21,9 +21,24 @@
 
   <!--[if IE]>
   <style type="text/css">
-  div.listContainer { height: 121px; overflow-x:hidden; overflow-y:auto; }
+    div.listContainer { height: 121px; overflow-x:hidden; overflow-y:auto; }
   </style>
   <![endif]-->
+
+  <!-- Include correct theme icon sets -->
+  <style type="text/css">
+    div.img{
+      background:transparent url(themes/modern/img.png) no-repeat;
+      position:relative
+    }
+    
+    div.img div {
+      background:transparent url(themes/modern/img.png) no-repeat;
+      bottom:0;
+      right:0;
+      position:absolute;
+    }
+  </style>
 
   <link rel="shortcut icon" href="favicon.ico">
 
