@@ -3517,5 +3517,43 @@ function mark($needle, $haystack, $ignorecase= true)
   return $result.$haystack;
 }
 
+
+/* Return an image description using the path */
+function image($path, $label= null)
+{
+  // Bail out, if there's no style file
+  if(!session::global_is_set("img-styles")){
+
+    // Get theme
+    if (isset ($config)){
+      $theme= $config->get_cfg_value("theme", "default");
+    } else {
+      # For debuging - avoid that there's no theme set
+      die("config not set!");
+      $theme= "default";
+    }
+
+    if (!file_exists("$BASE_DIR/ihtml/themes/$theme/img.styles")){
+      die ("No img.style for this theme found!");
+    }
+
+    session::global_set('img-styles', unserialize(file_get_contents("$BASE_DIR/ihtml/themes/$theme/img.styles")));
+  }
+  $styles= session::global_get('img-styles');
+
+  $lbl= "";
+  if ($label) {
+    if (isset($styles["images/label-".$label.".png"])) {
+      $lbl= "<div style='".$styles["images/label-".$label.".png"]."'></div>";
+    } else {
+      die("Invalid label specified: $label\n");
+    }
+  }
+
+  return "<div class='img' style='".$styles[$path]."'>$lbl</div>";
+}
+
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
