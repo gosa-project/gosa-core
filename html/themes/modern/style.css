@@ -319,6 +319,7 @@ div.menu ul li.menu-header {
 .button {
   padding:2px 6px;
   margin:0;
+  margin-bottom:6px;
   background-color:#F8F8F8;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#BBB));
   background: -moz-linear-gradient(top, #FFF, #BBB);
