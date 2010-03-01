@@ -446,7 +446,7 @@ fieldset label{
   margin-top:3px;
 }
 
-fieldset input[type=text]{
+fieldset input[type=text], fieldset select{
   float:left;
   width:10em;
   margin-top:3px;
