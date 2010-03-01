@@ -152,9 +152,6 @@ class tabs
 
   function save_object($save_current= FALSE)
   {
-
-  
-
     /* Save last tab */
     if ($this->last != ""){
       @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
@@ -194,7 +191,6 @@ class tabs
     $display = "\n  <div class='tabs'>";
     $display.= "\n    <ul>";
 
-
     foreach ($this->by_name as $class => $name){
 
       // Shorten string if its too long for the tab headers
@@ -208,13 +204,13 @@ class tabs
 
       // Take care about notifications 
       $obj = $this->by_object[$class];
-      $notify ="";
+      $tabClass = ($this->current == $class) ? "current" :"";
       if ( $this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)){
-        $notify= "!";
+        $tabClass .= " info";
       }
-      $tabClass = ($this->current == $class) ? "class='current'" :"";
+      if(!empty($tabClass)) $tabClass="class='{$tabClass}'";
       $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
-      $display.= "\n      <li {$tabClass} onClick=\"{$onClick}\">$title{$notify}</li>";
+      $display.= "\n      <li {$tabClass} onClick=\"{$onClick}\">{$title}</li>";
     }
     $display.="\n    </ul>";
     $display.="\n  </div>";
