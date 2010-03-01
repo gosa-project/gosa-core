@@ -22,6 +22,12 @@
 
 class MyAccountTabs extends tabs
 {
+
+  function remove_lock()
+  {
+    echo "Implement remove Lock !!!!!";;
+  }
+
 # var $base;
 #
 # /* Template adaption variables
