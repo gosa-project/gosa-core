@@ -22,16 +22,26 @@
 
 class pluglist 
 {
+  // The id of the last registered plugin id 
   var $index= 0;
+
   var $config= NULL;
-  var $dirlist= array();
   var $ui= NULL;
-  var $info= array();
+
+  // Contains a list of the paths for all registered plugins.
+  var $dirlist= array();
+
+  // Seems to be used in the help menu to generate an overview.
   var $headlines = array();
+
+  // Remember stuff in here.
   var $silly_cache= array();
 
+  // The pluglist keeps track of all registered plugins.
+  // (Registered plugins are those we are able to access)
   var $pluginList = array();
 
+  // Some cache vars to avoid regenration of the menus.   
   var $pathMenu = "";
   var $menu= "";
   var $iconmenu= "";
