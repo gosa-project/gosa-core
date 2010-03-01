@@ -587,7 +587,6 @@ function rescan_images($path, $theme)
            $warnings[]= "Warning: images $indexPath seems to be a duplicate of ".array_search($checksum, $checksums);
            $duplicates[$indexPath]= array_search($checksum, $checksums);
            $duplicates[$greyIndexPath]= preg_replace('/\.png$/', '-grey.png', array_search($checksum, $checksums));
-           continue;
          } else {
            $checksums[$indexPath]= $checksum;
          }
@@ -710,29 +709,30 @@ function rescan_images($path, $theme)
 
     // Insert source image...
 
-    // And eventually convert it to grey before
-    if (preg_match('/-grey\.png$/', $imagePath)) {
-      if (!function_exists("imageFilter")){
-        exec("convert ".$paths[$imagePath]." -colorspace Gray /tmp/grey-converted.png");
-        $src= imageCreateFromPng("/tmp/grey-converted.png");
-      } else {
-        $src= imageCreateFromPng($paths[$imagePath]);
-        imageFilter($src, IMG_FILTER_GRAYSCALE);
-      }
-    } else {
-      $src= imageCreateFromPng($paths[$imagePath]);
-    }
-
-    // Merge image
-    imageCopyResampled($dst, $src, $x, $y, 0, 0, $imageWidth, $imageHeight, $imageWidth, $imageHeight);
-    imageDestroy($src);
-
-    // Eventually overload with grey part
+    // Duplicate?
     if (isset($duplicates[$imagePath])){
       $imageHeight= $heights[$duplicates[$imagePath]];
       $imageWidth= $widths[$duplicates[$imagePath]];
       $x= $posX[$duplicates[$imagePath]];
       $y= $posY[$duplicates[$imagePath]];
+    } else {
+
+      // Eventually convert it to grey before
+      if (preg_match('/-grey\.png$/', $imagePath)) {
+        if (!function_exists("imageFilter")){
+          exec("convert ".$paths[$imagePath]." -colorspace Gray /tmp/grey-converted.png");
+          $src= imageCreateFromPng("/tmp/grey-converted.png");
+        } else {
+          $src= imageCreateFromPng($paths[$imagePath]);
+          imageFilter($src, IMG_FILTER_GRAYSCALE);
+        }
+      } else {
+        $src= imageCreateFromPng($paths[$imagePath]);
+      }
+
+      // Merge image
+      imageCopyResampled($dst, $src, $x, $y, 0, 0, $imageWidth, $imageHeight, $imageWidth, $imageHeight);
+      imageDestroy($src);
     }
 
     // Store style
