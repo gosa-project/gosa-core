@@ -160,16 +160,16 @@ class pluglist
    */
   function gen_menu()
   {
-    if ($this->menu == ""){
+    if (1 || $this->menu == ""){
       $cfg= $this->config->data['MENU'];
-      $menu = "\n<div class='navigation'>";
+      $menu = "\n      <div class='navigation'>";
       foreach ($cfg as $headline => $plug){
 
         if(!count($plug)) continue;
 
-        $menu.= "\n<div class='menu'>";
-        $menu.= "\n <ul>";
-        $menu.= "\n  <li class='menu-header'>"._($headline)."</li>";
+        $menu.= "\n        <div class='menu'>";
+        $menu.= "\n          <ul>";
+        $menu.= "\n            <li class='menu-header'>"._($headline)."</li>";
         $id = 0;
         foreach ($plug as $info){
 
@@ -178,40 +178,38 @@ class pluglist
 
           list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
           $class= "";
-          if($id == count($plug)) $class=" class='menu-last' \n   ";
-          $menu .=  "\n  <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title."</li>";
+          if($id == count($plug)) $class=" class='menu-last' ";
+          $menu .=  "\n            <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title."</li>";
         }
-        $menu.= "\n </ul>";
-        $menu.= "\n <div></div>\n";
-        $menu.= "\n</div>\n";
-        $menu.= "\n<div></div>\n";
-        $menu.= "\n<div class='v-spacer'></div>\n";
+        $menu.= "\n          </ul>";
+        $menu.= "\n          <div></div>";
+        $menu.= "\n        </div>\n";
+        $menu.= "\n        <div></div>";
+        $menu.= "\n        <div class='v-spacer'></div>\n";
       }
-      $menu.= "\n</div>";
+      $menu.= "\n      </div>\n";
       $this->menu = $menu;
 
       // Add javascript method to print out warning messages while leaving an unsaved form.
       // We do it in here to get the string translated.
-      $this->menu .= "
-        <script language='javascript' type='text/javascript'>
-        function openPlugin(id){
-          return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\",
-              \"main.php?plug=\" + id + \"&amp;reset=1\");
-        }
-      </script>
-        "; 
+      $this->menu .=  
+        "\n      <script language='javascript' type='text/javascript'>".
+        "\n        function openPlugin(id){".
+        "\n          return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\",".
+        "\n            \"main.php?plug=\" + id + \"&amp;reset=1\");".
+        "\n        }".
+        "\n      </script>\n"; 
     }
   
     // Use javascript to mark the currently selected plugin.
     $menu = $this->menu;
     if(isset($_GET['plug'])){
-      $menu.= "
-        <script language='javascript' type='text/javascript'>
-          if($('plugMenuId_".$_GET['plug']."')){
-            $('plugMenuId_".$_GET['plug']."').className= 'current'
-          }
-        </script>
-        "; 
+      $menu.= 
+     "\n      <script language='javascript' type='text/javascript'>".
+     "\n        if($('plugMenuId_".$_GET['plug']."')){".
+     "\n          $('plugMenuId_".$_GET['plug']."').className= 'current'".
+     "\n        }".
+     "\n      </script>\n";
     }
 
     // Return the generated/cached gosa menu.
@@ -271,25 +269,25 @@ class pluglist
 
   function genPathMenu()
   {
-    if(empty($this->pathMenu)){
+    if(1 || empty($this->pathMenu)){
       $this->pathMenu = 
-        "\n    <div class='plugin-path'>".
-        "\n     <ul class='path-navigation'>".
-        "\n      <li class='left right-border' onClick=\"openPlugin('');\">".
-        "\n       <div class='nav-home'></div>".
-        "\n      </li>".
-        "\n      <li class='left'>Welcome to GOsa</li>";
+        "\n        <div class='plugin-path'>".
+        "\n          <ul class='path-navigation'>".
+        "\n            <li class='left right-border' onClick=\"openPlugin('');\">".
+        "\n              <div class='nav-home'></div>".
+        "\n            </li>".
+        "\n            <li class='left'>Welcome to GOsa</li>";
 
       if(isset($this->config->data['PATHMENU'])){
         $cfg= &$this->config->data['PATHMENU'];
         $rcfg = array_reverse($cfg);
         foreach($rcfg as $id => $plug){
           list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
-          $this->pathMenu.= "\n     <li class='right left-border' onClick='openPlugin({$index})'>{$title}</li>";
+          $this->pathMenu.= "\n            <li class='right left-border' onClick='openPlugin({$index})'>{$title}</li>";
         }
       }
-      $this->pathMenu.= "\n    </ul>";
-      $this->pathMenu.= "\n    </div>";
+      $this->pathMenu.= "\n          </ul>";
+      $this->pathMenu.= "\n        </div>";
     } 
     return($this->pathMenu); 
   }

@@ -63,8 +63,10 @@ class tabs
     foreach ($data as &$tab){
 
       if (!plugin_available($tab['CLASS'])){
+        trigger_error(sprintf("Unknown class '%s'!", $tab['CLASS']));
       	continue;
       }
+      if ($this->current == "")  $this->current= $tab['CLASS'];
 
       $this->by_name[$tab['CLASS']]= $tab['NAME'];
 
@@ -79,11 +81,6 @@ class tabs
       $this->read_only |= $this->by_object[$tab['CLASS']]->read_only;
       $this->by_object[$tab['CLASS']]->parent= &$this;
       $this->by_object[$tab['CLASS']]->set_acl_category($this->acl_category);
-
-      /* Initialize current */
-      if ($this->current == ""){
-        $this->current= $tab['CLASS'];
-      }
     }
   }
 
@@ -112,10 +109,6 @@ class tabs
 
   function execute()
   {
-
-
-    echo "Do not render TABS while a sub-dialog is opened!<br>";
-
     // Ensure that the currently selected tab is valid.
     if(!isset($this->by_name[$this->current])) {
       $this->current = key($this->by_name);
@@ -147,17 +140,21 @@ class tabs
       $display= $this->by_object[$this->current]->multiple_execute();
     }
     $tabs= $this->gen_tabs();
-
-    $display =          "{$tabs}
-                        <input type='hidden' name='arg' value=''>
-                          <div class='tab-content'>{$display}
-                        </div>";
+    $display =   
+      "\n        {$tabs}".
+      "\n        <input type='hidden' name='arg' value=''>".
+      "\n        <div class='tab-content'>".
+      "\n          {$display}".
+      "\n        </div>";
 
     return ($display);
   }
 
   function save_object($save_current= FALSE)
   {
+
+  
+
     /* Save last tab */
     if ($this->last != ""){
       @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
@@ -192,6 +189,8 @@ class tabs
 
   function gen_tabs()
   {
+    if($this->by_object[$this->current]->is_modal_dialog()) return("");
+
     $display = "\n  <div class='tabs'>";
     $display.= "\n    <ul>";
 
@@ -215,7 +214,7 @@ class tabs
       }
       $tabClass = ($this->current == $class) ? "class='current'" :"";
       $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
-      $display.= "<li {$tabClass} onClick=\"{$onClick}\"><a href='#'>$title{$notify}</a></li>";
+      $display.= "\n      <li {$tabClass} onClick=\"{$onClick}\"><a href='#'>$title{$notify}</a></li>";
     }
     $display.="\n    </ul>";
     $display.="\n  </div>";
