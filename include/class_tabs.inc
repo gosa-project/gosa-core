@@ -184,9 +184,15 @@ class tabs
     }
   }
 
+
+  function is_modal_dialog()
+  {
+    return($this->by_object[$this->current]->is_modal_dialog());
+  }
+
   function gen_tabs()
   {
-    if($this->by_object[$this->current]->is_modal_dialog()) return("");
+    if($this->is_modal_dialog()) return("");
 
     $display = "\n  <div class='tabs'>";
     $display.= "\n    <ul>";
@@ -424,6 +430,13 @@ class tabs
       }
     }
     return(TRUE);
+  }
+
+  function setReadOnly($s = TRUE)
+  {
+    foreach($this->by_object as $name => $obj){
+      $this->by_object[$name]->read_only = $s;
+    }
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
