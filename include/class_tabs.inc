@@ -214,7 +214,7 @@ class tabs
       }
       $tabClass = ($this->current == $class) ? "class='current'" :"";
       $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
-      $display.= "\n      <li {$tabClass} onClick=\"{$onClick}\"><a href='#'>$title{$notify}</a></li>";
+      $display.= "\n      <li {$tabClass} onClick=\"{$onClick}\">$title{$notify}</li>";
     }
     $display.="\n    </ul>";
     $display.="\n  </div>";
