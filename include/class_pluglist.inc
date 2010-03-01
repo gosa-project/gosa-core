@@ -270,8 +270,7 @@ class pluglist
 
 
           $this->iconmenu.= "\n  <div class='icon-menu-item' style='width: 25%;' onclick='openPlugin({$index})'>";
-          /* $this->iconmenu.= "\n   ".image($icon); */
-          $this->iconmenu.= "\n   <div class='img' style='width:48px;height:48px;background-image: url({$icon});'></div>";
+          $this->iconmenu.= "\n   ".image($icon);
           $this->iconmenu.= "\n   <div class='dsc'>";
           $this->iconmenu.= "\n    <h1>{$title}</h1>";
           $this->iconmenu.= "\n    <p>{$desc}</p>";

@@ -28,15 +28,11 @@
   <!-- Include correct theme icon sets -->
   <style type="text/css">
     div.img{
-      background:transparent url(themes/modern/img.png) no-repeat;
-      position:relative
+      background-image:url(themes/modern/img.png);
     }
     
     div.img div {
-      background:transparent url(themes/modern/img.png) no-repeat;
-      bottom:0;
-      right:0;
-      position:absolute;
+      background-image:url(themes/modern/img.png);
     }
   </style>
 

@@ -3521,6 +3521,9 @@ function mark($needle, $haystack, $ignorecase= true)
 /* Return an image description using the path */
 function image($path, $label= null)
 {
+  global $config;
+  global $BASE_DIR;
+
   // Bail out, if there's no style file
   if(!session::global_is_set("img-styles")){
 

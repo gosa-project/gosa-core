@@ -727,16 +727,16 @@ function rescan_images($path, $theme)
     imageCopyResampled($dst, $src, $x, $y, 0, 0, $imageWidth, $imageHeight, $imageWidth, $imageHeight);
     imageDestroy($src);
 
-    // Store style
+    // Eventually overload with grey part
     if (isset($duplicates[$imagePath])){
       $imageHeight= $heights[$duplicates[$imagePath]];
       $imageWidth= $widths[$duplicates[$imagePath]];
       $x= $posX[$duplicates[$imagePath]];
       $y= $posY[$duplicates[$imagePath]];
-      $styles[$imagePath]= "background-position:-$x -$y;width:".$imageWidth."px;height:".$imageHeight."px";
-    } else {
-      $styles[$imagePath]= "background-position:-$x -$y;width:".$imageWidth."px;height:".$imageHeight."px";
     }
+
+    // Store style
+    $styles[$imagePath]= "background-position:-".$x."px -".$y."px;width:".$imageWidth."px;height:".$imageHeight."px";
 
     echo ".";
     flush();
