@@ -109,28 +109,18 @@ if (! $cleanup ){
       $display.= "<button class='button' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
       $display.= "&nbsp;";
       $display.= "<button class='button' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
-      $info= "<img alt='' align='middle' src='".get_template_path('images/lists/locked.png').
-             "'> ".$ui->dn."&nbsp;";
     } else {
       $info= "<img alt='' align='middle' src='".get_template_path('images/lists/unlocked.png').
              "'> ".$ui->dn."&nbsp;";
 
       /* Only display edit button if there is at least one attribute editable */
       if(preg_match("/r/",$ui->get_permissions($ui->dn,"users/MyAccountTabs"))){
-        $info.= "<img alt='' align='middle' src='".get_template_path('images/lists/on.png')."'> ".
-          msgPool::clickEditToChange();
-
         $display.= "<button class='button' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
       }
       $display.= "<input type='hidden' name='ignore'>\n";
     }
     $display.= "</div>\n";
   }
-
-  /* Page header*/
-  $display= print_header(get_template_path('plugins/posix/images/plugin.png'),
-                         _("POSIX settings"), $info).$display;
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
