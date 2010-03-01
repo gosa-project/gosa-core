@@ -112,13 +112,19 @@ class tabs
 
   function execute()
   {
-    /* Ensure that the currently selected tab is valid. */
-    if(!isset($this->by_name[$this->current])) $this->current = key($this->by_name);
 
-    /* Rotate current to last */
+
+    echo "Do not render TABS while a sub-dialog is opened!<br>";
+
+    // Ensure that the currently selected tab is valid.
+    if(!isset($this->by_name[$this->current])) {
+      $this->current = key($this->by_name);
+    }
+
+    // Rotate current to last 
     $this->last= $this->current;
 
-    /* Look for pressed tab button */
+    // Look for pressed tab button
     foreach ($this->by_object as $class => &$obj){
       if (isset($_POST[$class]) || (isset($_POST['arg']) && $_POST['arg'] == "$class")){
         $this->current= $class;
@@ -126,32 +132,26 @@ class tabs
       }
     }
 
-    /* Save last tab object */
+    // Save last tab object 
     if ($this->last == $this->current){
       $this->save_object(TRUE);
     } else {
       $this->save_object(FALSE);
     }
 
-    /* Show object */
-    $display = "<table summary=\"\" cellpadding=4 cellspacing=0 border=0 style=\"width:100%; background-color:#F8F8F8; border-style:solid; border-color:#AAA; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px;\">\n";
-    $display.= "<tr><td>\n";
-
     /* If multiple edit is enabled for this tab, 
        we have tho display different templates */
     if(!$this->multiple_support_active){
-      $display.= $this->by_object[$this->current]->execute();
+      $display= $this->by_object[$this->current]->execute();
     }else{
-      $display.= $this->by_object[$this->current]->multiple_execute();
+      $display= $this->by_object[$this->current]->multiple_execute();
     }
-    $modal_dialog = $this->by_object[$this->current]->is_modal_dialog();
-    
-    /* Build tab line */
-    $modal = TRUE;
-    $tabs= $this->gen_tabs($modal_dialog);
+    $tabs= $this->gen_tabs();
 
-    /* Footer for tabbed dialog */
-    $display = $tabs.$display."</td></tr></table>";
+    $display =          "{$tabs}
+                        <input type='hidden' name='arg' value=''>
+                          <div class='tab-content'>{$display}
+                        </div>";
 
     return ($display);
   }
@@ -190,65 +190,35 @@ class tabs
     }
   }
 
-  function gen_tabs($disabled = FALSE)
+  function gen_tabs()
   {
-    $display ="";
-    if(!$disabled){
-      $display.= "<input type=\"hidden\" name=\"arg\" value=\"\">";
-    }
-    $display.= "<table summary=\"\" cellpadding=0 cellspacing=0 border=0 style=\"width:100%;\"><tr>";
-    $index= 0;
-    $style= array("tab_left", "tab_active", "tab_near_active", "tab_right");
+    $display = "\n  <div class='tabs'>";
+    $display.= "\n    <ul>";
+
+
     foreach ($this->by_name as $class => $name){
 
-      /* Activate right tabs with style "tab_right"
-         Activate near current with style "tab_near_active" */
-      if ($index == 2 || $index == 1){
-        $index++;
-      }
-
-      /* Activate current tab with style "tab_active " */
-      if ($class == $this->current){
-        $index++;
-      }
-
-      /* Paint tab */
-      $display.= "<td style=\"vertical-align:bottom;width:1px;white-space:nowrap;\">";
-
-      /* Shorten string if its too long for the tab headers*/
+      // Shorten string if its too long for the tab headers
       $title= _($name);
       if (mb_strlen($title, 'UTF-8') > 28){
         $title= mb_substr($title,0, 25, 'UTF-8')."...";
       }
 
-      /* nobr causes w3c warnings so we use &nbsp; to keep the tab name in one line */
+      // nobr causes w3c warnings so we use &nbsp; to keep the tab name in one line 
       $title= str_replace(" ","&nbsp;",$title);
 
-      /* Take care about notifications */
+      // Take care about notifications 
       $obj = $this->by_object[$class];
+      $notify ="";
       if ( $this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)){
-        $notify= "id=\"notify\"";
-      } else {
-        $notify= "";
+        $notify= "!";
       }
-
-      if($disabled){
-        $display.= "<div ".$notify." class=\"$style[$index]\" 
-          style=' font-family:arial,helvetica,sans-serif;
-                  font-weight:bold;
-                  font-size:13px; 
-                  color: gray;'
-          title=\"$title\">".$title."</div>";
-      }elseif (session::global_get('js')==FALSE){	
-        $display.= "<div ".$notify." class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
-          " class=\"$style[$index]\" value=\"$title\"></div></td>";
-      } else {			 
-        $display.= "<div ".$notify." class=\"$style[$index]\"><a class=\"$style[$index]\" onclick=\"return true;\" href=\"javascript:document.mainform.arg.value='$class';document.mainform.submit();\">$title</a></div></td>";
-      }
+      $tabClass = ($this->current == $class) ? "class='current'" :"";
+      $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
+      $display.= "<li {$tabClass} onClick=\"{$onClick}\"><a href='#'>$title{$notify}</a></li>";
     }
-    $display.= "<td style=\"vertical-align:bottom;\">\n";
-    $display.= "<div class=\"tab_border\">&nbsp;</div></td></tr></table>";
-
+    $display.="\n    </ul>";
+    $display.="\n  </div>";
     return($display);
   }
 

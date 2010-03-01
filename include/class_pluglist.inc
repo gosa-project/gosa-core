@@ -40,14 +40,6 @@ class pluglist
   {
     $this->ui= &$ui;
     $this->config= &$config;
-
-    // Reserve a special ACL will allows us to display plugins/addons whenever a user 
-    //  is able to login into gosa. E.g. some kind of welcome page. 
-    $this->info['all']= array();
-    $this->info['all']['plProvidedAcls']= array();
-    $this->info['all']['plDescription']= _("All objects in this category");
-    $this->info['all']['plSelfModify']= FALSE;
-    
     $this->loadPluginList();
   }
 
@@ -55,15 +47,6 @@ class pluglist
   {
     $this->pluginList = array();
 
-    // Detect installed plugins and their configuration, to be able to restrict access later.
-    $classes= get_declared_classes();
-    foreach ($classes as $cname){
-      $cmethods = get_class_methods($cname);
-      if (in_array_ics('plInfo',$cmethods)){
-        $this->info[$cname]= call_user_func(array($cname, 'plInfo'));
-      }
-    }
-    
     // First load Menu Plugins 
     if(isset($this->config->data['MENU'])){
       foreach($this->config->data['MENU'] as $section => $plugins){
