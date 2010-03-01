@@ -12,7 +12,7 @@
 {/if}
         <br>
         {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
-          <button class='button' type="submit" name="edit_picture">{t}Change picture{/t}...</button>
+          <button type="submit" name="edit_picture">{t}Change picture{/t}...</button>
         {/render}
       </fieldset>
     </div>
@@ -147,14 +147,14 @@
       {/render}
       {render acl=$passwordStorageACL checkbox=$multiple_support checked=$use_pw_storage}
       	{if $pw_configurable eq "true"}
-	        &nbsp; <button class='button' id="edit_pw_method" type="submit" name="edit_pw_method">{t}Configure{/t}...</button>
+	        &nbsp; <button id="edit_pw_method" type="submit" name="edit_pw_method">{t}Configure{/t}...</button>
 	      {/if}
       {/render}
      
       {if $is_template ne "true" && !$multiple_support}
         <label for="edit_cert">{t}Certificates{/t}</label>
         {render acl=$CertificatesACL mode=read_active}
-          <button class='button 'id="edit_cert" type="submit" name="edit_cert">{t}Edit certificates{/t}...</button>
+          <button id="edit_cert" type="submit" name="edit_cert">{t}Edit certificates{/t}...</button>
         {/render}
       {/if}
 
@@ -169,7 +169,7 @@
           value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
         {/render}
         {render acl=$gosaLoginRestrictionACL}
-          <input id="add_res" type="submit" name="add_res" value="{t}Add{/t}">
+          <button id="add_res" type="submit" name="add_res">{t}Add{/t}<button>
         {/render}
       
       {else}
