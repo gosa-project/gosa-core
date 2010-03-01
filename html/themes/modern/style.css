@@ -85,6 +85,16 @@ img, input[type=image] {
 }
 
 /* Image with migration color */
+button.img{
+  background:none;
+  border:0;
+  margin:0;
+  padding:2px;
+}
+button.img div.img {
+  border:0;
+}
+
 div.img{
   background-color:transparent;
   background-repeat:no-repeat;

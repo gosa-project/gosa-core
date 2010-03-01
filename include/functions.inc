@@ -3519,7 +3519,7 @@ function mark($needle, $haystack, $ignorecase= true)
 
 
 /* Return an image description using the path */
-function image($path, $label= null)
+function image($path, $label= null, $action= "", $title= "")
 {
   global $config;
   global $BASE_DIR;
@@ -3553,7 +3553,12 @@ function image($path, $label= null)
     }
   }
 
-  return "<div class='img' style='".$styles[$path]."'>$lbl</div>";
+  // Clickable image or not?
+  if ($action == "") {
+    return "<div class='img' style='".$styles[$path]."'>$lbl</div>";
+  } else {
+    return "<button class='img' id='$action' name='$action' title='$title' type='submit'><div class='img' style='".$styles[$path]."'>$lbl</div></button>";
+  }
 }
 
 
