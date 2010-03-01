@@ -5,7 +5,7 @@
   <!-- Title bar including logout button -->
   <div class='title-bar'>
    <ul>
-    <li><img src='themes/modern/images/logo.png'></li>
+    <li>{$logo}</li>
     <li class='right table-wrapper'>
       <div class='logout-label'>
         <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>

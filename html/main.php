@@ -265,6 +265,7 @@ if (isset($_GET['reset'])){
 }
 
 /* show web frontend */
+$smarty->assign ("logo", "<div style='float:left'>".image("themes/modern/images/logo.png")."</div>");
 $smarty->assign ("date", date("l, dS F Y H:i:s O"));
 $smarty->assign ("lang", preg_replace('/_.*$/', '', $lang));
 $smarty->assign ("must", "<font class=\"must\">*</font>");
