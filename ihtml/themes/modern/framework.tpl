@@ -16,8 +16,7 @@
       </div>
     </li>
     <li class='right table-wrapper'>
-      <div class='logged-in-label'>You're logged in as <span class='logged-in-user'>{$username}</span>
-      </div>
+      <div class='logged-in-label'>{$loggedin}</div>
     </li>
    </ul>
   </div>

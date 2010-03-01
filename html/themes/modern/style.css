@@ -115,8 +115,8 @@ div.title-bar ul, div.title-bar ul li{
   padding:0;
 }
 
-span.logged-in-user{
-  font-style:italic;
+div.logged-in-label span{
+  font-weight:bold;
 }
 
 li.table-wrapper {
