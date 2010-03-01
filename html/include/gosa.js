@@ -349,7 +349,7 @@ function focus_field()
 		var tmp = document.getElementsByName(focus_field.arguments[i]);
 		for(e = 0 ; e < tmp.length ; e ++ ){
 
-			if(tmp[e].disabled != true &&  tmp[e].type != "none" && tmp[e].type != "hidden" ){
+			if(tmp[e].disabled != true &&  tmp[e].type != "none" && tmp[e].type != "hidden" && tmp[e].style.display != ""){
 				found = true;
 				element = tmp[e];
 				break;
