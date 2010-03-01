@@ -12,7 +12,7 @@
 {/if}
         <br>
         {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
-          <input style='vertical-align:top;' type="submit" name="edit_picture" value="{t}Change picture{/t}...">
+          <button class='button' type="submit" name="edit_picture">{t}Change picture{/t}...</button>
         {/render}
       </fieldset>
     </div>
@@ -147,14 +147,14 @@
       {/render}
       {render acl=$passwordStorageACL checkbox=$multiple_support checked=$use_pw_storage}
       	{if $pw_configurable eq "true"}
-	        &nbsp; <input id="edit_pw_method" type="submit" name="edit_pw_method" value="{t}Configure{/t}...">
+	        &nbsp; <button class='button' id="edit_pw_method" type="submit" name="edit_pw_method">{t}Configure{/t}...</button>
 	      {/if}
       {/render}
      
       {if $is_template ne "true" && !$multiple_support}
         <label for="edit_cert">{t}Certificates{/t}</label>
         {render acl=$CertificatesACL mode=read_active}
-          <input id="edit_cert" type="submit" name="edit_cert" value="{t}Edit certificates{/t}...">
+          <button class='button 'id="edit_cert" type="submit" name="edit_cert">{t}Edit certificates{/t}...</button>
         {/render}
       {/if}
 
