@@ -349,7 +349,7 @@ function focus_field()
 		var tmp = document.getElementsByName(focus_field.arguments[i]);
 		for(e = 0 ; e < tmp.length ; e ++ ){
 
-			if(tmp[e].disabled != true &&  tmp[e].type != "none" && tmp[e].type != "hidden" && tmp[e].style.display != ""){
+			if(isVisible(tmp[e])){
 				found = true;
 				element = tmp[e];
 				break;
@@ -537,6 +537,36 @@ function move_div_by_cursor(e)
 		}
 	}
 }
+
+
+function isVisible(obj)
+{
+    if (obj == document) return true
+
+    if (!obj) return false
+    if (!obj.parentNode) return false
+    if (obj.style) {
+        if (obj.style.display == 'none') return false
+        if (obj.style.visibility == 'hidden') return false
+    }
+
+    //Try the computed style in a standard way
+    if (window.getComputedStyle) {
+        var style = window.getComputedStyle(obj, "")
+        if (style.display == 'none') return false
+        if (style.visibility == 'hidden') return false
+    }
+
+    //Or get the computed style using IE's silly proprietary way
+    var style = obj.currentStyle
+    if (style) {
+        if (style['display'] == 'none') return false
+        if (style['visibility'] == 'hidden') return false
+    }
+
+    return isVisible(obj.parentNode)
+}
+
 
 
 // Global storage for baseSelector timer
