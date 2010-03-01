@@ -4,7 +4,7 @@
 
   <div class="mainlist-header">
    <p>{$HEADLINE}&nbsp;{$SIZELIMIT}</p>
-   <div>
+   <div class="mainlist-nav">
     <table>
      <tr>
       <td>{$ROOT}&nbsp;</td><td>{$BACK}&nbsp;</td><td>{$HOME}&nbsp;</td><td>{$RELOAD}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{t}Base{/t} {$BASE}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td><img src='images/rocket.png' alt='' class='center'></td><td> {$ACTIONS}</td>
