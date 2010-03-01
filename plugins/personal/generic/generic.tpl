@@ -118,7 +118,6 @@
   <div class="container-element" style='width:50%;'>
     <div class="fieldset-right">
 
-      <legend>{t}Postal address{/t}</legend>
       <fieldset>
 
       <label for="homePostalAddress">{t}Address{/t}</label>
@@ -199,6 +198,8 @@
     </div>
   </div>
 </div>
+
+<div class='clear'></div>
 
 <!--
 
