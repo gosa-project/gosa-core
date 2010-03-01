@@ -245,10 +245,17 @@
      <td>
      
      {if !$multiple_support}
-       {$gosaLoginRestrictionWidget}
+       {render acl=$gosaLoginRestrictionACL}
+         {$gosaLoginRestrictionWidget}
+       {/render}
+        {render acl=$gosaLoginRestrictionACL}
        <input type="text" id="res" name="res" size=22 maxlength=33 
         value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
+       {/render}
+        {render acl=$gosaLoginRestrictionACL}
        <input id="add_res" type="submit" name="add_res" value="{t}Add{/t}">
+       {/render}
+      
      {else}
       <input type='checkbox' name='use_gosaLoginRestriction' {if $use_gosaLoginRestriction} checked {/if}
         onClick='document.mainform.submit();'
