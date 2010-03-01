@@ -88,6 +88,7 @@ img, input[type=image] {
 div.img{
   background-repeat:no-repeat;
   position:relative;
+  float:left;
 }
 
 div.img div {
@@ -525,10 +526,6 @@ fieldset textarea:hover{
   min-height:70px;
   min-width:150px;
   cursor:pointer;
-}
-
-.icon-menu-item div.img{
-  float:left;
 }
 
 .icon-menu-item div.dsc{
