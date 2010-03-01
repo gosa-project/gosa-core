@@ -78,11 +78,14 @@ h3 {
   font-weight:bold;
 }
 
-div.img{
-  /* migration color */
-  background-color:rgba(255,0,0,0.2);
+/* Image with migration color */
+img, input[type=image] {
   border:1px solid red;
+  background-color:rgba(255,0,0,0.2);
+}
 
+/* Image with migration color */
+div.img{
   background-repeat:no-repeat;
   position:relative;
 }
