@@ -160,7 +160,7 @@ class pluglist
    */
   function gen_menu()
   {
-    if (1 || $this->menu == ""){
+    if ($this->menu == ""){
       $cfg= $this->config->data['MENU'];
       $menu = "\n      <div class='navigation'>";
       foreach ($cfg as $headline => $plug){
@@ -227,17 +227,18 @@ class pluglist
   function show_iconmenu()
   {
     $add_hr =FALSE;
+    $this->iconmenu = "";
     if ($this->iconmenu == ""){
       $cfg= $this->config->data['MENU'];
       foreach ($cfg as $headline => $plug){
         $col= 0;
 
-        $this->iconmenu .= "\n  <div class='clear'></div>\n";
+        $this->iconmenu .= "\n        <div class='clear'></div>";
         if($add_hr){
           $add_hr = FALSE;
-          $this->iconmenu .= "\n  <hr>\n";
+          $this->iconmenu .= "\n        <hr>";
         }
-        $this->iconmenu .= "\n  <h3 class='icon-menu-title'>". _($headline)."</h3>\n";
+        $this->iconmenu .= "\n        <h3 class='icon-menu-title'>". _($headline)."</h3>";
 
         foreach ($plug as $info){
 
@@ -246,18 +247,16 @@ class pluglist
 
           // Add a seperating row
           if (($col % 4) == 0){ 
-            $this->iconmenu .= "\n  <div class='clear'></div>\n";
+            $this->iconmenu .= "\n        <div class='clear'></div>";
           }
 
-
-          $this->iconmenu.= "\n  <div class='icon-menu-item' style='width: 25%;' onclick='openPlugin({$index})'>";
-          $this->iconmenu.= "\n   ".image($icon);
-          $this->iconmenu.= "\n   <div class='dsc'>";
-          $this->iconmenu.= "\n    <h1>{$title}</h1>";
-          $this->iconmenu.= "\n    <p>{$desc}</p>";
-          $this->iconmenu.= "\n   </div>";
-          $this->iconmenu.= "\n  </div>";
-
+          $this->iconmenu.= "\n        <div class='icon-menu-item' style='width: 25%;' onclick='openPlugin({$index})'>";
+          $this->iconmenu.= "\n          ".image($icon);
+          $this->iconmenu.= "\n          <div class='dsc'>";
+          $this->iconmenu.= "\n            <h1>{$title}</h1>";
+          $this->iconmenu.= "\n            <p>{$desc}</p>";
+          $this->iconmenu.= "\n          </div>";
+          $this->iconmenu.= "\n        </div>";
           $col++ ;
         }
         $add_hr = TRUE;
@@ -269,7 +268,7 @@ class pluglist
 
   function genPathMenu()
   {
-    if(1 || empty($this->pathMenu)){
+    if(empty($this->pathMenu)){
       $this->pathMenu = 
         "\n        <div class='plugin-path'>".
         "\n          <ul class='path-navigation'>".
