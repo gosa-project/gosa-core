@@ -283,7 +283,7 @@ class user extends plugin
     plugin::execute();
 
     /* Set list ACL */
-    $this->gosaLoginRestrictionWidget->setAcl($this->getacl('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit'))));
+    $this->gosaLoginRestrictionWidget->setAcl($this->getacl('gosaLoginRestriction'));
     $this->gosaLoginRestrictionWidget->update();
 
     /* Handle add/delete for restriction mode */
@@ -314,7 +314,7 @@ class user extends plugin
     if(preg_match("/ editManager/i", " ".implode(array_keys($_POST),' ')." ")){
       $this->dialog = new singleUserSelect($this->config, get_userinfo());
     }
-    if($this->dialog && count($this->dialog->detectPostActions())){
+    if($this->dialog && $this->dialog instanceOf singleUserSelect && count($this->dialog->detectPostActions())){
       $users = $this->dialog->detectPostActions();
       if(isset($users['targets']) && count($users['targets'])){
 
@@ -329,7 +329,7 @@ class user extends plugin
     if(isset($_POST['add_users_cancel'])){
       $this->dialog = NULL;
     }
-    if($this->dialog) return($this->dialog->execute()); 
+    if($this->dialog instanceOf singleUserSelect) return($this->dialog->execute()); 
 
 
     $smarty= get_smarty();
@@ -410,7 +410,7 @@ class user extends plugin
     }
 
     /* Remove picture? */
-    if($this->acl_is_writeable("userPicture",(!is_object($this->parent) && !session::is_set('edit'))) ){
+    if($this->acl_is_writeable("userPicture")){
       if (isset($_POST['picture_remove'])){
         $this->set_picture ();
         $this->jpegPhoto= "*removed*";
@@ -483,7 +483,7 @@ class user extends plugin
 
 
     /* Remove certificate? */
-    if($this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))){ 
+    if($this->acl_is_writeable("Certificate")){
       foreach (array ("userCertificate", "userSMIMECertificate", "userPKCS12") as $val){
         if (isset($_POST["remove_$val"])){
 
@@ -495,10 +495,8 @@ class user extends plugin
     }
 
     /* Upload new cert and close dialog? */	
-    if($this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))){ 
-
+    if($this->acl_is_writeable("Certificate")){
       $fail =false;
-
       if (isset($_POST['cert_edit_finish'])){
 
         /* for all certificates do */
@@ -547,7 +545,7 @@ class user extends plugin
 
     /* Display cert dialog */
     if ($this->cert_dialog){
-      $smarty->assign("CertificateACL",$this->getacl("Certificate",(!is_object($this->parent) && !session::is_set('edit'))));
+      $smarty->assign("CertificateACL",$this->getacl("Certificate"));
       $smarty->assign("Certificate_readable",$this->acl_is_readable("Certificate"));
       $smarty->assign("certificateSerialNumber",$this->certificateSerialNumber);
 
@@ -645,27 +643,20 @@ class user extends plugin
     /* Set acls */
     $tmp = $this->plinfo();
     foreach($tmp['plProvidedAcls'] as $val => $translation){
-      $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
+      $smarty->assign("$val"."ACL", $this->getacl($val));
     }
 
     // Special ACL for gosaLoginRestrictions - 
     // In case of multiple edit, we need a readonly ACL for the list. 
-    $smarty->assign('gosaLoginRestriction_ONLY_R_ACL', 
-      preg_replace("/[^r]/i","", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit')))));
+    $smarty->assign('gosaLoginRestriction_ONLY_R_ACL', preg_replace("/[^r]/i","", $this->getacl($val)));
 
     $smarty->assign("pwmode", $pwd_methods);
     $smarty->assign("pwmode_select", $this->pw_storage);
     $smarty->assign("pw_configurable", $is_configurable);
-    $smarty->assign("passwordStorageACL", $this->getacl("userPassword",(!is_object($this->parent) && !session::is_set('edit'))));
-
-    if(!session::is_set('edit')){
-      $smarty->assign("CertificatesACL","");
-    }else{
-      $smarty->assign("CertificatesACL",  $this->getacl("Certificate"));
-    }
-    
-    $smarty->assign("userPictureACL",   $this->getacl("userPicture",(!is_object($this->parent) && !session::is_set('edit'))));
-    $smarty->assign("userPicture_is_readable",   $this->acl_is_readable("userPicture",(!is_object($this->parent) && !session::is_set('edit'))));
+    $smarty->assign("passwordStorageACL", $this->getacl("userPassword"));
+    $smarty->assign("CertificatesACL",  $this->getacl("Certificate"));
+    $smarty->assign("userPictureACL",   $this->getacl("userPicture"));
+    $smarty->assign("userPicture_is_readable",   $this->acl_is_readable("userPicture"));
 
     /* Create base acls */
     $smarty->assign("base", $this->baseSelector->render());
@@ -678,14 +669,14 @@ class user extends plugin
       $smarty->assign("ivbbmodes", $ivbbmodes);
       foreach ($this->govattrs as $val){
         $smarty->assign("$val", $this->$val);
-        $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
+        $smarty->assign("$val"."ACL", $this->getacl($val));
       }
     } else {
       $smarty->assign("governmentmode", "false");
     }
 
     /* Special mode for uid */
-    $uidACL= $this->getacl("uid",(!is_object($this->parent) && !session::is_set('edit')));
+    $uidACL= $this->getacl("uid");
     if (isset ($this->dn)){
       if ($this->dn != "new"){
         $uidACL= preg_replace("/w/","",$uidACL);
@@ -836,7 +827,7 @@ class user extends plugin
       /* Save government mode attributes */
       if ($this->governmentmode){
         foreach ($this->govattrs as $val){
-          if ($this->acl_is_writeable($val,(!is_object($this->parent) && !session::is_set('edit'))) && isset($_POST["$val"])){
+          if ($this->acl_is_writeable($val)){
             $data= stripcslashes($_POST["$val"]);
             if ($data != $this->$val){
               $this->is_modified= TRUE;
@@ -1496,7 +1487,7 @@ class user extends plugin
   /* Load certificate from file to object */
   function set_cert($cert, $filename)
   {
-    if(!$this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))) return;
+    if(!$this->acl_is_writeable("Certificate")) return;
     $fd = fopen ($filename, "rb");
     if (filesize($filename)>0) {
       $this->$cert= fread ($fd, filesize ($filename));
