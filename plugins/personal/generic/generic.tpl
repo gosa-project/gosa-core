@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="container-element">
+  <div class="container-element" style='width:30%;'>
     <div class="fieldset-middle">
       <legend>{t}Generic{/t}</legend>
       <fieldset>
@@ -115,7 +115,7 @@
     </div>
   </div>
 
-  <div class="container-element">
+  <div class="container-element" style='width:50%;'>
     <div class="fieldset-right">
 
       <legend>{t}Postal address{/t}</legend>
