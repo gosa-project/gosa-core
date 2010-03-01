@@ -395,7 +395,14 @@ div.menu ul li.menu-header {
   background-color:#F8F8F8;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
-  color:#AAA;
+  color:#333;
+  cursor:pointer;
+}
+
+.tabs li:hover {
+  background-color:#FFF;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#FFF));
+  background: -moz-linear-gradient(top, #F8F8F8, #FFF);
 }
 
 .tabs li.current {
@@ -408,23 +415,8 @@ div.menu ul li.menu-header {
   border-bottom:1px solid #FFF;
   position:relative;
   z-index:1;
-  color:#000;
-}
-
-.tabs a {
-  float:left;
-  display:block;
-  text-decoration:none;
-  font-weight:bold;
-  color:#777;
-}
-
-.tabs li a:visited {
-  color:#777;
-}
-
-.tabs li.current a:visited {
-  color:#000;
+  color:#222;
+  cursor:pointer;
 }
 
 
