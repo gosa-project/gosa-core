@@ -33,7 +33,6 @@ class pluglist
 
   // Seems to be used in the help menu to generate an overview.
   var $headlines = array();
-
   // Remember stuff in here.
   var $silly_cache= array();
 
@@ -46,6 +45,9 @@ class pluglist
   var $menu= "";
   var $iconmenu= "";
 
+  // Classes plInfo list
+  var $info = array();
+
   function pluglist(&$config, &$ui)
   {
     $this->ui= &$ui;
@@ -56,6 +58,21 @@ class pluglist
   function loadPluginList()
   {
     $this->pluginList = array();
+
+		/* Fill info part of pluglist */
+		$classes= get_declared_classes();
+		foreach ($classes as $cname){
+			$cmethods = get_class_methods($cname);
+			if (in_array_ics('plInfo',$cmethods)){
+				$this->info[$cname]= call_user_func(array($cname, 'plInfo'));
+			}
+		}
+
+		/* Provide field for 'all' */
+		$this->info['all']= array();
+		$this->info['all']['plProvidedAcls']= array();
+		$this->info['all']['plDescription']= _("All objects in this category");
+		$this->info['all']['plSelfModify']= FALSE;
 
     // First load the menu plugins and try to register them in the pluglist
     //  if this fails for some reason, then remove the plugin from the menu.
