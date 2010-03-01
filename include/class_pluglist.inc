@@ -47,7 +47,8 @@ class pluglist
   {
     $this->pluginList = array();
 
-    // First load Menu Plugins 
+    // First load the menu plugins and try to register them in the pluglist
+    //  if this fails for some reason, then remove the plugin from the menu.
     if(isset($this->config->data['MENU'])){
       foreach($this->config->data['MENU'] as $section => $plugins){
         foreach($plugins as $id => $plug){
@@ -58,7 +59,8 @@ class pluglist
       }
     }
     
-    // Now register pathMenu plugins
+    // Now load the path menu and try to register the plugins in the pluglist
+    //  if this fails for some reason, then remove the plugin from the menu.
     if(isset($this->config->data['PATHMENU'])){
       foreach($this->config->data['PATHMENU'] as $id => $plugin){
         if(!$this->registerPlugin($plugin)){
@@ -70,12 +72,18 @@ class pluglist
     if(!session::is_set('maxC')){
       session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
     }
+
+    // Now generate menu - usually they are cached
     $this->gen_menu();
     $this->show_iconmenu();
     $this->genPathMenu();
   }
 
 
+  /*! \brief    Tries to register a plugin in the pluglist
+   *            Checks existence and ACL for the given plugin.
+   *            Returns true in case of success else false. 
+   */
   function registerPlugin($plug)
   {
     global $class_mapping;
@@ -266,6 +274,11 @@ class pluglist
   }
 
 
+  /*! \brieg    Generates and the path menu (the one on the upper right) and keeps
+   *             the generated HTML content, so we are not forced to generate it on every 
+   *             page request.
+   *            (See <pathMenu> of your gosa.conf)
+   */
   function genPathMenu()
   {
     if(empty($this->pathMenu)){
@@ -277,6 +290,7 @@ class pluglist
         "\n            </li>".
         "\n            <li class='left'>Welcome to GOsa</li>";
 
+      // Check if we've at least one entry defined ih the pathmenu
       if(isset($this->config->data['PATHMENU'])){
         $cfg= &$this->config->data['PATHMENU'];
         $rcfg = array_reverse($cfg);
@@ -292,6 +306,10 @@ class pluglist
   }
   
 
+  /*! \brief    Returns additional info for a given class name, like 
+   *             plugin-icon, title, description and the index of the element 
+                 in the pluglist which uses this class.
+   */
   function getPlugData($class)
   {
     global $class_mapping;
