@@ -233,8 +233,7 @@
      </td>
     </tr>
     <tr>
-     <td style='vertical-align:top'><label for="edit_perms">{t}Restrict login to{/t}</label></td>
-     <td>
+     <td colspan="2" style='vertical-align:top'><label for="edit_perms">{t}Restrict login to{/t}</label>
       
       {if !$multiple_support}
       {render acl=$gosaLoginRestrictionACL}
@@ -276,7 +275,6 @@
  </tr>
 </table>
 
-<p class="seperator">&nbsp;</p>
 
 <table summary="" class="line" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4" border="0">
  
@@ -339,22 +337,22 @@
      <td><label for="manager">{t}Manager{/t}</label></td>
      <td>
       {render acl=$managerACL}
-      <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled
-      title='{$manager}'>
+        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'
+          style='width:130px;'>
       {/render}
-      {render acl=$managerACL}
-      {image path="images/lists/edit.png" action="editManager"}
 
+      {render acl=$managerACL}
+        {image path="images/lists/edit.png" action="editManager"}
       {/render}
+
       {if $manager!=""}
-      {render acl=$managerACL  mode=read_active}
-      {image path="images/info_small.png" title="{$manager}"}
+        {render acl=$managerACL  mode=read_active}
+          {image path="images/info_small.png" title="{$manager}"}
+        {/render}
 
-      {/render}
-      {render acl=$managerACL}
-      {image path="images/lists/trash.png" action="removeManager"}
-
-      {/render}
+        {render acl=$managerACL}
+          {image path="images/lists/trash.png" action="removeManager"}
+        {/render}
       {/if}
      </td>
     </tr>
