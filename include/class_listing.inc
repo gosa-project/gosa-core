@@ -818,7 +818,7 @@ class listing {
     $objectType= $this->getObjectType($this->objectTypes, $classes);
     if ($objectType) {
       $this->objectDnMapping[$dn]= $objectType["objectClass"];
-      $result= "<img class='center' title='".LDAP::fix($dn)."' src='".$objectType["image"]."'>";
+      $result= image($objectType["image"], null, null, LDAP::fix($dn));
       if (!isset($this->objectTypeCount[$objectType['label']])) {
         $this->objectTypeCount[$objectType['label']]= 0;
       }
@@ -842,7 +842,7 @@ class listing {
     foreach($actions as $action) {
       // Skip the entry completely if there's no permission to execute it
       if (!$this->hasActionPermission($action, $dn, $classes)) {
-        $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+        $result.= image('images/empty.png');
         continue;
       }
 
@@ -852,12 +852,12 @@ class listing {
         if (preg_match('/^(.*)!$/', $fa, $m)){
           $fa= $m[1];
           if (isset($this->entries[$row][$fa]) && $this->entries[$row][$fa][0] == $fv) {
-            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            $result.= image('images/empty.png');
             continue;
           }
         } else {
           if (!isset($this->entries[$row][$fa]) && !$this->entries[$row][$fa][0] == $fv) {
-            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            $result.= image('images/empty.png');
             continue;
           }
         }
@@ -871,17 +871,17 @@ class listing {
         if (preg_match('/^!(.*)$/', $objectclass, $m)){
           $objectclass= $m[1];
           if(in_array($objectclass, $classes)) {
-            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            $result.= image('images/empty.png');
             continue;
           }
         } elseif (is_string($objectclass)) {
           if(!in_array($objectclass, $classes)) {
-            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            $result.= image('images/empty.png');
             continue;
           }
         } elseif (is_array($objectclass)) {
           if(count(array_intersect($objectclass, $classes)) != count($objectclass)){
-            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            $result.= image('images/empty.png');
             continue;
           }
         }
@@ -891,8 +891,7 @@ class listing {
       if ($action['type'] == "entry") {
         $label= $this->processElementFilter($action['label'], $this->entries[$row], $row);
         $image= $this->processElementFilter($action['image'], $this->entries[$row], $row);
-        $result.="<input class='center' type='image' src='$image' title='$label' ".
-                 "name='listing_".$action['name']."_$row' style='padding:1px'>";
+        $result.= image($image, null, "listing_".$action['name']."_$row", $label);
       }
 
       // Handle special types
@@ -1413,20 +1412,18 @@ class listing {
     // Render cut entries
     if($cut){
       if($ui->is_cutable($dn, $category, $class)){
-        $result .= "<input class='center' type='image'
-          src='images/lists/cut.png' alt='"._("Cut")."' name='listing_cut_$row' title='"._("Cut this entry")."' style='padding:1px'>";
+        $result.= image('images/lists/cut.png', null, "listing_cut_$row", _("Cut this entry"));
       }else{
-        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+        $result.= image('images/empty.png');
       }
     }
 
     // Render copy entries
     if($copy){
       if($ui->is_copyable($dn, $category, $class)){
-        $result.= "<input class='center' type='image'
-          src='images/lists/copy.png' alt='"._("Copy")."' name='listing_copy_$row' title='"._("Copy this entry")."' style='padding:1px'>";
+        $result.= image('images/lists/copy.png', null, "listing_copy_$row", _("Copy this entry"));
       }else{
-        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+        $result.= image('images/empty.png');
       }
     }
 
@@ -1506,21 +1503,17 @@ class listing {
 
         // Do we have snapshots for this dn?
         if($this->snapshotHandler->hasSnapshots($dn)){
-          $result.= "<input class='center' type='image' src='images/lists/restore.png' ".
-                     "alt='"._("Restore snapshot")."' name='listing_restore_$row' title='".
-                     _("Restore snapshot")."' style='padding:1px'>";
+          $result.= image('images/lists/restore.png', null, "listing_restore_$row", _("Restore snapshot"));
         } else {
-          $result.= "<img src='images/lists/restore_grey.png' alt=' ' class='center' style='padding:1px'>";
+          $result.= image('images/lists/restore_grey.png');
         }
       }
 
       // Draw snapshot button
       if($ui->allow_snapshot_create($dn, $category)){
-          $result.= "<input class='center' type='image' src='images/snapshot.png' ".
-                     "alt='"._("Create snapshot")."' name='listing_snapshot_$row' title='".
-                     _("Create a new snapshot from this object")."' style='padding:1px'>";
+          $result.= image('images/snapshot.png', null, "listing_snapshot_$row", _("Create a new snapshot from this object"));
       }else{
-          $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+          $result.= image('images/empty.png');
       }
     }
 
