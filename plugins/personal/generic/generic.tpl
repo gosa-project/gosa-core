@@ -26,7 +26,7 @@
     <tr>
      <td>
       {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
-      <input style='vertical-align:top;' type="submit" name="edit_picture" value="{t}Change picture{/t}...">
+      <button style='vertical-align:top;' type="submit" name="edit_picture">{t}Change picture{/t}...</button>
       {/render}
      </td>
     </tr>
@@ -37,7 +37,7 @@
   <td style="vertical-align:top">
    <img align="bottom" border="1" width="145" height="200" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
    <br>
-   <input type="submit" name="edit_picture" value="{t}Change picture{/t}...">
+   <button type="submit" name="edit_picture">{t}Change picture{/t}...</button>
   </td>
   -->
   
@@ -218,7 +218,7 @@
        {/foreach}
       </select>
       {if $pw_configurable eq "true"}
-      &nbsp; <input id="edit_pw_method" type="submit" name="edit_pw_method" value="{t}Configure{/t}...">
+      &nbsp; <button id="edit_pw_method" type="submit" name="edit_pw_method">{t}Configure{/t}...</button>
       {/if}
       {/render}
      </td>
@@ -229,7 +229,7 @@
      <td><label for="edit_cert">{t}Certificates{/t}</label></td>
      <td>
       {render acl=$CertificatesACL mode=read_active}
-      <input id="edit_cert" type="submit" name="edit_cert" value="{t}Edit certificates{/t}...">
+      <button id="edit_cert" type="submit" name="edit_cert">{t}Edit certificates{/t}...</button>
       {/render}
      </td>
     </tr>
@@ -253,7 +253,7 @@
       value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
       {/render}
       {render acl=$gosaLoginRestrictionACL}
-      <input id="add_res" type="submit" name="add_res" value="{t}Add{/t}">
+      <button id="add_res" type="submit" name="add_res">{t}Add{/t}</button>
       {/render}
       
       {else}
@@ -273,7 +273,7 @@
       value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
       {/render}
       {render acl=$gosaLoginRestrictionACL}
-      <input id="add_res" type="submit" name="add_res" value="{t}Add{/t}">
+      <button id="add_res" type="submit" name="add_res">{t}Add{/t}</button>
       {/render}
       {/if}
       {/if}
