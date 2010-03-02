@@ -185,8 +185,8 @@ class baseSelector {
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
       $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
-      $this->tree.= "<li><a$selected $link>".
-                    image($config->department_info[$base]['img'])."&nbsp;".
+      $this->tree.= "<li>".
+                    image($config->department_info[$base]['img'])."&nbsp;<a$selected $link>".
                     $this->gennonbreaks($config->department_info[$base]['name']).
                     ($config->department_info[$base]['description']==''?'':'&nbsp;<span class="informal">['.$this->gennonbreaks($config->department_info[$base]['description']).']</span>').
                     "</a>";

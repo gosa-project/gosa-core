@@ -562,7 +562,7 @@ function rescan_images($path, $theme)
          }
 
          // New image if it is not already one
-         if (preg_match('/new/', $indexPath)) {
+         if (preg_match('/new/', $indexPath) && !preg_match('/new\.png$/', $indexPath)) {
            echo "!";
            $warnings[]= "Warning: skipped possible *new* image $path";
            flush();
