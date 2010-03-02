@@ -186,7 +186,7 @@ class sortableListing {
   public function render()
   {
     $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
-    $result.= "<table border='0' cellpadding='0' cellspacing='0' width='100%' height='100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
+    $result.= "<table border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
     $action_width= 0;
     if (strpos($this->acl, 'w') === false) {
       $edit_image= $this->editable?"<img class='center' src='images/lists/edit-grey.png' alt='"._("Edit")."'>":"";
@@ -204,7 +204,11 @@ class sortableListing {
     if ($this->colspecs) {
       $result.= " <colgroup>\n";
       for ($i= 0; $i<$this->columns; $i++) {
-        $result.= "  <col style='width:".(isset($this->colspecs[$i])?$this->colspecs[$i]:"*")."'/>\n";
+        if(isset($this->colspecs[$i]) && $this->colspecs[$i] != '*'){
+          $result.= "  <col style='width:".($this->colspecs[$i])."'>\n";
+        }else{
+          $result.= "  <col>\n";
+        }
       }
 
       // Extend by another column if we've actions specified
