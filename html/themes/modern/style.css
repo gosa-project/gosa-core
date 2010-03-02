@@ -840,27 +840,21 @@ div.nlistFooter {
   background-color:white;
 }
 
-ul.mainlist-header-nav {
-  list-style:none;
-  cursor:pointer;
-  padding:0;
-  margin:0;
-  color:#666;
+div.mainlist-nav table{
+  border-collapse:collapse;
 }
 
-ul.mainlist-header-nav li {
-  display:inline;
-  padding:5px;
-  padding-top:8px;
-  height:19px;
+div.mainlist-nav td div.img{
+  margin-top:-2px;
 }
 
-ul.mainlist-header-nav li:hover {
-  background-color: #E0E0E0;
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#E0E0E0));
-  background: -moz-linear-gradient(top, #EEE, #E0E0E0);
+div.mainlist-nav td{
+  padding:3px 5px;
 }
 
+div.mainlist-nav td.left-border{
+  padding-left:5px;
+}
 
 /* Sortable Lists */
 
@@ -1092,11 +1086,12 @@ background-color:#F0F0F0;
 /* Pulldown menu */
 
 #pulldown {
-background:#FFF;
+display:inline-block;
+background-color:#FFF;
 height:23px;    
-border:1px #CCC solid;
-background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
-background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+border:1px solid #CCC;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+background:-moz-linear-gradient(top, #F8F8F8, #EFE);
 }                             
 
 #pulldown ul {

@@ -7,8 +7,9 @@
    <div class="mainlist-nav">
     <table>
      <tr>
-      <td>{$ROOT}&nbsp;</td><td>{$BACK}&nbsp;</td><td>{$HOME}&nbsp;</td><td>{$RELOAD}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{t}Base{/t} {$BASE}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td> {$ACTIONS}</td>
+      <td>{$ROOT}</td><td>{$BACK}</td><td>{$HOME}</td><td>{$RELOAD}</td><td class="left-border">{t}Base{/t} {$BASE}</td><td class="left-border">{$ACTIONS}</td>
      </tr>
+
     </table>
    </div>
   </div>
