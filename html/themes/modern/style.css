@@ -409,9 +409,9 @@ button:focus, .button:active {
   -webkit-border-top-left-radius:5px;
   -moz-border-radius-topleft:5px;
   -moz-border-radius-topright:5px;
-  background-color:#F8F8F8;
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
-  background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  background-color:#E8E8E8;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#D8D8D8), to(#CCC));
+  background: -moz-linear-gradient(top, #D8D8D8, #CCC);
   color:#333;
   cursor:pointer;
 }
