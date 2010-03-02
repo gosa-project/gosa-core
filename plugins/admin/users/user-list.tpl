@@ -5,11 +5,16 @@
   <div class="mainlist-header">
    <p>{$HEADLINE}&nbsp;{$SIZELIMIT}</p>
    <div class="mainlist-nav">
+    <div style='float:right'>Gustav</div>
     <table>
      <tr>
-      <td>{$ROOT}</td><td>{$BACK}</td><td>{$HOME}</td><td>{$RELOAD}</td><td class="left-border">{t}Base{/t} {$BASE}</td><td class="left-border">{$ACTIONS}</td>
+      <td>{$ROOT}</td>
+      <td>{$BACK}</td>
+      <td>{$HOME}</td>
+      <td>{$RELOAD}</td>
+      <td class="left-border">{t}Base{/t} {$BASE}</td>
+      <td class="left-border">{$ACTIONS}</td>
      </tr>
-
     </table>
    </div>
   </div>

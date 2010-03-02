@@ -1167,3 +1167,12 @@ font-weight:normal;
 background-color:#418DD4;                                      
 background-image:none;                                         
 }                       
+
+
+/* Filter */
+
+div.filter {
+  border:1px solid blue;
+}
+
+
