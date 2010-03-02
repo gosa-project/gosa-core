@@ -1,6 +1,7 @@
 <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
  <!-- Headline container -->
-<h2><img alt="" class="center" align="middle" src="images/lists/key.png"> {t}Certificates{/t}</h2>
+<h2>{image path="images/lists/key.png"} {t}Certificates{/t}
+</h2>
 
 <table summary="" style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
  <tr>

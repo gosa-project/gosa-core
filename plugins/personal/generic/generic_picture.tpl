@@ -2,7 +2,8 @@
  <!-- Headline container -->
  <tr>
    <td colspan=2>
-     <h2><img alt="" class="center" align="middle" src="plugins/generic/images/head.png"> {t}Personal picture{/t}</h2>
+     <h2>{image path="plugins/generic/images/head.png"} {t}Personal picture{/t}
+</h2>
    </td>
  </tr>
  <!-- Base container -->
@@ -12,7 +13,8 @@
    <table>
     <tr>
      <td width="147" height="200" bgcolor="gray">
-      <img class="center" border="0" width="100%" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
+      {image path="getbin.php?rand={$rand}"}
+
      </td>
     </tr>
    </table>
