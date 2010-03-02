@@ -36,7 +36,8 @@
 <br>
 
 <p class="plugbottom">
-  <input type=submit name="password_finish" value="{t}Set password{/t}">
+  <button type='submit' name='password_finish'>{t}Set password{/t}</button>
+
   &nbsp;
   <input type=reset id="password_cancel" name="password_cancel" value="{t}Clear fields{/t}">
   <input type='hidden' id='formSubmit'>

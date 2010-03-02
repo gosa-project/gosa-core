@@ -6,7 +6,8 @@
 <br>
 
 <p class="plugbottom">
-  <input type=submit name="password_back" value="{msgPool type=backButton}">
+  <button type='submit' name='password_back'>{msgPool type=backButton}</button>
+
 </p>
 
 <input type="hidden" name="ignore">
