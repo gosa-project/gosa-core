@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <list>
-  <definition>
-    <departmentBrowser>true</departmentBrowser>
-    <departmentRootVisible>false</departmentRootVisible>
-    <baseMode>true</baseMode>
-    <multiSelect>true</multiSelect>
-    <template>../plugins/personal/posix/trustSelect/trust-list.tpl</template>
-    <label>Please select the desired entries</label>
-    <defaultSortColumn>1</defaultSortColumn>
+<definition>
+<departmentbrowser>true</departmentbrowser>
+<departmentrootvisible>false</departmentrootvisible>
+<basemode>true</basemode>
+<multiselect>true</multiselect>
+<template>../plugins/personal/posix/trustSelect/trust-list.tpl</template>
+<label>Please select the desired entries</label>
+<defaultsortcolumn>1</defaultsortcolumn>
 
-    <objectType>
-      <label>Server</label>
-      <objectClass>goServer</objectClass>
-      <category>server</category>
-      <class>servgeneric</class>
-      <image>plugins/systems/images/select_server.png</image>
-    </objectType>
+<objecttype>
+<label>Server</label>
+<objectclass>goServer</objectclass>
+<category>server</category>
+<class>servgeneric</class>
+<image>plugins/systems/images/select_server.png</image>
+</objecttype>
 
-    <objectType>
-      <label>Workstation</label>
-      <objectClass>gotoWorkstation</objectClass>
-      <category>workstation</category>
-      <class>workgeneric</class>
-      <image>plugins/systems/images/select_workstation.png</image>
-    </objectType>
+<objecttype>
+<label>Workstation</label>
+<objectclass>gotoWorkstation</objectclass>
+<category>workstation</category>
+<class>workgeneric</class>
+<image>plugins/systems/images/select_workstation.png</image>
+</objecttype>
 
-    <objectType>
-      <label>Terminal</label>
-      <objectClass>gotoTerminal</objectClass>
-      <category>terminal</category>
-      <class>termgeneric</class>
-      <image>plugins/systems/images/select_terminal.png</image>
-    </objectType>
+<objecttype>
+<label>Terminal</label>
+<objectclass>gotoTerminal</objectclass>
+<category>terminal</category>
+<class>termgeneric</class>
+<image>plugins/systems/images/select_terminal.png</image>
+</objecttype>
 
-  </definition>
+</definition>
 
-  <table>
-    <layout>|20px;c|||</layout>
+<table>
+ <layout>|20px;c|||</layout>
+ 
+ <department>
+ <value>%{filter:objectType(dn,objectClass)}</value>
+ </department>
+ 
+ <department>
+ <value>%{filter:departmentLink(row,dn,description)}</value>
+ <span>1</span>
+ </department>
+ 
+ <column>
+ <value>%{filter:objectType(dn,objectClass)}</value>
+ </column>
+ 
+ <column>
+ <label>Name</label>
+ <sortattribute>cn</sortattribute>
+ <sorttype>string</sorttype>
+ <value>%{cn}</value>
+ <export>true</export>
+ </column>
+ 
+ <column>
+ <label>Description</label>
+ <sortattribute>description</sortattribute>
+ <sorttype>string</sorttype>
+ <value>%{description}</value>
+ <export>true</export>
+ </column>
+ 
+</table>
 
-    <department>
-      <value>%{filter:objectType(dn,objectClass)}</value>
-    </department>
+<actionmenu>
+</actionmenu>
 
-    <department>
-      <value>%{filter:departmentLink(row,dn,description)}</value>
-      <span>1</span>
-    </department>
-
-    <column>
-      <value>%{filter:objectType(dn,objectClass)}</value>
-    </column>
-
-    <column>
-      <label>Name</label>
-      <sortAttribute>cn</sortAttribute>
-      <sortType>string</sortType>
-      <value>%{cn}</value>
-      <export>true</export>
-    </column>
-
-    <column>
-      <label>Description</label>
-      <sortAttribute>description</sortAttribute>
-      <sortType>string</sortType>
-      <value>%{description}</value>
-      <export>true</export>
-    </column>
-
-  </table>
-
-  <actionmenu>
-  </actionmenu>
-
-  <actiontriggers snapshot="false" copypaste="false">
-  </actiontriggers>
+<actiontriggers snapshot="false" copypaste="false">
+</actiontriggers>
 
 </list>
