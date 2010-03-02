@@ -354,7 +354,7 @@
       <input type='image' src='images/lists/edit.png' name='editManager' class='center'>
       {/render}
       {if $manager!=""}
-      {render acl=$managerACL}
+      {render acl=$managerACL  mode=read_active}}
       <img src='images/info_small.png' title='{$manager}' class='center'>
       {/render}
       {render acl=$managerACL}
