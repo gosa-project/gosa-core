@@ -15,11 +15,11 @@
   <td style="vertical-align:top">
    <table>
     <tr>
-     <td width="147" height="200" bgcolor="gray">
+     <td style='width:147px; height: 200px;' bgcolor="gray">
       {if !$userPicture_is_readable}
       <img  src="plugins/users/images/default.jpg" alt=''>
       {else}
-      <img  src="getbin.php?rand={$rand}" alt=''>
+      <img  src="getbin.php?rand={$rand}" alt='' style='width:147px;' >
       {/if}
      </td>
     </tr>

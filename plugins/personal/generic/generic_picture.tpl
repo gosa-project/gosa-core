@@ -13,8 +13,7 @@
    <table>
     <tr>
      <td width="147" height="200" bgcolor="gray">
-      {image path="getbin.php?rand={$rand}"}
-
+      <img  src="getbin.php?rand={$rand}" alt='' style='width:147px;' >
      </td>
     </tr>
    </table>
