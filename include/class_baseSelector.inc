@@ -196,7 +196,7 @@ class baseSelector {
     }
 
     // Close tree
-    for ($i= 0; $i<=$last_indent; $i++) {
+    for ($i= 1; $i<$last_indent; $i++) {
       $this->tree.= "</li></ul>\n";
     }
     $this->tree.= "</div>\n";
