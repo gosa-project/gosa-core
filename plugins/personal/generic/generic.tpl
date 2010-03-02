@@ -17,11 +17,9 @@
     <tr>
      <td width="147" height="200" bgcolor="gray">
       {if !$userPicture_is_readable}
-      {image path="plugins/users/images/default.jpg"}
-
+      <img  src="plugins/users/images/default.jpg" alt=''>
       {else}
-      {image path="getbin.php?rand={$rand}"}
-
+      <img  src="getbin.php?rand={$rand}" alt=''>
       {/if}
      </td>
     </tr>
@@ -34,15 +32,6 @@
     </tr>
    </table>
   </td>
-  <!--
-  Old image container, with incorrect image scaling.
-  <td style="vertical-align:top">
-   {image path="getbin.php?rand={$rand}" align="bottom"}
-
-   <br>
-   <button type="submit" name="edit_picture">{t}Change picture{/t}...</button>
-  </td>
-  -->
   
   <!-- Name, ... -->
   <td style="vertical-align:top;">
@@ -354,7 +343,8 @@
       title='{$manager}'>
       {/render}
       {render acl=$managerACL}
-      <input type='image' src='images/lists/edit.png' name='editManager' class='center'>
+      {image path="images/lists/edit.png" action="editManager"}
+
       {/render}
       {if $manager!=""}
       {render acl=$managerACL  mode=read_active}
@@ -362,7 +352,8 @@
 
       {/render}
       {render acl=$managerACL}
-      <input type='image' src='images/lists/trash.png' name='removeManager' class='center'>
+      {image path="images/lists/trash.png" action="removeManager"}
+
       {/render}
       {/if}
      </td>
@@ -376,11 +367,13 @@
       <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled
       title='{$manager}'>
       {if $use_manager}
-      <input type='image' src='images/lists/edit.png' name='editManager' class='center'>
+      {image path="images/lists/edit.png" action="editManager"}
+
       {if $manager!=""}
       {image path="images/info_small.png" title="{$manager}"}
 
-      <input type='image' src='images/lists/trash.png' name='removeManager' class='center'>
+      {image path="images/lists/trash.png" action="removeManager"}
+
       {/if}
       {/if}
      </td>
