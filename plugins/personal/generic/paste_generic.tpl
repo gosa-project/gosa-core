@@ -50,7 +50,8 @@
 		  <td>
 			<input id="picture_file" name="picture_file" type="file" size="20" maxlength="255" accept="image/*.jpg">
 			&nbsp;
-			<input type=submit name="picture_remove" value="{t}Remove picture{/t}">
+			<button type='submit' name='picture_remove'>{t}Remove picture{/t}</button>
+
 		  </td>
 		</tr>
 	  </table>

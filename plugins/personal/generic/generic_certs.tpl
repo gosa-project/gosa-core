@@ -19,7 +19,8 @@
 	{/render}
      {else}
 	{render acl=$CertificateACL}
-     <input type=submit name="remove_userCertificate" value="{t}Remove{/t}">
+     <button type='submit' name='remove_userCertificate'>{t}Remove{/t}</button>
+
 	{/render}
      {/if}
    </td>
@@ -43,7 +44,8 @@
 	{/render}
      {else}
 	{render acl=$CertificateACL}
-     <input type=submit name="remove_userSMIMECertificate" value="{t}Remove{/t}">
+     <button type='submit' name='remove_userSMIMECertificate'>{t}Remove{/t}</button>
+
 	{/render}
 	 {/if}
    </td>
@@ -67,7 +69,8 @@
 	{/render}
 	 {else}
 	{render acl=$CertificateACL}
-     <input type=submit name="remove_userPKCS12" value="{t}Remove{/t}">
+     <button type='submit' name='remove_userPKCS12'>{t}Remove{/t}</button>
+
 	{/render}
 	 {/if}
    </td>
@@ -89,9 +92,11 @@
 
 <p class="plugbottom">
 	{render acl=$CertificateACL}
-  <input type=submit name="cert_edit_finish" value="{msgPool type=saveButton}">
+  <button type='submit' name='cert_edit_finish'>{msgPool type=saveButton}</button>
+
 	{/render}
   &nbsp;
-  <input type=submit name="cert_edit_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='cert_edit_cancel'>{msgPool type=cancelButton}</button>
+
 </p>
 
