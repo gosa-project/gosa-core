@@ -3519,7 +3519,7 @@ function mark($needle, $haystack, $ignorecase= true)
 
 
 /* Return an image description using the path */
-function image($path, $label= null, $action= "", $title= "")
+function image($path, $label= null, $action= "", $title= "", $align= "middle")
 {
   global $config;
   global $BASE_DIR;
@@ -3553,14 +3553,21 @@ function image($path, $label= null, $action= "", $title= "")
     }
   }
 
+  // Non middle layout?
+  if ($align == "middle") {
+    $align= "";
+  } else {
+    $align= ";vertical-align:$align";
+  }
+
   // Clickable image or not?
   if ($title != "") {
     $title= "title='$title'";
   }
   if ($action == "") {
-    return "<div class='img' $title style='".$styles[$path]."'>$lbl</div>";
+    return "<div class='img' $title style='".$styles[$path]."$align'>$lbl</div>";
   } else {
-    return "<input type='submit' class='img' id='$action' value='' name='$action' $title style='".$styles[$path]."'>";
+    return "<input type='submit' class='img' id='$action' value='' name='$action' $title style='".$styles[$path]."$align'>";
   }
 }
 

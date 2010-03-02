@@ -90,6 +90,7 @@ input[type=submit].img{
   border:0;
   padding:0;
   margin:0;
+  margin-top:-2px;
   display:inline-block;
   display:-moz-inline-block;
   background-color:transparent;
@@ -765,7 +766,7 @@ div.listContainer {
 }
 
 .listScrollContent td div.img {
-  padding-right:1px;
+  margin-right:1px;
 }
 
 .listScrollContent td input[type=submit].img {

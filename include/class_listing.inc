@@ -238,7 +238,7 @@ class listing {
             isset($config['sortType'])) {
           $this->sortAttribute= $config['sortAttribute'];
           $this->sortType= $config['sortType'];
-          $sorter= "&nbsp;<img border='0' title='".($this->sortDirection[$index]?_("Up"):_("Down"))."' src='images/lists/sort-".($this->sortDirection[$index]?"up":"down").".png' align='top'>";
+          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$index]?"up":"down").".png", null, null, $this->sortDirection[$index]?_("Up"):_("Down"), "text-top");
         }
         $sortable= (isset($config['sortAttribute']));
 
@@ -1102,8 +1102,7 @@ class listing {
     // Load shortcut
     $actions= &$this->xmlData['actionmenu']['action'];
     $result= "<input type='hidden' name='act' id='actionmenu' value=''><div style='display:none'><input type='submit' name='exec_act' id='exec_act' value=''></div>".
-             "<ul class='level1' id='root'><li><a href='#'>"._("Actions")."&nbsp;<img ".
-             "border=0 class='center' src='images/lists/sort-down.png'></a>";
+             "<ul class='level1' id='root'><li><a href='#'>"._("Actions")."&nbsp;".image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
     $result.= $this->recurseActions($actions);
@@ -1139,7 +1138,7 @@ class listing {
       // Fill image if set
       $img= "";
       if (isset($action['image'])){
-        $img= "<img border='0' class='center' src='".$action['image']."'>&nbsp;";
+        $img= image($action['image'])."&nbsp;";
       }
 
       if ($action['type'] == "separator"){
@@ -1151,7 +1150,7 @@ class listing {
       if ($action['type'] == "sub" && isset($action['action'])) {
         $level++;
         if (isset($action['label'])){
-          $result.= "<li$separator><a href='#'>$img"._($action['label'])."&nbsp;<img border='0' src='images/forward-arrow.png'></a>";
+          $result.= "<li$separator><a href='#'>$img"._($action['label'])."&nbsp;".image('images/forward-arrow.png')."</a>";
         }
 
         // Ensure we've an array of actions, this enables sub menus with only one action.
@@ -1373,13 +1372,13 @@ class listing {
 
       // Copy entry
       if($copy){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"copy\";document.getElementById(\"exec_act\").click();'><img src='images/lists/copy.png' alt='' border='0' class='center'>&nbsp;"._("Copy")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"copy\";document.getElementById(\"exec_act\").click();'>".image('images/lists/copy.png')."&nbsp;"._("Copy")."</a></li>";
         $separator= "";
       }
 
       // Cut entry
       if($cut){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"cut\";document.getElementById(\"exec_act\").click();'><img src='images/lists/cut.png' alt='' border='0' class='center'>&nbsp;"._("Cut")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"cut\";document.getElementById(\"exec_act\").click();'>".image("images/lists/cut.png")."&nbsp;"._("Cut")."</a></li>";
         $separator= "";
       }
     }
@@ -1387,9 +1386,9 @@ class listing {
     // Draw entries that allow pasting entries
     if($paste){
       if($this->copyPasteHandler->entries_queued()){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"paste\";document.getElementById(\"exec_act\").click();'><img src='images/lists/paste.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"paste\";document.getElementById(\"exec_act\").click();'>".image("images/lists/paste.png")."&nbsp;"._("Paste")."</a></li>";
       }else{
-        $result.= "<li$separator><a href='#'><img src='images/lists/paste-grey.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
+        $result.= "<li$separator><a href='#'>".image('images/lists/paste-grey.png')."&nbsp;"._("Paste")."</a></li>";
       }
     }
     
@@ -1453,9 +1452,9 @@ class listing {
 
       // Draw icons according to the restore flag
       if($restore){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"restore\";document.getElementById(\"exec_act\").click();'><img src='images/lists/restore.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"restore\";document.getElementById(\"exec_act\").click();'>".image('images/lists/restore.png')."&nbsp;"._("Restore snapshots")."</a></li>";
       }else{
-        $result.= "<li$separator><a href='#'><img src='images/lists/restore_grey.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
+        $result.= "<li$separator><a href='#'>".image('images/lists/restore_grey.png')."&nbsp;"._("Restore snapshots")."</a></li>";
       }
     }
 
@@ -1469,11 +1468,11 @@ class listing {
     $result = "";
 
     // Draw entries
-    $result.= "<li$separator><a href='#'><img border='0' class='center' src='images/lists/export.png'>&nbsp;"._("Export list")."&nbsp;<img border='0' src='images/forward-arrow.png'></a><ul class='level3'>";
+    $result.= "<li$separator><a href='#'>".image('images/lists/export.png')."&nbsp;"._("Export list")."&nbsp;".image("images/forward-arrow.png")."</a><ul class='level3'>";
 
     // Export CVS as build in exporter
     foreach ($this->exporter as $action => $exporter) {
-      $result.= "<li><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"$action\";document.getElementById(\"exec_act\").click();'><img border='0' class='center' src='".$exporter['image']."'>&nbsp;".$exporter['label']."</a></li>";
+      $result.= "<li><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"$action\";document.getElementById(\"exec_act\").click();'>".image($exporter['image'])."&nbsp;".$exporter['label']."</a></li>";
     }
 
     // Finalize list
