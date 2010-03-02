@@ -14,9 +14,11 @@
 </table>
 <br>
 <p class="plugbottom">
-  <input type=submit name="password_finish" value="{t}Set password{/t}">
+  <button type='submit' name='password_finish'>{t}Set password{/t}</button>
+
   &nbsp;
-  <input type=submit name="password_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='password_cancel'>{msgPool type=cancelButton}</button>
+
 </p>
 
 <!-- Place cursor -->

@@ -26,14 +26,17 @@
      <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
      <input id="picture_file" name="picture_file" type="file" size="20" maxlength="255" accept="image/*.jpg">
      &nbsp;
-     <input type=submit name="picture_remove" value="{t}Remove picture{/t}">
+     <button type='submit' name='picture_remove'>{t}Remove picture{/t}</button>
+
    </td>
  </tr>
 </table>
 <br>
 <p class="plugbottom">
-  <input type=submit name="picture_edit_finish" value="{msgPool type=saveButton}">
+  <button type='submit' name='picture_edit_finish'>{msgPool type=saveButton}</button>
+
   &nbsp;
-  <input type=submit name="picture_edit_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='picture_edit_cancel'>{msgPool type=cancelButton}</button>
+
 </p>
 
