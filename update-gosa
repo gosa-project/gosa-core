@@ -556,15 +556,15 @@ function rescan_images($path, $theme)
          // Grey image if it is not already one
          if (preg_match('/grey/', $indexPath)) {
            echo "!";
-           $warnings[]= "Warning: skipped possible grey image $path";
+           $warnings[]= "Warning: skipped possible *grey* image $path";
            flush();
            continue;
          }
 
-         // Grey image if it is not already one
+         // New image if it is not already one
          if (preg_match('/new/', $indexPath)) {
            echo "!";
-           $warnings[]= "Warning: skipped possible grey image $path";
+           $warnings[]= "Warning: skipped possible *new* image $path";
            flush();
            continue;
          }
