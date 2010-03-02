@@ -3554,10 +3554,13 @@ function image($path, $label= null, $action= "", $title= "")
   }
 
   // Clickable image or not?
+  if ($title != "") {
+    $title= "title='$title'";
+  }
   if ($action == "") {
-    return "<div class='img' style='".$styles[$path]."'>$lbl</div>";
+    return "<div class='img' $title style='".$styles[$path]."'>$lbl</div>";
   } else {
-    return "<button class='img' id='$action' name='$action' title='$title' type='submit'><div class='img' style='".$styles[$path]."'>$lbl</div></button>";
+    return "<input type='submit' class='img' id='$action' value='' name='$action' $title style='".$styles[$path]."'>";
   }
 }
 

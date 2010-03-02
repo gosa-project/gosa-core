@@ -416,7 +416,7 @@ class listing {
       foreach ($this->objectTypes as $objectType) {
         if (isset($this->objectTypeCount[$objectType['label']])) {
           $label= _($objectType['label']);
-          $result.= "<img class='center' src='".$objectType['image']."' title='$label' alt='$label'>&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;&nbsp;&nbsp;";
+          $result.= image($objectType['image'], null, null, $label)."&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;";
         }
       }
 
@@ -551,7 +551,7 @@ class listing {
       // Override base if we got signals from the navigation elements
       $action= "";
       foreach ($_POST as $key => $value) {
-        if (preg_match('/^(ROOT|BACK|HOME)_x$/', $key, $match)) {
+        if (preg_match('/^(ROOT|BACK|HOME)(_x)?$/', $key, $match)) {
           $action= $match[1];
           break;
         }
@@ -986,31 +986,29 @@ class listing {
 
     /* Draw root button */
     if($enableRoot){
-      $result["ROOT"]= "<input class='center' type='image' src='images/lists/root.png' align='middle' ".
-                       "title='"._("Go to root department")."' name='ROOT' alt='"._("Root")."'>";
+      $result["ROOT"]= image('images/lists/root.png', null, 'ROOT', _("Root"));
     }else{
-      $result["ROOT"]= "<img src='images/lists/root_grey.png' class='center' alt='"._("Root")."'>";
+      $result["ROOT"]= image('images/lists/root-grey.png', null, null, _("Root"));
     }
 
     /* Draw back button */
     if($enableBack){
-      $result["BACK"]= "<input class='center' type='image' align='middle' src='images/lists/back.png' ".
-                       "title='"._("Go up one department")."' alt='"._("Up")."' name='BACK'>";
+      $result["BACK"]= image('images/lists/back.png', null, 'BACK', _("Go up one department"));
     }else{
-      $result["BACK"]= "<img src='images/lists/back_grey.png' class='center' alt='"._("Up")."'>";
+      $result["BACK"]= image('images/lists/back-grey.png', null, null, _("Go up one department"));
     }
 
     /* Draw home button */
+   /* Draw home button */
     if($enableHome){
-      $result["HOME"]= "<input class='center' type='image' align='middle' src='images/lists/home.png' ".
-                       "title='"._("Go to users department")."' alt='"._("Home")."' name='HOME'>";
+      $result["HOME"]= image('images/lists/home.png', null, 'HOME', _("Go to users department"));
     }else{
-      $result["HOME"]= "<img src='images/lists/home_grey.png' class='center' alt='"._("Home")."'>";
+      $result["HOME"]= image('images/lists/home-grey.png', null, null, _("Go to users department"));
     }
 
+
     /* Draw reload button, this button is enabled everytime */
-    $result["RELOAD"]= "<input class='center' type='image' src='images/lists/reload.png' align='middle' ".
-                       "title='"._("Reload list")."' name='REFRESH' alt='"._("Submit")."'>";
+    $result["RELOAD"]= image('images/lists/reload.png', null, 'REFRESH', _("Reload list"));
 
     return ($result);
   }

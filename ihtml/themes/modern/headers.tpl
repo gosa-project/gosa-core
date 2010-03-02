@@ -24,10 +24,7 @@
 
     <!-- Include correct theme icon sets -->
     <style type="text/css">
-      div.img{
-        background-image:url(themes/modern/img.png);
-      }
-      div.img div {
+      div.img, div.img div, input[type=submit].img{
         background-image:url(themes/modern/img.png);
       }
     </style>

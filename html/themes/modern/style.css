@@ -85,18 +85,25 @@ img, input[type=image] {
 }
 
 /* Image with migration color */
-button.img{
-  background:none;
-  border:0;
-  margin:0;
-  padding:0;
-}
 
-div.img{
+input[type=submit].img{
+  border:0;
+  padding:0;
+  margin:0;
+  display:inline-block;
+  display:-moz-inline-block;
   background-color:transparent;
   background-repeat:no-repeat;
   position:relative;
-  float:left;
+  cursor:pointer;
+}
+
+div.img{
+  display:inline-block;
+  display:-moz-inline-block;
+  background-color:transparent;
+  background-repeat:no-repeat;
+  position:relative;
 }
 
 div.img div {
@@ -460,6 +467,10 @@ button:focus, .button:active {
   min-height:70px;
   min-width:150px;
   cursor:pointer;
+}
+
+.icon-menu-item div.img{
+  float:left;
 }
 
 .icon-menu-item div.dsc{
