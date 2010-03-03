@@ -31,11 +31,9 @@
  </tr>
 </table>
 <br>
-<p class="plugbottom">
+
+<div class='plugin-actions'>
   <button type='submit' name='picture_edit_finish'>{msgPool type=saveButton}</button>
-
-  &nbsp;
   <button type='submit' name='picture_edit_cancel'>{msgPool type=cancelButton}</button>
-
-</p>
+</div>
 

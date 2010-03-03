@@ -175,7 +175,7 @@
      <td style="vertical-align:top;"><label for="homePostalAddress">{t}Address{/t}</label></td>
      <td>
       {render acl=$homePostalAddressACL checkbox=$multiple_support checked=$use_homePostalAddress}
-      <textarea id="homePostalAddress" name="homePostalAddress" rows="3" style="width:100%">{$homePostalAddress}</textarea>
+        <textarea cols='200' id="homePostalAddress" name="homePostalAddress" rows="3" style="width:100%">{$homePostalAddress}</textarea>
       {/render}
      </td>
     </tr>
@@ -460,7 +460,7 @@
      <td style="vertical-align:top;"><label for="postalAddress">{t}Address{/t}</label></td>
      <td>
       {render acl=$postalAddressACL checkbox=$multiple_support checked=$use_postalAddress}
-      <textarea id="postalAddress" name="postalAddress" rows=3 style="width:100%">{$postalAddress}</textarea>
+        <textarea cols="200" id="postalAddress" name="postalAddress" rows=3 style="width:100%">{$postalAddress}</textarea>
       {/render}
      </td>
     </tr>

@@ -90,13 +90,10 @@
  {/if}
 </table>
 
-<p class="plugbottom">
+<div class='plugin-actions'>
 	{render acl=$CertificateACL}
-  <button type='submit' name='cert_edit_finish'>{msgPool type=saveButton}</button>
-
+    <button type='submit' name='cert_edit_finish'>{msgPool type=saveButton}</button>
 	{/render}
-  &nbsp;
   <button type='submit' name='cert_edit_cancel'>{msgPool type=cancelButton}</button>
-
-</p>
+</div>
 
