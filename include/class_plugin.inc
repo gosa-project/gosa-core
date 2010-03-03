@@ -588,9 +588,10 @@ class plugin
     } else {
       $state= "";
     }
-    $display= "<table summary=\"\" width=\"100%\"><tr>\n<td colspan=2><p><b>$text</b></p>\n";
-    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".$state.
-      "><p class=\"seperator\">&nbsp;</p></td></tr></table>";
+    $display = "<div class='plugin-enable-header'>\n";
+    $display.= "<p>$text</p>\n";
+    $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
+    $display.= "</div>\n";
 
     return($display);
   }
@@ -604,28 +605,13 @@ class plugin
     } else {
       $state= "";
     }
-    $display = "<p>$text<br>\n";
-    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".$state."></p>";
+    $display = "<div class='plugin-disable-header'>\n";
+    $display.= "<p>$text</p>\n";
+    $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
+    $display.= "</div>\n";
     return($display);
   }
 
-
-  /*! \brief Show header message for tab dialogs */
-  function show_header($button_text, $text, $disabled= FALSE)
-  {
-    echo "FIXME: show_header should be replaced by show_disable_header and show_enable_header<br>";
-    if ($disabled == TRUE){
-      $state= "disabled";
-    } else {
-      $state= "";
-    }
-    $display= "<table summary=\"\" width=\"100%\"><tr>\n<td colspan=2><p><b>$text</b></p>\n";
-    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".
-      ($this->acl_is_createable()?'':'disabled')." ".$state.
-      "><p class=\"seperator\">&nbsp;</p></td></tr></table>";
-
-    return($display);
-  }
 
 
   /* Create unique DN */

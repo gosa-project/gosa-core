@@ -226,6 +226,12 @@ div.plugin-area {
   text-align:right;
 }
 
+.plugin-disable-header {
+  border-bottom:1px solid #DDD;
+}
+
+.plugin-enable-header {
+}
 
 /* Plugin navigation bar */
 
@@ -450,33 +456,7 @@ button:focus, .button:active {
 }
 
 
-/* Containers */
-
-div.horizontal-container {
-  width:100%;
-  margin:0;
-  padding:0;
-  height:100%;
-  clear:both;
-}
-
-div.container {
-  float:left;
-  height:100%;
-  margin-right:-1px;
-  border-right:1px solid #CCC;
-}
-
-div.last-container {
-  float:left;
-  height:100%;
-}
-
-div.padder {
-  padding:4px;
-  height:100%;
-  width:100%;
-}
+/* Cleaner */
 
 .clear-left{
   clear:left;
