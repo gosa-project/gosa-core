@@ -341,18 +341,10 @@
           style='width:130px;'>
       {/render}
 
-      {render acl=$managerACL}
-        {image path="images/lists/edit.png" action="editManager"}
-      {/render}
-
+      {image path="images/lists/edit.png" action="editManager" acl=$managerACL}
       {if $manager!=""}
-        {render acl=$managerACL  mode=read_active}
-          {image path="images/info_small.png" title="{$manager}"}
-        {/render}
-
-        {render acl=$managerACL}
-          {image path="images/lists/trash.png" action="removeManager"}
-        {/render}
+        {image path="images/info_small.png" title="{$manager}" acl=$managerACL}
+        {image path="images/lists/trash.png" action="removeManager" acl=$managerACL}
       {/if}
      </td>
     </tr>
