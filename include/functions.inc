@@ -3546,9 +3546,8 @@ function image($path, $action= "", $title= "", $align= "middle")
   $styles= session::global_get('img-styles');
 
   /* Extract labels from path */
-  if (preg_match("/(-[a-z0-9]+)\.png$/", $path, $matches)) {
-    print_a($matches);
-    exit;
+  if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
+    $label= $matches[1];
   }
 
   $lbl= "";
