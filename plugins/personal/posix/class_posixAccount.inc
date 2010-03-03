@@ -442,19 +442,19 @@ class posixAccount extends plugin
 
       $shadowMinACL     =  $this->getacl("shadowMin",$SkipWrite);
       $smarty->assign("shadowmins", sprintf(_("Password can't be changed up to %s days after last change"), 
-            "<input name=\"shadowMin\" size=3 maxlength=4 value=\"".$this->shadowMin."\">"));
+            "<input type='text' name=\"shadowMin\" size=3 maxlength=4 value=\"".$this->shadowMin."\">"));
 
       $shadowMaxACL     =  $this->getacl("shadowMax",$SkipWrite);
       $smarty->assign("shadowmaxs", sprintf(_("Password must be changed after %s days"), 
-            "<input name=\"shadowMax\" size=3 maxlength=4 value=\"".$this->shadowMax."\">"));
+            "<input type='text' name=\"shadowMax\" size=3 maxlength=4 value=\"".$this->shadowMax."\">"));
 
       $shadowInactiveACL=  $this->getacl("shadowInactive",$SkipWrite);
       $smarty->assign("shadowinactives", sprintf(_("Disable account after %s days of inactivity after password expiry"), 
-            "<input name=\"shadowInactive\" size=3 maxlength=4 value=\"".$this->shadowInactive."\">"));
+            "<input type='text' name=\"shadowInactive\" size=3 maxlength=4 value=\"".$this->shadowInactive."\">"));
 
       $shadowWarningACL =  $this->getacl("shadowWarning",$SkipWrite);
       $smarty->assign("shadowwarnings", sprintf(_("Warn user %s days before password expiry"), 
-            "<input name=\"shadowWarning\" size=3 maxlength=4 value=\"".$this->shadowWarning."\">"));
+            "<input type='text' name=\"shadowWarning\" size=3 maxlength=4 value=\"".$this->shadowWarning."\">"));
 
       foreach( array("activate_shadowMin", "activate_shadowMax",
             "activate_shadowExpire", "activate_shadowInactive","activate_shadowWarning") as $val){

@@ -1,4 +1,6 @@
 
+  <h3>{t}Account settings{/t}</h3>
+  
    <!-- must_change_password  -->
    {render acl=$mustchangepasswordACL checkbox=$multiple_support checked=$use_mustchangepassword}
    <input type="checkbox" class="center" name="mustchangepassword" value="1" {$mustchangepassword}>
