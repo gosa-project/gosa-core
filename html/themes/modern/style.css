@@ -796,6 +796,14 @@ div.listContainer {
   max-width:500px;
 }
 
+.listScrollContent tr:hover {
+  background-color:#DDD;
+}
+
+.listScrollContent tr:last-child:hover {
+  background-color:#FFF;
+}
+
 div.nlistFooter {
   background-color:#F5F5F5;
   color:#444;
