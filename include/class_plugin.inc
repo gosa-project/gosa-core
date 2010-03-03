@@ -2060,7 +2060,18 @@ class plugin
       if(preg_match("/%/",$command)){
         $attrs = get_object_vars($plugin);
         foreach($attrs as $name => $value){
-          if(!is_string($value)) continue;
+          if(is_array($value)){
+            $s = "";
+            foreach($value as $val){
+              if(is_string($val) || is_int($val) || is_float($val) || is_bool($val)){
+                $s .= '"'.$val.'",'; 
+              }
+            }
+            $value = '['.trim($s,',').']';
+          }
+          if(!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value)){
+            continue;
+          }
           $command= preg_replace("/%$name/", $value, $command);
         }
       }
