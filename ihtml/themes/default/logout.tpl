@@ -11,7 +11,6 @@
 </div>
 </form>
 
-</body>
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
@@ -19,4 +18,5 @@
   -->
 </script>
 
+</body>
 </html>

@@ -108,7 +108,7 @@
     <tr>
      <td>
       <div style="height:10px;"></div>
-      <label for="day">{t}Date of birth{/t}</label>
+      <label for="dateOfBirth">{t}Date of birth{/t}</label>
      </td>
      <td>
       <div style="height:10px;"></div>
@@ -152,11 +152,11 @@
     </tr>
     <tr>
      <td>
-      <div style="height:10px;"></div>
-      <label for="base">{t}Base{/t}</label>
+      <div style="height:10px;"> </div>
+      {t}Base{/t}
      </td>
      <td>
-      <div style="height:10px;"></div>
+      <div style="height:10px;"> </div>
       {render acl=$baseACL checkbox=$multiple_support checked=$use_base}
       {$base}
       {/render}
@@ -233,7 +233,7 @@
      </td>
     </tr>
     <tr>
-     <td colspan="2" style='vertical-align:top'><label for="edit_perms">{t}Restrict login to{/t}</label>
+     <td colspan="2" style='vertical-align:top'><label for="res">{t}Restrict login to{/t}</label>
       
       {if !$multiple_support}
       {render acl=$gosaLoginRestrictionACL}
@@ -334,7 +334,7 @@
     </tr>
     {if !$multiple_support}
     <tr>
-     <td><label for="manager">{t}Manager{/t}</label></td>
+     <td><label for="manager_name">{t}Manager{/t}</label></td>
      <td>
       {render acl=$managerACL}
         <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'
