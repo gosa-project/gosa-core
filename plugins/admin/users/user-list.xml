@@ -91,14 +91,14 @@
      <action>
       <name>new</name>
       <type>entry</type>
-      <image>plugins/users/images/select_user.png</image>
+      <image>plugins/users/images/select_user.png[new]</image>
       <label>User</label>
      </action>
 
      <action>
       <name>new_template</name>
       <type>entry</type>
-      <image>plugins/users/images/select_template.png</image>
+      <image>plugins/users/images/select_template.png[new]</image>
       <label>Template</label>
      </action>
     </action>

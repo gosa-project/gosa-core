@@ -1454,7 +1454,7 @@ class listing {
       if($restore){
         $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"restore\";document.getElementById(\"exec_act\").click();'>".image('images/lists/restore.png')."&nbsp;"._("Restore snapshots")."</a></li>";
       }else{
-        $result.= "<li$separator><a href='#'>".image('images/lists/restore_grey.png')."&nbsp;"._("Restore snapshots")."</a></li>";
+        $result.= "<li$separator><a href='#'>".image('images/lists/restore-grey.png')."&nbsp;"._("Restore snapshots")."</a></li>";
       }
     }
 
@@ -1504,7 +1504,7 @@ class listing {
         if($this->snapshotHandler->hasSnapshots($dn)){
           $result.= image('images/lists/restore.png', "listing_restore_$row", _("Restore snapshot"));
         } else {
-          $result.= image('images/lists/restore_grey.png');
+          $result.= image('images/lists/restore-grey.png');
         }
       }
 

@@ -3557,6 +3557,8 @@ function image($path, $action= "", $title= "", $align= "middle")
     } else {
       die("Invalid label specified: $label\n");
     }
+
+    $path= preg_replace("/\[.*\]$/", "", $path);
   }
 
   // Non middle layout?
