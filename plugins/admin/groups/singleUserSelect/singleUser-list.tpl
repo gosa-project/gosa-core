@@ -28,7 +28,6 @@
 </table>
 
 <div class="plugin-actions">
-  <button type='submit' name='add_users_finish'>{msgPool type=okButton}</button>
   <button type='submit' name='add_users_cancel'>{msgPool type=cancelButton}</button>
 </div>
 

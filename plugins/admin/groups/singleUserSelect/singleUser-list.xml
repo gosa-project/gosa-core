@@ -75,12 +75,6 @@
     <action>
       <name>selectUser</name>
       <type>entry</type>
-      <image>images/empty.png</image>
-      <label>Select user</label>
-    </action>
-    <action>
-      <name>selectUser</name>
-      <type>entry</type>
       <image>images/lists/edit.png</image>
       <label>Select user</label>
     </action>
