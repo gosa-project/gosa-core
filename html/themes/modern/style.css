@@ -286,6 +286,7 @@ div.menu {
 }
 
 div.menu div {
+  margin-top:-1px;
   height:3px;
   border-right:1px solid #C2C2C2;
   border-left:1px solid #C2C2C2;
