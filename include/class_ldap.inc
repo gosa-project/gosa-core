@@ -673,7 +673,7 @@ class LDAP{
           /* Get name of first matching objectClass */
           $ocname= "";
           foreach($classes as $class){
-            if (isset($class['MUST']) && $class['MUST'] == "$type"){
+            if (isset($class['MUST']) && in_array($type, $class['MUST'])){
 
               /* Look for first classes that is structural... */
               if (isset($class['STRUCTURAL'])){
