@@ -278,6 +278,17 @@
 
    <h3>{t}Organizational information{/t}</h3>
   
+ 
+  </div>
+ </div>
+</div>
+
+<div class='clear'></div>
+
+<div class="horizontal-container">
+ <div class="container" style='width:33%'>
+  <div class="padder">
+
    {if $governmentmode eq "true"}
 
    <table summary=""> 
