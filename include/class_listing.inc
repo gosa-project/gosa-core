@@ -839,6 +839,11 @@ class listing {
     // Go thru all actions
     $result= "";
     $actions= $this->xmlData['actiontriggers']['action'];
+
+    // Ensure we've a valid actions array, if there is only one action in the actiontriggers col
+    //  then we've to create a valid array here.
+    if(isset($actions['name'])) $actions = array($actions);
+
     foreach($actions as $action) {
       // Skip the entry completely if there's no permission to execute it
       if (!$this->hasActionPermission($action, $dn, $classes)) {
