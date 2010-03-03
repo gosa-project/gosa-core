@@ -11,7 +11,7 @@
      <td><label for="homeDirectory">{t}Home directory{/t}</label>{$must}</td>
      <td>
       {render acl=$homeDirectoryACL checkbox=$multiple_support checked=$use_homeDirectory}
-      <input type='text' id="homeDirectory" name="homeDirectory" size=40 maxlength=120 value="{$homeDirectory}">
+      <input type='text' id="homeDirectory" name="homeDirectory" maxlength=120 value="{$homeDirectory}">
       {/render}
      </td>
     </tr>
@@ -87,8 +87,6 @@
    {/if}
 
    {if $sshPublicKey == 1}
-
-     <hr>
 
      {render acl=$sshPublicKeyACL}
      <h3>{t}SSH keys{/t}</h3>
