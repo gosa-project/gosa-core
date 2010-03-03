@@ -1,7 +1,4 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
- <tr>
-  <td style="width:50%; vertical-align:top;">
-   
+
    <!-- must_change_password  -->
    {render acl=$mustchangepasswordACL checkbox=$multiple_support checked=$use_mustchangepassword}
    <input type="checkbox" class="center" name="mustchangepassword" value="1" {$mustchangepassword}>
@@ -29,7 +26,10 @@
    
    <!-- activate_shadowExpire -->
    {render acl=$shadowExpireACL checkbox=$multiple_support checked=$use_activate_shadowExpire}
-   <table border="0" cellpadding="0" cellspacing="0"><tr><td><input type="checkbox" class="center" name="activate_shadowExpire" value="1" {$activate_shadowExpire}>
+   <table summary="{t}Password expiration settings{/t}" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+     <td>
+      <input type="checkbox" class="center" name="activate_shadowExpire" value="1" {$activate_shadowExpire}>
       {/render}
       {t}Password expires on{/t}&nbsp;
       {render acl=$shadowExpireACL}
@@ -62,6 +62,3 @@
    {render acl=$shadowWarningACL}
    {$shadowwarnings}
    {/render}
-  </td>
- </tr>
-</table>

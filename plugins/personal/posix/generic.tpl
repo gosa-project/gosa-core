@@ -1,9 +1,7 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
- <tr>
-  <td style="width:50%; vertical-align:top;">
-   <h3>{image path="images/rightarrow.png"} {t}Generic{/t}
-   </h3>
-   <table summary="">
+
+   <h3>{t}Generic{/t}</h3>
+
+   <table summary="{t}Generic settings{/t}">
     <tr>
      <td><label for="homeDirectory">{t}Home directory{/t}</label>{$must}</td>
      <td>
@@ -48,7 +46,7 @@
    
    {if !$multiple_support}
    
-   <table summary="">
+   <table summary="{t}Generic settings{/t}">
     <tr>
      <td>
       {render acl=$force_idsACL}
@@ -82,16 +80,11 @@
     </tr>
    </table>
    {/if}
-  </td>
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
-  </td>
-  <td style="vertical-align:top;">
-   <h3>{image path="plugins/posix/images/members.png"} {t}Group membership{/t}
-   </h3>
+
+   <h3>{t}Group membership{/t}</h3>
    {if $groups eq "too_many_for_nfs"}
-   <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
-   <br>
+     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
+     <br>
    {/if}
    {render acl=$groupMembershipACL}
    <select style="width:100%; height:130px;" name="group_list[]" size=16 multiple >
@@ -117,106 +110,92 @@
    <button type='submit' name='delete_groupmembership'>{msgPool type=delButton}</button>
    
    {/render}
-  </td>
- </tr>
-</table>
 
-<p class="seperator">&nbsp;</p>
 
-<table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
- <tr>
-  <td style='width:50%;vertical-align:top'>
    {if $sshPublicKey == 1}
-   {render acl=$sshPublicKeyACL}
-   <h3>{image path="images/lists/key.png"} {t}SSH keys{/t}
-   </h3>
-   <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
-   
-   <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
-   {/render}
+     {render acl=$sshPublicKeyACL}
+     <h3>{t}SSH keys{/t}</h3>
+     <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
+     <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
+     {/render}
    {/if}
-   <h3>{image path="plugins/posix/images/terminal_small.png"} {t}Account{/t}
-   </h3>
+
+   <h3>{t}Account{/t}</h3>
+
    {include file="$pwmode.tpl"}
-  </td>
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
-  </td>
-  <td style="vertical-align:top;">
-   <h3>{image path="images/lists/locked.png"} {t}System trust{/t}
-   </h3>
+  
+   <h3>{t}System trust{/t}</h3>
+
    {if !$multiple_support}
-   {t}Trust mode{/t}&nbsp;
-   {render acl=$trustmodeACL}
-   <select name="trustmode" id="trustmode" size=1 
-   onChange="changeSelectState('trustmode', 'wslist'); 
-   changeSelectState('trustmode', 'add_ws'); 
-   changeSelectState('trustmode', 'del_ws');">
-   {html_options options=$trustmodes selected=$trustmode}
-</select>
-{/render}
-{render acl=$trustmodeACL}
-<select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
- {html_options values=$workstations output=$workstations}
- {if $emptyArrAccess}
- <option disabled>&nbsp;</option>
- {/if}
-</select>
-{/render}
-<br>
-{render acl=$trustmodeACL}
-<button type='submit' name='add_ws' id="add_ws">{msgPool type=addButton}</button>&nbsp;
+    {t}Trust mode{/t}&nbsp;
+    {render acl=$trustmodeACL}
+     <select name="trustmode" id="trustmode" size=1 
+        onChange="changeSelectState('trustmode', 'wslist'); 
+        changeSelectState('trustmode', 'add_ws'); 
+        changeSelectState('trustmode', 'del_ws');">
+      {html_options options=$trustmodes selected=$trustmode}
+     </select>
+    {/render}
+    {render acl=$trustmodeACL}
+    <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
+      {html_options values=$workstations output=$workstations}
+      {if $emptyArrAccess}
+        <option disabled>&nbsp;</option>
+      {/if}
+    </select>
+    {/render}
 
-{/render}
-{render acl=$trustmodeACL}
-<button type='submit' name='delete_ws' id="del_ws">{msgPool type=delButton}</button>
+    <br>
 
-{/render}
+    {render acl=$trustmodeACL}
+      <button type='submit' name='add_ws' id="add_ws">{msgPool type=addButton}</button>&nbsp;
+    {/render}
+    {render acl=$trustmodeACL}
+      <button type='submit' name='delete_ws' id="del_ws">{msgPool type=delButton}</button>
+    {/render}
 
-{else}
-<input type="checkbox" name="use_trustmode" {if $use_trustmode} checked {/if}
-class="center" onClick="$('div_trustmode').toggle();">
-{t}Trust mode{/t}&nbsp;
-<div {if !$use_trustmode} style="display: none;" {/if} id="div_trustmode">
- {render acl=$trustmodeACL}
- <select name="trustmode" id="trustmode" size=1 
- onChange="changeSelectState('trustmode', 'wslist'); 
- changeSelectState('trustmode', 'add_ws'); 
- changeSelectState('trustmode', 'del_ws');">
- {html_options options=$trustmodes selected=$trustmode}
-</select>
-{/render}
-{render acl=$trustmodeACL}
-<select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
- {html_options values=$workstations output=$workstations}
- {if $emptyArrAccess}
- <option disabled>&nbsp;</option>
- {/if}
-</select>
-{/render}
-<br>
-{render acl=$trustmodeACL}
-<button type='submit' name='add_ws' id="add_ws">{msgPool type=addButton}</button>&nbsp;
+   {else}
 
-{/render}
-{render acl=$trustmodeACL}
-<button type='submit' name='delete_ws' id="del_ws">{msgPool type=delButton}</button>
+    <input type="checkbox" name="use_trustmode" {if $use_trustmode} checked {/if}
+      class="center" onClick="$('div_trustmode').toggle();">
+    {t}Trust mode{/t}&nbsp;
 
-{/render}
-</div>
-{/if}
-</td>
-</tr>
-</table>
+    <div {if !$use_trustmode} style="display: none;" {/if} id="div_trustmode">
+     {render acl=$trustmodeACL}
+      <select name="trustmode" id="trustmode" size=1 
+          onChange="changeSelectState('trustmode', 'wslist'); 
+          changeSelectState('trustmode', 'add_ws'); 
+          changeSelectState('trustmode', 'del_ws');">
+        {html_options options=$trustmodes selected=$trustmode}
+      </select>
+    {/render}
+
+    {render acl=$trustmodeACL}
+    <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
+     {html_options values=$workstations output=$workstations}
+     {if $emptyArrAccess}
+     <option disabled>&nbsp;</option>
+     {/if}
+    </select>
+    {/render}
+    <br>
+
+    {render acl=$trustmodeACL}
+    <button type='submit' name='add_ws' id="add_ws">{msgPool type=addButton}</button>&nbsp;
+    {/render}
+
+    {render acl=$trustmodeACL}
+    <button type='submit' name='delete_ws' id="del_ws">{msgPool type=delButton}</button>
+    {/render}
+    </div>
+    {/if}
+
+
 {if $multiple_support}
-<input type="hidden" name="posix_mulitple_edit" value="1">
+  <input type="hidden" name="posix_mulitple_edit" value="1">
 {/if}
-
 <input type="hidden" name="posixTab" value="posixTab">
 
-<!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
-<!-- // First input field on page
-focus_field('homeDirectory');
--->
+  focus_field('homeDirectory');
 </script>
