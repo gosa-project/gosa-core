@@ -1,7 +1,7 @@
 <table width='100%'>
  <tr>
   <td style='vertical-align:top;'>
-   <h2>{t}Posix settings{/t}</h2>
+   <h3>{t}Posix settings{/t}</h3>
    <table>
     <tr>
      <td>
@@ -52,8 +52,8 @@
    <table width="50%">
     <tr>
      <td style="vertical-align:top;" colspan="4">
-      <h2>{image path="plugins/posix/images/members.png"} {t}Group membership{/t}
-      </h2>
+      <h3>{image path="plugins/posix/images/members.png"} {t}Group membership{/t}
+      </h3>
      </td>
     </tr>
     <tr>
