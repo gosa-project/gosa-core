@@ -203,7 +203,7 @@ class baseSelector {
 
     // Draw submitter if required
     if ($this->submitButton) {
-      $this->tree.= image('images/lists/submit.png', null, "submit_base_".$this->pid, _("Submit"));
+      $this->tree.= image('images/lists/submit.png', "submit_base_".$this->pid, _("Submit"));
     }
     $this->tree.= "<input type='submit' style='display:none' name='submit_tree_base_".$this->pid."' id='submit_tree_base_".$this->pid."'>";
     $this->tree.= "<input type='hidden' name='bs_rebase_".$this->pid."' id='bs_rebase_".$this->pid."'>";

@@ -3519,10 +3519,11 @@ function mark($needle, $haystack, $ignorecase= true)
 
 
 /* Return an image description using the path */
-function image($path, $label= null, $action= "", $title= "", $align= "middle")
+function image($path, $action= "", $title= "", $align= "middle")
 {
   global $config;
   global $BASE_DIR;
+  $label= null;
 
   // Bail out, if there's no style file
   if(!session::global_is_set("img-styles")){
@@ -3543,6 +3544,12 @@ function image($path, $label= null, $action= "", $title= "", $align= "middle")
     session::global_set('img-styles', unserialize(file_get_contents("$BASE_DIR/ihtml/themes/$theme/img.styles")));
   }
   $styles= session::global_get('img-styles');
+
+  /* Extract labels from path */
+  if (preg_match("/(-[a-z0-9]+)\.png$/", $path, $matches)) {
+    print_a($matches);
+    exit;
+  }
 
   $lbl= "";
   if ($label) {

@@ -786,7 +786,7 @@ class userManagement extends management
     // Walk thru map
     foreach ($map as $oc => $properties) {
       if (in_array_ics($oc, $classes)) {
-        $result.= image($properties['image'], null, "listing_edit_".$properties['plugin']."_$row", $properties['title']);
+        $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
       } else {
         $result.= image('images/empty.png');
       }

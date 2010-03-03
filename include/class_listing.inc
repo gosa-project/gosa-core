@@ -238,7 +238,7 @@ class listing {
             isset($config['sortType'])) {
           $this->sortAttribute= $config['sortAttribute'];
           $this->sortType= $config['sortType'];
-          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$index]?"up":"down").".png", null, null, $this->sortDirection[$index]?_("Up"):_("Down"), "text-top");
+          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$index]?"up":"down").".png", null, $this->sortDirection[$index]?_("Up"):_("Down"), "text-top");
         }
         $sortable= (isset($config['sortAttribute']));
 
@@ -416,7 +416,7 @@ class listing {
       foreach ($this->objectTypes as $objectType) {
         if (isset($this->objectTypeCount[$objectType['label']])) {
           $label= _($objectType['label']);
-          $result.= image($objectType['image'], null, null, $label)."&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;";
+          $result.= image($objectType['image'], null, $label)."&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;";
         }
       }
 
@@ -818,7 +818,7 @@ class listing {
     $objectType= $this->getObjectType($this->objectTypes, $classes);
     if ($objectType) {
       $this->objectDnMapping[$dn]= $objectType["objectClass"];
-      $result= image($objectType["image"], null, null, LDAP::fix($dn));
+      $result= image($objectType["image"], null, LDAP::fix($dn));
       if (!isset($this->objectTypeCount[$objectType['label']])) {
         $this->objectTypeCount[$objectType['label']]= 0;
       }
@@ -891,7 +891,7 @@ class listing {
       if ($action['type'] == "entry") {
         $label= $this->processElementFilter($action['label'], $this->entries[$row], $row);
         $image= $this->processElementFilter($action['image'], $this->entries[$row], $row);
-        $result.= image($image, null, "listing_".$action['name']."_$row", $label);
+        $result.= image($image, "listing_".$action['name']."_$row", $label);
       }
 
       // Handle special types
@@ -985,29 +985,29 @@ class listing {
 
     /* Draw root button */
     if($enableRoot){
-      $result["ROOT"]= image('images/lists/root.png', null, 'ROOT', _("Root"));
+      $result["ROOT"]= image('images/lists/root.png', 'ROOT', _("Root"));
     }else{
-      $result["ROOT"]= image('images/lists/root-grey.png', null, null, _("Root"));
+      $result["ROOT"]= image('images/lists/root-grey.png', null, _("Root"));
     }
 
     /* Draw back button */
     if($enableBack){
-      $result["BACK"]= image('images/lists/back.png', null, 'BACK', _("Go up one department"));
+      $result["BACK"]= image('images/lists/back.png', 'BACK', _("Go up one department"));
     }else{
-      $result["BACK"]= image('images/lists/back-grey.png', null, null, _("Go up one department"));
+      $result["BACK"]= image('images/lists/back-grey.png', null, _("Go up one department"));
     }
 
     /* Draw home button */
    /* Draw home button */
     if($enableHome){
-      $result["HOME"]= image('images/lists/home.png', null, 'HOME', _("Go to users department"));
+      $result["HOME"]= image('images/lists/home.png', 'HOME', _("Go to users department"));
     }else{
-      $result["HOME"]= image('images/lists/home-grey.png', null, null, _("Go to users department"));
+      $result["HOME"]= image('images/lists/home-grey.png', null, _("Go to users department"));
     }
 
 
     /* Draw reload button, this button is enabled everytime */
-    $result["RELOAD"]= image('images/lists/reload.png', null, 'REFRESH', _("Reload list"));
+    $result["RELOAD"]= image('images/lists/reload.png', 'REFRESH', _("Reload list"));
 
     return ($result);
   }
@@ -1411,7 +1411,7 @@ class listing {
     // Render cut entries
     if($cut){
       if($ui->is_cutable($dn, $category, $class)){
-        $result.= image('images/lists/cut.png', null, "listing_cut_$row", _("Cut this entry"));
+        $result.= image('images/lists/cut.png', "listing_cut_$row", _("Cut this entry"));
       }else{
         $result.= image('images/empty.png');
       }
@@ -1420,7 +1420,7 @@ class listing {
     // Render copy entries
     if($copy){
       if($ui->is_copyable($dn, $category, $class)){
-        $result.= image('images/lists/copy.png', null, "listing_copy_$row", _("Copy this entry"));
+        $result.= image('images/lists/copy.png', "listing_copy_$row", _("Copy this entry"));
       }else{
         $result.= image('images/empty.png');
       }
@@ -1502,7 +1502,7 @@ class listing {
 
         // Do we have snapshots for this dn?
         if($this->snapshotHandler->hasSnapshots($dn)){
-          $result.= image('images/lists/restore.png', null, "listing_restore_$row", _("Restore snapshot"));
+          $result.= image('images/lists/restore.png', "listing_restore_$row", _("Restore snapshot"));
         } else {
           $result.= image('images/lists/restore_grey.png');
         }
@@ -1510,7 +1510,7 @@ class listing {
 
       // Draw snapshot button
       if($ui->allow_snapshot_create($dn, $category)){
-          $result.= image('images/snapshot.png', null, "listing_snapshot_$row", _("Create a new snapshot from this object"));
+          $result.= image('images/snapshot.png', "listing_snapshot_$row", _("Create a new snapshot from this object"));
       }else{
           $result.= image('images/empty.png');
       }
