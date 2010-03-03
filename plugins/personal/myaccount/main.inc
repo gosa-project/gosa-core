@@ -109,13 +109,8 @@ if (! $cleanup ){
     /* Are we in edit mode? */
     if (session::is_set('edit')){
       $display.= "<button class='button' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-      $display.= "&nbsp;";
       $display.= "<button class='button' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
     } else {
-      $info= "<img alt='' align='middle' src='".get_template_path('images/lists/unlocked.png').
-             "'> ".$ui->dn."&nbsp;";
-
-      /* Only display edit button if there is at least one attribute editable */
       if(preg_match("/r/",$ui->get_permissions($ui->dn,"users/MyAccountTabs"))){
         $display.= "<button class='button' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
       }
