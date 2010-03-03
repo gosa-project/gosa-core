@@ -26,6 +26,7 @@
 $lock_msg="";
 if ($remove_lock || isset($_POST['edit_cancel'])){
   if(session::is_set('MyAccountTabs') && session::is_set('edit')){
+    session::un_set('MyAccountTabs');
     del_lock($ui->dn);
   }
 }
@@ -76,6 +77,7 @@ if (! $cleanup ){
     /* No errors, save object */
     if (count ($message) == 0){
       $MyAccountTabs->save ();
+      $MyAccountTabs->setReadOnly(TRUE);
       del_lock ($ui->dn);
       session::un_set ('edit');
 
