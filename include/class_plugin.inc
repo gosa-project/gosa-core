@@ -629,134 +629,6 @@ class plugin
     return($display);
   }
 
-  /*! \brief Executes commands after an object has been created */
-  function postcreate($add_attrs= array())
-  {
-    /* Find postcreate entries for this class */
-    $command= $this->config->search(get_class($this), "POSTCREATE",array('menu', 'tabs'));
-
-    if ($command != ""){
-
-      /* Walk through attribute list */
-      foreach ($this->attributes as $attr){
-        if (!is_array($this->$attr)){
-          $add_attrs[$attr] = $this->$attr;
-        }
-      }
-      $add_attrs['dn']=$this->dn;
-
-      $tmp = array();
-      foreach($add_attrs as $name => $value){
-        $tmp[$name] =  strlen($name);
-      }
-      arsort($tmp);
-      
-      /* Additional attributes */
-      foreach ($tmp as $name => $len){
-        $value = $add_attrs[$name];
-        $command= str_replace("%$name", "$value", $command);
-      }
-
-      if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Execute");
-        exec($command,$arr);
-        foreach($arr as $str){
-          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Result: ".$str);
-        }
-      } else {
-        $message= msgPool::cmdnotfound("POSTCREATE", get_class($this));
-        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
-      }
-    }
-  }
-
-  /*! \brief Execute commands after an object has been modified */
-  function postmodify($add_attrs= array())
-  {
-    /* Find postcreate entries for this class */
-    $command= $this->config->search(get_class($this), "POSTMODIFY",array('menu','tabs'));
-
-    if ($command != ""){
-
-      /* Walk through attribute list */
-      foreach ($this->attributes as $attr){
-        if (!is_array($this->$attr)){
-          $add_attrs[$attr] = $this->$attr;
-        }
-      }
-      $add_attrs['dn']=$this->dn;
-
-      $tmp = array();
-      foreach($add_attrs as $name => $value){
-        $tmp[$name] =  strlen($name);
-      }
-      arsort($tmp);
-      
-      /* Additional attributes */
-      foreach ($tmp as $name => $len){
-        $value = $add_attrs[$name];
-        $command= str_replace("%$name", "$value", $command);
-      }
-
-      if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command, "Execute");
-        exec($command,$arr);
-        foreach($arr as $str){
-          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Result: ".$str);
-        }
-      } else {
-        $message= msgPool::cmdnotfound("POSTMODIFY", get_class($this));
-        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
-      }
-    }
-  }
-
-  /*! \brief Executes a command after an object has been removed */
-  function postremove($add_attrs= array())
-  {
-    /* Find postremove entries for this class */
-    $command= $this->config->search(get_class($this), "POSTREMOVE",array('menu','tabs'));
-    if ($command != ""){
-
-      /* Walk through attribute list */
-      foreach ($this->attributes as $attr){
-        if (!is_array($this->$attr)){
-          $add_attrs[$attr] = $this->$attr;
-        }
-      }
-      $add_attrs['dn']=$this->dn;
-
-      $tmp = array();
-      foreach($add_attrs as $name => $value){
-        $tmp[$name] =  strlen($name);
-      }
-      arsort($tmp);
-      
-      /* Additional attributes */
-      foreach ($tmp as $name => $len){
-        $value = $add_attrs[$name];
-        $command= str_replace("%$name", "$value", $command);
-      }
-
-      if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Execute");
-
-        exec($command,$arr);
-        foreach($arr as $str){
-          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Result: ".$str);
-        }
-      } else {
-        $message= msgPool::cmdnotfound("POSTREMOVE", get_class($this));
-        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
-      }
-    }
-  }
-
 
   /* Create unique DN */
   function create_unique_dn2($data, $base)
@@ -1135,24 +1007,6 @@ class plugin
     $ldap->cd($src_dn);
     $ldap->recursive_remove($src_dn);
     return (TRUE);
-  }
-
-
-  function handle_post_events($mode, $add_attrs= array())
-  {
-    switch ($mode){
-      case "add":
-        $this->postcreate($add_attrs);
-      break;
-
-      case "modify":
-        $this->postmodify($add_attrs);
-      break;
-
-      case "remove":
-        $this->postremove($add_attrs);
-      break;
-    }
   }
 
 
@@ -2141,6 +1995,88 @@ class plugin
   function is_modal_dialog()
   {
     return(isset($this->dialog) && $this->dialog);
+  }
+
+
+  /*! \brief    Forward command execution request
+   *             to the correct method. 
+   */
+  function handle_post_events($mode, $addAttrs= array())
+  {
+    if(!in_array($mode, array('add','remove','modify'))){
+      trigger_error(sprintf("Invalid post event type given '%s'! Valid types are [add,modify,remove].", $mode));
+      return;
+    }
+    switch ($mode){
+      case "add":
+        plugin::callHook($this,"POSTCREATE", $addAttrs);
+      break;
+
+      case "modify":
+        plugin::callHook($this,"POSTMODIFY", $addAttrs);
+      break;
+
+      case "remove":
+        plugin::callHook($this,"POSTREMOVE", $addAttrs);
+      break;
+    }
+  }
+
+
+  /*! \brief    Calls external hooks which are defined for this plugin (gosa.conf)
+   *            Replaces placeholder by class values of this plugin instance.
+   *  @param    Allows to a add special replacements.
+   */
+  static function callHook($plugin, $cmd, $addAttrs= array())
+  {
+    global $config;
+    $command= $config->search(get_class($plugin), $cmd,array('menu','tabs'));
+    if ($command != ""){
+
+      // Walk trough attributes list and add the plugins attributes. 
+      foreach ($plugin->attributes as $attr){
+        if (!is_array($plugin->$attr)){
+          $addAttrs[$attr] = $plugin->$attr;
+        }
+      }
+      $ui = get_userinfo();
+      $addAttrs['callerDN']=$ui->dn;
+      $addAttrs['dn']=$plugin->dn;
+
+      // Sort attributes by length, ensures correct replacement
+      $tmp = array();
+      foreach($addAttrs as $name => $value){
+        $tmp[$name] =  strlen($name);
+      }
+      arsort($tmp);
+
+      // Now replace the placeholder 
+      foreach ($tmp as $name => $len){
+        $value = $addAttrs[$name];
+        $command= str_replace("%$name", "$value", $command);
+      }
+
+      // If there are still some %.. in our command, try to fill these with some other class vars 
+      if(preg_match("/%/",$command)){
+        $attrs = get_object_vars($plugin);
+        foreach($attrs as $name => $value){
+          if(!is_string($value)) continue;
+          $command= preg_replace("/%$name/", $value, $command);
+        }
+      }
+
+      if (check_command($command)){
+        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command,"Execute");
+        exec($command,$arr);
+        if(is_array($arr)){
+          $str = implode("\n",$arr);
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$str);
+        }
+      } else {
+        $message= msgPool::cmdnotfound("POSTCREATE", get_class($plugin));
+        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+      }
+    }
   }
 }
 
