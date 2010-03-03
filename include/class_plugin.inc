@@ -604,10 +604,8 @@ class plugin
     } else {
       $state= "";
     }
-    $display= "<table summary=\"\" width=\"100%\"><tr>\n<td colspan=2><p><b>$text</b></p>\n";
-    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".$state.
-      "><p class=\"seperator\">&nbsp;</p></td></tr></table>";
-
+    $display = "<p>$text<br>\n";
+    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".$state."><p>";
     return($display);
   }
 
