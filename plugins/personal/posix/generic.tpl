@@ -1,4 +1,9 @@
 
+
+<div class="horizontal-container">
+ <div class="container" style='width:50%'>
+  <div class="padder">
+
    <h3>{t}Generic{/t}</h3>
 
    <table summary="{t}Generic settings{/t}">
@@ -81,13 +86,28 @@
    </table>
    {/if}
 
+   {if $sshPublicKey == 1}
+
+     <hr>
+
+     {render acl=$sshPublicKeyACL}
+     <h3>{t}SSH keys{/t}</h3>
+     <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
+     {/render}
+   {/if}
+
+  </div>
+ </div>
+ <div class="last-container" style='width:50%'>
+  <div class="padder">
+
    <h3>{t}Group membership{/t}</h3>
    {if $groups eq "too_many_for_nfs"}
      <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
      <br>
    {/if}
    {render acl=$groupMembershipACL}
-   <select style="width:100%; height:130px;" name="group_list[]" size=16 multiple >
+   <select style="width:100%; height:180px;" name="group_list[]" size=16 multiple >
     {if !$multiple_support}
     {html_options options=$groupMembership}
     {else}
@@ -111,18 +131,24 @@
    
    {/render}
 
+  </div>
+ </div>
+</div>
 
-   {if $sshPublicKey == 1}
-     {render acl=$sshPublicKeyACL}
-     <h3>{t}SSH keys{/t}</h3>
-     <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
-     <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
-     {/render}
-   {/if}
+<div class='clear'></div>
 
-   <h3>{t}Account{/t}</h3>
+<hr>
+
+<div class="horizontal-container">
+ <div class="container" style='width:50%'>
+  <div class="padder">
 
    {include file="$pwmode.tpl"}
+
+  </div>
+ </div>
+ <div class="last-container" style='width:50%'>
+  <div class="padder">
   
    <h3>{t}System trust{/t}</h3>
 
@@ -190,6 +216,11 @@
     </div>
     {/if}
 
+  </div>
+ </div>
+</div>
+
+<div class='clear'></div>
 
 {if $multiple_support}
   <input type="hidden" name="posix_mulitple_edit" value="1">
