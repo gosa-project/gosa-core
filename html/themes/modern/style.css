@@ -84,6 +84,12 @@ img, input[type=image] {
   background-color:rgba(255,0,0,0.2);
 }
 
+.required{
+  font-size:xx-small;
+  vertical-align:top;
+  color:red;
+}
+
 /* Image with migration color */
 
 input[type=submit].img{
@@ -410,8 +416,8 @@ button:focus, .button:active {
   -moz-border-radius-topleft:5px;
   -moz-border-radius-topright:5px;
   background-color:#E8E8E8;
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#D8D8D8), to(#CCC));
-  background: -moz-linear-gradient(top, #D8D8D8, #CCC);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#DDD));
+  background: -moz-linear-gradient(top, #EEE, #DDD);
   color:#333;
   cursor:pointer;
 }
