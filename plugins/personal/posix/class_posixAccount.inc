@@ -253,14 +253,6 @@ class posixAccount extends plugin
     }
     asort ($this->secondaryGroups);
 
-    /* Get global filter config */
-    if (!session::is_set("sysfilter")){
-      $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
-      $sysfilter= array( "depselect"       => $base,
-          "regex"           => "*");
-      session::set("sysfilter", $sysfilter);
-    }
     $this->ui = get_userinfo();
   }
 
@@ -276,11 +268,6 @@ class posixAccount extends plugin
     if($this->is_account && !$this->view_logged){
       $this->view_logged = TRUE;
       new log("view","users/".get_class($this),$this->dn);
-    }
-
-    /* Department has changed? */
-    if(isset($_POST['depselect'])){
-      session::set('CurrentMainBase',validate($_POST['depselect']));
     }
 
     if($this->multiple_support_active){
@@ -431,28 +418,25 @@ class posixAccount extends plugin
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
 
-    /* In 'MyAccount' mode, we must remove write acls if we are not in editing mode. */ 
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
-
-    $smarty->assign("sshPublicKeyACL", $this->getacl("sshPublicKey", $SkipWrite));
+    $smarty->assign("sshPublicKeyACL", $this->getacl("sshPublicKey"));
 
     /* Depending on pwmode, currently hardcoded because there are no other methods */
     if ( 1 == 1 ){
       $smarty->assign("pwmode", dirname(__FILE__)."/posix_shadow");
 
-      $shadowMinACL     =  $this->getacl("shadowMin",$SkipWrite);
+      $shadowMinACL     =  $this->getacl("shadowMin");
       $smarty->assign("shadowmins", sprintf(_("Password can't be changed up to %s days after last change"), 
             "<input type='text' name=\"shadowMin\" size=3 maxlength=4 value=\"".$this->shadowMin."\">"));
 
-      $shadowMaxACL     =  $this->getacl("shadowMax",$SkipWrite);
+      $shadowMaxACL     =  $this->getacl("shadowMax");
       $smarty->assign("shadowmaxs", sprintf(_("Password must be changed after %s days"), 
             "<input type='text' name=\"shadowMax\" size=3 maxlength=4 value=\"".$this->shadowMax."\">"));
 
-      $shadowInactiveACL=  $this->getacl("shadowInactive",$SkipWrite);
+      $shadowInactiveACL=  $this->getacl("shadowInactive");
       $smarty->assign("shadowinactives", sprintf(_("Disable account after %s days of inactivity after password expiry"), 
             "<input type='text' name=\"shadowInactive\" size=3 maxlength=4 value=\"".$this->shadowInactive."\">"));
 
-      $shadowWarningACL =  $this->getacl("shadowWarning",$SkipWrite);
+      $shadowWarningACL =  $this->getacl("shadowWarning");
       $smarty->assign("shadowwarnings", sprintf(_("Warn user %s days before password expiry"), 
             "<input type='text' name=\"shadowWarning\" size=3 maxlength=4 value=\"".$this->shadowWarning."\">"));
 
@@ -463,10 +447,10 @@ class posixAccount extends plugin
         } else {
           $smarty->assign("$val", "");
         }
-        $smarty->assign("$val"."ACL", $this->getacl($val,$SkipWrite));
+        $smarty->assign("$val"."ACL", $this->getacl($val));
       }
 
-      $smarty->assign("mustchangepasswordACL", $this->getacl("mustchangepassword",$SkipWrite));
+      $smarty->assign("mustchangepasswordACL", $this->getacl("mustchangepassword"));
     }
 
     // Set last system login
@@ -511,14 +495,14 @@ class posixAccount extends plugin
     /* Create onClick="" action string for the "Force UID/GID" option 
      */
     $onClickIDS ="";
-    if(preg_match("/w/",$this->getacl("uidNumber",$SkipWrite))){
+    if(preg_match("/w/",$this->getacl("uidNumber"))){
       $onClickIDS .= "changeState('uidNumber');";
     }
-    if(preg_match("/w/",$this->getacl("gidNumber",$SkipWrite))){
+    if(preg_match("/w/",$this->getacl("gidNumber"))){
       $onClickIDS .= "changeState('gidNumber');";
     }
     $smarty->assign("onClickIDS", $onClickIDS);
-    $smarty->assign("force_idsACL", $this->getacl("uidNumber",$SkipWrite).$this->getacl("gidNumber",$SkipWrite));
+    $smarty->assign("force_idsACL", $this->getacl("uidNumber").$this->getacl("gidNumber"));
 
     foreach(array("primaryGroup","trustmode","activate_shadowWarning","activate_shadowInactive","activate_shadowMin","activate_shadowMax","activate_shadowExpire","mustchangepassword") as $val){
       if(in_array($val,$this->multi_boxes)){
@@ -539,14 +523,15 @@ class posixAccount extends plugin
 
       if((session::get("js"))&&(($val=="uidNumber")||($val=="gidNumber")))
       {
-        $smarty->assign("$val"."ACL",$this->getacl($val,$SkipWrite));
+        $smarty->assign("$val"."ACL",$this->getacl($val));
         $smarty->assign("$val", $this->$val);
         continue;
       }
       $smarty->assign("$val", $this->$val);
-      $smarty->assign("$val"."ACL", $this->getacl($val,$SkipWrite));
+      $smarty->assign("$val"."ACL", $this->getacl($val));
     }
-    if($SkipWrite){
+
+    if($this->read_only){
       $smarty->assign("groupMembershipACL","r");
     }else{
       $smarty->assign("groupMembershipACL","rw");
@@ -555,18 +540,18 @@ class posixAccount extends plugin
 
     /* Work on trust modes */
     $smarty->assign("trusthide", " disabled ");
-    $smarty->assign("trustmodeACL",  $this->getacl("trustModel",$SkipWrite));
+    $smarty->assign("trustmodeACL",  $this->getacl("trustModel"));
     if ($this->trustModel == "fullaccess"){
       $trustmode= 1;
       // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel",$SkipWrite));
+      $smarty->assign("trustmode",  $this->getacl("trustModel"));
 
     } elseif ($this->trustModel == "byhost"){
       $trustmode= 2;
       $smarty->assign("trusthide", "");
     } else {
       // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel",$SkipWrite));
+      $smarty->assign("trustmode",  $this->getacl("trustModel"));
       $trustmode= 0;
     }
     $smarty->assign("trustmode", $trustmode);

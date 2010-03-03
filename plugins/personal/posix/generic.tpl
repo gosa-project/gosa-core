@@ -1,7 +1,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h3>{image path="images/rightarrow.png"} {t}Generic{/t}
+   <h3>{t}Generic{/t}
    </h3>
    <table summary="">
     <tr>
@@ -87,7 +87,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h3>{image path="plugins/posix/images/members.png"} {t}Group membership{/t}
+   <h3>{t}Group membership{/t}
    </h3>
    {if $groups eq "too_many_for_nfs"}
    <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
@@ -128,14 +128,14 @@
   <td style='width:50%;vertical-align:top'>
    {if $sshPublicKey == 1}
    {render acl=$sshPublicKeyACL}
-   <h3>{image path="images/lists/key.png"} {t}SSH keys{/t}
+   <h3>{t}SSH keys{/t}
    </h3>
    <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
    
    <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
    {/render}
    {/if}
-   <h3>{image path="plugins/posix/images/terminal_small.png"} {t}Account{/t}
+   <h3>{t}Account{/t}
    </h3>
    {include file="$pwmode.tpl"}
   </td>
@@ -143,7 +143,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h3>{image path="images/lists/locked.png"} {t}System trust{/t}
+   <h3>{t}System trust{/t}
    </h3>
    {if !$multiple_support}
    {t}Trust mode{/t}&nbsp;
