@@ -479,9 +479,6 @@ class department extends plugin
     /* The parameter forces only to set must_be_tagged, and don't touch any objects 
        This will be done later */
     $this->tag_objects(true);
-    
-    /* Optionally execute a command after we're done */
-		$this->postcreate();
     return(false);
 	}
 
