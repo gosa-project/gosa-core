@@ -46,16 +46,17 @@ input[type=text], input[type=password]{
   padding:3px;
 }
 
-input[type=text]:active, input[type=text]:focus, input[type=password]:active, input[type=password]:focus, textarea:focus, textarea:active{
+input[type=text]:active, input[type=text]:focus, input[type=password]:active, input[type=password]:focus, textarea:focus, textarea:active, select:focus, select:active{
   border:1px solid #777;
 }
 
-input[type=text]:hover, input[type=password]:hover, textarea:hover{
+input[type=text]:hover, input[type=password]:hover, textarea:hover, select:hover{
   border-color:#777;
 }
 
-textarea {
-  border:1px solid #CCC;
+textarea, select {
+  border:1px solid #DDD;
+  margin-bottom:2px;
 }
 
 input[disabled] {
@@ -63,15 +64,16 @@ color:#888;
 background-color:#DDD;
 }                     
 
-textarea[disabled] {
+textarea[disabled], select[disabled] {
 color:#000;         
 background-color:#DDD;
+border-color:#CCC;
 }                     
 
-select[disabled] {
-color:#000;       
-background-color:#DDD;
-}                     
+select[size=1]{
+  padding:0;
+  margin:0;
+}
 
 h1, h2, h3 {
   margin-top:2px;
@@ -343,7 +345,7 @@ div.menu ul li.menu-header {
 
 /* Buttons */
 
-button {
+button, select[size="1"] {
   padding:2px 6px;
   margin:0;
   margin-bottom:6px;
