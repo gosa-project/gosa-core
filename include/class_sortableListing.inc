@@ -213,7 +213,7 @@ class sortableListing {
 
       // Extend by another column if we've actions specified
       if ($action_width) {
-        $result.= "  <col style='width:".$action_width."px'/>\n";
+        $result.= "  <col style='width:".$action_width."px' >\n";
       }
       $result.= " </colgroup>\n";
     }
