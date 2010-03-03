@@ -1091,7 +1091,7 @@ background-color:#FFF;
 height:23px;    
 border:1px solid #CCC;
 background:-webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
-background:-moz-linear-gradient(top, #F8F8F8, #EFE);
+background:-moz-linear-gradient(top, #F8F8F8, #EEE);
 }                             
 
 #pulldown ul {
