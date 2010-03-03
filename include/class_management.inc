@@ -914,6 +914,31 @@ class management
   {
     return(is_object($this->tabObject) || is_object($this->dialogObject));
   }
+
+
+  /*! \brief    Forward command execution request
+   *             to the correct method.
+   */
+  function handle_post_events($mode, $addAttrs= array())
+  {
+    if(!in_array($mode, array('add','remove','modify'))){
+      trigger_error(sprintf("Invalid post event type given '%s'! Valid types are [add,modify,remove].", $mode));
+      return;
+    }
+    switch ($mode){
+      case "add":
+        plugin::callHook($this,"POSTCREATE", $addAttrs);
+      break;
+
+      case "modify":
+        plugin::callHook($this,"POSTMODIFY", $addAttrs);
+      break;
+
+      case "remove":
+        plugin::callHook($this,"POSTREMOVE", $addAttrs);
+      break;
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
