@@ -1998,8 +1998,8 @@ class plugin
   }
 
 
-  /*! \brief    Forward command execution request
-   *             to the correct method. 
+  /*! \brief    Forward command execution requests
+   *             to the hook execution method. 
    */
   function handle_post_events($mode, $addAttrs= array())
   {
