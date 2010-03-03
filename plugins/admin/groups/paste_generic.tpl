@@ -1,4 +1,4 @@
-<h2>{t}Group settings{/t}</h2>
+<h3>{t}Group settings{/t}</h3>
 <table width='100%'>
 	<tr>
 		<td style='width:150px;'>
