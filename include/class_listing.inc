@@ -245,14 +245,14 @@ class listing {
         $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index'";
         if (isset($config['label'])) {
           if ($sortable) {
-            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>"._($config['label'])."$sorter</a></td>";
+            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>"._($config['label'])."</a>$sorter</td>";
           } else {
             $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">"._($config['label'])."</td>";
           }
           $this->plainHeader[]= _($config['label']);
         } else {
           if ($sortable) {
-            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>&nbsp;$sorter</a></td>";
+            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>&nbsp;</a>$sorter</td>";
           } else {
             $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">&nbsp;</td>";
           }
