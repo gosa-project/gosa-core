@@ -605,7 +605,7 @@ class plugin
       $state= "";
     }
     $display = "<p>$text<br>\n";
-    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".$state."><p>";
+    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".$state."></p>";
     return($display);
   }
 
