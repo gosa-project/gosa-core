@@ -1,6 +1,7 @@
 <div class="contentboxh">
  <p class="contentboxh">
-  <img src="images/launch.png" align="right" alt="[F]">{t}Filter{/t}
+  {image path="images/launch.png" align="right"}{t}Filter{/t}
+
  </p>
 </div>
 
@@ -14,7 +15,8 @@
   <tr>
    <td>
     <label for="NAME">
-     <img src="images/lists/search.png" align=middle>&nbsp;Name
+     {image path="images/lists/search.png"}&nbsp;Name
+
     </label>
    </td>
    <td>

@@ -1,4 +1,5 @@
-<input type='image' src='images/empty.png' name='no_action_posted' value='do_nothing' alt='' style='width:2px;height:2px;'>
+{image path="images/empty.png" action="no_action_posted" value="do_nothing"}
+
 
 <table summary="" style="width:100%;height:100%; vertical-align:top; text-align:left;" cellpadding=2>
   <tr>
@@ -10,7 +11,8 @@
       <div class="contentboxb">
        <div style='background:white;padding:3px;'>
         <table><tr>
-          <td>{$ROOT}&nbsp;</td><td>{$BACK}&nbsp;</td><td>{$HOME}&nbsp;</td><td>{$RELOAD}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{t}Base{/t} {$BASE}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td><img src='images/rocket.png' alt='' class='center'></td><td> {$ACTIONS}</td>
+          <td>{$ROOT}&nbsp;</td><td>{$BACK}&nbsp;</td><td>{$HOME}&nbsp;</td><td>{$RELOAD}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{t}Base{/t} {$BASE}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{image path="images/rocket.png"}
+</td><td> {$ACTIONS}</td>
         </tr></table>
        </div>
       </div>
@@ -25,10 +27,9 @@
   </tr>
 </table>
 
-<p class="plugbottom">
-  <input type=submit name="add_users_finish" value="{msgPool type=addButton}">
-  &nbsp;
-  <input type=submit name="add_users_cancel" value="{msgPool type=cancelButton}">
-</p>
+<div class="plugin-actions">
+  <button type='submit' name='add_users_finish'>{msgPool type=okButton}</button>
+  <button type='submit' name='add_users_cancel'>{msgPool type=cancelButton}</button>
+</div>
 
 <input type="hidden" name="ignore">
