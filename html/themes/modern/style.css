@@ -46,12 +46,16 @@ input[type=text], input[type=password]{
   padding:3px;
 }
 
-input[type=text]:active, input[type=text]:focus, input[type=password]:active, input[type=password]:focus,{
+input[type=text]:active, input[type=text]:focus, input[type=password]:active, input[type=password]:focus, textarea:focus, textarea:active{
   border:1px solid #777;
 }
 
-input[type=text]:hover, input[type=password]:hover{
+input[type=text]:hover, input[type=password]:hover, textarea:hover{
   border-color:#777;
+}
+
+textarea {
+  border:1px solid #CCC;
 }
 
 input[disabled] {
