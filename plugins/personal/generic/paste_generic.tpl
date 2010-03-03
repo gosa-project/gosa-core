@@ -1,4 +1,4 @@
-<h2>{t}User settings{/t}</h2>
+<h3>{t}User settings{/t}</h3>
 <table width="100%">
   <tr>
 	<td style="vertical-align:top; border-right:1px solid #AAA; width:50%">

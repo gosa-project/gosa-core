@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan="4">
-   <h2>{t}Personal information{/t}</h2>
+   <h3>{t}Personal information{/t}</h3>
   </td>
  </tr>
  
@@ -281,7 +281,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan="3">
-   <h2>{t}Organizational information{/t}</h2>
+   <h3>{t}Organizational information{/t}</h3>
   </td>
  </tr>
  

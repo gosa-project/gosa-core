@@ -2,8 +2,7 @@
  <!-- Headline container -->
  <tr>
    <td colspan=2>
-     <h2>{image path="plugins/generic/images/head.png"} {t}Personal picture{/t}
-</h2>
+     <h3>{t}Personal picture{/t}</h3>
    </td>
  </tr>
  <!-- Base container -->
