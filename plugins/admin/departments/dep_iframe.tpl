@@ -1,4 +1,4 @@
-<h2>{t}Processing the requested operation{/t}</h2>
+<h3>{t}Processing the requested operation{/t}</h3>
 {$message}
 <br>
 <br>
