@@ -452,15 +452,30 @@ button:focus, .button:active {
 
 /* Containers */
 
-.container{
-  float:none;
+div.horizontal-container {
+  width:100%;
+  margin:0;
+  padding:0;
+  height:100%;
   clear:both;
+}
+
+div.container {
+  float:left;
+  height:100%;
+  margin-right:-1px;
+  border-right:1px solid #CCC;
+}
+
+div.last-container {
+  float:left;
   height:100%;
 }
 
-.container-element{
-  float:left;
+div.padder {
+  padding:4px;
   height:100%;
+  width:100%;
 }
 
 .clear-left{
