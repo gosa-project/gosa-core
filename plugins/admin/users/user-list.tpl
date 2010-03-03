@@ -5,7 +5,6 @@
   <div class="mainlist-header">
    <p>{$HEADLINE}&nbsp;{$SIZELIMIT}</p>
    <div class="mainlist-nav">
-    <div style='float:right'>Gustav</div>
     <table>
      <tr>
       <td>{$ROOT}</td>
