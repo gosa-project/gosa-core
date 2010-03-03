@@ -217,8 +217,9 @@ class pluglist
           $menu .=  "\n            <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title."</li>";
         }
         $menu.= "\n          </ul>";
-        $menu.= "\n          <div class='v-spacer'></div>\n";
+        $menu.= "\n          <div></div>";
         $menu.= "\n        </div>\n";
+        $menu.= "\n        <div></div>";
         $menu.= "\n        <div class='v-spacer'></div>\n";
       }
       $menu.= "\n      </div>\n";
