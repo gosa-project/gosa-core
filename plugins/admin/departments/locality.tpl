@@ -5,7 +5,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
    <td style="vertical-align:top; width:50%">
-     <h3><img class="center" alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h3>
+     <h3>{t}Properties{/t}</h3>
      <table summary="">
       <tr>
        <td><LABEL for="l">{t}Locality name{/t}</LABEL>{$must}</td>
@@ -64,7 +64,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
    <td style="vertical-align:top; width:100%">
-     <h3><img class="center" alt="" align="middle" src="images/lists/locked.png"> {t}Administrative settings{/t}</h3>
+     <h3>{t}Administrative settings{/t}</h3>
 {render acl=$gosaUnitTagACL}
      <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}><label for="is_administrational_unit">{t}Tag department as an independent administrative unit{/t}</label>
 {/render}
