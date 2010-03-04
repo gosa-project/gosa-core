@@ -275,57 +275,11 @@ function divGOsa_toggle(element) {
 
 function resizeHandler (e) {
 	if (!e) e=window.event;
-	if (document.getElementById("menucell") && document.getElementById("d_scrollbody")) {
-		var inner_height= window.innerHeight;
-		var min_height= 450;
-		var px_height= min_height;
-		var suggested= px_height;
-
-		// document.defaultView allows access to the rendered size of elements and should be supported by modern browsers
-		if(document.defaultView) {
-			var menu_height= 0;
-			if (document.getElementById("d_height")){
-				suggested= parseInt(document.getElementById("d_height").value);
-			} else {
-				menu_height=parseInt(document.defaultView.getComputedStyle(document.getElementById("menucell"),"").getPropertyValue('height'));
-				// Minimum height for divlist should be the bottom edge of the menu
-				min_height= menu_height-197;
-				suggested= min_height;
-				if((inner_height-230)-suggested>0) {
-					suggested= inner_height-230;
-				}
-
-			}
-
-			// IE uses other height specifications
-		} else if (Prototype.Browser.IE) {
-			suggested= document.all.menucell.offsetHeight;
-			offset= absTop(d_scrollbody);
-			suggested-= offset;
-			if((inner_height-230)-suggested>0) {
-				suggested= inner_height-230;
-			}
-		}
-
-		/* Reduce height if a list footer is set */
-		if(document.getElementById("t_scrollfoot")){
-			suggested = suggested -20;
-		}
-
-		if (!document.getElementById("list_workaround")) {
-			document.getElementById("d_scrollbody").style.height=suggested+"px";
-		} else {
-			if (!Prototype.Browser.IE) {
-				current_height= parseInt(document.defaultView.getComputedStyle(document.getElementById("t_nscrollbody"),"").getPropertyValue('height'));
-				if (current_height < menu_height) {
-					document.getElementById("d_scrollbody").style.height=suggested+20+"px";
-				}
-			}
-		}
-		if (document.getElementById("t_nscrollbody")) {
-			document.getElementById("t_nscrollbody").style.height=(suggested-22)+"px";
-		}
-	}
+	if ($("d_scrollbody") && $("t_nscrollbody")) {
+          var contentHeight= document.viewport.getHeight() - 216;
+          document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
+          document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
+        }
 	return true;
 }
 
