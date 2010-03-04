@@ -54,7 +54,7 @@
    <table summary="{t}Group membership{/t}">
     <tr>
      <td style="vertical-align:top;" colspan="4">
-      <h3>{image path="plugins/posix/images/members.png"} {t}Group membership{/t}
+      <h3>{t}Group membership{/t}
       </h3>
      </td>
     </tr>
