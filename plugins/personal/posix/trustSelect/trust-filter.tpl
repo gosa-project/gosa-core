@@ -17,7 +17,7 @@
  
  {$SCOPE}
  
- <table style="width:100%;border-top:1px solid #B0B0B0;"
+ <table summary='{t}Filter options{/t}' style="width:100%;border-top:1px solid #B0B0B0;"
   summary="{t}List filter settings{/t}">
   <tr>
    <td>
