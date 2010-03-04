@@ -121,7 +121,7 @@
  </tr>
 </table>
 
-<p class="seperator">&nbsp;</p>
+<hr>
 
 <table style="width:100%" summary="{t}Account accessibility{/t}" >
  <tr>
