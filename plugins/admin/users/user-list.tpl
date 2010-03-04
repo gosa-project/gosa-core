@@ -21,9 +21,9 @@
   {$LIST}
 </div>
 
-<div id="filter">
+<!--<div id="filter">
   {$FILTER}
-</div>
+</div>-->
 
 <div class="clear"></div>
 
