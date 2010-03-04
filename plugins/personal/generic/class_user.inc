@@ -664,8 +664,8 @@ class user extends plugin
     /* Save government mode attributes */
     if($this->governmentmode){
       $smarty->assign("governmentmode", "true");
-      $ivbbmodes= array("nein", "ivbv", "testa", "ivbv,testa", "internet",
-          "internet,ivbv", "internet,testa", "internet,ivbv,testa");
+      $ivbbmodes= array("nein", "", "ivbv", "testa", "ivbv,testa", "internet",
+                        "internet,ivbv", "internet,testa", "internet,ivbv,testa");
       $smarty->assign("ivbbmodes", $ivbbmodes);
       foreach ($this->govattrs as $val){
         $smarty->assign("$val", $this->$val);
