@@ -43,13 +43,13 @@
 {if $dialogState eq 'create'}
 <h1>{t}ACL type{/t} <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">{html_options options=$aclTypes selected=$aclType}<option disabled>&nbsp;</option></select>&nbsp;{if $javascript eq 'false'}<input type="submit" value="{msgPool type=applyButton}" name="refresh">{/if}</h1>
 
-<p class="seperator">&nbsp;</p>
+<hr>
 
 
 <h1>{t}List of available ACL categories{/t}</h1>
 {$aclList}
 
-<p class="seperator">&nbsp;</p>
+<hr>
 <div style='text-align:right;margin-top:5px'>
 {render acl=$gosaAclEntryACL}
 	<input type="submit" name="submit_new_acl" value="{msgPool type=applyButton}">
@@ -67,7 +67,7 @@
 {$aclSelector}
 {/render}
 
-<p class="seperator">&nbsp;</p>
+<hr>
 <div style='text-align:right;margin-top:5px'>
 {render acl=$gosaAclEntryACL}
 	<input type="submit" name="submit_edit_acl" value="{msgPool type=applyButton}">
