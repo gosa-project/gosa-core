@@ -12,7 +12,7 @@
 </div>
 
 <!--
-<p class="seperator">&nbsp;</p>
+<hr>
 <div style="text-align:right;">
 	<p>
 		<input type="submit" name="back" value="{msgPool type=backButton}">

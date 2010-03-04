@@ -551,7 +551,7 @@ class department extends plugin
     
     if(!$OnlySetTagFlag){
       $this->must_be_tagged = FALSE;
-	    echo '<p class="seperator">&nbsp;</p>';
+	    echo '<hr>';
       echo "<div style='width:100%;text-align:right;'>".
         "<form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>".
         "<br>".
@@ -634,7 +634,7 @@ class department extends plugin
     $this->orig_base= $this->base;     
     $this->entryCSN = getEntryCSN($this->dn);
 
-    echo '<p class="seperator">&nbsp;</p>';
+    echo '<hr>';
 
     echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
       <br><input type='submit' name='back' value='"._("Continue")."'>
