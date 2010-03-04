@@ -1,9 +1,10 @@
 <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-<h3>
-{t}Certificates{/t}</h3>
-<table width="100%" cellpadding=4 border=0>
+
+<h3>{t}Certificates{/t}</h3>
+
+<table summary="{t}The users standart certificate{/t}" style="width:100%">
  <tr>
-  <td width="12%" style="vertical-align:top">
+  <td width="25%" style="vertical-align:top">
    {t}Standard certificate{/t}
   </td>
   <td style="vertical-align:top">
@@ -24,10 +25,12 @@
   </td>
  </tr>
 </table>
-<br>
-<table summary="" style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
+
+<hr>
+
+<table summary="{t}The users S/MIME certificate{/t}" style="width:100%">
  <tr>
-  <td width="12%" style="vertical-align:top">
+  <td width="25%" style="vertical-align:top">
    {t}S/MIME certificate{/t} 
   </td>
   <td style="vertical-align:top">
@@ -48,10 +51,12 @@
   </td>
  </tr>
 </table>
-<br>
-<table summary="" style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
+
+<hr>
+
+<table summary="{t}The users PKCS12 certificate{/t}" style="width:100%">
  <tr>
-  <td width="12%" style="vertical-align:top">
+  <td width="25%" style="vertical-align:top">
    {t}PKCS12 certificate{/t} 
   </td>
   <td style="vertical-align:top">
@@ -85,6 +90,7 @@
  </tr>
  {/if}
 </table>
+<hr>
 <div class='plugin-actions'>
  {render acl=$CertificateACL}
  <button type='submit' name='cert_edit_finish'>
