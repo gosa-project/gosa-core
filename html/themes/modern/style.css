@@ -10,6 +10,11 @@ body, html {
   min-height:700px;
 }
 
+#mainform {
+  height:100%;
+  width:100%;
+}
+
 .left{
   float:left;
 }
@@ -195,10 +200,8 @@ div.navigation {
 }
 
 div.plugin-area {
-  float:right;
-  position:absolute;
-  left:164px;
-  right:0;
+  position:relative;
+  margin-left:164px;
   padding-right:6px;
   min-height:600px;
   min-width:700px;
@@ -820,16 +823,9 @@ div.nlistFooter {
 
 /* List header, Filter, misc. */
 
-#filter {
-  position:absolute;
-  right:0;
-  width:250px;
-}
-
 #mainlist {
-  position:absolute;
-  right:265px;
-  left:0;
+  height:100%;
+  padding-right:3px;
 }
 
 .mainlist-header {
