@@ -8,7 +8,7 @@
   {t}Changing the password affects your authentification on mail, proxy, samba and unix services.{/t}
 </p>
 
-<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
     <td><input id="current_password" type="password" name="current_password" size="30" maxlength="40"
