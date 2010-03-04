@@ -1,4 +1,4 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
@@ -23,11 +23,11 @@
     </p>
    </div>
    <div class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-    <table summary="" style="width:100%;">
+    <table style="width:100%;">
      {$alphabet}
     </table>
     
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
      <tr>
       <td width="50%">
        {image path="{$tree_image}"}&nbsp;{t}Display groups of department{/t}
@@ -40,7 +40,7 @@
       </td>
      </tr>
     </table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
      <tr>
       <td width="50%">
        {image path="{$search_image}"}&nbsp;{t}Display groups matching{/t}
@@ -52,7 +52,7 @@
       </td>
      </tr>
     </table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
      <tr>
       <td width="50%">
        {image path="{$search_image}"}&nbsp;{t}Display groups of user{/t}
@@ -64,7 +64,7 @@
       </td>
      </tr>
     </table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
      <tr>
       <td>
        <input type="checkbox" name="SubSearch" value="1" {$SubSearchCHK}

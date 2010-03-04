@@ -17,23 +17,20 @@
  
  {$SCOPE}
  
- <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
+ <table style="width:100%;border-top:1px solid #B0B0B0;"
+  summary="{t}List filter settings{/t}">
   <tr>
    <td>
     <label for="NAME">
     {image path="images/lists/search.png"}&nbsp;Name
-    
     </label>
    </td>
    <td>
     {$NAME}
    </td>
   </tr>
- </table>
- 
- <table summary=""  width="100%"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;">
   <tr>
-   <td width="100%" align="right">
+   <td colspan="2" align="right"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;">
     {$APPLY}
    </td>
   </tr>

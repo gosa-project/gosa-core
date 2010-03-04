@@ -1,4 +1,6 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4
+  summary="{t}"
+  >
  <tr>
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
@@ -21,15 +23,15 @@
     t}Filters{/t}</b></p>
    </div>
    <div class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-    <table summary="" style="width:100%;">
+    <table style="width:100%;">
      {$alphabet}
     </table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%">{image path="{$tree_image}"}&nbsp;{t}Display systems of department{/t}
+    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%">{image path="{$tree_image}"}&nbsp;{t}Display systems of department{/t}
       </td>
       <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
         {html_options options=$deplist selected=$depselect}
     </select></td></tr></table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%">{image path="{$search_image}"}&nbsp;{t}Display systems matching{/t}
+    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%">{image path="{$search_image}"}&nbsp;{t}Display systems matching{/t}
       </td>
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching addresses{/t}' onChange="mainform.submit()"></td></tr></table>
     {$apply}

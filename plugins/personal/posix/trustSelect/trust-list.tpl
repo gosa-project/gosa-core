@@ -1,7 +1,7 @@
 {image path="images/empty.png" action="no_action_posted" value="do_nothing"}
 
-
-<table summary="" style="width:100%;height:100%; vertical-align:top; text-align:left;" cellpadding=2>
+<table style="width:100%;height:100%; vertical-align:top; text-align:left;" cellpadding=2
+  summary="{t}List of systems{/t}">
  <tr>
   <td style="vertical-align:top; width:100%;">
    <div class="contentboxh">
@@ -10,10 +10,12 @@
    
    <div class="contentboxb">
     <div style='background:white;padding:3px;'>
-     <table><tr>
+     <table summary="{t}List navigation{/t}">
+      <tr>
        <td>{$ROOT}&nbsp;</td><td>{$BACK}&nbsp;</td><td>{$HOME}&nbsp;</td><td>{$RELOAD}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{t}Base{/t} {$BASE}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{image path="images/rocket.png"}
        </td><td> {$ACTIONS}</td>
-     </tr></table>
+      </tr>
+     </table>
     </div>
    </div>
    

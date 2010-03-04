@@ -1,9 +1,9 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table style="width:100%;" summary="{t}Posix extension settings{/t}">
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h3>{t}Generic{/t}
-   </h3>
-   <table summary="">
+
+   <h3>{t}Generic{/t}</h3>
+   <table summary="{t}Generic settings{/t}">
     <tr>
      <td><label for="homeDirectory">{t}Home directory{/t}</label>{$must}</td>
      <td>
@@ -48,7 +48,7 @@
    
    {if !$multiple_support}
    
-   <table summary="">
+   <table summary="{t}Account settings{/t}">
     <tr>
      <td>
       {render acl=$force_idsACL}
@@ -123,20 +123,18 @@
 
 <p class="seperator">&nbsp;</p>
 
-<table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table style="width:100%" summary="{t}Account accessibility{/t}" >
  <tr>
   <td style='width:50%;vertical-align:top'>
    {if $sshPublicKey == 1}
-   {render acl=$sshPublicKeyACL}
-   <h3>{t}SSH keys{/t}
-   </h3>
-   <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
-   
-   <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
-   {/render}
+     {render acl=$sshPublicKeyACL}
+     <h3>{t}SSH keys{/t}</h3>
+     <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
+     <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
+     {/render}
    {/if}
-   <h3>{t}Account{/t}
-   </h3>
+
+   <h3>{t}Account{/t}</h3>
    {include file="$pwmode.tpl"}
   </td>
   <td style="border-left:1px solid #A0A0A0">

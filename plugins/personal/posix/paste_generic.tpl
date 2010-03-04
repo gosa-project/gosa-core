@@ -2,7 +2,7 @@
  <tr>
   <td style='vertical-align:top;'>
    <h3>{t}Posix settings{/t}</h3>
-   <table>
+   <table summary="{t}Home directory{/t}">
     <tr>
      <td>
       <label for="homeDirectory">{t}Home directory{/t}</label>
@@ -12,7 +12,7 @@
      </td>
     </tr>
    </table>
-   <table style='width:100%;'>
+   <table summary="{t}Account settings{/t}">
     <tr>
      <td><label for="primaryGroup">{t}Primary group{/t}</label></td>
      <td>
@@ -49,7 +49,9 @@
      </td>
     </tr>
    </table>
-   <table width="50%">
+  </td>
+  <td>
+   <table summary="{t}Group membership{/t}">
     <tr>
      <td style="vertical-align:top;" colspan="4">
       <h3>{image path="plugins/posix/images/members.png"} {t}Group membership{/t}
