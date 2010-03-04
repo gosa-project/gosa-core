@@ -186,7 +186,7 @@ class sortableListing {
   public function render()
   {
     $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
-    $result.= "<table border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
+    $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
     $action_width= 0;
     if (strpos($this->acl, 'w') === false) {
       $edit_image= $this->editable?"<img class='center' src='images/lists/edit-grey.png' alt='"._("Edit")."'>":"";
