@@ -32,7 +32,7 @@
     </tr>
    </table>
 
-	<p class="seperator">&nbsp;</p>
+	<hr>
 	<h3>{t}System trust{/t}</h3>
     {t}Trust mode{/t}&nbsp;
     {render acl=$trustmodeACL}
