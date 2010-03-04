@@ -4,7 +4,6 @@
 
 
   {$TEMPLATES}&nbsp;<LABEL for='TEMPLATES'>{t}Show templates{/t}</LABEL><br>
-  {$FUNCTIONAL}&nbsp;<LABEL for='FUNCTIONAL'>{t}Show functional users{/t}</LABEL><br>
   {$POSIX}&nbsp;<LABEL for='POSIX'>{t}Show POSIX users{/t}</LABEL><br>
   {$MAIL}&nbsp;<LABEL for='MAIL'>{t}Show Mail users{/t}</LABEL><br>
   {$SAMBA}&nbsp;<LABEL for='SAMBA'>{t}Show Samba users{/t}</LABEL><br>
