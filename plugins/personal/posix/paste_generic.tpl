@@ -1,4 +1,4 @@
-<table width='100%'>
+<table width='100%' summary="{t}Posix settings{/t}">
  <tr>
   <td style='vertical-align:top;'>
    <h3>{t}Posix settings{/t}</h3>
