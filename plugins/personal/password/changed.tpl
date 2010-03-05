@@ -5,9 +5,9 @@
 
 <br>
 
-<p class="plugbottom">
+<hr>
+<div class="plugin-actions">
   <button type='submit' name='password_back'>{msgPool type=backButton}</button>
-
-</p>
+</div>
 
 <input type="hidden" name="ignore">
