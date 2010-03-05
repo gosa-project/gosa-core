@@ -55,7 +55,7 @@
 			</p>
 				
 
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 			<div style='width:100%; text-align:right; padding:5px;'>
 				<input type='submit' name='rootOC_dialog_cancel' value='{t}Close{/t}'>
 			</div>
@@ -102,7 +102,7 @@
 			</p>
 				
 
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 			<div style='width:100%; text-align:right; padding:5px;'>
 				<input type='submit' name='outside_winstations_dialog_cancel' value='{t}Close{/t}'>
 			</div>
@@ -156,7 +156,7 @@
                         {/if}
 			</p>
 
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
 				<input type='submit' name='outside_groups_dialog_perform' value='{t}Apply{/t}'>
 				&nbsp;
@@ -207,7 +207,7 @@
 			<input type='submit' name='outside_users_dialog_whats_done' value='{t}Show changes{/t}'>
 			{/if}
 
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
 				<input type='submit' name='outside_users_dialog_perform' value='{t}Apply{/t}'>
 				&nbsp;
@@ -255,7 +255,7 @@
 			{/if}
 
 			<input type='submit' value="{t}Reload{/t}">
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
 				<input type='submit' name='migrate_admin_user' value='{t}Apply{/t}'>	
 				<input type='submit' name='migrate_acls_cancel' value='{t}Cancel{/t}'>
@@ -320,7 +320,7 @@
   -->
 </script>
 
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
 				<input type='submit' name='create_admin_user' value='{t}Apply{/t}'>	
 				<input type='submit' name='create_acls_cancel' value='{t}Cancel{/t}'>
@@ -374,7 +374,7 @@ dn: {$deps_to_migrate.$key.dn}
 			<input type='submit' name='deps_visible_migrate_whatsdone' value='{t}Show changes{/t}'>
 			{/if}
 
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 
 			<div style='width:99%; text-align:right; padding:5px;'>
 				<input type='submit' name='deps_visible_migrate_migrate' value='{t}Apply{/t}'>
@@ -427,7 +427,7 @@ dn: {$users_to_migrate.$key.dn}
 			<input type='submit' name='users_visible_migrate_whatsdone' value='{t}Show changes{/t}'>
 			{/if}
 
-			<p class='seperator'>&nbsp;</p>	
+			<hr>	
 
 			<div style='width:99%; text-align:right; padding-top:5px;'>
 				<input type='submit' name='users_visible_migrate_migrate' value='{t}Apply{/t}'>
@@ -472,7 +472,7 @@ dn: {$users_to_migrate.$key.dn}
 			<input type='submit' name='device_dialog_whats_done' value='{t}Show changes{/t}'>
 		{/if}
 
-		<p class='seperator'>&nbsp;</p>	
+		<hr>	
 
 		<div style='width:99%; text-align:right; padding-top:5px;'>
 			<input type='submit' name='migrate_devices' value='{t}Apply{/t}'>
@@ -515,7 +515,7 @@ dn: {$users_to_migrate.$key.dn}
 			<input type='submit' name='service_dialog_whats_done' value='{t}Show changes{/t}'>
 		{/if}
 
-		<p class='seperator'>&nbsp;</p>	
+		<hr>	
 
 		<div style='width:99%; text-align:right; padding-top:5px;'>
 			<input type='submit' name='migrate_services' value='{t}Apply{/t}'>
@@ -559,7 +559,7 @@ dn: {$users_to_migrate.$key.dn}
 			<input type='submit' name='menu_dialog_whats_done' value='{t}Show changes{/t}'>
 		{/if}
 
-		<p class='seperator'>&nbsp;</p>	
+		<hr>	
 
 		<div style='width:99%; text-align:right; padding-top:5px;'>
 			<input type='submit' name='migrate_menus' value='{t}Apply{/t}'>
