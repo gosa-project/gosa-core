@@ -1,5 +1,4 @@
   <body>
-  <form action='main.php{$plug}' id='mainform' name='mainform' method='post' enctype='multipart/form-data'>
    {$php_errors}
    <div class='title-bar'>
     <ul>
@@ -18,6 +17,7 @@
      </li>
     </ul>
    </div>
+   <form action='main.php{$plug}' id='mainform' name='mainform' method='post' enctype='multipart/form-data'>
    {$menu}
    {$msg_dialogs}
    <div class='plugin-area'>
