@@ -29,7 +29,10 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   // To avoid recursion - restore original error handler.
   restore_error_handler();
 
-  /* Return if error reporting is set to zero */
+  /* Return if error reporting is set to zero 
+   * Also exclude statements prefixed with @ - Comment out the block below to see suppressed errors. 
+   * e.g. @call_function_but_hide_errors()
+   */
   if (error_reporting() == 0){
     set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
     return;
