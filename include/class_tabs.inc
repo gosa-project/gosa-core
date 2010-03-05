@@ -357,7 +357,7 @@ class tabs
         }else{
           if(!empty($tmp['string'])){
             $ret .= $tmp['string'];
-            $ret .= "<p class='seperator'>&nbsp;</p>";
+            $ret .= "<hr>";
           }
         }
       }
