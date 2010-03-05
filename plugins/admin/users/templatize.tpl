@@ -21,20 +21,21 @@
   </tr>
 </table>
 
-<br>
-<p class="plugbottom">
+<hr>
+<div class="plugin-actions">
   <input type=submit name="templatize_continue" value="{msgPool type=applyButton}">
-  &nbsp;
   <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
-</p>
+</div>
 
 {else}
 
-{t}No templates available!{/t}
+  {t}No templates available!{/t}
 
-<p class="plugbottom">
-  <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
-</p>
+  <hr>
+  <div class="plugin-actions">
+    <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
+  </div>
+
 {/if}
 
 
