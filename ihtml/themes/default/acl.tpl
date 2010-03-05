@@ -31,7 +31,7 @@
 		{/if}
 	</h1>
 
-	<p class="seperator">&nbsp;</p>
+	<hr>
 	<div style='padding:3px;'>
 	{t}Additional filter options{/t}&nbsp; 
 		{if !$acl_writeable}
@@ -99,7 +99,7 @@
 	{if $aclType ne 'reset'}
 	{if $aclType ne 'role'}
 	{if $aclType ne 'base'}
-	<p class="seperator">&nbsp;</p>
+	<hr>
 
 	<h1>{t}List of available ACL categories{/t}</h1>
 	{$aclList}
@@ -108,18 +108,18 @@
 	{/if}
 
 	{if $aclType eq 'base'}
-	<p class="seperator">&nbsp;</p>
+	<hr>
 	<h1>{t}ACL for this object{/t}</h1>
 	{$aclSelector}
 	{/if}
 
 	{if $aclType eq 'role'}
-	<p class="seperator">&nbsp;</p>
+	<hr>
 	<h1>{t}Available roles{/t}</h1>
 	{$roleSelector}
 	{/if}
 
-	<p class="seperator">&nbsp;</p>
+	<hr>
 	<div style='text-align:right;margin-top:5px'>
 		{if $acl_writeable}
 		<input type="submit" name="submit_new_acl" value="{t}Apply{/t}">
@@ -135,7 +135,7 @@
 
 	{$aclSelector}
 
-	<p class="seperator">&nbsp;</p>
+	<hr>
 	<div style='text-align:right;margin-top:5px'>
 		<input type="submit" name="submit_edit_acl" value="{t}Apply{/t}">
 		&nbsp;
