@@ -11,9 +11,8 @@
 {t}Before you confirm this action, ensure that everything will be as expected, possibly the best solution is a backup.{/t} 
 </p>
 
-<p class="plugbottom">
+<hr>
+<div class="plugin-actions">
 	<input type='submit' name='dep_move_confirm' value='{msgPool type=saveButton}'>
-  	&nbsp;
 	<input type='submit' name='cancel_save' value='{msgPool type=cancelButton}'>
-</p>
-
+</div>
