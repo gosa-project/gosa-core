@@ -74,36 +74,14 @@ class pluglist
 		$this->info['all']['plDescription']= _("All objects in this category");
 		$this->info['all']['plSelfModify']= FALSE;
 
-    // First load the menu plugins and try to register them in the pluglist
-    //  if this fails for some reason, then remove the plugin from the menu.
-    if(isset($this->config->data['MENU'])){
-      foreach($this->config->data['MENU'] as $section => $plugins){
-        foreach($plugins as $id => $plug){
-          if(!$this->registerPlugin($plug)){ 
-            unset($this->config->data['MENU'][$section][$id]); 
-          }
-        }
-      }
-    }
-    
-    // Now load the path menu and try to register the plugins in the pluglist
-    //  if this fails for some reason, then remove the plugin from the menu.
-    if(isset($this->config->data['PATHMENU'])){
-      foreach($this->config->data['PATHMENU'] as $id => $plugin){
-        if(!$this->registerPlugin($plugin)){
-          unset($this->config->data['PATHMENU'][$id]); 
-        } 
-      }
-    }
-
     if(!session::is_set('maxC')){
       session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
     }
-
-    // Now generate menu - usually they are cached
-    $this->gen_menu();
-    $this->show_iconmenu();
-    $this->genPathMenu();
+//
+//   // Now generate menu - usually they are cached
+//   $this->gen_menu();
+//   $this->show_iconmenu();
+//   $this->genPathMenu();
   }
 
 
@@ -196,6 +174,19 @@ class pluglist
   function gen_menu()
   {
     if ($this->menu == ""){
+
+      // First load the menu plugins and try to register them in the pluglist
+      //  if this fails for some reason, then remove the plugin from the menu.
+      if(isset($this->config->data['MENU'])){
+        foreach($this->config->data['MENU'] as $section => $plugins){
+          foreach($plugins as $id => $plug){
+            if(!$this->registerPlugin($plug)){ 
+              unset($this->config->data['MENU'][$section][$id]); 
+            }
+          }
+        }
+      }
+
       $cfg= $this->config->data['MENU'];
       $menu = "\n      <div class='navigation'>";
       foreach ($cfg as $headline => $plug){
@@ -264,6 +255,7 @@ class pluglist
     $add_hr =FALSE;
     $this->iconmenu = "";
     if ($this->iconmenu == ""){
+
       $cfg= $this->config->data['MENU'];
       foreach ($cfg as $headline => $plug){
         $col= 0;
@@ -309,6 +301,17 @@ class pluglist
   function genPathMenu()
   {
     if(empty($this->pathMenu)){
+
+      // Now load the path menu and try to register the plugins in the pluglist
+      //  if this fails for some reason, then remove the plugin from the menu.
+      if(isset($this->config->data['PATHMENU'])){
+        foreach($this->config->data['PATHMENU'] as $id => $plugin){
+          if(!$this->registerPlugin($plugin)){
+            unset($this->config->data['PATHMENU'][$id]); 
+          } 
+        }
+      }
+
       $this->pathMenu = 
         "\n        <div class='plugin-path'>".
         "\n          <ul class='path-navigation'>".

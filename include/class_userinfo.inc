@@ -359,6 +359,22 @@ class userinfo
       return($ret);
     }
 
+    /* Check for correct category and class values... */
+    if(strpos($object,'/') !== FALSE){
+      list($aclCategory, $aclClass) = split("/", $object);
+    }else{
+      $aclCategory = $object;
+    }
+    if(!isset($this->ocMapping[$aclCategory])){
+      trigger_error("Invalid ACL category '".$aclCategory."'! ({$object})");
+      msg_dialog::display(_("Error"), "Invalid ACL category '".$aclCategory."'! ({$object})", ERROR_DIALOG);
+      return("");
+    }elseif(isset($aclClass) && !in_array($aclClass, $this->ocMapping[$aclCategory])){
+      trigger_error("Invalid ACL class '".$aclClass."'! ({$object})");
+      msg_dialog::display(_("Error"), "Invalid ACL class '".$aclClass."'! ({$object})", ERROR_DIALOG);
+      return("");
+    }
+
     /* Detect the set of ACLs we have to check for this object 
      */
     $adn = $dn;
