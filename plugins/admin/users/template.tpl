@@ -43,12 +43,12 @@
   {/if}
 </table>
 
-<br>
-<p class="plugbottom">
+
+<hr>
+<div class="plugin-actions">
   <input type=submit name="template_continue" value="{t}Continue{/t}">
-  &nbsp;
   <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
-</p>
+</div>
 
 
 
