@@ -10,11 +10,6 @@ body, html {
   min-height:700px;
 }
 
-#mainform {
-  height:100%;
-  width:100%;
-}
-
 .left{
   float:left;
 }
@@ -196,7 +191,6 @@ div.navigation {
   width:150px;
   min-height:600px;
   padding-left:6px;
-  margin-top:8px;
 }
 
 div.plugin-area {
