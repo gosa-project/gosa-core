@@ -130,11 +130,10 @@
      {render acl=$sshPublicKeyACL}
      <h3>{t}SSH keys{/t}</h3>
      <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
-     <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
      {/render}
    {/if}
 
-   <h3>{t}Account{/t}</h3>
+   <hr>
    {include file="$pwmode.tpl"}
   </td>
   <td style="border-left:1px solid #A0A0A0">
