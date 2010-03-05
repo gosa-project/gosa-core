@@ -35,13 +35,13 @@
 
 <br>
 
-<p class="plugbottom">
+<hr>
+<div class="plugin-actions">
   <button type='submit' name='password_finish'>{t}Set password{/t}</button>
-
-  &nbsp;
   <input type=reset id="password_cancel" name="password_cancel" value="{t}Clear fields{/t}">
-  <input type='hidden' id='formSubmit'>
-</p>
+</div>
+
+<input type='hidden' id='formSubmit'>
 
 <input type="hidden" name="ignore">
 
