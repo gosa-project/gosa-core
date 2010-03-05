@@ -141,9 +141,6 @@ class management
       $this->filter->update();
       session::global_set(get_class($this)."_filter", $this->filter);
       session::set('autocomplete', $this->filter);
-      if (!$this->filter->isValid()){
-        msg_dialog::display(_("Filter error"), _("The filter is incomplete!"), ERROR_DIALOG);
-      }
     }
 
     // Handle actions (POSTs and GETs)

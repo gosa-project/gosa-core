@@ -13,6 +13,7 @@
       <td>{$RELOAD}</td>
       <td class="left-border">{t}Base{/t} {$BASE}</td>
       <td class="left-border">{$ACTIONS}</td>
+      <td class="left-border">{$FILTER}</td>
      </tr>
     </table>
    </div>
@@ -20,10 +21,6 @@
   
   {$LIST}
 </div>
-
-<!--<div id="filter">
-  {$FILTER}
-</div>-->
 
 <div class="clear"></div>
 
