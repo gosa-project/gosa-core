@@ -258,7 +258,7 @@ class userinfo
 
   function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
-    return(@$this->get_permissions($dn,$category.'/0',""));
+    return($this->get_permissions($dn,$category.'/0',""));
   }
 
   
