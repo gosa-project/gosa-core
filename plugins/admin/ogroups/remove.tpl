@@ -10,8 +10,8 @@
   {t}So - if you're sure - press 'Delete' to continue or 'Cancel' to abort.{/t}
 </p>
 
-<p class="plugbottom">
+<hr>
+<div class="plugin-actions">
   <input type=submit name="delete_confirmed" value="{msgPool type=delButton}">
-  &nbsp;
   <input type=submit name="delete_cancel" value="{msgPool type=cancelButton}">
-</p>
+</div>
