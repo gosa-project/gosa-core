@@ -28,13 +28,12 @@
 </table>
 
 <input type="hidden" value="1" name="PosixGroupDialogPosted">
-<p class="plugbottom">
+
+<br>
+<div class="plugin-actions">
 <button type='submit' name='add_groups_finish'>{msgPool type=addButton}</button>
-
-&nbsp;
 <button type='submit' name='add_groups_cancel'>{msgPool type=cancelButton}</button>
-
-</p>
+</div>
 
 
 <input type="hidden" name="ignore">
