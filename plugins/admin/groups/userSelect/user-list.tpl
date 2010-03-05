@@ -25,10 +25,10 @@
   </tr>
 </table>
 
-<p class="plugbottom">
+<hr>
+<div class="plugin-actions">
   <input type=submit name="add_users_finish" value="{msgPool type=addButton}">
-  &nbsp;
   <input type=submit name="add_users_cancel" value="{msgPool type=cancelButton}">
-</p>
+</div>
 
 <input type="hidden" name="ignore">
