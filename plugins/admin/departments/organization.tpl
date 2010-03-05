@@ -123,7 +123,7 @@
  </tr>
 </table>
 
-<p class='seperator'>&nbsp;</p>
+<hr>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
