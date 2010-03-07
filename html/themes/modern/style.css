@@ -1004,6 +1004,8 @@ div.treeList {
   z-index:500;
   overflow-y:auto;
   float:left;
+  margin-top:-1px;
+  margin-left:1px;
 }
 
 span.informal {
@@ -1269,6 +1271,7 @@ float:none;
 
 /* End IE5-Mac hack */
 #filtermenu ul.level2 {
+margin-top:-4px;
 position:absolute;                       
 top:0;                                   
 left:0;                                  
