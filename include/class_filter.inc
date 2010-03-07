@@ -218,7 +218,9 @@ class filter {
 
   function render()
   {
-    $content= "Search comes here...";
+    $searchMenu= "MENU^";
+    $content= "<div class='search-filter'>$searchMenu<input type='text' name='search_filter' value='".$this->value."'></div>".
+              "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button>";
 
     // Return meta data
     return ("<input type='hidden' name='FILTER_PID' value='".$this->pid."'>".$content);
@@ -262,7 +264,7 @@ class filter {
       if ($this->value == "") {
         $filter= preg_replace("/\\$/", '*', $filter);
       } else {
-        $filter= preg_replace("/\\$/", normalizeLdap($this->value), $filter);
+        $filter= preg_replace("/\\$/", "*".normalizeLdap($this->value)."*", $filter);
       }
 
       $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
