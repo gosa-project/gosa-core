@@ -399,6 +399,9 @@ class filter {
     $result.= "<ul class='level2'>";
     $result.= "<li><a href='#'>Dummy placeholder</a></li>";
     #$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
+
+    # AUTOCOMPLETER and getTextbox
+
     $result.= "</ul>";
 
     $script= '<script type="text/javascript" language="JavaScript">var menu2; menu2= new Menu("filter-root", "menu2", configMenu)</script>';
