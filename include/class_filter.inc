@@ -218,9 +218,9 @@ class filter {
 
   function render()
   {
-    $searchMenu= "MENU^";
-    $content= "<div class='search-filter'>$searchMenu<input type='text' name='search_filter' value='".$this->value."'></div>".
-              "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button>";
+    $content= "<table class='filter-wrapper'><tr><td>".$this->renderFilterMenu()."</td><td>";
+    $content.= "<div class='search-filter'><input type='text' name='search_filter' value='".$this->value."'></div>".
+              "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button></td></tr></table>";
 
     // Return meta data
     return ("<input type='hidden' name='FILTER_PID' value='".$this->pid."'>".$content);
@@ -386,6 +386,26 @@ class filter {
 
     return $base;
   }
+
+
+
+  function renderFilterMenu()
+  {
+    // Load shortcut
+    $result= "<input type='hidden' name='act' id='filter' value=''><div style='display:none'><input type='submit' name='exec_filter' id='exec_filter' value=''></div>".
+             "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png")._("...")."&nbsp;".image("images/lists/sort-down.png")."</a>";
+
+    // Build ul/li list
+    $result.= "<ul class='level2'>";
+    $result.= "<li><a href='#'>Dummy placeholder</a></li>";
+    #$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
+    $result.= "</ul>";
+
+    $script= '<script type="text/javascript" language="JavaScript">var menu2; menu2= new Menu("filter-root", "menu2", configMenu)</script>';
+
+    return "<div id='filtermenu'>".$result."</li></ul><div>$script";
+  }
+
 }
 
 

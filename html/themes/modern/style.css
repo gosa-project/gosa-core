@@ -211,11 +211,11 @@ div.plugin-area {
   position:relative;
   border:1px solid #CCC;
   border-radius:5px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
   -webkit-border-radius:5px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   -moz-border-radius:5px;
-  -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.1);
 }
 
 .plugin-actions {
@@ -296,12 +296,12 @@ div.menu div {
   border-bottom:1px solid #C2C2C2;
   border-bottom-left-radius:5px;
   border-bottom-right-radius:5px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
   -webkit-border-bottom-left-radius:5px;
   -webkit-border-bottom-right-radius:5px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   -moz-border-radius:5px;
-  -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.1);
 }
 
 div.menu ul {
@@ -395,15 +395,15 @@ button:focus, .button:active {
   border-top-right-radius:5px;
   border-bottom-right-radius:5px;
   border-bottom-left-radius:5px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
   -webkit-border-top-right-radius:5px;
   -webkit-border-bottom-right-radius:5px;
   -webkit-border-bottom-left-radius:5px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   -moz-border-radius-topright:5px;
   -moz-border-radius-bottomright:5px;
   -moz-border-radius-bottomleft:5px;
-  -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.1);
 }
 
 .tabs ul {
@@ -524,9 +524,9 @@ div.datepicker {
   background:#FFF;
   font-size:10px;
   padding:0;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
-  -webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
-  -moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
+  -moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
 }
 
 div.datepicker-calendar table {
@@ -1152,9 +1152,9 @@ left:0;
 visibility:hidden;                       
 border:1px #CCC solid;            
 background:#FFF;                         
-box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
--webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
--moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+-webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
+-moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
 }                                        
 
 #pulldown ul.level2 li,#pulldown ul.level3 li {
@@ -1180,6 +1180,7 @@ background-image:none;
 
 div.search-filter {
   border:1px solid #CCC;
+  border-left:0;
   background-color:white;
   text-align:middle;
   padding:0;
@@ -1198,5 +1199,103 @@ button.search-filter {
   margin:0;
   text-align:middle;
 }
+
+
+/* Filter menu */
+
+table.filter-wrapper {
+  border-collapse:collapse;
+  padding:0;
+  margin:0;
+}
+
+table.filter-wrapper tr, table.filter-wrapper td{
+  padding:0;
+  margin:0;
+}
+
+#filtermenu {
+border:1px solid #CCC;
+border-right:0;
+display:inline-block;
+background-color:#EEE;
+height:23px;    
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+background:-moz-linear-gradient(top, #F8F8F8, #EEE);
+}                             
+
+#filtermenu ul {
+display:block;
+margin:0;     
+padding:0;    
+line-height:1em;
+list-style:none;
+z-index:90;     
+}               
+
+#filtermenu ul li {
+float:left;      
+margin:0 3px 0 0;
+padding:0;       
+font-size:12px;  
+line-height:1 5em;
+list-style-type:none;
+}                    
+
+#filtermenu ul li a {
+float:left;        
+display:block;     
+/*width:auto;        */
+font-weight:normal;
+background:transparent;
+text-decoration:none;  
+margin:0;              
+padding:5px;           
+}                      
+
+#filtermenu ul li a:hover {
+text-decoration:none;    
+}                        
+
+#filtermenu ul li.sep {
+color:#AAA;          
+padding:.8em 0 .5em; 
+}                    
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#filtermenu ul li a {                                    
+float:none;                                            
+}                                                      
+
+/* End IE5-Mac hack */
+#filtermenu ul.level2 {
+position:absolute;                       
+top:0;                                   
+left:0;                                  
+visibility:hidden;                       
+border:1px #CCC solid;            
+background:#FFF;                         
+box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+-webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
+-moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}                                        
+
+#filtermenu ul.level2 li{
+border-bottom:1px solid #fff;                  
+float:none;                                    
+margin:0;                                      
+padding:0;                                     
+width:200px;                                   
+}                                              
+
+#filtermenu ul.level2 li a {
+padding:5px 9px 5px 5px;                           
+}                                                  
+
+#filtermenu ul.level2 li a:hover {
+font-weight:normal;                                            
+background-color:#418DD4;                                      
+background-image:none;                                         
+}                       
 
 
