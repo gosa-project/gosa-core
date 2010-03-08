@@ -528,6 +528,7 @@ function ldap_login_user_htaccess ($username)
   /* Bail out if we have login restrictions set, for security reasons
      the message is the same than failed user/pw */
   if (!$ui->loginAllowed()){
+    new log("security","login","",array(),"Login restriction for user \"$username\", login not permitted");
     return (NULL);
   }
 
@@ -624,6 +625,7 @@ function ldap_login_user ($username, $password)
   /* Bail out if we have login restrictions set, for security reasons
      the message is the same than failed user/pw */
   if (!$ui->loginAllowed()){
+    new log("security","login","",array(),"Login restriction for user \"$username\", login not permitted");
     return (NULL);
   }
 
