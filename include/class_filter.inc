@@ -37,6 +37,7 @@ class filter {
   var $alphabet= null;
   var $converter= array();
   var $pid;
+  var $headpage;
 
 
   function filter($filename)
@@ -419,7 +420,9 @@ class filter {
         }
       }
 
-      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
+      // Now call filter method and merge resulting entries. 
+      $result= array_merge($result, call_user_func(array($backend, 'query'),
+            $this, $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
     }
     
     return ($result);
