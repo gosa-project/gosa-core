@@ -115,9 +115,15 @@ class filterLDAP {
           if(isset($obj['category'])){
 
             $o = $obj['category']."/".$obj['class'];
+    
+            echo $o." -> ".$dn."<br>";
+
+      
             if(preg_match("/r/",$ui->get_permissions($dn,$o))){
               $result[]= $attrs;
             }
+          }else{
+            echo "<b>{$dn}</b><br>";
           }
         }
       }
