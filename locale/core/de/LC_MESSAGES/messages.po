@@ -3063,7 +3063,7 @@ msgid ""
 "added:"
 msgstr ""
 "Die folgenden Systeme sind bereits für die Konfiguration über eine "
-"Objektgruppe vorgeseheb und können nicht hinzugefügt werden:"
+"Objektgruppe vorgesehen und können nicht hinzugefügt werden:"
 
 #: plugins/admin/ogroups/class_ogroup.inc:819
 msgid "You can combine two different object types at maximum, only!"

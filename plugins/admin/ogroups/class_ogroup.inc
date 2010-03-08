@@ -85,37 +85,6 @@ class ogroup extends plugin
     }
     $this->is_account= TRUE;
 
-    /* Get global filter config */
-    if (!session::is_set("ogfilter")){
-      $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
-      $ogfilter= array( "dselect"       => $base,
-          "regex"           => "*");
-      session::set("ogfilter", $ogfilter);
-    }
-    $ogfilter= session::get('ogfilter');
-
-    /* Adjust flags */
-    foreach( array(   "U" => "accounts",
-          "G" => "groups",
-          "A" => "applications",
-          "D" => "departments",
-          "S" => "servers",
-          "W" => "workstations",
-          "O" => "winstations",
-          "T" => "terminals",
-          "F" => "phones",
-          "_" => "subtrees",
-          "P" => "printers") as $key => $val){
-
-      if (preg_match("/$key/", $this->gosaGroupObjects)){
-        $ogfilter[$val]= "checked";
-      } else {
-        $ogfilter[$val]= "";
-      }
-    }
-    session::set("ogfilter", $ogfilter);
-  
     /* Set base */
     if ($this->dn == "new"){
       $ui = get_userinfo();
