@@ -141,12 +141,17 @@ class pluglist
        */	
       if(preg_match("/:self$/",$acl_to_check)){
         $acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
-        if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
-          $this->silly_cache[$aclname]= TRUE;
-          return(TRUE);
+        if(strpos($acl_to_check,"/")){
+          if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
+            $this->silly_cache[$aclname]= TRUE;
+            return(TRUE);
+          }
+        }else{
+          if($this->ui->get_category_permissions($this->ui->dn,$acl_to_check,"") != ""){
+            $this->silly_cache[$aclname]= TRUE;
+            return(TRUE);
+          }
         }
-        $this->silly_cache[$aclname]= FALSE;
-        return(FALSE);
       }else{
 
         // No self acls. Check if we have any acls for the given ACL type 
