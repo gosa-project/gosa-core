@@ -118,7 +118,7 @@ class filterLDAP {
               $result[]= $attrs;
             }
           }else{
-            trigger_error("Invalid objectType given, please check listing.xml '{$dn}'!");
+            //trigger_error("Invalid objectType given, please check listing.xml '{$dn}'!");
           }
         }
       }

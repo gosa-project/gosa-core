@@ -19,6 +19,23 @@
       <image>plugins/groups/images/groups.png</image>
     </objectType>
 
+    <objectType>
+      <label>Group submenu menu</label>
+      <objectClass>gotoSubmenuEntry</objectClass>
+      <category>groups</category>
+      <class>group</class>
+      <image>plugins/groups/images/groups.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Group menu entry</label>
+      <objectClass>gotoMenuEntry</objectClass>
+      <category>groups</category>
+      <class>group</class>
+      <image>plugins/groups/images/groups.png</image>
+    </objectType>
+
+
   </definition>
 
   <table>
