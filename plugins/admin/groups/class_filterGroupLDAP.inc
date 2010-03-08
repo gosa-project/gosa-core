@@ -45,7 +45,7 @@ class filterGroupLDAP {
   static function get_list($parent,$base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH)
   {
     $filter= "(|(|(objectClass=gotoMenuEntry)(objectClass=gotoSubmenuEntry))$filter)";
-    return filterLDAP::get_list($base, $filter, $attributes, $category, $objectStorage, $flags);
+    return filterLDAP::get_list($parent,$base, $filter, $attributes, $category, $objectStorage, $flags);
   }
 
 
