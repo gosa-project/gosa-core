@@ -2,17 +2,17 @@
 
 class filterLDAP {
 
-  static function query($base, $scope, $filter, $attributes, $category, $objectStorage= array(""))
+  static function query($parent,$base, $scope, $filter, $attributes, $category, $objectStorage= array(""))
   {
     $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
     $flag= ($scope == "sub")?GL_SUBSEARCH:0;
-    $result= filterLDAP::get_list($base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT);
+    $result= filterLDAP::get_list($parent,$base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT);
     return $result;
   }
 
 
-  static function get_list($base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH)
+  static function get_list($parent,$base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH)
   {
     $ui= session::global_get('ui');
     $config= session::global_get('config');
@@ -110,12 +110,13 @@ class filterLDAP {
           $result[]= $attrs;
         }else{
 
-          /* Sort in every value that fits the permissions */
-          foreach ($category as $o){
-            if((preg_match("/\//",$o) && preg_match("/r/",$ui->get_permissions($dn,$o))) ||
-                (!preg_match("/\//",$o) && preg_match("/r/",$ui->get_category_permissions($dn, $o)))){
+          // Check entry permission
+          $obj = $parent->headpage->getObjectType($parent->headpage->objectTypes, $attrs['objectClass']);
+          if(isset($obj['category'])){
+
+            $o = $obj['category']."/".$obj['class'];
+            if(preg_match("/r/",$ui->get_permissions($dn,$o))){
               $result[]= $attrs;
-              break;
             }
           }
         }
