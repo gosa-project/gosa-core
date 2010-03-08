@@ -1302,3 +1302,9 @@ background-image:none;
 }                       
 
 
+/* Misc */
+
+.copynotice, .copynotice a {
+  color:#777;
+  text-align:right;
+}
