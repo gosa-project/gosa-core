@@ -2,7 +2,7 @@
 
 class filterGroupLDAP {
 
-  static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "")
+  static function query($parent,$base, $scope, $filter, $attributes, $category, $objectStorage= "")
   {
     $result= array();
     $menu= array();
@@ -10,7 +10,7 @@ class filterGroupLDAP {
     $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
     $flag= ($scope == "sub")?GL_SUBSEARCH:0;
-    $tmp= filterGroupLDAP::get_list($base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT);
+    $tmp= filterGroupLDAP::get_list($parent,$base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT);
 
     // Sort out menu entries, but save info
     $index= 0;
@@ -42,7 +42,7 @@ class filterGroupLDAP {
   }
 
 
-  static function get_list($base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH)
+  static function get_list($parent,$base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH)
   {
     $filter= "(|(|(objectClass=gotoMenuEntry)(objectClass=gotoSubmenuEntry))$filter)";
     return filterLDAP::get_list($base, $filter, $attributes, $category, $objectStorage, $flags);
