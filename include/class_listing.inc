@@ -124,6 +124,7 @@ class listing {
   function setFilter($filter)
   {
     $this->filter= &$filter;
+    $filter->headpage = &$this;
     if ($this->departmentBrowser){
       $this->departments= $this->getDepartments();
     }
