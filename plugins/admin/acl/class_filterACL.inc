@@ -2,17 +2,17 @@
 
 class filterACL {
 
-  static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "")
+  static function query($parent, $base, $scope, $filter, $attributes, $category, $objectStorage= "")
   {
     $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
     $flag= ($scope == "sub")?GL_SUBSEARCH:0;
     $result=array();
-    $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "cat"));
+    $result= array_merge($result,filterACL::get_list($parent, $base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "cat"));
     if($scope == "sub"){
-      $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "search"));
+      $result= array_merge($result,filterACL::get_list($parent, $base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "search"));
     }
-    $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT, ""));
+    $result= array_merge($result,filterACL::get_list($parent, $base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT, ""));
     return(filterACL::unifyResult($result));
   }
 
@@ -27,7 +27,7 @@ class filterACL {
     return(array_values($res)); 
   }
 
-  static function get_list($base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH, $method= "")
+  static function get_list($parent, $base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH, $method= "")
   {
     $ui= session::global_get('ui');
     $config= session::global_get('config');
