@@ -149,11 +149,11 @@ class filter {
         $characters= $element['autocomplete']['characters'];
       }
       $result.= "<div id='autocomplete$tag' class='autocomplete'></div>".
-                "<script type='text/javascript'>".
-                "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });".
-                "</script>";
+        "<script type='text/javascript'>".
+        "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });".
+        "</script>";
 
-       $this->autocompleters[$tag]= $element['autocomplete'];
+      $this->autocompleters[$tag]= $element['autocomplete'];
     }
     return $result;
   }
@@ -220,7 +220,7 @@ class filter {
   {
     $content= "<table class='filter-wrapper'><tr><td>".$this->renderFilterMenu()."</td><td>";
     $content.= "<div class='search-filter'><input type='text' name='search_filter' value='".$this->value."'></div>".
-              "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button></td></tr></table>";
+      "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button></td></tr></table>";
 
     // Return meta data
     return ("<input type='hidden' name='FILTER_PID' value='".$this->pid."'>".$content);
@@ -269,7 +269,7 @@ class filter {
 
       $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
     }
-    
+
     return ($result);
   }
 
@@ -314,10 +314,10 @@ class filter {
     $filter= preg_replace("/\\$/", normalizeLdap($value), $filter);
     if (isset($config['base']) && isset($config['scope']) && isset($config['category'])) {
       $result= call_user_func(array($backend, 'query'), $config['base'], $config['scope'], $filter, $attributes,
-                           $config["category"], $config["objectStorage"]);
+          $config["category"], $config["objectStorage"]);
     } else {
       $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-                           $this->category, $this->objectStorage);
+          $this->category, $this->objectStorage);
     }
 
     foreach ($result as $entry) {
@@ -393,14 +393,14 @@ class filter {
   {
     // Load shortcut
     $result= "<input type='hidden' name='act' id='filter' value=''><div style='display:none'><input type='submit' name='exec_filter' id='exec_filter' value=''></div>".
-             "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png")._("...")."&nbsp;".image("images/lists/sort-down.png")."</a>";
+      "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png")._("...")."&nbsp;".image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
     $result.= "<ul class='level2'>";
     $result.= "<li><a href='#'>Dummy placeholder</a></li>";
-    #$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
+#$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
 
-    # AUTOCOMPLETER and getTextbox
+# AUTOCOMPLETER and getTextbox
 
     $result.= "</ul>";
 
@@ -412,4 +412,5 @@ class filter {
 }
 
 
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
