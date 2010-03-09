@@ -177,11 +177,21 @@ class management
 
       $this->snapHandler->setSnapshotBases($bases);
     }
-    
-    // Display list
-    return($this->renderList());
-  }
   
+    // Dummy filter editor 
+    $dummy = "<button type='submit' name='editFilter'>!!</button>";
+    $this->registerAction("editFilter", "editFilter");
+ 
+    // Display list
+    return($dummy.$this->renderList());
+  }
+ 
+  function editFilter()
+  {
+    $headpage = $this->getHeadpage();
+    $this->dialogObject = new filterEditor($this->config,$headpage->categories);
+  }
+ 
   function renderList()
   {
     $this->headpage->update();
@@ -365,6 +375,9 @@ class management
     if(isset($_POST['edit_cancel'])) $action['action'] = "cancel";    
     if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";   
     if(isset($_POST['delete_cancel'])) $action['action'] = "cancelDelete";   
+    if(isset($_POST['editFilter'])) $action['action'] = "editFilter";   
+    if(isset($_POST['saveFilter'])) $action['action'] = "save";   
+    if(isset($_POST['cancelFilter'])) $action['action'] = "cancel";   
 
     // Detect Snapshot actions
     if(isset($_POST['CreateSnapshot'])) $action['action'] = "saveSnapshot";   
