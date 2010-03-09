@@ -123,6 +123,7 @@ class listing {
 
   function setFilter($filter)
   {
+    $filter->setCategories($this->categories);
     $this->filter= &$filter;
     if ($this->departmentBrowser){
       $this->departments= $this->getDepartments();
