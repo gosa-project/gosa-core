@@ -369,6 +369,7 @@ class sortableListing {
     }
 
     // Delete requested?
+    $this->action = "";
     if (strpos($this->acl, 'd') !== false){
       foreach ($_POST as $key => $value) {
         if (preg_match('/^del_'.$this->id.'_([0-9]+)_x.*$/', $key, $matches)) {
