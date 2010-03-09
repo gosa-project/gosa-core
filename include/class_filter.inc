@@ -60,6 +60,11 @@ class filter {
     }
 
     $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE)); 
+
+    // Instantiate the filter editor.
+    if(class_available("filterEditor")){
+      $this->filterEditor = new filterEditor($config, $this);
+    }
   }
 
 
