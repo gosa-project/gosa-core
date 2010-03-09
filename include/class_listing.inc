@@ -123,7 +123,6 @@ class listing {
 
   function setFilter($filter)
   {
-    $filter->setCategories($this->categories);
     $this->filter= &$filter;
     if ($this->departmentBrowser){
       $this->departments= $this->getDepartments();
@@ -270,10 +269,6 @@ class listing {
     if (($message= check_sizelimit()) != ""){
       return($message);
     }
-
-    // Display filter editor
-    if(0) 
-    return($this->filter->filterEditor->execute());
 
     // Some browsers don't have the ability do do scrollable table bodies, filter them
     // here.
