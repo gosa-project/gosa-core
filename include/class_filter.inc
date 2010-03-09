@@ -25,9 +25,6 @@ class filter {
   var $xmlData;
   var $searches= array();
   var $search;
-
-  #FIXME - Seems to be obsolete. Categories are defined in the listing.xml <objectType> 
-  #         and not in the filter.xml anymore.
   var $category= "";
   var $objectStorage= array();
   var $base= "";
@@ -39,16 +36,6 @@ class filter {
   var $converter= null;
   var $pid;
 
-  /* An editor which allows to create user defined ldap-filter.
-   * Due to the fact that it requires additional ldap schemata 
-   *  (objectClasses=gosaProperties) this is currently optional.
-   */
-  var $filterEditor = NULL;
-
-  /* The categories this filter is made for (e.g. ['users'] or. ['server','workstation']). 
-   * Since this is set we are able to create user defined filters.
-   */
-  var $categories   = array();
 
   function filter($filename)
   {
@@ -60,11 +47,6 @@ class filter {
     }
 
     $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE)); 
-
-    // Instantiate the filter editor.
-    if(class_available("filterEditor")){
-      $this->filterEditor = new filterEditor($config, $this);
-    }
   }
 
 
@@ -285,7 +267,7 @@ class filter {
         $filter= preg_replace("/\\$/", "*".normalizeLdap($this->value)."*", $filter);
       }
 
-      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->categories, $this->objectStorage));
+      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
     }
 
     return ($result);
@@ -335,7 +317,7 @@ class filter {
           $config["category"], $config["objectStorage"]);
     } else {
       $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-          $this->categories, $this->objectStorage);
+          $this->category, $this->objectStorage);
     }
 
     foreach ($result as $entry) {
@@ -416,7 +398,6 @@ class filter {
     // Build ul/li list
     $result.= "<ul class='level2'>";
     $result.= "<li><a href='#'>Dummy placeholder</a></li>";
-    $result.= "<li><a href='#'>Dummy placeholder</a></li>";
 #$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
 
 # AUTOCOMPLETER and getTextbox
@@ -428,15 +409,6 @@ class filter {
     return "<div id='filtermenu'>".$result."</li></ul><div>$script";
   }
 
-
-  
-  function setCategories($categories)
-  {
-    if(!is_array($categories) && !empty($categories)){
-      $categories = array($categories)  ;
-    }
-    $this->categories = $categories;
-  }
 }
 
 

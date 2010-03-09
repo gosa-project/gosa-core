@@ -271,6 +271,10 @@ class listing {
       return($message);
     }
 
+    // Display filter editor
+    if(0) 
+    return($this->filter->filterEditor->execute());
+
     // Some browsers don't have the ability do do scrollable table bodies, filter them
     // here.
     $switch= false;
