@@ -16,6 +16,16 @@
         </tr>
         <tr>
           <td>
+            <label for='parent'>{t}parent{/t}</label>
+          </td>
+          <td>
+            <select name='parent'>
+              {html_options values=$fixedFilters output=$fixedFilters selected=$parent}
+            </select>
+          </td>   
+        </tr>
+        <tr>
+          <td>
             <label for='description'>{t}Description{/t}</label>
           </td>
           <td>

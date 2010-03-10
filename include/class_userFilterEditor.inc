@@ -8,6 +8,7 @@ class userFilterEditor extends plugin
   // The values
   public $name = "";
   public $description = "";
+  public $parent = "";
   public $selectedCategories = array();
   public $share = FALSE;
   public $enabled = TRUE;
@@ -16,17 +17,20 @@ class userFilterEditor extends plugin
   // The list of all categories mangaged by the current filter object.
   // Used in the grop-down box.
   public $availableCategories = array();
+  public $fixedFilters = array();
   public $orig_name = "";
 
 
   /*! \brief    Instantiate the filter editing dialog. 
    *            Parses the filter info into editable data.
    */
-  function __construct($entry, $categories)
+  function __construct($entry, $categories, $fixedFilters)
   {
     $this->availableCategories = $categories;
+    $this->fixedFilters = $fixedFilters;
     if($entry){
       $this->entry = $entry;
+      $this->parent = $entry['parent'];
       $this->name = $entry['name'];
       $this->description = $entry['description'];
       $this->filter = $entry['filter'];
@@ -64,6 +68,7 @@ class userFilterEditor extends plugin
   {
     plugin::execute();
     $smarty = get_smarty();
+    $smarty->assign('parent', $this->parent);
     $smarty->assign('name', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
     $smarty->assign('filter', htmlentities($this->filter,ENT_COMPAT,'UTF-8'));
     $smarty->assign('share', $this->share);
@@ -71,6 +76,7 @@ class userFilterEditor extends plugin
     $smarty->assign('description', htmlentities($this->description,ENT_COMPAT,'UTF-8'));
     $smarty->assign('selectedCategories', $this->selectedCategories);
     $smarty->assign('availableCategories', $this->availableCategories);
+    $smarty->assign('fixedFilters', $this->fixedFilters);
     return($smarty->fetch(get_template_path('userFilterEditor.tpl', FALSE)));
   }
 
@@ -82,7 +88,7 @@ class userFilterEditor extends plugin
     if(isset($_POST['userFilterEditor'])){
 
       // Get posted strings
-      foreach(array('name','description') as $attr){
+      foreach(array('name','description', 'parent') as $attr){
         if(isset($_POST[$attr])){
           $this->$attr = get_post($attr);
         }
@@ -157,6 +163,7 @@ class userFilterEditor extends plugin
   function save()
   {
     $ret= array();
+    $ret['parent'] = $this->parent;
     $ret['name'] = $this->name;
     $ret['description'] = $this->description;
     $ret['categories'] = $this->selectedCategories;

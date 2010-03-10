@@ -67,7 +67,7 @@ class userFilter extends plugin
    */
   static function explodeFilterString($filter)
   {
-    list($categories, $name, $description, $filter, $flags) = split(";", $filter);
+    list($parent,$categories, $name, $description, $filter, $flags) = split(";", $filter);
 
     // Ensure that we no empty category in our category list.
     if(empty($categories)){
@@ -85,6 +85,7 @@ class userFilter extends plugin
 
     // build up filter entry.
     $tmp = array(
+        'parent' => $parent, 
         'name' => $name, 
         'categories' => $categories,
         'description' => base64_decode($description),
@@ -105,6 +106,7 @@ class userFilter extends plugin
     foreach($this->filters as $name => $filter){
       $data[$name] = array('data' =>
           array(
+            $filter['parent'],
             $filter['name'],
             $filter['description'],
             implode(", ",$filter['categories']),
@@ -240,7 +242,8 @@ class userFilter extends plugin
     // Build up new list of filters 
     $attrs = array();
     foreach($this->filters as $filter){
-      $tmp = implode(',', $filter['categories']).";";
+      $tmp = $filter['parent'].";";
+      $tmp.= implode(',', $filter['categories']).";";
       $tmp.= $filter['name'].";";
       $tmp.= base64_encode($filter['description']).";";
       $tmp.= base64_encode($filter['filter']).";";
