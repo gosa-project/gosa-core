@@ -2683,7 +2683,7 @@ msgstr "Beschreibung"
 
 #: ihtml/themes/modern/userFilterEditor.tpl:27 include/class_userFilter.inc:60
 msgid "Parent filter"
-msgstr "Parent Filter"
+msgstr "Stamm-Filter"
 
 #: ihtml/themes/modern/userFilterEditor.tpl:40
 #: plugins/personal/generic/generic.tpl:610
