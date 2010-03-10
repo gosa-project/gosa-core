@@ -29,12 +29,30 @@ class filterEditor extends plugin
     if(isset($this->attrs['gosaUserDefinedFilter'])){
       for($i=0; $i< $this->attrs['gosaUserDefinedFilter']['count']; $i++){
         list($categories, $name, $description, $filter, $flags) = split(";", $this->attrs['gosaUserDefinedFilter'][$i]);
+   
+        // Ensure that we no empty category in our category list.
+        if(empty($categories)){
+          $categories = array();
+        }else{
+          $categories = split(',', $categories);
+        }
+
+        // Ensure that we no empty entry in out flags list.
+        if(empty($flags)){
+          $flags = array();
+        }else{
+          $flags = split(',', $flags);
+        }
+
+        // build up filter entry.
         $tmp = array(
             'name' => $name, 
-            'categories' => split(',', $categories),
+            'categories' => $categories,
             'description' => base64_decode($description),
             'filter' => base64_decode($filter),
-            'flags' => split(',',$flags));
+            'flags' => $flags);
+
+
         $this->filters[$name] = $tmp; 
       }
     }
