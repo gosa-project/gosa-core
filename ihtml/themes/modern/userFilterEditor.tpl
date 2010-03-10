@@ -16,20 +16,20 @@
         </tr>
         <tr>
           <td>
-            <label for='parent'>{t}parent{/t}</label>
+            <label for='description'>{t}Description{/t}</label>
+          </td>
+          <td>
+            <input type='text' name='description' id='description' value='{$description}'>
+          </td>   
+        </tr>
+        <tr>
+          <td>
+            <label for='parent'>{t}Extension for the base filter{/t}</label>
           </td>
           <td>
             <select name='parent'>
               {html_options values=$fixedFilters output=$fixedFilters selected=$parent}
             </select>
-          </td>   
-        </tr>
-        <tr>
-          <td>
-            <label for='description'>{t}Description{/t}</label>
-          </td>
-          <td>
-            <input type='text' name='description' id='description' value='{$description}'>
           </td>   
         </tr>
       </table>  
@@ -46,7 +46,7 @@
 
     </td>
     <td style='vertical-align: top;'>
-      <label for='usedCategory'>{t}Affects the following categories{/t}</label><br>
+      <label for='usedCategory'>{t}This filter affects the following categories{/t}</label><br>
       <select id='usedCategory' name='usedCategory[]' size='4' multiple style='width:100%;'>
         {html_options options=$selectedCategories}
       </select>
