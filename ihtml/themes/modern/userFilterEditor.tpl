@@ -8,7 +8,7 @@
       <table summary='{t}Filter properties{/t}'>
         <tr>
           <td>
-            <label for='name'>{t}Name{/t}</label>
+            <label for='name'>{t}Name{/t}</label>{$must}
           </td>
           <td>
             <input type='text' name='name' id='name' value='{$name}'>
@@ -16,7 +16,7 @@
         </tr>
         <tr>
           <td>
-            <label for='description'>{t}Description{/t}</label>
+            <label for='description'>{t}Description{/t}</label>{$must}
           </td>
           <td>
             <input type='text' name='description' id='description' value='{$description}'>
