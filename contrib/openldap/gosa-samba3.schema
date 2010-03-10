@@ -266,6 +266,10 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.46 NAME 'gosaLoginRestriction'
         DESC 'Multivalue attribute to carry a number of allowed ips/subnets'
         SUP name)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.12.47 NAME 'gosaUserDefinedFilter'
+        DESC 'A user defined filter'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15)
+
 attributetype ( 1.3.6.1.4.1.10098.1.1.6.2 NAME 'academicTitle'
         DESC 'Field to represent the academic title'
         EQUALITY caseIgnoreMatch
@@ -408,3 +412,6 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.44 NAME 'gotoMenuEntry'
         MUST ( cn )
         MAY ( gosaApplicationParameter $ gosaApplicationPriority ) )
 
+objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.21 NAME 'gosaProperties' SUP top AUXILIARY
+        DESC 'Class for GOsa Properties, stores for example user filters (v2.6.8)'
+        MAY ( gosaUserDefinedFilter ) ) 
