@@ -80,7 +80,7 @@ class filter {
         }
 
         /* Store search */
-        $this->searches[$search['label']]= $search;
+        $this->searches[$search['tag']]= $search;
 
       }
     } else {
@@ -114,12 +114,34 @@ class filter {
 
   function setSearch($method)
   {
+    $patch= null;
+    if (is_array($this->category)) {
+      $categories= $this->category;
+    } else {
+      $categories= array($this->category);
+    }
+    $userfilters= userFilter::getFilter($categories);
+
+    // User filter selected?
+    if (isset($userfilters[$method])){
+      $usermethod= $method;
+      $patch= $userfilters[$method]['filter'];
+      $method= $userfilters[$method]['parent'];
+    }
+
     // Move information
     if (isset($this->searches[$method])) {
-      $this->query= $this->searches[$method]['query'];
+      $this->query= array_merge($this->searches[$method]['query']);
       if (!isset($this->query[0])) {
         $this->query= array($this->query);
       }
+ 
+      // Patch first filter?
+      if ($patch) {
+        $this->query[0]['filter']= $patch;
+        $method= $usermethod;
+      }
+
       $this->search= $method;
     } else {
       die ("Invalid search module!");
@@ -127,19 +149,12 @@ class filter {
   }
 
 
-  function getTextfield($element)
+  function getTextfield($tag, $value= "", $element= null)
   {
-    $tag= $element['tag'];
     $size= 30;
-    if (isset($element['size'])){
-      $size= $element['size'];
-    }
     $maxlength= 30;
-    if (isset($element['maxlength'])){
-      $maxlength= $element['maxlength'];
-    }
-    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='".$this->elementValues[$tag]."'>";
-    if (isset($element['autocomplete'])) {
+    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='".$value."'>";
+    if ($element && isset($element['autocomplete'])) {
       $frequency= "0.5";
       $characters= "1";
       if (isset($element['autocomplete']['frequency'])) {
@@ -153,7 +168,7 @@ class filter {
         "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });".
         "</script>";
 
-      $this->autocompleters[$tag]= $element['autocomplete'];
+      $this->autocompleters[$tag]= $element;
     }
     return $result;
   }
@@ -219,7 +234,7 @@ class filter {
   function render()
   {
     $content= "<table class='filter-wrapper'><tr><td>".$this->renderFilterMenu()."</td><td>";
-    $content.= "<div class='search-filter'><input type='text' name='search_filter' value='".$this->value."'></div>".
+    $content.= "<div class='search-filter'>".$this->getTextfield('search_filter', $this->value, $this->searches[$this->search])."</div>".
       "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button></td></tr></table>";
 
     // Return meta data
@@ -284,8 +299,24 @@ class filter {
       }
 
       // Save scope if needed
-      if ($this->scopeMode == "auto") {
-        $this->scope= isset($_POST['SCOPE'])?"sub":"one";
+      if ($this->scopeMode == "auto" && isset($_POST['act']) && $_POST['act'] == "toggle-subtree") {
+        $this->scope= ($this->scope == "one")?"sub":"one";
+      }
+
+      // Switch filter?
+      if (is_array($this->category)) {
+        $categories= $this->category;
+      } else {
+        $categories= array($this->category);
+      }
+
+      if (isset($_POST['act'])) {
+        foreach (array_merge($this->searches, userFilter::getFilter($categories)) as $tag => $cfg) {
+          if ($_POST['act'] == "filter-$tag") {
+            $this->setSearch($tag);
+            break;
+          }
+        }
       }
     }
 
@@ -297,27 +328,29 @@ class filter {
     global $class_mapping;
     $res= array();
 
-    // Is backend available?
-    $backend= "filter".$config['backend'];
-    if (!isset($class_mapping["$backend"])) {
-      die("Invalid backend specified in search config.");
-    }
-
-    // Load filter and attributes
-    $filter= $config['filter'];
-    $attributes= $config['attribute'];
+    // Load result attributes
+    $attributes= $config['autocomplete']['attribute'];
     if (!is_array($attributes)) {
       $attributes= array($attributes);
     }
 
-    // Make filter
-    $filter= preg_replace("/\\$/", normalizeLdap($value), $filter);
-    if (isset($config['base']) && isset($config['scope']) && isset($config['category'])) {
-      $result= call_user_func(array($backend, 'query'), $config['base'], $config['scope'], $filter, $attributes,
-          $config["category"], $config["objectStorage"]);
-    } else {
-      $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-          $this->category, $this->objectStorage);
+    // Do the query
+    $result= array();
+
+    // Is backend available?
+    $queries= $config['query'];
+    if (!isset($queries[0])){
+      $queries= array($queries);
+    }
+    foreach ($queries as $query) {
+      $backend= "filter".$query['backend'];
+      if (!isset($class_mapping["$backend"])) {
+        die("Invalid backend specified in search config.");
+      }
+      $filter= preg_replace("/\\$/", "*".normalizeLdap($value)."*", $query['filter']);
+
+      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
+          $this->category, $this->objectStorage));
     }
 
     foreach ($result as $entry) {
@@ -347,7 +380,7 @@ class filter {
     $max= 25;
 
     if(isset($this->searches[$this->search]['autocomplete'])){
-      $result= $this->getCompletitionList($this->searches[$this->search]['autocomplete'], $_POST['search_filter']);
+      $result= $this->getCompletitionList($this->searches[$this->search], $_POST['search_filter']);
       $result= array_unique($result);
       asort($result);
 
@@ -393,22 +426,46 @@ class filter {
   {
     // Load shortcut
     $result= "<input type='hidden' name='act' id='filter' value=''><div style='display:none'><input type='submit' name='exec_filter' id='exec_filter' value=''></div>".
-      "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png")._("...")."&nbsp;".image("images/lists/sort-down.png")."</a>";
+      "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png").image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
     $separator= " style='border-top:1px solid #AAA' ";
     $result.= "<ul class='level2'>";
-    $result.= "<li><a href='#'>Dummy placeholder</a></li>";
+
+    // Build in filters
+    foreach ($this->searches as $tag => $config) {
+      if ($tag == $this->search) {
+        $result.= "<li><a href='#'>".image("images/checked.png")."&nbsp;"._($config['label'])."</a></li>";
+      } else {
+        $result.= "<li><a href='#' onClick='document.getElementById(\"filter\").value= \"filter-$tag\";mainform.submit();'>".image("images/empty.png")."&nbsp;"._($config['label'])."</a></li>";
+      }
+    }
+
+    // User defined filters
+    $first= true;
+    if (is_array($this->category)) {
+      $categories= $this->category;
+    } else {
+      $categories= array($this->category);
+    }
+    foreach (userFilter::getFilter($categories) as $tag => $config) {
+      if ($tag == $this->search) {
+        $result.= "<li".($first?$separator:"")."><a href='#'>".image("images/checked.png")."&nbsp;"._($config['description'])."</a></li>";
+      } else {
+        $result.= "<li".($first?$separator:"")."><a href='#' onClick='document.getElementById(\"filter\").value= \"filter-$tag\";mainform.submit();'>".image("images/empty.png")."&nbsp;"._($config['description'])."</a></li>";
+      }
+
+      $first= false;
+    }
+
+    // Render scope if set to auto
+    if ($this->scopeMode == "auto") {
+      $result.= "<li$separator><a href='#' onClick='document.getElementById(\"filter\").value= \"toggle-subtree\";mainform.submit();'>".($this->scope=="one"?image("images/empty.png"):image("images/checked.png"))."&nbsp;"._("Search in subtrees")."</a></li>";
+    }
+
+
+    // Edit filter menu
     $result.= "<li$separator><a href='#' onClick='document.getElementById(\"filter\").value= \"config-filter\";mainform.submit();'>".image("images/configure.png")."&nbsp;"._("Edit filters")."...</a></li>";
-
-#############################
-print_a(userFilter::getFilter($category=array()));
-print_a($this->searches);
-#############################
-
-#$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
-
-# AUTOCOMPLETER and getTextbox
 
     $result.= "</ul>";
 
