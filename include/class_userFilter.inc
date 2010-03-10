@@ -57,7 +57,8 @@ class userFilter extends plugin
     $this->filterWidget->setEditable(true);
     $this->filterWidget->setWidth("100%");
     $this->filterWidget->setHeight("270px");
-    $this->filterWidget->setColspecs(array('100px', '200px', '100px', '70px','150px'));
+    $this->filterWidget->setHeader(array(_("Base"),_("Name"),_("Description"),_("Category"),_("Options"),""));
+    $this->filterWidget->setColspecs(array('80px', '100px', '200px', '120px','150px'));
     $this->filterWidget->setAcl($ui->get_permissions($ui->dn,'users/user','gosaUserDefinedFilter'));
     $this->filterWidget->setListData($this->filters, $this->convertFilterList());
   }
