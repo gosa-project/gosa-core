@@ -119,6 +119,8 @@ class management
     $this->registerAction("saveSnapshot","saveSnapshot");
     $this->registerAction("restoreSnapshot","restoreSnapshot");
     $this->registerAction("cancelSnapshot","closeDialogs");
+
+    $this->registerAction("config-filter","editFilter");
   }
 
   /*! \brief  Execute this plugin
@@ -178,16 +180,10 @@ class management
       $this->snapHandler->setSnapshotBases($bases);
     }
   
-    // Add a dummy filter editing button.
-    if(userFilter::userFilteringAvailable()){
-      $dummy = "<button type='submit' name='editFilter'>!!</button>";
-      $this->registerAction("editFilter", "editFilter");
-
-      print_a(userFilter::getFilter());
-    }
+    print_a(userFilter::getFilter());
  
     // Display list
-    return($dummy.$this->renderList());
+    return($this->renderList());
   }
  
   function editFilter()
@@ -379,7 +375,6 @@ class management
     if(isset($_POST['edit_cancel'])) $action['action'] = "cancel";    
     if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";   
     if(isset($_POST['delete_cancel'])) $action['action'] = "cancelDelete";   
-    if(isset($_POST['editFilter'])) $action['action'] = "editFilter";   
     if(isset($_POST['saveFilter'])) $action['action'] = "save";   
     if(isset($_POST['cancelFilter'])) $action['action'] = "cancel";   
 
