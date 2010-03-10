@@ -861,6 +861,7 @@ div.mainlist-nav td div.img{
 
 div.mainlist-nav td{
   padding:3px 5px;
+  vertical-align:middle;
 }
 
 div.mainlist-nav td.left-border{
