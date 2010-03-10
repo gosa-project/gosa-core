@@ -35,10 +35,6 @@ class userFilter extends plugin
 
     // Keep list of currently managed categories.
     $this->availableCategories = array_unique($categories);
-    $this->availableCategories[] = 'systems';
-    $this->availableCategories[] = 'phones';
-    $this->availableCategories[] = 'printer';
-    $this->availableCategories[] = 'component';
 
     // Load list of filters
     if(isset($this->attrs['gosaUserDefinedFilter'])){
