@@ -144,6 +144,11 @@ class userFilterEditor extends plugin
       $msgs[] = msgPool::invalid(_("Name"), $this->name,"/[a-z0-9\-_ ]/i");
     }  
 
+    // Description is a must value.
+    if(empty($this->description)){
+      $msgs[] = msgPool::required(_("Description"));
+    }
+
     // Count the number of opening and closing brackets - exclude escaped ones.
     $f = preg_replace('/\\\\[\(\)]/',"",$this->filter);
     $o = substr_count($f, '(');
