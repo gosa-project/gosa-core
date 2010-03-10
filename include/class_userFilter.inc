@@ -8,6 +8,21 @@ class userFilter extends plugin
   public $objectClass = array('gosaProperties');
   public $attributes = array('gosaUserDefinedFilter');
   public $gosaUserDefinedFilter = array();
+
+
+  /*! \brief    Returns true if we are able to read and write userFilters 
+   *            (schema has to be present, gosaProperties)
+   */
+  static function userFilteringAvailable()
+  {
+    if(!session::is_set('userFilter::userFilteringAvailable')){
+      global $config;
+      $ldap = $config->get_ldap_link();
+      $ocs = $ldap->get_objectclasses();
+      session::set('userFilter::userFilteringAvailable', isset($ocs['gosaProperties']));
+    }
+    return(session::get('userFilter::userFilteringAvailable'));
+  }
   
  
   /*! \brief  Initiates the filter editing dialog.

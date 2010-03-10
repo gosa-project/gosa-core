@@ -178,9 +178,11 @@ class management
       $this->snapHandler->setSnapshotBases($bases);
     }
   
-    // Dummy filter editor 
-    $dummy = "<button type='submit' name='editFilter'>!!</button>";
-    $this->registerAction("editFilter", "editFilter");
+    // Add a dummy filter editing button.
+    if(userFilter::userFilteringAvailable()){
+      $dummy = "<button type='submit' name='editFilter'>!!</button>";
+      $this->registerAction("editFilter", "editFilter");
+    }
  
     // Display list
     return($dummy.$this->renderList());
