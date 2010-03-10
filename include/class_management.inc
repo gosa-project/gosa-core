@@ -180,8 +180,6 @@ class management
       $this->snapHandler->setSnapshotBases($bases);
     }
   
-    print_a(userFilter::getFilter());
- 
     // Display list
     return($this->renderList());
   }
