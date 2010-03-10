@@ -186,8 +186,7 @@ class management
  
   function editFilter()
   {
-    $headpage = $this->getHeadpage();
-    $this->dialogObject = new userFilter($this->config,$headpage->categories);
+    $this->dialogObject = new userFilter($this->config,$this->getHeadpage());
   }
  
   function renderList()

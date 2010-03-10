@@ -121,6 +121,12 @@ class listing {
   }
 
 
+  function getFilter()
+  { 
+    return($this->filter);
+  }  
+
+
   function setFilter($filter)
   {
     $this->filter= &$filter;
