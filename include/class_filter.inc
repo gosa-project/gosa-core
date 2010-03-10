@@ -396,8 +396,10 @@ class filter {
       "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png")._("...")."&nbsp;".image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
+    $separator= " style='border-top:1px solid #AAA' ";
     $result.= "<ul class='level2'>";
     $result.= "<li><a href='#'>Dummy placeholder</a></li>";
+    $result.= "<li$separator><a href='#' onClick='document.getElementById(\"filter\").value= \"config-filter\";mainform.submit();'>".image("images/configure.png")."&nbsp;"._("Configure filter")."</a></li>";
 #$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
 
 # AUTOCOMPLETER and getTextbox
