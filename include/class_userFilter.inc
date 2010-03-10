@@ -5,7 +5,7 @@ class userFilter extends plugin
   protected $fitlers = array();
   protected $availableCategories = array();
   
-  public $objectClass = array('gosaProperties');
+  public $objectclasses = array('gosaProperties');
   public $attributes = array('gosaUserDefinedFilter');
   public $gosaUserDefinedFilter = array();
 
