@@ -182,6 +182,8 @@ class management
     if(userFilter::userFilteringAvailable()){
       $dummy = "<button type='submit' name='editFilter'>!!</button>";
       $this->registerAction("editFilter", "editFilter");
+
+      print_a(userFilter::getFilter());
     }
  
     // Display list

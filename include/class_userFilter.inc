@@ -203,7 +203,12 @@ class userFilter extends plugin
       for($i=0; $i < $attrs['gosaUserDefinedFilter']['count']; $i++){
         $tmp = userFilter::explodeFilterString($attrs['gosaUserDefinedFilter'][$i]);
         if(!isset($tmp['name'])) continue;
-           
+          
+        // Remove line breaks from the filter, which may were added for better reading. 
+        $c = preg_split('/\n/',$tmp['filter']);
+        foreach($c as $key => $str) $c[$key] = trim($str);
+        $tmp['filter'] = implode($c);
+ 
         // The filter is visible if it is shared or if is one of our own creations.
         //  ... and enabled.
         $visible = in_array('enable', $tmp['flags']) && 

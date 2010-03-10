@@ -127,6 +127,14 @@ class userFilterEditor extends plugin
       $msgs[] = msgPool::invalid(_("Name"), $this->name,"/[a-z0-9\-_ ]/i");
     }  
 
+    // Count the number of opening and closing brackets - exclude escaped ones.
+    $f = preg_replace('/\\\\[\(\)]/',"",$this->filter);
+    $o = substr_count($f, '(');
+    $c = substr_count($f, ')');
+    if($o != $c){
+      $msgs[] = sprintf(_("Please check your filter, you have '%s' opening and '%s' closing brackets!"), $o, $c);
+    }
+
     return($msgs);
   }
 
