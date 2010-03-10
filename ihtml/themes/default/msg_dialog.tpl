@@ -118,7 +118,7 @@
 						<br>
 					</td>
 					{if $s_Trace != "" && $i_TraceCnt != 0}
-					<td style='width:20px; vertical-align:top; cursor:pointer;'>
+					<td style='width:20px;cursor:pointer;'>
 						<div onClick="$('trace_{$i_ID}').toggle();"><u>Trace</u></div>
 					</td>
 					{/if}

@@ -553,6 +553,10 @@ div.datepicker table.header {
   text-align:center;
 }
 
+td {
+  vertical-align:top;
+}
+
 td.prev,td.prev_year,td.next,td.next_year {
   width:8%;
   cursor:pointer;

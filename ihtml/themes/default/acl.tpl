@@ -43,7 +43,7 @@
 
 	<table style="width:100%">
 	 <tr>
-	  <td style="width:48%; vertical-align:top;">
+	  <td style="width:48%">
 	   {t}Use members from{/t}
 	   <select name="target" onChange="document.mainform.submit()">
 			{html_options options=$targets selected=$target}
@@ -71,14 +71,14 @@
 	   </select>
 		{/if}
 	  </td>
-	  <td style="vertical-align:center; text-align:center">
+	  <td style="text-align:center">
 		{if $acl_writeable}
 	   <input type="submit" value="&gt;" name="add">
 	   <br><br>
 	   <input type="submit" value="&lt;" name="del">
 		{/if}
 	  </td>
-	  <td style="width:48%; vertical-align:top;">
+	  <td style="width:48%">
 	   {t}Members{/t}<br>
 		{if !$acl_writeable}
 	   <select style="width:100%;height:180px;" disabled name="dummy_r[]" size="20" multiple title="{t}List message recipients{/t}">

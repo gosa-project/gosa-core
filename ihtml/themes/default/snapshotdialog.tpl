@@ -74,7 +74,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="vertical-align:top;" colspan="2">
+		<td colspan="2">
 			<br>
 			{t}Reason for generating this snapshot{/t}<br> 
 			<textarea name="CurrentDescription" style="width:100%;height:160px;" rows=10 cols=100>{$CurrentDescription}</textarea>

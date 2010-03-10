@@ -4,7 +4,7 @@
 
 <table summary="{t}Filter editor{/t}" width="100%">
   <tr>
-    <td style='vertical-align: top; width:40%;'>
+    <td class="right-border" style='width:40%;'>
       <table summary='{t}Filter properties{/t}'>
         <tr>
           <td>
@@ -45,7 +45,7 @@
        {t}Enabled{/t}
 
     </td>
-    <td style='vertical-align: top;'>
+    <td>
       <label for='usedCategory'>{t}Categories where the filter is visible{/t}</label><br>
       <select id='usedCategory' name='usedCategory[]' size='4' multiple style='width:100%;'>
         {html_options options=$selectedCategories}

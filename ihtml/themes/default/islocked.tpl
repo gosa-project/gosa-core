@@ -1,5 +1,5 @@
 <div style="font-size:20px;">
-  <img alt="" src="images/encrypted.png" style="vertical-align:top;">&nbsp;{t}Locking conflict detected{/t}
+  <img alt="" src="images/encrypted.png">&nbsp;{t}Locking conflict detected{/t}
 </div>
 
 <p>
