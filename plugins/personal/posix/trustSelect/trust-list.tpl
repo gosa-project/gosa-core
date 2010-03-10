@@ -1,9 +1,9 @@
 {image path="images/empty.png" action="no_action_posted" value="do_nothing"}
 
-<table style="width:100%;height:100%; vertical-align:top; text-align:left;" cellpadding=2
+<table style="width:100%;height:100%" cellpadding=2
   summary="{t}List of systems{/t}">
  <tr>
-  <td style="vertical-align:top; width:100%;">
+  <td style="width:100%;">
    <div class="contentboxh">
     <p class="contentboxh">&nbsp;{$HEADLINE}&nbsp;{$SIZELIMIT}</p>
    </div>
@@ -23,7 +23,7 @@
    </div>
    {$LIST}
   </td>
-  <td style='vertical-align:top;min-width:250px'>
+  <td style='min-width:250px'>
    {$FILTER}
   </td>
  </tr>

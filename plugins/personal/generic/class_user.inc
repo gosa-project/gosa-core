@@ -568,7 +568,7 @@ class user extends plugin
 
           $str = "<table \"\" border=0>
                     <tr>
-                      <td style='vertical-align:top'>CN</td>
+                      <td>CN</td>
                       <td>".preg_replace("/ /", "&nbsp;", $certificate->getname())."</td>
                     </tr>
                   </table><br>".

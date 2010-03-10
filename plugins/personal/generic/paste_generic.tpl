@@ -2,7 +2,7 @@
 
 <table width="100%" summary="{t}Paste user{/t}">
  <tr>
- <td style="vertical-align:top; border-right:1px solid #AAA; width:50%">
+ <td class="right-border" style="width:50%">
    <table width="100%" summary="{t}Personal information{/t}">
  	<tr>
  	  <td><label for="sn">{t}Last name{/t}</label></td>
@@ -17,7 +17,7 @@
  	  <td><input type='text' id="uid" name="uid" size=25 maxlength=60 value="{$uid}"></td>
  	</tr>
  	<tr>
- 		<td style='vertical-align:top;'>
+ 		<td>
  			{t}Password{/t}
  		</td>
  		<td>
@@ -27,7 +27,7 @@
  	</tr>
    </table>
  </td>
- <td style="vertical-align:top ">
+ <td>
   <table summary="{t}The users picture{/t}">
    <tr>
     <td style="vertical-align: middle; width:147px; height:200px; background-color:gray;">

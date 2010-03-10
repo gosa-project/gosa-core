@@ -5,7 +5,7 @@
 
 <table summary="{t}Personal information{/t}">
  <tr>
-  <td style="vertical-align:top">
+  <td>
 
    <!-- The users picture settings container -->
    <table summary="{t}The users picture{/t}">
@@ -21,7 +21,7 @@
     <tr>
      <td>
       {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
-      <button style='vertical-align:top;' type="submit" name="edit_picture">{t}Change picture{/t}...</button>
+      <button type="submit" name="edit_picture">{t}Change picture{/t}...</button>
       {/render}
      </td>
     </tr>
@@ -29,7 +29,7 @@
   <!-- /The users picture settings container -->
 
   </td> 
-  <td style="vertical-align:top;">
+  <td>
 
    {if $is_template ne "true"}
 
@@ -183,10 +183,10 @@
    &nbsp;
   </td>
 
-  <td style="vertical-align:top;">
+  <td>
    <table style="width:100%" summary="{t}Postal address{/t}"> 
     <tr>
-     <td style="vertical-align:top;"><label for="homePostalAddress">{t}Address{/t}</label></td>
+     <td><label for="homePostalAddress">{t}Address{/t}</label></td>
      <td>
       {render acl=$homePostalAddressACL checkbox=$multiple_support checked=$use_homePostalAddress}
         <textarea cols='200' id="homePostalAddress" name="homePostalAddress" rows="3" style="width:100%">{$homePostalAddress}</textarea>
@@ -242,7 +242,7 @@
      </td>
     </tr>
     <tr>
-     <td colspan="2" style='vertical-align:top'><label for="res">{t}Restrict login to{/t}</label>
+     <td colspan="2"><label for="res">{t}Restrict login to{/t}</label>
       
       {if !$multiple_support}
       {render acl=$gosaLoginRestrictionACL}
@@ -296,7 +296,7 @@
 
   {if $governmentmode ne "true"}
   <!-- Company, ... -->
-  <td style="vertical-align:top;">
+  <td>
    <table summary="{t}Organizational information{/t} - {t}part{/t} 1">
     <tr>
      <td><label for="o">{t}Organization{/t}</label></td>
@@ -384,7 +384,7 @@
   </td>
   
   <!-- Phone, ... -->
-  <td style="vertical-align:top;">
+  <td>
    <table summary="{t}Organizational information{/t} - {t}part{/t} 2">
     <tr>
      <td><label for="roomNumber">{t}Room No.{/t}</label></td>
@@ -436,7 +436,7 @@
   </td>
   
   <!-- Location, ... -->
-  <td style="vertical-align:top;">
+  <td>
    <table summary="{t}Organizational information{/t} - {t}part{/t} 3">
     <tr>
      <td><label for="l">{t}Location{/t}</label></td>
@@ -455,7 +455,7 @@
      </td>
     </tr>
     <tr>
-     <td style="vertical-align:top;"><label for="postalAddress">{t}Address{/t}</label></td>
+     <td><label for="postalAddress">{t}Address{/t}</label></td>
      <td>
       {render acl=$postalAddressACL checkbox=$multiple_support checked=$use_postalAddress}
         <textarea cols="200" id="postalAddress" name="postalAddress" rows=3 style="width:100%">{$postalAddress}</textarea>
@@ -468,7 +468,7 @@
   {else} 
   
   <!-- Beschreibung, ... -->
-  <td style="vertical-align:top;border-right:1px solid #b0b0b0">
+  <td class="right-border">
    <table summary="{t}Organizational information{/t} - {t}part{/t} 1">
     <tr>
      <td><label for="vocation">{t}Vocation{/t}</label></td>
@@ -517,7 +517,7 @@
   </td>
   
   <!-- Phone, ... -->
-  <td style="vertical-align:top;border-right:1px solid #b0b0b0">
+  <td class='right-border'>
    <table summary="{t}Organizational information{/t} - {t}part{/t} 2">
     <tr>
      <td><label for="gouvernmentOrganizationalPersonLocality">{t}Person locality{/t}</label></td>
@@ -566,7 +566,7 @@
   </td>
   
   <!-- Location, ... -->
-  <td style="vertical-align:top;">
+  <td>
    <table summary="{t}Organizational information{/t} - {t}part{/t} 3">
     <tr>
      <td><label for="roomNumber">{t}Room No.{/t}</label></td>

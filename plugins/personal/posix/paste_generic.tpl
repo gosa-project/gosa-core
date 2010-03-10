@@ -1,6 +1,6 @@
 <table width='100%' summary="{t}Posix settings{/t}">
  <tr>
-  <td style='vertical-align:top;'>
+  <td>
    <h3>{t}Posix settings{/t}</h3>
    <table summary="{t}Home directory{/t}">
     <tr>
@@ -53,13 +53,13 @@
   <td>
    <table summary="{t}Group membership{/t}">
     <tr>
-     <td style="vertical-align:top;" colspan="4">
+     <td colspan="4">
       <h3>{t}Group membership{/t}
       </h3>
      </td>
     </tr>
     <tr>
-     <td style="vertical-align:top;" colspan="4">
+     <td colspan="4">
       
       {if $groups eq "too_many_for_nfs"}
       <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>

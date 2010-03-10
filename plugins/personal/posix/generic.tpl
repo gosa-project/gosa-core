@@ -1,6 +1,6 @@
 <table style="width:100%;" summary="{t}POSIX settings{/t}">
  <tr>
-  <td style="width:50%; vertical-align:top;">
+  <td style="width:50%">
 
    <h3>{t}Generic{/t}</h3>
    <table summary="{t}Generic settings{/t}">
@@ -86,7 +86,7 @@
   <td style="border-left:1px solid #A0A0A0">
    &nbsp;
   </td>
-  <td style="vertical-align:top;">
+  <td>
    <h3>{t}Group membership{/t}
    </h3>
    {if $groups eq "too_many_for_nfs"}
@@ -125,7 +125,7 @@
 
 <table style="width:100%" summary="{t}Account permissions{/t}" >
  <tr>
-  <td style='width:50%;vertical-align:top'>
+  <td style='width:50%'>
    {if $sshPublicKey == 1}
      {render acl=$sshPublicKeyACL}
      <h3>{t}SSH keys{/t}</h3>
@@ -139,7 +139,7 @@
   <td style="border-left:1px solid #A0A0A0">
    &nbsp;
   </td>
-  <td style="vertical-align:top;">
+  <td>
    <h3>{t}System trust{/t}
    </h3>
    {if !$multiple_support}
