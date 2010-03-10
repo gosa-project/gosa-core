@@ -106,6 +106,26 @@ class filterEditEntry extends plugin
     }
   }
 
+  
+  /*! \brief    Validate user input 
+   *  @return   Array   An Array containing potential error messages
+   */
+  function check()
+  {
+    $msgs = plugin::check();
+  
+    // Check if the name is given
+    if(empty($this->name)){
+      $msgs[] = msgPool::required(_("Name"));
+    }elseif(preg_match("/[^a-z0-9\-_ ]/i", $this->name)){
+      
+      // Check for a valid name, no special chars here - in particular no ; 
+      $msgs[] = msgPool::invalid(_("Name"), $this->name,"/[a-z0-9\-_ ]/i");
+    }  
+
+    return($msgs);
+  }
+
 
   /*! \brief    Transforms the entered values into a filter object (array) which is useable
    *             for the filterEditor overview dialog.

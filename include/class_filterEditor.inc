@@ -87,18 +87,28 @@ class filterEditor extends plugin
       $this->dialog->save_object();
       $msgs = $this->dialog->check();
       if(count($msgs)){
-        msg_dialog::display_checks($msgs);
+        msg_dialog::displayChecks($msgs);
       }else{
         $orig_name = $this->dialog->getOriginalName();
         $new_name = $this->dialog->getCurrentName();
 
-        // Remove old entry
-        if($orig_name != "") unset($this->filters[$orig_name]);
+        // The object was renamed and
+        if($orig_name != $new_name && isset($this->filters[$new_name])){
+          $msgs = array(msgPool::duplicated(_("Name")));
+          msg_dialog::displayChecks($msgs);
+        }else{
 
-        $this->filters[$new_name] = $this->dialog->save();
-        $this->dialog = NULL;
-        $this->filterWidget->setListData($this->filters, $this->convertFilterList());
-        $this->filterWidget->update();
+          // Remove old entry if filter was renamed
+          if($orig_name != "" && isset($this->filters[$orig_name])){
+            unset($this->filters[$orig_name]);
+          }
+          
+          // Now append the new filter object.
+          $this->filters[$new_name] = $this->dialog->save();
+          $this->dialog = NULL;
+          $this->filterWidget->setListData($this->filters, $this->convertFilterList());
+          $this->filterWidget->update();
+        }
       }
     }
 
