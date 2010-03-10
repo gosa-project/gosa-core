@@ -64,11 +64,11 @@ class userFilterEditor extends plugin
   {
     plugin::execute();
     $smarty = get_smarty();
-    $smarty->assign('name', $this->name);
-    $smarty->assign('filter', $this->filter);
+    $smarty->assign('name', htmlentities($this->name));
+    $smarty->assign('filter', htmlentities($this->filter));
     $smarty->assign('share', $this->share);
     $smarty->assign('enable', $this->enabled);
-    $smarty->assign('description', $this->description);
+    $smarty->assign('description', htmlentities($this->description));
     $smarty->assign('selectedCategories', $this->selectedCategories);
     $smarty->assign('availableCategories', $this->availableCategories);
     return($smarty->fetch(get_template_path('userFilterEditor.tpl', FALSE)));
@@ -82,10 +82,21 @@ class userFilterEditor extends plugin
     if(isset($_POST['userFilterEditor'])){
 
       // Get posted strings
-      foreach(array('name','description','filter') as $attr){
+      foreach(array('name','description') as $attr){
         if(isset($_POST[$attr])){
           $this->$attr = get_post($attr);
         }
+      }
+
+      // Filter needs special handling, it may contain charactes like < and >
+      //  wich are stipped out by get_post() && validate()
+      if(isset($_POST['filter'])){
+        $f = $_POST['filter'];
+        if(get_magic_quotes_gpc()){
+          $f = stripcslashes($f);
+        }
+        $f = utf8_decode($f);
+        $this->filter = $f;
       }
 
       // Get posted flags 
