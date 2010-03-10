@@ -206,6 +206,7 @@ class userFilter extends plugin
           
         // Remove line breaks from the filter, which may were added for better reading. 
         $c = preg_split('/\n/',$tmp['filter']);
+
         foreach($c as $key => $str) $c[$key] = trim($str);
         $tmp['filter'] = implode($c);
  
@@ -213,7 +214,10 @@ class userFilter extends plugin
         //  ... and enabled.
         $visible = in_array('enable', $tmp['flags']) && 
           ($attrs['dn'] == $ui->dn || in_array('share', $tmp['flags']));
-          
+         
+        // Convert filter encoding
+        $tmp['filter'] = utf8_encode($tmp['filter']);
+ 
         // Add filter if it matches the category list
         if($visible && (count($category) == 0 || array_intersect($category, $tmp['categories']))){ 
           $filter[$tmp['name']] = $tmp;
