@@ -9,10 +9,11 @@ class filterEditor extends plugin
   public $attributes = array('gosaUserDefinedFilter');
   public $gosaUserDefinedFilter = array();
   
-  
+ 
+  /*! \brief  Initiates the filter editing dialog.
+   */ 
   function __construct($config, $categories)
   {
-
     // Initialize this plugin with the users dn to gather user defined filters.
     $ui = get_userinfo();
     plugin::plugin($config, $ui->dn);
@@ -38,16 +39,22 @@ class filterEditor extends plugin
       }
     }
 
+    // Create the filter list
     $this->filterWidget= new sortableListing();
     $this->filterWidget->setDeleteable(true);
     $this->filterWidget->setEditable(true);
     $this->filterWidget->setWidth("100%");
-    $this->filterWidget->setHeight("70px");
+    $this->filterWidget->setHeight("270px");
     $this->filterWidget->setColspecs(array('100px', '200px', '100px', '70px','150px'));
     $this->filterWidget->setAcl($ui->get_permissions($ui->dn,'users/user','gosaUserDefinedFilter'));
     $this->filterWidget->setListData($this->filters, $this->convertFilterList());
   }
 
+
+  /*! \brief    Converts the list of filters ($this->filters) into data which is useable
+   *             for the sortableList object ($this->filterWidget).
+   *  @return   Array   An array containg data useable for sortableLists ($this->filterWidget)
+   */
   function convertFilterList()
   { 
     $data = array();
@@ -62,16 +69,20 @@ class filterEditor extends plugin
     return($data); 
   }
 
+
+  /*! \brief    Display the user-filter overview as HTML content.
+   *  @return   string    HTML-content showing the user-filter editing dialog.
+   */
   function execute()
   {
     plugin::execute();
 
-    // Close edit dialog
+    // Cancel filter modifications (edit dialog)
     if(isset($_POST['cancelFilterSettings'])){
       $this->dialog = NULL;
     }
 
-    // Close edit dialog
+    // Save modified filter entries (edit dialog)
     if(isset($_POST['saveFilterSettings']) && $this->dialog instanceOf filterEditEntry){
       $this->dialog->save_object();
       $msgs = $this->dialog->check();
@@ -101,7 +112,7 @@ class filterEditor extends plugin
       }
     }
 
-    // Act add requests
+    // Act on new requests
     if(isset($_POST['addFilter'])){
       $this->dialog=new filterEditEntry(array(), $this->availableCategories);
     }
@@ -122,24 +133,17 @@ class filterEditor extends plugin
       return($this->dialog->execute());
     }
 
-
     $smarty = get_smarty();
     $smarty->assign("list", $this->filterWidget->render());
     return($smarty->fetch(get_template_path('filterEditor.tpl', FALSE)));
   }
 
-  function enabled()
-  {
-    return(count($this->_parent->categories) != 0);
-  }
 
-  function save_object()
-  {
-  
-  }
-
+  /*! \brief    Write user-filter modifications back to the ldap.  
+   */
   function save()
   {
+    // Build up new list of filters 
     $attrs = array();
     foreach($this->filters as $filter){
       $tmp = implode(',', $filter['categories']).";";
@@ -150,6 +154,7 @@ class filterEditor extends plugin
       $attrs[] = $tmp;
     }
     $this->gosaUserDefinedFilter = $attrs;
+
     plugin::save();
 
     $ldap = $this->config->get_ldap_link();
@@ -162,6 +167,11 @@ class filterEditor extends plugin
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MODIFY, get_class()));
     }
   }  
+
+  
+  /*! \brief    Do not save any posted values here.
+   */
+  function save_object(){}
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
