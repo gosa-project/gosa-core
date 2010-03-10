@@ -189,14 +189,14 @@ class sortableListing {
     $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
     $action_width= 0;
     if (strpos($this->acl, 'w') === false) {
-      $edit_image= $this->editable?"<img class='center' src='images/lists/edit-grey.png' alt='"._("Edit")."'>":"";
+      $edit_image= $this->editable?image("images/lists/edit-grey.png"):"";
     } else {
-      $edit_image= $this->editable?"<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='%ID' id='%ID' title='"._("Edit this entry")."'>":"";
+      $edit_image= $this->editable?image('images/lists/edit.png', "%ID", _("Edit this entry")):"";
     }
     if (strpos($this->acl, 'd') === false) {
-      $delete_image= $this->deleteable?"<img class='center' src='images/lists/trash-grey.png' alt='"._("Delete")."'>":"";
+      $delete_image= $this->deleteable?image('images/lists/trash-grey.png'):"";
     } else {
-      $delete_image= $this->deleteable?"<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='%ID' title='"._("Delete this entry")."'>":"";
+      $delete_image= $this->deleteable?image('images/lists/trash.png', "%ID", _("Delete this entry")):"";
     }
 
     // Do we need colspecs?
@@ -226,7 +226,7 @@ class sortableListing {
         $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
         $sorter= "";
         if ($i == $this->sortColumn){
-          $sorter= "&nbsp;<img border='0' title='".($this->sortDirection[$i]?_("Up"):_("Down"))."' src='images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png' align='top'>";
+          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Up"):_("Down"));
         }
 
         if ($this->reorderable) {
@@ -372,7 +372,7 @@ class sortableListing {
     $this->action = "";
     if (strpos($this->acl, 'd') !== false){
       foreach ($_POST as $key => $value) {
-        if (preg_match('/^del_'.$this->id.'_([0-9]+)_x.*$/', $key, $matches)) {
+        if (preg_match('/^del_'.$this->id.'([0-9]+)$/', $key, $matches)) {
           $this->active_index= $this->mapping[$matches[1]];
 
           // Ignore request if mode requests it
@@ -395,7 +395,7 @@ class sortableListing {
     // Edit requested?
     if (strpos($this->acl, 'w') !== false){
       foreach ($_POST as $key => $value) {
-        if (preg_match('/^edit_'.$this->id.'_([0-9]+)_x.*$/', $key, $matches)) {
+        if (preg_match('/^edit_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
           $this->active_index= $this->mapping[$matches[1]];
 
           // Ignore request if mode requests it

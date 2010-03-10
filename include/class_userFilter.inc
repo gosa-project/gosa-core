@@ -124,6 +124,9 @@ class userFilter extends plugin
   {
     plugin::execute();
 
+    // Let the filter widget update itself
+    $this->filterWidget->update();
+
     // Cancel filter modifications (edit dialog)
     if(isset($_POST['cancelFilterSettings'])){
       $this->dialog = NULL;
