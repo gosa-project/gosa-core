@@ -28,32 +28,10 @@ class userFilter extends plugin
     // Load list of filters
     if(isset($this->attrs['gosaUserDefinedFilter'])){
       for($i=0; $i< $this->attrs['gosaUserDefinedFilter']['count']; $i++){
-        list($categories, $name, $description, $filter, $flags) = split(";", $this->attrs['gosaUserDefinedFilter'][$i]);
-   
-        // Ensure that we no empty category in our category list.
-        if(empty($categories)){
-          $categories = array();
-        }else{
-          $categories = split(',', $categories);
+        $tmp = userFilter::explodeFilterString($this->attrs['gosaUserDefinedFilter'][$i]);
+        if(isset($tmp['name'])){
+          $this->filters[$tmp['name']]= $tmp; 
         }
-
-        // Ensure that we no empty entry in out flags list.
-        if(empty($flags)){
-          $flags = array();
-        }else{
-          $flags = split(',', $flags);
-        }
-
-        // build up filter entry.
-        $tmp = array(
-            'name' => $name, 
-            'categories' => $categories,
-            'description' => base64_decode($description),
-            'filter' => base64_decode($filter),
-            'flags' => $flags);
-
-
-        $this->filters[$name] = $tmp; 
       }
     }
 
@@ -68,6 +46,38 @@ class userFilter extends plugin
     $this->filterWidget->setListData($this->filters, $this->convertFilterList());
   }
 
+  
+  /*! \brief    Parses a filter string into an array.
+   */
+  static function explodeFilterString($filter)
+  {
+    list($categories, $name, $description, $filter, $flags) = split(";", $filter);
+
+    // Ensure that we no empty category in our category list.
+    if(empty($categories)){
+      $categories = array();
+    }else{
+      $categories = split(',', $categories);
+    }
+
+    // Ensure that we no empty entry in out flags list.
+    if(empty($flags)){
+      $flags = array();
+    }else{
+      $flags = split(',', $flags);
+    }
+
+    // build up filter entry.
+    $tmp = array(
+        'name' => $name, 
+        'categories' => $categories,
+        'description' => base64_decode($description),
+        'filter' => base64_decode($filter),
+        'flags' => $flags);
+
+    return($tmp);
+  }
+  
 
   /*! \brief    Converts the list of filters ($this->filters) into data which is useable
    *             for the sortableList object ($this->filterWidget).
@@ -164,6 +174,37 @@ class userFilter extends plugin
     $smarty = get_smarty();
     $smarty->assign("list", $this->filterWidget->render());
     return($smarty->fetch(get_template_path('userFilter.tpl', FALSE)));
+  }
+
+
+  /*! \brief    Returns user defined filter for a given list of categories,
+   *             if no categories were specified all enabled filters will be returned.
+   */
+  static function getFilter($category=array())
+  {
+    global $config;
+    $ldap=$config->get_ldap_link();
+    $ui = get_userinfo();
+    $ldap->cd($config->current['BASE']);
+    $ldap->search("(&(objectClass=gosaProperties)(gosaUserDefinedFilter=*))",array('gosaUserDefinedFilter'));
+    $filter = array();
+    while($attrs = $ldap->fetch()){
+      for($i=0; $i < $attrs['gosaUserDefinedFilter']['count']; $i++){
+        $tmp = userFilter::explodeFilterString($attrs['gosaUserDefinedFilter'][$i]);
+        if(!isset($tmp['name'])) continue;
+           
+        // The filter is visible if it is shared or if is one of our own creations.
+        //  ... and enabled.
+        $visible = in_array('enable', $tmp['flags']) && 
+          ($attrs['dn'] == $ui->dn || in_array('share', $tmp['flags']));
+          
+        // Add filter if it matches the category list
+        if($visible && (count($category) == 0 || array_intersect($category, $tmp['categories']))){ 
+          $filter[$tmp['name']] = $tmp;
+        }
+      }
+    }
+    return($filter);
   }
 
 
