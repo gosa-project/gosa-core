@@ -59,7 +59,7 @@
 
 <hr>
 
-<input type='hidden' value='1' name='filterEditorEntry'>
+<input type='hidden' value='1' name='userFilterEditor'>
 
 <div class="plugin-actions">
   <button type='submit' name='saveFilterSettings'>{msgPool type='saveButton'}</button>

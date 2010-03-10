@@ -1,6 +1,6 @@
 <?php
 
-class filterEditor extends plugin 
+class userFilter extends plugin 
 {
   protected $fitlers = array();
   protected $availableCategories = array();
@@ -101,7 +101,7 @@ class filterEditor extends plugin
     }
 
     // Save modified filter entries (edit dialog)
-    if(isset($_POST['saveFilterSettings']) && $this->dialog instanceOf filterEditEntry){
+    if(isset($_POST['saveFilterSettings']) && $this->dialog instanceOf userFilterEditor){
       $this->dialog->save_object();
       $msgs = $this->dialog->check();
       if(count($msgs)){
@@ -136,13 +136,13 @@ class filterEditor extends plugin
     if($action['action'] == 'edit' && count($action['targets']) == 1){
       $key= $this->filterWidget->getKey($action['targets'][0]);
       if(isset($this->filters[$key])){
-        $this->dialog=new filterEditEntry($this->filters[$key], $this->availableCategories);
+        $this->dialog=new userFilterEditor($this->filters[$key], $this->availableCategories);
       }
     }
 
     // Act on new requests
     if(isset($_POST['addFilter'])){
-      $this->dialog=new filterEditEntry(array(), $this->availableCategories);
+      $this->dialog=new userFilterEditor(array(), $this->availableCategories);
     }
 
     // Act on remove requests 
@@ -156,14 +156,14 @@ class filterEditor extends plugin
     }
 
     // Display edit dialog
-    if($this->dialog instanceOf filterEditEntry){
+    if($this->dialog instanceOf userFilterEditor){
       $this->dialog->save_object();
       return($this->dialog->execute());
     }
 
     $smarty = get_smarty();
     $smarty->assign("list", $this->filterWidget->render());
-    return($smarty->fetch(get_template_path('filterEditor.tpl', FALSE)));
+    return($smarty->fetch(get_template_path('userFilter.tpl', FALSE)));
   }
 
 

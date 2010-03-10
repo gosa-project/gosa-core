@@ -1,6 +1,6 @@
 <?php
 
-class filterEditEntry extends plugin 
+class userFilterEditor extends plugin 
 {
   // The original entry else array(), allows us to perform existence checks.
   public $entry = array();
@@ -71,7 +71,7 @@ class filterEditEntry extends plugin
     $smarty->assign('description', $this->description);
     $smarty->assign('selectedCategories', $this->selectedCategories);
     $smarty->assign('availableCategories', $this->availableCategories);
-    return($smarty->fetch(get_template_path('filterEditorEntry.tpl', FALSE)));
+    return($smarty->fetch(get_template_path('userFilterEditor.tpl', FALSE)));
   }
 
 
@@ -79,7 +79,7 @@ class filterEditEntry extends plugin
    */
   function save_object()
   {
-    if(isset($_POST['filterEditorEntry'])){
+    if(isset($_POST['userFilterEditor'])){
 
       // Get posted strings
       foreach(array('name','description','filter') as $attr){
@@ -132,7 +132,7 @@ class filterEditEntry extends plugin
 
 
   /*! \brief    Transforms the entered values into a filter object (array) which is useable
-   *             for the filterEditor overview dialog.
+   *             for the userFilter overview dialog.
    *  @return   Returns transformed filter data.
    */
   function save()
