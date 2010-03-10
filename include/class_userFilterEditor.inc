@@ -64,11 +64,11 @@ class userFilterEditor extends plugin
   {
     plugin::execute();
     $smarty = get_smarty();
-    $smarty->assign('name', htmlentities($this->name));
-    $smarty->assign('filter', htmlentities($this->filter));
+    $smarty->assign('name', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
+    $smarty->assign('filter', htmlentities($this->filter,ENT_COMPAT,'UTF-8'));
     $smarty->assign('share', $this->share);
     $smarty->assign('enable', $this->enabled);
-    $smarty->assign('description', htmlentities($this->description));
+    $smarty->assign('description', htmlentities($this->description,ENT_COMPAT,'UTF-8'));
     $smarty->assign('selectedCategories', $this->selectedCategories);
     $smarty->assign('availableCategories', $this->availableCategories);
     return($smarty->fetch(get_template_path('userFilterEditor.tpl', FALSE)));
@@ -95,7 +95,7 @@ class userFilterEditor extends plugin
         if(get_magic_quotes_gpc()){
           $f = stripcslashes($f);
         }
-        $f = utf8_decode($f);
+        $f = mb_convert_encoding($_POST['filter'], 'UTF-8');
         $this->filter = $f;
       }
 

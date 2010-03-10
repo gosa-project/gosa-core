@@ -216,7 +216,7 @@ class userFilter extends plugin
           ($attrs['dn'] == $ui->dn || in_array('share', $tmp['flags']));
          
         // Convert filter encoding
-        $tmp['filter'] = utf8_encode($tmp['filter']);
+        $tmp['filter'] = mb_convert_encoding($tmp['filter'], 'UTF-8');
  
         // Add filter if it matches the category list
         if($visible && (count($category) == 0 || array_intersect($category, $tmp['categories']))){ 
