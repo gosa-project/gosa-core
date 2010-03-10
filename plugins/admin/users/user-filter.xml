@@ -4,12 +4,13 @@
   <definition>
     <category>users</category>
     <initial>true</initial>
-    <default>All</default>
+    <default>default</default>
     <scope>auto</scope>
   </definition>
 
   <search>
-    <label>All</label>
+    <tag>default</tag>
+    <label>Default filter</label>
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
@@ -28,7 +29,8 @@
   </search>
 
   <search>
-    <label>POSIX</label>
+    <tag>posix</tag>
+    <label>Show POSIX users</label>
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(objectClass=posixAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
@@ -47,7 +49,8 @@
   </search>
 
   <search>
-    <label>Mail</label>
+    <tag>mail</tag>
+    <label>Show mail users</label>
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(objectClass=gosaMailAccount)(|(cn=$)(sn=$)(uid=$)(mail=$)))</filter>
