@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <td>
-            <label for='parent'>{t}Extension for the base filter{/t}</label>
+            <label for='parent'>{t}Parent filter{/t}</label>
           </td>
           <td>
             <select name='parent'>
@@ -46,7 +46,7 @@
 
     </td>
     <td style='vertical-align: top;'>
-      <label for='usedCategory'>{t}This filter affects the following categories{/t}</label><br>
+      <label for='usedCategory'>{t}Categories where the filter is visible{/t}</label><br>
       <select id='usedCategory' name='usedCategory[]' size='4' multiple style='width:100%;'>
         {html_options options=$selectedCategories}
       </select>

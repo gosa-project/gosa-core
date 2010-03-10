@@ -2,7 +2,7 @@
 
 <h3>{t}Certificates{/t}</h3>
 
-<table summary="{t}The users standart certificate{/t}" style="width:100%">
+<table summary="{t}The users standard certificate{/t}" style="width:100%">
  <tr>
   <td width="25%" style="vertical-align:top">
    {t}Standard certificate{/t}

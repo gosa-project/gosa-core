@@ -283,9 +283,9 @@ if (session::global_get('js')==FALSE){
 }
 
 if($ui->ignore_acl_for_current_user()){
-  $smarty->assign ("loggedin", "<font color='red';>"._("ACLs are disabled")."</font>&nbsp;".sprintf("You're logged in as <span>%s [%s]</span>", $ui->cn, $ui->username));
+  $smarty->assign ("loggedin", "<font color='red';>"._("ACLs are disabled")."</font>&nbsp;".sprintf(_("You're logged in as %s"), "<span>".$ui->cn." [".$ui->username."]</span>"));
 }else{
-  $smarty->assign ("loggedin", sprintf("You're logged in as <span>%s [%s]</span>", $ui->cn, $ui->username));
+  $smarty->assign ("loggedin", sprintf(_("You're logged in as %s"), "<span>".$ui->cn." [".$ui->username."]</span>"));
 }
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
 $smarty->assign ("go_base", get_template_path('images/dtree.png'));

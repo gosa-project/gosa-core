@@ -154,7 +154,7 @@ class userFilterEditor extends plugin
     $o = substr_count($f, '(');
     $c = substr_count($f, ')');
     if($o != $c){
-      $msgs[] = sprintf(_("Please check your filter, you have '%s' opening and '%s' closing brackets!"), $o, $c);
+      $msgs[] = sprintf(_("Please check your filter. You have '%s' opening and '%s' closing brackets!"), $o, $c);
     }
 
     return($msgs);

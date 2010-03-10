@@ -1,4 +1,4 @@
-<table style="width:100%;" summary="{t}Posix extension settings{/t}">
+<table style="width:100%;" summary="{t}POSIX settings{/t}">
  <tr>
   <td style="width:50%; vertical-align:top;">
 
@@ -123,7 +123,7 @@
 
 <hr>
 
-<table style="width:100%" summary="{t}Account accessibility{/t}" >
+<table style="width:100%" summary="{t}Account permissions{/t}" >
  <tr>
   <td style='width:50%;vertical-align:top'>
    {if $sshPublicKey == 1}
