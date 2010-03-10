@@ -27,10 +27,16 @@
       <br>
       
       <input type='checkbox' name='shareFilter' value='1' {if $share} checked {/if}>
-       {t}Share this filter with others{/t}              
+       {t}Public visible{/t}              
+
+      <br>
+    
+      <input type='checkbox' name='enableFilter' value='1' {if $enable} checked {/if}>
+       {t}Enabled{/t}
+
     </td>
     <td style='vertical-align: top;'>
-      <label for='usedCategory'>{t}The categories this filter is displayed for{/t}</label><br>
+      <label for='usedCategory'>{t}Affects the following categories{/t}</label><br>
       <select id='usedCategory' name='usedCategory[]' size='4' multiple style='width:100%;'>
         {html_options options=$selectedCategories}
       </select>

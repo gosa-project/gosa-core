@@ -10,6 +10,7 @@ class filterEditEntry extends plugin
   public $description = "";
   public $selectedCategories = array();
   public $share = FALSE;
+  public $enabled = TRUE;
   public $filter = "(objectClass=*)";
 
   // The list of all categories mangaged by the current filter object.
@@ -31,6 +32,7 @@ class filterEditEntry extends plugin
       $this->filter = $entry['filter'];
       $this->selectedCategories = $entry['categories'];
       $this->share = in_array("share",$entry['flags']);
+      $this->enable = in_array("enable",$entry['flags']);
     }
     $this->orig_name = $this->name;
   }
@@ -65,6 +67,7 @@ class filterEditEntry extends plugin
     $smarty->assign('name', $this->name);
     $smarty->assign('filter', $this->filter);
     $smarty->assign('share', $this->share);
+    $smarty->assign('enable', $this->enabled);
     $smarty->assign('description', $this->description);
     $smarty->assign('selectedCategories', $this->selectedCategories);
     $smarty->assign('availableCategories', $this->availableCategories);
@@ -87,6 +90,7 @@ class filterEditEntry extends plugin
 
       // Get posted flags 
       $this->share = isset($_POST['shareFilter']);
+      $this->enable = isset($_POST['enableFilter']);
 
       // Get additional category  
       if(isset($_POST['addCategory'])){
@@ -141,6 +145,9 @@ class filterEditEntry extends plugin
     $ret['flags'] = array();
     if($this->share){
       $ret['flags'][] = "share";
+    }
+    if($this->enable){
+      $ret['flags'][] = "enable";
     }
     return($ret);
   }
