@@ -2,16 +2,25 @@
 
 class filterEditEntry extends plugin 
 {
+  // The original entry else array(), allows us to perform existence checks.
   public $entry = array();
+
+  // The values
   public $name = "";
   public $description = "";
   public $selectedCategories = array();
   public $share = FALSE;
   public $filter = "(objectClass=*)";
 
+  // The list of all categories mangaged by the current filter object.
+  // Used in the grop-down box.
   public $availableCategories = array();
   public $orig_name = "";
 
+
+  /*! \brief    Instantiate the filter editing dialog. 
+   *            Parses the filter info into editable data.
+   */
   function __construct($entry, $categories)
   {
     $this->availableCategories = $categories;
@@ -19,24 +28,36 @@ class filterEditEntry extends plugin
       $this->entry = $entry;
       $this->name = $entry['name'];
       $this->description = $entry['description'];
-      $this->selectedCategories = $entry['categories'];
       $this->filter = $entry['filter'];
+      $this->selectedCategories = $entry['categories'];
       $this->share = in_array("share",$entry['flags']);
     }
-
     $this->orig_name = $this->name;
   }
 
+
+  /*! \brief    Retunrs the filters original name 
+   *  @param    The original name of the filter (if none was given 
+   *             an empty string is returned)
+   */
   function getOriginalName()
   {
     return($this->orig_name);
   }
 
+
+  /*! \brief    Retunrs the filters name.
+   *  @param    The name of the filter
+   */
   function getCurrentName()
   {
     return($this->name);
   }
 
+
+  /*! \brief    Generates the <HTML> content, to edit the filter settings.
+   *  @return   String  HTML form.
+   */
   function execute()
   {
     plugin::execute();
@@ -50,6 +71,9 @@ class filterEditEntry extends plugin
     return($smarty->fetch(get_template_path('filterEditorEntry.tpl', FALSE)));
   }
 
+
+  /*! \brief    Keep values entered in the input form of the dialog. (POST/GET)
+   */
   function save_object()
   {
     if(isset($_POST['filterEditorEntry'])){
@@ -82,6 +106,11 @@ class filterEditEntry extends plugin
     }
   }
 
+
+  /*! \brief    Transforms the entered values into a filter object (array) which is useable
+   *             for the filterEditor overview dialog.
+   *  @return   Returns transformed filter data.
+   */
   function save()
   {
     $ret= array();
