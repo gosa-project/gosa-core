@@ -400,6 +400,12 @@ class filter {
     $result.= "<ul class='level2'>";
     $result.= "<li><a href='#'>Dummy placeholder</a></li>";
     $result.= "<li$separator><a href='#' onClick='document.getElementById(\"filter\").value= \"config-filter\";mainform.submit();'>".image("images/configure.png")."&nbsp;"._("Edit filters")."...</a></li>";
+
+#############################
+print_a(userFilter::getFilter($category=array()));
+print_a($this->searches);
+#############################
+
 #$result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
 
 # AUTOCOMPLETER and getTextbox
@@ -409,6 +415,12 @@ class filter {
     $script= '<script type="text/javascript" language="JavaScript">var menu2; menu2= new Menu("filter-root", "menu2", configMenu)</script>';
 
     return "<div id='filtermenu'>".$result."</li></ul><div>$script";
+  }
+
+
+  function getFixedFilters()
+  {
+    return array_keys($this->searches);
   }
 
 }
