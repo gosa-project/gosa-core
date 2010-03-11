@@ -276,6 +276,8 @@ class plugin
     session::set('LOCK_VARS_USED_GET',array());
     session::set('LOCK_VARS_USED_POST',array());
     session::set('LOCK_VARS_USED_REQUEST',array());
+
+    pathNavigator::registerPlugin($this);
   }
 
   /*! \brief Removes object from parent

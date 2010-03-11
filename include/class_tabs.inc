@@ -114,6 +114,8 @@ class tabs
       $this->current = key($this->by_name);
     }
 
+    pathNavigator::registerPlugin($this);
+
     // Rotate current to last 
     $this->last= $this->current;
 

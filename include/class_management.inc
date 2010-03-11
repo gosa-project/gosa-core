@@ -132,6 +132,8 @@ class management
     $vars = array('/^act$/','/^listing/','/^PID$/','/^FILTER_PID$/');
     session::set('LOCK_VARS_TO_USE',$vars);
 
+    pathNavigator::registerPlugin($this);
+
     /* Display the copy & paste dialog, if it is currently open */
     $ret = $this->copyPasteHandler("",array());
     if($ret){

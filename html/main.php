@@ -41,6 +41,8 @@ session::set('errorsAlreadyPosted',array());
 session::global_set('runtime_cache',array());
 session::set('limit_exceeded',FALSE);
 
+pathNavigator::clear();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
 }
@@ -301,7 +303,6 @@ if($reload_navigation){
   $plist->menu="";
 }
 $smarty->assign ("menu", $plist->gen_menu());
-$smarty->assign ("pathMenu", $plist->genPathMenu());
 $smarty->assign ("plug", "$plug");
 
 $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
@@ -355,6 +356,7 @@ if (is_file("$plugin_dir/main.inc")){
 
 /* Print_out last ErrorMessage repeated string. */
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
+$smarty->assign ("pathMenu", $plist->genPathMenu());
 $smarty->assign("contents", $display);
 
 /* If there's some post, take a look if everything is there... */

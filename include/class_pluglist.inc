@@ -323,7 +323,7 @@ class pluglist
         "\n            <li class='left right-border' onClick=\"openPlugin('');\">".
         "\n              <div class='nav-home'></div>".
         "\n            </li>".
-        "\n            <li class='left'>Welcome to GOsa</li>";
+        "\n            %navigator%";
 
       // Check if we've at least one entry defined ih the pathmenu
       if(isset($this->config->data['PATHMENU'])){
@@ -336,8 +336,10 @@ class pluglist
       }
       $this->pathMenu.= "\n          </ul>";
       $this->pathMenu.= "\n        </div>";
-    } 
-    return($this->pathMenu); 
+    }
+
+    $menu = pathNavigator::getCurrentPath();
+    return(preg_replace("/%navigator%/", $menu, $this->pathMenu)); 
   }
   
 
