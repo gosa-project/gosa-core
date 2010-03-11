@@ -545,6 +545,7 @@ class user extends plugin
 
     /* Display cert dialog */
     if ($this->cert_dialog){
+      pathNavigator::registerPlugin(_("Certificates"));
       $smarty->assign("CertificateACL",$this->getacl("Certificate"));
       $smarty->assign("Certificate_readable",$this->acl_is_readable("Certificate"));
       $smarty->assign("certificateSerialNumber",$this->certificateSerialNumber);

@@ -14,6 +14,8 @@ class pathNavigator
       $str = "{".get_class($class)."}";
     }elseif($class instanceOf tabs){
       $str = $class->dn;
+    }elseif(is_string($class)){
+      $str = $class;
     }
     
     if(!empty($str)){
