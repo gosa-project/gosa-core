@@ -11,7 +11,7 @@ class pathNavigator
     }elseif($class instanceOf plugin && isset($class->plHeadline)){
       $str = _($class->plHeadline);
     }elseif($class instanceOf plugin && !isset($class->plHeadline)){
-      $str = get_class($class);
+      $str = "{".get_class($class)."}";
     }elseif($class instanceOf tabs){
       $str = $class->dn;
     }
