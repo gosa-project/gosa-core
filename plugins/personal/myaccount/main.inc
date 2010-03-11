@@ -90,7 +90,7 @@ if (! $cleanup ){
   }
 
   /* Execute formular */
-  pathNavigator::registerPlugin(_("My account"),$MyAccountTabs->dn);
+  pathNavigator::registerPlugin(_("My account"));
   if($lock_msg){
     $display = $lock_msg;
   }else{
