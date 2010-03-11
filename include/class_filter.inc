@@ -218,18 +218,6 @@ class filter {
   }
 
 
-  function renderApply()
-  {
-    return ("<input type='submit' name='apply' value='"._("Apply filter")."'>");
-  }
-
-
-  function renderScope()
-  {
-    $checked= $this->scope == "sub"?" checked":"";
-    return "<input type='checkbox' id='SCOPE' name='SCOPE' value='1' onClick='document.mainform.submit();'$checked>&nbsp;<LABEL for='SCOPE'>"._("Search in subtrees")."</LABEL>";
-  }
-
 
   function render()
   {
