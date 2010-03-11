@@ -2,6 +2,8 @@
 
 class userFilterEditor extends plugin 
 {
+  public $pathTitle= "Edit";
+
   // The original entry else array(), allows us to perform existence checks.
   public $entry = array();
 

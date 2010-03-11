@@ -2,6 +2,8 @@
 
 class userFilter extends plugin 
 {
+  public $pathTitle= "Filter";
+
   protected $filters = array();
   protected $availableCategories = array();
   
