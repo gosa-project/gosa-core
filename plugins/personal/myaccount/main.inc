@@ -90,11 +90,13 @@ if (! $cleanup ){
   }
 
   /* Execute formular */
+  pathNavigator::registerPlugin(_("My account"));
   if($lock_msg){
     $display = $lock_msg;
   }else{
     $display.= $MyAccountTabs->execute ();
   }
+
 
   /* Store changes  in session */
   if (session::is_set('edit')){
