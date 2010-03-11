@@ -285,7 +285,7 @@ class tests {
     }
 
     #TODO: use $lang to check date format
-    if (!preg_match("/([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4})/", $date, $matches)) {
+    if (!preg_match("/^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4})$/", $date, $matches)) {
       return false;
     }
 
