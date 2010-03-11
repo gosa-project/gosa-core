@@ -889,22 +889,28 @@ div.mainlist-nav td.left-border{
 /* Sortable Lists */
 
 div.sortableListContainer {
-  border:1px solid #AAA;
+  border:1px solid #CCC;
   overflow:auto;
   margin-bottom:2px;
+  border-radius:2px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
 }
 
 .sortableListContainer th {
-  background-color:#D8D8D8;
-  padding:3px;
+  background-color:#F5F5F5;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+  background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  padding:4px;
   text-align:left;
-  border-left:1px solid #AAA;
+  border-left:1px solid #CCC;
+  border-bottom:1px solid #CCC;
 }
 
 .sortableListContainer td {
   padding:3px;
   text-align:left;
-  border-left:1px solid #AAA;
+  border-left:1px solid #CCC;
 }
 
 tr.sortableListItem {

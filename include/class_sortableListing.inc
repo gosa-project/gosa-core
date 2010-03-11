@@ -221,7 +221,7 @@ class sortableListing {
     // Do we need a header?
     if ($this->header) {
       $result.= " <thead>\n  <tr>\n";
-      $first= " style='border:0'";
+      $first= " style='border-left:0'";
       for ($i= 0; $i<$this->columns; $i++) {
         $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
         $sorter= "";

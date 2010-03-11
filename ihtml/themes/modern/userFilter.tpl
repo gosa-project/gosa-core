@@ -1,8 +1,5 @@
-<h3>{t}Filter editor{/t}</h3>
+<h3>{t}List of defined filters{/t}</h3>
 
-<hr>
-
-{t}List of configured filters{/t}
 {$list}
 <button type='submit' name='addFilter'>{msgPool type='addButton'}</button>
 
