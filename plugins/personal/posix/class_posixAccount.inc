@@ -408,6 +408,7 @@ class posixAccount extends plugin
       $smarty->assign("usePrototype", "false");
       if ($result= $this->ssh->execute()) {
         $this->dialog= true;
+        pathNavigator::registerPlugin("SSH keys");
         return $result;
       }
       $this->dialog= false;

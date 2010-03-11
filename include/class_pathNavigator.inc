@@ -3,10 +3,10 @@
 class pathNavigator
 {
 
-  static function registerPlugin($class)
+  static function registerPlugin($class, $title= "")
   {
     
-    $str = $title = "";
+    $str = "";
 
     // Display headline of management plugins
     if($class instanceOf management && isset($class->plHeadline)){
@@ -38,7 +38,9 @@ class pathNavigator
           session::set("pathNavigator::registerPlugin:{$class->dn}", $str);
         }
         $str = session::get("pathNavigator::registerPlugin:{$class->dn}");
-        $title = $class->dn;
+        if(empty($title)){
+          $title = $class->dn;
+        }
       }
     }
 
