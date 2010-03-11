@@ -9,7 +9,7 @@ class pathNavigator
     if($class instanceOf management && isset($class->plHeadline)){
       $str = "<b>"._($class->plHeadline)."</b>";
     }elseif($class instanceOf plugin && isset($class->plHeadline)){
-      $str = _($class->plHeadline);
+#      $str = _($class->plHeadline);
     }elseif($class instanceOf plugin && !isset($class->plHeadline)){
       $str = "{".get_class($class)."}";
     }elseif($class instanceOf tabs){
@@ -20,7 +20,7 @@ class pathNavigator
     
     if(!empty($str)){
       $cur = session::get('pathNavigator::position');
-      $cur.= "<li class='left'>{$str}</li>";
+      $cur.= "<li class='left left-border path-element'>{$str}</li>";
       session::set('pathNavigator::position', $cur);
     }
   }
@@ -29,7 +29,7 @@ class pathNavigator
   {
     $path = session::get('pathNavigator::position');
     if(empty($path)){
-      $path = "<li class='left'>Welcome to GOsa</li>";
+      $path = "<li class='left left-border path-element'>Welcome to GOsa</li>";
     }
     return($path);
   }

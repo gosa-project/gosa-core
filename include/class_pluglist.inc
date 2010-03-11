@@ -320,7 +320,7 @@ class pluglist
       $this->pathMenu = 
         "\n        <div class='plugin-path'>".
         "\n          <ul class='path-navigation'>".
-        "\n            <li class='left right-border' onClick=\"openPlugin('');\">".
+        "\n            <li class='left' onClick=\"openPlugin('');\">".
         "\n              <div class='nav-home'></div>".
         "\n            </li>".
         "\n            %navigator%";
