@@ -260,6 +260,12 @@ ul.path-navigation li {
   height:19px;
 }
 
+ul.path-navigation li.path-element {
+  font-weight:bold;
+  cursor:default;
+  border-right:1px solid #C2C2C2;
+}
+
 ul.path-navigation li:hover {
   background-color: #E0E0E0;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#E0E0E0));
