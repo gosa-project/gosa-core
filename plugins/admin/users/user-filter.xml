@@ -29,11 +29,51 @@
   </search>
 
   <search>
+    <tag>template</tag>
+    <label>Show templates</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaUserTemplate)((cn=$)(sn=$)(uid=$)))</filter>
+      <attribute>dn</attribute>
+      <attribute>objectClass</attribute>
+      <attribute>givenName</attribute>
+      <attribute>sn</attribute>
+      <attribute>uid</attribute>
+      <attribute>userPassword</attribute>
+    </query>
+    <autocomplete>
+      <attribute>mail</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
     <tag>posix</tag>
     <label>Show POSIX users</label>
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(objectClass=posixAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
+      <attribute>dn</attribute>
+      <attribute>objectClass</attribute>
+      <attribute>givenName</attribute>
+      <attribute>sn</attribute>
+      <attribute>uid</attribute>
+      <attribute>userPassword</attribute>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>samba</tag>
+    <label>Show SAMBA users</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaAccount)(objectClass=sambaSamAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>givenName</attribute>
