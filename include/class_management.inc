@@ -250,13 +250,13 @@ class management
 
       // Display ok, (apply) and cancel buttons
       $str.= "<p style=\"text-align:right\">\n";
-      $str.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
+      $str.= "<button type=\"submit\" name=\"edit_finish\" style=\"width:80px\">".msgPool::okButton()."</button>\n";
       $str.= "&nbsp;\n";
       if($this->displayApplyBtn){
-        $str.= "<input type=submit name=\"edit_apply\" value=\"".msgPool::applyButton()."\">\n";
+        $str.= "<button type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>\n";
         $str.= "&nbsp;\n";
       }
-      $str.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
+      $str.= "<button type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
       $str.= "</p>";
     }
     return($str);

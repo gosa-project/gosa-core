@@ -1223,6 +1223,7 @@ div.search-filter input[type=text]{
   border:0;
   padding:3px;
   margin:0;
+  height:17px;
 }
 
 button.search-filter {
