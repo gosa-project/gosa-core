@@ -52,7 +52,7 @@ class userFilter extends plugin
     }
 
     // Create the filter list
-    $this->filterWidget= new sortableListing();
+    $this->filterWidget= new sortableListing($this->filters, $this->convertFilterList());
     $this->filterWidget->setDeleteable(true);
     $this->filterWidget->setEditable(true);
     $this->filterWidget->setWidth("100%");
@@ -60,7 +60,6 @@ class userFilter extends plugin
     $this->filterWidget->setHeader(array(_("Parent filter"),_("Name"),_("Description"),_("Category"),_("Options"),""));
     $this->filterWidget->setColspecs(array('80px', '100px', '200px', '120px','150px'));
     $this->filterWidget->setAcl($ui->get_permissions($ui->dn,'users/user','gosaUserDefinedFilter'));
-    $this->filterWidget->setListData($this->filters, $this->convertFilterList());
   }
 
   
