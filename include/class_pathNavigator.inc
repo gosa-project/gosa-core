@@ -20,7 +20,11 @@ class pathNavigator
     
     if(!empty($str)){
       $cur = session::get('pathNavigator::position');
-      $cur.= "<li class='left left-border path-element'>{$str}</li>";
+      if(empty($cur)){
+        $cur.= "<li class='left left-border path-element'>{$str}</li>";
+      }else{
+        $cur.= "<li class='left path-element'>{$str}</li>";
+      }
       session::set('pathNavigator::position', $cur);
     }
   }
