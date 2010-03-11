@@ -6,10 +6,12 @@ class pathNavigator
   static function registerPlugin($class)
   {
     $str = "";
-    if($class instanceOf management){
+    if($class instanceOf management && isset($class->plHeadline)){
       $str = "<b>".$class->plHeadline."</b>";
-    }elseif($class instanceOf plugin){
+    }elseif($class instanceOf plugin && isset($class->plHeadline)){
       $str = $class->plHeadline;
+    }elseif($class instanceOf plugin && !isset($class->plHeadline)){
+      $str = get_class($class);
     }elseif($class instanceOf tabs){
       $str = $class->dn;
     }
