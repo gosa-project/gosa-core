@@ -10,7 +10,7 @@
 
 <br>
 
-<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" cellpadding=4 border=0>
   <tr>
     <td><b><LABEL for="template">{t}Template{/t}</LABEL></b></td>
     <td>

@@ -1,9 +1,9 @@
 <!--////////////////////
 	//	ORGANIZATION (o)
     //////////////////// -->
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%" cellpadding=4>
  <tr>
-   <td style="vertical-align:top; width:50%">
+   <td style="width:50%">
      <h3>{t}Properties{/t}</h3>
      
      <table summary="">
@@ -95,7 +95,7 @@
        </td>
       </tr>
       <tr>
-       <td style="vertical-align:top;"><LABEL for="postalAddress">{t}Address{/t}</LABEL></td>
+       <td><LABEL for="postalAddress">{t}Address{/t}</LABEL></td>
        <td>
 {render acl=$postalAddressACL}
 	<textarea id="postalAddress" name="postalAddress" style="width:100%" rows=3 cols=22 title="{t}Postal address of this subtree{/t}">{$postalAddress}</textarea>
@@ -125,9 +125,9 @@
 
 <hr>
 
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%" cellpadding=4>
  <tr>
-   <td style="vertical-align:top; width:100%">
+   <td style="width:100%">
      <h3>{t}Administrative settings{/t}</h3>
 {render acl=$gosaUnitTagACL}
      <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}><label for="is_administrational_unit">{t}Tag department as an independent administrative unit{/t}</label>

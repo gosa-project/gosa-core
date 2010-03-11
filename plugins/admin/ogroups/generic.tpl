@@ -1,6 +1,6 @@
 <table summary="" style="width:100%;">
  <tr>
-  <td style="width:50%; vertical-align:top">
+  <td style="width:50%">
    <input type="hidden" name="ogroupedit" value="1">
    <table summary="">
     <tr>

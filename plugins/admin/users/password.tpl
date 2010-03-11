@@ -8,7 +8,7 @@
  {t}Changing the password affects your authentification on mail, proxy, samba and unix services.{/t}
 </p>
 
-<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" cellpadding=4 border=0>
   <tr>
     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
     <td><input type="password" id="new_password" name="new_password" size="30" maxlength="40" onFocus="nextfield= 'repeated_password';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>

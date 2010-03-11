@@ -5,7 +5,7 @@
 
 <table summary="" style="width:100%;">
  <tr>
-  <td style="width:50%; vertical-align:top;">
+  <td style="width:50%">
    <table summary="" style="width:100%">
     <tr>
      <td><LABEL for="cn">{t}Group name{/t}</LABEL>{$must}</td>
@@ -228,11 +228,11 @@
    &nbsp;
   </td>
 
-  <td style="vertical-align:top;">
+  <td>
 
    <table summary="" style="width:100%">
     <tr>
-     <td style="vertical-align:top; width:50%">
+     <td style="width:50%">
       <b><LABEL for="members">{t}Group members{/t}</LABEL></b>
       <br>
 {render acl=$memberUidACL}
