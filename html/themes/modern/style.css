@@ -257,12 +257,24 @@ ul.path-navigation li {
   display:inline;
   padding:5px;
   padding-top:9px;
-  height:19px;
+  height:18px;
 }
 
 ul.path-navigation li.path-element {
   cursor:default;
   border-left:1px solid #C2C2C2;
+}
+
+ul.path-navigation li.path-element:hover {
+  background:transparent;
+  background: -webkit-gradient();
+  background: -moz-linear-gradient();
+}
+
+ul.path-navigation li.path-element[title]:hover {
+  background-color: #E0E0E0;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#E0E0E0));
+  background: -moz-linear-gradient(top, #EEE, #E0E0E0);
 }
 
 ul.path-navigation li:hover {
