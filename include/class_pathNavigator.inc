@@ -25,7 +25,11 @@ class pathNavigator
 
   static function getCurrentPath()
   {
-    return(session::get('pathNavigator::position'));
+    $path = session::get('pathNavigator::position');
+    if(empty($path)){
+      $path = "<li class='left'>Welcome to GOsa</li>";
+    }
+    return($path);
   }
 
   static function clear()
