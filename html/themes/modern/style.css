@@ -256,14 +256,13 @@ ul.path-navigation {
 ul.path-navigation li {
   display:inline;
   padding:5px;
-  padding-top:8px;
+  padding-top:9px;
   height:19px;
 }
 
 ul.path-navigation li.path-element {
-  font-weight:bold;
   cursor:default;
-  border-right:1px solid #C2C2C2;
+  border-left:1px solid #C2C2C2;
 }
 
 ul.path-navigation li:hover {
@@ -275,6 +274,7 @@ ul.path-navigation li:hover {
 div.nav-home {
   height:14px;
   width:20px;
+  margin-top:-1px;
   background-image:url(images/home.png);
 }
 
