@@ -5,16 +5,30 @@ class pathNavigator
 
   static function registerPlugin($class)
   {
+    
     $str = "";
+
+    // Display headline of management plugins
     if($class instanceOf management && isset($class->plHeadline)){
       $str= _($class->plHeadline);
-    }elseif($class instanceOf plugin && isset($class->plHeadline)){
-#      $str = _($class->plHeadline);
-    }elseif($class instanceOf plugin && !isset($class->plHeadline)){
-      $str = "{".get_class($class)."}";
-    }elseif($class instanceOf tabs){
+    }
+
+    // Shown title of sub dialogs (They have no plHeadline set.)
+    if($class instanceOf plugin && !isset($class->plHeadline)){
+      if(empty($class->pathTitle)){
+        $str = "Missing: ".get_class($class);
+      }else{
+        $str = _($class->pathTitle);
+      }
+    }
+  
+    // In case of tabs add the 'dn' of the entry 
+    if($class instanceOf tabs){
       $str = $class->dn;
-    }elseif(is_string($class)){
+    }
+
+    // Simple string given 
+    if(is_string($class)){
       $str = $class;
     }
     

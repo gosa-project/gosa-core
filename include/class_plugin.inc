@@ -31,7 +31,11 @@
  */
 
 class plugin
-{
+{ 
+  /*! \brief    The title shown in path menu while this plugin is visible.
+   */
+  var $pathTitle = "";
+
   /*!
     \brief Reference to parent object
 
