@@ -393,6 +393,7 @@ class user extends plugin
         }
         $this->pwObject->display = TRUE;
         $this->dialog= TRUE;
+        pathNavigator::registerPlugin(_("Password configuration"));
         return ($this->pwObject->configure());
       }
     }
@@ -540,6 +541,7 @@ class user extends plugin
     }
     /* Display picture dialog */
     if ($this->picture_dialog){
+      pathNavigator::registerPlugin(_("User picture"));
       return($smarty->fetch (get_template_path('generic_picture.tpl', TRUE, dirname(__FILE__))));
     }
 
