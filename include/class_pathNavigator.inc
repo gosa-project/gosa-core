@@ -7,9 +7,9 @@ class pathNavigator
   {
     $str = "";
     if($class instanceOf management && isset($class->plHeadline)){
-      $str = "<b>".$class->plHeadline."</b>";
+      $str = "<b>"._($class->plHeadline)."</b>";
     }elseif($class instanceOf plugin && isset($class->plHeadline)){
-      $str = $class->plHeadline;
+      $str = _($class->plHeadline);
     }elseif($class instanceOf plugin && !isset($class->plHeadline)){
       $str = get_class($class);
     }elseif($class instanceOf tabs){
