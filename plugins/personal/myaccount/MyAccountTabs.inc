@@ -22,11 +22,14 @@
 
 class MyAccountTabs extends tabs
 {
+  var $password_change_needed = FALSE;
 
   function remove_lock()
   {
     echo "Implement remove Lock !!!!!";;
   }
+
+  
 
 # var $base;
 #
