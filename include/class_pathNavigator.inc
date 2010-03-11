@@ -6,7 +6,7 @@ class pathNavigator
   static function registerPlugin($class)
   {
     
-    $str = "";
+    $str = $title = "";
 
     // Display headline of management plugins
     if($class instanceOf management && isset($class->plHeadline)){
@@ -24,7 +24,22 @@ class pathNavigator
   
     // In case of tabs add the 'dn' of the entry 
     if($class instanceOf tabs){
-      $str = $class->dn;
+
+      // Convert dn to cn
+      if(isset($class->dn)){
+        if(!session::is_set("pathNavigator::registerPlugin:{$class->dn}")){
+          global $config;
+          $ldap = $config->get_ldap_link();
+          $ldap->cat($class->dn, array('cn'));
+          if($ldap->count()){
+            $attrs = $ldap->fetch();
+            $str = $attrs['cn'][0];
+          }
+          session::set("pathNavigator::registerPlugin:{$class->dn}", $str);
+        }
+        $str = session::get("pathNavigator::registerPlugin:{$class->dn}");
+        $title = $class->dn;
+      }
     }
 
     // Simple string given 
@@ -34,10 +49,13 @@ class pathNavigator
     
     if(!empty($str)){
       $cur = session::get('pathNavigator::position');
+
+      if(!empty($title)) $title = " title='{$title}' ";
+
       if(empty($cur)){
-        $cur.= "<li class='left path-element'>{$str}</li>";
+        $cur.= "\n<li {$title} class='left path-element'>{$str}</li>";
       }else{
-        $cur.= "<li class='left path-element'>{$str}</li>";
+        $cur.= "\n<li {$title} class='left path-element'>{$str}</li>";
       }
       session::set('pathNavigator::position', $cur);
     }
