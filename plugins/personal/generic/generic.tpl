@@ -144,7 +144,7 @@
      </td>
      <td>
       {render acl=$genderACL}
-       <select id="gender" name="gender">
+       <select size="1" id="gender" name="gender">
         {html_options options=$gender_list selected=$gender}
        </select>
       {/render}
@@ -158,7 +158,7 @@
      </td>
      <td>
       {render acl=$preferredLanguageACL checkbox=$multiple_support checked=$use_preferredLanguage}
-      <select id="preferredLanguage" name="preferredLanguage">
+      <select size="1" id="preferredLanguage" name="preferredLanguage">
        {html_options options=$preferredLanguage_list selected=$preferredLanguage}
       </select>
       {/render}
@@ -213,7 +213,7 @@
      <td><label for="pw_storage">{t}Password storage{/t}</label></td>
      <td>
       {render acl=$passwordStorageACL checkbox=$multiple_support checked=$use_pw_storage}
-      <select id="pw_storage" name="pw_storage" onchange='document.mainform.submit()'>
+      <select size="1" id="pw_storage" name="pw_storage" onchange='document.mainform.submit()'>
        {foreach from=$pwmode key=value item=desc}
        <option value="{$value}" {if $pwmode_select == $value}selected{/if} >{$desc}</option>
        {/foreach}
@@ -610,7 +610,7 @@
      <td><label for="publicVisible">{t}Public visible{/t}</label></td>
      <td>
       {render acl=$publicVisibleACL checkbox=$multiple_support checked=$use_publicVisible}
-      <select id="publicVisible" name="publicVisible">
+      <select size="1" id="publicVisible" name="publicVisible">
        {html_options values=$ivbbmodes output=$ivbbmodes selected=$publicVisible}
       </select>
       {/render}
