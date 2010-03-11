@@ -90,6 +90,11 @@ img, input[type=image] {
   background-color:rgba(255,0,0,0.2);
 }
 
+/* Input with migration color */
+input[type=submit] {
+  border:1px solid red;
+}
+
 .required{
   font-size:xx-small;
   vertical-align:top;
