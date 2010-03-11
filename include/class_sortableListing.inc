@@ -372,7 +372,7 @@ class sortableListing {
     $this->action = "";
     if (strpos($this->acl, 'd') !== false){
       foreach ($_POST as $key => $value) {
-        if (preg_match('/^del_'.$this->id.'([0-9]+)$/', $key, $matches)) {
+        if (preg_match('/^del_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
           $this->active_index= $this->mapping[$matches[1]];
 
           // Ignore request if mode requests it
