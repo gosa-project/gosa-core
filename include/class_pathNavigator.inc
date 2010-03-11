@@ -52,11 +52,7 @@ class pathNavigator
 
       if(!empty($title)) $title = " title='{$title}' ";
 
-      if(empty($cur)){
-        $cur.= "\n<li {$title} class='left path-element'>{$str}</li>";
-      }else{
-        $cur.= "\n<li {$title} class='left path-element'>{$str}</li>";
-      }
+      $cur.= "\n<li {$title} class='left path-element'>{$str}</li>";
       session::set('pathNavigator::position', $cur);
     }
   }
