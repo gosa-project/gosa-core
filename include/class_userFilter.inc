@@ -206,6 +206,7 @@ class userFilter extends plugin
   static function getFilter($category=array())
   {
     global $config;
+
     $ldap=$config->get_ldap_link();
     $ui = get_userinfo();
     $ldap->cd($config->current['BASE']);
@@ -219,8 +220,8 @@ class userFilter extends plugin
         // Remove line breaks from the filter, which may were added for better reading. 
         foreach($tmp['queries'] as $key => $query){
           $c = preg_split('/\n/',$query['filter']);
-          foreach($c as $key => $str) $c[$key] = trim($str);
-          $tmp['queries'][$key]['filter'] = implode($c);
+          foreach($c as $cKey => $str) $c[$cKey] = trim($str);
+          $tmp['queries'][$key]['filter'] = mb_convert_encoding(implode($c),'UTF-8');
         }
  
         // The filter is visible if it is shared or if is one of our own creations.
@@ -228,9 +229,6 @@ class userFilter extends plugin
         $visible = in_array('enable', $tmp['flags']) && 
           ($attrs['dn'] == $ui->dn || in_array('share', $tmp['flags']));
          
-        // Convert filter encoding
-        $tmp['filter'] = mb_convert_encoding($tmp['filter'], 'UTF-8');
- 
         // Add filter if it matches the category list
         if($visible && (count($category) == 0 || array_intersect($category, $tmp['categories']))){ 
           $filter[$tmp['name']] = $tmp;

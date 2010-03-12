@@ -61,6 +61,11 @@ class filter {
 
     $this->xmlData= $this->xmlData["filterdef"];
 
+    // Transfer category
+    if (isset($this->xmlData['definition']['category'])){
+      $this->category= $this->xmlData['definition']['category'];
+    }
+
     // Load filter
     if (isset($this->xmlData['search'])) {
 
@@ -85,9 +90,12 @@ class filter {
         }
 
         /* Store search */
+        $search['fixed'] = TRUE;
         $this->searches[$search['tag']]= $search;
-
       }
+
+      $this->reloadUserFilter();
+
     } else {
       return false;
     }
@@ -105,34 +113,43 @@ class filter {
       $this->initial= true;
     }
 
-    // Transfer category
-    if (isset($this->xmlData['definition']['category'])){
-      $this->category= $this->xmlData['definition']['category'];
-    }
-
     // Set default search mode
     $this->setSearch($this->xmlData['definition']['default']);
 
     return true;  
   }
 
+  function reloadUserFilter()
+  {
+    // First remove all user filters
+    foreach($this->searches as $k => $s) {
+      if(!$s['fixed']) unset($this->searches[$k]);
+    }
+    
+    // Readd user filter.
+    foreach(userFilter::getFilter(array($this->category)) as $filter){
+      $tmp = array();
+      $tmp['tag'] = $filter['name'];
+      $tmp['label'] = $filter['description'];
+      $tmp['query'] = array();
+      foreach($filter['queries'] as $query){
+        if(isset($this->searches[$filter['parent']]['query']['attribute'])){
+          $query['attribute'] = $this->searches[$filter['parent']]['query']['attribute'];
+        }else{
+          $query['attribute'] = $this->searches[$filter['parent']]['query'][0]['attribute'];
+        }
+        $tmp['query'][] =  $query;
+      }
+      $tmp['autocomplete'] = $this->searches[$filter['parent']]['autocomplete'];
+      $tmp['fixed'] = FALSE;
+      $this->searches[$tmp['tag']] = $tmp;
+    }
+  }
+
 
   function setSearch($method)
   {
     $patch= null;
-    if (is_array($this->category)) {
-      $categories= $this->category;
-    } else {
-      $categories= array($this->category);
-    }
-    $userfilters= userFilter::getFilter($categories);
-
-    // User filter selected?
-    if (isset($userfilters[$method])){
-      $usermethod= $method;
-      $patch= $userfilters[$method]['filter'];
-      $method= $userfilters[$method]['parent'];
-    }
 
     // Move information
     if (isset($this->searches[$method])) {
@@ -141,12 +158,6 @@ class filter {
         $this->query= array($this->query);
       }
  
-      // Patch first filter?
-      if ($patch) {
-        $this->query[0]['filter']= $patch;
-        $method= $usermethod;
-      }
-
       $this->search= $method;
     } else {
       die ("Invalid search module!");
@@ -226,6 +237,9 @@ class filter {
 
   function render()
   {
+
+    $this->reloadUserFilter();
+
     $content= "<table class='filter-wrapper'><tr><td>".$this->renderFilterMenu()."</td><td>";
     $content.= "<div class='search-filter'>".$this->getTextfield('search_filter', $this->value, $this->searches[$this->search])."</div>".
       "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button></td></tr></table>";
@@ -296,15 +310,8 @@ class filter {
         $this->scope= ($this->scope == "one")?"sub":"one";
       }
 
-      // Switch filter?
-      if (is_array($this->category)) {
-        $categories= $this->category;
-      } else {
-        $categories= array($this->category);
-      }
-
-      if (isset($_POST['act'])) {
-        foreach (array_merge($this->searches, userFilter::getFilter($categories)) as $tag => $cfg) {
+      if (isset($_POST['act'])){
+        foreach ($this->searches as $tag => $cfg) {
           if ($_POST['act'] == "filter-$tag") {
             $this->setSearch($tag);
             break;
@@ -427,6 +434,9 @@ class filter {
 
     // Build in filters
     foreach ($this->searches as $tag => $config) {
+
+      if(!$config['fixed']) continue;  
+
       if ($tag == $this->search) {
         $result.= "<li><a href='#'>".image("images/checked.png")."&nbsp;"._($config['label'])."</a></li>";
       } else {
@@ -441,11 +451,14 @@ class filter {
     } else {
       $categories= array($this->category);
     }
-    foreach (userFilter::getFilter($categories) as $tag => $config) {
+
+    foreach ($this->searches as $tag => $config) {
+      if($config['fixed']) continue;  
+
       if ($tag == $this->search) {
-        $result.= "<li".($first?$separator:"")."><a href='#'>".image("images/checked.png")."&nbsp;"._($config['description'])."</a></li>";
+        $result.= "<li".($first?$separator:"")."><a href='#'>".image("images/checked.png")."&nbsp;"._($config['label'])."</a></li>";
       } else {
-        $result.= "<li".($first?$separator:"")."><a href='#' onClick='document.getElementById(\"filter\").value= \"filter-$tag\";mainform.submit();'>".image("images/empty.png")."&nbsp;"._($config['description'])."</a></li>";
+        $result.= "<li".($first?$separator:"")."><a href='#' onClick='document.getElementById(\"filter\").value= \"filter-$tag\";mainform.submit();'>".image("images/empty.png")."&nbsp;"._($config['label'])."</a></li>";
       }
 
       $first= false;
