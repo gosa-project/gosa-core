@@ -5,6 +5,7 @@
     <initial>true</initial>
     <default>default</default>
     <scope>auto</scope>
+    <category>users</category>
   </definition>
 
   <search>
@@ -14,6 +15,17 @@
       <storage>userRDN</storage>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
+      <attribute>dn</attribute>
+      <attribute>objectClass</attribute>
+      <attribute>givenName</attribute>
+      <attribute>sn</attribute>
+      <attribute>uid</attribute>
+      <attribute>userPassword</attribute>
+    </query>
+    <query>
+      <storage>userRDN</storage>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=posixAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>givenName</attribute>
