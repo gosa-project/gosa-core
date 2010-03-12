@@ -16,20 +16,20 @@ class userFilterEditor extends plugin
   public $enabled = TRUE;
   public $queries = array();
 
+  public $listing = NULL;
+
   // The list of all categories mangaged by the current filter object.
   // Used in the grop-down box.
-  public $availableCategories = array();
-  public $fixedFilters = array();
   public $orig_name = "";
+  
 
 
   /*! \brief    Instantiate the filter editing dialog. 
    *            Parses the filter info into editable data.
    */
-  function __construct($entry, $categories, $fixedFilters)
+  function __construct($entry, $listing)
   {
-    $this->availableCategories = $categories;
-    $this->fixedFilters = $fixedFilters;
+    $this->listing = &$listing;
     if($entry){
       $this->entry = $entry;
       $this->parent = $entry['parent'];
@@ -117,6 +117,8 @@ class userFilterEditor extends plugin
   {
     plugin::execute();
 
+    $smarty = get_smarty();
+
     // Build up HTML compliant html output
     $queries = array();
     foreach($this->queries as $key => $query){
@@ -124,7 +126,10 @@ class userFilterEditor extends plugin
       $queries[$key] = $query; 
     }  
 
-    $smarty = get_smarty();
+    // Build up list of hard coded filters 
+    $filter= $this->listing->getFilter();
+
+    $smarty->assign("fixedFilters", array_keys($filter->searches));
     $smarty->assign('parent', $this->parent);
     $smarty->assign('name', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
     $smarty->assign('queries', $queries);
@@ -132,8 +137,7 @@ class userFilterEditor extends plugin
     $smarty->assign('enable', $this->enabled);
     $smarty->assign('description', htmlentities($this->description,ENT_COMPAT,'UTF-8'));
     $smarty->assign('selectedCategories', $this->selectedCategories);
-    $smarty->assign('availableCategories', $this->availableCategories);
-    $smarty->assign('fixedFilters', $this->fixedFilters);
+    $smarty->assign('availableCategories', array_unique($this->listing->categories));
     return($smarty->fetch(get_template_path('userFilterEditor.tpl', FALSE)));
   }
 
@@ -193,7 +197,16 @@ class userFilterEditor extends plugin
 
       // Add new query 
       if(isset($_POST['addQuery'])){
-        $this->queries[] = array('backend'=>'filterLDAP', 'filter' => '(objectClass=*)');
+
+        $filter= $this->listing->getFilter();
+        $backend = 'filterLDAP';
+        $query = "(objectClass=*)";
+        if(isset($filter->searches[$this->parent])){
+          $query = $filter->searches[$this->parent]['query']['filter'];
+          $backend = $filter->searches[$this->parent]['query']['backend'];
+        }
+
+        $this->queries[] = array('backend'=> $backend, 'filter' => userFilterEditor::_autoIndentFilter($query,"  "));
       }
     }
   }

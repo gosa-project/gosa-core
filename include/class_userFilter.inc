@@ -5,14 +5,11 @@ class userFilter extends plugin
   public $pathTitle= "Filter";
 
   public $filters = array();
-  protected $availableCategories = array();
   
   public $objectclasses = array('gosaProperties');
   public $attributes = array('gosaUserDefinedFilter');
   public $gosaUserDefinedFilter = array();
-
   private $listing = NULL;
-  private $fixedFilter = NULL;
 
   /*! \brief    Returns true if we are able to read and write userFilters 
    *            (schema has to be present, gosaProperties)
@@ -38,10 +35,6 @@ class userFilter extends plugin
     plugin::plugin($config, $ui->dn);
     $this->listing = &$listing;
     $filter= $this->listing->getFilter();
-    $this->fixedFilter = $filter->getFixedFilters();
-
-    // Keep list of currently managed categories.
-    $this->availableCategories = array_unique($this->listing->categories);
 
     // Load list of filters
     if(isset($this->attrs['gosaUserDefinedFilter'])){
@@ -176,13 +169,13 @@ class userFilter extends plugin
     if($action['action'] == 'edit' && count($action['targets']) == 1){
       $key= $this->filterWidget->getKey($action['targets'][0]);
       if(isset($this->filters[$key])){
-        $this->dialog=new userFilterEditor($this->filters[$key], $this->availableCategories, $this->fixedFilter);
+        $this->dialog=new userFilterEditor($this->filters[$key], $this->listing);
       }
     }
 
     // Act on new requests
     if(isset($_POST['addFilter'])){
-      $this->dialog=new userFilterEditor(array(), $this->availableCategories, $this->fixedFilter);
+      $this->dialog=new userFilterEditor(array(), $this->listing);
     }
 
     // Act on remove requests 
