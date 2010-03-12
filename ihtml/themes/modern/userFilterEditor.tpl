@@ -66,7 +66,7 @@
 <hr>
 
 <b>Filter</b>
-<textarea name='filter' id='filter' cols="0" style='width:100%; height: 100px;'>{$filter}</textarea>
+<textarea name='filter' id='filter' cols="0" style='width:100%; height: 250px;'>{$filter}</textarea>
 
 <hr>
 
