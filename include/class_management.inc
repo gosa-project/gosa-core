@@ -121,6 +121,7 @@ class management
     $this->registerAction("cancelSnapshot","closeDialogs");
 
     $this->registerAction("config-filter","editFilter");
+    $this->registerAction("saveFilter","saveFilter");
   }
 
   /*! \brief  Execute this plugin
@@ -374,7 +375,7 @@ class management
     if(isset($_POST['edit_cancel'])) $action['action'] = "cancel";    
     if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";   
     if(isset($_POST['delete_cancel'])) $action['action'] = "cancelDelete";   
-    if(isset($_POST['saveFilter'])) $action['action'] = "save";   
+    if(isset($_POST['saveFilter'])) $action['action'] = "saveFilter";   
     if(isset($_POST['cancelFilter'])) $action['action'] = "cancel";   
 
     // Detect Snapshot actions
@@ -682,6 +683,25 @@ class management
           $this->tabObject = $tmp;
           set_object_info($this->tabObject->get_object_info());
         }
+      }
+    }
+  }
+
+
+  /*! \brief  Save filter modifcations.
+   */
+  protected function saveFilter()
+  {
+    if($this->dialogObject instanceOf userFilter){
+      $msgs = $this->dialogObject->check();
+      if(count($msgs)){
+        msg_dialog::displayChecks($msgs); 
+        return("");
+      }else{
+        $this->dialogObject->save();
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Entry saved!");
+        $this->remove_lock();
+        $this->closeDialogs();
       }
     }
   }
