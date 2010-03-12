@@ -71,6 +71,11 @@ class filter {
         $searches= $this->xmlData['search'];
       }
 
+      // Fix problem with only one defined query.
+      if(isset($this->xmlData['search']['query'])){
+        $this->xmlData['search'] = array($this->xmlData['search']);
+      }
+
       /* Store available searches */
       foreach ($this->xmlData['search'] as $search) {
 
