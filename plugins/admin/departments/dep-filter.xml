@@ -2,43 +2,32 @@
 
 <filterdef>
   <definition>
-    <category>departments</category>
-    <template>dep-filter.tpl</template>
+    <category>department</category>
     <initial>true</initial>
+    <default>default</default>
+    <scope>auto</scope>
   </definition>
 
   <search>
+    <tag>default</tag>
+    <label>Default filter</label>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=gosaDepartment)$NAME)</filter>
+      <filter>(&amp;(objectClass=gosaDepartment)(|(dc=$)(ou=$)(o=$)(l=$)(c=$)))</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>ou</attribute>
       <attribute>description</attribute>
     </query>
-    <scope>one</scope>
-  </search>
-
-  <element>
-    <type>textfield</type>
-    <tag>NAME</tag>
-    <size>18</size>
-    <maxlength>60</maxlength>
-    <default></default>
-    <unset></unset>
-    <set>(|(ou=*$*)(dc=*$*)(c=*$*)(l=*$*)(o=*$*))</set>
-    <alphabet>false</alphabet>
     <autocomplete>
-      <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=gosaDepartment)(|(ou=*$NAME*)(dc=*$NAME*)(l=*$NAME*)(c=*$NAME*)(o=*$NAME*)))</filter>
-      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+      <attribute>ou</attribute>
       <attribute>dc</attribute>
       <attribute>c</attribute>
       <attribute>l</attribute>
       <attribute>o</attribute>
-      <frequency>0.5</frequency>
-      <characters>3</characters>
     </autocomplete>
-  </element>
+  </search>
 
 </filterdef>
