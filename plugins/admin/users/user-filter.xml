@@ -6,6 +6,12 @@
     <initial>true</initial>
     <default>default</default>
     <scope>auto</scope>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>givenName</attribute>
+    <attribute>sn</attribute>
+    <attribute>uid</attribute>
+    <attribute>userPassword</attribute>
   </definition>
 
   <search>
@@ -14,12 +20,6 @@
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>givenName</attribute>
-      <attribute>sn</attribute>
-      <attribute>uid</attribute>
-      <attribute>userPassword</attribute>
     </query>
     <autocomplete>
       <attribute>cn</attribute>
@@ -34,12 +34,6 @@
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaUserTemplate)((cn=$)(sn=$)(uid=$)))</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>givenName</attribute>
-      <attribute>sn</attribute>
-      <attribute>uid</attribute>
-      <attribute>userPassword</attribute>
     </query>
     <autocomplete>
       <attribute>mail</attribute>
@@ -54,12 +48,6 @@
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(objectClass=posixAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>givenName</attribute>
-      <attribute>sn</attribute>
-      <attribute>uid</attribute>
-      <attribute>userPassword</attribute>
     </query>
     <autocomplete>
       <attribute>cn</attribute>
@@ -74,12 +62,6 @@
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(objectClass=sambaSamAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>givenName</attribute>
-      <attribute>sn</attribute>
-      <attribute>uid</attribute>
-      <attribute>userPassword</attribute>
     </query>
     <autocomplete>
       <attribute>cn</attribute>
@@ -94,12 +76,6 @@
     <query>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(objectClass=gosaMailAccount)(|(cn=$)(sn=$)(uid=$)(mail=$)))</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>givenName</attribute>
-      <attribute>sn</attribute>
-      <attribute>uid</attribute>
-      <attribute>userPassword</attribute>
     </query>
     <autocomplete>
       <attribute>mail</attribute>

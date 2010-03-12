@@ -34,10 +34,10 @@ class userFilterEditor extends plugin
     if($entry){
       $this->entry = $entry;
       $this->parent = $entry['parent'];
-      $this->name = $entry['name'];
+      $this->name = $entry['tag'];
       $this->description = $entry['description'];
       
-      foreach($entry['queries'] as $query){
+      foreach($entry['query'] as $query){
         $query['filter'] = userFilterEditor::_autoIndentFilter($query['filter'], "  ");
         $this->queries[] = $query;
       }
@@ -133,7 +133,7 @@ class userFilterEditor extends plugin
     $smarty->assign("fixedFilters", array_keys($filter->searches));
     $smarty->assign('parent', $this->parent);
     $smarty->assign('backends', $this->backends);
-    $smarty->assign('name', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
+    $smarty->assign('tag', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
     $smarty->assign('queries', $queries);
     $smarty->assign('share', $this->share);
     $smarty->assign('enable', $this->enabled);
@@ -151,7 +151,7 @@ class userFilterEditor extends plugin
     if(isset($_POST['userFilterEditor'])){
 
       // Get posted strings
-      foreach(array('name','description', 'parent') as $attr){
+      foreach(array('tag','description', 'parent') as $attr){
         if(isset($_POST[$attr])){
           $this->$attr = get_post($attr);
         }
@@ -265,10 +265,10 @@ class userFilterEditor extends plugin
   {
     $ret= array();
     $ret['parent'] = $this->parent;
-    $ret['name'] = $this->name;
+    $ret['tag'] = $this->name;
     $ret['description'] = $this->description;
     $ret['categories'] = $this->selectedCategories;
-    $ret['queries'] = $this->queries;
+    $ret['query'] = $this->queries;
     $ret['flags'] = array();
     if($this->share){
       $ret['flags'][] = "share";

@@ -40,8 +40,8 @@ class userFilter extends plugin
     if(isset($this->attrs['gosaUserDefinedFilter'])){
       for($i=0; $i< $this->attrs['gosaUserDefinedFilter']['count']; $i++){
         $tmp = userFilter::explodeFilterString($this->attrs['gosaUserDefinedFilter'][$i]);
-        if(isset($tmp['name'])){
-          $this->filters[$tmp['name']]= $tmp; 
+        if(isset($tmp['tag'])){
+          $this->filters[$tmp['tag']]= $tmp; 
         }
       }
     }
@@ -90,10 +90,10 @@ class userFilter extends plugin
     // build up filter entry.
     $tmp = array(
         'parent' => $parent, 
-        'name' => $name, 
+        'tag' => $name, 
         'categories' => $categories,
         'description' => base64_decode($description),
-        'queries' => $queries,
+        'query' => $queries,
         'flags' => $flags);
 
     return($tmp);
@@ -111,7 +111,7 @@ class userFilter extends plugin
       $data[$name] = array('data' =>
           array(
             $filter['parent'],
-            $filter['name'],
+            $filter['tag'],
             $filter['description'],
             implode(", ",$filter['categories']),
             implode(", ",$filter['flags'])));
@@ -217,13 +217,13 @@ class userFilter extends plugin
     while($attrs = $ldap->fetch()){
       for($i=0; $i < $attrs['gosaUserDefinedFilter']['count']; $i++){
         $tmp = userFilter::explodeFilterString($attrs['gosaUserDefinedFilter'][$i]);
-        if(!isset($tmp['name'])) continue;
+        if(!isset($tmp['tag'])) continue;
           
         // Remove line breaks from the filter, which may were added for better reading. 
-        foreach($tmp['queries'] as $key => $query){
+        foreach($tmp['query'] as $key => $query){
           $c = preg_split('/\n/',$query['filter']);
           foreach($c as $cKey => $str) $c[$cKey] = trim($str);
-          $tmp['queries'][$key]['filter'] = mb_convert_encoding(implode($c),'UTF-8');
+          $tmp['query'][$key]['filter'] = mb_convert_encoding(implode($c),'UTF-8');
         }
  
         // The filter is visible if it is shared or if is one of our own creations.
@@ -233,7 +233,7 @@ class userFilter extends plugin
          
         // Add filter if it matches the category list
         if($visible && (count($category) == 0 || array_intersect($category, $tmp['categories']))){ 
-          $filter[$tmp['name']] = $tmp;
+          $filter[$tmp['tag']] = $tmp;
         }
       }
     }
@@ -250,11 +250,11 @@ class userFilter extends plugin
     foreach($this->filters as $filter){
       $tmp = $filter['parent'].";";
       $tmp.= implode(',', $filter['categories']).";";
-      $tmp.= $filter['name'].";";
+      $tmp.= $filter['tag'].";";
       $tmp.= base64_encode($filter['description']).";";
 
       // Add queries 
-      foreach($filter['queries'] as $query){
+      foreach($filter['query'] as $query){
          $tmp.= base64_encode($query['filter']).":".$query['backend'].",";
       }
       $tmp = trim($tmp,",").";";

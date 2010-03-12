@@ -22,9 +22,11 @@
 
 class filter {
 
-  var $xmlData;
   var $searches= array();
+  var $xmlSearches= array();
+  var $attributes= array();
   var $search;
+  var $defaultSearch;
   var $category= "";
   var $objectStorage= array();
   var $base= "";
@@ -53,34 +55,34 @@ class filter {
   function load($filename)
   {
     $contents = file_get_contents($filename);
-    $this->xmlData= xml::xml2array($contents, 1);
+    $xmlData= xml::xml2array($contents, 1);
 
-    if (!isset($this->xmlData['filterdef'])) {
+    if (!isset($xmlData['filterdef'])) {
       return false;
     }
 
-    $this->xmlData= $this->xmlData["filterdef"];
+    $xmlData= $xmlData["filterdef"];
 
     // Load filter
-    if (isset($this->xmlData['search'])) {
+    if (isset($xmlData['search'])) {
 
       // Array conversion
-      if (!is_array($this->xmlData['search'])) {
-        $searches= array($this->xmlData['search']);
+      if (!is_array($xmlData['search'])) {
+        $searches= array($xmlData['search']);
       } else {
-        $searches= $this->xmlData['search'];
+        $searches= $xmlData['search'];
       }
 
       /* Store available searches */
-      foreach ($this->xmlData['search'] as $search) {
+      foreach ($xmlData['search'] as $search) {
 
         /* Do multi conversation */ 
-        if (!is_array($search['query'])){
+        if (!isset($search['query'][0])){
           $search['query']= array($search['query']);
         }
 
         /* Store search */
-        $this->searches[$search['tag']]= $search;
+        $this->xmlSearches[$search['tag']]= $search;
 
       }
     } else {
@@ -88,60 +90,60 @@ class filter {
     }
 
     // Transfer scope
-    $this->scopeMode= $this->xmlData['definition']['scope'];
+    $this->scopeMode= $xmlData['definition']['scope'];
     if ($this->scopeMode == "auto") {
       $this->scope= "one";
     } else {
       $this->scope= $this->scopeMode;
     }
 
+    // Transfer attributes
+    $this->attributes= $xmlData['definition']['attribute'];
+    if (!is_array($this->attributes)) {
+      $this->attributes= array($this->attributes);
+    }
+
     // Transfer initial value
-    if (isset($this->xmlData['definition']['initial']) && $this->xmlData['definition']['initial'] == "true"){
+    if (isset($xmlData['definition']['initial']) && $xmlData['definition']['initial'] == "true"){
       $this->initial= true;
     }
 
     // Transfer category
-    if (isset($this->xmlData['definition']['category'])){
-      $this->category= $this->xmlData['definition']['category'];
+    if (isset($xmlData['definition']['category'])){
+      $this->category= $xmlData['definition']['category'];
+    }
+    if (!is_array($this->category)) {
+      $this->category= array($this->category);
     }
 
-    // Set default search mode
-    $this->setSearch($this->xmlData['definition']['default']);
+    // Initialize searches and default search mode
+    $this->reloadFilters();
+    $this->defaultSearch= $xmlData['definition']['default'];
+    $this->setSearch($this->defaultSearch);
 
     return true;  
   }
 
 
-  function setSearch($method)
+  function reloadFilters()
+  {
+    $this->searches= array_merge($this->xmlSearches, userFilter::getFilter($this->category));
+    $this->setSearch($this->search);
+  }
+
+
+  function setSearch($method= null)
   {
     $patch= null;
-    if (is_array($this->category)) {
-      $categories= $this->category;
-    } else {
-      $categories= array($this->category);
-    }
-    $userfilters= userFilter::getFilter($categories);
 
-    // User filter selected?
-    if (isset($userfilters[$method])){
-      $usermethod= $method;
-      $patch= $userfilters[$method]['filter'];
-      $method= $userfilters[$method]['parent'];
+    // Maybe our search method has gone?
+    if (!isset($this->searches[$method])) {
+      $method= $this->defaultSearch;
     }
 
-    // Move information
+    // Try to use it, but bail out if there's no help...
     if (isset($this->searches[$method])) {
-      $this->query= array_merge($this->searches[$method]['query']);
-      if (!isset($this->query[0])) {
-        $this->query= array($this->query);
-      }
- 
-      // Patch first filter?
-      if ($patch) {
-        $this->query[0]['filter']= $patch;
-        $method= $usermethod;
-      }
-
+      $this->query= $this->searches[$method]['query'];
       $this->search= $method;
     } else {
       die ("Invalid search module!");
@@ -240,10 +242,9 @@ class filter {
       $this->initial= true;
       return $result;
     }
-
     // Go thru all queries and merge results
     foreach ($this->query as $query) {
-      if (!isset($query['backend']) || !isset($query['filter']) || !isset($query['attribute'])) {
+      if (!isset($query['backend']) || !isset($query['filter'])) {
         die("No backend specified in search config.");
       }
 
@@ -255,7 +256,6 @@ class filter {
 
       // Load filter and attributes
       $filter= $query['filter'];
-      $attributes= $query['attribute'];
 
       // Handle converters if present
       if ($this->converter) {
@@ -270,7 +270,7 @@ class filter {
         $filter= preg_replace("/\\$/", "*".normalizeLdap($this->value)."*", $filter);
       }
 
-      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
+      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage));
     }
 
     return ($result);
@@ -280,7 +280,6 @@ class filter {
   function update()
   {
     if (isset($_POST['FILTER_PID']) && $_POST['FILTER_PID'] == $this->pid) {
-
       // Save input field
       if (isset($_POST['search_filter'])) {
         $this->value= validate($_POST['search_filter']);
@@ -292,14 +291,8 @@ class filter {
       }
 
       // Switch filter?
-      if (is_array($this->category)) {
-        $categories= $this->category;
-      } else {
-        $categories= array($this->category);
-      }
-
       if (isset($_POST['act'])) {
-        foreach (array_merge($this->searches, userFilter::getFilter($categories)) as $tag => $cfg) {
+        foreach ($this->searches as $tag => $cfg) {
           if ($_POST['act'] == "filter-$tag") {
             $this->setSearch($tag);
             break;
@@ -326,6 +319,7 @@ class filter {
     $result= array();
 
     // Is backend available?
+    # FIXME
     $queries= $config['query'];
     if (!isset($queries[0])){
       $queries= array($queries);
@@ -421,7 +415,7 @@ class filter {
     $result.= "<ul class='level2'>";
 
     // Build in filters
-    foreach ($this->searches as $tag => $config) {
+    foreach ($this->xmlSearches as $tag => $config) {
       if ($tag == $this->search) {
         $result.= "<li><a href='#'>".image("images/checked.png")."&nbsp;"._($config['label'])."</a></li>";
       } else {
@@ -431,12 +425,7 @@ class filter {
 
     // User defined filters
     $first= true;
-    if (is_array($this->category)) {
-      $categories= $this->category;
-    } else {
-      $categories= array($this->category);
-    }
-    foreach (userFilter::getFilter($categories) as $tag => $config) {
+    foreach (userFilter::getFilter($this->category) as $tag => $config) {
       if ($tag == $this->search) {
         $result.= "<li".($first?$separator:"")."><a href='#'>".image("images/checked.png")."&nbsp;"._($config['description'])."</a></li>";
       } else {

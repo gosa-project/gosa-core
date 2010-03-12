@@ -702,6 +702,9 @@ class management
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Entry saved!");
         $this->remove_lock();
         $this->closeDialogs();
+
+        // Ask filter to reload information
+        $this->filter->reloadFilters();
       }
     }
   }
