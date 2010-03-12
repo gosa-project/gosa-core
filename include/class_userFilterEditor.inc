@@ -35,7 +35,7 @@ class userFilterEditor extends plugin
       $this->parent = $entry['parent'];
       $this->name = $entry['name'];
       $this->description = $entry['description'];
-      $this->filter = userFilterEditor::_autoIndentFilter($entry['filter'], "\t");
+      $this->filter = userFilterEditor::_autoIndentFilter($entry['filter'], "  ");
       $this->selectedCategories = $entry['categories'];
       $this->share = in_array("share",$entry['flags']);
       $this->enable = in_array("enable",$entry['flags']);
