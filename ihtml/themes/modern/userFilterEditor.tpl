@@ -65,9 +65,14 @@
 
 <hr>
 
-<b>Filter</b>
-<textarea name='filter' id='filter' cols="0" style='width:100%; height: 250px;'>{$filter}</textarea>
-
+{foreach from=$queries item=item key=key}
+  <b>{t}Query{/t} #{$key}</b><input type='text' name='backend_{$key}' value='{$item.backend}'>
+  <button type='submit' name='removeQuery_{$key}'>{msgPool type='delButton'}</button> 
+  <textarea name='filter_{$key}' id='filter_{$key}' cols="0" 
+      style='width:100%; height: 120px;'>{$item.filter}</textarea>
+  <hr>
+{/foreach}
+  <button type='submit' name='addQuery'>{msgPool type='addButton'}</button> 
 <hr>
 
 <input type='hidden' value='1' name='userFilterEditor'>

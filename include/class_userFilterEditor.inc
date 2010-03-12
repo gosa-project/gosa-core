@@ -14,7 +14,7 @@ class userFilterEditor extends plugin
   public $selectedCategories = array();
   public $share = FALSE;
   public $enabled = TRUE;
-  public $filter = "(objectClass=*)";
+  public $queries = array();
 
   // The list of all categories mangaged by the current filter object.
   // Used in the grop-down box.
@@ -35,7 +35,11 @@ class userFilterEditor extends plugin
       $this->parent = $entry['parent'];
       $this->name = $entry['name'];
       $this->description = $entry['description'];
-      $this->filter = userFilterEditor::_autoIndentFilter($entry['filter'], "  ");
+      
+      foreach($entry['queries'] as $query){
+        $query['filter'] = userFilterEditor::_autoIndentFilter($query['filter'], "  ");
+        $this->queries[] = $query;
+      }
       $this->selectedCategories = $entry['categories'];
       $this->share = in_array("share",$entry['flags']);
       $this->enable = in_array("enable",$entry['flags']);
@@ -112,10 +116,18 @@ class userFilterEditor extends plugin
   function execute()
   {
     plugin::execute();
+
+    // Build up HTML compliant html output
+    $queries = array();
+    foreach($this->queries as $key => $query){
+      $query['filter'] =  htmlentities($query['filter'],ENT_COMPAT,'UTF-8');
+      $queries[$key] = $query; 
+    }  
+
     $smarty = get_smarty();
     $smarty->assign('parent', $this->parent);
     $smarty->assign('name', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
-    $smarty->assign('filter', htmlentities($this->filter,ENT_COMPAT,'UTF-8'));
+    $smarty->assign('queries', $queries);
     $smarty->assign('share', $this->share);
     $smarty->assign('enable', $this->enabled);
     $smarty->assign('description', htmlentities($this->description,ENT_COMPAT,'UTF-8'));
@@ -141,12 +153,22 @@ class userFilterEditor extends plugin
 
       // Filter needs special handling, it may contain charactes like < and >
       //  wich are stipped out by get_post() && validate()
-      if(isset($_POST['filter'])){
-        $f = mb_convert_encoding($_POST['filter'], 'UTF-8');
-        if(get_magic_quotes_gpc()){
-          $f = stripcslashes($f);
+      foreach($this->queries as $key => $query){
+        if(isset($_POST['filter_'.$key])){
+          $f = mb_convert_encoding($_POST['filter_'.$key], 'UTF-8');
+          if(get_magic_quotes_gpc()){
+            $f = stripcslashes($f);
+          }
+          $this->queries[$key]['filter'] = $f;
+          $this->queries[$key]['backend'] = get_post('backend_'.$key);
         }
-        $this->filter = $f;
+      }
+      
+      foreach($this->queries as $key => $query){
+        if(isset($_POST['removeQuery_'.$key])){
+          unset($this->queries[$key]);
+          $this->queries = array_values($this->queries);
+        }   
       }
 
       // Get posted flags 
@@ -167,6 +189,11 @@ class userFilterEditor extends plugin
         foreach($_POST['usedCategory'] as $cat){
           if(isset($this->selectedCategories[$cat])) unset($this->selectedCategories[$cat]);
         }
+      }
+
+      // Add new query 
+      if(isset($_POST['addQuery'])){
+        $this->queries[] = array('backend'=>'filterLDAP', 'filter' => '(objectClass=*)');
       }
     }
   }
@@ -194,11 +221,13 @@ class userFilterEditor extends plugin
     }
 
     // Count the number of opening and closing brackets - exclude escaped ones.
-    $f = preg_replace('/\\\\[\(\)]/',"",$this->filter);
-    $o = substr_count($f, '(');
-    $c = substr_count($f, ')');
-    if($o != $c){
-      $msgs[] = sprintf(_("Please check your filter. You have '%s' opening and '%s' closing brackets!"), $o, $c);
+    foreach($this->queries as $key => $query){
+      $f = preg_replace('/\\\\[\(\)]/',"",$query['filter']);
+      $o = substr_count($f, '(');
+      $c = substr_count($f, ')');
+      if($o != $c){
+        $msgs[] = sprintf(_("Please check your filter #%s. You have '%s' opening and '%s' closing brackets!"), ($key+1),$o, $c);
+      }
     }
 
     return($msgs);
@@ -216,7 +245,7 @@ class userFilterEditor extends plugin
     $ret['name'] = $this->name;
     $ret['description'] = $this->description;
     $ret['categories'] = $this->selectedCategories;
-    $ret['filter'] = $this->filter;
+    $ret['queries'] = $this->queries;
     $ret['flags'] = array();
     if($this->share){
       $ret['flags'][] = "share";

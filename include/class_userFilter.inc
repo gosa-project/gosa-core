@@ -4,7 +4,7 @@ class userFilter extends plugin
 {
   public $pathTitle= "Filter";
 
-  protected $filters = array();
+  public $filters = array();
   protected $availableCategories = array();
   
   public $objectclasses = array('gosaProperties');
@@ -67,9 +67,9 @@ class userFilter extends plugin
   
   /*! \brief    Parses a filter string into an array.
    */
-  static function explodeFilterString($filter)
+  static function explodeFilterString($filterStr)
   {
-    list($parent,$categories, $name, $description, $filter, $flags) = split(";", $filter);
+    list($parent,$categories, $name, $description, $filterList, $flags) = split(";", $filterStr);
 
     // Ensure that we no empty category in our category list.
     if(empty($categories)){
@@ -82,7 +82,14 @@ class userFilter extends plugin
     if(empty($flags)){
       $flags = array();
     }else{
-      $flags = split(',', $flags);
+      $flags = preg_split('/,/', $flags);
+    }
+
+    // Get filters and their backends 
+    $queries = array();
+    foreach(split(",", $filterList) as $data){
+      list($filter, $backend) = preg_split('/:/', $data);
+      $queries[] =  array('backend' => $backend, 'filter' => base64_decode($filter));
     }
 
     // build up filter entry.
@@ -91,7 +98,7 @@ class userFilter extends plugin
         'name' => $name, 
         'categories' => $categories,
         'description' => base64_decode($description),
-        'filter' => base64_decode($filter),
+        'queries' => $queries,
         'flags' => $flags);
 
     return($tmp);
@@ -124,7 +131,7 @@ class userFilter extends plugin
   function execute()
   {
     plugin::execute();
-
+    
     // Let the filter widget update itself
     $this->filterWidget->update();
 
@@ -251,7 +258,12 @@ class userFilter extends plugin
       $tmp.= implode(',', $filter['categories']).";";
       $tmp.= $filter['name'].";";
       $tmp.= base64_encode($filter['description']).";";
-      $tmp.= base64_encode($filter['filter']).";";
+
+      // Add queries 
+      foreach($filter['queries'] as $query){
+         $tmp.= base64_encode($query['filter']).":".$query['backend'].",";
+      }
+      $tmp = trim($tmp,",").";";
       $tmp.= implode(',', $filter['flags']);
       $attrs[] = $tmp;
     }
