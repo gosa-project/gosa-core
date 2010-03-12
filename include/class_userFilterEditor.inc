@@ -204,6 +204,7 @@ class userFilterEditor extends plugin
         if(isset($filter->searches[$this->parent])){
           $query = $filter->searches[$this->parent]['query']['filter'];
           $backend = $filter->searches[$this->parent]['query']['backend'];
+          print_a($filter->searches[$this->parent]);
         }
 
         $this->queries[] = array('backend'=> $backend, 'filter' => userFilterEditor::_autoIndentFilter($query,"  "));

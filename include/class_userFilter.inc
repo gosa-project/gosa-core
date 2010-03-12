@@ -217,10 +217,11 @@ class userFilter extends plugin
         if(!isset($tmp['name'])) continue;
           
         // Remove line breaks from the filter, which may were added for better reading. 
-        $c = preg_split('/\n/',$tmp['filter']);
-
-        foreach($c as $key => $str) $c[$key] = trim($str);
-        $tmp['filter'] = implode($c);
+        foreach($tmp['queries'] as $key => $query){
+          $c = preg_split('/\n/',$query['filter']);
+          foreach($c as $key => $str) $c[$key] = trim($str);
+          $tmp['queries'][$key]['filter'] = implode($c);
+        }
  
         // The filter is visible if it is shared or if is one of our own creations.
         //  ... and enabled.
