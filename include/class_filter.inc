@@ -153,7 +153,7 @@ class filter {
 
     // Move information
     if (isset($this->searches[$method])) {
-      $this->query= array_merge($this->searches[$method]['query']);
+      $this->query= $this->searches[$method]['query'];
       if (!isset($this->query[0])) {
         $this->query= array($this->query);
       }
