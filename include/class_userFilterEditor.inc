@@ -81,8 +81,8 @@ class userFilterEditor extends plugin
         $i ++;
       }
     }
-    $str = preg_replace('/::OPEN::/', "(", $str);
-    $str = preg_replace('/::CLOSE::/', ")", $str);
+    $str = preg_replace('/::OPEN::/', '\(', $str);
+    $str = preg_replace('/::CLOSE::/', '\)', $str);
     return($str);
   }
 
@@ -142,11 +142,10 @@ class userFilterEditor extends plugin
       // Filter needs special handling, it may contain charactes like < and >
       //  wich are stipped out by get_post() && validate()
       if(isset($_POST['filter'])){
-        $f = $_POST['filter'];
+        $f = mb_convert_encoding($_POST['filter'], 'UTF-8');
         if(get_magic_quotes_gpc()){
           $f = stripcslashes($f);
         }
-        $f = mb_convert_encoding($_POST['filter'], 'UTF-8');
         $this->filter = $f;
       }
 
