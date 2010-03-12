@@ -307,7 +307,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 
   if ($ok) {
 
-    session::global_set('config',$config);
     /* Login as user, initialize user ACL's */
     if ($htaccess_authenticated){
       $ui= ldap_login_user_htaccess($username);
@@ -321,6 +320,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     if ($ui === NULL || !$ui){
       $message= _("Please check the username/password combination.");
       $smarty->assign ('nextfield', 'password');
+      session::global_set('config',$config);
       new log("security","login","",array(),"Authentication failed for user \"$username\"");
     } else {
       /* Remove all locks of this user */
