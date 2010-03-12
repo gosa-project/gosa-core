@@ -2,7 +2,6 @@
 
 <filterdef>
   <definition>
-    <category>department</category>
     <initial>true</initial>
     <default>default</default>
     <scope>auto</scope>
@@ -12,6 +11,7 @@
     <tag>default</tag>
     <label>Default filter</label>
     <query>
+      <storage></storage>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(|(dc=$)(ou=$)(o=$)(l=$)(c=$)))</filter>
       <attribute>dn</attribute>

@@ -2,7 +2,6 @@
 
 <filterdef>
   <definition>
-    <category>users</category>
     <initial>true</initial>
     <default>default</default>
     <scope>auto</scope>
@@ -12,6 +11,7 @@
     <tag>default</tag>
     <label>Default filter</label>
     <query>
+      <storage>userRDN</storage>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(|(cn=$)(sn=$)(uid=$)))</filter>
       <attribute>dn</attribute>
@@ -32,6 +32,7 @@
     <tag>template</tag>
     <label>Show templates</label>
     <query>
+      <storage>userRDN</storage>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaUserTemplate)(|(cn=$)(sn=$)(uid=$)))</filter>
       <attribute>dn</attribute>
