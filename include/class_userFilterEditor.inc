@@ -21,7 +21,8 @@ class userFilterEditor extends plugin
   // The list of all categories mangaged by the current filter object.
   // Used in the grop-down box.
   public $orig_name = "";
-  
+
+  public $backends = array('LDAP', 'SYSTEMS', 'FAI', 'GroupLDAP','ACL');  
 
 
   /*! \brief    Instantiate the filter editing dialog. 
@@ -131,6 +132,7 @@ class userFilterEditor extends plugin
 
     $smarty->assign("fixedFilters", array_keys($filter->searches));
     $smarty->assign('parent', $this->parent);
+    $smarty->assign('backends', $this->backends);
     $smarty->assign('name', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
     $smarty->assign('queries', $queries);
     $smarty->assign('share', $this->share);

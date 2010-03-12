@@ -27,7 +27,7 @@
             <label for='parent'>{t}Parent filter{/t}</label>
           </td>
           <td>
-            <select name='parent'>
+            <select name='parent' size='1'>
               {html_options values=$fixedFilters output=$fixedFilters selected=$parent}
             </select>
           </td>   
@@ -51,7 +51,7 @@
         {html_options options=$selectedCategories}
       </select>
       <br>
-      <select id='availableCategory' name='availableCategory'
+      <select id='availableCategory' name='availableCategory' size='1'
         onChange="$('manualCategory').value=$('availableCategory').options[$('availableCategory').selectedIndex].value"> 
         <option value=''>&nbsp;</option>
         {html_options values=$availableCategories output=$availableCategories}
@@ -66,7 +66,10 @@
 <hr>
 
 {foreach from=$queries item=item key=key}
-  <b>{t}Query{/t} #{$key}</b><input type='text' name='backend_{$key}' value='{$item.backend}'>
+  <b>{t}Query{/t} #{$key}</b>
+  <select name='backend_{$key}' size='1'>
+    {html_options output=$backends values=$backends selected=$item.backend}
+  </select>
   <button type='submit' name='removeQuery_{$key}'>{msgPool type='delButton'}</button> 
   <textarea name='filter_{$key}' id='filter_{$key}' cols="0" 
       style='width:100%; height: 120px;'>{$item.filter}</textarea>
