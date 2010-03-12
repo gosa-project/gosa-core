@@ -182,10 +182,10 @@ class userFilterEditor extends plugin
     // Check if the name is given
     if(empty($this->name)){
       $msgs[] = msgPool::required(_("Name"));
-    }elseif(preg_match("/[^a-z0-9\-_ ]/i", $this->name)){
+    }elseif(preg_match("/[^a-z0-9]/i", $this->name)){
       
       // Check for a valid name, no special chars here - in particular no ; 
-      $msgs[] = msgPool::invalid(_("Name"), $this->name,"/[a-z0-9\-_ ]/i");
+      $msgs[] = msgPool::invalid(_("Name"), $this->name,"/[a-z0-9]/i");
     }  
 
     // Description is a must value.
