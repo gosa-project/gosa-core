@@ -188,6 +188,7 @@ class userFilterEditor extends plugin
         }elseif(isset($_POST['availableCategory']) && !empty($_POST['availableCategory'])){
           $this->selectedCategories[] = get_post('availableCategory');
         }
+        $this->selectedCategories = array_unique($this->selectedCategories);
       }
 
       // Remove categories
