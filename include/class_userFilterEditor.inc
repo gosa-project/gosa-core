@@ -199,12 +199,18 @@ class userFilterEditor extends plugin
       if(isset($_POST['addQuery'])){
 
         $filter= $this->listing->getFilter();
-        $backend = 'filterLDAP';
+        $backend = 'LDAP';
         $query = "(objectClass=*)";
         if(isset($filter->searches[$this->parent])){
-          $query = $filter->searches[$this->parent]['query']['filter'];
-          $backend = $filter->searches[$this->parent]['query']['backend'];
-          print_a($filter->searches[$this->parent]);
+      
+          $tmp = $filter->searches[$this->parent];  
+          if(isset($tmp['query'][count($this->queries)])){
+            $query = $tmp['query'][count($this->queries)]['filter'];
+            $backend = $tmp['query'][count($this->queries)]['backend'];
+          }elseif(isset($tmp['query']['filter'])){
+            $query = $tmp['query']['filter'];
+            $backend = $tmp['query']['backend'];
+          }
         }
 
         $this->queries[] = array('backend'=> $backend, 'filter' => userFilterEditor::_autoIndentFilter($query,"  "));
