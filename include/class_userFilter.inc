@@ -81,8 +81,10 @@ class userFilter extends plugin
     // Get filters and their backends 
     $queries = array();
     foreach(split(",", $filterList) as $data){
-      list($filter, $backend) = preg_split('/:/', $data);
-      $queries[] =  array('backend' => $backend, 'filter' => base64_decode($filter));
+      if(!empty($data)){
+        list($filter, $backend) = preg_split('/:/', $data);
+        $queries[] =  array('backend' => $backend, 'filter' => base64_decode($filter));
+      }
     }
 
     // build up filter entry.
