@@ -94,7 +94,6 @@
 
     <action>
      <type>sub</type>
-     <image>images/lists/new.png</image>
      <label>Create</label>
 
      <action>
