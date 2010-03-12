@@ -35,12 +35,55 @@ class userFilterEditor extends plugin
       $this->parent = $entry['parent'];
       $this->name = $entry['name'];
       $this->description = $entry['description'];
-      $this->filter = $entry['filter'];
+      $this->filter = userFilterEditor::_autoIndentFilter($entry['filter'], "\t");
       $this->selectedCategories = $entry['categories'];
       $this->share = in_array("share",$entry['flags']);
       $this->enable = in_array("enable",$entry['flags']);
     }
     $this->orig_name = $this->name;
+  }
+
+
+  /*! \brief    Automatic indent indentation for filters.
+   */
+  static function _autoIndentFilter($str, $indent = " ")
+  {
+    // Remove line breaks and escaped brackets 
+    $str = preg_replace('/[\t ]*\n[\t ]*/', "", $str);
+    $str = preg_replace('/\\\\\\(/', "::OPEN::", $str);
+    $str = preg_replace('/\\\\\\)/', "::CLOSE::", $str);
+   
+    // Add a line break infront of every bracket 
+    $str = preg_replace('/\\(/', "\n(", $str);
+    $str = preg_replace('/\\)/', ")\n", $str);
+
+    // Split by linebreaks
+    $lines = preg_split("/\n/", $str);
+    $str = "";
+    $i = 0;
+ 
+    // Walk trough search blocks 
+    foreach($lines as $line){
+      $line = trim($line);
+      if(empty($line)) continue;
+
+      // Go back one level in indentation  
+      if(!preg_match("/\\(.*\\)/", $line) && preg_match('/\\)$/', $line)){
+        $i --;
+      }
+
+      $str.= "\n";
+      $str = str_pad($str,strlen($str)+$i, $indent); 
+      $str.= $line;
+
+      // Go one level deeper in indentation 
+      if(!preg_match("/\\(.*\\)/", $line) && preg_match('/^\\(/', $line)){
+        $i ++;
+      }
+    }
+    $str = preg_replace('/::OPEN::/', "(", $str);
+    $str = preg_replace('/::CLOSE::/', ")", $str);
+    return($str);
   }
 
 
