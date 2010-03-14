@@ -2483,7 +2483,8 @@ function progressbar($percentage, $width= 200, $height= 14, $showText= false, $c
   // Apply gradients
   $hoffset= floor($height / 2) + 4;
   $woffset= floor(($width+5) * (100-$percentage) / 100);
-  $style.="-moz-box-shadow:
+  foreach (array("-moz-box-shadow", "-webkit-box-shadow", "box-shadow") as $type) {
+    $style.="$type:
                    0 0 2px rgba(255, 255, 255, 0.4) inset,
                    0 4px 6px rgba(255, 255, 255, 0.4) inset,
                    0 ".$hoffset."px 0 -2px rgba(255, 255, 255, 0.2) inset,
@@ -2491,6 +2492,7 @@ function progressbar($percentage, $width= 200, $height= 14, $showText= false, $c
                    -".($woffset+1)."px 0 0 -2px rgba(0, 0, 0, 0.6) inset,
                    0pt ".($hoffset+1)."px 8px rgba(0, 0, 0, 0.3) inset,
                    0pt 1px 0px rgba(0, 0, 0, 0.2);";
+  }
 
   // Set ID
   if ($id != ""){
