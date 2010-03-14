@@ -117,8 +117,8 @@ class filter {
     }
 
     // Initialize searches and default search mode
-    $this->reloadFilters();
     $this->defaultSearch= $xmlData['definition']['default'];
+    $this->reloadFilters();
     $this->setSearch($this->defaultSearch);
 
     return true;  

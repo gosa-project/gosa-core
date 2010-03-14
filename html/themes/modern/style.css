@@ -1343,3 +1343,32 @@ background-image:none;
   color:#777;
   text-align:right;
 }
+
+/* Progress */
+
+div.progress {
+  text-align:center;
+  color: rgba(255,255,255,0.9);
+  padding:1px;
+  border: 1px solid rgba(0,0,0,0.6);
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+
+.progress-low {
+  background-color:#32CD32;
+}
+
+.progress-mid {
+  background-color:#FFFF00;
+}
+
+.progress-high {
+  background-color:#FFA500;
+}
+
+.progress-full {
+  background-color:#FF0000;
+}
+

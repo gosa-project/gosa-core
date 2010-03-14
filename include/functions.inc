@@ -3582,6 +3582,54 @@ function image($path, $action= "", $title= "", $align= "middle")
 }
 
 
+function progress($progress, $width= 200, $height= 14)
+{
+  $text= "";
+  $class= "";
+  $style= "width:${width};height:${height}px;";
+
+  // Fix progress range
+  $progress= floor($progress);
+  if ($progress > 100) {
+    $progress= 100;
+  }
+  if ($progress < 0) {
+    $progress= 0;
+  }
+
+  // Only show text if we're above 10px height
+  if ($height>10){
+    $text= $progress."%";
+  }
+
+  // Set font size
+  $style.= "font-size:".($height-3)."px;";
+
+  // Set color
+  if ($progress < 70) {
+    $class= " progress-low";
+  } elseif ($progress < 80) {
+    $class= " progress-mid";
+  } elseif ($progress < 90) {
+    $class= " progress-high";
+  } else {
+    $class= " progress-full";
+  }
+  
+  // Apply gradients
+  $hoffset= floor($height / 2) + 4;
+  $woffset= floor($width * (100-$progress) / 100);
+  $style.="-moz-box-shadow:
+                   0 0 2px rgba(255, 255, 255, 0.4) inset,
+                   0 4px 6px rgba(255, 255, 255, 0.4) inset,
+                   0 ".$hoffset."px 0 -2px rgba(255, 255, 255, 0.2) inset,
+                   -".$woffset."px 0 0 -2px rgba(255, 255, 255, 0.2) inset,
+                   -".($woffset+1)."px 0 0 -2px rgba(0, 0, 0, 0.6) inset,
+                   0pt ".($hoffset+1)."px 8px rgba(0, 0, 0, 0.3) inset,
+                   0pt 1px 0px rgba(0, 0, 0, 0.2);";
+
+  echo "<div class='progress$class' style='$style'>$text</div>";
+}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
