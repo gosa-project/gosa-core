@@ -2442,11 +2442,62 @@ function compare_revision($revision_file, $revision)
  * \param int 'percentage' Value to display
  * \param int 'width' width of the resulting output
  * \param int 'height' height of the resulting output
- * \param boolean 'showvalue' weither to show the percentage in the progressbar or not
+ * \param boolean 'showtext' weither to show the percentage in the progressbar or not
  * */
-function progressbar($percentage,$width=100,$height=15,$showvalue=false)
+function progressbar($percentage, $width= 200, $height= 14, $showText= false, $colorize= true, $id= "")
 {
-  return("<img src='progress.php?x=$width&amp;y=$height&amp;p=$percentage'>");
+  $text= "";
+  $class= "";
+  $style= "width:${width}px;height:${height}px;";
+
+  // Fix percentage range
+  $percentage= floor($percentage);
+  if ($percentage > 100) {
+    $percentage= 100;
+  }
+  if ($percentage < 0) {
+    $percentage= 0;
+  }
+
+  // Only show text if we're above 10px height
+  if ($showText && $height>10){
+    $text= $percentage."%";
+  }
+
+  // Set font size
+  $style.= "font-size:".($height-3)."px;";
+
+  // Set color
+  if ($colorize){
+    if ($percentage < 70) {
+      $class= " progress-low";
+    } elseif ($percentage < 80) {
+      $class= " progress-mid";
+    } elseif ($percentage < 90) {
+      $class= " progress-high";
+    } else {
+      $class= " progress-full";
+    }
+  }
+  
+  // Apply gradients
+  $hoffset= floor($height / 2) + 4;
+  $woffset= floor(($width+5) * (100-$percentage) / 100);
+  $style.="-moz-box-shadow:
+                   0 0 2px rgba(255, 255, 255, 0.4) inset,
+                   0 4px 6px rgba(255, 255, 255, 0.4) inset,
+                   0 ".$hoffset."px 0 -2px rgba(255, 255, 255, 0.2) inset,
+                   -".$woffset."px 0 0 -2px rgba(255, 255, 255, 0.2) inset,
+                   -".($woffset+1)."px 0 0 -2px rgba(0, 0, 0, 0.6) inset,
+                   0pt ".($hoffset+1)."px 8px rgba(0, 0, 0, 0.3) inset,
+                   0pt 1px 0px rgba(0, 0, 0, 0.2);";
+
+  // Set ID
+  if ($id != ""){
+    $id= "id='$id'";
+  }
+
+  return "<div class='progress$class' $id style='$style'>$text</div>";
 }
 
 
@@ -3581,55 +3632,6 @@ function image($path, $action= "", $title= "", $align= "middle")
   }
 }
 
-
-function progress($progress, $width= 200, $height= 14)
-{
-  $text= "";
-  $class= "";
-  $style= "width:${width};height:${height}px;";
-
-  // Fix progress range
-  $progress= floor($progress);
-  if ($progress > 100) {
-    $progress= 100;
-  }
-  if ($progress < 0) {
-    $progress= 0;
-  }
-
-  // Only show text if we're above 10px height
-  if ($height>10){
-    $text= $progress."%";
-  }
-
-  // Set font size
-  $style.= "font-size:".($height-3)."px;";
-
-  // Set color
-  if ($progress < 70) {
-    $class= " progress-low";
-  } elseif ($progress < 80) {
-    $class= " progress-mid";
-  } elseif ($progress < 90) {
-    $class= " progress-high";
-  } else {
-    $class= " progress-full";
-  }
-  
-  // Apply gradients
-  $hoffset= floor($height / 2) + 4;
-  $woffset= floor($width * (100-$progress) / 100);
-  $style.="-moz-box-shadow:
-                   0 0 2px rgba(255, 255, 255, 0.4) inset,
-                   0 4px 6px rgba(255, 255, 255, 0.4) inset,
-                   0 ".$hoffset."px 0 -2px rgba(255, 255, 255, 0.2) inset,
-                   -".$woffset."px 0 0 -2px rgba(255, 255, 255, 0.2) inset,
-                   -".($woffset+1)."px 0 0 -2px rgba(0, 0, 0, 0.6) inset,
-                   0pt ".($hoffset+1)."px 8px rgba(0, 0, 0, 0.3) inset,
-                   0pt 1px 0px rgba(0, 0, 0, 0.2);";
-
-  echo "<div class='progress$class' style='$style'>$text</div>";
-}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
