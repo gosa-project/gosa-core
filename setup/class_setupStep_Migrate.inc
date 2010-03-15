@@ -574,7 +574,6 @@ class Step_Migrate extends setup_step
     /* Try to create dummy object 
      */ 
     $ldap->cd ($dn);
-    $ldap->create_missing_trees($dn);
     $res = $ldap->add($testEntry);
     $ldap->cat($dn);
     if(!$ldap->count()){
