@@ -2,7 +2,13 @@ GOsa2 changelog
 ===============
 
 * gosa 2.6.9
-  - Fixed problem with initial phone accounts, sip type was NULL. 
+  - Fixed problem with initial phone accounts, sip type was NULL
+  - Fixed TLS issues in the setup
+  - Fixed locale issues in the setup
+  - Fixed delete of DHCP statements
+  - Fixed DHCP authoritative flag
+  - Modified sieve behaviour to use sieve-discard for "drop_own_mails"
+  - Modified filter descriptions to behave more like former 2.6 releases
 
 * gosa 2.6.8
   - Base selector displays descriptions and icons now
