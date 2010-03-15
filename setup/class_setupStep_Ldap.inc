@@ -96,10 +96,17 @@ class Step_Ldap extends setup_step
     $this->bind_id    = FALSE;
 
     @ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
-    $this->connect_id = @ldap_connect($this->connection);
+    $this->connect_id = ldap_connect($this->connection);
       
-    @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
-    $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
+    if($this->tls){
+      if(@ldap_set_option($this->connect_id, LDAP_OPT_REFERRALS, 0))
+        if(@ldap_start_tls($this->connect_id))
+          $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
+      @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
+    }else{
+      @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
+      $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
+    }
     
     if(!$this->bind_id){
       $str = sprintf(_("Anonymous bind to server '%s' failed!"),$this->connection); 
