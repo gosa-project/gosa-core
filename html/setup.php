@@ -69,8 +69,8 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
 }
 
 /* Get posted language */
-if(!session::global_is_set('language')){
-  session::global_set('language',get_browser_language());
+if(!session::global_is_set('lang')){
+  session::global_set('lang',get_browser_language());
 }
 if(isset($_POST['lang_selected'])){
   if($_POST['lang_selected'] != ""){
