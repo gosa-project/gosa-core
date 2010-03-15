@@ -81,6 +81,10 @@ select[size="1"]:hover{
   border:1px solid #777;
 }
 
+input[disabled]:hover, select[disabled]:hover, textarea[disabled]:hover {
+  border:1px solid #CCC;
+}                     
+
 h1, h2, h3 {
   margin-top:2px;
 }
