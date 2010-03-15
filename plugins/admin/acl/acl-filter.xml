@@ -3,56 +3,60 @@
 <filterdef>
   <definition>
     <category>acl</category>
-    <template>acl-filter.tpl</template>
     <initial>true</initial>
+    <scope>auto</scope>
+    <default>default</default>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>cn</attribute>
+    <attribute>ou</attribute>
+    <attribute>description</attribute>
   </definition>
 
   <search>
+    <tag>default</tag>
+    <label>Default filter</label>
     <query>
       <backend>ACL</backend>
-      <filter>(|$ACL$ROLE)$NAME</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>cn</attribute>
-      <attribute>ou</attribute>
-      <attribute>description</attribute>
+      <filter>(&amp;(|(objectClass=gosaAcl)(objectClass=gosaRole))(|(cn=$)(description=$)(ou=$)))</filter>
     </query>
-    <scope>auto</scope>
-  </search>
-
-  <element>
-    <type>textfield</type>
-    <tag>NAME</tag>
-    <size>20</size>
-    <maxlength>60</maxlength>
-    <default></default>
-    <unset></unset>
-    <set>(|(cn=*$*)(ou=*$*)(description=*$*))</set>
-    <alphabet>true</alphabet>
     <autocomplete>
-      <backend>ACL</backend>
-      <filter>(&amp;(|(objectClass=gosaAcl)(objectClass=gosaRole))(|(ou=*$NAME*)(description=*$NAME*)(cn=*$NAME*)))</filter>
       <attribute>ou</attribute>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
-  </element>
+  </search>
 
-  <element>
-    <type>checkbox</type>
-    <tag>ACL</tag>
-    <default>true</default>
-    <set>(objectClass=gosaAcl)</set>
-    <unset></unset>
-  </element>
+  <search>
+    <tag>rolesOnly</tag>
+    <label>Roles only</label>
+    <query>
+      <backend>ACL</backend>
+      <filter>(&amp;(objectClass=gosaRole)(|(cn=$)(description=$)(ou=$)))</filter>
+    </query>
+    <autocomplete>
+      <attribute>ou</attribute>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
 
-  <element>
-    <type>checkbox</type>
-    <tag>ROLE</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(objectClass=gosaRole)</set>
-  </element>
+  <search>
+    <tag>rolesAssignments</tag>
+    <label>Roles assignments</label>
+    <query>
+      <backend>ACL</backend>
+      <filter>(&amp;(objectClass=gosaAcl)(|(cn=$)(description=$)(ou=$)))</filter>
+    </query>
+    <autocomplete>
+      <attribute>ou</attribute>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
 
 </filterdef>
