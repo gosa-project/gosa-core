@@ -742,7 +742,9 @@ class Step_Migrate extends setup_step
         "/(,|)ou=configs,/","/(,|)ou=systems,/",
         "/(,|)ou=apps,/","/(,|)ou=mime,/","/(,|)ou=devices/","/^ou=aclroles,/","/^ou=incoming,/",
         "/ou=snapshots,/","/(,|)dc=addressbook,/","/^(,|)ou=machineaccounts,/",
-        "/(,|)ou=winstations,/");
+        "/(,|)ou=winstations,/","/(,|)ou=roles,/");
+
+    
 
     /* Get all invisible departments */
     $ldap->cd($cv['base']); 
