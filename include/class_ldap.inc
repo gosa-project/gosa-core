@@ -709,8 +709,11 @@ class LDAP{
             $na['objectClass'][]= 'locality';
           }
           $na[$type]= $param;
+
+          // Fill in MUST values - but do not overwrite existing ones.
           if (is_array($classes[$ocname]['MUST'])){
             foreach($classes[$ocname]['MUST'] as $attr){
+              if(isset($na[$attr]) && !empty($na[$attr])) continue;
               $na[$attr]= "filled";
             }
           }
