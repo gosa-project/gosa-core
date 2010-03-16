@@ -290,14 +290,14 @@ class filter {
       }
 
       // Save scope if needed
-      if ($this->scopeMode == "auto" && isset($_POST['act']) && $_POST['act'] == "toggle-subtree") {
+      if ($this->scopeMode == "auto" && isset($_POST['filter']) && $_POST['filter'] == "toggle-subtree") {
         $this->scope= ($this->scope == "one")?"sub":"one";
       }
 
       // Switch filter?
-      if (isset($_POST['act'])) {
+      if (isset($_POST['filter'])) {
         foreach ($this->searches as $tag => $cfg) {
-          if ($_POST['act'] == "filter-$tag") {
+          if ($_POST['filter'] == "filter-$tag") {
             $this->setSearch($tag);
             break;
           }
@@ -411,7 +411,7 @@ class filter {
   function renderFilterMenu()
   {
     // Load shortcut
-    $result= "<input type='hidden' name='act' id='filter' value=''><div style='display:none'><input type='submit' name='exec_filter' id='exec_filter' value=''></div>".
+    $result= "<input type='hidden' name='filter' id='filter' value=''><div style='display:none'><input type='submit' name='exec_filter' id='exec_filter' value=''></div>".
       "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png").image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
