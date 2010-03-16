@@ -181,7 +181,7 @@ class ogroupManagement extends management
     $conv= array(
         "Y" => array("plugins/users/images/select_template.png",_("Templates") , "ogroup"),
         "U" => array("plugins/generic/images/head.png"        ,_("User")        , "ogroup"),
-        "G" => array("plugins/groups/images/groups.png"       ,_("Group")       , "ogroup"),
+        "G" => array("plugins/groups/images/select_group.png"       ,_("Group")       , "ogroup"),
         "A" => array("plugins/ogroups/images/application.png" ,_("Application") , "ogroup"),
         "D" => array("plugins/departments/department.png"     ,_("Department")  , "ogroup"),
         "S" => array("plugins/ogroups/images/server.png"      ,_("Server")      , "ogroup"),
