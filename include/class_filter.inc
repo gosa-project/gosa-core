@@ -67,7 +67,7 @@ class filter {
     if (isset($xmlData['search'])) {
 
       // Array conversion
-      if (!is_array($xmlData['search'])) {
+      if (!isset($xmlData['search'][0])) {
         $searches= array($xmlData['search']);
       } else {
         $searches= $xmlData['search'];
