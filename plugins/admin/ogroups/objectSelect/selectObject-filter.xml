@@ -3,50 +3,43 @@
 <filterdef>
   <definition>
     <category>users</category>
-    <template>../plugins/admin/ogroups/objectSelect/selectObject-filter.tpl</template>
     <initial>true</initial>
+    <default>default</default>
+    <scope>auto</scope>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>cn</attribute>
+    <attribute>sn</attribute>
+    <attribute>ou</attribute>
+    <attribute>uid</attribute>
+    <attribute>givenName</attribute>
+    <attribute>description</attribute>
   </definition>
 
   <search>
+    <tag>default</tag>
+    <label>Default filter</label>
     <query>
       <backend>LDAPBlacklist</backend>
-      <filter>(&amp;(| $USER $GROUP $SERVER $WORKSTATION $TERMINAL $PRINTER $PHONE) $NAME)</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>cn</attribute>
-      <attribute>sn</attribute>
-      <attribute>ou</attribute>
-      <attribute>uid</attribute>
-      <attribute>givenName</attribute>
-      <attribute>description</attribute>
+      <filter>(&amp;
+                (|
+                  (objectClass=gosaAccont) 
+                  (objectClass=posixGroup)
+                  (objectClass=goServer)
+                  (objectClass=gotoWorkstation)
+                  (objectClass=gotoTerminal)
+                  (objectClass=gotoPrinter)
+                  (objectClass=goFonHardware)
+                )
+                (cn=$)
+              )
+      </filter>
     </query>
     <query>
       <backend>LDAPDepartmentBlacklist</backend>
-      <filter>(&amp;(| $DEPARTMENT)  $NAME)</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>cn</attribute>
-      <attribute>sn</attribute>
-      <attribute>ou</attribute>
-      <attribute>uid</attribute>
-      <attribute>givenName</attribute>
-      <attribute>description</attribute>
+      <filter>(&amp;(objectClass=gosaDepartment)(cn=$))</filter>
     </query>
-    <scope>auto</scope>
-  </search>
-
-  <element>
-    <type>textfield</type>
-    <tag>NAME</tag>
-    <size>20</size>
-    <maxlength>60</maxlength>
-    <default></default>
-    <unset></unset>
-    <set>(|(cn=*$*)(sn=*$*)(givenName=*$*)(ou=*$*)(dc=*$*)(c=*$*)(l=*$*))</set>
-    <alphabet>true</alphabet>
     <autocomplete>
-      <backend>LDAPBlacklist</backend>
-      <filter>(&amp;(|(objectClass=gosaDepartment)(objectClass=gosaAccount)(objectClass=posixGroup)(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal)(objectClass=gotoPrinter)(objectClass=goFonHardware))(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)(ou=*$NAME*)(dc=*$NAME*)(c=*$NAME*)(l=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <attribute>l</attribute>
       <attribute>o</attribute>
@@ -55,70 +48,6 @@
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>USER</tag>
-    <default></default>
-    <set>(&amp;(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate)))</set>
-    <unset></unset>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>GROUP</tag>
-    <default></default>
-    <unset></unset>
-    <set>(objectClass=posixGroup)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>DEPARTMENT</tag>
-    <default></default>
-    <unset></unset>
-    <set>(objectClass=gosaDepartment)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>SERVER</tag>
-    <default></default>
-    <unset></unset>
-    <set>(objectClass=goServer)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>WORKSTATION</tag>
-    <default></default>
-    <unset></unset>
-    <set>(objectClass=gotoWorkstation)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>TERMINAL</tag>
-    <default></default>
-    <unset></unset>
-    <set>(objectClass=gotoTerminal)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>PRINTER</tag>
-    <default></default>
-    <unset></unset>
-    <set>(objectClass=gotoPrinter)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>PHONE</tag>
-    <default></default>
-    <unset></unset>
-    <set>(objectClass=goFonHardware)</set>
-  </element>
+  </search>
 
 </filterdef>
