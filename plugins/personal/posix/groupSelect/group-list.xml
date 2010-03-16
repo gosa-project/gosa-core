@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <list>
   <definition>
-    <departmentbrowser>true</departmentbrowser>
-    <departmentrootvisible>false</departmentrootvisible>
-    <basemode>true</basemode>
-    <multiselect>true</multiselect>
+    <departmentBrowser>true</departmentBrowser>
+    <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>true</baseMode>
+    <multiSelect>true</multiSelect>
     <template>../plugins/personal/posix/groupSelect/group-list.tpl</template>
     <module>groups</module>
     <label>Please select the desired entries</label>
-    <defaultsortcolumn>1</defaultsortcolumn>
-    <objecttype>
+    <defaultSortColumn>1</defaultSortColumn>
+
+    <objectType>
       <label>Group</label>
-      <objectclass>posixGroup</objectclass>
+      <objectClass>posixGroup</objectClass>
       <category>groups</category>
       <class>group</class>
       <image>plugins/groups/images/select_group.png</image>
-    </objecttype>
+    </objectType>
+
   </definition>
 
   <table>
