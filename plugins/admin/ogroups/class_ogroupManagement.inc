@@ -195,10 +195,7 @@ class ogroupManagement extends management
     $result ="";
     for($i = 0 ; $i < strlen($types); $i++){
       $type = $types[$i];
-      $result.="<input class='center' type='image' src='".$conv[$type][0]."' ".
-        "alt='".$conv[$type][1]."' title='".$conv[$type][1].
-        "' name='listing_edit_".$conv[$type][2]."_$row' style='padding:1px'>";
-
+      $result.= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
     }
     return($result);
   }
