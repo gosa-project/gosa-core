@@ -838,7 +838,6 @@ div.nlistFooter {
   color:#444;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
-  border-top:1px solid #CCC;
   border-left:1px solid #CCC;
   border-right:1px solid #CCC;
   border-bottom:1px solid #CCC;
