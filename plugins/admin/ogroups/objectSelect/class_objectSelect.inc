@@ -39,21 +39,21 @@ class objectSelect extends management
         get_ou("printerRDN"),
         get_ou("phoneRDN"));
 
-#    // Build filter
- #   if (session::global_is_set(get_class($this)."_filter")){
-  #    $filter= session::global_get(get_class($this)."_filter");
-   # } else {
+    // Build filter
+    if (session::global_is_set(get_class($this)."_filter")){
+      $filter= session::global_get(get_class($this)."_filter");
+    } else {
       $filter = new filter(get_template_path("selectObject-filter.xml", true, dirname(__FILE__)));
       $filter->setObjectStorage($this->storagePoints);
-    #}
-    $this->setFilter($filter);
+#}
+      $this->setFilter($filter);
 
-    // Build headpage
-    $headpage = new listing(get_template_path("selectObject-list.xml", true, dirname(__FILE__)));
-    $headpage->registerElementFilter("depLabel", "objectSelect::filterDepLabel");
-    $this->registerAction("open","openEntry");
-    $headpage->setFilter($filter);
-    parent::__construct($config, $ui, "object", $headpage);
+      // Build headpage
+      $headpage = new listing(get_template_path("selectObject-list.xml", true, dirname(__FILE__)));
+      $headpage->registerElementFilter("depLabel", "objectSelect::filterDepLabel");
+      $this->registerAction("open","openEntry");
+      $headpage->setFilter($filter);
+      parent::__construct($config, $ui, "object", $headpage);
   }
 
 
