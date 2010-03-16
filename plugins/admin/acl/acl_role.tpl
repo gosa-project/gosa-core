@@ -35,13 +35,15 @@
 </table>
 {$aclList}
 {render acl=$gosaAclEntryACL}
-<input type="submit" name="new_acl" value="{t}New ACL{/t}">
+<button type='submit' name='new_acl'>{t}New ACL{/t}</button>
+
 {/render}
 
 {/if}
 
 {if $dialogState eq 'create'}
-<h1>{t}ACL type{/t} <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">{html_options options=$aclTypes selected=$aclType}<option disabled>&nbsp;</option></select>&nbsp;{if $javascript eq 'false'}<input type="submit" value="{msgPool type=applyButton}" name="refresh">{/if}</h1>
+<h1>{t}ACL type{/t} <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">{html_options options=$aclTypes selected=$aclType}<option disabled>&nbsp;</option></select>&nbsp;{if $javascript eq 'false'}<button type='submit' name='refresh'>{msgPool type=applyButton}</button>{/if}
+</h1>
 
 <hr>
 
@@ -52,10 +54,12 @@
 <hr>
 <div style='text-align:right;margin-top:5px'>
 {render acl=$gosaAclEntryACL}
-	<input type="submit" name="submit_new_acl" value="{msgPool type=applyButton}">
+	<button type='submit' name='submit_new_acl'>{msgPool type=applyButton}</button>
+
 	&nbsp;
 {/render}
-	<input type="submit" name="cancel_new_acl" value="{msgPool type=cancelButton}">
+	<button type='submit' name='cancel_new_acl'>{msgPool type=cancelButton}</button>
+
 </div>
 {/if}
 
@@ -70,10 +74,12 @@
 <hr>
 <div style='text-align:right;margin-top:5px'>
 {render acl=$gosaAclEntryACL}
-	<input type="submit" name="submit_edit_acl" value="{msgPool type=applyButton}">
+	<button type='submit' name='submit_edit_acl'>{msgPool type=applyButton}</button>
+
 {/render}
 	&nbsp;
-	<input type="submit" name="cancel_edit_acl" value="{msgPool type=cancelButton}">
+	<button type='submit' name='cancel_edit_acl'>{msgPool type=cancelButton}</button>
+
 </div>
 {/if}
 <input type='hidden' name='acl_role_posted' value='1'>
