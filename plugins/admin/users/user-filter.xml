@@ -33,7 +33,7 @@
     <label>Show templates</label>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=gosaUserTemplate)((cn=$)(sn=$)(uid=$)))</filter>
+      <filter>(&amp;(objectClass=gosaUserTemplate)(|(cn=$)(sn=$)(uid=$)))</filter>
     </query>
     <autocomplete>
       <attribute>mail</attribute>
