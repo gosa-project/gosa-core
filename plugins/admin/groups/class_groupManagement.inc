@@ -202,11 +202,9 @@ class groupManagement extends management
     // Walk thru map
     foreach ($map as $oc => $properties) {
       if (in_array_ics($oc, $classes)) {
-        $result.="<input class='center' type='image' src='".$properties['image']."' ".
-          "alt='".$properties['alt']."' title='".$properties['title'].
-                 "' name='listing_edit_".$properties['plugin']."_$row' style='padding:1px'>";
+        $result.= image($properties['image'], 'listing_edit_'.$properties['plugin'].'_'.$row, $properties['title']);
       } else {
-        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+        $result.= image('images/empty.png');
       }
     }
     return $result;
