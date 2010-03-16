@@ -33,8 +33,20 @@ header("Content-type: text/html; charset=UTF-8");
  */
 function displayLogin()
 {
-  global $smarty,$message,$config,$ssl,$error_collector;
+  global $smarty,$message,$config,$ssl,$error_collector, $BASE_DIR;
   error_reporting(E_ALL | E_STRICT);
+
+  /* Check theme compatibility */
+  $theme= $config->get_cfg_value('theme', 'default');
+  if (file_exists("$BASE_DIR/ihtml/themes/$theme/blacklist")) {
+    $blocks= file("$BASE_DIR/ihtml/themes/$theme/blacklist");
+    foreach ($blocks as $block) {
+      if (preg_match('/'.preg_quote($block).'/', $_SERVER['HTTP_USER_AGENT'])) {
+        die(sprintf(_("Your browser (%s) is blacklisted for the current theme."), $block));
+      }
+    }
+  }
+
   /* Fill template with required values */
   $username = "";
   if(isset($_POST["username"])){
