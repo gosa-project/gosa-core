@@ -666,7 +666,7 @@ class ogroup extends plugin
     $conv= array(  
         "Y" => "plugins/users/images/select_template.png",
         "U" => "plugins/generic/images/head.png",
-        "G" => "plugins/groups/images/groups.png",
+        "G" => "plugins/groups/images/select_group.png",
         "A" => "plugins/ogroups/images/application.png",
         "D" => "plugins/departments/images/department.png",
         "S" => "plugins/ogroups/images/server.png",
