@@ -69,13 +69,13 @@
 
     <action>
      <type>sub</type>
-     <image>plugins/groups/images/select_group.png[new]</image>
+     <image>images/lists/element.png[new]</image>
      <label>Create</label>
 
      <action>
       <name>new</name>
       <type>entry</type>
-      <image>plugins/groups/images/select_group.png</image>
+      <image>plugins/groups/images/select_group.png[new]</image>
       <label>Group</label>
      </action>
     </action>

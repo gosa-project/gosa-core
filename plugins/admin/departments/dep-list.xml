@@ -95,47 +95,48 @@
     <action>
      <type>sub</type>
      <label>Create</label>
+     <image>images/lists/element.png[new]</image>
 
      <action>
       <name>new_domain</name>
       <type>entry</type>
       <label>Domain</label>
-      <image>plugins/departments/images/domain.png</image>
+      <image>plugins/departments/images/domain.png[new]</image>
      </action>
     
      <action>
       <name>new_dcObject</name>
       <type>entry</type>
       <label>Domain component</label>
-      <image>plugins/departments/images/dc.png</image>
+      <image>plugins/departments/images/dc.png[new]</image>
      </action>
 
      <action>
       <name>new_country</name>
       <type>entry</type>
       <label>Country</label>
-      <image>plugins/departments/images/country.png</image>
+      <image>plugins/departments/images/country.png[new]</image>
      </action>
 
      <action>
       <name>new_locality</name>
       <type>entry</type>
       <label>Locality</label>
-      <image>plugins/departments/images/locality.png</image>
+      <image>plugins/departments/images/locality.png[new]</image>
      </action>
 
      <action>
       <name>new_organization</name>
       <type>entry</type>
       <label>Organization</label>
-      <image>plugins/departments/images/organization.png</image>
+      <image>plugins/departments/images/organization.png[new]</image>
      </action>
 
      <action>
       <name>new_organizationalUnit</name>
       <type>entry</type>
       <label>Department</label>
-      <image>images/lists/folder.png</image>
+      <image>images/lists/folder.png[new]</image>
      </action>
 
     </action>
