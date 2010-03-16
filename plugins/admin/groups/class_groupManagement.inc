@@ -151,7 +151,7 @@ class groupManagement extends management
     $map = array(
         "posixGroup" => 
         array(
-          "image" => "plugins/groups/images/groups.png",
+          "image" => "plugins/groups/images/select_group.png",
           "plugin" => "group",
           "alt" => _("Posix"),
           "title" => _("Edit posix properties")
