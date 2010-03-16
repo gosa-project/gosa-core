@@ -3,41 +3,30 @@
 <filterdef>
   <definition>
     <category>groups</category>
-    <template>../plugins/admin/groups/userSelect/user-filter.tpl</template>
     <initial>true</initial>
+    <default>default</default>
+    <scope>auto</scope>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>cn</attribute>
+    <attribute>sn</attribute>
+    <attribute>givenName</attribute>
+    <attribute>uid</attribute>
+    <attribute>description</attribute>
   </definition>
 
   <search>
+    <tag>default</tag>
+    <label>Default filter</label>
     <query>
       <backend>LDAPBlacklist</backend>
-      <filter>(&amp;(objectClass=gosaAccount)$NAME)</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>cn</attribute>
-      <attribute>sn</attribute>
-      <attribute>givenName</attribute>
-      <attribute>uid</attribute>
-      <attribute>description</attribute>
+      <filter>(&amp;(objectClass=gosaAccount)(cn=$))</filter>
     </query>
-    <scope>auto</scope>
-  </search>
-
-  <element>
-    <type>textfield</type>
-    <tag>NAME</tag>
-    <size>20</size>
-    <maxlength>60</maxlength>
-    <default></default>
-    <unset></unset>
-    <set>(|(sn=*$*)(givenName=*$*)(cn=*$*)(uid=*$*))</set>
-    <alphabet>true</alphabet>
     <autocomplete>
-      <backend>LDAPBlacklist</backend>
-      <filter>(&amp;(objectClass=posixAccount)(|(sn=*$NAME*)(givenName=*$NAME*)(cn=*$NAME*)(uid=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
-  </element>
+  </search>
 
 </filterdef>
