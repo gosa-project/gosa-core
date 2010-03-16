@@ -260,7 +260,11 @@ class filter {
       // Handle converters if present
       if ($this->converter) {
         preg_match('/([^:]+)::(.*)$/', $this->converter, $m);
-        $filter= call_user_func(array($m[1], $m[2]), preg_replace('/\$/', $this->value, $filter));
+        if ($this->value == "") {
+          $filter= call_user_func(array($m[1], $m[2]), preg_replace('/\$/', "*", $filter));
+        } else {
+          $filter= call_user_func(array($m[1], $m[2]), preg_replace('/\$/', $this->value, $filter));
+        }
       }
 
       // Do not replace escaped \$ - This is required to be able to search for e.g. windows machines.
