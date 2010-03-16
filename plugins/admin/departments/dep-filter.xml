@@ -31,20 +31,86 @@
   </search>
 
   <search>
-    <tag>default2</tag>
-    <label>Dummy</label>
+    <tag>ou</tag>
+    <label>Organizational unit</label>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=gosaDepartment)(|(dc=$)(ou=$)(o=$)(l=$)(c=$)))</filter>
+      <filter>(&amp;(objectClass=gosaDepartment)(objectClass=organizationalUnit)(ou=$))</filter>
     </query>
     <autocomplete>
       <frequency>0.5</frequency>
       <characters>3</characters>
       <attribute>ou</attribute>
-      <attribute>dc</attribute>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>c</tag>
+    <label>Country</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaDepartment)(objectClass=country)(c=$))</filter>
+    </query>
+    <autocomplete>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
       <attribute>c</attribute>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>l</tag>
+    <label>Locality</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaDepartment)(objectClass=locality)(l=$))</filter>
+    </query>
+    <autocomplete>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
       <attribute>l</attribute>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>dc</tag>
+    <label>Domain component</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaDepartment)(objectClass=dcObject)(dc=$))</filter>
+    </query>
+    <autocomplete>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+      <attribute>dc</attribute>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>o</tag>
+    <label>Organization</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaDepartment)(objectClass=organization)(o=$))</filter>
+    </query>
+    <autocomplete>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
       <attribute>o</attribute>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>domain</tag>
+    <label>Domain</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaDepartment)(objectClass=domain)(dc=$))</filter>
+    </query>
+    <autocomplete>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+      <attribute>dc</attribute>
     </autocomplete>
   </search>
 </filterdef>

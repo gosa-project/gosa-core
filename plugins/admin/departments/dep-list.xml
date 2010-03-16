@@ -94,8 +94,8 @@
 
     <action>
      <type>sub</type>
+     <image>images/lists/folder.png[new]</image>
      <label>Create</label>
-     <image>images/lists/element.png[new]</image>
 
      <action>
       <name>new_domain</name>
