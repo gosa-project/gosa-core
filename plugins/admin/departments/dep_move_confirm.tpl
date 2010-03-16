@@ -13,6 +13,8 @@
 
 <hr>
 <div class="plugin-actions">
-	<input type='submit' name='dep_move_confirm' value='{msgPool type=saveButton}'>
-	<input type='submit' name='cancel_save' value='{msgPool type=cancelButton}'>
+	<button type='submit' name='dep_move_confirm'>{msgPool type=saveButton}</button>
+
+	<button type='submit' name='cancel_save'>{msgPool type=cancelButton}</button>
+
 </div>
