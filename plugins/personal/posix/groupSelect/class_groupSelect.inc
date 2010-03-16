@@ -33,13 +33,13 @@ class groupSelect extends management
 
     $this->storagePoints = array(get_ou("groupRDN"));
 
-#    // Build filter
- #   if (session::global_is_set(get_class($this)."_filter")){
-  #    $filter= session::global_get(get_class($this)."_filter");
-   # } else {
+    // Build filter
+    if (session::global_is_set(get_class($this)."_filter")){
+      $filter= session::global_get(get_class($this)."_filter");
+    } else {
       $filter = new filter(get_template_path("group-filter.xml", true, dirname(__FILE__)));
       $filter->setObjectStorage($this->storagePoints);
-    #}
+    }
     $this->setFilter($filter);
 
     // Build headpage
