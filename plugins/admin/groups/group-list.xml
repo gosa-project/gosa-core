@@ -16,7 +16,7 @@
       <objectClass>posixGroup</objectClass>
       <category>groups</category>
       <class>group</class>
-      <image>plugins/groups/images/groups.png</image>
+      <image>plugins/groups/images/select_group.png</image>
     </objectType>
 
   </definition>
@@ -69,13 +69,13 @@
 
     <action>
      <type>sub</type>
-     <image>plugins/groups/images/groups.png[new]</image>
+     <image>plugins/groups/images/select_group.png[new]</image>
      <label>Create</label>
 
      <action>
       <name>new</name>
       <type>entry</type>
-      <image>plugins/groups/images/groups.png</image>
+      <image>plugins/groups/images/select_group.png</image>
       <label>Group</label>
      </action>
     </action>
