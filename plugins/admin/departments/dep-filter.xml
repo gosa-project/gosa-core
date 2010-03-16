@@ -2,22 +2,22 @@
 
 <filterdef>
   <definition>
+    <category>department</category>
     <initial>true</initial>
     <default>default</default>
     <scope>auto</scope>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>ou</attribute>
+    <attribute>description</attribute>
   </definition>
 
   <search>
     <tag>default</tag>
     <label>Default filter</label>
     <query>
-      <storage></storage>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(|(dc=$)(ou=$)(o=$)(l=$)(c=$)))</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>ou</attribute>
-      <attribute>description</attribute>
     </query>
     <autocomplete>
       <frequency>0.5</frequency>
@@ -30,4 +30,21 @@
     </autocomplete>
   </search>
 
+  <search>
+    <tag>default2</tag>
+    <label>Dummy</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=gosaDepartment)(|(dc=$)(ou=$)(o=$)(l=$)(c=$)))</filter>
+    </query>
+    <autocomplete>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+      <attribute>ou</attribute>
+      <attribute>dc</attribute>
+      <attribute>c</attribute>
+      <attribute>l</attribute>
+      <attribute>o</attribute>
+    </autocomplete>
+  </search>
 </filterdef>
