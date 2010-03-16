@@ -1,5 +1,3 @@
-<input type='image' src='images/empty.png' name='no_action_posted' value='do_nothing' alt='' style='width:2px;height:2px;'>
-
 <table summary="" style="width:100%;height:100%" cellpadding=2>
   <tr>
     <td style="width:100%">

@@ -1,6 +1,3 @@
-{image path="images/empty.png" action="no_action_posted" value="do_nothing"}
-
-
 <table summary="" style="width:100%;height:100%" cellpadding=2>
   <tr>
     <td style="width:100%">

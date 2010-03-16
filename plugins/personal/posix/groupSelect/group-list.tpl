@@ -1,5 +1,3 @@
-{image path="images/empty.png" action="no_action_posted" value="do_nothing"}
-
 <table summary="{t}Group selection{/t}"
   style="width:100%;height:100%" cellpadding=2>
  <tr>
