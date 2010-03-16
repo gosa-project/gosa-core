@@ -23,8 +23,10 @@
 
 <hr>
 <div class="plugin-actions">
-  <input type=submit name="templatize_continue" value="{msgPool type=applyButton}">
-  <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='templatize_continue'>{msgPool type=applyButton}</button>
+
+  <button type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
+
 </div>
 
 {else}
@@ -33,7 +35,8 @@
 
   <hr>
   <div class="plugin-actions">
-    <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
+    <button type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
+
   </div>
 
 {/if}

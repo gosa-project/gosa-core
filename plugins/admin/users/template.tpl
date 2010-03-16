@@ -46,8 +46,10 @@
 
 <hr>
 <div class="plugin-actions">
-  <input type=submit name="template_continue" value="{t}Continue{/t}">
-  <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='template_continue'>{t}Continue{/t}</button>
+
+  <button type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
+
 </div>
 
 

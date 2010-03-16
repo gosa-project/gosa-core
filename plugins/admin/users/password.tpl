@@ -29,8 +29,10 @@
 
 <hr>
 <div class="plugin-actions">
-  <input type=submit name="password_finish" value="{t}Set password{/t}">
-  <input type=submit name="password_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='password_finish'>{t}Set password{/t}</button>
+
+  <button type='submit' name='password_cancel'>{msgPool type=cancelButton}</button>
+
 </div>
 
 <input type='hidden' id='formSubmit'>
