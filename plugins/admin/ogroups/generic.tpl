@@ -53,10 +53,12 @@
     {/render}
        <br>
     {render acl=$trustmodeACL}
-       <input type="submit" id="add_ws" value="{msgPool type=addButton}" name="add_ws" {$trusthide}>&nbsp;
+       <button type='submit' name='add_ws' id="add_ws">{msgPool type=addButton}</button>&nbsp;
+
     {/render}
     {render acl=$trustmodeACL}
-       <input type="submit" id="del_ws" value="{msgPool type=delButton}" name="delete_ws" {$trusthide}>
+       <button type='submit' name='delete_ws' id="del_ws">{msgPool type=delButton}</button>
+
     {/render}
 
 
@@ -71,10 +73,12 @@
 {/render}
    <br>
 {render acl=$memberACL}
-   <input type=submit value="{msgPool type=addButton}" name="edit_membership">&nbsp;
+   <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>&nbsp;
+
 {/render}
 {render acl=$memberACL}
-   <input type=submit value="{msgPool type=delButton}" name="delete_membership">
+   <button type='submit' name='delete_membership'>{msgPool type=delButton}</button>
+
 {/render}
   </td>
  </tr>

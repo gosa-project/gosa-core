@@ -37,6 +37,8 @@ t}Filters{/t}</b></p>
 
 <hr>
 <div class="plugin-actions">
-  <input type=submit name="add_ws_finish" value="{msgPool type=addButton}">
-  <input type=submit name="add_ws_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='add_ws_finish'>{msgPool type=addButton}</button>
+
+  <button type='submit' name='add_ws_cancel'>{msgPool type=cancelButton}</button>
+
 </div>

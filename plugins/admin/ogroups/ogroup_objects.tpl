@@ -48,6 +48,8 @@
 
 <hr>
 <div class="plugin-actions">
-  <input type=submit name="add_object_finish" value="{msgPool type=addButton}">
-  <input type=submit name="add_object_cancel" value="{msgPool type=cancelButton}">
+  <button type='submit' name='add_object_finish'>{msgPool type=addButton}</button>
+
+  <button type='submit' name='add_object_cancel'>{msgPool type=cancelButton}</button>
+
 </div>
