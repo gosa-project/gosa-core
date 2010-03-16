@@ -26,7 +26,6 @@
 
 <input type="hidden" name="ignore">
 
-<hr>
 <div class="plugin-actions">
   <button type='submit' name='add_ws_finish'>{msgPool type=addButton}</button>
   <button type='submit' name='add_ws_cancel'>{msgPool type=cancelButton}</button>
