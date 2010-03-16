@@ -55,7 +55,7 @@ class reference extends plugin
 				"PureFTPdUser" => array(   "text" => _("FTP"),
 					"image" => "images/select_proxy.png"),
 				"posixGroup" => array(     "text" => _("Group"),
-					"image" => "images/select_groups.png"),
+					"image" => "plugins/groups/images/select_group.png"),
 				"gosaDepartment" => array( "text" => _("Department"),
 					"image" => "images/select_department.png"),
 				"goFonHardware" => array(   "text" => _("Phone"),
