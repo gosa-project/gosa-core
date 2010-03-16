@@ -74,7 +74,7 @@ class filter {
       }
 
       /* Store available searches */
-      foreach ($xmlData['search'] as $search) {
+      foreach ($searches as $search) {
 
         /* Do multi conversation */ 
         if (!isset($search['query'][0])){
