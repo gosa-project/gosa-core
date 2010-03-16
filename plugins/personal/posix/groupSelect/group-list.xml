@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <list>
   <definition>
     <departmentBrowser>true</departmentBrowser>
@@ -10,7 +9,6 @@
     <module>groups</module>
     <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
-
     <objectType>
       <label>Group</label>
       <objectClass>posixGroup</objectClass>
@@ -18,9 +16,7 @@
       <class>group</class>
       <image>plugins/groups/images/select_group.png</image>
     </objectType>
-
   </definition>
-
   <table>
     <layout>|20px;c|||</layout>
     <department>
@@ -48,10 +44,8 @@
       <export>true</export>
     </column>
   </table>
-
- <actionmenu>
+  <actionmenu>
   </actionmenu>
-
   <actiontriggers snapshot="false" copypaste="false">
   </actiontriggers>
 </list>

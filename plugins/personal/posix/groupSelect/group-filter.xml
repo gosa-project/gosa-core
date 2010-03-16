@@ -10,7 +10,6 @@
     <attribute>cn</attribute>
     <attribute>description</attribute>
   </definition>
-
   <search>
     <tag>default</tag>
     <label>Default filter</label>
@@ -24,5 +23,4 @@
       <characters>3</characters>
     </autocomplete>
   </search>
-
 </filterdef>
