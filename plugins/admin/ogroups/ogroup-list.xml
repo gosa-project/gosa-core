@@ -69,13 +69,13 @@
 
     <action>
      <type>sub</type>
-     <image>plugins/ogroups/images/ogroup.png[new]</image>
+     <image>images/lists/element.png[new]</image>
      <label>Create</label>
 
      <action>
       <name>new</name>
       <type>entry</type>
-      <image>plugins/ogroups/images/ogroup.png</image>
+      <image>plugins/ogroups/images/ogroup.png[new]</image>
       <label>Group</label>
      </action>
     </action>
