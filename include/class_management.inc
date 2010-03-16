@@ -122,6 +122,9 @@ class management
 
     $this->registerAction("config-filter","editFilter");
     $this->registerAction("saveFilter","saveFilter");
+
+    // To temporay disable the filter caching UNcomment this line.
+    #session::global_un_set(get_class($this)."_filter");
   }
 
   /*! \brief  Execute this plugin
