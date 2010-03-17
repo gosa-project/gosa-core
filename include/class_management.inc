@@ -308,14 +308,27 @@ class management
 
       // Add locks
       $dns_names = array();
+      $types = array();
+      $h = $this->getHeadpage();
+
+      // Build list of object -labels
+      foreach($h->objectTypes as $type){
+        $map[$type['objectClass']]= $type['label'];
+      }
+
       foreach($this->dns as $dn){
-        $dns_names[] =LDAP::fix($dn);
+        $tmp = $h->getType($dn);
+        if(isset($map[$tmp])){
+          $dns_names[] = '<i>('.$map[$tmp].')</i>&nbsp;'.LDAP::fix($dn);
+        }else{
+          $dns_names[] =LDAP::fix($dn);
+        }
       }
       add_lock ($this->dns, $this->ui->dn);
 
       // Display confirmation dialog.
       $smarty = get_smarty();
-      $smarty->assign("info", msgPool::deleteInfo($dns_names,_($this->objectName)));
+      $smarty->assign("info", msgPool::deleteInfo($dns_names));
       $smarty->assign("multiple", true);
       return($smarty->fetch(get_template_path('removeEntries.tpl')));
     }
