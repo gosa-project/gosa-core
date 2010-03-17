@@ -16,7 +16,7 @@
     <tag>default</tag>
     <label>Default filter</label>
     <query>
-      <backend>LDAP</backend>
+      <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(|(dc=$)(ou=$)(o=$)(l=$)(c=$)))</filter>
     </query>
     <autocomplete>
@@ -34,7 +34,7 @@
     <tag>ou</tag>
     <label>Organizational unit</label>
     <query>
-      <backend>LDAP</backend>
+      <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(objectClass=organizationalUnit)(ou=$))</filter>
     </query>
     <autocomplete>
@@ -48,7 +48,7 @@
     <tag>c</tag>
     <label>Country</label>
     <query>
-      <backend>LDAP</backend>
+      <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(objectClass=country)(c=$))</filter>
     </query>
     <autocomplete>
@@ -62,7 +62,7 @@
     <tag>l</tag>
     <label>Locality</label>
     <query>
-      <backend>LDAP</backend>
+      <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(objectClass=locality)(l=$))</filter>
     </query>
     <autocomplete>
@@ -76,7 +76,7 @@
     <tag>dc</tag>
     <label>Domain component</label>
     <query>
-      <backend>LDAP</backend>
+      <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(objectClass=dcObject)(dc=$))</filter>
     </query>
     <autocomplete>
@@ -90,7 +90,7 @@
     <tag>o</tag>
     <label>Organization</label>
     <query>
-      <backend>LDAP</backend>
+      <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(objectClass=organization)(o=$))</filter>
     </query>
     <autocomplete>
@@ -104,7 +104,7 @@
     <tag>domain</tag>
     <label>Domain</label>
     <query>
-      <backend>LDAP</backend>
+      <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(objectClass=domain)(dc=$))</filter>
     </query>
     <autocomplete>
