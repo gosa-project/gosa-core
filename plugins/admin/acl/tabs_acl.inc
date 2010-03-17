@@ -78,14 +78,13 @@ class acltab extends tabs
   {
     $display= tabs::execute();
     if($this->read_only){
-      $display.= "<p style=\"text-align:right\">\n";
-      $display.= "  <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
-      $display.= "</p>";
+      $display.= "<div class='plugin-actions'>";
+      $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
+      $display.= "</div>";
     }elseif(!$this->by_object['acl']->dialog){
       $display.= "<p style=\"text-align:right\">\n";
-      $display.= "  <input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
-      $display.= "  &nbsp;\n";
-      $display.= "  <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
+      $display.= "  <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>\n";
+      $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
       $display.= "</p>";
     }
     return($display);

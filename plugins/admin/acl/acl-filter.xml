@@ -30,9 +30,9 @@
 
   <search>
     <tag>rolesOnly</tag>
-    <label>Roles only</label>
+    <label>Roles</label>
     <query>
-      <backend>ACL</backend>
+      <backend>ACL role</backend>
       <filter>(&amp;(objectClass=gosaRole)(|(cn=$)(description=$)(ou=$)))</filter>
     </query>
     <autocomplete>
@@ -45,7 +45,7 @@
 
   <search>
     <tag>rolesAssignments</tag>
-    <label>Roles assignments</label>
+    <label>ACL Assignment</label>
     <query>
       <backend>ACL</backend>
       <filter>(&amp;(objectClass=gosaAcl)(|(cn=$)(description=$)(ou=$)))</filter>
