@@ -30,12 +30,17 @@ class pathNavigator
         if(!session::is_set("pathNavigator::registerPlugin:{$class->dn}")){
           global $config;
           $ldap = $config->get_ldap_link();
-          $ldap->cat($class->dn, array('cn'));
-          if($ldap->count()){
-            $attrs = $ldap->fetch();
-            $str = $attrs['cn'][0];
+
+          if(!empty($class->dn)){
+            $namingAttr = preg_replace("/^([^=]*)=.*$/","\\1",$class->dn);
+
+            $ldap->cat($class->dn, array($namingAttr));
+            if($ldap->count()){
+              $attrs = $ldap->fetch();
+              $str = $attrs[$namingAttr][0];
+            }
+            session::set("pathNavigator::registerPlugin:{$class->dn}", $str);
           }
-          session::set("pathNavigator::registerPlugin:{$class->dn}", $str);
         }
         $str = session::get("pathNavigator::registerPlugin:{$class->dn}");
         if(empty($title)){
