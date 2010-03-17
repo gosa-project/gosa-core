@@ -77,7 +77,8 @@
 	   </select>
 		{/if}
 	  </td>
-	  <td style="vertical-align:middle; " >
+	  <td>
+
 		{if $acl_writeable}
 	   <button type='submit' name='add'>&gt;</button>
 
