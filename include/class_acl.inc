@@ -703,33 +703,33 @@ class acl extends plugin
     $style = "style='width:100px;'";
 
     if($this->acl_is_writeable("")){
-      $display .= "<input ".$style." type='button' name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" value='Toggle C'>";
-      $display .= "<input ".$style." type='button' name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" value='Toggle M'>";
-      $display .= "<input ".$style." type='button' name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" value='Toggle D'> - ";
-      $display .= "<input ".$style." type='button' name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" value='Toggle R'>";
-      $display .= "<input ".$style." type='button' name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" value='Toggle W'> - ";
+      $display .= "<button type='button' ".$style." name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
+      $display .= "<button type='button' ".$style." name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
+      $display .= "<button type='button' ".$style." name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button> - ";
+      $display .= "<button type='button' ".$style." name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" >Toggle R</button>";
+      $display .= "<button type='button' ".$style." name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" >Toggle W</button> - ";
 
-      $display .= "<input ".$style." type='button' name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" value='R+'>";
-      $display .= "<input ".$style." type='button' name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" value='W+'>";
+      $display .= "<button type='button' ".$style." name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" >R+</button>";
+      $display .= "<button type='button' ".$style." name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" >W+</button>";
 
       $display .= "<br>";
 
       $style = "style='width:50px;'";
-      $display .= "<input ".$style." type='button' name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" value='C+'>";
-      $display .= "<input ".$style." type='button' name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" value='C-'>";
-      $display .= "<input ".$style." type='button' name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" value='M+'>";
-      $display .= "<input ".$style." type='button' name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" value='M-'>";
-      $display .= "<input ".$style." type='button' name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" value='D+'>";
-      $display .= "<input ".$style." type='button' name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" value='D-'> - ";
-      $display .= "<input ".$style." type='button' name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" value='R+'>";
-      $display .= "<input ".$style." type='button' name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" value='R-'>";
-      $display .= "<input ".$style." type='button' name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" value='W+'>";
-      $display .= "<input ".$style." type='button' name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" value='W-'> - ";
+      $display .= "<button type='button' ".$style." name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" >C+</button>";
+      $display .= "<button type='button' ".$style." name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" >C-</button>";
+      $display .= "<button type='button' ".$style." name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" >M+</button>";
+      $display .= "<button type='button' ".$style." name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" >M-</button>";
+      $display .= "<button type='button' ".$style." name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" >D+</button>";
+      $display .= "<button type='button' ".$style." name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" >D-</button> - ";
+      $display .= "<button type='button' ".$style." name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" >R+</button>";
+      $display .= "<button type='button' ".$style." name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" >R-</button>";
+      $display .= "<button type='button' ".$style." name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" >W+</button>";
+      $display .= "<button type='button' ".$style." name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" >W-</button> - ";
 
-      $display .= "<input ".$style." type='button' name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" value='R+'>";
-      $display .= "<input ".$style." type='button' name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" value='R-'>";
-      $display .= "<input ".$style." type='button' name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" value='W+'>";
-      $display .= "<input ".$style." type='button' name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" value='W-'>";
+      $display .= "<button type='button' ".$style." name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" >R+</button>";
+      $display .= "<button type='button' ".$style." name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
+      $display .= "<button type='button' ".$style." name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
+      $display .= "<button type='button' ".$style." name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
     }
 
     /* Build general objects */
@@ -772,14 +772,14 @@ class acl extends plugin
           "\n  <tr>".
           "\n    <td style='background-color:{$back_color};height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
           "\n    <td align='right' style='background-color:{$back_color};height:1.8em;'>".
-          "\n    <input type='button' onclick=\"$('{$tname}').toggle();\" value='"._("Show/hide advanced settings")."' /></td>".
+          "\n    <button type='button' onclick=\"$('{$tname}').toggle();\">"._("Show/hide advanced settings")."</button></td>".
           "\n  </tr>";
       } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
         $display.= "\n<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
           "\n  <tr>".
           "\n    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
           "\n    <td align='right' style='background-color:#C8C8C8;height:1.8em;'>".
-          "\n    <input type='button' onclick=\"$('{$tname}').toggle();\" value='"._("Show/hide advanced settings")."' /></td>".
+          "\n    <button type='button' onclick=\"$('{$tname}').toggle();\">"._("Show/hide advanced settings")."</button></td>".
           "\n  </tr>";
       } else {
         $display.= "\n<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
