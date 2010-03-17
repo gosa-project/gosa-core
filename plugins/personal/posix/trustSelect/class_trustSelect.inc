@@ -26,6 +26,8 @@ class trustSelect extends management
   protected $skipFooter = TRUE;
   protected $skipHeader = TRUE;
 
+  public $plHeadline = "Trust machine selection";
+
   function __construct($config,$ui)
   {
     $this->config = $config;
