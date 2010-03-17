@@ -1177,7 +1177,7 @@ class listing {
 
       // Render entry elseways
       if (isset($action['label'])){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"act\").value= \"".$action['name']."\";document.getElementById(\"exec_act\").click();'>$img"._($action['label'])."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>$img"._($action['label'])."</a></li>";
       }
 
       // Check for special types
@@ -1383,13 +1383,13 @@ class listing {
 
       // Copy entry
       if($copy){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"act\").value= \"copy\";document.getElementById(\"exec_act\").click();'>".image('images/lists/copy.png')."&nbsp;"._("Copy")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='\$(\"act\").value= \"copy\";\$(\"exec_act\").click();'>".image('images/lists/copy.png')."&nbsp;"._("Copy")."</a></li>";
         $separator= "";
       }
 
       // Cut entry
       if($cut){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"act\").value= \"cut\";document.getElementById(\"exec_act\").click();'>".image("images/lists/cut.png")."&nbsp;"._("Cut")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='\$(\"act\").value= \"cut\";\$(\"exec_act\").click();'>".image("images/lists/cut.png")."&nbsp;"._("Cut")."</a></li>";
         $separator= "";
       }
     }
@@ -1397,7 +1397,7 @@ class listing {
     // Draw entries that allow pasting entries
     if($paste){
       if($this->copyPasteHandler->entries_queued()){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"act\").value= \"paste\";document.getElementById(\"exec_act\").click();'>".image("images/lists/paste.png")."&nbsp;"._("Paste")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='\$(\"act\").value= \"paste\";\$(\"exec_act\").click();'>".image("images/lists/paste.png")."&nbsp;"._("Paste")."</a></li>";
       }else{
         $result.= "<li$separator><a href='#'>".image('images/lists/paste-grey.png')."&nbsp;"._("Paste")."</a></li>";
       }
@@ -1463,7 +1463,7 @@ class listing {
 
       // Draw icons according to the restore flag
       if($restore){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"act\").value= \"restore\";document.getElementById(\"exec_act\").click();'>".image('images/lists/restore.png')."&nbsp;"._("Restore snapshots")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='\$(\"act\").value= \"restore\";\$(\"exec_act\").click();'>".image('images/lists/restore.png')."&nbsp;"._("Restore snapshots")."</a></li>";
       }else{
         $result.= "<li$separator><a href='#'>".image('images/lists/restore-grey.png')."&nbsp;"._("Restore snapshots")."</a></li>";
       }
@@ -1483,7 +1483,7 @@ class listing {
 
     // Export CVS as build in exporter
     foreach ($this->exporter as $action => $exporter) {
-      $result.= "<li><a href='#' onClick='document.getElementById(\"act\").value= \"$action\";document.getElementById(\"exec_act\").click();'>".image($exporter['image'])."&nbsp;".$exporter['label']."</a></li>";
+      $result.= "<li><a href='#' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>".image($exporter['image'])."&nbsp;".$exporter['label']."</a></li>";
     }
 
     // Finalize list
@@ -1540,7 +1540,7 @@ class listing {
       $events= DaemonEvent::get_event_types_by_category($this->categories);
       if(isset($events['BY_CLASS']) && count($events['BY_CLASS'])){
         foreach($events['BY_CLASS'] as $name => $event){
-          $result.= "<li$separator><a href='#' onClick='document.getElementById(\"act\").value=\"$name\";document.getElementById(\"exec_act\").click();'>".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."</a></li>";
+          $result.= "<li$separator><a href='#' onClick='\$(\"act\").value=\"$name\";\$(\"exec_act\").click();'>".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."</a></li>";
           $separator= "";
         }
       }

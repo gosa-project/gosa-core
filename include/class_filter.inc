@@ -290,14 +290,14 @@ class filter {
       }
 
       // Save scope if needed
-      if ($this->scopeMode == "auto" && isset($_POST['filter']) && $_POST['filter'] == "toggle-subtree") {
+      if ($this->scopeMode == "auto" && isset($_POST['act']) && $_POST['act'] == "toggle-subtree") {
         $this->scope= ($this->scope == "one")?"sub":"one";
       }
 
       // Switch filter?
-      if (isset($_POST['filter'])) {
+      if (isset($_POST['act'])) {
         foreach ($this->searches as $tag => $cfg) {
-          if ($_POST['filter'] == "filter-$tag") {
+          if ($_POST['act'] == "filter-$tag") {
             $this->setSearch($tag);
             break;
           }
@@ -411,8 +411,7 @@ class filter {
   function renderFilterMenu()
   {
     // Load shortcut
-    $result= "<input type='hidden' name='filter' id='filter' value=''><div style='display:none'><input type='submit' name='exec_filter' id='exec_filter' value=''></div>".
-      "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png").image("images/lists/sort-down.png")."</a>";
+    $result= "<ul class='level1' id='filter-root'><li><a href='#'>".image("images/filter.png").image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
     $separator= " style='border-top:1px solid #AAA' ";
@@ -423,7 +422,7 @@ class filter {
       if ($tag == $this->search) {
         $result.= "<li><a href='#'>".image("images/checked.png")."&nbsp;"._($config['label'])."</a></li>";
       } else {
-        $result.= "<li><a href='#' onClick='document.getElementById(\"filter\").value= \"filter-$tag\";mainform.submit();'>".image("images/empty.png")."&nbsp;"._($config['label'])."</a></li>";
+        $result.= "<li><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>".image("images/empty.png")."&nbsp;"._($config['label'])."</a></li>";
       }
     }
 
@@ -433,7 +432,7 @@ class filter {
       if ($tag == $this->search) {
         $result.= "<li".($first?$separator:"")."><a href='#'>".image("images/checked.png")."&nbsp;"._($config['description'])."</a></li>";
       } else {
-        $result.= "<li".($first?$separator:"")."><a href='#' onClick='document.getElementById(\"filter\").value= \"filter-$tag\";mainform.submit();'>".image("images/empty.png")."&nbsp;"._($config['description'])."</a></li>";
+        $result.= "<li".($first?$separator:"")."><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>".image("images/empty.png")."&nbsp;"._($config['description'])."</a></li>";
       }
 
       $first= false;
@@ -441,12 +440,12 @@ class filter {
 
     // Render scope if set to auto
     if ($this->scopeMode == "auto") {
-      $result.= "<li$separator><a href='#' onClick='document.getElementById(\"filter\").value= \"toggle-subtree\";mainform.submit();'>".($this->scope=="one"?image("images/empty.png"):image("images/checked.png"))."&nbsp;"._("Search in subtrees")."</a></li>";
+      $result.= "<li$separator><a href='#' onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>".($this->scope=="one"?image("images/empty.png"):image("images/checked.png"))."&nbsp;"._("Search in subtrees")."</a></li>";
     }
 
 
     // Edit filter menu
-    $result.= "<li$separator><a href='#' onClick='document.getElementById(\"filter\").value= \"config-filter\";mainform.submit();'>".image("images/configure.png")."&nbsp;"._("Edit filters")."...</a></li>";
+    $result.= "<li$separator><a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>".image("images/configure.png")."&nbsp;"._("Edit filters")."...</a></li>";
 
     $result.= "</ul>";
 
