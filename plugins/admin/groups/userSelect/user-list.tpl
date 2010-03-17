@@ -1,5 +1,3 @@
-<input type='image' src='images/empty.png' name='no_action_posted' value='do_nothing' alt='' style='width:2px;height:2px;'>
-
 <div id="mainlist">
 
   <div class="mainlist-header">
