@@ -30,9 +30,9 @@
 
   <search>
     <tag>rolesOnly</tag>
-    <label>Roles</label>
+    <label>ACL role</label>
     <query>
-      <backend>ACL role</backend>
+      <backend>ACL</backend>
       <filter>(&amp;(objectClass=gosaRole)(|(cn=$)(description=$)(ou=$)))</filter>
     </query>
     <autocomplete>
