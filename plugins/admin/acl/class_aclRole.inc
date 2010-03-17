@@ -393,6 +393,12 @@ class aclrole extends acl
       $aclList= new divSelectBox("aclList");
       $aclList->SetHeight(450);
 
+      // Create a map of all used sections, this allows us to simply hide the remove button
+      //  if no acl is configured for the given section
+      // e.g. ';all;department/country;users/user;
+      $usedList = ";".implode(array_keys($this->aclContents),';').";";
+
+
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){
         $summary= "";
@@ -423,7 +429,7 @@ class aclrole extends acl
         if($this->acl_is_readable("gosaAclEntry")){
           $action.= image('images/lists/edit.png','cat_edit_'.$section,_("Edit category ACL"));
         }
-        if($this->acl_is_writeable("gosaAclEntry")){
+        if($this->acl_is_writeable("gosaAclEntry")  && preg_match("/;".$section."(;|\/)/", $usedList)){
           $action.= image('images/lists/trash.png','cat_del_'.$section,_("Delete category ACL"));
         }
 

@@ -1,6 +1,6 @@
 {if $dialogState eq 'head'}
 
-<h1>{t}Assigned ACL for current entry{/t}</h1>
+<h3>{t}Assigned ACL for current entry{/t}</h3>
 <table summary="{t}Assigned ACL for current entry{/t}">
 <tr>
 	<td>
@@ -42,13 +42,13 @@
 {/if}
 
 {if $dialogState eq 'create'}
-<h1>{t}ACL type{/t} <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">{html_options options=$aclTypes selected=$aclType}<option disabled>&nbsp;</option></select>&nbsp;{if $javascript eq 'false'}<button type='submit' name='refresh'>{msgPool type=applyButton}</button>{/if}
-</h1>
+<h3>{t}ACL type{/t} <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">{html_options options=$aclTypes selected=$aclType}<option disabled>&nbsp;</option></select>&nbsp;{if $javascript eq 'false'}<button type='submit' name='refresh'>{msgPool type=applyButton}</button>{/if}
+</h3>
 
 <hr>
 
 
-<h1>{t}List of available ACL categories{/t}</h1>
+<h3>{t}List of available ACL categories{/t}</h3>
 {$aclList}
 
 <hr>
@@ -65,7 +65,7 @@
 
 {if $dialogState eq 'edit'}
 
-<h1>{$headline}</h1>
+<h3>{$headline}</h3>
 
 {render acl=$gosaAclEntryACL}
 {$aclSelector}
