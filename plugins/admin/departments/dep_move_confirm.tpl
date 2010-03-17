@@ -1,5 +1,6 @@
 <div style="font-size:18px;">
- <img alt="" src="images/warning.png" align=top>&nbsp;{t}Warning{/t} - {t}You are currently moving/renaming this department.{/t}
+ {image path="images/warning.png" align="top"}&nbsp;{t}Warning{/t} - {t}You are currently moving/renaming this department.{/t}
+
 </div>
 <p>
 {t}Modifying a departments naming attribute 'ou' or base may corrupt acls and snapshot entries for all entire objects.{/t}

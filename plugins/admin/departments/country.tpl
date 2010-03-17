@@ -43,14 +43,17 @@
           title='{$manager}'>
 {/render}
 {render acl=$managerACL}
-        <input type='image' src='images/lists/edit.png' name='editManager' class='center'>
+        {image path="images/lists/edit.png" action="editManager"}
+
 {/render}
         {if $manager!=""}
 {render acl=$managerACL}
-        <img src='images/info_small.png' title='{$manager}' class='center'>
+        {image path="images/info_small.png" title="{$manager}"}
+
 {/render}
 {render acl=$managerACL}
-        <input type='image' src='images/lists/trash.png' name='removeManager' class='center'>
+        {image path="images/lists/trash.png" action="removeManager"}
+
 {/render}
         {/if}
      </td>
