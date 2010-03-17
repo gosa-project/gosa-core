@@ -10,13 +10,13 @@
 </p>
 
 <p class="plugbottom">
-  <input type="submit" name="delete_lock" value="{$action}">
+  <button type="submit" name="delete_lock">{$action}</button>
 	{if $allow_readonly}
   &nbsp;
-  <input type="submit" name="open_readonly" value="{t}Read only{/t}">
+  <button type="submit" name="open_readonly">{t}Read only{/t}</button>
 	{/if}
   &nbsp;
-  <input type="submit" name="cancel_lock" value="{t}Cancel{/t}">
+  <button type="submit" name="cancel_lock">{t}Cancel{/t}</button>
 </p>
       
 <input type="hidden" name="dn" value="{$dn}">
