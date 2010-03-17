@@ -9,7 +9,8 @@
 
 
 	{if $acl_createable}
-	<input type="submit" name="new_acl" value="{t}New ACL{/t}" >
+	<button type='submit' name='new_acl'>{t}New ACL{/t}</button>
+
 	{/if}
 	{/if}
 
@@ -24,9 +25,10 @@
 			<select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">
 				{html_options options=$aclTypes selected=$aclType}
 				<option disabled>&nbsp;</option>
-			</select>&nbsp;
+			</select size=1>&nbsp;
 			{if $javascript eq 'false'}
-				<input type="submit" value="{t}Apply{/t}" name="refresh">
+				<button type='submit' name='refresh'>{t}Apply{/t}</button>
+
 			{/if}
 		{/if}
 	</h1>
@@ -45,11 +47,12 @@
 	 <tr>
 	  <td style="width:48%">
 	   {t}Use members from{/t}
-	   <select name="target" onChange="document.mainform.submit()">
+	   <select name="target" onChange="document.mainform.submit()" size=1>
 			{html_options options=$targets selected=$target}
 			<option disabled>&nbsp;</option>
 	   </select>
-	   {if $javascript eq 'false'}<input type="submit" value="{t}Apply{/t}" name="refresh">{/if}<br><br>
+	   {if $javascript eq 'false'}<button type='submit' name='refresh'>{t}Apply{/t}</button>{/if}
+<br><br>
 	  </td>
 	  <td>
 	  </td>
@@ -71,11 +74,13 @@
 	   </select>
 		{/if}
 	  </td>
-	  <td style="text-align:center">
+	  <td style="vertical-align:middle; " >
 		{if $acl_writeable}
-	   <input type="submit" value="&gt;" name="add">
+	   <button type='submit' name='add'>&gt;</button>
+
 	   <br><br>
-	   <input type="submit" value="&lt;" name="del">
+	   <button type='submit' name='del'>&lt;</button>
+
 		{/if}
 	  </td>
 	  <td style="width:48%">
@@ -122,10 +127,12 @@
 	<hr>
 	<div style='text-align:right;margin-top:5px'>
 		{if $acl_writeable}
-		<input type="submit" name="submit_new_acl" value="{t}Apply{/t}">
+		<button type='submit' name='submit_new_acl'>{t}Apply{/t}</button>
+
 		&nbsp;
 		{/if}
-		<input type="submit" name="cancel_new_acl" value="{t}Cancel{/t}">
+		<button type='submit' name='cancel_new_acl'>{t}Cancel{/t}</button>
+
 	</div>
 	{/if}
 
@@ -137,9 +144,11 @@
 
 	<hr>
 	<div style='text-align:right;margin-top:5px'>
-		<input type="submit" name="submit_edit_acl" value="{t}Apply{/t}">
+		<button type='submit' name='submit_edit_acl'>{t}Apply{/t}</button>
+
 		&nbsp;
-		<input type="submit" name="cancel_edit_acl" value="{t}Cancel{/t}">
+		<button type='submit' name='cancel_edit_acl'>{t}Cancel{/t}</button>
+
 	</div>
 	{/if}
 {/if}
