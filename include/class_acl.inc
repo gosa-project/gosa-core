@@ -495,8 +495,8 @@ class acl extends plugin
         $field2= array("string" => $link);
 
         if($this->acl_is_writeable("")){
-          $action.= image('images/lists/sort-up.png', 'sortup_'.$key);
-          $action.= image('images/lists/sort-down.png', 'sortdown_'.$key);
+          $action.= image('images/lists/sort-up.png', 'sortup_'.$key,"","top");
+          $action.= image('images/lists/sort-down.png', 'sortdown_'.$key,"","bottom");
         } 
     
         if($this->acl_is_readable("")){
