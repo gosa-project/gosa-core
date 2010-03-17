@@ -83,8 +83,7 @@
    </table>
    {/if}
   </td>
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
+  <td class='left-border'>   &nbsp;
   </td>
   <td>
    <h3>{t}Group membership{/t}
@@ -136,8 +135,7 @@
    <hr>
    {include file="$pwmode.tpl"}
   </td>
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
+  <td class='left-border'>   &nbsp;
   </td>
   <td>
    <h3>{t}System trust{/t}
