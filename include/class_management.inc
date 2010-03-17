@@ -277,6 +277,9 @@ class management
    */
   protected function removeEntryRequested($action="",$target=array(),$all=array())
   {
+    // Close dialogs and remove locks for currently handled dns
+    $this->cancelEdit();
+  
     $disallowed = array();
     $this->dns = array();
 
