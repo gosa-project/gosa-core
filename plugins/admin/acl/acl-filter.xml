@@ -30,7 +30,7 @@
 
   <search>
     <tag>rolesOnly</tag>
-    <label>ACL role</label>
+    <label>ACL Templates</label>
     <query>
       <backend>ACL</backend>
       <filter>(&amp;(objectClass=gosaRole)(|(cn=$)(description=$)(ou=$)))</filter>
