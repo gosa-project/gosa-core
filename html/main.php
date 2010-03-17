@@ -285,7 +285,7 @@ if (session::global_get('js')==FALSE){
 }
 
 if($ui->ignore_acl_for_current_user()){
-  $smarty->assign ("loggedin", "<font color='red';>"._("ACLs are disabled")."</font>&nbsp;".sprintf(_("You're logged in as %s"), "<span>".$ui->cn." [".$ui->username."]</span>"));
+  $smarty->assign ("loggedin", "<font color='red'>"._("ACLs are disabled")."</font>&nbsp;".sprintf(_("You're logged in as %s"), "<span>".$ui->cn." [".$ui->username."]</span>"));
 }else{
   $smarty->assign ("loggedin", sprintf(_("You're logged in as %s"), "<span>".$ui->cn." [".$ui->username."]</span>"));
 }
