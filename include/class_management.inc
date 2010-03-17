@@ -314,7 +314,7 @@ class management
       $smarty = get_smarty();
       $smarty->assign("info", msgPool::deleteInfo($dns_names,_($this->objectName)));
       $smarty->assign("multiple", true);
-      return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+      return($smarty->fetch(get_template_path('removeEntries.tpl')));
     }
   }  
 
