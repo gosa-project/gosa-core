@@ -60,6 +60,11 @@ class deptabs extends tabs
     $nAV      = preg_replace('/"/', '\"', $nAV); 
     $new_dn   = @LDAP::convert($namingAttr.'='.$nAV.','.$baseobject->base);
 
+    // Do not try to move the root DSE
+    if($baseobject->is_root_dse){
+      $new_dn = $baseobject->orig_dn;
+    }
+
     /* Move group? */
     if ($this->dn != $new_dn && $this->dn != "new"){
       $baseobject->move($this->dn,$new_dn);

@@ -55,11 +55,14 @@ class department extends plugin
   var $initially_was_tagged = false;
   var $orig_base = "";
   var $orig_ou = "";
+  var $orig_dn = "";
   var $baseSelector;
 
   var $manager_enabled = FALSE;
   var $manager_name ="";
   var $manager ="";
+
+  var $is_root_dse = FALSE;
 
   function department (&$config, $dn)
   {
@@ -109,6 +112,12 @@ class department extends plugin
 	    }
     } else {
 	    $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
+    }
+
+    // Special handling for the rootDSE
+    if($this->dn == $this->config->current['BASE']){
+      $this->base = $this->dn;
+      $this->is_root_dse = TRUE;
     }
 
     $this->orig_base = $this->base;
@@ -207,12 +216,9 @@ class department extends plugin
 
     /* Hide base selector, if this object represents the base itself 
      */
-    $smarty->assign("is_root_dse", FALSE);
-    if($this->dn == $this->config->current['BASE']){
-      $smarty->assign("is_root_dse", TRUE);
-      $nA = $this->namingAttr."ACL";
-      $smarty->assign($nA,$this->getacl($this->namingAttr,TRUE));
-    }
+    $smarty->assign("is_root_dse", $this->is_root_dse);
+    $nA = $this->namingAttr."ACL";
+    $smarty->assign($nA,$this->getacl($this->namingAttr,TRUE));
 
     /* Hide all departments, that are subtrees of this department */
     $bases = $this->get_allowed_bases();
