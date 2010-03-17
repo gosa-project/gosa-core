@@ -55,7 +55,8 @@
 	<b>{t}Generic{/t}</b>
 	<table>	
 		<tr>
-			<td style='vertical-align:top'>
+			<td>
+
 				{t}Did the setup procedure help you to get started?{/t}   
 			</td>
 			<td>
@@ -65,7 +66,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td style='vertical-align:top'>
+			<td>
+
 				{t}If not, what problems did you encounter{/t}:
 			</td>
 			<td>
@@ -73,7 +75,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td style='vertical-align:top'>
+			<td>
+
 				{t}Is this the first time you use GOsa?{/t}
 			</td>
 			<td>
@@ -81,13 +84,14 @@
 				<br>
 				<input {if !$first_use} checked {/if} type='radio' name='first_use' value='0'>{t}No{/t},
 				{t}I use it since{/t}
-				<select name='use_since' title='{t}Select the year since when you are using GOsa{/t}'> 
+				<select name='use_since' title='{t}Select the year since when you are using GOsa{/t}' size=1> 
 					{html_options options=$years}
 				</select>
 			</td>	
 		</tr>
 		<tr>
-			<td style='vertical-align:top'>
+			<td>
+
 				{t}What operating system / distribution do you use?{/t}
 			</td>
 			<td>
@@ -95,7 +99,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td style='vertical-align:top'>
+			<td>
+
 				{t}What web server do you use?{/t}
 			</td>
 			<td>
@@ -103,7 +108,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td style='vertical-align:top'>
+			<td>
+
 				{t}What PHP version do you use?{/t}
 			</td>
 			<td>
@@ -115,7 +121,8 @@
 	<br><b>{t}LDAP{/t}</b>
 	<table>
 		<tr>
-			<td style='vertical-align:top'>
+			<td>
+
 			{t}What kind of LDAP server(s) do you use?{/t}
 			</td>
 			<td><input type='text' name='ldap_server' size=50 value='{$ldap_server}'>
@@ -132,7 +139,8 @@
 	<br><b>{t}Features{/t}</b>
 	<table>
 		<tr>
-			<td style='vertical-align:top'>{t}What features of GOsa do you use?{/t}
+			<td>{t}What features of GOsa do you use?{/t}
+
 			</td>
 			<td>
 				{foreach from=$features_used item=data key=key}
@@ -142,13 +150,15 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="vertical-align:top">{t}What features do you want to see in future versions of GOsa?{/t}
+			<td>{t}What features do you want to see in future versions of GOsa?{/t}
+
 			</td>
 			<td><textarea name='want_to_see_next' cols=50 rows=3>{$want_to_see_next}</textarea>
 			</td>
 		</tr>
 	</table>
 </div>
-<input type='submit' name='send_feedback' value='{t}Send feedback{/t}'>
+<button type='submit' name='send_feedback'>{t}Send feedback{/t}</button>
+
 {/if}
 <input type='hidden' name='step_feedback' value='1'>

@@ -6,7 +6,7 @@
             {t}Theme{/t}
         </div>
         <div class='step4_value'>
-            <select name="theme">
+            <select name="theme" size=1>
                 {html_options options=$themes selected=$theme}
             </select>
         </div>
@@ -19,7 +19,7 @@
             {t}Compress output send to browser{/t}
         </div>
         <div class='step4_value'>
-            <select name="compressed">
+            <select name="compressed" size=1>
                 {html_options options=$bool selected=$compressed}
             </select>
         </div>

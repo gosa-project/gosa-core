@@ -71,7 +71,7 @@
             {t}Timezone{/t}
         </div>
         <div class='step4_value'>
-            <select name='timezone' title='{t}Please choose your preferred timezone here{/t}' style="width:100%">
+            <select name='timezone' title='{t}Please choose your preferred timezone here{/t}' style="width:100%" size=1>
  		{foreach from=$timezones.TIMEZONES item=val key=key}
             {if $key == $timezone}
                 {if isset($timezones.DST_ZONES.$key)}

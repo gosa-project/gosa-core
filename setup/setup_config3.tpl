@@ -156,13 +156,13 @@
             {if $optional.uniq_identifier_active == FALSE}
                 <input type='checkbox' value='1' name='uniq_identifier_active'
                     onClick='changeState("uniq_identifier");'>
-				<select name="uniq_identifier" id="uniq_identifier" disabled>
+				<select name="uniq_identifier" id="uniq_identifier" disabled size=1>
 					{html_options options=$uniq_identifiers selected=$optional.uniq_identifier}
 				</select>
             {else}
                 <input type='checkbox' value='1' name='uniq_identifier_active' checked
 					onClick='changeState("uniq_identifier");'>
-				<select name="uniq_identifier" id="uniq_identifier" >
+				<select name="uniq_identifier" id="uniq_identifier"  size=1>
 					{html_options options=$uniq_identifiers selected=$optional.uniq_identifier}
 				</select>
             {/if}
@@ -324,7 +324,7 @@
             {t}Debug level{/t}
         </div>
         <div class='step4_value'>
-			<select name='debuglevel'>
+			<select name='debuglevel' size=1>
 				{if $optional.debuglevel == 0}
 					<option value='0' selected>0 {t}Disabled{/t}</option>
 					<option value='1'>1 {t}Enabled{/t}</option>

@@ -25,7 +25,8 @@ or
 {/if} 
 	</tt>
 	<p>	
-		<input type='submit' name='getconf' value='{t}Download configuration{/t}'>
+		<button type='submit' name='getconf'>{t}Download configuration{/t}</button>
+
 	</p>
 		{if $err_msg != ""}
 			<hr>

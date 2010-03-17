@@ -7,7 +7,7 @@
             {t}Enable schema validation when logging in{/t}
         </div>
         <div class='step4_value'>
-			<select name='enable_schema_check'>
+			<select name='enable_schema_check' size=1>
 				{html_options options=$bool selected=$enable_schema_check}
             </select>
         </div>

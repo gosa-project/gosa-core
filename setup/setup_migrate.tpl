@@ -30,7 +30,8 @@
 				</div>
 			{/foreach}
 		<br>
-		<input type='submit' name='reload' value='{t}Check again{/t}'>
+		<button type='submit' name='reload'>{t}Check again{/t}</button>
+
 
 		{elseif $method == "rootOC_migrate_dialog"}
 
@@ -51,13 +52,15 @@
 			</div>
 
 			<br>
-			<input type='submit' name='rootOC_migrate_start' value='{t}Migrate{/t}'>
+			<button type='submit' name='rootOC_migrate_start'>{t}Migrate{/t}</button>
+
 			</p>
 				
 
 			<hr>	
 			<div style='width:100%; text-align:right; padding:5px;'>
-				<input type='submit' name='rootOC_dialog_cancel' value='{t}Close{/t}'>
+				<button type='submit' name='rootOC_dialog_cancel'>{t}Close{/t}</button>
+
 			</div>
 
 		{elseif $method == "outside_winstations"}
@@ -93,18 +96,21 @@
 			{t}Select all{/t}
 			<p>
 			<b>{t}Move selected windows workstations into the following GOsa department{/t} : </b>
-			<select name='move_winstation_to'>
+			<select name='move_winstation_to' size=1>
 				{html_options options=$ous}
 			</select>
 			<br>
-			<input type='submit' name='outside_winstations_dialog_perform' value='{t}Move selected workstations{/t}'>
-			<input type='submit' name='outside_winstations_dialog_whats_done' value='{t}What will be done here{/t}'>
+			<button type='submit' name='outside_winstations_dialog_perform'>{t}Move selected workstations{/t}</button>
+
+			<button type='submit' name='outside_winstations_dialog_whats_done'>{t}What will be done here{/t}</button>
+
 			</p>
 				
 
 			<hr>	
 			<div style='width:100%; text-align:right; padding:5px;'>
-				<input type='submit' name='outside_winstations_dialog_cancel' value='{t}Close{/t}'>
+				<button type='submit' name='outside_winstations_dialog_cancel'>{t}Close{/t}</button>
+
 			</div>
 		
 
@@ -120,7 +126,7 @@
                         </p>
 			<p>
 			{t}Move selected groups into this group tree{/t}: 
-			<select name='move_group_to'>
+			<select name='move_group_to' size=1>
 				{html_options options=$ous}
 			</select>
 			</p>
@@ -150,17 +156,21 @@
 			<br>
 			<p>
                         {if $group_details}
-                        <input type='submit' name='outside_groups_dialog_refresh' value='{t}Hide changes{/t}'>
+                        <button type='submit' name='outside_groups_dialog_refresh'>{t}Hide changes{/t}</button>
+
                         {else}
-                        <input type='submit' name='outside_groups_dialog_whats_done' value='{t}Show changes{/t}'>
+                        <button type='submit' name='outside_groups_dialog_whats_done'>{t}Show changes{/t}</button>
+
                         {/if}
 			</p>
 
 			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
-				<input type='submit' name='outside_groups_dialog_perform' value='{t}Apply{/t}'>
+				<button type='submit' name='outside_groups_dialog_perform'>{t}Apply{/t}</button>
+
 				&nbsp;
-				<input type='submit' name='outside_groups_dialog_cancel' value='{t}Cancel{/t}'>
+				<button type='submit' name='outside_groups_dialog_cancel'>{t}Cancel{/t}</button>
+
 			</div>
 		
 		{elseif $method == "outside_users"}
@@ -174,7 +184,7 @@
 			</p>	
 			<p>
 			{t}Move selected users into this people tree{/t}: 
-			<select name='move_user_to'>
+			<select name='move_user_to' size=1>
 				{html_options options=$ous}
 			</select>
 			</p>
@@ -202,16 +212,20 @@
 			<br>
 
 			{if $user_details}
-			<input type='submit' name='outside_users_dialog_refresh' value='{t}Hide changes{/t}'>
+			<button type='submit' name='outside_users_dialog_refresh'>{t}Hide changes{/t}</button>
+
                         {else}
-			<input type='submit' name='outside_users_dialog_whats_done' value='{t}Show changes{/t}'>
+			<button type='submit' name='outside_users_dialog_whats_done'>{t}Show changes{/t}</button>
+
 			{/if}
 
 			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
-				<input type='submit' name='outside_users_dialog_perform' value='{t}Apply{/t}'>
+				<button type='submit' name='outside_users_dialog_perform'>{t}Apply{/t}</button>
+
 				&nbsp;
-				<input type='submit' name='outside_users_dialog_cancel' value='{t}Cancel{/t}'>
+				<button type='submit' name='outside_users_dialog_cancel'>{t}Cancel{/t}</button>
+
 			</div>
 		
 
@@ -234,7 +248,8 @@
 			</table>
 
 			{if !$details}
-				<input type='submit' name='migrate_acls_show_changes' value='{t}Show changes{/t}'>
+				<button type='submit' name='migrate_acls_show_changes'>{t}Show changes{/t}</button>
+
 				<input type='hidden' name='details' value='0'>
 			{else}
 				<input type='hidden' name='details' value='1'>
@@ -251,14 +266,18 @@
 				</div>
 				</div>
 				<br>
-				<input type='submit' name='migrate_acls_hide_changes' value='{t}Hide changes{/t}'>
+				<button type='submit' name='migrate_acls_hide_changes'>{t}Hide changes{/t}</button>
+
 			{/if}
 
-			<input type='submit' value="{t}Reload{/t}">
+			<button type='submit' name=''>{t}Reload{/t}</button>
+
 			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
-				<input type='submit' name='migrate_admin_user' value='{t}Apply{/t}'>	
-				<input type='submit' name='migrate_acls_cancel' value='{t}Cancel{/t}'>
+				<button type='submit' name='migrate_admin_user'>{t}Apply{/t}</button>	
+
+				<button type='submit' name='migrate_acls_cancel'>{t}Cancel{/t}</button>
+
 			</div>
 
 		{elseif $method == "create_acls"}
@@ -269,8 +288,10 @@
 {$what_will_be_done_now}
 </pre>
 			</div>		
-			<input type='submit' name='create_acls_create_confirmed' value='{t}Next{/t}'>
-			<input type='submit' name='create_acls_create_abort' value='{t}Abort{/t}'>
+			<button type='submit' name='create_acls_create_confirmed'>{t}Next{/t}</button>
+
+			<button type='submit' name='create_acls_create_abort'>{t}Abort{/t}</button>
+
 		{else}
 			<h2>{t}Create a new GOsa administrator account{/t}</h2>
 	
@@ -322,8 +343,10 @@
 
 			<hr>	
 			<div style='width:99%; text-align:right; padding:5px;'>
-				<input type='submit' name='create_admin_user' value='{t}Apply{/t}'>	
-				<input type='submit' name='create_acls_cancel' value='{t}Cancel{/t}'>
+				<button type='submit' name='create_admin_user'>{t}Apply{/t}</button>	
+
+				<button type='submit' name='create_acls_cancel'>{t}Cancel{/t}</button>
+
 			</div>
 			{/if}	
 		{elseif $method == "migrate_deps"}
@@ -369,17 +392,21 @@ dn: {$deps_to_migrate.$key.dn}
 			<br>
 
 			{if $deps_details}
-			<input type='submit' name='deps_visible_migrate_refresh' value='{t}Hide changes{/t}'>
+			<button type='submit' name='deps_visible_migrate_refresh'>{t}Hide changes{/t}</button>
+
 			{else}
-			<input type='submit' name='deps_visible_migrate_whatsdone' value='{t}Show changes{/t}'>
+			<button type='submit' name='deps_visible_migrate_whatsdone'>{t}Show changes{/t}</button>
+
 			{/if}
 
 			<hr>	
 
 			<div style='width:99%; text-align:right; padding:5px;'>
-				<input type='submit' name='deps_visible_migrate_migrate' value='{t}Apply{/t}'>
+				<button type='submit' name='deps_visible_migrate_migrate'>{t}Apply{/t}</button>
+
 				&nbsp;
-				<input type='submit' name='deps_visible_migrate_close' value='{t}Cancel{/t}'>
+				<button type='submit' name='deps_visible_migrate_close'>{t}Cancel{/t}</button>
+
 			</div>
 		{elseif $method == "migrate_users"}
 	
@@ -422,17 +449,21 @@ dn: {$users_to_migrate.$key.dn}
 			<br>
 
 			{if $user_details}
-			<input type='submit' name='users_visible_migrate_refresh' value='{t}Hide changes{/t}'>
+			<button type='submit' name='users_visible_migrate_refresh'>{t}Hide changes{/t}</button>
+
 			{else}
-			<input type='submit' name='users_visible_migrate_whatsdone' value='{t}Show changes{/t}'>
+			<button type='submit' name='users_visible_migrate_whatsdone'>{t}Show changes{/t}</button>
+
 			{/if}
 
 			<hr>	
 
 			<div style='width:99%; text-align:right; padding-top:5px;'>
-				<input type='submit' name='users_visible_migrate_migrate' value='{t}Apply{/t}'>
+				<button type='submit' name='users_visible_migrate_migrate'>{t}Apply{/t}</button>
+
 				&nbsp;
-				<input type='submit' name='users_visible_migrate_close' value='{t}Cancel{/t}'>
+				<button type='submit' name='users_visible_migrate_close'>{t}Cancel{/t}</button>
+
 			</div>
 
 
@@ -466,18 +497,23 @@ dn: {$users_to_migrate.$key.dn}
 		<br>
 
 		{if $device_details}
-			<input type='submit' name='device_dialog_refresh' value='{t}Hide changes{/t}'>
-			<input type='submit' name='dummy_11' value='{t}Refresh{/t}'>
+			<button type='submit' name='device_dialog_refresh'>{t}Hide changes{/t}</button>
+
+			<button type='submit' name='dummy_11'>{t}Refresh{/t}</button>
+
 		{else}
-			<input type='submit' name='device_dialog_whats_done' value='{t}Show changes{/t}'>
+			<button type='submit' name='device_dialog_whats_done'>{t}Show changes{/t}</button>
+
 		{/if}
 
 		<hr>	
 
 		<div style='width:99%; text-align:right; padding-top:5px;'>
-			<input type='submit' name='migrate_devices' value='{t}Apply{/t}'>
+			<button type='submit' name='migrate_devices'>{t}Apply{/t}</button>
+
 			&nbsp;
-			<input type='submit' name='device_dialog_cancel' value='{t}Cancel{/t}'>
+			<button type='submit' name='device_dialog_cancel'>{t}Cancel{/t}</button>
+
 		</div>
 
 	{elseif $method == "services"}
@@ -509,18 +545,23 @@ dn: {$users_to_migrate.$key.dn}
 		<br>
 
 		{if $service_details}
-			<input type='submit' name='service_dialog_refresh' value='{t}Hide changes{/t}'>
-			<input type='submit' name='dummy_11' value='{t}Refresh{/t}'>
+			<button type='submit' name='service_dialog_refresh'>{t}Hide changes{/t}</button>
+
+			<button type='submit' name='dummy_11'>{t}Refresh{/t}</button>
+
 		{else}
-			<input type='submit' name='service_dialog_whats_done' value='{t}Show changes{/t}'>
+			<button type='submit' name='service_dialog_whats_done'>{t}Show changes{/t}</button>
+
 		{/if}
 
 		<hr>	
 
 		<div style='width:99%; text-align:right; padding-top:5px;'>
-			<input type='submit' name='migrate_services' value='{t}Apply{/t}'>
+			<button type='submit' name='migrate_services'>{t}Apply{/t}</button>
+
 			&nbsp;
-			<input type='submit' name='service_dialog_cancel' value='{t}Cancel{/t}'>
+			<button type='submit' name='service_dialog_cancel'>{t}Cancel{/t}</button>
+
 		</div>
 
 
@@ -553,18 +594,23 @@ dn: {$users_to_migrate.$key.dn}
 		<br>
 
 		{if $menu_details}
-			<input type='submit' name='menu_dialog_refresh' value='{t}Hide changes{/t}'>
-			<input type='submit' name='dummy_11' value='{t}Refresh{/t}'>
+			<button type='submit' name='menu_dialog_refresh'>{t}Hide changes{/t}</button>
+
+			<button type='submit' name='dummy_11'>{t}Refresh{/t}</button>
+
 		{else}
-			<input type='submit' name='menu_dialog_whats_done' value='{t}Show changes{/t}'>
+			<button type='submit' name='menu_dialog_whats_done'>{t}Show changes{/t}</button>
+
 		{/if}
 
 		<hr>	
 
 		<div style='width:99%; text-align:right; padding-top:5px;'>
-			<input type='submit' name='migrate_menus' value='{t}Apply{/t}'>
+			<button type='submit' name='migrate_menus'>{t}Apply{/t}</button>
+
 			&nbsp;
-			<input type='submit' name='menu_dialog_cancel' value='{t}Cancel{/t}'>
+			<button type='submit' name='menu_dialog_cancel'>{t}Cancel{/t}</button>
+
 		</div>
 	{/if}
     </div>

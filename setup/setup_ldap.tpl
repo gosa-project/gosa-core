@@ -10,11 +10,14 @@
 			{html_options options=$resolved_users selected=$admin}
 		</select>
 		<input type='text' value='{$resolve_filter}' name='resolve_filter'>
-		<input type='submit' value='{t}Search{/t}' name='resolve_search'>
+		<button type='submit' name='resolve_search'>{t}Search{/t}</button>
+
 		<p class='seperator' style='margin-bottom:10px;'>&nbsp;</p>
 		<div style='text-align:right'>
-		<input type='submit' value='{t}Apply{/t}' name='use_selected_user'>
-		<input type='submit' value='{t}Cancel{/t}' name='resolve_user'>
+		<button type='submit' name='use_selected_user'>{t}Apply{/t}</button>
+
+		<button type='submit' name='resolve_user'>{t}Cancel{/t}</button>
+
 		</div>
 	</div>		
 	
@@ -56,7 +59,7 @@
 		</div>
 		<div class='step4_value'>
 			{if $namingContextsCount >= 1}
-				<select name='base'>		
+				<select name='base' size=1>		
 					{html_options values=$namingContexts output=$namingContexts selected=$base}
 				</select>
 			{else}
