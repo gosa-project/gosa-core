@@ -518,6 +518,11 @@ class acl extends plugin
       $aclList= new divSelectBox("aclList");
       $aclList->SetHeight(150);
 
+      // Create a map of all used sections, this allows us to simply hide the remove button 
+      //  if no acl is configured for the given section 
+      // e.g. ';all;department/country;users/user;
+      $usedList = ";".implode(array_keys($this->aclContents),';').";";
+
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){
         $summary= "";
@@ -548,7 +553,7 @@ class acl extends plugin
         if($this->acl_is_readable("")){
           $actions.= image('images/lists/edit.png','cat_edit_'.$section, msgPool::editButton(_("category ACL")));
         }
-        if($this->acl_is_removeable()){
+        if($this->acl_is_removeable() && preg_match("/;".$section."(;|\/)/", $usedList)){
           $actions.= image('images/lists/trash.png','cat_del_'.$section, msgPool::delButton(_("category ACL")));
         }   
 
