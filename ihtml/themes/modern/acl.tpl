@@ -1,49 +1,57 @@
 {if !$acl_readable}
 
-	<h2>{msgPool type=permView}</h2>
+	<h3>{msgPool type=permView}</h3>
 
 {else}
 	{if $dialogState eq 'head'}
-	<h1>{t}Assigned ACL for current entry{/t}</h1>
-	{$aclList}
-
-
-	{if $acl_createable}
-	<button type='submit' name='new_acl'>{t}New ACL{/t}</button>
-
-	{/if}
+  	<h3>{t}Assigned ACL for current entry{/t}</h3>
+	  {$aclList}
+    {if $acl_createable}
+     <button type='submit' name='new_acl'>{t}New ACL{/t}</button>
+ 	  {/if}
 	{/if}
 
 	{if $dialogState eq 'create'}
-	<h1>{t}ACL type{/t}
-		{if !$acl_writeable}
-			<select size="1" name="dummy_t" title="{t}Select an acl type{/t}" disabled>
-				{html_options options=$aclTypes selected=$aclType}
-				<option disabled>&nbsp;</option>
-			</select>&nbsp;
-		{else} 
-			<select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">
-				{html_options options=$aclTypes selected=$aclType}
-				<option disabled>&nbsp;</option>
-			</select size=1>&nbsp;
-			{if $javascript eq 'false'}
-				<button type='submit' name='refresh'>{t}Apply{/t}</button>
-
-			{/if}
-		{/if}
-	</h1>
+    <h3>{t}Options{/t}</h3>
+    <table summary='{t}Options{/t}'>
+      <tr>
+        <td>
+  	      {t}ACL type{/t}
+        </td>
+        <td>
+          {if !$acl_writeable}
+            <select size="1" name="dummy_t" title="{t}Select an acl type{/t}" disabled>
+              {html_options options=$aclTypes selected=$aclType}
+              <option disabled>&nbsp;</option>
+            </select>&nbsp;
+          {else} 
+            <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">
+              {html_options options=$aclTypes selected=$aclType}
+              <option disabled>&nbsp;</option>
+            </select size=1>&nbsp;
+            {if $javascript eq 'false'}
+              <button type='submit' name='refresh'>{t}Apply{/t}</button>
+            {/if}
+          {/if}
+        </td>
+      </tr>
+      <tr>
+        <td>
+      	  {t}Additional filter options{/t}
+        </td>
+        <td>
+  		    {if !$acl_writeable}
+            <input type='text' value='{$aclFilter}' disabled name='dummy_f' style='width:600px;'>
+          {else}
+            <input type='text' value='{$aclFilter}' name='aclFilter' style='width:600px;'>
+          {/if}
+        </td>
+      </tr>
+    </table>
 
 	<hr>
-	<div style='padding:3px;'>
-	{t}Additional filter options{/t}&nbsp; 
-		{if !$acl_writeable}
-		<input type='text' value='{$aclFilter}' disabled name='dummy_f' style='width:600px;'>
-		{else}
-		<input type='text' value='{$aclFilter}' name='aclFilter' style='width:600px;'>
-		{/if}
-	</div>
-
-	<table style="width:100%">
+  <h3>{t}Members{/t}</h3>
+	<table style="width:100%" summary='{t}Member selection{/t}'>
 	 <tr>
 	  <td style="width:48%">
 	   {t}Use members from{/t}
@@ -52,16 +60,11 @@
 			<option disabled>&nbsp;</option>
 	   </select>
 	   {if $javascript eq 'false'}<button type='submit' name='refresh'>{t}Apply{/t}</button>{/if}
-<br><br>
-	  </td>
-	  <td>
-	  </td>
-	  <td>
-	  </td>
-	 </tr>
+    </td>
+    <td>&nbsp;</td>
+    <td>{t}Members{/t}</td>
 	 <tr>
 	  <td style="width:48%">
-	   {t}Available members{/t}<br>
 		{if !$acl_writeable}
 	   <select style="width:100%;height:180px;" disabled name="dummy_s[]" size="20" multiple title="{t}List message possible targets{/t}">
 				{html_options options=$sources}
@@ -84,7 +87,6 @@
 		{/if}
 	  </td>
 	  <td style="width:48%">
-	   {t}Members{/t}<br>
 		{if !$acl_writeable}
 	   <select style="width:100%;height:180px;" disabled name="dummy_r[]" size="20" multiple title="{t}List message recipients{/t}">
 				{html_options options=$recipients}
@@ -106,7 +108,7 @@
 	{if $aclType ne 'base'}
 	<hr>
 
-	<h1>{t}List of available ACL categories{/t}</h1>
+	<h3>{t}List of available ACL categories{/t}</h3>
 	{$aclList}
 	{/if}
 	{/if}
@@ -114,13 +116,13 @@
 
 	{if $aclType eq 'base'}
 	<hr>
-	<h1>{t}ACL for this object{/t}</h1>
+	<h3>{t}ACL for this object{/t}</h3>
 	{$aclSelector}
 	{/if}
 
 	{if $aclType eq 'role'}
 	<hr>
-	<h1>{t}Available roles{/t}</h1>
+	<h3>{t}Available roles{/t}</h3>
 	{$roleSelector}
 	{/if}
 
@@ -138,7 +140,7 @@
 
 	{if $dialogState eq 'edit'}
 
-	<h1>{$headline}</h1>
+	<h3>{$headline}</h3>
 
 	{$aclSelector}
 
