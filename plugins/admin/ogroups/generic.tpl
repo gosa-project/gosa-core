@@ -63,7 +63,8 @@
 
 
   </td>
-  <td style="border-left:1px solid #A0A0A0; padding-left:10px;">
+  <td style='padding-left:10px;' class='left-border'>
+
    <b><LABEL for="members">{t}Member objects{/t}</LABEL></b>&nbsp;({$combinedObjects})
    <br>
 {render acl=$memberACL}
