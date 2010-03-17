@@ -10,7 +10,7 @@
    <!-- The users picture settings container -->
    <table summary="{t}The users picture{/t}">
     <tr>
-     <td style="vertical-align: middle; width:147px; height:200px; background-color:gray;">
+     <td style='width:147px; height:200px; background-color:gray;'>
       {if !$userPicture_is_readable}
       <img  src="plugins/users/images/default.jpg" alt=''>
       {else}
@@ -179,8 +179,7 @@
    </table>
 
   </td>
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
+  <td class='left-border'>   &nbsp;
   </td>
 
   <td>
@@ -379,8 +378,7 @@
    </table>
   </td>
   
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
+  <td class='left-border'>   &nbsp;
   </td>
   
   <!-- Phone, ... -->
@@ -431,8 +429,7 @@
    </table>
   </td>
   
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
+  <td class='left-border'>   &nbsp;
   </td>
   
   <!-- Location, ... -->
