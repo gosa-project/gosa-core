@@ -1629,15 +1629,7 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
   /* Prepare and show template */
   $smarty= get_smarty();
   $smarty->assign("allow_readonly",$allow_readonly);
-  if(is_array($dn)){
-    $msg = "<pre>";
-    foreach($dn as $sub_dn){
-      $msg .= "\n".$sub_dn.", ";
-    }
-    $msg = preg_replace("/, $/","</pre>",$msg);
-  }else{
-    $msg = $dn;
-  }
+  $msg= msgPool::buildList($dn);
 
   $smarty->assign ("dn", $msg);
   if ($remove){
@@ -1645,7 +1637,8 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
   } else {
     $smarty->assign ("action", _("Edit anyway"));
   }
-  $smarty->assign ("message", sprintf(_("You're going to edit the LDAP entry/entries %s"), "<b>".$msg."</b>", ""));
+
+  $smarty->assign ("message", _("These entries are currently locked:"). $msg);
 
   return ($smarty->fetch (get_template_path('islocked.tpl')));
 }

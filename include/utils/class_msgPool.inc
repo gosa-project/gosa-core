@@ -363,12 +363,12 @@ class msgPool
 
   public static function buildList($data)
   {
-    $objects= "<ul>";
+    $objects= "<ul class='object-list'>";
     foreach ($data as $key => $value){
       if (is_numeric($key)){
-        $objects.= "<li>\n<i>$value</i></li>";
+        $objects.= "<li>\n$value</li>";
       } else {
-        $objects.= "<li>\n$value (<i>$key</i>)</li>";
+        $objects.= "<li>\n$value <span>$key</span></li>";
       }
     }
     $objects.= "</ul>";

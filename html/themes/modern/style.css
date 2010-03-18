@@ -1353,6 +1353,17 @@ background-image:none;
   text-align:right;
 }
 
+.object-list li span {
+  color:#666;
+  font-style:italic;
+}
+
+.inline-warning {
+  font-size:18px;
+  text-align:bottom;
+}
+
+
 /* Progress */
 
 div.progress {
@@ -1382,3 +1393,99 @@ div.progress {
   background-color:#FF0000;
 }
 
+
+/* Login */
+
+.login-box-header {
+  padding:8px 13px;
+  font-size:20px;
+  background-color:#EEE;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+  background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  -moz-border-radius-topleft:5px;
+  -moz-border-radius-topright:5px;
+  -webkit-border-top-left-radius:5px;
+  -webkit-border-top-right-radius:5px;
+  border-bottom:1px solid #CCC;
+}
+
+.login-box-container {
+  padding:5% 10% 3% 10%;
+}
+
+.login-box {
+  position:absolute;
+  top:25%;
+  left:30%;
+  right:30%;
+  background-color:#FFF;
+  border:1px solid #CCC;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#F8F8F8));
+  background: -moz-linear-gradient(top, #FFF, #F8F8F8);
+}
+
+.login-element-container {
+  padding:5px 8px;
+  position:relative;
+  height:30px;
+}
+
+.login-warning {
+}
+
+.login-warning a{
+  font-weight: bold;
+}
+
+.login-label {
+  position:absolute;
+  left:8px;
+  width:10em;
+}
+
+.login-input {
+  position:absolute;
+  left:10em;
+  right:5px;
+}
+
+.login-input input{
+  width:92%;
+}
+
+.login-inline-message {
+  padding:0 5px;
+  color:red;
+  text-align:center;
+}
+
+.login-warning {
+  border:2px solid #F00;
+  background-color:#FCC;
+  padding:10px;
+  margin:0 10px 10px 10px;
+  text-align:center;
+}
+
+
+/* Logout */
+
+.logout-box {
+  position:absolute;
+  top:25%;
+  left:20%;
+  right:20%;
+  padding:10px;
+  background-color:#F8F8F8;
+  border:1px solid #CCC;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#F0F0F0));
+  background: -moz-linear-gradient(top, #FFF, #F0F0F0);
+}

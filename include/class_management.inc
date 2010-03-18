@@ -319,7 +319,7 @@ class management
       foreach($this->dns as $dn){
         $tmp = $h->getType($dn);
         if(isset($map[$tmp])){
-          $dns_names[] = '('._($map[$tmp]).')&nbsp;-&nbsp;'.LDAP::fix($dn);
+          $dns_names[LDAP::fix($dn)] = _($map[$tmp]);
         }else{
           $dns_names[] =LDAP::fix($dn);
         }

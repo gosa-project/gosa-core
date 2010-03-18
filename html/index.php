@@ -52,6 +52,7 @@ function displayLogin()
   if(isset($_POST["username"])){
     $username= $_POST["username"];
   }
+  $smarty->assign ("logo", image(get_template_path("images/logo.png")));
   $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
   $smarty->assign ('username', $username);
   $smarty->assign ('personal_img', get_template_path('images/login-head.png'));
@@ -66,14 +67,13 @@ function displayLogin()
 
   /* Displasy SSL mode warning? */
   if ($ssl != "" && $config->get_cfg_value('warnssl') == 'true'){
-    $smarty->assign ("ssl", _("Warning").": <a style=\"color:red;\" href=\"$ssl\">"._("Session is not encrypted!")."</a>");
+    $smarty->assign ("ssl", sprintf(_("This session is not ecrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">"._("here")."</a>"));
   } else {
     $smarty->assign ("ssl", "");
-  }
+ }
 
   if(!$config->check_session_lifetime()){
-    $smarty->assign ("lifetime", _("Warning").": ".
-        _("The session lifetime configured in your gosa.conf will be overridden by php.ini settings."));
+    $smarty->assign ("lifetime", _("The session lifetime configured in your gosa.conf will be overridden by php.ini settings."));
   }else{
     $smarty->assign ("lifetime", "");
   }
@@ -421,15 +421,8 @@ if (!isset($message)){
 
 $smarty->assign ("message", $message);
 
-/* Displasy SSL mode warning? */
-if ($ssl != "" && $config->get_cfg_value('WARNSSL') == 'true'){
-  $smarty->assign ("ssl", "<b>"._("Warning").":<\/b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."<\/b></a>!");
-} else {
-  $smarty->assign ("ssl", "");
-}
-
 /* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
-$smarty->assign ("cookies", "<b>"._("Warning").":<\/b> "._("Your browser has cookies disabled. Please enable cookies and reload this page before logging in!"));
+$smarty->assign ("cookies", _("Your browser has cookies disabled. Please enable cookies and reload this page before logging in!"));
 
 /* Generate server list */
 $servers= array();
