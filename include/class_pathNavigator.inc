@@ -15,9 +15,7 @@ class pathNavigator
 
     // Shown title of sub dialogs (They have no plHeadline set.)
     if($class instanceOf plugin && !isset($class->plHeadline)){
-      if(empty($class->pathTitle)){
-        $str = "Missing: ".get_class($class);
-      }else{
+      if(!empty($class->pathTitle)){
         $str = _($class->pathTitle);
       }
     }
