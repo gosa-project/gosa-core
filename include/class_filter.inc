@@ -148,7 +148,7 @@ class filter {
     if (isset($element['maxlength'])){
       $maxlength= $element['maxlength'];
     }
-    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='$size' maxlength='maxlength' value='".$this->elementValues[$tag]."'>";
+    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='".$this->elementValues[$tag]."'>";
     if (isset($element['autocomplete'])) {
       $frequency= "0.5";
       $characters= "1";
@@ -392,6 +392,9 @@ class filter {
       $filter= $query['filter'];
       $attributes= $query['attribute'];
 
+      // ObjectClass is required to check permissions later.
+      if(!in_array('objectClass', $attributes)) $attributes[] = 'objectClass';
+
       // Generate final filter
       foreach ($this->elements as $tag => $element) {
         if (!isset($element['set']) || !isset($element['unset'])) {
@@ -490,13 +493,16 @@ class filter {
       $attributes= array($attributes);
     }
 
+    // ObjectClass is required to check permissions later.
+    if(!in_array('objectClass', $attributes)) $attributes[] = 'objectClass';
+
     // Make filter
     $filter= preg_replace("/\\$$tag/", normalizeLdap($value), $filter);
     if (isset($config['base']) && isset($config['scope']) && isset($config['category'])) {
-      $result= call_user_func(array($backend, 'query'), $config['base'], $config['scope'], $filter, $attributes,
+      $result= call_user_func(array($backend, 'query'), $this,$config['base'], $config['scope'], $filter, $attributes,
                            $config["category"], $config["objectStorage"]);
     } else {
-      $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
+      $result= call_user_func(array($backend, 'query'), $this,$this->base, $this->scope, $filter, $attributes,
                            $this->category, $this->objectStorage);
     }
 
