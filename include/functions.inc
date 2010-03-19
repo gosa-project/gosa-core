@@ -3629,6 +3629,19 @@ function image($path, $action= "", $title= "", $align= "middle")
   }
 }
 
+/*! \brief    Encodes a complex string to be useable in HTML posts.
+ */
+function postEncode($str)
+{
+  return(preg_replace("/=/","_", base64_encode($str)));
+}
+
+/*! \brief    Decodes a string encoded by postEncode
+ */
+function postDecode($str)
+{
+  return(base64_decode(preg_replace("/_/","=", $str)));
+}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
