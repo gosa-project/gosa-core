@@ -28,12 +28,13 @@
     <maxlength>60</maxlength>
     <default></default>
     <unset></unset>
-    <set>(|(cn=*$*)(sn=*$*)(givenName=*$*))</set>
+    <set>(|(cn=*$*)(sn=*$*)(givenName=*$*)(uid=*$*))</set>
     <alphabet>true</alphabet>
     <autocomplete>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=gosaAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)))</filter>
+      <filter>(&amp;(objectClass=gosaAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)(uid=*$NAME*)))</filter>
       <attribute>cn</attribute>
+      <attribute>uid</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
