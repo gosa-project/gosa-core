@@ -321,7 +321,7 @@ class pluglist
         "\n        <div class='plugin-path'>".
         "\n          <ul class='path-navigation'>".
         "\n            <li class='left' onClick=\"openPlugin('');\">".
-        "\n              <div class='nav-home'></div>".
+        "\n              ".image(get_template_path("images/home.png")).
         "\n            </li>".
         "\n            %navigator%";
 

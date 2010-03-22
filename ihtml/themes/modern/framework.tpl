@@ -6,7 +6,7 @@
      <li class='right table-wrapper'>
        <div class='logout-label'>
          <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>
-          <input type='submit' name='log-out' id='log-out' title='Log out' value=''>
+          {$logout}
           <input type='hidden' name='forcedlogout' value='1'>
           <input type="hidden" name="php_c_check" value="1">
          </form>

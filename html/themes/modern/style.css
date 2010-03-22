@@ -150,6 +150,7 @@ div.title-bar{
   height:40px;
   border-top:1px solid #111;
   border-bottom:1px solid #222;
+  background-color:#000;
   background:url('images/title-bar.png') repeat-x;
   color:#FFF;
   cursor:default;
@@ -182,19 +183,6 @@ div.logout-label {
   height:40px;
   vertical-align:middle;
   padding:0 5px 0 5px;
-}
-
-#log-out{
-  width:16px;
-  height:16px;
-  border:0;
-  background-color:transparent;
-  background-image:url('images/btn-logout.png');
-  cursor:pointer;
-}
-
-#log-out:hover{
-  background-image:url('images/btn-logout-hover.png')
 }
 
 
@@ -296,13 +284,6 @@ ul.path-navigation li:hover {
   background-color: #E0E0E0;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#E0E0E0));
   background: -moz-linear-gradient(top, #EEE, #E0E0E0);
-}
-
-div.nav-home {
-  height:14px;
-  width:20px;
-  margin-top:-1px;
-  background-image:url(images/home.png);
 }
 
 .right-border {
