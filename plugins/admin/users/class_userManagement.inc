@@ -228,11 +228,12 @@ class userManagement extends management
 
   function handlePasswordQueue()
   {
+    $smarty = get_smarty();
+
     // Get next entry from queue.
     if(empty($this->dn) && count($this->pwd_change_queue)){
       $this->dn = array_pop($this->pwd_change_queue);
       set_object_info($this->dn);
-      $smarty = get_smarty();
       return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
     }
 
@@ -253,7 +254,6 @@ class userManagement extends management
       // Display errors
       if (count($message) != 0){
         msg_dialog::displayChecks($message);
-        $smarty = get_smarty();
         return($smarty->fetch(get_template_path('password.tpl', TRUE)));
       }
 
