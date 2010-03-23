@@ -159,12 +159,12 @@ class ogroup extends plugin
 
       /* Add member and force reload */
       $this->member[$NewMember]= $NewMember;
-      $this->reload(); 
 
       $this->memberList[$NewMember]= $this->objcache[$NewMember];
       unset ($this->objects[$NewMember]);
       uasort ($this->memberList, 'sort_list');
       reset ($this->memberList);
+      $this->reload(); 
     }else{
       /* Delete objects from group */
       if (isset($_POST['delete_membership']) && isset($_POST['members'])){
@@ -219,6 +219,7 @@ class ogroup extends plugin
         }
         $this->objectSelect= FALSE;
         $this->dialog= FALSE;
+        $this->reload();
       }
     }
   }
