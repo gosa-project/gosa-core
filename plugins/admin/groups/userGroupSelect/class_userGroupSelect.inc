@@ -26,6 +26,8 @@ class userGroupSelect extends management
   protected $skipFooter = TRUE;
   protected $skipHeader = TRUE;
 
+  public $plHeadline = "User and group selection";
+
   function __construct($config,$ui)
   {
     $this->config = $config;
