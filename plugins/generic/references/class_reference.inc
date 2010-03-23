@@ -155,14 +155,20 @@ class reference extends plugin
       } else {
         $img= "images/lists/sort-down.png";
       }
+
       $this->objectlist.= 
         ' <tr style="background-color:'.$cycle[$id&1].';">  '.
         '   <td class="phonelist" title="'.$attrs['cn'][0].'">  '.
-        '     '.image($img).'&nbsp;'.$attrs['cn'][0].
+        '     '.image($img).
         '     <a href="main.php?plug='.$_GET['plug'].'&amp;start=&amp;show='.base64_encode($attrs['dn']).'"> '.
+        '     &nbsp;'.$attrs['cn'][0].
         '     </a> '.
         '   </td> '.
-        '   <td>'.$description.'</td> '.
+        '   <td>'.
+        '     <a href="main.php?plug='.$_GET['plug'].'&amp;start=&amp;show='.base64_encode($attrs['dn']).'"> '.
+        $description.
+        '     </a> '.
+        '   </td> '.
         '   <td>'.$content.'</td> '.
         ' </tr>'.$addon;
       $id++;
