@@ -3,6 +3,17 @@
 <filterdef>
   <definition>
     <category>users</category>
+    <category>department</category>
+    <category>group</category>
+    <category>server</category>
+    <category>workstation</category>
+    <category>terminal</category>
+    <category>opsi</category>
+    <category>incoming</category>
+    <category>phone</category>
+    <category>printer</category>
+    <category>winworkstation</category>
+    <category>component</category>
     <initial>true</initial>
     <default>default</default>
     <scope>auto</scope>
