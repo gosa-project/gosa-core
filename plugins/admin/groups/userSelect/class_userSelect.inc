@@ -23,6 +23,7 @@
 class userSelect extends management
 {
 
+  public $plHeadline = "User selection";
   protected $skipFooter = TRUE;
   protected $skipHeader = TRUE;
 
