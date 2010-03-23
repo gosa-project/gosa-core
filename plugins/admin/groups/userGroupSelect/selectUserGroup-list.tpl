@@ -23,8 +23,8 @@
 <div class="clear"></div>
 
 <div class="plugin-actions">
-  <button type="submit" name="userGroupSelect_save">{msgPool type=okButton}"</button>
-  <button type="submit" name="userGroupSelect_cancel">{msgPool type=cancelButton}"</button>
+  <button type="submit" name="userGroupSelect_save">{msgPool type=okButton}</button>
+  <button type="submit" name="userGroupSelect_cancel">{msgPool type=cancelButton}</button>
 </div>
 
 <input type="hidden" name="ignore">
