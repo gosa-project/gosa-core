@@ -1100,9 +1100,11 @@ class listing {
 
   function renderActionMenu()
   {
+    $result= "<input type='hidden' name='act' id='act' value=''><div style='display:none'><input type='submit' name='exec_act' id='exec_act' value=''></div>";
+
     // Don't send anything if the menu is not defined
     if (!isset($this->xmlData['actionmenu']['action'])){
-      return "";
+      return $result;
     }
 
     // Array?
@@ -1112,8 +1114,7 @@ class listing {
 
     // Load shortcut
     $actions= &$this->xmlData['actionmenu']['action'];
-    $result= "<input type='hidden' name='act' id='act' value=''><div style='display:none'><input type='submit' name='exec_act' id='exec_act' value=''></div>".
-             "<ul class='level1' id='root'><li><a href='#'>"._("Actions")."&nbsp;".image("images/lists/sort-down.png")."</a>";
+    $result= "<ul class='level1' id='root'><li><a href='#'>"._("Actions")."&nbsp;".image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
     $result.= $this->recurseActions($actions);
