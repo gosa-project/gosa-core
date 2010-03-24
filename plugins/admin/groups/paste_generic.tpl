@@ -1,5 +1,5 @@
 <h3>{t}Group settings{/t}</h3>
-<table width='100%'>
+<table width='100%' summary="{t}Paste group settings{/t}" >
 	<tr>
 		<td style='width:150px;'>
 			{t}Group name{/t}
