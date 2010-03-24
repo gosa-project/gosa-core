@@ -2,11 +2,11 @@
 	//	COUNTRY (c)
     //////////////////// -->
 
-<table summary="" style="width:100%" cellpadding=4>
+<table summary="{t}Country{/t}" style="width:100%" cellpadding=4>
  <tr>
    <td style="width:50%">
      <h3>{t}Properties{/t}</h3>
-     <table summary="">
+     <table summary="{t}Properties{/t}">
       <tr>
        <td><LABEL for="c">{t}Country name{/t}</LABEL>{$must}</td>
        <td>
@@ -64,14 +64,10 @@
  </tr>
 </table>
 <hr>
-<table summary="" style="width:100%" cellpadding=4>
- <tr>
-   <td style="width:100%">
-     <h3>{t}Administrative settings{/t}</h3>
+
+<h3>{t}Administrative settings{/t}</h3>
 {render acl=$gosaUnitTagACL}
-     <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}><label for="is_administrational_unit">{t}Tag department as an independent administrative unit{/t}</label>
+ <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}>
+ <label for="is_administrational_unit">{t}Tag department as an independent administrative unit{/t}</label>
 {/render}
-   </td>
-  </tr>
-</table>
 <input type='hidden' name='dep_generic_posted' value='1'>
