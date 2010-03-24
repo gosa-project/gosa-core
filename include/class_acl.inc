@@ -1354,6 +1354,12 @@ class acl extends plugin
     }
   }
 
+  
+  // We are only interessted in our own acls ... 
+  function set_acl_category($category)
+  {
+    plugin::set_acl_category("acl");
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

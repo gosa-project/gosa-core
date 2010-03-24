@@ -1516,12 +1516,14 @@ class plugin
 
   function set_acl_base($base)
   {
+    @DEBUG (DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__,"<b>".$base."</b>","<b>ACL-Base:</b> ");
     $this->acl_base= $base;
   }
 
 
   function set_acl_category($category)
   {
+    @DEBUG (DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__,"<b>".$category."</b>(/".get_class($this).")","<b>ACL-Category:</b> ");
     $this->acl_category= "$category/";
   }
 
