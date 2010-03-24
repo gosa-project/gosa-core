@@ -161,7 +161,7 @@ class aclrole extends acl
     $plist= $tmp->info;
 
     /* Handle posts */
-    if (isset($_POST['new_acl']) && $this->acl_is_writeable("gosaAclEntry")){
+    if (isset($_POST['new_acl']) && $this->acl_is_writeable("gosaAclTemplate")){
       $this->dialogState= 'create';
       $this->dialog= TRUE;
       $this->currentIndex= count($this->gosaAclTemplate);
@@ -205,16 +205,16 @@ class aclrole extends acl
         continue;
       }
 
-      if(!$this->acl_is_writeable("gosaAclEntry")){
+      if(!$this->acl_is_writeable("gosaAclTemplate")){
         continue;
       }
 
-      if (preg_match('/^acl_del_[0-9]*/', $name) && $this->acl_is_writeable("gosaAclEntry")){
+      if (preg_match('/^acl_del_[0-9]*/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
         unset($this->gosaAclTemplate[preg_replace('/^acl_del_([0-9]*)$/', '\1', $name)]);
         continue;
       }
 
-      if (preg_match('/^cat_del_.*/', $name) && $this->acl_is_writeable("gosaAclEntry")){
+      if (preg_match('/^cat_del_.*/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
         $idx= preg_replace('/^cat_del_(.*)$/', '\1', $name);
         foreach ($this->ocMapping[$idx] as $key){
           if(isset($this->aclContents[$idx])) 
@@ -226,7 +226,7 @@ class aclrole extends acl
       }
 
       /* Sorting... */
-      if (preg_match('/^sortup_[0-9]*$/', $name) && $this->acl_is_writeable("gosaAclEntry")){
+      if (preg_match('/^sortup_[0-9]*$/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
         $index= preg_replace('/^sortup_([0-9]*)$/', '\1', $name);
         if ($index > 0){
           $tmp= $this->gosaAclTemplate[$index];
@@ -235,7 +235,7 @@ class aclrole extends acl
         }
         continue;
       }
-      if (preg_match('/^sortdown_[0-9]*$/', $name) && $this->acl_is_writeable("gosaAclEntry")){
+      if (preg_match('/^sortdown_[0-9]*$/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
         $index= preg_replace('/^sortdown_([0-9]*)$/', '\1', $name);
         if ($index < count($this->gosaAclTemplate)-1){
           $tmp= $this->gosaAclTemplate[$index];
@@ -246,7 +246,7 @@ class aclrole extends acl
       }
 
       /* ACL saving... */
-      if (preg_match('/^acl_.*_[^xy]$/', $name) && $this->acl_is_writeable("gosaAclEntry")){
+      if (preg_match('/^acl_.*_[^xy]$/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
         list($dummy, $object, $attribute, $value)= explode('_', $name);
 
         /* Skip for detection entry */
@@ -300,7 +300,7 @@ class aclrole extends acl
     }
 
     /* Store ACL in main object? */
-    if (isset($_POST['submit_new_acl']) && $this->acl_is_writeable("gosaAclEntry")){
+    if (isset($_POST['submit_new_acl']) && $this->acl_is_writeable("gosaAclTemplate")){
       $this->gosaAclTemplate[$this->currentIndex]['type']= $this->aclType;
       $this->gosaAclTemplate[$this->currentIndex]['members']= $this->recipients;
       $this->gosaAclTemplate[$this->currentIndex]['acl']= $this->aclContents;
@@ -319,12 +319,12 @@ class aclrole extends acl
     }
 
     /* Save edit acl? */
-    if (isset($_POST['submit_edit_acl']) && $this->acl_is_writeable("gosaAclEntry")){
+    if (isset($_POST['submit_edit_acl']) && $this->acl_is_writeable("gosaAclTemplate")){
       $this->dialogState= 'create';
     }
 
     /* Add acl? */
-    if (isset($_POST['add_acl']) && $_POST['aclObject'] != "" && $this->acl_is_writeable("gosaAclEntry")){
+    if (isset($_POST['add_acl']) && $_POST['aclObject'] != "" && $this->acl_is_writeable("gosaAclTemplate")){
       $this->dialogState= 'edit';
       $this->savedAclContents= array();
       foreach ($this->ocMapping[$this->aclObject] as $oc){
@@ -336,7 +336,7 @@ class aclrole extends acl
 
     /* Save common values */
     foreach (array("aclType", "aclObject", "target") as $key){
-      if (isset($_POST[$key]) && $this->acl_is_writeable("gosaAclEntry")){
+      if (isset($_POST[$key]) && $this->acl_is_writeable("gosaAclTemplate")){
         $this->$key= validate($_POST[$key]);
       }
     }
@@ -370,14 +370,14 @@ class aclrole extends acl
         $field2= array("string" => $link);
 
         $action ="";
-        if($this->acl_is_writeable("gosaAclEntry")){
+        if($this->acl_is_writeable("gosaAclTemplate")){
           $action.=image('images/lists/sort-up.png','sortup_'.$key,'','top');
           $action.=image('images/lists/sort-down.png','sortdown_'.$key,'','bottom');
         }
-        if($this->acl_is_readable("gosaAclEntry")){
+        if($this->acl_is_readable("gosaAclTemplate")){
           $action.= image('images/lists/edit.png','acl_edit_'.$key,msgPool::editButton(_("ACL")));
         }
-        if($this->acl_is_writeable("gosaAclEntry")){
+        if($this->acl_is_writeable("gosaAclTemplate")){
           $action.= image('images/lists/trash.png','acl_del_'.$key,msgPool::delButton(_("ACL")));
         }
 
@@ -426,10 +426,10 @@ class aclrole extends acl
         }
 
         $action = "";
-        if($this->acl_is_readable("gosaAclEntry")){
+        if($this->acl_is_readable("gosaAclTemplate")){
           $action.= image('images/lists/edit.png','cat_edit_'.$section,_("Edit category ACL"));
         }
-        if($this->acl_is_writeable("gosaAclEntry")  && preg_match("/;".$section."(;|\/)/", $usedList)){
+        if($this->acl_is_writeable("gosaAclTemplate")  && preg_match("/;".$section."(;|\/)/", $usedList)){
           $action.= image('images/lists/trash.png','cat_del_'.$section,_("Delete category ACL"));
         }
 
@@ -522,7 +522,7 @@ class aclrole extends acl
 
   function aclPostHandler()
   {
-    if (isset($_POST['save_acl']) && $this->acl_is_writeable("gosaAclEntry")){
+    if (isset($_POST['save_acl']) && $this->acl_is_writeable("gosaAclTemplate")){
       $this->save();
       return TRUE;
     }
@@ -736,7 +736,7 @@ class aclrole extends acl
             "cn"                => _("Name"),
             "base"              => _("Base"),
             "description"       => _("Description"),
-            "gosaAclEntry"      => _("Permissions"))
+            "gosaAclTemplate"      => _("Permissions"))
         ));
   }
 
