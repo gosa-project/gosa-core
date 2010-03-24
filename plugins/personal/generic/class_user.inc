@@ -1680,6 +1680,9 @@ class user extends plugin
           "sn"                => _("Surname"),
           "givenName"         => _("Given name"),
           "uid"               => _("User identification"),
+
+          "gosaUserDefinedFilter"  => _("Allow to define user filters"),
+
           "personalTitle"     => _("Personal title"),
           "academicTitle"     => _("Academic title"),
 
