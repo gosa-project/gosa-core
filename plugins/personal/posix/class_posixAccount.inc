@@ -49,7 +49,6 @@ class posixAccount extends plugin
   var $shadowLastChange= "0";
   var $shadowInactive= "0";
   var $shadowExpire= "";
-  var $gosaDefaultPrinter= "";
   var $accessTo= array();
   var $trustModel= "";
 
@@ -93,7 +92,7 @@ class posixAccount extends plugin
 
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
-      "shadowExpire", "gosaDefaultPrinter", "uid","accessTo","trustModel", "gotoLastSystemLogin");
+      "shadowExpire", "uid","accessTo","trustModel", "gotoLastSystemLogin");
 
   var $objectclasses= array("posixAccount", "shadowAccount");
 
@@ -914,11 +913,6 @@ class posixAccount extends plugin
       }
     }
 
-    if(empty($this->attrs['gosaDefaultPrinter'])){
-      $thid->attrs['gosaDefaultPrinter']=array();
-    }
-
-
     /* include global link_info */
     $this->cleanup();
 
@@ -1438,14 +1432,17 @@ class posixAccount extends plugin
             "uidNumber"           =>  _("User ID"),
             "gidNumber"           =>  _("Group ID"),
 
+            "shadowLastChange"    =>  _("Shadow last changed"),
+            "gotoLastSystemLogin"    =>  _("Last login"),
+
             "mustchangepassword"=>  _("Force password change on login"),
             "shadowMin"           =>  _("Shadow min"),
             "shadowMax"           =>  _("Shadow max"),
             "shadowWarning"       =>  _("Shadow warning"),
             "shadowInactive"      =>  _("Shadow inactive"),
             "shadowExpire"        =>  _("Shadow expire"),
-            "sshPublickey"        =>  _("Public SSH key"),
-            "trustModel"          =>  _("System trust model")))
+            "sshPublicKey"        =>  _("Public SSH key"),
+            "accessTo"            =>  _("System trust model")))
               );
   }
 
