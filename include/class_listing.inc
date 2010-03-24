@@ -451,6 +451,7 @@ class listing {
     }
 
     // Assign action menu / base
+    $smarty->assign("HEADLINE", $this->headline);
     $smarty->assign("ACTIONS", $this->renderActionMenu());
     $smarty->assign("BASE", $this->renderBase());
 
