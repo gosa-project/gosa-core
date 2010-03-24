@@ -3,7 +3,7 @@
   <div class="mainlist-header">
    <p>{$HEADLINE}&nbsp;{$SIZELIMIT}</p>
    <div class="mainlist-nav">
-    <table>
+    <table summary="{$HEADLINE}">
      <tr>
       <td>{$ROOT}</td>
       <td>{$BACK}</td>
