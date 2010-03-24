@@ -1,4 +1,4 @@
-<table width='100%'>
+<table width='100%' summary="{t}Paste object group{/t}">
 	<tr>
 		<td width='120'>
 			<LABEL for="cn">{t}Group name{/t}</LABEL>{$must}
