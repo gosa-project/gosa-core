@@ -447,7 +447,7 @@ class posixAccount extends plugin
         } else {
           $smarty->assign("$val", "");
         }
-        $smarty->assign("$val"."ACL", $this->getacl($val));
+        $smarty->assign("$val"."ACL", $this->getacl(preg_replace("/^.*_/","",$val)));
       }
 
       $smarty->assign("mustchangepasswordACL", $this->getacl("mustchangepassword"));
@@ -520,14 +520,11 @@ class posixAccount extends plugin
       }else{
         $smarty->assign("use_".$val,FALSE);
       }
-
-      if((session::get("js"))&&(($val=="uidNumber")||($val=="gidNumber")))
-      {
-        $smarty->assign("$val"."ACL",$this->getacl($val));
-        $smarty->assign("$val", $this->$val);
-        continue;
-      }
       $smarty->assign("$val", $this->$val);
+    }
+
+    $tmp = $this->plInfo();
+    foreach($tmp['plProvidedAcls'] as $val => $desc){
       $smarty->assign("$val"."ACL", $this->getacl($val));
     }
 
@@ -540,18 +537,18 @@ class posixAccount extends plugin
 
     /* Work on trust modes */
     $smarty->assign("trusthide", " disabled ");
-    $smarty->assign("trustmodeACL",  $this->getacl("trustModel"));
+    $smarty->assign("trustmodeACL",  $this->getacl("accessTo"));
     if ($this->trustModel == "fullaccess"){
       $trustmode= 1;
       // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel"));
+      $smarty->assign("trustmode",  $this->getacl("accessTo"));
 
     } elseif ($this->trustModel == "byhost"){
       $trustmode= 2;
       $smarty->assign("trusthide", "");
     } else {
       // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel"));
+      $smarty->assign("trustmode",  $this->getacl("accessTo"));
       $trustmode= 0;
     }
     $smarty->assign("trustmode", $trustmode);
@@ -687,7 +684,7 @@ class posixAccount extends plugin
       }
 
       /* Trust mode - special handling */
-      if($this->acl_is_writeable("trustModel")){
+      if($this->acl_is_writeable("accessTo")){
         if (isset($_POST['trustmode'])){
           $saved= $this->trustModel;
           if ($_POST['trustmode'] == "1"){
@@ -1428,6 +1425,7 @@ class posixAccount extends plugin
           "plProvidedAcls"  => array(
 
             "homeDirectory"       =>  _("Home directory"), 
+            "primaryGroup"        =>  _("Primary group"), 
             "loginShell"          =>  _("Shell"),
             "uidNumber"           =>  _("User ID"),
             "gidNumber"           =>  _("Group ID"),
@@ -1523,7 +1521,7 @@ class posixAccount extends plugin
       }
 
       /* Trust mode - special handling */
-      if($this->acl_is_writeable("trustModel")){
+      if($this->acl_is_writeable("accessTo")){
         if (isset($_POST['trustmode'])){
           $saved= $this->trustModel;
           if ($_POST['trustmode'] == "1"){
