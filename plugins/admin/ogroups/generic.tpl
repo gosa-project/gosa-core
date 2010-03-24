@@ -1,8 +1,8 @@
-<table summary="" style="width:100%;">
+<table summary="{t}Object group{/t}" style="width:100%;">
  <tr>
   <td style="width:50%">
    <input type="hidden" name="ogroupedit" value="1">
-   <table summary="">
+   <table summary="{t}Generic settings{/t}">
     <tr>
      <td><LABEL for="cn">{t}Group name{/t}</LABEL>{$must}</td>
      <td>
