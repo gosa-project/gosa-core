@@ -54,11 +54,11 @@
 			<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			<table summary='{t}Error message title{/t}'><tr><td>
 		{if $i_Type == $smarty.const.ERROR_DIALOG}
-						<img src='images/error.png' alt='{t}Error{/t}'>
+						{image path='images/error.png'}
 		{elseif $i_Type == $smarty.const.WARNING_DIALOG}
-						<img src='images/warning.png'  alt='{t}Warning{/t}'>
+						{image path='images/warning.png'}
 		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-						<img src='images/info.png' alt='{t}Information{/t}'>
+						{image path='images/warning.png'}
 		{/if}
 			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
 			</table>
@@ -102,11 +102,11 @@
 		<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			<table summary='{t}Error message title{/t}'><tr><td>
 		{if $i_Type == $smarty.const.ERROR_DIALOG}
-						<img src='images/error.png' alt='{t}Error{/t}'>
+						{image path='images/error.png'}
 		{elseif $i_Type == $smarty.const.WARNING_DIALOG}
-						<img src='images/warning.png'  alt='{t}Warning{/t}'>
+						{image path='images/warning.png'}
 		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-						<img src='images/info.png' alt='{t}Information{/t}'>
+						{image path='images/info.png'}
 		{/if}
 			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
 		</table>
@@ -133,7 +133,7 @@
 					{/if}
 		{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
 						<button id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' 
-              onClick='next_msg_dialog();' value='{t}Ok{/t}'>
+              onClick='next_msg_dialog();'>{t}Ok{/t}</button>
 		{elseif $i_Type == $smarty.const.CONFIRM_DIALOG}
 						<button id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
               onClick='next_msg_dialog();'>{t}Ok{/t}</button>
