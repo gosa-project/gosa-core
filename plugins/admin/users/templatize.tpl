@@ -10,7 +10,7 @@
 <br>
 
 {if $templates}
-<table summary="" cellpadding=4 border=0>
+<table summary="{t}Apply user template{/t}" cellpadding=4 border=0>
   <tr>
     <td><b><LABEL for="template">{t}Template{/t}</LABEL></b></td>
     <td>
@@ -24,9 +24,7 @@
 <hr>
 <div class="plugin-actions">
   <button type='submit' name='templatize_continue'>{msgPool type=applyButton}</button>
-
   <button type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
-
 </div>
 
 {else}
@@ -36,7 +34,6 @@
   <hr>
   <div class="plugin-actions">
     <button type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
-
   </div>
 
 {/if}
