@@ -21,7 +21,7 @@
         if (document.cookie.indexOf( "gosatest=") > -1 )
     	document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
         else
-    	document.write("<div class='login-warning'>{$cookies}</div>");
+    	document.write("<div class='login-warning'>{$cookies}<\/div>");
       -->
     </script>
      
