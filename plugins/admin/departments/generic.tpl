@@ -1,12 +1,12 @@
 <!--////////////////////
 	//	ORGANIZATIONAL UNIT (ou)
     //////////////////// -->
-<table summary="" style="width:100%" cellpadding=4>
+<table summary="{t}Organizational Unit{/t}" style="width:100%" cellpadding=4>
  <tr>
    <td style="width:50%">
      <h3>{t}Properties{/t}</h3>
      
-     <table summary="">
+     <table summary="{t}Properties{/t}">
       <tr>
        <td><LABEL for="ou">{t}Name of department{/t}</LABEL>{$must}</td>
        <td>
@@ -82,7 +82,7 @@
    <td>
      <h3>{t}Location{/t}</h3>
 
-     <table summary="" style="width:100%">
+     <table summary="{t}Location{/t}" style="width:100%">
       <tr>
        <td><LABEL for="st">{t}State{/t}</LABEL></td>
        <td>
@@ -129,17 +129,11 @@
 </table>
 
 <hr>
-
-<table summary="" style="width:100%" cellpadding=4>
- <tr>
-   <td style="width:100%">
-     <h3>{t}Administrative settings{/t}</h3>
+<h3>{t}Administrative settings{/t}</h3>
 {render acl=$gosaUnitTagACL}
-     <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}><label for="is_administrational_unit">{t}Tag department as an independent administrative unit{/t}</label>
+ <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}>
+ <label for="is_administrational_unit">{t}Tag department as an independent administrative unit{/t}</label>
 {/render}
-   </td>
-  </tr>
-</table>
 
 <!-- Place cursor -->
 <input type='hidden' name='dep_generic_posted' value='1'>
