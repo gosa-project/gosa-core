@@ -10,7 +10,7 @@
 
 <br>
 
-<table summary="" cellpadding=4 border=0>
+<table summary="{t}User template selection dialog{/t}" cellpadding=4 border=0>
   <tr>
     <td><b><LABEL for="template">{t}Template{/t}</LABEL></b></td>
     <td>
@@ -46,10 +46,8 @@
 
 <hr>
 <div class="plugin-actions">
-  <button type='submit' name='template_continue'>{t}Continue{/t}</button>
-
-  <button type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
-
+ <button type='submit' name='template_continue'>{t}Continue{/t}</button>
+ <button type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
 </div>
 
 
