@@ -176,11 +176,11 @@
     {/render}
        <br>
     {render acl=$trustmodeACL}
-       <button type='submit' name='add_ws' id="add_ws">{msgPool type=addButton}</button>&nbsp;
+       <button {$trusthide} type='submit' name='add_ws' id="add_ws">{msgPool type=addButton}</button>&nbsp;
 
     {/render}
     {render acl=$trustmodeACL}
-       <button type='submit' name='delete_ws' id="del_ws">{msgPool type=delButton}</button>
+       <button {$trusthide} type='submit' name='delete_ws' id="del_ws">{msgPool type=delButton}</button>
 
     {/render}
 
