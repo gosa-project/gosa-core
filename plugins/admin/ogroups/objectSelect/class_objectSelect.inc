@@ -25,6 +25,8 @@ class objectSelect extends management
   // Tab definition 
   protected $skipFooter = TRUE;
   protected $skipHeader = TRUE;
+  
+  var $plHeadline = "Object selection";
 
   function __construct($config,$ui)
   {
