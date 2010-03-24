@@ -133,7 +133,7 @@ class userFilterEditor extends plugin
     $smarty->assign("fixedFilters", array_keys($filter->searches));
     $smarty->assign('parent', $this->parent);
     $smarty->assign('backends', $this->backends);
-    $smarty->assign('tag', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
+    $smarty->assign('name', htmlentities($this->name,ENT_COMPAT,'UTF-8'));
     $smarty->assign('queries', $queries);
     $smarty->assign('share', $this->share);
     $smarty->assign('enable', $this->enabled);
@@ -151,7 +151,7 @@ class userFilterEditor extends plugin
     if(isset($_POST['userFilterEditor'])){
 
       // Get posted strings
-      foreach(array('tag','description', 'parent') as $attr){
+      foreach(array('name','description', 'parent') as $attr){
         if(isset($_POST[$attr])){
           $this->$attr = get_post($attr);
         }
