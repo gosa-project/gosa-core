@@ -1114,7 +1114,7 @@ class listing {
 
     // Load shortcut
     $actions= &$this->xmlData['actionmenu']['action'];
-    $result= "<ul class='level1' id='root'><li><a href='#'>"._("Actions")."&nbsp;".image("images/lists/sort-down.png")."</a>";
+    $result.= "<ul class='level1' id='root'><li><a href='#'>"._("Actions")."&nbsp;".image("images/lists/sort-down.png")."</a>";
 
     // Build ul/li list
     $result.= $this->recurseActions($actions);
