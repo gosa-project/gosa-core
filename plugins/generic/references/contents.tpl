@@ -1,5 +1,5 @@
 {if $objectList ne ""}
-<table style='width:100%;' summary="">
+<table style='width:100%;' summary="{t}Object references{/t}">
 
 
  <colgroup>
