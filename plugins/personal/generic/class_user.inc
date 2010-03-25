@@ -569,7 +569,7 @@ class user extends plugin
             $add_str_info = "<br><i>"._("(Some types of certificates are currently not supported and may be displayed as 'invalid'.)")."</i>";
           }
 
-          $str = "<table \"\" border=0>
+          $str = "<table \"\" border=0 summary='"._("Certificates")."'>
                     <tr>
                       <td>CN</td>
                       <td>".preg_replace("/ /", "&nbsp;", $certificate->getname())."</td>
