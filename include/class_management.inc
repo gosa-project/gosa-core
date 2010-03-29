@@ -342,21 +342,23 @@ class management
    *  @param  Array   'all'     A combination of both 'action' and 'target'.
    */
   function removeEntryConfirmed($action="",$target=array(),$all=array(),
-      $altTabClass="",$altTabType="",$altAclCategory="")
+      $altTabClass="",$altTabType="",  $altAclCategory="",$altAclPlugin="")
   {
     $tabType = $this->tabType;
     $tabClass = $this->tabClass;
     $aclCategory = $this->aclCategory;
+    $aclPlugin = $this->aclPlugin;
     if(!empty($altTabClass)) $tabClass = $altTabClass;
     if(!empty($altTabType)) $tabType = $altTabType;
     if(!empty($altAclCategory)) $aclCategory = $altAclCategory;
+    if(!empty($altAclPlugin)) $aclPlugin = $altAclPlugin;
 
     @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel confirmed!");
 
     foreach($this->dns as $key => $dn){
 
       // Check permissions, are we allowed to remove this object? 
-      $acl = $this->ui->get_permissions($dn, $this->aclCategory."/".$this->aclPlugin);
+      $acl = $this->ui->get_permissions($dn, $aclCategory."/".$aclPlugin);
       if(preg_match("/d/",$acl)){
 
         // Delete the object
