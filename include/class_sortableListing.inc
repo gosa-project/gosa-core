@@ -250,7 +250,7 @@ class sortableListing {
     $reorderable= $this->reorderable?"":" style='cursor:default'";
     if (strpos($this->acl, 'r') !== false) {
       foreach ($this->mapping as $nr => $row) {
-        $editable= $this->editable?" onclick='$(\"edit_".$this->id."_$nr\").click()'":"";
+        $editable= $this->editable?" onClick='$(\"edit_".$this->id."_$nr\").click()'":"";
 
         $id= "";
         if (isset($this->modes[$row])) {
