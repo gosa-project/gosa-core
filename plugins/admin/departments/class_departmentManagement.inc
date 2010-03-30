@@ -165,7 +165,8 @@ class departmentManagement extends management
 
   
   // Finally remove departments and update departmnet browsers
-  function removeEntryConfirmed($action="",$target=array(),$all=array(),$altTabClass="",$altTabType="",$altAclCategory="")
+  function removeEntryConfirmed($action="",$target=array(),$all=array(),$altTabClass="",
+    $altTabType="",$altAclCategory="", $aclPlugin="")
   {
     management::removeEntryConfirmed($action,$target,$all, $altTabClass,$altTabType,$altAclCategory);
     $this->refreshDeps();
