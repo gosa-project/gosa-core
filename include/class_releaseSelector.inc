@@ -95,6 +95,7 @@ class releaseSelector {
       $this->pathMapping[$base]= $base == $this->releaseBase? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
 
       $this->releaseInfo[$base]['name'] = $this->pathMapping[$base];
+      $this->releaseInfo[$base]['description'] = "";
     }
 
     // Save bases to session for autocompletion
