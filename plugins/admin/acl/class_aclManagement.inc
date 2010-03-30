@@ -66,7 +66,7 @@ class aclManagement extends management
   }
 
   function removeEntryConfirmed($action="",$target=array(),$all=array(),
-      $altTabClass="",$altTabType="",$altAclCategory="")
+      $altTabClass="",$altTabType="",$altAclCategory="", $aclPlugin="")
   {
     @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel confirmed!");
 
