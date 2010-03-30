@@ -101,6 +101,7 @@ class sortableListing {
     // Transfer information
     $this->displayData= array();
     $this->modes= array();
+    $this->mapping= array();
     foreach ($data as $key => $value) {
       $this->displayData[]= $value['data'];
       if (isset($value['mode'])) {
@@ -110,7 +111,9 @@ class sortableListing {
     $this->keys= array_keys($data);
 
     // Create initial mapping
-    $this->mapping= range(0, abs(count($this->keys)-1));
+    if(count($this->keys)){
+      $this->mapping= range(0, abs(count($this->keys)-1));
+    }
     $this->current_mapping= $this->mapping;
 
     // Find the number of coluns
