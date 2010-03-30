@@ -94,8 +94,8 @@ class releaseSelector {
       $elements= array_reverse($elements, true);
       $this->pathMapping[$base]= $base == $this->releaseBase? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
 
-      $this->releaseInfo[$base]['name'] = $this->pathMapping[$base];
-      $this->releaseInfo[$base]['description'] = "";
+      $this->releaseInfo[$base]['name'] = ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '', $elements[0]));
+      $this->releaseInfo[$base]['description'] = $dummy;
     }
 
     // Save bases to session for autocompletion
@@ -190,9 +190,11 @@ class releaseSelector {
       }
       $selected= $this->base == $base?" class='treeListSelected'":"";
       $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
+
       $this->tree.= "<li>".
                     "<a$selected $link>".
                     $this->gennonbreaks($this->releaseInfo[$base]['name']).
+                    ($this->releaseInfo[$base]['description']==''?'':'&nbsp;<span class="informal">['.$this->gennonbreaks($this->releaseInfo[$base]['description']).']</span>').
                     "</a>";
 
       $last_indent= $indent;
