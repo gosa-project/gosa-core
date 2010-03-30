@@ -551,7 +551,7 @@ function rescan_images($path, $theme)
       // We're only interested in png files
       $indexPath= substr($fileInfo->getPathname(), $baseLength + 1);
       $path= $fileInfo->getPathname();
-      if (preg_match('/\.png$/', $indexPath) && !preg_match('/\.svn/', $path) && !preg_match('/themes\/[^\/]+\/img.png$/', $path)){
+      if (preg_match('/\.png$/', $indexPath) && !preg_match('/\.svn/', $path) && !preg_match('/themes\/[^\/]+\/images/img.png$/', $path)){
   
          // Grey image if it is not already one
          if (preg_match('/grey/', $indexPath)) {
@@ -739,7 +739,7 @@ function rescan_images($path, $theme)
     $styles[$imagePath]= $styles[$realPath];
   }
 
-  imagePNG($dst, "html/themes/$theme/img.png", 9);
+  imagePNG($dst, "html/themes/$theme/images/img.png", 9);
   imageDestroy($dst);
 
   // Show warnings images

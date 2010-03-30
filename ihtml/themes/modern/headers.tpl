@@ -25,7 +25,7 @@
     <!-- Include correct theme icon sets -->
     <style type="text/css">
       div.img, div.img div, input[type=submit].img{
-        background-image:url(themes/modern/img.png);
+        background-image:url(themes/modern/images/img.png);
       }
     </style>
     <link rel="shortcut icon" href="favicon.ico">
