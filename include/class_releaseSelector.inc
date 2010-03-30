@@ -40,7 +40,6 @@ class releaseSelector {
 
     // Transfer data
     $this->releaseBase = $releaseBase; 
-    $this->releaseInfo = $bases;
     $this->setBases($bases);
     $this->setBase($base);
   }
@@ -60,8 +59,8 @@ class releaseSelector {
 
   function setBase($base)
   {
+    $this->base= $base;
     if (isset($this->pathMapping[$base])) {
-      $this->base= $base;
       $this->update(true);
     }
   }
@@ -82,7 +81,7 @@ class releaseSelector {
   function setBases($bases)
   {
     global $config;
-
+    $this->releaseInfo = array();
     $this->pathMapping= array();
     $selected= $this->base == $this->releaseBase?"Selected":"";
     $first= true;
@@ -94,10 +93,13 @@ class releaseSelector {
       $elements= explode(',', substr($base, 0, strlen($base) - strlen($this->releaseBase)));
       $elements= array_reverse($elements, true);
       $this->pathMapping[$base]= $base == $this->releaseBase? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
+
+      $this->releaseInfo[$base]['name'] = $this->pathMapping[$base];
     }
 
     // Save bases to session for autocompletion
     session::global_set('pathMapping', $this->pathMapping);
+    session::global_set('department_info', $this->releaseInfo);
   }
 
 
@@ -123,7 +125,7 @@ class releaseSelector {
         if (isset($_POST['bs_input_'.$this->pid])) {
 
           // Take over input field base
-          if ($this->submitButton && isset($_POST['submit_base_'.$this->pid.'_x']) || !$this->submitButton) {
+          if ($this->submitButton && isset($_POST['submit_base_'.$this->pid]) || !$this->submitButton) {
 
             // Check if base is available
             $this->lastState= false;
@@ -189,7 +191,7 @@ class releaseSelector {
       $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
       $this->tree.= "<li>".
                     "<a$selected $link>".
-                    $this->gennonbreaks($this->releaseInfo[$base]).
+                    $this->gennonbreaks($this->releaseInfo[$base]['name']).
                     "</a>";
 
       $last_indent= $indent;
