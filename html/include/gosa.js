@@ -522,6 +522,12 @@ function isVisible(obj)
 }
 
 
+/* Scroll down the body frame */
+function scrollDown2()
+{
+    document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
+}
+
 
 // Global storage for baseSelector timer
 var rtimer;
