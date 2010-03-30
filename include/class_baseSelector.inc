@@ -96,6 +96,7 @@ class baseSelector {
 
     // Save bases to session for autocompletion
     session::global_set('pathMapping', $this->pathMapping);
+    session::global_set('department_info', $config->department_info);
   }
 
 
@@ -121,7 +122,7 @@ class baseSelector {
         if (isset($_POST['bs_input_'.$this->pid])) {
 
           // Take over input field base
-          if ($this->submitButton && isset($_POST['submit_base_'.$this->pid.'_x']) || !$this->submitButton) {
+          if ($this->submitButton && isset($_POST['submit_base_'.$this->pid]) || !$this->submitButton) {
 
             // Check if base is available
             $this->lastState= false;
