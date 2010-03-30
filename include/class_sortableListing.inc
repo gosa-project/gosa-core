@@ -235,7 +235,7 @@ class sortableListing {
         if ($this->reorderable) {
           $result.= "   <th$first>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
         } else {
-          $result.= "   <th$first><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."$sorter</a></th>";
+          $result.= "   <th$first><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."</a>$sorter</th>";
         }
         $first= "";
       }
