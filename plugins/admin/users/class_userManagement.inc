@@ -42,8 +42,6 @@ class userManagement extends management
   protected $aclPlugin   = "user";
   protected $objectName   = "user";
 
-  protected $releaseSelector = NULL;
-
   function __construct($config,$ui)
   {
     $this->config = $config;
@@ -104,23 +102,7 @@ class userManagement extends management
     $this->registerAction("edit_environment","editEntry");
     $this->registerAction("edit_gofaxAccount","editEntry");
     $this->registerAction("edit_phoneAccount","editEntry");
- 
-      
-    $rel = array("a" => "/");
-    $rel['b,a'] = "test";
-    $rel['c,a'] = "test/f";
- 
-    $this->releaseSelector = new releaseSelector($rel, "a");
   }
-
-
-  function renderList()
-  {
-    $smarty = get_smarty();
-    $smarty->assign("RELEASE", $this->releaseSelector->render());
-    return(management::renderList());
-  }
-
 
 
   // Inject user actions 
