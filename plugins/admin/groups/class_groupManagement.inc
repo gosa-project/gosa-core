@@ -64,6 +64,8 @@ class groupManagement extends management
     parent::__construct($config, $ui, "groups", $headpage);
 
     $this->registerAction("edit_group","editEntry");
+    $this->registerAction("edit_group_","editEntry");
+    $this->registerAction("edit_group__","editEntry");
     $this->registerAction("edit_environment","editEntry");
     $this->registerAction("edit_appgroup","editEntry");
     $this->registerAction("edit_mailgroup","editEntry");
@@ -132,9 +134,8 @@ class groupManagement extends management
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
     $str = management::editEntry($action,$target);
-
     if(preg_match("/^edit_/",$action)){
-      $tab = preg_replace("/^edit_/","",$action);
+      $tab = preg_replace("/^edit_([^_]*).*$/","\\1",$action);
       if(isset($this->tabObject->by_object[$tab])){
         $this->tabObject->current = $tab;
       }else{
@@ -168,7 +169,7 @@ class groupManagement extends management
         "sambaGroupMapping" => 
         array(
           "image" => "plugins/groups/images/samba.png",
-          "plugin" => "group",
+          "plugin" => "group_",
           "alt" => _("Samba"),
           "title" => _("Edit samba properties")
           ),
@@ -176,7 +177,7 @@ class groupManagement extends management
         "goFonPickupGroup" => 
           array(
               "image" => "plugins/groups/images/asterisk.png",
-              "plugin" => "group",
+              "plugin" => "group__",
               "alt" => _("Phone"),
               "title" => _("Edit phone properties")
               ),
