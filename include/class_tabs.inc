@@ -439,6 +439,7 @@ class tabs
     foreach($this->by_object as $name => $obj){
       $this->by_object[$name]->read_only = $s;
     }
+    $this->read_only = $s;
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
