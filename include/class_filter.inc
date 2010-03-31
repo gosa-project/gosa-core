@@ -223,7 +223,7 @@ class filter {
 
   function render()
   {
-    $content= "<table class='filter-wrapper'><tr><td>".$this->renderFilterMenu()."</td><td>";
+    $content= "<table class='filter-wrapper' summary='"._("Search filter")."'><tr><td>".$this->renderFilterMenu()."</td><td>";
     $content.= "<div class='search-filter'>".$this->getTextfield('search_filter', $this->value, $this->searches[$this->search])."</div>".
       "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button></td></tr></table>";
 
@@ -451,7 +451,7 @@ class filter {
 
     $script= '<script type="text/javascript" language="JavaScript">var menu2; menu2= new Menu("filter-root", "menu2", configMenu)</script>';
 
-    return "<div id='filtermenu'>".$result."</li></ul><div>$script";
+    return "<div id='filtermenu'>".$result."</li></ul></div>$script";
   }
 
 

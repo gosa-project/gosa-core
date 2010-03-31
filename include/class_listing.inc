@@ -1120,7 +1120,7 @@ class listing {
     // Build ul/li list
     $result.= $this->recurseActions($actions);
 
-    return "<div id='pulldown'>".$result."</li></ul><div>";
+    return "<div id='pulldown'>".$result."</li></ul></div>";
   }
 
 
