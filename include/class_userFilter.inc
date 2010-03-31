@@ -112,7 +112,7 @@ class userFilter extends plugin
           array(
             $filter['parent'],
             $filter['tag'],
-            $filter['description'],
+            htmlentities($filter['description'], ENT_COMPAT, 'UTF-8'),
             implode(", ",$filter['categories']),
             implode(", ",$filter['flags'])));
     }
