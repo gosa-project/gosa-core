@@ -11,7 +11,7 @@
             <label for='name'>{t}Name{/t}</label>{$must}
           </td>
           <td>
-            <input type='text' name='name' id='name' value='{$name}'>
+            <input type='text' name='name' id='name' value="{$name}">
           </td>   
         </tr>
         <tr>
@@ -19,7 +19,7 @@
             <label for='description'>{t}Description{/t}</label>{$must}
           </td>
           <td>
-            <input type='text' name='description' id='description' value='{$description}'>
+            <input type='text' name='description' id='description' value="{$description}">
           </td>   
         </tr>
         <tr>
