@@ -419,10 +419,11 @@ class filter {
 
     // Build in filters
     foreach ($this->xmlSearches as $tag => $config) {
+      $label = htmlentities(_($config['label']),ENT_COMPAT,'UTF-8');
       if ($tag == $this->search) {
-        $result.= "<li><a href='#'>".image("images/checked.png")."&nbsp;"._($config['label'])."</a></li>";
+        $result.= "<li><a href='#'>".image("images/checked.png")."&nbsp;".$label."</a></li>";
       } else {
-        $result.= "<li><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>".image("images/empty.png")."&nbsp;"._($config['label'])."</a></li>";
+        $result.= "<li><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>".image("images/empty.png")."&nbsp;".$label."</a></li>";
       }
     }
 
