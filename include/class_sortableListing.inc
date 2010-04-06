@@ -319,16 +319,14 @@ class sortableListing {
 
   public function update()
   {
-    // Do not do anything if this is not our PID, or there's even no PID available...
-    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->id) {
-      return;
-    }
 
     // Filter GET with "act" attributes
     if (!$this->reorderable){
-      if(isset($_GET['act'])) {
+      if(isset($_GET['act']) && isset($_GET['PID']) && $this->id == $_GET['PID']) {
+    
         $key= validate($_GET['act']);
         if (preg_match('/^SORT_([0-9]+)$/', $key, $match)) {
+
           // Switch to new column or invert search order?
           $column= $match[1];
           if ($this->sortColumn != $column) {
@@ -339,7 +337,7 @@ class sortableListing {
 
         }
       }
-
+  
       // Update mapping according to sort parameters
       $this->sortData();
     }
