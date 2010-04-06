@@ -54,6 +54,8 @@ class acl extends plugin
   var $myAclObjects = array();
   var $acl_category = "acl/";
 
+   var $list =NULL;
+
   function acl (&$config, $parent, $dn= NULL)
   {
     /* Include config object */
@@ -235,8 +237,43 @@ class acl extends plugin
 
     /* Finally - we want to get saved... */
     $this->is_account= TRUE;
+
+    $this->updateList();
   }
 
+    
+  function updateList()
+  {
+      if(!$this->list){ 
+          $this->list = new sortableListing($this->gosaAclEntry,array(),TRUE);
+          $this->list->setDeleteable(true);
+          $this->list->setEditable(true);
+          $this->list->setColspecs(array('*'));
+          $this->list->setWidth("100%");
+          $this->list->setHeight("400px");
+          $this->list->setAcl("rwcdm");
+          $this->list->setHeader(array(_("Member"),_("Permissions"),_("Type")));
+      }
+
+ 
+    // Add ACL entries to the listing 
+    $lData = array();
+    foreach($this->gosaAclEntry as $id => $entry){
+       $lData[] = $this->convertForListing($entry);
+    }    
+    $this->list->setListData($this->gosaAclEntry, $lData);
+  }
+   
+    
+  function convertForListing($entry)
+  {
+    $member = implode($entry['members'],", ");
+    $acl = implode(array_keys($entry['acl']),", ");
+    $type = implode(array_keys($entry['acl']),", ");
+    return(array('data' => array($member, $acl, $this->aclTypes[$entry['type']])));
+  }
+
+  
 
   function execute()
   {
@@ -258,15 +295,21 @@ class acl extends plugin
     $aclDialog= FALSE;
     $firstedit= FALSE;
 
+    // Get listing actions. Delete or Edit.
+    $this->list->save_object();
+    $lAction = $this->list->getAction();
+    if($lAction['action'] == "reorder" || $lAction['action'] == "delete"){
+        $this->gosaAclEntry = $this->list->getMaintainedData();
+    }
+
     /* Act on HTML post and gets here.
      */
-    if(isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == "edit"){
-      $id = trim($_GET['id']);
-      $this->dialogState= 'create';
-      $firstedit= TRUE;
-      $this->dialog= TRUE;
-      $this->currentIndex= $id;
-      $this->loadAclEntry();
+    if($lAction['action'] == "edit"){
+        $this->currentIndex = $lAction['targets'][0];
+        $this->dialogState= 'create';
+        $firstedit= TRUE;
+        $this->dialog= TRUE;
+        $this->loadAclEntry();
     }
 
     foreach($_POST as $name => $post){
@@ -309,26 +352,6 @@ class acl extends plugin
             unset($this->aclContents[$idx]);
           if(isset($this->aclContents["$idx/$key"]))
             unset($this->aclContents["$idx/$key"]);
-        }
-        continue;
-      }
-
-      /* Sorting... */
-      if (preg_match('/^sortup_[0-9]*$/', $name)){
-        $index= preg_replace('/^sortup_([0-9]*)$/', '\1', $name);
-        if ($index > 0){
-          $tmp= $this->gosaAclEntry[$index];
-          $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index-1];
-          $this->gosaAclEntry[$index-1]= $tmp;
-        }
-        continue;
-      }
-      if (preg_match('/^sortdown_[0-9]*$/', $name)){
-        $index= preg_replace('/^sortdown_([0-9]*)$/', '\1', $name);
-        if ($index < count($this->gosaAclEntry)-1){
-          $tmp= $this->gosaAclEntry[$index];
-          $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index+1];
-          $this->gosaAclEntry[$index+1]= $tmp;
         }
         continue;
       }
@@ -469,48 +492,15 @@ class acl extends plugin
 
     /* Create templating instance */
     $smarty= get_smarty();
+    $smarty->assign("usePrototype", "true");
     $smarty->assign("acl_readable",$this->acl_is_readable(""));
     if(!$this->acl_is_readable("")){
       return ($smarty->fetch (get_template_path('acl.tpl')));
     }
 
     if ($this->dialogState == 'head'){
-      /* Draw list */
-      $aclList= new divSelectBox("aclList");
-      $aclList->SetHeight(450);
-      
-      /* Fill in entries */
-      foreach ($this->gosaAclEntry as $key => $entry){
-        if(!$this->acl_is_readable("")) continue;
-
-        $action ="";      
-
-        if($this->acl_is_readable("")){
-          $link = "<a href=?plug=".$_GET['plug']."&amp;id=".$key."&amp;act=edit>".$this->assembleAclSummary($entry)."</a>";
-        }else{
-          $link = $this->assembleAclSummary($entry);
-        }
-  
-        $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:150px'");
-        $field2= array("string" => $link);
-
-        if($this->acl_is_writeable("")){
-          $action.= image('images/lists/sort-up.png', 'sortup_'.$key,"","top");
-          $action.= image('images/lists/sort-down.png', 'sortdown_'.$key,"","bottom");
-        } 
-    
-        if($this->acl_is_readable("")){
-          $action.= image('images/lists/edit.png','acl_edit_'.$key,msgPool::editButton(_("ACL")));
-        }
-        if($this->acl_is_removeable("")){
-          $action.= image('images/lists/trash.png','acl_del_'.$key,msgPool::delButton(_("ACL")));
-        }
-
-        $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px;text-align:right;'");
-        $aclList->AddEntry(array($field1, $field2, $field3));
-      }
-
-      $smarty->assign("aclList", $aclList->DrawList());
+      $this->updateList();
+      $smarty->assign("aclList", $this->list->render());
     }
 
     if ($this->dialogState == 'create'){

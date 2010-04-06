@@ -534,4 +534,8 @@ class sortableListing {
     return isset($this->keys[$index])?$this->keys[$index]:null;
   }
 
+  public function getData($index) {
+    $realkey = $this->keys[$index];
+    return($this->data[$realkey]);
+  }
 }
