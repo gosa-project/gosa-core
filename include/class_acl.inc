@@ -298,14 +298,12 @@ class acl extends plugin
     // Get listing actions. Delete or Edit.
     $this->list->save_object();
     $lAction = $this->list->getAction();
-    if($lAction['action'] == "reorder" || $lAction['action'] == "delete"){
-        $this->gosaAclEntry = $this->list->getMaintainedData();
-    }
+    $this->gosaAclEntry = $this->list->getMaintainedData();
 
     /* Act on HTML post and gets here.
      */
     if($lAction['action'] == "edit"){
-        $this->currentIndex = $lAction['targets'][0];
+        $this->currentIndex = $this->list->getKey($lAction['targets'][0]);
         $this->dialogState= 'create';
         $firstedit= TRUE;
         $this->dialog= TRUE;
@@ -504,7 +502,7 @@ class acl extends plugin
     }
 
     if ($this->dialogState == 'create'){
-      /* Draw list */
+
       $aclList= new divSelectBox("aclList");
       $aclList->SetHeight(150);
 
@@ -554,6 +552,7 @@ class acl extends plugin
       }
 
       $smarty->assign("aclList", $aclList->DrawList());
+    
       $smarty->assign("aclType", $this->aclType);
       $smarty->assign("aclFilter", $this->aclFilter);
       $smarty->assign("aclTypes", $this->aclTypes);
