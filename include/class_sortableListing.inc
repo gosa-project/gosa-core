@@ -95,7 +95,7 @@ class sortableListing {
   private function setDisplayData($data)
   {
     if (!is_array($data)) {
-      die ("sortableList needs an array as data!");
+      trigger_error ("sortableList needs an array as data!");
     }
 
     // Transfer information
@@ -126,8 +126,9 @@ class sortableListing {
     }
 
     // Preset sort orders to 'down'
+    if(!count($this->sortDirection))
     for ($column= 0; $column<$this->columns; $column++) {
-      $this->sortDirection[]= true;
+      $this->sortDirection[$column]= true;
     }
   }
 
@@ -323,20 +324,23 @@ class sortableListing {
     }
 
     // Filter GET with "act" attributes
-    if (!$this->reorderable && isset($_GET['act'])) {
-      $key= validate($_GET['act']);
-      if (preg_match('/^SORT_([0-9]+)$/', $key, $match)) {
-        // Switch to new column or invert search order?
-        $column= $match[1];
-        if ($this->sortColumn != $column) {
-          $this->sortColumn= $column;
-        } else {
-          $this->sortDirection[$column]= !$this->sortDirection[$column];
-        }
+    if (!$this->reorderable){
+      if(isset($_GET['act'])) {
+        $key= validate($_GET['act']);
+        if (preg_match('/^SORT_([0-9]+)$/', $key, $match)) {
+          // Switch to new column or invert search order?
+          $column= $match[1];
+          if ($this->sortColumn != $column) {
+            $this->sortColumn= $column;
+          } else {
+            $this->sortDirection[$column]= !$this->sortDirection[$column];
+          }
 
-        // Update mapping according to sort parameters
-        $this->sortData();
+        }
       }
+
+      // Update mapping according to sort parameters
+      $this->sortData();
     }
   }
 
