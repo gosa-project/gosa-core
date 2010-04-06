@@ -126,9 +126,10 @@ class sortableListing {
     }
 
     // Preset sort orders to 'down'
-    if(!count($this->sortDirection))
     for ($column= 0; $column<$this->columns; $column++) {
-      $this->sortDirection[$column]= true;
+        if(!isset($this->sortDirection[$column])){
+            $this->sortDirection[$column]= true;
+        }
     }
   }
 
