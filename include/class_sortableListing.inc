@@ -62,7 +62,7 @@ class sortableListing {
 
     // Generate instance wide unique ID
     $tmp= gettimeofday();
-    $this->id= 'l'.md5($tmp['sec']);
+    $this->id= 'l'.md5(microtime().$tmp['sec']);
 
     // Set reorderable flag
     $this->reorderable= $reorderable;
@@ -291,7 +291,7 @@ class sortableListing {
     $result.= "</tr>\n";
 
     $result.= " </tbody>\n</table>\n</div>\n";
-    $result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
+#    $result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
     $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
     $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
 
@@ -319,7 +319,7 @@ class sortableListing {
   {
     // Do not do anything if this is not our PID, or there's even no PID available...
     if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->id) {
-      return;
+#      return;
     }
 
     // Filter GET with "act" attributes
@@ -345,7 +345,7 @@ class sortableListing {
   {
     // Do not do anything if this is not our PID, or there's even no PID available...
     if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->id) {
-      return;
+#      return;
     }
 
     // Do not do anything if we're not posted - or have no permission
