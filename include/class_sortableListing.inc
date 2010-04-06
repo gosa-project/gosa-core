@@ -318,8 +318,8 @@ class sortableListing {
   public function update()
   {
     // Do not do anything if this is not our PID, or there's even no PID available...
-    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->id) {
-#      return;
+    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->id) {
+      return;
     }
 
     // Filter GET with "act" attributes
@@ -344,8 +344,8 @@ class sortableListing {
   public function save_object()
   {
     // Do not do anything if this is not our PID, or there's even no PID available...
-    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->id) {
-#      return;
+    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->id) {
+      return;
     }
 
     // Do not do anything if we're not posted - or have no permission
