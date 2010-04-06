@@ -448,11 +448,10 @@ class sortableListing {
   public function getMaintainedData()
   {
     $tmp= array();
-
     foreach ($this->mapping as $src => $dst) {
-      $tmp[$this->keys[$dst]]= $this->data[$dst];
+      $realKey  = $this->keys[$dst];
+      $tmp[$realKey] = $this->data[$realKey];
     }
-
     return $tmp;
   }
 
