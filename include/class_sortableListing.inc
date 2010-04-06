@@ -71,6 +71,11 @@ class sortableListing {
     }
   }
 
+   
+  public function setDefaultSortColumn($id)
+  {
+    $this->sortColumn = $id;
+  }
 
   public function setListData($data, $displayData= null)
   {
