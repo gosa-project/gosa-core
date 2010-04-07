@@ -787,6 +787,8 @@ class ogroup extends plugin
 
     /* Reload tabs */
     $this->parent->reload($this->gosaGroupObjects );
+    
+    $this->trustModeDialog->PrepareForCopyPaste($source);
    
     /* Reload plugins */ 
     foreach($this->parent->by_object as $name => $class ){
