@@ -160,7 +160,7 @@ class aclrole extends acl
     $this->sectionList->setDeleteable(false);
     $this->sectionList->setEditable(false);
     $this->sectionList->setWidth("100%");
-    $this->sectionList->setHeight("120px");
+    $this->sectionList->setHeight("400px");
     $this->sectionList->setColspecs(array('200px','*'));
     $this->sectionList->setHeader(array(_("Section"),_("Description")));
     $this->sectionList->setDefaultSortColumn(1);
@@ -375,10 +375,14 @@ class aclrole extends acl
     }
 
     if ($this->dialogState == 'create'){
+
+
+
       /* Draw list */
       $aclList= new divSelectBox("aclList");
       $aclList->SetHeight(450);
-
+        $data = $lData = array();
+    
       // Create a map of all used sections, this allows us to simply hide the remove button
       //  if no acl is configured for the given section
       // e.g. ';all;department/country;users/user;
@@ -418,14 +422,15 @@ class aclrole extends acl
         if($this->acl_is_writeable("gosaAclTemplate")  && preg_match("/;".$section."(;|\/)/", $usedList)){
           $action.= image('images/lists/trash.png','cat_del_'.$section,_("Delete category ACL"));
         }
-
-        $field1= array("string" => $dsc, "attach" => "style='width:140px'");
-        $field2= array("string" => $summary);
-        $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px'");
-        $aclList->AddEntry(array($field1, $field2, $field3));
+        $data[] = $section;
+        $lData[] = array('data'=>array($dsc, $summary, $action));
       }
 
-      $smarty->assign("aclList", $aclList->DrawList());
+
+      $this->sectionList->setListData($data,$lData);
+      $this->sectionList->update();
+      $smarty->assign("aclList", $this->sectionList->render());
+
       $smarty->assign("aclType", $this->aclType);
       $smarty->assign("aclTypes", $this->aclTypes);
       $smarty->assign("target", $this->target);
