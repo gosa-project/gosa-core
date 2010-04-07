@@ -170,7 +170,18 @@ class trustModeDialog extends plugin
         $ldap->cd($this->dn);
         $this->cleanup();
         $ldap->modify($this->attrs);
-        echo $ldap->get_error();
+
+        /* Log last action */
+        if($this->initially_was_account){
+            new log("modify","users/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+        }else{
+            new log("create","users/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+        }
+
+        if (!$ldap->success()){
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), 
+                        $this->dn, LDAP_MOD,get_class()));
+        }
     }
 
     public function get_multi_edit_values()
