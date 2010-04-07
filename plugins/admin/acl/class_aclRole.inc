@@ -56,6 +56,9 @@ class aclrole extends acl
   var $base ="";
   var $baseSelector;
 
+  var $list =NULL;
+  var $sectionList = NULL;
+
   function aclrole (&$config,  $dn= NULL)
   {
     /* Include config object */
@@ -149,7 +152,53 @@ class aclrole extends acl
     $this->baseSelector->setSubmitButton(false);
     $this->baseSelector->setHeight(300);
     $this->baseSelector->update(true);
+
+    $this->updateList();
+
+    // Prepare lists
+    $this->sectionList = new sortableListing();
+    $this->sectionList->setDeleteable(false);
+    $this->sectionList->setEditable(false);
+    $this->sectionList->setWidth("100%");
+    $this->sectionList->setHeight("120px");
+    $this->sectionList->setColspecs(array('200px','*'));
+    $this->sectionList->setHeader(array(_("Section"),_("Description")));
+    $this->sectionList->setDefaultSortColumn(1);
+    $this->sectionList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
   }
+
+
+  function updateList()
+  {
+      if(!$this->list){
+          $this->list = new sortableListing($this->gosaAclTemplate,array(),TRUE);
+          $this->list->setDeleteable(true);
+          $this->list->setEditable(true);
+          $this->list->setColspecs(array('*'));
+          $this->list->setWidth("100%");
+          $this->list->setHeight("400px");
+          $this->list->setAcl("rwcdm");
+          $this->list->setHeader(array(_("Permissions"),_("Type")));
+      }
+
+
+    // Add ACL entries to the listing
+    $lData = array();
+    foreach($this->gosaAclTemplate as $id => $entry){
+       $lData[] = $this->convertForListing($entry);
+    }
+    $this->list->setListData($this->gosaAclTemplate, $lData);
+  }
+
+
+  function convertForListing($entry)
+  {
+    $member = implode($entry['members'],", ");
+    $acl = implode(array_keys($entry['acl']),", ");
+    $type = implode(array_keys($entry['acl']),", ");
+    return(array('data' => array($acl, $this->aclTypes[$entry['type']])));
+  }
+
 
 
   function execute()
@@ -174,26 +223,19 @@ class aclrole extends acl
 
     /* Act on HTML post and gets here.
      */
-    if(isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == "edit"){
-      $id = trim($_GET['id']);
-      $this->dialogState= 'create';
-      $firstedit= TRUE;
-      $this->dialog= TRUE;
-      $this->currentIndex= $id;
-      $this->loadAclEntry();
-    }
 
-    foreach($_POST as $name => $post){
-
-      /* Actions... */
-      if (preg_match('/^acl_edit_[0-9]*$/', $name)){
+    // Get listing actions. Delete or Edit.
+    $this->list->save_object();
+    $lAction = $this->list->getAction();
+    $this->gosaAclEntry = $this->list->getMaintainedData();
+    if($lAction['action'] == "edit"){
+        $this->currentIndex = $this->list->getKey($lAction['targets'][0]);
         $this->dialogState= 'create';
         $firstedit= TRUE;
         $this->dialog= TRUE;
-        $this->currentIndex= preg_replace('/^acl_edit_([0-9]*)$/', '\1', $name);
         $this->loadAclEntry();
-        continue;
-      }
+    }
+    foreach($_POST as $name => $post){
       if (preg_match('/^cat_edit_/', $name)){
         $this->aclObject= preg_replace('/^cat_edit_(.*)$/', '\1', $name);
         $this->dialogState= 'edit';
@@ -221,26 +263,6 @@ class aclrole extends acl
             unset($this->aclContents[$idx]);
           if(isset($this->aclContents["$idx/$key"])) 
             unset($this->aclContents["$idx/$key"]);
-        }
-        continue;
-      }
-
-      /* Sorting... */
-      if (preg_match('/^sortup_[0-9]*$/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
-        $index= preg_replace('/^sortup_([0-9]*)$/', '\1', $name);
-        if ($index > 0){
-          $tmp= $this->gosaAclTemplate[$index];
-          $this->gosaAclTemplate[$index]= $this->gosaAclTemplate[$index-1];
-          $this->gosaAclTemplate[$index-1]= $tmp;
-        }
-        continue;
-      }
-      if (preg_match('/^sortdown_[0-9]*$/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
-        $index= preg_replace('/^sortdown_([0-9]*)$/', '\1', $name);
-        if ($index < count($this->gosaAclTemplate)-1){
-          $tmp= $this->gosaAclTemplate[$index];
-          $this->gosaAclTemplate[$index]= $this->gosaAclTemplate[$index+1];
-          $this->gosaAclTemplate[$index+1]= $tmp;
         }
         continue;
       }
@@ -353,39 +375,8 @@ class aclrole extends acl
     }
 
     if ($this->dialogState == 'head'){
-      /* Draw list */
-      $aclList= new divSelectBox("aclList");
-      $aclList->SetHeight(350);
-
-      /* Fill in entries */
-      foreach ($this->gosaAclTemplate as $key => $entry){
-
-        if($this->acl_is_readable("")){
-          $link = "<a href=?plug=".$_GET['plug']."&amp;id=".$key."&amp;act=edit>".$this->assembleAclSummary($entry)."</a>";
-        }else{
-          $link = $this->assembleAclSummary($entry);
-        }
-
-        $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:150px'");
-        $field2= array("string" => $link);
-
-        $action ="";
-        if($this->acl_is_writeable("gosaAclTemplate")){
-          $action.=image('images/lists/sort-up.png','sortup_'.$key,'','top');
-          $action.=image('images/lists/sort-down.png','sortdown_'.$key,'','bottom');
-        }
-        if($this->acl_is_readable("gosaAclTemplate")){
-          $action.= image('images/lists/edit.png','acl_edit_'.$key,msgPool::editButton(_("ACL")));
-        }
-        if($this->acl_is_writeable("gosaAclTemplate")){
-          $action.= image('images/lists/trash.png','acl_del_'.$key,msgPool::delButton(_("ACL")));
-        }
-
-        $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px;text-align:right;'");
-        $aclList->AddEntry(array($field1, $field2, $field3));
-      }
-
-      $smarty->assign("aclList", $aclList->DrawList());
+      $this->updateList();
+      $smarty->assign("aclList", $this->list->render());
     }
 
     if ($this->dialogState == 'create'){
