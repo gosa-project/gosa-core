@@ -50,7 +50,6 @@ class posixAccount extends plugin
   var $shadowInactive= "0";
   var $shadowExpire= "";
   var $accessTo= array();
-  var $trustModel= "";
 
   var $glist=array();
   var $status= "";
@@ -68,10 +67,8 @@ class posixAccount extends plugin
   var $force_ids= 0;
   var $gotoLastSystemLogin= "";
   var $groupSelect= FALSE;
-  var $trustSelect= FALSE;
   var $secondaryGroups= array();
   var $primaryGroup= 0;
-  var $was_trust_account= FALSE;
   var $memberGroup= array();
   var $grouplist= array();
   var $ui= array();
@@ -92,7 +89,7 @@ class posixAccount extends plugin
 
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
-      "shadowExpire", "uid","accessTo","trustModel", "gotoLastSystemLogin");
+      "shadowExpire", "uid", "gotoLastSystemLogin");
 
   var $objectclasses= array("posixAccount", "shadowAccount");
 
@@ -102,7 +99,7 @@ class posixAccount extends plugin
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
-  function posixAccount (&$config, $dn= NULL)
+  function posixAccount (&$config, $dn= NULL, $parent =NULL)
   {
     global $class_mapping;
 
@@ -110,7 +107,10 @@ class posixAccount extends plugin
     $this->config= $config;
 
     /* Load bases attributes */
-    plugin::plugin($config, $dn);
+    plugin::plugin($config, $dn, $parent);
+
+    $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, $parent, 'users/posixAccount');
+    $this->trustModeDialog->setAcl('users/posixAccount');
 
     /*  If gotoLastSystemLogin is available read it from ldap and create a readable
         date time string, fallback to sambaLogonTime if available.
@@ -135,23 +135,6 @@ class posixAccount extends plugin
           in_array ('posixAccount', $this->attrs['objectClass'])){
 
         $this->is_account= TRUE;
-      }
-
-      /* Is this account a trustAccount? */
-      if ($this->is_account && isset($this->attrs['trustModel'])){
-        $this->trustModel= $this->attrs['trustModel'][0];
-        $this->was_trust_account= TRUE;
-      } else {
-        $this->was_trust_account= FALSE;
-        $this->trustModel= "";
-      }
-
-      $this->accessTo = array(); 
-      if ($this->is_account && isset($this->attrs['accessTo'])){
-        for ($i= 0; $i<$this->attrs['accessTo']['count']; $i++){
-          $tmp= $this->attrs['accessTo'][$i];
-          $this->accessTo[$tmp]= $tmp;
-        }
       }
       $this->initially_was_account= $this->is_account;
 
@@ -324,16 +307,9 @@ class posixAccount extends plugin
       $this->dialog= TRUE;
     }
 
-    // Allow to select trusted machines from a list
-    if (isset($_POST["add_ws"])){
-      $this->trustSelect= new trustSelect($this->config,get_userinfo());
-      $this->dialog= TRUE;
-    }
-
-    // Cancel trust and group dialog
-    if (isset($_POST['add_groups_cancel']) || isset($_POST['add_ws_cancel'])){
+    // Cancel group dialog
+    if (isset($_POST['add_groups_cancel'])){
       $this->groupSelect= NULL;
-      $this->trustSelect= NULL;
       $this->dialog= FALSE;
     }
 
@@ -355,44 +331,21 @@ class posixAccount extends plugin
       $this->delGroup ($_POST['group_list']);
     }
 
-    // Add selected machines to trusted ones.
-    if (isset($_POST["add_ws_finish"]) &&  $this->trustSelect){
-      $trusts = $this->trustSelect->detectPostActions();
-      if(isset($trusts['targets'])){
-
-        $headpage = $this->trustSelect->getHeadpage();              
-        foreach($trusts['targets'] as $id){
-          $attrs = $headpage->getEntry($id);
-          $this->accessTo[$attrs['cn'][0]]= $attrs['cn'][0];
-        }
-        ksort($this->accessTo);
-        $this->is_modified= TRUE;
-      }
-      $this->trustSelect= NULL;
-      $this->dialog= FALSE;
-    }
-
-    // Remove machine from trusted ones.
-    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
-      foreach($_POST['workstation_list'] as $name){
-        unset ($this->accessTo[$name]);
-      }
-      $this->is_modified= TRUE;
-    }
-
-
-
     /* Templates now! */
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
 
-    /* Show ws dialog */
-    if ($this->trustSelect){
 
-      // Build up blocklist
-      session::set('filterBlacklist', array('cn' => array_values($this->accessTo)));
-      return($this->trustSelect->execute());
+    // Handle trust mode dialog
+    $trustModeDialog = $this->trustModeDialog->execute();
+    if($this->trustModeDialog->trustSelect){
+        $this->dialog = TRUE;
+        return($trustModeDialog);
+        
     }
+    $this->dialog = FALSE;
+    $smarty->assign("trustModeDialog" , $trustModeDialog);
+
 
     /* Manage group add dialog */
     if ($this->groupSelect){
@@ -504,7 +457,7 @@ class posixAccount extends plugin
     $smarty->assign("onClickIDS", $onClickIDS);
     $smarty->assign("force_idsACL", $this->getacl("uidNumber").$this->getacl("gidNumber"));
 
-    foreach(array("primaryGroup","trustmode","activate_shadowWarning","activate_shadowInactive","activate_shadowMin","activate_shadowMax","activate_shadowExpire","mustchangepassword") as $val){
+    foreach(array("primaryGroup","activate_shadowWarning","activate_shadowInactive","activate_shadowMin","activate_shadowMax","activate_shadowExpire","mustchangepassword") as $val){
       if(in_array($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
@@ -523,10 +476,10 @@ class posixAccount extends plugin
       $smarty->assign("$val", $this->$val);
     }
 
-    $tmp = $this->plInfo();
-    foreach($tmp['plProvidedAcls'] as $val => $desc){
-      $smarty->assign("$val"."ACL", $this->getacl($val));
-    }
+    $tmp = $this->plInfo();                                                                                    
+    foreach($tmp['plProvidedAcls'] as $val => $desc){                                                          
+      $smarty->assign("$val"."ACL", $this->getacl($val));                                                      
+    }   
 
     if($this->read_only){
       $smarty->assign("groupMembershipACL","r");
@@ -535,40 +488,11 @@ class posixAccount extends plugin
     }
     $smarty->assign("status", $this->status);
 
-    /* Work on trust modes */
-    $smarty->assign("trusthide", " disabled ");
-    $smarty->assign("trustmodeACL",  $this->getacl("accessTo"));
-    if ($this->trustModel == "fullaccess"){
-      $trustmode= 1;
-      // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("accessTo"));
-
-    } elseif ($this->trustModel == "byhost"){
-      $trustmode= 2;
-      $smarty->assign("trusthide", "");
-    } else {
-      // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("accessTo"));
-      $trustmode= 0;
-    }
-    $smarty->assign("trustmode", $trustmode);
-    $smarty->assign("trustmodes", array( 0 => _("disabled"), 1 => _("full access"),
-          2 => _("allow access to these hosts")));
-
-
-
-    if((count($this->accessTo))==0)
-      $smarty->assign("emptyArrAccess",true);
-    else
-      $smarty->assign("emptyArrAccess",false);
-
     if($this->mustchangepassword){
       $smarty->assign("mustchangepassword", " checked ");
     } else {
       $smarty->assign("mustchangepassword", "");
     }
-
-    $smarty->assign("workstations", $this->accessTo);
 
     // Add SSH button if available
     $smarty->assign("sshPublicKey", $this->ssh?1:0);
@@ -597,7 +521,6 @@ class posixAccount extends plugin
 
     /* Keep uid, because we need it for authentification! */
     unset($this->attrs['uid']);
-    unset($this->attrs['trustModel']);
 
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         /* include global link_info */
@@ -636,7 +559,7 @@ class posixAccount extends plugin
     if (isset($_POST['posixTab'])){
       /* Save values to object */
       plugin::save_object();
-
+      $this->trustModeDialog->save_object();
 
       /* Save force GID checkbox */
       if($this->acl_is_writeable("gidNumber") || $this->acl_is_writeable("uidNumber")){
@@ -681,23 +604,6 @@ class posixAccount extends plugin
         $this->mustchangepassword = TRUE;
       }else{
         $this->mustchangepassword = FALSE;
-      }
-
-      /* Trust mode - special handling */
-      if($this->acl_is_writeable("accessTo")){
-        if (isset($_POST['trustmode'])){
-          $saved= $this->trustModel;
-          if ($_POST['trustmode'] == "1"){
-            $this->trustModel= "fullaccess";
-          } elseif ($_POST['trustmode'] == "2"){
-            $this->trustModel= "byhost";
-          } else {
-            $this->trustModel= "";
-          }
-          if ($this->trustModel != $saved){
-            $this->is_modified= TRUE;
-          }
-        }
       }
     }
 
@@ -884,31 +790,8 @@ class posixAccount extends plugin
     }
     /* Call parents save to prepare $this->attrs */
     plugin::save();
-
-    /* Trust accounts */
-    $objectclasses= array();
-    foreach ($this->attrs['objectClass'] as $key => $class){
-      if (preg_match('/trustAccount/i', $class)){
-        continue;
-      }
-      $objectclasses[]= $this->attrs['objectClass'][$key];
-    }
-    $this->attrs['objectClass']= $objectclasses;
-    if ($this->trustModel != ""){
-      $this->attrs['objectClass'][]= "trustAccount";
-      $this->attrs['trustModel']= $this->trustModel;
-      $this->attrs['accessTo']= array();
-      if ($this->trustModel == "byhost"){
-        foreach ($this->accessTo as $host){
-          $this->attrs['accessTo'][]= $host;
-        }
-      }
-    } else {
-      if ($this->was_trust_account){
-        $this->attrs['accessTo']= array();
-        $this->attrs['trustModel']= array();
-      }
-    }
+    $this->trustModeDialog->dn = $this->dn;
+    $this->trustModeDialog->save();
 
     /* include global link_info */
     $this->cleanup();
@@ -1449,15 +1332,12 @@ class posixAccount extends plugin
   function get_multi_edit_values()
   {
     $ret = plugin::get_multi_edit_values();
+    $ret = array_merge($ret,$this->trustModeDialog->get_multi_edit_values());
     $ret['groupMembership']     = $this->groupMembership;
     $ret['groupMembership_some']= $this->groupMembership_some;
 
     if(in_array("primaryGroup",$this->multi_boxes)){
       $ret['primaryGroup'] = $this->primaryGroup;
-    }
-    if(in_array("trustmode",$this->multi_boxes)){
-      $ret['trustModel'] = $this->trustModel;
-      $ret['accessTo'] = $this->accessTo;
     }
     foreach(array("shadowWarning","shadowInactive","shadowMin","shadowMax", "shadowExpire") as $entry){
       $active = "activate_".$entry;
@@ -1485,8 +1365,10 @@ class posixAccount extends plugin
       /* Update all values */
       plugin::multiple_save_object();
 
+      $this->trustModeDialog->multiple_save_object();
+
       /* Get selected checkboxes */
-      foreach(array("primaryGroup","trustmode","mustchangepassword","activate_shadowWarning","activate_shadowInactive","activate_shadowMin", "activate_shadowMax","activate_shadowExpire") as $val){
+      foreach(array("primaryGroup","mustchangepassword","activate_shadowWarning","activate_shadowInactive","activate_shadowMin", "activate_shadowMax","activate_shadowExpire") as $val){
         if(isset($_POST["use_".$val])){
           $this->multi_boxes[] = $val;
         }
@@ -1520,23 +1402,6 @@ class posixAccount extends plugin
         $this->mustchangepassword = FALSE;
       }
 
-      /* Trust mode - special handling */
-      if($this->acl_is_writeable("accessTo")){
-        if (isset($_POST['trustmode'])){
-          $saved= $this->trustModel;
-          if ($_POST['trustmode'] == "1"){
-            $this->trustModel= "fullaccess";
-          } elseif ($_POST['trustmode'] == "2"){
-            $this->trustModel= "byhost";
-          } else {
-            $this->trustModel= "";
-          }
-          if ($this->trustModel != $saved){
-            $this->is_modified= TRUE;
-          }
-        }
-      }
-
       /* Save primary group settings */
       if($this->acl_is_writeable("primaryGroup") && isset($_POST['primaryGroup'])){
         $data= $_POST['primaryGroup'];
@@ -1554,6 +1419,7 @@ class posixAccount extends plugin
   function init_multiple_support($attrs,$all)
   {
     plugin::init_multiple_support($attrs,$all);
+    $this->trustModeDialog->init_multiple_support($attrs,$all);
 
     /* Some dummy values */
     $groups_some = array();
@@ -1603,25 +1469,6 @@ class posixAccount extends plugin
     $this->groupMembership_some = $groups_some;
     $this->primaryGroup = $this->gidNumber;
 
-    /* Is this account a trustAccount? */
-    if (isset($this->multi_attrs['trustModel'])){
-      $this->trustModel= $this->multi_attrs['trustModel'][0];
-      $this->was_trust_account= TRUE;
-      $this->multi_boxes[] = "trustmode";
-    } else {
-      $this->was_trust_account= FALSE;
-      $this->trustModel= "";
-    }
-
-    /* Create access informations */
-    $this->accessTo = array();
-    if (isset($this->multi_attrs['accessTo'])){
-      for ($i= 0; $i<$this->multi_attrs['accessTo']['count']; $i++){
-        $tmp= $this->multi_attrs['accessTo'][$i];
-        $this->accessTo[$tmp]= $tmp;
-      }
-    }
-
     /* Adjust shadow checkboxes */
     foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
           "shadowExpire") as $val){
@@ -1655,8 +1502,25 @@ class posixAccount extends plugin
       $groups[$dn] = $cn;
     }
     plugin::set_multi_edit_values($attrs);
+    $this->trustModeDialog->set_multi_edit_values($attrs);
     $this->groupMembership = $groups;
   }
+
+  function set_acl_base($base)
+  {
+    @DEBUG (DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__,"<b>".$base."</b>","<b>ACL-Base:</b> ");
+    $this->acl_base= $base;
+    $this->trustModeDialog->set_acl_base($base);
+  }
+
+  /*! \brief  Enables multiple support for this plugin
+   */
+  function enable_multiple_support()
+  {
+    plugin::enable_multiple_support();
+    $this->trustModeDialog->enable_multiple_support();
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
