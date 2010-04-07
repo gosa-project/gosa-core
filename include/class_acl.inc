@@ -54,7 +54,9 @@ class acl extends plugin
   var $myAclObjects = array();
   var $acl_category = "acl/";
 
-   var $list =NULL;
+  var $list =NULL;
+
+  var $sectionList = NULL;
 
   function acl (&$config, $parent, $dn= NULL)
   {
@@ -239,6 +241,17 @@ class acl extends plugin
     $this->is_account= TRUE;
 
     $this->updateList();
+
+    // Prepare lists 
+    $this->sectionList = new sortableListing();
+    $this->sectionList->setDeleteable(false);
+    $this->sectionList->setEditable(false);
+    $this->sectionList->setWidth("100%");
+    $this->sectionList->setHeight("120px");
+    $this->sectionList->setColspecs(array('200px','*'));
+    $this->sectionList->setHeader(array(_("Section"),_("Description")));
+    $this->sectionList->setDefaultSortColumn(1);
+    $this->sectionList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
   }
 
     
@@ -503,55 +516,59 @@ class acl extends plugin
 
     if ($this->dialogState == 'create'){
 
-      $aclList= new divSelectBox("aclList");
-      $aclList->SetHeight(150);
+        // Create a map of all used sections, this allows us to simply hide the remove button 
+        //  if no acl is configured for the given section 
+        // e.g. ';all;department/country;users/user;
+        $usedList = ";".implode(array_keys($this->aclContents),';').";";
 
-      // Create a map of all used sections, this allows us to simply hide the remove button 
-      //  if no acl is configured for the given section 
-      // e.g. ';all;department/country;users/user;
-      $usedList = ";".implode(array_keys($this->aclContents),';').";";
+        /* Add settings for all categories to the (permanent) list */
+        $data = $lData = array();
+        foreach ($this->aclObjects as $section => $dsc){
+            $summary= "";
+            foreach($this->ocMapping[$section] as $oc){
+                if (isset($this->aclContents[$oc]) && 
+                        count($this->aclContents[$oc]) && 
+                        isset($this->aclContents[$oc][0]) &&
+                        $this->aclContents[$oc][0] != ""){
 
-      /* Add settings for all categories to the (permanent) list */
-      foreach ($this->aclObjects as $section => $dsc){
-        $summary= "";
-        foreach($this->ocMapping[$section] as $oc){
-          if (isset($this->aclContents[$oc]) && count($this->aclContents[$oc]) && isset($this->aclContents[$oc][0]) &&
-              $this->aclContents[$oc][0] != ""){
+                    $summary.= "$oc, ";
+                    continue;
+                }
+                if (isset($this->aclContents["$section/$oc"]) && 
+                        count($this->aclContents["$section/$oc"])){
+                    $summary.= "$oc, ";
+                    continue;
+                }
+                if (isset($this->aclContents[$oc]) && 
+                        !isset($this->aclContents[$oc][0]) && 
+                        count($this->aclContents[$oc])){
+                    $summary.= "$oc, ";
+                }
+            }
 
-            $summary.= "$oc, ";
-            continue;
-          }
-          if (isset($this->aclContents["$section/$oc"]) && count($this->aclContents["$section/$oc"])){
-            $summary.= "$oc, ";
-            continue;
-          }
-          if (isset($this->aclContents[$oc]) && !isset($this->aclContents[$oc][0]) && count($this->aclContents[$oc])){
-            $summary.= "$oc, ";
-          }
+            /* Set summary... */
+            if ($summary == ""){
+                $summary= '<i>'._("No ACL settings for this category!").'</i>';
+            } else {
+                $summary= trim($summary,", ");
+                $summary= " ".sprintf(_("Contains ACLs for these objects: %s"), $summary);
+            }
+
+            $actions ="";
+            if($this->acl_is_readable("")){
+                $actions.= image('images/lists/edit.png','cat_edit_'.$section, 
+                        msgPool::editButton(_("category ACL")));
+            }
+            if($this->acl_is_removeable() && preg_match("/;".$section."(;|\/)/", $usedList)){
+                $actions.= image('images/lists/trash.png','cat_del_'.$section, 
+                        msgPool::delButton(_("category ACL")));
+            }   
+            $data[] = $section;
+            $lData[] = array('data'=>array($dsc, $summary, $actions));
         }
-
-        /* Set summary... */
-        if ($summary == ""){
-          $summary= '<i>'._("No ACL settings for this category!").'</i>';
-        } else {
-          $summary= sprintf(_("Contains ACLs for these objects: %s"), preg_replace('/, $/', '', $summary));
-        }
-
-        $actions ="";
-        if($this->acl_is_readable("")){
-          $actions.= image('images/lists/edit.png','cat_edit_'.$section, msgPool::editButton(_("category ACL")));
-        }
-        if($this->acl_is_removeable() && preg_match("/;".$section."(;|\/)/", $usedList)){
-          $actions.= image('images/lists/trash.png','cat_del_'.$section, msgPool::delButton(_("category ACL")));
-        }   
-
-        $field1= array("string" => $dsc, "attach" => "style='width:100px'");
-        $field2= array("string" => $summary);
-        $field3= array("string" => $actions, "attach" => "style='border-right:0px;width:50px'");
-        $aclList->AddEntry(array($field1, $field2, $field3));
-      }
-
-      $smarty->assign("aclList", $aclList->DrawList());
+        $this->sectionList->setListData($data,$lData);
+        $this->sectionList->update();
+        $smarty->assign("aclList", $this->sectionList->render());
     
       $smarty->assign("aclType", $this->aclType);
       $smarty->assign("aclFilter", $this->aclFilter);
