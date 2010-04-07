@@ -9,14 +9,7 @@
   </select>
  {/render}
  {render acl=$trustmodeACL}
-  
-  <select style="width:100%" id="wslist" name="workstation_list[]" size=5 multiple {$trusthide}>
-   {html_options values=$accessTo output=$accessTo}
-   
-   {if $emptyArrAccess}<option disabled>&nbsp;</option>
-    
-   {/if}
-  </select>
+  {$trustList}
  {/render}
  <br>
  {render acl=$trustmodeACL}
@@ -40,14 +33,7 @@
   </select>
  {/render}
  {render acl=$trustmodeACL}
-  
-  <select style="width:100%" id="wslist" name="workstation_list[]" size=5 multiple {$trusthide}>
-   {html_options values=$accessTo output=$accessTo}
-   
-   {if $emptyArrAccess}<option disabled>&nbsp;</option>
-    
-   {/if}
-  </select>
+  {$trustList}
  {/render}
  <br>
  {render acl=$trustmodeACL}
