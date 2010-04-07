@@ -286,8 +286,12 @@ class management
     @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel requested!");
 
     // Check permissons for each target 
+    $h = $this->getHeadpage();
+    $oTypes = $h->objectTypes;
     foreach($target as $dn){
-      $acl = $this->ui->get_permissions($dn, $this->aclCategory."/".$this->aclPlugin);
+      $entry = $h->getEntry($dn);
+      $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
+      $acl = $this->ui->get_permissions($dn, $obj['category']."/".$obj['class']);
       if(preg_match("/d/",$acl)){
         $this->dns[] = $dn;
       }else{
@@ -309,7 +313,6 @@ class management
       // Add locks
       $dns_names = array();
       $types = array();
-      $h = $this->getHeadpage();
 
       // Build list of object -labels
       foreach($h->objectTypes as $type){
@@ -355,10 +358,15 @@ class management
 
     @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel confirmed!");
 
+    // Check permissons for each target 
+    $h = $this->getHeadpage();
+    $oTypes = $h->objectTypes;
     foreach($this->dns as $key => $dn){
+      $entry = $h->getEntry($dn);
+      $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
+      $acl = $this->ui->get_permissions($dn, $obj['category']."/".$obj['class']);
 
       // Check permissions, are we allowed to remove this object? 
-      $acl = $this->ui->get_permissions($dn, $aclCategory."/".$aclPlugin);
       if(preg_match("/d/",$acl)){
 
         // Delete the object

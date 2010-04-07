@@ -252,6 +252,16 @@ class acl extends plugin
     $this->sectionList->setHeader(array(_("Section"),_("Description")));
     $this->sectionList->setDefaultSortColumn(1);
     $this->sectionList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
+
+    $this->roleList = new sortableListing();
+    $this->roleList->setDeleteable(false);
+    $this->roleList->setEditable(false);
+    $this->roleList->setWidth("100%");
+    $this->roleList->setHeight("120px");
+    $this->roleList->setColspecs(array('20px','*','*'));
+    $this->roleList->setHeader(array(_("Used"),_("Name"),_("Description")));
+    $this->roleList->setDefaultSortColumn(1);
+    $this->roleList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
   }
 
     
@@ -676,29 +686,25 @@ class acl extends plugin
 
   function buildRoleSelector($list)
   {
-    $D_List =new divSelectBox("Acl_Roles");
- 
     $selected = $this->aclContents;
     if(!is_string($this->aclContents) || !isset($list[$this->aclContents])){
       $selected = key($list);
     }
 
-    $str ="";
+    $data = $lData = array();
     foreach($list as $dn => $values){
-
       if($dn == $selected){    
         $option = "<input type='radio' name='selected_role' value='".base64_encode($dn)."' checked>";
       }else{
         $option = "<input type='radio' name='selected_role' value='".base64_encode($dn)."'>";
       }
- 
-      $field1 = array("string" => $option) ;
-      $field2 = array("string" => $values['cn'], "attach" => "style='width:200px;'") ;
-      $field3 = array("string" => $values['description'],"attach" => "style='border-right:0px;'") ;
-
-      $D_List->AddEntry(array($field1,$field2,$field3));
+      $data[] = postEncode($dn);
+      $lData[] = array('data'=>array($option, $values['cn'], $values['description']));
     }
-    return($D_List->DrawList());
+    print_a($list);
+    $this->roleList->setListData($data,$lData);
+    $this->roleList->update();
+    return($this->roleList->render());
   } 
 
 
