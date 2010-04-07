@@ -1169,6 +1169,8 @@ class group extends plugin
   {
     plugin::PrepareForCopyPaste($source);
 
+    $this->trustModeDialog->PrepareForCopyPaste($source);
+
     if ($this->smbgroup) { 
       $this->sambaSID = $this->getSambaSID(); 
     } 
