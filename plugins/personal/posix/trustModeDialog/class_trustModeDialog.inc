@@ -37,6 +37,7 @@ class trustModeDialog extends plugin
 
         $this->trustList = new sortableListing($this->accessTo, $lData);
         $this->trustList->setDeleteable(true);
+        $this->trustList->setInstantDelete(true);
         $this->trustList->setEditable(false);
         $this->trustList->setWidth("100%");
         $this->trustList->setHeight("100px");
@@ -181,7 +182,7 @@ class trustModeDialog extends plugin
 
         $smarty->assign($smarty->assign("use_trustmode",in_array("trustmode", $this->multi_boxes)));
         $smarty->assign("multiple_support" , $this->multiple_support_active);
-        $this->trustList->update();
+#        $this->trustList->update();
         $smarty->assign("trustList", $this->trustList->render());
         return($smarty->fetch(get_template_path("generic.tpl",TRUE, dirname(__FILE__))));
     }
