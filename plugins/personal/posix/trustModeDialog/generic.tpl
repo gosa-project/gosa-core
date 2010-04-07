@@ -11,7 +11,6 @@
  {render acl=$trustmodeACL}
   {$trustList}
  {/render}
- <br>
  {render acl=$trustmodeACL}
   <button {$trusthide}type='submit' name='add_ws' id="add_ws">
   {msgPool type=addButton}</button>&nbsp;
@@ -35,7 +34,6 @@
  {render acl=$trustmodeACL}
   {$trustList}
  {/render}
- <br>
  {render acl=$trustmodeACL}
   <button type='submit' name='add_ws' id="add_ws">
   {msgPool type=addButton}</button>&nbsp;
