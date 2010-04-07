@@ -1811,7 +1811,7 @@ class plugin
         $this->multi_boxes[] = $val;
       }
 
-      if ($this->acl_is_writeable($val) && isset ($_POST["$val"])){
+      if (isset ($_POST["$val"]) && $this->acl_is_writeable($val)){
 
         /* Check for modifications */
         if (get_magic_quotes_gpc()) {
