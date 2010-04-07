@@ -701,7 +701,6 @@ class acl extends plugin
       $data[] = postEncode($dn);
       $lData[] = array('data'=>array($option, $values['cn'], $values['description']));
     }
-    print_a($list);
     $this->roleList->setListData($data,$lData);
     $this->roleList->update();
     return($this->roleList->render());
