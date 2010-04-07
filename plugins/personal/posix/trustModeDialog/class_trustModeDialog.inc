@@ -41,8 +41,8 @@ class trustModeDialog extends plugin
         $this->trustList->setWidth("100%");
         $this->trustList->setHeight("100px");
         $this->trustList->setColspecs(array('20px','*'));
-        
-        $this->trustList->setDefaultSortColumn(0);
+        $this->trustList->setHeader(array("~",_("Name"),_("Description")));
+        $this->trustList->setDefaultSortColumn(1);
 
     }
 
@@ -178,10 +178,10 @@ class trustModeDialog extends plugin
         else
             $smarty->assign("emptyArrAccess",false);
 
-        $smarty->assign("accessTo",$this->accessTo);
 
         $smarty->assign($smarty->assign("use_trustmode",in_array("trustmode", $this->multi_boxes)));
         $smarty->assign("multiple_support" , $this->multiple_support_active);
+        $this->trustList->update();
         $smarty->assign("trustList", $this->trustList->render());
         return($smarty->fetch(get_template_path("generic.tpl",TRUE, dirname(__FILE__))));
     }
