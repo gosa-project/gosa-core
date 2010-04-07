@@ -227,9 +227,9 @@ class aclrole extends acl
     // Get listing actions. Delete or Edit.
     $this->list->save_object();
     $lAction = $this->list->getAction();
-    $this->gosaAclEntry = $this->list->getMaintainedData();
+    $this->gosaAclTemplate = array_values($this->list->getMaintainedData());
     if($lAction['action'] == "edit"){
-        $this->currentIndex = $this->list->getKey($lAction['targets'][0]);
+        $this->currentIndex = $lAction['targets'][0];
         $this->dialogState= 'create';
         $firstedit= TRUE;
         $this->dialog= TRUE;
@@ -248,11 +248,6 @@ class aclrole extends acl
       }
 
       if(!$this->acl_is_writeable("gosaAclTemplate")){
-        continue;
-      }
-
-      if (preg_match('/^acl_del_[0-9]*/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
-        unset($this->gosaAclTemplate[preg_replace('/^acl_del_([0-9]*)$/', '\1', $name)]);
         continue;
       }
 

@@ -34,7 +34,7 @@
 </tr>
 </table>
 {$aclList}
-{render acl=$gosaAclEntryACL}
+{render acl=$gosaAclTemplateACL}
 <button type='submit' name='new_acl'>{t}New ACL{/t}</button>
 
 {/render}
@@ -53,7 +53,7 @@
 
 <hr>
 <div style='text-align:right;margin-top:5px'>
-{render acl=$gosaAclEntryACL}
+{render acl=$gosaAclTemplateACL}
 	<button type='submit' name='submit_new_acl'>{msgPool type=applyButton}</button>
 
 	&nbsp;
@@ -67,13 +67,13 @@
 
 <h3>{$headline}</h3>
 
-{render acl=$gosaAclEntryACL}
+{render acl=$gosaAclTemplateACL}
 {$aclSelector}
 {/render}
 
 <hr>
 <div style='text-align:right;margin-top:5px'>
-{render acl=$gosaAclEntryACL}
+{render acl=$gosaAclTemplateACL}
 	<button type='submit' name='submit_edit_acl'>{msgPool type=applyButton}</button>
 
 {/render}
