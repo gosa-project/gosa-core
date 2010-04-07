@@ -478,6 +478,8 @@ class sortableListing {
 
   public function sortData()
   {
+    if(!count($this->data)) return;
+
     // Extract data
     $tmp= array();
     foreach($this->displayData as $item) {
@@ -532,6 +534,23 @@ class sortableListing {
     $this->displayData[]= $displayEntry['data'];
     $this->mapping[]= count($this->mapping);
     $this->modified= true;
+
+    // Find the number of coluns
+    reset($this->displayData);
+    $first= current($this->displayData);
+    if (is_array($first)) {
+        $this->columns= count($first);
+    } else {
+        $this->columns= 1;
+    }
+
+    // Preset sort orders to 'down'
+    for ($column= 0; $column<$this->columns; $column++) {
+        if(!isset($this->sortDirection[$column])){
+            $this->sortDirection[$column]= true;
+        }
+    }
+
 
     // Sort data after we've added stuff
     $this->sortData();
