@@ -52,11 +52,6 @@ class ogroup extends plugin
   var $objectSelect= FALSE;
   var $view_logged = FALSE;
 
-  var $accessTo= array();
-  var $trustModel= "";
-  var $trustSelect = FALSE;
-
-  var $was_trust_account= FALSE;
   var $baseSelector;
 
   /* Already assigned Workstations. Will be hidden in selection. 
@@ -64,12 +59,16 @@ class ogroup extends plugin
   var $used_workstations = array();
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "gosaGroupObjects","member","accessTo","trustModel");
+  var $attributes= array("cn", "description", "gosaGroupObjects","member");
   var $objectclasses= array("top", "gosaGroupOfNames");
 
   function ogroup (&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
+    $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
+    $this->trustModeDialog->setAcl('ogroups/ogroup');
+
     $this->orig_dn= $dn;
 
     $this->member = array();
@@ -91,23 +90,6 @@ class ogroup extends plugin
       $this->base= dn2base(session::global_is_set("CurrentMainBase")?"cn=dummy,".session::global_get("CurrentMainBase"):$ui->dn);
     } else {
       $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"), '/')."/i","",$this->dn);
-
-      /* Is this account a trustAccount? */
-      if ($this->is_account && isset($this->attrs['trustModel'])){
-        $this->trustModel= $this->attrs['trustModel'][0];
-        $this->was_trust_account= TRUE;
-      } else {
-        $this->was_trust_account= FALSE;
-        $this->trustModel= "";
-      }
-
-      $this->accessTo = array();
-      if ($this->is_account && isset($this->attrs['accessTo'])){
-        for ($i= 0; $i<$this->attrs['accessTo']['count']; $i++){
-          $tmp= $this->attrs['accessTo'][$i];
-          $this->accessTo[$tmp]= $tmp;
-        }
-      }
     }
 
     /* Detect all workstations, which are already assigned to an object group  
@@ -256,51 +238,14 @@ class ogroup extends plugin
      * Trusts 
      ***********/
 
-    /* Add user workstation? */
-    if (isset($_POST["add_ws"])){
-      $this->trustSelect= new trustSelect($this->config,get_userinfo());
-      $this->dialog= TRUE;
+    // Handle trust mode dialog
+    $trustModeDialog = $this->trustModeDialog->execute();
+    if($this->trustModeDialog->trustSelect){
+        $this->dialog = TRUE;
+        return($trustModeDialog);
     }
-
-    // Add selected machines to trusted ones.
-    if (isset($_POST["add_ws_finish"]) &&  $this->trustSelect){
-      $trusts = $this->trustSelect->detectPostActions();
-      if(isset($trusts['targets'])){
-
-        $headpage = $this->trustSelect->getHeadpage();
-        foreach($trusts['targets'] as $id){
-          $attrs = $headpage->getEntry($id);
-          $this->accessTo[$attrs['cn'][0]]= $attrs['cn'][0];
-        }
-        ksort($this->accessTo);
-        $this->is_modified= TRUE;
-      }
-      $this->trustSelect= NULL;
-      $this->dialog= FALSE;
-    }
-
-
-    /* Remove user workstations? */
-    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
-      foreach($_POST['workstation_list'] as $name){
-        unset ($this->accessTo[$name]);
-      }
-      $this->is_modified= TRUE;
-    }
-
-    /* Add user workstation finished? */
-    if (isset($_POST["add_ws_cancel"])){
-      $this->trustSelect= NULL;
-      $this->dialog= FALSE;
-    }
-
-    /* Show ws dialog */
-    if ($this->trustSelect){
-  
-      // Build up blocklist
-      session::set('filterBlacklist', array('cn' => array_values($this->accessTo)));
-      return($this->trustSelect->execute());
-    }
+    $smarty->assign("trustModeDialog",$trustModeDialog);
+    $this->dialog = FALSE;
 
     /***********
      * Ende - Trusts 
@@ -391,40 +336,14 @@ class ogroup extends plugin
       $smarty->assign("$val", $this->$val);
     }
 
-    /******
-      Trust account
-     ******/
-    $smarty->assign("trusthide", " disabled ");
-    $smarty->assign("trustmodeACL",  $this->getacl("trustModel"));
-    if ($this->trustModel == "fullaccess"){
-      $trustmode= 1;
-      // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel"));
-
-    } elseif ($this->trustModel == "byhost"){
-      $trustmode= 2;
-      $smarty->assign("trusthide", "");
-    } else {
-      // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel"));
-      $trustmode= 0;
-    }
-    $smarty->assign("trustmode", $trustmode);
-    $smarty->assign("trustmodes", array( 0 => _("disabled"), 1 => _("full access"),
-          2 => _("allow access to these hosts")));
-
-    $smarty->assign("workstations", $this->accessTo);
-
-    if((count($this->accessTo))==0){
-      $smarty->assign("emptyArrAccess",true);
-    }else{
-      $smarty->assign("emptyArrAccess",false);
-    }
-    /******
-      Ende - Trust account
-     ******/
-
     return ($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+  }
+
+
+  function set_acl_base($base)
+  {
+    plugin::set_acl_base($base);
+    $this->trustModeDialog->set_acl_base($base);
   }
 
 
@@ -434,28 +353,7 @@ class ogroup extends plugin
     /* Save additional values for possible next step */
     if (isset($_POST['ogroupedit'])){
 
-      /******
-        Trust account 
-       ******/
-
-      if($this->acl_is_writeable("trustModel")){
-        if (isset($_POST['trustmode'])){
-          $saved= $this->trustModel;
-          if ($_POST['trustmode'] == "1"){
-            $this->trustModel= "fullaccess";
-          } elseif ($_POST['trustmode'] == "2"){
-            $this->trustModel= "byhost";
-          } else {
-            $this->trustModel= "";
-          }
-          if ($this->trustModel != $saved){
-            $this->is_modified= TRUE;
-          }
-        }
-      }
-      /******
-        Ende Trust account
-       ******/
+      $this->trustModeDialog->save_object();
 
       /* Create a base backup and reset the
          base directly after calling plugin::save_object();
@@ -839,36 +737,6 @@ class ogroup extends plugin
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
     }
 
-    /******
-      Trust accounts 
-     ******/
-    $objectclasses= array();
-    foreach ($this->attrs['objectClass'] as $key => $class){
-      if (preg_match('/trustAccount/i', $class)){
-        continue;
-      }
-      $objectclasses[]= $this->attrs['objectClass'][$key];
-    }
-    $this->attrs['objectClass']= $objectclasses;
-    if ($this->trustModel != ""){
-      $this->attrs['objectClass'][]= "trustAccount";
-      $this->attrs['trustModel']= $this->trustModel;
-      $this->attrs['accessTo']= array();
-      if ($this->trustModel == "byhost"){
-        foreach ($this->accessTo as $host){
-          $this->attrs['accessTo'][]= $host;
-        }
-      }
-    } else {
-      if ($this->was_trust_account){
-        $this->attrs['accessTo']= array();
-        $this->attrs['trustModel']= array();
-      }
-    }
-
-    /******
-      Ende - Trust accounts 
-     ******/
 
     /* Write back to ldap */
     $ldap->cd($this->dn);
@@ -888,6 +756,9 @@ class ogroup extends plugin
     if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
       $ret= 1;
+    }else{
+      $this->trustModeDialog->dn = $this->dn;
+      $this->trustModeDialog->save();
     }
 
     return ($ret);
@@ -925,7 +796,7 @@ class ogroup extends plugin
     }
 
     $source_o = new ogroup ($this->config, $source['dn']);
-    foreach(array("accessTo","member","gosaGroupObjects")  as $attr){
+    foreach(array("member","gosaGroupObjects")  as $attr){
       $this->$attr = $source_o->$attr;
     }
   }
@@ -976,7 +847,7 @@ class ogroup extends plugin
             "cn"                => _("Name"),
             "base"              => _("Base"),
             "description"       => _("Description"),
-            "trustModel"        => _("Sytem trust"),
+            "accessTo"          => _("Sytem trust"),
             "member"            => _("Member"))
           ));
   }
