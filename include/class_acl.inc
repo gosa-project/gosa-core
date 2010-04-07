@@ -57,6 +57,7 @@ class acl extends plugin
   var $list =NULL;
 
   var $sectionList = NULL;
+  var $roleList = NULL;
 
   function acl (&$config, $parent, $dn= NULL)
   {
@@ -321,7 +322,7 @@ class acl extends plugin
     // Get listing actions. Delete or Edit.
     $this->list->save_object();
     $lAction = $this->list->getAction();
-    $this->gosaAclEntry = $this->list->getMaintainedData();
+    $this->gosaAclEntry = array_values($this->list->getMaintainedData());
 
     /* Act on HTML post and gets here.
      */
