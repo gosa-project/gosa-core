@@ -60,14 +60,8 @@ class group extends plugin
   var $allowGroupsWithSameNameInOtherSubtrees = true;
   var $baseSelector;
 
-  /* Trustmodel/AccessTo 
-   */
-  var $accessTo= array();
-  var $trustModel= "";
-  var $trustSelect = FALSE;
-
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID","accessTo","trustModel");
+  var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
   var $objectclasses= array("top", "posixGroup");
 
   var $CopyPasteVars  = array("force_gid","fon_group","smbgroup","groupType","sambaSID","sambaDomainName","SID","nagios_group","sambaGroupType");
@@ -84,6 +78,9 @@ class group extends plugin
      }
 
     plugin::plugin ($config, $dn);
+
+    $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
+    $this->trustModeDialog->setAcl('groups/group');
 
     /* Load attributes depending on the samba version */
     $this->orig_dn= $dn;
@@ -197,23 +194,6 @@ class group extends plugin
     }
     $this->orig_base = $this->base;
 
-    /* Is this account a trustAccount? */
-    if (isset($this->attrs['trustModel'])){
-      $this->trustModel= $this->attrs['trustModel'][0];
-      $this->was_trust_account= TRUE;
-    } else {
-      $this->was_trust_account= FALSE;
-      $this->trustModel= "";
-    }
-
-    $this->accessTo = array();
-    if (isset($this->attrs['accessTo'])){
-      for ($i= 0; $i<$this->attrs['accessTo']['count']; $i++){
-        $tmp= $this->attrs['accessTo'][$i];
-        $this->accessTo[$tmp]= $tmp;
-      }
-    }
-
     /* Get global filter config */
     if (!session::is_set("sysfilter")){
       $ui= get_userinfo();
@@ -311,64 +291,18 @@ class group extends plugin
       }
     }
 
-
-    /* Add user workstation? */
-    if (isset($_POST["add_ws"])){
-      $this->trustSelect= new trustSelect($this->config,get_userinfo());
-      $this->dialog= TRUE;
-    }
-
-    // Add selected machines to trusted ones.
-    if (isset($_POST["add_ws_finish"]) &&  $this->trustSelect){
-      $trusts = $this->trustSelect->detectPostActions();
-      if(isset($trusts['targets'])){
-
-        $headpage = $this->trustSelect->getHeadpage();
-        foreach($trusts['targets'] as $id){
-          $attrs = $headpage->getEntry($id);
-          $this->accessTo[$attrs['cn'][0]]= $attrs['cn'][0];
-        }
-        ksort($this->accessTo);
-        $this->is_modified= TRUE;
-      }
-      $this->trustSelect= NULL;
-      $this->dialog= FALSE;
-    }
-
-
-    /* Add user workstation? */
-    if (isset($_POST["add_ws_finish"]) && isset($_POST['wslist'])){
-      foreach($_POST['wslist'] as $ws){
-        $this->accessTo[$ws]= $ws;
-      }
-      ksort($this->accessTo);
-      $this->is_modified= TRUE;
-    }
-
-    /* Remove user workstations? */
-    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
-      foreach($_POST['workstation_list'] as $name){
-        unset ($this->accessTo[$name]);
-      }
-      $this->is_modified= TRUE;
-    }
-
-    /* Add user workstation finished? */
-    if (isset($_POST["add_ws_cancel"])){
-      $this->trustSelect= NULL;
-      $this->dialog= FALSE;
-    }
-
-
-    /* Show ws dialog */
-    if ($this->trustSelect){
-    
-      // Build up blocklist
-      session::set('filterBlacklist', array('cn' => array_values($this->accessTo)));
-      return($this->trustSelect->execute());
-    }
-
     $smarty= get_smarty();
+
+    // Handle trust mode dialog
+    $trustModeDialog = $this->trustModeDialog->execute();
+    if($this->trustModeDialog->trustSelect){
+        $this->dialog = TRUE;
+        return($trustModeDialog);
+
+    }
+    $this->dialog = FALSE;
+    $smarty->assign("trustModeDialog" , $trustModeDialog);
+
     $smarty->assign("usePrototype", "true");
 
     if($this->config->search("nagiosaccount", "CLASS",array('menu'))){
@@ -412,37 +346,6 @@ class group extends plugin
 
     /* Members and users */
     $smarty->assign("members", $this->members);
-
-    /* Work on trust modes */
-    $smarty->assign("trusthide", " disabled ");
-    $smarty->assign("trustmodeACL",  $this->getacl("trustModel"));
-    if ($this->trustModel == "fullaccess"){
-      $trustmode= 1;
-      // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel"));
-
-    } elseif ($this->trustModel == "byhost"){
-      $trustmode= 2;
-      $smarty->assign("trusthide", "");
-    } else {
-      // pervent double disable tag in html code, this will disturb our clean w3c html
-      $smarty->assign("trustmode",  $this->getacl("trustModel"));
-      $trustmode= 0;
-    }
-    $smarty->assign("trustmode", $trustmode);
-    $smarty->assign("trustmodes", array( 0 => _("disabled"), 1 => _("full access"),
-          2 => _("allow access to these hosts")));
-
-    if((count($this->accessTo))==0){
-      $smarty->assign("emptyArrAccess",true);
-    } else{
-      $smarty->assign("emptyArrAccess",false);
-
-    }
-
-    $smarty->assign("workstations", $this->accessTo);
-
-
 
     /* Checkboxes */
     foreach (array("force_gid", "smbgroup") as $val){
@@ -505,7 +408,7 @@ class group extends plugin
         $smarty->assign("use_".$val,FALSE);
       }
     }
-    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group","trustmode") as $val){
+    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group") as $val){
       if(in_array($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
@@ -745,6 +648,7 @@ class group extends plugin
          Base will be set seperatly a few lines below */
       $base_tmp = $this->base;
       plugin::save_object();
+      $this->trustModeDialog->save_object();
       $this->base = $base_tmp;
 
       /* Refresh base */
@@ -795,24 +699,6 @@ class group extends plugin
         }
       }
     }
-
-    /* Trust mode - special handling */
-    if($this->acl_is_writeable("trustModel")){
-      if (isset($_POST['trustmode'])){
-        $saved= $this->trustModel;
-        if ($_POST['trustmode'] == "1"){
-          $this->trustModel= "fullaccess";
-        } elseif ($_POST['trustmode'] == "2"){
-          $this->trustModel= "byhost";
-        } else {
-          $this->trustModel= "";
-        }
-        if ($this->trustModel != $saved){
-          $this->is_modified= TRUE;
-        }
-      }
-    }
-
   }
 
 
@@ -841,33 +727,6 @@ class group extends plugin
     }
   
     plugin::save(); 
-
- /* Trust accounts */
-    $objectclasses= array();
-    foreach ($this->attrs['objectClass'] as $key => $class){
-      if (preg_match('/trustAccount/i', $class)){
-        continue;
-      }
-      $objectclasses[]= $this->attrs['objectClass'][$key];
-    }
-    $this->attrs['objectClass']= $objectclasses;
-    if ($this->trustModel != ""){
-      $this->attrs['objectClass'][]= "trustAccount";
-      $this->attrs['trustModel']= $this->trustModel;
-      $this->attrs['accessTo']= array();
-      if ($this->trustModel == "byhost"){
-        foreach ($this->accessTo as $host){
-          $this->attrs['accessTo'][]= $host;
-        }
-      }
-    } else {
-      if ($this->was_trust_account){
-        $this->attrs['accessTo']= array();
-        $this->attrs['trustModel']= array();
-      }
-    }
-
-
 
     /* Remove objectClass for samba/phone support */
     $tmp= array();
@@ -979,6 +838,8 @@ class group extends plugin
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
     }
 
+    $this->trustModeDialog->dn = $this->dn;
+    $this->trustModeDialog->save();
 
     /* Check generated gidNumber, it may be used by another group. 
      */
@@ -1188,7 +1049,7 @@ class group extends plugin
 
             "sambaGroupType"    => _("Samba group type"),
             "sambaDomainName"   => _("Samba domain name"),
-            "trustModel"        => _("System trust"),
+            "accessTo"        => _("System trust"),
             "fonGroup"          => _("Phone pickup group"),
             "nagiosGroup"       => _("Nagios group"),
 
@@ -1207,9 +1068,10 @@ class group extends plugin
       $base_tmp = $this->base;
       plugin::multiple_save_object();
       plugin::save_object();
+      $this->trustModeDialog->multiple_save_object();
       $this->base = $base_tmp;
 
-      foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group","trustmode") as $attr){
+      foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group") as $attr){
         if(isset($_POST['use_'.$attr])){
           $this->multi_boxes[] = $attr;
         }
@@ -1242,23 +1104,6 @@ class group extends plugin
         $this->groupType= $_POST['groupType'];
       }
 
-      /* Trust mode - special handling */
-      if($this->acl_is_writeable("trustModel")){
-        if (isset($_POST['trustmode'])){
-          $saved= $this->trustModel;
-          if ($_POST['trustmode'] == "1"){
-            $this->trustModel= "fullaccess";
-          } elseif ($_POST['trustmode'] == "2"){
-            $this->trustModel= "byhost";
-          } else {
-            $this->trustModel= "";
-          }
-          if ($this->trustModel != $saved){
-            $this->is_modified= TRUE;
-          }
-        }
-      }
-
       /* Save fon attribute */
       if ($this->acl_is_writeable("fonGroup")){
         if (isset ($_POST['fon_group'])){
@@ -1274,16 +1119,12 @@ class group extends plugin
   function get_multi_edit_values()
   {
     $ret = plugin::get_multi_edit_values();
+    $ret = array_merge($ret,$this->trustModeDialog->get_multi_edit_values());
 
     foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group") as $attr){    
       if(in_array($attr,$this->multi_boxes)){
         $ret[$attr] = $this->$attr;
       }
-    }
-
-    if(in_array("trustmode",$this->multi_boxes)){
-      $ret['trustModel'] = $this->trustModel;
-      $ret['accessTo'] = $this->accessTo;
     }
 
     $ret['memberUid'] = $this->memberUid;
@@ -1302,6 +1143,7 @@ class group extends plugin
   function init_multiple_support($attrs,$all)
   {
     plugin::init_multiple_support($attrs,$all);
+    $this->trustModeDialog->init_multiple_support($attrs,$all);
 
     $this->memberUid = array();
     $this->memberUid_used_by_some = array();
@@ -1337,13 +1179,22 @@ class group extends plugin
         $this->memberUid[] = $source['memberUid'][$i];
       }
     }
-    $this->accessTo = array();
-    if (isset($source['accessTo'])){
-      for ($i= 0; $i<$source['accessTo']['count']; $i++){
-        $tmp= $source['accessTo'][$i];
-        $this->accessTo[$tmp]= $tmp;
-      }
-    }
+  }
+
+
+  function set_acl_base($base)
+  {
+    plugin::set_acl_base($base);
+    $this->trustModeDialog->set_acl_base($base);
+  }
+
+
+  /*! \brief  Enables multiple support for this plugin
+   */
+  function enable_multiple_support()
+  {
+    plugin::enable_multiple_support();
+    $this->trustModeDialog->enable_multiple_support();
   }
 
 
@@ -1363,6 +1214,7 @@ class group extends plugin
       $users[$uid] = $uid;
     }
     plugin::set_multi_edit_values($attrs);
+    $this->trustModeDialog->set_multi_edit_values($attrs);
     $this->memberUid = $users;
   }
 
