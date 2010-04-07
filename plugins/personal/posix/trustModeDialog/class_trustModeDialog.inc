@@ -26,7 +26,23 @@ class trustModeDialog extends plugin
 
         }
         $this->initially_was_account = $this->is_account;
+    }
 
+    public function PrepareForCopyPaste($source)
+    {
+        $this->accessTo = array();
+        $this->trustModel= "";
+        $this->is_account = FALSE;
+        if(isset($source['trustModel'][0])){
+            $this->is_account = TRUE;
+            $this->trustModel= $source['trustModel'][0];
+            if (isset($source['accessTo'])){
+                for ($i= 0; $i<$source['accessTo']['count']; $i++){
+                    $tmp= $source['accessTo'][$i];
+                    $this->accessTo[$tmp]= $tmp;
+                }
+            }
+        }
     }
 
     public function setAcl($acl)
