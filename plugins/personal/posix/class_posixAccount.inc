@@ -109,7 +109,7 @@ class posixAccount extends plugin
     /* Load bases attributes */
     plugin::plugin($config, $dn, $parent);
 
-    $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, $parent, 'users/posixAccount');
+    $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, $parent);
     $this->trustModeDialog->setAcl('users/posixAccount');
 
     /*  If gotoLastSystemLogin is available read it from ldap and create a readable
