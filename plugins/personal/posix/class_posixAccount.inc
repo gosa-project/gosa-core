@@ -1259,6 +1259,8 @@ class posixAccount extends plugin
   {
     plugin::PrepareForCopyPaste($source);
 
+    $this->trustModeDialog->PrepareForCopyPaste($source);
+
     /* Avoid using the same gid/uid number as source user 
        empty numbers to enforce new ones. */
     $this->savedUidNumber = "";
