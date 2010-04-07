@@ -46,7 +46,7 @@ class divSelectBox {
 
   function DrawList(){
     $s_return  = "";
-    $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:100%;margin-right:0px;\"></div>\n";
+    $s_return .= "<div style=\"height:2px; overflow:hidden;width:100%;margin-right:0px;\"></div>\n";
     $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;height:".$this->height.";width:100%\">\n";
     $s_return .= "<div style=\"overflow: auto;width:100%;height:".($this->height)."px;\">\n";
     $s_return .= "<table ".
@@ -57,9 +57,7 @@ class divSelectBox {
                     "height:".($this->height-2)."px;".
                     "padding-right:1px; ".
                     "padding-bottom:2px; ".
-                    "border-left:solid 2px; ".
-                    "border-top:solid 0px; ".
-                    "border-color:#888888; ".
+                    "border:solid 2px #FF0000; ".
                     "'>\n";
     $s_return.=$this->_generatePage();
     $s_return.= "</table></div></div>";
