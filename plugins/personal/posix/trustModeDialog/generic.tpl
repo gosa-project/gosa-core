@@ -4,7 +4,7 @@
 
 {if !$multiple_support}{t}Trust mode{/t}&nbsp;
  {render acl=$trustmodeACL}
-  <select name="trustmode" id="trustmode" size=1   onChange="changeSelectState('trustmode', 'wslist');   changeSelectState('trustmode', 'add_ws');   changeSelectState('trustmode', 'del_ws');">
+  <select name="trustmode" id="trustmode" size=1   onChange="changeSelectState('trustmode', 'add_ws');   changeSelectState('trustmode', 'del_ws');">
    {html_options options=$trustmodes selected=$trustmode}
   </select>
  {/render}
@@ -27,7 +27,7 @@
  
  <div {if !$use_trustmode} style="display: none;" {/if}id="div_trustmode">
  {render acl=$trustmodeACL}
-  <select name="trustmode" id="trustmode" size=1 onChange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');">
+  <select name="trustmode" id="trustmode" size=1 onChange="changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');">
    {html_options options=$trustmodes selected=$trustmode}
   </select>
  {/render}
