@@ -7,6 +7,8 @@ class trustModeDialog extends plugin
     public $trustModel  = "";
     public $trustSelect = NULL;
 
+    private $trustList = NULL;
+
     function __construct(&$config, $dn, $parent = NULL)
     {
         plugin::plugin($config, $dn, $parent);
@@ -25,7 +27,23 @@ class trustModeDialog extends plugin
             }
 
         }
+
         $this->initially_was_account = $this->is_account;
+
+        $lData = array();
+        foreach($this->accessTo as $key => $cn){
+            $lData[$cn] = array('data' => $this->converCnToType($cn));
+        }
+
+        $this->trustList = new sortableListing($this->accessTo, $lData);
+        $this->trustList->setDeleteable(true);
+        $this->trustList->setEditable(false);
+        $this->trustList->setWidth("100%");
+        $this->trustList->setHeight("100px");
+        $this->trustList->setColspecs(array('20px','*'));
+        
+        $this->trustList->setDefaultSortColumn(0);
+
     }
 
     public function PrepareForCopyPaste($source)
@@ -45,6 +63,35 @@ class trustModeDialog extends plugin
         }
     }
 
+    public function converCnToType($cn)
+    {
+        if(isset($this->typeCache[$cn])){
+            return($this->typeCache[$cn]);
+        }
+
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->search("(&(|(objectClass=gotoTerminal)(objectClass=gotoWorkstation)".
+                "(objectClass=goServer))(cn=".$cn."))", array("objectClass", "description"));
+        $this->typeCache[$cn] = array("",$cn,"");
+        if($ldap->count() != 0){
+            $attrs = $ldap->fetch();
+            $img = $desc = "";
+            if(in_array("gotoWorkstation",$attrs['objectClass'])){
+                $img = image('plugins/systems/images/select_workstation.png'); 
+            }elseif(in_array("gotoTerminal",$attrs['objectClass'])){
+                $img = image('plugins/systems/images/select_terminal.png'); 
+            }elseif(in_array("goServer",$attrs['objectClass'])){
+                $img = image('plugins/systems/images/select_server.png'); 
+            }
+            if(isset($attrs['description'][0])) {
+                $desc = $attrs['description'][0];
+            }
+            $this->typeCache[$cn] = array($img,$cn,$desc);
+        }
+        return($this->typeCache[$cn]);
+    }
+
     public function setAcl($acl)
     {
         $this->acl = $acl;
@@ -54,6 +101,9 @@ class trustModeDialog extends plugin
     {
         // Call parent
         plugin::execute();
+
+        $this->trustList->setAcl($this->getacl("accessTo"));
+        $this->trustList->save_object();
 
         // Allow to select trusted machines from a list
         if (isset($_POST["add_ws"])){
@@ -75,20 +125,23 @@ class trustModeDialog extends plugin
                 $headpage = $this->trustSelect->getHeadpage();
                 foreach($trusts['targets'] as $id){
                     $attrs = $headpage->getEntry($id);
-                    $this->accessTo[$attrs['cn'][0]]= $attrs['cn'][0];
+                    $cn = $attrs['cn'][0];
+                    $this->accessTo[$cn]=$cn;
+                    $this->trustList->addEntry($cn,
+                            array('data'=> $this->converCnToType($cn)), 
+                            $attrs['cn'][0]);
                 }
-                ksort($this->accessTo);
                 $this->is_modified= TRUE;
+                $this->trustList->update();
             }
             $this->trustSelect= NULL;
             $this->dialog= FALSE;
         }
 
         // Remove machine from trusted ones.
-        if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
-            foreach($_POST['workstation_list'] as $name){
-                unset ($this->accessTo[$name]);
-            }
+        $actionL = $this->trustList->getAction();
+        if ($actionL['action'] == "delete"){
+            $this->accessTo = $this->trustList->getMaintainedData();
             $this->is_modified= TRUE;
         }
 
@@ -127,8 +180,9 @@ class trustModeDialog extends plugin
 
         $smarty->assign("accessTo",$this->accessTo);
 
-         $smarty->assign($smarty->assign("use_trustmode",in_array("trustmode", $this->multi_boxes)));
-         $smarty->assign("multiple_support" , $this->multiple_support_active);
+        $smarty->assign($smarty->assign("use_trustmode",in_array("trustmode", $this->multi_boxes)));
+        $smarty->assign("multiple_support" , $this->multiple_support_active);
+        $smarty->assign("trustList", $this->trustList->render());
         return($smarty->fetch(get_template_path("generic.tpl",TRUE, dirname(__FILE__))));
     }
 
@@ -254,7 +308,7 @@ class trustModeDialog extends plugin
                 $this->accessTo[$tmp]= $tmp;
             }
         }
-
+        $this->trustList->setListData($this->accessTo);
     }
 
 
