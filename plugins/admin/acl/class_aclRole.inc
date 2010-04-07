@@ -379,15 +379,12 @@ class aclrole extends acl
 
 
       /* Draw list */
-      $aclList= new divSelectBox("aclList");
-      $aclList->SetHeight(450);
-        $data = $lData = array();
+      $data = $lData = array();
     
       // Create a map of all used sections, this allows us to simply hide the remove button
       //  if no acl is configured for the given section
       // e.g. ';all;department/country;users/user;
       $usedList = ";".implode(array_keys($this->aclContents),';').";";
-
 
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){
