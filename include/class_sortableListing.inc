@@ -60,9 +60,27 @@ class sortableListing {
     // Save data to display
     $this->setListData($data, $displayData);
 
+    // Get list of used IDs 
+    if(!session::is_set('sortableListing_USED_IDS')){
+        session::set('sortableListing_USED_IDS',array());
+    }
+    $usedIds = session::get('sortableListing_USED_IDS');
+
     // Generate instance wide unique ID
-    $tmp= gettimeofday();
-    $this->id= 'l'.md5(microtime().$tmp['sec']);
+    $id = "";
+    while($id == "" || in_array($id, $usedIds)){
+
+        // Wait 1 msec to ensure that we definately get a new id
+        if($id != "") usleep(1);
+        $tmp= gettimeofday();
+        $id =  'l'.md5(microtime().$tmp['sec']);
+    }
+
+    // Only keep the last 10 list IDsi
+    $usedIds = array_slice($usedIds, count($usedIds) -10, 10);
+    $usedIds[] = $id;
+    session::set('sortableListing_USED_IDS',$usedIds);
+    $this->id = $id;
 
     // Set reorderable flag
     $this->reorderable= $reorderable;
