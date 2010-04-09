@@ -314,7 +314,7 @@ class user extends plugin
     if(preg_match("/ editManager/i", " ".implode(array_keys($_POST),' ')." ")){
       $this->dialog = new singleUserSelect($this->config, get_userinfo());
     }
-    if($this->dialog && count($this->dialog->detectPostActions())){
+    if($this->dialog instanceOf singleUserSelect && count($this->dialog->detectPostActions())){
       $users = $this->dialog->detectPostActions();
       if(isset($users['targets']) && count($users['targets'])){
 
@@ -329,7 +329,7 @@ class user extends plugin
     if(isset($_POST['add_users_cancel'])){
       $this->dialog = NULL;
     }
-    if($this->dialog) return($this->dialog->execute()); 
+    if($this->dialog instanceOf singleUserSelect) return($this->dialog->execute()); 
 
 
     $smarty= get_smarty();
@@ -362,26 +362,6 @@ class user extends plugin
         return $output;
       }
       $this->dialog= false;
-    }
-
-    /* Dialog handling */
-    if(is_object($this->dialog)){
-      /* Must be called before save_object */
-      $this->dialog->save_object();
-   
-      if($this->dialog->isClosed()){
-        $this->dialog = false;
-      }elseif($this->dialog->isSelected()){
-
-        /* check if selected base is allowed to move to / create a new object */
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$this->dialog->isSelected()])){
-          $this->base = $this->dialog->isSelected();
-        }
-        $this->dialog= false;
-      }else{
-        return($this->dialog->execute());
-      }
     }
 
     /* Want password method editing? */
