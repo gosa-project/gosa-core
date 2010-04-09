@@ -45,7 +45,7 @@
 
     <objectType>
       <label>Organization</label>
-      <objectClass>department</objectClass>
+      <objectClass>organization</objectClass>
       <category>department</category>
       <class>organization</class>
       <image>plugins/departments/images/organization.png</image>
