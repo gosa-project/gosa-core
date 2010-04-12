@@ -2973,7 +2973,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   // Get all available encryption Methods
 
   // NON STATIC CALL :)
-  $methods = new passwordMethod(session::get('config'));
+  $methods = new passwordMethod(session::get('config'),$dn);
   $available = $methods->get_available_methods();
 
   // read current password entry for $dn, to detect the encryption Method
@@ -3003,7 +3003,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   } else {
     // User MD5 by default
     $hash= "md5";
-    $test = new  $available['md5']($config);
+    $test = new  $available['md5']($config, $dn);
   }
 
   if($test instanceOf passwordMethod){
