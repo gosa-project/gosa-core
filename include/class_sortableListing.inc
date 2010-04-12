@@ -89,6 +89,10 @@ class sortableListing {
     }
   }
 
+  public function setReorderable($bool)
+  {
+    $this->reorderable= $bool;
+  }
    
   public function setDefaultSortColumn($id)
   {
