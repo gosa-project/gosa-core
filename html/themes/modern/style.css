@@ -908,6 +908,22 @@ div.sortableListContainer {
   border-left:1px solid #CCC;
 }
 
+.sortableListContainer tr:nth-child(odd) {
+  background-color:#FFF;
+}
+
+.sortableListContainer tr:nth-child(even) {
+  background-color:#F5F5F5;
+}
+
+.sortableListContainer tr:last-child {
+  background-color:#FFF;
+}
+
+.sortableListContainer tr td:last-child {
+  padding-right:20px;
+}
+
 tr.sortableListItem {
   background-color:#FFF;
   cursor:move;
