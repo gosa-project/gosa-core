@@ -608,7 +608,7 @@ class user extends plugin
     $is_configurable= FALSE;
     $hashes = $temp['name'];
     if(isset($temp[$this->pw_storage])){
-      $test= new $temp[$this->pw_storage]($this->config);
+      $test= new $temp[$this->pw_storage]($this->config, $this->dn);
       $is_configurable= $test->is_configurable();
     }else{
       new msg_dialog(_("Password method"),_("The selected password method is no longer available."),WARNING_DIALOG);
