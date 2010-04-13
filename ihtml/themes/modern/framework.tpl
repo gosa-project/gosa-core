@@ -7,7 +7,7 @@
        <div class='logout-label'>
          <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>
           <div style='cursor:pointer' onClick="
-                    return question('Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?',
+                    return question('{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}',
             'logout.php?forcedlogout');">{image path="{$logoutimage}"}</div>
           <input type='hidden' name='forcedlogout' value='1'>
           <input type="hidden" name="php_c_check" value="1">
