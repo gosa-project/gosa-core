@@ -1465,7 +1465,7 @@ class plugin
       /* Restore selected snapshot */
       if(preg_match("/^RestoreSnapShot_/",$name) && $once){
         $once = false;
-        $entry = base64_decode(preg_replace("/^RestoreSnapShot_([^_]*)_[xy]$/i","\\1",$name));
+        $entry = base64_decode(preg_replace("/^RestoreSnapShot_(.*)$/i","\\1",$name));
 
         if(!empty($entry) && $ui->allow_snapshot_restore($this->dn,$this->parent->acl_module)){
           $this->restore_snapshot($entry);

@@ -416,7 +416,7 @@ class management
       $once =TRUE;
       if(preg_match("/^RestoreSnapShot_/",$name) && $once){
         $once = FALSE;
-        $entry = base64_decode(preg_replace("/^RestoreSnapShot_([^_]*)_[xy]$/i","\\1",$name));
+        $entry = base64_decode(preg_replace("/^RestoreSnapShot_(.*)$/i","\\1",$name));
         $action['action'] = "restoreSnapshot";
         $action['targets'] = array($entry);
       }

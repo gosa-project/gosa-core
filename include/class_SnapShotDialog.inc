@@ -78,7 +78,7 @@ class SnapShotDialog extends plugin
             if((preg_match("/^RemoveSnapShot_/",$name)) && ($once)){
                 $once = false;
                 $entry = preg_replace("/^RemoveSnapShot_/","",$name);
-                $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
+                $entry = base64_decode($entry);
                 $found = false;
                 foreach($this->last_list as $t_stamp => $obj){
                     if($obj['dn'] == $entry){
@@ -147,7 +147,11 @@ class SnapShotDialog extends plugin
                 $time_stamp 	= date(_("Y-m-d, H:i:s"),preg_replace("/\-.*$/","",$entry['gosaSnapshotTimestamp'][0]));
                 $display_data 	= $entry['description'][0];
                 $data[$entry['dn']] = $entry;
-                $lData[$entry['dn']] = array('data'=>array($time_stamp,htmlentities (utf8_decode(LDAP::fix($display_data))),str_replace("%KEY",base64_encode($entry['dn']),$actions)));
+                $lData[$entry['dn']] = array('data'=>
+                        array(
+                            $time_stamp,
+                            htmlentities(utf8_decode(LDAP::fix($display_data))),
+                            str_replace("%KEY",base64_encode($entry['dn']), $actions)));
             }		
 
             $this->snapList->setListData($data, $lData);
