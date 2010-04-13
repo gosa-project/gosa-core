@@ -90,8 +90,8 @@ class SnapShotDialog extends plugin
                 if($found){
                     $this->del_dn 	= $entry;
                     $smarty= get_smarty();
-                    $smarty->assign("intro", sprintf(_("You're about to delete the snapshot '%s'."), LDAP::fix($this->del_dn)));
-                    return($smarty->fetch (get_template_path('remove.tpl')));
+                    $smarty->assign("info", sprintf(_("You're about to delete the snapshot '%s'."), LDAP::fix($this->del_dn)));
+                    return($smarty->fetch (get_template_path('removeEntries.tpl')));
                 }
             }
         }
