@@ -20,8 +20,6 @@
   {$LIST}
 </div>
 
-<input type="hidden" name="ignore">
-
 <br>
 <div class="plugin-actions">
   <button type='submit' name='add_groups_finish'>{msgPool type=addButton}</button>
@@ -29,4 +27,3 @@
 </div>
 
 
-<input type="hidden" name="ignore">
