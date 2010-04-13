@@ -17,7 +17,8 @@
     
     <!-- Formular data, containing a table to center fields -->
     <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
-     <table summary="" style='vertical-align:middle; text-align:left;' cellspacing='7' align='center'>
+     <table summary="">
+
       <tr>
         <td>
           <p> {t}Old password{/t}</p>
@@ -48,8 +49,7 @@
       <tr>
        <td colspan='2' style='text-align:center;'>
 	     <br />
-	  <input type='submit' name='changepassword' value='{t}Change password{/t}'
-	  	 title='{t}Click here to change your password{/t}'>
+	  <button type='submit' name='changepassword' title='{t}Click here to change your password{/t}'>{t}Change password{/t}</button>
 	     </td>
       </tr>
      </table>

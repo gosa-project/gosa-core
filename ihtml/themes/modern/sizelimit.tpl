@@ -11,7 +11,8 @@
 <input type="radio" name="action" value="newlimit">{$limit_message}
 
 <p class="plugbottom">
- <input type=submit name="set_size_action" value="{t}Set{/t}">
+ <button type='submit' name='set_size_action'>{t}Set{/t}</button>
+
 </p>
 
 <input type="hidden" name="ignore">
