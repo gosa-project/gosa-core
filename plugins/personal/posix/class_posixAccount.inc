@@ -251,6 +251,7 @@ class posixAccount extends plugin
       $this->view_logged = TRUE;
       new log("view","users/".get_class($this),$this->dn);
     }
+    $this->dialog = FALSE;
 
     if($this->multiple_support_active){
       $this->is_account = TRUE;
@@ -304,13 +305,11 @@ class posixAccount extends plugin
     // Display dialog to allow selection of groups
     if (isset($_POST['edit_groupmembership'])){
       $this->groupSelect = new groupSelect($this->config,get_userinfo());
-      $this->dialog= TRUE;
     }
 
     // Cancel group dialog
     if (isset($_POST['add_groups_cancel'])){
       $this->groupSelect= NULL;
-      $this->dialog= FALSE;
     }
 
     // Add groups selected in groupSelect dialog to ours.
@@ -321,7 +320,6 @@ class posixAccount extends plugin
         $this->is_modified= TRUE;
       }
       $this->groupSelect= NULL;
-      $this->dialog= FALSE;
     }
 
     // Remove groups from currently selected groups.
@@ -343,12 +341,12 @@ class posixAccount extends plugin
         return($trustModeDialog);
         
     }
-    $this->dialog = FALSE;
     $smarty->assign("trustModeDialog" , $trustModeDialog);
 
 
     /* Manage group add dialog */
     if ($this->groupSelect){
+      $this->dialog = TRUE;
 
       // Build up blocklist
       session::set('filterBlacklist', array('dn' => array_keys($this->groupMembership)));
@@ -363,7 +361,6 @@ class posixAccount extends plugin
         pathNavigator::registerPlugin("SSH keys");
         return $result;
       }
-      $this->dialog= false;
     }
 
 
