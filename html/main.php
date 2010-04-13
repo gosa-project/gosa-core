@@ -268,7 +268,7 @@ if (isset($_GET['reset'])){
 
 /* show web frontend */
 $smarty->assign ("logo", image(get_template_path("images/logo.png")));
-$smarty->assign ("logout", image(get_template_path("images/btn-logout.png"), "log-out", _("Log out")));
+$smarty->assign ("logoutimage", get_template_path("images/btn-logout.png"));
 $smarty->assign ("date", date("l, dS F Y H:i:s O"));
 $smarty->assign ("lang", preg_replace('/_.*$/', '', $lang));
 $smarty->assign ("must", "<span class='required'>*</span>");
