@@ -45,6 +45,17 @@ class SnapShotDialog extends plugin
         plugin::plugin($config,$dn);
         $this->parent 	= &$parent;
         $this->ui 		  = get_userinfo();
+
+        // Prepare lists
+        $this->snapList = new sortableListing();
+        $this->snapList->setDeleteable(false);
+        $this->snapList->setEditable(false);
+        $this->snapList->setWidth("100%");
+        $this->snapList->setHeight("200px");
+        $this->snapList->setHeader(array(_("Date"), _("Name") ));
+        $this->snapList->setColspecs(array('140px','*','60px'));
+        $this->snapList->setDefaultSortColumn(0);
+
     }
 
 
@@ -111,8 +122,7 @@ class SnapShotDialog extends plugin
                 $tmp = $this->Available_SnapsShots($this->dn,true);
             }
 
-            $DivListSnapShots = new divSelectBox("SnapShotRestore");
-            $DivListSnapShots->SetHeight(180);
+            $this->snapList->setAcl('rwcdm');
 
             $list_of_elements = array();			
 
@@ -129,28 +139,20 @@ class SnapShotDialog extends plugin
 
             /* Add Elements to divlist */	
             $this->last_list = $list_of_elements;
+
+            $data = $lData = array();
             foreach($list_of_elements as $entry){
-
-                $actions= "<input type='image' src='images/lists/restore.png' name='RestoreSnapShot_%KEY' 
-                    class='center' title='"._("Restore snapshot")."'>&nbsp;";
-                $actions.= "<input type='image' src='images/lists/trash.png' name='RemoveSnapShot_%KEY' 
-                    class='center' title='"._("Remove snapshot")."'>&nbsp;";
-
+                $actions=  image('images/lists/restore.png','RestoreSnapShot_%KEY',_("Restore snapshot"));
+                $actions.= image('images/lists/trash.png','RemoveSnapShot_%KEY',_("Remove snapshot"));
                 $time_stamp 	= date(_("Y-m-d, H:i:s"),preg_replace("/\-.*$/","",$entry['gosaSnapshotTimestamp'][0]));
                 $display_data 	= $entry['description'][0];
-
-                if($this->display_all_removed_objects){
-                    $display_data.= " - ".$entry['gosaSnapshotDN'][0];
-                }
-
-                $field0 = array("string"=> $time_stamp , "attach"=> "style='vertical-align:top;width:120px;'");
-                $field1 = array("string"=> htmlentities (utf8_decode(LDAP::fix($display_data))), "attach"=> "");
-                $field2 = array("string"=> str_replace("%KEY",base64_encode($entry['dn']),$actions) , 
-                        "attach"=> "style='border-right:0px;vertical-align:top;width:40px;text-align:right;'");
-                $DivListSnapShots->AddEntry(array($field0,$field1,$field2));
+                $data[$entry['dn']] = $entry;
+                $lData[$entry['dn']] = array('data'=>array($time_stamp,htmlentities (utf8_decode(LDAP::fix($display_data))),str_replace("%KEY",base64_encode($entry['dn']),$actions)));
             }		
 
-            $smarty->assign("SnapShotDivlist",$DivListSnapShots->DrawList());	
+            $this->snapList->setListData($data, $lData);
+            $this->snapList->update();
+            $smarty->assign("SnapShotDivlist",$this->snapList->render());
             $smarty->assign("CountSnapShots",count($list_of_elements));
         }
 
