@@ -1,4 +1,4 @@
-<h2>{t}Copy & paste wizard{/t}</h2>
+<h3>{t}Copy & paste wizard{/t}</h3>
 
 <b>{$message}</b>
 <br>
@@ -16,19 +16,17 @@
 	<br>
 
 	<div style='text-align:right;width:100%;'>
-		<input type='submit' name='PerformCopyPaste' value='{t}Save{/t}'>&nbsp;
-	{if $type == "modified"}
-		<input type='submit' name='abort_current_cut-copy_operation' value='{t}Cancel{/t}'>
-	{/if}
-	
-		<input type='submit' name='abort_all_cut-copy_operations' value='{t}Cancel all{/t}'>
+		<button type='submit' name='PerformCopyPaste'>{t}Save{/t}</button>
+	    {if $type == "modified"}
+		    <button type='submit' name='abort_current_cut-copy_operation'>{t}Cancel{/t}</button>
+    	{/if}
+		<button type='submit' name='abort_all_cut-copy_operations'>{t}Cancel all{/t}</button>
 	</div>
 	{/if}
 {else}
 	<hr>
-	<br>
-	<h2>{t}Operation complete{/t}</h2>
+	<h3>{t}Operation complete{/t}</h3>
 	<div style='text-align:right;width:100%;'>
-		<input type='submit' name='Back' value='{t}Finish{/t}'>&nbsp;
+		<button type='submit' name='Back'>{t}Finish{/t}</button>
 	</div>
 {/if}
