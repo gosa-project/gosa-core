@@ -244,13 +244,11 @@ class group extends plugin
     /* Add objects? */
     if (isset($_POST["edit_membership"]) && preg_match("/w/",$this->getacl("memberUid"))){
       $this->userSelect= new userSelect($this->config, get_userinfo());
-      $this->dialog= TRUE;
     }
 
     /* Add objects finished? */
     if (isset($_POST["add_users_cancel"])){
       $this->userSelect= NULL;
-      $this->dialog= FALSE;
     }
 
     /* Add user to group */
@@ -268,39 +266,17 @@ class group extends plugin
         }
       }
       $this->userSelect= NULL;
-      $this->dialog= FALSE;
-    }
-
-    /* Dialog handling */
-    if(is_object($this->dialog)){
-      /* Must be called before save_object */
-      $this->dialog->save_object();
-
-      if($this->dialog->isClosed()){
-        $this->dialog = false;
-      }elseif($this->dialog->isSelected()){
-
-        /* Check if selected base is valid */
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$this->dialog->isSelected()])){
-          $this->base = $this->dialog->isSelected();
-        }
-        $this->dialog= false;
-      }else{
-        return($this->dialog->execute());
-      }
     }
 
     $smarty= get_smarty();
-
+ 
     // Handle trust mode dialog
+    $this->dialog = FALSE;
     $trustModeDialog = $this->trustModeDialog->execute();
     if($this->trustModeDialog->trustSelect){
         $this->dialog = TRUE;
         return($trustModeDialog);
-
     }
-    $this->dialog = FALSE;
     $smarty->assign("trustModeDialog" , $trustModeDialog);
 
     $smarty->assign("usePrototype", "true");
@@ -319,6 +295,7 @@ class group extends plugin
 
     /* Manage object add dialog */
     if ($this->userSelect){
+      $this->dialog = TRUE;
       return($this->userSelect->execute());
     }
 
