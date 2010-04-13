@@ -26,4 +26,3 @@
   <button type='submit' name='add_users_cancel'>{msgPool type=cancelButton}</button>
 </div>
 
-<input type="hidden" name="ignore">
