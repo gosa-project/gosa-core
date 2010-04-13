@@ -25,4 +25,3 @@
   <button type=submit name="objectSelect_cancel">{msgPool type=cancelButton}</button>
 </div>
 
-<input type="hidden" name="ignore">
