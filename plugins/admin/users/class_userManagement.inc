@@ -23,7 +23,7 @@
 class userManagement extends management
 {
   var $plHeadline     = "Users";
-  var $plDescription  = "Manage users";
+  var $plDescription  = "Manage aspects of user accounts like generic, posix, samba and mail settings";
   var $plIcon  = "plugins/users/images/user.png";
 
   var $sn = "";
@@ -738,7 +738,7 @@ class userManagement extends management
     $label= "";
     if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
       if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
-        $label= _("Unlock account");
+        $label= _("Unlock account")."<rowClass:entry-locked/>";
       }else{
         $label= _("Lock account");
       }

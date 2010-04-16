@@ -60,7 +60,7 @@
 		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 						{image path='images/warning.png'}
 		{/if}
-			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
+			</td><td style='font-size: 1.1em;vertical-align:middle;font-weight:bold;'>{$s_Title}</td></tr>
 			</table>
 			</div>
 			<table summary='{t}Error message{/t}' 
@@ -108,14 +108,14 @@
 		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 						{image path='images/info.png'}
 		{/if}
-			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
+			</td><td style='font-size: 1.1em;vertical-align:middle; font-weight:bold;'>{$s_Title}</td></tr>
 		</table>
 		</div>
 
 			<table summary='{t}Error message{/t}' 
         style='z-index:250;width:100%; border-top: solid 1px #BBBBBB;' cellspacing=0 cellpadding=2 border=0>
 				<tr>
-					<td style='width:100%; padding:7px; padding-bottom:14px;'>
+					<td style='width:100%;padding:7px; padding-bottom:14px;'>
 						{$s_Message}
 						<br>
 					</td>

@@ -23,7 +23,7 @@
 class ogroupManagement extends management
 {
   var $plHeadline     = "Object groups";
-  var $plDescription  = "Manage object groups";
+  var $plDescription  = "Combine different types of objects to make use of this relationship";
   var $plIcon  = "plugins/ogroups/images/plugin.png";
 
   // Tab definition 

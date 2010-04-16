@@ -1,6 +1,7 @@
 <div class=plugin>
  <div class='inline-warning'>
-  {image path="images/warning.png" align="top"}&nbsp;{t}Attention{/t}
+  {image path="images/warning.png" align="top"}
+  <div class='inline-warning-text'>{t}Attention{/t}</div>
  </div>
 
  <hr>

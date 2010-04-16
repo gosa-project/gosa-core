@@ -23,7 +23,7 @@
 class groupManagement extends management
 {
   var $plHeadline     = "Groups";
-  var $plDescription  = "Group administration";
+  var $plDescription  = "Manage aspects of groups like members, posix, desktop, samba and mail settings";
   var $plIcon  = "plugins/groups/images/plugin.png";
 
   // Tab definition 

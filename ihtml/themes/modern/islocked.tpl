@@ -1,6 +1,7 @@
 <div class='plugin'>
  <div class='inline-warning'>
-   {image path="images/encrypted.png" align="top"}&nbsp;{t}Locking conflict detected{/t}
+  {image path="images/encrypted.png" align="top"}
+  <div class='inline-warning-text'>{t}Locking conflict detected{/t}</div>
  </div>
 
  <hr>

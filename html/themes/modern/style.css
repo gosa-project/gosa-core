@@ -94,17 +94,6 @@ h1, h3 {
   font-weight:bold;
 }
 
-/* Image with migration color */
-img, input[type=image] {
-  border:1px solid red;
-  background-color:rgba(255,0,0,0.2);
-}
-
-/* Input with migration color */
-input[type=submit] {
-  border:1px solid red;
-}
-
 .required{
   font-size:xx-small;
   vertical-align:top;
@@ -780,6 +769,14 @@ div.listContainer {
   background-color:#F5F5F5;
 }
 
+.listScrollContent tr.entry-locked:nth-child(odd) {
+  background-color:#FFA;
+}
+
+.listScrollContent tr.entry-locked:nth-child(even) {
+  background-color:#F5F5AA;
+}
+
 .listScrollContent tr:last-child {
   background-color:#FFF;
 }
@@ -1360,6 +1357,10 @@ background-image:none;
   text-align:bottom;
 }
 
+.inline-warning-text {
+  display:inline-block;
+  padding-top:13px;
+}
 
 /* Progress */
 
@@ -1448,11 +1449,12 @@ div.progress {
 .login-input {
   position:absolute;
   left:10em;
-  right:5px;
+  right:30px
 }
 
 .login-input input{
-  width:92%;
+  position:absolute;
+  width:100%;
 }
 
 .login-inline-message {

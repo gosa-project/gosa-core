@@ -8,7 +8,7 @@
     <multiSelect>true</multiSelect>
     <template>dep-list.tpl</template>
     <module>departments</module>
-    <label>List of departments</label>
+    <label>List of structural objects</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>

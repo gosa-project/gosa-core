@@ -22,8 +22,8 @@
 
 class departmentManagement extends management
 {
-  var $plHeadline     = "Departments";
-  var $plDescription  = "Manage Departments";
+  var $plHeadline     = "Directory structure";
+  var $plDescription  = "Manage organizations, organizational units, localities, countries and more";
   var $plIcon         = "plugins/departments/images/plugin.png";
 
   // Tab definition 

@@ -388,8 +388,16 @@ class listing {
     // Complete list by sorting entries for _sort$index and appending them to the output
     $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
     foreach ($entryIterator as $row => $entry){
-      $result.="<tr>\n";
-      $result.= $entry['_rendered'];
+
+      // Apply custom class to row?
+      if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
+        $result.="<tr class='".$matches[1]."'>\n";
+        $result.= preg_replace("/<rowClass[^>]+>/", '', $entry['_rendered']);
+      } else {
+        $result.="<tr>\n";
+        $result.= $entry['_rendered'];
+      }
+
       $result.="</tr>\n";
       $alt++;
     }
@@ -409,6 +417,7 @@ class listing {
           $result.= "<td class='list1nohighlight' style='border-right:0;$emptyListStyle'>&nbsp;</td>";
         }
       }
+
       $result.= "</tr>";
     }
 
