@@ -1285,7 +1285,7 @@ class acl extends plugin
           "plCategory"    => array("acl" => array("description"  => _("ACL")."&nbsp;&amp;&nbsp;"._("ACL roles"),
                                                           "objectClass"  => array("gosaAcl","gosaRole"))),
           "plProvidedAcls"=> array(
-            "gosaAclEntry"          => _("Acl entries")
+           "gosaAclEntry"          => _("ACL Entries")
 //            "description" => _("Role description")
             )
 

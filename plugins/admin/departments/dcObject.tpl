@@ -6,7 +6,7 @@
  <tr>
    <td style="width:50%">
      <h3>{t}Properties{/t}</h3>
-     <table summary="{t}Prpperties{/t}">
+     <table summary="{t}Properties{/t}">
       <tr>
        <td><LABEL for="dc">{t}Locality name{/t}</LABEL>{$must}</td>
        <td>

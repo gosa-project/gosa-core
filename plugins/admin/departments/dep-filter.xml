@@ -32,7 +32,7 @@
 
   <search>
     <tag>ou</tag>
-    <label>Organizational unit</label>
+    <label>Organizational Unit</label>
     <query>
       <backend>DEPARTMENT</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(objectClass=organizationalUnit)(ou=$))</filter>
