@@ -2216,38 +2216,6 @@ function in_array_ics($value, $items)
 }
 
 
-/*! \brief Generate a clickable alphabet */
-function generate_alphabet($count= 10)
-{
-  $characters= _("*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
-  $alphabet= "";
-  $c= 0;
-
-  /* Fill cells with charaters */
-  for ($i= 0, $l= mb_strlen($characters, 'UTF8'); $i<$l; $i++){
-    if ($c == 0){
-      $alphabet.= "<tr>";
-    }
-
-    $ch = mb_substr($characters, $i, 1, "UTF8");
-    $alphabet.= "<td><a class=\"alphaselect\" href=\"main.php?plug=".
-      validate($_GET['plug'])."&amp;search=".$ch."\">&nbsp;".$ch."&nbsp;</a></td>";
-
-    if ($c++ == $count){
-      $alphabet.= "</tr>";
-      $c= 0;
-    }
-  }
-
-  /* Fill remaining cells */
-  while ($c++ <= $count){
-    $alphabet.= "<td>&nbsp;</td>";
-  }
-
-  return ($alphabet);
-}
-
-
 /*! \brief Removes malicious characters from a (POST) string. */
 function validate($string)
 {
