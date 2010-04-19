@@ -304,7 +304,14 @@ class listing {
       if (preg_match('/Konqueror/i', $_SERVER['HTTP_USER_AGENT'])){
         $width= "28px";
       }
-      $result.= "<td class='listheader' style='text-align:center;padding:0;width:$width;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>\n";
+      $result.= "<td class='listheader' style='text-align:center;padding:0;width:$width;'>";
+      if($this->multiSelect){
+          $result.= "<input type='checkbox' id='select_all' name='select_all' 
+              title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >";
+      }else{
+          $result.= "&nbsp;";
+      }
+      $result.="</td>\n";
     }
     foreach ($this->header as $header) {
       $result.= $header;
