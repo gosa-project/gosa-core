@@ -75,10 +75,6 @@ class posixAccount extends plugin
   var $ssh= null;
   var $sshAcl= "";
 
-  var $GroupRegex= "*";
-  var $GroupUserRegex= "*";
-  var $SubSearch= false;
-
   var $view_logged= false;
 
   /* attribute list for save action */
@@ -494,7 +490,6 @@ class posixAccount extends plugin
     // Add SSH button if available
     $smarty->assign("sshPublicKey", $this->ssh?1:0);
 
-    $smarty->assign("apply", apply_filter());
     $smarty->assign("multiple_support" , $this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
@@ -603,29 +598,6 @@ class posixAccount extends plugin
         $this->mustchangepassword = FALSE;
       }
     }
-
-    /* Get regex from alphabet */
-    if(isset($_GET['search'])){
-      $this->GroupRegex = $_GET['search']."*";
-    }
-
-    /* Check checkboxes and regexes */
-    if(isset($_POST["PosixGroupDialogPosted"])){
-
-      if(isset($_POST['SubSearch']) && ($_POST['SubSearch'])){
-        $this->SubSearch = true;
-      }else{
-        $this->SubSearch = false;
-      }
-      if(isset($_POST['guser'])){
-        $this->GroupUserRegex = $_POST['guser'];
-      }
-      if(isset($_POST['regex'])){
-        $this->GroupRegex = $_POST['regex'];
-      }
-    }
-    $this->GroupRegex = preg_replace("/\*\**/","*",$this->GroupRegex);
-    $this->GroupUserRegex = preg_replace("/\*\**/","*",$this->GroupUserRegex);
   }
 
 
