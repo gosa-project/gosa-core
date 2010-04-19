@@ -5,7 +5,7 @@
     <departmentBrowser>true</departmentBrowser>
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
-    <multiSelect>false</multiSelect>
+    <singleSelect>true</singleSelect>
     <template>../plugins/admin/groups/singleUserSelect/singleUser-list.tpl</template>
     <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
@@ -21,7 +21,7 @@
   </definition>
 
   <table>
-    <layout>|20px;c||||80px;r|</layout>
+    <layout>|20px;c||||</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -60,24 +60,12 @@
       <export>true</export>
     </column>
 
-    <column>
-      <label>Actions</label>
-      <value>%{filter:actions(dn,row,objectClass)}</value>
-    </column>
-
-
   </table>
 
   <actionmenu>
   </actionmenu>
 
   <actiontriggers snapshot="false" copypaste="false">
-    <action>
-      <name>selectUser</name>
-      <type>entry</type>
-      <image>images/lists/edit.png</image>
-      <label>Select user</label>
-    </action>
   </actiontriggers>
 
 </list>

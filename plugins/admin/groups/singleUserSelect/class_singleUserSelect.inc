@@ -49,6 +49,14 @@ class singleUserSelect extends management
     $headpage->setFilter($filter);
     parent::__construct($config, $ui, "users", $headpage);
   }
+
+   // Inject user actions
+  function detectPostActions()
+  {
+      $action = management::detectPostActions();
+      if(isset($_POST['add_users_save'])) $action['action'] = "edit";
+      return($action);;
+  }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

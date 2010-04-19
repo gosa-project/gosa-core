@@ -23,6 +23,7 @@
 <div class="clear"></div>
 
 <div class="plugin-actions">
+  <button type='submit' name='add_users_save'>{msgPool type=okButton}</button>
   <button type='submit' name='add_users_cancel'>{msgPool type=cancelButton}</button>
 </div>
 
