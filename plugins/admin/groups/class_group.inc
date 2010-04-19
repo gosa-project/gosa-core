@@ -344,16 +344,8 @@ class group extends plugin
       $smarty->assign("baseSelect",false);
     }
 
-    /* Show main page */
-    $smarty->assign("alphabet", generate_alphabet(10));
-    $smarty->assign("search_image", get_template_path('images/lists/search.png'));
-    $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-    $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
-    $smarty->assign("deplist", $this->config->idepartments);
-
     /* Multiple edit handling */
     $smarty->assign("multiple_support",$this->multiple_support_active);
-
     $smarty->assign("memberUid_All",$this->memberUid);
     $smarty->assign("memberUid_Some",$this->memberUid_used_by_some);
 
