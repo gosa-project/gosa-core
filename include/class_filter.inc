@@ -155,7 +155,7 @@ class filter {
   {
     $size= 30;
     $maxlength= 30;
-    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='".$value."'>";
+    $result= "<input class='filter_textfield' placeholder='"._("Search")."...' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='".$value."'>";
     if ($element && isset($element['autocomplete'])) {
       $frequency= "0.5";
       $characters= "1";
