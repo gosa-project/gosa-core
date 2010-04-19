@@ -168,18 +168,6 @@ class group extends plugin
       $this->oldgroupType= $this->groupType;
     }
 
-    /* Get global filter config */
-    if (!session::is_set("gufilter")){
-      $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
-      $gufilter= array( "dselect"       => $base,
-          "regex"           => "*");
-      session::set("gufilter", $gufilter);
-    }
-    $gufilter= session::get('gufilter');
-    $gufilter['SubSearchGroup'] = false;
-    session::set('gufilter',$gufilter);
-  
     if ($this->dn == "new"){
       if(session::is_set('CurrentMainBase')){
         $this->base = session::get('CurrentMainBase');
@@ -193,15 +181,6 @@ class group extends plugin
       $this->base =preg_replace ("/^[^,]+,".preg_quote(get_groups_ou(), '/')."/i","",$this->dn);
     }
     $this->orig_base = $this->base;
-
-    /* Get global filter config */
-    if (!session::is_set("sysfilter")){
-      $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
-      $sysfilter= array( "depselect"       => $base,
-          "regex"           => "*");
-      session::set("sysfilter", $sysfilter);
-    }
 
     /* This is always an account */
     $this->is_account= TRUE;
@@ -462,14 +441,9 @@ class group extends plugin
   /* Reload data */
   function reload($silent = FALSE)
   {
-    /* Fix regex string */
-    $gufilter = session::get("gufilter");
-    $regex    = normalizeLdap($gufilter['regex']);
-    $MaxUser  = $this->OnlyShowFirstEntries;
-
     /* Prepare ldap link */
     $ldap= $this->config->get_ldap_link();
-    $ldap->cd($gufilter['dselect']);
+    $ldap->cd($this->config->current['BASE']);
 
 
     /* Resolve still unresolved memberuids to fill the list with sn/giveName attributes 
@@ -509,49 +483,10 @@ class group extends plugin
         $this->members[$value] = $value; 
       }  
     }
-
-    /* Create display list of users matching regex & filter 
-     */
-    $this->displayUsers = array();
-    $filter = "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$))(|(uid=".$regex.")(sn=".$regex.")(givenName=".$regex.")))";
-
-    /* Search in current tree or within subtrees depending on the checkbox from filter section */
-    if($gufilter['SubSearchGroup']){
-      $flag = GL_SIZELIMIT | GL_SUBSEARCH;
-      $base = $gufilter['dselect'];
-    }else{
-      $flag = GL_SIZELIMIT ;
-      $base = get_people_ou().$gufilter['dselect'];
-    }
-    $i = 0;
   
-
-    $res = get_list($filter,"users",$base,array("dn", "uid", "sn", "givenName"),$flag);
-
-    /* Fetch all users and skip already used users */
-    foreach($res as $attrs){
-      if(in_array($attrs['uid'][0], $this->memberUid)) {
-        continue;
-      }
-      $i ++;
-      if($i > $MaxUser) {
-        break;
-      }
-      $this->dnMapping[$attrs['uid'][0]]= $attrs["dn"];
-      $this->allusers[$attrs['uid'][0]]     = $this->createResultName($attrs);
-      $this->displayUsers[$attrs['uid'][0]] = $this->createResultName($attrs);
-    }
-  
-    /* If more than max users are found, display a message to warn the user */
-    if($i == $MaxUser && !$silent){
-      msg_dialog::display(_("Configuration error"), sprintf(_("Search returned too many results. Not displaying more than %s entries!"), $MaxUser), ERROR_DIALOG);
-    }
-    
     /* Sort lists */
     natcasesort($this->members);
     reset($this->members);
-    natcasesort ($this->displayUsers);
-    reset ($this->displayUsers);
   }
 
 
