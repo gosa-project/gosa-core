@@ -28,6 +28,7 @@ class listing {
   var $departmentBrowser= false;
   var $departmentRootVisible= false;
   var $multiSelect= false;
+  var $singleSelect= false;
   var $template;
   var $headline;
   var $base;
@@ -160,7 +161,7 @@ class listing {
     $this->xmlData= $this->xmlData["list"];
 
     // Load some definition values
-    foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect", "baseMode") as $token) {
+    foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect","singleSelect", "baseMode") as $token) {
       if (isset($this->xmlData['definition'][$token]) &&
           $this->xmlData['definition'][$token] == "true"){
         $this->$token= true;
@@ -294,11 +295,11 @@ class listing {
     
     $result.= "<div class='listContainer' id='d_scrollbody' style='min-height:".($height+25)."px;'>\n";
     $result.= "<table summary='$this->headline' style='width:100%;table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
-    $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
+    $this->numColumns= count($this->colprops) + (($this->multiSelect|$this->singleSelect)?1:0);
 
     // Build list header
     $result.= "<thead class='fixedListHeader listHeaderFormat'><tr>\n";
-    if ($this->multiSelect) {
+    if ($this->multiSelect || $this->singleSelect) {
       $width= "24px";
       if (preg_match('/Konqueror/i', $_SERVER['HTTP_USER_AGENT'])){
         $width= "28px";
@@ -331,7 +332,7 @@ class listing {
         $result.="<tr>";
 
         // Render multi select if needed
-        if ($this->multiSelect) {
+        if ($this->multiSelect || $this->singleSelect) {
           $result.="<td style='text-align:center;padding:0;' class='list1'>&nbsp;</td>";
         }
 
@@ -366,6 +367,10 @@ class listing {
       // Render multi select if needed
       if ($this->multiSelect) {
         $trow.="<td style='text-align:center;width:20px;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>\n";
+      }
+
+      if ($this->singleSelect) {
+        $trow.="<td style='text-align:center;width:20px;' class='list0'><input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'></td>\n";
       }
 
       foreach ($this->xmlData['table']['column'] as $index => $config) {
@@ -1062,6 +1067,12 @@ class listing {
         unset($result['targets']);
       }
       return $result;
+    }
+
+    // Get single selection (radio box)
+    if($this->singleSelect && isset($_POST['listing_radio_selected'])){
+        $entry = $_POST['listing_radio_selected'];
+        $result['targets']= array($this->entries[$entry]['dn']);
     }
 
     // Filter POST with "listing_" attributes
