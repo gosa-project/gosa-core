@@ -171,13 +171,19 @@ class ogroup extends plugin
       $this->reload(); 
     }else{
 
-      // Act on list modifications 
-      $this->memberListing->save_object();
-      $action = $this->memberListing->getAction();
-      if($action['action'] == 'delete'){
-        $this->member = $this->memberListing->getMaintainedData();
-        $this->reload();
-      }
+        // Act on list modifications 
+        $this->memberListing->save_object();
+        $action = $this->memberListing->getAction();
+        if($action['action'] == 'delete'){
+            foreach($action['targets'] as $id){
+                $value = $this->memberListing->getKey($id);
+                $this->objects["$value"]= $this->memberList[$value];                  
+                unset ($this->memberList["$value"]);                                  
+                unset ($this->member["$value"]);                                      
+            }
+            $this->reload();
+        }
+
 
       /* Add objects to group */
       if (isset($_POST['objectSelect_save']) && $this->objectSelect instanceOf objectSelect){
