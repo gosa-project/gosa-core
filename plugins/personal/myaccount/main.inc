@@ -25,9 +25,9 @@
 */
 $lock_msg="";
 if ($remove_lock || isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
+  del_lock($ui->dn);
   if(session::is_set('MyAccountTabs') && session::is_set('edit')){
     session::un_set('MyAccountTabs');
-    del_lock($ui->dn);
   }
 }
 
@@ -51,19 +51,19 @@ if (! $cleanup ){
   
   /* Enter edit mode? */
   if ((isset($_POST['edit'])) && (!session::is_set('edit'))){
-    $MyAccountTabs->setReadOnly(FALSE);
     
     /* Check locking */
     if (($username= get_lock($ui->dn)) != ""){
       session::set('back_plugin',$plug);
       session::set('LOCK_VARS_TO_USE',array("/^edit$/","/^plug$/"));
-      $lock_msg =  gen_locked_message ($username, $ui->dn);
+      $lock_msg =  gen_locked_message ($username, array($ui->dn));
 
     }else{
 
       /* Lock the current entry */
       add_lock ($ui->dn, $ui->dn);
       session::set('edit',TRUE);
+      $MyAccountTabs->setReadOnly(FALSE);
     }
   }
 
