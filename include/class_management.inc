@@ -673,7 +673,7 @@ class management
       set_object_info($this->dn);
       $user = get_lock($this->dn);
       if ($user != ""){
-        return(gen_locked_message ($user, $this->dn,TRUE));
+        return(gen_locked_message ($user, array($this->dn),TRUE));
       }
       add_lock ($this->dn, $this->ui->dn);
 
