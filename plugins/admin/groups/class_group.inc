@@ -191,6 +191,17 @@ class group extends plugin
     $this->baseSelector->setHeight(300);
     $this->baseSelector->update(true);
 
+    // Prepare lists
+    $this->memberList = new sortableListing();
+    $this->memberList->setDeleteable(true);
+    $this->memberList->setInstantDelete(true);
+    $this->memberList->setEditable(false);
+    $this->memberList->setWidth("100%");
+    $this->memberList->setHeight("300px");
+    $this->memberList->setHeader(array('~',_("Given name"),_("Surename"),_("Uid")));
+    $this->memberList->setColspecs(array('20px','*','*','*','20px'));
+    $this->memberList->setDefaultSortColumn(1);
+
     $this->reload(TRUE);
   }
 
@@ -212,8 +223,11 @@ class group extends plugin
     }
 
     /* Delete user from group */
-    if (isset($_POST['del_users']) && isset($_POST['members']) && preg_match("/w/",$this->getacl("memberUid"))){
-      foreach ($_POST['members'] as $value){
+    $this->memberList->save_object();
+    $action = $this->memberList->getAction();
+    if($action['action'] == 'delete' && preg_match("/w/",$this->getacl("memberUid"))){
+      foreach ($action['targets'] as $id){
+        $value = $this->memberList->getKey($id);
         unset ($this->members["$value"]);
         $this->removeUser($value);
       }
@@ -301,7 +315,28 @@ class group extends plugin
     
 
     /* Members and users */
-    $smarty->assign("members", $this->members);
+    $this->memberList->setAcl($this->getacl("memberUid"));
+    $data = $lData = array();
+
+    foreach($this->members as $uid => $member){
+        
+        $data[$uid] = $member;
+        $givenName = $sn = _("Unknown");
+        if(isset($member['sn'][0])) $sn = $member['sn'][0];
+        if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+        
+        $image = image('images/false.png');
+        if(isset($member['sn'])){
+            $image = image('plugins/users/images/select_user.png');
+        }
+
+        $lData[$uid] = array('data' => array($image,$sn, $givenName, $uid));
+    }
+
+    $this->memberList->setListData($data,$lData);
+    $this->memberList->update();
+
+    $smarty->assign("memberList", $this->memberList->render());
 
     /* Checkboxes */
     foreach (array("force_gid", "smbgroup") as $val){
@@ -401,8 +436,8 @@ class group extends plugin
       }else{
         while($attrs = $ldap->fetch()){
           $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
-          $this->members[$attrs['uid'][0]] = $this->createResultName($attrs);
-          $this->allusers[$attrs['uid'][0]]= $this->createResultName($attrs);
+          $this->members[$attrs['uid'][0]] = $attrs;
+          $this->allusers[$attrs['uid'][0]]= $atrts;
         }
       }
     }
@@ -457,8 +492,8 @@ class group extends plugin
       $ldap->search("(&(objectClass=gosaAccount)(|".$filter."))",array("dn", "uid","sn","givenName"));
       while($attrs = $ldap->fetch()){
         $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
-        $this->members[$attrs['uid'][0]] = $this->createResultName($attrs);
-        $this->allusers[$attrs['uid'][0]]= $this->createResultName($attrs);
+        $this->members[$attrs['uid'][0]] = $attrs;
+        $this->allusers[$attrs['uid'][0]]= $attrs;
       } 
     }
   
@@ -467,18 +502,14 @@ class group extends plugin
         count($this->memberUid) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
       foreach ($this->memberUid as $value){
         if(!isset($this->members[$value])){
-          $this->members[$value] =  _("! unknown UID")." [".$value."]"; 
+          $this->members[$value] = "";
         }
       }  
     }else{
       foreach ($this->memberUid as $value){
-        $this->members[$value] = $value; 
+        $this->members[$value] = "";
       }  
     }
-  
-    /* Sort lists */
-    natcasesort($this->members);
-    reset($this->members);
   }
 
 

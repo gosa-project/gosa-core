@@ -172,9 +172,9 @@
      <td style="width:50%">
       <b><LABEL for="members">{t}Group members{/t}</LABEL></b>
       <br>
-{render acl=$memberUidACL}
 
 	{if $multiple_support}
+{render acl=$memberUidACL}
 	  <select style="width:100%; height:380px;" id="members" name="members[]" size=15 multiple>
 		{foreach from=$memberUid_All item=name key=key}
 			<option value="{$key}">{$name}&nbsp;({t}In all groups{/t})</option>
@@ -183,13 +183,12 @@
         <option value="{$key}" style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;'>{$name}&nbsp;({t}Not in all groups{/t})</option>
 		{/foreach}
 	  </select>
-	{else}
-      <select style="width:100%; height:380px;" id="members" name="members[]" size=15 multiple>
-       {html_options options=$members}
-		<option disabled>&nbsp;</option>
-      </select>
-	{/if}
 {/render}
+	{else}
+        {render acl=$memberUidACL}
+            {$memberList}
+        {/render}
+	{/if}
       <br>
 {render acl=$memberUidACL}
       <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
