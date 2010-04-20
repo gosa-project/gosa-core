@@ -13,8 +13,8 @@
     <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <style type="text/css">@import url('themes/modern/style.css');</style>
-    <link rel="stylesheet" type="text/css" href="themes/modern/printer.css" media="print">
+    <style type="text/css">@import url('themes/default/style.css');</style>
+    <link rel="stylesheet" type="text/css" href="themes/default/printer.css" media="print">
 
     <!--[if IE]>
     <style type="text/css">
@@ -25,7 +25,7 @@
     <!-- Include correct theme icon sets -->
     <style type="text/css">
       div.img, div.img div, input[type=submit].img{
-        background-image:url(themes/modern/images/img.png);
+        background-image:url(themes/default/images/img.png);
       }
     </style>
     <link rel="shortcut icon" href="favicon.ico">
