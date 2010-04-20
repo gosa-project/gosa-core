@@ -257,54 +257,33 @@ class ogroup extends plugin
      ***********/
 
     // Handle trust mode dialog
+    $this->dialog = FALSE;
     $trustModeDialog = $this->trustModeDialog->execute();
     if($this->trustModeDialog->trustSelect){
         $this->dialog = TRUE;
         return($trustModeDialog);
     }
     $smarty->assign("trustModeDialog",$trustModeDialog);
-    $this->dialog = FALSE;
 
     /***********
      * Ende - Trusts 
      ***********/
 
 
-    /* Dialog handling */
-    if(is_object($this->dialog) && $this->acl_is_moveable()){
-      /* Must be called before save_object */
-      $this->dialog->save_object();
-
-      if($this->dialog->isClosed()){
-        $this->dialog = false;
-      }elseif($this->dialog->isSelected()){
-
-        /* A new base was selected, check if it is a valid one */
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$this->dialog->isSelected()])){
-          $this->base = $this->dialog->isSelected();
-        }
-        $this->dialog= false;
-      }else{
-        return($this->dialog->execute());
-      }
-    }
-
     /* Add objects? */
     if (isset($_POST["edit_membership"])){
       $this->objectSelect= new objectSelect($this->config, get_userinfo());
-      $this->dialog= TRUE;
     }
 
     /* Add objects finished? */
     if (isset($_POST["objectSelect_cancel"])){
       $this->objectSelect= FALSE;
-      $this->dialog= FALSE;
     }
 
     /* Manage object add dialog */
     if ($this->objectSelect){
       session::set('filterBlacklist', array('dn'=> $this->member));
+      $this->dialog= TRUE;
       return($this->objectSelect->execute());
     }
 
