@@ -217,8 +217,10 @@ class department extends plugin
     /* Hide base selector, if this object represents the base itself 
      */
     $smarty->assign("is_root_dse", $this->is_root_dse);
-    $nA = $this->namingAttr."ACL";
-    $smarty->assign($nA,$this->getacl($this->namingAttr,TRUE));
+    if($this->is_root_dse){
+        $nA = $this->namingAttr."ACL";
+        $smarty->assign($nA,$this->getacl($this->namingAttr,TRUE));
+    }
 
     /* Hide all departments, that are subtrees of this department */
     $bases = $this->get_allowed_bases();
