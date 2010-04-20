@@ -20,47 +20,60 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* Sort multidimensional arrays for key 'text' */
-function sort_list($val1, $val2)
-{
-  $v1= strtolower($val1['text']);
-  $v2= strtolower($val2['text']);
-  if ($v1 > $v2){
-    return 1;
-  }
-  if ($v1 < $v2){
-    return -1;
-  }
-  return 0;
-}
-
-
 class ogroup extends plugin
 {
-  /* Variables */
-  var $cn= "";
-  var $description= "";
-  var $base= "";
-  var $gosaGroupObjects= "";
-  var $objects= array();
-  var $objcache= array();
-  var $memberList= array();
-  var $member= array();
-  var $orig_dn= "";
-  var $orig_cn= "";
-  var $orig_base= "";
-  var $objectSelect= FALSE;
-  var $view_logged = FALSE;
+    var $typeToClass = array(  
+            "Y" => "gosaUserTemplate",
+            "U" => "gosaAccount",
+            "G" => "posixGroup",
+            "A" => "gosaApplication",
+            "D" => "gosaDepartment",
+            "S" => "goServer",
+            "W" => "gotoWorkstation",
+            "O" => "opsiClient",
+            "T" => "gotoTerminal",
+            "F" => "goFonHardware",
+            "P" => "gotoPrinter");
 
-  var $baseSelector;
+    var  $typeToImage = array(
+            "Y" => "plugins/users/images/select_template.png",
+            "U" => "plugins/users/images/select_user.png",
+            "G" => "plugins/groups/images/select_group.png",
+            "A" => "plugins/ogroups/images/application.png",
+            "D" => "plugins/departments/images/department.png",
+            "S" => "plugins/ogroups/images/server.png",
+            "W" => "plugins/ogroups/images/workstation.png",
+            "O" => "plugins/ogroups/images/winstation.png",
+            "T" => "plugins/ogroups/images/terminal.png",
+            "F" => "plugins/ogroups/images/phone.png",
+            "P" => "plugins/ogroups/images/printer.png",
+            "I" => "images/false.png");
 
-  /* Already assigned Workstations. Will be hidden in selection. 
-   */
-  var $used_workstations = array();
 
-  /* attribute list for save action */
-  var $attributes= array("cn", "description", "gosaGroupObjects","member");
-  var $objectclasses= array("top", "gosaGroupOfNames");
+    /* Variables */
+    var $cn= "";
+    var $description= "";
+    var $base= "";
+    var $gosaGroupObjects= "";
+    var $objects= array();
+    var $objcache= array();
+    var $memberList= array();
+    var $member= array();
+    var $orig_dn= "";
+    var $orig_cn= "";
+    var $orig_base= "";
+    var $objectSelect= FALSE;
+    var $view_logged = FALSE;
+
+    var $baseSelector;
+
+    /* Already assigned Workstations. Will be hidden in selection. 
+     */
+    var $used_workstations = array();
+
+    /* attribute list for save action */
+    var $attributes= array("cn", "description", "gosaGroupObjects","member");
+    var $objectclasses= array("top", "gosaGroupOfNames");
 
   function ogroup (&$config, $dn= NULL)
   {
@@ -131,6 +144,16 @@ class ogroup extends plugin
     $this->baseSelector->setSubmitButton(false);
     $this->baseSelector->setHeight(300);
     $this->baseSelector->update(true);
+    
+    // Prepare lists
+    $this->memberListing = new sortableListing();
+    $this->memberListing->setDeleteable(true);
+    $this->memberListing->setEditable(false);
+    $this->memberListing->setWidth("100%");
+    $this->memberListing->setHeight("300px");
+    $this->memberListing->setHeader(array("~",_("Name")));
+    $this->memberListing->setColspecs(array('20px','*','20px'));
+    $this->memberListing->setDefaultSortColumn(1);
 
     $this->reload();
   }
@@ -144,19 +167,15 @@ class ogroup extends plugin
 
       $this->memberList[$NewMember]= $this->objcache[$NewMember];
       unset ($this->objects[$NewMember]);
-      uasort ($this->memberList, 'sort_list');
       reset ($this->memberList);
       $this->reload(); 
     }else{
-      /* Delete objects from group */
-      if (isset($_POST['delete_membership']) && isset($_POST['members'])){
-        foreach ($_POST['members'] as $value){
-          $this->objects["$value"]= $this->memberList[$value];
-          unset ($this->memberList["$value"]);
-          unset ($this->member["$value"]);
-          uasort ($this->objects, 'sort_list');
-          reset ($this->objects);
-        }
+
+      // Act on list modifications 
+      $this->memberListing->save_object();
+      $action = $this->memberListing->getAction();
+      if($action['action'] == 'delete'){
+        $this->member = $this->memberListing->getMaintainedData();
         $this->reload();
       }
 
@@ -192,7 +211,6 @@ class ogroup extends plugin
 
             $this->memberList["$dn"]= $object;
             $this->member["$dn"]= $dn;
-            uasort ($this->memberList, 'sort_list');
             reset ($this->memberList);
           }
         }
@@ -326,10 +344,26 @@ class ogroup extends plugin
 
     /* Assign variables */
     $smarty->assign("base", $this->baseSelector->render());
-    $smarty->assign("members", $this->convert_list($this->memberList));
 
-    /* Objects have to be tuned... */
-    $smarty->assign("objects", $this->convert_list($this->objects));
+
+
+    $this->memberListing->setAcl('rwcdm');
+    $data = $lData = array();
+    foreach($this->member as $key => $dn){
+        $image = 'images/lists/element.png';
+        $name = $dn;
+        if(isset($this->memberList[$dn])){
+            $name  = $this->memberList[$dn]['text'];
+            if(isset($this->typeToImage[$this->memberList[$dn]['type']])){
+                $image = $this->typeToImage[$this->memberList[$dn]['type']];
+            }
+        }
+        $data[$key] = $dn;
+        $lData[$key] = array('data'=> array(image($image),$name));
+    }
+    $this->memberListing->setListData($data,$lData);
+    $this->memberListing->update();
+    $smarty->assign("memberList",$this->memberListing->render());
 
     /* Fields */
     foreach ($this->attributes as $val){
@@ -476,7 +510,6 @@ class ogroup extends plugin
         }
       }
     }
-    uasort ($this->objects, 'sort_list');
     reset ($this->objects);
 
     
@@ -538,7 +571,6 @@ class ogroup extends plugin
         $this->memberList[$dn]= $this->objects[$attrs["dn"]];
       }
     }
-    uasort ($this->memberList, 'sort_list');
     reset ($this->memberList);
 
     /* Assemble types of currently combined objects */
@@ -559,54 +591,16 @@ class ogroup extends plugin
   }
 
 
-  function convert_list($input)
-  {
-    $temp= "";
-    $conv= array(  
-        "Y" => "plugins/users/images/select_template.png",
-        "U" => "plugins/generic/images/head.png",
-        "G" => "plugins/groups/images/select_group.png",
-        "A" => "plugins/ogroups/images/application.png",
-        "D" => "plugins/departments/images/department.png",
-        "S" => "plugins/ogroups/images/server.png",
-        "W" => "plugins/ogroups/images/workstation.png",
-        "O" => "plugins/ogroups/images/winstation.png",
-        "T" => "plugins/ogroups/images/terminal.png",
-        "F" => "plugins/ogroups/images/phone.png",
-        "P" => "plugins/ogroups/images/printer.png",
-        "I" => "images/false.png");
-
-    foreach ($input as $key => $value){
-      /* Generate output */
-      $temp.= "<option title='".addslashes( $key)."' value=\"$key\" class=\"select\" style=\"background-image:url('".get_template_path($conv[$value['type']])."');\">".$value['text']."</option>\n";
-    }
-
-    return ($temp);
-  }
-
-
   function getObjectType($attrs)
   {
     $type= "I";
 
-    foreach(array(  
-          "Y" => "gosaUserTemplate",
-          "U" => "gosaAccount",
-          "G" => "posixGroup",
-          "A" => "gosaApplication",
-          "D" => "gosaDepartment",
-          "S" => "goServer",
-          "W" => "gotoWorkstation",
-          "O" => "opsiClient",
-          "T" => "gotoTerminal",
-          "F" => "goFonHardware",
-          "P" => "gotoPrinter") as $index => $class){
+    foreach($this->typeToClass as $index => $class){
       if (in_array($class, $attrs['objectClass'])){
         $type= $index;
         break;
       }
     }
-
     return ($type);
   }
 

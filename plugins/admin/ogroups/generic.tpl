@@ -41,9 +41,7 @@
    <b><LABEL for="members">{t}Member objects{/t}</LABEL></b>&nbsp;({$combinedObjects})
    <br>
 {render acl=$memberACL}
-   <select style="width:100%; height:450px;" id="members" name="members[]" size="15" multiple>
-    {$members}
-   </select>
+   {$memberList}
 {/render}
    <br>
 {render acl=$memberACL}
