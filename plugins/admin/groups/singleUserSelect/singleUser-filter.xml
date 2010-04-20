@@ -19,7 +19,7 @@
     <tag>default</tag>
     <label>Default filter</label>
     <query>
-      <backend>LDAPBlacklist</backend>
+      <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaAccount)(cn=$))</filter>
     </query>
     <autocomplete>
