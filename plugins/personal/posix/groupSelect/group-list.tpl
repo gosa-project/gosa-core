@@ -20,10 +20,8 @@
   {$LIST}
 </div>
 
-<br>
 <div class="plugin-actions">
   <button type='submit' name='add_groups_finish'>{msgPool type=addButton}</button>
   <button type='submit' name='add_groups_cancel'>{msgPool type=cancelButton}</button>
 </div>
-
 
