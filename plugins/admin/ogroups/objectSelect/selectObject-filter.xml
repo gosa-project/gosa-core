@@ -34,7 +34,7 @@
       <backend>LDAPBlacklist</backend>
       <filter>(&amp;
                 (|
-                  (objectClass=gosaAccont) 
+                  (objectClass=gosaAccount) 
                   (objectClass=posixGroup)
                   (objectClass=goServer)
                   (objectClass=gotoWorkstation)
