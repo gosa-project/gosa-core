@@ -365,19 +365,22 @@ class userinfo
     }else{
       $aclCategory = $object;
     }
-    if(!isset($this->ocMapping[$aclCategory])){
-      trigger_error("Invalid ACL category '".$aclCategory."'! ({$object})");
-      return("");
-    }elseif(isset($aclClass) && !in_array($aclClass, $this->ocMapping[$aclCategory])){
-      trigger_error("Invalid ACL class '".$aclClass."'! ({$object})");
-      return("");
-    }
-    if(isset($aclClass) &&class_available($aclClass)){
-      $plInfo = call_user_func(array($aclClass, 'plInfo'));
-      if(!empty($attribute) && !isset($plInfo['plProvidedAcls'][$attribute])){
-        trigger_error("Invalid ACL attribute '".$attribute."'! ({$object})");
-        return("");
-      }
+
+    if($this->config->get_cfg_value("displayerrors") == "true"){
+        if(!isset($this->ocMapping[$aclCategory])){
+            trigger_error("Invalid ACL category '".$aclCategory."'! ({$object})");
+            return("");
+        }elseif(isset($aclClass) && !in_array($aclClass, $this->ocMapping[$aclCategory])){
+            trigger_error("Invalid ACL class '".$aclClass."'! ({$object})");
+            return("");
+        }
+        if(isset($aclClass) &&class_available($aclClass)){
+            $plInfo = call_user_func(array($aclClass, 'plInfo'));
+            if(!empty($attribute) && !isset($plInfo['plProvidedAcls'][$attribute])){
+                trigger_error("Invalid ACL attribute '".$attribute."'! ({$object})");
+                return("");
+            }
+        }
     }
 
     /* Detect the set of ACLs we have to check for this object 
@@ -726,7 +729,9 @@ class userinfo
             }
           }
         }else{
-          trigger_error("Invalid type of category ".$category);
+            if($this->config->get_cfg_value("displayerrors") == "true"){
+                trigger_error("Invalid type of category ".$category);
+            }
           $acl = "";
         }
         $this->result_cache['has_complete_category_acls'][$dn][$category] = $acl;
