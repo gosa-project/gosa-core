@@ -128,6 +128,7 @@ if (isset($_POST['server'])) {
         $directory = key($servers);
     }
 }
+$smarty->assign ("title","GOsa");
 if (isset($_GET['directory']) && isset($servers[$_GET['directory']])) {
     $smarty->assign("show_directory_chooser", false);
     $directory= validate($_GET['directory']);

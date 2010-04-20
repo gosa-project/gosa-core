@@ -52,6 +52,8 @@ function displayLogin()
     if(isset($_POST["username"])) {
         $username= $_POST["username"];
     }
+    
+    $smarty->assign ("title","GOsa");
     $smarty->assign("logo", image(get_template_path("images/logo.png")));
     $smarty->assign('date', gmdate("D, d M Y H:i:s"));
     $smarty->assign('username', $username);

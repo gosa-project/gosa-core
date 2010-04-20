@@ -69,6 +69,7 @@ if (isset($config)){
 } else {
 	$smarty->compile_dir= '/var/spool/gosa/';
 }
+$smarty->assign ("title","GOsa");
     
 /* If GET request is posted, the logout was forced by pressing the link */
 if (isset($_POST['forcedlogout']) || isset($_GET['forcedlogout'])){
