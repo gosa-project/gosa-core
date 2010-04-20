@@ -46,11 +46,6 @@
    <br>
 {render acl=$memberACL}
    <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>&nbsp;
-
-{/render}
-{render acl=$memberACL}
-   <button type='submit' name='delete_membership'>{msgPool type=delButton}</button>
-
 {/render}
   </td>
  </tr>
