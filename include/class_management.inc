@@ -122,6 +122,7 @@ class management
 
     $this->registerAction("config-filter","editFilter");
     $this->registerAction("saveFilter","saveFilter");
+    $this->registerAction("cancelFilter","cancelFilter");
 
     // To temporay disable the filter caching UNcomment this line.
     #session::global_un_set(get_class($this)."_filter");
@@ -728,6 +729,7 @@ class management
           $this->closeDialogs();
       }
   }
+
 
   /*! \brief  Save filter modifcations.
    */
