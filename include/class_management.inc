@@ -407,7 +407,7 @@ class management
     if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";   
     if(isset($_POST['delete_cancel'])) $action['action'] = "cancelDelete";   
     if(isset($_POST['saveFilter'])) $action['action'] = "saveFilter";   
-    if(isset($_POST['cancelFilter'])) $action['action'] = "cancel";   
+    if(isset($_POST['cancelFilter'])) $action['action'] = "cancelFilter";   
 
     // Detect Snapshot actions
     if(isset($_POST['CreateSnapshot'])) $action['action'] = "saveSnapshot";   
@@ -718,6 +718,16 @@ class management
     }
   }
 
+
+  /*! \brief  Close filter dialog
+   */
+  protected function cancelFilter()
+  {
+      if($this->dialogObject instanceOf userFilter){
+          $this->remove_lock();
+          $this->closeDialogs();
+      }
+  }
 
   /*! \brief  Save filter modifcations.
    */
