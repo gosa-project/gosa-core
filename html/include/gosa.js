@@ -276,10 +276,19 @@ function divGOsa_toggle(element) {
 function resizeHandler (e) {
 	if (!e) e=window.event;
 	if ($("d_scrollbody") && $("t_nscrollbody")) {
-          var contentHeight= document.viewport.getHeight() - 216;
-          document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
-          document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
+
+        var contentHeight= document.viewport.getHeight() - 216;
+        if ($$('div.plugin-actions').length != 0) {
+          var height= 0;
+          $$('div.plugin-actions').each(function(s) {
+            height+= s.getHeight();
+          });
+          contentHeight-= height + 5;
         }
+
+        document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
+        document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
+    }
 	return true;
 }
 
