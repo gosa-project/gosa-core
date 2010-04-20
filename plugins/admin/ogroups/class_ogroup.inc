@@ -148,6 +148,7 @@ class ogroup extends plugin
     // Prepare lists
     $this->memberListing = new sortableListing();
     $this->memberListing->setDeleteable(true);
+    $this->memberListing->setInstantDelete(true);
     $this->memberListing->setEditable(false);
     $this->memberListing->setWidth("100%");
     $this->memberListing->setHeight("300px");
