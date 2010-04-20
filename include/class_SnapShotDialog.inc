@@ -156,7 +156,7 @@ class SnapShotDialog extends plugin
 
             $this->snapList->setListData($data, $lData);
             $this->snapList->update();
-            $smarty->assign("SnapShotDivlist",$this->snapList->render());
+            $smarty->assign("SnapShotList",$this->snapList->render());
             $smarty->assign("CountSnapShots",count($list_of_elements));
         }
 
