@@ -765,7 +765,7 @@ if ($argc < 2){
 	rescan_classes();
 	rescan_i18n();
 	rescan_guide();
-        rescan_images("html", "modern");
+        rescan_images("html", "default");
         exit (0);
 }
 
@@ -796,7 +796,7 @@ switch ($argv[1]){
                 rescan_classes();
                 break;
         case 'rescan-images':
-                rescan_images("html", "modern");
+                rescan_images("html", "default");
                 break;
         default:
                 echo "Error: Supplied command not known\n\n";
