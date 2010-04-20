@@ -80,7 +80,7 @@ class ogroup extends plugin
     plugin::plugin ($config, $dn);
 
     $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
-    $this->trustModeDialog->setAcl($this->getacl("member"));
+    $this->trustModeDialog->setAcl('ogroups/ogroup');
 
     $this->orig_dn= $dn;
 
@@ -332,7 +332,7 @@ class ogroup extends plugin
 
 
 
-    $this->memberListing->setAcl('rwcdm');
+    $this->memberListing->setAcl($this->getacl("member"));
     $data = $lData = array();
     foreach($this->member as $key => $dn){
         $image = 'images/lists/element.png';
