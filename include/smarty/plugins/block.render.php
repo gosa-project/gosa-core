@@ -72,7 +72,7 @@ function smarty_block_render($params, $text, &$smarty)
 	/* Disable objects, but keep those active that have mode=read_active */
 	if(!(isset($params['mode']) && ($params['mode']=='read_active') && preg_match("/(r|w)/",$acl))){
 
-		/* Disable options && greyout divlists */
+		/* Disable options && greyout lists */
 		$from 	= array("/class=['\"]list1nohighlight['\"]/i",
 				"/class=['\"]list0['\"]/i",
 				"/class=['\"]list1['\"]/i",

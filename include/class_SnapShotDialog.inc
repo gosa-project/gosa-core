@@ -137,7 +137,7 @@ class SnapShotDialog extends plugin
             /* Sort generated list */
             krsort($list_of_elements);
 
-            /* Add Elements to divlist */	
+            /* Add Elements to list */	
             $this->last_list = $list_of_elements;
 
             $data = $lData = array();
