@@ -316,7 +316,7 @@ class user extends plugin
     }
     if($this->dialog && $this->dialog instanceOf singleUserSelect && count($this->dialog->detectPostActions())){
       $users = $this->dialog->detectPostActions();
-      if(isset($users['action']) && $users['action'] =='edit' && isset($users['targets']) && count($users['targets'])){
+      if(isset($users['action']) && $users['action'] =='userSelected' && isset($users['targets']) && count($users['targets'])){
         $headpage = $this->dialog->getHeadpage();
         $dn = $users['targets'][0];
         $attrs = $headpage->getEntry($dn);

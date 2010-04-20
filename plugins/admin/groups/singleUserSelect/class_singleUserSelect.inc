@@ -54,7 +54,7 @@ class singleUserSelect extends management
   function detectPostActions()
   {
       $action = management::detectPostActions();
-      if(isset($_POST['add_users_save'])) $action['action'] = "edit";
+      if(isset($_POST['add_users_save'])) $action['action'] = "userSelected";
       return($action);;
   }
 } 
