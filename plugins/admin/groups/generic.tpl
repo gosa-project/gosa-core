@@ -189,7 +189,6 @@
             {$memberList}
         {/render}
 	{/if}
-      <br>
 {render acl=$memberUidACL}
       <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
 
