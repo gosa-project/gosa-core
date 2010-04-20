@@ -171,6 +171,7 @@ if ($config->get_cfg_value("sendCompressedOutput") != "") {
 
 /* Set template compile directory */
 $smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa');
+$smarty->error_unassigned= true;
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))) {

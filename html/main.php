@@ -98,6 +98,7 @@ if(session::global_get('_LAST_PAGE_REQUEST') == ""){
 
 /* Set template compile directory */
 $smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa');
+$smarty->error_unassigned= true;
 
 /* Set default */
 $reload_navigation = false;
