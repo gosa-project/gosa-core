@@ -142,13 +142,21 @@ class tabs
       $display= $this->by_object[$this->current]->multiple_execute();
     }
     $tabs= $this->gen_tabs();
-    $display =   
-      "\n        {$tabs}".
-      "\n        <input type='hidden' name='arg' value=''>".
-      "\n        <div class='tab-content'>".
-      "\n          {$display}".
-      "\n        </div>";
 
+    if($this->is_modal_dialog()){
+        $display =   
+            "\n        <div class='plugin'>".
+            "\n          {$display}".
+            "\n        </div>";
+    }else{
+
+        $display =   
+            "\n        {$tabs}".
+            "\n        <input type='hidden' name='arg' value=''>".
+            "\n        <div class='tab-content'>".
+            "\n          {$display}".
+            "\n        </div>";
+    }
     return ($display);
   }
 
