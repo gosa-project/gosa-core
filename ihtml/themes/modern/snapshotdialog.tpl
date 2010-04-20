@@ -34,7 +34,7 @@
 	</tr>
 	<tr>
 		<td>
-			{$SnapShotDivlist}
+			{$SnapShotList}
 		</td>
 	</tr>
 </table>
