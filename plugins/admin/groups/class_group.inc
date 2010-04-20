@@ -437,7 +437,7 @@ class group extends plugin
         while($attrs = $ldap->fetch()){
           $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
           $this->members[$attrs['uid'][0]] = $attrs;
-          $this->allusers[$attrs['uid'][0]]= $atrts;
+          $this->allusers[$attrs['uid'][0]]= $attrs;
         }
       }
     }
