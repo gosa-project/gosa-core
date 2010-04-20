@@ -80,7 +80,7 @@ class ogroup extends plugin
     plugin::plugin ($config, $dn);
 
     $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
-    $this->trustModeDialog->setAcl('ogroups/ogroup');
+    $this->trustModeDialog->setAcl($this->getacl("member"));
 
     $this->orig_dn= $dn;
 
