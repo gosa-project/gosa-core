@@ -83,60 +83,55 @@ class aclResolver
      */    
     function getReadableACL() 
     {
+        $tpl = 
+            "\n <tr>".
+            "\n  <td>%s</td>".
+            "\n  <td><b>%s</b></td>".
+            "\n  <td rowspan=3>%s</td>".
+            "\n </tr>".
+            "\n <tr>".
+            "\n  <td></td>".
+            "\n  <td><b>"._("Group members")."</b><ul>%s</ul></td>".
+            "\n </tr>".
+            "\n <tr>".
+            "\n  <td></td>".
+            "\n  <td><b>"._("Members")."</b><ul>%s</ul></td>".
+            "\n </tr>".
+            "\n <tr>".
+            "\n  <td></td>".
+            "\n  <td><b>"._("Acls")."</b><ul>%s</ul></td>".
+            "\n </tr>".
+            "\n <tr>".
+            "\n  <td colspan=3><hr></td>".
+            "\n </tr>";
+
+
         $str = "<table summary='"._("Object permissions")."' width='100%'>";
         foreach($this->affectingACLs as $dn => $acls){
             foreach($acls as $acl){
-                $str.="<tr>"; 
-                if(isset($this->config->idepartments[$dn])){
-                    $image= image("images/select_department.png");
-                }else{
-                    $image= image("images/lists/element.png");
-                }
-
-                $str.="<td style='width:20px;'>".$image."</td>";
-                $str.="<td><b>".$dn."</b></td>";
-                $str.="<td rowspan=3>".$this->aclTypes[$acl['type']]."</td>";
-                $str.="</tr>";
-
-                $str.="<tr>";
-                $str.="<td></td><td><b>"._("Group members")."</b><ul>";
+                $gmem = $umem = $defs = "";
+                $image = (isset($this->config->idepartments[$dn]))? "images/select_department.png":"images/lists/element.png";
+                $aclType = $this->aclTypes[$acl['type']];
+                
                 foreach($acl['members'] as $type => $name){
                     if(preg_match("/^G/", $type))
-                    $str .= "<li>".$name."</li>";
+                    $gmem .= "\n        <li>".$name."</li>";
                 }
-                $str .= "</ul>"; 
-                $str .= "</td>"; 
-                $str .= "</tr>";
-
-                $str.="<tr>";
-                $str.="<td></td><td><b>"._("Members")."</b><ul>";
                 foreach($acl['members'] as $type => $name){
                     if(!preg_match("/^G/", $type))
-                    $str .= "<li>".$name."</li>";
+                    $umem .= "\n        <li>".$name."</li>";
                 }
-                $str .= "</ul>"; 
-                $str .= "</td>"; 
-                $str .= "</tr>";
-
-                $str .= "<tr><td></td>";
 
                 if($acl['type']!='reset'){
-                    $str.="<td><b>"._("Acls")."</b><ul>";
                     foreach($acl['acl'] as $type => $acl){
-
                         if(isset($this->classMapping[$type])){
-                            $str .= "<li>".$this->classMapping[$type].": ".$this->aclToString($acl)."</li>";
+                            $defs .= "<li>".$this->classMapping[$type].": ".$this->aclToString($acl)."</li>";
                         }else{
-                            $str .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
+                            $defs .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
                         }
                     }
-                    $str .= "</ul>"; 
-                    $str .= "</td>"; 
-                    $str .= "</tr>"; 
-                }else{
-                    $str .= "<td></td>";
                 }
-                $str .= "<tr><td colspan=3><hr></td></tr>"; 
+                $str.= sprintf($tpl, image($image), $dn, $aclType, $gmem, $umem, $defs);
             }
         }
         $str .= "</table>"; 
