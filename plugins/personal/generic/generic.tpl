@@ -343,7 +343,7 @@
      <td>
       {render acl=$managerACL}
         <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'
-          style='width:130px;'>
+          style='width:120px;'>
       {/render}
 
       {image path="images/lists/edit.png" action="editManager" acl=$managerACL}
