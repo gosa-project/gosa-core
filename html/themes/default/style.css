@@ -1481,10 +1481,16 @@ div.progress {
   right:20%;
   padding:10px;
   background-color:#F8F8F8;
-  border:1px solid #CCC;
+  border:2px solid red;
   border-radius:5px;
   -moz-border-radius:5px;
   -webkit-border-radius:5px;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#F0F0F0));
   background: -moz-linear-gradient(top, #FFF, #F0F0F0);
 }
+
+h2 {
+  font-size:14px;
+  font-weight:bold;
+}
+
