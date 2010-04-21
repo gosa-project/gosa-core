@@ -83,8 +83,6 @@ class reference extends plugin
     $ui = get_userinfo();
     
 
-    $r = new aclResolver($this->config, $this->dn, $this);
-    return($r->getReadableACL());
 
     /* Set government mode */
     $smarty= get_smarty();
@@ -101,6 +99,8 @@ class reference extends plugin
     /* Fill array */
     $this->reload();
     $smarty->assign("objectList", $this->objectlist);
+    $r = new aclResolver($this->config, $this->dn, $this);
+    $smarty->assign("acls",$r->getReadableACL());
 
     /* Show main page */
     return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
