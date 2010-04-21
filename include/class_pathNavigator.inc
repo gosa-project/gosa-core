@@ -67,6 +67,7 @@ class pathNavigator
     if(empty($path)){
       $path = "<li class='left path-element'>"._("Welcome to GOsa")."</li>";
     }
+
     return($path);
   }
 

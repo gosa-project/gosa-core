@@ -94,24 +94,18 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     if (session::is_set('js') && session::get('js')==FALSE){
       $error_collector= "<div>";
     } else {
-      $error_collector= "
-        <table summary=\"\" width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black;z-index:150;'>
+        $error_collector= "
+        <table summary=\"\" class='error-collector'>
           <tr>
-            <td>
-              <img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;
-              <font style='font-size:14px;font-weight:bold'>".
-                _("Generating this page caused the PHP interpreter to raise some errors!")."
-              </font>
-            </td>
-            <td align=right>
-              <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
-                <img border='0' src='images/mailto.png' title='"._("Send bug report to the GOsa Team")."' class='center' alt=''>&nbsp;"._("Send bugreport")."
-              </a>
-            </td>
-            <td align=right>
-              <button onClick=\"$('errorbox').toggle();\">".
-                _("Toggle information")."
-              </button>
+           <td style='width:32px'>".image('images/toolbar-warning.png')."</td>
+           <td><span>"._("Generating this page caused the PHP interpreter to raise some errors!")."</span></td>
+           <td align='right'>
+            <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
+                ".image('images/mailto.png')."&nbsp;"._("Send bugreport")."
+            </a>
+           </td>
+           <td align='right'>
+            <button onClick=\"$('errorbox').toggle();\">"._("Toggle details")."</button>
             </td>
           </tr>
         </table>

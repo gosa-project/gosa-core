@@ -100,6 +100,27 @@ h1, h3 {
   color:red;
 }
 
+
+/* Error collector */
+.error-collector {
+  border-bottom:1px solid black;
+  width:100%;
+  z-index:150;
+  padding:2px;
+  height:32px;
+  background-color:#FFC0C0;
+}
+
+.error-collector span {
+  font-size:12px;
+  font-weight:bold;
+}
+
+.error-collector td {
+  vertical-align:middle;
+}
+
+
 /* Image with migration color */
 
 input[type=submit].img{
