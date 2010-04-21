@@ -93,6 +93,7 @@ class userinfo
   function loadACL()
   {
     $this->ACL= array();    
+    $this->allACLs= array();    
     $this->groups= array();    
     $this->result_cache =array();
     $this->reset_acl_cache();
@@ -180,6 +181,7 @@ class userinfo
             if (preg_match('/^G:\*/',  $grp)){
               $interresting= TRUE;
             }
+            $this->allACLs[$dn][$idx]= $type;
           }
         }
 
@@ -189,7 +191,6 @@ class userinfo
           }
           $this->ACL[$dn][$idx]= $type;
         }
-        $this->allACLs[$dn][$idx]= $type;
       }
     }
 
