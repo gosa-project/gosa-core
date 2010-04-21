@@ -24,7 +24,7 @@
 </tr>
 <tr>
 	<td>
-		{t}Base{/t}{$MUST}
+		{t}Base{/t}{$must}
 	</td>
 	<td>
 {render acl=$baseACL}
