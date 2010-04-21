@@ -292,8 +292,11 @@ class acl extends plugin
   function convertForListing($entry)
   {
     $member = implode($entry['members'],", ");
-    $acl = implode(array_keys($entry['acl']),", ");
-    $type = implode(array_keys($entry['acl']),", ");
+    if(isset($entry['acl']) && is_array($entry['acl'])){
+        $acl = implode(array_keys($entry['acl']),", ");
+    }else{
+        $acl="";
+    }
     return(array('data' => array($member, $acl, $this->aclTypes[$entry['type']])));
   }
 
