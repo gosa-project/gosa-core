@@ -96,14 +96,29 @@ class aclResolver
                 $str.="<td style='width:20px;'>".$image."</td>";
                 $str.="<td><b>".$dn."</b></td>";
                 $str.="<td rowspan=3>".$this->aclTypes[$acl['type']]."</td>";
-                $str.="</tr><tr>";
-                $str.="<td></td><td><b>"._("Members")."</b><ul>";
+                $str.="</tr>";
+
+                $str.="<tr>";
+                $str.="<td></td><td><b>"._("Group members")."</b><ul>";
                 foreach($acl['members'] as $type => $name){
+                    if(preg_match("/^G/", $type))
                     $str .= "<li>".$name."</li>";
                 }
                 $str .= "</ul>"; 
                 $str .= "</td>"; 
-                $str .= "</tr><tr><td></td>";
+                $str .= "</tr>";
+
+                $str.="<tr>";
+                $str.="<td></td><td><b>"._("Members")."</b><ul>";
+                foreach($acl['members'] as $type => $name){
+                    if(!preg_match("/^G/", $type))
+                    $str .= "<li>".$name."</li>";
+                }
+                $str .= "</ul>"; 
+                $str .= "</td>"; 
+                $str .= "</tr>";
+
+                $str .= "<tr><td></td>";
 
                 if($acl['type']!='reset'){
                     $str.="<td><b>"._("Acls")."</b><ul>";
