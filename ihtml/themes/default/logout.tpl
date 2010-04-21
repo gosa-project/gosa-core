@@ -6,14 +6,14 @@
  <h2>{t}Your GOsa session has expired!{/t}</h2>
 
  <p>
- {t}The last interaction with the GOsa web interface has been some time ago in the past. For security reasons, the session has been closed. To continue with administrative tasks, please sign in again.{/t}
+ {t}It has been a while since your last interaction with the GOsa took place. Your session has been closed for security reasons. Please login again to continue with administrative tasks.{/t}
  </p>
 
  <hr>
 
  <div class='plugin-actions'>
   <center>
-   <button type="submit" name="dummy">{t}Sign in again{/t}</button>
+   <button type="submit" name="dummy">{t}Login again{/t}</button>
   </center>
  </div>
 </div>
