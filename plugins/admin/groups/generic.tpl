@@ -45,7 +45,7 @@
      </td>
     </tr>
     <tr>
-      <td colspan=2> <div style="height:15px; width:100%; border-bottom:1px solid #909090;"></div> </td>
+      <td colspan=2><hr></td>
     </tr>
     <tr>
       <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
@@ -120,7 +120,7 @@
 
 	{if $pickupGroup == "true"}
     <tr>
-      <td colspan=2> <div style="height:15px; width:100%; border-bottom:1px solid #909090;"></div> </td>
+      <td colspan=2><hr></td>
     </tr>
     <tr>
       <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
@@ -135,7 +135,7 @@
 	{/if}
 	{if $nagios == "true"}
     <tr>
-      <td colspan=2> <div style="height:15px; width:100%; border-bottom:1px solid #909090;"></div> </td>
+      <td colspan=2><hr></td>
     </tr>
     <tr>
       <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
@@ -149,7 +149,7 @@
     </tr>
 	{/if}
     <tr>
-      <td colspan=2> <div style="height:15px; width:100%; border-bottom:1px solid #909090;"></div> </td>
+      <td colspan=2><hr></td>
     </tr>
     <tr>
       <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
@@ -170,17 +170,19 @@
    <table summary="" style="width:100%">
     <tr>
      <td style="width:50%">
-      <b><LABEL for="members">{t}Group members{/t}</LABEL></b>
-      <br>
-
 	{if $multiple_support}
+        <h3>{t}Common group members{/t}</h3>
         {render acl=$memberUidACL}
             {$commonList}
         {/render}
+        
+        <br>
+        <h3>{t}Partial group members{/t}</h3>
         {render acl=$memberUidACL}
             {$partialList}
         {/render}
 	{else}
+        <h3>{t}Group members{/t}</h3>
         {render acl=$memberUidACL}
             {$memberList}
         {/render}
