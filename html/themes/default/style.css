@@ -59,15 +59,15 @@ textarea, select {
   margin-bottom:2px;
 }
 
-input[disabled] {
-color:#888;      
-background-color:#DDD;
-}                     
-
-textarea[disabled], select[disabled] {
-color:#000;         
-background-color:#DDD;
+textarea[disabled], select:disabled, select[size="1"]:disabled {
+color:#666;
+background-color:#F0F0F0;
 border-color:#CCC;
+}
+
+input[disabled] {
+background-color:#F0F0F0;
+color:#666;      
 }                     
 
 select[size="1"]{
