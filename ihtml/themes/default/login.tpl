@@ -28,7 +28,7 @@
   
     <div class='login-box'>
      <div class='login-box-header'>
-     {t}Sign in{/t}
+     {t}Login to GOsa{/t}
      </div>
 
      <div class='login-box-container'>
@@ -59,13 +59,13 @@
      
      <div class='login-element-container'>
       <div class='login-label'>
-       <select size='1' name='server'  title='{t}Directory{/t}'>
+       <select size='1' name='server'  title='{t}Choose the directory to work on{/t}'>
       	{html_options options=$server_options selected=$server_id}
        </select>
       </div>
       <div class='right'>
-       <button type='submit' name='login' title='{t}Click here to log in{/t}' onFocus="nextfield='login';">{t}Sign in{/t}</button>
-       <input type='hidden' name='login' value='{t}Sign in{/t}' />             
+       <button type='submit' name='login' title='{t}Click here to log in{/t}' onFocus="nextfield='login';">{t}Log in{/t}</button>
+       <input type='hidden' name='login' value='{t}Log in{/t}' />             
       </div>
       <div class="clear"></div>
      </div>
