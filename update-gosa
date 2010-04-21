@@ -2,7 +2,7 @@
 <?php
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
- * Copyright (C) 2003-2008 GONICUS GmbH
+ * Copyright (C) 2003-2010 GONICUS GmbH
  *
  * ID: $$Id: main.php 9254 2008-03-03 15:57:49Z cajus $$
  *
@@ -60,6 +60,20 @@ function rmdirRecursive($path, $followLinks=false) {
   return rmdir($path);
 }
 
+
+function get_themes()
+{
+  $themes= array();
+  $d = dir(GOSA_HOME."/html/themes");
+  while (false !== ($entry = $d->read())) {
+    if ($entry[0] != '.') {
+      $themes[]= basename($entry);
+    }
+  }
+  $d->close();
+
+  return $themes;
+}
 
 /* Function to include all class_ files starting at a given directory base */
 function get_classes($folder= ".")
@@ -535,6 +549,8 @@ function rescan_images($path, $theme)
   $styles= array();
   $duplicates= array();
 
+  echo "Updating master image for theme '$theme'...";
+
   // Check for image magick convert
   if (!function_exists("imageFilter")){
     exec("which convert", $res, $ret);
@@ -544,7 +560,6 @@ function rescan_images($path, $theme)
   }
   
   // Scan for images in the given path
-  echo "Scanning for images";
   flush();
   foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $fileInfo) {
   
@@ -556,7 +571,7 @@ function rescan_images($path, $theme)
          // Grey image if it is not already one
          if (preg_match('/grey/', $indexPath)) {
            echo "!";
-           $warnings[]= "Warning: skipped possible *grey* image $path";
+           $warnings[]= "! Warning: skipped possible *grey* image $path";
            flush();
            continue;
          }
@@ -564,7 +579,7 @@ function rescan_images($path, $theme)
          // New image if it is not already one
          if (preg_match('/new/', $indexPath) && !preg_match('/new\.png$/', $indexPath)) {
            echo "!";
-           $warnings[]= "Warning: skipped possible *new* image $path";
+           $warnings[]= "! Warning: skipped possible *new* image $path";
            flush();
            continue;
          }
@@ -584,7 +599,7 @@ function rescan_images($path, $theme)
          // Is this image already there?
          $checksum= md5_file($path);
          if (in_array($checksum, $checksums)) {
-           $warnings[]= "Warning: images $indexPath seems to be a duplicate of ".array_search($checksum, $checksums);
+           $warnings[]= "! Warning: images $indexPath seems to be a duplicate of ".array_search($checksum, $checksums);
            $duplicates[$indexPath]= array_search($checksum, $checksums);
            $duplicates[$greyIndexPath]= preg_replace('/\.png$/', '-grey.png', array_search($checksum, $checksums));
            continue;
@@ -765,8 +780,10 @@ if ($argc < 2){
 	rescan_classes();
 	rescan_i18n();
 	rescan_guide();
-        rescan_images("html", "default");
-        exit (0);
+    foreach (get_themes() as $theme) {
+      rescan_images(GOSA_HOME."/html", $theme);
+    }
+    exit (0);
 }
 
 switch ($argv[1]){
@@ -796,7 +813,9 @@ switch ($argv[1]){
                 rescan_classes();
                 break;
         case 'rescan-images':
-                rescan_images("html", "default");
+                foreach (get_themes() as $theme) {
+                  rescan_images("html", $theme);
+                }
                 break;
         default:
                 echo "Error: Supplied command not known\n\n";
