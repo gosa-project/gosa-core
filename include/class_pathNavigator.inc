@@ -5,7 +5,6 @@ class pathNavigator
 
   static function registerPlugin($class, $title= "")
   {
-    
     $str = "";
 
     // Display headline of management plugins
