@@ -79,6 +79,13 @@ class reference extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    // ACL's we have
+    $ui = get_userinfo();
+    
+
+    $r = new aclResolver($this->config, $this->dn, $this);
+    return($r->getReadableACL());
+
     /* Set government mode */
     $smarty= get_smarty();
 

@@ -387,6 +387,7 @@ class tabs
       $this->by_name['reference']= _("References");
       $this->by_object['reference']= new reference($this->config, $this->dn);
       $this->by_object['reference']->parent= &$this;
+      $this->by_object['reference']->set_acl_category($this->acl_category);
     }
   }
 
