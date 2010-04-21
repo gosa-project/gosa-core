@@ -68,6 +68,13 @@ class group extends plugin
 
   var $multiple_support = TRUE;
 
+
+    // Lists 
+    private $memberList;    // Single group editing
+    private $commonList;    // (Multiple support active)
+    private $partialList;   // (Multiple support active)
+
+
   function group (&$config, $dn= NULL)
   {
      /* Set rfc2307bis flag */
@@ -191,6 +198,8 @@ class group extends plugin
     $this->baseSelector->setHeight(300);
     $this->baseSelector->update(true);
 
+
+
     // Prepare lists
     $this->memberList = new sortableListing();
     $this->memberList->setDeleteable(true);
@@ -222,16 +231,22 @@ class group extends plugin
       return ($display);
     }
 
-    /* Delete user from group */
-    $this->memberList->save_object();
-    $action = $this->memberList->getAction();
-    if($action['action'] == 'delete' && preg_match("/w/",$this->getacl("memberUid"))){
-      foreach ($action['targets'] as $id){
-        $value = $this->memberList->getKey($id);
-        unset ($this->members["$value"]);
-        $this->removeUser($value);
-      }
-      $this->reload();
+    // Act on list events 
+    foreach(array('memberList','commonList','partialList') as $list){
+
+        // Check if list is available, depends on multi- or sinlge- group editing. 
+        if($this->$list){
+            $this->$list->save_object();
+            $action = $this->$list->getAction();
+            if($action['action'] == 'delete' && preg_match("/w/",$this->getacl("memberUid"))){
+                foreach ($action['targets'] as $id){
+                    $value = $this->$list->getKey($id);
+                    unset ($this->members["$value"]);
+                    $this->removeUser($value);
+                }
+                $this->reload();
+            }
+        }
     }
 
     /* Add objects? */
@@ -315,28 +330,62 @@ class group extends plugin
     
 
     /* Members and users */
-    $this->memberList->setAcl($this->getacl("memberUid"));
-    $data = $lData = array();
-
-    foreach($this->members as $uid => $member){
-        
-        $data[$uid] = $member;
-        $givenName = $sn = _("Unknown");
-        if(isset($member['sn'][0])) $sn = $member['sn'][0];
-        if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
-        
-        $image = image('images/false.png');
-        if(isset($member['sn'])){
-            $image = image('plugins/users/images/select_user.png');
+    if(!$this->multiple_support_active){
+        $this->memberList->setAcl($this->getacl("memberUid"));
+        $data = $lData = array();
+        foreach($this->members as $uid => $member){
+            $data[$uid] = $member;
+            $givenName = $sn = _("Unknown");
+            if(isset($member['sn'][0])) $sn = $member['sn'][0];
+            if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+            $image = image('images/false.png');
+            if(isset($member['sn'])){
+                $image = image('plugins/users/images/select_user.png');
+            }
+            $lData[$uid] = array('data' => array($image,$sn, $givenName, $uid));
         }
+        $this->memberList->setListData($data,$lData);
+        $this->memberList->update();
+        $smarty->assign("memberList", $this->memberList->render());
+    }else{
+    
+        $this->commonList->setAcl($this->getacl("memberUid"));
+        $this->partialList->setAcl($this->getacl("memberUid"));
 
-        $lData[$uid] = array('data' => array($image,$sn, $givenName, $uid));
+        $data = $lData = array();
+        foreach($this->memberUid as $uid => $member){
+            $member = $this->members[$member];
+            $data[$uid] = $member;
+            $givenName = $sn = _("Unknown");
+            if(isset($member['sn'][0])) $sn = $member['sn'][0];
+            if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+            $image = image('images/false.png');
+            if(isset($member['sn'])){
+                $image = image('plugins/users/images/select_user.png');
+            }
+            $lData[$uid] = array('data' => array($image,$sn, $givenName, $uid));
+        }
+        $this->commonList->setListData($data,$lData);
+        $this->commonList->update();
+        $smarty->assign("commonList", $this->commonList->render());
+
+        $data = $lData = array();
+        foreach($this->memberUid_used_by_some as $uid => $member){
+            $member = $this->members[$member];
+            $data[$uid] = $member;
+            $givenName = $sn = _("Unknown");
+            if(isset($member['sn'][0])) $sn = $member['sn'][0];
+            if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+            $image = image('images/false.png');
+            if(isset($member['sn'])){
+                $image = image('plugins/users/images/select_user.png');
+            }
+            $lData[$uid] = array('data' => array($image,$sn, $givenName, $uid));
+        }
+        $this->partialList->setListData($data,$lData);
+        $this->partialList->update();
+        $smarty->assign("partialList", $this->partialList->render());
     }
-
-    $this->memberList->setListData($data,$lData);
-    $this->memberList->update();
-
-    $smarty->assign("memberList", $this->memberList->render());
 
     /* Checkboxes */
     foreach (array("force_gid", "smbgroup") as $val){
@@ -381,8 +430,6 @@ class group extends plugin
 
     /* Multiple edit handling */
     $smarty->assign("multiple_support",$this->multiple_support_active);
-    $smarty->assign("memberUid_All",$this->memberUid);
-    $smarty->assign("memberUid_Some",$this->memberUid_used_by_some);
 
     foreach($this->attributes as $val){
       if(in_array($val,$this->multi_boxes)){
@@ -478,9 +525,16 @@ class group extends plugin
          to be prepared when adding/deleting users)
      */    
     $filter = "";
+
+    // Merge in partial uids in multiple edit
+    $uids = array_keys($this->memberUid);
+    if($this->multiple_support_active) {
+        $uids = array_merge($uids,  array_keys($this->memberUid_used_by_some));
+    }
+    
     if ($this->config->get_cfg_value("ldapFilterNestingLimit") == "" ||
-        count($this->memberUid) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
-      foreach ($this->memberUid as $value){
+        count($uids) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
+      foreach ($uids as $value){
         if(!isset($this->members[$value])){
           $filter .= "(uid=".normalizeLdap($value).")";
         }
@@ -1023,7 +1077,7 @@ class group extends plugin
         }
       }
 
-      foreach (array( "smbgroup"   => "sambaGroupType" ,"nagios_group" => "nagios_group") as $val => $aclname) {
+      foreach (array( "smbgroup"   => "sambaGroupType" ,"nagios_group" => "nagiosGroup") as $val => $aclname) {
         if ($this->acl_is_writeable($aclname)){
           if(isset($_POST["$val"])){
             $this->$val=  TRUE;
@@ -1097,6 +1151,31 @@ class group extends plugin
       }
       ksort($this->memberUid_used_by_some);
     }
+
+    $this->reload(TRUE);
+
+    // We've two lists in mutliple support  
+    //  - one which represents those users which are part of ALL groups.
+    //  - ond one which represents those users which are only part of SOME groups.
+    $this->commonList = new sortableListing();
+    $this->commonList->setDeleteable(true);
+    $this->commonList->setInstantDelete(true);
+    $this->commonList->setEditable(false);
+    $this->commonList->setWidth("100%");
+    $this->commonList->setHeight("120px");
+    $this->commonList->setHeader(array('~',_("Given name"),_("Surename"),_("Uid")));
+    $this->commonList->setColspecs(array('20px','*','*','*','20px'));
+    $this->commonList->setDefaultSortColumn(1);
+
+    $this->partialList = new sortableListing();
+    $this->partialList->setDeleteable(true);
+    $this->partialList->setInstantDelete(true);
+    $this->partialList->setEditable(false);
+    $this->partialList->setWidth("100%");
+    $this->partialList->setHeight("120px");
+    $this->partialList->setHeader(array('~',_("Given name"),_("Surename"),_("Uid")));
+    $this->partialList->setColspecs(array('20px','*','*','*','20px'));
+    $this->partialList->setDefaultSortColumn(1);
   }
 
 

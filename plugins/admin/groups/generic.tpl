@@ -174,16 +174,12 @@
       <br>
 
 	{if $multiple_support}
-{render acl=$memberUidACL}
-	  <select style="width:100%; height:380px;" id="members" name="members[]" size=15 multiple>
-		{foreach from=$memberUid_All item=name key=key}
-			<option value="{$key}">{$name}&nbsp;({t}In all groups{/t})</option>
-		{/foreach}
-		{foreach from=$memberUid_Some item=name key=key}
-        <option value="{$key}" style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;'>{$name}&nbsp;({t}Not in all groups{/t})</option>
-		{/foreach}
-	  </select>
-{/render}
+        {render acl=$memberUidACL}
+            {$commonList}
+        {/render}
+        {render acl=$memberUidACL}
+            {$partialList}
+        {/render}
 	{else}
         {render acl=$memberUidACL}
             {$memberList}
