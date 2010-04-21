@@ -947,9 +947,13 @@ class acl extends plugin
     if(count($list) == 5){
       list($index, $type,$member,$permission,$filter)= $list;
       $filter = base64_decode($filter);
-    }else{
+    }elseif(count($list) == 4){
       $filter = "";
       list($index, $type,$member,$permission)= $list;
+    }else{
+      $permission = "";
+      $filter = "";
+      list($index, $type,$member)= $list;
     }
 
     $a= array( $index => array("type" => $type,
@@ -1129,7 +1133,7 @@ class acl extends plugin
       $acl= $this->gosaAclEntry[$this->currentIndex];
       $this->aclType= $acl['type'];
       $this->recipients= $acl['members'];
-      $this->aclContents= $acl['acl'];
+      $this->aclContents= (isset($acl['acl'])) ? $acl['acl'] :"";
       $this->aclFilter= $acl['filter'];
     }
 
