@@ -131,7 +131,7 @@ class aclResolver
             $autocompleter ="
                 <input class='filter_textfield' placeholder='"._("Search")."...' 
                 id='aclTarget' name='aclTarget' type='text' value='' 
-                onChange='\$('aclTargetSubmit').focus();'>
+                onChange=\"\$('aclTargetSubmit').focus();\">
 
                 <div id='autocomplete' class='autocomplete'></div>
                 <script type='text/javascript'>
