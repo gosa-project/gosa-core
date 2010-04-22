@@ -1185,6 +1185,7 @@ class acl extends plugin
       /* ACL's if needed */
       $final.= ":";
       if ($entry['type'] != "reset" && $entry['type'] != "role"){
+        $acl = "";
         if (isset($entry['acl'])){
           foreach ($entry['acl'] as $object => $contents){
 
