@@ -14,6 +14,9 @@ class aclResolver
     private $acl_category;
     private $parent;
 
+    // Used for the autocompleter
+    private $userMap;
+
     function __construct($config, $dn, $parent)
     {
         $this->config = &$config;
@@ -111,6 +114,15 @@ class aclResolver
      */    
     function getReadableACL() 
     {
+        if(isset($_POST['aclTarget'])){
+            $d = get_post('aclTarget');
+            if(isset($this->userMap[$d])){
+                $this->validateDn = $this->userMap[$d]['dn'];
+                $this->validateUid = $this->userMap[$d]['uid'][0];
+                $this->renderedList = "";
+            }
+        }
+        
         if(empty($this->renderedList)){
 
             $this->reload();
@@ -159,7 +171,8 @@ class aclResolver
                 "\n </tr>";
 
 
-            $str = "<table summary='"._("Object permissions")."' class='acl-viewer'>";
+            $str = "<br>".sprintf(_("ACL from the viewpoint of user '%s'"), "<b>".$this->validateUid."</b>");
+            $str.= "<table summary='"._("Object permissions")."' class='acl-viewer'>";
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
             $ui = get_userinfo();
@@ -267,6 +280,22 @@ class aclResolver
             $str.= "</ul>";
         }
         return($str."</ul>");
+    }
+
+    function processAutocomplete()
+    {
+            $ldap = $this->config->get_ldap_link();
+            $ldap->cd($this->config->current['BASE']);
+            $ldap->search("(&(objectClass=gosaAccount)(|(sn=*".get_post('aclTarget')."*)".
+                    "(uid=*".get_post('aclTarget')."*)(givenName=*".get_post('aclTarget')."*)))",
+                    array('uid','dn','sn','givenName'));
+            echo "<ul>";
+            while($attrs = $ldap->fetch()){
+                $display = $attrs['givenName'][0]." ".$attrs['sn'][0]." [".$attrs['uid'][0]."]";
+                echo "<li>{$display}</li>";
+                $this->userMap[$display] = $attrs;
+            }
+            echo "</ul>";
     }
 }
 

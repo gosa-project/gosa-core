@@ -87,6 +87,8 @@ class reference extends plugin
 
         /* Set government mode */
         $smarty= get_smarty();
+        $smarty->assign("usePrototype", "true");
+        session::set('autocomplete', $this->aclResolver);
 
         if (isset($_GET['show'])){
             $dn= base64_decode($_GET['show']);
