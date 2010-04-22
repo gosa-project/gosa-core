@@ -129,7 +129,7 @@ class aclResolver
 
             // Autocompleter template 
             $autocompleter ="
-                <input class='filter_textfield' placeholder='Suchen...' 
+                <input class='filter_textfield' placeholder='"._("Search")."...' 
                 id='aclTarget' name='aclTarget' type='text' value='' 
                 onChange='document.mainform.submit();'>
 
