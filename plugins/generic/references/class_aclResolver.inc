@@ -8,10 +8,19 @@ class aclResolver
 
     private $renderedList = "";
 
+    // The users 'dn' and 'uid' used to verify the collected acls
+    private $validateDn;
+    private $validateUid;
+
     function __construct($config, $dn, $parent)
     {
         $this->config = &$config;
         $this->dn = $dn;
+
+        // Replace this with a user defined one later.
+        $ui = get_userinfo();
+        $this->validateUid = $ui->uid;
+        $this->validateDn = $ui->dn;
 
         // Get ACL category for the current object.
         if(isset($parent->acl_category) && !empty($parent->acl_category)){
@@ -149,11 +158,11 @@ class aclResolver
                     $image = (isset($this->config->idepartments[$dn]))? "images/select_department.png":"images/lists/element.png";
                     $aclType = $this->aclTypes[$acl['type']];
 
-                    // Does the filter match for us? 
+                    // Does the filter match for current object? 
                     $filter ="";
                     $match = TRUE;
                     if(!empty($acl['filter'])){
-                        $match = $ldap->object_match_filter($ui->dn,$acl['filter']);
+                        $match = $ldap->object_match_filter($this->dn,$acl['filter']);
                         $filter= $acl['filter'];
                         if(!$match){
                             $filter= "<span>".$filter."</span>";
@@ -164,7 +173,7 @@ class aclResolver
                     if($match){
                         $found = FALSE;
                         foreach($acl['members'] as $mem => $desc){
-                            if($mem == "U:{$ui->dn}"){
+                            if($mem == "U:{$this->validateDn}"){
                                 $found = TRUE;
                                 break;
                             }
@@ -177,7 +186,7 @@ class aclResolver
                                 $ldap->cat($gdn,array('memberUid'));
                                 if($ldap->count()){
                                     $attrs = $ldap->fetch();
-                                    if(isset($attrs['memberUid']) && in_array($ui->uid, $attrs['memberUid'])){
+                                    if(isset($attrs['memberUid']) && in_array($this->validateUid, $attrs['memberUid'])){
                                         $found = TRUE;
                                     }
                                 }
