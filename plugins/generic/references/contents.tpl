@@ -22,17 +22,6 @@
             {/if}
         </td>
         <td>
-          <input class='filter_textfield' placeholder='{t}Search{/t}...' 
-            id='aclTarget' name='aclTarget' type='text' value='' 
-            onChange='document.mainform.submit();'>
-          <div id='autocomplete' class='autocomplete'></div>
-            <script type='text/javascript'>
-              new Ajax.Autocompleter(
-                    'aclTarget', 
-                    'autocomplete', 
-                    'autocomplete.php', 
-                    { minChars: 3, frequency: 0.5 });
-            </script>
             {$acls}
         </td>
     </tr>

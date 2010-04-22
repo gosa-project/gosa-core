@@ -122,10 +122,25 @@ class aclResolver
                 $this->renderedList = "";
             }
         }
-        
+       
         if(empty($this->renderedList)){
 
             $this->reload();
+
+            // Autocompleter template 
+            $autocompleter ="
+                <input class='filter_textfield' placeholder='Suchen...' 
+                id='aclTarget' name='aclTarget' type='text' value='' 
+                onChange='document.mainform.submit();'>
+
+                <div id='autocomplete' class='autocomplete'></div>
+                <script type='text/javascript'>
+                new Ajax.Autocompleter(
+                        'aclTarget', 
+                        'autocomplete', 
+                        'autocomplete.php', 
+                        { minChars: 3, frequency: 0.5 });
+            </script>";
 
             // Base template - each entry start with this 
             $tpl = 
@@ -171,8 +186,11 @@ class aclResolver
                 "\n </tr>";
 
 
-            $str = "<br>".sprintf(_("ACL from the viewpoint of user '%s'"), "<b>".$this->validateUid."</b>");
-            $str.= "<table summary='"._("Object permissions")."' class='acl-viewer'>";
+            $user = sprintf(_("ACL from the viewpoint of user '%s'"), "<b>".$this->validateUid."</b>");
+            $str  = "<table summary='"._("Object permissions")."'>";
+            $str .= " <tr><td>".$user."</td><td>".$autocompleter."</td></tr>";
+            $str .= "</table>";
+            $str .= "<table summary='"._("Object permissions")."' class='acl-viewer'>";
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
             $ui = get_userinfo();
