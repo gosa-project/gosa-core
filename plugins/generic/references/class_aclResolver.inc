@@ -229,19 +229,18 @@ class aclResolver
     {
         $str ="<ul>";
         foreach($acls as $name => $acl){
-
             if($name == "0") $name = _("All");
-
-            $str .= "<li>".$name.": <i>";
-
-            if(preg_match("/r/", $acl)) $str.= _("read").', '; 
-            if(preg_match("/w/", $acl)) $str.= _("write").', '; 
-            if(preg_match("/c/", $acl)) $str.= _("Create").', '; 
-            if(preg_match("/d/", $acl)) $str.= _("Remove").', '; 
-            if(preg_match("/m/", $acl)) $str.= _("Move").', '; 
-            if(preg_match("/s/", $acl)) $str.= _("Owner").', '; 
-            $str = trim($str,', ');
-            $str.= "</i></li>";
+            $str .= "<li>".$name;
+            $str .= "<ul>";
+            if(preg_match("/s/", $acl)){
+                $str.="<li>"._("Grant permission to owner").'</li>'; 
+            }
+            if(preg_match("/r/", $acl)) $str.="<li>"._("read").'</li>'; 
+            if(preg_match("/w/", $acl)) $str.="<li>"._("write").'</li>'; 
+            if(preg_match("/c/", $acl)) $str.="<li>"._("Create").'</li>'; 
+            if(preg_match("/d/", $acl)) $str.="<li>"._("Remove").'</li>'; 
+            if(preg_match("/m/", $acl)) $str.="<li>"._("Move").'</li>'; 
+            $str.= "</ul>";
         }
         return($str."</ul>");
     }
