@@ -22,6 +22,14 @@
             {/if}
         </td>
         <td>
+          <div id='autocomplete' class='autocomplete'></div>
+            <script type='text/javascript'>
+              new Ajax.Autocompleter(
+                    'bs_input_', 
+                    'autocomplete', 
+                    'autocomplete.php?type=base', 
+                    { minChars: 3, frequency: 0.5 });
+            </script>
             {$acls}
         </td>
     </tr>

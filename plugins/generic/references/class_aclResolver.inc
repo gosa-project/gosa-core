@@ -11,21 +11,19 @@ class aclResolver
     // The users 'dn' and 'uid' used to verify the collected acls
     private $validateDn;
     private $validateUid;
+    private $acl_category;
+    private $parent;
 
     function __construct($config, $dn, $parent)
     {
         $this->config = &$config;
         $this->dn = $dn;
+        $this->parent = $parent;
 
         // Replace this with a user defined one later.
         $ui = get_userinfo();
         $this->validateUid = $ui->uid;
         $this->validateDn = $ui->dn;
-
-        // Get ACL category for the current object.
-        if(isset($parent->acl_category) && !empty($parent->acl_category)){
-            $this->acl_category = preg_replace("/\/$/","",$parent->acl_category);
-        }
 
         // Build class mapping - only once, will not change during session.
         if(!session::is_set('aclConverter::classMapping')){
@@ -65,8 +63,9 @@ class aclResolver
                 "sub" => _("Complete subtree"),
                 "psub" => _("Complete subtree (permanent)"),
                 "role" => _("Use ACL defined in role"));
-
-        $this->reload();
+    
+        // Enforce to reload acl result 
+        $this->renderedList = "";
     }
 
     
@@ -76,6 +75,11 @@ class aclResolver
         $ui = get_userinfo();
         $ui->reset_acl_cache();
         $ui->loadACL();
+
+        // Get ACL category for the current object.
+        if(isset($this->parent->acl_category) && !empty($this->parent->acl_category)){
+            $this->acl_category = preg_replace("/\/$/","",$this->parent->acl_category);
+        }
 
         foreach($ui->allACLs as $dn => $acls){
             if(preg_match("/".preg_quote($dn,'/')."$/i", $this->dn)){
@@ -99,9 +103,6 @@ class aclResolver
                 }
             }
         }
-
-        // Enforce to reload acl result 
-        $this->renderedList = "";
     }
     
 
@@ -111,6 +112,8 @@ class aclResolver
     function getReadableACL() 
     {
         if(empty($this->renderedList)){
+
+            $this->reload();
 
             // Base template - each entry start with this 
             $tpl = 
@@ -268,4 +271,3 @@ class aclResolver
 }
 
 ?>
-
