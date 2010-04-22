@@ -2,10 +2,11 @@
 
 class aclResolver 
 {
-
     private $classMapping = array();
     private $aclTypes = array();
     private $affectingACLs = array();
+
+    private $renderedList = "";
 
     function __construct($config, $dn, $parent)
     {
@@ -17,7 +18,7 @@ class aclResolver
             $this->acl_category = preg_replace("/\/$/","",$parent->acl_category);
         }
 
-        // Build class mapping
+        // Build class mapping - only once, will not change during session.
         if(!session::is_set('aclConverter::classMapping')){
             $tmp= session::global_get('plist');
             $plist= $tmp->info;
@@ -48,27 +49,6 @@ class aclResolver
         }
         $this->classMapping = session::get('aclConverter::classMapping');
 
-        // Go through all ACLs and get those matching out DN.
-        $ui = get_userinfo();
-        foreach($ui->allACLs as $dn => $acls){
-            if(preg_match("/".preg_quote($dn,'/')."$/i", $this->dn)){
-                foreach($acls as $prio => $acl){
-                    if($acl['type'] == "reset"){
-                        $this->affectingACLs[$dn][$prio] = $acl;
-                        break;
-                    }else{
-                        foreach($acl['acl'] as $category => $attributes){
-                            if(preg_match("/^all($|\/)/", $category) || 
-                                    preg_match("/^".$this->acl_category."($|\/)/", $category)){
-                                $this->affectingACLs[$dn][$prio] = $acl;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         // Define ACL type translations
         $this->aclTypes= array("reset" => _("Reset ACLs"),
                 "one" => _("One level"),
@@ -76,66 +56,173 @@ class aclResolver
                 "sub" => _("Complete subtree"),
                 "psub" => _("Complete subtree (permanent)"),
                 "role" => _("Use ACL defined in role"));
+
+        $this->reload();
     }
+
+    
+    function reload()
+    {
+
+        // Go through all ACLs and get those matching out DN.
+        $ui = get_userinfo();
+        $ui->reset_acl_cache();
+        $ui->loadACL();
+
+        foreach($ui->allACLs as $dn => $acls){
+            if(preg_match("/".preg_quote($dn,'/')."$/i", $this->dn)){
+                foreach($acls as $prio => $acl){
+                    if($acl['type'] == "reset"){
+                        $this->affectingACLs[$dn][$prio] = $acl;
+                        continue;
+                    }else{
+                        foreach($acl['acl'] as $category => $attributes){
+                            if(preg_match("/^all($|\/)/", $category) || 
+                                    preg_match("/^".$this->acl_category."($|\/)/", $category)){
+                                $this->affectingACLs[$dn][$prio] = $acl;
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Enforce to reload acl result 
+        $this->renderedList = "";
+    }
+    
 
 
     /*! \brief   Create a human readable HTML result 
      */    
     function getReadableACL() 
     {
-        $tpl = 
-            "\n <tr>".
-            "\n  <td>%s</td>".
-            "\n  <td><b>%s</b></td>".
-            "\n  <td rowspan=3>%s</td>".
-            "\n </tr>".
-            "\n <tr>".
-            "\n  <td></td>".
-            "\n  <td><b>"._("Group members")."</b><ul>%s</ul></td>".
-            "\n </tr>".
-            "\n <tr>".
-            "\n  <td></td>".
-            "\n  <td><b>"._("Members")."</b><ul>%s</ul></td>".
-            "\n </tr>".
-            "\n <tr>".
-            "\n  <td></td>".
-            "\n  <td><b>"._("Acls")."</b><ul>%s</ul></td>".
-            "\n </tr>".
-            "\n <tr>".
-            "\n  <td colspan=3><hr></td>".
-            "\n </tr>";
+        if(empty($this->renderedList)){
+
+            $tpl = 
+                "\n <tr class='acl-viewer-head %s'>".
+                "\n  <td>%s</td>".
+                "\n  <td colspan=2><b>%s</b>&nbsp;-&nbsp;%s</td>".
+                "\n </tr>".
+                "\n %s".
+                "\n <tr>".
+                "\n  <td colspan=3><hr></td>".
+                "\n </tr>";
+
+            $filter_tpl = 
+                "\n <tr class='%s'>".
+                "\n  <td></td>".
+                "\n  <td><b>"._("Filter")."</b></td>".
+                "\n  <td><ul><li>%s</li></ul></td>".
+                "\n </tr>";
+
+            $gmem_tpl = 
+                "\n <tr class='%s'>".
+                "\n  <td></td>".
+                "\n  <td><b>"._("Group members")."</b></td>".
+                "\n  <td><ul>%s</ul></td>".
+                "\n </tr>";
+
+            $umem_tpl = 
+                "\n <tr class='%s'>".
+                "\n  <td></td>".
+                "\n  <td><b>"._("Members")."</b></td>".
+                "\n  <td><ul>%s</ul></td>".
+                "\n </tr>";
+
+            $acl_tpl = 
+                "\n <tr class='%s'>".
+                "\n  <td></td>".
+                "\n  <td><b>"._("Acls")."</b></td>".
+                "\n  <td><ul>%s</ul></td>".
+                "\n </tr>";
 
 
-        $str = "<table summary='"._("Object permissions")."' width='100%'>";
-        foreach($this->affectingACLs as $dn => $acls){
-            foreach($acls as $acl){
-                $gmem = $umem = $defs = "";
-                $image = (isset($this->config->idepartments[$dn]))? "images/select_department.png":"images/lists/element.png";
-                $aclType = $this->aclTypes[$acl['type']];
-                
-                foreach($acl['members'] as $type => $name){
-                    if(preg_match("/^G/", $type))
-                    $gmem .= "\n        <li>".$name."</li>";
-                }
-                foreach($acl['members'] as $type => $name){
-                    if(!preg_match("/^G/", $type))
-                    $umem .= "\n        <li>".$name."</li>";
-                }
+            $str = "<table summary='"._("Object permissions")."' class='acl-viewer'>";
+            $ldap = $this->config->get_ldap_link();
+            $ldap->cd($this->config->current['BASE']);
+            $ui = get_userinfo();
+            foreach($this->affectingACLs as $dn => $acls){
+                foreach($acls as $acl){
+                    $gmem = $umem = $defs = "";
+                    $image = (isset($this->config->idepartments[$dn]))? "images/select_department.png":"images/lists/element.png";
+                    $aclType = $this->aclTypes[$acl['type']];
 
-                if($acl['type']!='reset'){
-                    foreach($acl['acl'] as $type => $acl){
-                        if(isset($this->classMapping[$type])){
-                            $defs .= "<li>".$this->classMapping[$type].": ".$this->aclToString($acl)."</li>";
-                        }else{
-                            $defs .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
+                    // Does the filter match for us? 
+                    $filter ="";
+                    $match = TRUE;
+                    if(!empty($acl['filter'])){
+                        $match = $ldap->object_match_filter($ui->dn,$acl['filter']);
+                        $filter= $acl['filter'];
+                        if(!$match){
+                            $filter= "<span>".$filter."</span>";
                         }
                     }
+
+                    // Check if we are part of the member list 
+                    if($match){
+                        $found = FALSE;
+                        foreach($acl['members'] as $mem => $desc){
+                            if($mem == "U:{$ui->dn}"){
+                                $found = TRUE;
+                                break;
+                            }
+                            if($mem == "G:*"){
+                                $found = TRUE;
+                                break;
+                            }
+                            if(preg_match("/^G:/", $mem)){
+                                $gdn = preg_replace("/^G:/","",$mem);
+                                $ldap->cat($gdn,array('memberUid'));
+                                if($ldap->count()){
+                                    $attrs = $ldap->fetch();
+                                    if(isset($attrs['memberUid']) && in_array($ui->uid, $attrs['memberUid'])){
+                                        $found = TRUE;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        $match = $found;
+                    }
+
+                    $class = "";
+                    if(!$match){
+                        $class = "acl-viewer-blocked";
+                    }
+
+                    if(!empty($filter)) $filter =sprintf($filter_tpl,$class,$filter);
+
+                    foreach($acl['members'] as $type => $name){
+                        if(preg_match("/^G/", $type))
+                            $gmem .= "\n        <li>".$name."</li>";
+                    }
+                    if(!empty($gmem)) $gmem =sprintf($gmem_tpl,$class,$gmem);
+
+                    foreach($acl['members'] as $type => $name){
+                        if(!preg_match("/^G/", $type))
+                            $umem .= "\n        <li>".$name."</li>";
+                    }
+                    if(!empty($umem)) $umem = sprintf($umem_tpl,$class,$umem);
+
+                    if($acl['type']!='reset'){
+                        foreach($acl['acl'] as $type => $acl){
+                            if(isset($this->classMapping[$type])){
+                                $defs .= "<li>".$this->classMapping[$type].": ".$this->aclToString($acl)."</li>";
+                            }else{
+                                $defs .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
+                            }
+                        }
+                        if(!empty($defs)) $defs = sprintf($acl_tpl, $class,$defs);
+                    }
+                    $str.= sprintf($tpl,$class, image($image), $dn, $aclType, $filter.$gmem.$umem.$defs);
                 }
-                $str.= sprintf($tpl, image($image), $dn, $aclType, $gmem, $umem, $defs);
             }
+            $str .= "</table>"; 
+            $this->renderedList = $str;
         }
-        $str .= "</table>"; 
-        return($str);
+        return($this->renderedList);
     }
 
     function aclToString($acls)
