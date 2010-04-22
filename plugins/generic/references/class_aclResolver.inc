@@ -72,19 +72,22 @@ class aclResolver
     
     function reload()
     {
-
-        // Go through all ACLs and get those matching out DN.
+        // Go through all ACLs and get those matching the objects dn.
         $ui = get_userinfo();
         $ui->reset_acl_cache();
         $ui->loadACL();
 
         foreach($ui->allACLs as $dn => $acls){
             if(preg_match("/".preg_quote($dn,'/')."$/i", $this->dn)){
+
+                // Foreach dn there is a collection of ACLs indexed by their priority
                 foreach($acls as $prio => $acl){
                     if($acl['type'] == "reset"){
                         $this->affectingACLs[$dn][$prio] = $acl;
                         continue;
                     }else{
+
+                        // Only get those entries with a relevant acl-category
                         foreach($acl['acl'] as $category => $attributes){
                             if(preg_match("/^all($|\/)/", $category) || 
                                     preg_match("/^".$this->acl_category."($|\/)/", $category)){
@@ -109,6 +112,7 @@ class aclResolver
     {
         if(empty($this->renderedList)){
 
+            // Base template - each entry start with this 
             $tpl = 
                 "\n <tr class='acl-viewer-head %s'>".
                 "\n  <td>%s</td>".
@@ -119,6 +123,7 @@ class aclResolver
                 "\n  <td colspan=3><hr></td>".
                 "\n </tr>";
 
+            // If the acl consists of a user-object-filter then this template is used.        
             $filter_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
@@ -126,6 +131,7 @@ class aclResolver
                 "\n  <td><ul><li>%s</li></ul></td>".
                 "\n </tr>";
 
+            // Used to display ACL owner of type "group"
             $gmem_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
@@ -133,6 +139,7 @@ class aclResolver
                 "\n  <td><ul>%s</ul></td>".
                 "\n </tr>";
 
+            // Used to display ACL owner of type "user"
             $umem_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
@@ -140,6 +147,7 @@ class aclResolver
                 "\n  <td><ul>%s</ul></td>".
                 "\n </tr>";
 
+            // Used to display the acl contents, except 'reset' and 'role'
             $acl_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
@@ -155,7 +163,11 @@ class aclResolver
             foreach($this->affectingACLs as $dn => $acls){
                 foreach($acls as $acl){
                     $gmem = $umem = $defs = "";
+
+                    // Prepare entry icon (department or element?)
                     $image = (isset($this->config->idepartments[$dn]))? "images/select_department.png":"images/lists/element.png";
+
+                    // The acl type (sub,psub,reset...)
                     $aclType = $this->aclTypes[$acl['type']];
 
                     // Does the filter match for current object? 
