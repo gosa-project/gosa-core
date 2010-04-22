@@ -131,7 +131,7 @@ class aclResolver
             $autocompleter ="
                 <input class='filter_textfield' placeholder='"._("Search")."...' 
                 id='aclTarget' name='aclTarget' type='text' value='' 
-                onChange='document.mainform.submit();'>
+                onChange='\$('aclTargetSubmit').focus();'>
 
                 <div id='autocomplete' class='autocomplete'></div>
                 <script type='text/javascript'>
@@ -140,7 +140,8 @@ class aclResolver
                         'autocomplete', 
                         'autocomplete.php', 
                         { minChars: 3, frequency: 0.5 });
-            </script>";
+            </script>
+            ".image("images/lists/submit.png","aclTargetSubmit");
 
             // Base template - each entry start with this 
             $tpl = 
