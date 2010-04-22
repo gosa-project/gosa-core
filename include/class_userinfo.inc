@@ -448,12 +448,6 @@ class userinfo
         /* Inspect this ACL, place the result into ACL */
         foreach ($ACL[$cpath] as $subacl){
 
-          /* Reset? Just clean the ACL and turn over to the next one... */
-          if ($subacl['type'] == 'reset'){
-            $acl= $this->cleanACL($acl, TRUE);
-            continue;
-          }
-
           if($subacl['type'] == "role") {
             echo "role skipped";
             continue;
@@ -468,6 +462,12 @@ class userinfo
             if(!$ACL_CACHE['FILTER'][$id]){
               continue;
             }
+          }
+
+          /* Reset? Just clean the ACL and turn over to the next one... */
+          if ($subacl['type'] == 'reset'){
+            $acl= $this->cleanACL($acl, TRUE);
+            continue;
           }
 
           /* Self ACLs? 
