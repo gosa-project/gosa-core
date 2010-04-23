@@ -140,42 +140,39 @@ class aclResolver
                         'autocomplete', 
                         'autocomplete.php', 
                         { minChars: 3, frequency: 0.5 });
-            </script>
+                </script>
             ".image("images/lists/submit.png","aclTargetSubmit");
 
             // Base template - each entry start with this 
             $tpl = 
                 "\n <tr class='acl-viewer-head %s'>".
                 "\n  <td>%s</td>".
-                "\n  <td colspan=2><b>%s</b>&nbsp;-&nbsp;%s</td>".
+                "\n  <td colspan=2><b>%s</b><div class='right'>%s</div></td>".
                 "\n </tr>".
-                "\n %s".
-                "\n <tr>".
-                "\n  <td colspan=3><hr></td>".
-                "\n </tr>";
+                "\n %s";
 
             // If the acl consists of a user-object-filter then this template is used.        
             $filter_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
                 "\n  <td><b>"._("Filter")."</b></td>".
-                "\n  <td><ul><li>%s</li></ul></td>".
+                "\n  <td><ul class='acl-viewer-items'><li>%s</li></ul></td>".
                 "\n </tr>";
 
             // Used to display ACL owner of type "group"
             $gmem_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
-                "\n  <td><b>"._("Group members")."</b></td>".
-                "\n  <td><ul>%s</ul></td>".
+                "\n  <td><b>"._("Groups")."</b></td>".
+                "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
                 "\n </tr>";
 
             // Used to display ACL owner of type "user"
             $umem_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
-                "\n  <td><b>"._("Members")."</b></td>".
-                "\n  <td><ul>%s</ul></td>".
+                "\n  <td><b>"._("Users")."</b></td>".
+                "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
                 "\n </tr>";
 
             // Used to display the acl contents, except 'reset' and 'role'
@@ -183,15 +180,16 @@ class aclResolver
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
                 "\n  <td><b>"._("Acls")."</b></td>".
-                "\n  <td><ul>%s</ul></td>".
+                "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
                 "\n </tr>";
 
 
-            $user = sprintf(_("ACL from the viewpoint of user '%s'"), "<b>".$this->validateUid."</b>");
+            $user = "<h3>".sprintf(_("List of effective ACL for '%s'"), $this->validateUid)."</h3>";
             $str  = "<table summary='"._("Object permissions")."'>";
             $str .= " <tr><td>".$user."</td><td>".$autocompleter."</td></tr>";
             $str .= "</table>";
-            $str .= "<table summary='"._("Object permissions")."' class='acl-viewer'>";
+            $str .= "<div class='acl-viewer-container'>";
+            $str .= "<table summary='"._("Object permissions")."' cellpadding='0' cellspacing='0' class='acl-viewer'>";
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
             $ui = get_userinfo();
@@ -284,6 +282,7 @@ class aclResolver
                 }
             }
             $str .= "</table>"; 
+            $str .= "</div>"; 
             $this->renderedList = $str;
         }
         return($this->renderedList);

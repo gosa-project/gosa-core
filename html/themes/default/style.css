@@ -1516,3 +1516,48 @@ h2 {
   font-weight:bold;
 }
 
+
+/* ACL viewer */
+
+div.acl-viewer-container {
+  border:1px solid #CCC;
+  padding:1px;
+  height:100%;
+  min-height:480px;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+.acl-viewer span {
+    color:red;
+}
+
+table.acl-viewer{
+    width:100%;
+}
+
+.acl-viewer td {
+    padding-top:5px;
+}
+
+tr.acl-viewer-head{
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#DDD));
+  background: -moz-linear-gradient(top, #EEE, #DDD);
+}
+
+tr.acl-viewer-head td{
+  padding:6px;
+  margin:0;
+}
+
+tr.acl-viewer-blocked{
+  background:#FAA;
+}
+
+ul.acl-viewer-items, ul.acl-viewer-items li {
+  list-style:none;
+  display:inline;
+  margin:0;
+  padding:0;
+}
+

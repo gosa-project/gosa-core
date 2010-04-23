@@ -43,25 +43,25 @@ class reference extends plugin
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=posixGroup)(memberUid={$this->uid}))",
             'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Group"));
+            'msg'    => _("Group membership"));
 
         // Check for group membership in rfc 2307 bis mode
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=posixGroup)(member=".normalizeLdap($this->dn)."))",
             'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Group")." (rfc 2307 bis)");
+            'msg'    => _("Group membership")." (rfc 2307 bis)");
 
         // Check for role membership
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=organizationalRole)(roleOccupant=".normalizeLdap($this->dn)."))",
             'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Role"));
+            'msg'    => _("Role membership"));
 
         // Check for objectGroup membership
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=gosaGroupOfNames)(member=".normalizeLdap($this->dn)."))",
             'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Object group"));
+            'msg'    => _("Object group membership"));
 
         // Check for department manager 
         $this->referenceFilters[] = array(
@@ -115,6 +115,7 @@ class reference extends plugin
                 $list->update();    
                 $str .= "<h3>".$filter['msg']."</h3>";
                 $str .= $list->render();
+                $str .= "<div class='v-spacer'></div>";
             }
         }
 
