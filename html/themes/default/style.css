@@ -1561,3 +1561,6 @@ ul.acl-viewer-items, ul.acl-viewer-items li {
   padding:0;
 }
 
+table.reference-tab {
+  width:100%;
+}
