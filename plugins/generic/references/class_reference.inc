@@ -122,7 +122,7 @@ class reference extends plugin
         $smarty = get_smarty();        
         $smarty->assign('objectList', $str);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());
-
+        $smarty->assign("usePrototype", "true");
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
     }
 
