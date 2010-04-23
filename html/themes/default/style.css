@@ -1550,7 +1550,7 @@ tr.acl-viewer-head td{
   margin:0;
 }
 
-tr.acl-viewer-blocked{
+td.acl-viewer-blocked{
   background:#FAA;
 }
 
