@@ -197,7 +197,6 @@ class aclResolver
             $ui = get_userinfo();
             foreach($this->affectingACLs as $dn => $acls){
                 foreach($acls as $acl){
-                    $gmem = $umem = $defs = "";
 
                     // Prepare entry icon (department or element?)
                     $image = (isset($this->config->idepartments[$dn]))? "images/select_department.png":"images/lists/element.png";
@@ -216,52 +215,51 @@ class aclResolver
                         }
                     }
 
-                    // Check if we are part of the member list 
-                    if($match){
-                        $found = FALSE;
-                        foreach($acl['members'] as $mem => $desc){
-                            if($mem == "U:{$this->validateDn}"){
-                                $found = TRUE;
-                                break;
+                    // Check membership 
+                    $gmem = $umem = "";
+                    $users = $groups = array();
+                    $gfound = $ufound = FALSE;
+                    foreach($acl['members'] as $type => $name){
+
+                        // Check if we're part of the members 
+                        if(preg_match("/^U:/", $type)){
+                            if(preg_match("/^U:".preg_quote($this->validateDn,'/')."/", $type)){
+                                $users[] = $name;
+                                $ufound = TRUE;
+                                continue;
                             }
-                            if($mem == "G:*"){
-                                $found = TRUE;
-                                break;
+                            $users[] = "<span>".$name."</span>";
+                        }
+
+                        // Check if we're part of the group members 
+                        if(preg_match("/^G/", $type)){
+                            if($type == "G:*"){
+                                $gfound = TRUE;
+                                $groups[] = $name;
+                                continue;
                             }
-                            if(preg_match("/^G:/", $mem)){
-                                $gdn = preg_replace("/^G:/","",$mem);
+                            if(preg_match("/^G:/", $type)){
+                                $gdn = preg_replace("/^G:/","",$type);
                                 $ldap->cat($gdn,array('memberUid'));
                                 if($ldap->count()){
                                     $attrs = $ldap->fetch();
                                     if(isset($attrs['memberUid']) && in_array($this->validateUid, $attrs['memberUid'])){
-                                        $found = TRUE;
+                                        $gfound = TRUE;
+                                        $groups[] = $name;
                                     }
                                 }
-                                break;
+                                continue;
                             }
+
+                            // Group member doesn't mactch
+                            $groups[] = "<span>".$name."</span>";
                         }
-                        $match = $found;
                     }
+                    if(!count($groups)) $gfound = TRUE;
+                    if(!count($users)) $ufound = TRUE;
 
-                    $class = "";
-                    if(!$match){
-                        $class = "acl-viewer-blocked";
-                    }
-
-                    if(!empty($filter)) $filter =sprintf($filter_tpl,$class,$filter);
-
-                    foreach($acl['members'] as $type => $name){
-                        if(preg_match("/^G/", $type))
-                            $gmem .= "\n        <li>".$name."</li>";
-                    }
-                    if(!empty($gmem)) $gmem =sprintf($gmem_tpl,$class,$gmem);
-
-                    foreach($acl['members'] as $type => $name){
-                        if(!preg_match("/^G/", $type))
-                            $umem .= "\n        <li>".$name."</li>";
-                    }
-                    if(!empty($umem)) $umem = sprintf($umem_tpl,$class,$umem);
-
+                    // Build up ACL definition list 
+                    $defs ="";
                     if($acl['type']!='reset'){
                         foreach($acl['acl'] as $type => $acl){
                             if(isset($this->classMapping[$type])){
@@ -270,8 +268,18 @@ class aclResolver
                                 $defs .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
                             }
                         }
-                        if(!empty($defs)) $defs = sprintf($acl_tpl, $class,$defs);
                     }
+                   
+                    // Display the acl block in a special color if its not matching 
+                    $class="";
+                    if(!$gfound || !$ufound || !$match){
+                        $class = "acl-viewer-blocked";
+                    }                    
+
+                    if(!empty($filter)) $filter =sprintf($filter_tpl,$class,$filter);
+                    if(!empty($defs)) $defs = sprintf($acl_tpl,$class,$defs);
+                    if(count($users))  $umem = sprintf($umem_tpl,$class,"<li>".implode($users,'</li><li>')."</li>");
+                    if(count($groups)) $gmem = sprintf($gmem_tpl,$class,"<li>".implode($groups,'</li><li>')."</li>");
                     $str.= sprintf($tpl,$class, image($image), $dn, $aclType, $filter.$gmem.$umem.$defs);
                 }
             }
