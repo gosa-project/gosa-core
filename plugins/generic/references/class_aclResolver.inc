@@ -140,7 +140,7 @@ class aclResolver
                         'autocomplete', 
                         'autocomplete.php', 
                         { minChars: 3, frequency: 0.5 });
-                </script>
+            </script>
             ".image("images/lists/submit.png","aclTargetSubmit");
 
             // Base template - each entry start with this 
@@ -184,7 +184,7 @@ class aclResolver
                 "\n </tr>";
 
 
-            $user = "<h3>".sprintf(_("List of effective ACL for '%s'"), $this->validateUid)."</h3>";
+            $user = "<h3>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h3>";
             $str  = "<table summary='"._("Object permissions")."'>";
             $str .= " <tr><td>".$user."</td><td>".$autocompleter."</td></tr>";
             $str .= "</table>";
