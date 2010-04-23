@@ -1,6 +1,6 @@
 
 <h3>{t}Object info{/t}</h3>
-{if !$referencesREAD}
+{if !$someACL|regex_replace:"/[cdmr]/":"" == "r"}
     {msgPool type='permView'}
 {else}
     test
@@ -9,8 +9,7 @@
 <table summary='{t}Object references{/t}' class='reference-tab'>
     <tr>
         <td style='width:48%'>
-            {if !$referencesREAD}
-                <h3>{t}Object references{/t}</h3>
+            {if !$completeACL|regex_replace:"/[cdmr]/":"" == "r"}
                 {msgPool type='permView'}
             {else}
                 {$objectList}

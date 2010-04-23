@@ -124,9 +124,11 @@ class reference extends plugin
         // Assign permissions
         $tmp = $this->plInfo();
         $ui = get_userinfo();
-        foreach($tmp['plProvidedAcls'] as $name => $desc){
-            $smarty->assign($name.'READ', $ui->get_permissions($this->dn, 'references/reference', $name));
-        }
+
+        $category = preg_replace("/\/.*$/", "", $this->acl_category);
+        $smarty->assign('aclREAD',  preg_match("/r/",$ui->get_category_permissions($this->dn, 'acl')));
+        $smarty->assign('completeACL',  $ui->has_complete_category_acls($this->dn, $category)); 
+        $smarty->assign('someACL',      $ui->get_category_permissions($this->dn, $category));
 
         $smarty->assign('objectList', $this->objectList);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());
@@ -134,31 +136,6 @@ class reference extends plugin
         session::set('autocomplete', $this->aclResolver);
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
     }
-
-
-
-    static function plInfo()
-    {
-        return (array(
-                    "plShortName"   => _("Reference"),
-                    "plDescription" => _("Object references"),
-                    "plSelfModify"  => TRUE,
-                    "plDepends"     => array(),
-                    "plPriority"    => 0,
-                    "plSection"     => array("administration"),
-                    "plCategory"    => array("references" => array("description"  => _("References"),
-                                             "objectClass"  => array())),
-                    "plProvidedAcls"=> array(
-                        "references"   => _("View object references"),
-                        "acl"          => _("View acl trace"),
-                        "info"         => _("View object info"),
-                        "export"       => _("Allow entry export")
-                        )
-
-                    ));
-    }
-
-
 }
 
 ?>
