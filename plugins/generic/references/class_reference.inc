@@ -119,14 +119,46 @@ class reference extends plugin
     {
         // Mark plugin as viewed
         plugin::execute();
-
         $smarty = get_smarty();        
+
+        // Assign permissions
+        $tmp = $this->plInfo();
+        $ui = get_userinfo();
+        foreach($tmp['plProvidedAcls'] as $name => $desc){
+            $smarty->assign($name.'READ', $ui->get_permissions($this->dn, 'references/reference', $name));
+        }
+
         $smarty->assign('objectList', $this->objectList);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());
         $smarty->assign("usePrototype", "true");
         session::set('autocomplete', $this->aclResolver);
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
     }
+
+
+
+    static function plInfo()
+    {
+        return (array(
+                    "plShortName"   => _("Reference"),
+                    "plDescription" => _("Object references"),
+                    "plSelfModify"  => TRUE,
+                    "plDepends"     => array(),
+                    "plPriority"    => 0,
+                    "plSection"     => array("administration"),
+                    "plCategory"    => array("references" => array("description"  => _("References"),
+                                             "objectClass"  => array())),
+                    "plProvidedAcls"=> array(
+                        "references"   => _("View object references"),
+                        "acl"          => _("View acl trace"),
+                        "info"         => _("View object info"),
+                        "export"       => _("Allow entry export")
+                        )
+
+                    ));
+    }
+
+
 }
 
 ?>
