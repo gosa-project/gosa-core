@@ -1,15 +1,18 @@
 
 <h3>{t}Object info{/t}</h3>
-{if !$someACL|regex_replace:"/[cdmr]/":"" == "r"}
+{if !$someACL|regex_replace:"/[cdmw]/":"" == "r"}
     {msgPool type='permView'}
 {else}
-    test
+    Last modified ....
+{/if}
+{if $completeACL|regex_replace:"/[cdmw]/":"" == "r"}
+    <button type='submit' name='viewLdif'>{t}View entry{/t}</button>
 {/if}
 <hr>
 <table summary='{t}Object references{/t}' class='reference-tab'>
     <tr>
         <td style='width:48%'>
-            {if !$completeACL|regex_replace:"/[cdmr]/":"" == "r"}
+            {if !$completeACL|regex_replace:"/[cdmw]/":"" == "r"}
                 {msgPool type='permView'}
             {else}
                 {$objectList}
