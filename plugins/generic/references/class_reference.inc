@@ -22,217 +22,97 @@
 
 class reference extends plugin
 {
-    /* attribute list for save action */
-    var $attributes= array();
-    var $objectclasses= array();
-    var $objectlist= "";
-    var $obtypes= array();
-    var $fold= array();
-    var $objectCache= array();
+    var $attributes= array('uid');
     var $aclResolver = NULL;
 
-    function reference (&$config, $dn= NULL)
+    var $referenceFilters = array();
+    var $objectList ="";
+
+    function reference (&$config, $dn= NULL, $parent = NULL)
     {
-        /* Include config object */
-        $this->config= &$config;
-        $this->dn= $dn;
+        // Init the plugin
+        plugin::plugin($config,$dn,$parent);
+
+        // Initialize the ACL-resolver
         $this->aclResolver = new aclResolver($this->config, $this->dn, $this);
 
-        /* Fill translation array */
-        $this->obtypes= array(  
-                "gosaAccount" => array(	   "text" => _("Generic"),
-                    "image" => "images/penguin.png"),
-                "posixAccount" => array(   "text" =>_("UNIX"),
-                    "image" => "plugins/users/images/select_user.png"),
-                "gosaMailAccount" => array("text" => _("Mail"),
-                    "image" => "images/mailto.png"),
-                "sambaSamAccount" => array("text" => _("Samba"),
-                    "image" => "plugins/systems/images/select_winstation.png"),
-                "sambaAccount" => array(   "text" => _("Samba"),
-                    "image" => "plugins/sysmtes/images/select_winstation.png"),
-                "goFaxAccount" => array(   "text" => _("FAX"),
-                    "image" => "plugins/gofax/images/fax_small.png"),
-                "gosaProxyAccount" => array("text" => _("Proxy"),
-                    "image" => "images/select_proxy.png"),
-                "PureFTPdUser" => array(   "text" => _("FTP"),
-                    "image" => "images/select_proxy.png"),
-                "posixGroup" => array(     "text" => _("Group"),
-                    "image" => "plugins/groups/images/select_group.png"),
-                "gosaDepartment" => array( "text" => _("Department"),
-                    "image" => "images/select_department.png"),
-                "goFonHardware" => array(   "text" => _("Phone"),
-                        "image" => "plugins/systems/images/select_phone.png"),
-                "gosaApplication" => array("text" => _("Application"),
-                        "image" => "plugins/goto/images/select_application.png"),
-                "goServer" => array(	   "text" => _("Server"),
-                        "image" => "plugins/systems/images/select_server.png"),
-                "gotoTerminal" => array(   "text" => _("Thin Client"),
-                        "image" => "images/select_terminal.png"),
-                "gotoWorkstation" => array("text" => _("Workstation"),
-                        "image" => "plugins/systems/images/select_workstation.png"),
-                "gosaGroupOfNames" => array("text" => _("Object group"),
-                        "image" => "plugins/ogroups/images/select_ogroup.png"),
-                "gotoPrinter" => array(	   "text" => _("Printer"),
-                        "image" => "plugins/systems/images/select_printer.png"));
+        // References we may have to other objects.
+        $this->referenceFilters = array();
 
+        // Check for group membership
+        $this->referenceFilters[] = array(
+            'filter' => "(&(objectClass=posixGroup)(memberUid={$this->uid}))",
+            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
+            'msg'    => _("Group"));
+
+        // Check for group membership in rfc 2307 bis mode
+        $this->referenceFilters[] = array(
+            'filter' => "(&(objectClass=posixGroup)(member=".normalizeLdap($this->dn)."))",
+            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
+            'msg'    => _("Group")." (rfc 2307 bis)");
+
+        // Check for role membership
+        $this->referenceFilters[] = array(
+            'filter' => "(&(objectClass=organizationalRole)(roleOccupant=".normalizeLdap($this->dn)."))",
+            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
+            'msg'    => _("Role"));
+
+        // Check for objectGroup membership
+        $this->referenceFilters[] = array(
+            'filter' => "(&(objectClass=gosaGroupOfNames)(member=".normalizeLdap($this->dn)."))",
+            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
+            'msg'    => _("Object group"));
     }
 
     function execute()
     {
-        /* Call parent execute */
+        // Mark plugin as viewed
         plugin::execute();
 
-        // ACL's we have
-        $ui = get_userinfo();
+        // Go through filters and detect possible references  
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $str = "";
+        foreach($this->referenceFilters as $filter){
+            $ldap->search($filter['filter'], array_keys($filter['attrs']));
+            if(!$ldap->success()){
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_VIEW, get_class()));
+            }elseif($ldap->count()){
+                $list = new sortableListing();
+                $list->setDeleteable(false);
+                $list->setEditable(false);
+                $list->setWidth("100%");
+                $list->setHeight("80px");
+                $list->setHeader(array_values($filter['attrs']));
+                $list->setDefaultSortColumn(0);
+                $list->setAcl('rwcdm');
 
-        /* Set government mode */
-        $smarty= get_smarty();
-        $smarty->assign("usePrototype", "true");
-        session::set('autocomplete', $this->aclResolver);
+                $data = array();
+                while($attrs = $ldap->fetch()){
 
-        if (isset($_GET['show'])){
-            $dn= base64_decode($_GET['show']);
-            if (isset($this->fold["$dn"])){
-                unset($this->fold["$dn"]);
-            } else {
-                $this->fold["$dn"]= "$dn";
+                    $entry = array();
+                    foreach($filter['attrs'] as $name => $desc){
+                        $$name = "";
+                        if(isset($attrs[$name][0])) $$name = $attrs[$name][0];
+                        $entry['data'][] = $$name;
+                    }
+                    $data[] = $entry;
+                }
+                $list->setListData($data, $data);
+
+                $list->update();    
+                $str .= "<h3>".$filter['msg']."</h3>";
+                $str .= $list->render();
             }
         }
 
-        /* Fill array */
-        $this->reload();
-        $smarty->assign("objectList", $this->objectlist);
+        $smarty = get_smarty();        
+        $smarty->assign('objectList', $str);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());
 
-        /* Show main page */
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
     }
 
-
-    function reload()
-    {
-        $ldap= $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
-
-        $ldap->search(
-                "(|(gotoHotplugDeviceDN=".LDAP::prepare4filter($this->dn).")".
-                "(member=".LDAP::prepare4filter($this->dn).")(memberUid=".$this->uid."))",
-                array("memberUid","member","cn","description","objectClass"));
-
-        $cycle= array("F5F5F5", "ECECEC");
-        $id= 0;
-        $this->objectlist= "";
-        while ($attrs= $ldap->fetch()){
-
-            /* Add more information? */
-            $addon= "";
-            if (in_array($attrs['dn'], $this->fold)){
-                $memberattr= "";
-                if (isset($attrs['memberUid'])){
-                    unset($attrs['memberUid']['count']);
-                    $memberattr= "memberUid";
-                } 
-                if (isset($attrs['member'])){
-                    unset($attrs['member']['count']);
-                    $memberattr= "member";
-                } 
-                if ($memberattr == ""){
-                    continue;
-                }
-                foreach ($attrs[$memberattr] as $uid){
-                    $content= $this->getCacheObject($uid);
-                    if ($content === NULL) {
-                        continue;
-                    }
-                    $addon.= 
-                        ' <tr style="background-color:'.$cycle[$id&1].';"> '.
-                        '   <td title="'.$attrs['cn'][0].'">&nbsp;&nbsp;&nbsp;'.$content['name'].'</td>'.
-                        '   <td>'.$content['description'].'</td>'.
-                        '   <td>'.$content['type'].'</td> '.
-                        ' </tr>';
-                }
-            }
-
-            /* Build final entry */
-            if (isset($attrs['description'])){
-                $description= $attrs['description'][0];
-            } else {
-                $description= "-";
-            }
-            $content= $this->createContentString($attrs['objectClass']);
-            if ($addon == ""){
-                $img= "images/lists/expand.png";
-            } else {
-                $img= "images/lists/sort-down.png";
-            }
-
-            $this->objectlist.= 
-                ' <tr style="background-color:'.$cycle[$id&1].';">  '.
-                '   <td class="phonelist" title="'.$attrs['cn'][0].'">  '.
-                '     '.image($img).
-                '     <a href="main.php?plug='.$_GET['plug'].'&amp;start=&amp;show='.base64_encode($attrs['dn']).'"> '.
-                '     &nbsp;'.$attrs['cn'][0].
-                '     </a> '.
-                '   </td> '.
-                '   <td>'.
-                '     <a href="main.php?plug='.$_GET['plug'].'&amp;start=&amp;show='.base64_encode($attrs['dn']).'"> '.
-                $description.
-                '     </a> '.
-                '   </td> '.
-                '   <td>'.$content.'</td> '.
-                ' </tr>'.$addon;
-            $id++;
-        }
-
-    }
-
-    function getCacheObject($dn)
-    {
-        if (!isset($this->objectCache[$dn])){
-            $ldap= $this->config->get_ldap_link();
-            if (preg_match('/,/', $dn)){
-                $ldap->cat($dn, array("cn", "objectClass", "description","ou"));
-            } else {
-                $ldap->search("(uid=$dn)", array("cn", "objectClass", "description","ou"));
-            }
-            if ($ldap->count()){
-                $attrs= $ldap->fetch();
-
-                if(isset($attrs['ou']) && !isset($attrs['cn'])){
-                    $attrs['cn'] = $attrs['ou'];
-                }
-
-                if (isset($attrs['description'])){
-                    $description= $attrs['description'][0];
-                } else {
-                    $description= "-";
-                }
-                $this->objectCache[$dn]= array(	'name' => $attrs['cn'][0],
-                        'description' => "$description",
-                        'type' => $this->createContentString($attrs['objectClass']));
-            } else {
-                return NULL;
-            }
-        }
-        return ($this->objectCache[$dn]);
-    }
-
-    function createContentString($classes)
-    {
-        $result= "";
-        if(!is_null($classes)) {
-            foreach ($classes as $class){
-                if (isset($this->obtypes[$class])){
-                    $result.= 
-                        " ".image($this->obtypes[$class]['image']).
-                        " <a>".
-                        "   ".$this->obtypes[$class]['text'].
-                        " </a> ";
-                }
-            }
-        }
-        return (preg_replace('/ $/', '', $result));
-    }
 
 }
 
