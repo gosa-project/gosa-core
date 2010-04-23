@@ -288,7 +288,7 @@ class management
 
     // Check permissons for each target 
     $h = $this->getHeadpage();
-    $oTypes = $h->objectTypes;
+    $oTypes = array_reverse($h->objectTypes);
     foreach($target as $dn){
       $entry = $h->getEntry($dn);
       $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
@@ -361,7 +361,7 @@ class management
 
     // Check permissons for each target 
     $h = $this->getHeadpage();
-    $oTypes = $h->objectTypes;
+    $oTypes = array_reverse($h->objectTypes);
     foreach($this->dns as $key => $dn){
       $entry = $h->getEntry($dn);
       $obj   = $h->getObjectType($oTypes, $entry['objectClass']);

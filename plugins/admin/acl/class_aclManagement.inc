@@ -79,15 +79,15 @@ class aclManagement extends management
 
         if($headpage->getType($dn) == "gosaRole"){
           $tabClass = "aclroletab";
-          $tabTape  = "ACLROLETAB";
+          $tabType  = "ACLROLETAB";
         }else{
           $tabClass = "acltab";
-          $tabTape  = "ACLTAB";
+          $tabType  = "ACLTAB";
         }
 
         // Delete the object
         $this->dn = $dn;
-        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory, true, true);
+        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, 'acl', true, true);
         $this->tabObject->set_acl_base($this->dn);
         $this->tabObject->delete ();
         $this->tabObject->parent = &$this;
