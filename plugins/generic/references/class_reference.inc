@@ -74,12 +74,6 @@ class reference extends plugin
             'filter' => "(&(objectClass=gosaAccount)(manager=".normalizeLdap($this->dn)."))",
             'attrs'  => array('givenName' => _("Given name"),'sn' => _("Surname"),'uid'=>_("Uid")),
             'msg'    => _("User manager"));
-    }
-
-    function execute()
-    {
-        // Mark plugin as viewed
-        plugin::execute();
 
         // Go through filters and detect possible references  
         $ldap = $this->config->get_ldap_link();
@@ -118,16 +112,21 @@ class reference extends plugin
                 $str .= "<div class='v-spacer'></div>";
             }
         }
+        $this->objectList = $str;
+    }
+
+    function execute()
+    {
+        // Mark plugin as viewed
+        plugin::execute();
 
         $smarty = get_smarty();        
-        $smarty->assign('objectList', $str);
+        $smarty->assign('objectList', $this->objectList);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());
         $smarty->assign("usePrototype", "true");
         session::set('autocomplete', $this->aclResolver);
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
     }
-
-
 }
 
 ?>
