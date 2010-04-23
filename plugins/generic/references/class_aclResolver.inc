@@ -272,7 +272,7 @@ class aclResolver
                    
                     // Display the acl block in a special color if its not matching 
                     $class="";
-                    if(!$gfound || !$ufound || !$match){
+                    if(!($gfound || $ufound) || !$match){
                         $class = "acl-viewer-blocked";
                     }                    
 
@@ -297,7 +297,7 @@ class aclResolver
             $str .= "<li>".$name;
             $str .= "<ul>";
             if(preg_match("/s/", $acl)){
-                $str.="<li>"._("Grant permission to owner").'</li>'; 
+                $str.="<li><u>"._("Grant permission to owner").'</u></li>'; 
             }
             if(preg_match("/r/", $acl)) $str.="<li>"._("read").'</li>'; 
             if(preg_match("/w/", $acl)) $str.="<li>"._("write").'</li>'; 
