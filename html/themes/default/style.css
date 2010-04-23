@@ -1561,6 +1561,38 @@ ul.acl-viewer-items, ul.acl-viewer-items li {
   padding:0;
 }
 
+ul.acl-list, ul.acl-list li {
+  list-style:none;
+  display:inline;
+  margin:0;
+  padding:0;
+}
+
+ul.acl-viewer-items li ul.acl-category-list {
+  list-style:none;
+  margin:0;
+  padding-left:20px;
+}
+
+ul.acl-category-list {
+  padding-bottom:10px;
+}
+
+ul.acl-list li {
+  color:#777;
+}
+
+ul.acl-list li:after {
+  content: ", ";
+}
+
+ul.acl-list li:last-child:after {
+  content: "";
+}
+
+
+/* Reference tab */
+
 table.reference-tab {
   width:100%;
 }

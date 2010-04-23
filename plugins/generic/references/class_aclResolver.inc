@@ -290,19 +290,19 @@ class aclResolver
 
     function aclToString($acls)
     {
-        $str ="<ul>";
+        $str ="<ul class='acl-category-list'>";
         foreach($acls as $name => $acl){
             if($name == "0") $name = _("All");
-            $str .= "<li>".$name;
-            $str .= "<ul>";
+            $str .= "<li><i>".$name.":</i> ";
+            $str .= "<ul class='acl-list'>";
             if(preg_match("/s/", $acl)){
                 $str.="<li><u>"._("Grant permission to owner").'</u></li>'; 
             }
             if(preg_match("/r/", $acl)) $str.="<li>"._("read").'</li>'; 
             if(preg_match("/w/", $acl)) $str.="<li>"._("write").'</li>'; 
-            if(preg_match("/c/", $acl)) $str.="<li>"._("Create").'</li>'; 
-            if(preg_match("/d/", $acl)) $str.="<li>"._("Remove").'</li>'; 
-            if(preg_match("/m/", $acl)) $str.="<li>"._("Move").'</li>'; 
+            if(preg_match("/c/", $acl)) $str.="<li>"._("create").'</li>'; 
+            if(preg_match("/d/", $acl)) $str.="<li>"._("remove").'</li>'; 
+            if(preg_match("/m/", $acl)) $str.="<li>"._("move").'</li>'; 
             $str.= "</ul>";
         }
         return($str."</ul>");
