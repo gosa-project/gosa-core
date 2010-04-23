@@ -62,6 +62,18 @@ class reference extends plugin
             'filter' => "(&(objectClass=gosaGroupOfNames)(member=".normalizeLdap($this->dn)."))",
             'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
             'msg'    => _("Object group"));
+
+        // Check for department manager 
+        $this->referenceFilters[] = array(
+            'filter' => "(&(objectClass=gosaDepartment)(manager=".normalizeLdap($this->dn)."))",
+            'attrs'  => array('ou' => _("Name"),'description' => _("Description")),
+            'msg'    => _("Department manager"));
+
+        // Check for user manager 
+        $this->referenceFilters[] = array(
+            'filter' => "(&(objectClass=gosaAccount)(manager=".normalizeLdap($this->dn)."))",
+            'attrs'  => array('givenName' => _("Given name"),'sn' => _("Surname"),'uid'=>_("Uid")),
+            'msg'    => _("User manager"));
     }
 
     function execute()
