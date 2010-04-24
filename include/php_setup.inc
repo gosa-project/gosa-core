@@ -181,7 +181,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
         $line="";
       }
       $color= ($index&1)?'#404040':'606060';
-      $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Trace")."[$index]: $loc</td>";
+      $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Traceback")."[$index]: $loc</td>";
       $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=\"10%\">"._("Type").": $type</td></tr>";
       $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";
 

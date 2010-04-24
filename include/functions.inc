@@ -445,7 +445,7 @@ function ldap_init ($server, $base, $binddn='', $pass='')
   /* Sadly we've no proper return values here. Use the error message instead. */
   if (!$ldap->success()){
     msg_dialog::display(_("Fatal error"),
-        sprintf(_("FATAL: Error when connecting the LDAP. Server said '%s'."), $ldap->get_error()),
+        sprintf(_("Error while connecting to LDAP: %s"), $ldap->get_error()),
         FATAL_ERROR_DIALOG);
     exit();
   }
@@ -516,7 +516,7 @@ function ldap_login_user_htaccess ($username)
   $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
   /* Found no uniq match? Strange, because we did above... */
   if ($ldap->count() != 1) {
-    msg_dialog::display(_("LDAP error"), _("Username / UID is not unique inside the LDAP tree!"), FATAL_ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), _("User ID is not unique!"), FATAL_ERROR_DIALOG);
     return (NULL);
   }
   $attrs= $ldap->fetch();
@@ -602,7 +602,7 @@ function ldap_login_user ($username, $password)
 
             /* found more than one matching id */
     default:
-            msg_dialog::display(_("Internal error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), FATAL_ERROR_DIALOG);
+            msg_dialog::display(_("Internal error"), _("User ID is not unique!"), FATAL_ERROR_DIALOG);
             return (NULL);
   }
 
@@ -789,7 +789,7 @@ function add_lock($object, $user)
 
   /* Just a sanity check... */
   if ($object == "" || $user == ""){
-    msg_dialog::display(_("Internal error"), _("Error while adding a lock. Contact the developers!"), ERROR_DIALOG);
+    msg_dialog::display(_("Internal error"), _("Error while locking entry!"), ERROR_DIALOG);
     return;
   }
 
@@ -799,7 +799,7 @@ function add_lock($object, $user)
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64_encode($object)."))",
       array("gosaUser"));
   if (!$ldap->success()){
-    msg_dialog::display(_("Configuration error"), sprintf(_("Cannot create locking information in LDAP tree. Please contact your administrator!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+    msg_dialog::display(_("Configuration error"), sprintf(_("Cannot store lock information in LDAP!")."<br><br>"._('Error: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     return;
   }
 
@@ -907,7 +907,7 @@ function get_lock ($object)
 
   /* Sanity check */
   if ($object == ""){
-    msg_dialog::display(_("Internal error"), _("Error while adding a lock. Contact the developers!"), ERROR_DIALOG);
+    msg_dialog::display(_("Internal error"), _("Error while locking entry!"), ERROR_DIALOG);
     return("");
   }
 
@@ -926,9 +926,6 @@ function get_lock ($object)
 
   /* Check for broken locking information in LDAP */
   if ($ldap->count() > 1){
-
-    /* Hmm. We're removing broken LDAP information here and issue a warning. */
-    msg_dialog::display(_("Warning"), _("Found multiple locks for object to be locked. This should not happen - cleaning up multiple references."), WARNING_DIALOG);
 
     /* Clean up these references now... */
     while ($attrs= $ldap->fetch()){
@@ -1232,9 +1229,9 @@ function check_sizelimit()
   /* Eventually show dialog */
   if (session::is_set('limit_exceeded') && session::get('limit_exceeded')){
     $smarty= get_smarty();
-    $smarty->assign('warning', sprintf(_("The size limit of %d entries is exceed!"),
+    $smarty->assign('warning', sprintf(_("The current size limit of %d entries is exceeded!"),
           session::global_get('size_limit')));
-    $smarty->assign('limit_message', sprintf(_("Set the new size limit to %s and show me this message if the limit still exceeds"), '<input type="text" name="new_limit" maxlength="10" size="5" value="'.(session::global_get('size_limit') +100).'">'));
+    $smarty->assign('limit_message', sprintf(_("Set the size limit to %s"), '<input type="text" name="new_limit" maxlength="10" size="5" value="'.(session::global_get('size_limit') +100).'">'));
     return($smarty->fetch(get_template_path('sizelimit.tpl')));
   }
 
@@ -1251,7 +1248,7 @@ function print_sizelimit_warning()
     $config= "";
   }
   if (session::is_set('limit_exceeded') && session::get('limit_exceeded')){
-    return ("("._("incomplete").") $config");
+    return ("("._("list is incomplete").") $config");
   }
   return ("");
 }
@@ -1900,18 +1897,6 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
 }
 
 
-/*! \brief Generate HTML for the 'Apply filter' button */
-function apply_filter()
-{
-  $apply= "";
-
-  $apply= ''.
-    '<table summary=""  width="100%"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;"><tr><td width="100%" align="right">'.
-    '<input type="submit" name="apply" value="'._("Apply filter").'"></td></tr></table>';
-
-  return ($apply);
-}
-
 
 /*! \brief Generate HTML for the 'Back' button */
 function back_to_main()
@@ -2330,7 +2315,7 @@ function clean_smarty_compile_dir($directory)
               is_writable($directory."/".$file)) {
             // delete file
             if(!unlink($directory."/".$file)) {
-              msg_dialog::display(_("Internal error"), sprintf(_("File '%s' could not be deleted."), $directory."/".$file), ERROR_DIALOG);
+              msg_dialog::display(_("Internal error"), sprintf(_("File '%s' cannot be deleted!"), $directory."/".$file), ERROR_DIALOG);
               // This should never be reached
             }
           } elseif(is_dir($directory."/".$file) &&
@@ -2364,7 +2349,7 @@ function create_revision($revision_file, $revision)
     }
     fclose($fh);
   } else {
-    msg_dialog::display(_("Internal error"), _("Cannot write to revision file!"), ERROR_DIALOG);
+    msg_dialog::display(_("Internal error"), _("Cannot write revision file!"), ERROR_DIALOG);
   }
 
   return $result;
@@ -2384,7 +2369,7 @@ function compare_revision($revision_file, $revision)
         $result= true;
       }
     } else {
-      msg_dialog::display(_("Internal error"), _("Cannot write to revision file!"), ERROR_DIALOG);
+      msg_dialog::display(_("Internal error"), _("Cannot write revision file!"), ERROR_DIALOG);
     }
     // Close file
     fclose($fh);
@@ -2689,7 +2674,7 @@ function check_schema($cfg,$rfc2307bis = FALSE)
   $ldap = new ldapMultiplexer(new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE, $cfg['tls']));
   $objectclasses = $ldap->get_objectclasses();
   if(count($objectclasses) == 0){
-    msg_dialog::display(_("LDAP warning"), _("Cannot get schema information from server. No schema check possible!"), WARNING_DIALOG);
+    msg_dialog::display(_("Warning"), _("Cannot read schema information from LDAP. Schema validation is not possible!"), WARNING_DIALOG);
   }
 
   /* This is the default block used for each entry.
@@ -2701,28 +2686,28 @@ function check_schema($cfg,$rfc2307bis = FALSE)
       "STATUS"           => FALSE,
       "IS_MUST_HAVE"     => FALSE,
       "MSG"              => "",
-      "INFO"             => "");#_("There is currently no information specified for this schema extension."));
+      "INFO"             => "");
 
   /* The gosa base schema */
   $checks['gosaObject'] = $def_check;
   $checks['gosaObject']['REQUIRED_VERSION'] = "2.6.1";
-  $checks['gosaObject']['SCHEMA_FILES']     = array("gosa-samba3.schema","gosa-samba2.schema");
+  $checks['gosaObject']['SCHEMA_FILES']     = array("gosa-samba3.schema");
   $checks['gosaObject']['CLASSES_REQUIRED'] = array("gosaObject");
   $checks['gosaObject']['IS_MUST_HAVE']     = TRUE;
 
   /* GOsa Account class */
   $checks["gosaAccount"]["REQUIRED_VERSION"]= "2.6.6";
-  $checks["gosaAccount"]["SCHEMA_FILES"]    = array("gosa-samba3.schema","gosa-samba2.schema");
+  $checks["gosaAccount"]["SCHEMA_FILES"]    = array("gosa-samba3.schema");
   $checks["gosaAccount"]["CLASSES_REQUIRED"]= array("gosaAccount");
   $checks["gosaAccount"]["IS_MUST_HAVE"]    = TRUE;
-  $checks["gosaAccount"]["INFO"]            = _("Used to store account specific informations.");
+  $checks["gosaAccount"]["INFO"]            = _("This class is used to make users appear in GOsa.");
 
   /* GOsa lock entry, used to mark currently edited objects as 'in use' */
   $checks["gosaLockEntry"]["REQUIRED_VERSION"] = "2.6.1";
-  $checks["gosaLockEntry"]["SCHEMA_FILES"]     = array("gosa-samba3.schema","gosa-samba2.schema");
+  $checks["gosaLockEntry"]["SCHEMA_FILES"]     = array("gosa-samba3.schema");
   $checks["gosaLockEntry"]["CLASSES_REQUIRED"] = array("gosaLockEntry");
   $checks["gosaLockEntry"]["IS_MUST_HAVE"]     = TRUE;
-  $checks["gosaLockEntry"]["INFO"]             = _("Used to lock currently edited entries to avoid multiple changes at the same time.");
+  $checks["gosaLockEntry"]["INFO"]             = _("This class is used to lock entries in order to prevent multiple edits at a time.");
 
   /* Some other checks */
   foreach(array(
@@ -2767,18 +2752,18 @@ function check_schema($cfg,$rfc2307bis = FALSE)
       if(!isset($objectclasses[$name])){
         if($value['IS_MUST_HAVE']){
           $checks[$name]['STATUS'] = FALSE;
-          $checks[$name]['MSG']    = sprintf(_("Missing required object class '%s'!"),$class);
+          $checks[$name]['MSG']    = sprintf(_("Required object class '%s' is missing!"),$class);
         } else {
           $checks[$name]['STATUS'] = TRUE;
-          $checks[$name]['MSG']    = sprintf(_("Missing optional object class '%s'!"),$class);
+          $checks[$name]['MSG']    = sprintf(_("Optional object class '%s' is missing!"),$class);
         }
       }elseif(!check_schema_version($objectclasses[$name],$value['REQUIRED_VERSION'])){
         $checks[$name]['STATUS'] = FALSE;
 
-        $checks[$name]['MSG'] = sprintf(_("Version mismatch for required object class '%s' (!=%s)!"), $class,                           $value['REQUIRED_VERSION']);
+        $checks[$name]['MSG'] = sprintf(_("Wrong version of required object class '%s' (!=%s) detected!"), $class, $value['REQUIRED_VERSION']);
       }else{
         $checks[$name]['STATUS'] = TRUE;
-        $checks[$name]['MSG'] = sprintf(_("Class(es) available"));
+        $checks[$name]['MSG'] = sprintf(_("Class available"));
       }
     }
   }
@@ -2800,13 +2785,13 @@ function check_schema($cfg,$rfc2307bis = FALSE)
 
     if($rfc2307bis && isset($tmp['posixGroup']['STRUCTURAL'])){
       $checks['posixGroup']['STATUS']           = FALSE;
-      $checks['posixGroup']['MSG']              = _("You have enabled the rfc2307bis option on the 'ldap setup' step, but your schema    configuration do not support this option.");
-      $checks['posixGroup']['INFO']             = _("In order to use rfc2307bis conform groups the objectClass 'posixGroup' must be      AUXILIARY");
+      $checks['posixGroup']['MSG']              = _("RFC 2307bis group schema is enabled, but the current LDAP configuration does not support it!");
+      $checks['posixGroup']['INFO']             = _("To use RFC 2307bis groups, the objectClass 'posixGroup' must be AUXILIARY.");
     }
     if(!$rfc2307bis && !isset($tmp['posixGroup']['STRUCTURAL'])){
       $checks['posixGroup']['STATUS']           = FALSE;
-      $checks['posixGroup']['MSG']              = _("Your schema is configured to support the rfc2307bis group, but you have disabled this option on the 'ldap setup' step.");
-      $checks['posixGroup']['INFO']             = _("The objectClass 'posixGroup' must be STRUCTURAL");
+      $checks['posixGroup']['MSG']              = _("RFC 2307bis group schema is disabled, but the current LDAP configuration supports it!");
+      $checks['posixGroup']['INFO']             = _("To correct this, the objectClass 'posixGroup' must be STRUCTURAL.");
     }
   }
 
@@ -3037,7 +3022,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
           exec($command);
         } else {
-          $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, "password");
+          $message= sprintf(_("Command '%s' specified as post modify action for plugin '%s' does not exist!"), $command, "password");
           msg_dialog::display(_("Configuration error"), $message, ERROR_DIALOG);
         }
       }
@@ -3070,7 +3055,7 @@ function generate_smb_nt_hash($password)
     }
 
     if ($hash == "") {
-      msg_dialog::display(_("Configuration error"), _("Cannot generate samba hash!"), ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), _("Cannot generate SAMBA hash!"), ERROR_DIALOG);
       return ("");
     }
   } else {
@@ -3083,7 +3068,7 @@ function generate_smb_nt_hash($password)
 	  $hash= current($ar);
 
     if ($hash == "") {
-      msg_dialog::display(_("Configuration error"), sprintf(_("Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"),$config->get_cfg_value('sambaHashHook')), ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), sprintf(_("Generating SAMBA hash by running '%s' failed: check 'sambaHashHook'!"),$config->get_cfg_value('sambaHashHook')), ERROR_DIALOG);
       return ("");
     }
   }
@@ -3364,7 +3349,7 @@ function get_next_id($attrib, $dn)
       return get_next_id_traditional($attrib, $dn);
   }
 
-  msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("unknown idAllocation method!"), ERROR_DIALOG);
+  msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("unknown idAllocation method!"), ERROR_DIALOG);
   return null;
 }
 
@@ -3378,7 +3363,7 @@ function get_next_id_pool($attrib) {
 
   /* Sanity check */
   if ($min >= $max) {
-    msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." ".sprintf(_("%sPoolMin >= %sPoolMax!"), $attrib), ERROR_DIALOG);
+    msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." ".sprintf(_("%sPoolMin >= %sPoolMax!"), $attrib, $attrib), ERROR_DIALOG);
     return null;
   }
 
@@ -3416,7 +3401,7 @@ function get_next_id_pool($attrib) {
     }
     /* Bail out if it's not unique */
     if ($ldap->count() != 1) {
-      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("sambaUnixIdPool is not unique!"), ERROR_DIALOG);
+      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("sambaUnixIdPool is not unique!"), ERROR_DIALOG);
       return null;
     }
 
@@ -3428,11 +3413,11 @@ function get_next_id_pool($attrib) {
 
     /* Sanity check */
     if ($newAttr >= $max) {
-      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("no ID available!"), ERROR_DIALOG);
+      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("no ID available!"), ERROR_DIALOG);
       return null;
     }
     if ($newAttr < $min) {
-      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("no ID available!"), ERROR_DIALOG);
+      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("no ID available!"), ERROR_DIALOG);
       return null;
     }
 
@@ -3447,7 +3432,7 @@ function get_next_id_pool($attrib) {
     $ldap->cd($dn);
     $ldap->modify(array($attrib => $newAttr));
     if ($ldap->error != "Success") {
-      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." ".$ldap->get_error(), ERROR_DIALOG);
+      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." ".$ldap->get_error(), ERROR_DIALOG);
       return null;
     } else {
       return $oldAttr;
@@ -3456,7 +3441,7 @@ function get_next_id_pool($attrib) {
 
   /* Bail out if we had problems getting the next id */
   if (!$tries) {
-    msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("maximum tries exceeded!"), ERROR_DIALOG);
+    msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("maximum number of tries exceeded!"), ERROR_DIALOG);
   }
 
   return $id;
@@ -3516,7 +3501,7 @@ function get_next_id_traditional($attrib, $dn)
 
   /* Should not happen */
   if ($id == $hwm){
-    msg_dialog::display(_("Error"), _("Cannot allocate a free ID!"), ERROR_DIALOG);
+    msg_dialog::display(_("Error"), _("Cannot allocate free ID!"), ERROR_DIALOG);
     exit;
   }
 }
