@@ -322,7 +322,7 @@ class config  {
       /* Check for connection */
       if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
         $smarty= get_smarty();
-        msg_dialog::display(_("LDAP error"), _("Cannot bind to LDAP. Please contact the system administrator."), FATAL_ERROR_DIALOG);
+        msg_dialog::display(_("LDAP error"), _("Cannot bind to LDAP!"), FATAL_ERROR_DIALOG);
         exit();
       }
 
@@ -1109,7 +1109,7 @@ class config  {
     /* Check contributed config version and current config version.
      */
     if(($this->config_version == "NOT SET") || ($this->config_version != $current && !empty($this->config_version))){
-      msg_dialog::display(_("Configuration"),_("The configuration file you are using seems to be outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
+      msg_dialog::display(_("Configuration"),_("The configuration file you are using is outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
     }
   }
 

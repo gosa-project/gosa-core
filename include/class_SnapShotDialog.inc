@@ -90,7 +90,7 @@ class SnapShotDialog extends plugin
                 if($found){
                     $this->del_dn 	= $entry;
                     $smarty= get_smarty();
-                    $smarty->assign("info", sprintf(_("You're about to delete the snapshot '%s'."), LDAP::fix($this->del_dn)));
+                    $smarty->assign("info", sprintf(_("You are about to delete the snapshot '%s'."), LDAP::fix($this->del_dn)));
                     return($smarty->fetch (get_template_path('removeEntries.tpl')));
                 }
             }
@@ -143,7 +143,7 @@ class SnapShotDialog extends plugin
             $data = $lData = array();
             foreach($list_of_elements as $entry){
                 $actions=  image('images/lists/restore.png','RestoreSnapShot_%KEY',_("Restore snapshot"));
-                $actions.= image('images/lists/trash.png','RemoveSnapShot_%KEY',_("Remove snapshot"));
+                $actions.= image('images/lists/trash.png','RemoveSnapShot_%KEY',_("Delete snapshot"));
                 $time_stamp 	= date(_("Y-m-d, H:i:s"),preg_replace("/\-.*$/","",$entry['gosaSnapshotTimestamp'][0]));
                 $display_data 	= $entry['description'][0];
                 $data[$entry['dn']] = $entry;

@@ -258,7 +258,7 @@ class sortableListing {
         $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
         $sorter= "";
         if ($i == $this->sortColumn){
-          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Up"):_("Down"));
+          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending"));
         }
 
         if ($this->reorderable) {

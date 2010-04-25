@@ -57,7 +57,7 @@ class Socket_Client
   public function setEncryptionKey($key)
   {
     if(!function_exists("mcrypt_get_iv_size")){
-      $this->set_error(_("The mcrypt module was not found. Please install php5-mcrypt."));
+      $this->set_error(_("No PHP mcrypt module found!"));
       $this->ckey = "";
       $this->b_encrypt = FALSE;
     }
@@ -105,7 +105,7 @@ class Socket_Client
     $this->handle = @fsockopen($this->host, $this->port, $this->errno, $this->errstr, $this->timeout);
     if(!$this->handle){
       $this->handle = NULL;
-      $this->set_error(sprintf(_("Socket connection to host '%s:%s' failed: %s"),$this->host,$this->port,$this->errstr));
+      $this->set_error(sprintf(_("Socket connection to '%s:%s' failed: %s"),$this->host,$this->port,$this->errstr));
     }else{
       $this->b_data_send = TRUE;
 
@@ -188,7 +188,7 @@ class Socket_Client
         }
       }
       if((microtime(TRUE) - $start) > $this->timeout ){     
-        $this->set_error(sprintf(_("Socket timeout of %s seconds reached."),$this->timeout));     
+        $this->set_error(sprintf(_("Socket timeout of %s seconds reached!"),$this->timeout));     
         break;
       }
     }

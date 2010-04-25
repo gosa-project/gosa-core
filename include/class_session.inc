@@ -73,7 +73,7 @@ class session {
 
 		/* Sanity check */
 		if (!session::channel_exists($channel)){
-			msg_dialog::display(_("Internal error"), _("Requested channel does not exist! Please contact your Administrator."), FATAL_ERROR_DIALOG);
+			msg_dialog::display(_("Internal error"), _("Requested channel does not exist!"), FATAL_ERROR_DIALOG);
 		}
 
 		$channel= "gch_".$channel;
@@ -98,7 +98,7 @@ class session {
 		} else {
 			/* Sanity check */
 			if (!session::channel_exists($channel)){
-				msg_dialog::display(_("Internal error"), _("Requested channel does not exist! Please contact your Administrator."), FATAL_ERROR_DIALOG);
+				msg_dialog::display(_("Internal error"), _("Requested channel does not exist!"), FATAL_ERROR_DIALOG);
 			}
 			$_SESSION[$channel][$name] = $value;
 		}
@@ -124,7 +124,7 @@ class session {
 
 		/* Sanity check */
 		if (!session::channel_exists($channel)){
-			msg_dialog::display(_("Internal error"), _("Requested channel does not exist! Please contact your Administrator."), FATAL_ERROR_DIALOG);
+			msg_dialog::display(_("Internal error"), _("Requested channel does not exist!"), FATAL_ERROR_DIALOG);
 		}
 
 		$channel= "gch_".$channel;

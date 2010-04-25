@@ -457,7 +457,7 @@ class management
         $this->dialogObject->parent = &$this;
 
       }else{
-        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s."),$entry),
+        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s!"),$entry),
             ERROR_DIALOG);
       }
     }
@@ -504,7 +504,7 @@ class management
       @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Snaptshot restored!");
       $this->closeDialogs();
     }else{
-      msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
+      msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$entry),
           ERROR_DIALOG);
     }
   }
@@ -541,7 +541,7 @@ class management
         $this->dialogObject->display_restore_dialog = true;
         $this->dialogObject->parent = &$this;
       }else{
-        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
+        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$entry),
             ERROR_DIALOG);
       } 
     }else{
@@ -555,7 +555,7 @@ class management
         $this->dialogObject->display_restore_dialog = true;
         $this->dialogObject->parent = &$this;
       }else{
-        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
+        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$entry),
             ERROR_DIALOG);
       } 
     }
@@ -614,7 +614,7 @@ class management
         $this->tabObject->parent = &$this;
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Create new entry initiated!");
       } else {
-        msg_dialog::display(_("Error"), sprintf(_("No tab declaration for '%s' found in your configuration file. Cannot create plugin instance!"), $tabType), ERROR_DIALOG);
+        msg_dialog::display(_("Error"), sprintf(_("No tab definition for '%s' found in configuration file: cannot create plugin instance!"), $tabType), ERROR_DIALOG);
       }
     }
   }

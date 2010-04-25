@@ -524,7 +524,7 @@ class plugin
       $current_csn = getEntryCSN($this->dn);
       if($current_csn != $this->entryCSN && !empty($this->entryCSN) && !empty($current_csn)){
         $this->entryCSN = $current_csn;
-        $message[] = _("The object has changed since opened in GOsa. All changes that may be done by others get lost if you save this entry!");
+        $message[] = _("The current object has been altered while beeing edited. If you save this entry, changes that have been made by others will be discarded!");
       }
     }
     return ($message);
@@ -842,8 +842,7 @@ class plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$dst_dn));
     if (!$ldap->rename_dn($src_dn,$dst_dn)){
-#      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $src_dn, "", get_class()));
-      new log("debug","Ldap Protocol v3 implementation error, ldap_rename failed, falling back to manual copy.","FROM: $src_dn  -- TO: $dst_dn",array(),$ldap->get_error());
+      new log("debug","LDAP protocol v3 implementation error, ldap_rename failed, falling back to manual copy.","FROM: $src_dn  -- TO: $dst_dn",array(),$ldap->get_error());
       @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,"Rename failed FROM: $src_dn  -- TO:  $dst_dn", 
           "Ldap Protocol v3 implementation error, falling back to maunal method.");
       return(FALSE);
@@ -1431,7 +1430,7 @@ class plugin
         if(!empty($entry) && $ui->allow_snapshot_create($entry,$this->parent->acl_module)){
           $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s."),$entry),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s!"),$entry),ERROR_DIALOG);
         }
       }  
   
@@ -1443,7 +1442,7 @@ class plugin
           $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
           $this->snapDialog->display_restore_dialog = true;
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$entry),ERROR_DIALOG);
         }
       }
 
@@ -1458,7 +1457,7 @@ class plugin
           $this->snapDialog->display_restore_dialog      = true;
           $this->snapDialog->display_all_removed_objects  = true;
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$base),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$base),ERROR_DIALOG);
         }
       }
 
@@ -1471,7 +1470,7 @@ class plugin
           $this->restore_snapshot($entry);
           $this->snapDialog = NULL;
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$entry),ERROR_DIALOG);
         }
       }
     }
@@ -1687,8 +1686,7 @@ class plugin
         /* Acls for this object must be adjusted */
         if($found){
 
-          $debug_info=  _("Changing ACL dn")."&nbsp;:&nbsp;<br>&nbsp;-"._("from")."&nbsp;<b>&nbsp;".
-            $old_dn."</b><br>&nbsp;-"._("to")."&nbsp;<b>".$new_dn."</b><br>";
+          $debug_info= sprintf(_("Changing ACL DN from %s to %s"), "<b>".$old_dn."</b>", "<b>".$new_dn."</b>");
           @DEBUG (DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__,$debug_info,"ACL");
 
           $update[$attrs['dn']] =array();
@@ -1897,7 +1895,7 @@ class plugin
       if($ui->allow_snapshot_create($base,$category)){
         $str.= "<input class='center' type='image' src='images/snapshot.png'
           alt='"._("Create snapshot")."' name='CreateSnapShotDialog_".base64_encode($base)."' 
-          title='"._("Create a new snapshot from this object")."'>&nbsp;";
+          title='"._("Create new snapshot for this object")."'>&nbsp;";
       }else{
         $str = "<img class='center' src='images/empty.png' alt=' '>&nbsp;";
       }
@@ -1915,7 +1913,7 @@ class plugin
       if($cut){
         if($ui->is_cutable($base,$category,$class)){
           $action .= "<input class='center' type='image'
-            src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+            src='images/lists/cut.png' alt='"._("Cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
         }else{
           $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
         }
@@ -1923,7 +1921,7 @@ class plugin
       if($copy){
         if($ui->is_copyable($base,$category,$class)){
           $action.= "<input class='center' type='image'
-            src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+            src='images/lists/copy.png' alt='"._("Copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
         }else{
           $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
         }

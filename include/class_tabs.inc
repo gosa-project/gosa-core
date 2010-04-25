@@ -54,7 +54,7 @@ class tabs
     if(!count($data)) {
       $data[] = array("CLASS" => 'plugin',"NAME" => 'Error');
       msg_dialog::display(_("Error"),
-        sprintf(_("No plugin definitions found to initialize '%s', please check your configuration file."),get_class($this)),
+        sprintf(_("No plugin definition for '%s' found: please check the configuration file!"),get_class($this)),
         "ERROR_DIALOG");
     }
 

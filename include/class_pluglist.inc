@@ -96,7 +96,7 @@ class pluglist
     if (!isset($plug['CLASS'])){
       msg_dialog::display(
           _("Configuration error"),
-          _("The configuration format has changed. Please re-run setup!"),
+          _("The configuration format has changed: please run the setup again!"),
           FATAL_ERROR_DIALOG);
       exit();
     }
@@ -226,7 +226,7 @@ class pluglist
       $this->menu .=  
         "\n      <script language='javascript' type='text/javascript'>".
         "\n        function openPlugin(id){".
-        "\n          return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\",".
+        "\n          return question(\""._("You are currently editing a database entry. Do you want to discard the changes?")."\",".
         "\n            \"main.php?plug=\" + id + \"&amp;reset=1\");".
         "\n        }".
         "\n      </script>\n"; 

@@ -230,7 +230,7 @@ class LDAP{
       if($this->max_ldap_query_time){
         $diff = microtime(true) - $start;
         if($diff > $this->max_ldap_query_time){
-          msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took about %.2fs!"), $diff), WARNING_DIALOG);
+          msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took %.2fs!"), $diff), WARNING_DIALOG);
         }
       }
 
@@ -263,7 +263,7 @@ class LDAP{
       if($this->max_ldap_query_time){
         $diff = microtime(true) - $start;
         if($diff > $this->max_ldap_query_time){
-          msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took about %.2fs!"), $diff), WARNING_DIALOG);
+          msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took %.2fs!"), $diff), WARNING_DIALOG);
         }
       }
 
@@ -690,7 +690,7 @@ class LDAP{
 
           /* Bail out, if we've nothing to do... */
           if ($ocname == ""){
-            msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': no object class found!"),$type), FATAL_ERROR_DIALOG);
+            msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': no object class found"),$type), FATAL_ERROR_DIALOG);
             exit();
           }
 
@@ -828,9 +828,9 @@ class LDAP{
     } else {
       $adderror= $this->get_additional_error();
       if ($adderror != ""){
-        $error= $this->error." (".$this->get_additional_error().", ".sprintf(_("while operating on '%s' using LDAP server '%s'"), $this->basedn, $this->hostname).")";
+        $error= $this->error." (".$this->get_additional_error().", ".sprintf(_("while operating on %s using LDAP server %s"), "<b>".$this->basedn."</b>", "<b>".$this->hostname."</b>").")";
       } else {
-        $error= $this->error." (".sprintf(_("while operating on LDAP server %s"), $this->hostname).")";
+        $error= $this->error." (".sprintf(_("while operating on LDAP server %s"), "<b>".$this->hostname."</b>").")";
       }
       return $error;
     }
@@ -1052,7 +1052,7 @@ class LDAP{
 
       /* Every block must begin with a dn */
       if($dn != "dn") {
-        $error= sprintf(_("This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' in line %s"), $line, $current_line);
+        $error= sprintf(_("Invalid DN '%s': block to be imported should start with 'dn: ...' in line %s"), $line, "<b>".$current_line."</b>");
         return -2;  
       }
 
@@ -1081,7 +1081,7 @@ class LDAP{
      
       /* If we can't Import, return with a file error */
       if(!$this->import_single_entry($srp, $single,$usemodify,$usermdir) ) {
-        $error= sprintf(_("Error while importing dn: '%s', please check your LDIF from line %s on!"), $line,
+        $error= sprintf(_("Error while importing DN '%s': please check LDIF from line %s on!"), $line,
                         $current_line);
         return UNKNOWN_TOKEN_IN_LDIF_FILE;      }
     }

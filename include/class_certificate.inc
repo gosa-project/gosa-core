@@ -97,7 +97,7 @@ class certificate
     /* If cert is loaded correctly and is PEM now, we could read some data out of it */
     if(count($this->info()) <=1)  {
       $this->certificate();
-      $this->error = _("Cannot load certificate - only PEM/DER is supported!");
+      $this->error = _("Cannot load certificate: only PEM and DER are supported!");
       /* Reset*/
       return(false);
     }

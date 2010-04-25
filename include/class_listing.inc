@@ -245,7 +245,7 @@ class listing {
             isset($config['sortType'])) {
           $this->sortAttribute= $config['sortAttribute'];
           $this->sortType= $config['sortType'];
-          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$index]?"up":"down").".png", null, $this->sortDirection[$index]?_("Up"):_("Down"), "text-top");
+          $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$index]?"up":"down").".png", null, $this->sortDirection[$index]?_("Sort ascending"):_("Sort descending"), "text-top");
         }
         $sortable= (isset($config['sortAttribute']));
 
@@ -1025,17 +1025,17 @@ class listing {
 
     /* Draw back button */
     if($enableBack){
-      $result["BACK"]= image('images/lists/back.png', 'BACK', _("Go up one department"));
+      $result["BACK"]= image('images/lists/back.png', 'BACK', _("Go to preceding level"));
     }else{
-      $result["BACK"]= image('images/lists/back-grey.png', null, _("Go up one department"));
+      $result["BACK"]= image('images/lists/back-grey.png', null, _("Go to preceding level"));
     }
 
     /* Draw home button */
    /* Draw home button */
     if($enableHome){
-      $result["HOME"]= image('images/lists/home.png', 'HOME', _("Go to users department"));
+      $result["HOME"]= image('images/lists/home.png', 'HOME', _("Go to current users level"));
     }else{
-      $result["HOME"]= image('images/lists/home-grey.png', null, _("Go to users department"));
+      $result["HOME"]= image('images/lists/home-grey.png', null, _("Go to current users level"));
     }
 
 
@@ -1550,7 +1550,7 @@ class listing {
 
       // Draw snapshot button
       if($ui->allow_snapshot_create($dn, $category)){
-          $result.= image('images/snapshot.png', "listing_snapshot_$row", _("Create a new snapshot from this object"));
+          $result.= image('images/snapshot.png', "listing_snapshot_$row", _("Create new snapshot for this object"));
       }else{
           $result.= image('images/empty.png');
       }

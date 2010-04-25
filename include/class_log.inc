@@ -103,7 +103,7 @@ class log {
     }
 
     if(!isset($entry['objecttype']) || empty($entry['objecttype'])){
-      $msgs[] = _("Specified objectType is empty or invalid!");
+      $msgs[] = _("Specified 'objectType' is empty or invalid!");
     }
   
     return($msgs);

@@ -571,7 +571,7 @@ class acl extends plugin
                     $summary= '<i>'._("No ACL settings for this category!").'</i>';
                 } else {
                     $summary= trim($summary,", ");
-                    $summary= " ".sprintf(_("Contains ACLs for these objects: %s"), $summary);
+                    $summary= " ".sprintf(_("ACLs for: %s"), $summary);
                 }
 
                 $actions ="";
@@ -628,13 +628,12 @@ class acl extends plugin
 
       /* Role selector if scope is base */
       if ($this->aclType == 'role'){
-        $smarty->assign('roleSelector', "Role selector");#, $this->buildRoleSelector($this->myAclObjects));
         $smarty->assign('roleSelector', $this->buildRoleSelector($this->roles));
       }
     }
 
     if ($this->dialogState == 'edit'){
-      $smarty->assign('headline', sprintf(_("Edit ACL for '%s' - scope is '%s'"), $this->aclObjects[$this->aclObject], $this->aclTypes[$this->aclType]));
+      $smarty->assign('headline', sprintf(_("Edit ACL for '%s' with scope '%s'"), $this->aclObjects[$this->aclObject], $this->aclTypes[$this->aclType]));
 
       /* Collect objects for selected category */
       foreach ($this->ocMapping[$this->aclObject] as $idx => $class){
@@ -1087,9 +1086,9 @@ class acl extends plugin
       if($entry['type'] == "role"){
 
         if(isset($this->roles[$entry['acl']])){  
-          $summary.= sprintf(_("Role: %s"), $this->roles[$entry['acl']]['cn']);
+          $summary.= sprintf(_("ACL role: %s"), $this->roles[$entry['acl']]['cn']);
         }else{
-          $summary.= sprintf(_("Role: %s"), "<i>"._("unknown role")."</i>");
+          $summary.= sprintf(_("ACL role: %s"), "<i>"._("unknown ACL role")."</i>");
         }
       }else{
         foreach ($entry['acl'] as $name => $object){
@@ -1294,7 +1293,6 @@ class acl extends plugin
                                                           "objectClass"  => array("gosaAcl","gosaRole"))),
           "plProvidedAcls"=> array(
            "gosaAclEntry"          => _("ACL Entries")
-//            "description" => _("Role description")
             )
 
           ));
