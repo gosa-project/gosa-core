@@ -3596,5 +3596,14 @@ function postDecode($str)
   return(base64_decode(preg_replace("/_/","=", $str)));
 }
 
+
+/*! \brief    Generate bold output
+ */
+function bold($str)
+{
+  return "<b>$str</b>";
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -31,23 +31,23 @@ class xml {
     if (!$xml->schemaValidate($schema)) {
       $errors = libxml_get_errors();
       foreach ($errors as $error) {
-        $str= "";
+        $estr= "";
         switch ($error->level) {
             case LIBXML_ERR_WARNING:
-                $str= _("Warning")." ".$error->code.": ";
+                $estr= _("Warning")." ".$error->code.":";
                 break;
             case LIBXML_ERR_ERROR:
-                $str= _("Error")." ".$error->code.": ";
+                $estr= _("Error")." ".$error->code.":";
                 break;
             case LIBXML_ERR_FATAL:
-                $str= _("Fatal error")." ".$error->code.": ";
+                $estr= _("Fatal error")." ".$error->code.":";
                 break;
         }
-        $str.= trim($error->message);
         if ($error->file) {
-            $str.= " "._("in")." ".$error->file;
+          $str= sprintf("%s %s in %s", $estr, trim($error->message), $error->file);
+        } else {
+          $str= sprintf("%s %s in %s on line %s", $estr, trim($error->message), $error->file, $error->line);
         }
-        $str.= " "._("on line")." ".$error->line;
         msg_dialog::display(_("XML error"), $str, ERROR_DIALOG);
       }
       libxml_clear_errors();
