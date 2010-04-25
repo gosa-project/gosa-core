@@ -57,7 +57,7 @@ class Socket_Client
   public function setEncryptionKey($key)
   {
     if(!function_exists("mcrypt_get_iv_size")){
-      $this->set_error(_("No PHP mcrypt module found!"));
+      $this->set_error(msgPool::missingext("mcrypt"));
       $this->ckey = "";
       $this->b_encrypt = FALSE;
     }

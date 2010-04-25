@@ -575,7 +575,7 @@ class msgPool
 
   public static function check_base()
   {
-    return _("The supplied base is not valid and has been reset to the previous value!");
+    return _("The supplied base is not valid and has been reset to its previous value!");
   }
 
 }
