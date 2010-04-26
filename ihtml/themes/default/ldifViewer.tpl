@@ -1,4 +1,5 @@
-
+<h3>{t}Raw LDAP entry{/t}</h3>
+<hr>
 <pre>
 {$ldif}
 </pre>

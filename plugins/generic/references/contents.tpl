@@ -1,29 +1,31 @@
 
-<h3>{t}Object info{/t}</h3>
+<h3>{t}Object information{/t}</h3>
 <table width='100%' summary='{t}Object info{/t}'>
     <tr>
         <td style='width:48%;'>
-            {if !$someACL|regex_replace:"/[cdmw]/":"" == "r"}
-                {msgPool type='permView'}
-            {else}
-                {if $modifyTimestamp==""}
-                    Last modified: {t}Unknown{/t}
-                {else}
-                    Last modified: {$modifyTimestamp}
-                {/if}
+            {if $completeACL|regex_replace:"/[cdmw]/":"" == "r"}
+                <button type='submit' name='viewLdif'>{t}Show raw object entry{/t}</button>
             {/if}
         </td>
         <td class='right-border' style='width:2px'>
           &nbsp;
         </td>
         <td>
-            {if $completeACL|regex_replace:"/[cdmw]/":"" == "r"}
-                {t}View current entry ldif{/t}&nbsp;<button type='submit' name='viewLdif'>{t}View{/t}</button>
+            {if !$someACL|regex_replace:"/[cdmw]/":"" == "r"}
+                {msgPool type='permView'}
+            {else}
+                {if $modifyTimestamp==""}
+                    {t}Last modification{/t}: {t}Unknown{/t}
+                {else}
+                    {t}Last modification{/t}: {$modifyTimestamp}
+                {/if}
             {/if}
         </td>
     </tr>
 </table>
+
 <hr>
+
 <table summary='{t}Object references{/t}' class='reference-tab'>
     <tr>
         <td style='width:48%'>
