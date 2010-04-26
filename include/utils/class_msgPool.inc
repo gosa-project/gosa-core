@@ -10,50 +10,33 @@ define ("LDAP_AUTH",   6);
 class msgPool
 {
 
-  public static function selectToView($type,$o_type = "")
-  {
-    if($o_type == ""){
-      return(sprintf(_("Select to list objects of type '%s'."),$type));
-    }elseif($o_type == "contains"){
-      return(sprintf(_("Select to list objects containig '%s'."),$type));
-    }elseif($o_type == "enabled"){
-      return(sprintf(_("Select to list objects that have '%s' enabled"),$type));
-    }elseif($o_type == "subsearch"){
-      return(_("Select to search within subtrees"));
-    }elseif($o_type == "subsearch_small"){
-      return(_("Search in subtrees"));
-    }
-
-  }
-
-
   public static function deleteInfo($name= "",$type = "")
   {
     if ($name == "") { 
       if($type == ""){
         return (_("This object will be deleted!"));
       }else{
-        return (sprintf(_("This '%s' object will be deleted!"), $type));
+        return (sprintf(_("This %s object will be deleted!"), bold($type)));
       }
     }
     if (!is_array($name)){
       if($type == ""){
-        return (sprintf(_("This object will be deleted: %s"), "<br><br><i>$name</i>"));
+        return (sprintf(_("This object will be deleted: %s"), "<br><br>$name"));
       }else{
-        return (sprintf(_("This '%s' object will be deleted: %s"),$type, "<br><br><i>$name</i>"));
+        return (sprintf(_("This %s object will be deleted: %s"), bold($type), "<br><br>$name"));
       }
     }
     if (count($name) == 1){
       if($type == ""){
         return (_("This object will be deleted:")."<br>".msgPool::buildList($name));
       }else{
-        return (sprintf(_("This '%s' object will be deleted:"),$type). "<br>".msgPool::buildList($name));
+        return (sprintf(_("This %s object will be deleted:"), bold($type)). "<br>".msgPool::buildList($name));
       }
     }
     if($type == ""){
-      return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)));
+      return (sprintf(_("These objects will be deleted: %s"), "<br><br>".msgPool::buildList($name)));
     }else{
-      return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)));
+      return (sprintf(_("These %s objects will be deleted: %s"), bold($type), "<br>".msgPool::buildList($name)));
     }
   }
 
@@ -65,7 +48,7 @@ class msgPool
     }
 
     if (!is_array($name)){
-      return (_("You have no permission to delete the object:")."<br><br><i>$name</i>");
+      return (_("You have no permission to delete the object:")."<br><br>$name");
     }
 
     if (count($name) == 1){
@@ -83,7 +66,7 @@ class msgPool
     }
 
     if (!is_array($name)){
-      return (_("You have no permission to create the object:")."<br><br><i>$name</i>");
+      return (_("You have no permission to create the object:")."<br><br>$name");
     }
 
     if (count($name) == 1){
@@ -101,7 +84,7 @@ class msgPool
     }
 
     if (!is_array($name)){
-      return (_("You have no permission to modify the object:")."<br><br><i>$name</i>");
+      return (_("You have no permission to modify the object:")."<br><br>$name");
     }
 
     if (count($name) == 1){
@@ -119,7 +102,7 @@ class msgPool
     }
 
     if (!is_array($name)){
-      return (_("You have no permission to view the object:")."<br><br><i>$name</i>");
+      return (_("You have no permission to view the object:")."<br><br>$name");
     }
 
     if (count($name) == 1){
@@ -137,7 +120,7 @@ class msgPool
     }
 
     if (!is_array($name)){
-      return (_("You have no permission to move the object:")."<br><br><i>$name</i>");
+      return (_("You have no permission to move the object:")."<br><br>$name");
     }
 
     if (count($name) == 1){
@@ -151,67 +134,67 @@ class msgPool
   public static function dbconnect($name, $error= "", $dbinfo= "")
   {
     if ($error != ""){
-      $error= "<br><br><i>"._("Error").":</i> ".$error;
+      $error= "<br><br>"._("Error").": ".bold($error);
     }
     if ($dbinfo != ""){
-      $error.= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+      $error.= "<br><br>"._("Connection information").": ".bold($dbinfo);
     }
-    return (sprintf(_("Cannot connect to %s database!"), $name).$error);
+    return (sprintf(_("Cannot connect to %s database!"), bold($name)).$error);
   }
 
 
   public static function dbselect($name, $error= "", $dbinfo= "")
   {
     if ($error != ""){
-      $error= "<br><br><i>"._("Error").":</i> ".$error;
+      $error= "<br><br>"._("Error").": ".bold($error);
     }
     if ($dbinfo != ""){
-      $error.= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+      $error.= "<br><br>"._("Connection information").": ".bold($dbinfo);
     }
-    return (sprintf(_("Cannot select %s database!"), $name).$error);
+    return (sprintf(_("Cannot select %s database!"), bold($name)).$error);
   }
 
 
   public static function noserver($name)
   {
-    return (sprintf(_("No %s server defined!"), $name));
+    return (sprintf(_("No %s server defined!"), bold($name)));
   }
 
 
   public static function dbquery($name, $error= "", $dbinfo= "")
   {
     if ($error != ""){
-      $error= "<br><br><i>"._("Error").":</i> ".$error;
+      $error= "<br><br>"._("Error").": ".bold($error);
     }
     if ($dbinfo != ""){
-      $error.= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+      $error.= "<br><br>"._("Connection information").": ".bold($dbinfo);
     }
-    return (sprintf(_("Cannot query %s database!"), $name).$error);
+    return (sprintf(_("Cannot query %s database!"), bold($name)).$error);
   }
 
 
   public static function reserved($name)
   {
-    return (sprintf(_("The field '%s' contains a reserved keyword!"), $name));
+    return (sprintf(_("The field %s contains a reserved keyword!"), bold($name)));
   }
 
 
   public static function cmdnotfound($type, $plugin)
   {
-    return (sprintf(_("Command specified as %s hook for plugin '%s' does not exist!"), $type, $plugin));
+    return (sprintf(_("Command specified as %s hook for plugin %s does not exist!"), bold($type), bold($plugin)));
   }
 
 
   public static function cmdinvalid($type, $command = "",$plugin="")
   {
     if(empty($command)){
-      return (sprintf(_("'%s' command is invalid!"), $type));
+      return (sprintf(_("%s command is invalid!"), bold($type)));
     }elseif($command != "" && $plugin != ""){
-      return (sprintf(_("'%s' command (%s) for plugin %s is invalid!"), $type,$command,$plugin));
+      return (sprintf(_("%s command (%s) for plugin %s is invalid!"), bold($type), bold($command) ,bold($plugin)));
     }elseif($plugin != "" && $command =""){
-      return (sprintf(_("'%s' command for plugin %s is invalid!"), $type,$plugin));
+      return (sprintf(_("%s command for plugin %s is invalid!"), bold($type), bold($plugin)));
     }else{
-      return (sprintf(_("'%s' command (%s) is invalid!"), $type,$command));
+      return (sprintf(_("%s command (%s) is invalid!"), bold($type), bold($command)));
     }
   }
 
@@ -219,13 +202,13 @@ class msgPool
   public static function cmdexecfailed($type, $command = "",$plugin="")
   {
     if(empty($command)){
-      return (sprintf(_("Cannot execute '%s' command!"), $type));
+      return (sprintf(_("Cannot execute %s command!"), bold($type)));
     }elseif($command != "" && $plugin != ""){
-      return (sprintf(_("Cannot execute '%s' command (%s) for plugin %s!"), $type,$command,$plugin));
+      return (sprintf(_("Cannot execute %s command (%s) for plugin %s!"), bold($type), bold($command), bold($plugin)));
     }elseif($plugin != "" && $command =""){
-      return (sprintf(_("Cannot execute '%s' command for plugin %s!"), $type,$plugin));
+      return (sprintf(_("Cannot execute %s command for plugin %s!"), bold($type), bold($plugin)));
     }else{
-      return (sprintf(_("Cannot execute '%s' command (%s)!"), $type,$command));
+      return (sprintf(_("Cannot execute %s command (%s)!"), bold($type), bold($command)));
     }
   }
 
@@ -233,9 +216,9 @@ class msgPool
   public static function toobig($name, $min= "")
   {
     if ($min == ""){
-      return (sprintf(_("Value for '%s' is too large!"), $name));
+      return (sprintf(_("Value for %s is too large!"), bold($name)));
     } else {
-      return (sprintf(_("'%s' must be smaller than %s!"), $name, $min));
+      return (sprintf(_("%s must be smaller than %s!"), bold($name), bold($min)));
     }
   }
 
@@ -243,28 +226,28 @@ class msgPool
   public static function toosmall($name, $min= "")
   {
     if ($min == ""){
-      return (sprintf(_("Value for '%s' is too small!"), $name));
+      return (sprintf(_("Value for %s is too small!"), bold($name)));
     } else {
-      return (sprintf(_("'%s' must be %d or above!"), $name, $min));
+      return (sprintf(_("%s must be %s or above!"), bold($name), bold($min)));
     }
   }
 
 
   public static function depends($name1, $name2)
   {
-    return (sprintf(_("'%s' depends on '%s' - please provide both values!"), $name1, $name2));
+    return (sprintf(_("%s depends on %s - please provide both values!"), bold($name1), bold($name2)));
   }
 
 
   public static function duplicated($name)
   {
-    return (sprintf(_("There is already an entry with this '%s' attribute in the system!"), $name));
+    return (sprintf(_("There is already an entry with this %s attribute in the system!"), bold($name)));
   }
 
 
   public static function required($name)
   {
-    return (sprintf(_("The required field '%s' is empty!"), $name));
+    return (sprintf(_("The required field %s is empty!"), bold($name)));
   }
 
 
@@ -272,7 +255,7 @@ class msgPool
   {
     /* Stylize example */
     if ($example != ""){
-      $example= "<br><br><i>"._("Example").":</i> ".$example;
+      $example= "<br><br>"._("Example").": ".bold($example);
     }
 
     /* If validChars are posted, take data and paint all invalid
@@ -292,18 +275,18 @@ class msgPool
         }
       }
 
-      return sprintf(_("The Field '%s' contains invalid characters"), $name).". ".
-        (strlen($mismatch)==1?sprintf(_("'%s' is not allowed:"), $mismatch):sprintf(_("'%s' are not allowed!"), $mismatch)).
+      return sprintf(_("The Field %s contains invalid characters"), bold($name)).". ".
+        (strlen($mismatch)==1?sprintf(_("%s is not allowed:"), bold($mismatch)):sprintf(_("%s are not allowed!"), bold($mismatch))).
         "<br><br> \"$result\"$example";
     } else {
-      return sprintf(_("The Field '%s' contains invalid characters!"), $name)."!$example";
+      return sprintf(_("The Field %s contains invalid characters!"), bold($name))."!$example";
     }
   }
 
 
   public static function missingext($name)
   {
-    return sprintf(_("Missing %s PHP extension!"), $name);
+    return sprintf(_("Missing %s PHP extension!"), bold($name));
   }
 
 
@@ -377,23 +360,23 @@ class msgPool
 
   public static function noValidExtension($name)
   {
-    return sprintf(_("This account has no valid %s extensions!"), $name);
+    return sprintf(_("This account has no valid %s extensions!"), bold($name));
   }
 
   public static function featuresEnabled($name, $depends= "")
   {
     if ($depends == ""){
-      return sprintf(_("This account has %s settings enabled. You can disable them by clicking below."), $name);
+      return sprintf(_("This account has %s settings enabled. You can disable them by clicking below."), bold($name));
     } else {
       if (count($depends) == 1){
-        return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $name, $depends);
+        return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), bold($name), bold($depends));
       } else {
         $deps= "";
         foreach ($depends as $dep){
           $deps.= "$dep / ";
         }
         $deps= preg_replace("/ \/ $/", "", $deps);
-        return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $name, $deps);
+        return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), bold($name), bold($deps));
       }
     }
   }
@@ -402,17 +385,17 @@ class msgPool
   public static function featuresDisabled($name, $depends= "")
   {
     if ($depends == ""){
-      return sprintf(_("This account has %s settings disabled. You can enable them by clicking below."), $name);
+      return sprintf(_("This account has %s settings disabled. You can enable them by clicking below."), bold($name));
     } else {
       if (count($depends) == 1){
-        return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), $name, $depends);
+        return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), bold($name), bold($depends));
       } else {
         $deps= "";
         foreach ($depends as $dep){
           $deps.= "$dep / ";
         }
         $deps= preg_replace("/ \/ $/", "", $deps);
-        return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), $name, $deps);
+        return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), bold($name), bold($deps));
       }
     }
   }
@@ -454,7 +437,7 @@ class msgPool
   {
     /* Assign headline depending on type */
     $headline= _("MySQL operation failed!");
-    return $headline."<br><br><i>"._("Error").":</i> ".$error;
+    return $headline."<br><br>"._("Error").": ".bold($error);
   }
 
 
@@ -465,17 +448,17 @@ class msgPool
         _("delete operation"), _("search operation"), _("authentication"));
 
     if (isset($typemap[$type])){
-      $headline= sprintf(_("LDAP %s failed!"), $typemap[$type]);
+      $headline= sprintf(_("LDAP %s failed!"), bold($typemap[$type]));
     } else {
       $headline= _("LDAP operation failed!");
     }
 
     /* Fill DN information */
     if ($dn != ""){
-      $dn_info= "<br><br><i>"._("Object").":</i> ".LDAP::fix($dn);
+      $dn_info= "<br><br>"._("Object").": ".bold(LDAP::fix($dn));
     }
 
-    return $headline.$dn_info."<br><br><i>"._("Error").":</i> ".$error;
+    return $headline.$dn_info."<br><br>"._("Error").": ".bold($error);
   }
 
 
@@ -485,7 +468,7 @@ class msgPool
       return _("Upload failed!");
     }
 
-    return sprintf(_("Upload failed: %s"), "<br><br><i>$reason</i>");
+    return sprintf(_("Upload failed: %s"), "<br><br>".bold($reason));
   }
 
 
@@ -494,82 +477,82 @@ class msgPool
     if ($error == ""){
       return _("Communication failure with the infrastructure service!");
     }
-    return sprintf(_("Communication failure with the infrastructure service: %s"), "<br><br>"._("Error").": ".$error);
+    return sprintf(_("Communication failure with the infrastructure service: %s"), "<br><br>".$error);
   }
 
 
   public static function stillInUse($type, $objects= array())
   {
     if (!is_array($objects)){
-      return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br><br>".$objects);
+      return sprintf(_("This %s is still in use by this object: %s"), bold($type), "<br><br>".$objects);
     }
     if (count($objects) == 1){
-      return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br>".msgPool::buildList($objects));
+      return sprintf(_("This %s is still in use by this object: %s"), bold($type), "<br>".msgPool::buildList($objects));
     }
     if (count($objects) == 0){
-      return sprintf(_("This '%s' is still in use."), $type);
+      return sprintf(_("This %s is still in use."), bold($type));
     }
-    return sprintf(_("This '%s' is still in use by these objects: %s"), $type, "<br>".msgPool::buildList($objects));
+    return sprintf(_("This %s is still in use by these objects: %s"), bold($type), "<br>".msgPool::buildList($objects));
   }
 
 
   public static function fileDoesNotExist($file)
   {
-    return sprintf(_("File '%s' does not exist!"), $file);
+    return sprintf(_("File %s does not exist!"), bold($file));
   }
 
 
   public static function cannotReadFile($file)
   {
-    return sprintf(_("Cannot open file '%s' for reading!"), $file);
+    return sprintf(_("Cannot open file %s for reading!"), bold($file));
   }
 
 
   public static function cannotWriteFile($file)
   {
-    return sprintf(_("Cannot open file '%s' for writing!"), $file);
+    return sprintf(_("Cannot open file %s for writing!"), bold($file));
   }
 
 
   public static function invalidConfigurationAttribute($attr)
   {
-    return sprintf(_("The value for '%s' is currently unconfigured or invalid, please check your configuration file!"), $attr);
+    return sprintf(_("The value for %s is currently unconfigured or invalid, please check your configuration file!"), bold($attr));
   }
 
 
   public static function cannotDeleteFile($file)
   {
-    return sprintf(_("Cannot delete file '%s'!"), $file);
+    return sprintf(_("Cannot delete file %s!"), bold($file));
   }
 
 
   public static function cannotCreateFolder($path)
   {
-    return sprintf(_("Cannot create folder '%s'!"), $path);
+    return sprintf(_("Cannot create folder %s!"), bold($path));
   }
 
 
   public static function cannotDeleteFolder($path)
   {
-    return sprintf(_("Cannot delete folder '%s'!"), $path);
+    return sprintf(_("Cannot delete folder %s!"), bold($path));
   }
 
 
   public static function checkingFor($what)
   {
-    return sprintf(_("Checking for %s support"), $what);
+    return sprintf(_("Checking for %s support"), bold($what));
   }
 
 
   public static function installPhpModule($what)
   {
-    return sprintf(_("Install and activate the %s PHP module."), $what);
+    return sprintf(_("Install and activate the %s PHP module."), bold($what));
   }
 
 
   public static function class_not_found($plugin)
   {
-    return (sprintf(_("Cannot initialize class '%s'! Maybe there is a plugin missing in your gosa setup?"), $plugin));
+    return (sprintf(_("Cannot initialize class %s! Maybe there is a plugin missing in your gosa setup?"), bold($plugin)));
   }
 
 

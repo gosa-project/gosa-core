@@ -44,7 +44,7 @@ class timezone {
       $tz = $config->get_cfg_value("timezone");
 
       if(!@date_default_timezone_set($tz)){
-        msg_dialog::display(_("Configuration error"), sprintf(_("The configured timezone '%s' is not valid!"), $tz), ERROR_DIALOG);
+        msg_dialog::display(_("Configuration error"), sprintf(_("The configured timezone %s is not valid!"), bold($tz)), ERROR_DIALOG);
       }
       $tz_delta = date("Z", $stamp);
       $tz_delta = $tz_delta / 3600 ;
