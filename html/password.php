@@ -85,8 +85,8 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))) {
     msg_dialog::display(
         _("Configuration error"),
         sprintf(
-            _("Directory '%s' specified as compile directory is not accessible!"),
-            $smarty->compile_dir
+            _("Compile directory %s is not accessible!"),
+            bold($smarty->compile_dir)
         ),
         FATAL_ERROR_DIALOG
     );
@@ -215,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
     /* Do new and repeated password fields match? */
     $new_password= $_POST['new_password'];
     if ($_POST['new_password'] != $_POST['new_password_repeated']) {
-        $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+        $message[]= _("The values for 'New password' and 'Repeated new password' differ!");
     } else {
         if ($_POST['new_password'] == "") {
             $message[]= msgPool::required(_("New password"));
@@ -227,13 +227,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
         $l= $config->get_cfg_value("passwordMinDiffer");
         if (substr($_POST['current_password'], 0, $l) ==
             substr($_POST['new_password'], 0, $l)) {
-            $message[]= _("The password used as new and current are too similar.");
+            $message[]= _("The password used as new and current are too similar!");
         }
     }
     if ($config->get_cfg_value("passwordMinLength") != "") {
         if (strlen($_POST['new_password']) <
            $config->get_cfg_value("passwordMinLength")) {
-            $message[]= _("The password used as new is to short.");
+            $message[]= _("The password used as new is to short!");
         }
     }
 

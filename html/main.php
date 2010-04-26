@@ -148,8 +148,8 @@ if (!session::global_is_set('plist')){
         require_once("$BASE_DIR/$path");
       } else {
         msg_dialog::display(_("Fatal error"),
-            sprintf(_("Cannot locate file '%s' - please run '%s' to fix this"),
-              "$BASE_DIR/$path", "<b>update-gosa</b>"), FATAL_ERROR_DIALOG);
+            sprintf(_("Cannot locate file %s - please run %s to fix this"),
+              bold("$BASE_DIR/$path"), bold("update-gosa")), FATAL_ERROR_DIALOG);
         exit;
       }
     }
@@ -168,7 +168,7 @@ $plist= session::global_get('plist');
 if (isset($global_check) && $config->get_cfg_value("forceglobals") == "true"){
   msg_dialog::display(
             _("PHP configuration"),
-            _("FATAL: Register globals is on. GOsa will refuse to login unless this is fixed by an administrator."),
+            _("FATAL: Register globals is active. Please fix this in order to continue."),
             FATAL_ERROR_DIALOG);
 
   new log("security","login","",array(),"Register globals is on. For security reasons, this should be turned off.") ;
@@ -351,7 +351,7 @@ if (is_file("$plugin_dir/main.inc")){
 } else {
   msg_dialog::display(
       _("Plugin"),
-      sprintf(_("FATAL: Cannot find any plugin definitions for plugin '%s'!"), $plug),
+      sprintf(_("FATAL: Cannot find any plugin definitions for plugin %s!"), bold($plug)),
       FATAL_ERROR_DIALOG);
   exit();
 }

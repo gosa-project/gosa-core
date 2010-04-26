@@ -42,7 +42,7 @@ function displayLogin()
         $blocks= file("$BASE_DIR/ihtml/themes/$theme/blacklist");
         foreach ($blocks as $block) {
             if (preg_match('/'.preg_quote($block).'/', $_SERVER['HTTP_USER_AGENT'])) {
-                die(sprintf(_("Your browser (%s) is blacklisted for the current theme."), $block));
+                die(sprintf(_("Your browser (%s) is blacklisted for the current theme!"), $block));
             }
         }
     }
@@ -69,13 +69,13 @@ function displayLogin()
 
     /* Displasy SSL mode warning? */
     if ($ssl != "" && $config->get_cfg_value('warnssl') == 'true') {
-        $smarty->assign("ssl", sprintf(_("This session is not ecrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">"._("here")."</a>"));
+        $smarty->assign("ssl", sprintf(_("This session is not ecrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">".bold(_("here"))."</a>"));
     } else {
         $smarty->assign("ssl", "");
     }
 
     if(!$config->check_session_lifetime()) {
-        $smarty->assign ("lifetime", _("The session lifetime configured in your gosa.conf will be overridden by php.ini settings."));
+        $smarty->assign ("lifetime", _("The configured session lifetime will be overridden by php.ini settings!"));
     } else {
         $smarty->assign ("lifetime", "");
     }
@@ -177,7 +177,7 @@ $smarty->error_unassigned= true;
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))) {
-    msg_dialog::display(_("Smarty error"),sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
+    msg_dialog::display(_("Smarty error"),sprintf(_("Compile directory %s is not accessible!"),
         $smarty->compile_dir),FATAL_ERROR_DIALOG);
     exit();
 }
@@ -228,7 +228,7 @@ if ($config->get_cfg_value("forcessl") == 'true' && $ssl != '') {
 $htaccess_authenticated= FALSE;
 if ($config->get_cfg_value("htaccessAuthentication") == "true" ) {
     if (!isset($_SERVER['REMOTE_USER'])) {
-        msg_dialog::display(_("Configuration error"), _("There is a problem with the authentication setup!"), FATAL_ERROR_DIALOG);
+        msg_dialog::display(_("Configuration error"), _("Broken HTTP authentication setup!"), FATAL_ERROR_DIALOG);
         exit;
     }
 
@@ -236,11 +236,11 @@ if ($config->get_cfg_value("htaccessAuthentication") == "true" ) {
     $username= $tmp['username'];
     $server= $tmp['server'];
     if ($username == "") {
-        msg_dialog::display(_("Error"), _("Cannot find a valid user for the current authentication setup!"), FATAL_ERROR_DIALOG);
+        msg_dialog::display(_("Error"), _("Cannot find a valid user for the current HTTP authentication!"), FATAL_ERROR_DIALOG);
         exit;
     }
     if ($server == "") {
-        msg_dialog::display(_("Error"), _("User information is not unique accross the configured LDAP trees!"), FATAL_ERROR_DIALOG);
+        msg_dialog::display(_("Error"), _("Cannot find a unique user for the current HTTP authentication!"), FATAL_ERROR_DIALOG);
         exit;
     }
 
@@ -277,7 +277,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
         $tls =       ($config->get_cfg_value("ldapTLS") == "true");
 
         if(!count($ldap->get_objectclasses())) {
-            msg_dialog::display(_("LDAP error"), _("Cannot detect information about the installed LDAP schema!"), ERROR_DIALOG);
+            msg_dialog::display(_("LDAP error"), _("Cannot obtain information about the available LDAP schema!"), ERROR_DIALOG);
             displayLogin();
             exit()  ;
         }else{
@@ -290,7 +290,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $checkarr = array();
             foreach($str as $tr) {
                 if(isset($tr['IS_MUST_HAVE']) && !$tr['STATUS']) {
-                    msg_dialog::display(_("LDAP error"), _("Your LDAP setup contains old schema definitions:")."<br><br><i>".$tr['MSG']."</i>", ERROR_DIALOG);
+                    msg_dialog::display(_("LDAP error"), _("Your LDAP setup contains old schema definitions:")."<br><br>".$tr['MSG'], ERROR_DIALOG);
                     displayLogin();
                     exit();
                 }
@@ -326,7 +326,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
         if ($htaccess_authenticated) {
             $ui= ldap_login_user_htaccess($username);
             if ($ui === NULL || !$ui) {
-                msg_dialog::display(_("Authentication error"), _("Cannot retrieve user information for htaccess authentication!"), FATAL_ERROR_DIALOG);
+                msg_dialog::display(_("Authentication error"), _("Cannot retrieve user information for HTTP authentication!"), FATAL_ERROR_DIALOG);
                 exit;
             }
         } else {
@@ -425,7 +425,7 @@ if (!isset($message)) {
 $smarty->assign ("message", $message);
 
 /* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
-$smarty->assign ("cookies", _("Your browser has cookies disabled. Please enable cookies and reload this page before logging in!"));
+$smarty->assign ("cookies", _("Your browser has cookies disabled: please enable cookies and reload this page before logging in!"));
 
 /* Generate server list */
 $servers= array();
