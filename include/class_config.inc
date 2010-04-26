@@ -756,7 +756,7 @@ class config  {
 
       $dn= $ldap->getDN();
       $this->tdepartments[$dn]= "";
-      $this->department_info[LDAP::fix($dn)]= array("img" => $type_data['IMG'],
+      $this->department_info[$dn]= array("img" => $type_data['IMG'],
                                          "description" => isset($attrs['description'][0])?$attrs['description'][0]:"",
                                          "name" => $attrs[$type_data['ATTR']][0]);
 
