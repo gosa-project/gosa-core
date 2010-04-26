@@ -863,7 +863,8 @@ class LDAP{
     $attrs  = (count($attributes))?implode($attributes,' '):'';
     $scope = (!empty($scope))?' -s '.$scope: '';
     $limit = (!$limit)?'':' -z '.$limit;
-    $cmd = "ldapsearch -x -LLLL '{$filter}' {$limit} {$scope} -H '{$host}' -b '{$dn}' $attrs";
+    $dn = escapeshellarg($dn);
+    $cmd = "ldapsearch -x -LLLL '{$filter}' {$limit} {$scope} -H '{$host}' -b {$dn} $attrs";
     exec($cmd, $ret,$code);
     $res = implode($ret,"\n");
     return($res);
