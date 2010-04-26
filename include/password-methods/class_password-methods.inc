@@ -290,6 +290,20 @@ class passwordMethod
   {
     return($this);
   }
+
+
+  static function is_harmless($password)
+  {
+      global $config;
+
+      if ($config->get_cfg_value("strictPasswordRules", "true") == "true") {
+          // Do we have UTF8 characters in the password?
+          return ($password == utf8_decode($password));
+      }
+
+      return(true);
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
