@@ -1126,114 +1126,6 @@ class plugin
   }
 
 
-  /*! \brief Create a snapshot of the current object */
-  function create_snapshot($type= "snapshot", $description= array())
-  {
-
-    /* Check if snapshot functionality is enabled */
-    if(!$this->snapshotEnabled()){
-      return;
-    }
-
-    /* Get configuration from gosa.conf */
-    $config = $this->config;
-
-    /* Create lokal ldap connection */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-
-    /* check if there are special server configurations for snapshots */
-    if($config->get_cfg_value("snapshotURI") == ""){
-
-      /* Source and destination server are both the same, just copy source to dest obj */
-      $ldap_to      = $ldap;
-      $snapldapbase = $this->config->current['BASE'];
-
-    }else{
-      $server         = $config->get_cfg_value("snapshotURI");
-      $user           = $config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $config->get_cfg_value("snapshotBase");
-
-      $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
-      $ldap_to -> cd($snapldapbase);
-
-      if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
-      }
-
-    }
-
-    /* check if the dn exists */ 
-    if ($ldap->dn_exists($this->dn)){
-
-      /* Extract seconds & mysecs, they are used as entry index */
-      list($usec, $sec)= explode(" ", microtime());
-
-      /* Collect some infos */
-      $base           = $this->config->current['BASE'];
-      $snap_base      = $config->get_cfg_value("snapshotBase");
-      $base_of_object = preg_replace ('/^[^,]+,/i', '', $this->dn);
-      $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
-
-      /* Create object */
-#$data             = preg_replace('/^dn:.*\n/', '', $ldap->gen_ldif($this->dn,"(!(objectClass=gosaDepartment))"));
-      $data             = $ldap->gen_ldif($this->dn,"(&(!(objectClass=gosaDepartment))(!(objectClass=FAIclass)))");
-      $newName          = str_replace(".", "", $sec."-".$usec);
-      $target= array();
-      $target['objectClass']            = array("top", "gosaSnapshotObject");
-      $target['gosaSnapshotData']       = gzcompress($data, 6);
-      $target['gosaSnapshotType']       = $type;
-      $target['gosaSnapshotDN']         = $this->dn;
-      $target['description']            = $description;
-      $target['gosaSnapshotTimestamp']  = $newName;
-
-      /* Insert the new snapshot 
-         But we have to check first, if the given gosaSnapshotTimestamp
-         is already used, in this case we should increment this value till there is 
-         an unused value. */ 
-      $new_dn                           = "gosaSnapshotTimestamp=".$newName.",".$new_base;
-      $ldap_to->cat($new_dn);
-      while($ldap_to->count()){
-        $ldap_to->cat($new_dn);
-        $newName = str_replace(".", "", $sec."-".($usec++));
-        $new_dn                           = "gosaSnapshotTimestamp=".$newName.",".$new_base;
-        $target['gosaSnapshotTimestamp']  = $newName;
-      } 
-
-      /* Inset this new snapshot */
-      $ldap_to->cd($snapldapbase);
-      $ldap_to->create_missing_trees($snapldapbase);
-      $ldap_to->create_missing_trees($new_base);
-      $ldap_to->cd($new_dn);
-      $ldap_to->add($target);
-      if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $new_dn, LDAP_ADD, get_class()));
-      }
-
-      if (!$ldap->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $new_base, "", get_class()));
-      }
-
-    }
-  }
-
-  /*! \brief Remove a snapshot */
-  function remove_snapshot($dn)
-  {
-    $ui       = get_userinfo();
-    $old_dn   = $this->dn; 
-    $this->dn = $dn;
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->rmdir_recursive($this->dn);
-    if(!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn));
-    }
-    $this->dn = $old_dn;
-  }
-
-
   /*! \brief Test if snapshotting is enabled
    *
    * Test weither snapshotting is enabled or not. There will also be some errors posted,
@@ -1242,269 +1134,67 @@ class plugin
    */
   function snapshotEnabled()
   {
-    return $this->config->snapshotEnabled();
+      return $this->config->snapshotEnabled();
   }
 
 
-  /* \brief Return available snapshots for the given base */
-  function Available_SnapsShots($dn,$raw = false)
-  {
-    if(!$this->snapshotEnabled()) return(array());
+ /* \brief Return available snapshots for the given base */
+ function Available_SnapsShots($dn,$raw = false)
+ {
+   if(!$this->snapshotEnabled()) return(array());
 
-    /* Create an additional ldap object which
-       points to our ldap snapshot server */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $cfg= &$this->config->current;
+   /* Create an additional ldap object which
+      points to our ldap snapshot server */
+   $ldap= $this->config->get_ldap_link();
+   $ldap->cd($this->config->current['BASE']);
+   $cfg= &$this->config->current;
 
-    /* check if there are special server configurations for snapshots */
-    if($this->config->get_cfg_value("snapshotURI") == ""){
-      $ldap_to      = $ldap;
-    }else{
-      $server         = $this->config->get_cfg_value("snapshotURI");
-      $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
-      $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
-      $ldap_to -> cd($snapldapbase);
-      if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
-      }
-    }
+   /* check if there are special server configurations for snapshots */
+   if($this->config->get_cfg_value("snapshotURI") == ""){
+     $ldap_to      = $ldap;
+   }else{
+     $server         = $this->config->get_cfg_value("snapshotURI");
+     $user           = $this->config->get_cfg_value("snapshotAdminDn");
+     $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
+     $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
+     $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
+     $ldap_to -> cd($snapldapbase);
+     if (!$ldap_to->success()){
+       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+     }
+   }
 
-    /* Prepare bases and some other infos */
-    $base           = $this->config->current['BASE'];
-    $snap_base      = $this->config->get_cfg_value("snapshotBase");
-    $base_of_object = preg_replace ('/^[^,]+,/i', '', $dn);
-    $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
-    $tmp            = array(); 
+   /* Prepare bases and some other infos */
+   $base           = $this->config->current['BASE'];
+   $snap_base      = $this->config->get_cfg_value("snapshotBase");
+   $base_of_object = preg_replace ('/^[^,]+,/i', '', $dn);
+   $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
+   $tmp            = array(); 
 
-    /* Fetch all objects with  gosaSnapshotDN=$dn */
-    $ldap_to->cd($new_base);
-    $ldap_to->ls("(&(objectClass=gosaSnapshotObject)(gosaSnapshotDN=".$dn."))",$new_base,
-        array("gosaSnapshotType","gosaSnapshotTimestamp","gosaSnapshotDN","description")); 
+   /* Fetch all objects with  gosaSnapshotDN=$dn */
+   $ldap_to->cd($new_base);
+   $ldap_to->ls("(&(objectClass=gosaSnapshotObject)(gosaSnapshotDN=".$dn."))",$new_base,
+       array("gosaSnapshotType","gosaSnapshotTimestamp","gosaSnapshotDN","description")); 
 
-    /* Put results into a list and add description if missing */
-    while($entry = $ldap_to->fetch()){ 
-      if(!isset($entry['description'][0])){
-        $entry['description'][0]  = "";
-      }
-      $tmp[] = $entry; 
-    }
+   /* Put results into a list and add description if missing */
+   while($entry = $ldap_to->fetch()){ 
+     if(!isset($entry['description'][0])){
+       $entry['description'][0]  = "";
+     }
+     $tmp[] = $entry; 
+   }
 
-    /* Return the raw array, or format the result */
-    if($raw){
-      return($tmp);
-    }else{  
-      $tmp2 = array();
-      foreach($tmp as $entry){
-        $tmp2[base64_encode($entry['dn'])] = $entry['description'][0]; 
-      }
-    }
-    return($tmp2);
-  }
-
-
-  function getAllDeletedSnapshots($base_of_object,$raw = false)
-  {
-    if(!$this->snapshotEnabled()) return(array());
-
-    /* Create an additional ldap object which
-       points to our ldap snapshot server */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $cfg= &$this->config->current;
-
-    /* check if there are special server configurations for snapshots */
-    if($this->config->get_cfg_value("snapshotURI") == ""){
-      $ldap_to      = $ldap;
-    }else{
-      $server         = $this->config->get_cfg_value("snapshotURI");
-      $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
-      $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
-      $ldap_to -> cd($snapldapbase);
-      if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
-      }
-    }
-
-    /* Prepare bases */ 
-    $base           = $this->config->current['BASE'];
-    $snap_base      = $this->config->get_cfg_value("snapshotBase");
-    $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
-
-    /* Fetch all objects and check if they do not exist anymore */
-    $ui = get_userinfo();
-    $tmp = array();
-    $ldap_to->cd($new_base);
-    $ldap_to->ls("(objectClass=gosaSnapshotObject)",$new_base,array("gosaSnapshotType","gosaSnapshotTimestamp","gosaSnapshotDN","description"));
-    while($entry = $ldap_to->fetch()){
-
-      $chk =  str_replace($new_base,"",$entry['dn']);
-      if(preg_match("/,ou=/",$chk)) continue;
-
-      if(!isset($entry['description'][0])){
-        $entry['description'][0]  = "";
-      }
-      $tmp[] = $entry; 
-    }
-
-    /* Check if entry still exists */
-    foreach($tmp as $key => $entry){
-      $ldap->cat($entry['gosaSnapshotDN'][0]);
-      if($ldap->count()){
-        unset($tmp[$key]);
-      }
-    }
-
-    /* Format result as requested */
-    if($raw) {
-      return($tmp);
-    }else{
-      $tmp2 = array();
-      foreach($tmp as $key => $entry){
-        $tmp2[base64_encode($entry['dn'])] = $entry['description'][0]; 
-      }
-    }
-    return($tmp2);
-  } 
-
-
-  /* \brief Restore selected snapshot */
-  function restore_snapshot($dn)
-  {
-    if(!$this->snapshotEnabled()) return(array());
-
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $cfg= &$this->config->current;
-
-    /* check if there are special server configurations for snapshots */
-    if($this->config->get_cfg_value("snapshotURI") == ""){
-      $ldap_to      = $ldap;
-    }else{
-      $server         = $this->config->get_cfg_value("snapshotURI");
-      $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
-      $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
-      $ldap_to -> cd($snapldapbase);
-      if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
-      }
-    }
-
-    /* Get the snapshot */ 
-    $ldap_to->cat($dn);
-    $restoreObject = $ldap_to->fetch();
-
-    /* Prepare import string */
-    $data  = gzuncompress($ldap_to->get_attribute($dn,'gosaSnapshotData'));
-
-    /* Import the given data */
-    $err = "";
-    $ldap->import_complete_ldif($data,$err,false,false);
-    if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, "", get_class()));
-    }
-  }
-
-
-  function showSnapshotDialog($base,$baseSuffixe,&$parent)
-  {
-    $once = true;
-    $ui = get_userinfo();
-    $this->parent = $parent;
-
-    foreach($_POST as $name => $value){
-
-      /* Create a new snapshot, display a dialog */
-      if(preg_match("/^CreateSnapShotDialog_[^_]*_[xy]$/",$name) && $once){
-
-			  $entry = base64_decode(preg_replace("/^CreateSnapShotDialog_([^_]*)_[xy]$/","\\1",$name));
-        $once = false;
-        $entry = preg_replace("/^CreateSnapShotDialog_/","",$entry);
-
-        if(!empty($entry) && $ui->allow_snapshot_create($entry,$this->parent->acl_module)){
-          $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
-        }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s!"), bold($entry)),ERROR_DIALOG);
-        }
-      }  
-  
-      /* Restore a snapshot, display a dialog with all snapshots of the current object */
-      if(preg_match("/^RestoreSnapShotDialog_/",$name) && $once){
-        $once = false;
-        $entry = base64_decode(preg_replace("/^RestoreSnapShotDialog_([^_]*)_[xy]$/i","\\1",$name));
-        if(!empty($entry) && $ui->allow_snapshot_restore($this->dn,$this->parent->acl_module)){
-          $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
-          $this->snapDialog->display_restore_dialog = true;
-        }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"), bold($entry)),ERROR_DIALOG);
-        }
-      }
-
-      /* Restore one of the already deleted objects */
-      if(((isset($_POST['menu_action']) && $_POST['menu_action'] == "RestoreDeletedSnapShot") 
-          || preg_match("/^RestoreDeletedSnapShot_/",$name)) && $once){
-        $once = false;
-
-        if($ui->allow_snapshot_restore($this->dn,$this->parent->acl_module)){
-          $this->snapDialog = new SnapShotDialog($this->config,"",$this);
-          $this->snapDialog->set_snapshot_bases($baseSuffixe);
-          $this->snapDialog->display_restore_dialog      = true;
-          $this->snapDialog->display_all_removed_objects  = true;
-        }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"), bold($base)),ERROR_DIALOG);
-        }
-      }
-
-      /* Restore selected snapshot */
-      if(preg_match("/^RestoreSnapShot_/",$name) && $once){
-        $once = false;
-        $entry = base64_decode(preg_replace("/^RestoreSnapShot_(.*)$/i","\\1",$name));
-
-        if(!empty($entry) && $ui->allow_snapshot_restore($this->dn,$this->parent->acl_module)){
-          $this->restore_snapshot($entry);
-          $this->snapDialog = NULL;
-        }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"), bold($entry)),ERROR_DIALOG);
-        }
-      }
-    }
-
-    /* Create a new snapshot requested, check
-       the given attributes and create the snapshot*/
-    if(isset($_POST['CreateSnapshot']) && is_object($this->snapDialog)){
-      $this->snapDialog->save_object();
-      $msgs = $this->snapDialog->check();
-      if(count($msgs)){
-        foreach($msgs as $msg){
-          msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
-        }
-      }else{
-        $this->dn =  $this->snapDialog->dn;
-        $this->create_snapshot("snapshot",$this->snapDialog->CurrentDescription);
-        $this->snapDialog = NULL;
-      }
-    }
-
-    /* Restore is requested, restore the object with the posted dn .*/
-    if((isset($_POST['RestoreSnapshot'])) && (isset($_POST['SnapShot']))){
-    }
-
-    if(isset($_POST['CancelSnapshot'])){
-      $this->snapDialog = NULL;
-    }
-
-    if(is_object($this->snapDialog )){
-      $this->snapDialog->save_object();
-      return($this->snapDialog->execute());
-    }
-  }
-
+   /* Return the raw array, or format the result */
+   if($raw){
+     return($tmp);
+   }else{  
+     $tmp2 = array();
+     foreach($tmp as $entry){
+       $tmp2[base64_encode($entry['dn'])] = $entry['description'][0]; 
+     }
+   }
+   return($tmp2);
+ }
 
   /*! \brief Return plugin informations for acl handling */
   static function plInfo()

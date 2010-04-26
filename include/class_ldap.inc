@@ -866,6 +866,7 @@ class LDAP{
     $cmd = "ldapsearch -x -LLLL '{$filter}' {$limit} {$scope} -H '{$host}' -b '{$dn}' $attrs";
     exec($cmd, $ret,$code);
     $res = implode($ret,"\n");
+    print_a(array($res,$cmd, $ret,$code));
     return($res);
   }
 
