@@ -517,7 +517,10 @@ class userinfo
                 foreach($this->ocMapping[$ocs] as $oc){
                   if (isset($subacl['acl'][$ocs.'/'.$oc])){
 
-                    if($dn != $this->dn && strpos($subacl['acl'][$ocs.'/'.$oc][0],"s") !== FALSE) continue;
+                      // Skip ACLs wich are defined for ourselfs only - if not checking against ($ui->dn)
+                      if(isset($subacl['acl'][$ocs.'/'.$oc][0]) && 
+                              $dn != $this->dn && 
+                              strpos($subacl['acl'][$ocs.'/'.$oc][0],"s") !== FALSE) continue;
 
                     foreach($subacl['acl'][$ocs.'/'.$oc] as $attr => $dummy){
                       $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$ocs.'/'.$oc][$attr]);
