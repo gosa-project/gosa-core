@@ -248,7 +248,7 @@ class userFilterEditor extends plugin
       $o = substr_count($f, '(');
       $c = substr_count($f, ')');
       if($o != $c){
-        $msgs[] = sprintf(_("Error in filter #%s: %s opening and %s closing brackets detected!"), ($key+1),$o, $c);
+        $msgs[] = sprintf(_("Error in filter #%s: %s opening and %s closing brackets detected!"), bold($key+1), bold($o), bold($c));
       }
     }
 

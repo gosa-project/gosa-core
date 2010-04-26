@@ -43,8 +43,8 @@ class SnapshotHandler {
         if(!session::is_set("snapshotFailMessageSend")){
           session::set("snapshotFailMessageSend",TRUE);
           msg_dialog::display(_("Configuration error"),
-              sprintf(_("The snapshot functionality is enabled but the required variable '%s' is not set!"),
-                "snapshotBase"), ERROR_DIALOG);
+              sprintf(_("The snapshot functionality is enabled but the required variable %s is not set!"),
+                bold("snapshotBase")), ERROR_DIALOG);
         }
         return;
       }
@@ -56,7 +56,7 @@ class SnapshotHandler {
         if(!session::is_set("snapshotFailMessageSend")){
           session::set("snapshotFailMessageSend",TRUE);
           msg_dialog::display(_("Configuration error"),
-              sprintf(_("The snapshot functionality is enabled but the required PHP compression module is missing: %s!"),"php5-zip / php5-gzip"), ERROR_DIALOG);
+              sprintf(_("The snapshot functionality is enabled but the required PHP compression module is missing: %s!"), bold("php5-zip / php5-gzip")), ERROR_DIALOG);
         }
         return;
       }
@@ -74,8 +74,8 @@ class SnapshotHandler {
             if(!session::is_set("snapshotFailMessageSend")){
               session::set("snapshotFailMessageSend",TRUE);
               msg_dialog::display(_("Configuration error"),
-                  sprintf(_("The snapshot functionality is enabled but the required variable '%s' is not set!"),
-                    $missing), ERROR_DIALOG);
+                  sprintf(_("The snapshot functionality is enabled but the required variable %s is not set!"),
+                    bold($missing)), ERROR_DIALOG);
             }
             return;
           }

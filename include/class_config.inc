@@ -150,8 +150,8 @@ class config  {
     fclose($fh);
     if(!xml_parse($this->parser, chop($xmldata))){
       $msg = sprintf(_("XML error in gosa.conf: %s at line %d"),
-            xml_error_string(xml_get_error_code($this->parser)),
-            xml_get_current_line_number($this->parser));
+            bold(xml_error_string(xml_get_error_code($this->parser))),
+            bold(xml_get_current_line_number($this->parser)));
       msg_dialog::display(_("Configuration error"), $msg, FATAL_ERROR_DIALOG);
       exit;
     }
@@ -1151,8 +1151,8 @@ class config  {
         if(!session::is_set("snapshotFailMessageSend")){
           session::set("snapshotFailMessageSend",TRUE);
           msg_dialog::display(_("Configuration error"),
-              sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),
-                      "snapshotBase"), ERROR_DIALOG);
+              sprintf(_("The snapshot functionality is enabled, but the required variable %s is not set."),
+                      bold("snapshotBase")), ERROR_DIALOG);
         }
         return(FALSE);
       }
@@ -1164,7 +1164,7 @@ class config  {
         if(!session::is_set("snapshotFailMessageSend")){
           session::set("snapshotFailMessageSend",TRUE);
           msg_dialog::display(_("Configuration error"),
-              sprintf(_("The snapshot functionality is enabled, but the required compression module is missing. Please install '%s'."),"php5-zip / php5-gzip"), ERROR_DIALOG);
+              sprintf(_("The snapshot functionality is enabled, but the required compression module is missing. Please install %s."), bold("php5-zip / php5-gzip")), ERROR_DIALOG);
         }
         return(FALSE);
       }
@@ -1182,8 +1182,8 @@ class config  {
             if(!session::is_set("snapshotFailMessageSend")){
               session::set("snapshotFailMessageSend",TRUE);
               msg_dialog::display(_("Configuration error"),
-                  sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),
-                    $missing), ERROR_DIALOG);
+                  sprintf(_("The snapshot functionality is enabled, but the required variable %s is not set."),
+                    bold($missing)), ERROR_DIALOG);
             }
             return(FALSE);
           }

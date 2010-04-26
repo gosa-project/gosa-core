@@ -105,7 +105,7 @@ class Socket_Client
     $this->handle = @fsockopen($this->host, $this->port, $this->errno, $this->errstr, $this->timeout);
     if(!$this->handle){
       $this->handle = NULL;
-      $this->set_error(sprintf(_("Socket connection to '%s:%s' failed: %s"),$this->host,$this->port,$this->errstr));
+      $this->set_error(sprintf(_("Socket connection to %s:%s failed: %s"), bold($this->host), bold($this->port), $this->errstr));
     }else{
       $this->b_data_send = TRUE;
 
@@ -188,7 +188,7 @@ class Socket_Client
         }
       }
       if((microtime(TRUE) - $start) > $this->timeout ){     
-        $this->set_error(sprintf(_("Socket timeout of %s seconds reached!"),$this->timeout));     
+        $this->set_error(sprintf(_("Socket timeout of %s seconds reached!"), bold($this->timeout)));     
         break;
       }
     }

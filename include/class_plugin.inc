@@ -913,7 +913,7 @@ class plugin
       $ldap->cd($entry['dn']);
       $ldap->modify($update);
       if(!$ldap->success()){
-        trigger_error(sprintf("Failed to update manager for '%s', error was '%s'", $entry['dn'], $ldap->get_error()));
+        trigger_error(sprintf("Failed to update manager for %s: %s", bold($entry['dn']), $ldap->get_error()));
       }
     }
  
@@ -1430,7 +1430,7 @@ class plugin
         if(!empty($entry) && $ui->allow_snapshot_create($entry,$this->parent->acl_module)){
           $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s!"),$entry),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s!"), bold($entry)),ERROR_DIALOG);
         }
       }  
   
@@ -1442,7 +1442,7 @@ class plugin
           $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
           $this->snapDialog->display_restore_dialog = true;
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$entry),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"), bold($entry)),ERROR_DIALOG);
         }
       }
 
@@ -1457,7 +1457,7 @@ class plugin
           $this->snapDialog->display_restore_dialog      = true;
           $this->snapDialog->display_all_removed_objects  = true;
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$base),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"), bold($base)),ERROR_DIALOG);
         }
       }
 
@@ -1470,7 +1470,7 @@ class plugin
           $this->restore_snapshot($entry);
           $this->snapDialog = NULL;
         }else{
-          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"),$entry),ERROR_DIALOG);
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"), bold($entry)),ERROR_DIALOG);
         }
       }
     }
@@ -1686,7 +1686,7 @@ class plugin
         /* Acls for this object must be adjusted */
         if($found){
 
-          $debug_info= sprintf(_("Changing ACL DN from %s to %s"), "<b>".$old_dn."</b>", "<b>".$new_dn."</b>");
+          $debug_info= sprintf(_("Changing ACL DN from %s to %s"), bold($old_dn), bold($new_dn));
           @DEBUG (DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__,$debug_info,"ACL");
 
           $update[$attrs['dn']] =array();
@@ -1994,7 +1994,7 @@ class plugin
   function handle_post_events($mode, $addAttrs= array())
   {
     if(!in_array($mode, array('add','remove','modify'))){
-      trigger_error(sprintf("Invalid post event type given '%s'! Valid types are [add,modify,remove].", $mode));
+      trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", bold($mode)));
       return;
     }
     switch ($mode){

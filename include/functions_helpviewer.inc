@@ -42,9 +42,9 @@ class parseXml
     $xmldata= fread($fh, 100000);
     fclose($fh);
     if(!xml_parse($this->parser, chop($xmldata))){
-        print(sprintf(_("XML error in guide.xml: %s at line %d"),
-            xml_error_string(xml_get_error_code($this->parser)),
-            xml_get_current_line_number($this->parser)));
+        print(sprintf(_("XML error in guide.xml: %s at line %s"),
+            bold(xml_error_string(xml_get_error_code($this->parser))),
+            bold(xml_get_current_line_number($this->parser))));
         exit;
     }
     return($this->entries);
@@ -386,8 +386,8 @@ function searchlist($arr,$res,$maxresults)
   /* appending footer message for resultlist */
   $ret.= "<br>
               ".sprintf(_("%s results for your search with the keyword %s"), 
-                            "<b>".count($topten)."</b>", 
-                            "<b>".session::get('parsed_search_keyword')."</b>");
+                            bold(count($topten)), 
+                            bold(session::get('parsed_search_keyword')));
   $ret.="<br>
         <br>";
   return($ret);
@@ -458,9 +458,7 @@ function createResultEntry($entry,$res,$name,$max)
              </tr>
              <tr>
               <td colspan=2>
-                <b>
-                  ".(sprintf(_("%s%% hit rate in file %s"),$percentage,$name))."
-                </b>
+                  ".(sprintf(_("%s%% hit rate in file %s"), bold($percentage), bold($name)))."
               </td>
             </tr>
           </table>

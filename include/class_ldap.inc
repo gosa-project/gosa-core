@@ -690,7 +690,7 @@ class LDAP{
 
           /* Bail out, if we've nothing to do... */
           if ($ocname == ""){
-            msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': no object class found"),$type), FATAL_ERROR_DIALOG);
+            msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN %s: no object class found"), bold($type)), FATAL_ERROR_DIALOG);
             exit();
           }
 
@@ -741,7 +741,7 @@ class LDAP{
               $na["dc"]= $param;
               break;
             default:
-              msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': not supported"),$type), FATAL_ERROR_DIALOG);
+              msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN %s: not supported"), bold($type)), FATAL_ERROR_DIALOG);
               exit();
           }
 
@@ -828,9 +828,9 @@ class LDAP{
     } else {
       $adderror= $this->get_additional_error();
       if ($adderror != ""){
-        $error= $this->error." (".$this->get_additional_error().", ".sprintf(_("while operating on %s using LDAP server %s"), "<b>".$this->basedn."</b>", "<b>".$this->hostname."</b>").")";
+        $error= $this->error." (".$this->get_additional_error().", ".sprintf(_("while operating on %s using LDAP server %s"), bold($this->basedn), bold($this->hostname)).")";
       } else {
-        $error= $this->error." (".sprintf(_("while operating on LDAP server %s"), "<b>".$this->hostname."</b>").")";
+        $error= $this->error." (".sprintf(_("while operating on LDAP server %s"), bold($this->hostname)).")";
       }
       return $error;
     }
@@ -1052,7 +1052,7 @@ class LDAP{
 
       /* Every block must begin with a dn */
       if($dn != "dn") {
-        $error= sprintf(_("Invalid DN '%s': block to be imported should start with 'dn: ...' in line %s"), $line, "<b>".$current_line."</b>");
+        $error= sprintf(_("Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"), bold($line), bold($current_line));
         return -2;  
       }
 
@@ -1081,7 +1081,7 @@ class LDAP{
      
       /* If we can't Import, return with a file error */
       if(!$this->import_single_entry($srp, $single,$usemodify,$usermdir) ) {
-        $error= sprintf(_("Error while importing DN '%s': please check LDIF from line %s on!"), $line,
+        $error= sprintf(_("Error while importing DN %s: please check LDIF from line %s on!"), bold($line),
                         $current_line);
         return UNKNOWN_TOKEN_IN_LDIF_FILE;      }
     }

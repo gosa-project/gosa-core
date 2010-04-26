@@ -64,17 +64,17 @@ class CopyPasteHandler {
   function add_to_queue($dn,$action,$tab_class,$tab_object,$tab_acl_category,&$parent = NULL)
   {
     if(!class_available($tab_class)){
-      trigger_error(sprintf("Specified class object '%s' does not exists.",$tab_class));
+      trigger_error(sprintf("Specified class object %s does not exists.", bold($tab_class)));
       return(FALSE);
     }
 
     if(!isset($this->config->data['TABS'][$tab_object])){
-      trigger_error(sprintf("Specified tab object '%s' does not exists.",$tab_object));
+      trigger_error(sprintf("Specified tab object %s does not exists.", bold($tab_object)));
       return(FALSE);
     }
 
     if(!in_array($action,array("cut","copy"))){
-      trigger_error(sprintf("Specified action '%s' does not exists for copy & paste.",$action));
+      trigger_error(sprintf("Specified action %s does not exists for copy & paste.", bold($action)));
       return(FALSE);
     } 
 
@@ -115,7 +115,7 @@ class CopyPasteHandler {
 
       /* Update folder permissions */
       if(!@chmod(LDAP_DUMP_PATH,0700)){
-        $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("Cannot set permission for '%s'")."</i>" ,LDAP_DUMP_PATH);
+        $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": "._("Cannot set permission for %s"), bold(LDAP_DUMP_PATH));
         msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
         new log("copy","all/all","copy & paste, event queue.",array(), $msg);
         return(FALSE);
@@ -156,7 +156,7 @@ class CopyPasteHandler {
 
     /* Check if given dn is valid and ldap search was succesfull */ 
     if(!$res){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("'%s' is no vaild LDAP object"), LDAP::fix($dn));
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": "._("'%s' is no vaild LDAP object"), bold(LDAP::fix($dn)));
       msg_dialog::display(_("Internal error"), $msg, ERROR_DIALOG);
       new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
@@ -173,7 +173,7 @@ class CopyPasteHandler {
 
     /* check if we are able to create a new file the given directory */
     if(!is_writeable($path)){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("No write permission in '%s'"),LDAP_DUMP_PATH);
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": "._("No write permission in '%s'"), bold(LDAP_DUMP_PATH));
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
@@ -190,7 +190,7 @@ class CopyPasteHandler {
 
     /* Update folder permissions */
     if(!@chmod($path."/".$filename,0700)){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("Cannot set permission for '%s'"),LDAP_DUMP_PATH);
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": "._("Cannot set permission for '%s'"), bold(LDAP_DUMP_PATH));
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all","copy & paste, event queue.",array(), $msg);
       return(FALSE);
@@ -415,7 +415,7 @@ class CopyPasteHandler {
         $smarty->assign("AttributesToFix",$this->generateAttributesToFix());
         $smarty->assign("SubDialog",$this->current['object']->SubDialog);
         $smarty->assign("objectDN",$this->current['source_data']['dn']);
-        $smarty->assign("message", sprintf(_("This object will be pasted: %s"), "<br><br>".$this->current['source_data']['dn']));
+        $smarty->assign("message", sprintf(_("This object will be pasted: %s"), "<br><br>".bold($this->current['source_data']['dn'])));
         return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
       }
     }

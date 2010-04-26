@@ -54,7 +54,7 @@ class tabs
     if(!count($data)) {
       $data[] = array("CLASS" => 'plugin',"NAME" => 'Error');
       msg_dialog::display(_("Error"),
-        sprintf(_("No plugin definition for '%s' found: please check the configuration file!"),get_class($this)),
+        sprintf(_("No plugin definition for %s found: please check the configuration file!"), bold(get_class($this))),
         "ERROR_DIALOG");
     }
 
@@ -63,7 +63,7 @@ class tabs
     foreach ($data as &$tab){
 
       if (!plugin_available($tab['CLASS'])){
-        trigger_error(sprintf("Unknown class '%s'!", $tab['CLASS']));
+        trigger_error(sprintf("Unknown class %s!", bold($tab['CLASS'])));
       	continue;
       }
       if ($this->current == "")  $this->current= $tab['CLASS'];
@@ -246,7 +246,7 @@ class tabs
     foreach (array_reverse($this->by_object) as $key => $obj){
       $reason= $obj->allow_remove();
       if ($reason != ""){
-        msg_dialog::display(_("Warning"), sprintf(_("Delete process has been canceled by plugin '%s': %s"), $key, $reason), WARNING_DIALOG);
+        msg_dialog::display(_("Warning"), sprintf(_("Delete process has been canceled by plugin %s: %s"), bold($key), $reason), WARNING_DIALOG);
         return;
       }
     }

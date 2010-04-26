@@ -124,14 +124,14 @@ function __gosa_autoload($class_name) {
     global $class_mapping, $BASE_DIR;
 
     if ($class_mapping === NULL){
-	    echo sprintf(_("Fatal error: no class locations defined - please run '%s' to fix this"), "<b>update-gosa</b>");
+	    echo sprintf(_("Fatal error: no class locations defined - please run %s to fix this"), bold("update-gosa"));
 	    exit;
     }
 
     if (isset($class_mapping["$class_name"])){
       require_once($BASE_DIR."/".$class_mapping["$class_name"]);
     } else {
-      echo sprintf(_("Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"), $class_name, "<b>update-gosa</b>");
+      echo sprintf(_("Fatal error: cannot instantiate class %s - try running %s to fix this"), bold($class_name), bold("update-gosa"));
       exit;
     }
 }
@@ -1051,7 +1051,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
       // log($action,$objecttype,$object,$changes_array = array(),$result = "") 
       new log("debug","all",__FILE__,$attributes,
           sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter.".
-            " This may slow down GOsa. Search was: '%s'",$filter));
+            " This may slow down GOsa. Used filter: %s", $filter));
     }
     $tmp = get_list($filter, $category,$base,$attributes,$flags);
     return($tmp);
@@ -2218,7 +2218,7 @@ function get_gosa_version()
 
   /* Release or development? */
   if (preg_match('%/gosa/trunk/%', $svn_path)){
-    return (sprintf(_("GOsa development snapshot (Rev %s)"), $revision));
+    return (sprintf(_("GOsa development snapshot (Rev %s)"), bold($revision)));
   } else {
     $release= preg_replace('%^.*/([^/]+)/include/functions.inc.*$%', '\1', $svn_path);
     return (sprintf(_("GOsa $release"), $revision));
@@ -2315,7 +2315,7 @@ function clean_smarty_compile_dir($directory)
               is_writable($directory."/".$file)) {
             // delete file
             if(!unlink($directory."/".$file)) {
-              msg_dialog::display(_("Internal error"), sprintf(_("File '%s' cannot be deleted!"), $directory."/".$file), ERROR_DIALOG);
+              msg_dialog::display(_("Internal error"), sprintf(_("File %s cannot be deleted!"), bold($directory."/".$file)), ERROR_DIALOG);
               // This should never be reached
             }
           } elseif(is_dir($directory."/".$file) &&
@@ -2752,15 +2752,15 @@ function check_schema($cfg,$rfc2307bis = FALSE)
       if(!isset($objectclasses[$name])){
         if($value['IS_MUST_HAVE']){
           $checks[$name]['STATUS'] = FALSE;
-          $checks[$name]['MSG']    = sprintf(_("Required object class '%s' is missing!"),$class);
+          $checks[$name]['MSG']    = sprintf(_("Required object class %s is missing!"), bold($class));
         } else {
           $checks[$name]['STATUS'] = TRUE;
-          $checks[$name]['MSG']    = sprintf(_("Optional object class '%s' is missing!"),$class);
+          $checks[$name]['MSG']    = sprintf(_("Optional object class %s is missing!"), bold($class));
         }
       }elseif(!check_schema_version($objectclasses[$name],$value['REQUIRED_VERSION'])){
         $checks[$name]['STATUS'] = FALSE;
 
-        $checks[$name]['MSG'] = sprintf(_("Wrong version of required object class '%s' (!=%s) detected!"), $class, $value['REQUIRED_VERSION']);
+        $checks[$name]['MSG'] = sprintf(_("Wrong version of required object class %s (!=%s) detected!"), bold($class), bold($value['REQUIRED_VERSION']));
       }else{
         $checks[$name]['STATUS'] = TRUE;
         $checks[$name]['MSG'] = sprintf(_("Class available"));
@@ -3022,7 +3022,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
           exec($command);
         } else {
-          $message= sprintf(_("Command '%s' specified as post modify action for plugin '%s' does not exist!"), $command, "password");
+          $message= sprintf(_("Command %s specified as post modify action for plugin %s does not exist!"), bold($command), bold("password"));
           msg_dialog::display(_("Configuration error"), $message, ERROR_DIALOG);
         }
       }
@@ -3068,7 +3068,7 @@ function generate_smb_nt_hash($password)
 	  $hash= current($ar);
 
     if ($hash == "") {
-      msg_dialog::display(_("Configuration error"), sprintf(_("Generating SAMBA hash by running '%s' failed: check 'sambaHashHook'!"),$config->get_cfg_value('sambaHashHook')), ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), sprintf(_("Generating SAMBA hash by running %s failed: check %s!"), bold($config->get_cfg_value('sambaHashHook'), bold("sambaHashHook"))), ERROR_DIALOG);
       return ("");
     }
   }
@@ -3363,7 +3363,7 @@ function get_next_id_pool($attrib) {
 
   /* Sanity check */
   if ($min >= $max) {
-    msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." ".sprintf(_("%sPoolMin >= %sPoolMax!"), $attrib, $attrib), ERROR_DIALOG);
+    msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." ".sprintf(_("%sPoolMin >= %sPoolMax!"), bold($attrib), bold($attrib)), ERROR_DIALOG);
     return null;
   }
 
