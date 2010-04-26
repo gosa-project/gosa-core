@@ -3597,11 +3597,11 @@ function postDecode($str)
 }
 
 
-/*! \brief    Generate bold output
+/*! \brief    Generate styled output
  */
 function bold($str)
 {
-  return "<b>$str</b>";
+  return "<span class='highlight'>$str</span>";
 }
 
 

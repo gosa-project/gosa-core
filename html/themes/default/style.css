@@ -10,6 +10,10 @@ body, html {
   min-height:700px;
 }
 
+span.highlight {
+  font-weight:bold;
+}
+
 .left{
   float:left;
 }
