@@ -244,9 +244,9 @@ class aclResolver
                                     if(isset($attrs['memberUid']) && in_array($this->validateUid, $attrs['memberUid'])){
                                         $gfound = TRUE;
                                         $groups[] = $name;
+                                        continue;
                                     }
                                 }
-                                continue;
                             }
 
                             // Group member doesn't mactch
