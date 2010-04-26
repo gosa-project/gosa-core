@@ -1581,6 +1581,7 @@ class listing {
 
   function getEntry($dn)
   {
+    $dn = LDAP::fix($dn);
     foreach ($this->entries as $entry) {
       if (isset($entry['dn']) && strcasecmp($dn, $entry['dn']) == 0){
         return $entry;
@@ -1598,6 +1599,7 @@ class listing {
 
   function getType($dn)
   {
+    $dn = LDAP::fix($dn);
     if (isset($this->objectDnMapping[$dn])) {
       return $this->objectDnMapping[$dn];
     }
