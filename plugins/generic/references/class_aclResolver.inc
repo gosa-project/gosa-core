@@ -216,14 +216,14 @@ class aclResolver
                     // Check membership 
                     $gmem = $umem = "";
                     $users = $groups = array();
-                    $gfound = $ufound = FALSE;
+                    $found = FALSE;
                     foreach($acl['members'] as $type => $name){
 
                         // Check if we're part of the members 
                         if(preg_match("/^U:/", $type)){
                             if(preg_match("/^U:".preg_quote($this->validateDn,'/')."/", $type)){
                                 $users[] = $name;
-                                $ufound = TRUE;
+                                $found = TRUE;
                                 continue;
                             }
                             $users[] = "<span>".$name."</span>";
@@ -232,7 +232,7 @@ class aclResolver
                         // Check if we're part of the group members 
                         if(preg_match("/^G/", $type)){
                             if($type == "G:*"){
-                                $gfound = TRUE;
+                                $found = TRUE;
                                 $groups[] = $name;
                                 continue;
                             }
@@ -242,19 +242,17 @@ class aclResolver
                                 if($ldap->count()){
                                     $attrs = $ldap->fetch();
                                     if(isset($attrs['memberUid']) && in_array($this->validateUid, $attrs['memberUid'])){
-                                        $gfound = TRUE;
+                                        $found = TRUE;
                                         $groups[] = $name;
                                         continue;
                                     }
                                 }
                             }
 
-                            // Group member doesn't mactch
+                            // Mark groups that doesn't match 
                             $groups[] = "<span>".$name."</span>";
                         }
                     }
-                    if(!count($groups)) $gfound = TRUE;
-                    if(!count($users)) $ufound = TRUE;
 
                     // Build up ACL definition list 
                     $defs ="";
@@ -270,10 +268,10 @@ class aclResolver
                    
                     // Display the acl block in a special color if its not matching 
                     $class="";
-                    if(!($gfound || $ufound) || !$match){
+                    if(!$found || !$match){
                         $class = "acl-viewer-blocked";
                     }                    
-
+                    $str .= "<tr><td>".$class."</td></tr>";
                     if(!empty($filter)) $filter =sprintf($filter_tpl,$class,$filter);
                     if(!empty($defs)) $defs = sprintf($acl_tpl,$class,$defs);
                     if(count($users))  $umem = sprintf($umem_tpl,$class,"<li>".implode($users,'</li><li>')."</li>");
