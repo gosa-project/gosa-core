@@ -89,6 +89,9 @@ class password extends plugin
       }elseif($check_length && (strlen($_POST['new_password']) < $length)){
         msg_dialog::display(_("Password change"),
                             _("The password used as new is to short."),WARNING_DIALOG);
+      }elseif(!passwordMethod::is_harmless($_POST['new_password'])){
+        msg_dialog::display(_("Password change"),
+                            _("The password contains possibly problematic unicode characters."),WARNING_DIALOG);
       }elseif($check_hook && $check_hook_output != ""){
         msg_dialog::display(_("Password change"),
                     sprintf(_("External password changer reported a problem: %s."),$check_hook_output),WARNING_DIALOG);

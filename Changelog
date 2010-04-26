@@ -1,6 +1,13 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.7
+  - Updated default design
+  - Updated and fixed english wording
+  - Rewrote filtering methods
+  - Rewrote reference tabs
+  - Replaced all lists by either listing or sortable_listing
+
 * gosa 2.6.9
   - Fixed problem with initial phone accounts, sip type was NULL
   - Fixed TLS issues in the setup

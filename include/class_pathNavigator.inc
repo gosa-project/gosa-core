@@ -81,7 +81,7 @@ class pathNavigator
 
   static function clear()
   {
-    session::set('pathNavigator::position','');
+    session::set('pathNavigator::position', array());
     session::set('pathNavigator::title','');
   }
 }
