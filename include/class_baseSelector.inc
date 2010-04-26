@@ -57,6 +57,7 @@ class baseSelector {
 
   function setBase($base)
   {
+    $base = LDAP::fix($base);
     if (isset($this->pathMapping[$base])) {
       $this->base= $base;
       $this->update(true);
@@ -91,7 +92,7 @@ class baseSelector {
       $elements= explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
       $elements= array_reverse($elements, true);
 
-      $this->pathMapping[$base]= $base == $config->current['BASE']? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
+      $this->pathMapping[LDAP::fix($base)]= $base == $config->current['BASE']? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
     }
 
     // Save bases to session for autocompletion
@@ -188,8 +189,8 @@ class baseSelector {
       $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
       $this->tree.= "<li>".
                     image($config->department_info[$base]['img'])."&nbsp;<a$selected $link>".
-                    $this->gennonbreaks($config->department_info[$base]['name']).
-                    ($config->department_info[$base]['description']==''?'':'&nbsp;<span class="informal">['.$this->gennonbreaks($config->department_info[$base]['description']).']</span>').
+                    ($this->gennonbreaks($config->department_info[LDAP::fix($base)]['name'])).
+                    ($config->department_info[LDAP::fix($base)]['description']==''?'':'&nbsp;<span class="informal">['.$this->gennonbreaks($config->department_info[LDAP::fix($base)]['description']).']</span>').
                     "</a>";
 
       $last_indent= $indent;
