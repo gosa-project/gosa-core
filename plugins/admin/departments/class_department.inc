@@ -238,7 +238,7 @@ class department extends plugin
     $this->baseSelector->setBases($tmp);
 
     foreach ($this->attributes as $val){
-      $smarty->assign("$val", $this->$val);
+      $smarty->assign("$val", htmlentities($this->$val));
     }
     $smarty->assign("base", $this->baseSelector->render());
 
