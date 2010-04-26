@@ -857,27 +857,16 @@ class LDAP{
   }
 
 
-  function gen_ldif ($srp, $dn, $filter= "(objectClass=*)", $attributes= array('*'), $recursive= TRUE)
+  function generateLdif ($dn, $filter= "(objectClass=*)", $attributes= array(), $scope = 'sub', $limit=0)
   {
-    $display= "";
-
-    if ($recursive){
-      $this->cd($dn);
-      $this->ls($srp, $filter,$dn, array('dn','objectClass'));
-      $deps = array();
-
-      $display .= $this->gen_one_entry($dn)."\n";
-
-      while ($attrs= $this->fetch($srp)){
-        $deps[] = $attrs['dn'];
-      }
-      foreach($deps as $dn){
-        $display .= $this->gen_ldif($srp, $dn, $filter,$attributes,$recursive);
-      }
-    } else {
-      $display.= $this->gen_one_entry($dn);
-    }
-    return ($display);
+    $host = $this->hostname;
+    $attrs  = (count($attributes))?implode($attributes,' '):'';
+    $scope = (!empty($scope))?' -s '.$scope: '';
+    $limit = (!$limit)?'':' -z '.$limit;
+    $cmd = "ldapsearch -x -LLLL '{$filter}' {$limit} {$scope} -H '{$host}' -b '{$dn}' $attrs";
+    exec($cmd, $ret,$code);
+    $res = implode($ret,"\n");
+    return($res);
   }
 
 
@@ -901,57 +890,6 @@ class LDAP{
       }
 
     return ($display);
-  }
-
-
-  function gen_one_entry($dn, $filter= "(objectClass=*)" , $name= array("*"))
-  {
-    $ret = "";
-    $data = "";
-    if($this->reconnect){
-      $this->connect();
-    }
-
-    /* Searching Ldap Tree */
-    $sr= @ldap_read($this->cid, LDAP::fix($dn), $filter, $name);
-
-    /* Get the first entry */   
-    $entry= @ldap_first_entry($this->cid, $sr);
-
-    /* Get all attributes related to that Objekt */
-    $atts = array();
-    
-    /* Assemble dn */
-    $atts[0]['name']  = "dn";
-    $atts[0]['value'] = array('count' => 1, 0 => $dn);
-
-    /* Reset index */
-    $i = 1 ; 
-  $identifier = array();
-    $attribute= @ldap_first_attribute($this->cid,$entry,$identifier);
-    while ($attribute) {
-      $i++;
-      $atts[$i]['name']  = $attribute;
-      $atts[$i]['value'] = @ldap_get_values_len($this->cid, $entry, "$attribute");
-
-      /* Next one */
-      $attribute= @ldap_next_attribute($this->cid,$entry,$identifier);
-    }
-
-    foreach($atts as $at)
-    {
-      for ($i= 0; $i<$at['value']['count']; $i++){
-
-        /* Check if we must encode the data */
-        if(!preg_match('/^[a-z0-9+@#.=, \/ -]+$/i', $at['value'][$i])) {
-          $ret .= $at['name'].":: ".base64_encode($at['value'][$i])."\n";
-        } else {
-          $ret .= $at['name'].": ".$at['value'][$i]."\n";
-        }
-      }
-    }
-
-    return($ret);
   }
 
 

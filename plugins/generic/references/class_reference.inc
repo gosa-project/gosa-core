@@ -132,10 +132,14 @@ class reference extends plugin
         // Mark plugin as viewed
         plugin::execute();
 
+        // Show ldif viewer
         if(isset($_POST['viewLdif'])){
-            echo "ding!";
+            $this->dialog = new ldifViewer($this->config, $this->dn);
         }
-
+        if(isset($_POST['cancelLdifViewer'])) $this->dialog = NULL;
+        if($this->dialog instanceOf ldifViewer){
+            return($this->dialog->execute());
+        }
 
         $smarty = get_smarty();        
 
