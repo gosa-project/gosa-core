@@ -13,7 +13,7 @@
                 {/if}
             {/if}
         </td>
-        <td class='right-border'>
+        <td class='right-border' style='width:2px'>
           &nbsp;
         </td>
         <td>
@@ -33,7 +33,7 @@
                 {$objectList}
             {/if}
         </td>
-        <td class='right-border'>
+        <td class='right-border'  style='width:2px'>
           &nbsp;
         </td>
         <td>
