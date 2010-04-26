@@ -118,6 +118,7 @@ class management
     $this->registerAction("restore",     "restoreSnapshotDialog");
     $this->registerAction("saveSnapshot","saveSnapshot");
     $this->registerAction("restoreSnapshot","restoreSnapshot");
+    $this->registerAction("removeSnapshotConfirmed","removeSnapshotConfirmed");
     $this->registerAction("cancelSnapshot","closeDialogs");
 
     $this->registerAction("config-filter","editFilter");
@@ -406,6 +407,7 @@ class management
     if(isset($_POST['edit_finish'])) $action['action'] = "save";    
     if(isset($_POST['edit_cancel'])) $action['action'] = "cancel";    
     if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";   
+    if(isset($_POST['delete_snapshot_confirm'])) $action['action'] = "removeSnapshotConfirmed";   
     if(isset($_POST['delete_cancel'])) $action['action'] = "cancelDelete";   
     if(isset($_POST['saveFilter'])) $action['action'] = "saveFilter";   
     if(isset($_POST['cancelFilter'])) $action['action'] = "cancelFilter";   
@@ -505,6 +507,21 @@ class management
       $this->closeDialogs();
     }else{
       msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s!"), bold($entry)),
+          ERROR_DIALOG);
+    }
+  }
+
+
+  /*! \brief  Removes a snapshot object.
+   */
+  function removeSnapshotConfirmed($action="",$target=array(),$all=array())
+  {
+    $entry = $this->dialogObject->del_dn;
+    if(!empty($entry) && $this->ui->allow_snapshot_create($entry,$this->aclCategory)){
+      $this->snapHandler->remove_snapshot($entry);
+      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$entry,"Snaptshot removed!");
+    }else{
+      msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to remove a snapshot for %s!"), bold($entry)),
           ERROR_DIALOG);
     }
   }

@@ -91,15 +91,9 @@ class SnapShotDialog extends plugin
                     $this->del_dn 	= $entry;
                     $smarty= get_smarty();
                     $smarty->assign("info", sprintf(_("You are about to delete the snapshot %s."), bold(LDAP::fix($this->del_dn))));
-                    return($smarty->fetch (get_template_path('removeEntries.tpl')));
+                    return($smarty->fetch (get_template_path('removeSnapshots.tpl')));
                 }
             }
-        }
-
-        /* Remove snapshot */
-        if(isset($_POST['delete_confirm']) && !empty($this->del_dn)){
-            $this->remove_snapshot($this->del_dn);
-            $this->del_dn = "";
         }
 
         /* We must restore a snapshot */
