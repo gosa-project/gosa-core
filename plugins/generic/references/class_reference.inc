@@ -22,16 +22,28 @@
 
 class reference extends plugin
 {
-    var $attributes= array('uid');
+    var $attributes= array('uid','modifyTimestamp');
     var $aclResolver = NULL;
 
     var $referenceFilters = array();
     var $objectList ="";
+    var $modifyTimestamp = "";
 
     function reference (&$config, $dn= NULL, $parent = NULL)
     {
         // Init the plugin
         plugin::plugin($config,$dn,$parent);
+
+        // Try to read the 'modifyTimestamp' - this has to be done separately. 
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->cat($this->dn, array('modifyTimestamp'));
+        if($ldap->count()){
+            $attrs = $ldap->fetch();
+            if(isset($attrs['modifyTimestamp'][0])){
+                $this->modifyTimestamp = $attrs['modifyTimestamp'][0];
+            }
+        }
 
         // Initialize the ACL-resolver
         $this->aclResolver = new aclResolver($this->config, $this->dn, $this);
@@ -119,6 +131,12 @@ class reference extends plugin
     {
         // Mark plugin as viewed
         plugin::execute();
+
+        if(isset($_POST['viewLdif'])){
+            echo "ding!";
+        }
+
+
         $smarty = get_smarty();        
 
         // Assign permissions
@@ -129,6 +147,10 @@ class reference extends plugin
         $smarty->assign('aclREAD',  preg_match("/r/",$ui->get_category_permissions($this->dn, 'acl')));
         $smarty->assign('completeACL',  $ui->has_complete_category_acls($this->dn, $category)); 
         $smarty->assign('someACL',      $ui->get_category_permissions($this->dn, $category));
+        
+        // Convert the modifyTimestamp to a human readable value
+        $tz = timezone::get_default_timezone();
+        $smarty->assign('modifyTimestamp', date('d.m.Y H:i:s', strtotime($this->modifyTimestamp)));
 
         $smarty->assign('objectList', $this->objectList);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());

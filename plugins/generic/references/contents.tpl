@@ -3,10 +3,17 @@
 {if !$someACL|regex_replace:"/[cdmw]/":"" == "r"}
     {msgPool type='permView'}
 {else}
-    Last modified ....
-{/if}
-{if $completeACL|regex_replace:"/[cdmw]/":"" == "r"}
-    <button type='submit' name='viewLdif'>{t}View entry{/t}</button>
+
+    {if $modifyTimestamp==""}
+        Last modified: {t}Unknown{/t}
+    {else}
+        Last modified: {$modifyTimestamp}
+    {/if}
+
+    {if $completeACL|regex_replace:"/[cdmw]/":"" == "r"}
+        <br>
+        {t}View current entry ldif{/t}&nbsp;<button type='submit' name='viewLdif'>{t}View{/t}</button>
+    {/if}
 {/if}
 <hr>
 <table summary='{t}Object references{/t}' class='reference-tab'>
