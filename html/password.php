@@ -236,6 +236,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
             $message[]= _("The password used as new is to short!");
         }
     }
+    if(!passwordMethod::is_harmless($_POST['new_password'])){
+        $message[]= _("The password contains possibly problematic unicode characters!");
+    }
 
     /* Validate */
     if (!tests::is_uid($uid)) {
