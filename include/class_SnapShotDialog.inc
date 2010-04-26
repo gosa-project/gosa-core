@@ -177,7 +177,7 @@ class SnapShotDialog extends plugin
 
     function save_object()
     {	
-        plugin::save_object();
+//        plugin::save_object();
         foreach($this->attributes as $name){
             if(isset($_POST[$name])){
                 $this->$name = stripslashes($_POST[$name]);
