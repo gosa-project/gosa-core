@@ -53,27 +53,36 @@ class pathNavigator
     
     if(!empty($str)){
       $cur = session::get('pathNavigator::position');
-
-      if(!empty($title)) $title = " title='{$title}' ";
-
-      $cur.= "\n<li {$title} class='left path-element'>{$str}</li>";
+      $entry = array('TITLE' => $title, 'NAME' => $str);
+      $cur[] = $entry;
       session::set('pathNavigator::position', $cur);
     }
   }
 
   static function getCurrentPath()
   {
-    $path = session::get('pathNavigator::position');
+    $list = session::get('pathNavigator::position');
+    $path = "";
+    $sTitle = "";
+    foreach($list as $entry){
+        $title = (!empty($entry['TITLE']))? 'title="'.htmlentities(LDAP::fix($entry['TITLE']),ENT_COMPAT,'UTF-8').'"': '';
+        $path.= "\n<li {$title} class='left path-element'>{$entry['NAME']}</li>";
+        $sTitle .= " - ".$entry['NAME'];
+    }
+
     if(empty($path)){
       $path = "<li class='left path-element'>"._("Welcome to GOsa")."</li>";
     }
 
+    $smarty = get_smarty();
+    $smarty->assign('title', 'GOsa '.$sTitle);
     return($path);
   }
 
   static function clear()
   {
     session::set('pathNavigator::position','');
+    session::set('pathNavigator::title','');
   }
 }
 
