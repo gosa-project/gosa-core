@@ -146,7 +146,7 @@ class aclResolver
             // Base template - each entry start with this 
             $tpl = 
                 "\n <tr class='acl-viewer-head %s'>".
-                "\n  <td>%s</td>".
+                "\n  <td style='width:20px'>%s</td>".
                 "\n  <td colspan=2><b>%s</b><div class='right'>%s</div></td>".
                 "\n </tr>".
                 "\n %s";
