@@ -352,6 +352,7 @@ class CopyPasteHandler {
         $this->lastdn = $this->current['object']->dn;
         $this->current= $this->_update_vars($this->current);
         $this->current['object']->save();
+        $this->handleReferences();
         $this->current = FALSE;
       } 
     }
@@ -368,6 +369,7 @@ class CopyPasteHandler {
       /* Load next queue entry */
       if(!count($msgs)){
         $this->current['object']->save();
+        $this->handleReferences();
         $this->lastdn = $this->current['object']->dn;
         $this->current = FALSE;
       }else{
@@ -503,6 +505,33 @@ class CopyPasteHandler {
     return($ret);
   }
 
+
+  function handleReferences()
+  {
+    $dst_dn = $this->current['object']->dn;
+    $src_dn = $this->current['dn'];
+
+    // Migrate objectgroups
+    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))",
+            "ogroups", array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+
+    // Walk through all objectGroups
+    foreach($ogroups as $ogroup){
+        $o_ogroup= new ogroup($this->config,$ogroup['dn']);
+        $o_ogroup->member[$dst_dn]= $dst_dn;
+        $o_ogroup->save();
+    }
+
+    // Update roles 
+    $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","roles", array(get_ou("roleRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+
+    // Walk through all roles
+    foreach($roles as $role){
+        $role = new roleGeneric($this->config,$role['dn']);
+        $role->roleOccupant[] = $dst_dn;
+        $role->save();
+    }
+  }
 
   /* returns the paste icon for headpages */ 
   function generatePasteIcon()
