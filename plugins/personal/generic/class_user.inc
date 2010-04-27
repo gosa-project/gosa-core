@@ -1643,6 +1643,18 @@ class user extends plugin
     $this->old_userPKCS12= "";
     $this->old_userSMIMECertificate= "";
     $this->old_userCertificate= "";
+
+    /* Generate dateOfBirth entry */
+    if (isset ($source['dateOfBirth'])){
+
+        /* This entry is ISO 8601 conform */
+        list($year, $month, $day)= explode("-", $source['dateOfBirth'][0], 3);
+
+#TODO: use $lang to convert date
+        $this->dateOfBirth= "$day.$month.$year";
+    } else {
+        $this->dateOfBirth= "";
+    }
   }
 
 
