@@ -271,7 +271,6 @@ class aclResolver
                     if(!$found || !$match){
                         $class = "acl-viewer-blocked";
                     }                    
-                    $str .= "<tr><td>".$class."</td></tr>";
                     if(!empty($filter)) $filter =sprintf($filter_tpl,$class,$filter);
                     if(!empty($defs)) $defs = sprintf($acl_tpl,$class,$defs);
                     if(count($users))  $umem = sprintf($umem_tpl,$class,"<li>".implode($users,'</li><li>')."</li>");
