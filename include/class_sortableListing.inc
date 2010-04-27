@@ -232,7 +232,7 @@ class sortableListing {
     }
 
     // Do we need colspecs?
-    $action_width= ($this->editable?20:0) + ($this->deleteable?20:0);
+    $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
     if ($this->colspecs) {
       $result.= " <colgroup>\n";
       for ($i= 0; $i<$this->columns; $i++) {
