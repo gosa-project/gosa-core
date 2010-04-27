@@ -175,6 +175,9 @@
         {render acl=$memberUidACL}
             {$commonList}
         {/render}
+        {render acl=$memberUidACL}
+          <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
+        {/render}
         
         <br>
         <h3>{t}Partial group members{/t}</h3>
@@ -186,16 +189,10 @@
         {render acl=$memberUidACL}
             {$memberList}
         {/render}
+        {render acl=$memberUidACL}
+          <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
+        {/render}
 	{/if}
-{render acl=$memberUidACL}
-      <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
-
-{/render}
-      &nbsp;
-{render acl=$memberUidACL}
-      <button type='submit' name='del_users'>{msgPool type=delButton}</button>
-
-{/render}
      </td>
     </tr> 
    </table>
