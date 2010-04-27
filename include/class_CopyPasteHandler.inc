@@ -511,6 +511,9 @@ class CopyPasteHandler {
     $dst_dn = $this->current['object']->dn;
     $src_dn = $this->current['dn'];
 
+    // Only copy references if required 
+    if($this->current['method'] != 'copy') return;
+
     // Migrate objectgroups
     $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))",
             "ogroups", array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
