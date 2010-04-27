@@ -871,11 +871,6 @@ class LDAP{
   }
 
 
-  function importLdif($str)
-  {
-  }
-
-
   function gen_xls ($srp, $dn, $filter= "(objectClass=*)", $attributes= array('*'), $recursive= TRUE,$r_array=0)
   {
     $display= array();
@@ -905,6 +900,293 @@ class LDAP{
   }
   
 
+
+  /*  This funktion imports ldifs 
+        
+      If DeleteOldEntries is true, the destination entry will be deleted first. 
+      If JustModify is true the destination entry will only be touched by the attributes specified in the ldif.
+      if JustMofify id false the destination dn will be overwritten by the new ldif. 
+    */
+
+  function import_complete_ldif($srp, $str_attr,$error,$JustModify,$DeleteOldEntries)
+  {
+    if($this->reconnect) $this->connect();
+
+    /* First we have to split the string into empty lines.
+       An empty line indicates an new Entry */
+    $entries = preg_split("/\n/",$str_attr);
+
+    $data = "";
+    $cnt = 0; 
+    $current_line = 0;
+
+    /* FIX ldif */
+    $last = "";
+    $tmp  = "";
+    $i = 0;
+    foreach($entries as $entry){
+      if(preg_match("/^ /",$entry)){
+        $tmp[$i] .= trim($entry);
+      }else{
+        $i ++;
+        $tmp[$i] = trim($entry);
+      }
+    }
+
+    /* Every single line ... */
+    foreach($tmp as $entry) {
+      $current_line ++;
+
+      /* Removing Spaces to .. 
+         .. test if a new entry begins */
+      $tmp  = str_replace(" ","",$data );
+
+      /* .. prevent empty lines in an entry */
+      $tmp2 = str_replace(" ","",$entry);
+
+      /* If the Block ends (Empty Line) */
+      if((empty($entry))&&(!empty($tmp))) {
+        /* Add collected lines as a complete block */
+        $all[$cnt] = $data;
+        $cnt ++;
+        $data ="";
+      } else {
+
+        /* Append lines ... */
+        if(!empty($tmp2)) {
+          /* check if we need base64_decode for this line */
+          if(strstr($tmp2, "::") !== false)
+          {
+            $encoded = explode("::",$entry);
+            $attr  = trim($encoded[0]);
+            $value = base64_decode(trim($encoded[1]));
+            /* Add linenumber */
+            $data .= $current_line."#".base64_encode($attr.":".$value)."\n";
+          }
+          else
+          {
+            /* Add Linenumber */ 
+            $data .= $current_line."#".base64_encode($entry)."\n";
+          }
+        }
+      }
+    }
+
+    /* The Data we collected is not in the array all[];
+       For example the Data is stored like this..
+
+       all[0] = "1#dn : .... \n 
+       2#ObjectType: person \n ...."
+       
+       Now we check every insertblock and try to insert */
+    foreach ( $all as $single) {
+      $lineone = preg_split("/\n/",$single);  
+      $ndn = explode("#", $lineone[0]);
+      $line = base64_decode($ndn[1]);
+
+      $dnn = explode (":",$line,2);
+      $current_line = $ndn[0];
+      $dn    = $dnn[0];
+      $value = $dnn[1];
+
+      /* Every block must begin with a dn */
+      if($dn != "dn") {
+        $error= sprintf(_("Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"), bold($line), bold($current_line));
+        return -2;  
+      }
+
+      /* Should we use Modify instead of Add */
+      $usemodify= false;
+
+      /* Delete before insert */
+      $usermdir= false;
+    
+      /* The dn address already exists, Don't delete destination entry, overwrite it */
+      if (($this->dn_exists($value))&&((!$JustModify)&&(!$DeleteOldEntries))) {
+
+        $usermdir = $usemodify = false;
+
+      /* Delete old entry first, then add new */
+      } elseif(($this->dn_exists($value))&&($DeleteOldEntries)){
+
+        /* Delete first, then add */
+        $usermdir = true;        
+
+      } elseif(($this->dn_exists($value))&&($JustModify)) {
+        
+        /* Modify instead of Add */
+        $usemodify = true;
+      }
+     
+      /* If we can't Import, return with a file error */
+      if(!$this->import_single_entry($srp, $single,$usemodify,$usermdir) ) {
+        $error= sprintf(_("Error while importing DN %s: please check LDIF from line %s on!"), bold($line),
+                        $current_line);
+        return UNKNOWN_TOKEN_IN_LDIF_FILE;      }
+    }
+
+    return (INSERT_OK);
+  }
+
+
+  /* Imports a single entry 
+      If $delete is true;  The old entry will be deleted if it exists.
+      if $modify is true;  All variables that are not touched by the new ldif will be kept.
+      if $modify is false; The new ldif overwrites the old entry, and all untouched attributes get lost.
+  */
+  function import_single_entry($srp, $str_attr,$modify,$delete)
+  {
+    global $config;
+
+    if(!$config){
+      trigger_error("Can't import ldif, can't read config object.");
+    }
+  
+
+    if($this->reconnect) $this->connect();
+
+    $ret = false;
+    $rows= preg_split("/\n/",$str_attr);
+    $data= false;
+
+    foreach($rows as $row) {
+      
+      /* Check if we use Linenumbers (when import_complete_ldif is called we use
+         Linenumbers) Linenumbers are use like this 123#attribute : value */
+      if(!empty($row)) {
+        if(strpos($row,"#")!=FALSE) {
+
+          /* We are using line numbers 
+             Because there is a # before a : */
+          $tmp1= explode("#",$row);
+          $current_line= $tmp1[0];
+          $row= base64_decode($tmp1[1]);
+        }
+
+        /* Split the line into  attribute  and value */
+        $attr   = explode(":", $row,2);
+        $attr[0]= trim($attr[0]);  /* attribute */
+        $attr[1]= $attr[1];  /* value */
+
+        /* Check :: was used to indicate base64_encoded strings */
+        if($attr[1][0] == ":"){
+          $attr[1]=trim(preg_replace("/^:/","",$attr[1]));
+          $attr[1]=base64_decode($attr[1]);
+        }
+
+        $attr[1] = trim($attr[1]);
+
+        /* Check for attributes that are used more than once */
+        if(!isset($data[$attr[0]])) {
+          $data[$attr[0]]=$attr[1];
+        } else {
+          $tmp = $data[$attr[0]];
+
+          if(!is_array($tmp)) {
+            $new[0]=$tmp;
+            $new[1]=$attr[1];
+            $datas[$attr[0]]['count']=1;             
+            $data[$attr[0]]=$new;
+          } else {
+            $cnt = $datas[$attr[0]]['count'];           
+            $cnt ++;
+            $data[$attr[0]][$cnt]=$attr[1];
+            $datas[$attr[0]]['count'] = $cnt;
+          }
+        }
+      }
+    }
+
+    /* If dn is an index of data, we should try to insert the data */
+    if(isset($data['dn'])) {
+
+      /* Fix dn */
+      $tmp = gosa_ldap_explode_dn($data['dn']);
+      unset($tmp['count']);
+      $newdn ="";
+      foreach($tmp as $tm){
+        $newdn.= trim($tm).",";
+      }
+      $newdn = preg_replace("/,$/","",$newdn);
+      $data['dn'] = $newdn;
+   
+      /* Creating Entry */
+      $this->cd($data['dn']);
+
+      /* Delete existing entry */
+      if($delete){
+        $this->rmdir_recursive($srp, $data['dn']);
+      }
+     
+      /* Create missing trees */
+      $this->cd ($this->basedn);
+      $this->cd($config->current['BASE']);
+      $this->create_missing_trees($srp, preg_replace("/^[^,]+,/","",$data['dn']));
+      $this->cd($data['dn']);
+
+      $dn = $data['dn'];
+      unset($data['dn']);
+      
+      if(!$modify){
+
+        $this->cat($srp, $dn);
+        if($this->count($srp)){
+        
+          /* The destination entry exists, overwrite it with the new entry */
+          $attrs = $this->fetch($srp);
+          foreach($attrs as $name => $value ){
+            if(!is_numeric($name)){
+              if(in_array($name,array("dn","count"))) continue;
+              if(!isset($data[$name])){
+                $data[$name] = array();
+              }
+            }
+          }
+          $ret = $this->modify($data);
+    
+        }else{
+    
+          /* The destination entry doesn't exists, create it */
+          $ret = $this->add($data);
+        }
+
+      } else {
+        
+        /* Keep all vars that aren't touched by this ldif */
+        $ret = $this->modify($data);
+      }
+    }
+
+    if (!$this->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $dn, "", get_class()));
+    }
+
+    return($ret);
+  }
+
+  
+  function importcsv($str)
+  {
+    $lines = preg_split("/\n/",$str);
+    foreach($lines as $line)
+    {
+      /* continue if theres a comment */
+      if(substr(trim($line),0,1)=="#"){
+        continue;
+      }
+
+      $line= str_replace ("\t\t","\t",$line);
+      $line= str_replace ("\t"  ,"," ,$line);
+      echo $line;
+
+      $cells = explode(",",$line )  ;
+      $linet= str_replace ("\t\t",",",$line);
+      $cells = preg_split("/\t/",$line);
+      $count = count($cells);  
+    }
+
+  }
+  
   function get_objectclasses( $force_reload = FALSE)
   {
     $objectclasses = array();
