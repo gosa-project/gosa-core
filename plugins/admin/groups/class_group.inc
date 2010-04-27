@@ -827,9 +827,6 @@ class group extends plugin
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
     }
 
-    $this->trustModeDialog->dn = $this->dn;
-    $this->trustModeDialog->save();
-
     /* Check generated gidNumber, it may be used by another group. 
      */
     if($this->gidNumber != ""){
@@ -868,6 +865,9 @@ class group extends plugin
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
       $ret= 1;
     }
+
+    $this->trustModeDialog->dn = $this->dn;
+    $this->trustModeDialog->save();
 
     /* Remove uid lock */
     del_lock ("gidnumber");
