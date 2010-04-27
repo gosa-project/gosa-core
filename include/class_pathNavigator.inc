@@ -61,7 +61,18 @@ class pathNavigator
 
   static function getCurrentPath()
   {
+    // Ensure that we've a position value initialized. 
+    if(!session::is_set('pathNavigator::position')) {
+        session::set('pathNavigator::position',array());
+    }
+
+    // Get position and validate its value
     $list = session::get('pathNavigator::position');
+    if(!is_array($list)){
+        $list = array();
+    }
+
+    // Build up title and path string.
     $path = "";
     $sTitle = "";
     foreach($list as $entry){
@@ -70,6 +81,7 @@ class pathNavigator
         $sTitle .= " - ".$entry['NAME'];
     }
 
+    // If no path is given then show a simple 'Welcome to GOsa' string.
     if(empty($path)){
       $path = "<li class='left path-element'>"._("Welcome to GOsa")."</li>";
     }
@@ -82,7 +94,6 @@ class pathNavigator
   static function clear()
   {
     session::set('pathNavigator::position', array());
-    session::set('pathNavigator::title','');
   }
 }
 
