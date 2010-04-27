@@ -211,12 +211,6 @@ class trustModeDialog extends plugin
 
     public function save()
     {
-       
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
-        $ldap->cat($this->dn);
-        $this->attrs = $ldap->fetch();
-
         plugin::save();
  
         /* Trust accounts */
