@@ -502,6 +502,7 @@ class listing {
     // Take care of base selector
     if ($this->baseMode) {
       $this->baseSelector->update();
+
       // Check if a wrong base was supplied
       if(!$this->baseSelector->checkLastBaseUpdate()){
          msg_dialog::display(_("Error"), msgPool::check_base(), ERROR_DIALOG);

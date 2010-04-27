@@ -110,6 +110,7 @@ class baseSelector {
     if(isset($_REQUEST['BPID']) && $_REQUEST['BPID'] == $this->pid) {
       if (isset($_POST['bs_rebase_'.$this->pid]) && !empty($_POST['bs_rebase_'.$this->pid])) {
         $new_base= base64_decode($_POST['bs_rebase_'.$this->pid]);
+
         if (isset($this->pathMapping[$new_base])) {
           $this->base= $new_base;
           $this->action= 'rebase';
@@ -118,6 +119,7 @@ class baseSelector {
           return false;
         }
       }else{
+
         // Input field set?
         if (isset($_POST['bs_input_'.$this->pid])) {
 
@@ -127,7 +129,7 @@ class baseSelector {
             // Check if base is available
             $this->lastState= false;
             foreach ($this->pathMapping as $key => $path) {
-              if (mb_strtolower($path) == mb_strtolower($_POST['bs_input_'.$this->pid])) {
+              if (mb_strtolower($path) == mb_strtolower(get_post('bs_input_'.$this->pid))) {
                 $this->base= $key;
                 $this->lastState= true;
                 break;
