@@ -58,6 +58,11 @@ input[type=text]:hover, input[type=password]:hover, textarea:hover, select:hover
   border-color:#777;
 }
 
+input[type=password]{
+  background-repeat:no-repeat;
+  background-position:right center;
+}
+
 textarea, select {
   border:1px solid #DDD;
   margin-bottom:2px;
