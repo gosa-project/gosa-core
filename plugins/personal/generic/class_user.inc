@@ -746,7 +746,6 @@ class user extends plugin
     while ($ldap->fetch()){
       $og= new ogroup($this->config, $ldap->getDN());
       unset($og->member[$this->dn]);
-      $og->member= array_values($og->member);
       $og->save ();
     }
 
