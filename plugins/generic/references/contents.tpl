@@ -28,6 +28,7 @@
 
 <table summary='{t}Object references{/t}' class='reference-tab'>
     <tr>
+        {if $objectList!=""}
         <td style='width:48%'>
             {if !$completeACL|regex_replace:"/[cdmw]/":"" == "r"}
                 {msgPool type='permView'}
@@ -38,6 +39,7 @@
         <td class='right-border'  style='width:2px'>
           &nbsp;
         </td>
+        {/if}
         <td>
             {if !$aclREAD}
                 <h3>{t}ACL trace{/t}</h3>
