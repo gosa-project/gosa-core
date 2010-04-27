@@ -38,7 +38,7 @@
 <hr>
 <div class="plugin-actions">
   <button type='submit' name='password_finish'>{t}Set password{/t}</button>
-  <input type=reset id="password_cancel" name="password_cancel" value="{t}Clear fields{/t}">
+  <button type=reset id="password_cancel" name="password_cancel">{t}Clear fields{/t}</button>
 </div>
 
 <input type='hidden' id='formSubmit'>
