@@ -759,8 +759,6 @@ class posixAccount extends plugin
     }
     /* Call parents save to prepare $this->attrs */
     plugin::save();
-    $this->trustModeDialog->dn = $this->dn;
-    $this->trustModeDialog->save();
 
     /* include global link_info */
     $this->cleanup();
@@ -800,6 +798,9 @@ class posixAccount extends plugin
       $this->ssh->setDN($this->dn);
       $this->ssh->save();
     }
+
+    $this->trustModeDialog->dn = $this->dn;
+    $this->trustModeDialog->save();
 
     /* Take care about groupMembership values: add to groups */
     foreach ($this->groupMembership as $key => $value){
@@ -1255,6 +1256,12 @@ class posixAccount extends plugin
     if(isset($source['gidNumber'][0])){
       $this->primaryGroup= $source['gidNumber'][0];
     }
+
+    $tmp = new trustModeDialog($this->config, $source['dn']);
+    $this->trustModeDialog = new trustModeDialog($this->config, $this->dn);
+    $this->trustModeDialog->trustModel = $tmp->trustModel;
+    $this->trustModeDialog->accessTo = $tmp->accessTo;
+    $this->trustModeDialog->setAcl('users/posixAccount');
 
   }
 
