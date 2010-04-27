@@ -114,9 +114,11 @@ class departmentManagement extends management
     $str = management::saveChanges();
     if(!empty($str)) return($str);
 
+    $plugname = (isset($this->last_tabObject->base_name))? $this->last_tabObject->base_name : '';
+
     $this->refreshDeps(); 
-    $plugname = $this->last_tabObject->base_name;
-    if($this->last_tabObject->by_object[$plugname]->must_be_tagged()){
+    if(is_object($this->last_tabObject->by_object[$plugname]) && 
+            $this->last_tabObject->by_object[$plugname]->must_be_tagged()){
       $smarty = get_smarty();
       $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
       $smarty->assign("message",_("As soon as the tag operation has finished, you can scroll down to end of the page and    press the 'Continue' button to continue with the department management dialog."));
