@@ -43,7 +43,6 @@
 {render acl=$memberACL}
    {$memberList}
 {/render}
-   <br>
 {render acl=$memberACL}
    <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>&nbsp;
 {/render}

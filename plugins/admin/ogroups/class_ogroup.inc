@@ -191,6 +191,12 @@ class ogroup extends plugin
         $objects = $this->objectSelect->save();
         $skipped = FALSE;
         foreach($objects as $object){
+          $dn = $object['dn'];
+
+          // Do not add existing members twice!
+          if(isset($this->member["$dn"])){
+              continue;
+          }
 
           $tmp = "";
           foreach($this->memberList as $obj){
@@ -199,7 +205,6 @@ class ogroup extends plugin
 
           $type  = $this->getObjectType($object);
           $name= $this->getObjectName($object);
-          $dn = $object['dn'];
 
           /* Fill array */
           if (isset($object["description"][0])){
