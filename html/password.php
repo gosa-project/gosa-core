@@ -251,11 +251,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
         $ui= ldap_login_user($uid, $current_password);
 
         if ($ui === NULL) {
-            $message[]= _("Please check the username/password combination.");
+            $message[]= _("Please check the username/password combination!");
         } else {
             $acls = $ui->get_permissions($ui->dn, "users/password");
             if (!preg_match("/w/i", $acls)) {
-                $message[]= _("You have no permissions to change your password.");
+                $message[]= _("You have no permissions to change your password!");
             }
         }
     }

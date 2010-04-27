@@ -333,7 +333,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $ui= ldap_login_user($username, $_POST["password"]);
         }
         if ($ui === NULL || !$ui) {
-            $message= _("Please check the username/password combination.");
+            $message= _("Please check the username/password combination!");
             $smarty->assign ('nextfield', 'password');
             session::global_set('config',$config);
             new log("security","login","",array(),"Authentication failed for user \"$username\"");
