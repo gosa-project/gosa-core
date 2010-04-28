@@ -27,7 +27,6 @@ class SnapshotHandler {
   var $isEnabled= false;
   var $snapshotBases= array();
 
-
   /* Create handler  */
   function SnapshotHandler(&$config)
   {
@@ -340,15 +339,12 @@ class SnapshotHandler {
   function remove_snapshot($dn)
   {
     $ui       = get_userinfo();
-    $old_dn   = $this->dn;
-    $this->dn = $dn;
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->rmdir_recursive($this->dn);
+    $ldap->rmdir_recursive($dn);
     if(!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn));
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn));
     }
-    $this->dn = $old_dn;
   }
  /* returns true if snapshots are enabled, and false if it is disalbed
      There will also be some errors psoted, if the configuration failed */
