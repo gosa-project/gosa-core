@@ -417,7 +417,7 @@ class CopyPasteHandler {
         $smarty->assign("AttributesToFix",$this->generateAttributesToFix());
         $smarty->assign("SubDialog",$this->current['object']->SubDialog);
         $smarty->assign("objectDN",$this->current['source_data']['dn']);
-        $smarty->assign("message", sprintf(_("This object will be pasted: %s"), "<br><br>".bold($this->current['source_data']['dn'])));
+        $smarty->assign("message", sprintf(_("This object will be pasted: %s"), "<br><br>".$this->current['source_data']['dn']));
         return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
       }
     }
