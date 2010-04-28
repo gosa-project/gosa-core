@@ -556,6 +556,15 @@ location besides the LDAP. It will be called this way:
 /path/to/your/script "username" "oldpassword" "newpassword"
 .fi
 
+.B strictPasswordRules
+.I bool
+.PP
+The
+.I strictPasswordRules
+tells GOsa to check for UTF-8 characters in the supplied password. These
+Characters can lead to non working authentications if UTF-8 and none
+UTF-8 systems locales get mixed. The default is "true".
+
 .B handleExpiredAccounts
 .I bool
 .PP
