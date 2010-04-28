@@ -733,7 +733,6 @@ class user extends plugin
     while ($ldap->fetch()){
       $og= new ogroup($this->config, $ldap->getDN());
       unset($og->member[$this->dn]);
-      $og->member= array_values($og->member);
       $og->save ();
     }
 
@@ -1630,6 +1629,20 @@ class user extends plugin
     $this->old_userPKCS12= "";
     $this->old_userSMIMECertificate= "";
     $this->old_userCertificate= "";
+
+    /* Generate dateOfBirth entry */
+    if (isset ($source['dateOfBirth'])){
+        list($year, $month, $day)= explode("-", $source['dateOfBirth'][0], 3);
+        $this->dateOfBirth= "$day.$month.$year";
+    } else {
+        $this->dateOfBirth= "";
+    }
+
+    // Try to load the user picture
+    $tmp_dn = $this->dn;
+    $this->dn = $source['dn'];
+    $this->load_picture();
+    $this->dn = $tmp_dn;
   }
 
 

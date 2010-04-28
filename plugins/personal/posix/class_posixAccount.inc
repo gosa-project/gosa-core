@@ -1425,6 +1425,17 @@ class posixAccount extends plugin
       $this->primaryGroup= $source['gidNumber'][0];
     }
 
+
+    /* Adjust shadow checkboxes */
+    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
+                "shadowExpire") as $val){
+
+        if ($this->$val != 0){
+            $oval= "activate_".$val;
+            $this->$oval= "1";
+        }
+    }
+
   }
 
 
