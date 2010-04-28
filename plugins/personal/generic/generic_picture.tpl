@@ -1,4 +1,4 @@
-<h3>{t}Personal picture{/t}</h3>
+<h3>{t}User picture{/t}</h3>
 <table summary="{t}The users picture{/t}">
  <tr>
   <td style='width:147px; height:200px; background-color:gray;'>
