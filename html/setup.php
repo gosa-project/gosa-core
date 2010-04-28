@@ -63,8 +63,8 @@ $smarty->compile_dir= '/var/spool/gosa/';
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
-  msg_dialog::display(_("Smarty"),sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
-    $smarty->compile_dir),FATAL_ERROR_DIALOG);
+  msg_dialog::display(_("Smarty"),sprintf( _("Compile directory %s is not accessible!"),
+    bold($smarty->compile_dir)),FATAL_ERROR_DIALOG);
   exit();
 }
 

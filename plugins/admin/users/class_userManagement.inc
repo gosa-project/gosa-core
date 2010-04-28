@@ -23,7 +23,7 @@
 class userManagement extends management
 {
   var $plHeadline     = "Users";
-  var $plDescription  = "Manage aspects of user accounts like generic, posix, samba and mail settings";
+  var $plDescription  = "Manage aspects of user accounts like generic, POSIX, samba and mail settings";
   var $plIcon  = "plugins/users/images/user.png";
 
   var $sn = "";

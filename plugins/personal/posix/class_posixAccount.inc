@@ -34,7 +34,7 @@
 class posixAccount extends plugin
 {
   /* Definitions */
-  var $plHeadline= "UNIX";
+  var $plHeadline= "POSIX";
   var $plDescription= "Edit users POSIX settings";
 
   /* Plugin specific values */

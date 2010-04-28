@@ -160,7 +160,7 @@ class ogrouptabs extends tabs
             if(!$mixed_type && 
                     ((preg_match("/T/",$objects)) || (preg_match("/W/",$objects)))&&(!isset($this->by_object['termgroup']))){
                 if(!isset($this->by_object['termgroup'])){
-                    $this->by_name['termgroup']= _("Systems");
+                    $this->by_name['termgroup']= _("System settings");
                     $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
                     $this->by_object['termgroup']->inheritTimeServer = false;
                     $this->by_object['termgroup']->parent= &$this;
@@ -172,7 +172,7 @@ class ogrouptabs extends tabs
             if(!$mixed_type &&
                     preg_match("/T/",$objects) &&(!isset($this->by_object['termstartup']))){
                 if(!isset($this->by_object['termstartup'])){
-                    $this->by_name['termstartup']= _("Startup");
+                    $this->by_name['termstartup']= _("Recipe");
                     $this->by_object['termstartup']= new termstartup($this->config, $this->dn,$this->by_object['ogroup']);
                     $this->by_object['termstartup']->parent= &$this;
                     $this->by_object['termstartup']->acl = "#all#";
@@ -197,7 +197,7 @@ class ogrouptabs extends tabs
         if(class_available("workstartup")){
             if(!$mixed_type &&
                     (preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['workstartup']))){
-                $this->by_name['workstartup']= _("Startup");
+                $this->by_name['workstartup']= _("Recipe");
                 $this->by_object['workstartup']= new workstartup($this->config, $this->dn);
                 $this->by_object['workstartup']->parent= &$this;
                 $this->add("workstartup");
@@ -216,7 +216,7 @@ class ogrouptabs extends tabs
         if(class_available("faiSummary")){
             if(!$mixed_type &&
                     (preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['faiSummary']))){
-                $this->by_name['faiSummary']= _("FAI summary");
+                $this->by_name['faiSummary']= _("Deployment summary");
                 $this->by_object['faiSummary']= new faiSummaryTab($this->config, $this->dn);
                 $this->by_object['faiSummary']->parent= &$this;
                 $this->add("faiSummary");
@@ -226,7 +226,7 @@ class ogrouptabs extends tabs
         /* Add environment tab if user or group is member in this object group*/
         if(class_available("environment")){
             if((preg_match("/G/",$objects) || preg_match("/U/",$objects)) && !isset($this->by_name['environment'])){
-                $this->by_name['environment']= _("Environment");
+                $this->by_name['environment']= _("Desktop");
                 $this->by_object['environment']= new environment($this->config, $this->dn);
                 $this->by_object['environment']->parent= &$this;
                 $this->add("environment");
