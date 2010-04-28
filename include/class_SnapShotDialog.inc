@@ -104,16 +104,18 @@ class SnapShotDialog extends plugin
                or the snapshots for the given object dn */
             $res = array();
             $tmp = array();
+            $handler = new SnapshotHandler($this->config);
+
             if($this->display_all_removed_objects){
                 if(count($this->snap_shot_bases)){
                     foreach($this->snap_shot_bases as $dn){
-                        $tmp = array_merge($tmp,$this->getAllDeletedSnapshots($dn,true));
+                        $tmp = array_merge($tmp,$handler->getAllDeletedSnapshots($dn,true));
                     }
                 }else{
-                    $tmp = $this->getAllDeletedSnapshots($this->snap_shot_bases,true);
+                    $tmp = $handler->getAllDeletedSnapshots($this->snap_shot_bases,true);
                 }
             }else{
-                $tmp = $this->Available_SnapsShots($this->dn,true);
+                $tmp = $handler->Available_SnapsShots($this->dn,true);
             }
 
             $this->snapList->setAcl('rwcdm');
