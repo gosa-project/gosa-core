@@ -11,18 +11,21 @@
 <table cellpadding=4 border=0 summary="{t}Password change dialog{/t}">
   <tr>
     <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
-    <td><input id="current_password" type="password" name="current_password" size="30" maxlength="40"
-		onFocus="nextfield= 'new_password';"></td>
+    <td>
+        {factory type='password' name='current_password' id='current_password' onfocus="nextfield= 'new_password';"}
+    </td>
   </tr>
   <tr>
     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
-    <td><input id="new_password" type="password" name="new_password" size="30" maxlength="40"
-		onFocus="nextfield= 'repeated_password';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
+    <td>
+        {factory type='password' name='new_password' id='new_password' onkeyup="testPasswordCss(\$('new_password').value)"}
+    </td>
   </tr>
   <tr>
     <td><b><LABEL for="repeated_password">{t}Repeat new password{/t}</LABEL></b></td>
-    <td><input id="repeated_password" type="password" name="repeated_password" size="30" maxlength="40"
-		onFocus="nextfield= 'password_finish';"></td>
+    <td>
+        {factory type='password' name='repeated_password' id='repeated_password' onfocus="nextfield= 'password_finish';"}
+    </td>
   </tr>
   <tr>
     <td><b>{t}Password strength{/t}</b></td>

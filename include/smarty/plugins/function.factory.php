@@ -5,7 +5,7 @@ function smarty_function_factory($params, &$smarty)
 
     // Capture params
     foreach(array('type','id','name','title','value','maxlength',
-                'onfocus','onclick') as $var){
+                'onfocus','onclick','onkeyup') as $var){
         $$var = (isset($params[$var]))? $params[$var] : "";
         $tmp  = "{$var}Ready";
         $$tmp = (isset($params[$var]))? "{$var}=\"{$params[$var]}\"" : "";
@@ -20,10 +20,10 @@ function smarty_function_factory($params, &$smarty)
             // Maxlength has a default of 40 characters
             $maxlengthReady = (empty($maxlength))?'maxlength="40"': $maxlengthReady; 
             $str .= "<input {$nameReady} {$idReady} {$valueReady} {$maxlengthReady}
-            {$titleReady} {$onfocusReady} type='password'
+            {$titleReady} {$onfocusReady} {$onkeyupReady} type='password'
             onkeypress=\"
                 if (capslock(event)){
-                    $('{$id}').style.backgroundImage = 'url(images/caps.png)'
+                    $('{$id}').style.backgroundImage='url(images/caps.png)'
                 } else {
                     $('{$id}').style.backgroundImage= ''
                 }\">";

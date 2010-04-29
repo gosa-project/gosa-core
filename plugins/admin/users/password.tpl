@@ -11,11 +11,17 @@
 <table summary="{t}Password input dialog{/t}" cellpadding=4 border=0>
   <tr>
     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
-    <td><input type="password" id="new_password" name="new_password" size="30" maxlength="40" onFocus="nextfield= 'repeated_password';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
+    <td>
+        {factory type='password' id='new_password' name='new_password' 
+            onfocus="nextfield='repeated_password';" onkeyup="testPasswordCss(\$('new_password').value);"}
+    </td>
   </tr>
   <tr>
     <td><b><LABEL for="repeated_password">{t}Repeat new password{/t}</LABEL></b></td>
-    <td><input type="password" id="repeated_password" name="repeated_password" size="30" maxlength="40" onFocus="nextfiled= 'password_finish'"></td>
+    <td>
+        {factory type='password' id='repeated_password' name='repeated_password'
+            onfocus="nextfield='password_finish';"}
+    </td>
   </tr>
   <tr>
     <td><b>{t}Strength{/t}</b></td>
@@ -29,10 +35,8 @@
 
 <hr>
 <div class="plugin-actions">
-  <button type='submit' name='password_finish'>{t}Set password{/t}</button>
-
-  <button type='submit' name='password_cancel'>{msgPool type=cancelButton}</button>
-
+  <button type='submit' id='password_finish'name='password_finish'>{t}Set password{/t}</button>
+  <button type='submit' id='password_cancel'name='password_cancel'>{msgPool type=cancelButton}</button>
 </div>
 
 <input type='hidden' id='formSubmit'>
