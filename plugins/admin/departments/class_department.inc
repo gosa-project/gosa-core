@@ -172,7 +172,7 @@ class department extends plugin
 		$this->config->get_departments($this->dn);
 		$this->config->make_idepartments();
 		$smarty= get_smarty();
-    $smarty->assign("usePrototype", "true");
+
 
     // Clear manager attribute if requested
     if(preg_match("/ removeManager/i", " ".implode(array_keys($_POST),' ')." ")){
