@@ -117,7 +117,8 @@ class departmentManagement extends management
     $plugname = (isset($this->last_tabObject->base_name))? $this->last_tabObject->base_name : '';
 
     $this->refreshDeps(); 
-    if(is_object($this->last_tabObject->by_object[$plugname]) && 
+    if(isset($this->last_tabObject->by_object[$plugname]) &&
+       is_object($this->last_tabObject->by_object[$plugname])      &&
             $this->last_tabObject->by_object[$plugname]->must_be_tagged()){
       $smarty = get_smarty();
       $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
