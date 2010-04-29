@@ -309,7 +309,7 @@ $smarty->assign ("menu", $plist->gen_menu());
 $smarty->assign ("plug", "$plug");
 
 $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
-$smarty->assign("usePrototype", "false");
+
 
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
