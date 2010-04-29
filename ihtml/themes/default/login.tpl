@@ -46,13 +46,7 @@
        <div class='login-element-container'>
         <div class='login-label'><label for='password'>{t}Password{/t}</label></div>
         <div class='login-input'>
-         <input type='password' name='password' id='password' maxlength='40' value=''
-        	 title='{t}Password{/t}' onFocus="nextfield= 'login';" onKeyPress= "
-               if (capslock(event)){
-                 $('password').style.backgroundImage = 'url(images/caps.png)'
-              } else {
-                 $('password').style.backgroundImage= ''
-              }"/>
+         {factory type='password' name='password' id='password' maxlength='40' onfocus="nextfield= 'login'"}
         </div>
         <div class="clear"></div>
        </div>
