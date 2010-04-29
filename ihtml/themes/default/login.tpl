@@ -46,7 +46,7 @@
        <div class='login-element-container'>
         <div class='login-label'><label for='password'>{t}Password{/t}</label></div>
         <div class='login-input'>
-         {factory type='password' name='password' id='password' maxlength='40' onfocus="nextfield= 'login'"}
+         {factory type='password' name='password' id='password' onfocus="nextfield= 'login'"}
         </div>
         <div class="clear"></div>
        </div>

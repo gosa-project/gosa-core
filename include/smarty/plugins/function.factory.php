@@ -15,14 +15,17 @@ function smarty_function_factory($params, &$smarty)
     switch($type){
 
         // Generate a password input field, with CapsLock detection.
-        case 'password' : 
+        case 'password' :
+
+            // Maxlength has a default of 40 characters
+            $maxlengthReady = (empty($maxlength))?'maxlength="40"': $maxlengthReady; 
             $str .= "<input {$nameReady} {$idReady} {$valueReady} {$maxlengthReady}
             {$titleReady} {$onfocusReady} type='password'
             onkeypress=\"
                 if (capslock(event)){
-                    $('password').style.backgroundImage = 'url(images/caps.png)'
+                    $('{$id}').style.backgroundImage = 'url(images/caps.png)'
                 } else {
-                    $('password').style.backgroundImage= ''
+                    $('{$id}').style.backgroundImage= ''
                 }\">";
     }
     return($str);
