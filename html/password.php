@@ -150,7 +150,7 @@ if ($config->get_cfg_value("forcessl") == 'true' && $ssl != ''){
 }
 
 /* Check for selected password method */
-$method= $config->get_cfg_value("hash", "crypt/md5");
+$method= $config->get_cfg_value("passwordDefaultHash", "crypt/md5");
 if (isset($_GET['method'])){
 	$method= validate($_GET['method']);
 	$tmp = new passwordMethod($config);

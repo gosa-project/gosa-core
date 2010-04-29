@@ -580,7 +580,7 @@ class user extends plugin
 
     /* Prepare password hashes */
     if ($this->pw_storage == ""){
-      $this->pw_storage= $this->config->get_cfg_value("hash");
+      $this->pw_storage= $this->config->get_cfg_value("passwordDefaultHash");
     }
 
     $temp= passwordMethod::get_available_methods();
