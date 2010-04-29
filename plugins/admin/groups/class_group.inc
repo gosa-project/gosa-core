@@ -287,7 +287,7 @@ class group extends plugin
     }
     $smarty->assign("trustModeDialog" , $trustModeDialog);
 
-    $smarty->assign("usePrototype", "true");
+
 
     if($this->config->search("nagiosaccount", "CLASS",array('menu'))){
       $smarty->assign("nagios",true);
