@@ -332,7 +332,7 @@ class user extends plugin
 
 
     $smarty= get_smarty();
-    $smarty->assign("usePrototype", "true");
+
     $smarty->assign("gosaLoginRestrictionWidget", $this->gosaLoginRestrictionWidget->render());
 
     /* Assign sex */
