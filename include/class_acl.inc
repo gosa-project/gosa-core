@@ -520,7 +520,7 @@ class acl extends plugin
 
     /* Create templating instance */
     $smarty= get_smarty();
-    $smarty->assign("usePrototype", "true");
+
     $smarty->assign("acl_readable",$this->acl_is_readable(""));
     if(!$this->acl_is_readable("")){
       return ($smarty->fetch (get_template_path('acl.tpl')));
