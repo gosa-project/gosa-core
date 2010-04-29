@@ -257,7 +257,7 @@ class ogroup extends plugin
 
     /* Load templating engine */
     $smarty= get_smarty();
-    $smarty->assign("usePrototype", "true");
+
 
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $translation){
