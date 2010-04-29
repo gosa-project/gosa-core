@@ -214,13 +214,6 @@ function changeTripleSelectState_2nd_neg(firstTriggerField, secondTriggerField, 
 	}
 }
 
-// work together to analyze keystrokes
-if (Prototype.Browser.Gecko){
-	window.onkeypress= keyHandler;
-} else {
-	document.onkeydown= keyHandler;
-}
-
 
 function popup(target, name) {
 	var mypopup= 
