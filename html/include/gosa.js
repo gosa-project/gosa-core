@@ -95,10 +95,26 @@ function acl_toggle_all(regex)
 
 /* Global key handler to estimate which element gets the next focus if enter is pressed */
 function keyHandler(DnEvents) {
+
+    var element = Event.element(DnEvents);
+
 	// determines whether Netscape or Internet Explorer
 	k = (Prototype.Browser.Gecko) ? DnEvents.keyCode : window.event.keyCode;
 	if (k == 13) { // enter key pressed
+
+
+        // Stop 'Enter' key-press from beeing handled internally
+        Event.stop(DnEvents);
+
 		if(typeof(nextfield)!='undefined') {
+
+            var next_element = $(nextfield);
+            if(next_element.type == 'submit'){
+                $('mainform').submit(); 
+                return(false);
+            }
+        
+
 			if(nextfield == 'login') {
 				return true; // submit, we finished all fields
 			} else { // we are not done yet, send focus to next box

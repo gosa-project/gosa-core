@@ -9,7 +9,7 @@
     </ul>
    </div>
 
-   <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
+   <form action='index.php' method='post' name='mainform' id='mainform' onSubmit='js_check(this);return true;'>
     {image path="images/empty.png" align="top" action="focus"}
     {$msg_dialogs}
 
@@ -63,7 +63,7 @@
        </select>
       </div>
       <div class='right'>
-       <button type='submit' name='login' title='{t}Click here to log in{/t}' onFocus="nextfield='login';">{t}Log in{/t}</button>
+       <button type='submit' name='login' id='login' title='{t}Click here to log in{/t}' onFocus="nextfield='login';">{t}Log in{/t}</button>
        <input type='hidden' name='login' value='{t}Log in{/t}' />             
       </div>
       <div class="clear"></div>
