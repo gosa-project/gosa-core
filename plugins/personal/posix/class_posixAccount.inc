@@ -327,7 +327,7 @@ class posixAccount extends plugin
 
     /* Templates now! */
     $smarty= get_smarty();
-    $smarty->assign("usePrototype", "true");
+
 
 
     // Handle trust mode dialog
@@ -351,7 +351,7 @@ class posixAccount extends plugin
 
     // Handle ssh dialog?
     if ($this->ssh instanceOf sshPublicKey && preg_match('/[rw]/', $this->getacl("sshPublicKey"))) {
-      $smarty->assign("usePrototype", "false");
+
       if ($result= $this->ssh->execute()) {
         $this->dialog= true;
         pathNavigator::registerPlugin("SSH keys");
@@ -362,7 +362,7 @@ class posixAccount extends plugin
 
     /* Show main page */
     $smarty= get_smarty();
-    $smarty->assign("usePrototype", "true");
+
 
     $smarty->assign("sshPublicKeyACL", $this->getacl("sshPublicKey"));
 
