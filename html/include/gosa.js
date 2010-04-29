@@ -137,10 +137,11 @@ function getNextInputElement(element)
     var found = false;
     for (var e=0;e< document.forms.length; e++){
         for (var i = 0; i < document.forms[e].elements.length; i++) {           
-            if(found && !document.forms[e].elements[i].disabled){
-                return(document.forms[e].elements[i]);    
+            var el = document.forms[e].elements[i]
+            if(found && !el.disabled && el.type!='hidden' && !el.name.match(/^submit_tree_base/) && !el.name.match(/^bs_rebase/)){
+                return(el);    
             }                                                           
-            if(document.forms[e].elements[i].id==element.id || document.forms[e].elements[i].name==element.name){        
+            if(el.id==element.id || el.name==element.name){        
                 found =true;
             }
         }                                                              
