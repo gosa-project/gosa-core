@@ -360,7 +360,7 @@ class aclrole extends acl
 
     /* Create templating instance */
     $smarty= get_smarty();
-    $smarty->assign("usePrototype", "true");
+
 
     $smarty->assign("base", $this->baseSelector->render());
 
