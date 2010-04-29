@@ -80,16 +80,16 @@ function acl_set_all(regex,value)
 /* Toggle checkbox that matches regex */
 function acl_toggle_all(regex)
 {
-	for (var i = 0; i < document.mainform.elements.length; i++) {
-		var _id=document.mainform.elements[i].id;
-		if(_id.match(regex)) {
-			if (document.getElementById(_id).checked == true){
-				document.getElementById(_id).checked= false;
-			} else {
-				document.getElementById(_id).checked= true;
-			}
-		}
-	}
+    for (var i = 0; i < document.mainform.elements.length; i++) {
+        var _id=document.mainform.elements[i].id;
+        if(_id.match(regex)) {
+            if (document.getElementById(_id).checked == true){
+                document.getElementById(_id).checked= false;
+            } else {
+                document.getElementById(_id).checked= true;
+            }
+        }
+    }
 }
 
 
@@ -98,88 +98,53 @@ function keyHandler(DnEvents) {
 
     var element = Event.element(DnEvents);
 
-	// determines whether Netscape or Internet Explorer
-	k = (Prototype.Browser.Gecko) ? DnEvents.keyCode : window.event.keyCode;
-	if (k == 13) { // enter key pressed
+    // determines whether Netscape or Internet Explorer
+    k = (Prototype.Browser.Gecko) ? DnEvents.keyCode : window.event.keyCode;
+    if (k == 13) { // enter key pressed
 
-
-        // Stop 'Enter' key-press from beeing handled internally
+        // Stop 'Enter' key-press from beeing processed internally
         Event.stop(DnEvents);
 
-		if(typeof(nextfield)!='undefined') {
+        // No nextfield explicitly specified 
+        var next_element = null;
+        if(typeof(nextfield)!='undefined') {
+            next_element = $(nextfield);
+        }
+       
+        // nextfield not given or invalid
+        if(!next_element || typeof(nextfield)=='undefined'){
+            next_element = getNextInputElement(element);
+        }
 
-            var next_element = $(nextfield);
-            if(next_element.type == 'submit'){
-                $('mainform').submit(); 
-                return(false);
+        // If next element is of type submit, then submit the button else set focus
+        if(next_element!=null && next_element.type == 'submit'){
+            next_element.click();
+            return(false);
+        }else if(next_element){
+            next_element.focus();
+            return;
+        }
+    
+    } else if (k==9 && element.type=='textarea') {
+        Event.stop(DnEvents);
+        element.value += "\t";
+        return false;
+    }
+}
+
+function getNextInputElement(element)
+{
+    var found = false;
+    for (var e=0;e< document.forms.length; e++){
+        for (var i = 0; i < document.forms[e].elements.length; i++) {           
+            if(found && !document.forms[e].elements[i].disabled){
+                return(document.forms[e].elements[i]);    
+            }                                                           
+            if(document.forms[e].elements[i].id==element.id || document.forms[e].elements[i].name==element.name){        
+                found =true;
             }
-        
-
-			if(nextfield == 'login') {
-				return true; // submit, we finished all fields
-			} else { // we are not done yet, send focus to next box
-				eval('document.mainform.' + nextfield + '.focus()');
-				return false;
-			}
-		} else {
-			if(Prototype.Browser.Gecko) {
-				if(DnEvents.target.type == 'textarea') {
-					return true;
-				} else if (DnEvents.target.type != 'submit') {
-					// TAB
-					var thisfield = document.getElementById(DnEvents.target.id);
-					for (i = 0; i < document.forms[0].elements.length; i++) {
-						if(document.forms[0].elements[i].id==thisfield.id) {
-							// Last form element on page?
-							if(i!=document.forms[0].elements.length-1) {
-								document.forms[0].elements[i+1].focus();
-							}
-						}
-					}
-					return false;
-				} else {
-					return true;
-				}
-				// Check for konqueror
-			} else if(document.clientWidth) {
-				// do nothing ATM
-			} else {
-				if(window.event.srcElement.type == 'textarea') {
-					return true;
-				} else if (window.event.srcElement.type != 'submit') {
-					// TAB
-					var thisfield = document.getElementById(window.event.srcElement.id);
-					for (i = 0; i < document.forms[0].elements.length; i++) {
-						if(document.forms[0].elements[i].id==thisfield.id) {
-							// Last form element on page?
-							if(i!=document.forms[0].elements.length-1) {
-								document.forms[0].elements[i+1].focus();
-							}
-						}
-					}
-					return false;
-				} else {
-					return true;
-				}
-			}
-		}
-	} else if (k==9) {
-		// Tab key pressed
-		if(Prototype.Browser.Gecko) {
-			if(DnEvents.target.type == 'textarea') {
-				document.getElementById(DnEvents.target.id).value+="\t";
-				return false;
-			}
-			// Check for konqueror
-		} else if(document.clientWidth) {
-			// do nothing ATM
-		} else {
-			if(window.event.srcElement.type == 'textarea') {
-				document.getElementById(window.event.srcElement.id).value+="\t";
-				return false;
-			}
-		}
-	}
+        }                                                              
+    }                                                              
 }
 
 function changeState() {

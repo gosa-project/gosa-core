@@ -18,7 +18,8 @@
   <tr>
     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
     <td>
-        {factory type='password' name='new_password' id='new_password' onkeyup="testPasswordCss(\$('new_password').value)"}
+        {factory type='password' name='new_password' id='new_password' 
+            onkeyup="testPasswordCss(\$('new_password').value)"  onfocus="nextfield= 'repeated_password';"}
     </td>
   </tr>
   <tr>
