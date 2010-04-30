@@ -801,27 +801,27 @@ div.listContainer {
 }
 
 .listScrollContent tr.entry-locked:nth-child(odd) {
-  background-color:#FFA;
+  background-color:#FFC;
 }
 
 .listScrollContent tr.entry-locked:nth-child(even) {
-  background-color:#F5F5AA;
+  background-color:#F5F5CC;
 }
 
 .listScrollContent tr.entry-error:nth-child(odd) {
-  background-color:#FFA;
+  background-color:#FCC;
 }
 
 .listScrollContent tr.entry-error:nth-child(even) {
-  background-color:#F5F5AA;
+  background-color:#F5C5C5;
 }
 
 .listScrollContent tr.entry-warning:nth-child(odd) {
-  background-color:#FFA;
+  background-color:#FEC;
 }
 
 .listScrollContent tr.entry-warning:nth-child(even) {
-  background-color:#F5F5AA;
+  background-color:#F5E5C5;
 }
 
 .listScrollContent tr:last-child {
