@@ -148,8 +148,30 @@ class baseSelector {
     }
 
     $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($config->current['BASE'])."';  $('submit_tree_base_".$this->pid."').click();\"";
-    $this->tree= "<input type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onkeydown=\"\$('bs_".$this->pid."').hide()\" onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});
-        Element.show.delay(0.25,\$('bs_".$this->pid."'));\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value=\"".preg_replace('/"/', '&quot;',$this->pathMapping[$this->base])."\">";
+
+
+    $this->tree= "<input style='width:160px' type='text' size='35'
+        name='bs_input_{$this->pid}' id='bs_input_{$this->pid}'
+
+        onkeydown=\"    \$('bs_{$this->pid}').hide(); \"
+        onfocus=\"      \$('bs_{$this->pid}').hide(); \"
+        onmouseover=\"  mouseIsStillOver = true;
+                        function showIt()
+                            {
+                                if(mouseIsStillOver){
+                                    \$('bs_".$this->pid."').show();
+                                }
+                            };
+                        Element.clonePosition(\$('bs_".$this->pid."'),
+                        'bs_input_".$this->pid."',
+                        {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});
+                        rtimer=showIt.delay(0.25); \"
+
+        onmouseout=\"   mouseIsStillOver=false;
+                        rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
+
+        value=\"".preg_replace('/"/','&quot;',$this->pathMapping[$this->base])."\">";
+
 
     // Autocompleter
     $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".

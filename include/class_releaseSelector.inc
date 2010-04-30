@@ -151,27 +151,32 @@ class releaseSelector {
     $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($this->releaseBase)."';  
         $('submit_tree_base_".$this->pid."').click();\"";
 
-    $this->tree= "<input
-        style='width:160px'
-        type='text'
-        size='35'
-        name='bs_input_{$this->pid}'
-        id='bs_input_{$this->pid}'
+    $this->tree= "<input style='width:160px' type='text' size='35' 
+        name='bs_input_{$this->pid}' id='bs_input_{$this->pid}'
 
         onkeydown=\"    \$('bs_{$this->pid}').hide(); \"
         onfocus=\"      \$('bs_{$this->pid}').hide(); \"
-        onmouseover=\"  Element.clonePosition(\$('bs_".$this->pid."'),
+        onmouseover=\"  mouseIsStillOver = true; 
+                        function showIt() 
+                            {
+                                if(mouseIsStillOver){
+                                    \$('bs_".$this->pid."').show();  
+                                }
+                            };
+                        Element.clonePosition(\$('bs_".$this->pid."'),
                         'bs_input_".$this->pid."', 
                         {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});
-                        \$('bs_".$this->pid."').show(); \" 
+                        rtimer=showIt.delay(0.25); \" 
 
-        onmouseout=\"   rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
+        onmouseout=\"   mouseIsStillOver=false; 
+                        rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
 
         value=\"".preg_replace('/"/','&quot;',$this->pathMapping[$this->base])."\">";
 
     // Autocompleter
     $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
                   "<script type='text/javascript'>".
+                  "var mouseIsStillOver = false;".
                   "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 'autocomplete.php?type=base', { minChars: 3, frequency: 0.5 });";
     if ($this->submitButton) {
       $this->tree.= "$('bs_input_".$this->pid."').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
