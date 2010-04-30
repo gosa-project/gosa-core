@@ -857,17 +857,27 @@ class LDAP{
   }
 
 
+  /*! \brief  Generates an ldif for all entries matching the filter settings, scope and limit.
+   *  @param  $dn           The entry to export.
+   *  @param  $filter       Limit the exported object to those maching this filter.
+   *  @param  $attributes   Specify the attributes to export here, empty means all.
+   *  @param  $scope        'base', 'sub' .. see manpage for 'ldapmodify' for details.
+   *  @param  $limit        Limits the result.
+   */
   function generateLdif ($dn, $filter= "(objectClass=*)", $attributes= array(), $scope = 'sub', $limit=0)
   {
-    $host = $this->hostname;
-    $attrs  = (count($attributes))?implode($attributes,' '):'';
-    $scope = (!empty($scope))?' -s '.$scope: '';
-    $limit = (!$limit)?'':' -z '.$limit;
-    $dn = escapeshellarg($dn);
-    $cmd = "ldapsearch -x -LLLL '{$filter}' {$limit} {$scope} -H '{$host}' -b {$dn} $attrs";
-    exec($cmd, $ret,$code);
-    $res = implode($ret,"\n");
-    return($res);
+      $attrs  = (count($attributes))?implode($attributes,' '):'';
+      $scope = (!empty($scope))?' -s '.$scope: '';
+      $limit = (!$limit)?'':' -z '.$limit;
+      $dn = escapeshellarg($dn);
+      $admin = escapeshellarg($this->binddn);
+      $pwd = escapeshellarg($this->bindpw);
+      $filter = escapeshellarg($filter);
+      $host = escapeshellarg($this->hostname);
+      $cmd = "ldapsearch -x -LLLL -D {$admin} -w {$pwd} {$filter} {$limit} {$scope} -H {$host} -b {$dn} $attrs";
+      exec($cmd, $ret,$code);
+      $res = implode($ret,"\n");
+      return($res);
   }
 
 
