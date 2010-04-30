@@ -68,77 +68,104 @@ class passwordMethod
   }
 
 
+
+  /*! \brief       Locks an account (gosaAccount) by added a '!' as prefix to the password hashes.
+   *               This makes logins impossible, due to the fact that the hash becomes invalid.
+   *                 userPassword: {SHA}!q02NKl9IChNwZEAJxzRdmB6E
+   *                 sambaLMPassword: !EBD223B61F8C259AD3B435B51404EE
+   *                 sambaNTPassword: !98BB35737013AAF181D0FE9FDA09E
+   */               
   function lock_account($config,$dn = "")
   {
-    if(!$this->lockable) return FALSE;
+      if(!$this->lockable) return FALSE;
 
-    /* Get current password hash */
-    $pwd ="";
-    $ldap = $config->get_ldap_link();
-    $ldap->cd($config->current['BASE']);
-    if(!empty($dn)){
-      $ldap->cat($dn);
-      $attrs = $ldap->fetch();
-      if(isset($attrs['userPassword'][0])){
-        $pwd = $attrs['userPassword'][0];
+      /* Get current password hash */
+      $userPassword = $sambaLMPassword = $sambaNTPassword = "";
+      $ldap = $config->get_ldap_link();
+      $ldap->cd($config->current['BASE']);
+      if(!empty($dn)){
+          $ldap->cat($dn,array('sambaLMPassword','sambaNTPassword','userPassword'));
+          $attrs = $ldap->fetch();
+          $userPassword = (isset($attrs['userPassword'][0])) ? $attrs['userPassword'][0]: "";
+          $sambaLMPassword = (isset($attrs['sambaLMPassword'][0])) ? $attrs['sambaLMPassword'][0]: "";
+          $sambaNTPassword = (isset($attrs['sambaNTPassword'][0])) ? $attrs['sambaNTPassword'][0]: "";
+      }elseif(isset($this->attrs['userPassword'][0])){
+          $dn = $this->attrs['dn'];
+          $userPassword = (isset($this->attrs['userPassword'][0])) ? $this->attrs['userPassword'][0]: "";
+          $sambaLMPassword = (isset($this->attrs['sambaLMPassword'][0])) ? $this->attrs['sambaLMPassword'][0]: "";
+          $sambaNTPassword = (isset($this->attrs['sambaNTPassword'][0])) ? $this->attrs['sambaNTPassword'][0]: "";
       }
-    }elseif(isset($this->attrs['userPassword'][0])){
-      $pwd = $this->attrs['userPassword'][0];
-      $dn = $this->attrs['dn'];
-    }
 
-    /* We can only lock/unlock non-empty passwords */
-    if(!empty($pwd)){
+      /* We can only lock/unlock non-empty passwords */
+      if(!empty($userPassword)){
 
-      /* Check if this entry is already locked. */
-      if(preg_match("/^[^\}]*+\}!/",$pwd)){
-        return(TRUE);
-      }     
-      
-      /* Lock entry */
-      $pwd = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$pwd);
-      $ldap->cd($dn);
-      $ldap->modify(array("userPassword" => $pwd));
-      return($ldap->success());
-    }
-    return(FALSE);
+          /* Check if this entry is already locked. */
+          if(preg_match("/^[^\}]*+\}!/",$userPassword)){
+              return(TRUE);
+          }     
+
+          /* Lock entry */
+          $userPassword = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$userPassword);
+          $sambaLMPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaLMPassword);
+          $sambaNTPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaNTPassword);
+          $ldap->cd($dn);
+          $ldap->modify(
+                  array(
+                      "userPassword" => $userPassword,
+                      "sambaLMPassword" => $sambaLMPassword,
+                      "sambaNTPassword" => $sambaNTPassword));
+          return($ldap->success());
+      }
+      return(FALSE);
   }
 
 
+  /*! \brief       Unlocks an account (gosaAccount) which was locked by 'lock_account()'.
+   *               For details about the locking mechanism see 'lock_account()'.
+   */               
   function unlock_account($config,$dn = "")
   {
-    if(!$this->lockable) return FALSE;
+      if(!$this->lockable) return FALSE;
 
-    /* Get current password hash */
-    $pwd ="";
-    $ldap = $config->get_ldap_link();
-    $ldap->cd($config->current['BASE']);
-    if(!empty($dn)){
-      $ldap->cat($dn);
-      $attrs = $ldap->fetch();
-      if(isset($attrs['userPassword'][0])){
-        $pwd = $attrs['userPassword'][0];
+      /* Get current password hash */
+      $userPassword = $sambaLMPassword = $sambaNTPassword = "";
+      $ldap = $config->get_ldap_link();
+      $ldap->cd($config->current['BASE']);
+      if(!empty($dn)){
+          $ldap->cat($dn,array('sambaLMPassword','sambaNTPassword','userPassword'));
+          $attrs = $ldap->fetch();
+          $userPassword = (isset($attrs['userPassword'][0])) ? $attrs['userPassword'][0]: "";
+          $sambaLMPassword = (isset($attrs['sambaLMPassword'][0])) ? $attrs['sambaLMPassword'][0]: "";
+          $sambaNTPassword = (isset($attrs['sambaNTPassword'][0])) ? $attrs['sambaNTPassword'][0]: "";
+      }elseif(isset($this->attrs['userPassword'][0])){
+          $dn = $this->attrs['dn'];
+          $userPassword = (isset($this->attrs['userPassword'][0])) ? $this->attrs['userPassword'][0]: "";
+          $sambaLMPassword = (isset($this->attrs['sambaLMPassword'][0])) ? $this->attrs['sambaLMPassword'][0]: "";
+          $sambaNTPassword = (isset($this->attrs['sambaNTPassword'][0])) ? $this->attrs['sambaNTPassword'][0]: "";
       }
-    }elseif(isset($this->attrs['userPassword'][0])){
-      $pwd = $this->attrs['userPassword'][0];
-      $dn = $this->attrs['dn'];
-    }
 
-    /* We can only lock/unlock non-empty passwords */
-    if(!empty($pwd)){
 
-      /* Check if this entry is already locked. */
-      if(!preg_match("/^[^\}]*+\}!/",$pwd)){
-        return (TRUE);
-      }     
-      
-      /* Lock entry */
-      $pwd = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$pwd);
-      $ldap->cd($dn);
-      $ldap->modify(array("userPassword" => $pwd));
-      return($ldap->success());
-    }
-    return(FALSE);
+      /* We can only lock/unlock non-empty passwords */
+      if(!empty($userPassword)){
+
+          /* Check if this entry is already locked. */
+          if(!preg_match("/^[^\}]*+\}!/",$userPassword)){
+              return (TRUE);
+          }     
+
+          /* Lock entry */
+          $userPassword = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$userPassword);
+          $sambaLMPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaLMPassword);
+          $sambaNTPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaNTPassword);
+          $ldap->cd($dn);
+          $ldap->modify(
+                  array(
+                      "userPassword" => $userPassword,
+                      "sambaLMPassword" => $sambaLMPassword,
+                      "sambaNTPassword" => $sambaNTPassword));
+          return($ldap->success());
+      }
+      return(FALSE);
   }
 
 
