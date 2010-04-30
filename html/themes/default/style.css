@@ -808,6 +808,22 @@ div.listContainer {
   background-color:#F5F5AA;
 }
 
+.listScrollContent tr.entry-error:nth-child(odd) {
+  background-color:#FFA;
+}
+
+.listScrollContent tr.entry-error:nth-child(even) {
+  background-color:#F5F5AA;
+}
+
+.listScrollContent tr.entry-warning:nth-child(odd) {
+  background-color:#FFA;
+}
+
+.listScrollContent tr.entry-warning:nth-child(even) {
+  background-color:#F5F5AA;
+}
+
 .listScrollContent tr:last-child {
   background-color:#FFF;
 }
