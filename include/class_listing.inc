@@ -336,11 +336,11 @@ class listing {
       // Fill with department browser if configured this way
       $departmentIterator= new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
       foreach ($departmentIterator as $row => $entry){
-        $result.="<tr>";
+        $rowResult= "<tr>";
 
         // Render multi select if needed
         if ($this->multiSelect || $this->singleSelect) {
-          $result.="<td style='text-align:center;padding:0;' class='list1'>&nbsp;</td>";
+          $rowResult.="<td style='text-align:center;padding:0;' class='list1'>&nbsp;</td>";
         }
 
         // Render defined department columns, fill the rest with some stuff
@@ -351,19 +351,27 @@ class listing {
             $colspan= $config['span'];
             $this->useSpan= true;
           }
-          $result.="<td colspan='$colspan' ".$this->colprops[$index]." class='list1'>".$this->renderCell($config['value'], $entry, $row)."</td>";
+          $rowResult.="<td colspan='$colspan' ".$this->colprops[$index]." class='list1'>".$this->renderCell($config['value'], $entry, $row)."</td>";
           $rest-= $colspan;
         }
 
         // Fill remaining cols with nothing
         $last= $this->numColumns - $rest;
         for ($i= 0; $i<$rest; $i++){
-          $result.= "<td ".$this->colprops[$last+$i-1]." class='list1'>&nbsp;</td>";
+          $rowResult.= "<td ".$this->colprops[$last+$i-1]." class='list1'>&nbsp;</td>";
         }
-        $result.="</tr>";
+        $rowResult.="</tr>";
 
+        // Apply label to objecttype icon?
+        if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)){
+            $objectType= image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
+            $rowResult= preg_replace("/<objectType[^>]+>/", $objectType, $rowResult);
+        }
+        $result.= $rowResult;
         $alt++;
       }
+
+
       $deps= $alt;
     }
 
