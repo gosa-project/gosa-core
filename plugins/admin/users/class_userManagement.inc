@@ -738,7 +738,7 @@ class userManagement extends management
     $label= "";
     if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
       if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
-        $label= _("Unlock account")."<rowClass:entry-locked/>";
+        $label= _("Unlock account")."<rowClass:entry-locked/><rowLabel:locked/>";
       }else{
         $label= _("Lock account");
       }

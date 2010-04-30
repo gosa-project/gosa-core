@@ -401,6 +401,16 @@ class listing {
     $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
     foreach ($entryIterator as $row => $entry){
 
+      // Apply label to objecttype icon?
+       if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)){
+           if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
+               $objectType= image($matches[1]."[".$m[1]."]", null, LDAP::fix(base64_decode($matches[2])));
+           } else {
+               $objectType= image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
+           }
+           $entry['_rendered']= preg_replace("/<objectType[^>]+>/", $objectType, $entry['_rendered']);
+      }
+
       // Apply custom class to row?
       if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
         $result.="<tr class='".$matches[1]."'>\n";
@@ -847,7 +857,7 @@ class listing {
     $objectType= $this->getObjectType($this->objectTypes, $classes);
     if ($objectType) {
       $this->objectDnMapping[$dn]= $objectType["objectClass"];
-      $result= image($objectType["image"], null, LDAP::fix($dn));
+      $result= "<objectType:".$objectType["image"].":".base64_encode(LDAP::fix($dn))."/>";
       if (!isset($this->objectTypeCount[$objectType['label']])) {
         $this->objectTypeCount[$objectType['label']]= 0;
       }
