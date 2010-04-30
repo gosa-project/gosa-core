@@ -145,11 +145,29 @@ class releaseSelector {
 
     /* Skip if there's no change */
     if (($this->tree && $this->base == $last_base) && !$force) {
-      return true;
+        return true;
     }
 
-    $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($this->releaseBase)."';  $('submit_tree_base_".$this->pid."').click();\"";
-    $this->tree= "<input style='width:160px' type='text' size='35' name='bs_input_".$this->pid."' id='bs_input_".$this->pid."' onkeydown=\"\$('bs_".$this->pid."').hide()\" onfocus=\"\$('bs_".$this->pid."').hide()\" onmouseover=\"Element.clonePosition(\$('bs_".$this->pid."'), 'bs_input_".$this->pid."', {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});Element.show.delay(0.25,\$('bs_".$this->pid."'));\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\" value=\"".preg_replace('/"/', '&quot;',$this->pathMapping[$this->base])."\">";
+    $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($this->releaseBase)."';  
+        $('submit_tree_base_".$this->pid."').click();\"";
+
+    $this->tree= "<input
+        style='width:160px'
+        type='text'
+        size='35'
+        name='bs_input_{$this->pid}'
+        id='bs_input_{$this->pid}'
+
+        onkeydown=\"    \$('bs_{$this->pid}').hide(); \"
+        onfocus=\"      \$('bs_{$this->pid}').hide(); \"
+        onmouseover=\"  Element.clonePosition(\$('bs_".$this->pid."'),
+                        'bs_input_".$this->pid."', 
+                        {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});
+                        \$('bs_".$this->pid."').show(); \" 
+
+        onmouseout=\"   rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
+
+        value=\"".preg_replace('/"/','&quot;',$this->pathMapping[$this->base])."\">";
 
     // Autocompleter
     $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
