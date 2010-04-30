@@ -409,6 +409,7 @@ class listing {
                $objectType= image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
            }
            $entry['_rendered']= preg_replace("/<objectType[^>]+>/", $objectType, $entry['_rendered']);
+           $entry['_rendered']= preg_replace("/<rowLabel[^>]+>/", '', $entry['_rendered']);
       }
 
       // Apply custom class to row?
