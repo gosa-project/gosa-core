@@ -251,26 +251,22 @@ function divGOsa_toggle(element) {
 function resizeHandler (e) {
 	if (!e) e= window.event;
 
-    var contentHeight= document.viewport.getHeight() - 216;
-    if ($$('div.plugin-actions').length != 0) {
-      var height= 0;
-      $$('div.plugin-actions').each(function(s) {
-        height+= s.getHeight();
-      });
-      contentHeight-= height + 5;
+    // This works with FF / IE9. If Apples resolves a bug in webkit,
+    // it works with Safari/Chrome, too.
+	if ($("d_scrollbody") && $("t_nscrollbody")) {
+      var contentHeight= document.viewport.getHeight() - 216;
+      if ($$('div.plugin-actions').length != 0) {
+        var height= 0;
+        $$('div.plugin-actions').each(function(s) {
+          height+= s.getHeight();
+        });
+        contentHeight-= height + 5;
+      }
+
+      document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
+      document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
     }
 
-    // For WebKit #3239 has to be resolved by Apple, then it works
-    // in Webkit / Gecko based browsers
-    if (Prototype.Browser.Gecko || Prototype.Browser.WebKit){
-	  if ($("d_scrollbody") && $("t_nscrollbody")) {
-          document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
-          document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
-      }
-    } else {
-      document.getElementById('d_scrollbody').style.minHeight = contentHeight+23+'px';
-      document.getElementById('t_nscrollbody').style.minHeight = contentHeight+'px';
-    }
 	return true;
 }
 
