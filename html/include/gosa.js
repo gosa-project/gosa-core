@@ -260,7 +260,9 @@ function resizeHandler (e) {
       contentHeight-= height + 5;
     }
 
-    if (Prototype.Browser.Gecko){
+    // For WebKit #3239 has to be resolved by Apple, then it works
+    // in Webkit / Gecko based browsers
+    if (Prototype.Browser.Gecko || Prototype.Browser.WebKit){
 	  if ($("d_scrollbody") && $("t_nscrollbody")) {
           document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
           document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
