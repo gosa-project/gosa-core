@@ -249,23 +249,29 @@ function divGOsa_toggle(element) {
 }
 
 function resizeHandler (e) {
-	if (!e) e=window.event;
-	if ($("d_scrollbody") && $("t_nscrollbody")) {
+	if (!e) e= window.event;
 
-        var contentHeight= document.viewport.getHeight() - 216;
-        if ($$('div.plugin-actions').length != 0) {
-          var height= 0;
-          $$('div.plugin-actions').each(function(s) {
-            height+= s.getHeight();
-          });
-          contentHeight-= height + 5;
-        }
+    var contentHeight= document.viewport.getHeight() - 216;
+    if ($$('div.plugin-actions').length != 0) {
+      var height= 0;
+      $$('div.plugin-actions').each(function(s) {
+        height+= s.getHeight();
+      });
+      contentHeight-= height + 5;
+    }
 
-        document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
-        document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
+    if (Prototype.Browser.Gecko){
+	  if ($("d_scrollbody") && $("t_nscrollbody")) {
+          document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
+          document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
+      }
+    } else {
+      document.getElementById('d_scrollbody').style.minHeight = contentHeight+23+'px';
+      document.getElementById('t_nscrollbody').style.minHeight = contentHeight+'px';
     }
 	return true;
 }
+
 
 function absTop(e) {
 	return (e.offsetParent)?e.offsetTop+absTop(e.offsetParent) : e.offsetTop;
