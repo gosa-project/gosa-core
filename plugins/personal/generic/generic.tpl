@@ -29,7 +29,7 @@
   <!-- /The users picture settings container -->
 
   </td> 
-  <td>
+  <td style='width:45%'>
 
    {if $is_template ne "true"}
 
@@ -183,7 +183,7 @@
   </td>
 
   <td>
-   <table style="width:100%" summary="{t}Postal address{/t}"> 
+   <table summary="{t}Postal address{/t}"> 
     <tr>
      <td><label for="homePostalAddress">{t}Address{/t}</label></td>
      <td>
@@ -433,7 +433,7 @@
   </td>
   
   <!-- Location, ... -->
-  <td>
+  <td style='width:33%'>
    <table summary="{t}Organizational information{/t} - {t}part{/t} 3">
     <tr>
      <td><label for="l">{t}Location{/t}</label></td>
