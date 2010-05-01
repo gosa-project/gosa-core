@@ -111,6 +111,10 @@ h1, h3 {
 
 
 /* Error collector */
+#errorbox {
+  width:100%;
+}
+
 .error-collector {
   border-bottom:1px solid black;
   width:100%;
@@ -118,7 +122,17 @@ h1, h3 {
   padding:2px;
   height:32px;
   background-color:#FFA;
+  -webkit-animation-name:error-collector;
+  -webkit-animation-duration:0.5s;
+  -webkit-animation-iteration-count:2;
+  -webkit-animation-direction:alternate
 }
+
+@-webkit-keyframes error-collector{
+  from{background-color:#FFA;}
+  to{background-color:red;}
+}
+
 
 .error-collector span {
   font-size:12px;
