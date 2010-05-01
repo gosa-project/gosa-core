@@ -4,10 +4,6 @@
  {t}To change the user password use the fields below. The changes take effect immediately. Please memorize the new password, because the user wouldn't be able to login without it.{/t}
 </p>
 
-<p>
- {t}Changing the password affects your authentification on mail, proxy, samba and unix services.{/t}
-</p>
-
 <table summary="{t}Password input dialog{/t}" cellpadding=4 border=0>
   <tr>
     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
@@ -26,8 +22,8 @@
   <tr>
     <td><b>{t}Strength{/t}</b></td>
     <td>
-        <span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:5px;">
-        <span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:5px;"></span></span>
+        <span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:7px;">
+        <span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:7px;"></span></span>
     </td>
   </tr>
 </table>

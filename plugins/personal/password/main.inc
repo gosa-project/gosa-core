@@ -52,10 +52,6 @@ if ( $cleanup ){
   /* Execute formular */
   $display.= $password->execute ();
 
-  /* Page header*/
-  $display= print_header(get_template_path('plugins/password/images/plugin.png'),
-                         _("Password settings"), "").$display;
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

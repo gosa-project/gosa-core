@@ -4,10 +4,6 @@
   {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
 </p>
 
-<p>
-  {t}Changing the password affects your authentification on mail, proxy, samba and unix services.{/t}
-</p>
-
 <table cellpadding=4 border=0 summary="{t}Password change dialog{/t}">
   <tr>
     <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
@@ -31,8 +27,8 @@
   <tr>
     <td><b>{t}Password strength{/t}</b></td>
     <td>
-	<span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:5px;">
-	<span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:5px;"></span></span>
+	<span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:7px;">
+	<span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:7px;"></span></span>
     </td>
   </tr>
 </table>
