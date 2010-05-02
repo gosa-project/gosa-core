@@ -62,13 +62,13 @@ class userFilter extends plugin
    */
   static function explodeFilterString($filterStr)
   {
-    list($parent,$categories, $name, $description, $filterList, $flags) = split(";", $filterStr);
+    list($parent,$categories, $name, $description, $filterList, $flags) = preg_split('/;/', $filterStr);
 
     // Ensure that we no empty category in our category list.
     if(empty($categories)){
       $categories = array();
     }else{
-      $categories = split(',', $categories);
+      $categories = preg_split('/,/', $categories);
     }
 
     // Ensure that we no empty entry in out flags list.
@@ -80,7 +80,7 @@ class userFilter extends plugin
 
     // Get filters and their backends 
     $queries = array();
-    foreach(split(",", $filterList) as $data){
+    foreach(preg_split('/,/', $filterList) as $data){
       if(!empty($data)){
         list($filter, $backend) = preg_split('/:/', $data);
         $queries[] =  array('backend' => $backend, 'filter' => base64_decode($filter));
