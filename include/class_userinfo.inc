@@ -365,7 +365,7 @@ class userinfo
 
     /* Check for correct category and class values... */
     if(strpos($object,'/') !== FALSE){
-      list($aclCategory, $aclClass) = split("/", $object);
+      list($aclCategory, $aclClass) = preg_split("!/!", $object);
     }else{
       $aclCategory = $object;
     }
