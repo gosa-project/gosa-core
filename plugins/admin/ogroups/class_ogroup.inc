@@ -184,74 +184,63 @@ class ogroup extends plugin
     $this->reload();
   }
 
-  function AddDelMembership($NewMember = false){
-
-    if($NewMember){
-
-      /* Add member and force reload */
-      $this->member[$NewMember]= $NewMember;
-      $this->reload(); 
-
-      $this->memberList[$NewMember]= $this->objcache[$NewMember];
-      unset ($this->objects[$NewMember]);
-      uasort ($this->memberList, 'sort_list');
-      reset ($this->memberList);
-    }else{
+  function AddDelMembership()
+  {
       /* Delete objects from group */
       if (isset($_POST['delete_membership']) && isset($_POST['members'])){
-        foreach ($_POST['members'] as $value){
-          $this->objects["$value"]= $this->memberList[$value];
-          unset ($this->memberList["$value"]);
-          unset ($this->member["$value"]);
-          uasort ($this->objects, 'sort_list');
-          reset ($this->objects);
-        }
-        $this->reload();
+          foreach ($_POST['members'] as $value){
+              $this->objects["$value"]= $this->memberList[$value];
+              unset ($this->memberList["$value"]);
+              unset ($this->member["$value"]);
+              uasort ($this->objects, 'sort_list');
+              reset ($this->objects);
+          }
+          $this->reload();
       }
 
       /* Add objects to group */
       if (isset($_POST['objectSelect_save']) && $this->objectSelect instanceOf objectSelect){
-        $objects = $this->objectSelect->save();
-        $skipped = FALSE;
-        foreach($objects as $object){
+          $objects = $this->objectSelect->save();
+          $skipped = FALSE;
+          foreach($objects as $object){
 
-          $tmp = "";
-          foreach($this->memberList as $obj){
-            $tmp .= $obj['type'];
+              $tmp = "";
+              foreach($this->memberList as $obj){
+                  $tmp .= $obj['type'];
+              }
+
+              $type  = $this->getObjectType($object);
+              $name= $this->getObjectName($object);
+              $dn = $object['dn'];
+
+              /* Fill array */
+              if (isset($object["description"][0])){
+                  $object= array("text" => "$name [".$object["description"][0]."]", "type" => "$type");
+              } elseif (isset($object["uid"][0])) {
+                  $object= array("text" => "$name [".$object["uid"][0]."]", "type" => "$type");
+              } else {
+                  $object= array("text" => "$name", "type" => "$type");
+              }
+
+              if(preg_match("/T/",$tmp) && $type == "W"){
+                  $skipped =TRUE;
+              }elseif(preg_match("/W/",$tmp) && $type == "T"){
+                  $skipped =TRUE;
+              }else{
+
+                  $this->memberList["$dn"]= $object;
+                  $this->member["$dn"]= $dn;
+                  uasort ($this->memberList, 'sort_list');
+                  reset ($this->memberList);
+              }
           }
-
-          $type  = $this->getObjectType($object);
-          $name= $this->getObjectName($object);
-          $dn = $object['dn'];
-
-          /* Fill array */
-          if (isset($object["description"][0])){
-            $object= array("text" => "$name [".$object["description"][0]."]", "type" => "$type");
-          } elseif (isset($object["uid"][0])) {
-            $object= array("text" => "$name [".$object["uid"][0]."]", "type" => "$type");
-          } else {
-            $object= array("text" => "$name", "type" => "$type");
+          if($skipped){
+              msg_dialog::display(_("Information"), _("You cannot combine terminals and workstations in one object group!"), INFO_DIALOG);
           }
-
-          if(preg_match("/T/",$tmp) && $type == "W"){
-            $skipped =TRUE;
-          }elseif(preg_match("/W/",$tmp) && $type == "T"){
-            $skipped =TRUE;
-          }else{
-
-            $this->memberList["$dn"]= $object;
-            $this->member["$dn"]= $dn;
-            uasort ($this->memberList, 'sort_list');
-            reset ($this->memberList);
-          }
-        }
-        if($skipped){
-          msg_dialog::display(_("Information"), _("You cannot combine terminals and workstations in one object group!"), INFO_DIALOG);
-        }
-        $this->objectSelect= FALSE;
-        $this->dialog= FALSE;
+          $this->objectSelect= FALSE;
+          $this->dialog= FALSE;
+          $this->reload();
       }
-    }
   }
 
   function execute()
@@ -336,26 +325,6 @@ class ogroup extends plugin
      * Ende - Trusts 
      ***********/
 
-
-    /* Dialog handling */
-    if(is_object($this->dialog) && $this->acl_is_moveable()){
-      /* Must be called before save_object */
-      $this->dialog->save_object();
-
-      if($this->dialog->isClosed()){
-        $this->dialog = false;
-      }elseif($this->dialog->isSelected()){
-
-        /* A new base was selected, check if it is a valid one */
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$this->dialog->isSelected()])){
-          $this->base = $this->dialog->isSelected();
-        }
-        $this->dialog= false;
-      }else{
-        return($this->dialog->execute());
-      }
-    }
 
     /* Add objects? */
     if (isset($_POST["edit_membership"])){
