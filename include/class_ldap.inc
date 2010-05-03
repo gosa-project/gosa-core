@@ -874,9 +874,11 @@ class LDAP{
       $pwd = escapeshellarg($this->bindpw);
       $filter = escapeshellarg($filter);
       $host = escapeshellarg($this->hostname);
-      $cmd = "ldapsearch -x -LLLL -D {$admin} -w {$pwd} {$filter} {$limit} {$scope} -H {$host} -b {$dn} $attrs";
-      exec($cmd, $ret,$code);
-      $res = implode($ret,"\n");
+      $cmd = "ldapsearch -x -LLLL -D {$admin} -w {$pwd} {$filter} {$limit} {$scope} -H {$host} -b {$dn} $attrs ";
+      ob_start();
+      passthru($cmd);
+      $res=ob_get_contents();
+      ob_end_clean();
       return($res);
   }
 
