@@ -1732,13 +1732,13 @@ class user extends plugin
 
         );
 
-    /* Append government attributes if required */
-    global $config;
-    if($config->get_cfg_value("honourIvbbAttributes") == "true"){
-      foreach($govattrs as $attr => $desc){
-        $ret["plProvidedAcls"][$attr] = $desc;
-      }
-    }
+#   /* Append government attributes if required */
+#   global $config;
+#   if($config->get_cfg_value("honourIvbbAttributes") == "true"){
+#     foreach($govattrs as $attr => $desc){
+#       $ret["plProvidedAcls"][$attr] = $desc;
+#     }
+#   }
     return($ret);
   }
 
