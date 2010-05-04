@@ -19,7 +19,9 @@
  </div>
 </div>
 
-
+{if !$is_modified}
+<input type="hidden" name="ignore">
+{/if}
 
 
 {$content}

@@ -15,6 +15,10 @@
   {$LIST}
 </div>
 
+{if !$is_modified}
+<input type="hidden" name="ignore">
+{/if}
+
 <div class="plugin-actions">
     <button name='saveProperties'>{msgPool type='okButton'}</button>
     <button name='cancelProperties'>{msgPool type='cancelButton'}</button>

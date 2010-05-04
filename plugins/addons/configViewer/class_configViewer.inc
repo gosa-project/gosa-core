@@ -39,15 +39,20 @@ class configViewer extends management
      */
     function execute()
     {
-        foreach($_POST as $pName => $value){
-            if(preg_match("/:/", $pName)){
-                list($class,$name) = preg_split("/:/", $pName,2);
-                if($this->config->configRegistry->propertyExists($class,$name)){
-                    $prop = $this->config->configRegistry->getProperty($class,$name);
-                    $prop->setValue(get_post($pName));;
-                }
+        // Walk trough all properties and check if there posts for us.
+        $all = $this->config->configRegistry->getAllProperties();
+        $modified = FALSE;
+        foreach($all as $prop){
+            $post = "{$prop->getClass()}:{$prop->getName()}";
+            if(isset($_POST[$post])){
+                $prop->setValue(get_post($post));;
             }
+        
+            $modified |= in_array($prop->getStatus(),array('modified','removed'));
         }
+       
+        $smarty = get_smarty();
+        $smarty->assign('is_modified', $modified);
         return(management::execute());
     }
 
