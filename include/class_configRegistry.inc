@@ -210,6 +210,8 @@ class gosaProperty
     }
 
     function getValue() { return($this->value); }
+    function getMigrate() { return($this->migrate); }
+    function getCheck() { return($this->check); }
     function getName() { return($this->name); }
     function getClass() { return($this->class); }
     function getGroup() { return($this->group); }
@@ -217,6 +219,7 @@ class gosaProperty
     function getDescription() { return($this->description); }
     function getDefault() { return($this->default); }
     function getStatus() { return($this->status); }
+    function isMandatory() { return($this->mandatory); }
 
     function setValue($str) 
     {
