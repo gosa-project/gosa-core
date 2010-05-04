@@ -38,7 +38,7 @@ class configViewer extends plugin
             $data[$id] = $p;
             $lData[$id] = array('data' => array(
                         $p->getGroup(),
-                        $p->getClass(),
+                        $this->configRegistry->classToName[$p->getClass()],
                         $p->getName(),
                         $p->getValue(),
                         $p->getStatus()
