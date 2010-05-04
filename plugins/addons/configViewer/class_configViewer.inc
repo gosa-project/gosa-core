@@ -1,9 +1,35 @@
 <?php
 
-class configViewer extends plugin
+
+class configViewer extends management
 {
     var $plHeadline= "Preferences";
     var $plDescription= "Configure global and special GOsa settings like hooks and plugin parameters";
+    var $plIcon  = "plugins/configViewer/images/plugin.png";
+
+    function __construct($config,$ui)
+    {
+        $this->config = $config;
+        $this->ui = $ui;
+
+        // Build filter
+        if (0&&session::global_is_set(get_class($this)."_filter")){
+            $filter= session::global_get(get_class($this)."_filter");
+        } else {
+            $filter = new filter(get_template_path("property-filter.xml", true));
+            $filter->setObjectStorage($this->storagePoints);
+        }
+        $this->setFilter($filter);
+
+        // Build headpage
+        $headpage = new listing(get_template_path("property-list.xml", true));
+        $headpage->setFilter($filter);
+        parent::__construct($config, $ui, "property", $headpage);
+    }
+}
+
+class configViewer_old extends plugin
+{
 
     var $configRegistry = NULL;    
     var $viewType = 'byClass';
