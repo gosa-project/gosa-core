@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <definition>
+    <departmentBrowser>false</departmentBrowser>
+    <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>false</baseMode>
+    <multiSelect>true</multiSelect>
+    <template>sudo-list.tpl</template>
+    <module>sudo</module>
+    <label>List of sudo roles</label>
+    <defaultSortColumn>1</defaultSortColumn>
+
+    <objectType>
+      <label>Role</label>
+      <objectClass>sudoRole</objectClass>
+      <category>sudo</category>
+      <class>sudo</class>
+      <image>plugins/sudo/images/select_sudo.png</image>
+    </objectType>
+
+  </definition>
+
+  <table>
+    <layout>|20px;c|120px||170px;r|</layout>
+
+    <column>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </column>
+
+    <column>
+      <label>Name</label>
+      <sortAttribute>cn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:link(row,dn,"%s",cn)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Description</label>
+      <sortAttribute>description</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:link(row,dn,"%s",description)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Actions</label>
+      <value>%{filter:actions(dn,row,objectClass)}</value>
+    </column>
+
+  </table>
+
+  <actionmenu>
+
+    <action>
+     <type>sub</type>
+     <image>images/lists/element.png[new]</image>
+     <label>Create</label>
+
+     <action>
+      <name>new</name>
+      <type>entry</type>
+      <image>plugins/sudo/images/select_sudo.png[new]</image>
+      <label>Role</label>
+     </action>
+
+     <action>
+      <name>new_default</name>
+      <type>entry</type>
+      <image>plugins/sudo/images/select_sudo.png</image>
+      <label>Default</label>
+     </action>
+
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <label>Remove</label>
+    </action>
+
+    <action>
+      <type>exporter</type>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <type>copypaste</type>
+    </action>
+
+    <action>
+      <type>snapshot</type>
+    </action>
+
+  </actionmenu>
+
+  <actiontriggers snapshot="true" copypaste="true">
+
+    <action>
+      <name>cp</name>
+      <type>copypaste</type>
+    </action>
+
+    <action>
+      <name>edit</name>
+      <type>entry</type>
+      <image>images/lists/edit.png</image>
+      <label>Edit sudo role</label>
+    </action>
+
+    <action>
+      <name>snapshot</name>
+      <type>snapshot</type>
+    </action>
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <acl>sudo/sudo[d]</acl>
+      <label>Remove sudo role</label>
+    </action>
+
+  </actiontriggers>
+
+</list>

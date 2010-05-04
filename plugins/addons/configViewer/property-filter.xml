@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+
+  <definition>
+    <category>all</category>
+    <initial>true</initial>
+    <default>default</default>
+    <scope>one</scope>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Default filter</label>
+    <query>
+      <backend>PROPERTIES</backend>
+      <filter>state=*</filter>
+    </query>
+    <autocomplete>
+      <attribute>state</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>default2</tag>
+    <label>Default filter2</label>
+    <query>
+      <backend>PROPERTIES</backend>
+      <filter>state=modified>
+    </query>
+    <autocomplete>
+      <attribute>state</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+</filterdef>
