@@ -148,6 +148,13 @@ class configRegistry{
         }
         return("");
     }
+
+    function saveChanges()
+    {
+        foreach($this->properties as $prop){
+            $prop->save();
+        }
+    }
 }
 
 
@@ -227,6 +234,11 @@ class gosaProperty
         $this->value = $str; 
     }
 
+    function restoreDefault() 
+    {
+        $this->setStatus('removed'); 
+    }
+
     function save()
     {
         if($this->getStatus() == 'modified'){
@@ -269,12 +281,45 @@ class gosaProperty
                     echo $ldap->get_error();
                 }
             } 
+        }elseif($this->getStatus() == 'removed'){
+            $ldap = $this->parent->config->get_ldap_link();
+            $ldap->cd($this->parent->config->current['BASE']);
+            $dn = "cn={$this->class},".$this->parent->config->current['CONFIG'];
+            $ldap->cat($dn);
+            $attrs = $ldap->fetch();
+            $data = array();
+            for($i = 0;$i<$attrs['gosaSetting']['count']; $i ++){
+                $set = $attrs['gosaSetting'][$i];
+                if(preg_match("/^{$this->name}:/", $set)){
+                    continue;
+                }
+                $data['gosaSetting'][] = $set;
+            }
+            $ldap->cd($dn);
+            $ldap->modify($data);
+            if($ldap->success()){
+                $this->status = 'undefined';
+
+                // Second check for values in the config file.
+                if(isset($this->parent->fileStoredProperties[$this->class][$this->name])){
+                    $this->setStatus('file');
+                    $this->value = $this->parent->fileStoredProperties[$this->class][$this->name];
+                }
+
+                // If there still wasn't found anything then fallback to the default.
+                if($this->getStatus() == 'undefined'){
+                    $this->value = $this->getDefault();
+                }
+
+            }else{
+                echo $ldap->get_error();
+            }
         }
     }
 
     private function setStatus($state) 
     {
-        if(!in_array($state, array('ldap','file','undefined','modified'))) {
+        if(!in_array($state, array('ldap','file','undefined','modified','removed'))) {
             trigger_error("Unknown property status given '{$state}' for {$this->class}:{$this->name}!");
         }else{
             $this->status = $state; 

@@ -44,7 +44,6 @@ if ( $cleanup ){
 
     /* Execute formular */
     $display= $configViewer->execute ();
-    $display.= "<input type=\"hidden\" name=\"ignore\">\n";
 
     /* Store changes  in session */
     session::set('configViewer',$configViewer);

@@ -15,4 +15,7 @@
   {$LIST}
 </div>
 
-<div class="clear"></div>
+<div class="plugin-actions">
+    <button name='saveProperties'>{msgPool type='okButton'}</button>
+    <button name='cancelProperties'>{msgPool type='cancelButton'}</button>
+</div>

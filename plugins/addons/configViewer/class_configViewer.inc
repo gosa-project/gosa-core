@@ -29,7 +29,39 @@ class configViewer extends management
         $headpage->registerElementFilter("propertyValue", "configViewer::propertyValue");
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "property", $headpage);
+
+        $this->registerAction("saveProperties","saveProperties");
+        $this->registerAction("cancelProperties","cancelProperties");
     }
+
+    function cancelProperties()
+    {
+        $this->config->configRegistry->reload($force=TRUE);
+    }
+
+    function saveProperties()
+    {
+        $this->config->configRegistry->saveChanges();
+    }
+
+    function detectPostActions()
+    {
+        $action = management::detectPostActions();
+        if(isset($_POST['saveProperties']))  $action['action'] = 'saveProperties';
+        if(isset($_POST['cancelProperties']))  $action['action'] = 'cancelProperties';
+        return($action);
+    }
+
+    protected function removeEntryRequested($action="",$target=array(),$all=array())
+    {
+        foreach($target as $dn){
+            list($class,$name) = preg_split("/:/", $dn);
+            if($this->config->configRegistry->propertyExists($class,$name)){
+                $prop = $this->config->configRegistry->getProperty($class,$name);
+                $prop->restoreDefault();
+            }
+        }
+    } 
 
     static function propertyGroup($group, $description = array())
     {

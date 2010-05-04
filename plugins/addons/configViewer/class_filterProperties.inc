@@ -22,7 +22,7 @@ class filterCONFIGPROPERTIES {
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'type', $property->getType());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'migrate', $property->getMigrate());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'group', $property->getGroup());
-        $entry['dn'] = $property->getName();
+        $entry['dn'] = $property->getClass().":".$property->getName();
 
         $found =TRUE;
         if(!empty($filter)){

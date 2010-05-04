@@ -20,6 +20,14 @@
     </objectType>
 
     <objectType>
+      <label>Property will be restored</label>
+      <objectClass>removed</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>images/lists/trash.png</image>
+    </objectType>
+
+    <objectType>
       <label>Modified property</label>
       <objectClass>modified</objectClass>
       <category>all</category>
