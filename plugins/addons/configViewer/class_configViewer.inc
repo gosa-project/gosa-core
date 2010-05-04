@@ -34,6 +34,24 @@ class configViewer extends management
         $this->registerAction("cancelProperties","cancelProperties");
     }
 
+    /*! \brief  Execute this plugin
+     *          Handle actions/events, locking, snapshots, dialogs, tabs,...
+     */
+    function execute()
+    {
+        foreach($_POST as $pName => $value){
+            if(preg_match("/:/", $pName)){
+                list($class,$name) = preg_split("/:/", $pName,2);
+                if($this->config->configRegistry->propertyExists($class,$name)){
+                    $prop = $this->config->configRegistry->getProperty($class,$name);
+                    $prop->setValue(get_post($pName));;
+                }
+            }
+        }
+        return(management::execute());
+    }
+
+
     function cancelProperties()
     {
         $this->config->configRegistry->reload($force=TRUE);

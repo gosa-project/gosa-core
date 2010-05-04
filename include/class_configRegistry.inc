@@ -230,8 +230,10 @@ class gosaProperty
 
     function setValue($str) 
     {
-        $this->setStatus('modified'); 
-        $this->value = $str; 
+        if($this->value != $str){
+            $this->setStatus('modified'); 
+            $this->value = $str; 
+        }
     }
 
     function restoreDefault() 
