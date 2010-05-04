@@ -21,7 +21,7 @@ class userFilterEditor extends plugin
   // The list of all categories mangaged by the current filter object.
   // Used in the grop-down box.
   public $orig_name = "";
-  public $backends = array('LDAP','LDAPBlacklist', 'SYSTEMS', 'FAI', 'GroupLDAP','ACL', 'OPSIPackages','APPLICATIONS','MIMETYPES');  
+  public $backends = array('LDAP','LDAPBlacklist', 'SYSTEMS', 'FAI', 'GroupLDAP','ACL', 'OPSIPackages','APPLICATIONS','MIMETYPES','CONFIGPROPERTIES');  
 
 
   /*! \brief    Instantiate the filter editing dialog. 
