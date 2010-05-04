@@ -24,9 +24,6 @@ class configRegistry{
         // Do not reload the properties everytime, once we have  
         //  everything loaded and registrered skip the reload.
         // Status is 'finished' once we had a ldap connection (logged in)
-    
-        $force = TRUE;
-        
         if(!$force && $this->status == 'finished') return;
 
         // Reset everything
