@@ -7,13 +7,14 @@
     <initial>true</initial>
     <default>default</default>
     <scope>one</scope>
+    <attribute>dummy</attribute>
   </definition>
 
   <search>
     <tag>default</tag>
     <label>Default filter</label>
     <query>
-      <backend>PROPERTIES</backend>
+      <backend>CONFIGPROPERTIES</backend>
       <filter>state=*</filter>
     </query>
     <autocomplete>
@@ -27,8 +28,8 @@
     <tag>default2</tag>
     <label>Default filter2</label>
     <query>
-      <backend>PROPERTIES</backend>
-      <filter>state=modified>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>state=modified</filter>
     </query>
     <autocomplete>
       <attribute>state</attribute>

@@ -6,33 +6,41 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>false</baseMode>
     <multiSelect>true</multiSelect>
-    <template>sudo-list.tpl</template>
-    <module>sudo</module>
-    <label>List of sudo roles</label>
+    <template>property-list.tpl</template>
+    <module>all</module>
+    <label>List of configuration settings</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
-      <label>Role</label>
-      <objectClass>sudoRole</objectClass>
-      <category>sudo</category>
-      <class>sudo</class>
+      <label>Property</label>
+      <objectClass>none</objectClass>
+      <category>all</category>
+      <class>all</class>
       <image>plugins/sudo/images/select_sudo.png</image>
     </objectType>
 
   </definition>
 
   <table>
-    <layout>|20px;c|120px||170px;r|</layout>
+    <layout>|20px;c|120px||||170px;r|</layout>
 
     <column>
       <value>%{filter:objectType(dn,objectClass)}</value>
     </column>
 
     <column>
+      <label>Group</label>
+      <sortAttribute>group</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{group}</value>
+      <export>true</export>
+    </column>
+
+    <column>
       <label>Name</label>
       <sortAttribute>cn</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s",cn)}</value>
+      <value>%{cn}</value>
       <export>true</export>
     </column>
 
@@ -40,7 +48,7 @@
       <label>Description</label>
       <sortAttribute>description</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s",description)}</value>
+      <value>%{description}</value>
       <export>true</export>
     </column>
 

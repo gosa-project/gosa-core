@@ -23,8 +23,6 @@
 */
 if ($remove_lock){
     if(session::is_set('configViewer')){
-        $configViewer = session::get('configViewer');   
-        $configViewer->save_object();
     }
 }
 
@@ -33,8 +31,6 @@ if ($remove_lock){
  */
 if ( $cleanup ){
     if (session::is_set('configViewer')){
-        $configViewer = session::get('configViewer');   
-        $configViewer->save_object();
     }
     session::un_set('configViewer');
 }else{
@@ -42,7 +38,7 @@ if ( $cleanup ){
 
     /* Create logview object on demand */
     if (!session::is_set('configViewer')){
-        session::set('configViewer',new configViewer($config));
+        session::set('configViewer',new configViewer($config, get_userinfo()));
     }
     $configViewer = session::get('configViewer');
 
