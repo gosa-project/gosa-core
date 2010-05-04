@@ -34,21 +34,27 @@ class configViewer extends management
         $this->registerAction("cancelProperties","cancelProperties");
     }
 
-    /*! \brief  Execute this plugin
-     *          Handle actions/events, locking, snapshots, dialogs, tabs,...
-     */
+
+    function execute()
+    {
+        // Walk trough all properties and check if there posts for us.
+        $all = $this->config->configRegistry->getAllProperties();
+        foreach($all as $prop){
+            $post = "{$prop->getClass()}:{$prop->getName()}";
+            if(isset($_POST[$post]) && !in_array($prop->getStatus(),array('removed'))){
+                $prop->setValue(get_post($post));
+            }
+        }
+        return(management::execute());
+    }
+
     function renderList()
     {
         // Walk trough all properties and check if there posts for us.
         $all = $this->config->configRegistry->getAllProperties();
-        $modified = FALSE;
         foreach($all as $prop){
-            $post = "{$prop->getClass()}:{$prop->getName()}";
-            if(isset($_POST[$post])){
-                $prop->setValue(get_post($post));;
-            }
-        
-            $modified |= in_array($prop->getStatus(),array('modified','removed'));
+            $modified = in_array($prop->getStatus(),array('modified','removed'));
+            if($modified) break;
         }
        
         $smarty = get_smarty();
