@@ -2,8 +2,8 @@
 
 class configViewer extends plugin
 {
-    var $plHeadline= "Config viewer";
-    var $plDescription= "Allows to modify configuration values";
+    var $plHeadline= "Preferences";
+    var $plDescription= "Configure global and special GOsa settings like hooks and plugin parameters";
 
     var $configRegistry = NULL;    
     var $viewType = 'byClass';
