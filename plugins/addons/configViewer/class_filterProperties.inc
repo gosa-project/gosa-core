@@ -18,6 +18,7 @@ class filterCONFIGPROPERTIES {
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'value', $property->getValue());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'default', $property->getDefault());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'check', $property->getCheck());
+        $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'class', $property->getClass());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'type', $property->getType());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'migrate', $property->getMigrate());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'group', $property->getGroup());

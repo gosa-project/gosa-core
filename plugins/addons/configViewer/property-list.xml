@@ -46,7 +46,7 @@
   </definition>
 
   <table>
-    <layout>|20px;c|120px||||170px;r|</layout>
+    <layout>|20px;c|80px|100px|100px||60px;r|</layout>
 
     <column>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -56,7 +56,15 @@
       <label>Group</label>
       <sortAttribute>group</sortAttribute>
       <sortType>string</sortType>
-      <value>%{group}</value>
+      <value>%{filter:propertyGroup(group,description)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Class</label>
+      <sortAttribute>group</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:propertyClass(class,description)}</value>
       <export>true</export>
     </column>
 
@@ -64,7 +72,7 @@
       <label>Name</label>
       <sortAttribute>cn</sortAttribute>
       <sortType>string</sortType>
-      <value>%{cn}</value>
+      <value>%{filter:propertyName(cn,description)}</value>
       <export>true</export>
     </column>
 
@@ -72,15 +80,7 @@
       <label>Value</label>
       <sortAttribute>value</sortAttribute>
       <sortType>string</sortType>
-      <value>%{value}</value>
-      <export>true</export>
-    </column>
-
-    <column>
-      <label>Description</label>
-      <sortAttribute>description</sortAttribute>
-      <sortType>string</sortType>
-      <value>%{description}</value>
+      <value>%{filter:propertyValue(class,cn,value,type,default,description)}</value>
       <export>true</export>
     </column>
 
@@ -143,31 +143,14 @@
 
   </actionmenu>
 
-  <actiontriggers snapshot="true" copypaste="true">
-
-    <action>
-      <name>cp</name>
-      <type>copypaste</type>
-    </action>
-
-    <action>
-      <name>edit</name>
-      <type>entry</type>
-      <image>images/lists/edit.png</image>
-      <label>Edit sudo role</label>
-    </action>
-
-    <action>
-      <name>snapshot</name>
-      <type>snapshot</type>
-    </action>
+  <actiontriggers snapshot="false" copypaste="false">
 
     <action>
       <name>remove</name>
       <type>entry</type>
+      <objectclass>ldap</objectclass>
       <image>images/lists/trash.png</image>
-      <acl>sudo/sudo[d]</acl>
-      <label>Remove sudo role</label>
+      <label>Restore to default</label>
     </action>
 
   </actiontriggers>

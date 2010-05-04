@@ -25,7 +25,7 @@
   </search>
 
   <search>
-    <tag>default2</tag>
+    <tag>all</tag>
     <label>All properties</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>

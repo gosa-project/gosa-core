@@ -23,83 +23,53 @@ class configViewer extends management
 
         // Build headpage
         $headpage = new listing(get_template_path("property-list.xml", true));
+        $headpage->registerElementFilter("propertyName", "configViewer::propertyName");
+        $headpage->registerElementFilter("propertyGroup", "configViewer::propertyGroup");
+        $headpage->registerElementFilter("propertyClass", "configViewer::propertyClass");
+        $headpage->registerElementFilter("propertyValue", "configViewer::propertyValue");
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "property", $headpage);
     }
-}
 
-class configViewer_old extends plugin
-{
-
-    var $configRegistry = NULL;    
-    var $viewType = 'byClass';
-    var $viewTypes = array();
-
-    function __construct (&$config, $dn= NULL)
+    static function propertyGroup($group, $description = array())
     {
-        $this->config = &$config;
-        $this->configRegistry = &$config->configRegistry;
-        $this->viewTypes = array(
-                'byClass' => _("By class name"), 
-                'byName'  => _("By property name"), 
-                'byStatus'=> _("By status"), 
-                'byGroup' => _('By group'));
-
+        $title = _("No description");
+        if(!empty($description[0])) $title=$description[0];
+        return("<span title=\"{$title}\">{$group[0]}</span>");
+    }
+    static function propertyClass($class, $description = array())
+    {
+        global $config;
+        if(isset($config->configRegistry->classToName[$class[0]])){
+            $class = $config->configRegistry->classToName[$class[0]];
+        }else{
+            $class = $class[0];
+        }
+        $title = _("No description");
+        if(!empty($description[0])) $title=$description[0];
+        return("<span title=\"{$title}\">{$class}</span>");
+    }
+    static function propertyName($cn, $description = array())
+    {
+        $title = _("No description");
+        if(!empty($description[0])) $title=$description[0];
+        return("<span title=\"{$title}\">{$cn[0]}</span>");
+    }
+    static function propertyValue($class,$cn, $value,$type,$default,$description)
+    {
+        $name  = "{$class[0]}:{$cn[0]}";
+        $value = htmlentities($value[0], ENT_COMPAT , 'UTF-8');
+        $title = _("No description");
+        if(!empty($description[0])) $title=$description[0];
+        switch($type[0]){
+            case 'string':
+            case 'integer':
+                $res = "<input style='width:97%' title=\"{$title}\" type='text' value=\"{$value}\" name={$name}>";
+                break;
+            default: $res = ""; 
+        }
         
-        $this->propertyList = new sortableListing();
-        $this->propertyList->setDeleteable(false);
-        $this->propertyList->setEditable(false);
-        $this->propertyList->setWidth("100%");
-        $this->propertyList->setHeight("500px");
-        $this->propertyList->setHeader(array(_("Group"),_("Class"),_("Name"),_("Value"), _("Status")));
-        $this->propertyList->setDefaultSortColumn(0);
-        $this->propertyList->setAcl('rwcdm');
-    }
-
-    function execute()
-    {
-        $all = $this->configRegistry->getAllProperties();
-        $data = $lData = array();
-        foreach($all as $id => $p){
-            $value = htmlentities($p->getValue(), ENT_COMPAT, 'UTF-8');
-            $data[$id] = $p;
-
-
-            $status = $p->getStatus();
-            if($status == 'modified'){
-                $status = "<button name='save_{$p->getClass()}:{$p->getName()}'>".msgPool::saveButton()."</button>";
-                $status.= "<button name='reset_{$p->getClass()}:{$p->getName()}'>".("Reset")."</button>";
-            }
-            if($status == 'ldap'){
-                $status = "<button name='del_{$p->getClass()}:{$p->getName()}'>".msgPool::delButton()."</button>";
-            }
-
-            $lData[$id] = array('data' => array(
-                        $p->getGroup(),
-                        $this->configRegistry->classToName[$p->getClass()],
-                        $p->getName(),
-                        "<input type='text' value=\"{$value}\" name='{$p->getClass()}:{$p->getName()}'>",
-                        $status
-                        ));
-        }
-        $this->propertyList->setListData($data,$lData);
-        $this->propertyList->update();
-        $smarty = get_smarty();
-        $smarty->assign('content', $this->propertyList->render());
-        return($smarty->fetch(get_template_path('generic.tpl', TRUE)));
-    }
-
-    function save_object()
-    {
-        $all = $this->configRegistry->getAllProperties();
-        foreach($all as $id => $p){
-            if(isset($_POST[$p->getClass().":".$p->getName()])){
-                $val = get_post($p->getClass().":".$p->getName());
-                if($val != $p->getValue()){
-                    $p->setValue($val);
-                }
-            }
-        }
+        return($res);
     }
 }
 ?>
