@@ -24,7 +24,7 @@ class configViewer extends plugin
         $this->propertyList->setDeleteable(false);
         $this->propertyList->setEditable(false);
         $this->propertyList->setWidth("100%");
-        $this->propertyList->setHeight("600px");
+        $this->propertyList->setHeight("500px");
         $this->propertyList->setHeader(array(_("Group"),_("Class"),_("Name"),_("Value"), _("Status")));
         $this->propertyList->setDefaultSortColumn(0);
         $this->propertyList->setAcl('rwcdm');
@@ -35,12 +35,14 @@ class configViewer extends plugin
         $all = $this->configRegistry->getAllProperties();
         $data = $lData = array();
         foreach($all as $id => $p){
+
+            $value = htmlentities($p->getValue(), ENT_COMPAT, 'UTF-8');
             $data[$id] = $p;
             $lData[$id] = array('data' => array(
                         $p->getGroup(),
                         $this->configRegistry->classToName[$p->getClass()],
                         $p->getName(),
-                        $p->getValue(),
+                        "<input type='text' value=\"{$value}\" name='{$p->getClass()}:{$p->getName()}'>",
                         $p->getStatus()
                         ));
         }
