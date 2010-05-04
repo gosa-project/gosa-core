@@ -45,7 +45,7 @@ class configViewer extends plugin
                 $status.= "<button name='reset_{$p->getClass()}:{$p->getName()}'>".("Reset")."</button>";
             }
             if($status == 'ldap'){
-                $status = "<button name='del_{$p->getClass()}:{$p->getName()}'>".msgPool::saveButton()."</button>";
+                $status = "<button name='del_{$p->getClass()}:{$p->getName()}'>".msgPool::delButton()."</button>";
             }
 
             $lData[$id] = array('data' => array(
