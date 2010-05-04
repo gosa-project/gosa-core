@@ -15,7 +15,7 @@
     <label>Used properties</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
-      <filter>status=(ldap|file)§cn=$</filter>
+      <filter>status=(ldap|file|modified)§cn=$</filter>
     </query>
     <autocomplete>
       <attribute>status</attribute>
