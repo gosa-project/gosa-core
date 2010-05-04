@@ -165,6 +165,7 @@ class gosaProperty
     protected $check = "";
     protected $migrate = "";
     protected $mandatory = FALSE;
+    protected $group = "default";
     protected $parent = NULL;
     protected $data = array();
 
@@ -177,7 +178,7 @@ class gosaProperty
     protected $status = 'undefined';
 
     protected $attributes = array('name','type','default','description','check',
-            'migrate','mandatory');
+            'migrate','mandatory','group');
 
     function __construct($parent,$classname,$data)
     {
@@ -214,6 +215,7 @@ class gosaProperty
     function getValue() { return($this->value); }
     function getName() { return($this->name); }
     function getClass() { return($this->class); }
+    function getGroup() { return($this->group); }
     function getType() { return($this->type); }
     function getDescription() { return($this->description); }
     function getDefault() { return($this->default); }
