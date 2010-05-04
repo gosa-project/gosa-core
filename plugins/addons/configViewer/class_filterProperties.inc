@@ -9,6 +9,7 @@ class filterCONFIGPROPERTIES {
     $all = $config->configRegistry->getAllProperties();
     $ret = array();
     foreach($all as $property){
+
         $entry = array();
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'cn', $property->getName());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'objectClass', $property->getStatus());
@@ -21,7 +22,20 @@ class filterCONFIGPROPERTIES {
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'migrate', $property->getMigrate());
         $entry = filterCONFIGPROPERTIES::fakeLdapResult($entry, 'group', $property->getGroup());
         $entry['dn'] = $property->getName();
-        $ret[] = $entry; 
+
+        $found =TRUE;
+        if(!empty($filter)){
+            $tests = preg_split("/§/", $filter);
+            foreach($tests as $test){
+                list($name,$value) = preg_split("/=/",$test);
+                $value =preg_replace("/\*/",'',$value);
+                if(empty($value)) $value='.*';
+                if(!isset($entry[$name][0]) || !preg_match("/{$value}/",$entry[$name][0])){
+                    $found = false;
+                }
+            } 
+        }
+       if($found) $ret[] = $entry; 
     }
 
     return($ret);

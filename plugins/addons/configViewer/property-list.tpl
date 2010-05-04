@@ -5,9 +5,6 @@
    <div class="mainlist-nav">
     <table summary="{$HEADLINE}">
      <tr>
-      <td>{$ROOT}</td>
-      <td>{$BACK}</td>
-      <td>{$HOME}</td>
       <td>{$RELOAD}</td>
       <td class="left-border">{$ACTIONS}</td>
       <td class="left-border">{$FILTER}</td>
@@ -15,10 +12,7 @@
     </table>
    </div>
   </div>
-
   {$LIST}
 </div>
 
 <div class="clear"></div>
-
-<input type="hidden" name="ignore">

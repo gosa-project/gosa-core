@@ -12,11 +12,35 @@
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
-      <label>Property</label>
-      <objectClass>none</objectClass>
+      <label>Property not used</label>
+      <objectClass>undefined</objectClass>
       <category>all</category>
       <class>all</class>
-      <image>plugins/sudo/images/select_sudo.png</image>
+      <image>images/lists/element.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Modified property</label>
+      <objectClass>modified</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>plugins/configViewer/images/ldap.png[new]</image>
+    </objectType>
+
+    <objectType>
+      <label>Property configured in ldap</label>
+      <objectClass>ldap</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>plugins/configViewer/images/ldap.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Property configured in config file</label>
+      <objectClass>file</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>plugins/configViewer/images/file.png</image>
     </objectType>
 
   </definition>
@@ -41,6 +65,14 @@
       <sortAttribute>cn</sortAttribute>
       <sortType>string</sortType>
       <value>%{cn}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Value</label>
+      <sortAttribute>value</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{value}</value>
       <export>true</export>
     </column>
 

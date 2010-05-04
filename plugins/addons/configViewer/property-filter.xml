@@ -12,13 +12,13 @@
 
   <search>
     <tag>default</tag>
-    <label>Default filter</label>
+    <label>Used properties</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
-      <filter>state=*</filter>
+      <filter>status=(ldap|file)§cn=$</filter>
     </query>
     <autocomplete>
-      <attribute>state</attribute>
+      <attribute>status</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
@@ -26,13 +26,13 @@
 
   <search>
     <tag>default2</tag>
-    <label>Default filter2</label>
+    <label>All properties</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
-      <filter>state=modified</filter>
+      <filter>cn=$</filter>
     </query>
     <autocomplete>
-      <attribute>state</attribute>
+      <attribute>status</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
