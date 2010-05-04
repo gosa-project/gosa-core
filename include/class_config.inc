@@ -86,7 +86,7 @@ class config  {
     }
 
     // Load configuration registry
-    $this->configRegistry = new configRegistry();
+    $this->configRegistry = new configRegistry($this);
   }
 
 
@@ -1077,11 +1077,6 @@ class config  {
    */
   function get_cfg_value($name, $default= "") 
   {
-      if($this->configRegistry->propertyExists($name)){
-          return($this->configRegistry->getPropertyValue($name));
-      }
-
-
     $name= strtoupper($name);
 
     /* Check if we have a current value for $name */
