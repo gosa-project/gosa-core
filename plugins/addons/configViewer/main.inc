@@ -23,13 +23,19 @@
 */
 if ($remove_lock){
     if(session::is_set('configViewer')){
-        // Nothing to unlock here
+        $configViewer = session::get('configViewer');   
+        $configViewer->save_object();
     }
 }
+
 
 /* Remove this plugin from session
  */
 if ( $cleanup ){
+    if (session::is_set('configViewer')){
+        $configViewer = session::get('configViewer');   
+        $configViewer->save_object();
+    }
     session::un_set('configViewer');
 }else{
 

@@ -35,15 +35,25 @@ class configViewer extends plugin
         $all = $this->configRegistry->getAllProperties();
         $data = $lData = array();
         foreach($all as $id => $p){
-
             $value = htmlentities($p->getValue(), ENT_COMPAT, 'UTF-8');
             $data[$id] = $p;
+
+
+            $status = $p->getStatus();
+            if($status == 'modified'){
+                $status = "<button name='save_{$p->getClass()}:{$p->getName()}'>".msgPool::saveButton()."</button>";
+                $status.= "<button name='reset_{$p->getClass()}:{$p->getName()}'>".("Reset")."</button>";
+            }
+            if($status == 'ldap'){
+                $status = "<button name='del_{$p->getClass()}:{$p->getName()}'>".msgPool::saveButton()."</button>";
+            }
+
             $lData[$id] = array('data' => array(
                         $p->getGroup(),
                         $this->configRegistry->classToName[$p->getClass()],
                         $p->getName(),
                         "<input type='text' value=\"{$value}\" name='{$p->getClass()}:{$p->getName()}'>",
-                        $p->getStatus()
+                        $status
                         ));
         }
         $this->propertyList->setListData($data,$lData);
@@ -51,6 +61,19 @@ class configViewer extends plugin
         $smarty = get_smarty();
         $smarty->assign('content', $this->propertyList->render());
         return($smarty->fetch(get_template_path('generic.tpl', TRUE)));
+    }
+
+    function save_object()
+    {
+        $all = $this->configRegistry->getAllProperties();
+        foreach($all as $id => $p){
+            if(isset($_POST[$p->getClass().":".$p->getName()])){
+                $val = get_post($p->getClass().":".$p->getName());
+                if($val != $p->getValue()){
+                    $p->setValue($val);
+                }
+            }
+        }
     }
 }
 ?>
