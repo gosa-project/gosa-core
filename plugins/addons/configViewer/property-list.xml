@@ -102,31 +102,6 @@
   <actionmenu>
 
     <action>
-     <type>sub</type>
-     <image>images/lists/element.png[new]</image>
-     <label>Create</label>
-
-     <action>
-      <name>new</name>
-      <type>entry</type>
-      <image>plugins/sudo/images/select_sudo.png[new]</image>
-      <label>Role</label>
-     </action>
-
-     <action>
-      <name>new_default</name>
-      <type>entry</type>
-      <image>plugins/sudo/images/select_sudo.png</image>
-      <label>Default</label>
-     </action>
-
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
       <name>remove</name>
       <type>entry</type>
       <image>images/lists/trash.png</image>
@@ -135,18 +110,6 @@
 
     <action>
       <type>exporter</type>
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
-      <type>copypaste</type>
-    </action>
-
-    <action>
-      <type>snapshot</type>
     </action>
 
   </actionmenu>
