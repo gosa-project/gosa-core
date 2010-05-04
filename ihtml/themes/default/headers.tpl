@@ -12,6 +12,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
 
     <style type="text/css">@import url('themes/default/style.css');</style>
     <link rel="stylesheet" type="text/css" href="themes/default/printer.css" media="print">
