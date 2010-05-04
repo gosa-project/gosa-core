@@ -37,7 +37,7 @@ class configViewer extends management
     /*! \brief  Execute this plugin
      *          Handle actions/events, locking, snapshots, dialogs, tabs,...
      */
-    function execute()
+    function renderList()
     {
         // Walk trough all properties and check if there posts for us.
         $all = $this->config->configRegistry->getAllProperties();
@@ -53,7 +53,7 @@ class configViewer extends management
        
         $smarty = get_smarty();
         $smarty->assign('is_modified', $modified);
-        return(management::execute());
+        return(management::renderList());
     }
 
 

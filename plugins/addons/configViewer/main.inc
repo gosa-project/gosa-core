@@ -23,6 +23,7 @@
 */
 if ($remove_lock){
     if(session::is_set('configViewer')){
+        $config->configRegistry->reload($force=TRUE);
     }
 }
 
