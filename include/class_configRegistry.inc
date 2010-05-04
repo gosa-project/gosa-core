@@ -111,6 +111,11 @@ class configRegistry{
         $this->mapPropertyToClass[$id] = $class;
     }
 
+    public function getAllProperties()
+    {
+        return($this->properties);
+    }
+
     function propertyExists($class,$name)
     {
         return(isset($this->mapByName[$class][$name]));
@@ -208,6 +213,7 @@ class gosaProperty
 
     function getValue() { return($this->value); }
     function getName() { return($this->name); }
+    function getClass() { return($this->class); }
     function getType() { return($this->type); }
     function getDescription() { return($this->description); }
     function getDefault() { return($this->default); }
