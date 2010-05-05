@@ -31,6 +31,16 @@ class core extends plugin {
                     "plProperties"  => array(
 
                         array(
+                            "name"          => "htaccessAuthentication",
+                            "type"          => "string",
+                            "default"       => "",
+                            "description"   => "",
+                            "check"         => "",
+                            "migrate"       => "",
+                            "group"         => "core",
+                            "mandatory"     => FALSE),
+
+                        array(
                             "name"          => "logging",
                             "type"          => "string",
                             "default"       => "",
@@ -159,6 +169,18 @@ class core extends plugin {
                                 "migrate"       => "",
                                 "group"         => "core",
                                 "mandatory"     => FALSE),
+
+
+                        array(
+                                "name"          => "ignoreAcl",
+                                "type"          => "string",
+                                "default"       => "",
+                                "description"   => "",
+                                "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => FALSE),
+
 
                         array(
                                 "name"          => "ppdPath",
@@ -660,6 +682,15 @@ class core extends plugin {
                                 "group"         => "core",
                                 "mandatory"     => FALSE),
 
+                        array(
+                                "name"          => "iePngWorkaround",
+                                "type"          => "string",
+                                "default"       => "",
+                                "description"   => "",
+                                "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => FALSE),
                         array(
                                 "name"          => "snapshotURI",
                                 "type"          => "string",
