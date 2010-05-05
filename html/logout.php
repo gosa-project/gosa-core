@@ -65,7 +65,7 @@ textdomain($domain);
 /* Create smarty & Set template compile directory */
 $smarty= new smarty();
 if (isset($config)){
-	$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa/');
+	$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa/');
 } else {
 	$smarty->compile_dir= '/var/spool/gosa/';
 }
