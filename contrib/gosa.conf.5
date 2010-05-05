@@ -1072,7 +1072,7 @@ If you don't have mkntpasswd from the samba distribution installed, you can use
 perl to generate the hash:
 
 .nf
-perl -MCrypt::SmbHash -e "print join(q[:], ntlmgen \\$ARGV[0]), $/;"
+perl \-MCrypt::SmbHash \-e "print join(q[:], ntlmgen \\$ARGV[0]), $/;"
 .if
 .PP
 
