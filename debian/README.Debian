@@ -33,7 +33,7 @@ running as a different user on different port for GOsa exclusively. Or use
 apache2-mpm-itk and assign a different user to a virtual host.
 
 
-* Generic informations
+* Generic information
 
 Getting GOsa running itself is not very complicated. Problems normally
 arise when integrating it in various services.
