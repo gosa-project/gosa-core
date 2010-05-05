@@ -208,8 +208,15 @@ class gosaProperty
             if(isset($data[$aName])){
                 $this->$aName = $data[$aName];
             }
-        }       
+        }      
 
+        // Initialize with the current value
+        $this->_restoreCurrentValue(); 
+    }
+
+    private function _restoreCurrentValue()
+    {
+    
         // First check for values in the LDAP Database.
         if(isset($this->parent->ldapStoredProperties[$this->class][$this->name])){
             $this->setStatus('ldap');
@@ -250,7 +257,11 @@ class gosaProperty
 
     function restoreDefault() 
     {
-        $this->setStatus('removed'); 
+        if(in_array($this->getStatus(),array('ldap'))){
+            $this->setStatus('removed'); 
+        }elseif(in_array($this->getStatus(),array('modified'))){
+            $this->_restoreCurrentValue();
+        }
     }
 
     function save()
@@ -301,7 +312,7 @@ class gosaProperty
             $dn = "cn={$this->class},".$this->parent->config->current['CONFIG'];
             $ldap->cat($dn);
             $attrs = $ldap->fetch();
-            $data = array();
+            $data = array('gosaSetting' => array());
             for($i = 0;$i<$attrs['gosaSetting']['count']; $i ++){
                 $set = $attrs['gosaSetting'][$i];
                 if(preg_match("/^{$this->name}:/", $set)){
@@ -312,19 +323,7 @@ class gosaProperty
             $ldap->cd($dn);
             $ldap->modify($data);
             if($ldap->success()){
-                $this->status = 'undefined';
-
-                // Second check for values in the config file.
-                if(isset($this->parent->fileStoredProperties[$this->class][$this->name])){
-                    $this->setStatus('file');
-                    $this->value = $this->parent->fileStoredProperties[$this->class][$this->name];
-                }
-
-                // If there still wasn't found anything then fallback to the default.
-                if($this->getStatus() == 'undefined'){
-                    $this->value = $this->getDefault();
-                }
-
+                $this->_restoreCurrentValue();
             }else{
                 echo $ldap->get_error();
             }

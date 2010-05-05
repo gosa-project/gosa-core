@@ -351,16 +351,6 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
-                                "name"          => "sudoRDN",
-                                "type"          => "string",
-                                "default"       => "",
-                                "description"   => "",
-                                "check"         => "",
-                                "migrate"       => "",
-                                "group"         => "core",
-                                "mandatory"     => FALSE),
-
-                        array(
                                 "name"          => "gosaSupportURI",
                                 "type"          => "string",
                                 "default"       => "",
