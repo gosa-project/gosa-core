@@ -14,7 +14,7 @@ function smarty_block_render($params, $text, &$smarty)
 	}
 
 	/* Debug output */
-	if (session::is_set('DEBUGLEVEL') && session::get('DEBUGLEVEL') & DEBUG_ACL ){
+	if (session::is_set('debugLevel') && session::get('debugLevel') & DEBUG_ACL ){
 		echo "<font color='blue' size='2'>&nbsp;".$acl."</font>";
 	}
 
