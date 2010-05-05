@@ -67,7 +67,7 @@ $config->check_and_reload();
 $config->configRegistry->reload();
 
 /* Enable compressed output */
-if ($config->get_cfg_value("sendCompressedOutput") == "true"){
+if ($config->get_cfg_value("core","sendCompressedOutput") == "true"){
   ob_start("ob_gzhandler");
 }
 
@@ -77,7 +77,7 @@ if(session::global_get('_LAST_PAGE_REQUEST') == ""){
 }else{
 
   /* check GOsa.conf for defined session lifetime */
-  $max_life= $config->get_cfg_value("sessionLifetime", 60*60*2);
+  $max_life= $config->get_cfg_value("core","sessionLifetime", 60*60*2);
 
   /* get time difference between last page reload */
   $request_time = (time()- session::global_get('_LAST_PAGE_REQUEST'));
@@ -98,7 +98,7 @@ if(session::global_get('_LAST_PAGE_REQUEST') == ""){
 @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 
 /* Set template compile directory */
-$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa');
+$smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory", '/var/spool/gosa');
 $smarty->error_unassigned= true;
 
 /* Set default */
@@ -166,7 +166,7 @@ if (!session::global_is_set('plist')){
 $plist= session::global_get('plist');
 
 /* Check for register globals */
-if (isset($global_check) && $config->get_cfg_value("forceglobals") == "true"){
+if (isset($global_check) && $config->get_cfg_value("core","forceglobals") == "true"){
   msg_dialog::display(
             _("PHP configuration"),
             _("FATAL: Register globals is active. Please fix this in order to continue."),
@@ -309,7 +309,7 @@ if($reload_navigation){
 $smarty->assign ("menu", $plist->gen_menu());
 $smarty->assign ("plug", "$plug");
 
-$smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
+$smarty->assign("iePngWorkaround", $config->get_cfg_value("core","iePngWorkaround","false" ) == "true");
 
 
 /* React on clicks */
@@ -336,7 +336,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 /* check if we are using account expiration */
-if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
+if ($config->get_cfg_value("core","handleExpiredAccounts") == "true"){
   $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
   if ($expired == 2){
@@ -429,7 +429,7 @@ if(isset($_COOKIE['GOsa_Filter_Settings'])){
 }
 
 /* Save filters? */
-if($config->get_cfg_value("storeFilterSettings") == "true"){
+if($config->get_cfg_value("core","storeFilterSettings") == "true"){
   $cookie_vars = array("MultiDialogFilters","CurrentMainBase");
   foreach($cookie_vars as $var){
     if(session::global_is_set($var)){
