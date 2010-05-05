@@ -60,7 +60,7 @@ bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
-$smarty->compile_dir= $config->get_cfg_value("compile", "/var/spool/gosa/");
+$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", "/var/spool/gosa/");
 $smarty->assign("title", "GOsa - "._("Help browser"));
 
 /* HELP management starts here ...
