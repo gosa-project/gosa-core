@@ -1082,6 +1082,8 @@ class config  {
         return($this->configRegistry->getPropertyValue('core',$name));
     }
 
+    syslog(1, $name);    
+
     $name= strtoupper($name);
 
     /* Check if we have a current value for $name */
