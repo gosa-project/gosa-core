@@ -37,7 +37,7 @@ function displayLogin()
     error_reporting(E_ALL | E_STRICT);
 
     /* Check theme compatibility */
-    $theme= $config->get_cfg_value('theme', 'default');
+    $theme= $config->get_cfg_value("core",'theme', 'default');
     if (file_exists("$BASE_DIR/ihtml/themes/$theme/blacklist")) {
         $blocks= file("$BASE_DIR/ihtml/themes/$theme/blacklist");
         foreach ($blocks as $block) {
@@ -68,7 +68,7 @@ function displayLogin()
     $smarty->assign("message", $message);
 
     /* Displasy SSL mode warning? */
-    if ($ssl != "" && $config->get_cfg_value('warnSSL') == 'true') {
+    if ($ssl != "" && $config->get_cfg_value("core",'warnSSL') == 'true') {
         $smarty->assign("ssl", sprintf(_("This session is not ecrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">".bold(_("here"))."</a>"));
     } else {
         $smarty->assign("ssl", "");
@@ -104,7 +104,7 @@ function displayLogin()
         $smarty->assign("php_errors", "");
     }
     $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
-    $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
+    $smarty->assign("iePngWorkaround", $config->get_cfg_value("core","iePngWorkaround","false" ) == "true");
 
     $smarty->display (get_template_path('headers.tpl'));
     $smarty->assign("version",get_gosa_version());
@@ -161,18 +161,18 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)) {
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-session::global_set('debugLevel',$config->get_cfg_value('debugLevel'));
+session::global_set('debugLevel',$config->get_cfg_value("core",'debugLevel'));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 }
 
 /* Enable compressed output */
-if ($config->get_cfg_value("sendCompressedOutput") != "") {
+if ($config->get_cfg_value("core","sendCompressedOutput") != "") {
     ob_start("ob_gzhandler");
 }
 
 /* Set template compile directory */
-$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa');
+$smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory", '/var/spool/gosa');
 $smarty->error_unassigned= true;
 
 /* Check for compile directory */
@@ -219,14 +219,14 @@ if (!isset($_SERVER['HTTPS']) ||
     }
 
 /* If SSL is forced, just forward to the SSL enabled site */
-if ($config->get_cfg_value("forceSSL") == 'true' && $ssl != '') {
+if ($config->get_cfg_value("core","forceSSL") == 'true' && $ssl != '') {
     header ("Location: $ssl");
     exit;
 }
 
 /* Do we have htaccess authentification enabled? */
 $htaccess_authenticated= FALSE;
-if ($config->get_cfg_value("htaccessAuthentication") == "true" ) {
+if ($config->get_cfg_value("core","htaccessAuthentication") == "true" ) {
     if (!isset($_SERVER['REMOTE_USER'])) {
         msg_dialog::display(_("Configuration error"), _("Broken HTTP authentication setup!"), FATAL_ERROR_DIALOG);
         exit;
@@ -272,9 +272,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     }
 
     /* Check for schema file presence */
-    if ($config->get_cfg_value("schemaCheck") == "true") {
-        $recursive = ($config->get_cfg_value("ldapFollowReferrals") == "true");
-        $tls =       ($config->get_cfg_value("ldapTLS") == "true");
+    if ($config->get_cfg_value("core","schemaCheck") == "true") {
+        $recursive = ($config->get_cfg_value("core","ldapFollowReferrals") == "true");
+        $tls =       ($config->get_cfg_value("core","ldapTLS") == "true");
 
         if(!count($ldap->get_objectclasses())) {
             msg_dialog::display(_("LDAP error"), _("Cannot obtain information about the available LDAP schema!"), ERROR_DIALOG);
@@ -286,7 +286,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $cfg['password']  = $config->current['ADMINPASSWORD'];
             $cfg['connection']= $config->current['SERVER'];
             $cfg['tls']       = $tls;
-            $str = check_schema($cfg, $config->get_cfg_value("rfc2307bis") == "true");
+            $str = check_schema($cfg, $config->get_cfg_value("core","rfc2307bis") == "true");
             $checkarr = array();
             foreach($str as $tr) {
                 if(isset($tr['IS_MUST_HAVE']) && !$tr['STATUS']) {
@@ -299,11 +299,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     }
 
     /* Check for locking area */
-    $ldap->cat($config->get_cfg_value("config"), array("dn"));
+    $ldap->cat($config->get_cfg_value("core","config"), array("dn"));
     $attrs= $ldap->fetch();
     if (!count ($attrs)) {
         $ldap->cd($config->current['BASE']);
-        $ldap->create_missing_trees($config->get_cfg_value("config"));
+        $ldap->create_missing_trees($config->get_cfg_value("core","config"));
     }
 
     /* Check for valid input */
@@ -352,7 +352,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             session::global_set('config',$config);
 
             /* Restore filter settings from cookie, if available */
-            if($config->get_cfg_value("storeFilterSettings") == "true") {
+            if($config->get_cfg_value("core","storeFilterSettings") == "true") {
 
                 if(isset($_COOKIE['GOsa_Filter_Settings']) || isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])) {
 
@@ -377,7 +377,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             }
 
             /* are we using accountexpiration */
-            if ($config->get_cfg_value("handleExpiredAccounts") == "true") {
+            if ($config->get_cfg_value("core","handleExpiredAccounts") == "true") {
                 $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
                 if ($expired == 1) {
