@@ -1,4 +1,4 @@
-<script language="javascript" src="include/tooltip-v0.2.js" type="text/javascript"></script>
+<script language="javascript" src="include/tooltip.js" type="text/javascript"></script>
 
 <div id="mainlist">
 
@@ -23,7 +23,9 @@
       return node.getAttribute('title');
     }).each(function(node){
         var test = node.title;
-      new Tooltip(node,test);
+      var t = new Tooltip(node,test);
+      t.options.delta_x = -150;
+      t.options.delta_y = -50;
       node.removeAttribute("title");
     });
   });

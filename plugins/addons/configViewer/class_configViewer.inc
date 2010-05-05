@@ -118,7 +118,7 @@ class configViewer extends management
         $title = _("No description");
         if(isset($description[0])) $title = htmlentities($description[0],ENT_COMPAT, 'UTF-8');
         $title = preg_replace("/\n/", "<br>", $title);
-        $tooltip = "<div id='tooltip_{$id}' class='tooltip'>".$title."</div>";
+        $tooltip = "<div id='tooltip_{$id}' class='tooltip' style='display:none'>".$title."</div>";
         return($tooltip."<span title='tooltip_{$id}'>{$cn[0]}</span>");
     }
     static function propertyValue($class,$cn,$value,$type,$default,$defaults)
