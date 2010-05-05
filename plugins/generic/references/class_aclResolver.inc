@@ -33,7 +33,6 @@ class aclResolver
             $tmp= session::global_get('plist');
             $plist= $tmp->info;
             $map = array();
-            $map['all']= _("All categories");
             foreach($plist as $class => $plInfo){
                 if(isset($plInfo['plCategory']) && is_array($plInfo['plCategory'])){
                     foreach($plInfo['plCategory'] as $category => $desc){

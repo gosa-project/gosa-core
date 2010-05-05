@@ -127,8 +127,6 @@ class aclrole extends acl
         }
       }
     }
-    $this->aclObjects['all']= '*&nbsp;'._("All categories");
-    $this->ocMapping['all']= array('0' => 'all');
 
     /* Sort categories */
     asort($this->aclObjects);
@@ -446,9 +444,6 @@ class aclrole extends acl
           continue;
         }
         $aclObjects[$this->aclObject.'/'.$class]= $plist[$class]['plDescription'];
-      }
-      if ($this->aclObject == 'all'){
-        $aclObjects['all']= _("All objects in current subtree");
       }
       $smarty->assign('aclSelector', $this->buildAclSelector($aclObjects));
     }
