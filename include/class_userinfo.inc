@@ -77,7 +77,7 @@ class userinfo
     $this->uid= $attrs['uid'][0];
     $this->ip= $_SERVER['REMOTE_ADDR'];
 
-    $this->ignoreACL = ($this->config->get_cfg_value("ignoreAcl") == $this->dn);
+    $this->ignoreACL = ($this->config->get_cfg_value("core","ignoreAcl") == $this->dn);
 
     /* Initialize ACL_CACHE */
     $this->reset_acl_cache();
@@ -370,7 +370,7 @@ class userinfo
       $aclCategory = $object;
     }
 
-    if($this->config->get_cfg_value("displayErrors") == "true"){
+    if($this->config->get_cfg_value("core","displayErrors") == "true"){
         if(!isset($this->ocMapping[$aclCategory])){
             trigger_error("Invalid ACL category '".$aclCategory."'! ({$object})");
             return("");
@@ -744,7 +744,7 @@ class userinfo
             }
           }
         }else{
-            if($this->config->get_cfg_value("displayErrors") == "true"){
+            if($this->config->get_cfg_value("core","displayErrors") == "true"){
                 trigger_error("Invalid type of category ".$category);
             }
           $acl = "";
