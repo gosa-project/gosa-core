@@ -69,7 +69,7 @@ class userManagement extends management
     if ($this->config->boolValueIsTrue("main", "copyPaste")){
       $this->cpHandler = new CopyPasteHandler($this->config);
     }
-    if($this->config->get_cfg_value("enableSnapshots") == "true"){
+    if($this->config->get_cfg_value("core","enableSnapshots") == "true"){
       $this->snapHandler = new SnapshotHandler($this->config);
     }
 
@@ -267,8 +267,8 @@ class userManagement extends management
           return($smarty->fetch(get_template_path('password.tpl', TRUE)));
         }
       }
-      if ($this->config->get_cfg_value("passwordHook") != ""){
-        exec($this->config->get_cfg_value("passwordHook")." ".$username." ".$_POST['new_password'], $resarr);
+      if ($this->config->get_cfg_value("core","passwordHook") != ""){
+        exec($this->config->get_cfg_value("core","passwordHook")." ".$username." ".$_POST['new_password'], $resarr);
       }
       new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
       $this->dn ="";
@@ -472,8 +472,8 @@ class userManagement extends management
 
         // Preset uid field by using the idGenerator 
         $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
-        if ($this->config->get_cfg_value("idGenerator") != ""){
-          $uids= gen_uids ($this->config->get_cfg_value("idGenerator"), $attributes);
+        if ($this->config->get_cfg_value("core","idGenerator") != ""){
+          $uids= gen_uids ($this->config->get_cfg_value("core","idGenerator"), $attributes);
           if (count($uids)){
             $smarty->assign("edit_uid", "false");
             $smarty->assign("uids", $uids);
