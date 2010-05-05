@@ -1527,7 +1527,8 @@ class plugin
   static function callHook($plugin, $cmd, $addAttrs= array())
   {
     global $config;
-    $command= $config->search(get_class($plugin), $cmd,array('menu','tabs'));
+    $command = $config->configRegistry->getPropertyValue(get_class($plugin),$cmd);
+    
     if ($command != ""){
 
       // Walk trough attributes list and add the plugins attributes. 

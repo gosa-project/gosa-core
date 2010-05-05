@@ -128,6 +128,10 @@ class configRegistry{
 
     function propertyExists($class,$name)
     {
+        if(!isset($this->mapByName[$class][$name])){
+        print_a(array($class,$name));
+
+        }
         return(isset($this->mapByName[$class][$name]));
     }
 
