@@ -44,7 +44,7 @@ class password extends plugin
     $smarty->assign("NotAllowed" , !preg_match("/w/i",$password_ACLS));
 
     /* Display expiration template */
-    if ($this->config->get_cfg_value("handleExpiredAccounts") == "true"){
+    if ($this->config->get_cfg_value("core","handleExpiredAccounts") == "true"){
       $expired= ldap_expired_account($this->config, $ui->dn, $ui->username);
       if($expired == 4){
         return($smarty->fetch(get_template_path("nochange.tpl", TRUE)));
@@ -55,16 +55,16 @@ class password extends plugin
     if (isset($_POST['password_finish'])){
 
       /* Should we check different characters in new password */
-      $check_differ = $this->config->get_cfg_value("passwordMinDiffer") != "";
-      $differ       = $this->config->get_cfg_value("passwordMinDiffer", 0);
+      $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
+      $differ       = $this->config->get_cfg_value("core","passwordMinDiffer", 0);
 
       /* Enable length check ? */
-      $check_length = $this->config->get_cfg_value("passwordMinLength") != "";
-      $length       = $this->config->get_cfg_value("passwordMinLength", 0);
+      $check_length = $this->config->get_cfg_value("core","passwordMinLength") != "";
+      $length       = $this->config->get_cfg_value("core","passwordMinLength", 0);
 
       /* Call external password quality hook ?*/
-      $check_hook   = $this->config->get_cfg_value("passwordHook") != "";
-      $hook         = $this->config->get_cfg_value("passwordHook")." ".$ui->username." ".$_POST['current_password']." ".$_POST['new_password'];
+      $check_hook   = $this->config->get_cfg_value("core","passwordHook") != "";
+      $hook         = $this->config->get_cfg_value("core","passwordHook")." ".$ui->username." ".$_POST['current_password']." ".$_POST['new_password'];
       if($check_hook){
         exec($hook,$resarr);
         $check_hook_output = "";
@@ -102,8 +102,8 @@ class password extends plugin
             $ui->dn, 
             $_POST['current_password'],
             $this->config->current['SERVER'],
-            $this->config->get_cfg_value("ldapFollowReferrals") == "true",
-            $this->config->get_cfg_value("ldapTLS") == "true");
+            $this->config->get_cfg_value("core","ldapFollowReferrals") == "true",
+            $this->config->get_cfg_value("core","ldapTLS") == "true");
 
         /* connection Successfull ? */
         if (!$tldap->success()){
