@@ -9,6 +9,7 @@ Standards-Version: 3.8.4
 Homepage: https://oss.gonicus.de/labs/gosa/
 Vcs-Browser: https://oss.gonicus.de/repositories/gosa/trunk
 Vcs-Svn: https://oss.gonicus.de/repositories/gosa/trunk
+DM-Upload-Allowed: yes
 
 Package: gosa
 Architecture: all
