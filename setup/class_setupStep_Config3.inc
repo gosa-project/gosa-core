@@ -34,15 +34,15 @@ class Step_Config3 extends setup_step
               "strict_units" => false,
               "list_summary" => true,
               "forceglobals" => true,
-              "forcessl" => false,
+              "forceSSL" => false,
               "ldapstats" => false,
-              "warnssl" => true,
+              "warnSSL" => true,
               "user_filter_cookie" => true,
               "ppd_path" => "/var/spool/ppd/",
               "ppd_path_active" => FALSE,
-              "compile" =>  "/var/spool/gosa",
+              "templateCompileDirectory" =>  "/var/spool/gosa",
               "snmpcommunity" =>  "goto",
-              "debuglevel" => 0,
+              "debugLevel" => 0,
               "session_lifetime" => 7200,
               "max_ldap_query_time" => "5.0",
               "max_ldap_query_time_active" => FALSE,
@@ -115,7 +115,7 @@ class Step_Config3 extends setup_step
         }
       }
       
-      foreach(array("login_attribute","list_summary","strict_units","snmpcommunity","noprimarygroup","forceglobals","forcessl","ldapstats","user_filter_cookie","warnssl","compile","debuglevel","session_lifetime") as $name){
+      foreach(array("login_attribute","list_summary","strict_units","snmpcommunity","noprimarygroup","forceglobals","forceSSL","ldapstats","user_filter_cookie","warnSSL","templateCompileDirectory","debugLevel","session_lifetime") as $name){
         if(isset($_POST[$name])){
           $this->optional[$name] = get_post($name);
         }
