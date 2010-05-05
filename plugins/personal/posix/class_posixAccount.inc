@@ -680,7 +680,7 @@ class posixAccount extends plugin
       if ($ldap->count() == 0){
 
         $groupcn = $this->uid;
-        $pri_attr = $this->config->get_cfg_value("accountPrimaryAttribute");
+        $pri_attr = $this->config->get_cfg_value("core","accountPrimaryAttribute");
         $groupdn= preg_replace ('/^'.preg_quote($pri_attr,'/').'=[^,]+,'.preg_quote(get_people_ou(),'/').'/i',
             'cn='.$groupcn.','.get_groups_ou(), $this->dn);
 
@@ -867,15 +867,15 @@ class posixAccount extends plugin
       if (!tests::is_id($this->uidNumber)){
         $message[]= msgPool::invalid(_("UID"), $this->uidNumber, "/[0-9]/");
       } else {
-        if ($this->uidNumber < $this->config->get_cfg_value("minId")){
-          $message[]= msgPool::toosmall(_("UID"), $this->config->get_cfg_value("minId"));
+        if ($this->uidNumber < $this->config->get_cfg_value("core","minId")){
+          $message[]= msgPool::toosmall(_("UID"), $this->config->get_cfg_value("core","minId"));
         }
       }
       if (!tests::is_id($this->gidNumber)){
         $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
-        if ($this->gidNumber < $this->config->get_cfg_value("minId")){
-          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minId"));
+        if ($this->gidNumber < $this->config->get_cfg_value("core","minId")){
+          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("core","minId"));
         }
       }
     }
