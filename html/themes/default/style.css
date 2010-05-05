@@ -159,6 +159,13 @@ input[type=submit].img{
   cursor:pointer;
 }
 
+div.tooltip{
+  padding: 5px;
+  width: 500px;
+  border: 1px solid #000;
+  background-color: #F0F0F0;
+}
+
 div.img{
   display:inline-block;
   display:-moz-inline-block;

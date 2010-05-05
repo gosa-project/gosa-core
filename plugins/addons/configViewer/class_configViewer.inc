@@ -52,6 +52,9 @@ class configViewer extends management
     {
         // Walk trough all properties and check if there posts for us.
         $all = $this->config->configRegistry->getAllProperties();
+
+        $htmlTooltips = "";
+        $jsTooltips = "";
         foreach($all as $prop){
             $modified = in_array($prop->getStatus(),array('modified','removed'));
             if($modified) break;
@@ -59,6 +62,8 @@ class configViewer extends management
        
         $smarty = get_smarty();
         $smarty->assign('is_modified', $modified);
+        $smarty->assign('htmlTooltips', $htmlTooltips);
+        $smarty->assign('jsTooltips', $jsTooltips);
         return(management::renderList());
     }
 
@@ -94,9 +99,7 @@ class configViewer extends management
 
     static function propertyGroup($group, $description = array())
     {
-        $title = _("No description");
-        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
-        return("<span title=\"{$title}\">{$group[0]}</span>");
+        return($group[0]);
     }
     static function propertyClass($class, $description = array())
     {
@@ -106,26 +109,26 @@ class configViewer extends management
         }else{
             $class = $class[0];
         }
-        $title = _("No description");
-        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
-        return("<span title=\"{$title}\">{$class}</span>");
+        return($class);
     }
-    static function propertyName($cn, $description = array())
+    static function propertyName($class,$cn, $description = array())
     {
+        $id = "{$class[0]}_{$cn[0]}";
+
         $title = _("No description");
-        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
-        return("<span title=\"{$title}\">{$cn[0]}</span>");
+        if(isset($description[0])) $title = htmlentities($description[0],ENT_COMPAT, 'UTF-8');
+        $title = preg_replace("/\n/", "<br>", $title);
+        $tooltip = "<div id='tooltip_{$id}' class='tooltip'>".$title."</div>";
+        return($tooltip."<span title='tooltip_{$id}'>{$cn[0]}</span>");
     }
     static function propertyValue($class,$cn, $value,$type,$default,$description)
     {
         $name  = "{$class[0]}:{$cn[0]}";
         $value = htmlentities($value[0], ENT_COMPAT , 'UTF-8');
-        $title = _("No description");
-        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
         switch($type[0]){
             case 'string':
             case 'integer':
-                $res = "<input style='width:97%' title=\"{$title}\" type='text' value=\"{$value}\" name={$name}>";
+                $res = "<input style='width:97%' type='text' value=\"{$value}\" name={$name}>";
                 break;
             default: $res = ""; 
         }
