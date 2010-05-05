@@ -87,7 +87,7 @@ class log {
         msg_dialog::display(_("Internal error"), sprintf(_("Logging failed: %s"), $msg), ERROR_DIALOG);
       }
     }else{
-      if(is_object($config) && preg_match("/true/i",$config->get_cfg_value("logging",""))){
+      if(is_object($config) && preg_match("/true/i",$config->get_cfg_value("core","logging",""))){
         $this->log_into_syslog($entry);
       }
     }
