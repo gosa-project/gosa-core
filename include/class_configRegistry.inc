@@ -179,6 +179,7 @@ class gosaProperty
     protected $value = "";
     protected $type = "string";
     protected $default = "";
+    protected $defaults = "";
     protected $description = "";
     protected $check = "";
     protected $migrate = "";
@@ -196,7 +197,7 @@ class gosaProperty
     protected $status = 'undefined';
 
     protected $attributes = array('name','type','default','description','check',
-            'migrate','mandatory','group');
+            'migrate','mandatory','group','defaults');
 
     function __construct($parent,$classname,$data)
     {
@@ -248,6 +249,7 @@ class gosaProperty
     function getType() { return($this->type); }
     function getDescription() { return($this->description); }
     function getDefault() { return($this->default); }
+    function getDefaults() { return($this->defaults); }
     function getStatus() { return($this->status); }
     function isMandatory() { return($this->mandatory); }
 

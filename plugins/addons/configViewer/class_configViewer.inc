@@ -121,14 +121,31 @@ class configViewer extends management
         $tooltip = "<div id='tooltip_{$id}' class='tooltip'>".$title."</div>";
         return($tooltip."<span title='tooltip_{$id}'>{$cn[0]}</span>");
     }
-    static function propertyValue($class,$cn, $value,$type,$default,$description)
+    static function propertyValue($class,$cn,$value,$type,$default,$defaults)
     {
         $name  = "{$class[0]}:{$cn[0]}";
         $value = htmlentities($value[0], ENT_COMPAT , 'UTF-8');
         switch($type[0]){
+            case 'switch':
+                
+                if(!empty($defaults[0])){
+                    $data = call_user_func(preg_split("/::/", $defaults[0]));
+                    if(is_array($data)){
+                        $res = "<select size=1 name=\"{$name}\" style='width:100%'>";
+                        foreach($data as $oValue => $oDesc){
+                            if($oValue == $value){
+                                $res.="<option selected value=\"{$oValue}\">{$oDesc}</option>\n";
+                            }else{
+                                $res.="<option value=\"{$oValue}\">{$oDesc}</option>\n";
+                            }
+                        }
+                        $res.= "</select>";
+                    }
+                }
+                break;
             case 'string':
             case 'integer':
-                $res = "<input style='width:97%' type='text' value=\"{$value}\" name={$name}>";
+                $res = "<input style='width:97%' type='text' value=\"{$value}\" name=\"{$name}\">";
                 break;
             default: $res = ""; 
         }

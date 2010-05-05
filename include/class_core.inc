@@ -18,6 +18,12 @@ class all extends plugin {
 }
 
 class core extends plugin {
+
+    static function getPropertyValues()
+    {
+        return(array(1,2,3));
+    }
+
     static function plInfo()
     {
         return (array(
