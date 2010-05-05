@@ -62,7 +62,7 @@ class gosaSupportDaemon
 
     // Detect timeout 
     if($timeout == null){
-      $timeout = $config->get_cfg_value("gosaSupportTimeout",15);
+      $timeout = $config->get_cfg_value("core","gosaSupportTimeout",15);
     }
 
     /* This should only be the case if we call this from setup.
@@ -71,12 +71,12 @@ class gosaSupportDaemon
     if(!is_object($config)) { return; }
 
     # load from config, store statically
-    if ($config->get_cfg_value("gosaSupportURI") != ""){
+    if ($config->get_cfg_value("core","gosaSupportURI") != ""){
 
       if ($this->s_host == ""){
-        $this->s_host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->get_cfg_value("gosaSupportURI"));
-        $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->get_cfg_value("gosaSupportURI"));
-        $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->get_cfg_value("gosaSupportURI"));
+        $this->s_host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->get_cfg_value("core","gosaSupportURI"));
+        $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->get_cfg_value("core","gosaSupportURI"));
+        $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->get_cfg_value("core","gosaSupportURI"));
       }
       $this->is_configured = TRUE;
       $this->f_timeout = $timeout;
