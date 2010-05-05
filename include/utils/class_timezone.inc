@@ -38,10 +38,10 @@ class timezone {
     }
 
     /* Is there a timezone configured in the gosa configuration (gosa.conf) */
-    if ($config->get_cfg_value("timezone") != ""){
+    if ($config->get_cfg_value("core","timezone") != ""){
 
       /* Get zonename */
-      $tz = $config->get_cfg_value("timezone");
+      $tz = $config->get_cfg_value("core","timezone");
 
       if(!@date_default_timezone_set($tz)){
         msg_dialog::display(_("Configuration error"), sprintf(_("The configured timezone %s is not valid!"), bold($tz)), ERROR_DIALOG);
