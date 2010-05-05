@@ -31,8 +31,9 @@ class configRegistry{
         $this->fileStoredProperties = array();
         $this->properties = array();
         $this->mapByClass = array();
+        $this->mapByName = array();
         $this->mapPropertyToClass = array();
-        
+
         // Search for config flags defined in the config file (TAB section)
         foreach($this->config->data['TABS'] as $tabname => $tabdefs){
             foreach($tabdefs as $info){
@@ -80,7 +81,7 @@ class configRegistry{
             }
             $this->status = 'finished';
         }
- 
+
         global $class_mapping;
         foreach ($class_mapping as $cname => $path){
             $cmethods = get_class_methods($cname);
@@ -166,6 +167,7 @@ class configRegistry{
         foreach($this->properties as $prop){
             $prop->save();
         }
+        $this->reload(TRUE);
     }
 }
 
@@ -221,12 +223,14 @@ class gosaProperty
         if(isset($this->parent->ldapStoredProperties[$this->class][$this->name])){
             $this->setStatus('ldap');
             $this->value = $this->parent->ldapStoredProperties[$this->class][$this->name];
+            return;
         }
 
         // Second check for values in the config file.
         if(isset($this->parent->fileStoredProperties[$this->class][strtolower($this->name)])){
             $this->setStatus('file');
             $this->value = $this->parent->fileStoredProperties[$this->class][strtolower($this->name)];
+            return;
         }
 
         // If there still wasn't found anything then fallback to the default.
@@ -275,16 +279,16 @@ class gosaProperty
             if(!$ldap->count()){
                 $ldap->cd($dn);
                 $data = array(
-                            'cn' => $this->class, 
-                            'objectClass' => array('top','gosaConfig'),
-                            'gosaSetting' => $this->name.":".$this->value);
+                        'cn' => $this->class, 
+                        'objectClass' => array('top','gosaConfig'),
+                        'gosaSetting' => $this->name.":".$this->value);
 
                 $ldap->add($data);
-                if($ldap->success()){
-                    $this->status = 'ldap';
-                }else{
+                if(!$ldap->success()){
                     echo $ldap->get_error();
                 }
+                $this->_restoreCurrentValue();
+
             }else{
                 $attrs = $ldap->fetch();
                 $data = array();
@@ -300,11 +304,10 @@ class gosaProperty
                 if(!$found) $data['gosaSetting'][] = "{$this->name}:{$this->value}";
                 $ldap->cd($dn);
                 $ldap->modify($data);
-                if($ldap->success()){
-                    $this->status = 'ldap';
-                }else{
+                if(!$ldap->success()){
                     echo $ldap->get_error();
                 }
+                $this->_restoreCurrentValue();
             } 
         }elseif($this->getStatus() == 'removed'){
             $ldap = $this->parent->config->get_ldap_link();
@@ -322,11 +325,10 @@ class gosaProperty
             }
             $ldap->cd($dn);
             $ldap->modify($data);
-            if($ldap->success()){
-                $this->_restoreCurrentValue();
-            }else{
+            if(!$ldap->success()){
                 echo $ldap->get_error();
             }
+            $this->_restoreCurrentValue();
         }
     }
 

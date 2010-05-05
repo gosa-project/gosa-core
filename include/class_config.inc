@@ -1077,6 +1077,11 @@ class config  {
    */
   function get_cfg_value($name, $default= "") 
   {
+
+    if($this->configRegistry->propertyExists('core',$name)){
+        return($this->configRegistry->getPropertyValue('core',$name));
+    }
+
     $name= strtoupper($name);
 
     /* Check if we have a current value for $name */
