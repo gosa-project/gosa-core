@@ -81,7 +81,7 @@ class listing {
     }
 
     // Move footer information
-    $this->showFooter= ($config->get_cfg_value("listSummary") == "true");
+    $this->showFooter= ($config->get_cfg_value("core","listSummary") == "true");
 
     // Register build in filters
     $this->registerElementFilter("objectType", "listing::filterObjectType");
