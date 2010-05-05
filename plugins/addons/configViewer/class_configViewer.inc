@@ -95,7 +95,7 @@ class configViewer extends management
     static function propertyGroup($group, $description = array())
     {
         $title = _("No description");
-        if(!empty($description[0])) $title=$description[0];
+        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
         return("<span title=\"{$title}\">{$group[0]}</span>");
     }
     static function propertyClass($class, $description = array())
@@ -107,13 +107,13 @@ class configViewer extends management
             $class = $class[0];
         }
         $title = _("No description");
-        if(!empty($description[0])) $title=$description[0];
+        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
         return("<span title=\"{$title}\">{$class}</span>");
     }
     static function propertyName($cn, $description = array())
     {
         $title = _("No description");
-        if(!empty($description[0])) $title=$description[0];
+        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
         return("<span title=\"{$title}\">{$cn[0]}</span>");
     }
     static function propertyValue($class,$cn, $value,$type,$default,$description)
@@ -121,7 +121,7 @@ class configViewer extends management
         $name  = "{$class[0]}:{$cn[0]}";
         $value = htmlentities($value[0], ENT_COMPAT , 'UTF-8');
         $title = _("No description");
-        if(!empty($description[0])) $title=$description[0];
+        if(!empty($description[0])) $title=htmlentities($description[0], ENT_COMPAT, 'UTF-8');
         switch($type[0]){
             case 'string':
             case 'integer':

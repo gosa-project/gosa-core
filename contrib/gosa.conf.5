@@ -270,11 +270,11 @@ The
 statement enables copy and paste for LDAP entries managed with GOsa.
 .PP
 
-.B snapshots
+.B enableSnapshots
 .I bool
 .PP
 The
-.I snapshots
+.I enableSnapshots
 statement enables a snapshot mechaism in GOsa. This enables you to save
 certain states of entries and restore them later on.
 .PP
@@ -403,6 +403,14 @@ The
 variable defines where to store PPD files for the GOto environment plugins.
 .PP
 
+.B ppdGzip
+.I bool
+.PP
+The
+.I ppdGzip
+variable enables PPD file compression.
+.PP
+
 .B resolutions
 .I path
 .PP
@@ -436,6 +444,15 @@ credentials@host:port
 .fi
 .PP
 
+.B gosaSupportTimeout
+.I integer
+.PP
+The
+.I gosaSupportTimeout
+sets a connection timeout for all gosa-si actions. See 
+.I gosaSupportURI
+for details.
+.PP
 
 .B Browser and display options
 
@@ -499,30 +516,6 @@ value defines when a session will expire in seconds. For Debian systems, this wi
 not work because the sessions will be removed by a cron job instead. Please modify
 the value inside of your php.ini instead.
 .PP
-
-.B primaryGroupFilter
-.I bool
-.PP
-The
-.I primaryGroupFilter
-variable enables or disables the group filter to show primary user groups. It is
-time consuming to evaluate which groups are primary and which are not. So you may
-want to set it to
-.I true
-if your group plugin is slow.
-.PP
-
-.B iePngWorkaround
-.I bool
-.PP
-The
-.I iePngWorkaround
-variable enables or disables a workaround for IE < 7 in order to display transparent
-PNG files correctly. This drastically slows down browsing. Please use Firefox or Opera
-instead.
-.PP
-.PP
-
 
 .B Password options
 .PP
@@ -978,11 +971,11 @@ externaly. It gets called with the current entry "dn" and the attribute to be ID
 should return an integer value.
 .PP
 
-.B hash
+.B passwordDefaultHash
 .I string
 .PP
 The
-.I hash
+.I passwordDefaultHash
 statement defines the default password hash to choose for new accounts. Valid values are
 .I crypt/standard-des, crypt/md5, crypt/enhanced-des, crypt/blowfish, md5, sha, ssha, smd5, clear
 and
@@ -1076,11 +1069,11 @@ perl -MCrypt::SmbHash -e "print join(q[:], ntlmgen \\$ARGV[0]), $/;"
 .if
 .PP
 
-.B sambaidmapping
+.B sambaIdmapping
 .I bool
 .PP
 The
-.I sambaidmapping
+.I sambaIdMapping
 statement tells GOsa to maintain sambaIdmapEntry objects. Depending on your
 setup this can drastically improve the windows login performance.
 .PP

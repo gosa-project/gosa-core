@@ -81,8 +81,6 @@ if (isset($_POST['forcedlogout']) || isset($_GET['forcedlogout'])){
   if (isset($config) && $config->get_cfg_value("core","htaccessAuthentication") == "true"){
 
     /* Else notice that the user has to close the browser... */
-    $smarty->assign("iePngWorkaround", FALSE);
-
     $smarty->display (get_template_path('headers.tpl'));
     $smarty->display (get_template_path('logout-close.tpl'));
     exit;

@@ -25,7 +25,7 @@
   </search>
 
   <search>
-    <tag>default2</tag>
+    <tag>ldap</tag>
     <label>LDAP</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
@@ -39,7 +39,7 @@
   </search>
 
   <search>
-    <tag>default3</tag>
+    <tag>modified</tag>
     <label>Modified</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
@@ -51,7 +51,6 @@
       <characters>3</characters>
     </autocomplete>
   </search>
-
 
   <search>
     <tag>all</tag>
@@ -66,5 +65,20 @@
       <characters>3</characters>
     </autocomplete>
   </search>
+
+  <search>
+    <tag>group</tag>
+    <label>Filter by group</label>
+    <query>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>group=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>status</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
 
 </filterdef>

@@ -47,9 +47,6 @@ class Step_Config3 extends setup_step
               "max_ldap_query_time" => "5.0",
               "max_ldap_query_time_active" => FALSE,
 
-              "mailQueueScriptPath" => "/usr/bin/sudo /usr/local/sbin/mailqueue %action %id %server",
-              "mailQueueScriptPath_active" => FALSE,
-
               "notifydir" => "",
               "notifydir_active" => FALSE,
 
@@ -137,15 +134,6 @@ class Step_Config3 extends setup_step
         }
       }else{
         $this->optional['max_ldap_query_time_active'] = FALSE;
-      }
-
-      if(isset($_POST['mailQueueScriptPath_active'])){
-        $this->optional['mailQueueScriptPath_active'] = TRUE;
-        if(isset($_POST['mailQueueScriptPath'])){
-          $this->optional['mailQueueScriptPath'] = get_post('mailQueueScriptPath');
-        }
-      }else{
-        $this->optional['mailQueueScriptPath_active'] = FALSE;
       }
 
       if(isset($_POST['kioskpath_active'])){

@@ -309,8 +309,6 @@ if($reload_navigation){
 $smarty->assign ("menu", $plist->gen_menu());
 $smarty->assign ("plug", "$plug");
 
-$smarty->assign("iePngWorkaround", $config->get_cfg_value("core","iePngWorkaround","false" ) == "true");
-
 
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){

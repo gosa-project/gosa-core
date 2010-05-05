@@ -112,25 +112,6 @@
 
     <div class='step4_container'>
         <div class='step4_name'>
-            {t}Mail queue script{/t}
-        </div>
-        <div class='step4_value'>
-            {if $optional.mailQueueScriptPath_active == FALSE}
-                <input type='checkbox' value='1' name='mailQueueScriptPath_active'
-                    onClick='changeState("mailQueueScriptPath");'>
-                <input size=40 id='mailQueueScriptPath' name='mailQueueScriptPath' 
-					type='text' value='{$optional.mailQueueScriptPath}' disabled>
-            {else}
-                <input type='checkbox' value='1' name='mailQueueScriptPath_active' checked 
-					onClick='changeState("mailQueueScriptPath");'>
-                <input size=40 id='mailQueueScriptPath' name='mailQueueScriptPath' type='text' 
-					value='{$optional.mailQueueScriptPath}'  >
-            {/if}
-        </div>
-    </div>
-
-    <div class='step4_container'>
-        <div class='step4_name'>
             {t}Notification script{/t}
         </div>
         <div class='step4_value'>

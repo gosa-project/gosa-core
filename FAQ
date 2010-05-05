@@ -470,20 +470,6 @@ A: Yes. Set "sessionLifetime" to the number of seconds of inactivity. 7200
    section of your gosa.conf.
 
 
-Q: Microsoft Internet Explorer <=6 seems paints strange blocks around
-   images.
-
-A: Use Firefox, Konqueror, Safari, Opera, IE >= 7, etc. IE is broken and
-   I don't want to waste my time with working around this old crap. There's
-   a quick hack, if you just put "iePngWorkaround='true'" inside the main
-   section of your gosa.conf. This is a JavaScript based workaround and I've
-   to place a WARNING here, that it is damn slow if you've large lists to
-   display.
-
-   If you have much time, you can provide a seamless integration with MS
-   filter css extension.
-
-
 Q: Is there a way to let users change passwords without logging into GOsa?
 
 A: Yes. Browse to "password.php". You can preset a couple of things i.e.:

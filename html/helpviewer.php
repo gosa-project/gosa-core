@@ -116,7 +116,6 @@ if(session::global_is_set('current_class_for_help')){
   if($helpdir == ""){
     
     $smarty->assign("help_contents","<br><h2>"._("There is no helpfile specified for this class"))."</h2>";
-    $smarty->assign("iePngWorkaround", $config->get_cfg_value("core","iePngWorkaround","false" ) == "true");
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
     $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
     echo $display;
