@@ -45,10 +45,10 @@ if(session::global_is_set('ui')){
 }
 
 /* Language setup */
-if ((!isset($config)) || $config->get_cfg_value("language") == ""){
+if ((!isset($config)) || $config->get_cfg_value("core","language") == ""){
   $lang= get_browser_language();
 } else {
-  $lang= $config->get_cfg_value("language");
+  $lang= $config->get_cfg_value("core","language");
 }
 
 putenv("LANGUAGE=");
@@ -65,7 +65,7 @@ textdomain($domain);
 /* Create smarty & Set template compile directory */
 $smarty= new smarty();
 if (isset($config)){
-	$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa/');
+	$smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory", '/var/spool/gosa/');
 } else {
 	$smarty->compile_dir= '/var/spool/gosa/';
 }
@@ -78,7 +78,7 @@ if (isset($_POST['forcedlogout']) || isset($_GET['forcedlogout'])){
   session::destroy ();
   
   /* If we're not using htaccess authentication, just redirect... */
-  if (isset($config) && $config->get_cfg_value("htaccessAuthentication") == "true"){
+  if (isset($config) && $config->get_cfg_value("core","htaccessAuthentication") == "true"){
 
     /* Else notice that the user has to close the browser... */
     $smarty->assign("iePngWorkaround", FALSE);
