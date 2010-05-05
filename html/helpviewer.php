@@ -42,7 +42,7 @@ $ui= session::global_get('ui');
 $config= session::global_get('config');
 
 /* Language setup */
-$lang= $config->get_cfg_value("language");
+$lang= $config->get_cfg_value("core","language");
 if ($lang == ""){
   $lang= get_browser_language();
 }
@@ -60,7 +60,7 @@ bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
-$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", "/var/spool/gosa/");
+$smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory", "/var/spool/gosa/");
 $smarty->assign("title", "GOsa - "._("Help browser"));
 
 /* HELP management starts here ...
@@ -116,7 +116,7 @@ if(session::global_is_set('current_class_for_help')){
   if($helpdir == ""){
     
     $smarty->assign("help_contents","<br><h2>"._("There is no helpfile specified for this class"))."</h2>";
-    $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
+    $smarty->assign("iePngWorkaround", $config->get_cfg_value("core","iePngWorkaround","false" ) == "true");
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
     $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
     echo $display;
