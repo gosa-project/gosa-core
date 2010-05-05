@@ -42,8 +42,8 @@
             {t}Smarty compile directory{/t}
         </div>
         <div class='step4_value'>
-			<input size=40 id='compile' name='compile' 
-				type='text' value='{$optional.compile}'>
+			<input size=40 id='templateCompileDirectory' name='templateCompileDirectory' 
+				type='text' value='{$optional.templateCompileDirectory}'>
         </div>
     </div>
     <div class='step4_container'>
@@ -51,7 +51,7 @@
             {t}SNMP community{/t}
         </div>
         <div class='step4_value'>
-			<input size=40 id='compile' name='snmpcommunity' 
+			<input size=40 id='snmpcommunity' name='snmpcommunity' 
 				type='text' value='{$optional.snmpcommunity}'>
         </div>
     </div>
@@ -234,8 +234,8 @@
         </div>
         <div class='step4_value'>
 	
-            <select name="forcessl" size="1" title="">
-            	{html_options options=$bool selected=$optional.forcessl}
+            <select name="forceSSL" size="1" title="">
+            	{html_options options=$bool selected=$optional.forceSSL}
             </select>
         </div>
     </div>
@@ -246,8 +246,8 @@
         </div>
         <div class='step4_value'>
 	
-            <select name="warnssl" size="1" title="">
-            	{html_options options=$bool selected=$optional.warnssl}
+            <select name="warnSSL" size="1" title="">
+            	{html_options options=$bool selected=$optional.warnSSL}
             </select>
         </div>
     </div>
@@ -324,8 +324,8 @@
             {t}Debug level{/t}
         </div>
         <div class='step4_value'>
-			<select name='debuglevel' size=1>
-				{if $optional.debuglevel == 0}
+			<select name='debugLevel' size=1>
+				{if $optional.debugLevel == 0}
 					<option value='0' selected>0 {t}Disabled{/t}</option>
 					<option value='1'>1 {t}Enabled{/t}</option>
 				{else}
