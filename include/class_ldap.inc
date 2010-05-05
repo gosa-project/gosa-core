@@ -60,8 +60,8 @@ class LDAP{
     $this->hostname=$hostname;
 
     /* Check if MAX_LDAP_QUERY_TIME is defined */ 
-    if(is_object($config) && $config->get_cfg_value("ldapMaxQueryTime") != ""){
-      $str = $config->get_cfg_value("ldapMaxQueryTime");
+    if(is_object($config) && $config->get_cfg_value("core","ldapMaxQueryTime") != ""){
+      $str = $config->get_cfg_value("core","ldapMaxQueryTime");
       $this->max_ldap_query_time = (float)($str);
     }
 
@@ -1206,7 +1206,7 @@ class LDAP{
 
     /* Only read schema if it is allowed */
     if(isset($config) && preg_match("/config/i",get_class($config))){
-      if ($config->get_cfg_value("schemaCheck") != "true"){
+      if ($config->get_cfg_value("core","schemaCheck") != "true"){
         return($objectclasses);
       } 
     }
