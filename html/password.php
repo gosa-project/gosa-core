@@ -68,7 +68,7 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)) {
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-session::global_set('DEBUGLEVEL', $config->get_cfg_value("debuglevel"));
+session::global_set('debugLevel', $config->get_cfg_value("debugLevel"));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     @DEBUG(
         DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config"
@@ -165,7 +165,7 @@ if (!isset($_SERVER['HTTPS']) ||
 }
 
 /* If SSL is forced, just forward to the SSL enabled site */
-if ($config->get_cfg_value("forcessl") == 'true' && $ssl != '') {
+if ($config->get_cfg_value("forceSSL") == 'true' && $ssl != '') {
     header("Location: $ssl");
     exit;
 }
@@ -312,7 +312,7 @@ $smarty->assign('uid', $uid);
 $smarty->assign('password_img', get_template_path('images/password.png'));
 
 /* Displasy SSL mode warning? */
-if ($ssl != "" && $config->get_cfg_value("warnssl") == 'true') {
+if ($ssl != "" && $config->get_cfg_value("warnSSL") == 'true') {
     $smarty->assign(
         "ssl",
         "<b>"._("Warning").":</b> "._("Session will not be encrypted.").
