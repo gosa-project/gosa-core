@@ -78,7 +78,7 @@ class group extends plugin
   function group (&$config, $dn= NULL)
   {
      /* Set rfc2307bis flag */
-     if ($config->get_cfg_value("rfc2307bis") == "true"){
+     if ($config->get_cfg_value("core","rfc2307bis") == "true"){
        $this->rfc2307bis= TRUE;
        $this->attributes[]= "member";
        $this->objectclasses[]= "groupOfNames";
@@ -146,7 +146,7 @@ class group extends plugin
         if(isset($attrs['sambaAlgorithmicRidBase'])){  
           $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];  
         } else {  
-          $this->ridBase= $this->config->get_cfg_value("sambaRidBase");
+          $this->ridBase= $this->config->get_cfg_value("core","sambaRidBase");
         } 
 
         /* Get domain name for SID */
@@ -158,10 +158,10 @@ class group extends plugin
           }
         }
       } else {
-        if ($this->config->get_cfg_value("sambaRidBase") != ""){
+        if ($this->config->get_cfg_value("core","sambaRidBase") != ""){
           $this->sambaDomainName= "DEFAULT";
-          $this->ridBase= $this->config->get_cfg_value("sambaRidBase");
-          $this->SID= $this->config->get_cfg_value("sid");
+          $this->ridBase= $this->config->get_cfg_value("core","sambaRidBase");
+          $this->SID= $this->config->get_cfg_value("core","sid");
         } else {
           msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
         }
@@ -532,8 +532,8 @@ class group extends plugin
         $uids = array_merge($uids,  array_keys($this->memberUid_used_by_some));
     }
     
-    if ($this->config->get_cfg_value("ldapFilterNestingLimit") == "" ||
-        count($uids) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
+    if ($this->config->get_cfg_value("core","ldapFilterNestingLimit") == "" ||
+        count($uids) < $this->config->get_cfg_value("core","ldapFilterNestingLimit")){
       foreach ($uids as $value){
         if(!isset($this->members[$value])){
           $filter .= "(uid=".normalizeLdap($value).")";
@@ -552,8 +552,8 @@ class group extends plugin
     }
   
     /* check if all uids are resolved */
-    if ($this->config->get_cfg_value("ldapFilterNestingLimit") == "" ||
-        count($this->memberUid) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
+    if ($this->config->get_cfg_value("core","ldapFilterNestingLimit") == "" ||
+        count($this->memberUid) < $this->config->get_cfg_value("core","ldapFilterNestingLimit")){
       foreach ($this->memberUid as $value){
         if(!isset($this->members[$value])){
           $this->members[$value] = "";
@@ -766,7 +766,7 @@ class group extends plugin
       /* User wants me to fake the idMappings? This is useful for
          making winbind resolve the group names in a reasonable amount
          of time in combination with larger databases. */
-      if ($this->config->get_cfg_value("sambaidmapping") == "true"){
+      if ($this->config->get_cfg_value("core","sambaidmapping") == "true"){
         $this->attrs['objectClass'][]= "sambaIdmapEntry";
       }
 
@@ -954,8 +954,8 @@ class group extends plugin
       if (!tests::is_id($this->gidNumber)){
         $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
-        if ($this->gidNumber < $this->config->get_cfg_value("minId")){
-          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minId"));
+        if ($this->gidNumber < $this->config->get_cfg_value("core","minId")){
+          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("core","minId"));
         }
 
       }
