@@ -33,7 +33,7 @@ class configRegistry{
         $this->mapByClass = array();
         $this->mapPropertyToClass = array();
         
-        // Search for config flags defined in the config file
+        // Search for config flags defined in the config file (TAB section)
         foreach($this->config->data['TABS'] as $tabname => $tabdefs){
             foreach($tabdefs as $info){
 
@@ -51,6 +51,18 @@ class configRegistry{
                         }
                     }
                 }
+            }
+        }
+
+        // Search for config flags defined in the config file (MAIN section)
+        foreach($this->config->data['MAIN'] as $name => $value){
+            $this->fileStoredProperties['core'][strtolower($name)] = $value;
+        }
+
+        // Search for config flags defined in the config file (Current LOCATION section)
+        if(isset($this->config->current)){
+            foreach($this->config->current as $name => $value){
+                $this->fileStoredProperties['core'][strtolower($name)] = $value;
             }
         }
 
@@ -205,9 +217,9 @@ class gosaProperty
         }
 
         // Second check for values in the config file.
-        if(isset($this->parent->fileStoredProperties[$this->class][$this->name])){
+        if(isset($this->parent->fileStoredProperties[$this->class][strtolower($this->name)])){
             $this->setStatus('file');
-            $this->value = $this->parent->fileStoredProperties[$this->class][$this->name];
+            $this->value = $this->parent->fileStoredProperties[$this->class][strtolower($this->name)];
         }
 
         // If there still wasn't found anything then fallback to the default.

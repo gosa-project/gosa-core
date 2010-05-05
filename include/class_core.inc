@@ -18,24 +18,17 @@ class all extends plugin {
 }
 
 class core extends plugin {
-
-
-    /*! \brief  Add ACL object
-      @return Returns the ACL object.
-     */
     static function plInfo()
     {
         return (array(
-                    "plShortName" => _("Sudo"),
-                    "plDescription" => _("Sudo role"),
+                    "plShortName" => _("Core"),
+                    "plDescription" => _("GOsa core plugin"),
                     "plSelfModify"  => FALSE,
                     "plDepends"     => array(),
                     "plPriority"    => 0,
                     "plSection"     => array("administration"),
-                    "plCategory"    => array("sudo" => array("objectClass" => "sudoRole", "description" => _("Sudo role"))),
-
+                    "plCategory"    => array("all"),
                     "plProperties"  => array(
-
 
                         array(
                             "name"          => "logging",
