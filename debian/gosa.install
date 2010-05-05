@@ -7,6 +7,7 @@ locale				/usr/share/gosa
 plugins				/usr/share/gosa
 setup				/usr/share/gosa
 debian/gosa-apache.conf		/etc/gosa
+debian/99gosa-lighttpd.conf	/etc/gosa
 contrib/shells			/etc/gosa
 contrib/encodings		/etc/gosa
 contrib/openldap/slapd.conf	/usr/share/doc/gosa/slapd.conf-example
