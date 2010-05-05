@@ -4,8 +4,6 @@ class configRegistry{
 
     public $config = NULL;
     public $properties = array();
-    public $mapByClass = array();
-    public $mapPropertyToClass = array();
     public $ldapStoredProperties = array(); 
     public $fileStoredProperties = array(); 
     public $classToName = array(); 
@@ -30,9 +28,7 @@ class configRegistry{
         $this->ldapStoredProperties = array();
         $this->fileStoredProperties = array();
         $this->properties = array();
-        $this->mapByClass = array();
         $this->mapByName = array();
-        $this->mapPropertyToClass = array();
 
         // Search for config flags defined in the config file (TAB section)
         foreach($this->config->data['TABS'] as $tabname => $tabdefs){
@@ -116,9 +112,8 @@ class configRegistry{
     {
         $id = count($this->properties);
         $this->properties[$id] = new gosaProperty($this,$class,$data);
-        $this->mapByName[$class][strtolower($data['name'])] = $id;
-        $this->mapByClass[$class][] = $id;
-        $this->mapPropertyToClass[$id] = $class;
+        $p = strtolower("{$class}::{$data['name']}");
+        $this->mapByName[$p] = $id;
     }
 
     public function getAllProperties()
@@ -127,16 +122,18 @@ class configRegistry{
     }
 
     function propertyExists($class,$name)
-    {
-        return(isset($this->mapByName[$class][strtolower($name)]));
+    {       
+        $p = strtolower("{$class}::{$name}");
+        return(isset($this->mapByName[$p]));
     }
 
     private function getId($class,$name)
     {
-        if(!isset($this->mapByName[$class][strtolower($name)])){
+        $p = strtolower("{$class}::{$name}");
+        if(!isset($this->mapByName[$p])){
             return(-1);
         }       
-        return($this->mapByName[$class][strtolower($name)]);    
+        return($this->mapByName[$p]);    
     }
 
     function getProperty($class,$name)
