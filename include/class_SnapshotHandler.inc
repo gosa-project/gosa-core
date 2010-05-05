@@ -33,10 +33,10 @@ class SnapshotHandler {
     $this->config = &$config;	
     $config = $this->config;
 
-    if($config->get_cfg_value("enableSnapshots") == "true"){
+    if($config->get_cfg_value("core","enableSnapshots") == "true"){
 
       /* Check if the snapshot_base is defined */
-      if ($config->get_cfg_value("snapshotBase") == ""){
+      if ($config->get_cfg_value("core","snapshotBase") == ""){
 
         /* Send message if not done already */
         if(!session::is_set("snapshotFailMessageSend")){
@@ -61,12 +61,12 @@ class SnapshotHandler {
       }
 
       /* check if there are special server configurations for snapshots */
-      if ($config->get_cfg_value("snapshotURI") != ""){
+      if ($config->get_cfg_value("core","snapshotURI") != ""){
 
         /* check if all required vars are available to create a new ldap connection */
         $missing = "";
         foreach(array("snapshotURI","snapshotAdminDn","snapshotAdminPassword","snapshotBase") as $var){
-          if($config->get_cfg_value($var) == ""){
+          if($config->get_cfg_value("core",$var) == ""){
             $missing .= $var." ";
 
             /* Send message if not done already */
@@ -109,15 +109,15 @@ class SnapshotHandler {
     $snapshotLdap= null;
 
     /* check if there are special server configurations for snapshots */
-    if($this->config->get_cfg_value("snapshotURI") != ""){
-      $server= $this->config->get_cfg_value("snapshotURI");
-      $user= $this->config->get_cfg_value("snapshotAdminDn");
-      $password= $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
+    if($this->config->get_cfg_value("core","snapshotURI") != ""){
+      $server= $this->config->get_cfg_value("core","snapshotURI");
+      $user= $this->config->get_cfg_value("core","snapshotAdminDn");
+      $password= $this->config->get_credentials($this->config->get_cfg_value("core","snapshotAdminPassword"));
       $snapshotLdap= new ldapMultiplexer(new LDAP($user,$password, $server));
     }
 
     /* Prepare bases */
-    $this->snapshotLdapBase= $this->config->get_cfg_value("snapshotBase");
+    $this->snapshotLdapBase= $this->config->get_cfg_value("core","snapshotBase");
     $snapshotLdap->cd($this->snapshotLdapBase);
     if (!$snapshotLdap->success()){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($snapshotLdap->get_error(), $this->snapshotLdapBase, "", get_class()));
@@ -261,17 +261,17 @@ class SnapshotHandler {
     $ldap->cd($this->config->current['BASE']);
 
     /* check if there are special server configurations for snapshots */
-    if($config->get_cfg_value("snapshotURI") == ""){
+    if($config->get_cfg_value("core","snapshotURI") == ""){
 
       /* Source and destination server are both the same, just copy source to dest obj */
       $ldap_to      = $ldap;
       $snapldapbase = $this->config->current['BASE'];
 
     }else{
-      $server         = $config->get_cfg_value("snapshotURI");
-      $user           = $config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $config->get_cfg_value("snapshotBase");
+      $server         = $config->get_cfg_value("core","snapshotURI");
+      $user           = $config->get_cfg_value("core","snapshotAdminDn");
+      $password       = $this->config->get_credentials($config->get_cfg_value("core","snapshotAdminPassword"));
+      $snapldapbase   = $config->get_cfg_value("core","snapshotBase");
 
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
@@ -290,7 +290,7 @@ class SnapshotHandler {
 
       /* Collect some infos */
       $base           = $this->config->current['BASE'];
-      $snap_base      = $config->get_cfg_value("snapshotBase");
+      $snap_base      = $config->get_cfg_value("core","snapshotBase");
       $base_of_object = preg_replace ('/^[^,]+,/i', '', $dn);
       $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
 
@@ -367,13 +367,13 @@ class SnapshotHandler {
     $cfg= &$this->config->current;
 
     /* check if there are special server configurations for snapshots */
-    if($this->config->get_cfg_value("snapshotURI") == ""){
+    if($this->config->get_cfg_value("core","snapshotURI") == ""){
       $ldap_to      = $ldap;
     }else{
-      $server         = $this->config->get_cfg_value("snapshotURI");
-      $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
+      $server         = $this->config->get_cfg_value("core","snapshotURI");
+      $user           = $this->config->get_cfg_value("core","snapshotAdminDn");
+      $password       = $this->config->get_credentials($this->config->get_cfg_value("core","snapshotAdminPassword"));
+      $snapldapbase   = $this->config->get_cfg_value("core","snapshotBase");
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
       if (!$ldap_to->success()){
@@ -382,7 +382,7 @@ class SnapshotHandler {
     }
     /* Prepare bases and some other infos */
     $base           = $this->config->current['BASE'];
-    $snap_base      = $this->config->get_cfg_value("snapshotBase");
+    $snap_base      = $this->config->get_cfg_value("core","snapshotBase");
     $base_of_object = preg_replace ('/^[^,]+,/i', '', $dn);
     $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
     $tmp            = array();
@@ -422,13 +422,13 @@ class SnapshotHandler {
     $cfg= &$this->config->current;
 
     /* check if there are special server configurations for snapshots */
-    if($this->config->get_cfg_value("snapshotURI") == ""){
+    if($this->config->get_cfg_value("core","snapshotURI") == ""){
       $ldap_to      = $ldap;
     }else{
-      $server         = $this->config->get_cfg_value("snapshotURI");
-      $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
+      $server         = $this->config->get_cfg_value("core","snapshotURI");
+      $user           = $this->config->get_cfg_value("core","snapshotAdminDn");
+      $password       = $this->config->get_credentials($this->config->get_cfg_value("core","snapshotAdminPassword"));
+      $snapldapbase   = $this->config->get_cfg_value("core","snapshotBase");
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
       if (!$ldap_to->success()){
@@ -438,7 +438,7 @@ class SnapshotHandler {
 
     /* Prepare bases */
     $base           = $this->config->current['BASE'];
-    $snap_base      = $this->config->get_cfg_value("snapshotBase");
+    $snap_base      = $this->config->get_cfg_value("core","snapshotBase");
     $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
   /* Fetch all objects and check if they do not exist anymore */
     $ui = get_userinfo();
@@ -487,13 +487,13 @@ class SnapshotHandler {
     $cfg= &$this->config->current;
 
     /* check if there are special server configurations for snapshots */
-    if($this->config->get_cfg_value("snapshotURI") == ""){
+    if($this->config->get_cfg_value("core","snapshotURI") == ""){
       $ldap_to      = $ldap;
     }else{
-      $server         = $this->config->get_cfg_value("snapshotURI");
-      $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
-      $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
+      $server         = $this->config->get_cfg_value("core","snapshotURI");
+      $user           = $this->config->get_cfg_value("core","snapshotAdminDn");
+      $password       = $this->config->get_credentials($this->config->get_cfg_value("core","snapshotAdminPassword"));
+      $snapldapbase   = $this->config->get_cfg_value("core","snapshotBase");
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
       if (!$ldap_to->success()){
