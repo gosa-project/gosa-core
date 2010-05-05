@@ -457,7 +457,7 @@ class config  {
 
     /* Search mailMethod konfiguration in main section too 
      */
-    $this->current['MAILMETHOD'] = $this->get_cfg_value("mailMethod","");
+    $this->current['MAILMETHOD'] = $this->get_cfg_value("core","mailMethod","");
     if (!isset($this->current['MAILMETHOD'])){
       $this->current['MAILMETHOD']= "";
     }
@@ -1075,11 +1075,11 @@ class config  {
    *
    *
    */
-  function get_cfg_value($name, $default= "") 
+  function get_cfg_value($class,$name, $default= "") 
   {
 
-    if($this->configRegistry->propertyExists('core',$name)){
-        return($this->configRegistry->getPropertyValue('core',$name));
+    if($this->configRegistry->propertyExists($class,$name)){
+        return($this->configRegistry->getPropertyValue($class,$name));
     }
 
     syslog(1, $name);    
@@ -1155,10 +1155,10 @@ class config  {
      There will also be some errors psoted, if the configuration failed */
   function snapshotEnabled()
   {
-    if($this->get_cfg_value("enableSnapshots") == "true"){
+    if($this->get_cfg_value("core","enableSnapshots") == "true"){
 
       /* Check if the snapshot_base is defined */
-      if ($this->get_cfg_value("snapshotBase") == ""){
+      if ($this->get_cfg_value("core","snapshotBase") == ""){
 
         /* Send message if not done already */
         if(!session::is_set("snapshotFailMessageSend")){
@@ -1183,12 +1183,12 @@ class config  {
       }
 
       /* check if there are special server configurations for snapshots */
-      if ($this->get_cfg_value("snapshotURI") != ""){
+      if ($this->get_cfg_value("core","snapshotURI") != ""){
 
         /* check if all required vars are available to create a new ldap connection */
         $missing = "";
         foreach(array("snapshotURI","snapshotAdminDn","snapshotAdminPassword","snapshotBase") as $var){
-          if($this->get_cfg_value($var) == ""){
+          if($this->get_cfg_value("core",$var) == ""){
             $missing .= $var." ";
 
             /* Send message if not done already */
