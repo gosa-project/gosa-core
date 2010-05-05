@@ -13,7 +13,7 @@ class configViewer extends management
         $this->ui = $ui;
 
         // Build filter
-        if (0&&session::global_is_set(get_class($this)."_filter")){
+        if (session::global_is_set(get_class($this)."_filter")){
             $filter= session::global_get(get_class($this)."_filter");
         } else {
             $filter = new filter(get_template_path("property-filter.xml", true));
