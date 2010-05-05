@@ -116,7 +116,7 @@ class configRegistry{
     {
         $id = count($this->properties);
         $this->properties[$id] = new gosaProperty($this,$class,$data);
-        $this->mapByName[$class][$data['name']] = $id;
+        $this->mapByName[$class][strtolower($data['name'])] = $id;
         $this->mapByClass[$class][] = $id;
         $this->mapPropertyToClass[$id] = $class;
     }
@@ -128,16 +128,15 @@ class configRegistry{
 
     function propertyExists($class,$name)
     {
-        if(!isset($this->mapByName[$class][$name])){
-        print_a(array($class,$name));
-
-        }
-        return(isset($this->mapByName[$class][$name]));
+        return(isset($this->mapByName[$class][strtolower($name)]));
     }
 
     private function getId($class,$name)
     {
-        return($this->mapByName[$class][$name]);    
+        if(!isset($this->mapByName[$class][strtolower($name)])){
+            return(-1);
+        }       
+        return($this->mapByName[$class][strtolower($name)]);    
     }
 
     function getProperty($class,$name)
