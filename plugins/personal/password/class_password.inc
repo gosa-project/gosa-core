@@ -23,7 +23,7 @@
 class password extends plugin
 {
   /* Definitions */
-  var $plHeadline     = "Password";
+  var $plHeadline     = "Change password";
   var $plDescription  = "Change user password";
 
   function password(&$config, $dn= NULL, $parent= NULL)
