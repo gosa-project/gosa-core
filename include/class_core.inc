@@ -19,9 +19,61 @@ class all extends plugin {
 
 class core extends plugin {
 
-    static function getPropertyValues()
+    static function getPropertyValues($class,$name,$value,$type)
     {
-        return(array(1,2,3));
+        $list = array();
+        switch($name){
+            case 'passwordDefaultHash':
+                $tmp = passwordMethod::get_available_methods();
+                foreach($tmp['name'] as $id => $method){
+                    $desc = $tmp[$id]['name'];
+                    $list[$method] = $desc;
+                }
+                break;
+            case 'accountPrimaryAttribute':
+                $list = array('uid' => 'uid', 'cn' => 'cn');
+                break;
+            case 'loginAttribute':
+                $list = array(
+                            'uid' => 'uid',
+                            'mail' => 'mail',
+                            'both' => 'uid & mail');
+                break;
+            case 'timezone': 
+                $tmp = timezone::_get_tz_zones();
+                foreach($tmp['TIMEZONES'] as $name => $offset){
+                    if($offset >= 0){
+                        $list[$name] = $name." ( + ".sprintf("%0.2f",$offset/(60*60))." "._("hours").")";
+                    }else{
+                        $offset = $offset * -1;
+                        $list[$name] = $name." ( - ".sprintf("%0.2f",($offset/(60*60)))." "._("hours").")";
+                    }
+                }
+                break;
+            case 'mailAttribute':
+                $list = array('mail' => 'mail','uid' => 'uid');
+                break;
+            case 'mailMethod': 
+                $list = mailMethod::get_methods();
+                break;
+            case 'language':
+                $tmp = get_languages(TRUE);
+                $list[""] = _("Automatic");
+                foreach($tmp as $key => $desc){
+                    $list[$key] = $desc;
+                }
+                break;
+            case 'modificationDetectionAttribute': 
+                $list = array('entryCSN' => 'entryCSN (OpenLdap)','textCSN'=>'textCSN (Sun DS)');
+                break;
+            default: echo $name." ";$list = array();
+        }
+
+        if(!isset($list[$value])){
+            $list[$value] = $value." ("._("User value").")";
+        }
+
+        return($list);
     }
 
     static function plInfo()
