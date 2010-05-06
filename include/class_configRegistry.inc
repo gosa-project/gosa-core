@@ -177,6 +177,7 @@ class gosaProperty
     protected $name = "";
     protected $class = "";
     protected $value = "";
+    protected $tmp_value = "";  // Used when modified but not saved 
     protected $type = "string";
     protected $default = "";
     protected $defaults = "";
@@ -275,7 +276,6 @@ class gosaProperty
         }
     }
 
-    function getValue() { return($this->value); }
     function getMigrate() { return($this->migrate); }
     function getCheck() { return($this->check); }
     function getName() { return($this->name); }
@@ -292,7 +292,16 @@ class gosaProperty
     {
         if($this->value != $str){
             $this->setStatus('modified'); 
-            $this->value = $str; 
+            $this->tmp_value = $str; 
+        }
+    }
+
+    function getValue($temporary = FALSE) 
+    { 
+        if($temporary && in_array($this->getStatus(), array('modified'))){
+            return($this->tmp_value); 
+        }else{ 
+            return($this->value); 
         }
     }
 
@@ -308,7 +317,6 @@ class gosaProperty
     function save()
     {
         if($this->getStatus() == 'modified'){
-
             $ldap = $this->parent->config->get_ldap_link();
             $ldap->cd($this->parent->config->current['BASE']);
             $dn = "cn={$this->class},".$this->parent->config->current['CONFIG'];
@@ -318,13 +326,12 @@ class gosaProperty
                 $data = array(
                         'cn' => $this->class, 
                         'objectClass' => array('top','gosaConfig'),
-                        'gosaSetting' => $this->name.":".$this->value);
+                        'gosaSetting' => $this->name.":".$this->tmp_value);
 
                 $ldap->add($data);
                 if(!$ldap->success()){
                     echo $ldap->get_error();
                 }
-                $this->_restoreCurrentValue();
 
             }else{
                 $attrs = $ldap->fetch();
@@ -333,19 +340,19 @@ class gosaProperty
                 for($i = 0;$i<$attrs['gosaSetting']['count']; $i ++){
                     $set = $attrs['gosaSetting'][$i];
                     if(preg_match("/^{$this->name}:/", $set)){
-                        $set = "{$this->name}:{$this->value}";
+                        $set = "{$this->name}:{$this->tmp_value}";
                         $found = true;
                     }
                     $data['gosaSetting'][] = $set;
                 }
-                if(!$found) $data['gosaSetting'][] = "{$this->name}:{$this->value}";
+                if(!$found) $data['gosaSetting'][] = "{$this->name}:{$this->tmp_value}";
                 $ldap->cd($dn);
                 $ldap->modify($data);
                 if(!$ldap->success()){
                     echo $ldap->get_error();
                 }
-                $this->_restoreCurrentValue();
             } 
+            $this->_restoreCurrentValue();
         }elseif($this->getStatus() == 'removed'){
             $ldap = $this->parent->config->get_ldap_link();
             $ldap->cd($this->parent->config->current['BASE']);
