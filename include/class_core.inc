@@ -330,7 +330,7 @@ class core extends plugin {
                                 "type"          => "path",
                                 "default"       => "/var/spool/gosa",
                                 "description"   => "The 'templateCompileDirectory' statements defines the path, where the PHP templating engins 'smarty' should store its compiled GOsa templates for improved speed. This path needs to be writeable by the user your webserver is running with.",
-                                "check"         => "gosaProperty::isExistingPath",
+                                "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "core",
                                 "mandatory"     => FALSE),
@@ -698,7 +698,7 @@ Example template /etc/gosa/vacation/business.txt:
    %givenName %sn
 
 ",
-                                "check"         => "gosaProperty::isExistingPath",
+                                "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "mail",
                                 "mandatory"     => FALSE),

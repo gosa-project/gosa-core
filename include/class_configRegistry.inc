@@ -232,9 +232,9 @@ class gosaProperty
         return(TRUE);
     }
 
-    static function isExistingPath($message,$class,$name,$value, $type)
+    static function isWriteablePath($message,$class,$name,$value, $type)
     {
-        return(TRUE);
+        return(!empty($value)&&is_writeable($value));
     }
 
     static function isCommand($message,$class,$name,$value, $type)
