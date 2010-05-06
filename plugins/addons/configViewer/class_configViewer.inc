@@ -121,7 +121,7 @@ class configViewer extends management
         $tooltip = "<div id='tooltip_{$id}' class='tooltip' style='display:none'>".$title."</div>";
         return($tooltip."<span title='tooltip_{$id}'>{$cn[0]}</span>");
     }
-    static function propertyValue($class,$cn,$value,$type,$default,$defaults)
+    static function propertyValue($class,$cn,$value,$type,$default,$defaults,$check)
     {
         $ssize  = "208px";
         $isize  = "200px";
@@ -163,7 +163,15 @@ class configViewer extends management
             default: echo $type[0].$name."  ";$res = ""; 
         }
         
-        return($res." <i>(".$value).")</i>";
+        // Color row in red if the check methods returns false.
+        if(!empty($check[0])){
+            $check = call_user_func(preg_split("/::/", $check[0]),$displayMessage=FALSE, $class[0], $cn[0], $value, $type[0]);
+            if(!$check){
+                $res.= "<rowClass:entry-error/>";
+            }
+        }
+
+        return($res." <i>(".$value.")</i>");
     }
 }
 ?>

@@ -217,6 +217,41 @@ class gosaProperty
         $this->_restoreCurrentValue(); 
     }
 
+    static function isBool($message,$class,$name,$value, $type)
+    {
+        return(in_array($value,array('true','false','')));
+    }
+
+    static function isInteger($message,$class,$name,$value, $type)
+    {
+        return(is_numeric($value) && !preg_match("/[^0-9]/", $value));
+    }
+
+    static function isPath($message,$class,$name,$value, $type)
+    {
+        return(TRUE);
+    }
+
+    static function isExistingPath($message,$class,$name,$value, $type)
+    {
+        return(TRUE);
+    }
+
+    static function isCommand($message,$class,$name,$value, $type)
+    {
+        return(TRUE);
+    }
+
+    static function isDn($message,$class,$name,$value, $type)
+    {
+        return(TRUE);
+    }
+
+    static function isRdn($message,$class,$name,$value, $type)
+    {
+        return(TRUE);
+    }
+
     private function _restoreCurrentValue()
     {
     
