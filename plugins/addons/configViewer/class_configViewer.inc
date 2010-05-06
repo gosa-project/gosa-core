@@ -123,15 +123,23 @@ class configViewer extends management
     }
     static function propertyValue($class,$cn,$value,$type,$default,$defaults)
     {
+        $ssize  = "208px";
+        $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
-        $value = htmlentities($value[0], ENT_COMPAT , 'UTF-8');
+        $value = htmlentities($value[0],ENT_COMPAT,'UTF-8');
         switch($type[0]){
+            case 'bool':
+                $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
+                $false = (preg_match('/true/i', $value)) ? '' : "selected";
+                $true  = (preg_match('/true/i', $value)) ? "selected" : '';
+                $res.= "<option {$false} value='false'>"._("FALSE")."</option>";
+                $res.= "<option {$true} value='true'>"._("TRUE")."</option>";
+                $res.= "</select>";
             case 'switch':
-                
                 if(!empty($defaults[0])){
-                    $data = call_user_func(preg_split("/::/", $defaults[0]));
+                    $data = call_user_func(preg_split("/::/", $defaults[0]), $class[0],$cn[0],$value, $type[0]);
                     if(is_array($data)){
-                        $res = "<select size=1 name=\"{$name}\" style='width:100%'>";
+                        $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
                         foreach($data as $oValue => $oDesc){
                             if($oValue == $value){
                                 $res.="<option selected value=\"{$oValue}\">{$oDesc}</option>\n";
@@ -143,14 +151,19 @@ class configViewer extends management
                     }
                 }
                 break;
+            case 'dn':
+            case 'rdn':
+            case 'uri':
+            case 'path':
+            case 'command':
             case 'string':
             case 'integer':
-                $res = "<input style='width:97%' type='text' value=\"{$value}\" name=\"{$name}\">";
+                $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
                 break;
-            default: $res = ""; 
+            default: echo $type[0].$name."  ";$res = ""; 
         }
         
-        return($res);
+        return($res." <i>(".$value).")</i>";
     }
 }
 ?>

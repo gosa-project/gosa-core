@@ -141,7 +141,7 @@ class core extends plugin {
 
                         array(
                                 "name"          => "passwordHook",
-                                "type"          => "shellCommand",
+                                "type"          => "command",
                                 "default"       => "",
                                 "description"   => 
                                 _("The 'passwordHook' can specify an external script to handle password settings at some other location besides the LDAP.")."&nbsp;".sprintf(_("It will be called this way: %s"),"/path/to/your/script \"username\" \"oldpassword\" \"newpassword\""),
@@ -328,7 +328,7 @@ class core extends plugin {
                         array(
                                 "name"          => "templateCompileDirectory",
                                 "type"          => "path",
-                                "default"       => "",
+                                "default"       => "/var/spool/gosa",
                                 "description"   => "The 'templateCompileDirectory' statements defines the path, where the PHP templating engins 'smarty' should store its compiled GOsa templates for improved speed. This path needs to be writeable by the user your webserver is running with.",
                                 "check"         => "gosaProperty::isExistingPath",
                                 "migrate"       => "",
@@ -358,7 +358,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "sambaHashHook",
                                 "type"          => "command",
-                                "default"       => "",
+                                "default"       => "perl -MCrypt::SmbHash -e \"print join(q[:], ntlmgen \\\$ARGV[0]), $/;\"",
                                 "description"   => sprintf(_("The 'sambaHashHook' statement contains an executable to generate samba hash values. This is required for password synchronization, but not required if you apply gosa-si services. If you don't have mkntpasswd from the samba distribution installed, you can use perl to generate the hash: %s"),"perl -MCrypt::SmbHash -e \"print join(q[:], ntlmgen \\\$ARGV[0]), $/;\""),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
@@ -410,7 +410,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "gidNumberBase",
                                 "type"          => "integer",
-                                "default"       => "",
+                                "default"       => "1000",
                                 "description"   => "The 'gidNumberBase' statement defines where to start looking for a new free group id. This should be synced with your 'adduser.conf' to avoid overlapping gidNumber values between local and LDAP based lookups. The gidNumberBase can even be dynamic. Take a look at the 'nextIdHook' definition.",
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
@@ -420,7 +420,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "uidNumberBase",
                                 "type"          => "integer",
-                                "default"       => "",
+                                "default"       => "1000",
                                 "description"   => "The 'uidNumberBase' statement defines where to start looking for a new free user id. This should be synced with your 'adduser.conf' to avoid overlapping uidNumber values between local and LDAP based lookups. The uidNumberBase can even be dynamic. Take a look at the 'baseIdHook' definition.",
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
@@ -532,7 +532,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "idGenerator",
                                 "type"          => "string",
-                                "default"       => "",
+                                "default"       => "{%sn}-{%givenName[2-4]}",
                                 "description"   => "The 'idGenerator' statement describes an automatic way to generate new user ids. There are two basic functions supported - which can be combined: 
 
  a) using attributes
@@ -592,7 +592,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "mailAttribute",
                                 "type"          => "switch",
-                                "default"       => "",
+                                "default"       => "mail",
                                 "defaults"      => "core::getPropertyValues",
                                 "description"   => "The 'mailAttribute' statement determines which attribute GOsa will use to create accounts. Valid values are 'mail' and 'uid'.",
                                 "check"         => "",
@@ -675,7 +675,7 @@ Examples
                         array(
                                 "name"          => "cyrusUseSlashes",
                                 "type"          => "bool",
-                                "default"       => "",
+                                "default"       => TRUE,
                                 "description"   => "The 'cyrusUseSlashes' statement determines if GOsa should use \"foo/bar\" or \"foo.bar\" namespaces in IMAP. Unix style is with slashes.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -685,7 +685,7 @@ Examples
                         array(
                                 "name"          => "vacationTemplateDirectory",
                                 "type"          => "path",
-                                "default"       => "",
+                                "default"       => "/etc/gosa/vacation",
                                 "description"   => "The 'vacationTemplateDirectory' statement sets the path where GOsa will look for vacation message templates. Default is /etc/gosa/vacation. 
 
 Example template /etc/gosa/vacation/business.txt:
@@ -706,7 +706,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "ldapTLS",
                                 "type"          => "bool",
-                                "default"       => "",
+                                "default"       => FALSE,
                                 "description"   => "The 'ldapTLS' statement enables or disables TLS operating on LDAP connections.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -716,7 +716,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "honourIvbbAttributes",
                                 "type"          => "bool",
-                                "default"       => "",
+                                "default"       => FALSE,
                                 "description"   => "The 'honourIvbbAttributes' statement enables the IVBB mode inside of GOsa. You need the ivbb.schema file from used by german authorities.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -726,7 +726,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "sambaIdMapping",
                                 "type"          => "bool",
-                                "default"       => "",
+                                "default"       => FALSE,
                                 "description"   => "The 'sambaIdMapping' statement tells GOsa to maintain sambaIdmapEntry objects. Depending on your setup this can drastically improve the windows login performance.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -736,7 +736,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "handleExpiredAccounts",
                                 "type"          => "bool",
-                                "default"       => "",
+                                "default"       => TRUE,
                                 "description"   => "The 'handleExpiredAccounts' statement enables shadow attribute tests during the login to the GOsa web interface and forces password renewal or account lockout.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -766,7 +766,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "enableSnapshots",
                                 "type"          => "bool",
-                                "default"       => "",
+                                "default"       => FALSE,
                                 "description"   => "The 'enableSnapshots' statement enables a snapshot mechaism in GOsa. This enables you to save certain states of entries and restore them later on.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -776,7 +776,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "snapshotBase",
                                 "type"          => "dn",
-                                "default"       => "",
+                                "default"       => "ou=snapshots,dc=localhost,dc=de",
                                 "description"   => "The 'snapshotBase' statement defines the base where snapshots should be stored inside of the LDAP.",
                                 "check"         => "gosaProperty::isDn",
                                 "migrate"       => "",
@@ -786,7 +786,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "snapshotAdminDn",
                                 "type"          => "dn",
-                                "default"       => "",
+                                "default"       => "cn=admin,dc=localhost,dc=de",
                                 "description"   => "The 'snapshotAdminDn' variable defines the user which is used to authenticate when connecting to 'snapshotURI'.",
                                 "check"         => "gosaProperty::isDn",
                                 "migrate"       => "",
@@ -796,7 +796,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "snapshotAdminPassword",
                                 "type"          => "string",
-                                "default"       => "",
+                                "default"       => "secret",
                                 "description"   => "The 'snapshotAdminPassword' variable defines the credentials which are used in combination with 'snapshotAdminDn' and 'snapshotURI' in order to authenticate.",
                                 "check"         => "",
                                 "migrate"       => "",
@@ -806,7 +806,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "snapshotURI",
                                 "type"          => "uri",
-                                "default"       => "",
+                                "default"       => "ldap://localhost:389",
                                 "description"   => "The 'snapshotURI' variable defines the LDAP URI for the server which is used to do object snapshots.",
                                 "check"         => "",
                                 "migrate"       => "",
