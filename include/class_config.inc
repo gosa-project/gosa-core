@@ -973,38 +973,26 @@ class config  {
   }
 
 
-  /*! \brief Check if there's the specified bool value set in the configuration
+  /*! \brief Checks if there's a bool property set in the configuration.
    *
    *  The function checks, weither the specified bool value is set to a true
-   *  value in the configuration file. Considered true are either true or yes,
-   *  case-insensitive.
+   *  value in the configuration file. 
    *
    *  Example usage:
    *  \code
-   *  if ($this->config->boolValueIsTrue("main", "copyPaste")) {
+   *  if ($this->config->boolValueIsTrue("core", "copyPaste")) {
    *    echo "Copy Paste Handling is enabled";
    *  }
    *  \endcode
    *
-   *  \param string 'section' Section in the configuration file.
+   *  \param string 'class' The properties class. e.g. 'core','user','sudo',...
    *  \param string 'value' Key in the given section, which is subject to check
    *
    *
    * */
-  function boolValueIsTrue($section, $value)
+  function boolValueIsTrue($class, $value)
   {
-    $section= strtoupper($section);
-    $value= strtoupper($value);
-    if (isset($this->data[$section][$value])){
-    
-      $data= $this->data[$section][$value];
-      if (preg_match("/^true$/i", $data) || preg_match("/yes/i", $data)){
-        return TRUE;
-      }
-
-    }
-
-    return FALSE;
+    return(preg_match("/true/i", $this->get_cfg_value($class,$name)));
   }
 
 
