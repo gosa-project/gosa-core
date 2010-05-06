@@ -66,7 +66,7 @@ class userManagement extends management
     $headpage->setFilter($filter);
 
     // Add copy&paste and snapshot handler.
-    if ($this->config->boolValueIsTrue("main", "copyPaste")){
+    if ($this->config->boolValueIsTrue("core", "copyPaste")){
       $this->cpHandler = new CopyPasteHandler($this->config);
     }
     if($this->config->get_cfg_value("core","enableSnapshots") == "true"){
@@ -705,7 +705,7 @@ class userManagement extends management
   function copyPasteHandler($action="",$target=array(),$all=array(),
       $altTabClass ="", $altTabType = "", $altAclCategory="",$altAclPlugin="")
   {
-    if ($this->config->boolValueIsTrue("main", "copyPaste")){
+    if ($this->config->boolValueIsTrue("core", "copyPaste")){
       $this->cpHandler->lastdn = "";
       $str = management::copyPasteHandler($action,$target,$all);
       if($this->cpHandler->lastdn != "" && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new"){
