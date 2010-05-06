@@ -74,7 +74,7 @@ if [ -d /etc/lighttpd/conf-available ]; then
     echo "Making /gosa available in /etc/lighttpd/conf-enabled/"
 
     # Add GOsa include file
-    ln -s /etc/gosa/99gosa-lighttpd.conf /etc/lighttpd/conf-enabled/99gosa-lighttpd.conf
+    ln -s /etc/gosa/gosa-lighttpd.conf /etc/lighttpd/conf-enabled/99gosa-lighttpd.conf
   fi
 
   # Finally restart servers
