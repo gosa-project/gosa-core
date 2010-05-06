@@ -55,7 +55,7 @@ class aclManagement extends management
     $headpage->setFilter($filter);
 
     // Add copy&paste and snapshot handler.
-    if ($this->config->boolValueIsTrue("main", "copyPaste")){
+    if ($this->config->boolValueIsTrue("core", "copyPaste")){
       $this->cpHandler = new CopyPasteHandler($this->config);
     }
     if($this->config->get_cfg_value("core","enableSnapshots") == "true"){
