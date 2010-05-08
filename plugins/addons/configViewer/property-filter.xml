@@ -12,7 +12,7 @@
 
   <search>
     <tag>default</tag>
-    <label>Used properties</label>
+    <label>Show effective properties</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
       <filter>status=(ldap|file|modified|removed)§cn=$</filter>
@@ -26,7 +26,7 @@
 
   <search>
     <tag>ldap</tag>
-    <label>LDAP</label>
+    <label>Show LDAP properties</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
       <filter>status=(ldap|modified|removed)§cn=$</filter>
@@ -40,7 +40,7 @@
 
   <search>
     <tag>modified</tag>
-    <label>Modified</label>
+    <label>Show modified properties</label>
     <query>
       <backend>CONFIGPROPERTIES</backend>
       <filter>status=(modified|removed)§cn=$</filter>
@@ -65,20 +65,5 @@
       <characters>3</characters>
     </autocomplete>
   </search>
-
-  <search>
-    <tag>group</tag>
-    <label>Filter by group</label>
-    <query>
-      <backend>CONFIGPROPERTIES</backend>
-      <filter>group=$</filter>
-    </query>
-    <autocomplete>
-      <attribute>status</attribute>
-      <frequency>0.5</frequency>
-      <characters>3</characters>
-    </autocomplete>
-  </search>
-
 
 </filterdef>
