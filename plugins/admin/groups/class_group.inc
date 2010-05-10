@@ -1020,6 +1020,19 @@ class group extends plugin
           "plSection"     => array("administration"),
           "plCategory"    => array("groups" => array("objectClass" => "posixGroup", "description" => _("Groups"))),
 
+          "plProperties" =>
+          array(
+              array(
+                  "name"          => "ogroupRDN",
+                  "type"          => "rdn",
+                  "default"       => "ou=groups,",
+                  "description"   => "The 'ogroupRDN' statement defines the location where new accounts will be created. The default is 'ou=groups,'.",
+                  "check"         => "gosaProperty::isRdn",
+                  "migrate"       => "",
+                  "group"         => "plugin",
+                  "mandatory"     => FALSE)),
+
+
           "plProvidedAcls"    => array(
             "cn"                => _("Name"),
             "description"       => _("Description"),
