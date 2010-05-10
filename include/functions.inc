@@ -3011,7 +3011,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
       }
 
       /* Find postmodify entries for this class */
-      $command= $config->search("password", "POSTMODIFY",array('menu'));
+      $command= $config->get_cfg_value("password","postmodify");
 
       if ($command != ""){
         /* Walk through attribute list */
