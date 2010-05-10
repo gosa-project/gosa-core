@@ -1006,6 +1006,14 @@ class config  {
     return ("");
   }
 
+   
+  /*! \brief          Check whether a plugin is activated or not 
+   */ 
+  function pluginEnabled($class){
+      $tmp = $this->search($class, "CLASS",array('menu','tabs'));
+      return(!empty($tmp));
+  }
+
 
   /*! \brief Get a configuration value from the config
    *
