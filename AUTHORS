@@ -77,3 +77,6 @@ documentation and additional help.
 * Wouter Verhelst <wouter@debian.org>
   accept-to-gettext code that helps for language conversation
 
+* Antoine Gallavardin <antoine.gallavardin@free.fr>
+  Dhcp plugin patch to manage key and update zone in dhcp for dyndns
+
