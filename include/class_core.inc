@@ -96,7 +96,7 @@ class core extends plugin {
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
                             "group"         => "authentification",
-                            "mandatory"     => FALSE),
+                            "mandatory"     => TRUE),
 
                         array(
                             "name"          => "logging",
@@ -107,7 +107,7 @@ class core extends plugin {
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
                             "group"         => "core",
-                            "mandatory"     => FALSE),
+                            "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "listSummary",
@@ -158,7 +158,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "schemaCheck",
@@ -168,7 +168,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "copyPaste",
@@ -178,7 +178,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "copyPaste",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "forceGlobals",
@@ -188,7 +188,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "forceSSL",
@@ -198,7 +198,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "ldapStats",
@@ -218,7 +218,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "ppdGzip",
@@ -291,7 +291,7 @@ class core extends plugin {
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "language",
@@ -333,7 +333,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "debugLevel",
@@ -385,7 +385,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "userRDN",
@@ -415,7 +415,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "uidNumberBase",
@@ -425,7 +425,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "gosaSupportURI",
@@ -456,7 +456,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "timezone",
@@ -467,7 +467,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "honourUnitTags",
@@ -711,7 +711,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "honourIvbbAttributes",
@@ -771,7 +771,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "snapshotBase",
