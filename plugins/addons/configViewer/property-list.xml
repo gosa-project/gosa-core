@@ -80,7 +80,7 @@
       <label>Name</label>
       <sortAttribute>cn</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:propertyName(class,cn,description)}</value>
+      <value>%{filter:propertyName(class,cn,description,mandatory)}</value>
       <export>true</export>
     </column>
 
@@ -88,7 +88,7 @@
       <label>Value</label>
       <sortAttribute>value</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:propertyValue(class,cn,value,type,default,defaults,check)}</value>
+      <value>%{filter:propertyValue(class,cn,value,type,default,defaults,check,mandatory)}</value>
       <export>true</export>
     </column>
 

@@ -75,7 +75,15 @@ class configViewer extends management
 
     function saveProperties()
     {
-        $this->config->configRegistry->saveChanges();
+        $all = $this->config->configRegistry->getAllProperties();
+        $valid = TRUE;
+        foreach($all as $prop){
+            $valid &= $prop->check();
+        }
+
+        if($valid){ 
+            $this->config->configRegistry->saveChanges();
+        }
     }
 
     function detectPostActions()
@@ -111,7 +119,7 @@ class configViewer extends management
         }
         return($class);
     }
-    static function propertyName($class,$cn, $description = array())
+    static function propertyName($class,$cn, $description,$mandatory)
     {
         $id = "{$class[0]}_{$cn[0]}";
 
@@ -119,9 +127,12 @@ class configViewer extends management
         if(isset($description[0])) $title = htmlentities($description[0],ENT_COMPAT, 'UTF-8');
         $title = preg_replace("/\n/", "<br>", $title);
         $tooltip = "<div id='tooltip_{$id}' class='tooltip' style='display:none'>".$title."</div>";
-        return($tooltip."<span title='tooltip_{$id}'>{$cn[0]}</span>");
+
+        $must = ($mandatory[0]) ? "<span class='required'>*</span>" : "";
+
+        return($tooltip."<span title='tooltip_{$id}'>{$cn[0]}{$must}</span>");
     }
-    static function propertyValue($class,$cn,$value,$type,$default,$defaults,$check)
+    static function propertyValue($class,$cn,$value,$type,$default,$defaults,$check,$mandatory)
     {
         $ssize  = "208px";
         $isize  = "200px";
@@ -162,16 +173,21 @@ class configViewer extends management
                 break;
             default: echo $type[0].$name."  ";$res = ""; 
         }
-        
+       
+        // Check if it is a required value. 
+        if($mandatory[0] && empty($value)){
+           $res.= "<rowClass:entry-error/>";
+        }
+
         // Color row in red if the check methods returns false.
-        if(!empty($check[0])){
+        if(!empty($check[0]) && !empty($value)){
             $check = call_user_func(preg_split("/::/", $check[0]),$displayMessage=FALSE, $class[0], $cn[0], $value, $type[0]);
             if(!$check){
                 $res.= "<rowClass:entry-error/>";
             }
         }
 
-        return($res." <i>(".$value.")</i>");
+        return($res);
     }
 }
 ?>

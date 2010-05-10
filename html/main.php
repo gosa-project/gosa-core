@@ -77,7 +77,7 @@ if(session::global_get('_LAST_PAGE_REQUEST') == ""){
 }else{
 
   /* check GOsa.conf for defined session lifetime */
-  $max_life= $config->get_cfg_value("core","sessionLifetime", 60*60*2);
+  $max_life= $config->get_cfg_value("core","sessionLifetime");
 
   /* get time difference between last page reload */
   $request_time = (time()- session::global_get('_LAST_PAGE_REQUEST'));
