@@ -38,7 +38,7 @@ class aclManagement extends management
     $this->config = $config;
     $this->ui = $ui;
    
-    $this->storagePoints = array(get_ou("aclRoleRDN")); // ACLs are attached to department containers
+    $this->storagePoints = array(get_ou("aclrole", "aclRoleRDN") ); // ACLs are attached to department containers
 
     // Build filter
     if (session::global_is_set(get_class($this)."_filter")){
