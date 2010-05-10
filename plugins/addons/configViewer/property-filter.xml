@@ -66,4 +66,18 @@
     </autocomplete>
   </search>
 
+  <search>
+    <tag>byGroup</tag>
+    <label>Search for property groups</label>
+    <query>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>group=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>status</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
 </filterdef>
