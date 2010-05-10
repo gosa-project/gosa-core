@@ -289,17 +289,8 @@ class group extends plugin
 
 
 
-    if($this->config->search("nagiosaccount", "CLASS",array('menu'))){
-      $smarty->assign("nagios",true);
-    }else{
-      $smarty->assign("nagios",false);
-    }
-    
-    if($this->config->search("phoneAccount", "CLASS",array('menu'))){
-      $smarty->assign("pickupGroup",true);
-    }else{
-      $smarty->assign("pickupGroup",false);
-    }
+    $smarty->assign("nagios", $this->config->pluginEnabled("nagiosAccount"));
+    $smarty->assign("pickupGroup", $this->config->pluginEnabled("phoneAccount"));
 
     /* Manage object add dialog */
     if ($this->userSelect){
