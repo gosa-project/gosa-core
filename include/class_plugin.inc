@@ -466,7 +466,7 @@ class plugin
     }
 
     /* Find hooks entries for this class */
-    $command = $config->configRegistry->getPropertyValue(get_class($plugin),"check");
+    $command = $this->config->configRegistry->getPropertyValue(get_class($plugin),"check");
     if ($command != ""){
 
       if (!check_command($command)){
