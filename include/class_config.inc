@@ -160,11 +160,6 @@ class config  {
       msg_dialog::display(_("Configuration error"), $msg, FATAL_ERROR_DIALOG);
       exit;
     }
-
-    // Default schemacheck to "true"
-    if(!isset($this->data['MAIN']['SCHEMACHECK'])){
-      $this->data['MAIN']['SCHEMACHECK'] = "true";
-    }
   }
 
   function tag_open($parser, $tag, $attrs)
@@ -361,43 +356,10 @@ class config  {
   {
     $this->current= $this->data['LOCATIONS'][$name];
 
-    if (!isset($this->current['USERRDN'])){
-      $this->current['USERRDN']= "ou=people";
-    }
-    if (!isset($this->current['GROUPRDN'])){
-      $this->current['GROUPS']= "ou=groups";
-    }
-
     if (isset($this->current['INITIAL_BASE'])){
       session::global_set('CurrentMainBase',$this->current['INITIAL_BASE']);
     }
   
-    /* Remove possibly added ',' from end of group and people ou */
-    $this->current['GROUPS'] = preg_replace("/,*$/","",$this->current['GROUPRDN']);
-    $this->current['USERRDN'] = preg_replace("/,*$/","",$this->current['USERRDN']);
-
-    if (!isset($this->current['SAMBAMACHINEACCOUNTRDN'])){
-      $this->current['SAMBAMACHINEACCOUNTRDN']= "ou=winstations,ou=systems";
-    }
-    if (!isset($this->current['ACCOUNTPRIMARYATTRIBUTE'])){
-      $this->current['ACCOUNTPRIMARYATTRIBUTE']= "cn";
-    }
-    if (!isset($this->current['MINID'])){
-      $this->current['MINID']= 100;
-    }
-    if (!isset($this->current['LDAPSIZELIMIT'])){
-      $this->current['LDAPSIZELIMIT']= 200;
-    }
-    if (!isset($this->current['SIZEINGORE'])){
-      $this->current['LDAPSIZEIGNORE']= TRUE;
-    } else {
-      if (preg_match("/true/i", $this->current['LDAPSIZEIGNORE'])){
-        $this->current['LDAPSIZEIGNORE']= TRUE;
-      } else {
-        $this->current['LDAPSIZEIGNORE']= FALSE;
-      }
-    }
-
     /* Sort referrals, if present */
     if (isset ($this->current['REFERRAL'])){
       $bases= array();
@@ -457,11 +419,8 @@ class config  {
 
     /* Search mailMethod konfiguration in main section too 
      */
-    $this->current['MAILMETHOD'] = $this->get_cfg_value("core","mailMethod","");
-    if (!isset($this->current['MAILMETHOD'])){
-      $this->current['MAILMETHOD']= "";
-    }
-    if ($this->current['MAILMETHOD'] == ""){
+    $tmp = $this->get_cfg_value("core","mailMethod");
+    if ($tmp){
       $ldap->search ("(objectClass=goMailServer)", array('cn'));
       $this->data['SERVERS']['IMAP']= array();
       while ($attrs= $ldap->fetch()){

@@ -211,6 +211,16 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "ldapSizelimit",
+                                "type"          => "bool",
+                                "default"       => 200,
+                                "description"   => _("The ldapSizelimit statement tells GOsa to retrieve the specified maximum number of results. The user will get  a  warning,  that  not  all entries were shown."), 
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => TRUE),
+
+                        array(
                                 "name"          => "warnSSL",
                                 "type"          => "bool",
                                 "default"       => "true",
