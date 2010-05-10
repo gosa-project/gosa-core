@@ -974,7 +974,9 @@ class config  {
   }
 
 
-  /*! Search for a configuration setting in different categories
+  /*! Outdated - try to use pluginEnabled, boolValueIsTrue or get_cfg_value instead. 
+   *
+   *  (Search for a configuration setting in different categories
    *
    *  Searches for the value of a given key in the configuration data.
    *  Optionally the list of categories to search (tabs, main, locations) can
@@ -984,6 +986,7 @@ class config  {
    *  \code
    *  $postcmd = $this->config->search(get_class($this), "POSTCOMMAND", array("menu", "tabs"));
    *  \endcode
+   *  ) 
    *
    * */
   function search($class, $value, $categories= "")
