@@ -715,6 +715,21 @@ class aclrole extends acl
           "plPriority"    => 0,
           "plSection"     => array("administration"),
           "plCategory"    => array("acl"),
+          "plProperties" =>
+          array(
+              array(
+                  "name"          => "aclRoleRDN",
+                  "type"          => "rdn",
+                  "default"       => "ou=aclroles,",
+                  "description"   => "The 'aclRoleRDN' statement defines the location where new acl roles will be created. The default is 'ou=aclroles,'.",
+                  "check"         => "gosaProperty::isRdn",
+                  "migrate"       => "",
+                  "group"         => "plugin",
+                  "mandatory"     => FALSE
+                  )
+              ),
+
+
           "plProvidedAcls"    => array(
             "cn"                => _("Name"),
             "base"              => _("Base"),
