@@ -334,8 +334,8 @@ class config  {
       }
 
       if (!session::global_is_set('size_limit')){
-        session::global_set('size_limit',$this->current['LDAPSIZELIMIT']);
-        session::global_set('size_ignore',$this->current['LDAPSIZEIGNORE']);
+        session::global_set('size_limit', $this->get_cfg_value('core', 'ldapSizeLimit'));
+        session::global_set('size_ignore', $this->boolValueIsTrue('core', 'ldapSizeIgnore'));
       }
     }
 
