@@ -466,8 +466,7 @@ class plugin
     }
 
     /* Find hooks entries for this class */
-    $command= $this->config->search(get_class($this), "CHECK", array('menu', 'tabs'));
-
+    $command = $config->configRegistry->getPropertyValue(get_class($plugin),"check");
     if ($command != ""){
 
       if (!check_command($command)){
