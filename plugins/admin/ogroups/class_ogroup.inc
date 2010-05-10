@@ -102,7 +102,7 @@ class ogroup extends plugin
       $ui = get_userinfo();
       $this->base= dn2base(session::global_is_set("CurrentMainBase")?"cn=dummy,".session::global_get("CurrentMainBase"):$ui->dn);
     } else {
-      $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"), '/')."/i","",$this->dn);
+      $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("group", "ogroupRDN") , '/')."/i","",$this->dn);
     }
 
     /* Detect all workstations, which are already assigned to an object group  
@@ -432,24 +432,24 @@ class ogroup extends plugin
         "departments"     => array("OBJ"=>"department", "CLASS"=>"gosaDepartment" ,
           "DN"=> ""                        ,"ACL" => "department"), 
         "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
-          "DN"=> get_ou('serverRDN')        ,"ACL" => "server"),
+          "DN"=> get_ou("group", "ogroupRDN")         ,"ACL" => "server"),
         "workstations"    => array("OBJ"=>"workgeneric", "CLASS"=>"gotoWorkstation",
-          "DN"=> get_ou('workstationRDN')   ,"ACL" => "workstation"),
+          "DN"=> get_ou("group", "ogroupRDN")    ,"ACL" => "workstation"),
         "winstations"     => array("OBJ"=>"wingeneric", "CLASS"=>"opsiClient",        
-          "DN"=> get_ou('SAMBAMACHINEACCOUNTRDN')     ,"ACL" => "winstation"),
+          "DN"=> get_ou("group", "ogroupRDN")      ,"ACL" => "winstation"),
         "terminals"       => array("OBJ"=>"termgeneric", "CLASS"=>"gotoTerminal"   ,
-          "DN"=> get_ou('terminalRDN')      ,"ACL" => "terminal"),
+          "DN"=> get_ou("group", "ogroupRDN")       ,"ACL" => "terminal"),
         "printers"        => array("OBJ"=>"printgeneric", "CLASS"=>"gotoPrinter"    ,
-          "DN"=> get_ou('printerRDN')       ,"ACL" => "printer"),
+          "DN"=> get_ou("group", "ogroupRDN")        ,"ACL" => "printer"),
         "phones"          => array("OBJ"=>"phoneGeneric", "CLASS"=>"goFonHardware"  ,
-          "DN"=> get_ou('phoneRDN')         ,"ACL" => "phone"));
+          "DN"=> get_ou("group", "ogroupRDN")          ,"ACL" => "phone"));
 
 
     /* Allow searching for applications, if we are not using release managed applications 
       */
     if(!$this->IsReleaseManagementActivated()){
       $p_f[      "applications"]    = array("OBJ"=>"application", "CLASS"=>"gosaApplication",
-          "DN"=> get_ou('applicationRDN')   ,"ACL" => "application"); 
+          "DN"=> get_ou("group", "ogroupRDN")    ,"ACL" => "application"); 
     }
            
     /*###########
@@ -625,7 +625,7 @@ class ogroup extends plugin
 
     /* Permissions for that base? */
     if ($this->base != ""){
-      $new_dn= 'cn='.$this->cn.','.get_ou('ogroupRDN').$this->base;
+      $new_dn= 'cn='.$this->cn.','.get_ou("group", "ogroupRDN") .$this->base;
     } else {
       $new_dn= $this->dn;
     }
@@ -703,7 +703,7 @@ class ogroup extends plugin
 
     /* New accounts need proper 'dn', propagate it to remaining objects */
     if ($this->dn == 'new'){
-      $this->dn= 'cn='.$this->cn.','.get_ou('ogroupRDN').$this->base;
+      $this->dn= 'cn='.$this->cn.','.get_ou("group", "ogroupRDN") .$this->base;
     }
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
