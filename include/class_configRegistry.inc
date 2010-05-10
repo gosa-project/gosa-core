@@ -12,7 +12,6 @@ class configRegistry{
 
     function __construct($config)
     {
-        restore_error_handler();
         $this->config = &$config;
         $this->reload();
     }
