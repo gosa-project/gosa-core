@@ -1396,67 +1396,104 @@ function get_sub_department($value)
  * Example:
  * \code
  * # Determine LDAP base where systems are stored
- * $base = get_ou("core", "userRDN")  . $this->config->current['BASE'];
+ * $base = get_ou('systemRDN') . $this->config->current['BASE'];
  * $ldap->cd($base);
  * \endcode
  * */
-function get_ou($class,$name)
+function get_ou($name)
 {
-    global $config;
+  global $config;
 
+  $map = array( 
+                "roleRDN"      => "ou=roles,",
+                "ogroupRDN"      => "ou=groups,",
+                "applicationRDN" => "ou=apps,",
+                "systemRDN"     => "ou=systems,",
+                "serverRDN"      => "ou=servers,ou=systems,",
+                "terminalRDN"    => "ou=terminals,ou=systems,",
+                "workstationRDN" => "ou=workstations,ou=systems,",
+                "printerRDN"     => "ou=printers,ou=systems,",
+                "phoneRDN"       => "ou=phones,ou=systems,",
+                "componentRDN"   => "ou=netdevices,ou=systems,",
+                "sambaMachineAccountRDN"   => "ou=winstation,",
 
-    // Check if RDN exists.
-    if(!$config->configRegistry->propertyExists($class, $name)){
-        trigger_error("No department mapping found for type ".$name);
-        return "";
-    }
+                "faxBlocklistRDN"   => "ou=gofax,ou=systems,",
+                "systemIncomingRDN"    => "ou=incoming,",
+                "aclRoleRDN"     => "ou=aclroles,",
+                "phoneMacroRDN"       => "ou=macros,ou=asterisk,ou=configs,ou=systems,",
+                "phoneConferenceRDN"  => "ou=conferences,ou=asterisk,ou=configs,ou=systems,",
 
-    $ou = $config->get_cfg_value($class,$name);
-    if ($ou != ""){
-        if (!preg_match('/^[^=]+=[^=]+/', $ou)){
-            $ou = @LDAP::convert("ou=$ou");
-        } else {
-            $ou = @LDAP::convert("$ou");
-        }
-        if(preg_match("/".preg_quote($config->current['BASE'], '/')."$/",$ou)){
-            return($ou);
-        }else{
-            return("$ou,");
-        }
+                "faiBaseRDN"         => "ou=fai,ou=configs,ou=systems,",
+                "faiScriptRDN"   => "ou=scripts,",
+                "faiHookRDN"     => "ou=hooks,",
+                "faiTemplateRDN" => "ou=templates,",
+                "faiVariableRDN" => "ou=variables,",
+                "faiProfileRDN"  => "ou=profiles,",
+                "faiPackageRDN"  => "ou=packages,",
+                "faiPartitionRDN"=> "ou=disk,",
 
+                "sudoRDN"       => "ou=sudoers,",
+
+                "deviceRDN"      => "ou=devices,",
+                "mimetypeRDN"    => "ou=mime,");
+
+  /* Preset ou... */
+  if ($config->get_cfg_value("core",$name, "_not_set_") != "_not_set_"){
+    $ou= $config->get_cfg_value("core",$name);
+  } elseif (isset($map[$name])) {
+    $ou = $map[$name];
+    return($ou);
+  } else {
+    trigger_error("No department mapping found for type ".$name);
+    return "";
+  }
+ 
+  if ($ou != ""){
+    if (!preg_match('/^[^=]+=[^=]+/', $ou)){
+      $ou = @LDAP::convert("ou=$ou");
     } else {
-        return "";
+      $ou = @LDAP::convert("$ou");
     }
+
+    if(preg_match("/".preg_quote($config->current['BASE'], '/')."$/",$ou)){
+      return($ou);
+    }else{
+      return("$ou,");
+    }
+  
+  } else {
+    return "";
+  }
 }
 
 
 /*! \brief Get the OU for users 
  *
- * Frontend for get_ou("core", "userRDN")  with userRDN
+ * Frontend for get_ou() with userRDN
  * */
 function get_people_ou()
 {
-  return (get_ou("core", "userRDN") );
+  return (get_ou("userRDN"));
 }
 
 
 /*! \brief Get the OU for groups
  *
- * Frontend for get_ou("core", "userRDN")  with groupRDN
+ * Frontend for get_ou() with groupRDN
  */
 function get_groups_ou()
 {
-  return (get_ou("core", "userRDN") );
+  return (get_ou("groupRDN"));
 }
 
 
 /*! \brief Get the OU for winstations
  *
- * Frontend for get_ou("core", "userRDN")  with sambaMachineAccountRDN
+ * Frontend for get_ou() with sambaMachineAccountRDN
  */
 function get_winstations_ou()
 {
-  return (get_ou("core", "userRDN") );
+  return (get_ou("sambaMachineAccountRDN"));
 }
 
 

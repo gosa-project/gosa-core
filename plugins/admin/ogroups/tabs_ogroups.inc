@@ -344,7 +344,7 @@ class ogrouptabs extends tabs
 
         /* Check for new 'dn', in order to propagate the
            'dn' to all plugins */
-        $new_dn= 'cn='.$baseobject->cn.','.get_ou("group", "ogroupRDN") .$baseobject->base;
+        $new_dn= 'cn='.$baseobject->cn.','.get_ou('ogroupRDN').$baseobject->base;
 
         /* Move group? */
         if (LDAP::fix($this->dn) != LDAP::fix($new_dn)){
@@ -360,7 +360,7 @@ class ogrouptabs extends tabs
         }
 
         if ($this->dn == "new"){
-            $this->dn= 'cn='.$baseobject->cn.','.get_ou("group", "ogroupRDN") .$baseobject->base;
+            $this->dn= 'cn='.$baseobject->cn.','.get_ou('ogroupRDN').$baseobject->base;
         }
 
         /* Only delete attributes if there are members left */
