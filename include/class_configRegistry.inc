@@ -88,13 +88,13 @@ class configRegistry{
                 // Register Post Events (postmodfiy,postcreate,postremove,checkhook)
                 if(isset($def['plShortName'])){
                     $this->classToName[$cname] = $def['plShortName'];
-                    $data = array('name' => 'postcreate','type' => 'string');
+                    $data = array('name' => 'postcreate','type' => 'command');
                     $this->register($cname, $data);    
-                    $data = array('name' => 'postremove','type' => 'string');
+                    $data = array('name' => 'postremove','type' => 'command');
                     $this->register($cname, $data);    
-                    $data = array('name' => 'postmodify','type' => 'string');
+                    $data = array('name' => 'postmodify','type' => 'command');
                     $this->register($cname, $data);    
-                    $data = array('name' => 'checkhook', 'type' => 'string');
+                    $data = array('name' => 'check', 'type' => 'command');
                     $this->register($cname, $data);    
                 }
 
