@@ -91,7 +91,7 @@ class core extends plugin {
                         array(
                             "name"          => "htaccessAuthentication",
                             "type"          => "bool",
-                            "default"       => FALSE,
+                            "default"       => "false",
                             "description"   => _("The 'htaccessAuthentication' variable tells GOsa to use either htaccess authentication or LDAP authentication. This can be used if you want to use i.e. kerberos to authenticate the users."),
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
@@ -101,7 +101,7 @@ class core extends plugin {
                         array(
                             "name"          => "logging",
                             "type"          => "bool",
-                            "default"       => TRUE,
+                            "default"       => "true",
                             "description"   => _("The 'logging' statement enables event logging on GOsa side. Setting it to 'true' GOsa will log every action a user performs via syslog. If you use rsyslog and configure it to mysql logging, you can browse all events within GOsa. GOsa will not log anything, if the logging value is empty or set to 'false'."),
 
                             "check"         => "gosaProperty::isBool",
@@ -112,7 +112,7 @@ class core extends plugin {
                         array(
                                 "name"          => "listSummary",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => _("The 'listSummary' statement determines whether a status bar will be shown on the bottom of GOsa generated lists, displaying a short summary of type and number of elements in the list."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -153,7 +153,7 @@ class core extends plugin {
                         array(
                                 "name"          => "displayErrors",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'displayErrors' statement tells GOsa to show PHP errors in the upper part of the screen. This should be disabled in productive deployments, because there might be some important passwords arround.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -163,7 +163,7 @@ class core extends plugin {
                         array(
                                 "name"          => "schemaCheck",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "The 'schemaCheck' statement enables or disables schema checking during login. It is recommended to switch this on in order to let GOsa handle object creation more efficient.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -173,7 +173,7 @@ class core extends plugin {
                         array(
                                 "name"          => "copyPaste",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'copyPaste' statement enables copy and paste for LDAP entries managed with GOsa.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -183,7 +183,7 @@ class core extends plugin {
                         array(
                                 "name"          => "forceGlobals",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'forceGlobals' statement enables PHP security checks to force register_global settings to be switched off.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -193,7 +193,7 @@ class core extends plugin {
                         array(
                                 "name"          => "forceSSL",
                                 "type"          => "string",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'forceSSL' statement enables PHP security checks to force encrypted access to the web interface. GOsa will try to redirect to the same URL - just with https://",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -203,7 +203,7 @@ class core extends plugin {
                         array(
                                 "name"          => "ldapStats",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => _("Logs information about triggered ldap operations, duration, filter, aso. into syslog."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -213,7 +213,7 @@ class core extends plugin {
                         array(
                                 "name"          => "warnSSL",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "The 'warnSSL' statement enables PHP security checks to detect non encrypted access to the web interface. GOsa will display a warning in this case.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -223,7 +223,7 @@ class core extends plugin {
                         array(
                                 "name"          => "ppdGzip",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "The 'ppdGzip' variable enables PPD file compression.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -265,7 +265,7 @@ class core extends plugin {
                         array(
                                 "name"          => "storeFilterSettings",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "The 'storeFilterSettings' statement determines whether GOsa should store filter and plugin settings inside of a cookie.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -275,7 +275,7 @@ class core extends plugin {
                         array(
                                 "name"          => "sendCompressedOutput",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "The 'sendCompressedOutput' statement determines whether PHP should send compressed HTML pages to browsers or not. This may increase or decrease the performance, depending on your network.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -472,7 +472,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "honourUnitTags",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'honourUnitTags' statement enables checking of 'unitTag' attributes when using administrative units. If this is set to 'true' GOsa can only see objects inside the administrative unit a user is logged into.",
                                 "check"         => "",
                                 "migrate"       => "gosaProperty::isBool",
@@ -482,7 +482,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "useSaslForKerberos",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'useSaslForKerberos' statement defines the way the kerberos realm is stored in the #userPassword' attribute. Set it to 'true' in order to get {sasl}user@REALM.NET, or to 'false' to get {kerberos}user@REALM.NET. The latter is outdated, but may be needed from time to time.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -492,7 +492,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "rfc2307bis",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'rfc2307bis' statement enables rfc2307bis style groups in GOsa. You can use 'member' attributes instead of memberUid in this case. To make it work on unix systems, you've to adjust your NSS configuration to use rfc2307bis style groups, too",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -502,7 +502,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "personalTitleInDN",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'personalTitleInDN' option tells GOsa to include the personal title in user DNs when #accountPrimaryAttribute' is set to \"cn\".",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -572,7 +572,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "strictNamingRules",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "The 'strictNamingRules' statement enables strict checking of uids and group names. If you need characters like . or - inside of your accounts, set this to 'false'",
@@ -675,7 +675,7 @@ Examples
                         array(
                                 "name"          => "cyrusUseSlashes",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "The 'cyrusUseSlashes' statement determines if GOsa should use \"foo/bar\" or \"foo.bar\" namespaces in IMAP. Unix style is with slashes.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -706,7 +706,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "ldapTLS",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'ldapTLS' statement enables or disables TLS operating on LDAP connections.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -716,7 +716,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "honourIvbbAttributes",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'honourIvbbAttributes' statement enables the IVBB mode inside of GOsa. You need the ivbb.schema file from used by german authorities.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -726,7 +726,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "sambaIdMapping",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'sambaIdMapping' statement tells GOsa to maintain sambaIdmapEntry objects. Depending on your setup this can drastically improve the windows login performance.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -736,7 +736,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "handleExpiredAccounts",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => "The 'handleExpiredAccounts' statement enables shadow attribute tests during the login to the GOsa web interface and forces password renewal or account lockout.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -766,7 +766,7 @@ Example template /etc/gosa/vacation/business.txt:
                         array(
                                 "name"          => "enableSnapshots",
                                 "type"          => "bool",
-                                "default"       => FALSE,
+                                "default"       => "false",
                                 "description"   => "The 'enableSnapshots' statement enables a snapshot mechaism in GOsa. This enables you to save certain states of entries and restore them later on.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",

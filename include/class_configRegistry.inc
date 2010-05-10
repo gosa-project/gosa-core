@@ -218,6 +218,26 @@ class gosaProperty
         $this->_restoreCurrentValue(); 
     }
 
+    function check()
+    {
+        $val = $this->getValue(TRUE);
+        $return = TRUE;
+        if($this->mandatory && empty($val)){
+            msg_dialog::display(_("Error"), msgPool::required(_($this->name)), ERROR_DIALOG);
+            $return = FALSE;
+        }
+
+        $check = $this->getCheck();
+        if(!empty($val) && !empty($check)){
+            $res = call_user_func(preg_split("/::/", $this->check),$messages=TRUE, $this->class,$this->name,$val, $this->type);
+            if(!$res){
+                msg_dialog::display(_("Error"), msgPool::invalid(_($this->name)), ERROR_DIALOG);
+                $return = FALSE;
+            }
+        }
+        return($return);
+    }
+
     static function isBool($message,$class,$name,$value, $type)
     {
         return(in_array($value,array('true','false','')));
@@ -245,12 +265,12 @@ class gosaProperty
 
     static function isDn($message,$class,$name,$value, $type)
     {
-        return(TRUE);
+        return(preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*$/i", $value));
     }
 
     static function isRdn($message,$class,$name,$value, $type)
     {
-        return(TRUE);
+        return(preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*$/i", $value));
     }
 
     private function _restoreCurrentValue()
@@ -290,7 +310,9 @@ class gosaProperty
 
     function setValue($str) 
     {
-        if($this->value != $str){
+        if(in_array($this->getStatus(), array('modified'))){
+            $this->tmp_value = $str; 
+        }elseif($this->value != $str){
             $this->setStatus('modified'); 
             $this->tmp_value = $str; 
         }
