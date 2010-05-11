@@ -64,9 +64,9 @@ class commandVerifier
         return($smarty->fetch(get_template_path('commandVerifier.tpl', 'TRUE')));
     }
 
-function save_object()
-{
-    if(isset($_POST['command'])) $this->command = get_post('command');
+    function save_object()
+    {
+        if(isset($_POST['command'])) $this->command = get_post('command');
     }
 
     function save()

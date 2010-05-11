@@ -147,6 +147,10 @@ class configViewer extends management
         $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
         $value = htmlentities($value[0],ENT_COMPAT,'UTF-8');
+
+        // Add slashes to keep escaped values escaped after passing them to smarty.
+        $value = addslashes($value);
+
         switch($type[0]){
             case 'bool':
                 $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
