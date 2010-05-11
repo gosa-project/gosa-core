@@ -459,6 +459,17 @@ DEBUG_SI      = 256"),
                                 "migrate"       => "",
                                 "group"         => "id",
                                 "mandatory"     => TRUE),
+
+                       array(
+                                "name"          => "baseIdHook",
+                                "type"          => "cmd",
+                                "default"       => "",
+                                "description"   => _("The 'baseIdHook' statement allows to hook into the id generation method (traditional mode), to define the starting range for new generated ids"), 
+                                "check"         => "gosaProperty::isCommand",
+                                "migrate"       => "",
+                                "group"         => "id",
+                                "mandatory"     => TRUE),
+
                         array(
                                 "name"          => "gidNumberPoolMin",
                                 "type"          => "integer",
