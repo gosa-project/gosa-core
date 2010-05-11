@@ -192,7 +192,7 @@ class core extends plugin {
 
                         array(
                                 "name"          => "forceSSL",
-                                "type"          => "string",
+                                "type"          => "bool",
                                 "default"       => "false",
                                 "description"   => "The 'forceSSL' statement enables PHP security checks to force encrypted access to the web interface. GOsa will try to redirect to the same URL - just with https://",
                                 "check"         => "gosaProperty::isBool",
