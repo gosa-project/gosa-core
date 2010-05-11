@@ -17,8 +17,11 @@
  <button type='submit' name='execute'>{t}Test{/t}</button> 
 </p>
 
-<hr>
-  {$output}
+{if $output}
+ <hr>
+ {$output}
+{/if}
+
 <hr>
 
 <div class="plugin-actions">
