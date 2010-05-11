@@ -78,7 +78,6 @@ class configViewer extends management
         $all = $this->config->configRegistry->getAllProperties();
         $valid = TRUE;
         foreach($all as $prop){
-            echo $prop->getClass()."::".$prop->getName()."<br>";
             $valid &= $prop->check();
         }
 
