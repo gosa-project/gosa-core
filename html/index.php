@@ -37,7 +37,7 @@ function displayLogin()
     error_reporting(E_ALL | E_STRICT);
 
     /* Check theme compatibility */
-    $theme= $config->get_cfg_value("core",'theme', 'default');
+    $theme= $config->get_cfg_value("core",'theme');
     if (file_exists("$BASE_DIR/ihtml/themes/$theme/blacklist")) {
         $blocks= file("$BASE_DIR/ihtml/themes/$theme/blacklist");
         foreach ($blocks as $block) {
@@ -171,7 +171,7 @@ if ($config->get_cfg_value("core","sendCompressedOutput") != "") {
 }
 
 /* Set template compile directory */
-$smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory", '/var/spool/gosa');
+$smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory");
 $smarty->error_unassigned= true;
 
 /* Check for compile directory */
