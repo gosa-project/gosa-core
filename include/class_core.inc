@@ -214,6 +214,16 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "ldapFollowReferrals",
+                                "type"          => "bool",
+                                "default"       => "false",
+                                "description"   => _("The 'ldapFollowReferrals' statement tells GOsa to follow LDAP referrals."),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "ldap",
+                                "mandatory"     => TRUE),
+
+                        array(
                                 "name"          => "ldapSizelimit",
                                 "type"          => "integer",
                                 "default"       => 200,
