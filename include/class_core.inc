@@ -472,7 +472,7 @@ DEBUG_SI      = 256"),
 
                        array(
                                 "name"          => "baseIdHook",
-                                "type"          => "cmd",
+                                "type"          => "command",
                                 "default"       => "",
                                 "description"   => _("The 'baseIdHook' statement allows to hook into the id generation method (traditional mode), to define the starting range for new generated ids"), 
                                 "check"         => "gosaProperty::isCommand",
