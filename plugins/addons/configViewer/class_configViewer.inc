@@ -41,7 +41,7 @@ class configViewer extends management
         $all = $this->config->configRegistry->getAllProperties();
         foreach($all as $prop){
             $post = "{$prop->getClass()}:{$prop->getName()}";
-            if(isset($_POST[$post]) && !in_array($prop->getStatus(),array('removed'))){
+            if(isset($_POST[$post]) && $prop->getStatus() != 'removed'){
                 $prop->setValue(get_post($post));
             }
         }
@@ -50,11 +50,8 @@ class configViewer extends management
 
     function renderList()
     {
-        // Walk trough all properties and check if there posts for us.
+        // Walk trough all properties and check if we have modified something
         $all = $this->config->configRegistry->getAllProperties();
-
-        $htmlTooltips = "";
-        $jsTooltips = "";
         foreach($all as $prop){
             $modified = in_array($prop->getStatus(),array('modified','removed'));
             if($modified) break;
@@ -62,8 +59,6 @@ class configViewer extends management
        
         $smarty = get_smarty();
         $smarty->assign('is_modified', $modified);
-        $smarty->assign('htmlTooltips', $htmlTooltips);
-        $smarty->assign('jsTooltips', $jsTooltips);
         return(management::renderList());
     }
 
