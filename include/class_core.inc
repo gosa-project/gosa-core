@@ -225,6 +225,16 @@ class core extends plugin {
                                 "mandatory"     => TRUE),
 
                         array(
+                                "name"          => "ldapFilterNestingLimit",
+                                "type"          => "integer",
+                                "default"       => 200,
+                                "description"   => _("The 'ldapFilterNestingLimit' statement can be used to speed up group handling for groups with several hundreds of members. The default behaviour is, that GOsa will resolv the memberUid values in a group to real names. To achieve this, it writes a single filter to minimize searches. Some LDAP servers (namely Sun DS) simply crash when the filter gets too big. You can set a member limit, where GOsa will stop to do these lookups."),
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "ldap",
+                                "mandatory"     => TRUE),
+
+                        array(
                                 "name"          => "ldapSizelimit",
                                 "type"          => "integer",
                                 "default"       => 200,
@@ -468,7 +478,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => FALSE),
 
                         array(
                                 "name"          => "gidNumberPoolMin",
@@ -478,7 +488,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => FALSE),
 
                         array(
                                 "name"          => "gidNumberPoolMax",
@@ -488,7 +498,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => FALSE),
 
                         array(
                                 "name"          => "uidNumberPoolMin",
@@ -498,7 +508,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => FALSE),
 
                         array(
                                 "name"          => "uidNumberPoolMax",
@@ -508,7 +518,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => FALSE),
 
                         array(
                                 "name"          => "uidNumberBase",
@@ -518,7 +528,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => FALSE),
 
                         array(
                                 "name"          => "gosaSupportURI",
