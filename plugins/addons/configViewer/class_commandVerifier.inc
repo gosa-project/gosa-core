@@ -51,11 +51,11 @@ class commandVerifier
             $code = proc_close($process);
 
             if(!empty($stdout)) $stdout = "<pre>{$stdout}</pre>";
-            if(!empty($stdout)) $stdout = "<pre>{$stdout}</pre>";
+            if(!empty($stderr)) $stderr = "<pre>{$stderr}</pre>";
             $output = "
                 <table summary='"._("Results")."'>
                 <tr><td><b>Result:</b></td><td>$stdout</td></tr>
-                <tr><td><b>Error:</b></td><td>$stdout</td></tr>
+                <tr><td><b>Error:</b></td><td>$stderr</td></tr>
                 <tr><td><b>Return code:</b></td><td>$code</td></tr>
                 </table>";
         }
