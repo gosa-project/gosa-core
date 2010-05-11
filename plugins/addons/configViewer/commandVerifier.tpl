@@ -1,4 +1,15 @@
 <h3>{t}Command verifier{/t}</h3>
+<p>
+ {t}Here you can execute commands in the way GOsa does and check the generated results or errors. This can be very usefull especially for the post events (postcreate, postmodify and postremove) due to the fact that these hook are executed silently.{/t}
+</p>
+
+<p>
+ <b>
+  {t}Please be carefull here, all commands will really be executed on your machine and may break things!{/t}
+ </b>
+</p>
+
+<hr>
 
 <p>
  {t}The command to check for{/t}
@@ -9,6 +20,7 @@
 <hr>
   {$output}
 <hr>
+
 <div class="plugin-actions">
     <button type='submit' name='commandVerifier_save'>{msgPool type='okButton'}</button>
     <button type='submit' name='commandVerifier_cancel'>{msgPool type='cancelButton'}</button>
