@@ -76,9 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 
 /* Set template compile directory */
-$smarty->compile_dir= $config->get_cfg_value("core",
-    "templateCompileDirectory", '/var/spool/gosa'
-);
+$smarty->compile_dir= $config->get_cfg_value("core", "templateCompileDirectory");
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))) {
@@ -171,7 +169,7 @@ if ($config->get_cfg_value("core","forceSSL") == 'true' && $ssl != '') {
 }
 
 /* Check for selected password method */
-$method= $config->get_cfg_value("core","passwordDefaultHash", "crypt/md5");
+$method= $config->get_cfg_value("core","passwordDefaultHash");
 if (isset($_GET['method'])) {
     $method= validate($_GET['method']);
     $tmp = new passwordMethod($config);
