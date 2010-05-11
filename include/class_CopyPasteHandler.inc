@@ -516,7 +516,7 @@ class CopyPasteHandler {
 
     // Migrate objectgroups
     $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))",
-            "ogroups", array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+            "ogroups", array(get_ou("group", "ogroupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
     // Walk through all objectGroups
     foreach($ogroups as $ogroup){
@@ -527,7 +527,7 @@ class CopyPasteHandler {
 
     // Update roles 
     $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=".LDAP::prepare4filter(LDAP::fix($src_dn))."))",
-            "roles", array(get_ou("roleRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+            "roles", array(get_ou("roleGeneric", "roleRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
     // Walk through all roles
     foreach($roles as $role){
@@ -548,7 +548,7 @@ class CopyPasteHandler {
 
             $uid = $this->current['object']->uid;
             $groups = get_sub_list("(&(objectClass=posixGroup)(memberUid={$suid}))",
-                    "groups",array(get_ou("groupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+                    "groups",array(get_ou("core", "groupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
             // Walk through all POSIX groups
             foreach($groups as $group){

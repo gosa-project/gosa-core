@@ -35,7 +35,7 @@ class aclroletab extends tabs
 
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
-    $new_dn= 'cn='.$baseobject->cn.",".get_ou('aclRoleRDN').$baseobject->base;
+    $new_dn= 'cn='.$baseobject->cn.",".get_ou("aclrole", "aclRoleRDN").$baseobject->base;
 
     if ($this->dn != $new_dn){
 

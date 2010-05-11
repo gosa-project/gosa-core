@@ -33,13 +33,13 @@ class objectSelect extends management
     $this->config = $config;
     $this->ui = $ui;
     $this->storagePoints = array(
-        get_ou("userRDN"), 
-        get_ou("groupRDN"),
-        get_ou("terminalRDN"),
-        get_ou("workstationRDN"),
-        get_ou("serverRDN"),
-        get_ou("printerRDN"),
-        get_ou("phoneRDN"));
+        get_ou("core", "userRDN"), 
+        get_ou("core", "groupRDN"),
+        get_ou("termgeneric", "terminalRDN"),
+        get_ou("workgeneric", "workstationRDN"),
+        get_ou("servgeneric", "serverRDN"),
+        get_ou("printgeneric", "printerRDN"),
+        get_ou("phoneGeneric", "phoneRDN"));
 
     // Build filter
     if (session::global_is_set(get_class($this)."_filter")){

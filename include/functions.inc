@@ -1396,7 +1396,7 @@ function get_sub_department($value)
  * Example:
  * \code
  * # Determine LDAP base where systems are stored
- * $base = get_ou('systemRDN') . $this->config->current['BASE'];
+ * $base = get_ou("systemManagement", "systemRDN") . $this->config->current['BASE'];
  * $ldap->cd($base);
  * \endcode
  * */
@@ -1473,7 +1473,7 @@ function get_ou($name)
  * */
 function get_people_ou()
 {
-  return (get_ou("userRDN"));
+  return (get_ou("core", "userRDN"));
 }
 
 
@@ -1483,7 +1483,7 @@ function get_people_ou()
  */
 function get_groups_ou()
 {
-  return (get_ou("groupRDN"));
+  return (get_ou("core", "groupRDN"));
 }
 
 
@@ -1493,7 +1493,7 @@ function get_groups_ou()
  */
 function get_winstations_ou()
 {
-  return (get_ou("sambaMachineAccountRDN"));
+  return (get_ou("wingeneric", "sambaMachineAccountRDN"));
 }
 
 
