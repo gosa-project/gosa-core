@@ -54,7 +54,7 @@
   </definition>
 
   <table>
-    <layout>|20px;c|80px|100px|200px||60px;r|</layout>
+    <layout>|20px;c|||||60px;r|</layout>
 
     <column>
       <value>%{filter:objectType(dn,objectClass)}</value>
