@@ -56,11 +56,11 @@ class password extends plugin
 
       /* Should we check different characters in new password */
       $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
-      $differ       = $this->config->get_cfg_value("core","passwordMinDiffer", 0);
+      $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
 
       /* Enable length check ? */
       $check_length = $this->config->get_cfg_value("core","passwordMinLength") != "";
-      $length       = $this->config->get_cfg_value("core","passwordMinLength", 0);
+      $length       = $this->config->get_cfg_value("core","passwordMinLength");
 
       /* Call external password quality hook ?*/
       $check_hook   = $this->config->get_cfg_value("core","passwordHook") != "";
