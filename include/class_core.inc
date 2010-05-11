@@ -895,9 +895,6 @@ Example template /etc/gosa/vacation/business.txt:
                                 "mandatory"     => FALSE)
                             ),
 
-
-#cyrusAutocreateFolders null
-#cyrusDeleteMailbox true
                         "plProvidedAcls"    => array(
                                 "accessTo"          => _("System trust"),
                                 "cn"                => _("Name"),
