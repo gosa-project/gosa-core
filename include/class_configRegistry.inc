@@ -86,8 +86,13 @@ class configRegistry{
                 $def = call_user_func(array($cname, 'plInfo'));;
 
                 // Register Post Events (postmodfiy,postcreate,postremove,checkhook)
-                if(isset($def['plShortName'])){
-                    $this->classToName[$cname] = $def['plShortName'];
+                if(count($def)){
+                    
+                    $name = $cname;
+                    $name = (isset($def['plShortName'])) ? $def['plShortName'] : $cname;
+                    $name = (isset($def['plDescription'])) ? $def['plDescription'] : $cname;
+
+                    $this->classToName[$cname] = $name;
                     $data = array('name' => 'postcreate','type' => 'command');
                     $this->register($cname, $data);    
                     $data = array('name' => 'postremove','type' => 'command');
