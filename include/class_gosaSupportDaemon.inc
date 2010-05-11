@@ -62,7 +62,7 @@ class gosaSupportDaemon
 
     // Detect timeout 
     if($timeout == null){
-      $timeout = $config->get_cfg_value("core","gosaSupportTimeout",15);
+      $timeout = $config->get_cfg_value("core","gosaSupportTimeout");
     }
 
     /* This should only be the case if we call this from setup.
