@@ -246,7 +246,7 @@ class core extends plugin {
                         array(
                                 "name"          => "ppdGzip",
                                 "type"          => "bool",
-                                "default"       => "true",
+                                "default"       => true,
                                 "description"   => "The 'ppdGzip' variable enables PPD file compression.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -391,10 +391,19 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "passwordDefaultHash",
                                 "type"          => "switch",
-                                "default"       => "crypt",
+                                "default"       => "crypt/md5",
                                 "defaults"      => "core::getPropertyValues",
                                 "description"   => "The 'passwordDefaultHash' statement defines the default password hash to choose for new accounts.",
                                 "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "password",
+                                "mandatory"     => FALSE),
+                        array(
+                                "name"          => "strictPasswordRules",
+                                "type"          => "bool",
+                                "default"       => TRUE,
+                                "description"   => _("The 'strictPasswordRules' tells GOsa to check for UTF-8 characters in the supplied password. These Characters can lead to non working authentications if UTF-8 and none UTF-8 systems locales get mixed. The default is 'true'."),
+                                "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "password",
                                 "mandatory"     => FALSE),
@@ -502,7 +511,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "gosaSupportTimeout",
                                 "type"          => "integer",
-                                "default"       => "15",
+                                "default"       => 15,
                                 "description"   => "The 'gosaSupportTimeout' sets a connection timeout for all gosa-si actions. See 'gosaSupportURI' for details.",
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
@@ -886,6 +895,9 @@ Example template /etc/gosa/vacation/business.txt:
                                 "mandatory"     => FALSE)
                             ),
 
+
+#cyrusAutocreateFolders null
+#cyrusDeleteMailbox true
                         "plProvidedAcls"    => array(
                                 "accessTo"          => _("System trust"),
                                 "cn"                => _("Name"),
