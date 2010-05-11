@@ -308,7 +308,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
 
   /* Set theme */
   if (isset ($config)){
-	$theme= $config->get_cfg_value("core","theme", "default");
+	$theme= $config->get_cfg_value("core","theme");
   } else {
   	$theme= "default";
   }
@@ -3308,7 +3308,7 @@ function get_next_id($attrib, $dn)
 {
   global $config;
 
-  switch ($config->get_cfg_value("core","idAllocationMethod", "traditional")){
+  switch ($config->get_cfg_value("core","idAllocationMethod")){
     case "pool":
       return get_next_id_pool($attrib);
     case "traditional":
@@ -3499,7 +3499,7 @@ function image($path, $action= "", $title= "", $align= "middle")
 
     // Get theme
     if (isset ($config)){
-      $theme= $config->get_cfg_value("core","theme", "default");
+      $theme= $config->get_cfg_value("core","theme");
     } else {
       # For debuging - avoid that there's no theme set
       die("config not set!");
