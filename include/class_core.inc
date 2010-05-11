@@ -23,6 +23,9 @@ class core extends plugin {
     {
         $list = array();
         switch($name){
+            case 'idAllocationMethod':
+                $list = array('traditional' => _('Traditional'), 'pool' => _('Use samba pool'));
+                break;
             case 'passwordDefaultHash':
                 $tmp = passwordMethod::get_available_methods();
                 foreach($tmp['name'] as $id => $method){
@@ -434,7 +437,46 @@ DEBUG_SI      = 256"),
                                 "description"   => "The 'gidNumberBase' statement defines where to start looking for a new free group id. This should be synced with your 'adduser.conf' to avoid overlapping gidNumber values between local and LDAP based lookups. The gidNumberBase can even be dynamic. Take a look at the 'nextIdHook' definition.",
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
-                                "group"         => "core",
+                                "group"         => "id",
+                                "mandatory"     => TRUE),
+                        array(
+                                "name"          => "gidNumberPoolMin",
+                                "type"          => "integer",
+                                "default"       => 10000,
+                                "description"   => "The 'uidNumberPoolMin/gidNumberPoolMin' statement defines the lowest assignable user/group id for use with the 'idAllocationMethod = pool'.",
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "id",
+                                "mandatory"     => TRUE),
+
+                        array(
+                                "name"          => "gidNumberPoolMax",
+                                "type"          => "integer",
+                                "default"       => 40000,
+                                "description"   => "The 'uidNumberPoolMax/gidNumberPoolMax' statement defines the highest assignable user/group id for use with the 'idAllocationMethod = pool'.",
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "id",
+                                "mandatory"     => TRUE),
+
+                        array(
+                                "name"          => "uidNumberPoolMin",
+                                "type"          => "integer",
+                                "default"       => 10000,
+                                "description"   => "The 'uidNumberPoolMin/gidNumberPoolMin' statement defines the lowest assignable user/group id for use with the 'idAllocationMethod = pool'.",
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "id",
+                                "mandatory"     => TRUE),
+
+                        array(
+                                "name"          => "uidNumberPoolMax",
+                                "type"          => "integer",
+                                "default"       => 40000,
+                                "description"   => "The 'uidNumberPoolMax/gidNumberPoolMax' statement defines the highest assignable user/group id for use with the 'idAllocationMethod = pool'.",
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "id",
                                 "mandatory"     => TRUE),
 
                         array(
@@ -444,7 +486,7 @@ DEBUG_SI      = 256"),
                                 "description"   => "The 'uidNumberBase' statement defines where to start looking for a new free user id. This should be synced with your 'adduser.conf' to avoid overlapping uidNumber values between local and LDAP based lookups. The uidNumberBase can even be dynamic. Take a look at the 'baseIdHook' definition.",
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
-                                "group"         => "core",
+                                "group"         => "id",
                                 "mandatory"     => TRUE),
 
                         array(
@@ -536,7 +578,7 @@ DEBUG_SI      = 256"),
                                 "description"   => "The 'nextIdHook' statement defines a script to be called for finding the next free id for users or groups externaly. It gets called with the current entry \"dn\" and the attribute to be ID'd. It should return an integer value.",
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
-                                "group"         => "core",
+                                "group"         => "id",
                                 "mandatory"     => FALSE),
 
                         array(
@@ -602,11 +644,11 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "minId",
                                 "type"          => "integer",
-                                "default"       => "",
+                                "default"       => 40,
                                 "description"   => "The 'minId' statement defines the minimum assignable user or group id to avoid security leaks with uid 0 accounts. This is used for the 'traditional' method.",
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
-                                "group"         => "core",
+                                "group"         => "id",
                                 "mandatory"     => FALSE),
 
                         array(
@@ -823,6 +865,16 @@ Example template /etc/gosa/vacation/business.txt:
                                 "group"         => "snapshot",
                                 "mandatory"     => FALSE),
 
+                        array(
+                                "name"          => "idAllocationMethod",
+                                "type"          => "switch",
+                                "default"       => "traditional",
+                                "defaults"      => "core::getPropertyValues",
+                                "description"   => "The 'idAllocationMethod' statement defines how GOsa generates numeric user and group id values. If it is set to 'traditional' GOsa will do create a lock and perform a search for the next free ID. The lock will be removed after the procedure completes. 'pool' will use the sambaUnixIdPool objectclass settings inside your LDAP. This one is unsafe, because it does not check for concurrent LDAP access and already used IDs in this range. On the other hand it is much faster.",
+                                "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "id",
+                                "mandatory"     => TRUE),
                         array(
                                 "name"          => "snapshotURI",
                                 "type"          => "uri",

@@ -3324,8 +3324,8 @@ function get_next_id_pool($attrib) {
   global $config;
 
   /* Fill informational values */
-  $min= $config->get_cfg_value("core","${attrib}PoolMin", 10000);
-  $max= $config->get_cfg_value("core","${attrib}PoolMax", 40000);
+  $min= $config->get_cfg_value("core","${attrib}PoolMin");
+  $max= $config->get_cfg_value("core","${attrib}PoolMax");
 
   /* Sanity check */
   if ($min >= $max) {
@@ -3348,8 +3348,8 @@ function get_next_id_pool($attrib) {
     /* If it does not exist, create one with these defaults */
     if ($ldap->count() == 0) {
       /* Fill informational values */
-      $minUserId= $config->get_cfg_value("core","uidPoolMin", 10000);
-      $minGroupId= $config->get_cfg_value("core","gidPoolMin", 10000);
+      $minUserId= $config->get_cfg_value("core","uidNumberPoolMin");
+      $minGroupId= $config->get_cfg_value("core","gidNumberPoolMin");
 
       /* Add as default */
       $attrs= array("objectClass" => array("organizationalUnit", "sambaUnixIdPool"));
