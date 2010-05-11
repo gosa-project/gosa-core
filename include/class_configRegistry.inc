@@ -257,6 +257,11 @@ class gosaProperty
         return(!empty($value)&&is_writeable($value));
     }
 
+    static function isReadableFile($message,$class,$name,$value, $type)
+    {
+        return(!empty($value)&&is_readable($value)&&is_file($value));
+    }
+
     static function isCommand($message,$class,$name,$value, $type)
     {
         return(TRUE);

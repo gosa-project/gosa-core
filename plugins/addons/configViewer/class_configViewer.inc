@@ -166,6 +166,7 @@ class configViewer extends management
             case 'rdn':
             case 'uri':
             case 'path':
+            case 'file':
             case 'command':
             case 'string':
             case 'integer':
