@@ -161,7 +161,7 @@ class group extends plugin
         if ($this->config->get_cfg_value("core","sambaRidBase") != ""){
           $this->sambaDomainName= "DEFAULT";
           $this->ridBase= $this->config->get_cfg_value("core","sambaRidBase");
-          $this->SID= $this->config->get_cfg_value("core","sid");
+          $this->SID= $this->config->get_cfg_value("core","sambaSID");
         } else {
           msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
         }
@@ -757,7 +757,7 @@ class group extends plugin
       /* User wants me to fake the idMappings? This is useful for
          making winbind resolve the group names in a reasonable amount
          of time in combination with larger databases. */
-      if ($this->config->get_cfg_value("core","sambaidmapping") == "true"){
+      if ($this->config->boolValueIsTrue("core","sambaIdMapping")){
         $this->attrs['objectClass'][]= "sambaIdmapEntry";
       }
 
