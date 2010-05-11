@@ -9,7 +9,7 @@
 
 <p>
     {t}The generated output{/t}
-    <textarea size=10 style='width:100%'>{$output}</textarea>
+    {$output}
 </p>
 
 <button type='submit' name='execute'>{t}Test{/t}</button> 
