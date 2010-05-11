@@ -58,6 +58,7 @@ class core extends plugin {
                 break;
             case 'mailMethod': 
                 $list = mailMethod::get_methods();
+                $list[''] = _("None");
                 break;
             case 'language':
                 $tmp = get_languages(TRUE);
@@ -256,7 +257,7 @@ class core extends plugin {
                         array(
                                 "name"          => "ppdGzip",
                                 "type"          => "bool",
-                                "default"       => true,
+                                "default"       => "true",
                                 "description"   => "The 'ppdGzip' variable enables PPD file compression.",
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
@@ -411,7 +412,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "strictPasswordRules",
                                 "type"          => "bool",
-                                "default"       => TRUE,
+                                "default"       => "true",
                                 "description"   => _("The 'strictPasswordRules' tells GOsa to check for UTF-8 characters in the supplied password. These Characters can lead to non working authentications if UTF-8 and none UTF-8 systems locales get mixed. The default is 'true'."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
