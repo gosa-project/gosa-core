@@ -1400,70 +1400,36 @@ function get_sub_department($value)
  * $ldap->cd($base);
  * \endcode
  * */
-function get_ou($name)
+function get_ou($class,$name)
 {
-  global $config;
+    global $config;
 
-  $map = array( 
-                "roleRDN"      => "ou=roles,",
-                "ogroupRDN"      => "ou=groups,",
-                "applicationRDN" => "ou=apps,",
-                "systemRDN"     => "ou=systems,",
-                "serverRDN"      => "ou=servers,ou=systems,",
-                "terminalRDN"    => "ou=terminals,ou=systems,",
-                "workstationRDN" => "ou=workstations,ou=systems,",
-                "printerRDN"     => "ou=printers,ou=systems,",
-                "phoneRDN"       => "ou=phones,ou=systems,",
-                "componentRDN"   => "ou=netdevices,ou=systems,",
-                "sambaMachineAccountRDN"   => "ou=winstation,",
+    if(!$config->configRegistry->propertyExists($class,$name)){
+        trigger_error("No department mapping found for type ".$name);
+        return "";
+    }
 
-                "faxBlocklistRDN"   => "ou=gofax,ou=systems,",
-                "systemIncomingRDN"    => "ou=incoming,",
-                "aclRoleRDN"     => "ou=aclroles,",
-                "phoneMacroRDN"       => "ou=macros,ou=asterisk,ou=configs,ou=systems,",
-                "phoneConferenceRDN"  => "ou=conferences,ou=asterisk,ou=configs,ou=systems,",
+    $ou = $config->configRegistry->getPropertyValue($class,$name);
+    if ($ou != ""){
+        if (!preg_match('/^[^=]+=[^=]+/', $ou)){
+            $ou = @LDAP::convert("ou=$ou");
+        } else {
+            $ou = @LDAP::convert("$ou");
+        }
 
-                "faiBaseRDN"         => "ou=fai,ou=configs,ou=systems,",
-                "faiScriptRDN"   => "ou=scripts,",
-                "faiHookRDN"     => "ou=hooks,",
-                "faiTemplateRDN" => "ou=templates,",
-                "faiVariableRDN" => "ou=variables,",
-                "faiProfileRDN"  => "ou=profiles,",
-                "faiPackageRDN"  => "ou=packages,",
-                "faiPartitionRDN"=> "ou=disk,",
+        if(preg_match("/".preg_quote($config->current['BASE'], '/')."$/",$ou)){
+            return($ou);
+        }else{
+            if(!preg_match("/,$/", $ou)){
+                return("$ou,");
+            }else{
+                return($ou);
+            }
+        }
 
-                "sudoRDN"       => "ou=sudoers,",
-
-                "deviceRDN"      => "ou=devices,",
-                "mimetypeRDN"    => "ou=mime,");
-
-  /* Preset ou... */
-  if ($config->get_cfg_value("core",$name, "_not_set_") != "_not_set_"){
-    $ou= $config->get_cfg_value("core",$name);
-  } elseif (isset($map[$name])) {
-    $ou = $map[$name];
-    return($ou);
-  } else {
-    trigger_error("No department mapping found for type ".$name);
-    return "";
-  }
- 
-  if ($ou != ""){
-    if (!preg_match('/^[^=]+=[^=]+/', $ou)){
-      $ou = @LDAP::convert("ou=$ou");
     } else {
-      $ou = @LDAP::convert("$ou");
+        return "";
     }
-
-    if(preg_match("/".preg_quote($config->current['BASE'], '/')."$/",$ou)){
-      return($ou);
-    }else{
-      return("$ou,");
-    }
-  
-  } else {
-    return "";
-  }
 }
 
 
