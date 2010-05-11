@@ -50,8 +50,8 @@ class commandVerifier
             }
             $code = proc_close($process);
 
-            if(!empty($stdout)) $stdout = "<pre>{$stdout}</pre>";
-            if(!empty($stderr)) $stderr = "<pre>{$stderr}</pre>";
+            if(!empty($stdout)) $stdout = "<pre>".htmlentities($stdout,ENT_COMPAT,'UTF-8')."</pre>";
+            if(!empty($stderr)) $stderr = "<pre>".htmlentities($stderr,ENT_COMPAT,'UTF-8')."</pre>";
             $output = "
                 <table summary='"._("Results")."'>
                 <tr><td><b>Result:</b></td><td>$stdout</td></tr>
