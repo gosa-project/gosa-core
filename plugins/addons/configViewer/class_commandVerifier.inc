@@ -22,16 +22,20 @@ class commandVerifier
             $process = proc_open($this->command, $descriptorspec, $pipes);
             if (is_resource($process)) {
                 $send= stream_get_contents($pipes[0]);
-                $res = htmlentities(stream_get_contents($pipes[1]),ENT_COMPAT,'UTF-8');
-                $err = htmlentities(stream_get_contents($pipes[2]),ENT_COMPAT,'UTF-8');
+                $res = trim(htmlentities(stream_get_contents($pipes[1]),ENT_COMPAT,'UTF-8'));
+                $err = trim(htmlentities(stream_get_contents($pipes[2]),ENT_COMPAT,'UTF-8'));
                 fclose($pipes[0]);
                 fclose($pipes[1]);
                 fclose($pipes[2]);
                 $code = proc_close($process);
+
+                if(!empty($err)) $err = "<pre>{$err}</pre>";
+                if(!empty($res)) $res = "<pre>{$res}</pre>";
+
                 $output = "
                     <table summary='"._("Results")."'>
-                    <tr><td><b>Result:</b></td><td><pre>$res</pre></td></tr>
-                    <tr><td><b>Error:</b></td><td><pre>$err</pre></td></tr>
+                    <tr><td><b>Result:</b></td><td>$res</td></tr>
+                    <tr><td><b>Error:</b></td><td>$err</td></tr>
                     <tr><td><b>Return code:</b></td><td>$code</td></tr>
                     </table>";
             }
