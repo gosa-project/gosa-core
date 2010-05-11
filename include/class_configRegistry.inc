@@ -227,7 +227,6 @@ class gosaProperty
         $val = $this->getValue(TRUE);
         $return = TRUE;
         if($this->mandatory && empty($val)){
-            msg_dialog::display(_("Error"), msgPool::required(_($this->name)), ERROR_DIALOG);
             $return = FALSE;
         }
 
@@ -235,7 +234,6 @@ class gosaProperty
         if(!empty($val) && !empty($check)){
             $res = call_user_func(preg_split("/::/", $this->check),$messages=TRUE, $this->class,$this->name,$val, $this->type);
             if(!$res){
-                msg_dialog::display(_("Error"), msgPool::invalid(_($this->name)), ERROR_DIALOG);
                 $return = FALSE;
             }
         }
@@ -244,47 +242,120 @@ class gosaProperty
 
     static function isBool($message,$class,$name,$value, $type)
     {
-        return(in_array($value,array('true','false','')));
+        $match = in_array($value,array('true','false',''));
+
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value,"",_("Use 'true', 'false' or empty if allowed")), WARNING_DIALOG);
+        }
+    
+        return($match);
     }
 
     static function isString($message,$class,$name,$value, $type)
     {
-        return(TRUE);
+        $match = TRUE;
+    
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            msg_dialog::display(_("Warning"), msgPool::invalid($name), WARNING_DIALOG);
+        }
+
+        return($match);
     }
 
     static function isInteger($message,$class,$name,$value, $type)
     {
-        return(is_numeric($value) && !preg_match("/[^0-9]/", $value));
+        $match = is_numeric($value) && !preg_match("/[^0-9]/", $value);
+
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            msg_dialog::display(_("Warning"), msgPool::invalid($name, $value,'/[0-9]/'), WARNING_DIALOG);
+        }
+
+        return($match);
     }
 
     static function isPath($message,$class,$name,$value, $type)
     {
-        return(TRUE);
+        $match = TRUE;
+    
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            msg_dialog::display(_("Warning"), msgPool::invalid($name), WARNING_DIALOG);
+        }
+
+        return($match);
     }
 
     static function isWriteablePath($message,$class,$name,$value, $type)
     {
-        return(!empty($value)&&is_writeable($value));
+        $match = !empty($value)&&is_dir($value)&&is_writeable($value);
+    
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+
+            if(!is_dir($value)){
+                msg_dialog::display(_("Warning"), sprintf(_("The specified folder does not exists '%s'."), $value), WARNING_DIALOG);
+            }elseif(!is_writeable($value)){
+                msg_dialog::display(_("Warning"), sprintf(_("The specified folder cannot be used for writing '%s'."), $value), WARNING_DIALOG);
+            }
+        }
+
+        return($match);
     }
 
     static function isReadableFile($message,$class,$name,$value, $type)
     {
-        return(!empty($value)&&is_readable($value)&&is_file($value));
+        $match = !empty($value) && is_readable($value) && is_file($value);
+
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+                
+            if(!is_file($value)){
+                msg_dialog::display(_("Warning"), sprintf(_("The specified file does not exists '%s'."), $value), WARNING_DIALOG);
+            }elseif(!is_readable($value)){
+                msg_dialog::display(_("Warning"), sprintf(_("The specified file cannot be used for reading '%s'."), $value), WARNING_DIALOG);
+            }
+        }
+
+        return($match);
     }
 
     static function isCommand($message,$class,$name,$value, $type)
     {
-        return(TRUE);
+        $match = TRUE;
+
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            msg_dialog::display(_("Warning"), msgPool::cmdinvalid($name,$value),  WARNING_DIALOG);
+        }
+        
+        return($match);
     }
 
     static function isDn($message,$class,$name,$value, $type)
     {
-        return(preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*$/i", $value));
+        $match = preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*$/i", $value);
+
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value),  WARNING_DIALOG);
+        }
+        
+        return($match);
     }
 
     static function isRdn($message,$class,$name,$value, $type)
     {
-        return(preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*$/i", $value));
+        $match = preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*$/i", $value);
+
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value),  WARNING_DIALOG);
+        }
+        
+        return($match);
     }
 
     private function _restoreCurrentValue()
