@@ -146,7 +146,7 @@ class ogrouptabs extends tabs
         /* Add mail group tab , if there is curerntly no mail tab defined */ 
         if(class_available("mailogroup")){
             if((preg_match("/U/",$objects))&&(!isset($this->by_object['mailogroup']))){
-                if ($this->config->get_cfg_value("core","mailmethod") == "kolab"){
+                if (preg_match("/olab/i",$this->config->get_cfg_value("core","mailMethod"))){
                     $this->by_name['mailogroup']= _("Mail");
                     $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
                     $this->by_object['mailogroup']->parent= &$this;
