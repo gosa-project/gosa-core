@@ -1694,8 +1694,7 @@ class user extends plugin
                 "type"          => "string",
                 "default"       => "",
                 "description"   => sprintf(
-                    _("The 'accountRDN' option tells GOsa to use a placeholder pattern for generating account RDNs. A pattern can include attribute names prefaced by a % and normal text: %s. This will generate a RDN consisting of cn=.... filled with surname and given name of the edited account. This option disables the use of accountPrimaryAttribute and personalTitleInDn."), 
-                    "accountRDN=\"cn=%sn %givenName\""),
+                    _("The 'accountRDN' option tells GOsa to use a placeholder pattern for generating account RDNs. A pattern can include attribute names prefaced by a %% and normal text: %s. This will generate a RDN consisting of cn=.... filled with surname and given name of the edited account. This option disables the use of accountPrimaryAttribute and personalTitleInDn."), "accountRDN=\"cn=%sn %givenName\""),
                 "check"         => "gosaProperty::isString",
                 "migrate"       => "",
                 "group"         => "plugin",
