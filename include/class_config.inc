@@ -1033,28 +1033,26 @@ class config  {
    *
    *
    */
-  function get_cfg_value($class,$name, $default= "") 
+  function get_cfg_value($class,$name, $default= NULL) 
   {
+    // The default parameter is deprecated 
+    if($default != NULL){
+#        trigger_error("Third parameter 'default' is deprecated for function 'get_cfg_value'!");
+    }
 
+    // Return the matching property value if it exists.
     if($this->configRegistry->propertyExists($class,$name)){
         return($this->configRegistry->getPropertyValue($class,$name));
     }
 
-    syslog(1, $name);    
+    // Show a warning in the syslog if there is an undefined property requested.
+    syslog(1,"Unconfigured property: {$class}::{$name}");    
 
+    // Try to find the property in the config file directly.
     $name= strtoupper($name);
-
-    /* Check if we have a current value for $name */
-    if (isset($this->current[$name])){
-      return ($this->current[$name]);
-    }
-
-    /* Check if we have a global value for $name */
-    if (isset($this->data["MAIN"][$name])){
-      return ($this->data["MAIN"][$name]);
-    }
-
-    return ($default);
+    if (isset($this->current[$name])) return ($this->current[$name]);
+    if (isset($this->data["MAIN"][$name])) return ($this->data["MAIN"][$name]);
+    return ("");
   }
 
 
