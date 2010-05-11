@@ -44,7 +44,21 @@ class configViewer extends management
             if(isset($_POST[$post]) && $prop->getStatus() != 'removed'){
                 $prop->setValue(get_post($post));
             }
+
+            // Open the command verify dialog
+            if(isset($_POST["testCommand_{$post}"])){
+                $this->dialogObject = new commandVerifier($this->config,$prop);
+            }
         }
+
+        if(isset($_POST['commandVerifier_save'])){
+            $this->dialogObject->save();
+            $this->closeDialogs();
+        }
+        if(isset($_POST['commandVerifier_cancel'])){
+            $this->closeDialogs();
+        }
+
         return(management::execute());
     }
 
@@ -157,12 +171,15 @@ class configViewer extends management
                     }
                 }
                 break;
+            case 'command':
+                $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
+                $res.= image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                break;
             case 'dn':
             case 'rdn':
             case 'uri':
             case 'path':
             case 'file':
-            case 'command':
             case 'string':
             case 'integer':
                 $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
