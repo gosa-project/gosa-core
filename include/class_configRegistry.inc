@@ -247,6 +247,11 @@ class gosaProperty
         return(in_array($value,array('true','false','')));
     }
 
+    static function isString($message,$class,$name,$value, $type)
+    {
+        return(TRUE);
+    }
+
     static function isInteger($message,$class,$name,$value, $type)
     {
         return(is_numeric($value) && !preg_match("/[^0-9]/", $value));

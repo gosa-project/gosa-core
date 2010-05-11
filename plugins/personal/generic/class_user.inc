@@ -1241,7 +1241,7 @@ class user extends plugin
   function update_new_dn()
   {
     // Alternative way to handle DN
-    $pattern= $this->config->get_cfg_value("core","accountRDN");
+    $pattern= $this->config->get_cfg_value("user","accountRDN");
     if ($pattern != "") {
       $rdn= $this->create_initial_rdn($pattern);
       $attribute= preg_replace('/=.*$/', '', $rdn);
@@ -1687,6 +1687,22 @@ class user extends plugin
         "plCategory"    => array("users" => array("description" => _("Users"),
                                                   "objectClass" => "gosaAccount")),
 
+
+        "plProperties" => array(
+            array(
+                "name"          => "accountRDN",
+                "type"          => "string",
+                "default"       => "",
+                "description"   => sprintf(
+                    _("The 'accountRDN' option tells GOsa to use a placeholder pattern for generating account RDNs. A pattern can include attribute names prefaced by a % and normal text: %s. This will generate a RDN consisting of cn=.... filled with surname and given name of the edited account. This option disables the use of accountPrimaryAttribute and personalTitleInDn."), 
+                    "accountRDN=\"cn=%sn %givenName\""),
+                "check"         => "gosaProperty::isString",
+                "migrate"       => "",
+                "group"         => "plugin",
+                "mandatory"     => FALSE
+                )
+
+            ),
         "plProvidedAcls" => array(
 
           "sn"                => _("Surname"),
