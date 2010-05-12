@@ -83,11 +83,26 @@ class configViewer extends management
         if(count($this->toBeMigrated)){
             $first = $this->toBeMigrated[0]->getMigrationClass();
             $first->save_object();
-            $content =  $first->execute();
-            $smarty = get_smarty();
-            $smarty->assign('content', $content);
-            $smarty->assign('leftSteps', count($this->toBeMigrated));
-            return($smarty->fetch(get_template_path('migrate.tpl',TRUE)));
+    
+            // We've no problems with this property anymore.
+            while($first instanceOf propertyMigration && !$first->checkForIssues()){
+                $this->toBeMigrated[0]->save();
+                unset($this->toBeMigrated[0]);
+                $this->toBeMigrated = array_values($this->toBeMigrated);
+                if(count($this->toBeMigrated)){
+                    $first = $this->toBeMigrated[0]->getMigrationClass();
+                }else{
+                    $first = NULL;
+                }
+            }
+
+            if($first){
+                $content =  $first->execute();
+                $smarty = get_smarty();
+                $smarty->assign('content', $content);
+                $smarty->assign('leftSteps', count($this->toBeMigrated));
+                return($smarty->fetch(get_template_path('migrate.tpl',TRUE)));
+            }
         }
 
         return(management::execute());

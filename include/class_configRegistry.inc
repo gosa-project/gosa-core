@@ -243,7 +243,7 @@ class gosaProperty
                 trigger_error("Cannot start migration for gosaProperty::'{$this->getName()}' class not found ({$this->migrate})!");
             }else{
                 $class = $this->migrate;
-                $tmp = new $class($this);
+                $tmp = new $class($this->parent->config,$this);
                 if(! $tmp instanceof propertyMigration){ 
                     trigger_error("Cannot start migration for gosaProperty::'{$this->getName()}' doesn't implement propertyMigration!");
                 }
@@ -391,7 +391,7 @@ class gosaProperty
 
     static function isRdn($message,$class,$name,$value, $type)
     {
-        $match = preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*$/i", $value);
+        $match = preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*,$/i", $value);
 
         // Display the reason for failing this check.         
         if($message && ! $match){
@@ -546,7 +546,7 @@ class gosaProperty
 
 interface propertyMigration
 {
-    function __construct($property);
+    function __construct($config,$property);
 }
 
 
