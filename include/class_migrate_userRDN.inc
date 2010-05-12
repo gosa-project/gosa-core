@@ -128,9 +128,10 @@ class migrate_userRDN implements propertyMigration
             }
 
             // Now move the objects to the new traget
+            $tmp = new plugin($this->config,NULL);
             foreach($this->found['move'] as $id => $data){
                 if(isset($_POST["migrateEntry_{$id}"])){
-                    $ldap->rename_dn($data['from'], $data['to']);
+                    $tmp->move($data['from'], $data['to']);
                 }
             }
             $this->checkForIssues();
