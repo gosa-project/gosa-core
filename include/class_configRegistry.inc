@@ -50,6 +50,20 @@ class configRegistry{
             }
         }
 
+        // Search for config flags defined in the config file (MENU section)
+        foreach($this->config->data['MENU'] as $section => $entries){
+            foreach($entries as $entry){
+                if(count($entry) > 2 && isset($entry['CLASS'])){
+                    $class = $entry['CLASS'];
+                    foreach($entry as $name => $value){
+                        if(!in_array($name, array('CLASS','ACL'))){
+                            $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
+                        }
+                    }
+                }
+            }
+        }
+
         // Search for config flags defined in the config file (MAIN section)
         foreach($this->config->data['MAIN'] as $name => $value){
             $this->fileStoredProperties['core'][strtolower($name)] = $value;
@@ -412,9 +426,9 @@ class gosaProperty
         }
 
         // Second check for values in the config file.
-        if(isset($this->parent->fileStoredProperties[$this->class][strtolower($this->name)])){
+        if(isset($this->parent->fileStoredProperties[strtolower($this->class)][strtolower($this->name)])){
             $this->setStatus('file');
-            $this->value = $this->parent->fileStoredProperties[$this->class][strtolower($this->name)];
+            $this->value = $this->parent->fileStoredProperties[strtolower($this->class)][strtolower($this->name)];
             return;
         }
 
