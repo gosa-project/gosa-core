@@ -453,7 +453,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "groupRDN",
                                 "type"          => "rdn",
-                                "default"       => "ou=groups",
+                                "default"       => "ou=groups,",
                                 "description"   => "The 'groupsRDN' statement defines the location where new groups will be created inside of defined departments. The default is 'ou=groups'.",
                                 "check"         => "gosaProperty::isRdn",
                                 "migrate"       => "",
