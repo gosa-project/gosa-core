@@ -27,7 +27,6 @@ class migrate_userRDN implements propertyMigration
         $targetValue = $this->property->getValue(TRUE);
         $dnMatch = "";
         if(!empty($initialValue)){
-
             foreach(preg_split("/,/", $initialValue) as $rdnPart){
                 if(empty($rdnPart)) continue;
                 list($namingAttrs, $container) = preg_split("/=/",$rdnPart,2);
@@ -61,7 +60,7 @@ class migrate_userRDN implements propertyMigration
                         $this->found['add'][$targetValue.$container] = array(); 
                     }
                     if($dn != $dnTo){
-                        $this->found['move'][$dn] = $dnTo;
+                        $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
                         $found = TRUE;
                     }
                 }
@@ -84,7 +83,7 @@ class migrate_userRDN implements propertyMigration
                         $this->found['add'][$targetValue.$container] = array(); 
                     }
                     if($dn != $dnTo){
-                        $this->found['move'][$dn] = $dnTo;
+                        $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
                         $found = TRUE;
                     }
                 }
@@ -105,8 +104,10 @@ class migrate_userRDN implements propertyMigration
         if(count($this->found['move'])) {
             $str.= "<br><h3>"._("Objects that will be moved")."</h3>";
             $str.="<pre>";
-            foreach($this->found['move'] as $dn => $dnTo){
-                $str.= sprintf(_("Moving object '%s' to '%s'"), $dn, $dnTo)."<br>";
+            foreach($this->found['move'] as $id => $data){
+                $checked = (!isset($_POST['migrateNow'])) ? 'checked':'';
+                $str.= "<input $checked type='checkbox' value='1' name='migrateEntry_{$id}'>";
+                $str.= sprintf(_("Moving object '%s' to '%s'"), $data['from'], $data['to'])."<br>";
             }
             $str.="</pre>";
         }
@@ -127,8 +128,10 @@ class migrate_userRDN implements propertyMigration
             }
 
             // Now move the objects to the new traget
-            foreach($this->found['move'] as $from => $to){
-                $ldap->rename_dn($from, $to);
+            foreach($this->found['move'] as $id => $data){
+                if(isset($_POST["migrateEntry_{$id}"])){
+                    $ldap->rename_dn($data['from'], $data['to']);
+                }
             }
             $this->checkForIssues();
         }
