@@ -64,7 +64,6 @@ class configViewer extends management
         // Execute registered management event listeners.
         $this->handleActions($this->detectPostActions());
 
-
         // Handle properties that have to be migrated 
         if(isset($_POST['propertyMigrate_cancel']) && count($this->toBeMigrated)){
             unset($this->toBeMigrated[0]);
@@ -93,6 +92,11 @@ class configViewer extends management
                     $first = $this->toBeMigrated[0]->getMigrationClass();
                 }else{
                     $first = NULL;
+                    
+                    // Nothing to migrate and everything is fine, reload the list now.
+                    if(!count($this->toBeMigrated)){
+                        $this->config->configRegistry->reload($force=TRUE);
+                    }
                 }
             }
 
@@ -140,6 +144,11 @@ class configViewer extends management
         // Now save the properties.
         if($valid){
             $this->toBeMigrated = $this->config->configRegistry->saveChanges();
+
+            // Nothing to migrate and everything is fine, reload the list now.
+            if(!count($this->toBeMigrated)){
+                $this->config->configRegistry->reload($force=TRUE);
+            }
         }
     }
 
