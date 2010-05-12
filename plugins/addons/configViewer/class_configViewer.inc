@@ -135,7 +135,6 @@ class configViewer extends management
         $valid = TRUE;
         foreach($all as $prop){
             $valid &= $prop->check();
-            if(!$valid) break;
         }
 
         // Now save the properties.

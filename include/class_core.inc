@@ -570,7 +570,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => FALSE),
 
                         array(
                                 "name"          => "honourUnitTags",
