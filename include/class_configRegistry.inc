@@ -168,10 +168,21 @@ class configRegistry{
 
     function saveChanges()
     {
+        $migrate = array();
         foreach($this->properties as $prop){
-            $prop->save();
+
+            // Is this property modified
+            if(in_array($prop->getStatus(),array('modified','removed'))){
+
+                // Check if we've to migrate something before we can make the changes effective. 
+                if($prop->migrationRequired()){
+                    $migrate[] = $prop;
+                }else{
+                    $prop->save();
+                }
+            }
         }
-        $this->reload(TRUE);
+        return($migrate);
     }
 }
 
@@ -193,6 +204,8 @@ class gosaProperty
     protected $parent = NULL;
     protected $data = array();
 
+    protected $migrationClass = NULL;
+
     /*!  The current property status
      *     'ldap'       Property is stored in ldap 
      *     'file'       Property is stored in the config file
@@ -203,6 +216,9 @@ class gosaProperty
 
     protected $attributes = array('name','type','default','description','check',
             'migrate','mandatory','group','defaults');
+
+
+
 
     function __construct($parent,$classname,$data)
     {
@@ -220,6 +236,33 @@ class gosaProperty
 
         // Initialize with the current value
         $this->_restoreCurrentValue(); 
+
+        // Instantiate migration class 
+        if(!empty($this->migrate)){
+            if(!class_available($this->migrate)){
+                trigger_error("Cannot start migration for gosaProperty::'{$this->getName()}' class not found ({$this->migrate})!");
+            }else{
+                $class = $this->migrate;
+                $tmp = new $class($this);
+                if(! $tmp instanceof propertyMigration){ 
+                    trigger_error("Cannot start migration for gosaProperty::'{$this->getName()}' doesn't implement propertyMigration!");
+                }
+                $this->migrationClass = $tmp;
+            }
+        }
+    }
+
+    function migrationRequired()
+    {
+        if(empty($this->migrate) || $this->migrationClass == NULL){
+            return(FALSE);
+        }
+        return($this->migrationClass->checkForIssues());
+    }
+
+    function getMigrationClass()
+    {
+        return($this->migrationClass);
     }
 
     function check()
@@ -458,8 +501,9 @@ class gosaProperty
                 if(!$ldap->success()){
                     echo $ldap->get_error();
                 }
-            } 
-            $this->_restoreCurrentValue();
+            }
+            $this->value = $this->tmp_value;
+            $this->setStatus('ldap'); 
         }elseif($this->getStatus() == 'removed'){
             $ldap = $this->parent->config->get_ldap_link();
             $ldap->cd($this->parent->config->current['BASE']);
@@ -497,5 +541,13 @@ class gosaProperty
         return(TRUE);    
     }
 }
+
+
+
+interface propertyMigration
+{
+    function __construct($property);
+}
+
 
 ?>

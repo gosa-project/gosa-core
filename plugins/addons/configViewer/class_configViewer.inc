@@ -7,6 +7,8 @@ class configViewer extends management
     var $plDescription= "Configure global and special GOsa settings like hooks and plugin parameters";
     var $plIcon  = "plugins/configViewer/images/plugin.png";
 
+    var $toBeMigrated = array();
+
     function __construct($config,$ui)
     {
         $this->config = $config;
@@ -50,13 +52,42 @@ class configViewer extends management
                 $this->dialogObject = new commandVerifier($this->config,$prop);
             }
         }
-
         if(isset($_POST['commandVerifier_save'])){
             $this->dialogObject->save();
             $this->closeDialogs();
         }
         if(isset($_POST['commandVerifier_cancel'])){
             $this->closeDialogs();
+        }
+
+
+        // Execute registered management event listeners.
+        $this->handleActions($this->detectPostActions());
+
+
+        // Handle properties that have to be migrated 
+        if(isset($_POST['propertyMigrate_cancel']) && count($this->toBeMigrated)){
+            unset($this->toBeMigrated[0]);
+            $this->toBeMigrated = array_values($this->toBeMigrated);
+        }
+        if(isset($_POST['propertyMigrate_save']) && count($this->toBeMigrated)){
+            $first = $this->toBeMigrated[0]->getMigrationClass();
+            $first->save_object();
+            $msgs = $first->check();
+            if(!count($msgs)){
+                $this->toBeMigrated[0]->save();
+                unset($this->toBeMigrated[0]);
+                $this->toBeMigrated = array_values($this->toBeMigrated);
+            }
+        }
+        if(count($this->toBeMigrated)){
+            $first = $this->toBeMigrated[0]->getMigrationClass();
+            $first->save_object();
+            $content =  $first->execute();
+            $smarty = get_smarty();
+            $smarty->assign('content', $content);
+            $smarty->assign('leftSteps', count($this->toBeMigrated));
+            return($smarty->fetch(get_template_path('migrate.tpl',TRUE)));
         }
 
         return(management::execute());
@@ -84,14 +115,17 @@ class configViewer extends management
 
     function saveProperties()
     {
+        // Check if we've misconfigured properties and skip saving in this case.
         $all = $this->config->configRegistry->getAllProperties();
         $valid = TRUE;
         foreach($all as $prop){
             $valid &= $prop->check();
+            if(!$valid) break;
         }
 
-        if($valid){ 
-            $this->config->configRegistry->saveChanges();
+        // Now save the properties.
+        if($valid){
+            $this->toBeMigrated = $this->config->configRegistry->saveChanges();
         }
     }
 
