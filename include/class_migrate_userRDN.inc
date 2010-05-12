@@ -72,10 +72,16 @@ class migrate_userRDN implements propertyMigration
 
                 list($name, $container) = preg_split("/,/",$dn,2);
                 if(preg_match("/^".preg_quote($initialValue,'/i')."/", $container)){
-                    $containerDN = preg_replace("/^".preg_quote($initialValue,'/')."/",$targetValue,$container);
-                    $dnTo = $name.",".$containerDN;
+                    $container = preg_replace("/^".preg_quote($initialValue,'/')."/",$targetValue,$container);
+
+                    // Ensure that we handle a valid gosaDepartment container.
+                    while(!isset($this->config->idepartments[$container])){
+                        $container = preg_replace("/^[^,]*+,/","",$container);
+                    }
+
+                    $dnTo = $name.",".$targetValue.$container;
                     if(!empty($targetValue) && !$ldap->dn_exists($targetValue.$container)){
-                        $this->found['add'][$containerDN] = array(); 
+                        $this->found['add'][$targetValue.$container] = array(); 
                     }
                     if($dn != $dnTo){
                         $this->found['move'][$dn] = $dnTo;
