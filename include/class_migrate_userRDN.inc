@@ -27,9 +27,13 @@ class migrate_userRDN implements propertyMigration
         $targetValue = $this->property->getValue(TRUE);
         $dnMatch = "";
         if(!empty($initialValue)){
-            list($namingAttrs, $container) = preg_split("/=/",$initialValue,2);
-            $container = trim($container,', ');
-            $dnMatch = "({$namingAttrs}:dn:={$container})";
+
+            foreach(preg_split("/,/", $initialValue) as $rdnPart){
+                if(empty($rdnPart)) continue;
+                list($namingAttrs, $container) = preg_split("/=/",$rdnPart,2);
+                $container = trim($container,', ');
+                $dnMatch.= "({$namingAttrs}:dn:={$container})";
+            }
         }
 
         // Search for users
