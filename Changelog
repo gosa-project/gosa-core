@@ -2,6 +2,13 @@ GOsa2 changelog
 ===============
 
 * gosa 2.6.10
+  - Fixed timestamps in samba domain info dialog
+  - Updated filter for windows workstations in systems plugin
+  - Allow to use phoneAccount attributes as replacements in macros
+  - Updated mailAccount "Do not deliver to own mailbox" flag was inverse
+  - Updated gofon macro saving handling, avoids database duplicates
+  - Fixed Problem with Copy & Paste of servers
+  - Improved ppd parser
 
 * gosa 2.6.9
   - Fixed problem with initial phone accounts, sip type was NULL
