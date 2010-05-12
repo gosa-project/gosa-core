@@ -443,7 +443,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "userRDN",
                                 "type"          => "rdn",
-                                "default"       => "ou=people",
+                                "default"       => "ou=people,",
                                 "description"   => "The 'userRDN' statement defines the location where new accounts will be created inside of defined departments. The default is 'ou=people'.",
                                 "check"         => "gosaProperty::isRdn",
                                 "migrate"       => "migrate_userRDN",
