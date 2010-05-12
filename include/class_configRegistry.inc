@@ -383,7 +383,7 @@ class gosaProperty
 
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value),  WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value,'','cn=user,ou=people,dc=example,dc=de'),  WARNING_DIALOG);
         }
         
         return($match);
@@ -395,7 +395,7 @@ class gosaProperty
 
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value),  WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value,'','ou=people,'),  WARNING_DIALOG);
         }
         
         return($match);
