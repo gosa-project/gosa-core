@@ -475,7 +475,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.9.82 NAME 'gotoSessionType'
 objectclass (1.3.6.1.4.1.10098.1.2.1.16 NAME 'goTerminalServer' SUP top AUXILIARY
 	DESC 'Terminal server description (v2.6.1)'
 	MUST ( cn $ goXdmcpIsEnabled )
-	MAY  ( description $ goTerminalServerStatus $ gotoSessionType ))
+	MAY  ( description $ goTerminalServerStatus $ gotoSessionType $ goFontPath ))
 
 # NFS Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.19 NAME 'goNfsServer' SUP top AUXILIARY
