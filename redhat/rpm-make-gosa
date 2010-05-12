@@ -81,31 +81,31 @@ mkdir -p %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
 
 echo "%{buildroot} <<---------" 
 
-if [ -e ./html/* ]; then
+if ls ./html/* &> /dev/null ;then
 	mv ./html/* %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
 fi
 
 # Move contrib if available
 mkdir -p %{buildroot}/usr/share/doc/%{name}
-if [ -e ./contrib/* ]; then
+if ls ./contrib/* &> /dev/null ;then
 	mv ./contrib %{buildroot}/usr/share/doc/%{name}
 fi
 
 # Move help
 mkdir -p %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
-if [ -e ./help/* ]; then
+if ls ./help/* &> /dev/null ;then
 	mv ./help/* %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
 fi
 
 # Copy etc
 mkdir -p %{buildroot}/etc/gosa
-if [ -e ./etc/* ]; then
+if ls ./etc/* &> /dev/null ;then
 	mv ./etc/* %{buildroot}/etc/gosa
 fi
 
 # Move localization
 mkdir -p %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
-if [ -e ./locale/* ]; then
+if ls ./local/* &> /dev/null ;then
 	mv ./locale/* %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
 fi
 
