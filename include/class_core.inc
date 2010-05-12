@@ -625,7 +625,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "sambaMachineAccountRDN",
                                 "type"          => "rdn",
-                                "default"       => "ou=winstations",
+                                "default"       => "ou=winstations,",
                                 "description"   => "This statement defines the location where GOsa looks for new samba workstations.",
                                 "check"         => "gosaProperty::isRdn",
                                 "migrate"       => "",
