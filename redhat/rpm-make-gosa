@@ -105,13 +105,13 @@ fi
 
 # Move localization
 mkdir -p %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
-if ls ./local/* &> /dev/null ;then
+if ls ./locale/* &> /dev/null ;then
 	mv ./locale/* %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
 fi
 
 # Move plugin itself
-mkdir -p %{buildroot}/usr/share/gosa/plugins/@@NAME@@
-mv ./* %{buildroot}/usr/share/gosa/plugins/@@NAME@@
+mkdir -p %{buildroot}/usr/share/gosa/plugins/
+mv ./* %{buildroot}/usr/share/gosa/plugins/
 
 %post
 /usr/sbin/update-gosa
@@ -124,7 +124,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%attr (-,root,root) /usr/share/gosa/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/gosa/plugins/
 %attr (-,root,root) /usr/share/gosa/doc/plugins/@@NAME@@
 %attr (-,root,root) /usr/share/gosa/locale/plugins/@@NAME@@
 %attr (-,root,root) /usr/share/gosa/html/plugins/@@NAME@@
@@ -139,6 +139,7 @@ EOF
 mv $configfile ${2}/SPECS
 cp -r ./rpm_src/gosa-plugins/${1} /tmp/gosa-plugin-${1}-${version}
 cd /tmp/
+rm /tmp/gosa-plugin-${1}-${version}/plugin.dsc
 tar cjf ${2}/SOURCES/gosa-plugin-${1}-${version}.tar.bz2 ./gosa-plugin-${1}-${version}
 rm -rf gosa-plugin-${1}-${version}
 echo "Done."

@@ -243,6 +243,7 @@ mkdir -p %{buildroot}/usr/sbin
 mkdir -p %{buildroot}/usr/share/pixmaps
 mkdir -p %{buildroot}/usr/share/applications
 mkdir -p %{buildroot}/usr/share/man/man1/
+mkdir -p %{buildroot}/usr/share/man/man5/
 
 mv contrib/desktoprc 		%{buildroot}/etc/gosa
 mv contrib/gosa 		%{buildroot}/usr/bin
@@ -251,7 +252,7 @@ mv debian/gosa-16.xpm 		%{buildroot}/usr/share/pixmaps
 mv debian/gosa-desktop.desktop 	%{buildroot}/usr/share/applications
 
 # Gzip manpages from source
-for x in update-gosa.1 dh-make-gosa.1 update-locale.1 update-online-help.1 update-pdf-help.1
+for x in update-gosa.1 dh-make-gosa.1 update-locale.1 update-online-help.1 update-pdf-help.1 gosa-encrypt-passwords.1
 do
 	gzip $x
 done
@@ -274,6 +275,8 @@ done
 mv ./*.1.gz 			%{buildroot}/usr/share/man/man1/
 gzip -c contrib/gosa.1 > contrib/gosa.1.gz
 mv contrib/gosa.1.gz 		%{buildroot}/usr/share/man/man1/
+gzip -c contrib/gosa.conf.5 > contrib/gosa.conf.5.gz
+mv contrib/gosa.conf.5.gz 		%{buildroot}/usr/share/man/man5/
 
 mkdir -p %{buildroot}/usr/share/doc/gosa-%{version}
 rm -rf %{buildroot}/usr/share/gosa/contrib
@@ -310,7 +313,9 @@ rm -rf %{buildroot}
 #%attr(-,root,root) /contrib/openldap
 %config %attr(-,root,root) /usr/share/doc/gosa/slapd.conf-example
 %attr(755,root,root) /usr/sbin/update-gosa
+%attr(755,root,root) /usr/share/man/man1/gosa-encrypt-passwords.1.gz
 %attr(755,root,root) /usr/share/man/man1/update-gosa.1.gz
+%attr(755,root,root) /usr/share/man/man5/gosa.conf.5.gz
 %attr(644,root,root) /etc/gosa/shells
 %attr(644,root,root) /etc/gosa/encodings
 %attr(755,root,root) /usr/sbin/gosa-encrypt-passwords
@@ -389,3 +394,6 @@ rm -rf %{buildroot}
 %changelog
 * Fri Nov 17 2008 Stefan Japes <japes@GONICUS.de>
 - First build of GOsa 2.6 as an RPM, should work on SuSE and RedHat
+* Thu May 14 2010 
+- Corrected errors when building RPM and plugins where not on right
+  place Closes #957 and #970
