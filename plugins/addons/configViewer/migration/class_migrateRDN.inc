@@ -36,6 +36,14 @@ class migrateRDN implements propertyMigration
         $ldap2= $this->config->get_ldap_link();
         $ldap2->cd($this->config->current['BASE']);
 
+        // Search for possible release deparments/containers - this enables us to
+        //  SKIP release based objects - we cannot move them right now.
+        $releases = array();
+        $ldap->search("objectClass=FAIbranch");
+        while($attrs = $ldap->fetch()){
+            $releases[$attrs['dn']] = $attrs['dn'];
+        }
+
         // If the userRDN wasn't empty, then only search for users inside of the old userRDN.
         $initialValue = $this->prefix.$this->property->getValue().$this->suffix;
         $targetValue = $this->prefix.$this->property->getValue(TRUE).$this->suffix;
@@ -66,18 +74,28 @@ class migrateRDN implements propertyMigration
 
                 // Ensure that we handle a valid gosaDepartment container.
                 while(!isset($this->config->idepartments[$container])){
+
+                    // This object is part of a FAI release - we better skip it here.
+                    if(isset($releases[$container])){
+                        break;
+                    }
+
                     $container = preg_replace("/^[^,]*+,/","",$container);
                 }
+    
+                // We haven't found a valid gosaDepartment in this dn, so skip.
+                if(isset($this->config->idepartments[$container])){
 
-                // Queue new containuer to be created.
-                if(!preg_match("/^".preg_quote($targetValue,'/i')."/", $container)){
-                    $dnTo = $name.",".$targetValue.$container;
-                    if(!$ldap->dn_exists($targetValue.$container)){
-                        $this->found['add'][$targetValue.$container] = array(); 
-                    }
-                    if($dn != $dnTo){
-                        $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
-                        $found = TRUE;
+                    // Queue new containuer to be created.
+                    if(!preg_match("/^".preg_quote($targetValue,'/i')."/", $container)){
+                        $dnTo = $name.",".$targetValue.$container;
+                        if(!$ldap->dn_exists($targetValue.$container)){
+                            $this->found['add'][$targetValue.$container] = array(); 
+                        }
+                        if($dn != $dnTo){
+                            $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
+                            $found = TRUE;
+                        }
                     }
                 }
             }
@@ -91,17 +109,27 @@ class migrateRDN implements propertyMigration
 
                     // Ensure that we handle a valid gosaDepartment container.
                     while(!isset($this->config->idepartments[$container])){
+
+                        // This object is part of a FAI release - we better skip it here.
+                        if(isset($releases[$container])){
+                            break;
+                        }
+
                         $container = preg_replace("/^[^,]*+,/","",$container);
                     }
 
+                    // We haven't found a valid gosaDepartment in this dn, so skip.
+                    if(isset($this->config->idepartments[$container])){
 
-                    $dnTo = $name.",".$targetValue.$container;
-                    if(!empty($targetValue) && !$ldap->dn_exists($targetValue.$container)){
-                        $this->found['add'][$targetValue.$container] = array(); 
-                    }
-                    if($dn != $dnTo){
-                        $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
-                        $found = TRUE;
+
+                        $dnTo = $name.",".$targetValue.$container;
+                        if(!empty($targetValue) && !$ldap->dn_exists($targetValue.$container)){
+                            $this->found['add'][$targetValue.$container] = array(); 
+                        }
+                        if($dn != $dnTo){
+                            $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
+                            $found = TRUE;
+                        }
                     }
                 }
             }    
