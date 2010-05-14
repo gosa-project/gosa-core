@@ -4,7 +4,9 @@
 
 <hr>
 
+<div style='width:100%; height: 400px; overflow: scroll'>
 {$content}
+</div>
 
 <hr>
 <div class="plugin-actions">
