@@ -418,7 +418,6 @@ class gosaProperty
 
     private function _restoreCurrentValue()
     {
-    
         // First check for values in the LDAP Database.
         if(isset($this->parent->ldapStoredProperties[$this->class][$this->name])){
             $this->setStatus('ldap');
@@ -463,7 +462,7 @@ class gosaProperty
 
     function getValue($temporary = FALSE) 
     { 
-        if($temporary && in_array($this->getStatus(), array('modified'))){
+        if($temporary && in_array($this->getStatus(), array('modified','removed'))){
             return($this->tmp_value); 
         }else{ 
             return($this->value); 
@@ -474,8 +473,13 @@ class gosaProperty
     {
         if(in_array($this->getStatus(),array('ldap'))){
             $this->setStatus('removed'); 
-        }elseif(in_array($this->getStatus(),array('modified'))){
-            $this->_restoreCurrentValue();
+
+            // Second check for values in the config file.
+            if(isset($this->parent->fileStoredProperties[strtolower($this->class)][strtolower($this->name)])){
+                $this->tmp_value = $this->parent->fileStoredProperties[strtolower($this->class)][strtolower($this->name)];
+            }else{
+                $this->tmp_value = $this->getDefault();
+            }
         }
     }
 
