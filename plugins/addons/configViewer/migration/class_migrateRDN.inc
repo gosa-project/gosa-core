@@ -1,12 +1,13 @@
 <?php
 
 
-class migrate_userRDN implements propertyMigration
-{
-    private $property = NULL;
-    private $config = NULL;
 
-    private $found = array();
+class migrateRDN implements propertyMigration
+{
+    protected $property = NULL;
+    protected $config = NULL;
+    protected $found = array();
+    protected $filter ="";
 
     function __construct($config,$property)
     {
@@ -36,7 +37,8 @@ class migrate_userRDN implements propertyMigration
         }
 
         // Search for users
-        $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=sambaSamAccount)){$dnMatch})",array('dn'));
+        $filter = sprintf($this->filter,$dnMatch);
+        $ldap->search($filter,array('dn'));
         $found = FALSE;
         while($attrs = $ldap->fetch()){
             $dn = $attrs['dn'];
@@ -143,5 +145,6 @@ class migrate_userRDN implements propertyMigration
         return(array());
     }
 } 
+
 
 ?>
