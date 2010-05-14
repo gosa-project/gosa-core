@@ -9,6 +9,14 @@ class migrateRDN implements propertyMigration
     protected $found = array();
     protected $filter ="";
 
+    // Additional suffixes or prefixes 
+    // e.g. for 'faiScriptRDN' (ou=scripts,) moving to new destination lets say 
+    //  to 'ou=FAIscripts,' would break stuff with having 'ou=fai,ou=systems,ou=config' 
+    // prepended.
+    // 
+    protected $suffix = ""; 
+    protected $prefix = ""; 
+
     function __construct($config,$property)
     {
         $this->property = &$property;
@@ -24,8 +32,9 @@ class migrateRDN implements propertyMigration
         $ldap2->cd($this->config->current['BASE']);
 
         // If the userRDN wasn't empty, then only search for users inside of the old userRDN.
-        $initialValue = $this->property->getValue();
-        $targetValue = $this->property->getValue(TRUE);
+        $initialValue = $this->prefix.$this->property->getValue().$this->suffix;
+        $targetValue = $this->prefix.$this->property->getValue(TRUE).$this->suffix;
+
         $dnMatch = "";
         if(!empty($initialValue)){
             foreach(preg_split("/,/", $initialValue) as $rdnPart){
@@ -79,6 +88,7 @@ class migrateRDN implements propertyMigration
                     while(!isset($this->config->idepartments[$container])){
                         $container = preg_replace("/^[^,]*+,/","",$container);
                     }
+
 
                     $dnTo = $name.",".$targetValue.$container;
                     if(!empty($targetValue) && !$ldap->dn_exists($targetValue.$container)){
