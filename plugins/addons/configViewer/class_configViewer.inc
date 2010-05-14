@@ -203,7 +203,7 @@ class configViewer extends management
         $ssize  = "208px";
         $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
-        $value = htmlentities($value[0],ENT_COMPAT,'UTF-8');
+        $value = htmlentities($value[0],ENT_QUOTES      ,'UTF-8');
 
         // Add slashes to keep escaped values escaped after passing them to smarty.
         $value = addslashes($value);
