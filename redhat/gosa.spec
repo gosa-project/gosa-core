@@ -394,6 +394,6 @@ rm -rf %{buildroot}
 %changelog
 * Fri Nov 17 2008 Stefan Japes <japes@GONICUS.de>
 - First build of GOsa 2.6 as an RPM, should work on SuSE and RedHat
-* Thu May 14 2010 
+* Thu May 14 2010 Olivier BONHOMME <obonhomme@nerim.net>
 - Corrected errors when building RPM and plugins where not on right
   place Closes #957 and #970
