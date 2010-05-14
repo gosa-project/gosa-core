@@ -456,7 +456,7 @@ DEBUG_SI      = 256"),
                                 "default"       => "ou=groups,",
                                 "description"   => "The 'groupsRDN' statement defines the location where new groups will be created inside of defined departments. The default is 'ou=groups'.",
                                 "check"         => "gosaProperty::isRdn",
-                                "migrate"       => "",
+                                "migrate"       => "migrate_groupRDN",
                                 "group"         => "group",
                                 "mandatory"     => FALSE),
 
@@ -620,16 +620,6 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
-
-                        array(
-                                "name"          => "sambaMachineAccountRDN",
-                                "type"          => "rdn",
-                                "default"       => "ou=winstations,",
-                                "description"   => "This statement defines the location where GOsa looks for new samba workstations.",
-                                "check"         => "gosaProperty::isRdn",
-                                "migrate"       => "",
-                                "group"         => "samba",
                                 "mandatory"     => FALSE),
 
                         array(
