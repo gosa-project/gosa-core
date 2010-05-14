@@ -23,6 +23,11 @@ class migrateRDN implements propertyMigration
         $this->config = &$config;
     }   
 
+    function getChanges()
+    {
+        return($this->found);
+    }
+
     function checkForIssues()
     {
         $this->found = array();

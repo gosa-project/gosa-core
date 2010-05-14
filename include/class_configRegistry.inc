@@ -251,8 +251,12 @@ class gosaProperty
         // Initialize with the current value
         $this->_restoreCurrentValue(); 
 
+    }
+
+    function migrationRequired()
+    {
         // Instantiate migration class 
-        if(!empty($this->migrate)){
+        if(!empty($this->migrate) && $this->migrationClass == NULL){
             if(!class_available($this->migrate)){
                 trigger_error("Cannot start migration for gosaProperty::'{$this->getName()}' class not found ({$this->migrate})!");
             }else{
@@ -260,14 +264,11 @@ class gosaProperty
                 $tmp = new $class($this->parent->config,$this);
                 if(! $tmp instanceof propertyMigration){ 
                     trigger_error("Cannot start migration for gosaProperty::'{$this->getName()}' doesn't implement propertyMigration!");
+                }else{
+                    $this->migrationClass = $tmp;
                 }
-                $this->migrationClass = $tmp;
             }
         }
-    }
-
-    function migrationRequired()
-    {
         if(empty($this->migrate) || $this->migrationClass == NULL){
             return(FALSE);
         }
