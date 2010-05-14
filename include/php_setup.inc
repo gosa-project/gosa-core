@@ -272,7 +272,7 @@ error_reporting (E_ALL | E_STRICT);
 $error_collector= "";
 $error_collector_mailto= "";
 
-#set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
+set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
 
 $variables_order= "ES";
 ini_set("register_globals",0);
