@@ -107,19 +107,19 @@ class migrateRDN implements propertyMigration
             $str.= "<br><h3>"._("Objects that will be moved")."</h3>";
             $str.="<pre>";
             foreach($this->found['move'] as $id => $data){
-                $checked = (!isset($_POST['migrateNow'])) ? 'checked':'';
+                $checked = (!isset($_POST["migrateNow".get_class($this)])) ? 'checked':'';
                 $str.= "<input $checked type='checkbox' value='1' name='migrateEntry_{$id}'>";
                 $str.= sprintf(_("Moving object '%s' to '%s'"), $data['from'], $data['to'])."<br>";
             }
             $str.="</pre>";
         }
-        $str.= "<button name='migrateNow'>"._("Migrate")."</button>";
+        $str.= "<button name='migrateNow".get_class($this)."'>"._("Migrate")."</button>";
         return($str);
     }
    
     function save_object()
     {
-        if(isset($_POST['migrateNow'])){
+        if(isset($_POST["migrateNow".get_class($this)])){
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
 
