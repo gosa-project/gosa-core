@@ -1028,7 +1028,7 @@ class group extends plugin
                   "default"       => "ou=groups,",
                   "description"   => "The 'ogroupRDN' statement defines the location where new accounts will be created. The default is 'ou=groups,'.",
                   "check"         => "gosaProperty::isRdn",
-                  "migrate"       => "",
+                  "migrate"       => "migrate_ogroupRDN",
                   "group"         => "plugin",
                   "mandatory"     => FALSE)),
 
