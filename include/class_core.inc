@@ -158,11 +158,22 @@ class core extends plugin {
                                 "name"          => "displayErrors",
                                 "type"          => "bool",
                                 "default"       => "false",
-                                "description"   => "The 'displayErrors' statement tells GOsa to show PHP errors in the upper part of the screen. This should be disabled in productive deployments, because there might be some important passwords arround.",
+                                "description"   => _("The 'displayErrors' statement tells GOsa to show PHP errors in the upper part of the screen. This should be disabled in productive deployments, because there might be some important passwords arround.")." ".sprintf(_("The property '%s' may be interesting too."),'developmentMode'),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "debug",
                                 "mandatory"     => TRUE),
+
+                        array(
+                                "name"          => "developmentMode",
+                                "type"          => "bool",
+                                "default"       => "false",
+                                "description"   => _("The 'developmentMode' statement tells GOsa to show development related error messages, for example messages about missing ACL configuration or classes. Due to the fact that enabling this flag will result in a lot of false error messages it should only be enabled while developing or debugging plugins!"),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "debug",
+                                "mandatory"     => TRUE),
+
 
                         array(
                                 "name"          => "schemaCheck",
