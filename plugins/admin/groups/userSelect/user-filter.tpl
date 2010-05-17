@@ -14,7 +14,7 @@
   <tr>
    <td>
     <label for="NAME">
-     <img src="images/lists/search.png" align=middle>&nbsp;Name
+     <img src="images/lists/search.png" align=middle>&nbsp;{t}Name{/t}
     </label>
    </td>
    <td>
