@@ -77,6 +77,11 @@ class configViewer extends management
                 $this->toBeMigrated[0]->save();
                 unset($this->toBeMigrated[0]);
                 $this->toBeMigrated = array_values($this->toBeMigrated);
+
+                // Nothing to migrate and everything is fine, reload the list now.
+                if(!count($this->toBeMigrated)){
+                    $this->config->configRegistry->reload($force=TRUE);
+                }
             }
         }
         if(count($this->toBeMigrated)){
