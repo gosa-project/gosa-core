@@ -116,6 +116,14 @@ class Step_Checks extends setup_step
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
+    /* Is calendar module available/compiled/installed */
+    $N = msgPool::checkingFor(_("Calendar"));
+    $D = _("GOsa requires this module to calculate dates.");
+    $S = msgPool::installPhpModule("calendar");
+    $R = is_callable("cal_days_in_month");
+    $M = TRUE;
+    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
+
     /* Mysql module loaded ? */
     $N = msgPool::checkingFor(_("MySQL"));
     $D = _("GOsa requires this module to communicate with several supported databases.");

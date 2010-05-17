@@ -37,7 +37,7 @@
 	</div>
 	<div class='step4_container'>
 		<div class='step4_name'>
-			<div style='vertical-align:middle;height:100%;'>{t}Connection URI{/t}</div>
+			<div style='vertical-align:middle;'>{t}Connection URI{/t}</div>
 		</div>
 		<div class='step4_value'>
 			<input type='text' name='connection' maxlength='80' size='40' value='{$connection}'>

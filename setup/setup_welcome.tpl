@@ -10,8 +10,6 @@
 	<ul>
 	 <li>{t}Create a basic, single site configuration{/t}</li>
 	 <li>{t}Tries to find problems within your PHP and LDAP setup{/t}</li>
-	 <li>{t}Let you choose from a set of basic and advanced configuration switches{/t}</li>
-	 <li>{t}Guided migration of existing LDAP trees{/t}</li>
 	</ul>
 	<p>
 	<b>{t}What will the wizard NOT do for you?{/t}</b>

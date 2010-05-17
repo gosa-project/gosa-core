@@ -92,7 +92,7 @@ class Step_Feedback  extends setup_step
                                                 "NAME" => _("UNIX accounts/groups"));
     $this->features_used['samba']       = array("USED" => isset($oc['sambaSamAccount']) || isset($oc['sambaAccount']) , 
                                                 "NAME" => _("Samba management"));
-    $this->features_used['mail']        = array("USED" => $cv['mail']  != "none", 
+    $this->features_used['mail']        = array("USED" => FALSE,
                                                 "NAME" => _("Mailsystem management"));
     $this->features_used['fax']         = array("USED" => isset($oc['goFaxAccount']) , 
                                                 "NAME" => _("FAX system administration"));
