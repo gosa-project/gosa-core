@@ -43,7 +43,7 @@ class setup
 #    $this->o_steps[$i++] = new Step_Config1();
 #    $this->o_steps[$i++] = new Step_Config2();
 #    $this->o_steps[$i++] = new Step_Config3();
-#    $this->o_steps[$i++] = new Step_Migrate();
+    $this->o_steps[$i++] = new Step_Migrate();
     $this->o_steps[$i++] = new Step_Feedback();
     $this->o_steps[$i++] = new Step_Finish();
     $this->i_steps = $i-1;
