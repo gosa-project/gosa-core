@@ -469,7 +469,7 @@ class Step_Migrate extends setup_step
         $people_ou = "ou=people,"; // Thats the property default.
         $dn = "cn=System Administrator-".$uid.",".$people_ou.$cv['base'];
 
-        $hash = $hash = passwordMethod::make_hash($pw2, 'crypt/standard-des');
+        $hash = $hash = passwordMethod::make_hash($pw2, 'crypt/md5');
 
         $new_user=array();
         $new_user['objectClass']= array("top","person","gosaAccount","organizationalPerson","inetOrgPerson");
