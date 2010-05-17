@@ -370,7 +370,8 @@ class userinfo
       $aclCategory = $object;
     }
 
-    if($this->config->get_cfg_value("core","displayErrors") == "true"){
+    if($this->config->boolValueIsTrue("core","developmentMode")){
+
         if(!isset($this->ocMapping[$aclCategory])){
             trigger_error("Invalid ACL category '".$aclCategory."'! ({$object})");
             return("");
@@ -744,7 +745,7 @@ class userinfo
             }
           }
         }else{
-            if($this->config->get_cfg_value("core","displayErrors") == "true"){
+            if($this->config->boolValueIsTrue("core","developmentMode")){
                 trigger_error("Invalid type of category ".$category);
             }
           $acl = "";
