@@ -17,10 +17,22 @@ class migrateRDN implements propertyMigration
     protected $suffix = ""; 
     protected $prefix = ""; 
 
+    protected $title = "";
+    protected $description = "";
+
+
     function __construct($config,$property)
     {
         $this->property = &$property;
         $this->config = &$config;
+
+        //Set a dummy title and description
+        if(empty($this->title)){
+            $this->title = sprintf(_("GOsa migration of property '%s'"), $this->property->getName());
+        }
+        if(empty($this->description)){
+            $this->description = sprintf(_("GOsa has detected objects outside of the configured storage point (%s)"), $this->property->getValue(TRUE));
+        }
     }   
 
     function getChanges()
@@ -139,22 +151,29 @@ class migrateRDN implements propertyMigration
 
     function execute()
     {
-        $str = "";
+        $str = "<h3>".$this->title."</h3>";
+        $str.= $this->description;
+        $str.= "<hr>";
         if(count($this->found['add'])) {
-            $str.= "<br><h3>"._("Objects that will be added")."</h3>";
+            $str.= "<br>"._("Objects that will be added");
+            $str.= "<ul>";
             foreach($this->found['add'] as $dn => $attrs){
-                $str.= $dn."<br>";
+                $str.= "<li>".$dn."</li>";
             }
+            $str.= "</ul>";
         }
         if(count($this->found['move'])) {
-            $str.= "<br><h3>"._("Objects that will be moved")."</h3>";
-            $str.="<pre>";
+            $str.= "<br>"._("Objects that will be moved")."<br>";
+            $str.= "<ul style='list-style:none; padding: 15px;'>";
             foreach($this->found['move'] as $id => $data){
                 $checked = (!isset($_POST["migrateNow".get_class($this)])) ? 'checked':'';
-                $str.= "<input $checked type='checkbox' value='1' name='migrateEntry_{$id}'>";
-                $str.= sprintf(_("Moving object '%s' to '%s'"), $data['from'], $data['to'])."<br>";
+                $str.= "<li>
+            
+                <span style='white-space:nowrap;'>
+                <input $checked type='checkbox' value='1' name='migrateEntry_{$id}'>";
+                $str.= sprintf(_("Moving object '%s' to '%s'"), $data['from'], $data['to'])."</span></li>";
             }
-            $str.="</pre>";
+            $str.="</ul>";
         }
         $str.= "<button name='migrateNow".get_class($this)."'>"._("Migrate")."</button>";
         return($str);
