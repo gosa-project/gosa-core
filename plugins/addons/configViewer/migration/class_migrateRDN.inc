@@ -31,7 +31,7 @@ class migrateRDN implements propertyMigration
             $this->title = sprintf(_("GOsa migration of property '%s'"), $this->property->getName());
         }
         if(empty($this->description)){
-            $this->description = sprintf(_("GOsa has detected objects outside of the configured storage point (%s)"), $this->property->getValue(TRUE));
+            $this->description = sprintf(_("GOsa has detected objects outside of the configured storage point (%s)."), $this->property->getValue(TRUE));
         }
     }   
 

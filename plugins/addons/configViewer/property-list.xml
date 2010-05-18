@@ -32,7 +32,7 @@
       <objectClass>modified</objectClass>
       <category>all</category>
       <class>all</class>
-      <image>plugins/configViewer/images/ldap.png[new]</image>
+      <image>plugins/propertyEditor/images/ldap.png[new]</image>
     </objectType>
 
     <objectType>
@@ -40,7 +40,7 @@
       <objectClass>ldap</objectClass>
       <category>all</category>
       <class>all</class>
-      <image>plugins/configViewer/images/ldap.png</image>
+      <image>plugins/propertyEditor/images/ldap.png</image>
     </objectType>
 
     <objectType>
@@ -48,7 +48,7 @@
       <objectClass>file</objectClass>
       <category>all</category>
       <class>all</class>
-      <image>plugins/configViewer/images/file.png</image>
+      <image>plugins/propertyEditor/images/file.png</image>
     </objectType>
 
   </definition>

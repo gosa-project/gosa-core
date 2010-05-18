@@ -1,11 +1,11 @@
 <?php
 
 
-class configViewer extends management
+class propertyEditor extends management
 {
     var $plHeadline= "Preferences";
     var $plDescription= "Configure global and special GOsa settings like hooks and plugin parameters";
-    var $plIcon  = "plugins/configViewer/images/plugin.png";
+    var $plIcon  = "plugins/propertyEditor/images/plugin.png";
 
     var $toBeMigrated = array();
 
@@ -25,10 +25,10 @@ class configViewer extends management
 
         // Build headpage
         $headpage = new listing(get_template_path("property-list.xml", true));
-        $headpage->registerElementFilter("propertyName", "configViewer::propertyName");
-        $headpage->registerElementFilter("propertyGroup", "configViewer::propertyGroup");
-        $headpage->registerElementFilter("propertyClass", "configViewer::propertyClass");
-        $headpage->registerElementFilter("propertyValue", "configViewer::propertyValue");
+        $headpage->registerElementFilter("propertyName", "propertyEditor::propertyName");
+        $headpage->registerElementFilter("propertyGroup", "propertyEditor::propertyGroup");
+        $headpage->registerElementFilter("propertyClass", "propertyEditor::propertyClass");
+        $headpage->registerElementFilter("propertyValue", "propertyEditor::propertyValue");
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "property", $headpage);
 
