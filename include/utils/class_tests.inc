@@ -40,7 +40,8 @@ class tests {
       return (TRUE);
     }
 
-    return preg_match ("/^[\/0-9 ()+*-]+$/", $nr);
+    // We require at least one numeric character in the number string.
+    return preg_match ("/^[\/0-9 ()+*-]*[0-9]{1}[\/0-9 ()+*-]*$/", $nr);
   }
 
 
