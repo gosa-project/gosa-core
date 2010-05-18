@@ -195,7 +195,16 @@ class migrateRDN implements propertyMigration
             $tmp = new plugin($this->config,NULL);
             foreach($this->found['move'] as $id => $data){
                 if(isset($_POST["migrateEntry_{$id}"])){
-                    $tmp->move($data['from'], $data['to']);
+                    if($tmp->move($data['from'], $data['to'])){
+                    }elseif($ldap->dn_exists($data['to'])){
+                        msg_dialog::display(_("Error"), 
+                                sprintf(_("Migration failed for object %s, dn already exists!"), 
+                                    bold($data['to'])), ERROR_DIALOG);
+                    }else{
+                        msg_dialog::display(_("Error"), 
+                                sprintf(_("Migration failed for object %s, please check if it already exists!"), 
+                                    bold($data['to'])), ERROR_DIALOG);
+                    }
                 }
             }
             $this->checkForIssues();
