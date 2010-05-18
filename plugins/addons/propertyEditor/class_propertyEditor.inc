@@ -60,6 +60,10 @@ class propertyEditor extends management
             $this->closeDialogs();
         }
 
+        // Once accepted hide the warning message        
+        if(isset($_POST['warningAccepted'])){
+            $this->warningNotAccepted = TRUE;
+        }
 
         // Execute registered management event listeners.
         $this->handleActions($this->detectPostActions());
@@ -114,6 +118,8 @@ class propertyEditor extends management
             }
         }
 
+        $smarty = get_smarty();
+        $smarty->assign("warningNotAccepted", $this->warningNotAccepted);
         return(management::execute());
     }
 
