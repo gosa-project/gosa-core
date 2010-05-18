@@ -9,6 +9,11 @@
         {t}Modifying properties may break your setup, destroy or mess up your ldap database, lead to security holes or it can even make logins impossible!{/t}
         {t}Since configuration properties are stored in the ldap database a copy/backup can be handy.{/t}
        </p>
+
+       <p>
+        {t}If we've locked yourself out, you can try to set 'ignoreLdapProperties' to 'true' in your gosa.conf. With this option set to true, GOsa will ignore LDAP based property values, but it cannot reverse damage done to your LDAP database.{/t}
+       </p>
+
       </td> 
      </tr>
     </table>
