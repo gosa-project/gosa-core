@@ -10,6 +10,9 @@ class configRegistry{
 
     public $status = 'none';
 
+    // Excludes property values defined in ldap 
+    public $ignoreLdapProperties = FALSE;
+
     function __construct($config)
     {
         $this->config = &$config;
@@ -76,8 +79,15 @@ class configRegistry{
             }
         }
 
+        // Skip searching for LDAP defined properties if 'ignoreLdapProperties' is set to 'true'
+        //  in the config. 
+        if(isset($this->fileStoredProperties['core'][strtolower('ignoreLdapProperties')]) && 
+            preg_match("/(true|on)/i", $this->fileStoredProperties['core'][strtolower('ignoreLdapProperties')])){
+            $this->ignoreLdapProperties = TRUE;
+        }
+
         // Search for all config flags defined in the LDAP - BUT only if we ARE logged in. 
-        if(!empty($this->config->current['CONFIG'])){
+        if(!$this->ignoreLdapProperties && !empty($this->config->current['CONFIG'])){
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['CONFIG']);
             $ldap->search('(&(objectClass=gosaConfig)(gosaSetting=*))', array('cn','gosaSetting'));
