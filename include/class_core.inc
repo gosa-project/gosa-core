@@ -936,19 +936,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "migrate"       => "",
                                 "group"         => "snapshot",
                                 "mandatory"     => FALSE)
-                            ),
-
-                        "plProvidedAcls"    => array(
-                                "accessTo"          => _("System trust"),
-                                "cn"                => _("Name"),
-                                "description"       => _("Description"),
-                                "sudoUser"          => _("Users"),
-                                "sudoHost"          => _("Host"),
-                                "sudoCommand"       => _("Command"),
-                                "sudoRunAs"         => _("Run as user"),
-                                "trustModel"        => _("Access control list"))
-                            )
-                            );
+                            )));
     }
 }
 ?>
