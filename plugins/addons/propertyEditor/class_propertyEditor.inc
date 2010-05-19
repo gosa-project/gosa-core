@@ -9,6 +9,8 @@ class propertyEditor extends management
 
     var $toBeMigrated = array();
 
+    var $warningAccepted = FALSE;
+
     function __construct($config,$ui)
     {
         $this->config = $config;
@@ -62,7 +64,7 @@ class propertyEditor extends management
 
         // Once accepted hide the warning message        
         if(isset($_POST['warningAccepted'])){
-            $this->warningNotAccepted = TRUE;
+            $this->warningAccepted = TRUE;
         }
 
         // Execute registered management event listeners.
@@ -119,7 +121,7 @@ class propertyEditor extends management
         }
 
         $smarty = get_smarty();
-        $smarty->assign("warningNotAccepted", $this->warningNotAccepted);
+        $smarty->assign("warningAccepted", $this->warningAccepted);
         $smarty->assign("ignoreLdapProperties", $this->config->configRegistry->ignoreLdapProperties);
         return(management::execute());
     }

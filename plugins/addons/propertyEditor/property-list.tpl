@@ -1,4 +1,4 @@
-{if !$warningNotAccepted}
+{if !$warningAccepted}
 
     <table summary="{t}Warning message{/t}" style='width:100%'>
      <tr>
@@ -18,8 +18,8 @@
      </tr>
     </table>
     <hr>
-      <input type='checkbox' name='warningAccepted' value='1'>
-        {t}I know the risks and want to modify properties!{/t}
+      <input type='checkbox' name='warningAccepted' value='1' id='warningAccepted'>
+      <label for='warningAccepted'>{t}I know the risks and want to modify properties!{/t}</label>
     <hr>
     <div class="plugin-actions">
         <button name='goOn'>{msgPool type='okButton'}</button> 
