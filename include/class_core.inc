@@ -33,6 +33,13 @@ class core extends plugin {
                     $list[$method] = $desc;
                 }
                 break;
+            case 'theme':
+                $cmd = "cd ../ihtml/themes; find . -name 'img.styles' | sed s/'^[^\/]*\/\([^\/]*\).*'/'\\1'/g";
+                $res = `$cmd`;
+                foreach(preg_split("/\n/",$res) as $entry){
+                    $list[$entry] = $entry;
+                }
+                break;
             case 'accountPrimaryAttribute':
                 $list = array('uid' => 'uid', 'cn' => 'cn');
                 break;
@@ -361,7 +368,7 @@ class core extends plugin {
 
                         array(
                                 "name"          => "theme",
-                                "type"          => "string",
+                                "type"          => "switch",
                                 "default"       => "default",
                                 "defaults"      => "core::getPropertyValues",
                                 "description"   => "The 'theme' statement defines what theme is used to display GOsa pages. You can install some corporate identity like theme and/or modify certain templates to fit your needs within themes. Take a look at the GOsa FAQ for more information.",

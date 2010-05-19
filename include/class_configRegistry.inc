@@ -81,6 +81,7 @@ class configRegistry{
 
         // Skip searching for LDAP defined properties if 'ignoreLdapProperties' is set to 'true'
         //  in the config. 
+        $this->ignoreLdapProperties = FALSE;
         if(isset($this->fileStoredProperties['core'][strtolower('ignoreLdapProperties')]) && 
             preg_match("/(true|on)/i", $this->fileStoredProperties['core'][strtolower('ignoreLdapProperties')])){
             $this->ignoreLdapProperties = TRUE;
