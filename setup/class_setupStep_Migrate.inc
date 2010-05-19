@@ -222,13 +222,13 @@ class Step_Migrate extends setup_step
                         foreach($members as $member){
                             $member = base64_decode($member);
                             if(isset($users[$member])){
-                                if(preg_match("/all;cmdrw/i",$tmp[3])){
+                                if(preg_match("/all\/all;cmdrw/i",$tmp[3])){
                                     $valid_users .= $users[$member].", ";
                                     $GOsa_26_found  = TRUE;
                                 }
                             }
                             if(isset($groups[$member])){
-                                if(preg_match("/all;cmdrw/i",$tmp[3])){
+                                if(preg_match("/all\/all;cmdrw/i",$tmp[3])){
                                     $ldap->cat($member);
                                     $group_attrs = $ldap->fetch();
                                     $val_users = "";
@@ -257,7 +257,7 @@ class Step_Migrate extends setup_step
                             for($e = 0 ; $e < $cnt ; $e++){
 
                                 $a_str = $ret['gosaAclTemplate'][$e];
-                                if(preg_match("/^[0-9]*:psub:/",$a_str) && preg_match("/:all;cmdrw$/",$a_str)){
+                                if(preg_match("/^[0-9]*:psub:/",$a_str) && preg_match("/:all\/all;cmdrw$/",$a_str)){
 
                                     $members = explode(",",$tmp[3]);
                                     foreach($members as $member){
@@ -388,7 +388,7 @@ class Step_Migrate extends setup_step
             }
         }
 
-        $acl = "0:psub:".base64_encode($dn).":all;cmdrw";    
+        $acl = "0:psub:".base64_encode($dn).":all/all;cmdrw";    
         $attrs_new['gosaAclEntry'][] = $acl;
         if(isset($attrs['gosaAclEntry'])){
             for($i = 0 ; $i < $attrs['gosaAclEntry']['count']; $i ++){
