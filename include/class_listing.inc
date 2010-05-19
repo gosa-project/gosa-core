@@ -57,7 +57,7 @@ class listing {
   var $baseSelector;
 
 
-  function listing($filename)
+  function listing($source, $isString = FALSE)
   {
     global $config;
     global $class_mapping;
@@ -65,8 +65,14 @@ class listing {
     // Initialize pid
     $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
 
-    if (!$this->load($filename)) {
-      die("Cannot parse $filename!");
+    if($isString){
+        if(!$this->loadString($source)){
+            die("Cannot parse $source!");
+        }
+    }else{
+        if (!$this->loadFile($source)) {
+            die("Cannot parse $source!");
+        }
     }
 
     // Set base for filter
@@ -148,10 +154,13 @@ class listing {
     return false;
   }
 
-
-  function load($filename)
+  function loadFile($filename)
   {
-    $contents = file_get_contents($filename);
+    return($this->loadString(file_get_contents($filename)));
+  }
+
+  function loadString($contents)
+  {
     $this->xmlData= xml::xml2array($contents, 1);
 
     if (!isset($this->xmlData['list'])) {
