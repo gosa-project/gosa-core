@@ -87,7 +87,7 @@ class configRegistry{
         }
 
         // Search for all config flags defined in the LDAP - BUT only if we ARE logged in. 
-        if(!$this->ignoreLdapProperties && !empty($this->config->current['CONFIG'])){
+        if(!empty($this->config->current['CONFIG'])){
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['CONFIG']);
             $ldap->search('(&(objectClass=gosaConfig)(gosaSetting=*))', array('cn','gosaSetting'));
@@ -472,10 +472,24 @@ class gosaProperty
 
     function getValue($temporary = FALSE) 
     { 
-        if($temporary && in_array($this->getStatus(), array('modified','removed'))){
-            return($this->tmp_value); 
+        if($temporary){
+            if(in_array($this->getStatus(), array('modified','removed'))){
+                return($this->tmp_value); 
+            }else{
+                return($this->value); 
+            }
         }else{ 
-            return($this->value); 
+
+            // Do not return ldap values if we've to ignore them.
+            if($this->parent->ignoreLdapProperties){
+                if(isset($this->parent->fileStoredProperties[strtolower($this->class)][strtolower($this->name)])){
+                    return($this->parent->fileStoredProperties[strtolower($this->class)][strtolower($this->name)]);
+                }else{
+                    return($this->getDefault());
+                }
+            }else{
+                return($this->value); 
+            }
         }
     }
 
