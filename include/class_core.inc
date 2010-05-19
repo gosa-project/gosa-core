@@ -35,9 +35,12 @@ class core extends plugin {
                 break;
             case 'theme':
                 $cmd = "cd ../ihtml/themes; find . -name 'img.styles' | sed s/'^[^\/]*\/\([^\/]*\).*'/'\\1'/g";
-                $res = `$cmd`;
+                $res = `$cmd`  ; 
+                $list = array();
                 foreach(preg_split("/\n/",$res) as $entry){
-                    $list[$entry] = $entry;
+                    if(!empty($entry)){
+                        $list[$entry] = $entry;
+                    }
                 }
                 break;
             case 'accountPrimaryAttribute':
@@ -375,7 +378,7 @@ class core extends plugin {
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "visual",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => TRUE),
 
                         array(
                                 "name"          => "sessionLifetime",
