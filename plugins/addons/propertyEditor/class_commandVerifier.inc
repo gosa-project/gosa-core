@@ -24,7 +24,7 @@ class commandVerifier
                     1 => array('pipe', 'w'),
                     2 => array('pipe', 'w'));
             $process = proc_open($this->command, $descriptorSpec, $pipes);
-            $txOff = 0; $txLen = strlen($stdin);
+            $txOff = 0; $txLen = 0;
 
             $stdout = ''; $stdoutDone = FALSE;
             $stderr = ''; $stderrDone = FALSE;
