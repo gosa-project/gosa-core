@@ -3501,8 +3501,8 @@ function image($path, $action= "", $title= "", $align= "middle")
     if (isset ($config)){
       $theme= $config->get_cfg_value("core","theme");
     } else {
-      # For debuging - avoid that there's no theme set
-      die("config not set!");
+
+      // Fall back to default theme
       $theme= "default";
     }
 
