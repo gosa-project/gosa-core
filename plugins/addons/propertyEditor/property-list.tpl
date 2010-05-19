@@ -51,11 +51,14 @@
     $$("*").findAll(function(node){
       return node.getAttribute('title');
     }).each(function(node){
-        var test = node.title;
-      var t = new Tooltip(node,test);
-      t.options.delta_x = -150;
-      t.options.delta_y = -50;
-      node.removeAttribute("title");
+      var test = node.title;
+
+      if($(test)){
+          var t = new Tooltip(node,test);
+          t.options.delta_x = -150;
+          t.options.delta_y = -50;
+          node.removeAttribute("title");
+      }
     });
   });
 </script>
