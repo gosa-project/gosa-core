@@ -6,7 +6,7 @@ class all extends plugin {
     {
         return (array(
                     "plShortName"   => _("All"),
-                    "plDescription" => _("All objects in this category"),
+                    "plDescription" => _("All objects"),
                     "plSelfModify"  => TRUE,
                     "plDepends"     => array(),
                     "plPriority"    => 0,
