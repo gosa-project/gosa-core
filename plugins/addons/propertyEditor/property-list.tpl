@@ -32,7 +32,11 @@
 <div id="mainlist">
 
   <div class="mainlist-header">
-   <p>{$HEADLINE}&nbsp;{$SIZELIMIT}</p>
+   <p>{$HEADLINE}&nbsp;{$SIZELIMIT}
+    {if $ignoreLdapProperties}
+    -  <font color='red'>{t}Ignoring LDAP defined properties !{/t}</font>
+    {/if}
+   </p>
    <div class="mainlist-nav">
     <table summary="{$HEADLINE}">
      <tr>

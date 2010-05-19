@@ -120,6 +120,7 @@ class propertyEditor extends management
 
         $smarty = get_smarty();
         $smarty->assign("warningNotAccepted", $this->warningNotAccepted);
+        $smarty->assign("ignoreLdapProperties", $this->config->configRegistry->ignoreLdapProperties);
         return(management::execute());
     }
 
