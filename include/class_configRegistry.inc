@@ -531,13 +531,15 @@ class gosaProperty
                 $attrs = $ldap->fetch();
                 $data = array();
                 $found = false;
-                for($i = 0;$i<$attrs['gosaSetting']['count']; $i ++){
-                    $set = $attrs['gosaSetting'][$i];
-                    if(preg_match("/^{$this->name}:/", $set)){
-                        $set = "{$this->name}:{$this->tmp_value}";
-                        $found = true;
+                if(isset($attrs['gosaSetting']['count'])){
+                    for($i = 0;$i<$attrs['gosaSetting']['count']; $i ++){
+                        $set = $attrs['gosaSetting'][$i];
+                        if(preg_match("/^{$this->name}:/", $set)){
+                            $set = "{$this->name}:{$this->tmp_value}";
+                            $found = true;
+                        }
+                        $data['gosaSetting'][] = $set;
                     }
-                    $data['gosaSetting'][] = $set;
                 }
                 if(!$found) $data['gosaSetting'][] = "{$this->name}:{$this->tmp_value}";
                 $ldap->cd($dn);
