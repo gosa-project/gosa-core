@@ -35,5 +35,14 @@
    {$focus}
    <input type="hidden" name="php_c_check" value="1">
   </form>
+
+  <!-- Automatic logout when session is expired -->
+  <script type='text/javascript'>
+   function logout()
+   {
+    document.location = 'logout.php';
+   }
+   logout.delay({$sessionLifetime});
+  </script>     
  </body>
 </html>

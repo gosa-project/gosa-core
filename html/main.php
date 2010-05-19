@@ -360,6 +360,7 @@ if (is_file("$plugin_dir/main.inc")){
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign ("pathMenu", $plist->genPathMenu());
 $smarty->assign("contents", $display);
+$smarty->assign("sessionLifetime", $config->get_cfg_value('core','sessionLifetime'));
 
 /* If there's some post, take a look if everything is there... */
 if (isset($_POST) && count($_POST)){
