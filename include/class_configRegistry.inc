@@ -417,7 +417,7 @@ class gosaProperty
 
     static function isRdn($message,$class,$name,$value, $type)
     {
-        $match = preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=]*,?$/i", $value);
+        $match = preg_match("/^([a-z]*=[^=,]*,)*[^=]*=[^=,]*,?$/i", $value);
 
         // Display the reason for failing this check.         
         if($message && ! $match){
