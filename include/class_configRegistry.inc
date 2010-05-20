@@ -315,7 +315,10 @@ class gosaProperty
 
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value,"",_("Use 'true', 'false' or empty if allowed")), WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), 
+                    sprintf(_("The value '%s' specified for '%s:%s' is invalid. A bool value is required here!"), 
+                        bold($value),bold($class),bold($name)), 
+                    WARNING_DIALOG);
         }
     
         return($match);
@@ -327,7 +330,10 @@ class gosaProperty
     
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name), WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), 
+                    sprintf(_("The value '%s' specified for '%s:%s' is invalid. A string value is required here!"), 
+                        bold($value),bold($class),bold($name)), 
+                    WARNING_DIALOG);
         }
 
         return($match);
@@ -339,7 +345,10 @@ class gosaProperty
 
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name, $value,'/[0-9]/'), WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), 
+                    sprintf(_("The value '%s' specified for '%s:%s' is invalid. A numeric value is required here!"), 
+                        bold($value),bold($class),bold($name)), 
+                    WARNING_DIALOG);
         }
 
         return($match);
@@ -347,11 +356,36 @@ class gosaProperty
 
     static function isPath($message,$class,$name,$value, $type)
     {
-        $match = TRUE;
+        $match = preg_match("#^(/[^/]*/){1}#", $value);
     
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name), WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), 
+                    sprintf(_("The path '%s' specified for '%s:%s' is invalid!"), 
+                        bold($value),bold($class),bold($name)), 
+                    WARNING_DIALOG);
+        }
+
+        return($match);
+    }
+
+    static function isReadablePath($message,$class,$name,$value, $type)
+    {
+        $match = !empty($value)&&is_dir($value)&&is_writeable($value);
+   
+        // Display the reason for failing this check.         
+        if($message && ! $match){
+            if(!is_dir($value)){
+                msg_dialog::display(_("Warning"), 
+                        sprintf(_("The folder '%s' specified for '%s:%s' does not exists!"), 
+                            bold($value),bold($class),bold($name)), 
+                        WARNING_DIALOG);
+            }elseif(!is_readable($value)){
+                msg_dialog::display(_("Warning"), 
+                        sprintf(_("The folder '%s' specified for '%s:%s' cannot be used for reading!"), 
+                            bold($value),bold($class),bold($name)), 
+                        WARNING_DIALOG);
+            }
         }
 
         return($match);
@@ -360,14 +394,19 @@ class gosaProperty
     static function isWriteablePath($message,$class,$name,$value, $type)
     {
         $match = !empty($value)&&is_dir($value)&&is_writeable($value);
-    
+   
         // Display the reason for failing this check.         
         if($message && ! $match){
-
             if(!is_dir($value)){
-                msg_dialog::display(_("Warning"), sprintf(_("The specified folder does not exists '%s'."), $value), WARNING_DIALOG);
+                msg_dialog::display(_("Warning"), 
+                        sprintf(_("The folder '%s' specified for '%s:%s' does not exists!"), 
+                            bold($value),bold($class),bold($name)), 
+                        WARNING_DIALOG);
             }elseif(!is_writeable($value)){
-                msg_dialog::display(_("Warning"), sprintf(_("The specified folder cannot be used for writing '%s'."), $value), WARNING_DIALOG);
+                msg_dialog::display(_("Warning"), 
+                        sprintf(_("The folder '%s' specified for '%s:%s' cannot be used for writing!"), 
+                            bold($value),bold($class),bold($name)), 
+                        WARNING_DIALOG);
             }
         }
 
@@ -382,9 +421,15 @@ class gosaProperty
         if($message && ! $match){
                 
             if(!is_file($value)){
-                msg_dialog::display(_("Warning"), sprintf(_("The specified file does not exists '%s'."), $value), WARNING_DIALOG);
+                msg_dialog::display(_("Warning"), 
+                        sprintf(_("The file '%s' specified for '%s:%s' does not exists!"), 
+                            bold($value),bold($class),bold($name)), 
+                        WARNING_DIALOG);
             }elseif(!is_readable($value)){
-                msg_dialog::display(_("Warning"), sprintf(_("The specified file cannot be used for reading '%s'."), $value), WARNING_DIALOG);
+                msg_dialog::display(_("Warning"), 
+                        sprintf(_("The file '%s' specified for '%s:%s' cannot be read!"), 
+                            bold($value),bold($class),bold($name)), 
+                        WARNING_DIALOG);
             }
         }
 
@@ -397,7 +442,10 @@ class gosaProperty
 
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::cmdinvalid($name,$value),  WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), 
+                    sprintf(_("The command '%s' specified for '%s:%s' is invalid!"), 
+                        bold($value),bold($class),bold($name)), 
+                    WARNING_DIALOG);
         }
         
         return($match);
@@ -409,7 +457,10 @@ class gosaProperty
 
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value,'','cn=user,ou=people,dc=example,dc=de'),  WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), 
+                    sprintf(_("The dn '%s' specified for '%s:%s' is invalid!"), 
+                        bold($value),bold($class),bold($name)), 
+                    WARNING_DIALOG);
         }
         
         return($match);
@@ -421,7 +472,10 @@ class gosaProperty
 
         // Display the reason for failing this check.         
         if($message && ! $match){
-            msg_dialog::display(_("Warning"), msgPool::invalid($name,$value,'','ou=people,'),  WARNING_DIALOG);
+            msg_dialog::display(_("Warning"), 
+                    sprintf(_("The rdn '%s' specified for '%s:%s' is invalid!"), 
+                        bold($value),bold($class),bold($name)), 
+                    WARNING_DIALOG);
         }
         
         return($match);
