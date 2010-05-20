@@ -721,7 +721,7 @@ class aclrole extends acl
                   "name"          => "aclRoleRDN",
                   "type"          => "rdn",
                   "default"       => "ou=aclroles,",
-                  "description"   => "The 'aclRoleRDN' statement defines the location where new acl roles will be created. The default is 'ou=aclroles,'.",
+                  "description"   => _("The 'aclRoleRDN' statement defines the location where new acl roles will be created. The default is 'ou=aclroles,'."),
                   "check"         => "gosaProperty::isRdn",
                   "migrate"       => "migrate_aclRoleRDN",
                   "group"         => "plugin",
