@@ -60,6 +60,9 @@ class migrateRDN implements propertyMigration
         $initialValue = $this->prefix.$this->property->getValue().$this->suffix;
         $targetValue = $this->prefix.$this->property->getValue(TRUE).$this->suffix;
 
+        if(!empty($initialValue) && !preg_match("/,$/", $initialValue)) $initialValue.=",";
+        if(!empty($targetValue) && !preg_match("/,$/", $targetValue)) $targetValue.=",";
+
         $dnMatch = "";
         if(!empty($initialValue)){
             foreach(preg_split("/,/", $initialValue) as $rdnPart){
