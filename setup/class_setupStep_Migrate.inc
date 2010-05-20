@@ -325,8 +325,8 @@ class Step_Migrate extends setup_step
                 $this->checks['acls']['STATUS_MSG']= _("Failed");
                 $this->checks['acls']['ERROR_MSG'] = $str;
                 $this->checks['acls']['ERROR_MSG'].= _("There is no valid GOsa 2.6 administrator account inside your LDAP.")."&nbsp;";
-                $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='migrate_acls' value='"._("Migrate")."'>";
-                $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='create_acls' value='"._("Create")."'>";
+                $this->checks['acls']['ERROR_MSG'].= "<button type='submit' name='migrate_acls'>"._("Migrate")."</button>";
+                $this->checks['acls']['ERROR_MSG'].= "<button type='submit' name='create_acls'>"._("Create")."</button>";
             }elseif($GOsa_26_found){
                 $str = "";
                 if(!empty($valid_users)){
@@ -342,7 +342,7 @@ class Step_Migrate extends setup_step
                 $this->checks['acls']['STATUS']    = FALSE;
                 $this->checks['acls']['STATUS_MSG']= _("Failed");
                 $this->checks['acls']['ERROR_MSG']= _("There is no GOsa administrator account inside your LDAP.")."&nbsp;";
-                $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='create_acls' value='"._("Create")."'>";
+                $this->checks['acls']['ERROR_MSG'].= "<button type='submit' name='create_acls'>"._("Create")."</button>";
             }
         }
 
@@ -696,7 +696,7 @@ class Step_Migrate extends setup_step
                 $this->checks['root']['STATUS']    = FALSE;
                 $this->checks['root']['STATUS_MSG']= _("Failed");
                 $this->checks['root']['ERROR_MSG'] =  _("The LDAP root object is missing. It is required to use your LDAP service.").'&nbsp;';
-                $this->checks['root']['ERROR_MSG'].=  "<input type='submit' name='retry_root_create' value='"._("Try to create root object")."'>";
+                $this->checks['root']['ERROR_MSG'].=  "<button type='submit' name='retry_root_create'>"._("Try to create root object")."</button>";
                 return(FALSE);
             }else{
 
@@ -709,7 +709,7 @@ class Step_Migrate extends setup_step
                     $this->checks['root']['STATUS']    = FALSE;
                     $this->checks['root']['STATUS_MSG']= _("Failed");
                     $this->checks['root']['ERROR_MSG'] = _("Root object couldn't be created, you should try it on your own.");
-                    $this->checks['root']['ERROR_MSG'].= "&nbsp;<input type='submit' name='retry_root_create' value='"._("Try to create root object")."'>";
+                    $this->checks['root']['ERROR_MSG'].= "&nbsp;<button type='submit' name='retry_root_create'>"._("Try to create root object")."</button>";
                     return($res);;
                 }
             }
@@ -836,8 +836,8 @@ class Step_Migrate extends setup_step
                  */
                 $this->checks['rootOC']['STATUS']    = FALSE;
                 $this->checks['rootOC']['STATUS_MSG']= _("Failed");
-                $this->checks['rootOC']['ERROR_MSG'] = "&nbsp;<input type='submit' 
-                    name='root_add_objectclasses' value='"._("Migrate")."'>";
+                $this->checks['rootOC']['ERROR_MSG'] = "&nbsp;<button type='submit' 
+                    name='root_add_objectclasses'>"._("Migrate")."</button>";
 
                 return(FALSE);
             }else{
