@@ -1322,6 +1322,7 @@ button.search-filter {
   padding:4px 2px 3px 2px;;
   margin:0;
   text-align:middle;
+  height:25px;
 }
 
 
@@ -1336,6 +1337,7 @@ table.filter-wrapper {
 table.filter-wrapper tr, table.filter-wrapper td{
   padding:0;
   margin:0;
+  vertical-align:top;
 }
 
 #filtermenu {
