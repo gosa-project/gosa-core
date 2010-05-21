@@ -19,7 +19,7 @@
      </li>
      <li class='right table-wrapper'>
        <div class='logout-label'>
-        <canvas id="sTimeout" width="22" height="22" title="{$sessionLifetime}|{t}Session expires in %d minutes{/t}"></canvas>
+        <canvas id="sTimeout" width="22" height="22" title="{$sessionLifetime}|{t}Session expires in %d minutes!{/t}"></canvas>
        </div>
      </li>
     </ul>
