@@ -473,86 +473,86 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.9.82 NAME 'gotoSessionType'
 
 # Terminal Server description 
 objectclass (1.3.6.1.4.1.10098.1.2.1.16 NAME 'goTerminalServer' SUP top AUXILIARY
-	DESC 'Terminal server description (v2.6.1)'
+	DESC 'Terminal server description (v2.7)'
 	MUST ( cn $ goXdmcpIsEnabled )
 	MAY  ( description $ goTerminalServerStatus $ gotoSessionType $ goFontPath ))
 
 # NFS Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.19 NAME 'goNfsServer' SUP top AUXILIARY
-	DESC 'NFS server description (v2.6.1)'
+	DESC 'NFS server description (v2.7)'
 	MUST ( cn )
 	MAY  ( goExportEntry $ description $ goNfsServerStatus ))
 
 # Time Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.20 NAME 'goNtpServer' SUP top AUXILIARY
-	DESC 'Time server description (v2.6.1)'
+	DESC 'Time server description (v2.7)'
 	MUST ( cn )
         MAY  ( goTimeSource $ description $ goNtpServerStatus ))
 
 # Syslog Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.21 NAME 'goSyslogServer' SUP top AUXILIARY
-	DESC 'Syslog server description (v2.6.1)'
+	DESC 'Syslog server description (v2.7)'
 	MUST ( cn )
 	MAY  ( goSyslogSection $ description $ goSyslogServerStatus ))
 
 # LDAP Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.22 NAME 'goLdapServer' SUP top AUXILIARY
-	DESC 'LDAP server description (v2.6.1)'
+	DESC 'LDAP server description (v2.7)'
 	MUST ( cn )
 	MAY  ( goLdapBase $ description $ goLdapServerStatus ))
 
 # CUPS Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.23 NAME 'goCupsServer' SUP top AUXILIARY
-	DESC 'CUPS server description (v2.6.1)'
+	DESC 'CUPS server description (v2.7)'
 	MUST ( cn )
 	MAY  ( description $ goCupsServerStatus ))
 
 # IMAP Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.24 NAME 'goImapServer' SUP top AUXILIARY
-	DESC 'IMAP server description (v2.6.1)'
+	DESC 'IMAP server description (v2.7)'
 	MUST ( cn $ goImapName $ goImapConnect $ goImapAdmin $ goImapPassword )
 	MAY  ( goImapSieveServer $ goImapSievePort $ description $ goImapServerStatus $
 	       cyrusImap $ cyrusImapSSL $ cyrusPop3 $ cyrusPop3SSL ))
 
 # Kerberos Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.25 NAME 'goKrbServer' SUP top AUXILIARY
-	DESC 'Kerberos server description (v2.6.1)'
+	DESC 'Kerberos server description (v2.7)'
 	MUST ( cn $ goKrbRealm )
 	MAY  ( description $ goKrbServerStatus ))
 
 # Fax Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.26 NAME 'goFaxServer' SUP top AUXILIARY
-	DESC 'Fax server description (v2.6.1)'
+	DESC 'Fax server description (v2.7)'
 	MUST ( cn $ goFaxAdmin $ goFaxPassword )
 	MAY  ( description $ goFaxServerStatus ))
 
 # Common server class
 objectclass (1.3.6.1.4.1.10098.1.2.1.27 NAME 'goServer' SUP top AUXILIARY
-	DESC 'Server description (v2.6.1)'
+	DESC 'Server description (v2.7)'
 	MUST ( cn )
 	MAY  ( description $ macAddress $ ipHostNumber ))
 
 # LogDB Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.28 NAME 'goLogDBServer' SUP top AUXILIARY
-	DESC 'Log DB server description (v2.6.1)'
+	DESC 'Log DB server description (v2.7)'
 	MUST ( cn $ gosaLogDB $ goLogAdmin $ goLogPassword )
 	MAY  ( goLogDBServerStatus ))
 
 # Fon Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.29 NAME 'goFonServer' SUP top AUXILIARY
-        DESC 'Fon server description (v2.6.1)'
+        DESC 'Fon server description (v2.7)'
         MUST ( cn $ goFonAdmin $ goFonPassword $ goFonAreaCode $ goFonCountryCode )
         MAY  ( description $ goFonServerStatus ))
 
 # Share Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.33 NAME 'goShareServer' SUP top AUXILIARY
-	DESC 'Share server description (v2.6.1)'
+	DESC 'Share server description (v2.7)'
 	MUST ( cn )
 	MAY  ( description $ goExportEntry $ goShareServerStatus ))
 
 # Mail Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.36 NAME 'goMailServer' SUP top AUXILIARY
-	DESC 'Mail server definition (v2.6.1)'
+	DESC 'Mail server definition (v2.7)'
 	MUST ( cn )
 	MAY  ( description $ goMailServerStatus $ postfixHeaderSizeLimit $
 	       postfixMailboxSizeLimit $ postfixMessageSizeLimit $
@@ -562,20 +562,20 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.36 NAME 'goMailServer' SUP top AUXILIARY
 
 # Glpi Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.37 NAME 'goGlpiServer' SUP top AUXILIARY
-	DESC 'Glpi server definition (v2.6.1)'
+	DESC 'Glpi server definition (v2.7)'
 	MUST ( cn $ goGlpiAdmin $ goGlpiDatabase)
 	MAY  ( description $ goGlpiPassword $ goGlpiServerStatus ) )
 
 # Spamassassin definitions
 objectclass (1.3.6.1.4.1.10098.1.2.1.38 NAME 'goSpamServer' SUP top AUXILIARY
-	DESC 'Spam server definition (v2.6.1)'
+	DESC 'Spam server definition (v2.7)'
 	MUST ( cn )
 	MAY  ( saRewriteHeader $ saTrustedNetworks $ saRequiredScore $ saFlags $
 	       saRule $ saStatus ) )
 
 # Clamav definitions
 objectclass (1.3.6.1.4.1.10098.1.2.1.39 NAME 'goVirusServer' SUP top AUXILIARY
-	DESC 'Virus server definition (v2.6.1)'
+	DESC 'Virus server definition (v2.7)'
 	MUST ( cn )
 	MAY  ( avMaxThreads $ avMaxDirectoryRecursions $ avUser $ avFlags $
                avArchiveMaxFileSize $ avArchiveMaxRecursion $ avArchiveMaxCompressionRatio $
@@ -583,12 +583,12 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.39 NAME 'goVirusServer' SUP top AUXILIARY
 
 # LogDB Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.40 NAME 'gosaLogServer' SUP top AUXILIARY
-	DESC 'GOsa log server (v2.6)'
+	DESC 'GOsa log server (v2.7)'
 	MUST ( cn $ goLogDB $ goLogDBUser $ goLogDBPassword ))
 
 # Environment Server
 objectclass (1.3.6.1.4.1.10098.1.2.1.41 NAME 'goEnvironmentServer' SUP top AUXILIARY
-	DESC 'Environment server definition (v2.6)'
+	DESC 'Environment server definition (v2.7)'
 	MUST ( cn )
 	MAY  ( gotoKioskProfile ) )
 

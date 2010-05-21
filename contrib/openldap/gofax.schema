@@ -77,19 +77,19 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.7.11 NAME 'facsimileAlternateTelephoneNumb
 
 # objectclass 
 objectclass (1.3.6.1.4.1.10098.1.2.1.11 NAME 'goFaxAccount' SUP top AUXILIARY
-	DESC 'goFax Account objectclass (v1.0.4)'
+	DESC 'goFax Account objectclass (v2.7'
 	MUST ( goFaxDeliveryMode $ facsimileTelephoneNumber $ uid $ goFaxIsEnabled )
 	MAY ( goFaxPrinter $ goFaxDivertNumber $ goFaxLanguage $ goFaxFormat $ goFaxRBlocklist $ 
 	      goFaxRBlockgroups $ goFaxSBlocklist $ goFaxSBlockgroups $ mail $
 	      facsimileAlternateTelephoneNumber ))
 
 objectclass (1.3.6.1.4.1.10098.1.2.1.12 NAME 'goFaxSBlock'
-	DESC 'goFax send blocklist groups (v1.0.4)'
+	DESC 'goFax send blocklist groups (v2.7)'
 	MUST ( cn )
 	MAY ( goFaxSBlocklist $ description ))
 
 objectclass (1.3.6.1.4.1.10098.1.2.1.13 NAME 'goFaxRBlock'
-	DESC 'goFax receive blocklist groups (v1.0.4)'
+	DESC 'goFax receive blocklist groups (v2.7)'
 	MUST ( cn )
 	MAY ( goFaxRBlocklist $ description ))
 
