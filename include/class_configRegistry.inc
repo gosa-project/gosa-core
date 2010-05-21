@@ -13,9 +13,30 @@ class configRegistry{
     // Excludes property values defined in ldap 
     public $ignoreLdapProperties = FALSE;
 
+    // Contains all classes with plInfo
+    public $classesWithInfo = array();
+
     function __construct($config)
     {
         $this->config = &$config;
+
+        // Detect classes that have a plInfo method 
+        global $class_mapping;
+        foreach ($class_mapping as $cname => $path){
+            $cmethods = get_class_methods($cname);
+            if (is_array($cmethods) && in_array_ics('plInfo',$cmethods)){
+
+                // Get plugin definitions
+                $def = call_user_func(array($cname, 'plInfo'));;
+
+                // Register Post Events (postmodfiy,postcreate,postremove,checkhook)
+                if(count($def)){
+                    $this->classesWithInfo[$cname] = $def;
+                }
+            }
+        }
+
+        // (Re)Load properties
         $this->reload();
     }
 
@@ -102,36 +123,29 @@ class configRegistry{
             $this->status = 'finished';
         }
 
-        global $class_mapping;
-        foreach ($class_mapping as $cname => $path){
-            $cmethods = get_class_methods($cname);
-            if (is_array($cmethods) && in_array_ics('plInfo',$cmethods)){
+        // Register plugin properties.
+        foreach ($this->classesWithInfo as $cname => $def){
 
-                // Get plugin definitions
-                $def = call_user_func(array($cname, 'plInfo'));;
+            // Detect class name
+            $name = $cname;
+            $name = (isset($def['plShortName'])) ? $def['plShortName'] : $cname;
+            $name = (isset($def['plDescription'])) ? $def['plDescription'] : $cname;
 
-                // Register Post Events (postmodfiy,postcreate,postremove,checkhook)
-                if(count($def)){
-                    
-                    $name = $cname;
-                    $name = (isset($def['plShortName'])) ? $def['plShortName'] : $cname;
-                    $name = (isset($def['plDescription'])) ? $def['plDescription'] : $cname;
+            // Register post events
+            $this->classToName[$cname] = $name;
+            $data = array('name' => 'postcreate','type' => 'command');
+            $this->register($cname, $data);    
+            $data = array('name' => 'postremove','type' => 'command');
+            $this->register($cname, $data);    
+            $data = array('name' => 'postmodify','type' => 'command');
+            $this->register($cname, $data);    
+            $data = array('name' => 'check', 'type' => 'command');
+            $this->register($cname, $data);    
 
-                    $this->classToName[$cname] = $name;
-                    $data = array('name' => 'postcreate','type' => 'command');
-                    $this->register($cname, $data);    
-                    $data = array('name' => 'postremove','type' => 'command');
-                    $this->register($cname, $data);    
-                    $data = array('name' => 'postmodify','type' => 'command');
-                    $this->register($cname, $data);    
-                    $data = array('name' => 'check', 'type' => 'command');
-                    $this->register($cname, $data);    
-                }
-
-                if(isset($def['plProperties'])){
-                    foreach($def['plProperties'] as $property){
-                        $this->register($cname, $property);
-                    }
+            // Register properties 
+            if(isset($def['plProperties'])){
+                foreach($def['plProperties'] as $property){
+                    $this->register($cname, $property);
                 }
             }
         }
