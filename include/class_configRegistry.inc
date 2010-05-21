@@ -15,6 +15,10 @@ class configRegistry{
 
     // Contains all classes with plInfo
     public $classesWithInfo = array();
+    public $categoryRequirements  = array();
+    public $categoryToClass  = array();
+
+    public $objectClasses = array();
 
     function __construct($config)
     {
@@ -39,6 +43,76 @@ class configRegistry{
         // (Re)Load properties
         $this->reload();
     }
+
+
+    function validateSchemata($disableIncompatiblePlugins = FALSE,$displayMessage = FALSE)
+    {
+        // We can check the schemata only with a valid LDAP connection
+        if(empty($this->config->current['CONFIG'])){
+            return(TRUE); 
+        }
+
+        // Read objectClasses from ldap
+        if(!count($this->objectClasses)){
+            $ldap = $this->config->get_ldap_link();
+            $ldap->cd($this->config->current['BASE']);
+            $this->objectClasses = $ldap->get_objectclasses();
+        }
+
+        // Collect required schema infos
+        $this->categoryRequirements = array();
+        $this->categoryToClass = array();
+        foreach($this->classesWithInfo as $cname => $defs){
+            if(isset($defs['plCategory'])){
+                foreach($defs['plCategory'] as $name => $data){
+                    if(!is_numeric($name)){
+                        $this->categoryToClass[$name]['BASE'] = $cname;
+                        if(isset($data['objectClass'])){
+                            $this->categoryRequirements[$name] = $data['objectClass'];
+                        }
+                    }else{
+                        $this->categoryToClass[$data]['SUB'][] = $cname;
+                    }
+                }
+            }
+        }
+
+        // Check schema requirements now
+        foreach($this->categoryRequirements as $cat => $requirements){
+
+            if(!is_string($requirements)){
+            }else{
+                if(!$this->ocAvailable($requirements)){
+
+                    if($displayMessage){
+                        $classes = "<ul>";
+                        $name = $this->categoryToClass[$cat]['BASE'];
+                        $classes.= "<li>".$this->classToName[$name]."</li>";
+                        if(isset($this->categoryToClass[$cat]['SUB'])){
+                            foreach($this->categoryToClass[$cat]['SUB'] as $name){
+                                $classes.= "<li>".$this->classToName[$name]."</li>";
+                            }
+                        }
+                        $classes.= "</ul>";
+                        msg_dialog::display(_("Schema validation error"), 
+                                sprintf(_("The objectClass '%s' which is required for plugin '%s' is not availabe!"),
+                                    bold($requirements),bold($cat)), 
+                                ERROR_DIALOG);
+                    }
+                }else{
+                     #äprint_a($this->objectClasses[$requirements]);   
+                }
+            }
+        }
+    }
+
+
+    // check wheter an objectClass is installed or not.
+    function ocAvailable($name)
+    {
+        return(isset($this->objectClasses[$name]));
+    }
+
 
     function reload($force = FALSE)
     {
