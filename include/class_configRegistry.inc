@@ -20,6 +20,8 @@ class configRegistry{
 
     public $objectClasses = array();
 
+    public $schemaCheckFinished = FALSE;
+
     function __construct($config)
     {
         $this->config = &$config;
@@ -45,12 +47,15 @@ class configRegistry{
     }
 
 
-    function validateSchemata($disableIncompatiblePlugins = FALSE,$displayMessage = FALSE)
+    function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE,$displayMessage = FALSE)
     {
         // We can check the schemata only with a valid LDAP connection
         if(empty($this->config->current['CONFIG'])){
             return(TRUE); 
         }
+
+        // Don't do things twice unless forced
+        if($this->schemaCheckFinished && !$force) return; 
 
         // Read objectClasses from ldap
         if(!count($this->objectClasses)){
@@ -91,6 +96,7 @@ class configRegistry{
                 }
             }
         }
+        $this->schemaCheckFinished =TRUE;
     }
 
     function ocVersionMatch($required, $installed)

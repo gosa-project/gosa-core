@@ -65,7 +65,7 @@ if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
 $config= session::global_get('config');
 $config->check_and_reload();
 $config->configRegistry->reload();
-$config->configRegistry->validateSchemata(TRUE, TRUE);
+$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE,$errorMessages= TRUE);
 
 /* Enable compressed output */
 if ($config->get_cfg_value("core","sendCompressedOutput") == "true"){
