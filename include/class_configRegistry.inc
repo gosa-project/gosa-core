@@ -15,7 +15,7 @@ class configRegistry{
 
     // Contains all classes with plInfo
     public $classesWithInfo = array();
-    public $categoryRequirements  = array();
+    public $pluginRequirements  = array();
     public $categoryToClass  = array();
 
     public $objectClasses = array();
@@ -60,52 +60,60 @@ class configRegistry{
         }
 
         // Collect required schema infos
-        $this->categoryRequirements = array();
+        $this->pluginRequirements = array('ldapSchema' => array());
         $this->categoryToClass = array();
         foreach($this->classesWithInfo as $cname => $defs){
-            if(isset($defs['plCategory'])){
-                foreach($defs['plCategory'] as $name => $data){
-                    if(!is_numeric($name)){
-                        $this->categoryToClass[$name]['BASE'] = $cname;
-                        if(isset($data['objectClass'])){
-                            $this->categoryRequirements[$name] = $data['objectClass'];
-                        }
-                    }else{
-                        $this->categoryToClass[$data]['SUB'][] = $cname;
-                    }
-                }
+            if(isset($defs['plRequirements']['ldapSchema'])){
+                $this->pluginRequirements['ldapSchema'][$cname] = $defs['plRequirements']['ldapSchema'];
             }
         }
 
         // Check schema requirements now
-        foreach($this->categoryRequirements as $cat => $requirements){
-
-            if(!is_string($requirements)){
-            }else{
-                if(!$this->ocAvailable($requirements)){
-
+        foreach($this->pluginRequirements['ldapSchema'] as $cname => $requirements){
+            foreach($requirements as $oc => $version){
+                if(!$this->ocAvailable($oc)){
                     if($displayMessage){
-                        $classes = "<ul>";
-                        $name = $this->categoryToClass[$cat]['BASE'];
-                        $classes.= "<li>".$this->classToName[$name]."</li>";
-                        if(isset($this->categoryToClass[$cat]['SUB'])){
-                            foreach($this->categoryToClass[$cat]['SUB'] as $name){
-                                $classes.= "<li>".$this->classToName[$name]."</li>";
-                            }
-                        }
-                        $classes.= "</ul>";
                         msg_dialog::display(_("Schema validation error"), 
                                 sprintf(_("The objectClass '%s' which is required for plugin '%s' is not availabe!"),
-                                    bold($requirements),bold($cat)), 
+                                    bold($oc),bold($cname)), 
                                 ERROR_DIALOG);
                     }
-                }else{
-                     #äprint_a($this->objectClasses[$requirements]);   
+                }elseif(!empty($version)){
+
+                    $currentVersion = $this->getObjectClassVersion($oc);
+                    if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
+                        if($displayMessage){
+                            msg_dialog::display(_("Schema validation error"), 
+                                    sprintf(_("The objectClass '%s' which is required for plugin '%s' has version %s but %s is required!"),bold($oc),bold($cname),bold($currentVersion),bold($version)), 
+                                    ERROR_DIALOG);
+                        }
+                    }
                 }
             }
         }
     }
 
+    function ocVersionMatch($required, $installed)
+    {
+        $operator = preg_replace('/^([=<>]*).*$/',"\\1",$required);
+        $required = preg_replace('/^[=<>]*(.*)$/',"\\1",$required);
+        return(version_compare($installed,$required, $operator)); 
+    }
+
+    
+    function getObjectClassVersion($oc)
+    {
+        if(!isset($this->objectClasses[$oc])){
+            return(NULL);
+        }else{
+            $version = -1; // unknown
+            if(preg_match("/(v[^)]*)/", $this->objectClasses[$oc]['DESC'])){
+                $version = preg_replace('/^.*\(v([^)]*)\).*$/',"\\1", $this->objectClasses[$oc]['DESC']);
+            }
+        }
+        return($version);
+    }
+    
 
     // check wheter an objectClass is installed or not.
     function ocAvailable($name)
