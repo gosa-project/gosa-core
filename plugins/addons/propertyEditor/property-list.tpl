@@ -72,7 +72,7 @@
 {/if}
 
 <div class="plugin-actions">
-    <button name='saveProperties'>{msgPool type='okButton'}</button>
-    <button name='cancelProperties'>{msgPool type='cancelButton'}</button>
+    <button name='saveProperties'>{msgPool type='applyButton'}</button>
+    <button name='cancelProperties' {if !$is_modified} disabled {/if}>{t}Undo{/t}</button>
 </div>
-{/if}
+{/if} 
