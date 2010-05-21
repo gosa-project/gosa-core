@@ -11,7 +11,7 @@ class all extends plugin {
                     "plDepends"     => array(),
                     "plPriority"    => 0,
                     "plSection"     => array("administration"),
-                    "plCategory"    => array("all" => array("objectClass" => "none", "description" => '*&nbsp;'._("All"))),
+                    "plCategory"    => array("all" => array("description" => '*&nbsp;'._("All"))),
                     "plProvidedAcls"    => array())
                );
     }
