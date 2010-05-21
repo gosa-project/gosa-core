@@ -383,7 +383,7 @@ class core extends plugin {
                         array(
                                 "name"          => "sessionLifetime",
                                 "type"          => "integer",
-                                "default"       => 7200,
+                                "default"       => 600,
                                 "description"   => _("The 'sessionLifetime' value defines when a session will expire in seconds. For Debian systems, this will not work because the sessions will be removed by a cron job instead. Please modify the value inside of your php.ini instead."),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
