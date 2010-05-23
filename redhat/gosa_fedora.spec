@@ -76,7 +76,7 @@ desktop environment.
 %package schema
 Group: 			System/Administration
 Summary: 		Schema Definitions for the GOSA package
-Requires:		gosa >= %{version}
+Requires:		openldap-servers	
 Obsoletes:		gosa-ldap
 
 %description schema
