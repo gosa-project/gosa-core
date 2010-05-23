@@ -95,9 +95,9 @@ desktop environment.
 Group: 			System/Administration
 Summary: 		Schema Definitions for the GOSA package
 %if %{suse}
-Requires:		gosa >= %{version}
+Requires:		openldap2	
 %else
-Requires:		gosa >= %{version}
+Requires:		openldap-servers
 %endif
 Obsoletes:		gosa-ldap
 
