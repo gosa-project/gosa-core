@@ -93,12 +93,14 @@ class configRegistry{
 
         if($displayMessage && count($missing)){
             msg_dialog::display(_("Schema validation error"), 
-                    sprintf(_("The following objectClasses are missing! %s"), msgPool::buildList($missing)),
+                 _("The following objectClasses are missing:").
+                "<div class='scrollContainer' style='height:100px'>".msgPool::buildList($missing)."</div>",
                     ERROR_DIALOG);
         }    
         if($displayMessage && count($invalid)){
             msg_dialog::display(_("Schema validation error"), 
-                    sprintf(_("The following objectClasses do not match the version requirements! %s"), msgPool::buildList($invalid)),
+                _("The following objectClasses do not match the version requirements:").
+                "<div class='scrollContainer' style='height:100px'>".msgPool::buildList($invalid)."</div>",
                     ERROR_DIALOG);
         }    
 
