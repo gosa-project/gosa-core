@@ -49,6 +49,12 @@ class configRegistry{
         $this->reload();
     }
 
+    
+    function schemaCheckFinished()
+    {
+        return($this->schemaCheckFinished);
+    }
+
 
     function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
     {

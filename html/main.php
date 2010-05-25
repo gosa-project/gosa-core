@@ -65,7 +65,10 @@ if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
 $config= session::global_get('config');
 $config->check_and_reload();
 $config->configRegistry->reload();
-if(!$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE)){
+
+// Validate LDAP schema if not done already
+if(!$config->configRegistry->schemaCheckFinished() && 
+    !$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE)){
     $config->configRegistry->displayErrors();
 }
 
