@@ -74,28 +74,34 @@ class configRegistry{
         }
 
         // Check schema requirements now
+        $missing = $invalid = array();
         foreach($this->pluginRequirements['ldapSchema'] as $cname => $requirements){
             foreach($requirements as $oc => $version){
                 if(!$this->ocAvailable($oc)){
-                    if($displayMessage){
-                        msg_dialog::display(_("Schema validation error"), 
-                                sprintf(_("The objectClass '%s' which is required for plugin '%s' is not availabe!"),
-                                    bold($oc),bold($cname)), 
-                                ERROR_DIALOG);
-                    }
+                    $missing[] = $oc;
                 }elseif(!empty($version)){
-
                     $currentVersion = $this->getObjectClassVersion($oc);
                     if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
-                        if($displayMessage){
-                            msg_dialog::display(_("Schema validation error"), 
-                                    sprintf(_("The objectClass '%s' which is required for plugin '%s' has version %s but %s is required!"),bold($oc),bold($cname),bold($currentVersion),bold($version)), 
-                                    ERROR_DIALOG);
+                        if($currentVersion == -1){
+                            $currentVersion = _("unknown");
                         }
+                        $invalid[] = sprintf(_("%s has version %s but %s required!"), bold($oc),bold($currentVersion),bold($version));
                     }
                 }
             }
         }
+
+        if($displayMessage && count($missing)){
+            msg_dialog::display(_("Schema validation error"), 
+                    sprintf(_("The following objectClasses are missing! %s"), msgPool::buildList($missing)),
+                    ERROR_DIALOG);
+        }    
+        if($displayMessage && count($invalid)){
+            msg_dialog::display(_("Schema validation error"), 
+                    sprintf(_("The following objectClasses do not match the version requirements! %s"), msgPool::buildList($invalid)),
+                    ERROR_DIALOG);
+        }    
+
         $this->schemaCheckFinished =TRUE;
     }
 
