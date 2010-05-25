@@ -198,6 +198,9 @@ bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 $smarty->assign ('nextfield', 'username');
 
+/* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
+$smarty->assign ("cookies", _("Your browser has cookies disabled: please enable cookies and reload this page before logging in!"));
+
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 }
@@ -422,9 +425,6 @@ if (!isset($message)) {
 }
 
 $smarty->assign ("message", $message);
-
-/* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
-$smarty->assign ("cookies", _("Your browser has cookies disabled: please enable cookies and reload this page before logging in!"));
 
 /* Generate server list */
 $servers= array();
