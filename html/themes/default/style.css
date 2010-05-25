@@ -1,10 +1,42 @@
+@font-face {
+  font-family: 'LiberationSans';
+  src: local('LiberationSans Regular'),
+       local('LiberationSans-Regular'),
+       url('fonts/LiberationSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'LiberationSans';
+  src: local('LiberationSans Italic'),
+       local('LiberationSans-Italic'),
+       url('fonts/LiberationSans-Italic.ttf') format('truetype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'LiberationSans';
+  src: local('LiberationSans Bold'),
+       local('LiberationSans-Bold'),
+       url('fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'LiberationSans';
+  src: local('LiberationSans Bold Italic'),
+        local('LiberationSans-BoldItalic'),
+        url('fonts/LiberationSans-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+} 
+
 body, html {
   border:0;
   margin:0;
   background-color:#FFF;
   color:#000;
-  font-size:12px;
-  font-family:"Lucida Grande",Arial,Verdana,sans-serif;
+  font-size:13px;
+  font-family:"LiberationSans",Arial,Verdana,sans-serif;
   height:100%;
   min-width:1000px;
   min-height:700px;
@@ -99,7 +131,7 @@ h1, h2, h3 {
 }
 
 h1, h3 {
-  font-size:12px;
+  font-size:13px;
   font-weight:bold;
 }
 
@@ -135,7 +167,7 @@ h1, h3 {
 
 
 .error-collector span {
-  font-size:12px;
+  font-size:13px;
   font-weight:bold;
 }
 
@@ -554,14 +586,14 @@ button:focus, .button:active {
 }
 
 .icon-menu-item h1{
-  font-size:12px;
+  font-size:13px;
   font-weight:bold;
   margin:0;
   color:#333;
 }
 
 h3.icon-menu-title{
-  font-size:14px;
+  font-size:15px;
   font-weight:bold;
   margin-top:8px;
   color:#333;
@@ -586,9 +618,9 @@ div.datepicker {
   position:absolute;
   text-align:center;
   border:1px #CCC solid;
-  font-family:arial;
+  font-family:"LiberationSans",Arial,Verdana,sans-serif;
   background:#FFF;
-  font-size:10px;
+  font-size:11px;
   padding:0;
   box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
   -webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
@@ -596,7 +628,7 @@ div.datepicker {
 }
 
 div.datepicker-calendar table {
-  font-size:10px;
+  font-size:11px;
   border:1px solid #FFF;
   margin:0;
   padding:0;
@@ -604,7 +636,7 @@ div.datepicker-calendar table {
 }
 
 div.datepicker div.datepicker-header {
-  font-size:11px;
+  font-size:12px;
   font-weight:bold;
   background:#F0F0F0;
   border-bottom:1px solid #CCC;
@@ -726,7 +758,7 @@ div.datepicker-calendar table tbody tr td.nclick_outbound:hover {
 }
 
 div.datepicker div.datepicker-footer {
-  font-size:10px;
+  font-size:11px;
   background:#F0F0F0;
   border-top:1px solid #AAA;
   cursor:pointer;
@@ -934,7 +966,7 @@ div.nlistFooter {
 .mainlist-header p{
   color:#444;
   font-weight:bold;
-  font-size:14px;
+  font-size:15px;
   margin:4px;
 }
 
@@ -1237,7 +1269,7 @@ z-index:90;
 float:left;      
 margin:0 3px 0 0;
 padding:0;       
-font-size:12px;  
+font-size:13px;  
 line-height:1 5em;
 list-style-type:none;
 }                    
@@ -1364,7 +1396,7 @@ z-index:90;
 float:left;      
 margin:0 3px 0 0;
 padding:0;       
-font-size:12px;  
+font-size:13px;  
 line-height:1 5em;
 list-style-type:none;
 }                    
@@ -1440,7 +1472,7 @@ background-image:none;
 }
 
 .inline-warning {
-  font-size:18px;
+  font-size:19px;
   text-align:bottom;
 }
 
