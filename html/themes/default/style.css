@@ -176,6 +176,15 @@ h1, h3 {
 }
 
 
+div.scrollContainer {
+  border:1px solid #CCC;
+  padding:1px;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+
+
 /* Image with migration color */
 
 input[type=submit].img{
