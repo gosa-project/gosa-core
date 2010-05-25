@@ -1285,6 +1285,7 @@ class acl extends plugin
           "plDepends"     => array(),
           "plPriority"    => 0,
           "plSection"     => array("administration"),
+          "plRequirements"=> array('ldapSchema' => array('gosaAcl' => '>=2.7')),
           "plCategory"    => array("acl" => array("description"  => _("ACL")."&nbsp;&amp;&nbsp;"._("ACL roles"),
                                                           "objectClass"  => array("gosaAcl","gosaRole"))),
           "plProvidedAcls"=> array(

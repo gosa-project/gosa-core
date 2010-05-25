@@ -100,6 +100,17 @@ class core extends plugin {
                     "plPriority"    => 0,
                     "plSection"     => array("administration"),
                     "plCategory"    => array("all"),
+
+                    "plRequirements"=> array(
+                        'ldapSchema' => array(
+                            'gosaObject' => '>=2.7',
+                            'gosaLockEntry' => '>=2.7',
+                            'gosaCacheEntry' => '>=2.7',
+                            'gosaConfig' => '>=2.7',
+                            'gosaProperties' => '>=2.7'
+                            )
+                        ),
+
                     "plProperties"  => array(
 
                         array(
