@@ -1687,6 +1687,12 @@ class user extends plugin
         "plCategory"    => array("users" => array("description" => _("Users"),
                                                   "objectClass" => "gosaAccount")),
 
+        "plRequirements"=> array(
+            'ldapSchema' => array(
+                'gosaAccount' => '>=2.7',
+                'gosaUserTemplate' => '>=2.7'
+                )
+            ),
 
         "plProperties" => array(
             array(
