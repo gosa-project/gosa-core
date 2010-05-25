@@ -273,33 +273,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
         exit();
     }
 
-    /* Check for schema file presence */
-    if ($config->get_cfg_value("core","schemaCheck") == "true") {
-        $recursive = ($config->get_cfg_value("core","ldapFollowReferrals") == "true");
-        $tls =       ($config->get_cfg_value("core","ldapTLS") == "true");
-
-        if(!count($ldap->get_objectclasses())) {
-            msg_dialog::display(_("LDAP error"), _("Cannot obtain information about the available LDAP schema!"), ERROR_DIALOG);
-            displayLogin();
-            exit()  ;
-        }else{
-            $cfg = array();
-            $cfg['admin']     = $config->current['ADMINDN'];
-            $cfg['password']  = $config->current['ADMINPASSWORD'];
-            $cfg['connection']= $config->current['SERVER'];
-            $cfg['tls']       = $tls;
-            $str = check_schema($cfg, $config->get_cfg_value("core","rfc2307bis") == "true");
-            $checkarr = array();
-            foreach($str as $tr) {
-                if(isset($tr['IS_MUST_HAVE']) && !$tr['STATUS']) {
-                    msg_dialog::display(_("LDAP error"), _("Your LDAP setup contains old schema definitions:")."<br><br>".$tr['MSG'], ERROR_DIALOG);
-                    displayLogin();
-                    exit();
-                }
-            }
-        }
-    }
-
     /* Check for locking area */
     $ldap->cat($config->get_cfg_value("core","config"), array("dn"));
     $attrs= $ldap->fetch();
