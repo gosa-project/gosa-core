@@ -23,6 +23,7 @@ class configRegistry{
     public $detectedSchemaIssues = array();
     public $schemaCheckFailed = FALSE;
     public $schemaCheckFinished = FALSE;
+    public $pluginsDeactivated = array();
 
     function __construct($config)
     {
@@ -64,6 +65,9 @@ class configRegistry{
         $this->detectedSchemaIssues['missing'] = array();
         $this->detectedSchemaIssues['versionMismatch'] = array();
 
+        // Clear last results 
+        $this->pluginsDeactivated = array();
+
         // Read objectClasses from ldap
         if(!count($this->objectClasses)){
             $ldap = $this->config->get_ldap_link();
@@ -75,28 +79,42 @@ class configRegistry{
         $this->pluginRequirements = array('ldapSchema' => array());
         $this->categoryToClass = array();
         foreach($this->classesWithInfo as $cname => $defs){
-            if(isset($defs['plRequirements']['ldapSchema'])){
-                $this->pluginRequirements['ldapSchema'][$cname] = $defs['plRequirements']['ldapSchema'];
+            if(isset($defs['plRequirements'])){
+                $this->pluginRequirements[$cname] = $defs['plRequirements'];
             }
         }
 
         // Check schema requirements now        $missing = $invalid = array();
-        foreach($this->pluginRequirements['ldapSchema'] as $cname => $requirements){
-            foreach($requirements as $oc => $version){
-                if(1 || !$this->ocAvailable($oc)){
-                    $this->detectedSchemaIssues['missing'][] = $oc;
-                    $this->schemaCheckFailed = TRUE;
-                }elseif(!empty($version)){
-                    $currentVersion = $this->getObjectClassVersion($oc);
-                    if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
-                        if($currentVersion == -1){
-                            $currentVersion = _("unknown");
-                        }
-                        $this->detectedSchemaIssues['versionMismatch'] = 
-                            sprintf(_("%s has version %s but %s required!"), bold($oc),bold($currentVersion),bold($version));
+        foreach($this->pluginRequirements as $cname => $requirements){
+
+            // Check LDAP schema requirements for this plugins
+            $failure = FALSE;
+            if(isset($requirements['ldapSchema'])){
+                foreach($requirements['ldapSchema'] as $oc => $version){
+                    if(!$this->ocAvailable($oc)){
+                        $this->detectedSchemaIssues['missing'][] = $oc;
                         $this->schemaCheckFailed = TRUE;
+                        $failure = TRUE;
+                    }elseif(!empty($version)){
+                        $currentVersion = $this->getObjectClassVersion($oc);
+                        if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
+                            if($currentVersion == -1){
+                                $currentVersion = _("unknown");
+                            }
+                            $this->detectedSchemaIssues['versionMismatch'] = 
+                                sprintf(_("%s has version %s but %s required!"), bold($oc),bold($currentVersion),bold($version));
+                            $this->schemaCheckFailed = TRUE;
+                            $failure = TRUE;
+                        }
                     }
                 }
+            }
+
+            // Display corresponding plugins now 
+            if($disableIncompatiblePlugins && $failure && isset($requirements['onFailureDisablePlugin'])){
+                foreach($requirements['onFailureDisablePlugin'] as $name){
+                    $this->pluginsDeactivated[] = $name;
+                } 
             }
         }
         $this->schemaCheckFinished =TRUE;

@@ -1691,7 +1691,8 @@ class user extends plugin
             'ldapSchema' => array(
                 'gosaAccount' => '>=2.7',
                 'gosaUserTemplate' => '>=2.7'
-                )
+                ),
+            'onFailureDisablePlugin' => array('userManagement')
             ),
 
         "plProperties" => array(
