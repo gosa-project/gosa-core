@@ -715,6 +715,7 @@ class aclrole extends acl
           "plPriority"    => 0,
           "plSection"     => array("administration"),
           "plCategory"    => array("acl"),
+          "plRequirements"=> array('ldapSchema' => array('gosaAcl' => '>=2.7')),
           "plProperties" =>
           array(
               array(
