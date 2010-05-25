@@ -42,7 +42,7 @@ class migrateRDN implements propertyMigration
 
     function checkForIssues()
     {
-        $this->found = array();
+        $this->found = array('add'=>array(), 'move' => array());
         $ldap= $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $ldap2= $this->config->get_ldap_link();
