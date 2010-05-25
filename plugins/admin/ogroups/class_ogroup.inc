@@ -823,6 +823,7 @@ class ogroup extends plugin
           "plDepends"     => array(),
           "plPriority"    => 1,
           "plSection"     => array("administration"),
+          "plRequirements"=> array('ldapSchema' => array('gosaGroupOfNames' => '>=2.7')),
           "plCategory"    => array("ogroups" => array("description"  => _("Object groups"),
                                                       "objectClass"  => "gosaGroupOfNames")),
           "plProvidedAcls"=> array(
