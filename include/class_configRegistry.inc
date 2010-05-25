@@ -20,6 +20,8 @@ class configRegistry{
 
     public $objectClasses = array();
 
+    public $detectedSchemaIssues = array();
+    public $schemaCheckFailed = FALSE;
     public $schemaCheckFinished = FALSE;
 
     function __construct($config)
@@ -47,7 +49,7 @@ class configRegistry{
     }
 
 
-    function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE,$displayMessage = FALSE)
+    function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
     {
         // We can check the schemata only with a valid LDAP connection
         if(empty($this->config->current['CONFIG'])){
@@ -55,7 +57,12 @@ class configRegistry{
         }
 
         // Don't do things twice unless forced
-        if($this->schemaCheckFinished && !$force) return; 
+        if($this->schemaCheckFinished && !$force) return($this->schemaCheckFailed); 
+
+        // Prepare result array
+        $this->detectedSchemaIssues = array();
+        $this->detectedSchemaIssues['missing'] = array();
+        $this->detectedSchemaIssues['versionMismatch'] = array();
 
         // Read objectClasses from ldap
         if(!count($this->objectClasses)){
@@ -73,39 +80,50 @@ class configRegistry{
             }
         }
 
-        // Check schema requirements now
-        $missing = $invalid = array();
+        // Check schema requirements now        $missing = $invalid = array();
         foreach($this->pluginRequirements['ldapSchema'] as $cname => $requirements){
             foreach($requirements as $oc => $version){
-                if(!$this->ocAvailable($oc)){
-                    $missing[] = $oc;
+                if(1 || !$this->ocAvailable($oc)){
+                    $this->detectedSchemaIssues['missing'][] = $oc;
+                    $this->schemaCheckFailed = TRUE;
                 }elseif(!empty($version)){
                     $currentVersion = $this->getObjectClassVersion($oc);
                     if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
                         if($currentVersion == -1){
                             $currentVersion = _("unknown");
                         }
-                        $invalid[] = sprintf(_("%s has version %s but %s required!"), bold($oc),bold($currentVersion),bold($version));
+                        $this->detectedSchemaIssues['versionMismatch'] = 
+                            sprintf(_("%s has version %s but %s required!"), bold($oc),bold($currentVersion),bold($version));
+                        $this->schemaCheckFailed = TRUE;
                     }
                 }
             }
         }
-
-        if($displayMessage && count($missing)){
-            msg_dialog::display(_("Schema validation error"), 
-                 _("The following objectClasses are missing:").
-                "<div class='scrollContainer' style='height:100px'>".msgPool::buildList($missing)."</div>",
-                    ERROR_DIALOG);
-        }    
-        if($displayMessage && count($invalid)){
-            msg_dialog::display(_("Schema validation error"), 
-                _("The following objectClasses do not match the version requirements:").
-                "<div class='scrollContainer' style='height:100px'>".msgPool::buildList($invalid)."</div>",
-                    ERROR_DIALOG);
-        }    
-
         $this->schemaCheckFinished =TRUE;
+        return(!$this->schemaCheckFailed);
     }
+
+        
+    function displayErrors()
+    {
+        if(count($this->detectedSchemaIssues['missing'])){
+            msg_dialog::display(_("Schema validation error"), 
+                    _("The following objectClasses are missing:").
+                    "<div class='scrollContainer' style='height:100px'>".
+                    msgPool::buildList($this->detectedSchemaIssues['missing']).
+                    "</div>",
+                    ERROR_DIALOG);
+        }    
+        if(count($this->detectedSchemaIssues['versionMismatch'])){
+            msg_dialog::display(_("Schema validation error"), 
+                    _("The following objectClasses do not match the version requirements:").
+                    "<div class='scrollContainer' style='height:100px'>".
+                    msgPool::buildList($this->detectedSchemaIssues['versionMismatch']).
+                    "</div>",
+                    ERROR_DIALOG);
+        }    
+    }
+
 
     function ocVersionMatch($required, $installed)
     {
