@@ -74,6 +74,7 @@ if (! $cleanup ){
       $MyAccountTabs->save ();
       del_lock ($ui->dn);
       session::un_set ('edit');
+      $MyAccountTabs->setReadOnly(TRUE);
       if(isset($MyAccountTabs->by_object['user']) && $MyAccountTabs->by_object['user']->password_change_needed()){
         $MyAccountTabs->password_change_needed = TRUE;
       }else{
