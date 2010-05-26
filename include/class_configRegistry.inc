@@ -97,17 +97,17 @@ class configRegistry{
             $failure = FALSE;
             if(isset($requirements['ldapSchema'])){
                 foreach($requirements['ldapSchema'] as $oc => $version){
-                    if(1 || !$this->ocAvailable($oc)){
+                    if(rand(0,5)==1 || !$this->ocAvailable($oc)){
                         $this->detectedSchemaIssues['missing'][] = $oc;
                         $this->schemaCheckFailed = TRUE;
                         $failure = TRUE;
                     }elseif(!empty($version)){
                         $currentVersion = $this->getObjectClassVersion($oc);
-                        if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
+                        if(1 || !empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
                             if($currentVersion == -1){
                                 $currentVersion = _("unknown");
                             }
-                            $this->detectedSchemaIssues['versionMismatch'] = 
+                            $this->detectedSchemaIssues['versionMismatch'][] = 
                                 sprintf(_("%s has version %s but %s required!"), bold($oc),bold($currentVersion),bold($version));
                             $this->schemaCheckFailed = TRUE;
                             $failure = TRUE;
@@ -137,22 +137,38 @@ class configRegistry{
         
     function displayErrors()
     {
+
+        $message = "";
         if(count($this->detectedSchemaIssues['missing'])){
-            msg_dialog::display(_("Schema validation error"), 
-                    _("The following objectClasses are missing:").
-                    "<div class='scrollContainer' style='height:100px'>".
-                    msgPool::buildList($this->detectedSchemaIssues['missing']).
-                    "</div>",
-                    ERROR_DIALOG);
+            $message .=   
+                _("The following objectClasses are missing:").
+                "<div class='scrollContainer' style='height:100px'>".
+                msgPool::buildList($this->detectedSchemaIssues['missing']).
+                "</div>";
         }    
         if(count($this->detectedSchemaIssues['versionMismatch'])){
-            msg_dialog::display(_("Schema validation error"), 
-                    _("The following objectClasses do not match the version requirements:").
-                    "<div class='scrollContainer' style='height:100px'>".
-                    msgPool::buildList($this->detectedSchemaIssues['versionMismatch']).
-                    "</div>",
-                    ERROR_DIALOG);
+            $message.=
+                _("The following objectClasses do not match the version requirements:").
+                "<div class='scrollContainer' style='height:100px'>".
+                msgPool::buildList($this->detectedSchemaIssues['versionMismatch']).
+                "</div>";
         }    
+        if(count($this->pluginsDeactivated)){
+
+            $tmp = array();
+            foreach($this->pluginsDeactivated as $class){
+                $tmp[$class] = (isset($this->classToName[$class]))? $this->classToName[$class] : $class;
+            }
+
+            $message.= _("Due to unresolved requirements GOsa will deactivate the following plugins:").
+                "<div class='scrollContainer' style='height:100px'>".
+                msgPool::buildList($tmp).
+                "</div>";
+        }
+    
+        if($message != ""){ 
+            msg_dialog::display(_("Schema validation error"),$message, ERROR_DIALOG);
+        }
     }
 
 
