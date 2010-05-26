@@ -1296,8 +1296,6 @@ class posixAccount extends plugin
           "plCategory"        => array("users"),
           "plOptions"         => array(),
 
-          "plRequirements"=> array('ldapSchema' => array('gosaProxyAccount' => '>=2.7')),    
-
           "plProvidedAcls"  => array(
 
             "homeDirectory"       =>  _("Home directory"), 
