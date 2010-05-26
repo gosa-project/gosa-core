@@ -7,7 +7,7 @@
 
     <p>{t}When checking this option, GOsa will try to connect http://oss.gonicus.de in order to subscribe you to the gosa-announce mailing list. You've to confirm this by mail.{/t}</p>
 
-	<table>	
+	<table summary="{t}Organization{/t}">	
 		<tr>
 			<td>{t}Organization{/t}</td>
 			<td><input name='organization' type='text' value='{$organization}' style='width:300px;'></td>
@@ -33,7 +33,7 @@
 
     <hr>
 	<b>{t}Generic{/t}</b>
-	<table>	
+	<table  summary="{t}Generic{/t}">	
 		<tr>
 			<td>{t}Did the setup procedure help you to get started?{/t}</td>
 			<td><input {if $get_started} checked {/if} type='radio' name='get_started' value='1'>{t}Yes{/t}
@@ -72,7 +72,7 @@
 
 	<hr>
     <b>{t}LDAP{/t}</b>
-	<table>
+	<table  summary="{t}LDAP{/t}">
 		<tr>
 			<td>{t}What kind of LDAP server(s) do you use?{/t}</td>
 			<td><input type='text' name='ldap_server' size=50 value='{$ldap_server}'></td>
@@ -85,7 +85,7 @@
 
 	<hr>
     <b>{t}Features{/t}</b>
-	<table>
+	<table  summary="{t}Features{/t}">
 		<tr>
 			<td>{t}What features of GOsa do you use?{/t}</td>
 			<td>

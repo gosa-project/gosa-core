@@ -2,16 +2,16 @@
 		<p>{t}During the LDAP inspection, we're going to check for several common pitfalls that may occur when migration to GOsa base LDAP administration. You may want to fix the problems below, in order to provide smooth services.{/t}
 		</p>
 
-        <table style='width:100%'>
+        <table style='width:100%' summary='{t}Checks{/t}'>
             {foreach from=$checks item=val key=key}
                 <tr> 
                     <td>
                         <b>{$checks.$key.TITLE}</b>&nbsp; {$checks.$key.STATUS_MSG}
-                        <p>
-                            {if $checks.$key.ERROR_MSG}
+                        {if $checks.$key.ERROR_MSG}
+                            <p>
                                 {$checks.$key.ERROR_MSG}
-                            {/if}
-                        </p>
+                            </p>
+                        {/if}
                     </td>
                 </tr>
             {/foreach}
@@ -40,7 +40,7 @@
     <h2>{t}Create a new GOsa administrator account{/t}</h2>
     <p>{t}This dialog will automatically add a new super administrator to your LDAP tree.{/t}</p>
 
-    <table>
+    <table summary="{t}Name{/t}">
         <tr>
             <td>{t}Name{/t}:</td>
             <td><i>System administrator</i></td>

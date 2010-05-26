@@ -23,7 +23,6 @@ or
  chmod 640 {$CONFIG_DIR}/{$CONFIG_FILE}
 </pre>
 {/if} 
-	</tt>
 	<p>	
 		<button type='submit' name='getconf'>{t}Download configuration{/t}</button>
 
