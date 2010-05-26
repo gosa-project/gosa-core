@@ -186,7 +186,7 @@ class pluglist
         }
       }
 
-        $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
+      $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
       $cfg= $this->config->data['MENU'];
       $menu = "\n      <div class='navigation'>";
@@ -258,8 +258,9 @@ class pluglist
   function show_iconmenu()
   {
     $add_hr =FALSE;
-    $this->iconmenu = "";
     if ($this->iconmenu == ""){
+
+      $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
       $cfg= $this->config->data['MENU'];
       foreach ($cfg as $headline => $plug){
@@ -276,6 +277,9 @@ class pluglist
 
           // Get Plugin info
           list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
+
+          // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+          if(isset($disabledPlugins[$info['CLASS']])) continue;
 
           // Add a seperating row
           if (($col % 4) == 0){ 
@@ -307,6 +311,8 @@ class pluglist
   {
     if(empty($this->pathMenu)){
 
+      $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
+
       // Now load the path menu and try to register the plugins in the pluglist
       //  if this fails for some reason, then remove the plugin from the menu.
       if(isset($this->config->data['PATHMENU'])){
@@ -331,6 +337,10 @@ class pluglist
         $rcfg = array_reverse($cfg);
         foreach($rcfg as $id => $plug){
           list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
+
+          // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+          if(isset($disabledPlugins[$plug['CLASS']])) continue;
+
           $this->pathMenu.= "\n            <li class='right left-border' onClick='openPlugin({$index})'>{$title}</li>";
         }
       }

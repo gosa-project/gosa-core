@@ -625,11 +625,21 @@ class management
     if(empty($tabClass) || empty($tabType)){
       // No tab type defined
     }else{
-      if (isset($this->config->data['TABS'][$tabType])) {
-        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
-        $this->tabObject->set_acl_base($this->headpage->getBase());
-        $this->tabObject->parent = &$this;
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Create new entry initiated!");
+
+        if (isset($this->config->data['TABS'][$tabType])) {
+
+            // Check if the base plugin is available - it is mostly responsible for object creation and removal.
+            $first  = $this->config->data['TABS'][$tabType][0];
+            if(!class_available($first['CLASS'])){
+                msg_dialog::display(_("Internal error"),
+                        sprintf(_("Cannot instantiate tabbed-plugin, the base plugin (%s) is not available!"), $first['CLASS']),
+                        ERROR_DIALOG);
+            }else{
+                $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
+                $this->tabObject->set_acl_base($this->headpage->getBase());
+                $this->tabObject->parent = &$this;
+                @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Create new entry initiated!");
+            }
       } else {
         msg_dialog::display(_("Error"), sprintf(_("No tab definition for %s found in configuration file: cannot create plugin instance!"), bold($tabType)), ERROR_DIALOG);
       }
