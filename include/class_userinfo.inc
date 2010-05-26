@@ -379,7 +379,7 @@ class userinfo
             trigger_error("Invalid ACL class '".$aclClass."'! ({$object})");
             return("");
         }
-        if(isset($aclClass) &&class_available($aclClass)){
+        if(isset($aclClass) && $aclClass != '0' && class_available($aclClass)){
             $plInfo = call_user_func(array($aclClass, 'plInfo'));
             if(!empty($attribute) && !isset($plInfo['plProvidedAcls'][$attribute])){
                 trigger_error("Invalid ACL attribute '".$attribute."'! ({$object})");
