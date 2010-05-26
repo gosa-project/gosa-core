@@ -108,7 +108,7 @@ class configRegistry{
                                 $currentVersion = _("unknown");
                             }
                             $this->detectedSchemaIssues['versionMismatch'][] = 
-                                sprintf(_("%s has version %s but %s required!"), bold($oc),bold($currentVersion),bold($version));
+                                sprintf(_("%s has version %s but %s is required!"), bold($oc),bold($currentVersion),bold($version));
                             $this->schemaCheckFailed = TRUE;
                             $failure = TRUE;
                         }
@@ -141,21 +141,20 @@ class configRegistry{
         $message = "";
         if(count($this->detectedSchemaIssues['missing'])){
             $message.= "<br>".
-                _("The following objectClasses are missing:").
+                _("The following object classes are missing:").
                 "<div class='scrollContainer' style='height:100px'>".
                 msgPool::buildList($this->detectedSchemaIssues['missing']).
                 "</div>";
         }    
         if(count($this->detectedSchemaIssues['versionMismatch'])){
             $message.= "<br>".
-                _("The following objectClasses do not match the version requirements:").
+                _("The following object classes are outdated:").
                 "<div class='scrollContainer' style='height:100px'>".
                 msgPool::buildList($this->detectedSchemaIssues['versionMismatch']).
                 "</div>";
         }    
         if($message != ""){
-            $message = _("Some plugins are deactivated, due to unresolved LDAP schema dependencies!")."<br>".
-                $message;
+            $message.= "<br>"._("Plugins that require one or more of the object classes above will be disabled until the object classes get updated.");
  
             msg_dialog::display(_("Schema validation error"),$message, ERROR_DIALOG);
         }
