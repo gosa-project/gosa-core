@@ -229,6 +229,8 @@ class setup
             }else{
                 $str .= "<button disabled type='submit' name='last'>".msgPool::backButton()."</button>";
             }
+
+            $str .= "<button type='submit' name='test'>"._("check")."</button>";
             $str .= "<button type='submit' name='next'>"._("next")."</button>";
             $str .="</div>";
         }
@@ -239,7 +241,23 @@ class setup
     /* Create header entry */
     function get_header_html()
     {
-        $str=   $this->o_steps[$this->i_current]->print_header();
+        $title = $this->o_steps[$this->i_current]->getTitle();
+        $image = $this->o_steps[$this->i_current]->getImage();
+        $page = $this->i_current ." / ".count($this->o_steps);
+
+
+        $str = "<div style='100%'>
+                    <div style='float: left; '>
+                        <img src='{$image}' alt=''>
+                    </div>
+                    <div style='float: left; margin-left:10px;margin-top:10px;font-size:24px;font-weight:bold;'>
+                        {$title}
+                    </div>
+                    <div style='float: right; margin-top:10px;font-size:24px;font-weight:bold;'>
+                        {$page}
+                    </div>
+                </div>
+                <div class='clear'></div> ";
         return ($str);
     }
 

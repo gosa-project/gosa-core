@@ -11,14 +11,14 @@
   <form action='setup.php' name='mainform' method='post' enctype='multipart/form-data'>
    {$msg_dialogs}
 
-    <br>
+ <!--  
    <div class='navigation'>
     <div class='menu'>
      {$navigation}	
     </div>	
    </div>
-
-   <div class='plugin-area'>
+ -->
+   <div class='plugin-area' style='margin:10px;'>
     <div class='plugin'>
     {$errors}
     {$header}

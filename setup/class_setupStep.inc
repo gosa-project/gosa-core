@@ -115,15 +115,16 @@ class setup_step extends plugin
     return($tmp);
   }
 
-  function print_header()
+  function getTitle()
   {
-    $image= get_template_path($this->header_image);
-    $display= "<div style='padding:3px;'>";
-    $display.= "  <p class=\"center\" style=\"margin:0px 0px 0px 5px;padding:0px;font-size:24px;font-weight:bold;\"><img class=\"center\" src=\"$image\" align=\"middle\" alt=\"*\">&nbsp;".$this->s_title_long."</p>\n";
-    $display.= "</div>\n";
-
-    return($display);
+      return($this->s_title_long);
   }
+
+  function getImage()
+  {
+      return($this->header_image);
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
