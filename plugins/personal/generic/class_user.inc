@@ -1692,7 +1692,7 @@ class user extends plugin
                 'gosaAccount' => '>=2.7',
                 'gosaUserTemplate' => '>=2.7'
                 ),
-            'onFailureDisablePlugin' => array('userManagement')
+            'onFailureDisablePlugin' => array(get_class(),'userManagement')
             ),
 
         "plProperties" => array(
