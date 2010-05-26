@@ -21,7 +21,7 @@
 	{else}
 
 	<b>{t}LDAP connection{/t}</b>
-    <table style='width:100%'>
+    <table style='width:100%' summary='{t}LDAP connection{/t}'>
         <tr>
             <td style='width:200px;'>{t}Location name{/t}</td>
             <td><input type='text' name='location' maxlength='80' size='40' value='{$location}'></td>    
@@ -56,7 +56,7 @@
 
     <hr> 
 	<b>{t}Authentication{/t}</b>
-    <table style='width:100%'>
+    <table style='width:100%' summary='{t}Authentication{/t}'>
         <tr>
             <td style='width:200px;'>{t}Admin DN{/t}</td>
             <td>
@@ -84,7 +84,7 @@
 
     <hr> 
 	<b>{t}Schema based settings{/t}</b>
-    <table style='width:100%'>
+    <table style='width:100%' summary='{t}Schema based settings{/t}'>
         <tr>
             <td style='width:200px;'>{t}Use rfc2307bis compliant groups{/t}</td>
             <td>
@@ -98,7 +98,7 @@
 	{if !$resolve_user}
     <hr> 
         <b>{t}Current status{/t}</b>
-        <table style='width:100%'>
+        <table style='width:100%' summary='{t}Current status{/t}'>
             <tr>
                 <td style='width:200px;'>{t}Information{/t}</td>
                 <td>{$connection_status}</td>

@@ -2,7 +2,7 @@
   {$php_errors}
   <div class='title-bar'>
    <ul>
-    <li><img src='themes/default/images/logo.png'></li>
+    <li><img src='themes/default/images/logo.png' alt='GOsa'></li>
     <li>{t}GOsa setup wizard{/t}</li>
     <li>{$version}</li>
    </ul>
