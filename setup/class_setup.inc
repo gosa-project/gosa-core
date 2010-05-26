@@ -233,7 +233,10 @@ class setup
             if($this->o_steps[$this->i_current]->b_displayCheckbutton){
                 $str .= "<button type='submit' name='test'>"._("check")."</button>";
             }
-            $str .= "<button type='submit' name='next'>"._("next")."</button>";
+
+            if(isset($this->o_steps[$this->i_current +1])){
+                $str .= "<button type='submit' name='next'>"._("next")."</button>";
+            }
             $str .="</div>";
         }
         return($str);
