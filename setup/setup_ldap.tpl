@@ -1,3 +1,8 @@
+ <p>
+  {t}The main data source used in GOsa is LDAP. In order to access the information stored there, please enter the required information.{/t}
+ </p>
+
+  <hr>
 
 	{if $resolve_user}
 

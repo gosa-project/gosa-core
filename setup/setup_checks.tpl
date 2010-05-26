@@ -1,10 +1,13 @@
+<p>
+ {t}This step checks if your PHP server has all required modules and configuration settings.{/t}
+</p>
 
 <table style='width:100%;' summary='{t}Inspection{/t}'>
  <tr>
   <td style='text-align:top; width: 50%;'>
-   <h2 class='step2_container_title'>{t}PHP module and extension checks{/t}</h2>
+   <h2>{t}PHP module and extension checks{/t}</h2>
 
-   <table style='width:100%;' summary='{t}Basic checks{/t}'>
+   <table cellspacing='0' class='sortableListContainer' style='border:1px solid #CCC; width:100%;' summary='{t}Basic checks{/t}'>
     {foreach from=$basic item=val key=key}
      {if $basic[$key].SOLUTION != "" && !$basic[$key].RESULT}
       <tr class='entry_container_info'>
@@ -15,13 +18,13 @@
      <td>{$basic[$key].NAME}</td>
 
      {if $basic[$key].RESULT}
-       <td>{t}Ok{/t}</td>
+       <td style='color:#0A0'>{t}Ok{/t}</td>
       </tr>
      {else}
         {if $basic[$key].MUST}
-         <td>{t}Error{/t}</td>
+         <td style='color:red'>{t}Error{/t}</td>
         {else}
-         <td>{t}Warning{/t}</td>
+         <td style='color:orange'>{t}Warning{/t}</td>
         {/if}
        </tr>
 
@@ -44,8 +47,8 @@
    </table>
   </td>
   <td>
-   <h2 class='step2_container_title'>{t}PHP setup configuration{/t} (<a style='text-decoration:underline' href='?info' target='_blank'>{t}show information{/t})</a></h2>
-   <table style='width:100%;' summary='{t}Extended checks{/t}'>
+   <h2>{t}PHP setup configuration{/t} (<a style='text-decoration:underline' href='?info' target='_blank'>{t}show information{/t})</a></h2>
+   <table cellspacing='0' class='sortableListContainer' style='border:1px solid #CCC; width:100%;' summary='{t}Extended checks{/t}'>
     {foreach from=$config item=val key=key}
      {if $config[$key].SOLUTION != "" && !$config[$key].RESULT}
       <tr class='entry_container_info'>
@@ -56,13 +59,13 @@
      <td>{$config[$key].NAME}</td>
 
      {if $config[$key].RESULT}
-       <td>{t}Ok{/t}</td>
+       <td style='color:#0A0'>{t}Ok{/t}</td>
       </tr>
      {else}
         {if $config[$key].MUST}
-         <td>{t}Error{/t}</td>
+         <td style='color:red'>{t}Error{/t}</td>
         {else}
-         <td>{t}Warning{/t}</td>
+         <td style='color:orange'>{t}Warning{/t}</td>
         {/if}
        </tr>
 

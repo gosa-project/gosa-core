@@ -224,6 +224,7 @@ class setup
             $str ="";
         }else{
             $str ="<div class='plugin-actions'>";
+
             if(isset($this->o_steps[$this->i_current -1]) && $this->o_steps[$this->i_current -1]->is_enabled()){
                 $str .= "<button type='submit' name='last'>".msgPool::backButton()."</button>";
             }else{
@@ -231,11 +232,11 @@ class setup
             }
 
             if($this->o_steps[$this->i_current]->b_displayCheckbutton){
-                $str .= "<button type='submit' name='test'>"._("check")."</button>";
+                $str .= "&nbsp;<button type='submit' name='test'>"._("Check again")."</button>";
             }
 
             if(isset($this->o_steps[$this->i_current +1])){
-                $str .= "<button type='submit' name='next'>"._("next")."</button>";
+                $str .= "&nbsp;<button type='submit' name='next'>"._("Next")."</button>";
             }
             $str .="</div>";
         }

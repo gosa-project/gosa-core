@@ -4,14 +4,14 @@
      <tr>
       <td style='padding: 10px;'>{image path='images/warning.png'}</td>
       <td>
-        <h3>Attention</h3>
+        <h3>{t}Attention{/t}</h3>
        <p>
-        {t}Modifying properties may break your setup, destroy or mess up your ldap database, lead to security holes or it can even make logins impossible!{/t}
-        {t}Since configuration properties are stored in the ldap database a copy/backup can be handy.{/t}
+        {t}Modifying properties may break your setup, destroy or mess up your LDAP database, lead to security holes or it can even make a login impossible!{/t}
+        {t}Since configuration properties are stored in the LDAP database a copy/backup can be handy.{/t}
        </p>
 
        <p>
-        {t}If we've locked yourself out, you can try to set 'ignoreLdapProperties' to 'true' in your gosa.conf. With this option set to true, GOsa will ignore LDAP based property values, but it cannot reverse damage done to your LDAP database.{/t}
+        {t}If you've debarred yourself, you can try to set 'ignoreLdapProperties' to 'true' in your gosa.conf main section. This will make GOsa ignore LDAP based property values.{/t}
        </p>
 
       </td> 
@@ -19,7 +19,7 @@
     </table>
     <hr>
       <input type='checkbox' name='warningAccepted' value='1' id='warningAccepted'>
-      <label for='warningAccepted'>{t}I know the risks and want to modify properties!{/t}</label>
+      <label for='warningAccepted'>{t}I understand that there are certain risks, but I want to modify properties!{/t}</label>
     <hr>
     <div class="plugin-actions">
         <button name='goOn'>{msgPool type='okButton'}</button> 
