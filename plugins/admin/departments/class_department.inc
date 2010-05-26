@@ -665,10 +665,11 @@ class department extends plugin
                   "plDepends"     => array(),
                   "plSection"     => array("administration"),
                   "plRequirements"=> array(
-                      'ldapSchema' => array(
-                          'gosaDepartment' => '>=2.7'
-                          )
+                      'ldapSchema' => array('gosaDepartment' => '>=2.7'),
+                      'onFailureDisablePlugin' => array(get_class(),'departmentManagement',
+                          'country','dcObject','domain','locality','organization')
                       ),
+    
                   "plCategory"    => array("department" => array("objectClass" => "gosaDepartment", "description" => _("Departments"))),
             
                   "plProvidedAcls" => array(
