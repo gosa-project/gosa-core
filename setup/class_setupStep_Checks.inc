@@ -95,10 +95,10 @@ class Step_Checks extends setup_step
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* Check for installed mhash module */
-    $N = msgPool::checkingFor("mhash");
-    $D = _("GOsa requires this module to make use of SSHA encryption.");
-    $S = msgPool::installPhpModule("mhash");
-    $R = is_callable("mhash");
+    $N = msgPool::checkingFor("hash method");
+    $D = _("GOsa requires either 'mhash' or the 'sha1' module to make use of SSHA encryption.");
+    $S = msgPool::installPhpModule("mhash/sha1");
+    $R = is_callable('mhash') || is_callable('sha1');
     $M = FALSE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
