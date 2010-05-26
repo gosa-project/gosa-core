@@ -39,6 +39,7 @@ class Step_Migrate extends setup_step
     /* Root object classes */
     var $rootOC_migrate_dialog = FALSE;
     var $rootOC_details = array();
+    var $b_displayCheckbutton = TRUE;
 
     function Step_Migrate()
     {
@@ -507,7 +508,7 @@ class Step_Migrate extends setup_step
     function execute()
     {
         /* Initialise checks if this is the first call */
-        if(!$this->checks_initialised || isset($_POST['reload'])){
+        if(!$this->checks_initialised || isset($_POST['test'])){
             $this->initialize_checks();
             $this->checks_initialised = TRUE;
         }

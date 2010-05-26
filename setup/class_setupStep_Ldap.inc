@@ -42,6 +42,7 @@ class Step_Ldap extends setup_step
 
   var $header_image= "images/setup/ldap.png";
 
+    var $b_displayCheckbutton = TRUE;
   function Step_Ldap()
   {
     $this->update_strings();

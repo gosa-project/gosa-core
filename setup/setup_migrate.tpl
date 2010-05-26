@@ -16,8 +16,6 @@
                 </tr>
             {/foreach}
         </table>
-		<br>
-		<button type='submit' name='reload'>{t}Check again{/t}</button>
 
 	{elseif $method == "rootOC_migrate_dialog"}
 

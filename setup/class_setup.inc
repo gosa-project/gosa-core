@@ -230,7 +230,9 @@ class setup
                 $str .= "<button disabled type='submit' name='last'>".msgPool::backButton()."</button>";
             }
 
-            $str .= "<button type='submit' name='test'>"._("check")."</button>";
+            if($this->o_steps[$this->i_current]->b_displayCheckbutton){
+                $str .= "<button type='submit' name='test'>"._("check")."</button>";
+            }
             $str .= "<button type='submit' name='next'>"._("next")."</button>";
             $str .="</div>";
         }

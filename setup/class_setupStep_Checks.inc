@@ -26,6 +26,8 @@ class Step_Checks extends setup_step
   var $config_checks= array();
   var $is_writeable = array();
   var $header_image = "images/setup/system.png";
+    
+    var $b_displayCheckbutton = TRUE;
 
   function Step_Checks()
   {

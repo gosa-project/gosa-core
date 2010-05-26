@@ -28,6 +28,7 @@ class setup_step extends plugin
   var $is_active    = false;
   var $is_enabled   = false;
   var $is_completed = false;
+  var $b_displayCheckbutton = false;
 
   var $header_image = "images/setup/user.png";
 
