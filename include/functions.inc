@@ -144,8 +144,14 @@ spl_autoload_register('__gosa_autoload');
  */
 function class_available($name)
 {
-  global $class_mapping;
-  return(isset($class_mapping[$name]));
+  global $class_mapping, $config;
+    
+  $disabled = array();
+  if($config instanceOf config && $config->configRegistry instanceOf configRegistry){
+    $disabled = $config->configRegistry->getDisabledPlugins();
+  }
+
+  return(isset($class_mapping[$name]) && !isset($disabled[$name]));
 }
 
 

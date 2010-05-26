@@ -186,9 +186,12 @@ class pluglist
         }
       }
 
+        $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
+
       $cfg= $this->config->data['MENU'];
       $menu = "\n      <div class='navigation'>";
       foreach ($cfg as $headline => $plug){
+
 
         if(!count($plug)) continue;
 
@@ -197,6 +200,9 @@ class pluglist
         $menu.= "\n            <li class='menu-header'>"._($headline)."</li>";
         $id = 0;
         foreach ($plug as $info){
+
+            // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+            if(isset($disabledPlugins[$info['CLASS']])) continue;
 
           // Used to detect the last element in the menu
           $id ++;

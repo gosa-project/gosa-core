@@ -97,7 +97,7 @@ class configRegistry{
             $failure = FALSE;
             if(isset($requirements['ldapSchema'])){
                 foreach($requirements['ldapSchema'] as $oc => $version){
-                    if(!$this->ocAvailable($oc)){
+                    if(1 || !$this->ocAvailable($oc)){
                         $this->detectedSchemaIssues['missing'][] = $oc;
                         $this->schemaCheckFailed = TRUE;
                         $failure = TRUE;
@@ -119,12 +119,19 @@ class configRegistry{
             // Display corresponding plugins now 
             if($disableIncompatiblePlugins && $failure && isset($requirements['onFailureDisablePlugin'])){
                 foreach($requirements['onFailureDisablePlugin'] as $name){
-                    $this->pluginsDeactivated[] = $name;
+                    $this->pluginsDeactivated[$name] = $name;
                 } 
             }
         }
         $this->schemaCheckFinished =TRUE;
+        session::un_set('plist');
         return(!$this->schemaCheckFailed);
+    }
+
+    
+    function getDisabledPlugins()
+    {
+        return($this->pluginsDeactivated);
     }
 
         
