@@ -698,11 +698,21 @@ class management
       if(empty($tabClass) || empty($tabType)){
         trigger_error("We can't edit any object(s). 'tabClass' or 'tabType' is empty!");
       }else{
+
         $tab = $tabClass;
-        $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$tabType], $this->dn,$aclCategory);
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Edit entry initiated!");
-        $this->tabObject->set_acl_base($this->dn);
-        $this->tabObject->parent = &$this;
+        
+        // Check if the base plugin is available - it is mostly responsible for object creation and removal.
+        $first  = $this->config->data['TABS'][$tabType][0];
+        if(!class_available($first['CLASS'])){
+            msg_dialog::display(_("Internal error"), 
+                    sprintf(_("Cannot instantiate tabbed-plugin, the base plugin (%s) is not available!"), $first['CLASS']), 
+                    ERROR_DIALOG);
+        }else{
+            $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$tabType], $this->dn,$aclCategory);
+            @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Edit entry initiated!");
+            $this->tabObject->set_acl_base($this->dn);
+            $this->tabObject->parent = &$this;
+        }
       }
     }else{
 
