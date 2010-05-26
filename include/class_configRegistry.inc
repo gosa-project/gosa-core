@@ -140,33 +140,23 @@ class configRegistry{
 
         $message = "";
         if(count($this->detectedSchemaIssues['missing'])){
-            $message .=   
+            $message.= "<br>".
                 _("The following objectClasses are missing:").
                 "<div class='scrollContainer' style='height:100px'>".
                 msgPool::buildList($this->detectedSchemaIssues['missing']).
                 "</div>";
         }    
         if(count($this->detectedSchemaIssues['versionMismatch'])){
-            $message.=
+            $message.= "<br>".
                 _("The following objectClasses do not match the version requirements:").
                 "<div class='scrollContainer' style='height:100px'>".
                 msgPool::buildList($this->detectedSchemaIssues['versionMismatch']).
                 "</div>";
         }    
-        if(count($this->pluginsDeactivated)){
-
-            $tmp = array();
-            foreach($this->pluginsDeactivated as $class){
-                $tmp[$class] = (isset($this->classToName[$class]))? $this->classToName[$class] : $class;
-            }
-
-            $message.= _("Due to unresolved requirements GOsa will deactivate the following plugins:").
-                "<div class='scrollContainer' style='height:100px'>".
-                msgPool::buildList($tmp).
-                "</div>";
-        }
-    
-        if($message != ""){ 
+        if($message != ""){
+            $message = _("Some plugins are deactivated, due to unresolved LDAP schema dependencies!")."<br>".
+                $message;
+ 
             msg_dialog::display(_("Schema validation error"),$message, ERROR_DIALOG);
         }
     }
