@@ -97,13 +97,13 @@ class configRegistry{
             $failure = FALSE;
             if(isset($requirements['ldapSchema'])){
                 foreach($requirements['ldapSchema'] as $oc => $version){
-                    if(rand(0,5)==1 || !$this->ocAvailable($oc)){
+                    if(!$this->ocAvailable($oc)){
                         $this->detectedSchemaIssues['missing'][] = $oc;
                         $this->schemaCheckFailed = TRUE;
                         $failure = TRUE;
                     }elseif(!empty($version)){
                         $currentVersion = $this->getObjectClassVersion($oc);
-                        if(1 || !empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
+                        if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
                             if($currentVersion == -1){
                                 $currentVersion = _("unknown");
                             }
