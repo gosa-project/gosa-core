@@ -187,7 +187,6 @@ class Step_Migrate extends setup_step
             $this->checks['acls']['ERROR_MSG'] = _("Possibly the 'root object' is missing.");
         }else{
             $GOsa_26_found = false; // GOsa 2.6 Account found
-            $GOsa_25_found = false; // GOsa 2.5 Account found, allow migration
 
             $username = "";
             $attrs = $ldap->fetch();
@@ -292,43 +291,7 @@ class Step_Migrate extends setup_step
                 }
             }
 
-            /* Try to find an old GOsa 2.5 administrative account that may be migrated 
-             */
-            if(!$GOsa_26_found){
-                $valid_users = "";
-                $valid_groups = "";
-                $ldap->cd($cv['base']);
-                $ldap->search("(&(objectClass=posixGroup)(gosaSubtreeACL=:all)(memberUid=*))",array("memberUid","cn"));
-                while($p_group = $ldap->fetch()){
-                    $val_users = "";
-                    for($e = 0 ; $e < $p_group['memberUid']['count'] ; $e ++ ){
-                        $user = $p_group['memberUid'][$e];
-                        if(isset($rusers[$user])){
-                            $val_users .= $user.", ";
-                        }  
-                    }
-                    if(!empty($val_users)){
-                        $valid_groups .= $groups[$p_group['dn']]."(<i>".trim($val_users,", ")."</i>), ";
-                        $GOsa_25_found  = TRUE;
-                    }
-                }
-            }
-
-
-            /* Print out results 
-             */
-            if($GOsa_25_found){
-                $str = "";
-                if(!empty($valid_groups)){
-                    $str.= "<i>".sprintf(_("GOsa 2.5 administrative accounts found: %s"),trim($valid_groups,", "))."</i><br>";
-                }
-                $this->checks['acls']['STATUS']    = FALSE;
-                $this->checks['acls']['STATUS_MSG']= _("Failed");
-                $this->checks['acls']['ERROR_MSG'] = $str;
-                $this->checks['acls']['ERROR_MSG'].= _("There is no valid GOsa 2.6 administrator account inside your LDAP.")."&nbsp;";
-                $this->checks['acls']['ERROR_MSG'].= "<button type='submit' name='migrate_acls'>"._("Migrate")."</button>";
-                $this->checks['acls']['ERROR_MSG'].= "<button type='submit' name='create_acls'>"._("Create")."</button>";
-            }elseif($GOsa_26_found){
+            if($GOsa_26_found){
                 $str = "";
                 if(!empty($valid_users)){
                     $str.= "<b>"._("Users")."</b>:&nbsp;".trim($valid_users,", ")."<br>";
