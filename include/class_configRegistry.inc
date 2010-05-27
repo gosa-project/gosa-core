@@ -56,10 +56,33 @@ class configRegistry{
     }
 
 
+    
     function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
     {
-        // We can check the schemata only with a valid LDAP connection
-        if(empty($this->config->current['CONFIG'])){
+        // Read objectClasses from ldap
+        if(!count($this->objectClasses)){
+            $ldap = $this->config->get_ldap_link();
+            $ldap->cd($this->config->current['BASE']);
+            $this->setObjectClasses($ldap->get_objectclasses());
+        }
+
+        return($this->_validateSchemata($force, $disableIncompatiblePlugins));
+    }
+
+    function setObjectClasses($ocs)
+    {
+        $this->objectClasses = $ocs;
+    }
+
+    function getSchemaResults()
+    {
+        return($this->detectedSchemaIssues);
+    }
+
+    function _validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
+    {
+        // We cannot check without readable schema info
+        if(!count($this->objectClasses)){
             return(TRUE); 
         }
 
@@ -73,13 +96,6 @@ class configRegistry{
 
         // Clear last results 
         $this->pluginsDeactivated = array();
-
-        // Read objectClasses from ldap
-        if(!count($this->objectClasses)){
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cd($this->config->current['BASE']);
-            $this->objectClasses = $ldap->get_objectclasses();
-        }
 
         // Collect required schema infos
         $this->pluginRequirements = array('ldapSchema' => array());
@@ -202,6 +218,8 @@ class configRegistry{
         $this->fileStoredProperties = array();
         $this->properties = array();
         $this->mapByName = array();
+
+        if(!$this->config) return;
 
         // Search for config flags defined in the config file (TAB section)
         foreach($this->config->data['TABS'] as $tabname => $tabdefs){
