@@ -114,7 +114,7 @@ class configRegistry{
             if(isset($requirements['ldapSchema'])){
                 foreach($requirements['ldapSchema'] as $oc => $version){
                     if(!$this->ocAvailable($oc)){
-                        $this->detectedSchemaIssues['missing'][] = $oc;
+                        $this->detectedSchemaIssues['missing'][$oc] = $oc;
                         $this->schemaCheckFailed = TRUE;
                         $failure = TRUE;
                     }elseif(!empty($version)){
@@ -123,7 +123,7 @@ class configRegistry{
                             if($currentVersion == -1){
                                 $currentVersion = _("unknown");
                             }
-                            $this->detectedSchemaIssues['versionMismatch'][] = 
+                            $this->detectedSchemaIssues['versionMismatch'][$oc] = 
                                 sprintf(_("%s has version %s but %s is required!"), bold($oc),bold($currentVersion),bold($version));
                             $this->schemaCheckFailed = TRUE;
                             $failure = TRUE;
@@ -159,14 +159,14 @@ class configRegistry{
             $message.= "<br>".
                 _("The following object classes are missing:").
                 "<div class='scrollContainer' style='height:100px'>".
-                msgPool::buildList($this->detectedSchemaIssues['missing']).
+                msgPool::buildList(array_values($this->detectedSchemaIssues['missing'])).
                 "</div>";
         }    
         if(count($this->detectedSchemaIssues['versionMismatch'])){
             $message.= "<br>".
                 _("The following object classes are outdated:").
                 "<div class='scrollContainer' style='height:100px'>".
-                msgPool::buildList($this->detectedSchemaIssues['versionMismatch']).
+                msgPool::buildList(array_values($this->detectedSchemaIssues['versionMismatch'])).
                 "</div>";
         }    
         if($message != ""){

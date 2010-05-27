@@ -99,18 +99,23 @@ class core extends plugin {
                     "plDepends"     => array(),
                     "plPriority"    => 0,
                     "plSection"     => array("administration"),
-                    "plCategory"    => array("all"),
 
                     "plRequirements"=> array(
                         'ldapSchema' => array(
                             'gosaObject' => '>=2.7',
+                            'gosaAccount' => '>=2.7',
                             'gosaLockEntry' => '>=2.7',
+                            'gosaDepartment' => '>=2.7',
                             'gosaCacheEntry' => '>=2.7',
-                            'gosaConfig' => '>=2.7',
-                            'gosaProperties' => '>=2.7'
-                            )
+                            'gosaProperties' => '>=2.7',
+                            'gosaConfig' => '>=2.7'
+                            ),
+                        'onFailureDisablePlugin' => array(get_class())
                         ),
 
+
+
+                    "plCategory"    => array("all"),
                     "plProperties"  => array(
 
                         array(
