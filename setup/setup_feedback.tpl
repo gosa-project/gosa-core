@@ -68,6 +68,10 @@
 			<td>{t}What PHP version do you use?{/t}</td>
 			<td><input type='text' size=50 name='php_version' value='{$php_version}'></td>
 		</tr>
+		<tr>
+			<td>{t}GOsa version{/t}</td>
+			<td>{$gosa_version}</td>
+		</tr>
 	</table>
 
 	<hr>
