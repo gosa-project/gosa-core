@@ -67,7 +67,8 @@ $config->check_and_reload();
 $config->configRegistry->reload();
 
 // Validate LDAP schema if not done already
-if(!$config->configRegistry->schemaCheckFinished() && 
+if( $config->boolValueIsTrue('core','schemaCheck') && 
+    !$config->configRegistry->schemaCheckFinished() && 
     !$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE)){
     $config->configRegistry->displayErrors();
 }
