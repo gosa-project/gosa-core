@@ -22,111 +22,88 @@
 
 class Step_Schema extends setup_step
 {
-  var $checked = array();
-  var $not_checked = array();
-  var $schema_readable  = FALSE;
-  var $attributes       = array("enable_schema_check","samba_version");
-  var $enable_schema_check = TRUE;
-  var $samba_version       = 3;
+    var $checked = array();
+    var $not_checked = array();
+    var $b_displayCheckbutton = true;
 
-  var $found_ocs = 0; 
- 
-  function Step_Schema()
-  {
-    $this->update_strings();
-  }
-
-  
-  function update_strings()
-  {
-    $this->s_title      = _("LDAP schema check");
-    $this->s_title_long = _("LDAP schema check");
-    $this->s_info       = _("Perform test on your current LDAP schema");
-  }
-
-  
-  function execute()
-  {
-    $this->check_schema();
-    $failed_checks = 0 ; 
-    foreach($this->checked as $val) {
-      if(!$val['STATUS']){
-        $failed_checks ++;
-      }
+    function Step_Schema()
+    {
+        $this->update_strings();
     }
 
-    if($failed_checks == 0){
-      $this->is_completed = TRUE;
-    }else{
-      $this->is_completed = TRUE;
+
+    function update_strings()
+    {
+        $this->s_title      = _("LDAP schema check");
+        $this->s_title_long = _("LDAP schema check");
+        $this->s_info       = _("Perform test on your current LDAP schema");
     }
+
+
+    function execute()
+    {
+        // Establish ldap connection
+        $cv = $this->parent->captured_values;
+        $ldap_l = new LDAP($cv['admin'],
+                $cv['password'],
+                $cv['connection'],
+                FALSE,
+                $cv['tls']);
+
+        // Detect Schema Info
+        $ldap = new ldapMultiplexer($ldap_l);
+        $ldap->cd($cv['base']);
+        $objectclasses = $ldap->get_objectclasses();
+   
+        // Check if we can find something
+        $ldap->set_size_limit(1);
+        $res = $ldap->search("(objectClass=*)");  
+        $ldap->set_size_limit(0);
     
-    /* Check if the database is already initialised.
-     * If the root object is missing we can't read any schema informations.
-     * In this case we should display a message.
-     */
-    $cv = $this->parent->captured_values;
+        // Validate schema
+        $cR = new configRegistry(NULL);;
+        $cR->setObjectClasses($objectclasses);
+        $cR->_validateSchemata(TRUE,TRUE);
+        $info = $cR->getSchemaResults();
+        $disabled = $cR->getDisabledPlugins();
 
-    /* Establish ldap connection */
-    $ldap_l = new LDAP($cv['admin'],
-        $cv['password'],
-        $cv['connection'],
-        FALSE,
-        $cv['tls']);
+        // Check if the 'AT LEAST' required classes are available.  
+        $smarty = get_smarty();
+        $smarty->assign('message', "");
+        $smarty->assign('database_initialised', ($res==TRUE));
+        $smarty->assign('ocCount', count($objectclasses));
 
-    $ldap = new ldapMultiplexer($ldap_l);
+        // We are fine here once we got object classes. 
+        $this->is_completed = count($objectclasses);
 
-    /* Check if root object exists */
-    $ldap->cd($cv['base']);
-    $ldap->set_size_limit(1);
-    $res = $ldap->search("(objectClass=*)");
-    $ldap->set_size_limit(0);
+        // Now check if the core requirements are fulfilled.
+        if(in_array('core', $disabled)){
+            $message = "";
+            $this->is_completed = FALSE;
+            $coreDefs = core::plInfo();
+            $coreRequired = $coreDefs['plRequirements']['ldapSchema'];
+            $missing = $version = array();
+            foreach($coreRequired as $oc => $requirement){
+                if(isset($info['missing'][$oc])){
+                    $missing[$oc] = $info['missing'][$oc];
+                }
+                if(isset($info['versionMismatch'][$oc])){
+                    $version[$oc] = $info['versionMismatch'][$oc];
+                }
+            }
 
-    $smarty = get_smarty();
-    $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
-    $smarty->assign("database_initialised", ($res == TRUE));
-    $smarty->assign("found_ocs", $this->found_ocs);
-    $smarty->assign("schema_readable",$this->schema_readable);
-    $smarty->assign("enable_schema_check",$this->enable_schema_check);
-    $smarty->assign("checks",$this->checked);
-    $smarty->assign("not_checked",$this->not_checked);
-    $smarty->assign("failed_checks",$failed_checks);
-    return($smarty -> fetch (get_template_path("../setup/setup_schema.tpl")));
-  }
-
-  function save_object()
-  {
-    if(isset($_POST['step7_posted'])){
-
-      /* Get attributes */
-      foreach($this->attributes as $attr){
-        if(isset($_POST[$attr])){
-          $this->$attr = validate($_POST[$attr]);
+            $message .= "<hr>";
+            if(count($missing)){
+                $message.= _("The following object classes are missing:").msgPool::buildList(array_values($missing));
+            }
+            if(count($version)){
+                $message.= _("The following object classes are outdated:").msgPool::buildList(array_values($version));
+            }
+            $smarty->assign('message', $message);
         }
-      }
+        $smarty->assign('checkFailed', !$this->is_completed);
+        return($smarty->fetch (get_template_path("../setup/setup_schema.tpl")));
     }
-  }
-
-  function check_schema()
-  {
-    $cfg = $this->parent->captured_values;
-
-    /* Get objectclasses */
-    $ldap = new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']);
-    $objectclasses = $ldap->get_objectclasses(TRUE);
-    $this->found_ocs = count($objectclasses);
-    $rfc2307bis = $cfg['rfc2307bis'];
-    $this->checked = check_schema($cfg,$rfc2307bis);
-
-    /* Which samba version do we use? */
-    if(isset($objectclasses['sambaSamAccount'])){
-      $this->samba_version = 3;
-    } elseif(isset($objectclasses['sambaAccount'])) {
-      $this->samba_version = 2;
-    }else{
-      $this->samba_version = 0;
-    }
-  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
