@@ -235,9 +235,7 @@ class setup
                 $str .= "&nbsp;<button type='submit' name='test'>"._("Check again")."</button>";
             }
 
-            if(isset($this->o_steps[$this->i_current +1])){
-                $str .= "&nbsp;<button type='submit' name='next'>"._("Next")."</button>";
-            }
+            $str .= "&nbsp;<button type='submit' name='next'>"._("Next")."</button>";
             $str .="</div>";
         }
         return($str);
