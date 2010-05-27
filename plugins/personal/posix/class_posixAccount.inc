@@ -1295,6 +1295,10 @@ class posixAccount extends plugin
           "plSection"         => array("personal" => _("My account")),
           "plCategory"        => array("users"),
           "plOptions"         => array(),
+          "plRequirements"=> array(
+              'ldapSchema' => array('posixAccount' => ''),
+              'onFailureDisablePlugin' => array(get_class(), 'sambaAccount','netatalk','environment')
+              ),
 
           "plProvidedAcls"  => array(
 
