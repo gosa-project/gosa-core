@@ -25,6 +25,11 @@ class configRegistry{
     public $schemaCheckFinished = FALSE;
     public $pluginsDeactivated = array();
 
+
+    /*! \brief      Constructs the config registry 
+     *  @param      config  The configuration object
+     *  @return     
+     */
     function __construct($config)
     {
         $this->config = &$config;
@@ -49,18 +54,27 @@ class configRegistry{
         $this->reload();
     }
 
-    
+
+    /*! \brief      Checks whether the schema check was called in the current session or not.
+     *  @return     Boolean     True if check was already called
+     */
     function schemaCheckFinished()
     {
         return($this->schemaCheckFinished);
     }
 
 
-    
-    function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
+    /*! \brief      Starts the schema validation
+     *  @param      Boolean     'force' Force a re-check.
+     *  @param      Boolean     'disableIncompatiblePlugins' Disables of incompatible GOsa-plugins.
+     *  @return     Boolean     True on success else FALSE
+     */
+    function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE, $objectClassesToUse = array())
     {
         // Read objectClasses from ldap
-        if(!count($this->objectClasses)){
+        if(count($objectClassesToUse)){
+            $this->setObjectClasses($objectClassesToUse);
+        }elseif(!count($this->objectClasses)){
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
             $this->setObjectClasses($ldap->get_objectclasses());
@@ -69,17 +83,33 @@ class configRegistry{
         return($this->_validateSchemata($force, $disableIncompatiblePlugins));
     }
 
+
+    /*! \brief      Sets the list object classes to use while validation the schema. (See 'validateSchemata')
+     *              This is called from the GOsa-Setup
+     *  @param      Array       The list of object classes (usually LDAP::get_objectlclasses()).
+     *  @return     void  
+     */
     function setObjectClasses($ocs)
     {
         $this->objectClasses = $ocs;
     }
 
+
+    /*! \brief      Returns an array which contains all unresolved schemata requirements.
+     *  @return     Array       An array containing all errors/issues  
+     */
     function getSchemaResults()
     {
         return($this->detectedSchemaIssues);
     }
 
-    function _validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
+
+    /*! \brief      This method checks if the installed ldap-schemata matches the plugin requirements.
+     *  @param      Boolean     'force' Force a re-check.
+     *  @param      Boolean     'disableIncompatiblePlugins' Disables of incompatible GOsa-plugins.
+     *  @return     String  
+     */
+    private function _validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
     {
         // We cannot check without readable schema info
         if(!count($this->objectClasses)){
@@ -145,15 +175,20 @@ class configRegistry{
     }
 
     
+    /*! \brief      The function 'validateSchemata' may has disabled some GOsa-Plugins, 
+     *               the list of disabled plugins will be returned here.
+     *  @return     Array       The list of plugins disabled by 'validateSchemata'
+     */
     function getDisabledPlugins()
     {
         return($this->pluginsDeactivated);
     }
 
         
-    function displayErrors()
+    /*! \brief      Displays an error message with all issues detect during the schema validation.
+     */
+    function displayRequirementErrors()
     {
-
         $message = "";
         if(count($this->detectedSchemaIssues['missing'])){
             $message.= "<br>".
@@ -177,7 +212,12 @@ class configRegistry{
     }
 
 
-    function ocVersionMatch($required, $installed)
+    /*! \brief      Checks to version strings (e.g. '>=v2.8' and '2.9')
+     *  @param      String      The required version with operators (e.g. '>=2.8') 
+     *  @param      String      The version to match for withOUT operators (e.g. '2.9') 
+     *  @return     Boolean     True if version matches else false.  
+     */
+    private function ocVersionMatch($required, $installed)
     {
         $operator = preg_replace('/^([=<>]*).*$/',"\\1",$required);
         $required = preg_replace('/^[=<>]*(.*)$/',"\\1",$required);
@@ -185,6 +225,10 @@ class configRegistry{
     }
 
     
+    /*! \brief      Returns the currently installed version of a given object class.
+     *  @param      String      The name of the objectClass to check for. 
+     *  @return     String      The version string of the objectClass (e.g. v2.7) 
+     */
     function getObjectClassVersion($oc)
     {
         if(!isset($this->objectClasses[$oc])){
@@ -199,13 +243,19 @@ class configRegistry{
     }
     
 
-    // check wheter an objectClass is installed or not.
+    /*! \brief      Check whether the given object class is available or not. 
+     *  @param      String      The name of the objectClass to check for (e.g. 'mailAccount') 
+     *  @return     Boolean     Returns TRUE if the class exists else FALSE.
+     */
     function ocAvailable($name)
     {
         return(isset($this->objectClasses[$name]));
     }
 
 
+    /*! \brief      Re-loads the list of installed GOsa-Properties. 
+     *  @param      Boolean     $force   If force is TRUE, the complete properties list is rebuild..
+     */
     function reload($force = FALSE)
     {
         // Do not reload the properties everytime, once we have  
@@ -319,6 +369,11 @@ class configRegistry{
         }
     }
 
+
+    /*! \brief      Registers a GOsa-Property and thus makes it useable by GOsa and its plugins.
+     *  @param      String      $class  The name of the class/plugin that wants to register this property.
+     *  @return     Array       $data   An array containing all data set in plInfo['plProperty]
+     */
     function register($class,$data)
     {
         $id = count($this->properties);
@@ -327,17 +382,33 @@ class configRegistry{
         $this->mapByName[$p] = $id;
     }
 
+
+    /*! \brief      Returns all registered properties.
+     *  @return     Array   A list of all properties.
+     */
     public function getAllProperties()
     {
         return($this->properties);
     }
 
+
+    /*! \brief      Checks whether a property exists or not.
+     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
+     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     *  @return     Boolean     TRUE if it exists else FALSE.
+     */
     function propertyExists($class,$name)
     {       
         $p = strtolower("{$class}::{$name}");
         return(isset($this->mapByName[$p]));
     }
 
+
+    /*! \brief      Returns the id of a registered property.
+     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
+     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     *  @return     Integer     The id for the given property.  
+     */
     private function getId($class,$name)
     {
         $p = strtolower("{$class}::{$name}");
@@ -347,6 +418,12 @@ class configRegistry{
         return($this->mapByName[$p]);    
     }
 
+
+    /*! \brief      Returns a given property, if it exists.
+     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
+     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     *  @return     GOsaPropery     The property or 'NULL' if it doesn't exists.
+     */
     function getProperty($class,$name)
     {
         if($this->propertyExists($class,$name)){
@@ -355,6 +432,12 @@ class configRegistry{
         return(NULL); 
     }
 
+
+    /*! \brief      Returns the value for a given property, if it exists.
+     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
+     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     *  @return     GOsaPropery     The property value or an empty string if it doesn't exists.
+     */
     function getPropertyValue($class,$name)
     {   
         if($this->propertyExists($class,$name)){
@@ -364,6 +447,12 @@ class configRegistry{
         return("");
     }
 
+
+    /*! \brief      Set a new value for a given property, if it exists.
+     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
+     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     *  @return     
+     */
     function setPropertyValue($class,$name, $value)
     {   
         if($this->propertyExists($class,$name)){
@@ -373,6 +462,10 @@ class configRegistry{
         return("");
     }
 
+
+    /*! \brief      Save all temporary made property changes and thus make them useable/effective.
+     *  @return     Array       Returns a list of plugins that have to be migrated before they can be saved.
+     */
     function saveChanges()
     {
         $migrate = array();

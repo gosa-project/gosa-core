@@ -70,7 +70,7 @@ $config->configRegistry->reload();
 if( $config->boolValueIsTrue('core','schemaCheck') && 
     !$config->configRegistry->schemaCheckFinished() && 
     !$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE)){
-    $config->configRegistry->displayErrors();
+    $config->configRegistry->displayRequirementErrors();
 }
 
 /* Enable compressed output */

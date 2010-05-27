@@ -62,8 +62,7 @@ class Step_Schema extends setup_step
     
         // Validate schema
         $cR = new configRegistry(NULL);;
-        $cR->setObjectClasses($objectclasses);
-        $cR->_validateSchemata(TRUE,TRUE);
+        $cR->validateSchemata(TRUE,TRUE,$objectclasses);
         $info = $cR->getSchemaResults();
         $disabled = $cR->getDisabledPlugins();
 
