@@ -3036,8 +3036,15 @@ function generate_smb_nt_hash($password)
 {
   global $config;
 
-  # Try to use gosa-si?
-  if ($config->get_cfg_value("core","gosaSupportURI") != ""){
+  // First try to retrieve values via RPC 
+  if ($config->get_cfg_value("core","gosaRpcServer") != ""){
+
+    $rpc = $config->getRpcHandle();
+    $hash = $rpc->mksmbhash($password);
+
+  }elseif ($config->get_cfg_value("core","gosaSupportURI") != ""){
+
+    // Try using gosa-si
   	$res= gosaSupportDaemon::send("gosa_gen_smb_hash", "GOSA", array("password" => $password), TRUE);
     if (isset($res['XML']['HASH'])){
     	$hash= $res['XML']['HASH'];

@@ -302,7 +302,7 @@ class config  {
       $passwd  =  $this->get_cfg_value('core','gosaRpcPassword');
 
       $handle = new jsonRPC($server);
-      $handle->login($user, $password);
+      $handle->login($user, $passwd);
 
       //Fixme  Add checks here - login successful aso.
       return($handle);
