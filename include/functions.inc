@@ -2183,18 +2183,37 @@ function validate($string)
 /*! \brief Evaluate the current GOsa version from the build in revision string */
 function get_gosa_version()
 {
-  global $svn_revision, $svn_path;
+    global $svn_revision, $svn_path;
 
-  /* Extract informations */
-  $revision= preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
+    /* Extract informations */
+    $revision= preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
 
-  /* Release or development? */
-  if (preg_match('%/gosa/trunk/%', $svn_path)){
-    return (sprintf(_("GOsa development snapshot (Rev %s)"), bold($revision)));
-  } else {
-    $release= preg_replace('%^.*/([^/]+)/include/functions.inc.*$%', '\1', $svn_path);
+    // Extract the relevant part out of the svn url
+    $release= preg_replace('%^.*/gosa/(.*)/include/functions.inc.*$%', '\1', $svn_path);
+
+    // Remove stuff which is not interesting
+    if(preg_match("/gosa-core/i", $release)) $release = preg_replace("/[\/]gosa-core/i","",$release);
+
+    // A Tagged Version
+    if(preg_match("#/tags/#i", $svn_path)){
+        $release = preg_replace("/tags[\/]*/i","",$release);
+        $release = preg_replace("/\//","",$release) ;
+        return (sprintf(_("GOsa %s"),$release));
+    }
+
+    // A Branched Version
+    if(preg_match("#/branches/#i", $svn_path)){
+        $release = preg_replace("/branches[\/]*/i","",$release);
+        $release = preg_replace("/\//","",$release) ;
+        return (sprintf(_("GOsa %s snapshot (Rev %s)"),$release , bold($revision)));
+    }
+
+    // The trunk version
+    if(preg_match("#/trunk/#i", $svn_path)){
+        return (sprintf(_("GOsa development snapshot (Rev %s)"), bold($revision)));
+    }
+
     return (sprintf(_("GOsa $release"), $revision));
-  }
 }
 
 
