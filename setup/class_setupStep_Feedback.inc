@@ -132,7 +132,7 @@ class Step_Feedback  extends setup_step
         }
       }else{
         $str = $this->create_serialise_data_string(); 
-        $feedback_url = $this->feedback_url."?data=".base64_encode($str);
+        $feedback_url = $this->feedback_url."?data=".urlencode(base64_encode($str));
 
         $ret = @fopen($feedback_url,"r");
 
