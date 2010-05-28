@@ -110,6 +110,14 @@
 				<input type='text' size=50 name='php_version' value='{$php_version}'>
 			</td>
 		</tr>
+		<tr>
+			<td style='vertical-align:top'>
+				{t}GOsa version{/t}</td>
+			</td>
+			<td>
+				{$gosa_version}
+			</td>
+		</tr>
 	</table>
 
 	<br><b>{t}LDAP{/t}</b>
