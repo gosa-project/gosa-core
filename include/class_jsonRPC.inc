@@ -6,11 +6,12 @@ class jsonRPC {
     private $url;
     private $id;
 
-    public function __construct($url,$debug = false) {
+    public function __construct($url,$debug = false) 
+    {
 
         $this->url = $url;
-        $this->dbug = $debug;
-        $this->id = 1;
+        $this->debug = $debug;
+        $this->id = 0;
 
         // Init Curl handler
         $this->curlHandler = curl_init($this->url);
@@ -22,7 +23,13 @@ class jsonRPC {
         curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER , array('Content-Type: application/json'));
     }
 
-    public function __call($method,$params) {
+    public function __destruct()
+    {
+        curl_close($this->curlHandler);
+    }
+
+    public function __call($method,$params) 
+    {
 
         if (!is_scalar($method))  trigger_error('jsonRPC::__call requires a scalar value as first parameter!');
 
@@ -43,9 +50,9 @@ class jsonRPC {
 
         // Check responce id
         if ($response['id'] != $this->id){
-            trigger_error('jsonPRC returned incorrect response id (request id: '.$this->id.', response id: '.$response['id'].')');
+            trigger_error('jsonPRC returned incorrect response '.
+                    'id (request id: '.$this->id.', response id: '.$response['id'].')');
         }
-
         return($response['result']);
     }
 }
