@@ -295,6 +295,20 @@ class config  {
   }
 
 
+  function getRpcHandle()
+  {
+      $server  =  $this->get_cfg_value('core','gosaRpcServer');
+      $user    =  $this->get_cfg_value('core','gosaRpcUser');
+      $passwd  =  $this->get_cfg_value('core','gosaRpcPassword');
+
+      $handle = new jsonRPC($server);
+      $handle->login($user, $password);
+
+      //Fixme  Add checks here - login successful aso.
+      return($handle);
+  }
+
+
   /*! \brief Get a LDAP link object
    *
    * This function can be used to get an ldap object, which in turn can
