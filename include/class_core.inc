@@ -568,6 +568,36 @@ DEBUG_SI      = 256"),
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "gosaRpcServer",
+                                "type"          => "string",
+                                "default"       => "http://localhost:8080/rpc",
+                                "description"   => "Ther server to use for RPC connections! Future GOsa-ng service!",
+                                "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "rpc",
+                                "mandatory"     => FALSE),
+
+                        array(
+                                "name"          => "gosaRpcUser",
+                                "type"          => "string",
+                                "default"       => "admin",
+                                "description"   => "Ther username to use for RPC connections! Future GOsa-ng service!",
+                                "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "rpc",
+                                "mandatory"     => FALSE),
+
+                        array(
+                                "name"          => "gosaRpcPassword",
+                                "type"          => "string",
+                                "default"       => "tester",
+                                "description"   => "Ther password to use for RPC connections! Future GOsa-ng service!",
+                                "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "rpc",
+                                "mandatory"     => FALSE),
+
+                        array(
                                 "name"          => "gosaSupportURI",
                                 "type"          => "string",
                                 "default"       => "",
