@@ -3041,6 +3041,10 @@ function generate_smb_nt_hash($password)
 
     $rpc = $config->getRpcHandle();
     $hash = $rpc->mksmbhash($password);
+    if(!$rpc->success()){
+        msg_dialog::display(_("Error"),msgPool::rpcError($rpc->get_error()),ERROR_DIALOG);
+        return("");
+    }
 
   }elseif ($config->get_cfg_value("core","gosaSupportURI") != ""){
 

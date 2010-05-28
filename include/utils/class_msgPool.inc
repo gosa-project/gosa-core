@@ -481,6 +481,15 @@ class msgPool
   }
 
 
+  public static function rpcError($error= "")
+  {
+    if ($error == ""){
+      return _("Communication failure with the GOSA-NG service!");
+    }
+    return sprintf(_("Communication failure with the GOSA-NG service: %s"), "<br><br>".$error);
+  }
+
+
   public static function stillInUse($type, $objects= array())
   {
     if (!is_array($objects)){
