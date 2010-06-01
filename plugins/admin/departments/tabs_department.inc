@@ -80,7 +80,7 @@ class deptabs extends tabs
     $this->dn= $new_dn;
     $baseobject->dn= $this->dn;
     if (!$ignore_account){
-      tabs::save(TRUE);
+      tabs::save();
     }
   }
 }
