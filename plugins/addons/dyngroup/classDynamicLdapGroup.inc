@@ -124,6 +124,8 @@ class DynamicLdapGroup extends plugin
             // A filter is required
             if(empty($entry['filter'])){
                 $messages[] = msgPool::required(_("Filter")." {$nr}");
+            }elseif(!preg_match("/^\(/", $entry['filter'])){
+                $messages[] = msgPool::invalid(_("Filter")." {$nr}",  $entry['filter'],'', '(objectClass=gosaAccount)'." - "._("Surrounding brakets are required!"));
             }else{
 
                 // Check if filter is valid
@@ -241,7 +243,6 @@ class DynamicLdapGroup extends plugin
         foreach($this->labeledURIparsed as $entry){
             $scope = $this->scopes[$entry['scope']];
             $filter = $entry['filter'];
-            $filter = '('.trim($filter, '() ').')';
             $this->labeledURI[] = "{$entry['base']}?{$entry['attr']}?{$scope}?{$filter}";
         }
         $this->labeledURI = array_unique($this->labeledURI);
