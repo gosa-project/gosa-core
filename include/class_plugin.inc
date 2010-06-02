@@ -1142,7 +1142,9 @@ class plugin
   }
 
 
-  /*! \brief Return plugin informations for acl handling */
+  /*! \brief Return plugin informations for acl handling 
+   *         See class_core.inc for examples.
+   */
   static function plInfo()
   {
     return array();
