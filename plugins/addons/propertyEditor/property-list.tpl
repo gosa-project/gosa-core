@@ -24,6 +24,7 @@
     <div class="plugin-actions">
         <button name='goOn'>{msgPool type='okButton'}</button> 
     </div>
+    <input type="hidden" name="ignore">
 
 {else}
 
@@ -68,7 +69,7 @@
 </script>
 
 {if !$is_modified}
-<input type="hidden" name="ignore">
+    <input type="hidden" name="ignore">
 {/if}
 
 <div class="plugin-actions">
