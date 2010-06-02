@@ -1060,7 +1060,7 @@ class config  {
     }
 
     // Show a warning in the syslog if there is an undefined property requested.
-    syslog(1,"Unconfigured property: {$class}::{$name}");    
+    new log("debug","","Unconfigured property: '{$class}::{$name}'",array(),'');
 
     // Try to find the property in the config file directly.
     $name= strtoupper($name);
