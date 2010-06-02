@@ -3262,9 +3262,6 @@ function update_accessTo($from,$to)
   while($attrs = $ldap->fetch()){
     $new_attrs = array("accessTo" => array());
     $dn = $attrs['dn'];
-    for($i = 0 ; $i < $attrs['objectClass']['count']; $i++){
-      $new_attrs['objectClass'][] =  $attrs['objectClass'][$i];
-    }
     for($i = 0 ; $i < $attrs['accessTo']['count']; $i++){
       if($attrs['accessTo'][$i] == $from){
         if(!empty($to)){
