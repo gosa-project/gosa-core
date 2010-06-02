@@ -25,6 +25,9 @@ class configRegistry{
     public $schemaCheckFinished = FALSE;
     public $pluginsDeactivated = array();
 
+    // Name of enabled plugins found in gosa.conf.
+    private $activePlugins = array();
+
 
     /*! \brief      Constructs the config registry 
      *  @param      config  The configuration object
@@ -130,9 +133,18 @@ class configRegistry{
         // Collect required schema infos
         $this->pluginRequirements = array('ldapSchema' => array());
         $this->categoryToClass = array();
+
+        // Walk through plugins with requirements, but only check for active plugins.
         foreach($this->classesWithInfo as $cname => $defs){
             if(isset($defs['plRequirements'])){
-                $this->pluginRequirements[$cname] = $defs['plRequirements'];
+
+                // Only queue checks for active plugins. 
+                if(isset($this->activePlugins[strtolower($cname)])){
+                    $this->pluginRequirements[$cname] = $defs['plRequirements'];
+                }else{
+                    new log("debug","schemaValidation","Skipped schema check for '{$cname}' plugin is inactive!",
+                        array(),'');
+                }
             }
         }
 
@@ -145,8 +157,13 @@ class configRegistry{
                 foreach($requirements['ldapSchema'] as $oc => $version){
                     if(!$this->ocAvailable($oc)){
                         $this->detectedSchemaIssues['missing'][$oc] = $oc;
+                    
                         $this->schemaCheckFailed = TRUE;
                         $failure = TRUE;
+
+                        new log("debug","schemaValidation","LDAP objectClass missing '{$oc}'!",
+                                array(),'');
+
                     }elseif(!empty($version)){
                         $currentVersion = $this->getObjectClassVersion($oc);
                         if(!empty($currentVersion) && !$this->ocVersionMatch($version, $currentVersion)){
@@ -157,6 +174,10 @@ class configRegistry{
                                 sprintf(_("%s has version %s but %s is required!"), bold($oc),bold($currentVersion),bold($version));
                             $this->schemaCheckFailed = TRUE;
                             $failure = TRUE;
+
+                            new log("debug","schemaValidation","LDAP objectClass version mismatch '{$oc}' ".
+                                    "has '{$currentVersion}' but {$version} required!",
+                                    array(),'');
                         }
                     }
                 }
@@ -268,6 +289,7 @@ class configRegistry{
         $this->fileStoredProperties = array();
         $this->properties = array();
         $this->mapByName = array();
+        $this->activePlugins = array('core'=>'core');
 
         if(!$this->config) return;
 
@@ -275,8 +297,15 @@ class configRegistry{
         foreach($this->config->data['TABS'] as $tabname => $tabdefs){
             foreach($tabdefs as $info){
 
+                // Put plugin in list of active plugins
+                if(isset($info['CLASS'])){
+                    $class = strtolower($info['CLASS']);
+                    $this->activePlugins[$class] = $class;
+                }
+
                 // Check if the info is valid
                 if(isset($info['NAME']) && isset($info['CLASS'])){
+                    
 
                     // Check if there is nore than just the plugin definition
                     if(count($info) > 2){
@@ -295,11 +324,18 @@ class configRegistry{
         // Search for config flags defined in the config file (MENU section)
         foreach($this->config->data['MENU'] as $section => $entries){
             foreach($entries as $entry){
-                if(count($entry) > 2 && isset($entry['CLASS'])){
-                    $class = $entry['CLASS'];
-                    foreach($entry as $name => $value){
-                        if(!in_array($name, array('CLASS','ACL'))){
-                            $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
+
+                if(isset($entry['CLASS'])){
+
+                    // Put plugin to active plugins list.
+                    $class = strtolower($entry['CLASS']);
+                    $this->activePlugins[$class] = $class;
+                
+                    if(count($entry) > 2 ){
+                        foreach($entry as $name => $value){
+                            if(!in_array($name, array('CLASS','ACL'))){
+                                $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
+                            }
                         }
                     }
                 }
