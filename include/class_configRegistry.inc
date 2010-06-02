@@ -138,12 +138,26 @@ class configRegistry{
         foreach($this->classesWithInfo as $cname => $defs){
             if(isset($defs['plRequirements'])){
 
+                // Check only if required plugin is enabled in gosa.conf
+                // Normally this is the class name itself, but may be overridden
+                //  in plInfo using the plRequirements::activePlugin statement.
+                $requiresActivePlugin = $cname;
+                if(isset($defs['plRequirements']['activePlugin'])){
+                    $requiresActivePlugin = $defs['plRequirements']['activePlugin'];
+                }
+
                 // Only queue checks for active plugins. 
-                if(isset($this->activePlugins[strtolower($cname)])){
+                if(isset($this->activePlugins[strtolower($requiresActivePlugin)])){
                     $this->pluginRequirements[$cname] = $defs['plRequirements'];
                 }else{
-                    new log("debug","","Skipped schema check for '{$cname}' plugin is inactive!",
-                        array(),'');
+                    if($cname == $requiresActivePlugin){
+                        new log("debug","","Skipped schema check for '{$cname}' plugin is inactive!",
+                                array(),'');
+                    }else{
+                        new log("debug","","Skipped schema check for class '{$cname}' skipped,".
+                                    " required plugin '{$requiresActivePlugin}' is inactive!",
+                                array(),'');
+                    }
                 }
             }
         }
