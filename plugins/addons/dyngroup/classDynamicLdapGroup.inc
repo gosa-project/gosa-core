@@ -255,91 +255,58 @@ class DynamicLdapGroup extends plugin
         if(!$ldap->success()){
             msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
         }
-
-        if (strcasecmp($this->orig_dn, $this->dn) != 0)
-        {
-            $this->renameDNsInDynGroupsValues($this->orig_dn, $this->dn);
-        }
     }
 
 
-    /**
-     * Return attributes values of an LDAP entry.
-     * @param String $dn DN of the LDAP entry.
-     * @param Array $attributes Attributes to look for.
-     * @return Array An associative array of requested values.
+    /*! \brief      Updates labeledURI entries in ldap.
+     *              Check whether the given src_dn is part of some labeledURI entries
+     *               and then updates the entries to use the dst_dn.
+     * @param       $config     The GOsa configuration object.
+     * @param       $src_dn     The source 'dn' of the object that was moved.
+     * @param       $dst_dn     The target 'dn' of the object that was moved.
      */
-    public function getAttributesValues ($dn, $attributes = Array('dn'))
+    public static function moveDynGroup($config,$src_dn,$dst_dn)
     {
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cat($dn, $attributes);
-        if ($attrs = $ldap->fetch())
-        {
-            $data = Array();
-            foreach ($attributes as $attribute)
-            {
-                if (array_key_exists($attribute, $attrs) !== false)
-                {
-                    $data[$attribute] = $attrs[$attribute];
-                    unset($data[$attribute]['count']);
+        // Fetch all dynamic group definitions 
+        $objs = get_list("(&(objectClass=labeledURIObject)(labeledURI=*))",array("all"),$config->current['BASE'],
+                array("dn","labeledURI"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
+        $newAttrs = array();
+        foreach($objs as $obj){
+            $changes = false;
+            $attrs = array();
+            for($i = 0; $i < $obj['labeledURI']['count']; $i++){
+                $c = $obj['labeledURI'][$i];
+                $c = preg_replace('/'.preg_quote($src_dn,'/').'/',$dst_dn,$c);
+                $attrs['labeledURI'][] = $c;
+
+                // Check if something has changed
+                if($c != $obj['labeledURI'][$i]){
+                    $changes =TRUE;
                 }
             }
-            if (sizeof($data) > 0)
-            {
-                return $data;
+
+            // If at least one line of 'labeledURI' has changed then we have to update the whole entry.
+            if($changes)      $newAttrs[$obj['dn']] = $attrs;
+        }
+ 
+        // If we've at least one entry to update then 
+        if(count($newAttrs)){
+            $ldap = $config->get_ldap_link();
+            foreach($newAttrs as $dn => $data){
+                $ldap->cd($dn);
+                $ldap->modify($data);
+                if(!$ldap->success()){
+                    trigger_error(sprintf("Failed to dynamic group object for %s: %s", bold($dn), $ldap->get_error()));
+                    new log("debug",
+                            "plugin/plugin::move()",$dn,array(),
+                            " -- ERROR -- Failed to update dynamic groups (labeledURI) - ".$ldap->get_error());
+                }else{
+                    new log("modify",
+                            "plugin/plugin::move()",$dn,array_keys($data),
+                            "Updated dynamic group entries (labeledURI)");
+                }
             }
         }
-        return false;
-    }
-
-
-    /**
-     * Modify search base for all URL of all dynamic groups objects into the LDAP
-     * directory.
-     */
-    public function renameDNsInDynGroupsValues ($old_dn, $new_dn)
-    {
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
-        //
-        // Build the LDAP search filter. We take only LDAP entries which have all
-        // objectClasses and attributes defined by this plugin.
-        //
-        $filter = '';
-        foreach ($this->objectclasses as $objectclass)
-        {
-            $filter .= '(objectClass=' . $objectclass . ')';
-                    }
-                    foreach ($this->attributes as $attribute)
-                    {
-                    $filter .= '(' . $attribute . '=*)';
-                    }
-            $filter = '(&' . $filter . ')';
-            //
-            // The search should return some LDAP entries. If so, performed modifications
-            // on values (delete the values, and add it again with correct search DN).
-            //
-            $ldap->search($filter, Array('dn'));
-            if ($attrs = $ldap->fetch())
-            {
-                foreach ($attrs as $dn)
-                {
-                    $values = $this->getAttributesValues($dn, $this->attributes);
-                    if ($values === false || !is_array($values))
-                    {
-                        continue;
-                    }
-                    foreach ($values as $attribute => $value)
-                    {
-                        for($i=0; $i<sizeof($value); $i++)
-                        {
-                            $values[$attribute][$i] = str_replace($old_dn, $new_dn, $values[$attribute][$i]);
-                        }
-                    }
-                    $ldap->cd($dn);
-                    $ldap->modify($values);
-                }
-            }
     }
 
 
