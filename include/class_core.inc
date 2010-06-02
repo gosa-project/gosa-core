@@ -1,5 +1,110 @@
 <?php
 
+/*
+ *   How to use plugin::plInfo()
+ *   ===================
+ *   
+ *   The function returns a descriptive array of the plugin,
+ *    which will then be used by GOsa to populate the plugin, its ACLs, 
+ *    its properties, its schema requirements aso.
+ *
+ *
+ *   The following values can be set:
+ *   ================================
+ *
+ *   plShortName    |-> The name of the plugin in short (e.g. Posix)
+ *                  |   This short-name will be shown for example in the ACL definitions.
+ *                  | 
+ *                  | 
+ *   plDescription  |-> A descriptive text for the plugin (e.g. User posix account extension)
+ *                  |   This will be shown in the ACL definitions.   
+ *                  | 
+ *                  | 
+ *   plSelfModify   |-> If set to true this plugin allows to set 'self' ACLs.
+ *                  |   For exampe to allow to change the users own password, but not the others.
+ *                  | 
+ *                  | 
+ *   plDepends      |-> The plugins dependencies to other classes (e.g. sambaAccount requires posixAccount)
+ *                  |  
+ *                  | 
+ *   plPriority     |-> The priority of the plugin, this influences the ACL listings only.
+ *                  | 
+ *                  | 
+ *   plSection      |-> The section of this plugin 'administration', 'personal', 'addons'
+ *                  | 
+ *                  | 
+ *   plCategory     |-> The plugin category this plugins belongs to (e.g. users, groups, departments) 
+ *                  | 
+ *                  | 
+ *   plRequirements |-> Plugin requirements. 
+ *                  | |
+ *                  | |-> [activePlugin]           The schame checks will only be performed if the given plugin is enabled
+ *                  | |                             in the gosa.conf definitions.
+ *                  | |                            Defaults to the current class name if empty.
+ *                  | |
+ *                  | |-> [ldapSchema]             An array of objectClass requirements.
+ *                  | |                            Syntax [[objectClass => 'version'], ... ]
+ *                  | |                            Version can be emtpy which just checks for the existence of the class.
+ *                  | |
+ *                  | |-> [onFailureDisablePlugin] A list of plugins that which will be disabled if the 
+ *                  |                               requirements couldn't be fillfulled.
+ *                  |
+ *                  |      ---------------------------------------------
+ *                  |      EXAMPLE:
+ *                  |      ---------------------------------------------
+ *                  |      "plRequirements"=> array(
+ *                  |         'activePlugin' => 'applicationManagement', 
+ *                  |         'ldapSchema' => array(
+ *                  |             'gosaObject' => '',
+ *                  |             'gosaAccount' => '>=2.7',
+ *                  |             'gosaLockEntry' => '>=2.7',
+ *                  |             'gosaDepartment' => '>=2.7',
+ *                  |             'gosaCacheEntry' => '>=2.7',
+ *                  |             'gosaProperties' => '>=2.7',
+ *                  |             'gosaConfig' => '>=2.7'
+ *                  |             ),
+ *                  |         'onFailureDisablePlugin' => array(get_class(), 'someClassName')
+ *                  |         ),
+ *                  |      ---------------------------------------------
+ *                  |
+ *                  |
+ *                  |         
+ *   plProvidedAcls |-> The ACLs provided by this plugin
+ *                  |
+ *                  |      ---------------------------------------------
+ *                  |      EXAMPLE:
+ *                  |      ---------------------------------------------
+ *                  |      "plProvidedAcls"=> array(
+ *                  |          'cn'             => _('Name'),
+ *                  |          'uid'            => _('Uid'),
+ *                  |          'phoneNumber'    => _('Phone number')
+ *                  |          ),
+ *                  |      ---------------------------------------------
+ *                  |
+ *                  |
+ *                  | 
+ *   plProperties   |-> Properties used by the plugin.
+ *                  |   Properties which are defined here will be modifyable using the property editor.
+ *                  |   To read properties you can use $config->get_cfg_value(className, propertyName)
+ *                  | 
+ *                  |      ---------------------------------------------
+ *                  |      EXAMPLE:
+ *                  |      ---------------------------------------------
+ *                  |      "plProperties"=> array(
+ *                  |         array(
+ *                  |             "name"          => "htaccessAuthentication",
+ *                  |             "type"          => "bool",
+ *                  |             "default"       => "false",
+ *                  |             "description"   => _("A description..."),
+ *                  |             "check"         => "gosaProperty::isBool",
+ *                  |             "migrate"       => "",
+ *                  |             "group"         => "authentification",
+ *                  |             "mandatory"     => TRUE
+ *                  |             ),
+ *                  |         ),
+ *                  |   See class_core.inc for a huge amount of examples.
+ */
+
 
 class all extends plugin {
     static function plInfo()
