@@ -7,6 +7,11 @@ GOsa2 changelog
   - Rewrote filtering methods
   - Rewrote reference tabs
   - Replaced all lists by either listing or sortable_listing
+  - Added dynamic groups to core functionality, labeledURIObject.
+  - Added property editor plugin, including property validation and migration.
+  - Rewrote schema check, more flexible and only checks for required classes. 
+  - Stripped setup to minimum requirements. (Use property editor form fine-tuning)
+  - Introduced dynamic path-menu, replaces the old 'MyAccount' section.
 
 * gosa 2.6.9
   - Fixed problem with initial phone accounts, sip type was NULL
