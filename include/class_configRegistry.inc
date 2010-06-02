@@ -388,7 +388,6 @@ class configRegistry{
                     $this->ldapStoredProperties[$class][$name] = $value;
                 }
             }
-            $this->status = 'finished';
         }
 
         // Register plugin properties.
@@ -417,6 +416,19 @@ class configRegistry{
                 }
             }
         }
+
+        // We are only finsihed once we are logged in.
+        if(!empty($this->config->current['CONFIG'])){
+            $this->status = 'finished';
+        }
+    }
+
+   
+    /*! \brief      Returns TRUE if the property registration has finished without any error.
+     */ 
+    function propertyInitializationComplete()
+    {
+        return($this->status == 'finished');
     }
 
 

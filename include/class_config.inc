@@ -1060,7 +1060,11 @@ class config  {
     }
 
     // Show a warning in the syslog if there is an undefined property requested.
-    new log("debug","","Unconfigured property: '{$class}::{$name}'",array(),'');
+    if($this->configRegistry->propertyInitializationComplete() && 
+            "{$class}::{$name}" != 'core::config' &&  // <--- This on is never set, only in gosa.conf. 
+            "{$class}::{$name}" != 'core::logging'){  // <--- This one may cause endless recursions in class_log.inc
+        new log("debug","","Unconfigured property: '{$class}::{$name}'",array(),'');
+    }
 
     // Try to find the property in the config file directly.
     $name= strtoupper($name);
