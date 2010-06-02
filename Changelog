@@ -7,7 +7,7 @@ GOsa2 changelog
   - Rewrote filtering methods
   - Rewrote reference tabs
   - Replaced all lists by either listing or sortable_listing
-  - Added dynamic groups to core functionality, labeledURIObject.
+  - Added dynamic groups to core functionality. Thanks to <Thomas Chemineau>
   - Added property editor plugin, including property validation and migration.
   - Rewrote schema check, more flexible and only checks for required classes. 
   - Stripped setup to minimum requirements. (Use property editor form fine-tuning)
