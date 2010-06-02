@@ -142,7 +142,7 @@ class configRegistry{
                 if(isset($this->activePlugins[strtolower($cname)])){
                     $this->pluginRequirements[$cname] = $defs['plRequirements'];
                 }else{
-                    new log("debug","schemaValidation","Skipped schema check for '{$cname}' plugin is inactive!",
+                    new log("debug","","Skipped schema check for '{$cname}' plugin is inactive!",
                         array(),'');
                 }
             }
@@ -161,7 +161,7 @@ class configRegistry{
                         $this->schemaCheckFailed = TRUE;
                         $failure = TRUE;
 
-                        new log("debug","schemaValidation","LDAP objectClass missing '{$oc}'!",
+                        new log("debug","","LDAP objectClass missing '{$oc}'!",
                                 array(),'');
 
                     }elseif(!empty($version)){
@@ -175,7 +175,7 @@ class configRegistry{
                             $this->schemaCheckFailed = TRUE;
                             $failure = TRUE;
 
-                            new log("debug","schemaValidation","LDAP objectClass version mismatch '{$oc}' ".
+                            new log("debug","","LDAP objectClass version mismatch '{$oc}' ".
                                     "has '{$currentVersion}' but {$version} required!",
                                     array(),'');
                         }

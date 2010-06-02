@@ -102,7 +102,7 @@ class log {
       $msgs[] = sprintf(_("Invalid option %s specified!"), bold($entry['action']));
     }
 
-    if(!isset($entry['objecttype']) || empty($entry['objecttype'])){
+    if(!isset($entry['objecttype'])){
       $msgs[] = _("Specified 'objectType' is empty or invalid!");
     }
   
@@ -114,11 +114,20 @@ class log {
   function log_into_syslog($entry)
   {
     $str= "";
-    if (empty($entry['object']) && empty($entry['changes'])) {
-      $str = "(".$entry['action'].") ".$entry['objecttype'].": ".$entry['result'];
-    } else {
-      $str = "(".$entry['action'].") ".$entry['object']." of type ".$entry['objecttype']." ".$entry['changes'].": ".$entry['result'];
+
+    if(!empty($entry['action']))        $str .= "({$entry['action']}) ";
+
+    // Add object and object type if set.
+    if(!empty($entry['object']) && !empty($entry['objecttype'])){
+        $str .= "{$entry['object']} of type {$entry['objecttype']} ";
+    }elseif(!empty($entry['object'])){
+        $str .= "{$entry['object']} ";
+    }elseif(!empty($entry['objecttype'])){
+        $str .= "{$entry['objecttype']} ";
     }
+    if(!empty($entry['changes'])) $str .= "{$entry['changes']} ";
+    if(!empty($entry['result']))  $str .= ": {$entry['result']} ";
+
     gosa_log($str);
   }
 
