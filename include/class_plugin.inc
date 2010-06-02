@@ -915,6 +915,11 @@ class plugin
         trigger_error(sprintf("Failed to update manager for %s: %s", bold($entry['dn']), $ldap->get_error()));
       }
     }
+
+    // Migrate 'dyn-groups' here. labeledURIObject
+    if(class_available('DynamicLdapGroup')) {
+        DynamicLdapGroup::moveDynGroup($this->config,$src_dn,$dst_dn);
+    }
  
     /* Check if there are gosa departments moved. 
        If there were deps moved, the force reload of config->deps.
