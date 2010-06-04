@@ -21,6 +21,10 @@ class jsonRPC {
         $user   =  $this->config->get_cfg_value('core','gosaRpcUser');
         $passwd =  $this->config->get_cfg_value('core','gosaRpcPassword');
 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($url), "Initiated RPC "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($user), "RPC user: "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($passwd),"RPC password: "); 
+
         // Init Curl handler
         $this->curlHandler = curl_init($url);
 
@@ -35,7 +39,6 @@ class jsonRPC {
         // Try to login 
         $this->login($user, $passwd);
        
-        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,"RPC Login ".$this->get_error() , "Login"); 
     }
         
 
@@ -72,7 +75,15 @@ class jsonRPC {
              $this->__login();
         }
 
+        // Start request
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,"{$method}", "Calling: "); 
         $response = $this->request($method,$params);
+        if($this->success()){
+            DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($response['result']), "Result: "); 
+        }else{
+            DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->get_error())."<br>".$response, "Result (FAILED): "); 
+        }
+
         return($response['result']);
     }
 
