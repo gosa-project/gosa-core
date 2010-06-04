@@ -6,6 +6,7 @@ class jsonRPC {
     private $config;
     private $id;
     private $lastStats = array();
+    private $lastAction = "none";
 
     public function __construct($config, $debug = false) 
     {
@@ -59,13 +60,27 @@ class jsonRPC {
 
     public function __destruct()
     {
-        curl_close($this->curlHandler);
+        if($this->curlHandler){
+             curl_close($this->curlHandler);
+        }
     }
 
     public function __call($method,$params) 
     {
         // Check if handle is still valid!
-        if(! $this->curlHandler) $this->__login();
+        if(!$this->curlHandler && $this->lastAction != 'login'){
+             $this->__login();
+        }
+
+        $response = $this->request($method,$params);
+        return($response['result']);
+    }
+
+    
+    private function request($method, $params)
+    {
+        // Set last action 
+        $this->lastAction = $method;
 
         // Reset stats of last request.
         $this->lastStats = array();
@@ -89,9 +104,10 @@ class jsonRPC {
 
         // Set current result stats.
         $this->lastStats = curl_getinfo($this->curlHandler);
-        return($response['result']);
+    
+        return($response);
     }
-
+    
 
     public static function getHttpStatusCodeMessage($code)
     {
