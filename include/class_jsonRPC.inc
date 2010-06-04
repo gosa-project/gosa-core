@@ -79,7 +79,8 @@ class jsonRPC {
         DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,"{$method}", "Calling: "); 
         $response = $this->request($method,$params);
         if($this->success()){
-            DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($response['result']), "Result: "); 
+            DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,
+                (is_array($response['result']))?$response['result']:bold($response['result']), "Result: "); 
         }else{
             DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->get_error())."<br>".$response, "Result (FAILED): "); 
         }
