@@ -64,6 +64,8 @@ class config  {
   var $filename = "";
   var $last_modified = 0;
 
+    private $jsonRPChandle = NULL; 
+
   public $configRegistry = NULL;
 
   /*! \brief Class constructor of the config class
@@ -297,17 +299,13 @@ class config  {
 
   function getRpcHandle()
   {
-      $server  =  $this->get_cfg_value('core','gosaRpcServer');
-      $user    =  $this->get_cfg_value('core','gosaRpcUser');
-      $passwd  =  $this->get_cfg_value('core','gosaRpcPassword');
-
-      $handle = new jsonRPC($server);
-      $handle->login($user, $passwd);
-
-      //Fixme  Add checks here - login successful aso.
-      return($handle);
+      // Create jsonRPC handle on demand.
+      if(!$this->jsonRPChandle){
+          $this->jsonRPChandle = new jsonRPC($this);
+      }
+      return($this->jsonRPChandle);
   }
-
+    
 
   /*! \brief Get a LDAP link object
    *
