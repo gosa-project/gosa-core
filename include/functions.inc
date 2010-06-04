@@ -89,6 +89,7 @@ define ("DEBUG_ACL",    128); /*! Debug level for ACL infos */
 define ("DEBUG_SI",     256); /*! Debug level for communication with gosa-si */
 define ("DEBUG_MAIL",   512); /*! Debug level for all about mail (mailAccounts, imap, sieve etc.) */
 define ("DEBUG_FAI",   1024); // FAI (incomplete)
+define ("DEBUG_RPC",   2048); /*! Debug level for communication with remote procedures */
 
 /* Rewrite german 'umlauts' and spanish 'accents'
    to get better results */
@@ -209,21 +210,26 @@ function make_seed() {
  * */
 function DEBUG($level, $line, $function, $file, $data, $info="")
 {
-  if (session::global_get('debugLevel') & $level){
-    $output= "DEBUG[$level] ";
-    if ($function != ""){
-      $output.= "($file:$function():$line) - $info: ";
-    } else {
-      $output.= "($file:$line) - $info: ";
+    global $config;
+    $debugLevel = 0;
+    if($config instanceOf config){
+        $debugLevel = $config->get_cfg_value('core', 'debugLevel');
     }
-    echo $output;
-    if (is_array($data)){
-      print_a($data);
-    } else {
-      echo "'$data'";
+    if ($debugLevel & $level){
+        $output= "DEBUG[$level] ";
+        if ($function != ""){
+            $output.= "($file:$function():$line) - $info: ";
+        } else {
+            $output.= "($file:$line) - $info: ";
+        }
+        echo $output;
+        if (is_array($data)){
+            print_a($data);
+        } else {
+            echo "'$data'";
+        }
+        echo "<br>";
     }
-    echo "<br>";
-  }
 }
 
 

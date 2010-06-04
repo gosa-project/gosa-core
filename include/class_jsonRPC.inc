@@ -2,16 +2,14 @@
 class jsonRPC {
 
     private $curlHandler = NULL;
-    private $debug;
     private $config;
     private $id;
     private $lastStats = array();
     private $lastAction = "none";
 
-    public function __construct($config, $debug = false) 
+    public function __construct($config) 
     {
         $this->config = $config;
-        $this->debug = $debug;
         $this->id = 0;
         $this->__login();
     }
@@ -36,6 +34,8 @@ class jsonRPC {
 
         // Try to login 
         $this->login($user, $passwd);
+       
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,"RPC Login ".$this->get_error() , "Login"); 
     }
         
 
