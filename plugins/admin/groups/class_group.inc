@@ -1327,6 +1327,47 @@ class group extends plugin
   {
     plugin::PrepareForCopyPaste($source);
 
+    /* Get samba Domain in case of samba 3 */
+    if ($this->sambaSID != ""){
+      $this->SID= preg_replace ("/-[^-]+$/", "", $this->sambaSID);
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))",array("sambaAlgorithmicRidBase"));
+      if ($ldap->count() != 0){
+        $attrs= $ldap->fetch();
+        if(isset($attrs['sambaAlgorithmicRidBase'])){
+          $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];
+        } else {
+          $this->ridBase= $this->config->get_cfg_value("sambaRidBase");
+        }
+
+        /* Get domain name for SID */
+        $this->sambaDomainName= "DEFAULT";
+        foreach ($this->config->data['SERVERS']['SAMBA'] as $key => $val){
+          if ($val['SID'] == $this->SID){
+            $this->sambaDomainName= $key;
+            break;
+          }
+        }
+      } else {
+        if ($this->config->get_cfg_value("sambaRidBase") != ""){
+          $this->sambaDomainName= "DEFAULT";
+          $this->ridBase= $this->config->get_cfg_value("sambaRidBase");
+          $this->SID= $this->config->get_cfg_value("sid");
+        } else {
+          msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
+        }
+      }
+
+      /* Get group type */
+      $this->groupType= (int)substr(strrchr($this->sambaSID, "-"), 1);
+      if ($this->groupType < 500 || $this->groupType > 553){
+        $this->groupType= 0;
+      }
+      $this->oldgroupType= $this->groupType;
+    }
+
+
     // Detect samba groups and adapt its values.
     $this->smbgroup = in_array('sambaGroupMapping', $source['objectClass']);
     if ($this->smbgroup) { 
