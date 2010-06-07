@@ -36,7 +36,7 @@
     </objectType>
 
     <objectType>
-      <label>Property configured in ldap</label>
+      <label>Property configured in LDAP</label>
       <objectClass>ldap</objectClass>
       <category>all</category>
       <class>all</class>

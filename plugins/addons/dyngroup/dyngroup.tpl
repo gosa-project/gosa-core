@@ -1,6 +1,6 @@
 <h3>{t}List of dynamic rules{/t}</h3>
 
-<table summary="{t}Labeled uri definitions{/t}" style='width:100%'>
+<table summary="{t}Labeled URI definitions{/t}" style='width:100%'>
  <tr>
   <td style='width:40%;'>{t}Base{/t}</td>
   <td>{t}Scope{/t}</td>

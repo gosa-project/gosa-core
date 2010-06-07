@@ -2782,12 +2782,12 @@ function check_schema($cfg,$rfc2307bis = FALSE)
 
     if($rfc2307bis && isset($tmp['posixGroup']['STRUCTURAL'])){
       $checks['posixGroup']['STATUS']           = FALSE;
-      $checks['posixGroup']['MSG']              = _("RFC 2307bis group schema is enabled, but the current LDAP configuration does not support it!");
-      $checks['posixGroup']['INFO']             = _("To use RFC 2307bis groups, the objectClass 'posixGroup' must be AUXILIARY.");
+      $checks['posixGroup']['MSG']              = _("RFC2307bis schema is enabled, but the current LDAP configuration does not support it!");
+      $checks['posixGroup']['INFO']             = _("To use RFC2307bis groups, the objectClass 'posixGroup' must be AUXILIARY.");
     }
     if(!$rfc2307bis && !isset($tmp['posixGroup']['STRUCTURAL'])){
       $checks['posixGroup']['STATUS']           = FALSE;
-      $checks['posixGroup']['MSG']              = _("RFC 2307bis group schema is disabled, but the current LDAP configuration supports it!");
+      $checks['posixGroup']['MSG']              = _("RFC2307bis schema is disabled, but the current LDAP configuration supports it!");
       $checks['posixGroup']['INFO']             = _("To correct this, the objectClass 'posixGroup' must be STRUCTURAL.");
     }
   }

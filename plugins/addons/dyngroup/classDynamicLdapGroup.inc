@@ -102,7 +102,7 @@ class DynamicLdapGroup extends plugin
         
         // At least one entry is required. 
         if(!count($this->labeledURIparsed)){
-            $messages[] = msgPool::required(_("Labeled Uri"));
+            $messages[] = msgPool::required(_("Labeled URI"));
         }  
 
         // Check entries
@@ -324,7 +324,7 @@ class DynamicLdapGroup extends plugin
                 "plSection"     => Array("addon"),
                 "plCategory"    => Array("groups", "department", "ogroups"),
                 "plProvidedAcls" => array(
-                    'labeledURI' =>  _('labeledURI'),
+                    'labeledURI' =>  _('Labeled URI'),
                     )
                 );
     }
