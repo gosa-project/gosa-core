@@ -1185,20 +1185,22 @@ class group extends plugin
 
   function PrepareForCopyPaste($source)
   {
-    plugin::PrepareForCopyPaste($source);
+      plugin::PrepareForCopyPaste($source);
 
-    $this->trustModeDialog->PrepareForCopyPaste($source);
+      $this->trustModeDialog->PrepareForCopyPaste($source);
 
-    if ($this->smbgroup) { 
-      $this->sambaSID = $this->getSambaSID(); 
-    } 
+      // Detect samba groups and adapt its values.
+      $this->smbgroup = in_array('sambaGroupMapping', $source['objectClass']);
+      if ($this->smbgroup) { 
+          $this->sambaSID = $this->getSambaSID(); 
+      } 
 
-    $this->memberUid = array();
-    if(isset($source['memberUid'])){
-      for($i = 0 ; $i < $source['memberUid']['count']; $i ++){
-        $this->memberUid[] = $source['memberUid'][$i];
+      $this->memberUid = array();
+      if(isset($source['memberUid'])){
+          for($i = 0 ; $i < $source['memberUid']['count']; $i ++){
+              $this->memberUid[] = $source['memberUid'][$i];
+          }
       }
-    }
   }
 
 
