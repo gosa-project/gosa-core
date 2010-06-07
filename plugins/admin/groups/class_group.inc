@@ -1327,6 +1327,8 @@ class group extends plugin
   {
     plugin::PrepareForCopyPaste($source);
 
+    // Detect samba groups and adapt its values.
+    $this->smbgroup = in_array('sambaGroupMapping', $source['objectClass']);
     if ($this->smbgroup) { 
       $this->sambaSID = $this->getSambaSID(); 
     } 
