@@ -37,7 +37,7 @@ class userinfo
   var $ocMapping= array();
   var $groups= array();
   var $result_cache =array();
-  var $ignoreACL = FALSE;
+  var $ignoreACL = NULL;
   var $ACLperPath = array();
   var $ACLperPath_usesFilter = array();
 
@@ -76,8 +76,6 @@ class userinfo
     $this->dn= $userdn;
     $this->uid= $attrs['uid'][0];
     $this->ip= $_SERVER['REMOTE_ADDR'];
-
-    $this->ignoreACL = ($this->config->get_cfg_value("core","ignoreAcl") == $this->dn);
 
     /* Initialize ACL_CACHE */
     $this->reset_acl_cache();
@@ -764,6 +762,9 @@ class userinfo
    */ 
   function ignore_acl_for_current_user()
   {
+    if($this->ignoreACL === NULL){
+        $this->ignoreACL = ($this->config->get_cfg_value("core","ignoreAcl") == $this->dn);
+    }
     return($this->ignoreACL);
   }
 
