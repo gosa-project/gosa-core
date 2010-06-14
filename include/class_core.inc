@@ -328,7 +328,7 @@ class core extends plugin {
 
                         array(
                                 "name"          => "forceGlobals",
-                                "type"          => "bool",
+                                "type"          => "noLdap",
                                 "default"       => "false",
                                 "description"   => _("The 'forceGlobals' statement enables PHP security checks to force register_global settings to be switched off."),
                                 "check"         => "gosaProperty::isBool",
@@ -338,7 +338,7 @@ class core extends plugin {
 
                         array(
                                 "name"          => "forceSSL",
-                                "type"          => "bool",
+                                "type"          => "noLdap",
                                 "default"       => "false",
                                 "description"   => _("The 'forceSSL' statement enables PHP security checks to force encrypted access to the web interface. GOsa will try to redirect to the same URL - just with https://"),
                                 "check"         => "gosaProperty::isBool",
@@ -398,7 +398,7 @@ class core extends plugin {
 
                         array(
                                 "name"          => "warnSSL",
-                                "type"          => "bool",
+                                "type"          => "noLdap",
                                 "default"       => "true",
                                 "description"   => _("The 'warnSSL' statement enables PHP security checks to detect non encrypted access to the web interface. GOsa will display a warning in this case."),
                                 "check"         => "gosaProperty::isBool",

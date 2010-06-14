@@ -223,6 +223,9 @@ class propertyEditor extends management
         $value = addslashes($value);
 
         switch($type[0]){
+            case 'noLdap':
+                $res = $value." &nbsp;<i>(".CONFIG_DIR.'/'.CONFIG_FILE.")</i>";
+                break;
             case 'bool':
                 $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
                 $false = (preg_match('/true/i', $value)) ? '' : "selected";
