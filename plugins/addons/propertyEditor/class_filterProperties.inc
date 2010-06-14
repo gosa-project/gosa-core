@@ -33,7 +33,7 @@ class filterCONFIGPROPERTIES {
                 list($name,$value) = preg_split("/=/",$test);
                 $value =preg_replace("/\*/",'',$value);
                 if(empty($value)) $value='.*';
-                if(!isset($entry[$name][0]) || !preg_match("/{$value}/",$entry[$name][0])){
+                if(!isset($entry[$name][0]) || !preg_match("/{$value}/i",$entry[$name][0])){
                     $found = false;
                 }
             } 
