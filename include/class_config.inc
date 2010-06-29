@@ -253,6 +253,10 @@ class config  {
                   $this->data['PATHMENU']= array(); ;
                   break;
 
+      case 'SHORTCUTMENU':
+                  $this->data['SHORTCUTMENU']= array(); ;
+                  break;
+
                   /* Inser plugins */
       case 'PLUGIN':
                   if ($this->tags[$this->level-3] == 'MENU' &&
@@ -262,6 +266,9 @@ class config  {
                   }
                   if ($this->tags[$this->level-2] == 'PATHMENU'){
                     $this->data['PATHMENU'][$this->gpc++]= $attrs;
+                  }
+                  if ($this->tags[$this->level-2] == 'SHORTCUTMENU'){
+                    $this->data['SHORTCUTMENU'][$this->gpc++]= $attrs;
                   }
                   if ($this->tags[$this->level-2] == 'SERVICEMENU'){
                     $this->data['SERVICE'][$attrs['CLASS']]= $attrs;

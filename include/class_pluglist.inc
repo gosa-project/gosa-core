@@ -313,6 +313,16 @@ class pluglist
 
       $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
+      // Now load the icon menu and try to register the plugins in the pluglist
+      //  if this fails for some reason, then remove the plugins from the menu.
+      if(isset($this->config->data['SHORTCUTMENU'])){
+        foreach($this->config->data['SHORTCUTMENU'] as $id => $plugin){
+          if(!$this->registerPlugin($plugin)){
+            unset($this->config->data['SHORTCUTMENU'][$id]); 
+          } 
+        }
+      }
+
       // Now load the path menu and try to register the plugins in the pluglist
       //  if this fails for some reason, then remove the plugin from the menu.
       if(isset($this->config->data['PATHMENU'])){
@@ -324,15 +334,28 @@ class pluglist
       }
 
       $this->pathMenu = 
-        "\n        <div class='plugin-path'>".
-        "\n          <ul class='path-navigation'>".
-        "\n            <li class='left right-border' onClick=\"openPlugin('');\" title='"._("Dash board")."'>".
-        "\n              ".image(get_template_path("images/dashBoard.png")).
-        "\n            </li>".
-        "\n            <li class='left' onClick=\"openPlugin('');\" title='"._("Back to main menu")."'>".
-        "\n              ".image(get_template_path("images/home.png")).
-        "\n            </li>".
-        "\n            %navigator%";
+          "\n        <div class='plugin-path'>".
+          "\n          <ul class='path-navigation'>";
+
+      // Check if we've at least one entry defined ih the iconmenu
+      if(isset($this->config->data['SHORTCUTMENU'])){
+          $icfg= &$this->config->data['SHORTCUTMENU'];
+          $rcfg = array_reverse($icfg);
+          foreach($rcfg as $id => $plug){
+              list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
+
+              // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+              if(isset($disabledPlugins[$plug['CLASS']])) continue;
+
+              $cssClass= (!isset($rcfg[$id+1]))? 'left' : 'left right-border';
+              $this->pathMenu.= "            
+                  <li class='{$cssClass}' onClick='openPlugin({$index})' title='{$title}'>".
+                  image(get_template_path($shortIcon))."</li>";
+          }
+      }
+
+      // Place the navigator part, this will be replaced during runtime.
+      $this->pathMenu .= "\n            %navigator%";
 
       // Check if we've at least one entry defined ih the pathmenu
       if(isset($this->config->data['PATHMENU'])){
@@ -367,6 +390,8 @@ class pluglist
     $plHeadline= _($vars['plHeadline']);
     $plDescription= _($vars['plDescription']);
     $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon']: "plugin.png";
+    $plShortIcon = (isset($vars['plShortIcon'])) ? $vars['plShortIcon']: "plugin.png";
+
     $index= $this->get_index($class);
 
     /* Check if class is available. If the class doesn't exists display error symbol
@@ -385,7 +410,14 @@ class pluglist
     }else{
       $image = $plIcon; 
     }
-    return(array($index, $plHeadline, $plDescription, $image));
+    // Detect the correct position of the plugin icon
+    if(!preg_match("/\//",$plShortIcon)){
+      $shortImage= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', 
+            $class_mapping[$class])."/images/$plShortIcon");
+    }else{
+      $shortImage = $plShortIcon; 
+    }
+    return(array($index, $plHeadline, $plDescription, $image, $shortImage));
   }
 
 
