@@ -7,6 +7,14 @@ class dashBoard extends plugin
    var $plShortIcon = 'dashBoard.png';
    var $plIcon = 'dashBoard.png';
 
+
+    function execute()
+    {
+        $smarty = get_smarty();
+
+        return($smarty->fetch(get_template_path('dashBoard.tpl', TRUE)));
+        
+    }
 }
 
 ?>
