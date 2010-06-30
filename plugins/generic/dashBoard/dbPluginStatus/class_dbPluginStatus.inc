@@ -23,7 +23,7 @@ class dbPluginStatus extends plugin
         $this->pluginList->setDeleteable(false);
         $this->pluginList->setEditable(false);
         $this->pluginList->setColspecs(array('30px','120px','*','100px'));
-        $this->pluginList->setHeader(array('?',_("Name"),_("Descriptio"),_("Status")));
+        $this->pluginList->setHeader(array('?',_("Name"),_("Description"),_("Status")));
         $this->pluginList->setWidth("100%");
         $this->pluginList->setDefaultSortColumn(1);
         $this->pluginList->setHeight("200px");
