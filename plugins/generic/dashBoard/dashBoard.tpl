@@ -4,7 +4,6 @@
         <td style='width:50%;' class='right-border'>
             
             <!-- Channel -->    
-            <h3>{t}Channels{/t}</h3> 
 
             {$dbChannelStatus}
 
@@ -14,7 +13,6 @@
         <td>
             
             <!-- Plugins Status -->    
-            <h3>{t}Plugin status{/t}</h3> 
 
             {$dbPluginStatus}
 
@@ -27,7 +25,6 @@
         <td style='width:50%;' class='right-border'>
             
             <!-- Messages -->    
-            <h3>{t}Notifications{/t}</h3> 
     
             {$dbNotifications}
 
@@ -37,7 +34,6 @@
         <td>
             
             <!-- RSS Feeds -->    
-            <h3>{t}Information{/t}</h3> 
     
             {$dbInformation}
 
