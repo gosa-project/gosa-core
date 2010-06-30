@@ -1,7 +1,7 @@
 
 <table style='width:100%' summary="{t}GOsa dash board{/t}">
     <tr>
-        <td style='width:50%;' class='right-border'>
+        <td style='width:50%; padding-right:5px;' class='right-border'>
             
             <!-- Channel -->    
 
@@ -22,7 +22,7 @@
     </tr>
     <tr><td colspan="2"><hr></td></tr>
     <tr>
-        <td style='width:50%;' class='right-border'>
+        <td style='width:50%; padding-right:5px;' class='right-border'>
             
             <!-- Messages -->    
     
