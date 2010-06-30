@@ -1,6 +1,6 @@
 <?php
 
-class dbPluginStatus extends plugin
+class dbChannelStatus extends plugin
 {
     function __construct($config)
     {
@@ -10,7 +10,7 @@ class dbPluginStatus extends plugin
     function execute()
     {
         $smarty = get_smarty();
-        return($smarty->fetch(get_template_path('dbPluginStatus/contents.tpl', TRUE)));
+        return($smarty->fetch(get_template_path('dbChannelStatus/contents.tpl', TRUE)));
     }
 
     function save_object()
