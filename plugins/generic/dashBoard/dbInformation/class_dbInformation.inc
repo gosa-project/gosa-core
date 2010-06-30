@@ -54,21 +54,6 @@ class dbInformation extends plugin
         parent::save_object();
         $this->feedList->save_object();
     }
-
-    function save()
-    {
-        parent::save();
-    }
-
-    function check()
-    {
-        return(parent::check());
-    }
-
-    function remove_from_parent()
-    {
-        parent::remove_from_parent();
-    }
 }
 
 ?>
