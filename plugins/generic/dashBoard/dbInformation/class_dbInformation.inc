@@ -10,10 +10,10 @@ class dbInformation extends plugin
         $this->feedList = new sortableListing();
         $this->feedList->setDeleteable(false);
         $this->feedList->setEditable(false);
-#        $this->feedList->setColspecs(array('30px','120px','*','100px'));
-#        $this->feedList->setHeader(array('?',_("Name"),_("Descriptio"),_("Status")));
+        #$this->feedList->setColspecs(array('130px','*'));
+        #$this->feedList->setHeader(array(_("Date"),_("Description")));
         $this->feedList->setWidth("100%");
-#        $this->feedList->setDefaultSortColumn(1);
+        #$this->feedList->setDefaultSortColumn(0);
         $this->feedList->setHeight("200px");
         $this->feedList->setAcl("rwcdm");
     }
@@ -21,13 +21,16 @@ class dbInformation extends plugin
     function execute()
     {
         $smarty = get_smarty();
-        $feeds = rssReader::feadToArray('http://www.computerbild.de/rssfeed_2261.html?node=10');
-
+        $feeds = rssReader::feadToArray(array(
+                    'http://www.computerbild.de/rssfeed_2261.html?node=10',
+                    'http://www.charts-portal.de/games/Computerspiele.xml'));
+        $feeds = rssReader::sortFeedResultBy($feeds, 'timestamp');
         $data = $lData = array();
         foreach($feeds as $key => $feed){
             $data[$key] = $feed;
-            $lData[$key] = array('data'=> array(date('H:i:s', $feed['timestamp']),$feed['title']));
+            $lData[$key] = array('data'=> array($feed['title']));
         }
+
         $this->feedList->setListData($data, $lData);
         $this->feedList->update();
         $smarty->assign('feedList', $this->feedList->render());
