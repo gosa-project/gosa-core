@@ -1,1 +1,1 @@
-Test
+{$pluginList}
