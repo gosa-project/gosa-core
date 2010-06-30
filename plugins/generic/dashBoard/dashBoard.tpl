@@ -5,7 +5,8 @@
             
             <!-- Channel -->    
             <h3>{t}Channels{/t}</h3> 
-    
+
+            {$dbChannelStatus}
 
             <!--Chanel  END -->
 
@@ -28,6 +29,7 @@
             <!-- Messages -->    
             <h3>{t}Advices{/t}</h3> 
     
+            {$dbAdvices}
 
             <!-- Messages  END -->
 
@@ -37,6 +39,7 @@
             <!-- RSS Feeds -->    
             <h3>{t}Information{/t}</h3> 
     
+            {$dbInformation}
 
             <!-- RSS Feeds  END -->
 
