@@ -57,6 +57,15 @@ class configRegistry{
         $this->reload();
     }
 
+    
+    /*! \brief      Returns a list of plugins used by GOsa.
+        @return     Array       An array containing all plugins with theis plInfo data.
+     */
+    function getListOfPlugins()
+    {
+        return($this->classesWithInfo);
+    }
+
 
     /*! \brief      Checks whether the schema check was called in the current session or not.
      *  @return     Boolean     True if check was already called
