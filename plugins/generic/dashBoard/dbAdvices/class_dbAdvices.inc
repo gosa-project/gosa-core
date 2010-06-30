@@ -18,7 +18,8 @@ class dbAdvices extends plugin
     function execute()
     {
         // Get logs as RSS feed.
-        $source = file_get_contents('http://10.3.65.162/gosa/gosa-all/gosa/html/index.html');
+        $rsyslog = new rsyslog($this->config);
+        $source = $rsyslog->logToRss(); 
 
         // Read Feeds and sort the results 
         $feeds = rssReader::parseFeedFromSource(array($source));
