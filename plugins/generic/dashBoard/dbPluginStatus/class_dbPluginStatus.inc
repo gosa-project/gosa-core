@@ -19,11 +19,13 @@ class dbPluginStatus extends plugin
         $this->disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
    
         // Construct the plugin list.
-        $this->pluginList= new sortableListing($this->gosaLoginRestriction);
+        $this->pluginList= new sortableListing();
         $this->pluginList->setDeleteable(false);
         $this->pluginList->setEditable(false);
-        $this->pluginList->setColspecs(array('*'));
+        $this->pluginList->setColspecs(array('30px','120px','*','100px'));
+        $this->pluginList->setHeader(array('?',_("Name"),_("Descriptio"),_("Status")));
         $this->pluginList->setWidth("100%");
+        $this->pluginList->setDefaultSortColumn(1);
         $this->pluginList->setHeight("200px");
         $this->pluginList->setAcl("rwcdm");
 
@@ -49,10 +51,14 @@ class dbPluginStatus extends plugin
                 $desc = $plInfo['plDescription']; 
             }
 
+            // Build image
+            $image = image('images/true.png');
+
             // Detect the plugin status
             $status = 'OK';
             if(isset($this->disabledPlugins[$plugin])){
                 $status = 'Failure';
+                $image = image('images/small_error.png');
 
                 // Check if an invalid schema is the reason
                 $reasons = $this->config->configRegistry->getSchemaResults();
@@ -72,7 +78,7 @@ class dbPluginStatus extends plugin
 
             // Add entry/line to the list
             $data[$plugin] = $plInfo;
-            $lData[$plugin] = array('data' => array($name,$desc, $status));
+            $lData[$plugin] = array('data' => array($image,$name,$desc, $status));
         }
         $this->pluginList->setListData($data,$lData);
         $this->pluginList->update();
