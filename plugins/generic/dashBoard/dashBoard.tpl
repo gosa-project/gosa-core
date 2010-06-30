@@ -27,9 +27,9 @@
         <td style='width:50%;' class='right-border'>
             
             <!-- Messages -->    
-            <h3>{t}Advices{/t}</h3> 
+            <h3>{t}Notifications{/t}</h3> 
     
-            {$dbAdvices}
+            {$dbNotifications}
 
             <!-- Messages  END -->
 

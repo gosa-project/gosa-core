@@ -1,6 +1,6 @@
 <?php
 
-class dbAdvices extends plugin
+class dbNotifications extends plugin
 {
     function __construct($config)
     {
@@ -37,7 +37,7 @@ class dbAdvices extends plugin
         // Generate the HTML content
         $smarty = get_smarty();
         $smarty->assign('adviceList', $this->adviceList->render());
-        return($smarty->fetch(get_template_path('dbAdvices/contents.tpl', TRUE)));
+        return($smarty->fetch(get_template_path('dbNotifications/contents.tpl', TRUE)));
     }
 
     function save_object()
