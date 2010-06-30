@@ -31,11 +31,7 @@ class dbInformation extends plugin
         }
     
         // Read Feeds and sort the results 
-        $feeds = rssReader::feadToArray(array(
-                    'http://www.uweschwanz.com/de/rss/',
-                    'http://www.aviationpower.de/rss_de.php',
-                    'http://www.computerbild.de/rssfeed_2261.html?node=10',
-                    'http://www.charts-portal.de/games/Computerspiele.xml'));
+        $feeds = rssReader::parseFeedFromUrl(array('http://www.uweschwanz.com/de/rss/'));
         $feeds = rssReader::sortFeedResultBy($feeds, 'timestamp');
 
         // Append the results to the list.
