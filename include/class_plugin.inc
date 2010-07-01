@@ -1530,7 +1530,7 @@ class plugin
    *            Replaces placeholder by class values of this plugin instance.
    *  @param    Allows to a add special replacements.
    */
-  static function callHook($plugin, $cmd, $addAttrs= array())
+  static function callHook($plugin, $cmd, $addAttrs= array(), &$returnOutput = array(), &$returnCode = NULL)
   {
     global $config;
     $command = $config->configRegistry->getPropertyValue(get_class($plugin),$cmd);
@@ -1581,14 +1581,22 @@ class plugin
       }
 
       if (check_command($command)){
+
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command,"Execute");
-        exec($command,$arr);
-        if(is_array($arr)){
+        exec($command, $arr, $returnCode);
+        $returnOutput = $arr;
+
+        if($returnCode != 0){
+          $str = implode("\n",$arr);
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: ".$returnCode);
+          $message= msgPool::cmdexecfailed($cmd,$command, get_class($plugin));
+          msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+        }elseif(is_array($arr)){
           $str = implode("\n",$arr);
           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$str);
         }
       } else {
-        $message= msgPool::cmdnotfound("POSTCREATE", get_class($plugin));
+        $message= msgPool::cmdinvalid($cmd,$command, get_class($plugin));
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }
