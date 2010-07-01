@@ -87,6 +87,10 @@ class pluglist
   {
     global $class_mapping;
 
+    // Clean ACL string, we do not want any spaces or lines breaks here. 
+    $plug['ACL'] = trim($plug['ACL']);
+
+    // Check class
     if (!isset($plug['CLASS'])){
       msg_dialog::display(
           _("Configuration error"),
@@ -128,7 +132,11 @@ class pluglist
     }
 
     foreach($acls_to_check as $acl_to_check){
+    
+      // Remove spaces and line breaks.
       $acl_to_check = trim($acl_to_check);
+      $acl_to_check = preg_replace("/ /","",$acl_to_check);
+        
 
       /* Check if the given acl tag is only valid for self acl entries  
        *          <plugin acl="users/user:self" class="user"...  
