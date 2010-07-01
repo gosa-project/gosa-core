@@ -77,8 +77,21 @@ class password extends plugin
         $smarty->assign("proposalEnabled" , $this->proposalEnabled);
         $smarty->assign("proposalSelected" , $this->proposalSelected);
 
+        if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;
+
         /* Pwd change requested */
         if (isset($_POST['password_finish'])){
+    
+            if($this->proposalSelected){
+                $current_password = get_post('current_password');
+                $new_password = $this->proposal;
+                $repeated_password = $this->proposal;
+            }else{
+                $current_password = get_post('current_password');
+                $new_password = get_post('new_password');
+                $repeated_password = get_post('repeated_password');
+            }
+
 
             /* Should we check different characters in new password */
             $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
@@ -90,7 +103,9 @@ class password extends plugin
 
             /* Call external password quality hook ?*/
             $check_hook   = $this->config->get_cfg_value("core","passwordHook") != "";
-            $hook         = $this->config->get_cfg_value("core","passwordHook")." ".$ui->username." ".$_POST['current_password']." ".$_POST['new_password'];
+            $hook         = $this->config->get_cfg_value("core","passwordHook")." ".
+                        $ui->username." ".$current_password." ".$new_password;
+
             if($check_hook){
                 exec($hook,$resarr);
                 $check_hook_output = "";
@@ -100,22 +115,22 @@ class password extends plugin
             }
 
             /* Check given values */    
-            if(!isset($_POST['current_password']) || empty($_POST['current_password'])){
+            if(empty($current_password)){
                 msg_dialog::display(_("Password change"),
                         _("You need to specify your current password in order to proceed."),WARNING_DIALOG);
-            }elseif ($_POST['new_password'] != $_POST['repeated_password']){
+            }elseif ($new_password  != $repeated_password){
                 msg_dialog::display(_("Password change"),
                         _("The passwords you've entered as 'New password' and 'Repeated new password' do not match."),WARNING_DIALOG);
-            } elseif ($_POST['new_password'] == ""){
+            } elseif ($new_password == ""){
                 msg_dialog::display(_("Password change"),
                         _("The password you've entered as 'New password' is empty."),WARNING_DIALOG);
-            }elseif($check_differ && (substr($_POST['current_password'], 0, $differ) == substr($_POST['new_password'], 0, $differ))){
+            }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
                 msg_dialog::display(_("Password change"),
                         _("The password used as new and current are too similar."),WARNING_DIALOG);
-            }elseif($check_length && (strlen($_POST['new_password']) < $length)){
+            }elseif($check_length && (strlen($new_password) < $length)){
                 msg_dialog::display(_("Password change"),
                         _("The password used as new is to short."),WARNING_DIALOG);
-            }elseif(!passwordMethod::is_harmless($_POST['new_password'])){
+            }elseif(!passwordMethod::is_harmless($new_password)){
                 msg_dialog::display(_("Password change"),
                         _("The password contains possibly problematic unicode characters!"),WARNING_DIALOG);
             }elseif($check_hook && $check_hook_output != ""){
@@ -126,7 +141,7 @@ class password extends plugin
                 /* Try to connect via current password */
                 $tldap = new LDAP(
                         $ui->dn, 
-                        $_POST['current_password'],
+                        $current_password,
                         $this->config->current['SERVER'],
                         $this->config->get_cfg_value("core","ldapFollowReferrals") == "true",
                         $this->config->get_cfg_value("core","ldapTLS") == "true");
@@ -142,11 +157,11 @@ class password extends plugin
                         msg_dialog::display(_("Password change"),
                                 _("You have no permission to change your password."),WARNING_DIALOG);
                     }else{
-                        $this->change_password($ui->dn, $_POST['new_password']);
+                        $this->change_password($ui->dn, $new_password);
                         gosa_log ("User/password has been changed");
-                        $ui->password= $_POST['new_password'];
+                        $ui->password= $new_password;
                         session::set('ui',$ui);
-#$this->handle_post_events("modify",array("userPassword" => $_POST['new_password']));
+#$this->handle_post_events("modify",array("userPassword" => $new_password));
                         return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
                     }
                 }
