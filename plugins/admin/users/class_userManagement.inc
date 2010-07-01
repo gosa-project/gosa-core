@@ -228,6 +228,9 @@ class userManagement extends management
 
   function handlePasswordQueue()
   {
+    // skip if nothing is to do
+    if(empty($this->dn) && !count($this->pwd_change_queue)) return;
+
     $smarty = get_smarty();
 
     // Get next entry from queue.
