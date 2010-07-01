@@ -83,31 +83,52 @@ class pluglist
    *            Checks existence and ACL for the given plugin.
    *            Returns true in case of success else false. 
    */
-  function registerPlugin($plug)
+  function registerPlugin(&$plug)
   {
-    global $class_mapping;
+      global $class_mapping;
 
-    // Clean ACL string, we do not want any spaces or lines breaks here. 
-    $plug['ACL'] = trim($plug['ACL']);
+      // Clean ACL string, we do not want any spaces or lines breaks here. 
+      $plug['ACL'] = trim($plug['ACL']);
 
-    // Check class
-    if (!isset($plug['CLASS'])){
-      msg_dialog::display(
-          _("Configuration error"),
-          _("The configuration format has changed: please run the setup again!"),
-          FATAL_ERROR_DIALOG);
-      exit();
-    }
-    if (!plugin_available($plug['CLASS'])){
-      return(FALSE);
-    }
-    if (!$this->check_access($plug['ACL'])){
-      return(FALSE);
-    }
-    $this->dirlist[$this->index] = dirname($class_mapping[$plug['CLASS']]);
-    $this->pluginList[$this->index] = $plug['CLASS'];
-    $this->index++;
-    return(TRUE);
+      // Clean ACL string, we do not want any spaces or lines breaks here.
+      $acl = trim($plug['ACL']);
+      if(preg_match("/,/",$acl)){
+          $acls = explode(",",$acl);
+      }else{
+          $acls = array($acl);
+      }
+      foreach($acls as $key => $aclEntry){
+          $aclEntry = trim($aclEntry);
+          $tmp = preg_replace("/[^a-z0-9\/:]/i","",$aclEntry);
+
+          // Check if cleaned 'acl' tag doesn't match the configured one from the gosa.conf.
+          // Display a notification to tell the user that there is something wrong.
+          if($tmp != $aclEntry){
+              trigger_error("Please check acl='{$aclEntry}' tag for plugin '{$plug['CLASS']}' in your gosa.conf, it contains invalid characters!" );
+          }
+          $acls[$key] = $tmp;
+      }
+      $plug['ACL'] = implode(',',$acls);
+
+
+      // Check class
+      if (!isset($plug['CLASS'])){
+          msg_dialog::display(
+                  _("Configuration error"),
+                  _("The configuration format has changed: please run the setup again!"),
+                  FATAL_ERROR_DIALOG);
+          exit();
+      }
+      if (!plugin_available($plug['CLASS'])){
+          return(FALSE);
+      }
+      if (!$this->check_access($plug['ACL'])){
+          return(FALSE);
+      }
+      $this->dirlist[$this->index] = dirname($class_mapping[$plug['CLASS']]);
+      $this->pluginList[$this->index] = $plug['CLASS'];
+      $this->index++;
+      return(TRUE);
   }
 
 
@@ -187,7 +208,7 @@ class pluglist
       if(isset($this->config->data['MENU'])){
         foreach($this->config->data['MENU'] as $section => $plugins){
           foreach($plugins as $id => $plug){
-            if(!$this->registerPlugin($plug)){ 
+            if(!$this->registerPlugin($this->config->data['MENU'][$section][$id])){ 
               unset($this->config->data['MENU'][$section][$id]); 
             }
           }
@@ -325,7 +346,7 @@ class pluglist
       //  if this fails for some reason, then remove the plugins from the menu.
       if(isset($this->config->data['SHORTCUTMENU'])){
         foreach($this->config->data['SHORTCUTMENU'] as $id => $plugin){
-          if(!$this->registerPlugin($plugin)){
+          if(!$this->registerPlugin($this->config->data['SHORTCUTMENU'][$id])){
             unset($this->config->data['SHORTCUTMENU'][$id]); 
           } 
         }
@@ -335,7 +356,7 @@ class pluglist
       //  if this fails for some reason, then remove the plugin from the menu.
       if(isset($this->config->data['PATHMENU'])){
         foreach($this->config->data['PATHMENU'] as $id => $plugin){
-          if(!$this->registerPlugin($plugin)){
+          if(!$this->registerPlugin($this->config->data['PATHMENU'][$id])){
             unset($this->config->data['PATHMENU'][$id]); 
           } 
         }
