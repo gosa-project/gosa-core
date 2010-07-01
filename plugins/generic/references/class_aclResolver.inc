@@ -292,7 +292,7 @@ class aclResolver
             $str .= "<li><i>".$name.":</i> ";
             $str .= "<ul class='acl-list'>";
             if(preg_match("/s/", $acl)){
-                $str.="<li><u>"._("Grant permission to owner").'</u></li>'; 
+                $str.="<li><u>"._("Restrict changes to user's own object").'</u></li>'; 
             }
             if(preg_match("/r/", $acl)) $str.="<li>"._("read").'</li>'; 
             if(preg_match("/w/", $acl)) $str.="<li>"._("write").'</li>'; 
