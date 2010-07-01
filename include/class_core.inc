@@ -286,6 +286,16 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "passwordProposalHook",
+                                "type"          => "command",
+                                "default"       => "",
+                                "description"   => _("The 'passwordProposalHook' can be used to let GOsa generate password proposals for you. Whenever you change a password, you can then decide whether to use the proposal or to manually specify a password.")." "._("Here is an example command:")." /usr/bin/apg -n1",
+                                "check"         => "gosaProperty::isCommand",
+                                "migrate"       => "",
+                                "group"         => "password",
+                                "mandatory"     => FALSE),
+
+                        array(
                                 "name"          => "displayErrors",
                                 "type"          => "bool",
                                 "default"       => "false",
