@@ -336,8 +336,15 @@ class passwordMethod
     {
         if($config->configRegistry->propertyExists('core', 'passwordProposalHook')){
             $value = $config->configRegistry->getPropertyValue('core', 'passwordProposalHook');
-            echo $value;
+            $core = new core($config);
+
+            // No execute the hook and fetch the results.
+            plugin::callHook($core, 'passwordProposalHook', $addAttrs= array(), $ret);
+            if(count($ret) && !empty($ret[0])){
+                return($ret[0]);
+            }
         }
+        return('');
     }
 
 
