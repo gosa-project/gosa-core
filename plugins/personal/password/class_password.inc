@@ -46,9 +46,7 @@ class password extends plugin
     function refreshProposal()
     {
         $this->proposal = passwordMethod::getPasswordProposal($this->config);
-        if($this->proposal != ""){
-            $this->proposalEnabled  =TRUE;
-        }
+        $this->proposalEnabled = (!empty($this->proposal));
     }
 
 

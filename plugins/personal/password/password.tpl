@@ -6,7 +6,7 @@
 
 <hr>
 
-{if !proposalEnabled}
+{if !$proposalEnabled}
   <table cellpadding=4 border=0 summary="{t}Password change dialog{/t}">
     <tr>
       <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
