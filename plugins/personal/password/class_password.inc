@@ -27,18 +27,28 @@ class password extends plugin
     var $plDescription  = "Change user password";
 
     var $proposal = "";
+    var $proposalEnabled = FALSE;
+    var $proposalSelected = FALSE;
 
     function password(&$config, $dn= NULL, $parent= NULL)
     {
         plugin::plugin($config, $dn, $parent);
 
-        $this->reloadProposal();
+        // Try to generate a password proposal, if this is successfull 
+        //  then preselect the proposal usage. 
+        $this->refreshProposal();
+        if($this->proposal != ""){
+            $this->proposalSelected = TRUE;
+        }
     }
 
 
-    function reloadProposal()
+    function refreshProposal()
     {
         $this->proposal = passwordMethod::getPasswordProposal($this->config);
+        if($this->proposal != ""){
+            $this->proposalEnabled  =TRUE;
+        }
     }
 
 
@@ -60,6 +70,12 @@ class password extends plugin
                 return($smarty->fetch(get_template_path("nochange.tpl", TRUE)));
             }
         }
+        
+        // Refresh proposal if requested
+        if(isset($_POST['refreshProposal'])) $this->refreshProposal();
+        $smarty->assign("proposal" , $this->proposal);
+        $smarty->assign("proposalEnabled" , $this->proposalEnabled);
+        $smarty->assign("proposalSelected" , $this->proposalSelected);
 
         /* Pwd change requested */
         if (isset($_POST['password_finish'])){
