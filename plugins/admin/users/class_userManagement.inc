@@ -42,6 +42,10 @@ class userManagement extends management
   protected $aclPlugin   = "user";
   protected $objectName   = "user";
 
+  protected $proposal = "";
+  protected $proposalEnabled = FALSE;
+  protected $proposalSelected = FALSE;
+
   function __construct($config,$ui)
   {
     $this->config = $config;
@@ -115,7 +119,7 @@ class userManagement extends management
     if(isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
     if(isset($_POST['password_cancel'])){
       $action['action'] = "passwordCancel";
-    }elseif((count($this->pwd_change_queue) || isset($_POST['password_finish']))){
+    }elseif((count($this->pwd_change_queue) || isset($_POST['password_finish']) || isset($_POST['refreshProposal']))){
       $action['action'] = "passwordQueue";
     }
     return($action);
@@ -226,64 +230,106 @@ class userManagement extends management
   }
 
 
+
+  function refreshProposal()
+  {
+      $this->proposal = passwordMethod::getPasswordProposal($this->config);
+      $this->proposalEnabled = (!empty($this->proposal));
+  }
+
+
   function handlePasswordQueue()
   {
     // skip if nothing is to do
     if(empty($this->dn) && !count($this->pwd_change_queue)) return;
 
+    // Refresh proposal if requested
+    if(isset($_POST['refreshProposal'])) $this->refreshProposal();
+    if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;
+
     $smarty = get_smarty();
+    $smarty->assign("proposal" , $this->proposal);
+    $smarty->assign("proposalEnabled" , $this->proposalEnabled);
+    $smarty->assign("proposalSelected" , $this->proposalSelected);
 
     // Get next entry from queue.
     if(empty($this->dn) && count($this->pwd_change_queue)){
-      $this->dn = array_pop($this->pwd_change_queue);
-      set_object_info($this->dn);
-      return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
+
+        // Generate new proposal
+        $this->refreshProposal();
+        $this->proposalSelected = ($this->proposal != "");
+        $smarty->assign("proposal" , $this->proposal);
+        $smarty->assign("proposalEnabled" , $this->proposalEnabled);
+        $smarty->assign("proposalSelected" , $this->proposalSelected);
+
+        $this->dn = array_pop($this->pwd_change_queue);
+        set_object_info($this->dn);
+        return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
+    }
+
+    // If we've just refreshed the proposal then do not check the password for validity.
+    if(isset($_POST['refreshProposal'])){
+        return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
     }
 
     // Check permissions
-    $dn  = $this->dn;
-    $acl = $this->ui->get_permissions($dn, "users/password");
-    $cacl= $this->ui->get_permissions($dn, "users/user");
-    if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)){
-      $message= array();
-      if ($_POST['new_password'] != $_POST['repeated_password']){
-        $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-      } else {
-        if ($_POST['new_password'] == ""){
-          $message[] = msgPool::required(_("New password"));
-        }
-      }
+    if(isset($_POST['password_finish'])){
 
-      // Display errors
-      if (count($message) != 0){
-        msg_dialog::displayChecks($message);
-        return($smarty->fetch(get_template_path('password.tpl', TRUE)));
-      }
+        $dn  = $this->dn;
+        $acl = $this->ui->get_permissions($dn, "users/password");
+        $cacl= $this->ui->get_permissions($dn, "users/user");
+        if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)){
 
-      // Change cassword 
-      if(isset($this->force_hash_type[$this->dn])){
-        if(!change_password ($this->dn, $_POST['new_password'],0,$this->force_hash_type[$this->dn])){
-          return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+            // Get posted passwords
+            if($this->proposalSelected){
+                $new_password = $this->proposal;
+                $repeated_password = $this->proposal;
+            }else{
+                $new_password = get_post('new_password');
+                $repeated_password = get_post('repeated_password');
+            }
+
+            // Check posted passwords now.            
+            $message= array();
+            if ($new_password != $repeated_password){
+                $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+            } else {
+                if ($new_password == ""){
+                    $message[] = msgPool::required(_("New password"));
+                }
+            }
+
+            // Display errors
+            if (count($message) != 0){
+                msg_dialog::displayChecks($message);
+                return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+            }
+
+            // Change cassword 
+            if(isset($this->force_hash_type[$this->dn])){
+                if(!change_password ($this->dn, $new_password,0,$this->force_hash_type[$this->dn])){
+                    return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+                }
+            }else{
+                if(!change_password ($this->dn, $new_password)){
+                    return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+                }
+            }
+            if ($this->config->get_cfg_value("core","passwordHook") != ""){
+                exec($this->config->get_cfg_value("core","passwordHook")." ".$username." ".$new_password, $resarr);
+            }
+            new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
+            $this->dn ="";
+
+        } else {
+            msg_dialog::display(_("Password change"),
+                    _("You have no permission to change this users password!"),
+                    WARNING_DIALOG);
         }
-      }else{
-        if(!change_password ($this->dn, $_POST['new_password'])){
-          return($smarty->fetch(get_template_path('password.tpl', TRUE)));
-        }
-      }
-      if ($this->config->get_cfg_value("core","passwordHook") != ""){
-        exec($this->config->get_cfg_value("core","passwordHook")." ".$username." ".$_POST['new_password'], $resarr);
-      }
-      new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
-      $this->dn ="";
-      
-    } else {
-      msg_dialog::display(_("Password change"),
-          _("You have no permission to change this users password!"),
-          WARNING_DIALOG);
     }
 
     // Cleanup
-    if(!count($this->pwd_change_queue)){
+    if(!count($this->pwd_change_queue) && $this->dn=""){
       $this->remove_lock();
       $this->closeDialogs();
     }else{
