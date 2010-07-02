@@ -549,6 +549,18 @@ location besides the LDAP. It will be called this way:
 /path/to/your/script "username" "oldpassword" "newpassword"
 .fi
 
+.B passwordProposalHook
+.I command
+.PP
+The
+.I passwordProposalHook
+can be used to let GOsa generate password proposals for you. 
+Whenever you change a password, you can then decide whether to use the proposal or to manually specify a password.
+
+.nf
+/usr/bin/apg -n1
+.fi
+
 .B strictPasswordRules
 .I bool
 .PP
