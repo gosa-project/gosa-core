@@ -46,6 +46,9 @@ class userManagement extends management
     protected $proposalEnabled = FALSE;
     protected $proposalSelected = FALSE;
 
+    protected $passwordChangeForceable = FALSE;
+    protected $enforcePasswordChange = FALSE;
+
     function __construct($config,$ui)
     {
         $this->config = $config;
@@ -247,10 +250,15 @@ class userManagement extends management
         if(isset($_POST['refreshProposal'])) $this->refreshProposal();
         if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;
 
+        $this->enforcePasswordChange = isset($_POST['new_password']) && isset($_POST['enforcePasswordChange']);
+
         $smarty = get_smarty();
         $smarty->assign("proposal" , $this->proposal);
         $smarty->assign("proposalEnabled" , $this->proposalEnabled);
         $smarty->assign("proposalSelected" , $this->proposalSelected);
+
+        $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
+        $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
 
         // Get next entry from queue.
         if(empty($this->dn) && count($this->pwd_change_queue)){
@@ -263,6 +271,19 @@ class userManagement extends management
             $smarty->assign("proposalSelected" , $this->proposalSelected);
 
             $this->dn = array_pop($this->pwd_change_queue);
+
+            // Check if we are able to enforce a password change
+            $ldap = $this->config->get_ldap_link();
+            $ldap->cd($this->config->current['BASE']);
+            $ldap->cat($this->dn);
+            $attrs = $ldap->fetch();
+            $this->passwordChangeForceable = 
+                    in_array('sambaAccount', $attrs['objectClass']) || 
+                    in_array('posixAccount', $attrs['objectClass']);
+            
+            $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
+            $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
+
             set_object_info($this->dn);
             return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
         }

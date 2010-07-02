@@ -77,8 +77,13 @@
 
 {/if}
 
-<br>
+{if $passwordChangeForceable}
+    <hr>
+    <input type='checkbox' name='enforcePasswordChange' value='1'
+        {if $enforcePasswordChange} checked {/if}>&nbsp;{t}Enforce password change on next login.{/t}
+{/if}
 
+<br>
 <hr>
 <div class="plugin-actions">
   <button type='submit' id='password_finish'name='password_finish'>{t}Set password{/t}</button>
