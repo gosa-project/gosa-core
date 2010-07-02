@@ -42,6 +42,14 @@ class userManagement extends management
   protected $aclPlugin   = "user";
   protected $objectName   = "user";
 
+  protected $proposal = "";
+  protected $proposalEnabled = FALSE;
+  protected $proposalSelected = FALSE;
+
+  protected $passwordChangeForceable = FALSE;
+  protected $enforcePasswordChange = FALSE;
+
+
   function __construct($config,$ui)
   {
     $this->config = $config;
@@ -105,6 +113,13 @@ class userManagement extends management
   }
 
 
+  function refreshProposal()
+  {
+    $this->proposal = passwordMethod::getPasswordProposal($this->config);
+    $this->proposalEnabled = (!empty($this->proposal));
+  }
+
+
   // Inject user actions 
   function detectPostActions()
   {
@@ -115,7 +130,7 @@ class userManagement extends management
     if(isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
     if(isset($_POST['password_cancel'])){
       $action['action'] = "passwordCancel";
-    }elseif((count($this->pwd_change_queue) || isset($_POST['password_finish']))){
+    }elseif((count($this->pwd_change_queue) || isset($_POST['password_finish']) || isset($_POST['refreshProposal']))){
       $action['action'] = "passwordQueue";
     }
     return($action);
@@ -228,68 +243,154 @@ class userManagement extends management
 
   function handlePasswordQueue()
   {
-    // skip if nothing is to do
-    if(empty($this->dn) && !count($this->pwd_change_queue)) return;
+      // skip if nothing is to do
+      if(empty($this->dn) && !count($this->pwd_change_queue)) return;
 
-    // Get next entry from queue.
-    if(empty($this->dn) && count($this->pwd_change_queue)){
-      $this->dn = array_pop($this->pwd_change_queue);
-      set_object_info($this->dn);
+      // Refresh proposal if requested
+      if(isset($_POST['refreshProposal'])) $this->refreshProposal();
+      if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;
+
+      $this->enforcePasswordChange = isset($_POST['new_password']) && isset($_POST['enforcePasswordChange']);
+
       $smarty = get_smarty();
-      return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
-    }
+      $smarty->assign("proposal" , $this->proposal);
+      $smarty->assign("proposalEnabled" , $this->proposalEnabled);
+      $smarty->assign("proposalSelected" , $this->proposalSelected);
 
-    // Check permissions
-    $dn  = $this->dn;
-    $acl = $this->ui->get_permissions($dn, "users/password");
-    $cacl= $this->ui->get_permissions($dn, "users/user");
-    if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)){
-      $message= array();
-      if ($_POST['new_password'] != $_POST['repeated_password']){
-        $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-      } else {
-        if ($_POST['new_password'] == ""){
-          $message[] = msgPool::required(_("New password"));
-        }
+      $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
+      $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
+
+      // Get next entry from queue.
+      if(empty($this->dn) && count($this->pwd_change_queue)){
+
+          // Generate new proposal
+          $this->refreshProposal();
+          $this->proposalSelected = ($this->proposal != "");
+          $this->dn = array_pop($this->pwd_change_queue);
+
+          // Check if we are able to enforce a password change
+          $ldap = $this->config->get_ldap_link();
+          $ldap->cd($this->config->current['BASE']);
+          $ldap->cat($this->dn);
+          $attrs = $ldap->fetch();
+          $this->passwordChangeForceable =
+              in_array('sambaAccount', $attrs['objectClass']) ||
+              in_array('posixAccount', $attrs['objectClass']);
+          $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
+          $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
+
+          // Assign proposal variables
+          $smarty->assign("proposal" , $this->proposal);
+          $smarty->assign("proposalEnabled" , $this->proposalEnabled);
+          $smarty->assign("proposalSelected" , $this->proposalSelected);
+
+          set_object_info($this->dn);
+          return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
       }
 
-      // Display errors
-      if (count($message) != 0){
-        msg_dialog::displayChecks($message);
-        $smarty = get_smarty();
-        return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+      // If we've just refreshed the proposal then do not check the password for validity.
+      if(isset($_POST['refreshProposal'])){
+          return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
       }
 
-      // Change cassword 
-      if(isset($this->force_hash_type[$this->dn])){
-        if(!change_password ($this->dn, $_POST['new_password'],0,$this->force_hash_type[$this->dn])){
-          return($smarty->fetch(get_template_path('password.tpl', TRUE)));
-        }
+      // Check permissions
+      if(isset($_POST['password_finish'])){
+
+          $dn  = $this->dn;
+          $acl = $this->ui->get_permissions($dn, "users/password");
+          $cacl= $this->ui->get_permissions($dn, "users/user");
+          if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)){
+
+              // Get posted passwords
+              if($this->proposalSelected){
+                  $new_password = $this->proposal;
+                  $repeated_password = $this->proposal;
+              }else{
+                  $new_password = get_post('new_password');
+                  $repeated_password = get_post('repeated_password');
+              }
+
+              // Check posted passwords now.
+              $message= array();
+              if ($new_password != $repeated_password){
+                  $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+              } else {
+                  if ($new_password == ""){
+                      $message[] = msgPool::required(_("New password"));
+                  }
+              }
+
+              // Display errors
+              if (count($message) != 0){
+                  msg_dialog::displayChecks($message);
+                  return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+              }
+
+              // Change cassword
+              if(isset($this->force_hash_type[$this->dn])){
+                  if(!change_password ($this->dn, $new_password,0,$this->force_hash_type[$this->dn])){
+                      return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+                  }
+              }else{
+                  if(!change_password ($this->dn, $new_password)){
+                      return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+                  }
+              }
+              if ($this->config->get_cfg_value("core","passwordHook") != ""){
+                  exec($this->config->get_cfg_value("core","passwordHook")." ".$this->dn." ".$new_password, $resarr);
+              }
+
+              // The user has to change his password on next login
+              // - We are going to update samba and posix attributes here, to enforce
+              //   such a password change.
+              if($this->passwordChangeForceable && $this->enforcePasswordChange){
+
+                  // Check if we are able to enforce a password change
+                  $ldap = $this->config->get_ldap_link();
+                  $ldap->cd($this->config->current['BASE']);
+                  $ldap->cat($this->dn);
+                  $attrs = $ldap->fetch();
+                  $samba = in_array('sambaSamAccount', $attrs['objectClass']);
+                  $posix = in_array('posixAccount', $attrs['objectClass']);
+
+                  // Update the posix shadow flag...
+                  if($posix){
+                      $posixAccount = new posixAccount($this->config, $this->dn);
+                      $posixAccount->is_modified=TRUE;
+                      $posixAccount->activate_shadowExpire=1;
+                      $posixAccount->shadowExpire = date('d.m.Y', time() - (1 * 24 * 60 *60));
+                      $posixAccount->save();
+                  }
+
+                  // Update the samba kickoff flag...
+                  if($samba){
+                      $sambaAccount = new sambaAccount($this->config, $this->dn);
+                      $sambaAccount->is_modified=TRUE;
+                      $sambaAccount->kickoff_time_set  = "1";
+                      $sambaAccount->sambaKickoffTime= date('d.m.Y', time() - (1 * 24 * 60 *60));
+                      $sambaAccount->save();
+                  }
+              }
+
+              new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
+              $this->dn ="";
+
+          } else {
+              msg_dialog::display(_("Password change"),
+                      _("You have no permission to change this users password!"),
+                      WARNING_DIALOG);
+          }
+      }
+      // Cleanup
+      if(!count($this->pwd_change_queue) && $this->dn=""){
+          $this->remove_lock();
+          $this->closeDialogs();
       }else{
-        if(!change_password ($this->dn, $_POST['new_password'])){
-          return($smarty->fetch(get_template_path('password.tpl', TRUE)));
-        }
+          return($this->handlePasswordQueue());
       }
-      if ($this->config->get_cfg_value("passwordHook") != ""){
-        exec($this->config->get_cfg_value("passwordHook")." ".$username." ".$_POST['new_password'], $resarr);
-      }
-      new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
-      $this->dn ="";
-      
-    } else {
-      msg_dialog::display(_("Password change"),
-          _("You have no permission to change this users password!"),
-          WARNING_DIALOG);
-    }
-
-    // Cleanup
-    if(!count($this->pwd_change_queue)){
-      $this->remove_lock();
-      $this->closeDialogs();
-    }else{
-      return($this->handlePasswordQueue());
-    }
   }
+
+
 
 
   /*! \brief  Save user modifications. 

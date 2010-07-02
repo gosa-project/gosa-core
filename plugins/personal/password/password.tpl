@@ -8,30 +8,79 @@
   {t}Changing the password affects your authentification on mail, proxy, samba and unix services.{/t}
 </p>
 
-<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
-  <tr>
-    <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
-    <td><input id="current_password" type="password" name="current_password" size="30" maxlength="40"
-		onFocus="nextfield= 'new_password';"></td>
-  </tr>
-  <tr>
-    <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
-    <td><input id="new_password" type="password" name="new_password" size="30" maxlength="40"
-		onFocus="nextfield= 'repeated_password';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
-  </tr>
-  <tr>
-    <td><b><LABEL for="repeated_password">{t}Repeat new password{/t}</LABEL></b></td>
-    <td><input id="repeated_password" type="password" name="repeated_password" size="30" maxlength="40"
-		onFocus="nextfield= 'password_finish';"></td>
-  </tr>
-  <tr>
-    <td><b>{t}Password strength{/t}</b></td>
-    <td>
-	<span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:5px;">
-	<span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:5px;"></span></span>
-    </td>
-  </tr>
-</table>
+<hr>
+
+{if !$proposalEnabled}
+
+  <table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+    <tr>
+      <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
+      <td><input id="current_password" type="password" name="current_password" 
+          onFocus="nextfield= 'new_password';"></td>
+    </tr>
+    <tr>
+      <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
+      <td><input id="new_password" type="password" name="new_password" 
+          onFocus="nextfield= 'repeated_password';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
+    </tr>
+    <tr>
+      <td><b><LABEL for="repeated_password">{t}Repeat new password{/t}</LABEL></b></td>
+      <td><input id="repeated_password" type="password" name="repeated_password" 
+          onFocus="nextfield= 'password_finish';"></td>
+    </tr>
+    <tr>
+      <td><b>{t}Password strength{/t}</b></td>
+      <td>
+      <span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:5px;">
+      <span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:5px;"></span></span>
+      </td>
+    </tr>
+  </table>
+
+{else}
+
+  <table cellpadding=4 border=0 summary="{t}Password change dialog{/t}">
+    <tr>
+      <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
+      <td><input id="current_password" type="password" name="current_password" 
+          onFocus="nextfield= 'new_password';"></td>
+    </tr>
+    <tr>
+      <td>
+        <input type='radio' value='1' name='proposalSelected'
+            {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
+      </td>
+      <td>
+        <input type='text' value="{$proposal}" style='color: black;'>
+        &nbsp;<input type='submit' name='refreshProposal' value='{t}Refresh{/t}'>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type='radio' value='0' name='proposalSelected'
+            {if !$proposalSelected} checked {/if}>&nbsp;<b>{t}Manually specify a password{/t}</b>
+      </td>
+    </tr>
+    <tr>
+      <td  style='padding-left:40px;'><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
+      <td><input id="new_password" type="password" name="new_password" 
+          onFocus="nextfield= 'repeated_password';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
+    </tr>
+    <tr>
+      <td  style='padding-left:40px;'><b><LABEL for="repeated_password">{t}Repeat new password{/t}</LABEL></b></td>
+      <td><input id="repeated_password" type="password" name="repeated_password" 
+          onFocus="nextfield= 'password_finish';"></td>
+    </tr>
+    <tr>
+      <td  style='padding-left:40px;'><b>{t}Password strength{/t}</b></td>
+      <td>
+      <span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:7px;">
+      <span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:7px;"></span></span>
+      </td>
+    </tr>
+  </table>
+{/if}
+
 
 <br>
 

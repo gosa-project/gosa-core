@@ -38,7 +38,7 @@ if ( $cleanup ){
 }else{
 
   /* Reset requested? */
-  if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
+  if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])|| isset($_POST['password_changed'])){
     session::un_set ('edit');
     session::un_set ('user');
   }
@@ -76,129 +76,91 @@ if ( $cleanup ){
     }
   }
 
-  /* Perform password change */
-  if (isset($_POST['password_finish'])){
-
-    /* For security reasons, check if user is allowed to set password again */
-    if ($user->acl_is_writeable("userPassword") || $user->acl_is_createable()){
-
-      /* Check input and feed errors into 'message' */
-      $message= array();
-
-      /* Sanity checks... */
-      if ($_POST['new_password'] != $_POST['repeated_password']){
-
-        /* Matching passwords in new and repeated? */
-        $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-      } else {
-
-        /* Empty password is not permitted by default. */
-        if ($_POST['new_password'] == ""){
-          $message[]= msgPool::required(_("New password"));
-        }
-      }
-
-      /* Errors, or change password? */
-      if (count($message) != 0){
-
-        /* Show error message and continue editing */
-        msg_dialog::displayChecks($message);
-        $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
-        return ($display);
-      }
-      change_password ($user->dn, $_POST['new_password'], 0, $user->pw_storage);
-      new log("modify","users/password","",array(),"Password has been changed");
-
-    } else {
-
-      /* Missing permissions, show message */
-      msg_dialog::display(_("Error"), _("You have no permission to set your password!"), ERROR_DIALOG);
-    }
-
-    del_lock ($ui->dn);
-    session::un_set ('user');
-  }
-
   /* save changes to LDAP and disable edit mode */
+  $info = "";
   if (isset($_POST['edit_finish'])){
 
-    /* Perform checks */
-    $message= $user->check ();
+      /* Perform checks */
+      $message= $user->check ();
 
-    /* No errors, save object */
-    if (count ($message) == 0){
-      $user->save ();
-      del_lock ($ui->dn);
-      session::un_set ('edit');
+      /* No errors, save object */
+      if (count ($message) == 0){
+          $user->save ();
+          del_lock ($ui->dn);
+          session::un_set ('edit');
 
-      /* Need to reset the password? */
-      if($user->password_change_needed()){
-        /* Save object */
-        session::set('user',$user);
+          /* Need to reset the password? */
+          if($user->password_change_needed()){
 
-        $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
-        return ($display);
+              $user->passwordClass= new password($config, $ui->dn);
+              $user->passwordClass->forceHash($user->pw_storage);
+
+              session::set('user',$user);
+              $display.=$user->passwordClass->execute();
+          } else {
+              session::un_set ('user');
+          }
+
       } else {
-        session::un_set ('user');
+          /* Errors found, show message */
+          msg_dialog::displayChecks($message);
       }
+  }elseif(isset($user->passwordClass)){
 
-    } else {
-      /* Errors found, show message */
-      msg_dialog::displayChecks($message);
-    }
-  }
+    $display.=$user->passwordClass->execute();
 
-  /* Execute formular */
-  if($lock_msg){
-    $display.= $lock_msg;
   }else{
-    $display.= $user->execute ();
-  }
 
-  /* Store changes  in session */
-  if (session::is_set('edit')){
-    session::set('user',$user);
-  }
-
-  $info = "";
-
-  /* Show page footer depending on the mode */
-  if (!$user->cert_dialog && !$user->picture_dialog && !$user->dialog && $user->is_account && empty($lock_msg)){
-    $display.= "<p class=\"plugbottom\">";
-
-    /* Are we in edit mode? */
-    if (session::is_set('edit')){
-      $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
-      $display.= "&nbsp;";
-      $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
-
-      $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/locked.png').
-        "\"> ".$ui->dn."&nbsp;";
-    } else {
-      /* 'viewid' may be set by i.e. the phonelist plugin. This
-         means that we want to go back... */
-      if (isset ($viewid)){
-        $str= msgPool::backButton();
-        $fn = "back";
-      } else {
-        $str= msgPool::editButton();
-        $fn = "edit";
-        $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/unlocked.png').
-          "\"> ".$ui->dn."&nbsp;";
+      /* Execute formular */
+      if($lock_msg){
+          $display.= $lock_msg;
+      }else{
+          $display.= $user->execute ();
       }
 
-      /* Only display edit button if there is at least one attribute editable */
-      if(preg_match("/r/",$ui->get_permissions($ui->dn,"users/user"))){
-        if ($fn == "edit"){
-          $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/on.png')."\"> ".
-            msgPool::clickEditToChange();
-          $display.= "<input type=submit name=\"$fn\" value=\"$str\">\n";
-        }
+      /* Store changes  in session */
+      if (session::is_set('edit')){
+          session::set('user',$user);
       }
 
-      $display.= "<input type=\"hidden\" name=\"ignore\">\n";
-    }
-    $display.= "</p>\n";
+      /* Show page footer depending on the mode */
+      if (!$user->cert_dialog && !$user->picture_dialog && !$user->dialog && $user->is_account && empty($lock_msg)){
+          $display.= "<p class=\"plugbottom\">";
+
+          /* Are we in edit mode? */
+          if (session::is_set('edit')){
+              $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
+              $display.= "&nbsp;";
+              $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
+
+              $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/locked.png').
+                  "\"> ".$ui->dn."&nbsp;";
+          } else {
+              /* 'viewid' may be set by i.e. the phonelist plugin. This
+                 means that we want to go back... */
+              if (isset ($viewid)){
+                  $str= msgPool::backButton();
+                  $fn = "back";
+              } else {
+                  $str= msgPool::editButton();
+                  $fn = "edit";
+                  $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/unlocked.png').
+                      "\"> ".$ui->dn."&nbsp;";
+              }
+
+              /* Only display edit button if there is at least one attribute editable */
+              if(preg_match("/r/",$ui->get_permissions($ui->dn,"users/user"))){
+                  if ($fn == "edit"){
+                      $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/on.png')."\"> ".
+                          msgPool::clickEditToChange();
+                      $display.= "<input type=submit name=\"$fn\" value=\"$str\">\n";
+                  }
+              }
+
+              $display.= "<input type=\"hidden\" name=\"ignore\">\n";
+          }
+          $display.= "</p>\n";
+      }
   }
 
   /* Page header*/
