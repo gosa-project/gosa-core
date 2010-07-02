@@ -24,15 +24,17 @@
 /* Remove locks created by this plugin
 */
 $lock_msg="";
-if ($remove_lock || isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
-  del_lock($ui->dn);
-  if(session::is_set('MyAccountTabs') && session::is_set('edit')){
-      session::un_set('MyAccountTabs');
-  }
+if ($remove_lock || 
+        isset($_POST['edit_cancel']) || 
+        isset($_POST['password_cancel'])){
+    del_lock($ui->dn);
+    if(session::is_set('MyAccountTabs') && session::is_set('edit')){
+        session::un_set('MyAccountTabs');
+    }
 }
 
 /* Reset requested? */
-if (isset($_POST['edit_cancel']) || $cleanup){
+if (isset($_POST['edit_cancel']) || $cleanup || isset($_POST['password_changed'])){ 
     session::un_set ('edit');
     session::un_set ('MyAccountTabs');
 }
