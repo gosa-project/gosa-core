@@ -79,8 +79,9 @@
 
 {if $passwordChangeForceable}
     <hr>
-    <input type='checkbox' name='enforcePasswordChange' value='1'
-        {if $enforcePasswordChange} checked {/if}>&nbsp;{t}Enforce password change on next login.{/t}
+    <input type='checkbox' name='enforcePasswordChange' value='1' id='enforcePasswordChange'
+        {if $enforcePasswordChange} checked {/if}>&nbsp;
+            <LABEL for='enforcePasswordChange'>{t}Enforce password change on next login.{/t}</LABEL>
 {/if}
 
 <br>

@@ -266,10 +266,6 @@ class userManagement extends management
             // Generate new proposal
             $this->refreshProposal();
             $this->proposalSelected = ($this->proposal != "");
-            $smarty->assign("proposal" , $this->proposal);
-            $smarty->assign("proposalEnabled" , $this->proposalEnabled);
-            $smarty->assign("proposalSelected" , $this->proposalSelected);
-
             $this->dn = array_pop($this->pwd_change_queue);
 
             // Check if we are able to enforce a password change
@@ -280,9 +276,13 @@ class userManagement extends management
             $this->passwordChangeForceable = 
                     in_array('sambaAccount', $attrs['objectClass']) || 
                     in_array('posixAccount', $attrs['objectClass']);
-            
             $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
             $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
+
+            // Assign proposal variables
+            $smarty->assign("proposal" , $this->proposal);
+            $smarty->assign("proposalEnabled" , $this->proposalEnabled);
+            $smarty->assign("proposalSelected" , $this->proposalSelected);
 
             set_object_info($this->dn);
             return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
@@ -339,6 +339,39 @@ class userManagement extends management
                 if ($this->config->get_cfg_value("core","passwordHook") != ""){
                     exec($this->config->get_cfg_value("core","passwordHook")." ".$username." ".$new_password, $resarr);
                 }
+        
+                // The user has to change his password on next login
+                // - We are going to update samba and posix attributes here, to enforce
+                //   such a password change.
+                if($this->passwordChangeForceable && $this->enforcePasswordChange){
+
+                    // Check if we are able to enforce a password change
+                    $ldap = $this->config->get_ldap_link();
+                    $ldap->cd($this->config->current['BASE']);
+                    $ldap->cat($this->dn);
+                    $attrs = $ldap->fetch();
+                    $samba = in_array('sambaSamAccount', $attrs['objectClass']);
+                    $posix = in_array('posixAccount', $attrs['objectClass']);
+
+                    // Update the posix shadow flag...
+                    if($posix){
+                        $posixAccount = new posixAccount($this->config, $this->dn);
+                        $posixAccount->is_modified=TRUE;
+                        $posixAccount->activate_shadowExpire=1;
+                        $posixAccount->shadowExpire = date('d.m.Y', time() - (1 * 24 * 60 *60));
+                        $posixAccount->save();
+                    }
+                   
+                    // Update the samba kickoff flag...
+                    if($samba){
+                        $sambaAccount = new sambaAccount($this->config, $this->dn);
+                        $sambaAccount->is_modified=TRUE;
+                        $sambaAccount->kickoff_time_set  = "1";
+                        $sambaAccount->sambaKickoffTime= date('d.m.Y', time() - (1 * 24 * 60 *60));
+                        $sambaAccount->save();
+                    }
+                }
+
                 new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
                 $this->dn ="";
 
