@@ -48,7 +48,10 @@
         <input type='radio' value='1' name='proposalSelected'
             {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
       </td>
-      <td><b>{$proposal}</b>&nbsp;{image path='images/lists/reload.png' action='refreshProposal'}</td>
+      <td>
+        <input type='text' disabled value="{$proposal}" style='color: black;'>
+        &nbsp;{image path='images/lists/reload.png' action='refreshProposal'}
+      </td>
     </tr>
     <tr>
       <td>
