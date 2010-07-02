@@ -30,6 +30,8 @@ class password extends plugin
     var $proposalEnabled = FALSE;
     var $proposalSelected = FALSE;
 
+    var $forcedHash = NULL;
+
     function password(&$config, $dn= NULL, $parent= NULL)
     {
         plugin::plugin($config, $dn, $parent);
@@ -41,6 +43,12 @@ class password extends plugin
             $this->proposalSelected = TRUE;
         }
     }
+
+    
+    function forceHash($hash)
+    {
+        $this->forcedHash = $hash;
+    }    
 
 
     function refreshProposal()
@@ -155,7 +163,7 @@ class password extends plugin
                         msg_dialog::display(_("Password change"),
                                 _("You have no permission to change your password."),WARNING_DIALOG);
                     }else{
-                        $this->change_password($ui->dn, $new_password);
+                        $this->change_password($ui->dn, $new_password, $this->forcedHash);
                         gosa_log ("User/password has been changed");
                         $ui->password= $new_password;
                         session::set('ui',$ui);
@@ -168,9 +176,13 @@ class password extends plugin
         return($smarty->fetch(get_template_path("password.tpl", TRUE)));
     } 
 
-    function change_password($dn, $pwd)
+    function change_password($dn, $pwd, $hash)
     {
-        change_password ($dn, $pwd);
+        if(!$hash){
+            change_password ($dn, $pwd);
+        }else{
+            change_password ($dn, $pwd,0, $hash);
+        }
     }
 
     function remove_from_parent()

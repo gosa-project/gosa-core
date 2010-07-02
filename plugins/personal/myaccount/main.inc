@@ -97,40 +97,15 @@ if (! $cleanup ){
             }
         }
 
-
-        if (isset($_POST['password_finish']) && $MyAccountTabs->password_change_needed){
-            $user = $MyAccountTabs->by_object['user'];
-
-            if ($user->acl_is_writeable("userPassword") || $user->acl_is_createable()){
-                $message= array();
-                if ($_POST['new_password'] != $_POST['repeated_password']){
-                    $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-                } else {
-                    if ($_POST['new_password'] == ""){
-                        $message[]= msgPool::required(_("New password"));
-                    }
-                }
-
-                if (count($message) != 0){
-                    msg_dialog::displayChecks($message);
-                    $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
-                    return ($display);
-                }
-                change_password ($user->dn, $_POST['new_password'], 0, $user->pw_storage);
-                $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true);
-                $MyAccountTabs->setReadOnly(TRUE);
-                session::set('MyAccountTabs',$MyAccountTabs);
-                new log("modify","users/password","",array(),"Password has been changed");
-            } else {
-                msg_dialog::display(_("Error"), _("You have no permission to set your password!"), ERROR_DIALOG);
-            }
-
-            del_lock ($ui->dn);
-            session::un_set ('user');
-        }
-
+        // Build up password class to make password-hash changes 
+        //  effective, by setting a new password.
         if($MyAccountTabs->password_change_needed){
-            $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
+            if(!isset($MyAccountTabs->passwordClass)){
+                $user = $MyAccountTabs->by_object['user'];
+                $MyAccountTabs->passwordClass= new password($config, $ui->dn);
+                $MyAccountTabs->passwordClass->forceHash($user->pw_storage);
+            }
+            $display.= $MyAccountTabs->passwordClass->execute();
         }
 
         /* Execute formular */
