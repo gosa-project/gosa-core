@@ -1,4 +1,4 @@
-contrib/gosa.conf.5
-gosa-encrypt-passwords.1
-update-gosa.1
+gosa-core/contrib/gosa.conf.5
+gosa-core/gosa-encrypt-passwords.1
+gosa-core/update-gosa.1
 

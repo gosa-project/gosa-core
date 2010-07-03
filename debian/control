@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: GOsa packages maintainers group <gosa-pkg@oss.gonicus.de>
 Uploaders: Cajus Pollmeier <cajus@debian.org>, Benoit Mortier <benoit.mortier@opensides.be>
-Build-Depends: debhelper (>= 5), dpatch
+Build-Depends: debhelper (>= 7.0.50~)
 Build-Depends-Indep: po-debconf
 Standards-Version: 3.8.4
 Homepage: https://oss.gonicus.de/labs/gosa/
@@ -20,27 +20,27 @@ Description: Web Based LDAP Administration Program
  kerberos accounts. It is able to manage the postfix/cyrus server
  combination and can write user adapted sieve scripts.
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: gosa-dev
 Architecture: all
-Depends: gosa, php5-cli, latex2html, lyx, ${misc:Depends}
-Description: GOsa development utiles
+Depends: ${misc:Depends}, gosa, php5-cli, latex2html, lyx
+Description: GOsa² development utilities
  This package contains a couple of tools to generate online
- help, extract localisations and aid developing.
+ help, extract localizations and howto's for developing Gosa² plugins.
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: gosa-desktop
 Architecture: all
-Depends: konqueror | iceweasel | mozilla | firefox, debconf, ${misc:Depends}
-Description: Desktop integration for GOsa
- This package includes a menu definition for your desktop
+Depends: ${misc:Depends}, konqueror | iceweasel | mozilla | firefox, debconf
+Description: Desktop integration for GOsa²
+ This package includes a Gosa² menu definition for your desktop
  environment.
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: gosa-schema
@@ -48,56 +48,531 @@ Architecture: all
 Depends: ${misc:Depends}
 Recommends: slapd
 Description: LDAP schema for GOsa
- This package includes the LDAP schema needed by GOsa.
+ This package includes the basics LDAP schemas needed by GOsa².
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: gosa-help-en
 Architecture: all
-Depends: gosa, ${misc:Depends}
+Depends: ${misc:Depends}, gosa
 Description: English online help for GOsa
- This package includes the English online documentation for GOsa
+ This package includes the English online documentation for GOsa²
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: gosa-help-de
 Architecture: all
-Depends: gosa, ${misc:Depends}
-Description: German online help for GOsa
- This package includes the German online documentation for GOsa
+Depends: ${misc:Depends}, gosa
+Description: German online help for GOsa²
+ This package includes the German online documentation for GOsa²
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: gosa-help-fr
 Architecture: all
-Depends: gosa, ${misc:Depends}
-Description: French online help for GOsa
- This package includes the French online documentation for GOsa
+Depends: ${misc:Depends}, gosa
+Description: French online help for GOsa²
+ This package includes the French online documentation for GOsa²
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: gosa-help-nl
 Architecture: all
-Depends: gosa, ${misc:Depends}
+Depends: ${misc:Depends}, gosa
 Description: Dutch online help for GOsa
- This package includes the Dutch online documentation for GOsa
+ This package includes the Dutch online documentation for GOsa²
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
 Package: smarty-acl-render
 Architecture: all
-Depends: smarty, ${misc:Depends}
+Depends: ${misc:Depends}, smarty
 Suggests: gosa
 Description: Provide ACL based rendering for Smarty
  smarty-acl-render provides acl based rendering support for Smarty,
  the popular PHP templating engine (http://smarty.php.net/). This
- module is mainly used by GOsa.
+ module is mainly used by GOsa².
  .
- GOsa is a combination of system-administrator and end-user web
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-addressbook
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: addressbook plugin for GOsa²
+ Simple addressbook plugin for GOsa².
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-connectivity
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: connectivity plugin for GOsa²
+ Connectivity base plugin - base for really small plugins.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-dhcp
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: dhcp plugin for GOsa²
+ DHCP service management plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-dhcp-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² dhcp plugin
+ This package includes the LDAP schema needed by the GOsa²
+ dhcp plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-dns
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: dns plugin for GOsa²
+ DNS service management plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-dns-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² dns plugin
+ This package includes the LDAP schema needed by the GOsa²
+ dns plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-fai
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-goto
+Breaks: gosa (<<2.6)
+Description: fai plugin for GOsa²
+ FAI plugin for managing Linux system deployment.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-fai-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² fai plugin
+ This package includes the LDAP schema needed by the GOsa²
+ fai plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-gofax
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: gofax plugin for GOsa²
+ GOfax management with report functionality
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-gofon
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: gofon plugin for GOsa²
+ GOfon management with report functionality
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-goto
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: goto plugin for GOsa²
+ GOto desktop management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-kolab
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity, gosa-plugin-mail
+Breaks: gosa (<<2.6)
+Description: kolab plugin for GOsa²
+ Kolab2 account management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-kolab-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² kolab plugin
+ This package includes the LDAP schema needed by the GOsa²
+ kolab plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-ldapmanager
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: ldapmanager plugin for GOsa²
+ LDAP import and export management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-log
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: log plugin for GOsa²
+ Syslog and GOsa² logging management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-log-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² log plugin
+ This package includes the LDAP schema needed by the GOsa²
+ log plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-mail
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: base mail plugin for GOsa²
+ Mail management base plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-mit-krb5
+Architecture: all
+Conflicts: gosa-plugin-heimdal 
+Breaks: gosa (<<2.6)
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Description: mit-krb5 plugin for GOsa²
+ MIT kerberos management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-mit-krb5-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² mit-krb5 plugin
+ This package includes the LDAP schema needed by the GOsa²
+ mit-krb5 plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-nagios
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: nagios plugin for GOsa²
+ Nagios account settings management
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-nagios-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² nagios plugin
+ This package includes the LDAP schema needed by the GOsa²
+ nagios plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-netatalk
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: netatalk plugin for GOsa²
+ Netatalk account management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-opengroupware
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-mail, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: opengroupware plugin for GOsa²
+ Opengroupware account management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-openxchange
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-mail, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: openxchange plugin for GOsa²
+ Open-Xchange account management plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-openxchange-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² openxchange plugin
+ This package includes the LDAP schema needed by the GOsa²
+ openxchange plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-opsi
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-fai, gosa-plugin-goto
+Breaks: gosa (<<2.6)
+Description: opsi plugin for GOsa²
+ opsi plugin for managing windows system and software deployment
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-phpgw
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-mail, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: phpgw plugin for GOsa²
+ PHP Groupware connectivity plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-phpgw-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² phpgw plugin
+ This package includes the LDAP schema needed by the GOsa²
+ phpgw plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-phpscheduleit
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: phpscheduleit plugin for GOsa²
+ PHP scheduleit connectivity plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-phpscheduleit-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² phpscheduleit plugin
+ This package includes the LDAP schema needed by the GOsa²
+ phpscheduleit plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-pptp
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: pptp plugin for GOsa²
+ PPTP connectivity plugin
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-pptp-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² pptp plugin
+ This package includes the LDAP schema needed by the GOsa²
+ pptp plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-pureftpd
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: pureftpd plugin for GOsa²
+ PureFTPD connectivity plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-pureftpd-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² pureftpd plugin
+ This package includes the LDAP schema needed by the GOsa²
+ pureftpd plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-rolemanagement
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: rolemanagement plugin for GOsa²
+ Role Management plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-rsyslog
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Breaks: gosa (<<2.6)
+Description: rsyslog plugin for GOsa²
+ Syslog and GOsa logging plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-samba
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: samba3 plugin for GOsa²
+ Plugin for Samba 3 management.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-scalix
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: scalix plugin for GOsa²
+ Scalix account management plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-squid
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: squid plugin for GOsa²
+ Squid connectivity plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-ssh
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: ssh plugin for GOsa²
+ SSH key management plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-ssh-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² ssh plugin
+ This package includes the LDAP schema needed by the GOsa²
+ ssh plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-sudo
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: sudo plugin for GOsa²
+ Sudo management plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-sudo-schema
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slapd
+Description: LDAP schema for GOsa² sudo plugin
+ This package includes the LDAP schema needed by the GOsa
+ sudo plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-systems
+Architecture: all
+Depends: ${misc:Depends}, gosa
+Breaks: gosa (<<2.6)
+Description: systems plugin for GOsa²
+ Systems management base plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-uw-imap
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-mail
+Breaks: gosa (<<2.6)
+Description: uw-imap plugin for GOsa²
+ UW imap mail method.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-plugin-webdav
+Architecture: all
+Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
+Breaks: gosa (<<2.6)
+Description: webdav plugin for GOsa²
+ WebDAV connectivity plugin.
+ .
+ GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 

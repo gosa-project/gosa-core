@@ -1,13 +1,7 @@
-#! /bin/sh /usr/share/dpatch/dpatch-run
-## 04_fix_locale_location.dpatch by  <cajus@debian.org>
-##
-## All lines beginning with `## DP:' are a description of the patch.
-## DP: Fixed location of auto-generated locales
-
-@DPATCH@
-diff -urNad gosa-2.6.0+svn11288~/include/php_setup.inc gosa-2.6.0+svn11288/include/php_setup.inc
---- gosa-2.6.0+svn11288~/include/php_setup.inc	2008-06-11 15:55:59.000000000 +0200
-+++ gosa-2.6.0+svn11288/include/php_setup.inc	2008-06-11 15:56:00.000000000 +0200
+Author: <cajus@debian.org>
+Description: Fixed location of auto-generated locales
+--- a/include/php_setup.inc
++++ b/gosa-core/include/php_setup.inc
 @@ -20,7 +20,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
@@ -17,9 +11,8 @@ diff -urNad gosa-2.6.0+svn11288~/include/php_setup.inc gosa-2.6.0+svn11288/inclu
  
  function gosaRaiseError($errno, $errstr, $errfile, $errline)
  {
-diff -urNad gosa-2.6.0+svn11288~/update-gosa gosa-2.6.0+svn11288/update-gosa
---- gosa-2.6.0+svn11288~/update-gosa	2008-06-11 15:55:59.000000000 +0200
-+++ gosa-2.6.0+svn11288/update-gosa	2008-06-11 16:02:30.000000000 +0200
+--- a/update-gosa
++++ b/gosa-core/update-gosa
 @@ -169,20 +169,20 @@
  
  	/* For each language, merge the target .mo to the compiled directory. */

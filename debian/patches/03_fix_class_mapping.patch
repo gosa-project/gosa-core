@@ -1,14 +1,8 @@
-#! /bin/sh /usr/share/dpatch/dpatch-run
-## 03_fix_class_mapping.dpatch by  <cajus@debian.org>
-##
-## All lines beginning with `## DP:' are a description of the patch.
-## DP: Fix location of auto-generated class mapping file
-
-@DPATCH@
-diff -urNad gosa-2.6.3~/include/class_config.inc gosa-2.6.3/include/class_config.inc
---- gosa-2.6.3~/include/class_config.inc	2008-12-18 15:13:44.000000000 +0100
-+++ gosa-2.6.3/include/class_config.inc	2009-01-15 14:08:54.000000000 +0100
-@@ -76,12 +76,12 @@
+Author: <cajus@debian.org>
+Description: Fix location of auto-generated class mapping file
+--- a/include/class_config.inc
++++ b/gosa-core/include/class_config.inc
+@@ -100,12 +100,12 @@
          if we have installed or removed plugins. 
       */
      if(session::global_is_set("class_location.inc:timestamp")){
@@ -22,12 +16,11 @@ diff -urNad gosa-2.6.3~/include/class_config.inc gosa-2.6.3/include/class_config
 +    $tmp = stat("/var/cache/gosa/class.cache");
      session::global_set("class_location.inc:timestamp",$tmp['mtime']);
  
- 
-diff -urNad gosa-2.6.3~/include/functions.inc gosa-2.6.3/include/functions.inc
---- gosa-2.6.3~/include/functions.inc	2009-01-15 14:07:35.000000000 +0100
-+++ gosa-2.6.3/include/functions.inc	2009-01-15 14:07:36.000000000 +0100
+     if($this->filename != "" && filemtime($this->filename) != $this->last_modified){
+--- a/include/functions.inc
++++ b/gosa-core/include/functions.inc
 @@ -73,7 +73,7 @@
- $svn_revision = '$Revision: 13322 $';
+ $svn_revision = '$Revision: 17589 $';
  
  /* Include required files */
 -require_once("class_location.inc");
@@ -35,9 +28,8 @@ diff -urNad gosa-2.6.3~/include/functions.inc gosa-2.6.3/include/functions.inc
  require_once ("functions_debug.inc");
  require_once ("accept-to-gettext.inc");
  
-diff -urNad gosa-2.6.3~/update-gosa gosa-2.6.3/update-gosa
---- gosa-2.6.3~/update-gosa	2008-06-10 09:56:22.000000000 +0200
-+++ gosa-2.6.3/update-gosa	2009-01-15 14:07:36.000000000 +0100
+--- a/update-gosa
++++ b/gosa-core/update-gosa
 @@ -21,7 +21,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
