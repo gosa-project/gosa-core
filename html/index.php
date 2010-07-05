@@ -365,7 +365,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
         $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
-        if ($expired == 1){
+        if ($expired == POSIX_ACCOUNT_EXPIRED){
           $message= _("Account locked. Please contact your system administrator!");
           $smarty->assign ('nextfield', 'password');
           new log("security","login","",array(),"Account for user \"$username\" has expired") ;
