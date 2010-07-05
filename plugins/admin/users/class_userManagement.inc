@@ -337,7 +337,11 @@ class userManagement extends management
                   }
               }
               if ($this->config->get_cfg_value("core","passwordHook") != ""){
-                  exec($this->config->get_cfg_value("core","passwordHook")." ".$this->dn." ".$new_password, $resarr);
+                  $ldap = $this->config->get_ldap_link();
+                  $ldap->cd($this->config->current['BASE']);
+                  $ldap->cat($this->dn,array('uid'));
+                  $attrs = $ldap->fetch();
+                  exec($this->config->get_cfg_value("core","passwordHook")." ".$attrs['uid'][0]." ".$new_password, $resarr);
               }
 
               // The user has to change his password on next login
