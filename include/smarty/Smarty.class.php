@@ -108,7 +108,7 @@ if (SMARTY_SPL_AUTOLOAD && set_include_path(get_include_path() . PATH_SEPARATOR 
  */
 class Smarty extends Smarty_Internal_Data {
     // smarty version
-    const SMARTY_VERSION = '3.0rc1'; // SVN Rev: 3286
+    const SMARTY_VERSION = 'Smarty-3.0-RC2'; 
     // auto literal on delimiters with whitspace
     public $auto_literal = true; 
     // display error on not assigned variables

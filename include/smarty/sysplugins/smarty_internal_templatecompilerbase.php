@@ -133,7 +133,7 @@ class Smarty_Internal_TemplateCompilerBase {
             return '';
         } else {
             // not an internal compiler tag
-            if (strlen($tag) < 6 || substr_compare($tag, 'close', -5, 5) != 0) {
+            if (strlen($tag) < 6 || substr($tag, -5) != 'close') {
                 // check if tag is a registered object
                 if (isset($this->smarty->registered_objects[$tag]) && isset($args['object_methode'])) {
                     $methode = $args['object_methode'];
@@ -363,7 +363,6 @@ class Smarty_Internal_TemplateCompilerBase {
             // generate replacement code
             if ((!$this->template->resource_object->isEvaluated || $this->template->forceNocache) && $this->template->caching && !$this->suppressNocacheProcessing &&
                     ($this->nocache || $this->tag_nocache || $this->template->forceNocache == 2)) {
-                $this->tag_nocache = false;
                 $this->template->has_nocache_code = true;
                 $_output = str_replace("'", "\'", $content);
                 $_output = "<?php echo '/*%%SmartyNocache:{$this->nocache_hash}%%*/" . $_output . "/*/%%SmartyNocache:{$this->nocache_hash}%%*/';?>"; 
@@ -383,6 +382,7 @@ class Smarty_Internal_TemplateCompilerBase {
             $_output = $content;
         } 
         $this->suppressNocacheProcessing = false;
+        $this->tag_nocache = false;
         return $_output;
     } 
     /**
