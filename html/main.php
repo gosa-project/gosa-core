@@ -192,11 +192,19 @@ $smarty->assign("hideMenus", FALSE);
 if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
     $expired= ldap_expired_account($config, $ui->dn, $ui->username);
     if ($expired == 2){
+
+        // The users password is about to xpire soon, display a warning message.
         new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
         msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
     } elseif ($expired == 3){
+
+        // The password is expired, we are now going to enforce a new one from the user.
+
+        // Hide the GOsa menus to avoid leaving the enforced password change dialog.
         $smarty->assign("hideMenus", TRUE);
         $plug = (isset($_GET['plug'])) ? $_GET['plug'] : null;
+
+        // Search for the 'password' class and set its id as active plug.
         foreach ($plist->dirlist as $key => $value){
             if (preg_match("/\bpassword\b/i",$value)){
                 if($plug != $key) {
