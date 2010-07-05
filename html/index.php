@@ -369,6 +369,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
           $message= _("Account locked. Please contact your system administrator!");
           $smarty->assign ('nextfield', 'password');
           new log("security","login","",array(),"Account for user \"$username\" has expired") ;
+          displayLogin();
+          exit();
         } elseif ($expired == 3){
           $plist= new pluglist($config, $ui);
           foreach ($plist->dirlist as $key => $value){
