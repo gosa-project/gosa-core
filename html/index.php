@@ -371,16 +371,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
           new log("security","login","",array(),"Account for user \"$username\" has expired") ;
           displayLogin();
           exit();
-        } elseif ($expired == 3){
-          $plist= new pluglist($config, $ui);
-          foreach ($plist->dirlist as $key => $value){
-            if (preg_match("/\bpassword\b/i",$value)){
-              $plug=$key;
-              new log("security","login","",array(),"User \"$username\" password forced to change") ;
-              header ("Location: main.php?plug=$plug&amp;reset=1");
-              exit;
-            }
-          }
         }
       }
 

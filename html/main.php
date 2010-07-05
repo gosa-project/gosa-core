@@ -333,13 +333,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 /* check if we are using account expiration */
+$smarty->assign("hideMenus", FALSE);
 if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
-  $expired= ldap_expired_account($config, $ui->dn, $ui->username);
-
-  if ($expired == 2){
-    new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
-    msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
-  }
+    $expired= ldap_expired_account($config, $ui->dn, $ui->username);
+    if ($expired == 2){
+        new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
+        msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
+    } elseif ($expired == 3){
+        $smarty->assign("hideMenus", TRUE);
+    }
 }
 
 /* Load plugin */
