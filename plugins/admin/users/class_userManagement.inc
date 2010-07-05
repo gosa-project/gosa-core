@@ -336,12 +336,12 @@ class userManagement extends management
                       return($smarty->fetch(get_template_path('password.tpl', TRUE)));
                   }
               }
-              if ($this->config->get_cfg_value("core","passwordHook") != ""){
+              if ($this->config->get_cfg_value("passwordHook") != ""){
                   $ldap = $this->config->get_ldap_link();
                   $ldap->cd($this->config->current['BASE']);
                   $ldap->cat($this->dn,array('uid'));
                   $attrs = $ldap->fetch();
-                  exec($this->config->get_cfg_value("core","passwordHook")." ".$attrs['uid'][0]." ".$new_password, $resarr);
+                  exec($this->config->get_cfg_value("passwordHook")." ".$attrs['uid'][0]." ".$_POST['new_password'], $resarr);
               }
 
               // The user has to change his password on next login
