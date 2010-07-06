@@ -298,8 +298,14 @@ class sortableListing {
         $first= " style='border:0'";
 
         foreach ($this->displayData[$row] as $column) {
-          $result.= "   <td$editable$first>".$column."</td>\n";
-          $first= "";
+
+            // Do NOT use the onClick statement for columns that contain links or buttons.
+            if(preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)){
+                $result.= "   <td$first>".$column."</td>\n";
+            }else{
+                $result.= "   <td$editable$first>".$column."</td>\n";
+            }
+            $first= "";
         }
 
         if ($action_width) {
