@@ -732,6 +732,15 @@ function ldap_expired_account($config, $userdn, $uid)
         }
     }
 
+    // -- I guess this is the correct detection, isn't it?
+    if($shadowLastChange != null && $shadowWarning != null && $shadowMax != null){
+        $daysRemaining = ($shadowLastChange + $shadowMax) - $current ;
+        if($daysRemaining > 0 && $daysRemaining <= $shadowWarning){
+                return(POSIX_WARN_ABOUT_EXPIRATION);
+        }
+    }
+
+
 
     // Check if we've to force the user to change his password.
     // --------------------------------------------------------
