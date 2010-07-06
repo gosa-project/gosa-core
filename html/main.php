@@ -191,11 +191,13 @@ $plist->gen_menu();
 $smarty->assign("hideMenus", FALSE);
 if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
     $expired= ldap_expired_account($config, $ui->dn, $ui->username);
-    if ($expired == POSIX_WARN_ABOUT_EXPIRATION){
+    if ($expired == POSIX_WARN_ABOUT_EXPIRATION && !session::is_set('POSIX_WARN_ABOUT_EXPIRATION__DONE')){
 
         // The users password is about to xpire soon, display a warning message.
         new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
         msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
+        session::set('POSIX_WARN_ABOUT_EXPIRATION__DONE', TRUE);
+    
     } elseif ($expired == POSIX_FORCE_PASSWORD_CHANGE){
 
         // The password is expired, we are now going to enforce a new one from the user.
