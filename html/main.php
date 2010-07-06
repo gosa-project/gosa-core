@@ -190,6 +190,40 @@ if (session::global_is_set('plugin_dir')){
 } else {
   $old_plugin_dir= "";
 }
+
+// Generate menus 
+$plist->gen_headlines();
+$plist->gen_menu();
+$plist->genPathMenu();
+
+/* check if we are using account expiration */
+$smarty->assign("hideMenus", FALSE);
+if ($config->get_cfg_value("core","handleExpiredAccounts") == "true"){
+    $expired= ldap_expired_account($config, $ui->dn, $ui->username);
+ 
+    if ($expired == POSIX_WARN_ABOUT_EXPIRATION && !session::is_set('POSIX_WARN_ABOUT_EXPIRATION__DONE')){
+
+        // The users password is about to xpire soon, display a warning message.
+        new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
+        msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
+        session::set('POSIX_WARN_ABOUT_EXPIRATION__DONE', TRUE);
+
+    } elseif ($expired == POSIX_FORCE_PASSWORD_CHANGE){
+
+        // The password is expired, we are now going to enforce a new one from the user.
+
+        // Hide the GOsa menus to avoid leaving the enforced password change dialog.
+        $smarty->assign("hideMenus", TRUE);
+        $plug = (isset($_GET['plug'])) ? $_GET['plug'] : null;
+
+        // Detect password plugin id:
+        $passId =  array_search('password', $plist->pluginList);
+        if($passId !== FALSE){
+            $_GET['plug'] = $passId;
+        }
+    }
+}
+
 if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
   $plug= validate($_GET['plug']);
   $plugin_dir= $plist->get_path($plug);
@@ -337,16 +371,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $_REQUEST[$name] = $value;
       } 
     }
-  }
-}
-
-/* check if we are using account expiration */
-if ($config->get_cfg_value("core","handleExpiredAccounts") == "true"){
-  $expired= ldap_expired_account($config, $ui->dn, $ui->username);
-
-  if ($expired == 2){
-    new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
-    msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
   }
 }
 

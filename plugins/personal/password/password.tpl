@@ -6,6 +6,12 @@
 
 <hr>
 
+{if $passwordExpired}
+    <b><font color='red'>{t}Your Password has expired. Please choose a new password.{/t}</font></b>
+<hr>
+{/if}
+
+
 {if !$proposalEnabled}
   <table cellpadding=4 border=0 summary="{t}Password change dialog{/t}">
     <tr>

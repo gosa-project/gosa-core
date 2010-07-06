@@ -25,12 +25,20 @@
     </ul>
    </div>
    <form action='main.php{$plug}' id='mainform' name='mainform' method='post' enctype='multipart/form-data'>
-   {$menu}
-   {$msg_dialogs}
-   <div class='plugin-area'>
-     {$pathMenu}
-     {$contents}
-   </div>
+
+   {if $hideMenus}
+
+    {$contents}
+
+   {else}
+
+    {$menu}
+    {$msg_dialogs}
+    <div class='plugin-area'>
+      {$pathMenu}
+      {$contents}
+    </div>
+   {/if}
 
    {if $channel != ""}
    <input type="hidden" name="_channel_" value="{$channel}">

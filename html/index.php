@@ -355,20 +355,12 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             if ($config->get_cfg_value("core","handleExpiredAccounts") == "true") {
                 $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
-                if ($expired == 1) {
+                if ($expired == POSIX_ACCOUNT_EXPIRED) {
                     $message= _("Account locked. Please contact your system administrator!");
                     $smarty->assign ('nextfield', 'password');
                     new log("security","login","",array(),"Account for user \"$username\" has expired") ;
-                } elseif ($expired == 3) {
-                    $plist= new pluglist($config, $ui);
-                    foreach ($plist->dirlist as $key => $value) {
-                        if (preg_match("/\bpassword\b/i",$value)) {
-                            $plug=$key;
-                            new log("security","login","",array(),"User \"$username\" password forced to change") ;
-                            header ("Location: main.php?plug=$plug&amp;reset=1");
-                            exit;
-                        }
-                    }
+                    displayLogin();
+                    exit();
                 }
             }
 

@@ -91,6 +91,12 @@ define ("DEBUG_MAIL",   512); /*! Debug level for all about mail (mailAccounts, 
 define ("DEBUG_FAI",   1024); // FAI (incomplete)
 define ("DEBUG_RPC",   2048); /*! Debug level for communication with remote procedures */
 
+// Define shadow states
+define ("POSIX_ACCOUNT_EXPIRED", 1);
+define ("POSIX_WARN_ABOUT_EXPIRATION", 2);
+define ("POSIX_FORCE_PASSWORD_CHANGE", 4);
+define ("POSIX_DISALLOW_PASSWORD_CHANGE", 8);
+
 /* Rewrite german 'umlauts' and spanish 'accents'
    to get better results */
 $REWRITE= array( "ä" => "ae",
@@ -659,109 +665,126 @@ function ldap_login_user ($username, $password)
 }
 
 
-/*! \brief Test if account is about to expire
+/*! \brief      Checks the posixAccount status by comparing the shadow attributes.
  *
- * \param string 'userdn' the DN of the user
- * \param string 'username' the username
- * \return int Can be one of the following values:
- *  - 1 the account is locked
- *  - 2 warn the user that the password is about to expire and he should change
- *  his password
- *  - 3 force the user to change his password
- *  - 4 user should not be able to change his password
- * */
-function ldap_expired_account($config, $userdn, $username)
+ * @param Object    The GOsa configuration object.
+ * @param String    The 'dn' of the user to test the account status for.
+ * @param String    The 'uid' of the user we're going to test.
+ * @return Const
+ *                  POSIX_ACCOUNT_EXPIRED           - If the account is expired.
+ *                  POSIX_WARN_ABOUT_EXPIRATION     - If the account is going to expire.
+ *                  POSIX_FORCE_PASSWORD_CHANGE     - The password has to be changed.
+ *                  POSIX_DISALLOW_PASSWORD_CHANGE  - The password cannot be changed right now.
+ *
+ *
+ *
+ *      shadowLastChange
+ *      |
+ *      |---- shadowMin --->    |       <-- shadowMax --
+ *      |                       |       |
+ *      |------- shadowWarning ->       |
+ *                                      |-- shadowInactive --> DEACTIVATED
+ *                                      |
+ *                                      EXPIRED
+ *
+ */
+function ldap_expired_account($config, $userdn, $uid)
 {
+    // Skip this for the admin account, we do not want to lock him out.
+#    if($uid == 'admin') return(0);
+
     $ldap= $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
     $ldap->cat($userdn);
     $attrs= $ldap->fetch();
-    
-    /* default value no errors */
-    $expired = 0;
-    
-    $sExpire = 0;
-    $sLastChange = 0;
-    $sMax = 0;
-    $sMin = 0;
-    $sInactive = 0;
-    $sWarning = 0;
-    
-    $current= date("U");
-    
-    $current= floor($current /60 /60 /24);
-    
-    /* special case of the admin, should never been locked */
-    /* FIXME should allow any name as user admin */
-    if($username != "admin")
-    {
+    $current= floor(date("U") /60 /60 /24);
 
-      if(isset($attrs['shadowExpire'][0])){
-        $sExpire= $attrs['shadowExpire'][0];
-      } else {
-        $sExpire = 0;
-      }
-      
-      if(isset($attrs['shadowLastChange'][0])){
-        $sLastChange= $attrs['shadowLastChange'][0];
-      } else {
-        $sLastChange = 0;
-      }
-      
-      if(isset($attrs['shadowMax'][0])){
-        $sMax= $attrs['shadowMax'][0];
-      } else {
-        $smax = 0;
-      }
-
-      if(isset($attrs['shadowMin'][0])){
-        $sMin= $attrs['shadowMin'][0];
-      } else {
-        $sMin = 0;
-      }
-      
-      if(isset($attrs['shadowInactive'][0])){
-        $sInactive= $attrs['shadowInactive'][0];
-      } else {
-        $sInactive = 0;
-      }
-      
-      if(isset($attrs['shadowWarning'][0])){
-        $sWarning= $attrs['shadowWarning'][0];
-      } else {
-        $sWarning = 0;
-      }
-      
-      /* is the account locked */
-      /* shadowExpire + shadowInactive (option) */
-      if($sExpire >0){
-        if($current >= ($sExpire+$sInactive)){
-          return(1);
-        }
-      }
-    
-      /* the user should be warned to change is password */
-      if((($sExpire >0) && ($sWarning >0)) && ($sExpire >= $current)){
-        if (($sExpire - $current) < $sWarning){
-          return(2);
-        }
-      }
-      
-      /* force user to change password */
-      if(($sLastChange >0) && ($sMax) >0){
-        if($current >= ($sLastChange+$sMax)){
-          return(3);
-        }
-      }
-      
-      /* the user should not be able to change is password */
-      if(($sLastChange >0) && ($sMin >0)){
-        if (($sLastChange + $sMin) >= $current){
-          return(4);
-        }
-      }
+    // Fetch required attributes
+    foreach(array('shadowExpire','shadowLastChange','shadowMax','shadowMin',
+                'shadowInactive','shadowWarning') as $attr){
+        $$attr = (isset($attrs[$attr][0]))? $attrs[$attr][0] : null;
     }
-   return($expired);
+
+
+    // Check if the account has expired.
+    // ---------------------------------
+    // An account is locked/expired once its expiration date has reached (shadowExpire).
+    // If the optional attribute (shadowInactive) is set, we've to postpone
+    //  the account expiration by the amount of days specified in (shadowInactive).
+    if($shadowExpire != null && $shadowExpire >= $current){
+
+        // The account seems to be expired, but we've to check 'shadowInactive' additionally.
+        // ShadowInactive specifies an amount of days we've to reprieve the user.
+        // It some kind of x days' grace.
+        if($shadowInactive == null || $current > $shadowExpire + $shadowInactive){
+
+            // Finally we've detect that the account is deactivated.
+            return(POSIX_ACCOUNT_EXPIRED);
+        }
+    }
+
+    // The users password is going to expire.
+    // --------------------------------------
+    // We've to warn the user in the case of an expiring account.
+    // An account is going to expire when it reaches its expiration date (shadowExpire).
+    // The user has to be warned, if the days left till expiration, match the
+    //  configured warning period (shadowWarning)
+    // --> shadowWarning: Warn x days before account expiration.
+    if($shadowExpire != null && $shadowWarning != null){
+
+        // Check if the account is still active and not already expired.
+        if($shadowExpire >= $current){
+
+            // Check if we've to warn the user by comparing the remaining
+            //  number of days till expiration with the configured amount
+            //  of days in shadowWarning.
+            if(($shadowExpire - $current) <= $shadowWarning){
+                return(POSIX_WARN_ABOUT_EXPIRATION);
+            }
+        }
+    }
+
+    // -- I guess this is the correct detection, isn't it? 
+    if($shadowLastChange != null && $shadowWarning != null && $shadowMax != null){
+        $daysRemaining = ($shadowLastChange + $shadowMax) - $current ;
+        if($daysRemaining > 0 && $daysRemaining <= $shadowWarning){
+                return(POSIX_WARN_ABOUT_EXPIRATION);
+        }
+    }
+
+
+    // Check if we've to force the user to change his password.
+    // --------------------------------------------------------
+    // A password change is enforced when the password is older than
+    //  the configured amount of days (shadowMax).
+    // The age of the current password (shadowLastChange) plus the maximum
+    //  amount amount of days (shadowMax) has to be smaller than the
+    //  current timestamp.
+    if($shadowLastChange != null && $shadowMax != null){
+
+        // Check if we've an outdated password.
+        if($current >= ($shadowLastChange + $shadowMax)){
+            return(POSIX_FORCE_PASSWORD_CHANGE);
+        }
+    }
+
+
+    // Check if we've to freeze the users password.
+    // --------------------------------------------
+    // Once a user has changed his password, he cannot change it again
+    //  for a given amount of days (shadowMin).
+    // We should not allow to change the password within GOsa too.
+    if($shadowLastChange != null && $shadowMin != null){
+
+        // Check if we've an outdated password.
+        if(($shadowLastChange + $shadowMin) >= $current){
+            return(POSIX_DISALLOW_PASSWORD_CHANGE);
+        }
+    }
+
+    return(0);
 }
+
 
 
 /*! \brief Add a lock for object(s)
