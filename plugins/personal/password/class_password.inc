@@ -68,8 +68,10 @@ class password extends plugin
     $smarty->assign("NotAllowed" , !preg_match("/w/i",$password_ACLS));
 
     /* Display expiration template */
+    $smarty->assign("passwordExpired", FALSE);
     if ($this->config->get_cfg_value("handleExpiredAccounts") == "true"){
       $expired= ldap_expired_account($this->config, $ui->dn, $ui->username);
+      $smarty->assign("passwordExpired", $expired & POSIX_FORCE_PASSWORD_CHANGE);
       if($expired == POSIX_DISALLOW_PASSWORD_CHANGE){
         return($smarty->fetch(get_template_path("nochange.tpl", TRUE)));
       }
@@ -82,7 +84,6 @@ class password extends plugin
     $smarty->assign("proposalEnabled" , $this->proposalEnabled);
     $smarty->assign("proposalSelected" , $this->proposalSelected);
 
-    $smarty->assign("passwordExpired", ldap_expired_account($this->config, $ui->dn, $ui->uid) & POSIX_FORCE_PASSWORD_CHANGE);
     
 
     if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;

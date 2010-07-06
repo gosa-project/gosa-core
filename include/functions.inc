@@ -677,12 +677,15 @@ function ldap_login_user ($username, $password)
  */
 function ldap_expired_account($config, $userdn, $uid)
 {
+
+    // Skip this for the admin account, we do not want to lock him out.
+    if($uid == 'admin') return(0);
+
     $ldap= $config->get_ldap_link();
     $ldap->cd($config->current['BASE']);
     $ldap->cat($userdn);
     $attrs= $ldap->fetch();
     $current= floor(date("U") /60 /60 /24);
-
 
     // Fetch required attributes 
     foreach(array('shadowExpire','shadowLastChange','shadowMax','shadowMin',
@@ -759,7 +762,7 @@ function ldap_expired_account($config, $userdn, $uid)
         }
     }    
 
-    return(NULL);
+    return(0);
 }
 
 
