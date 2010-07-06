@@ -10,6 +10,11 @@
 
 <hr>
 
+{if $passwordExpired}
+    <b><font color='red'>{t}Your Password has expired. Please choose a new password.{/t}</font></b>
+<hr>
+{/if}
+
 {if !$proposalEnabled}
 
   <table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
@@ -79,8 +84,8 @@
       </td>
     </tr>
   </table>
-{/if}
 
+{/if}
 
 <br>
 

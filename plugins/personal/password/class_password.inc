@@ -82,6 +82,9 @@ class password extends plugin
     $smarty->assign("proposalEnabled" , $this->proposalEnabled);
     $smarty->assign("proposalSelected" , $this->proposalSelected);
 
+    $smarty->assign("passwordExpired", ldap_expired_account($this->config, $ui->dn, $ui->uid) & POSIX_FORCE_PASSWORD_CHANGE);
+    
+
     if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;
 
 
