@@ -29,6 +29,7 @@
    {if $hideMenus}
 
     {$contents}
+    {$msg_dialogs}
 
    {else}
 

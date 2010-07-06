@@ -275,7 +275,7 @@ class userManagement extends management
             $attrs = $ldap->fetch();
             $this->passwordChangeForceable = 
                     in_array('sambaAccount', $attrs['objectClass']) || 
-                    in_array('posixAccount', $attrs['objectClass']);
+                    (in_array('posixAccount', $attrs['objectClass']) && isset($attrs['shadowMax']));
             $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
             $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
 
@@ -359,11 +359,19 @@ class userManagement extends management
 
                     // Update the posix shadow flag...
                     if($posix){
-                        $posixAccount = new posixAccount($this->config, $this->dn);
-                        $posixAccount->is_modified=TRUE;
-                        $posixAccount->activate_shadowExpire=1;
-                        $posixAccount->shadowExpire = date('d.m.Y', time() - (1 * 24 * 60 *60));
-                        $posixAccount->save();
+
+                        $current= floor(date("U") /60 /60 /24);
+                        $enforceDate = $current -  $attrs['shadowMax'][0];
+                        $new_attrs = array();
+                        $new_attrs['shadowLastChange'] = $enforceDate;
+                        $ldap->cd($this->dn);
+                        $ldap->modify($new_attrs);
+
+#                       $posixAccount = new posixAccount($this->config, $this->dn);
+#                       $posixAccount->is_modified=TRUE;
+#                       $posixAccount->activate_shadowExpire=1;
+#                       $posixAccount->shadowExpire = date('d.m.Y', time() - (1 * 24 * 60 *60));
+#                       $posixAccount->save();
                     }
                    
                     // Update the samba kickoff flag...
