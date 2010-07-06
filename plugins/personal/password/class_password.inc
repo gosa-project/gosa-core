@@ -71,7 +71,7 @@ class password extends plugin
 
         /* Display expiration template */
         $smarty->assign("passwordExpired", FALSE);
-        if ($this->config->get_cfg_value("core","handleExpiredAccounts") == "true"){
+        if ($this->config->boolValueIsTrue("core","handleExpiredAccounts")){
             $expired= ldap_expired_account($this->config, $ui->dn, $ui->username);
             $smarty->assign("passwordExpired", $expired & POSIX_FORCE_PASSWORD_CHANGE);
             if($expired == POSIX_DISALLOW_PASSWORD_CHANGE){

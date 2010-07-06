@@ -352,7 +352,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             }
 
             /* are we using accountexpiration */
-            if ($config->get_cfg_value("core","handleExpiredAccounts") == "true") {
+            if ($config->boolValueIsTrue("core","handleExpiredAccounts")) {
                 $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
                 if ($expired == POSIX_ACCOUNT_EXPIRED) {

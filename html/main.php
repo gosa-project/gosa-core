@@ -198,7 +198,7 @@ $plist->genPathMenu();
 
 /* check if we are using account expiration */
 $smarty->assign("hideMenus", FALSE);
-if ($config->get_cfg_value("core","handleExpiredAccounts") == "true"){
+if ($config->boolValueIsTrue("core","handleExpiredAccounts")){
     $expired= ldap_expired_account($config, $ui->dn, $ui->username);
  
     if ($expired == POSIX_WARN_ABOUT_EXPIRATION && !session::is_set('POSIX_WARN_ABOUT_EXPIRATION__DONE')){
