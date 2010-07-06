@@ -663,8 +663,19 @@ function ldap_login_user ($username, $password)
  *                  POSIX_FORCE_PASSWORD_CHANGE     - The password has to be changed.
  *                  POSIX_DISALLOW_PASSWORD_CHANGE  - The password cannot be changed right now.
  * 
+ * 
+ * 
+ *      shadowLastChange       
+ *      |
+ *      |---- shadowMin --->    |       <-- shadowMax --
+ *      |                       |       |
+ *      |------- shadowWarning ->       | 
+ *                                      |-- shadowInactive --> DEACTIVATED
+ *                                      |
+ *                                      EXPIRED
+ *                           
  */
-function ldap_expired_account($config, $userdn, $username)
+function ldap_expired_account($config, $userdn, $uid)
 {
     $ldap= $config->get_ldap_link();
     $ldap->cd($config->current['BASE']);
