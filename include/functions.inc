@@ -683,6 +683,7 @@ function ldap_expired_account($config, $userdn, $uid)
     $attrs= $ldap->fetch();
     $current= floor(date("U") /60 /60 /24);
 
+
     // Fetch required attributes 
     foreach(array('shadowExpire','shadowLastChange','shadowMax','shadowMin',
                 'shadowInactive','shadowWarning') as $attr){
@@ -697,10 +698,10 @@ function ldap_expired_account($config, $userdn, $uid)
     //  the account expiration by the amount of days specified in (shadowInactive).
     if($shadowExpire != null && $shadowExpire >= $current){
 
-        // The account seems to be inactive, but we've to check 'shadowInactive' additionally.
+        // The account seems to be expired, but we've to check 'shadowInactive' additionally.
         // ShadowInactive specifies an amount of days we've to reprieve the user.
         // It some kind of x days' grace.
-        if($shadowExpire == null || $shadowExpire + $shadowExpire >= $current){
+        if($shadowInactive == null || $current > $shadowExpire + $shadowInactive){
 
             // Finally we've detect that the account is deactivated. 
             return(POSIX_ACCOUNT_EXPIRED);
