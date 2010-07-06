@@ -670,7 +670,7 @@ function ldap_expired_account($config, $userdn, $username)
     $ldap->cd($config->current['BASE']);
     $ldap->cat($userdn);
     $attrs= $ldap->fetch();
-    $current= floor($date("U") /60 /60 /24);
+    $current= floor(date("U") /60 /60 /24);
 
     // Fetch required attributes 
     foreach(array('shadowExpire','shadowLastChange','shadowMax','shadowMin',
