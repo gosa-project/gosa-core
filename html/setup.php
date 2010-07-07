@@ -61,12 +61,24 @@ session::set('errorsAlreadyPosted',array());
 session::set('LastError',"");
 
 /* Set template compile directory */
-$smarty->compile_dir= '/var/spool/gosa/';
+if(!session::is_set("SETUP_COMPILE_DIR")){
+    session::set('SETUP_COMPILE_DIR', '/var/spool/gosa/');
+}
+if(isset($_POST['compile_dir']) && isset($_POST['useCompileDir'])){
+    session::set('SETUP_COMPILE_DIR', get_post('compile_dir'));
+}
+
+$smarty->compile_dir= session::get('SETUP_COMPILE_DIR');
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
-  msg_dialog::display(_("Smarty"),sprintf( _("Compile directory %s is not accessible!"),
-    bold($smarty->compile_dir)),FATAL_ERROR_DIALOG);
+    echo "<form action='?' method='POST'>".
+         "   <h2>".
+         "       "._("Please specify a writeable directory for GOsa to create temporary files.").
+         "   </h2>".
+         "   ".sprintf(_("GOsa requires a writeable directory temporary store generated templates."), $smarty->compile_dir).
+         "<input name='compile_dir' type='text' value=\"".htmlentities(session::get('SETUP_COMPILE_DIR'), ENT_QUOTES, 'UTF-8')."\"> ".
+         "<button name='useCompileDir'>".msgPool::okButton()."</button></form>";
   exit();
 }
 
