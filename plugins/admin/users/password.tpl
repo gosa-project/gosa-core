@@ -43,8 +43,16 @@
             {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
       </td>
       <td>
-        <input type='text' disabled value="{$proposal}" style='color: black;'>
-        &nbsp;{image path='images/lists/reload.png' action='refreshProposal'}
+        <div style='
+                  width:180px;
+                  border:1px solid #CCC;
+                  padding:3px;
+                  padding-top:5px;
+                  padding-bottom:4px;
+            '>{$proposal}</div>
+      </td>
+      <td style='vertical-align: middle;'>
+            {image path='images/lists/reload.png' action='refreshProposal'}
       </td>
     </tr>
     <tr>
