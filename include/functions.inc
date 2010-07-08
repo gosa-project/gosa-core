@@ -2909,6 +2909,35 @@ function get_post($name)
 }
 
 
+/*! \brief Returns contents of the given POST variable and check magic quotes settings
+ *
+ * Depending on the magic quotes settings this returns a stripclashed'ed version of
+ * a certain POST variable.
+ *
+ * \param string 'name' the POST var to return ($_POST[$name])
+ * \return string
+ * */
+function get_binary_post($name)
+{
+  if(!isset($_POST[$name])){
+    trigger_error("Requested POST value (".$name.") does not exists, you should add a check to prevent this message.");
+    return(FALSE);
+  }
+
+  $p = str_replace('\0', '', $_POST[$name]);
+  if(get_magic_quotes_gpc()){
+    return(stripcslashes($p));
+  }else{
+    return($_POST[$p]);
+  }
+}
+
+function set_post($value)
+{
+    return(htmlentities($value, ENT_QUOTES, 'utf-8'));
+}
+
+
 /*! \brief Return class name in correct case */
 function get_correct_class_name($cls)
 {
