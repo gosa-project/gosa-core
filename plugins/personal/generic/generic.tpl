@@ -154,7 +154,7 @@
 
     <tr>
      <td>
-      <label for="preferredLanguage">{t}Preferred langage{/t}</label>
+      <label for="preferredLanguage">{t}Preferred language{/t}</label>
      </td>
      <td>
       {render acl=$preferredLanguageACL checkbox=$multiple_support checked=$use_preferredLanguage}
