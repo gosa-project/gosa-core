@@ -2934,6 +2934,12 @@ function get_binary_post($name)
 
 function set_post($value)
 {
+    if(is_array($value)){
+        foreach($value as $key => $val){
+            $value[$key] = set_post($val);
+        }
+        return($value);
+    }
     return(htmlentities($value, ENT_QUOTES, 'utf-8'));
 }
 
