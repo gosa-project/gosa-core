@@ -352,7 +352,7 @@ class aclrole extends acl
     /* Save common values */
     foreach (array("aclType", "aclObject", "target") as $key){
       if (isset($_POST[$key]) && $this->acl_is_writeable("gosaAclTemplate")){
-        $this->$key= validate($_POST[$key]);
+        $this->$key= get_post($key);
       }
     }
 
@@ -453,7 +453,7 @@ class aclrole extends acl
 
     /* Assign cn and decription if this is a role */
     foreach(array("cn","description") as $name){
-      $smarty->assign($name,$this->$name);
+      $smarty->assign($name,set_post($this->$name));
     }
     return ($smarty->fetch (get_template_path('acl_role.tpl',dirname(__FILE__))));
   }
@@ -678,7 +678,7 @@ class aclrole extends acl
   function saveCopyDialog()
   {
     if(isset($_POST['cn'])){
-      $this->cn = $_POST['cn'];
+      $this->cn = get_post('cn');
     }
   }
   
@@ -686,7 +686,7 @@ class aclrole extends acl
   function getCopyDialog()
   {
     $smarty = get_smarty();
-    $smarty->assign("cn",$this->cn);
+    $smarty->assign("cn",set_post($this->cn));
     $str = $smarty->fetch(get_template_path("paste_role.tpl",TRUE,dirname(__FILE__)));
     $ret = array();
     $ret['string'] = $str;
