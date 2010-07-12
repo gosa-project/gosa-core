@@ -552,7 +552,7 @@ class userManagement extends management
             $smarty = get_smarty();
             foreach(array("sn", "givenName", "uid", "template") as $attr){
                 if(isset($_POST[$attr])){
-                    $smarty->assign("$attr", get_post($attr));
+                    $smarty->assign("$attr", set_post(get_post($attr)));
                 }else{
                     $smarty->assign("$attr", "");
                 }
@@ -573,11 +573,11 @@ class userManagement extends management
 
             // Remember user input.
             $smarty = get_smarty();
-            $this->sn             = $_POST['sn'];
-            $this->givenName      = $_POST['givenName'];
+            $this->sn             = get_post('sn');
+            $this->givenName      = get_post('givenName');
 
             // Avoid duplicate entries, check if such a user already exists.
-            $dn= preg_replace("/^[^,]+,/i", "", $_POST['template']);
+            $dn= preg_replace("/^[^,]+,/i", "", get_post('template'));
             $ldap= $this->config->get_ldap_link();
             $ldap->cd ($dn);
             $ldap->search ("(&(sn=".normalizeLdap($this->sn).")(givenName=".normalizeLdap($this->givenName)."))", array("givenName"));
@@ -606,7 +606,7 @@ class userManagement extends management
                 $smarty->assign("$attr", $this->$attr);
             }
             if (isset($_POST['template'])){
-                $smarty->assign("template", $_POST['template']);
+                $smarty->assign("template", get_post('template'));
             }
             $smarty->assign("templates",$templates); 
             return($smarty->fetch(get_template_path('template.tpl', TRUE)));
@@ -616,10 +616,10 @@ class userManagement extends management
         /********************
          * 3   No template - Ok. Lets fill the data into the user object and skip templating here. 
          ********************/
-        if ($_POST['template'] == 'none'){
+        if (get_post('template') == 'none'){
             foreach(array("sn", "givenName", "uid") as $attr){
                 if (isset($_POST[$attr])){
-                    $this->tabObject->by_object['user']->$attr= $_POST[$attr];
+                    $this->tabObject->by_object['user']->$attr= get_post($attr);
                 }
             }
 
@@ -636,13 +636,13 @@ class userManagement extends management
 
             // Move user supplied data to sub plugins 
             foreach(array("uid","sn","givenName") as $attr){
-                $this->$attr = $_POST[$attr];
+                $this->$attr = get_post($attr);
                 $this->tabObject->$attr       = $this->$attr;
                 $this->tabObject->by_object['user']->$attr = $this->$attr;
             }
 
             // Adapt template values.
-            $template_dn              = $_POST['template'];
+            $template_dn              = get_post('template');
             $this->tabObject->adapt_from_template($template_dn, array("uid","cn","givenName","sn"));
             $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/i')."/", '', $template_dn);
             $this->tabObject->by_object['user']->base= $template_base;
