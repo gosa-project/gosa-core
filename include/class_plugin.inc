@@ -334,12 +334,9 @@ class plugin
     /* Save values to object */
     foreach ($this->attributes as $val){
       if (isset ($_POST["$val"]) && $this->acl_is_writeable($val)){
+  
         /* Check for modifications */
-        if (get_magic_quotes_gpc()) {
-          $data= stripcslashes($_POST["$val"]);
-        } else {
-          $data= $this->$val = $_POST["$val"];
-        }
+        $data= $this->$val = get_post($val);
         if ($this->$val != $data){
           $this->is_modified= TRUE;
         }
@@ -1449,12 +1446,7 @@ class plugin
 
       if (isset ($_POST["$val"]) && $this->acl_is_writeable($val)){
 
-        /* Check for modifications */
-        if (get_magic_quotes_gpc()) {
-          $data= stripcslashes($_POST["$val"]);
-        } else {
-          $data= $this->$val = $_POST["$val"];
-        }
+        $data= $this->$val = get_post($val);
         if ($this->$val != $data){
           $this->is_modified= TRUE;
         }
