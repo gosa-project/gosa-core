@@ -172,7 +172,12 @@ class core extends plugin {
                 $list = array('mail' => 'mail','uid' => 'uid');
                 break;
             case 'mailMethod': 
-                $list = mailMethod::get_methods();
+                $tmp = mailMethod::get_methods();
+                $list =array();
+                foreach($tmp as $name => $value){
+                    $name = preg_replace('/^mailMethod/','', $name);
+                    $list[$name] = $value;
+                }
                 $list[''] = _("None");
                 break;
             case 'language':
