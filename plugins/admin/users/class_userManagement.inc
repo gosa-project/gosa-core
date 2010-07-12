@@ -253,7 +253,7 @@ class userManagement extends management
         $this->enforcePasswordChange = isset($_POST['new_password']) && isset($_POST['enforcePasswordChange']);
 
         $smarty = get_smarty();
-        $smarty->assign("proposal" , $this->proposal);
+        $smarty->assign("proposal" , set_post($this->proposal));
         $smarty->assign("proposalEnabled" , $this->proposalEnabled);
         $smarty->assign("proposalSelected" , $this->proposalSelected);
 
@@ -280,7 +280,7 @@ class userManagement extends management
             $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
 
             // Assign proposal variables
-            $smarty->assign("proposal" , $this->proposal);
+            $smarty->assign("proposal" , set_post($this->proposal));
             $smarty->assign("proposalEnabled" , $this->proposalEnabled);
             $smarty->assign("proposalSelected" , $this->proposalSelected);
 
@@ -564,7 +564,6 @@ class userManagement extends management
             return($smarty->fetch(get_template_path('template.tpl', TRUE)));
         }
 
-
         /********************
          * 2   There was a template selected, now ask for the uid.
          ********************/
@@ -581,6 +580,7 @@ class userManagement extends management
             $ldap= $this->config->get_ldap_link();
             $ldap->cd ($dn);
             $ldap->search ("(&(sn=".normalizeLdap($this->sn).")(givenName=".normalizeLdap($this->givenName)."))", array("givenName"));
+
             if ($ldap->count () != 0){
                 msg_dialog::displayChecks(array(msgPool::duplicated(_("Name"))));
             }else{
@@ -603,7 +603,7 @@ class userManagement extends management
 
             // Assign user input 
             foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
-                $smarty->assign("$attr", $this->$attr);
+                $smarty->assign("$attr", set_post($this->$attr));
             }
             if (isset($_POST['template'])){
                 $smarty->assign("template", get_post('template'));

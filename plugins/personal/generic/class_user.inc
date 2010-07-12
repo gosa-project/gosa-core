@@ -288,7 +288,7 @@ class user extends plugin
 
     /* Handle add/delete for restriction mode */
     if (isset($_POST['add_res']) && isset($_POST['res'])) {
-      $val= validate($_POST['res']);
+      $val= get_post('res');
       if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/', $val) ||
           preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+)$/', $val) ||
           preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)$/', $val)) {
@@ -516,7 +516,7 @@ class user extends plugin
         if (isset($_POST["certificateSerialNumber"]) &&
             $_POST["certificateSerialNumber"] != ""){
 
-          if (!tests::is_id($_POST["certificateSerialNumber"])){
+          if (!tests::is_id(get_post('certificateSerialNumber'))){
             $fail = true;
             msg_dialog::display(_("Error"), msgPool::invalid(_("Serial number"),$_POST["certificateSerialNumber"],"/[0-9]/"),ERROR_DIALOG);
 
@@ -529,7 +529,7 @@ class user extends plugin
             }
           }
 
-          $this->certificateSerialNumber= $_POST["certificateSerialNumber"];
+          $this->certificateSerialNumber= get_post("certificateSerialNumber");
           $this->is_modified= TRUE;
         }
         if(!$fail){
@@ -627,7 +627,7 @@ class user extends plugin
     /* Load attributes and acl's */
     $ui =get_userinfo();
     foreach($this->attributes as $val){
-      $smarty->assign("$val", $this->$val);
+      $smarty->assign("$val", set_post($this->$val));
       if(in_array($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
@@ -652,8 +652,8 @@ class user extends plugin
     // In case of multiple edit, we need a readonly ACL for the list. 
     $smarty->assign('gosaLoginRestriction_ONLY_R_ACL', preg_replace("/[^r]/i","", $this->getacl($val)));
 
-    $smarty->assign("pwmode", $pwd_methods);
-    $smarty->assign("pwmode_select", $this->pw_storage);
+    $smarty->assign("pwmode", set_post($pwd_methods));
+    $smarty->assign("pwmode_select", set_post($this->pw_storage));
     $smarty->assign("pw_configurable", $is_configurable);
     $smarty->assign("passwordStorageACL", $this->getacl("userPassword"));
     $smarty->assign("CertificatesACL",  $this->getacl("Certificate"));
@@ -670,7 +670,7 @@ class user extends plugin
                         "internet,ivbv", "internet,testa", "internet,ivbv,testa");
       $smarty->assign("ivbbmodes", $ivbbmodes);
       foreach ($this->govattrs as $val){
-        $smarty->assign("$val", $this->$val);
+        $smarty->assign("$val", set_post($this->$val));
         $smarty->assign("$val"."ACL", $this->getacl($val));
       }
     } else {
@@ -702,7 +702,7 @@ class user extends plugin
       $smarty->assign("has_phoneaccount", "false");
     }
     $smarty->assign("multiple_support" , $this->multiple_support_active);
-    $smarty->assign("manager_name",$this->manager_name);
+    $smarty->assign("manager_name", set_post($this->manager_name));
     return($smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__))));
   }
 
@@ -829,7 +829,7 @@ class user extends plugin
       if ($this->governmentmode){
         foreach ($this->govattrs as $val){
           if ($this->acl_is_writeable($val)){
-            $data= stripcslashes($_POST["$val"]);
+            $data= get_post($val);
             if ($data != $this->$val){
               $this->is_modified= TRUE;
             }
@@ -848,7 +848,7 @@ class user extends plugin
       if (isset($_POST['pw_storage'])){
         foreach(array("pw_storage") as $val){
           if(isset($_POST[$val])){
-            $data= validate($_POST[$val]);
+            $data= get_post($val);
             if ($data != $this->$val){
               $this->is_modified= TRUE;
             }
@@ -1587,12 +1587,12 @@ class user extends plugin
     $smarty->assign("passwordTodo","clear");
 
     if(isset($_POST['passwordTodo'])){
-      $smarty->assign("passwordTodo",$_POST['passwordTodo']);
+      $smarty->assign("passwordTodo",set_post(get_post('passwordTodo')));
     }
 
-    $smarty->assign("sn",       $this->sn);
-    $smarty->assign("givenName",$this->givenName);
-    $smarty->assign("uid",      $this->uid);
+    $smarty->assign("sn",       set_post($this->sn));
+    $smarty->assign("givenName",set_post($this->givenName));
+    $smarty->assign("uid",      set_post($this->uid));
     $smarty->assign("rand",     $rand);
     $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
 
@@ -1622,7 +1622,7 @@ class user extends plugin
     $attrs = array("uid","givenName","sn");
     foreach($attrs as $attr){
       if(isset($_POST[$attr])){
-        $this->$attr = $_POST[$attr];
+        $this->$attr = get_post($attr);
       }
     } 
   }
@@ -1806,7 +1806,7 @@ class user extends plugin
     if (isset($_POST['pw_storage'])){
       foreach(array("pw_storage") as $val){
         if(isset($_POST[$val])){
-          $data= validate(get_post($val));
+          $data= get_post($val);
           if ($data != $this->$val){
             $this->is_modified= TRUE;
           }
