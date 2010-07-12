@@ -1,6 +1,7 @@
 <table width='100%' summary="{t}Posix settings{/t}">
  <tr>
-  <td>
+  <td style='width:50%;' class='right-border'>
+
    <h3>{t}Posix settings{/t}</h3>
    <table summary="{t}Home directory{/t}">
     <tr>
@@ -12,6 +13,7 @@
      </td>
     </tr>
    </table>
+
    <table summary="{t}Account settings{/t}">
     <tr>
      <td><label for="primaryGroup">{t}Primary group{/t}</label></td>
@@ -49,17 +51,18 @@
      </td>
     </tr>
    </table>
+
   </td>
   <td>
-   <table summary="{t}Group membership{/t}">
+
+   <table summary="{t}Group membership{/t}" width='100%'>
+ 
     <tr>
-     <td colspan="4">
-      <h3>{t}Group membership{/t}
-      </h3>
+     <td><h3>{t}Group membership{/t}</h3>
      </td>
     </tr>
     <tr>
-     <td colspan="4">
+     <td>
       
       {if $groups eq "too_many_for_nfs"}
       <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>

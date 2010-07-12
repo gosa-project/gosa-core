@@ -322,7 +322,7 @@ class posixAccount extends plugin
     if (isset($_POST['delete_groupmembership']) && 
         isset($_POST['group_list']) && count($_POST['group_list'])){
 
-      $this->delGroup ($_POST['group_list']);
+      $this->delGroup (get_post('group_list'));
     }
 
     /* Templates now! */
@@ -400,22 +400,23 @@ class posixAccount extends plugin
     }
 
     // Set last system login
-    $smarty->assign("gotoLastSystemLogin",$this->gotoLastSystemLogin);
+    $smarty->assign("gotoLastSystemLogin", set_post($this->gotoLastSystemLogin));
 
     /* Fill arrays */
-    $smarty->assign("shells", $this->loginShellList);
+    $smarty->assign("shells", set_post($this->loginShellList));
     $smarty->assign("secondaryGroups", $this->secondaryGroups);
-    $smarty->assign("primaryGroup", $this->primaryGroup);
+    $smarty->assign("primaryGroup", set_post($this->primaryGroup));
     if(!$this->multiple_support_active){
       if (!count($this->groupMembership)){
         $smarty->assign("groupMembership", array("&nbsp;"));
       } else {
-        $smarty->assign("groupMembership", $this->groupMembership);
+        $smarty->assign("groupMembership", set_post($this->groupMembership));
       }
     }else{
-      $smarty->assign("groupMembership", $this->groupMembership);
-      $smarty->assign("groupMembership_some", $this->groupMembership_some);
+      $smarty->assign("groupMembership", set_post($this->groupMembership));
+      $smarty->assign("groupMembership_some", set_post($this->groupMembership_some));
     }
+
     if (count($this->groupMembership) > 16){
       $smarty->assign("groups", "too_many_for_nfs");
     } else {
@@ -466,7 +467,7 @@ class posixAccount extends plugin
       }else{
         $smarty->assign("use_".$val,FALSE);
       }
-      $smarty->assign("$val", $this->$val);
+      $smarty->assign("$val", set_post($this->$val));
     }
 
     $tmp = $this->plInfo();                                                                                    
@@ -568,11 +569,11 @@ class posixAccount extends plugin
 
       /*Save primary group settings */
       if($this->acl_is_writeable("primaryGroup") && isset($_POST['primaryGroup'])){
-        $data= $_POST['primaryGroup'];
+        $data= get_post('primaryGroup');
         if ($this->primaryGroup != $data){
           $this->is_modified= TRUE;
         }
-        $this->primaryGroup= $_POST['primaryGroup'];
+        $this->primaryGroup= get_post('primaryGroup');
       }
 
       /* Get seelcted shadow checkboxes */
@@ -581,7 +582,7 @@ class posixAccount extends plugin
           $activate_var = "activate_".$var;
           if(isset($_POST['activate_'.$var])){
             $this->$activate_var  = true;
-            $this->$var      = $_POST[$var];
+            $this->$var      = get_post($var);
           }else{
             $this->$activate_var  = false;
             if ($var != "shadowExpire") {
@@ -1127,11 +1128,11 @@ class posixAccount extends plugin
   function saveCopyDialog()
   {
     if(isset($_POST['homeDirectory'])){
-      $this->homeDirectory = $_POST['homeDirectory'];
+      $this->homeDirectory = get_post('homeDirectory');
       if (isset ($_POST['force_ids'])){
         $data= 1;
-        $this->gidNumber = $_POST['gidNumber'];
-        $this->uidNumber = $_POST['uidNumber'];
+        $this->gidNumber = get_post('gidNumber');
+        $this->uidNumber = get_post('uidNumber');
       } else {
         $data= 0;
       }
@@ -1139,11 +1140,11 @@ class posixAccount extends plugin
         $this->is_modified= TRUE;
       }
       $this->force_ids= $data;
-      $data= $_POST['primaryGroup'];
+      $data= get_post('primaryGroup');
       if ($this->primaryGroup != $data){
         $this->is_modified= TRUE;
       }
-      $this->primaryGroup= $_POST['primaryGroup'];
+      $this->primaryGroup= get_post('primaryGroup');
     }
   }
 
@@ -1196,18 +1197,18 @@ class posixAccount extends plugin
 
     /* Assigned informations to smarty */
     $smarty = get_smarty();
-    $smarty->assign("homeDirectory",$this->homeDirectory);
+    $smarty->assign("homeDirectory",set_post($this->homeDirectory));
     $smarty->assign("secondaryGroups",$this->secondaryGroups);
-    $smarty->assign("primaryGroup",$this->primaryGroup);
+    $smarty->assign("primaryGroup",set_post($this->primaryGroup));
 
-    $smarty->assign("uidNumber",$this->uidNumber);
-    $smarty->assign("gidNumber",$this->gidNumber);
-    $smarty->assign("forceMode",$forceMode);
-    $smarty->assign("force_ids",$force_ids);
+    $smarty->assign("uidNumber",set_post($this->uidNumber));
+    $smarty->assign("gidNumber",set_post($this->gidNumber));
+    $smarty->assign("forceMode",set_post($forceMode));
+    $smarty->assign("force_ids",set_post($force_ids));
     if (!count($this->groupMembership)){
       $smarty->assign("groupMembership", array("&nbsp;"));
     } else {
-      $smarty->assign("groupMembership", $this->groupMembership);
+      $smarty->assign("groupMembership", set_post($this->groupMembership));
     }
 
     /* Display wars message if there are more than 16 group members */
@@ -1376,7 +1377,7 @@ class posixAccount extends plugin
           if(in_array($activate_var, $this->multi_boxes)){
             if(isset($_POST['activate_'.$var])){
               $this->$activate_var  = true;
-              $this->$var      = $_POST[$var];
+              $this->$var      = get_post($var);
             }else{
               $this->$activate_var  = false;
               $this->$var      = 0;
@@ -1399,11 +1400,11 @@ class posixAccount extends plugin
 
       /* Save primary group settings */
       if($this->acl_is_writeable("primaryGroup") && isset($_POST['primaryGroup'])){
-        $data= $_POST['primaryGroup'];
+        $data= get_post('primaryGroup');
         if ($this->primaryGroup != $data){
           $this->is_modified= TRUE;
         }
-        $this->primaryGroup= $_POST['primaryGroup'];
+        $this->primaryGroup= get_post('primaryGroup');
       }
     }
   }
