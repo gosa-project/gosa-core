@@ -1269,7 +1269,12 @@ class posixAccount extends plugin
         }
     }
 
-
+    /* Convert shadowExpire for usage */
+    if ($this->shadowExpire == 0){
+      $this->shadowExpire= "";
+    } else {
+      $this->shadowExpire= date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
+    }
 
     $tmp = new trustModeDialog($this->config, $source['dn']);
     $this->trustModeDialog = new trustModeDialog($this->config, $this->dn);
