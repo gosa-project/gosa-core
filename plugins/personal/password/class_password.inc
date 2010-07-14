@@ -81,7 +81,7 @@ class password extends plugin
         
         // Refresh proposal if requested
         if(isset($_POST['refreshProposal'])) $this->refreshProposal();
-        $smarty->assign("proposal" , $this->proposal);
+        $smarty->assign("proposal" , set_post($this->proposal));
         $smarty->assign("proposalEnabled" , $this->proposalEnabled);
         $smarty->assign("proposalSelected" , $this->proposalSelected);
 
