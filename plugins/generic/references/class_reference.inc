@@ -154,7 +154,7 @@ class reference extends plugin
         
         // Convert the modifyTimestamp to a human readable value
         $tz = timezone::get_default_timezone();
-        $smarty->assign('modifyTimestamp', date('d.m.Y H:i:s', strtotime($this->modifyTimestamp)));
+        $smarty->assign('modifyTimestamp', set_post(date('d.m.Y H:i:s', strtotime($this->modifyTimestamp))));
 
         $smarty->assign('objectList', $this->objectList);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());

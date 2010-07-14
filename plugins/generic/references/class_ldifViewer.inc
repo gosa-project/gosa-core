@@ -15,7 +15,7 @@ class ldifViewer extends plugin
     function execute()
     {
         $smarty = get_smarty();
-        $smarty->assign('ldif', $this->ldif);
+        $smarty->assign('ldif', set_post($this->ldif));
         return($smarty->fetch(get_template_path('ldifViewer.tpl')));
     }
 }
