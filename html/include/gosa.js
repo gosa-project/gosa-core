@@ -142,7 +142,7 @@ function getNextInputElement(element)
             if(found && !el.disabled && el.type!='hidden' && !el.name.match(/^submit_tree_base/) && !el.name.match(/^bs_rebase/)){
                 return(el);    
             }                                                           
-            if(el.id==element.id || el.name==element.name){        
+            if((el.id != "" && el.id==element.id) || (el.name != "" && el.name==element.name)){        
                 found =true;
             }
         }                                                              
