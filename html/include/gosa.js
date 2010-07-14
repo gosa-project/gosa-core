@@ -101,7 +101,7 @@ function keyHandler(DnEvents) {
 
     // determines whether Netscape or Internet Explorer
     k = (Prototype.Browser.Gecko) ? DnEvents.keyCode : window.event.keyCode;
-    if (k == 13) { // enter key pressed
+    if (k == 13 && element.type!='textarea') { // enter key pressed
 
         // Stop 'Enter' key-press from beeing processed internally
         Event.stop(DnEvents);
