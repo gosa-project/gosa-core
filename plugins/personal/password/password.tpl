@@ -56,7 +56,15 @@
             {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
       </td>
       <td>
-        <input type='text' value="{$proposal}" style='color: black;'>
+        <div style='
+                  width:180px;
+                  border:1px solid #BBB;
+                  padding-top:3px;
+                  padding-bottom:3px;
+            '>{$proposal}</div>
+
+      </td>
+      <td>
         &nbsp;<input type='submit' name='refreshProposal' value='{t}Refresh{/t}'>
       </td>
     </tr>
