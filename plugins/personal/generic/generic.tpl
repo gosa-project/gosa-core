@@ -10,11 +10,11 @@
    <!-- The users picture settings container -->
    <table summary="{t}The users picture{/t}">
     <tr>
-     <td style='width:147px; height:200px; background-color:gray;'>
+     <td style='width:147px; height:200px; background-color:gray; vertical-align: middle;' >
       {if !$userPicture_is_readable}
       <img  src="plugins/users/images/default.jpg" alt=''>
       {else}
-      <img  src="getbin.php?rand={$rand}" alt='' style='width:147px;' >
+      <img  src="getbin.php?rand={$rand}" alt='' style='width:147px; vertical-align: middle;' >
       {/if}
      </td>
     </tr>
