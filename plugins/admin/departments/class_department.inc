@@ -205,7 +205,7 @@ class department extends plugin
       if($this->dialog) return($this->dialog->execute());
     }
     $smarty->assign("manager",$this->manager);
-    $smarty->assign("manager_name",$this->manager_name);
+    $smarty->assign("manager_name", set_post($this->manager_name));
     $smarty->assign("manager_enabled",$this->manager_enabled);
 
 
