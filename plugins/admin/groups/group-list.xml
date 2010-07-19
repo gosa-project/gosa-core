@@ -20,7 +20,7 @@
     </objectType>
 
     <objectType>
-      <label>Group submenu menu</label>
+      <label>Group submenu entry</label>
       <objectClass>gotoSubmenuEntry</objectClass>
       <category>groups</category>
       <class>group</class>
