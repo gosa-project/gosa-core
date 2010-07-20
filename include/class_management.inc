@@ -628,9 +628,10 @@ class management
     if(!empty($altTabType)) $tabType = $altTabType;
     if(!empty($altAclCategory)) $aclCategory = $altAclCategory;
 
+    $this->displayApplyBtn = count($target) == 1;
+
     // Single edit - we only got one object dn.
     if(count($target) == 1){
-      $this->displayApplyBtn = TRUE;
       $this->is_new = FALSE;
       $this->is_single_edit = TRUE;
       $this->is_multiple_edit = FALSE;
