@@ -378,10 +378,8 @@ class userManagement extends management
                     if($samba){
                         $sambaAccount = new sambaAccount($this->config, $this->dn);
                         $sambaAccount->is_modified=TRUE;
-                        $sambaAccount->enforcePasswordChange=TRUE;
-                        $sambaAccount->cannotChangePassword=FALSE;
-                        $sambaAccount->sambaPwdCanChange=0;
-                        $sambaAccount->sambaAcctFlags = preg_replace("/X/i","",$sambaAccount->sambaAcctFlags);
+                        $sambaAccount->flag_enforcePasswordChange = TRUE;
+                        $sambaAccount->flag_cannotChangePassword = FALSE;
                         $sambaAccount->save();
                     }
                 }
