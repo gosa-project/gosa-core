@@ -1248,21 +1248,18 @@ class posixAccount extends plugin
       }
     }
 
-    /* FIXME: NEED review of this section */
-    /* Need to check shadowExpire separately */
-
-    /* 
-     * If shadowExpire is not enabled in the template, it's a UNIX timestamp - so don't convert it to seconds.
-     * The check is a hack - if difference between timestamp generated above and here is max 1 day.
-     */
-    if(abs($this->shadowExpire - time())>86400) {
-      $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
-    }
-    
     /* Only enable checkbox, if shadowExpire is in the future */
     if($this->shadowExpire > time()) {
-      $this->activate_shadowExpire= "1";
+        $this->activate_shadowExpire= "1";
     }
+
+    /* Convert shadowExpire for usage */
+    if ($this->shadowExpire == 0){
+        $this->shadowExpire= "";
+    } else {
+        $this->shadowExpire= date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
+    }
+
   }
 
   function convertToSeconds($val)
