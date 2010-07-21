@@ -3043,12 +3043,17 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
     // Not for groups
     if ($mode == 0){
-      // Create SMB Password
-      $attrs= generate_smb_nt_hash($password);
 
-      if ($shadow != 0){
-        $attrs['shadowLastChange']= $shadow;
-      }
+        $tmp = $config->get_cfg_value('core','sambaHashHook');
+        if(!empty($tmp)){
+
+            // Create SMB Password
+            $attrs= generate_smb_nt_hash($password);
+
+            if ($shadow != 0){
+                $attrs['shadowLastChange']= $shadow;
+            }
+        }
     }
 
     $attrs['userPassword']= array();
