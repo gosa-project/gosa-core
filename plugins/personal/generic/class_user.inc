@@ -1551,12 +1551,15 @@ class user extends plugin
       $this->givenName= $this->parent->givenName;
     }
 
-    if ($this->dateOfBirth) {
+    /* Generate dateOfBirth entry */
+    if (isset ($this->attrs['dateOfBirth'])){
       /* This entry is ISO 8601 conform */
-      list($year, $month, $day)= explode("-", $this->dateOfBirth, 3);
+      list($year, $month, $day)= explode("-", $this->attrs['dateOfBirth'][0], 3);
     
       #TODO: use $lang to convert date
       $this->dateOfBirth= "$day.$month.$year";
+    } else {
+      $this->dateOfBirth= "";
     }
   }
 
