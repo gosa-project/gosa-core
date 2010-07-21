@@ -377,8 +377,10 @@ class userManagement extends management
                   if($samba){
                       $sambaAccount = new sambaAccount($this->config, $this->dn);
                       $sambaAccount->is_modified=TRUE;
-                      $sambaAccount->kickoff_time_set  = "1";
-                      $sambaAccount->sambaKickoffTime= date('d.m.Y', time() - (1 * 24 * 60 *60));
+                      $sambaAccount->enforcePasswordChange=TRUE;
+                      $sambaAccount->cannotChangePassword=FALSE;
+                      $sambaAccount->sambaPwdCanChange=0;
+                      $sambaAccount->sambaAcctFlags = preg_replace("/X/i","",$sambaAccount->sambaAcctFlags);
                       $sambaAccount->save();
                   }
               }
