@@ -95,6 +95,7 @@ if(isset($servers[$directory])){
     $config->check_and_reload();
     $config->configRegistry->reload(TRUE);
 }
+session::global_set('plist', new pluglist($config, $ui));
 
 session::global_set('debugLevel', $config->get_cfg_value("core","debugLevel"));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
