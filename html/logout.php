@@ -69,6 +69,13 @@ if (isset($config)){
 } else {
 	$smarty->compile_dir= '/var/spool/gosa/';
 }
+
+if(!is_writeable($smarty->compile_dir)){
+
+    header('location: index.php');
+    exit();
+}
+
 $smarty->assign ("title","GOsa");
     
 /* If GET request is posted, the logout was forced by pressing the link */
