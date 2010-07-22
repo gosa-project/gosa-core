@@ -643,7 +643,10 @@ class plugin
           $add_attrs[$attr] = $this->$attr;
         }
       }
+      $ui = get_userinfo();
       $add_attrs['dn']=$this->dn;
+      $add_attrs['callerDN']=$ui->dn;
+      $add_attrs['location']=$this->config->current['NAME'];
 
       $tmp = array();
       foreach($add_attrs as $name => $value){
@@ -686,7 +689,10 @@ class plugin
           $add_attrs[$attr] = $this->$attr;
         }
       }
+      $ui = get_userinfo();
       $add_attrs['dn']=$this->dn;
+      $add_attrs['callerDN']=$ui->dn;
+      $add_attrs['location']=$this->config->current['NAME'];
 
       $tmp = array();
       foreach($add_attrs as $name => $value){
@@ -727,7 +733,10 @@ class plugin
           $add_attrs[$attr] = $this->$attr;
         }
       }
+      $ui = get_userinfo();
       $add_attrs['dn']=$this->dn;
+      $add_attrs['callerDN']=$ui->dn;
+      $add_attrs['location']=$this->config->current['NAME'];
 
       $tmp = array();
       foreach($add_attrs as $name => $value){
