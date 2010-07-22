@@ -262,6 +262,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
         /* Do we have the selected user somewhere? */
         $ui= ldap_login_user($uid, $current_password);
 
+        /* Load ocMapping into userinfo */
+        $tmp= new acl($config, NULL, $ui->dn);
+        $ui->ocMapping= $tmp->ocMapping;
+
+
+        $ui->loadACL();
+
         if ($ui === NULL) {
             $message[]= _("Please check the username/password combination!");
         } else {
