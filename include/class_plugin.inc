@@ -336,10 +336,11 @@ class plugin
       if (isset ($_POST["$val"]) && $this->acl_is_writeable($val)){
   
         /* Check for modifications */
-        $data= $this->$val = get_post($val);
+        $data= get_post($val);
         if ($this->$val != $data){
           $this->is_modified= TRUE;
         }
+        $this->$val = $data;
     
         /* Okay, how can I explain this fix ... 
          * In firefox, disabled option fields aren't selectable ... but in IE you can select these fileds. 
@@ -1526,7 +1527,7 @@ class plugin
   {
     global $config;
     $command = $config->configRegistry->getPropertyValue(get_class($plugin),$cmd);
-    
+   
     if ($command != ""){
 
       // Walk trough attributes list and add the plugins attributes. 
@@ -1538,6 +1539,7 @@ class plugin
       $ui = get_userinfo();
       $addAttrs['callerDN']=$ui->dn;
       $addAttrs['dn']=$plugin->dn;
+      $addAttrs['location']=$config->current['NAME'];
 
       // Sort attributes by length, ensures correct replacement
       $tmp = array();
