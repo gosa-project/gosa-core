@@ -24,6 +24,9 @@ function displayPWchanger()
 {
     global $smarty;
 
+    $smarty->assign ("logo", image(get_template_path("images/logo.png")));
+    $smarty->assign ("date", date("l, dS F Y H:i:s O"));
+    $smarty->assign ("lang", preg_replace('/_.*$/', '', $lang));
     $smarty->display(get_template_path('password.tpl'));
     exit();
 }
