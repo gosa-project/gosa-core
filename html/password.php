@@ -26,7 +26,6 @@ function displayPWchanger()
 
     $smarty->assign ("logo", image(get_template_path("images/logo.png")));
     $smarty->assign ("date", date("l, dS F Y H:i:s O"));
-    $smarty->assign ("lang", preg_replace('/_.*$/', '', $lang));
     $smarty->display(get_template_path('password.tpl'));
     exit();
 }
@@ -71,6 +70,32 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)) {
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
+
+/* Generate server list */
+$servers= array();
+foreach ($config->data['LOCATIONS'] as $key => $ignored) {
+    $servers[$key]= $key;
+}
+
+if (isset($_POST['server'])) {
+    $directory= get_post('server');
+}elseif (isset($_GET['directory'])) {
+    $directory= $_GET['directory'];
+} else {
+    $directory= $config->data['MAIN']['DEFAULT'];
+    if (!isset($servers[$directory])) {
+        $directory = key($servers);
+    }
+    
+}
+
+// Set location and reload the configRegistry - we've now access to the ldap. 
+if(isset($servers[$directory])){
+    $config->set_current($directory);
+    $config->check_and_reload();
+    $config->configRegistry->reload(TRUE);
+}
+
 session::global_set('debugLevel', $config->get_cfg_value("core","debugLevel"));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     @DEBUG(
@@ -115,20 +140,6 @@ $domain = 'messages';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
-/* Generate server list */
-$servers= array();
-foreach ($config->data['LOCATIONS'] as $key => $ignored) {
-    $servers[$key]= $key;
-}
-if (isset($_POST['server'])) {
-    $directory= validate($_POST['server']);
-} else {
-    $directory= $config->data['MAIN']['DEFAULT'];
-
-    if (!isset($servers[$directory])) {
-        $directory = key($servers);
-    }
-}
 $smarty->assign ("title","GOsa");
 if (isset($_GET['directory']) && isset($servers[$_GET['directory']])) {
     $smarty->assign("show_directory_chooser", false);
@@ -175,7 +186,7 @@ if ($config->get_cfg_value("core","forceSSL") == 'true' && $ssl != '') {
 $method= $config->get_cfg_value("core","passwordDefaultHash");
 if (isset($_GET['method'])) {
     $method= validate($_GET['method']);
-    $tmp = new passwordMethod($config);
+    $tmp = new passwordMethod($config, "dummy");
     $available = $tmp->get_available_methods();
     if (!isset($available[$method])) {
         msg_dialog::display(
