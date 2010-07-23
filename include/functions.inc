@@ -2902,10 +2902,11 @@ function get_post($name)
   }
 
   if(get_magic_quotes_gpc()){
-    return(stripcslashes(validate($_POST[$name])));
+    $val = stripcslashes($_POST[$name]);
   }else{
-    return(validate($_POST[$name]));
+    $val = $_POST[$name];
   }
+  return($val);
 }
 
 
