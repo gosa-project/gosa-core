@@ -3025,7 +3025,6 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
         // Create SMB Password
         if ($config->get_cfg_value('sambaHashHook', NULL)) { 
-            echo "111111";
             $attrs= generate_smb_nt_hash($password);
 
             if ($shadow != 0){
