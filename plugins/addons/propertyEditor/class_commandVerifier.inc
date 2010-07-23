@@ -59,7 +59,7 @@ class commandVerifier
                 <tr><td><b>Return code:</b></td><td>$code</td></tr>
                 </table>";
         }
-        $smarty->assign('value', htmlentities($this->command,ENT_COMPAT,'UTF-8'));
+        $smarty->assign('value', set_post($this->command));
         $smarty->assign('output', $output);
         return($smarty->fetch(get_template_path('commandVerifier.tpl', 'TRUE')));
     }
