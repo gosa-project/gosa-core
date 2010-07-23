@@ -988,7 +988,7 @@ class listing {
       $name= $name[0];
     }
     $result= sprintf("%s [%s]", $name, $description[0]);
-    return("<a href='?plug=".$_GET['plug']."&amp;PID=$this->pid&amp;act=department_$row' title='$dn'>$result</a>");
+    return("<a href='?plug=".$_GET['plug']."&amp;PID=$this->pid&amp;act=department_$row' title='$dn'>".set_post($result)."</a>");
   }
 
 
@@ -1014,7 +1014,7 @@ class listing {
     $result= "&nbsp;";
     $trans= call_user_func_array("sprintf", $params);
     if ($trans != "") {
-      return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='$dn'>$trans</a>");
+      return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='$dn'>".set_post($trans)."</a>");
     }
 
     return $result;
