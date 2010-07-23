@@ -204,7 +204,7 @@ class propertyEditor extends management
         $id = "{$class[0]}_{$cn[0]}";
 
         $title = _("No description");
-        if(isset($description[0])) $title = htmlentities($description[0],ENT_COMPAT, 'UTF-8');
+        if(isset($description[0])) $title = set_post($description[0]);
         $title = preg_replace("/\n/", "<br>", $title);
         $tooltip = "<div id='tooltip_{$id}' class='tooltip' style='display:none'>".$title."</div>";
 
@@ -217,10 +217,7 @@ class propertyEditor extends management
         $ssize  = "208px";
         $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
-        $value = htmlentities($value[0],ENT_QUOTES      ,'UTF-8');
-
-        // Add slashes to keep escaped values escaped after passing them to smarty.
-        $value = addslashes($value);
+        $value = set_post($value[0]);
 
         switch($type[0]){
             case 'noLdap':
