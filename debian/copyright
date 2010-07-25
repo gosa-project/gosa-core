@@ -5,7 +5,20 @@ It was downloaded from http://www.gosa-project.org
 
 Copyright: 
 
-    Copyright (C) 2001-2008 Cajus Pollmeier <pollmeier@gonicus.de>
+	Copyright (C) 2003-2010 GONICUS GmbH
+
+Upstream Authors: 
+
+	Copyright (C) 2003-2008 Cajus Pollmeier <pollmeier@gonicus.de>
+	Copyright (C) 2003-2008 Fabian Hickert <fabian.hickert@gonicus.de>  
+	Copyright (C) 2003-2005 Alejandro Escanero Blanco <aescanero@chaosdimension.org>
+	Copyright (c) 2003 Wouter Verhelst <wouter@debian.org>
+	Copyright (C) 2005 Benoit Mortier <benoit.mortier@opensides.be>
+	Copyright (C) 2005 Guillaume Delecourt <guillaume.delecourt@opensides.be>
+	Copyright (C) 2005 Vincent Seynhaeve <vincent.seynhaeve@opensides.be>
+	Copyright (C) 2006 Bernd Zeimetz <bernd@zeimetz.de>
+	Copyright (C) 2006 Gina Haeussge <osd@foosel.net>
+	Copyright (C) 2006 Jörn Dreyer, based on work by Cajus Pollmeier
 
 License:
 
@@ -45,7 +58,7 @@ License: MIT
  SOFTWARE.
 
 Files: controls.js
-Copyright:	(C) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+Copyright:  (C) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
             (C) 2005-2009 Ivan Krstic (http://blogs.law.harvard.edu/ivan)
             (C) 2005-2009 Jon Tirsen (http://www.tirsen.com)
 License: MIT
@@ -182,8 +195,16 @@ Licence: MIT
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
+SIEVE-PHP.LIB VERSION 0.0.8:
+	Copyright (C) 2001 Dan Ellis <danellis@rushmore.com>
+
+Files: gosa-core/include/class_ldap.inc: 
+	Copyright (C) 1998  Eric Kilfoil <eric@ipass.net>
+ 	Copyright (C) 2003 Alejandro Escanero Blanco <aescanero@chaosdimension.org>
+	Copyright (C) 2003-2008 GONICUS GmbH
+
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL-2'.
 
-The Debian packaging is Copyright (C) 2010, Cajus Pollmeier <cajus@debian.org> and
+The Debian packaging is Copyright (C) 2010, Benoit Mortier <benoit.mortier@opensides.be> and
 is licensed under the GPL, see above.

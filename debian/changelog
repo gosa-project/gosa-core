@@ -5,8 +5,12 @@ gosa (2.6.10-1) unstable; urgency=low
 
   [ Benoit Mortier ]
   * Switch to dpkg-source 3.0 (quilt) format
+  * gosa fails with: "Fatal error: Call to undefined function
+    print_array() (Closes: #573220)
+  * GOSa fails to add IP and MAC addresses to samba created hosts
+    (Closes: #582896)
 
- -- Benoit Mortier <benoit.mortier@opensides.be>  Sat, 26 Jun 2010 22:48:41 +0200
+ -- Benoit Mortier <benoit.mortier@opensides.be>  Tue, 20 Jul 2010 12:48:02 +0200
 
 gosa (2.6.9-1) unstable; urgency=low
 
