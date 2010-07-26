@@ -2896,16 +2896,29 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
  * */
 function get_post($name)
 {
-  if(!isset($_POST[$name])){
-    trigger_error("Requested POST value (".$name.") does not exists, you should add a check to prevent this message.");
-    return(FALSE);
-  }
+    if(!isset($_POST[$name])){
+        trigger_error("Requested POST value (".$name.") does not exists, you should add a check to prevent this message.");
+        return(FALSE);
+    }
 
-  if(get_magic_quotes_gpc()){
-    $val = stripcslashes($_POST[$name]);
-  }else{
-    $val = $_POST[$name];
-  }
+    // Handle Posted Arrays
+    $tmp = array();
+    if(is_array($_POST[$name]) && !is_string($_POST[$name])){
+        foreach($_POST[$name] as $key => $val){
+            if(get_magic_quotes_gpc()){
+                $val = stripcslashes($val);
+            }
+            $tmp[$key] = $val;
+        } 
+        return($tmp);
+    }else{
+
+        if(get_magic_quotes_gpc()){
+            $val = stripcslashes($_POST[$name]);
+        }else{
+            $val = $_POST[$name];
+        }
+    }
   return($val);
 }
 
