@@ -161,10 +161,22 @@ class ogroup extends plugin
 
   function AddDelMembership($NewMember = false){
 
-    if($NewMember){
+      if($NewMember){
 
-      /* Add member and force reload */
-      $this->member[$NewMember]= $NewMember;
+          // Ensure that we definitely know the new members attributes.
+          //  - Fetch unknown objects here. 
+          if(!isset($this->memberList[$NewMember])){
+
+              $ldap = $this->config->get_ldap_link();
+              $ldap->cd($this->config->current['BASE']);
+              $ldap->cat($NewMember);
+              $attrs = $ldap->fetch();
+              $this->objcache[$NewMember] = $attrs;
+          }
+
+          /* Add member and force reload */
+          $this->member[$NewMember]= $NewMember;
+
 
       $this->memberList[$NewMember]= $this->objcache[$NewMember];
       unset ($this->objects[$NewMember]);
