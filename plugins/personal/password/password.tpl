@@ -51,11 +51,15 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='1' name='proposalSelected'
+        <input type='radio' value='1' name='proposalSelected' onClick='document.mainform.submit();'
             {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
       </td>
       <td>
         <div style='
+                {if !$proposalSelected} 
+                  background-color:#F0F0F0; 
+                  color:#666;
+                {/if}
                   width:180px;
                   border:1px solid #CCC;
                   padding:3px;
@@ -69,21 +73,32 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='0' name='proposalSelected'
+        <input type='radio' value='0' name='proposalSelected'  onChange='document.mainform.submit();'
             {if !$proposalSelected} checked {/if}>&nbsp;<b>{t}Manually specify a password{/t}</b>
       </td>
     </tr>
     <tr>
       <td style='padding-left:40px;'><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
       <td>
-          {factory type='password' name='new_password' id='new_password' 
-              onkeyup="testPasswordCss(\$('new_password').value)"  onfocus="nextfield= 'repeated_password';"}
+          {if $proposalSelected} 
+              {factory type='password' name='new_password' id='new_password' disabled
+                  onkeyup="testPasswordCss(\$('new_password').value)"  onfocus="nextfield= 'repeated_password';"}
+          {else} 
+              {factory type='password' name='new_password' id='new_password' 
+                  onkeyup="testPasswordCss(\$('new_password').value)"  onfocus="nextfield= 'repeated_password';"}
+          {/if}
       </td>
     </tr>
     <tr>
       <td style='padding-left:40px;'><b><LABEL for="repeated_password">{t}Repeat new password{/t}</LABEL></b></td>
       <td>
-          {factory type='password' name='repeated_password' id='repeated_password' onfocus="nextfield= 'password_finish';"}
+          {if $proposalSelected} 
+            {factory type='password' name='repeated_password' id='repeated_password' disabled
+                onfocus="nextfield= 'password_finish';"}
+          {else}
+            {factory type='password' name='repeated_password' id='repeated_password' 
+                onfocus="nextfield= 'password_finish';"}
+          {/if}
       </td>
     </tr>
     <tr>
