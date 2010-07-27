@@ -125,7 +125,6 @@ class userManagement extends management
         }elseif((count($this->pwd_change_queue) || isset($_POST['password_finish']) || isset($_POST['refreshProposal']))){
             $action['action'] = "passwordQueue";
         }
-        if(isset($_POST['passwordQueue'])) $action['action'] = "passwordQueue";
         return($action);
     }
 
@@ -290,7 +289,7 @@ class userManagement extends management
         }
 
         // If we've just refreshed the proposal then do not check the password for validity.
-        if(!isset($_POST['password_finish']) && (isset($_POST['refreshProposal']) || isset($_POST['passwordQueue']))){
+        if(isset($_POST['refreshProposal'])){
             return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
         }
 
