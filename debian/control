@@ -5,7 +5,7 @@ Maintainer: GOsa packages maintainers group <gosa-pkg@oss.gonicus.de>
 Uploaders: Cajus Pollmeier <cajus@debian.org>, Benoit Mortier <benoit.mortier@opensides.be>
 Build-Depends: debhelper (>= 7.0.50~)
 Build-Depends-Indep: po-debconf
-Standards-Version: 3.8.4
+Standards-Version: 3.9.1
 Homepage: https://oss.gonicus.de/labs/gosa/
 Vcs-Browser: https://oss.gonicus.de/repositories/gosa/trunk
 Vcs-Svn: https://oss.gonicus.de/repositories/gosa/trunk

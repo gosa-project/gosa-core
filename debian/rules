@@ -3,3 +3,7 @@
 %:
 	dh $@
 
+override_dh_compress:
+	dh_compress
+	gzip -d debian/gosa/usr/share/doc/gosa/gosa.conf.gz
+
