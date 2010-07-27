@@ -11,6 +11,9 @@ function smarty_function_factory($params, &$smarty)
         $$tmp = (isset($params[$var]))? "{$var}=\"{$params[$var]}\"" : "";
     }
 
+    $disabled = (isset($params['disabled']))? 'disabled' : "";
+
+
     $str = "";
     switch($type){
 
@@ -20,7 +23,7 @@ function smarty_function_factory($params, &$smarty)
             // Maxlength has a default of 40 characters
             $maxlengthReady = (empty($maxlength))?'maxlength="40"': $maxlengthReady; 
             $str .= "<input {$nameReady} {$idReady} {$valueReady} {$maxlengthReady}
-            {$titleReady} {$onfocusReady} {$onkeyupReady} type='password'
+            {$titleReady} {$onfocusReady} {$onkeyupReady} {$disabled} type='password'
             onkeypress=\"
                 if (capslock(event)){
                     $('{$id}').style.backgroundImage='url(images/caps.png)'
