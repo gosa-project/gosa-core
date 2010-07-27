@@ -60,6 +60,7 @@ class password extends plugin
   {
     plugin::execute();
     $smarty = get_smarty();
+    $smarty->assign("usePrototype", "true");
     $ui = get_userinfo();
 
     /* Get acls */
@@ -80,14 +81,10 @@ class password extends plugin
 
     // Refresh proposal if requested
     if(isset($_POST['refreshProposal'])) $this->refreshProposal();
+    if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;
     $smarty->assign("proposal" , $this->proposal);
     $smarty->assign("proposalEnabled" , $this->proposalEnabled);
     $smarty->assign("proposalSelected" , $this->proposalSelected);
-
-    
-
-    if(isset($_POST['proposalSelected'])) $this->proposalSelected = get_post('proposalSelected') == 1;
-
 
     /* Pwd change requested */
     if (isset($_POST['password_finish'])){

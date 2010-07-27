@@ -52,11 +52,11 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='1' name='proposalSelected'
+        <input type='radio' value='1' name='proposalSelected' id='proposalSelected' onClick='updateFields();'
             {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
       </td>
       <td>
-        <div style='
+        <div id='proposalText' style='
                   width:180px;
                   border:1px solid #BBB;
                   padding-top:3px;
@@ -70,7 +70,7 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='0' name='proposalSelected'
+        <input type='radio' value='0' name='proposalSelected' onClick='updateFields();'
             {if !$proposalSelected} checked {/if}>&nbsp;<b>{t}Manually specify a password{/t}</b>
       </td>
     </tr>
@@ -106,11 +106,34 @@
 
 <input type="hidden" name="ignore">
 
-<!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-  nextfield= 'current_password';
-	focus_field('current_password');
-  -->
+    nextfield= 'current_password';
+    focus_field('current_password');
+
+
+    function updateFields()
+    {
+        if($('proposalSelected').checked){
+            $('new_password').disable();
+            $('repeated_password').disable();
+            $('proposalText').setStyle(
+                 'background-color:#FFF;' +
+                 'color:#000;' +
+                 'width:180px;' +
+                 'border:1px solid #CCC;' +
+                 'padding:3px;' );
+        }else{
+            $('new_password').enable();
+            $('repeated_password').enable();
+            $('proposalText').setStyle(
+                 'background-color:#DDD;' +
+                 'color:#888;' +
+                 'width:180px;' +
+                 'border:1px solid #CCC;' +
+                 'padding:3px;');
+        }
+    }
+    updateFields();
 </script>
+
 
