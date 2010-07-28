@@ -415,6 +415,12 @@ class configRegistry{
             $this->register($cname, $data);    
             $data = array('name' => 'postmodify','type' => 'command');
             $this->register($cname, $data);    
+            $data = array('name' => 'precreate','type' => 'command');
+            $this->register($cname, $data);    
+            $data = array('name' => 'preremove','type' => 'command');
+            $this->register($cname, $data);    
+            $data = array('name' => 'premodify','type' => 'command');
+            $this->register($cname, $data);    
             $data = array('name' => 'check', 'type' => 'command');
             $this->register($cname, $data);    
 

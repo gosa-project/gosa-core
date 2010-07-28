@@ -34,6 +34,7 @@ class jsonRPC {
         curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, 'cookiefile.txt'); 
         curl_setopt($this->curlHandler, CURLOPT_POST , TRUE);
         curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER , TRUE);
+        curl_setopt($this->curlHandler, CURLOPT_SSL_VERIFYPEER, TRUE);
         curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER , array('Content-Type: application/json'));
 
         // Try to login 

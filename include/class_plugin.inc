@@ -319,6 +319,9 @@ class plugin
     /*
        $ldap->modify($this->attrs);
      */
+    if($this->initially_was_account){
+        $this->handle_pre_events('remove');
+    }
   }
 
 
@@ -398,6 +401,37 @@ class plugin
 
     /* Handle tagging */
     $this->tag_attrs($this->attrs);
+
+    if($this->is_new){
+        $this->handle_pre_events('add');
+    }else{
+        $this->handle_pre_events('modify');
+    }
+  }
+
+
+  /*! \brief    Forward command execution requests
+   *             to the hook execution method.
+   */
+  function handle_pre_events($mode, $addAttrs= array())
+  {
+    if(!in_array($mode, array('add','remove','modify'))){
+      trigger_error(sprintf("Invalid pre event type given %s! Valid types are [add,modify,remove].", $mode));
+      return;
+    }
+    switch ($mode){
+      case "add":
+        plugin::callHook($this,"PRECREATE", $addAttrs);
+      break;
+
+      case "modify":
+        plugin::callHook($this,"PREMODIFY", $addAttrs);
+      break;
+
+      case "remove":
+        plugin::callHook($this,"PREREMOVE", $addAttrs);
+      break;
+    }
   }
 
 
