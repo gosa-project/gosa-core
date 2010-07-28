@@ -1,6 +1,14 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.11
+  - Updated post-event handling and added pre-post-event hooks.
+  - Updated sudoers plugin, to allow special chars.
+  - Updated samba flags and account expiration.
+  - Samba password hashs can now be disabled by removing 'sambaHashHook' from gosa.conf.
+  - Implemented password proposals - see 'passwordProposalHook'.
+  - Fixed usage of 'templateCompileDirectory'.
+
 * gosa 2.6.10
   - Fixed timestamps in samba domain info dialog
   - Fixed Problem with Copy & Paste of servers
