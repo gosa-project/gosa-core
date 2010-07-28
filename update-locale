@@ -41,8 +41,8 @@ generate_po() {
 
   echo "Merging po files with existing ones"
   error=0
-  for f in locale/${l_path}??/LC_MESSAGES; do
-    [[ "$f" == "locale/${l_path}??/LC_MESSAGES" ]] && break
+  for f in locale/${l_path}*/LC_MESSAGES; do
+    [[ "$f" == "locale/${l_path}/LC_MESSAGES" ]] && break
     echo -n "* merging $f/messages.po: "
     [ ! -f $f/messages.po ] && touch $f/messages.po
 
