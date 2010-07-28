@@ -481,9 +481,9 @@ class department extends plugin
     $this->tag_objects(true);
     
     /* Optionally execute a command after we're done */
-		$this->postcreate();
+    $this->handle_post_events("add",array("uid" => $this->uid));
     return(false);
-	}
+    }
 
 
 	/* Tag objects to have the gosaAdministrativeUnitTag */
