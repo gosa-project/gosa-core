@@ -304,15 +304,15 @@ class plugin
       $this->attrs["$val"]= array();
     }
 
-    /* Unset account info */
-    $this->is_account= FALSE;
-
     /* Do not write in plugin base class, this must be done by
        children, since there are normally additional attribs,
        lists, etc. */
     /*
        $ldap->modify($this->attrs);
      */
+    if($this->initially_was_account){
+        $this->handle_prepost_events('remove');
+    }
   }
 
 
@@ -394,6 +394,12 @@ class plugin
 
     /* Handle tagging */
     $this->tag_attrs($this->attrs);
+
+    if($this->is_new){
+        $this->handle_prepost_events('add');
+    }else{
+        $this->handle_prepost_events('modify');
+    }
   }
 
 
@@ -1172,6 +1178,31 @@ class plugin
   }
 
 
+  /*! \brief    Forward command execution requests
+   *             to the hook execution method.
+   */
+  function handle_prepost_events($mode, $addAttrs= array())
+  {
+    if(!in_array($mode, array('add','remove','modify'))){
+      trigger_error(sprintf("Invalid pre-post event type given %s! Valid types are [add,modify,remove].", $mode));
+      return;
+    }
+    switch ($mode){
+      case "add":
+        plugin::callHook($this,"PREPOSTCREATE", $addAttrs);
+      break;
+
+      case "modify":
+        plugin::callHook($this,"PREPOSTMODIFY", $addAttrs);
+      break;
+
+      case "remove":
+        plugin::callHook($this,"PREPOSTREMOVE", $addAttrs);
+      break;
+    }
+  }
+
+
   /*! \brief    Calls external hooks which are defined for this plugin (gosa.conf)
    *            Replaces placeholder by class values of this plugin instance.
    *  @param    Allows to a add special replacements.
@@ -1179,7 +1210,7 @@ class plugin
   static function callHook($plugin, $cmd, $addAttrs= array(), &$returnOutput = array(), &$returnCode = NULL)
   {
       global $config;
-      $command= $config->search(get_class($plugin), "POSTCREATE",array('menu', 'tabs'));
+      $command= $config->search(get_class($plugin), $cmd ,array('menu', 'tabs'));
       if ($command != ""){
 
           // Walk trough attributes list and add the plugins attributes.
