@@ -971,7 +971,7 @@ class management
 
 
   function postcreate() {
-    $this->handle_post_events('create');
+    $this->handle_post_events('add');
   }
   function postmodify(){
     $this->handle_post_events('modify');
