@@ -311,7 +311,7 @@ class plugin
        $ldap->modify($this->attrs);
      */
     if($this->initially_was_account){
-        $this->handle_prepost_events('remove');
+        $this->handle_pre_events('remove');
     }
   }
 
@@ -396,9 +396,9 @@ class plugin
     $this->tag_attrs($this->attrs);
 
     if($this->is_new){
-        $this->handle_prepost_events('add');
+        $this->handle_pre_events('add');
     }else{
-        $this->handle_prepost_events('modify');
+        $this->handle_pre_events('modify');
     }
   }
 
@@ -1181,23 +1181,23 @@ class plugin
   /*! \brief    Forward command execution requests
    *             to the hook execution method.
    */
-  function handle_prepost_events($mode, $addAttrs= array())
+  function handle_pre_events($mode, $addAttrs= array())
   {
     if(!in_array($mode, array('add','remove','modify'))){
-      trigger_error(sprintf("Invalid pre-post event type given %s! Valid types are [add,modify,remove].", $mode));
+      trigger_error(sprintf("Invalid pre event type given %s! Valid types are [add,modify,remove].", $mode));
       return;
     }
     switch ($mode){
       case "add":
-        plugin::callHook($this,"PREPOSTCREATE", $addAttrs);
+        plugin::callHook($this,"PRECREATE", $addAttrs);
       break;
 
       case "modify":
-        plugin::callHook($this,"PREPOSTMODIFY", $addAttrs);
+        plugin::callHook($this,"PREMODIFY", $addAttrs);
       break;
 
       case "remove":
-        plugin::callHook($this,"PREPOSTREMOVE", $addAttrs);
+        plugin::callHook($this,"PREREMOVE", $addAttrs);
       break;
     }
   }
