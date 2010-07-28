@@ -866,62 +866,43 @@ class management
     $this->filter = $str;
   }
 
-
   function postcreate() {
-    $this->_handlePostEvent('POSTCREATE');
+      $this->handle_post_events('add');
   }
   function postmodify(){
-    $this->_handlePostEvent('POSTMODIFY');
+      $this->handle_post_events('modify');
   }
   function postremove(){
-    $this->_handlePostEvent('POSTREMOVE');
-  }
-
-  function _handlePostEvent($type)
-  {
-
-    /* Find postcreate entries for this class */
-    $command= $this->config->search(get_class($this), $type,array('menu', 'tabs'));
-    if ($command != ""){
-
-      /* Walk through attribute list */
-      foreach ($this->attributes as $attr){
-        if (!is_array($this->$attr)){
-          $add_attrs[$attr] = $this->$attr;
-        }
-      }
-      $add_attrs['dn']=$this->dn;
-
-      $tmp = array();
-      foreach($add_attrs as $name => $value){
-        $tmp[$name] =  strlen($name);
-      }
-      arsort($tmp);
-
-      /* Additional attributes */
-      foreach ($tmp as $name => $len){
-        $value = $add_attrs[$name];
-        $command= str_replace("%$name", "$value", $command);
-      }
-
-      if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Execute");
-        exec($command,$arr);
-        foreach($arr as $str){
-          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-              $command, "Result: ".$str);
-        }
-      } else {
-        $message= msgPool::cmdnotfound($type, get_class($this));
-        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
-      }
-    }
+      $this->handle_post_events('remove');
   }
 
   function is_modal_dialog()
   {
-    return(is_object($this->tabObject) || is_object($this->dialogObject));
+      return(is_object($this->tabObject) || is_object($this->dialogObject));
+  }
+
+  /*! \brief    Forward command execution request
+   *             to the correct method.
+   */
+  function handle_post_events($mode, $addAttrs= array())
+  {
+      if(!in_array($mode, array('add','remove','modify'))){
+          trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", $mode));
+          return;
+      }
+      switch ($mode){
+          case "add":
+              plugin::callHook($this,"POSTCREATE", $addAttrs);
+          break;
+
+          case "modify":
+              plugin::callHook($this,"POSTMODIFY", $addAttrs);
+          break;
+
+          case "remove":
+              plugin::callHook($this,"POSTREMOVE", $addAttrs);
+          break;
+      }
   }
 }
 

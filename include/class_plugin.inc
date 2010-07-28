@@ -1147,21 +1147,104 @@ class plugin
   }
 
 
-  function handle_post_events($mode, $add_attrs= array())
+  /*! \brief    Forward command execution requests
+   *             to the hook execution method.
+   */
+  function handle_post_events($mode, $addAttrs= array())
   {
+    if(!in_array($mode, array('add','remove','modify'))){
+      trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", $mode));
+      return;
+    }
     switch ($mode){
       case "add":
-        $this->postcreate($add_attrs);
+        plugin::callHook($this,"POSTCREATE", $addAttrs);
       break;
 
       case "modify":
-        $this->postmodify($add_attrs);
+        plugin::callHook($this,"POSTMODIFY", $addAttrs);
       break;
 
       case "remove":
-        $this->postremove($add_attrs);
+        plugin::callHook($this,"POSTREMOVE", $addAttrs);
       break;
     }
+  }
+
+
+  /*! \brief    Calls external hooks which are defined for this plugin (gosa.conf)
+   *            Replaces placeholder by class values of this plugin instance.
+   *  @param    Allows to a add special replacements.
+   */
+  static function callHook($plugin, $cmd, $addAttrs= array(), &$returnOutput = array(), &$returnCode = NULL)
+  {
+      global $config;
+      $command= $config->search(get_class($plugin), "POSTCREATE",array('menu', 'tabs'));
+      if ($command != ""){
+
+          // Walk trough attributes list and add the plugins attributes.
+          foreach ($plugin->attributes as $attr){
+              if (!is_array($plugin->$attr)){
+                  $addAttrs[$attr] = $plugin->$attr;
+              }
+          }
+          $ui = get_userinfo();
+          $addAttrs['callerDN']=$ui->dn;
+          $addAttrs['dn']=$plugin->dn;
+          $addAttrs['location']=$config->current['NAME'];
+
+          // Sort attributes by length, ensures correct replacement
+          $tmp = array();
+          foreach($addAttrs as $name => $value){
+              $tmp[$name] =  strlen($name);
+          }
+          arsort($tmp);
+
+          // Now replace the placeholder
+          foreach ($tmp as $name => $len){
+              $value = $addAttrs[$name];
+              $command= str_replace("%$name", "$value", $command);
+          }
+          // If there are still some %.. in our command, try to fill these with some other class vars
+          if(preg_match("/%/",$command)){
+              $attrs = get_object_vars($plugin);
+              foreach($attrs as $name => $value){
+                  if(is_array($value)){
+                      $s = "";
+                      foreach($value as $val){
+                          if(is_string($val) || is_int($val) || is_float($val) || is_bool($val)){
+                              $s .= '"'.$val.'",';
+                          }
+                      }
+                      $value = '['.trim($s,',').']';
+                  }
+                  if(!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value)){
+                      continue;
+                  }
+                  $command= preg_replace("/%$name/", $value, $command);
+              }
+          }
+
+          if (check_command($command)){
+
+              @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command,"Execute");
+              exec($command, $arr, $returnCode);
+              $returnOutput = $arr;
+
+              if($returnCode != 0){
+                  $str = implode("\n",$arr);
+                  @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: ".$returnCode);
+                  $message= msgPool::cmdexecfailed($cmd,$command, get_class($plugin));
+                  msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+              }elseif(is_array($arr)){
+                  $str = implode("\n",$arr);
+                  @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$str);
+              }
+          } else {
+              $message= msgPool::cmdinvalid($cmd,$command, get_class($plugin));
+              msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+          }
+      }
   }
 
 
