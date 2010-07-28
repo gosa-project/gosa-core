@@ -390,99 +390,97 @@ class department extends plugin
 	}
 
 
-	/* Save to LDAP */
-	function save()
-	{
-		$ldap= $this->config->get_ldap_link();
+    /* Save to LDAP */
+    function save()
+    {
+        $ldap= $this->config->get_ldap_link();
 
-    /* Ensure that ou is saved too, it is required by objectClass gosaDepartment 
-     */
-    $nA = $this->namingAttr;
-    $this->ou = $this->$nA;
+        /* Ensure that ou is saved too, it is required by objectClass gosaDepartment 
+         */
+        $nA = $this->namingAttr;
+        $this->ou = $this->$nA;
 
-    /* Add tag objects if needed */
-    if ($this->is_administrational_unit){
+        /* Add tag objects if needed */
+        if ($this->is_administrational_unit){
 
-      /* If this wasn't tagged before add oc an reset unit tag */
-      if(!$this->initially_was_tagged){
-        $this->objectclasses[]= "gosaAdministrativeUnit";
-        $this->gosaUnitTag= "";
+            /* If this wasn't tagged before add oc an reset unit tag */
+            if(!$this->initially_was_tagged){
+                $this->objectclasses[]= "gosaAdministrativeUnit";
+                $this->gosaUnitTag= "";
 
-        /* It seams that this method is called twice, 
-           set this to true. to avoid adding this oc twice */
-        $this->initially_was_tagged = true;
-      }
+                /* It seams that this method is called twice, 
+                   set this to true. to avoid adding this oc twice */
+                $this->initially_was_tagged = true;
+            }
 
-      if ($this->gosaUnitTag == ""){
+            if ($this->gosaUnitTag == ""){
 
-        /* It's unlikely, but check if already used... */
-        $try= 5;
-        $ldap->cd($this->config->current['BASE']);
-        while ($try--){
+                /* It's unlikely, but check if already used... */
+                $try= 5;
+                $ldap->cd($this->config->current['BASE']);
+                while ($try--){
 
-          /* Generate microtime stamp as tag */
-          list($usec, $sec)= explode(" ", microtime());
-          $time_stamp= preg_replace("/\./", "", $sec.$usec);
+                    /* Generate microtime stamp as tag */
+                    list($usec, $sec)= explode(" ", microtime());
+                    $time_stamp= preg_replace("/\./", "", $sec.$usec);
 
-          $ldap->search("(&(objectClass=gosaAdministrativeUnit)(gosaUnitTag=$time_stamp))",array("gosaUnitTag"));
-          if ($ldap->count() == 0){
-            break;
-          }
+                    $ldap->search("(&(objectClass=gosaAdministrativeUnit)(gosaUnitTag=$time_stamp))",array("gosaUnitTag"));
+                    if ($ldap->count() == 0){
+                        break;
+                    }
+                }
+                if($try == 0) {
+                    msg_dialog::display(_("Fatal error"), _("Cannot find an unused tag for this administrative unit!"), WARNING_DIALOG);
+                    return;
+                }
+                $this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
+            }
         }
-        if($try == 0) {
-          msg_dialog::display(_("Fatal error"), _("Cannot find an unused tag for this administrative unit!"), WARNING_DIALOG);
-          return;
+        $this->skipTagging = TRUE;
+        plugin::save();
+
+        /* Remove tag information if needed */
+        if (!$this->is_administrational_unit && $this->initially_was_tagged){
+            $tmp= array();
+
+            /* Remove gosaAdministrativeUnit from this plugin */
+            foreach($this->attrs['objectClass'] as $oc){
+                if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
+                    continue;
+                }
+                if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
+                    $tmp[]= $oc;
+                }
+            }
+            $this->attrs['objectClass']= $tmp;
+            $this->attrs['gosaUnitTag']= array();
+            $this->gosaUnitTag = "";
         }
-        $this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
-      }
-    }
-    $this->skipTagging = TRUE;
-    plugin::save();
 
-    /* Remove tag information if needed */
-    if (!$this->is_administrational_unit && $this->initially_was_tagged){
-      $tmp= array();
 
-      /* Remove gosaAdministrativeUnit from this plugin */
-      foreach($this->attrs['objectClass'] as $oc){
-        if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
-          continue;
+        /* Write back to ldap */
+        $ldap->cat($this->dn, array('dn'));
+        $ldap->cd($this->dn);
+
+        if ($ldap->count()){
+            $this->cleanup();
+            $ldap->modify ($this->attrs); 
+            new log("modify","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+            $this->handle_post_events('modify');
+        } else {
+            $ldap->add($this->attrs);
+            $this->handle_post_events('add');
+            new log("create","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
         }
-        if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
-          $tmp[]= $oc;
+        if (!$ldap->success()){
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
         }
-      }
-      $this->attrs['objectClass']= $tmp;
-      $this->attrs['gosaUnitTag']= array();
-      $this->gosaUnitTag = "";
-    }
 
+        /* The parameter forces only to set must_be_tagged, and don't touch any objects 
+           This will be done later */
+        $this->tag_objects(true);
 
-		/* Write back to ldap */
-		$ldap->cat($this->dn, array('dn'));
-		$ldap->cd($this->dn);
-
-		if ($ldap->count()){
-			$this->cleanup();
-			$ldap->modify ($this->attrs); 
-      new log("modify","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
-			$this->handle_post_events('modify');
-		} else {
-			$ldap->add($this->attrs);
-			$this->handle_post_events('add');
-      new log("create","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
-		}
-    if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
-    }
-
-    /* The parameter forces only to set must_be_tagged, and don't touch any objects 
-       This will be done later */
-    $this->tag_objects(true);
-    
-    /* Optionally execute a command after we're done */
-    $this->handle_post_events("add",array("uid" => $this->uid));
-    return(false);
+        return(false);
     }
 
 
