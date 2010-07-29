@@ -83,11 +83,11 @@
                         </tr>
                     {/if}
                 <tr>
-                    <td><b>{t}Username{/t}</b></td>
+                    <td><b>{t}User name{/t}</b></td>
                     <td>
                         {if $display_username}
                             <input type='text' name='uid' maxlength='40' value='{$uid}' 
-                                title='{t}Username{/t}' onFocus="nextfield= 'current_password';">
+                                title='{t}User name{/t}' onFocus="nextfield= 'current_password';">
                         {else}
                             <i>{$uid}</i>
                         {/if}

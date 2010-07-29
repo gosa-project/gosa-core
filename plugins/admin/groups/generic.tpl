@@ -143,7 +143,7 @@
     <tr>
      <td colspan=2>
 {render acl=$nagiosGroupACL checkbox=$multiple_support checked=$use_nagios_group}
-      <input class="center" type=checkbox name="nagios_group" value="1" {$nagios_group}>{t}Members are in a nagios group{/t}
+      <input class="center" type=checkbox name="nagios_group" value="1" {$nagios_group}>{t}Members are in a Nagios group{/t}
 {/render}
      </td>
     </tr>

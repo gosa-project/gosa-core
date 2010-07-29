@@ -884,7 +884,7 @@ class userManagement extends management
                 "apple-user" => array("image" => "plugins/netatalk/images/select_netatalk.png",
                     "plugin" => "netatalk",
                     "alt" => _("Netatalk"),
-                    "title" => _("Edit netatalk properties")),
+                    "title" => _("Edit Netatalk properties")),
                 "gotoEnvironment" => array("image" => "plugins/users/images/small_environment.png",
                     "plugin" => "environment",
                     "alt" => _("Environment"),
