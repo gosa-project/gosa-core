@@ -250,7 +250,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
         }
     }
     if(!passwordMethod::is_harmless($_POST['new_password'])){
-        $message[]= _("The password contains possibly problematic unicode characters!");
+        $message[]= _("The password contains possibly problematic Unicode characters!");
     }
 
     /* Validate */

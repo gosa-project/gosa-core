@@ -6,7 +6,7 @@
 {t}This procedure will restore a snapshot of the selected object. It will replace the existing object after pressing the restore button.{/t}
 <br>
 <br>
-{t}Remember that DNS configuration and database entries could not be restored. For some objects it is only nescessary to open and save them again (goFon), but some entries must be recreated manually (glpi).{/t}
+{t}Remember that DNS configuration and database entries could not be restored. For some objects it is only necessary to open and save them again (goFon), but some entries must be recreated manually (glpi).{/t}
 <br>
 <br>
 {t}Don't forget to check references to other objects, for example does the selected printer still exists ?{/t}
@@ -68,7 +68,7 @@
 	</tr>
 	<tr>
 		<td>
-			<b>{t}Timestamp{/t}</b> 
+			<b>{t}Time stamp{/t}</b> 
 		</td>
 		<td> 
 		   {$CurrentDate}

@@ -1,4 +1,4 @@
-<table summary="{t}Paste acl-role{/t}">
+<table summary="{t}Paste ACL-role{/t}">
 	<tr>
 		<td>
 			{t}Name{/t}

@@ -39,7 +39,7 @@
     </tr>
     {if $gotoLastSystemLogin}
     <tr>
-     <td>{t}Last logon{/t}</td>
+     <td>{t}Last log-on{/t}</td>
      <td>{$gotoLastSystemLogin}</td>
     </tr>
     {/if}

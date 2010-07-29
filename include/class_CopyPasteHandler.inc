@@ -156,7 +156,7 @@ class CopyPasteHandler {
 
     /* Check if given dn is valid and ldap search was succesfull */ 
     if(!$res){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": "._("'%s' is no vaild LDAP object"), bold(LDAP::fix($dn)));
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": "._("'%s' is no valid LDAP object"), bold(LDAP::fix($dn)));
       msg_dialog::display(_("Internal error"), $msg, ERROR_DIALOG);
       new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);

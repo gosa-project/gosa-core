@@ -380,7 +380,7 @@ if (is_file("$plugin_dir/main.inc")){
   require ("$plugin_dir/main.inc");
 } else {
   msg_dialog::display(
-      _("Plugin"),
+      _("Plug-in"),
       sprintf(_("FATAL: Cannot find any plugin definitions for plugin %s!"), bold($plug)),
       FATAL_ERROR_DIALOG);
   exit();

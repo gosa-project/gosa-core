@@ -3,7 +3,7 @@
 
 </div>
 <p>
-{t}Modifying a departments naming attribute 'ou' or base may corrupt acls and snapshot entries for all entire objects.{/t}
+{t}Modifying a departments naming attribute 'ou' or base may corrupt ACLs and snapshot entries for all entire objects.{/t}
 </p>
 <p>
 {t}GOsa can NOT fix this for you, yet.{/t}

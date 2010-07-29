@@ -63,7 +63,7 @@
 	<b>{t}Authentication{/t}</b>
     <table style='width:100%' summary='{t}Authentication{/t}'>
         <tr>
-            <td style='width:200px;'>{t}Admin DN{/t}</td>
+            <td style='width:200px;'>{t}Administrator DN{/t}</td>
             <td>
                 <input type='text' name='admin_given' maxlength='160' size='40' value='{$admin_given}'>
 			    {if $append_base_to_admin_dn},{$base_to_append}{/if}
@@ -78,7 +78,7 @@
                 <input onClick='document.mainform.submit();' 
                     {if $append_base_to_admin_dn} checked {/if} 
                     type='checkbox' name='append_base_to_admin_dn' value='1'>&nbsp;
-                {t}Automatically append LDAP base to admin DN{/t}
+                {t}Automatically append LDAP base to administrator DN{/t}
             </td>
         </tr>
         <tr>
@@ -91,7 +91,7 @@
 	<b>{t}Schema based settings{/t}</b>
     <table style='width:100%' summary='{t}Schema based settings{/t}'>
         <tr>
-            <td style='width:200px;'>{t}Use rfc2307bis compliant groups{/t}</td>
+            <td style='width:200px;'>{t}Use RFC 2307bis compliant groups{/t}</td>
             <td>
                 <select name="rfc2307bis" size="1" title="">
                    {html_options options=$bool selected=$rfc2307bis}

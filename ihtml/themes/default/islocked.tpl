@@ -11,7 +11,7 @@
  </p>
 
  <p>
-   {t}If this lock detection is false, the other person has obviously closed the webbrowser during the edit operation. You may want to take over the lock by pressing the 'Edit anyway' button.{/t}
+   {t}If this lock detection is false, the other person has obviously closed the web browser during the edit operation. You may want to take over the lock by pressing the 'Edit anyway' button.{/t}
  </p>
 
  <hr>

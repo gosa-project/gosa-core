@@ -8,9 +8,9 @@
 
  {if $ocCount == 0}
   <p>
-   {t}Could not read any schema informations, all checks skipped. Adjust your ldap acls.{/t}
+   {t}Could not read any schema information, all checks skipped. Adjust your LDAP ACLs.{/t}
    {if !$database_initialised}
-    {t}It seems that your ldap database wasn't initialized yet. This maybe the reason, why GOsa can't read your schema configuration!{/t}
+    {t}It seems that your LDAP database wasn't initialized yet. This maybe the reason, why GOsa can't read your schema configuration!{/t}
    {/if}
   </p>
  {else}

@@ -20,12 +20,12 @@
         </td>
         <td>
           {if !$acl_writeable}
-            <select size="1" name="dummy_t" title="{t}Select an acl type{/t}" disabled>
+            <select size="1" name="dummy_t" title="{t}Select an ACL type{/t}" disabled>
               {html_options options=$aclTypes selected=$aclType}
               <option disabled>&nbsp;</option>
             </select>&nbsp;
           {else} 
-            <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">
+            <select size="1" name="aclType" title="{t}Select an ACL type{/t}" onChange="document.mainform.submit()">
               {html_options options=$aclTypes selected=$aclType}
               <option disabled>&nbsp;</option>
             </select size=1>&nbsp;

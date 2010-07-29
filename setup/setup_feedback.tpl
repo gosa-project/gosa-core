@@ -1,9 +1,9 @@
 {if $feedback_send}
-	<font color='green'>{t}Feedback sucessfully send{/t}</font>
+	<font color='green'>{t}Feedback successfully send{/t}</font>
 {else}
 	
     <input {if $subscribe} checked {/if} type='checkbox' name='subscribe' value='1' class='center'>
-    {t}Subscribe to the gosa-announce mailinglist{/t}
+    {t}Subscribe to the gosa-announce mailing list{/t}
 
     <p>{t}When checking this option, GOsa will try to connect http://oss.gonicus.de in order to subscribe you to the gosa-announce mailing list. You've to confirm this by mail.{/t}</p>
 

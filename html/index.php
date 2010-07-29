@@ -69,7 +69,7 @@ function displayLogin()
 
     /* Displasy SSL mode warning? */
     if ($ssl != "" && $config->get_cfg_value("core",'warnSSL') == 'true') {
-        $smarty->assign("ssl", sprintf(_("This session is not ecrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">".bold(_("here"))."</a>"));
+        $smarty->assign("ssl", sprintf(_("This session is not encrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">".bold(_("here"))."</a>"));
     } else {
         $smarty->assign("ssl", "");
     }
@@ -286,7 +286,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     if (!$htaccess_authenticated) {
         $username= $_POST["username"];
         if (!preg_match("/^[@A-Za-z0-9_.-]+$/", $username)) {
-            $message= _("Please specify a valid username!");
+            $message= _("Please specify a valid user name!");
             $ok= false;
         } elseif (mb_strlen($_POST["password"], 'UTF-8') == 0) {
             $message= _("Please specify your password!");

@@ -298,7 +298,7 @@ class msgPool
 
   public static function okButton()
   {
-    return sprintf(_("Ok"));
+    return sprintf(_("OK"));
   }
 
 

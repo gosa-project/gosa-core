@@ -7,7 +7,7 @@
 	</p>
 
       {if $webgroup == ""}
-{t}Depending on the user name your webserver is running on:{/t}
+{t}Depending on the user name your web server is running on:{/t}
 <tt>
 <pre> chown root:www-data {$CONFIG_DIR}/{$CONFIG_FILE}
  chmod 640 {$CONFIG_DIR}/{$CONFIG_FILE}

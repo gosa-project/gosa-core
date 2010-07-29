@@ -154,8 +154,8 @@ class groupManagement extends management
                 array(
                     "image" => "plugins/groups/images/select_group.png",
                     "plugin" => "group",
-                    "alt" => _("Posix"),
-                    "title" => _("Edit posix properties")
+                    "alt" => _("POSIX"),
+                    "title" => _("Edit POSIX properties")
                     ),
 
                 "gosaMailAccount" => 

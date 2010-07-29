@@ -1,11 +1,11 @@
 <h3>{t}Command verifier{/t}</h3>
 <p>
- {t}Here you can execute commands in the way GOsa does and check the generated results or errors. This can be very usefull especially for the post events (postcreate, postmodify and postremove) due to the fact that these hook are executed silently.{/t}
+ {t}Here you can execute commands in the way GOsa does and check the generated results or errors. This can be very useful especially for the post events (postcreate, postmodify and postremove) due to the fact that these hook are executed silently.{/t}
 </p>
 
 <p>
  <b>
-  {t}Please be carefull here, all commands will really be executed on your machine and may break things!{/t}
+  {t}Please be careful here, all commands will really be executed on your machine and may break things!{/t}
  </b>
 </p>
 

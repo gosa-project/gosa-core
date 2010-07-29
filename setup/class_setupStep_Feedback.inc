@@ -95,7 +95,7 @@ class Step_Feedback  extends setup_step
         $this->features_used['samba']       = array("USED" => isset($oc['sambaSamAccount']) || isset($oc['sambaAccount']) , 
                 "NAME" => _("Samba management"));
         $this->features_used['mail']        = array("USED" => FALSE,
-                "NAME" => _("Mailsystem management"));
+                "NAME" => _("Mail system management"));
         $this->features_used['fax']         = array("USED" => isset($oc['goFaxAccount']) , 
                 "NAME" => _("FAX system administration"));
         $this->features_used['asterisk']    = array("USED" => isset($oc['goFonAccount']), 
@@ -103,9 +103,9 @@ class Step_Feedback  extends setup_step
         $this->features_used['inventory']   = array("USED" => isset($oc['glpiAccount']) , 
                 "NAME" => _("System inventory"));
         $this->features_used['system']      = array("USED" => FALSE , 
-                "NAME" => _("System-/Configmanagement"));
+                "NAME" => _("System/Configuration management"));
         $this->features_used['addressbook'] = array("USED" => FALSE , 
-                "NAME" => _("Addressbook"));
+                "NAME" => _("Address book"));
     }
 
 

@@ -139,7 +139,7 @@ class password extends plugin
                         _("The password used as new is to short."),WARNING_DIALOG);
             }elseif(!passwordMethod::is_harmless($new_password)){
                 msg_dialog::display(_("Password change"),
-                        _("The password contains possibly problematic unicode characters!"),WARNING_DIALOG);
+                        _("The password contains possibly problematic Unicode characters!"),WARNING_DIALOG);
             }elseif($check_hook && $check_hook_output != ""){
                 msg_dialog::display(_("Password change"),
                         sprintf(_("External password changer reported a problem: %s."),$check_hook_output),WARNING_DIALOG);

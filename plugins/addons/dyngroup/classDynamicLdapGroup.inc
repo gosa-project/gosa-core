@@ -125,7 +125,7 @@ class DynamicLdapGroup extends plugin
             if(empty($entry['filter'])){
                 $messages[] = msgPool::required(_("Filter")." {$nr}");
             }elseif(!preg_match("/^\(/", $entry['filter'])){
-                $messages[] = msgPool::invalid(_("Filter")." {$nr}",  $entry['filter'],'', '(objectClass=gosaAccount)'." - "._("Surrounding brakets are required!"));
+                $messages[] = msgPool::invalid(_("Filter")." {$nr}",  $entry['filter'],'', '(objectClass=gosaAccount)'." - "._("Surrounding brackets are required!"));
             }else{
 
                 // Check if filter is valid

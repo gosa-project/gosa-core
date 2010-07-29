@@ -294,7 +294,7 @@ class user extends plugin
           preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)$/', $val)) {
         $this->gosaLoginRestrictionWidget->addEntry($val);
       } else {
-        msg_dialog::display(_("Error"), _("Please add a single IP address or a network/netmask combination!"), ERROR_DIALOG);
+        msg_dialog::display(_("Error"), _("Please add a single IP address or a network/net mask combination!"), ERROR_DIALOG);
       }
     }
 
@@ -1740,7 +1740,7 @@ class user extends plugin
           "employeeType"      => _("Employee type"),
 
           "roomNumber"        => _("Room number"),
-          "telephoneNumber"   => _("Telefon number"),
+          "telephoneNumber"   => _("Telephone number"),
           "pager"             => _("Pager number"),
           "mobile"            => _("Mobile number"),
           "facsimileTelephoneNumber"     => _("Fax number"),

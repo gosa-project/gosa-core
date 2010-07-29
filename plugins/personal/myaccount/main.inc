@@ -50,7 +50,7 @@ if (! $cleanup ){
         $first  = $config->data['TABS']['MYACCOUNTTABS'][0];
         if(!class_available($first['CLASS'])){
             msg_dialog::display(_("Internal error"),
-                    sprintf(_("Cannot instantiate tabbed-plugin, the base plugin (%s) is not available!"), $first['CLASS']),
+                    sprintf(_("Cannot instantiate tabbed-plug-in, the base plugin (%s) is not available!"), $first['CLASS']),
                     ERROR_DIALOG);
         }else{
 

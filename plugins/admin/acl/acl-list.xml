@@ -8,11 +8,11 @@
     <multiSelect>true</multiSelect>
     <template>acl-list.tpl</template>
     <module>acl</module>
-    <label>List of acls</label>
+    <label>List of ACLs</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
-      <label>Acl</label>
+      <label>ACL</label>
       <objectClass>gosaAcl</objectClass>
       <category>acl</category>
       <class>acl</class>

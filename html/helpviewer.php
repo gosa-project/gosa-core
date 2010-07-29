@@ -115,7 +115,7 @@ if(session::global_is_set('current_class_for_help')){
   /* If there is no entry in the xml file for this class, display an error message */
   if($helpdir == ""){
     
-    $smarty->assign("help_contents","<br><h2>"._("There is no helpfile specified for this class"))."</h2>";
+    $smarty->assign("help_contents","<br><h2>"._("There is no help file specified for this class"))."</h2>";
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
     $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
     echo $display;
@@ -265,7 +265,7 @@ if(isset($_POST['search'])){
 }else{
   
   /* There was a file requested which actually doesn't exists */
-  $smarty->assign("help_contents","<h2>".sprintf(_("Helpdir '%s' is not accessible, can't read any helpfiles."),$helpdir))."</h2><br>";
+  $smarty->assign("help_contents","<h2>".sprintf(_("Help directory '%s' is not accessible, can't read any help files."),$helpdir))."</h2><br>";
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
   $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
   echo $display;

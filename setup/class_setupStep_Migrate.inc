@@ -131,7 +131,7 @@ class Step_Migrate extends setup_step
             $this->checks['permissions']['STATUS']    = FALSE;
             $this->checks['permissions']['STATUS_MSG']= _("Failed");
             $this->checks['permissions']['ERROR_MSG'] = 
-                sprintf(_("The specified user '%s' does not have full access to your ldap database."),$cv['admin']);
+                sprintf(_("The specified user '%s' does not have full access to your LDAP database."),$cv['admin']);
             return(false);
         }
 
@@ -144,13 +144,13 @@ class Step_Migrate extends setup_step
             $this->checks['permissions']['STATUS']    = FALSE;
             $this->checks['permissions']['STATUS_MSG']= _("Failed");
             $this->checks['permissions']['ERROR_MSG'] = 
-                sprintf(_("The specified user '%s' does not have full access to your ldap database."),$cv['admin']);
+                sprintf(_("The specified user '%s' does not have full access to your LDAP database."),$cv['admin']);
             return(false);
         }
 
         /* Create & remove of dummy object was successful */
         $this->checks['permissions']['STATUS']    = TRUE;
-        $this->checks['permissions']['STATUS_MSG']= _("Ok");
+        $this->checks['permissions']['STATUS_MSG']= _("OK");
         $this->checks['permissions']['ERROR_MSG'] = "";
         return(true);
     } 
@@ -300,7 +300,7 @@ class Step_Migrate extends setup_step
                     $str.= "<b>"._("Groups")."</b>:&nbsp;".trim($valid_groups,", ")."<br>";
                 }
                 $this->checks['acls']['STATUS']    = TRUE;
-                $this->checks['acls']['STATUS_MSG']= _("Ok");
+                $this->checks['acls']['STATUS_MSG']= _("OK");
                 $this->checks['acls']['ERROR_MSG'] = $str;
             }else{
                 $this->checks['acls']['STATUS']    = FALSE;
@@ -412,7 +412,7 @@ class Step_Migrate extends setup_step
         $ldap->cd($cv['base']);
         $ldap->search("(uid=".$uid.")");
         if($ldap->count()){
-            msg_dialog::display(_("Input error"),msgPool::duplicated(_("Uid")), ERROR_DIALOG);
+            msg_dialog::display(_("Input error"),msgPool::duplicated(_("UID")), ERROR_DIALOG);
             return false;
         }
 
@@ -681,7 +681,7 @@ class Step_Migrate extends setup_step
 
         /* Create & remove of dummy object was successful */
         $this->checks['root']['STATUS']    = TRUE;
-        $this->checks['root']['STATUS_MSG']= _("Ok");
+        $this->checks['root']['STATUS_MSG']= _("OK");
     }
 
 
@@ -825,7 +825,7 @@ class Step_Migrate extends setup_step
 
         /* Create & remove of dummy object was successful */
         $this->checks['rootOC']['STATUS']    = TRUE;
-        $this->checks['rootOC']['STATUS_MSG']= _("Ok");
+        $this->checks['rootOC']['STATUS_MSG']= _("OK");
         $this->checks['rootOC']['ERROR_MSG'] = "";
     }
 

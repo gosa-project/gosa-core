@@ -112,7 +112,7 @@ class Step_Checks extends setup_step
 
     /* Is imap module available */
     $N = msgPool::checkingFor(_("mbstring"));
-    $D = _("GOsa requires this module to handle unicode strings.");
+    $D = _("GOsa requires this module to handle Unicode strings.");
     $S = msgPool::installPhpModule("mbstring");
     $R = is_callable("mb_strlen");
     $M = TRUE;
@@ -147,7 +147,7 @@ class Step_Checks extends setup_step
 
     $N = msgPool::checkingFor(_("samba hash generator"));
     $D = _("GOsa requires this command to synchronize POSIX and samba passwords.");
-    $S = _("Deploy a gosa-si installation or install the perl Crypt::SmbHash modules.");
+    $S = _("Deploy a gosa-si installation or install the Perl Crypt::SmbHash modules.");
     $R = $have_mkntpwd;
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
@@ -215,7 +215,7 @@ class Step_Checks extends setup_step
 
     /* Check if memory limit is set to 32 or > */
     $N = "memory_limit &gt;= <b>32</b>";
-    $D = _("GOsa needs at least 32MB of memory. Setting it below this limit may cause errors that are not reproducable! Increase it for larger setups.");
+    $D = _("GOsa needs at least 32MB of memory. Setting it below this limit may cause errors that are not reproducible! Increase it for larger setups.");
     $S = _("Search for 'memory_limit' in your php.ini and set it to '32M' or higher.");
     $R = ini_get('memory_limit') >= 32 ;
     $M = TRUE;
@@ -266,9 +266,9 @@ class Step_Checks extends setup_step
      */
 
     /* Check if we can create a config file.*/
-    $N = _("Configuration writeable");
+    $N = _("Configuration writable");
     $D = _("The configuration file can't be written");
-    $S = sprintf(_("GOsa reads its configuration from a file located in (%s/%s). The setup can write the configuration directly if it is writeable."),CONFIG_DIR,CONFIG_FILE); 
+    $S = sprintf(_("GOsa reads its configuration from a file located in (%s/%s). The setup can write the configuration directly if it is writable."),CONFIG_DIR,CONFIG_FILE); 
     $R =    ( file_exists(CONFIG_DIR."/".CONFIG_FILE) && is_writeable(CONFIG_DIR."/".CONFIG_FILE)) // is there a config file ? 
         ||  (!file_exists(CONFIG_DIR."/".CONFIG_FILE) && is_writeable(CONFIG_DIR));  // There is non, but can we create a file there ?
     $M = FALSE;

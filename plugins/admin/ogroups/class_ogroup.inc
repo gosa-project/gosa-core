@@ -323,7 +323,7 @@ class ogroup extends plugin
                     "D" => _("departments"),
                     "S" => _("servers"),
                     "W" => _("workstations"),
-                    "O" => _("winstations"),
+                    "O" => _("Windows workstations"),
                     "T" => _("terminals"),
                     "F" => _("phones"),
                     "P" => _("printers"));
@@ -528,7 +528,7 @@ class ogroup extends plugin
 
             /* It has failed, add entry with type flag I (Invalid)*/
             if (!$ldap->success()){
-                $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".LDAP::fix($dn),"type" => "I");
+                $this->memberList[$dn]= array('text' => _("Non existing DN:")." ".LDAP::fix($dn),"type" => "I");
 
             } else {
 
@@ -840,7 +840,7 @@ class ogroup extends plugin
                         "cn"                => _("Name"),
                         "base"              => _("Base"),
                         "description"       => _("Description"),
-                        "accessTo"          => _("Sytem trust"),
+                        "accessTo"          => _("System trust"),
                         "member"            => _("Member"))
                     ));
     }

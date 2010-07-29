@@ -1,6 +1,6 @@
 <div id="mainlist">
  <div class="mainlist-header">
-  <p>{t}Property migration assistent{/t} - {t}Migration steps left{/t}: {$leftSteps}</p>
+  <p>{t}Property migration assistant{/t} - {t}Migration steps left{/t}: {$leftSteps}</p>
   <div class="mainlist-nav">
    <div style='width:100%; height: 400px; overflow: scroll; padding: 5px;'>
 

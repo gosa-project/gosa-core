@@ -34,10 +34,10 @@
      <div class='login-box-container'>
        <div class='login-element-container'>
         <div style='background-color:green'>
-         <div class='login-label'><label for='username'>{t}Username{/t}</label></div>
+         <div class='login-label'><label for='username'>{t}User name{/t}</label></div>
          <div class='login-input'>
           <input type='text' name='username' maxlength='40' value='{$username}'
-            	 title='{t}Username{/t}' onFocus="nextfield= 'password';" />
+            	 title='{t}User name{/t}' onFocus="nextfield= 'password';" />
          </div>
         </div>
          <div class="clear"></div>

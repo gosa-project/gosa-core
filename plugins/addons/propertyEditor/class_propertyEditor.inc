@@ -4,7 +4,7 @@
 class propertyEditor extends management
 {
     var $plHeadline= "Preferences";
-    var $plDescription= "Configure global and special GOsa settings like hooks and plugin parameters";
+    var $plDescription= "Configure global and special GOsa settings like hooks and plug-in parameters";
     var $plIcon  = "plugins/propertyEditor/images/plugin.png";
 
     var $toBeMigrated = array();

@@ -359,7 +359,7 @@ class multi_plug
    */
   public function get_object_info()
   {
-    return(_("You are currently editing mutliple entries."));
+    return(_("You are currently editing multiple entries."));
   }
 
 

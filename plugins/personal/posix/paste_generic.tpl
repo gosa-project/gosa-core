@@ -1,8 +1,8 @@
-<table width='100%' summary="{t}Posix settings{/t}">
+<table width='100%' summary="{t}POSIX settings{/t}">
  <tr>
   <td style='width:50%;' class='right-border'>
 
-   <h3>{t}Posix settings{/t}</h3>
+   <h3>{t}POSIX settings{/t}</h3>
    <table summary="{t}Home directory{/t}">
     <tr>
      <td>

@@ -232,7 +232,7 @@ class core extends plugin {
                             "name"          => "htaccessAuthentication",
                             "type"          => "bool",
                             "default"       => "false",
-                            "description"   => _("The 'htaccessAuthentication' variable tells GOsa to use either htaccess authentication or LDAP authentication. This can be used if you want to use i.e. kerberos to authenticate the users."),
+                            "description"   => _("The 'htaccessAuthentication' variable tells GOsa to use either htaccess authentication or LDAP authentication. This can be used if you want to use i.e. Kerberos to authenticate the users."),
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
                             "group"         => "authentification",

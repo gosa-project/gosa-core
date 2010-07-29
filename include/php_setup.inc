@@ -101,7 +101,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
            <td><span>"._("Generating this page caused the PHP interpreter to raise some errors!")."</span></td>
            <td align='right'>
             <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
-                ".image('images/mailto.png')."&nbsp;"._("Send bugreport")."
+                ".image('images/mailto.png')."&nbsp;"._("Send bug report")."
             </a>
            </td>
            <td align='right'>

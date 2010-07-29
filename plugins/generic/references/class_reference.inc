@@ -84,7 +84,7 @@ class reference extends plugin
         // Check for user manager 
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=gosaAccount)(manager=".normalizeLdap($this->dn)."))",
-            'attrs'  => array('givenName' => _("Given name"),'sn' => _("Surname"),'uid'=>_("Uid")),
+            'attrs'  => array('givenName' => _("Given name"),'sn' => _("Surname"),'uid'=>_("UID")),
             'msg'    => _("User manager"));
 
         // Go through filters and detect possible references  

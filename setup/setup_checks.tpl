@@ -18,7 +18,7 @@
      <td>{$basic[$key].NAME}</td>
 
      {if $basic[$key].RESULT}
-       <td style='color:#0A0'>{t}Ok{/t}</td>
+       <td style='color:#0A0'>{t}OK{/t}</td>
       </tr>
      {else}
         {if $basic[$key].MUST}
@@ -59,7 +59,7 @@
      <td>{$config[$key].NAME}</td>
 
      {if $config[$key].RESULT}
-       <td style='color:#0A0'>{t}Ok{/t}</td>
+       <td style='color:#0A0'>{t}OK{/t}</td>
       </tr>
      {else}
         {if $config[$key].MUST}

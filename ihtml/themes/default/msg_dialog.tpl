@@ -74,9 +74,9 @@
 				<tr>
 					<td colspan='2' align='center'>
 		{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}'>{t}Ok{/t}</button> 
+						<button type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button> 
 		{elseif $buttononst.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}'>{t}Ok{/t}</button>
+						<button type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
 						<button type='submit' name='MSG_CANCEL{$i_ID}'>{t}Cancel{/t}</button>
 		{/if}
 					</td>
@@ -133,15 +133,15 @@
 					{/if}
 		{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
 						<button id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}Ok{/t}</button>
+              onClick='next_msg_dialog();'>{t}OK{/t}</button>
 		{elseif $i_Type == $smarty.const.CONFIRM_DIALOG}
 						<button id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}Ok{/t}</button>
+              onClick='next_msg_dialog();'>{t}OK{/t}</button>
 						<button type='button' name='MSG_CANCEL{$i_ID}' 
               onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
 		{elseif $i_Type == $smarty.const.OK_CANCEL_DIALOG}
 						<button id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}Ok{/t}</button>
+              onClick='next_msg_dialog();'>{t}OK{/t}</button>
 						<button type='submit' name='MSG_CANCEL{$i_ID}' 
               onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
 		{/if}
