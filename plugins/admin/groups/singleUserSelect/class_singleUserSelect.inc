@@ -23,40 +23,40 @@
 class singleUserSelect extends management
 {
 
-  protected $skipFooter = TRUE;
-  protected $skipHeader = TRUE;
+    protected $skipFooter = TRUE;
+    protected $skipHeader = TRUE;
 
-  var $plHeadline = "User selection";
+    var $plHeadline = "User selection";
 
-  function __construct($config,$ui)
-  {
-    $this->config = $config;
-    $this->ui = $ui;
-   
-    $this->storagePoints = array(get_ou("core", "userRDN"));
- 
-    // Build filter
-    if (session::global_is_set(get_class($this)."_filter")){
-      $filter= session::global_get(get_class($this)."_filter");
-    } else {
-      $filter = new filter(get_template_path("singleUser-filter.xml", true, dirname(__FILE__)));
-      $filter->setObjectStorage($this->storagePoints);
+    function __construct($config,$ui)
+    {
+        $this->config = $config;
+        $this->ui = $ui;
+
+        $this->storagePoints = array(get_ou("core", "userRDN"));
+
+        // Build filter
+        if (session::global_is_set(get_class($this)."_filter")){
+            $filter= session::global_get(get_class($this)."_filter");
+        } else {
+            $filter = new filter(get_template_path("singleUser-filter.xml", true, dirname(__FILE__)));
+            $filter->setObjectStorage($this->storagePoints);
+        }
+        $this->setFilter($filter);
+
+        // Build headpage
+        $headpage = new listing(get_template_path("singleUser-list.xml", true, dirname(__FILE__)));
+        $headpage->setFilter($filter);
+        parent::__construct($config, $ui, "users", $headpage);
     }
-    $this->setFilter($filter);
 
-    // Build headpage
-    $headpage = new listing(get_template_path("singleUser-list.xml", true, dirname(__FILE__)));
-    $headpage->setFilter($filter);
-    parent::__construct($config, $ui, "users", $headpage);
-  }
-
-   // Inject user actions
-  function detectPostActions()
-  {
-      $action = management::detectPostActions();
-      if(isset($_POST['add_users_save'])) $action['action'] = "userSelected";
-      return($action);;
-  }
+    // Inject user actions
+    function detectPostActions()
+    {
+        $action = management::detectPostActions();
+        if(isset($_POST['add_users_save'])) $action['action'] = "userSelected";
+        return($action);;
+    }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
