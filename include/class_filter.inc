@@ -224,7 +224,7 @@ class filter {
     function render()
     {
         $content= "<table class='filter-wrapper' summary='"._("Search filter")."'><tr><td>".$this->renderFilterMenu()."</td><td>";
-        $content.= "<div class='search-filter'>".$this->getTextfield('search_filter', $this->value, $this->searches[$this->search])."</div>".
+        $content.= "<div class='search-filter'>".$this->getTextfield('search_filter', set_post($this->value), $this->searches[$this->search])."</div>".
             "&nbsp;<button class='search-filter' type='submit' title='"._("Search")."'>".image("images/find.png")."</button></td></tr></table>";
 
         // Return meta data
