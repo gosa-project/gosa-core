@@ -109,18 +109,21 @@ class aclrole extends acl
             $this->ocMapping[$idx][]= $class;
             $this->aclObjects[$idx]= $data['description'];
 
+
             /* Additionally filter the classes we're interested in in "self edit" mode */
-            if (is_array($data['objectClass'])){
-              foreach($data['objectClass'] as $objectClass){
-                if (in_array_ics($objectClass, $oc)){
-                  $this->myAclObjects[$idx.'/'.$class]= $acls['plDescription'];
-                  break;
+            if(isset($data['objectClass'])){
+                if (is_array($data['objectClass'])){
+                    foreach($data['objectClass'] as $objectClass){
+                        if (in_array_ics($objectClass, $oc)){
+                            $this->myAclObjects[$idx.'/'.$class]= $acls['plDescription'];
+                            break;
+                        }
+                    }
+                } else {
+                    if (in_array_ics($data['objectClass'], $oc)){
+                        $this->myAclObjects[$idx.'/'.$class]= $acls['plDescription'];
+                    }
                 }
-              }
-            } else {
-              if (in_array_ics($data['objectClass'], $oc)){
-                $this->myAclObjects[$idx.'/'.$class]= $acls['plDescription'];
-              }
             }
           }
 
