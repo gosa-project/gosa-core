@@ -296,8 +296,9 @@ class SnapshotHandler {
       $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
 
       /* Create object */
-#$data             = preg_replace('/^dn:.*\n/', '', $ldap->gen_ldif($dn,"(!(objectClass=gosaDepartment))"));
-      $data             = $ldap->gen_ldif($dn,"(&(!(objectClass=gosaDepartment))(!(objectClass=FAIclass)))");
+      $data             = $ldap->generateLdif(LDAP::fix($dn),
+              "(&(!(objectClass=gosaDepartment))(!(objectClass=FAIclass)))",array(),'base');
+
       $newName          = str_replace(".", "", $sec."-".$usec);
       $target= array();
       $target['objectClass']            = array("top", "gosaSnapshotObject");
