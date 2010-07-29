@@ -23,31 +23,31 @@
 class userSelect extends management
 {
 
-  public $plHeadline = "User selection";
-  protected $skipFooter = TRUE;
-  protected $skipHeader = TRUE;
+    public $plHeadline = "User selection";
+    protected $skipFooter = TRUE;
+    protected $skipHeader = TRUE;
 
-  function __construct($config,$ui)
-  {
-    $this->config = $config;
-    $this->ui = $ui;
-   
-    $this->storagePoints = array(get_ou("core", "userRDN"));
+    function __construct($config,$ui)
+    {
+        $this->config = $config;
+        $this->ui = $ui;
 
-    // Build filter
-    if (session::global_is_set(get_class($this)."_filter")){
-      $filter= session::global_get(get_class($this)."_filter");
-    } else {
-      $filter = new filter(get_template_path("user-filter.xml", true, dirname(__FILE__)));
-      $filter->setObjectStorage($this->storagePoints);
+        $this->storagePoints = array(get_ou("core", "userRDN"));
+
+        // Build filter
+        if (session::global_is_set(get_class($this)."_filter")){
+            $filter= session::global_get(get_class($this)."_filter");
+        } else {
+            $filter = new filter(get_template_path("user-filter.xml", true, dirname(__FILE__)));
+            $filter->setObjectStorage($this->storagePoints);
+        }
+        $this->setFilter($filter);
+
+        // Build headpage
+        $headpage = new listing(get_template_path("user-list.xml", true, dirname(__FILE__)));
+        $headpage->setFilter($filter);
+        parent::__construct($config, $ui, "users", $headpage);
     }
-    $this->setFilter($filter);
-
-    // Build headpage
-    $headpage = new listing(get_template_path("user-list.xml", true, dirname(__FILE__)));
-    $headpage->setFilter($filter);
-    parent::__construct($config, $ui, "users", $headpage);
-  }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
