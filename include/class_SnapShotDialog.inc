@@ -75,6 +75,7 @@ class SnapShotDialog extends plugin
         $ui = get_userinfo();
         $once = true;
         foreach($_POST as $name => $value){
+            $value = get_post($name);
             if((preg_match("/^RemoveSnapShot_/",$name)) && ($once)){
                 $once = false;
                 $entry = preg_replace("/^RemoveSnapShot_/","",$name);
@@ -160,7 +161,7 @@ class SnapShotDialog extends plugin
         $smarty->assign("RestoreMode",$this->display_restore_dialog);
         $smarty->assign("CurrentDate",date(_("Y-m-d, H:i:s")));
         $smarty->assign("CurrentDN",LDAP::fix($this->dn));
-        $smarty->assign("CurrentDescription",$this->CurrentDescription);
+        $smarty->assign("CurrentDescription",set_post($this->CurrentDescription));
         return($smarty->fetch(get_template_path("snapshotdialog.tpl")));
     }
 
@@ -179,10 +180,10 @@ class SnapShotDialog extends plugin
 
     function save_object()
     {	
-//        plugin::save_object();
+        //        plugin::save_object();
         foreach($this->attributes as $name){
             if(isset($_POST[$name])){
-                $this->$name = stripslashes($_POST[$name]);
+                $this->$name = get_post($name);
             }
         }
     }
