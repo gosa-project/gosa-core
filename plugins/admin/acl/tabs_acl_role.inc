@@ -32,10 +32,12 @@ class aclroletab extends tabs
   function save($ignore_account= FALSE)
   {
     $baseobject= $this->by_object['aclrole'];
+    $cn      = preg_replace('/,/', '\,', $baseobject->cn); 
+    $cn      = preg_replace('/"/', '\"', $cn); 
 
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
-    $new_dn= 'cn='.$baseobject->cn.",".get_ou("aclrole", "aclRoleRDN").$baseobject->base;
+    $new_dn=  @LDAP::convert('cn='.$cn.",".get_ou("aclrole", "aclRoleRDN").$baseobject->base);
 
     if ($this->dn != $new_dn){
 
