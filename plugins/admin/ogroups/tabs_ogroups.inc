@@ -344,7 +344,9 @@ class ogrouptabs extends tabs
 
         /* Check for new 'dn', in order to propagate the
            'dn' to all plugins */
-        $new_dn= 'cn='.$baseobject->cn.','.get_ou("group", "ogroupRDN").$baseobject->base;
+        $cn      = preg_replace('/,/', '\,', $baseobject->cn); 
+        $cn      = preg_replace('/"/', '\"', $cn); 
+        $new_dn= 'cn='.$cn.','.get_ou("group", "ogroupRDN").$baseobject->base;
 
         /* Move group? */
         if (LDAP::fix($this->dn) != LDAP::fix($new_dn)){
