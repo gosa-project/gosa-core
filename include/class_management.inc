@@ -94,7 +94,7 @@ class management
     $this->config = $config;
     $this->initTime = microtime(TRUE);
 
-    stats::log('management', $class = get_class($this), $action = __FUNCTION__, $amount = 1, 
+    stats::log('management', $class = get_class($this), $action = 'open', $amount = 1, 
             $duration = (microtime(TRUE) - $this->initTime));
 
     if($this->cpHandler) $this->headpage->setCopyPasteHandler($this->cpHandler);
