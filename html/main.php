@@ -41,6 +41,15 @@ session::set('errorsAlreadyPosted',array());
 session::global_set('runtime_cache',array());
 session::set('limit_exceeded',FALSE);
 
+// Count number of page reloads 
+if(!session::is_set('clicks')){
+    session::set('clicks', 0);
+}
+$clicks = session::get('clicks');
+$clicks ++ ;
+session::set('clicks', $clicks);
+
+
 pathNavigator::clear();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -474,6 +483,8 @@ if($config->get_cfg_value("core","storeFilterSettings") == "true"){
   }
   @setcookie("GOsa_Filter_Settings",base64_encode(serialize($cookie)),time() + (60*60*24));
 }
+
+stats::show();
 
 /* Show page... */
 echo $display;
