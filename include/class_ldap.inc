@@ -235,6 +235,7 @@ class LDAP{
       }
 
       $this->log("LDAP operation: time=".(microtime(true)-$start)." operation=search('".LDAP::fix($this->basedn)."', '$filter')");
+      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
       return($this->sr[$srp]);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -268,6 +269,7 @@ class LDAP{
       }
 
       $this->log("LDAP operation: time=".(microtime(true) - $start)." operation=ls('".LDAP::fix($basedn)."', '$filter')");
+      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
 
       return($this->sr[$srp]);
     }else{
@@ -584,12 +586,14 @@ class LDAP{
       return (0);
     }
     if($this->hascon){
+      $start = microtime(TRUE);
       if ($this->reconnect) $this->connect();
       $r = @ldap_modify($this->cid, LDAP::fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
       if(!$this->success()){
         $this->error.= $this->makeReadableErrors($this->error,$attrs);
       }
+      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -600,12 +604,14 @@ class LDAP{
   function add($attrs)
   {
     if($this->hascon){
+      $start = microtime(TRUE);
       if ($this->reconnect) $this->connect();
       $r = @ldap_add($this->cid, LDAP::fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
       if(!$this->success()){
         $this->error.= $this->makeReadableErrors($this->error,$attrs);
       }
+      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";

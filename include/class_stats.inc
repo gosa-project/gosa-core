@@ -81,7 +81,7 @@ class stats
         $TABLE_NAME = 'stats';
         $query = "SELECT * FROM {$TABLE_NAME} ORDER BY MTIMESTAMP";
         $query = "SELECT PLUGIN, ACTION, MAX(DURATION) as 'DURATION' FROM {$TABLE_NAME} WHERE ACTION='modify' GROUP BY PLUGIN,ACTION ";
-        $query = "SELECT * FROM {$TABLE_NAME} ORDER BY MTIMESTAMP";
+        $query = "SELECT * FROM {$TABLE_NAME} ORDER BY ID DESC LIMIT 20";
         $res = sqlite_query($query, $res);
         echo "<pre>";
         foreach(sqlite_fetch_all($res) as $entry){

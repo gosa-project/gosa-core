@@ -92,6 +92,10 @@ class management
     $this->headpage = $headpage;
     $this->ui = $ui;
     $this->config = $config;
+    $this->initTime = microtime(TRUE);
+
+    stats::log('management', $class = get_class($this), $action = __FUNCTION__, $amount = 1, 
+            $duration = (microtime(TRUE) - $this->initTime));
 
     if($this->cpHandler) $this->headpage->setCopyPasteHandler($this->cpHandler);
     if($this->snapHandler) $this->headpage->setSnapshotHandler($this->snapHandler);
@@ -437,6 +441,9 @@ class management
     if(isset($this->actions[$action['action']])){
       $func = $this->actions[$action['action']];
       if(!isset($action['targets']))$action['targets']= array(); 
+      stats::log('management', $class = get_class($this), $action['action'], $amount = count($action['targets']), 
+              $duration = (microtime(TRUE) - $this->initTime));
+
       return($this->$func($action['action'],$action['targets'],$action));
     }
   } 
