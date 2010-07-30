@@ -170,8 +170,8 @@ class DynamicLdapGroup extends plugin
         // Display values.
         //
         $smarty = get_smarty();
-        $smarty->assign('labeledURIparsed', $this->labeledURIparsed);
-        $smarty->assign('scopes', $this->scopes);
+        $smarty->assign('labeledURIparsed',  set_post($this->labeledURIparsed));
+        $smarty->assign('scopes', set_post($this->scopes));
         $display .= $smarty->fetch(get_template_path('dyngroup.tpl', TRUE, dirname(__FILE__)));
         return $display;
     }
