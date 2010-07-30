@@ -329,11 +329,14 @@ if (session::global_get('js')==FALSE){
   $smarty->assign("help_method"," onclick=\"return popup('helpviewer.php$plug','GOsa help');\"");
 }
 
+
+$loggedin = sprintf(_("You're logged in as %s"), 
+    "<span>".$ui->cn." [".$ui->username."] / ".$config->current['NAME']."</span> &nbsp;");
 if($ui->ignore_acl_for_current_user()){
-  $smarty->assign ("loggedin", "<font color='red'>"._("ACLs are disabled")."</font>&nbsp;".sprintf(_("You're logged in as %s"), "<span>".$ui->cn." [".$ui->username."]</span>"));
-}else{
-  $smarty->assign ("loggedin", sprintf(_("You're logged in as %s"), "<span>".$ui->cn." [".$ui->username."]</span>"));
+    $loggedin = "<font color='red'>"._("ACLs are disabled")."</font>&nbsp;".$loggedin;
 }
+
+$smarty->assign ("loggedin", $loggedin);
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
 $smarty->assign ("go_base", get_template_path('images/dtree.png'));
 $smarty->assign ("go_home", get_template_path('images/gohome.png'));
