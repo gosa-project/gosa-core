@@ -64,6 +64,8 @@ class config  {
     var $filename = "";
     var $last_modified = 0;
 
+    var $gosaUUID = "";
+
     private $jsonRPChandle = NULL; 
 
     public $configRegistry = NULL;
@@ -79,6 +81,8 @@ class config  {
         $this->parser = xml_parser_create();
         $this->basedir= $basedir;
 
+        $this->gosaUUID = uniqid();
+
         xml_set_object($this->parser, $this);
         xml_set_element_handler($this->parser, "tag_open", "tag_close");
 
@@ -90,6 +94,12 @@ class config  {
         // Load configuration registry
         $this->configRegistry = new configRegistry($this);
     }
+
+
+    function getGOsaUUID()
+    {
+        return($this->gosaUUID);
+    }    
 
 
     /*! \brief Check and reload the configuration
