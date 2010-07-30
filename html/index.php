@@ -83,7 +83,7 @@ function displayLogin()
     /* Generate server list */
     $servers= array();
     if (isset($_POST['server'])) {
-        $selected= validate($_POST['server']);
+        $selected= get_post('server');
     } else {
         $selected= $config->data['MAIN']['DEFAULT'];
     }
@@ -261,7 +261,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     }
 
     if (!$htaccess_authenticated) {
-        $server= validate($_POST["server"]);
+        $server= get_post("server");
     }
     $config->set_current($server);
 
@@ -393,8 +393,8 @@ $smarty->assign ("message", $message);
 
 /* Generate server list */
 $servers= array();
-if (isset($_POST['server'])) {
-    $selected= validate($_POST['server']);
+if (isset($_POST['server'])){
+    $selected= get_post('server');
 } else {
     $selected= $config->data['MAIN']['DEFAULT'];
 }

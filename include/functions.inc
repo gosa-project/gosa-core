@@ -1298,7 +1298,7 @@ function eval_sizelimit()
     if (tests::is_id($_POST['new_limit']) &&
         isset($_POST['action']) && $_POST['action']=="newlimit"){
 
-      session::global_set('size_limit', validate($_POST['new_limit']));
+      session::global_set('size_limit', get_post('new_limit'));
       session::set('size_ignore', FALSE);
     }
 

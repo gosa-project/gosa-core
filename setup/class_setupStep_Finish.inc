@@ -138,7 +138,7 @@ class Step_Finish extends setup_step
       /* Get attributes */
       foreach($this->attributes as $attr){
         if(isset($_POST[$attr])){
-          $this->$attr = validate($_POST[$attr]);
+          $this->$attr = get_post($attr);
         }
       }
     }

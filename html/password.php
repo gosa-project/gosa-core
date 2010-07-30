@@ -205,7 +205,7 @@ if (isset($_GET['uid']) && $_GET['uid'] != "") {
     $uid= validate($_GET['uid']);
     $smarty->assign('display_username', false);
 } elseif (isset($_POST['uid'])) {
-    $uid= validate($_POST['uid']);
+    $uid= get_post('uid');
     $smarty->assign('display_username', true);
 } else {
     $uid= "";
