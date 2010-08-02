@@ -94,8 +94,9 @@ class management
     $this->config = $config;
     $this->initTime = microtime(TRUE);
 
-    stats::log('management', $class = get_class($this), $action = 'open', $amount = 1, 
-            $duration = (microtime(TRUE) - $this->initTime));
+    // Create statistic table entry 
+    stats::log('management', $class = get_class($this), $this->getAclCategories(),  $action = 'open', 
+            $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
 
     if($this->cpHandler) $this->headpage->setCopyPasteHandler($this->cpHandler);
     if($this->snapHandler) $this->headpage->setSnapshotHandler($this->snapHandler);
@@ -132,6 +133,17 @@ class management
     // To temporay disable the filter caching UNcomment this line.
     #session::global_un_set(get_class($this)."_filter");
   }
+
+  
+  /*! \brief  Returns an array with all ACL-Categories we are responsible for.
+   */
+  function getAclCategories()
+  {
+      $ret= $this->aclCategory;
+      if(!is_array($ret)) $ret = array($ret);
+      return($ret);
+  }    
+
 
   /*! \brief  Execute this plugin
    *          Handle actions/events, locking, snapshots, dialogs, tabs,...
@@ -441,8 +453,10 @@ class management
     if(isset($this->actions[$action['action']])){
       $func = $this->actions[$action['action']];
       if(!isset($action['targets']))$action['targets']= array(); 
-      stats::log('management', $class = get_class($this), $action['action'], $amount = count($action['targets']), 
-              $duration = (microtime(TRUE) - $this->initTime));
+
+      // Create statistic table entry 
+      stats::log('management', $class = get_class($this), $this->getAclCategories(),  $action['action'],
+              $amount = count($action['targets']), $duration = (microtime(TRUE) - $this->initTime));
 
       return($this->$func($action['action'],$action['targets'],$action));
     }
