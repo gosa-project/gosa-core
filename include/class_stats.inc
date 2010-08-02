@@ -70,6 +70,8 @@ class stats
         $TABLE_NAME = stats::$tableName;
         $query = "DROP TABLE '{$TABLE_NAME}'";
         $ret = sqlite_query($query, $handle);
+        stats::$lastHandle = NULL;
+        stats::getDatabaseHandle();
     }
 
 
@@ -147,6 +149,7 @@ class stats
 
         // Get database handle, if it is invalid (NULL) return without creating stats
         $res = stats::getDatabaseHandle();
+#        stats::dropTable($res);
         if(!$res) return;
 
         // Ensure that 'clicks' and 'overallRenderTimer' are present and set correctly, 
@@ -154,7 +157,7 @@ class stats
         //   -- 'clicks' is a counter wich is set in main.php -> Number of page reloads 
         //   -- 'overallRenderTimer' is set in main.php -> timestamp of rendering start.
         if(!isset($clicks) || empty($clicks)) $clicks = 0;
-        if(!isset($overallRenderTimer) || empty($overallRenderTimer)){
+        if(!isset($overallRenderTimer)){
             $renderTime = 0;
         }else{
             $renderTime = microtime(TRUE) - $overallRenderTimer;
@@ -163,6 +166,16 @@ class stats
             //  we will not be able to sum up the render time in a single SQL statement.
             $overallRenderTimer = microtime(TRUE);
         }
+
+        // Enforce floating point values ...damn this sucks.
+        $duration   += 0.000001;
+        $renderTime += 0.000001;
+
+        $duration   = sprintf("%0.6f",$duration);
+        $renderTime = sprintf("%0.6f",$renderTime);
+
+        $duration   = preg_replace("/\./",",",$duration);
+        $renderTime = preg_replace("/\./",",",$renderTime);
 
         // Prepare values to be useable within a database
         $uuid = $config->getGOsaUUID();
@@ -177,7 +190,7 @@ class stats
         $info           = sqlite_escape_string($info);
         $clicks         = sqlite_escape_string($clicks);
         $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
-        $cpu_load       = sqlite_escape_string(stats::get_cpu_load());
+        $cpu_load       = sqlite_escape_string(sprintf("%0.6f",stats::get_cpu_load()));
 
         // Clean up category, which usally comes from acl_category and may still contain 
         //  some special chars like /
@@ -208,6 +221,7 @@ class stats
     static function show()
     {
         $res = stats::getDatabaseHandle();
+#       stats::dropTable($res);
         if(!$res) return;        
 
         $TABLE_NAME = stats::$tableName;
@@ -530,6 +544,29 @@ class stats
             FROM {$TABLE_NAME}
             GROUP BY ACTION
             ORDER BY DUR DESC LIMIT 10";
+        $ret = sqlite_query($query, $res);
+
+        $colSize = 16;
+        $title = FALSE;
+        foreach(sqlite_fetch_all($ret) as $entry){
+            foreach($entry as $key => $str){
+                if(is_numeric($key)) continue;
+                echo str_pad($str,$colSize,' ')."|"; 
+            }
+            echo "\n";
+        }
+        echo sqlite_error_string($ret);
+
+
+        echo "\n------ \n";
+        echo "Rendertime per plugin\n";
+        echo "------ \n";
+
+        $query = "
+            SELECT PLUGIN, RENDER_TIME * 1000000 AS RM
+            FROM {$TABLE_NAME}
+            GROUP BY PLUGIN
+            ";
         $ret = sqlite_query($query, $res);
 
         $colSize = 16;
