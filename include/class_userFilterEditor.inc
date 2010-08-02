@@ -29,6 +29,7 @@ class userFilterEditor extends plugin
      */
     function __construct($entry, $listing)
     {
+
         $this->listing = &$listing;
         if($entry){
             $this->entry = $entry;
@@ -45,6 +46,11 @@ class userFilterEditor extends plugin
             $this->enable = in_array("enable",$entry['flags']);
         }
         $this->orig_name = $this->name;
+
+        // Create statistic table entry
+        $this->initTime = microtime(TRUE);
+        stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'open',
+                $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
     }
 
 
