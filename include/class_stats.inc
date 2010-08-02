@@ -45,7 +45,8 @@ class stats
                         DURATION        REAL,
                         AMOUNT          INTEGER,
                         MEMORY_USAGE    INTEGER,
-                        CPU_LOAD        FLOAT
+                        CPU_LOAD        FLOAT,
+                        INFO            BLOB
                         )";
             $ret = sqlite_query($query, $res);
         }
@@ -55,7 +56,7 @@ class stats
 
 
 
-    static function log($type, $plugin, $category, $action, $amount = 1, $duration = 0)
+    static function log($type, $plugin, $category, $action, $amount = 1, $duration = 0, $info ='')
     {
         global $config;
         global $clicks;
@@ -67,6 +68,7 @@ class stats
         $uuid           = $config->getGOsaUUID();
         $amount         = sqlite_escape_string($amount);
         $duration       = sqlite_escape_string($duration);
+        $info           = sqlite_escape_string($info);
         $clicks         = sqlite_escape_string($clicks);
         $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
         $cpu_load       = sqlite_escape_string(stats::get_cpu_load());
@@ -81,10 +83,10 @@ class stats
         $TABLE_NAME = 'stats';
         $query = "
             INSERT INTO {$TABLE_NAME}
-                (ACTID, TYPE, PLUGIN, CATEGORY, ACTION, UUID, MTIMESTAMP, TIMESTAMP, AMOUNT, DURATION, MEMORY_USAGE, CPU_LOAD) 
+                (ACTID, TYPE, PLUGIN, CATEGORY, ACTION, UUID, MTIMESTAMP, TIMESTAMP, AMOUNT, DURATION, MEMORY_USAGE, CPU_LOAD, INFO) 
             VALUES 
                 ('{$clicks}','{$type}','{$plugin}','{$category}','{$action}','{$uuid}',
-                    '{$mtimestamp}','{$timestamp}','{$amount}','{$duration}','{$memory_usage}','{$cpu_load}')";
+                    '{$mtimestamp}','{$timestamp}','{$amount}','{$duration}','{$memory_usage}','{$cpu_load}','{$info}')";
         sqlite_query($query, $res);
     }
 
@@ -176,10 +178,10 @@ class stats
         echo "------ \n";
 
         $query = "
-            SELECT SUM(DURATION) AS DUR, PLUGIN 
+            SELECT SUM(DURATION) AS DUR, PLUGIN, UUID 
             FROM {$TABLE_NAME}
             WHERE plugin != 'LDAP' 
-            GROUP BY PLUGIN 
+            GROUP BY PLUGIN, UUID 
             ORDER BY DUR DESC LIMIT 10";
         $ret = sqlite_query($query, $res);
 
@@ -309,12 +311,12 @@ class stats
         echo "------ \n";
 
         $query = "
-            SELECT COUNT(ACTION) as CNT, ACTION, PLUGIN 
+            SELECT COUNT(ACTION) as CNT, ACTION, PLUGIN, UUID 
             FROM {$TABLE_NAME}
             WHERE   TYPE = 'plugin'
              AND    PLUGIN != 'LDAP'
              AND    ACTION = 'open'
-            GROUP BY ACTION,PLUGIN 
+            GROUP BY ACTION,PLUGIN, UUID
             ORDER BY CNT DESC LIMIT 5";
         $ret = sqlite_query($query, $res);
 
