@@ -367,6 +367,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             /* Not account expired or password forced change go to main page */
             new log("security","login","",array(),"User \"$username\" logged in successfully") ;
             $plist= new pluglist($config, $ui);
+
+            stats::log('global', 'global', array(),  $action = 'login', $amount = 1, 0);
+
             if(isset($plug) && isset($plist->dirlist[$plug])) {
                 header ("Location: main.php?plug=".$plug."&amp;global_check=1");
             }else{
