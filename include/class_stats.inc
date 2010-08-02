@@ -43,6 +43,7 @@ class stats
                         TIMESTAMP       INTEGER,
                         MTIMESTAMP      REAL,
                         DURATION        REAL,
+                        RENDER_TIME     REAL,
                         AMOUNT          INTEGER,
                         MEMORY_USAGE    INTEGER,
                         CPU_LOAD        FLOAT,
@@ -60,6 +61,19 @@ class stats
     {
         global $config;
         global $clicks;
+        global $overallRenderTimer;
+
+        if(!isset($overallRenderTimer) || empty($overallRenderTimer)){
+            $renderTime = 0;
+        }else{
+            $renderTime = microtime(TRUE) - $overallRenderTimer;
+
+            // Now set the overallRenderTimer to the current timestamp - else 
+            //  we will not be able to sum up the render time in a single SQL statement.
+            $overallRenderTimer = microtime(TRUE);
+            
+        }
+
         $type           = sqlite_escape_string($type);
         $plugin         = sqlite_escape_string($plugin);
         $action         = sqlite_escape_string($action);
@@ -68,6 +82,7 @@ class stats
         $uuid           = $config->getGOsaUUID();
         $amount         = sqlite_escape_string($amount);
         $duration       = sqlite_escape_string($duration);
+        $renderTime     = sqlite_escape_string($renderTime);
         $info           = sqlite_escape_string($info);
         $clicks         = sqlite_escape_string($clicks);
         $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
@@ -83,10 +98,12 @@ class stats
         $TABLE_NAME = 'stats';
         $query = "
             INSERT INTO {$TABLE_NAME}
-                (ACTID, TYPE, PLUGIN, CATEGORY, ACTION, UUID, MTIMESTAMP, TIMESTAMP, AMOUNT, DURATION, MEMORY_USAGE, CPU_LOAD, INFO) 
+                (ACTID, TYPE, PLUGIN, CATEGORY, ACTION, UUID, MTIMESTAMP, TIMESTAMP, 
+                 AMOUNT, DURATION, RENDER_TIME, MEMORY_USAGE, CPU_LOAD, INFO) 
             VALUES 
                 ('{$clicks}','{$type}','{$plugin}','{$category}','{$action}','{$uuid}',
-                    '{$mtimestamp}','{$timestamp}','{$amount}','{$duration}','{$memory_usage}','{$cpu_load}','{$info}')";
+                    '{$mtimestamp}','{$timestamp}','{$amount}','{$duration}','{$renderTime}',
+                    '{$memory_usage}','{$cpu_load}','{$info}')";
         sqlite_query($query, $res);
     }
 

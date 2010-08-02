@@ -23,6 +23,9 @@
 /* Save start time */
 $start = microtime();
 
+// Will be used in the "stats" plugin later, to be able calculate the elapsed render time.
+$overallRenderTimer = microtime(TRUE);
+
 /* Basic setup, remove eventually registered sessions */
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
