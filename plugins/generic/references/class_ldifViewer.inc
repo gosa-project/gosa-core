@@ -6,6 +6,10 @@ class ldifViewer extends plugin
 
     function __construct($config, $dn)
     {
+        $this->initTime = microtime(TRUE);
+        stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'open',
+                $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
+
         $this->config = &$config;
         $this->dn = $dn;
         $ldap = $this->config->get_ldap_link();
