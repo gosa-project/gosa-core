@@ -158,7 +158,7 @@ class stats
 
         // Get database handle, if it is invalid (NULL) return without creating stats
         $res = stats::getDatabaseHandle();
-        stats::dropTable($res);
+#        stats::dropTable($res);
         if(!$res) return;
 
         // Ensure that 'clicks' and 'overallRenderTimer' are present and set correctly, 
