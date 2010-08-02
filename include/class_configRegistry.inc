@@ -745,11 +745,19 @@ class gosaProperty
 
     static function isWriteableFile($message,$class,$name,$value, $type)
     {
-        $match = !empty($value) && (is_file($value) || is_writeable($value));
+        $match = (file_exists($value) && is_writeable($value)) || 
+                 (!file_exists($value) && is_writeable(dirname($value)));
+                
    
         // Display the reason for failing this check.         
         if($message && ! $match){
-            if(!is_writeable($value) || !is_file($value)){
+
+            if(!file_exists($value) && !is_writeable(dirname($value))){
+                msg_dialog::display(_("Warning"), 
+                        sprintf(_("The file '%s' specified for '%s:%s' cannot be created neither be used for writing!"), 
+                            bold($value),bold($class),bold($name)), 
+                        WARNING_DIALOG);
+            }elseif(file_exists($value) && !is_writeable($value)){
                 msg_dialog::display(_("Warning"), 
                         sprintf(_("The file '%s' specified for '%s:%s' cannot be used for writing!"), 
                             bold($value),bold($class),bold($name)), 

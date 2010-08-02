@@ -38,7 +38,7 @@ class stats
         }
 
         // Check if we are able to read/write the given database file.
-        if(!is_writeable(stats::$tableFile)){
+        if(!is_writeable(stats::$tableFile) && !is_writeable(dirname(stats::$tableFile))){
             return(NULL);
         }
 
