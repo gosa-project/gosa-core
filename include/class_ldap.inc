@@ -235,7 +235,10 @@ class LDAP{
       }
 
       $this->log("LDAP operation: time=".(microtime(true)-$start)." operation=search('".LDAP::fix($this->basedn)."', '$filter')");
-      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
+
+      // Create statistic table entry 
+      stats::log('ldap', $class = get_class($this), $category = array(),  $action = __FUNCTION__, 
+              $amount = 1, $duration = (microtime(TRUE) - $start));
       return($this->sr[$srp]);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -269,7 +272,10 @@ class LDAP{
       }
 
       $this->log("LDAP operation: time=".(microtime(true) - $start)." operation=ls('".LDAP::fix($basedn)."', '$filter')");
-      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
+
+      // Create statistic table entry 
+      stats::log('ldap', $class = get_class($this), $category = array(),  $action = __FUNCTION__, 
+              $amount = 1, $duration = (microtime(TRUE) - $start));
 
       return($this->sr[$srp]);
     }else{
@@ -593,7 +599,10 @@ class LDAP{
       if(!$this->success()){
         $this->error.= $this->makeReadableErrors($this->error,$attrs);
       }
-      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
+
+      // Create statistic table entry 
+      stats::log('ldap', $class = get_class($this), $category = array(),  $action = __FUNCTION__, 
+              $amount = 1, $duration = (microtime(TRUE) - $start));
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -611,7 +620,11 @@ class LDAP{
       if(!$this->success()){
         $this->error.= $this->makeReadableErrors($this->error,$attrs);
       }
-      stats::log('ldap', $class = get_class($this), $action = __FUNCTION__, $amount = 1, $duration = (microtime(TRUE) - $start));
+
+      // Create statistic table entry 
+      stats::log('ldap', $class = get_class($this), $category = array(),  $action = __FUNCTION__, 
+              $amount = 1, $duration = (microtime(TRUE) - $start));
+
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
