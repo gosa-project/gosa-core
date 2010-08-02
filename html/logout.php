@@ -51,6 +51,10 @@ if ((!isset($config)) || $config->get_cfg_value("core","language") == ""){
   $lang= $config->get_cfg_value("core","language");
 }
 
+// Try to keep track of logouts, this will fail if our session has already expired. 
+// Nothing will be logged if config isn't present anymore.
+stats::log('global', 'global', array(),  $action = 'logout', $amount = 1, 0);
+
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
