@@ -63,6 +63,8 @@ class stats
         global $clicks;
         global $overallRenderTimer;
 
+
+        if(!isset($clicks) || empty($clicks)) $clicks = 0;
         if(!isset($overallRenderTimer) || empty($overallRenderTimer)){
             $renderTime = 0;
         }else{
@@ -74,12 +76,17 @@ class stats
             
         }
 
+        if(is_object($config) && $config instanceOf config){
+            $uuid = $config->getGOsaUUID();
+        }else{
+            $uuid = "";
+        }
+
         $type           = sqlite_escape_string($type);
         $plugin         = sqlite_escape_string($plugin);
         $action         = sqlite_escape_string($action);
         $timestamp      = time();
         $mtimestamp     = microtime(TRUE);
-        $uuid           = $config->getGOsaUUID();
         $amount         = sqlite_escape_string($amount);
         $duration       = sqlite_escape_string($duration);
         $renderTime     = sqlite_escape_string($renderTime);
