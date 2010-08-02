@@ -3037,6 +3037,8 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
   if($test instanceOf passwordMethod){
 
+    stats::log('global', 'global', array('users'),  $action = 'change_password', $amount = 1, 0, $test->get_hash());
+
     $deactivated = $test->is_locked($config,$dn);
 
     /* Feed password backends with information */
