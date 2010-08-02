@@ -239,6 +239,26 @@ class core extends plugin {
                             "mandatory"     => TRUE),
 
                         array(
+                            "name"          => "statsDatabaseEnabled",
+                            "type"          => "bool",
+                            "default"       => "false",
+                            "description"   => _("Enables/Disables GOSa usage statistics moduls."),
+                            "check"         => "gosaProperty::isBool",
+                            "migrate"       => "",
+                            "group"         => "core",
+                            "mandatory"     => TRUE),
+
+                        array(
+                                "name"          => "statsDatabaseFile",
+                                "type"          => "file",
+                                "default"       => "/var/spool/gosa/stats",
+                                "description"   => _("The database file for GOSa usage statistics."),
+                                "check"         => "gosaProperty::isWriteableFile",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => TRUE),
+
+                        array(
                             "name"          => "logging",
                             "type"          => "bool",
                             "default"       => "true",

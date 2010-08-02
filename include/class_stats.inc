@@ -3,34 +3,115 @@
 class stats 
 {
     
-    static protected $last_cpu_load = "";
-    static protected $last_cpu_load_stamp = 0;
+    static protected $lastCpuLoad = "";
+    static protected $lastCpuLoadTimestamp = 0;
 
+    static protected $tableName = "stats";
+    static protected $tableFile = "/var/spool/gosa/stats";
 
-    static function checkDatabase()
+    static protected $lastHandle = NULL;
+    static protected $statsEnabled = FALSE;
+
+    static function getDatabaseHandle()
     {
-        $TABLE_NAME = 'stats';
-    
-        // Check for modules
-        // php5-sqlite
-
-
-        // Try to create database, if it exists just open it.
-        $res = sqlite_open('/var/spool/gosa/stats', 0666, $error);
-        if(!$res){
-            return($res);
+        // Try to return last valid handle.
+        if(stats::$lastHandle != NULL && is_resource(stats::$lastHandle)){
+            return(stats::$lastHandle);
         }
 
-        // Delete Table 
+        // Check if Logging is enabled
+        global $config;
+        if(!is_object($config) || ! $config instanceOf config){
+            return(NULL);
+        }
+    
+        // Get statsFile property 
+        stats::$tableFile    = $config->get_cfg_value('core', 'statsDatabaseFile');
+        stats::$statsEnabled = $config->boolValueIsTrue('core', 'statsDatabaseEnabled');
+        if(!stats::$statsEnabled){
+            return;
+        }
+
+        // Check for SQLite extension
+        if(!stats::checkSQLiteExtension()){
+            return(NULL);
+        }
+
+        // Check if we are able to read/write the given database file.
+        if(!is_writeable(stats::$tableFile)){
+            return(NULL);
+        }
+
+        // Try to create database, if it exists just open it.
+        $handle = sqlite_popen(stats::$tableFile, 0666, $error);
+        if($handle){
+            stats::createDatabaseOnDemand($handle);
+        }
+        stats::$lastHandle = $handle;
+        return($handle);
+    }
+
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
+    static function checkSQLiteExtension()
+    {
+        return(function_exists('sqlite_popen'));
+    }
+
+
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
+    static function dropTable($handle)
+    {
+        $TABLE_NAME = stats::$tableName;
         $query = "DROP TABLE '{$TABLE_NAME}'";
-#        $ret = sqlite_query($query, $res);
+        $ret = sqlite_query($query, $handle);
+    }
 
-        // List Tables an check if there is already everything we need.
+
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
+    static function get_memory_usage()
+    {
+        return(memory_get_usage());
+    }
+
+
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
+    static function get_cpu_load()
+    {
+        $cur = time();
+        if(empty(stats::$lastCpuLoad) || (($cur - stats::$lastCpuLoadTimestamp) >=2 )){
+            list($one, $five, $ten) =preg_split("/ /",shell_exec('cat /proc/loadavg'));
+            stats::$lastCpuLoad = $one;
+            stats::$lastCpuLoadTimestamp = $cur;
+        }
+        return(stats::$lastCpuLoad);
+    }
+
+
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
+    static function createDatabaseOnDemand($handle)
+    {
+        $TABLE_NAME = stats::$tableName;
+
+        // List Tables an check if there is already everything we need,
+        //  if not create it.
         $query = "SELECT name FROM sqlite_master WHERE type='table' and name='{$TABLE_NAME}'";
-        $ret = sqlite_query($query, $res);
+        $ret = sqlite_query($query, $handle);
         if(!count(sqlite_fetch_all($ret))){
-
-            // Check for table existance    
             $query = "
                 CREATE TABLE {$TABLE_NAME} (
                         ID              INTEGER PRIMARY KEY,
@@ -49,21 +130,29 @@ class stats
                         CPU_LOAD        FLOAT,
                         INFO            BLOB
                         )";
-            $ret = sqlite_query($query, $res);
+            $ret = sqlite_query($query, $handle);
         }
-
-        return($res);
     }
 
 
-
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
     static function log($type, $plugin, $category, $action, $amount = 1, $duration = 0, $info ='')
     {
         global $config;
         global $clicks;
         global $overallRenderTimer;
 
+        // Get database handle, if it is invalid (NULL) return without creating stats
+        $res = stats::getDatabaseHandle();
+        if(!$res) return;
 
+        // Ensure that 'clicks' and 'overallRenderTimer' are present and set correctly, 
+        //  if not simply create them with dummy values... 
+        //   -- 'clicks' is a counter wich is set in main.php -> Number of page reloads 
+        //   -- 'overallRenderTimer' is set in main.php -> timestamp of rendering start.
         if(!isset($clicks) || empty($clicks)) $clicks = 0;
         if(!isset($overallRenderTimer) || empty($overallRenderTimer)){
             $renderTime = 0;
@@ -73,15 +162,10 @@ class stats
             // Now set the overallRenderTimer to the current timestamp - else 
             //  we will not be able to sum up the render time in a single SQL statement.
             $overallRenderTimer = microtime(TRUE);
-            
         }
 
-        if(is_object($config) && $config instanceOf config){
-            $uuid = $config->getGOsaUUID();
-        }else{
-            $uuid = "";
-        }
-
+        // Prepare values to be useable within a database
+        $uuid = $config->getGOsaUUID();
         $type           = sqlite_escape_string($type);
         $plugin         = sqlite_escape_string($plugin);
         $action         = sqlite_escape_string($action);
@@ -95,14 +179,16 @@ class stats
         $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
         $cpu_load       = sqlite_escape_string(stats::get_cpu_load());
 
+        // Clean up category, which usally comes from acl_category and may still contain 
+        //  some special chars like /
         $tmp = array();
         foreach($category as $cat){
             $tmp[] = trim($cat, '\/,; ');
         }
         $category = sqlite_escape_string(implode($tmp, ', '));
-
-        $res = stats::checkDatabase();
-        $TABLE_NAME = 'stats';
+   
+        // Create insert statement.
+        $TABLE_NAME = stats::$tableName;
         $query = "
             INSERT INTO {$TABLE_NAME}
                 (ACTID, TYPE, PLUGIN, CATEGORY, ACTION, UUID, MTIMESTAMP, TIMESTAMP, 
@@ -113,27 +199,18 @@ class stats
                     '{$memory_usage}','{$cpu_load}','{$info}')";
         sqlite_query($query, $res);
     }
-
-    static function get_memory_usage()
-    {
-        return(memory_get_usage());
-    }
-
-    static function get_cpu_load()
-    {
-        $cur = time();
-        if(empty(stats::$last_cpu_load) || (($cur - stats::$last_cpu_load_stamp) >=2 )){
-            list($one, $five, $ten) =preg_split("/ /",shell_exec('cat /proc/loadavg'));
-            stats::$last_cpu_load = $one;
-            stats::$last_cpu_load_stamp = $cur;
-        }
-        return(stats::$last_cpu_load);
-    }
-    
+   
+ 
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
     static function show()
     {
-        $res = stats::checkDatabase();
-        $TABLE_NAME = 'stats';
+        $res = stats::getDatabaseHandle();
+        if(!$res) return;        
+
+        $TABLE_NAME = stats::$tableName;
         $query = "SELECT * FROM {$TABLE_NAME} ORDER BY MTIMESTAMP";
         $query = "SELECT PLUGIN, ACTION, MAX(DURATION) as 'DURATION' FROM {$TABLE_NAME} WHERE ACTION='modify' GROUP BY PLUGIN,ACTION ";
         $query = "SELECT * FROM {$TABLE_NAME} ORDER BY ID DESC LIMIT 30";
