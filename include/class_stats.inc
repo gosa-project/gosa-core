@@ -329,8 +329,120 @@ class stats
             }
             echo "\n";
         }
-        echo "</pre>";
         echo sqlite_error_string($ret);
+
+        echo "\n------ \n";
+        echo "Time per session\n";
+        echo "------ \n";
+
+        $query = "
+            SELECT SUM(DURATION) as DUR, UUID
+            FROM {$TABLE_NAME}
+            GROUP BY UUID
+            ORDER BY DUR DESC LIMIT 10";
+        $ret = sqlite_query($query, $res);
+
+        $colSize = 16;
+        $title = FALSE;
+        foreach(sqlite_fetch_all($ret) as $entry){
+            foreach($entry as $key => $str){
+                if(is_numeric($key)) continue;
+                echo str_pad($str,$colSize,' ')."|"; 
+            }
+            echo "\n";
+        }
+        echo sqlite_error_string($ret);
+
+        echo "\n------ \n";
+        echo "Most used password hashes\n";
+        echo "------ \n";
+
+        $query = "
+            SELECT DISTINCT(INFO), COUNT(INFO) as CNT
+            FROM {$TABLE_NAME}
+            WHERE ACTION = 'change_password'
+            GROUP BY INFO
+            ORDER BY INFO DESC LIMIT 10";
+        $ret = sqlite_query($query, $res);
+
+        $colSize = 16;
+        $title = FALSE;
+        foreach(sqlite_fetch_all($ret) as $entry){
+            foreach($entry as $key => $str){
+                if(is_numeric($key)) continue;
+                echo str_pad($str,$colSize,' ')."|"; 
+            }
+            echo "\n";
+        }
+        echo sqlite_error_string($ret);
+
+        echo "\n------ \n";
+        echo "Actions at all\n";
+        echo "------ \n";
+
+        $query = "
+            SELECT DISTINCT(ACTION), COUNT(ACTION)  AS CNT
+            FROM {$TABLE_NAME}
+            GROUP BY ACTION
+            ORDER BY CNT DESC LIMIT 10";
+        $ret = sqlite_query($query, $res);
+
+        $colSize = 16;
+        $title = FALSE;
+        foreach(sqlite_fetch_all($ret) as $entry){
+            foreach($entry as $key => $str){
+                if(is_numeric($key)) continue;
+                echo str_pad($str,$colSize,' ')."|"; 
+            }
+            echo "\n";
+        }
+        echo sqlite_error_string($ret);
+
+        echo "\n------ \n";
+        echo "Time spent per action\n";
+        echo "------ \n";
+
+        $query = "
+            SELECT DISTINCT(ACTION), SUM(DURATION) AS DUR
+            FROM {$TABLE_NAME}
+            GROUP BY ACTION
+            ORDER BY DUR DESC LIMIT 10";
+        $ret = sqlite_query($query, $res);
+
+        $colSize = 16;
+        $title = FALSE;
+        foreach(sqlite_fetch_all($ret) as $entry){
+            foreach($entry as $key => $str){
+                if(is_numeric($key)) continue;
+                echo str_pad($str,$colSize,' ')."|"; 
+            }
+            echo "\n";
+        }
+        echo sqlite_error_string($ret);
+
+        echo "\n------ \n";
+        echo "Average time per action\n";
+        echo "------ \n";
+
+        $query = "
+            SELECT DISTINCT(ACTION), AVG(DURATION) AS DUR
+            FROM {$TABLE_NAME}
+            GROUP BY ACTION
+            ORDER BY DUR DESC LIMIT 10";
+        $ret = sqlite_query($query, $res);
+
+        $colSize = 16;
+        $title = FALSE;
+        foreach(sqlite_fetch_all($ret) as $entry){
+            foreach($entry as $key => $str){
+                if(is_numeric($key)) continue;
+                echo str_pad($str,$colSize,' ')."|"; 
+            }
+            echo "\n";
+        }
+        echo sqlite_error_string($ret);
+
+        echo "</pre>";
     }
 }
 
