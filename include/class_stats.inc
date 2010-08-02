@@ -12,6 +12,15 @@ class stats
     static protected $lastHandle = NULL;
     static protected $statsEnabled = FALSE;
 
+
+    static function prepareFloatForWriting($float){
+        return(floor($float * 1000));
+    }
+
+    static function prepareFloatForReading($int){
+        return($int / 1000);
+    }
+
     static function getDatabaseHandle()
     {
         // Try to return last valid handle.
@@ -149,7 +158,7 @@ class stats
 
         // Get database handle, if it is invalid (NULL) return without creating stats
         $res = stats::getDatabaseHandle();
-#        stats::dropTable($res);
+        stats::dropTable($res);
         if(!$res) return;
 
         // Ensure that 'clicks' and 'overallRenderTimer' are present and set correctly, 
@@ -167,15 +176,8 @@ class stats
             $overallRenderTimer = microtime(TRUE);
         }
 
-        // Enforce floating point values ...damn this sucks.
-        $duration   += 0.000001;
-        $renderTime += 0.000001;
-
-        $duration   = sprintf("%0.6f",$duration);
-        $renderTime = sprintf("%0.6f",$renderTime);
-
-        $duration   = preg_replace("/\./",",",$duration);
-        $renderTime = preg_replace("/\./",",",$renderTime);
+        $duration   = stats::prepareFloatForWriting($duration);
+        $renderTime = stats::prepareFloatForWriting($renderTime);
 
         // Prepare values to be useable within a database
         $uuid = $config->getGOsaUUID();
@@ -563,7 +565,7 @@ class stats
         echo "------ \n";
 
         $query = "
-            SELECT PLUGIN, RENDER_TIME * 1000000 AS RM
+            SELECT PLUGIN, RENDER_TIME AS RM
             FROM {$TABLE_NAME}
             GROUP BY PLUGIN
             ";
