@@ -203,7 +203,11 @@ class management
 
       $this->snapHandler->setSnapshotBases($bases);
     }
-  
+ 
+    // Create statistic table entry 
+    stats::log('management', $class = get_class($this), $this->getAclCategories(),  $action = 'view',
+            $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
+ 
     // Display list
     return($this->renderList());
   }

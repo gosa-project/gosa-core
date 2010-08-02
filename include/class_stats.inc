@@ -568,6 +568,8 @@ class stats
             SELECT PLUGIN, RENDER_TIME AS RM
             FROM {$TABLE_NAME}
             GROUP BY PLUGIN
+            ORDER BY RM DESC
+            LIMIT 10
             ";
         $ret = sqlite_query($query, $res);
 
