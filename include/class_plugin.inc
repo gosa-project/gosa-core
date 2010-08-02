@@ -147,7 +147,6 @@ class plugin
   {
 
     $this->initTime = microtime(TRUE);
-    stats::log('plugin', $class = get_class($this), $action = 'open', $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
 
     /* Configuration is fine, allways */
     $this->config= &$config;	
@@ -164,6 +163,10 @@ class plugin
         $this->acl_category = $c."/";
       }
     }
+
+    // Create statistic table entry 
+    stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'open', 
+        $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
 
     /* Handle new accounts, don't read information from LDAP */
     if ($dn == "new"){
@@ -286,7 +289,10 @@ class plugin
     session::set('LOCK_VARS_USED_REQUEST',array());
 
     pathNavigator::registerPlugin($this);
-    stats::log('plugin', $class = get_class($this), $action = 'view', $amount = 1, $duration = microtime(TRUE) - $this->initTime);
+
+    // Create statistic table entry 
+    stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'view', 
+        $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
   }
 
   /*! \brief Removes object from parent
@@ -326,7 +332,10 @@ class plugin
      */
     if($this->initially_was_account){
         $this->handle_pre_events('remove');
-        stats::log('plugin', $class = get_class($this), $action = 'remove', $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
+
+        // Create statistic table entry 
+        stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'remove', 
+                $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
     }
   }
 
@@ -410,10 +419,16 @@ class plugin
 
     if($this->is_new){
         $this->handle_pre_events('add');
-        stats::log('plugin', $class = get_class($this), $action = 'create', $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
+
+        // Create statistic table entry 
+        stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'create', 
+                $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
     }else{
         $this->handle_pre_events('modify');
-        stats::log('plugin', $class = get_class($this), $action = 'modify', $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
+
+        // Create statistic table entry 
+        stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'modify', 
+                $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
     }
   }
 
@@ -987,8 +1002,10 @@ class plugin
       return(TRUE);
     }
 
-    stats::log('plugin', $class = get_class($this), $action = 'move', $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
-    
+    // Create statistic table entry 
+    stats::log('plugin', $class = get_class($this), $category = array($this->acl_category),  $action = 'move', 
+            $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
+
     /* Try to move the entry instead of copy & delete
      */
     if(TRUE){
