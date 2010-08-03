@@ -20,6 +20,24 @@ class dbChannelStatus extends plugin
 
     function execute()
     {
+        // Transmit daily statistics to GOsa-Server
+        if(isset($_POST['transmitStatistics'])){
+
+            // First try to retrieve values via RPC
+            if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
+
+                $dump = stats::dumpTables();
+                $rpc = $this->config->getRpcHandle();
+                $hash = $rpc->updateInstanceStatus($dump);
+                if(!$rpc->success()){
+                    msg_dialog::display(_("Error"),msgPool::rpcError($rpc->get_error()),ERROR_DIALOG);
+                    return("");
+                }
+            }
+        }
+    
+
+
         $smarty = get_smarty();
 
         $channel = array();
