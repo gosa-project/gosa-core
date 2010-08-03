@@ -13,14 +13,16 @@ class stats
     static protected $statsEnabled = FALSE;
 
 
-    static function prepareFloatForWriting($float){
-        return(floor($float * 1000));
-    }
-
-    static function prepareFloatForReading($int){
-        return($int / 1000);
-    }
-
+    /*! \brief     This method tries to connect the GOsa-stats database and 
+     *              then returns a database handle on success else NULL.
+     *
+     *             (The GOsa-stats database has to be enabled : statsDatabaseEnabled/statsDatabaseFile)
+     *
+     *             This database will then contain information about the use of GOsa,
+     *              no customer data will be stored.
+     *
+     *  @return     handle      Returns a sqlite database handle.
+     */
     static function getDatabaseHandle()
     {
         // Try to return last valid handle.
@@ -60,9 +62,9 @@ class stats
         return($handle);
     }
 
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+
+    /*! \brief      Check whether the qlite extension is available or not.
+     *  @return     boolean     TRUE on success else FALSE
      */  
     static function checkSQLiteExtension()
     {
@@ -70,9 +72,8 @@ class stats
     }
 
 
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+    /*! \brief      Drops the current stats table and thus enforces a recreation.
+     *  @param      handle      The database handle to use.
      */  
     static function dropTable($handle)
     {
@@ -84,9 +85,8 @@ class stats
     }
 
 
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+    /*! \brief      Returns the currently used amount of memory form the PHP process.
+     *  @return     int     The amount of bytes used for the PHP process.
      */  
     static function get_memory_usage()
     {
@@ -94,14 +94,14 @@ class stats
     }
 
 
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+    /*! \brief      Returns the current CPU load. 
+     *              The result will be cached and one updated every 5 seconds.
+     *  @return     float       The current 'cpu_load'.
      */  
     static function get_cpu_load()
     {
         $cur = time();
-        if(empty(stats::$lastCpuLoad) || (($cur - stats::$lastCpuLoadTimestamp) >=2 )){
+        if(empty(stats::$lastCpuLoad) || (($cur - stats::$lastCpuLoadTimestamp) >= 5 )){
             list($one, $five, $ten) =preg_split("/ /",shell_exec('cat /proc/loadavg'));
             stats::$lastCpuLoad = $one;
             stats::$lastCpuLoadTimestamp = $cur;
@@ -110,9 +110,9 @@ class stats
     }
 
 
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+    /*! \brief      This method checks if the 'stats' table is already present,
+     *               if it is not then it will be created.
+     *  @param      handle      The sqlite database handle
      */  
     static function createDatabaseOnDemand($handle)
     {
@@ -146,9 +146,15 @@ class stats
     }
 
 
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+    /*! \brief      Creates a new 'stats' table entry.
+     *              -> Logs a GOsa action/activity in the sqlite stats table.
+     *  @param      string  type        The action type, e.g. ldap/plugin/management
+     *  @param      string  plugin      The plugin name, e.g. userManagement/user/posixAccount
+     *  @param      string  category    The plugin category e.g. users/servers/groups
+     *  @param      string  action      The action done e.g. edit/view/open/move
+     *  @param      int     amount      The amount, e.g. for multiple edit
+     *  @param      float   duration    The elapsed time.
+     *  @param      string  info        Some infos form the action, e.g. the used hashing mehtod for pwd changes.
      */  
     static function log($type, $plugin, $category, $action, $amount = 1, $duration = 0, $info ='')
     {
@@ -158,7 +164,6 @@ class stats
 
         // Get database handle, if it is invalid (NULL) return without creating stats
         $res = stats::getDatabaseHandle();
-#        stats::dropTable($res);
         if(!$res) return;
 
         // Ensure that 'clicks' and 'overallRenderTimer' are present and set correctly, 
@@ -216,9 +221,11 @@ class stats
     }
   
  
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+    /*! \brief      This method returns all entries of the GOsa-stats table.
+     *              You can limit the result by setting the from/to parameter (timestamp).
+     *  @param      int     from    The timestamp to start the result from. 
+     *  @param      int     to      The timestamp to end the request.
+     *  @return     array           An array containing the requested entries.
      */  
     static function dumpTables($from = NULL, $to = NULL)
     {
@@ -246,17 +253,11 @@ class stats
     }
 
  
-    /*! \brief      |
-     *  @param      |
-     *  @return     |
+    /*! \brief      This is just a dummy output/debug method 
+     *              It directly prints some stats and table infos on the screen.
      */  
     static function show()
     {
-
-        stats::dumpTables();
-
-        return;
-
         $res = stats::getDatabaseHandle();
 #       stats::dropTable($res);
         if(!$res) return;        
@@ -621,7 +622,34 @@ class stats
 
         echo "</pre>";
     }
-}
 
+
+    /*! \brief     Somehow sqlite can not work with float values when it comes to AVG() SUM().
+     *             We use this methods to convert float values to int and vice versa.
+     *             The database will then contain 'int' intead of 'float'.
+     *                  prepareFloatForReading -> Used for reading 'float' values.
+     *                  prepareFloatForWriting -> Used for writing 'float' values.
+     *  @param     float    The 'float' value to convert.
+     *  @return    int      The converted float value. 
+     */
+    static function prepareFloatForWriting($float)
+    {
+        return(floor($float * 1000));
+    }
+
+
+
+    /*! \brief     Somehow sqlite can not work with float values when it comes to AVG() SUM().
+     *             We use this methods to convert float values to int and vice versa.
+     *             The database will then contain 'int' intead of 'float'.
+     *                  prepareFloatForWriting -> Used for writing 'float' values.
+     *  @param     float    The 'int' value read from the table.
+     *  @return    int      The converted int value. 
+     */
+    static function prepareFloatForReading($int)
+    {
+        return($int / 1000);
+    }
+}
 
 ?>
