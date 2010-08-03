@@ -1,4 +1,6 @@
 <?php
+
+
 class jsonRPC {
 
     private $curlHandler = NULL;
@@ -13,15 +15,25 @@ class jsonRPC {
     private $userPassword = "";
     private $authModeDigest = FALSE; 
 
-    public function __construct($config, $connectUrl="", $username="", $userPassword="", $authModeDigest=FALSE) 
+
+    /*! \brief      Constructs a new jsonRPC handle which is connected to a given URL.
+     *              It can either connect using a rpc method or via auth method digest.
+     *  @param      object      The gosa configuration object (class_config)
+     *  @param      string      The url to connect to. 
+     *  @param      string      The username for authentication
+     *  @param      string      The password to use for authentication
+     *  @param      boolean     Whether to use DIGEST authentication or not.
+     *  @return     
+     */
+    public function __construct($config, $connectUrl, $username, $userPassword, $authModeDigest=FALSE) 
     {
         $this->config = $config;
         $this->id = 0;
 
         // Get connection data
-        $this->connectUrl   = (!empty($connectUrl))   ? $connectUrl   : $this->config->get_cfg_value('core','gosaRpcServer');
-        $this->username     = (!empty($username))     ? $username     : $this->config->get_cfg_value('core','gosaRpcUser');
-        $this->userPassword = (!empty($userPassword)) ? $userPassword : $this->config->get_cfg_value('core','gosaRpcPassword');
+        $this->connectUrl     = $connectUrl; 
+        $this->username       = $username; 
+        $this->userPassword   = $userPassword; 
         $this->authModeDigest = $authModeDigest;
 
         // Put some usefull info in the logs 
@@ -33,6 +45,11 @@ class jsonRPC {
         $this->__login();
     }
 
+
+    /*! \brief          
+     *  @param      
+     *  @return     
+     */
     private function __login()
     {
         // Init Curl handler
@@ -55,13 +72,20 @@ class jsonRPC {
             $this->login($this->username, $this->userPassword);
         }
     }
-        
 
+
+    /*! \brief      Returns the last HTTP status code.  
+     *  @return     int         The last status code.          
+     */
     public function getHTTPstatusCode()
     {
         return((isset($this->lastStats['http_code']))? $this->lastStats['http_code'] : -1 );
     }
 
+
+    /*! \brief      Returns the last error string. 
+     *  @return     string      The last error message.
+     */
     public function get_error()
     {
         if($this->lastStats['http_code'] != 200){
@@ -71,23 +95,39 @@ class jsonRPC {
         }
     }
 
+
+    /*! \brief      Returns TRUE if the last action was successfull else FALSE.
+     *  @return     boolean     TRUE on success else FALSE. 
+     */
     public function success()
     {
         return(curl_errno($this->curlHandler) == 0 && $this->lastStats['http_code'] == 200);
     }
 
+
+    /*! \brief      The class destructor, it destroys open rpc handles if needed.
+     */
     public function __destruct()
     {
         if($this->curlHandler){
-             curl_close($this->curlHandler);
+            curl_close($this->curlHandler);
         }
     }
 
+
+    /*! \brief      This is some kind of catch-all method, all unknown method names will 
+     *               will be interpreted as rpc request. 
+     *              If you call "$this->blafasel" this method will initiate an rpc request 
+     *               for method 'blafasel'.
+     *  @param      string  method   The rpc method to execute.
+     *  @param      params  array    The parameter to use.
+     *  @return     mixed            The request result.
+     */
     public function __call($method,$params) 
     {
         // Check if handle is still valid!
         if(!$this->curlHandler && $this->lastAction != 'login'){
-             $this->__login();
+            $this->__login();
         }
 
         // Start request
@@ -95,7 +135,7 @@ class jsonRPC {
         $response = $this->request($method,$params);
         if($this->success()){
             DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,
-                (is_array($response['result']))?$response['result']:bold($response['result']), "Result: "); 
+                    (is_array($response['result']))?$response['result']:bold($response['result']), "Result: "); 
         }else{
             DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->get_error())."<br>".$response, "Result (FAILED): "); 
         }
@@ -103,7 +143,13 @@ class jsonRPC {
         return($response['result']);
     }
 
-    
+
+    /*! \brief      This method finally initiates the real RPC requests and handles 
+     *               the result from the server.
+     *  @param      string  method      The method to call 
+     *  @param      array   params      The paramter to use.
+     *  @return     mixed   The server response. 
+     */
     private function request($method, $params)
     {
         // Set last action 
@@ -111,7 +157,7 @@ class jsonRPC {
 
         // Reset stats of last request.
         $this->lastStats = array();
-   
+
         // Validate input  values
         if (!is_scalar($method))  trigger_error('jsonRPC::__call requires a scalar value as first parameter!');
         if (is_array($params)) {
@@ -131,11 +177,15 @@ class jsonRPC {
 
         // Set current result stats.
         $this->lastStats = curl_getinfo($this->curlHandler);
-    
+
         return($response);
     }
-    
 
+
+    /*! \brief      Returns the HTTP status message for a given HTTP status code.        
+     *  @param      int     code    The status to code to return a message for. 
+     *  @return     string  The corresponding status message. 
+     */
     public static function getHttpStatusCodeMessage($code)
     {
         $codes  = array(
