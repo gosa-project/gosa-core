@@ -214,7 +214,37 @@ class stats
                     '{$memory_usage}','{$cpu_load}','{$info}')";
         sqlite_query($query, $res);
     }
-   
+  
+ 
+    /*! \brief      |
+     *  @param      |
+     *  @return     |
+     */  
+    static function dumpTables($from = NULL, $to = NULL)
+    {
+        // Get database connection
+        $TABLE_NAME = stats::$tableName;
+        $handle = stats::getDatabaseHandle();
+        if(!$handle) return;        
+
+        // Build up filter to limit dumped entries to the given range.
+        $tim = "";
+        if($from != NULL){
+            $from = sqlite_escape_string($from);
+            $tim.= "AND TIMESTAMP >= '{$from}' ";
+        }
+        if($to != NULL){
+            $to = sqlite_escape_string($to);
+            $tim.= "AND TIMESTAMP <= '{$to}' ";
+        }
+        $tim = preg_replace("/^AND /"," WHERE ",$tim);
+
+        // Create Filter and start query
+        $filter = "SELECT * FROM {$TABLE_NAME}{$tim} LIMIT 10";
+        $ret = sqlite_array_query($filter, $handle, SQLITE_ASSOC);
+        return($ret);
+    }
+
  
     /*! \brief      |
      *  @param      |
@@ -222,6 +252,11 @@ class stats
      */  
     static function show()
     {
+
+        stats::dumpTables();
+
+        return;
+
         $res = stats::getDatabaseHandle();
 #       stats::dropTable($res);
         if(!$res) return;        
