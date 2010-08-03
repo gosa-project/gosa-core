@@ -7,39 +7,54 @@ class jsonRPC {
     private $lastStats = array();
     private $lastAction = "none";
 
-    public function __construct($config) 
+
+    private $url = "";
+    private $user = "";
+    private $password = "";
+
+    private $authModeDigest = FALSE; 
+
+    public function __construct($config, $url = "", $user = "", $password = "", $digest = FALSE) 
     {
         $this->config = $config;
         $this->id = 0;
+
+        // Get connection data
+        $this->url    = (!empty($url))      ? $url      : $this->config->get_cfg_value('core','gosaRpcServer');
+        $this->user   = (!empty($user))     ? $user     : $this->config->get_cfg_value('core','gosaRpcUser');
+        $this->passwd = (!empty($password)) ? $password : $this->config->get_cfg_value('core','gosaRpcPassword');
+        $this->authModeDigest = $digest;
+
+        // Put some usefull info in the logs 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->url), "Initiated RPC "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->user), "RPC user: "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->passwd),"RPC password: "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->authModeDigest),"Digest Auth (0: No, 1: Yes): "); 
+
         $this->__login();
     }
 
     private function __login()
     {
-        // Get connection data
-        $url    =  $this->config->get_cfg_value('core','gosaRpcServer');
-        $user   =  $this->config->get_cfg_value('core','gosaRpcUser');
-        $passwd =  $this->config->get_cfg_value('core','gosaRpcPassword');
-
-        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($url), "Initiated RPC "); 
-        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($user), "RPC user: "); 
-        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($passwd),"RPC password: "); 
-
         // Init Curl handler
-        $this->curlHandler = curl_init($url);
+        $this->curlHandler = curl_init($this->url);
 
         // Set curl options
-        curl_setopt($this->curlHandler, CURLOPT_URL , $url);
-        curl_setopt($this->curlHandler, CURLOPT_COOKIESESSION , TRUE);
-        curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, 'cookiefile.txt'); 
-        curl_setopt($this->curlHandler, CURLOPT_POST , TRUE);
-        curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER , TRUE);
-        curl_setopt($this->curlHandler, CURLOPT_SSL_VERIFYPEER, TRUE);
-        curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER , array('Content-Type: application/json'));
+        curl_setopt($this->curlHandler, CURLOPT_URL ,           $this->url);
+        curl_setopt($this->curlHandler, CURLOPT_POST ,          TRUE);
+        curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER ,TRUE);
+        curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER ,    array('Content-Type: application/json'));
+        curl_setopt($this->curlHandler, CURLOPT_SSL_VERIFYPEER, FALSE);
 
         // Try to login 
-        $this->login($user, $passwd);
-       
+        if($this->authModeDigest){
+            curl_setopt($this->curlHandler, CURLOPT_USERPWD , "{$this->user}:{$this->passwd}");
+            curl_setopt($this->curlHandler, CURLOPT_HTTPAUTH , CURLAUTH_ANYSAFE);
+        }else{
+            curl_setopt($this->curlHandler, CURLOPT_COOKIESESSION , TRUE);
+            curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, 'cookiefile.txt'); 
+            $this->login($this->user, $this->passwd);
+        }
     }
         
 

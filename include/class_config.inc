@@ -314,11 +314,11 @@ class config  {
     }
 
 
-    function getRpcHandle()
+    function getRpcHandle($url="", $user="", $pwd="", $digest = FALSE )
     {
         // Create jsonRPC handle on demand.
-        if(!$this->jsonRPChandle){
-            $this->jsonRPChandle = new jsonRPC($this);
+        if(!$this->jsonRPChandle || TRUE){
+            $this->jsonRPChandle = new jsonRPC($this, $url, $user, $pwd, $digest);
         }
         return($this->jsonRPChandle);
     }
