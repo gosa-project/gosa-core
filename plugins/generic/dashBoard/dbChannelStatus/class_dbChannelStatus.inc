@@ -25,7 +25,12 @@ class dbChannelStatus extends plugin
 
             // First try to retrieve values via RPC
             if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
-                $dump = stats::dumpTables();
+                $tmp = stats::dumpTables();
+                $dump = array();
+                foreach($tmp as $entry){
+                    $dump[] = array_values($entry);
+                }
+
                 $rpc = $this->config->getRpcHandle(
                         "http://10.3.64.59:4000",
                         "65717fe6-9e3e-11df-b010-5452005f1250",
