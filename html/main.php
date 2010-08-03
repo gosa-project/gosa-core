@@ -487,8 +487,6 @@ if($config->get_cfg_value("core","storeFilterSettings") == "true"){
   @setcookie("GOsa_Filter_Settings",base64_encode(serialize($cookie)),time() + (60*60*24));
 }
 
-stats::show();
-
 /* Show page... */
 echo $display;
 

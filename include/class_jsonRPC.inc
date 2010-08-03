@@ -8,27 +8,26 @@ class jsonRPC {
     private $lastAction = "none";
 
 
-    private $url = "";
-    private $user = "";
-    private $password = "";
-
+    private $connectUrl = "";
+    private $username = "";
+    private $userPassword = "";
     private $authModeDigest = FALSE; 
 
-    public function __construct($config, $url = "", $user = "", $password = "", $digest = FALSE) 
+    public function __construct($config, $connectUrl="", $username="", $userPassword="", $authModeDigest=FALSE) 
     {
         $this->config = $config;
         $this->id = 0;
 
         // Get connection data
-        $this->url    = (!empty($url))      ? $url      : $this->config->get_cfg_value('core','gosaRpcServer');
-        $this->user   = (!empty($user))     ? $user     : $this->config->get_cfg_value('core','gosaRpcUser');
-        $this->passwd = (!empty($password)) ? $password : $this->config->get_cfg_value('core','gosaRpcPassword');
-        $this->authModeDigest = $digest;
+        $this->connectUrl   = (!empty($connectUrl))   ? $connectUrl   : $this->config->get_cfg_value('core','gosaRpcServer');
+        $this->username     = (!empty($username))     ? $username     : $this->config->get_cfg_value('core','gosaRpcUser');
+        $this->userPassword = (!empty($userPassword)) ? $userPassword : $this->config->get_cfg_value('core','gosaRpcPassword');
+        $this->authModeDigest = $authModeDigest;
 
         // Put some usefull info in the logs 
-        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->url), "Initiated RPC "); 
-        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->user), "RPC user: "); 
-        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->passwd),"RPC password: "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->connectUrl), "Initiated RPC "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->username), "RPC user: "); 
+        DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->userPassword),"RPC password: "); 
         DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->authModeDigest),"Digest Auth (0: No, 1: Yes): "); 
 
         $this->__login();
@@ -37,10 +36,10 @@ class jsonRPC {
     private function __login()
     {
         // Init Curl handler
-        $this->curlHandler = curl_init($this->url);
+        $this->curlHandler = curl_init($this->connectUrl);
 
         // Set curl options
-        curl_setopt($this->curlHandler, CURLOPT_URL ,           $this->url);
+        curl_setopt($this->curlHandler, CURLOPT_URL ,           $this->connectUrl);
         curl_setopt($this->curlHandler, CURLOPT_POST ,          TRUE);
         curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER ,TRUE);
         curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER ,    array('Content-Type: application/json'));
@@ -48,12 +47,12 @@ class jsonRPC {
 
         // Try to login 
         if($this->authModeDigest){
-            curl_setopt($this->curlHandler, CURLOPT_USERPWD , "{$this->user}:{$this->passwd}");
+            curl_setopt($this->curlHandler, CURLOPT_USERPWD , "{$this->username}:{$this->userPassword}");
             curl_setopt($this->curlHandler, CURLOPT_HTTPAUTH , CURLAUTH_ANYSAFE);
         }else{
             curl_setopt($this->curlHandler, CURLOPT_COOKIESESSION , TRUE);
             curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, 'cookiefile.txt'); 
-            $this->login($this->user, $this->passwd);
+            $this->login($this->username, $this->userPassword);
         }
     }
         
