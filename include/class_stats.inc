@@ -240,7 +240,7 @@ class stats
         $tim = preg_replace("/^AND /"," WHERE ",$tim);
 
         // Create Filter and start query
-        $filter = "SELECT * FROM {$TABLE_NAME}{$tim} ODER BY ID";
+        $filter = "SELECT * FROM {$TABLE_NAME}{$tim} ORDER BY ID";
         $ret = sqlite_array_query($filter, $handle, SQLITE_ASSOC);
         return($ret);
     }
