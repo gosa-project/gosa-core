@@ -139,7 +139,7 @@ class jsonRPC {
         }else{
             DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->get_error())."<br>".$response, "Result (FAILED): "); 
         }
-
+        if(isset($response['error']) && !empty($response['error']))  print_a(array($response));
         return($response['result']);
     }
 
