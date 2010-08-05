@@ -69,6 +69,12 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     new log("debug","all",$errfile,array(),"Type:".$errno.", Message:".$errstr.", File:".$errfile.", Line: ".$errline);
   }
 
+  // Log errors in usage DB
+  if(class_exists('stats') && !preg_match("/No such object/",$errstr)){
+      stats::log('error', $class = 'ERROR', $category = array(),  $action = __FUNCTION__, 
+              $amount = 1, $duration = 0, $errno);
+  }
+
   /* Create header as needed */
   if ($error_collector == ""){
 
