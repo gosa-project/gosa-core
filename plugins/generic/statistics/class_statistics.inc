@@ -11,6 +11,7 @@ class statistics extends plugin
 
 
     var $rpcHandle = NULL;
+    var $rpcConfigured = FALSE;
 
 
     function __construct($config)
