@@ -1,4 +1,5 @@
 gofax/admin			/usr/share/gosa/plugins
+gofax/gofax			/usr/share/gosa/plugins
 gofax/help/guide.xml		/usr/share/gosa/doc/plugins/gofax
 gofax/locale			/usr/share/gosa/locale/plugins/gofax
 gofax/contrib			/usr/share/doc/gosa-plugin-gofax
