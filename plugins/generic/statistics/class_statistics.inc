@@ -67,30 +67,39 @@ class statistics extends plugin
 
                 $all = array_sum($res['category_count']);
                 $data = array();
+                $cnt = 5;
                 foreach($res['category_count'] as $category => $count){
-                    $tmp[$category] = floor(($count / $all) * 10000) / 100;
-                    $data[] = array($category, floor(($count / $all) * 10000) / 100);
+                    $tmp[$category] = $count;
                 }
 
+                asort($tmp);
+                $tmp = array_slice($tmp,0,7);
 
+                // Include pChart 
+                new pChartInclude();
+
+                // Dataset definition   
+                $DataSet = new pData;  
                 $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
-                $plot = new PHPlot(600,400);
-                $plot->SetImageBorderType('plain');
+                $DataSet->AddPoint(array_values($tmp),"Serie1");  
+                $DataSet->AddPoint(array_keys($tmp),"Serie2");  
+                $DataSet->AddAllSeries();  
+                $DataSet->SetAbsciseLabelSerie("Serie2");  
 
-                $plot->SetTitle("World Gold Production, 1990\n(1000s of Troy Ounces)");
-                $plot->SetPlotType('pie');
-                $plot->SetDataType('text-data-single');
-                $plot->SetDataValues($data);
+                // Initialise the graph  
+                $Test = new pChart(400,200);  
+                $Test->drawFilledRoundedRectangle(7,7,373,193,5,255,200,200);  
+                $Test->drawRoundedRectangle(5,5,375,195,5,200,255,200);  
 
-                foreach ($data as $row)
-                    $plot->SetLegend(implode(': ', $row));
+                // Draw the pie chart  
+                $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
+                $Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
+                $Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),200,255,200);  
 
+                $file = '/tmp/graph_'.$this->graphID_1;
+                $Test->Render($file);
 
-                $plot->SetOutputFile('/tmp/graph_'.$this->graphID_1);
-                $plot->SetIsInline(TRUE);
-                $plot->DrawGraph();
-
-                session::set('statistics::graphFile'.$this->graphID_1,'/tmp/graph_'.$this->graphID_1);
+                session::set('statistics::graphFile'.$this->graphID_1,$file);
             }
         }
 
