@@ -108,6 +108,7 @@ class statistics extends plugin
                     $tmp = array();
                     $DataSet2 = new pData;  
                     $dates = array();
+                    $max = 0;
                     foreach($res['action_per_date'] as $id => $data){
 
                         $category = $data['category'];
@@ -115,10 +116,12 @@ class statistics extends plugin
 
                         if(!isset($mostUsedCategories[$category])) continue;
 
+                        if($data['count'] > $max) $max = $data['count'];
                         $tmp[$category][$date] = $data['count'];
                         $dates[] = $date;
                     }
                     $dates = array_unique($dates);
+
                     foreach($tmp as $category => $data){
                         
                         foreach($dates as $date){
@@ -137,13 +140,13 @@ class statistics extends plugin
                     $DataSet2->RemoveSerie('date');  
 
                     $Test2 = new pChart(700,230);  
-                    $Test2->setFixedScale(0,20);  
+                    $Test2->setFixedScale(0,$max);  
                     $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
                     $Test2->setGraphArea(50,30,585,200);  
                     $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
                     $Test2->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
                     $Test2->drawGraphArea(255,255,255,TRUE);  
-                    $Test2->drawScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);     
+                    $Test2->drawScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);     
                     $Test2->drawGrid(4,TRUE,230,230,230,50);  
 
                     // Draw the 0 line  
