@@ -105,7 +105,7 @@ function get_classes($folder= ".")
     }
 
     /* Recurse through all "common" directories */
-    if (is_dir($file)){
+    if (is_dir($file) && !file_exists("{$file}/excludeFromAutoLoad")){
       get_classes($file);
       continue;
     }
