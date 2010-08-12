@@ -107,19 +107,32 @@ class statistics extends plugin
 
                 $tmp = array();
                 $DataSet2 = new pData; 
-                $cnt = 5;
+                $cnt = 2;
                 foreach($res['category_count'] as $category => $count){
                     for($i = 0; $i < 10; $i++){
-                        $tmp[$category][] = rand(0,16);
+                        $tmp[$category][time() - ($i*60*60*24)] = rand(0,16);
                     }
                     $DataSet2->AddPoint($tmp[$category], $category);
-                    $DataSet2->SetSerieName($category,$category);  
+                    $DataSet2->SetSerieName(_($category), $category);
                     $cnt --;
                     if(!$cnt) break;
                 }
-
                 $DataSet2->AddAllSeries();  
-                $DataSet2->SetAbsciseLabelSerie();  
+
+                // Build up X-Axis
+                $steps = 10;
+                $it = 24*60*60;
+                $start = time() - ($steps * $it);
+                $stop = time();
+                $DataDescription = array();
+                for($i = $start; $i < $stop; $i += $it){
+                    $seriesX[] =  date('d .m', $i);
+#                    $seriesX[] =  $i;
+                }
+#                $DataSet2->SetXAxisFormat("date");
+                $DataSet2->AddPoint($seriesX, 'date');
+                $DataSet2->SetAbsciseLabelSerie('date');  
+                $DataSet2->RemoveSerie('date');  
 
                 #  // Initialise the graph  
                 $Test2 = new pChart(700,230);  
@@ -140,6 +153,7 @@ class statistics extends plugin
                 $Test2->drawCubicCurve($DataSet2->GetData(),$DataSet2->GetDataDescription());  
 
                 // Finish the graph  
+                $DataSet2->RemoveSerie('date');  
                 $Test2->drawLegend(600,30,$DataSet2->GetDataDescription(),255,255,255);  
                 $Test2->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
 
