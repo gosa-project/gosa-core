@@ -88,7 +88,7 @@ class statistics extends plugin
 
                     // Initialise the graph  
                     $Test = new pChart(400,200);  
-                    $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
+                    $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
                     $Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
                     $Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),200,255,200);  
 
@@ -153,7 +153,7 @@ class statistics extends plugin
 
                     $Test2 = new pChart(700,230);  
                     $Test2->setFixedScale(0,$max);  
-                    $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
+                    $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
                     $Test2->setGraphArea(50,30,585,200);  
                     $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
                     $Test2->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
@@ -166,7 +166,8 @@ class statistics extends plugin
 
                     // Draw the cubic curve graph  
 #                    $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
-                    $Test2->drawLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
+#                    $Test2->drawLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
+                    $Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);  
 
                     // Finish the graph  
                     $DataSet2->RemoveSerie('date');  
