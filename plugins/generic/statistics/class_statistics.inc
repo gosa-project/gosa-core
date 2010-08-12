@@ -74,8 +74,18 @@ class statistics extends plugin
 
 
                 $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
-                $plot = new PHPlot();
+                $plot = new PHPlot(600,400);
+                $plot->SetImageBorderType('plain');
+
+                $plot->SetTitle("World Gold Production, 1990\n(1000s of Troy Ounces)");
+                $plot->SetPlotType('pie');
+                $plot->SetDataType('text-data-single');
                 $plot->SetDataValues($data);
+
+                foreach ($data as $row)
+                    $plot->SetLegend(implode(': ', $row));
+
+
                 $plot->SetOutputFile('/tmp/graph_'.$this->graphID_1);
                 $plot->SetIsInline(TRUE);
                 $plot->DrawGraph();
