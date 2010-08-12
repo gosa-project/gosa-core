@@ -109,33 +109,45 @@ class statistics extends plugin
                     $DataSet2 = new pData;  
                     $dates = array();
                     $max = 0;
+
                     foreach($res['action_per_date'] as $id => $data){
 
                         $category = $data['category'];
-                        $date =  date('d .m', $data['date']);
+                        $date =  $data['date'];
 
                         if(!isset($mostUsedCategories[$category])) continue;
 
                         if($data['count'] > $max) $max = $data['count'];
                         $tmp[$category][$date] = $data['count'];
-                        $dates[] = $date;
+                        $dates[$date] = $date;
                     }
-                    $dates = array_unique($dates);
+                    $dMin = min($dates);
+                    $dMax = max($dates);
+                    for($i = $dMin; $i < $dMax; $i += (24*60*60)){
+                        if(!in_array($i,$dates)) $dates[$i] = $i;
+                    }
+                    $dates = array_values($dates);
+                    sort($dates);
 
                     foreach($tmp as $category => $data){
-                        
+                        reset($dates);
                         foreach($dates as $date){
                             if(!isset($tmp[$category][$date])){
-                                $tmp[$category][$date] =0;
+                                $tmp[$category][$date] = 0;
                             }
                         }     
-
+                        ksort($tmp[$category]);
+                        
                         $DataSet2->AddPoint($tmp[$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
                     }
+                   
                     $DataSet2->AddAllSeries();  
 
-                    $DataSet2->AddPoint($dates, 'date');
+                    $tmp = array();
+                    foreach($dates as $date) $tmp[] = date('d.m', $date);
+
+                    $DataSet2->AddPoint($tmp, 'date');
                     $DataSet2->SetAbsciseLabelSerie('date');  
                     $DataSet2->RemoveSerie('date');  
 
