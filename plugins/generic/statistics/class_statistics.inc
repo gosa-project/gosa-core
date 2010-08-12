@@ -65,101 +65,103 @@ class statistics extends plugin
                     msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
                 }
 
-                $all = array_sum($res['category_count']);
-                $data = array();
-                $cnt = 5;
-                foreach($res['category_count'] as $category => $count){
-                    $tmp[$category] = $count;
-                }
+                if($res){
 
-                asort($tmp);
-                $tmp = array_slice($tmp,0,7);
+                    // Include pChart 
+                    new pChartInclude();
 
-                // Include pChart 
-                new pChartInclude();
+                    // --------
+                    // Generate PIE chart of most used categories
+                    // --------
 
-                // Dataset definition   
-                $DataSet = new pData;  
-                $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
-                $DataSet->AddPoint(array_values($tmp),"Serie1");  
-                $DataSet->AddPoint(array_keys($tmp),"Serie2");  
-                $DataSet->AddAllSeries();  
-                $DataSet->SetAbsciseLabelSerie("Serie2");  
+                    // Get most used categories, but only eight at once.
+                    arsort($res['category_count']);
+                    $mostUsedCategories = array_slice($res['category_count'],0,8);
 
-                // Initialise the graph  
-                $Test = new pChart(400,200);  
-                # $Test->drawFilledRoundedRectangle(7,7,373,193,5,255,200,200);  
-                # $Test->drawRoundedRectangle(5,5,375,195,5,200,255,200);  
+                    // Dataset definition   
+                    $DataSet = new pData;  
+                    $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
+                    $DataSet->AddPoint(array_values($mostUsedCategories),"Serie1");  
+                    $DataSet->AddPoint(array_keys($mostUsedCategories),"Serie2");  
+                    $DataSet->AddAllSeries();  
+                    $DataSet->SetAbsciseLabelSerie("Serie2");  
 
-                // Draw the pie chart  
-                $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
-                $Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
-                $Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),200,255,200);  
+                    // Initialise the graph  
+                    $Test = new pChart(400,200);  
+                    $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
+                    $Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
+                    $Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),200,255,200);  
 
-                $file = '/tmp/graph_'.$this->graphID_1;
-                $Test->Render($file);
-                session::set('statistics::graphFile'.$this->graphID_1,$file);
+                    $file = '/tmp/graph_'.$this->graphID_1;
+                    $Test->Render($file);
+                    session::set('statistics::graphFile'.$this->graphID_1,$file);
 
 
+                    // --------
+                    // Generate combined line and car chart of plugin usage, ldap execution time and errors 
+                    // --------
 
-                ## Second graph, plugin usage over time
-                $this->graphID_2 = preg_replace("/[^0-9]/","",microtime(TRUE));
+                    // Generate new and unique graph id
+                    $this->graphID_2 = preg_replace("/[^0-9]/","",microtime(TRUE));
 
-                $tmp = array();
-                $DataSet2 = new pData; 
-                $cnt = 2;
-                foreach($res['category_count'] as $category => $count){
-                    for($i = 0; $i < 10; $i++){
-                        $tmp[$category][time() - ($i*60*60*24)] = rand(0,16);
+                    // Build up DataSet. 
+                    $tmp = array();
+                    $DataSet2 = new pData;  
+                    $dates = array();
+                    foreach($res['action_per_date'] as $id => $data){
+
+                        $category = $data['category'];
+                        $date =  date('d .m', $data['date']);
+
+                        if(!isset($mostUsedCategories[$category])) continue;
+
+                        $tmp[$category][$date] = $data['count'];
+                        $dates[] = $date;
                     }
-                    $DataSet2->AddPoint($tmp[$category], $category);
-                    $DataSet2->SetSerieName(_($category), $category);
-                    $cnt --;
-                    if(!$cnt) break;
+                    $dates = array_unique($dates);
+                    foreach($tmp as $category => $data){
+                        
+                        foreach($dates as $date){
+                            if(!isset($tmp[$category][$date])){
+                                $tmp[$category][$date] =0;
+                            }
+                        }     
+
+                        $DataSet2->AddPoint($tmp[$category], $category);
+                        $DataSet2->SetSerieName(_($category), $category);
+                    }
+                    $DataSet2->AddAllSeries();  
+
+                    $DataSet2->AddPoint($dates, 'date');
+                    $DataSet2->SetAbsciseLabelSerie('date');  
+                    $DataSet2->RemoveSerie('date');  
+
+                    $Test2 = new pChart(700,230);  
+                    $Test2->setFixedScale(0,20);  
+                    $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
+                    $Test2->setGraphArea(50,30,585,200);  
+                    $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $Test2->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $Test2->drawGraphArea(255,255,255,TRUE);  
+                    $Test2->drawScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);     
+                    $Test2->drawGrid(4,TRUE,230,230,230,50);  
+
+                    // Draw the 0 line  
+                    $Test2->drawTreshold(0,143,55,72,TRUE,TRUE);  
+
+                    // Draw the cubic curve graph  
+#                    $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
+                    $Test2->drawLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
+
+                    // Finish the graph  
+                    $DataSet2->RemoveSerie('date');  
+                    $Test2->drawLegend(600,30,$DataSet2->GetDataDescription(),255,255,255);  
+                    $Test2->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
+
+                    $file = '/tmp/graph_'.$this->graphID_2;
+                    $Test2->Render($file);
+                    session::set('statistics::graphFile'.$this->graphID_2,$file);
                 }
-                $DataSet2->AddAllSeries();  
-
-                // Build up X-Axis
-                $steps = 10;
-                $it = 24*60*60;
-                $start = time() - ($steps * $it);
-                $stop = time();
-                $DataDescription = array();
-                for($i = $start; $i < $stop; $i += $it){
-                    $seriesX[] =  date('d .m', $i);
-#                    $seriesX[] =  $i;
-                }
-#                $DataSet2->SetXAxisFormat("date");
-                $DataSet2->AddPoint($seriesX, 'date');
-                $DataSet2->SetAbsciseLabelSerie('date');  
-                $DataSet2->RemoveSerie('date');  
-
-                #  // Initialise the graph  
-                $Test2 = new pChart(700,230);  
-                $Test2->setFixedScale(0,20);  
-                $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
-                $Test2->setGraphArea(50,30,585,200);  
-                $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-                $Test2->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-                $Test2->drawGraphArea(255,255,255,TRUE);  
-                $Test2->drawScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);     
-                $Test2->drawGrid(4,TRUE,230,230,230,50);  
-
-                // Draw the 0 line  
-                $Test2->drawTreshold(0,143,55,72,TRUE,TRUE);  
-
-                // Draw the cubic curve graph  
-                $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
-                $Test2->drawCubicCurve($DataSet2->GetData(),$DataSet2->GetDataDescription());  
-
-                // Finish the graph  
-                $DataSet2->RemoveSerie('date');  
-                $Test2->drawLegend(600,30,$DataSet2->GetDataDescription(),255,255,255);  
-                $Test2->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
-
-                $file = '/tmp/graph_'.$this->graphID_2;
-                $Test2->Render($file);
-                session::set('statistics::graphFile'.$this->graphID_2,$file);
             }
         }
 
