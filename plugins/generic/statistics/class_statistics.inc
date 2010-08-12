@@ -66,33 +66,21 @@ class statistics extends plugin
                 }
 
                 $all = array_sum($res['category_count']);
-                $tmp = array();
-                $tmpRendered = array();
+                $data = array();
                 foreach($res['category_count'] as $category => $count){
                     $tmp[$category] = floor(($count / $all) * 10000) / 100;
+                    $data[] = array($category, floor(($count / $all) * 10000) / 100);
                 }
 
 
-               $data = array_values($tmp);
+                $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
+                $plot = new PHPlot();
+                $plot->SetDataValues($data);
+                $plot->SetOutputFile('/tmp/graph_'.$this->graphID_1);
+                $plot->SetIsInline(TRUE);
+                $plot->DrawGraph();
 
-               // Include jpgraph classes now.
-               new jpGraphInclude();
-
-               $graph = new PieGraph(600,500);
-               $graph->title->Set("Example 4 of pie plot");
-               $graph->SetAntiAliasing();
-
-               $p1 = new PiePlot($data);
-               $p1 = new PiePlot3D($data);
-               $p1->value->SetColor("darkred");
-               $p1->SetSize(0.3);
-               $p1->SetCenter(0.4);
-               $p1->SetLegends(array_keys($tmp));
-               $graph->Add($p1);
-
-               $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
-               $graph->Stroke('/tmp/graph_'.$this->graphID_1, TRUE);
-               session::set('statistics::graphFile'.$this->graphID_1,'/tmp/graph_'.$this->graphID_1);
+                session::set('statistics::graphFile'.$this->graphID_1,'/tmp/graph_'.$this->graphID_1);
             }
         }
 
