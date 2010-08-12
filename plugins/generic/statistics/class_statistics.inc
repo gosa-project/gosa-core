@@ -7,12 +7,10 @@ class statistics extends plugin
     var $plShortIcon = 'statistics.png';
     var $plIcon = 'plugin.png';
     
-    var $receivedStats = array();
-
-
     var $rpcHandle = NULL;
     var $rpcConfigured = FALSE;
 
+    var $graphID_1 = 0;
 
     function __construct($config)
     {
@@ -36,13 +34,13 @@ class statistics extends plugin
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
+        $smarty->assign("validRpcHandle", TRUE);
         if(!$this->rpcConfigured || !$this->rpcHandle){
             $smarty->assign("validRpcHandle", FALSE);
             return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
         }
 
-
-        $smarty->assign("validRpcHandle", TRUE);
+        // Send stats 
         if(isset($_POST['transmitStatistics'])){
             $tmp = stats::dumpTables();
             $dump = array();
@@ -72,14 +70,33 @@ class statistics extends plugin
                 $tmpRendered = array();
                 foreach($res['category_count'] as $category => $count){
                     $tmp[$category] = floor(($count / $all) * 10000) / 100;
-                    $tmpRendered[$category] = progressbar($tmp[$category]);
                 }
-                $this->receivedStats = $tmpRendered;
+
+
+               $data = array_values($tmp);
+
+               // Include jpgraph classes now.
+               new jpGraphInclude();
+
+               $graph = new PieGraph(600,500);
+               $graph->title->Set("Example 4 of pie plot");
+               $graph->SetAntiAliasing();
+
+               $p1 = new PiePlot($data);
+               $p1 = new PiePlot3D($data);
+               $p1->value->SetColor("darkred");
+               $p1->SetSize(0.3);
+               $p1->SetCenter(0.4);
+               $p1->SetLegends(array_keys($tmp));
+               $graph->Add($p1);
+
+               $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
+               $graph->Stroke('/tmp/graph_'.$this->graphID_1, TRUE);
+               session::set('statistics::graphFile'.$this->graphID_1,'/tmp/graph_'.$this->graphID_1);
             }
         }
 
-
-        $smarty->assign("receivedStats",$this->receivedStats);
+        $smarty->assign('graphID_1', $this->graphID_1);
         return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
     }
 

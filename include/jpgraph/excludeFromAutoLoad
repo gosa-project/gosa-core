@@ -1,0 +1,1 @@
+This file excludes jpgraph from PHP5 class auto loading.
