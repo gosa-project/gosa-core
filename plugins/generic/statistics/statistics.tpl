@@ -16,5 +16,6 @@
     <hr>
 
     <img src='plugins/statistics/getGraph.php?id={$graphID_1}'>
+    <img src='plugins/statistics/getGraph.php?id={$graphID_2}'>
 
 {/if}

@@ -88,8 +88,8 @@ class statistics extends plugin
 
                 // Initialise the graph  
                 $Test = new pChart(400,200);  
-                $Test->drawFilledRoundedRectangle(7,7,373,193,5,255,200,200);  
-                $Test->drawRoundedRectangle(5,5,375,195,5,200,255,200);  
+                # $Test->drawFilledRoundedRectangle(7,7,373,193,5,255,200,200);  
+                # $Test->drawRoundedRectangle(5,5,375,195,5,200,255,200);  
 
                 // Draw the pie chart  
                 $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
@@ -98,12 +98,59 @@ class statistics extends plugin
 
                 $file = '/tmp/graph_'.$this->graphID_1;
                 $Test->Render($file);
-
                 session::set('statistics::graphFile'.$this->graphID_1,$file);
+
+
+
+                ## Second graph, plugin usage over time
+                $this->graphID_2 = preg_replace("/[^0-9]/","",microtime(TRUE));
+
+                $tmp = array();
+                $DataSet2 = new pData; 
+                $cnt = 5;
+                foreach($res['category_count'] as $category => $count){
+                    for($i = 0; $i < 10; $i++){
+                        $tmp[$category][] = rand(0,16);
+                    }
+                    $DataSet2->AddPoint($tmp[$category], $category);
+                    $DataSet2->SetSerieName($category,$category);  
+                    $cnt --;
+                    if(!$cnt) break;
+                }
+
+                $DataSet2->AddAllSeries();  
+                $DataSet2->SetAbsciseLabelSerie();  
+
+                #  // Initialise the graph  
+                $Test2 = new pChart(700,230);  
+                $Test2->setFixedScale(0,20);  
+                $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",8);  
+                $Test2->setGraphArea(50,30,585,200);  
+                $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                $Test2->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                $Test2->drawGraphArea(255,255,255,TRUE);  
+                $Test2->drawScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);     
+                $Test2->drawGrid(4,TRUE,230,230,230,50);  
+
+                // Draw the 0 line  
+                $Test2->drawTreshold(0,143,55,72,TRUE,TRUE);  
+
+                // Draw the cubic curve graph  
+                $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
+                $Test2->drawCubicCurve($DataSet2->GetData(),$DataSet2->GetDataDescription());  
+
+                // Finish the graph  
+                $Test2->drawLegend(600,30,$DataSet2->GetDataDescription(),255,255,255);  
+                $Test2->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
+
+                $file = '/tmp/graph_'.$this->graphID_2;
+                $Test2->Render($file);
+                session::set('statistics::graphFile'.$this->graphID_2,$file);
             }
         }
 
         $smarty->assign('graphID_1', $this->graphID_1);
+        $smarty->assign('graphID_2', $this->graphID_2);
         return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
     }
 
