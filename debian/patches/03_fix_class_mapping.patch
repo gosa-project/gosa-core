@@ -20,7 +20,7 @@ Description: Fix location of auto-generated class mapping file
 --- a/include/functions.inc
 +++ b/gosa-core/include/functions.inc
 @@ -73,7 +73,7 @@
- $svn_revision = '$Revision: 17589 $';
+ $svn_revision = '$Revision: 19051 $';
  
  /* Include required files */
 -require_once("class_location.inc");
