@@ -1,3 +1,12 @@
+gosa (2.6.11-1) unstable; urgency=low
+
+  * Samba schema file is incompatible with Samba shipped with lenny
+    (Closes: #582899)
+  * package explicitly depends on preform MPM (Closes: #591043)
+  * default config refers to missing FCGIWrapper (Closes: #591046)
+
+ -- Benoit Mortier <benoit.mortier@opensides.be>  Fri, 13 Aug 2010 11:00:29 +0200
+
 gosa (2.6.10-2) unstable; urgency=low
 
   * Removed faulty patch due to 3.0 source conversion
