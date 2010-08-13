@@ -60,7 +60,14 @@ class statistics extends plugin
 
             // First try to retrieve values via RPC
             if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
-                $res = $this->rpcHandle->getInstanceStats();
+
+
+                $days = 40;
+                $interval = 1;
+                $start = time() - ($days*86400);
+                $stop  = time();
+
+                $res = $this->rpcHandle->getInstanceStats($start,$stop,'day',$interval);
                 if(!$this->rpcHandle->success()){
                     msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
                 }
@@ -75,8 +82,8 @@ class statistics extends plugin
                     // --------
 
                     // Get most used categories, but only eight at once.
-                    arsort($res['category_count']);
-                    $mostUsedCategories = array_slice($res['category_count'],0,8);
+                    arsort($res['actionsPerCategory']);
+                    $mostUsedCategories = array_slice($res['actionsPerCategory'],0,8);
 
                     // Dataset definition   
                     $DataSet = new pData;  
@@ -110,7 +117,7 @@ class statistics extends plugin
                     $dates = array();
                     $max = 0;
 
-                    foreach($res['action_per_date'] as $id => $data){
+                    foreach($res['actionsPerInterval'] as $id => $data){
 
                         $category = $data['category'];
                         $date =  $data['date'];
@@ -121,27 +128,14 @@ class statistics extends plugin
                         $tmp[$category][$date] = $data['count'];
                         $dates[$date] = $date;
                     }
-                    $dMin = min($dates);
-                    $dMax = max($dates);
-                    for($i = $dMin; $i < $dMax; $i += (24*60*60)){
-                        if(!in_array($i,$dates)) $dates[$i] = $i;
-                    }
                     $dates = array_values($dates);
                     sort($dates);
 
                     foreach($tmp as $category => $data){
-                        reset($dates);
-                        foreach($dates as $date){
-                            if(!isset($tmp[$category][$date])){
-                                $tmp[$category][$date] = 0;
-                            }
-                        }     
                         ksort($tmp[$category]);
-                        
                         $DataSet2->AddPoint($tmp[$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
                     }
-                   
                     $DataSet2->AddAllSeries();  
 
                     $tmp = array();
@@ -165,8 +159,8 @@ class statistics extends plugin
                     $Test2->drawTreshold(0,143,55,72,TRUE,TRUE);  
 
                     // Draw the cubic curve graph  
-#                    $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
-#                    $Test2->drawLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
+                    #$Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
+                    #$Test2->drawLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE); 
                     $Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);  
 
                     // Finish the graph  
