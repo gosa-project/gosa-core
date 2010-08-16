@@ -16,14 +16,6 @@
     <hr>
     <table width="100%">
         <tr>
-            <td>{t}Interval{/t}</td>
-            <td>
-                <select name='graph1Interval'>
-                    {html_options values=$intervalValues output=$intervalValues selected=$graph1Interval}
-                </select>
-            </td>
-        </tr>
-        <tr>
             <td>{t}Start{/t}</td>
             <td>
                  <input type="text" id="graph1DatePicker1" name="graph1DatePicker1" class="date" value="{$graph1DatePicker1}">

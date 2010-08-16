@@ -130,26 +130,25 @@ class statistics extends plugin
                     $this->graphID_2 = preg_replace("/[^0-9]/","",microtime(TRUE));
 
                     // Build up DataSet. 
-                    $tmp = array();
                     $DataSet2 = new pData;  
-                    $dates = array();
-                    $max = 0;
-
+                    $intervalEntries = array();
+                    $max =0;
                     foreach($res['actionsPerInterval'] as $id => $data){
-
+                        
                         $category = $data['category'];
                         $date =  $data['date'];
+                        $iDate =  strtotime($date);
+                        $count =  $data['count'];
 
                         if(!isset($mostUsedCategories[$category])) continue;
-
+                        $intervalEntries[$category][$date] = $count;
                         if($data['count'] > $max) $max = $data['count'];
-                        $tmp[$category][$date] = $data['count'];
-                        $dates[$date] = $date;
+                        $dates[$iDate]=$iDate;
                     }
                     
-                    foreach($tmp as $category => $data){
-                        ksort($tmp[$category]);
-                        $DataSet2->AddPoint($tmp[$category], $category);
+                    foreach($intervalEntries as $category => $data){
+                        ksort($intervalEntries[$category]);
+                        $DataSet2->AddPoint($intervalEntries[$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
                     }
 
