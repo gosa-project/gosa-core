@@ -11,10 +11,19 @@ class statistics extends plugin
     var $rpcConfigured = FALSE;
 
     var $graphID_1 = 0;
+    var $graphID_2 = 0;
+
+    var $graph1Interval = 1;
+    var $graph1DatePicker1 = 0;
+    var $graph1DatePicker2 = 0;
 
     function __construct($config)
     {
         plugin::plugin($config, NULL);
+
+        // Init start and stop times for graph 1
+        $this->graph1DatePicker1 = date('d.m.Y', time() - 7 * 24 * 60 *60);
+        $this->graph1DatePicker2 = date('d.m.Y', time());
 
         // First try to retrieve values via RPC
         $this->rpcConfigured = FALSE;
@@ -30,7 +39,17 @@ class statistics extends plugin
 
     function execute()
     {
+        if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
+        if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
+        if(isset($_POST['graph1Interval'])) $this->graph1Interval = get_post('graph1Interval');
+
+        if(!$this->graph1Interval) $this->graph1Interval = 1;
+
         $smarty = get_smarty();
+        $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
+        $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
+        $smarty->assign('graph1Interval', $this->graph1Interval);
+        $smarty->assign('intervalValues', array('1','2','5','7','30'));
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
@@ -61,13 +80,12 @@ class statistics extends plugin
             // First try to retrieve values via RPC
             if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
 
+                $interval = $this->graph1Interval;
+                $start = strtotime($this->graph1DatePicker1);
+                $stop  = strtotime($this->graph1DatePicker2);
 
-                $days = 40;
-                $interval = 1;
-                $start = time() - ($days*86400);
-                $stop  = time();
-
-                $res = $this->rpcHandle->getInstanceStats($start,$stop,'day',$interval);
+                // Request statistics now
+                $res = $this->rpcHandle->getInstanceStats($start,$stop,$interval);
                 if(!$this->rpcHandle->success()){
                     msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
                 }
@@ -128,19 +146,31 @@ class statistics extends plugin
                         $tmp[$category][$date] = $data['count'];
                         $dates[$date] = $date;
                     }
-                    $dates = array_values($dates);
-                    sort($dates);
-
+                    
                     foreach($tmp as $category => $data){
                         ksort($tmp[$category]);
                         $DataSet2->AddPoint($tmp[$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
                     }
+
                     $DataSet2->AddAllSeries();  
 
                     $tmp = array();
-                    foreach($dates as $date) $tmp[] = date('d.m', $date);
+                    $cnt = 0;
+                    ksort($dates);
+                    $Xam = 5;
 
+                    foreach($dates as $key => $date){
+                        if((count($dates) <= $Xam) || 
+                            ($cnt % (floor(count($dates) / $Xam )) == 0)){
+                            $tmp[$date] = date('d.m.Y', $date);
+                        }else{
+                            $tmp[$date] = ' ';
+                        }
+                        $cnt ++;    
+                    }
+               
+ 
                     $DataSet2->AddPoint($tmp, 'date');
                     $DataSet2->SetAbsciseLabelSerie('date');  
                     $DataSet2->RemoveSerie('date');  
