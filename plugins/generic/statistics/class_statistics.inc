@@ -132,12 +132,14 @@ class statistics extends plugin
                     // Build up DataSet. 
                     $DataSet2 = new pData;  
                     $intervalEntries = array();
-                    $max = 500;
+                    $max = 0;
                     foreach($res['actionsPerInterval'] as $category => $dates){
                         if(!isset($mostUsedCategories[$category])) continue;
                         ksort($res['actionsPerInterval'][$category]);
                         $DataSet2->AddPoint($res['actionsPerInterval'][$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
+                        $tmpMax = max($res['actionsPerInterval'][$category]);
+                        if($tmpMax > $max) $max = $tmpMax;
                     }
                     $DataSet2->AddAllSeries();  
 
