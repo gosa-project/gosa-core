@@ -132,37 +132,22 @@ class statistics extends plugin
                     // Build up DataSet. 
                     $DataSet2 = new pData;  
                     $intervalEntries = array();
-                    $max =0;
-                    foreach($res['actionsPerInterval'] as $id => $data){
-                        
-                        $category = $data['category'];
-                        $date =  $data['date'];
-                        $iDate =  strtotime($date);
-                        $count =  $data['count'];
-
+                    $max = 500;
+                    foreach($res['actionsPerInterval'] as $category => $dates){
                         if(!isset($mostUsedCategories[$category])) continue;
-                        $intervalEntries[$category][$date] = $count;
-                        if($data['count'] > $max) $max = $data['count'];
-                        $dates[$iDate]=$iDate;
-                    }
-                    
-                    foreach($intervalEntries as $category => $data){
-                        ksort($intervalEntries[$category]);
-                        $DataSet2->AddPoint($intervalEntries[$category], $category);
+                        ksort($res['actionsPerInterval'][$category]);
+                        $DataSet2->AddPoint($res['actionsPerInterval'][$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
                     }
-
                     $DataSet2->AddAllSeries();  
 
-                    $tmp = array();
-                    $cnt = 0;
-                    ksort($dates);
                     $Xam = 5;
-
-                    foreach($dates as $key => $date){
+                    $cnt =0;
+                    foreach($res['actionsPerIntervalDates'] as $key => $date){
+                        $date = strtotime($date);
                         if((count($dates) <= $Xam) || 
                             ($cnt % (floor(count($dates) / $Xam )) == 0)){
-                            $tmp[$date] = date('d.m.Y', $date);
+                            $tmp[$date] = date('d.m.Y',$date);
                         }else{
                             $tmp[$date] = ' ';
                         }
