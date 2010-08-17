@@ -129,33 +129,54 @@ class statistics extends plugin
                     // Generate new and unique graph id
                     $this->graphID_2 = preg_replace("/[^0-9]/","",microtime(TRUE));
 
-                    // Build up DataSet. 
+                    // Prepare transmitted data, sort it by date and collect 
+                    //  transmitted timestamps to be able to print the x-Axis labels.
+                    $dataArray = array();
+                    $dates = array();
                     $DataSet2 = new pData;  
-                    $intervalEntries = array();
                     $max = 0;
-                    foreach($res['actionsPerInterval'] as $category => $dates){
+                    foreach($res['actionsPerInterval'] as $category => $entriesPerDate){
+
+                        // Only print the 8 most used categories, else we receive a lot of errors
+                        //  from the pChart classes, seems that it can only handle 8 data series at once.
                         if(!isset($mostUsedCategories[$category])) continue;
-                        ksort($res['actionsPerInterval'][$category]);
-                        $DataSet2->AddPoint($res['actionsPerInterval'][$category], $category);
+
+                        // Collect data per category and store used timestamps
+                        foreach($entriesPerDate as $dateStr => $count){
+                            $date = strtotime($dateStr);
+                            $dataArray[$category][$date] = $count;
+                            $dates[$date]=$date;
+                        }
+                
+                        // Sort results. 
+                        ksort($dataArray[$category]);
+                        ksort($dates);
+
+                        // Add results to our data set.
+                        $DataSet2->AddPoint($dataArray[$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
-                        $tmpMax = max($res['actionsPerInterval'][$category]);
+
+                        // Detect maximum value, to adjust the Y-Axis
+                        $tmpMax = max($dataArray[$category]);
                         if($tmpMax > $max) $max = $tmpMax;
                     }
                     $DataSet2->AddAllSeries();  
 
-                    $Xam = 5;
-                    $cnt =0;
-                    foreach($res['actionsPerIntervalDates'] as $key => $date){
-                        $date = strtotime($date);
-                        if((count($dates) <= $Xam) || 
-                            ($cnt % (floor(count($dates) / $Xam )) == 0)){
-                            $tmp[$date] = date('d.m.Y',$date);
+                    // Prepare date strings for X-Axis, only print a given number of 
+                    //  of labels to keep the axis readable.
+                    $Xam = 5; // Number of labels
+                    $cnt = 0;
+                    $tmp = array();
+                    foreach($dates as $stamp){
+                        if((count($dates) <= $Xam) || ($cnt % (floor(count($dates) / $Xam )) == 0)){
+                            $tmp[$stamp] = date('d.m.Y',$stamp);
                         }else{
-                            $tmp[$date] = ' ';
+                            $tmp[$stamp] = ' ';
                         }
                         $cnt ++;    
                     }
-               
+              
+ 
  
                     $DataSet2->AddPoint($tmp, 'date');
                     $DataSet2->SetAbsciseLabelSerie('date');  
