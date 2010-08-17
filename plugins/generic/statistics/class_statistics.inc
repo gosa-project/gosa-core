@@ -193,7 +193,7 @@ class statistics extends plugin
                     $DataSet2->RemoveSerie('date');  
 
                     $Test2 = new pChart(700,230);  
-                    $Test2->setFixedScale(1,$max);  
+                    $Test2->setFixedScale(0.0001,$max);  
                     $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
                     $Test2->setGraphArea(50,30,585,200);  
                     $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
@@ -210,8 +210,7 @@ class statistics extends plugin
 
                     // Draw the cubic curve graph  
                     if(count($dataArray)){
-                        $Test2->drawFilledCubicCurve($DataSet2->GetData(),$DataSet2->GetDataDescription(),.1,20);  
- #                       $Test2->drawLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription());
+                        $Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);
                         $Test2->drawLegend(600,30,$DataSet2->GetDataDescription(),255,255,255);  
                     }
 
