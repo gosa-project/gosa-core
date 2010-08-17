@@ -144,7 +144,7 @@ class statistics extends plugin
                         // Collect data per category and store used timestamps
                         foreach($entriesPerDate as $dateStr => $count){
                             $date = strtotime($dateStr);
-                            $dataArray[$category][$date] = $count;
+                            $dataArray[$category][$date] = log($count + 1);
                             $dates[$date]=$date;
                         }
                 
@@ -176,8 +176,6 @@ class statistics extends plugin
                         $cnt ++;    
                     }
               
- 
- 
                     $DataSet2->AddPoint($tmp, 'date');
                     $DataSet2->SetAbsciseLabelSerie('date');  
                     $DataSet2->RemoveSerie('date');  
@@ -198,7 +196,8 @@ class statistics extends plugin
                     // Draw the cubic curve graph  
                     #$Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);  
                     #$Test2->drawLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE); 
-                    $Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);  
+                    #$Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);  
+                    $Test2->drawFilledCubicCurve($DataSet2->GetData(),$DataSet2->GetDataDescription(),.1,20);  
 
                     // Finish the graph  
                     $DataSet2->RemoveSerie('date');  
