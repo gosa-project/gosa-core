@@ -35,13 +35,16 @@ class stats
         if(!is_object($config) || ! $config instanceOf config){
             return(NULL);
         }
-    
+
         // Get statsFile property 
         stats::$tableFile    = $config->get_cfg_value('core', 'statsDatabaseFile');
         stats::$statsEnabled = $config->boolValueIsTrue('core', 'statsDatabaseEnabled');
         if(!stats::$statsEnabled){
             return;
         }
+
+        // Append a date suffix to the database file, to prevent huge and unusable database files.
+        stats::$tableFile.= date('-Y_m_d');
 
         // Check for SQLite extension
         if(!stats::checkSQLiteExtension()){
