@@ -91,7 +91,6 @@ class statistics extends plugin
 
                 if($res){
 
-
                     // Include pChart 
                     new pChartInclude();
 
@@ -149,7 +148,7 @@ class statistics extends plugin
 
                             // Do not append empty data                            
                             if(empty($category)) continue;
-                            if($count) $count = log($count);
+                            if($count) $count = ($count);
                             $dataArray[$category][$date] = $count;
                         }
                       
@@ -169,8 +168,6 @@ class statistics extends plugin
                         if($tmpMax > $max) $max = $tmpMax;
                     }
                     ksort($dates);
-
-
 
                     $DataSet2->AddAllSeries();  
 
@@ -192,14 +189,14 @@ class statistics extends plugin
                     $DataSet2->SetAbsciseLabelSerie('date');  
                     $DataSet2->RemoveSerie('date');  
 
-                    $Test2 = new pChart(700,230);  
-                    $Test2->setFixedScale(0.0001,$max);  
+                    $Test2 = new pChart(800,230);  
+                    $Test2->setFixedScale(0.0001,($max*1.1));  
                     $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
                     $Test2->setGraphArea(50,30,585,200);  
                     $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
                     $Test2->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
                     $Test2->drawGraphArea(255,255,255,TRUE);  
-                    $Test2->drawGrid(4,TRUE,230,230,230,50);  
+                    $Test2->drawGrid(4,TRUE,200,200,200,50);  
                     $Test2->drawTreshold(0,143,55,72,TRUE,TRUE);  
                     $Test2->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
 
@@ -208,11 +205,37 @@ class statistics extends plugin
                         $DataSet2->RemoveSerie('date');
                     }
 
+
                     // Draw the cubic curve graph  
                     if(count($dataArray)){
                         $Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);
-                        $Test2->drawLegend(600,30,$DataSet2->GetDataDescription(),255,255,255);  
                     }
+
+                    // Add error series
+                    $errors = array();
+                    foreach($res['errorsPerInterval'] as $dateStr => $count){
+                        $date = strtotime($dateStr);
+                        if($count !=0) $count = ($count);
+                        $errors[$date] = $count;
+                    }
+
+                    $DataSet2->AddPoint($errors, 'Errors');
+                    $DataSet2->SetSerieName('Errors', 'Errors');
+                    $DataSet2->AddAllSeries();  
+                    $DataSet2->RemoveSerie('date');
+
+                    // Draw legend
+                    $Test2->drawLegend(650,30,$DataSet2->GetDataDescription(),255,255,255);  
+
+                    // Remove plugin usage from data series, just keep error series.
+                    foreach($dataArray as $categoryName => $list){
+                        $DataSet2->RemoveSerie($categoryName);
+                    }
+    
+                    // Draw right scale (Errors per day)
+                    $Test2->setFixedScale(0.0001,(max($errors) +1) *1.1);
+                    $Test2->drawRightScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2);
+                    $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);
 
                     $file = '/tmp/graph_'.$this->graphID_2;
                     $Test2->Render($file);
