@@ -10,14 +10,16 @@
 
 {else}
 
-    <button name='transmitStatistics'>{t}Send{/t}</button>
-    <button name='receiveStatistics'>{t}Receive{/t}</button>
+    {if $unsbmittedFiles != 0}
+        {$unsbmittedFilesMsg}
+        <button name='transmitStatistics'>{t}Send{/t}</button>
+        <hr>
+    {/if}
 
-    <hr>
-    <table width="100%">
+    <table>
         <tr>
-            <td>{t}Start{/t}</td>
-            <td>
+            <td>{t}Generate report for{/t}</td>
+            <td style='width:220px;'>
                  <input type="text" id="graph1DatePicker1" name="graph1DatePicker1" class="date" value="{$graph1DatePicker1}">
                  <script type="text/javascript">
                   {literal}
@@ -30,10 +32,8 @@
                   {/literal}
                  </script>
             </td>
-        </tr>
-        <tr>
-            <td>{t}Stop{/t}</td>
-            <td>
+            <td> - </td>
+            <td style='width:220px;'>
                 <input type="text" id="graph1DatePicker2" name="graph1DatePicker2" class="date" value="{$graph1DatePicker2}">
                 <script type="text/javascript">
                  {literal}
@@ -46,8 +46,12 @@
                  {/literal}
                 </script>
             </td>
+            <td>
+                <button name='receiveStatistics'>{t}Receive{/t}</button>
+            </td>
         </tr>
     </table>
+    <hr>
 
     <img src='plugins/statistics/getGraph.php?id={$graphID_1}'>
     <img src='plugins/statistics/getGraph.php?id={$graphID_2}'>

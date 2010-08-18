@@ -70,6 +70,11 @@ class statistics extends plugin
         $available = $this->getLocalStatisticsFiles();
         $alreadyTransmitted = $this->getStatisticsDatesFromServer();
         $unsubmitted = array_intersect($available,$alreadyTransmitted);
+
+        // Exclude statistic collection from today, they are still active and cannot be submitted.
+        $curDate =  date('Y-m-d');
+        if(isset($unsubmitted)) unset($unsubmitted[$curDate]);
+
         return($unsubmitted);  
     }
 
@@ -202,6 +207,7 @@ class statistics extends plugin
                     $dates = array();
                     $DataSet2 = new pData;  
                     $max = 1;
+                    $seriesNumber = 0;
                     foreach($res['actionsPerInterval'] as $category => $entriesPerDate){
 
                         // Collect data per category and store used timestamps
@@ -227,6 +233,7 @@ class statistics extends plugin
                         $DataSet2->SetSerieName(_($category), $category);
                         $Test->setLabel($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1",0,"Daily incomes");  
                         $DataSet2->AddSerie($category);
+                        $seriesNumber++;
 
                         // Detect maximum value, to adjust the Y-Axis
                         $tmpMax = max($dataArray[$category]);
@@ -264,7 +271,6 @@ class statistics extends plugin
 
                     if(count($dates)){
                         $Test2->drawScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);     
-                        $DataSet2->RemoveSerie('date');
                     }
 
                     // Draw the cubic curve graph  
@@ -283,7 +289,9 @@ class statistics extends plugin
                     $DataSet2->AddPoint($errors, 'Errors');
                     $DataSet2->SetSerieName('Errors', 'Errors');
                     $DataSet2->AddSerie('Errors');
-                    
+                    $seriesNumber ++;
+                   
+                    $Test2->setColorPalette($seriesNumber-1,255,0,0);   
 
                     // Draw legend
                     $Test2->drawLegend(650,30,$DataSet2->GetDataDescription(),255,255,255);  
@@ -296,7 +304,7 @@ class statistics extends plugin
                     // Draw right scale (Errors per day)
                     $Test2->setFixedScale(0.0001,(max($errors) +1) *1.1);
                     $Test2->drawRightScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2);
-                    $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),TRUE);
+                    $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription());
 
                     $file = '/tmp/graph_'.$this->graphID_2;
                     $Test2->Render($file);
@@ -307,6 +315,11 @@ class statistics extends plugin
 
         $smarty->assign('graphID_1', $this->graphID_1);
         $smarty->assign('graphID_2', $this->graphID_2);
+        $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
+        $smarty->assign('unsbmittedFilesMsg', 
+                sprintf(
+                    _("You have currently %s unsubmitted statistic collection, do you want to transmit them now?"),
+                    count($this->unsbmittedFiles)));
         return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
     }
 
