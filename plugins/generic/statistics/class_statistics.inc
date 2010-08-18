@@ -17,6 +17,8 @@ class statistics extends plugin
     var $graph1DatePicker1 = 0;
     var $graph1DatePicker2 = 0;
 
+    var $unsbmittedFiles = array();
+
     function __construct($config)
     {
         plugin::plugin($config, NULL);
@@ -35,7 +37,60 @@ class statistics extends plugin
                     "WyukwauWoid2",
                     TRUE);
         }
+
+        // Get list of unsubmitted files.
+        $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
     }
+
+    /*! \brief      Returns a list local stored statistic files
+        @param      Array   A list of filenames and dates.
+     */ 
+    function getLocalStatisticsFiles()
+    {
+        
+        $res = stats::getLocalStatFiles();
+        $tmp = array();
+        if(count($res)){
+            foreach($res as $file){
+                $date = strtotime($file);
+                if($date){
+                    $tmp[$file] = $date;
+                }
+            }
+        }
+        return($tmp);
+    }
+
+   
+    /*! \brief      Returns a list of not transmitted stat files (except files for the current day)
+     *  @return     Array   A list of unsubmitted statistic files.
+     */ 
+    function getUnsubmittedStatistics()
+    {
+        $available = $this->getLocalStatisticsFiles();
+        $alreadyTransmitted = $this->getStatisticsDatesFromServer();
+        $unsubmitted = array_intersect($available,$alreadyTransmitted);
+        return($unsubmitted);  
+    }
+
+
+    /*! \brief      Request a list of dates for which the server can return statistics.
+        @param      Array   A list of dates    $ret=[iso-str] = timestamp
+     */ 
+    function getStatisticsDatesFromServer()
+    {
+        $res = $this->rpcHandle->getInstanceStatDates();
+        $dates = array();
+        if(!$this->rpcHandle->success()){
+            msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
+        }else{
+            foreach($res as $date){
+                $dates[$date] = strtotime($date);
+            }
+        }
+        return($dates);
+    }
+
 
     function execute()
     {
@@ -61,17 +116,22 @@ class statistics extends plugin
 
         // Send stats 
         if(isset($_POST['transmitStatistics'])){
-            $tmp = stats::dumpTables();
-            $dump = array();
-            foreach($tmp as $entry){
-                $dump[] = array_values($entry);
+            $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
+            foreach($this->unsbmittedFiles as $filename => $date){
+                $tmp = stats::dumpTables($filename);
+                $dump = array();
+                foreach($tmp as $entry){
+                    $dump[] = array_values($entry);
+                }
+                $res = $this->rpcHandle->updateInstanceStatus($dump);
+                if(!$this->rpcHandle->success()){
+                    msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
+                }else{
+                    stats::removeStatsFile($filename);
+                    echo "Inserted ".$res." entries for date ".date('d.m.Y', $date)."<br>";
+                }
             }
-            $res = $this->rpcHandle->updateInstanceStatus($dump);
-            if(!$this->rpcHandle->success()){
-                msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
-            }else{
-                echo $res." Entries inserted";
-            }
+            $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
         }
 
         // Transmit daily statistics to GOsa-Server
@@ -95,7 +155,7 @@ class statistics extends plugin
                     new pChartInclude();
 
                     // Get most used categories, but only eight at once.
-                    if(count($res['actionsPerCategory']) && 0){
+                    if(count($res['actionsPerCategory'])){
 
                         // --------
                         // Generate PIE chart of most used categories
@@ -108,9 +168,12 @@ class statistics extends plugin
                         $DataSet = new pData;  
                         $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
 
-                        $DataSet->AddPoint(array_values($mostUsedCategories),"Serie1");  
-                        $DataSet->AddPoint(array_keys($mostUsedCategories),"Serie2");  
+                        $values = array_values($mostUsedCategories);
+                        $keys = array_keys($mostUsedCategories);
+
+                        $DataSet->AddPoint($values,"Serie1");  
                         $DataSet->AddAllSeries();  
+                        $DataSet->AddPoint($keys,"Serie2");  
                         $DataSet->SetAbsciseLabelSerie("Serie2");  
 
                         // Initialise the graph  
@@ -162,14 +225,14 @@ class statistics extends plugin
                         // Add results to our data set.
                         $DataSet2->AddPoint($dataArray[$category], $category);
                         $DataSet2->SetSerieName(_($category), $category);
+                        $Test->setLabel($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1",0,"Daily incomes");  
+                        $DataSet2->AddSerie($category);
 
                         // Detect maximum value, to adjust the Y-Axis
                         $tmpMax = max($dataArray[$category]);
                         if($tmpMax > $max) $max = $tmpMax;
                     }
                     ksort($dates);
-
-                    $DataSet2->AddAllSeries();  
 
                     // Prepare date strings for X-Axis, only print a given number of 
                     //  of labels to keep the axis readable.
@@ -187,7 +250,6 @@ class statistics extends plugin
 
                     $DataSet2->AddPoint($tmp, 'date');
                     $DataSet2->SetAbsciseLabelSerie('date');  
-                    $DataSet2->RemoveSerie('date');  
 
                     $Test2 = new pChart(800,230);  
                     $Test2->setFixedScale(0.0001,($max*1.1));  
@@ -205,7 +267,6 @@ class statistics extends plugin
                         $DataSet2->RemoveSerie('date');
                     }
 
-
                     // Draw the cubic curve graph  
                     if(count($dataArray)){
                         $Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);
@@ -221,8 +282,8 @@ class statistics extends plugin
 
                     $DataSet2->AddPoint($errors, 'Errors');
                     $DataSet2->SetSerieName('Errors', 'Errors');
-                    $DataSet2->AddAllSeries();  
-                    $DataSet2->RemoveSerie('date');
+                    $DataSet2->AddSerie('Errors');
+                    
 
                     // Draw legend
                     $Test2->drawLegend(650,30,$DataSet2->GetDataDescription(),255,255,255);  

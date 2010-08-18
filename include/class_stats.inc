@@ -7,7 +7,6 @@ class stats
     static protected $lastCpuLoadTimestamp = 0;
 
     static protected $tableName = "stats";
-    static protected $tableFile = "/var/spool/gosa/stats";
 
     static protected $lastHandle = NULL;
     static protected $statsEnabled = FALSE;
@@ -16,35 +15,54 @@ class stats
     /*! \brief     This method tries to connect the GOsa-stats database and 
      *              then returns a database handle on success else NULL.
      *
-     *             (The GOsa-stats database has to be enabled : statsDatabaseEnabled/statsDatabaseFile)
+     *             (The GOsa-stats database has to be enabled : statsDatabaseEnabled/statsDatabaseDirectory)
      *
      *             This database will then contain information about the use of GOsa,
      *              no customer data will be stored.
      *
      *  @return     handle      Returns a sqlite database handle.
      */
-    static function getDatabaseHandle()
+    static function getDatabaseHandle($filename = '')
     {
+        // We cannot log while the path to store logs in is empty.
+        global $config;
+        $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
+        if(empty($path)){
+            return(NULL);
+        }
+
+        // Check if path exists, if not try to create it
+        if(!is_dir($path) ){
+            $res = @mkdir($path);
+            if(!$res){
+                return(NULL);
+            }
+        }
+
+        // Append a date suffix to the database file, to prevent huge and unusable database files.
+        if($filename == ''){
+            $filename = date('Y-m-d');
+        }
+        $tableFile = $path.'/'.$filename;
+
         // Try to return last valid handle.
-        if(stats::$lastHandle != NULL && is_resource(stats::$lastHandle)){
-            return(stats::$lastHandle);
+        if(file_exists($tableFile) && 
+                isset(stats::$lastHandle[$filename]) && 
+                stats::$lastHandle[$filename] != NULL &&
+                is_resource(stats::$lastHandle[$filename])){
+            return(stats::$lastHandle[$filename]);
         }
 
         // Check if Logging is enabled
-        global $config;
         if(!is_object($config) || ! $config instanceOf config){
             return(NULL);
         }
 
         // Get statsFile property 
-        stats::$tableFile    = $config->get_cfg_value('core', 'statsDatabaseFile');
         stats::$statsEnabled = $config->boolValueIsTrue('core', 'statsDatabaseEnabled');
         if(!stats::$statsEnabled){
-            return;
+            return(NULL);
         }
-
-        // Append a date suffix to the database file, to prevent huge and unusable database files.
-        stats::$tableFile.= date('-Y_m_d');
 
         // Check for SQLite extension
         if(!stats::checkSQLiteExtension()){
@@ -52,17 +70,39 @@ class stats
         }
 
         // Check if we are able to read/write the given database file.
-        if(!is_writeable(stats::$tableFile) && !is_writeable(dirname(stats::$tableFile))){
+        if(!is_writeable($path) && !is_writeable(dirname($tableFile))){
             return(NULL);
         }
-
+        
         // Try to create database, if it exists just open it.
-        $handle = sqlite_popen(stats::$tableFile, 0666, $error);
+        $handle = sqlite_open($tableFile, 0666, $error);
         if($handle){
             stats::createDatabaseOnDemand($handle);
         }
-        stats::$lastHandle = $handle;
+        stats::$lastHandle[$filename] = $handle;
         return($handle);
+    }
+
+
+    /*! \brief      Returns a list of all created stat files
+     *  @return     Array   A list of all currently stored stat files.
+     */
+    static function getLocalStatFiles()
+    {
+        $res = array();
+
+        // Check if we're creating logs right now.
+        if(stats::getDatabaseHandle()){
+            global $config;
+
+            // Walk through all files found in the storage path
+            $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
+            $dir = opendir($path);
+            while($file = readdir($dir)){
+                if(is_file($path.'/'.$file)) $res[] = $file;
+            }
+        } 
+        return($res);   
     }
 
 
@@ -222,7 +262,19 @@ class stats
                     '{$memory_usage}','{$cpu_load}','{$info}')";
         sqlite_query($query, $res);
     }
-  
+
+   
+    /*! \brief      Closes all sqlite handles opened by this class
+     */ 
+    static function closeHandles()
+    {
+        foreach(stats::lastHandle as $handle){
+            if($handle && is_resource($handle)){
+                sqlite_close($handle);
+            }
+        }
+    }
+ 
  
     /*! \brief      This method returns all entries of the GOsa-stats table.
      *              You can limit the result by setting the from/to parameter (timestamp).
@@ -230,30 +282,43 @@ class stats
      *  @param      int     to      The timestamp to end the request.
      *  @return     array           An array containing the requested entries.
      */  
-    static function dumpTables($from = NULL, $to = NULL)
+    static function dumpTables($filename)
     {
         // Get database connection
         $TABLE_NAME = stats::$tableName;
-        $handle = stats::getDatabaseHandle();
+        $handle = stats::getDatabaseHandle($filename);
         if(!$handle) return;        
 
-        // Build up filter to limit dumped entries to the given range.
-        $tim = "";
-        if($from != NULL){
-            $from = sqlite_escape_string($from);
-            $tim.= "AND TIMESTAMP >= '{$from}' ";
-        }
-        if($to != NULL){
-            $to = sqlite_escape_string($to);
-            $tim.= "AND TIMESTAMP <= '{$to}' ";
-        }
-        $tim = preg_replace("/^AND /"," WHERE ",$tim);
-
         // Create Filter and start query
-        $filter = "SELECT * FROM {$TABLE_NAME}{$tim} ORDER BY ID";
+        $filter = "SELECT * FROM {$TABLE_NAME} ORDER BY ID";
         $ret = sqlite_array_query($filter, $handle, SQLITE_ASSOC);
         return($ret);
     }
+
+    
+    static function removeStatsFile($filename)
+    {
+        // Get statsFile property 
+        global $config;
+        $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
+        stats::$statsEnabled = $config->boolValueIsTrue('core', 'statsDatabaseEnabled');
+        if(!stats::$statsEnabled){
+            return(NULL);
+        }
+
+        // We cannot log while the path to store logs in is empty.
+        if(empty($path)){
+            return(NULL);
+        }
+        
+        // Check if file exists and then remove it
+        if(isset(stats::$lastHandle[$filename]) && is_resource(stats::$lastHandle[$filename])){
+            sqlite_close(stats::$lastHandle[$filename]);
+        }
+        if(file_exists($path.'/'.$filename)){
+            unlink($path.'/'.$filename);
+        }
+     }
 
  
     /*! \brief      This is just a dummy output/debug method 

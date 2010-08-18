@@ -249,11 +249,11 @@ class core extends plugin {
                             "mandatory"     => TRUE),
 
                         array(
-                                "name"          => "statsDatabaseFile",
-                                "type"          => "file",
+                                "name"          => "statsDatabaseDirectory",
+                                "type"          => "path",
                                 "default"       => "/var/spool/gosa/stats",
                                 "description"   => _("The database file for GOSa usage statistics."),
-                                "check"         => "gosaProperty::isWriteableFile",
+                                "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "core",
                                 "mandatory"     => TRUE),
