@@ -13,7 +13,6 @@ class statistics extends plugin
     var $graphID_1 = 0;
     var $graphID_2 = 0;
 
-    var $graph1Interval = 1;
     var $graph1DatePicker1 = 0;
     var $graph1DatePicker2 = 0;
 
@@ -113,15 +112,10 @@ class statistics extends plugin
     {
         if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
         if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
-        if(isset($_POST['graph1Interval'])) $this->graph1Interval = get_post('graph1Interval');
-
-        if(!$this->graph1Interval) $this->graph1Interval = 1;
 
         $smarty = get_smarty();
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
-        $smarty->assign('graph1Interval', $this->graph1Interval);
-        $smarty->assign('intervalValues', array('1','2','5','7','30'));
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
