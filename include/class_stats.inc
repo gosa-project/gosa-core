@@ -26,6 +26,12 @@ class stats
     {
         // We cannot log while the path to store logs in is empty.
         global $config;
+
+        // Check if Logging is enabled
+        if(!is_object($config) || ! $config instanceOf config){
+            return(NULL);
+        }
+
         $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
         if(empty($path)){
             return(NULL);
@@ -51,11 +57,6 @@ class stats
                 stats::$lastHandle[$filename] != NULL &&
                 is_resource(stats::$lastHandle[$filename])){
             return(stats::$lastHandle[$filename]);
-        }
-
-        // Check if Logging is enabled
-        if(!is_object($config) || ! $config instanceOf config){
-            return(NULL);
         }
 
         // Get statsFile property 
