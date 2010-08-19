@@ -53,7 +53,20 @@
     </table>
     <hr>
 
-    <img src='plugins/statistics/getGraph.php?id={$graphID_1}'>
-    <img src='plugins/statistics/getGraph.php?id={$graphID_2}'>
+    {if $graphID_1}
+        <img src='plugins/statistics/getGraph.php?id={$graphID_1}'>
+    {/if}
+    {if $graphID_2}
+        <img src='plugins/statistics/getGraph.php?id={$graphID_2}'>
+    {/if}
+    {if $graphID_3}
+        <img src='plugins/statistics/getGraph.php?id={$graphID_3}'>
+    {/if}
+    {if $graphID_4}
+        <img src='plugins/statistics/getGraph.php?id={$graphID_4}'>
+    {/if}
+    {if $graphID_5}
+        <img src='plugins/statistics/getGraph.php?id={$graphID_5}'>
+    {/if}
 
 {/if}

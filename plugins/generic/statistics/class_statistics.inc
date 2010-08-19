@@ -12,6 +12,9 @@ class statistics extends plugin
 
     var $graphID_1 = 0;
     var $graphID_2 = 0;
+    var $graphID_3 = 0;
+    var $graphID_4 = 0;
+    var $graphID_5 = 0;
 
     var $graph1DatePicker1 = 0;
     var $graph1DatePicker2 = 0;
@@ -160,7 +163,7 @@ class statistics extends plugin
                     msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
                 }
 
-                if($res){
+                if($res && $this->rpcHandle->success()){
 
                     // Include pChart 
                     new pChartInclude();
@@ -256,17 +259,17 @@ class statistics extends plugin
                     //  of labels to keep the axis readable.
                     $Xam = 5; // Number of labels
                     $cnt = 0;
-                    $tmp = array();
+                    $dateSeries = array();
                     foreach($dates as $stamp){
                         if((count($dates) <= $Xam) || ($cnt % (floor(count($dates) / $Xam )) == 0)){
-                            $tmp[$stamp] = date('d.m.Y',$stamp);
+                            $dateSeries[$stamp] = date('d.m.Y',$stamp);
                         }else{
-                            $tmp[$stamp] = ' ';
+                            $dateSeries[$stamp] = ' ';
                         }
                         $cnt ++;    
                     }
 
-                    $DataSet2->AddPoint($tmp, 'date');
+                    $DataSet2->AddPoint($dateSeries, 'date');
                     $DataSet2->SetAbsciseLabelSerie('date');  
 
                     $Test2 = new pChart(800,230);  
@@ -320,12 +323,174 @@ class statistics extends plugin
                     $file = '/tmp/graph_'.$this->graphID_2;
                     $Test2->Render($file);
                     session::set('statistics::graphFile'.$this->graphID_2,$file);
+
+
+
+
+
+
+
+
+
+
+                        
+                
+
+
+
+
+                    // Prepare Data 
+                    $graphData = array();
+                    foreach($res['usagePerInterval'] as $dateStr => $data){
+                        $date = strtotime($dateStr);
+                        foreach($data as $name => $val){
+                            $graphData[$name][$date] = $val;
+                        }
+                    }
+   
+                    // Sort Data 
+                    foreach($graphData as $key => $data)
+                        ksort($graphData[$key]);
+
+                    // Generate new and unique graph id
+                    $this->graphID_3 = preg_replace("/[^0-9]/","",microtime(TRUE));
+
+                    // Prepare transmitted data, sort it by date and collect 
+                    //  transmitted timestamps to be able to print the x-Axis labels.
+                    $DataSet3 = new pData;  
+
+                    $max = max($graphData['max_mem']);
+
+                    $DataSet3->AddPoint(array_values($graphData['max_mem']), 'max_mem');
+                    $DataSet3->AddPoint(array_values($graphData['avg_mem']), 'avg_mem');
+                    $DataSet3->AddPoint(array_values($graphData['min_mem']), 'min_mem');
+
+                    $DataSet3->SetSerieName('Min Memory', 'min_mem');
+                    $DataSet3->SetSerieName('Max Memory', 'max_mem');
+                    $DataSet3->SetSerieName('Average Memory', 'avg_mem');
+
+                    $DataSet3->AddAllSeries();  
+                    $DataSet3->AddPoint($dateSeries, 'date');
+                    $DataSet3->SetAbsciseLabelSerie('date');
+
+                    $Test3 = new pChart(800,230);  
+                    $Test3->setFixedScale(0.0001,($max*1.1));  
+                    $Test3->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+                    $Test3->setGraphArea(50,30,585,200);  
+                    $Test3->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $Test3->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $Test3->drawGraphArea(255,255,255,TRUE);  
+                    $Test3->drawGrid(4,TRUE,200,200,200,50);  
+                    $Test3->drawTreshold(0,143,55,72,TRUE,TRUE);  
+                    $Test3->drawTitle(50,22,"Memory usage",50,50,50,585);  
+
+                    $Test3->drawScale($DataSet3->GetData(),$DataSet3->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
+                    $Test3->drawFilledCubicCurve($DataSet3->GetData(),$DataSet3->GetDataDescription(),.1,50); 
+
+                    $file = '/tmp/graph_'.$this->graphID_3;
+                    $Test3->Render($file);
+                    session::set('statistics::graphFile'.$this->graphID_3,$file);
+
+
+
+
+
+
+
+                    // Generate new and unique graph id
+                    $this->graphID_4 = preg_replace("/[^0-9]/","",microtime(TRUE));
+
+                    // Prepare transmitted data, sort it by date and collect 
+                    //  transmitted timestamps to be able to print the x-Axis labels.
+                    $DataSet4 = new pData;  
+
+                    $max = max($graphData['max_dur']);
+
+                    $DataSet4->AddPoint(array_values($graphData['max_dur']), 'max_dur');
+                    $DataSet4->AddPoint(array_values($graphData['avg_dur']), 'avg_dur');
+                    $DataSet4->AddPoint(array_values($graphData['min_dur']), 'min_dur');
+
+                    $DataSet4->SetSerieName('Min dur', 'min_dur');
+                    $DataSet4->SetSerieName('Max dur', 'max_dur');
+                    $DataSet4->SetSerieName('Average dur', 'avg_dur');
+
+                    $DataSet4->AddAllSeries();  
+                    $DataSet4->AddPoint($dateSeries, 'date');
+                    $DataSet4->SetAbsciseLabelSerie('date');
+
+                    $Test4 = new pChart(800,230);  
+                    $Test4->setFixedScale(0.0001,($max*1.1));  
+                    $Test4->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+                    $Test4->setGraphArea(50,30,585,200);  
+                    $Test4->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $Test4->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $Test4->drawGraphArea(255,255,255,TRUE);  
+                    $Test4->drawGrid(4,TRUE,200,200,200,50);  
+                    $Test4->drawTreshold(0,143,55,72,TRUE,TRUE);  
+                    $Test4->drawTitle(50,22,"Render time",50,50,50,585);  
+
+                    $Test4->drawScale($DataSet4->GetData(),$DataSet4->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
+                    $Test4->drawFilledCubicCurve($DataSet4->GetData(),$DataSet4->GetDataDescription(),.1,50); 
+
+                    $file= '/tmp/graph_'.$this->graphID_4;
+                    $Test4->Render($file);
+                    session::set('statistics::graphFile'.$this->graphID_4,$file);
+
+
+
+
+
+
+
+
+                    // Generate new and unique graph id
+                    $this->graphID_5 = preg_replace("/[^0-9]/","",microtime(TRUE));
+
+                    // Prepare transmitted data, sort it by date and collect 
+                    //  transmitted timestamps to be able to print the x-Axis labels.
+                    $DataSet5 = new pData;  
+
+                    $max = max($graphData['max_load']);
+
+                    $DataSet5->AddPoint(array_values($graphData['max_load']), 'max_load');
+                    $DataSet5->AddPoint(array_values($graphData['avg_load']), 'avg_load');
+                    $DataSet5->AddPoint(array_values($graphData['min_load']), 'min_load');
+
+                    $DataSet5->SetSerieName('Min Load', 'min_load');
+                    $DataSet5->SetSerieName('Max Load', 'max_load');
+                    $DataSet5->SetSerieName('Average Load', 'avg_load');
+
+                    $DataSet5->AddAllSeries();  
+                    $DataSet5->AddPoint($dateSeries, 'date');
+                    $DataSet5->SetAbsciseLabelSerie('date');
+
+                    $Test5 = new pChart(800,230);  
+                    $Test5->setFixedScale(0.0001,($max*1.1));  
+                    $Test5->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+                    $Test5->setGraphArea(50,30,585,200);  
+                    $Test5->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $Test5->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $Test5->drawGraphArea(255,255,255,TRUE);  
+                    $Test5->drawGrid(4,TRUE,200,200,200,50);  
+                    $Test5->drawTreshold(0,143,55,72,TRUE,TRUE);  
+                    $Test5->drawTitle(50,22,"CPU load",50,50,50,585);  
+
+                    $Test5->drawScale($DataSet5->GetData(),$DataSet5->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
+                    $Test5->drawFilledCubicCurve($DataSet5->GetData(),$DataSet5->GetDataDescription(),.1,50); 
+
+                    $file = '/tmp/graph_'.$this->graphID_5;
+                    $Test5->Render($file);
+                    session::set('statistics::graphFile'.$this->graphID_5,$file);
+
                 }
             }
         }
 
         $smarty->assign('graphID_1', $this->graphID_1);
         $smarty->assign('graphID_2', $this->graphID_2);
+        $smarty->assign('graphID_3', $this->graphID_3);
+        $smarty->assign('graphID_4', $this->graphID_4);
+        $smarty->assign('graphID_5', $this->graphID_5);
         $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
         $smarty->assign('unsbmittedFilesMsg', 
                 sprintf(
