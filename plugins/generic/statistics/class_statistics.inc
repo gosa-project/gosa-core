@@ -83,7 +83,11 @@ class statistics extends plugin
     {
         $available = $this->getLocalStatisticsFiles();
         $alreadyTransmitted = $this->getStatisticsDatesFromServer();
-        $unsubmitted = array_intersect($available,$alreadyTransmitted);
+
+        $unsubmitted = array();
+        foreach($available as $key => $day){
+            if(!isset($alreadyTransmitted[$key])) $unsubmitted [$key] = $day;
+        }
 
         // Exclude statistic collection from today, they are still active and cannot be submitted.
         $curDate =  date('Y-m-d');
