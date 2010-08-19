@@ -40,6 +40,18 @@ class statistics extends plugin
 
         // Get list of unsubmitted files.
         $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
+
+        // Collect category translations
+        $this->catTranslations = array();
+        foreach($this->config->configRegistry->getListOfPlugins() as $plugin => $data){
+            if(isset($data['plCategory'])){
+                foreach($data['plCategory'] as $id => $name){
+                    if(!is_numeric($id)){
+                        $this->catTranslations[$id] = $name['description'];
+                    }
+                }
+            }
+        }
     }
 
     /*! \brief      Returns a list local stored statistic files
@@ -167,6 +179,7 @@ class statistics extends plugin
                         // --------
 
                         arsort($res['actionsPerCategory']);
+
                         $mostUsedCategories = array_slice($res['actionsPerCategory'],0,8);
 
                         // Dataset definition   
@@ -174,7 +187,11 @@ class statistics extends plugin
                         $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
 
                         $values = array_values($mostUsedCategories);
+
                         $keys = array_keys($mostUsedCategories);
+                        foreach($keys as $id => $cat){
+                            $keys[$id] = $this->getCategoryTranslation($cat);
+                        }
 
                         $DataSet->AddPoint($values,"Serie1");  
                         $DataSet->AddAllSeries();  
@@ -182,7 +199,7 @@ class statistics extends plugin
                         $DataSet->SetAbsciseLabelSerie("Serie2");  
 
                         // Initialise the graph  
-                        $Test = new pChart(400,200);  
+                        $Test = new pChart(500,200);  
                         $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
 
 
@@ -230,7 +247,7 @@ class statistics extends plugin
 
                         // Add results to our data set.
                         $DataSet2->AddPoint($dataArray[$category], $category);
-                        $DataSet2->SetSerieName(_($category), $category);
+                        $DataSet2->SetSerieName($this->getCategoryTranslation($category), $category);
                         $Test->setLabel($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1",0,"Daily incomes");  
                         $DataSet2->AddSerie($category);
                         $seriesNumber++;
@@ -287,7 +304,7 @@ class statistics extends plugin
                     }
 
                     $DataSet2->AddPoint($errors, 'Errors');
-                    $DataSet2->SetSerieName('Errors', 'Errors');
+                    $DataSet2->SetSerieName(_('Error'), 'Errors');
                     $DataSet2->AddSerie('Errors');
                     $seriesNumber ++;
                    
@@ -323,15 +340,47 @@ class statistics extends plugin
         return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
     }
 
+
     function check()
     {
         $messages = plugin::check();
         return($messages);
     }
 
+
     function save_object()
     {
         plugin::save_object();
+    }
+
+
+    /*! \brief      This method tries to translate category names.
+     *  @param      The category name to translate
+     *  @return     String  The translated category names.
+     */
+    function getCategoryTranslation($name)
+    {
+        $ret ="";
+        
+        // Extract category names from the given string.
+        $list = preg_split("/, /", $name);
+   
+        // We do not have a category for systems directly, so we've to map all system types to 'System'.
+        // If we do not map to _(Systems) the graph legend will be half screen width.
+        if(count(array_intersect(array('server','terminal','workstation', 'opsi', 'component'), $list))){
+            return(_("Systems"));
+        }
+
+        // Walk through category names and try to find a translation.
+        foreach($list as $cat){
+            $cat = trim($cat);
+            if(isset($this->catTranslations[$cat])){
+                $ret .= _($this->catTranslations[$cat]).", ";
+            }else{
+                $ret .= $cat.", ";
+            }
+        }
+        return(rtrim($ret, ', '));
     }
 }
 ?>
