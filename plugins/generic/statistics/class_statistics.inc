@@ -306,7 +306,34 @@ class statistics extends plugin
             $this->generateCategoryPieGraph($gData['actionsPerCategory']);
         }
         $this->generateActionsGraph($gData);
-        $this->generateSystemStatsGraph($gData);
+
+        // Generate graph which displays the memory usage over time
+        $series = array(
+            'max_mem' => _('Max'),
+            'avg_mem' => _('Avergae'),
+            'min_mem' => _('Min'));
+        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Memory usage"),3);
+
+        // Generate graph which displays the cpu load over time
+        $series = array(
+            'max_load' => _('Max'),
+            'avg_load' => _('Avergae'),
+            'min_load' => _('Min'));
+        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("CPU load"),4);
+
+        // Generate graph which displays the render time
+        $series = array(
+            'max_render' => _('Max'),
+            'avg_render' => _('Avergae'),
+            'min_render' => _('Min'));
+        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Render time"),5);
+
+        // Generate graph which displays the plugin duration
+        $series = array(
+            'max_dur' => _('Max'),
+            'avg_dur' => _('Avergae'),
+            'min_dur' => _('Min'));
+        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Seconds per action"),6);
     }
 
 
@@ -376,15 +403,6 @@ class statistics extends plugin
      */ 
     function generateSystemStatsGraph($gData, $key = "", $series= array(), $title = "", $gID=0 )
     { 
-
-        $title = _("Memory usage");
-        $key    = "usagePerInterval";
-        $series = array(
-            'max_mem' => _('Max'),
-            'avg_mem' => _('Avergae'),
-            'min_mem' => _('Min'));
-        $gID = 3;
-
         // Add series data to dataSet        
         $dataSet = new pData;  
         $max = 0;
@@ -408,7 +426,7 @@ class statistics extends plugin
         $chart->drawGraphArea(255,255,255,TRUE);  
         $chart->drawGrid(4,TRUE,200,200,200,50);  
         $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
-        $chart->drawTitle(50,22,"Memory usage",50,50,50,585);  
+        $chart->drawTitle(50,22,$title,50,50,50,585);  
         $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
 
         $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
