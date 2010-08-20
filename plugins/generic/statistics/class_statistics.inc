@@ -174,43 +174,9 @@ class statistics extends plugin
 
                     // Get most used categories, but only eight at once.
                     if(count($res['actionsPerCategory'])){
-
-                        // --------
-                        // Generate PIE chart of most used categories
-                        // --------
-
-                        arsort($res['actionsPerCategory']);
-
-                        $mostUsedCategories = array_slice($res['actionsPerCategory'],0,8);
-
-                        // Dataset definition   
-                        $DataSet = new pData;  
-                        $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
-
-                        $values = array_values($mostUsedCategories);
-
-                        $keys = array_keys($mostUsedCategories);
-                        foreach($keys as $id => $cat){
-                            $keys[$id] = $this->getCategoryTranslation($cat);
-                        }
-
-                        $DataSet->AddPoint($values,"Serie1");  
-                        $DataSet->AddAllSeries();  
-                        $DataSet->AddPoint($keys,"Serie2");  
-                        $DataSet->SetAbsciseLabelSerie("Serie2");  
-
-                        // Initialise the graph  
-                        $Test = new pChart(500,200);  
-                        $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-
-
-                        $Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
-                        $Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),200,255,200);  
-
-                        $file = '/tmp/graph_'.$this->graphID_1;
-                        $Test->Render($file);
-                        session::set('statistics::graphFile'.$this->graphID_1,$file);
+                        $this->generateCategoryPieGraph($res['actionsPerCategory']);
                     }
+
 
                     // --------
                     // Generate combined line and car chart of plugin usage, ldap execution time and errors 
@@ -238,7 +204,7 @@ class statistics extends plugin
                             if($count) $count = ($count);
                             $dataArray[$category][$date] = $count;
                         }
-                     
+
                         // Do not append empty data 
                         if(empty($category)) continue;
 
@@ -248,7 +214,6 @@ class statistics extends plugin
                         // Add results to our data set.
                         $DataSet2->AddPoint($dataArray[$category], $category);
                         $DataSet2->SetSerieName($this->getCategoryTranslation($category), $category);
-                        $Test->setLabel($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1",0,"Daily incomes");  
                         $DataSet2->AddSerie($category);
                         $seriesNumber++;
 
@@ -309,7 +274,7 @@ class statistics extends plugin
                     $DataSet2->SetSerieName(_('Error'), 'Errors');
                     $DataSet2->AddSerie('Errors');
                     $seriesNumber ++;
-                   
+
                     $Test2->setColorPalette($seriesNumber-1,255,0,0);   
 
                     // Draw legend
@@ -319,7 +284,7 @@ class statistics extends plugin
                     foreach($dataArray as $categoryName => $list){
                         $DataSet2->RemoveSerie($categoryName);
                     }
-    
+
                     // Draw right scale (Errors per day)
                     $Test2->setFixedScale(0.0001,(max($errors) +1) *1.1);
                     $Test2->drawRightScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2);
@@ -339,7 +304,7 @@ class statistics extends plugin
                             $graphData[$name][$date] = $val;
                         }
                     }
-   
+
                     // Sort Data 
                     foreach($graphData as $key => $data)
                         ksort($graphData[$key]);
@@ -512,10 +477,10 @@ class statistics extends plugin
     function getCategoryTranslation($name)
     {
         $ret ="";
-        
+
         // Extract category names from the given string.
         $list = preg_split("/, /", $name);
-   
+
         // We do not have a category for systems directly, so we've to map all system types to 'System'.
         // If we do not map to _(Systems) the graph legend will be half screen width.
         if(count(array_intersect(array('server','terminal','workstation', 'opsi', 'component'), $list))){
@@ -532,6 +497,41 @@ class statistics extends plugin
             }
         }
         return(rtrim($ret, ', '));
+    }
+
+
+    function generateCategoryPieGraph($data)
+    {
+        // Sort data by usage count and slice array to get 
+        //  the eight most used categories
+        arsort($data);
+        $mostUsedCategories = array_slice($data,0,8);
+        $values = array_values($mostUsedCategories);
+        $keys = array_keys($mostUsedCategories);
+
+        // Try to find a translation for the given category names
+        foreach($keys as $id => $cat){
+            $keys[$id] = $this->getCategoryTranslation($cat);
+        }
+
+        // Dataset definition   
+        $DataSet = new pData;  
+        $DataSet->AddPoint($values,"Serie1");  
+        $DataSet->AddAllSeries();  
+        $DataSet->AddPoint($keys,"Serie2");  
+        $DataSet->SetAbsciseLabelSerie("Serie2");  
+
+        // Initialise the graph  
+        $Test = new pChart(500,200);  
+        $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+        $Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
+        $Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),200,255,200);  
+
+        // Store graph data
+        $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
+        $file = '/tmp/graph_'.$this->graphID_1;
+        $Test->Render($file);
+        session::set('statistics::graphFile'.$this->graphID_1,$file);
     }
 }
 ?>
