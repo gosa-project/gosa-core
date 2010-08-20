@@ -16,6 +16,10 @@ class statistics extends plugin
     var $graphID_4 = 0;
     var $graphID_5 = 0;
 
+    var $legendR = 235;
+    var $legendG = 235;
+    var $legendB = 235;
+
     var $graph1DatePicker1 = 0;
     var $graph1DatePicker2 = 0;
 
@@ -189,7 +193,7 @@ class statistics extends plugin
                     //  transmitted timestamps to be able to print the x-Axis labels.
                     $dataArray = array();
                     $dates = array();
-                    $DataSet2 = new pData;  
+                    $dataSet = new pData;  
                     $max = 1;
                     $seriesNumber = 0;
                     foreach($res['actionsPerInterval'] as $category => $entriesPerDate){
@@ -212,9 +216,9 @@ class statistics extends plugin
                         ksort($dataArray[$category]);
 
                         // Add results to our data set.
-                        $DataSet2->AddPoint($dataArray[$category], $category);
-                        $DataSet2->SetSerieName($this->getCategoryTranslation($category), $category);
-                        $DataSet2->AddSerie($category);
+                        $dataSet->AddPoint($dataArray[$category], $category);
+                        $dataSet->SetSerieName($this->getCategoryTranslation($category), $category);
+                        $dataSet->AddSerie($category);
                         $seriesNumber++;
 
                         // Detect maximum value, to adjust the Y-Axis
@@ -237,27 +241,27 @@ class statistics extends plugin
                         $cnt ++;    
                     }
 
-                    $DataSet2->AddPoint($dateSeries, 'date');
-                    $DataSet2->SetAbsciseLabelSerie('date');  
+                    $dataSet->AddPoint($dateSeries, 'date');
+                    $dataSet->SetAbsciseLabelSerie('date');  
 
-                    $Test2 = new pChart(800,230);  
-                    $Test2->setFixedScale(0.0001,($max*1.1));  
-                    $Test2->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-                    $Test2->setGraphArea(50,30,585,200);  
-                    $Test2->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-                    $Test2->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-                    $Test2->drawGraphArea(255,255,255,TRUE);  
-                    $Test2->drawGrid(4,TRUE,200,200,200,50);  
-                    $Test2->drawTreshold(0,143,55,72,TRUE,TRUE);  
-                    $Test2->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
+                    $chart = new pChart(800,230);  
+                    $chart->setFixedScale(0.0001,($max*1.1));  
+                    $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+                    $chart->setGraphArea(50,30,585,200);  
+                    $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $chart->drawGraphArea(255,255,255,TRUE);  
+                    $chart->drawGrid(4,TRUE,200,200,200,50);  
+                    $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
+                    $chart->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
 
                     if(count($dates)){
-                        $Test2->drawScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);     
+                        $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);     
                     }
 
                     // Draw the cubic curve graph  
                     if(count($dataArray)){
-                        $Test2->drawFilledLineGraph($DataSet2->GetData(),$DataSet2->GetDataDescription(),50,TRUE);
+                        $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE);
                     }
 
                     // Add error series
@@ -270,28 +274,28 @@ class statistics extends plugin
 
                     ksort($errors);
 
-                    $DataSet2->AddPoint($errors, 'Errors');
-                    $DataSet2->SetSerieName(_('Error'), 'Errors');
-                    $DataSet2->AddSerie('Errors');
+                    $dataSet->AddPoint($errors, 'Errors');
+                    $dataSet->SetSerieName(_('Error'), 'Errors');
+                    $dataSet->AddSerie('Errors');
                     $seriesNumber ++;
 
-                    $Test2->setColorPalette($seriesNumber-1,255,0,0);   
+                    $chart->setColorPalette($seriesNumber-1,255,0,0);   
 
                     // Draw legend
-                    $Test2->drawLegend(650,30,$DataSet2->GetDataDescription(),255,255,255);  
+                    $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
 
                     // Remove plugin usage from data series, just keep error series.
                     foreach($dataArray as $categoryName => $list){
-                        $DataSet2->RemoveSerie($categoryName);
+                        $dataSet->RemoveSerie($categoryName);
                     }
 
                     // Draw right scale (Errors per day)
-                    $Test2->setFixedScale(0.0001,(max($errors) +1) *1.1);
-                    $Test2->drawRightScale($DataSet2->GetData(),$DataSet2->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2);
-                    $Test2->drawBarGraph($DataSet2->GetData(),$DataSet2->GetDataDescription());
+                    $chart->setFixedScale(0.0001,(max($errors) +1) *1.1);
+                    $chart->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2);
+                    $chart->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription());
 
                     $file = '/tmp/graph_'.$this->graphID_2;
-                    $Test2->Render($file);
+                    $chart->Render($file);
                     session::set('statistics::graphFile'.$this->graphID_2,$file);
 
 
@@ -314,38 +318,38 @@ class statistics extends plugin
 
                     // Prepare transmitted data, sort it by date and collect 
                     //  transmitted timestamps to be able to print the x-Axis labels.
-                    $DataSet3 = new pData;  
+                    $dataSet = new pData;  
 
                     $max = max($graphData['max_mem']);
 
-                    $DataSet3->AddPoint(array_values($graphData['max_mem']), 'max_mem');
-                    $DataSet3->AddPoint(array_values($graphData['avg_mem']), 'avg_mem');
-                    $DataSet3->AddPoint(array_values($graphData['min_mem']), 'min_mem');
+                    $dataSet->AddPoint(array_values($graphData['max_mem']), 'max_mem');
+                    $dataSet->AddPoint(array_values($graphData['avg_mem']), 'avg_mem');
+                    $dataSet->AddPoint(array_values($graphData['min_mem']), 'min_mem');
 
-                    $DataSet3->SetSerieName('Min Memory', 'min_mem');
-                    $DataSet3->SetSerieName('Max Memory', 'max_mem');
-                    $DataSet3->SetSerieName('Average Memory', 'avg_mem');
+                    $dataSet->SetSerieName('Min Memory', 'min_mem');
+                    $dataSet->SetSerieName('Max Memory', 'max_mem');
+                    $dataSet->SetSerieName('Average Memory', 'avg_mem');
 
-                    $DataSet3->AddAllSeries();  
-                    $DataSet3->AddPoint($dateSeries, 'date');
-                    $DataSet3->SetAbsciseLabelSerie('date');
+                    $dataSet->AddAllSeries();  
+                    $dataSet->AddPoint($dateSeries, 'date');
+                    $dataSet->SetAbsciseLabelSerie('date');
 
-                    $Test3 = new pChart(800,230);  
-                    $Test3->setFixedScale(0.0001,($max*1.1));  
-                    $Test3->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-                    $Test3->setGraphArea(50,30,585,200);  
-                    $Test3->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-                    $Test3->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-                    $Test3->drawGraphArea(255,255,255,TRUE);  
-                    $Test3->drawGrid(4,TRUE,200,200,200,50);  
-                    $Test3->drawTreshold(0,143,55,72,TRUE,TRUE);  
-                    $Test3->drawTitle(50,22,"Memory usage",50,50,50,585);  
+                    $chart = new pChart(800,230);  
+                    $chart->setFixedScale(0.0001,($max*1.1));  
+                    $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+                    $chart->setGraphArea(50,30,585,200);  
+                    $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $chart->drawGraphArea(255,255,255,TRUE);  
+                    $chart->drawGrid(4,TRUE,200,200,200,50);  
+                    $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
+                    $chart->drawTitle(50,22,"Memory usage",50,50,50,585);  
 
-                    $Test3->drawScale($DataSet3->GetData(),$DataSet3->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
-                    $Test3->drawFilledCubicCurve($DataSet3->GetData(),$DataSet3->GetDataDescription(),.1,50); 
+                    $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
+                    $chart->drawFilledCubicCurve($dataSet->GetData(),$dataSet->GetDataDescription(),.1,50); 
 
                     $file = '/tmp/graph_'.$this->graphID_3;
-                    $Test3->Render($file);
+                    $chart->Render($file);
                     session::set('statistics::graphFile'.$this->graphID_3,$file);
 
 
@@ -359,38 +363,38 @@ class statistics extends plugin
 
                     // Prepare transmitted data, sort it by date and collect 
                     //  transmitted timestamps to be able to print the x-Axis labels.
-                    $DataSet4 = new pData;  
+                    $dataSet = new pData;  
 
                     $max = max($graphData['max_dur']);
 
-                    $DataSet4->AddPoint(array_values($graphData['max_dur']), 'max_dur');
-                    $DataSet4->AddPoint(array_values($graphData['avg_dur']), 'avg_dur');
-                    $DataSet4->AddPoint(array_values($graphData['min_dur']), 'min_dur');
+                    $dataSet->AddPoint(array_values($graphData['max_dur']), 'max_dur');
+                    $dataSet->AddPoint(array_values($graphData['avg_dur']), 'avg_dur');
+                    $dataSet->AddPoint(array_values($graphData['min_dur']), 'min_dur');
 
-                    $DataSet4->SetSerieName('Min dur', 'min_dur');
-                    $DataSet4->SetSerieName('Max dur', 'max_dur');
-                    $DataSet4->SetSerieName('Average dur', 'avg_dur');
+                    $dataSet->SetSerieName('Min dur', 'min_dur');
+                    $dataSet->SetSerieName('Max dur', 'max_dur');
+                    $dataSet->SetSerieName('Average dur', 'avg_dur');
 
-                    $DataSet4->AddAllSeries();  
-                    $DataSet4->AddPoint($dateSeries, 'date');
-                    $DataSet4->SetAbsciseLabelSerie('date');
+                    $dataSet->AddAllSeries();  
+                    $dataSet->AddPoint($dateSeries, 'date');
+                    $dataSet->SetAbsciseLabelSerie('date');
 
-                    $Test4 = new pChart(800,230);  
-                    $Test4->setFixedScale(0.0001,($max*1.1));  
-                    $Test4->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-                    $Test4->setGraphArea(50,30,585,200);  
-                    $Test4->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-                    $Test4->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-                    $Test4->drawGraphArea(255,255,255,TRUE);  
-                    $Test4->drawGrid(4,TRUE,200,200,200,50);  
-                    $Test4->drawTreshold(0,143,55,72,TRUE,TRUE);  
-                    $Test4->drawTitle(50,22,"Render time",50,50,50,585);  
+                    $chart = new pChart(800,230);  
+                    $chart->setFixedScale(0.0001,($max*1.1));  
+                    $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+                    $chart->setGraphArea(50,30,585,200);  
+                    $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $chart->drawGraphArea(255,255,255,TRUE);  
+                    $chart->drawGrid(4,TRUE,200,200,200,50);  
+                    $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
+                    $chart->drawTitle(50,22,"Render time",50,50,50,585);  
 
-                    $Test4->drawScale($DataSet4->GetData(),$DataSet4->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
-                    $Test4->drawFilledCubicCurve($DataSet4->GetData(),$DataSet4->GetDataDescription(),.1,50); 
+                    $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
+                    $chart->drawFilledCubicCurve($dataSet->GetData(),$dataSet->GetDataDescription(),.1,50); 
 
                     $file= '/tmp/graph_'.$this->graphID_4;
-                    $Test4->Render($file);
+                    $chart->Render($file);
                     session::set('statistics::graphFile'.$this->graphID_4,$file);
 
 
@@ -405,38 +409,38 @@ class statistics extends plugin
 
                     // Prepare transmitted data, sort it by date and collect 
                     //  transmitted timestamps to be able to print the x-Axis labels.
-                    $DataSet5 = new pData;  
+                    $dataSet = new pData;  
 
                     $max = max($graphData['max_load']);
 
-                    $DataSet5->AddPoint(array_values($graphData['max_load']), 'max_load');
-                    $DataSet5->AddPoint(array_values($graphData['avg_load']), 'avg_load');
-                    $DataSet5->AddPoint(array_values($graphData['min_load']), 'min_load');
+                    $dataSet->AddPoint(array_values($graphData['max_load']), 'max_load');
+                    $dataSet->AddPoint(array_values($graphData['avg_load']), 'avg_load');
+                    $dataSet->AddPoint(array_values($graphData['min_load']), 'min_load');
 
-                    $DataSet5->SetSerieName('Min Load', 'min_load');
-                    $DataSet5->SetSerieName('Max Load', 'max_load');
-                    $DataSet5->SetSerieName('Average Load', 'avg_load');
+                    $dataSet->SetSerieName('Min Load', 'min_load');
+                    $dataSet->SetSerieName('Max Load', 'max_load');
+                    $dataSet->SetSerieName('Average Load', 'avg_load');
 
-                    $DataSet5->AddAllSeries();  
-                    $DataSet5->AddPoint($dateSeries, 'date');
-                    $DataSet5->SetAbsciseLabelSerie('date');
+                    $dataSet->AddAllSeries();  
+                    $dataSet->AddPoint($dateSeries, 'date');
+                    $dataSet->SetAbsciseLabelSerie('date');
 
-                    $Test5 = new pChart(800,230);  
-                    $Test5->setFixedScale(0.0001,($max*1.1));  
-                    $Test5->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-                    $Test5->setGraphArea(50,30,585,200);  
-                    $Test5->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-                    $Test5->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-                    $Test5->drawGraphArea(255,255,255,TRUE);  
-                    $Test5->drawGrid(4,TRUE,200,200,200,50);  
-                    $Test5->drawTreshold(0,143,55,72,TRUE,TRUE);  
-                    $Test5->drawTitle(50,22,"CPU load",50,50,50,585);  
+                    $chart = new pChart(800,230);  
+                    $chart->setFixedScale(0.0001,($max*1.1));  
+                    $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+                    $chart->setGraphArea(50,30,585,200);  
+                    $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+                    $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+                    $chart->drawGraphArea(255,255,255,TRUE);  
+                    $chart->drawGrid(4,TRUE,200,200,200,50);  
+                    $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
+                    $chart->drawTitle(50,22,"CPU load",50,50,50,585);  
 
-                    $Test5->drawScale($DataSet5->GetData(),$DataSet5->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
-                    $Test5->drawFilledCubicCurve($DataSet5->GetData(),$DataSet5->GetDataDescription(),.1,50); 
+                    $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
+                    $chart->drawFilledCubicCurve($dataSet->GetData(),$dataSet->GetDataDescription(),.1,50); 
 
                     $file = '/tmp/graph_'.$this->graphID_5;
-                    $Test5->Render($file);
+                    $chart->Render($file);
                     session::set('statistics::graphFile'.$this->graphID_5,$file);
 
                 }
@@ -491,10 +495,11 @@ class statistics extends plugin
         foreach($list as $cat){
             $cat = trim($cat);
             if(isset($this->catTranslations[$cat])){
-                $ret .= _($this->catTranslations[$cat]).", ";
-            }else{
-                $ret .= $cat.", ";
+                $cat = _($this->catTranslations[$cat]);
+            }elseif(!empty($cat)){
+                $cat = _($cat);
             }
+            $ret .= $cat.", ";
         }
         return(rtrim($ret, ', '));
     }
@@ -505,32 +510,37 @@ class statistics extends plugin
         // Sort data by usage count and slice array to get 
         //  the eight most used categories
         arsort($data);
-        $mostUsedCategories = array_slice($data,0,8);
-        $values = array_values($mostUsedCategories);
-        $keys = array_keys($mostUsedCategories);
+        $mostUsedCategories = array_slice($data,0,7);
+
+        // Get the rest of categories and combine them 'others'
+        $theRest = array_slice($data,7);
+        $mostUsedCategories['remaining'] = array_sum($theRest);
 
         // Try to find a translation for the given category names
+        $values = array_values($mostUsedCategories);
+        $keys = array_keys($mostUsedCategories);
         foreach($keys as $id => $cat){
             $keys[$id] = $this->getCategoryTranslation($cat);
         }
 
         // Dataset definition   
-        $DataSet = new pData;  
-        $DataSet->AddPoint($values,"Serie1");  
-        $DataSet->AddAllSeries();  
-        $DataSet->AddPoint($keys,"Serie2");  
-        $DataSet->SetAbsciseLabelSerie("Serie2");  
+        $dataSet = new pData;  
+        $dataSet->AddPoint($values,"Serie1");  
+        $dataSet->AddAllSeries();  
+        $dataSet->AddPoint($keys,"Serie2");  
+        $dataSet->SetAbsciseLabelSerie("Serie2");  
 
         // Initialise the graph  
-        $Test = new pChart(500,200);  
-        $Test->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-        $Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
-        $Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),200,255,200);  
+        $chart = new pChart(600,250);  
+        $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
+        $chart->drawPieGraph($dataSet->GetData(),$dataSet->GetDataDescription(),200,120,150,PIE_PERCENTAGE,TRUE,50,20,3);  
+        $chart->drawPieLegend(420,15,$dataSet->GetData(),$dataSet->GetDataDescription(),
+                $this->legendR,$this->legendG,$this->legendB);
 
         // Store graph data
         $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
         $file = '/tmp/graph_'.$this->graphID_1;
-        $Test->Render($file);
+        $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphID_1,$file);
     }
 }
