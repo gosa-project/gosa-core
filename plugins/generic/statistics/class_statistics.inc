@@ -238,8 +238,7 @@ class statistics extends plugin
                             if($count) $count = ($count);
                             $dataArray[$category][$date] = $count;
                         }
-                      
- 
+                     
                         // Do not append empty data 
                         if(empty($category)) continue;
 
@@ -304,6 +303,8 @@ class statistics extends plugin
                         $errors[$date] = $count;
                     }
 
+                    ksort($errors);
+
                     $DataSet2->AddPoint($errors, 'Errors');
                     $DataSet2->SetSerieName(_('Error'), 'Errors');
                     $DataSet2->AddSerie('Errors');
@@ -327,19 +328,6 @@ class statistics extends plugin
                     $file = '/tmp/graph_'.$this->graphID_2;
                     $Test2->Render($file);
                     session::set('statistics::graphFile'.$this->graphID_2,$file);
-
-
-
-
-
-
-
-
-
-
-                        
-                
-
 
 
 
