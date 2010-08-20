@@ -287,9 +287,21 @@ class stats
         $handle = stats::getDatabaseHandle($filename);
         if(!$handle) return;        
 
+        $query = 
+            "  SELECT ".
+            "      TYPE, PLUGIN, CATEGORY, ACTION, ".
+            "      UUID, DATE(TIMESTAMP, 'unixepoch') as date, ".
+            "      AVG(DURATION), AVG(RENDER_TIME), SUM(AMOUNT), ".
+            "      AVG(MEMORY_USAGE), AVG(CPU_LOAD), INFO ".
+            "  FROM ".
+            "      stats ".
+            "  GROUP BY ".
+            "      TYPE, PLUGIN, CATEGORY, ACTION, UUID, date, INFO ".
+            "  ORDER BY ".
+            "      ID ";
+
         // Create Filter and start query
-        $filter = "SELECT * FROM {$TABLE_NAME} ORDER BY ID";
-        $ret = sqlite_array_query($filter, $handle, SQLITE_ASSOC);
+        $ret = sqlite_array_query($query, $handle, SQLITE_ASSOC);
         return($ret);
     }
 
