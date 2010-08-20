@@ -129,6 +129,14 @@ class statistics extends plugin
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
 
+        $this->skipSeries = array('users',
+//                'gofonmacro',
+                'opsi, server, workstation, terminal, printer, phone, winworkstation, component',
+                'acl',
+                'groups',
+                'department');
+        $this->reloadGraphs();
+
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
         $smarty->assign("validRpcHandle", TRUE);
@@ -346,8 +354,9 @@ class statistics extends plugin
         $lineMax = 100;
         $errorMax = (max($gData['errorsPerInterval']) < 100)? 100:max($gData['errorsPerInterval']);
         $dataSet = new pData;  
+        $seriesCnt = 0;
         foreach($gData['actionsPerInterval'] as $category => $entriesPerDate){
-            if(empty($category)) continue;
+            if(empty($category) || in_array($category, $this->skipSeries)) continue;
 
             // Add results to our data set.
             $dataSet->AddPoint($entriesPerDate, $category);
@@ -357,6 +366,7 @@ class statistics extends plugin
             // Detect maximum value, to adjust the Y-Axis
             $tmpMax = max($entriesPerDate);
             if($tmpMax > $lineMax) $lineMax = $tmpMax;
+            $seriesCnt ++;
         }
 
         // Add timeline
@@ -375,7 +385,7 @@ class statistics extends plugin
         $chart->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
         $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, TRUE);     
         $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE);
-        $chart->setColorPalette(count($gData['actionsPerInterval']),255,0,0);   
+        $chart->setColorPalette($seriesCnt,255,0,0);   
 
         // Draw legend
         $dataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
