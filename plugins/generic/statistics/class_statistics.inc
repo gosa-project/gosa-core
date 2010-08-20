@@ -124,9 +124,6 @@ class statistics extends plugin
 
     function execute()
     {
-        if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
-        if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
-
         $smarty = get_smarty();
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
@@ -178,21 +175,24 @@ class statistics extends plugin
         $smarty->assign('graphID_4', $this->graphID_4);
         $smarty->assign('graphID_5', $this->graphID_5);
         $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
-        $smarty->assign('unsbmittedFilesMsg', 
-                sprintf(
+        $smarty->assign('unsbmittedFilesMsg', sprintf(
                     _("You have currently %s unsubmitted statistic collection, do you want to transmit them now?"),
                     count($this->unsbmittedFiles)));
         return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
     }
 
 
+    /*! \brief      Prepares the graph data we've received from the rpc-service.
+     *              This method will construct a usable data-array with converted 
+     *               date strings.
+     */
     function prepareGraphData($res)
     { 
-        $gData = array();
 
         /* Build up array which represents the amount of errors per
          *  interval.
          */
+        $gData = array();
         foreach($res['errorsPerInterval'] as $dateStr => $data){
             $date = strtotime($dateStr);
             $gData['errorsPerInterval'][$date] = $data;
@@ -260,6 +260,8 @@ class statistics extends plugin
     function save_object()
     {
         plugin::save_object();
+        if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
+        if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
     }
 
 
@@ -294,6 +296,8 @@ class statistics extends plugin
     }
 
 
+    /*! \brief  Reload the graph images.
+     */ 
     function reloadGraphs()
     {
         new pChartInclude();
@@ -305,6 +309,8 @@ class statistics extends plugin
     }
 
 
+    /*! \brief  Generates the line-graph which displays the plugin usage over time.
+     */ 
     function generateActionsGraph($gData)
     {
         $lineMax = 100;
@@ -509,6 +515,8 @@ class statistics extends plugin
 #
 
 
+    /*! \brief  Generate the pie-chart which displays the overall-plugin-usage
+     */
     function generateCategoryPieGraph($data)
     {
         // Sort data by usage count and slice array to get 
