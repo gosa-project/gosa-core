@@ -68,5 +68,8 @@
     {if $graphID_5}
         <img src='plugins/statistics/getGraph.php?id={$graphID_5}'>
     {/if}
+    {if $graphID_6}
+        <img src='plugins/statistics/getGraph.php?id={$graphID_6}'>
+    {/if}
 
 {/if}

@@ -17,6 +17,7 @@ class statistics extends plugin
     var $graphID_3 = 0;
     var $graphID_4 = 0;
     var $graphID_5 = 0;
+    var $graphID_6 = 0;
 
     var $legendR = 235;
     var $legendG = 235;
@@ -174,6 +175,7 @@ class statistics extends plugin
         $smarty->assign('graphID_3', $this->graphID_3);
         $smarty->assign('graphID_4', $this->graphID_4);
         $smarty->assign('graphID_5', $this->graphID_5);
+        $smarty->assign('graphID_6', $this->graphID_6);
         $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
         $smarty->assign('unsbmittedFilesMsg', sprintf(
                     _("You have currently %s unsubmitted statistic collection, do you want to transmit them now?"),
