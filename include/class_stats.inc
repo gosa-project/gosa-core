@@ -100,7 +100,9 @@ class stats
             $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
             $dir = opendir($path);
             while($file = readdir($dir)){
-                if(is_file($path.'/'.$file)) $res[] = $file;
+                if(is_file($path.'/'.$file) && !preg_match('/.old$/', $file)) {
+                    $res[] = $file;
+                }
             }
         } 
         return($res);   
@@ -326,7 +328,8 @@ class stats
             sqlite_close(stats::$lastHandle[$filename]);
         }
         if(file_exists($path.'/'.$filename)){
-            unlink($path.'/'.$filename);
+            #unlink($path.'/'.$filename);
+            rename($path.'/'.$filename,  $path.'/'.$filename.".old");
         }
     }
 }
