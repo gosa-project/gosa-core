@@ -274,6 +274,8 @@ class statistics extends plugin
             }
         }
 
+        // Get action usage, to be able to render a pie chart about most done actions.
+        $gData['actionsPerPluginAction'] = $res['actionsPerPluginAction'];
         return($gData);
     }
 
@@ -341,9 +343,8 @@ class statistics extends plugin
         if(!count($gData)){
             return;
         }
-        if(count($gData['actionsPerCategory'])){
-            $this->generateCategoryPieGraph($gData['actionsPerCategory']);
-        }
+        $this->generateCategoryPieGraph($gData['actionsPerCategory'], 1, _("Plugin usage"));
+        $this->generateCategoryPieGraph($gData['actionsPerPluginAction'], 7,_("Actions"));
         $this->generateActionsGraph($gData);
 
         // Generate graph which displays the memory usage over time
@@ -514,21 +515,33 @@ class statistics extends plugin
 
     /*! \brief  Generate the pie-chart which displays the overall-plugin-usage
      */
-    function generateCategoryPieGraph($data)
+    function generateCategoryPieGraph($data, $gID, $title)
     {
+        $this->graphIDs[$gID] = 0;
+        if(!count($data)) return;
+
         // Sort data by usage count and slice array to get 
         //  the eight most used categories
-        $gID = 1;
         arsort($data);
-        $mostUsedCategories = array_slice($data,0,7);
+        
+        // Detect max value and throw out entries less than 1% 
+        //  the will else be unreadable
+        $max = max($data);
+        $pos = 0;
+        foreach($data as $key => $count){
+            if($pos >=7 || ($count / $max)*100 < 1) break;
+            $pos ++;
+        }
+ 
+        $dataRes = array_slice($data,0,$pos);
 
         // Get the rest of categories and combine them 'others'
-        $theRest = array_slice($data,7);
-        $mostUsedCategories['remaining'] = array_sum($theRest);
+        $theRest = array_slice($data,$pos);
+        $dataRes['remaining'] = array_sum($theRest);
 
         // Try to find a translation for the given category names
-        $values = array_values($mostUsedCategories);
-        $keys = array_keys($mostUsedCategories);
+        $values = array_values($dataRes);
+        $keys = array_keys($dataRes);
         foreach($keys as $id => $cat){
             $keys[$id] = $this->getCategoryTranslation($cat);
         }
@@ -547,7 +560,7 @@ class statistics extends plugin
         // Initialise the graph  
         $chart = new pChart($x,$y);  
         $chart->setFontProperties($this->font,10);  
-        $chart->drawPieGraph($dataSet->GetData(),$dataSet->GetDataDescription(),($x/3),($y/2)-10,($y/2),PIE_PERCENTAGE,TRUE,50,20,3);  
+        $chart->drawPieGraph($dataSet->GetData(),$dataSet->GetDataDescription(),($x/3),($y/2)-10,($y/2),PIE_PERCENTAGE,TRUE,50,20,6);  
         $chart->drawPieLegend(($x/3*2),15,$dataSet->GetData(),$dataSet->GetDataDescription(),
                 $this->legendR,$this->legendG,$this->legendB);
 

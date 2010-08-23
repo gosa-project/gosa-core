@@ -53,9 +53,21 @@
     </table>
     <hr>
 
-    {if isset($graphIDs.1) && $graphIDs.1}
-        <img src='plugins/statistics/getGraph.php?id={$graphIDs.1}'>
-    {/if}
+    
+    <table>
+        <tr>
+            <td>
+                {if isset($graphIDs.1) && $graphIDs.1}
+                    <img src='plugins/statistics/getGraph.php?id={$graphIDs.1}'>
+                {/if}
+            </td>
+            <td>
+                {if isset($graphIDs.7) && $graphIDs.7}
+                    <img src='plugins/statistics/getGraph.php?id={$graphIDs.7}'>
+                {/if}
+            </td>
+        </tr>
+    </table>
 
     <table>
         <tr>
