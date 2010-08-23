@@ -12,13 +12,8 @@ class statistics extends plugin
 
     var $statisticData = array();
 
-    var $graphID_1 = 0;
-    var $graphID_2 = 0;
-    var $graphID_3 = 0;
-    var $graphID_4 = 0;
-    var $graphID_5 = 0;
-    var $graphID_6 = 0;
-
+    var $graphIDs = array();
+    var $skipSeries = array();
     var $seriesListPerGraph = array();
 
     var $legendR = 235;
@@ -137,14 +132,6 @@ class statistics extends plugin
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
 
-        $this->skipSeries = array('users',
-                'errorsPerInterval',
-                'gofonmacro',
-                'opsi, server, workstation, terminal, printer, phone, winworkstation, component',
-                'acl',
-                'groups',
-                'department');
-
         $this->reloadGraphs();
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
@@ -189,13 +176,10 @@ class statistics extends plugin
             $this->rpcHandle_Error = !$this->rpcHandle->success();
         }
 
+
         $smarty->assign('seriesListPerGraph', $this->seriesListPerGraph);
-        $smarty->assign('graphID_1', $this->graphID_1);
-        $smarty->assign('graphID_2', $this->graphID_2);
-        $smarty->assign('graphID_3', $this->graphID_3);
-        $smarty->assign('graphID_4', $this->graphID_4);
-        $smarty->assign('graphID_5', $this->graphID_5);
-        $smarty->assign('graphID_6', $this->graphID_6);
+        $smarty->assign('skipSeries', $this->skipSeries);
+        $smarty->assign('graphIDs', $this->graphIDs);
         $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
         $smarty->assign('unsbmittedFilesMsg', sprintf(
                     _("You have currently %s unsubmitted statistic collection, do you want to transmit them now?"),
@@ -270,6 +254,11 @@ class statistics extends plugin
             }
             ksort($gData['actionsPerInterval'][$category]);
         }
+        $this->skipSeries[1] = array();
+        $this->skipSeries[2] = array();
+        $this->skipSeries[3] = array();
+        $this->skipSeries[4] = array();
+        $this->skipSeries[5] = array();
         return($gData);
     }
 
@@ -286,6 +275,19 @@ class statistics extends plugin
         plugin::save_object();
         if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
         if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
+
+    
+        // Get series to enable or disable
+        foreach($this->seriesListPerGraph as $graphId => $series){
+            $this->skipSeries[$graphId] = array();
+            if(isset($_POST["graphPosted_{$graphId}"])){
+                foreach($series as $seriesName => $seriesDesc){
+                    if(!isset($_POST["addSeries_{$graphId}_{$seriesName}"])){
+                        $this->skipSeries[$graphId][] = $seriesName;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -325,13 +327,9 @@ class statistics extends plugin
     function reloadGraphs()
     {
         new pChartInclude();
+
         $gData = $this->statisticData;
         if(!count($gData)){
-            $this->graphID_1 = 0;
-            $this->graphID_2 = 0;
-            $this->graphID_3 = 0;
-            $this->graphID_4 = 0;
-            $this->graphID_5 = 0;
             return;
         }
         if(count($gData['actionsPerCategory'])){
@@ -377,8 +375,9 @@ class statistics extends plugin
         $errorMax = (max($gData['errorsPerInterval']) < 100)? 100:max($gData['errorsPerInterval']);
         $dataSet = new pData;  
         $seriesCnt = 0;
+        $gID = 2;
         foreach($gData['actionsPerInterval'] as $category => $entriesPerDate){
-            if(empty($category) || in_array($category, $this->skipSeries)) continue;
+            if(empty($category) || in_array($category, $this->skipSeries[$gID])) continue;
 
             // Add results to our data set.
             $dataSet->AddPoint($entriesPerDate, $category);
@@ -415,7 +414,7 @@ class statistics extends plugin
         // Do we've to add the errors series?
         // If we have to, then add the error-data-series.
         //  and set the color for the new error-series to red.
-        if(!in_array('errorsPerInterval', $this->skipSeries)){
+        if(!in_array('errorsPerInterval', $this->skipSeries[$gID])){
 
             // Set the color for the error Series to 'red'. 
             // This has to be done before drawing the legend.
@@ -428,13 +427,13 @@ class statistics extends plugin
 
         
         // Draw legend, but only if there is something to draw!
-        if($seriesCnt || !in_array('errorsPerInterval', $this->skipSeries)){
+        if($seriesCnt || !in_array('errorsPerInterval', $this->skipSeries[$gID])){
             $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
         }
 
         // Draw the error graph on top of the other graphs now.
         // But remove the category-graph before. 
-        if(!in_array('errorsPerInterval', $this->skipSeries)){
+        if(!in_array('errorsPerInterval', $this->skipSeries[$gID])){
 
             // Remove all graph series and add the error-series, then draw the new graph.
             // (It is not relevant if it was really added before, so we simply remove all series!)
@@ -447,19 +446,18 @@ class statistics extends plugin
         }
 
         // Generate new and unique graph id
-        $this->graphID_2 = preg_replace("/[^0-9]/","",microtime(TRUE));
-        $file = '/tmp/graph_'.$this->graphID_2;
+        $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE));
+        $file = '/tmp/graph_'.$this->graphIDs[$gID];
         $chart->Render($file);
-        session::set('statistics::graphFile'.$this->graphID_2,$file);
+        session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
 
         // Keep a list of all selecteable data-series, to allow the user to disable
         //  or enable series on demand.
-        $gid = 2;
-        $this->seriesListPerGraph[$gid] = array();
+        $this->seriesListPerGraph[$gID] = array();
         foreach($gData['actionsPerInterval'] as $key => $data){
-            $this->seriesListPerGraph[$gid][$key] = $this->getCategoryTranslation($key); 
+            $this->seriesListPerGraph[$gID][$key] = $this->getCategoryTranslation($key); 
         }
-        $this->seriesListPerGraph[$gid]['errorsPerInterval'] = _("Error");
+        $this->seriesListPerGraph[$gID]['errorsPerInterval'] = _("Error");
  
         return;
     }
@@ -498,11 +496,10 @@ class statistics extends plugin
         $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
         $chart->drawFilledCubicCurve($dataSet->GetData(),$dataSet->GetDataDescription(),.1,50); 
 
-        $gName = "graphID_".$gID;
-        $this->$gName = preg_replace("/[^0-9]/","",microtime(TRUE));
-        $file = '/tmp/graph_'.$this->$gName;
+        $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE));
+        $file = '/tmp/graph_'.$this->graphIDs[$gID];
         $chart->Render($file);
-        session::set('statistics::graphFile'.$this->$gName,$file);
+        session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
     }
 
 
@@ -512,6 +509,7 @@ class statistics extends plugin
     {
         // Sort data by usage count and slice array to get 
         //  the eight most used categories
+        $gID = 1;
         arsort($data);
         $mostUsedCategories = array_slice($data,0,7);
 
@@ -545,10 +543,10 @@ class statistics extends plugin
                 $this->legendR,$this->legendG,$this->legendB);
 
         // Store graph data
-        $this->graphID_1 = preg_replace("/[^0-9]/","",microtime(TRUE));
-        $file = '/tmp/graph_'.$this->graphID_1;
+        $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE));
+        $file = '/tmp/graph_'.$this->graphIDs[$gID];
         $chart->Render($file);
-        session::set('statistics::graphFile'.$this->graphID_1,$file);
+        session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
     }
 }
 ?>

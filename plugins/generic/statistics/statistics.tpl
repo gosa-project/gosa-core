@@ -53,35 +53,40 @@
     </table>
     <hr>
 
-    {if $graphID_1}
-        <img src='plugins/statistics/getGraph.php?id={$graphID_1}'>
+    {if isset($graphIDs.1) && $graphIDs.1}
+        <img src='plugins/statistics/getGraph.php?id={$graphIDs.1}'>
     {/if}
 
     <table>
         <tr>
             <td>
-                {if $graphID_2}
-                    <img src='plugins/statistics/getGraph.php?id={$graphID_2}'>
+                {if isset($graphIDs.2) && $graphIDs.2}
+                    <img src='plugins/statistics/getGraph.php?id={$graphIDs.2}'>
+                    <input type='hidden' name='graphPosted_2' value='1'>
                 {/if}
             </td>
             <td>
-                {foreach from=$seriesListPerGraph.2 key=key item=item}
-                    <input type='checkbox' name='{$key}' value='1'>{$item}<br>
-                {/foreach} 
+                {if isset($graphIDs.2) && $graphIDs.2}
+                    {foreach from=$seriesListPerGraph.2 key=key item=item}
+                        <input type='checkbox' name='addSeries_2_{$key}' value='1'
+                            onClick="document.mainform.submit();"
+                            {if !($key|in_array:$skipSeries.2)} checked {/if}>{$item}<br>
+                    {/foreach} 
+                {/if}
             </td>
         </tr>
     </table>
-    {if $graphID_3}
-        <img src='plugins/statistics/getGraph.php?id={$graphID_3}'>
+    {if isset($graphIDs.3) && $graphIDs.3}
+        <img src='plugins/statistics/getGraph.php?id={$graphIDs.3}'>
     {/if}
-    {if $graphID_4}
-        <img src='plugins/statistics/getGraph.php?id={$graphID_4}'>
+    {if isset($graphIDs.4) && $graphIDs.4}
+        <img src='plugins/statistics/getGraph.php?id={$graphIDs.4}'>
     {/if}
-    {if $graphID_5}
-        <img src='plugins/statistics/getGraph.php?id={$graphID_5}'>
+    {if isset($graphIDs.5) && $graphIDs.5}
+        <img src='plugins/statistics/getGraph.php?id={$graphIDs.5}'>
     {/if}
-    {if $graphID_6}
-        <img src='plugins/statistics/getGraph.php?id={$graphID_6}'>
+    {if isset($graphIDs.6) && $graphIDs.6}
+        <img src='plugins/statistics/getGraph.php?id={$graphIDs.6}'>
     {/if}
 
 {/if}
