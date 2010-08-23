@@ -10,21 +10,25 @@ class statistics extends plugin
     var $rpcHandle = NULL;
     var $rpcConfigured = FALSE;
 
-    var $statisticData = array();
+    // Graph data 
+    var $statisticData = array();       // Via rpc received stats
+    var $graphIDs = array();            // IDs for created grpah
+    var $skipSeries = array();          // Graph series which should be skipped
+    var $seriesListPerGraph = array();  // Series names per graph
 
-    var $graphIDs = array();
-    var $skipSeries = array();
-    var $seriesListPerGraph = array();
-
+    // Legend colors
     var $legendR = 235;
     var $legendG = 235;
     var $legendB = 235;
 
+    // Font used in graphs
     var $font = "./themes/default/fonts/LiberationSans-Regular.ttf";
 
+    // Datepicker initial
     var $graph1DatePicker1 = 0;
     var $graph1DatePicker2 = 0;
 
+    // A collection opf timestamps for unsubmitted statistics data.
     var $unsbmittedFiles = array();
 
     function __construct($config)
@@ -195,8 +199,7 @@ class statistics extends plugin
      *               date strings.
      */
     function prepareGraphData($res)
-    { 
-
+    {
         /* Build up array which represents the amount of errors per
          *  interval.
          */
@@ -223,7 +226,6 @@ class statistics extends plugin
             $cnt ++;
         }
         ksort($gData['dates']);
-
         
         /* Build up 'actions per category' array, this will later
          *   be represented using a pie chart.
@@ -259,6 +261,19 @@ class statistics extends plugin
         $this->skipSeries[3] = array();
         $this->skipSeries[4] = array();
         $this->skipSeries[5] = array();
+
+
+        // Clean data from unusable categories like ('terminals workstations, ...')
+        foreach($gData as $serieName => $seriesData){
+            foreach($seriesData as $key => $data){
+                $list = preg_split("/, /", $key);
+                if(count(array_intersect(array('server','terminal','workstation', 'opsi', 'component'), $list))){
+                    unset($gData[$serieName][$key]);
+                    $gData[$serieName]['systems'] = $data;
+                }
+            }
+        }
+
         return($gData);
     }
 
@@ -299,26 +314,20 @@ class statistics extends plugin
     {
         $ret ="";
 
-        // Extract category names from the given string.
-        $list = preg_split("/, /", $name);
-
         // We do not have a category for systems directly, so we've to map all system types to 'System'.
         // If we do not map to _(Systems) the graph legend will be half screen width.
-        if(count(array_intersect(array('server','terminal','workstation', 'opsi', 'component'), $list))){
+        if($name == "systems"){
             return(_("Systems"));
         }
 
         // Walk through category names and try to find a translation.
-        foreach($list as $cat){
-            $cat = trim($cat);
-            if(isset($this->catTranslations[$cat])){
-                $cat = _($this->catTranslations[$cat]);
-            }elseif(!empty($cat)){
-                $cat = _($cat);
-            }
-            $ret .= $cat.", ";
+        $cat = trim($name);
+        if(isset($this->catTranslations[$cat])){
+            $cat = _($this->catTranslations[$cat]);
+        }elseif(!empty($cat)){
+            $cat = _($cat);
         }
-        return(rtrim($ret, ', '));
+        return($cat); 
     }
 
 
