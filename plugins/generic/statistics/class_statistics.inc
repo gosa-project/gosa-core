@@ -19,6 +19,8 @@ class statistics extends plugin
     var $graphID_5 = 0;
     var $graphID_6 = 0;
 
+    var $seriesListPerGraph = array();
+
     var $legendR = 235;
     var $legendG = 235;
     var $legendB = 235;
@@ -100,7 +102,6 @@ class statistics extends plugin
         // Exclude statistic collection from today, they are still active and cannot be submitted.
         $curDate =  date('Y-m-d');
         if(isset($unsubmitted)) unset($unsubmitted[$curDate]);
-
         return($unsubmitted);  
     }
 
@@ -110,6 +111,12 @@ class statistics extends plugin
      */ 
     function getStatisticsDatesFromServer()
     {
+        // Do not request anything while rpc isn't configured.
+        if(!$this->rpcConfigured){
+            return(array());
+        }
+        
+        // Try to gather statistic dates from the backenbd.
         $res = $this->rpcHandle->getInstanceStatDates();
         $dates = array();
         if(!$this->rpcHandle->success()){
@@ -119,6 +126,7 @@ class statistics extends plugin
                 $dates[$date] = strtotime($date);
             }
         }
+        $this->rpcHandle_Error = !$this->rpcHandle->success();
         return($dates);
     }
 
@@ -130,17 +138,19 @@ class statistics extends plugin
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
 
         $this->skipSeries = array('users',
-//                'gofonmacro',
+                'errorsPerInterval',
+                'gofonmacro',
                 'opsi, server, workstation, terminal, printer, phone, winworkstation, component',
                 'acl',
                 'groups',
                 'department');
+
         $this->reloadGraphs();
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
         $smarty->assign("validRpcHandle", TRUE);
-        if(!$this->rpcConfigured || !$this->rpcHandle){
+        if(!$this->rpcHandle){
             $smarty->assign("validRpcHandle", FALSE);
             return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
         }
@@ -159,8 +169,8 @@ class statistics extends plugin
                     msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
                 }else{
                     stats::removeStatsFile($filename);
-                    echo "Inserted ".$res." entries for date ".date('d.m.Y', $date)."<br>";
                 }
+                $this->rpcHandle_Error = !$this->rpcHandle->success();
             }
             $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
         }
@@ -176,8 +186,10 @@ class statistics extends plugin
                 $this->statisticData = $this->prepareGraphData($res); 
                 $this->reloadGraphs();
             }
+            $this->rpcHandle_Error = !$this->rpcHandle->success();
         }
 
+        $smarty->assign('seriesListPerGraph', $this->seriesListPerGraph);
         $smarty->assign('graphID_1', $this->graphID_1);
         $smarty->assign('graphID_2', $this->graphID_2);
         $smarty->assign('graphID_3', $this->graphID_3);
@@ -188,6 +200,8 @@ class statistics extends plugin
         $smarty->assign('unsbmittedFilesMsg', sprintf(
                     _("You have currently %s unsubmitted statistic collection, do you want to transmit them now?"),
                     count($this->unsbmittedFiles)));
+    
+        $smarty->assign('rpcHandle_Error', $this->rpcHandle_Error);
         return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
     }
 
@@ -312,6 +326,14 @@ class statistics extends plugin
     {
         new pChartInclude();
         $gData = $this->statisticData;
+        if(!count($gData)){
+            $this->graphID_1 = 0;
+            $this->graphID_2 = 0;
+            $this->graphID_3 = 0;
+            $this->graphID_4 = 0;
+            $this->graphID_5 = 0;
+            return;
+        }
         if(count($gData['actionsPerCategory'])){
             $this->generateCategoryPieGraph($gData['actionsPerCategory']);
         }
@@ -384,22 +406,45 @@ class statistics extends plugin
         $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
         $chart->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
         $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, TRUE);     
-        $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE);
-        $chart->setColorPalette($seriesCnt,255,0,0);   
 
-        // Draw legend
-        $dataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
-        $dataSet->SetSerieName(_('Error'), 'Errors');
-        $dataSet->AddSerie('Errors');
-        $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
-
-        // Remove all graph series and add the error-series, then draw the new graph.
-        foreach($gData['actionsPerInterval'] as $category => $data){
-            $dataSet->RemoveSerie($category);
+        // Only draw this graph if we've at least one series to draw! 
+        if($seriesCnt){
+            $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE);
         }
-        $chart->setFixedScale(0,$errorMax);
-        $chart->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2, TRUE);
-        $chart->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription());
+
+        // Do we've to add the errors series?
+        // If we have to, then add the error-data-series.
+        //  and set the color for the new error-series to red.
+        if(!in_array('errorsPerInterval', $this->skipSeries)){
+
+            // Set the color for the error Series to 'red'. 
+            // This has to be done before drawing the legend.
+            $chart->setColorPalette($seriesCnt,255,0,0);   
+
+            $dataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
+            $dataSet->SetSerieName(_('Error'), 'Errors');
+            $dataSet->AddSerie('Errors');
+        }
+
+        
+        // Draw legend, but only if there is something to draw!
+        if($seriesCnt || !in_array('errorsPerInterval', $this->skipSeries)){
+            $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
+        }
+
+        // Draw the error graph on top of the other graphs now.
+        // But remove the category-graph before. 
+        if(!in_array('errorsPerInterval', $this->skipSeries)){
+
+            // Remove all graph series and add the error-series, then draw the new graph.
+            // (It is not relevant if it was really added before, so we simply remove all series!)
+            foreach($gData['actionsPerInterval'] as $category => $data){
+                $dataSet->RemoveSerie($category);
+            }
+            $chart->setFixedScale(0,$errorMax);
+            $chart->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2, TRUE);
+            $chart->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription());
+        }
 
         // Generate new and unique graph id
         $this->graphID_2 = preg_replace("/[^0-9]/","",microtime(TRUE));
@@ -407,6 +452,15 @@ class statistics extends plugin
         $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphID_2,$file);
 
+        // Keep a list of all selecteable data-series, to allow the user to disable
+        //  or enable series on demand.
+        $gid = 2;
+        $this->seriesListPerGraph[$gid] = array();
+        foreach($gData['actionsPerInterval'] as $key => $data){
+            $this->seriesListPerGraph[$gid][$key] = $this->getCategoryTranslation($key); 
+        }
+        $this->seriesListPerGraph[$gid]['errorsPerInterval'] = _("Error");
+ 
         return;
     }
    
