@@ -3,17 +3,12 @@
 class categoryActionsOverTime extends statChart
 {
     var $title = 'Plugin usage over time';
-    var $gID = 0;
-
-    var $graphData = array();    
-    var $seriesList = array();
-
-    var $enableCaching = FALSE;
+    var $enableCaching = TRUE;
 
     function __construct(&$config)
     {
         parent::__construct($config);
-        $this->gID = get_class();
+        $this->graphName = get_class();
     }
 
 
@@ -39,6 +34,14 @@ class categoryActionsOverTime extends statChart
             if($tmpMax > $lineMax) $lineMax = $tmpMax;
             $seriesCnt ++;
         }
+
+        // Keep a list of all selecteable data-series, to allow the user to disable
+        //  or enable series on demand.
+        $this->seriesList = array();
+        foreach($gData['actionsPerInterval'] as $key => $data){
+            $this->seriesList[$key] = $this->getCategoryTranslation($key); 
+        }
+        $this->seriesList['errorsPerInterval'] = _("Error");
 
         // Create a dataSet containing all series 
         $allSeriesDataSet = clone $dataSet;
@@ -117,14 +120,6 @@ class categoryActionsOverTime extends statChart
         $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphID,$file);
         $pCache->WriteToCache(get_class(),$allSeriesDataSet->GetData(),$chart);   
-
-        // Keep a list of all selecteable data-series, to allow the user to disable
-        //  or enable series on demand.
-        $this->seriesList = array();
-        foreach($gData['actionsPerInterval'] as $key => $data){
-            $this->seriesList[$key] = $this->getCategoryTranslation($key); 
-        }
-        $this->seriesList['errorsPerInterval'] = _("Error");
 
         return;
     }

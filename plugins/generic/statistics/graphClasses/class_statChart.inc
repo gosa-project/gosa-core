@@ -13,6 +13,10 @@ class statChart{
     
     var $skipSeries = array();
 
+    var $graphName = 0;
+
+    var $seriesList = array();
+
     function __construct(&$config,$gData = array())
     {
         $this->config = $config;
@@ -74,12 +78,12 @@ class statChart{
 
     function getSeriesSelector()
     {
-        $str = "<input type='hidden' name='{$this->gID}_posted' value='1'>";
+        $str = "<input type='hidden' name='{$this->graphName}_posted' value='1'>";
         $list = $this->getSeriesList();
         foreach($list as $key => $item){
             $checked = (in_array($key, $this->skipSeries))? '': 'checked';
             $str .= "<span style='padding-right:20px'>".
-                    "   <input type='checkbox' name='addSeries_{$this->gID}_{$key}' value='1'".
+                    "   <input type='checkbox' name='addSeries_{$this->graphName}_{$key}' value='1'".
                     "       onClick=\"document.mainform.submit();\" ".
                     "       {$checked}>{$item}".
                     "   </span>";
@@ -89,11 +93,12 @@ class statChart{
 
     function save_object()
     {
-        if(!isset($_POST["{$this->gID}_posted"])) return;
+        if(!isset($_POST["{$this->graphName}_posted"])) return;
 
         // Get series to enable or disable
+        $this->skipSeries = array();
         foreach($this->seriesList as $seriesName => $seriesDesc){
-            if(!isset($_POST["addSeries_{$this->gID}_{$seriesName}"])){
+            if(!isset($_POST["addSeries_{$this->graphName}_{$seriesName}"])){
                 $this->skipSeries[] = $seriesName;
             }
         }
