@@ -71,7 +71,7 @@
 
     {if isset($curGraphID) && $curGraphID}
     
-        <select name='selectedGraphType'>
+        <select name='selectedGraphType' onChange="document.mainform.submit();">
             {html_options options=$availableGraphs selected=$selectedGraphType}
         </select>
     

@@ -39,7 +39,7 @@ class statistics extends plugin
         plugin::plugin($config, NULL);
 
         $this->graphs[] = new categoryActionsOverTime($config); 
-        $this->graphs[] = new testChart($config); 
+        $this->graphs[] = new memoryUsageChart($config); 
 
         // Init start and stop times for graph 1
         $this->graph1DatePicker1 = date('d.m.Y', time() - 14 * 24 * 60 *60);
