@@ -247,7 +247,8 @@ class statistics extends plugin
 
 
         /* Prepare actions-per-interval array.
-         */    
+         */   
+        $gData['actionsPerInterval'] = array(); 
         foreach($res['actionsPerInterval'] as $category => $data){
             if(empty($category)) continue;
             foreach($data as $dateStr => $count){

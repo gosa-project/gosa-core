@@ -53,7 +53,6 @@
     </table>
     <hr>
 
-    
     <table>
         <tr>
             <td>
@@ -69,19 +68,17 @@
         </tr>
     </table>
 
-    <hr>
-    <table>
-        <tr>
-            <td>
-                {if isset($graphIDs.2) && $graphIDs.2}
+    {if isset($graphIDs.2) && $graphIDs.2}
+        <hr>
+        <table>
+            <tr>
+                <td>
                     <img src='plugins/statistics/getGraph.php?id={$graphIDs.2}'>
                     <input type='hidden' name='graphPosted_2' value='1'>
-                {/if}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {if isset($graphIDs.2) && $graphIDs.2}
+                </td>
+            </tr>
+            <tr>
+                <td>
                     {foreach from=$seriesListPerGraph.2 key=key item=item}
                         <span style='padding-right:20px'>
                         <input type='checkbox' name='addSeries_2_{$key}' value='1'
@@ -89,24 +86,27 @@
                             {if !($key|in_array:$skipSeries.2)} checked {/if}>{$item}
                         </span>
                     {/foreach} 
-                {/if}
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
+    {/if}
 
-    <hr>
 
     {if isset($graphIDs.3) && $graphIDs.3}
         <img src='plugins/statistics/getGraph.php?id={$graphIDs.3}'>
+        <hr>
     {/if}
     {if isset($graphIDs.4) && $graphIDs.4}
         <img src='plugins/statistics/getGraph.php?id={$graphIDs.4}'>
+        <hr>
     {/if}
     {if isset($graphIDs.5) && $graphIDs.5}
         <img src='plugins/statistics/getGraph.php?id={$graphIDs.5}'>
+        <hr>
     {/if}
     {if isset($graphIDs.6) && $graphIDs.6}
         <img src='plugins/statistics/getGraph.php?id={$graphIDs.6}'>
+        <hr>
     {/if}
 
 {/if}
