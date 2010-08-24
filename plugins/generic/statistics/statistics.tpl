@@ -77,9 +77,17 @@
                     <input type='hidden' name='graphPosted_2' value='1'>
                 {/if}
             </td>
+        </tr>
+        <tr>
             <td>
-                {if isset($graphLegends.2) && $graphIDs.2}
-                    {$graphLegends.2}
+                {if isset($graphIDs.2) && $graphIDs.2}
+                    {foreach from=$seriesListPerGraph.2 key=key item=item}
+                        <span style='padding-right:20px'>
+                        <input type='checkbox' name='addSeries_2_{$key}' value='1'
+                            onClick="document.mainform.submit();" 
+                            {if !($key|in_array:$skipSeries.2)} checked {/if}>{$item}
+                        </span>
+                    {/foreach} 
                 {/if}
             </td>
         </tr>
