@@ -343,8 +343,8 @@ class statistics extends plugin
         if(!count($gData)){
             return;
         }
-        $this->generateCategoryPieGraph($gData['actionsPerCategory'], 1, _("Plugin usage"));
-        $this->generateCategoryPieGraph($gData['actionsPerPluginAction'], 7,_("Actions"));
+        $this->generatePieGraph($gData['actionsPerCategory'], 1, _("Plugin usage"));
+        $this->generatePieGraph($gData['actionsPerPluginAction'], 7,_("Actions"));
         $this->generateActionsGraph($gData);
 
 #       // Generate graph which displays the memory usage over time
@@ -455,6 +455,7 @@ class statistics extends plugin
             $dataSet->AddSerie('Errors');
         }
 
+        $chart->drawLegend(750,30,$dataSet->GetDataDescription(),255,255,255);
 
         // Draw the error graph on top of the other graphs now.
         // But remove the category-graph before. 
@@ -531,7 +532,7 @@ class statistics extends plugin
 
     /*! \brief  Generate the pie-chart which displays the overall-plugin-usage
      */
-    function generateCategoryPieGraph($data, $gID, $title)
+    function generatePieGraph($data, $gID, $title)
     {
         $this->graphIDs[$gID] = 0;
         if(!count($data)) return;
