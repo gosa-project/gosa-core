@@ -57,13 +57,13 @@
     <table>
         <tr>
             <td>
-                {if isset($graphIDs.1) && $graphIDs.1}
-                    <img src='plugins/statistics/getGraph.php?id={$graphIDs.1}'>
+                {if isset($staticChart1_ID) && $staticChart1_ID}
+                    <img src='plugins/statistics/getGraph.php?id={$staticChart1_ID}'>
                 {/if}
             </td>
             <td>
-                {if isset($graphIDs.7) && $graphIDs.7}
-                    <img src='plugins/statistics/getGraph.php?id={$graphIDs.7}'>
+                {if isset($staticChart2_ID) && $staticChart2_ID}
+                    <img src='plugins/statistics/getGraph.php?id={$staticChart2_ID}'>
                 {/if}
             </td>
         </tr>

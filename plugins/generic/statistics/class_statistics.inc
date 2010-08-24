@@ -12,14 +12,6 @@ class statistics extends plugin
 
     // Graph data 
     var $statisticData = array();       // Via rpc received stats
-    var $graphIDs = array();            // IDs for created grpah
-    var $skipSeries = array();          // Graph series which should be skipped
-    var $seriesListPerGraph = array();  // Series names per graph
-
-    // Legend colors
-    var $legendR = 235;
-    var $legendG = 235;
-    var $legendB = 235;
 
     // Font used in graphs
     var $font = "./themes/default/fonts/LiberationSans-Regular.ttf";
@@ -43,8 +35,8 @@ class statistics extends plugin
         $this->graphs[] = new cpuLoadChart($config); 
         $this->graphs[] = new renderTimeChart($config); 
         $this->graphs[] = new durationTimeChart($config); 
-        $this->graphs[] = new pieChart1($config); 
-        $this->graphs[] = new pieChart2($config); 
+        $this->staticChart1 = new pieChart1($config); 
+        $this->staticChart2 = new pieChart2($config); 
 
         // Init start and stop times for graph 1
         $this->graph1DatePicker1 = date('d.m.Y', time() - 14 * 24 * 60 *60);
@@ -63,19 +55,8 @@ class statistics extends plugin
 
         // Get list of unsubmitted files.
         $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
-
-        // Collect category translations
-        $this->catTranslations = array();
-        foreach($this->config->configRegistry->getListOfPlugins() as $plugin => $data){
-            if(isset($data['plCategory'])){
-                foreach($data['plCategory'] as $id => $name){
-                    if(!is_numeric($id)){
-                        $this->catTranslations[$id] = $name['description'];
-                    }
-                }
-            }
-        }
     }
+
 
     /*! \brief      Returns a list local stored statistic files
         @param      Array   A list of filenames and dates.
@@ -199,11 +180,12 @@ class statistics extends plugin
         
         $this->reloadGraphs();
 
+        $smarty->assign('staticChart1_ID', $this->staticChart1->getGraphID());
+        $smarty->assign('staticChart2_ID', $this->staticChart2->getGraphID());
+
         $curGraph = $this->graphs[$this->selectedGraphType];
         $smarty->assign('curGraphID', $curGraph->getGraphID());
         $smarty->assign('curSeriesSelector', $curGraph->getSeriesSelector());
-        $smarty->assign('skipSeries', $this->skipSeries);
-        $smarty->assign('graphIDs', $this->graphIDs);
         $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
         $smarty->assign('unsbmittedFilesMsg', sprintf(
                     _("You have currently %s unsubmitted statistic collection, do you want to transmit them now?"),
@@ -277,12 +259,6 @@ class statistics extends plugin
             }
             ksort($gData['actionsPerInterval'][$category]);
         }
-        $this->skipSeries[1] = array();
-        $this->skipSeries[2] = array();
-        $this->skipSeries[3] = array();
-        $this->skipSeries[4] = array();
-        $this->skipSeries[5] = array();
-
 
         // Clean data from unusable categories like ('terminals workstations, ...')
         foreach($gData as $serieName => $seriesData){
@@ -316,33 +292,11 @@ class statistics extends plugin
    
         if(isset($_POST['selectedGraphType'])) $this->selectedGraphType = get_post('selectedGraphType');
 
+        $this->staticChart1->save_object();
+        $this->staticChart2->save_object();
+
         $curGraph = $this->graphs[$this->selectedGraphType];
         $curGraph->save_object();
-    }
-
-
-    /*! \brief      This method tries to translate category names.
-     *  @param      The category name to translate
-     *  @return     String  The translated category names.
-     */
-    function getCategoryTranslation($name)
-    {
-        $ret ="";
-
-        // We do not have a category for systems directly, so we've to map all system types to 'System'.
-        // If we do not map to _(Systems) the graph legend will be half screen width.
-        if($name == "systems"){
-            return(_("Systems"));
-        }
-
-        // Walk through category names and try to find a translation.
-        $cat = trim($name);
-        if(isset($this->catTranslations[$cat])){
-            $cat = _($this->catTranslations[$cat]);
-        }elseif(!empty($cat)){
-            $cat = _($cat);
-        }
-        return($cat); 
     }
 
 
@@ -359,95 +313,11 @@ class statistics extends plugin
         $curGraph = $this->graphs[$this->selectedGraphType];
         $curGraph->setGraphData($gData);
         $curGraph->render();
-#        $this->generateActionsGraph($gData);
 
-#       // Generate graph which displays the render time
-#       $series = array(
-#           'max_render' => _('Max'),
-#           'avg_render' => _('Avergae'),
-#           'min_render' => _('Min'));
-#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Render time"),5);
-#
-#       // Generate graph which displays the plugin duration
-#       $series = array(
-#           'max_dur' => _('Max'),
-#           'avg_dur' => _('Avergae'),
-#           'min_dur' => _('Min'));
-#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Seconds per action"),6);
-    }
-
-   
-
-
-    /*! \brief  Generate the pie-chart which displays the overall-plugin-usage
-     */
-    function generatePieGraph($data, $gID, $title)
-    {
-        $this->graphIDs[$gID] = 0;
-        if(!count($data)) return;
-
-        // Sort data by usage count and slice array to get 
-        //  the eight most used categories
-        arsort($data);
-        
-        // Detect max value and throw out entries less than 1% 
-        //  the will else be unreadable
-        $max = max($data);
-        $pos = 0;
-        foreach($data as $key => $count){
-            if($pos >=7 || ($count / $max)*100 < 1) break;
-            $pos ++;
-        }
- 
-        $dataRes = array_slice($data,0,$pos);
-
-        // Get the rest of categories and combine them 'others'
-        $theRest = array_slice($data,$pos);
-        $dataRes['remaining'] = array_sum($theRest);
-
-        // Try to find a translation for the given category names
-        $values = array_values($dataRes);
-        $keys = array_keys($dataRes);
-        foreach($keys as $id => $cat){
-            $keys[$id] = $this->getCategoryTranslation($cat);
-        }
-
-        // Dataset definition   
-        $dataSet = new pData;  
-        $dataSet->AddPoint($values,"Serie1");  
-        $dataSet->AddAllSeries();  
-        $dataSet->AddPoint($keys,"Serie2");  
-        $dataSet->SetAbsciseLabelSerie("Serie2");  
-
-        // Read graph from cache?
-        $pCache = new pCache('/var/spool/gosa/');
-        if($pCache->IsInCache($gID,$dataSet->GetData())){
-            $filename =  $pCache->GetHash($gID,$dataSet->GetData());
-            $filename = '/var/spool/gosa/'.$filename;    
-            if(file_exists($filename) && is_readable($filename)){
-                $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE)).rand(0,99999);
-                session::set('statistics::graphFile'.$this->graphIDs[$gID],$filename);
-                return;
-            }
-        }
-
-        // Set graph area
-        $x = 400;
-        $y = 200;
-
-        // Initialise the graph  
-        $chart = new pChart($x,$y);  
-        $chart->setFontProperties($this->font,10);  
-        $chart->drawPieGraph($dataSet->GetData(),$dataSet->GetDataDescription(),($x/3),($y/2)-10,($y/2),PIE_PERCENTAGE,TRUE,50,20,6);  
-        $chart->drawPieLegend(($x/3*2),15,$dataSet->GetData(),$dataSet->GetDataDescription(),
-                $this->legendR,$this->legendG,$this->legendB);
-
-        // Store graph data
-        $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE));
-        $file = '/tmp/graph_'.$this->graphIDs[$gID];
-        $chart->Render($file);
-        session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
-        $pCache->WriteToCache($gID,$dataSet->GetData(),$chart);   
+        $this->staticChart1->setGraphData($gData);
+        $this->staticChart1->render();
+        $this->staticChart2->setGraphData($gData);
+        $this->staticChart2->render();
     }
 }
 ?>
