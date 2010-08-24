@@ -15,11 +15,27 @@ class statistics extends plugin
     var $graphIDs = array();            // IDs for created grpah
     var $skipSeries = array();          // Graph series which should be skipped
     var $seriesListPerGraph = array();  // Series names per graph
+    var $graphLegends = array();        // A self-made legend 
 
     // Legend colors
     var $legendR = 235;
     var $legendG = 235;
     var $legendB = 235;
+
+    // Pre define the used chart colors 
+    var $legendColors =   
+        array(
+                array(127,127,116),
+                array(114,176,180),
+                array(0,124,143),
+                array(20,67,93),
+                array(39,10,43),
+                array(82,124,148),
+                array(97,152,183),
+                array(115,173,207),
+                array(144,196,226),
+                array(174,216,240));
+
 
     // Font used in graphs
     var $font = "./themes/default/fonts/LiberationSans-Regular.ttf";
@@ -181,6 +197,8 @@ class statistics extends plugin
         }
 
 
+        $smarty->assign('legendColors', $this->legendColors);
+        $smarty->assign('graphLegends', $this->graphLegends);
         $smarty->assign('seriesListPerGraph', $this->seriesListPerGraph);
         $smarty->assign('skipSeries', $this->skipSeries);
         $smarty->assign('graphIDs', $this->graphIDs);
@@ -196,10 +214,17 @@ class statistics extends plugin
 
     /*! \brief      Prepares the graph data we've received from the rpc-service.
      *              This method will construct a usable data-array with converted 
-     *               date strings.
+     *               date strings, cleaned up categories.
      */
     function prepareGraphData($res)
     {
+        // Dummy, please check later if it is still required. 
+        $this->skipSeries[1] = array();
+        $this->skipSeries[2] = array();
+        $this->skipSeries[3] = array();
+        $this->skipSeries[4] = array();
+        $this->skipSeries[5] = array();
+
         /* Build up array which represents the amount of errors per
          *  interval.
          */
@@ -256,12 +281,6 @@ class statistics extends plugin
             }
             ksort($gData['actionsPerInterval'][$category]);
         }
-        $this->skipSeries[1] = array();
-        $this->skipSeries[2] = array();
-        $this->skipSeries[3] = array();
-        $this->skipSeries[4] = array();
-        $this->skipSeries[5] = array();
-
 
         // Clean data from unusable categories like ('terminals workstations, ...')
         foreach($gData as $serieName => $seriesData){
@@ -381,30 +400,45 @@ class statistics extends plugin
      */ 
     function generateActionsGraph($gData)
     {
-        $lineMax = 100;
-        $errorMax = (max($gData['errorsPerInterval']) < 100)? 100:max($gData['errorsPerInterval']);
+
+        // Prepare self-made legend data
+        $legendData = array();
+
+        $lineMax = 10;
+        $errorMax = max($gData['errorsPerInterval']);
         $dataSet = new pData;  
         $seriesCnt = 0;
         $gID = 2;
+        $chart = new pChart(800,230);
         foreach($gData['actionsPerInterval'] as $category => $entriesPerDate){
-            if(empty($category) || in_array($category, $this->skipSeries[$gID])) continue;
+            if(empty($category)) continue; 
 
-            // Add results to our data set.
-            $dataSet->AddPoint($entriesPerDate, $category);
-            $dataSet->SetSerieName($this->getCategoryTranslation($category), $category);
-            $dataSet->AddSerie($category);
+            // Add entry to legendData array.
+            $desc = $this->getCategoryTranslation($category);
 
-            // Detect maximum value, to adjust the Y-Axis
-            $tmpMax = max($entriesPerDate);
-            if($tmpMax > $lineMax) $lineMax = $tmpMax;
+            // Set series color
+            $color = $this->legendColors[$seriesCnt];
+            $legendData[$seriesCnt] = array('name' => $category,'desc'=>$desc,'color' => $color);
+            list($r,$g,$b) = $color;
+            $chart->setColorPalette($seriesCnt,$r,$g,$b);   
+
+            // Do not add graph data for skipped series 
+            if(!in_array($category, $this->skipSeries[$gID])){
+                $dataSet->AddPoint($entriesPerDate, $category);
+                $dataSet->SetSerieName($desc, $category);
+                $dataSet->AddSerie($category);
+
+                // Detect maximum value, to adjust the Y-Axis
+                $tmpMax = max($entriesPerDate);
+                if($tmpMax > $lineMax) $lineMax = $tmpMax;
+            }
+
             $seriesCnt ++;
         }
 
         // Add timeline
         $dataSet->AddPoint($gData['dates'], 'date');
         $dataSet->SetAbsciseLabelSerie('date');  
-
-        $chart = new pChart(800,230);  
         $chart->setFixedScale(0.000,$lineMax);
         $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
         $chart->setGraphArea(50,30,585,200);  
@@ -429,17 +463,14 @@ class statistics extends plugin
             // Set the color for the error Series to 'red'. 
             // This has to be done before drawing the legend.
             $chart->setColorPalette($seriesCnt,255,0,0);   
-
             $dataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
             $dataSet->SetSerieName(_('Error'), 'Errors');
             $dataSet->AddSerie('Errors');
+
         }
 
-        
-        // Draw legend, but only if there is something to draw!
-        if($seriesCnt || !in_array('errorsPerInterval', $this->skipSeries[$gID])){
-            $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
-        }
+        // Add entry to legendData array.
+        $legendData[$seriesCnt] = array('name' => 'errorsPerInterval','desc'=>_('Error'),'color' => array(255,0,0));
 
         // Draw the error graph on top of the other graphs now.
         // But remove the category-graph before. 
@@ -468,10 +499,43 @@ class statistics extends plugin
             $this->seriesListPerGraph[$gID][$key] = $this->getCategoryTranslation($key); 
         }
         $this->seriesListPerGraph[$gID]['errorsPerInterval'] = _("Error");
- 
+
+        // Create self-made legend with checkboxes to be able to select the desired graph series.
+        $this->graphLegends[$gID] = $this->generateLegend($legendData,$gID, TRUE); 
         return;
     }
    
+
+    function generateLegend($legendData,$gID, $useCheckboxes = FALSE)
+    {
+        $str = "";
+        $str .= "<table>";
+        foreach($legendData as $id => $data){
+
+            $label = $data['desc'];
+            $name = $data['name'];
+            if(count($data['color'])){
+                list($r,$g,$b) = $data['color'];
+                $color = "rgba({$r},{$g},{$b},1)";
+            }else{
+                $color = "rgba(255,255,255,1);";
+            }
+            $colorDiv = "<div style='width:8px; height:8px; background-color: {$color}'>";
+
+            if($useCheckboxes){
+                $checked = (in_array($name, $this->skipSeries[$gID]))? '':'checked';
+                $checkbox = "<input type='checkbox' name='addSeries_{$gID}_{$name}' value='1'
+                    onClick='document.mainform.submit();' {$checked}>"; 
+            }
+
+            $str .= "<tr>";
+            $str .= "<td>{$checkbox}</td><td style='vertical-align: middle;'>{$colorDiv}</td><td>{$label}</td>\n";
+            $str .= "</tr>";
+        }
+        $str.="</table>";
+        return($str);
+    }        
+
 
     /*! \brief  Generates a graph about system informations.
      */ 
@@ -492,6 +556,7 @@ class statistics extends plugin
         $dataSet->SetAbsciseLabelSerie('date');  
         
         $chart = new pChart(800,230);  
+        $this->loadColors($chart);
         $chart->setFixedScale(0.0001,($max*1.1));  
         $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
         $chart->setGraphArea(50,30,585,200);  
@@ -559,6 +624,7 @@ class statistics extends plugin
 
         // Initialise the graph  
         $chart = new pChart($x,$y);  
+        $this->loadColors($chart);
         $chart->setFontProperties($this->font,10);  
         $chart->drawPieGraph($dataSet->GetData(),$dataSet->GetDataDescription(),($x/3),($y/2)-10,($y/2),PIE_PERCENTAGE,TRUE,50,20,6);  
         $chart->drawPieLegend(($x/3*2),15,$dataSet->GetData(),$dataSet->GetDataDescription(),
@@ -569,6 +635,27 @@ class statistics extends plugin
         $file = '/tmp/graph_'.$this->graphIDs[$gID];
         $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
+    }
+
+    function loadColors(&$graph) 
+    {
+        $colors =
+            array( 
+                    array(227,227,216),
+                    array(114,176,180),
+                    array(0,124,143),
+                    array(20,67,93),
+                    array(39,10,43),
+                    array(82,124,148),
+                    array(97,152,183),
+                    array(115,173,207),
+                    array(144,196,226),
+                    array(174,216,240));
+
+        foreach($this->legendColors as $key => $values){
+            list($R,$G,$B) = $values;
+            $graph->setColorPalette($key,$R,$G,$B);
+        }   
     }
 }
 ?>
