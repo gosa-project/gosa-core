@@ -1,3 +1,4 @@
+
 <h3>{t}Usage statistics{/t}</h3>
 
 {if !$rpcConfigured}
@@ -68,24 +69,18 @@
         </tr>
     </table>
 
-    {if isset($graphIDs.2) && $graphIDs.2}
+    {if isset($curGraphID) && $curGraphID}
         <hr>
         <table>
             <tr>
                 <td>
-                    <img src='plugins/statistics/getGraph.php?id={$graphIDs.2}'>
-                    <input type='hidden' name='graphPosted_2' value='1'>
+                    <input type='hidden' name='currentGraphPosted' value='1'>
+                    <img src='plugins/statistics/getGraph.php?id={$curGraphID}'>
                 </td>
             </tr>
             <tr>
                 <td>
-                    {foreach from=$seriesListPerGraph.2 key=key item=item}
-                        <span style='padding-right:20px'>
-                        <input type='checkbox' name='addSeries_2_{$key}' value='1'
-                            onClick="document.mainform.submit();" 
-                            {if !($key|in_array:$skipSeries.2)} checked {/if}>{$item}
-                        </span>
-                    {/foreach} 
+                    {$curSeriesSelector}
                 </td>
             </tr>
         </table>

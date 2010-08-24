@@ -31,9 +31,14 @@ class statistics extends plugin
     // A collection opf timestamps for unsubmitted statistics data.
     var $unsbmittedFiles = array();
 
+    var $graphs = array();
+    var $currentGraph = 0;
+
     function __construct($config)
     {
         plugin::plugin($config, NULL);
+
+        $this->graphs[] = new categoryActionsOverTime($config); 
 
         // Init start and stop times for graph 1
         $this->graph1DatePicker1 = date('d.m.Y', time() - 14 * 24 * 60 *60);
@@ -180,7 +185,9 @@ class statistics extends plugin
         
         $this->reloadGraphs();
 
-        $smarty->assign('seriesListPerGraph', $this->seriesListPerGraph);
+        $curGraph = $this->graphs[$this->currentGraph];
+        $smarty->assign('curGraphID', $curGraph->getGraphID());
+        $smarty->assign('curSeriesSelector', $curGraph->getSeriesSelector());
         $smarty->assign('skipSeries', $this->skipSeries);
         $smarty->assign('graphIDs', $this->graphIDs);
         $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
@@ -294,17 +301,8 @@ class statistics extends plugin
         if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
 
     
-        // Get series to enable or disable
-        foreach($this->seriesListPerGraph as $graphId => $series){
-            $this->skipSeries[$graphId] = array();
-            if(isset($_POST["graphPosted_{$graphId}"])){
-                foreach($series as $seriesName => $seriesDesc){
-                    if(!isset($_POST["addSeries_{$graphId}_{$seriesName}"])){
-                        $this->skipSeries[$graphId][] = $seriesName;
-                    }
-                }
-            }
-        }
+        $curGraph = $this->graphs[$this->currentGraph];
+        $curGraph->save_object();
     }
 
 
@@ -345,7 +343,11 @@ class statistics extends plugin
         }
         $this->generatePieGraph($gData['actionsPerCategory'], 1, _("Plugin usage"));
         $this->generatePieGraph($gData['actionsPerPluginAction'], 7,_("Actions"));
-        $this->generateActionsGraph($gData);
+    
+        $curGraph = $this->graphs[$this->currentGraph];
+        $curGraph->setGraphData($gData);
+        $curGraph->render();
+#        $this->generateActionsGraph($gData);
 
 #       // Generate graph which displays the memory usage over time
 #       $series = array(
