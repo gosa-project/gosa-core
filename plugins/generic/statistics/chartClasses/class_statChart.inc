@@ -34,6 +34,11 @@ class statChart{
         }
     }
 
+    function getTitle()
+    {
+        return(_($this->title));
+    }    
+
 
     function setGraphData($data)
     {

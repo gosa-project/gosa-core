@@ -32,13 +32,14 @@ class statistics extends plugin
     var $unsbmittedFiles = array();
 
     var $graphs = array();
-    var $currentGraph = 0;
+    var $selectedGraphType = 0;
 
     function __construct($config)
     {
         plugin::plugin($config, NULL);
 
         $this->graphs[] = new categoryActionsOverTime($config); 
+        $this->graphs[] = new testChart($config); 
 
         // Init start and stop times for graph 1
         $this->graph1DatePicker1 = date('d.m.Y', time() - 14 * 24 * 60 *60);
@@ -141,6 +142,14 @@ class statistics extends plugin
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
 
+        // Assign list of graphs 
+        $tmp = array();
+        foreach($this->graphs as $id => $gClass){
+            $tmp[$id] = $gClass->getTitle();
+        }
+        $smarty->assign("selectedGraphType", $this->selectedGraphType);
+        $smarty->assign("availableGraphs", $tmp);
+
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
@@ -185,7 +194,7 @@ class statistics extends plugin
         
         $this->reloadGraphs();
 
-        $curGraph = $this->graphs[$this->currentGraph];
+        $curGraph = $this->graphs[$this->selectedGraphType];
         $smarty->assign('curGraphID', $curGraph->getGraphID());
         $smarty->assign('curSeriesSelector', $curGraph->getSeriesSelector());
         $smarty->assign('skipSeries', $this->skipSeries);
@@ -299,9 +308,10 @@ class statistics extends plugin
         plugin::save_object();
         if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
         if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
+   
+        if(isset($_POST['selectedGraphType'])) $this->selectedGraphType = get_post('selectedGraphType');
 
-    
-        $curGraph = $this->graphs[$this->currentGraph];
+        $curGraph = $this->graphs[$this->selectedGraphType];
         $curGraph->save_object();
     }
 
@@ -344,7 +354,7 @@ class statistics extends plugin
         $this->generatePieGraph($gData['actionsPerCategory'], 1, _("Plugin usage"));
         $this->generatePieGraph($gData['actionsPerPluginAction'], 7,_("Actions"));
     
-        $curGraph = $this->graphs[$this->currentGraph];
+        $curGraph = $this->graphs[$this->selectedGraphType];
         $curGraph->setGraphData($gData);
         $curGraph->render();
 #        $this->generateActionsGraph($gData);
@@ -378,118 +388,6 @@ class statistics extends plugin
 #       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Seconds per action"),6);
     }
 
-
-    /*! \brief  Generates the line-graph which displays the plugin usage over time.
-     */ 
-    function generateActionsGraph($gData)
-    {
-        $lineMax = 100;
-        $errorMax = (max($gData['errorsPerInterval']) < 100)? 100:max($gData['errorsPerInterval']);
-        $dataSet = new pData;  
-        $seriesCnt = 0;
-        $gID = 2;
-        foreach($gData['actionsPerInterval'] as $category => $entriesPerDate){
-            if(empty($category) || in_array($category, $this->skipSeries[$gID])) continue;
-
-            // Add results to our data set.
-            $dataSet->AddPoint($entriesPerDate, $category);
-            $dataSet->SetSerieName($this->getCategoryTranslation($category), $category);
-            $dataSet->AddSerie($category);
-
-            // Detect maximum value, to adjust the Y-Axis
-            $tmpMax = max($entriesPerDate);
-            if($tmpMax > $lineMax) $lineMax = $tmpMax;
-            $seriesCnt ++;
-        }
-
-        // Create a dataSet containing all series 
-        $allSeriesDataSet = clone $dataSet;
-        if(!in_array('errorsPerInterval', $this->skipSeries[$gID])){
-            $allSeriesDataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
-            $allSeriesDataSet->SetSerieName(_('Error'), 'Errors');
-            $allSeriesDataSet->AddSerie('Errors');
-        }
-
-        // Add timeline
-        $dataSet->AddPoint($gData['dates'], 'date');
-        $dataSet->SetAbsciseLabelSerie('date');  
-
-        // Read graph from cache?
-        $pCache = new pCache('/var/spool/gosa/');
-        if($pCache->IsInCache($gID,$allSeriesDataSet->GetData())){
-            $filename =  $pCache->GetHash($gID,$allSeriesDataSet->GetData());
-            $filename = '/var/spool/gosa/'.$filename;    
-            if(file_exists($filename) && is_readable($filename)){
-                $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE)).rand(0,99999);
-                session::set('statistics::graphFile'.$this->graphIDs[$gID],$filename);
-                return;
-            }
-        }
-
-        $chart = new pChart(900,230);  
-        $chart->setFixedScale(0.000,$lineMax);
-        $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-        $chart->setGraphArea(50,8,830,200);  
-        $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-        $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-        $chart->drawGraphArea(255,255,255,TRUE);  
-        $chart->drawGrid(4,TRUE,200,200,200,50);  
-        $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
-#        $chart->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
-        $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, TRUE);     
-
-        // Only draw this graph if we've at least one series to draw! 
-        if($seriesCnt){
-            $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE);
-        }
-
-        // Do we've to add the errors series?
-        // If we have to, then add the error-data-series.
-        //  and set the color for the new error-series to red.
-        if(!in_array('errorsPerInterval', $this->skipSeries[$gID])){
-
-            // Set the color for the error Series to 'red'. 
-            // This has to be done before drawing the legend.
-            $chart->setColorPalette($seriesCnt,255,0,0);   
-
-            $dataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
-            $dataSet->SetSerieName(_('Error'), 'Errors');
-            $dataSet->AddSerie('Errors');
-        }
-
-        $chart->drawLegend(750,30,$dataSet->GetDataDescription(),255,255,255);
-
-        // Draw the error graph on top of the other graphs now.
-        // But remove the category-graph before. 
-        if(!in_array('errorsPerInterval', $this->skipSeries[$gID])){
-
-            // Remove all graph series and add the error-series, then draw the new graph.
-            // (It is not relevant if it was really added before, so we simply remove all series!)
-            foreach($gData['actionsPerInterval'] as $category => $data){
-                $dataSet->RemoveSerie($category);
-            }
-            $chart->setFixedScale(0,$errorMax);
-            $chart->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,120,150,150,TRUE,0,2, TRUE);
-            $chart->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription());
-        }
-
-        // Generate new and unique graph id
-        $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE));
-        $file = '/tmp/graph_'.$this->graphIDs[$gID];
-        $chart->Render($file);
-        session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
-        $pCache->WriteToCache($gID,$allSeriesDataSet->GetData(),$chart);   
-
-        // Keep a list of all selecteable data-series, to allow the user to disable
-        //  or enable series on demand.
-        $this->seriesListPerGraph[$gID] = array();
-        foreach($gData['actionsPerInterval'] as $key => $data){
-            $this->seriesListPerGraph[$gID][$key] = $this->getCategoryTranslation($key); 
-        }
-        $this->seriesListPerGraph[$gID]['errorsPerInterval'] = _("Error");
- 
-        return;
-    }
    
 
     /*! \brief  Generates a graph about system informations.

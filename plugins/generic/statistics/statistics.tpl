@@ -70,6 +70,11 @@
     </table>
 
     {if isset($curGraphID) && $curGraphID}
+    
+        <select name='selectedGraphType'>
+            {html_options options=$availableGraphs selected=$selectedGraphType}
+        </select>
+    
         <hr>
         <table>
             <tr>
