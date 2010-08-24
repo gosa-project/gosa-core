@@ -410,6 +410,7 @@ class statistics extends plugin
         $seriesCnt = 0;
         $gID = 2;
         $chart = new pChart(800,230);
+        $seriesShown = 0;
         foreach($gData['actionsPerInterval'] as $category => $entriesPerDate){
             if(empty($category)) continue; 
 
@@ -419,8 +420,6 @@ class statistics extends plugin
             // Set series color
             $color = $this->legendColors[$seriesCnt];
             $legendData[$seriesCnt] = array('name' => $category,'desc'=>$desc,'color' => $color);
-            list($r,$g,$b) = $color;
-            $chart->setColorPalette($seriesCnt,$r,$g,$b);   
 
             // Do not add graph data for skipped series 
             if(!in_array($category, $this->skipSeries[$gID])){
@@ -428,9 +427,14 @@ class statistics extends plugin
                 $dataSet->SetSerieName($desc, $category);
                 $dataSet->AddSerie($category);
 
+                list($r,$g,$b) = $color;
+                $chart->setColorPalette($seriesShown,$r,$g,$b);   
+
                 // Detect maximum value, to adjust the Y-Axis
                 $tmpMax = max($entriesPerDate);
                 if($tmpMax > $lineMax) $lineMax = $tmpMax;
+
+                $seriesShown ++;
             }
 
             $seriesCnt ++;
@@ -462,7 +466,7 @@ class statistics extends plugin
 
             // Set the color for the error Series to 'red'. 
             // This has to be done before drawing the legend.
-            $chart->setColorPalette($seriesCnt,255,0,0);   
+            $chart->setColorPalette($seriesShown,255,0,0);   
             $dataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
             $dataSet->SetSerieName(_('Error'), 'Errors');
             $dataSet->AddSerie('Errors');
