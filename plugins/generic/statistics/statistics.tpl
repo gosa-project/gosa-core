@@ -69,6 +69,7 @@
         </tr>
     </table>
 
+    <hr>
     <table>
         <tr>
             <td>
@@ -92,6 +93,9 @@
             </td>
         </tr>
     </table>
+
+    <hr>
+
     {if isset($graphIDs.3) && $graphIDs.3}
         <img src='plugins/statistics/getGraph.php?id={$graphIDs.3}'>
     {/if}

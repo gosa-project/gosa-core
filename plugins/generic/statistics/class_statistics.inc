@@ -347,33 +347,33 @@ class statistics extends plugin
         $this->generateCategoryPieGraph($gData['actionsPerPluginAction'], 7,_("Actions"));
         $this->generateActionsGraph($gData);
 
-        // Generate graph which displays the memory usage over time
-        $series = array(
-            'max_mem' => _('Max'),
-            'avg_mem' => _('Avergae'),
-            'min_mem' => _('Min'));
-        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Memory usage"),3);
-
-        // Generate graph which displays the cpu load over time
-        $series = array(
-            'max_load' => _('Max'),
-            'avg_load' => _('Avergae'),
-            'min_load' => _('Min'));
-        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("CPU load"),4);
-
-        // Generate graph which displays the render time
-        $series = array(
-            'max_render' => _('Max'),
-            'avg_render' => _('Avergae'),
-            'min_render' => _('Min'));
-        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Render time"),5);
-
-        // Generate graph which displays the plugin duration
-        $series = array(
-            'max_dur' => _('Max'),
-            'avg_dur' => _('Avergae'),
-            'min_dur' => _('Min'));
-        $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Seconds per action"),6);
+#       // Generate graph which displays the memory usage over time
+#       $series = array(
+#           'max_mem' => _('Max'),
+#           'avg_mem' => _('Avergae'),
+#           'min_mem' => _('Min'));
+#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Memory usage"),3);
+#
+#       // Generate graph which displays the cpu load over time
+#       $series = array(
+#           'max_load' => _('Max'),
+#           'avg_load' => _('Avergae'),
+#           'min_load' => _('Min'));
+#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("CPU load"),4);
+#
+#       // Generate graph which displays the render time
+#       $series = array(
+#           'max_render' => _('Max'),
+#           'avg_render' => _('Avergae'),
+#           'min_render' => _('Min'));
+#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Render time"),5);
+#
+#       // Generate graph which displays the plugin duration
+#       $series = array(
+#           'max_dur' => _('Max'),
+#           'avg_dur' => _('Avergae'),
+#           'min_dur' => _('Min'));
+#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Seconds per action"),6);
     }
 
 
@@ -404,16 +404,16 @@ class statistics extends plugin
         $dataSet->AddPoint($gData['dates'], 'date');
         $dataSet->SetAbsciseLabelSerie('date');  
 
-        $chart = new pChart(800,230);  
+        $chart = new pChart(900,230);  
         $chart->setFixedScale(0.000,$lineMax);
         $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-        $chart->setGraphArea(50,30,585,200);  
+        $chart->setGraphArea(50,8,830,200);  
         $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
         $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
         $chart->drawGraphArea(255,255,255,TRUE);  
         $chart->drawGrid(4,TRUE,200,200,200,50);  
         $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
-        $chart->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
+#        $chart->drawTitle(50,22,"Plugin usage over time",50,50,50,585);  
         $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, TRUE);     
 
         // Only draw this graph if we've at least one series to draw! 
@@ -435,11 +435,6 @@ class statistics extends plugin
             $dataSet->AddSerie('Errors');
         }
 
-        
-        // Draw legend, but only if there is something to draw!
-        if($seriesCnt || !in_array('errorsPerInterval', $this->skipSeries[$gID])){
-            $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
-        }
 
         // Draw the error graph on top of the other graphs now.
         // But remove the category-graph before. 
