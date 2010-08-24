@@ -40,6 +40,11 @@ class statistics extends plugin
 
         $this->graphs[] = new categoryActionsOverTime($config); 
         $this->graphs[] = new memoryUsageChart($config); 
+        $this->graphs[] = new cpuLoadChart($config); 
+        $this->graphs[] = new renderTimeChart($config); 
+        $this->graphs[] = new durationTimeChart($config); 
+        $this->graphs[] = new pieChart1($config); 
+        $this->graphs[] = new pieChart2($config); 
 
         // Init start and stop times for graph 1
         $this->graph1DatePicker1 = date('d.m.Y', time() - 14 * 24 * 60 *60);
@@ -351,28 +356,11 @@ class statistics extends plugin
         if(!count($gData)){
             return;
         }
-        $this->generatePieGraph($gData['actionsPerCategory'], 1, _("Plugin usage"));
-        $this->generatePieGraph($gData['actionsPerPluginAction'], 7,_("Actions"));
-    
         $curGraph = $this->graphs[$this->selectedGraphType];
         $curGraph->setGraphData($gData);
         $curGraph->render();
 #        $this->generateActionsGraph($gData);
 
-#       // Generate graph which displays the memory usage over time
-#       $series = array(
-#           'max_mem' => _('Max'),
-#           'avg_mem' => _('Avergae'),
-#           'min_mem' => _('Min'));
-#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("Memory usage"),3);
-#
-#       // Generate graph which displays the cpu load over time
-#       $series = array(
-#           'max_load' => _('Max'),
-#           'avg_load' => _('Avergae'),
-#           'min_load' => _('Min'));
-#       $this->generateSystemStatsGraph($gData,'usagePerInterval',$series, _("CPU load"),4);
-#
 #       // Generate graph which displays the render time
 #       $series = array(
 #           'max_render' => _('Max'),
@@ -389,45 +377,6 @@ class statistics extends plugin
     }
 
    
-
-    /*! \brief  Generates a graph about system informations.
-     */ 
-    function generateSystemStatsGraph($gData, $key = "", $series= array(), $title = "", $gID=0 )
-    { 
-        // Add series data to dataSet        
-        $dataSet = new pData;  
-        $max = 0;
-        foreach($series as $seriesName => $seriesDesc){
-            if(isset($gData[$key][$seriesName])){
-                $dataSet->AddPoint($gData[$key][$seriesName],$seriesName);
-                $dataSet->SetSerieName($seriesDesc,$seriesName);
-                if($max < max($gData[$key][$seriesName])) $max = max($gData[$key][$seriesName]);
-            }
-        }
-        $dataSet->AddAllSeries();  
-        $dataSet->AddPoint($gData['dates'], 'date');
-        $dataSet->SetAbsciseLabelSerie('date');  
-        
-        $chart = new pChart(800,230);  
-        $chart->setFixedScale(0.0001,($max*1.1));  
-        $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-        $chart->setGraphArea(50,30,585,200);  
-        $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-        $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-        $chart->drawGraphArea(255,255,255,TRUE);  
-        $chart->drawGrid(4,TRUE,200,200,200,50);  
-        $chart->drawTreshold(0,143,55,72,TRUE,TRUE);  
-        $chart->drawTitle(50,22,$title,50,50,50,585);  
-        $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
-
-        $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
-        $chart->drawFilledCubicCurve($dataSet->GetData(),$dataSet->GetDataDescription(),.1,50); 
-
-        $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE));
-        $file = '/tmp/graph_'.$this->graphIDs[$gID];
-        $chart->Render($file);
-        session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
-    }
 
 
     /*! \brief  Generate the pie-chart which displays the overall-plugin-usage

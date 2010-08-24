@@ -70,11 +70,9 @@
     </table>
 
     {if isset($curGraphID) && $curGraphID}
-    
-        <select name='selectedGraphType' onChange="document.mainform.submit();">
+        <select name='selectedGraphType' onChange="document.mainform.submit();" size='1'>
             {html_options options=$availableGraphs selected=$selectedGraphType}
         </select>
-    
         <hr>
         <table>
             <tr>
@@ -90,23 +88,4 @@
             </tr>
         </table>
     {/if}
-
-
-    {if isset($graphIDs.3) && $graphIDs.3}
-        <img src='plugins/statistics/getGraph.php?id={$graphIDs.3}'>
-        <hr>
-    {/if}
-    {if isset($graphIDs.4) && $graphIDs.4}
-        <img src='plugins/statistics/getGraph.php?id={$graphIDs.4}'>
-        <hr>
-    {/if}
-    {if isset($graphIDs.5) && $graphIDs.5}
-        <img src='plugins/statistics/getGraph.php?id={$graphIDs.5}'>
-        <hr>
-    {/if}
-    {if isset($graphIDs.6) && $graphIDs.6}
-        <img src='plugins/statistics/getGraph.php?id={$graphIDs.6}'>
-        <hr>
-    {/if}
-
 {/if}
