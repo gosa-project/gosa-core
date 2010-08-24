@@ -136,7 +136,6 @@ class statistics extends plugin
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
 
-        $this->reloadGraphs();
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
@@ -175,11 +174,11 @@ class statistics extends plugin
                 msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
             }elseif($res){
                 $this->statisticData = $this->prepareGraphData($res); 
-                $this->reloadGraphs();
             }
             $this->rpcHandle_Error = !$this->rpcHandle->success();
         }
-
+        
+        $this->reloadGraphs();
 
         $smarty->assign('seriesListPerGraph', $this->seriesListPerGraph);
         $smarty->assign('skipSeries', $this->skipSeries);
@@ -401,9 +400,29 @@ class statistics extends plugin
             $seriesCnt ++;
         }
 
+        // Create a dataSet containing all series 
+        $allSeriesDataSet = clone $dataSet;
+        if(!in_array('errorsPerInterval', $this->skipSeries[$gID])){
+            $allSeriesDataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
+            $allSeriesDataSet->SetSerieName(_('Error'), 'Errors');
+            $allSeriesDataSet->AddSerie('Errors');
+        }
+
         // Add timeline
         $dataSet->AddPoint($gData['dates'], 'date');
         $dataSet->SetAbsciseLabelSerie('date');  
+
+        // Read graph from cache?
+        $pCache = new pCache('/var/spool/gosa/');
+        if($pCache->IsInCache($gID,$allSeriesDataSet->GetData())){
+            $filename =  $pCache->GetHash($gID,$allSeriesDataSet->GetData());
+            $filename = '/var/spool/gosa/'.$filename;    
+            if(file_exists($filename) && is_readable($filename)){
+                $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE)).rand(0,99999);
+                session::set('statistics::graphFile'.$this->graphIDs[$gID],$filename);
+                return;
+            }
+        }
 
         $chart = new pChart(900,230);  
         $chart->setFixedScale(0.000,$lineMax);
@@ -456,6 +475,7 @@ class statistics extends plugin
         $file = '/tmp/graph_'.$this->graphIDs[$gID];
         $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
+        $pCache->WriteToCache($gID,$allSeriesDataSet->GetData(),$chart);   
 
         // Keep a list of all selecteable data-series, to allow the user to disable
         //  or enable series on demand.
@@ -549,6 +569,18 @@ class statistics extends plugin
         $dataSet->AddPoint($keys,"Serie2");  
         $dataSet->SetAbsciseLabelSerie("Serie2");  
 
+        // Read graph from cache?
+        $pCache = new pCache('/var/spool/gosa/');
+        if($pCache->IsInCache($gID,$dataSet->GetData())){
+            $filename =  $pCache->GetHash($gID,$dataSet->GetData());
+            $filename = '/var/spool/gosa/'.$filename;    
+            if(file_exists($filename) && is_readable($filename)){
+                $this->graphIDs[$gID] = preg_replace("/[^0-9]/","",microtime(TRUE)).rand(0,99999);
+                session::set('statistics::graphFile'.$this->graphIDs[$gID],$filename);
+                return;
+            }
+        }
+
         // Set graph area
         $x = 400;
         $y = 200;
@@ -565,6 +597,7 @@ class statistics extends plugin
         $file = '/tmp/graph_'.$this->graphIDs[$gID];
         $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphIDs[$gID],$file);
+        $pCache->WriteToCache($gID,$dataSet->GetData(),$chart);   
     }
 }
 ?>
