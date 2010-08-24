@@ -10,11 +10,8 @@ class statChart{
     var $graphData = array();    
     var $graphID = 0;
     var $enableCaching = TRUE;
-    
     var $skipSeries = array();
-
     var $graphName = 0;
-
     var $seriesList = array();
 
     function __construct(&$config,$gData = array())

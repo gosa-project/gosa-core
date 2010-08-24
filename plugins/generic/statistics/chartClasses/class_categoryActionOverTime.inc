@@ -3,7 +3,7 @@
 class categoryActionsOverTime extends statChart
 {
     var $title = 'Plugin usage over time';
-    var $enableCaching = TRUE;
+    var $enableCaching = FALSE;
 
     function __construct(&$config)
     {
@@ -70,7 +70,7 @@ class categoryActionsOverTime extends statChart
         $chart = new pChart(900,230);  
         $chart->setFixedScale(0.000,$lineMax);
         $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
-        $chart->setGraphArea(50,8,830,200);  
+        $chart->setGraphArea(50,28,630,200);  
         $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
         $chart->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
         $chart->drawGraphArea(255,255,255,TRUE);  
@@ -98,7 +98,7 @@ class categoryActionsOverTime extends statChart
             $dataSet->AddSerie('Errors');
         }
 
-        $chart->drawLegend(750,30,$dataSet->GetDataDescription(),255,255,255);
+        $chart->drawLegend(720,0,$dataSet->GetDataDescription(),255,255,255);
 
         // Draw the error graph on top of the other graphs now.
         // But remove the category-graph before. 
