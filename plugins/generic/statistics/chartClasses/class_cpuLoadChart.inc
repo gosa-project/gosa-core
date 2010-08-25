@@ -2,8 +2,8 @@
 
 class cpuLoadChart extends memoryUsageChart
 {
-    var $title = 'CPU load';
-    var $enableCaching = TRUE;
+    protected $title = 'CPU load';
+    protected $enableCaching = TRUE;
 
     function __construct(&$config)
     {

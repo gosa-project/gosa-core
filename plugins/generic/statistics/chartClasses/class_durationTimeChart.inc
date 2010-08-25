@@ -2,8 +2,8 @@
 
 class durationTimeChart extends memoryUsageChart
 {
-    var $title = 'Plugin duration';
-    var $enableCaching = TRUE;
+    protected $title = 'Plugin duration';
+    protected $enableCaching = TRUE;
 
     function __construct(&$config)
     {

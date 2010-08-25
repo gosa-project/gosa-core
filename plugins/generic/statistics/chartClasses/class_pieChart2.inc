@@ -2,10 +2,8 @@
 
 class pieChart2 extends pieChart1
 {
-    var $title = 'Action usage';
-    var $enableCaching = FALSE;
-
-    var $keyName = "actionsPerPluginAction";
+    protected $title = 'Action usage';
+    protected $keyName = "actionsPerPluginAction";
 
     function __construct(&$config)
     {

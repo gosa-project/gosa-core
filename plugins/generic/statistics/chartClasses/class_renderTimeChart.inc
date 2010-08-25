@@ -2,8 +2,8 @@
 
 class renderTimeChart extends memoryUsageChart
 {
-    var $title = 'Render time';
-    var $enableCaching = TRUE;
+    protected $title = 'Render time';
+    protected $enableCaching = TRUE;
 
     function __construct(&$config)
     {

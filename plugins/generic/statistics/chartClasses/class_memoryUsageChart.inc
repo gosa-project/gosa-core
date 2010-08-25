@@ -2,8 +2,8 @@
 
 class memoryUsageChart extends statChart
 {
-    var $title = 'Memory usage';
-    var $enableCaching = TRUE;
+    protected $title = 'Memory usage';
+    protected $enableCaching = TRUE;
 
     function __construct(&$config)
     {

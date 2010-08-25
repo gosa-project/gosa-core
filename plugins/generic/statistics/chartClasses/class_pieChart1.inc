@@ -2,10 +2,8 @@
 
 class pieChart1 extends statChart
 {
-    var $title = 'Plugin usage';
-    var $enableCaching = FALSE;
-
-    var $keyName = "actionsPerCategory";
+    protected $title = 'Plugin usage';
+    protected $keyName = "actionsPerCategory";
 
 
     function __construct(&$config)

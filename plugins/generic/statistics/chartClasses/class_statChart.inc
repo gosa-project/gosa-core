@@ -3,16 +3,16 @@
 class statChart{
 
     // Graph data 
-    var $statisticData = array();       // Via rpc received stats
+    protected $statisticData = array();       // Via rpc received stats
     
     // Font used in graphs
-    var $font = "./themes/default/fonts/LiberationSans-Regular.ttf";
-    var $graphData = array();    
-    var $graphID = 0;
-    var $enableCaching = TRUE;
-    var $skipSeries = array();
-    var $graphName = 0;
-    var $seriesList = array();
+    protected $font = "./themes/default/fonts/LiberationSans-Regular.ttf";
+    protected $graphData = array();    
+    protected $graphID = 0;
+    protected $enableCaching = TRUE;
+    protected $skipSeries = array();
+    protected $graphName = 0;
+    protected $seriesList = array();
 
     function __construct(&$config,$gData = array())
     {

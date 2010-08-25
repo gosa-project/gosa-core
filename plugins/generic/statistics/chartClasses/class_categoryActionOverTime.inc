@@ -2,8 +2,7 @@
 
 class categoryActionsOverTime extends statChart
 {
-    var $title = 'Plugin usage over time';
-    var $enableCaching = FALSE;
+    protected $title = 'Plugin usage over time';
 
     function __construct(&$config)
     {
