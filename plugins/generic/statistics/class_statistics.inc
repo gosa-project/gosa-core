@@ -35,6 +35,7 @@ class statistics extends plugin
         $this->graphs[] = new cpuLoadChart($config); 
         $this->graphs[] = new renderTimeChart($config); 
         $this->graphs[] = new durationTimeChart($config); 
+        $this->graphs[] = new objectCountChart($config); 
         $this->staticChart1 = new pieChart1($config); 
         $this->staticChart2 = new pieChart2($config); 
 
@@ -203,7 +204,11 @@ class statistics extends plugin
      *               date strings.
      */
     function prepareGraphData($res)
-    {
+    {   
+        // Object categories which has to mapped to 'systems'
+        $mapSystems = array('server','terminal','workstation', 'opsi', 
+                'component','phone', 'winworkstation', 'printer', 'incoming');
+
         /* Build up array which represents the amount of errors per
          *  interval.
          */
@@ -262,11 +267,42 @@ class statistics extends plugin
             ksort($gData['actionsPerInterval'][$category]);
         }
 
+        /* Prepare object count per interval array.
+         */   
+        $gData['objectCountPerInterval'] = array(); 
+        foreach($res['objectCountPerInterval'] as $category => $data){
+            if(empty($category)) continue;
+            if(in_array($category,$mapSystems)){
+                $category = 'systems';
+            }
+
+            // Skip series which are not interesting for us
+            if(!in_array($category,array('users','groups','department','systems','ogroups','fai'))){
+                $category = 'remaining';
+            }
+
+            foreach($data as $dateStr => $count){
+                $date = strtotime($dateStr);
+
+                if(!isset($gData['objectCountPerInterval'][$category][$date])){
+                    $gData['objectCountPerInterval'][$category][$date]=0;
+                }
+                $gData['objectCountPerInterval'][$category][$date] += $count;
+            }
+            ksort($gData['objectCountPerInterval'][$category]);
+        }
+        // Move remaining to the end of the list
+        if(isset($gData['objectCountPerInterval']['remaining'])){
+            $data = $gData['objectCountPerInterval']['remaining'];
+            unset($gData['objectCountPerInterval']['remaining']);
+            $gData['objectCountPerInterval']['remaining'] = $data;
+        }
+
         // Clean data from unusable categories like ('terminals workstations, ...')
         foreach($gData as $serieName => $seriesData){
             foreach($seriesData as $key => $data){
                 $list = preg_split("/, /", $key);
-                if(count(array_intersect(array('server','terminal','workstation', 'opsi', 'component'), $list))){
+                if(count(array_intersect($mapSystems, $list))){
                     unset($gData[$serieName][$key]);
                     $gData[$serieName]['systems'] = $data;
                 }
