@@ -36,7 +36,9 @@ class memoryUsageChart extends statChart
         $dataSet->AddAllSeries();  
         $dataSet->AddPoint($this->graphData['dates'], 'date');
         $dataSet->SetAbsciseLabelSerie('date');  
-        
+       
+        echo $this->enableCaching;
+ 
         // Read graph from cache?
         $pCache = new pCache('/var/spool/gosa/');
         if($this->enableCaching && $pCache->IsInCache(get_class(),$dataSet->GetData())){
@@ -62,7 +64,8 @@ class memoryUsageChart extends statChart
         $chart->drawLegend(650,30,$dataSet->GetDataDescription(),255,255,255);  
 
         $chart->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2, FALSE);
-        $chart->drawFilledCubicCurve($dataSet->GetData(),$dataSet->GetDataDescription(),.1,50); 
+#        $chart->drawFilledCubicCurve($dataSet->GetData(),$dataSet->GetDataDescription(),.1,50); 
+        $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE); 
 
         // Generate new and unique graph id
         $this->graphID = preg_replace("/[^0-9]/","",microtime(TRUE));
