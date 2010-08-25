@@ -85,9 +85,10 @@ class statChart{
         foreach($list as $key => $item){
             $checked = (in_array($key, $this->skipSeries))? '': 'checked';
             $str .= "<span style='padding-right:20px'>".
-                    "   <input type='checkbox' name='addSeries_{$this->graphName}_{$key}' value='1'".
+                    "   <input id='addSeries_{$this->graphName}_{$key}' type='checkbox' ".
+                    "       name='addSeries_{$this->graphName}_{$key}' value='1'".
                     "       onClick=\"document.mainform.submit();\" ".
-                    "       {$checked}>{$item}".
+                    "       {$checked}><LABEL for='addSeries_{$this->graphName}_{$key}'>{$item}</LABEL>".
                     "   </span>";
         }
         return($str);

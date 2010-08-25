@@ -15,7 +15,7 @@ class objectCountChart extends statChart
      */ 
     function render()
     {
-        $lineMax = 100;
+        $lineMax = 20;
         $gData = $this->graphData;
         $dataSet = new pData;  
         $seriesCnt = 0;
@@ -59,7 +59,7 @@ class objectCountChart extends statChart
         }
 
         $chart = new pChart(900,230);  
-        $chart->setFixedScale(0.000,$lineMax);
+        $chart->setFixedScale(0,$lineMax);
         $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
         $chart->setGraphArea(50,28,630,200);  
         $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
@@ -73,9 +73,9 @@ class objectCountChart extends statChart
         // Only draw this graph if we've at least one series to draw! 
         if($seriesCnt){
             $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE);
+            $chart->drawLegend(720,0,$dataSet->GetDataDescription(),255,255,255);
         }
 
-        $chart->drawLegend(720,0,$dataSet->GetDataDescription(),255,255,255);
 
         // Generate new and unique graph id
         $this->graphID = preg_replace("/[^0-9]/","",microtime(TRUE));
