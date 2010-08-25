@@ -20,7 +20,7 @@ class statistics extends plugin
     var $graph1DatePicker1 = 0;
     var $graph1DatePicker2 = 0;
 
-    // A collection opf timestamps for unsubmitted statistics data.
+    // A collection of timestamps for unsubmitted statistics data.
     var $unsbmittedFiles = array();
 
     var $graphs = array();
@@ -39,7 +39,7 @@ class statistics extends plugin
         $this->staticChart2 = new pieChart2($config); 
 
         // Init start and stop times for graph 1
-        $this->graph1DatePicker1 = date('d.m.Y', time() - 14 * 24 * 60 *60);
+        $this->graph1DatePicker1 = date('d.m.Y', time() - 28 * 24 * 60 *60);
         $this->graph1DatePicker2 = date('d.m.Y', time());
 
         // First try to retrieve values via RPC
@@ -128,15 +128,6 @@ class statistics extends plugin
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
 
-        // Assign list of graphs 
-        $tmp = array();
-        foreach($this->graphs as $id => $gClass){
-            $tmp[$id] = $gClass->getTitle();
-        }
-        $smarty->assign("selectedGraphType", $this->selectedGraphType);
-        $smarty->assign("availableGraphs", $tmp);
-
-
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
         $smarty->assign("validRpcHandle", TRUE);
@@ -145,15 +136,25 @@ class statistics extends plugin
             return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
         }
 
+        // Assign list of selectable graphs 
+        $tmp = array();
+        foreach($this->graphs as $id => $gClass){
+            $tmp[$id] = $gClass->getTitle();
+        }
+        $smarty->assign("selectedGraphType", $this->selectedGraphType);
+        $smarty->assign("availableGraphs", $tmp);
+
         // Send stats 
         if(isset($_POST['transmitStatistics'])){
             $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
             foreach($this->unsbmittedFiles as $filename => $date){
-                $tmp = stats::dumpTables($filename);
+                $tmp = stats::generateStatisticDump($filename);
                 $dump = array();
                 foreach($tmp as $entry){
                     $dump[] = array_values($entry);
                 }
+                $objectCount = stats::getLdapObjectCount($this->config, TRUE);
+                $dump = array_merge($dump, $objectCount);
                 $res = $this->rpcHandle->updateInstanceStatus($dump);
                 if(!$this->rpcHandle->success()){
                     msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
@@ -166,7 +167,7 @@ class statistics extends plugin
         }
 
         // Transmit daily statistics to GOsa-Server
-        if(isset($_POST['receiveStatistics']) && $this->rpcConfigured){
+        if((isset($_POST['receiveStatistics']) || !count($this->statisticData)) && $this->rpcConfigured){
             $start = strtotime($this->graph1DatePicker1);
             $stop  = strtotime($this->graph1DatePicker2);
             $res = $this->rpcHandle->getInstanceStats($start,$stop);
@@ -177,7 +178,8 @@ class statistics extends plugin
             }
             $this->rpcHandle_Error = !$this->rpcHandle->success();
         }
-        
+       
+        // Update graphs 
         $this->reloadGraphs();
 
         $smarty->assign('staticChart1_ID', $this->staticChart1->getGraphID());

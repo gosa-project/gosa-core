@@ -282,7 +282,7 @@ class stats
      *  @param      int     to      The timestamp to end the request.
      *  @return     array           An array containing the requested entries.
      */  
-    static function dumpTables($filename)
+    static function generateStatisticDump($filename)
     {
         // Get database connection
         $TABLE_NAME = stats::$tableName;
@@ -330,6 +330,85 @@ class stats
         if(file_exists($path.'/'.$filename)){
             #unlink($path.'/'.$filename);
             rename($path.'/'.$filename,  $path.'/'.$filename.".old");
+        }
+    }
+
+    
+    static function getLdapObjectCount($config, $statisticConformResult = FALSE)    
+    {
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
+        
+        // A list of objectClasses to search for, indexed by their 
+        //  object-category
+        $ocsToSearchFor = array(
+                "department" => array("gosaDepartment"),
+                "devices" => array("gotoDevice"),
+                "fai" => array("FAIobject"),
+                "gofaxlist" => array("goFaxRBlock","goFaxSBlock"),
+                "gofonconference" => array("goFonConference"),
+                "phone" => array("goFonHardware"),
+                "gofonmacro" => array("goFonMacro"),
+                "users" => array("gosaAccount"),
+                "acls" => array("gosaAcl","gosaRole"),
+                "application" => array("gosaApplication"),
+                "ogroups" => array("gosaGroupOfNames"),
+                "roles" => array("organizationalRole"),
+                "server" => array("goServer"),
+                "printer" => array("gotoPrinter"),
+                "terminal" => array("gotoTerminal"),
+                "workstation" => array("gotoWorkstation"),
+                "winworkstation" => array("sambaSamAccount"),
+                "incoming" => array("goHard"),
+                "component" => array("ieee802Device"),
+                "mimetypes" => array("gotoMimeType"),
+                "groups" => array("posixGroup"),
+                "sudo" => array("sudoRole"));
+
+        // Build up a filter which contains all objectClass combined by OR.
+        // We will later sum up the results using PHP.
+        $filter = "";
+        $categoryCounter = array();
+        foreach($ocsToSearchFor as $category => $ocs){
+            foreach($ocs as $oc){
+                $filter.= "(objectClass={$oc})";
+            }
+            $categoryCounter[$category] = 0;
+        }
+        $filter = "(|{$filter})";
+
+        // Initiate the ldap query
+        $res = $ldap->search($filter, array('objectClass'));
+        if($ldap->success()) {
+
+            // Count number of results per category
+            while($entry = $ldap->fetch()){
+                foreach($ocsToSearchFor as $category => $ocs){
+                    if(count(array_intersect($ocs, $entry['objectClass']))){
+                        $categoryCounter[$category] ++;
+                        break; 
+                    }
+                }
+            }
+        }
+        arsort($categoryCounter);
+
+        // Do we have to return the result as SQL INSERT statement?
+        if($statisticConformResult){ 
+            $uuid           = $config->getGOsaUUID();
+            $type           = 'objectCount';
+            $plugin         = '';
+            $action         = '';
+            $date           = date('Y-m-d');
+            $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
+            $cpu_load       = sqlite_escape_string(number_format(stats::get_cpu_load(),4,'.',''));
+            $sql = array();
+            foreach($categoryCounter as $category => $amount){
+                $sql[] = array($type, $plugin, $category,$action,$uuid,$date, 0,0,$amount,$memory_usage,$cpu_load,'');
+            }
+            return($sql);
+        }else{
+            return($categoryCounter); 
         }
     }
 }
