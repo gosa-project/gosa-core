@@ -23,11 +23,19 @@ class memoryUsageChart extends statChart
      */ 
     function render()
     {
+
         // Add series data to dataSet        
         $dataSet = new pData;  
-        $max = 0;
+        $max = 1;
         foreach($this->series as $seriesName => $seriesDesc){
-            if(isset($this->graphData[$this->dataName][$seriesName])){
+
+            // Check if we've useable series data
+            $renderable = 
+                (isset($this->graphData[$this->dataName][$seriesName])) && 
+                (count($this->graphData[$this->dataName][$seriesName]));
+
+            // Add series if it has at least one result
+            if($renderable){
                 $dataSet->AddPoint($this->graphData[$this->dataName][$seriesName],$seriesName);
                 $dataSet->SetSerieName($seriesDesc,$seriesName);
                 if($max < max($this->graphData[$this->dataName][$seriesName])) $max = max($this->graphData[$this->dataName][$seriesName]);
@@ -50,7 +58,7 @@ class memoryUsageChart extends statChart
         }
 
         $chart = new pChart(800,230);  
-        $chart->setFixedScale(0.0001,($max*1.1));  
+        $chart->setFixedScale(0,$max);  
         $chart->setFontProperties("./themes/default/fonts/LiberationSans-Regular.ttf",10);  
         $chart->setGraphArea(50,30,585,200);  
         $chart->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  

@@ -28,12 +28,15 @@ class pieChart1 extends statChart
         
         // Detect max value and throw out entries less than 1% 
         //  the will else be unreadable
-        $max = max($data);
+
+        $max = (count($data)) ? max($data) : 1;
         $pos = 0;
         foreach($data as $key => $count){
             if($pos >=7 || ($count / $max)*100 < 1) break;
             $pos ++;
         }
+
+        $this->graphID = 0;
  
         $dataRes = array_slice($data,0,$pos);
 
@@ -47,6 +50,8 @@ class pieChart1 extends statChart
         foreach($keys as $id => $cat){
             $keys[$id] = $this->getCategoryTranslation($cat);
         }
+
+        if(!count($data)) return;
 
         // Dataset definition   
         $dataSet = new pData;  
@@ -76,8 +81,8 @@ class pieChart1 extends statChart
         $chart->setFontProperties($this->font,10); 
         if(count($data)) {
             $chart->drawPieGraph($dataSet->GetData(),$dataSet->GetDataDescription(),($x/3),($y/2)-10,($y/2),PIE_PERCENTAGE,TRUE,50,20,6);  
+            $chart->drawPieLegend(($x/3*2),15,$dataSet->GetData(),$dataSet->GetDataDescription(),255,255,255);
         }
-        $chart->drawPieLegend(($x/3*2),15,$dataSet->GetData(),$dataSet->GetDataDescription(),255,255,255);
 
         // Store graph data
         $this->graphID = preg_replace("/[^0-9]/","",microtime(TRUE));

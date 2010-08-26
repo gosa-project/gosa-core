@@ -58,11 +58,19 @@
             <td>
                 {if isset($staticChart1_ID) && $staticChart1_ID}
                     <img src='plugins/statistics/getGraph.php?id={$staticChart1_ID}'>
+                {else}
+                    <div style='height:200px; width: 400px;'>
+                        <i>{t}No statistic data for given period{/t}</i>
+                    </div>
                 {/if}
             </td>
             <td>
                 {if isset($staticChart2_ID) && $staticChart2_ID}
                     <img src='plugins/statistics/getGraph.php?id={$staticChart2_ID}'>
+                {else}
+                    <div style='height:200px; width: 400px;'>
+                        <i>{t}No statistic data for given period{/t}</i>
+                    </div>
                 {/if}
             </td>
         </tr>
