@@ -20,32 +20,39 @@ class actionSelectChart extends statChart
         $gData = $this->graphData;
         $dataSet = new pData;  
         $seriesCnt = 0;
+        $pCache = new pCache('/var/spool/gosa/');
 
-        if(!isset($gData['actionTypeGraph'][$this->current_action])){
-            $this->current_action = key($gData['actionTypeGraph']);
-        }
+        // Check if we've received data for the graph we've to render now.
+        $seriesValid = count($gData['actionTypeGraph']);
+        if($seriesValid){
 
-        $dataBase = $gData['actionTypeGraph'][$this->current_action];
-    
-        foreach($dataBase as $category => $entriesPerDate){
-            if(empty($category) || in_array($category, $this->skipSeries)) continue;
+            // Ensure that we've a valid action type selected.
+            if(!isset($gData['actionTypeGraph'][$this->current_action])){
+                $this->current_action = key($gData['actionTypeGraph']);
+            }
 
-            // Add results to our data set.
-            $dataSet->AddPoint($entriesPerDate, $category);
-            $dataSet->SetSerieName($this->getCategoryTranslation($category), $category);
-            $dataSet->AddSerie($category);
+            $dataBase = $gData['actionTypeGraph'][$this->current_action];
 
-            // Detect maximum value, to adjust the Y-Axis
-            $tmpMax = max($entriesPerDate);
-            if($tmpMax > $lineMax) $lineMax = $tmpMax;
-            $seriesCnt ++;
-        }
+            foreach($dataBase as $category => $entriesPerDate){
+                if(empty($category) || in_array($category, $this->skipSeries)) continue;
 
-        // Keep a list of all selecteable data-series, to allow the user to disable
-        //  or enable series on demand.
-        $this->seriesList = array();
-        foreach($dataBase as $key => $data){
-            $this->seriesList[$key] = $this->getCategoryTranslation($key); 
+                // Add results to our data set.
+                $dataSet->AddPoint($entriesPerDate, $category);
+                $dataSet->SetSerieName($this->getCategoryTranslation($category), $category);
+                $dataSet->AddSerie($category);
+
+                // Detect maximum value, to adjust the Y-Axis
+                $tmpMax = max($entriesPerDate);
+                if($tmpMax > $lineMax) $lineMax = $tmpMax;
+                $seriesCnt ++;
+            }
+
+            // Keep a list of all selecteable data-series, to allow the user to disable
+            //  or enable series on demand.
+            $this->seriesList = array();
+            foreach($dataBase as $key => $data){
+                $this->seriesList[$key] = $this->getCategoryTranslation($key); 
+            }
         }
 
         // Add timeline
@@ -53,7 +60,6 @@ class actionSelectChart extends statChart
         $dataSet->SetAbsciseLabelSerie('date');  
 
         // Read graph from cache?
-        $pCache = new pCache('/var/spool/gosa/');
         if($this->enableCaching && $pCache->IsInCache(get_class(),$dataSet->GetData())){
             $filename =  $pCache->GetHash(get_class(),$dataSet->GetData());
             $filename = '/var/spool/gosa/'.$filename;    
