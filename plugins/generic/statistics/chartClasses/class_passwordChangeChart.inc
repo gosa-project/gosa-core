@@ -75,6 +75,8 @@ class passwordChangeChart extends statChart
         // Only draw this graph if we've at least one series to draw! 
         if($seriesCnt){
             $chart->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),50,TRUE);
+            #$chart->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);  
+            #$chart->drawStackedBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);  
             $chart->drawLegend(720,0,$dataSet->GetDataDescription(),255,255,255);
         }
 
