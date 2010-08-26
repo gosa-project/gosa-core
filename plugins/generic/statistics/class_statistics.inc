@@ -36,6 +36,7 @@ class statistics extends plugin
         $this->graphs[] = new renderTimeChart($config); 
         $this->graphs[] = new durationTimeChart($config); 
         $this->graphs[] = new objectCountChart($config); 
+        $this->graphs[] = new actionSelectChart($config); 
         $this->staticChart1 = new pieChart1($config); 
         $this->staticChart2 = new pieChart2($config); 
 
@@ -273,6 +274,31 @@ class statistics extends plugin
                 $gData['actionsPerInterval'][$category][$date]=$count;
             }
             ksort($gData['actionsPerInterval'][$category]);
+        }
+
+        /* Prepare actions-per-interval array.
+         */   
+        $gData['actionsAndCategoryPerInterval'] = array(); 
+        foreach($res['actionsAndCategoryPerInterval'] as $action => $aData){
+            foreach($aData as $category => $data){
+                if(empty($category)) continue;
+
+                $list = preg_split("/, /", $category);
+                if(count(array_intersect($mapSystems, $list))){ 
+                    $category = 'systems';
+                }
+
+                // Add missing date stamps
+                foreach($gData['dates'] as $timestamp => $value){
+                    $gData['actionsAndCategoryPerInterval'][$action][$category][$timestamp]=0;
+                }
+
+                foreach($data as $dateStr => $count){
+                    $date = strtotime($dateStr);
+                    $gData['actionsAndCategoryPerInterval'][$action][$category][$date]=$count;
+                }
+                ksort($gData['actionsAndCategoryPerInterval'][$action][$category]);
+            }
         }
 
         /* Prepare object count per interval array.
