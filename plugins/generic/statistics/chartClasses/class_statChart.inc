@@ -31,6 +31,7 @@ class statChart{
         }
     }
 
+
     function getTitle()
     {
         return(_($this->title));

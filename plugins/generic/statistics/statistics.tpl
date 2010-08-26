@@ -19,7 +19,7 @@
 
     <table>
         <tr>
-            <td>{t}Generate report for{/t}</td>
+            <td><b>{t}Generate report for{/t}:</b></td>
             <td style='width:220px;'>
                  <input type="text" id="graph1DatePicker1" name="graph1DatePicker1" class="date" value="{$graph1DatePicker1}">
                  <script type="text/javascript">
@@ -33,7 +33,6 @@
                   {/literal}
                  </script>
             </td>
-            <td> - </td>
             <td style='width:220px;'>
                 <input type="text" id="graph1DatePicker2" name="graph1DatePicker2" class="date" value="{$graph1DatePicker2}">
                 <script type="text/javascript">
@@ -48,7 +47,7 @@
                 </script>
             </td>
             <td>
-                <button name='receiveStatistics'>{t}Receive{/t}</button>
+                <button name='receiveStatistics'>{t}Update{/t}</button>
             </td>
         </tr>
     </table>
@@ -70,10 +69,11 @@
     </table>
 
     {if isset($curGraphID) && $curGraphID}
+        <hr>
+        <b>{t}Select report type{/t}:</b>&nbsp;
         <select name='selectedGraphType' onChange="document.mainform.submit();" size='1'>
             {html_options options=$availableGraphs selected=$selectedGraphType}
         </select>
-        <hr>
         <table>
             <tr>
                 <td>
