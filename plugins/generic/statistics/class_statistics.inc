@@ -37,6 +37,7 @@ class statistics extends plugin
         $this->graphs[] = new durationTimeChart($config); 
         $this->graphs[] = new objectCountChart($config); 
         $this->graphs[] = new actionSelectChart($config); 
+        $this->graphs[] = new passwordChangeChart($config); 
         $this->staticChart1 = new pieChart1($config); 
         $this->staticChart2 = new pieChart2($config); 
 
