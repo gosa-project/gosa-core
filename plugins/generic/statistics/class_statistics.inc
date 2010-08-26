@@ -343,6 +343,22 @@ class statistics extends plugin
             }
         }
 
+        // Get info about used password hashes 
+        $gData['usedPasswordHashes'] = array();
+        foreach($res['usedPasswordHashes'] as $category => $data){
+
+            // Add missing date stamps
+            foreach($gData['dates'] as $timestamp => $value){
+                $gData['usedPasswordHashes'][$category][$timestamp]=0;
+            }
+
+            foreach($data as $dateStr => $count){
+                $date = strtotime($dateStr);
+                $gData['usedPasswordHashes'][$category][$date]=$count;
+            }
+            ksort($gData['usedPasswordHashes'][$category]);
+        }
+
         // Get action usage, to be able to render a pie chart about most done actions.
         $gData['actionsPerPluginAction'] = $res['actionsPerPluginAction'];
         return($gData);
