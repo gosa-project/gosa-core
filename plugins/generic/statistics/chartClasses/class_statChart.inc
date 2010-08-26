@@ -79,6 +79,11 @@ class statChart{
         return($this->seriesList);
     }
 
+    function getGraphOptions()
+    {
+        return("");
+    }
+
     function getSeriesSelector()
     {
         $str = "<input type='hidden' name='{$this->graphName}_posted' value='1'>";

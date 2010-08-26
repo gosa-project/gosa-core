@@ -74,6 +74,7 @@
         <select name='selectedGraphType' onChange="document.mainform.submit();" size='1'>
             {html_options options=$availableGraphs selected=$selectedGraphType}
         </select>
+        {$curGraphOptions}
         <table>
             <tr>
                 <td>

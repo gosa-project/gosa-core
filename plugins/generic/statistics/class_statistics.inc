@@ -195,6 +195,7 @@ class statistics extends plugin
 
         $curGraph = $this->graphs[$this->selectedGraphType];
         $smarty->assign('curGraphID', $curGraph->getGraphID());
+        $smarty->assign('curGraphOptions', $curGraph->getGraphOptions());
         $smarty->assign('curSeriesSelector', $curGraph->getSeriesSelector());
         $smarty->assign('unsbmittedFiles', count($this->unsbmittedFiles));
         $smarty->assign('unsbmittedFilesMsg', sprintf(
