@@ -2,7 +2,8 @@
 
 class actionSelectChart extends statChart
 {
-    protected $title = 'Plugin usage over time';
+    protected $title = 'Action count per plugin';
+    protected $current_action = "";
 
     function __construct(&$config)
     {
@@ -19,6 +20,10 @@ class actionSelectChart extends statChart
         $gData = $this->graphData;
         $dataSet = new pData;  
         $seriesCnt = 0;
+
+        if(!isset($gData['actionsAndCategoryPerInterval'][$this->current_action])){
+            $this->current_action = key($gData['actionsAndCategoryPerInterval']);
+        }
 
         $dataBase = $gData['actionsAndCategoryPerInterval'][$this->current_action];
     
