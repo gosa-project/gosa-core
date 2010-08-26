@@ -30,7 +30,7 @@ if ($remove_lock){
 /* Remove this plugin from session
 */
 if ( $cleanup ){
-  session::un_set('statistics');
+   # session::un_set('statistics');
 }else{
 
 

@@ -21,7 +21,7 @@ class statistics extends plugin
     var $graph1DatePicker2 = 0;
 
     // A collection of timestamps for unsubmitted statistics data.
-    var $unsbmittedFiles = array();
+    var $unsbmittedFiles = NULL;
 
     var $graphs = array();
     var $selectedGraphType = 0;
@@ -53,9 +53,6 @@ class statistics extends plugin
                     "WyukwauWoid2",
                     TRUE);
         }
-
-        // Get list of unsubmitted files.
-        $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
     }
 
 
@@ -83,8 +80,12 @@ class statistics extends plugin
      */ 
     function getUnsubmittedStatistics()
     {
-        $available = $this->getLocalStatisticsFiles();
         $alreadyTransmitted = $this->getStatisticsDatesFromServer();
+        if($alreadyTransmitted == NULL){
+            return(NULL);
+        }
+
+        $available = $this->getLocalStatisticsFiles();
 
         $unsubmitted = array();
         foreach($available as $key => $day){
@@ -113,6 +114,7 @@ class statistics extends plugin
         $dates = array();
         if(!$this->rpcHandle->success()){
             msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);
+            return(NULL);
         }else{
             foreach($res as $date){
                 $dates[$date] = strtotime($date);
@@ -128,6 +130,11 @@ class statistics extends plugin
         $smarty = get_smarty();
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
+
+        // Get list of unsubmitted files.
+        if($this->unsbmittedFiles == NULL){
+            $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
+        }
 
         // Do not render anything if we are not prepared to send and receive data via rpc.
         $smarty->assign("rpcConfigured", $this->rpcConfigured);
