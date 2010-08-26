@@ -1743,6 +1743,7 @@ function dn2base($dn)
  * */
 function check_command($cmdline)
 {
+  return(TRUE);  
   $cmd= preg_replace("/ .*$/", "", $cmdline);
 
   /* Check if command exists in filesystem */
