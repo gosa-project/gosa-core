@@ -1630,7 +1630,7 @@ class plugin
           if(!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value)){
             continue;
           }
-          $command= preg_replace("/%$name/", $value, $command);
+          $command= preg_replace("/%$name/", escapeshellarg($value), $command);
         }
       }
 
