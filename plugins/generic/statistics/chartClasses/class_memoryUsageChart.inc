@@ -46,7 +46,7 @@ class memoryUsageChart extends statChart
         $dataSet->SetAbsciseLabelSerie('date');  
        
         // Read graph from cache?
-        $pCache = new pCache('/var/spool/gosa/');
+        $pCache = new pCache($this->cachePath);
         if($this->enableCaching && $pCache->IsInCache(get_class(),$dataSet->GetData())){
             $filename =  $pCache->GetHash(get_class(),$dataSet->GetData());
             $filename = '/var/spool/gosa/'.$filename;    

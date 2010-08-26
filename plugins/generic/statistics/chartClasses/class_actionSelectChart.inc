@@ -20,7 +20,7 @@ class actionSelectChart extends statChart
         $gData = $this->graphData;
         $dataSet = new pData;  
         $seriesCnt = 0;
-        $pCache = new pCache('/var/spool/gosa/');
+        $pCache = new pCache($this->cachePath);
 
         // Check if we've received data for the graph we've to render now.
         $seriesValid = count($gData['actionTypeGraph']);

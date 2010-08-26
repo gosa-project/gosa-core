@@ -14,8 +14,23 @@ class statChart{
     protected $graphName = 0;
     protected $seriesList = array();
 
+    protected $cachePath = "";
+
     function __construct(&$config,$gData = array())
     {
+        // Try to get the configured stats path to store image for caching reasons
+        $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
+        if(!empty($path)){
+            $this->cachePath = "{$path}/images/";
+        }else{
+            $this->cachePath = "/var/spool/gosa/stats/images/";
+        }
+
+        // Try to create the cache path
+        if(!is_dir($this->cachePath)){
+            @mkdir($this->cachePath);
+        }
+
         $this->config = $config;
 
         // Collect category translations
