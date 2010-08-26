@@ -267,20 +267,20 @@ class statistics extends plugin
 
         /* Prepare actions-per-interval array.
          */   
-        $gData['actionsPerInterval'] = array(); 
-        foreach($res['actionsPerInterval'] as $category => $data){
+        $gData['actionsGraph'] = array(); 
+        foreach($res['actionsGraph'] as $category => $data){
             if(empty($category)) continue;
             foreach($data as $dateStr => $count){
                 $date = strtotime($dateStr);
-                $gData['actionsPerInterval'][$category][$date]=$count;
+                $gData['actionsGraph'][$category][$date]=$count;
             }
-            ksort($gData['actionsPerInterval'][$category]);
+            ksort($gData['actionsGraph'][$category]);
         }
 
         /* Prepare actions-per-interval array.
          */   
-        $gData['actionsAndCategoryPerInterval'] = array(); 
-        foreach($res['actionsAndCategoryPerInterval'] as $action => $aData){
+        $gData['actionTypeGraph'] = array(); 
+        foreach($res['actionTypeGraph'] as $action => $aData){
             foreach($aData as $category => $data){
                 if(empty($category)) continue;
 
@@ -291,14 +291,14 @@ class statistics extends plugin
 
                 // Add missing date stamps
                 foreach($gData['dates'] as $timestamp => $value){
-                    $gData['actionsAndCategoryPerInterval'][$action][$category][$timestamp]=0;
+                    $gData['actionTypeGraph'][$action][$category][$timestamp]=0;
                 }
 
                 foreach($data as $dateStr => $count){
                     $date = strtotime($dateStr);
-                    $gData['actionsAndCategoryPerInterval'][$action][$category][$date]=$count;
+                    $gData['actionTypeGraph'][$action][$category][$date]=$count;
                 }
-                ksort($gData['actionsAndCategoryPerInterval'][$action][$category]);
+                ksort($gData['actionTypeGraph'][$action][$category]);
             }
         }
 

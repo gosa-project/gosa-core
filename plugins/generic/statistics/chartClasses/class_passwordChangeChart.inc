@@ -2,7 +2,7 @@
 
 class passwordChangeChart extends statChart
 {
-    protected $title = 'Password chnages';
+    protected $title = 'Password changes';
     protected $current_action = "";
 
     function __construct(&$config)

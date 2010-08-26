@@ -21,11 +21,11 @@ class actionSelectChart extends statChart
         $dataSet = new pData;  
         $seriesCnt = 0;
 
-        if(!isset($gData['actionsAndCategoryPerInterval'][$this->current_action])){
-            $this->current_action = key($gData['actionsAndCategoryPerInterval']);
+        if(!isset($gData['actionTypeGraph'][$this->current_action])){
+            $this->current_action = key($gData['actionTypeGraph']);
         }
 
-        $dataBase = $gData['actionsAndCategoryPerInterval'][$this->current_action];
+        $dataBase = $gData['actionTypeGraph'][$this->current_action];
     
         foreach($dataBase as $category => $entriesPerDate){
             if(empty($category) || in_array($category, $this->skipSeries)) continue;
@@ -97,7 +97,7 @@ class actionSelectChart extends statChart
         $current = $this->current_action; 
         $str = "&nbsp;<b>"._("Action").":</b>&nbsp;".
             "<select name='actionSelectChart_action' size='1' onChange='document.mainform.submit();'>";
-        foreach(array_keys($this->graphData['actionsAndCategoryPerInterval']) as $name){
+        foreach(array_keys($this->graphData['actionTypeGraph']) as $name){
             $checked = ($name==$current)? 'selected' : '';
             $str .= "\n<option value='{$name}' {$checked}>"._($name)."</option>";
         }

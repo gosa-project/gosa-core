@@ -20,7 +20,7 @@ class categoryActionsOverTime extends statChart
         $errorMax = (max($gData['errorsPerInterval']) < 100)? 100:max($gData['errorsPerInterval']);
         $dataSet = new pData;  
         $seriesCnt = 0;
-        foreach($gData['actionsPerInterval'] as $category => $entriesPerDate){
+        foreach($gData['actionsGraph'] as $category => $entriesPerDate){
             if(empty($category) || in_array($category, $this->skipSeries)) continue;
 
             // Add results to our data set.
@@ -37,7 +37,7 @@ class categoryActionsOverTime extends statChart
         // Keep a list of all selecteable data-series, to allow the user to disable
         //  or enable series on demand.
         $this->seriesList = array();
-        foreach($gData['actionsPerInterval'] as $key => $data){
+        foreach($gData['actionsGraph'] as $key => $data){
             $this->seriesList[$key] = $this->getCategoryTranslation($key); 
         }
         $this->seriesList['errorsPerInterval'] = _("Error");
@@ -105,7 +105,7 @@ class categoryActionsOverTime extends statChart
 
             // Remove all graph series and add the error-series, then draw the new graph.
             // (It is not relevant if it was really added before, so we simply remove all series!)
-            foreach($gData['actionsPerInterval'] as $category => $data){
+            foreach($gData['actionsGraph'] as $category => $data){
                 $dataSet->RemoveSerie($category);
             }
             $chart->setFixedScale(0,$errorMax);
