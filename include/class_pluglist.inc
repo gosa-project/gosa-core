@@ -196,7 +196,7 @@ class pluglist {
 					$plDescription= $vars['plDescription'];
 
 					$index= $this->get_index($info['CLASS']);
-					$href= "main.php?plug=$index&amp;reset=1";
+					$href= "main.php?plug=$index&reset=1";
 
 					if(!$vars){
 						$plHeadline 	= _("Unknown");
