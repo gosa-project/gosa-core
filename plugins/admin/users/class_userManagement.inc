@@ -341,7 +341,8 @@ class userManagement extends management
                   $ldap->cd($this->config->current['BASE']);
                   $ldap->cat($this->dn,array('uid'));
                   $attrs = $ldap->fetch();
-                  exec($this->config->get_cfg_value("passwordHook")." ".$attrs['uid'][0]." ".$_POST['new_password'], $resarr);
+                  exec($this->config->get_cfg_value("passwordHook")." ".
+                          escapeshellarg($attrs['uid'][0])." ".escapeshellarg($_POST['new_password']), $resarr);
               }
 
               // The user has to change his password on next login
