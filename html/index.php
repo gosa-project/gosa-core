@@ -378,7 +378,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       new log("security","login","",array(),"User \"$username\" logged in successfully") ;
       $plist= new pluglist($config, $ui);
       if(isset($plug) && isset($plist->dirlist[$plug])){
-        header ("Location: main.php?plug=".$plug."&amp;global_check=1");
+        header ("Location: main.php?plug=".$plug."&global_check=1");
       }else{
         header ("Location: main.php?global_check=1");
       }
