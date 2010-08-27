@@ -2676,7 +2676,7 @@ function get_base_from_hook($dn, $attrib)
     $command= $config->get_cfg_value("baseIdHook");
 
     if ($command != ""){
-      $command.= " '".LDAP::fix($dn)."' $attrib";
+      $command.= " ".escapeshellarg(LDAP::fix($dn))." ".escapeshellarg($attrib);
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
         exec($command, $output);
@@ -3059,8 +3059,8 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
       if ($command != ""){
         /* Walk through attribute list */
-        $command= preg_replace("/%userPassword/", $password, $command);
-        $command= preg_replace("/%dn/", $dn, $command);
+        $command= preg_replace("/%userPassword/", escapeshellarg($password), $command);
+        $command= preg_replace("/%dn/", escapeshellarg($dn), $command);
 
         if (check_command($command)){
           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
