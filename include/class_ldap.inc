@@ -879,7 +879,6 @@ class LDAP{
   /*! \brief  Generates an ldif for all entries matching the filter settings, scope and limit.
    *  @param  $dn           The entry to export.
    *  @param  $filter       Limit the exported object to those maching this filter.
-   *  @param  $attributes   Specify the attributes to export here, empty means all.
    *  @param  $scope        'base', 'sub' .. see manpage for 'ldapmodify' for details.
    *  @param  $limit        Limits the result.
    */
