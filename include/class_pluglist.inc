@@ -215,6 +215,11 @@ class pluglist
         }
       }
 
+      // Remove empty sections 
+      if(count($this->config->data['MENU'][$section]) == 0){ 
+          unset($this->config->data['MENU'][$section]); 
+      } 
+
       $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
       $cfg= $this->config->data['MENU'];
