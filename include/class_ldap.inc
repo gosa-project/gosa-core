@@ -902,7 +902,7 @@ class LDAP{
       }
       $scope = (!empty($scope))?' -s '.$scope: '';
 
-      // Prepare paramters
+      // Prepare parameters to be valid for shell execution
       $dn = escapeshellarg($dn);
       $pwd = $this->bindpw;
       $host = escapeshellarg($this->hostname);
