@@ -883,21 +883,57 @@ class LDAP{
    *  @param  $scope        'base', 'sub' .. see manpage for 'ldapmodify' for details.
    *  @param  $limit        Limits the result.
    */
-  function generateLdif ($dn, $filter= "(objectClass=*)", $attributes= array(), $scope = 'sub', $limit=0)
+  function generateLdif ($dn, $filter= "(objectClass=*)", $scope = 'sub', $limit=0)
   {
       $attrs  = (count($attributes))?implode($attributes,' '):'';
-      $scope = (!empty($scope))?' -s '.$scope: '';
+
+      // Ensure that limit is numeric if not skip here.
+      if(!empty($limit) && !is_numeric($limit)){
+          trigger_error(sprintf("Invalid parameter for limit '%s', a numeric value is required."), $limit);
+          return(NULL);
+      }
       $limit = (!$limit)?'':' -z '.$limit;
+
+      // Check scope values
+      $scope = trim($scope);
+      if(!empty($scope) && !in_array($scope, array('base', 'one', 'sub', 'children'))){
+          trigger_error(sprintf("Invalid parameter for scope '%s', please use 'base', 'one', 'sub' or 'children'."), $scope);
+          return(NULL);
+      }
+      $scope = (!empty($scope))?' -s '.$scope: '';
+
+      // Prepare paramters
       $dn = escapeshellarg($dn);
-      $admin = escapeshellarg($this->binddn);
-      $pwd = escapeshellarg($this->bindpw);
-      $filter = escapeshellarg($filter);
+      $pwd = $this->bindpw;
       $host = escapeshellarg($this->hostname);
-      $cmd = "ldapsearch -x -LLLL -D {$admin} -w {$pwd} {$filter} {$limit} {$scope} -H {$host} -b {$dn} $attrs ";
-      ob_start();
-      passthru($cmd);
-      $res=ob_get_contents();
-      ob_end_clean();
+      $admin = escapeshellarg($this->binddn);
+      $filter = escapeshellarg($filter);
+      $cmd = "ldapsearch -x -LLLL -D {$admin} {$filter} {$limit} {$scope} -H {$host} -b {$dn} -W ";
+
+      // Create list of process pipes  
+      $descriptorspec = array(
+              0 => array("pipe", "r"),  // stdin
+              1 => array("pipe", "w"),  // stdout
+              2 => array("pipe", "w")); // stderr
+    
+      // Try to open the process 
+      $process = proc_open($cmd, $descriptorspec, $pipes);
+      if (is_resource($process)) {
+
+          // Write the password to stdin
+          fwrite($pipes[0], $pwd);
+          fclose($pipes[0]);
+
+          // Get results from stdout and stderr
+          $res = stream_get_contents($pipes[1]);
+          $err = stream_get_contents($pipes[2]);
+          fclose($pipes[1]);
+
+          // Close the process and check its return value
+          if(proc_close($process) != 0){
+              trigger_error($err);
+          }
+      }
       return($res);
   }
 

@@ -13,7 +13,7 @@ class ldifViewer extends plugin
         $this->config = &$config;
         $this->dn = $dn;
         $ldap = $this->config->get_ldap_link();
-        $this->ldif=$ldap->generateLdif(LDAP::fix($this->dn),'(objectClass=*)',array(),'base');
+        $this->ldif=$ldap->generateLdif(LDAP::fix($this->dn),'(objectClass=*)','base');
     }
 
     function execute()

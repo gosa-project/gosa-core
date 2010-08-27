@@ -296,7 +296,7 @@ class SnapshotHandler {
 
       /* Create object */
       $data             = $ldap->generateLdif(LDAP::fix($dn),
-              "(&(!(objectClass=gosaDepartment))(!(objectClass=FAIclass)))",array(),'base');
+              "(&(!(objectClass=gosaDepartment))(!(objectClass=FAIclass)))",'base');
  
       $newName          = str_replace(".", "", $sec."-".$usec);
       $target= array();
