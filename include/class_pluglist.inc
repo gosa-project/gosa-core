@@ -261,7 +261,7 @@ class pluglist
         "\n      <script language='javascript' type='text/javascript'>".
         "\n        function openPlugin(id){".
         "\n          return question(\""._("You are currently editing a database entry. Do you want to discard the changes?")."\",".
-        "\n            \"main.php?plug=\" + id + \"&amp;reset=1\");".
+        "\n            \"main.php?plug=\" + id + \"&reset=1\");".
         "\n        }".
         "\n      </script>\n"; 
     }
