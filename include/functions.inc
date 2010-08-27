@@ -3154,7 +3154,9 @@ function generate_smb_nt_hash($password)
       return ("");
     }
   } else {
-	  $tmp= $config->get_cfg_value("core",'sambaHashHook')." ".escapeshellarg($password);
+	  $tmp = $config->get_cfg_value("core",'sambaHashHook');
+      $tmp = preg_replace("/%userPassword/", escapeshellarg($password), $tmp);
+      $tmp = preg_replace("/%password/", escapeshellarg($password), $tmp);
 	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
 
 	  exec($tmp, $ar);

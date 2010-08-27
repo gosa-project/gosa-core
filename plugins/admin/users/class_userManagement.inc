@@ -320,6 +320,21 @@ class userManagement extends management
                     }
                 }
 
+                // Check password via check hook
+                if ($this->config->get_cfg_value("core","passwordHook") != ""){
+                    $ldap = $this->config->get_ldap_link();
+                    $ldap->cd($this->config->current['BASE']);
+                    $ldap->cat($this->dn,array('uid'));
+                    $attrs = $ldap->fetch();
+                    $cmd = $this->config->get_cfg_value("core","passwordHook");
+                    $cmd = preg_replace("/%current_password/",'',$cmd);
+                    $cmd = preg_replace("/%new_password/",escapeshellarg($new_password), $cmd);
+                    $cmd = preg_replace("/%uid/",escapeshellarg($attrs['uid'][0]), $cmd);
+                    $cmd = preg_replace("/%dn/",escapeshellarg($attrs['dn']), $cmd);
+                    exec($cmd,$resarr);
+                    $message = array_merge($message, $resarr);
+                }
+
                 // Display errors
                 if (count($message) != 0){
                     msg_dialog::displayChecks($message);
@@ -335,13 +350,6 @@ class userManagement extends management
                     if(!change_password ($this->dn, $new_password)){
                         return($smarty->fetch(get_template_path('password.tpl', TRUE)));
                     }
-                }
-                if ($this->config->get_cfg_value("core","passwordHook") != ""){
-                    $ldap = $this->config->get_ldap_link();
-                    $ldap->cd($this->config->current['BASE']);
-                    $ldap->cat($this->dn,array('uid'));
-                    $attrs = $ldap->fetch();
-                    exec($this->config->get_cfg_value("core","passwordHook")." ".$attrs['uid'][0]." ".$new_password, $resarr);
                 }
         
                 // The user has to change his password on next login

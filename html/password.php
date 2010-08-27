@@ -289,11 +289,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
         /* Passed quality check, just try to change the password now */
         $output= "";
         if ($config->get_cfg_value("core","passwordHook") != "") {
-            exec(
-                $config->get_cfg_value("core","passwordHook")." ".$ui->username." ".
-                $_POST['current_password']." ".$_POST['new_password'],
-                $resarr
-            );
+
+            $cmd = $config->get_cfg_value("core","passwordHook");
+            $cmd = preg_replace("/%current_password/",escapeshellarg(get_post('current_password')), $cmd);
+            $cmd = preg_replace("/%new_password/",escapeshellarg(get_post('new_password')), $cmd);
+            $cmd = preg_replace("/%uid/",escapeshellarg($ui->username), $cmd);
+            $cmd = preg_replace("/%dn/",escapeshellarg($ui->dn), $cmd);
+            exec($cmd, $resarr);
             if (count($resarr) > 0) {
                 $output= join('\n', $resarr);
             }
