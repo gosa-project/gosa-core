@@ -663,7 +663,7 @@ class plugin
       /* Additional attributes */
       foreach ($tmp as $name => $len){
         $value = $add_attrs[$name];
-        $command= str_replace("%$name", "$value", $command);
+        $command= str_replace("%$name", escapeshellarg($value), $command);
       }
 
       if (check_command($command)){
@@ -709,7 +709,7 @@ class plugin
       /* Additional attributes */
       foreach ($tmp as $name => $len){
         $value = $add_attrs[$name];
-        $command= str_replace("%$name", "$value", $command);
+        $command= str_replace("%$name", escapeshellarg($value), $command);
       }
 
       if (check_command($command)){
@@ -753,7 +753,7 @@ class plugin
       /* Additional attributes */
       foreach ($tmp as $name => $len){
         $value = $add_attrs[$name];
-        $command= str_replace("%$name", "$value", $command);
+        $command= str_replace("%$name", escapeshellarg($value), $command);
       }
 
       if (check_command($command)){
@@ -1252,7 +1252,7 @@ class plugin
                   if(!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value)){
                       continue;
                   }
-                  $command= preg_replace("/%$name/", $value, $command);
+                  $command= preg_replace("/%$name/", escapeshellarg($value), $command);
               }
           }
 
