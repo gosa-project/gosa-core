@@ -111,7 +111,8 @@ class password extends plugin
 
       /* Call external password quality hook ?*/
       $check_hook   = $this->config->get_cfg_value("passwordHook") != "";
-      $hook         = $this->config->get_cfg_value("passwordHook")." ".$ui->username." ".$current_password." ".$new_password;
+      $hook         = $this->config->get_cfg_value("passwordHook")." ".
+          escapeshellarg($ui->username)." ".escapeshellarg($current_password)." ".escapeshellarg($new_password);
       if($check_hook){
         exec($hook,$resarr);
         $check_hook_output = "";
