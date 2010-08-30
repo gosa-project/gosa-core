@@ -89,7 +89,10 @@ You can override an icon by specifying the
 .I "icon"
 attribute.
 
-For every plugin, you can provide at least four additional hooks: 
+For every plugin, you can provide at least seven additional hooks: 
+.I precreate,
+.I preremove,
+.I premodify
 .I postcreate,
 .I postremove,
 .I postmodify
@@ -107,7 +110,7 @@ These keywords take a full executable path of a script. You can
 provide certain parameters in form of LDAP attributes. '%uid'
 will pass the current user id, '%dn' the current object dn, etc.
 
-The script gets executed after create, delete or modify tasks.
+The script gets executed before(pre) and after(post) create, delete or modify tasks.
 
 .I The
 .B check
