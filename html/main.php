@@ -431,7 +431,7 @@ if (isset($_POST['_channel_'])){
 } else {
 	$smarty->assign("channel", "");
 }
-
+$smarty->assign ("title","GOsa");
 $display= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl')).
           $smarty->fetch(get_template_path('framework.tpl'));
 
