@@ -212,13 +212,13 @@ class pluglist
               unset($this->config->data['MENU'][$section][$id]); 
             }
           }
+
+          // Remove empty sections 
+          if(count($this->config->data['MENU'][$section]) == 0){ 
+              unset($this->config->data['MENU'][$section]); 
+          } 
         }
       }
-
-      // Remove empty sections 
-      if(count($this->config->data['MENU'][$section]) == 0){ 
-          unset($this->config->data['MENU'][$section]); 
-      } 
 
       $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
