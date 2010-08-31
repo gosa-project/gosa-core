@@ -1241,7 +1241,7 @@ class posixAccount extends plugin
     }
 
     /* Adjust shadow checkboxes */
-    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive") as $val){
+    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowExpire") as $val){
       if ($this->$val != 0){
         $oval= "activate_".$val;
         $this->$oval= "1";
