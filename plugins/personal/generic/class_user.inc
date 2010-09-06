@@ -1313,8 +1313,19 @@ class user extends plugin
     /* Check if we are allowed to create/move this user */
     if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
       $message[]= msgPool::permCreate();
-    }elseif($this->orig_dn != "new" && $this->new_dn != $this->orig_dn && !$this->acl_is_moveable($this->base)){
-      $message[]= msgPool::permMove();
+    }elseif($this->orig_dn != "new" && $this->new_dn != $this->orig_dn){
+
+        /* Check if the objects dn has changed while the base was left unchanged. 
+         * In this case we've to check move permissions for the object itself.
+         * 
+         * If the base has changed then we've to check the permission for the destination
+         *  base.
+         */
+        if($this->orig_base == $this->base && !$this->acl_is_moveable($this->dn)){
+            $message[]= msgPool::permMove();
+        }elseif($this->orig_base != $this->base && !$this->acl_is_moveable($this->base)){
+            $message[]= msgPool::permMove();
+        }
     }
 
     /* UID already used? */
