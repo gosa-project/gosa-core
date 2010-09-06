@@ -479,8 +479,9 @@ class group extends plugin
                 }
             }
         }
-
+        
         $this->memberUid[$uid]= $uid;
+        $this->reload();
     }
 
 
@@ -517,44 +518,63 @@ class group extends plugin
          */    
         $filter = "";
 
+    
+
         // Merge in partial uids in multiple edit
-        $uids = array_keys($this->memberUid);
+        $allUids = array_keys($this->memberUid);
         if($this->multiple_support_active) {
-            $uids = array_merge($uids,  array_keys($this->memberUid_used_by_some));
+            $allUids = array_merge($allUids,  array_keys($this->memberUid_used_by_some));
         }
 
-        if ($this->config->get_cfg_value("core","ldapFilterNestingLimit") == "" ||
-                count($uids) < $this->config->get_cfg_value("core","ldapFilterNestingLimit")){
-            foreach ($uids as $value){
-                if(!isset($this->members[$value])){
-                    $filter .= "(uid=".normalizeLdap($value).")";
-                }
+        // Do not request data for users we've already fetched before.
+        foreach($allUids as $key => $uid){
+            if(isset($this->dnMapping[$uid])) unset($allUids[$key]);
+        }
+        $allUids = array_values($allUids);
+
+        // To resolve the usernames out of the 'uid' we've to perform ldap queries. 
+        // To keep the amount of queries as short as possible, we combine the query 
+        //  for 'sn','givenName','..' for serveral users in one single query:
+        //      (|(uid=hans)(uid=peter)(uid=hubert)(..))
+        // 
+        // Unfortunately there is a filter length limit which causes the query to be invalid,
+        //  we've to split these huge query again into shorter query strings. 
+        // 
+        // maxPerRound specifies the amount of queries we can combine into a 
+        //  single query.
+        $maxPerRound = $this->config->get_cfg_value("core","ldapFilterNestingLimit");
+        if( $maxPerRound == "" ) {
+            $maxPerRound = count($allUids);
+        }
+
+        for ( $added = 0; $added < count($allUids); $added += $maxPerRound ) {
+
+            // First build the query....
+            $start = $added;
+            $end = $added + $maxPerRound;
+            $filter = "";
+            for ( $done = $start; $done < $end; $done++ ) {
+                if(!isset($allUids[$done])) break;
+                $value = $allUids[$done];
+                $filter .= "(uid=".normalizeLdap($value).")";
             }
-        }
 
-        if(!empty($filter)){    
+            // Retrieve the data to LDAP
             $ldap->cd($this->config->current['BASE']);
             $ldap->search("(&(objectClass=gosaAccount)(|".$filter."))",array("dn", "uid","sn","givenName"));
-            while($attrs = $ldap->fetch()){
+            while( $attrs = $ldap->fetch() ) {
                 $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
                 $this->members[$attrs['uid'][0]] = $attrs;
                 $this->allusers[$attrs['uid'][0]]= $attrs;
-            } 
+            }
         }
 
         /* check if all uids are resolved */
-        if ($this->config->get_cfg_value("core","ldapFilterNestingLimit") == "" ||
-                count($this->memberUid) < $this->config->get_cfg_value("core","ldapFilterNestingLimit")){
-            foreach ($this->memberUid as $value){
-                if(!isset($this->members[$value])){
-                    $this->members[$value] = "";
-                }
-            }  
-        }else{
-            foreach ($this->memberUid as $value){
+        foreach ($this->memberUid as $value){
+            if(!isset($this->members[$value])){
                 $this->members[$value] = "";
-            }  
-        }
+            }
+        }  
     }
 
 
