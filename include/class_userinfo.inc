@@ -227,7 +227,7 @@ class userinfo
              */
             if(isset($acl_set['acl'])){ 
                 foreach($acl_set['acl'] as $object => $object_acls){
-                    if(isset($object_acls[0]) && strpos($object_acls[0],"s")){
+                    if(isset($object_acls[0]) && strpos($object_acls[0],"s") !== FALSE){
                         unset($without_self_acl[$sdn][$dn][$acl_id]['acl'][$object]);
                     }
                 }
