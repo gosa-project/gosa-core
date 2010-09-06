@@ -1333,6 +1333,7 @@ class plugin
     $ui = session::global_get('ui');
     if($ui->dn == $old_dn){
       $ui->dn = $new_dn;
+      $ui->loadACL();
       session::global_set('ui',$ui);
       new log("view","acl/".get_class($this),$this->dn,array(),"Updated current object dn from '".$old_dn."' to '".$new_dn."'");
     }
