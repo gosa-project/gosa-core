@@ -1067,20 +1067,6 @@ class user extends plugin
 
     }
 
-#    /* This only gets called when user is renaming himself */
-#    $ldap= $this->config->get_ldap_link();
-#   if ($this->dn != $this->new_dn){
-#
-#     /* Write entry on new 'dn' */
-#     $this->update_acls($this->dn,$this->new_dn);
-#     $this->move($this->dn, $this->new_dn);
-#
-#     /* Happen to use the new one */
-#     change_ui_dn($this->dn, $this->new_dn);
-#     $this->dn= $this->new_dn;
-#   }
-
-
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
        new entries. So do a check first... */
     $ldap= $this->config->get_ldap_link();
