@@ -93,6 +93,8 @@ if (! $cleanup ){
                     $MyAccountTabs->password_change_needed = TRUE;
                 }else{
                     session::un_set ('MyAccountTabs');
+                    $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true); 
+                    $MyAccountTabs->setReadOnly(TRUE);
                 }
             } else {
                 msg_dialog::displayChecks($message);
