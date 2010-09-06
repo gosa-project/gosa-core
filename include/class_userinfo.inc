@@ -226,7 +226,7 @@ class userinfo
             /* Remove all acl entries which are especially for the current user (self acl)
              */
             foreach($acl_set['acl'] as $object => $object_acls){
-              if(isset($object_acls[0]) && strpos($object_acls[0],"s")){
+              if(isset($object_acls[0]) && strpos($object_acls[0],"s") !== FALSE){
                 unset($without_self_acl[$sdn][$dn][$acl_id]['acl'][$object]);
               }
             }
