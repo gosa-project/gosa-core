@@ -158,13 +158,39 @@ class statistics extends plugin
         if(isset($_POST['transmitStatistics'])){
             $this->unsbmittedFiles = $this->getUnsubmittedStatistics();
             foreach($this->unsbmittedFiles as $filename => $date){
+
+                $strDate = date('Y-m-d', $date);
                 $tmp = stats::generateStatisticDump($filename);
                 $dump = array();
+                $invalidDateCount = 0;
                 foreach($tmp as $entry){
+                   
+                    // Check if the result date equals the report file date
+                    //  - If not update the entry. 
+                    if($entry['date'] != $strDate){
+                        $entry['date'] = $strDate;
+                        $invalidDateCount ++;
+                    }
                     $dump[] = array_values($entry);
                 }
-                $objectCount = stats::getLdapObjectCount($this->config, TRUE);
-                $dump = array_merge($dump, $objectCount);
+
+                // Merge result with ldap object count 
+                $objectCount = stats::getLdapObjectCount($this->config, TRUE, date('Y-m-d', $date));
+                foreach($objectCount as $entry){
+
+                    // Check if the result date equals the report file date
+                    //  - If not update the entry. 
+                    if($entry['date'] != $strDate){
+                        $entry['date'] = $strDate;
+                        $invalidDateCount ++;
+                    }
+                    $dump[] = array_values($entry);
+                }
+
+                // Warn about invalid dates transmitted
+                if($invalidDateCount) trigger_error(sprintf("Report contained %s entries with invalid date string!",$invalidDateCount));
+            
+                // Send in our report now.
                 $res = $this->rpcHandle->updateInstanceStatus($dump);
                 if(!$this->rpcHandle->success()){
                     msg_dialog::display(_("Error"),msgPool::rpcError($this->rpcHandle->get_error()),ERROR_DIALOG);

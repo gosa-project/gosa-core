@@ -334,7 +334,7 @@ class stats
     }
 
     
-    static function getLdapObjectCount($config, $statisticConformResult = FALSE)    
+    static function getLdapObjectCount($config, $statisticConformResult = FALSE, $date = "")    
     {
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
@@ -399,12 +399,24 @@ class stats
             $type           = 'objectCount';
             $plugin         = '';
             $action         = '';
-            $date           = date('Y-m-d');
+            $date           = (empty($date))?date('Y-m-d'):$date;
             $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
             $cpu_load       = sqlite_escape_string(number_format(stats::get_cpu_load(),4,'.',''));
             $sql = array();
             foreach($categoryCounter as $category => $amount){
-                $sql[] = array($type, $plugin, $category,$action,$uuid,$date, 0,0,$amount,$memory_usage,$cpu_load,'');
+                $sql[] = array(
+                        "type" => $type,
+                        "plugin" => $plugin,
+                        "category" => $category,
+                        "action" => $action,
+                        "uuid" => $uuid,
+                        "date" => $date,
+                        "duration" => 0,
+                        "render_time" => 0,
+                        "amount" => $amount,
+                        "mem_usage" => $memory_usage,
+                        "load" => $cpu_load,
+                        "info" => '');
             }
             return($sql);
         }else{
