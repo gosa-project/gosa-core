@@ -294,12 +294,13 @@ class tests {
   }
   /*
    * Compares two dates
+   * @param $dataA as String in german dateformat
+   * @param $dataB as String in german dateformat
+   * @return float or false on error
    * 
-   * <0 => a<b
+   * * <0 => a<b
    * 0 => a=b
    * >0 => a>b
-   * 
-   * 
    */
  public static function compareDate($dateA, $dateB){
 	 /*
