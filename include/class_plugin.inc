@@ -1585,7 +1585,7 @@ class plugin
    *  @param    Allows to a add special replacements.
    */
   static function callHook($plugin, $cmd, $addAttrs= array(), &$returnOutput = array(), 
-          &$returnCode = NULL, &$errorOutput, $displayErrors = TRUE)
+          &$returnCode = NULL, &$errorOutput = array(), $displayErrors = TRUE)
   {
       global $config;
       $command = $config->configRegistry->getPropertyValue(get_class($plugin),$cmd);
