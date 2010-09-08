@@ -100,82 +100,75 @@ class password extends plugin
             }
 
 
-            /* Should we check different characters in new password */
+            // Get configuration flags for further input checks.
             $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
             $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
-
-            /* Enable length check ? */
             $check_length = $this->config->get_cfg_value("core","passwordMinLength") != "";
             $length       = $this->config->get_cfg_value("core","passwordMinLength");
 
-            // Call the pre-event command and check its return code
-            $attrs = array('current_password', escapeshellarg($current_password));
-            $attrs = array('new_password', escapeshellarg($new_password));
-            plugin::callHook($this, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
-            if($retCode === 0 && count($output)){
-                msg_dialog::display(_("Password change"),
-                        sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),
-                            implode($output)),WARNING_DIALOG);    
-            }
+            // Once an error has occured it is stored here.
+            $message = array();
 
             // Call the check hook
-            $checkRes = $this->callCheckHook($attrs);
-            if(count($checkRes)){
-                msg_dialog::display(_("Password change"),
-                        sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),
-                            implode($checkRes)),WARNING_DIALOG);    
-            }
-
-            // Call the post-event command and check its return code
             $attrs = array();
             $attrs['current_password'] = escapeshellarg($current_password);
             $attrs['new_password'] = escapeshellarg($new_password);
-            plugin::callHook($this, 'POSTMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
-            if($retCode === 0 && count($output)){
-                msg_dialog::display(_("Password change"),
-                        sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),
-                            implode($output)),WARNING_DIALOG);    
-            }
 
-
-            /* Call external password quality hook ?*/
+            // Depricated but execute for backward compability
             $check_hook   = $this->config->get_cfg_value("core","passwordHook") != "";
             $cmd = $this->config->get_cfg_value("core","passwordHook");
-            $cmd = preg_replace("/%current_password/",escapeshellarg($current_password), $cmd);
-            $cmd = preg_replace("/%new_password/",escapeshellarg($new_password), $cmd);
-            $cmd = preg_replace("/%uid/",escapeshellarg($ui->username), $cmd);
-            $cmd = preg_replace("/%dn/",escapeshellarg($ui->dn), $cmd);
-            if($check_hook){
-                exec($cmd,$resarr);
-                $check_hook_output = "";
-                if(count($resarr) > 0) {
-                    $check_hook_output= join('\n', $resarr);
+            if(!empty($cmd)){
+                $cmd = preg_replace("/%current_password/",escapeshellarg($current_password), $cmd);
+                $cmd = preg_replace("/%new_password/",escapeshellarg($new_password), $cmd);
+                $cmd = preg_replace("/%uid/",escapeshellarg($ui->username), $cmd);
+                $cmd = preg_replace("/%dn/",escapeshellarg($ui->dn), $cmd);
+                if($check_hook){
+                    exec($cmd,$resarr);
+                    $check_hook_output = "";
+                    if(count($resarr) > 0) {
+                        $check_hook_output= join('\n', $resarr);
+                        $message[] = sprintf(_("Password hook reported a problem: %s. Password change canceled!"),
+                                $check_hook_output);
+                    }
                 }
             }
 
-            /* Check given values */    
+            // Perform GOsa password policy checks 
             if(empty($current_password)){
-                msg_dialog::display(_("Password change"),
-                        _("You need to specify your current password in order to proceed."),WARNING_DIALOG);
-            }elseif ($new_password  != $repeated_password){
-                msg_dialog::display(_("Password change"),
-                        _("The passwords you've entered as 'New password' and 'Repeated new password' do not match."),WARNING_DIALOG);
-            } elseif ($new_password == ""){
-                msg_dialog::display(_("Password change"),
-                        _("The password you've entered as 'New password' is empty."),WARNING_DIALOG);
+                $message[] = _("You need to specify your current password in order to proceed.");
+            }elseif($new_password  != $repeated_password){
+                $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+            }elseif($new_password == ""){
+                $message[] = _("The password you've entered as 'New password' is empty.");
             }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
-                msg_dialog::display(_("Password change"),
-                        _("The password used as new and current are too similar."),WARNING_DIALOG);
+                $message[] = _("The password used as new and current are too similar.");
             }elseif($check_length && (strlen($new_password) < $length)){
-                msg_dialog::display(_("Password change"),
-                        _("The password used as new is to short."),WARNING_DIALOG);
+                $message[] = _("The password used as new is to short.");
             }elseif(!passwordMethod::is_harmless($new_password)){
-                msg_dialog::display(_("Password change"),
-                        _("The password contains possibly problematic Unicode characters!"),WARNING_DIALOG);
-            }elseif($check_hook && $check_hook_output != ""){
-                msg_dialog::display(_("Password change"),
-                        sprintf(_("External password changer reported a problem: %s."),$check_hook_output),WARNING_DIALOG);
-            }else{
+                $message[] = _("The password contains possibly problematic Unicode characters!");
+            }
+
+            // Call external check hook to validate the password change
+            if(!count($message)){
+                $checkRes = $this->callCheckHook($attrs);
+                if(count($checkRes)){
+                    $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),implode($checkRes));
+                }
+            }
+
+            // Call the pre-event command and check its return code
+            if(!count($message)){
+                plugin::callHook($this, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
+                if($retCode === 0 && count($output)){
+                    $message[] = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
+                }
+            }
+
+
+            // Some errors/warning occured, display them and abort password change.
+            if(count($message)){
+                msg_dialog::displayChecks($message);
+            }else{ 
 
                 /* Try to connect via current password */
                 $tldap = new LDAP(
@@ -200,7 +193,14 @@ class password extends plugin
                         gosa_log ("User/password has been changed");
                         $ui->password= $new_password;
                         session::set('ui',$ui);
-#$this->handle_post_events("modify",array("userPassword" => $new_password));
+
+                        // Call the post-event command and check its return code
+                        plugin::callHook($this, 'POSTMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
+                        if($retCode === 0 && count($output)){
+                            $message[] = sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),implode($output));
+                            echo "Rollback";
+                        }
+           
                         return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
                     }
                 }
