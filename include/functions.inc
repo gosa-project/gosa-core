@@ -2996,130 +2996,176 @@ function get_correct_class_name($cls)
  * \param string 'password' the password
  * \param int mode
  * \param string 'hash' which hash to use to encrypt it, default is empty
- * for cleartext storage.
+ *                  for cleartext storage.
+ * \param string    The users old password, this allows script based rollback mechanisms,
+ *                   the prehook will then be called witch switched newPassword/oldPassword. 
  * \return boolean TRUE on success FALSE on error
  */
-function change_password ($dn, $password, $mode=0, $hash= "")
+function change_password ($dn, $password, $mode=0, $hash= "", $old_password = "")
 {
-  global $config;
-  $newpass= "";
+    global $config;
+    $newpass= "";
 
-  /* Convert to lower. Methods are lowercase */
-  $hash= strtolower($hash);
+    /* Convert to lower. Methods are lowercase */
+    $hash= strtolower($hash);
 
-  // Get all available encryption Methods
+    // Get all available encryption Methods
 
-  // NON STATIC CALL :)
-  $methods = new passwordMethod(session::get('config'),$dn);
-  $available = $methods->get_available_methods();
+    // NON STATIC CALL :)
+    $methods = new passwordMethod(session::get('config'),$dn);
+    $available = $methods->get_available_methods();
 
-  // read current password entry for $dn, to detect the encryption Method
-  $ldap       = $config->get_ldap_link();
-  $ldap->cat ($dn, array("shadowLastChange", "userPassword", "uid"));
-  $attrs      = $ldap->fetch ();
+    // read current password entry for $dn, to detect the encryption Method
+    $ldap       = $config->get_ldap_link();
+    $ldap->cat ($dn, array("shadowLastChange", "userPassword","sambaNTPassword","sambaLMPassword", "uid"));
+    $attrs      = $ldap->fetch ();
+    $initialAttrs = $attrs;
 
-  /* Is ensure that clear passwords will stay clear */
-  if($hash == "" && isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
-    $hash = "clear";
-  }
-
-  // Detect the encryption Method
-  if ( (isset($attrs['userPassword'][0]) &&  preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)) ||  $hash != ""){
-
-    /* Check for supported algorithm */
-    mt_srand((double) microtime()*1000000);
-
-    /* Extract used hash */
-    if ($hash == ""){
-      $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
-    } else {
-      $test = new $available[$hash]($config,$dn);
-      $test->set_hash($hash);
+    /* Is ensure that clear passwords will stay clear */
+    if($hash == "" && isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
+        $hash = "clear";
     }
 
-  } else {
-    // User MD5 by default
-    $hash= "md5";
-    $test = new  $available['md5']($config, $dn);
-  }
+    // Detect the encryption Method
+    if ( (isset($attrs['userPassword'][0]) &&  preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)) ||  $hash != ""){
 
-  if($test instanceOf passwordMethod){
+        /* Check for supported algorithm */
+        mt_srand((double) microtime()*1000000);
 
-    stats::log('global', 'global', array('users'),  $action = 'change_password', $amount = 1, 0, $test->get_hash());
+        /* Extract used hash */
+        if ($hash == ""){
+            $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
+        } else {
+            $test = new $available[$hash]($config,$dn);
+            $test->set_hash($hash);
+        }
 
-    $deactivated = $test->is_locked($config,$dn);
-
-    /* Feed password backends with information */
-    $test->dn= $dn;
-    $test->attrs= $attrs;
-    $newpass= $test->generate_hash($password);
-
-    // Update shadow timestamp?
-    if (isset($attrs["shadowLastChange"][0])){
-      $shadow= (int)(date("U") / 86400);
     } else {
-      $shadow= 0;
+        // User MD5 by default
+        $hash= "md5";
+        $test = new  $available['md5']($config, $dn);
     }
 
-    // Write back modified entry
-    $ldap->cd($dn);
-    $attrs= array();
+    if($test instanceOf passwordMethod){
 
-    // Not for groups
-    if ($mode == 0){
+        stats::log('global', 'global', array('users'),  $action = 'change_password', $amount = 1, 0, $test->get_hash());
 
-        $tmp = $config->get_cfg_value('core','sambaHashHook');
-        if(!empty($tmp)){
+        $deactivated = $test->is_locked($config,$dn);
 
-            // Create SMB Password
-            $attrs= generate_smb_nt_hash($password);
+        /* Feed password backends with information */
+        $test->dn= $dn;
+        $test->attrs= $attrs;
+        $newpass= $test->generate_hash($password);
 
-            if ($shadow != 0){
-                $attrs['shadowLastChange']= $shadow;
+        // Update shadow timestamp?
+        if (isset($attrs["shadowLastChange"][0])){
+            $shadow= (int)(date("U") / 86400);
+        } else {
+            $shadow= 0;
+        }
+
+        // Write back modified entry
+        $ldap->cd($dn);
+        $attrs= array();
+
+        // Not for groups
+        if ($mode == 0){
+
+            $tmp = $config->get_cfg_value('core','sambaHashHook');
+            if(!empty($tmp)){
+
+                // Create SMB Password
+                $attrs= generate_smb_nt_hash($password);
+
+                if ($shadow != 0){
+                    $attrs['shadowLastChange']= $shadow;
+                }
             }
         }
-    }
 
-    $attrs['userPassword']= array();
-    $attrs['userPassword']= $newpass;
+        $attrs['userPassword']= array();
+        $attrs['userPassword']= $newpass;
 
-    $ldap->modify($attrs);
+        $ldap->modify($attrs);
 
-    /* Read ! if user was deactivated */
-    if($deactivated){
-      $test->lock_account($config,$dn);
-    }
-
-    new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
-
-    if (!$ldap->success()) {
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, ERROR_DIALOG));
-    } else {
-
-      /* Run backend method for change/create */
-      if(!$test->set_password($password)){
-        return(FALSE);
-      }
-
-      /* Find postmodify entries for this class */
-      $command= $config->get_cfg_value("password","postmodify");
-
-      if ($command != ""){
-        /* Walk through attribute list */
-        $command= preg_replace("/%userPassword/", escapeshellarg($password), $command);
-        $command= preg_replace("/%dn/", escapeshellarg($dn), $command);
-
-        if (check_command($command)){
-          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
-          exec($command);
-        } else {
-          $message= sprintf(_("Command %s specified as post modify action for plugin %s does not exist!"), bold($command), bold("password"));
-          msg_dialog::display(_("Configuration error"), $message, ERROR_DIALOG);
+        /* Read ! if user was deactivated */
+        if($deactivated){
+            $test->lock_account($config,$dn);
         }
-      }
+
+        new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
+
+        $passwordPlugin = new password($config,$dn);
+
+
+        // Try to write changes to the ldap
+        $preRollback = FALSE;
+        $ldapRollback = FALSE;
+        $success = TRUE;
+        if (!$ldap->success()) {
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, ERROR_DIALOG));
+            $preRollback = TRUE;
+            $success =FALSE;
+        } else {
+
+            // Now call the passwordMethod change mechanism.
+            if(!$test->set_password($password)){
+                $preRollback = TRUE;
+                $success = FALSE;
+            }else{
+        
+                // Execute the password hook
+                plugin::callHook($passwordPlugin, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = FALSE);
+                if($retCode === 0 && count($output)){
+                    $attrs = array();
+                    $attrs['userPassword'] = escapeshellarg($password);
+                    $attrs['current_password'] = escapeshellarg($password);
+                    $attrs['old_password'] = escapeshellarg($old_password);
+                    $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
+                    msg_dialog::displayChecks(array($message));
+                }else{
+                    $preRollback = TRUE;
+                    $ldapRollback = TRUE;
+                    $success = FALSE;
+
+                    // Call password method again and send in old password to 
+                    //  keep the database consistency
+                    $test->set_password($old_password);
+                }
+            }
+        }
+
+        // Setting password in the ldap database or further operation failed, we should now execute 
+        //  the plugins pre-event hook, using switched passwords new/old password.
+        // This ensures that passwords which were set outside of GOsa, will be reset to its 
+        //  starting value.
+        if($preRollback && !empty($old_password)){
+            $attrs = array();
+            $attrs['current_password'] = escapeshellarg($password);
+            $attrs['new_password'] = escapeshellarg($old_password);
+            plugin::callHook($passwordPlugin, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = FALSE);
+            if($retCode === 0 && count($output)){
+                $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
+                msg_dialog::displayChecks(array($message));
+            }
+        }
+        
+        // We've written the password to the ldap database, but executing the postmodify hook failed.
+        // Now, we've to rollback all password related ldap operations.
+        if($ldapRollback){
+            $attrs = array();
+            foreach(array("userPassword","sambaNTPassword","sambaLMPassword") as $attr){
+                $attrs[$attr] = $initialAttrs[$attr][0];
+            }
+            $ldap->cd($dn);
+            $ldap->modify($attrs);
+            if(!$ldap->success()){
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, ERROR_DIALOG));
+            }
+        }
+
+        return($success);
     }
-    return(TRUE);
-  }
 }
 
 
