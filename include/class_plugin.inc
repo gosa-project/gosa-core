@@ -1584,79 +1584,105 @@ class plugin
    *            Replaces placeholder by class values of this plugin instance.
    *  @param    Allows to a add special replacements.
    */
-  static function callHook($plugin, $cmd, $addAttrs= array(), &$returnOutput = array(), &$returnCode = NULL)
+  static function callHook($plugin, $cmd, $addAttrs= array(), &$returnOutput = array(), 
+          &$returnCode = NULL, &$errorOutput, $displayErrors = TRUE)
   {
-    global $config;
-    $command = $config->configRegistry->getPropertyValue(get_class($plugin),$cmd);
-   
-    if (empty($command)){
-        $returnCode = 0; // Simulate a return code to tell the caller that everythin is fine.
-    }else{
+      global $config;
+      $command = $config->configRegistry->getPropertyValue(get_class($plugin),$cmd);
 
-      // Walk trough attributes list and add the plugins attributes. 
-      foreach ($plugin->attributes as $attr){
-        if (!is_array($plugin->$attr)){
-          $addAttrs[$attr] = $plugin->$attr;
-        }
-      }
-      $ui = get_userinfo();
-      $addAttrs['callerDN']=$ui->dn;
-      $addAttrs['dn']=$plugin->dn;
-      $addAttrs['location']=$config->current['NAME'];
+      $returnCode = 0; // Simulate a return code to tell the caller that everythin is fine.
+      $returnOutput = array();
+      $arr = array();
 
-      // Sort attributes by length, ensures correct replacement
-      $tmp = array();
-      foreach($addAttrs as $name => $value){
-        $tmp[$name] =  strlen($name);
-      }
-      arsort($tmp);
+      if (!empty($command)){
 
-      // Now replace the placeholder 
-      foreach ($tmp as $name => $len){
-        $value = $addAttrs[$name];
-        $command= str_replace("%$name", "$value", $command);
-      }
-
-      // If there are still some %.. in our command, try to fill these with some other class vars 
-      if(preg_match("/%/",$command)){
-        $attrs = get_object_vars($plugin);
-        foreach($attrs as $name => $value){
-          if(is_array($value)){
-            $s = "";
-            foreach($value as $val){
-              if(is_string($val) || is_int($val) || is_float($val) || is_bool($val)){
-                $s .= '"'.$val.'",'; 
+          // Walk trough attributes list and add the plugins attributes. 
+          foreach ($plugin->attributes as $attr){
+              if (!is_array($plugin->$attr)){
+                  $addAttrs[$attr] = $plugin->$attr;
               }
-            }
-            $value = '['.trim($s,',').']';
           }
-          if(!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value)){
-            continue;
+          $ui = get_userinfo();
+          $addAttrs['callerDN']=$ui->dn;
+          $addAttrs['dn']=$plugin->dn;
+          $addAttrs['location']=$config->current['NAME'];
+
+          // Sort attributes by length, ensures correct replacement
+          $tmp = array();
+          foreach($addAttrs as $name => $value){
+              $tmp[$name] =  strlen($name);
           }
-          $command= preg_replace("/%$name/", escapeshellarg($value), $command);
-        }
+          arsort($tmp);
+
+          // Now replace the placeholder 
+          foreach ($tmp as $name => $len){
+              $value = $addAttrs[$name];
+              $command= str_replace("%$name", "$value", $command);
+          }
+
+          // If there are still some %.. in our command, try to fill these with some other class vars 
+          if(preg_match("/%/",$command)){
+              $attrs = get_object_vars($plugin);
+              foreach($attrs as $name => $value){
+                  if(is_array($value)){
+                      $s = "";
+                      foreach($value as $val){
+                          if(is_string($val) || is_int($val) || is_float($val) || is_bool($val)){
+                              $s .= '"'.$val.'",'; 
+                          }
+                      }
+                      $value = '['.trim($s,',').']';
+                  }
+                  if(!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value)){
+                      continue;
+                  }
+                  $command= preg_replace("/%$name/", escapeshellarg($value), $command);
+              }
+          }
+
+          if (check_command($command)){
+
+              // Create list of process pipes
+              $descriptorspec = array(
+                      0 => array("pipe", "r"),  // stdin
+                      1 => array("pipe", "w"),  // stdout
+                      2 => array("pipe", "w")); // stderr
+
+              // Try to open the process
+              @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command,"Execute");
+              $process = proc_open($command, $descriptorspec, $pipes);
+              if (is_resource($process)) {
+
+                  // Write the password to stdin
+                  // fwrite($pipes[0], $pwd); 
+                  fclose($pipes[0]);
+
+                  // Get results from stdout and stderr
+                  $arr = stream_get_contents($pipes[1]);
+                  $err = stream_get_contents($pipes[2]);
+                  fclose($pipes[1]);
+
+                  // Close the process and check its return value
+                  $returnCode = proc_close($process);
+                  $returnOutput = preg_split("/\n/", $arr,0,PREG_SPLIT_NO_EMPTY);
+                  $errorOutput = preg_split("/\n/",$err,0,PREG_SPLIT_NO_EMPTY);
+              }
+
+              if($returnCode != 0){
+                  @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: ".$returnCode);
+                  @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$err);
+                  if($displayErrors){
+                      $message= msgPool::cmdexecfailed($cmd,$command, get_class($plugin));
+                      msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+                  }
+              }elseif(is_array($arr)){
+                  @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$arr);
+              }
+          } elseif($displayErrors) {
+              $message= msgPool::cmdinvalid($cmd,$command, get_class($plugin));
+              msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+          }
       }
-
-      if (check_command($command)){
-
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command,"Execute");
-        exec($command, $arr, $returnCode);
-        $returnOutput = $arr;
-
-        if($returnCode != 0){
-          $str = implode("\n",$arr);
-          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: ".$returnCode);
-          $message= msgPool::cmdexecfailed($cmd,$command, get_class($plugin));
-          msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
-        }elseif(is_array($arr)){
-          $str = implode("\n",$arr);
-          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$str);
-        }
-      } else {
-        $message= msgPool::cmdinvalid($cmd,$command, get_class($plugin));
-        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
-      }
-    }
   }
 }
 
