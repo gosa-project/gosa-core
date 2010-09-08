@@ -1589,7 +1589,9 @@ class plugin
     global $config;
     $command = $config->configRegistry->getPropertyValue(get_class($plugin),$cmd);
    
-    if ($command != ""){
+    if (empty($command)){
+        $returnCode = 0; // Simulate a return code to tell the caller that everythin is fine.
+    }else{
 
       // Walk trough attributes list and add the plugins attributes. 
       foreach ($plugin->attributes as $attr){

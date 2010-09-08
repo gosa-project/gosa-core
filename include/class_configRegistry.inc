@@ -344,7 +344,6 @@ class configRegistry{
             }
         }
 
-        // Search for config flags defined in the config file (MENU section)
         foreach($this->config->data['MENU'] as $section => $entries){
             foreach($entries as $entry){
 
@@ -359,6 +358,25 @@ class configRegistry{
                             if(!in_array($name, array('CLASS','ACL'))){
                                 $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Search for config flags defined in the config file (PATHMENU)
+        foreach($this->config->data['PATHMENU'] as $entry){
+
+            if(isset($entry['CLASS'])){
+
+                // Put plugin to active plugins list.
+                $class = strtolower($entry['CLASS']);
+                $this->activePlugins[$class] = $class;
+
+                if(count($entry) > 2 ){
+                    foreach($entry as $name => $value){
+                        if(!in_array($name, array('CLASS','ACL'))){
+                            $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
                         }
                     }
                 }
