@@ -158,7 +158,7 @@ class password extends plugin
 
             // Call the pre-event command and check its return code
             if(!count($message)){
-                plugin::callHook($this, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
+                plugin::callHook($this, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = FALSE);
                 if($retCode === 0 && count($output)){
                     $message[] = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
                 }
@@ -193,14 +193,6 @@ class password extends plugin
                         gosa_log ("User/password has been changed");
                         $ui->password= $new_password;
                         session::set('ui',$ui);
-
-                        // Call the post-event command and check its return code
-                        plugin::callHook($this, 'POSTMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
-                        if($retCode === 0 && count($output)){
-                            $message[] = sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),implode($output));
-                            echo "Rollback";
-                        }
-           
                         return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
                     }
                 }
