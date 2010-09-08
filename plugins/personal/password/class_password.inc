@@ -28,7 +28,7 @@ class password extends plugin
 
     var $proposal = "";
     var $proposalEnabled = FALSE;
-    var $proposalSelected = FALSE;
+    var $proposalSelected = TRUE;
 
     var $forcedHash = NULL;
 
@@ -108,13 +108,41 @@ class password extends plugin
             $check_length = $this->config->get_cfg_value("core","passwordMinLength") != "";
             $length       = $this->config->get_cfg_value("core","passwordMinLength");
 
+            // Call the pre-event command and check its return code
+            $attrs = array('current_password', escapeshellarg($current_password));
+            $attrs = array('new_password', escapeshellarg($new_password));
+            plugin::callHook($this, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
+            if($retCode === 0 && count($output)){
+                msg_dialog::display(_("Password change"),
+                        sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),
+                            implode($output)),WARNING_DIALOG);    
+            }
+
+            // Call the check hook
+            $checkRes = $this->callCheckHook($attrs);
+            if(count($checkRes)){
+                msg_dialog::display(_("Password change"),
+                        sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),
+                            implode($checkRes)),WARNING_DIALOG);    
+            }
+
+            // Call the post-event command and check its return code
+            $attrs = array();
+            $attrs['current_password'] = escapeshellarg($current_password);
+            $attrs['new_password'] = escapeshellarg($new_password);
+            plugin::callHook($this, 'POSTMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = TRUE);
+            if($retCode === 0 && count($output)){
+                msg_dialog::display(_("Password change"),
+                        sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),
+                            implode($output)),WARNING_DIALOG);    
+            }
+
+
             /* Call external password quality hook ?*/
             $check_hook   = $this->config->get_cfg_value("core","passwordHook") != "";
-
-            /* Prepare password hook */
             $cmd = $this->config->get_cfg_value("core","passwordHook");
-            $cmd = preg_replace("/%current_password/",escapeshellarg(get_post('current_password')), $cmd);
-            $cmd = preg_replace("/%new_password/",escapeshellarg(get_post('new_password')), $cmd);
+            $cmd = preg_replace("/%current_password/",escapeshellarg($current_password), $cmd);
+            $cmd = preg_replace("/%new_password/",escapeshellarg($new_password), $cmd);
             $cmd = preg_replace("/%uid/",escapeshellarg($ui->username), $cmd);
             $cmd = preg_replace("/%dn/",escapeshellarg($ui->dn), $cmd);
             if($check_hook){
@@ -197,6 +225,46 @@ class password extends plugin
 
     function save()
     {
+    }
+
+    function callCheckHook($attrs = array())
+    {
+        $command = $this->config->configRegistry->getPropertyValue(get_class($this),"check");
+        if (!empty($command)){
+
+            // Build up ldif to send to the check hook
+            $ldif= "dn: $this->dn\n";
+            foreach ($attrs as $name => $value){
+                $ldif.= "{$name}: {$value}\n";
+            }
+            $ldif.= "\n";
+
+            /* Feed "ldif" into hook and retrieve result*/
+            $descriptorspec = array( 0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
+            $fh= proc_open($command, $descriptorspec, $pipes);
+            if (is_resource($fh)) {
+                fwrite ($pipes[0], $ldif);
+                fclose($pipes[0]);
+                $arr= stream_get_contents($pipes[1]);
+                $err = stream_get_contents($pipes[2]);
+                fclose($pipes[1]);
+                fclose($pipes[2]);
+                $returnCode = proc_close($fh);
+
+                if($returnCode !== 0){
+                    @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: ".$returnCode);
+                    @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$err);
+                    if($displayErrors){
+                        $message= msgPool::cmdexecfailed($cmd,$command, get_class($plugin));
+                        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+                    }
+                }else{
+                    @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$arr);
+                    return(preg_split("/\n/", $arr,0,PREG_SPLIT_NO_EMPTY));
+                }
+            }
+        }
+        return(array());
     }
 
     static function plInfo()
