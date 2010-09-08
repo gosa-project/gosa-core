@@ -292,7 +292,33 @@ class tests {
 
     return checkdate($matches[2],$matches[1],$matches[3]);
   }
-
+  /*
+   * Compares two dates
+   * 
+   * <0 => a<b
+   * 0 => a=b
+   * >0 => a>b
+   * 
+   * 
+   */
+ public static function compareDate($dateA, $dateB){
+	 /*
+	  * TODO:
+	  * use $lang to check date format	
+	  */ 
+ 	$tstampA = strtotime($dateA);
+ 	if($tstampA === false){
+ 		trigger_error("Given date can not be converted to timestamp(".$dataA.") in function tests::compareDate.");
+ 		return false;	
+ 	}
+ 	$tstampB = strtotime($dateB);
+ 	if($tstampB === false){
+ 		trigger_error("Given date can not be converted to timestamp(".$dataB.") in function tests::compareDate.");
+ 		return false;	
+ 	}
+ 	
+	return $tstampA-$tstampB;
+ }
   /* \brief Check if the specified IP address $address is inside the given network */
   public static function is_in_ip_range($from, $to, $address)
   {
