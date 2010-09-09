@@ -111,8 +111,8 @@ class password extends plugin
 
             // Call the check hook
             $attrs = array();
-            $attrs['current_password'] = escapeshellarg($current_password);
-            $attrs['new_password'] = escapeshellarg($new_password);
+            $attrs['current_password'] = ($current_password);
+            $attrs['new_password'] = ($new_password);
 
             // Perform GOsa password policy checks 
             if(empty($current_password)){
@@ -206,10 +206,8 @@ class password extends plugin
                 if($returnCode !== 0){
                     @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: ".$returnCode);
                     @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$err);
-                    if($displayErrors){
-                        $message= msgPool::cmdexecfailed($cmd,$command, get_class($plugin));
-                        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
-                    }
+                    $message= msgPool::cmdexecfailed($err,$command, "password");
+                    msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
                 }else{
                     @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$arr);
                     return(preg_split("/\n/", $arr,0,PREG_SPLIT_NO_EMPTY));
