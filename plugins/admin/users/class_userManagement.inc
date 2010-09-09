@@ -343,11 +343,13 @@ class userManagement extends management
 
                 // Change cassword 
                 if(isset($this->force_hash_type[$this->dn])){
-                    if(!change_password ($this->dn, $new_password,0,$this->force_hash_type[$this->dn])){
+                    if(!change_password ($this->dn, $new_password,0,$this->force_hash_type[$this->dn],'', $message)){
+                        msg_dialog::displayChecks(array($message));
                         return($smarty->fetch(get_template_path('password.tpl', TRUE)));
                     }
                 }else{
-                    if(!change_password ($this->dn, $new_password)){
+                    if(!change_password ($this->dn, $new_password,0,'','',$message)){
+                        msg_dialog::displayChecks(array($message));
                         return($smarty->fetch(get_template_path('password.tpl', TRUE)));
                     }
                 }

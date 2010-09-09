@@ -3072,11 +3072,11 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $attrs['userPassword']= $newpass;
 
         // Prepare prevent hook call
-        $attrsPre = $attrs;
-        $attrsPre['current_password'] = $old_password;
-        $attrsPre['new_password'] = $password;
+        $attrsEvent = $attrs;
+        $attrsEvent['current_password'] = escapeshellarg($old_password);
+        $attrsEvent['new_password'] = escapeshellarg($password);
         $passwordPlugin = new password($config,$dn);
-        plugin::callHook($passwordPlugin, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = FALSE);
+        plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
         if($retCode === 0 && count($output)){
             $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
             return(FALSE);
@@ -3091,7 +3091,7 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
             $test->lock_account($config,$dn);
         }
 
-        // Check if everythin went fine and then call the post event hooks.
+        // Check if everything went fine and then call the post event hooks.
         // If an error occures, then try to rollback the complete actions done.
         $preRollback = FALSE;
         $ldapRollback = FALSE;
@@ -3113,14 +3113,10 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
             }else{
         
                 // Execute the password hook
-                plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = FALSE);
+                plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
                 if($retCode === 0){
                     if(count($output)){
                         new log("modify","users/passwordMethod",$dn,array(),"Password change - Post mdoify hook reported! - FAILED!");
-                        $attrs = array();
-                        $attrs['userPassword'] = escapeshellarg($password);
-                        $attrs['current_password'] = escapeshellarg($password);
-                        $attrs['old_password'] = escapeshellarg($old_password);
                         $message = sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),implode($output));
                         $ldapRollback = TRUE;
                         $preRollback = TRUE;
@@ -3143,18 +3139,22 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         }
 
         // Setting password in the ldap database or further operation failed, we should now execute 
-        //  the plugins post-event hook, using switched passwords new/old password.
+        //  the plugins pre-event hook, using switched passwords new/old password.
         // This ensures that passwords which were set outside of GOsa, will be reset to its 
         //  starting value.
-        if($preRollback && !empty($old_password)){
-            new log("modify","users/passwordMethod",$dn,array(),"Rolling back postmodify hook!");
-            $attrs = array();
-            $attrs['current_password'] = escapeshellarg($password);
-            $attrs['new_password'] = escapeshellarg($old_password);
-            plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = FALSE);
+        if($preRollback){
+            new log("modify","users/passwordMethod",$dn,array(),"Rolling back premodify hook!");
+            $oldpass= $test->generate_hash($old_password);
+            $attrsEvent['current_password'] = escapeshellarg($password);
+            $attrsEvent['new_password'] = escapeshellarg($old_password);
+            foreach(array("userPassword","sambaNTPassword","sambaLMPassword") as $attr){
+                if(isset($initialAttrs[$attr][0])) $attrsEvent[$attr] = $initialAttrs[$attr][0];
+            }
+            
+            plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
             if($retCode === 0 && count($output)){
-                $message = sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),implode($output));
-                new log("modify","users/passwordMethod",$dn,array(),"Rolling back postmodify hook! - FAILED!");
+                $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
+                new log("modify","users/passwordMethod",$dn,array(),"Rolling back premodify hook! - FAILED!");
             }
         }
         
@@ -3164,7 +3164,7 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
             new log("modify","users/passwordMethod",$dn,array(),"Rolling back ldap modifications!");
             $attrs = array();
             foreach(array("userPassword","sambaNTPassword","sambaLMPassword") as $attr){
-                $attrs[$attr] = $initialAttrs[$attr][0];
+                if(isset($initialAttrs[$attr][0])) $attrs[$attr] = $initialAttrs[$attr][0];
             }
             $ldap->cd($dn);
             $ldap->modify($attrs);

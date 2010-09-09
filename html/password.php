@@ -307,13 +307,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
             );
             msg_dialog::displayChecks($message);
         } else {
-            if ($method != "") {
-                change_password($ui->dn, $_POST['new_password'], 0, $method);
-            } else {
-                change_password($ui->dn, $_POST['new_password']);
+            if(!change_password($ui->dn, $_POST['new_password'], FALSE, $method,get_post('current_password'),$msg)){
+                msg_dialog::displayChecks(array($msg));
+            }else{
+                gosa_log("User/password has been changed");
+                $smarty->assign("changed", true);
             }
-            gosa_log("User/password has been changed");
-            $smarty->assign("changed", true);
         }
     }
 

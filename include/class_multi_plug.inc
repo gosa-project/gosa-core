@@ -388,8 +388,11 @@ class multi_plug
   {
     foreach($this->a_handles as $i_id => $o_handle){
       if($o_handle->password_change_needed() && isset($o_handle->by_object['user'])){
-        new msg_dialog(_("Reset password"),_("The user password has been reset. Please set a new password!"),WARNING_DIALOG);
-        change_password ($o_handle->dn, "",0, $o_handle->by_object['user']->pw_storage);
+        if(!change_password ($o_handle->dn, "",FALSE, $o_handle->by_object['user']->pw_storage,'',$message)){
+            msg_dialog::displayChecks(array($message));
+        }else{
+            new msg_dialog(_("Reset password"),_("The user password has been reset. Please set a new password!"),WARNING_DIALOG);
+        }
       }
     }
     return(FALSE);
