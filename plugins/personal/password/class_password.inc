@@ -131,7 +131,7 @@ class password extends plugin
 
             // Call external check hook to validate the password change
             if(!count($message)){
-                $checkRes = $this->callCheckHook($attrs);
+                $checkRes = $this->callCheckHook($this->config,$this->dn,$attrs);
                 if(count($checkRes)){
                     $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),implode($checkRes));
                 }
@@ -179,13 +179,13 @@ class password extends plugin
     {
     }
 
-    function callCheckHook($attrs = array())
+    static function callCheckHook($config,$dn,$attrs = array())
     {
-        $command = $this->config->configRegistry->getPropertyValue(get_class($this),"check");
+        $command = $config->configRegistry->getPropertyValue("password","check");
         if (!empty($command)){
 
             // Build up ldif to send to the check hook
-            $ldif= "dn: $this->dn\n";
+            $ldif= "dn: $dn\n";
             foreach ($attrs as $name => $value){
                 $ldif.= "{$name}: {$value}\n";
             }

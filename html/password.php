@@ -237,11 +237,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
     // Once an error has occured it is stored here.
     $message = array();
 
-    // Call the check hook
-    $attrs = array();
-    $attrs['current_password'] = escapeshellarg($current_password);
-    $attrs['new_password'] = escapeshellarg($new_password);
-
     // Perform GOsa password policy checks
     if(!tests::is_uid($uid)) {
         $message[]= msgPool::invalid(_("Login"));
@@ -260,16 +255,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
     }
 
     // Connect as the given user and load its ACLs
-    $ui= ldap_login_user($uid, $current_password);
-    if ($ui === NULL) {
-        $message[]= _("Please check the username/password combination!");
-    } else {
-        $tmp= new acl($config, NULL, $ui->dn);
-        $ui->ocMapping= $tmp->ocMapping;
-        $ui->loadACL();
-        $acls = $ui->get_permissions($ui->dn, "users/password");
-        if (!preg_match("/w/i", $acls)) {
-            $message[]= _("You have no permissions to change your password!");
+    if(!count($message)){
+        $ui= ldap_login_user($uid, $current_password);
+        if ($ui === NULL) {
+            $message[]= _("Please check the username/password combination!");
+        } else {
+            $tmp= new acl($config, NULL, $ui->dn);
+            $ui->ocMapping= $tmp->ocMapping;
+            $ui->loadACL();
+            $acls = $ui->get_permissions($ui->dn, "users/password");
+            if (!preg_match("/w/i", $acls)) {
+                $message[]= _("You have no permissions to change your password!");
+            }
+        }
+    }
+
+    // Call external check hook to validate the password change
+    if(!count($message)){
+        $attrs = array();
+        $attrs['current_password'] = escapeshellarg($current_password);
+        $attrs['new_password'] = escapeshellarg($new_password);
+        $checkRes = password::callCheckHook($config,$ui->dn,$attrs);
+        if(count($checkRes)){
+            $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),implode($checkRes));
         }
     }
 
