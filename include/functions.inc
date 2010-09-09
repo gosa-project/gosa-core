@@ -3116,7 +3116,7 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
                 plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
                 if($retCode === 0){
                     if(count($output)){
-                        new log("modify","users/passwordMethod",$dn,array(),"Password change - Post mdoify hook reported! - FAILED!");
+                        new log("modify","users/passwordMethod",$dn,array(),"Password change - Post modify hook reported! - FAILED!");
                         $message = sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),implode($output));
                         $ldapRollback = TRUE;
                         $preRollback = TRUE;
