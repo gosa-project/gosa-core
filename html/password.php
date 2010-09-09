@@ -222,74 +222,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
         session::global_set('_LAST_PAGE_REQUEST', time());
     }
 
-    $message= array();
-    $current_password= $_POST['current_password'];
+    // Get posted values
+    $current_password = get_post('current_password');
+    $new_password = get_post('new_password');
+    $repeated_password = get_post('new_password_repeated');
 
-    /* Do new and repeated password fields match? */
-    $new_password= $_POST['new_password'];
-    if ($_POST['new_password'] != $_POST['new_password_repeated']) {
-        $message[]= _("The values for 'New password' and 'Repeated new password' differ!");
-    } else {
-        if ($_POST['new_password'] == "") {
-            $message[]= msgPool::required(_("New password"));
-        }
-    }
 
-    /* Password policy fulfilled? */
-    if ($config->get_cfg_value("core","passwordMinDiffer") != "") {
-        $l= $config->get_cfg_value("core","passwordMinDiffer");
-        if (substr($_POST['current_password'], 0, $l) ==
-            substr($_POST['new_password'], 0, $l)) {
-            $message[]= _("The password used as new and current are too similar!");
-        }
-    }
-    if ($config->get_cfg_value("core","passwordMinLength") != "") {
-        if (strlen($_POST['new_password']) <
-           $config->get_cfg_value("core","passwordMinLength")) {
-            $message[]= _("The password used as new is to short!");
-        }
-    }
-    if(!passwordMethod::is_harmless($_POST['new_password'])){
-        $message[]= _("The password contains possibly problematic Unicode characters!");
-    }
+    // Get configuration flags for further input checks.
+    $check_differ = $config->get_cfg_value("core","passwordMinDiffer") != "";
+    $differ       = $config->get_cfg_value("core","passwordMinDiffer");
+    $check_length = $config->get_cfg_value("core","passwordMinLength") != "";
+    $length       = $config->get_cfg_value("core","passwordMinLength");
 
-    /* Validate */
-    if (!tests::is_uid($uid)) {
+    // Once an error has occured it is stored here.
+    $message = array();
+
+    // Call the check hook
+    $attrs = array();
+    $attrs['current_password'] = escapeshellarg($current_password);
+    $attrs['new_password'] = escapeshellarg($new_password);
+
+    // Perform GOsa password policy checks
+    if(!tests::is_uid($uid)) {
         $message[]= msgPool::invalid(_("Login"));
-    } elseif (mb_strlen($_POST["current_password"], 'UTF-8') == 0) {
-        $message[]= msgPool::required(_("Current password"));
+    }elseif(empty($current_password)){
+        $message[] = _("You need to specify your current password in order to proceed.");
+    }elseif($new_password  != $repeated_password){
+        $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+    }elseif($new_password == ""){
+        $message[] = _("The password you've entered as 'New password' is empty.");
+    }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
+        $message[] = _("The password used as new and current are too similar.");
+    }elseif($check_length && (strlen($new_password) < $length)){
+        $message[] = _("The password used as new is to short.");
+    }elseif(!passwordMethod::is_harmless($new_password)){
+        $message[] = _("The password contains possibly problematic Unicode characters!");
+    }
+
+    // Connect as the given user and load its ACLs
+    $ui= ldap_login_user($uid, $current_password);
+    if ($ui === NULL) {
+        $message[]= _("Please check the username/password combination!");
     } else {
-
-        /* Do we have the selected user somewhere? */
-        $ui= ldap_login_user($uid, $current_password);
-
-        /* Load ocMapping into userinfo */
         $tmp= new acl($config, NULL, $ui->dn);
         $ui->ocMapping= $tmp->ocMapping;
-
-
         $ui->loadACL();
-
-        if ($ui === NULL) {
-            $message[]= _("Please check the username/password combination!");
-        } else {
-            $acls = $ui->get_permissions($ui->dn, "users/password");
-            if (!preg_match("/w/i", $acls)) {
-                $message[]= _("You have no permissions to change your password!");
-            }
+        $acls = $ui->get_permissions($ui->dn, "users/password");
+        if (!preg_match("/w/i", $acls)) {
+            $message[]= _("You have no permissions to change your password!");
         }
     }
 
-    /* Do we need to show error messages? */
+    // Display error messages
     if (count($message) != 0) {
-        /* Show error message and continue editing */
         msg_dialog::displayChecks($message);
-    } elseif(!change_password($ui->dn, $_POST['new_password'], FALSE, $method,get_post('current_password'),$msg)){
-        msg_dialog::displayChecks(array($msg));
-    } else {
-        gosa_log("User/password has been changed");
-        $smarty->assign("changed", true);
-    }
+    } else
+
+        // Try to change the password
+        if(!change_password($ui->dn, $_POST['new_password'], FALSE, $method,get_post('current_password'),$msg)){
+            msg_dialog::displayChecks(array($msg));
+        } else {
+            gosa_log("User/password has been changed");
+            $smarty->assign("changed", true);
+        }
 }
 
 /* Parameter fill up */
