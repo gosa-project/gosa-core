@@ -365,11 +365,8 @@ class ogrouptabs extends tabs
             $this->dn= 'cn='.$baseobject->cn.','.get_ou("group", "ogroupRDN").$baseobject->base;
         }
 
-        /* Only delete attributes if there are members left */
-        if (count($this->by_object['ogroup']->memberList) != 0) {
-            foreach(array_keys($this->to_remove) as $object) {
-                $this->to_remove[$object]->remove_from_parent();
-            }
+        foreach(array_keys($this->to_remove) as $object) {
+            $this->to_remove[$object]->remove_from_parent();
         }
         tabs::save();
     }
