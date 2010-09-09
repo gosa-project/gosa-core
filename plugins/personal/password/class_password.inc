@@ -156,15 +156,6 @@ class password extends plugin
                 }
             }
 
-            // Call the pre-event command and check its return code
-            if(!count($message)){
-                plugin::callHook($this, 'PREMODIFY', $attrs, $output,$retCode,$error, $directlyPrintError = FALSE);
-                if($retCode === 0 && count($output)){
-                    $message[] = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
-                }
-            }
-
-
             // Some errors/warning occured, display them and abort password change.
             if(count($message)){
                 msg_dialog::displayChecks($message);
@@ -182,33 +173,21 @@ class password extends plugin
                 if (!$tldap->success()){
                     msg_dialog::display(_("Password change"),
                             _("The password you've entered as your current password doesn't match the real one."),WARNING_DIALOG);
+                }elseif (!preg_match("/w/i",$password_ACLS)){
+                    msg_dialog::display(_("Password change"),
+                            _("You have no permission to change your password."),WARNING_DIALOG);
+                }elseif(!change_password($ui->dn, $new_password,FALSE, $this->forcedHash, $current_password, $message)){
+                    msg_dialog::display(_("Password change"),
+                            $message,WARNING_DIALOG);
                 }else{
-
-                    /* Check GOsa permissions */
-                    if (!preg_match("/w/i",$password_ACLS)){
-                        msg_dialog::display(_("Password change"),
-                                _("You have no permission to change your password."),WARNING_DIALOG);
-                    }else{
-                        $this->change_password($ui->dn, $new_password, $this->forcedHash);
-                        gosa_log ("User/password has been changed");
-                        $ui->password= $new_password;
-                        session::set('ui',$ui);
-                        return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
-                    }
+                    $ui->password= $new_password;
+                    session::set('ui',$ui);
+                    return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
                 }
             }
         }
         return($smarty->fetch(get_template_path("password.tpl", TRUE)));
     } 
-
-    function change_password($dn, $pwd, $hash)
-    {
-        if(!$hash){
-            change_password ($dn, $pwd);
-        }else{
-            change_password ($dn, $pwd,0, $hash);
-        }
-    }
 
     function remove_from_parent()
     {
