@@ -3005,20 +3005,22 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
 {
     global $config;
     $newpass= "";
+
+    // Not sure, why this is here, but maybe some encryption methods require it.
     mt_srand((double) microtime()*1000000);
 
     // Get a list of all available password encryption methods.
     $methods = new passwordMethod(session::get('config'),$dn);
     $available = $methods->get_available_methods();
 
-    // Fetch the current object data, to be able to detect the current hashinf method
-    //  and to be able to rollback changes once an error occured.
+    // Fetch the current object data, to be able to detect the current hashing method
+    //  and to be able to rollback changes once has an error occured.
     $ldap = $config->get_ldap_link();
     $ldap->cat ($dn, array("shadowLastChange", "userPassword","sambaNTPassword","sambaLMPassword", "uid"));
     $attrs = $ldap->fetch ();
     $initialAttrs = $attrs;
 
-    // If no hashing method is enforced, then detect what method we've use here.
+    // If no hashing method is enforced, then detect what method we've to use.
     $hash = strtolower($hash);
     if(empty($hash)){
 
@@ -3029,8 +3031,8 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
             $test->set_hash($hash);
         }
 
-        // If we've still no valid hashing method detected, then try to extract if from the current password hash.
-        if(isset($attrs['userPassword'][0]) && preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)){
+        // If we've still no valid hashing method detected, then try to extract if from the userPassword attribute.
+        elseif(isset($attrs['userPassword'][0]) && preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)){
             $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
             $hash = $test->get_hash_name();
         }
@@ -3044,12 +3046,12 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $test->set_hash($hash);
     }
 
-    // We've now a valid password method handle and can create the new password hash.
+    // We've now a valid password-method-handle and can create the new password hash or don't we?
     if(!$test instanceOf passwordMethod){
         $message = _("Cannot detect password hash!");
     }else{
 
-        // Feed password backends with information 
+        // Feed password backends with object information. 
         $test->dn = $dn;
         $test->attrs = $attrs;
         $newpass= $test->generate_hash($password);
@@ -3068,10 +3070,9 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
 
         // Write back the new password hash 
         $ldap->cd($dn);
-        $attrs['userPassword']= array();
         $attrs['userPassword']= $newpass;
 
-        // Prepare prevent hook call
+        // Prepare a special attribute list, which will be used for event hook calls
         $attrsEvent = array();
         foreach($initialAttrs as $name => $value){
             if(!is_numeric($name))
@@ -3084,6 +3085,7 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $attrsEvent['current_password'] = escapeshellarg($old_password);
         $attrsEvent['new_password'] = escapeshellarg($password);
 
+        // Call the premodify hook now
         $passwordPlugin = new password($config,$dn);
         plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
         if($retCode === 0 && count($output)){
@@ -3147,8 +3149,8 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
             }
         }
 
-        // Setting password in the ldap database or further operation failed, we should now execute 
-        //  the plugins pre-event hook, using switched passwords new/old password.
+        // Setting the password in the ldap database or further operation failed, we should now execute 
+        //  the plugins pre-event hook, using switched passwords, new/old password.
         // This ensures that passwords which were set outside of GOsa, will be reset to its 
         //  starting value.
         if($preRollback){
