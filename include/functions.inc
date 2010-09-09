@@ -3072,9 +3072,18 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $attrs['userPassword']= $newpass;
 
         // Prepare prevent hook call
-        $attrsEvent = $attrs;
+        $attrsEvent = array();
+        foreach($initialAttrs as $name => $value){
+            if(!is_numeric($name))
+                $attrsEvent[$name] = escapeshellarg($value[0]);
+        }
+        $attrsEvent['dn'] = escapeshellarg($initialAttrs['dn']);
+        foreach($attrs as $name => $value){
+            $attrsEvent[$name] = escapeshellarg($value);
+        }
         $attrsEvent['current_password'] = escapeshellarg($old_password);
         $attrsEvent['new_password'] = escapeshellarg($password);
+
         $passwordPlugin = new password($config,$dn);
         plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
         if($retCode === 0 && count($output)){
