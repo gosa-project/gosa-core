@@ -2988,62 +2988,54 @@ function get_correct_class_name($cls)
 }
 
 
-/*! \brief Change the password of a given DN
- * 
- * Change the password of a given DN with the specified hash.
+/*! \brief  Change the password for a given object ($dn).
+ *          This method uses the specified hashing method to generate a new password
+ *           for the object and it also takes care of sambaHashes, if enabled.
+ *          Finally the postmodify hook of the class 'user' will be called, if it is set.
  *
- * \param string 'dn' the DN whose password shall be changed
- * \param string 'password' the password
- * \param int mode
- * \param string 'hash' which hash to use to encrypt it, default is empty
- *                  for cleartext storage.
- * \param string    The users old password, this allows script based rollback mechanisms,
- *                   the prehook will then be called witch switched newPassword/oldPassword. 
- * \return boolean TRUE on success FALSE on error
+ * @param   String   The DN whose password shall be changed.
+ * @param   String   The new password.
+ * @param   Boolean  Skip adding samba hashes to the target (sambaNTPassword,sambaLMPassword)
+ * @param   String   The hashin method to use, default is the global configured default.
+ * @param   String   The users old password, this allows script based rollback mechanisms,
+ *                    the prehook will then be called witch switched newPassword/oldPassword. 
+ * @return  Boolean  TRUE on success else FALSE.
  */
-function change_password ($dn, $password, $mode=0, $hash= "", $old_password = "")
+function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password = "")
 {
     global $config;
     $newpass= "";
+    mt_srand((double) microtime()*1000000);
 
-    /* Convert to lower. Methods are lowercase */
-    $hash= strtolower($hash);
-
-    // Get all available encryption Methods
-
-    // NON STATIC CALL :)
+    // Get a list of all available password encryption methods.
     $methods = new passwordMethod(session::get('config'),$dn);
     $available = $methods->get_available_methods();
 
-    // read current password entry for $dn, to detect the encryption Method
-    $ldap       = $config->get_ldap_link();
+    // Fetch the current object data, to be able to detect the current hashinf method
+    //  and to be able to rollback changes once an error occured.
+    $ldap = $config->get_ldap_link();
     $ldap->cat ($dn, array("shadowLastChange", "userPassword","sambaNTPassword","sambaLMPassword", "uid"));
-    $attrs      = $ldap->fetch ();
+    $attrs = $ldap->fetch ();
     $initialAttrs = $attrs;
 
-    /* Is ensure that clear passwords will stay clear */
-    if($hash == "" && isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
-        $hash = "clear";
-    }
-
-    // Detect the encryption Method
-    if ( (isset($attrs['userPassword'][0]) &&  preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)) ||  $hash != ""){
-
-        /* Check for supported algorithm */
-        mt_srand((double) microtime()*1000000);
-
-        /* Extract used hash */
-        if ($hash == ""){
-            $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
-        } else {
+    // If no hashing method is enforced, then detect if we've currently used a 
+    //  clear-text password for this object.
+    // If it isn't, then let the password methods detect the hashing algorithm.
+    $hash = strtolower($hash);
+    if(empty($hash)){
+        if(isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
+            $hash = "clear";
             $test = new $available[$hash]($config,$dn);
             $test->set_hash($hash);
         }
 
-    } else {
-        // User MD5 by default
-        $hash= "md5";
-        $test = new  $available['md5']($config, $dn);
+        // If we've still no valid hashing method detected, then try to extract if from the current password hash.
+        if(isset($attrs['userPassword'][0]) && preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)){
+            $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
+        }
+    }else{
+        $test = new $available[$hash]($config,$dn);
+        $test->set_hash($hash);
     }
 
     if($test instanceOf passwordMethod){
@@ -3069,7 +3061,7 @@ function change_password ($dn, $password, $mode=0, $hash= "", $old_password = ""
         $attrs= array();
 
         // Not for groups
-        if ($mode == 0){
+        if (!$mode){
 
             $tmp = $config->get_cfg_value('core','sambaHashHook');
             if(!empty($tmp)){
