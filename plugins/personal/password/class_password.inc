@@ -114,25 +114,6 @@ class password extends plugin
             $attrs['current_password'] = escapeshellarg($current_password);
             $attrs['new_password'] = escapeshellarg($new_password);
 
-            // Depricated but execute for backward compability
-            $check_hook   = $this->config->get_cfg_value("core","passwordHook") != "";
-            $cmd = $this->config->get_cfg_value("core","passwordHook");
-            if(!empty($cmd)){
-                $cmd = preg_replace("/%current_password/",escapeshellarg($current_password), $cmd);
-                $cmd = preg_replace("/%new_password/",escapeshellarg($new_password), $cmd);
-                $cmd = preg_replace("/%uid/",escapeshellarg($ui->username), $cmd);
-                $cmd = preg_replace("/%dn/",escapeshellarg($ui->dn), $cmd);
-                if($check_hook){
-                    exec($cmd,$resarr);
-                    $check_hook_output = "";
-                    if(count($resarr) > 0) {
-                        $check_hook_output= join('\n', $resarr);
-                        $message[] = sprintf(_("Password hook reported a problem: %s. Password change canceled!"),
-                                $check_hook_output);
-                    }
-                }
-            }
-
             // Perform GOsa password policy checks 
             if(empty($current_password)){
                 $message[] = _("You need to specify your current password in order to proceed.");

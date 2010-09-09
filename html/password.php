@@ -284,39 +284,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
     if (count($message) != 0) {
         /* Show error message and continue editing */
         msg_dialog::displayChecks($message);
+    } elseif(!change_password($ui->dn, $_POST['new_password'], FALSE, $method,get_post('current_password'),$msg)){
+        msg_dialog::displayChecks(array($msg));
     } else {
-
-        /* Passed quality check, just try to change the password now */
-        $output= "";
-        if ($config->get_cfg_value("core","passwordHook") != "") {
-
-            $cmd = $config->get_cfg_value("core","passwordHook");
-            $cmd = preg_replace("/%current_password/",escapeshellarg(get_post('current_password')), $cmd);
-            $cmd = preg_replace("/%new_password/",escapeshellarg(get_post('new_password')), $cmd);
-            $cmd = preg_replace("/%uid/",escapeshellarg($ui->username), $cmd);
-            $cmd = preg_replace("/%dn/",escapeshellarg($ui->dn), $cmd);
-            exec($cmd, $resarr);
-            if (count($resarr) > 0) {
-                $output= join('\n', $resarr);
-            }
-        }
-        if ($output != "") {
-            $message[]= sprintf(
-                _("External password changer reported a problem: %s"),
-                $output
-            );
-            msg_dialog::displayChecks($message);
-        } else {
-            if(!change_password($ui->dn, $_POST['new_password'], FALSE, $method,get_post('current_password'),$msg)){
-                msg_dialog::displayChecks(array($msg));
-            }else{
-                gosa_log("User/password has been changed");
-                $smarty->assign("changed", true);
-            }
-        }
+        gosa_log("User/password has been changed");
+        $smarty->assign("changed", true);
     }
-
-
 }
 
 /* Parameter fill up */

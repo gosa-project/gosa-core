@@ -540,18 +540,6 @@ statement determines whether a newly entered password has to be checked
 to have at least n different characters.
 .PP
 
-.B passwordHook
-.I path
-.PP
-The
-.I passwordHook
-can specify an external script to handle password settings at some other
-location besides the LDAP. It will be called this way:
-
-.nf
-/path/to/your/script "username" "oldpassword" "newpassword"
-.fi
-
 .B passwordProposalHook
 .I command
 .PP

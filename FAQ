@@ -117,9 +117,12 @@ A: You can place the keywords "passwordMinLength" and "passwordMinDiffer" in the
 Q: I've to update passwords on external windows PDCs. Can I add a command to let
    synchronize these for me?
 
-A: There's the possibility to add a password hook in gosa.conf's main section using
-   the keyword "passwordHook". The specified command will be executed with 
-   three parameters: /path/to/your/script username oldpassword newpassword
+A: There's the possibility to add a hooks in gosa.conf's plugin tags using
+   the "premodify/postmodify" keywords. The specified command will be executed with 
+   these additional parameters: %current_password %new_password %userPassword 
+
+   For further information about pre- and post hooks search for the premodify 
+   and postmodify statements.
 
    So you can call i.e. smbpasswd to handle your password change on the PDC.
 

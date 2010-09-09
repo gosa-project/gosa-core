@@ -300,17 +300,6 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
-                                "name"          => "passwordHook",
-                                "type"          => "command",
-                                "default"       => "",
-                                "description"   => 
-                                _("The 'passwordHook' can specify an external script to handle password settings at some other location besides the LDAP.")."&nbsp;".sprintf(_("It will be called this way: %s"),"/path/to/your/script \"username\" \"oldpassword\" \"newpassword\""),
-                        "check"         => "gosaProperty::isCommand",
-                                "migrate"       => "",
-                                "group"         => "password",
-                                "mandatory"     => FALSE),
-
-                        array(
                                 "name"          => "passwordProposalHook",
                                 "type"          => "command",
                                 "default"       => "",
