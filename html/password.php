@@ -273,8 +273,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
     // Call external check hook to validate the password change
     if(!count($message)){
         $attrs = array();
-        $attrs['current_password'] = escapeshellarg($current_password);
-        $attrs['new_password'] = escapeshellarg($new_password);
+        $attrs['current_password'] = ($current_password);
+        $attrs['new_password'] = ($new_password);
         $checkRes = password::callCheckHook($config,$ui->dn,$attrs);
         if(count($checkRes)){
             $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),implode($checkRes));
