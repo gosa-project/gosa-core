@@ -1006,7 +1006,34 @@ class user extends plugin
     } else {
 
       /* Fallback if there's no image magick inside PHP */
-      if (!function_exists("imagick_blob2image")){
+      if (function_exists("imagick_blob2image")){
+
+        /* Load the new uploaded Photo */
+        if(!$handle  =  imagick_blob2image($this->photoData))  {
+          new log("debug","users/".get_class($this),$this->dn,array(),"Could not access uploaded image");
+        }
+
+        /* Resizing image to 147x200 and blur */
+        if(!imagick_resize($handle,147,200,IMAGICK_FILTER_GAUSSIAN,0)){
+          new log("debug","users/".get_class($this),$this->dn,array(),"Could not resize uploaded image");
+        }
+
+        /* Converting image to JPEG */
+        if(!imagick_convert($handle,"JPEG")) {
+          new log("debug","users/".get_class($this),$this->dn,array(),"Could not convert uploaded image to jepg");
+        }
+
+        /* Creating binary Code for the Image */
+        if(!$dump = imagick_image2blob($handle)){
+          new log("debug","users/".get_class($this),$this->dn,array(),"Could not create new user image");
+        }
+
+        /* Sending Image */
+        $output=  $dump;
+
+        /* Save attribute */
+        $this->attrs["jpegPhoto"] = $output;
+      }elseif (exec('convert')){
         /* Get temporary file name for conversation */
         $fname = tempnam (TEMP_DIR, "GOsa");
   
@@ -1035,36 +1062,12 @@ class user extends plugin
 
         /* Save attribute */
         $this->attrs["jpegPhoto"] = $output;
+      }else{
+          msg_dialog::display(_("Error"),
+                  _("Cannot save user picture, GOsa requires the package 'imagemagick' or 'php5-imagick' to be installed!"),
+                  ERROR_DIALOG);
 
-      } else {
-
-        /* Load the new uploaded Photo */
-        if(!$handle  =  imagick_blob2image($this->photoData))  {
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not access uploaded image");
-        }
-
-        /* Resizing image to 147x200 and blur */
-        if(!imagick_resize($handle,147,200,IMAGICK_FILTER_GAUSSIAN,0)){
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not resize uploaded image");
-        }
-
-        /* Converting image to JPEG */
-        if(!imagick_convert($handle,"JPEG")) {
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not convert uploaded image to jepg");
-        }
-
-        /* Creating binary Code for the Image */
-        if(!$dump = imagick_image2blob($handle)){
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not create new user image");
-        }
-
-        /* Sending Image */
-        $output=  $dump;
-
-        /* Save attribute */
-        $this->attrs["jpegPhoto"] = $output;
       }
-
     }
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
