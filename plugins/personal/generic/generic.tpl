@@ -14,7 +14,7 @@
       {if !$userPicture_is_readable}
       <img  src="plugins/users/images/default.jpg" alt=''>
       {else}
-      <img  src="getbin.php?rand={$rand}" alt='' style='width:147px; vertical-align: middle;' >
+      <img  src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
       {/if}
      </td>
     </tr>

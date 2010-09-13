@@ -1005,69 +1005,51 @@ class user extends plugin
 
     } else {
 
-      /* Fallback if there's no image magick inside PHP */
-      if (function_exists("imagick_blob2image")){
+        if(class_exists('Imagick')){
 
-        /* Load the new uploaded Photo */
-        if(!$handle  =  imagick_blob2image($this->photoData))  {
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not access uploaded image");
+            $im = new Imagick();
+            $im->readImageBlob($this->photoData);
+            $im->setImageOpacity(1.0);
+            $im->resizeImage(147,200,Imagick::FILTER_UNDEFINED,0.5,TRUE);
+            $im->setCompressionQuality(90);
+            $im->setImageFormat('jpeg'); 
+            $this->attrs["jpegPhoto"] = $im->getImageBlob();
+
+        }elseif (exec('convert')){
+            /* Get temporary file name for conversation */
+            $fname = tempnam (TEMP_DIR, "GOsa");
+
+            /* Open file and write out photoData */
+            $fp = fopen ($fname, "w");
+            fwrite ($fp, $this->photoData);
+            fclose ($fp);
+
+            /* Build conversation query. Filename is generated automatically, so
+               we do not need any special security checks. Exec command and save
+               output. For PHP safe mode, you'll need a configuration which respects
+               image magick as executable... */
+            $query= "convert -size 147x200 $fname -resize 147x200 +profile \"*\" -";
+            @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+                    $query, "Execute");
+
+            /* Read data written by convert */
+            $output= "";
+            $sh= popen($query, 'r');
+            while (!feof($sh)){
+                $output.= fread($sh, 4096);
+            }
+            pclose($sh);
+
+            unlink($fname);
+
+            /* Save attribute */
+            $this->attrs["jpegPhoto"] = $output;
+        }else{
+            msg_dialog::display(_("Error"),
+                    _("Cannot save user picture, GOsa requires the package 'imagemagick' or 'php5-imagick' to be installed!"),
+                    ERROR_DIALOG);
+
         }
-
-        /* Resizing image to 147x200 and blur */
-        if(!imagick_resize($handle,147,200,IMAGICK_FILTER_GAUSSIAN,0)){
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not resize uploaded image");
-        }
-
-        /* Converting image to JPEG */
-        if(!imagick_convert($handle,"JPEG")) {
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not convert uploaded image to jepg");
-        }
-
-        /* Creating binary Code for the Image */
-        if(!$dump = imagick_image2blob($handle)){
-          new log("debug","users/".get_class($this),$this->dn,array(),"Could not create new user image");
-        }
-
-        /* Sending Image */
-        $output=  $dump;
-
-        /* Save attribute */
-        $this->attrs["jpegPhoto"] = $output;
-      }elseif (exec('convert')){
-        /* Get temporary file name for conversation */
-        $fname = tempnam (TEMP_DIR, "GOsa");
-  
-        /* Open file and write out photoData */
-        $fp = fopen ($fname, "w");
-        fwrite ($fp, $this->photoData);
-        fclose ($fp);
-
-        /* Build conversation query. Filename is generated automatically, so
-           we do not need any special security checks. Exec command and save
-           output. For PHP safe mode, you'll need a configuration which respects
-           image magick as executable... */
-        $query= "convert -size 147x200 $fname -resize 147x200 +profile \"*\" -";
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $query, "Execute");
-  
-        /* Read data written by convert */
-        $output= "";
-        $sh= popen($query, 'r');
-        while (!feof($sh)){
-          $output.= fread($sh, 4096);
-        }
-        pclose($sh);
-
-        unlink($fname);
-
-        /* Save attribute */
-        $this->attrs["jpegPhoto"] = $output;
-      }else{
-          msg_dialog::display(_("Error"),
-                  _("Cannot save user picture, GOsa requires the package 'imagemagick' or 'php5-imagick' to be installed!"),
-                  ERROR_DIALOG);
-
-      }
     }
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for

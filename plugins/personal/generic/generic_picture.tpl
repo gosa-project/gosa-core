@@ -1,9 +1,8 @@
 <h3>{t}User picture{/t}</h3>
 <table summary="{t}The users picture{/t}">
  <tr>
-  <td style='width:147px; height:200px; background-color:gray;'>
-
-   <img src="getbin.php?rand={$rand}" alt='' style='width:147px;' >
+  <td style='width:147px; height:200px; background-color:gray; vertical-align: middle;'>
+   <img  src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
   </td>
  </tr>
 </table>
