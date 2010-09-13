@@ -162,7 +162,7 @@ class tabs
     foreach ($this->by_name as $class => $name){
         $this->isPluginModified |= $this->by_object[$class]->is_modified;
     }
-    $display="<input style='width:100%;' type='text' id='pluginModified' name='pluginModified' value='{$this->isPluginModified}'>".$display;
+    $display="<input type='hidden' id='pluginModified' name='pluginModified' value='{$this->isPluginModified}'>".$display;
 
     return ($display);
   }
