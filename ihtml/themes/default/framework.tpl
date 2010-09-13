@@ -49,6 +49,8 @@
    {$focus}
    <input type="hidden" name="php_c_check" value="1">
   </form>
+  
+<input type='text' id='d'> 
 
   <!-- Automatic logout when session is expired -->
   <script type='text/javascript'>
@@ -57,6 +59,21 @@
     document.location = 'logout.php';
    }
    logout.delay({$sessionLifetime});
-  </script>     
+
+
+   // Append change handler to all input fields. 
+   if($('pluginModified') != null && $('pluginModified').value == 0){
+       for(i=0;i<document.forms.length;i++){
+           for(e=0;e<document.forms[i].elements.length;e++){
+               var ele = document.forms[i].elements[e];
+               Event.observe(ele, 'change', 
+                    function () {
+                        $('pluginModified').value |= 1;
+                    });
+           }
+       }
+   }
+
+  </script>    
  </body>
 </html>
