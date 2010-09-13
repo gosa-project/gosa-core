@@ -21,35 +21,36 @@
  */
 
 /* Remove locks created by this plugin
-*/
+ */
 if ($remove_lock){
-  if(session::is_set('departmentManagement')){
-      $macl = session::get('departmentManagement');
-      $macl->remove_lock();
-  }
+    if(session::is_set('departmentManagement')){
+        $macl = session::get('departmentManagement');
+        $macl->remove_lock();
+        session::un_set('departmentManagement');
+    }
 }
 
 /* Remove this plugin from session
-*/
+ */
 if ( $cleanup ){
-  session::un_set('departmentManagement');
+    session::un_set('departmentManagement');
 }else{
 
-  /* Create usermanagement object on demand */
-  if (!session::is_set('departmentManagement')){
-    $departmentManagement= new departmentManagement ($config, $ui);
+    /* Create usermanagement object on demand */
+    if (!session::is_set('departmentManagement')){
+        $departmentManagement= new departmentManagement ($config, $ui);
+        session::set('departmentManagement',$departmentManagement);
+    }
+    $departmentManagement = session::get('departmentManagement');
+    $display= $departmentManagement->execute();
+
+    /* Reset requested? */
+    if (isset($_GET['reset']) && $_GET['reset'] == 1){
+        session::un_set ('departmentManagement');
+    }
+
+    /* Show and save dialog */
     session::set('departmentManagement',$departmentManagement);
-  }
-  $departmentManagement = session::get('departmentManagement');
-  $display= $departmentManagement->execute();
-
-  /* Reset requested? */
-  if (isset($_GET['reset']) && $_GET['reset'] == 1){
-    session::un_set ('departmentManagement');
-  }
-
-  /* Show and save dialog */
-  session::set('departmentManagement',$departmentManagement);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
