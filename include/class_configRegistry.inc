@@ -160,12 +160,12 @@ class configRegistry{
                     $this->pluginRequirements[$cname] = $defs['plRequirements'];
                 }else{
                     if($cname == $requiresActivePlugin){
-                        new log("debug","","Skipped schema check for '{$cname}' plugin is inactive!",
-                                array(),'');
+                        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "", 
+                                "Skipped schema check for '{$cname}' plugin is inactive!");
                     }else{
-                        new log("debug","","Skipped schema check for class '{$cname}' skipped,".
-                                    " required plugin '{$requiresActivePlugin}' is inactive!",
-                                array(),'');
+                        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "", 
+                                "Skipped schema check for class '{$cname}' skipped,".
+                                " required plugin '{$requiresActivePlugin}' is inactive!");
                     }
                 }
             }
