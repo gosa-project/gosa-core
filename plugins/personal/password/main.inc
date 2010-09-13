@@ -26,7 +26,7 @@
 $lock_msg="";
 if ($remove_lock){
   if(session::is_set('password')){
-    //Nothing to do here
+    session::un_set('password');
   }
 }
 
