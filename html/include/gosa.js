@@ -29,7 +29,7 @@ Event.observe(window, 'keypress', keyHandler);
 /* Ask before switching a plugin with this function */
 function question(text, url)
 {
-	if(document.mainform.ignore){
+	if(document.mainform.ignore || $('pluginModified') == null || $('pluginModified').value == 0){
 		location.href= url;
 		return true;
 	}
