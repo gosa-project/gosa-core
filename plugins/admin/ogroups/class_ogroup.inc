@@ -65,6 +65,8 @@ class ogroup extends plugin
     var $objectSelect= FALSE;
     var $view_logged = FALSE;
 
+    var $copyMembers = TRUE;
+
     var $baseSelector;
 
     /* Already assigned Workstations. Will be hidden in selection. 
@@ -700,6 +702,10 @@ class ogroup extends plugin
     {
         plugin::save();
 
+        // Do not save members if we don't want to. 
+        // This may be the case if we've copied an ogroup containing systems!
+        if(!$this->copyMembers) $this->member = array();
+
         /* Move members to target array */
         $this->attrs['member'] =array();
         foreach ($this->member as $key => $desc){
@@ -777,6 +783,16 @@ class ogroup extends plugin
     {
         plugin::PrepareForCopyPaste($source);
 
+        // Preselect "Copy members" state.
+        // If we've terminals, workstations or servers in our members list,
+        //  then disable this option by default, to avoid problems with 
+        //  inheritance of ogroup values. 
+        if (preg_match("/[STW]/", $this->gosaGroupObjects) || !isset($source['member'])) { 
+            $this->copyMembers = FALSE; 
+        } else { 
+            $this->copyMembers = TRUE; 
+        } 
+
         /* Reload tabs */
         $this->parent->reload($this->gosaGroupObjects );
 
@@ -800,6 +816,7 @@ class ogroup extends plugin
     {
         $smarty = get_smarty();
         $smarty->assign("cn",  set_post($this->cn));
+        $smarty->assign("copyMembers", $this->copyMembers);
         $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
         $ret = array();
         $ret['string'] = $str;
@@ -812,6 +829,7 @@ class ogroup extends plugin
         if(isset($_POST['cn'])){
             $this->cn = get_post('cn');
         }
+        $this->copyMembers = isset($_POST['copyMembers']);
     }
 
 
