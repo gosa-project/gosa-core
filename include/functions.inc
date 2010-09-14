@@ -2421,10 +2421,6 @@ function clean_smarty_compile_dir($directory)
               msg_dialog::display(_("Internal error"), sprintf(_("File '%s' could not be deleted."), $directory."/".$file), ERROR_DIALOG);
               // This should never be reached
             }
-          } elseif(is_dir($directory."/".$file) &&
-              is_writable($directory."/".$file)) {
-            // Just recursively delete it
-            rmdirRecursive($directory."/".$file);
           }
         }
         // We should now create a fresh revision file
