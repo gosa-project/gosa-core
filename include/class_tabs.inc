@@ -159,6 +159,12 @@ class tabs
     }
 
     // Detect if we've modifications right now.
+    // - A plugin state has to be changed, this is not a goo solution, but
+    //   currently it does what we want. 
+    //   (It would be better to ask the plugins if something has changed)
+    $this->isPluginModified |= isset($_POST['modify_state']);
+
+    // - Capture the plugins modification status.
     foreach ($this->by_name as $class => $name){
         $this->isPluginModified |= (isset($this->by_object[$class]->is_modified)) && $this->by_object[$class]->is_modified;
     }
