@@ -700,11 +700,14 @@ class ogroup extends plugin
     /* Save to LDAP */
     function save()
     {
-        plugin::save();
-
         // Do not save members if we don't want to. 
         // This may be the case if we've copied an ogroup containing systems!
-        if(!$this->copyMembers) $this->member = array();
+        if(!$this->copyMembers){
+            $this->member = array();
+            $this->reload();
+        }
+
+        plugin::save();
 
         /* Move members to target array */
         $this->attrs['member'] =array();
