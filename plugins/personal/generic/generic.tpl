@@ -1,7 +1,4 @@
-
-
 <h3>{t}Personal information{/t}</h3>
-
 
 <table summary="{t}Personal information{/t}">
  <tr>

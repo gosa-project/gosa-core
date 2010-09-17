@@ -50,8 +50,6 @@
    <input type="hidden" name="php_c_check" value="1">
   </form>
   
-<input type='text' id='d'> 
-
   <!-- Automatic logout when session is expired -->
   <script type='text/javascript'>
    function logout()
