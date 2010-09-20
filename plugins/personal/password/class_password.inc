@@ -28,7 +28,7 @@ class password extends plugin
 
     var $proposal = "";
     var $proposalEnabled = FALSE;
-    var $proposalSelected = TRUE;
+    var $proposalSelected = FALSE;
 
     var $forcedHash = NULL;
 
