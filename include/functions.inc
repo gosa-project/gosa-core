@@ -3777,5 +3777,71 @@ function bold($str)
 }
 
 
+
+/*! \brief  Detect the special character handling for the currently used ldap database. 
+ *  @param      Config  The GOsa configuration object.
+ *  @return     Array   An array containing a character mapping the use.
+ */
+function detectLdapSpecialCharHandling()
+{
+    // The list of chars to test for
+    global $config;
+    if(!$config) return(NULL);
+
+    $testChars = array(',','"');
+
+    // In the DN we've to use escaped characters, but the object name (o)
+    //  has the be un-escaped.
+    $dnName = $name = "GOsaLdapEncoding_";
+    foreach($testChars as $char){
+        $dnName .= "\\{$char}_";
+        $name .= "{$char}_";
+    }
+
+    // Create the target dn
+    $oDN = "o=".LDAP::convert($dnName).",".$config->current['BASE'];
+
+    // Create the object on demand.
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
+    if(!$ldap->dn_exists($oDN)){
+        $obj = array();
+        $obj['objectClass'] = array('top','organization');
+        $obj['o'] = $name;
+        $obj['description'] = 'GOsa character encoding test-object.';
+        $ldap->cd($oDN);
+        $ldap->add($obj);
+    }
+
+    // Read the encoding instruction set.
+    $ldap->cd($config->current['BASE']);
+    $ldap->ls("(&(o={$name})(objectClass=organization))");
+
+    
+    if(!$ldap->count() == 1){
+        trigger_error("GOsa couldn't detect the special character encoding used by your ldap!");
+        return(NULL);
+    }else{
+
+        $re = ldap_first_entry($ldap->cid, $ldap->getSearchResultHandle());
+        $attrs= ldap_get_attributes($ldap->cid, $re);
+        $attrs['dn']= trim(ldap_get_dn($ldap->cid, $re));
+        $o = $attrs['o'][0];
+        $dn = $attrs['dn'];
+        $mapOstr = preg_replace("/^GOsaLdapEncoding_/","",$o);
+        $mapO = preg_split("/_/", $mapOstr,0, PREG_SPLIT_NO_EMPTY);
+        $mapDNstr = preg_replace("/^o=GOsaLdapEncoding_([^,]*),.*$/","\\1",$dn);
+        $mapDN = preg_split("/_/", $mapDNstr,0, PREG_SPLIT_NO_EMPTY);
+
+        $map = array();
+        foreach($mapO as $key => $entry){
+            $map[$entry] = $mapDN[$key];
+            $map[$mapDN[$key]] = $entry;
+        }
+        return($map);
+    }
+    return(NULL);
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
