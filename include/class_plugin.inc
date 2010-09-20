@@ -930,6 +930,27 @@ class plugin
       $o_ogroup->save();
     }
 
+    // Migrate objectgroups if needed
+    $objects = get_sub_list("(&(objectClass=gotoEnvironment)(gotoHotplugDeviceDN=".LDAP::prepare4filter(LDAP::fix($src_dn))."))",
+            "users",array(get_ou("core","userRDN"), get_ou("core","groupRDN")),
+            $this->config->current['BASE'],array("dn", "gotoHotplugDeviceDN"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+    $ldap = $this->config->get_ldap_link();
+    foreach($objects as $obj){
+        $deviceDNS = array();
+        for($i=0; $i < $obj["gotoHotplugDeviceDN"]['count']; $i++){
+            $odn = $obj["gotoHotplugDeviceDN"][$i];
+            if($odn == $src_dn){
+                $odn = $dst_dn;
+            }
+            $deviceDNS[] = $odn;
+        }
+        $ldap->cd($obj['dn']);
+        $ldap->modify(array('gotoHotplugDeviceDN'=>$deviceDNS));
+        if(!$ldap->success()){
+            trigger_error(sprintf("Failed to update gotoHotplugDeviceDN for %s: %s", bold($obj['dn']), $ldap->get_error()));
+        }
+    }
+
     // Migrate rfc groups if needed
     $groups = get_sub_list("(&(objectClass=posixGroup)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","groups", array(get_ou("core", "groupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
