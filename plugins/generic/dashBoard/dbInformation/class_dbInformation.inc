@@ -31,7 +31,7 @@ class dbInformation extends plugin
         }
     
         // Read Feeds and sort the results 
-        $feeds = rssReader::parseFeedFromUrl(array('http://www.uweschwanz.com/de/rss/'));
+        $feeds = rssReader::parseFeedFromUrl(array('http://www.heise.de/newsticker/heise.rdf'));
         $feeds = rssReader::sortFeedResultBy($feeds, 'timestamp');
 
         // Append the results to the list.

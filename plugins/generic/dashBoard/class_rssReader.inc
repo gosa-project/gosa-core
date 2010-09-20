@@ -29,7 +29,7 @@ class rssReader{
         if(!is_array($sources)) $urls = array($sources);
         foreach($sources as $source){
             $doc = new DOMDocument();
-            $res = $doc->loadXML($source);
+            $res = @$doc->loadXML($source);
             if(!$res){
                 trigger_error("Failed to load feed '{$source}'!");
             }else{
