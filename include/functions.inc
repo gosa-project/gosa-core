@@ -3788,6 +3788,7 @@ function detectLdapSpecialCharHandling()
     global $config;
     if(!$config) return(NULL);
 
+
     $testChars = array(',','"');
 
     // In the DN we've to use escaped characters, but the object name (o)
@@ -3801,31 +3802,34 @@ function detectLdapSpecialCharHandling()
     // Create the target dn
     $oDN = "o=".LDAP::convert($dnName).",".$config->current['BASE'];
 
-    // Create the object on demand.
+    // Get ldap connection and check if we've already created the character 
+    //  detection object. 
     $ldap = $config->get_ldap_link();
-    $ldap->cd($config->current['BASE']);
-    if(!$ldap->dn_exists($oDN)){
+    $ldapCID = $ldap->cid();
+
+    $res = ldap_list($ldap->cid, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('dn'));
+    $cnt = ldap_count_entries($ldap->cid, $res);
+    if(!$cnt){
         $obj = array();
         $obj['objectClass'] = array('top','organization');
         $obj['o'] = $name;
         $obj['description'] = 'GOsa character encoding test-object.';
-        $ldap->cd($oDN);
-        $ldap->add($obj);
+        ldap_add($ldap->cid, $config->current['BASE'], $attrs);
     }
-
-    // Read the encoding instruction set.
-    $ldap->cd($config->current['BASE']);
-    $ldap->ls("(&(o={$name})(objectClass=organization))");
-
     
-    if(!$ldap->count() == 1){
+    
+    // Read the encoding instruction set.
+    $res = ldap_list($ldap->cid, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('*'));
+    $cnt = ldap_count_entries($ldap->cid, $res);
+    if($cnt != 1){
         trigger_error("GOsa couldn't detect the special character encoding used by your ldap!");
         return(NULL);
     }else{
 
-        $re = ldap_first_entry($ldap->cid, $ldap->getSearchResultHandle());
+        $re = ldap_first_entry($ldap->cid, $res);
         $attrs= ldap_get_attributes($ldap->cid, $re);
         $attrs['dn']= trim(ldap_get_dn($ldap->cid, $re));
+    
         $o = $attrs['o'][0];
         $dn = $attrs['dn'];
         $mapOstr = preg_replace("/^GOsaLdapEncoding_/","",$o);

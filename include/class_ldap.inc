@@ -327,11 +327,6 @@ class LDAP{
     }
   }
 
-    function getSearchResultHandle($srp)
-    {
-        return($this->sr[$srp]);
-    }
-
   function fetch($srp)
   {
     $att= array();
