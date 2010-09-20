@@ -3804,31 +3804,30 @@ function detectLdapSpecialCharHandling()
 
     // Get ldap connection and check if we've already created the character 
     //  detection object. 
-    $ldap = $config->get_ldap_link();
-    $ldapCID = $ldap->cid();
-
-    $res = ldap_list($ldap->cid, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('dn'));
-    $cnt = ldap_count_entries($ldap->cid, $res);
+    $ldapCID = @ldap_connect($config->current['SERVER']);
+    @ldap_bind($ldapCID, $config->current['ADMINDN'],$config->current['ADMINPASSWORD']);
+    $res = ldap_list($ldapCID, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('dn'));
+    $cnt = ldap_count_entries($ldapCID, $res);
     if(!$cnt){
         $obj = array();
         $obj['objectClass'] = array('top','organization');
         $obj['o'] = $name;
         $obj['description'] = 'GOsa character encoding test-object.';
-        ldap_add($ldap->cid, $config->current['BASE'], $attrs);
+        ldap_add($ldapCID, $config->current['BASE'], $attrs);
     }
     
     
     // Read the encoding instruction set.
-    $res = ldap_list($ldap->cid, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('*'));
-    $cnt = ldap_count_entries($ldap->cid, $res);
+    $res = ldap_list($ldapCID, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('*'));
+    $cnt = ldap_count_entries($ldapCID, $res);
     if($cnt != 1){
         trigger_error("GOsa couldn't detect the special character encoding used by your ldap!");
         return(NULL);
     }else{
 
-        $re = ldap_first_entry($ldap->cid, $res);
-        $attrs= ldap_get_attributes($ldap->cid, $re);
-        $attrs['dn']= trim(ldap_get_dn($ldap->cid, $re));
+        $re = ldap_first_entry($ldapCID, $res);
+        $attrs= ldap_get_attributes($ldapCID, $re);
+        $attrs['dn']= trim(ldap_get_dn($ldapCID, $re));
     
         $o = $attrs['o'][0];
         $dn = $attrs['dn'];

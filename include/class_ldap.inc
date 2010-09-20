@@ -28,7 +28,9 @@ define("NO_FILE_UPLOADED",10003);
 define("INSERT_OK",10000);
 define("SPECIALS_OVERRIDE", TRUE);
 
-class LDAP{
+class LDAP
+{
+    public static $characterMap = NULL;
 
   var $hascon   =false;
   var $reconnect=false;
@@ -66,6 +68,11 @@ class LDAP{
     }
 
     $this->connect();
+
+    // Get detected character mapping
+    if(LDAP::$characterMap == NULL){
+        LDAP::$characterMap = detectLdapSpecialCharHandling();
+    }
   }
 
 
