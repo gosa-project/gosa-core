@@ -31,6 +31,8 @@ define("SPECIALS_OVERRIDE", TRUE);
 class LDAP
 {
     public static $characterMap = NULL;
+    public static $characterMapRegFrom = NULL;
+    public static $characterMapRegTo = NULL;
 
   var $hascon   =false;
   var $reconnect=false;
@@ -53,26 +55,21 @@ class LDAP
 
   function LDAP($binddn,$bindpw, $hostname, $follow_referral= FALSE, $tls= FALSE)
   {
-    global $config;
-    $this->follow_referral= $follow_referral;
-    $this->tls=$tls;
-    $this->binddn=LDAP::convert($binddn);
+      global $config;
+      $this->follow_referral= $follow_referral;
+      $this->tls=$tls;
+      $this->binddn=LDAP::convert($binddn);
 
-    $this->bindpw=$bindpw;
-    $this->hostname=$hostname;
+      $this->bindpw=$bindpw;
+      $this->hostname=$hostname;
 
-    /* Check if MAX_LDAP_QUERY_TIME is defined */ 
-    if(is_object($config) && $config->get_cfg_value("core","ldapMaxQueryTime") != ""){
-      $str = $config->get_cfg_value("core","ldapMaxQueryTime");
-      $this->max_ldap_query_time = (float)($str);
-    }
+      /* Check if MAX_LDAP_QUERY_TIME is defined */ 
+      if(is_object($config) && $config->get_cfg_value("core","ldapMaxQueryTime") != ""){
+          $str = $config->get_cfg_value("core","ldapMaxQueryTime");
+          $this->max_ldap_query_time = (float)($str);
+      }
 
-    $this->connect();
-
-    // Get detected character mapping
-    if(LDAP::$characterMap == NULL || TRUE){
-        LDAP::$characterMap = detectLdapSpecialCharHandling();
-    }
+      $this->connect();
   }
 
 
@@ -109,23 +106,51 @@ class LDAP
   }
 
 
-  /* Function to fix all problematic characters inside a DN by replacing \001XX
-     codes to their original values. See "convert" for mor information. 
-     ',' characters are always expanded to \, (not \2C), since all tested LDAP
-     servers seem to take it the correct way.                                  */
+  /* \brief     Tests for the special-char handling of the currently used ldap database 
+   *             and updates the LDAP class correspondingly.
+   *            This affects the LDAP::fix function and allows us to write 
+   *             dns containing  , " ( )
+   */
+  static function updateSpecialCharHandling()
+  {
+      // Set a default character handling.
+      LDAP::$characterMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/");
+      LDAP::$characterMapRegTo = array("\,", "(", ")", "/", '\"');
+
+      if(LDAP::$characterMap == NULL){
+          LDAP::$characterMap = detectLdapSpecialCharHandling();
+
+          // Check if character-detection was successfull, if it wasn't use a fallback.
+          if(LDAP::$characterMap){
+              foreach(LDAP::$characterMap as $from => $to){
+                  LDAP::$characterMapRegFrom[] = "/{$from}/";
+                  LDAP::$characterMapRegTo[] = "/{$to}/";
+              }
+          }
+      }
+  }
+
+
+  /* \brief   Function to fix all problematic characters inside a DN by replacing \001XX
+   *           codes to their original values. See "convert" for more information. 
+   *          The ',' characters are always expanded to \, (not \2C), since all tested LDAP
+   *           servers seem to take it the correct way.                                 
+   * @param String  The DN to convert characters in. 
+   * @param String  The converted dn.
+   */
   static function fix($dn)
   {
-    if (SPECIALS_OVERRIDE == TRUE){
-    
-    print_a(LDAP::$characterMap);
+      if (SPECIALS_OVERRIDE == TRUE){
+        
+          // Update the conversion instruction set.
+          if(LDAP::$characterMap == NULL) LDAP::updateSpecialCharHandling();
 
-      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/"),
-            array("\,", "(", ")", "/", '\"'),
-            $dn));
-    } else {
-      return ($dn);
-    }
+          return (preg_replace(LDAP::$characterMapRegFrom,LDAP::$characterMapRegTo,$dn));
+      } else {
+          return ($dn);
+      }
   }
+
 
   /* Function to fix problematic characters in DN's that are used for search
      requests. I.e. member=....                                               */

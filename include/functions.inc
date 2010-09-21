@@ -3794,7 +3794,12 @@ function detectLdapSpecialCharHandling()
     //  has the be un-escaped.
     $name = 'GOsaLdapEncoding_,_"_(_)';
     $dnName = 'GOsaLdapEncoding_\,_\"_(_)';
-    
+   
+    // Prapare name to be useable in filters
+    $fixed= normalizeLdap(str_replace('\\\\', '\\\\\\', $name));
+    $filterName = str_replace('\\,', '\\\\,', $fixed);
+
+ 
     // Create the target dn
     $oDN = "o={$dnName},".$config->current['BASE'];
 
@@ -3804,7 +3809,7 @@ function detectLdapSpecialCharHandling()
     ldap_set_option($ldapCID, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_bind($ldapCID, $config->current['ADMINDN'],$config->current['ADMINPASSWORD']);
     $res = ldap_list($ldapCID, $config->current['BASE'], 
-            "(&(o=".LDAP::prepare4filter($name).")(objectClass=organization))",
+            "(&(o=".$filterName.")(objectClass=organization))",
             array('dn'));
 
     // If we haven't created the character-detection object, then create it now.
@@ -3819,7 +3824,7 @@ function detectLdapSpecialCharHandling()
     
     // Read the character-handling detection entry from the ldap.
     $res = ldap_list($ldapCID, $config->current['BASE'],
-            "(&(o=".LDAP::prepare4filter($name).")(objectClass=organization))",
+            "(&(o=".$filterName.")(objectClass=organization))",
             array('dn','o'));
     $cnt = ldap_count_entries($ldapCID, $res);
     if($cnt != 1){
