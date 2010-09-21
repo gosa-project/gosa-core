@@ -141,9 +141,7 @@ class LDAP
 
                     // Append entry make readable array
                     LDAP::$readableMapRegFrom[] = "/".preg_quote($to,'/')."/";
-                    LDAP::$readableMapRegFrom[] = "/".preg_quote(stripslashes($to),'/')."/";
                     LDAP::$readableMapRegFrom[] = "/".preg_quote(LDAP::convert($to),'/')."/";
-                    LDAP::$readableMapRegTo[] = stripslashes($from);
                     LDAP::$readableMapRegTo[] = stripslashes($from);
                     LDAP::$readableMapRegTo[] = stripslashes($from);
                 }
