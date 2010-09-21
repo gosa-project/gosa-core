@@ -3852,7 +3852,7 @@ function detectLdapSpecialCharHandling()
         // Create a mapping out of the results.
         $map = array();
         foreach($mapName as $key => $entry){
-            $map[LDAP::convert("{$entry}")] = $mapDN[$key];
+            $map[$entry] = $mapDN[$key];
         }
         return($map);
     }

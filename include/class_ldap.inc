@@ -125,6 +125,7 @@ class LDAP
                 LDAP::$characterMapRegFrom = array();
                 LDAP::$characterMapRegTo = array();
                 foreach(LDAP::$characterMap as $from => $to){
+                    $from = LDAP::convert($from);
                     LDAP::$characterMapRegFrom[] = "/{$from}/";
                     LDAP::$characterMapRegTo[] = addslashes($to);
                 }
