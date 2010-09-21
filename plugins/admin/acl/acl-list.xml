@@ -23,7 +23,7 @@
       <label>Role</label>
       <objectClass>gosaRole</objectClass>
       <category>acl</category>
-      <class>acl</class>
+      <class>aclrole</class>
       <image>plugins/acl/images/role.png</image>
     </objectType>
 
