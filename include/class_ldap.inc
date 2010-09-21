@@ -33,6 +33,8 @@ class LDAP
     public static $characterMap = NULL;
     public static $characterMapRegFrom = NULL;
     public static $characterMapRegTo = NULL;
+    public static $readableMapRegFrom = NULL;
+    public static $readableMapRegTo = NULL;
 
     var $hascon   =false;
     var $reconnect=false;
@@ -117,6 +119,11 @@ class LDAP
         LDAP::$characterMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/");
         LDAP::$characterMapRegTo = array("\,", "(", ")", "/", '\"');
 
+        // Set a default mapping to make readable strings out of dns.
+        LDAP::$readableMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/",
+                "/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//", "/\\\\22/", '/\\\\"/');
+        LDAP::$readableMapRegTo = array(",", "(", ")", "/", '"',",", ",", "(", ")", "/", '"', '"');
+
         if(LDAP::$characterMap === NULL){
             LDAP::$characterMap = detectLdapSpecialCharHandling();
 
@@ -124,10 +131,19 @@ class LDAP
             if(LDAP::$characterMap !== NULL){
                 LDAP::$characterMapRegFrom = array();
                 LDAP::$characterMapRegTo = array();
+                LDAP::$readableMapRegFrom = array();
+                LDAP::$readableMapRegTo = array();
                 foreach(LDAP::$characterMap as $from => $to){
-                    $from = LDAP::convert($from);
-                    LDAP::$characterMapRegFrom[] = "/{$from}/";
+                   
+                    // Append entry character conversion  
+                    LDAP::$characterMapRegFrom[] = "/".preg_quote(LDAP::convert($from),'/')."/";
                     LDAP::$characterMapRegTo[] = addslashes($to);
+
+                    // Append entry make readable array
+                    LDAP::$readableMapRegFrom[] = "/".preg_quote(stripslashes($to),'/')."/";
+                    LDAP::$readableMapRegTo[] = stripslashes($from);
+                    LDAP::$readableMapRegFrom[] = "/".preg_quote(LDAP::convert($to),'/')."/";
+                    LDAP::$readableMapRegTo[] = stripslashes($from);
                 }
             }else{
                 // To avoid querying a hundred times without any success, stop here.
@@ -137,6 +153,16 @@ class LDAP
 
         $attrs = array(implode(LDAP::$characterMapRegFrom,', '),implode(LDAP::$characterMapRegTo,', '));
         @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"Detected special-char handling for LDAP actions");
+    }
+
+
+    static function makeReadable($dn)
+    {
+        if(LDAP::$characterMap === NULL) LDAP::updateSpecialCharHandling();
+
+        print_a(array(LDAP::$readableMapRegFrom,LDAP::$readableMapRegTo,$dn, preg_replace(LDAP::$readableMapRegFrom,LDAP::$readableMapRegTo,$dn)));
+
+        return (preg_replace(LDAP::$readableMapRegFrom,LDAP::$readableMapRegTo,$dn));
     }
 
 

@@ -170,7 +170,7 @@ class baseSelector {
             onmouseout=\"   mouseIsStillOver=false;
         rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
 
-            value=\"".preg_replace('/"/','&quot;',$this->pathMapping[$this->base])."\">";
+            value=\"".htmlentities(LDAP::makeReadable($this->pathMapping[$this->base]),ENT_COMPAT,'utf-8')."\">";
 
 
         // Autocompleter
