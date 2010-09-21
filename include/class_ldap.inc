@@ -70,7 +70,7 @@ class LDAP
     $this->connect();
 
     // Get detected character mapping
-    if(LDAP::$characterMap == NULL){
+    if(LDAP::$characterMap == NULL || TRUE){
         LDAP::$characterMap = detectLdapSpecialCharHandling();
     }
   }
@@ -116,6 +116,9 @@ class LDAP
   static function fix($dn)
   {
     if (SPECIALS_OVERRIDE == TRUE){
+    
+    print_a(LDAP::$characterMap);
+
       return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/"),
             array("\,", "(", ")", "/", '\"'),
             $dn));

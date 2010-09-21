@@ -3779,6 +3779,8 @@ function bold($str)
 
 
 /*! \brief  Detect the special character handling for the currently used ldap database. 
+ *          For example some convert , to \2C or " to \22.
+ *         
  *  @param      Config  The GOsa configuration object.
  *  @return     Array   An array containing a character mapping the use.
  */
@@ -3788,58 +3790,62 @@ function detectLdapSpecialCharHandling()
     global $config;
     if(!$config) return(NULL);
 
-
-    $testChars = array(',','"');
-
     // In the DN we've to use escaped characters, but the object name (o)
     //  has the be un-escaped.
-    $dnName = $name = "GOsaLdapEncoding_";
-    foreach($testChars as $char){
-        $dnName .= "\\{$char}_";
-        $name .= "{$char}_";
-    }
-
+    $name = 'GOsaLdapEncoding_,_"_(_)';
+    $dnName = 'GOsaLdapEncoding_\,_\"_(_)';
+    
     // Create the target dn
-    $oDN = "o=".LDAP::convert($dnName).",".$config->current['BASE'];
+    $oDN = "o={$dnName},".$config->current['BASE'];
 
     // Get ldap connection and check if we've already created the character 
     //  detection object. 
-    $ldapCID = @ldap_connect($config->current['SERVER']);
-    @ldap_bind($ldapCID, $config->current['ADMINDN'],$config->current['ADMINPASSWORD']);
-    $res = ldap_list($ldapCID, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('dn'));
+    $ldapCID = ldap_connect($config->current['SERVER']);
+    ldap_set_option($ldapCID, LDAP_OPT_PROTOCOL_VERSION, 3);
+    ldap_bind($ldapCID, $config->current['ADMINDN'],$config->current['ADMINPASSWORD']);
+    $res = ldap_list($ldapCID, $config->current['BASE'], 
+            "(&(o=".LDAP::prepare4filter($name).")(objectClass=organization))",
+            array('dn'));
+
+    // If we haven't created the character-detection object, then create it now.
     $cnt = ldap_count_entries($ldapCID, $res);
     if(!$cnt){
         $obj = array();
         $obj['objectClass'] = array('top','organization');
         $obj['o'] = $name;
         $obj['description'] = 'GOsa character encoding test-object.';
-        ldap_add($ldapCID, $config->current['BASE'], $attrs);
+        ldap_add($ldapCID, $oDN, $obj);
     }
     
-    
-    // Read the encoding instruction set.
-    $res = ldap_list($ldapCID, $config->current['BASE'], "(&(o={$name})(objectClass=organization))",array('*'));
+    // Read the character-handling detection entry from the ldap.
+    $res = ldap_list($ldapCID, $config->current['BASE'],
+            "(&(o=".LDAP::prepare4filter($name).")(objectClass=organization))",
+            array('dn','o'));
     $cnt = ldap_count_entries($ldapCID, $res);
     if($cnt != 1){
-        trigger_error("GOsa couldn't detect the special character encoding used by your ldap!");
+        trigger_error("GOsa couldn't detect the special character handling used by your ldap!");
         return(NULL);
     }else{
 
+        // Get the character handling entry from the ldap and check how the 
+        //  values were written. Compare them with what
+        //  we've initially intended to write and create a mapping out 
+        //  of the results.
         $re = ldap_first_entry($ldapCID, $res);
-        $attrs= ldap_get_attributes($ldapCID, $re);
-        $attrs['dn']= trim(ldap_get_dn($ldapCID, $re));
-    
-        $o = $attrs['o'][0];
-        $dn = $attrs['dn'];
-        $mapOstr = preg_replace("/^GOsaLdapEncoding_/","",$o);
-        $mapO = preg_split("/_/", $mapOstr,0, PREG_SPLIT_NO_EMPTY);
-        $mapDNstr = preg_replace("/^o=GOsaLdapEncoding_([^,]*),.*$/","\\1",$dn);
+        $attrs = ldap_get_attributes($ldapCID, $re);
+   
+        // Extract the interessting characters out of the dn and the 
+        //  initially used $name for the entry. 
+        $mapDNstr = preg_replace("/^o=GOsaLdapEncoding_([^,]*),.*$/","\\1", trim(ldap_get_dn($ldapCID, $re)));
         $mapDN = preg_split("/_/", $mapDNstr,0, PREG_SPLIT_NO_EMPTY);
 
+        $mapNameStr = preg_replace("/^GOsaLdapEncoding_/","",$dnName);
+        $mapName = preg_split("/_/", $mapNameStr,0, PREG_SPLIT_NO_EMPTY);
+
+        // Create a mapping out of the results.
         $map = array();
-        foreach($mapO as $key => $entry){
-            $map[$entry] = $mapDN[$key];
-            $map[$mapDN[$key]] = $entry;
+        foreach($mapName as $key => $entry){
+            $map[LDAP::convert("{$entry}")] = $mapDN[$key];
         }
         return($map);
     }
