@@ -122,12 +122,17 @@ class LDAP
 
           // Check if character-detection was successfull, if it wasn't use a fallback.
           if(LDAP::$characterMap){
+              LDAP::$characterMapRegFrom = array();
+              LDAP::$characterMapRegTo = array();
               foreach(LDAP::$characterMap as $from => $to){
                   LDAP::$characterMapRegFrom[] = "/{$from}/";
                   LDAP::$characterMapRegTo[] = "/{$to}/";
               }
           }
       }
+                
+      $attrs = array(implode(LDAP::$characterMapRegFrom,', '),implode(LDAP::$characterMapRegTo,', '));
+      @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"Detected special-char handling for LDAP actions");
   }
 
 
