@@ -349,9 +349,9 @@ class msgPool
     $objects= "<ul class='object-list'>";
     foreach ($data as $key => $value){
       if (is_numeric($key)){
-        $objects.= "<li>\n$value</li>";
+        $objects.= "<li>\n".LDAP::makeReadable($value)."</li>";
       } else {
-        $objects.= "<li>\n$value <span>$key</span></li>";
+        $objects.= "<li>\n$value <span>".LDAP::makeReadable($key)."</span></li>";
       }
     }
     $objects.= "</ul>";

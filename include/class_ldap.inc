@@ -140,9 +140,11 @@ class LDAP
                     LDAP::$characterMapRegTo[] = addslashes($to);
 
                     // Append entry make readable array
+                    LDAP::$readableMapRegFrom[] = "/".preg_quote($to,'/')."/";
                     LDAP::$readableMapRegFrom[] = "/".preg_quote(stripslashes($to),'/')."/";
-                    LDAP::$readableMapRegTo[] = stripslashes($from);
                     LDAP::$readableMapRegFrom[] = "/".preg_quote(LDAP::convert($to),'/')."/";
+                    LDAP::$readableMapRegTo[] = stripslashes($from);
+                    LDAP::$readableMapRegTo[] = stripslashes($from);
                     LDAP::$readableMapRegTo[] = stripslashes($from);
                 }
             }else{
@@ -156,12 +158,14 @@ class LDAP
     }
 
 
+    /*!  \brief     This methods replaces non-readable characters be readable ones, 
+     *               depends on what were detect in 'updateSpecialCharHandling'.
+     * @param       String  The DN/string to cleanup 
+     * @return      String  The readable string.
+     */
     static function makeReadable($dn)
     {
         if(LDAP::$characterMap === NULL) LDAP::updateSpecialCharHandling();
-
-        print_a(array(LDAP::$readableMapRegFrom,LDAP::$readableMapRegTo,$dn, preg_replace(LDAP::$readableMapRegFrom,LDAP::$readableMapRegTo,$dn)));
-
         return (preg_replace(LDAP::$readableMapRegFrom,LDAP::$readableMapRegTo,$dn));
     }
 
