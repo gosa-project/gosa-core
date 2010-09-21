@@ -3818,7 +3818,10 @@ function detectLdapSpecialCharHandling()
         $obj['objectClass'] = array('top','organization');
         $obj['o'] = $name;
         $obj['description'] = 'GOsa character encoding test-object.';
-        ldap_add($ldapCID, $oDN, $obj);
+        if(!@ldap_add($ldapCID, $oDN, $obj)){
+            trigger_error("GOsa couldn't detect the special character handling used by your ldap!");
+            return(NULL);
+        }
     }
     
     // Read the character-handling detection entry from the ldap.
@@ -3826,7 +3829,7 @@ function detectLdapSpecialCharHandling()
             "(&(o=".$filterName.")(objectClass=organization))",
             array('dn','o'));
     $cnt = ldap_count_entries($ldapCID, $res);
-    if($cnt != 1){
+    if($cnt != 1 || !$res){
         trigger_error("GOsa couldn't detect the special character handling used by your ldap!");
         return(NULL);
     }else{

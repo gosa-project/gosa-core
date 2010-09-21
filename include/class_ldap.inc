@@ -117,17 +117,20 @@ class LDAP
         LDAP::$characterMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/");
         LDAP::$characterMapRegTo = array("\,", "(", ")", "/", '\"');
 
-        if(LDAP::$characterMap == NULL){
+        if(LDAP::$characterMap === NULL){
             LDAP::$characterMap = detectLdapSpecialCharHandling();
 
             // Check if character-detection was successfull, if it wasn't use a fallback.
-            if(LDAP::$characterMap){
+            if(LDAP::$characterMap !== NULL){
                 LDAP::$characterMapRegFrom = array();
                 LDAP::$characterMapRegTo = array();
                 foreach(LDAP::$characterMap as $from => $to){
                     LDAP::$characterMapRegFrom[] = "/{$from}/";
                     LDAP::$characterMapRegTo[] = "/{$to}/";
                 }
+            }else{
+                // To avoid querying a hundred times without any success, stop here.
+                LDAP::$characterMap = array();
             }
         }
 
@@ -148,7 +151,7 @@ class LDAP
         if (SPECIALS_OVERRIDE == TRUE){
 
             // Update the conversion instruction set.
-            if(LDAP::$characterMap == NULL) LDAP::updateSpecialCharHandling();
+            if(LDAP::$characterMap === NULL) LDAP::updateSpecialCharHandling();
 
             return (preg_replace(LDAP::$characterMapRegFrom,LDAP::$characterMapRegTo,$dn));
         } else {
