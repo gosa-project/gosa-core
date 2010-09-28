@@ -26,7 +26,6 @@ if ($remove_lock){
     if(session::is_set('departmentManagement')){
         $macl = session::get('departmentManagement');
         $macl->remove_lock();
-        session::un_set('departmentManagement');
     }
 }
 
