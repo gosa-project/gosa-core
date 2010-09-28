@@ -26,7 +26,6 @@ if ($remove_lock){
     if(session::is_set('userManagement')){
         $macl = session::get('userManagement');
         $macl->remove_lock();
-        session::un_set('userManagement');
     }
 }
 
