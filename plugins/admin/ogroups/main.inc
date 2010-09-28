@@ -26,7 +26,6 @@ if ($remove_lock){
     if(session::is_set('ogroupManagement')){
         $macl = session::get('ogroupManagement');
         $macl->remove_lock();
-        session::un_set('ogroupManagement');
     }
 }
 
