@@ -28,9 +28,6 @@ if ($remove_lock ||
         isset($_POST['edit_cancel']) || 
         isset($_POST['password_cancel'])){
     del_lock($ui->dn);
-    if(session::is_set('MyAccountTabs') && session::is_set('edit')){
-        session::un_set('MyAccountTabs');
-    }
 }
 
 /* Reset requested? */
