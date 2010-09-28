@@ -26,7 +26,6 @@ if ($remove_lock){
     if(session::is_set('aclManagement')){
         $macl = session::get('aclManagement');
         $macl->remove_lock();
-        session::un_set('aclManagement');
     }
 }
 
