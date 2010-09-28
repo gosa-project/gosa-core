@@ -33,6 +33,7 @@ class sortableListing {
     private $cssclass= "";
     private $id;
 
+    private $sortingEnabled= true;
     private $data= array();
     private $keys= array();
     private $modes= array();
@@ -506,9 +507,15 @@ class sortableListing {
     }
 
 
+    public function sortingEnabled($bool = TRUE)
+    {
+        $this->sortingEnabled= $bool;
+    }
+
+
     public function sortData()
     {
-        if(!count($this->data)) return;
+        if(!$this->sortingEnabled || !count($this->data)) return;
 
         // Extract data
         $tmp= array();
