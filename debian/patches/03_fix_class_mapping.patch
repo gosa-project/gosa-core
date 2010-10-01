@@ -1,7 +1,9 @@
 Author: <cajus@debian.org>
 Description: Fix location of auto-generated class mapping file
---- a/include/class_config.inc
-+++ b/gosa-core/include/class_config.inc
+Index: gosa/gosa-core/include/class_config.inc
+===================================================================
+--- gosa.orig/gosa-core/include/class_config.inc	2010-02-05 13:51:35.000000000 +0000
++++ gosa/gosa-core/include/class_config.inc	2010-10-01 06:51:28.478555098 +0000
 @@ -100,12 +100,12 @@
          if we have installed or removed plugins. 
       */
@@ -17,10 +19,12 @@ Description: Fix location of auto-generated class mapping file
      session::global_set("class_location.inc:timestamp",$tmp['mtime']);
  
      if($this->filename != "" && filemtime($this->filename) != $this->last_modified){
---- a/include/functions.inc
-+++ b/gosa-core/include/functions.inc
+Index: gosa/gosa-core/include/functions.inc
+===================================================================
+--- gosa.orig/gosa-core/include/functions.inc	2010-10-01 06:51:28.000000000 +0000
++++ gosa/gosa-core/include/functions.inc	2010-10-01 06:51:55.250554318 +0000
 @@ -73,7 +73,7 @@
- $svn_revision = '$Revision: 19051 $';
+ $svn_revision = '$Revision: 19652 $';
  
  /* Include required files */
 -require_once("class_location.inc");
@@ -28,8 +32,10 @@ Description: Fix location of auto-generated class mapping file
  require_once ("functions_debug.inc");
  require_once ("accept-to-gettext.inc");
  
---- a/update-gosa
-+++ b/gosa-core/update-gosa
+Index: gosa/gosa-core/update-gosa
+===================================================================
+--- gosa.orig/gosa-core/update-gosa	2008-06-10 07:56:22.000000000 +0000
++++ gosa/gosa-core/update-gosa	2010-10-01 06:51:28.481554589 +0000
 @@ -21,7 +21,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
