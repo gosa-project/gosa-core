@@ -101,16 +101,6 @@ Description: Provide ACL based rendering for Smarty
  GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
-Package: gosa-plugin-addressbook
-Architecture: all
-Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
-Description: addressbook plugin for GOsa²
- Simple addressbook plugin for GOsa².
- .
- GOsa² is a combination of system-administrator and end-user web
- interface, designed to handle LDAP based setups.
-
 Package: gosa-plugin-connectivity
 Architecture: all
 Depends: ${misc:Depends}, gosa
