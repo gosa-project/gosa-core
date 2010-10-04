@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VIcore2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-29 20:30+0200\n"
+"POT-Creation-Date: 2010-08-02 20:33+0200\n"
 "PO-Revision-Date: 2008-07-04 09:59+0200\n"
 "Last-Translator: Stefan Koehler <stefan@gonicus.de>\n"
 "Language-Team: Vietnamese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -160,8 +161,8 @@ msgstr "Hiệu chỉnh các tính năng chung"
 
 #: ihtml/themes/default/userFilterEditor.tpl:11 include/class_acl.inc:262
 #: include/class_SnapShotDialog.inc:55 include/class_userFilter.inc:55
-#: include/class_userFilter.inc:150 include/class_userFilterEditor.inc:230
-#: include/class_userFilterEditor.inc:234
+#: include/class_userFilter.inc:150 include/class_userFilterEditor.inc:236
+#: include/class_userFilterEditor.inc:240
 #: plugins/generic/dashBoard/dbChannelStatus/class_dbChannelStatus.inc:14
 #: plugins/generic/dashBoard/dbPluginStatus/class_dbPluginStatus.inc:26
 #: plugins/generic/references/class_reference.inc:57
@@ -238,7 +239,7 @@ msgstr "Tên"
 
 #: ihtml/themes/default/userFilterEditor.tpl:19 include/class_acl.inc:252
 #: include/class_acl.inc:262 include/class_SnapShotDialog.inc:174
-#: include/class_userFilter.inc:55 include/class_userFilterEditor.inc:239
+#: include/class_userFilter.inc:55 include/class_userFilterEditor.inc:245
 #: plugins/generic/dashBoard/dbChannelStatus/class_dbChannelStatus.inc:14
 #: plugins/generic/dashBoard/dbPluginStatus/class_dbPluginStatus.inc:26
 #: plugins/generic/references/class_reference.inc:57
@@ -506,7 +507,7 @@ msgstr "Thay đổi mật khẩu của bạn"
 msgid "Your password has been changed successfully."
 msgstr "Mật khẩu của bạn đã được thay đổi thành công."
 
-#: ihtml/themes/default/password.tpl:65 html/main.php:208
+#: ihtml/themes/default/password.tpl:65 html/main.php:220
 #: plugins/admin/users/class_userManagement.inc:391
 #: plugins/personal/password/class_password.inc:126
 #: plugins/personal/password/class_password.inc:129
@@ -675,7 +676,7 @@ msgstr ""
 msgid "Session expires in %d!"
 msgstr "Phiên không được mã hóa!"
 
-#: html/password.php:61 html/main.php:158 include/functions.inc:465
+#: html/password.php:61 html/main.php:170 include/functions.inc:465
 #: include/.svn/tmp/tempfile.tmp:447 include/.svn/tmp/tempfile.2.tmp:447
 #: include/utils/class_xml.inc:43
 #: plugins/admin/departments/class_department.inc:439
@@ -688,20 +689,20 @@ msgid "GOsa configuration %s/%s is not readable. Aborted."
 msgstr "Cấu hình GOsa %s/%s không đọc được. Bãi bỏ."
 
 #: html/password.php:113 html/index.php:157 html/index.php:233
-#: html/main.php:273
+#: html/main.php:285
 #: include/password-methods/class_password-methods-ssha.inc:51
 #: include/password-methods/class_password-methods-sha.inc:48
 #: include/class_SnapshotHandler.inc:44 include/class_SnapshotHandler.inc:57
 #: include/class_SnapshotHandler.inc:75 include/functions.inc:837
-#: include/functions.inc:3107 include/functions.inc:3150
-#: include/functions.inc:3163 include/.svn/tmp/tempfile.tmp:802
+#: include/functions.inc:3109 include/functions.inc:3152
+#: include/functions.inc:3165 include/.svn/tmp/tempfile.tmp:802
 #: include/.svn/tmp/tempfile.tmp:3027 include/.svn/tmp/tempfile.tmp:3059
 #: include/.svn/tmp/tempfile.tmp:3072 include/.svn/tmp/tempfile.2.tmp:802
 #: include/.svn/tmp/tempfile.2.tmp:3080 include/.svn/tmp/tempfile.2.tmp:3112
 #: include/.svn/tmp/tempfile.2.tmp:3125 include/utils/class_timezone.inc:47
-#: include/class_config.inc:162 include/class_config.inc:685
-#: include/class_config.inc:1145 include/class_config.inc:1158
-#: include/class_config.inc:1176 include/class_pluglist.inc:117
+#: include/class_config.inc:172 include/class_config.inc:695
+#: include/class_config.inc:1155 include/class_config.inc:1168
+#: include/class_config.inc:1186 include/class_pluglist.inc:117
 #: include/class_CopyPasteHandler.inc:119
 #: include/class_CopyPasteHandler.inc:128
 #: include/class_CopyPasteHandler.inc:177
@@ -787,10 +788,11 @@ msgstr "Bộ thay đổi mật khẩu bên ngoài báo cáo có vấn đề:%s."
 #: include/class_configRegistry.inc:670 include/class_configRegistry.inc:685
 #: include/class_configRegistry.inc:700 include/class_configRegistry.inc:715
 #: include/class_configRegistry.inc:731 include/class_configRegistry.inc:736
-#: include/class_configRegistry.inc:753 include/class_configRegistry.inc:758
-#: include/class_configRegistry.inc:776 include/class_configRegistry.inc:781
-#: include/class_configRegistry.inc:797 include/class_configRegistry.inc:812
-#: include/class_configRegistry.inc:827
+#: include/class_configRegistry.inc:756 include/class_configRegistry.inc:761
+#: include/class_configRegistry.inc:778 include/class_configRegistry.inc:783
+#: include/class_configRegistry.inc:801 include/class_configRegistry.inc:806
+#: include/class_configRegistry.inc:822 include/class_configRegistry.inc:837
+#: include/class_configRegistry.inc:852
 #: plugins/admin/groups/class_group.inc:832
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/personal/posix/class_posixAccount.inc:651
@@ -847,15 +849,15 @@ msgstr ""
 msgid "Broken HTTP authentication setup!"
 msgstr "Có vấn đề với  việc cài đặt chức năng xác định thẩm quyền!"
 
-#: html/index.php:241 html/index.php:245 include/class_management.inc:483
-#: include/class_management.inc:644
+#: html/index.php:241 html/index.php:245 include/class_management.inc:508
+#: include/class_management.inc:669
 #: include/password-methods/class_password-methods.inc:277
-#: include/class_listing.inc:536 include/functions.inc:3135
-#: include/functions.inc:3441 include/functions.inc:3455
-#: include/functions.inc:3485 include/functions.inc:3493
-#: include/functions.inc:3505 include/functions.inc:3509
-#: include/functions.inc:3524 include/functions.inc:3533
-#: include/functions.inc:3593 include/class_tabs.inc:56
+#: include/class_listing.inc:536 include/functions.inc:3137
+#: include/functions.inc:3443 include/functions.inc:3457
+#: include/functions.inc:3487 include/functions.inc:3495
+#: include/functions.inc:3507 include/functions.inc:3511
+#: include/functions.inc:3526 include/functions.inc:3535
+#: include/functions.inc:3595 include/class_tabs.inc:56
 #: include/.svn/tmp/tempfile.tmp:3353 include/.svn/tmp/tempfile.tmp:3367
 #: include/.svn/tmp/tempfile.tmp:3397 include/.svn/tmp/tempfile.tmp:3405
 #: include/.svn/tmp/tempfile.tmp:3417 include/.svn/tmp/tempfile.tmp:3421
@@ -865,7 +867,7 @@ msgstr "Có vấn đề với  việc cài đặt chức năng xác định th�
 #: include/.svn/tmp/tempfile.2.tmp:3458 include/.svn/tmp/tempfile.2.tmp:3470
 #: include/.svn/tmp/tempfile.2.tmp:3474 include/.svn/tmp/tempfile.2.tmp:3489
 #: include/.svn/tmp/tempfile.2.tmp:3498 include/.svn/tmp/tempfile.2.tmp:3558
-#: include/class_plugin.inc:1621 include/class_plugin.inc:1628
+#: include/class_plugin.inc:1647 include/class_plugin.inc:1654
 #: include/utils/class_xml.inc:40 include/utils/class_msgPool.inc:137
 #: include/utils/class_msgPool.inc:149 include/utils/class_msgPool.inc:167
 #: include/utils/class_msgPool.inc:440 include/utils/class_msgPool.inc:461
@@ -929,7 +931,7 @@ msgstr ""
 #: include/functions.inc:537 include/functions.inc:583
 #: include/functions.inc:852 include/functions.inc:901
 #: include/functions.inc:958 include/functions.inc:1008
-#: include/functions.inc:3086 include/functions.inc:3367
+#: include/functions.inc:3088 include/functions.inc:3369
 #: include/.svn/tmp/tempfile.tmp:476 include/.svn/tmp/tempfile.tmp:511
 #: include/.svn/tmp/tempfile.tmp:519 include/.svn/tmp/tempfile.tmp:565
 #: include/.svn/tmp/tempfile.tmp:817 include/.svn/tmp/tempfile.tmp:866
@@ -940,8 +942,8 @@ msgstr ""
 #: include/.svn/tmp/tempfile.2.tmp:817 include/.svn/tmp/tempfile.2.tmp:866
 #: include/.svn/tmp/tempfile.2.tmp:923 include/.svn/tmp/tempfile.2.tmp:976
 #: include/.svn/tmp/tempfile.2.tmp:3059 include/.svn/tmp/tempfile.2.tmp:3332
-#: include/class_userFilter.inc:275 include/class_ldap.inc:756
-#: include/class_ldap.inc:1173 include/class_config.inc:344
+#: include/class_userFilter.inc:275 include/class_ldap.inc:775
+#: include/class_ldap.inc:1192 include/class_config.inc:354
 #: plugins/generic/references/class_reference.inc:97
 #: plugins/admin/ogroups/class_ogroup.inc:749
 #: plugins/admin/ogroups/class_ogroup.inc:766
@@ -994,56 +996,56 @@ msgstr ""
 msgid "Smarty"
 msgstr "Smarty"
 
-#: html/main.php:159
+#: html/main.php:171
 #, fuzzy, php-format
 msgid "Cannot locate file %s - please run %s to fix this"
 msgstr "Không thể xác định vị trí file '%s'- xin hãy chạy '%s' để sửa lỗi này!"
 
-#: html/main.php:178
+#: html/main.php:190
 msgid "PHP configuration"
 msgstr "Cấu hình PHP"
 
-#: html/main.php:179
+#: html/main.php:191
 msgid ""
 "FATAL: Register globals is active. Please fix this in order to continue."
 msgstr ""
 
-#: html/main.php:208
+#: html/main.php:220
 msgid "Your password is about to expire, please change your password!"
 msgstr "Mật khẩu của bạn chuẩn bị hết hạn, xin hãy thay đối mật khẩu của bạn!"
 
-#: html/main.php:273
+#: html/main.php:285
 msgid "Running out of memory!"
 msgstr "Hết dung lượng bộ nhớ!"
 
-#: html/main.php:333
-#, fuzzy
-msgid "ACLs are disabled"
-msgstr "Vô hiệu việc kiểm tra ACL của người dùng"
-
-#: html/main.php:333 html/main.php:335
+#: html/main.php:345
 #, php-format
 msgid "You're logged in as %s"
 msgstr ""
 
-#: html/main.php:383
+#: html/main.php:348
+#, fuzzy
+msgid "ACLs are disabled"
+msgstr "Vô hiệu việc kiểm tra ACL của người dùng"
+
+#: html/main.php:398
 #, fuzzy
 msgid "Plug-in"
 msgstr "Plugin"
 
-#: html/main.php:384
+#: html/main.php:399
 #, fuzzy, php-format
 msgid "FATAL: Cannot find any plugin definitions for plugin %s!"
 msgstr ""
 "LỖI NGHIÊM TRỌNG: không thể tìm thấy bất cứ  plugin definition nào cho "
 "plugin '%s'!"
 
-#: html/main.php:400
+#: html/main.php:415
 #, fuzzy
 msgid "Configuration Error"
 msgstr "Lỗi cấu hình"
 
-#: html/main.php:401
+#: html/main.php:416
 #, php-format
 msgid ""
 "FATAL: not all POST variables have been transfered by PHP - please inform "
@@ -1078,38 +1080,38 @@ msgstr ""
 msgid "unconfigured"
 msgstr "không được cấu hình"
 
-#: include/class_management.inc:304 include/class_management.inc:462
-#: include/class_management.inc:509 include/class_management.inc:524
-#: include/class_management.inc:561 include/class_management.inc:575
+#: include/class_management.inc:324 include/class_management.inc:487
+#: include/class_management.inc:534 include/class_management.inc:549
+#: include/class_management.inc:586 include/class_management.inc:600
 #: plugins/admin/users/class_userManagement.inc:228
 #: plugins/admin/users/class_userManagement.inc:744
 msgid "Permission"
 msgstr "Cho phép"
 
-#: include/class_management.inc:385
+#: include/class_management.inc:405
 #: plugins/admin/users/class_userManagement.inc:702
 #: plugins/admin/users/class_userManagement.inc:706
 #: plugins/admin/acl/class_aclManagement.inc:98
 msgid "Permission error"
 msgstr "Lỗi về cấp phép"
 
-#: include/class_management.inc:462
+#: include/class_management.inc:487
 #, fuzzy, php-format
 msgid "You are not allowed to create a snapshot for %s!"
 msgstr "Bạn không được phép tạo ra snapshot cho %s."
 
-#: include/class_management.inc:509 include/class_management.inc:561
-#: include/class_management.inc:575
+#: include/class_management.inc:534 include/class_management.inc:586
+#: include/class_management.inc:600
 #, fuzzy, php-format
 msgid "You are not allowed to restore a snapshot for %s!"
 msgstr "Bạn không được phép phục hồi một snapshot cho %s."
 
-#: include/class_management.inc:524
+#: include/class_management.inc:549
 #, fuzzy, php-format
 msgid "You are not allowed to remove a snapshot for %s!"
 msgstr "Bạn không được phép phục hồi một snapshot cho %s."
 
-#: include/class_management.inc:634 include/class_management.inc:718
+#: include/class_management.inc:659 include/class_management.inc:743
 #: include/class_acl.inc:978 include/class_session.inc:76
 #: include/class_session.inc:101 include/class_session.inc:127
 #: include/functions.inc:623 include/functions.inc:827
@@ -1122,22 +1124,22 @@ msgstr "Bạn không được phép phục hồi một snapshot cho %s."
 #: include/.svn/tmp/tempfile.2.tmp:605 include/.svn/tmp/tempfile.2.tmp:792
 #: include/.svn/tmp/tempfile.2.tmp:910 include/.svn/tmp/tempfile.2.tmp:1308
 #: include/.svn/tmp/tempfile.2.tmp:2372 include/.svn/tmp/tempfile.2.tmp:2406
-#: include/.svn/tmp/tempfile.2.tmp:2426 include/class_ldap.inc:693
-#: include/class_ldap.inc:744 include/class_log.inc:87
+#: include/.svn/tmp/tempfile.2.tmp:2426 include/class_ldap.inc:712
+#: include/class_ldap.inc:763 include/class_log.inc:87
 #: include/class_CopyPasteHandler.inc:160
 #: include/class_CopyPasteHandler.inc:274
 #: plugins/personal/myaccount/main.inc:52
 msgid "Internal error"
 msgstr "Lỗi nội bộ"
 
-#: include/class_management.inc:635 include/class_management.inc:719
+#: include/class_management.inc:660 include/class_management.inc:744
 #: plugins/personal/myaccount/main.inc:53
 #, php-format
 msgid ""
 "Cannot instantiate tabbed-plug-in, the base plugin (%s) is not available!"
 msgstr ""
 
-#: include/class_management.inc:644
+#: include/class_management.inc:669
 #, php-format
 msgid ""
 "No tab definition for %s found in configuration file: cannot create plugin "
@@ -1442,7 +1444,7 @@ msgid "Cut"
 msgstr "Cut"
 
 #: include/class_listing.inc:1460 include/class_listing.inc:1462
-#: include/class_CopyPasteHandler.inc:570
+#: include/class_CopyPasteHandler.inc:571
 msgid "Paste"
 msgstr "Paste"
 
@@ -1718,64 +1720,64 @@ msgstr "Tiếng Việt"
 msgid "Russian"
 msgstr "Tiếng Nga"
 
-#: include/functions.inc:3106
+#: include/functions.inc:3108
 #, fuzzy, php-format
 msgid ""
 "Command %s specified as post modify action for plugin %s does not exist!"
 msgstr "Lệnh được cụ thể hóa là %s móc nối với plugin '%s' không tồn tại!"
 
-#: include/functions.inc:3150
+#: include/functions.inc:3152
 #, fuzzy
 msgid "Cannot generate SAMBA hash!"
 msgstr "Không thể sinh ra hàm băm samba!"
 
-#: include/functions.inc:3163
+#: include/functions.inc:3165
 #, php-format
 msgid "Generating SAMBA hash by running %s failed: check %s!"
 msgstr ""
 
-#: include/functions.inc:3441 include/functions.inc:3455
-#: include/functions.inc:3493 include/functions.inc:3505
-#: include/functions.inc:3509 include/functions.inc:3524
-#: include/functions.inc:3533
+#: include/functions.inc:3443 include/functions.inc:3457
+#: include/functions.inc:3495 include/functions.inc:3507
+#: include/functions.inc:3511 include/functions.inc:3526
+#: include/functions.inc:3535
 #, fuzzy
 msgid "Cannot allocate free ID:"
 msgstr "Không thể phân phối một ID miễn phí!"
 
-#: include/functions.inc:3441 include/.svn/tmp/tempfile.tmp:3353
+#: include/functions.inc:3443 include/.svn/tmp/tempfile.tmp:3353
 #: include/.svn/tmp/tempfile.2.tmp:3406
 msgid "unknown idAllocation method!"
 msgstr ""
 
-#: include/functions.inc:3455 include/.svn/tmp/tempfile.tmp:3367
+#: include/functions.inc:3457 include/.svn/tmp/tempfile.tmp:3367
 #: include/.svn/tmp/tempfile.2.tmp:3420
 #, php-format
 msgid "%sPoolMin >= %sPoolMax!"
 msgstr ""
 
-#: include/functions.inc:3485 include/.svn/tmp/tempfile.tmp:3397
+#: include/functions.inc:3487 include/.svn/tmp/tempfile.tmp:3397
 #: include/.svn/tmp/tempfile.2.tmp:3450
 #, fuzzy
 msgid "Cannot create sambaUnixIdPool entry!"
 msgstr "Không thể tạo ra folder '%s'!"
 
-#: include/functions.inc:3493 include/.svn/tmp/tempfile.tmp:3405
+#: include/functions.inc:3495 include/.svn/tmp/tempfile.tmp:3405
 #: include/.svn/tmp/tempfile.2.tmp:3458
 msgid "sambaUnixIdPool is not unique!"
 msgstr ""
 
-#: include/functions.inc:3505 include/functions.inc:3509
+#: include/functions.inc:3507 include/functions.inc:3511
 #: include/.svn/tmp/tempfile.tmp:3417 include/.svn/tmp/tempfile.tmp:3421
 #: include/.svn/tmp/tempfile.2.tmp:3470 include/.svn/tmp/tempfile.2.tmp:3474
 #, fuzzy
 msgid "no ID available!"
 msgstr "Không có mẫu nào!"
 
-#: include/functions.inc:3533
+#: include/functions.inc:3535
 msgid "maximum number of tries exceeded!"
 msgstr ""
 
-#: include/functions.inc:3593
+#: include/functions.inc:3595
 #, fuzzy
 msgid "Cannot allocate free ID!"
 msgstr "Không thể phân phối một ID miễn phí!"
@@ -2160,18 +2162,18 @@ msgstr "Tìm kiếm tại các cây con"
 msgid "Edit filters"
 msgstr "Hiệu chỉnh các giấy phép"
 
-#: include/class_userFilterEditor.inc:248
+#: include/class_userFilterEditor.inc:254
 #, php-format
 msgid "Error in filter #%s: %s opening and %s closing brackets detected!"
 msgstr ""
 
-#: include/class_plugin.inc:558
+#: include/class_plugin.inc:581
 msgid ""
 "The current object has been altered while beeing edited. If you save this "
 "entry, changes that have been made by others will be discarded!"
 msgstr ""
 
-#: include/class_plugin.inc:1359
+#: include/class_plugin.inc:1385
 #, php-format
 msgid "Changing ACL DN from %s to %s"
 msgstr ""
@@ -2756,39 +2758,39 @@ msgid ""
 "The supplied base is not valid and has been reset to its previous value!"
 msgstr ""
 
-#: include/class_ldap.inc:233 include/class_ldap.inc:266
+#: include/class_ldap.inc:233 include/class_ldap.inc:270
 msgid "Performance warning"
 msgstr "Cảnh báo khả năng hoạt động"
 
-#: include/class_ldap.inc:233 include/class_ldap.inc:266
+#: include/class_ldap.inc:233 include/class_ldap.inc:270
 #, fuzzy, php-format
 msgid "LDAP performance is poor: last query took %.2fs!"
 msgstr ""
 "Khả năng hoạt động của LDAP rất thấp: truy vấn lần cuối mất khoảng %.2fs!"
 
-#: include/class_ldap.inc:693
+#: include/class_ldap.inc:712
 #, fuzzy, php-format
 msgid "Cannot automatically create subtrees with RDN %s: no object class found"
 msgstr ""
 "Không thể tự động tạo ra cây con với RDN '%s': không có lớp đối tượng nào "
 "được tìm thấy!"
 
-#: include/class_ldap.inc:744
+#: include/class_ldap.inc:763
 #, fuzzy, php-format
 msgid "Cannot automatically create subtrees with RDN %s: not supported"
 msgstr "Không thể tự động tạo ra cây con với RDN '%s': không được hỗ trợ "
 
-#: include/class_ldap.inc:831
+#: include/class_ldap.inc:850
 #, fuzzy, php-format
 msgid "while operating on %s using LDAP server %s"
 msgstr "Trong khi chạy trên '%s' sử dụng LDAP server '%s'"
 
-#: include/class_ldap.inc:833
+#: include/class_ldap.inc:852
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr "Trong khi chạy trên LDAP server %s"
 
-#: include/class_ldap.inc:1006
+#: include/class_ldap.inc:1025
 #, fuzzy, php-format
 msgid ""
 "Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"
@@ -2796,7 +2798,7 @@ msgstr ""
 "Đây không phải là một DN hợp lệ: '%s'. Khóa để chặn việc nạp thêm phải được "
 "bắt đầu với 'dn:...' trong dòng %s "
 
-#: include/class_ldap.inc:1035
+#: include/class_ldap.inc:1054
 #, fuzzy, php-format
 msgid "Error while importing DN %s: please check LDIF from line %s on!"
 msgstr ""
@@ -2876,7 +2878,7 @@ msgstr ""
 msgid "The path '%s' specified for '%s:%s' is invalid!"
 msgstr "Lệnh '%s' cho plugin '%s' không hợp lệ!"
 
-#: include/class_configRegistry.inc:732 include/class_configRegistry.inc:754
+#: include/class_configRegistry.inc:732 include/class_configRegistry.inc:779
 #, fuzzy, php-format
 msgid "The folder '%s' specified for '%s:%s' does not exists!"
 msgstr "Lệnh được cụ thể hóa là %s móc nối với plugin '%s' không tồn tại!"
@@ -2886,32 +2888,44 @@ msgstr "Lệnh được cụ thể hóa là %s móc nối với plugin '%s' khô
 msgid "The folder '%s' specified for '%s:%s' cannot be used for reading!"
 msgstr ""
 
-#: include/class_configRegistry.inc:759
+#: include/class_configRegistry.inc:757
+#, fuzzy, php-format
+msgid ""
+"The file '%s' specified for '%s:%s' cannot be created neither be used for "
+"writing!"
+msgstr "Lệnh được cụ thể hóa là %s móc nối với plugin '%s' không tồn tại!"
+
+#: include/class_configRegistry.inc:762
+#, fuzzy, php-format
+msgid "The file '%s' specified for '%s:%s' cannot be used for writing!"
+msgstr "Lệnh được cụ thể hóa là %s móc nối với plugin '%s' không tồn tại!"
+
+#: include/class_configRegistry.inc:784
 #, php-format
 msgid "The folder '%s' specified for '%s:%s' cannot be used for writing!"
 msgstr ""
 
-#: include/class_configRegistry.inc:777
+#: include/class_configRegistry.inc:802
 #, fuzzy, php-format
 msgid "The file '%s' specified for '%s:%s' does not exists!"
 msgstr "Lệnh được cụ thể hóa là %s móc nối với plugin '%s' không tồn tại!"
 
-#: include/class_configRegistry.inc:782
+#: include/class_configRegistry.inc:807
 #, php-format
 msgid "The file '%s' specified for '%s:%s' cannot be read!"
 msgstr ""
 
-#: include/class_configRegistry.inc:798
+#: include/class_configRegistry.inc:823
 #, fuzzy, php-format
 msgid "The command '%s' specified for '%s:%s' is invalid!"
 msgstr "Lệnh '%s' (%s) cho plugin %s không hợp lệ!"
 
-#: include/class_configRegistry.inc:813
+#: include/class_configRegistry.inc:838
 #, fuzzy, php-format
 msgid "The dn '%s' specified for '%s:%s' is invalid!"
 msgstr "Lệnh '%s' cho plugin '%s' không hợp lệ!"
 
-#: include/class_configRegistry.inc:828
+#: include/class_configRegistry.inc:853
 #, fuzzy, php-format
 msgid "The rdn '%s' specified for '%s:%s' is invalid!"
 msgstr "Lệnh '%s' cho plugin '%s' không hợp lệ!"
@@ -2934,25 +2948,25 @@ msgstr "Không thể  gửi thông báo trì hoãn đến entry %s!"
 msgid "Cannot remove entry %s!"
 msgstr "Không thể xóa entry %s!"
 
-#: include/class_config.inc:159
+#: include/class_config.inc:169
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr "Lỗi XML trong gosa.conf: %s tại dòng %d"
 
-#: include/class_config.inc:344
+#: include/class_config.inc:354
 msgid "Cannot bind to LDAP!"
 msgstr ""
 
-#: include/class_config.inc:685
+#: include/class_config.inc:695
 #, fuzzy
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
 msgstr "SID và/hoặc RIDBASE đang bị mất trong cấu hình này!"
 
-#: include/class_config.inc:1104
+#: include/class_config.inc:1114
 msgid "Configuration"
 msgstr "Cấu hình"
 
-#: include/class_config.inc:1104
+#: include/class_config.inc:1114
 #, fuzzy
 msgid ""
 "The configuration file you are using is outdated. Please move the GOsa "
@@ -2961,7 +2975,7 @@ msgstr ""
 "File cấu hình bạn đang sử dụng hình như đã lỗi thời. Hãy chuyển file cấu "
 "hình của GOsa ra chỗ khác để chạy việc cài đặt GOsa lần nữa."
 
-#: include/class_config.inc:1146 include/class_config.inc:1177
+#: include/class_config.inc:1156 include/class_config.inc:1187
 #, fuzzy, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable %s is not "
@@ -2970,7 +2984,7 @@ msgstr ""
 "Chức năng Snapshot đã được bật, nhưng biến số được yêu cầu: '%s' vẫn chưa "
 "được thiết lập."
 
-#: include/class_config.inc:1159
+#: include/class_config.inc:1169
 #, fuzzy, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required compression module "
@@ -3035,6 +3049,14 @@ msgid ""
 msgstr ""
 
 #: include/class_core.inc:245
+msgid "Enables/Disables GOSa usage statistics moduls."
+msgstr ""
+
+#: include/class_core.inc:255
+msgid "The database file for GOSa usage statistics."
+msgstr ""
+
+#: include/class_core.inc:265
 msgid ""
 "The 'logging' statement enables event logging on GOsa side. Setting it to "
 "'true' GOsa will log every action a user performs via syslog. If you use "
@@ -3043,60 +3065,60 @@ msgid ""
 "'false'."
 msgstr ""
 
-#: include/class_core.inc:256
+#: include/class_core.inc:276
 msgid ""
 "The 'listSummary' statement determines whether a status bar will be shown on "
 "the bottom of GOsa generated lists, displaying a short summary of type and "
 "number of elements in the list."
 msgstr ""
 
-#: include/class_core.inc:266
+#: include/class_core.inc:286
 msgid ""
 "The 'passwordMinLength' statement determines whether a newly entered "
 "password has to be of a minimum length."
 msgstr ""
 
-#: include/class_core.inc:276
+#: include/class_core.inc:296
 msgid ""
 "The 'passwordMinDiffer' statement determines whether a newly entered "
 "password has to be checked to have at least n different characters."
 msgstr ""
 
-#: include/class_core.inc:287
+#: include/class_core.inc:307
 msgid ""
 "The 'passwordHook' can specify an external script to handle password "
 "settings at some other location besides the LDAP."
 msgstr ""
 
-#: include/class_core.inc:287
+#: include/class_core.inc:307
 #, php-format
 msgid "It will be called this way: %s"
 msgstr ""
 
-#: include/class_core.inc:297
+#: include/class_core.inc:317
 msgid ""
 "The 'passwordProposalHook' can be used to let GOsa generate password "
 "proposals for you. Whenever you change a password, you can then decide "
 "whether to use the proposal or to manually specify a password."
 msgstr ""
 
-#: include/class_core.inc:297
+#: include/class_core.inc:317
 msgid "Here is an example command:"
 msgstr ""
 
-#: include/class_core.inc:307
+#: include/class_core.inc:327
 msgid ""
 "The 'displayErrors' statement tells GOsa to show PHP errors in the upper "
 "part of the screen. This should be disabled in productive deployments, "
 "because there might be some important passwords arround."
 msgstr ""
 
-#: include/class_core.inc:307
+#: include/class_core.inc:327
 #, php-format
 msgid "The property '%s' may be interesting too."
 msgstr ""
 
-#: include/class_core.inc:317
+#: include/class_core.inc:337
 msgid ""
 "The 'developmentMode' statement tells GOsa to show development related error "
 "messages, for example messages about missing ACL configuration or classes. "
@@ -3104,44 +3126,44 @@ msgid ""
 "messages it should only be enabled while developing or debugging plugins!"
 msgstr ""
 
-#: include/class_core.inc:328
+#: include/class_core.inc:348
 msgid ""
 "The 'schemaCheck' statement enables or disables schema checking during "
 "login. It is recommended to switch this on in order to let GOsa handle "
 "object creation more efficient."
 msgstr ""
 
-#: include/class_core.inc:338
+#: include/class_core.inc:358
 msgid ""
 "The 'copyPaste' statement enables copy and paste for LDAP entries managed "
 "with GOsa."
 msgstr ""
 
-#: include/class_core.inc:348
+#: include/class_core.inc:368
 msgid ""
 "The 'forceGlobals' statement enables PHP security checks to force "
 "register_global settings to be switched off."
 msgstr ""
 
-#: include/class_core.inc:358
+#: include/class_core.inc:378
 msgid ""
 "The 'forceSSL' statement enables PHP security checks to force encrypted "
 "access to the web interface. GOsa will try to redirect to the same URL - "
 "just with https://"
 msgstr ""
 
-#: include/class_core.inc:368
+#: include/class_core.inc:388
 msgid ""
 "Logs information about triggered ldap operations, duration, filter, aso. "
 "into syslog."
 msgstr ""
 
-#: include/class_core.inc:378
+#: include/class_core.inc:398
 msgid ""
 "The 'ldapFollowReferrals' statement tells GOsa to follow LDAP referrals."
 msgstr ""
 
-#: include/class_core.inc:388
+#: include/class_core.inc:408
 msgid ""
 "The 'ldapFilterNestingLimit' statement can be used to speed up group "
 "handling for groups with several hundreds of members. The default behaviour "
@@ -3151,61 +3173,61 @@ msgid ""
 "set a member limit, where GOsa will stop to do these lookups."
 msgstr ""
 
-#: include/class_core.inc:398
+#: include/class_core.inc:418
 msgid ""
 "The ldapSizelimit statement tells GOsa to retrieve the specified maximum "
 "number of results. The user will get  a  warning,  that  not  all entries "
 "were shown."
 msgstr ""
 
-#: include/class_core.inc:408
+#: include/class_core.inc:428
 msgid ""
 "Disables sizelimit checks, only the configured amount of results will be "
 "shown!"
 msgstr ""
 
-#: include/class_core.inc:418
+#: include/class_core.inc:438
 msgid ""
 "The 'warnSSL' statement enables PHP security checks to detect non encrypted "
 "access to the web interface. GOsa will display a warning in this case."
 msgstr ""
 
-#: include/class_core.inc:428
+#: include/class_core.inc:448
 msgid "The 'ppdGzip' variable enables PPD file compression."
 msgstr ""
 
-#: include/class_core.inc:439
+#: include/class_core.inc:459
 msgid ""
 "The 'ignoreAcl' value tells GOsa to ignore complete ACL sets for the given "
 "DN. Add your DN here and you'll be able to restore accidently dropped ACLs."
 msgstr ""
 
-#: include/class_core.inc:450
+#: include/class_core.inc:470
 msgid ""
 "The 'ppdPath' variable defines where to store PPD files for the GOto "
 "environment plugins."
 msgstr ""
 
-#: include/class_core.inc:460
+#: include/class_core.inc:480
 msgid ""
 "The 'ldapMaxQueryTime' statement tells GOsa to stop LDAP actions if there is "
 "no answer within the specified number of seconds."
 msgstr ""
 
-#: include/class_core.inc:470
+#: include/class_core.inc:490
 msgid ""
 "The 'storeFilterSettings' statement determines whether GOsa should store "
 "filter and plugin settings inside of a cookie."
 msgstr ""
 
-#: include/class_core.inc:480
+#: include/class_core.inc:500
 msgid ""
 "The 'sendCompressedOutput' statement determines whether PHP should send "
 "compressed HTML pages to browsers or not. This may increase or decrease the "
 "performance, depending on your network."
 msgstr ""
 
-#: include/class_core.inc:491
+#: include/class_core.inc:511
 msgid ""
 "The 'modificationDetectionAttribute' statement enables GOsa to check if a "
 "entry currently being edited has been modified from someone else outside "
@@ -3214,7 +3236,7 @@ msgid ""
 "based systems."
 msgstr ""
 
-#: include/class_core.inc:502
+#: include/class_core.inc:522
 msgid ""
 "The 'language' statement defines the default language used by GOsa. Normally "
 "GOsa autodetects the language from the browser settings. If this is not "
@@ -3222,7 +3244,7 @@ msgid ""
 "de for german) here."
 msgstr ""
 
-#: include/class_core.inc:513
+#: include/class_core.inc:533
 msgid ""
 "The 'theme' statement defines what theme is used to display GOsa pages. You "
 "can install some corporate identity like theme and/or modify certain "
@@ -3230,7 +3252,7 @@ msgid ""
 "more information."
 msgstr ""
 
-#: include/class_core.inc:523
+#: include/class_core.inc:543
 msgid ""
 "The 'sessionLifetime' value defines when a session will expire in seconds. "
 "For Debian systems, this will not work because the sessions will be removed "
@@ -3238,7 +3260,7 @@ msgid ""
 "instead."
 msgstr ""
 
-#: include/class_core.inc:533
+#: include/class_core.inc:553
 msgid ""
 "The 'templateCompileDirectory' statements defines the path, where the PHP "
 "templating engins 'smarty' should store its compiled GOsa templates for "
@@ -3246,14 +3268,14 @@ msgid ""
 "is running with."
 msgstr ""
 
-#: include/class_core.inc:543
+#: include/class_core.inc:563
 #, php-format
 msgid ""
 "The 'debugLevel' value tells GOsa to display certain information on each "
 "page load. Value is an AND combination of the following byte values: %s"
 msgstr ""
 
-#: include/class_core.inc:563
+#: include/class_core.inc:583
 #, php-format
 msgid ""
 "The 'sambaHashHook' statement contains an executable to generate samba hash "
@@ -3262,20 +3284,20 @@ msgid ""
 "distribution installed, you can use perl to generate the hash: %s"
 msgstr ""
 
-#: include/class_core.inc:574
+#: include/class_core.inc:594
 msgid ""
 "The 'passwordDefaultHash' statement defines the default password hash to "
 "choose for new accounts."
 msgstr ""
 
-#: include/class_core.inc:583
+#: include/class_core.inc:603
 msgid ""
 "The 'strictPasswordRules' tells GOsa to check for UTF-8 characters in the "
 "supplied password. These Characters can lead to non working authentications "
 "if UTF-8 and none UTF-8 systems locales get mixed. The default is 'true'."
 msgstr ""
 
-#: include/class_core.inc:594
+#: include/class_core.inc:614
 msgid ""
 "The 'accountPrimaryAttribute' option tells GOsa how to create new accounts. "
 "Possible values are 'uid' and 'cn'. In the first case GOsa creates uid style "
@@ -3286,19 +3308,19 @@ msgid ""
 "'personalTitleInDN'."
 msgstr ""
 
-#: include/class_core.inc:604
+#: include/class_core.inc:624
 msgid ""
 "The 'userRDN' statement defines the location where new accounts will be "
 "created inside of defined departments. The default is 'ou=people'."
 msgstr ""
 
-#: include/class_core.inc:614
+#: include/class_core.inc:634
 msgid ""
 "The 'groupsRDN' statement defines the location where new groups will be "
 "created inside of defined departments. The default is 'ou=groups'."
 msgstr ""
 
-#: include/class_core.inc:624
+#: include/class_core.inc:644
 msgid ""
 "The 'gidNumberBase' statement defines where to start looking for a new free "
 "group id. This should be synced with your 'adduser.conf' to avoid "
@@ -3307,25 +3329,25 @@ msgid ""
 "definition."
 msgstr ""
 
-#: include/class_core.inc:634
+#: include/class_core.inc:654
 msgid ""
 "The 'baseIdHook' statement allows to hook into the id generation method "
 "(traditional mode), to define the starting range for new generated ids"
 msgstr ""
 
-#: include/class_core.inc:644 include/class_core.inc:664
+#: include/class_core.inc:664 include/class_core.inc:684
 msgid ""
 "The 'uidNumberPoolMin/gidNumberPoolMin' statement defines the lowest "
 "assignable user/group id for use with the 'idAllocationMethod = pool'."
 msgstr ""
 
-#: include/class_core.inc:654 include/class_core.inc:674
+#: include/class_core.inc:674 include/class_core.inc:694
 msgid ""
 "The 'uidNumberPoolMax/gidNumberPoolMax' statement defines the highest "
 "assignable user/group id for use with the 'idAllocationMethod = pool'."
 msgstr ""
 
-#: include/class_core.inc:684
+#: include/class_core.inc:704
 msgid ""
 "The 'uidNumberBase' statement defines where to start looking for a new free "
 "user id. This should be synced with your 'adduser.conf' to avoid overlapping "
@@ -3333,26 +3355,26 @@ msgid ""
 "even be dynamic. Take a look at the 'baseIdHook' definition."
 msgstr ""
 
-#: include/class_core.inc:724
+#: include/class_core.inc:744
 msgid ""
 "The 'gosaSupportURI' defines the major gosa-si server host and the password "
 "for GOsa to connect to it. It can be used if you want to use i.e. kerberos "
 "to authenticate the users. The format is: credentials@host:port"
 msgstr ""
 
-#: include/class_core.inc:734
+#: include/class_core.inc:754
 msgid ""
 "The 'gosaSupportTimeout' sets a connection timeout for all gosa-si actions. "
 "See 'gosaSupportURI' for details."
 msgstr ""
 
-#: include/class_core.inc:745
+#: include/class_core.inc:765
 msgid ""
 "The 'loginAttribute' statement tells GOsa which LDAP attribute is used as "
 "the login name during login. It can be set to 'uid', 'mail' or 'both'"
 msgstr ""
 
-#: include/class_core.inc:756
+#: include/class_core.inc:776
 msgid ""
 "The 'timezone' statements defines the timezone used inside of GOsa to handle "
 "date related tasks, such as password expiery, vacation messages, etc. The "
@@ -3360,14 +3382,14 @@ msgid ""
 "timezone."
 msgstr ""
 
-#: include/class_core.inc:766
+#: include/class_core.inc:786
 msgid ""
 "The 'honourUnitTags' statement enables checking of 'unitTag' attributes when "
 "using administrative units. If this is set to 'true' GOsa can only see "
 "objects inside the administrative unit a user is logged into."
 msgstr ""
 
-#: include/class_core.inc:776
+#: include/class_core.inc:796
 msgid ""
 "The 'useSaslForKerberos' statement defines the way the kerberos realm is "
 "stored in the #userPassword' attribute. Set it to 'true' in order to get "
@@ -3375,7 +3397,7 @@ msgid ""
 "latter is outdated, but may be needed from time to time."
 msgstr ""
 
-#: include/class_core.inc:786
+#: include/class_core.inc:806
 msgid ""
 "The 'rfc2307bis' statement enables rfc2307bis style groups in GOsa. You can "
 "use 'member' attributes instead of memberUid in this case. To make it work "
@@ -3383,20 +3405,20 @@ msgid ""
 "style groups, too"
 msgstr ""
 
-#: include/class_core.inc:796
+#: include/class_core.inc:816
 msgid ""
 "The 'personalTitleInDN' option tells GOsa to include the personal title in "
 "user DNs when #accountPrimaryAttribute' is set to \"cn\"."
 msgstr ""
 
-#: include/class_core.inc:806
+#: include/class_core.inc:826
 msgid ""
 "The 'nextIdHook' statement defines a script to be called for finding the "
 "next free id for users or groups externaly. It gets called with the current "
 "entry \"dn\" and the attribute to be ID'd. It should return an integer value."
 msgstr ""
 
-#: include/class_core.inc:816
+#: include/class_core.inc:836
 msgid ""
 "The 'idGenerator' statement describes an automatic way to generate new user "
 "ids. There are two basic functions supported - which can be combined: \n"
@@ -3434,32 +3456,32 @@ msgid ""
 "    will generate a three digits random number appended to \"ext\".\n"
 msgstr ""
 
-#: include/class_core.inc:856
+#: include/class_core.inc:876
 msgid ""
 "The 'strictNamingRules' statement enables strict checking of uids and group "
 "names. If you need   characters like . or - inside of your accounts, set "
 "this to 'false'."
 msgstr ""
 
-#: include/class_core.inc:866
+#: include/class_core.inc:886
 msgid ""
 "The 'minId' statement defines the minimum assignable user or group id to "
 "avoid security leaks with uid 0 accounts. This is used for the 'traditional' "
 "method."
 msgstr ""
 
-#: include/class_core.inc:877
+#: include/class_core.inc:897
 msgid ""
 "The 'mailAttribute' statement determines which attribute GOsa will use to "
 "create accounts. Valid values are 'mail' and 'uid'."
 msgstr ""
 
-#: include/class_core.inc:887
+#: include/class_core.inc:907
 msgid ""
 "This attribute allows to override the prefix used to create shared folders."
 msgstr ""
 
-#: include/class_core.inc:897
+#: include/class_core.inc:917
 msgid ""
 "This attribute allows to override the user account creation syntax, see the "
 "'mailFolderCreation' description for more details.\n"
@@ -3470,7 +3492,7 @@ msgid ""
 "com\"\n"
 msgstr ""
 
-#: include/class_core.inc:912
+#: include/class_core.inc:932
 msgid ""
 "Every mail method has its own way to create mail accounts like 'share/"
 "development' or 'shared.development@example.com' which is used to identify "
@@ -3495,25 +3517,25 @@ msgid ""
 " %uattrib%   Depends on mailAttribute=\"uid/mail\".\n"
 msgstr ""
 
-#: include/class_core.inc:938
+#: include/class_core.inc:958
 msgid ""
 "The 'imapTimeout' statement sets the connection timeout for imap actions."
 msgstr ""
 
-#: include/class_core.inc:949
+#: include/class_core.inc:969
 msgid ""
 "The 'mailMethod' statement tells GOsa which mail method the setup should use "
 "to communicate with a possible mail server. Leave this undefined if your "
 "mail method does not match the predefined ones."
 msgstr ""
 
-#: include/class_core.inc:959
+#: include/class_core.inc:979
 msgid ""
 "The 'cyrusUseSlashes' statement determines if GOsa should use \"foo/bar\" or "
 "\"foo.bar\" namespaces in IMAP. Unix style is with slashes."
 msgstr ""
 
-#: include/class_core.inc:969
+#: include/class_core.inc:989
 msgid ""
 "The 'vacationTemplateDirectory' statement sets the path where GOsa will look "
 "for vacation message templates. Default is /etc/gosa/vacation. \n"
@@ -3529,70 +3551,70 @@ msgid ""
 "\n"
 msgstr ""
 
-#: include/class_core.inc:990
+#: include/class_core.inc:1010
 msgid ""
 "The 'ldapTLS' statement enables or disables TLS operating on LDAP "
 "connections."
 msgstr ""
 
-#: include/class_core.inc:1000
+#: include/class_core.inc:1020
 msgid ""
 "The 'honourIvbbAttributes' statement enables the IVBB mode inside of GOsa. "
 "You need the ivbb.schema file from used by german authorities."
 msgstr ""
 
-#: include/class_core.inc:1010
+#: include/class_core.inc:1030
 msgid ""
 "The 'sambaIdMapping' statement tells GOsa to maintain sambaIdmapEntry "
 "objects. Depending on your setup this can drastically improve the windows "
 "login performance."
 msgstr ""
 
-#: include/class_core.inc:1020
+#: include/class_core.inc:1040
 msgid ""
 "The 'handleExpiredAccounts' statement enables shadow attribute tests during "
 "the login to the GOsa web interface and forces password renewal or account "
 "lockout."
 msgstr ""
 
-#: include/class_core.inc:1030
+#: include/class_core.inc:1050
 msgid ""
 "The 'sambaSID' statement defines a samba SID if not available inside of the "
 "LDAP. You can retrieve the current sid by net getlocalsid."
 msgstr ""
 
-#: include/class_core.inc:1040
+#: include/class_core.inc:1060
 msgid ""
 "The 'sambaRidBase' statement defines the base id to add to ordinary sid "
 "calculations - if not available inside of the LDAP."
 msgstr ""
 
-#: include/class_core.inc:1050
+#: include/class_core.inc:1070
 msgid ""
 "The 'enableSnapshots' statement enables a snapshot mechaism in GOsa. This "
 "enables you to save certain states of entries and restore them later on."
 msgstr ""
 
-#: include/class_core.inc:1060
+#: include/class_core.inc:1080
 msgid ""
 "The 'snapshotBase' statement defines the base where snapshots should be "
 "stored inside of the LDAP."
 msgstr ""
 
-#: include/class_core.inc:1070
+#: include/class_core.inc:1090
 msgid ""
 "The 'snapshotAdminDn' variable defines the user which is used to "
 "authenticate when connecting to 'snapshotURI'."
 msgstr ""
 
-#: include/class_core.inc:1080
+#: include/class_core.inc:1100
 msgid ""
 "The 'snapshotAdminPassword' variable defines the credentials which are used "
 "in combination with 'snapshotAdminDn' and 'snapshotURI' in order to "
 "authenticate."
 msgstr ""
 
-#: include/class_core.inc:1091
+#: include/class_core.inc:1111
 msgid ""
 "The 'idAllocationMethod' statement defines how GOsa generates numeric user "
 "and group id values. If it is set to 'traditional' GOsa will do create a "
@@ -3603,7 +3625,7 @@ msgid ""
 "the other hand it is much faster."
 msgstr ""
 
-#: include/class_core.inc:1100
+#: include/class_core.inc:1120
 msgid ""
 "The 'snapshotURI' variable defines the LDAP URI for the server which is used "
 "to do object snapshots."
@@ -3672,7 +3694,7 @@ msgstr "Các đối tượng này sẽ được paste: %s"
 msgid "This object will be pasted: %s"
 msgstr "Đối tượng này sẽ được paste: %s"
 
-#: include/class_CopyPasteHandler.inc:572
+#: include/class_CopyPasteHandler.inc:573
 msgid "Cannot paste"
 msgstr "Không thể paste"
 

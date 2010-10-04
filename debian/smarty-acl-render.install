@@ -1,3 +1,0 @@
-include/smarty/plugins/block.render.php     /usr/share/php/smarty/libs/plugins
-include/smarty/plugins/function.msgPool.php /usr/share/php/smarty/libs/plugins
-include/smarty/plugins/function.factory.php /usr/share/php/smarty/libs/plugins

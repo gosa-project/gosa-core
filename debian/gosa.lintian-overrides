@@ -1,7 +1,0 @@
-gosa: extra-license-file usr/share/gosa/setup/class_setupStep_License.inc
-gosa: extra-license-file usr/share/gosa/setup/license.txt
-gosa: extra-license-file usr/share/gosa/setup/setup_license.tpl
-gosa: package-contains-empty-directory usr/share/gosa/locale/core/en/LC_MESSAGES/
-gosa: package-contains-empty-directory usr/share/gosa/html/plugins/welcome/
-gosa: package-contains-empty-directory usr/share/gosa/bin/
-gosa: package-contains-empty-directory usr/share/gosa/html/plugins/references/
