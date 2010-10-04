@@ -109,12 +109,21 @@ class passwordMethod
             $sambaLMPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaLMPassword);
             $sambaNTPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaNTPassword);
             $ldap->cd($dn);
+
+            $pwdClass = new password($config, $dn);
+            $pwdClass->callHook($pwdClass, 'PRELOCK',array(), $ret);
             $ldap->modify(
                     array(
                         "userPassword" => $userPassword,
                         "sambaLMPassword" => $sambaLMPassword,
                         "sambaNTPassword" => $sambaNTPassword));
+
+            if($ldap->success()){
+                $pwdClass->callHook($pwdClass, 'POSTLOCK',array(), $ret);
+                print_a($ret);
+            }
             return($ldap->success());
+            
         }
         return(FALSE);
     }
@@ -157,12 +166,20 @@ class passwordMethod
             $userPassword = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$userPassword);
             $sambaLMPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaLMPassword);
             $sambaNTPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaNTPassword);
+
+            $pwdClass = new password($config, $dn);
+            $pwdClass->callHook($pwdClass, 'PREUNLOCK',array(), $ret);
+
             $ldap->cd($dn);
             $ldap->modify(
                     array(
                         "userPassword" => $userPassword,
                         "sambaLMPassword" => $sambaLMPassword,
                         "sambaNTPassword" => $sambaNTPassword));
+            if($ldap->success()){
+                $pwdClass = new password($config, $dn);
+                $pwdClass->callHook($pwdClass, 'POSTUNLOCK',array(), $ret);
+            }
             return($ldap->success());
         }
         return(FALSE);

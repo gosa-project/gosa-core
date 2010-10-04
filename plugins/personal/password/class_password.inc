@@ -220,14 +220,52 @@ class password extends plugin
     static function plInfo()
     {
         return (array(
-                    "plDescription"     => _("User password"),
-                    "plSelfModify"      => TRUE,
-                    "plDepends"         => array("user"),
-                    "plPriority"        => 10,
+                    "plDescription" => _("User password"),
+                    "plSelfModify"  => TRUE,
+                    "plDepends"     => array("user"),
+                    "plPriority"    => 10,
                     "plSection"     => array("personal" => _("My account")),
                     "plCategory"    => array("users"),
-                    "plOptions"         => array(),
+                    "plOptions"     => array(),
 
+                    "plProperties" => array(
+                        array(
+                            "name"          => "PRELOCK",
+                            "type"          => "command",
+                            "default"       => "",
+                            "description"   => "",
+                            "check"         => "gosaProperty::isCommand",
+                            "migrate"       => "",
+                            "group"         => "password",
+                            "mandatory"     => FALSE),
+                        array(
+                            "name"          => "POSTLOCK",
+                            "type"          => "command",
+                            "default"       => "",
+                            "description"   => "",
+                            "check"         => "gosaProperty::isCommand",
+                            "migrate"       => "",
+                            "group"         => "password",
+                            "mandatory"     => FALSE),
+                        array(
+                            "name"          => "PREUNLOCK",
+                            "type"          => "command",
+                            "default"       => "",
+                            "description"   => "",
+                            "check"         => "gosaProperty::isCommand",
+                            "migrate"       => "",
+                            "group"         => "password",
+                            "mandatory"     => FALSE),
+                        array(
+                            "name"          => "POSTUNLOCK",
+                            "type"          => "command",
+                            "default"       => "",
+                            "description"   => "",
+                            "check"         => "gosaProperty::isCommand",
+                            "migrate"       => "",
+                            "group"         => "password",
+                            "mandatory"     => FALSE)
+                        ),
                     "plProvidedAcls"  => array())
                );
     }
