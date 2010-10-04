@@ -94,11 +94,21 @@ class passwordMethod
       if(preg_match("/^[^\}]*+\}!/",$pwd)){
         return(TRUE);
       }     
-      
+     
+      // Lock the account by modifying the password hash.
+      $pwdClass = new password($config, $dn);
+      $pwdClass->callHook($pwdClass, 'PRELOCK',array(), $ret);
+
       /* Lock entry */
       $pwd = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$pwd);
       $ldap->cd($dn);
       $ldap->modify(array("userPassword" => $pwd));
+
+      // Call the password post-lock hook, if defined.
+      if($ldap->success()){
+          $pwdClass->callHook($pwdClass, 'POSTLOCK',array(), $ret);
+      }
+
       return($ldap->success());
     }
     return(FALSE);
@@ -132,10 +142,19 @@ class passwordMethod
         return (TRUE);
       }     
       
+      // Unlock the account by modifying the password hash.
+      $pwdClass = new password($config, $dn);
+      $pwdClass->callHook($pwdClass, 'PREUNLOCK',array(), $ret);
+
       /* Lock entry */
       $pwd = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$pwd);
       $ldap->cd($dn);
       $ldap->modify(array("userPassword" => $pwd));
+
+      // Call the password post-lock hook, if defined.
+      if($ldap->success()){
+          $pwdClass->callHook($pwdClass, 'POSTUNLOCK',array(), $ret);
+      }
       return($ldap->success());
     }
     return(FALSE);
