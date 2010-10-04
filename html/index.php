@@ -305,7 +305,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
                 exit;
             }
         } else {
-            $ui= ldap_login_user($username, $_POST["password"]);
+            $ui= ldap_login_user($username, get_post("password"));
         }
         if ($ui === NULL || !$ui) {
             $message= _("Please check the username/password combination!");
