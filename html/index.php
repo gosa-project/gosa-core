@@ -50,7 +50,7 @@ function displayLogin()
     /* Fill template with required values */
     $username = "";
     if(isset($_POST["username"])) {
-        $username= $_POST["username"];
+        $username= get_post("username");
     }
     
     $smarty->assign ("title","GOsa");
@@ -284,11 +284,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     /* Check for valid input */
     $ok= true;
     if (!$htaccess_authenticated) {
-        $username= $_POST["username"];
+        $username= get_post("username");
         if (!preg_match("/^[@A-Za-z0-9_.-]+$/", $username)) {
             $message= _("Please specify a valid user name!");
             $ok= false;
-        } elseif (mb_strlen($_POST["password"], 'UTF-8') == 0) {
+        } elseif (mb_strlen(get_post("password"), 'UTF-8') == 0) {
             $message= _("Please specify your password!");
             $smarty->assign ('nextfield', 'password');
             $ok= false;
