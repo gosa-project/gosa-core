@@ -38,7 +38,7 @@ function displayLogin()
   /* Fill template with required values */
   $username = "";
   if(isset($_POST["username"])){
-    $username= $_POST["username"];
+    $username= get_post("username");
   }
   $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
   $smarty->assign ('username', $username);
@@ -69,7 +69,7 @@ function displayLogin()
   /* Generate server list */
   $servers= array();
   if (isset($_POST['server'])){
-    $selected= validate($_POST['server']);
+    $selected= get_post('server');
   } else {
     $selected= $config->data['MAIN']['DEFAULT'];
   }
@@ -244,7 +244,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   }
 
   if (!$htaccess_authenticated){
-    $server= validate($_POST["server"]);
+    $server= get_post("server");
   }
   $config->set_current($server);
 
@@ -294,11 +294,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   /* Check for valid input */
   $ok= true;
   if (!$htaccess_authenticated){
-    $username= $_POST["username"];
+    $username= get_post("username");
     if (!preg_match("/^[@A-Za-z0-9_.-]+$/", $username)){
       $message= _("Please specify a valid username!");
       $ok= false;
-    } elseif (mb_strlen($_POST["password"], 'UTF-8') == 0){
+    } elseif (mb_strlen(get_post("password"), 'UTF-8') == 0){
       $message= _("Please specify your password!");
       $smarty->assign ('nextfield', 'password');
       $ok= false;
@@ -315,7 +315,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
         exit;
       }
     } else {
-      $ui= ldap_login_user($username, $_POST["password"]);
+      $ui= ldap_login_user($username, get_post("password"));
     }
     if ($ui === NULL || !$ui){
       $message= _("Please check the username/password combination.");
@@ -414,7 +414,7 @@ $smarty->assign ("cookies", "<b>"._("Warning").":<\/b> "._("Your browser has coo
 /* Generate server list */
 $servers= array();
 if (isset($_POST['server'])){
-  $selected= validate($_POST['server']);
+  $selected= get_post('server');
 } else {
   $selected= $config->data['MAIN']['DEFAULT'];
 }
