@@ -594,43 +594,47 @@ class plugin
     $ldap->cat ($dn);
     $this->attrs= $ldap->fetch();
 
-    /* Walk through attributes */
-    foreach ($this->attributes as $val){
-
-      /* Skip the ones in skip list */
-      if (in_array($val, $skip)){
-        continue;
-      }
-
-      if (isset($this->attrs["$val"][0])){
-
-        /* If attribute is set, replace dynamic parts: 
-           %sn, %givenName and %uid. Fill these in our local variables. */
-        $value= $this->attrs["$val"][0];
-
-        foreach (array("sn", "givenName", "uid") as $repl){
-          if (preg_match("/%$repl/i", $value)){
-            $value= preg_replace ("/%$repl/i", $this->parent->$repl, $value);
-          }
+    $values = array();
+    foreach($this->attributes as $name){
+        if(isset($this->parent->$name)){
+            $value = $this->parent->$name;
+            if(is_numeric($name)) continue;
+            if(is_string($value))  $values[$name] = $value;
+            if(is_array($value) && isset($value[0]))  $values[$name] = $value[0];
         }
-        $this->$val= $value;
-      }
+    }
+
+    foreach($this->attributes as $name){
+
+        // Skip the ones in skip list 
+        if (in_array($name, $skip)) continue;
+        if (!isset($this->attrs[$name]['count'])) continue;
+
+        $value= $this->attrs[$name][0];
+
+        if($this->attrs[$name]['count'] == 1){
+            $value = fillReplacements($this->attrs[$name][0], $values);
+        }else{
+            $value = array();
+            for($i=0;$i<$this->attrs[$name]['count'];$i++){
+                $value[] = fillReplacements($this->attrs[$name][$i], $values);
+            }
+        }
+
+        $this->$name = $value; 
+        print_a(array($name => $value));
     }
 
     /* Is Account? */
     $found= TRUE;
     foreach ($this->objectclasses as $obj){
-      if (preg_match('/top/i', $obj)){
-        continue;
-      }
+      if (preg_match('/top/i', $obj)) continue;
       if (!in_array_ics ($obj, $this->attrs['objectClass'])){
         $found= FALSE;
         break;
       }
     }
-    if ($found){
-      $this->is_account= TRUE;
-    }
+    $this->is_account = $found;
   }
 
   /* \brief Indicate whether a password change is needed or not */
