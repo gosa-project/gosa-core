@@ -3870,7 +3870,7 @@ function detectLdapSpecialCharHandling()
  *  @param  Array   An array of replacements.
  *  @return     The resulting string. 
  */
-function fillReplacements($str, $attrs, $shellArg = FALSE)
+function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
 {
     // Search for '%...{...}
     // Get all matching parts of the given string and sort them by
@@ -3885,11 +3885,20 @@ function fillReplacements($str, $attrs, $shellArg = FALSE)
 
     // Replace the placeholder in the given string now.
     foreach($hits as $match){
+
+        // Avoid errors about undefined index.
+        if(!isset($attrs[$name])) $attrs[$name] = $default;
+
+        // Calculate the replacement        
         $name = $match[2];
         $start = (isset($match[5])) ? $match[5] : 0;
         $end = (isset($match[7])) ? $match[7] : strlen($attrs[$name]);
         $value  = substr($attrs[$name], $start, $end);
+
+        // Use values which are valid for shell execution?
         if($shellArg) $value = escapeshellarg($value);
+
+        // Replace the placeholder within the string.
         $str = preg_replace("/".preg_quote($match[0],'/')."/", $value, $str);
     }
     return($str);
