@@ -2047,120 +2047,6 @@ function expand_id($rule, $attributes)
 }
 
 
-/*! \brief Generate a list of uid proposals based on a rule
- *
- *  Unroll given rule string by filling in attributes and replacing
- *  all keywords.
- *
- * \param string 'rule' The rule string from gosa.conf.
- * \param array 'attributes' A dictionary of attribute/value mappings
- * \return array List of valid not used uids
- */
-function gen_uids($rule, $attributes)
-{
-  global $config;
-
-  // Strip out non ascii chars
-  foreach($attributes as $name => $value){
-      $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);
-      $value = preg_replace('/[^(\x20-\x7F)]*/','',$value);
-      $attributes[$name] = $value;
-  }
-
-  /* Search for keys and fill the variables array with all 
-     possible values for that key. */
-  $part= "";
-  $trigger= false;
-  $stripped= "";
-  $variables= array();
-
-  for ($pos= 0, $l= strlen($rule); $pos < $l; $pos++){
-
-    if ($rule[$pos] == "{" ){
-      $trigger= true;
-      $part= "";
-      continue;
-    }
-
-    if ($rule[$pos] == "}" ){
-      $variables[$pos]= expand_id($part, $attributes);
-      $stripped.= "{".$pos."}";
-      $trigger= false;
-      continue;
-    }
-
-    if ($trigger){
-      $part.= $rule[$pos];
-    } else {
-      $stripped.= $rule[$pos];
-    }
-  }
-
-  /* Recurse through all possible combinations */
-  $proposed= recurse($stripped, $variables);
-
-  /* Get list of used ID's */
-  $ldap= $config->get_ldap_link();
-  $ldap->cd($config->current['BASE']);
-
-  /* Remove used uids and watch out for id tags */
-  $ret= array();
-  foreach($proposed as $uid){
-
-    /* Check for id tag and modify uid if needed */
-    if(preg_match('/\{id(:|!)\d+}/',$uid, $m)){
-      $size= preg_replace('/^.*{id(:|!)(\d+)}.*$/', '\\2', $uid);
-
-      $start= $m[1]==":"?0:-1;
-      for ($i= $start, $p= pow(10,$size)-1; $i < $p; $i++){
-        if ($i == -1) {
-          $number= "";
-        } else {
-          $number= sprintf("%0".$size."d", $i+1);
-        }
-        $res= preg_replace('/{id(:|!)\d+}/', $number, $uid);
-
-        $ldap->search("(uid=".preg_replace('/[{}]/', '', $res).")",array('dn'));
-        if($ldap->count() == 0){
-          $uid= $res;
-          break;
-        }
-      }
-
-      /* Remove link if nothing has been found */
-      $uid= preg_replace('/{id(:|!)\d+}/', '', $uid);
-    }
-
-    if(preg_match('/\{id#\d+}/',$uid)){
-      $size= preg_replace('/^.*{id#(\d+)}.*$/', '\\1', $uid);
-
-      while (true){
-        mt_srand((double) microtime()*1000000);
-        $number= sprintf("%0".$size."d", mt_rand(0, pow(10, $size)-1));
-        $res= preg_replace('/{id#(\d+)}/', $number, $uid);
-        $ldap->search("(uid=".preg_replace('/[{}]/', '', $res).")",array('dn'));
-        if($ldap->count() == 0){
-          $uid= $res;
-          break;
-        }
-      }
-
-      /* Remove link if nothing has been found */
-      $uid= preg_replace('/{id#\d+}/', '', $uid);
-    }
-
-    /* Don't assign used ones */
-    $ldap->search("(uid=".preg_replace('/[{}]/', '', $uid).")",array('dn'));
-    if($ldap->count() == 0){
-      /* Add uid, but remove {} first. These are invalid anyway. */
-      $ret[]= preg_replace('/[{}]/', '', $uid);
-    }
-  }
-
-  return(array_unique($ret));
-}
-
-
 /*! \brief Convert various data sizes to bytes
  *
  * Given a certain value in the format n(g|m|k), where n
@@ -3909,6 +3795,124 @@ function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
         $str = preg_replace("/".preg_quote($match[0],'/')."/", $value, $str);
     }
     return($str);
+}
+
+
+/*! \brief Generate a list of uid proposals based on a rule
+ *
+ *  Unroll given rule string by filling in attributes and replacing
+ *  all keywords.
+ *
+ * \param string 'rule' The rule string from gosa.conf.
+ * \param array 'attributes' A dictionary of attribute/value mappings
+ * \return array List of valid not used uids
+ */
+function gen_uids($rule, $attributes)
+{
+    global $config;
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
+
+
+    // Strip out non ascii chars
+    foreach($attributes as $name => $value){
+        $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);
+        $value = preg_replace('/[^(\x20-\x7F)]*/','',$value);
+        $attributes[$name] = strtolower($value);
+    }
+
+    // Search for '{%...[n-m]}
+    // Get all matching parts of the given string and sort them by
+    //  length, to avoid replacing strings like '%uidNumber' with 'uid'
+    //  instead of 'uidNumber'; The longest tring at first.
+    preg_match_all('/(\{?%([a-z0-9]+)(\[(([0-9]+)(\-([0-9]+))?)\])?\}?)/i', $rule ,$matches, PREG_SET_ORDER);
+    $replacements = array(); 
+    foreach($matches as $match){
+        
+        // No start position given, then add the complete value
+        if(!isset($match[5])){
+            $replacements[$match[0]][] = $attributes[$match[2]];
+    
+        // Start given but no end, so just add a simple character
+        }elseif(!isset($match[7])){
+            if(isset($attributes[$match[2]][$match[5]])){
+                $replacements[$match[0]][] = $attributes[$match[2]][$match[5]];
+            }
+
+        // Add all values in range
+        }else{
+            $str = "";
+            for($i=$match[5]; $i<= $match[7]; $i++){
+                if(isset($attributes[$match[2]][$i])){
+                    $str .= $attributes[$match[2]][$i];
+                    $replacements[$match[0]][] = $str;
+                }
+            }
+        }
+    }
+
+    // Create proposal array
+    $rules = array($rule);
+    foreach($replacements as $tag => $values){
+        $rules = gen_uid_proposals($rules, $tag,$values);
+    }
+    
+
+    // Search for id tags {id:3} / {id#3}
+    preg_match_all('/\{id(#|:)([0-9])+\}/i', $rule ,$matches, PREG_SET_ORDER);
+    $idReplacements = array();
+    foreach($matches as $match){
+        if(count($match) != 3) continue;
+
+        // Generate random number 
+        if($match[1] == '#'){
+            foreach($rules as $id => $ruleStr){
+                $genID = rand(pow(10,$match[2] -1),pow(10, ($match[2])) - 1);
+                $rules[$id] = preg_replace("/".preg_quote($match[0],'/')."/", $genID,$ruleStr);
+            }
+        }
+    
+        // Search for next free id 
+        if($match[1] == ':'){
+
+            // Walk through rules and replace all occurences of {id:..}
+            foreach($rules as $id => $ruleStr){
+                $genID = 0;
+                $start = TRUE;
+                while($start || $ldap->count()){
+                    $start = FALSE;
+                    $number= sprintf("%0".$match[2]."d", $genID);
+                    $testRule = preg_replace("/".preg_quote($match[0],'/')."/",$number,$ruleStr); 
+                    $ldap->search('uid='.normalizeLdap($testRule));
+                    $genID ++;
+                }
+                $rules[$id] = preg_replace("/".preg_quote($match[0],'/')."/",$number,$ruleStr);
+            }
+        }
+    }
+
+    // Create result set by checking which uid is already used and which is free.
+    $ret = array();
+    foreach($rules as $rule){
+        $ldap->search('uid='.normalizeLdap($rule));
+        if(!$ldap->count()){
+            $ret[] =  $rule;
+        }
+    }
+   
+    return($ret);
+}
+
+
+function gen_uid_proposals(&$rules, $tag, $values)
+{
+    $newRules = array();
+    foreach($rules as $rule){
+        foreach($values as $value){
+            $newRules[] = preg_replace("/".preg_quote($tag,'/')."/", $value, $rule); 
+        }
+    }
+    return($newRules);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
