@@ -1636,10 +1636,7 @@ class plugin
           arsort($tmp);
 
           // Now replace the placeholder 
-          foreach ($tmp as $name => $len){
-              $value = $addAttrs[$name];
-              $command= str_replace("%$name", "$value", $command);
-          }
+          $command = fillReplacements($command, $addAttrs, TRUE);
 
           // If there are still some %.. in our command, try to fill these with some other class vars 
           if(preg_match("/%/",$command)){

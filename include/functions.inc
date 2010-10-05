@@ -3859,5 +3859,42 @@ function detectLdapSpecialCharHandling()
     return(NULL);
 }
 
+
+/*! \brief  Replaces placeholder in a given string.
+ *          For example:
+ *            '%uid@gonicus.de'         Replaces '%uid' with 'uid'.
+ *            '%uid{0}@gonicus.de'      Replaces '%uid{0}' with the first char of 'uid'.
+ *            '%uid{2:4}@gonicus.de'    Replaces '%uid{2:4}' with three chars from 'uid' starting from the second.
+ *             
+ *  @param  String  The string to perform the action on.
+ *  @param  Array   An array of replacements.
+ *  @return     The resulting string. 
+ */
+function fillReplacements($str, $attrs, $shellArg = FALSE)
+{
+    // Search for '%...{...}
+    // Get all matching parts of the given string and sort them by
+    //  length, to avoid replacing strings like '%uidNumber' with 'uid'
+    //  instead of 'uidNumber'; The longest tring at first.
+    preg_match_all('/(%([a-z0-9]+)(\{(([0-9]+)(:([0-9]+))?)\})?)/i', $str ,$matches, PREG_SET_ORDER);
+    $hits = array();
+    foreach($matches as $match){
+        $hits[strlen($match[2]).$match[0]] = $match;
+    }
+    krsort($hits);
+
+    // Replace the placeholder in the given string now.
+    foreach($hits as $match){
+        $name = $match[2];
+        $start = (isset($match[5])) ? $match[5] : 0;
+        $end = (isset($match[7])) ? $match[7] : strlen($attrs[$name]);
+        $value  = substr($attrs[$name], $start, $end);
+        if($shellArg) $value = escapeshellarg($value);
+        $str = preg_replace("/".preg_quote($match[0],'/')."/", $value, $str);
+    }
+    return($str);
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

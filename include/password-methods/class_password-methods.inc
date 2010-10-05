@@ -108,13 +108,20 @@ class passwordMethod
             $userPassword = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$userPassword);
             $sambaLMPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaLMPassword);
             $sambaNTPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaNTPassword);
-            $ldap->cd($dn);
 
-            // Lock the account by modifying the password hash.
+            // Call external lock hook
+            $res = $ldap->cat($dn);
+            $hookAttrs = array();
+            foreach($ldap->fetch() as $name => $value){
+                if(is_numeric($name)) continue;
+                if(isset($value[0])) $hookAttrs[$name] = $value[0];
+                if(isset($value) && is_string($value)) $hookAttrs[$name] = $value;
+            }
             $pwdClass = new password($config, $dn);
-            $pwdClass->callHook($pwdClass, 'PRELOCK',array(), $ret);
+            $pwdClass->callHook($pwdClass, 'PRELOCK',$hookAttrs, $ret);
 
             // Update the ldap entry
+            $ldap->cd($dn);
             $ldap->modify(
                     array(
                         "userPassword" => $userPassword,
@@ -124,7 +131,7 @@ class passwordMethod
             if($ldap->success()){
 
                 // Call the password post-lock hook, if defined.
-                $pwdClass->callHook($pwdClass, 'POSTLOCK',array(), $ret);
+                $pwdClass->callHook($pwdClass, 'POSTLOCK',$hookAttrs, $ret);
             }
             return($ldap->success());
             
@@ -171,9 +178,16 @@ class passwordMethod
             $sambaLMPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaLMPassword);
             $sambaNTPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaNTPassword);
 
-            // Call a pre-lock hook if defined.
+            // Call external lock hook
+            $res = $ldap->cat($dn);
+            $hookAttrs = array();
+            foreach($ldap->fetch() as $name => $value){
+                if(is_numeric($name)) continue;
+                if(isset($value[0])) $hookAttrs[$name] = $value[0];
+                if(isset($value) && is_string($value)) $hookAttrs[$name] = $value;
+            }
             $pwdClass = new password($config, $dn);
-            $pwdClass->callHook($pwdClass, 'PREUNLOCK',array(), $ret);
+            $pwdClass->callHook($pwdClass, 'PREUNLOCK',$hookAttrs, $ret);
 
             // Lock the account by modifying the password hash. 
             $ldap->cd($dn);
@@ -186,7 +200,7 @@ class passwordMethod
 
                 // Call the password post-lock hook, if defined.
                 $pwdClass = new password($config, $dn);
-                $pwdClass->callHook($pwdClass, 'POSTUNLOCK',array(), $ret);
+                $pwdClass->callHook($pwdClass, 'POSTUNLOCK',$hookAttrs, $ret);
             }
             return($ldap->success());
         }
