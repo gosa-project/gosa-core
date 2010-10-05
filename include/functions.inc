@@ -3863,8 +3863,10 @@ function detectLdapSpecialCharHandling()
 /*! \brief  Replaces placeholder in a given string.
  *          For example:
  *            '%uid@gonicus.de'         Replaces '%uid' with 'uid'.
- *            '%uid{0}@gonicus.de'      Replaces '%uid{0}' with the first char of 'uid'.
- *            '%uid{2:4}@gonicus.de'    Replaces '%uid{2:4}' with three chars from 'uid' starting from the second.
+ *            '{%uid[0]@gonicus.de}'    Replaces '%uid[0]' with the first char of 'uid'.
+ *            '%uid[2-4]@gonicus.de'    Replaces '%uid[2-4]' with three chars from 'uid' starting from the second.
+ *      
+ *          The surrounding {} in example 2 are optional.
  *
  *  @param  String  The string to perform the action on.
  *  @param  Array   An array of replacements.
@@ -3872,7 +3874,7 @@ function detectLdapSpecialCharHandling()
  */
 function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
 {
-    // Search for '%...{...}
+    // Search for '{%...[n-m]}
     // Get all matching parts of the given string and sort them by
     //  length, to avoid replacing strings like '%uidNumber' with 'uid'
     //  instead of 'uidNumber'; The longest tring at first.
