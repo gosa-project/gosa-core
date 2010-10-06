@@ -54,6 +54,7 @@ class sortableListing {
     private $acl= "";
     private $modified= false;
 
+	
     public function sortableListing($data= array(), $displayData= null, $reorderable= false)
     {
         global $config;
@@ -100,6 +101,17 @@ class sortableListing {
         $this->sortColumn = $id;
     }
 
+	/*
+	* 
+	* Examples
+	* DatenARray ($data)
+	* @param: array( arbitrary object, arbitrary object)
+	* Datenarray will be manipulated by add, del and sort operations. According to this it will be returned from this widget.
+	* The index of a data entry must correspond to the entry of the "display array" following.
+	* DisplayArray ($displyData)
+	* @param: array("eins" array( "data"=> array("Uno", "2", "x" ) , "zwei" array( "data"=> array("Due", "3", "y" ))) ;
+	* label pointing on a list of columns that will be shown in the list.
+	*/
     public function setListData($data, $displayData= null)
     {
         // Save data to display
@@ -113,13 +125,13 @@ class sortableListing {
         $this->setDisplayData($displayData);
     }
 
-
+	//setting flat data 
     private function setData($data)
     {
         $this->data= $data;
     }
 
-
+	// collecting the display data -
     private function setDisplayData($data)
     {
         if (!is_array($data)) {
