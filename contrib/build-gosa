@@ -72,7 +72,7 @@ def build(release, base_url, target="/tmp", method="svn", key_id=None, cleanup=T
         smarty_dir = join(core_dir, "include", "smarty")
         for rfile in [f for f in os.listdir(join(smarty_dir, "plugins"))
             if not f in ["block.render.php", "block.t.php", "function.msgPool.php",
-            "function.factory.php"]]:
+            "function.factory.php", "function.image.php"]]:
 
             os.remove(join(smarty_dir, "plugins", rfile))
 
