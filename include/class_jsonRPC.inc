@@ -7,6 +7,7 @@ class jsonRPC {
     private $config;
     private $id;
     private $lastStats = array();
+    private $lastResult = array();
     private $lastAction = "none";
 
 
@@ -89,12 +90,17 @@ class jsonRPC {
     public function get_error()
     {
         if($this->lastStats['http_code'] != 200){
-            return($this->getHttpStatusCodeMessage($this->lastStats['http_code']));
+            $error = $this->getHttpStatusCodeMessage($this->lastStats['http_code']);
+            if(isset($this->lastResult['error']['message'])){
+                $error .= ": ".$this->lastResult['error']['message']; 
+            }
+            return($error);
         }else{
             return(curl_error($this->curlHandler));
         }
     }
 
+    
 
     /*! \brief      Returns TRUE if the last action was successfull else FALSE.
      *  @return     boolean     TRUE on success else FALSE. 
@@ -139,7 +145,9 @@ class jsonRPC {
         }else{
             DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->get_error())."<br>".$response, "Result (FAILED): "); 
         }
-        if(isset($response['error']) && !empty($response['error']))  print_a(array($response));
+        if(isset($response['error']) && !empty($response['error'])){
+              print_a(array($response));
+        }
         return($response['result']);
     }
 
@@ -177,6 +185,7 @@ class jsonRPC {
 
         // Set current result stats.
         $this->lastStats = curl_getinfo($this->curlHandler);
+        $this->lastResult = $response;
 
         return($response);
     }
