@@ -65,6 +65,11 @@ class releaseSelector {
         }
     }
 
+    function setRootBase($base)
+    {
+        $this->releaseBase = $base;
+    }
+
 
     function checkBase($base)
     {
