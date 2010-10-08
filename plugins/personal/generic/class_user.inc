@@ -1501,6 +1501,7 @@ class user extends plugin
 
     /* Get base */
     $this->base= preg_replace('/^[^,]+,'.preg_quote(get_people_ou(), '/').'/i', '', $dn);
+    $this->baseSelector->setBase($this->base);
 
     if($this->governmentmode){
 
