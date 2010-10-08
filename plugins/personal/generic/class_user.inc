@@ -809,7 +809,8 @@ class user extends plugin
       plugin::save_object ();
 
       /* Refresh base */
-      if ($this->acl_is_moveable($this->base)){
+      if ($this->acl_is_moveable($this->base) || 
+            ($this->dn == "new" && $this->acl_is_createable($this->base))){
         if (!$this->baseSelector->update()) {
           msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
         }
