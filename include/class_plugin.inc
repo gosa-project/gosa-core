@@ -620,9 +620,7 @@ class plugin
                 $value[] = fillReplacements($this->attrs[$name][$i], $values);
             }
         }
-
         $this->$name = $value; 
-        print_a(array($name => $value));
     }
 
     /* Is Account? */
