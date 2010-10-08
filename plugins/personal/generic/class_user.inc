@@ -796,7 +796,8 @@ class user extends plugin
       plugin::save_object ();
 
       /* Refresh base */
-      if ($this->acl_is_moveable($this->base)){
+      if ($this->acl_is_moveable($this->base) || 
+            ($this->dn == "new" && $this->acl_is_createable($this->base))){
         if (!$this->baseSelector->update()) {
           msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
         }
@@ -1489,6 +1490,7 @@ class user extends plugin
 
     /* Get base */
     $this->base= preg_replace('/^[^,]+,'.preg_quote(get_people_ou(), '/').'/i', '', $dn);
+    $this->baseSelector->setBase($this->base);
 
     if($this->governmentmode){
 
