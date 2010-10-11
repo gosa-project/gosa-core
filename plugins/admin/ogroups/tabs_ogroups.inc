@@ -82,6 +82,11 @@ class ogrouptabs extends tabs
                 $this->remove('mailogroup');
             }
         }
+        if(class_available("DistributionList")){
+            if(!preg_match("/U/",$objects) && isset($this->by_object['DistributionList'])){
+                $this->remove('DistributionList');
+            }
+        }
 
         /* Remove terminal group, if theres no terminal left in the object list 
          */
@@ -152,6 +157,14 @@ class ogrouptabs extends tabs
                     $this->by_object['mailogroup']->parent= &$this;
                     $this->add('mailogroup');
                 }
+            }
+        }
+        if(class_available("DistributionList")){
+            if((preg_match("/U/",$objects))&&(!isset($this->by_object['DistributionList']))){
+                $this->by_name['DistributionList']= _("Groupware");
+                $this->by_object['DistributionList']= new DistributionList($this->config, $this->dn);
+                $this->by_object['DistributionList']->parent= &$this;
+                $this->add('DistributionList');
             }
         }
 
