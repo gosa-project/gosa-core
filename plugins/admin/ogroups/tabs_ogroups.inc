@@ -82,9 +82,9 @@ class ogrouptabs extends tabs
                 $this->remove('mailogroup');
             }
         }
-        if(class_available("DistributionList")){
-            if(!preg_match("/U/",$objects) && isset($this->by_object['DistributionList'])){
-                $this->remove('DistributionList');
+        if(class_available("GroupwareDistributionList")){
+            if(!preg_match("/U/",$objects) && isset($this->by_object['GroupwareDistributionList'])){
+                $this->remove('GroupwareDistributionList');
             }
         }
 
@@ -159,12 +159,12 @@ class ogrouptabs extends tabs
                 }
             }
         }
-        if(class_available("DistributionList")){
-            if((preg_match("/U/",$objects))&&(!isset($this->by_object['DistributionList']))){
-                $this->by_name['DistributionList']= _("Groupware");
-                $this->by_object['DistributionList']= new DistributionList($this->config, $this->dn);
-                $this->by_object['DistributionList']->parent= &$this;
-                $this->add('DistributionList');
+        if(class_available("GroupwareDistributionList")){
+            if((preg_match("/U/",$objects))&&(!isset($this->by_object['GroupwareDistributionList']))){
+                $this->by_name['GroupwareDistributionList']= _("Groupware");
+                $this->by_object['GroupwareDistributionList']= new GroupwareDistributionList($this->config, $this->dn);
+                $this->by_object['GroupwareDistributionList']->parent= &$this;
+                $this->add('GroupwareDistributionList');
             }
         }
 
