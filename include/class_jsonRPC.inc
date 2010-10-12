@@ -145,8 +145,12 @@ class jsonRPC {
         }else{
             DEBUG (DEBUG_RPC, __LINE__, __FUNCTION__, __FILE__,bold($this->get_error())."<br>".$response, "Result (FAILED): "); 
         }
-        if(isset($response['error']) && !empty($response['error'])){
-              print_a(array($response));
+
+        global $config;
+        $debugLevel = $config->get_cfg_value('core', 'debugLevel'); 
+        if($debugLevel & DEBUG_RPC){
+            print_a(array('CALLED:' => array($method => $params)));
+            print_a(array('RESPONSE' => $response));
         }
         return($response['result']);
     }
