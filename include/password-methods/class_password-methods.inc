@@ -106,8 +106,13 @@ class passwordMethod
 
             /* Lock entry */
             $userPassword = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$userPassword);
-            $sambaLMPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaLMPassword);
-            $sambaNTPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaNTPassword);
+
+            // Only lock samba hashes if samba passwords are enabled
+            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) == "";
+            if($smbPasswdEnabled){
+                $sambaLMPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaLMPassword);
+                $sambaNTPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaNTPassword);
+            }
 
             // Call external lock hook
             $res = $ldap->cat($dn);
@@ -122,12 +127,16 @@ class passwordMethod
 
             // Update the ldap entry
             $ldap->cd($dn);
-            $ldap->modify(
-                    array(
-                        "userPassword" => $userPassword,
-                        "sambaLMPassword" => $sambaLMPassword,
-                        "sambaNTPassword" => $sambaNTPassword));
+            $attrs = array();
+            $attrs['userPassword'] = $userPassword;
+    
+            // Updated samba hashes if samba hashing is enabled
+            if($smbPasswdEnabled){
+                $attrs['sambaLMPassword'] = $sambaLMPassword;
+                $attrs['sambaNTPassword'] = $sambaNTPassword;
+            }
 
+            $ldap->modify($attrs);
             if($ldap->success()){
 
                 // Call the password post-lock hook, if defined.
@@ -174,9 +183,15 @@ class passwordMethod
             }     
 
             /* Lock entry */
+
             $userPassword = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$userPassword);
-            $sambaLMPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaLMPassword);
-            $sambaNTPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaNTPassword);
+
+            // Update samba hashes only if its enabled.
+            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) == "";
+            if($smbPasswdEnabled){
+                $sambaLMPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaLMPassword);
+                $sambaNTPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaNTPassword);
+            }
 
             // Call external lock hook
             $res = $ldap->cat($dn);
@@ -191,11 +206,19 @@ class passwordMethod
 
             // Lock the account by modifying the password hash. 
             $ldap->cd($dn);
-            $ldap->modify(
-                    array(
-                        "userPassword" => $userPassword,
-                        "sambaLMPassword" => $sambaLMPassword,
-                        "sambaNTPassword" => $sambaNTPassword));
+
+            // Update the ldap entry
+            $attrs = array();
+            $attrs['userPassword'] = $userPassword;
+
+            // Updated samba hashes if samba hashing is enabled
+            if($smbPasswdEnabled){
+                $attrs['sambaLMPassword'] = $sambaLMPassword;
+                $attrs['sambaNTPassword'] = $sambaNTPassword;
+            }
+
+            $ldap->modify($attrs);
+
             if($ldap->success()){
 
                 // Call the password post-lock hook, if defined.
