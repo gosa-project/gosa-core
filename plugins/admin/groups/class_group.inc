@@ -916,7 +916,7 @@ class group extends plugin
             if (strict_uid_mode()){
                 $message[]= msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9_-]/");
             } else {
-                $message[]= msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9_-]/i");
+                $message[]= msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9 _.-]/i");
             }
         }
 
