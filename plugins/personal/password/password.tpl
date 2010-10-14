@@ -51,8 +51,8 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='1' id='proposalSelected' name='proposalSelected' onClick='updateFields();'
-            {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
+        <input type='radio' value='1' id='proposalSelected_true' name='proposalSelected' onClick='updateFields();'
+            {if $proposalSelected} checked {/if}>&nbsp;<b><LABEL for="proposalSelected_true">{t}Use proposal{/t}</LABEL></b>
       </td>
       <td>
         <div id='proposalText' 
@@ -70,8 +70,8 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='0' name='proposalSelected' onClick='updateFields();'
-            {if !$proposalSelected} checked {/if}>&nbsp;<b>{t}Manually specify a password{/t}</b>
+        <input type='radio' value='0' name='proposalSelected' id='proposalSelected_false' onClick='updateFields();'
+            {if !$proposalSelected} checked {/if}>&nbsp;<b><LABEL for="proposalSelected_false">{t}Manually specify a password{/t}</LABEL></b>
       </td>
     </tr>
     <tr>

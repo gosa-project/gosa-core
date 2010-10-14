@@ -45,8 +45,8 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='1' name='proposalSelected'
-            {if $proposalSelected} checked {/if}>&nbsp;<b>{t}Use proposal{/t}</b>
+        <input type='radio' value='1' name='proposalSelected' id='proposalSelected_true'
+            {if $proposalSelected} checked {/if}>&nbsp;<b><LABEL for="proposalSelected_true">{t}Use proposal{/t}</LABEL></b>
       </td>
       <td>
         <div style='
@@ -63,8 +63,8 @@
     </tr>
     <tr>
       <td>
-        <input type='radio' value='0' name='proposalSelected'
-            {if !$proposalSelected} checked {/if}>&nbsp;<b>{t}Manually specify a password{/t}</b>
+        <input type='radio' value='0' name='proposalSelected' id='proposalSelected_false'
+            {if !$proposalSelected} checked {/if}>&nbsp;<b><LABEL for="proposalSelected_false">{t}Manually specify a password{/t}</LABEL></b>
       </td>
     </tr>
     <tr>
