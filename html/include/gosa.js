@@ -117,8 +117,14 @@ function keyHandler(DnEvents) {
             next_element = getNextInputElement(element);
         }
 
-        // If next element is of type submit, then submit the button else set focus
-        if(next_element!=null && next_element.type == 'submit'){
+        if(element != null && element.type == 'submit'){
+
+            // If the current element is of type submit, then submit the button else set focus
+            element.click();
+            return(false);
+        }else if(next_element!=null && next_element.type == 'submit'){
+        
+            // If next element is of type submit, then submit the button else set focus
             next_element.click();
             return(false);
         }else if(next_element){
