@@ -38,6 +38,7 @@ $domain = 'messages';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
+
 /* Remember everything we did after the last click */
 session::start();
 session::set('errorsAlreadyPosted',array());
@@ -51,6 +52,17 @@ if(!session::is_set('clicks')){
 $clicks = session::get('clicks');
 $clicks ++ ;
 session::set('clicks', $clicks);
+
+
+/* On some systems we can not operate on uploaded tmp files. We need to 
+ *  explicitely copy them first 
+ */
+foreach($_FILES as $postName => $entry){
+    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
+    if(move_uploaded_file($_FILES[$postName]['tmp_name'], $tempfile)){ 
+        $_FILES[$postName]['tmp_name'] = $tempfile;
+    }
+}
 
 
 pathNavigator::clear();
