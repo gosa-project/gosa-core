@@ -422,16 +422,16 @@ class user extends plugin
     /* Save picture */
     if (isset($_POST['picture_edit_finish'])){
 
-      /* Check for clean upload */
-      if ($_FILES['picture_file']['name'] != ""){
-        if (!is_uploaded_file($_FILES['picture_file']['tmp_name'])) {
-          msg_dialog::display(_("Error"), _("Cannot upload file!"), ERROR_DIALOG);
-        }else{
-          /* Activate new picture */
-          $this->set_picture($_FILES['picture_file']['tmp_name']);
+        /* Check for clean upload */
+        if ($_FILES['picture_file']['name'] != ""){
+            if (!file_exists($_FILES['picture_file']['tmp_name'])) {
+                msg_dialog::display(_("Error"), _("Cannot upload file!"), ERROR_DIALOG);
+            }else{
+                /* Activate new picture */
+                $this->set_picture($_FILES['picture_file']['tmp_name']);
+            }
         }
-      }
-      $this->picture_dialog= FALSE;
+        $this->picture_dialog= FALSE;
       $this->dialog= FALSE;
       $this->is_modified= TRUE;
     }
@@ -507,7 +507,7 @@ class user extends plugin
           if (array_key_exists($val."_file", $_FILES) &&
               array_key_exists('name', $_FILES[$val."_file"]) &&
               $_FILES[$val."_file"]['name'] != "" &&
-              is_uploaded_file($_FILES[$val."_file"]['tmp_name'])) {
+              is_readable($_FILES[$val."_file"]['tmp_name'])) {
             $this->set_cert("$val", $_FILES[$val."_file"]['tmp_name']);
           }
         }
