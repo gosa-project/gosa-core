@@ -17,6 +17,34 @@ class jsonRPC {
     private $authModeDigest = FALSE; 
 
 
+    /*! \brief  This function is used by the property editor and checks the 
+     *           given rpc connection informations.
+     */
+    public static function testConnectionProperties($message,$class,$name,$value, $type)
+    {
+        global $config;
+
+        // Get currently used connection usernamem and password.
+        // We use the temporary values, due to the fact, that we do not want to test
+        //  the current values, we want to test the modified values.
+        $user = $config->configRegistry->getProperty('core','gosaRpcUser');
+        $username =  $user->getValue($temporaryValue = TRUE);
+        $passwd = $config->configRegistry->getProperty('core','gosaRpcPassword');
+        $passwdString =  $passwd->getValue($temporaryValue = TRUE);
+
+        $connection = new jsonRPC($config, $value, $username, $passwdString);        
+        if(!$connection->success() && $message){
+            msg_dialog::display(_("Warning"),
+                    sprintf(_("The rpc connection (%s) specified for '%s:%s' is invalid! Error was: %s."),
+                        bold($value),bold($class),bold($name), bold($connection->get_error())),
+                    WARNING_DIALOG);
+
+        }
+        
+        return($connection->success());
+    }
+
+
     /*! \brief      Constructs a new jsonRPC handle which is connected to a given URL.
      *              It can either connect using a rpc method or via auth method digest.
      *  @param      object      The gosa configuration object (class_config)
