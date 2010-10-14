@@ -13,18 +13,15 @@
 
  <div class='plugin-actions'>
   <center>
-   <button type="submit" name="dummy">{t}Login again{/t}</button>
+   <button type="submit" name="dummy" id="dummy">{t}Login again{/t}</button>
   </center>
  </div>
 </div>
 
 </form>
 
-<!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-  focus_field('dummy');
-  -->
+  $('dummy').focus();
 </script>
 
 </body>
