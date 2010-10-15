@@ -998,7 +998,14 @@ function filterLink()
 
     $row= func_get_arg(0);
     $pid= $this->pid;
-    $dn= LDAP::fix(func_get_arg(1));
+
+    // Prepare title attribute
+    $titleAttr = func_get_arg(1);
+    if(is_array($titleAttr) && isset($titleAttr[0])){
+        $titleAttr = $titleAttr[0];
+    }
+    $titleAttr = LDAP::fix($titleAttr);
+
     $params= array(func_get_arg(2));
 
     // Collect sprintf params
@@ -1014,7 +1021,7 @@ function filterLink()
     $result= "&nbsp;";
     $trans= call_user_func_array("sprintf", $params);
     if ($trans != "") {
-        return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='$dn'>".set_post($trans)."</a>");
+        return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='{$titleAttr}'>".set_post($trans)."</a>");
     }
 
     return $result;
