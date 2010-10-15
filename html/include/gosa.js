@@ -267,7 +267,7 @@ function resizeHandler (e) {
         		$$('div.plugin-actions').each(function(s) {
           			height+= s.getHeight();
         		});
-        		contentHeight-= height + 5;
+        		contentHeight-= height + 25;
       		}
 
 		if (Prototype.Browser.Gecko || Prototype.Browser.IE) {
