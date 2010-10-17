@@ -118,4 +118,3 @@ chmod 770 -R /var/cache/gosa
 update-gosa
 
 exit 0
-
