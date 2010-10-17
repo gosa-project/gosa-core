@@ -13,17 +13,7 @@ case "$1" in
       ;;
 
   triggered)
-      for triggername in $2; do
-          case "$triggername" in
-              "update-gosa")
-                /usr/sbin/update-gosa
-                ;;
-          *)
-              echo "unhandled/unknown trigger!"
-              exit 1
-              ;;
-          esac
-      done
+      /usr/sbin/update-gosa
       ;;
 
   *)
