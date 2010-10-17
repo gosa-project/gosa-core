@@ -1,1 +1,0 @@
-activate update-gosa
