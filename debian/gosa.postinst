@@ -14,6 +14,7 @@ case "$1" in
 
   triggered)
       /usr/sbin/update-gosa
+      exit 0
       ;;
 
   *)
