@@ -5,6 +5,8 @@ gosa (2.6.11-2) unstable; urgency=low
   * Added missing scripts in gosa-dev package
   * Added missing README.squid to gosa-plugin-squid package
   * Added patch for security in using gosa hook for password
+  * package explicitly depends on preform MPM (Closes: #591043)
+  * default config refers to missing FCGIWrapper (Closes: #591046)
 
  -- Benoit Mortier <benoit.mortier@opensides.be>  Sun, 17 Oct 2010 16:00:00 +0200
 
