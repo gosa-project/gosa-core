@@ -13,7 +13,7 @@ case "$1" in
       ;;
 
   triggered)
-      /usr/sbin/update-gosa
+      update-gosa
       exit 0
       ;;
 
