@@ -4,4 +4,4 @@ gofon/help/guide.xml	/usr/share/gosa/doc/plugins/gofon
 gofon/locale		/usr/share/gosa/locale/plugins/gofon
 gofon/contrib		/usr/share/doc/gosa-plugin-gofon
 gofon/html/images	/usr/share/gosa/html/plugins/gofon
-gofon/etc		/etc/gosa
+gofon/etc/asterisk/*.conf	/etc/gosa/asterisk

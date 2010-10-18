@@ -5,4 +5,5 @@ mail/help/guide.xml		/usr/share/gosa/doc/plugins/mail
 mail/locale			/usr/share/gosa/locale/plugins/mail
 mail/contrib			/usr/share/doc/gosa-plugin-mail
 mail/html/images		/usr/share/gosa/html/plugins/mail
-mail/etc/			/etc/gosa
+mail/etc/*.txt			/etc/gosa
+mail/etc/vacation		/etc/gosa

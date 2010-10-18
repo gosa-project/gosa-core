@@ -1,2 +1,2 @@
-interest update-gosa
-interest /usr/share/gosa/plugins
+interest	/usr/share/gosa/
+interest	update-gosa-plugins
