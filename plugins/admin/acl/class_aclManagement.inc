@@ -79,10 +79,10 @@ class aclManagement extends management
 
         if($headpage->getType($dn) == "gosaRole"){
           $tabClass = "aclroletab";
-          $tabTape  = "ACLROLETAB";
+          $tabType  = "ACLROLETAB";
         }else{
           $tabClass = "acltab";
-          $tabTape  = "ACLTAB";
+          $tabType  = "ACLTAB";
         }
 
         // Delete the object
