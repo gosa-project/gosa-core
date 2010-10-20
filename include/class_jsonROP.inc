@@ -1,41 +1,34 @@
 <?php
 
-
 class jsonROP
 {
     private $config;
 
-    public static function getObject($objectID)
+    public static function inspectJsonResult($result)
     {
-        global $config;
+        // Check for remove objects we've to create
+        if(isset($result['__jsonclass__'])){
 
-        // Disable debug output, #FIXME remove this later.
-        $dL = $config->configRegistry->getProperty('core', 'debugLevel');
-        $dL->setValue(2048)   ;
-        $dL->save();
+            // Get all relevant class informations 
+            $classDef = $result['__jsonclass__'][1];
+            $type = $classDef[0];
+            $ref_id = $classDef[1];
+            $object_id = $classDef[2];
+            $methods = $classDef[3];
+            $properties = $classDef[4];
 
-        // Connect to the backend and request the given object.
-        $rpc = $config->getRpcHandle('http://10.3.64.59:8088','','');
-        $res = $rpc->openObject($objectID, 12);
+            // Prepare values
+            $values = array();
+            foreach($properties as $prop){
+                $values[$prop] = NULL;
+                if(isset($res[$prop])) $values[$prop] = $res[$prop]; 
+            }
 
-        // Get all relevant class informations 
-        $classDef = $res['__jsonclass__'][1];
-        $type = $classDef[0];
-        $ref_id = $classDef[1];
-        $object_id = $classDef[2];
-        $methods = $classDef[3];
-        $properties = $classDef[4];
-
-        // Prepare values
-        $values = array();
-        foreach($properties as $prop){
-            $values[$prop] = NULL;
-            if(isset($res[$prop])) $values[$prop] = $res[$prop]; 
-        }
-
-        // Build up remote object
-        $object = new remoteObject($rpc, $type, $properties, $values, $methods, $object_id, $ref_id);
-        return($object);
+            // Build up remote object
+            $object = new remoteObject($rpc, $type, $properties, $values, $methods, $object_id, $ref_id);
+            return($object);
+        }        
+        return($result);
     }
 }
 

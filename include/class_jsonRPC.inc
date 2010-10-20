@@ -182,7 +182,14 @@ class jsonRPC {
             print_a(array('CALLED:' => array($method => $params)));
             print_a(array('RESPONSE' => $response));
         }
-        return($response['result']);
+        $return = $response['result'];
+        
+        // Create remote-object handling using the jsonROP class
+        if(class_available('jsonROP')){
+            $return = jsonROP::inspectJsonResult($return);
+        }
+
+        return($return);
     }
 
 
