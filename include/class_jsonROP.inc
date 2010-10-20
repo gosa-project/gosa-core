@@ -11,26 +11,31 @@ class jsonROP
 
     function getObject($objectID)
     {
-        $rpc = $this->config->getRpcHandle();
-        #$res = $rpc->getObject($objectID, 12);
         
-        $str = '{"id": "abcdef", "result": {"__jsonro__":{"type":"User", "methods":["notify", "remove", "setPassword"], "properties":["sn", "givenName", "uid", "telephoneNumber"]}, "object_id": "07bb3760-db8e-11df-b5c0-5452005f1250", "givenName": "Cajus", "sn": "Pollmeier", "uid": "cajus"}, "error": null}';
+        $dL = $this->config->configRegistry->getProperty('core', 'debugLevel');
+        $dL->setValue(0);   
+        $dL->save();
 
-        $res = json_decode($str);
-        $result = $res->result;       
-        $classDef = $result->__jsonro__;
-       
-        $object = new remoteObject($rpc, $classDef->type, 
-            $classDef->properties, array() ,$classDef->properties, $result->object_id);
+        $rpc = $this->config->getRpcHandle('http://10.3.64.59:8088','','');
+        $res = $rpc->openObject($objectID, 12);
 
+        $classDef = $res['__jsonclass__'][1];
 
-        $object->set_sn ('Wurst'); 
-        $object->sn = 'Horst';
-        echo $object->sn;
+        $type = $classDef[0];
+        $uuid = $classDef[1];
+        $object_id = $classDef[2];
+        $methods = $classDef[3];
+        $properties = $classDef[4];
+        $values = array();
+
+        $object = new remoteObject($rpc, $type, $properties, $values, $methods, $object_id, $uuid);
+
+        $object->set_sn("Wurst"); 
         echo $object->get_sn();
+
+        $object->sn = "Timmay";
+        echo $object->sn;
     }
-
-
 }
 
 
@@ -40,16 +45,18 @@ class remoteObject
     private $properties;
     private $methods;
     private $type;
-    private $oid;
+    private $object_id;
+    private $uuid;
     private $values;
 
-    function __construct(&$rpcHandle, $type, $properties, $values, $methods, $oid)
+    function __construct(&$rpcHandle, $type, $properties, $values, $methods, $object_id, $uuid)
     {
         $this->rpcHandle = $rpcHandle;
         $this->properties = $properties;
         $this->methods = $methods;
         $this->type = $type;
-        $this->oid = $oid;
+        $this->uuid = $uuid;
+        $this->object_id = $object_id;
         $this->values = $values;
     }
 
@@ -58,46 +65,104 @@ class remoteObject
     //  and allow to call the dynamic methods
     function __call($name, $args)
     {
-
         // Check if such an attribute is registered
         if(preg_match("/^get_/", $name)){
             $varName = preg_replace("/^get_/","", $name);
             if(in_array($varName, $this->properties)){
-                return($this->rpcHandle->$name($args));
+                return($this->__getProperty($varName));
             } 
         }elseif(preg_match("/^set_/", $name)){
             $varName = preg_replace("/^set_/","", $name);
             if(in_array($varName, $this->properties)){
-                return($this->rpcHandle->$name($args));
+                return($this->__setProperty($varName, $args[0]));
             }
         }
-        trigger_error("Invalid method called '{$name}'");
+
+        echo "<br><b>Calling: {$name}</b>";
+        #return($this->rpcHandle->$name($args));
     }
 
 
     // Enables calls like  $object->mailAddress = 'test';
-    function __set($varName, $args)
+    function __set($varName, $value)
     {
+        // Set property value
         if(in_array($varName, $this->properties)){
-            $func = "set_{$varName}";
-            $this->rpcHandle->$func($args);
-            return;
+            return($this->__setProperty($varName, $value));
         }
 
+        // Set class member value
         if(isset($this->$varName)){
-            $this->$varName = $args;
-            return;
+            $this->$varName = $value;
+            return(TRUE);
         }
+
         trigger_error("No attribute '{$varName}' defined!");
+        return(FALSE);
     }
+
 
     function __get($varName)
     {
         if(in_array($varName, $this->properties)){
-            $func = "get_{$varName}";
-            $this->rpcHandle->$func($args);
+            return($this->__getProperty($varName));
         }
+
+        // Set class member value
+        if(isset($this->$varName)){
+            return($this->$varName);
+        }
+
         trigger_error("No attribute '{$varName}' defined!");
+        return(NULL);
+    }
+
+    
+    function __setProperty($name, $value)
+    {
+        $this->rpcHandle->setObjectProperty($this->uuid, $name,$value);
+        if($this->rpcHandle->success()){
+            $this->__addPropValueToCache($name, $value);
+            return(TRUE);
+        }
+        return(FALSE);
+    }
+
+
+    function __getProperty($name)
+    {
+        if($this->__propIsCached($name)){
+            return($this->__getPropFromCache($name));
+        }
+
+        $res = $this->rpcHandle->getObjectProperty($this->uuid, $name);
+        if(!$this->rpcHandle->success()){
+            return(NULL);
+        }else{
+            $this->__addPropValueToCache($name, $res);
+            return($res);
+        }
+    }
+
+    
+    function __addPropValueToCache($name, $value)
+    {
+
+    }
+
+    function __getPropFromCache($name, $value)
+    {
+
+    }
+
+    function __propIsCached($name)
+    {
+        return(FALSE);
+    }
+
+    function __removePropFromCache($name, $value)
+    {
+        return(FALSE);
     }
 
 }

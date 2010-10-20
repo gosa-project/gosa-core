@@ -93,12 +93,14 @@ class jsonRPC {
 
         // Try to login 
         if($this->authModeDigest){
-            curl_setopt($this->curlHandler, CURLOPT_USERPWD , "{$this->username}:{$this->userPassword}");
+            if(!empty($this->username)) 
+                curl_setopt($this->curlHandler, CURLOPT_USERPWD , "{$this->username}:{$this->userPassword}");
             curl_setopt($this->curlHandler, CURLOPT_HTTPAUTH , CURLAUTH_ANYSAFE);
         }else{
             curl_setopt($this->curlHandler, CURLOPT_COOKIESESSION , TRUE);
             curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, 'cookiefile.txt'); 
-            $this->login($this->username, $this->userPassword);
+            if(!empty($this->username)) 
+                $this->login($this->username, $this->userPassword);
         }
     }
 
