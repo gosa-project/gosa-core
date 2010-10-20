@@ -5,36 +5,37 @@ class jsonROP
 {
     private $config;
 
-    function __construct($config){
-        $this->config = &$config;
-    }
-
-    function getObject($objectID)
+    public static function getObject($objectID)
     {
-        
-        $dL = $this->config->configRegistry->getProperty('core', 'debugLevel');
-        $dL->setValue(0);   
+        global $config;
+
+        // Disable debug output, #FIXME remove this later.
+        $dL = $config->configRegistry->getProperty('core', 'debugLevel');
+        $dL->setValue(2048)   ;
         $dL->save();
 
-        $rpc = $this->config->getRpcHandle('http://10.3.64.59:8088','','');
+        // Connect to the backend and request the given object.
+        $rpc = $config->getRpcHandle('http://10.3.64.59:8088','','');
         $res = $rpc->openObject($objectID, 12);
 
+        // Get all relevant class informations 
         $classDef = $res['__jsonclass__'][1];
-
         $type = $classDef[0];
-        $uuid = $classDef[1];
+        $ref_id = $classDef[1];
         $object_id = $classDef[2];
         $methods = $classDef[3];
         $properties = $classDef[4];
+
+        // Prepare values
         $values = array();
+        foreach($properties as $prop){
+            $values[$prop] = NULL;
+            if(isset($res[$prop])) $values[$prop] = $res[$prop]; 
+        }
 
-        $object = new remoteObject($rpc, $type, $properties, $values, $methods, $object_id, $uuid);
-
-        $object->set_sn("Wurst"); 
-        echo $object->get_sn();
-
-        $object->sn = "Timmay";
-        echo $object->sn;
+        // Build up remote object
+        $object = new remoteObject($rpc, $type, $properties, $values, $methods, $object_id, $ref_id);
+        return($object);
     }
 }
 
@@ -46,20 +47,44 @@ class remoteObject
     private $methods;
     private $type;
     private $object_id;
-    private $uuid;
+    private $ref_id;
     private $values;
 
-    function __construct(&$rpcHandle, $type, $properties, $values, $methods, $object_id, $uuid)
+    private $cache = array();
+
+    function __construct(&$rpcHandle, $type, $properties, $values, $methods, $object_id, $ref_id)
     {
         $this->rpcHandle = $rpcHandle;
         $this->properties = $properties;
         $this->methods = $methods;
         $this->type = $type;
-        $this->uuid = $uuid;
+        $this->ref_id = $ref_id;
         $this->object_id = $object_id;
         $this->values = $values;
+        $this->cache = $values;
     }
 
+
+    function getType()
+    {
+        return($this->type);
+    }
+    
+    function getProperties()
+    {
+        return($this->properties);
+    }
+    
+    function getReferenceId()
+    {
+        return($this->red_id);
+    }
+   
+    function clearCache()
+    {
+        $this->__clearCache();
+    }
+ 
 
     // Enables calls like  get_property() and set_property()
     //  and allow to call the dynamic methods
@@ -69,7 +94,8 @@ class remoteObject
         if(preg_match("/^get_/", $name)){
             $varName = preg_replace("/^get_/","", $name);
             if(in_array($varName, $this->properties)){
-                return($this->__getProperty($varName));
+                $force = isset($args[0]) && $args[0];
+                return($this->__getProperty($varName, $force));
             } 
         }elseif(preg_match("/^set_/", $name)){
             $varName = preg_replace("/^set_/","", $name);
@@ -120,7 +146,7 @@ class remoteObject
     
     function __setProperty($name, $value)
     {
-        $this->rpcHandle->setObjectProperty($this->uuid, $name,$value);
+        $this->rpcHandle->setObjectProperty($this->ref_id, $name,$value);
         if($this->rpcHandle->success()){
             $this->__addPropValueToCache($name, $value);
             return(TRUE);
@@ -129,13 +155,13 @@ class remoteObject
     }
 
 
-    function __getProperty($name)
+    function __getProperty($name, $force = FALSE)
     {
-        if($this->__propIsCached($name)){
+        if(!$force && $this->__propIsCached($name)){
             return($this->__getPropFromCache($name));
         }
 
-        $res = $this->rpcHandle->getObjectProperty($this->uuid, $name);
+        $res = $this->rpcHandle->getObjectProperty($this->ref_id, $name);
         if(!$this->rpcHandle->success()){
             return(NULL);
         }else{
@@ -145,26 +171,42 @@ class remoteObject
     }
 
     
-    function __addPropValueToCache($name, $value)
+    function close()
     {
-
+        $res = $this->rpcHandle->closeObject($this->ref_id);
+        if($this->success){
+            $this->ref_id = "";
+        }
+        return($this->rpcHandle->success());
     }
 
-    function __getPropFromCache($name, $value)
+    
+    function __addPropValueToCache($name, $value)
     {
+        $this->cache[$name] = $value;
+    }
 
+    function __getPropFromCache($name)
+    {
+        return($this->cache[$name]);
     }
 
     function __propIsCached($name)
     {
-        return(FALSE);
+        return(isset($this->cache[$name]));
     }
 
-    function __removePropFromCache($name, $value)
+    function __clearCache()
     {
-        return(FALSE);
+        $this->cache = array();
     }
 
+    function __removePropFromCache($name)
+    {
+        if($this->__propIsCached($name)){
+            unset($this->cache[$name]);
+        }
+    }
 }
 
 ?>
