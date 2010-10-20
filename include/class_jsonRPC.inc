@@ -184,13 +184,48 @@ class jsonRPC {
         }
         $return = $response['result'];
         
-        // Create remote-object handling using the jsonROP class
-        if(class_available('jsonROP')){
-            $return = jsonROP::inspectJsonResult($return);
-        }
+        // Inspect the result and replace predefined statements with their 
+        //  coresponding classes.
+        $return = $this->inspectJsonResult($return);
 
         return($return);
     }
+
+
+
+    public function inspectJsonResult($result)
+    {
+        // Check for remove objects we've to create
+        if(isset($result['__jsonclass__']) && class_available('remoteObject')){
+
+            // Get all relevant class informations
+            $classDef = $result['__jsonclass__'][1];
+            $type = $classDef[0];
+            $ref_id = $classDef[1];
+            $object_id = $classDef[2];
+            $methods = $classDef[3];
+            $properties = $classDef[4];
+
+            // Prepare values
+            $values = array();
+            foreach($properties as $prop){
+                $values[$prop] = NULL;
+                if(isset($res[$prop])) $values[$prop] = $res[$prop];
+            }
+
+            // Build up remote object
+            $object = new remoteObject($rpc, $type, $properties, $values, $methods, $object_id, $ref_id);
+            return($object);
+        }
+        return($result);
+    }
+
+
+
+
+
+
+
 
 
     /*! \brief      This method finally initiates the real RPC requests and handles 
