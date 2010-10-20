@@ -38,6 +38,28 @@ class releaseSelector {
         // Initialize pid
         $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
 
+        // Get list of used IDs
+        if(!session::is_set('releaseSelector_USED_IDS')){
+            session::set('releaseSelector_USED_IDS',array());
+        }
+        $usedIds = session::get('releaseSelector_USED_IDS');
+
+        // Generate instance wide unique ID
+        $pid = "";
+        while($pid == "" || in_array($pid, $usedIds)){
+
+            // Wait 1 msec to ensure that we definately get a new id
+            if($pid != "") usleep(1);
+            $tmp= gettimeofday();
+            $pid =  'l'.md5(microtime().$tmp['sec']);
+        }
+
+        // Only keep the last 10 list IDsi
+        $usedIds = array_slice($usedIds, count($usedIds) -10, 10);
+        $usedIds[] = $pid;
+        session::set('releaseSelector_USED_IDS',$usedIds);
+        $this->pid = $pid;
+
         // Transfer data
         $this->releaseBase = $releaseBase; 
         $this->setBases($bases);
