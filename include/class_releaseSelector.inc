@@ -138,7 +138,7 @@ class releaseSelector {
         // Analyze for base changes if needed
         $this->action= null;
         $last_base= $this->base;
-        if(isset($_REQUEST['BPID']) && $_REQUEST['BPID'] == $this->pid) {
+        if(isset($_REQUEST["BPID_{$this->pid}"]) && $_REQUEST["BPID_{$this->pid}"] == $this->pid) {
             if (isset($_POST['bs_rebase_'.$this->pid]) && !empty($_POST['bs_rebase_'.$this->pid])) {
                 $new_base= base64_decode(get_post('bs_rebase_'.$this->pid));
                 if (isset($this->pathMapping[$new_base])) {
@@ -263,7 +263,7 @@ class releaseSelector {
         }
         $this->tree.= "<input type='submit' style='display:none' name='submit_tree_base_".$this->pid."' id='submit_tree_base_".$this->pid."'>";
         $this->tree.= "<input type='hidden' name='bs_rebase_".$this->pid."' id='bs_rebase_".$this->pid."'>";
-        $this->tree.= "<input type='hidden' name='BPID' id='BPID' value='".$this->pid."'>";
+        $this->tree.= "<input type='hidden' name='BPID_{$this->pid}' id='BPID_{$this->pid}' value='".$this->pid."'>";
 
         $this->lastState= true;
         return true;
@@ -291,7 +291,7 @@ class releaseSelector {
     function getAction()
     {
         // Do not do anything if this is not our BPID, or there's even no BPID available...
-        if(!isset($_REQUEST['BPID']) || $_REQUEST['BPID'] != $this->pid) {
+        if(!isset($_REQUEST["BPID_{$this->pid}"]) || $_REQUEST["BPID_{$this->pid}"] != $this->pid) {
             return;
         }
 
