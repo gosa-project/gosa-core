@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <definition>
+    <departmentBrowser>false</departmentBrowser>
+    <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>false</baseMode>
+    <multiSelect>true</multiSelect>
+    <template>DeviceConfig-list.tpl</template>
+    <label>List of items</label>
+    <defaultSortColumn>1</defaultSortColumn>
+
+    %TYPES%
+
+  </definition>
+
+  <table>
+    <layout>|20px;c|||170px;r|</layout>
+
+    <department>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </department>
+
+    <department>
+      <value>%{filter:departmentLink(row,dn,description)}</value>
+      <span>2</span>
+    </department>
+
+    <column>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </column>
+
+    <column>
+      <label>Name</label>
+      <sortAttribute>cn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:link(row,dn,"%s",cn,pid)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Description</label>
+      <sortAttribute>description</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:link(row,dn,"%s",description,pid)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Actions</label>
+      <value>%{filter:actions(dn,row,objectClass)}</value>
+    </column>
+
+  </table>
+
+  <actionmenu>
+
+    %ITEMS%
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <label>Remove</label>
+    </action>
+
+  </actionmenu>
+
+  <actiontriggers snapshot="false" copypaste="false">
+
+    <action>
+      <name>editEntry</name>
+      <type>entry</type>
+      <image>images/lists/edit.png</image>
+      <label>Edit item</label>
+    </action>
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <label>Remove item</label>
+    </action>
+
+  </actiontriggers>
+
+</list>
