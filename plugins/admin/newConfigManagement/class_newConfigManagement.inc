@@ -87,6 +87,15 @@ class newConfigManagement extends plugin
 
     function execute()
     {
+        $list = $this->dataModel->getItemsByType('Package');
+        $rel = $this->selectedRelease;
+        $displayEntries = array();
+        foreach($list as $entry){
+            if($entry['parentPath'] == $rel){
+                $displayEntries[] = $entry;
+            }
+        }
+    
         $this->listing->setDistributions($this->getDistList());
         $this->listing->setReleases($this->getReleaseList());
         return($this->listing->renderList());
@@ -96,16 +105,11 @@ class newConfigManagement extends plugin
     function getReleaseList()
     {
         $res = array();
-        $res = array("cn=root" => '/');
-        if(isset($this->distributionMap[$this->selectedDistribution])){
-           $dist = $this->distributionMap[$this->selectedDistribution];
-           $list = $this->dataModel->getItemsByType('Release');
-           $this->releaseMap = array();
-           foreach($list as $base => $entry){
-               if($entry['parentPath'] != $dist) continue;
-               $res["cn={$entry['name']},cn=root"] = $entry['name'];
-               $this->releaseMap["cn={$entry['name']},cn=root"] = $entry['path'];
-           }
+        $dist = $this->selectedDistribution;
+        $list = $this->dataModel->getItemsByType('Release');
+        foreach($list as $base => $entry){
+            if($entry['parentPath'] != $dist) continue;
+            $res[$entry['path']] = $entry['name'];
         }
         return($res);
     }
@@ -114,12 +118,9 @@ class newConfigManagement extends plugin
     function getDistList()
     {
         $list = $this->dataModel->getItemsByType('Distribution');
-        $res = array();
-        $res = array("cn=root" => '');
-        $this->distributionMap = array();
+        $res = array('/root/wurst' => 'wurst', '/root/tester' => 'tester');
         foreach($list as $base => $entry){
-            $res["cn={$entry['name']},cn=root"] = $entry['name'];
-            $this->distributionMap["cn={$entry['name']},cn=root"] = $entry['path'];
+            $res[$entry['path']] = $entry['name'];
         }
         return($res);
     }
