@@ -117,11 +117,8 @@ class ItemSelector {
         foreach ($bases as $base => $dummy) {
 
             // Build path style display
-            $elements= explode(',', substr($base, 0, strlen($base) - strlen($this->releaseBase)));
-            $elements= array_reverse($elements, true);
-            $this->pathMapping[$base]= $base == $this->releaseBase? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
-
-            $this->releaseInfo[$base]['name'] = ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '', $elements[0]));
+            $this->pathMapping[$base]= $base == $this->releaseBase? '/' : $dummy;
+            $this->releaseInfo[$base]['name'] = preg_replace("/^.*\//","",$base);
             $this->releaseInfo[$base]['description'] = $dummy;
         }
 
@@ -210,8 +207,9 @@ class ItemSelector {
         }
         $this->tree.= "</script>";
 
-        $selected= $this->base == $this->releaseBase?"Selected":"";
-        $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/&nbsp;["._("Root")."]</a><ul class='treeList'>\n";
+        $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\">
+
+    <ul class='treeList'>\n";
         $first= true;
         $last_indent= 2;
 
@@ -223,9 +221,9 @@ class ItemSelector {
             }
 
             // Build path style display
-            $elements= explode(',', substr($base, 0, strlen($base) - strlen($this->releaseBase)));
-
-            $indent= count($elements);
+            $elements= explode('/', substr($base, strlen($this->releaseBase), strlen($base)));
+            $indent= count($elements) ;
+        
             if (!$first && ($indent == $last_indent)) {
                 $this->tree.= "</li>\n";
             }
