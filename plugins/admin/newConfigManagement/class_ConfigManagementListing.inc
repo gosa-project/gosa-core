@@ -30,25 +30,26 @@ class ConfigManagementListing extends management
         return($this->distributionSelector->getBase());
     }
 
+    function setDistribution($dist)
+    {
+        return($this->distributionSelector->setBase($dist));
+    }
+
+    function setRelease($rel)
+    {
+        return($this->releaseSelector->setBase($rel));
+    }
+
     function getSelectedRelease()
     {
         return($this->releaseSelector->getBase());
     }
 
-    function setDistribution($base)
-    {
-        $this->distributionSelector->setBase($base);
-    }
 
     function setDistributions($distributions) 
     {
         $this->distributionSelector->setBases($distributions);
         $this->distributionSelector->update(TRUE);
-    }
-
-    function setRelease($base)
-    {
-        $this->releaseSelector->setBase($base);
     }
 
     function setReleases($releases) 

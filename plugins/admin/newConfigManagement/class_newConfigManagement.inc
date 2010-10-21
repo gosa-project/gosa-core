@@ -54,6 +54,21 @@ class newConfigManagement extends plugin
         $this->listing->save_object();
         $this->selectedDistribution = $this->listing->getSelectedDistribution();
         $this->selectedRelease = $this->listing->getSelectedRelease();
+    
+        $distList = $this->getDistList();
+        $releaseList = $this->getReleaseList();
+
+        if(!isset($releaseList[$this->selectedRelease])){
+            if(count($releaseList)){
+                $this->selectedRelease = key($releaseList);
+            }else{
+                $this->selectedRelease = "";
+            }
+        }
+        $this->listing->setDistribution($this->selectedDistribution);
+        $this->listing->setRelease($this->selectedRelease);
+        $this->listing->setDistributions($this->getDistList());
+        $this->listing->setReleases($this->getReleaseList());
     }
 
     
@@ -95,9 +110,6 @@ class newConfigManagement extends plugin
                 $displayEntries[] = $entry;
             }
         }
-    
-        $this->listing->setDistributions($this->getDistList());
-        $this->listing->setReleases($this->getReleaseList());
         return($this->listing->renderList());
     }
 
@@ -118,7 +130,7 @@ class newConfigManagement extends plugin
     function getDistList()
     {
         $list = $this->dataModel->getItemsByType('Distribution');
-        $res = array('/root/wurst' => 'wurst', '/root/tester' => 'tester');
+        $res = array();
         foreach($list as $base => $entry){
             $res[$entry['path']] = $entry['name'];
         }
