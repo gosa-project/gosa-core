@@ -18,6 +18,7 @@ if ( $cleanup ){
         session::set('newConfigManagement',$newConfigManagement);
     }
     $newConfigManagement = session::get('newConfigManagement');
+    $display= $newConfigManagement->save_object();
     $display= $newConfigManagement->execute();
 
     /* Reset requested? */

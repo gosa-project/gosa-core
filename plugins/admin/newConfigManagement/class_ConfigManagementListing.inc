@@ -5,8 +5,8 @@ class ConfigManagementListing extends management
 
     private $base = "";
 
+    private $distributionSelector = NULL;
     private $releaseSelector = NULL;
-    private $itemSelector = NULL;
 
 
     function __construct($config, $ui)
@@ -15,9 +15,35 @@ class ConfigManagementListing extends management
         $this->storagePoints = array("");
         $this->rebuildListing();
 
-       
-        $this->releaseSelector = new ItemSelector(array('cn=/'=>'/'),"cn=/","cn=/"); 
-        $this->itemSelector = new ItemSelector(array('cn=/'=>'/'),"cn=/","cn=/"); 
+        $this->distributionSelector = new ItemSelector(array('cn=root'=>'root'),"cn=root","cn=root"); 
+        $this->releaseSelector = new ItemSelector(array('cn=root'=>'root'),"cn=root","cn=root");
+    }
+
+    function save_object()
+    {
+        $this->distributionSelector->update();    
+        $this->releaseSelector->update();    
+    }
+
+    function getSelectedDistribution()
+    {
+        return($this->distributionSelector->getBase());
+    }
+
+    function getSelectedRelease()
+    {
+        return($this->releaseSelector->getBase());
+    }
+
+    function setDistribution($base)
+    {
+        $this->distributionSelector->setBase($base);
+    }
+
+    function setDistributions($distributions) 
+    {
+        $this->distributionSelector->setBases($distributions);
+        $this->distributionSelector->update(TRUE);
     }
 
     function setRelease($base)
@@ -25,22 +51,12 @@ class ConfigManagementListing extends management
         $this->releaseSelector->setBase($base);
     }
 
-    function setReleases ($releases) 
+    function setReleases($releases) 
     {
         $this->releaseSelector->setBases($releases);
+        $this->releaseSelector->update(TRUE);
     }
 
-
-    function setItem($base)
-    {
-        $this->itemSelector->setBase($base);
-    }
-
-    function setItems ($items) 
-    {
-        $this->itemSelector->setBases($items);
-    }
-    function setAllowedItems() {} 
     function renderList()
     {
         session::set('DEVICE_ITEMS', array());
@@ -50,11 +66,8 @@ class ConfigManagementListing extends management
         $headpage->update();
         $smarty = get_smarty();
         
-        $this->releaseSelector->update(TRUE);    
-        $this->itemSelector->update(TRUE);    
-
+        $smarty->assign("DISTRIBUTION", $this->distributionSelector->render());
         $smarty->assign("RELEASE", $this->releaseSelector->render());
-        $smarty->assign("ITEM", $this->itemSelector->render());
         $display = $headpage->render();
         return($this->getHeader().$display);
 
@@ -80,19 +93,7 @@ class ConfigManagementListing extends management
         $headpage->setFilter($filter);
 
         parent::__construct($this->config, $this->ui, "services", $headpage);
-
-        // Register default actions
-        $this->registerAction("new",        "newEntry");
-        $this->registerAction("edit",       "openEntry"); // !! We forward 'edit' to 'open' to have a department like navigation.
-        $this->registerAction("editEntry",  "editEntry");
-
-        $this->registerAction("saveItemChanges", "saveItemChanges");
-        $this->registerAction("cancelItemEdit", "closeDialogs");
-        $this->registerAction("cancelItemAdd", "closeDialogs");
-        $this->registerAction("saveItemAdd", "saveItemAdd");
     }
-
-    
 } 
 
 ?>

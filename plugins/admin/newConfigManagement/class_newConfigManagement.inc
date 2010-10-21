@@ -8,58 +8,53 @@ class newConfigManagement extends plugin
 
     var $installationMethods = array();
 
+    var $selectedDistribution;
+
     function __construct($config, $dn)
     {
         $this->config = &$config;
-
         $this->listing = new ConfigManagementListing($this->config, get_userinfo());
         $this->dataModel = new ConfigManagementDataModel();
 
+        // Load distributions 
+        $rpc = $this->config->getRpcHandle();
+        $res = $rpc->getDistributions();
+        if(!$rpc->success()){
+            msg_dialog::display(_("Error"), sprintf(_("Failed to load distributions, error was '%s'!"), $rpc->get_error()),ERROR_DIALOG);
+            return(NULL);
+        }
+        foreach($res as $dist){
+            $this->dataModel->addItem('Distribution','/root', $dist);
 
-#       $dists = $this->getDistributions();
-#       foreach($dists as $name => $dist){
-#
-#           
-#           $this->dataModel->addItem
-#   
-#           
-#       }
-#        
-#   
-#
-#
-#
-#       // Get installation methods from the backend.
-#       $this->loadInstallationMethods();
+            // Load the releases for the current distribution
+            $releases = $rpc->getReleases($dist);
+            if(!$rpc->success()){
+                msg_dialog::display(_("Error"), sprintf(_("Failed to load releases, error was '%s'!"), $rpc->get_error()),ERROR_DIALOG);
+                return(NULL);
+            }
+            foreach($releases as $release){
+                $this->dataModel->addItem('Release',"/root/{$dist}", $release);
+
+                // Load packages
+                $packages = $rpc->getPackages($release);
+                if(!$rpc->success()){
+                    msg_dialog::display(_("Error"), sprintf(_("Failed to load packages, error was '%s'!"), $rpc->get_error()),ERROR_DIALOG);
+                    return(NULL);
+                }
+                foreach($packages as $package){
+                    $this->dataModel->addItem('Package',"/root/{$dist}/{$release}", $package['name'], $package);
+                }
+            }
+        }
+
     }
 
-    
-    function getDistributions()
+    function save_object()
     {
-        return(
-            array(
-                'debian' => 
-                    array('type' => 'deb', 'install_method' => 'puppet'),
-                'suse' => 
-                    array('type' => 'rpm', 'install_method' => 'muppet')
-            ));
+        $this->listing->save_object();
+        $this->selectedDistribution = $this->listing->getSelectedDistribution();
+        $this->selectedRelease = $this->listing->getSelectedRelease();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     
     /*! \brief  Intializes this plugin
@@ -87,34 +82,52 @@ class newConfigManagement extends plugin
             $this->initFailed = TRUE;
             return;
         }
-
-
-        $this->getReleases();
     }
 
-    
-
-   
-    function getReleases()
-    {
-        $rpc = $this->config->getRpcHandle();
-        $res = $rpc->getReleases();
-        if(!$rpc->success()){
-            $this->rpcError = TRUE;
-            $this->errorMessage = $rpc->get_error();;
-            return(NULL);
-        }
-        return($res);
-    }
- 
 
     function execute()
     {
+        $this->listing->setDistributions($this->getDistList());
+        $this->listing->setReleases($this->getReleaseList());
         return($this->listing->renderList());
     }
 
+
+    function getReleaseList()
+    {
+        $res = array();
+        $res = array("cn=root" => '/');
+        if(isset($this->distributionMap[$this->selectedDistribution])){
+           $dist = $this->distributionMap[$this->selectedDistribution];
+           $list = $this->dataModel->getItemsByType('Release');
+           $this->releaseMap = array();
+           foreach($list as $base => $entry){
+               if($entry['parentPath'] != $dist) continue;
+               $res["cn={$entry['name']},cn=root"] = $entry['name'];
+               $this->releaseMap["cn={$entry['name']},cn=root"] = $entry['path'];
+           }
+        }
+        return($res);
+    }
+    
+    
+    function getDistList()
+    {
+        $list = $this->dataModel->getItemsByType('Distribution');
+        $res = array();
+        $res = array("cn=root" => '');
+        $this->distributionMap = array();
+        foreach($list as $base => $entry){
+            $res["cn={$entry['name']},cn=root"] = $entry['name'];
+            $this->distributionMap["cn={$entry['name']},cn=root"] = $entry['path'];
+        }
+        return($res);
+    }
+    
+
     function remove_lock()
-    {}
+    {
+    }
 
     public static function plInfo()
     {
@@ -131,8 +144,5 @@ class newConfigManagement extends plugin
                     "plProvidedAcls"=> array()
                     ));
     }
-
 }
-
-
 ?>
