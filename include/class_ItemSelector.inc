@@ -175,6 +175,11 @@ class ItemSelector {
         $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($this->releaseBase)."';  
             $('submit_tree_base_".$this->pid."').click();\"";
 
+        $initialValue = "";
+        if(isset($this->pathMapping[$this->base])){
+            $initialValue = $this->pathMapping[$this->base];
+        }
+
         $this->tree= "<input style='width:160px' type='text' size='35' 
             name='bs_input_{$this->pid}' id='bs_input_{$this->pid}'
 
@@ -195,7 +200,7 @@ class ItemSelector {
             onmouseout=\"   mouseIsStillOver=false; 
             rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
 
-            value=\"".preg_replace('/"/','&quot;',$this->pathMapping[$this->base])."\">";
+            value=\"".preg_replace('/"/','&quot;',$initialValue)."\">";
 
         // Autocompleter
         $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
