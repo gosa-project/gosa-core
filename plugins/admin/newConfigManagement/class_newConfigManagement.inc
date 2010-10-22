@@ -6,14 +6,31 @@ class newConfigManagement extends plugin
     var $plHeadline = "Config management";
     var $plDescription = "Config management";
 
-    var $installationMethods = array();
-
     var $selectedDistribution;
+    var $selectedRelease;
 
+    var $dataModel = NULL;
+    var $listing = NULL;
+
+
+    /*! \brief  Initialize the plugin and finally update the data model.
+     */
     function __construct($config, $dn)
     {
         $this->config = &$config;
         $this->listing = new ConfigManagementListing($this->config, get_userinfo());
+
+        // Request an update of the data model
+        $this->updateDataModel();
+    }
+
+
+    /*! \brief  Updates all distributions, releases, packages and items in the dataModel
+     *          Load information from the backend.
+     */
+    function updateDataModel()
+    {
+        // Recreate the data model, to have a clean and fresh instance.
         $this->dataModel = new ConfigManagementDataModel();
 
         // Load distributions 
@@ -44,20 +61,41 @@ class newConfigManagement extends plugin
                 foreach($packages as $package){
                     $this->dataModel->addItem('Package',"/root/{$dist}/{$release}", $package['name'], $package);
                 }
+
+                // Load items
+                $items = $rpc->listConfigItems($release);
+                if(!$rpc->success()){
+                    msg_dialog::display(_("Error"), sprintf(_("Failed to load items, error was '%s'!"), $rpc->get_error()),ERROR_DIALOG);
+                    return(NULL);
+                }
+                foreach($items as $package){
+                    $this->dataModel->addItem('Item',"/root/{$dist}/{$release}", $package['name'], $package);
+                }
             }
         }
 
     }
 
+
+    /*! \brief  Keep track of posted values and populate those 
+     *           which are interesting for us.
+     *          Inspects the _POST and _GET values.
+     */
     function save_object()
     {
+        // Update the listing class, this is necessary to get post
+        //  actions from it.
         $this->listing->save_object();
+
+        // Get the selected distribution and release from the listing widget.
         $this->selectedDistribution = $this->listing->getSelectedDistribution();
         $this->selectedRelease = $this->listing->getSelectedRelease();
-    
+   
+        // Get a list of all available distributions and releases.
         $distList = $this->getDistList();
         $releaseList = $this->getReleaseList();
 
+        // Ensure that we've valid values selected.
         if(!isset($releaseList[$this->selectedRelease])){
             if(count($releaseList)){
                 $this->selectedRelease = key($releaseList);
@@ -65,10 +103,64 @@ class newConfigManagement extends plugin
                 $this->selectedRelease = "";
             }
         }
+
+        // Transfer checked values back to the listing class.
         $this->listing->setDistribution($this->selectedDistribution);
         $this->listing->setRelease($this->selectedRelease);
         $this->listing->setDistributions($this->getDistList());
         $this->listing->setReleases($this->getReleaseList());
+    }
+
+
+    /*! \brief  Generate the HTML content for this plugin.
+     *          Actually renders the listing widget..
+     */
+    function execute()
+    {
+        // Get the selected release and store it in a session variable
+        //  to allow the configFilter to access it and display the
+        //  packages and items.
+        $item = $this->dataModel->getItemByPath($this->selectedRelease);
+        print_a($item);
+
+        return($this->listing->renderList());
+    }
+
+
+    /*! \brief  Returns a simply list of all releases of the CURRENT distribution.
+     *          This list will then be used to generate the entries of the 
+     *           ItemSelectors in the listing class.
+     */
+    function getReleaseList()
+    {
+        $res = array();
+        $dist = $this->selectedDistribution;
+        $list = $this->dataModel->getItemsByType('Release');
+        foreach($list as $base => $entry){
+            if($entry['parentPath'] != $dist) continue;
+            $res[$entry['path']] = $entry['name'];
+        }
+        return($res);
+    }
+    
+    
+    /*! \brief  Returns a simply list of all distributions.
+     *          This list will then be used to generate the entries of the 
+     *           ItemSelectors in the listing class.
+     */
+    function getDistList()
+    {
+        $list = $this->dataModel->getItemsByType('Distribution');
+        $res = array();
+        foreach($list as $base => $entry){
+            $res[$entry['path']] = $entry['name'];
+        }
+        return($res);
+    }
+    
+
+    function remove_lock()
+    {
     }
 
     
@@ -99,48 +191,6 @@ class newConfigManagement extends plugin
         }
     }
 
-
-    function execute()
-    {
-        $list = $this->dataModel->getItemsByType('Package');
-        $rel = $this->selectedRelease;
-        $displayEntries = array();
-        foreach($list as $entry){
-            if($entry['parentPath'] == $rel){
-                $displayEntries[] = $entry;
-            }
-        }
-        return($this->listing->renderList());
-    }
-
-
-    function getReleaseList()
-    {
-        $res = array();
-        $dist = $this->selectedDistribution;
-        $list = $this->dataModel->getItemsByType('Release');
-        foreach($list as $base => $entry){
-            if($entry['parentPath'] != $dist) continue;
-            $res[$entry['path']] = $entry['name'];
-        }
-        return($res);
-    }
-    
-    
-    function getDistList()
-    {
-        $list = $this->dataModel->getItemsByType('Distribution');
-        $res = array();
-        foreach($list as $base => $entry){
-            $res[$entry['path']] = $entry['name'];
-        }
-        return($res);
-    }
-    
-
-    function remove_lock()
-    {
-    }
 
     public static function plInfo()
     {

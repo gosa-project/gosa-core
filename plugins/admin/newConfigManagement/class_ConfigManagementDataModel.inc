@@ -68,11 +68,19 @@ class ConfigManagementDataModel
         
     }
 
+    function getItemByPath($path)
+    {
+        if(isset($this->data['linear'][$path])){
+            return($this->data['linear'][$path]);
+        }
+        return(NULL);
+    }
+
     function getItemsByType($type)
     {
         $res = array();
-        foreach($this->typeToPath[$type] as $path){
-            $res[$path] = $this->data['linear'][$path];
+        foreach($this->data['linear'] as $path => $item){
+            if($item['type'] == $type) $res[] = $item;
         }
         return($res);
     }
