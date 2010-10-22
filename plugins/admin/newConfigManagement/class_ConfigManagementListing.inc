@@ -5,8 +5,8 @@ class ConfigManagementListing extends management
 
     private $base = "";
 
-    private $distributionSelector = NULL;
-    private $releaseSelector = NULL;
+    private $containerSelector = NULL;
+    private $itemSelector = NULL;
 
 
     function __construct($config, $ui)
@@ -15,47 +15,47 @@ class ConfigManagementListing extends management
         $this->storagePoints = array("");
         $this->rebuildListing();
 
-        $this->distributionSelector = new ItemSelector(array(),'/root','/root');
-        $this->releaseSelector = new ItemSelector(array(),'/root','/root');
+        $this->containerSelector = new ItemSelector(array(),'/root','/root');
+        $this->itemSelector = new ItemSelector(array(),'/root','/root');
     }
 
     function save_object()
     {
-        $this->distributionSelector->update();    
-        $this->releaseSelector->update();    
+        $this->containerSelector->update();    
+        $this->itemSelector->update();    
     }
 
-    function getSelectedDistribution()
+    function getSelectedContainer()
     {
-        return($this->distributionSelector->getBase());
+        return($this->containerSelector->getBase());
     }
 
-    function setDistribution($dist)
+    function setContainer($dist)
     {
-        return($this->distributionSelector->setBase($dist));
+        return($this->containerSelector->setBase($dist));
     }
 
-    function setRelease($rel)
+    function setItem($rel)
     {
-        return($this->releaseSelector->setBase($rel));
+        return($this->itemSelector->setBase($rel));
     }
 
-    function getSelectedRelease()
+    function getSelectedItem()
     {
-        return($this->releaseSelector->getBase());
+        return($this->itemSelector->getBase());
     }
 
 
-    function setDistributions($distributions) 
+    function setContainers($containers) 
     {
-        $this->distributionSelector->setBases($distributions);
-        $this->distributionSelector->update(TRUE);
+        $this->containerSelector->setBases($containers);
+        $this->containerSelector->update(TRUE);
     }
 
-    function setReleases($releases) 
+    function setItems($items) 
     {
-        $this->releaseSelector->setBases($releases);
-        $this->releaseSelector->update(TRUE);
+        $this->itemSelector->setBases($items);
+        $this->itemSelector->update(TRUE);
     }
 
     function renderList()
@@ -67,8 +67,8 @@ class ConfigManagementListing extends management
         $headpage->update();
         $smarty = get_smarty();
         
-        $smarty->assign("DISTRIBUTION", $this->distributionSelector->render());
-        $smarty->assign("RELEASE", $this->releaseSelector->render());
+        $smarty->assign("CONTAINER", $this->containerSelector->render());
+        $smarty->assign("ITEM", $this->itemSelector->render());
         $display = $headpage->render();
         return($this->getHeader().$display);
 

@@ -6,8 +6,8 @@
     <table summary="{$HEADLINE}">
      <tr>
       <td>{$RELOAD}</td>
-      <td class="left-border">{t}Distribution{/t} {$DISTRIBUTION}</td>
-      <td class="left-border">{t}Release{/t} {$RELEASE}</td>
+      <td class="left-border">{t}Container{/t} {$CONTAINER}</td>
+      <td class="left-border">{t}Item{/t} {$ITEM}</td>
       <td class="left-border">{$ACTIONS}</td>
       <td class="left-border">{$FILTER}</td>
      </tr>

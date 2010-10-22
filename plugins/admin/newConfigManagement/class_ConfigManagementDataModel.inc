@@ -68,12 +68,26 @@ class ConfigManagementDataModel
         
     }
 
+    function itemExistsByPath($path)
+    {
+        return(isset($this->data['linear'][$path]));
+    }
+    
     function getItemByPath($path)
     {
         if(isset($this->data['linear'][$path])){
             return($this->data['linear'][$path]);
         }
         return(NULL);
+    }
+
+    function setItemStatus($path, $status)
+    {
+        if(!$this->itemExistsByPath($path)){
+            trigger_error("Invalid item path '{$path}'!");
+        }else{
+            $this->data['linear'][$path]['status'] = $status;
+        }
     }
 
     function getItemsByType($type)

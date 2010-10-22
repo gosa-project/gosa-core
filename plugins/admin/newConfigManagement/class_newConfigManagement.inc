@@ -6,8 +6,8 @@ class newConfigManagement extends plugin
     var $plHeadline = "Config management";
     var $plDescription = "Config management";
 
-    var $selectedDistribution;
-    var $selectedRelease;
+    var $selectedContainer;
+    var $selectedItem;
 
     var $dataModel = NULL;
     var $listing = NULL;
@@ -41,39 +41,17 @@ class newConfigManagement extends plugin
             return(NULL);
         }
         foreach($res as $dist){
-            $this->dataModel->addItem('Distribution','/root', $dist);
+            $this->dataModel->addItem('Distribution','/root', $dist['name'], $dist);
+            foreach($dist['releases'] as $release){
+                $distPath = "/root/{$dist['name']}";
+                $this->dataModel->addItem('Release',$distPath, $release['name'], $release);
 
-            // Load the releases for the current distribution
-            $releases = $rpc->getReleases($dist);
-            if(!$rpc->success()){
-                msg_dialog::display(_("Error"), sprintf(_("Failed to load releases, error was '%s'!"), $rpc->get_error()),ERROR_DIALOG);
-                return(NULL);
-            }
-            foreach($releases as $release){
-                $this->dataModel->addItem('Release',"/root/{$dist}", $release);
-
-                // Load packages
-                $packages = $rpc->getPackages($release);
-                if(!$rpc->success()){
-                    msg_dialog::display(_("Error"), sprintf(_("Failed to load packages, error was '%s'!"), $rpc->get_error()),ERROR_DIALOG);
-                    return(NULL);
-                }
-                foreach($packages as $package){
-                    $this->dataModel->addItem('Package',"/root/{$dist}/{$release}", $package['name'], $package);
-                }
-
-                // Load items
-                $items = $rpc->listConfigItems($release);
-                if(!$rpc->success()){
-                    msg_dialog::display(_("Error"), sprintf(_("Failed to load items, error was '%s'!"), $rpc->get_error()),ERROR_DIALOG);
-                    return(NULL);
-                }
-                foreach($items as $package){
-                    $this->dataModel->addItem('Item',"/root/{$dist}/{$release}", $package['name'], $package);
+                foreach($dist['components'] as $component){
+                    $comPath = "{$distPath}/{$release['name']}";
+                    $this->dataModel->addItem('Component',$comPath, $component['name'], $component);
                 }
             }
         }
-
     }
 
 
@@ -88,27 +66,65 @@ class newConfigManagement extends plugin
         $this->listing->save_object();
 
         // Get the selected distribution and release from the listing widget.
-        $this->selectedDistribution = $this->listing->getSelectedDistribution();
-        $this->selectedRelease = $this->listing->getSelectedRelease();
-   
+        $this->selectedContainer = $this->listing->getSelectedContainer();
+        $this->selectedItem = $this->listing->getSelectedItem();
+  
         // Get a list of all available distributions and releases.
         $distList = $this->getDistList();
-        $releaseList = $this->getReleaseList();
+        $releaseList = $this->getItemList();
 
         // Ensure that we've valid values selected.
-        if(!isset($releaseList[$this->selectedRelease])){
+        if(!isset($releaseList[$this->selectedItem])){
             if(count($releaseList)){
-                $this->selectedRelease = key($releaseList);
+                $this->selectedItem = key($releaseList);
             }else{
-                $this->selectedRelease = "";
+                $this->selectedItem = "";
             }
         }
 
+        // Update list of items within the selected container. 
+        $this->updateItemList($this->selectedContainer);
+
         // Transfer checked values back to the listing class.
-        $this->listing->setDistribution($this->selectedDistribution);
-        $this->listing->setRelease($this->selectedRelease);
-        $this->listing->setDistributions($this->getDistList());
-        $this->listing->setReleases($this->getReleaseList());
+        $this->listing->setContainer($this->selectedContainer);
+        $this->listing->setItem($this->selectedItem);
+        $this->listing->setContainers($this->getDistList());
+        $this->listing->setItems($this->getItemList());
+    }
+
+
+    function updateItemList($path)
+    {
+        // Fist get Item and check if it is an release 
+        if($this->dataModel->itemExistsByPath($path)){
+            $data = $this->dataModel->getItemByPath($path);
+
+            // Only releases can contain config-items.
+            if($data['type'] == 'Release' && $data['status'] != "fetched"){
+
+                $rpc = $this->config->getRpcHandle();
+                $res = $rpc->listConfigItems($data['name']);
+                if(!$rpc->success()){
+                    msg_dialog::display(_("Error"), 
+                            sprintf(_("Failed to load distributions, error was '%s'!"), 
+                                $rpc->get_error()),ERROR_DIALOG);
+                }else{
+                    $this->dataModel->setItemStatus($path, 'käse');
+                    foreach($res as $itemPath => $type){
+                
+                        // Make names dataModel conform
+                        $itemPath = $path.preg_replace("/^\//","/root", $itemPath);
+                        $name = preg_replace("/^.*\//","",$itemPath);   
+
+                        $itemPath = preg_replace("/\/[^\/]*$/","", $itemPath);
+
+                        print_a(array($type, $itemPath, $name));
+ 
+                        $this->dataModel->addItem($type, $itemPath, $name); 
+                    }
+                }
+            }
+        }
     }
 
 
@@ -120,7 +136,7 @@ class newConfigManagement extends plugin
         // Get the selected release and store it in a session variable
         //  to allow the configFilter to access it and display the
         //  packages and items.
-        $item = $this->dataModel->getItemByPath($this->selectedRelease);
+        $item = $this->dataModel->getItemByPath($this->selectedItem);
         session::set('CONFIG_ITEM', $item);
 
         return($this->listing->renderList());
@@ -131,12 +147,12 @@ class newConfigManagement extends plugin
      *          This list will then be used to generate the entries of the 
      *           ItemSelectors in the listing class.
      */
-    function getReleaseList()
+    function getItemList()
     {
         $data = $this->dataModel->getItemByPath('/root');
         return($this->__recurseItem($data));
         $res = array();
-        $dist = $this->selectedDistribution;
+        $dist = $this->selectedContainer;
         $list = $this->dataModel->getItemsByType('Release');
         foreach($list as $base => $entry){
             if($entry['parentPath'] != $dist) continue;
@@ -152,7 +168,6 @@ class newConfigManagement extends plugin
      */
     function getDistList()
     {
-
         $data = $this->dataModel->getItemByPath('/root');
         return($this->__recurseItem($data));
        
@@ -169,7 +184,7 @@ class newConfigManagement extends plugin
     function __recurseItem($item)
     {
         $res = array();
-        $res[$item['path']] = $item['name'];
+        $res[$item['path']] = $item['type'];
         if(count($item['children'])){
             foreach($item['children'] as $child){
                 $res = array_merge($res, $this->__recurseItem($child));
