@@ -10,6 +10,7 @@ class filterConfigManagement {
         // Walk through the data array till we reach the correct level, then 
         //  create the list of entries.
         $data = session::get('CONFIG_ITEM');
+        if(!$data) return(array());
 
         // Prepare filter, strip out regex regex related chars, except for *
         $filter = preg_replace('/\*/','____STAR____', $filter);

@@ -133,6 +133,8 @@ class newConfigManagement extends plugin
      */
     function getReleaseList()
     {
+        $data = $this->dataModel->getItemByPath('/root');
+        return($this->__recurseItem($data));
         $res = array();
         $dist = $this->selectedDistribution;
         $list = $this->dataModel->getItemsByType('Release');
@@ -150,6 +152,11 @@ class newConfigManagement extends plugin
      */
     function getDistList()
     {
+
+        $data = $this->dataModel->getItemByPath('/root');
+        return($this->__recurseItem($data));
+       
+
         $list = $this->dataModel->getItemsByType('Distribution');
         $res = array();
         foreach($list as $base => $entry){
@@ -158,6 +165,20 @@ class newConfigManagement extends plugin
         return($res);
     }
     
+
+    function __recurseItem($item)
+    {
+        $res = array();
+        $res[$item['path']] = $item['name'];
+        if(count($item['children'])){
+            foreach($item['children'] as $child){
+                $res = array_merge($res, $this->__recurseItem($child));
+            }
+        }
+        return($res);
+    }
+
+
 
     function remove_lock()
     {

@@ -16,7 +16,7 @@ class ConfigManagementListing extends management
         $this->rebuildListing();
 
         $this->distributionSelector = new ItemSelector(array(),'/root','/root');
-        $this->releaseSelector = new ItemSelector(array('cn=root'=>'root'),"cn=root","cn=root");
+        $this->releaseSelector = new ItemSelector(array(),'/root','/root');
     }
 
     function save_object()
