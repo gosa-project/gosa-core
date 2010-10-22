@@ -121,7 +121,11 @@ class jsonRPC {
     {
         if($this->lastStats['http_code'] != 200){
             $error = $this->getHttpStatusCodeMessage($this->lastStats['http_code']);
-            if(isset($this->lastResult['error']['message'])){
+            if(isset($this->lastResult['error']['error'])){
+                $err = $this->lastResult['error']['error'];
+                $message = call_user_func_array(sprintf,$err);
+                $error .= $message;
+            }elseif(isset($this->lastResult['error']['message'])){
                 $error .= ": ".$this->lastResult['error']['message']; 
             }
             return($error);
