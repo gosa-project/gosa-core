@@ -13,7 +13,7 @@
     <tag>default</tag>
     <label>Default filter</label>
     <query>
-      <backend>DeviceItems</backend>
+      <backend>ConfigManagement</backend>
       <filter>$</filter>
     </query>
     <autocomplete>

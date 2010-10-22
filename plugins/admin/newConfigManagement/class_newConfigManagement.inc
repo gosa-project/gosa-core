@@ -121,7 +121,7 @@ class newConfigManagement extends plugin
         //  to allow the configFilter to access it and display the
         //  packages and items.
         $item = $this->dataModel->getItemByPath($this->selectedRelease);
-        print_a($item);
+        session::set('CONFIG_ITEM', $item);
 
         return($this->listing->renderList());
     }
