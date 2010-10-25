@@ -124,7 +124,8 @@ class ConfigManagementListing extends management
 
         // Register default actions
         $this->registerAction("new",    "newEntry");
-        $this->registerAction("edit",   "editEntry");
+        $this->registerAction("editEntry",  "editEntry");
+        $this->registerAction("open",       "openEntry");
         $this->registerAction("apply",  "applyChanges");
         $this->registerAction("save",   "saveChanges");
         $this->registerAction("cancel", "cancelEdit");
@@ -141,6 +142,11 @@ class ConfigManagementListing extends management
     function removeEntryRequested($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
     {
         $this->parent->removeEntry($target);
+    }
+
+    function openEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    {
+        $this->parent->openEntry($target);
     }
 
     function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")

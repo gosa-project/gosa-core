@@ -262,6 +262,12 @@ class newConfigManagement extends plugin
     }
 
 
+    function openEntry($id)
+    {
+        print_a($id); 
+    }
+
+
     public static function plInfo()
     {
         return (array(
