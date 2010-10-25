@@ -264,7 +264,6 @@ class newConfigManagement extends plugin
     }
 
 
-
     function editEntry($ids)
     {
         foreach($ids as $id){
@@ -283,12 +282,13 @@ class newConfigManagement extends plugin
 
     function openEntry($ids)
     {
-        foreach($ids as $id){
-            $item = $this->dataModel->getItemById($id);
-            if($item){
-                if(in_array($item['type'], array('Distribution', 'Release', 'Component'))){
-                    $this->setCurrentContainer($item['path'], $this->selectedContainer);
-                }
+        $id = $ids[0];
+        $item = $this->dataModel->getItemById($id);
+        if($item){
+            if(in_array($item['type'], array('Distribution', 'Release'))){
+                $this->setCurrentContainer($item['path'], $this->selectedContainer);
+            }else{
+                $this->editEntry(array($id));
             }
         }
     }
