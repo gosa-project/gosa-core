@@ -98,6 +98,21 @@ class ConfigManagementDataModel
         }
         return($res);
     }
+
+
+    function getItemById($id)
+    {
+        $path = NULL;
+        if(isset($this->idToPath[$id])){
+            $path = $this->idToPath[$id];
+        }else{
+            return(NULL);
+        }
+        if(isset($this->data['linear'][$path])){
+            return($this->data['linear'][$path]);
+        }
+        return(NULL);
+    }
 }
 
 ?>

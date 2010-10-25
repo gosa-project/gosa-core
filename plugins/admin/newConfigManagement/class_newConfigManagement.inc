@@ -66,30 +66,9 @@ class newConfigManagement extends plugin
         $this->listing->save_object();
 
         // Get the selected distribution and release from the listing widget.
-        $this->selectedContainer = $this->listing->getSelectedContainer();
-        $this->selectedItem = $this->listing->getSelectedItem();
-  
-        // Get a list of all available distributions and releases.
-        $distList = $this->getDistList();
-        $releaseList = $this->getItemList();
-
-        // Ensure that we've valid values selected.
-        if(!isset($releaseList[$this->selectedItem])){
-            if(count($releaseList)){
-                $this->selectedItem = key($releaseList);
-            }else{
-                $this->selectedItem = "";
-            }
-        }
-
-        // Update list of items within the selected container. 
-        $this->updateItemList($this->selectedContainer);
-
-        // Transfer checked values back to the listing class.
-        $this->listing->setContainer($this->selectedContainer);
-        $this->listing->setItem($this->selectedItem);
-        $this->listing->setContainers($this->getDistList());
-        $this->listing->setItems($this->getItemList());
+        $cont = $this->listing->getSelectedContainer();
+        $item = $this->listing->getSelectedItem();
+        $this->setCurrentContainer($cont, $item);
     }
 
 
@@ -128,21 +107,57 @@ class newConfigManagement extends plugin
     }
 
 
+
+    function setCurrentContainer($cont, $item)
+    {
+        $this->selectedContainer = $cont;
+        $this->selectedItem = $item;
+
+        // Get a list of all available distributions and releases.
+        $distList = $this->getDistList();
+        $releaseList = $this->getItemList();
+
+        // Ensure that we've valid values selected.
+        if(!isset($releaseList[$this->selectedItem])){
+            if(count($releaseList)){
+                $this->selectedItem = key($releaseList);
+            }else{
+                $this->selectedItem = "";
+            }
+        }
+
+        // Update list of items within the selected container. 
+        $this->updateItemList($this->selectedContainer);
+
+        // Transfer checked values back to the listing class.
+        $this->listing->setContainer($this->selectedContainer);
+        $this->listing->setItem($this->selectedItem);
+        $this->listing->setContainers($this->getDistList());
+        $this->listing->setItems($this->getItemList());
+    }
+
+
     /*! \brief  Generate the HTML content for this plugin.
      *          Actually renders the listing widget..
      */
     function execute()
     {
-
         // Get the selected release and store it in a session variable
         //  to allow the configFilter to access it and display the
         //  packages and items.
-        $path = $this->selectedContainer.$this->selectedItem;
-        $item = $this->dataModel->getItemByPath($path);
-        session::set('CONFIG_ITEM', $item);
+        $res = $this->listing->execute();
         $this->listing->setListingTypes($this->getListingTypes());
 
-        return($this->listing->execute());
+        return($res);
+    }
+
+    
+    function getItemsToBeDisplayed()
+    {
+
+        $path = $this->selectedContainer.$this->selectedItem;
+        $item = $this->dataModel->getItemByPath($path);
+        return($item);
     }
 
 
@@ -250,21 +265,32 @@ class newConfigManagement extends plugin
 
 
 
-    function editEntry($id)
+    function editEntry($ids)
     {
-        print_a($id);
+        foreach($ids as $id){
+            echo "<br>Edit {$id}";
+        }
     }
 
 
-    function removeEntry($id)
+    function removeEntry($ids)
     {
-        print_a($id); 
+        foreach($ids as $id){
+            echo "<br>Remove {$id}";
+        }
     }
 
 
-    function openEntry($id)
+    function openEntry($ids)
     {
-        print_a($id); 
+        foreach($ids as $id){
+            $item = $this->dataModel->getItemById($id);
+            if($item){
+                if(in_array($item['type'], array('Distribution', 'Release', 'Component'))){
+                    $this->setCurrentContainer($item['path'], $this->selectedContainer);
+                }
+            }
+        }
     }
 
 

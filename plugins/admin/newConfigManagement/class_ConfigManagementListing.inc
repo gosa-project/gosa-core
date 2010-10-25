@@ -7,7 +7,6 @@ class ConfigManagementListing extends management
 
     private $containerSelector = NULL;
     private $itemSelector = NULL;
-
     private $objectTypeStr = "";
 
     function __construct($config, $ui, $parent)
@@ -64,17 +63,13 @@ class ConfigManagementListing extends management
 
     function renderList()
     {
-        session::set('DEVICE_ITEMS', array());
-
         $headpage = $this->getHeadpage();
         $headpage->update();
         $smarty = get_smarty();
-        
         $smarty->assign("CONTAINER", $this->containerSelector->render());
         $smarty->assign("ITEM", $this->itemSelector->render());
         $display = $headpage->render();
         return($this->getHeader().$display);
-
     }
 
 
@@ -90,18 +85,81 @@ class ConfigManagementListing extends management
 
         }
         $this->objectTypeStr = $str;
-        $this->rebuildListing();
     }
 
-   
-    function rebuildListing()
+
+    function execute()
     {
+        // Ensure that html posts and gets are kept even if we see a 'Entry islocked' dialog.
+        $vars = array('/^act$/','/^listing/','/^PID$/','/^FILTER_PID$/');
+        session::set('LOCK_VARS_TO_USE',$vars);
+
+        pathNavigator::registerPlugin($this);
+
+        /* Display the copy & paste dialog, if it is currently open */
+        $ret = $this->copyPasteHandler("",array());
+        if($ret){
+            return($this->getHeader().$ret);
+        }
+
+        // Update filter
+        if ($this->filter) {
+            $this->filter->update();
+            session::global_set(get_class($this)."_filter", $this->filter);
+            session::set('autocomplete', $this->filter);
+        }
 
         // Handle actions (POSTs and GETs)
         $str = $this->handleActions($this->detectPostActions());
         if($str) return($this->getHeader().$str);
 
+        $items = $this->parent->getItemsToBeDisplayed();
+        session::set('CONFIG_ITEM', $items);
 
+        // Open single dialog objects
+        if(is_object($this->dialogObject)){
+            if(method_exists($this->dialogObject,'save_object')) $this->dialogObject->save_object();
+            if(method_exists($this->dialogObject,'execute')){
+                $display = $this->dialogObject->execute();
+                $display.= $this->_getTabFooter();
+                return($this->getHeader().$display);
+            }
+        }
+
+        // Display tab object.
+        if($this->tabObject instanceOf tabs || $this->tabObject instanceOf multi_plug){
+#      $this->tabObject->save_object();
+            $display = $this->tabObject->execute();
+            $display.= $this->_getTabFooter();
+            return($this->getHeader().$display);
+        }
+        // Set current restore base for snapshot handling.
+        if(is_object($this->snapHandler)){
+            $bases = array();
+            foreach($this->storagePoints as $sp){
+                $bases[] = $sp.$this->headpage->getBase();
+            }
+
+            // No bases specified? Try base
+            if(!count($bases)) $bases[] = $this->headpage->getBase();
+
+            $this->snapHandler->setSnapshotBases($bases);
+        }
+
+        // Create statistic table entry
+        stats::log('management', $class = get_class($this), $this->getAclCategories(),  $action = 'view',
+                $amount = 1, $duration = (microtime(TRUE) - $this->initTime));
+
+        // Display list
+        $this->rebuildListing();
+        $str = $this->renderList();
+        return($str);
+    }    
+    
+
+   
+    function rebuildListing()
+    {
         // Build filter
         if (session::global_is_set(get_class($this)."_filter")){
             $filter= session::global_get(get_class($this)."_filter");
@@ -125,7 +183,7 @@ class ConfigManagementListing extends management
         // Register default actions
         $this->registerAction("new",    "newEntry");
         $this->registerAction("editEntry",  "editEntry");
-        $this->registerAction("open",       "openEntry");
+        $this->registerAction("edit",       "openEntry");
         $this->registerAction("apply",  "applyChanges");
         $this->registerAction("save",   "saveChanges");
         $this->registerAction("cancel", "cancelEdit");
@@ -153,6 +211,22 @@ class ConfigManagementListing extends management
     {
         $this->parent->editEntry($target);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 } 
 
 ?>
