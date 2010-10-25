@@ -18,7 +18,7 @@ class newConfigManagement extends plugin
     function __construct($config, $dn)
     {
         $this->config = &$config;
-        $this->listing = new ConfigManagementListing($this->config, get_userinfo());
+        $this->listing = new ConfigManagementListing($this->config, get_userinfo(), $this);
 
         // Request an update of the data model
         $this->updateDataModel();
@@ -242,10 +242,23 @@ class newConfigManagement extends plugin
 
         $types['Component']['objectClass'] = 'Component';
         $types['Component']['label'] = _('Component');
-        $types['Component']['image'] = 'images/lists/edit.png';
+        $types['Component']['image'] = 'plugins/users/images/select_user.png';
         $types['Component']['category'] = 'Device';
         $types['Component']['class'] = 'Device';
         return($types);
+    }
+
+
+
+    function editEntry($id)
+    {
+        print_a($id);
+    }
+
+
+    function removeEntry($id)
+    {
+        print_a($id); 
     }
 
 

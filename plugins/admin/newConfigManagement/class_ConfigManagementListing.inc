@@ -10,7 +10,7 @@ class ConfigManagementListing extends management
 
     private $objectTypeStr = "";
 
-    function __construct($config, $ui)
+    function __construct($config, $ui, $parent)
     {
         // Set storage points - We do not have any - We just create a fake list which lists all items
         $this->storagePoints = array("");
@@ -18,6 +18,8 @@ class ConfigManagementListing extends management
 
         $this->containerSelector = new ItemSelector(array(),'/root','/root');
         $this->itemSelector = new ItemSelector(array(),'','');
+
+        $this->parent = &$parent;
     }
 
     function save_object()
@@ -94,6 +96,12 @@ class ConfigManagementListing extends management
    
     function rebuildListing()
     {
+
+        // Handle actions (POSTs and GETs)
+        $str = $this->handleActions($this->detectPostActions());
+        if($str) return($this->getHeader().$str);
+
+
         // Build filter
         if (session::global_is_set(get_class($this)."_filter")){
             $filter= session::global_get(get_class($this)."_filter");
@@ -113,6 +121,31 @@ class ConfigManagementListing extends management
         $headpage->setFilter($filter);
 
         parent::__construct($this->config, $this->ui, "services", $headpage);
+
+        // Register default actions
+        $this->registerAction("new",    "newEntry");
+        $this->registerAction("edit",   "editEntry");
+        $this->registerAction("apply",  "applyChanges");
+        $this->registerAction("save",   "saveChanges");
+        $this->registerAction("cancel", "cancelEdit");
+        $this->registerAction("cancelDelete", "cancelEdit");
+        $this->registerAction("remove", "removeEntryRequested");
+        $this->registerAction("removeConfirmed", "removeEntryConfirmed");
+
+        $this->registerAction("config-filter","editFilter");
+        $this->registerAction("saveFilter","saveFilter");
+        $this->registerAction("cancelFilter","cancelFilter");
+
+    }
+
+    function removeEntryRequested($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    {
+        $this->parent->removeEntry($target);
+    }
+
+    function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    {
+        $this->parent->editEntry($target);
     }
 } 
 

@@ -69,7 +69,7 @@
   <actiontriggers snapshot="false" copypaste="false">
 
     <action>
-      <name>editEntry</name>
+      <name>edit</name>
       <type>entry</type>
       <image>images/lists/edit.png</image>
       <label>Edit item</label>
