@@ -216,19 +216,19 @@ class ItemSelector {
 
     <ul class='treeList'>\n";
         $first= true;
-        $last_indent= 2;
+        $last_indent= 1;
 
         foreach ($this->pathMapping as $base => $dummy) {
 
             // Skip root for tree
             if ($base == $this->releaseBase) {
-                continue;
+#                continue;
             }
 
             // Build path style display
             $elements= explode('/', substr($base, strlen($this->releaseBase), strlen($base)));
             $indent= count($elements) ;
-        
+       
             if (!$first && ($indent == $last_indent)) {
                 $this->tree.= "</li>\n";
             }
