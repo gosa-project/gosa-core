@@ -133,6 +133,7 @@ class newConfigManagement extends plugin
      */
     function execute()
     {
+
         // Get the selected release and store it in a session variable
         //  to allow the configFilter to access it and display the
         //  packages and items.
@@ -141,7 +142,7 @@ class newConfigManagement extends plugin
         session::set('CONFIG_ITEM', $item);
         $this->listing->setListingTypes($this->getListingTypes());
 
-        return($this->listing->renderList());
+        return($this->listing->execute());
     }
 
 
@@ -235,9 +236,15 @@ class newConfigManagement extends plugin
 
         $types['Release']['objectClass'] = 'Release';
         $types['Release']['label'] = _('Release');
-        $types['Release']['image'] = 'images/lists/edit.png';
+        $types['Release']['image'] = 'images/lists/delete.png';
         $types['Release']['category'] = 'Device';
         $types['Release']['class'] = 'Device';
+
+        $types['Component']['objectClass'] = 'Component';
+        $types['Component']['label'] = _('Component');
+        $types['Component']['image'] = 'images/lists/edit.png';
+        $types['Component']['category'] = 'Device';
+        $types['Component']['class'] = 'Device';
         return($types);
     }
 

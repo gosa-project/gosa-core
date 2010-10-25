@@ -59,11 +59,11 @@ class ConfigManagementListing extends management
         $this->itemSelector->update(TRUE);
     }
 
+
     function renderList()
     {
         session::set('DEVICE_ITEMS', array());
 
-        $filter = $this->getFilter();
         $headpage = $this->getHeadpage();
         $headpage->update();
         $smarty = get_smarty();
@@ -102,8 +102,6 @@ class ConfigManagementListing extends management
             $filter->setObjectStorage($this->storagePoints);
         }
         $this->setFilter($filter);
-
-        
 
         // Load service xml file and fill in placeholders
         $contents = file_get_contents(get_template_path("DeviceConfig-list.xml", true));
