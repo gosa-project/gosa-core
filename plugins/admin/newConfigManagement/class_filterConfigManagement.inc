@@ -4,9 +4,6 @@ class filterConfigManagement {
 
     static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "")
     {
-
-        echo $base;
-
         // Walk through the data array till we reach the correct level, then 
         //  create the list of entries.
         $data = session::get('CONFIG_ITEM');

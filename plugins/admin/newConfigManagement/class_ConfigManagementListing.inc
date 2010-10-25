@@ -8,6 +8,7 @@ class ConfigManagementListing extends management
     private $containerSelector = NULL;
     private $itemSelector = NULL;
 
+    private $objectTypeStr = "";
 
     function __construct($config, $ui)
     {
@@ -74,6 +75,22 @@ class ConfigManagementListing extends management
 
     }
 
+
+    function setListingTypes($types)
+    {
+        $str = "";
+        foreach($types as $typeData){
+            $str.= "\n<objectType>";
+            foreach($typeData as $key => $value){
+                $str .= "\n\t<{$key}>{$value}</{$key}>";
+            }
+            $str.= "\n</objectType>\n";
+
+        }
+        $this->objectTypeStr = $str;
+        $this->rebuildListing();
+    }
+
    
     function rebuildListing()
     {
@@ -86,9 +103,13 @@ class ConfigManagementListing extends management
         }
         $this->setFilter($filter);
 
+        
+
         // Load service xml file and fill in placeholders
         $contents = file_get_contents(get_template_path("DeviceConfig-list.xml", true));
+        $contents = preg_replace("/%TYPES%/", $this->objectTypeStr, $contents);
         $contents = preg_replace("/%ITEMS%/", "", $contents);
+
         $headpage = new listing($contents,TRUE);
         $headpage->setBase($this->base);
         $headpage->setFilter($filter);

@@ -139,6 +139,7 @@ class newConfigManagement extends plugin
         $path = $this->selectedContainer.$this->selectedItem;
         $item = $this->dataModel->getItemByPath($path);
         session::set('CONFIG_ITEM', $item);
+        $this->listing->setListingTypes($this->getListingTypes());
 
         return($this->listing->renderList());
     }
@@ -220,6 +221,24 @@ class newConfigManagement extends plugin
             $this->initFailed = TRUE;
             return;
         }
+    }
+
+
+    function getListingTypes()
+    {
+        $types= array();
+        $types['Distribution']['objectClass'] = 'Distribution';
+        $types['Distribution']['label'] = _('Distribution');
+        $types['Distribution']['image'] = 'images/lists/edit.png';
+        $types['Distribution']['category'] = 'Device';
+        $types['Distribution']['class'] = 'Device';
+
+        $types['Release']['objectClass'] = 'Release';
+        $types['Release']['label'] = _('Release');
+        $types['Release']['image'] = 'images/lists/edit.png';
+        $types['Release']['category'] = 'Device';
+        $types['Release']['class'] = 'Device';
+        return($types);
     }
 
 
