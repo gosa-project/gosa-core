@@ -200,7 +200,7 @@ class jsonRPC {
     public function inspectJsonResult($result)
     {
         // Check for remove objects we've to create
-        if(isset($result['__jsonclass__']) && class_available('remoteObject')){
+        if(is_array($result) &&  isset($result['__jsonclass__']) && class_available('remoteObject')){
 
             // Get all relevant class informations
             $classDef = $result['__jsonclass__'][1];
