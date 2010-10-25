@@ -77,8 +77,8 @@ class management
   protected $snapHandler = null;
 
   // The listing handlers
-  private $headpage = null;
-  private $filter = null;
+  protected $headpage = null;
+  protected $filter = null;
 
   // A list of configured actions/events
   protected $actions = array();
