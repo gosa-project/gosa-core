@@ -110,16 +110,16 @@ class newConfigManagement extends plugin
                                 $rpc->get_error()),ERROR_DIALOG);
                 }else{
                     $this->dataModel->setItemStatus($path, 'käse');
+                    $rpc = $this->config->getRpcHandle();
+                    $res = $rpc->getPackages($data['name']);
+
+                    return;
                     foreach($res as $itemPath => $type){
                 
                         // Make names dataModel conform
-                        $itemPath = $path.preg_replace("/^\//","/root", $itemPath);
+                        $itemPath = $path.'/'.preg_replace("/^\//","/root", $itemPath);
                         $name = preg_replace("/^.*\//","",$itemPath);   
-
                         $itemPath = preg_replace("/\/[^\/]*$/","", $itemPath);
-
-                        print_a(array($type, $itemPath, $name));
- 
                         $this->dataModel->addItem($type, $itemPath, $name); 
                     }
                 }
@@ -136,7 +136,8 @@ class newConfigManagement extends plugin
         // Get the selected release and store it in a session variable
         //  to allow the configFilter to access it and display the
         //  packages and items.
-        $item = $this->dataModel->getItemByPath($this->selectedItem);
+        $path = $this->selectedContainer.$this->selectedItem;
+        $item = $this->dataModel->getItemByPath($path);
         session::set('CONFIG_ITEM', $item);
 
         return($this->listing->renderList());
@@ -149,14 +150,11 @@ class newConfigManagement extends plugin
      */
     function getItemList()
     {
-        $data = $this->dataModel->getItemByPath('/root');
-        return($this->__recurseItem($data));
-        $res = array();
-        $dist = $this->selectedContainer;
-        $list = $this->dataModel->getItemsByType('Release');
-        foreach($list as $base => $entry){
-            if($entry['parentPath'] != $dist) continue;
-            $res[$entry['path']] = $entry['name'];
+        $data = $this->dataModel->getItemByPath($this->selectedContainer);
+        $res = array(""=>"/");
+        if($data['type'] != 'Release'){
+        }else{
+            $res = array_merge($res,$this->__recurseItem($data, array('Component'),$this->selectedContainer));
         }
         return($res);
     }
@@ -169,25 +167,22 @@ class newConfigManagement extends plugin
     function getDistList()
     {
         $data = $this->dataModel->getItemByPath('/root');
-        return($this->__recurseItem($data));
-       
-
-        $list = $this->dataModel->getItemsByType('Distribution');
-        $res = array();
-        foreach($list as $base => $entry){
-            $res[$entry['path']] = $entry['name'];
-        }
+        $res["/root"] = "/";
+        $res = array_merge($res,$this->__recurseItem($data, array('Distribution','Release')));
         return($res);
     }
     
 
-    function __recurseItem($item)
+    function __recurseItem($item, $types, $parent = "")
     {
         $res = array();
-        $res[$item['path']] = $item['type'];
+        if(in_array($item['type'], $types)){
+            $path = preg_replace("/".preg_quote($parent,'/')."/","",$item['path']);
+            $res[$path] = $item['name'];
+        }
         if(count($item['children'])){
             foreach($item['children'] as $child){
-                $res = array_merge($res, $this->__recurseItem($child));
+                $res = array_merge($res, $this->__recurseItem($child, $types, $parent));
             }
         }
         return($res);

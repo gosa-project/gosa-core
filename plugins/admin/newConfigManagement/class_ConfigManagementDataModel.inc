@@ -90,11 +90,11 @@ class ConfigManagementDataModel
         }
     }
 
-    function getItemsByType($type)
+    function getItemsByType($types)
     {
         $res = array();
         foreach($this->data['linear'] as $path => $item){
-            if($item['type'] == $type) $res[] = $item;
+            if(in_array($item['type'],$types)) $res[] = $item;
         }
         return($res);
     }
