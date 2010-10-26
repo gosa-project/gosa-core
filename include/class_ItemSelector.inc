@@ -33,7 +33,7 @@ class ItemSelector {
     public $releaseInfo;
     public $releaseBase;
 
-    function __construct($bases, $base, $releaseBase)
+    function __construct($bases = array(), $base = "", $releaseBase = "")
     {
         // Initialize pid
         $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
@@ -123,8 +123,8 @@ class ItemSelector {
         }
 
         // Save bases to session for autocompletion
-        session::global_set('pathMapping', $this->pathMapping);
-        session::global_set('department_info', $this->releaseInfo);
+        session::global_set("pathMapping_{$this->pid}", $this->pathMapping);
+        session::global_set("department_info_{$this->pid}", $this->releaseInfo);
     }
 
 
@@ -136,8 +136,9 @@ class ItemSelector {
         $this->action= null;
         $last_base= $this->base;
         if(isset($_REQUEST["BPID_{$this->pid}"]) && $_REQUEST["BPID_{$this->pid}"] == $this->pid) {
-            if (isset($_POST['bs_rebase_'.$this->pid]) && !empty($_POST['bs_rebase_'.$this->pid])) {
+            if (isset($_POST['bs_rebase_'.$this->pid])) {
                 $new_base= base64_decode(get_post('bs_rebase_'.$this->pid));
+
                 if (isset($this->pathMapping[$new_base])) {
                     $this->base= $new_base;
                     $this->action= 'rebase';
@@ -180,25 +181,36 @@ class ItemSelector {
             $initialValue = $this->pathMapping[$this->base];
         }
 
-        $this->tree= "<input style='width:160px' type='text' size='35' 
-            name='bs_input_{$this->pid}' id='bs_input_{$this->pid}'
+        $this->tree= "
+        
+            <input style='width:160px' type='text' size='35' 
+            name='bs_input_{$this->pid}' 
+            id='bs_input_{$this->pid}'
 
             onkeydown=\"    \$('bs_{$this->pid}').hide(); \"
             onfocus=\"      \$('bs_{$this->pid}').hide(); \"
-            onmouseover=\"  mouseIsStillOver = true; 
-            function showIt() 
-            {
-                if(mouseIsStillOver){
-                    \$('bs_".$this->pid."').show();  
-                }
-            };
-        Element.clonePosition(\$('bs_".$this->pid."'),
-                'bs_input_".$this->pid."', 
-                {setHeight: false, setWidth: false, offsetTop:(Element.getHeight('bs_input_".$this->pid."'))});
-        rtimer=showIt.delay(0.25); \" 
+            onmouseover=\"  
+                mouseIsStillOver = true; 
+                function showIt() 
+                {
+                    if(mouseIsStillOver){
+                        \$('bs_".$this->pid."').show();  
+                    }
+                };
 
-            onmouseout=\"   mouseIsStillOver=false; 
-            rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
+                Element.clonePosition(
+                    \$('bs_".$this->pid."'),
+                    'bs_input_".$this->pid."', 
+                    {
+                        setHeight: false, 
+                        setWidth: false, 
+                        offsetTop:(Element.getHeight('bs_input_".$this->pid."'))
+                    });
+                rtimer=showIt.delay(0.25); \" 
+
+            onmouseout=\"   
+                mouseIsStillOver=false; 
+                rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
 
             value=\"".preg_replace('/"/','&quot;',$initialValue)."\">";
 
@@ -206,29 +218,41 @@ class ItemSelector {
         $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
             "<script type='text/javascript'>".
             "var mouseIsStillOver = false;".
-            "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 'autocomplete.php?type=base', { minChars: 3, frequency: 0.5 });";
+            "new Ajax.Autocompleter(
+                'bs_input_".$this->pid."', 
+                'autocomplete_".$this->pid."', 
+                'autocomplete.php?type=base&pid={$this->pid}', 
+                { minChars: 3, frequency: 0.5 });";
+
         if ($this->submitButton) {
-            $this->tree.= "$('bs_input_".$this->pid."').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
+            $this->tree.= "$('bs_input_".$this->pid."').observe('keypress', 
+                    function(event) 
+                    { 
+                        if(event.keyCode == Event.KEY_RETURN) { 
+                            $('submit_base_".$this->pid."').click();          
+                        } 
+                    });";
         }
         $this->tree.= "</script>";
+        $this->tree.= "<div class='treeList' 
+                            style=' display:none;
+                                    max-height:".$this->height."px' 
+                            id='bs_".$this->pid."' 
+                            onmouseover=\"
+                                    window.clearTimeout(rtimer);\" 
+                            onmouseout=\"
+                                    rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\">
+                        <ul class='treeList'>\n";
 
-        $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\">
-
-    <ul class='treeList'>\n";
         $first= true;
         $last_indent= 1;
 
         foreach ($this->pathMapping as $base => $dummy) {
 
-            // Skip root for tree
-            if ($base == $this->releaseBase) {
-#                continue;
-            }
-
             // Build path style display
             $elements= explode('/', substr($base, strlen($this->releaseBase), strlen($base)));
             $indent= count($elements) ;
-       
+      
             if (!$first && ($indent == $last_indent)) {
                 $this->tree.= "</li>\n";
             }

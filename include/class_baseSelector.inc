@@ -96,8 +96,8 @@ class baseSelector {
         }
 
         // Save bases to session for autocompletion
-        session::global_set('pathMapping', $this->pathMapping);
-        session::global_set('department_info', $config->department_info);
+        session::global_set("pathMapping_{$this->pid}", $this->pathMapping);
+        session::global_set("department_info_{$this->pid}", $config->department_info);
     }
 
 
@@ -176,7 +176,9 @@ class baseSelector {
         // Autocompleter
         $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
             "<script type='text/javascript'>".
-            "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 'autocomplete.php?type=base', { minChars: 3, frequency: 0.5 });";
+            "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 
+             'autocomplete.php?type=base&pid={$this->pid}', 
+            { minChars: 3, frequency: 0.5 });";
         if ($this->submitButton) {
             $this->tree.= "$('bs_input_".$this->pid."').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
         }
