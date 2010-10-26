@@ -1,5 +1,7 @@
 <?php
 
+/*! \brief  This class allows to manage backend config items and packages.
+ */
 class newConfigManagement extends plugin
 {
     var $initTime;
@@ -72,6 +74,11 @@ class newConfigManagement extends plugin
     }
 
 
+    /*! \brief  Load extended sub-objecte like 'config items' or 'packages'
+     *           for the given release path.
+     *  @param  String  The release path to load sub-objects for.
+     *  @return NULL 
+     */
     function updateItemList($path)
     {
         // Fist get Item and check if it is an release 
@@ -88,40 +95,46 @@ class newConfigManagement extends plugin
                             sprintf(_("Failed to load distributions, error was '%s'!"), 
                                 $rpc->get_error()),ERROR_DIALOG);
                 }else{
-                    $this->dataModel->setItemStatus($path, 'käse');
                     $rpc = $this->config->getRpcHandle();
                     $res = $rpc->getPackages($data['name']);
 
                     return;
                     foreach($res as $itemPath => $type){
-                
+
                         // Make names dataModel conform
                         $itemPath = $path.'/'.preg_replace("/^\//","/root", $itemPath);
                         $name = preg_replace("/^.*\//","",$itemPath);   
                         $itemPath = preg_replace("/\/[^\/]*$/","", $itemPath);
                         $this->dataModel->addItem($type, $itemPath, $name); 
                     }
+                    $this->dataModel->setItemStatus($path, 'fetched');
                 }
             }
         }
     }
 
 
-
+    /*! \brief  Sets the currently selected container and item path. 
+     *  @param  String  The path of the container to set.
+     *  @param  String  The path of the item to set.
+     *  @return 
+     */
     function setCurrentContainer($cont, $item)
     {
         $this->selectedContainer = $cont;
         $this->selectedItem = $item;
 
-        // Get a list of all available distributions and releases.
-        $distList = $this->getDistList();
+        // Get a list of all available container and items.
+        $distList = $this->getContainerList();
         $releaseList = $this->getItemList();
 
         // Ensure that we've valid values selected.
         if(!isset($releaseList[$this->selectedItem])){
             if(count($releaseList)){
+                echo "Fallback";
                 $this->selectedItem = key($releaseList);
             }else{
+                echo "Fallback 2";
                 $this->selectedItem = "";
             }
         }
@@ -132,7 +145,7 @@ class newConfigManagement extends plugin
         // Transfer checked values back to the listing class.
         $this->listing->setContainer($this->selectedContainer);
         $this->listing->setItem($this->selectedItem);
-        $this->listing->setContainers($this->getDistList());
+        $this->listing->setContainers($this->getContainerList());
         $this->listing->setItems($this->getItemList());
     }
 
@@ -151,7 +164,12 @@ class newConfigManagement extends plugin
         return($res);
     }
 
-    
+
+    /*! \brief      Returns a list of items which will then be displayed 
+     *               in the management-list. 
+     *              (The management class calls this method from its execute())
+     *  @return     Array   A list of items/objects for the listing. 
+     */
     function getItemsToBeDisplayed()
     {
 
@@ -168,28 +186,43 @@ class newConfigManagement extends plugin
     function getItemList()
     {
         $data = $this->dataModel->getItemByPath($this->selectedContainer);
-        $res = array(""=>"/");
+        $res = array();
+        $res[""]=array("name" => "/", "desc" => "ROOT");
+        $res["/root"]= array("name" => "root", "desc" => "TIMMAY");
+#       $res["/root/test"]="test";
+#       $res["/root/test/timmay"]="tim";
+#       $res["/ad"]= "ad";
+        return($res);
+
+
         if($data['type'] != 'Release'){
         }else{
             $res = array_merge($res,$this->__recurseItem($data, array('Component'),$this->selectedContainer));
         }
         return($res);
     }
-    
-    
+
+
     /*! \brief  Returns a simply list of all distributions.
      *          This list will then be used to generate the entries of the 
      *           ItemSelectors in the listing class.
      */
-    function getDistList()
+    function getContainerList()
     {
         $data = $this->dataModel->getItemByPath('/root');
         $res["/root"] = "/";
         $res = array_merge($res,$this->__recurseItem($data, array('Distribution','Release')));
         return($res);
     }
-    
 
+
+    /*! \brief  Recursivly walks through an item and collects all path and name info.
+     *          The reult can then be used to fill the ItemSelector.
+     *  @param  Array   The Item to recurse. 
+     *  @param  Array   The type of of objects to collect. 
+     *  @param  String  The parent path prefix which should be removed.
+     *  @return Array   An array containing Array[path] = name
+     */
     function __recurseItem($item, $types, $parent = "")
     {
         $res = array();
@@ -206,12 +239,6 @@ class newConfigManagement extends plugin
     }
 
 
-
-    function remove_lock()
-    {
-    }
-
-    
     /*! \brief  Intializes this plugin
      *          All available installation methods will be loaded
      */
@@ -240,6 +267,10 @@ class newConfigManagement extends plugin
     }
 
 
+    /*! \brief   Returns a info list about all items we can manage,
+     *            this used to fill the listings <objectType> settings.
+     *  @return Array   An array with item info.
+     */
     function getListingTypes()
     {
         $types= array();
@@ -264,6 +295,11 @@ class newConfigManagement extends plugin
     }
 
 
+    /*! \brief  Acts on edit requests and opens an edit dialog for the received item-id.
+     *          (This action is received from the ConfigManagementListing class.)
+     *  @param  Array   The items ids. (May contain multiple ids)
+     *  @return  
+     */
     function editEntry($ids)
     {
         foreach($ids as $id){
@@ -272,6 +308,11 @@ class newConfigManagement extends plugin
     }
 
 
+    /*! \brief  Acts on remove requests.
+     *          (This action is received from the ConfigManagementListing class.)
+     *  @param  Array   The items ids. (May contain multiple ids)
+     *  @return  
+     */
     function removeEntry($ids)
     {
         foreach($ids as $id){
@@ -280,13 +321,21 @@ class newConfigManagement extends plugin
     }
 
 
+    /*! \brief  Acts on open requests.
+     *          (This action is received from the ConfigManagementListing class.)
+     *  @param  Array   The items ids. (May contain multiple ids)
+     *  @return  
+     */
     function openEntry($ids)
     {
         $id = $ids[0];
         $item = $this->dataModel->getItemById($id);
         if($item){
             if(in_array($item['type'], array('Distribution', 'Release'))){
-                $this->setCurrentContainer($item['path'], $this->selectedContainer);
+                $this->setCurrentContainer($item['path'], $this->selectedItem);
+            }elseif(in_array($item['type'], array('Component'))){
+                $next = preg_replace("/".preg_quote($this->selectedContainer,'/')."/","", $item['path']);
+                $this->setCurrentContainer($this->selectedContainer, $next);
             }else{
                 $this->editEntry(array($id));
             }
@@ -294,6 +343,9 @@ class newConfigManagement extends plugin
     }
 
 
+    /*! \brief      The plugins ACL and plugin-property definition. 
+     *  @return 
+     */
     public static function plInfo()
     {
         return (array(
@@ -309,5 +361,16 @@ class newConfigManagement extends plugin
                     "plProvidedAcls"=> array()
                     ));
     }
+
+
+    /*! \brief   
+     *  @param  
+     *  @return 
+     */
+    function remove_lock()
+    {
+    }
+
+
 }
 ?>
