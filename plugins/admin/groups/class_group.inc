@@ -207,7 +207,7 @@ class group extends plugin
         $this->memberList->setEditable(false);
         $this->memberList->setWidth("100%");
         $this->memberList->setHeight("300px");
-        $this->memberList->setHeader(array('~',_("Given name"),_("Surename"),_("UID")));
+        $this->memberList->setHeader(array('~',_("Given name"),_("Surname"),_("UID")));
         $this->memberList->setColspecs(array('20px','*','*','*','20px'));
         $this->memberList->setDefaultSortColumn(1);
 
@@ -1187,7 +1187,7 @@ class group extends plugin
         $this->commonList->setEditable(false);
         $this->commonList->setWidth("100%");
         $this->commonList->setHeight("120px");
-        $this->commonList->setHeader(array('~',_("Given name"),_("Surename"),_("UID")));
+        $this->commonList->setHeader(array('~',_("Given name"),_("Surname"),_("UID")));
         $this->commonList->setColspecs(array('20px','*','*','*','20px'));
         $this->commonList->setDefaultSortColumn(1);
 
@@ -1197,7 +1197,7 @@ class group extends plugin
         $this->partialList->setEditable(false);
         $this->partialList->setWidth("100%");
         $this->partialList->setHeight("120px");
-        $this->partialList->setHeader(array('~',_("Given name"),_("Surename"),_("UID")));
+        $this->partialList->setHeader(array('~',_("Given name"),_("Surname"),_("UID")));
         $this->partialList->setColspecs(array('20px','*','*','*','20px'));
         $this->partialList->setDefaultSortColumn(1);
     }
