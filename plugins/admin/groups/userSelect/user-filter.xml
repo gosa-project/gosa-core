@@ -2,7 +2,7 @@
 
 <filterdef>
   <definition>
-    <category>groups</category>
+    <category>users</category>
     <initial>true</initial>
     <default>default</default>
     <scope>auto</scope>
