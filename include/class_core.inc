@@ -832,7 +832,7 @@ DEBUG_SI      = 256"),
 
       idGenerator=\"{%sn}-{%givenName[2-4]}\"
 
-    will generate an ID using the full surename, adding a dash, and adding at
+    will generate an ID using the full surname, adding a dash, and adding at
     least the first two characters of givenName. If this ID is used, it'll
     use up to four characters. If no automatic generation is possible, a
     input box is shown.
