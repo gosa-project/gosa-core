@@ -187,11 +187,8 @@ class newConfigManagement extends plugin
     {
         $data = $this->dataModel->getItemByPath($this->selectedContainer);
         $res = array();
-        $res[""]=array("name" => "/", "desc" => "ROOT");
-        $res["/root"]= array("name" => "root", "desc" => "TIMMAY");
-#       $res["/root/test"]="test";
-#       $res["/root/test/timmay"]="tim";
-#       $res["/ad"]= "ad";
+        $res[""] = array("name" => "/", "desc" => "");
+        $res = array_merge($res,$this->__recurseItem($data, array('Component')));
         return($res);
 
 
@@ -210,7 +207,8 @@ class newConfigManagement extends plugin
     function getContainerList()
     {
         $data = $this->dataModel->getItemByPath('/root');
-        $res["/root"] = "/";
+        $res = array();
+        $res["/root"] = array("name" => "/", "desc" => "");
         $res = array_merge($res,$this->__recurseItem($data, array('Distribution','Release')));
         return($res);
     }
