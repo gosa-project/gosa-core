@@ -238,7 +238,7 @@ class sortableListing {
         } else {
             $edit_image= $this->editable?image('images/lists/edit.png', "%ID", _("Edit this entry")):"";
         }
-        if (strpos($this->acl, 'd') === false) {
+        if (strpos($this->acl, 'w') === false) {
             $delete_image= $this->deleteable?image('images/lists/trash-grey.png'):"";
         } else {
             $delete_image= $this->deleteable?image('images/lists/trash.png', "%ID", _("Delete this entry")):"";
