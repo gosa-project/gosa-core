@@ -225,7 +225,7 @@ class sortableListing {
       } else {
           $edit_image= $this->editable?"<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='%ID' id='%ID'  title='"._("Edit this entry")."'>":"";
       }
-      if (strpos($this->acl, 'd') === false) {
+      if (strpos($this->acl, 'w') === false) {
           $delete_image= $this->deleteable?"<img class='center' src='images/lists/trash-grey.png' alt='"._("Delete")."'>":"";
       } else {
           $delete_image= $this->deleteable?"<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='%ID'    title='"._("Delete this entry")."'>":"";
