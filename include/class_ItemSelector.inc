@@ -114,12 +114,12 @@ class ItemSelector {
         $first= true;
         $last_indent= 2;
 
-        foreach ($bases as $base => $dummy) {
+        foreach ($bases as $path => $data) {
 
             // Build path style display
-            $this->pathMapping[$base]= $base == $this->releaseBase? '/' : $dummy;
-            $this->releaseInfo[$base]['name'] = preg_replace("/^.*\//","",$base);
-            $this->releaseInfo[$base]['description'] = $dummy;
+            $this->pathMapping[$path]= $path == $this->releaseBase? '/' : $data['name'];
+            $this->releaseInfo[$path]['name'] = $data['name'];
+            $this->releaseInfo[$path]['description'] = $data['desc'];
         }
 
         // Save bases to session for autocompletion
