@@ -210,6 +210,8 @@ class newConfigManagement extends plugin
         $res = array();
         $res["/root"] = array("name" => "/", "desc" => "");
         $res = array_merge($res,$this->__recurseItem($data, array('Distribution','Release')));
+
+        print_a($res);
         return($res);
     }
 
@@ -226,7 +228,7 @@ class newConfigManagement extends plugin
         $res = array();
         if(in_array($item['type'], $types)){
             $path = preg_replace("/".preg_quote($parent,'/')."/","",$item['path']);
-            $res[$path] = $item['name'];
+            $res[$path] = array('name' => $item['name'],'desc'=>$item['type']);
         }
         if(count($item['children'])){
             foreach($item['children'] as $child){
