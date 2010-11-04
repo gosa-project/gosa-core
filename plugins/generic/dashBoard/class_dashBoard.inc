@@ -21,10 +21,20 @@ class dashBoard extends plugin
         $this->dbChannelStatus = new dbChannelStatus($config);
         $this->dbNotifications = new dbNotifications($config);
         $this->dbInformation = new dbInformation($config);
+
+
+        // Detect registration status 
+        $this->GOsaRegistration = new GOsaRegistration($config);
+        $this->registered = GOsaRegistration::isRegistered($config);
     }
 
     function execute()
     {
+
+        if(!$this->registered){
+            return($this->GOsaRegistration->execute());
+        }
+
         $smarty = get_smarty();
         $smarty->assign('dbPluginStatus', $this->dbPluginStatus->execute());
         $smarty->assign('dbChannelStatus', $this->dbChannelStatus->execute());
