@@ -178,7 +178,7 @@ class Step_Checks extends setup_step
 
     $N = msgPool::checkingFor(_("compression module"));
     $D = _("GOsa requires this extension to handle snapshots.");
-    $S = msgPool::installPhpModule("php5-zip / php5-gzip");
+    $S = msgPool::installPhpModule("compile with --with-zlib");
     $R = is_callable("gzcompress");
     $M = FALSE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
