@@ -1,7 +1,12 @@
 
 <h3>{t}Usage statistics{/t}</h3>
+{if !$registered}
 
-{if !$rpcConfigured}
+    {t}This feature is disabled. To enable it you have to register GOsa, you can initiate a registration using the dash-board plugin.{/t}
+
+    <button type='button' onClick="openPlugin({$dashBoardId});">{t}Dash board{/t}</button>
+
+{else if !$rpcConfigured}
 
     {t}This feature is disabled. To enable it you can use the GOsa properties plugin, just activate the remote procedure call (RPC) configuration flags.{/t}
 

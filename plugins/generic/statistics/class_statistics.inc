@@ -30,30 +30,37 @@ class statistics extends plugin
     {
         plugin::plugin($config, NULL);
 
-        $this->graphs[] = new categoryActionsOverTime($config); 
-        $this->graphs[] = new memoryUsageChart($config); 
-        $this->graphs[] = new cpuLoadChart($config); 
-        $this->graphs[] = new renderTimeChart($config); 
-        $this->graphs[] = new durationTimeChart($config); 
-        $this->graphs[] = new objectCountChart($config); 
-        $this->graphs[] = new actionSelectChart($config); 
-        $this->graphs[] = new passwordChangeChart($config); 
-        $this->staticChart1 = new pieChart1($config); 
-        $this->staticChart2 = new pieChart2($config); 
+        // Detect registration status first
+        $this->registered = 
+            GOsaRegistration::isRegistered($config) && 
+            GOsaRegistration::getRegistrationType($config) == "registered";
 
-        // Init start and stop times for graph 1
-        $this->graph1DatePicker1 = date('d.m.Y', time() - 28 * 24 * 60 *60);
-        $this->graph1DatePicker2 = date('d.m.Y', time());
+        if($registered){
+            $this->graphs[] = new categoryActionsOverTime($config); 
+            $this->graphs[] = new memoryUsageChart($config); 
+            $this->graphs[] = new cpuLoadChart($config); 
+            $this->graphs[] = new renderTimeChart($config); 
+            $this->graphs[] = new durationTimeChart($config); 
+            $this->graphs[] = new objectCountChart($config); 
+            $this->graphs[] = new actionSelectChart($config); 
+            $this->graphs[] = new passwordChangeChart($config); 
+            $this->staticChart1 = new pieChart1($config); 
+            $this->staticChart2 = new pieChart2($config); 
 
-        // First try to retrieve values via RPC
-        $this->rpcConfigured = FALSE;
-        if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
-            $this->rpcConfigured = TRUE;
-            $this->rpcHandle = $this->config->getRpcHandle(
-                    "http://10.3.64.59:4000",
-                    "65717fe6-9e3e-11df-b010-5452005f1250",
-                    "WyukwauWoid2",
-                    TRUE);
+            // Init start and stop times for graph 1
+            $this->graph1DatePicker1 = date('d.m.Y', time() - 28 * 24 * 60 *60);
+            $this->graph1DatePicker2 = date('d.m.Y', time());
+
+            // First try to retrieve values via RPC
+            $this->rpcConfigured = FALSE;
+            if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
+                $this->rpcConfigured = TRUE;
+                $this->rpcHandle = $this->config->getRpcHandle(
+                        "http://10.3.64.59:4000",
+                        "65717fe6-9e3e-11df-b010-5452005f1250",
+                        "WyukwauWoid2",
+                        TRUE);
+            }
         }
     }
 
@@ -130,6 +137,18 @@ class statistics extends plugin
     function execute()
     {
         $smarty = get_smarty();
+       
+        // Check registration status, we need at least 'registered'. 
+        $smarty->assign("registered", $this->registered);
+        if(!$this->registered){
+    
+            $plist = session::get('plist');
+ 
+            $id = array_search('dashBoard', $plist->pluginList);
+            $smarty->assign('dashBoardId', $id);
+            return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
+        }
+
         $smarty->assign('graph1DatePicker1', $this->graph1DatePicker1);
         $smarty->assign('graph1DatePicker2', $this->graph1DatePicker2);
 
@@ -401,6 +420,9 @@ class statistics extends plugin
 
     function save_object()
     {
+        // Nothing to do for not registered accounts.
+        if(!$this->registered) return;
+
         plugin::save_object();
         if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
         if(isset($_POST['graph1DatePicker2'])) $this->graph1DatePicker2 = get_post('graph1DatePicker2');
