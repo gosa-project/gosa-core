@@ -26,6 +26,8 @@ class statistics extends plugin
     var $graphs = array();
     var $selectedGraphType = 0;
 
+    var $registered = FALSE;
+
     function __construct($config)
     {
         plugin::plugin($config, NULL);
