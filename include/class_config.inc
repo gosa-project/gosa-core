@@ -91,6 +91,7 @@ class config  {
 
         // Load configuration registry
         $this->configRegistry = new configRegistry($this);
+        $this->registration = new GOsaRegistration($this);
     }
 
 

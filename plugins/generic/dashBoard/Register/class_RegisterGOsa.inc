@@ -2,6 +2,7 @@
 
 class GOsaRegistration extends plugin
 {
+
     static function registerGOsa($config, $uuid, $type, $userData = array())
     {
         echo "<br>Register GOsa.";
@@ -17,8 +18,12 @@ class GOsaRegistration extends plugin
 
     static function isRegistered($config, $uuid = NULL)
     {
+        // Return cached values first.
+        if(GOsaRegistration::$isRegistered != NULL) return(GOsaRegistration::$isRegistered);
+
         // Get the GOsa-instance-uuid and ask the backend if a registration of this uuid is known.
         $instanceUUID = $config->getInstanceUUID();
+
         echo $instanceUUID;
     
         $status = $config->configRegistry->getPropertyValue('GOsaRegistration','registerStatus');

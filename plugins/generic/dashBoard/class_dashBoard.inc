@@ -24,7 +24,7 @@ class dashBoard extends plugin
 
 
         // Detect registration status 
-        $this->GOsaRegistration = new GOsaRegistration($config);
+        $this->RegistrationDialog = new RegistrationDialog($config);
         $this->registered = GOsaRegistration::isRegistered($config);
     }
 
@@ -32,7 +32,7 @@ class dashBoard extends plugin
     {
 
         if(!$this->registered){
-            return($this->GOsaRegistration->execute());
+            return($this->RegistrationDialog->execute());
         }
 
         $smarty = get_smarty();
@@ -57,7 +57,7 @@ class dashBoard extends plugin
     {
         plugin::save_object();
         
-        if(!$this->registered) $this->GOsaRegistration->save_object();
+        if(!$this->registered) $this->RegistrationDialog->save_object();
 
         $this->dbPluginStatus->save_object();
         $this->dbChannelStatus->save_object();
