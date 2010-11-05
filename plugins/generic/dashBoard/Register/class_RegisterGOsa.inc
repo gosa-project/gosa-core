@@ -10,6 +10,7 @@ class GOsaRegistration extends plugin
 {
     protected $defaultRegistrationType = "registered";
     protected $isRegistered = FALSE; 
+    protected $step = 0;
 
     function __construct(&$config)
     {
@@ -23,13 +24,17 @@ class GOsaRegistration extends plugin
     {
         $smarty = get_smarty();
         $smarty->assign("default", $this->defaultRegistrationType);
+        $smarty->assign("step", $this->step);
         return($smarty->fetch(get_template_path("Register/register.tpl", TRUE))); 
     } 
 
 
     function save_object()
     {
-       if(isset($_POST['registrationType']))  $this->defaultRegistrationType = get_post('registrationType');
+        if(isset($_POST['registrationType']))  $this->defaultRegistrationType = get_post('registrationType');
+        if(isset($_POST['startRegistration'])) $this->step = 1;
+
+        if(isset($_POST['stepBack'])) $this->step -= 1;
     }
     
 
