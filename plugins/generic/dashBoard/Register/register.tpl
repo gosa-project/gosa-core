@@ -35,7 +35,7 @@
         <ul>
             <li>{t}Access to 'Premium-Channels'.{/t}</li>
             <li>{t}Watch the status of current plugin updates/patches and the availability of new plugins.{/t}</li>
-            <li>{t}Receive newsletter, if wanted.{/t}</li>
+            <li>{t}Recieve newsletter, if wanted.{/t}</li>
             <li>{t}View several usefull statistics about your GOsa installation{/t}.</li>
         </ul>
         </p>
@@ -131,6 +131,6 @@
 {/if}
 
 {if $step == 200}
-   <h3>VERIFY TEXTS!!!</h3> You have receifed a mail, bafasel, please click link and so on.
+   <h3>VERIFY TEXTS!!!</h3> You have reciefed a mail, bafasel, please click link and so on.
 
 {/if}

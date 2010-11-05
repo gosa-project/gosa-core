@@ -8,7 +8,7 @@
 
 class GOsaRegistration extends plugin
 {
-    protected $defaultRegistrationType = "registered";
+    protected $selectedRegistrationType = "registered";
     protected $isRegistered = FALSE; 
     protected $step = 0;
 
@@ -21,11 +21,26 @@ class GOsaRegistration extends plugin
         $this->isRegistered = GOsaRegistration::isRegistered($this->config);
 
         foreach($this->attrs as $attr) $this->values[$attr] = "";
+
+        // Try to establish a rpc connection.
+        $this->rpcConfigured = FALSE;
+        if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
+            $this->rpcConfigured = TRUE;
+            $this->rpcHandle = $this->config->getRpcHandle(
+                    "http://10.3.64.59:4000",
+                    "65717fe6-9e3e-11df-b010-5452005f1250",
+                    "WyukwauWoid2",
+                    TRUE);
+        }
     }
 
 
     function registerNow()
     {
+        if($this->selectedRegistrationType == "registered"){
+            print_a($this->rpcHandle->registerUser('cajus', $this->values));
+        }
+
         $this->step = 200; // Awaiting verification
     }
 
@@ -44,7 +59,7 @@ class GOsaRegistration extends plugin
 
 
         $smarty = get_smarty();
-        $smarty->assign("default", $this->defaultRegistrationType);
+        $smarty->assign("default", $this->selectedRegistrationType);
         $smarty->assign("step", $this->step);
 
         foreach($this->attrs as $attr) $smarty->assign($attr, set_post($this->values[$attr]));
@@ -56,7 +71,7 @@ class GOsaRegistration extends plugin
 
     function save_object()
     {
-        if(isset($_POST['registrationType']))  $this->defaultRegistrationType = get_post('registrationType');
+        if(isset($_POST['registrationType']))  $this->selectedRegistrationType = get_post('registrationType');
         if(isset($_POST['startRegistration'])) $this->step = 1;
         if(isset($_POST['stepBack'])) $this->step -= 1;
 
