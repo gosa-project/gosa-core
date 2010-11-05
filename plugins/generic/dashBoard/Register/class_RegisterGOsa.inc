@@ -24,16 +24,30 @@ class GOsaRegistration extends plugin
     }
 
 
+    function registerNow()
+    {
+        $this->step = 200; // Awaiting verification
+    }
+
    
     function execute()
     {
+        // Registration request.
+        if(isset($_POST['registerNow'])){
+            $msgs = $this->check();
+            if(count($msgs)){
+                msg_dialog::displayChecks($msgs); 
+            }else{
+                $this->registerNow();
+            }
+        }
+
+
         $smarty = get_smarty();
         $smarty->assign("default", $this->defaultRegistrationType);
         $smarty->assign("step", $this->step);
 
-
-
-        foreach($this->attrs as $attr) $smarty->assign($attr, $this->values[$attr]);
+        foreach($this->attrs as $attr) $smarty->assign($attr, set_post($this->values[$attr]));
 
 
         return($smarty->fetch(get_template_path("Register/register.tpl", TRUE))); 
@@ -44,8 +58,11 @@ class GOsaRegistration extends plugin
     {
         if(isset($_POST['registrationType']))  $this->defaultRegistrationType = get_post('registrationType');
         if(isset($_POST['startRegistration'])) $this->step = 1;
-
         if(isset($_POST['stepBack'])) $this->step -= 1;
+
+        foreach($this->attrs as $attr){
+            if(isset($_POST[$attr])) $this->values[$attr] = get_post($attr);
+        }
     }
     
 

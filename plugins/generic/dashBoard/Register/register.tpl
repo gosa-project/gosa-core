@@ -129,3 +129,8 @@
         <button name='stepBack'>{msgPool type=backButton}</button>
     </div>
 {/if}
+
+{if $step == 200}
+   <h3>VERIFY TEXTS!!!</h3> You have receifed a mail, bafasel, please click link and so on.
+
+{/if}
