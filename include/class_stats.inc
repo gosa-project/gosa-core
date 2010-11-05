@@ -228,7 +228,7 @@ class stats
         }
 
         // Prepare values to be useable within a database
-        $uuid = $config->getGOsaUUID();
+        $uuid = $config->getInstanceUUID();
         $type           = sqlite_escape_string($type);
         $plugin         = sqlite_escape_string($plugin);
         $action         = sqlite_escape_string($action);
@@ -395,7 +395,7 @@ class stats
 
         // Do we have to return the result as SQL INSERT statement?
         if($statisticConformResult){ 
-            $uuid           = $config->getGOsaUUID();
+            $uuid           = $config->getInstanceUUID();
             $type           = 'objectCount';
             $plugin         = '';
             $action         = '';
