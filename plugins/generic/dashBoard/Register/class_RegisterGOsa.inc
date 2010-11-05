@@ -27,6 +27,13 @@ class GOsaRegistration extends plugin
     } 
 
 
+    function save_object()
+    {
+       if(isset($_POST['registrationType']))  $this->defaultRegistrationType = get_post('registrationType');
+    }
+    
+
+
     static function registerGOsa($config, $uuid, $type, $userData = array())
     {
         echo "<br>Register GOsa.";

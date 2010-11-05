@@ -3,14 +3,14 @@
 {t}Do you want to register GOsa and benefit from the features it brings?{/t}
 
 <p>
- <input type='radio' name='registrationType' value=''
-        {if $default == ""} checked {/if}><b>{t}I do not want to register{/t}</b>
+ <input type='radio' name='registrationType' value='' id="registrationType_"
+     {if $default == ""} checked {/if}><b><LABEL for="registrationType_">{t}I do not want to register{/t}</LABEL></b>
     <p style='padding-left:20px;'>
         <!-- Add a descritive text later -->
     </p>
 
-    <input type='radio' name='registrationType' value='annonym'
-        {if $default == "annonym"} checked {/if}><b>{t}Annonym access{/t}</b>
+    <input type='radio' name='registrationType' value='annonym' id="registrationType_annonym"
+        {if $default == "annonym"} checked {/if}><b><LABEL for="registrationType_annonym">{t}Annonym access{/t}</LABEL></b>
     <p style='padding-left:20px;'>
     <ul>
         <li>{t}Access to the 'Open-Channels' to easily install or remove plugins within the GOsa user interface{/t}</li>
@@ -27,8 +27,8 @@
     </ul>
     </p>
     
-    <input type='radio' name='registrationType' value='registered'
-        {if $default == "registered"} checked {/if}><b>{t}Register{/t}</b>
+    <input type='radio' name='registrationType' value='registered' id="registrationType_registered"
+        {if $default == "registered"} checked {/if}><b><LABEL for="registrationType_registered">{t}Register{/t}</LABEL></b>
     <p style='padding-left:20px;'>
     {t}Additionally to the 'Annonomous' account you can:{/t}
     <ul>
@@ -52,4 +52,11 @@
     </p>
  
 </p>
+
+
+<hr>
+
+<div class="plugin-actions">
+    <button name='startRegistration'>{msgPool type=okButton}</button>
+</div>
 
