@@ -8,7 +8,7 @@
 
 class GOsaRegistration extends plugin
 {
-
+    protected $defaultRegistrationType = "registered";
     protected $isRegistered = FALSE; 
 
     function __construct(&$config)
@@ -22,18 +22,22 @@ class GOsaRegistration extends plugin
     function execute()
     {
         $smarty = get_smarty();
-
+        $smarty->assign("default", $this->defaultRegistrationType);
         return($smarty->fetch(get_template_path("Register/register.tpl", TRUE))); 
     } 
 
 
     static function registerGOsa($config, $uuid, $type, $userData = array())
     {
-
         echo "<br>Register GOsa.";
         print_a(func_get_args());
-        
     }
+
+
+    static function getRegistrationType($config)
+    {
+        return($config->configRegistry->getPropertyValue('GOsaRegistration','registerStatus'));
+    }    
 
 
     static function isRegistered($config, $uuid = NULL)
