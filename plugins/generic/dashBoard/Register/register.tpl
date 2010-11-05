@@ -75,37 +75,37 @@
 
         <table style='width:100%;'>
             <tr> 
-                <td style='width:180px;'><LABEL for="mailAddress">{t}Mail-address{/t}{$must}</LABEL></td>
+                <td style='width:220px;'><LABEL for="mailAddress">{t}Mail-address{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="mailAddress" value="{$mailAddress}" id="mailAddress">
                 </td>
             </tr>
             <tr> 
-                <td style='width:180px;'><LABEL for="surname">{t}Surname{/t}{$must}</LABEL></td>
+                <td for="surname">{t}Surname{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="surname" value="{$surname}" id="surname">
                 </td>
             </tr>
             <tr> 
-                <td style='width:180px;'><LABEL for="givenName">{t}Given name{/t}{$must}</LABEL></td>
+                <td for="givenName">{t}Given name{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="givenName" value="{$givenName}" id="givenName">
                 </td>
             </tr>
             <tr> 
-                <td style='width:180px;'><LABEL for="company">{t}Company{/t}{$must}</LABEL></td>
+                <td for="company">{t}Company{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="company" value="{$company}" id="company">
                 </td>
             </tr>
             <tr> 
-                <td style='width:180px;'><LABEL for="clients">{t}Amount of managed clients{/t}{$must}</LABEL></td>
+                <td for="clients">{t}Amount of managed clients{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="clients" value="{$clients}" id="clients">
                 </td>
             </tr>
             <tr> 
-                <td style='width:180px;'><LABEL for="knownFrom">{t}Where do you know GOsa from?{/t}{$must}</LABEL></td>
+                <td for="knownFrom">{t}Where do you know GOsa from?{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="knownFrom" value="{$knownFrom}" id="knownFrom">
                 </td>
