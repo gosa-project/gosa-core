@@ -12,10 +12,15 @@ class GOsaRegistration extends plugin
     protected $isRegistered = FALSE; 
     protected $step = 0;
 
+    public $attrs = array('mailAddress','surname','givenName', 'company', 'clients', 'knownFrom');
+    protected $values = array();
+
     function __construct(&$config)
     {
         $this->config = $config;    
         $this->isRegistered = GOsaRegistration::isRegistered($this->config);
+
+        foreach($this->attrs as $attr) $this->values[$attr] = "";
     }
 
 
@@ -25,6 +30,12 @@ class GOsaRegistration extends plugin
         $smarty = get_smarty();
         $smarty->assign("default", $this->defaultRegistrationType);
         $smarty->assign("step", $this->step);
+
+
+
+        foreach($this->attrs as $attr) $smarty->assign($attr, $this->values[$attr]);
+
+
         return($smarty->fetch(get_template_path("Register/register.tpl", TRUE))); 
     } 
 
