@@ -37,7 +37,7 @@ class statistics extends plugin
             GOsaRegistration::isRegistered($config) && 
             GOsaRegistration::getRegistrationType($config) == "registered";
 
-        if($registered){
+        if($this->registered){
             $this->graphs[] = new categoryActionsOverTime($config); 
             $this->graphs[] = new memoryUsageChart($config); 
             $this->graphs[] = new cpuLoadChart($config); 
