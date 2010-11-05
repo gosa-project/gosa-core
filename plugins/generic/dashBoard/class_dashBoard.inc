@@ -56,6 +56,9 @@ class dashBoard extends plugin
     function save_object()
     {
         plugin::save_object();
+        
+        if(!$this->registered) $this->GOsaRegistration->save_object();
+
         $this->dbPluginStatus->save_object();
         $this->dbChannelStatus->save_object();
         $this->dbNotifications->save_object();

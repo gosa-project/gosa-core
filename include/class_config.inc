@@ -64,7 +64,7 @@ class config  {
     var $filename = "";
     var $last_modified = 0;
 
-    var $gosaUUID = "";
+    var $instanceUUID = "";
 
     private $jsonRPChandle = NULL; 
 
@@ -81,8 +81,6 @@ class config  {
         $this->parser = xml_parser_create();
         $this->basedir= $basedir;
 
-        $this->gosaUUID = uniqid();
-
         xml_set_object($this->parser, $this);
         xml_set_element_handler($this->parser, "tag_open", "tag_close");
 
@@ -96,9 +94,9 @@ class config  {
     }
 
 
-    function getGOsaUUID()
+    function getInstanceUUID()
     {
-        return($this->gosaUUID);
+        return($this->instanceUUID);
     }    
 
 
@@ -185,6 +183,9 @@ class config  {
             $this->config_found= TRUE;
             if(isset($attrs['CONFIGVERSION'])){
                 $this->config_version = $attrs['CONFIGVERSION'];
+            }
+            if(isset($attrs['INSTANCEUUID'])){
+                $this->instanceUUID = $attrs['INSTANCEUUID'];
             }
         }
 

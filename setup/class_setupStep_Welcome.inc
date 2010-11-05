@@ -23,14 +23,18 @@
 class Step_Welcome  extends setup_step
 {
   var $languages      = array();
-  var $attributes     = array();
+  var $attributes     = array('instanceUUID');
   var $header_image   = "images/setup/welcome.png";
 
+    var $instanceUUID = "";
+    
   function Step_Welcome()
   {
     $this->is_enabled     = TRUE;
     $this->is_active      = TRUE;
     $this->update_strings(); 
+
+    $this->instanceUUID = gen_uuid();
   }
 
   function update_strings()
