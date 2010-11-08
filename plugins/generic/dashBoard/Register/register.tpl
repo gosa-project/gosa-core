@@ -79,7 +79,7 @@
                 </td>
             </tr>
             <tr> 
-                <td style='width:220px;'><LABEL for="mailAddress">{t}Mail-address{/t}{$must}</LABEL></td>
+                <td style='width:220px;'><LABEL for="mailAddress">{t}Mail address{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="mailAddress" value="{$mailAddress}" id="mailAddress">
                 </td>
@@ -93,9 +93,8 @@
             <tr> 
                 <td style='width:220px;'><LABEL for="password">{t}Password{/t}{$must}</LABEL></td>
                 <td>
-                    {factory type='password' name='password' id='password'
+                    {factory type='password' name='password' id='password' value={$password}
                           onkeyup="testPasswordCss(\$('password').value)"}
-
                 </td>
             </tr>
             <tr>
@@ -112,7 +111,7 @@
             <tr> 
                 <td style='width:220px;'><LABEL for="password_repeated">{t}Password{/t} <i>({t}repeated{/t})</i>{$must}</LABEL></td>
                 <td>
-                    {factory type='password' name='password_repeated' id='password_repeated'}
+                    {factory type='password' name='password_repeated' id='password_repeated' value={$password_repeated}}
                 </td>
             </tr>
             <tr> 
@@ -158,25 +157,93 @@
         </table>
         <hr>
         <i>({$must} {t}Required fields{/t})</i>
-
-
     {/if}
 
     <hr>
     <div class="plugin-actions">
         <button name='stepBack'>{msgPool type=backButton}</button>
-        <button name='registerNow'>{msgPool type=okButton}</button>
+        <button name='registerPage2'>{msgPool type=okButton}</button>
     </div>
     <script type="text/javascript">
         focus_field('uid');
     </script>
 {/if}
 
+
 {if $step == 2}
+
+    <h3>{t}Company information{/t}</h3>
+    <table style='width:100%;'>
+        <tr> 
+            <td style='width:220px;'><LABEL for="company">{t}Company name{/t}</LABEL></td>
+            <td>
+                <input type='text' name="company" value="{$company}" id="company">
+            </td>
+        </tr>
+        <tr> 
+            <td style='width:220px;'><LABEL for="street">{t}Street{/t}</LABEL></td>
+            <td>
+                <input type='text' name="street" value="{$street}" id="street">
+            </td>
+        </tr>
+        <tr> 
+            <td style='width:220px;'><LABEL for="city">{t}City{/t}</LABEL></td>
+            <td>
+                <input type='text' name="city" value="{$city}" id="city">
+            </td>
+        </tr>
+        <tr> 
+            <td style='width:220px;'><LABEL for="postal_code">{t}Postal code{/t}</LABEL></td>
+            <td>
+                <input type='text' name="postal_code" value="{$postal_code}" id="postal_code">
+            </td>
+        </tr>
+    </table>
+    <hr>
+
+    <h3>{t}Contact information{/t}</h3>
+    <table style='width:100%;'>
+        <tr> 
+            <td style='width:220px;'><LABEL for="phone">{t}Contact phone number{/t}</LABEL></td>
+            <td>
+                <input type='text' name="phone" value="{$phone}" id="phone">
+            </td>
+        </tr>
+        <tr> 
+            <td style='width:220px;'><LABEL for="contact_mail">{t}Contact mail address{/t}</LABEL></td>
+            <td>
+                <input type='text' name="contact_mail" value="{$contact_mail}" id="contact_mail">
+            </td>
+        </tr>
+    </table>
+    <hr>
+
+    <h3>{t}Details{/t}</h3>
+    <table style='width:100%;'>
+        <tr> 
+            <td style='width:220px;'><LABEL for="employees">{t}Number of employees{/t}</LABEL></td>
+            <td>
+                <input type='text' name="employees" value="{$employees}" id="employees">
+            </td>
+        </tr>
+        <tr> 
+            <td style='width:220px;'><LABEL for="trade">{t}What does your company deal with?{/t}</LABEL></td>
+            <td>
+                <textarea style="width:240px;" rows=3 id='trade' name="trade">{$trade}</textarea>
+            </td>
+        </tr>
+        <tr> 
+            <td style='width:220px;'><LABEL for="description">{t}Additional information{/t}</LABEL></td>
+            <td>
+                <textarea style="width:240px;" rows=3 id='description' name="description">{$description}</textarea>
+            </td>
+        </tr>
+    </table>
 
     <hr>
     <div class="plugin-actions">
         <button name='stepBack'>{msgPool type=backButton}</button>
+        <button name='registerPage3'>{msgPool type=okButton}</button>
     </div>
 {/if}
 
