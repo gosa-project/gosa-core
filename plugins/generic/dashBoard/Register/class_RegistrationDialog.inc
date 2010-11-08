@@ -18,7 +18,6 @@ class RegistrationDialog extends plugin
     function __construct(&$config)
     {
         $this->config = $config;    
-        $this->isRegistered = GOsaRegistration::isRegistered($this->config);
 
         foreach($this->attrs as $attr) $this->values[$attr] = "";
 

@@ -55,7 +55,7 @@ class dashBoard extends plugin
     {
         plugin::save_object();
         
-        if(!$this->registered) $this->RegistrationDialog->save_object();
+        if(!$this->config->registration->isRegistered()) $this->RegistrationDialog->save_object();
 
         $this->dbPluginStatus->save_object();
         $this->dbChannelStatus->save_object();
