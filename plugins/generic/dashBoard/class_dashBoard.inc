@@ -25,13 +25,11 @@ class dashBoard extends plugin
 
         // Detect registration status 
         $this->RegistrationDialog = new RegistrationDialog($config);
-        $this->registered = GOsaRegistration::isRegistered($config);
     }
 
     function execute()
     {
-
-        if(!$this->registered){
+        if(!$this->config->registration->isRegistered()){
             return($this->RegistrationDialog->execute());
         }
 

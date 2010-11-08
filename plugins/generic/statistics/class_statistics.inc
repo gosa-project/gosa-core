@@ -33,11 +33,7 @@ class statistics extends plugin
         plugin::plugin($config, NULL);
 
         // Detect registration status first
-        $this->registered = 
-            GOsaRegistration::isRegistered($config) && 
-            GOsaRegistration::getRegistrationType($config) == "registered";
-
-        if($this->registered){
+        if(!$this->config->registration->isRegistered()){
             $this->graphs[] = new categoryActionsOverTime($config); 
             $this->graphs[] = new memoryUsageChart($config); 
             $this->graphs[] = new cpuLoadChart($config); 
@@ -141,7 +137,7 @@ class statistics extends plugin
         $smarty = get_smarty();
        
         // Check registration status, we need at least 'registered'. 
-        $smarty->assign("registered", $this->registered);
+        $smarty->assign("registered", $this->config->registration->isRegistered());
         if(!$this->registered){
     
             $plist = session::get('plist');
@@ -423,7 +419,7 @@ class statistics extends plugin
     function save_object()
     {
         // Nothing to do for not registered accounts.
-        if(!$this->registered) return;
+        if(!$this->config->registration->isRegistered()) return;
 
         plugin::save_object();
         if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');
