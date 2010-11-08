@@ -1,3 +1,5 @@
+<script type="text/javascript" src="include/pwdStrength.js"></script>
+
 <h3>{t}GOsa registration{/t}</h3>
 
 
@@ -10,6 +12,8 @@
         <p style='padding-left:20px;'>
             <!-- Add a descritive text later -->
         </p>
+
+        <!--
         <input type='radio' name='registrationType' value='annonym' id="registrationType_annonym"
             {if $default == "annonym"} checked {/if}><b><LABEL for="registrationType_annonym">{t}Annonym access{/t}</LABEL></b>
         <p style='padding-left:20px;'>
@@ -27,7 +31,7 @@
             <li>{t}The bugs you will report and the corresponding trace. You can select what information you want to send in.{/t}</li>
         </ul>
         </p>
-        
+        -->
         <input type='radio' name='registrationType' value='registered' id="registrationType_registered"
             {if $default == "registered"} checked {/if}><b><LABEL for="registrationType_registered">{t}Register{/t}</LABEL></b>
         <p style='padding-left:20px;'>
@@ -66,52 +70,95 @@
         <b>{t}Selected registration type:{/t} {$default}</b>
     {elseif $default == "registered"}
         
-        <p>
-            {t}Please fill in the fields below.{/t}
-            <br>
-            <i>({$must} {t}Required fields{/t})</i>
-        </p>
-
-
+        <h3>{t}Account settings{/t}</h3>
         <table style='width:100%;'>
+            <tr> 
+                <td style='width:220px;'><LABEL for="uid">{t}Login-ID{/t}{$must}</LABEL></td>
+                <td>
+                    <input type='text' name="uid" value="{$uid}" id="uid">
+                </td>
+            </tr>
             <tr> 
                 <td style='width:220px;'><LABEL for="mailAddress">{t}Mail-address{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="mailAddress" value="{$mailAddress}" id="mailAddress">
                 </td>
             </tr>
+        </table>
+
+        <hr>
+
+        <h3>{t}Password{/t}</h3>
+        <table style='width:100%;'>
             <tr> 
-                <td for="surname">{t}Surname{/t}{$must}</LABEL></td>
+                <td style='width:220px;'><LABEL for="password">{t}Password{/t}{$must}</LABEL></td>
+                <td>
+                    {factory type='password' name='password' id='password'
+                          onkeyup="testPasswordCss(\$('password').value)"}
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div style='width:200px'>
+                    <span id="meterEmpty" style="padding:0;margin:0;width:100%;
+                            background-color:#DC143C;display:block;height:7px;">
+                    <span id="meterFull" style="padding:0;margin:0;z-index:100;
+                            width:0;background-color:#006400;display:block;height:7px;"></span></span>
+                    </div>
+                </td>
+            </tr>
+            <tr> 
+                <td style='width:220px;'><LABEL for="password_repeated">{t}Password{/t} <i>({t}repeated{/t})</i>{$must}</LABEL></td>
+                <td>
+                    {factory type='password' name='password_repeated' id='password_repeated'}
+                </td>
+            </tr>
+            <tr> 
+                <td style='width:220px;'><LABEL for="restoreQuestion">{t}Password restore question{/t}{$must}</LABEL></td>
+                <td>
+                    <input type='text' style='width:400px' name="restoreQuestion" value="{$restoreQuestion}" id="restoreQuestion">
+                </td>
+            </tr>
+            <tr> 
+                <td style='width:220px;'><LABEL for="restoreAnswer">{t}Password restore answer{/t}{$must}</LABEL></td>
+                <td>
+                    <input type='text' name="restoreAnswer" value="{$restoreAnswer}" id="restoreAnswer">
+                </td>
+            </tr>
+        </table>
+        <hr>
+       
+        <h3>{t}Personal information{/t}</h3>
+        <table style='width:100%;'>
+            <tr> 
+                <td style='width:220px;'><LABEL for="surname">{t}Surname{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="surname" value="{$surname}" id="surname">
                 </td>
             </tr>
             <tr> 
-                <td for="givenName">{t}Given name{/t}{$must}</LABEL></td>
+                <td style='width:220px;'><LABEL for="givenName">{t}Given name{/t}{$must}</LABEL></td>
                 <td>
                     <input type='text' name="givenName" value="{$givenName}" id="givenName">
                 </td>
             </tr>
+        </table>
+
+        <hr>
+        <h3>{t}Newsletter{/t}</h3>
+        <table style='width:100%;'>
             <tr> 
-                <td for="company">{t}Company{/t}{$must}</LABEL></td>
+                <td style='width:220px;'><LABEL for="newsletter">{t}Newsletter{/t}</LABEL></td>
                 <td>
-                    <input type='text' name="company" value="{$company}" id="company">
-                </td>
-            </tr>
-            <tr> 
-                <td for="clients">{t}Amount of managed clients{/t}{$must}</LABEL></td>
-                <td>
-                    <input type='text' name="clients" value="{$clients}" id="clients">
-                </td>
-            </tr>
-            <tr> 
-                <td for="knownFrom">{t}Where do you know GOsa from?{/t}{$must}</LABEL></td>
-                <td>
-                    <input type='text' name="knownFrom" value="{$knownFrom}" id="knownFrom">
+                    <input type='checkbox' name="newsletter" value="1" {if $newsletter} checked {/if}id="newsletter">
                 </td>
             </tr>
         </table>
-       
+        <hr>
+        <i>({$must} {t}Required fields{/t})</i>
+
 
     {/if}
 
@@ -120,6 +167,9 @@
         <button name='stepBack'>{msgPool type=backButton}</button>
         <button name='registerNow'>{msgPool type=okButton}</button>
     </div>
+    <script type="text/javascript">
+        focus_field('uid');
+    </script>
 {/if}
 
 {if $step == 2}
@@ -131,6 +181,6 @@
 {/if}
 
 {if $step == 200}
-   <h3>VERIFY TEXTS!!!</h3> You have reciefed a mail, bafasel, please click link and so on.
+   <h3>VERIFY TEXTS!!!</h3> You have receifed a mail, bafasel, please click link and so on.
 
 {/if}

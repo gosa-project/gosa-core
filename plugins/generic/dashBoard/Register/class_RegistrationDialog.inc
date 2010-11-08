@@ -12,7 +12,17 @@ class RegistrationDialog extends plugin
     protected $isRegistered = FALSE; 
     protected $step = 0;
 
-    public $attrs = array('mailAddress','surname','givenName', 'company', 'clients', 'knownFrom');
+    public $attrs = array(
+            
+            // User table
+            'uid','password','password_repeated','restoreQuestion','restoreAnswer',
+            'mailAddress','surname','givenName','newsletter',
+
+            // Contact table
+            'phone','contact','contact_mail','company','street',
+            'postal_code','city','trade','employees','description');
+
+
     protected $values = array();
 
     function __construct(&$config)
@@ -37,10 +47,31 @@ class RegistrationDialog extends plugin
     function registerNow()
     {
         if($this->selectedRegistrationType == "registered"){
+
+            // Register user 
             print_a($this->rpcHandle->registerUser('cajus', $this->values));
+
+            // Register Instance with User.
         }
 
-        $this->step = 200; // Awaiting verification
+        #$this->step = 200; // Awaiting verification
+    }
+
+
+    function check()
+    {
+        $message  = array();
+        if($this->step == 1){
+
+            // Checking for a valid 'uid'.
+            if(empty($this->values['uid'])) {
+                $message[] = msgPool::required(_("Account-ID"));
+            }elseif(!preg_match("/^[a-z0-9_-]+$/", $this->values['uid'])){
+                $message[] = msgPool::invalid(_("Account-ID"), $this->values['uid'],'/[a-z0-9_-]/');
+            }
+        }
+        
+        return($message);
     }
 
    
