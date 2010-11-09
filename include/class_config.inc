@@ -316,7 +316,7 @@ class config  {
     }
 
 
-    function getRpcHandle($connectUrl=NULL, $username=NULL, $userPassword=NULL, $authModeDigest=FALSE)
+    function getRpcHandle($connectUrl=NULL, $username=NULL, $userPassword=NULL, $authModeDigest=FALSE, $cache = TRUE)
     {
         // Get conenct information, if no info was given use the default values from gosa.conf
         $connectUrl   = ($connectUrl !== NULL)   ? $connectUrl   : $this->get_cfg_value('core','gosaRpcServer');
@@ -325,10 +325,15 @@ class config  {
         $authModeDigest = $authModeDigest;
     
         // Create jsonRPC handle on demand.
-        if(!isset($this->jsonRPChandle[$connectUrl][$username]) || !$this->jsonRPChandle[$connectUrl][$username]){
-            $this->jsonRPChandle[$connectUrl][$username] = new jsonRPC($this, $connectUrl, $username, $userPassword, $authModeDigest);
+        if(!$cache){
+            return(new jsonRPC($this, $connectUrl, $username, $userPassword, $authModeDigest));
+        }else{
+
+            if(!isset($this->jsonRPChandle[$connectUrl][$username]) || !$this->jsonRPChandle[$connectUrl][$username]){
+                $this->jsonRPChandle[$connectUrl][$username] = new jsonRPC($this, $connectUrl, $username, $userPassword, $authModeDigest);
+            }
+            return($this->jsonRPChandle[$connectUrl][$username]);
         }
-        return($this->jsonRPChandle[$connectUrl][$username]);
     }
 
 

@@ -93,8 +93,10 @@ class jsonRPC {
 
         // Try to login 
         if($this->authModeDigest){
-            if(!empty($this->username)) 
+            if(!empty($this->username)){
                 curl_setopt($this->curlHandler, CURLOPT_USERPWD , "{$this->username}:{$this->userPassword}");
+            }
+        
             curl_setopt($this->curlHandler, CURLOPT_HTTPAUTH , CURLAUTH_ANYSAFE);
         }else{
             curl_setopt($this->curlHandler, CURLOPT_COOKIESESSION , TRUE);
@@ -141,7 +143,8 @@ class jsonRPC {
      */
     public function success()
     {
-        return(curl_errno($this->curlHandler) == 0 && $this->lastStats['http_code'] == 200);
+        return(curl_errno($this->curlHandler) == 0 || 
+             (isset($this->lastStats['http_code']) && $this->lastStats['http_code'] == 200));
     }
 
 
