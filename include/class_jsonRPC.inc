@@ -143,8 +143,9 @@ class jsonRPC {
      */
     public function success()
     {
-        return(curl_errno($this->curlHandler) == 0 || 
-             (isset($this->lastStats['http_code']) && $this->lastStats['http_code'] == 200));
+        return(curl_errno($this->curlHandler) == 0 && 
+                isset($this->lastStats['http_code']) && 
+                $this->lastStats['http_code'] == 200);
     }
 
 
@@ -226,13 +227,6 @@ class jsonRPC {
         }
         return($result);
     }
-
-
-
-
-
-
-
 
 
     /*! \brief      This method finally initiates the real RPC requests and handles 
