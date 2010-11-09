@@ -42,7 +42,7 @@
 
 {/if}
 
-{if $step == 1 || $step == -1}
+{if $step == 1}
     <table>
         <tr>
             <td><LABEL for="username">{t}Login{/t}</LABEL></td>
@@ -60,8 +60,28 @@
     <hr>
     <div class="plugin-actions">
         <button name='stepBack'>{msgPool type=backButton}</button>        
-        <button name='registerPage2'>{msgPool type=okButton}</button>        
+        <button name='registerPage1'>{msgPool type=okButton}</button>        
     </div>
 {/if}
 
+{if $step == 2}
+    <h3>{t}Registration complete{/t}</h3>
+    <p>
+        {t}GOsa instance sucessfully registered{/t}
+    </p>
+    <hr>
+    <div class="plugin-actions">
+        <button name='registerComplete'>{msgPool type=okButton}</button>        
+    </div>
+{/if}
 
+{if $step == 100}
+    <h3>{t}Registration complete{/t}</h3>
+    <p>
+        {t}GOsa instance will not be registered{/t}
+    </p>
+    <hr>
+    <div class="plugin-actions">
+        <button name='registerComplete'>{msgPool type=okButton}</button>        
+    </div>
+{/if}

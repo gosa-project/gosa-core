@@ -22,15 +22,27 @@ class dashBoard extends plugin
         $this->dbNotifications = new dbNotifications($config);
         $this->dbInformation = new dbInformation($config);
 
-
-        // Detect registration status 
-        $this->RegistrationDialog = new RegistrationDialog($config);
+        // Check if we've access to the registration server
+        if($config->registration->isServerAccessible()){
+            if(!$config->registration->isInstanceRegistered()){
+                $this->dialog = new RegistrationDialog($config);
+            }
+        }
     }
 
     function execute()
     {
-        if(!$this->config->registration->isRegistered()){
-            return($this->RegistrationDialog->execute());
+        // Seems that we haven't registered our GOsa instance yet.
+        // Ask the user to do so, now.
+        if($this->dialog instanceOf RegistrationDialog){
+            $this->dialog->save_object();
+
+            // Check if the registration is complete/canceled
+            if(!$this->dialog->finished()){
+                return($this->dialog->execute());
+            }else{
+                $this->dialog = NULL;
+            }
         }
 
         $smarty = get_smarty();
@@ -54,13 +66,16 @@ class dashBoard extends plugin
     function save_object()
     {
         plugin::save_object();
-        
-        if(!$this->config->registration->isRegistered()) $this->RegistrationDialog->save_object();
+       
+        if($this->dialog instanceOf RegistrationDialog){ 
+            $this->dialog->save_object();
+        }else{
 
-        $this->dbPluginStatus->save_object();
-        $this->dbChannelStatus->save_object();
-        $this->dbNotifications->save_object();
-        $this->dbInformation->save_object();
+            $this->dbPluginStatus->save_object();
+            $this->dbChannelStatus->save_object();
+            $this->dbNotifications->save_object();
+            $this->dbInformation->save_object();
+        }
     }
 
     function save()

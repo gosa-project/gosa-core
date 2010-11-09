@@ -15,6 +15,13 @@ class RegistrationDialog extends plugin
     protected $values = array();
     public $attrs = array('username','password');
 
+    protected $finished = FALSE;
+
+    function finished()
+    {
+        return($this->finished);
+    }
+
     function __construct(&$config)
     {
         $this->config = $config;    
@@ -30,7 +37,7 @@ class RegistrationDialog extends plugin
         $smarty->assign("error", "");
 
         // Registration page one filled in, next step requested.
-        if(isset($_POST['registerPage2'])){
+        if(isset($_POST['registerPage1'])){
             $msgs = $this->check();
             if(count($msgs)){
                 msg_dialog::displayChecks($msgs); 
@@ -38,19 +45,10 @@ class RegistrationDialog extends plugin
 
                 if($this->selectedRegistrationType == "registered"){
 
-                    // Try to login with the given username / password
-                    $rpcHandle = $this->config->getRpcHandle(                                                   
-                            "http://10.3.64.59:4000",                                                                 
-                            $this->values['username'],
-                            $this->values['password'],
-                            TRUE, FALSE);         
-
-                    // Register instance 
+                    // Try to registrate the instance with the given username and password.
+                    $rpcHandle = $this->config->registration->getConnection($this->values['username'],$this->values['password']);
                     $rpcHandle->registerInstance($this->config->getInstanceUuid());
-
-                    // Check if we're able to connect. 
                     if(!$rpcHandle->success()){
-            
                         $code =  $rpcHandle->getHTTPstatusCode();
                         if($code == 0){
                             $smarty->assign("error", _("Communciation with the backend failed! Please check your internet connection!"));
@@ -59,6 +57,8 @@ class RegistrationDialog extends plugin
                         }elseif($code == 403){
                             $smarty->assign("error", _("Internal server error, please try again later. If the problem persists contact the GOsa-Team!"));
                         }
+                    }else{
+                        $this->step = 2;
                     }
                 } 
             }
@@ -78,7 +78,16 @@ class RegistrationDialog extends plugin
         }
 
         if(isset($_POST['registrationType']))  $this->selectedRegistrationType = get_post('registrationType');
-        if(isset($_POST['startRegistration'])) $this->step = 1;
+
+        // Registration type selected and next page choosen.
+        if(isset($_POST['startRegistration'])){
+            if($this->selectedRegistrationType == "none"){
+                $this->step = 100;
+            }else{
+                $this->step = 1;
+            }
+        }
+        if(isset($_POST['registerComplete'])) $this->finished = TRUE;
         if(isset($_POST['stepBack'])) $this->step -= 1;
     }
 }
