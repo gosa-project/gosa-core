@@ -95,14 +95,12 @@ class GOsaRegistration
 
     function isInstanceRegisteredWithServer()
     {
-        if($this->isRegistered === NULL){
-            $con = $this->getConnection();
-            $res = $con->isInstanceRegistered($this->config->getInstanceUuid());
-            if($con->success()){
-                $this->isRegistered = $res;
-            }else{
-                return(FALSE);
-            }
+        $con = $this->getConnection();
+        $res = $con->isInstanceRegistered($this->config->getInstanceUuid());
+        if($con->success()){
+            $this->isRegistered = $res;
+        }else{
+            return(FALSE);
         }
         return($this->isRegistered);
     }
