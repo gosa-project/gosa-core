@@ -102,6 +102,12 @@ class config  {
     }    
 
 
+    function getInstancePassword()
+    {
+        return($this->instancePassword);
+    }    
+
+
     /*! \brief Check and reload the configuration
      * 
      * This function checks if the configuration has changed, since it was

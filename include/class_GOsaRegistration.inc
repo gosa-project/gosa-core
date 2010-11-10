@@ -45,6 +45,9 @@ class GOsaRegistration
 
     function registrationNotWanted()
     {
+        // While we are registered this will always be FALSE.
+        if($this->isInstanceRegistered()) return(FALSE);
+
         // Check if the registration process was postponed or completely(>=0) canceled (-1)
         $date = $this->config->configRegistry->getPropertyValue('GOsaRegistration','askForRegistration');
         return($date == -1);
