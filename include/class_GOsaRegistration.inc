@@ -52,8 +52,7 @@ class GOsaRegistration
 
     function registrationRequired()
     {
-        // If we are already registered, then do not ask for regsitration again
-        if(!empty($this->config->instancePassword)) return(FALSE);
+        if($this->isInstanceRegistered) return(FALSE);
 
         // Seems that we haven't received an instancePassword yet, this can has two reasons:
         // 1. Not registered yet or registration postponed     2. We do not want to registrate our instance.
@@ -70,6 +69,19 @@ class GOsaRegistration
     }
 
     function isInstanceRegistered()
+    {
+        if($this->isServerAccessible()){
+
+            // First check if the server is accessible and if the instance is registered.
+            return($this->isInstanceRegisteredWithServer());
+        }else{
+
+            // Server is down, now check if we've an instancePassword set in our gosa.conf.             
+            return(!empty($this->config->instancePassword));
+        }
+    }
+
+    function isInstanceRegisteredWithServer()
     {
         if($this->isRegistered === NULL){
             $con = $this->getConnection();
