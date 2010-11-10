@@ -155,13 +155,13 @@ class statistics extends plugin
         $smarty->assign("instanceRegistered", $this->instanceRegistered);
         $smarty->assign("serverAccessible", $this->serverAccessible);
         $smarty->assign("registrationNotWanted", $this->registrationNotWanted);
+        $plist = session::get('plist');
+        $id = array_search('dashBoard', $plist->pluginList);
+        $smarty->assign('dashBoardId', $id);
 
         // If we have an unregistered instance of GOsa, display a message which
         //  allows to registrate GOsa
         if(!$this->instanceRegistered){
-            $plist = session::get('plist');
-            $id = array_search('dashBoard', $plist->pluginList);
-            $smarty->assign('dashBoardId', $id);
             return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
         }
 
