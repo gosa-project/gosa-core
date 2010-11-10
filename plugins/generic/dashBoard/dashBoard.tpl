@@ -1,4 +1,4 @@
-{if !$instanceRegistered}
+{if !$instanceRegistered || !$isServerAccessible}
     <h3>{t}This feature is only accessible for registrated instances of GOsa{/t}</h3>
 
     {if $registrationServerAvailable}
@@ -6,6 +6,9 @@
     {else}
         {t}Unfortunately the registration server cannot be reached, maybe the server is down for maintaince or you've no internet access!{/t}
     {/if}
+
+
+
 {else}
     <table style='width:100%' summary="{t}GOsa dash board{/t}">
         <tr>

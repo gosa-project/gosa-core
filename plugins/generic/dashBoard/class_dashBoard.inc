@@ -29,11 +29,13 @@ class dashBoard extends plugin
     function init()
     {
         // Instantiate child classes
-        if($this->config->registration->isInstanceRegistered()){
-            $this->dbPluginStatus = new dbPluginStatus($config);
-            $this->dbChannelStatus = new dbChannelStatus($config);
-            $this->dbNotifications = new dbNotifications($config);
-            $this->dbInformation = new dbInformation($config);
+        if( $this->config->registration->isInstanceRegistered() && 
+                $this->config->registration->isServerAccessible()){
+
+            $this->dbPluginStatus = new dbPluginStatus($this->config);
+            $this->dbChannelStatus = new dbChannelStatus($this->config);
+            $this->dbNotifications = new dbNotifications($this->config);
+            $this->dbInformation = new dbInformation($this->config);
             $this->initialized = TRUE;
         }
     }
@@ -61,6 +63,7 @@ class dashBoard extends plugin
 
         $smarty = get_smarty();
         $smarty->assign('instanceRegistered', $this->config->registration->isInstanceRegistered());
+        $smarty->assign('isServerAccessible', $this->config->registration->isServerAccessible());
         $smarty->assign('registrationServerAvailable', $this->config->registration->isServerAccessible());
 
         if($this->initialized){
