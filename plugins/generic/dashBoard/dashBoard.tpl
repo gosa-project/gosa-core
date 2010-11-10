@@ -1,44 +1,53 @@
+{if !$instanceRegistered}
+    <h3>{t}This feature is only accessible for registrated instances of GOsa{/t}</h3>
 
-<table style='width:100%' summary="{t}GOsa dash board{/t}">
-    <tr>
-        <td style='width:50%; padding-right:5px;' class='right-border'>
-            
-            <!-- Channel -->    
+    {if $registrationServerAvailable}
+        <button name="registerNow">{t}Registrate{/t}</button>
+    {else}
+        {t}Unfortunately the registration server cannot be reached, maybe the server is down for maintaince or you've no internet access!{/t}
+    {/if}
+{else}
+    <table style='width:100%' summary="{t}GOsa dash board{/t}">
+        <tr>
+            <td style='width:50%; padding-right:5px;' class='right-border'>
+                
+                <!-- Channel -->    
 
-            {$dbChannelStatus}
+                {$dbChannelStatus}
 
-            <!--Chanel  END -->
+                <!--Chanel  END -->
 
-        </td>
-        <td>
-            
-            <!-- Plugins Status -->    
+            </td>
+            <td>
+                
+                <!-- Plugins Status -->    
 
-            {$dbPluginStatus}
+                {$dbPluginStatus}
 
-            <!-- Plugins Status  END -->
+                <!-- Plugins Status  END -->
 
-        </td>
-    </tr>
-    <tr><td colspan="2"><hr></td></tr>
-    <tr>
-        <td style='width:50%; padding-right:5px;' class='right-border'>
-            
-            <!-- Messages -->    
-    
-            {$dbNotifications}
+            </td>
+        </tr>
+        <tr><td colspan="2"><hr></td></tr>
+        <tr>
+            <td style='width:50%; padding-right:5px;' class='right-border'>
+                
+                <!-- Messages -->    
+        
+                {$dbNotifications}
 
-            <!-- Messages  END -->
+                <!-- Messages  END -->
 
-        </td>
-        <td>
-            
-            <!-- RSS Feeds -->    
-    
-            {$dbInformation}
+            </td>
+            <td>
+                
+                <!-- RSS Feeds -->    
+        
+                {$dbInformation}
 
-            <!-- RSS Feeds  END -->
+                <!-- RSS Feeds  END -->
 
-        </td>
-    </tr>
-</table>
+            </td>
+        </tr>
+    </table>
+{/if}
