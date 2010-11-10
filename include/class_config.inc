@@ -65,6 +65,7 @@ class config  {
     var $last_modified = 0;
 
     var $instanceUUID = "";
+    var $instancePassword = "";
 
     private $jsonRPChandle = NULL; 
 
@@ -187,6 +188,9 @@ class config  {
             }
             if(isset($attrs['INSTANCEUUID'])){
                 $this->instanceUUID = $attrs['INSTANCEUUID'];
+            }
+            if(isset($attrs['INSTANCEPASSWORD'])){
+                $this->instancePassword = $attrs['INSTANCEPASSWORD'];
             }
         }
 
