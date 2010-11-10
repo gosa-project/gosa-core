@@ -52,7 +52,7 @@ class GOsaRegistration
 
     function registrationRequired()
     {
-        if($this->isInstanceRegistered) return(FALSE);
+        if($this->isInstanceRegistered()) return(FALSE);
 
         // Seems that we haven't received an instancePassword yet, this can has two reasons:
         // 1. Not registered yet or registration postponed     2. We do not want to registrate our instance.
