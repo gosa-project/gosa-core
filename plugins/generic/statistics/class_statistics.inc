@@ -65,7 +65,7 @@ class statistics extends plugin
             $this->rpcHandle = $this->config->getRpcHandle(
                     $this->config->registration->getRegistrationServer(),
                     $this->config->getInstanceUUID(),
-                    $this->config->getInstancePassword(),
+                    $this->config->configRegistry->getPropertyValue('GOsaRegistration','instancePassword'),
                     TRUE);
 
             $this->initialized = TRUE;
