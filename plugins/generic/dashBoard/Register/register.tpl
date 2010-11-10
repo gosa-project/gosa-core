@@ -6,14 +6,15 @@
 
     {t}Do you want to register GOsa and benefit from the features it brings?{/t}
     <p>
-     <input type='radio' name='registrationType' value='' id="registrationType_"
-         {if $default == ""} checked {/if}><b><LABEL for="registrationType_">{t}I do not want to register{/t}</LABEL></b>
+     <input type='radio' name='registrationType' value='dontWant' id="registrationType_dontWant"
+         {if $default == "dontWant"} checked {/if}>
+            <b><LABEL for="registrationType_dontWant">{t}I do not want to register{/t}</LABEL></b>
         <p style='padding-left:20px;'>
             <!-- Add a descritive text later -->
         </p>
 
-        <input type='radio' name='registrationType' value='registered' id="registrationType_registered"
-            {if $default == "registered"} checked {/if}><b><LABEL for="registrationType_registered">{t}Register{/t}</LABEL></b>
+        <input type='radio' name='registrationType' value='registrate' id="registrationType_registrate"
+            {if $default == "registrate"} checked {/if}><b><LABEL for="registrationType_registrate">{t}Register{/t}</LABEL></b>
         <p style='padding-left:20px;'>
         {t}Additionally to the 'Annonomous' account you can:{/t}
         <ul>
@@ -42,7 +43,7 @@
 
 {/if}
 
-{if $step == 1}
+{if $step == 1 && $default == "registrate"}
     <table>
         <tr>
             <td><LABEL for="username">{t}Login{/t}</LABEL></td>
@@ -64,7 +65,7 @@
     </div>
 {/if}
 
-{if $step == 2}
+{if $step == 2 && $default == "registrate"}
     <h3>{t}Registration complete{/t}</h3>
     <p>
         {t}GOsa instance sucessfully registered{/t}
@@ -75,13 +76,14 @@
     </div>
 {/if}
 
-{if $step == 100}
+{if $step == 1 && $default == "dontWant"}
     <h3>{t}Registration complete{/t}</h3>
     <p>
         {t}GOsa instance will not be registered{/t}
     </p>
     <hr>
     <div class="plugin-actions">
+        <button name='stepBack'>{msgPool type=backButton}</button>        
         <button name='registerComplete'>{msgPool type=okButton}</button>        
     </div>
 {/if}

@@ -23,7 +23,7 @@ class dashBoard extends plugin
         $this->dbInformation = new dbInformation($config);
 
         // Check if we've access to the registration server
-        if($config->registration->isServerAccessible()){
+        if($this->config->registration->registrationRequired() && $config->registration->isServerAccessible()){
             if(!$config->registration->isInstanceRegistered()){
                 $this->dialog = new RegistrationDialog($config);
             }
@@ -35,7 +35,6 @@ class dashBoard extends plugin
         // Seems that we haven't registered our GOsa instance yet.
         // Ask the user to do so, now.
         if($this->dialog instanceOf RegistrationDialog){
-            $this->dialog->save_object();
 
             // Check if the registration is complete/canceled
             if(!$this->dialog->finished()){

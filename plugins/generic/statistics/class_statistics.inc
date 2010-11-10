@@ -26,14 +26,18 @@ class statistics extends plugin
     var $graphs = array();
     var $selectedGraphType = 0;
 
-    var $registered = FALSE;
+    var $serverAccessible = FALSE;
+    var $instanceRegistered = FALSE;
 
     function __construct($config)
     {
         plugin::plugin($config, NULL);
 
         // Detect registration status first
-        if(!$this->config->registration->isRegistered()){
+        $this->serverAccessible = $config->registration->isServerAccessible();
+        $this->instanceRegistered = $this->config->registration->isInstanceRegistered();
+
+        if(!$this->serverAccessible || !$this->instanceRegistered){
             $this->graphs[] = new categoryActionsOverTime($config); 
             $this->graphs[] = new memoryUsageChart($config); 
             $this->graphs[] = new cpuLoadChart($config); 
@@ -137,9 +141,9 @@ class statistics extends plugin
         $smarty = get_smarty();
        
         // Check registration status, we need at least 'registered'. 
-        $smarty->assign("registered", $this->config->registration->isRegistered());
-        if(!$this->registered){
-    
+        $smarty->assign("instanceRegistered", $this->instanceRegistered);
+        $smarty->assign("serverAccessible", $this->serverAccessible);
+        if(!$this->serverAccessible || !$this->instanceRegistered){
             $plist = session::get('plist');
  
             $id = array_search('dashBoard', $plist->pluginList);
@@ -419,7 +423,7 @@ class statistics extends plugin
     function save_object()
     {
         // Nothing to do for not registered accounts.
-        if(!$this->config->registration->isRegistered()) return;
+        if(!$this->serverAccessible || !$this->instanceRegistered) return;
 
         plugin::save_object();
         if(isset($_POST['graph1DatePicker1'])) $this->graph1DatePicker1 = get_post('graph1DatePicker1');

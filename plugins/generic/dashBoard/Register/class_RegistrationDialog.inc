@@ -8,7 +8,7 @@
 
 class RegistrationDialog extends plugin
 {
-    protected $selectedRegistrationType = "registered";
+    protected $selectedRegistrationType = "registrate";
     protected $isRegistered = FALSE; 
     protected $step = 0;
 
@@ -43,7 +43,7 @@ class RegistrationDialog extends plugin
                 msg_dialog::displayChecks($msgs); 
             }else{
 
-                if($this->selectedRegistrationType == "registered"){
+                if($this->selectedRegistrationType == "registrate"){
 
                     // Try to registrate the instance with the given username and password.
                     $rpcHandle = $this->config->registration->getConnection($this->values['username'],$this->values['password']);
@@ -80,14 +80,17 @@ class RegistrationDialog extends plugin
         if(isset($_POST['registrationType']))  $this->selectedRegistrationType = get_post('registrationType');
 
         // Registration type selected and next page choosen.
-        if(isset($_POST['startRegistration'])){
-            if($this->selectedRegistrationType == "none"){
-                $this->step = 100;
-            }else{
-                $this->step = 1;
+        if(isset($_POST['startRegistration'])) $this->step = 1;
+        if(isset($_POST['registerComplete'])){
+            $this->finished = TRUE;
+
+            // Tell GOsa not to ask for a regsitration again.
+            if($this->selectedRegistrationType == "dontWant"){
+                $prop =  $this->config->configRegistry->getProperty('GOsaRegistration','askForRegistration');
+                $prop->setValue(-1);
+                $prop->save();
             }
         }
-        if(isset($_POST['registerComplete'])) $this->finished = TRUE;
         if(isset($_POST['stepBack'])) $this->step -= 1;
     }
 }
