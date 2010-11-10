@@ -61,15 +61,13 @@ class statistics extends plugin
             $this->graph1DatePicker2 = date('d.m.Y', time());
 
             // First try to retrieve values via RPC
-            $this->rpcConfigured = FALSE;
-            if ($this->config->get_cfg_value("core","gosaRpcServer") != ""){
-                $this->rpcConfigured = TRUE;
-                $this->rpcHandle = $this->config->getRpcHandle(
-                        "http://10.3.64.59:4000",
-                        "65717fe6-9e3e-11df-b010-5452005f1250",
-                        "WyukwauWoid2",
-                        TRUE);
-            }
+            $this->rpcConfigured = TRUE;
+            $this->rpcHandle = $this->config->getRpcHandle(
+                    $this->config->registration->getRegistrationServer(),
+                    $this->config->getInstanceUUID(),
+                    $this->config->getInstancePassword(),
+                    TRUE);
+
             $this->initialized = TRUE;
         }
     }
@@ -161,7 +159,7 @@ class statistics extends plugin
 
         // If we have an unregistered instance of GOsa, display a message which
         //  allows to registrate GOsa
-        if(!$this->instanceRegistered){
+        if(!$this->instanceRegistered || !$this->serverAccessible){
             return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));
         }
 
