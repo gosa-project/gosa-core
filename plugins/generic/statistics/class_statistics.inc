@@ -28,26 +28,33 @@ class statistics extends plugin
 
     var $serverAccessible = FALSE;
     var $instanceRegistered = FALSE;
+    var $registrationNotWanted = FALSE;
+
+    var $initialized = FALSE;
 
     function __construct($config)
     {
         plugin::plugin($config, NULL);
+    }
 
+    function init()
+    {
         // Detect registration status first
-        $this->serverAccessible = $config->registration->isServerAccessible();
+        $this->serverAccessible = $this->config->registration->isServerAccessible();
+        $this->registrationNotWanted = $this->config->registration->registrationNotWanted();
         $this->instanceRegistered = $this->config->registration->isInstanceRegistered();
+        if($this->instanceRegistered){
+            $this->graphs[] = new categoryActionsOverTime($this->config); 
+            $this->graphs[] = new memoryUsageChart($this->config); 
+            $this->graphs[] = new cpuLoadChart($this->config); 
+            $this->graphs[] = new renderTimeChart($this->config); 
+            $this->graphs[] = new durationTimeChart($this->config); 
+            $this->graphs[] = new objectCountChart($this->config); 
+            $this->graphs[] = new actionSelectChart($this->config); 
+            $this->graphs[] = new passwordChangeChart($this->config); 
+            $this->staticChart1 = new pieChart1($this->config); 
+            $this->staticChart2 = new pieChart2($this->config); 
 
-        if(!$this->serverAccessible || !$this->instanceRegistered){
-            $this->graphs[] = new categoryActionsOverTime($config); 
-            $this->graphs[] = new memoryUsageChart($config); 
-            $this->graphs[] = new cpuLoadChart($config); 
-            $this->graphs[] = new renderTimeChart($config); 
-            $this->graphs[] = new durationTimeChart($config); 
-            $this->graphs[] = new objectCountChart($config); 
-            $this->graphs[] = new actionSelectChart($config); 
-            $this->graphs[] = new passwordChangeChart($config); 
-            $this->staticChart1 = new pieChart1($config); 
-            $this->staticChart2 = new pieChart2($config); 
 
             // Init start and stop times for graph 1
             $this->graph1DatePicker1 = date('d.m.Y', time() - 28 * 24 * 60 *60);
@@ -63,6 +70,7 @@ class statistics extends plugin
                         "WyukwauWoid2",
                         TRUE);
             }
+            $this->initialized = TRUE;
         }
     }
 
@@ -138,14 +146,20 @@ class statistics extends plugin
 
     function execute()
     {
+
+        if(!$this->initialized) $this->init();
+
         $smarty = get_smarty();
        
         // Check registration status, we need at least 'registered'. 
         $smarty->assign("instanceRegistered", $this->instanceRegistered);
         $smarty->assign("serverAccessible", $this->serverAccessible);
-        if(!$this->serverAccessible || !$this->instanceRegistered){
+        $smarty->assign("registrationNotWanted", $this->registrationNotWanted);
+
+        // If we have an unregistered instance of GOsa, display a message which
+        //  allows to registrate GOsa
+        if(!$this->instanceRegistered){
             $plist = session::get('plist');
- 
             $id = array_search('dashBoard', $plist->pluginList);
             $smarty->assign('dashBoardId', $id);
             return($smarty->fetch(get_template_path('statistics.tpl', TRUE)));

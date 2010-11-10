@@ -1,9 +1,8 @@
 
 <h3>{t}Usage statistics{/t}</h3>
-{if !$serverAccessible}
-
+{if $registrationNotWanted}
+    
     {t}This feature is disabled. To enable it you have to register GOsa, you can initiate a registration using the dash-board plugin.{/t}
-
     <button type='button' onClick="openPlugin({$dashBoardId});">{t}Dash board{/t}</button>
 
 {else if !$instanceRegistered}
@@ -12,7 +11,7 @@
 
     <button type='button' onClick="openPlugin({$dashBoardId});">{t}Dash board{/t}</button>
 
-{else if !$validRpcHandle || $rpcHandle_Error}
+{else if !$serverAccessible || !$validRpcHandle || $rpcHandle_Error}
 
     {t}Communication with the GOsa-backend failed. Please check the rpc configuration!{/t}
 

@@ -36,15 +36,6 @@ class RegistrationDialog extends plugin
         $smarty = get_smarty();
         $smarty->assign("error", "");
 
-        // Tell GOsa not to ask for a regsitration again.
-        if(isset($_POST['registerComplete'])){
-            if($this->selectedRegistrationType == "dontWant"){
-                $prop =  $this->config->configRegistry->getProperty('GOsaRegistration','askForRegistration');
-                $prop->setValue(-1);
-                $prop->save();
-            }
-        }
-
         // Registration page one filled in, next step requested.
         if(isset($_POST['registerPage1'])){
             $msgs = $this->check();
@@ -93,8 +84,15 @@ class RegistrationDialog extends plugin
 
         // Registration type selected and next page choosen.
         if(isset($_POST['startRegistration'])) $this->step = 1;
+
+        // Tell GOsa not to ask for a regsitration again.
         if(isset($_POST['registerComplete'])){
             $this->finished = TRUE;
+            if($this->selectedRegistrationType == "dontWant"){
+                $prop =  $this->config->configRegistry->getProperty('GOsaRegistration','askForRegistration');
+                $prop->setValue(-1);
+                $prop->save();
+            }
         }
         if(isset($_POST['stepBack'])) $this->step -= 1;
     }
