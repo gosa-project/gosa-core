@@ -47,7 +47,7 @@ class RegistrationDialog extends plugin
 
                     // Try to registrate the instance with the given username and password.
                     $rpcHandle = $this->config->registration->getConnection($this->values['username'],$this->values['password']);
-                    $rpcHandle->registerInstance($this->config->getInstanceUuid());
+                    $password = $rpcHandle->registerInstance($this->config->getInstanceUuid());
                     if(!$rpcHandle->success()){
                         $code =  $rpcHandle->getHTTPstatusCode();
                         if($code == 0){
@@ -58,9 +58,17 @@ class RegistrationDialog extends plugin
                             $smarty->assign("error", _("Internal server error, please try again later. If the problem persists contact the GOsa-Team!"));
                         }
                     }else{
+                    
                         $this->step = 2;
+
+                        // Restore the registration postpone value. 
                         $prop =  $this->config->configRegistry->getProperty('GOsaRegistration','askForRegistration');
                         $prop->setValue(0);
+                        $prop->save();
+
+                        // Store the returned password
+                        $prop =  $this->config->configRegistry->getProperty('GOsaRegistration','instancePassword');
+                        $prop->setValue($password);
                         $prop->save();
                     }
                 } 
