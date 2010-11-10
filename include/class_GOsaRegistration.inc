@@ -32,15 +32,24 @@ class GOsaRegistration
         }
     }
 
-    function isServerAccessible()
+    function isServerAccessible($force = FALSE)
     {
-            $con = $this->getConnection();
-            $res = $con->isInstanceRegistered("dummy");
-            if($con->success()){
-                return(TRUE);
-            }else{
-                return(FALSE);
+        // Only request a new status every 2 seconds
+        if(isset($this->cache['isServerAccessible']['called']) && !$force){
+            if($this->cache['isServerAccessible']['called'] + 2 > time()){
+                return($this->cache['isServerAccessible']['result']);
             }
+        }
+
+        // Check the connection status by calling a dummy function
+        $con = $this->getConnection();
+        $res = $con->isInstanceRegistered("dummy");
+
+        // Store the result
+        $this->cache['isServerAccessible']['called'] = time();        
+        $this->cache['isServerAccessible']['result'] = $con->success();
+
+        return($con->success());
     }
 
     function registrationNotWanted()
