@@ -88,8 +88,9 @@ class GOsaRegistration
             return($this->isInstanceRegisteredWithServer());
         }else{
 
-            // Server is down, now check if we've an instancePassword set in our gosa.conf.             
-            return(!empty($this->config->instancePassword));
+            // Server is down, now check if we've an instancePassword set in our gosa.conf.
+            $instancePassword = $this->config->configRegistry->getPropertyValue('GOsaRegistration','instancePassword'); 
+            return(!empty($instancePassword));
         }
     }
 
@@ -111,6 +112,15 @@ class GOsaRegistration
         return (array(
                     "plProperties"  => array(
                         array(
+                            "name"          => "instancePassword",
+                            "type"          => "string",
+                            "default"       => "",
+                            "description"   => "",
+                            "check"         => "gosaProperty::isString",
+                            "migrate"       => "",
+                            "group"         => "registration",
+                            "mandatory"     => FALSE),
+                        array(
                             "name"          => "askForRegistration",
                             "type"          => "integer",
                             "default"       => "0",
@@ -119,7 +129,9 @@ class GOsaRegistration
                             "migrate"       => "",
                             "group"         => "registration",
                             "mandatory"     => FALSE),
-                        ))); 
+                        )
+                    )
+                    );
     }
 } 
 
