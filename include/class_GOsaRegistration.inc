@@ -12,6 +12,8 @@ class GOsaRegistration
 
     function __construct(&$config)
     {
+        // Check if we're registrated 
+
         $this->config = $config;
     }    
 
@@ -41,12 +43,28 @@ class GOsaRegistration
             }
     }
 
+    function registrationNotWanted()
+    {
+        // Check if the registration process was postponed or completely(>=0) canceled (-1)
+        $date = $this->config->configRegistry->getPropertyValue('GOsaRegistration','askForRegistration');
+        return($date == -1);
+    }
+
     function registrationRequired()
     {
+        // If we are already registered, then do not ask for regsitration again
+        if(!empty($this->config->instancePassword)) return(FALSE);
+
+        // Seems that we haven't received an instancePassword yet, this can has two reasons:
+        // 1. Not registered yet or registration postponed     2. We do not want to registrate our instance.
         $date = $this->config->configRegistry->getPropertyValue('GOsaRegistration','askForRegistration');
         if($date == -1){
+
+            // We do not want to registrate
             return(FALSE);
         }else{
+
+            // Registration may be postponed.
             return($date < time());
         }
     }
