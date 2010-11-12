@@ -1,8 +1,0 @@
-Updated Handling of the registration process
--Moving classes to include.
---This line, and those below, will be ignored--
-
-M    plugins/generic/dashBoard/class_dashBoard.inc
-M    plugins/generic/dashBoard/Register/class_RegisterGOsa.inc
-A    include/class_GOsaRegistration.inc
-M    include/class_config.inc
