@@ -23,6 +23,10 @@
 /*! \file
  * Common functions and named definitions. */
 
+/* Define globals for revision comparing */
+$svn_path = '$HeadURL$';
+$svn_revision = '$Revision$';
+
 /* Configuration file location */
 if(!isset($_SERVER['CONFIG_DIR'])){
   define ("CONFIG_DIR", "/etc/gosa");
@@ -67,10 +71,6 @@ define('DES_CBC_MD4',2);
 define('DES_CBC_MD5',3);
 define('DES3_CBC_MD5',5);
 define('DES3_CBC_SHA1',16);
-
-/* Define globals for revision comparing */
-$svn_path = '$HeadURL$';
-$svn_revision = '$Revision$';
 
 /* Include required files */
 require_once("class_location.inc");
