@@ -3540,7 +3540,7 @@ function get_next_id_traditional($attrib, $dn)
     /* Call base hook */
     $base= get_base_from_hook($dn, $attrib);
   }
-  for ($id= $base; $id++; $id < pow(2,32)){
+  for ($id= $base; $id++; $id < $hwm){
     if (!in_array($id, $ids)){
       return ($id);
     }
