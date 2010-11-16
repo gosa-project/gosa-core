@@ -49,7 +49,7 @@ msgstr "Hier klicken zum Anmelden"
 
 #: ihtml/themes/default/login.tpl:66 ihtml/themes/default/login.tpl:67
 msgid "Log in"
-msgstr "Kennung"
+msgstr "Anmelden"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:1
 msgid "Copy & paste wizard"
