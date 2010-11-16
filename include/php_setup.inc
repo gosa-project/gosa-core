@@ -292,7 +292,7 @@ require("smarty/Smarty.class.php");
 $smarty = new Smarty;
 $smarty->template_dir = $BASE_DIR.'/ihtml/';
 $smarty->caching= false;
-$smarty->php_handling= SMARTY_PHP_REMOVE;
+$smarty->php_handling= Smarty::PHP_REMOVE;
 
 /* Global FPDF define */
 define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
