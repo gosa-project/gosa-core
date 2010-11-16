@@ -200,7 +200,7 @@ $plist= session::global_get('plist');
 if (isset($global_check) && $config->boolValueIsTrue("core","forceGlobals")){
   msg_dialog::display(
             _("PHP configuration"),
-            _("FATAL: Register globals is active. Please fix this in order to continue."),
+            _("Fatal error: Register globals is active. Please fix this in order to continue."),
             FATAL_ERROR_DIALOG);
 
   new log("security","login","",array(),"Register globals is on. For security reasons, this should be turned off.") ;
@@ -408,7 +408,7 @@ if (is_file("$plugin_dir/main.inc")){
 } else {
   msg_dialog::display(
       _("Plug-in"),
-      sprintf(_("FATAL: Cannot find any plugin definitions for plugin %s!"), bold($plug)),
+      sprintf(_("Fatal error: Cannot find any plugin definitions for plugin %s!"), bold($plug)),
       FATAL_ERROR_DIALOG);
   exit();
 }
@@ -425,7 +425,7 @@ if (isset($_POST) && count($_POST)){
   if (!isset($_POST['php_c_check'])){
     msg_dialog::display(
             _("Configuration Error"),
-            sprintf(_("FATAL: not all POST variables have been transfered by PHP - please inform your administrator!")),
+            sprintf(_("Fatal error: not all POST variables have been transfered by PHP - please inform your administrator!")),
             FATAL_ERROR_DIALOG);
     exit();
   }

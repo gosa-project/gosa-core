@@ -6,7 +6,7 @@
 {t}This procedure will restore a snapshot of the selected object. It will replace the existing object after pressing the restore button.{/t}
 <br>
 <br>
-{t}Remember that DNS configuration and database entries could not be restored. For some objects it is only necessary to open and save them again (goFon), but some entries must be recreated manually (glpi).{/t}
+{t}DNS configuration and some database entries cannot be restored. They need to be recreated manually.{/t}
 <br>
 <br>
 {t}Don't forget to check references to other objects, for example does the selected printer still exists ?{/t}
@@ -26,7 +26,7 @@
 		<td>
 			<br>
 			{if $CountSnapShots==0}
-				{t}There is no snapshot available that could be restored{/t}
+				{t}There is no snapshot available that can be restored{/t}
 			{else}
 				{t}Choose a snapshot and click the folder image, to restore the snapshot{/t}
 			{/if}

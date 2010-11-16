@@ -35,7 +35,7 @@ class jsonRPC {
         $connection = new jsonRPC($config, $value, $username, $passwdString);        
         if(!$connection->success() && $message){
             msg_dialog::display(_("Warning"),
-                    sprintf(_("The rpc connection (%s) specified for '%s:%s' is invalid! Error was: %s."),
+                    sprintf(_("The RPC connection (%s) specified for %s:%s is invalid: %s"),
                         bold($value),bold($class),bold($name), bold($connection->get_error())),
                     WARNING_DIALOG);
 
@@ -328,7 +328,7 @@ class jsonRPC {
                 '507' =>  'Insufficient Storage',
                 '509' =>  'Bandwidth Limit Exceeded',
                 '510' =>  'Not Extended');
-        return((isset($codes[$code]))? $codes[$code] : sprintf(_("Unknown HTTP status code '%s'!"), $code));
+        return((isset($codes[$code]))? $codes[$code] : sprintf(_("Unknown HTTP status code %s!"), bold($code)));
     }
 }
 ?>

@@ -1,6 +1,6 @@
 
 <h3>{t}Object information{/t}</h3>
-<table width='100%' summary='{t}Object info{/t}'>
+<table width='100%' summary='{t}Object information{/t}'>
     <tr>
         <td style='width:48%;'>
             {if $completeACL|regex_replace:"/[cdmw]/":"" == "r"}

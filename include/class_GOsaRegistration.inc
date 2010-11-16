@@ -124,7 +124,7 @@ class GOsaRegistration
                             "name"          => "askForRegistration",
                             "type"          => "integer",
                             "default"       => "0",
-                            "description"   => _("Represents a unix-timestamp which points to the date, GOsa will ask for a registration again. -1 = Never, 0 = Now else once we reached the gieven timestamp"), 
+                            "description"   => _("UNIX-timestamp pointing to the date GOsa will ask for a registration again (-1 to disable)"), 
                             "check"         => "gosaProperty::isInteger",
                             "migrate"       => "",
                             "group"         => "registration",

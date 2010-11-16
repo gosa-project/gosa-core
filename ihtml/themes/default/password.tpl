@@ -69,7 +69,7 @@
                 <!-- Display error message on demand -->
                 {if $message}<div class='login-warning'>{$message}</div>{/if}
 
-                <p class="infotext">{t}This dialog provides a simple way to change your password. Enter the current password and the new password (twice) in the fields below and press the 'Change' button.{/t}</p>
+                <p class="infotext">{t}Enter the current password and the new password (twice) in the fields below and press the 'Set password' button.{/t}</p>
 
                 <table summary="{t}Change password{/t}">
                     {if $show_directory_chooser}

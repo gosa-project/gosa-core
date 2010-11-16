@@ -976,7 +976,7 @@ class LDAP
         // First check if we are able to call 'ldapsearch' on the command line.
         $check = shell_exec('which ldapsearch');
         if(empty($check)){
-            $this->error = sprintf(_("Missing command line programm '%s'!"), 'ldapsearch');
+            $this->error = sprintf(_("Command line programm %s is missing!"), bold('ldapsearch'));
             return(NULL);
         }
 

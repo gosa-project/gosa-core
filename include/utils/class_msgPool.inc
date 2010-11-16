@@ -484,9 +484,9 @@ class msgPool
   public static function rpcError($error= "")
   {
     if ($error == ""){
-      return _("Communication failure with the GOSA-NG service!");
+      return _("Communication failure with the GOsa-NG service!");
     }
-    return sprintf(_("Communication failure with the GOSA-NG service: %s"), "<br><br>".$error);
+    return sprintf(_("Communication failure with the GOsa-NG service: %s"), "<br><br>".$error);
   }
 
 

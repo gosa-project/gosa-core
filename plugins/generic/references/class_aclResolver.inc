@@ -178,7 +178,7 @@ class aclResolver
             $acl_tpl = 
                 "\n <tr class='%s'>".
                 "\n  <td></td>".
-                "\n  <td><b>"._("Acls")."</b></td>".
+                "\n  <td><b>"._("ACLs")."</b></td>".
                 "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
                 "\n </tr>";
 

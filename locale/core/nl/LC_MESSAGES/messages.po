@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 20:33+0200\n"
+"POT-Creation-Date: 2010-10-20 18:49+0200\n"
 "PO-Revision-Date: 2006-06-02 16:58+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
@@ -32,6 +32,7 @@ msgid "User name"
 msgstr "Gebruikersnaam"
 
 #: ihtml/themes/default/login.tpl:47
+#: plugins/generic/dashBoard/Register/register.tpl:53
 #: plugins/personal/generic/paste_generic.tpl:21 setup/setup_migrate.tpl:53
 msgid "Password"
 msgstr "Wachtwoord"
@@ -58,8 +59,8 @@ msgstr "Kopieren &amp; plakken wizard"
 #, fuzzy
 msgid ""
 "Some values need to be unique in the complete directory while some "
-"combinations make no sense. GOsa shows the relevant attributes. Please "
-"maintain the values below to fulfill the policies."
+"combinations make no sense. Please edit the values below to fulfill the "
+"policies."
 msgstr ""
 "Somige waardes moeten uniek zijn binnen de gehele directory, terwijl sommige "
 "combinaties geen zin hebben. GOsa toont de relevante attributen. Bewaar de "
@@ -136,8 +137,7 @@ msgstr "Negeer deze fout en toon alle gegevens die de LDAP server teruggeeft"
 #: ihtml/themes/default/sizelimit.tpl:11
 #, fuzzy
 msgid ""
-"ignore this error and show all entries that fit into the defined size limit "
-"and let me use filters instead"
+"ignore this error and show all entries that fit into the defined size limit"
 msgstr ""
 "Negeer deze fout en toon alle gegevens die passen binnen de gedefiniëerde "
 "grootte limiet en laat me daarvoor in de plaats filters gebruiken"
@@ -170,23 +170,24 @@ msgstr "Bewerk algemene eigenschappen"
 #: plugins/generic/references/class_reference.inc:75
 #: plugins/generic/references/class_reference.inc:81
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:97
-#: plugins/admin/ogroups/class_ogroup.inc:155
-#: plugins/admin/ogroups/class_ogroup.inc:659
-#: plugins/admin/ogroups/class_ogroup.inc:674
-#: plugins/admin/ogroups/class_ogroup.inc:678
-#: plugins/admin/ogroups/class_ogroup.inc:840
+#: plugins/admin/ogroups/class_ogroup.inc:157
+#: plugins/admin/ogroups/class_ogroup.inc:661
+#: plugins/admin/ogroups/class_ogroup.inc:676
+#: plugins/admin/ogroups/class_ogroup.inc:680
+#: plugins/admin/ogroups/class_ogroup.inc:861
 #: plugins/admin/ogroups/ogroup-list.xml:41
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:49
 #: plugins/admin/groups/group-list.xml:41
-#: plugins/admin/groups/class_group.inc:886
-#: plugins/admin/groups/class_group.inc:897
-#: plugins/admin/groups/class_group.inc:899
-#: plugins/admin/groups/class_group.inc:916
-#: plugins/admin/groups/class_group.inc:930
-#: plugins/admin/groups/class_group.inc:937
-#: plugins/admin/groups/class_group.inc:1037
-#: plugins/admin/users/class_userManagement.inc:538
-#: plugins/admin/users/class_userManagement.inc:585
+#: plugins/admin/groups/class_group.inc:906
+#: plugins/admin/groups/class_group.inc:917
+#: plugins/admin/groups/class_group.inc:919
+#: plugins/admin/groups/class_group.inc:936
+#: plugins/admin/groups/class_group.inc:950
+#: plugins/admin/groups/class_group.inc:957
+#: plugins/admin/groups/class_group.inc:1057
+#: plugins/admin/users/class_userManagement.inc:533
+#: plugins/admin/users/class_userManagement.inc:580
+#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:34
 #: plugins/admin/departments/class_domain.inc:47
 #: plugins/admin/departments/class_domain.inc:49
 #: plugins/admin/departments/class_domain.inc:54
@@ -224,10 +225,10 @@ msgstr "Bewerk algemene eigenschappen"
 #: plugins/admin/acl/class_aclRole.inc:763 plugins/admin/acl/acl-list.xml:49
 #: plugins/admin/acl/paste_role.tpl:4 plugins/admin/acl/acl_role.tpl:7
 #: plugins/addons/propertyEditor/property-list.xml:80
-#: plugins/personal/generic/class_user.inc:1331
-#: plugins/personal/generic/class_user.inc:1349
-#: plugins/personal/generic/class_user.inc:1391
-#: plugins/personal/generic/class_user.inc:1875
+#: plugins/personal/generic/class_user.inc:1315
+#: plugins/personal/generic/class_user.inc:1333
+#: plugins/personal/generic/class_user.inc:1375
+#: plugins/personal/generic/class_user.inc:1860
 #: plugins/personal/posix/trustModeDialog/class_trustModeDialog.inc:45
 #: plugins/personal/posix/trustSelect/trust-list.xml:46
 #: plugins/personal/posix/groupSelect/group-list.xml:33
@@ -247,13 +248,14 @@ msgstr "Naam"
 #: plugins/generic/references/class_reference.inc:75
 #: plugins/generic/references/class_reference.inc:81
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:105
-#: plugins/admin/ogroups/class_ogroup.inc:842
+#: plugins/admin/ogroups/class_ogroup.inc:863
 #: plugins/admin/ogroups/generic.tpl:15
 #: plugins/admin/ogroups/ogroup-list.xml:49
 #: plugins/admin/groups/generic.tpl:24
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:57
 #: plugins/admin/groups/group-list.xml:49
-#: plugins/admin/groups/class_group.inc:1038
+#: plugins/admin/groups/class_group.inc:1058
+#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:42
 #: plugins/admin/departments/dep-list.xml:79
 #: plugins/admin/departments/locality.tpl:19
 #: plugins/admin/departments/generic.tpl:19
@@ -289,8 +291,8 @@ msgid "Parent filter"
 msgstr "Parameters"
 
 #: ihtml/themes/default/userFilterEditor.tpl:40
-#: plugins/personal/generic/class_user.inc:1678
-#: plugins/personal/generic/generic.tpl:607
+#: plugins/personal/generic/class_user.inc:1663
+#: plugins/personal/generic/generic.tpl:604
 msgid "Public visible"
 msgstr "Publiek zichtbaar"
 
@@ -408,9 +410,9 @@ msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:9
 msgid ""
-"Remember that DNS configuration and database entries could not be restored. "
-"For some objects it is only necessary to open and save them again (goFon), "
-"but some entries must be recreated manually (glpi)."
+"Remember that DNS configuration and database entries cannot be restored. For "
+"some objects it is only necessary to open and save them again (goFon), but "
+"some entries must be recreated manually (glpi)."
 msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:12
@@ -429,7 +431,7 @@ msgstr "Object"
 
 #: ihtml/themes/default/snapshotdialog.tpl:29
 #, fuzzy
-msgid "There is no snapshot available that could be restored"
+msgid "There is no snapshot available that cannot be restored"
 msgstr ""
 "Er is geen MySQL extensie beschikbaar. Controleer uw PHP installatie a.u.b."
 
@@ -503,26 +505,19 @@ msgstr "Verander wachtwoord"
 msgid "Your password has been changed successfully."
 msgstr ""
 
-#: ihtml/themes/default/password.tpl:65 html/main.php:220
-#: plugins/admin/users/class_userManagement.inc:391
-#: plugins/personal/password/class_password.inc:126
-#: plugins/personal/password/class_password.inc:129
-#: plugins/personal/password/class_password.inc:132
-#: plugins/personal/password/class_password.inc:135
-#: plugins/personal/password/class_password.inc:138
-#: plugins/personal/password/class_password.inc:141
-#: plugins/personal/password/class_password.inc:144
+#: ihtml/themes/default/password.tpl:65 html/main.php:232
+#: plugins/admin/users/class_userManagement.inc:386
+#: plugins/personal/password/class_password.inc:155
 #: plugins/personal/password/class_password.inc:158
-#: plugins/personal/password/class_password.inc:164
+#: plugins/personal/password/class_password.inc:161
 #, fuzzy
 msgid "Password change"
 msgstr "Het veranderen van het wachtwoord is niet toegestaan"
 
 #: ihtml/themes/default/password.tpl:72
 msgid ""
-"This dialog provides a simple way to change your password. Enter the current "
-"password and the new password (twice) in the fields below and press the "
-"'Change' button."
+"Enter the current password and the new password (twice) in the fields below "
+"and press the 'Change' button."
 msgstr ""
 
 #: ihtml/themes/default/password.tpl:74 plugins/admin/users/user-list.xml:128
@@ -535,7 +530,7 @@ msgstr "Verander wachtwoord"
 msgid "Directory"
 msgstr "Directory"
 
-#: ihtml/themes/default/password.tpl:97 html/password.php:260
+#: ihtml/themes/default/password.tpl:97
 #: plugins/personal/password/password.tpl:18
 #: plugins/personal/password/password.tpl:47
 #: plugins/personal/myaccount/password.tpl:12
@@ -543,8 +538,8 @@ msgstr "Directory"
 msgid "Current password"
 msgstr "Huidig wachtwoord"
 
-#: ihtml/themes/default/password.tpl:103 html/password.php:234
-#: plugins/admin/users/password.tpl:13 plugins/admin/users/password.tpl:65
+#: ihtml/themes/default/password.tpl:103 plugins/admin/users/password.tpl:13
+#: plugins/admin/users/password.tpl:65
 #: plugins/admin/users/class_userManagement.inc:319
 #: plugins/personal/password/password.tpl:24
 #: plugins/personal/password/password.tpl:78
@@ -672,8 +667,7 @@ msgstr ""
 msgid "Session expires in %d!"
 msgstr "De sessie zal niet versleuteld zijn."
 
-#: html/password.php:61 html/main.php:170 include/functions.inc:465
-#: include/.svn/tmp/tempfile.tmp:447 include/.svn/tmp/tempfile.2.tmp:447
+#: html/password.php:61 html/main.php:182 include/functions.inc:465
 #: include/utils/class_xml.inc:43
 #: plugins/admin/departments/class_department.inc:439
 #, fuzzy
@@ -686,27 +680,22 @@ msgid "GOsa configuration %s/%s is not readable. Aborted."
 msgstr "GOsa configuratie %s/gosa.conf is niet leesbaar. Geannuleerd."
 
 #: html/password.php:113 html/index.php:157 html/index.php:233
-#: html/main.php:285
+#: html/main.php:297
 #: include/password-methods/class_password-methods-ssha.inc:51
 #: include/password-methods/class_password-methods-sha.inc:48
 #: include/class_SnapshotHandler.inc:44 include/class_SnapshotHandler.inc:57
 #: include/class_SnapshotHandler.inc:75 include/functions.inc:837
-#: include/functions.inc:3109 include/functions.inc:3152
-#: include/functions.inc:3165 include/.svn/tmp/tempfile.tmp:802
-#: include/.svn/tmp/tempfile.tmp:3027 include/.svn/tmp/tempfile.tmp:3059
-#: include/.svn/tmp/tempfile.tmp:3072 include/.svn/tmp/tempfile.2.tmp:802
-#: include/.svn/tmp/tempfile.2.tmp:3080 include/.svn/tmp/tempfile.2.tmp:3112
-#: include/.svn/tmp/tempfile.2.tmp:3125 include/utils/class_timezone.inc:47
-#: include/class_config.inc:172 include/class_config.inc:695
-#: include/class_config.inc:1155 include/class_config.inc:1168
-#: include/class_config.inc:1186 include/class_pluglist.inc:117
-#: include/class_CopyPasteHandler.inc:119
+#: include/functions.inc:3051 include/functions.inc:3066
+#: include/utils/class_timezone.inc:47 include/class_config.inc:171
+#: include/class_config.inc:710 include/class_config.inc:1171
+#: include/class_config.inc:1184 include/class_config.inc:1202
+#: include/class_pluglist.inc:117 include/class_CopyPasteHandler.inc:119
 #: include/class_CopyPasteHandler.inc:128
 #: include/class_CopyPasteHandler.inc:177
 #: include/class_CopyPasteHandler.inc:186
 #: include/class_CopyPasteHandler.inc:194
 #: plugins/admin/groups/class_group.inc:166
-#: plugins/admin/groups/class_group.inc:1220
+#: plugins/admin/groups/class_group.inc:1240
 #, fuzzy
 msgid "Configuration error"
 msgstr "Configuratie bestand"
@@ -726,74 +715,79 @@ msgstr "Wachtwoord encryptie"
 msgid "Error: Password method not available!"
 msgstr ""
 
-#: html/password.php:231
-#, fuzzy
-msgid "The values for 'New password' and 'Repeated new password' differ!"
-msgstr ""
-"Het nieuwe wachtwoord en het herhaalde wachtwoord komen niet met elkaar "
-"overeen."
-
-#: html/password.php:243
-#, fuzzy
-msgid "The password used as new and current are too similar!"
-msgstr ""
-"Het huidige wachtwoord en het nieuwe wachtwoord lijken te veel op elkaar."
-
-#: html/password.php:249
-#, fuzzy
-msgid "The password used as new is to short!"
-msgstr "Het nieuw opgegeven wachtwoord is te kort."
-
-#: html/password.php:253 plugins/personal/password/class_password.inc:142
-#, fuzzy
-msgid "The password contains possibly problematic Unicode characters!"
-msgstr "Het veld 'Naam' bevat ongeldige karakters."
-
-#: html/password.php:258 plugins/admin/groups/userSelect/user-list.xml:56
+#: html/password.php:242 plugins/generic/dashBoard/Register/register.tpl:49
+#: plugins/admin/groups/userSelect/user-list.xml:56
 #: plugins/admin/groups/singleUserSelect/singleUser-list.xml:56
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:65
 #: plugins/admin/users/template.tpl:32 plugins/admin/users/user-list.xml:65
-#: plugins/personal/generic/class_user.inc:1326
+#: plugins/personal/generic/class_user.inc:1310
+#: plugins/personal/generic/class_user.inc:1328
+#: plugins/personal/generic/class_user.inc:1342
 #: plugins/personal/generic/class_user.inc:1344
-#: plugins/personal/generic/class_user.inc:1358
-#: plugins/personal/generic/class_user.inc:1360
-#: plugins/personal/generic/class_user.inc:1719
-#: plugins/personal/generic/generic.tpl:68
+#: plugins/personal/generic/class_user.inc:1704
+#: plugins/personal/generic/generic.tpl:65
 #: plugins/personal/generic/paste_generic.tpl:16
 msgid "Login"
 msgstr "Inlognaam"
 
-#: html/password.php:274 html/index.php:311
+#: html/password.php:244 plugins/personal/password/class_password.inc:119
+msgid "You need to specify your current password in order to proceed."
+msgstr "U moet uw huidige wachtwoord opgeven om door te kunnen gaan."
+
+#: html/password.php:246 plugins/admin/users/class_userManagement.inc:316
+#: plugins/personal/password/class_password.inc:121
+msgid ""
+"The passwords you've entered as 'New password' and 'Repeated new password' "
+"do not match."
+msgstr ""
+"Het nieuwe wachtwoord en het herhaalde wachtwoord komen niet met elkaar "
+"overeen."
+
+#: html/password.php:248 plugins/personal/password/class_password.inc:123
+msgid "The password you've entered as 'New password' is empty."
+msgstr "Het nieuw ingevoerde wachtwoord is leeg."
+
+#: html/password.php:250 plugins/personal/password/class_password.inc:125
+msgid "The password used as new and current are too similar."
+msgstr ""
+"Het huidige wachtwoord en het nieuwe wachtwoord lijken te veel op elkaar."
+
+#: html/password.php:252 plugins/personal/password/class_password.inc:127
+msgid "The password used as new is to short."
+msgstr "Het nieuw opgegeven wachtwoord is te kort."
+
+#: html/password.php:254 plugins/personal/password/class_password.inc:129
+#, fuzzy
+msgid "The password contains possibly problematic Unicode characters!"
+msgstr "Het veld 'Naam' bevat ongeldige karakters."
+
+#: html/password.php:261 html/index.php:311
 #, fuzzy
 msgid "Please check the username/password combination!"
 msgstr "Controleer a.u.b. de gebruikersnaam/wachtwoord combinatie."
 
-#: html/password.php:278
+#: html/password.php:268
 #, fuzzy
 msgid "You have no permissions to change your password!"
 msgstr "U heeft geen toestemming om uw wachtwoord te veranderen."
 
-#: html/password.php:303
-#, fuzzy, php-format
-msgid "External password changer reported a problem: %s"
-msgstr "Extern wachtwoord verander mechanisme rapporteerde een probleem:"
+#: html/password.php:280 plugins/personal/password/class_password.inc:136
+#, php-format
+msgid "Check-hook reported a problem: %s. Password change canceled!"
+msgstr ""
 
-#: html/password.php:338 include/functions.inc:2663 include/functions.inc:2667
-#: include/functions.inc:2673 include/functions.inc:2697
-#: include/class_tabs.inc:249 include/.svn/tmp/tempfile.tmp:931
-#: include/.svn/tmp/tempfile.tmp:2644 include/.svn/tmp/tempfile.tmp:2648
-#: include/.svn/tmp/tempfile.tmp:2654 include/.svn/tmp/tempfile.2.tmp:931
-#: include/.svn/tmp/tempfile.2.tmp:2697 include/.svn/tmp/tempfile.2.tmp:2701
-#: include/.svn/tmp/tempfile.2.tmp:2707 include/utils/class_xml.inc:37
-#: include/class_configRegistry.inc:670 include/class_configRegistry.inc:685
-#: include/class_configRegistry.inc:700 include/class_configRegistry.inc:715
-#: include/class_configRegistry.inc:731 include/class_configRegistry.inc:736
-#: include/class_configRegistry.inc:756 include/class_configRegistry.inc:761
-#: include/class_configRegistry.inc:778 include/class_configRegistry.inc:783
-#: include/class_configRegistry.inc:801 include/class_configRegistry.inc:806
-#: include/class_configRegistry.inc:822 include/class_configRegistry.inc:837
-#: include/class_configRegistry.inc:852
-#: plugins/admin/groups/class_group.inc:832
+#: html/password.php:315 include/functions.inc:2487 include/functions.inc:2491
+#: include/functions.inc:2497 include/functions.inc:2521
+#: include/class_tabs.inc:262 include/class_jsonRPC.inc:37
+#: include/utils/class_xml.inc:37 include/class_configRegistry.inc:688
+#: include/class_configRegistry.inc:703 include/class_configRegistry.inc:718
+#: include/class_configRegistry.inc:733 include/class_configRegistry.inc:749
+#: include/class_configRegistry.inc:754 include/class_configRegistry.inc:774
+#: include/class_configRegistry.inc:779 include/class_configRegistry.inc:796
+#: include/class_configRegistry.inc:801 include/class_configRegistry.inc:819
+#: include/class_configRegistry.inc:824 include/class_configRegistry.inc:840
+#: include/class_configRegistry.inc:855 include/class_configRegistry.inc:870
+#: plugins/admin/groups/class_group.inc:852
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/personal/posix/class_posixAccount.inc:651
 #: plugins/personal/posix/class_posixAccount.inc:774 setup/setup_checks.tpl:27
@@ -801,11 +795,11 @@ msgstr "Extern wachtwoord verander mechanisme rapporteerde een probleem:"
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: html/password.php:338
+#: html/password.php:315
 msgid "Session will not be encrypted."
 msgstr "De sessie zal niet versleuteld zijn."
 
-#: html/password.php:340
+#: html/password.php:317
 msgid "Enter SSL session"
 msgstr "Gebruik een SSL sessie"
 
@@ -848,23 +842,14 @@ msgstr ""
 
 #: html/index.php:241 html/index.php:245 include/class_management.inc:508
 #: include/class_management.inc:669
-#: include/password-methods/class_password-methods.inc:277
-#: include/class_listing.inc:536 include/functions.inc:3137
-#: include/functions.inc:3443 include/functions.inc:3457
-#: include/functions.inc:3487 include/functions.inc:3495
-#: include/functions.inc:3507 include/functions.inc:3511
-#: include/functions.inc:3526 include/functions.inc:3535
-#: include/functions.inc:3595 include/class_tabs.inc:56
-#: include/.svn/tmp/tempfile.tmp:3353 include/.svn/tmp/tempfile.tmp:3367
-#: include/.svn/tmp/tempfile.tmp:3397 include/.svn/tmp/tempfile.tmp:3405
-#: include/.svn/tmp/tempfile.tmp:3417 include/.svn/tmp/tempfile.tmp:3421
-#: include/.svn/tmp/tempfile.tmp:3436 include/.svn/tmp/tempfile.tmp:3445
-#: include/.svn/tmp/tempfile.tmp:3505 include/.svn/tmp/tempfile.2.tmp:3406
-#: include/.svn/tmp/tempfile.2.tmp:3420 include/.svn/tmp/tempfile.2.tmp:3450
-#: include/.svn/tmp/tempfile.2.tmp:3458 include/.svn/tmp/tempfile.2.tmp:3470
-#: include/.svn/tmp/tempfile.2.tmp:3474 include/.svn/tmp/tempfile.2.tmp:3489
-#: include/.svn/tmp/tempfile.2.tmp:3498 include/.svn/tmp/tempfile.2.tmp:3558
-#: include/class_plugin.inc:1647 include/class_plugin.inc:1654
+#: include/password-methods/class_password-methods.inc:339
+#: include/class_listing.inc:536 include/functions.inc:3036
+#: include/functions.inc:3344 include/functions.inc:3358
+#: include/functions.inc:3388 include/functions.inc:3396
+#: include/functions.inc:3408 include/functions.inc:3412
+#: include/functions.inc:3427 include/functions.inc:3436
+#: include/functions.inc:3496 include/class_tabs.inc:56
+#: include/class_plugin.inc:1696 include/class_plugin.inc:1703
 #: include/utils/class_xml.inc:40 include/utils/class_msgPool.inc:137
 #: include/utils/class_msgPool.inc:149 include/utils/class_msgPool.inc:167
 #: include/utils/class_msgPool.inc:440 include/utils/class_msgPool.inc:461
@@ -878,13 +863,21 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:193
 #: include/class_CopyPasteHandler.inc:273
 #: include/class_CopyPasteHandler.inc:377 include/class_msg_dialog.inc:99
-#: plugins/admin/ogroups/class_ogroup.inc:400
+#: plugins/generic/statistics/chartClasses/class_categoryActionOverTime.inc:43
+#: plugins/generic/statistics/chartClasses/class_categoryActionOverTime.inc:49
+#: plugins/generic/statistics/chartClasses/class_categoryActionOverTime.inc:96
+#: plugins/generic/statistics/class_statistics.inc:133
+#: plugins/generic/statistics/class_statistics.inc:229
+#: plugins/generic/statistics/class_statistics.inc:244
+#: plugins/admin/ogroups/class_ogroup.inc:402
 #: plugins/admin/groups/class_group.inc:463
 #: plugins/admin/groups/class_group.inc:469
-#: plugins/admin/groups/class_group.inc:637
-#: plugins/admin/groups/class_group.inc:733
-#: plugins/admin/groups/class_group.inc:738
-#: plugins/admin/groups/class_group.inc:1076
+#: plugins/admin/groups/class_group.inc:657
+#: plugins/admin/groups/class_group.inc:753
+#: plugins/admin/groups/class_group.inc:758
+#: plugins/admin/groups/class_group.inc:1096
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:42
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:94
 #: plugins/admin/departments/class_department.inc:317
 #: plugins/admin/acl/class_aclRole.inc:670
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:203
@@ -892,12 +885,14 @@ msgstr ""
 #: plugins/personal/generic/class_user.inc:297
 #: plugins/personal/generic/class_user.inc:428
 #: plugins/personal/generic/class_user.inc:521
-#: plugins/personal/generic/class_user.inc:814
-#: plugins/personal/generic/class_user.inc:1203
-#: plugins/personal/generic/class_user.inc:1210
-#: plugins/personal/generic/class_user.inc:1228
-#: plugins/personal/generic/class_user.inc:1498
-#: plugins/personal/generic/class_user.inc:1824
+#: plugins/personal/generic/class_user.inc:815
+#: plugins/personal/generic/class_user.inc:1049
+#: plugins/personal/generic/class_user.inc:1176
+#: plugins/personal/generic/class_user.inc:1183
+#: plugins/personal/generic/class_user.inc:1201
+#: plugins/personal/generic/class_user.inc:1482
+#: plugins/personal/generic/class_user.inc:1809
+#: plugins/personal/password/class_password.inc:210
 #: setup/class_setupStep_Migrate.inc:450 setup/setup_checks.tpl:25
 #: setup/setup_checks.tpl:66
 #, php-format
@@ -925,24 +920,14 @@ msgstr ""
 #: include/functions.inc:537 include/functions.inc:583
 #: include/functions.inc:852 include/functions.inc:901
 #: include/functions.inc:958 include/functions.inc:1008
-#: include/functions.inc:3088 include/functions.inc:3369
-#: include/.svn/tmp/tempfile.tmp:476 include/.svn/tmp/tempfile.tmp:511
-#: include/.svn/tmp/tempfile.tmp:519 include/.svn/tmp/tempfile.tmp:565
-#: include/.svn/tmp/tempfile.tmp:817 include/.svn/tmp/tempfile.tmp:866
-#: include/.svn/tmp/tempfile.tmp:923 include/.svn/tmp/tempfile.tmp:976
-#: include/.svn/tmp/tempfile.tmp:3006 include/.svn/tmp/tempfile.tmp:3279
-#: include/.svn/tmp/tempfile.2.tmp:476 include/.svn/tmp/tempfile.2.tmp:511
-#: include/.svn/tmp/tempfile.2.tmp:519 include/.svn/tmp/tempfile.2.tmp:565
-#: include/.svn/tmp/tempfile.2.tmp:817 include/.svn/tmp/tempfile.2.tmp:866
-#: include/.svn/tmp/tempfile.2.tmp:923 include/.svn/tmp/tempfile.2.tmp:976
-#: include/.svn/tmp/tempfile.2.tmp:3059 include/.svn/tmp/tempfile.2.tmp:3332
-#: include/class_userFilter.inc:275 include/class_ldap.inc:775
-#: include/class_ldap.inc:1192 include/class_config.inc:354
+#: include/functions.inc:3270 include/class_userFilter.inc:275
+#: include/class_ldap.inc:847 include/class_ldap.inc:1307
+#: include/class_config.inc:367
 #: plugins/generic/references/class_reference.inc:97
-#: plugins/admin/ogroups/class_ogroup.inc:749
-#: plugins/admin/ogroups/class_ogroup.inc:766
-#: plugins/admin/groups/class_group.inc:580
-#: plugins/admin/groups/class_group.inc:856
+#: plugins/admin/ogroups/class_ogroup.inc:758
+#: plugins/admin/ogroups/class_ogroup.inc:775
+#: plugins/admin/groups/class_group.inc:600
+#: plugins/admin/groups/class_group.inc:876
 #: plugins/admin/departments/class_department.inc:285
 #: plugins/admin/departments/class_department.inc:482
 #: plugins/admin/departments/class_department.inc:759
@@ -950,10 +935,10 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:602
 #: plugins/admin/acl/class_aclRole.inc:642
 #: plugins/admin/acl/class_aclRole.inc:656
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:191
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:256
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:191
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:256
 #: plugins/personal/generic/class_user.inc:729
-#: plugins/personal/generic/class_user.inc:1125
+#: plugins/personal/generic/class_user.inc:1098
 #: plugins/personal/posix/trustModeDialog/class_trustModeDialog.inc:253
 #: plugins/personal/posix/class_posixAccount.inc:529
 #: plugins/personal/posix/class_posixAccount.inc:791
@@ -992,60 +977,61 @@ msgstr ""
 msgid "Smarty"
 msgstr "Samenvatting"
 
-#: html/main.php:171
+#: html/main.php:183
 #, php-format
 msgid "Cannot locate file %s - please run %s to fix this"
 msgstr ""
 
-#: html/main.php:190
+#: html/main.php:202
 #, fuzzy
 msgid "PHP configuration"
 msgstr "FAX database"
 
-#: html/main.php:191
+#: html/main.php:203
 msgid ""
-"FATAL: Register globals is active. Please fix this in order to continue."
+"Fatal error: Register globals is active. Please fix this in order to "
+"continue."
 msgstr ""
 
-#: html/main.php:220
+#: html/main.php:232
 #, fuzzy
 msgid "Your password is about to expire, please change your password!"
 msgstr "Uw wachtwoord zal spoedig verlopen! Kies a.u.b. een nieuw wachtwoord."
 
-#: html/main.php:285
+#: html/main.php:297
 msgid "Running out of memory!"
 msgstr ""
 
-#: html/main.php:345
+#: html/main.php:357
 #, php-format
 msgid "You're logged in as %s"
 msgstr ""
 
-#: html/main.php:348
+#: html/main.php:360
 #, fuzzy
 msgid "ACLs are disabled"
 msgstr "gedeactiveerd"
 
-#: html/main.php:398
+#: html/main.php:410
 #, fuzzy
 msgid "Plug-in"
 msgstr "in"
 
-#: html/main.php:399
+#: html/main.php:411
 #, fuzzy, php-format
-msgid "FATAL: Cannot find any plugin definitions for plugin %s!"
+msgid "Fatal error: Cannot find any plugin definitions for plugin %s!"
 msgstr "FATAAL: Kan geen enkele module defenities vinden voor module '%s'!"
 
-#: html/main.php:415
+#: html/main.php:427
 #, fuzzy
 msgid "Configuration Error"
 msgstr "Configuratie bestand"
 
-#: html/main.php:416
+#: html/main.php:428
 #, php-format
 msgid ""
-"FATAL: not all POST variables have been transfered by PHP - please inform "
-"your administrator!"
+"Fatal error: not all POST variables have been transfered by PHP - please "
+"inform your administrator!"
 msgstr ""
 
 #: html/helpviewer.php:64
@@ -1081,14 +1067,14 @@ msgstr "niet geconfigureerd"
 #: include/class_management.inc:534 include/class_management.inc:549
 #: include/class_management.inc:586 include/class_management.inc:600
 #: plugins/admin/users/class_userManagement.inc:228
-#: plugins/admin/users/class_userManagement.inc:744
+#: plugins/admin/users/class_userManagement.inc:739
 #, fuzzy
 msgid "Permission"
 msgstr "Rechten"
 
 #: include/class_management.inc:405
-#: plugins/admin/users/class_userManagement.inc:702
-#: plugins/admin/users/class_userManagement.inc:706
+#: plugins/admin/users/class_userManagement.inc:697
+#: plugins/admin/users/class_userManagement.inc:701
 #: plugins/admin/acl/class_aclManagement.inc:98
 #, fuzzy
 msgid "Permission error"
@@ -1115,25 +1101,18 @@ msgstr "U heeft geen toestemming om uw wachtwoord te veranderen!"
 #: include/class_session.inc:101 include/class_session.inc:127
 #: include/functions.inc:623 include/functions.inc:827
 #: include/functions.inc:945 include/functions.inc:1340
-#: include/functions.inc:2338 include/functions.inc:2372
-#: include/functions.inc:2392 include/.svn/tmp/tempfile.tmp:605
-#: include/.svn/tmp/tempfile.tmp:792 include/.svn/tmp/tempfile.tmp:910
-#: include/.svn/tmp/tempfile.tmp:1308 include/.svn/tmp/tempfile.tmp:2372
-#: include/.svn/tmp/tempfile.tmp:2406 include/.svn/tmp/tempfile.tmp:2426
-#: include/.svn/tmp/tempfile.2.tmp:605 include/.svn/tmp/tempfile.2.tmp:792
-#: include/.svn/tmp/tempfile.2.tmp:910 include/.svn/tmp/tempfile.2.tmp:1308
-#: include/.svn/tmp/tempfile.2.tmp:2372 include/.svn/tmp/tempfile.2.tmp:2406
-#: include/.svn/tmp/tempfile.2.tmp:2426 include/class_ldap.inc:712
-#: include/class_ldap.inc:763 include/class_log.inc:87
+#: include/functions.inc:2166 include/functions.inc:2196
+#: include/functions.inc:2216 include/class_ldap.inc:784
+#: include/class_ldap.inc:835 include/class_log.inc:87
 #: include/class_CopyPasteHandler.inc:160
 #: include/class_CopyPasteHandler.inc:274
-#: plugins/personal/myaccount/main.inc:52
+#: plugins/personal/myaccount/main.inc:49
 #, fuzzy
 msgid "Internal error"
 msgstr "Terminal server"
 
 #: include/class_management.inc:660 include/class_management.inc:744
-#: plugins/personal/myaccount/main.inc:53
+#: plugins/personal/myaccount/main.inc:50
 #, php-format
 msgid ""
 "Cannot instantiate tabbed-plug-in, the base plugin (%s) is not available!"
@@ -1146,12 +1125,13 @@ msgid ""
 "instance!"
 msgstr ""
 
-#: include/class_releaseSelector.inc:187 include/class_listing.inc:1050
-#: include/class_listing.inc:1052 include/class_baseSelector.inc:186
+#: include/class_releaseSelector.inc:214 include/class_listing.inc:1057
+#: include/class_listing.inc:1059 include/class_baseSelector.inc:188
 msgid "Root"
 msgstr "Basis"
 
-#: include/class_releaseSelector.inc:235 include/class_baseSelector.inc:233
+#: include/class_releaseSelector.inc:262 include/class_ItemSelector.inc:289
+#: include/class_baseSelector.inc:235
 msgid "Submit"
 msgstr "Verwerk"
 
@@ -1170,7 +1150,7 @@ msgstr ""
 msgid "Welcome to GOsa"
 msgstr "Welkom bij het GOsa installatie programma!"
 
-#: include/password-methods/class_password-methods.inc:277
+#: include/password-methods/class_password-methods.inc:339
 msgid "Cannot find a suitable password method for the current hash!"
 msgstr ""
 
@@ -1244,14 +1224,14 @@ msgstr ""
 #: include/class_acl.inc:237
 #: plugins/generic/references/class_aclResolver.inc:173
 #: plugins/admin/users/class_userManagement.inc:25
-#: plugins/personal/generic/class_user.inc:1690
+#: plugins/personal/generic/class_user.inc:1675
 #: setup/class_setupStep_Migrate.inc:297
 msgid "Users"
 msgstr "Gebruikers"
 
 #: include/class_acl.inc:237
 #: plugins/generic/references/class_aclResolver.inc:165
-#: plugins/admin/groups/class_group.inc:1021
+#: plugins/admin/groups/class_group.inc:1041
 #: plugins/admin/groups/class_groupManagement.inc:25
 #: setup/class_setupStep_Migrate.inc:300
 msgid "Groups"
@@ -1267,7 +1247,7 @@ msgstr "Actie"
 msgid "Used"
 msgstr "Gebruiker"
 
-#: include/class_acl.inc:278 plugins/admin/ogroups/class_ogroup.inc:844
+#: include/class_acl.inc:278 plugins/admin/ogroups/class_ogroup.inc:865
 #, fuzzy
 msgid "Member"
 msgstr "Groepsleden"
@@ -1278,7 +1258,7 @@ msgstr "Groepsleden"
 msgid "Permissions"
 msgstr "Rechten"
 
-#: include/class_acl.inc:278 include/php_setup.inc:185
+#: include/class_acl.inc:278 include/php_setup.inc:191
 #: plugins/admin/acl/class_aclRole.inc:182
 msgid "Type"
 msgstr "Type"
@@ -1380,7 +1360,7 @@ msgid "No members"
 msgstr "Groepsleden"
 
 #: include/class_acl.inc:1284 include/class_acl.inc:1285
-#: include/class_acl.inc:1291 include/class_tabs.inc:382
+#: include/class_acl.inc:1291 include/class_tabs.inc:395
 #: plugins/admin/acl/tabs_acl.inc:28 plugins/admin/acl/class_aclRole.inc:770
 #: plugins/admin/acl/acl-list.xml:15
 msgid "ACL"
@@ -1407,11 +1387,11 @@ msgstr "Nieuw profiel"
 msgid "Requested channel does not exist!"
 msgstr "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
 
-#: include/class_listing.inc:257 include/class_sortableListing.inc:261
+#: include/class_listing.inc:257 include/class_sortableListing.inc:274
 msgid "Sort ascending"
 msgstr ""
 
-#: include/class_listing.inc:257 include/class_sortableListing.inc:261
+#: include/class_listing.inc:257 include/class_sortableListing.inc:274
 msgid "Sort descending"
 msgstr ""
 
@@ -1425,77 +1405,78 @@ msgstr "Selecteer"
 msgid "created by"
 msgstr "Aanmaken"
 
-#: include/class_listing.inc:1057 include/class_listing.inc:1059
+#: include/class_listing.inc:1064 include/class_listing.inc:1066
 msgid "Go to preceding level"
 msgstr ""
 
-#: include/class_listing.inc:1065 include/class_listing.inc:1067
+#: include/class_listing.inc:1072 include/class_listing.inc:1074
 msgid "Go to current users level"
 msgstr ""
 
-#: include/class_listing.inc:1072
+#: include/class_listing.inc:1079
 msgid "Reload list"
 msgstr "Lijst herladen"
 
-#: include/class_listing.inc:1176 plugins/admin/ogroups/ogroup-list.xml:62
+#: include/class_listing.inc:1183 plugins/admin/ogroups/ogroup-list.xml:62
 #: plugins/admin/groups/group-list.xml:62 plugins/admin/users/user-list.xml:78
+#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:50
 #: plugins/admin/departments/dep-list.xml:87 plugins/admin/acl/acl-list.xml:65
 #: plugins/addons/propertyEditor/property-list.xml:96
 msgid "Actions"
 msgstr "Acties"
 
-#: include/class_listing.inc:1446
+#: include/class_listing.inc:1453
 #, fuzzy
 msgid "Copy"
 msgstr "kopieer"
 
-#: include/class_listing.inc:1452
+#: include/class_listing.inc:1459
 #, fuzzy
 msgid "Cut"
 msgstr "knippen"
 
-#: include/class_listing.inc:1460 include/class_listing.inc:1462
+#: include/class_listing.inc:1467 include/class_listing.inc:1469
 #: include/class_CopyPasteHandler.inc:571
 msgid "Paste"
 msgstr "Plakken"
 
-#: include/class_listing.inc:1485
+#: include/class_listing.inc:1492
 msgid "Cut this entry"
 msgstr "Deze invoer knippen"
 
-#: include/class_listing.inc:1494
+#: include/class_listing.inc:1501
 msgid "Copy this entry"
 msgstr "Deze invoer kopieren"
 
-#: include/class_listing.inc:1526 include/class_listing.inc:1528
+#: include/class_listing.inc:1533 include/class_listing.inc:1535
 #, fuzzy
 msgid "Restore snapshots"
 msgstr "Nagios account aanmaken"
 
-#: include/class_listing.inc:1542
+#: include/class_listing.inc:1549
 #, fuzzy
 msgid "Export list"
 msgstr "Exporteer"
 
-#: include/class_listing.inc:1576 include/class_SnapShotDialog.inc:142
+#: include/class_listing.inc:1583 include/class_SnapShotDialog.inc:142
 msgid "Restore snapshot"
 msgstr ""
 
-#: include/class_listing.inc:1584
+#: include/class_listing.inc:1591
 #, fuzzy
 msgid "Create new snapshot for this object"
 msgstr "Nieuw FAI object aanmaken"
 
-#: include/class_sortableListing.inc:221
+#: include/class_sortableListing.inc:234
 #, fuzzy
 msgid "Sortable list"
 msgstr "Exporteer"
 
-#: include/class_sortableListing.inc:226
+#: include/class_sortableListing.inc:239
 msgid "Edit this entry"
 msgstr "Bewerk deze invoer"
 
-#: include/class_sortableListing.inc:231
+#: include/class_sortableListing.inc:244
 msgid "Delete this entry"
 msgstr "Verwijder deze invoer"
 
@@ -1544,9 +1525,7 @@ msgstr "De hoeveelheidslimiet van %d invoeren is overschreden!"
 msgid "Set the size limit to %s"
 msgstr ""
 
-#: include/functions.inc:1281 include/.svn/tmp/tempfile.tmp:1249
-#: include/.svn/tmp/tempfile.2.tmp:1249
-#: plugins/personal/generic/generic.tpl:221
+#: include/functions.inc:1281 plugins/personal/generic/generic.tpl:218
 msgid "Configure"
 msgstr "Instellen"
 
@@ -1555,13 +1534,11 @@ msgstr "Instellen"
 msgid "list is incomplete"
 msgstr "onvolledig"
 
-#: include/functions.inc:1634 include/.svn/tmp/tempfile.tmp:1644
-#: include/.svn/tmp/tempfile.2.tmp:1644
+#: include/functions.inc:1634
 msgid "Continue anyway"
 msgstr "Toch doorgaan"
 
-#: include/functions.inc:1636 include/.svn/tmp/tempfile.tmp:1646
-#: include/.svn/tmp/tempfile.2.tmp:1646
+#: include/functions.inc:1636
 msgid "Edit anyway"
 msgstr "Alsnog bewerken"
 
@@ -1569,46 +1546,41 @@ msgstr "Alsnog bewerken"
 msgid "These entries are currently locked:"
 msgstr ""
 
-#: include/functions.inc:1879 include/.svn/tmp/tempfile.tmp:1888
-#: include/.svn/tmp/tempfile.2.tmp:1888
+#: include/functions.inc:1880
 msgid "Entries per page"
 msgstr "Regels per pagina"
 
-#: include/functions.inc:2230
+#: include/functions.inc:2058
 #, fuzzy, php-format
 msgid "GOsa %s"
 msgstr "Log DB gebruiker"
 
-#: include/functions.inc:2237
+#: include/functions.inc:2065
 #, fuzzy, php-format
 msgid "GOsa %s snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
 
-#: include/functions.inc:2242 include/.svn/tmp/tempfile.tmp:2275
-#: include/.svn/tmp/tempfile.2.tmp:2275
+#: include/functions.inc:2070
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
 
-#: include/functions.inc:2338
+#: include/functions.inc:2166
 #, php-format
 msgid "File %s cannot be deleted!"
 msgstr ""
 
-#: include/functions.inc:2372 include/functions.inc:2392
+#: include/functions.inc:2196 include/functions.inc:2216
 #, fuzzy
 msgid "Cannot write revision file!"
 msgstr "Kan bestand '%s' niet aanmaken."
 
-#: include/functions.inc:2663 include/functions.inc:2667
-#: include/functions.inc:2673 include/.svn/tmp/tempfile.tmp:2644
-#: include/.svn/tmp/tempfile.tmp:2648 include/.svn/tmp/tempfile.tmp:2654
-#: include/.svn/tmp/tempfile.2.tmp:2697 include/.svn/tmp/tempfile.2.tmp:2701
-#: include/.svn/tmp/tempfile.2.tmp:2707
+#: include/functions.inc:2487 include/functions.inc:2491
+#: include/functions.inc:2497
 msgid "'baseIdHook' is not available. Using default base!"
 msgstr ""
 
-#: include/functions.inc:2697
+#: include/functions.inc:2521
 #, fuzzy
 msgid ""
 "Cannot read schema information from LDAP. Schema validation is not possible!"
@@ -1616,174 +1588,169 @@ msgstr ""
 "Kan de schema informatie niet ophalen van de server. Schema controle is "
 "onmogelijk!"
 
-#: include/functions.inc:2723
+#: include/functions.inc:2547
 msgid "This class is used to make users appear in GOsa."
 msgstr ""
 
-#: include/functions.inc:2730
+#: include/functions.inc:2554
 msgid ""
 "This class is used to lock entries in order to prevent multiple edits at a "
 "time."
 msgstr ""
 
-#: include/functions.inc:2775
+#: include/functions.inc:2599
 #, fuzzy, php-format
 msgid "Required object class %s is missing!"
 msgstr "Toon FAI sjabloon objecten"
 
-#: include/functions.inc:2778
+#: include/functions.inc:2602
 #, php-format
 msgid "Optional object class %s is missing!"
 msgstr ""
 
-#: include/functions.inc:2783
+#: include/functions.inc:2607
 #, fuzzy, php-format
 msgid "Wrong version of required object class %s (!=%s) detected!"
 msgstr "Toon FAI sjabloon objecten"
 
-#: include/functions.inc:2786
+#: include/functions.inc:2610
 #, fuzzy, php-format
 msgid "Class available"
 msgstr "Bestand is beschikbaar"
 
-#: include/functions.inc:2808
+#: include/functions.inc:2632
 msgid ""
 "RFC2307bis schema is enabled, but the current LDAP configuration does not "
 "support it!"
 msgstr ""
 
-#: include/functions.inc:2809
+#: include/functions.inc:2633
 msgid ""
 "To use RFC2307bis groups, the objectClass 'posixGroup' must be AUXILIARY."
 msgstr ""
 
-#: include/functions.inc:2813
+#: include/functions.inc:2637
 msgid ""
 "RFC2307bis schema is disabled, but the current LDAP configuration supports "
 "it!"
 msgstr ""
 
-#: include/functions.inc:2814
+#: include/functions.inc:2638
 msgid "To correct this, the objectClass 'posixGroup' must be STRUCTURAL."
 msgstr ""
 
-#: include/functions.inc:2839 include/.svn/tmp/tempfile.tmp:2820
-#: include/.svn/tmp/tempfile.2.tmp:2873
+#: include/functions.inc:2663
 msgid "German"
 msgstr "Duits"
 
-#: include/functions.inc:2840 include/.svn/tmp/tempfile.tmp:2821
-#: include/.svn/tmp/tempfile.2.tmp:2874
+#: include/functions.inc:2664
 msgid "French"
 msgstr "Frans"
 
-#: include/functions.inc:2841 include/.svn/tmp/tempfile.tmp:2822
-#: include/.svn/tmp/tempfile.2.tmp:2875
+#: include/functions.inc:2665
 msgid "Italian"
 msgstr "Italiaans"
 
-#: include/functions.inc:2842 include/.svn/tmp/tempfile.tmp:2823
-#: include/.svn/tmp/tempfile.2.tmp:2876
+#: include/functions.inc:2666
 msgid "Spanish"
 msgstr "Spaans"
 
-#: include/functions.inc:2843 include/.svn/tmp/tempfile.tmp:2824
-#: include/.svn/tmp/tempfile.2.tmp:2877
+#: include/functions.inc:2667
 msgid "English"
 msgstr "Engels"
 
-#: include/functions.inc:2844 include/.svn/tmp/tempfile.tmp:2825
-#: include/.svn/tmp/tempfile.2.tmp:2878
+#: include/functions.inc:2668
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: include/functions.inc:2845 include/.svn/tmp/tempfile.tmp:2826
-#: include/.svn/tmp/tempfile.2.tmp:2879
+#: include/functions.inc:2669
 msgid "Polish"
 msgstr "Pools"
 
-#: include/functions.inc:2846 include/.svn/tmp/tempfile.tmp:2827
-#: include/.svn/tmp/tempfile.2.tmp:2880
+#: include/functions.inc:2670
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: include/functions.inc:2848 include/.svn/tmp/tempfile.tmp:2829
-#: include/.svn/tmp/tempfile.2.tmp:2882
+#: include/functions.inc:2672
 #, fuzzy
 msgid "Chinese"
 msgstr "Chipset"
 
-#: include/functions.inc:2849 include/.svn/tmp/tempfile.tmp:2830
-#: include/.svn/tmp/tempfile.2.tmp:2883
+#: include/functions.inc:2673
 #, fuzzy
 msgid "Vietnamese"
 msgstr "Naam"
 
-#: include/functions.inc:2850 include/.svn/tmp/tempfile.tmp:2831
-#: include/.svn/tmp/tempfile.2.tmp:2884
+#: include/functions.inc:2674
 msgid "Russian"
 msgstr "Russisch"
 
-#: include/functions.inc:3108
-#, fuzzy, php-format
-msgid ""
-"Command %s specified as post modify action for plugin %s does not exist!"
-msgstr ""
-"Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
-"bestaat niet."
+#: include/functions.inc:2867
+#, fuzzy
+msgid "Cannot detect password hash!"
+msgstr "De opgegeven database kon niet geselecteerd worden!"
 
-#: include/functions.inc:3152
+#: include/functions.inc:2908 include/functions.inc:2983
+#, php-format
+msgid "Pre-event hook reported a problem: %s. Password change canceled!"
+msgstr ""
+
+#: include/functions.inc:2939
+#, fuzzy
+msgid "Password change failed!"
+msgstr "Het veranderen van het wachtwoord is niet toegestaan"
+
+#: include/functions.inc:2947
+#, php-format
+msgid "Post-event hook reported a problem: %s. Password change canceled!"
+msgstr ""
+
+#: include/functions.inc:3051
 msgid "Cannot generate SAMBA hash!"
 msgstr ""
 
-#: include/functions.inc:3165
+#: include/functions.inc:3066
 #, php-format
 msgid "Generating SAMBA hash by running %s failed: check %s!"
 msgstr ""
 
-#: include/functions.inc:3443 include/functions.inc:3457
-#: include/functions.inc:3495 include/functions.inc:3507
-#: include/functions.inc:3511 include/functions.inc:3526
-#: include/functions.inc:3535
+#: include/functions.inc:3344 include/functions.inc:3358
+#: include/functions.inc:3396 include/functions.inc:3408
+#: include/functions.inc:3412 include/functions.inc:3427
+#: include/functions.inc:3436
 #, fuzzy
 msgid "Cannot allocate free ID:"
 msgstr ""
 "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
 
-#: include/functions.inc:3443 include/.svn/tmp/tempfile.tmp:3353
-#: include/.svn/tmp/tempfile.2.tmp:3406
+#: include/functions.inc:3344
 msgid "unknown idAllocation method!"
 msgstr ""
 
-#: include/functions.inc:3457 include/.svn/tmp/tempfile.tmp:3367
-#: include/.svn/tmp/tempfile.2.tmp:3420
+#: include/functions.inc:3358
 #, php-format
 msgid "%sPoolMin >= %sPoolMax!"
 msgstr ""
 
-#: include/functions.inc:3487 include/.svn/tmp/tempfile.tmp:3397
-#: include/.svn/tmp/tempfile.2.tmp:3450
+#: include/functions.inc:3388
 #, fuzzy
 msgid "Cannot create sambaUnixIdPool entry!"
 msgstr "Ga naar basis afdelingen"
 
-#: include/functions.inc:3495 include/.svn/tmp/tempfile.tmp:3405
-#: include/.svn/tmp/tempfile.2.tmp:3458
+#: include/functions.inc:3396
 msgid "sambaUnixIdPool is not unique!"
 msgstr ""
 
-#: include/functions.inc:3507 include/functions.inc:3511
-#: include/.svn/tmp/tempfile.tmp:3417 include/.svn/tmp/tempfile.tmp:3421
-#: include/.svn/tmp/tempfile.2.tmp:3470 include/.svn/tmp/tempfile.2.tmp:3474
+#: include/functions.inc:3408 include/functions.inc:3412
 #, fuzzy
 msgid "no ID available!"
 msgstr "Bestand is beschikbaar"
 
-#: include/functions.inc:3535
+#: include/functions.inc:3436
 msgid "maximum number of tries exceeded!"
 msgstr ""
 
-#: include/functions.inc:3595
+#: include/functions.inc:3496
 #, fuzzy
 msgid "Cannot allocate free ID!"
 msgstr ""
@@ -1796,12 +1763,12 @@ msgstr ""
 "Kan niet verbinden met de opgegeven database. Controleer uw GLPI "
 "configuratie a.u.b."
 
-#: include/class_tabs.inc:249
+#: include/class_tabs.inc:262
 #, fuzzy, php-format
 msgid "Delete process has been canceled by plugin %s: %s"
 msgstr "Het verwijder proces is geannuleerd door plugin '%s': %s"
 
-#: include/class_tabs.inc:387
+#: include/class_tabs.inc:400
 msgid "References"
 msgstr "Referenties"
 
@@ -1841,215 +1808,20 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#: include/.svn/tmp/tempfile.tmp:127 include/.svn/tmp/tempfile.2.tmp:127
-#, php-format
-msgid "Fatal error: no class locations defined - please run '%s' to fix this"
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:134 include/.svn/tmp/tempfile.2.tmp:134
-#, php-format
+#: include/class_GOsaRegistration.inc:127
 msgid ""
-"Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
+"UNIX-timestamp pointing to the date GOsa will ask for a registration again "
+"(-1 to disable)"
 msgstr ""
 
-#: include/.svn/tmp/tempfile.tmp:448 include/.svn/tmp/tempfile.2.tmp:448
+#: include/class_jsonRPC.inc:38
 #, fuzzy, php-format
-msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
-msgstr ""
-"FATAAL: Fout bij het verbinden met de LDAP server. De server meldt: '%s'."
+msgid "The RPC connection (%s) specified for %s:%s is invalid: %s"
+msgstr "De opgegeven 'UID' waarde is niet correct."
 
-#: include/.svn/tmp/tempfile.tmp:519 include/.svn/tmp/tempfile.2.tmp:519
-#, fuzzy
-msgid "Username / UID is not unique inside the LDAP tree!"
-msgstr "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
-
-#: include/.svn/tmp/tempfile.tmp:605 include/.svn/tmp/tempfile.2.tmp:605
-#, fuzzy
-msgid ""
-"Username / UID is not unique inside the LDAP tree. Please contact your "
-"Administrator."
-msgstr "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
-
-#: include/.svn/tmp/tempfile.tmp:792 include/.svn/tmp/tempfile.tmp:910
-#: include/.svn/tmp/tempfile.2.tmp:792 include/.svn/tmp/tempfile.2.tmp:910
-msgid "Error while adding a lock. Contact the developers!"
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:802 include/.svn/tmp/tempfile.2.tmp:802
+#: include/class_jsonRPC.inc:331
 #, fuzzy, php-format
-msgid ""
-"Cannot create locking information in LDAP tree. Please contact your "
-"administrator!"
-msgstr ""
-"Kan de blokkade informatie niet ophalen uit de LDAP database. Controleer a.u."
-"b. de 'config' regel in gosa.conf!"
-
-#: include/.svn/tmp/tempfile.tmp:802 include/.svn/tmp/tempfile.2.tmp:802
-#, fuzzy, php-format
-msgid "LDAP server returned: %s"
-msgstr "LDAP server"
-
-#: include/.svn/tmp/tempfile.tmp:931 include/.svn/tmp/tempfile.2.tmp:931
-#, fuzzy
-msgid ""
-"Found multiple locks for object to be locked. This should not happen - "
-"cleaning up multiple references."
-msgstr ""
-"Er zijn meerdere blokkades voor het te blokkeren object gevonden. Dat zou "
-"niet mogelijk moeten zijn. Meervoudige verwijzingen worden opgeschoond."
-
-#: include/.svn/tmp/tempfile.tmp:1235 include/.svn/tmp/tempfile.2.tmp:1235
-#, fuzzy, php-format
-msgid "The size limit of %d entries is exceed!"
-msgstr "De hoeveelheidslimiet van %d invoeren is overschreden!"
-
-#: include/.svn/tmp/tempfile.tmp:1237 include/.svn/tmp/tempfile.2.tmp:1237
-#, php-format
-msgid ""
-"Set the new size limit to %s and show me this message if the limit still "
-"exceeds"
-msgstr ""
-"Stel de nieuwe hoeveelheidslimiet in op %s en toon me dit bericht indien de "
-"limiet nog steeds overschreden wordt."
-
-#: include/.svn/tmp/tempfile.tmp:1254 include/.svn/tmp/tempfile.2.tmp:1254
-#, fuzzy
-msgid "incomplete"
-msgstr "onvolledig"
-
-#: include/.svn/tmp/tempfile.tmp:1648 include/.svn/tmp/tempfile.2.tmp:1648
-#, fuzzy, php-format
-msgid "You're going to edit the LDAP entry/entries %s"
-msgstr "U staat op het punt de invoer '%s' te kopieren."
-
-#: include/.svn/tmp/tempfile.tmp:1917 include/.svn/tmp/tempfile.2.tmp:1917
-msgid "Apply filter"
-msgstr "Filter toepassen"
-
-#: include/.svn/tmp/tempfile.tmp:2229 include/.svn/tmp/tempfile.2.tmp:2229
-msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
-#: include/.svn/tmp/tempfile.tmp:2372 include/.svn/tmp/tempfile.2.tmp:2372
-#, php-format
-msgid "File '%s' could not be deleted."
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:2406 include/.svn/tmp/tempfile.tmp:2426
-#: include/.svn/tmp/tempfile.2.tmp:2406 include/.svn/tmp/tempfile.2.tmp:2426
-#, fuzzy
-msgid "Cannot write to revision file!"
-msgstr "Kan bestand '%s' niet aanmaken."
-
-#: include/.svn/tmp/tempfile.tmp:2678 include/.svn/tmp/tempfile.2.tmp:2731
-#, fuzzy
-msgid "LDAP warning"
-msgstr "LDAP beheer"
-
-#: include/.svn/tmp/tempfile.tmp:2678 include/.svn/tmp/tempfile.2.tmp:2731
-#, fuzzy
-msgid "Cannot get schema information from server. No schema check possible!"
-msgstr ""
-"Kan de schema informatie niet ophalen van de server. Schema controle is "
-"onmogelijk!"
-
-#: include/.svn/tmp/tempfile.tmp:2704 include/.svn/tmp/tempfile.2.tmp:2757
-#, fuzzy
-msgid "Used to store account specific informations."
-msgstr "Het account verloopt op"
-
-#: include/.svn/tmp/tempfile.tmp:2711 include/.svn/tmp/tempfile.2.tmp:2764
-msgid ""
-"Used to lock currently edited entries to avoid multiple changes at the same "
-"time."
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:2756 include/.svn/tmp/tempfile.2.tmp:2809
-#, fuzzy, php-format
-msgid "Missing required object class '%s'!"
-msgstr "Toon FAI sjabloon objecten"
-
-#: include/.svn/tmp/tempfile.tmp:2759 include/.svn/tmp/tempfile.2.tmp:2812
-#, fuzzy, php-format
-msgid "Missing optional object class '%s'!"
-msgstr "Toon FAI sjabloon objecten"
-
-#: include/.svn/tmp/tempfile.tmp:2764 include/.svn/tmp/tempfile.2.tmp:2817
-#, fuzzy, php-format
-msgid "Version mismatch for required object class '%s' (!=%s)!"
-msgstr "Toon FAI sjabloon objecten"
-
-#: include/.svn/tmp/tempfile.tmp:2767 include/.svn/tmp/tempfile.2.tmp:2820
-#, fuzzy, php-format
-msgid "Class(es) available"
-msgstr "Bestand is beschikbaar"
-
-#: include/.svn/tmp/tempfile.tmp:2789 include/.svn/tmp/tempfile.2.tmp:2842
-msgid ""
-"You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema    configuration do not support this option."
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:2790 include/.svn/tmp/tempfile.2.tmp:2843
-msgid ""
-"In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
-"be      AUXILIARY"
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:2794 include/.svn/tmp/tempfile.2.tmp:2847
-msgid ""
-"Your schema is configured to support the rfc2307bis group, but you have "
-"disabled this option on the 'ldap setup' step."
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:2795 include/.svn/tmp/tempfile.2.tmp:2848
-msgid "The objectClass 'posixGroup' must be STRUCTURAL"
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:3026 include/.svn/tmp/tempfile.2.tmp:3079
-#, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
-msgstr ""
-"Het commando '%s' dat gespecificeerd is als POSTMODIFY voor module '%s' "
-"bestaat niet."
-
-#: include/.svn/tmp/tempfile.tmp:3059 include/.svn/tmp/tempfile.2.tmp:3112
-#, fuzzy
-msgid "Cannot generate samba hash!"
-msgstr "De opgegeven database kon niet geselecteerd worden!"
-
-#: include/.svn/tmp/tempfile.tmp:3072 include/.svn/tmp/tempfile.2.tmp:3125
-#, php-format
-msgid ""
-"Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:3353 include/.svn/tmp/tempfile.tmp:3367
-#: include/.svn/tmp/tempfile.tmp:3405 include/.svn/tmp/tempfile.tmp:3417
-#: include/.svn/tmp/tempfile.tmp:3421 include/.svn/tmp/tempfile.tmp:3436
-#: include/.svn/tmp/tempfile.tmp:3445 include/.svn/tmp/tempfile.2.tmp:3406
-#: include/.svn/tmp/tempfile.2.tmp:3420 include/.svn/tmp/tempfile.2.tmp:3458
-#: include/.svn/tmp/tempfile.2.tmp:3470 include/.svn/tmp/tempfile.2.tmp:3474
-#: include/.svn/tmp/tempfile.2.tmp:3489 include/.svn/tmp/tempfile.2.tmp:3498
-#, fuzzy
-msgid "Cannot allocate a free ID:"
-msgstr ""
-"Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
-
-#: include/.svn/tmp/tempfile.tmp:3445 include/.svn/tmp/tempfile.2.tmp:3498
-msgid "maximum tries exceeded!"
-msgstr ""
-
-#: include/.svn/tmp/tempfile.tmp:3505 include/.svn/tmp/tempfile.2.tmp:3558
-#, fuzzy
-msgid "Cannot allocate a free ID!"
-msgstr ""
-"Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
-
-#: include/class_jsonRPC.inc:181
-#, fuzzy, php-format
-msgid "Unknown HTTP status code '%s'!"
+msgid "Unknown HTTP status code %s!"
 msgstr "Onbekende FAI status %s"
 
 #: include/class_multi_plug.inc:362
@@ -2057,12 +1829,12 @@ msgstr "Onbekende FAI status %s"
 msgid "You are currently editing multiple entries."
 msgstr "U heeft geen toestemming om deze afdeling te verwijderen."
 
-#: include/class_multi_plug.inc:391
+#: include/class_multi_plug.inc:394
 #, fuzzy
 msgid "Reset password"
 msgstr "Wachtwoord instellen"
 
-#: include/class_multi_plug.inc:391
+#: include/class_multi_plug.inc:394
 #, fuzzy
 msgid "The user password has been reset. Please set a new password!"
 msgstr "Uw wachtwoord is verlopen! Kies a.u.b. een nieuw wachtwoord. "
@@ -2086,54 +1858,54 @@ msgstr "Kan quota informatie niet ophaleven voor '%s'."
 msgid "No valid certificate loaded!"
 msgstr "Geen geldig certificaat geladen"
 
-#: include/php_setup.inc:101
+#: include/php_setup.inc:107
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 "Er is minimaal één PHP fout opgetreden bij het genereren van deze pagina!"
 
-#: include/php_setup.inc:104
+#: include/php_setup.inc:110
 #, fuzzy
 msgid "Send bug report"
 msgstr "Afzender"
 
-#: include/php_setup.inc:108
+#: include/php_setup.inc:114
 msgid "Toggle details"
 msgstr ""
 
-#: include/php_setup.inc:117
+#: include/php_setup.inc:123
 msgid "PHP error"
 msgstr "PHP fout"
 
-#: include/php_setup.inc:136
+#: include/php_setup.inc:142
 msgid "class"
 msgstr "klasse"
 
-#: include/php_setup.inc:142
+#: include/php_setup.inc:148
 msgid "function"
 msgstr "functie"
 
-#: include/php_setup.inc:147
+#: include/php_setup.inc:153
 msgid "static"
 msgstr "statisch"
 
-#: include/php_setup.inc:151
+#: include/php_setup.inc:157
 msgid "method"
 msgstr "methode"
 
-#: include/php_setup.inc:184
+#: include/php_setup.inc:190
 #, fuzzy
 msgid "Traceback"
 msgstr "Trace"
 
-#: include/php_setup.inc:185
+#: include/php_setup.inc:191
 msgid "File"
 msgstr "Bestand"
 
-#: include/php_setup.inc:185
+#: include/php_setup.inc:191
 msgid "Line"
 msgstr "Regel"
 
-#: include/php_setup.inc:186
+#: include/php_setup.inc:192
 msgid "Arguments"
 msgstr "Argumenten"
 
@@ -2171,7 +1943,7 @@ msgid ""
 "entry, changes that have been made by others will be discarded!"
 msgstr ""
 
-#: include/class_plugin.inc:1385
+#: include/class_plugin.inc:1409
 #, php-format
 msgid "Changing ACL DN from %s to %s"
 msgstr ""
@@ -2469,8 +2241,8 @@ msgstr "Verwijder printer mogelijkheden"
 #: include/utils/class_msgPool.inc:319
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:123
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:83
-#: plugins/personal/generic/generic.tpl:255
-#: plugins/personal/generic/generic.tpl:275
+#: plugins/personal/generic/generic.tpl:252
+#: plugins/personal/generic/generic.tpl:272
 #, php-format
 msgid "Add"
 msgstr "Toevoegen"
@@ -2706,12 +2478,12 @@ msgid "Communication failure with the infrastructure service: %s"
 msgstr ""
 
 #: include/utils/class_msgPool.inc:487
-msgid "Communication failure with the GOSA-NG service!"
+msgid "Communication failure with the GOsa-NG service!"
 msgstr ""
 
 #: include/utils/class_msgPool.inc:489
 #, php-format
-msgid "Communication failure with the GOSA-NG service: %s"
+msgid "Communication failure with the GOsa-NG service: %s"
 msgstr ""
 
 #: include/utils/class_msgPool.inc:496 include/utils/class_msgPool.inc:499
@@ -2790,36 +2562,41 @@ msgid ""
 "The supplied base is not valid and has been reset to its previous value!"
 msgstr ""
 
-#: include/class_ldap.inc:233 include/class_ldap.inc:270
+#: include/class_ldap.inc:305 include/class_ldap.inc:342
 msgid "Performance warning"
 msgstr ""
 
-#: include/class_ldap.inc:233 include/class_ldap.inc:270
+#: include/class_ldap.inc:305 include/class_ldap.inc:342
 #, php-format
 msgid "LDAP performance is poor: last query took %.2fs!"
 msgstr ""
 
-#: include/class_ldap.inc:712
+#: include/class_ldap.inc:784
 #, php-format
 msgid "Cannot automatically create subtrees with RDN %s: no object class found"
 msgstr ""
 
-#: include/class_ldap.inc:763
+#: include/class_ldap.inc:835
 #, php-format
 msgid "Cannot automatically create subtrees with RDN %s: not supported"
 msgstr ""
 
-#: include/class_ldap.inc:850
+#: include/class_ldap.inc:922
 #, fuzzy, php-format
 msgid "while operating on %s using LDAP server %s"
 msgstr "bij het bewerken van '%s' op LDAP server '%s'"
 
-#: include/class_ldap.inc:852
+#: include/class_ldap.inc:924
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr "bij het bewerken van LDAP server %s"
 
-#: include/class_ldap.inc:1025
+#: include/class_ldap.inc:979
+#, php-format
+msgid "Command line programm %s is missing!"
+msgstr ""
+
+#: include/class_ldap.inc:1140
 #, fuzzy, php-format
 msgid ""
 "Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"
@@ -2827,7 +2604,7 @@ msgstr ""
 "Dit is geen geldige DN: '%s'. Een blok dat geïmporteerd wordt, dient te "
 "beginnen met 'dn: ...' op regel %s"
 
-#: include/class_ldap.inc:1054
+#: include/class_ldap.inc:1169
 #, fuzzy, php-format
 msgid "Error while importing DN %s: please check LDIF from line %s on!"
 msgstr ""
@@ -2851,7 +2628,7 @@ msgstr "De opgegeven naam is ongeldig."
 
 #: include/class_configRegistry.inc:194
 #: plugins/personal/generic/class_user.inc:273
-#: plugins/personal/generic/class_user.inc:1913
+#: plugins/personal/generic/class_user.inc:1898
 #, fuzzy
 msgid "unknown"
 msgstr "Onbekend"
@@ -2880,91 +2657,88 @@ msgstr ""
 msgid "Schema validation error"
 msgstr "Nagios authenticatie"
 
-#: include/class_configRegistry.inc:671
-#, php-format
-msgid ""
-"The value '%s' specified for '%s:%s' is invalid. A bool value is required "
-"here!"
-msgstr ""
-
-#: include/class_configRegistry.inc:686
-#, php-format
-msgid ""
-"The value '%s' specified for '%s:%s' is invalid. A string value is required "
-"here!"
-msgstr ""
-
-#: include/class_configRegistry.inc:701
-#, php-format
-msgid ""
-"The value '%s' specified for '%s:%s' is invalid. A numeric value is required "
-"here!"
-msgstr ""
-
-#: include/class_configRegistry.inc:716
-#, php-format
-msgid "The path '%s' specified for '%s:%s' is invalid!"
-msgstr ""
-
-#: include/class_configRegistry.inc:732 include/class_configRegistry.inc:779
+#: include/class_configRegistry.inc:689
 #, fuzzy, php-format
-msgid "The folder '%s' specified for '%s:%s' does not exists!"
+msgid "The value %s specified for %s:%s needs to be a bool value!"
 msgstr ""
 "Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
 "bestaat niet."
 
-#: include/class_configRegistry.inc:737
-#, php-format
-msgid "The folder '%s' specified for '%s:%s' cannot be used for reading!"
-msgstr ""
-
-#: include/class_configRegistry.inc:757
+#: include/class_configRegistry.inc:704
 #, fuzzy, php-format
-msgid ""
-"The file '%s' specified for '%s:%s' cannot be created neither be used for "
-"writing!"
+msgid "The value %s specified for %s:%s needs to be a string!"
 msgstr ""
 "Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
 "bestaat niet."
 
-#: include/class_configRegistry.inc:762
+#: include/class_configRegistry.inc:719
 #, fuzzy, php-format
-msgid "The file '%s' specified for '%s:%s' cannot be used for writing!"
+msgid "The value %s specified for %s:%s needs to be numeric!"
 msgstr ""
 "Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
 "bestaat niet."
 
-#: include/class_configRegistry.inc:784
-#, php-format
-msgid "The folder '%s' specified for '%s:%s' cannot be used for writing!"
+#: include/class_configRegistry.inc:734
+#, fuzzy, php-format
+msgid "The path %s specified for %s:%s is invalid!"
+msgstr "De opgegeven 'UID' waarde is niet correct."
+
+#: include/class_configRegistry.inc:750 include/class_configRegistry.inc:797
+#, fuzzy, php-format
+msgid "The folder %s specified for %s:%s does not exists!"
 msgstr ""
+"Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
+"bestaat niet."
+
+#: include/class_configRegistry.inc:755
+#, fuzzy, php-format
+msgid "The folder %s specified for %s:%s cannot be used for reading!"
+msgstr ""
+"Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
+"bestaat niet."
+
+#: include/class_configRegistry.inc:775 include/class_configRegistry.inc:780
+#, fuzzy, php-format
+msgid "The file %s specified for %s:%s is not writeable!"
+msgstr ""
+"Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
+"bestaat niet."
 
 #: include/class_configRegistry.inc:802
 #, fuzzy, php-format
-msgid "The file '%s' specified for '%s:%s' does not exists!"
+msgid "The folder %s specified for %s:%s is not writeable!"
 msgstr ""
 "Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
 "bestaat niet."
 
-#: include/class_configRegistry.inc:807
-#, php-format
-msgid "The file '%s' specified for '%s:%s' cannot be read!"
-msgstr ""
-
-#: include/class_configRegistry.inc:823
-#, php-format
-msgid "The command '%s' specified for '%s:%s' is invalid!"
-msgstr ""
-
-#: include/class_configRegistry.inc:838
+#: include/class_configRegistry.inc:820
 #, fuzzy, php-format
-msgid "The dn '%s' specified for '%s:%s' is invalid!"
+msgid "The file %s specified for %s:%s does not exists!"
+msgstr ""
+"Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
+"bestaat niet."
+
+#: include/class_configRegistry.inc:825
+#, fuzzy, php-format
+msgid "The file %s specified for %s:%s is not readable!"
+msgstr ""
+"Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module '%s' "
+"bestaat niet."
+
+#: include/class_configRegistry.inc:841
+#, fuzzy, php-format
+msgid "The command %s specified for %s:%s is invalid!"
 msgstr "De opgegeven 'UID' waarde is niet correct."
 
-#: include/class_configRegistry.inc:853
-#, php-format
-msgid "The rdn '%s' specified for '%s:%s' is invalid!"
-msgstr ""
+#: include/class_configRegistry.inc:856
+#, fuzzy, php-format
+msgid "The DN %s specified for %s:%s is invalid!"
+msgstr "De opgegeven 'UID' waarde is niet correct."
+
+#: include/class_configRegistry.inc:871
+#, fuzzy, php-format
+msgid "The RDN %s specified for %s:%s is invalid!"
+msgstr "De opgegeven 'UID' waarde is niet correct."
 
 #: include/class_gosaSupportDaemon.inc:112
 msgid "GOsa support daemon"
@@ -2986,39 +2760,39 @@ msgstr "Kan bestand '%s' niet aanmaken."
 msgid "Cannot remove entry %s!"
 msgstr "Onbekende FAI status %s"
 
-#: include/class_config.inc:169
+#: include/class_config.inc:168
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr "XML fout in gosa.conf: %s op regel %d"
 
-#: include/class_config.inc:354
+#: include/class_config.inc:367
 msgid "Cannot bind to LDAP!"
 msgstr ""
 
-#: include/class_config.inc:695
+#: include/class_config.inc:711
 #, fuzzy
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
 msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
 
-#: include/class_config.inc:1114
+#: include/class_config.inc:1130
 #, fuzzy
 msgid "Configuration"
 msgstr "Configuratie bestand"
 
-#: include/class_config.inc:1114
+#: include/class_config.inc:1130
 msgid ""
 "The configuration file you are using is outdated. Please move the GOsa "
 "configuration file away to run the GOsa setup again."
 msgstr ""
 
-#: include/class_config.inc:1156 include/class_config.inc:1187
+#: include/class_config.inc:1172 include/class_config.inc:1203
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable %s is not "
 "set."
 msgstr ""
 
-#: include/class_config.inc:1169
+#: include/class_config.inc:1185
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required compression module "
@@ -3118,41 +2892,30 @@ msgid ""
 "password has to be checked to have at least n different characters."
 msgstr ""
 
-#: include/class_core.inc:307
-msgid ""
-"The 'passwordHook' can specify an external script to handle password "
-"settings at some other location besides the LDAP."
-msgstr ""
-
-#: include/class_core.inc:307
-#, php-format
-msgid "It will be called this way: %s"
-msgstr ""
-
-#: include/class_core.inc:317
+#: include/class_core.inc:306
 msgid ""
 "The 'passwordProposalHook' can be used to let GOsa generate password "
 "proposals for you. Whenever you change a password, you can then decide "
 "whether to use the proposal or to manually specify a password."
 msgstr ""
 
-#: include/class_core.inc:317
+#: include/class_core.inc:306
 msgid "Here is an example command:"
 msgstr ""
 
-#: include/class_core.inc:327
+#: include/class_core.inc:316
 msgid ""
 "The 'displayErrors' statement tells GOsa to show PHP errors in the upper "
 "part of the screen. This should be disabled in productive deployments, "
 "because there might be some important passwords arround."
 msgstr ""
 
-#: include/class_core.inc:327
+#: include/class_core.inc:316
 #, php-format
 msgid "The property '%s' may be interesting too."
 msgstr ""
 
-#: include/class_core.inc:337
+#: include/class_core.inc:326
 msgid ""
 "The 'developmentMode' statement tells GOsa to show development related error "
 "messages, for example messages about missing ACL configuration or classes. "
@@ -3160,44 +2923,44 @@ msgid ""
 "messages it should only be enabled while developing or debugging plugins!"
 msgstr ""
 
-#: include/class_core.inc:348
+#: include/class_core.inc:337
 msgid ""
 "The 'schemaCheck' statement enables or disables schema checking during "
 "login. It is recommended to switch this on in order to let GOsa handle "
 "object creation more efficient."
 msgstr ""
 
-#: include/class_core.inc:358
+#: include/class_core.inc:347
 msgid ""
 "The 'copyPaste' statement enables copy and paste for LDAP entries managed "
 "with GOsa."
 msgstr ""
 
-#: include/class_core.inc:368
+#: include/class_core.inc:357
 msgid ""
 "The 'forceGlobals' statement enables PHP security checks to force "
 "register_global settings to be switched off."
 msgstr ""
 
-#: include/class_core.inc:378
+#: include/class_core.inc:367
 msgid ""
 "The 'forceSSL' statement enables PHP security checks to force encrypted "
 "access to the web interface. GOsa will try to redirect to the same URL - "
 "just with https://"
 msgstr ""
 
-#: include/class_core.inc:388
+#: include/class_core.inc:377
 msgid ""
 "Logs information about triggered ldap operations, duration, filter, aso. "
 "into syslog."
 msgstr ""
 
-#: include/class_core.inc:398
+#: include/class_core.inc:387
 msgid ""
 "The 'ldapFollowReferrals' statement tells GOsa to follow LDAP referrals."
 msgstr ""
 
-#: include/class_core.inc:408
+#: include/class_core.inc:397
 msgid ""
 "The 'ldapFilterNestingLimit' statement can be used to speed up group "
 "handling for groups with several hundreds of members. The default behaviour "
@@ -3207,61 +2970,61 @@ msgid ""
 "set a member limit, where GOsa will stop to do these lookups."
 msgstr ""
 
-#: include/class_core.inc:418
+#: include/class_core.inc:407
 msgid ""
 "The ldapSizelimit statement tells GOsa to retrieve the specified maximum "
 "number of results. The user will get  a  warning,  that  not  all entries "
 "were shown."
 msgstr ""
 
-#: include/class_core.inc:428
+#: include/class_core.inc:417
 msgid ""
 "Disables sizelimit checks, only the configured amount of results will be "
 "shown!"
 msgstr ""
 
-#: include/class_core.inc:438
+#: include/class_core.inc:427
 msgid ""
 "The 'warnSSL' statement enables PHP security checks to detect non encrypted "
 "access to the web interface. GOsa will display a warning in this case."
 msgstr ""
 
-#: include/class_core.inc:448
+#: include/class_core.inc:437
 msgid "The 'ppdGzip' variable enables PPD file compression."
 msgstr ""
 
-#: include/class_core.inc:459
+#: include/class_core.inc:448
 msgid ""
 "The 'ignoreAcl' value tells GOsa to ignore complete ACL sets for the given "
 "DN. Add your DN here and you'll be able to restore accidently dropped ACLs."
 msgstr ""
 
-#: include/class_core.inc:470
+#: include/class_core.inc:459
 msgid ""
 "The 'ppdPath' variable defines where to store PPD files for the GOto "
 "environment plugins."
 msgstr ""
 
-#: include/class_core.inc:480
+#: include/class_core.inc:469
 msgid ""
 "The 'ldapMaxQueryTime' statement tells GOsa to stop LDAP actions if there is "
 "no answer within the specified number of seconds."
 msgstr ""
 
-#: include/class_core.inc:490
+#: include/class_core.inc:479
 msgid ""
 "The 'storeFilterSettings' statement determines whether GOsa should store "
 "filter and plugin settings inside of a cookie."
 msgstr ""
 
-#: include/class_core.inc:500
+#: include/class_core.inc:489
 msgid ""
 "The 'sendCompressedOutput' statement determines whether PHP should send "
 "compressed HTML pages to browsers or not. This may increase or decrease the "
 "performance, depending on your network."
 msgstr ""
 
-#: include/class_core.inc:511
+#: include/class_core.inc:500
 msgid ""
 "The 'modificationDetectionAttribute' statement enables GOsa to check if a "
 "entry currently being edited has been modified from someone else outside "
@@ -3270,7 +3033,7 @@ msgid ""
 "based systems."
 msgstr ""
 
-#: include/class_core.inc:522
+#: include/class_core.inc:511
 msgid ""
 "The 'language' statement defines the default language used by GOsa. Normally "
 "GOsa autodetects the language from the browser settings. If this is not "
@@ -3278,7 +3041,7 @@ msgid ""
 "de for german) here."
 msgstr ""
 
-#: include/class_core.inc:533
+#: include/class_core.inc:522
 msgid ""
 "The 'theme' statement defines what theme is used to display GOsa pages. You "
 "can install some corporate identity like theme and/or modify certain "
@@ -3286,7 +3049,7 @@ msgid ""
 "more information."
 msgstr ""
 
-#: include/class_core.inc:543
+#: include/class_core.inc:532
 msgid ""
 "The 'sessionLifetime' value defines when a session will expire in seconds. "
 "For Debian systems, this will not work because the sessions will be removed "
@@ -3294,7 +3057,7 @@ msgid ""
 "instead."
 msgstr ""
 
-#: include/class_core.inc:553
+#: include/class_core.inc:542
 msgid ""
 "The 'templateCompileDirectory' statements defines the path, where the PHP "
 "templating engins 'smarty' should store its compiled GOsa templates for "
@@ -3302,14 +3065,14 @@ msgid ""
 "is running with."
 msgstr ""
 
-#: include/class_core.inc:563
+#: include/class_core.inc:552
 #, php-format
 msgid ""
 "The 'debugLevel' value tells GOsa to display certain information on each "
 "page load. Value is an AND combination of the following byte values: %s"
 msgstr ""
 
-#: include/class_core.inc:583
+#: include/class_core.inc:572
 #, php-format
 msgid ""
 "The 'sambaHashHook' statement contains an executable to generate samba hash "
@@ -3318,20 +3081,20 @@ msgid ""
 "distribution installed, you can use perl to generate the hash: %s"
 msgstr ""
 
-#: include/class_core.inc:594
+#: include/class_core.inc:583
 msgid ""
 "The 'passwordDefaultHash' statement defines the default password hash to "
 "choose for new accounts."
 msgstr ""
 
-#: include/class_core.inc:603
+#: include/class_core.inc:592
 msgid ""
 "The 'strictPasswordRules' tells GOsa to check for UTF-8 characters in the "
 "supplied password. These Characters can lead to non working authentications "
 "if UTF-8 and none UTF-8 systems locales get mixed. The default is 'true'."
 msgstr ""
 
-#: include/class_core.inc:614
+#: include/class_core.inc:603
 msgid ""
 "The 'accountPrimaryAttribute' option tells GOsa how to create new accounts. "
 "Possible values are 'uid' and 'cn'. In the first case GOsa creates uid style "
@@ -3342,19 +3105,19 @@ msgid ""
 "'personalTitleInDN'."
 msgstr ""
 
-#: include/class_core.inc:624
+#: include/class_core.inc:613
 msgid ""
 "The 'userRDN' statement defines the location where new accounts will be "
 "created inside of defined departments. The default is 'ou=people'."
 msgstr ""
 
-#: include/class_core.inc:634
+#: include/class_core.inc:623
 msgid ""
 "The 'groupsRDN' statement defines the location where new groups will be "
 "created inside of defined departments. The default is 'ou=groups'."
 msgstr ""
 
-#: include/class_core.inc:644
+#: include/class_core.inc:633
 msgid ""
 "The 'gidNumberBase' statement defines where to start looking for a new free "
 "group id. This should be synced with your 'adduser.conf' to avoid "
@@ -3363,25 +3126,25 @@ msgid ""
 "definition."
 msgstr ""
 
-#: include/class_core.inc:654
+#: include/class_core.inc:643
 msgid ""
 "The 'baseIdHook' statement allows to hook into the id generation method "
 "(traditional mode), to define the starting range for new generated ids"
 msgstr ""
 
-#: include/class_core.inc:664 include/class_core.inc:684
+#: include/class_core.inc:653 include/class_core.inc:673
 msgid ""
 "The 'uidNumberPoolMin/gidNumberPoolMin' statement defines the lowest "
 "assignable user/group id for use with the 'idAllocationMethod = pool'."
 msgstr ""
 
-#: include/class_core.inc:674 include/class_core.inc:694
+#: include/class_core.inc:663 include/class_core.inc:683
 msgid ""
 "The 'uidNumberPoolMax/gidNumberPoolMax' statement defines the highest "
 "assignable user/group id for use with the 'idAllocationMethod = pool'."
 msgstr ""
 
-#: include/class_core.inc:704
+#: include/class_core.inc:693
 msgid ""
 "The 'uidNumberBase' statement defines where to start looking for a new free "
 "user id. This should be synced with your 'adduser.conf' to avoid overlapping "
@@ -3389,26 +3152,26 @@ msgid ""
 "even be dynamic. Take a look at the 'baseIdHook' definition."
 msgstr ""
 
-#: include/class_core.inc:744
+#: include/class_core.inc:733
 msgid ""
 "The 'gosaSupportURI' defines the major gosa-si server host and the password "
 "for GOsa to connect to it. It can be used if you want to use i.e. kerberos "
 "to authenticate the users. The format is: credentials@host:port"
 msgstr ""
 
-#: include/class_core.inc:754
+#: include/class_core.inc:743
 msgid ""
 "The 'gosaSupportTimeout' sets a connection timeout for all gosa-si actions. "
 "See 'gosaSupportURI' for details."
 msgstr ""
 
-#: include/class_core.inc:765
+#: include/class_core.inc:754
 msgid ""
 "The 'loginAttribute' statement tells GOsa which LDAP attribute is used as "
 "the login name during login. It can be set to 'uid', 'mail' or 'both'"
 msgstr ""
 
-#: include/class_core.inc:776
+#: include/class_core.inc:765
 msgid ""
 "The 'timezone' statements defines the timezone used inside of GOsa to handle "
 "date related tasks, such as password expiery, vacation messages, etc. The "
@@ -3416,14 +3179,14 @@ msgid ""
 "timezone."
 msgstr ""
 
-#: include/class_core.inc:786
+#: include/class_core.inc:775
 msgid ""
 "The 'honourUnitTags' statement enables checking of 'unitTag' attributes when "
 "using administrative units. If this is set to 'true' GOsa can only see "
 "objects inside the administrative unit a user is logged into."
 msgstr ""
 
-#: include/class_core.inc:796
+#: include/class_core.inc:785
 msgid ""
 "The 'useSaslForKerberos' statement defines the way the kerberos realm is "
 "stored in the #userPassword' attribute. Set it to 'true' in order to get "
@@ -3431,7 +3194,7 @@ msgid ""
 "latter is outdated, but may be needed from time to time."
 msgstr ""
 
-#: include/class_core.inc:806
+#: include/class_core.inc:795
 msgid ""
 "The 'rfc2307bis' statement enables rfc2307bis style groups in GOsa. You can "
 "use 'member' attributes instead of memberUid in this case. To make it work "
@@ -3439,20 +3202,20 @@ msgid ""
 "style groups, too"
 msgstr ""
 
-#: include/class_core.inc:816
+#: include/class_core.inc:805
 msgid ""
 "The 'personalTitleInDN' option tells GOsa to include the personal title in "
 "user DNs when #accountPrimaryAttribute' is set to \"cn\"."
 msgstr ""
 
-#: include/class_core.inc:826
+#: include/class_core.inc:815
 msgid ""
 "The 'nextIdHook' statement defines a script to be called for finding the "
 "next free id for users or groups externaly. It gets called with the current "
 "entry \"dn\" and the attribute to be ID'd. It should return an integer value."
 msgstr ""
 
-#: include/class_core.inc:836
+#: include/class_core.inc:825
 msgid ""
 "The 'idGenerator' statement describes an automatic way to generate new user "
 "ids. There are two basic functions supported - which can be combined: \n"
@@ -3465,7 +3228,7 @@ msgid ""
 "\n"
 "      idGenerator=\"{%sn}-{%givenName[2-4]}\"\n"
 "\n"
-"    will generate an ID using the full surename, adding a dash, and adding "
+"    will generate an ID using the full surname, adding a dash, and adding "
 "at\n"
 "    least the first two characters of givenName. If this ID is used, it'll\n"
 "    use up to four characters. If no automatic generation is possible, a\n"
@@ -3490,32 +3253,32 @@ msgid ""
 "    will generate a three digits random number appended to \"ext\".\n"
 msgstr ""
 
-#: include/class_core.inc:876
+#: include/class_core.inc:865
 msgid ""
 "The 'strictNamingRules' statement enables strict checking of uids and group "
 "names. If you need   characters like . or - inside of your accounts, set "
 "this to 'false'."
 msgstr ""
 
-#: include/class_core.inc:886
+#: include/class_core.inc:875
 msgid ""
 "The 'minId' statement defines the minimum assignable user or group id to "
 "avoid security leaks with uid 0 accounts. This is used for the 'traditional' "
 "method."
 msgstr ""
 
-#: include/class_core.inc:897
+#: include/class_core.inc:886
 msgid ""
 "The 'mailAttribute' statement determines which attribute GOsa will use to "
 "create accounts. Valid values are 'mail' and 'uid'."
 msgstr ""
 
-#: include/class_core.inc:907
+#: include/class_core.inc:896
 msgid ""
 "This attribute allows to override the prefix used to create shared folders."
 msgstr ""
 
-#: include/class_core.inc:917
+#: include/class_core.inc:906
 msgid ""
 "This attribute allows to override the user account creation syntax, see the "
 "'mailFolderCreation' description for more details.\n"
@@ -3526,7 +3289,7 @@ msgid ""
 "com\"\n"
 msgstr ""
 
-#: include/class_core.inc:932
+#: include/class_core.inc:921
 msgid ""
 "Every mail method has its own way to create mail accounts like 'share/"
 "development' or 'shared.development@example.com' which is used to identify "
@@ -3551,25 +3314,25 @@ msgid ""
 " %uattrib%   Depends on mailAttribute=\"uid/mail\".\n"
 msgstr ""
 
-#: include/class_core.inc:958
+#: include/class_core.inc:947
 msgid ""
 "The 'imapTimeout' statement sets the connection timeout for imap actions."
 msgstr ""
 
-#: include/class_core.inc:969
+#: include/class_core.inc:958
 msgid ""
 "The 'mailMethod' statement tells GOsa which mail method the setup should use "
 "to communicate with a possible mail server. Leave this undefined if your "
 "mail method does not match the predefined ones."
 msgstr ""
 
-#: include/class_core.inc:979
+#: include/class_core.inc:968
 msgid ""
 "The 'cyrusUseSlashes' statement determines if GOsa should use \"foo/bar\" or "
 "\"foo.bar\" namespaces in IMAP. Unix style is with slashes."
 msgstr ""
 
-#: include/class_core.inc:989
+#: include/class_core.inc:978
 msgid ""
 "The 'vacationTemplateDirectory' statement sets the path where GOsa will look "
 "for vacation message templates. Default is /etc/gosa/vacation. \n"
@@ -3585,70 +3348,70 @@ msgid ""
 "\n"
 msgstr ""
 
-#: include/class_core.inc:1010
+#: include/class_core.inc:999
 msgid ""
 "The 'ldapTLS' statement enables or disables TLS operating on LDAP "
 "connections."
 msgstr ""
 
-#: include/class_core.inc:1020
+#: include/class_core.inc:1009
 msgid ""
 "The 'honourIvbbAttributes' statement enables the IVBB mode inside of GOsa. "
 "You need the ivbb.schema file from used by german authorities."
 msgstr ""
 
-#: include/class_core.inc:1030
+#: include/class_core.inc:1019
 msgid ""
 "The 'sambaIdMapping' statement tells GOsa to maintain sambaIdmapEntry "
 "objects. Depending on your setup this can drastically improve the windows "
 "login performance."
 msgstr ""
 
-#: include/class_core.inc:1040
+#: include/class_core.inc:1029
 msgid ""
 "The 'handleExpiredAccounts' statement enables shadow attribute tests during "
 "the login to the GOsa web interface and forces password renewal or account "
 "lockout."
 msgstr ""
 
-#: include/class_core.inc:1050
+#: include/class_core.inc:1039
 msgid ""
 "The 'sambaSID' statement defines a samba SID if not available inside of the "
 "LDAP. You can retrieve the current sid by net getlocalsid."
 msgstr ""
 
-#: include/class_core.inc:1060
+#: include/class_core.inc:1049
 msgid ""
 "The 'sambaRidBase' statement defines the base id to add to ordinary sid "
 "calculations - if not available inside of the LDAP."
 msgstr ""
 
-#: include/class_core.inc:1070
+#: include/class_core.inc:1059
 msgid ""
 "The 'enableSnapshots' statement enables a snapshot mechaism in GOsa. This "
 "enables you to save certain states of entries and restore them later on."
 msgstr ""
 
-#: include/class_core.inc:1080
+#: include/class_core.inc:1069
 msgid ""
 "The 'snapshotBase' statement defines the base where snapshots should be "
 "stored inside of the LDAP."
 msgstr ""
 
-#: include/class_core.inc:1090
+#: include/class_core.inc:1079
 msgid ""
 "The 'snapshotAdminDn' variable defines the user which is used to "
 "authenticate when connecting to 'snapshotURI'."
 msgstr ""
 
-#: include/class_core.inc:1100
+#: include/class_core.inc:1089
 msgid ""
 "The 'snapshotAdminPassword' variable defines the credentials which are used "
 "in combination with 'snapshotAdminDn' and 'snapshotURI' in order to "
 "authenticate."
 msgstr ""
 
-#: include/class_core.inc:1111
+#: include/class_core.inc:1100
 msgid ""
 "The 'idAllocationMethod' statement defines how GOsa generates numeric user "
 "and group id values. If it is set to 'traditional' GOsa will do create a "
@@ -3659,7 +3422,7 @@ msgid ""
 "the other hand it is much faster."
 msgstr ""
 
-#: include/class_core.inc:1120
+#: include/class_core.inc:1109
 msgid ""
 "The 'snapshotURI' variable defines the LDAP URI for the server which is used "
 "to do object snapshots."
@@ -3669,7 +3432,7 @@ msgstr ""
 msgid "The configuration format has changed: please run the setup again!"
 msgstr ""
 
-#: include/class_pluglist.inc:258
+#: include/class_pluglist.inc:263
 #, fuzzy
 msgid ""
 "You are currently editing a database entry. Do you want to discard the "
@@ -3678,7 +3441,7 @@ msgstr ""
 "U bent momenteel database gegevens aan het bewerken. Wilt u eventuele "
 "wijzigingen ongedaan maken?"
 
-#: include/class_pluglist.inc:430 plugins/generic/references/contents.tpl:18
+#: include/class_pluglist.inc:435 plugins/generic/references/contents.tpl:18
 #: plugins/admin/groups/class_group.inc:329
 #: plugins/admin/groups/class_group.inc:350
 #: plugins/admin/groups/class_group.inc:367
@@ -3736,12 +3499,116 @@ msgstr "Plakken onmogelijk"
 msgid "Please fix the above error and reload the page."
 msgstr ""
 
+#: plugins/generic/statistics/statistics.tpl:2
+msgid "Usage statistics"
+msgstr ""
+
+#: plugins/generic/statistics/statistics.tpl:5
+#: plugins/generic/statistics/statistics.tpl:10
+msgid ""
+"This feature is disabled. To enable it you have to register GOsa, you can "
+"initiate a registration using the dash-board plugin."
+msgstr ""
+
+#: plugins/generic/statistics/statistics.tpl:6
+#: plugins/generic/statistics/statistics.tpl:12
+#, fuzzy
+msgid "Dash board"
+msgstr "GOsa help"
+
+#: plugins/generic/statistics/statistics.tpl:16
+#, fuzzy
+msgid ""
+"Communication with the GOsa-backend failed. Please check the rpc "
+"configuration!"
+msgstr ""
+"Kan niet verbinden met de opgegeven database. Controleer uw GLPI "
+"configuratie a.u.b."
+
+#: plugins/generic/statistics/statistics.tpl:22
+msgid "Send"
+msgstr ""
+
+#: plugins/generic/statistics/statistics.tpl:28
+msgid "Generate report for"
+msgstr ""
+
+#: plugins/generic/statistics/statistics.tpl:56
+msgid "Update"
+msgstr ""
+
+#: plugins/generic/statistics/statistics.tpl:69
+#: plugins/generic/statistics/statistics.tpl:78
+msgid "No statistic data for given period"
+msgstr ""
+
+#: plugins/generic/statistics/statistics.tpl:87
+#, fuzzy
+msgid "Select report type"
+msgstr "Selecteer een basis"
+
+#: plugins/generic/statistics/chartClasses/class_actionSelectChart.inc:104
+#, fuzzy
+msgid "Action"
+msgstr "Acties"
+
+#: plugins/generic/statistics/chartClasses/class_cpuLoadChart.inc:15
+#: plugins/generic/statistics/chartClasses/class_memoryUsageChart.inc:15
+#: plugins/generic/statistics/chartClasses/class_renderTimeChart.inc:15
+#: plugins/generic/statistics/chartClasses/class_durationTimeChart.inc:15
+#, fuzzy
+msgid "Max"
+msgstr "Mei"
+
+#: plugins/generic/statistics/chartClasses/class_cpuLoadChart.inc:16
+#: plugins/generic/statistics/chartClasses/class_memoryUsageChart.inc:16
+#: plugins/generic/statistics/chartClasses/class_renderTimeChart.inc:16
+#: plugins/generic/statistics/chartClasses/class_durationTimeChart.inc:16
+msgid "Avergae"
+msgstr ""
+
+#: plugins/generic/statistics/chartClasses/class_cpuLoadChart.inc:17
+#: plugins/generic/statistics/chartClasses/class_memoryUsageChart.inc:17
+#: plugins/generic/statistics/chartClasses/class_renderTimeChart.inc:17
+#: plugins/generic/statistics/chartClasses/class_durationTimeChart.inc:17
+#, fuzzy
+msgid "Min"
+msgstr "Hoofdmenu"
+
+#: plugins/generic/statistics/chartClasses/class_statChart.inc:73
+#, fuzzy
+msgid "Systems"
+msgstr "Systeem"
+
+#: plugins/generic/statistics/class_statistics.inc:263
+#, fuzzy, php-format
+msgid ""
+"You have currently %s unsubmitted statistic collection, do you want to "
+"transmit them now?"
+msgstr ""
+"U bent momenteel database gegevens aan het bewerken. Wilt u eventuele "
+"wijzigingen ongedaan maken?"
+
 #: plugins/generic/dashBoard/dbInformation/contents.tpl:1
-#: plugins/admin/ogroups/class_ogroup.inc:242 setup/setup_ldap.tpl:108
+#: plugins/admin/ogroups/class_ogroup.inc:244 setup/setup_ldap.tpl:108
 msgid "Information"
 msgstr "Informatie"
 
 #: plugins/generic/dashBoard/dashBoard.tpl:2
+msgid "This feature is only accessible for registrated instances of GOsa"
+msgstr ""
+
+#: plugins/generic/dashBoard/dashBoard.tpl:5
+msgid "Registrate"
+msgstr ""
+
+#: plugins/generic/dashBoard/dashBoard.tpl:7
+msgid ""
+"Unfortunately the registration server cannot be reached, maybe the server is "
+"down for maintaince or you've no internet access!"
+msgstr ""
+
+#: plugins/generic/dashBoard/dashBoard.tpl:13
 #, fuzzy
 msgid "GOsa dash board"
 msgstr "GOsa help"
@@ -3776,6 +3643,108 @@ msgstr "Samba Instellingen"
 msgid "Notifications"
 msgstr "Beroep"
 
+#: plugins/generic/dashBoard/Register/class_RegistrationDialog.inc:54
+msgid ""
+"Communciation with the backend failed! Please check your internet connection!"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/class_RegistrationDialog.inc:56
+msgid ""
+"Authentication failed, please check combination of username and password!"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/class_RegistrationDialog.inc:58
+msgid ""
+"Internal server error, please try again later. If the problem persists "
+"contact the GOsa-Team!"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:3
+#, fuzzy
+msgid "GOsa registration"
+msgstr "Algemene wachtrij instellingen"
+
+#: plugins/generic/dashBoard/Register/register.tpl:7
+msgid "Do you want to register GOsa and benefit from the features it brings?"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:11
+msgid "I do not want to register"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:17
+msgid "Register"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:19
+msgid "Additionally to the 'Annonomous' account you can:"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:21
+msgid "Access to 'Premium-Channels'."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:22
+msgid ""
+"Watch the status of current plugin updates/patches and the availability of "
+"new plugins."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:23
+msgid "Recieve newsletter, if wanted."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:24
+msgid "View several usefull statistics about your GOsa installation"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:29
+msgid "What information will be transmitted to the backend and maybe stored:"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:31
+msgid "All personal information filled in the registration form."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:32
+msgid "Information about the installed plugins and their version."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:33
+msgid ""
+"The GOsa-UUID (will be generated during the registration) and a password, to "
+"authenticate."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:34
+msgid ""
+"The bugs you will report and the corresponding trace. You can select what "
+"information you want to send in."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:35
+msgid ""
+"When the statistics extension is used. GOsa will transmit information about "
+"plugins, their usage and the amount of objects present in your ldap "
+"database. No sensitive data is transmitted here, just the object type, the "
+"action performed, cpu usage, memory usage, elapsed time..."
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:69
+#: plugins/generic/dashBoard/Register/register.tpl:80
+#, fuzzy
+msgid "Registration complete"
+msgstr "Bewerking afgerond"
+
+#: plugins/generic/dashBoard/Register/register.tpl:71
+msgid "GOsa instance sucessfully registered"
+msgstr ""
+
+#: plugins/generic/dashBoard/Register/register.tpl:82
+#, fuzzy
+msgid "GOsa instance will not be registered"
+msgstr "De sessie zal niet versleuteld zijn."
+
 #: plugins/generic/references/class_reference.inc:58
 #: plugins/generic/references/class_reference.inc:64
 #: plugins/personal/posix/generic.tpl:89
@@ -3803,29 +3772,32 @@ msgstr "Afdeling beheer"
 #: plugins/admin/groups/userSelect/user-list.xml:40
 #: plugins/admin/groups/singleUserSelect/singleUser-list.xml:40
 #: plugins/admin/groups/class_group.inc:210
-#: plugins/admin/groups/class_group.inc:1170
-#: plugins/admin/groups/class_group.inc:1180
-#: plugins/admin/users/class_userManagement.inc:541
+#: plugins/admin/groups/class_group.inc:1190
+#: plugins/admin/groups/class_group.inc:1200
+#: plugins/admin/users/class_userManagement.inc:536
 #: plugins/admin/users/user-list.xml:57
-#: plugins/personal/generic/class_user.inc:1341
-#: plugins/personal/generic/class_user.inc:1388
-#: plugins/personal/generic/class_user.inc:1718
-#: plugins/personal/generic/class_user.inc:1872
+#: plugins/personal/generic/class_user.inc:1325
+#: plugins/personal/generic/class_user.inc:1372
+#: plugins/personal/generic/class_user.inc:1703
+#: plugins/personal/generic/class_user.inc:1857
 msgid "Given name"
 msgstr "Naam"
 
 #: plugins/generic/references/class_reference.inc:87
 #: plugins/admin/groups/userSelect/user-list.xml:48
 #: plugins/admin/groups/singleUserSelect/singleUser-list.xml:48
+#: plugins/admin/groups/class_group.inc:210
+#: plugins/admin/groups/class_group.inc:1190
+#: plugins/admin/groups/class_group.inc:1200
 #: plugins/admin/users/user-list.xml:49
-#: plugins/personal/generic/class_user.inc:1717
+#: plugins/personal/generic/class_user.inc:1702
 msgid "Surname"
 msgstr "Achternaam"
 
 #: plugins/generic/references/class_reference.inc:87
 #: plugins/admin/groups/class_group.inc:210
-#: plugins/admin/groups/class_group.inc:1170
-#: plugins/admin/groups/class_group.inc:1180
+#: plugins/admin/groups/class_group.inc:1190
+#: plugins/admin/groups/class_group.inc:1200
 #: plugins/personal/posix/class_posixAccount.inc:869
 #: plugins/personal/posix/class_posixAccount.inc:872
 #: plugins/personal/posix/generic.tpl:64
@@ -3875,8 +3847,8 @@ msgid "Enter another user name"
 msgstr ""
 
 #: plugins/generic/references/class_aclResolver.inc:157
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:126
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:128
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:126
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:128
 #: plugins/addons/dyngroup/dyngroup.tpl:8
 #, fuzzy
 msgid "Filter"
@@ -3943,8 +3915,8 @@ msgstr "Voorkeurstaal"
 #: plugins/admin/departments/dep-list.xml:71
 #: plugins/admin/departments/dep-list.xml:138
 #: plugins/admin/departments/class_departmentManagement.inc:253
-#: plugins/personal/generic/class_user.inc:1736
-#: plugins/personal/generic/generic.tpl:309
+#: plugins/personal/generic/class_user.inc:1721
+#: plugins/personal/generic/generic.tpl:306
 msgid "Department"
 msgstr "Afdeling"
 
@@ -3974,14 +3946,14 @@ msgstr "Printer"
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:55
 #: plugins/admin/ogroups/class_ogroupManagement.inc:188
 #: plugins/admin/groups/class_groupManagement.inc:181
-#: plugins/admin/users/class_userManagement.inc:898
+#: plugins/admin/users/class_userManagement.inc:893
 #: plugins/admin/departments/generic.tpl:110
 #: plugins/admin/departments/class_department.inc:376
 #: plugins/admin/departments/organization.tpl:109
-#: plugins/personal/generic/class_user.inc:1369
-#: plugins/personal/generic/class_user.inc:1860
-#: plugins/personal/generic/generic.tpl:397
-#: plugins/personal/generic/generic.tpl:577
+#: plugins/personal/generic/class_user.inc:1353
+#: plugins/personal/generic/class_user.inc:1845
+#: plugins/personal/generic/generic.tpl:394
+#: plugins/personal/generic/generic.tpl:574
 msgid "Phone"
 msgstr "Telefoon"
 
@@ -4012,6 +3984,7 @@ msgstr "Groep"
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.xml:21
 #: plugins/admin/groups/group-filter.xml:17
 #: plugins/admin/users/user-filter.xml:19
+#: plugins/admin/newConfigManagement/DeviceConfig-filter.xml:14
 #: plugins/admin/departments/dep-filter.xml:17
 #: plugins/admin/acl/acl-filter.xml:18
 #: plugins/personal/posix/trustSelect/trust-filter.xml:17
@@ -4022,14 +3995,14 @@ msgstr "Parameters"
 
 #: plugins/admin/ogroups/objectSelect/selectObject-list.tpl:12
 #: plugins/admin/ogroups/ogroup-list.tpl:12
-#: plugins/admin/ogroups/class_ogroup.inc:841
+#: plugins/admin/ogroups/class_ogroup.inc:862
 #: plugins/admin/ogroups/generic.tpl:26
 #: plugins/admin/groups/userSelect/user-list.tpl:12
 #: plugins/admin/groups/generic.tpl:39
 #: plugins/admin/groups/singleUserSelect/singleUser-list.tpl:12
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.tpl:12
 #: plugins/admin/groups/group-list.tpl:12
-#: plugins/admin/groups/class_group.inc:1039
+#: plugins/admin/groups/class_group.inc:1059
 #: plugins/admin/users/user-list.tpl:12
 #: plugins/admin/departments/locality.tpl:28
 #: plugins/admin/departments/generic.tpl:39
@@ -4046,10 +4019,10 @@ msgstr "Parameters"
 #: plugins/admin/departments/organization.tpl:39
 #: plugins/admin/acl/acl-list.tpl:12 plugins/admin/acl/class_aclRole.inc:742
 #: plugins/admin/acl/acl_role.tpl:27
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:114
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:114
 #: plugins/addons/dyngroup/dyngroup.tpl:5
-#: plugins/personal/generic/class_user.inc:1729
-#: plugins/personal/generic/generic.tpl:170
+#: plugins/personal/generic/class_user.inc:1714
+#: plugins/personal/generic/generic.tpl:167
 #: plugins/personal/posix/trustSelect/trust-list.tpl:12
 #: plugins/personal/posix/groupSelect/group-list.tpl:12
 #: setup/setup_ldap.tpl:47
@@ -4062,7 +4035,7 @@ msgid "Object selection"
 msgstr "Groep instellingen"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroup.inc:837
+#: plugins/admin/ogroups/class_ogroup.inc:858
 msgid "Object groups"
 msgstr "Objectgroepen"
 
@@ -4091,97 +4064,97 @@ msgstr "Programma"
 msgid "Windows Install"
 msgstr "Windows werkstation"
 
-#: plugins/admin/ogroups/class_ogroup.inc:242
+#: plugins/admin/ogroups/class_ogroup.inc:244
 msgid "You cannot combine terminals and workstations in one object group!"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:316
-#: plugins/admin/users/class_userManagement.inc:463
-#: plugins/admin/users/class_userManagement.inc:497
-#: plugins/admin/users/class_userManagement.inc:528
+#: plugins/admin/ogroups/class_ogroup.inc:318
+#: plugins/admin/users/class_userManagement.inc:458
+#: plugins/admin/users/class_userManagement.inc:492
+#: plugins/admin/users/class_userManagement.inc:523
 msgid "none"
 msgstr "geen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:318
+#: plugins/admin/ogroups/class_ogroup.inc:320
 msgid "too many different objects!"
 msgstr "te veel verschillende object tpyes!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:320
+#: plugins/admin/ogroups/class_ogroup.inc:322
 msgid "users"
 msgstr "gebruikers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:321
+#: plugins/admin/ogroups/class_ogroup.inc:323
 msgid "groups"
 msgstr "groepen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:322
+#: plugins/admin/ogroups/class_ogroup.inc:324
 msgid "applications"
 msgstr "programma's"
 
-#: plugins/admin/ogroups/class_ogroup.inc:323
+#: plugins/admin/ogroups/class_ogroup.inc:325
 msgid "departments"
 msgstr "afdelingen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:324
+#: plugins/admin/ogroups/class_ogroup.inc:326
 msgid "servers"
 msgstr "servers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:325
+#: plugins/admin/ogroups/class_ogroup.inc:327
 msgid "workstations"
 msgstr "werkstations"
 
-#: plugins/admin/ogroups/class_ogroup.inc:326
+#: plugins/admin/ogroups/class_ogroup.inc:328
 #, fuzzy
 msgid "Windows workstations"
 msgstr "Toon werkstations"
 
-#: plugins/admin/ogroups/class_ogroup.inc:327
+#: plugins/admin/ogroups/class_ogroup.inc:329
 msgid "terminals"
 msgstr "terminals"
 
-#: plugins/admin/ogroups/class_ogroup.inc:328
+#: plugins/admin/ogroups/class_ogroup.inc:330
 msgid "phones"
 msgstr "telefoons"
 
-#: plugins/admin/ogroups/class_ogroup.inc:329
+#: plugins/admin/ogroups/class_ogroup.inc:331
 msgid "printers"
 msgstr "printers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:531
+#: plugins/admin/ogroups/class_ogroup.inc:533
 #, fuzzy
 msgid "Non existing DN:"
 msgstr "Niet bestaande dn: "
 
-#: plugins/admin/ogroups/class_ogroup.inc:649
+#: plugins/admin/ogroups/class_ogroup.inc:651
 #, php-format
 msgid ""
 "These systems are already configured by other object groups and cannot be "
 "added:"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:683
+#: plugins/admin/ogroups/class_ogroup.inc:685
 #, fuzzy
 msgid "You can combine two different object types at maximum, only!"
 msgstr "U kunt maximaal twee verschillende object types tegelijk combineren!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:827
-#: plugins/admin/groups/class_group.inc:1015
-#: plugins/admin/users/class_userManagement.inc:870
+#: plugins/admin/ogroups/class_ogroup.inc:848
+#: plugins/admin/groups/class_group.inc:1035
+#: plugins/admin/users/class_userManagement.inc:865
 #: plugins/admin/departments/class_department.inc:659
 #: plugins/personal/generic/class_user.inc:37
-#: plugins/personal/generic/class_user.inc:1684
+#: plugins/personal/generic/class_user.inc:1669
 #: plugins/personal/posix/generic.tpl:5 setup/setup_feedback.tpl:35
 #: setup/setup_feedback.tpl:36
 msgid "Generic"
 msgstr "Algemeen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:828
+#: plugins/admin/ogroups/class_ogroup.inc:849
 #, fuzzy
 msgid "Object group generic"
 msgstr "Objectgroep"
 
-#: plugins/admin/ogroups/class_ogroup.inc:843
-#: plugins/admin/groups/class_group.inc:1045
+#: plugins/admin/ogroups/class_ogroup.inc:864
+#: plugins/admin/groups/class_group.inc:1065
 #: plugins/personal/posix/trustModeDialog/generic.tpl:2
 msgid "System trust"
 msgstr "Systeem vertrouwen"
@@ -4215,42 +4188,47 @@ msgstr "Omschrijving voor deze groep"
 msgid "Member objects"
 msgstr "Lidmaatschap objecten"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:134
+#: plugins/admin/ogroups/tabs_ogroups.inc:139
 msgid "Phone queue"
 msgstr "Telefoonwachtrij"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:150
+#: plugins/admin/ogroups/tabs_ogroups.inc:155
 #: plugins/admin/groups/class_groupManagement.inc:165
-#: plugins/admin/users/class_userManagement.inc:877
+#: plugins/admin/users/class_userManagement.inc:872
 msgid "Mail"
 msgstr "E-mail"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:163
+#: plugins/admin/ogroups/tabs_ogroups.inc:164
+#, fuzzy
+msgid "Groupware"
+msgstr "Groepnaam"
+
+#: plugins/admin/ogroups/tabs_ogroups.inc:176
 #, fuzzy
 msgid "System settings"
 msgstr "Gebruikersinstellingen"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:175
-#: plugins/admin/ogroups/tabs_ogroups.inc:200
+#: plugins/admin/ogroups/tabs_ogroups.inc:188
+#: plugins/admin/ogroups/tabs_ogroups.inc:213
 #, fuzzy
 msgid "Recipe"
 msgstr "Ontvanger"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:187
-#: plugins/admin/ogroups/tabs_ogroups.inc:209
+#: plugins/admin/ogroups/tabs_ogroups.inc:200
+#: plugins/admin/ogroups/tabs_ogroups.inc:222
 msgid "Devices"
 msgstr "Apparaten"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:219
+#: plugins/admin/ogroups/tabs_ogroups.inc:232
 #, fuzzy
 msgid "Deployment summary"
 msgstr "Afdelingnaam"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:229
+#: plugins/admin/ogroups/tabs_ogroups.inc:242
 msgid "Desktop"
 msgstr ""
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:246
+#: plugins/admin/ogroups/tabs_ogroups.inc:259
 msgid "Applications"
 msgstr "Programma's"
 
@@ -4263,6 +4241,12 @@ msgstr "Objectgroep"
 #, fuzzy
 msgid "Please enter the new object group name"
 msgstr "Geef a.u.b. een nieuwe naam op"
+
+#: plugins/admin/ogroups/paste_generic.tpl:16
+msgid ""
+"Copy members. Be careful with this option, systems can only inherit from a "
+"single object group!"
+msgstr ""
 
 #: plugins/admin/ogroups/ogroup-list.xml:11
 msgid "List of object groups"
@@ -4303,6 +4287,7 @@ msgstr "Bewerken"
 #: plugins/admin/ogroups/ogroup-list.xml:98
 #: plugins/admin/groups/group-list.xml:98
 #: plugins/admin/users/user-list.xml:121
+#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:64
 #: plugins/admin/departments/dep-list.xml:160
 #: plugins/admin/departments/dep-list.xml:181
 #: plugins/admin/acl/acl-list.xml:95 plugins/admin/acl/acl-list.xml:144
@@ -4336,9 +4321,9 @@ msgstr "servers"
 msgid "User selection"
 msgstr "Groep instellingen"
 
-#: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:44
-#: plugins/personal/generic/generic.tpl:58
-#: plugins/personal/generic/generic.tpl:76
+#: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:41
+#: plugins/personal/generic/generic.tpl:55
+#: plugins/personal/generic/generic.tpl:73
 msgid "Multiple edit"
 msgstr ""
 
@@ -4431,19 +4416,12 @@ msgid "Remove group"
 msgstr "servers"
 
 #: plugins/admin/groups/class_group.inc:166
-#: plugins/admin/groups/class_group.inc:1220
+#: plugins/admin/groups/class_group.inc:1240
 #, fuzzy
 msgid "Cannot find group SID in your configuration!"
 msgstr ""
 "Kan de SID van deze groep niet vinden in de LDAP database of in uw "
 "configuratie bestand."
-
-#: plugins/admin/groups/class_group.inc:210
-#: plugins/admin/groups/class_group.inc:1170
-#: plugins/admin/groups/class_group.inc:1180
-#, fuzzy
-msgid "Surename"
-msgstr "Achternaam"
 
 #: plugins/admin/groups/class_group.inc:310
 msgid "Samba group"
@@ -4477,24 +4455,24 @@ msgstr ""
 msgid "Add UID '%s' to group '%s' failed: UID is used more than once!"
 msgstr ""
 
-#: plugins/admin/groups/class_group.inc:733
+#: plugins/admin/groups/class_group.inc:753
 #, fuzzy, php-format
 msgid "Cannot find any SID for '%s'!"
 msgstr "Kan bestand '%s' niet aanmaken."
 
-#: plugins/admin/groups/class_group.inc:738
+#: plugins/admin/groups/class_group.inc:758
 #, fuzzy, php-format
 msgid "Cannot find any RIDBASE for '%s'!"
 msgstr "Kan bestand '%s' niet aanmaken."
 
-#: plugins/admin/groups/class_group.inc:832
+#: plugins/admin/groups/class_group.inc:852
 #, php-format
 msgid "The gidNumber '%s' is already in use by %s!"
 msgstr ""
 
-#: plugins/admin/groups/class_group.inc:946
-#: plugins/admin/groups/class_group.inc:949
-#: plugins/admin/groups/class_group.inc:1041
+#: plugins/admin/groups/class_group.inc:966
+#: plugins/admin/groups/class_group.inc:969
+#: plugins/admin/groups/class_group.inc:1061
 #: plugins/personal/posix/class_posixAccount.inc:876
 #: plugins/personal/posix/class_posixAccount.inc:879
 #: plugins/personal/posix/generic.tpl:75
@@ -4502,38 +4480,38 @@ msgstr ""
 msgid "GID"
 msgstr "GID"
 
-#: plugins/admin/groups/class_group.inc:1016
+#: plugins/admin/groups/class_group.inc:1036
 #, fuzzy
 msgid "Generic group settings"
 msgstr "Algemene wachtrij instellingen"
 
-#: plugins/admin/groups/class_group.inc:1029
+#: plugins/admin/groups/class_group.inc:1049
 msgid ""
 "The 'ogroupRDN' statement defines the location where new object groups will "
 "be created. The default is 'ou=groups,'."
 msgstr ""
 
-#: plugins/admin/groups/class_group.inc:1043
+#: plugins/admin/groups/class_group.inc:1063
 #, fuzzy
 msgid "Samba group type"
 msgstr "Samba groep"
 
-#: plugins/admin/groups/class_group.inc:1044
+#: plugins/admin/groups/class_group.inc:1064
 #, fuzzy
 msgid "Samba domain name"
 msgstr "Samba home"
 
-#: plugins/admin/groups/class_group.inc:1046
+#: plugins/admin/groups/class_group.inc:1066
 #, fuzzy
 msgid "Phone pickup group"
 msgstr "Leden zitten in een telefoon beantwoordgroep"
 
-#: plugins/admin/groups/class_group.inc:1047
+#: plugins/admin/groups/class_group.inc:1067
 #, fuzzy
 msgid "Nagios group"
 msgstr "Nagios account"
 
-#: plugins/admin/groups/class_group.inc:1049
+#: plugins/admin/groups/class_group.inc:1069
 #, fuzzy
 msgid "Group member"
 msgstr "Groepsleden"
@@ -4545,7 +4523,7 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/groups/class_groupManagement.inc:157
-#: plugins/admin/users/class_userManagement.inc:874
+#: plugins/admin/users/class_userManagement.inc:869
 #: plugins/personal/posix/class_posixAccount.inc:37
 #: plugins/personal/posix/class_posixAccount.inc:270
 #: plugins/personal/posix/class_posixAccount.inc:290
@@ -4555,29 +4533,29 @@ msgid "POSIX"
 msgstr ""
 
 #: plugins/admin/groups/class_groupManagement.inc:158
-#: plugins/admin/users/class_userManagement.inc:875
+#: plugins/admin/users/class_userManagement.inc:870
 #, fuzzy
 msgid "Edit POSIX properties"
 msgstr "Bewerk UNIX eigenschappen"
 
 #: plugins/admin/groups/class_groupManagement.inc:166
-#: plugins/admin/users/class_userManagement.inc:879
+#: plugins/admin/users/class_userManagement.inc:874
 msgid "Edit mail properties"
 msgstr "Bewerk E-mail eigenschappen"
 
 #: plugins/admin/groups/class_groupManagement.inc:173
-#: plugins/admin/users/class_userManagement.inc:882
+#: plugins/admin/users/class_userManagement.inc:877
 #: plugins/personal/posix/class_posixAccount.inc:290
 msgid "Samba"
 msgstr "Samba"
 
 #: plugins/admin/groups/class_groupManagement.inc:174
-#: plugins/admin/users/class_userManagement.inc:883
+#: plugins/admin/users/class_userManagement.inc:878
 msgid "Edit samba properties"
 msgstr "Bewerk Samba eigenschappen"
 
 #: plugins/admin/groups/class_groupManagement.inc:182
-#: plugins/admin/users/class_userManagement.inc:899
+#: plugins/admin/users/class_userManagement.inc:894
 msgid "Edit phone properties"
 msgstr "Bewerk telefoon eigenschappen"
 
@@ -4592,13 +4570,13 @@ msgid "Edit start menu properties"
 msgstr "Bewerk Samba eigenschappen"
 
 #: plugins/admin/groups/class_groupManagement.inc:197
-#: plugins/admin/users/class_userManagement.inc:890
+#: plugins/admin/users/class_userManagement.inc:885
 #: plugins/personal/posix/class_posixAccount.inc:290
 msgid "Environment"
 msgstr "Omgeving"
 
 #: plugins/admin/groups/class_groupManagement.inc:198
-#: plugins/admin/users/class_userManagement.inc:891
+#: plugins/admin/users/class_userManagement.inc:886
 msgid "Edit environment properties"
 msgstr "Bewerk omgeving eigenschappen"
 
@@ -4679,18 +4657,18 @@ msgid "User template selection dialog"
 msgstr ""
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/users/class_userManagement.inc:535
+#: plugins/admin/users/class_userManagement.inc:530
 #: plugins/admin/users/user-list.xml:15 plugins/admin/users/user-list.xml:102
 #: plugins/admin/users/templatize.tpl:15
 msgid "Template"
 msgstr "Sjabloon"
 
-#: plugins/admin/users/template.tpl:23 plugins/personal/generic/generic.tpl:40
+#: plugins/admin/users/template.tpl:23 plugins/personal/generic/generic.tpl:37
 #: plugins/personal/generic/paste_generic.tpl:8
 msgid "Last name"
 msgstr "Achternaam"
 
-#: plugins/admin/users/template.tpl:27 plugins/personal/generic/generic.tpl:54
+#: plugins/admin/users/template.tpl:27 plugins/personal/generic/generic.tpl:51
 #: plugins/personal/generic/paste_generic.tpl:12
 msgid "First name"
 msgstr "Voornaam"
@@ -4700,60 +4678,51 @@ msgid ""
 "Manage aspects of user accounts like generic, POSIX, samba and mail settings"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:316
-#: plugins/personal/password/class_password.inc:130
-msgid ""
-"The passwords you've entered as 'New password' and 'Repeated new password' "
-"do not match."
-msgstr ""
-"Het nieuwe wachtwoord en het herhaalde wachtwoord komen niet met elkaar "
-"overeen."
-
-#: plugins/admin/users/class_userManagement.inc:392
+#: plugins/admin/users/class_userManagement.inc:387
 #, fuzzy
 msgid "You have no permission to change this users password!"
 msgstr "U heeft geen toestemming om uw wachtwoord te veranderen."
 
-#: plugins/admin/users/class_userManagement.inc:782
+#: plugins/admin/users/class_userManagement.inc:777
 #, fuzzy
 msgid "Account locking"
 msgstr "Account"
 
-#: plugins/admin/users/class_userManagement.inc:783
+#: plugins/admin/users/class_userManagement.inc:778
 #, php-format
 msgid ""
 "Password method '%s' does not support locking. Account (%s) has not been "
 "locked!"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:856
+#: plugins/admin/users/class_userManagement.inc:851
 #, fuzzy
 msgid "Unlock account"
 msgstr "Mijn account"
 
-#: plugins/admin/users/class_userManagement.inc:858
+#: plugins/admin/users/class_userManagement.inc:853
 #, fuzzy
 msgid "Lock account"
 msgstr "Mijn account"
 
-#: plugins/admin/users/class_userManagement.inc:871
+#: plugins/admin/users/class_userManagement.inc:866
 msgid "Edit generic properties"
 msgstr "Bewerk algemene eigenschappen"
 
-#: plugins/admin/users/class_userManagement.inc:886
+#: plugins/admin/users/class_userManagement.inc:881
 msgid "Netatalk"
 msgstr "Netatalk"
 
-#: plugins/admin/users/class_userManagement.inc:887
+#: plugins/admin/users/class_userManagement.inc:882
 #, fuzzy
 msgid "Edit Netatalk properties"
 msgstr "Bewerk Netatalk eigenschappen"
 
-#: plugins/admin/users/class_userManagement.inc:894
+#: plugins/admin/users/class_userManagement.inc:889
 msgid "FAX"
 msgstr "Fax"
 
-#: plugins/admin/users/class_userManagement.inc:895
+#: plugins/admin/users/class_userManagement.inc:890
 #, fuzzy
 msgid "Edit FAX properties"
 msgstr "Bewerk UNIX eigenschappen"
@@ -4816,6 +4785,69 @@ msgstr "Sjablonen"
 msgid "No templates available!"
 msgstr "Bestand is beschikbaar"
 
+#: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:9
+#, fuzzy
+msgid "Container"
+msgstr "Doorgaan"
+
+#: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:10
+msgid "Item"
+msgstr ""
+
+#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:10
+#, fuzzy
+msgid "List of items"
+msgstr "Lijst met gebruikers"
+
+#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:75
+#, fuzzy
+msgid "Edit item"
+msgstr "Bewerk certificaten"
+
+#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:82
+#, fuzzy
+msgid "Remove item"
+msgstr "Plaatje verwijderen"
+
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:8
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:9
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:352
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:353
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:359
+#, fuzzy
+msgid "Config management"
+msgstr "Systeembeheer"
+
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:42
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:95
+#, php-format
+msgid "Failed to load distributions, error was '%s'!"
+msgstr ""
+
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:262
+msgid "No selectable install methods returned!"
+msgstr ""
+
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:263
+#: setup/class_setup.inc:183
+#, fuzzy
+msgid "Setup"
+msgstr "Stel in"
+
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:278
+#, fuzzy
+msgid "Distribution"
+msgstr "Omschrijving"
+
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:284
+msgid "Release"
+msgstr ""
+
+#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:290
+#, fuzzy
+msgid "Component"
+msgstr "Windows beheerders"
+
 #: plugins/admin/departments/dep-list.xml:11
 #, fuzzy
 msgid "List of structural objects"
@@ -4866,8 +4898,8 @@ msgstr "Plaats"
 #: plugins/admin/departments/class_organizationGeneric.inc:114
 #: plugins/admin/departments/dep-filter.xml:91
 #: plugins/admin/departments/organization.tpl:4
-#: plugins/personal/generic/class_user.inc:1735
-#: plugins/personal/generic/generic.tpl:301 setup/setup_feedback.tpl:10
+#: plugins/personal/generic/class_user.inc:1720
+#: plugins/personal/generic/generic.tpl:298 setup/setup_feedback.tpl:10
 #: setup/setup_feedback.tpl:12
 msgid "Organization"
 msgstr "Organisatie"
@@ -4904,9 +4936,9 @@ msgstr "Omschrijving voor de afdeling"
 #: plugins/admin/departments/dcObject.tpl:39
 #: plugins/admin/departments/class_department.inc:684
 #: plugins/admin/departments/organization.tpl:51
-#: plugins/personal/generic/class_user.inc:1738
-#: plugins/personal/generic/generic.tpl:342
-#: plugins/personal/generic/generic.tpl:358
+#: plugins/personal/generic/class_user.inc:1723
+#: plugins/personal/generic/generic.tpl:339
+#: plugins/personal/generic/generic.tpl:355
 #, fuzzy
 msgid "Manager"
 msgstr "Windows gebruikers"
@@ -4967,8 +4999,8 @@ msgstr "Categorie voor deze subtree"
 #: plugins/admin/departments/class_department.inc:680
 #: plugins/admin/departments/organization.tpl:82
 #: plugins/admin/departments/organization.tpl:94
-#: plugins/personal/generic/class_user.inc:1749
-#: plugins/personal/generic/generic.tpl:439
+#: plugins/personal/generic/class_user.inc:1734
+#: plugins/personal/generic/generic.tpl:436
 msgid "Location"
 msgstr "Plaats"
 
@@ -4976,8 +5008,8 @@ msgstr "Plaats"
 #: plugins/admin/departments/class_organizationGeneric.inc:129
 #: plugins/admin/departments/class_department.inc:679
 #: plugins/admin/departments/organization.tpl:86
-#: plugins/personal/generic/class_user.inc:1748
-#: plugins/personal/generic/generic.tpl:447
+#: plugins/personal/generic/class_user.inc:1733
+#: plugins/personal/generic/generic.tpl:444
 msgid "State"
 msgstr "Provincie"
 
@@ -4994,8 +5026,8 @@ msgstr "Plaats van deze subtree"
 #: plugins/admin/departments/generic.tpl:103
 #: plugins/admin/departments/class_department.inc:681
 #: plugins/admin/departments/organization.tpl:102
-#: plugins/personal/generic/generic.tpl:188
-#: plugins/personal/generic/generic.tpl:455
+#: plugins/personal/generic/generic.tpl:185
+#: plugins/personal/generic/generic.tpl:452
 msgid "Address"
 msgstr "Adres"
 
@@ -5014,10 +5046,10 @@ msgstr "Basis telefoonnummer van deze subtree"
 #: plugins/admin/departments/class_department.inc:379
 #: plugins/admin/departments/class_department.inc:683
 #: plugins/admin/departments/organization.tpl:117
-#: plugins/personal/generic/class_user.inc:1372
-#: plugins/personal/generic/class_user.inc:1863
-#: plugins/personal/generic/generic.tpl:422
-#: plugins/personal/generic/generic.tpl:589
+#: plugins/personal/generic/class_user.inc:1356
+#: plugins/personal/generic/class_user.inc:1848
+#: plugins/personal/generic/generic.tpl:419
+#: plugins/personal/generic/generic.tpl:586
 msgid "Fax"
 msgstr "Fax"
 
@@ -5058,8 +5090,8 @@ msgid "Organization name"
 msgstr "Organisatie"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:131
-#: plugins/personal/generic/class_user.inc:1750
-#: plugins/personal/generic/generic.tpl:186
+#: plugins/personal/generic/class_user.inc:1735
+#: plugins/personal/generic/generic.tpl:183
 msgid "Postal address"
 msgstr "Adres thuis"
 
@@ -5250,8 +5282,8 @@ msgstr ""
 
 #: plugins/admin/acl/class_aclRole.inc:714 plugins/admin/acl/acl-list.xml:23
 #: plugins/admin/acl/acl-list.xml:82
-#: plugins/personal/generic/class_user.inc:1680
-#: plugins/personal/generic/generic.tpl:506
+#: plugins/personal/generic/class_user.inc:1665
+#: plugins/personal/generic/generic.tpl:503
 msgid "Role"
 msgstr "Funktie"
 
@@ -5271,31 +5303,31 @@ msgstr "Lijst met macro's"
 msgid "Paste ACL-role"
 msgstr "Verwijder gebruiker"
 
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:105
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:327
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:105
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:327
 msgid "Labeled URI"
 msgstr ""
 
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:119
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:121
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:119
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:121
 #: plugins/addons/dyngroup/dyngroup.tpl:7
 #, fuzzy
 msgid "Attribute"
 msgstr "Telefoon attributen "
 
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:128
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:128
 msgid "Surrounding brackets are required!"
 msgstr ""
 
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:136
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:136
 #, php-format
 msgid "The given filter '%s' for entry %s seems to be invalid!"
 msgstr ""
 
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:166
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:168
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:319
-#: plugins/addons/dyngroup/classDynamicLdapGroup.inc:320
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:166
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:168
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:319
+#: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:320
 #, fuzzy
 msgid "Dynamic object"
 msgstr "Object"
@@ -5558,14 +5590,14 @@ msgid "Serial number"
 msgstr "Telefoonnummer"
 
 #: plugins/personal/generic/class_user.inc:543
-#: plugins/personal/generic/class_user.inc:1731
+#: plugins/personal/generic/class_user.inc:1716
 #: plugins/personal/generic/generic_picture.tpl:1
 msgid "User picture"
 msgstr "Persoonlijk plaatje"
 
 #: plugins/personal/generic/class_user.inc:549
 #: plugins/personal/generic/class_user.inc:571
-#: plugins/personal/generic/generic.tpl:229
+#: plugins/personal/generic/generic.tpl:226
 #: plugins/personal/generic/generic_certs.tpl:3
 msgid "Certificates"
 msgstr "Certificaten"
@@ -5596,122 +5628,128 @@ msgstr "Geen certificaat geinstalleerd"
 msgid "The selected password method is no longer available."
 msgstr "Dit programma is niet meer beschikbaar."
 
-#: plugins/personal/generic/class_user.inc:1203
+#: plugins/personal/generic/class_user.inc:1050
+msgid ""
+"Cannot save user picture, GOsa requires the package 'imagemagick' or 'php5-"
+"imagick' to be installed!"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:1176
 msgid "Cannot build RDN: no + allowed to build sub RDN!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1210
+#: plugins/personal/generic/class_user.inc:1183
 msgid "Cannot build RDN: attribute is not defined!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1228
+#: plugins/personal/generic/class_user.inc:1201
 msgid "Cannot build RDN: invalid attribute parameters!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1299
+#: plugins/personal/generic/class_user.inc:1272
 #, fuzzy
 msgid "The selected password method requires initial configuration!"
 msgstr "Dit programma is niet meer beschikbaar."
 
-#: plugins/personal/generic/class_user.inc:1364
-#: plugins/personal/generic/class_user.inc:1754
-#: plugins/personal/generic/class_user.inc:1857
-#: plugins/personal/generic/generic.tpl:204
+#: plugins/personal/generic/class_user.inc:1348
+#: plugins/personal/generic/class_user.inc:1739
+#: plugins/personal/generic/class_user.inc:1842
+#: plugins/personal/generic/generic.tpl:201
 msgid "Homepage"
 msgstr "Homepage"
 
-#: plugins/personal/generic/class_user.inc:1375
-#: plugins/personal/generic/class_user.inc:1866
-#: plugins/personal/generic/generic.tpl:406
+#: plugins/personal/generic/class_user.inc:1359
+#: plugins/personal/generic/class_user.inc:1851
+#: plugins/personal/generic/generic.tpl:403
 msgid "Mobile"
 msgstr "GSM"
 
-#: plugins/personal/generic/class_user.inc:1378
-#: plugins/personal/generic/class_user.inc:1869
-#: plugins/personal/generic/generic.tpl:414
+#: plugins/personal/generic/class_user.inc:1362
+#: plugins/personal/generic/class_user.inc:1854
+#: plugins/personal/generic/generic.tpl:411
 msgid "Pager"
 msgstr "Pieper"
 
-#: plugins/personal/generic/class_user.inc:1383
-#: plugins/personal/generic/class_user.inc:1726
-#: plugins/personal/generic/generic.tpl:120
+#: plugins/personal/generic/class_user.inc:1367
+#: plugins/personal/generic/class_user.inc:1711
+#: plugins/personal/generic/generic.tpl:117
 msgid "Date of birth"
 msgstr "Geboortedatum"
 
-#: plugins/personal/generic/class_user.inc:1498
+#: plugins/personal/generic/class_user.inc:1482
 #, fuzzy
 msgid "Cannot open certificate!"
 msgstr "Het opgegeven certificaat kon geopend worden!"
 
-#: plugins/personal/generic/class_user.inc:1669
-#: plugins/personal/generic/generic.tpl:529
+#: plugins/personal/generic/class_user.inc:1654
+#: plugins/personal/generic/generic.tpl:526
 msgid "Unit"
 msgstr "Eenheid"
 
-#: plugins/personal/generic/class_user.inc:1670
-#: plugins/personal/generic/generic.tpl:554
+#: plugins/personal/generic/class_user.inc:1655
+#: plugins/personal/generic/generic.tpl:551
 msgid "House identifier"
 msgstr "Huis identificatie"
 
-#: plugins/personal/generic/class_user.inc:1671
-#: plugins/personal/generic/generic.tpl:471
+#: plugins/personal/generic/class_user.inc:1656
+#: plugins/personal/generic/generic.tpl:468
 msgid "Vocation"
 msgstr "Beroep"
 
-#: plugins/personal/generic/class_user.inc:1672
-#: plugins/personal/generic/generic.tpl:598
+#: plugins/personal/generic/class_user.inc:1657
+#: plugins/personal/generic/generic.tpl:595
 msgid "Last delivery"
 msgstr "Laatste levering"
 
-#: plugins/personal/generic/class_user.inc:1673
-#: plugins/personal/generic/generic.tpl:520
+#: plugins/personal/generic/class_user.inc:1658
+#: plugins/personal/generic/generic.tpl:517
 msgid "Person locality"
 msgstr "Werkplaats"
 
-#: plugins/personal/generic/class_user.inc:1674
-#: plugins/personal/generic/generic.tpl:479
+#: plugins/personal/generic/class_user.inc:1659
+#: plugins/personal/generic/generic.tpl:476
 msgid "Unit description"
 msgstr "Eenheid omschrijving"
 
-#: plugins/personal/generic/class_user.inc:1675
-#: plugins/personal/generic/generic.tpl:488
+#: plugins/personal/generic/class_user.inc:1660
+#: plugins/personal/generic/generic.tpl:485
 msgid "Subject area"
 msgstr "Werkgebied"
 
-#: plugins/personal/generic/class_user.inc:1676
-#: plugins/personal/generic/generic.tpl:497
+#: plugins/personal/generic/class_user.inc:1661
+#: plugins/personal/generic/generic.tpl:494
 msgid "Functional title"
 msgstr "Functionele titel"
 
-#: plugins/personal/generic/class_user.inc:1677
+#: plugins/personal/generic/class_user.inc:1662
 #: plugins/personal/generic/generic_certs.tpl:83
 msgid "Certificate serial number"
 msgstr "Certificaat serienummer"
 
-#: plugins/personal/generic/class_user.inc:1679
-#: plugins/personal/generic/generic.tpl:538
+#: plugins/personal/generic/class_user.inc:1664
+#: plugins/personal/generic/generic.tpl:535
 msgid "Street"
 msgstr "Straat"
 
-#: plugins/personal/generic/class_user.inc:1681
-#: plugins/personal/generic/generic.tpl:546
+#: plugins/personal/generic/class_user.inc:1666
+#: plugins/personal/generic/generic.tpl:543
 msgid "Postal code"
 msgstr "Postcode"
 
-#: plugins/personal/generic/class_user.inc:1685
+#: plugins/personal/generic/class_user.inc:1670
 #, fuzzy
 msgid "Generic user settings"
 msgstr "Algemene wachtrij instellingen"
 
-#: plugins/personal/generic/class_user.inc:1689
+#: plugins/personal/generic/class_user.inc:1674
 #: plugins/personal/posix/class_posixAccount.inc:1297
-#: plugins/personal/password/class_password.inc:205
+#: plugins/personal/password/class_password.inc:227
 #: plugins/personal/myaccount/class_MyAccount.inc:5
-#: plugins/personal/myaccount/main.inc:115
+#: plugins/personal/myaccount/main.inc:114
 msgid "My account"
 msgstr "Mijn account"
 
-#: plugins/personal/generic/class_user.inc:1707
+#: plugins/personal/generic/class_user.inc:1692
 #, php-format
 msgid ""
 "The 'accountRDN' option tells GOsa to use a placeholder pattern for "
@@ -5721,120 +5759,120 @@ msgid ""
 "disables the use of accountPrimaryAttribute and personalTitleInDn."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1721
+#: plugins/personal/generic/class_user.inc:1706
 #, fuzzy
 msgid "Allow definition of custom filters"
 msgstr "Configuratie bestand"
 
-#: plugins/personal/generic/class_user.inc:1723
-#: plugins/personal/generic/generic.tpl:95
+#: plugins/personal/generic/class_user.inc:1708
+#: plugins/personal/generic/generic.tpl:92
 msgid "Personal title"
 msgstr "Aanhef"
 
-#: plugins/personal/generic/class_user.inc:1724
-#: plugins/personal/generic/generic.tpl:105
+#: plugins/personal/generic/class_user.inc:1709
+#: plugins/personal/generic/generic.tpl:102
 msgid "Academic title"
 msgstr "Academische titel"
 
-#: plugins/personal/generic/class_user.inc:1727
-#: plugins/personal/generic/generic.tpl:143
+#: plugins/personal/generic/class_user.inc:1712
+#: plugins/personal/generic/generic.tpl:140
 msgid "Sex"
 msgstr "Geslacht"
 
-#: plugins/personal/generic/class_user.inc:1728
-#: plugins/personal/generic/generic.tpl:157
+#: plugins/personal/generic/class_user.inc:1713
+#: plugins/personal/generic/generic.tpl:154
 #, fuzzy
 msgid "Preferred language"
 msgstr "Voorkeurstaal"
 
-#: plugins/personal/generic/class_user.inc:1733
+#: plugins/personal/generic/class_user.inc:1718
 #, fuzzy
 msgid "Login restrictions"
 msgstr "Wachtwoord verloopt op"
 
-#: plugins/personal/generic/class_user.inc:1737
+#: plugins/personal/generic/class_user.inc:1722
 #, fuzzy
 msgid "Department number"
 msgstr "Afdelingnaam"
 
-#: plugins/personal/generic/class_user.inc:1739
+#: plugins/personal/generic/class_user.inc:1724
 #, fuzzy
 msgid "Employee number"
 msgstr "Functie"
 
-#: plugins/personal/generic/class_user.inc:1740
-#: plugins/personal/generic/generic.tpl:333
+#: plugins/personal/generic/class_user.inc:1725
+#: plugins/personal/generic/generic.tpl:330
 msgid "Employee type"
 msgstr "Functie"
 
-#: plugins/personal/generic/class_user.inc:1742
+#: plugins/personal/generic/class_user.inc:1727
 #, fuzzy
 msgid "Room number"
 msgstr "Telefoonnummer"
 
-#: plugins/personal/generic/class_user.inc:1743
+#: plugins/personal/generic/class_user.inc:1728
 #, fuzzy
 msgid "Telephone number"
 msgstr "Telefoonnummer"
 
-#: plugins/personal/generic/class_user.inc:1744
+#: plugins/personal/generic/class_user.inc:1729
 #, fuzzy
 msgid "Pager number"
 msgstr "Telefoonnummer"
 
-#: plugins/personal/generic/class_user.inc:1745
+#: plugins/personal/generic/class_user.inc:1730
 #, fuzzy
 msgid "Mobile number"
 msgstr "GSM nummer"
 
-#: plugins/personal/generic/class_user.inc:1746
+#: plugins/personal/generic/class_user.inc:1731
 #, fuzzy
 msgid "Fax number"
 msgstr "Serienummer"
 
-#: plugins/personal/generic/class_user.inc:1752
+#: plugins/personal/generic/class_user.inc:1737
 msgid "Home postal address"
 msgstr "Adres thuis"
 
-#: plugins/personal/generic/class_user.inc:1753
+#: plugins/personal/generic/class_user.inc:1738
 #, fuzzy
 msgid "Home phone number"
 msgstr "Telefoonnummer"
 
-#: plugins/personal/generic/class_user.inc:1755
+#: plugins/personal/generic/class_user.inc:1740
 #, fuzzy
 msgid "User password method"
 msgstr "Wachtwoord encryptie"
 
-#: plugins/personal/generic/class_user.inc:1756
+#: plugins/personal/generic/class_user.inc:1741
 #, fuzzy
 msgid "User certificates"
 msgstr "Standaard certificaat"
 
-#: plugins/personal/generic/class_user.inc:1964
+#: plugins/personal/generic/class_user.inc:1949
 #, fuzzy
 msgid "Entries differ"
 msgstr "Regels per pagina"
 
+#: plugins/personal/generic/generic.tpl:1
 #: plugins/personal/generic/generic.tpl:3
-#: plugins/personal/generic/generic.tpl:6
 #: plugins/personal/generic/paste_generic.tpl:6
 msgid "Personal information"
 msgstr "Persoonlijke informatie"
 
-#: plugins/personal/generic/generic.tpl:11
+#: plugins/personal/generic/generic.tpl:8
 #: plugins/personal/generic/paste_generic.tpl:31
 #: plugins/personal/generic/generic_picture.tpl:2
 #, fuzzy
 msgid "The users picture"
 msgstr "Persoonlijk plaatje"
 
-#: plugins/personal/generic/generic.tpl:24
+#: plugins/personal/generic/generic.tpl:21
 msgid "Change picture"
 msgstr "Verander plaatje"
 
-#: plugins/personal/generic/generic.tpl:37
-#: plugins/personal/generic/generic.tpl:84
+#: plugins/personal/generic/generic.tpl:34
+#: plugins/personal/generic/generic.tpl:81
 #: plugins/personal/posix/generic.tpl:51
 #: plugins/personal/posix/paste_generic.tpl:17
 #: plugins/personal/posix/posix_shadow.tpl:2
@@ -5842,66 +5880,66 @@ msgstr "Verander plaatje"
 msgid "Account settings"
 msgstr "Groep instellingen"
 
-#: plugins/personal/generic/generic.tpl:86
+#: plugins/personal/generic/generic.tpl:83
 msgid "Template name"
 msgstr "Sjabloon naam"
 
-#: plugins/personal/generic/generic.tpl:196
+#: plugins/personal/generic/generic.tpl:193
 msgid "Private phone"
 msgstr "Telefoon privé"
 
-#: plugins/personal/generic/generic.tpl:212
+#: plugins/personal/generic/generic.tpl:209
 msgid "Password storage"
 msgstr "Wachtwoord encryptie"
 
-#: plugins/personal/generic/generic.tpl:232
+#: plugins/personal/generic/generic.tpl:229
 msgid "Edit certificates"
 msgstr "Bewerk certificaten"
 
-#: plugins/personal/generic/generic.tpl:244
+#: plugins/personal/generic/generic.tpl:241
 msgid "Restrict login to"
 msgstr ""
 
-#: plugins/personal/generic/generic.tpl:252
-#: plugins/personal/generic/generic.tpl:272
+#: plugins/personal/generic/generic.tpl:249
+#: plugins/personal/generic/generic.tpl:269
 msgid "IP or network"
 msgstr ""
 
+#: plugins/personal/generic/generic.tpl:285
 #: plugins/personal/generic/generic.tpl:288
-#: plugins/personal/generic/generic.tpl:291
-#: plugins/personal/generic/generic.tpl:299
-#: plugins/personal/generic/generic.tpl:386
-#: plugins/personal/generic/generic.tpl:437
-#: plugins/personal/generic/generic.tpl:469
-#: plugins/personal/generic/generic.tpl:518
-#: plugins/personal/generic/generic.tpl:567
+#: plugins/personal/generic/generic.tpl:296
+#: plugins/personal/generic/generic.tpl:383
+#: plugins/personal/generic/generic.tpl:434
+#: plugins/personal/generic/generic.tpl:466
+#: plugins/personal/generic/generic.tpl:515
+#: plugins/personal/generic/generic.tpl:564
 msgid "Organizational information"
 msgstr "Organisatie informatie"
 
-#: plugins/personal/generic/generic.tpl:299
-#: plugins/personal/generic/generic.tpl:386
-#: plugins/personal/generic/generic.tpl:437
-#: plugins/personal/generic/generic.tpl:469
-#: plugins/personal/generic/generic.tpl:518
-#: plugins/personal/generic/generic.tpl:567
+#: plugins/personal/generic/generic.tpl:296
+#: plugins/personal/generic/generic.tpl:383
+#: plugins/personal/generic/generic.tpl:434
+#: plugins/personal/generic/generic.tpl:466
+#: plugins/personal/generic/generic.tpl:515
+#: plugins/personal/generic/generic.tpl:564
 #, fuzzy
 msgid "part"
 msgstr "Samenvatting"
 
-#: plugins/personal/generic/generic.tpl:317
+#: plugins/personal/generic/generic.tpl:314
 msgid "Department No."
 msgstr "Afdeling nr."
 
-#: plugins/personal/generic/generic.tpl:325
+#: plugins/personal/generic/generic.tpl:322
 msgid "Employee No."
 msgstr "Personeel nr."
 
-#: plugins/personal/generic/generic.tpl:388
-#: plugins/personal/generic/generic.tpl:569
+#: plugins/personal/generic/generic.tpl:385
+#: plugins/personal/generic/generic.tpl:566
 msgid "Room No."
 msgstr "Kamer nr."
 
-#: plugins/personal/generic/generic.tpl:583
+#: plugins/personal/generic/generic.tpl:580
 msgid "Please use the phone tab"
 msgstr "Gebruik a.u.b. de telefoon tab"
 
@@ -5923,7 +5961,7 @@ msgid "Set new password"
 msgstr "Nieuw wachtwoord instellen"
 
 #: plugins/personal/generic/paste_generic.tpl:43
-#: plugins/personal/generic/generic_picture.tpl:14
+#: plugins/personal/generic/generic_picture.tpl:13
 msgid "Remove picture"
 msgstr "Plaatje verwijderen"
 
@@ -6264,29 +6302,7 @@ msgstr "Wis velden"
 msgid "Change user password"
 msgstr "Verander wachtwoord"
 
-#: plugins/personal/password/class_password.inc:127
-msgid "You need to specify your current password in order to proceed."
-msgstr "U moet uw huidige wachtwoord opgeven om door te kunnen gaan."
-
-#: plugins/personal/password/class_password.inc:133
-msgid "The password you've entered as 'New password' is empty."
-msgstr "Het nieuw ingevoerde wachtwoord is leeg."
-
-#: plugins/personal/password/class_password.inc:136
-msgid "The password used as new and current are too similar."
-msgstr ""
-"Het huidige wachtwoord en het nieuwe wachtwoord lijken te veel op elkaar."
-
-#: plugins/personal/password/class_password.inc:139
-msgid "The password used as new is to short."
-msgstr "Het nieuw opgegeven wachtwoord is te kort."
-
-#: plugins/personal/password/class_password.inc:145
-#, fuzzy, php-format
-msgid "External password changer reported a problem: %s."
-msgstr "Extern wachtwoord verander mechanisme rapporteerde een probleem:"
-
-#: plugins/personal/password/class_password.inc:159
+#: plugins/personal/password/class_password.inc:156
 msgid ""
 "The password you've entered as your current password doesn't match the real "
 "one."
@@ -6294,15 +6310,39 @@ msgstr ""
 "Het wachtwoord dat u opgegeven heeft als uw huidige wachtwoord is niet "
 "correct."
 
-#: plugins/personal/password/class_password.inc:165
+#: plugins/personal/password/class_password.inc:159
 #, fuzzy
 msgid "You have no permission to change your password."
 msgstr "U heeft geen toestemming om uw wachtwoord te veranderen."
 
-#: plugins/personal/password/class_password.inc:201
+#: plugins/personal/password/class_password.inc:223
 #, fuzzy
 msgid "User password"
 msgstr "Wachtwoord wissen"
+
+#: plugins/personal/password/class_password.inc:236
+msgid ""
+"The 'PRELOCK' statement of class password, describes a hook which gets "
+"called before a password gets locked."
+msgstr ""
+
+#: plugins/personal/password/class_password.inc:245
+msgid ""
+"The 'POSTLOCK' statement of class password, describes a hook which gets "
+"called after a password is locked."
+msgstr ""
+
+#: plugins/personal/password/class_password.inc:254
+msgid ""
+"The 'PREUNLOCK' statement of class password, describes a hook which gets "
+"called before a password gets un-locked."
+msgstr ""
+
+#: plugins/personal/password/class_password.inc:263
+msgid ""
+"The 'POSTUNLOCK' statement of class password, describes a hook which gets "
+"called after a password is un-locked."
+msgstr ""
 
 #: plugins/personal/password/nochange.tpl:2
 #: plugins/personal/myaccount/nochange.tpl:2
@@ -6402,11 +6442,6 @@ msgstr "Geef a.u.b. een geldige scriptnaam op."
 msgid ""
 "You have to select at least one of both options, subscribe or send feedback."
 msgstr ""
-
-#: setup/class_setup.inc:183
-#, fuzzy
-msgid "Setup"
-msgstr "Stel in"
 
 #: setup/class_setup.inc:195
 #, fuzzy
@@ -7289,17 +7324,17 @@ msgstr "Ldap server"
 msgid "Perform test on your current LDAP schema"
 msgstr ""
 
-#: setup/class_setupStep_Welcome.inc:38
+#: setup/class_setupStep_Welcome.inc:42
 #, fuzzy
 msgid "Welcome"
 msgstr "Welkom %s!"
 
-#: setup/class_setupStep_Welcome.inc:39
+#: setup/class_setupStep_Welcome.inc:43
 #, fuzzy
 msgid "The welcome message"
 msgstr "Verwijder dit bericht"
 
-#: setup/class_setupStep_Welcome.inc:40
+#: setup/class_setupStep_Welcome.inc:44
 #, fuzzy
 msgid "Welcome to the GOsa setup assistent"
 msgstr "Welkom bij het GOsa installatie programma!"
@@ -7341,6 +7376,161 @@ msgid "This step allows you to select your preferred language."
 msgstr ""
 "Deze dialoog maakt het mogelijk om een apparaat te verbinden aan de computer "
 "die u momenteel aan het bewerken bent."
+
+#, fuzzy
+#~ msgid ""
+#~ "The file '%s' specified for '%s:%s' cannot be created neither be used for "
+#~ "writing!"
+#~ msgstr ""
+#~ "Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module "
+#~ "'%s' bestaat niet."
+
+#, fuzzy
+#~ msgid "The values for 'New password' and 'Repeated new password' differ!"
+#~ msgstr ""
+#~ "Het nieuwe wachtwoord en het herhaalde wachtwoord komen niet met elkaar "
+#~ "overeen."
+
+#, fuzzy
+#~ msgid "The password used as new and current are too similar!"
+#~ msgstr ""
+#~ "Het huidige wachtwoord en het nieuwe wachtwoord lijken te veel op elkaar."
+
+#, fuzzy
+#~ msgid "The password used as new is to short!"
+#~ msgstr "Het nieuw opgegeven wachtwoord is te kort."
+
+#, fuzzy
+#~ msgid "External password changer reported a problem: %s"
+#~ msgstr "Extern wachtwoord verander mechanisme rapporteerde een probleem:"
+
+#, fuzzy
+#~ msgid ""
+#~ "Command %s specified as post modify action for plugin %s does not exist!"
+#~ msgstr ""
+#~ "Het commando '%s' dat gespecificeerd is als CHECK inhaker voor module "
+#~ "'%s' bestaat niet."
+
+#, fuzzy
+#~ msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
+#~ msgstr ""
+#~ "FATAAL: Fout bij het verbinden met de LDAP server. De server meldt: '%s'."
+
+#, fuzzy
+#~ msgid "Username / UID is not unique inside the LDAP tree!"
+#~ msgstr ""
+#~ "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
+
+#, fuzzy
+#~ msgid ""
+#~ "Username / UID is not unique inside the LDAP tree. Please contact your "
+#~ "Administrator."
+#~ msgstr ""
+#~ "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
+
+#, fuzzy
+#~ msgid ""
+#~ "Cannot create locking information in LDAP tree. Please contact your "
+#~ "administrator!"
+#~ msgstr ""
+#~ "Kan de blokkade informatie niet ophalen uit de LDAP database. Controleer "
+#~ "a.u.b. de 'config' regel in gosa.conf!"
+
+#, fuzzy
+#~ msgid "LDAP server returned: %s"
+#~ msgstr "LDAP server"
+
+#, fuzzy
+#~ msgid ""
+#~ "Found multiple locks for object to be locked. This should not happen - "
+#~ "cleaning up multiple references."
+#~ msgstr ""
+#~ "Er zijn meerdere blokkades voor het te blokkeren object gevonden. Dat zou "
+#~ "niet mogelijk moeten zijn. Meervoudige verwijzingen worden opgeschoond."
+
+#, fuzzy
+#~ msgid "The size limit of %d entries is exceed!"
+#~ msgstr "De hoeveelheidslimiet van %d invoeren is overschreden!"
+
+#~ msgid ""
+#~ "Set the new size limit to %s and show me this message if the limit still "
+#~ "exceeds"
+#~ msgstr ""
+#~ "Stel de nieuwe hoeveelheidslimiet in op %s en toon me dit bericht indien "
+#~ "de limiet nog steeds overschreden wordt."
+
+#, fuzzy
+#~ msgid "incomplete"
+#~ msgstr "onvolledig"
+
+#, fuzzy
+#~ msgid "You're going to edit the LDAP entry/entries %s"
+#~ msgstr "U staat op het punt de invoer '%s' te kopieren."
+
+#~ msgid "Apply filter"
+#~ msgstr "Filter toepassen"
+
+#~ msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+#~ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+#, fuzzy
+#~ msgid "Cannot write to revision file!"
+#~ msgstr "Kan bestand '%s' niet aanmaken."
+
+#, fuzzy
+#~ msgid "LDAP warning"
+#~ msgstr "LDAP beheer"
+
+#, fuzzy
+#~ msgid "Cannot get schema information from server. No schema check possible!"
+#~ msgstr ""
+#~ "Kan de schema informatie niet ophalen van de server. Schema controle is "
+#~ "onmogelijk!"
+
+#, fuzzy
+#~ msgid "Used to store account specific informations."
+#~ msgstr "Het account verloopt op"
+
+#, fuzzy
+#~ msgid "Missing required object class '%s'!"
+#~ msgstr "Toon FAI sjabloon objecten"
+
+#, fuzzy
+#~ msgid "Missing optional object class '%s'!"
+#~ msgstr "Toon FAI sjabloon objecten"
+
+#, fuzzy
+#~ msgid "Version mismatch for required object class '%s' (!=%s)!"
+#~ msgstr "Toon FAI sjabloon objecten"
+
+#, fuzzy
+#~ msgid "Class(es) available"
+#~ msgstr "Bestand is beschikbaar"
+
+#~ msgid ""
+#~ "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to "
+#~ "exist."
+#~ msgstr ""
+#~ "Het commando '%s' dat gespecificeerd is als POSTMODIFY voor module '%s' "
+#~ "bestaat niet."
+
+#, fuzzy
+#~ msgid "Cannot allocate a free ID:"
+#~ msgstr ""
+#~ "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
+
+#, fuzzy
+#~ msgid "Cannot allocate a free ID!"
+#~ msgstr ""
+#~ "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
+
+#, fuzzy
+#~ msgid "Surename"
+#~ msgstr "Achternaam"
+
+#, fuzzy
+#~ msgid "External password changer reported a problem: %s."
+#~ msgstr "Extern wachtwoord verander mechanisme rapporteerde een probleem:"
 
 #~ msgid "Username"
 #~ msgstr "Gebruikersnaam"
@@ -7892,9 +8082,6 @@ msgstr ""
 #~ "Indien u zeker bent drukt u dan 'Verwijderen' om door te gaan of "
 #~ "'Annuleren' om te annuleren."
 
-#~ msgid "Main"
-#~ msgstr "Hoofdmenu"
-
 #~ msgid "Help"
 #~ msgstr "Help"
 
@@ -7960,10 +8147,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "All categories"
 #~ msgstr "Categorie toevoegen"
-
-#, fuzzy
-#~ msgid "Systems"
-#~ msgstr "Systeem"
 
 #~ msgid "Startup"
 #~ msgstr "Opstarten"
@@ -8270,10 +8453,6 @@ msgstr ""
 
 #~ msgid "Show terminals"
 #~ msgstr "Toon terminals"
-
-#, fuzzy
-#~ msgid "List of systems"
-#~ msgstr "Lijst met gebruikers"
 
 #, fuzzy
 #~ msgid "List navigation"
@@ -9117,10 +9296,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Service infrastructure"
 #~ msgstr "Zoek binnen subtree"
-
-#, fuzzy
-#~ msgid "Password change failed."
-#~ msgstr "Het veranderen van het wachtwoord is niet toegestaan"
 
 #~ msgid "You are not allowed to set this users password!"
 #~ msgstr ""

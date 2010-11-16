@@ -242,7 +242,7 @@ class core extends plugin {
                             "name"          => "statsDatabaseEnabled",
                             "type"          => "bool",
                             "default"       => "false",
-                            "description"   => _("Enables/Disables GOSa usage statistics moduls."),
+                            "description"   => _("Enables/Disables GOsa usage statistics moduls."),
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
                             "group"         => "core",

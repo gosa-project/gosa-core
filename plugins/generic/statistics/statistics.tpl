@@ -13,7 +13,7 @@
 
 {else if !$serverAccessible || !$validRpcHandle || $rpcHandle_Error}
 
-    {t}Communication with the GOsa-backend failed. Please check the rpc configuration!{/t}
+    {t}Communication with the GOsa-backend failed. Please check the RPC configuration!{/t}
 
 {else}
 
