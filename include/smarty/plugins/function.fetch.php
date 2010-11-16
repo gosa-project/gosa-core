@@ -16,12 +16,11 @@
  *       (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  * @param array $params parameters
- * @param object $smarty Smarty object
  * @param object $template template object
  * @return string|null if the assign parameter is passed, Smarty assigns the
  *                     result to a template variable
  */
-function smarty_function_fetch($params, $smarty, $template)
+function smarty_function_fetch($params, $template)
 {
     if (empty($params['file'])) {
         trigger_error("[plugin] fetch parameter 'file' cannot be empty",E_USER_NOTICE);
@@ -29,8 +28,8 @@ function smarty_function_fetch($params, $smarty, $template)
     }
 
     $content = '';
-    if ($template->security && !preg_match('!^(http|ftp)://!i', $params['file'])) {
-        if(!$smarty->security_handler->isTrustedResourceDir($params['file'])) {
+    if (isset($template->security_policy) && !preg_match('!^(http|ftp)://!i', $params['file'])) {
+        if(!$template->security_policy->isTrustedResourceDir($params['file'])) {
             return;
         }
         
