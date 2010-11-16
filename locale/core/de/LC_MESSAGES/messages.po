@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-20 18:49+0200\n"
-"PO-Revision-Date: 2010-11-16 14:12+0100\n"
+"PO-Revision-Date: 2010-11-16 14:52+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: \n"
@@ -56,7 +56,6 @@ msgid "Copy & paste wizard"
 msgstr "Kopieren & Einfügen - Assistent"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:7
-#, fuzzy
 msgid ""
 "Some values need to be unique in the complete directory while some "
 "combinations make no sense. Please edit the values below to fulfill the "
@@ -64,7 +63,7 @@ msgid ""
 msgstr ""
 "Bestimmte Werte müssen im gesamten Verzeichnis eindeutig sein, während "
 "andere Kombinationen keinen Sinn ergeben. GOsa zeigt die relevanten "
-"Attribute. Bitte verwalten Sie die Werte, die unten angezeigt werden, um die "
+"Attribute. Bitte ändern Sie die Werte, die unten angezeigt werden, um die "
 "Auflagen zu erfüllen."
 
 #: ihtml/themes/default/copyPasteDialog.tpl:9
@@ -141,7 +140,6 @@ msgstr ""
 "Ignoriere diesen Fehler und zeige alle vom LDAP-Server gelieferten Einträge"
 
 #: ihtml/themes/default/sizelimit.tpl:11
-#, fuzzy
 msgid ""
 "ignore this error and show all entries that fit into the defined size limit"
 msgstr ""
@@ -525,6 +523,8 @@ msgid ""
 "Enter the current password and the new password (twice) in the fields below "
 "and press the 'Change' button."
 msgstr ""
+"Bitte geben Sie das momentane, sowie zweimalig das neue Passwort in den "
+"Feldern unten ein und betätigen Sie die 'Passwort setzen' Schaltfläche."
 
 #: ihtml/themes/default/password.tpl:74 plugins/admin/users/user-list.xml:128
 #: plugins/admin/users/user-list.xml:230
@@ -980,7 +980,6 @@ msgid "PHP configuration"
 msgstr "PHP-Konfiguration"
 
 #: html/main.php:203
-#, fuzzy
 msgid ""
 "Fatal error: Register globals is active. Please fix this in order to "
 "continue."
@@ -1010,22 +1009,24 @@ msgid "Plug-in"
 msgstr "Erweiterung"
 
 #: html/main.php:411
-#, fuzzy, php-format
+#, php-format
 msgid "Fatal error: Cannot find any plugin definitions for plugin %s!"
 msgstr ""
-"FATAL: Es kann keine Erweiterung für die Definition von '%s' gefunden werden!"
+"Schwerer Fehler: Es kann keine Erweiterung für die Definition von '%s' "
+"gefunden werden!"
 
 #: html/main.php:427
 msgid "Configuration Error"
 msgstr "Konfigurationsfehler"
 
 #: html/main.php:428
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Fatal error: not all POST variables have been transfered by PHP - please "
 "inform your administrator!"
 msgstr ""
-"FATAL: es wurden nicht alle POST-Variablen von PHP übertragen - bitte "
+"Schwerer Fehler: es wurden nicht alle POST-Variablen von PHP übertragen - "
+"bitte "
 "informieren Sie den Administrator!"
 
 #: html/helpviewer.php:64
@@ -1782,16 +1783,18 @@ msgid ""
 "UNIX-timestamp pointing to the date GOsa will ask for a registration again "
 "(-1 to disable)"
 msgstr ""
+"UNIX-Zeitstempel für die nächste GOsa-Registrierungsfrage (-1 zum "
+"Deaktivieren)"
 
 #: include/class_jsonRPC.inc:38
-#, fuzzy, php-format
+#, php-format
 msgid "The RPC connection (%s) specified for %s:%s is invalid: %s"
 msgstr "Die RPC-Verbindung (%s) für %s:%s ist ungültig: %s"
 
 #: include/class_jsonRPC.inc:331
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown HTTP status code %s!"
-msgstr "Unbekannter HTTP status code %s!"
+msgstr "Unbekannter HTTP Status-Code %s!"
 
 #: include/class_multi_plug.inc:362
 msgid "You are currently editing multiple entries."
@@ -2408,14 +2411,13 @@ msgid "Communication failure with the infrastructure service: %s"
 msgstr "Kommunikationsfehler mit dem Infrastruktur Dienst: %s"
 
 #: include/utils/class_msgPool.inc:487
-#, fuzzy
 msgid "Communication failure with the GOsa-NG service!"
 msgstr "Kommunikationsfehler mit dem GOsa-NG Dienst!"
 
 #: include/utils/class_msgPool.inc:489
-#, fuzzy, php-format
+#, php-format
 msgid "Communication failure with the GOsa-NG service: %s"
-msgstr "Kommunikationsfehler mit dem Infrastruktur Dienst: %s"
+msgstr "Kommunikationsfehler mit dem GOsa-NG Dienst: %s"
 
 #: include/utils/class_msgPool.inc:496 include/utils/class_msgPool.inc:499
 #, php-format
@@ -2530,7 +2532,7 @@ msgid "while operating on LDAP server %s"
 msgstr "während der Arbeit auf LDAP-Server '%s'"
 
 #: include/class_ldap.inc:979
-#, fuzzy, php-format
+#, php-format
 msgid "Command line programm %s is missing!"
 msgstr "Kommandozeilenprogramm %s fehlt!"
 
@@ -2595,33 +2597,30 @@ msgid "Schema validation error"
 msgstr "Fehler beim Validieren des Schemas"
 
 #: include/class_configRegistry.inc:689
-#, fuzzy, php-format
+#, php-format
 msgid "The value %s specified for %s:%s needs to be a bool value!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Der Wert %s welcher für %s:%s angegeben wurde, muss boolesch sein!"
 
 #: include/class_configRegistry.inc:704
-#, fuzzy, php-format
+#, php-format
 msgid "The value %s specified for %s:%s needs to be a string!"
 msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+"Der Wert %s welcher für %s:%s angegeben wurde, muss eine Zeichenkette sein!"
 
 #: include/class_configRegistry.inc:719
-#, fuzzy, php-format
+#, php-format
 msgid "The value %s specified for %s:%s needs to be numeric!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Der Wert %s welcher für %s:%s angegeben wurde, muss nummerisch sein!"
 
 #: include/class_configRegistry.inc:734
-#, fuzzy, php-format
+#, php-format
 msgid "The path %s specified for %s:%s is invalid!"
-msgstr "'%s' Kommando für Modul %s ist ungültig!"
+msgstr "Der Pfad %s, welcher für %s:%s angegeben ist, ist ungültig!"
 
 #: include/class_configRegistry.inc:750 include/class_configRegistry.inc:797
-#, fuzzy, php-format
+#, php-format
 msgid "The folder %s specified for %s:%s does not exists!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Der Ordner %s, welcher für %s:%s angegeben ist, existiert nicht!"
 
 #: include/class_configRegistry.inc:755
 #, fuzzy, php-format
@@ -2630,43 +2629,39 @@ msgstr ""
 "Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
 
 #: include/class_configRegistry.inc:775 include/class_configRegistry.inc:780
-#, fuzzy, php-format
+#, php-format
 msgid "The file %s specified for %s:%s is not writeable!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Die Datei %s, welche für %s:%s angegeben wurde ist nicht schreibbar!"
 
 #: include/class_configRegistry.inc:802
-#, fuzzy, php-format
+#, php-format
 msgid "The folder %s specified for %s:%s is not writeable!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Der Ordner %s, welche für %s:%s angegeben wurde ist nicht schreibbar!"
 
 #: include/class_configRegistry.inc:820
-#, fuzzy, php-format
+#, php-format
 msgid "The file %s specified for %s:%s does not exists!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Die Datei %s, welche für %s:%s angegeben wurde, existiert nicht!"
 
 #: include/class_configRegistry.inc:825
-#, fuzzy, php-format
+#, php-format
 msgid "The file %s specified for %s:%s is not readable!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Die Datei %s, welche für %s:%s angegeben wurde ist nicht lesbar!"
 
 #: include/class_configRegistry.inc:841
-#, fuzzy, php-format
+#, php-format
 msgid "The command %s specified for %s:%s is invalid!"
-msgstr "'%s' Kommando (%s) für Modul %s ist ungültig!"
+msgstr "Das Kommando %s, welche für %s:%s angegeben wurde ist ungültig!"
 
 #: include/class_configRegistry.inc:856
-#, fuzzy, php-format
+#, php-format
 msgid "The DN %s specified for %s:%s is invalid!"
-msgstr "'%s' Kommando für Modul %s ist ungültig!"
+msgstr "Die DN %s, welche für %s:%s angegeben wurde ist ungültig!"
 
 #: include/class_configRegistry.inc:871
-#, fuzzy, php-format
+#, php-format
 msgid "The RDN %s specified for %s:%s is invalid!"
-msgstr "'%s' Kommando für Modul %s ist ungültig!"
+msgstr "Die RDN %s, welche für %s:%s angegeben wurde ist ungültig!"
 
 #: include/class_gosaSupportDaemon.inc:112
 msgid "GOsa support daemon"
@@ -2704,83 +2699,73 @@ msgid "Configuration"
 msgstr "Konfiguration"
 
 #: include/class_config.inc:1130
-#, fuzzy
 msgid ""
 "The configuration file you are using is outdated. Please move the GOsa "
 "configuration file away to run the GOsa setup again."
 msgstr ""
 "Die von Ihnen verwendete Konfigurationsdatei scheint veraltet zu sein. Bitte "
-"entfernen Sie diese Datei und starten Sie das GOsa-Setup."
+"entfernen Sie diese Datei und starten Sie das GOsa-Setup erneut."
 
 #: include/class_config.inc:1172 include/class_config.inc:1203
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable %s is not "
 "set."
 msgstr ""
 "Die Snapshot-Funktionalität ist aktiviert, aber die erforderliche Variable "
-"'%s' ist nicht gesetzt."
+"%s ist nicht gesetzt."
 
 #: include/class_config.inc:1185
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required compression module "
 "is missing. Please install %s."
 msgstr ""
-"Die Snapshot-Funktionalität ist aktiviert, aber das erforderliche Modul '%s' "
-"ist nicht verfügbar. Bitte installieren Sie '%s'."
+"Die Snapshot-Funktionalität ist aktiviert, aber das erforderliche "
+"compression Modul ist nicht verfügbar. Bitte installieren Sie %s."
 
 #: include/class_core.inc:113 include/class_core.inc:119
 #: plugins/generic/references/class_aclResolver.inc:291
-#, fuzzy
 msgid "All"
-msgstr "ACL"
+msgstr "Alle"
 
 #: include/class_core.inc:114
-#, fuzzy
 msgid "All objects"
-msgstr "Objekte verschieben"
+msgstr "Alle Objekte"
 
 #: include/class_core.inc:132
-#, fuzzy
 msgid "Traditional"
-msgstr "Terminal"
+msgstr "Traditionell"
 
 #: include/class_core.inc:132
 msgid "Use samba pool"
 msgstr "Samba-Pool verwenden"
 
 #: include/class_core.inc:164 include/class_core.inc:167
-#, fuzzy
 msgid "hours"
-msgstr "Donnerstag"
+msgstr "Stunden"
 
 #: include/class_core.inc:181
-#, fuzzy
 msgid "None"
-msgstr "keine"
+msgstr "Keine"
 
 #: include/class_core.inc:185 setup/class_setupStep_Language.inc:47
 msgid "Automatic"
 msgstr "Automatisch"
 
 #: include/class_core.inc:197
-#, fuzzy
 msgid "User value"
-msgstr "Benutzername"
+msgstr "Benutzer-Wert"
 
 #: include/class_core.inc:206
-#, fuzzy
 msgid "Core"
-msgstr "Schliessen"
+msgstr "Kern"
 
 #: include/class_core.inc:207
-#, fuzzy
 msgid "GOsa core plugin"
-msgstr "GOsa-Grundeinstellungen"
+msgstr "GOsa Core-Modul"
 
 #: include/class_core.inc:235
-#, fuzzy
 msgid ""
 "The 'htaccessAuthentication' variable tells GOsa to use either htaccess "
 "authentication or LDAP authentication. This can be used if you want to use i."
@@ -2792,11 +2777,11 @@ msgstr ""
 
 #: include/class_core.inc:245
 msgid "Enables/Disables GOSa usage statistics moduls."
-msgstr ""
+msgstr "Aktiviert/Deaktiviert die GOsa Nutzungsstatistik."
 
 #: include/class_core.inc:255
 msgid "The database file for GOSa usage statistics."
-msgstr ""
+msgstr "Datenbankdatei für die GOsa Nutzungsstatistik."
 
 #: include/class_core.inc:265
 msgid ""
@@ -3363,14 +3348,12 @@ msgid ""
 msgstr ""
 
 #: include/class_pluglist.inc:118
-#, fuzzy
 msgid "The configuration format has changed: please run the setup again!"
 msgstr ""
-"Das Konfigurationsformat hat sich geändert. Bitte durchlaufen Sie erneut die "
-"Einrichtung!"
+"Das Konfigurationsformat hat sich geändert: bitte starten Sie das Setup "
+"erneut!"
 
 #: include/class_pluglist.inc:263
-#, fuzzy
 msgid ""
 "You are currently editing a database entry. Do you want to discard the "
 "changes?"
@@ -3398,14 +3381,14 @@ msgid "Copy and paste failed!"
 msgstr "Kopieren & Einfügen ist fehlgeschlagen!"
 
 #: include/class_CopyPasteHandler.inc:118
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot set permission for %s"
-msgstr "Kann Berechtigungen für '%s' nicht setzen"
+msgstr "Kann Berechtigungen für %s nicht setzen"
 
 #: include/class_CopyPasteHandler.inc:159
-#, fuzzy, php-format
+#, php-format
 msgid "'%s' is no valid LDAP object"
-msgstr "'%s' ist kein gültiges LDAP-Objekt"
+msgstr "%s ist kein gültiges LDAP-Objekt"
 
 #: include/class_CopyPasteHandler.inc:176
 #, php-format
@@ -3437,7 +3420,7 @@ msgstr "Bitte beheben Sie obigen Fehler und laden die Seite neu."
 
 #: plugins/generic/statistics/statistics.tpl:2
 msgid "Usage statistics"
-msgstr ""
+msgstr "Nutzungsstatistik"
 
 #: plugins/generic/statistics/statistics.tpl:5
 #: plugins/generic/statistics/statistics.tpl:10
@@ -3452,13 +3435,12 @@ msgid "Dash board"
 msgstr ""
 
 #: plugins/generic/statistics/statistics.tpl:16
-#, fuzzy
 msgid ""
 "Communication with the GOsa-backend failed. Please check the rpc "
 "configuration!"
 msgstr ""
-"Es wurde keine Plugin-Definition gefunden um '%s' zu Initialisieren. Bitte "
-"prüfen Sie Ihre Konfigurationsdatei!"
+"Kommunikation mit dem GOsa-Backend ist fehlgeschlagen. Bitte prüfen Sie die "
+"RPC-Konfiguration!"
 
 #: plugins/generic/statistics/statistics.tpl:22
 msgid "Send"
@@ -3687,19 +3669,16 @@ msgid "Group membership"
 msgstr "Gruppenmitgliedschaft"
 
 #: plugins/generic/references/class_reference.inc:70
-#, fuzzy
 msgid "Role membership"
-msgstr "Gruppenmitgliedschaft"
+msgstr "Rollenmitgliedschaft"
 
 #: plugins/generic/references/class_reference.inc:76
-#, fuzzy
 msgid "Object group membership"
-msgstr "Objektgruppe (Allgemein)"
+msgstr "Objektgruppenmitgliedschaft"
 
 #: plugins/generic/references/class_reference.inc:82
-#, fuzzy
 msgid "Department manager"
-msgstr "Name der Abteilung"
+msgstr "Abteilungs-Verwalter"
 
 #: plugins/generic/references/class_reference.inc:87
 #: plugins/admin/groups/userSelect/user-list.xml:40
@@ -3740,14 +3719,12 @@ msgid "UID"
 msgstr "UID"
 
 #: plugins/generic/references/class_reference.inc:88
-#, fuzzy
 msgid "User manager"
-msgstr "Benutzername"
+msgstr "Benutzer-Verwalter"
 
 #: plugins/generic/references/contents.tpl:2
-#, fuzzy
 msgid "Object information"
-msgstr "Verbindungs-Information"
+msgstr "Objekt-Information"
 
 #: plugins/generic/references/contents.tpl:3
 #, fuzzy
@@ -3760,18 +3737,16 @@ msgstr "Zeige rohe Objektdaten"
 
 #: plugins/generic/references/contents.tpl:18
 #: plugins/generic/references/contents.tpl:20
-#, fuzzy
 msgid "Last modification"
-msgstr "Benutzerkennung"
+msgstr "Letzte Änderung"
 
 #: plugins/generic/references/contents.tpl:29
 msgid "Object references"
 msgstr "Objekt-Referenzen"
 
 #: plugins/generic/references/contents.tpl:45
-#, fuzzy
 msgid "ACL trace"
-msgstr "ACL-Typ"
+msgstr "ACL-Verfolgung"
 
 #: plugins/generic/references/class_aclResolver.inc:131
 msgid "Enter another user name"
@@ -3796,24 +3771,20 @@ msgstr "Liste der effektiven ACLs für '%s'"
 
 #: plugins/generic/references/class_aclResolver.inc:187
 #: plugins/generic/references/class_aclResolver.inc:191
-#, fuzzy
 msgid "Object permissions"
-msgstr "Konto-Berechtigungen"
+msgstr "Objekt-Berechtigungen"
 
 #: plugins/generic/references/class_aclResolver.inc:299
-#, fuzzy
 msgid "create"
-msgstr "Anlegen"
+msgstr "anlegen"
 
 #: plugins/generic/references/class_aclResolver.inc:300
-#, fuzzy
 msgid "remove"
-msgstr "Entfernen"
+msgstr "entfernen"
 
 #: plugins/generic/references/class_aclResolver.inc:301
-#, fuzzy
 msgid "move"
-msgstr "Entfernen"
+msgstr "verschieben"
 
 #: plugins/generic/welcome/main.inc:26
 #, php-format
@@ -3822,9 +3793,8 @@ msgstr "Willkommen %s!"
 
 #: plugins/generic/welcome/class_welcome.inc:5
 #: plugins/generic/welcome/class_welcome.inc:6
-#, fuzzy
 msgid "Back to main menu"
-msgstr "GOsa Hauptmenü"
+msgstr "Zurück zum Hauptmenü"
 
 #: plugins/generic/welcome/welcome.tpl:8
 msgid "The GOsa team"
@@ -4031,9 +4001,8 @@ msgid "workstations"
 msgstr "Arbeitsstationen"
 
 #: plugins/admin/ogroups/class_ogroup.inc:328
-#, fuzzy
 msgid "Windows workstations"
-msgstr "Arbeitsstationen"
+msgstr "Windows-Arbeitsstationen"
 
 #: plugins/admin/ogroups/class_ogroup.inc:329
 msgid "terminals"
@@ -4048,9 +4017,8 @@ msgid "printers"
 msgstr "Drucker"
 
 #: plugins/admin/ogroups/class_ogroup.inc:533
-#, fuzzy
 msgid "Non existing DN:"
-msgstr "Unbekannte dn:"
+msgstr "Unbekannte DN:"
 
 #: plugins/admin/ogroups/class_ogroup.inc:651
 #, php-format
@@ -4126,14 +4094,12 @@ msgid "Mail"
 msgstr "Mail"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:164
-#, fuzzy
 msgid "Groupware"
-msgstr "Gruppenname"
+msgstr "Groupware"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:176
-#, fuzzy
 msgid "System settings"
-msgstr "Benutzer-Einstellungen"
+msgstr "Systemeinstellungen"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:188
 #: plugins/admin/ogroups/tabs_ogroups.inc:213
