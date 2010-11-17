@@ -1,7 +1,11 @@
 GOsa2 changelog
 ===============
+* gosa 2.6.12
+  - Escaped passed command line arguments.
+  - Updated password handling and hooks, allows sepcial chars in passwords.
+  - Added lock/unlock events for users.
 
-* gosa 2.6.11
+* gosa 2.6.11   (2010-08-06)
   - Updated post-event handling and added pre-event hooks
   - Updated sudoers plugin, to allow special chars
   - Updated samba flags and account expiration to be 3.4.x compliant
@@ -11,7 +15,7 @@ GOsa2 changelog
   - Temporarily use included 'templateCompileDirectory' if the
     external definition is wrong
 
-* gosa 2.6.10
+* gosa 2.6.10   (2010-05-12 )
   - Fixed timestamps in samba domain info dialog
   - Fixed Problem with Copy & Paste of servers
   - Fixed several list filter descriptions
@@ -21,7 +25,7 @@ GOsa2 changelog
   - Updated gofon macro saving handling, avoids database duplicates
   - Improved PPD parser
 
-* gosa 2.6.9
+* gosa 2.6.9    (2010-03-15)
   - Fixed problem with initial phone accounts, sip type was NULL
   - Fixed TLS issues in the setup
   - Fixed locale issues in the setup
@@ -30,7 +34,7 @@ GOsa2 changelog
   - Modified sieve behaviour to use sieve-discard for "drop_own_mails"
   - Modified filter descriptions to behave more like former 2.6 releases
 
-* gosa 2.6.8
+* gosa 2.6.8    (2010-02-19)
   - Base selector displays descriptions and icons now
   - Base selector autocomplete
   - Fixed gosa.conf system generation
@@ -38,7 +42,7 @@ GOsa2 changelog
   - Improved ACL handling for new lists
   - Fixed phone filters
 
-* gosa 2.6.7
+* gosa 2.6.7    (2010-02-02)
   - Added more information to DHCP service dialog (thanks to Mathieu)
   - Added more checks for DNS zone records
   - Added IMAP folder autocreation
@@ -58,7 +62,7 @@ GOsa2 changelog
   - Updated integrated smarty to version 3.0b7 to avoid broken templates
     during further development
 
-* gosa 2.6.6
+* gosa 2.6.6    (2009-10-12)
   - Added ssh public key management
   - Added LVM support to FAI modules using setup-storage
   - Added DHCP/DNS options to the OPSI hosts
@@ -89,7 +93,7 @@ GOsa2 changelog
   - Removed outdated samba 2 mode
   - Various minor bugfixes
 
-* gosa 2.6.5
+* gosa 2.6.5    (2009-06-30)
   - Updated locales
   - Improved PPD handling
   - Added more sanity checks in group management
@@ -105,7 +109,7 @@ GOsa2 changelog
   - Updated logging on debian systems
   - Various minor bugfixes
 
-* gosa 2.6.4
+* gosa 2.6.4    (2009-02-10)
   - Added missing images
   - Fixed issue with the FAI log viewer
   - Made DNS TTL settings optional
@@ -123,14 +127,14 @@ GOsa2 changelog
   - Added phoneNumber limitations to match asterisk realtime extension tables
   - Updated addressbook permissions
 
-* gosa 2.6.3
+* gosa 2.6.3    (2009-01-15)
   - Fixed several issues, occurred when using user templates
   - Fixed problem with department creation, since GOsa 2.6.1
   - Fixed exponential escaping of special chars in dns record entries
   - Added samba domain information to samba tab
   - Removed readonly attributes from samba tab
 
-* gosa 2.6.2
+* gosa 2.6.2    (2009-01-08)
   - Updated german locales
   - Updated french locales
   - Updated spanish locales
@@ -142,7 +146,7 @@ GOsa2 changelog
   - Setup cleanups
   - Edit locking improvements, code cleanup
 
-* gosa 2.6.1
+* gosa 2.6.1    (2008-12-04)
   - Build seperate packages for plugin schema files
   - Make ACL editor more robust
   - Fix problem with self modify ACL detection
@@ -160,7 +164,7 @@ GOsa2 changelog
   - Fixed issues with user templates and storing password methods
   - Removed forced dependency on GOsa-SI
 
-* gosa 2.6
+* gosa 2.6      (2008-11-07)
   - Redesign of ACL handling
     - Roles
     - Fine grained read, write, change controls down to
