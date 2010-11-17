@@ -3873,5 +3873,29 @@ function gen_uuid()
     );
 }
 
+function gosa_file_name($filename)
+{
+    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
+    if(move_uploaded_file($filename, $tempfile)){ 
+       return( $tempfile);
+    }
+}
+
+function gosa_file($filename)
+{
+    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
+    if(move_uploaded_file($filename, $tempfile)){ 
+       return file( $tempfile );
+    }
+}
+
+function gosa_fopen($filename, $mode)
+{
+    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
+    if(move_uploaded_file($filename, $tempfile)){ 
+       return fopen( $tempfile, $mode );
+    }
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
