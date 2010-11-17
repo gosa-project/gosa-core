@@ -53,18 +53,6 @@ $clicks = session::get('clicks');
 $clicks ++ ;
 session::set('clicks', $clicks);
 
-
-/* On some systems we can not operate on uploaded tmp files. We need to 
- *  explicitely copy them first 
- */
-foreach($_FILES as $postName => $entry){
-    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
-    if(move_uploaded_file($_FILES[$postName]['tmp_name'], $tempfile)){ 
-        $_FILES[$postName]['tmp_name'] = $tempfile;
-    }
-}
-
-
 pathNavigator::clear();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
