@@ -424,11 +424,12 @@ class user extends plugin
 
         /* Check for clean upload */
         if ($_FILES['picture_file']['name'] != ""){
-            if (!file_exists($_FILES['picture_file']['tmp_name'])) {
+            $filename = gosa_file_name($_FILES['picture_file']['tmp_name']);
+            if (!file_exists($filename)) {
                 msg_dialog::display(_("Error"), _("Cannot upload file!"), ERROR_DIALOG);
             }else{
                 /* Activate new picture */
-                $this->set_picture($_FILES['picture_file']['tmp_name']);
+                $this->set_picture($filename);
             }
         }
         $this->picture_dialog= FALSE;
@@ -508,7 +509,7 @@ class user extends plugin
               array_key_exists('name', $_FILES[$val."_file"]) &&
               $_FILES[$val."_file"]['name'] != "" &&
               is_readable($_FILES[$val."_file"]['tmp_name'])) {
-            $this->set_cert("$val", $_FILES[$val."_file"]['tmp_name']);
+            $this->set_cert("$val", gosa_file_name($_FILES[$val."_file"]['tmp_name']));
           }
         }
 
@@ -1597,7 +1598,7 @@ class user extends plugin
     $this->set_acl_base($this->base);
 
     if((isset($_FILES['picture_file']['tmp_name'])) && ($_FILES['picture_file']['size'] > 0)){
-      $this->set_picture($_FILES['picture_file']['tmp_name']);
+      $this->set_picture(gosa_file_name($_FILES['picture_file']['tmp_name']));
     }
 
     /* Remove picture? */
