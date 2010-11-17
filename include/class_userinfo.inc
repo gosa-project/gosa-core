@@ -708,7 +708,6 @@ class userinfo
             }
           }
         }else{
-          trigger_error("Invalid type of category ".$category);
           $acl = "";
         }
         $this->result_cache['has_complete_category_acls'][$dn][$category] = $acl;
