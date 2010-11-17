@@ -1,17 +1,26 @@
 GOsa2 changelog
 ===============
 
-* gosa 2.6.99
-  - Updated default design
-  - Updated and fixed english wording
-  - Rewrote filtering methods
-  - Rewrote reference tabs
-  - Replaced all lists by either listing or sortable_listing
+* gosa 2.7
+  - Updated design. CSS 3, mostly w3c conform.
+  - Updated and fixed english wording.
+  - Rewrote filtering methods, allows to define self-made filters.
+  - Rewrote reference tabs, it now resolve the users acls.
+  - Replaced all lists by either listing or sortable_listing-
   - Added dynamic groups to core functionality. Thanks to <Thomas Chemineau>
   - Added property editor plugin, including property validation and migration.
-  - Rewrote schema check, more flexible and only checks for required classes. 
-  - Stripped setup to minimum requirements. (Use property editor form fine-tuning)
+  - Rewrote schema check, more flexible and only checks for required classes.
+  - Stripped setup to minimum requirements. (Use property editor form fine-tuning).
   - Introduced dynamic path-menu, replaces the old 'MyAccount' section.
+  - Added premodify, precreate and preremove events to be able to act before things get saved.
+  - Hardened handling of sepcial chars in user inputs.
+  - Added a wildcard ACL to allow to given ACLs to 'everyone'
+  - Disallow UTF-8 characters in passwords.
+  - Switch to the new version of the smarty template engine, version 3.
+  - Updated the ldap export plugins to use the cli, which is much faster.
+  - Intruduced a new image rendering based on sprites, increases performance.
+  - Added automatic logout, for security reasons.
+  - Allow to use replacements like {%var[n-m]} in pre and post events and user templates.
 
 * gosa 2.6.9
   - Fixed problem with initial phone accounts, sip type was NULL
