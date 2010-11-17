@@ -3613,7 +3613,7 @@ function detectLdapSpecialCharHandling()
     // In the DN we've to use escaped characters, but the object name (o)
     //  has the be un-escaped.
     $name = 'GOsaLdapEncoding_,_"_(_)_+_/';
-    $dnName = 'GOsaLdapEncoding_\,_\"_(_)_\+_\/';
+    $dnName = 'GOsaLdapEncoding_\,_\"_(_)_\+_/';
    
     // Prapare name to be useable in filters
     $fixed= normalizeLdap(str_replace('\\\\', '\\\\\\', $name));
