@@ -711,7 +711,7 @@ function ldap_expired_account($config, $userdn, $uid)
     // An account is locked/expired once its expiration date has reached (shadowExpire).
     // If the optional attribute (shadowInactive) is set, we've to postpone
     //  the account expiration by the amount of days specified in (shadowInactive).
-    if($shadowExpire != null && $shadowExpire >= $current){
+    if($shadowExpire != null && $shadowExpire <= $current){
 
         // The account seems to be expired, but we've to check 'shadowInactive' additionally.
         // ShadowInactive specifies an amount of days we've to reprieve the user.
