@@ -31,6 +31,7 @@ Index: gosa/gosa-core/include/functions.inc
 +require_once("/var/cache/gosa/class.cache");
  require_once ("functions_debug.inc");
  require_once ("accept-to-gettext.inc");
+
 Index: gosa/gosa-core/update-gosa
 ===================================================================
 --- gosa.orig/gosa-core/update-gosa 2008-06-10 07:56:22.000000000 +0000
