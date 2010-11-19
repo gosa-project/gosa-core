@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-07-09 20:24+0200\n"
-"PO-Revision-Date: 2010-08-06 11:30+0200\n"
+"PO-Revision-Date: 2010-11-19 17:43+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3922,7 +3922,7 @@ msgstr "Description du département"
 #: plugins/personal/generic/generic.tpl:340
 #: plugins/personal/generic/generic.tpl:361
 msgid "Manager"
-msgstr ""
+msgstr "Responsable"
 
 #: plugins/admin/departments/locality.tpl:67
 #: plugins/admin/departments/generic.tpl:132
@@ -4814,11 +4814,11 @@ msgstr "Forcer le changement de mot de passe au la connexion"
 
 #: plugins/personal/posix/class_posixAccount.inc:1467
 msgid "Shadow min"
-msgstr ""
+msgstr "nb minimal entre changements"
 
 #: plugins/personal/posix/class_posixAccount.inc:1468
 msgid "Shadow max"
-msgstr ""
+msgstr "Max valid time"
 
 #: plugins/personal/posix/class_posixAccount.inc:1469
 msgid "Shadow warning"
