@@ -24,7 +24,7 @@ Index: gosa/gosa-core/include/functions.inc
 --- gosa.orig/gosa-core/include/functions.inc	2010-10-04 12:18:46.000000000 +0200
 +++ gosa/gosa-core/include/functions.inc	2010-10-04 12:20:38.000000000 +0200
 @@ -73,7 +73,7 @@
- $svn_revision = '$Revision: 19783 $';
+ define('DES3_CBC_SHA1',16);
  
  /* Include required files */
 -require_once("class_location.inc");
