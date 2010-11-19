@@ -62,8 +62,10 @@ class tabs
     $this->acl_category = $acl_category;
     foreach ($data as &$tab){
 
-      if (!plugin_available($tab['CLASS']) && $this->config->boolValueIsTrue("core","developmentMode")){
-        trigger_error(sprintf("Unknown class %s!", bold($tab['CLASS'])));
+      if (!plugin_available($tab['CLASS'])){
+        if($this->config->boolValueIsTrue("core","developmentMode")){
+            trigger_error(sprintf("Unknown class %s!", bold($tab['CLASS'])));
+        }
       	continue;
       }
       if ($this->current == "")  $this->current= $tab['CLASS'];
