@@ -95,7 +95,7 @@ function get_classes($folder= ".")
   }
 
   $dh = opendir(".");
-  while(false !== ($file = readdir($dh))){
+  while(is_resource($dh) && false !== ($file = readdir($dh))){
 
     if (preg_match("/.*\.svn.*/", $file) ||
         preg_match("/.*smarty.*/i",$file) ||
@@ -126,7 +126,7 @@ function get_classes($folder= ".")
     }
   }
 
-  closedir($dh);
+  @closedir($dh);
   chdir($currdir);
 
   return ($result);
