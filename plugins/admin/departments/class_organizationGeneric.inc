@@ -22,119 +22,119 @@
 
 class organization extends department
 {
-	/* attribute list for save action */
-  var $attributes     = array( "o", "ou", "description","userPassword","searchGuide",
-      "seeAlso","businessCategory","x121Address","registeredAddress","manager",
-      "destinationIndicator","preferredDeliveryMethod","telexNumber",
-      "telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street",
-      "postOfficeBox","postalCode", "postalAddress","physicalDeliveryOfficeName",
-      "st","l","teletexTerminalIdentifier","gosaUnitTag");
+    /* attribute list for save action */
+    var $attributes     = array( "o", "ou", "description","userPassword","searchGuide",
+            "seeAlso","businessCategory","x121Address","registeredAddress","manager",
+            "destinationIndicator","preferredDeliveryMethod","telexNumber",
+            "telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street",
+            "postOfficeBox","postalCode", "postalAddress","physicalDeliveryOfficeName",
+            "st","l","teletexTerminalIdentifier","gosaUnitTag");
 
-  var $objectclasses  = array("top", "gosaDepartment");
-  var $structuralOC   = array("organization");
+    var $objectclasses  = array("top", "gosaDepartment");
+    var $structuralOC   = array("organization");
 
-  /* Attributes 
-   */ 
-  var $st                       ="";
-  var $l                        ="";
-  var $description              ="";
-  var $userPassword             ="";
-  var $searchGuide              ="";
-  var $seeAlso                  ="";
-  var $businessCategory         ="";
-  var $x121Address              ="";
-  var $registeredAddress        ="";
-  var $destinationIndicator     ="";
-  var $preferredDeliveryMethod  ="";
-  var $telexNumber              ="";
-  var $telephoneNumber          ="";
-  var $internationaliSDNNumber  ="";
-  var $facsimileTelephoneNumber ="";
-  var $street                   ="";
-  var $postOfficeBox            ="";
-  var $postalCode               ="";
-  var $postalAddress            ="";
-  var $teletexTerminalIdentifier="";
-  var $physicalDeliveryOfficeName="";
+    /* Attributes 
+     */ 
+    var $st                       ="";
+    var $l                        ="";
+    var $description              ="";
+    var $userPassword             ="";
+    var $searchGuide              ="";
+    var $seeAlso                  ="";
+    var $businessCategory         ="";
+    var $x121Address              ="";
+    var $registeredAddress        ="";
+    var $destinationIndicator     ="";
+    var $preferredDeliveryMethod  ="";
+    var $telexNumber              ="";
+    var $telephoneNumber          ="";
+    var $internationaliSDNNumber  ="";
+    var $facsimileTelephoneNumber ="";
+    var $street                   ="";
+    var $postOfficeBox            ="";
+    var $postalCode               ="";
+    var $postalAddress            ="";
+    var $teletexTerminalIdentifier="";
+    var $physicalDeliveryOfficeName="";
 
-  /* Naming attributes 
-   */
-  var $o            ="";
-  var $type         = "organization";
-  var $orgi_o       = "";
-  var $namingAttr   = "o";
-
-  var $manager_enabled = FALSE;
-  var $manager_name ="";
-  var $manager ="";
-
-  function check()
-  {
-    $message = plugin::check();
-
-		/* Check for presence of this department */
-		$ldap= $this->config->get_ldap_link();
-    $ldap->ls ("(&(o=".$this->o.")(objectClass=organization))", $this->base, array('dn'));
-    if ($this->orig_o == "new" && $ldap->count()){
-			$message[]= msgPool::duplicated(_("Name"));
-		} elseif ($this->orig_dn != $this->dn && $ldap->count()){
-			$message[]= msgPool::duplicated(_("Name"));
-		}
-
-		/* All required fields are set? */
-		if ($this->o == ""){
-			$message[]= msgPool::required(_("Name"));
-		}elseif(tests::is_department_name_reserved($this->o,$this->base)){
-      $message[]= msgPool::reserved(_("Name"));
-    }elseif(preg_match ('/[#+:=>\\\\\/]/', $this->o)){
-			$message[]= msgPool::invalid(_("Name"), $this->o, "/[^#+:=>\\\\\/]/");
-		}
-
-    /* Check description */
-		if ($this->description == ""){
-			$message[]= msgPool::required(_("Description"));
-		}
-
-    /* Check if we are allowed to create or move this object
+    /* Naming attributes 
      */
-    if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
-      $message[] = msgPool::permCreate();
-    }elseif($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
-      $message[] = msgPool::permMove();
+    var $o            ="";
+    var $type         = "organization";
+    var $orgi_o       = "";
+    var $namingAttr   = "o";
+
+    var $manager_enabled = FALSE;
+    var $manager_name ="";
+    var $manager ="";
+
+    function check()
+    {
+        $message = plugin::check();
+
+        /* Check for presence of this department */
+        $ldap= $this->config->get_ldap_link();
+        $ldap->ls ("(&(o=".$this->o.")(objectClass=organization))", $this->base, array('dn'));
+        if ($this->orig_o == "new" && $ldap->count()){
+            $message[]= msgPool::duplicated(_("Name"));
+        } elseif ($this->orig_dn != $this->dn && $ldap->count()){
+            $message[]= msgPool::duplicated(_("Name"));
+        }
+
+        /* All required fields are set? */
+        if ($this->o == ""){
+            $message[]= msgPool::required(_("Name"));
+        }elseif(tests::is_department_name_reserved($this->o,$this->base)){
+            $message[]= msgPool::reserved(_("Name"));
+        }elseif(preg_match ('/[#+:=>\\\\\/]/', $this->o)){
+            $message[]= msgPool::invalid(_("Name"), $this->o, "/[^#+:=>\\\\\/]/");
+        }
+
+        /* Check description */
+        if ($this->description == ""){
+            $message[]= msgPool::required(_("Description"));
+        }
+
+        /* Check if we are allowed to create or move this object
+         */
+        if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
+            $message[] = msgPool::permCreate();
+        }elseif($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
+            $message[] = msgPool::permMove();
+        }
+
+        return($message);
     }
 
-    return($message);
-  }
 
+    /* Return plugin informations for acl handling */
+    static function plInfo()
+    {
+        return (array("plShortName"   => _("Organization"),
+                    "plDescription" => _("Organization"),
+                    "plSelfModify"  => FALSE,
+                    "plPriority"    => 1,
+                    "plDepends"     => array(),
+                    "plSection"     => array("administration"),
+                    "plCategory"    => array("department"),
 
-  /* Return plugin informations for acl handling */
-  static function plInfo()
-  {
-    return (array("plShortName"   => _("Organization"),
-          "plDescription" => _("Organization"),
-          "plSelfModify"  => FALSE,
-          "plPriority"    => 1,
-          "plDepends"     => array(),
-          "plSection"     => array("administration"),
-          "plCategory"    => array("department"),
+                    "plProvidedAcls" => array(
+                        "o"                       => _("Organization name"),
+                        "description"             => _("Description"),
+                        "businessCategory"        => _("Category"),
+                        "base"                    => _("Base"),
 
-          "plProvidedAcls" => array(
-            "o"                       => _("Organization name"),
-            "description"             => _("Description"),
-            "businessCategory"        => _("Category"),
-            "base"                    => _("Base"),
+                        "manager"                 => _("Manager"),
 
-            "manager"                 => _("Manager"),
+                        "st"                      => _("State"),
+                        "l"                       => _("Location"),
+                        "postalAddress"           => _("Postal address"),
+                        "telephoneNumber"         => _("Phone number"),
+                        "facsimileTelephoneNumber"=> _("Fax"),
 
-            "st"                      => _("State"),
-            "l"                       => _("Location"),
-            "postalAddress"           => _("Postal address"),
-            "telephoneNumber"         => _("Phone number"),
-            "facsimileTelephoneNumber"=> _("Fax"),
-
-            "gosaUnitTag"             => _("Administrative settings"))
-          ));
-  }
+                        "gosaUnitTag"             => _("Administrative settings"))
+                        ));
+    }
 
 }
 
