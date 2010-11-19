@@ -292,13 +292,7 @@ require("smarty/Smarty.class.php");
 $smarty = new Smarty;
 $smarty->template_dir = $BASE_DIR.'/ihtml/';
 $smarty->caching= false;
-
-// To be able to switch between smarty version 2/3
-if(defined('SMARTY_PHP_REMOVE')){
-    $smarty->php_handling= SMARTY_PHP_REMOVE;
-}else{
-    $smarty->php_handling= Smarty::PHP_REMOVE;
-}
+$smarty->php_handling= Smarty::PHP_REMOVE;
 
 /* Global FPDF define */
 define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
