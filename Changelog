@@ -1,9 +1,9 @@
 GOsa2 changelog
 ===============
 * gosa 2.6.12
-  - Escaped passed command line arguments.
-  - Updated password handling and hooks, allows sepcial chars in passwords.
-  - Added lock/unlock events for users.
+  - Escaped command line arguments in some locations
+  - Updated password handling and hooks, allows sepcial chars in passwords
+  - Added lock/unlock events for users
 
 * gosa 2.6.11   (2010-08-06)
   - Updated post-event handling and added pre-event hooks
