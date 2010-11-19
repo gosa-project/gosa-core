@@ -24,7 +24,7 @@ Index: gosa/gosa-core/include/functions.inc
 --- gosa.orig/gosa-core/include/functions.inc	2010-10-01 06:51:28.000000000 +0000
 +++ gosa/gosa-core/include/functions.inc	2010-10-01 06:51:55.250554318 +0000
 @@ -73,7 +73,7 @@
- $svn_revision = '$Revision: 19652 $';
+ }
  
  /* Include required files */
 -require_once("class_location.inc");
