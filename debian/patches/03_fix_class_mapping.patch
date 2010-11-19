@@ -31,4 +31,27 @@ Index: gosa/gosa-core/include/functions.inc
 +require_once("/var/cache/gosa/class.cache");
  require_once ("functions_debug.inc");
  require_once ("accept-to-gettext.inc");
- 
+Index: gosa/gosa-core/update-gosa
+===================================================================
+--- gosa.orig/gosa-core/update-gosa 2008-06-10 07:56:22.000000000 +0000
++++ gosa/gosa-core/update-gosa  2010-10-01 06:51:28.481554589 +0000
+@@ -21,7 +21,7 @@
+  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  */
+
+-define ("GOSA_HOME", dirname(__FILE__));
++define ("GOSA_HOME", "/usr/share/gosa");
+ define ("LOCALE_DIR", GOSA_HOME."/locale");
+ define ("PLUGSTATE_DIR", GOSA_HOME."/state");
+
+@@ -122,8 +122,8 @@
+ function rescan_classes()
+ {
+    echo "Updating class cache...\n";
+-   $class_mapping= get_classes();
+-   $filename= GOSA_HOME."/include/class_location.inc";
++   $class_mapping= get_classes("/usr/share/gosa");
++   $filename= "/var/cache/gosa/class.cache";
+
+    /* Sanity checks */
+    if (!file_exists($filename) || is_writable($filename)) { 
