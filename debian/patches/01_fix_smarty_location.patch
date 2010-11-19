@@ -7,10 +7,10 @@ Description: Adapt location for debian packaged smarty
  
  /* Do smarty setup */
 -require("smarty/Smarty.class.php");
-+if (file_exists("/usr/share/php/smarty/Smarty.class.php")){
-+	require("/usr/share/php/smarty/Smarty.class.php");
++if (file_exists("/usr/share/php/smarty3/Smarty.class.php")){
++	require("/usr/share/php/smarty3/Smarty.class.php");
 +} else {
-+	require("/usr/share/php/smarty/libs/Smarty.class.php");
++	require("/usr/share/php/smarty3/libs/Smarty.class.php");
 +}
  $smarty = new Smarty;
  $smarty->template_dir = $BASE_DIR.'/ihtml/';
