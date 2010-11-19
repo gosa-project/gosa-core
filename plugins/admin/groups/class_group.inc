@@ -289,8 +289,8 @@ class group extends plugin
 
 
 
-        $smarty->assign("nagios", $this->config->pluginEnabled("nagiosAccount"));
-        $smarty->assign("pickupGroup", $this->config->pluginEnabled("phoneAccount"));
+        $smarty->assign("nagios", $this->config->pluginEnabled("nagiosAccount") && class_available("nagiosAccount"));
+        $smarty->assign("pickupGroup", $this->config->pluginEnabled("phoneAccount") && class_available("phoneAccount"));
 
         /* Manage object add dialog */
         if ($this->userSelect){
