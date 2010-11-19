@@ -54,8 +54,8 @@ class dcObject extends department
             $message[]= msgPool::required(_("Name"));
         }elseif(tests::is_department_name_reserved($this->dc,$this->base)){
             $message[]= msgPool::reserved(_("Name"));
-        }elseif(!preg_match ('/[a-z0-9 \.,\-_]/i', $this->dc)){
-            $message[]= msgPool::invalid(_("Name"), $this->dc, "/[a-z0-9 \.,\-_]/");
+        }elseif(preg_match ('/[^a-z0-9 \.,\-_]/i', $this->dc)){
+            $message[]= msgPool::invalid(_("Name"), $this->dc, "/[a-z0-9 \.,\-_]/i");
         }
 
         /* Check description */
