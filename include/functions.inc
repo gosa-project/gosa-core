@@ -1440,7 +1440,7 @@ function get_ou($class,$name)
     global $config;
 
     if(!$config->configRegistry->propertyExists($class,$name)){
-        if($this->config->boolValueIsTrue("core","developmentMode")){
+        if($config->boolValueIsTrue("core","developmentMode")){
             trigger_error("No department mapping found for type ".$name);
         }
         return "";
