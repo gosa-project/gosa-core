@@ -156,7 +156,9 @@ class acl extends plugin
     if (isset($this->parent) && $this->parent !== NULL){
         $oc= array();
         foreach ($this->parent->by_object as $key => $obj){
-            $oc= array_merge($oc, $obj->objectclasses);
+            if(isset($obj->objectclasses) && is_array($obj->objectclasses)){
+                $oc= array_merge($oc, $obj->objectclasses);
+            }
             if(isset($obj->acl_category)){
                 $tmp= str_replace("/","",$obj->acl_category);
                 $cats[$tmp] = $tmp;
