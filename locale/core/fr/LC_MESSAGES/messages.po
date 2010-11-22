@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-20 18:49+0200\n"
-"PO-Revision-Date: 2010-01-28 22:18+0100\n"
+"PO-Revision-Date: 2010-11-22 23:11+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "Language: \n"
@@ -16,13 +16,11 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: ihtml/themes/default/login.tpl:31
-#, fuzzy
 msgid "Login to GOsa"
-msgstr "Bienvenue dans l'installation de GOsa"
+msgstr "Connexion à GOsa"
 
 #: ihtml/themes/default/login.tpl:37 ihtml/themes/default/login.tpl:40
 #: ihtml/themes/default/password.tpl:86 ihtml/themes/default/password.tpl:90
-#, fuzzy
 msgid "User name"
 msgstr "Nom d'utilisateur"
 
@@ -41,9 +39,8 @@ msgid "Click here to log in"
 msgstr "Cliquez ici pour vous connecter"
 
 #: ihtml/themes/default/login.tpl:66 ihtml/themes/default/login.tpl:67
-#, fuzzy
 msgid "Log in"
-msgstr "Identifiant"
+msgstr "Connexion"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:1
 msgid "Copy & paste wizard"
@@ -109,9 +106,8 @@ msgid "Finish"
 msgstr "Terminé"
 
 #: ihtml/themes/default/userFilter.tpl:1
-#, fuzzy
 msgid "List of defined filters"
-msgstr "Ecrire le fichier de configuration"
+msgstr ""
 
 #: ihtml/themes/default/sizelimit.tpl:3
 msgid ""
@@ -137,13 +133,10 @@ msgstr ""
 "LDAP"
 
 #: ihtml/themes/default/sizelimit.tpl:11
-#, fuzzy
-msgid ""
-"ignore this error and show all entries that fit into the defined size limit"
+msgid "ignore this error and show all entries that fit into the defined size limit"
 msgstr ""
 "ignorer cette erreur et montrer toutes les entrées qui sont récupérées grâce "
-"au paramètre sizelimit défini et laissez moi utiliser les filtres pour "
-"restreindre les données a visualiser"
+"au paramètre sizelimit défini"
 
 #: ihtml/themes/default/sizelimit.tpl:16 include/utils/class_msgPool.inc:331
 #, php-format
@@ -152,14 +145,12 @@ msgstr "Activer"
 
 #: ihtml/themes/default/userFilterEditor.tpl:1
 #: ihtml/themes/default/userFilterEditor.tpl:5
-#, fuzzy
 msgid "Filter editor"
-msgstr "Erreur de Filtre"
+msgstr "Editeur de Filtre"
 
 #: ihtml/themes/default/userFilterEditor.tpl:8
-#, fuzzy
 msgid "Filter properties"
-msgstr "Modifier les propriétés de base"
+msgstr "Propriétés du filtre"
 
 #: ihtml/themes/default/userFilterEditor.tpl:11 include/class_acl.inc:262
 #: include/class_SnapShotDialog.inc:55 include/class_userFilter.inc:55
@@ -289,9 +280,8 @@ msgstr ""
 
 #: ihtml/themes/default/userFilterEditor.tpl:27
 #: include/class_userFilter.inc:55
-#, fuzzy
 msgid "Parent filter"
-msgstr "Imprimante"
+msgstr ""
 
 #: ihtml/themes/default/userFilterEditor.tpl:40
 #: plugins/personal/generic/class_user.inc:1663
@@ -308,9 +298,8 @@ msgid "Categories where the filter is visible"
 msgstr ""
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
-#, fuzzy
 msgid "Query"
-msgstr "utilisateurs"
+msgstr "Requète"
 
 #: ihtml/themes/default/acl.tpl:7 plugins/admin/acl/acl_role.tpl:3
 #: plugins/admin/acl/acl_role.tpl:4
@@ -323,9 +312,8 @@ msgstr "Nouvelle ACL"
 
 #: ihtml/themes/default/acl.tpl:15 ihtml/themes/default/acl.tpl:16
 #: include/class_userFilter.inc:55
-#, fuzzy
 msgid "Options"
-msgstr "Applications"
+msgstr ""
 
 #: ihtml/themes/default/acl.tpl:19 plugins/admin/acl/acl_role.tpl:45
 msgid "ACL type"
@@ -333,7 +321,6 @@ msgstr "Type ACL"
 
 #: ihtml/themes/default/acl.tpl:23 ihtml/themes/default/acl.tpl:28
 #: plugins/admin/acl/acl_role.tpl:45
-#, fuzzy
 msgid "Select an ACL type"
 msgstr "Sélectionnez un type d'acl"
 
@@ -355,9 +342,8 @@ msgid "Members"
 msgstr "Membres"
 
 #: ihtml/themes/default/acl.tpl:54
-#, fuzzy
 msgid "Member selection"
-msgstr "Préférences des groupes"
+msgstr "Sélection des membres"
 
 #: ihtml/themes/default/acl.tpl:57
 msgid "Use members from"
@@ -409,7 +395,6 @@ msgstr ""
 "restaurer."
 
 #: ihtml/themes/default/snapshotdialog.tpl:9
-#, fuzzy
 msgid ""
 "Remember that DNS configuration and database entries cannot be restored. For "
 "some objects it is only necessary to open and save them again (goFon), but "
@@ -437,7 +422,6 @@ msgid "Object"
 msgstr "Objet"
 
 #: ihtml/themes/default/snapshotdialog.tpl:29
-#, fuzzy
 msgid "There is no snapshot available that cannot be restored"
 msgstr "Il n'y a pas de snapshots disponibles qui pourrait être restaurés"
 
@@ -471,7 +455,6 @@ msgstr ""
 "dans les copie instantanées."
 
 #: ihtml/themes/default/snapshotdialog.tpl:71
-#, fuzzy
 msgid "Time stamp"
 msgstr "Date"
 
@@ -493,9 +476,8 @@ msgstr ""
 
 #: ihtml/themes/default/msg_dialog.tpl:66
 #: ihtml/themes/default/msg_dialog.tpl:115
-#, fuzzy
 msgid "Error message"
-msgstr "Envoyer un message"
+msgstr "Message d'erreur"
 
 #: ihtml/themes/default/msg_dialog.tpl:77
 #: ihtml/themes/default/msg_dialog.tpl:79
@@ -526,7 +508,6 @@ msgid "Password change"
 msgstr "Changement de mot de passe"
 
 #: ihtml/themes/default/password.tpl:72
-#, fuzzy
 msgid ""
 "Enter the current password and the new password (twice) in the fields below "
 "and press the 'Change' button."
@@ -595,7 +576,6 @@ msgid "Locking conflict detected"
 msgstr "Conflit de verrou détecté"
 
 #: ihtml/themes/default/islocked.tpl:14
-#, fuzzy
 msgid ""
 "If this lock detection is false, the other person has obviously closed the "
 "web browser during the edit operation. You may want to take over the lock by "
@@ -628,7 +608,6 @@ msgid "Your GOsa session has expired!"
 msgstr "Votre session GOsa à expiré !"
 
 #: ihtml/themes/default/logout.tpl:9
-#, fuzzy
 msgid ""
 "It has been a while since your last interaction with GOsa took place. Your "
 "session has been closed for security reasons. Please login again to continue "
@@ -639,7 +618,6 @@ msgstr ""
 "veuillez vous reconnecter."
 
 #: ihtml/themes/default/logout.tpl:16
-#, fuzzy
 msgid "Login again"
 msgstr "Reconnexion"
 
@@ -649,12 +627,10 @@ msgstr ""
 
 #: ihtml/themes/default/removeEntries.tpl:4
 #: plugins/addons/propertyEditor/property-list.tpl:7
-#, fuzzy
 msgid "Attention"
-msgstr "Authentification"
+msgstr ""
 
 #: ihtml/themes/default/removeEntries.tpl:14
-#, fuzzy
 msgid ""
 "If you're sure you want to do this press 'Delete' to continue or 'Cancel' to "
 "abort."
@@ -663,7 +639,6 @@ msgstr ""
 "'Annuler' pour abandonner."
 
 #: ihtml/themes/default/framework.tpl:9
-#, fuzzy
 msgid "Log out"
 msgstr "Déconnexion"
 
@@ -676,9 +651,9 @@ msgstr ""
 "Voulez vous annuler les modifications ?"
 
 #: ihtml/themes/default/framework.tpl:22
-#, fuzzy, php-format
+#, php-format
 msgid "Session expires in %d!"
-msgstr "La session n'est pas cryptée !"
+msgstr "La session expire dans %d !"
 
 #: html/password.php:61 html/main.php:182 include/functions.inc:465
 #: include/utils/class_xml.inc:43
@@ -712,11 +687,9 @@ msgid "Configuration error"
 msgstr "Erreur de configuration"
 
 #: html/password.php:115 html/index.php:179 html/setup.php:73
-#, fuzzy, php-format
+#, php-format
 msgid "Compile directory %s is not accessible!"
-msgstr ""
-"Le répertoire '%s' spécifié comme répertoire de compilation est "
-"inaccessible !"
+msgstr "Le répertoire '%s'est inaccessible !"
 
 #: html/password.php:194 plugins/personal/generic/class_user.inc:613
 msgid "Password method"
@@ -756,8 +729,7 @@ msgstr ""
 
 #: html/password.php:248 plugins/personal/password/class_password.inc:123
 msgid "The password you've entered as 'New password' is empty."
-msgstr ""
-"Le mot de passe que vous avez entré comme 'Nouveau mot de passe' est vide."
+msgstr "Le mot de passe que vous avez entré comme 'Nouveau mot de passe' est vide."
 
 #: html/password.php:250 plugins/personal/password/class_password.inc:125
 msgid "The password used as new and current are too similar."
@@ -768,19 +740,16 @@ msgid "The password used as new is to short."
 msgstr "Le nouveau mot de passe ne comporte pas suffisamment de caractères."
 
 #: html/password.php:254 plugins/personal/password/class_password.inc:129
-#, fuzzy
 msgid "The password contains possibly problematic Unicode characters!"
-msgstr "Le champ '%s' contient des caractères invalides !"
+msgstr ""
 
 #: html/password.php:261 html/index.php:311
-#, fuzzy
 msgid "Please check the username/password combination!"
-msgstr "Veuillez vérifier le nom d'utilisateur et le mot de passe."
+msgstr "Veuillez vérifier le nom d'utilisateur et le mot de passe !"
 
 #: html/password.php:268
-#, fuzzy
 msgid "You have no permissions to change your password!"
-msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe."
+msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe !"
 
 #: html/password.php:280 plugins/personal/password/class_password.inc:136
 #, php-format
@@ -825,23 +794,20 @@ msgid "This session is not encrypted. Click %s to enter an encrypted session."
 msgstr ""
 
 #: html/index.php:72
-#, fuzzy
 msgid "here"
-msgstr "Thème"
+msgstr "ici"
 
 #: html/index.php:78
-#, fuzzy
 msgid "The configured session lifetime will be overridden by php.ini settings!"
 msgstr ""
 "La durée de validité des sessions configurée dans votre gosa.conf sera "
-"remplacée par celle définie dans votre php.ini."
+"remplacée par celle définie dans votre php.ini !"
 
 #: html/index.php:179
 msgid "Smarty error"
 msgstr "Erreur Smarty"
 
 #: html/index.php:202
-#, fuzzy
 msgid ""
 "Your browser has cookies disabled: please enable cookies and reload this "
 "page before logging in!"
@@ -850,9 +816,8 @@ msgstr ""
 "recharger cette page avant de vous connecter !"
 
 #: html/index.php:233
-#, fuzzy
 msgid "Broken HTTP authentication setup!"
-msgstr "Il y a une problèmes avec la configuration de l'authentification !"
+msgstr "Il y a une problèmes avec l'authentification HTTP !"
 
 #: html/index.php:241 html/index.php:245 include/class_management.inc:508
 #: include/class_management.inc:669
@@ -914,18 +879,12 @@ msgid "Error"
 msgstr "Erreur"
 
 #: html/index.php:241
-#, fuzzy
 msgid "Cannot find a valid user for the current HTTP authentication!"
-msgstr ""
-"Impossible de trouver un utilisateur valide pour le système "
-"d'authentification !"
+msgstr "Impossible de trouver un utilisateur valide pour l'authentification HTTP !"
 
 #: html/index.php:245
-#, fuzzy
 msgid "Cannot find a unique user for the current HTTP authentication!"
-msgstr ""
-"Impossible de trouver un utilisateur valide pour le système "
-"d'authentification !"
+msgstr "Impossible de trouver un utilisateur unique pour l'authentification HTTP !"
 
 #: html/index.php:271 include/class_SnapshotHandler.inc:123
 #: include/class_SnapshotHandler.inc:280 include/class_SnapshotHandler.inc:329
@@ -964,7 +923,6 @@ msgid "LDAP error"
 msgstr "Erreur LDAP"
 
 #: html/index.php:289
-#, fuzzy
 msgid "Please specify a valid user name!"
 msgstr "Le nom d'utilisateur est incorrect !"
 
@@ -977,11 +935,8 @@ msgid "Authentication error"
 msgstr "Erreur d'authentification"
 
 #: html/index.php:304
-#, fuzzy
 msgid "Cannot retrieve user information for HTTP authentication!"
-msgstr ""
-"Impossible de trouver l'information utilisateur pour l'authentification "
-"htaccess !"
+msgstr "Impossible de trouver l'information utilisateur pour l'authentification HTTP !"
 
 #: html/index.php:359
 msgid "Account locked. Please contact your system administrator!"
@@ -992,10 +947,9 @@ msgid "Smarty"
 msgstr "Smarty"
 
 #: html/main.php:183
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot locate file %s - please run %s to fix this"
-msgstr ""
-"Je n'ai pas trouvé '%s' - veuillez exécuter '%s' pour régler ce problème"
+msgstr "Je n'ai pas trouvé le fichier '%s' - veuillez exécuter '%s' pour régler ce problème"
 
 #: html/main.php:202
 msgid "PHP configuration"
@@ -1009,8 +963,7 @@ msgstr ""
 
 #: html/main.php:232
 msgid "Your password is about to expire, please change your password!"
-msgstr ""
-"Votre mot de passe va bientôt expirer, veuillez changer votre mot de passe !"
+msgstr "Votre mot de passe va bientôt expirer, veuillez changer votre mot de passe !"
 
 #: html/main.php:297
 msgid "Running out of memory!"
@@ -1019,20 +972,18 @@ msgstr "Plus de mémoire disponible !"
 #: html/main.php:357
 #, php-format
 msgid "You're logged in as %s"
-msgstr ""
+msgstr "Vous êtes connecté en tant que %s"
 
 #: html/main.php:360
-#, fuzzy
 msgid "ACLs are disabled"
-msgstr "Les vérifications des ACL de l'utilisateur ont été désactivés"
+msgstr "Les vérifications des ACL ont été désactivés"
 
 #: html/main.php:410
-#, fuzzy
 msgid "Plug-in"
 msgstr "Extension"
 
 #: html/main.php:411
-#, fuzzy, php-format
+#, php-format
 msgid "Fatal error: Cannot find any plugin definitions for plugin %s!"
 msgstr "FATAL: Impossible de trouver une définition pour l'extension '%s' !"
 
@@ -1041,22 +992,19 @@ msgid "Configuration Error"
 msgstr "Erreur de configuration"
 
 #: html/main.php:428
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Fatal error: not all POST variables have been transfered by PHP - please "
 "inform your administrator!"
-msgstr ""
-"FATAL: toute les variables POST non pas été transférées par PHP - Veuillez "
-"avertir votre administrateur !"
+msgstr "FATAL: toute les variables POST non pas été transférées par PHP - Veuillez avertir votre administrateur !"
 
 #: html/helpviewer.php:64
 msgid "Help browser"
 msgstr "Aide"
 
 #: html/helpviewer.php:118
-#, fuzzy
 msgid "There is no help file specified for this class"
-msgstr "Il n'y a pas de fichier d'aide spécifiée pour cette classe."
+msgstr "Il n'y a pas de fichier d'aide spécifiée pour cette classe"
 
 #: html/helpviewer.php:193 include/functions_helpviewer.inc:97
 msgid "previous"
@@ -1067,11 +1015,9 @@ msgid "next"
 msgstr "suivant"
 
 #: html/helpviewer.php:268
-#, fuzzy, php-format
+#, php-format
 msgid "Help directory '%s' is not accessible, can't read any help files."
-msgstr ""
-"Le répertoire d'aide '%s' n'est pas accessible, impossible de lire les "
-"fichiers d'aide."
+msgstr "Le répertoire d'aide '%s' n'est pas accessible, impossible de lire les fichiers d'aide."
 
 #: include/class_management.inc:32 include/class_management.inc:33
 #: plugins/personal/posix/class_posixAccount.inc:215
@@ -1094,21 +1040,20 @@ msgid "Permission error"
 msgstr "Erreur de permissions"
 
 #: include/class_management.inc:487
-#, fuzzy, php-format
+#, php-format
 msgid "You are not allowed to create a snapshot for %s!"
-msgstr ""
-"Vous n'êtes pas autorisé à créer une nouvelle copie instantanée pour %s."
+msgstr "Vous n'êtes pas autorisé à créer une nouvelle copie instantanée pour %s !"
 
 #: include/class_management.inc:534 include/class_management.inc:586
 #: include/class_management.inc:600
-#, fuzzy, php-format
+#, php-format
 msgid "You are not allowed to restore a snapshot for %s!"
-msgstr "Vous n'êtes pas autorisé à restaurer un copie instantanée de %s."
+msgstr "Vous n'êtes pas autorisé à restaurer une copie instantanée de %s !"
 
 #: include/class_management.inc:549
-#, fuzzy, php-format
+#, php-format
 msgid "You are not allowed to remove a snapshot for %s!"
-msgstr "Vous n'êtes pas autorisé à restaurer un copie instantanée de %s."
+msgstr "Vous n'êtes pas autorisé à supprimer une copie instantanée de %s !"
 
 #: include/class_management.inc:659 include/class_management.inc:743
 #: include/class_acl.inc:978 include/class_session.inc:76
@@ -1127,18 +1072,15 @@ msgstr "Erreur interne"
 #: include/class_management.inc:660 include/class_management.inc:744
 #: plugins/personal/myaccount/main.inc:50
 #, php-format
-msgid ""
-"Cannot instantiate tabbed-plug-in, the base plugin (%s) is not available!"
+msgid "Cannot instantiate tabbed-plug-in, the base plugin (%s) is not available!"
 msgstr ""
 
 #: include/class_management.inc:669
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "No tab definition for %s found in configuration file: cannot create plugin "
 "instance!"
-msgstr ""
-"Pas de déclaration pour '%s' dans votre fichier de configuration. Impossible "
-"d'initialiser le plugin !"
+msgstr "Pas de déclaration pour '%s' dans votre fichier de configuration. Impossible d'initialiser le plugin !"
 
 #: include/class_releaseSelector.inc:214 include/class_listing.inc:1057
 #: include/class_listing.inc:1059 include/class_baseSelector.inc:188
@@ -1151,19 +1093,18 @@ msgid "Submit"
 msgstr "Soumettre"
 
 #: include/class_socketClient.inc:108
-#, fuzzy, php-format
+#, php-format
 msgid "Socket connection to %s:%s failed: %s"
-msgstr "La connexion socket vers l'hôte '%s:%s' à echoué : %s"
+msgstr "La connexion socket vers l'hôte %s:%s à echoué : %s"
 
 #: include/class_socketClient.inc:191
-#, fuzzy, php-format
+#, php-format
 msgid "Socket timeout of %s seconds reached!"
-msgstr "Le temps limite du socket de '%s' secondes à été atteint."
+msgstr "Le temps limite du socket de %s secondes à été atteint !"
 
 #: include/class_pathNavigator.inc:86
-#, fuzzy
 msgid "Welcome to GOsa"
-msgstr "Bienvenue dans l'installation de GOsa"
+msgstr "Bienvenue dans GOsa"
 
 #: include/password-methods/class_password-methods.inc:339
 msgid "Cannot find a suitable password method for the current hash!"
@@ -1172,22 +1113,18 @@ msgstr ""
 "passe !"
 
 #: include/class_SnapshotHandler.inc:45 include/class_SnapshotHandler.inc:76
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The snapshot functionality is enabled but the required variable %s is not "
 "set!"
-msgstr ""
-"La fonctionnalité pour les copie instantanées est activée, mais la variable "
-"requise '%s' n'est pas configurée."
+msgstr "La fonctionnalité pour les copie instantanées est activée, mais la variable requise '%s' n'est pas configurée !"
 
 #: include/class_SnapshotHandler.inc:58
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The snapshot functionality is enabled but the required PHP compression "
 "module is missing: %s!"
-msgstr ""
-"La fonctionnalité pour les copie instantanées est activée, mais le module "
-"nécessaire à la compression est manquant. Veuillez installer '%s'. "
+msgstr "La fonctionnalité pour les copie instantanées est activée, mais le module nécessaire à la compression est manquant. Veuillez installer %s !"
 
 #: include/class_acl.inc:27 plugins/admin/acl/class_aclManagement.inc:25
 msgid "Access control"
@@ -1199,9 +1136,9 @@ msgstr "Gestion de listes de contrôle d'accès (ACL)"
 
 #: include/class_acl.inc:125 include/class_acl.inc:611
 #: include/class_acl.inc:1027
-#, fuzzy, php-format
+#, php-format
 msgid "All users"
-msgstr "utilisateurs"
+msgstr "Tout les utilisateurs"
 
 #: include/class_acl.inc:226
 #: plugins/generic/references/class_aclResolver.inc:62
@@ -1254,14 +1191,12 @@ msgid "Groups"
 msgstr "Groupes"
 
 #: include/class_acl.inc:252
-#, fuzzy
 msgid "Section"
-msgstr "fonction"
+msgstr ""
 
 #: include/class_acl.inc:262
-#, fuzzy
 msgid "Used"
-msgstr "Utilisateur"
+msgstr "Utilisé"
 
 #: include/class_acl.inc:278 plugins/admin/ogroups/class_ogroup.inc:865
 msgid "Member"
@@ -1291,7 +1226,7 @@ msgid "category ACL"
 msgstr "ACL de la catégorie"
 
 #: include/class_acl.inc:637
-#, fuzzy, php-format
+#, php-format
 msgid "Edit ACL for '%s' with scope '%s'"
 msgstr "Editer l'ACL pour '%s', l'étendue est '%s'"
 
@@ -1333,7 +1268,7 @@ msgid "Complete object"
 msgstr "L'objet au complet"
 
 #: include/class_acl.inc:978
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown ACL type '%s'!"
 msgstr "Type d'ACL inconnu '%s' !"
 
@@ -1343,12 +1278,11 @@ msgid "Unknown entry '%s'!"
 msgstr "Entrée inconnue '%s'  !"
 
 #: include/class_acl.inc:1087 include/class_acl.inc:1089
-#, fuzzy, php-format
+#, php-format
 msgid "ACL role: %s"
-msgstr "Rôles ACL"
+msgstr "Rôles ACL : %s"
 
 #: include/class_acl.inc:1089
-#, fuzzy
 msgid "unknown ACL role"
 msgstr "Rôle inconnu"
 
@@ -1381,17 +1315,13 @@ msgid "ACL roles"
 msgstr "Rôles ACL"
 
 #: include/class_acl.inc:1294
-#, fuzzy
 msgid "ACL Entries"
-msgstr "Toutes les catégories"
+msgstr ""
 
 #: include/class_session.inc:76 include/class_session.inc:101
 #: include/class_session.inc:127
-#, fuzzy
 msgid "Requested channel does not exist!"
-msgstr ""
-"Le canal demandé n'existe pas ! Veuillez contacter votre administrateur "
-"système."
+msgstr "Le canal demandé n'existe pas !"
 
 #: include/class_listing.inc:257 include/class_sortableListing.inc:274
 msgid "Sort ascending"
@@ -1463,7 +1393,6 @@ msgid "Restore snapshot"
 msgstr "Restaurer la copie instantanée"
 
 #: include/class_listing.inc:1591
-#, fuzzy
 msgid "Create new snapshot for this object"
 msgstr "Créer un nouveau snapshot depuis cet objet"
 
@@ -1481,48 +1410,40 @@ msgid "Delete this entry"
 msgstr "Supprimer cette entrée"
 
 #: include/functions.inc:134
-#, fuzzy, php-format
+#, php-format
 msgid "Fatal error: no class locations defined - please run %s to fix this"
-msgstr ""
-"Erreur fatale : pas d'emplacement défini pour les classes  - veuillez "
-"exécuter '%s' pour régler le problème"
+msgstr "Erreur fatale : pas d'emplacement défini pour les classes - veuillez exécuter %s pour régler le problème"
 
 #: include/functions.inc:141
-#, fuzzy, php-format
+#, php-format
 msgid "Fatal error: cannot instantiate class %s - try running %s to fix this"
-msgstr ""
-"Erreur fatale : impossible d'initialiser la classe '%s' - veuillez exécuter "
-"'%s' pour essayer de régler le problème"
+msgstr "Erreur fatale : impossible d'initialiser la classe %s - veuillez exécuter %s pour essayer de régler le problème"
 
 #: include/functions.inc:466
-#, fuzzy, php-format
+#, php-format
 msgid "Error while connecting to LDAP: %s"
-msgstr ""
-"FATAL: Erreur lors de la connexion au serveur LDAP. Le serveur à répondu "
-"'%s'."
+msgstr "FATAL: Erreur lors de la connexion au serveur LDAP. Le serveur à répondu %s"
 
 #: include/functions.inc:537 include/functions.inc:623
-#, fuzzy
 msgid "User ID is not unique!"
-msgstr "sambaUnixIdPool n'est pas unique !"
+msgstr ""
 
 #: include/functions.inc:827 include/functions.inc:945
 msgid "Error while locking entry!"
 msgstr ""
 
 #: include/functions.inc:837
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot store lock information in LDAP!"
 msgstr ""
-"Impossible de détecter les information sur les schémas LDAP installés !"
 
 #: include/functions.inc:837
-#, fuzzy, php-format
+#, php-format
 msgid "Error: %s"
-msgstr "Erreur"
+msgstr "Erreur: %s"
 
 #: include/functions.inc:1267
-#, fuzzy, php-format
+#, php-format
 msgid "The current size limit of %d entries is exceeded!"
 msgstr "La taille limite de %d entrées est dépassée !"
 
@@ -1536,9 +1457,8 @@ msgid "Configure"
 msgstr "Configurer"
 
 #: include/functions.inc:1286
-#, fuzzy
 msgid "list is incomplete"
-msgstr "Le filtre est incomplet !"
+msgstr "Le liste est incomplète"
 
 #: include/functions.inc:1634
 msgid "Continue anyway"
@@ -1562,9 +1482,9 @@ msgid "GOsa %s"
 msgstr ""
 
 #: include/functions.inc:2065
-#, fuzzy, php-format
+#, php-format
 msgid "GOsa %s snapshot (Rev %s)"
-msgstr "Version de développement de GOsa (Rev %s)"
+msgstr "Version de développement de GOsa %s (Rev %s)"
 
 #: include/functions.inc:2070
 #, php-format
@@ -1572,12 +1492,11 @@ msgid "GOsa development snapshot (Rev %s)"
 msgstr "Version de développement de GOsa (Rev %s)"
 
 #: include/functions.inc:2166
-#, fuzzy, php-format
+#, php-format
 msgid "File %s cannot be deleted!"
-msgstr "Le fichier '%s' ne peut pas être éffacé."
+msgstr "Le fichier %s ne peut pas être éffacé !"
 
 #: include/functions.inc:2196 include/functions.inc:2216
-#, fuzzy
 msgid "Cannot write revision file!"
 msgstr "Impossible d'écrire le fichier de revision !"
 
@@ -1587,43 +1506,36 @@ msgid "'baseIdHook' is not available. Using default base!"
 msgstr "'baseIdHook' n'est pas disponible. Utilisation de la base par défaut !"
 
 #: include/functions.inc:2521
-#, fuzzy
-msgid ""
-"Cannot read schema information from LDAP. Schema validation is not possible!"
-msgstr ""
-"Impossible de récupérer les informations sur les schémas depuis le serveur. "
-"Vérification des schémas impossibles !"
+msgid "Cannot read schema information from LDAP. Schema validation is not possible!"
+msgstr "Impossible de récupérer les informations sur les schémas depuis le serveur. Vérification des schémas impossibles !"
 
 #: include/functions.inc:2547
 msgid "This class is used to make users appear in GOsa."
 msgstr ""
 
 #: include/functions.inc:2554
-#, fuzzy
 msgid ""
 "This class is used to lock entries in order to prevent multiple edits at a "
 "time."
-msgstr ""
-"Utilisé pour verrouiller les entrées actuellement modifiées afin d'éviter de "
-"multiples changements simultanés."
+msgstr "Utilisé pour verrouiller les entrées actuellement modifiées afin d'éviter de multiples changements simultanés."
 
 #: include/functions.inc:2599
-#, fuzzy, php-format
+#, php-format
 msgid "Required object class %s is missing!"
-msgstr "Object class obligatoire '%s' manquante !"
+msgstr "Object class obligatoire %s manquante !"
 
 #: include/functions.inc:2602
-#, fuzzy, php-format
+#, php-format
 msgid "Optional object class %s is missing!"
-msgstr "Object class facultative '%s' manquante !"
+msgstr "Object class facultative %s manquante !"
 
 #: include/functions.inc:2607
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong version of required object class %s (!=%s) detected!"
-msgstr "La version requise des object class ne correspond pas '%s' (!=%s) !"
+msgstr "La version requise des object class ne correspond pas %s (!=%s) !"
 
 #: include/functions.inc:2610
-#, fuzzy, php-format
+#, php-format
 msgid "Class available"
 msgstr "Classe(s) disponible(s)"
 
@@ -1634,12 +1546,8 @@ msgid ""
 msgstr ""
 
 #: include/functions.inc:2633
-#, fuzzy
-msgid ""
-"To use RFC2307bis groups, the objectClass 'posixGroup' must be AUXILIARY."
-msgstr ""
-"Pour pouvoir utiliser des groupes conformes à la norme rfc2307bis, "
-"l'objectClass 'posixGroup' doit être       AUXILIARY"
+msgid "To use RFC2307bis groups, the objectClass 'posixGroup' must be AUXILIARY."
+msgstr "Pour pouvoir utiliser des groupes conformes à la norme rfc2307bis, l'objectClass 'posixGroup' doit être AUXILIARY."
 
 #: include/functions.inc:2637
 msgid ""
@@ -1648,9 +1556,8 @@ msgid ""
 msgstr ""
 
 #: include/functions.inc:2638
-#, fuzzy
 msgid "To correct this, the objectClass 'posixGroup' must be STRUCTURAL."
-msgstr "L'objectClass 'posixGroup' doit être STRUCTURAL"
+msgstr "Pour corriger ceci, L'objectClass 'posixGroup' doit être STRUCTURAL."
 
 #: include/functions.inc:2663
 msgid "German"
@@ -1697,9 +1604,8 @@ msgid "Russian"
 msgstr "Russe"
 
 #: include/functions.inc:2867
-#, fuzzy
 msgid "Cannot detect password hash!"
-msgstr "Impossible de générer un hash samba !"
+msgstr ""
 
 #: include/functions.inc:2908 include/functions.inc:2983
 #, php-format
@@ -1707,9 +1613,8 @@ msgid "Pre-event hook reported a problem: %s. Password change canceled!"
 msgstr ""
 
 #: include/functions.inc:2939
-#, fuzzy
 msgid "Password change failed!"
-msgstr "Changement de mot de passe"
+msgstr "Le changement de mot de passe à échoué !"
 
 #: include/functions.inc:2947
 #, php-format
@@ -1717,22 +1622,19 @@ msgid "Post-event hook reported a problem: %s. Password change canceled!"
 msgstr ""
 
 #: include/functions.inc:3051
-#, fuzzy
 msgid "Cannot generate SAMBA hash!"
 msgstr "Impossible de générer un hash samba !"
 
 #: include/functions.inc:3066
-#, fuzzy, php-format
+#, php-format
+#, fuzzy
 msgid "Generating SAMBA hash by running %s failed: check %s!"
-msgstr ""
-"Impossible de générer le mot de passe samba: l'exécution de '%s' à échoué, "
-"veuillez vérifier le paramètre 'sambaHashHook'!"
+msgstr "Impossible de générer le mot de passe samba: l'exécution de '%s' à échoué, veuillez vérifier le paramètre 'sambaHashHook'!"
 
 #: include/functions.inc:3344 include/functions.inc:3358
 #: include/functions.inc:3396 include/functions.inc:3408
 #: include/functions.inc:3412 include/functions.inc:3427
 #: include/functions.inc:3436
-#, fuzzy
 msgid "Cannot allocate free ID:"
 msgstr "Impossible d'assigner un ID libre :"
 
@@ -1758,45 +1660,39 @@ msgid "no ID available!"
 msgstr "Pas d' ID disponibles !"
 
 #: include/functions.inc:3436
-#, fuzzy
 msgid "maximum number of tries exceeded!"
 msgstr "Nombre maximum d'essais dépassés !"
 
 #: include/functions.inc:3496
-#, fuzzy
 msgid "Cannot allocate free ID!"
 msgstr "Impossible d'assigner un ID libre !"
 
 #: include/class_tabs.inc:57
-#, fuzzy, php-format
+#, php-format
 msgid "No plugin definition for %s found: please check the configuration file!"
-msgstr ""
-"Pas de définition de plugin pour l'initialisation de '%s', veuillez vérifier "
-"votre fichier de configuration."
+msgstr "Pas de définition de plugin pour l'initialisation de %s, veuillez vérifier votre fichier de configuration !"
 
 #: include/class_tabs.inc:262
-#, fuzzy, php-format
+#, php-format
 msgid "Delete process has been canceled by plugin %s: %s"
-msgstr "L'effacement à été interrompu par l'extension '%s': %s"
+msgstr "L'effacement à été interrompu par l'extension %s: %s"
 
 #: include/class_tabs.inc:400
 msgid "References"
 msgstr "Références"
 
 #: include/class_SnapShotDialog.inc:55
-#, fuzzy
 msgid "Date"
-msgstr "Coller"
+msgstr ""
 
 #: include/class_SnapShotDialog.inc:94
-#, fuzzy, php-format
+#, php-format
 msgid "You are about to delete the snapshot %s."
-msgstr "Vous êtes sur le point de supprimer le snapshot '%s'."
+msgstr "Vous êtes sur le point de supprimer le snapshot %s."
 
 #: include/class_SnapShotDialog.inc:143
-#, fuzzy
 msgid "Delete snapshot"
-msgstr "Créer un snapshot"
+msgstr "Effacer un snapshot"
 
 #: include/class_SnapShotDialog.inc:144 include/class_SnapShotDialog.inc:162
 msgid "Y-m-d, H:i:s"
@@ -1825,42 +1721,34 @@ msgid ""
 msgstr ""
 
 #: include/class_jsonRPC.inc:38
-#, fuzzy, php-format
+#, php-format
 msgid "The RPC connection (%s) specified for %s:%s is invalid: %s"
-msgstr "l'option '%s' de la commande pour l'extension %s est invalide !"
+msgstr ""
 
 #: include/class_jsonRPC.inc:331
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown HTTP status code %s!"
-msgstr "Type d'ACL inconnu '%s' !"
+msgstr ""
 
 #: include/class_multi_plug.inc:362
-#, fuzzy
 msgid "You are currently editing multiple entries."
 msgstr "Vous êtes occupé à éditer des entrées multiples."
 
 #: include/class_multi_plug.inc:394
-#, fuzzy
 msgid "Reset password"
-msgstr "Attribuer le mot de passe"
+msgstr "Réinitialiser le mot de passe"
 
 #: include/class_multi_plug.inc:394
-#, fuzzy
 msgid "The user password has been reset. Please set a new password!"
-msgstr ""
-"Le mot de passe de l'utilisateur à été réinitialisé, veuillez entrer un "
-"nouveau mot de passe !"
+msgstr "Le mot de passe de l'utilisateur à été réinitialisé, veuillez entrer un nouveau mot de passe !"
 
 #: include/class_certificate.inc:73
 msgid "Certificate is empty!"
 msgstr "Le Certificat et vide !"
 
 #: include/class_certificate.inc:100
-#, fuzzy
 msgid "Cannot load certificate: only PEM and DER are supported!"
-msgstr ""
-"Impossible de charger le certificat - seul les certificats PEM/DER sont "
-"supportés !"
+msgstr "Impossible de charger le certificat - seul les certificats PEM/DER sont supportés !"
 
 #: include/class_certificate.inc:115
 msgid "Cannot extract information for non PEM certificates!"
@@ -1877,7 +1765,6 @@ msgstr ""
 "PHP !"
 
 #: include/php_setup.inc:110
-#, fuzzy
 msgid "Send bug report"
 msgstr "Envoyer un rapport de bug"
 
@@ -2157,8 +2044,7 @@ msgstr "Impossible d'exécuter '%s' de la commande (%s) pour l'extension %s !"
 #: include/utils/class_msgPool.inc:209
 #, fuzzy, php-format
 msgid "Cannot execute %s command for plugin %s!"
-msgstr ""
-"Impossible d'exécuter l'option '%s' de la commande pour l'extension %s !"
+msgstr "Impossible d'exécuter l'option '%s' de la commande pour l'extension %s !"
 
 #: include/utils/class_msgPool.inc:211
 #, fuzzy, php-format
@@ -2279,8 +2165,7 @@ msgstr "Ce compte n'a pas d'extensions %s valides !"
 
 #: include/utils/class_msgPool.inc:369
 #, php-format
-msgid ""
-"This account has %s settings enabled. You can disable them by clicking below."
+msgid "This account has %s settings enabled. You can disable them by clicking below."
 msgstr ""
 "Ce compte possède l'extension %s activée. Vous pouvez la supprimer en "
 "cliquant sur le bouton ci-dessous."
@@ -2296,8 +2181,7 @@ msgstr ""
 
 #: include/utils/class_msgPool.inc:388
 #, php-format
-msgid ""
-"This account has %s settings disabled. You can enable them by clicking below."
+msgid "This account has %s settings disabled. You can enable them by clicking below."
 msgstr ""
 "Ce compte possède %s paramètres desactivés. Vous pouvez les activer en "
 "clicquant ci dessous."
@@ -2542,8 +2426,7 @@ msgstr ""
 "extension dans votre installation de GOsa ?"
 
 #: include/utils/class_msgPool.inc:570
-msgid ""
-"The supplied base is not valid and has been reset to its previous value!"
+msgid "The supplied base is not valid and has been reset to its previous value!"
 msgstr ""
 
 #: include/class_ldap.inc:305 include/class_ldap.inc:342
@@ -2588,8 +2471,7 @@ msgstr ""
 
 #: include/class_ldap.inc:1140
 #, fuzzy, php-format
-msgid ""
-"Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"
+msgid "Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"
 msgstr ""
 "Ceci n'est pas un DN valide: '%s'. Le fichier d'importation doit commencer "
 "avec 'dn: ...' à la ligne %s"
@@ -2948,8 +2830,7 @@ msgid ""
 msgstr ""
 
 #: include/class_core.inc:387
-msgid ""
-"The 'ldapFollowReferrals' statement tells GOsa to follow LDAP referrals."
+msgid "The 'ldapFollowReferrals' statement tells GOsa to follow LDAP referrals."
 msgstr ""
 
 #: include/class_core.inc:397
@@ -3266,8 +3147,7 @@ msgid ""
 msgstr ""
 
 #: include/class_core.inc:896
-msgid ""
-"This attribute allows to override the prefix used to create shared folders."
+msgid "This attribute allows to override the prefix used to create shared folders."
 msgstr ""
 
 #: include/class_core.inc:906
@@ -3307,8 +3187,7 @@ msgid ""
 msgstr ""
 
 #: include/class_core.inc:947
-msgid ""
-"The 'imapTimeout' statement sets the connection timeout for imap actions."
+msgid "The 'imapTimeout' statement sets the connection timeout for imap actions."
 msgstr ""
 
 #: include/class_core.inc:958
@@ -3638,13 +3517,11 @@ msgid "Notifications"
 msgstr "Script de notification"
 
 #: plugins/generic/dashBoard/Register/class_RegistrationDialog.inc:54
-msgid ""
-"Communciation with the backend failed! Please check your internet connection!"
+msgid "Communciation with the backend failed! Please check your internet connection!"
 msgstr ""
 
 #: plugins/generic/dashBoard/Register/class_RegistrationDialog.inc:56
-msgid ""
-"Authentication failed, please check combination of username and password!"
+msgid "Authentication failed, please check combination of username and password!"
 msgstr ""
 
 #: plugins/generic/dashBoard/Register/class_RegistrationDialog.inc:58
@@ -4648,8 +4525,7 @@ msgid "First name"
 msgstr "Prénom"
 
 #: plugins/admin/users/class_userManagement.inc:26
-msgid ""
-"Manage aspects of user accounts like generic, POSIX, samba and mail settings"
+msgid "Manage aspects of user accounts like generic, POSIX, samba and mail settings"
 msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:387
@@ -5033,8 +4909,7 @@ msgid "Directory structure"
 msgstr "Répertoire"
 
 #: plugins/admin/departments/class_departmentManagement.inc:26
-msgid ""
-"Manage organizations, organizational units, localities, countries and more"
+msgid "Manage organizations, organizational units, localities, countries and more"
 msgstr ""
 
 #: plugins/admin/departments/class_departmentManagement.inc:125
@@ -5183,8 +5058,7 @@ msgid "ACL Assignment"
 msgstr "Gestion des ACL"
 
 #: plugins/admin/acl/class_aclManagement.inc:26
-msgid ""
-"Control access to GOsa managed objects down to attribute and action level"
+msgid "Control access to GOsa managed objects down to attribute and action level"
 msgstr ""
 
 #: plugins/admin/acl/class_aclRole.inc:26
@@ -5230,8 +5104,7 @@ msgstr "Objet utilisé"
 #: plugins/admin/acl/class_aclRole.inc:635
 #, php-format
 msgid "This role cannot be removed while it is in use by these objects:"
-msgstr ""
-"Ce rôle ne peut pas être supprimé car il est encore utilisé par ces objets :"
+msgstr "Ce rôle ne peut pas être supprimé car il est encore utilisé par ces objets :"
 
 #: plugins/admin/acl/class_aclRole.inc:714 plugins/admin/acl/acl-list.xml:23
 #: plugins/admin/acl/acl-list.xml:82
@@ -5304,8 +5177,7 @@ msgid "Preferences"
 msgstr "Références"
 
 #: plugins/addons/propertyEditor/class_propertyEditor.inc:7
-msgid ""
-"Configure global and special GOsa settings like hooks and plug-in parameters"
+msgid "Configure global and special GOsa settings like hooks and plug-in parameters"
 msgstr ""
 
 #: plugins/addons/propertyEditor/class_propertyEditor.inc:206
@@ -5362,8 +5234,7 @@ msgstr "Migrer"
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:204
 #, fuzzy, php-format
 msgid "Migration failed for object %s, dn already exists!"
-msgstr ""
-"L'ajout d'un utilisateur administratif à échoué : l'objet '%s' existe déja !"
+msgstr "L'ajout d'un utilisateur administratif à échoué : l'objet '%s' existe déja !"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:208
 #, php-format
@@ -5500,8 +5371,7 @@ msgid ""
 msgstr ""
 
 #: plugins/addons/propertyEditor/property-list.tpl:22
-msgid ""
-"I understand that there are certain risks, but I want to modify properties!"
+msgid "I understand that there are certain risks, but I want to modify properties!"
 msgstr ""
 
 #: plugins/addons/propertyEditor/property-list.tpl:38
@@ -5608,8 +5478,7 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:1272
 msgid "The selected password method requires initial configuration!"
-msgstr ""
-"Le format de stockage sélectionné nécessite une configuration de base !"
+msgstr "Le format de stockage sélectionné nécessite une configuration de base !"
 
 #: plugins/personal/generic/class_user.inc:1348
 #: plugins/personal/generic/class_user.inc:1739
@@ -6179,8 +6048,7 @@ msgstr "Préférences des groupes"
 
 #: plugins/personal/posix/posix_shadow.tpl:12
 msgid "User must change password on first login"
-msgstr ""
-"L'utilisateur doit changer son mot de passe lors de sa première connexion"
+msgstr "L'utilisateur doit changer son mot de passe lors de sa première connexion"
 
 #: plugins/personal/posix/posix_shadow.tpl:59
 #, fuzzy
@@ -6277,8 +6145,7 @@ msgstr ""
 #: plugins/personal/password/nochange.tpl:2
 #: plugins/personal/myaccount/nochange.tpl:2
 msgid "You have no permission to change your password at this time"
-msgstr ""
-"Vous n'avez pas l'autorisation pour changer votre mot de passe à ce moment"
+msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe à ce moment"
 
 #: plugins/personal/myaccount/class_MyAccount.inc:6
 #, fuzzy
@@ -6362,8 +6229,7 @@ msgid "Please specify a valid email address."
 msgstr "Veuillez indiquer une adresse de messagerie valide."
 
 #: setup/class_setupStep_Feedback.inc:185
-msgid ""
-"You have to select at least one of both options, subscribe or send feedback."
+msgid "You have to select at least one of both options, subscribe or send feedback."
 msgstr ""
 "Vous devez au moins avoir activé une option, souscrire ou envoyer votre "
 "retour d'information."
@@ -6466,8 +6332,7 @@ msgstr "Vérification de l'installation"
 
 #: setup/class_setupStep_Checks.inc:42
 msgid "Basic checks for PHP compatibility and extensions"
-msgstr ""
-"Vérification de base de la version de PHP et des extensions nécéssaires."
+msgstr "Vérification de base de la version de PHP et des extensions nécéssaires."
 
 #: setup/class_setupStep_Checks.inc:66
 msgid "Checking PHP version"
@@ -6514,8 +6379,7 @@ msgstr "mbstring"
 #: setup/class_setupStep_Checks.inc:115
 #, fuzzy
 msgid "GOsa requires this module to handle Unicode strings."
-msgstr ""
-"GOsa a besoin  de ce module pour gèrer les chaînes de caractère unicode."
+msgstr "GOsa a besoin  de ce module pour gèrer les chaînes de caractère unicode."
 
 #: setup/class_setupStep_Checks.inc:122
 msgid "Calendar"
@@ -6524,16 +6388,14 @@ msgstr ""
 #: setup/class_setupStep_Checks.inc:123
 #, fuzzy
 msgid "GOsa requires this module to calculate dates."
-msgstr ""
-"GOsa a besoin  de ce module pour gèrer les chaînes de caractère unicode."
+msgstr "GOsa a besoin  de ce module pour gèrer les chaînes de caractère unicode."
 
 #: setup/class_setupStep_Checks.inc:130
 msgid "MySQL"
 msgstr "MySQL"
 
 #: setup/class_setupStep_Checks.inc:131
-msgid ""
-"GOsa requires this module to communicate with several supported databases."
+msgid "GOsa requires this module to communicate with several supported databases."
 msgstr ""
 "GOsa à besion de ce module pour dialoguer avec les bases de données "
 "supportées."
@@ -6550,8 +6412,7 @@ msgstr ""
 
 #: setup/class_setupStep_Checks.inc:150
 #, fuzzy
-msgid ""
-"Deploy a gosa-si installation or install the Perl Crypt::SmbHash modules."
+msgid "Deploy a gosa-si installation or install the Perl Crypt::SmbHash modules."
 msgstr ""
 "Déployez une installation gosa-si ou installer les modules perl Crypt::"
 "Smbash."
@@ -6638,8 +6499,7 @@ msgstr ""
 "mémoire pour les installations plus complexes."
 
 #: setup/class_setupStep_Checks.inc:219
-msgid ""
-"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
 msgstr ""
 "Recherchez pour 'memory_limit' dans votre php.ini et mettez le à '32M' or "
 "plus haut."
@@ -6661,8 +6521,7 @@ msgid "The Execution time should be at least 30 seconds."
 msgstr "Le temps d'exécution doit être au moins de 30 secondes."
 
 #: setup/class_setupStep_Checks.inc:235
-msgid ""
-"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
 msgstr ""
 "Rechercher l'option 'max_execution_time' dans votre php.ini et mettez le à "
 "'30' ou plus."
@@ -6704,8 +6563,7 @@ msgstr ""
 "'off'."
 
 #: setup/class_setupStep_Checks.inc:259
-msgid ""
-"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
 msgstr ""
 "Recherchez l'option 'zend.ze1_compatibility_mode' dans votre hp.ini et "
 "mettez la à 'Off'."
@@ -6945,8 +6803,7 @@ msgstr "Sélectionner un utilisateur"
 #: setup/setup_ldap.tpl:81
 #, fuzzy
 msgid "Automatically append LDAP base to administrator DN"
-msgstr ""
-"Ajouter automatiquement la base de l'annuaire LDAP au DN de l'administrateur"
+msgstr "Ajouter automatiquement la base de l'annuaire LDAP au DN de l'administrateur"
 
 #: setup/setup_ldap.tpl:85
 #, fuzzy
@@ -7009,10 +6866,8 @@ msgstr "Echec"
 
 #: setup/class_setupStep_Migrate.inc:134 setup/class_setupStep_Migrate.inc:147
 #, fuzzy, php-format
-msgid ""
-"The specified user '%s' does not have full access to your LDAP database."
-msgstr ""
-"L'utilisateur spécifié '%s' n'a pas l'accès complet à votre annuaire ldap."
+msgid "The specified user '%s' does not have full access to your LDAP database."
+msgstr "L'utilisateur spécifié '%s' n'a pas l'accès complet à votre annuaire ldap."
 
 #: setup/class_setupStep_Migrate.inc:308
 msgid "There is no GOsa administrator account inside your LDAP."
@@ -7048,12 +6903,10 @@ msgstr "Le nom d'utilisateur est incorrect !"
 #: setup/class_setupStep_Migrate.inc:450
 #, php-format
 msgid "Adding an administrative user failed: object '%s' already exists!"
-msgstr ""
-"L'ajout d'un utilisateur administratif à échoué : l'objet '%s' existe déja !"
+msgstr "L'ajout d'un utilisateur administratif à échoué : l'objet '%s' existe déja !"
 
 #: setup/class_setupStep_Migrate.inc:662
-msgid ""
-"The LDAP root object is missing. It is required to use your LDAP service."
+msgid "The LDAP root object is missing. It is required to use your LDAP service."
 msgstr ""
 "L'objet LDAP racine est manquant. Il est indispensable pour utiliser votre "
 "annuaire LDAP."
@@ -7279,1413 +7132,3 @@ msgstr "Configuration de la langue"
 msgid "This step allows you to select your preferred language."
 msgstr "Cette étape vous permet de sélectionner votre langue préférée."
 
-#, fuzzy
-#~ msgid ""
-#~ "The file '%s' specified for '%s:%s' cannot be created neither be used for "
-#~ "writing!"
-#~ msgstr ""
-#~ "La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-#~ "pas !"
-
-#, fuzzy
-#~ msgid "The rdn '%s' specified for '%s:%s' is invalid!"
-#~ msgstr "l'option '%s' de la commande pour l'extension %s est invalide !"
-
-#, fuzzy
-#~ msgid "The values for 'New password' and 'Repeated new password' differ!"
-#~ msgstr ""
-#~ "Le mot de passe entrée dans le champ 'Nouveau mot de passe' et celui dans "
-#~ "le champ 'Répéter le nouveau mot de passe' ne concordent pas."
-
-#, fuzzy
-#~ msgid "The password used as new and current are too similar!"
-#~ msgstr "Le nouveau et l'ancien mot de passe sont trop similaires."
-
-#, fuzzy
-#~ msgid "The password used as new is to short!"
-#~ msgstr "Le nouveau mot de passe ne comporte pas suffisamment de caractères."
-
-#, fuzzy
-#~ msgid "External password changer reported a problem: %s"
-#~ msgstr ""
-#~ "Le programme externe pour changer votre mot de passe à renvoyé une "
-#~ "erreur: %s."
-
-#, fuzzy
-#~ msgid ""
-#~ "Command %s specified as post modify action for plugin %s does not exist!"
-#~ msgstr ""
-#~ "La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-#~ "pas !"
-
-#, fuzzy
-#~ msgid ""
-#~ "Fatal error: no class locations defined - please run '%s' to fix this"
-#~ msgstr ""
-#~ "Erreur fatale : pas d'emplacement défini pour les classes  - veuillez "
-#~ "exécuter '%s' pour régler le problème"
-
-#, fuzzy
-#~ msgid ""
-#~ "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
-#~ msgstr ""
-#~ "Erreur fatale : impossible d'initialiser la classe '%s' - veuillez "
-#~ "exécuter '%s' pour essayer de régler le problème"
-
-#, fuzzy
-#~ msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
-#~ msgstr ""
-#~ "FATAL: Erreur lors de la connexion au serveur LDAP. Le serveur à répondu "
-#~ "'%s'."
-
-#~ msgid "Username / UID is not unique inside the LDAP tree!"
-#~ msgstr ""
-#~ "Le nom de l'utilisateur / UID n'est pas unique dans votre annuaire LDAP !"
-
-#~ msgid ""
-#~ "Username / UID is not unique inside the LDAP tree. Please contact your "
-#~ "Administrator."
-#~ msgstr ""
-#~ "Le nom de l'utilisateur / UID n'est pas unique dans votre annuaire LDAP. "
-#~ "Veuillez contacter votre administrateur système."
-
-#~ msgid "Error while adding a lock. Contact the developers!"
-#~ msgstr "Erreur lors de l'ajout d'un verrou. Contactez les développeurs !"
-
-#~ msgid ""
-#~ "Cannot create locking information in LDAP tree. Please contact your "
-#~ "administrator!"
-#~ msgstr ""
-#~ "Impossible d'obtenir les informations de verrouillage dans l'annuaire "
-#~ "LDAP. Veuillez contacter votre administrateur !"
-
-#~ msgid "LDAP server returned: %s"
-#~ msgstr "Le serveur LDAP à retourné: %s"
-
-#~ msgid ""
-#~ "Found multiple locks for object to be locked. This should not happen - "
-#~ "cleaning up multiple references."
-#~ msgstr ""
-#~ "Détection de verrou multiple pour un même objet. Ceci ne devrait pas "
-#~ "arriver. Effacement des références multiples."
-
-#, fuzzy
-#~ msgid "The size limit of %d entries is exceed!"
-#~ msgstr "La taille limite de %d entrées est dépassée !"
-
-#~ msgid ""
-#~ "Set the new size limit to %s and show me this message if the limit still "
-#~ "exceeds"
-#~ msgstr ""
-#~ "Mettre la nouvelle limite à %s et me montrer ce message si la limite est "
-#~ "toujours dépassée"
-
-#~ msgid "incomplete"
-#~ msgstr "incomplet"
-
-#~ msgid "You're going to edit the LDAP entry/entries %s"
-#~ msgstr "Vous êtes sur le point d'éditer l'entrée(s) %s"
-
-#~ msgid "Apply filter"
-#~ msgstr "Appliquer le filtre"
-
-#~ msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-#~ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
-#, fuzzy
-#~ msgid "File '%s' could not be deleted."
-#~ msgstr "Le fichier '%s' ne peut pas être éffacé."
-
-#, fuzzy
-#~ msgid "Cannot write to revision file!"
-#~ msgstr "Impossible d'écrire le fichier de revision !"
-
-#~ msgid "LDAP warning"
-#~ msgstr "Avertissement LDAP"
-
-#, fuzzy
-#~ msgid "Cannot get schema information from server. No schema check possible!"
-#~ msgstr ""
-#~ "Impossible de récupérer les informations sur les schémas depuis le "
-#~ "serveur. Vérification des schémas impossibles !"
-
-#~ msgid "Used to store account specific informations."
-#~ msgstr "Utilisé pour stocker les informations spécifiques des comptes."
-
-#, fuzzy
-#~ msgid ""
-#~ "Used to lock currently edited entries to avoid multiple changes at the "
-#~ "same time."
-#~ msgstr ""
-#~ "Utilisé pour verrouiller les entrées actuellement modifiées afin d'éviter "
-#~ "de multiples changements simultanés."
-
-#, fuzzy
-#~ msgid "Missing required object class '%s'!"
-#~ msgstr "Object class '%s' de GOsa manquante !"
-
-#, fuzzy
-#~ msgid "Missing optional object class '%s'!"
-#~ msgstr "Object class '%s' de GOsa manquante !"
-
-#, fuzzy
-#~ msgid "Version mismatch for required object class '%s' (!=%s)!"
-#~ msgstr "La version requise des object class ne correspond pas '%s' (!=%s) !"
-
-#, fuzzy
-#~ msgid "Class(es) available"
-#~ msgstr "Classe(s) disponible(s)"
-
-#~ msgid ""
-#~ "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
-#~ "schema    configuration do not support this option."
-#~ msgstr ""
-#~ "Vous avez activé l'option rfc2307bis dans votre option 'configuration du "
-#~ "serveur ldap' lors de l'installation, mais la configuration de vos schéma "
-#~ "ne supportent pas cette option."
-
-#, fuzzy
-#~ msgid ""
-#~ "In order to use rfc2307bis conform groups the objectClass 'posixGroup' "
-#~ "must be      AUXILIARY"
-#~ msgstr ""
-#~ "Pour pouvoir utiliser des groupes conformes à la norme rfc2307bis, "
-#~ "l'objectClass 'posixGroup' doit être       AUXILIARY"
-
-#~ msgid ""
-#~ "Your schema is configured to support the rfc2307bis group, but you have "
-#~ "disabled this option on the 'ldap setup' step."
-#~ msgstr ""
-#~ "Votre schéma est configuré pour supporter les groupes rfc2307, mais vous "
-#~ "avez désactivé cette option lors de l'étape 'configuration de l'annuaire "
-#~ "ldap' du programme d'installation."
-
-#, fuzzy
-#~ msgid "The objectClass 'posixGroup' must be STRUCTURAL"
-#~ msgstr "L'objectClass 'posixGroup' doit être STRUCTURAL"
-
-#~ msgid ""
-#~ "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to "
-#~ "exist."
-#~ msgstr ""
-#~ "La commande '%s', utilisée dans le POSTMODIFY de l'extension '%s' "
-#~ "n'existe pas."
-
-#, fuzzy
-#~ msgid ""
-#~ "Cannot generate samba hash: running '%s' failed, check the "
-#~ "'sambaHashHook'!"
-#~ msgstr ""
-#~ "Impossible de générer le mot de passe samba: l'exécution de '%s' à "
-#~ "échoué, veuillez vérifier le paramètre 'sambaHashHook'!"
-
-#, fuzzy
-#~ msgid "Cannot allocate a free ID:"
-#~ msgstr "Impossible d'assigner un ID libre :"
-
-#, fuzzy
-#~ msgid "maximum tries exceeded!"
-#~ msgstr "Nombre maximum d'essais dépassés !"
-
-#, fuzzy
-#~ msgid "Cannot allocate a free ID!"
-#~ msgstr "Impossible d'assigner un ID libre !"
-
-#, fuzzy
-#~ msgid "Surename"
-#~ msgstr "Nom de famille"
-
-#~ msgid "External password changer reported a problem: %s."
-#~ msgstr ""
-#~ "Le programme externe pour changer votre mot de passe à renvoyé une "
-#~ "erreur: %s."
-
-#~ msgid "Username"
-#~ msgstr "Nom d'utilisateur"
-
-#~ msgid ""
-#~ "You've successfully changed your password. Remember to change all "
-#~ "programms configured to use it as well."
-#~ msgstr ""
-#~ "Votre mot de passe a été changé. N'oubliez pas de modifier les programmes "
-#~ "qui l'utilisent."
-
-#~ msgid "Ok"
-#~ msgstr "Ok"
-
-#~ msgid "Grant permission to owner"
-#~ msgstr "Donner la permission à l'utilisateur"
-
-#~ msgid "Password change not allowed"
-#~ msgstr "Le changement du mot de passe n'est pas autorisé"
-
-#~ msgid "Preferred langage"
-#~ msgstr "Langue préférée"
-
-#~ msgid "Posix settings"
-#~ msgstr "Paramètres Posix"
-
-#~ msgid "You have no permission to set your password!"
-#~ msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe !"
-
-#~ msgid ""
-#~ "You have changed the method your password is stored in the ldap database. "
-#~ "For that reason you've to enter your password at this point again. GOsa "
-#~ "will then encode it with the selected method."
-#~ msgstr ""
-#~ "Vous avez sélectionnez une autre méthode de stockage des mots de passe. "
-#~ "Pour cette raison vous devez ressaisir votre mot de passe afin que GOsa "
-#~ "puisse le réencoder et l'enregistrer dans l'annuaire LDAP."
-
-#~ msgid "Edit posix properties"
-#~ msgstr "Modifier les propriétés posix"
-
-#~ msgid "Sytem trust"
-#~ msgstr "Système de Confiance"
-
-#, fuzzy
-#~ msgid "Processing"
-#~ msgstr "Permissions"
-
-#, fuzzy
-#~ msgid "Created"
-#~ msgstr "Créer"
-
-#, fuzzy
-#~ msgid "No Content"
-#~ msgstr "Contenu"
-
-#, fuzzy
-#~ msgid "Reset Content"
-#~ msgstr "Contenu"
-
-#, fuzzy
-#~ msgid "Partial Content"
-#~ msgstr "Contenu"
-
-#, fuzzy
-#~ msgid "Multi-Status"
-#~ msgstr "Statut"
-
-#, fuzzy
-#~ msgid "Multiple Choice"
-#~ msgstr "Edition multiple"
-
-#, fuzzy
-#~ msgid "See Other"
-#~ msgstr "Sélectionner un utilisateur"
-
-#, fuzzy
-#~ msgid "Use Proxy"
-#~ msgstr "Utilisateur"
-
-#, fuzzy
-#~ msgid "(reserviert)"
-#~ msgstr "serveurs"
-
-#, fuzzy
-#~ msgid "Proxy Authentication Required"
-#~ msgstr "Erreur d'authentification"
-
-#, fuzzy
-#~ msgid "Gone"
-#~ msgstr "aucun"
-
-#, fuzzy
-#~ msgid "Precondition Failed"
-#~ msgstr "Ecrire le fichier de configuration"
-
-#, fuzzy
-#~ msgid "Expectation Failed"
-#~ msgstr "La requête LDAP à échoué !"
-
-#, fuzzy
-#~ msgid "Locked"
-#~ msgstr "Verouillez les utilisateurs"
-
-#, fuzzy
-#~ msgid "Unordered Collection"
-#~ msgstr "Préférences des groupes"
-
-#, fuzzy
-#~ msgid "Internal Server Error"
-#~ msgstr "Erreur interne"
-
-#, fuzzy
-#~ msgid "Not Implemented"
-#~ msgstr "Terminé"
-
-#, fuzzy
-#~ msgid "Gateway Time-out"
-#~ msgstr "Délai d'attente pour le service GOsa"
-
-#~ msgid "GOsa settings 3/3"
-#~ msgstr "Paramètres de GOsa 3/3"
-
-#~ msgid "Tweak some GOsa core behaviour"
-#~ msgstr "Customiser certains paramètres essentiels de GOsa"
-
-#~ msgid "Session lifetime must be a numeric value!"
-#~ msgstr "La durée de la session doit être une valeur numérique !"
-
-#~ msgid "Maximum LDAP query time must be a numeric value!"
-#~ msgstr ""
-#~ "Le temps maximumpour une requête ldap doit être une valeur numérique !"
-
-#~ msgid ""
-#~ "This seems to be the first time you start GOsa - we didn't find any "
-#~ "configuration right now. This simple wizard intends to help you while "
-#~ "setting it up."
-#~ msgstr ""
-#~ "Il semble que c'est votre première installation de GOsa - nous n'avons "
-#~ "pas trouvé de configuration. Ce programme d'aide à l'installation vous "
-#~ "aidera à configurer GOsa."
-
-#~ msgid "What will the wizard do for you?"
-#~ msgstr "Qu'est ce que le programme d'aide à l'installation fera pour vous ?"
-
-#~ msgid "Create a basic, single site configuration"
-#~ msgstr "Créer une simple configuration mono site"
-
-#~ msgid "Tries to find problems within your PHP and LDAP setup"
-#~ msgstr ""
-#~ "Essaye de trouver si il existe des problèmes dans votre configuration PHP "
-#~ "ou LDAP"
-
-#~ msgid ""
-#~ "Let you choose from a set of basic and advanced configuration switches"
-#~ msgstr "Vous permet de choisir un jeu d'option de base ou avancées"
-
-#~ msgid "Guided migration of existing LDAP trees"
-#~ msgstr "Migration assistée d'un annuaire LDAP existant"
-
-#~ msgid "What will the wizard NOT do for you?"
-#~ msgstr "Qu'est ce que le l'assistant d'installation ne fera pas pour vous ?"
-
-#~ msgid "Find every possible configuration error"
-#~ msgstr "Trouver toutes les erreur possible dans votre configuration"
-
-#~ msgid "Migrate every possible LDAP setup - create backup dumps!"
-#~ msgstr "Migrer tout les scénario LDAP possible - créez des sauvegardes !"
-
-#~ msgid "To continue..."
-#~ msgstr "Suite de la configuration..."
-
-#~ msgid "Samba settings"
-#~ msgstr "Configuration Samba"
-
-#~ msgid "Samba hash generator"
-#~ msgstr "Générateur de hash samba"
-
-#~ msgid "Samba SID"
-#~ msgstr "SID Samba"
-
-#~ msgid "RID base"
-#~ msgstr "Base du RID"
-
-#~ msgid "Workstation container"
-#~ msgstr "Branche contenant les stations de travail"
-
-#~ msgid "Samba SID mapping"
-#~ msgstr "Correspondance des SID samba"
-
-#~ msgid "Timezone"
-#~ msgstr "Fuseau Horaire"
-
-#~ msgid "Please choose your preferred timezone here"
-#~ msgstr "Veuillez indiquer votre fuseau horaire préféré ici"
-
-#~ msgid "Additional GOsa settings"
-#~ msgstr "Paramètres supplémentaire de GOsa"
-
-#~ msgid "Enable Copy & Paste"
-#~ msgstr "Activer le Copier / Coller"
-
-#~ msgid "Government mode"
-#~ msgstr "Mode Gouvernemental"
-
-#~ msgid "GOsa logging"
-#~ msgstr "journaux systèmes GOsa"
-
-#~ msgid "Mail settings"
-#~ msgstr "Paramètres de messagerie"
-
-#~ msgid "Mail method"
-#~ msgstr "Méthode de messagerie"
-
-#~ msgid "Account identification attribute"
-#~ msgstr "Attribut d'identification du compte"
-
-#~ msgid "Vacation templates"
-#~ msgstr "Modèles de messages d'absence "
-
-#~ msgid "Use Cyrus UNIX style"
-#~ msgstr "Utiliser Cyrus en mode UNIX"
-
-#~ msgid "Snapshots / Undo"
-#~ msgstr "Copie instantanée / Undo"
-
-#~ msgid "Enable snapshots"
-#~ msgstr "Activer la copie instantanée"
-
-#~ msgid "Snapshot base"
-#~ msgstr "Base pour les snapshots"
-
-#~ msgid "GOsa settings 2/3"
-#~ msgstr "Paramètres de GOsa 2/3"
-
-#~ msgid "Customize special parameters"
-#~ msgstr "Customiser les paramètres spéciaux"
-
-#~ msgid "Enable schema validation when logging in"
-#~ msgstr "Activer la validation des schéma lors de la connexion"
-
-#~ msgid "Checking for invisible departments"
-#~ msgstr "Vérification des départements invisibles"
-
-#~ msgid "Checking for invisible users"
-#~ msgstr "Vérification des utilisateurs invisibles"
-
-#~ msgid "Checking for users outside the people tree"
-#~ msgstr "Vérification d'utilisateurs en dehors de la branche people"
-
-#~ msgid "Checking for groups outside the groups tree"
-#~ msgstr "Vérification des groupes en dehors de la branche groups"
-
-#~ msgid "Checking for windows workstations outside the winstation tree"
-#~ msgstr "Vérification de stations windows en dehors de la branche winstation"
-
-#~ msgid "Checking for duplicated UID numbers"
-#~ msgstr "Vérification pour les uid en double"
-
-#~ msgid "Checking for duplicate GID numbers"
-#~ msgstr "Vérification pour les gid en double"
-
-#~ msgid "Checking for old style USB devices"
-#~ msgstr "Recherche de périphériques USB ancien style"
-
-#~ msgid "Checking for old services that have to be migrated"
-#~ msgstr "Vérification des anciens services qui devront être migré."
-
-#~ msgid "Checking for old style application menus"
-#~ msgstr "Vérifier pour les menu des applications ancienne mode"
-
-#~ msgid "Found %s duplicate values for attribute 'uidNumber'."
-#~ msgstr "J'ai trouvé %s valeur dupliquées pour l'attribut 'uidNumber'."
-
-#~ msgid "Found %s duplicate values for attribute 'gidNumber'."
-#~ msgstr "J'ai trouvé %s valeur dupliquées pour l'attribut 'gidNumber'."
-
-#~ msgid ""
-#~ "Found %s winstations outside the predefined winstation department ou '%s'."
-#~ msgstr ""
-#~ "J'ai trouvé %s winstations en dehors du département winstation prédéfini "
-#~ "'%s'."
-
-#~ msgid "Move"
-#~ msgstr "Bouger"
-
-#~ msgid "Found %s user(s) outside the configured tree '%s'."
-#~ msgstr ""
-#~ "J'ai trouvé %s utilsateur(s) en dehors de la branche configurée '%s'."
-
-#~ msgid "Found %s user(s) that will not be visible in GOsa."
-#~ msgstr "J'ai trouvé %s utilisateur(s) qui ne seront pas visibles dans GOsa."
-
-#~ msgid "Cannot migrate department '%s':"
-#~ msgstr "Impossible de migrer le département '%s' :"
-
-#~ msgid "Found %s department(s) that will not be visible in GOsa."
-#~ msgstr "J'ai trouvé %s département(s) qui ne seront pas visible dans GOsa."
-
-#~ msgid "GOsa 2.5 administrative accounts found: %s"
-#~ msgstr "Compte administratifs de GOsa 2.5 trouvés : %s"
-
-#~ msgid "There is no valid GOsa 2.6 administrator account inside your LDAP."
-#~ msgstr ""
-#~ "Il n'y a pas d'administrateur GOsa 2.6 valide dans votre annuaire LDAP."
-
-#~ msgid "Cannot move users to the requested department!"
-#~ msgstr ""
-#~ "Impossible de bouger les utilisateurs vers le département spécifié !"
-
-#~ msgid "to"
-#~ msgstr "vers"
-
-#~ msgid "Updating following references too"
-#~ msgstr "Mise à jour des références suivantes aussi"
-
-#~ msgid "User will be moved from"
-#~ msgstr "Les utilisateurs seront bougés depuis"
-
-#~ msgid "Copy '%s' to '%s' failed:"
-#~ msgstr "La copie de '%s' vers '%s' à échoué :"
-
-#~ msgid "There are %s devices that need to be migrated."
-#~ msgstr "Il y a %s services qui ont besoin d'être migrés."
-
-#~ msgid "Adding '%s' to the LDAP failed: %s"
-#~ msgstr "L'ajout de '%s' à l'annuaire LDAP à échoué: %s"
-
-#~ msgid "Updating '%s' failed: %s"
-#~ msgstr "La mise à jour de '%s' à échoué : %s"
-
-#~ msgid "There are %s services that need to be migrated."
-#~ msgstr "Il y a %s services qui doivent être migrés."
-
-#~ msgid "There are %s application menus which have to be migrated."
-#~ msgstr "Il y a %s menu d'applications qui doivent être migrés."
-
-#~ msgid "Look and feel"
-#~ msgstr "Thèmes et apparences"
-
-#~ msgid "Theme"
-#~ msgstr "Thème"
-
-#~ msgid "Apache"
-#~ msgstr "Apache"
-
-#~ msgid "Compress output send to browser"
-#~ msgstr "Compresser les données envoyées au navigateur web"
-
-#~ msgid "People and group storage"
-#~ msgstr ""
-#~ "Branches de l'arbre ldap ou sont stockes les utilisateurs et les groupes"
-
-#~ msgid "People DN attribute"
-#~ msgstr "Type d'attribut pour le DN des utilisateurs"
-
-#~ msgid "People storage subtree"
-#~ msgstr "Branches de l'arbre ldap ou sont stockes les utilisateurs"
-
-#~ msgid "Group storage subtree"
-#~ msgstr "Branches de l'arbre ldap ou sont stockes les groupes"
-
-#~ msgid "Include personal title in user DN"
-#~ msgstr "Inclure le personal title dans le DN de l'utilisateur"
-
-#~ msgid "Relaxed naming policies"
-#~ msgstr "Règles de de nommage souples"
-
-#~ msgid "Automatic UIDs"
-#~ msgstr "Uid automatiques"
-
-#~ msgid "GID / UID min id"
-#~ msgstr "GID / UID id min"
-
-#~ msgid "Number base for people/groups"
-#~ msgstr "Nombre de départ pour les utilisateurs/groupes"
-
-#~ msgid "Hook for number base"
-#~ msgstr "Connexions pour le nombre de base"
-
-#~ msgid "Password settings"
-#~ msgstr "Préférences pour les mots de passe"
-
-#~ msgid "Password encryption algorithm"
-#~ msgstr "Algorithme de cryptage pour les mots de passe"
-
-#~ msgid "Password restrictions"
-#~ msgstr "Restrictions pour les mot de passe"
-
-#~ msgid "Password minimum length"
-#~ msgstr "Taille minimum des mots de passe"
-
-#~ msgid "Different characters from old password"
-#~ msgstr "Nombre de caractères différents de l'ancien mot de passe"
-
-#~ msgid "Password change hook"
-#~ msgstr "Connexions pour le changement de mot de passe"
-
-#~ msgid "Use SASL for kerberos"
-#~ msgstr "Utiliser SASL pour kerberos"
-
-#~ msgid "Use account expiration"
-#~ msgstr "Utiliser l'expiration du compte"
-
-#~ msgid ""
-#~ "GOsa supports several encryption types for your passwords. Normally this "
-#~ "is adjustable via user templates, but you can specify a default method to "
-#~ "be used here, too."
-#~ msgstr ""
-#~ "GOsa supporte différents types de cryptage pour vos mots de passe. "
-#~ "Normalement ceci est ajustable avec des modèles utilisateurs, mais vous "
-#~ "pouvez spécifier ici une méthode qui sera utilisée par défaut."
-
-#~ msgid ""
-#~ "GOsa always acts as admin and manages access rights internally. This is a "
-#~ "workaround till OpenLDAP's in directory ACI's are    fully implemented. "
-#~ "For this to work, we need the admin DN and the corresponding password."
-#~ msgstr ""
-#~ "GOsa agit toujours comme un administrateur et gère les droits (ACLs) en "
-#~ "interne. C'est un procédé utilisé en attendant que les ACI de OpenLDAP "
-#~ "soient finalisées. Pour ces raisons il est nécessaire d'indiquer le DN de "
-#~ "l'administrateur et son mot de passe."
-
-#~ msgid ""
-#~ "Some basic LDAP parameters are tunable and affect the locations where "
-#~ "GOsa saves people and groups, including the way accounts get created. "
-#~ "Check the values below if the fit your needs."
-#~ msgstr ""
-#~ "Des paramètres basiques du serveur LDAP sont modifiables et affectent "
-#~ "l'endroit où GOsa va enregistrer les utilisateurs et les groupes, "
-#~ "incluant la façon dont vont être créés les comptes. Vérifiez les valeurs "
-#~ "suivantes afin quelles correspondent à vos besoins."
-
-#~ msgid ""
-#~ "GOsa has modular support for several mail methods. These methods provide "
-#~ "interfaces to users mailboxes and general handling    for quotas. You can "
-#~ "choose the dummy plugin to leave all your mail settings untouched."
-#~ msgstr ""
-#~ "GOsa à un support modulaire des méthodes de messagerie. Ces méthodes "
-#~ "fournissent des interfaces vers les boîtes à messages des utilisateurs "
-#~ "ainsi que la gestion de leurs quotas. Vous pouvez choisir l'extension "
-#~ "dummy pour que GOsa ne touche a rien."
-
-#~ msgid "Enable primary group filter"
-#~ msgstr "Activer le filtre sur les groupes primaires"
-
-#~ msgid "Display summary in listings"
-#~ msgstr "Afficher les sommaires dans les listes"
-
-#~ msgid "Honour administrative units"
-#~ msgstr "Honorer les entités administratives"
-
-#~ msgid "Smarty compile directory"
-#~ msgstr "Répertoire de compilation de smarty"
-
-#~ msgid "SNMP community"
-#~ msgstr "communauté SNMP"
-
-#~ msgid "Path for PPD storage"
-#~ msgstr "Répertoire pour le stockage des PPD"
-
-#~ msgid "Path for kiosk profile storage"
-#~ msgstr "Répertoire pour le stockage des profiles kiosk"
-
-#~ msgid "SUDO role base"
-#~ msgstr "Base pour SUDO"
-
-#~ msgid "Mail queue script"
-#~ msgstr "Script pour la gestion de la queue du serveur de messagerie"
-
-#~ msgid "Enable edit locking"
-#~ msgstr "Activer le vérrouillage lors de l'édition"
-
-#~ msgid "Gosa support daemon"
-#~ msgstr "Service GOsa"
-
-#~ msgid "Login and session"
-#~ msgstr "connexion et session"
-
-#~ msgid "Enforce register_globals to be deactivated"
-#~ msgstr "Force register_globals à être désactivé"
-
-#~ msgid "Enforce encrypted connections"
-#~ msgstr "Force les connexions cryptées"
-
-#~ msgid "Warn if session is not encrypted"
-#~ msgstr "Avertir si la session ne sera pas cryptée"
-
-#~ msgid "Remember dialog filter settings"
-#~ msgstr "Se souvenir des paramètres des filtres"
-
-#~ msgid "Session lifetime"
-#~ msgstr "Durée de vie de la session"
-
-#~ msgid "Debugging"
-#~ msgstr "Deboguage"
-
-#~ msgid "Show PHP errors"
-#~ msgstr "Afficher les erreur PHP"
-
-#~ msgid "Maximum LDAP query time"
-#~ msgstr "Durée maximale d'une requête LDAP"
-
-#~ msgid "Debug level"
-#~ msgstr "Niveau de débogage"
-
-#~ msgid "Disabled"
-#~ msgstr "Désactivé"
-
-#~ msgid ""
-#~ "Move windows workstations into a valid windows workstation department"
-#~ msgstr ""
-#~ "Bouger les stations windows dans un département valide pour les stations "
-#~ "windows."
-
-#~ msgid ""
-#~ "This dialog allows you to move the displayed windows workstations into a "
-#~ "valid department"
-#~ msgstr ""
-#~ "Ce dialogue vous permet de bouger les stations windows affichées dans un "
-#~ "département valide"
-
-#~ msgid ""
-#~ "Be careful with this tool, there may be references pointing to this "
-#~ "workstations that can't be migrated."
-#~ msgstr ""
-#~ "Soyez prudent avec cet outil, il peut y avoir des références pointant "
-#~ "vers ces machines qui ne seront pas migrées."
-
-#~ msgid ""
-#~ "Move selected windows workstations into the following GOsa department"
-#~ msgstr "Bouger les machines windows dans le département GOsa suivant"
-
-#~ msgid "Move selected workstations"
-#~ msgstr "Bouger les stations de travail sélectionnées"
-
-#~ msgid "What will be done here"
-#~ msgstr "Que ce qui sera exécuté ici"
-
-#~ msgid "Move groups into configured group tree"
-#~ msgstr "Bouger les groupes dans le groupe configuré"
-
-#~ msgid ""
-#~ "This dialog allows moving a couple of groups to the configured group "
-#~ "tree. Doing this may straighten your LDAP service."
-#~ msgstr ""
-#~ "Ce dialogue permet de bouger un couple de groupes dans le groupe "
-#~ "configuré. Exécuter cela peut améliorer votre service LDAP."
-
-#~ msgid ""
-#~ "Be careful with this option! There may be references pointing to these "
-#~ "groups. The GOsa setup can't migrate references, so you may want to "
-#~ "cancel the migration in this case."
-#~ msgstr ""
-#~ "Soyez prudent avec cette opération ! Il peut exister des références qui "
-#~ "pointent vers ces groupes. Le programme d'installation de GOsa ne peut "
-#~ "pas migrer ces références, vous préférerez peut être annuler la migration "
-#~ "dans ce cas."
-
-#~ msgid "Move selected groups into this group tree"
-#~ msgstr "Bouger les groupes sélectionnés dans le groupe de base cet annuaire"
-
-#~ msgid "Hide changes"
-#~ msgstr "Camoufler les changements"
-
-#~ msgid "Show changes"
-#~ msgstr "Montrer les changements"
-
-#~ msgid "Move users into configured user tree"
-#~ msgstr "Bouger les utilisateurs dans la branche utilisateur configurée"
-
-#~ msgid ""
-#~ "This dialog allows moving a couple of users to the configured user tree. "
-#~ "Doing this may straighten your LDAP service."
-#~ msgstr ""
-#~ "Ce dialogue permet de bouger un ensemble d'utilisateurs dans la branche "
-#~ "utilisateur configurée. Exécuter cette opération peut améliorer votre "
-#~ "service LDAP."
-
-#~ msgid ""
-#~ "Be careful with this option! There may be references pointing to these "
-#~ "users. The GOsa setup can't migrate references, so you may want to cancel "
-#~ "the migration in this case."
-#~ msgstr ""
-#~ "Soyez prudent avec cette opération ! Il peut exister des références qui "
-#~ "pointent vers ces utilisateurs. Le programme d'installation de GOsa ne "
-#~ "peut pas migrer ces références, vous préférerez peut être annuler la "
-#~ "migration dans ce cas."
-
-#~ msgid "Move selected users into this people tree"
-#~ msgstr "Bouger les utilisateurs sélectionnés dans la branche utilisateurs."
-
-#~ msgid "Migrate GOsa 2.5 administrative accounts"
-#~ msgstr "Migrer les compte administrateur de GOsa 2.5"
-
-#~ msgid ""
-#~ "This dialog allows the migration of GOsa 2.5 admin accounts into GOsa 2.6 "
-#~ "useable accounts."
-#~ msgstr ""
-#~ "Cette boite de dialogue permet la migration des comptes administrateurs "
-#~ "de GOSa 2.5 vers GOsa 2.6."
-
-#~ msgid "Abort"
-#~ msgstr "Annuler"
-
-#~ msgid ""
-#~ "The listed departments are currently invisible in the GOsa user "
-#~ "interface. If you want to change this for a couple of entries, select "
-#~ "them and use the migrate button below."
-#~ msgstr ""
-#~ "Les département listés sont actuellement invisibles dans l'interface "
-#~ "utilisateur de GOsa. Si vous voulez changer cela pour un certain nombre "
-#~ "d'entrée, sélectionnez les et utilisez le bouton migration ci dessous."
-
-#~ msgid ""
-#~ "If you want to know what will be done when migrating the selected "
-#~ "entries, use the 'Show changes' button to see the LDIF."
-#~ msgstr ""
-#~ "Si vous voulez savoir ce qui sera effectué lorsque vous migrerez les "
-#~ "entrées sélectionnées, utilisez le bouton 'Montrer les changements' pour "
-#~ "voir le fichier LDIF."
-
-#~ msgid ""
-#~ "The listed users are currently invisible in the GOsa user interface. If "
-#~ "you want to change this for a couple of users, just select them and use "
-#~ "the 'Migrate' button below."
-#~ msgstr ""
-#~ "Les utilisateurs listés sont actuellement invisibles dans l'interface "
-#~ "utilisateur de GOsa. Si vous voulez changer ceci pour certains "
-#~ "d'utilisateurs, veuillez les sélectionner et utiliser le bouton "
-#~ "'migration' ci dessous."
-
-#~ msgid ""
-#~ "The listed devices are currently invisible in the GOsa interface. If you "
-#~ "want to change this for a couple of devices, just select them and use the "
-#~ "'Migrate' button below."
-#~ msgstr ""
-#~ "Les périphériques listés sont actuellement invisibles dans l'interface de "
-#~ "GOsa. Si vous voulez changer ceci pour certains périphériques, veuillez "
-#~ "les sélectionner et utiliser le bouton 'migration' ci dessous."
-
-#~ msgid "Refresh"
-#~ msgstr "Rafraîchir"
-
-#~ msgid ""
-#~ "The listed services are currently invalid for the GOsa version you are "
-#~ "going to install. If you want to update a couple of service, just select "
-#~ "them and use the 'Migrate' button below."
-#~ msgstr ""
-#~ "Les services listés sont actuellement invisibles dans l'interface de "
-#~ "GOsa. Si vous voulez changer ceci certains services, veuillez les "
-#~ "sélectionner et utiliser le bouton 'migration' ci dessous."
-
-#~ msgid ""
-#~ "The listed menus are currently invisible in the GOsa interface. If you "
-#~ "want to change this for a couple of devices, just select them and use the "
-#~ "'Migrate' button below."
-#~ msgstr ""
-#~ "Les menus listés sont actuellement invisibles dans l'interface de GOsa. "
-#~ "Si vous voulez changer ceci pour certains menus, veuillez les "
-#~ "sélectionner et utiliser le bouton 'migration' ci dessous."
-
-#~ msgid "Installation"
-#~ msgstr " "
-
-#~ msgid "GOsa settings 1/3"
-#~ msgstr "Paramètres de GOsa 1/3"
-
-#~ msgid "The specified value for '%s' must be a numeric value"
-#~ msgstr "Le valeur spécifiée pour '%s' doit être une valeur numérique."
-
-#~ msgid "Don't add a trailing comma to '%s'."
-#~ msgstr "N'ajoutez pas une virgule à la fin de '%s'."
-
-#~ msgid "People storage ou"
-#~ msgstr "Branches de l'arbre ldap ou sont stockes les utilisateurs"
-
-#~ msgid "Group storage ou"
-#~ msgstr "Branches de l'arbre ldap ou sont stockes les groupes"
-
-#~ msgid "Uid base must be numeric"
-#~ msgstr "l'uid de base doit être une valeur numérique"
-
-#~ msgid "The given password minimum length is not numeric."
-#~ msgstr ""
-#~ "La longueur minimale du mot de passe n'est pas une valeur numérique."
-
-#~ msgid "The given password differ value is not numeric."
-#~ msgstr "L'option password differ n'est pas une valeur numérique."
-
-#~ msgid "Available members"
-#~ msgstr "Membres disponibles"
-
-#~ msgid "GOsa login screen"
-#~ msgstr "Fenêtre de connexion GOsa"
-
-#~ msgid "Login screen"
-#~ msgstr "Fenêtre de connexion"
-
-#~ msgid ""
-#~ "Please use your username and your password to log into the site "
-#~ "administration system."
-#~ msgstr ""
-#~ "Veuillez utiliser votre nom d'utilisateur et votre mot de passe afin de "
-#~ "vous connecter."
-
-#~ msgid "Sign in"
-#~ msgstr "Connexion"
-
-#~ msgid ""
-#~ "This may be used by several groups. Please double check if your really "
-#~ "want to do this since there is no way for GOsa to get your data back."
-#~ msgstr ""
-#~ "Cela peut être utilisé par plusieurs groupes. Veuillez vérifier que vous "
-#~ "voulez effectuer cette opération étant donné qu'il est impossible pour "
-#~ "GOsa de récupérer vos données."
-
-#~ msgid ""
-#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
-#~ msgstr ""
-#~ "D'accord - si vous êtes sur - cliquez sur 'Supprimer' pour continuer ou "
-#~ "sur 'Annuler' pour abandonner."
-
-#~ msgid "Help"
-#~ msgstr "Aide"
-
-#~ msgid "Sign out"
-#~ msgstr "Déconnexion"
-
-#~ msgid "Signed in:"
-#~ msgstr "Connecté:"
-
-#~ msgid "Success"
-#~ msgstr "Réussi"
-
-#~ msgid "New password repeated"
-#~ msgstr "Nouveau mot de passe"
-
-#~ msgid "Change"
-#~ msgstr "Changer"
-
-#~ msgid "Thin Client"
-#~ msgstr "Clients légers"
-
-#~ msgid "Object name"
-#~ msgstr "Nom de l'objet"
-
-#~ msgid "This object has no relationship to other objects."
-#~ msgstr "Cette objet n'a pas de relation avec d'autres objets."
-
-#~ msgid ""
-#~ "Changing the password affects your authentification on mail, proxy, samba "
-#~ "and unix services."
-#~ msgstr ""
-#~ "Changer le mot de passe affecte votre identification sur la messagerie, "
-#~ "le proxy, samba, et les services unix."
-
-#~ msgid ""
-#~ "(Some types of certificates are currently not supported and may be "
-#~ "displayed as 'invalid'.)"
-#~ msgstr ""
-#~ "(Certains types de certificats ne sont pas supportés et peuvent être "
-#~ "affichés comme 'non valides'.)"
-
-#~ msgid "Personal picture"
-#~ msgstr "Image personnelle"
-
-#~ msgid "In all groups"
-#~ msgstr "dans tout les groupes"
-
-#~ msgid "Not in all groups"
-#~ msgstr "pas dans tout les groupes"
-
-#~ msgid "! unknown UID"
-#~ msgstr "! identifiant inconnu"
-
-#~ msgid ""
-#~ "Search returned too many results. Not displaying more than %s entries!"
-#~ msgstr ""
-#~ "La recherche à retourné trop de résultats. Je n'affiche que %s entr§es !"
-
-#~ msgid "All categories"
-#~ msgstr "Toutes les catégories"
-
-#~ msgid "All objects in current subtree"
-#~ msgstr "Tout les objets dans le sous arbres actuel"
-
-#~ msgid "Startup"
-#~ msgstr "Démarrage"
-
-#~ msgid "FAI summary"
-#~ msgstr "Sommaire FAI"
-
-#~ msgid "Cannot bind to LDAP. Please contact the system administrator."
-#~ msgstr ""
-#~ "Impossible de se connecter à l'annuaire LDAP. Veuillez contacter "
-#~ "l'administrateur du système."
-
-#~ msgid "The mcrypt module was not found. Please install php5-mcrypt."
-#~ msgstr ""
-#~ "Le module mcrypt n'as pas été trouvé. Veuillez installer php5-mycrypt."
-
-#~ msgid "Password reset"
-#~ msgstr "Réinitialisation du mot de passe"
-
-#~ msgid "Up"
-#~ msgstr "Au dessus"
-
-#~ msgid "Down"
-#~ msgstr "En bas"
-
-#~ msgid ""
-#~ "The timezone setting '%s' in your gosa.conf is not valid. Cannot "
-#~ "calculate correct timezone offset."
-#~ msgstr ""
-#~ "Le fuseau horaire '%s' indiqué dans votre gosa.conf est invalide. "
-#~ "Impossible de calculer le décalage horaire correct."
-
-#~ msgid "Select to list objects of type '%s'."
-#~ msgstr "Sélectionnez pour lister les objets de type '%s'."
-
-#~ msgid "Select to list objects containig '%s'."
-#~ msgstr "Sélectionner pour lister les objets contenant '%s'."
-
-#~ msgid "Select to list objects that have '%s' enabled"
-#~ msgstr "Sélectionnez pour lister les objets qui ont '%s' activés"
-
-#~ msgid "Select to search within subtrees"
-#~ msgstr "Sélectionner pour chercher dans le sous arbre"
-
-#~ msgid "in"
-#~ msgstr "dans"
-
-#~ msgid "on line"
-#~ msgstr "en ligne"
-
-#~ msgid "Contains ACLs for these objects: %s"
-#~ msgstr "Contient les ACL pour ces objets: %s"
-
-#~ msgid "Role: %s"
-#~ msgstr "Rôle : %s"
-
-#~ msgid "Go up one department"
-#~ msgstr "Monter d'un département"
-
-#~ msgid "Go to users department"
-#~ msgstr "Aller au département des utilisateurs"
-
-#~ msgid "Remove snapshot"
-#~ msgstr "Supprimer le snapshot"
-
-#~ msgid "Send bug report to the GOsa Team"
-#~ msgstr "Envoyer vos commentaires au membres du projet Gosa"
-
-#~ msgid "Toggle information"
-#~ msgstr "Afficher/Cacher l'information"
-
-#~ msgid "All objects in this category"
-#~ msgstr "Tout les objets dans cette catégorie"
-
-#~ msgid ""
-#~ "The object has changed since opened in GOsa. All changes that may be done "
-#~ "by others get lost if you save this entry!"
-#~ msgstr ""
-#~ "Cet objet à changer depuis son ouverture dans GOsa. Tout les changement "
-#~ "éffectués par les autres seront perdus si vous sauvez cette entrée !"
-
-#~ msgid "Changing ACL dn"
-#~ msgstr "Changement du dn de l'acl"
-
-#~ msgid "from"
-#~ msgstr "de"
-
-#~ msgid "Restore"
-#~ msgstr "Restaurer"
-
-#~ msgid "cut"
-#~ msgstr "couper"
-
-#~ msgid "User information is not unique accross the configured LDAP trees!"
-#~ msgstr ""
-#~ "L'information de l'utilisateur n'est pas unique à travers tout les "
-#~ "annuaires !"
-
-#~ msgid "Your LDAP setup contains old schema definitions:"
-#~ msgstr "Votre installation LDAP contient de vieux schémas :"
-
-#~ msgid ""
-#~ "FATAL: Register globals is on. GOsa will refuse to login unless this is "
-#~ "fixed by an administrator."
-#~ msgstr ""
-#~ "FATAL: Register globals est activé. GOsa ne permettra pas aux "
-#~ "utilisateurs de se connecter tant que ceci n'est pas corrigé par un "
-#~ "administrateur."
-
-#, fuzzy
-#~ msgid "Prpperties"
-#~ msgstr "Propriétés"
-
-#, fuzzy
-#~ msgid "Organizational unit"
-#~ msgstr "Nom de l'entreprise"
-
-#~ msgid "Old password"
-#~ msgstr "Ancien mot de passe"
-
-#~ msgid "Verify password"
-#~ msgstr "Vérifier votre mot de passe"
-
-#~ msgid "Session conflict detected"
-#~ msgstr "Conflit détecté entre différentes sessions"
-
-#~ msgid ""
-#~ "Probably there's another active instance of your session. Multiple window "
-#~ "operation is technical not possible and heavily depends on the browser "
-#~ "you're using. Usage of different browsers at a time (i.e. IE and Mozilla) "
-#~ "is possible. Pressing the Logout button will close this session."
-#~ msgstr ""
-#~ "Une autre instance de votre session a été détectée. Les opérations "
-#~ "multiples sont techniquement impossible et dépendent du navigateur "
-#~ "utilisé. L'usage de navigateurs différents en même temps est possible "
-#~ "(ex: IE et Mozilla) est possible. Cliquer sur le bouton 'Déconnexion' "
-#~ "fermera cette session."
-
-#~ msgid ""
-#~ "Ignoring this message will change/destroy the data you're currently "
-#~ "editing, so please close multiple windows and log in again."
-#~ msgstr ""
-#~ "Ignorer ce message entraînera la modification/destruction des données en "
-#~ "cours d'édition, il est conseillé de fermer toutes les fenêtres ouvertes "
-#~ "et de se reconnecter."
-
-#~ msgid "External password changer reported a problem: "
-#~ msgstr ""
-#~ "Le programme externe pour changer votre mot de passe à renvoyé une "
-#~ "erreur: "
-
-#~ msgid "Show department"
-#~ msgstr "Départements"
-
-#~ msgid "Show groups"
-#~ msgstr "Groupes"
-
-#~ msgid "Show server"
-#~ msgstr "Serveur"
-
-#~ msgid "Show workstation"
-#~ msgstr "Stations de travail"
-
-#~ msgid "Show terminal"
-#~ msgstr "Terminaux"
-
-#~ msgid "Show printer"
-#~ msgstr "Imprimante"
-
-#~ msgid "Show phone"
-#~ msgstr "Téléphones"
-
-#, fuzzy
-#~ msgid "Filter options"
-#~ msgstr "Paramètres supplémentaire pour le filtre"
-
-#~ msgid ""
-#~ "Please double check if you really want to do this since there is no way "
-#~ "for GOsa to get your data back."
-#~ msgstr ""
-#~ "Veuillez vérifier que vous voulez effectuer cette action. Toutes les "
-#~ "données seront perdues étant donné qu'il est impossible pour GOsa de "
-#~ "récupérer vos données."
-
-#~ msgid "Manage object groups"
-#~ msgstr "Gestion des groupe d'objets"
-
-#~ msgid "nested groups"
-#~ msgstr "groupes imbriqués"
-
-#~ msgid "application groups"
-#~ msgstr "groupes d'applications"
-
-#~ msgid "department groups"
-#~ msgstr "groupes de départements"
-
-#~ msgid "server groups"
-#~ msgstr "groupes de serveurs"
-
-#~ msgid "workstation groups"
-#~ msgstr "groupes de stations de travail"
-
-#~ msgid "terminal groups"
-#~ msgstr "groupes de terminaux"
-
-#~ msgid "printer groups"
-#~ msgstr "groupes d'imprimantes"
-
-#~ msgid "phone groups"
-#~ msgstr "groupes de téléphones"
-
-#~ msgid "Select objects to add"
-#~ msgstr "Sélectionnez les objets à ajouter"
-
-#~ msgid "Filters"
-#~ msgstr "Filtres"
-
-#~ msgid "Display objects of department"
-#~ msgstr "Afficher les objets du département"
-
-#~ msgid "Choose the department the search will be based on"
-#~ msgstr "Sélectionner le département où sera effectuée la recherche"
-
-#~ msgid "Display objects matching"
-#~ msgstr "Afficher les objets correspondants"
-
-#~ msgid "Regular expression for matching object names"
-#~ msgstr "Expression régulière pour trouver les objets correspondants"
-
-#~ msgid "Select systems to add"
-#~ msgstr "Sélectionner les hôtes à ajouter"
-
-#~ msgid "Display systems of department"
-#~ msgstr "Afficher les systèmes du département"
-
-#~ msgid "Display systems matching"
-#~ msgstr "Afficher les systèmes correspondant"
-
-#~ msgid "Regular expression for matching addresses"
-#~ msgstr "Expression régulière pour sélectionner les adresses correspondantes"
-
-#~ msgid ""
-#~ "This may be a primary user group. Please double check if you really want "
-#~ "to do this since there is no way for GOsa to get your data back."
-#~ msgstr ""
-#~ "Ce groupe est un groupe principal contenant des utilisateurs. Veuillez "
-#~ "vous assurez que vous voulez bien exécuter cette action étant donné qu'il "
-#~ "est impossible pour GOsa de récupérer vos données."
-
-#~ msgid "Show samba groups"
-#~ msgstr "Groupes Samba"
-
-#~ msgid "Show mail groups"
-#~ msgstr "Groupes de messagerie"
-
-#~ msgid "Group administration"
-#~ msgstr "Administration du groupe"
-
-#~ msgid ""
-#~ "This includes all account data, system access rules, imap settings, etc. "
-#~ "for this user. Please double check if your really want to do this since "
-#~ "there is no way for GOsa to get your data back."
-#~ msgstr ""
-#~ "Cela inclut toutes les données des comptes, les droits d'accès, la "
-#~ "configuration imap,etc. pour cet utilisateur. Veuillez vous assurez que "
-#~ "vous voulez effectuez cette opération étant donné qu'il est impossible "
-#~ "pour GOsa de récupérer vos données."
-
-#~ msgid "Manage users"
-#~ msgstr "Gèrer les utilisateurs"
-
-#~ msgid ""
-#~ "This includes 'all' accounts, systems, etc. in this subtree. Please "
-#~ "double check if your really want to do this since there is no way for "
-#~ "GOsa to get your data back."
-#~ msgstr ""
-#~ "Ceci inclus tous les comptes systèmes, etc... dans cette branche. "
-#~ "Veuillez vérifier si vous voulez réaliser cette opération étant donné "
-#~ "qu'il est impossible pour GOsa de récupérer vos données."
-
-#~ msgid ""
-#~ "Best thing to do before performing this action would be to save the "
-#~ "current contents of your LDAP tree in a file. So - if you've done so - "
-#~ "press 'Delete' to continue or 'Cancel' to abort."
-#~ msgstr ""
-#~ "Il est conseillé de sauvegarder l'arbre de votre annuaire LDAP dans un "
-#~ "fichier avant de réaliser cette action. Appuyez sur 'Supprimer' pour "
-#~ "continuer ou 'Annuler' pour abandonner."
-
-#~ msgid "List of departments"
-#~ msgstr "Liste des départements"
-
-#~ msgid "Manage Departments"
-#~ msgstr "Gérer les départements"
-
-#~ msgid "Show access control lists"
-#~ msgstr "Montrer le contrôle d'accès (ACL)"
-
-#~ msgid "Show roles"
-#~ msgstr "Montrer les rôles"
-
-#~ msgid "Bug submitter"
-#~ msgstr "Rapport de bogues"
-
-#~ msgid ""
-#~ "<a\thref='https://oss.gonicus.de/labs/gosa/"
-#~ "newticket'\ttarget='_blank'>Bugsubmitter</a>"
-#~ msgstr ""
-#~ "<a\thref='https://oss.gonicus.de/labs/gosa/"
-#~ "newticket'\ttarget='_blank'>Rapport de bogues</a>"
-
-#~ msgid "Show servers"
-#~ msgstr "Serveurs"
-
-#~ msgid "Show workstations"
-#~ msgstr "Stations de travail"
-
-#~ msgid "Show terminals"
-#~ msgstr "Terminaux"
-
-#, fuzzy
-#~ msgid "List navigation"
-#~ msgstr "Stations Windows"
-
-#, fuzzy
-#~ msgid "Group selection filter"
-#~ msgstr "Préférences des groupes"
-
-#, fuzzy
-#~ msgid "Posix extension settings"
-#~ msgstr "Paramètres Posix"
-
-#~ msgid "Go to root department"
-#~ msgstr "Aller au département de base"
-
-#~ msgid "Home"
-#~ msgstr "Accueil"
-
-#~ msgid ""
-#~ "This is the GOsa main menu. You can select your tasks from the menu on "
-#~ "the left, or by choosing one of the pictograms below. All changes apply "
-#~ "directly to your companies LDAP server."
-#~ msgstr ""
-#~ "Vous êtes sur la fenêtre principale de GOsa. Vous pouvez sélectionner une "
-#~ "rubrique soit en utilisant le menu de gauche soit en cliquant sur une des "
-#~ "icônes. Tout les changements sont directement appliqués sur les serveurs "
-#~ "LDAP de votre société."
-
-#~ msgid ""
-#~ "Use 'Sign out' on the upper left to close the connection and 'Main' to "
-#~ "get back to the pictogram view."
-#~ msgstr ""
-#~ "Cliquez sur déconnexion, en haut à gauche, pour vous déconnecter, sur "
-#~ "Accueil pour revenir à la page principale."
-
-#~ msgid "Show functional users"
-#~ msgstr "montrer les utilisateurs fonctionnels"
-
-#~ msgid "Show Samba users"
-#~ msgstr "Montrer les utilisateurs samba"
-
-#~ msgid "Choose subtree to place user in"
-#~ msgstr "Sélectionnez la branche où sera enregistrée l'utilisateur"
-
-#~ msgid "Select a base"
-#~ msgstr "Sélectionnez une base"
-
-#~ msgid "Generic user information"
-#~ msgstr "Information générales sur l'utilisateur"
-
-#~ msgid "Account"
-#~ msgstr "Compte"
-
-#~ msgid "Select groups to add"
-#~ msgstr "Sélectionner les groupes à ajouter"
-
-#~ msgid "Display groups of department"
-#~ msgstr "Afficher les groupes du département"
-
-#~ msgid "Display groups matching"
-#~ msgstr "Afficher les groupes correspondants"
-
-#~ msgid "Regular expression for matching group names"
-#~ msgstr "Expression régulière correspondant à des noms de groupe"
-
-#~ msgid "Display groups of user"
-#~ msgstr "Afficher les groupes contenant des utilisateurs"
-
-#~ msgid "User name of which groups are shown"
-#~ msgstr "Utilisateur dont on montre les groupes"
-
-#~ msgid "Inconsistent DN encoding detected: '%s'"
-#~ msgstr "Encodage du inconsistant du DN détecté : '%s'"
-
-#~ msgid "Choose a base"
-#~ msgstr "Sélectionnez une base"
-
-#~ msgid "Choose subtree to place group in"
-#~ msgstr "Sélectionnez la branche où sera placée le groupe"
-
-#~ msgid "Choose subtree to place department in"
-#~ msgstr ""
-#~ "Sélectionnez la branche de l'annuaire dans laquelle sera placée le "
-#~ "département"
