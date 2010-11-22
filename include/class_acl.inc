@@ -832,7 +832,11 @@ class acl extends plugin
 
             /* Walk through the list of attributes */
             $cnt= 1;
-            $splist= $plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'];
+            $splist= array();
+            if(isset($plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'])){
+                $splist= $plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'];
+            }
+
             if(session::global_get('js')) {
                 if(isset($_SERVER['HTTP_USER_AGENT']) && 
                         (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
