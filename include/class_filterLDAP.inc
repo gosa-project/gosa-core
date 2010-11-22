@@ -35,6 +35,13 @@ class filterLDAP {
       $bases[$base]= "";
     } else {
       foreach ($objectStorage as $oc) {
+
+        // Handle empty storage locatios here, maybe get_ou() as returned an empty string.
+        if(empty($oc)){
+            $bases[$base] = "";
+            continue;
+        }
+
         $oc= preg_replace('/,$/', '', $oc);
         $tmp= explode(',', $oc);
         if (count($tmp) == 1) {
