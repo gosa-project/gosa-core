@@ -454,6 +454,7 @@ class msgPool
     }
 
     /* Fill DN information */
+    $dn_info="";
     if ($dn != ""){
       $dn_info= "<br><br>"._("Object").": ".bold(LDAP::fix($dn));
     }
