@@ -120,9 +120,20 @@ class aclResolver
                 $this->validateDn = $this->userMap[$d]['dn'];
                 $this->validateUid = $this->userMap[$d]['uid'][0];
                 $this->renderedList = "";
+            }else{
+
+                foreach($this->userMap as $string => $data){
+                    if($data['uid'][0] == $d){
+                        $this->validateDn = $data['dn'];
+                        $this->validateUid = $data['uid'][0];
+                        $this->renderedList = "";
+
+                    }
+                }
             }
         }
-       
+
+ 
         if(empty($this->renderedList)){
 
             $this->reload();
