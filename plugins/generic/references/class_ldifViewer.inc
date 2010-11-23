@@ -2,7 +2,9 @@
 
 class ldifViewer extends plugin
 {
-    private $ldif;    
+    private $ldif;
+        private $success= FALSE;
+        private $error= "";
 
     function __construct($config, $dn)
     {
@@ -14,11 +16,21 @@ class ldifViewer extends plugin
         $this->dn = $dn;
         $ldap = $this->config->get_ldap_link();
         $this->ldif=$ldap->generateLdif(LDAP::fix($this->dn),'(objectClass=*)','base');
+        if(!$ldap->success()){
+                msg_dialog::display(_("Error"),
+                                msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_READ),
+                        ERROR_DIALOG);
+
+        }
+        $this->success = $ldap->success();
+        $this->error = $ldap->get_error();
     }
 
     function execute()
     {
         $smarty = get_smarty();
+        $smarty->assign('success', $this->success);
+        $smarty->assign('error', $this->error);
         $smarty->assign('ldif', set_post($this->ldif));
         return($smarty->fetch(get_template_path('ldifViewer.tpl')));
     }
