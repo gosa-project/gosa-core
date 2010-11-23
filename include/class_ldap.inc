@@ -956,8 +956,6 @@ class LDAP
      */
     function generateLdif ($dn, $filter= "(objectClass=*)", $scope = 'sub', $limit=0)
     {
-        $attrs  = (count($attributes))?implode($attributes,' '):'';
-
         // Ensure that limit is numeric if not skip here.
         if(!empty($limit) && !is_numeric($limit)){
             trigger_error(sprintf("Invalid parameter for limit '%s', a numeric value is required."), $limit);
