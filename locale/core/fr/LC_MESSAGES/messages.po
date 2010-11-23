@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-20 18:49+0200\n"
-"PO-Revision-Date: 2010-11-22 23:11+0100\n"
+"PO-Revision-Date: 2010-11-23 23:25+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "Language: \n"
@@ -32,7 +32,7 @@ msgstr "Mot de passe"
 
 #: ihtml/themes/default/login.tpl:61
 msgid "Choose the directory to work on"
-msgstr ""
+msgstr "Choisir le répertoire sur lequel travailler"
 
 #: ihtml/themes/default/login.tpl:66
 msgid "Click here to log in"
@@ -47,15 +47,12 @@ msgid "Copy & paste wizard"
 msgstr "Assistant pour le copier &amp; coller"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:7
-#, fuzzy
 msgid ""
 "Some values need to be unique in the complete directory while some "
 "combinations make no sense. Please edit the values below to fulfill the "
 "policies."
 msgstr ""
-"Certaines valeurs doivent être unique dans tout l'arbre et certaines "
-"combinations n'ont pas de sens. Gosa vous montre les valeurs "
-"correspondantes. Veuillez maintenir les valeurs pour respecter les "
+"Certaines valeurs doivent être unique dans tout l'arbre et certaines combinations n'ont pas de sens. Veuillez éditer les valeurs ci dessous pour respecter les "
 "politiques de sécurité."
 
 #: ihtml/themes/default/copyPasteDialog.tpl:9
@@ -107,7 +104,7 @@ msgstr "Terminé"
 
 #: ihtml/themes/default/userFilter.tpl:1
 msgid "List of defined filters"
-msgstr ""
+msgstr "Liste des filtres définis"
 
 #: ihtml/themes/default/sizelimit.tpl:3
 msgid ""
@@ -295,7 +292,7 @@ msgstr "Activé"
 
 #: ihtml/themes/default/userFilterEditor.tpl:49
 msgid "Categories where the filter is visible"
-msgstr ""
+msgstr "Catégories dans lequel les filtres sont visibles"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
 msgid "Query"
@@ -472,7 +469,7 @@ msgstr "Continuer"
 #: ihtml/themes/default/msg_dialog.tpl:55
 #: ihtml/themes/default/msg_dialog.tpl:103
 msgid "Error message title"
-msgstr ""
+msgstr "Titre du message d'erreur"
 
 #: ihtml/themes/default/msg_dialog.tpl:66
 #: ihtml/themes/default/msg_dialog.tpl:115
@@ -741,7 +738,7 @@ msgstr "Le nouveau mot de passe ne comporte pas suffisamment de caractères."
 
 #: html/password.php:254 plugins/personal/password/class_password.inc:129
 msgid "The password contains possibly problematic Unicode characters!"
-msgstr ""
+msgstr "Le mot de passe contient des caractères Unicode qui peuvent poser problème !"
 
 #: html/password.php:261 html/index.php:311
 msgid "Please check the username/password combination!"
@@ -786,12 +783,12 @@ msgstr "Démarrer une session SSL"
 #: html/index.php:45
 #, php-format
 msgid "Your browser (%s) is blacklisted for the current theme!"
-msgstr ""
+msgstr "Votre navigateur (%s) n'est pas compatible avec le thème sélectionné !"
 
 #: html/index.php:72
 #, php-format
 msgid "This session is not encrypted. Click %s to enter an encrypted session."
-msgstr ""
+msgstr "La session n'est pas chiffrée. Cliquez sur %s pour utiliser une seesion chiffrée."
 
 #: html/index.php:72
 msgid "here"
@@ -959,7 +956,7 @@ msgstr "Configuration de PHP"
 msgid ""
 "Fatal error: Register globals is active. Please fix this in order to "
 "continue."
-msgstr ""
+msgstr "Erreur Fatale: Register globals est actif. Veuillez corriger ceci avant de continuer."
 
 #: html/main.php:232
 msgid "Your password is about to expire, please change your password!"
@@ -1219,7 +1216,7 @@ msgstr "Pas de paramètres pour les ACL de cette catégorie !"
 #: include/class_acl.inc:575
 #, php-format
 msgid "ACLs for: %s"
-msgstr ""
+msgstr "ACLs pour: %s"
 
 #: include/class_acl.inc:581 include/class_acl.inc:585
 msgid "category ACL"
@@ -1325,11 +1322,11 @@ msgstr "Le canal demandé n'existe pas !"
 
 #: include/class_listing.inc:257 include/class_sortableListing.inc:274
 msgid "Sort ascending"
-msgstr ""
+msgstr "Tri ascendant"
 
 #: include/class_listing.inc:257 include/class_sortableListing.inc:274
 msgid "Sort descending"
-msgstr ""
+msgstr "Tri descendant"
 
 #: include/class_listing.inc:319
 msgid "Select all"
@@ -1399,7 +1396,7 @@ msgstr "Créer un nouveau snapshot depuis cet objet"
 #: include/class_sortableListing.inc:234
 #, fuzzy
 msgid "Sortable list"
-msgstr "Exporter la liste"
+msgstr "Liste triable"
 
 #: include/class_sortableListing.inc:239
 msgid "Edit this entry"
@@ -1426,16 +1423,16 @@ msgstr "FATAL: Erreur lors de la connexion au serveur LDAP. Le serveur à répon
 
 #: include/functions.inc:537 include/functions.inc:623
 msgid "User ID is not unique!"
-msgstr ""
+msgstr "L'ID de l'utilisateur n'est pas unique !"
 
 #: include/functions.inc:827 include/functions.inc:945
 msgid "Error while locking entry!"
-msgstr ""
+msgstr "Erreur lors du verouillage de l'entrée !"
 
 #: include/functions.inc:837
 #, php-format
 msgid "Cannot store lock information in LDAP!"
-msgstr ""
+msgstr "Impossible de stocker l'information de verouillage dans l'annuaire !"
 
 #: include/functions.inc:837
 #, php-format
@@ -1450,7 +1447,7 @@ msgstr "La taille limite de %d entrées est dépassée !"
 #: include/functions.inc:1269
 #, php-format
 msgid "Set the size limit to %s"
-msgstr ""
+msgstr "Mettre le size limit à %s"
 
 #: include/functions.inc:1281 plugins/personal/generic/generic.tpl:218
 msgid "Configure"
@@ -1470,7 +1467,7 @@ msgstr "Éditer malgré tout"
 
 #: include/functions.inc:1639
 msgid "These entries are currently locked:"
-msgstr ""
+msgstr "Ces entrées sont actuellement verrouillées :"
 
 #: include/functions.inc:1880
 msgid "Entries per page"
@@ -1511,7 +1508,7 @@ msgstr "Impossible de récupérer les informations sur les schémas depuis le se
 
 #: include/functions.inc:2547
 msgid "This class is used to make users appear in GOsa."
-msgstr ""
+msgstr "Cette classe est utilisée pour faire apparaitre les utilisateurs dans GOsa."
 
 #: include/functions.inc:2554
 msgid ""
@@ -1589,7 +1586,7 @@ msgstr "Polonais"
 
 #: include/functions.inc:2670
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugais Brésilien"
 
 #: include/functions.inc:2672
 msgid "Chinese"
@@ -1605,7 +1602,7 @@ msgstr "Russe"
 
 #: include/functions.inc:2867
 msgid "Cannot detect password hash!"
-msgstr ""
+msgstr "Impossible de détecter l'encodage du mot de passe !"
 
 #: include/functions.inc:2908 include/functions.inc:2983
 #, php-format
@@ -1627,9 +1624,8 @@ msgstr "Impossible de générer un hash samba !"
 
 #: include/functions.inc:3066
 #, php-format
-#, fuzzy
 msgid "Generating SAMBA hash by running %s failed: check %s!"
-msgstr "Impossible de générer le mot de passe samba: l'exécution de '%s' à échoué, veuillez vérifier le paramètre 'sambaHashHook'!"
+msgstr "Impossible de générer le mot de passe samba: l'exécution de '%s' à échoué, vérifier %s !"
 
 #: include/functions.inc:3344 include/functions.inc:3358
 #: include/functions.inc:3396 include/functions.inc:3408
@@ -1723,12 +1719,12 @@ msgstr ""
 #: include/class_jsonRPC.inc:38
 #, php-format
 msgid "The RPC connection (%s) specified for %s:%s is invalid: %s"
-msgstr ""
+msgstr "La connection RPC (%s) spécifiée pour %s:%s est invalide : %s"
 
 #: include/class_jsonRPC.inc:331
 #, php-format
 msgid "Unknown HTTP status code %s!"
-msgstr ""
+msgstr "Code de status HTTP inconnu %s !"
 
 #: include/class_multi_plug.inc:362
 msgid "You are currently editing multiple entries."
@@ -1793,7 +1789,6 @@ msgid "method"
 msgstr "méthode"
 
 #: include/php_setup.inc:190
-#, fuzzy
 msgid "Traceback"
 msgstr "Trace"
 
@@ -1818,18 +1813,16 @@ msgid "Category"
 msgstr "Catégorie"
 
 #: include/class_filter.inc:226
-#, fuzzy
 msgid "Search filter"
-msgstr "Imprimante"
+msgstr "Filtre de recherche"
 
 #: include/class_filter.inc:444
 msgid "Search in subtrees"
 msgstr "Chercher dans les sous arbre"
 
 #: include/class_filter.inc:449
-#, fuzzy
 msgid "Edit filters"
-msgstr "Editer des certificats"
+msgstr "Editer des filtres"
 
 #: include/class_userFilterEditor.inc:254
 #, php-format
@@ -1845,15 +1838,14 @@ msgstr ""
 #: include/class_plugin.inc:1409
 #, php-format
 msgid "Changing ACL DN from %s to %s"
-msgstr ""
+msgstr "Changement du DN de l'ACL depuis %s vers %s"
 
 #: include/functions_helpviewer.inc:45
-#, fuzzy, php-format
+#, php-format
 msgid "XML error in guide.xml: %s at line %s"
-msgstr "Erreur XML dans guide.xml: %s à la ligne %d"
+msgstr "Erreur XML dans guide.xml: %s à la ligne %s"
 
 #: include/functions_helpviewer.inc:88
-#, fuzzy
 msgid "No help available for this plug-in."
 msgstr "L'aide n'est pas disponible pour cette extension."
 
@@ -1868,9 +1860,9 @@ msgid "%s%% hit rate in file %s"
 msgstr "%s%% de correspondance dans le fichier %s"
 
 #: include/utils/class_timezone.inc:47
-#, fuzzy, php-format
+#, php-format
 msgid "The configured timezone %s is not valid!"
-msgstr "Le fichier de configuration %s/%s ne peut être lu. Abandon."
+msgstr "Le fuseau horaire configuré %s est incorrect !"
 
 #: include/utils/class_xml.inc:51
 msgid "XML error"
@@ -1881,7 +1873,7 @@ msgid "This object will be deleted!"
 msgstr "Cet objet sera effacé !"
 
 #: include/utils/class_msgPool.inc:19
-#, fuzzy, php-format
+#, php-format
 msgid "This %s object will be deleted!"
 msgstr "L'objet '%s' sera effacé !"
 
@@ -1891,16 +1883,16 @@ msgid "This object will be deleted: %s"
 msgstr "Cet objet sera effacé : %s"
 
 #: include/utils/class_msgPool.inc:26
-#, fuzzy, php-format
+#, php-format
 msgid "This %s object will be deleted: %s"
-msgstr "L'objet de type '%s' sera effacé: %s"
+msgstr "L'objet %s sera effacé: %s"
 
 #: include/utils/class_msgPool.inc:31
 msgid "This object will be deleted:"
-msgstr "Cet objet sera effacé: "
+msgstr "Cet objet sera effacé:"
 
 #: include/utils/class_msgPool.inc:33
-#, fuzzy, php-format
+#, php-format
 msgid "This %s object will be deleted:"
 msgstr "L'objet de type '%s' sera effacé:"
 
@@ -1910,7 +1902,7 @@ msgid "These objects will be deleted: %s"
 msgstr "Ces objets seront effacés: %s"
 
 #: include/utils/class_msgPool.inc:39
-#, fuzzy, php-format
+#, php-format
 msgid "These %s objects will be deleted: %s"
 msgstr "Ces objets de type '%s' seront effacés: %s"
 
@@ -2000,115 +1992,113 @@ msgid "Cannot query %s database!"
 msgstr "Impossible d'effectuer une requête sur la base de données %s !"
 
 #: include/utils/class_msgPool.inc:178
-#, fuzzy, php-format
+#, php-format
 msgid "The field %s contains a reserved keyword!"
 msgstr "Le champ '%s' contient un mot réservé !"
 
 #: include/utils/class_msgPool.inc:184
-#, fuzzy, php-format
+#, php-format
 msgid "Command specified as %s hook for plugin %s does not exist!"
-msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
+msgstr "La commande %s, spécifiée comme connexion de l'extension %s n'existe pas !"
 
 #: include/utils/class_msgPool.inc:191
-#, fuzzy, php-format
+#, php-format
 msgid "%s command is invalid!"
-msgstr "Le commande '%s' est invalide !"
+msgstr "Le commande %s est invalide !"
 
 #: include/utils/class_msgPool.inc:193
-#, fuzzy, php-format
+#, php-format
 msgid "%s command (%s) for plugin %s is invalid!"
-msgstr "l'option '%s' de la commande (%s) pour l'extension %s est invalide !"
+msgstr "%s de la commande (%s) pour l'extension %s est invalide !"
 
 #: include/utils/class_msgPool.inc:195
-#, fuzzy, php-format
+#, php-format
 msgid "%s command for plugin %s is invalid!"
-msgstr "l'option '%s' de la commande pour l'extension %s est invalide !"
+msgstr "%s de la commande pour l'extension %s est invalide !"
 
 #: include/utils/class_msgPool.inc:197
-#, fuzzy, php-format
+#, php-format
 msgid "%s command (%s) is invalid!"
-msgstr "l'option '%s' de la commande (%s) est invalide !"
+msgstr "%s de la commande (%s) est invalide !"
 
 #: include/utils/class_msgPool.inc:205
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot execute %s command!"
-msgstr "Impossible d'exécuter la commande '%s' !"
+msgstr "Impossible d'exécuter la commande %s !"
 
 #: include/utils/class_msgPool.inc:207
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot execute %s command (%s) for plugin %s!"
-msgstr "Impossible d'exécuter '%s' de la commande (%s) pour l'extension %s !"
+msgstr "Impossible d'exécuter %s de la commande (%s) pour l'extension %s !"
 
 #: include/utils/class_msgPool.inc:209
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot execute %s command for plugin %s!"
-msgstr "Impossible d'exécuter l'option '%s' de la commande pour l'extension %s !"
+msgstr "Impossible d'exécuter l'option %s de la commande pour l'extension %s !"
 
 #: include/utils/class_msgPool.inc:211
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot execute %s command (%s)!"
-msgstr "Impossible d'exécuter l'option '%s' de la commande (%s) !"
+msgstr "Impossible d'exécuter l'option %s de la commande (%s) !"
 
 #: include/utils/class_msgPool.inc:219
-#, fuzzy, php-format
+#, php-format
 msgid "Value for %s is too large!"
-msgstr "La valeur pour '%s' est trop grande !"
+msgstr "La valeur pour %s est trop grande !"
 
 #: include/utils/class_msgPool.inc:221
-#, fuzzy, php-format
+#, php-format
 msgid "%s must be smaller than %s!"
-msgstr "'%s' doit être plus petit que %s !"
+msgstr "%s doit être plus petit que %s !"
 
 #: include/utils/class_msgPool.inc:229
-#, fuzzy, php-format
+#, php-format
 msgid "Value for %s is too small!"
-msgstr "La valeur pour '%s' est trop petite !"
+msgstr "La valeur pour %s est trop petite !"
 
 #: include/utils/class_msgPool.inc:231
-#, fuzzy, php-format
+#, php-format
 msgid "%s must be %s or above!"
-msgstr "'%s' doit être à la version %d ou plus grand !"
+msgstr "%s doit être à %s ou plus grand !"
 
 #: include/utils/class_msgPool.inc:238
-#, fuzzy, php-format
+#, php-format
 msgid "%s depends on %s - please provide both values!"
-msgstr "'%s' dépend de '%s' - veuillez indiquer les deux valeurs !"
+msgstr "%s dépend de %s - veuillez indiquer les deux valeurs !"
 
 #: include/utils/class_msgPool.inc:244
-#, fuzzy, php-format
+#, php-format
 msgid "There is already an entry with this %s attribute in the system!"
-msgstr "Il existe déjà une entrée avec l'attribut '%s' dans le système !"
+msgstr "Il existe déjà une entrée avec l'attribut %s dans le système !"
 
 #: include/utils/class_msgPool.inc:250
-#, fuzzy, php-format
+#, php-format
 msgid "The required field %s is empty!"
-msgstr "Le champ obligatoire '%s' n'est pas rempli !"
+msgstr "Le champ obligatoire %s n'est pas rempli !"
 
 #: include/utils/class_msgPool.inc:258
 msgid "Example"
 msgstr "Exemple"
 
 #: include/utils/class_msgPool.inc:278
-#, fuzzy, php-format
+#, php-format
 msgid "The Field %s contains invalid characters"
-msgstr "Le champ '%s' contient des caractères invalides"
+msgstr "Le champ %s contient des caractères invalides"
 
 #: include/utils/class_msgPool.inc:279
-#, fuzzy, php-format
+#, php-format
 msgid "%s is not allowed:"
-msgstr "'%s' n'est pas permis :"
+msgstr "%s n'est pas permis :"
 
 #: include/utils/class_msgPool.inc:279
-#, fuzzy, php-format
+#, php-format
 msgid "%s are not allowed!"
-msgstr "'%s' n'est pas autorisé !"
+msgstr "%s n'est pas autorisé !"
 
 #: include/utils/class_msgPool.inc:282
-#, fuzzy, php-format
+#, php-format
 msgid "The Field %s contains invalid characters!"
-msgstr "Le champ '%s' contient des caractères invalides !"
+msgstr "Le champ %s contient des caractères invalides !"
 
 #: include/utils/class_msgPool.inc:289
 #, php-format
@@ -2343,68 +2333,67 @@ msgid "Communication failure with the infrastructure service: %s"
 msgstr "Erreur de communication avec le service d'infrastructure : %s"
 
 #: include/utils/class_msgPool.inc:487
-#, fuzzy
 msgid "Communication failure with the GOsa-NG service!"
-msgstr "Erreur de communication avec le service d'infrastructure !"
+msgstr "Erreur de communication avec le service GOsa-NG !"
 
 #: include/utils/class_msgPool.inc:489
-#, fuzzy, php-format
+#, php-format
 msgid "Communication failure with the GOsa-NG service: %s"
-msgstr "Erreur de communication avec le service d'infrastructure : %s"
+msgstr "Erreur de communication avec le service GOsa-NG : %s"
 
 #: include/utils/class_msgPool.inc:496 include/utils/class_msgPool.inc:499
-#, fuzzy, php-format
+#, php-format
 msgid "This %s is still in use by this object: %s"
-msgstr "Ce '%s' est en cours d'utilisation par : %s"
+msgstr "Ce %s est en cours d'utilisation par : %s"
 
 #: include/utils/class_msgPool.inc:502
-#, fuzzy, php-format
+#, php-format
 msgid "This %s is still in use."
-msgstr "Ce '%s' est toujours en utilisation."
+msgstr "Ce %s est toujours en utilisation."
 
 #: include/utils/class_msgPool.inc:504
-#, fuzzy, php-format
+#, php-format
 msgid "This %s is still in use by these objects: %s"
-msgstr "Ce '%s' est en utilisation par les objets : %s"
+msgstr "Ce %s est en utilisation par les objets : %s"
 
 #: include/utils/class_msgPool.inc:510
-#, fuzzy, php-format
+#, php-format
 msgid "File %s does not exist!"
-msgstr "Le fichier '%s' n'existe pas !"
+msgstr "Le fichier %s n'existe pas !"
 
 #: include/utils/class_msgPool.inc:516
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot open file %s for reading!"
-msgstr "Impossible de lire le fichier '%s' !"
+msgstr "Impossible de lire le fichier %s !"
 
 #: include/utils/class_msgPool.inc:522
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot open file %s for writing!"
-msgstr "Impossible d'écrire dans le fichier '%s' !"
+msgstr "Impossible d'écrire dans le fichier %s !"
 
 #: include/utils/class_msgPool.inc:528
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The value for %s is currently unconfigured or invalid, please check your "
 "configuration file!"
 msgstr ""
-"La valeur de '%s' est actuellement vide ou non valide, veuillez vérifier "
+"La valeur de %s est actuellement vide ou non valide, veuillez vérifier "
 "votre fichier de configuration !"
 
 #: include/utils/class_msgPool.inc:534
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete file %s!"
-msgstr "Impossible d'effacer le fichier '%s' !"
+msgstr "Impossible d'effacer le fichier %s !"
 
 #: include/utils/class_msgPool.inc:540
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot create folder %s!"
-msgstr "Impossible de créer le répertoire '%s' !"
+msgstr "Impossible de créer le répertoire %s !"
 
 #: include/utils/class_msgPool.inc:546
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete folder %s!"
-msgstr "Impossible d'effacer le répertoire '%s' !"
+msgstr "Impossible d'effacer le répertoire %s !"
 
 #: include/utils/class_msgPool.inc:552
 #, php-format
@@ -2417,12 +2406,12 @@ msgid "Install and activate the %s PHP module."
 msgstr "Installer et activer le module PHP %s."
 
 #: include/utils/class_msgPool.inc:564
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Cannot initialize class %s! Maybe there is a plugin missing in your gosa "
 "setup?"
 msgstr ""
-"Impossible d'initialiser la classe '%s' ! Peut être manque t'il une "
+"Impossible d'initialiser la classe %s ! Peut être manque t'il une "
 "extension dans votre installation de GOsa ?"
 
 #: include/utils/class_msgPool.inc:570
@@ -2434,30 +2423,24 @@ msgid "Performance warning"
 msgstr "Avertissement de performance"
 
 #: include/class_ldap.inc:305 include/class_ldap.inc:342
-#, fuzzy, php-format
+#, php-format
 msgid "LDAP performance is poor: last query took %.2fs!"
-msgstr ""
-"La performance de votre annuaire est faible : la dernière requête à duré "
-"%.2fs !"
+msgstr "La performance de votre annuaire est faible : la dernière requête à duré %.2fs !"
 
 #: include/class_ldap.inc:784
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot automatically create subtrees with RDN %s: no object class found"
-msgstr ""
-"Impossible de créer automatiquement des sous arbres avec le RDN '%s': object "
-"class non trouvé !"
+msgstr "Impossible de créer automatiquement des sous arbres avec le RDN %s: pas d'object class trouvé"
 
 #: include/class_ldap.inc:835
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot automatically create subtrees with RDN %s: not supported"
-msgstr ""
-"Impossible de créer automatiquement des sous arbres avec le RDN '%s': non "
-"supporté"
+msgstr "Impossible de créer automatiquement des sous arbres avec le RDN %s: non supporté"
 
 #: include/class_ldap.inc:922
-#, fuzzy, php-format
+#, php-format
 msgid "while operating on %s using LDAP server %s"
-msgstr "lors de l'opération sur '%s' en utilisant le serveur LDAP '%s'"
+msgstr "lors de l'opération sur %s en utilisant le serveur LDAP %s"
 
 #: include/class_ldap.inc:924
 #, php-format
@@ -2470,18 +2453,14 @@ msgid "Command line programm %s is missing!"
 msgstr ""
 
 #: include/class_ldap.inc:1140
-#, fuzzy, php-format
+#, php-format
 msgid "Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"
-msgstr ""
-"Ceci n'est pas un DN valide: '%s'. Le fichier d'importation doit commencer "
-"avec 'dn: ...' à la ligne %s"
+msgstr "Ceci n'est pas un DN valide: %s. Le fichier d'importation doit commencer avec 'dn: ...' à la ligne %s"
 
 #: include/class_ldap.inc:1169
-#, fuzzy, php-format
+#, php-format
 msgid "Error while importing DN %s: please check LDIF from line %s on!"
-msgstr ""
-"Erreur lors de l'importation du dn: '%s', veuillez vérifier votre fichier "
-"votre fichier LDIF à partir de la ligne %s !"
+msgstr "Erreur lors de l'importation du dn: %s, veuillez vérifier votre fichier votre fichier LDIF à partir de la ligne %s !"
 
 #: include/class_log.inc:87
 #, php-format
@@ -2489,19 +2468,17 @@ msgid "Logging failed: %s"
 msgstr "Echec du Journal système : %s"
 
 #: include/class_log.inc:102
-#, fuzzy, php-format
+#, php-format
 msgid "Invalid option %s specified!"
 msgstr "Option %s non valide !"
 
 #: include/class_log.inc:106
-#, fuzzy
 msgid "Specified 'objectType' is empty or invalid!"
 msgstr "Le type d'objet spécifié est vide ou invalide !"
 
 #: include/class_configRegistry.inc:194
 #: plugins/personal/generic/class_user.inc:273
 #: plugins/personal/generic/class_user.inc:1898
-#, fuzzy
 msgid "unknown"
 msgstr "Inconnu"
 
@@ -2515,9 +2492,8 @@ msgid "The following object classes are missing:"
 msgstr ""
 
 #: include/class_configRegistry.inc:246 setup/class_setupStep_Schema.inc:99
-#, fuzzy
 msgid "The following object classes are outdated:"
-msgstr "Les références suivantes seront mises à jour"
+msgstr ""
 
 #: include/class_configRegistry.inc:252
 msgid ""
@@ -2526,92 +2502,73 @@ msgid ""
 msgstr ""
 
 #: include/class_configRegistry.inc:254
-#, fuzzy
 msgid "Schema validation error"
-msgstr "Erreur d'authentification"
+msgstr "Erreur de validation des schémas"
 
 #: include/class_configRegistry.inc:689
-#, fuzzy, php-format
+#, php-format
 msgid "The value %s specified for %s:%s needs to be a bool value!"
 msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
 
 #: include/class_configRegistry.inc:704
-#, fuzzy, php-format
+#, php-format
 msgid "The value %s specified for %s:%s needs to be a string!"
 msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
 
 #: include/class_configRegistry.inc:719
-#, fuzzy, php-format
+#, php-format
 msgid "The value %s specified for %s:%s needs to be numeric!"
 msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
 
 #: include/class_configRegistry.inc:734
-#, fuzzy, php-format
+#, php-format
 msgid "The path %s specified for %s:%s is invalid!"
-msgstr "l'option '%s' de la commande pour l'extension %s est invalide !"
+msgstr "le chemin %s spécifié pour %s: %s est invalide !"
 
 #: include/class_configRegistry.inc:750 include/class_configRegistry.inc:797
-#, fuzzy, php-format
+#, php-format
 msgid "The folder %s specified for %s:%s does not exists!"
-msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
+msgstr "le répertoire %s spécifié pour %s: %s n'existe pas !"
 
 #: include/class_configRegistry.inc:755
-#, fuzzy, php-format
+#, php-format
 msgid "The folder %s specified for %s:%s cannot be used for reading!"
-msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
+msgstr "Le répertoire %s spécifié pour %s: %s ne peut pas être utilisé en lecture !"
 
 #: include/class_configRegistry.inc:775 include/class_configRegistry.inc:780
-#, fuzzy, php-format
+#, php-format
 msgid "The file %s specified for %s:%s is not writeable!"
-msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
+msgstr "Le fichier %s spécifié pour %s: %s est protegé contre l'écriture !"
 
 #: include/class_configRegistry.inc:802
-#, fuzzy, php-format
+#, php-format
 msgid "The folder %s specified for %s:%s is not writeable!"
-msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
+msgstr "Le répertoire %s spécifié pour %s: %s est protegé contre l'ecriture !"
 
 #: include/class_configRegistry.inc:820
-#, fuzzy, php-format
+#, php-format
 msgid "The file %s specified for %s:%s does not exists!"
-msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
+msgstr "Le fichier %s spécifié pour %s: %s n'existe pas !"
 
 #: include/class_configRegistry.inc:825
-#, fuzzy, php-format
+#, php-format
 msgid "The file %s specified for %s:%s is not readable!"
-msgstr ""
-"La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe "
-"pas !"
+msgstr "Le fichier %s spécifié pour %s: %s n'est pas lisible !"
 
 #: include/class_configRegistry.inc:841
-#, fuzzy, php-format
+#, php-format
 msgid "The command %s specified for %s:%s is invalid!"
-msgstr "l'option '%s' de la commande (%s) pour l'extension %s est invalide !"
+msgstr "La commande %s spécifié pour %s: %s est invalide !"
 
 #: include/class_configRegistry.inc:856
-#, fuzzy, php-format
+#, php-format
 msgid "The DN %s specified for %s:%s is invalid!"
-msgstr "l'option '%s' de la commande pour l'extension %s est invalide !"
+msgstr "Le DN %s spécifié pour %s: %s est invalide !"
 
 #: include/class_configRegistry.inc:871
-#, fuzzy, php-format
+#, php-format
 msgid "The RDN %s specified for %s:%s is invalid!"
-msgstr "l'option '%s' de la commande pour l'extension %s est invalide !"
+msgstr "Le RDN %s spécifié pour %s: %s est invalide !"
 
 #: include/class_gosaSupportDaemon.inc:112
 msgid "GOsa support daemon"
@@ -2638,7 +2595,7 @@ msgstr "Erreur XML dans gosa.conf: %s à la ligne %d"
 
 #: include/class_config.inc:367
 msgid "Cannot bind to LDAP!"
-msgstr ""
+msgstr "Impossible de se connecter à l'annuaire !"
 
 #: include/class_config.inc:711
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
@@ -2649,79 +2606,65 @@ msgid "Configuration"
 msgstr ""
 
 #: include/class_config.inc:1130
-#, fuzzy
 msgid ""
 "The configuration file you are using is outdated. Please move the GOsa "
 "configuration file away to run the GOsa setup again."
-msgstr ""
-"Le fichier de configuration que vous utilisez semble ancien. Veuillez "
-"l'enlever et recommencer l'installation."
+msgstr "Le fichier de configuration que vous utilisez semble ancien. Veuillez l'enlever et recommencer l'installation."
 
 #: include/class_config.inc:1172 include/class_config.inc:1203
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable %s is not "
 "set."
-msgstr ""
-"La fonctionnalité pour les copie instantanées est activée, mais la variable "
-"requise '%s' n'est pas configurée."
+msgstr "La fonctionnalité pour les copie instantanées est activée, mais la variable requise %s n'est pas configurée."
 
 #: include/class_config.inc:1185
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required compression module "
 "is missing. Please install %s."
-msgstr ""
-"La fonctionnalité pour les copie instantanées est activée, mais le module "
-"nécessaire à la compression est manquant. Veuillez installer '%s'. "
+msgstr "La fonctionnalité pour les copie instantanées est activée, mais le module nécessaire à la compression est manquant. Veuillez installer %s."
 
 #: include/class_core.inc:113 include/class_core.inc:119
 #: plugins/generic/references/class_aclResolver.inc:291
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 #: include/class_core.inc:114
-#, fuzzy
 msgid "All objects"
-msgstr "Bouger un objet"
+msgstr "Tout les objets"
 
 #: include/class_core.inc:132
-#, fuzzy
 msgid "Traditional"
-msgstr "Entreprise"
+msgstr "Traditionel"
 
 #: include/class_core.inc:132
 msgid "Use samba pool"
-msgstr ""
+msgstr "Utiliser le pool samba"
 
 #: include/class_core.inc:164 include/class_core.inc:167
-#, fuzzy
 msgid "hours"
-msgstr "Jeudi"
+msgstr "heures"
 
 #: include/class_core.inc:181
-#, fuzzy
 msgid "None"
-msgstr "aucun"
+msgstr "Aucun"
 
 #: include/class_core.inc:185 setup/class_setupStep_Language.inc:47
 msgid "Automatic"
 msgstr "Automatique"
 
 #: include/class_core.inc:197
-#, fuzzy
 msgid "User value"
-msgstr "Nom d'utilisateur"
+msgstr ""
 
 #: include/class_core.inc:206
-#, fuzzy
 msgid "Core"
-msgstr "Fermer"
+msgstr "Coeur"
 
 #: include/class_core.inc:207
-#, fuzzy
 msgid "GOsa core plugin"
-msgstr "Paramètres essentiels de GOsa"
+msgstr ""
 
 #: include/class_core.inc:235
 msgid ""
