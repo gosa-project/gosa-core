@@ -45,6 +45,7 @@ class aclResolver
             foreach($plist as $class => $plInfo){
                 if(isset($plInfo['plCategory']) && is_array($plInfo['plCategory'])){
                     foreach($plInfo['plCategory'] as $category => $desc){
+                        if(!isset($map[$category])) continue;
                         if(!is_numeric($category)){
                             $map[$category."/".$class] = $map[$category]." - ".$plInfo['plDescription'];
                         }else{
