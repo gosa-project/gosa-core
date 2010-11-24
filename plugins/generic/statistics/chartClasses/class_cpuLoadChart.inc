@@ -12,9 +12,9 @@ class cpuLoadChart extends memoryUsageChart
 
         // Generate graph which displays the memory usage over time
         $this->series = array(
-                'max_load' => _('Max'),
-                'avg_load' => _('Avergae'),
-                'min_load' => _('Min'));
+                'max_load' => _('Maximum'),
+                'avg_load' => _('Average'),
+                'min_load' => _('Minimum'));
         $this->dataName = "usagePerInterval";
     }
 }

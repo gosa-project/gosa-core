@@ -12,9 +12,9 @@ class durationTimeChart extends memoryUsageChart
 
         // Generate graph which displays the memory usage over time
         $this->series = array(
-                'max_dur' => _('Max'),
-                'avg_dur' => _('Avergae'),
-                'min_dur' => _('Min'));
+                'max_dur' => _('Maximum'),
+                'avg_dur' => _('Average'),
+                'min_dur' => _('Minimum'));
         $this->dataName = "usagePerInterval";
     }
 }

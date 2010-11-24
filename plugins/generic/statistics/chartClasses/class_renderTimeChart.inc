@@ -12,9 +12,9 @@ class renderTimeChart extends memoryUsageChart
 
         // Generate graph which displays the memory usage over time
         $this->series = array(
-                'max_render' => _('Max'),
-                'avg_render' => _('Avergae'),
-                'min_render' => _('Min'));
+                'max_render' => _('Maximum'),
+                'avg_render' => _('Average'),
+                'min_render' => _('Minimum'));
         $this->dataName = "usagePerInterval";
     }
 }

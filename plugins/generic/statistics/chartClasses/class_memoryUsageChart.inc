@@ -12,9 +12,9 @@ class memoryUsageChart extends statChart
 
         // Generate graph which displays the memory usage over time
         $this->series = array(
-                'max_mem' => _('Max'),
-                'avg_mem' => _('Avergae'),
-                'min_mem' => _('Min'));
+                'max_mem' => _('Maximum'),
+                'avg_mem' => _('Average'),
+                'min_mem' => _('Minimum'));
         $this->dataName = "usagePerInterval";
     }
 
