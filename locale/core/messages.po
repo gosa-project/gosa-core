@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-20 18:49+0200\n"
+"POT-Creation-Date: 2010-10-28 20:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Filter properties"
 msgstr ""
 
-#: ihtml/themes/default/userFilterEditor.tpl:11 include/class_acl.inc:262
+#: ihtml/themes/default/userFilterEditor.tpl:11 include/class_acl.inc:264
 #: include/class_SnapShotDialog.inc:55 include/class_userFilter.inc:55
 #: include/class_userFilter.inc:150 include/class_userFilterEditor.inc:236
 #: include/class_userFilterEditor.inc:240
@@ -203,10 +203,10 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:763 plugins/admin/acl/acl-list.xml:49
 #: plugins/admin/acl/paste_role.tpl:4 plugins/admin/acl/acl_role.tpl:7
 #: plugins/addons/propertyEditor/property-list.xml:80
-#: plugins/personal/generic/class_user.inc:1315
-#: plugins/personal/generic/class_user.inc:1333
-#: plugins/personal/generic/class_user.inc:1375
-#: plugins/personal/generic/class_user.inc:1860
+#: plugins/personal/generic/class_user.inc:1316
+#: plugins/personal/generic/class_user.inc:1334
+#: plugins/personal/generic/class_user.inc:1376
+#: plugins/personal/generic/class_user.inc:1861
 #: plugins/personal/posix/trustModeDialog/class_trustModeDialog.inc:45
 #: plugins/personal/posix/trustSelect/trust-list.xml:46
 #: plugins/personal/posix/groupSelect/group-list.xml:33
@@ -215,8 +215,8 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ihtml/themes/default/userFilterEditor.tpl:19 include/class_acl.inc:252
-#: include/class_acl.inc:262 include/class_SnapShotDialog.inc:174
+#: ihtml/themes/default/userFilterEditor.tpl:19 include/class_acl.inc:254
+#: include/class_acl.inc:264 include/class_SnapShotDialog.inc:174
 #: include/class_userFilter.inc:55 include/class_userFilterEditor.inc:245
 #: plugins/generic/dashBoard/dbChannelStatus/class_dbChannelStatus.inc:14
 #: plugins/generic/dashBoard/dbPluginStatus/class_dbPluginStatus.inc:26
@@ -268,7 +268,7 @@ msgid "Parent filter"
 msgstr ""
 
 #: ihtml/themes/default/userFilterEditor.tpl:40
-#: plugins/personal/generic/class_user.inc:1663
+#: plugins/personal/generic/class_user.inc:1664
 #: plugins/personal/generic/generic.tpl:604
 msgid "Public visible"
 msgstr ""
@@ -321,7 +321,7 @@ msgid "Additional filter options"
 msgstr ""
 
 #: ihtml/themes/default/acl.tpl:53 ihtml/themes/default/acl.tpl:65
-#: include/class_acl.inc:1108
+#: include/class_acl.inc:1114
 msgid "Members"
 msgstr ""
 
@@ -375,9 +375,8 @@ msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:9
 msgid ""
-"Remember that DNS configuration and database entries cannot be restored. For "
-"some objects it is only necessary to open and save them again (goFon), but "
-"some entries must be recreated manually (glpi)."
+"DNS configuration and some database entries cannot be restored. They need to "
+"be recreated manually."
 msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:12
@@ -387,15 +386,15 @@ msgid ""
 msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:20
-#: ihtml/themes/default/snapshotdialog.tpl:63 include/class_acl.inc:797
-#: include/class_acl.inc:804 include/class_acl.inc:811
-#: include/utils/class_msgPool.inc:458
+#: ihtml/themes/default/snapshotdialog.tpl:63 include/class_acl.inc:799
+#: include/class_acl.inc:806 include/class_acl.inc:813
+#: include/utils/class_msgPool.inc:459
 #: plugins/admin/departments/class_department.inc:624
 msgid "Object"
 msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:29
-msgid "There is no snapshot available that cannot be restored"
+msgid "There is no snapshot available that can be restored"
 msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:31
@@ -464,7 +463,7 @@ msgstr ""
 msgid "Your password has been changed successfully."
 msgstr ""
 
-#: ihtml/themes/default/password.tpl:65 html/main.php:232
+#: ihtml/themes/default/password.tpl:65 html/main.php:220
 #: plugins/admin/users/class_userManagement.inc:386
 #: plugins/personal/password/class_password.inc:155
 #: plugins/personal/password/class_password.inc:158
@@ -475,7 +474,7 @@ msgstr ""
 #: ihtml/themes/default/password.tpl:72
 msgid ""
 "Enter the current password and the new password (twice) in the fields below "
-"and press the 'Change' button."
+"and press the 'Set password' button."
 msgstr ""
 
 #: ihtml/themes/default/password.tpl:74 plugins/admin/users/user-list.xml:128
@@ -606,7 +605,7 @@ msgstr ""
 msgid "Session expires in %d!"
 msgstr ""
 
-#: html/password.php:61 html/main.php:182 include/functions.inc:465
+#: html/password.php:61 html/main.php:170 include/functions.inc:465
 #: include/utils/class_xml.inc:43
 #: plugins/admin/departments/class_department.inc:439
 msgid "Fatal error"
@@ -618,12 +617,12 @@ msgid "GOsa configuration %s/%s is not readable. Aborted."
 msgstr ""
 
 #: html/password.php:113 html/index.php:157 html/index.php:233
-#: html/main.php:297
+#: html/main.php:285
 #: include/password-methods/class_password-methods-ssha.inc:51
 #: include/password-methods/class_password-methods-sha.inc:48
 #: include/class_SnapshotHandler.inc:44 include/class_SnapshotHandler.inc:57
 #: include/class_SnapshotHandler.inc:75 include/functions.inc:837
-#: include/functions.inc:3051 include/functions.inc:3066
+#: include/functions.inc:3053 include/functions.inc:3068
 #: include/utils/class_timezone.inc:47 include/class_config.inc:171
 #: include/class_config.inc:710 include/class_config.inc:1171
 #: include/class_config.inc:1184 include/class_config.inc:1202
@@ -642,7 +641,7 @@ msgstr ""
 msgid "Compile directory %s is not accessible!"
 msgstr ""
 
-#: html/password.php:194 plugins/personal/generic/class_user.inc:613
+#: html/password.php:194 plugins/personal/generic/class_user.inc:614
 msgid "Password method"
 msgstr ""
 
@@ -655,11 +654,11 @@ msgstr ""
 #: plugins/admin/groups/singleUserSelect/singleUser-list.xml:56
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:65
 #: plugins/admin/users/template.tpl:32 plugins/admin/users/user-list.xml:65
-#: plugins/personal/generic/class_user.inc:1310
-#: plugins/personal/generic/class_user.inc:1328
-#: plugins/personal/generic/class_user.inc:1342
-#: plugins/personal/generic/class_user.inc:1344
-#: plugins/personal/generic/class_user.inc:1704
+#: plugins/personal/generic/class_user.inc:1311
+#: plugins/personal/generic/class_user.inc:1329
+#: plugins/personal/generic/class_user.inc:1343
+#: plugins/personal/generic/class_user.inc:1345
+#: plugins/personal/generic/class_user.inc:1705
 #: plugins/personal/generic/generic.tpl:65
 #: plugins/personal/generic/paste_generic.tpl:16
 msgid "Login"
@@ -705,9 +704,9 @@ msgstr ""
 msgid "Check-hook reported a problem: %s. Password change canceled!"
 msgstr ""
 
-#: html/password.php:315 include/functions.inc:2487 include/functions.inc:2491
-#: include/functions.inc:2497 include/functions.inc:2521
-#: include/class_tabs.inc:262 include/class_jsonRPC.inc:37
+#: html/password.php:315 include/functions.inc:2489 include/functions.inc:2493
+#: include/functions.inc:2499 include/functions.inc:2523
+#: include/class_tabs.inc:264 include/class_jsonRPC.inc:37
 #: include/utils/class_xml.inc:37 include/class_configRegistry.inc:688
 #: include/class_configRegistry.inc:703 include/class_configRegistry.inc:718
 #: include/class_configRegistry.inc:733 include/class_configRegistry.inc:749
@@ -767,16 +766,16 @@ msgstr ""
 #: html/index.php:241 html/index.php:245 include/class_management.inc:508
 #: include/class_management.inc:669
 #: include/password-methods/class_password-methods.inc:339
-#: include/class_listing.inc:536 include/functions.inc:3036
-#: include/functions.inc:3344 include/functions.inc:3358
-#: include/functions.inc:3388 include/functions.inc:3396
-#: include/functions.inc:3408 include/functions.inc:3412
-#: include/functions.inc:3427 include/functions.inc:3436
-#: include/functions.inc:3496 include/class_tabs.inc:56
-#: include/class_plugin.inc:1696 include/class_plugin.inc:1703
+#: include/class_listing.inc:536 include/functions.inc:3038
+#: include/functions.inc:3346 include/functions.inc:3360
+#: include/functions.inc:3390 include/functions.inc:3398
+#: include/functions.inc:3410 include/functions.inc:3414
+#: include/functions.inc:3429 include/functions.inc:3438
+#: include/functions.inc:3498 include/class_tabs.inc:56
+#: include/class_plugin.inc:1698 include/class_plugin.inc:1705
 #: include/utils/class_xml.inc:40 include/utils/class_msgPool.inc:137
 #: include/utils/class_msgPool.inc:149 include/utils/class_msgPool.inc:167
-#: include/utils/class_msgPool.inc:440 include/utils/class_msgPool.inc:461
+#: include/utils/class_msgPool.inc:440 include/utils/class_msgPool.inc:462
 #: include/class_gosaSupportDaemon.inc:1184
 #: include/class_gosaSupportDaemon.inc:1204
 #: include/class_CopyPasteHandler.inc:118
@@ -793,6 +792,7 @@ msgstr ""
 #: plugins/generic/statistics/class_statistics.inc:133
 #: plugins/generic/statistics/class_statistics.inc:229
 #: plugins/generic/statistics/class_statistics.inc:244
+#: plugins/generic/references/class_ldifViewer.inc:20
 #: plugins/admin/ogroups/class_ogroup.inc:402
 #: plugins/admin/groups/class_group.inc:463
 #: plugins/admin/groups/class_group.inc:469
@@ -807,15 +807,15 @@ msgstr ""
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:203
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:207
 #: plugins/personal/generic/class_user.inc:297
-#: plugins/personal/generic/class_user.inc:428
-#: plugins/personal/generic/class_user.inc:521
-#: plugins/personal/generic/class_user.inc:815
-#: plugins/personal/generic/class_user.inc:1049
-#: plugins/personal/generic/class_user.inc:1176
-#: plugins/personal/generic/class_user.inc:1183
-#: plugins/personal/generic/class_user.inc:1201
-#: plugins/personal/generic/class_user.inc:1482
-#: plugins/personal/generic/class_user.inc:1809
+#: plugins/personal/generic/class_user.inc:429
+#: plugins/personal/generic/class_user.inc:522
+#: plugins/personal/generic/class_user.inc:816
+#: plugins/personal/generic/class_user.inc:1050
+#: plugins/personal/generic/class_user.inc:1177
+#: plugins/personal/generic/class_user.inc:1184
+#: plugins/personal/generic/class_user.inc:1202
+#: plugins/personal/generic/class_user.inc:1483
+#: plugins/personal/generic/class_user.inc:1810
 #: plugins/personal/password/class_password.inc:210
 #: setup/class_setupStep_Migrate.inc:450 setup/setup_checks.tpl:25
 #: setup/setup_checks.tpl:66
@@ -836,13 +836,13 @@ msgstr ""
 #: include/class_SnapshotHandler.inc:333 include/class_SnapshotHandler.inc:346
 #: include/class_SnapshotHandler.inc:380 include/class_SnapshotHandler.inc:435
 #: include/class_SnapshotHandler.inc:500 include/class_SnapshotHandler.inc:515
-#: include/class_acl.inc:1252 include/class_acl.inc:1348
+#: include/class_acl.inc:1258 include/class_acl.inc:1354
 #: include/functions.inc:494 include/functions.inc:529
 #: include/functions.inc:537 include/functions.inc:583
 #: include/functions.inc:852 include/functions.inc:901
 #: include/functions.inc:958 include/functions.inc:1008
-#: include/functions.inc:3270 include/class_userFilter.inc:275
-#: include/class_ldap.inc:847 include/class_ldap.inc:1307
+#: include/functions.inc:3272 include/class_userFilter.inc:275
+#: include/class_ldap.inc:847 include/class_ldap.inc:1305
 #: include/class_config.inc:367
 #: plugins/generic/references/class_reference.inc:97
 #: plugins/admin/ogroups/class_ogroup.inc:758
@@ -858,8 +858,8 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:656
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:191
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:256
-#: plugins/personal/generic/class_user.inc:729
-#: plugins/personal/generic/class_user.inc:1098
+#: plugins/personal/generic/class_user.inc:730
+#: plugins/personal/generic/class_user.inc:1099
 #: plugins/personal/posix/trustModeDialog/class_trustModeDialog.inc:253
 #: plugins/personal/posix/class_posixAccount.inc:529
 #: plugins/personal/posix/class_posixAccount.inc:791
@@ -891,52 +891,52 @@ msgstr ""
 msgid "Smarty"
 msgstr ""
 
-#: html/main.php:183
+#: html/main.php:171
 #, php-format
 msgid "Cannot locate file %s - please run %s to fix this"
 msgstr ""
 
-#: html/main.php:202
+#: html/main.php:190
 msgid "PHP configuration"
 msgstr ""
 
-#: html/main.php:203
+#: html/main.php:191
 msgid ""
 "Fatal error: Register globals is active. Please fix this in order to "
 "continue."
 msgstr ""
 
-#: html/main.php:232
+#: html/main.php:220
 msgid "Your password is about to expire, please change your password!"
 msgstr ""
 
-#: html/main.php:297
+#: html/main.php:285
 msgid "Running out of memory!"
 msgstr ""
 
-#: html/main.php:357
+#: html/main.php:345
 #, php-format
 msgid "You're logged in as %s"
 msgstr ""
 
-#: html/main.php:360
+#: html/main.php:348
 msgid "ACLs are disabled"
 msgstr ""
 
-#: html/main.php:410
+#: html/main.php:398
 msgid "Plug-in"
 msgstr ""
 
-#: html/main.php:411
+#: html/main.php:399
 #, php-format
 msgid "Fatal error: Cannot find any plugin definitions for plugin %s!"
 msgstr ""
 
-#: html/main.php:427
+#: html/main.php:415
 msgid "Configuration Error"
 msgstr ""
 
-#: html/main.php:428
+#: html/main.php:416
 #, php-format
 msgid ""
 "Fatal error: not all POST variables have been transfered by PHP - please "
@@ -1001,12 +1001,12 @@ msgid "You are not allowed to remove a snapshot for %s!"
 msgstr ""
 
 #: include/class_management.inc:659 include/class_management.inc:743
-#: include/class_acl.inc:978 include/class_session.inc:76
+#: include/class_acl.inc:984 include/class_session.inc:76
 #: include/class_session.inc:101 include/class_session.inc:127
 #: include/functions.inc:623 include/functions.inc:827
 #: include/functions.inc:945 include/functions.inc:1340
-#: include/functions.inc:2166 include/functions.inc:2196
-#: include/functions.inc:2216 include/class_ldap.inc:784
+#: include/functions.inc:2168 include/functions.inc:2198
+#: include/functions.inc:2218 include/class_ldap.inc:784
 #: include/class_ldap.inc:835 include/class_log.inc:87
 #: include/class_CopyPasteHandler.inc:160
 #: include/class_CopyPasteHandler.inc:274
@@ -1078,187 +1078,187 @@ msgstr ""
 msgid "Manage access control lists"
 msgstr ""
 
-#: include/class_acl.inc:125 include/class_acl.inc:611
-#: include/class_acl.inc:1027
+#: include/class_acl.inc:125 include/class_acl.inc:613
+#: include/class_acl.inc:1033
 #, php-format
 msgid "All users"
 msgstr ""
 
-#: include/class_acl.inc:226
-#: plugins/generic/references/class_aclResolver.inc:62
+#: include/class_acl.inc:228
+#: plugins/generic/references/class_aclResolver.inc:63
 msgid "Reset ACLs"
 msgstr ""
 
-#: include/class_acl.inc:227
-#: plugins/generic/references/class_aclResolver.inc:63
+#: include/class_acl.inc:229
+#: plugins/generic/references/class_aclResolver.inc:64
 #: plugins/admin/acl/class_aclRole.inc:139
 msgid "One level"
 msgstr ""
 
-#: include/class_acl.inc:228 include/class_acl.inc:233
-#: plugins/generic/references/class_aclResolver.inc:64
+#: include/class_acl.inc:230 include/class_acl.inc:235
+#: plugins/generic/references/class_aclResolver.inc:65
 #: plugins/admin/acl/class_aclRole.inc:140
 msgid "Current object"
 msgstr ""
 
-#: include/class_acl.inc:229
-#: plugins/generic/references/class_aclResolver.inc:65
+#: include/class_acl.inc:231
+#: plugins/generic/references/class_aclResolver.inc:66
 #: plugins/admin/acl/class_aclRole.inc:141
 msgid "Complete subtree"
 msgstr ""
 
-#: include/class_acl.inc:230
-#: plugins/generic/references/class_aclResolver.inc:66
+#: include/class_acl.inc:232
+#: plugins/generic/references/class_aclResolver.inc:67
 #: plugins/admin/acl/class_aclRole.inc:142
 msgid "Complete subtree (permanent)"
 msgstr ""
 
-#: include/class_acl.inc:231 include/class_acl.inc:234
-#: plugins/generic/references/class_aclResolver.inc:67
+#: include/class_acl.inc:233 include/class_acl.inc:236
+#: plugins/generic/references/class_aclResolver.inc:68
 msgid "Use ACL defined in role"
 msgstr ""
 
-#: include/class_acl.inc:237
-#: plugins/generic/references/class_aclResolver.inc:173
+#: include/class_acl.inc:239
+#: plugins/generic/references/class_aclResolver.inc:185
 #: plugins/admin/users/class_userManagement.inc:25
-#: plugins/personal/generic/class_user.inc:1675
+#: plugins/personal/generic/class_user.inc:1676
 #: setup/class_setupStep_Migrate.inc:297
 msgid "Users"
 msgstr ""
 
-#: include/class_acl.inc:237
-#: plugins/generic/references/class_aclResolver.inc:165
+#: include/class_acl.inc:239
+#: plugins/generic/references/class_aclResolver.inc:177
 #: plugins/admin/groups/class_group.inc:1041
 #: plugins/admin/groups/class_groupManagement.inc:25
 #: setup/class_setupStep_Migrate.inc:300
 msgid "Groups"
 msgstr ""
 
-#: include/class_acl.inc:252
+#: include/class_acl.inc:254
 msgid "Section"
 msgstr ""
 
-#: include/class_acl.inc:262
+#: include/class_acl.inc:264
 msgid "Used"
 msgstr ""
 
-#: include/class_acl.inc:278 plugins/admin/ogroups/class_ogroup.inc:865
+#: include/class_acl.inc:280 plugins/admin/ogroups/class_ogroup.inc:865
 msgid "Member"
 msgstr ""
 
-#: include/class_acl.inc:278 plugins/admin/acl/class_aclRole.inc:182
+#: include/class_acl.inc:280 plugins/admin/acl/class_aclRole.inc:182
 #: plugins/admin/acl/class_aclRole.inc:744
 msgid "Permissions"
 msgstr ""
 
-#: include/class_acl.inc:278 include/php_setup.inc:191
+#: include/class_acl.inc:280 include/php_setup.inc:191
 #: plugins/admin/acl/class_aclRole.inc:182
 msgid "Type"
 msgstr ""
 
-#: include/class_acl.inc:572
+#: include/class_acl.inc:574
 msgid "No ACL settings for this category!"
 msgstr ""
 
-#: include/class_acl.inc:575
+#: include/class_acl.inc:577
 #, php-format
 msgid "ACLs for: %s"
 msgstr ""
 
-#: include/class_acl.inc:581 include/class_acl.inc:585
+#: include/class_acl.inc:583 include/class_acl.inc:587
 msgid "category ACL"
 msgstr ""
 
-#: include/class_acl.inc:637
+#: include/class_acl.inc:639
 #, php-format
 msgid "Edit ACL for '%s' with scope '%s'"
 msgstr ""
 
-#: include/class_acl.inc:799 include/class_acl.inc:806
+#: include/class_acl.inc:801 include/class_acl.inc:808
 msgid "Show/hide advanced settings"
 msgstr ""
 
-#: include/class_acl.inc:817
+#: include/class_acl.inc:819
 msgid "Create objects"
 msgstr ""
 
-#: include/class_acl.inc:818
+#: include/class_acl.inc:820
 msgid "Move objects"
 msgstr ""
 
-#: include/class_acl.inc:819
+#: include/class_acl.inc:821
 msgid "Remove objects"
 msgstr ""
 
-#: include/class_acl.inc:821
-#: plugins/generic/references/class_aclResolver.inc:295
+#: include/class_acl.inc:823
+#: plugins/generic/references/class_aclResolver.inc:307
 msgid "Restrict changes to user's own object"
 msgstr ""
 
-#: include/class_acl.inc:825 include/class_acl.inc:930
-#: include/class_acl.inc:934
-#: plugins/generic/references/class_aclResolver.inc:297
+#: include/class_acl.inc:827 include/class_acl.inc:936
+#: include/class_acl.inc:940
+#: plugins/generic/references/class_aclResolver.inc:309
 msgid "read"
 msgstr ""
 
-#: include/class_acl.inc:826 include/class_acl.inc:932
-#: include/class_acl.inc:935
-#: plugins/generic/references/class_aclResolver.inc:298
+#: include/class_acl.inc:828 include/class_acl.inc:938
+#: include/class_acl.inc:941
+#: plugins/generic/references/class_aclResolver.inc:310
 msgid "write"
 msgstr ""
 
-#: include/class_acl.inc:830
+#: include/class_acl.inc:832
 msgid "Complete object"
 msgstr ""
 
-#: include/class_acl.inc:978
+#: include/class_acl.inc:984
 #, php-format
 msgid "Unknown ACL type '%s'!"
 msgstr ""
 
-#: include/class_acl.inc:1023
+#: include/class_acl.inc:1029
 #, php-format
 msgid "Unknown entry '%s'!"
 msgstr ""
 
-#: include/class_acl.inc:1087 include/class_acl.inc:1089
+#: include/class_acl.inc:1093 include/class_acl.inc:1095
 #, php-format
 msgid "ACL role: %s"
 msgstr ""
 
-#: include/class_acl.inc:1089
+#: include/class_acl.inc:1095
 msgid "unknown ACL role"
 msgstr ""
 
-#: include/class_acl.inc:1097
+#: include/class_acl.inc:1103
 #, php-format
 msgid "Contains settings for these objects: %s"
 msgstr ""
 
-#: include/class_acl.inc:1114
+#: include/class_acl.inc:1120
 msgid "inactive"
 msgstr ""
 
-#: include/class_acl.inc:1114
+#: include/class_acl.inc:1120
 msgid "No members"
 msgstr ""
 
-#: include/class_acl.inc:1284 include/class_acl.inc:1285
-#: include/class_acl.inc:1291 include/class_tabs.inc:395
+#: include/class_acl.inc:1290 include/class_acl.inc:1291
+#: include/class_acl.inc:1297 include/class_tabs.inc:397
 #: plugins/admin/acl/tabs_acl.inc:28 plugins/admin/acl/class_aclRole.inc:770
 #: plugins/admin/acl/acl-list.xml:15
 msgid "ACL"
 msgstr ""
 
-#: include/class_acl.inc:1285
+#: include/class_acl.inc:1291
 msgid "Access control list"
 msgstr ""
 
-#: include/class_acl.inc:1291
+#: include/class_acl.inc:1297
 msgid "ACL roles"
 msgstr ""
 
-#: include/class_acl.inc:1294
+#: include/class_acl.inc:1300
 msgid "ACL Entries"
 msgstr ""
 
@@ -1403,211 +1403,211 @@ msgstr ""
 msgid "list is incomplete"
 msgstr ""
 
-#: include/functions.inc:1634
+#: include/functions.inc:1636
 msgid "Continue anyway"
 msgstr ""
 
-#: include/functions.inc:1636
+#: include/functions.inc:1638
 msgid "Edit anyway"
 msgstr ""
 
-#: include/functions.inc:1639
+#: include/functions.inc:1641
 msgid "These entries are currently locked:"
 msgstr ""
 
-#: include/functions.inc:1880
+#: include/functions.inc:1882
 msgid "Entries per page"
 msgstr ""
 
-#: include/functions.inc:2058
+#: include/functions.inc:2060
 #, php-format
 msgid "GOsa %s"
 msgstr ""
 
-#: include/functions.inc:2065
+#: include/functions.inc:2067
 #, php-format
 msgid "GOsa %s snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:2070
+#: include/functions.inc:2072
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:2166
+#: include/functions.inc:2168
 #, php-format
 msgid "File %s cannot be deleted!"
 msgstr ""
 
-#: include/functions.inc:2196 include/functions.inc:2216
+#: include/functions.inc:2198 include/functions.inc:2218
 msgid "Cannot write revision file!"
 msgstr ""
 
-#: include/functions.inc:2487 include/functions.inc:2491
-#: include/functions.inc:2497
+#: include/functions.inc:2489 include/functions.inc:2493
+#: include/functions.inc:2499
 msgid "'baseIdHook' is not available. Using default base!"
 msgstr ""
 
-#: include/functions.inc:2521
+#: include/functions.inc:2523
 msgid ""
 "Cannot read schema information from LDAP. Schema validation is not possible!"
 msgstr ""
 
-#: include/functions.inc:2547
+#: include/functions.inc:2549
 msgid "This class is used to make users appear in GOsa."
 msgstr ""
 
-#: include/functions.inc:2554
+#: include/functions.inc:2556
 msgid ""
 "This class is used to lock entries in order to prevent multiple edits at a "
 "time."
 msgstr ""
 
-#: include/functions.inc:2599
+#: include/functions.inc:2601
 #, php-format
 msgid "Required object class %s is missing!"
 msgstr ""
 
-#: include/functions.inc:2602
+#: include/functions.inc:2604
 #, php-format
 msgid "Optional object class %s is missing!"
 msgstr ""
 
-#: include/functions.inc:2607
+#: include/functions.inc:2609
 #, php-format
 msgid "Wrong version of required object class %s (!=%s) detected!"
 msgstr ""
 
-#: include/functions.inc:2610
+#: include/functions.inc:2612
 #, php-format
 msgid "Class available"
 msgstr ""
 
-#: include/functions.inc:2632
+#: include/functions.inc:2634
 msgid ""
 "RFC2307bis schema is enabled, but the current LDAP configuration does not "
 "support it!"
 msgstr ""
 
-#: include/functions.inc:2633
+#: include/functions.inc:2635
 msgid ""
 "To use RFC2307bis groups, the objectClass 'posixGroup' must be AUXILIARY."
 msgstr ""
 
-#: include/functions.inc:2637
+#: include/functions.inc:2639
 msgid ""
 "RFC2307bis schema is disabled, but the current LDAP configuration supports "
 "it!"
 msgstr ""
 
-#: include/functions.inc:2638
+#: include/functions.inc:2640
 msgid "To correct this, the objectClass 'posixGroup' must be STRUCTURAL."
 msgstr ""
 
-#: include/functions.inc:2663
+#: include/functions.inc:2665
 msgid "German"
 msgstr ""
 
-#: include/functions.inc:2664
+#: include/functions.inc:2666
 msgid "French"
 msgstr ""
 
-#: include/functions.inc:2665
+#: include/functions.inc:2667
 msgid "Italian"
 msgstr ""
 
-#: include/functions.inc:2666
+#: include/functions.inc:2668
 msgid "Spanish"
 msgstr ""
 
-#: include/functions.inc:2667
+#: include/functions.inc:2669
 msgid "English"
 msgstr ""
 
-#: include/functions.inc:2668
+#: include/functions.inc:2670
 msgid "Dutch"
 msgstr ""
 
-#: include/functions.inc:2669
+#: include/functions.inc:2671
 msgid "Polish"
 msgstr ""
 
-#: include/functions.inc:2670
+#: include/functions.inc:2672
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: include/functions.inc:2672
+#: include/functions.inc:2674
 msgid "Chinese"
 msgstr ""
 
-#: include/functions.inc:2673
+#: include/functions.inc:2675
 msgid "Vietnamese"
 msgstr ""
 
-#: include/functions.inc:2674
+#: include/functions.inc:2676
 msgid "Russian"
 msgstr ""
 
-#: include/functions.inc:2867
+#: include/functions.inc:2869
 msgid "Cannot detect password hash!"
 msgstr ""
 
-#: include/functions.inc:2908 include/functions.inc:2983
+#: include/functions.inc:2910 include/functions.inc:2985
 #, php-format
 msgid "Pre-event hook reported a problem: %s. Password change canceled!"
 msgstr ""
 
-#: include/functions.inc:2939
+#: include/functions.inc:2941
 msgid "Password change failed!"
 msgstr ""
 
-#: include/functions.inc:2947
+#: include/functions.inc:2949
 #, php-format
 msgid "Post-event hook reported a problem: %s. Password change canceled!"
 msgstr ""
 
-#: include/functions.inc:3051
+#: include/functions.inc:3053
 msgid "Cannot generate SAMBA hash!"
 msgstr ""
 
-#: include/functions.inc:3066
+#: include/functions.inc:3068
 #, php-format
 msgid "Generating SAMBA hash by running %s failed: check %s!"
 msgstr ""
 
-#: include/functions.inc:3344 include/functions.inc:3358
-#: include/functions.inc:3396 include/functions.inc:3408
-#: include/functions.inc:3412 include/functions.inc:3427
-#: include/functions.inc:3436
+#: include/functions.inc:3346 include/functions.inc:3360
+#: include/functions.inc:3398 include/functions.inc:3410
+#: include/functions.inc:3414 include/functions.inc:3429
+#: include/functions.inc:3438
 msgid "Cannot allocate free ID:"
 msgstr ""
 
-#: include/functions.inc:3344
+#: include/functions.inc:3346
 msgid "unknown idAllocation method!"
 msgstr ""
 
-#: include/functions.inc:3358
+#: include/functions.inc:3360
 #, php-format
 msgid "%sPoolMin >= %sPoolMax!"
 msgstr ""
 
-#: include/functions.inc:3388
+#: include/functions.inc:3390
 msgid "Cannot create sambaUnixIdPool entry!"
 msgstr ""
 
-#: include/functions.inc:3396
+#: include/functions.inc:3398
 msgid "sambaUnixIdPool is not unique!"
 msgstr ""
 
-#: include/functions.inc:3408 include/functions.inc:3412
+#: include/functions.inc:3410 include/functions.inc:3414
 msgid "no ID available!"
 msgstr ""
 
-#: include/functions.inc:3436
+#: include/functions.inc:3438
 msgid "maximum number of tries exceeded!"
 msgstr ""
 
-#: include/functions.inc:3496
+#: include/functions.inc:3498
 msgid "Cannot allocate free ID!"
 msgstr ""
 
@@ -1616,12 +1616,12 @@ msgstr ""
 msgid "No plugin definition for %s found: please check the configuration file!"
 msgstr ""
 
-#: include/class_tabs.inc:262
+#: include/class_tabs.inc:264
 #, php-format
 msgid "Delete process has been canceled by plugin %s: %s"
 msgstr ""
 
-#: include/class_tabs.inc:400
+#: include/class_tabs.inc:402
 msgid "References"
 msgstr ""
 
@@ -1781,7 +1781,7 @@ msgid ""
 "entry, changes that have been made by others will be discarded!"
 msgstr ""
 
-#: include/class_plugin.inc:1409
+#: include/class_plugin.inc:1411
 #, php-format
 msgid "Changing ACL DN from %s to %s"
 msgstr ""
@@ -2252,103 +2252,103 @@ msgstr ""
 msgid "LDAP operation failed!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:468
+#: include/utils/class_msgPool.inc:469
 msgid "Upload failed!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:471
+#: include/utils/class_msgPool.inc:472
 #, php-format
 msgid "Upload failed: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:478
+#: include/utils/class_msgPool.inc:479
 msgid "Communication failure with the infrastructure service!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:480
+#: include/utils/class_msgPool.inc:481
 #, php-format
 msgid "Communication failure with the infrastructure service: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:487
+#: include/utils/class_msgPool.inc:488
 msgid "Communication failure with the GOsa-NG service!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:489
+#: include/utils/class_msgPool.inc:490
 #, php-format
 msgid "Communication failure with the GOsa-NG service: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:496 include/utils/class_msgPool.inc:499
+#: include/utils/class_msgPool.inc:497 include/utils/class_msgPool.inc:500
 #, php-format
 msgid "This %s is still in use by this object: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:502
+#: include/utils/class_msgPool.inc:503
 #, php-format
 msgid "This %s is still in use."
 msgstr ""
 
-#: include/utils/class_msgPool.inc:504
+#: include/utils/class_msgPool.inc:505
 #, php-format
 msgid "This %s is still in use by these objects: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:510
+#: include/utils/class_msgPool.inc:511
 #, php-format
 msgid "File %s does not exist!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:516
+#: include/utils/class_msgPool.inc:517
 #, php-format
 msgid "Cannot open file %s for reading!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:522
+#: include/utils/class_msgPool.inc:523
 #, php-format
 msgid "Cannot open file %s for writing!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:528
+#: include/utils/class_msgPool.inc:529
 #, php-format
 msgid ""
 "The value for %s is currently unconfigured or invalid, please check your "
 "configuration file!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:534
+#: include/utils/class_msgPool.inc:535
 #, php-format
 msgid "Cannot delete file %s!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:540
+#: include/utils/class_msgPool.inc:541
 #, php-format
 msgid "Cannot create folder %s!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:546
+#: include/utils/class_msgPool.inc:547
 #, php-format
 msgid "Cannot delete folder %s!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:552
+#: include/utils/class_msgPool.inc:553
 #, php-format
 msgid "Checking for %s support"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:558
+#: include/utils/class_msgPool.inc:559
 #, php-format
 msgid "Install and activate the %s PHP module."
 msgstr ""
 
-#: include/utils/class_msgPool.inc:564
+#: include/utils/class_msgPool.inc:565
 #, php-format
 msgid ""
 "Cannot initialize class %s! Maybe there is a plugin missing in your gosa "
 "setup?"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:570
+#: include/utils/class_msgPool.inc:571
 msgid ""
 "The supplied base is not valid and has been reset to its previous value!"
 msgstr ""
@@ -2382,18 +2382,18 @@ msgstr ""
 msgid "while operating on LDAP server %s"
 msgstr ""
 
-#: include/class_ldap.inc:979
+#: include/class_ldap.inc:977
 #, php-format
 msgid "Command line programm %s is missing!"
 msgstr ""
 
-#: include/class_ldap.inc:1140
+#: include/class_ldap.inc:1138
 #, php-format
 msgid ""
 "Invalid DN %s: block to be imported should start with 'dn: ...' in line %s"
 msgstr ""
 
-#: include/class_ldap.inc:1169
+#: include/class_ldap.inc:1167
 #, php-format
 msgid "Error while importing DN %s: please check LDIF from line %s on!"
 msgstr ""
@@ -2414,7 +2414,7 @@ msgstr ""
 
 #: include/class_configRegistry.inc:194
 #: plugins/personal/generic/class_user.inc:273
-#: plugins/personal/generic/class_user.inc:1898
+#: plugins/personal/generic/class_user.inc:1899
 msgid "unknown"
 msgstr ""
 
@@ -2468,7 +2468,7 @@ msgstr ""
 
 #: include/class_configRegistry.inc:755
 #, php-format
-msgid "The folder %s specified for %s:%s cannot be used for reading!"
+msgid "The folder %s specified for %s:%s is not readable!"
 msgstr ""
 
 #: include/class_configRegistry.inc:775 include/class_configRegistry.inc:780
@@ -2562,7 +2562,7 @@ msgid ""
 msgstr ""
 
 #: include/class_core.inc:113 include/class_core.inc:119
-#: plugins/generic/references/class_aclResolver.inc:291
+#: plugins/generic/references/class_aclResolver.inc:303
 msgid "All"
 msgstr ""
 
@@ -2582,42 +2582,42 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
-#: include/class_core.inc:181
+#: include/class_core.inc:184
 msgid "None"
 msgstr ""
 
-#: include/class_core.inc:185 setup/class_setupStep_Language.inc:47
+#: include/class_core.inc:188 setup/class_setupStep_Language.inc:47
 msgid "Automatic"
 msgstr ""
 
-#: include/class_core.inc:197
+#: include/class_core.inc:200
 msgid "User value"
 msgstr ""
 
-#: include/class_core.inc:206
+#: include/class_core.inc:209
 msgid "Core"
 msgstr ""
 
-#: include/class_core.inc:207
+#: include/class_core.inc:210
 msgid "GOsa core plugin"
 msgstr ""
 
-#: include/class_core.inc:235
+#: include/class_core.inc:238
 msgid ""
 "The 'htaccessAuthentication' variable tells GOsa to use either htaccess "
 "authentication or LDAP authentication. This can be used if you want to use i."
 "e. Kerberos to authenticate the users."
 msgstr ""
 
-#: include/class_core.inc:245
-msgid "Enables/Disables GOSa usage statistics moduls."
+#: include/class_core.inc:248
+msgid "Enables/Disables GOsa usage statistics moduls."
 msgstr ""
 
-#: include/class_core.inc:255
+#: include/class_core.inc:258
 msgid "The database file for GOSa usage statistics."
 msgstr ""
 
-#: include/class_core.inc:265
+#: include/class_core.inc:268
 msgid ""
 "The 'logging' statement enables event logging on GOsa side. Setting it to "
 "'true' GOsa will log every action a user performs via syslog. If you use "
@@ -2626,49 +2626,49 @@ msgid ""
 "'false'."
 msgstr ""
 
-#: include/class_core.inc:276
+#: include/class_core.inc:279
 msgid ""
 "The 'listSummary' statement determines whether a status bar will be shown on "
 "the bottom of GOsa generated lists, displaying a short summary of type and "
 "number of elements in the list."
 msgstr ""
 
-#: include/class_core.inc:286
+#: include/class_core.inc:289
 msgid ""
 "The 'passwordMinLength' statement determines whether a newly entered "
 "password has to be of a minimum length."
 msgstr ""
 
-#: include/class_core.inc:296
+#: include/class_core.inc:299
 msgid ""
 "The 'passwordMinDiffer' statement determines whether a newly entered "
 "password has to be checked to have at least n different characters."
 msgstr ""
 
-#: include/class_core.inc:306
+#: include/class_core.inc:309
 msgid ""
 "The 'passwordProposalHook' can be used to let GOsa generate password "
 "proposals for you. Whenever you change a password, you can then decide "
 "whether to use the proposal or to manually specify a password."
 msgstr ""
 
-#: include/class_core.inc:306
+#: include/class_core.inc:309
 msgid "Here is an example command:"
 msgstr ""
 
-#: include/class_core.inc:316
+#: include/class_core.inc:319
 msgid ""
 "The 'displayErrors' statement tells GOsa to show PHP errors in the upper "
 "part of the screen. This should be disabled in productive deployments, "
 "because there might be some important passwords arround."
 msgstr ""
 
-#: include/class_core.inc:316
+#: include/class_core.inc:319
 #, php-format
 msgid "The property '%s' may be interesting too."
 msgstr ""
 
-#: include/class_core.inc:326
+#: include/class_core.inc:329
 msgid ""
 "The 'developmentMode' statement tells GOsa to show development related error "
 "messages, for example messages about missing ACL configuration or classes. "
@@ -2676,44 +2676,44 @@ msgid ""
 "messages it should only be enabled while developing or debugging plugins!"
 msgstr ""
 
-#: include/class_core.inc:337
+#: include/class_core.inc:340
 msgid ""
 "The 'schemaCheck' statement enables or disables schema checking during "
 "login. It is recommended to switch this on in order to let GOsa handle "
 "object creation more efficient."
 msgstr ""
 
-#: include/class_core.inc:347
+#: include/class_core.inc:350
 msgid ""
 "The 'copyPaste' statement enables copy and paste for LDAP entries managed "
 "with GOsa."
 msgstr ""
 
-#: include/class_core.inc:357
+#: include/class_core.inc:360
 msgid ""
 "The 'forceGlobals' statement enables PHP security checks to force "
 "register_global settings to be switched off."
 msgstr ""
 
-#: include/class_core.inc:367
+#: include/class_core.inc:370
 msgid ""
 "The 'forceSSL' statement enables PHP security checks to force encrypted "
 "access to the web interface. GOsa will try to redirect to the same URL - "
 "just with https://"
 msgstr ""
 
-#: include/class_core.inc:377
+#: include/class_core.inc:380
 msgid ""
 "Logs information about triggered ldap operations, duration, filter, aso. "
 "into syslog."
 msgstr ""
 
-#: include/class_core.inc:387
+#: include/class_core.inc:390
 msgid ""
 "The 'ldapFollowReferrals' statement tells GOsa to follow LDAP referrals."
 msgstr ""
 
-#: include/class_core.inc:397
+#: include/class_core.inc:400
 msgid ""
 "The 'ldapFilterNestingLimit' statement can be used to speed up group "
 "handling for groups with several hundreds of members. The default behaviour "
@@ -2723,61 +2723,61 @@ msgid ""
 "set a member limit, where GOsa will stop to do these lookups."
 msgstr ""
 
-#: include/class_core.inc:407
+#: include/class_core.inc:410
 msgid ""
 "The ldapSizelimit statement tells GOsa to retrieve the specified maximum "
 "number of results. The user will get  a  warning,  that  not  all entries "
 "were shown."
 msgstr ""
 
-#: include/class_core.inc:417
+#: include/class_core.inc:420
 msgid ""
 "Disables sizelimit checks, only the configured amount of results will be "
 "shown!"
 msgstr ""
 
-#: include/class_core.inc:427
+#: include/class_core.inc:430
 msgid ""
 "The 'warnSSL' statement enables PHP security checks to detect non encrypted "
 "access to the web interface. GOsa will display a warning in this case."
 msgstr ""
 
-#: include/class_core.inc:437
+#: include/class_core.inc:440
 msgid "The 'ppdGzip' variable enables PPD file compression."
 msgstr ""
 
-#: include/class_core.inc:448
+#: include/class_core.inc:451
 msgid ""
 "The 'ignoreAcl' value tells GOsa to ignore complete ACL sets for the given "
 "DN. Add your DN here and you'll be able to restore accidently dropped ACLs."
 msgstr ""
 
-#: include/class_core.inc:459
+#: include/class_core.inc:462
 msgid ""
 "The 'ppdPath' variable defines where to store PPD files for the GOto "
 "environment plugins."
 msgstr ""
 
-#: include/class_core.inc:469
+#: include/class_core.inc:472
 msgid ""
 "The 'ldapMaxQueryTime' statement tells GOsa to stop LDAP actions if there is "
 "no answer within the specified number of seconds."
 msgstr ""
 
-#: include/class_core.inc:479
+#: include/class_core.inc:482
 msgid ""
 "The 'storeFilterSettings' statement determines whether GOsa should store "
 "filter and plugin settings inside of a cookie."
 msgstr ""
 
-#: include/class_core.inc:489
+#: include/class_core.inc:492
 msgid ""
 "The 'sendCompressedOutput' statement determines whether PHP should send "
 "compressed HTML pages to browsers or not. This may increase or decrease the "
 "performance, depending on your network."
 msgstr ""
 
-#: include/class_core.inc:500
+#: include/class_core.inc:503
 msgid ""
 "The 'modificationDetectionAttribute' statement enables GOsa to check if a "
 "entry currently being edited has been modified from someone else outside "
@@ -2786,7 +2786,7 @@ msgid ""
 "based systems."
 msgstr ""
 
-#: include/class_core.inc:511
+#: include/class_core.inc:514
 msgid ""
 "The 'language' statement defines the default language used by GOsa. Normally "
 "GOsa autodetects the language from the browser settings. If this is not "
@@ -2794,7 +2794,7 @@ msgid ""
 "de for german) here."
 msgstr ""
 
-#: include/class_core.inc:522
+#: include/class_core.inc:525
 msgid ""
 "The 'theme' statement defines what theme is used to display GOsa pages. You "
 "can install some corporate identity like theme and/or modify certain "
@@ -2802,7 +2802,7 @@ msgid ""
 "more information."
 msgstr ""
 
-#: include/class_core.inc:532
+#: include/class_core.inc:535
 msgid ""
 "The 'sessionLifetime' value defines when a session will expire in seconds. "
 "For Debian systems, this will not work because the sessions will be removed "
@@ -2810,7 +2810,7 @@ msgid ""
 "instead."
 msgstr ""
 
-#: include/class_core.inc:542
+#: include/class_core.inc:545
 msgid ""
 "The 'templateCompileDirectory' statements defines the path, where the PHP "
 "templating engins 'smarty' should store its compiled GOsa templates for "
@@ -2818,14 +2818,14 @@ msgid ""
 "is running with."
 msgstr ""
 
-#: include/class_core.inc:552
+#: include/class_core.inc:555
 #, php-format
 msgid ""
 "The 'debugLevel' value tells GOsa to display certain information on each "
 "page load. Value is an AND combination of the following byte values: %s"
 msgstr ""
 
-#: include/class_core.inc:572
+#: include/class_core.inc:575
 #, php-format
 msgid ""
 "The 'sambaHashHook' statement contains an executable to generate samba hash "
@@ -2834,20 +2834,20 @@ msgid ""
 "distribution installed, you can use perl to generate the hash: %s"
 msgstr ""
 
-#: include/class_core.inc:583
+#: include/class_core.inc:586
 msgid ""
 "The 'passwordDefaultHash' statement defines the default password hash to "
 "choose for new accounts."
 msgstr ""
 
-#: include/class_core.inc:592
+#: include/class_core.inc:595
 msgid ""
 "The 'strictPasswordRules' tells GOsa to check for UTF-8 characters in the "
 "supplied password. These Characters can lead to non working authentications "
 "if UTF-8 and none UTF-8 systems locales get mixed. The default is 'true'."
 msgstr ""
 
-#: include/class_core.inc:603
+#: include/class_core.inc:606
 msgid ""
 "The 'accountPrimaryAttribute' option tells GOsa how to create new accounts. "
 "Possible values are 'uid' and 'cn'. In the first case GOsa creates uid style "
@@ -2858,19 +2858,19 @@ msgid ""
 "'personalTitleInDN'."
 msgstr ""
 
-#: include/class_core.inc:613
+#: include/class_core.inc:616
 msgid ""
 "The 'userRDN' statement defines the location where new accounts will be "
 "created inside of defined departments. The default is 'ou=people'."
 msgstr ""
 
-#: include/class_core.inc:623
+#: include/class_core.inc:626
 msgid ""
 "The 'groupsRDN' statement defines the location where new groups will be "
 "created inside of defined departments. The default is 'ou=groups'."
 msgstr ""
 
-#: include/class_core.inc:633
+#: include/class_core.inc:636
 msgid ""
 "The 'gidNumberBase' statement defines where to start looking for a new free "
 "group id. This should be synced with your 'adduser.conf' to avoid "
@@ -2879,25 +2879,25 @@ msgid ""
 "definition."
 msgstr ""
 
-#: include/class_core.inc:643
+#: include/class_core.inc:646
 msgid ""
 "The 'baseIdHook' statement allows to hook into the id generation method "
 "(traditional mode), to define the starting range for new generated ids"
 msgstr ""
 
-#: include/class_core.inc:653 include/class_core.inc:673
+#: include/class_core.inc:656 include/class_core.inc:676
 msgid ""
 "The 'uidNumberPoolMin/gidNumberPoolMin' statement defines the lowest "
 "assignable user/group id for use with the 'idAllocationMethod = pool'."
 msgstr ""
 
-#: include/class_core.inc:663 include/class_core.inc:683
+#: include/class_core.inc:666 include/class_core.inc:686
 msgid ""
 "The 'uidNumberPoolMax/gidNumberPoolMax' statement defines the highest "
 "assignable user/group id for use with the 'idAllocationMethod = pool'."
 msgstr ""
 
-#: include/class_core.inc:693
+#: include/class_core.inc:696
 msgid ""
 "The 'uidNumberBase' statement defines where to start looking for a new free "
 "user id. This should be synced with your 'adduser.conf' to avoid overlapping "
@@ -2905,26 +2905,26 @@ msgid ""
 "even be dynamic. Take a look at the 'baseIdHook' definition."
 msgstr ""
 
-#: include/class_core.inc:733
+#: include/class_core.inc:736
 msgid ""
 "The 'gosaSupportURI' defines the major gosa-si server host and the password "
 "for GOsa to connect to it. It can be used if you want to use i.e. kerberos "
 "to authenticate the users. The format is: credentials@host:port"
 msgstr ""
 
-#: include/class_core.inc:743
+#: include/class_core.inc:746
 msgid ""
 "The 'gosaSupportTimeout' sets a connection timeout for all gosa-si actions. "
 "See 'gosaSupportURI' for details."
 msgstr ""
 
-#: include/class_core.inc:754
+#: include/class_core.inc:757
 msgid ""
 "The 'loginAttribute' statement tells GOsa which LDAP attribute is used as "
 "the login name during login. It can be set to 'uid', 'mail' or 'both'"
 msgstr ""
 
-#: include/class_core.inc:765
+#: include/class_core.inc:768
 msgid ""
 "The 'timezone' statements defines the timezone used inside of GOsa to handle "
 "date related tasks, such as password expiery, vacation messages, etc. The "
@@ -2932,14 +2932,14 @@ msgid ""
 "timezone."
 msgstr ""
 
-#: include/class_core.inc:775
+#: include/class_core.inc:778
 msgid ""
 "The 'honourUnitTags' statement enables checking of 'unitTag' attributes when "
 "using administrative units. If this is set to 'true' GOsa can only see "
 "objects inside the administrative unit a user is logged into."
 msgstr ""
 
-#: include/class_core.inc:785
+#: include/class_core.inc:788
 msgid ""
 "The 'useSaslForKerberos' statement defines the way the kerberos realm is "
 "stored in the #userPassword' attribute. Set it to 'true' in order to get "
@@ -2947,7 +2947,7 @@ msgid ""
 "latter is outdated, but may be needed from time to time."
 msgstr ""
 
-#: include/class_core.inc:795
+#: include/class_core.inc:798
 msgid ""
 "The 'rfc2307bis' statement enables rfc2307bis style groups in GOsa. You can "
 "use 'member' attributes instead of memberUid in this case. To make it work "
@@ -2955,20 +2955,20 @@ msgid ""
 "style groups, too"
 msgstr ""
 
-#: include/class_core.inc:805
+#: include/class_core.inc:808
 msgid ""
 "The 'personalTitleInDN' option tells GOsa to include the personal title in "
 "user DNs when #accountPrimaryAttribute' is set to \"cn\"."
 msgstr ""
 
-#: include/class_core.inc:815
+#: include/class_core.inc:818
 msgid ""
 "The 'nextIdHook' statement defines a script to be called for finding the "
 "next free id for users or groups externaly. It gets called with the current "
 "entry \"dn\" and the attribute to be ID'd. It should return an integer value."
 msgstr ""
 
-#: include/class_core.inc:825
+#: include/class_core.inc:828
 msgid ""
 "The 'idGenerator' statement describes an automatic way to generate new user "
 "ids. There are two basic functions supported - which can be combined: \n"
@@ -3006,32 +3006,32 @@ msgid ""
 "    will generate a three digits random number appended to \"ext\".\n"
 msgstr ""
 
-#: include/class_core.inc:865
+#: include/class_core.inc:868
 msgid ""
 "The 'strictNamingRules' statement enables strict checking of uids and group "
 "names. If you need   characters like . or - inside of your accounts, set "
 "this to 'false'."
 msgstr ""
 
-#: include/class_core.inc:875
+#: include/class_core.inc:878
 msgid ""
 "The 'minId' statement defines the minimum assignable user or group id to "
 "avoid security leaks with uid 0 accounts. This is used for the 'traditional' "
 "method."
 msgstr ""
 
-#: include/class_core.inc:886
+#: include/class_core.inc:889
 msgid ""
 "The 'mailAttribute' statement determines which attribute GOsa will use to "
 "create accounts. Valid values are 'mail' and 'uid'."
 msgstr ""
 
-#: include/class_core.inc:896
+#: include/class_core.inc:899
 msgid ""
 "This attribute allows to override the prefix used to create shared folders."
 msgstr ""
 
-#: include/class_core.inc:906
+#: include/class_core.inc:909
 msgid ""
 "This attribute allows to override the user account creation syntax, see the "
 "'mailFolderCreation' description for more details.\n"
@@ -3042,7 +3042,7 @@ msgid ""
 "com\"\n"
 msgstr ""
 
-#: include/class_core.inc:921
+#: include/class_core.inc:924
 msgid ""
 "Every mail method has its own way to create mail accounts like 'share/"
 "development' or 'shared.development@example.com' which is used to identify "
@@ -3067,25 +3067,25 @@ msgid ""
 " %uattrib%   Depends on mailAttribute=\"uid/mail\".\n"
 msgstr ""
 
-#: include/class_core.inc:947
+#: include/class_core.inc:950
 msgid ""
 "The 'imapTimeout' statement sets the connection timeout for imap actions."
 msgstr ""
 
-#: include/class_core.inc:958
+#: include/class_core.inc:961
 msgid ""
 "The 'mailMethod' statement tells GOsa which mail method the setup should use "
 "to communicate with a possible mail server. Leave this undefined if your "
 "mail method does not match the predefined ones."
 msgstr ""
 
-#: include/class_core.inc:968
+#: include/class_core.inc:971
 msgid ""
 "The 'cyrusUseSlashes' statement determines if GOsa should use \"foo/bar\" or "
 "\"foo.bar\" namespaces in IMAP. Unix style is with slashes."
 msgstr ""
 
-#: include/class_core.inc:978
+#: include/class_core.inc:981
 msgid ""
 "The 'vacationTemplateDirectory' statement sets the path where GOsa will look "
 "for vacation message templates. Default is /etc/gosa/vacation. \n"
@@ -3101,70 +3101,70 @@ msgid ""
 "\n"
 msgstr ""
 
-#: include/class_core.inc:999
+#: include/class_core.inc:1002
 msgid ""
 "The 'ldapTLS' statement enables or disables TLS operating on LDAP "
 "connections."
 msgstr ""
 
-#: include/class_core.inc:1009
+#: include/class_core.inc:1012
 msgid ""
 "The 'honourIvbbAttributes' statement enables the IVBB mode inside of GOsa. "
 "You need the ivbb.schema file from used by german authorities."
 msgstr ""
 
-#: include/class_core.inc:1019
+#: include/class_core.inc:1022
 msgid ""
 "The 'sambaIdMapping' statement tells GOsa to maintain sambaIdmapEntry "
 "objects. Depending on your setup this can drastically improve the windows "
 "login performance."
 msgstr ""
 
-#: include/class_core.inc:1029
+#: include/class_core.inc:1032
 msgid ""
 "The 'handleExpiredAccounts' statement enables shadow attribute tests during "
 "the login to the GOsa web interface and forces password renewal or account "
 "lockout."
 msgstr ""
 
-#: include/class_core.inc:1039
+#: include/class_core.inc:1042
 msgid ""
 "The 'sambaSID' statement defines a samba SID if not available inside of the "
 "LDAP. You can retrieve the current sid by net getlocalsid."
 msgstr ""
 
-#: include/class_core.inc:1049
+#: include/class_core.inc:1052
 msgid ""
 "The 'sambaRidBase' statement defines the base id to add to ordinary sid "
 "calculations - if not available inside of the LDAP."
 msgstr ""
 
-#: include/class_core.inc:1059
+#: include/class_core.inc:1062
 msgid ""
 "The 'enableSnapshots' statement enables a snapshot mechaism in GOsa. This "
 "enables you to save certain states of entries and restore them later on."
 msgstr ""
 
-#: include/class_core.inc:1069
+#: include/class_core.inc:1072
 msgid ""
 "The 'snapshotBase' statement defines the base where snapshots should be "
 "stored inside of the LDAP."
 msgstr ""
 
-#: include/class_core.inc:1079
+#: include/class_core.inc:1082
 msgid ""
 "The 'snapshotAdminDn' variable defines the user which is used to "
 "authenticate when connecting to 'snapshotURI'."
 msgstr ""
 
-#: include/class_core.inc:1089
+#: include/class_core.inc:1092
 msgid ""
 "The 'snapshotAdminPassword' variable defines the credentials which are used "
 "in combination with 'snapshotAdminDn' and 'snapshotURI' in order to "
 "authenticate."
 msgstr ""
 
-#: include/class_core.inc:1100
+#: include/class_core.inc:1103
 msgid ""
 "The 'idAllocationMethod' statement defines how GOsa generates numeric user "
 "and group id values. If it is set to 'traditional' GOsa will do create a "
@@ -3175,7 +3175,7 @@ msgid ""
 "the other hand it is much faster."
 msgstr ""
 
-#: include/class_core.inc:1109
+#: include/class_core.inc:1112
 msgid ""
 "The 'snapshotURI' variable defines the LDAP URI for the server which is used "
 "to do object snapshots."
@@ -3266,7 +3266,7 @@ msgstr ""
 
 #: plugins/generic/statistics/statistics.tpl:16
 msgid ""
-"Communication with the GOsa-backend failed. Please check the rpc "
+"Communication with the GOsa-backend failed. Please check the RPC "
 "configuration!"
 msgstr ""
 
@@ -3503,10 +3503,10 @@ msgstr ""
 #: plugins/admin/groups/class_group.inc:1200
 #: plugins/admin/users/class_userManagement.inc:536
 #: plugins/admin/users/user-list.xml:57
-#: plugins/personal/generic/class_user.inc:1325
-#: plugins/personal/generic/class_user.inc:1372
-#: plugins/personal/generic/class_user.inc:1703
-#: plugins/personal/generic/class_user.inc:1857
+#: plugins/personal/generic/class_user.inc:1326
+#: plugins/personal/generic/class_user.inc:1373
+#: plugins/personal/generic/class_user.inc:1704
+#: plugins/personal/generic/class_user.inc:1858
 msgid "Given name"
 msgstr ""
 
@@ -3517,7 +3517,7 @@ msgstr ""
 #: plugins/admin/groups/class_group.inc:1190
 #: plugins/admin/groups/class_group.inc:1200
 #: plugins/admin/users/user-list.xml:49
-#: plugins/personal/generic/class_user.inc:1702
+#: plugins/personal/generic/class_user.inc:1703
 msgid "Surname"
 msgstr ""
 
@@ -3538,11 +3538,8 @@ msgid "User manager"
 msgstr ""
 
 #: plugins/generic/references/contents.tpl:2
-msgid "Object information"
-msgstr ""
-
 #: plugins/generic/references/contents.tpl:3
-msgid "Object info"
+msgid "Object information"
 msgstr ""
 
 #: plugins/generic/references/contents.tpl:7
@@ -3562,40 +3559,40 @@ msgstr ""
 msgid "ACL trace"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:131
+#: plugins/generic/references/class_aclResolver.inc:143
 msgid "Enter another user name"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:157
+#: plugins/generic/references/class_aclResolver.inc:169
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:126
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:128
 #: plugins/addons/dyngroup/dyngroup.tpl:8
 msgid "Filter"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:181
-msgid "Acls"
+#: plugins/generic/references/class_aclResolver.inc:193
+msgid "ACLs"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:186
+#: plugins/generic/references/class_aclResolver.inc:198
 #, php-format
 msgid "List of effective ACLs for '%s'"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:187
-#: plugins/generic/references/class_aclResolver.inc:191
+#: plugins/generic/references/class_aclResolver.inc:199
+#: plugins/generic/references/class_aclResolver.inc:203
 msgid "Object permissions"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:299
+#: plugins/generic/references/class_aclResolver.inc:311
 msgid "create"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:300
+#: plugins/generic/references/class_aclResolver.inc:312
 msgid "remove"
 msgstr ""
 
-#: plugins/generic/references/class_aclResolver.inc:301
+#: plugins/generic/references/class_aclResolver.inc:313
 msgid "move"
 msgstr ""
 
@@ -3628,7 +3625,7 @@ msgstr ""
 #: plugins/admin/departments/dep-list.xml:71
 #: plugins/admin/departments/dep-list.xml:138
 #: plugins/admin/departments/class_departmentManagement.inc:253
-#: plugins/personal/generic/class_user.inc:1721
+#: plugins/personal/generic/class_user.inc:1722
 #: plugins/personal/generic/generic.tpl:306
 msgid "Department"
 msgstr ""
@@ -3663,8 +3660,8 @@ msgstr ""
 #: plugins/admin/departments/generic.tpl:110
 #: plugins/admin/departments/class_department.inc:376
 #: plugins/admin/departments/organization.tpl:109
-#: plugins/personal/generic/class_user.inc:1353
-#: plugins/personal/generic/class_user.inc:1845
+#: plugins/personal/generic/class_user.inc:1354
+#: plugins/personal/generic/class_user.inc:1846
 #: plugins/personal/generic/generic.tpl:394
 #: plugins/personal/generic/generic.tpl:574
 msgid "Phone"
@@ -3733,7 +3730,7 @@ msgstr ""
 #: plugins/admin/acl/acl_role.tpl:27
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:114
 #: plugins/addons/dyngroup/dyngroup.tpl:5
-#: plugins/personal/generic/class_user.inc:1714
+#: plugins/personal/generic/class_user.inc:1715
 #: plugins/personal/generic/generic.tpl:167
 #: plugins/personal/posix/trustSelect/trust-list.tpl:12
 #: plugins/personal/posix/groupSelect/group-list.tpl:12
@@ -3847,7 +3844,7 @@ msgstr ""
 #: plugins/admin/users/class_userManagement.inc:865
 #: plugins/admin/departments/class_department.inc:659
 #: plugins/personal/generic/class_user.inc:37
-#: plugins/personal/generic/class_user.inc:1669
+#: plugins/personal/generic/class_user.inc:1670
 #: plugins/personal/posix/generic.tpl:5 setup/setup_feedback.tpl:35
 #: setup/setup_feedback.tpl:36
 msgid "Generic"
@@ -4526,7 +4523,7 @@ msgstr ""
 #: plugins/admin/departments/class_organizationGeneric.inc:114
 #: plugins/admin/departments/dep-filter.xml:91
 #: plugins/admin/departments/organization.tpl:4
-#: plugins/personal/generic/class_user.inc:1720
+#: plugins/personal/generic/class_user.inc:1721
 #: plugins/personal/generic/generic.tpl:298 setup/setup_feedback.tpl:10
 #: setup/setup_feedback.tpl:12
 msgid "Organization"
@@ -4562,7 +4559,7 @@ msgstr ""
 #: plugins/admin/departments/dcObject.tpl:39
 #: plugins/admin/departments/class_department.inc:684
 #: plugins/admin/departments/organization.tpl:51
-#: plugins/personal/generic/class_user.inc:1723
+#: plugins/personal/generic/class_user.inc:1724
 #: plugins/personal/generic/generic.tpl:339
 #: plugins/personal/generic/generic.tpl:355
 msgid "Manager"
@@ -4622,7 +4619,7 @@ msgstr ""
 #: plugins/admin/departments/class_department.inc:680
 #: plugins/admin/departments/organization.tpl:82
 #: plugins/admin/departments/organization.tpl:94
-#: plugins/personal/generic/class_user.inc:1734
+#: plugins/personal/generic/class_user.inc:1735
 #: plugins/personal/generic/generic.tpl:436
 msgid "Location"
 msgstr ""
@@ -4631,7 +4628,7 @@ msgstr ""
 #: plugins/admin/departments/class_organizationGeneric.inc:129
 #: plugins/admin/departments/class_department.inc:679
 #: plugins/admin/departments/organization.tpl:86
-#: plugins/personal/generic/class_user.inc:1733
+#: plugins/personal/generic/class_user.inc:1734
 #: plugins/personal/generic/generic.tpl:444
 msgid "State"
 msgstr ""
@@ -4669,8 +4666,8 @@ msgstr ""
 #: plugins/admin/departments/class_department.inc:379
 #: plugins/admin/departments/class_department.inc:683
 #: plugins/admin/departments/organization.tpl:117
-#: plugins/personal/generic/class_user.inc:1356
-#: plugins/personal/generic/class_user.inc:1848
+#: plugins/personal/generic/class_user.inc:1357
+#: plugins/personal/generic/class_user.inc:1849
 #: plugins/personal/generic/generic.tpl:419
 #: plugins/personal/generic/generic.tpl:586
 msgid "Fax"
@@ -4710,7 +4707,7 @@ msgid "Organization name"
 msgstr ""
 
 #: plugins/admin/departments/class_organizationGeneric.inc:131
-#: plugins/personal/generic/class_user.inc:1735
+#: plugins/personal/generic/class_user.inc:1736
 #: plugins/personal/generic/generic.tpl:183
 msgid "Postal address"
 msgstr ""
@@ -4881,7 +4878,7 @@ msgstr ""
 
 #: plugins/admin/acl/class_aclRole.inc:714 plugins/admin/acl/acl-list.xml:23
 #: plugins/admin/acl/acl-list.xml:82
-#: plugins/personal/generic/class_user.inc:1665
+#: plugins/personal/generic/class_user.inc:1666
 #: plugins/personal/generic/generic.tpl:503
 msgid "Role"
 msgstr ""
@@ -5152,163 +5149,163 @@ msgstr ""
 msgid "Password configuration"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:428
+#: plugins/personal/generic/class_user.inc:429
 msgid "Cannot upload file!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:521
+#: plugins/personal/generic/class_user.inc:522
 msgid "Serial number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:543
-#: plugins/personal/generic/class_user.inc:1716
+#: plugins/personal/generic/class_user.inc:544
+#: plugins/personal/generic/class_user.inc:1717
 #: plugins/personal/generic/generic_picture.tpl:1
 msgid "User picture"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:549
-#: plugins/personal/generic/class_user.inc:571
+#: plugins/personal/generic/class_user.inc:550
+#: plugins/personal/generic/class_user.inc:572
 #: plugins/personal/generic/generic.tpl:226
 #: plugins/personal/generic/generic_certs.tpl:3
 msgid "Certificates"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:568
+#: plugins/personal/generic/class_user.inc:569
 msgid "(Not supported certificate types are marked as invalid.)"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:578
+#: plugins/personal/generic/class_user.inc:579
 #, php-format
 msgid "Certificate is valid from %s to %s and is currently %s."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:581
+#: plugins/personal/generic/class_user.inc:582
 msgid "valid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:582
+#: plugins/personal/generic/class_user.inc:583
 msgid "invalid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:587
+#: plugins/personal/generic/class_user.inc:588
 msgid "No certificate installed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:613
+#: plugins/personal/generic/class_user.inc:614
 msgid "The selected password method is no longer available."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1050
+#: plugins/personal/generic/class_user.inc:1051
 msgid ""
 "Cannot save user picture, GOsa requires the package 'imagemagick' or 'php5-"
 "imagick' to be installed!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1176
+#: plugins/personal/generic/class_user.inc:1177
 msgid "Cannot build RDN: no + allowed to build sub RDN!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1183
+#: plugins/personal/generic/class_user.inc:1184
 msgid "Cannot build RDN: attribute is not defined!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1201
+#: plugins/personal/generic/class_user.inc:1202
 msgid "Cannot build RDN: invalid attribute parameters!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1272
+#: plugins/personal/generic/class_user.inc:1273
 msgid "The selected password method requires initial configuration!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1348
-#: plugins/personal/generic/class_user.inc:1739
-#: plugins/personal/generic/class_user.inc:1842
+#: plugins/personal/generic/class_user.inc:1349
+#: plugins/personal/generic/class_user.inc:1740
+#: plugins/personal/generic/class_user.inc:1843
 #: plugins/personal/generic/generic.tpl:201
 msgid "Homepage"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1359
-#: plugins/personal/generic/class_user.inc:1851
+#: plugins/personal/generic/class_user.inc:1360
+#: plugins/personal/generic/class_user.inc:1852
 #: plugins/personal/generic/generic.tpl:403
 msgid "Mobile"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1362
-#: plugins/personal/generic/class_user.inc:1854
+#: plugins/personal/generic/class_user.inc:1363
+#: plugins/personal/generic/class_user.inc:1855
 #: plugins/personal/generic/generic.tpl:411
 msgid "Pager"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1367
-#: plugins/personal/generic/class_user.inc:1711
+#: plugins/personal/generic/class_user.inc:1368
+#: plugins/personal/generic/class_user.inc:1712
 #: plugins/personal/generic/generic.tpl:117
 msgid "Date of birth"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1482
+#: plugins/personal/generic/class_user.inc:1483
 msgid "Cannot open certificate!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1654
+#: plugins/personal/generic/class_user.inc:1655
 #: plugins/personal/generic/generic.tpl:526
 msgid "Unit"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1655
+#: plugins/personal/generic/class_user.inc:1656
 #: plugins/personal/generic/generic.tpl:551
 msgid "House identifier"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1656
+#: plugins/personal/generic/class_user.inc:1657
 #: plugins/personal/generic/generic.tpl:468
 msgid "Vocation"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1657
+#: plugins/personal/generic/class_user.inc:1658
 #: plugins/personal/generic/generic.tpl:595
 msgid "Last delivery"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1658
+#: plugins/personal/generic/class_user.inc:1659
 #: plugins/personal/generic/generic.tpl:517
 msgid "Person locality"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1659
+#: plugins/personal/generic/class_user.inc:1660
 #: plugins/personal/generic/generic.tpl:476
 msgid "Unit description"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1660
+#: plugins/personal/generic/class_user.inc:1661
 #: plugins/personal/generic/generic.tpl:485
 msgid "Subject area"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1661
+#: plugins/personal/generic/class_user.inc:1662
 #: plugins/personal/generic/generic.tpl:494
 msgid "Functional title"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1662
+#: plugins/personal/generic/class_user.inc:1663
 #: plugins/personal/generic/generic_certs.tpl:83
 msgid "Certificate serial number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1664
+#: plugins/personal/generic/class_user.inc:1665
 #: plugins/personal/generic/generic.tpl:535
 msgid "Street"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1666
+#: plugins/personal/generic/class_user.inc:1667
 #: plugins/personal/generic/generic.tpl:543
 msgid "Postal code"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1670
+#: plugins/personal/generic/class_user.inc:1671
 msgid "Generic user settings"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1674
+#: plugins/personal/generic/class_user.inc:1675
 #: plugins/personal/posix/class_posixAccount.inc:1297
 #: plugins/personal/password/class_password.inc:227
 #: plugins/personal/myaccount/class_MyAccount.inc:5
@@ -5316,7 +5313,7 @@ msgstr ""
 msgid "My account"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1692
+#: plugins/personal/generic/class_user.inc:1693
 #, php-format
 msgid ""
 "The 'accountRDN' option tells GOsa to use a placeholder pattern for "
@@ -5326,84 +5323,84 @@ msgid ""
 "disables the use of accountPrimaryAttribute and personalTitleInDn."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1706
+#: plugins/personal/generic/class_user.inc:1707
 msgid "Allow definition of custom filters"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1708
+#: plugins/personal/generic/class_user.inc:1709
 #: plugins/personal/generic/generic.tpl:92
 msgid "Personal title"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1709
+#: plugins/personal/generic/class_user.inc:1710
 #: plugins/personal/generic/generic.tpl:102
 msgid "Academic title"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1712
+#: plugins/personal/generic/class_user.inc:1713
 #: plugins/personal/generic/generic.tpl:140
 msgid "Sex"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1713
+#: plugins/personal/generic/class_user.inc:1714
 #: plugins/personal/generic/generic.tpl:154
 msgid "Preferred language"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1718
+#: plugins/personal/generic/class_user.inc:1719
 msgid "Login restrictions"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1722
+#: plugins/personal/generic/class_user.inc:1723
 msgid "Department number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1724
+#: plugins/personal/generic/class_user.inc:1725
 msgid "Employee number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1725
+#: plugins/personal/generic/class_user.inc:1726
 #: plugins/personal/generic/generic.tpl:330
 msgid "Employee type"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1727
+#: plugins/personal/generic/class_user.inc:1728
 msgid "Room number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1728
+#: plugins/personal/generic/class_user.inc:1729
 msgid "Telephone number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1729
+#: plugins/personal/generic/class_user.inc:1730
 msgid "Pager number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1730
+#: plugins/personal/generic/class_user.inc:1731
 msgid "Mobile number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1731
+#: plugins/personal/generic/class_user.inc:1732
 msgid "Fax number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1737
+#: plugins/personal/generic/class_user.inc:1738
 msgid "Home postal address"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1738
+#: plugins/personal/generic/class_user.inc:1739
 msgid "Home phone number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1740
+#: plugins/personal/generic/class_user.inc:1741
 msgid "User password method"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1741
+#: plugins/personal/generic/class_user.inc:1742
 msgid "User certificates"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1949
+#: plugins/personal/generic/class_user.inc:1950
 msgid "Entries differ"
 msgstr ""
 
