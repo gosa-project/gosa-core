@@ -2,7 +2,7 @@
     <h3>{t}This feature is only accessible for registrated instances of GOsa{/t}</h3>
 
     {if $registrationServerAvailable}
-        <button name="registerNow">{t}Registrate{/t}</button>
+        <button name="registerNow">{t}Register{/t}</button>
     {else}
         {t}Unfortunately the registration server cannot be reached, maybe the server is down for maintaince or you've no internet access!{/t}
     {/if}
