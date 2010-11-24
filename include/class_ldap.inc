@@ -899,7 +899,7 @@ class LDAP{
       $filter = escapeshellarg($filter);
 
         
-      $cmd = "ldapsearch -x -LLLL -D {$admin} {$filter} {$limit} {$scope} -H {$host} -b {$dn} -W ";
+      $cmd = "ldapsearch -x -LLLL -D {$admin} {$filter} {$limit} {$scope} -H {$host} -b {$dn} -w {$pwd} ";
 
       // Create list of process pipes
       $descriptorspec = array(
@@ -912,7 +912,6 @@ class LDAP{
       if (is_resource($process)) {
 
           // Write the password to stdin
-          fwrite($pipes[0], $pwd);
           fclose($pipes[0]);
 
           // Get results from stdout and stderr
