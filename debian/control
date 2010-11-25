@@ -247,27 +247,6 @@ Description: ldapmanager plugin for GOsa²
  GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
-Package: gosa-plugin-log
-Architecture: all
-Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
-Description: log plugin for GOsa²
- Syslog and GOsa² logging management plugin
- .
- GOsa² is a combination of system-administrator and end-user web
- interface, designed to handle LDAP based setups.
-
-Package: gosa-plugin-log-schema
-Architecture: all
-Depends: ${misc:Depends}
-Recommends: slapd
-Description: LDAP schema for GOsa² log plugin
- This package includes the LDAP schema needed by the GOsa²
- log plugin.
- .
- GOsa² is a combination of system-administrator and end-user web
- interface, designed to handle LDAP based setups.
-
 Package: gosa-plugin-mail
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
