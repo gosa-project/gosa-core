@@ -186,7 +186,7 @@ def main():
         help="retrieval base path [%default]", metavar="URL")
     op.add_option("-a", "--with-smarty", dest="smarty",
         default=False, action="store_true",
-        help="retrieval base path [%default]")
+        help="build smarty3 packages from smarty provided by gosa source")
     op.add_option("-t", "--target", dest="target",
         default=".",
         help="target directory [%default]", metavar="PATH")
