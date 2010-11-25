@@ -86,12 +86,12 @@ def build(release, base_url, target="/tmp", method="svn", key_id=None, cleanup=T
 
             # Remove smarty3 package section
             out = ""
-            control = join(tmp_dir, "debian", "control")
+            control = join(target_dir, "debian", "control")
             data = open(control, 'r')
             remove = False
 
             for line in data:
-                line = line.strip()
+                line = line.rstrip()
                 if line == "Package: smarty3":
                     remove = True
             
