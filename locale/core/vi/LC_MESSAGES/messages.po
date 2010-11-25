@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VIcore2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-09 20:24+0200\n"
+"POT-Creation-Date: 2010-10-29 19:13+0200\n"
 "PO-Revision-Date: 2008-07-04 09:59+0200\n"
 "Last-Translator: Stefan Koehler <stefan@gonicus.de>\n"
 "Language-Team: Vietnamese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,8 +23,8 @@ msgstr ""
 #: ihtml/themes/default/msg_dialog.tpl:106 ihtml/themes/default/islocked.tpl:6
 #: ihtml/themes/default/conflict.tpl:6 html/password.php:280 html/index.php:57
 #: html/index.php:63 html/index.php:406 html/index.php:412
-#: include/functions.inc:954 include/functions.inc:2686
-#: include/functions.inc:2690 include/functions.inc:2696
+#: include/functions.inc:954 include/functions.inc:2689
+#: include/functions.inc:2693 include/functions.inc:2699
 #: include/class_tabs.inc:268 include/utils/class_xml.inc:37
 #: plugins/admin/ogroups/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/groups/class_group.inc:994 plugins/admin/users/remove.tpl:2
@@ -277,12 +278,12 @@ msgstr "Mật khẩu cũ"
 #: ihtml/themes/default/accountexpired.tpl:36
 #: ihtml/themes/default/password.tpl:82 ihtml/themes/default/password.tpl:83
 #: html/password.php:196 plugins/admin/users/password.tpl:17
-#: plugins/admin/users/password.tpl:53
+#: plugins/admin/users/password.tpl:60
 #: plugins/admin/users/class_userManagement.inc:319
 #: plugins/personal/generic/password.tpl:22
-#: plugins/personal/generic/password.tpl:65
+#: plugins/personal/generic/password.tpl:72
 #: plugins/personal/password/password.tpl:27
-#: plugins/personal/password/password.tpl:70
+#: plugins/personal/password/password.tpl:78
 msgid "New password"
 msgstr "Mật khẩu mới"
 
@@ -347,7 +348,7 @@ msgstr ""
 #: ihtml/themes/default/snapshotdialog.tpl:62 include/class_acl.inc:777
 #: include/class_acl.inc:784 include/class_acl.inc:791
 #: include/class_acl.inc:797 include/utils/class_msgPool.inc:475
-#: plugins/admin/departments/class_department.inc:621
+#: plugins/admin/departments/class_department.inc:619
 msgid "Object"
 msgstr "đối tượng"
 
@@ -392,26 +393,27 @@ msgstr "Lý do để tạo ra snapshot này"
 
 #: ihtml/themes/default/snapshotdialog.tpl:87
 #: plugins/admin/users/template.tpl:48
-#: plugins/admin/departments/class_department.inc:561
-#: plugins/admin/departments/class_department.inc:643
+#: plugins/admin/departments/class_department.inc:559
+#: plugins/admin/departments/class_department.inc:641
 msgid "Continue"
 msgstr "Tiếp tục"
 
 #: ihtml/themes/default/msg_dialog.tpl:57
 #: ihtml/themes/default/msg_dialog.tpl:104 html/index.php:224
 #: html/index.php:228 include/class_management.inc:448
-#: include/class_management.inc:584 include/class_management.inc:916
-#: include/password-methods/class_password-methods.inc:250
-#: include/password-methods/class_password-methods.inc:309
-#: include/password-methods/class_password-methods.inc:320
-#: include/class_listing.inc:480 include/functions.inc:3393
-#: include/functions.inc:3407 include/functions.inc:3437
-#: include/functions.inc:3445 include/functions.inc:3457
-#: include/functions.inc:3461 include/functions.inc:3476
-#: include/functions.inc:3485 include/functions.inc:3545
-#: include/class_tabs.inc:56 include/class_plugin.inc:670
-#: include/class_plugin.inc:712 include/class_plugin.inc:755
-#: include/class_plugin.inc:1642 include/utils/class_xml.inc:40
+#: include/class_management.inc:584
+#: include/password-methods/class_password-methods.inc:269
+#: include/password-methods/class_password-methods.inc:328
+#: include/password-methods/class_password-methods.inc:339
+#: include/class_listing.inc:480 include/functions.inc:3399
+#: include/functions.inc:3413 include/functions.inc:3443
+#: include/functions.inc:3451 include/functions.inc:3463
+#: include/functions.inc:3467 include/functions.inc:3482
+#: include/functions.inc:3491 include/functions.inc:3551
+#: include/class_tabs.inc:56 include/class_plugin.inc:679
+#: include/class_plugin.inc:724 include/class_plugin.inc:770
+#: include/class_plugin.inc:1269 include/class_plugin.inc:1276
+#: include/class_plugin.inc:1766 include/utils/class_xml.inc:40
 #: include/utils/class_msgPool.inc:154 include/utils/class_msgPool.inc:166
 #: include/utils/class_msgPool.inc:184 include/utils/class_msgPool.inc:457
 #: include/utils/class_msgPool.inc:478 include/utils/class_msgPool.inc:497
@@ -437,12 +439,13 @@ msgstr "Tiếp tục"
 #: plugins/personal/generic/class_user.inc:297
 #: plugins/personal/generic/class_user.inc:408
 #: plugins/personal/generic/class_user.inc:503
-#: plugins/personal/generic/class_user.inc:801
-#: plugins/personal/generic/class_user.inc:1190
-#: plugins/personal/generic/class_user.inc:1197
-#: plugins/personal/generic/class_user.inc:1215
-#: plugins/personal/generic/class_user.inc:1485
-#: plugins/personal/generic/class_user.inc:1783
+#: plugins/personal/generic/class_user.inc:802
+#: plugins/personal/generic/class_user.inc:1037
+#: plugins/personal/generic/class_user.inc:1176
+#: plugins/personal/generic/class_user.inc:1183
+#: plugins/personal/generic/class_user.inc:1201
+#: plugins/personal/generic/class_user.inc:1471
+#: plugins/personal/generic/class_user.inc:1775
 #: setup/class_setupStep_Migrate.inc:1201 setup/setup_checks.tpl:30
 #: setup/setup_checks.tpl:91
 #, php-format
@@ -488,15 +491,9 @@ msgid "Your password has been changed successfully."
 msgstr "Mật khẩu của bạn đã được thay đổi thành công."
 
 #: ihtml/themes/default/password.tpl:41 html/main.php:198
-#: plugins/admin/users/class_userManagement.inc:390
-#: plugins/personal/password/class_password.inc:128
-#: plugins/personal/password/class_password.inc:131
-#: plugins/personal/password/class_password.inc:134
-#: plugins/personal/password/class_password.inc:137
-#: plugins/personal/password/class_password.inc:140
-#: plugins/personal/password/class_password.inc:143
-#: plugins/personal/password/class_password.inc:157
-#: plugins/personal/password/class_password.inc:163
+#: plugins/admin/users/class_userManagement.inc:391
+#: plugins/personal/password/class_password.inc:160
+#: plugins/personal/password/class_password.inc:166
 msgid "Password change"
 msgstr "Thay đổi mật khẩu"
 
@@ -524,9 +521,9 @@ msgstr "Mật khẩu mới được lặp lại"
 
 #: ihtml/themes/default/password.tpl:90
 #: plugins/personal/generic/password.tpl:32
-#: plugins/personal/generic/password.tpl:75
+#: plugins/personal/generic/password.tpl:82
 #: plugins/personal/password/password.tpl:37
-#: plugins/personal/password/password.tpl:80
+#: plugins/personal/password/password.tpl:88
 msgid "Password strength"
 msgstr "Ưu điểm của mật khẩu"
 
@@ -659,8 +656,8 @@ msgstr "Cấu hình GOsa %s/%s không đọc được. Bãi bỏ."
 #: include/password-methods/class_password-methods-sha.inc:48
 #: include/class_SnapshotHandler.inc:45 include/class_SnapshotHandler.inc:58
 #: include/class_SnapshotHandler.inc:76 include/functions.inc:825
-#: include/functions.inc:3067 include/functions.inc:3099
-#: include/functions.inc:3112 include/utils/class_timezone.inc:47
+#: include/functions.inc:3073 include/functions.inc:3105
+#: include/functions.inc:3118 include/utils/class_timezone.inc:47
 #: include/class_config.inc:155 include/class_config.inc:695
 #: include/class_config.inc:1146 include/class_config.inc:1159
 #: include/class_config.inc:1177 include/class_pluglist.inc:182
@@ -690,7 +687,7 @@ msgid "Error: Password method not available!"
 msgstr "Lỗi: Phương pháp mật khẩu không có!"
 
 #: html/password.php:193 plugins/admin/users/class_userManagement.inc:316
-#: plugins/personal/password/class_password.inc:132
+#: plugins/personal/password/class_password.inc:117
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -698,11 +695,11 @@ msgstr ""
 "Các mật khẩu bạn vừa nhập vào: \"Mật khẩu mới\" và \"Mật khẩu lặp lại\" "
 "không giống nhau."
 
-#: html/password.php:204 plugins/personal/password/class_password.inc:138
+#: html/password.php:204 plugins/personal/password/class_password.inc:121
 msgid "The password used as new and current are too similar."
 msgstr "Mật khẩu mới và mật khẩu cũ quá giống nhau."
 
-#: html/password.php:209 plugins/personal/password/class_password.inc:141
+#: html/password.php:209 plugins/personal/password/class_password.inc:123
 msgid "The password used as new is to short."
 msgstr "Mật khẩu mới cần được cắt ngắn lại."
 
@@ -710,11 +707,11 @@ msgstr "Mật khẩu mới cần được cắt ngắn lại."
 #: plugins/admin/groups/singleUserSelect/singleUser-list.xml:56
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:65
 #: plugins/admin/users/template.tpl:32 plugins/admin/users/user-list.xml:65
-#: plugins/personal/generic/class_user.inc:1313
+#: plugins/personal/generic/class_user.inc:1299
+#: plugins/personal/generic/class_user.inc:1317
 #: plugins/personal/generic/class_user.inc:1331
-#: plugins/personal/generic/class_user.inc:1345
-#: plugins/personal/generic/class_user.inc:1347
-#: plugins/personal/generic/generic.tpl:82
+#: plugins/personal/generic/class_user.inc:1333
+#: plugins/personal/generic/generic.tpl:84
 #: plugins/personal/generic/paste_generic.tpl:15
 msgid "Login"
 msgstr "Đăng nhập"
@@ -773,34 +770,34 @@ msgstr ""
 
 #: html/index.php:254 html/index.php:265 html/index.php:278
 #: include/class_SnapshotHandler.inc:124 include/class_SnapshotHandler.inc:281
-#: include/class_SnapshotHandler.inc:329 include/class_SnapshotHandler.inc:333
-#: include/class_SnapshotHandler.inc:348 include/class_SnapshotHandler.inc:383
-#: include/class_SnapshotHandler.inc:438 include/class_SnapshotHandler.inc:503
-#: include/class_SnapshotHandler.inc:518 include/class_acl.inc:1233
+#: include/class_SnapshotHandler.inc:330 include/class_SnapshotHandler.inc:334
+#: include/class_SnapshotHandler.inc:349 include/class_SnapshotHandler.inc:384
+#: include/class_SnapshotHandler.inc:439 include/class_SnapshotHandler.inc:504
+#: include/class_SnapshotHandler.inc:519 include/class_acl.inc:1233
 #: include/class_acl.inc:1329 include/functions.inc:483
 #: include/functions.inc:518 include/functions.inc:526
 #: include/functions.inc:571 include/functions.inc:840
 #: include/functions.inc:889 include/functions.inc:946
-#: include/functions.inc:999 include/functions.inc:3046
-#: include/functions.inc:3319 include/class_plugin.inc:1319
-#: include/class_plugin.inc:1368 include/class_plugin.inc:1372
-#: include/class_plugin.inc:1388 include/class_plugin.inc:1428
-#: include/class_plugin.inc:1486 include/class_plugin.inc:1552
-#: include/class_plugin.inc:1567 include/class_ldap.inc:756
-#: include/class_ldap.inc:1222 include/class_config.inc:318
+#: include/functions.inc:999 include/functions.inc:3052
+#: include/functions.inc:3325 include/class_plugin.inc:1442
+#: include/class_plugin.inc:1492 include/class_plugin.inc:1496
+#: include/class_plugin.inc:1512 include/class_plugin.inc:1552
+#: include/class_plugin.inc:1610 include/class_plugin.inc:1676
+#: include/class_plugin.inc:1691 include/class_ldap.inc:756
+#: include/class_ldap.inc:1219 include/class_config.inc:318
 #: plugins/admin/ogroups/class_ogroup.inc:888
 #: plugins/admin/ogroups/class_ogroup.inc:902
 #: plugins/admin/groups/class_group.inc:697
 #: plugins/admin/groups/class_group.inc:1018
 #: plugins/admin/departments/class_department.inc:279
 #: plugins/admin/departments/class_department.inc:476
-#: plugins/admin/departments/class_department.inc:750
-#: plugins/admin/departments/class_department.inc:781
+#: plugins/admin/departments/class_department.inc:748
+#: plugins/admin/departments/class_department.inc:779
 #: plugins/admin/acl/class_aclRole.inc:613
 #: plugins/admin/acl/class_aclRole.inc:653
 #: plugins/admin/acl/class_aclRole.inc:667
 #: plugins/personal/generic/class_user.inc:716
-#: plugins/personal/generic/class_user.inc:1112
+#: plugins/personal/generic/class_user.inc:1098
 #: plugins/personal/posix/class_posixAccount.inc:631
 #: plugins/personal/posix/class_posixAccount.inc:963
 #: setup/class_setupStep_Migrate.inc:1212
@@ -871,9 +868,10 @@ msgid "PHP configuration"
 msgstr "Cấu hình PHP"
 
 #: html/main.php:168
+#, fuzzy
 msgid ""
-"FATAL: Register globals is on. GOsa will refuse to login unless this is "
-"fixed by an administrator."
+"Fatal error: Register globals is on. GOsa will refuse to login unless this "
+"is fixed by an administrator."
 msgstr ""
 "LỖI NGHIÊM TRỌNG: Đăng ký toàn cầu đang bật. GOsa sẽ từ chối đăng nhập vào "
 "trừ khi lỗi này được một admin sửa."
@@ -895,8 +893,8 @@ msgid "Plugin"
 msgstr "Plugin"
 
 #: html/main.php:374
-#, php-format
-msgid "FATAL: Cannot find any plugin definitions for plugin '%s'!"
+#, fuzzy, php-format
+msgid "Fatal error: Cannot find any plugin definitions for plugin '%s'!"
 msgstr ""
 "LỖI NGHIÊM TRỌNG: không thể tìm thấy bất cứ  plugin definition nào cho "
 "plugin '%s'!"
@@ -909,8 +907,8 @@ msgstr "Lỗi cấu hình"
 #: html/main.php:389
 #, php-format
 msgid ""
-"FATAL: not all POST variables have been transfered by PHP - please inform "
-"your administrator!"
+"Fatal error: not all POST variables have been transfered by PHP - please "
+"inform your administrator!"
 msgstr ""
 
 #: html/helpviewer.php:64
@@ -951,29 +949,29 @@ msgstr ""
 
 #: include/class_management.inc:292 include/class_management.inc:427
 #: include/class_management.inc:474 include/class_management.inc:511
-#: include/class_management.inc:525 include/class_plugin.inc:1590
-#: include/class_plugin.inc:1602 include/class_plugin.inc:1617
-#: include/class_plugin.inc:1630
+#: include/class_management.inc:525 include/class_plugin.inc:1714
+#: include/class_plugin.inc:1726 include/class_plugin.inc:1741
+#: include/class_plugin.inc:1754
 #: plugins/admin/users/class_userManagement.inc:236
-#: plugins/admin/users/class_userManagement.inc:744
+#: plugins/admin/users/class_userManagement.inc:745
 msgid "Permission"
 msgstr "Cho phép"
 
 #: include/class_management.inc:353
-#: plugins/admin/users/class_userManagement.inc:702
-#: plugins/admin/users/class_userManagement.inc:706
+#: plugins/admin/users/class_userManagement.inc:703
+#: plugins/admin/users/class_userManagement.inc:707
 #: plugins/admin/acl/class_aclManagement.inc:98
 msgid "Permission error"
 msgstr "Lỗi về cấp phép"
 
-#: include/class_management.inc:427 include/class_plugin.inc:1590
+#: include/class_management.inc:427 include/class_plugin.inc:1714
 #, php-format
 msgid "You are not allowed to create a snapshot for %s."
 msgstr "Bạn không được phép tạo ra snapshot cho %s."
 
 #: include/class_management.inc:474 include/class_management.inc:511
-#: include/class_management.inc:525 include/class_plugin.inc:1602
-#: include/class_plugin.inc:1617 include/class_plugin.inc:1630
+#: include/class_management.inc:525 include/class_plugin.inc:1726
+#: include/class_plugin.inc:1741 include/class_plugin.inc:1754
 #, php-format
 msgid "You are not allowed to restore a snapshot for %s."
 msgstr "Bạn không được phép phục hồi một snapshot cho %s."
@@ -999,7 +997,7 @@ msgstr "Kết nối socket đến  '%s:%s' thất bại:  '%s'"
 msgid "Socket timeout of %s seconds reached."
 msgstr "Thời hạn cho socket là  %s giây đã đến."
 
-#: include/password-methods/class_password-methods.inc:250
+#: include/password-methods/class_password-methods.inc:269
 msgid "Cannot find a suitable password method for the current hash!"
 msgstr ""
 "Không thể tìm thấy một phương pháp mật khẩu phù hợp cho hàm băm hiện tại!"
@@ -1067,7 +1065,7 @@ msgid "Use ACL defined in role"
 msgstr "Sử dụng ACL được xác định trong vai trò"
 
 #: include/class_acl.inc:233 plugins/admin/users/class_userManagement.inc:25
-#: plugins/personal/generic/class_user.inc:1674
+#: plugins/personal/generic/class_user.inc:1666
 #: setup/class_setupStep_Migrate.inc:1040
 msgid "Users"
 msgstr "Người dùng"
@@ -1080,19 +1078,19 @@ msgstr "Các nhóm"
 
 #: include/class_acl.inc:496 include/class_listing.inc:242
 #: include/class_listing.inc:999 include/class_listing.inc:1001
-#: include/class_sortableListing.inc:225
+#: include/class_sortableListing.inc:261
 #: plugins/admin/acl/class_aclRole.inc:372
 msgid "Up"
 msgstr "Lên"
 
 #: include/class_acl.inc:498 include/class_listing.inc:242
-#: include/class_sortableListing.inc:225
+#: include/class_sortableListing.inc:261
 #: plugins/admin/acl/class_aclRole.inc:374
 msgid "Down"
 msgstr "Xuống"
 
 #: include/class_acl.inc:503 include/class_acl.inc:551
-#: include/class_sortableListing.inc:192 include/class_sortableListing.inc:194
+#: include/class_sortableListing.inc:224 include/class_sortableListing.inc:226
 #: plugins/admin/ogroups/ogroup-list.xml:91
 #: plugins/admin/groups/group-list.xml:108
 #: plugins/admin/users/user-list.xml:114
@@ -1112,7 +1110,7 @@ msgid "ACL"
 msgstr "ACL"
 
 #: include/class_acl.inc:507 include/class_acl.inc:555
-#: include/class_sortableListing.inc:197 include/class_sortableListing.inc:199
+#: include/class_sortableListing.inc:229 include/class_sortableListing.inc:231
 #: include/utils/class_msgPool.inc:342 plugins/admin/acl/class_aclRole.inc:381
 #: plugins/admin/acl/class_aclRole.inc:430
 #, php-format
@@ -1180,8 +1178,8 @@ msgstr "Hoàn thành đối tượng"
 #: include/class_session.inc:101 include/class_session.inc:127
 #: include/functions.inc:611 include/functions.inc:815
 #: include/functions.inc:933 include/functions.inc:1331
-#: include/functions.inc:2414 include/functions.inc:2448
-#: include/functions.inc:2468 include/class_ldap.inc:693
+#: include/functions.inc:2421 include/functions.inc:2451
+#: include/functions.inc:2471 include/class_ldap.inc:693
 #: include/class_ldap.inc:744 include/class_log.inc:87
 #: include/class_CopyPasteHandler.inc:160
 #: include/class_CopyPasteHandler.inc:274
@@ -1287,26 +1285,26 @@ msgid "Actions"
 msgstr "Các thao tác"
 
 #: include/class_listing.inc:1380 include/class_listing.inc:1430
-#: include/class_plugin.inc:2114
+#: include/class_plugin.inc:2238
 msgid "Copy"
 msgstr "Copy"
 
 #: include/class_listing.inc:1386 include/class_listing.inc:1420
-#: include/class_plugin.inc:2118
+#: include/class_plugin.inc:2242
 msgid "Cut"
 msgstr "Cut"
 
 #: include/class_listing.inc:1394 include/class_listing.inc:1396
-#: include/class_plugin.inc:2125 include/class_plugin.inc:2128
+#: include/class_plugin.inc:2249 include/class_plugin.inc:2252
 #: include/class_CopyPasteHandler.inc:570
 msgid "Paste"
 msgstr "Paste"
 
-#: include/class_listing.inc:1420 include/class_plugin.inc:2072
+#: include/class_listing.inc:1420 include/class_plugin.inc:2196
 msgid "Cut this entry"
 msgstr "Cắt entry này"
 
-#: include/class_listing.inc:1430 include/class_plugin.inc:2080
+#: include/class_listing.inc:1430 include/class_plugin.inc:2204
 msgid "Copy this entry"
 msgstr "Copy entry này"
 
@@ -1320,23 +1318,27 @@ msgid "Export list"
 msgstr ""
 
 #: include/class_listing.inc:1513 include/class_listing.inc:1514
-#: include/class_SnapShotDialog.inc:135 include/class_plugin.inc:2046
+#: include/class_SnapShotDialog.inc:135 include/class_plugin.inc:2170
 msgid "Restore snapshot"
 msgstr "Phục hồi lại snapshot"
 
-#: include/class_listing.inc:1523 include/class_plugin.inc:2053
+#: include/class_listing.inc:1523 include/class_plugin.inc:2177
 msgid "Create snapshot"
 msgstr "Tạo ra snapshot"
 
-#: include/class_listing.inc:1524 include/class_plugin.inc:2054
+#: include/class_listing.inc:1524 include/class_plugin.inc:2178
 msgid "Create a new snapshot from this object"
 msgstr "Tạo ra một snapshot mới từ đối tượng này"
 
-#: include/class_sortableListing.inc:194
+#: include/class_sortableListing.inc:221
+msgid "Sortable list"
+msgstr ""
+
+#: include/class_sortableListing.inc:226
 msgid "Edit this entry"
 msgstr "Hiệu chỉnh entry này"
 
-#: include/class_sortableListing.inc:199
+#: include/class_sortableListing.inc:231
 msgid "Delete this entry"
 msgstr "Xóa bỏ entry"
 
@@ -1413,7 +1415,7 @@ msgstr ""
 "Thiết lập kích cỡ mới cho %s và cho tôi thấy tin nhắn nếu giới hạn này vẫn "
 "vượt quá tiêu chuẩn"
 
-#: include/functions.inc:1272 plugins/personal/generic/generic.tpl:221
+#: include/functions.inc:1272 plugins/personal/generic/generic.tpl:223
 msgid "Configure"
 msgstr "Cấu hình"
 
@@ -1442,54 +1444,54 @@ msgstr "các entry cho mỗi trang"
 msgid "Apply filter"
 msgstr "Áp dụng bộ lọc"
 
-#: include/functions.inc:2252 include/class_filter.inc:281
+#: include/functions.inc:2259 include/class_filter.inc:281
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:2306
+#: include/functions.inc:2313
 #, fuzzy, php-format
 msgid "GOsa %s"
 msgstr "GOsa"
 
-#: include/functions.inc:2313
+#: include/functions.inc:2320
 #, fuzzy, php-format
 msgid "GOsa %s snapshot (Rev %s)"
 msgstr "snapshot phát triển GOsa (Rev %s)"
 
-#: include/functions.inc:2318
+#: include/functions.inc:2325
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "snapshot phát triển GOsa (Rev %s)"
 
-#: include/functions.inc:2414
+#: include/functions.inc:2421
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr "File '%s' không thể bị xóa."
 
-#: include/functions.inc:2448 include/functions.inc:2468
+#: include/functions.inc:2451 include/functions.inc:2471
 msgid "Cannot write to revision file!"
 msgstr "Không thể viết lên revision file!"
 
-#: include/functions.inc:2686 include/functions.inc:2690
-#: include/functions.inc:2696
+#: include/functions.inc:2689 include/functions.inc:2693
+#: include/functions.inc:2699
 #, fuzzy
 msgid "'baseIdHook' is not available. Using default base!"
 msgstr "'base_hook' không có. Hãy sử dụng cơ sở mặc định!"
 
-#: include/functions.inc:2720
+#: include/functions.inc:2723
 msgid "LDAP warning"
 msgstr "Cảnh báo LDAP"
 
-#: include/functions.inc:2720
+#: include/functions.inc:2723
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr ""
 "Không thể dùng thông tin lược đồ từ server. Không thể kiểm tra giản đồ!"
 
-#: include/functions.inc:2746
+#: include/functions.inc:2749
 msgid "Used to store account specific informations."
 msgstr "Đã từng lưu trữ thông tin cụ thể về tài khoản."
 
-#: include/functions.inc:2753
+#: include/functions.inc:2756
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
@@ -1497,27 +1499,27 @@ msgstr ""
 "Đã từng khóa các entry hiện đang được hiệu chỉnh nhằm tránh các thay đổi "
 "khác nhau tại cùng một thời điểm."
 
-#: include/functions.inc:2798
+#: include/functions.inc:2801
 #, php-format
 msgid "Missing required object class '%s'!"
 msgstr "Lớp đối tượng '%s' được yêu cầu mất tích!"
 
-#: include/functions.inc:2801
+#: include/functions.inc:2804
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr "Lớp đối tượng lựa chọn '%s' mất tích!"
 
-#: include/functions.inc:2806
+#: include/functions.inc:2809
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr "Phiên bản không phù hợp với lớp đối tượng '%s' được yêu cầu (!=%s)!"
 
-#: include/functions.inc:2809
+#: include/functions.inc:2812
 #, php-format
 msgid "Class(es) available"
 msgstr "Đã có lớp"
 
-#: include/functions.inc:2831
+#: include/functions.inc:2834
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
@@ -1525,7 +1527,7 @@ msgstr ""
 "Bạn vừa bật lựa chọn rfc2307bis lên trên bước ' cài đặt ldap', nhưng cấu "
 "hình giản đồ của bạn không hỗ trợ lựa chọn này."
 
-#: include/functions.inc:2832
+#: include/functions.inc:2835
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
@@ -1533,7 +1535,7 @@ msgstr ""
 "Để có thể sử dụng được nhóm conform rfc2307bis, objectClass "
 "'posixGroup' (nhóm posix) phải được hỗ trợ     "
 
-#: include/functions.inc:2836
+#: include/functions.inc:2839
 msgid ""
 "Your schema is configured to support the rfc2307bis group, but you have "
 "disabled this option on the 'ldap setup' step."
@@ -1541,51 +1543,51 @@ msgstr ""
 "Lược đồ của bạn được cấu hình để hỗ trợ nhóm rfc2307bis, nhưng bạn đã vừa "
 "tắt chức năng này đi trong bước 'cài đặt ldap'."
 
-#: include/functions.inc:2837
+#: include/functions.inc:2840
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr "ObjectClass (Lớp đối tượng) 'posixGroup' phải CÓ CẤU TRÚC"
 
-#: include/functions.inc:2861
+#: include/functions.inc:2864
 msgid "German"
 msgstr "Tiếng Đức"
 
-#: include/functions.inc:2862
+#: include/functions.inc:2865
 msgid "French"
 msgstr "Tiếng Pháp"
 
-#: include/functions.inc:2863
+#: include/functions.inc:2866
 msgid "Italian"
 msgstr "Tiếng Ý"
 
-#: include/functions.inc:2864
+#: include/functions.inc:2867
 msgid "Spanish"
 msgstr "Tiếng Tây Ban Nha"
 
-#: include/functions.inc:2865
+#: include/functions.inc:2868
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: include/functions.inc:2866
+#: include/functions.inc:2869
 msgid "Dutch"
 msgstr "Tiếng Hà Lan"
 
-#: include/functions.inc:2867
+#: include/functions.inc:2870
 msgid "Polish"
 msgstr "Tiếng Phần Lan"
 
-#: include/functions.inc:2869
+#: include/functions.inc:2872
 msgid "Chinese"
 msgstr "Tiếng Trung Quốc"
 
-#: include/functions.inc:2870
+#: include/functions.inc:2873
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: include/functions.inc:2871
+#: include/functions.inc:2874
 msgid "Russian"
 msgstr "Tiếng Nga"
 
-#: include/functions.inc:3066
+#: include/functions.inc:3072
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -1593,52 +1595,52 @@ msgstr ""
 "Lệnh '%s', được xác định là POSTMODIFY (thay đổi sau) cho chế độ plugin '%s' "
 "hình như không tồn tại."
 
-#: include/functions.inc:3099
+#: include/functions.inc:3105
 msgid "Cannot generate samba hash!"
 msgstr "Không thể sinh ra hàm băm samba!"
 
-#: include/functions.inc:3112
+#: include/functions.inc:3118
 #, php-format
 msgid ""
 "Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
 msgstr ""
 
-#: include/functions.inc:3393 include/functions.inc:3407
-#: include/functions.inc:3445 include/functions.inc:3457
-#: include/functions.inc:3461 include/functions.inc:3476
-#: include/functions.inc:3485
+#: include/functions.inc:3399 include/functions.inc:3413
+#: include/functions.inc:3451 include/functions.inc:3463
+#: include/functions.inc:3467 include/functions.inc:3482
+#: include/functions.inc:3491
 #, fuzzy
 msgid "Cannot allocate a free ID:"
 msgstr "Không thể phân phối một ID miễn phí!"
 
-#: include/functions.inc:3393
+#: include/functions.inc:3399
 msgid "unknown idAllocation method!"
 msgstr ""
 
-#: include/functions.inc:3407
+#: include/functions.inc:3413
 #, php-format
 msgid "%sPoolMin >= %sPoolMax!"
 msgstr ""
 
-#: include/functions.inc:3437
+#: include/functions.inc:3443
 #, fuzzy
 msgid "Cannot create sambaUnixIdPool entry!"
 msgstr "Không thể tạo ra folder '%s'!"
 
-#: include/functions.inc:3445
+#: include/functions.inc:3451
 msgid "sambaUnixIdPool is not unique!"
 msgstr ""
 
-#: include/functions.inc:3457 include/functions.inc:3461
+#: include/functions.inc:3463 include/functions.inc:3467
 #, fuzzy
 msgid "no ID available!"
 msgstr "Không có mẫu nào!"
 
-#: include/functions.inc:3485
+#: include/functions.inc:3491
 msgid "maximum tries exceeded!"
 msgstr ""
 
-#: include/functions.inc:3545
+#: include/functions.inc:3551
 msgid "Cannot allocate a free ID!"
 msgstr "Không thể phân phối một ID miễn phí!"
 
@@ -1698,7 +1700,7 @@ msgstr "Y-m-d, H:i:s (Năm-tháng-ngày)"
 #: plugins/admin/departments/country.tpl:19
 #: plugins/admin/departments/dcObject.tpl:19
 #: plugins/admin/departments/class_department.inc:359
-#: plugins/admin/departments/class_department.inc:666
+#: plugins/admin/departments/class_department.inc:664
 #: plugins/admin/departments/organization.tpl:19
 #: plugins/admin/acl/class_aclRole.inc:735 plugins/admin/acl/acl-list.xml:57
 #: plugins/admin/acl/acl_role.tpl:17
@@ -1817,7 +1819,7 @@ msgstr "Tranh luận"
 msgid "Search in subtrees"
 msgstr "Tìm kiếm tại các cây con"
 
-#: include/class_plugin.inc:521
+#: include/class_plugin.inc:527
 msgid ""
 "The object has changed since opened in GOsa. All changes that may be done by "
 "others get lost if you save this entry!"
@@ -1825,29 +1827,29 @@ msgstr ""
 "Đối tượng đã bị thay đổi từ khi được mở trong GOsa. Nếu bạn lưu entry này "
 "lại, khi các đối tượng khác lạc hướng có thể gây ra thêm tất cả các thay đổi!"
 
-#: include/class_plugin.inc:1844
+#: include/class_plugin.inc:1968
 msgid "Changing ACL dn"
 msgstr "Thay đổi ACL dn"
 
-#: include/class_plugin.inc:1844
+#: include/class_plugin.inc:1968
 msgid "from"
 msgstr "Từ"
 
-#: include/class_plugin.inc:1845 setup/class_setupStep_Migrate.inc:1250
+#: include/class_plugin.inc:1969 setup/class_setupStep_Migrate.inc:1250
 #: setup/class_setupStep_Migrate.inc:1300
 #: setup/class_setupStep_Migrate.inc:1348
 msgid "to"
 msgstr "đến"
 
-#: include/class_plugin.inc:2028 include/class_plugin.inc:2030
+#: include/class_plugin.inc:2152 include/class_plugin.inc:2154
 msgid "Restore"
 msgstr "Phục hồi"
 
-#: include/class_plugin.inc:2072
+#: include/class_plugin.inc:2196
 msgid "cut"
 msgstr "cắt"
 
-#: include/class_plugin.inc:2080
+#: include/class_plugin.inc:2204
 msgid "copy"
 msgstr "Copy"
 
@@ -2154,8 +2156,8 @@ msgstr "PHP mở rộng %s mất tích!"
 #: include/utils/class_msgPool.inc:336
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:123
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-list.xml:83
-#: plugins/personal/generic/generic.tpl:251
-#: plugins/personal/generic/generic.tpl:269
+#: plugins/personal/generic/generic.tpl:253
+#: plugins/personal/generic/generic.tpl:271
 #: setup/class_setupStep_Migrate.inc:2869
 #, php-format
 msgid "Add"
@@ -2483,7 +2485,12 @@ msgstr "Trong khi chạy trên '%s' sử dụng LDAP server '%s'"
 msgid "while operating on LDAP server %s"
 msgstr "Trong khi chạy trên LDAP server %s"
 
-#: include/class_ldap.inc:1055
+#: include/class_ldap.inc:890
+#, php-format
+msgid "Missing command line programm '%s'!"
+msgstr ""
+
+#: include/class_ldap.inc:1052
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -2492,7 +2499,7 @@ msgstr ""
 "Đây không phải là một DN hợp lệ: '%s'. Khóa để chặn việc nạp thêm phải được "
 "bắt đầu với 'dn:...' trong dòng %s "
 
-#: include/class_ldap.inc:1084
+#: include/class_ldap.inc:1081
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -2569,7 +2576,7 @@ msgstr "Định dạng cấu hình đã thay đổi. Xin hãy chạy lại cài 
 #: include/class_pluglist.inc:316
 #: plugins/admin/departments/class_department.inc:145
 #: plugins/personal/generic/class_user.inc:273
-#: plugins/personal/generic/class_user.inc:1872
+#: plugins/personal/generic/class_user.inc:1864
 msgid "Unknown"
 msgstr "Không rõ"
 
@@ -2621,10 +2628,10 @@ msgstr "Xin hãy sửa lỗi trên và reload trang trên."
 #: plugins/generic/references/class_reference.inc:41
 #: plugins/admin/ogroups/class_ogroup.inc:966
 #: plugins/admin/groups/class_group.inc:1174
-#: plugins/admin/users/class_userManagement.inc:870
-#: plugins/admin/departments/class_department.inc:656
+#: plugins/admin/users/class_userManagement.inc:871
+#: plugins/admin/departments/class_department.inc:654
 #: plugins/personal/generic/class_user.inc:37
-#: plugins/personal/generic/class_user.inc:1668
+#: plugins/personal/generic/class_user.inc:1660
 #: plugins/personal/posix/generic.tpl:4 setup/setup_feedback.tpl:55
 msgid "Generic"
 msgstr "Thông tin chung"
@@ -2637,7 +2644,7 @@ msgstr "UNIX"
 #: plugins/generic/references/class_reference.inc:45
 #: plugins/admin/ogroups/tabs_ogroups.inc:148
 #: plugins/admin/groups/class_groupManagement.inc:164
-#: plugins/admin/users/class_userManagement.inc:877
+#: plugins/admin/users/class_userManagement.inc:878
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:70
 msgid "Mail"
 msgstr "Thư"
@@ -2645,14 +2652,14 @@ msgstr "Thư"
 #: plugins/generic/references/class_reference.inc:47
 #: plugins/generic/references/class_reference.inc:49
 #: plugins/admin/groups/class_groupManagement.inc:172
-#: plugins/admin/users/class_userManagement.inc:882
+#: plugins/admin/users/class_userManagement.inc:883
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:78
 msgid "Samba"
 msgstr "Samba"
 
 #: plugins/generic/references/class_reference.inc:51
-#: plugins/admin/users/class_userManagement.inc:894
+#: plugins/admin/users/class_userManagement.inc:895
 msgid "FAX"
 msgstr "Fax"
 
@@ -2682,8 +2689,8 @@ msgstr "Nhóm "
 #: plugins/admin/departments/dep-list.xml:71
 #: plugins/admin/departments/dep-list.xml:138
 #: plugins/admin/departments/class_departmentManagement.inc:249
-#: plugins/personal/generic/class_user.inc:1695
-#: plugins/personal/generic/generic.tpl:307
+#: plugins/personal/generic/class_user.inc:1687
+#: plugins/personal/generic/generic.tpl:309
 msgid "Department"
 msgstr "Bộ phận"
 
@@ -2691,14 +2698,14 @@ msgstr "Bộ phận"
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:55
 #: plugins/admin/ogroups/class_ogroupManagement.inc:188
 #: plugins/admin/groups/class_groupManagement.inc:180
-#: plugins/admin/users/class_userManagement.inc:898
+#: plugins/admin/users/class_userManagement.inc:899
 #: plugins/admin/departments/generic.tpl:106
 #: plugins/admin/departments/class_department.inc:370
 #: plugins/admin/departments/organization.tpl:105
-#: plugins/personal/generic/class_user.inc:1356
-#: plugins/personal/generic/class_user.inc:1819
-#: plugins/personal/generic/generic.tpl:398
-#: plugins/personal/generic/generic.tpl:579
+#: plugins/personal/generic/class_user.inc:1342
+#: plugins/personal/generic/class_user.inc:1811
+#: plugins/personal/generic/generic.tpl:400
+#: plugins/personal/generic/generic.tpl:581
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:86
 msgid "Phone"
 msgstr "Số điện thoại"
@@ -2825,8 +2832,8 @@ msgstr "Người dùng"
 #: plugins/admin/groups/class_group.inc:1089
 #: plugins/admin/groups/class_group.inc:1096
 #: plugins/admin/groups/class_group.inc:1183
-#: plugins/admin/users/class_userManagement.inc:538
-#: plugins/admin/users/class_userManagement.inc:585
+#: plugins/admin/users/class_userManagement.inc:539
+#: plugins/admin/users/class_userManagement.inc:586
 #: plugins/admin/users/user-filter.tpl:24
 #: plugins/admin/departments/class_domain.inc:47
 #: plugins/admin/departments/class_domain.inc:49
@@ -2834,7 +2841,7 @@ msgstr "Người dùng"
 #: plugins/admin/departments/class_domain.inc:56
 #: plugins/admin/departments/class_domain.inc:58
 #: plugins/admin/departments/class_domain.inc:90
-#: plugins/admin/departments/dep-filter.tpl:13
+#: plugins/admin/departments/dep-filter.tpl:15
 #: plugins/admin/departments/class_localityGeneric.inc:48
 #: plugins/admin/departments/class_localityGeneric.inc:50
 #: plugins/admin/departments/class_localityGeneric.inc:55
@@ -2866,10 +2873,10 @@ msgstr "Người dùng"
 #: plugins/admin/acl/class_aclRole.inc:755 plugins/admin/acl/acl-list.xml:49
 #: plugins/admin/acl/paste_role.tpl:4 plugins/admin/acl/acl-filter.tpl:21
 #: plugins/admin/acl/acl_role.tpl:7
-#: plugins/personal/generic/class_user.inc:1318
-#: plugins/personal/generic/class_user.inc:1336
-#: plugins/personal/generic/class_user.inc:1378
-#: plugins/personal/generic/class_user.inc:1834
+#: plugins/personal/generic/class_user.inc:1304
+#: plugins/personal/generic/class_user.inc:1322
+#: plugins/personal/generic/class_user.inc:1364
+#: plugins/personal/generic/class_user.inc:1826
 #: plugins/personal/posix/trustSelect/trust-list.xml:56
 #: plugins/personal/posix/trustSelect/trust-filter.tpl:23
 #: plugins/personal/posix/groupSelect/group-filter.tpl:21
@@ -2899,13 +2906,13 @@ msgstr "Tên"
 #: plugins/admin/departments/domain.tpl:28
 #: plugins/admin/departments/country.tpl:28
 #: plugins/admin/departments/dcObject.tpl:28
-#: plugins/admin/departments/class_department.inc:668
+#: plugins/admin/departments/class_department.inc:666
 #: plugins/admin/departments/dep-list.tpl:13
 #: plugins/admin/departments/organization.tpl:39
 #: plugins/admin/acl/acl-list.tpl:13 plugins/admin/acl/class_aclRole.inc:734
 #: plugins/admin/acl/acl_role.tpl:27
-#: plugins/personal/generic/class_user.inc:1688
-#: plugins/personal/generic/generic.tpl:164
+#: plugins/personal/generic/class_user.inc:1680
+#: plugins/personal/generic/generic.tpl:166
 #: plugins/personal/posix/trustSelect/trust-list.tpl:13
 #: plugins/personal/posix/groupSelect/group-list.tpl:13
 #: setup/setup_ldap.tpl:55
@@ -3008,9 +3015,9 @@ msgstr ""
 "tượng!"
 
 #: plugins/admin/ogroups/class_ogroup.inc:354
-#: plugins/admin/users/class_userManagement.inc:463
-#: plugins/admin/users/class_userManagement.inc:497
-#: plugins/admin/users/class_userManagement.inc:528
+#: plugins/admin/users/class_userManagement.inc:464
+#: plugins/admin/users/class_userManagement.inc:498
+#: plugins/admin/users/class_userManagement.inc:529
 msgid "none"
 msgstr "không có"
 
@@ -3160,7 +3167,7 @@ msgstr "Tóm tắt FAI"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:222
 #: plugins/admin/groups/class_groupManagement.inc:196
-#: plugins/admin/users/class_userManagement.inc:890
+#: plugins/admin/users/class_userManagement.inc:891
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:102
 msgid "Environment"
@@ -3331,26 +3338,26 @@ msgstr ""
 
 #: plugins/admin/groups/userSelect/user-list.xml:40
 #: plugins/admin/groups/singleUserSelect/singleUser-list.xml:40
-#: plugins/admin/users/class_userManagement.inc:541
+#: plugins/admin/users/class_userManagement.inc:542
 #: plugins/admin/users/user-list.xml:57
-#: plugins/personal/generic/class_user.inc:1328
-#: plugins/personal/generic/class_user.inc:1375
-#: plugins/personal/generic/class_user.inc:1680
-#: plugins/personal/generic/class_user.inc:1831
+#: plugins/personal/generic/class_user.inc:1314
+#: plugins/personal/generic/class_user.inc:1361
+#: plugins/personal/generic/class_user.inc:1672
+#: plugins/personal/generic/class_user.inc:1823
 msgid "Given name"
 msgstr "Tên thật"
 
 #: plugins/admin/groups/userSelect/user-list.xml:48
 #: plugins/admin/groups/singleUserSelect/singleUser-list.xml:48
 #: plugins/admin/users/user-list.xml:49
-#: plugins/personal/generic/class_user.inc:1679
+#: plugins/personal/generic/class_user.inc:1671
 #, fuzzy
 msgid "Surname"
 msgstr "Họ "
 
-#: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:52
-#: plugins/personal/generic/generic.tpl:73
-#: plugins/personal/generic/generic.tpl:89
+#: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:54
+#: plugins/personal/generic/generic.tpl:75
+#: plugins/personal/generic/generic.tpl:91
 msgid "Multiple edit"
 msgstr "Hiệu chỉnh đa dạng"
 
@@ -3568,19 +3575,19 @@ msgid "Edit posix properties"
 msgstr "Hiệu chỉnh các tính năng điện thoại"
 
 #: plugins/admin/groups/class_groupManagement.inc:165
-#: plugins/admin/users/class_userManagement.inc:879
+#: plugins/admin/users/class_userManagement.inc:880
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:71
 msgid "Edit mail properties"
 msgstr "Hiệu chỉnh các tính năng mail"
 
 #: plugins/admin/groups/class_groupManagement.inc:173
-#: plugins/admin/users/class_userManagement.inc:883
+#: plugins/admin/users/class_userManagement.inc:884
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:79
 msgid "Edit samba properties"
 msgstr "Hiệu chỉnh các tính năng samba"
 
 #: plugins/admin/groups/class_groupManagement.inc:181
-#: plugins/admin/users/class_userManagement.inc:899
+#: plugins/admin/users/class_userManagement.inc:900
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:87
 msgid "Edit phone properties"
 msgstr "Hiệu chỉnh các tính năng điện thoại"
@@ -3597,7 +3604,7 @@ msgid "Edit start menu properties"
 msgstr "Hiệu chỉnh các tính năng samba"
 
 #: plugins/admin/groups/class_groupManagement.inc:197
-#: plugins/admin/users/class_userManagement.inc:891
+#: plugins/admin/users/class_userManagement.inc:892
 #: plugins/personal/posix/trustSelect/class_trustSelect.inc:103
 msgid "Edit environment properties"
 msgstr "Hiệu chỉnh các tính năng môi trường"
@@ -3632,15 +3639,15 @@ msgstr ""
 "Thay đổi mật khẩu có thể ảnh hưởng đến sự xác nhận của bạn lên các dịch vụ "
 "mail, ủy quyền (proxy), samba và unix."
 
-#: plugins/admin/users/password.tpl:21 plugins/admin/users/password.tpl:57
+#: plugins/admin/users/password.tpl:21 plugins/admin/users/password.tpl:64
 #: plugins/personal/generic/password.tpl:27
-#: plugins/personal/generic/password.tpl:70
+#: plugins/personal/generic/password.tpl:77
 #: plugins/personal/password/password.tpl:32
-#: plugins/personal/password/password.tpl:75
+#: plugins/personal/password/password.tpl:83
 msgid "Repeat new password"
 msgstr "Lặp lại mật khẩu mới"
 
-#: plugins/admin/users/password.tpl:25 plugins/admin/users/password.tpl:61
+#: plugins/admin/users/password.tpl:25 plugins/admin/users/password.tpl:68
 msgid "Strength"
 msgstr "Cường độ"
 
@@ -3656,29 +3663,29 @@ msgstr "Độ dài tối thiểu của mật khẩu"
 msgid "Use proposal"
 msgstr "các nhóm người dùng"
 
-#: plugins/admin/users/password.tpl:43
-#: plugins/personal/generic/password.tpl:55
-#: plugins/personal/password/password.tpl:60 setup/setup_migrate.tpl:470
+#: plugins/admin/users/password.tpl:50
+#: plugins/personal/generic/password.tpl:62
+#: plugins/personal/password/password.tpl:68 setup/setup_migrate.tpl:470
 #: setup/setup_migrate.tpl:513 setup/setup_migrate.tpl:557
 #, fuzzy
 msgid "Refresh"
 msgstr "Các tham chiếu"
 
-#: plugins/admin/users/password.tpl:49
-#: plugins/personal/generic/password.tpl:61
-#: plugins/personal/password/password.tpl:66
+#: plugins/admin/users/password.tpl:56
+#: plugins/personal/generic/password.tpl:68
+#: plugins/personal/password/password.tpl:74
 #, fuzzy
 msgid "Manually specify a password"
 msgstr "Xin hãy xác định mật mã của bạn!"
 
-#: plugins/admin/users/password.tpl:77
+#: plugins/admin/users/password.tpl:84
 #, fuzzy
 msgid "Enforce password change on next login."
 msgstr "Ép buộc thay đổi mật khẩu trong khi đăng nhập"
 
-#: plugins/admin/users/password.tpl:84
-#: plugins/personal/generic/password.tpl:88
-#: plugins/personal/password/password.tpl:93
+#: plugins/admin/users/password.tpl:91
+#: plugins/personal/generic/password.tpl:95
+#: plugins/personal/password/password.tpl:101
 msgid "Set password"
 msgstr "Đặt mật khẩu"
 
@@ -3697,18 +3704,18 @@ msgstr ""
 "các mẫu."
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/users/class_userManagement.inc:535
+#: plugins/admin/users/class_userManagement.inc:536
 #: plugins/admin/users/user-list.xml:15 plugins/admin/users/user-list.xml:102
 #: plugins/admin/users/templatize.tpl:15
 msgid "Template"
 msgstr "Mẫu"
 
-#: plugins/admin/users/template.tpl:23 plugins/personal/generic/generic.tpl:49
+#: plugins/admin/users/template.tpl:23 plugins/personal/generic/generic.tpl:51
 #: plugins/personal/generic/paste_generic.tpl:7
 msgid "Last name"
 msgstr "Họ"
 
-#: plugins/admin/users/template.tpl:27 plugins/personal/generic/generic.tpl:69
+#: plugins/admin/users/template.tpl:27 plugins/personal/generic/generic.tpl:71
 #: plugins/personal/generic/paste_generic.tpl:11
 msgid "First name"
 msgstr "Tên"
@@ -3717,37 +3724,37 @@ msgstr "Tên"
 msgid "Manage users"
 msgstr "Quản lý người dùng"
 
-#: plugins/admin/users/class_userManagement.inc:391
+#: plugins/admin/users/class_userManagement.inc:392
 msgid "You have no permission to change this users password!"
 msgstr "Bạn không được phép thay đổi mật mã người dùng này!"
 
-#: plugins/admin/users/class_userManagement.inc:782
+#: plugins/admin/users/class_userManagement.inc:783
 #, fuzzy
 msgid "Account locking"
 msgstr "Tài khoản"
 
-#: plugins/admin/users/class_userManagement.inc:783
+#: plugins/admin/users/class_userManagement.inc:784
 #, php-format
 msgid ""
 "Password method '%s' does not support locking. Account (%s) has not been "
 "locked!"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:856
+#: plugins/admin/users/class_userManagement.inc:857
 #, fuzzy
 msgid "Unlock account"
 msgstr "Tài khoản của tôi"
 
-#: plugins/admin/users/class_userManagement.inc:858
+#: plugins/admin/users/class_userManagement.inc:859
 #, fuzzy
 msgid "Lock account"
 msgstr "Tài khoản của tôi"
 
-#: plugins/admin/users/class_userManagement.inc:871
+#: plugins/admin/users/class_userManagement.inc:872
 msgid "Edit generic properties"
 msgstr "Hiệu chỉnh các tính năng chung"
 
-#: plugins/admin/users/class_userManagement.inc:874
+#: plugins/admin/users/class_userManagement.inc:875
 #: plugins/personal/posix/class_posixAccount.inc:304
 #: plugins/personal/posix/class_posixAccount.inc:324
 #: plugins/personal/posix/class_posixAccount.inc:326
@@ -3755,20 +3762,20 @@ msgstr "Hiệu chỉnh các tính năng chung"
 msgid "POSIX"
 msgstr "POSIX (giao diện hệ điều hành lưu động)"
 
-#: plugins/admin/users/class_userManagement.inc:875
+#: plugins/admin/users/class_userManagement.inc:876
 #, fuzzy
 msgid "Edit POSIX properties"
 msgstr "Hiệu chỉnh các tính năng UNIX"
 
-#: plugins/admin/users/class_userManagement.inc:886
+#: plugins/admin/users/class_userManagement.inc:887
 msgid "Netatalk"
 msgstr "Netatalk"
 
-#: plugins/admin/users/class_userManagement.inc:887
+#: plugins/admin/users/class_userManagement.inc:888
 msgid "Edit netatalk properties"
 msgstr "Hiệu chỉnh các đặc tính của netatalk"
 
-#: plugins/admin/users/class_userManagement.inc:895
+#: plugins/admin/users/class_userManagement.inc:896
 #, fuzzy
 msgid "Edit FAX properties"
 msgstr "Hiệu chỉnh các tính năng UNIX"
@@ -3910,8 +3917,8 @@ msgstr "Vị trí"
 #: plugins/admin/departments/class_departmentManagement.inc:237
 #: plugins/admin/departments/class_organizationGeneric.inc:113
 #: plugins/admin/departments/class_organizationGeneric.inc:114
-#: plugins/personal/generic/class_user.inc:1694
-#: plugins/personal/generic/generic.tpl:299 setup/setup_feedback.tpl:23
+#: plugins/personal/generic/class_user.inc:1686
+#: plugins/personal/generic/generic.tpl:301 setup/setup_feedback.tpl:23
 msgid "Organization"
 msgstr "Tổ chức"
 
@@ -3945,11 +3952,11 @@ msgstr "Văn bản mô tả cho bộ phận"
 #: plugins/admin/departments/domain.tpl:39
 #: plugins/admin/departments/country.tpl:39
 #: plugins/admin/departments/dcObject.tpl:39
-#: plugins/admin/departments/class_department.inc:675
+#: plugins/admin/departments/class_department.inc:673
 #: plugins/admin/departments/organization.tpl:51
-#: plugins/personal/generic/class_user.inc:1697
-#: plugins/personal/generic/generic.tpl:340
-#: plugins/personal/generic/generic.tpl:361
+#: plugins/personal/generic/class_user.inc:1689
+#: plugins/personal/generic/generic.tpl:342
+#: plugins/personal/generic/generic.tpl:363
 #, fuzzy
 msgid "Manager"
 msgstr "Quản lý người dùng"
@@ -3964,7 +3971,7 @@ msgstr "Quản lý người dùng"
 #: plugins/admin/departments/domain.tpl:67
 #: plugins/admin/departments/country.tpl:67
 #: plugins/admin/departments/dcObject.tpl:67
-#: plugins/admin/departments/class_department.inc:677
+#: plugins/admin/departments/class_department.inc:675
 #: plugins/admin/departments/organization.tpl:131
 msgid "Administrative settings"
 msgstr "Thiết lập quản trị"
@@ -3993,7 +4000,7 @@ msgstr "Văn bản mô tả cho bộ phận"
 
 #: plugins/admin/departments/generic.tpl:27
 #: plugins/admin/departments/class_organizationGeneric.inc:124
-#: plugins/admin/departments/class_department.inc:667
+#: plugins/admin/departments/class_department.inc:665
 #: plugins/admin/departments/organization.tpl:27
 msgid "Category"
 msgstr "Các danh mục"
@@ -4007,20 +4014,20 @@ msgstr "Các danh mục cho cây con"
 #: plugins/admin/departments/generic.tpl:91
 #: plugins/admin/departments/class_localityGeneric.inc:91
 #: plugins/admin/departments/class_organizationGeneric.inc:130
-#: plugins/admin/departments/class_department.inc:671
+#: plugins/admin/departments/class_department.inc:669
 #: plugins/admin/departments/organization.tpl:78
 #: plugins/admin/departments/organization.tpl:90
-#: plugins/personal/generic/class_user.inc:1708
-#: plugins/personal/generic/generic.tpl:441
+#: plugins/personal/generic/class_user.inc:1700
+#: plugins/personal/generic/generic.tpl:443
 msgid "Location"
 msgstr "Vị trí"
 
 #: plugins/admin/departments/generic.tpl:83
 #: plugins/admin/departments/class_organizationGeneric.inc:129
-#: plugins/admin/departments/class_department.inc:670
+#: plugins/admin/departments/class_department.inc:668
 #: plugins/admin/departments/organization.tpl:82
-#: plugins/personal/generic/class_user.inc:1707
-#: plugins/personal/generic/generic.tpl:449
+#: plugins/personal/generic/class_user.inc:1699
+#: plugins/personal/generic/generic.tpl:451
 msgid "State"
 msgstr "Bang"
 
@@ -4035,10 +4042,10 @@ msgid "Location of this subtree"
 msgstr "Vị trí của cây con"
 
 #: plugins/admin/departments/generic.tpl:99
-#: plugins/admin/departments/class_department.inc:672
+#: plugins/admin/departments/class_department.inc:670
 #: plugins/admin/departments/organization.tpl:98
-#: plugins/personal/generic/generic.tpl:183
-#: plugins/personal/generic/generic.tpl:457
+#: plugins/personal/generic/generic.tpl:185
+#: plugins/personal/generic/generic.tpl:459
 msgid "Address"
 msgstr "Địa chỉ"
 
@@ -4055,12 +4062,12 @@ msgstr "Đặt số điện thoại của cây con này"
 #: plugins/admin/departments/generic.tpl:114
 #: plugins/admin/departments/class_organizationGeneric.inc:133
 #: plugins/admin/departments/class_department.inc:373
-#: plugins/admin/departments/class_department.inc:674
+#: plugins/admin/departments/class_department.inc:672
 #: plugins/admin/departments/organization.tpl:113
-#: plugins/personal/generic/class_user.inc:1359
-#: plugins/personal/generic/class_user.inc:1822
-#: plugins/personal/generic/generic.tpl:423
-#: plugins/personal/generic/generic.tpl:591
+#: plugins/personal/generic/class_user.inc:1345
+#: plugins/personal/generic/class_user.inc:1814
+#: plugins/personal/generic/generic.tpl:425
+#: plugins/personal/generic/generic.tpl:593
 msgid "Fax"
 msgstr "Số fax"
 
@@ -4079,8 +4086,8 @@ msgid "Domain Component"
 msgstr "Admin miền"
 
 #: plugins/admin/departments/class_departmentManagement.inc:25
-#: plugins/admin/departments/class_department.inc:657
-#: plugins/admin/departments/class_department.inc:662
+#: plugins/admin/departments/class_department.inc:655
+#: plugins/admin/departments/class_department.inc:660
 msgid "Departments"
 msgstr "Các bộ phận"
 
@@ -4104,7 +4111,7 @@ msgid "Organization name"
 msgstr "Tổ chức"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:131
-#: plugins/personal/generic/class_user.inc:1709
+#: plugins/personal/generic/class_user.inc:1701
 msgid "Postal address"
 msgstr "Địa chỉ theo bưu điện"
 
@@ -4138,40 +4145,40 @@ msgstr "Tên của cây con được tạo"
 msgid "Cannot find an unused tag for this administrative unit!"
 msgstr "Không thể tìm được một tag chưa được dùng cho đơn vị quản trị này!"
 
-#: plugins/admin/departments/class_department.inc:504
+#: plugins/admin/departments/class_department.inc:502
 #, php-format
 msgid "Tagging '%s'."
 msgstr "Tagging '%s'."
 
-#: plugins/admin/departments/class_department.inc:585
+#: plugins/admin/departments/class_department.inc:583
 #, php-format
 msgid "Moving '%s' to '%s'"
 msgstr "Chuyển từ '%s' đến '%s'"
 
-#: plugins/admin/departments/class_department.inc:626
+#: plugins/admin/departments/class_department.inc:624
 #, php-format
 msgid "FAILED to copy %s, aborting operation"
 msgstr "Thất bại trong việc copy %s, bãi bỏ thao tác"
 
-#: plugins/admin/departments/class_department.inc:665
+#: plugins/admin/departments/class_department.inc:663
 msgid "Department name"
 msgstr "Tên bộ phận"
 
-#: plugins/admin/departments/class_department.inc:673
+#: plugins/admin/departments/class_department.inc:671
 msgid "Telephone"
 msgstr "Số điện thoại"
 
-#: plugins/admin/departments/class_department.inc:728
+#: plugins/admin/departments/class_department.inc:726
 #, php-format
 msgid "Object '%s' is already tagged"
 msgstr "Đối tượng '%s' đã bị tag"
 
-#: plugins/admin/departments/class_department.inc:735
+#: plugins/admin/departments/class_department.inc:733
 #, php-format
 msgid "Adding tag (%s) to object '%s'"
 msgstr "Thêm tag (%s) vào đối tượng '%s'"
 
-#: plugins/admin/departments/class_department.inc:767
+#: plugins/admin/departments/class_department.inc:765
 #, php-format
 msgid "Removing tag from object '%s'"
 msgstr "Bỏ tag từ đối tượng '%s'"
@@ -4284,8 +4291,8 @@ msgstr ""
 
 #: plugins/admin/acl/class_aclRole.inc:725 plugins/admin/acl/acl-list.xml:23
 #: plugins/admin/acl/acl-list.xml:82
-#: plugins/personal/generic/class_user.inc:1664
-#: plugins/personal/generic/generic.tpl:508
+#: plugins/personal/generic/class_user.inc:1656
+#: plugins/personal/generic/generic.tpl:510
 msgid "Role"
 msgstr "Vai trò"
 
@@ -4373,205 +4380,211 @@ msgstr "Không có giấy chứng nhận nào được cài đặt"
 msgid "The selected password method is no longer available."
 msgstr "Phương pháp lập mật khẩu được chọn này không còn ở đây."
 
-#: plugins/personal/generic/class_user.inc:1190
+#: plugins/personal/generic/class_user.inc:1038
+msgid ""
+"Cannot save user picture, GOsa requires the package 'imagemagick' or 'php5-"
+"imagick' to be installed!"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:1176
 msgid "Cannot build RDN: no + allowed to build sub RDN!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1197
+#: plugins/personal/generic/class_user.inc:1183
 msgid "Cannot build RDN: attribute is not defined!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1215
+#: plugins/personal/generic/class_user.inc:1201
 msgid "Cannot build RDN: invalid attribute parameters!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1286
+#: plugins/personal/generic/class_user.inc:1272
 msgid "The selected password method requires initial configuration!"
 msgstr "Phương pháp lập mật khẩu được chọn yêu cầu cấu hình ban đầu!"
 
-#: plugins/personal/generic/class_user.inc:1351
-#: plugins/personal/generic/class_user.inc:1713
-#: plugins/personal/generic/class_user.inc:1816
-#: plugins/personal/generic/generic.tpl:199
+#: plugins/personal/generic/class_user.inc:1337
+#: plugins/personal/generic/class_user.inc:1705
+#: plugins/personal/generic/class_user.inc:1808
+#: plugins/personal/generic/generic.tpl:201
 msgid "Homepage"
 msgstr "Trang chủ"
 
-#: plugins/personal/generic/class_user.inc:1362
-#: plugins/personal/generic/class_user.inc:1825
-#: plugins/personal/generic/generic.tpl:407
+#: plugins/personal/generic/class_user.inc:1348
+#: plugins/personal/generic/class_user.inc:1817
+#: plugins/personal/generic/generic.tpl:409
 msgid "Mobile"
 msgstr "Điện thoại di động"
 
-#: plugins/personal/generic/class_user.inc:1365
-#: plugins/personal/generic/class_user.inc:1828
-#: plugins/personal/generic/generic.tpl:415
+#: plugins/personal/generic/class_user.inc:1351
+#: plugins/personal/generic/class_user.inc:1820
+#: plugins/personal/generic/generic.tpl:417
 msgid "Pager"
 msgstr "Máy nhắn tin"
 
-#: plugins/personal/generic/class_user.inc:1370
-#: plugins/personal/generic/class_user.inc:1685
-#: plugins/personal/generic/generic.tpl:119
+#: plugins/personal/generic/class_user.inc:1356
+#: plugins/personal/generic/class_user.inc:1677
+#: plugins/personal/generic/generic.tpl:121
 msgid "Date of birth"
 msgstr "Ngày sinh"
 
-#: plugins/personal/generic/class_user.inc:1485
+#: plugins/personal/generic/class_user.inc:1471
 msgid "Cannot open certificate!"
 msgstr "Không mở được giấy chứng nhận!"
 
-#: plugins/personal/generic/class_user.inc:1653
-#: plugins/personal/generic/generic.tpl:531
+#: plugins/personal/generic/class_user.inc:1645
+#: plugins/personal/generic/generic.tpl:533
 msgid "Unit"
 msgstr "Đơn vị"
 
-#: plugins/personal/generic/class_user.inc:1654
-#: plugins/personal/generic/generic.tpl:556
+#: plugins/personal/generic/class_user.inc:1646
+#: plugins/personal/generic/generic.tpl:558
 msgid "House identifier"
 msgstr "Mô tả căn nhà"
 
-#: plugins/personal/generic/class_user.inc:1655
-#: plugins/personal/generic/generic.tpl:473
+#: plugins/personal/generic/class_user.inc:1647
+#: plugins/personal/generic/generic.tpl:475
 msgid "Vocation"
 msgstr "Nghề nghiệp"
 
-#: plugins/personal/generic/class_user.inc:1656
-#: plugins/personal/generic/generic.tpl:600
+#: plugins/personal/generic/class_user.inc:1648
+#: plugins/personal/generic/generic.tpl:602
 msgid "Last delivery"
 msgstr "Lần cung cấp cuối"
 
-#: plugins/personal/generic/class_user.inc:1657
-#: plugins/personal/generic/generic.tpl:522
+#: plugins/personal/generic/class_user.inc:1649
+#: plugins/personal/generic/generic.tpl:524
 msgid "Person locality"
 msgstr "Địa phương của người dùng"
 
-#: plugins/personal/generic/class_user.inc:1658
-#: plugins/personal/generic/generic.tpl:481
+#: plugins/personal/generic/class_user.inc:1650
+#: plugins/personal/generic/generic.tpl:483
 msgid "Unit description"
 msgstr "Mô tả đơn vị "
 
-#: plugins/personal/generic/class_user.inc:1659
-#: plugins/personal/generic/generic.tpl:490
+#: plugins/personal/generic/class_user.inc:1651
+#: plugins/personal/generic/generic.tpl:492
 msgid "Subject area"
 msgstr "Lĩnh vực chuyên môn"
 
-#: plugins/personal/generic/class_user.inc:1660
-#: plugins/personal/generic/generic.tpl:499
+#: plugins/personal/generic/class_user.inc:1652
+#: plugins/personal/generic/generic.tpl:501
 msgid "Functional title"
 msgstr "Danh xưng chức năng"
 
-#: plugins/personal/generic/class_user.inc:1661
+#: plugins/personal/generic/class_user.inc:1653
 #: plugins/personal/generic/generic_certs.tpl:78
 msgid "Certificate serial number"
 msgstr "Số seri chứng nhận"
 
-#: plugins/personal/generic/class_user.inc:1662
-#: plugins/personal/generic/generic.tpl:609
+#: plugins/personal/generic/class_user.inc:1654
+#: plugins/personal/generic/generic.tpl:611
 msgid "Public visible"
 msgstr "Hiển thị với tất cả mọi người"
 
-#: plugins/personal/generic/class_user.inc:1663
-#: plugins/personal/generic/generic.tpl:540
+#: plugins/personal/generic/class_user.inc:1655
+#: plugins/personal/generic/generic.tpl:542
 msgid "Street"
 msgstr "Phố"
 
-#: plugins/personal/generic/class_user.inc:1665
-#: plugins/personal/generic/generic.tpl:548
+#: plugins/personal/generic/class_user.inc:1657
+#: plugins/personal/generic/generic.tpl:550
 msgid "Postal code"
 msgstr "Mã bưu điện"
 
-#: plugins/personal/generic/class_user.inc:1669
+#: plugins/personal/generic/class_user.inc:1661
 msgid "Generic user settings"
 msgstr "Thiết lập chung của người dùng"
 
-#: plugins/personal/generic/class_user.inc:1673
-#: plugins/personal/posix/class_posixAccount.inc:1455
-#: plugins/personal/password/class_password.inc:205
+#: plugins/personal/generic/class_user.inc:1665
+#: plugins/personal/posix/class_posixAccount.inc:1452
+#: plugins/personal/password/class_password.inc:208
 msgid "My account"
 msgstr "Tài khoản của tôi"
 
-#: plugins/personal/generic/class_user.inc:1681
+#: plugins/personal/generic/class_user.inc:1673
 msgid "User identification"
 msgstr "Chứng nhận người dùng"
 
-#: plugins/personal/generic/class_user.inc:1682
-#: plugins/personal/generic/generic.tpl:98
+#: plugins/personal/generic/class_user.inc:1674
+#: plugins/personal/generic/generic.tpl:100
 msgid "Personal title"
 msgstr "Chức danh cá nhân"
 
-#: plugins/personal/generic/class_user.inc:1683
-#: plugins/personal/generic/generic.tpl:108
+#: plugins/personal/generic/class_user.inc:1675
+#: plugins/personal/generic/generic.tpl:110
 msgid "Academic title"
 msgstr "Chức danh học thuật"
 
-#: plugins/personal/generic/class_user.inc:1686
-#: plugins/personal/generic/generic.tpl:138
+#: plugins/personal/generic/class_user.inc:1678
+#: plugins/personal/generic/generic.tpl:140
 msgid "Sex"
 msgstr "Giới tính"
 
-#: plugins/personal/generic/class_user.inc:1687
+#: plugins/personal/generic/class_user.inc:1679
 msgid "Preferred language"
 msgstr "Ngôn ngữ muốn sử dụng"
 
-#: plugins/personal/generic/class_user.inc:1690
+#: plugins/personal/generic/class_user.inc:1682
 #: plugins/personal/generic/paste_generic.tpl:47
 msgid "User picture"
 msgstr "Ảnh của người sử dụng"
 
-#: plugins/personal/generic/class_user.inc:1692
+#: plugins/personal/generic/class_user.inc:1684
 #, fuzzy
 msgid "Login restrictions"
 msgstr "Các hạn chế mật khẩu"
 
-#: plugins/personal/generic/class_user.inc:1696
+#: plugins/personal/generic/class_user.inc:1688
 msgid "Department number"
 msgstr "Số phòng làm việc"
 
-#: plugins/personal/generic/class_user.inc:1698
+#: plugins/personal/generic/class_user.inc:1690
 msgid "Employee number"
 msgstr "Số nhân viên"
 
-#: plugins/personal/generic/class_user.inc:1699
-#: plugins/personal/generic/generic.tpl:331
+#: plugins/personal/generic/class_user.inc:1691
+#: plugins/personal/generic/generic.tpl:333
 msgid "Employee type"
 msgstr "Loại nhân viên"
 
-#: plugins/personal/generic/class_user.inc:1701
+#: plugins/personal/generic/class_user.inc:1693
 msgid "Room number"
 msgstr "Số phòng"
 
-#: plugins/personal/generic/class_user.inc:1702
+#: plugins/personal/generic/class_user.inc:1694
 msgid "Telefon number"
 msgstr "Số điện thoại"
 
-#: plugins/personal/generic/class_user.inc:1703
+#: plugins/personal/generic/class_user.inc:1695
 msgid "Pager number"
 msgstr "Số máy nhắn tin"
 
-#: plugins/personal/generic/class_user.inc:1704
+#: plugins/personal/generic/class_user.inc:1696
 msgid "Mobile number"
 msgstr "Số di động"
 
-#: plugins/personal/generic/class_user.inc:1705
+#: plugins/personal/generic/class_user.inc:1697
 msgid "Fax number"
 msgstr "Số fax"
 
-#: plugins/personal/generic/class_user.inc:1711
+#: plugins/personal/generic/class_user.inc:1703
 msgid "Home postal address"
 msgstr "Đại chỉ nhà theo bưu điện"
 
-#: plugins/personal/generic/class_user.inc:1712
+#: plugins/personal/generic/class_user.inc:1704
 msgid "Home phone number"
 msgstr "Số điện thoại nhà"
 
-#: plugins/personal/generic/class_user.inc:1714
+#: plugins/personal/generic/class_user.inc:1706
 #, fuzzy
 msgid "User password method"
 msgstr "Phương pháp lập mật khẩu"
 
-#: plugins/personal/generic/class_user.inc:1715
+#: plugins/personal/generic/class_user.inc:1707
 msgid "User certificates"
 msgstr "Giấy phép của người dùng"
 
-#: plugins/personal/generic/class_user.inc:1923
+#: plugins/personal/generic/class_user.inc:1915
 #, fuzzy
 msgid "Entries differ"
 msgstr "các entry cho mỗi trang"
@@ -4589,72 +4602,71 @@ msgstr ""
 msgid "Personal information"
 msgstr "Thông tin cá nhân"
 
-#: plugins/personal/generic/generic.tpl:20
-#: plugins/personal/generic/generic.tpl:22
-#: plugins/personal/generic/generic.tpl:38
+#: plugins/personal/generic/generic.tpl:21
+#: plugins/personal/generic/generic.tpl:24
+#: plugins/personal/generic/generic.tpl:40
 #: plugins/personal/generic/paste_generic.tpl:37
 #: plugins/personal/generic/generic_picture.tpl:5
-#: plugins/personal/generic/generic_picture.tpl:15
 msgid "Personal picture"
 msgstr "Ảnh cá nhân"
 
-#: plugins/personal/generic/generic.tpl:29
-#: plugins/personal/generic/generic.tpl:40
+#: plugins/personal/generic/generic.tpl:31
+#: plugins/personal/generic/generic.tpl:42
 msgid "Change picture"
 msgstr "Thay đổi hình ảnh"
 
-#: plugins/personal/generic/generic.tpl:62
+#: plugins/personal/generic/generic.tpl:64
 msgid "Template name"
 msgstr "Tên Mẫu"
 
-#: plugins/personal/generic/generic.tpl:151
+#: plugins/personal/generic/generic.tpl:153
 msgid "Preferred langage"
 msgstr "Ngôn ngữ muốn dùng"
 
-#: plugins/personal/generic/generic.tpl:191
+#: plugins/personal/generic/generic.tpl:193
 msgid "Private phone"
 msgstr "Số điện thoại riêng"
 
-#: plugins/personal/generic/generic.tpl:212
+#: plugins/personal/generic/generic.tpl:214
 msgid "Password storage"
 msgstr "Kho lưu mật khẩu"
 
-#: plugins/personal/generic/generic.tpl:229
+#: plugins/personal/generic/generic.tpl:231
 #: plugins/personal/generic/generic_certs.tpl:3
 msgid "Certificates"
 msgstr "Các giấy phép"
 
-#: plugins/personal/generic/generic.tpl:232
+#: plugins/personal/generic/generic.tpl:234
 msgid "Edit certificates"
 msgstr "Hiệu chỉnh các giấy phép"
 
-#: plugins/personal/generic/generic.tpl:244
+#: plugins/personal/generic/generic.tpl:246
 msgid "Restrict login to"
 msgstr ""
 
-#: plugins/personal/generic/generic.tpl:250
-#: plugins/personal/generic/generic.tpl:266
+#: plugins/personal/generic/generic.tpl:252
+#: plugins/personal/generic/generic.tpl:268
 msgid "IP or network"
 msgstr ""
 
-#: plugins/personal/generic/generic.tpl:287
+#: plugins/personal/generic/generic.tpl:289
 msgid "Organizational information"
 msgstr "Thông tin về tổ chức"
 
-#: plugins/personal/generic/generic.tpl:315
+#: plugins/personal/generic/generic.tpl:317
 msgid "Department No."
 msgstr "Số phòng ban"
 
-#: plugins/personal/generic/generic.tpl:323
+#: plugins/personal/generic/generic.tpl:325
 msgid "Employee No."
 msgstr "Số nhân viên"
 
-#: plugins/personal/generic/generic.tpl:389
-#: plugins/personal/generic/generic.tpl:571
+#: plugins/personal/generic/generic.tpl:391
+#: plugins/personal/generic/generic.tpl:573
 msgid "Room No."
 msgstr "Số phòng"
 
-#: plugins/personal/generic/generic.tpl:585
+#: plugins/personal/generic/generic.tpl:587
 msgid "Please use the phone tab"
 msgstr "Xin hãy sử dụng Phone Tab"
 
@@ -4696,8 +4708,8 @@ msgstr ""
 msgid "Password change dialog"
 msgstr "Thay đổi mật khẩu"
 
-#: plugins/personal/generic/password.tpl:90
-#: plugins/personal/password/password.tpl:95
+#: plugins/personal/generic/password.tpl:97
+#: plugins/personal/password/password.tpl:103
 msgid "Clear fields"
 msgstr "Dọn sạch các trường "
 
@@ -4797,7 +4809,7 @@ msgstr ""
 #: plugins/personal/posix/class_posixAccount.inc:1030
 #: plugins/personal/posix/class_posixAccount.inc:1105
 #: plugins/personal/posix/class_posixAccount.inc:1108
-#: plugins/personal/posix/class_posixAccount.inc:1461
+#: plugins/personal/posix/class_posixAccount.inc:1458
 #: plugins/personal/posix/generic.tpl:7
 #: plugins/personal/posix/paste_generic.tpl:8
 msgid "Home directory"
@@ -4830,53 +4842,53 @@ msgstr "Cảnh báo về Shadow"
 msgid "shadowInactive"
 msgstr "Shadow  không hoạt động"
 
-#: plugins/personal/posix/class_posixAccount.inc:1451
+#: plugins/personal/posix/class_posixAccount.inc:1448
 msgid "POSIX account"
 msgstr "tài khoản POSIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:1462
+#: plugins/personal/posix/class_posixAccount.inc:1459
 #: plugins/personal/posix/generic.tpl:15
 msgid "Shell"
 msgstr "Shell"
 
-#: plugins/personal/posix/class_posixAccount.inc:1463
+#: plugins/personal/posix/class_posixAccount.inc:1460
 #: setup/setup_migrate.tpl:291
 msgid "User ID"
 msgstr "ID người dùng"
 
-#: plugins/personal/posix/class_posixAccount.inc:1464
+#: plugins/personal/posix/class_posixAccount.inc:1461
 msgid "Group ID"
 msgstr "ID nhóm"
 
-#: plugins/personal/posix/class_posixAccount.inc:1466
+#: plugins/personal/posix/class_posixAccount.inc:1463
 msgid "Force password change on login"
 msgstr "Ép buộc thay đổi mật khẩu trong khi đăng nhập"
 
-#: plugins/personal/posix/class_posixAccount.inc:1467
+#: plugins/personal/posix/class_posixAccount.inc:1464
 msgid "Shadow min"
 msgstr "Shadow min"
 
-#: plugins/personal/posix/class_posixAccount.inc:1468
+#: plugins/personal/posix/class_posixAccount.inc:1465
 msgid "Shadow max"
 msgstr "Shadow max"
 
-#: plugins/personal/posix/class_posixAccount.inc:1469
+#: plugins/personal/posix/class_posixAccount.inc:1466
 msgid "Shadow warning"
 msgstr "Cảnh báo Shadow"
 
-#: plugins/personal/posix/class_posixAccount.inc:1470
+#: plugins/personal/posix/class_posixAccount.inc:1467
 msgid "Shadow inactive"
 msgstr "Shadow không hoạt động"
 
-#: plugins/personal/posix/class_posixAccount.inc:1471
+#: plugins/personal/posix/class_posixAccount.inc:1468
 msgid "Shadow expire"
 msgstr "Shadow hết hạn"
 
-#: plugins/personal/posix/class_posixAccount.inc:1472
+#: plugins/personal/posix/class_posixAccount.inc:1469
 msgid "Public SSH key"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1473
+#: plugins/personal/posix/class_posixAccount.inc:1470
 msgid "System trust model"
 msgstr "Mô hình ủy thác hệ thống"
 
@@ -4999,31 +5011,31 @@ msgstr "Mật khẩu của bạn đã hết hạn. Xin hãy chọn một mật k
 msgid "Change user password"
 msgstr "Thay đổi mật khẩu người dùng"
 
-#: plugins/personal/password/class_password.inc:129
+#: plugins/personal/password/class_password.inc:115
 msgid "You need to specify your current password in order to proceed."
 msgstr "Bạn cần xác định mật khẩu hiện tại để có thể tiếp tục."
 
-#: plugins/personal/password/class_password.inc:135
+#: plugins/personal/password/class_password.inc:119
 msgid "The password you've entered as 'New password' is empty."
 msgstr "Mật khẩu bạn vừa nhập vào làm \"Mật khẩu mới\" bị rỗng."
 
-#: plugins/personal/password/class_password.inc:144
+#: plugins/personal/password/class_password.inc:140
 #, php-format
-msgid "External password changer reported a problem: %s."
-msgstr "Bộ thay đổi mật khẩu bên ngoài báo cáo có vấn đề:%s."
+msgid "Check-hook reported a problem: %s. Password change canceled!"
+msgstr ""
 
-#: plugins/personal/password/class_password.inc:158
+#: plugins/personal/password/class_password.inc:161
 msgid ""
 "The password you've entered as your current password doesn't match the real "
 "one."
 msgstr ""
 "Mật khẩu bạn vừa đưa vào làm mật khẩu hiện tại không giống mật khẩu thật."
 
-#: plugins/personal/password/class_password.inc:164
+#: plugins/personal/password/class_password.inc:167
 msgid "You have no permission to change your password."
 msgstr "Bạn không có quyền thay đổi mật khẩu của bạn."
 
-#: plugins/personal/password/class_password.inc:201
+#: plugins/personal/password/class_password.inc:204
 msgid "User password"
 msgstr "Mật khẩu người dùng"
 
@@ -6739,6 +6751,9 @@ msgstr "Bước này cho phép bạn lựa chọn ngôn ngữ bạn muốn dùng
 #: setup/class_setupStep_Language.inc:47
 msgid "Automatic"
 msgstr "Tự động"
+
+#~ msgid "External password changer reported a problem: %s."
+#~ msgstr "Bộ thay đổi mật khẩu bên ngoài báo cáo có vấn đề:%s."
 
 #, fuzzy
 #~ msgid "Group submenu menu"

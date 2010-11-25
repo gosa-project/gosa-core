@@ -165,7 +165,7 @@ $plist= session::global_get('plist');
 if (isset($global_check) && $config->get_cfg_value("forceglobals") == "true"){
   msg_dialog::display(
             _("PHP configuration"),
-            _("FATAL: Register globals is on. GOsa will refuse to login unless this is fixed by an administrator."),
+            _("Fatal error: Register globals is on. GOsa will refuse to login unless this is fixed by an administrator."),
             FATAL_ERROR_DIALOG);
 
   new log("security","login","",array(),"Register globals is on. For security reasons, this should be turned off.") ;
@@ -371,7 +371,7 @@ if (is_file("$plugin_dir/main.inc")){
 } else {
   msg_dialog::display(
       _("Plugin"),
-      sprintf(_("FATAL: Cannot find any plugin definitions for plugin '%s'!"), $plug),
+      sprintf(_("Fatal error: Cannot find any plugin definitions for plugin '%s'!"), $plug),
       FATAL_ERROR_DIALOG);
   exit();
 }
@@ -386,7 +386,7 @@ if (isset($_POST) && count($_POST)){
   if (!isset($_POST['php_c_check'])){
     msg_dialog::display(
             _("Configuration Error"),
-            sprintf(_("FATAL: not all POST variables have been transfered by PHP - please inform your administrator!")),
+            sprintf(_("Fatal error: not all POST variables have been transfered by PHP - please inform your administrator!")),
             FATAL_ERROR_DIALOG);
     exit();
   }
