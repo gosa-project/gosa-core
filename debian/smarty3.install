@@ -16,7 +16,6 @@ gosa-core/include/smarty/plugins/function.math.php /usr/share/php/smarty3/plugin
 gosa-core/include/smarty/plugins/modifier.escape.php /usr/share/php/smarty3/plugins
 gosa-core/include/smarty/plugins/function.popup.php /usr/share/php/smarty3/plugins
 gosa-core/include/smarty/plugins/modifiercompiler.cat.php /usr/share/php/smarty3/plugins
-gosa-core/include/smarty/plugins/function.msgPool.php /usr/share/php/smarty3/plugins
 gosa-core/include/smarty/plugins/modifiercompiler.strip_tags.php /usr/share/php/smarty3/plugins
 gosa-core/include/smarty/plugins/modifier.capitalize.php /usr/share/php/smarty3/plugins
 gosa-core/include/smarty/plugins/modifier.date_format.php /usr/share/php/smarty3/plugins
