@@ -578,3 +578,16 @@ Description: webdav plugin for GOsa²
  GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
+Package: smarty3
+Architecture: all
+Depends: php5 | php5-cgi | php5-cli, ${misc:Depends}
+Description: Template engine for PHP
+ Smarty is a template engine for PHP. More specifically, it
+ facilitates a manageable way to separate application logic and content
+ from its presentation.
+ .
+ The Smarty 3 API has been refactored to a syntax geared for consistency 
+ and modularity. The Smarty 2 API syntax is still supported, but will 
+ throw a deprecation notice. You can disable the notices, but it is highly
+ recommended to adjust your syntax to Smarty 3, as the Smarty 2 syntax 
+ must run through an extra rerouting wrapper.
