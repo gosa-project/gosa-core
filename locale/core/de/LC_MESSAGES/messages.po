@@ -3455,9 +3455,8 @@ msgid "No statistic data for given period"
 msgstr "Keine Statiskdaten für die angegebene Periode vorhanden"
 
 #: plugins/generic/statistics/statistics.tpl:87
-#, fuzzy
 msgid "Select report type"
-msgstr "Wählen Sie einen ACL-Typ"
+msgstr "Wählen Sie einen Report-Typ"
 
 #: plugins/generic/statistics/chartClasses/class_actionSelectChart.inc:104
 msgid "Action"
@@ -3489,13 +3488,12 @@ msgid "Systems"
 msgstr "Systeme"
 
 #: plugins/generic/statistics/class_statistics.inc:263
-#, fuzzy, php-format
 msgid ""
 "You have currently %s unsubmitted statistic collection, do you want to "
 "transmit them now?"
 msgstr ""
-"Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen "
-"werden?"
+"Es sind momentan %s nicht übertragene Statistikdatensätze aufgelaufen. "
+"Möchten Sie diese nun übertragen?"
 
 #: plugins/generic/dashBoard/dbInformation/contents.tpl:1
 #: plugins/admin/ogroups/class_ogroup.inc:244 setup/setup_ldap.tpl:108
@@ -3527,14 +3525,12 @@ msgid "Status"
 msgstr "Status"
 
 #: plugins/generic/dashBoard/dbChannelStatus/contents.tpl:1
-#, fuzzy
 msgid "Channels"
-msgstr "Abbrechen"
+msgstr "Kanäle"
 
 #: plugins/generic/dashBoard/dbPluginStatus/contents.tpl:1
-#, fuzzy
 msgid "Plugin status"
-msgstr "Momentaner Status"
+msgstr "Modul Status"
 
 #: plugins/generic/dashBoard/dbPluginStatus/class_dbPluginStatus.inc:69
 msgid "Version mismatch"
@@ -3640,18 +3636,16 @@ msgstr ""
 
 #: plugins/generic/dashBoard/Register/register.tpl:69
 #: plugins/generic/dashBoard/Register/register.tpl:80
-#, fuzzy
 msgid "Registration complete"
-msgstr "Vorgang abgeschlossen"
+msgstr "Registrierung abgeschlossen"
 
 #: plugins/generic/dashBoard/Register/register.tpl:71
 msgid "GOsa instance sucessfully registered"
 msgstr ""
 
 #: plugins/generic/dashBoard/Register/register.tpl:82
-#, fuzzy
 msgid "GOsa instance will not be registered"
-msgstr "Die Sitzung ist nicht verschlüsselt."
+msgstr "Die GOsa-Instanz wird nicht registriert"
 
 #: plugins/generic/references/class_reference.inc:58
 #: plugins/generic/references/class_reference.inc:64
@@ -4207,7 +4201,6 @@ msgstr "POSIX-Name der Gruppe"
 
 #: plugins/admin/groups/generic.tpl:59
 #: plugins/admin/groups/paste_generic.tpl:13
-#, fuzzy
 msgid "Normally IDs are auto-generated, select to specify manually"
 msgstr ""
 "Normalerweise werden IDs automatisch generiert. Auswählen um dies zu umgehen"
@@ -4235,19 +4228,16 @@ msgid "Members are in a phone pickup group"
 msgstr "Mitglieder sind in einer Telefon-Gruppe"
 
 #: plugins/admin/groups/generic.tpl:146
-#, fuzzy
 msgid "Members are in a Nagios group"
 msgstr "Mitglieder sind in einer Nagios-Gruppe"
 
 #: plugins/admin/groups/generic.tpl:174
-#, fuzzy
-msgid "Common group members"
+msgid "Common group"
 msgstr "Gemeinsame Gruppe"
 
 #: plugins/admin/groups/generic.tpl:183
-#, fuzzy
 msgid "Partial group members"
-msgstr "Gruppenmitglieder"
+msgstr "Teilweise Gruppenmitglieder"
 
 #: plugins/admin/groups/generic.tpl:188
 msgid "Group members"
@@ -4291,7 +4281,6 @@ msgid "Samba group"
 msgstr "Samba-Gruppe"
 
 #: plugins/admin/groups/class_group.inc:310
-#, fuzzy
 msgid "Domain administrators"
 msgstr "Domänen-Administratoren"
 
@@ -4352,7 +4341,6 @@ msgid "Generic group settings"
 msgstr "Allgemeine Gruppeneinstellungen"
 
 #: plugins/admin/groups/class_group.inc:1049
-#, fuzzy
 msgid ""
 "The 'ogroupRDN' statement defines the location where new object groups will "
 "be created. The default is 'ou=groups,'."
@@ -4381,7 +4369,6 @@ msgid "Group member"
 msgstr "Gruppenmitglieder"
 
 #: plugins/admin/groups/class_groupManagement.inc:26
-#, fuzzy
 msgid ""
 "Manage aspects of groups like members, POSIX, desktop, samba and mail "
 "settings"
@@ -4481,19 +4468,16 @@ msgstr "Stärke"
 #: plugins/admin/users/password.tpl:43
 #: plugins/personal/password/password.tpl:55
 #: plugins/personal/myaccount/password.tpl:49
-#, fuzzy
 msgid "Use proposal"
-msgstr "Samba-Pool verwenden"
+msgstr "Vorschlag verwenden"
 
 #: plugins/admin/users/password.tpl:61
 #: plugins/personal/password/password.tpl:74
 #: plugins/personal/myaccount/password.tpl:67
-#, fuzzy
 msgid "Manually specify a password"
-msgstr "Bitte geben Sie Ihr Passwort ein!"
+msgstr "Passwort manuell setzen"
 
 #: plugins/admin/users/password.tpl:95
-#, fuzzy
 msgid "Enforce password change on next login."
 msgstr "Erzwinge Änderung des Passwort bei Anmeldung"
 
@@ -4533,7 +4517,6 @@ msgid "First name"
 msgstr "Vorname"
 
 #: plugins/admin/users/class_userManagement.inc:26
-#, fuzzy
 msgid ""
 "Manage aspects of user accounts like generic, POSIX, samba and mail settings"
 msgstr ""
@@ -4574,7 +4557,6 @@ msgid "Netatalk"
 msgstr "Netatalk"
 
 #: plugins/admin/users/class_userManagement.inc:882
-#, fuzzy
 msgid "Edit Netatalk properties"
 msgstr "Netatalk-Einstellungen bearbeiten"
 
@@ -4639,37 +4621,32 @@ msgid "No templates available!"
 msgstr "Keine Vorlagen verfügbar!"
 
 #: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:9
-#, fuzzy
 msgid "Container"
-msgstr "Fortsetzen"
+msgstr "Container"
 
 #: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:10
 msgid "Item"
-msgstr ""
+msgstr "Item"
 
 #: plugins/admin/newConfigManagement/DeviceConfig-list.xml:10
-#, fuzzy
 msgid "List of items"
-msgstr "Liste der Benutzer"
+msgstr "Liste der Items"
 
 #: plugins/admin/newConfigManagement/DeviceConfig-list.xml:75
-#, fuzzy
 msgid "Edit item"
-msgstr "Filter bearbeiten"
+msgstr "Item bearbeiten"
 
 #: plugins/admin/newConfigManagement/DeviceConfig-list.xml:82
-#, fuzzy
 msgid "Remove item"
-msgstr "Bild entfernen"
+msgstr "Item entfernen"
 
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:8
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:9
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:352
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:353
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:359
-#, fuzzy
 msgid "Config management"
-msgstr "System-/Konfigurationsverwaltung"
+msgstr "Konfigurationsverwaltung"
 
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:42
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:95
@@ -4687,18 +4664,16 @@ msgid "Setup"
 msgstr "Einrichtung"
 
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:278
-#, fuzzy
 msgid "Distribution"
-msgstr "Beschreibung"
+msgstr "Distribution"
 
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:284
 msgid "Release"
-msgstr ""
+msgstr "Release"
 
 #: plugins/admin/newConfigManagement/class_newConfigManagement.inc:290
-#, fuzzy
 msgid "Component"
-msgstr "Domänen-Komponente"
+msgstr "Komponente"
 
 #: plugins/admin/departments/dep-list.xml:11
 msgid "List of structural objects"
@@ -5013,12 +4988,11 @@ msgid "Processing the requested operation"
 msgstr "Gewünschte Operation wird durchgeführt"
 
 #: plugins/admin/departments/dep_iframe.tpl:7
-#, fuzzy
 msgid ""
 "Your browser doesn't support IFRAME HTML elements. Please use this link to "
 "perform the requested operation."
 msgstr ""
-"Ihr Browser unterstützt keine IFrames - bitte wählen Sie diesen Link, um die "
+"Ihr Browser unterstützt keine IFRAME HTML Elemente. Bitte wählen Sie diesen Link, um die "
 "gewünschte Operation durchzuführen."
 
 #: plugins/admin/departments/organization.tpl:11
@@ -5035,7 +5009,6 @@ msgstr ""
 "Momentan sind Sie dabei, diese Abteilung zu verschieben bzw. neu zu benennen."
 
 #: plugins/admin/departments/dep_move_confirm.tpl:6
-#, fuzzy
 msgid ""
 "Modifying a departments naming attribute 'ou' or base may corrupt ACLs and "
 "snapshot entries for all entire objects."
@@ -5127,7 +5100,6 @@ msgid "Role"
 msgstr "Rolle"
 
 #: plugins/admin/acl/class_aclRole.inc:731
-#, fuzzy
 msgid ""
 "The 'aclRoleRDN' statement defines the location where new ACL roles will be "
 "created. The default is 'ou=aclroles,'."
@@ -5136,12 +5108,10 @@ msgstr ""
 "Standard ist 'ou=aclroles,'."
 
 #: plugins/admin/acl/acl-list.xml:11
-#, fuzzy
 msgid "List of ACLs"
 msgstr "Liste der ACLs"
 
 #: plugins/admin/acl/paste_role.tpl:1
-#, fuzzy
 msgid "Paste ACL-role"
 msgstr "ACL-Rolle einfügen"
 
@@ -5153,12 +5123,10 @@ msgstr "URI"
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:119
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:121
 #: plugins/addons/dyngroup/dyngroup.tpl:7
-#, fuzzy
 msgid "Attribute"
-msgstr "Anmeldeattribut"
+msgstr "Attribut"
 
 #: plugins/addons/dyngroup/class_DynamicLdapGroup.inc:128
-#, fuzzy
 msgid "Surrounding brackets are required!"
 msgstr "Umschliessende Klammern fehlen!"
 
@@ -5176,34 +5144,29 @@ msgid "Dynamic object"
 msgstr "Dynamisches Objekt"
 
 #: plugins/addons/dyngroup/dyngroup.tpl:1
-#, fuzzy
 msgid "List of dynamic rules"
-msgstr "Liste der ACLs"
+msgstr "Liste der dynamischen Regeln"
 
 #: plugins/addons/dyngroup/dyngroup.tpl:3
 msgid "Labeled URI definitions"
 msgstr "URI-Definitionen"
 
 #: plugins/addons/dyngroup/dyngroup.tpl:6
-#, fuzzy
 msgid "Scope"
-msgstr "Kopieren"
+msgstr "Gültigkeitsbereich"
 
 #: plugins/addons/propertyEditor/class_propertyEditor.inc:6
-#, fuzzy
 msgid "Preferences"
-msgstr "Referenzen"
+msgstr "Einstellungen"
 
 #: plugins/addons/propertyEditor/class_propertyEditor.inc:7
-#, fuzzy
 msgid ""
 "Configure global and special GOsa settings like hooks and plug-in parameters"
 msgstr "Globale und spezielle GOsa-Einstellungen wie Hooks und Plugin-Optionen"
 
 #: plugins/addons/propertyEditor/class_propertyEditor.inc:206
-#, fuzzy
 msgid "No description"
-msgstr "Beschreibung"
+msgstr "Keine Beschreibung"
 
 #: plugins/addons/propertyEditor/class_propertyEditor.inc:230
 msgid "FALSE"
@@ -5227,25 +5190,21 @@ msgid "Migration of property '%s'"
 msgstr "Migration der Option '%s'"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:34
-#, fuzzy, php-format
 msgid "GOsa has detected objects outside of the configured storage point (%s)."
 msgstr ""
-"Es wurden %s Gruppen ausserhalb des konfigurierten Baums '%s' gefunden."
+"Es wurden Objekte ausserhalb des konfigurierten Baums '%s' gefunden."
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:161
-#, fuzzy
 msgid "Objects that will be added"
-msgstr "Dieses objekt wird gelöscht!"
+msgstr "Dieses Objekte werden hinzugefügt"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:169
-#, fuzzy
 msgid "Objects that will be moved"
-msgstr "Die Windows-Arbeitsstation wird verschoben von"
+msgstr "Diese Objekte werden verschoben"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:177
-#, fuzzy, php-format
 msgid "Moving object '%s' to '%s'"
-msgstr "Verschiebe '%s' nach '%s'"
+msgstr "Verschiebe Objekt '%s' nach '%s'"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:181
 #: setup/setup_migrate.tpl:32 setup/class_setupStep_Migrate.inc:804
@@ -5253,11 +5212,8 @@ msgid "Migrate"
 msgstr "Migrieren"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:204
-#, fuzzy, php-format
 msgid "Migration failed for object %s, dn already exists!"
-msgstr ""
-"Hinzufügen eines administrativen Benutzers fehlgeschlagen: Objekt '%s' "
-"existiert bereits!"
+msgstr "Migration des Objektes %S ist fehlgeschlagen: DN existiert bereits!"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:208
 #, php-format
@@ -5267,58 +5223,49 @@ msgstr ""
 "bereits existiert!"
 
 #: plugins/addons/propertyEditor/migrate.tpl:3
-#, fuzzy
 msgid "Property migration assistant"
-msgstr "Migrationsassistent für Optionen"
+msgstr "Migrationsassistent für Einstellungen"
 
 #: plugins/addons/propertyEditor/migrate.tpl:3
-#, fuzzy
 msgid "Migration steps left"
-msgstr "Migrationsfehler"
+msgstr "Verbleibende Migrationsschritte"
 
 #: plugins/addons/propertyEditor/property-filter.xml:15
-#, fuzzy
 msgid "Effective properties"
-msgstr "Filtereinstellungen"
+msgstr "Effektive Einstellungen"
 
 #: plugins/addons/propertyEditor/property-filter.xml:29
-#, fuzzy
 msgid "Modified properties"
-msgstr "Filtereinstellungen"
+msgstr "Modifizierte Einstellungen"
 
 #: plugins/addons/propertyEditor/property-filter.xml:43
-#, fuzzy
 msgid "All properties"
-msgstr "Filtereinstellungen"
+msgstr "Alle Einstellungen"
 
 #: plugins/addons/propertyEditor/property-filter.xml:57
-#, fuzzy
 msgid "LDAP properties"
-msgstr "Eigenschaften"
+msgstr "Im LDAP abgelegte Einstellungen"
 
 #: plugins/addons/propertyEditor/property-filter.xml:71
-#, fuzzy
 msgid "Search for property groups"
-msgstr "Zeige primäre Gruppen"
+msgstr "Nach Einstellungsgruppen suchen"
 
 #: plugins/addons/propertyEditor/commandVerifier.tpl:1
 msgid "Command verifier"
 msgstr "Kommandoüberprüfung"
 
 #: plugins/addons/propertyEditor/commandVerifier.tpl:3
-#, fuzzy
 msgid ""
 "Here you can execute commands in the way GOsa does and check the generated "
 "results or errors. This can be very useful especially for the post events "
 "(postcreate, postmodify and postremove) due to the fact that these hook are "
 "executed silently."
 msgstr ""
-"An dieser stelle können Sie GOsa Kommandos ausführen lassen und das erzeugte "
+"An dieser Stelle können Sie GOsa Kommandos ausführen lassen und das erzeugte "
 "Ergebnis einsehen. Dies kann nützlich sein, wenn Sie beispielsweise post-"
 "Events (postcreate, postmodify und postremove) ausprobieren möchten."
 
 #: plugins/addons/propertyEditor/commandVerifier.tpl:8
-#, fuzzy
 msgid ""
 "Please be careful here, all commands will really be executed on your machine "
 "and may break things!"
@@ -5331,57 +5278,48 @@ msgid "The command to check for"
 msgstr "Das zu überprüfende Kommando"
 
 #: plugins/addons/propertyEditor/commandVerifier.tpl:17
-#, fuzzy
 msgid "Test"
-msgstr "Zeitstempel"
+msgstr "Test"
 
 #: plugins/addons/propertyEditor/property-list.xml:11
-#, fuzzy
 msgid "List of configuration settings"
-msgstr "Schreibe Konfigurationsdatei"
+msgstr "Liste von Konfigurationseinstellungen"
 
 #: plugins/addons/propertyEditor/property-list.xml:15
-#, fuzzy
 msgid "Property not used"
-msgstr "Gruppe des Benutzers"
+msgstr "Einstellung wird nicht verwendet"
 
 #: plugins/addons/propertyEditor/property-list.xml:23
-#, fuzzy
 msgid "Property will be restored"
-msgstr "Die Gruppe wird verschoben von"
+msgstr "Einstellung wird wiederhergestellt"
 
 #: plugins/addons/propertyEditor/property-list.xml:31
-#, fuzzy
 msgid "Modified property"
-msgstr "Änderungs-Operation"
+msgstr "Veränderte Einstellung"
 
 #: plugins/addons/propertyEditor/property-list.xml:39
 msgid "Property configured in LDAP"
 msgstr "Optionen aus dem LDAP"
 
 #: plugins/addons/propertyEditor/property-list.xml:47
-#, fuzzy
 msgid "Property configured in config file"
-msgstr "Erzeugen Ihrer Konfigurationsdatei"
+msgstr "Einstellung aus Konfigurationsdatei"
 
 #: plugins/addons/propertyEditor/property-list.xml:72
-#, fuzzy
 msgid "Class"
 msgstr "Klasse"
 
 #: plugins/addons/propertyEditor/property-list.xml:88
-#, fuzzy
 msgid "Value"
-msgstr "männlich"
+msgstr "Wert"
 
 #: plugins/addons/propertyEditor/property-list.xml:124
 msgid "Restore to default"
 msgstr "Standard wiederherstellen"
 
 #: plugins/addons/propertyEditor/property-list.tpl:3
-#, fuzzy
 msgid "Warning message"
-msgstr "Nachricht senden"
+msgstr "Warnmeldung"
 
 #: plugins/addons/propertyEditor/property-list.tpl:9
 msgid ""
@@ -5430,7 +5368,6 @@ msgid "Edit organizational user settings"
 msgstr "Organisationsbezogene Benutzereinstellungen bearbeiten"
 
 #: plugins/personal/generic/class_user.inc:297
-#, fuzzy
 msgid "Please add a single IP address or a network/net mask combination!"
 msgstr ""
 "Bitte eine einzelne IP-Adresse oder eine Netzwerk/Netzmasken Kombination "
@@ -5628,7 +5565,6 @@ msgstr ""
 "deaktiviert die Nutzung von accountPrimaryAttribute und personalTitleInDn."
 
 #: plugins/personal/generic/class_user.inc:1707
-#, fuzzy
 msgid "Allow definition of custom filters"
 msgstr "Definieren von Benutzerfiltern erlauben"
 
@@ -5674,7 +5610,6 @@ msgid "Room number"
 msgstr "Raumnummer"
 
 #: plugins/personal/generic/class_user.inc:1729
-#, fuzzy
 msgid "Telephone number"
 msgstr "Telefonnummer"
 
@@ -6029,7 +5964,6 @@ msgid "POSIX settings"
 msgstr "POSIX-Einstellungen"
 
 #: plugins/personal/posix/generic.tpl:42
-#, fuzzy
 msgid "Last log-on"
 msgstr "Letztes Login"
 
@@ -6085,7 +6019,6 @@ msgstr "Passwort läuft ab am"
 
 #: plugins/personal/password/changed.tpl:3
 #: plugins/personal/myaccount/changed.tpl:3
-#, fuzzy
 msgid ""
 "You've successfully changed your password. Remember to change all programs "
 "configured to use it as well."
@@ -6105,9 +6038,8 @@ msgstr ""
 "dieses nicht mehr anmelden können."
 
 #: plugins/personal/password/password.tpl:10
-#, fuzzy
 msgid "Your Password has expired. Please choose a new password."
-msgstr "Das Nutzer-Passwort wurde zurückgesetzt, bitte setzen Sie ein Neues!"
+msgstr "Das Nutzer-Passwort ist abgelaufen, bitte setzen Sie ein Neues!"
 
 #: plugins/personal/password/password.tpl:16
 #: plugins/personal/password/password.tpl:45
@@ -6175,9 +6107,8 @@ msgid "Edit personal settings"
 msgstr "Persönliche Filtereinstellungen bearbeiten"
 
 #: plugins/personal/myaccount/nochange.tpl:5
-#, fuzzy
 msgid "Your password hash method will not be changed!"
-msgstr "Fehler: Passwort-Methode ist nicht verfügbar!"
+msgstr "Ihre Passwort-Hash-Methode wird nicht verändert!"
 
 #: setup/class_setupStep_Feedback.inc:94
 msgid "UNIX accounts/groups"
@@ -6188,7 +6119,6 @@ msgid "Samba management"
 msgstr "Samba-Verwaltung"
 
 #: setup/class_setupStep_Feedback.inc:98
-#, fuzzy
 msgid "Mail system management"
 msgstr "Mailsystem-Verwaltung"
 
@@ -6205,12 +6135,10 @@ msgid "System inventory"
 msgstr "System-Inventar"
 
 #: setup/class_setupStep_Feedback.inc:106
-#, fuzzy
 msgid "System/Configuration management"
 msgstr "System-/Konfigurationsverwaltung"
 
 #: setup/class_setupStep_Feedback.inc:108
-#, fuzzy
 msgid "Address book"
 msgstr "Adressbuch"
 
@@ -6337,7 +6265,6 @@ msgid "The configuration is currently not readable or it does not exists."
 msgstr "Die Konfiguration ist momentan nicht lesbar oder existiert nicht."
 
 #: setup/class_setupStep_Finish.inc:117
-#, fuzzy, php-format
 msgid ""
 "After downloading and placing the file under %s, please make sure that the "
 "user the web server is running with is able to read %s, while other users "
@@ -6383,11 +6310,10 @@ msgid "GOsa requires this module for the samba integration."
 msgstr "GOsa benötigt dieses Modul für die Samba-Einbindung."
 
 #: setup/class_setupStep_Checks.inc:99
-#, fuzzy
 msgid ""
 "GOsa requires either 'mhash' or the 'sha1' module to make use of SSHA "
 "encryption."
-msgstr "GOsa benötigt dieses Modul um die SSHA-Verschlüsselung zu verwenden."
+msgstr "GOsa benötigt entweder das 'mhash' oder das 'sha1' Modul um die SSHA-Verschlüsselung zu verwenden."
 
 #: setup/class_setupStep_Checks.inc:107
 msgid "GOsa requires this module to talk to an IMAP server."
@@ -6399,7 +6325,6 @@ msgid "mbstring"
 msgstr "mbstring"
 
 #: setup/class_setupStep_Checks.inc:115
-#, fuzzy
 msgid "GOsa requires this module to handle Unicode strings."
 msgstr "GOsa benötigt dieses Modul um Unicode-Zeichenketten zu verarbeiten."
 
@@ -6408,9 +6333,8 @@ msgid "Calendar"
 msgstr "Kalender"
 
 #: setup/class_setupStep_Checks.inc:123
-#, fuzzy
 msgid "GOsa requires this module to calculate dates."
-msgstr "GOsa benötigt dieses Modul um Unicode-Zeichenketten zu verarbeiten."
+msgstr "GOsa benötigt dieses Modul um Datumsangaben zu verarbeiten."
 
 #: setup/class_setupStep_Checks.inc:130
 msgid "MySQL"
@@ -6434,7 +6358,6 @@ msgstr ""
 "Passwörter."
 
 #: setup/class_setupStep_Checks.inc:150
-#, fuzzy
 msgid ""
 "Deploy a gosa-si installation or install the Perl Crypt::SmbHash modules."
 msgstr ""
@@ -6515,7 +6438,6 @@ msgstr ""
 "'Off'."
 
 #: setup/class_setupStep_Checks.inc:218
-#, fuzzy
 msgid ""
 "GOsa needs at least 32MB of memory. Setting it below this limit may cause "
 "errors that are not reproducible! Increase it for larger setups."
@@ -6610,7 +6532,6 @@ msgid "The configuration file can't be written"
 msgstr "Die Konfigurationsdatei kann nicht geschrieben werden"
 
 #: setup/class_setupStep_Checks.inc:271
-#, fuzzy, php-format
 msgid ""
 "GOsa reads its configuration from a file located in (%s/%s). The setup can "
 "write the configuration directly if it is writable."
@@ -6972,7 +6893,6 @@ msgid "How to get started"
 msgstr "Was vorzubereiten ist"
 
 #: setup/setup_welcome.tpl:5
-#, fuzzy
 msgid ""
 "This seems to be the first time you run GOsa on this system. To start the "
 "GOsa web interface you need a working configuration file, which can be "
@@ -7016,7 +6936,6 @@ msgid "Starting the setup"
 msgstr "Starte Einrichtungsassistenten"
 
 #: setup/setup_welcome.tpl:26
-#, fuzzy
 msgid ""
 "For security reasons you need to authenticate the installation by creating "
 "the file '/tmp/gosa.auth', containing the current session ID on the servers "
@@ -7032,7 +6951,6 @@ msgid "Click the 'Next' button when you've finished."
 msgstr "Drücken Sie auf den Knopf 'Fortfahren', wenn Sie fertig sind."
 
 #: setup/setup_license.tpl:3
-#, fuzzy
 msgid ""
 "GOsa is developed under the terms of the GNU General Public License v2. "
 "Please accept the terms below."
@@ -7098,7 +7016,6 @@ msgid "Schema check failed"
 msgstr "Schema-Prüfung fehlgeschlagen"
 
 #: setup/setup_schema.tpl:11
-#, fuzzy
 msgid ""
 "Could not read any schema information, all checks skipped. Adjust your LDAP "
 "ACLs."
@@ -7107,7 +7024,6 @@ msgstr ""
 "übersprungen. Passen Sie Ihre LDAP-ACLs an."
 
 #: setup/setup_schema.tpl:13
-#, fuzzy
 msgid ""
 "It seems that your LDAP database wasn't initialized yet. This maybe the "
 "reason, why GOsa can't read your schema configuration!"
@@ -7149,7 +7065,6 @@ msgid "Please select the preferred language"
 msgstr "Bitte wählen Sie Ihre bevorzugte Sprache"
 
 #: setup/setup_language.tpl:5
-#, fuzzy
 msgid ""
 "At this point, you can select the site wide default language. Choosing "
 "'automatic' will use the language requested by the browser. This setting can "
@@ -7171,244 +7086,3 @@ msgstr "Sprachauswahl"
 #: setup/class_setupStep_Language.inc:42
 msgid "This step allows you to select your preferred language."
 msgstr "Dieser Schritt erlaubt es Ihnen, Ihre bevorzugte Sprache auszuwählen."
-
-#, fuzzy
-#~ msgid "The folder %s specified for %s:%s cannot be used for reading!"
-#~ msgstr ""
-#~ "Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert "
-#~ "nicht!"
-
-#, fuzzy
-#~ msgid "Object info"
-#~ msgstr "Objekt in Verwendung"
-
-#, fuzzy
-#~ msgid "Acls"
-#~ msgstr "ACL"
-
-#, fuzzy
-#~ msgid ""
-#~ "The file '%s' specified for '%s:%s' cannot be created neither be used for "
-#~ "writing!"
-#~ msgstr ""
-#~ "Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert "
-#~ "nicht!"
-
-#, fuzzy
-#~ msgid "The rdn '%s' specified for '%s:%s' is invalid!"
-#~ msgstr "'%s' Kommando für Modul %s ist ungültig!"
-
-#, fuzzy
-#~ msgid "The values for 'New password' and 'Repeated new password' differ!"
-#~ msgstr ""
-#~ "Die Passwörter, die Sie als 'Neues Passwort' und 'Neues Passwort "
-#~ "(Wiederholung)' eingegeben haben sind nicht identisch."
-
-#, fuzzy
-#~ msgid "The password used as new and current are too similar!"
-#~ msgstr "Das alte und neue Passwort sind sich zu ähnlich."
-
-#, fuzzy
-#~ msgid "The password used as new is to short!"
-#~ msgstr ""
-#~ "Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben, ist zu "
-#~ "kurz."
-
-#~ msgid "External password changer reported a problem: %s"
-#~ msgstr ""
-#~ "Das externe Passwort-Änderungsprogramm hat einen Fehler gemeldet: %s."
-
-#, fuzzy
-#~ msgid ""
-#~ "Command %s specified as post modify action for plugin %s does not exist!"
-#~ msgstr ""
-#~ "Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert "
-#~ "nicht!"
-
-#, fuzzy
-#~ msgid ""
-#~ "Fatal error: no class locations defined - please run '%s' to fix this"
-#~ msgstr ""
-#~ "Schwerer Fehler: keine Klassenfundorte definiert - bitte führen Sie '%s' "
-#~ "aus, um das Problem zu beheben"
-
-#, fuzzy
-#~ msgid ""
-#~ "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
-#~ msgstr ""
-#~ "Schwerer Fehler: Kann Klasse '%s' nicht instanziieren - bitte führen Sie "
-#~ "'%s' aus um das Problem zu beheben"
-
-#, fuzzy
-#~ msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
-#~ msgstr ""
-#~ "FATAL: Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
-
-#, fuzzy
-#~ msgid "Username / UID is not unique inside the LDAP tree!"
-#~ msgstr "sambaUnixIdPool ist nicht eindeutig!"
-
-#, fuzzy
-#~ msgid ""
-#~ "Cannot create locking information in LDAP tree. Please contact your "
-#~ "administrator!"
-#~ msgstr ""
-#~ "Das Konto ist gesperrt. Bitte benachrichtigen Sie den Administrator!"
-
-#, fuzzy
-#~ msgid "The size limit of %d entries is exceed!"
-#~ msgstr "Die Größenbeschränkung von %d Einträgen ist überschritten!"
-
-#, fuzzy
-#~ msgid "incomplete"
-#~ msgstr "Abgeschlossen"
-
-#, fuzzy
-#~ msgid "Apply filter"
-#~ msgstr "Vorlage anwenden"
-
-#, fuzzy
-#~ msgid "File '%s' could not be deleted."
-#~ msgstr "Die Datei '%s' konnte nicht entfernt werden."
-
-#, fuzzy
-#~ msgid "Cannot write to revision file!"
-#~ msgstr "Kann nicht in Revisions-Datei schreiben!"
-
-#, fuzzy
-#~ msgid "LDAP warning"
-#~ msgstr "Warnung"
-
-#, fuzzy
-#~ msgid "Cannot get schema information from server. No schema check possible!"
-#~ msgstr ""
-#~ "Kann die Schema-Informationen nicht vom Server beziehen. Keine "
-#~ "Schemaprüfung möglich!"
-
-#, fuzzy
-#~ msgid ""
-#~ "Used to lock currently edited entries to avoid multiple changes at the "
-#~ "same time."
-#~ msgstr ""
-#~ "Verwenden, um die momentan bearbeiteten Einträge für andere zu sperren "
-#~ "(um gleichzeitige Änderungen zu verhindern)."
-
-#, fuzzy
-#~ msgid "Missing required object class '%s'!"
-#~ msgstr "Die GOsa-Objektklasse '%s' fehlt!"
-
-#, fuzzy
-#~ msgid "Missing optional object class '%s'!"
-#~ msgstr "Die GOsa-Objektklasse '%s' fehlt!"
-
-#, fuzzy
-#~ msgid "Version mismatch for required object class '%s' (!=%s)!"
-#~ msgstr "Falsche·Version·der·benötigten·Objektklasse·'%s'·(!=%s)!"
-
-#, fuzzy
-#~ msgid "Class(es) available"
-#~ msgstr "Verfügbare Klasse(n)"
-
-#, fuzzy
-#~ msgid ""
-#~ "In order to use rfc2307bis conform groups the objectClass 'posixGroup' "
-#~ "must be      AUXILIARY"
-#~ msgstr ""
-#~ "Um RFC2307bis-konforme Gruppen verwenden zu können, muss die Objektklasse "
-#~ "'posixGroup' AUXILIARY sein"
-
-#, fuzzy
-#~ msgid "The objectClass 'posixGroup' must be STRUCTURAL"
-#~ msgstr "Die Objektklasse 'posixGroup' muss STRUCTURAL sein"
-
-#, fuzzy
-#~ msgid ""
-#~ "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to "
-#~ "exist."
-#~ msgstr ""
-#~ "Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert "
-#~ "nicht!"
-
-#, fuzzy
-#~ msgid ""
-#~ "Cannot generate samba hash: running '%s' failed, check the "
-#~ "'sambaHashHook'!"
-#~ msgstr ""
-#~ "Kann keinen SAMBA-Hash generieren: die Ausführung von '%s' ist "
-#~ "fehlgeschlagen, prüfen Sie den 'sambaHashHook'!"
-
-#, fuzzy
-#~ msgid "Cannot allocate a free ID:"
-#~ msgstr "Konnte keine freie ID allozieren:"
-
-#, fuzzy
-#~ msgid "maximum tries exceeded!"
-#~ msgstr "maximale Anzahl von Versuchen abgelaufen!"
-
-#, fuzzy
-#~ msgid "Cannot allocate a free ID!"
-#~ msgstr "Konnte keine freie ID allozieren!"
-
-#, fuzzy
-#~ msgid "Surename"
-#~ msgstr "Nachname"
-
-#~ msgid "External password changer reported a problem: %s."
-#~ msgstr ""
-#~ "Das externe Passwort-Änderungsprogramm hat einen Fehler gemeldet: %s."
-
-#~ msgid "Username"
-#~ msgstr "Benutzername"
-
-#~ msgid ""
-#~ "You've successfully changed your password. Remember to change all "
-#~ "programms configured to use it as well."
-#~ msgstr ""
-#~ "Sie haben erfolgreich Ihr Passwort geändert. Bitte denken Sie daran alle "
-#~ "Programme anzupassen, die dieses Passwort auch benutzen."
-
-#~ msgid "Ok"
-#~ msgstr "Ok"
-
-#~ msgid "Uid"
-#~ msgstr "Uid"
-
-#~ msgid "Grant permission to owner"
-#~ msgstr "Berechtigungen für Eigentümer einräumen"
-
-#~ msgid "Password change not allowed"
-#~ msgstr "Passwort-Änderung ist nicht erlaubt"
-
-#~ msgid "Preferred langage"
-#~ msgstr "Bevorzugte Sprache"
-
-#~ msgid "Posix settings"
-#~ msgstr "UNIX-Einstellungen"
-
-#~ msgid "You have no permission to set your password!"
-#~ msgstr "Sie haben keine Berechtigung Ihr Passwort zu ändern!"
-
-#~ msgid ""
-#~ "You have changed the method your password is stored in the ldap database. "
-#~ "For that reason you've to enter your password at this point again. GOsa "
-#~ "will then encode it with the selected method."
-#~ msgstr ""
-#~ "Sie haben die Verschlüsselungsart, mit der Ihr Passwort in der LDAP-"
-#~ "Datenbank gespeichert wird, geändert. Aus diesem Grund müssen Sie das "
-#~ "Passwort an dieser Stelle noch einmal eingeben, damit es von GOsa in der "
-#~ "gewünschten Verschlüsselung abgelegt werden kann."
-
-#~ msgid "Posix"
-#~ msgstr "Posix"
-
-#~ msgid "Edit posix properties"
-#~ msgstr "POSIX-Eigenschaften bearbeiten"
-
-#~ msgid "Acl"
-#~ msgstr "ACL"
-
-#~ msgid "winstations"
-#~ msgstr "Windows-Arbeitsstationen"
-
-#~ msgid "Sytem trust"
-#~ msgstr "System-Vertrauen"
