@@ -252,7 +252,7 @@ class pluglist
             $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
             $cfg= $this->config->data['MENU'];
-            $menu = "\n      <div class='navigation'>";
+            $menu = "";
             foreach ($cfg as $headline => $plug){
 
 
@@ -283,8 +283,9 @@ class pluglist
                 $menu.= "\n        <div style='font-size:0'>&nbsp;</div>";
                 $menu.= "\n        <div class='v-spacer'></div>\n";
             }
-            $menu.= "\n      </div>\n";
-            $this->menu = $menu;
+            if(count($this->registeredMenuEntries)){
+                $this->menu = "\n<div class='navigation'>\n{$menu}</div>";
+            }
 
             // Add javascript method to print out warning messages while leaving an unsaved form.
             // We do it in here to get the string translated.

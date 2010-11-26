@@ -35,7 +35,7 @@
 
     {$menu}
     {$msg_dialogs}
-    <div class='plugin-area'>
+    <div class='plugin-area{if $noMenuMode}-noMenu{/if}'>
       {$pathMenu}
       {$contents}
     </div>

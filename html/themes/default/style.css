@@ -286,6 +286,15 @@ div.plugin-area {
   cursor:default;
 }
 
+div.plugin-area-noMenu {
+  position:relative;
+  margin-left:6px;
+  padding-right:6px;
+  min-height:600px;
+  min-width:700px;
+  cursor:default;
+}
+
 
 /* Plugin decorations */
 
