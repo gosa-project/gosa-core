@@ -184,6 +184,8 @@ if (!session::global_is_set('plist')){
 }
 $plist= session::global_get('plist');
 
+print_a($plist);
+
 /* Check for register globals */
 if (isset($global_check) && $config->boolValueIsTrue("core","forceGlobals")){
   msg_dialog::display(
