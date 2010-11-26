@@ -236,7 +236,7 @@ if ($config->boolValueIsTrue("core","handleExpiredAccounts")){
     }
 }
 
-$smarty->assign("noMenuMode", FALSE);
+$smarty->assign("noMenuMode", count($plist->getRegisteredMenuEntries()) == 0);
 if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
   $plug= validate($_GET['plug']);
   $plugin_dir= $plist->get_path($plug);
@@ -253,7 +253,6 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
     if(count($plist->getRegisteredMenuEntries()) == 0){
         session::global_set('plugin_dir',"infoPage");
         $plugin_dir= "$BASE_DIR/plugins/generic/infoPage";
-        $smarty->assign("noMenuMode", TRUE);
     }else{
         session::global_set('plugin_dir',"welcome");
         $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
