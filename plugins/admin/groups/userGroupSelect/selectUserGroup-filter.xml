@@ -21,7 +21,7 @@
     <label>Default filter</label>
     <query>
       <backend>LDAPBlacklist</backend>
-      <filter>(&amp;(|(objectClass=gosaAccount)(objectClass=posixAccount))(cn=$))</filter>
+      <filter>(&amp;(|(objectClass=gosaAccount)(objectClass=posixGroup))(cn=$))</filter>
     </query>
     <autocomplete>
       <attribute>cn</attribute>
