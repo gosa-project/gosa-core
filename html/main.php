@@ -184,8 +184,6 @@ if (!session::global_is_set('plist')){
 }
 $plist= session::global_get('plist');
 
-print_a($plist);
-
 /* Check for register globals */
 if (isset($global_check) && $config->boolValueIsTrue("core","forceGlobals")){
   msg_dialog::display(
@@ -249,9 +247,15 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
   }
 } else {
 
-  /* set to welcome page as default plugin */
-  session::global_set('plugin_dir',"welcome");
-  $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
+    // Display the welcome page for admins (iconmenu) and an info page for those 
+    //  who are not allowed to adminstrate anything (user)
+    if(count($plist->getRegisteredMenuEntries()) == 0){
+        session::global_set('plugin_dir',"infoPage");
+        $plugin_dir= "$BASE_DIR/plugins/generic/infoPage";
+    }else{
+        session::global_set('plugin_dir',"welcome");
+        $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
+    } 
 }
 
 /* Handle plugin locks.

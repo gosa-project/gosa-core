@@ -52,6 +52,31 @@ class pluglist
     var $registeredIconEntries = array();
     var $registeredShortCutEntries = array();
 
+
+    function getRegisteredMenuEntries ()
+    {
+        return($this->registeredMenuEntries);
+    }
+
+
+    function getRegisteredPathEntries ()
+    {
+        return($this->registeredPathEntries);
+    }
+
+
+    function getRegisteredIconEntries ()
+    {
+        return($this->registeredIconEntries);
+    }
+
+
+    function getRegisteredShortCutEntries ()
+    {
+        return($this->registeredShortCutEntries);
+    }
+
+
     function pluglist(&$config, &$ui)
     {
         $this->ui= &$ui;
