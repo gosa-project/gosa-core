@@ -5977,10 +5977,6 @@ msgstr "Erzwinge UID/GID"
 msgid "(Warning: more than 16 groups are not supported by NFS!)"
 msgstr "(Warnung: mehr als 16 Gruppen werden von NFS nicht unterstützt!)"
 
-#: plugins/personal/posix/generic.tpl:101
-msgid "Common group"
-msgstr "Gemeinsame Gruppe"
-
 #: plugins/personal/posix/generic.tpl:105
 msgid "Groups differ"
 msgstr "Gruppen sind unterschiedlich"
