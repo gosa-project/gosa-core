@@ -26,10 +26,10 @@ class infoPage extends plugin
         $str = "";
         foreach($this->config->data['TABS']['MYACCOUNTTABS'] as $pluginData){
             $plugin = $pluginData['CLASS'];
-            $plInfo = call_user_func(array($plugin,'plInfo'));
+
+            if(!$this->checkAccess($plugin)) continue;
 
             list($index, $title, $desc, $icon) = $plist->getPlugData($plugin);
-
             $str.= "\n        <div class='icon-menu-item' style='width: 20%;' onclick='openPlugin(\"{$myAccountID}\",\"{$plugin}\")'>";
             $str.= "\n          ".image($icon);
             $str.= "\n          <div class='dsc'>";
@@ -40,6 +40,18 @@ class infoPage extends plugin
 
         }
         return($str);
+    }
+
+    function checkAccess($class)
+    {
+        foreach($this->ui->ocMapping as $cat => $aclClasses){
+            if(in_array($class, $aclClasses)){
+                if(preg_match('/[rw]/',$this->ui->get_permissions($this->ui->dn, "{$cat}/{$class}", ''))){
+                    return(TRUE);
+                }
+            }
+        }
+        return(FALSE);
     }
     
 
