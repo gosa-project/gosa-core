@@ -14,7 +14,29 @@ class infoPage extends plugin
 
         // Detect managers for the current user.
         $this->managers = $this->detectManagers();
+
+        // Get plugin list
+        $this->plugins = $this->getPluginList();
     }
+
+    function getPluginList()
+    {
+        $plist = session::get('plist');
+        $myAccountID = array_search('MyAccount',$plist->pluginList);
+        $str = "";
+        foreach($this->config->data['TABS']['MYACCOUNTTABS'] as $pluginData){
+            $plugin = $pluginData['CLASS'];
+            $plInfo = call_user_func(array($plugin,'plInfo'));
+
+
+            $str .= "<div style='width:20%;height:40px; background-color: grey; float: left'
+                        onClick='openPlugin(\"{$myAccountID}\", \"{$plugin}\");'>";
+            $str .= $plugin;
+            $str .= "</div>";
+        }
+        return($str);
+    }
+    
 
     function detectManagers()
     {
@@ -53,6 +75,7 @@ class infoPage extends plugin
 
     function execute()
     {
+        $this->plugins = $this->getPluginList();
         $smarty = get_smarty();
         $personalInfoAllowed = FALSE;
         foreach(array("uid","sn","givenName","street","l","o","ou","jpegPhoto","personalTitle",
@@ -72,6 +95,7 @@ class infoPage extends plugin
         $smarty->assign("personalInfoAllowed", $personalInfoAllowed);
         $smarty->assign("attrs", $this->attrs);
         $smarty->assign("managers", $this->managers);
+        $smarty->assign("plugins", $this->plugins);
         $smarty->assign("managersCnt", count($this->managers));
         return($smarty->fetch(get_template_path("infoPage.tpl")));
     }

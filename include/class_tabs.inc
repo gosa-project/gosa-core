@@ -84,6 +84,12 @@ class tabs
       $this->by_object[$tab['CLASS']]->parent= &$this;
       $this->by_object[$tab['CLASS']]->set_acl_category($this->acl_category);
     }
+
+    // Try to set the current tab to the posted value
+    if(isset($_GET['pluginTab'])){
+        $tab = $_GET['pluginTab'];
+        if(isset($this->by_name[$tab])) $this->current = $tab;
+    } 
   }
 
  

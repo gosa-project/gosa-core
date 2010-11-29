@@ -291,9 +291,9 @@ class pluglist
             // We do it in here to get the string translated.
             $this->menu .=  
                 "\n      <script language='javascript' type='text/javascript'>".
-                "\n        function openPlugin(id){".
+                "\n        function openPlugin(id, plugin){".
                 "\n          return question(\""._("You are currently editing a database entry. Do you want to discard the changes?")."\",".
-                "\n            \"main.php?plug=\" + id + \"&reset=1\");".
+                "\n            \"main.php?plug=\" + id + \"&reset=1&pluginTab=\" + plugin);".
                 "\n        }".
                 "\n      </script>\n"; 
         }

@@ -40,29 +40,22 @@
             {/if}
         </tr>
     </table>
-                
 
 {/if}
 
+{if $plugins != ""}
 <hr>
-
-
 <h3>{t}Management shortcuts{/t}</h3>
+    {$plugins}
+    <div class="clear"></div>
+{/if}
 
-[aus gosa.conf, Ansicht wie im icon-Menu, max. 4 Icons nebeneinander]
+{if $managersCnt != 0}
+    <hr>
+    <h3>{t}If you need assistance with this interface, please contact your administrative contact{/t}:</h3>
 
-<hr>
-
-<h3>{t}If you need assistance with this interface, please contact your administrative contact{/t}:</h3>
-
-<pre>
-[liste von uids aus gosa.conf, die aufgelöst wird nach:]
- * Hugo Verwalter
-   Mail:  verwalter@where.com
-   Phone: 771
-
- * Gundula Ver-Walter
-   Mail:  gundula@where.com
-   Phone: 772
-</pre>
+    {foreach from=$managers item=item}
+        {$item.str}
+    {/foreach}
+{/if}
 <hr>
