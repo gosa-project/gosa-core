@@ -5,12 +5,14 @@ class infoPage extends plugin
     private $ui;
     private $managers;
 
+
+    /*! \brief
+     */
     function __construct($config)
     {
         $this->config = &$config;
         $this->ui = get_userinfo();
         plugin::plugin($config, $this->ui->dn);
-
 
         // Detect managers for the current user.
         $this->managers = $this->detectManagers();
@@ -19,6 +21,11 @@ class infoPage extends plugin
         $this->plugins = $this->getPluginList();
     }
 
+
+    /*! \brief  Returns a HTML string which respresent a list of plugins the user can access.
+     *          Only accessible plugins will be rendered.
+     *  @return String  HTML content
+     */
     function getPluginList()
     {
         $plist = session::get('plist');
@@ -42,6 +49,11 @@ class infoPage extends plugin
         return($str);
     }
 
+
+    /*! \brief  Check if we've access to a given class/plugin of GOsa. 
+     *  @param  String  The class name to check for.
+     *  @return Boolean     True on success else FALSE.
+     */
     function checkAccess($class)
     {
         foreach($this->ui->ocMapping as $cat => $aclClasses){
@@ -53,8 +65,13 @@ class infoPage extends plugin
         }
         return(FALSE);
     }
-    
 
+
+    /*! \brief  Prepares an array which contains info about the users
+     *           managers. The personal manager and the next
+     *           manager defined for a department.
+     *  @return Array   An array with resolved manager dns.
+     */
     function detectManagers()
     {
 
@@ -102,16 +119,19 @@ class infoPage extends plugin
     }
 
 
+    /*! \brief  Renders the plugin UI in HTML.
+     *  @return String  HTML content of the plugin.
+     */
     function execute()
     {
         $smarty = get_smarty();
         $personalInfoAllowed = FALSE;
         foreach(array("uid","sn","givenName","street","l","o","ou","jpegPhoto","personalTitle",
-            "academicTitle","dateOfBirth","homePostalAddress","homePhone","departmentNumber",
-            "employeeNumber","employeeType") as $attr){
+                    "academicTitle","dateOfBirth","homePostalAddress","homePhone","departmentNumber",
+                    "employeeNumber","employeeType") as $attr){
             $smarty->assign($attr, "");
             if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", $attr))
-                && isset($this->attrs[$attr][0])){
+                    && isset($this->attrs[$attr][0])){
                 $smarty->assign($attr,set_post( $this->attrs[$attr][0]));
                 $personalInfoAllowed = TRUE;
             }
