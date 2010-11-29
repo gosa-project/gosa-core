@@ -240,6 +240,8 @@ $smarty->assign("noMenuMode", count($plist->getRegisteredMenuEntries()) == 0);
 if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
   $plug= validate($_GET['plug']);
   $plugin_dir= $plist->get_path($plug);
+  $plugin= $plist->get_class($plug);
+  session::global_set('currentPlugin',$plugin);
   session::global_set('plugin_dir',$plugin_dir);
   if ($plugin_dir == ""){
     new log("security","gosa","",array(),"main.php called with invalid plug parameter \"$plug\"") ;
@@ -247,17 +249,18 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
     exit;
   }
 } else {
-
-    // Display the welcome page for admins (iconmenu) and an info page for those 
-    //  who are not allowed to adminstrate anything (user)
-    if(count($plist->getRegisteredMenuEntries()) == 0){
-        session::global_set('plugin_dir',"infoPage");
-        $plugin_dir= "$BASE_DIR/plugins/generic/infoPage";
-    }else{
-        session::global_set('plugin_dir',"welcome");
-        $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
-    } 
+    session::global_set('plugin_dir',"welcome");
+    session::global_set('currentPlugin','welcome');
+    $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
 }
+
+// Display the welcome page for admins (iconmenu) and an info page for those 
+//  who are not allowed to adminstrate anything (user)
+if(count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('currentPlugin') == "welcome"){
+    session::global_set('plugin_dir',"infoPage");
+    session::global_set('currentPlugin','welcome');
+    $plugin_dir= "$BASE_DIR/plugins/generic/infoPage";
+} 
 
 /* Handle plugin locks.
     - Remove the plugin from session if we switched to another. (cleanup) 

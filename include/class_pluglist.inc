@@ -187,6 +187,10 @@ class pluglist
             $acl_to_check = trim($acl_to_check);
             $acl_to_check = preg_replace("/ /","",$acl_to_check);
 
+            if($acl_to_check == "none"){
+                $this->silly_cache[$aclname]= TRUE;
+                return(TRUE);
+            }
 
             /* Check if the given acl tag is only valid for self acl entries  
              *          <plugin acl="users/user:self" class="user"...  
@@ -507,6 +511,14 @@ class pluglist
     function get_index($class)
     {
         return (array_search($class, $this->pluginList));
+    }
+
+
+    /*! \brief    Returns the plugins id for a given class.
+     */
+    function get_class($index)
+    {
+        return($this->pluginList[$index]);
     }
 
 
