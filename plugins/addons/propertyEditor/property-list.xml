@@ -54,10 +54,18 @@
   </definition>
 
   <table>
-    <layout>|20px;c|||||60px;r|</layout>
+    <layout>|20px;c|||||70px;r|</layout>
 
     <column>
       <value>%{filter:objectType(dn,objectClass)}</value>
+    </column>
+
+    <column>
+      <label>Name</label>
+      <sortAttribute>cn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:propertyName(class,cn,description,mandatory)}</value>
+      <export>true</export>
     </column>
 
     <column>
@@ -73,14 +81,6 @@
       <sortAttribute>group</sortAttribute>
       <sortType>string</sortType>
       <value>%{filter:propertyClass(class,description)}</value>
-      <export>true</export>
-    </column>
-
-    <column>
-      <label>Name</label>
-      <sortAttribute>cn</sortAttribute>
-      <sortType>string</sortType>
-      <value>%{filter:propertyName(class,cn,description,mandatory)}</value>
       <export>true</export>
     </column>
 
