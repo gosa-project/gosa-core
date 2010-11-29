@@ -75,7 +75,6 @@ class infoPage extends plugin
 
     function execute()
     {
-        $this->plugins = $this->getPluginList();
         $smarty = get_smarty();
         $personalInfoAllowed = FALSE;
         foreach(array("uid","sn","givenName","street","l","o","ou","jpegPhoto","personalTitle",
@@ -96,6 +95,7 @@ class infoPage extends plugin
         $smarty->assign("attrs", $this->attrs);
         $smarty->assign("managers", $this->managers);
         $smarty->assign("plugins", $this->plugins);
+        $smarty->assign("jpegPhoto", isset($this->attrs['jpegPhoto']));
         $smarty->assign("managersCnt", count($this->managers));
         return($smarty->fetch(get_template_path("infoPage.tpl")));
     }
