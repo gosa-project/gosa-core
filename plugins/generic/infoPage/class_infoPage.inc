@@ -107,6 +107,12 @@ class infoPage extends plugin
 
         session::set('binary',$this->attrs['jpegPhoto'][0]);
         session::set('binarytype',"image/jpeg");
+
+        // Set date of birth
+        if(isset($this->attrs['dateOfBirth'][0])){
+            $smarty->assign("dateOfBirth", date('d.m.Y',strtotime($this->attrs['dateOfBirth'][0])));
+        }
+
         $smarty->assign("rand", rand(0, 99999999));
         $smarty->assign("personalInfoAllowed", $personalInfoAllowed);
         $smarty->assign("attrs", $this->attrs);
