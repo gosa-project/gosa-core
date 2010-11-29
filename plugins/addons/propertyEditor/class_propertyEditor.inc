@@ -227,8 +227,8 @@ class propertyEditor extends management
                 $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
                 $false = (preg_match('/true/i', $value)) ? '' : "selected";
                 $true  = (preg_match('/true/i', $value)) ? "selected" : '';
-                $res.= "<option {$false} value='false'>"._("FALSE")."</option>";
-                $res.= "<option {$true} value='true'>"._("TRUE")."</option>";
+                $res.= "<option {$false} value='false'>"._("Off")."</option>";
+                $res.= "<option {$true} value='true'>"._("On")."</option>";
                 $res.= "</select>";
             case 'switch':
                 if(!empty($defaults[0])){
