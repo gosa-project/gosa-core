@@ -296,8 +296,13 @@ class pluglist
             $this->menu .=  
                 "\n      <script language='javascript' type='text/javascript'>".
                 "\n        function openPlugin(id, plugin){".
+                "\n          if(plugin){ ".
+                "\n             plugin = '&pluginTab=' +  plugin".
+                "\n          }else{".
+                "\n             plugin = '';".
+                "\n          }".
                 "\n          return question(\""._("You are currently editing a database entry. Do you want to discard the changes?")."\",".
-                "\n            \"main.php?plug=\" + id + \"&reset=1&pluginTab=\" + plugin);".
+                "\n            \"main.php?plug=\" + id + \"&reset=1\" + plugin);".
                 "\n        }".
                 "\n      </script>\n"; 
         }

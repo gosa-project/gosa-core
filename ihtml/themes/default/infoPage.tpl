@@ -33,7 +33,7 @@
 
                 </table>
             </td>
-            {if $jpegPhoto != ""}
+            {if $jpegPhoto}
                 <td>
                     <img  src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
                 </td>

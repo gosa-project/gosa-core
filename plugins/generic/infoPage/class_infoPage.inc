@@ -28,11 +28,16 @@ class infoPage extends plugin
             $plugin = $pluginData['CLASS'];
             $plInfo = call_user_func(array($plugin,'plInfo'));
 
+            list($index, $title, $desc, $icon) = $plist->getPlugData($plugin);
 
-            $str .= "<div style='width:20%;height:40px; background-color: grey; float: left'
-                        onClick='openPlugin(\"{$myAccountID}\", \"{$plugin}\");'>";
-            $str .= $plugin;
-            $str .= "</div>";
+            $str.= "\n        <div class='icon-menu-item' style='width: 20%;' onclick='openPlugin(\"{$myAccountID}\",\"{$plugin}\")'>";
+            $str.= "\n          ".image($icon);
+            $str.= "\n          <div class='dsc'>";
+            $str.= "\n            <h1>{$title}</h1>";
+            $str.= "\n            <p>{$desc}</p>";
+            $str.= "\n          </div>";
+            $str.= "\n        </div>";
+
         }
         return($str);
     }
