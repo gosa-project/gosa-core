@@ -53,9 +53,10 @@
 {if $managersCnt != 0}
     <hr>
     <h3>{t}If you need assistance with this interface, please contact your administrative contact{/t}:</h3>
-
     {foreach from=$managers item=item}
+        <div style='float: left; width:50%;'>
         {$item.str}
+        </div>
     {/foreach}
 {/if}
 <hr>

@@ -45,38 +45,50 @@ class infoPage extends plugin
 
     function detectManagers()
     {
-        $dn = $this->dn;
-        $max = 10;
-        $dns = array();
-        $dns[] = $dn;
-        while(strlen($dn) >= strlen($this->config->current['BASE']) && $max){
-            $dn = preg_replace("/^[^,]+,/","",$dn);
-            $dns[] = $dn;
-            $max --;
-        }
+
+        // Check if we've an own manager set
         $ldap = $this->config->get_ldap_link(); 
         $ldap->cd($this->config->current['BASE']);
-        $managers = array();
-        foreach($dns as $dn){
+        $ldap->cat($this->dn, array('manager'));
+        $attrs = $ldap->fetch();
+        $dns = array();
+        if(isset($attrs['manager'][0])){
+            $dns['PERSONAL'] = $attrs['manager'][0];
+        }
+
+        // Get next department manager dn
+        $dn = $this->dn;
+        $max = 10;
+        while(strlen($dn) >= strlen($this->config->current['BASE']) && $max){
+            $dn = preg_replace("/^[^,]+,/","",$dn);
+            $max --;
             $ldap->cat($dn, array('manager'));
             $attrs = $ldap->fetch();
-            if(isset($attrs['manager'])){
-                $ldap->cat($attrs['manager'][0], array('sn','givenName','mail','telephoneNumber'));
-                $managers[$dn] = $ldap->fetch();
-                $name = $phone = $mail = "";
-                $name = "<b>".set_post($managers[$dn]['sn'][0]).", ".set_post($managers[$dn]['givenName'][0])."</b>";
-                if(isset($managers[$dn]['mail'][0])){
-                    $mail = "<li>"._("Mail address").":&nbsp;".set_post($managers[$dn]['mail'][0])."</li>";
-                }
-                if(isset($managers[$dn]['telephoneNumber'][0])){
-                    $phone = "<li>"._("Phone number").":&nbsp;".set_post($managers[$dn]['telephoneNumber'][0])."</li>";
-                }
-                $managers[$dn]['str'] = "<p>{$name}<ul>{$phone}{$mail}</ul></p>";
+            if(isset($attrs['manager'][0])){
+                $dns['DEPARTMENT'] = $attrs['manager'][0];
+                break;
             }
+        }
+
+        // Resolve collected manager dns
+        $managers = array();
+        foreach($dns as $type => $dn){
+            $ldap->cat($dn,array('sn','givenName','mail','telephoneNumber'));
+            $managers[$dn] = $ldap->fetch();
+            $managers[$dn]['type'] = $type;
+            $name = $phone = $mail = "";
+            $name = "<b>".set_post($managers[$dn]['sn'][0]).", ".set_post($managers[$dn]['givenName'][0])."</b>";
+            if(isset($managers[$dn]['mail'][0])){
+                $mail = "<li>"._("Mail address").":&nbsp;".set_post($managers[$dn]['mail'][0])."</li>";
+            }
+            if(isset($managers[$dn]['telephoneNumber'][0])){
+                $phone = "<li>"._("Phone number").":&nbsp;".set_post($managers[$dn]['telephoneNumber'][0])."</li>";
+            }
+            $managers[$dn]['str'] = "<p>{$name}<ul>{$phone}{$mail}</ul></p>";
         }
         return($managers);
     }
-    
+
 
     function execute()
     {
