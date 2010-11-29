@@ -804,7 +804,7 @@ msgstr "Ihr Browser (%s) ist für das momentane Theme nicht geeignet!"
 #, php-format
 msgid "This session is not encrypted. Click %s to enter an encrypted session."
 msgstr ""
-"Diese Sitzung ist nicht verschlüsselt. Klicken Sie %s um eine Verschlüsselte "
+"Diese Sitzung ist nicht verschlüsselt. Klicken Sie %s um eine verschlüsselte "
 "Sitzung zu verwenden."
 
 #: html/index.php:72
