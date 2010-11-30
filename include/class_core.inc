@@ -816,48 +816,16 @@ DEBUG_SI      = 256"),
                                 "name"          => "nextIdHook",
                                 "type"          => "command",
                                 "default"       => "",
-                                #TODO: Work starts here...
-                                "description"   => _("The 'nextIdHook' statement defines a script to be called for finding the next free id for users or groups externaly. It gets called with the current entry \"dn\" and the attribute to be ID'd. It should return an integer value."),
+                                "description"   => _("Script to be called for finding the next free id for groups or users."),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
                                 "group"         => "id",
                                 "mandatory"     => FALSE),
-
                         array(
                                 "name"          => "idGenerator",
                                 "type"          => "string",
                                 "default"       => "{%sn}-{%givenName[2-4]}",
-                                "description"   => _("The 'idGenerator' statement describes an automatic way to generate new user ids. There are two basic functions supported - which can be combined: 
-
- a) using attributes
-
-    You can specify LDAP attributes (currently only sn and givenName) in
-    braces {} and add a percent sign befor it. Optionally you can strip it
-    down to a number of characters, specified in []. I.e.
-
-      idGenerator=\"{%sn}-{%givenName[2-4]}\"
-
-    will generate an ID using the full surname, adding a dash, and adding at
-    least the first two characters of givenName. If this ID is used, it'll
-    use up to four characters. If no automatic generation is possible, a
-    input box is shown.
-
- b) using automatic id's
-
-    I.e. specifying
-
-      idGenerator=\"acct{id:3}\"
-
-    will generate a three digits id with the next free entry appended to \"acct\".
-
-      idGenerator=\"acct{id!1}\"
-
-    will generate a one digit id with the next free entry appended to \"acct\" - if needed.
-
-      idGenerator=\"ext{id#3}\"
-
-    will generate a three digits random number appended to \"ext\".
-"),
+                                "description"   => _("Descriptive string for the automatic ID generator. Please read the FAQ file for more information."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
@@ -867,7 +835,7 @@ DEBUG_SI      = 256"),
                                 "name"          => "strictNamingRules",
                                 "type"          => "bool",
                                 "default"       => "true",
-                                "description"   => _("The 'strictNamingRules' statement enables strict checking of uids and group names. If you need   characters like . or - inside of your accounts, set this to 'false'."),
+                                "description"   => _("Enable strict checking for user IDs and group names."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
@@ -877,7 +845,7 @@ DEBUG_SI      = 256"),
                                 "name"          => "minId",
                                 "type"          => "integer",
                                 "default"       => 40,
-                                "description"   => _("The 'minId' statement defines the minimum assignable user or group id to avoid security leaks with uid 0 accounts. This is used for the 'traditional' method."),
+                                "description"   => _("Lowest assignable user or group ID. Only active if idAllocationMethod is set to 'traditional'."),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
@@ -888,7 +856,7 @@ DEBUG_SI      = 256"),
                                 "type"          => "switch",
                                 "default"       => "mail",
                                 "defaults"      => "core::getPropertyValues",
-                                "description"   => _("The 'mailAttribute' statement determines which attribute GOsa will use to create accounts. Valid values are 'mail' and 'uid'."),
+                                "description"   => _("Attribute to be used for primary mail addresses."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -898,7 +866,7 @@ DEBUG_SI      = 256"),
                                 "name"          => "gosaSharedPrefix",
                                 "type"          => "string",
                                 "default"       => "",
-                                "description"   => _("This attribute allows to override the prefix used to create shared folders."),
+                                "description"   => _("Namespace used for shared folders."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -908,12 +876,7 @@ DEBUG_SI      = 256"),
                                 "name"          => "mailUserCreation",
                                 "type"          => "string",
                                 "default"       => "",
-                                "description"   => _("This attribute allows to override the user account creation syntax, see the 'mailFolderCreation' description for more details.
-
-Examples
- mailUserCreation=\"%prefix%%uid%\"           => \"user.foobar\"
- mailUserCreation=\"my-prefix.%uid%%domain%\"  => \"my-prefix.foobar@example.com\"
-"),
+                                "description"   => _("Namespace rule to create user folders. Please read the FAQ file for more information."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -923,23 +886,7 @@ Examples
                                 "name"          => "mailFolderCreation",
                                 "type"          => "string",
                                 "default"       => "",
-                                "description"   => _("Every mail method has its own way to create mail accounts like 'share/development' or 'shared.development@example.com' which is used to identify the accounts, set quotas or add acls.
-
-To override the methods default account creation syntax, you can set the 'mailFolderCreation' option.
-
-Examples
-
- mailFolderCreation=\"%prefix%%cn%\"              => \"shared.development\"
- mailFolderCreation=\"my-prefix.%cn%%domain%\"    => \"my-prefix.development@example.com\"
-
- %prefix%    The methods default prefix. (Depends on cyrusUseSlashes=FALSE/TRUE)
- %cn%        The groups/users cn.
- %uid%       The users uid.
- %mail%      The objects mail attribute.
- %domain%    The domain part of the objects mail attribute.
- %mailpart%  The user address part of the mail address.
- %uattrib%   Depends on mailAttribute=\"uid/mail\".
-"),
+                                "description"   => _("Namespace rule to create folders. Please read the FAQ file for more information."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -949,7 +896,7 @@ Examples
                                 "name"          => "imapTimeout",
                                 "type"          => "integer",
                                 "default"       => 10,
-                                "description"   => _("The 'imapTimeout' statement sets the connection timeout for imap actions."),
+                                "description"   => _("Seconds after an IMAP connection is considered dead."),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -960,7 +907,7 @@ Examples
                                 "type"          => "switch",
                                 "default"       => "",
                                 "defaults"      => "core::getPropertyValues",
-                                "description"   => _("The 'mailMethod' statement tells GOsa which mail method the setup should use to communicate with a possible mail server. Leave this undefined if your mail method does not match the predefined ones."),
+                                "description"   => _("Class name of the mail method to be used."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -970,7 +917,7 @@ Examples
                                 "name"          => "cyrusUseSlashes",
                                 "type"          => "bool",
                                 "default"       => "true",
-                                "description"   => _("The 'cyrusUseSlashes' statement determines if GOsa should use \"foo/bar\" or \"foo.bar\" namespaces in IMAP. Unix style is with slashes."),
+                                "description"   => _("Enable slashes instead of dots as a name space separator for Cyrus IMAP."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -980,18 +927,7 @@ Examples
                                 "name"          => "vacationTemplateDirectory",
                                 "type"          => "path",
                                 "default"       => "/etc/gosa/vacation",
-                                "description"   => _("The 'vacationTemplateDirectory' statement sets the path where GOsa will look for vacation message templates. Default is /etc/gosa/vacation. 
-
-Example template /etc/gosa/vacation/business.txt:
-
-   DESC:Away from desk
-   Hi, I'm currently away from my desk. You can contact me on
-   my cell phone via %mobile.
-
-   Greetings,
-   %givenName %sn
-
-"),
+                                "description"   => _("Directory to store vacation templates. Please read the FAQ file for more information."),
                                 "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "mail",
@@ -1001,7 +937,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "ldapTLS",
                                 "type"          => "bool",
                                 "default"       => "false",
-                                "description"   => _("The 'ldapTLS' statement enables or disables TLS operating on LDAP connections."),
+                                "description"   => _("Enable TLS for LDAP connections."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
@@ -1011,7 +947,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "honourIvbbAttributes",
                                 "type"          => "bool",
                                 "default"       => "false",
-                                "description"   => _("The 'honourIvbbAttributes' statement enables the IVBB mode inside of GOsa. You need the ivbb.schema file from used by german authorities."),
+                                "description"   => _("Enable IVBB used by german authorities."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
@@ -1021,7 +957,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "sambaIdMapping",
                                 "type"          => "bool",
                                 "default"       => "false",
-                                "description"   => _("The 'sambaIdMapping' statement tells GOsa to maintain sambaIdmapEntry objects. Depending on your setup this can drastically improve the windows login performance."),
+                                "description"   => _("Maintain sambaIdmapEntry objects to improve performance on some Samba versions."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "samba",
@@ -1031,7 +967,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "handleExpiredAccounts",
                                 "type"          => "bool",
                                 "default"       => "true",
-                                "description"   => _("The 'handleExpiredAccounts' statement enables shadow attribute tests during the login to the GOsa web interface and forces password renewal or account lockout."),
+                                "description"   => _("Enable checks to determine whether an account is expired or not."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
@@ -1041,7 +977,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "sambaSID",
                                 "type"          => "string",
                                 "default"       => "",
-                                "description"   => _("The 'sambaSID' statement defines a samba SID if not available inside of the LDAP. You can retrieve the current sid by net getlocalsid."),
+                                "description"   => _("String containing the SID for Samba setups without the Domain object in LDAP."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "samba",
@@ -1051,7 +987,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "sambaRidBase",
                                 "type"          => "integer",
                                 "default"       => "",
-                                "description"   => _("The 'sambaRidBase' statement defines the base id to add to ordinary sid calculations - if not available inside of the LDAP."),
+                                "description"   => _("String containing the RID base for Samba setups without the Domain object in LDAP."),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "samba",
@@ -1061,7 +997,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "enableSnapshots",
                                 "type"          => "bool",
                                 "default"       => "false",
-                                "description"   => _("The 'enableSnapshots' statement enables a snapshot mechaism in GOsa. This enables you to save certain states of entries and restore them later on."),
+                                "description"   => _("Enable manual object snapshots."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
@@ -1071,7 +1007,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "snapshotBase",
                                 "type"          => "dn",
                                 "default"       => "ou=snapshots,dc=localhost,dc=de",
-                                "description"   => _("The 'snapshotBase' statement defines the base where snapshots should be stored inside of the LDAP."),
+                                "description"   => _("Base DN for snapshot storage."),
                                 "check"         => "gosaProperty::isDn",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
@@ -1081,7 +1017,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "snapshotAdminDn",
                                 "type"          => "dn",
                                 "default"       => "cn=admin,dc=localhost,dc=de",
-                                "description"   => _("The 'snapshotAdminDn' variable defines the user which is used to authenticate when connecting to 'snapshotURI'."),
+                                "description"   => _("DN of the snapshot administrator."),
                                 "check"         => "gosaProperty::isDn",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
@@ -1091,7 +1027,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "snapshotAdminPassword",
                                 "type"          => "string",
                                 "default"       => "secret",
-                                "description"   => _("The 'snapshotAdminPassword' variable defines the credentials which are used in combination with 'snapshotAdminDn' and 'snapshotURI' in order to authenticate."),
+                                "description"   => _("Password of the snapshot administrator."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
@@ -1102,7 +1038,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "type"          => "switch",
                                 "default"       => "traditional",
                                 "defaults"      => "core::getPropertyValues",
-                                "description"   => _("The 'idAllocationMethod' statement defines how GOsa generates numeric user and group id values. If it is set to 'traditional' GOsa will do create a lock and perform a search for the next free ID. The lock will be removed after the procedure completes. 'pool' will use the sambaUnixIdPool objectclass settings inside your LDAP. This one is unsafe, because it does not check for concurrent LDAP access and already used IDs in this range. On the other hand it is much faster."),
+                                "description"   => _("Method for user and group ID generation. Note: only the 'traditional' method is safe due to PHP limitations."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "id",
@@ -1111,7 +1047,7 @@ Example template /etc/gosa/vacation/business.txt:
                                 "name"          => "snapshotURI",
                                 "type"          => "uri",
                                 "default"       => "ldap://localhost:389",
-                                "description"   => _("The 'snapshotURI' variable defines the LDAP URI for the server which is used to do object snapshots."),
+                                "description"   => _("URI of server to be used for snapshots."),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
