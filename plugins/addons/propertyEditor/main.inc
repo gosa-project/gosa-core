@@ -32,8 +32,8 @@ if ($remove_lock){
  */
 if ( $cleanup ){
     if (session::is_set('propertyEditor')){
+        #session::un_set('propertyEditor');
     }
-    session::un_set('propertyEditor');
 }else{
 
 
