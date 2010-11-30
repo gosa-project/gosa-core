@@ -785,7 +785,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "useSaslForKerberos",
                                 "type"          => "bool",
-                                "default"       => "false",
+                                "default"       => "true",
                                 "description"   => _("Enable the use of {sasl} instead of {kerberos} for user realms."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
