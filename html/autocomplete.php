@@ -40,7 +40,7 @@ if (isset($_GET['type']) && $_GET['type'] == "base" && isset($_GET['pid'])) {
     
     // Find dn based on name and description
     $pid = $_GET['pid'];
-    if (session::is_set("pathMapping_{$pid}") && count($_POST) == 1) {
+    if (session::is_set("pathMapping_{$pid}")){
         $res= "";
         $pathMapping= session::get("pathMapping_{$pid}");
         $department_info= session::get("department_info_{$pid}");
