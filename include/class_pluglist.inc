@@ -534,7 +534,7 @@ class pluglist
      */
     function plugin_access_allowed($plug_id)
     {
-        return(isset($this->pluginList[$plug_id]));
+        return(isset($this->pluginList[$plug_id]) && $plug_id != "");
     }
 
 
