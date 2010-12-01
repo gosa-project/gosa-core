@@ -13,7 +13,7 @@
 
 <input type='checkbox' value='1' name='copyMembers' {if $copyMembers} checked {/if} id='copyMembers'>
 <LABEL for='copyMembers'>
-&nbsp;{t}Copy members. Be careful with this option, systems can only inherit from a single object group!{/t}
+&nbsp;{t}Warning: systems can only inherit from a single object group!{/t}
 </LABEL>
 <script language="JavaScript" type="text/javascript">
 	focus_field('cn');

@@ -201,11 +201,11 @@ class migrateRDN implements propertyMigration
                     if($tmp->move($data['from'], $data['to'])){
                     }elseif($ldap->dn_exists($data['to'])){
                         msg_dialog::display(_("Error"), 
-                                sprintf(_("Migration failed for object %s, dn already exists!"), 
+                                sprintf(_("Migration failed for object %s: DN already exists!"), 
                                     bold($data['to'])), ERROR_DIALOG);
                     }else{
                         msg_dialog::display(_("Error"), 
-                                sprintf(_("Migration failed for object %s, please check if it already exists!"), 
+                                sprintf(_("Migration failed for object %s: please check if it already exists!"), 
                                     bold($data['to'])), ERROR_DIALOG);
                     }
                 }

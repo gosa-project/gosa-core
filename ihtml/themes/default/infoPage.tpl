@@ -22,13 +22,13 @@
                     {if $homePostalAddress != ""}<tr><td style="padding-top:15px">{t}Home postal address{/t}:</td><td style="padding-top:15px"><i>{$homePostalAddress}</i></td></tr>{/if}
                     {if $dateOfBirth != ""}<tr><td style="padding-top:15px">{t}Date of birth{/t}:</td><td style="padding-top:15px"><i>{$dateOfBirth}</i></td></tr>{/if}
                     {if $mail != ""}<tr><td style="padding-top:15px">{t}Mail{/t}:</td><td style="padding-top:15px"><i>{$mail}</i></td></tr>{/if}
-                    {if $homePhone != ""}<tr><td>{t}Home phone{/t}:</td><td><i>{$homePhone}</i></td></tr>{/if}
+                    {if $homePhone != ""}<tr><td>{t}Home phone number{/t}:</td><td><i>{$homePhone}</i></td></tr>{/if}
                 </table>
             </td>
             <td style="border-left:1px solid #CCC; padding-left:10px">
                 <table>
                     {if $o != ""}<tr><td>{t}Organization{/t}:</td><td><i>{$o}</i></td></tr>{/if}
-                    {if $ou != ""}<tr><td>{t}Organizational unit{/t}:</td><td><i>{$ou}</i></td></tr>{/if}
+                    {if $ou != ""}<tr><td>{t}Organizational Unit{/t}:</td><td><i>{$ou}</i></td></tr>{/if}
                     {if $l != ""}<tr><td style="padding-top:15px">{t}Location{/t}:</td><td style="padding-top:15px"><i>{$l}</i></td></tr>{/if}
                     {if $street != ""}<tr><td>{t}Street{/t}:</td><td><i>{$street}</i></td></tr>{/if}
                     {if $departmentNumber != ""}<tr><td style="padding-top:15px">{t}Department number{/t}:</td><td style="padding-top:15px"><i>{$departmentNumber}</i></td></tr>{/if}

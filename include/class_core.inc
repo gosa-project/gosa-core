@@ -265,7 +265,7 @@ class core extends plugin {
                             "name"          => "logging",
                             "type"          => "bool",
                             "default"       => "true",
-                            "description"   => _("Enables event logging in GOsa. Setting it to 'On' make GOsa log every action a user performs via syslog. If you use this in combination with rsyslog and configure it to mysql logging, you can browse all events in GOsa."),
+                            "description"   => _("Enables event logging in GOsa. Setting it to 'On' make GOsa log every action a user performs via syslog. If you use this in combination with rsyslog and configure it to MySQL logging, you can browse all events in GOsa."),
 
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
