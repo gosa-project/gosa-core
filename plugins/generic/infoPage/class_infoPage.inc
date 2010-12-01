@@ -126,31 +126,39 @@ class infoPage extends plugin
     {
         $smarty = get_smarty();
         $personalInfoAllowed = FALSE;
-        foreach(array("uid","sn","givenName","street","l","o","ou","jpegPhoto","personalTitle",
+        foreach(array("uid","sn","givenName","mail","street","l","o","ou","jpegPhoto","personalTitle",
                     "academicTitle","dateOfBirth","homePostalAddress","homePhone","departmentNumber",
                     "employeeNumber","employeeType") as $attr){
             $smarty->assign($attr, "");
             if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", $attr))
                     && isset($this->attrs[$attr][0])){
-                $smarty->assign($attr,set_post( $this->attrs[$attr][0]));
+                $smarty->assign($attr, set_post($this->attrs[$attr][0]));
                 $personalInfoAllowed = TRUE;
             }
+        }
+
+        #TODO: Permission
+        if(!isset($this->attrs['jpegPhoto'])){
+            echo "No image...";
+        }
+
+        // Convert address
+        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "homePostalAddress")) && isset($this->attrs['homePostalAddress'][0])){
+            $smarty->assign("homePostalAddress", preg_replace("/\n/", "<br>", $this->attrs['homePostalAddress'][0]));
         }
 
         session::set('binary',$this->attrs['jpegPhoto'][0]);
         session::set('binarytype',"image/jpeg");
 
         // Set date of birth
-        if(isset($this->attrs['dateOfBirth'][0])){
+        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "dateOfBirth")) && isset($this->attrs['dateOfBirth'][0])){
             $smarty->assign("dateOfBirth", date('d.m.Y',strtotime($this->attrs['dateOfBirth'][0])));
         }
 
         $smarty->assign("rand", rand(0, 99999999));
         $smarty->assign("personalInfoAllowed", $personalInfoAllowed);
-        $smarty->assign("attrs", $this->attrs);
         $smarty->assign("managers", $this->managers);
         $smarty->assign("plugins", $this->plugins);
-        $smarty->assign("jpegPhoto", isset($this->attrs['jpegPhoto']));
         $smarty->assign("managersCnt", count($this->managers));
         return($smarty->fetch(get_template_path("infoPage.tpl")));
     }

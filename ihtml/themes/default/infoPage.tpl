@@ -1,12 +1,12 @@
-<h3>{t}Welcome to the GOsa self service!{/t}</h3>
-<hr>
-
 {if $personalInfoAllowed}
 
-    <h3>{t}Information about you{/t}:</h3>
+    <h3>{t}Personal information{/t}</h3>
 
     <table width="100%">
         <tr>
+            <td>
+                    <img src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
+            </td>
             <td style="width:33%">
                 <table>
                     {if $uid != ""}<tr><td>{t}User-ID{/t}:</td><td>{$uid}</td></tr>{/if}
@@ -16,11 +16,12 @@
                     {if $academicTitle != ""}<tr><td>{t}Academic title{/t}:</td><td>{$academicTitle}</td></tr>{/if}
 
                     {if $dateOfBirth != ""}<tr><td>{t}Date of birth{/t}:</td><td>{$dateOfBirth}</td></tr>{/if}
+                    {if $mail != ""}<tr><td>{t}Mail{/t}:</td><td>{$mail}</td></tr>{/if}
                     {if $homePhone != ""}<tr><td>{t}Home phone{/t}:</td><td>{$homePhone}</td></tr>{/if}
-                    {if $homePostalAddress != ""}<tr><td>{t}Home postal address{/t}:</td><td><pre>{$homePostalAddress}</pre></td></tr>{/if}
+                    {if $homePostalAddress != ""}<tr><td>{t}Home postal address{/t}:</td><td>{$homePostalAddress}</td></tr>{/if}
                 </table>
             </td>
-            <td style="width:33%">
+            <td>
                 <table>
                     {if $o != ""}<tr><td>{t}Organization{/t}:</td><td>{$o}</td></tr>{/if}
                     {if $ou != ""}<tr><td>{t}Organizational unit{/t}:</td><td>{$ou}</td></tr>{/if}
@@ -33,11 +34,6 @@
 
                 </table>
             </td>
-            {if $jpegPhoto}
-                <td>
-                    <img  src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
-                </td>
-            {/if}
         </tr>
     </table>
 
