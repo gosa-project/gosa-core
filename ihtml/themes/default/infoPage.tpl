@@ -10,27 +10,27 @@
             </td>
             <td style="width:33%">
                 <table>
-                    {if $uid != ""}<tr><td>{t}User ID{/t}:</td><td>{$uid}</td></tr>{/if}
-                    {if $sn != ""}<tr><td>{t}Surname{/t}:</td><td>{$sn}</td></tr>{/if}
-                    {if $givenName != ""}<tr><td>{t}Given name{/t}:</td><td>{$givenName}</td></tr>{/if}
-                    {if $personalTitle != ""}<tr><td>{t}Personal title{/t}:</td><td>{$personalTitle}</td></tr>{/if}
-                    {if $academicTitle != ""}<tr><td>{t}Academic title{/t}:</td><td>{$academicTitle}</td></tr>{/if}
-                    {if $homePostalAddress != ""}<tr><td style="padding-top:15px">{t}Home postal address{/t}:</td><td style="padding-top:15px">{$homePostalAddress}</td></tr>{/if}
-                    {if $dateOfBirth != ""}<tr><td style="padding-top:15px">{t}Date of birth{/t}:</td><td style="padding-top:15px">{$dateOfBirth}</td></tr>{/if}
-                    {if $mail != ""}<tr><td style="padding-top:15px">{t}Mail{/t}:</td><td style="padding-top:15px">{$mail}</td></tr>{/if}
-                    {if $homePhone != ""}<tr><td>{t}Home phone{/t}:</td><td>{$homePhone}</td></tr>{/if}
+                    {if $uid != ""}<tr><td>{t}User ID{/t}:</td><td><i>{$uid}</i></td></tr>{/if}
+                    {if $sn != ""}<tr><td>{t}Surname{/t}:</td><td><i>{$sn}</i></td></tr>{/if}
+                    {if $givenName != ""}<tr><td>{t}Given name{/t}:</td><td><i>{$givenName}</i></td></tr>{/if}
+                    {if $personalTitle != ""}<tr><td>{t}Personal title{/t}:</td><td><i>{$personalTitle}</i></td></tr>{/if}
+                    {if $academicTitle != ""}<tr><td>{t}Academic title{/t}:</td><td><i>{$academicTitle}</i></td></tr>{/if}
+                    {if $homePostalAddress != ""}<tr><td style="padding-top:15px">{t}Home postal address{/t}:</td><td style="padding-top:15px"><i>{$homePostalAddress}</i></td></tr>{/if}
+                    {if $dateOfBirth != ""}<tr><td style="padding-top:15px">{t}Date of birth{/t}:</td><td style="padding-top:15px"><i>{$dateOfBirth}</i></td></tr>{/if}
+                    {if $mail != ""}<tr><td style="padding-top:15px">{t}Mail{/t}:</td><td style="padding-top:15px"><i>{$mail}</i></td></tr>{/if}
+                    {if $homePhone != ""}<tr><td>{t}Home phone{/t}:</td><td><i>{$homePhone}</i></td></tr>{/if}
                 </table>
             </td>
             <td style="border-left:1px solid #CCC; padding-left:10px">
                 <table>
-                    {if $o != ""}<tr><td>{t}Organization{/t}:</td><td>{$o}</td></tr>{/if}
-                    {if $ou != ""}<tr><td>{t}Organizational unit{/t}:</td><td>{$ou}</td></tr>{/if}
-                    {if $l != ""}<tr><td style="padding-top:15px">{t}Location{/t}:</td><td style="padding-top:15px">{$l}</td></tr>{/if}
-                    {if $street != ""}<tr><td>{t}Street{/t}:</td><td>{$street}</td></tr>{/if}
-                    {if $departmentNumber != ""}<tr><td style="padding-top:15px">{t}Department number{/t}:</td><td style="padding-top:15px">{$departmentNumber}</td></tr>{/if}
+                    {if $o != ""}<tr><td>{t}Organization{/t}:</td><td><i>{$o}</i></td></tr>{/if}
+                    {if $ou != ""}<tr><td>{t}Organizational unit{/t}:</td><td><i>{$ou}</i></td></tr>{/if}
+                    {if $l != ""}<tr><td style="padding-top:15px">{t}Location{/t}:</td><td style="padding-top:15px"><i>{$l}</i></td></tr>{/if}
+                    {if $street != ""}<tr><td>{t}Street{/t}:</td><td><i>{$street}</i></td></tr>{/if}
+                    {if $departmentNumber != ""}<tr><td style="padding-top:15px">{t}Department number{/t}:</td><td style="padding-top:15px"><i>{$departmentNumber}</i></td></tr>{/if}
 
-                    {if $employeeNumber != ""}<tr><td style="padding-top:15px">{t}Employee number{/t}:</td><td style="padding-top:15px">{$employeeNumber}</td></tr>{/if}
-                    {if $employeeType != ""}<tr><td>{t}Employee type{/t}:</td><td>{$employeeType}</td></tr>{/if}
+                    {if $employeeNumber != ""}<tr><td style="padding-top:15px">{t}Employee number{/t}:</td><td style="padding-top:15px"><i>{$employeeNumber}</i></td></tr>{/if}
+                    {if $employeeType != ""}<tr><td>{t}Employee type{/t}:</td><td><i>{$employeeType}</i></td></tr>{/if}
 
                 </table>
             </td>
