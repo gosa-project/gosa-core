@@ -87,15 +87,13 @@ class infoPage extends plugin
 
         // Get next department manager dn
         $dn = $this->dn;
-        $max = 10;
-        while(strlen($dn) >= strlen($this->config->current['BASE']) && $max){
+        $max = 4;
+        while(strlen($dn) >= strlen($this->config->current['BASE']) && $max--){
             $dn = preg_replace("/^[^,]+,/","",$dn);
-            $max --;
             $ldap->cat($dn, array('manager'));
             $attrs = $ldap->fetch();
             if(isset($attrs['manager'][0])){
                 $dns['DEPARTMENT'] = $attrs['manager'][0];
-                break;
             }
         }
 
@@ -106,14 +104,14 @@ class infoPage extends plugin
             $managers[$dn] = $ldap->fetch();
             $managers[$dn]['type'] = $type;
             $name = $phone = $mail = "";
-            $name = "<b>".set_post($managers[$dn]['sn'][0]).", ".set_post($managers[$dn]['givenName'][0])."</b>";
-            if(isset($managers[$dn]['mail'][0])){
-                $mail = "<li>"._("Mail address").":&nbsp;".set_post($managers[$dn]['mail'][0])."</li>";
-            }
+            $name = "<tr><td colspan='2' style='background-color:#F0F0F0'><b>".set_post($managers[$dn]['givenName'][0])." ".set_post($managers[$dn]['sn'][0])."</b></td></tr>";
             if(isset($managers[$dn]['telephoneNumber'][0])){
-                $phone = "<li>"._("Phone number").":&nbsp;".set_post($managers[$dn]['telephoneNumber'][0])."</li>";
+                $phone = "<tr><td>&nbsp;"._("Phone number").":</td><td><i>".set_post($managers[$dn]['telephoneNumber'][0])."</i></td></tr>";
             }
-            $managers[$dn]['str'] = "<p>{$name}<ul>{$phone}{$mail}</ul></p>";
+            if(isset($managers[$dn]['mail'][0])){
+                $mail = "<tr><td>&nbsp;"._("Mail").":</td><td><i>".set_post($managers[$dn]['mail'][0])."</i></td></tr>";
+            }
+            $managers[$dn]['str'] = "<table cellpadding='2' style='border:1px solid #CCC'>{$name}{$phone}{$mail}</table>";
         }
         return($managers);
     }

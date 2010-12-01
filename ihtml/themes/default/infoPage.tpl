@@ -50,7 +50,7 @@
     <hr>
     <h3>{t}Administrative contact{/t}</h3>
     {foreach from=$managers item=item}
-        <div style='float:left; width:50%;'>
+        <div style='float:left; padding-right:20px;'>
         {$item.str}
         </div>
     {/foreach}
