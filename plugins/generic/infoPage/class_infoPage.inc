@@ -139,6 +139,8 @@ class infoPage extends plugin
         if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "homePostalAddress")) && 
                 isset($this->attrs['homePostalAddress'][0])){
             $smarty->assign("homePostalAddress", preg_replace("/\n/", "<br>", $this->attrs['homePostalAddress'][0]));
+        }else{
+            $smarty->assign("homePostalAddress", "");
         }
 
         // Assign JPEG Photo only if it is set and if we are allowed to view it.
@@ -154,6 +156,8 @@ class infoPage extends plugin
         if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "dateOfBirth")) && 
                 isset($this->attrs['dateOfBirth'][0])){
             $smarty->assign("dateOfBirth", date('d.m.Y',strtotime($this->attrs['dateOfBirth'][0])));
+        }else{
+            $smarty->assign("dateOfBirth","");
         }
 
         $smarty->assign("rand", rand(0, 99999999));
