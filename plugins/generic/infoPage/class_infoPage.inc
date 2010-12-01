@@ -139,7 +139,7 @@ class infoPage extends plugin
 
         #TODO: Permission
         if(!isset($this->attrs['jpegPhoto'])){
-            echo "No image...";
+            #echo "No image...";
         }
 
         // Convert address
@@ -160,6 +160,8 @@ class infoPage extends plugin
         $smarty->assign("managers", $this->managers);
         $smarty->assign("plugins", $this->plugins);
         $smarty->assign("managersCnt", count($this->managers));
+        $smarty->assign("revision", get_gosa_version());
+        $smarty->assign("year", date("Y"));
         return($smarty->fetch(get_template_path("infoPage.tpl")));
     }
 }
