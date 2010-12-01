@@ -49,7 +49,7 @@ VERSION=$(cat rpm_src/gosa-core/debian/changelog | head -n 1 | sed -n -e 's/.*(\
 case "$distribution" in 
  "RHEL" ) 
 	rm -rf /var/tmp/gosa*
-	build_path='/usr/src/redhat'
+	build_path='/root/rpmbuild/'
 	target='redhat'
 	;;
  "SLES" ) 
@@ -106,7 +106,7 @@ sed "s/^Version:.*$/Version:            $VERSION/" \
 # Build GOsa RPM 
 ##
 echo "Try to build package ... rpmbuild" 
-rpmbuild -bb $build_path/SPECS/gosa.spec
+rpmbuild -bb --buildroot $build_path $build_path/SPECS/gosa.spec
 if [ $? != 0 ]
 then
 	echo "Error: Build error" 
