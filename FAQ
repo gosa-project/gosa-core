@@ -638,20 +638,18 @@ A:  Yes, just add the following line to your gosa.conf:
 
 
 
-PLEASE VERIFY THOSE
-
-
-
 Q:  GOsa doesn't seem to follow my referrals. What can I do? 
 
 A:  Place the option 'ldapFollowReferrals = "true"' inside your locations definition
     and you should be fine.
 
 
+
 Q:  GOsa is not in my native language, can I translate it to my language? 
 
     Yes. Just go to the locale directory and copy the messages.po file somewhere
-    else. Edit the copy and put your translations into the msgstr lines. To be
+    else. (Translation is splitted into core and plugin translation files). 
+    Edit the copy and put your translations into the msgstr lines. To be
     included in next GOsa releases, you may want to send it to the GOsa maintainer.
     Finally you need to create a directory with your language code. (i.e. de for
     german) containing the LC_MESSAGES directory. Move your messages.po file there
@@ -659,10 +657,3 @@ Q:  GOsa is not in my native language, can I translate it to my language?
 
     You may need to restart apache, depending on your setup. On Debian, be sure
     to have your locale generated (dpkg-reconfigure locales) before.
-
-
-
-Q:  Can GOsa show some vendor information for given MAC addresses? 
-
-A:  Yes. Download http://standards.ieee.org/regauth/oui/oui.txt and place
-    it in /etc/gosa/oui.txt.
