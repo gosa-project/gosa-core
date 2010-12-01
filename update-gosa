@@ -39,6 +39,8 @@ Usage: update-gosa install dsc     Install the plugin using the dsc information
 
        update-gosa rescan-i18n     Rebuilds the translations
 
+       update-gosa rescan-images   Rebuilds the themes master image
+
        update-gosa rescan-classes  Rebuilds the class list
        
        update-gosa                 Shortcut for rescan-classes and rescan-i18n
