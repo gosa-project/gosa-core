@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-01 15:07+0100\n"
+"POT-Creation-Date: 2010-12-01 16:21+0100\n"
 "PO-Revision-Date: 2010-04-30 21:15+0100\n"
 "Last-Translator: Piort Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
@@ -21,7 +21,6 @@ msgstr ""
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.xml:21
 #: plugins/admin/groups/group-filter.xml:17
 #: plugins/admin/departments/dep-filter.xml:17
-#: plugins/admin/newConfigManagement/DeviceConfig-filter.xml:14
 #: plugins/admin/ogroups/ogroup-filter.xml:18
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.xml:32
 #: plugins/personal/posix/trustSelect/trust-filter.xml:17
@@ -106,7 +105,6 @@ msgstr "Pełniona funkcja"
 #: plugins/admin/departments/class_domain.inc:56
 #: plugins/admin/departments/class_domain.inc:58
 #: plugins/admin/departments/class_domain.inc:90
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:34
 #: plugins/admin/ogroups/ogroup-list.xml:41
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:97
 #: plugins/admin/ogroups/class_ogroup.inc:157
@@ -162,7 +160,6 @@ msgstr "Imię"
 #: plugins/admin/departments/generic.tpl:19
 #: plugins/admin/departments/class_domain.inc:63
 #: plugins/admin/departments/class_domain.inc:91
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:42
 #: plugins/admin/ogroups/ogroup-list.xml:49
 #: plugins/admin/ogroups/generic.tpl:15
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:105
@@ -187,7 +184,6 @@ msgstr "Opis"
 #: plugins/admin/acl/acl-list.xml:65 plugins/admin/users/user-list.xml:78
 #: plugins/admin/groups/group-list.xml:62
 #: plugins/admin/departments/dep-list.xml:87
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:50
 #: plugins/admin/ogroups/ogroup-list.xml:62
 #: plugins/addons/propertyEditor/property-list.xml:96
 #: include/class_listing.inc:1183
@@ -207,7 +203,6 @@ msgstr "Utwórz"
 #: plugins/admin/groups/group-list.xml:98
 #: plugins/admin/departments/dep-list.xml:160
 #: plugins/admin/departments/dep-list.xml:181
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:64
 #: plugins/admin/ogroups/ogroup-list.xml:98
 #: plugins/personal/generic/generic_certs.tpl:22
 #: plugins/personal/generic/generic_certs.tpl:48
@@ -358,8 +353,6 @@ msgstr ""
 #: plugins/admin/groups/class_group.inc:758
 #: plugins/admin/groups/class_group.inc:1096
 #: plugins/admin/departments/class_department.inc:317
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:42
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:94
 #: plugins/admin/ogroups/class_ogroup.inc:402
 #: plugins/personal/generic/class_user.inc:297
 #: plugins/personal/generic/class_user.inc:429
@@ -576,7 +569,7 @@ msgstr "Szablon"
 #: plugins/personal/generic/class_user.inc:1703
 #: plugins/personal/generic/class_user.inc:1857
 #: plugins/generic/references/class_reference.inc:87
-#: ihtml/themes/default/infoPage.tpl:15
+#: ihtml/themes/default/infoPage.tpl:19
 msgid "Given name"
 msgstr "Imię"
 
@@ -634,7 +627,7 @@ msgstr "Edytuj właściwości UNIX"
 #: plugins/admin/groups/class_groupManagement.inc:165
 #: plugins/admin/ogroups/tabs_ogroups.inc:155
 #: plugins/generic/infoPage/class_infoPage.inc:112
-#: ihtml/themes/default/infoPage.tpl:20
+#: ihtml/themes/default/infoPage.tpl:24
 msgid "Mail"
 msgstr "Poczta"
 
@@ -829,7 +822,7 @@ msgstr "Użytkownik"
 #: plugins/admin/groups/class_group.inc:1200
 #: plugins/personal/generic/class_user.inc:1702
 #: plugins/generic/references/class_reference.inc:87
-#: ihtml/themes/default/infoPage.tpl:14
+#: ihtml/themes/default/infoPage.tpl:18
 msgid "Surname"
 msgstr "Nazwisko"
 
@@ -1431,7 +1424,7 @@ msgstr "Stan"
 #: plugins/admin/departments/generic.tpl:95
 #: plugins/personal/generic/generic.tpl:436
 #: plugins/personal/generic/class_user.inc:1734
-#: ihtml/themes/default/infoPage.tpl:28
+#: ihtml/themes/default/infoPage.tpl:32
 msgid "Location"
 msgstr "Lokalizacja"
 
@@ -1492,6 +1485,7 @@ msgstr ""
 
 #: plugins/admin/departments/dep-filter.xml:35
 #: plugins/admin/departments/generic.tpl:4
+#: ihtml/themes/default/infoPage.tpl:31
 msgid "Organizational Unit"
 msgstr "Jednostka organizacyjna"
 
@@ -1504,7 +1498,7 @@ msgstr "Jednostka organizacyjna"
 #: plugins/admin/departments/class_departmentManagement.inc:241
 #: plugins/personal/generic/generic.tpl:298
 #: plugins/personal/generic/class_user.inc:1720 setup/setup_feedback.tpl:10
-#: setup/setup_feedback.tpl:12 ihtml/themes/default/infoPage.tpl:26
+#: setup/setup_feedback.tpl:12 ihtml/themes/default/infoPage.tpl:30
 msgid "Organization"
 msgstr "Organizacja"
 
@@ -1635,68 +1629,6 @@ msgid ""
 "management dialog."
 msgstr ""
 
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:10
-#, fuzzy
-msgid "List of items"
-msgstr "Lista użytkowników"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:75
-#, fuzzy
-msgid "Edit item"
-msgstr "Edytuj filtry"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:82
-#, fuzzy
-msgid "Remove item"
-msgstr "Usuń obrazek"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:9
-#, fuzzy
-msgid "Container"
-msgstr "Kontynuuj"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:10
-msgid "Item"
-msgstr ""
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:8
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:9
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:352
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:353
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:359
-#, fuzzy
-msgid "Config management"
-msgstr "Zarządzanie systemem"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:42
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:95
-#, php-format
-msgid "Failed to load distributions, error was '%s'!"
-msgstr ""
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:262
-msgid "No selectable install methods returned!"
-msgstr ""
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:263
-#: setup/class_setup.inc:183
-msgid "Setup"
-msgstr "Ustawienia"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:278
-#, fuzzy
-msgid "Distribution"
-msgstr "Opis"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:284
-msgid "Release"
-msgstr ""
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:290
-#, fuzzy
-msgid "Component"
-msgstr "Komponent Domeny"
-
 #: plugins/admin/ogroups/paste_generic.tpl:1
 #, fuzzy
 msgid "Paste object group"
@@ -1708,9 +1640,7 @@ msgid "Please enter the new object group name"
 msgstr "Proszę podać nową nazwę."
 
 #: plugins/admin/ogroups/paste_generic.tpl:16
-msgid ""
-"Copy members. Be careful with this option, systems can only inherit from a "
-"single object group!"
+msgid "Warning: systems can only inherit from a single object group!"
 msgstr ""
 
 #: plugins/admin/ogroups/ogroup-list.xml:11
@@ -2081,7 +2011,7 @@ msgid "Shell"
 msgstr "Shell"
 
 #: plugins/personal/posix/class_posixAccount.inc:1310
-#: setup/setup_migrate.tpl:49 ihtml/themes/default/infoPage.tpl:13
+#: setup/setup_migrate.tpl:49 ihtml/themes/default/infoPage.tpl:17
 msgid "User ID"
 msgstr "Identyfikator użytkownika"
 
@@ -2282,7 +2212,7 @@ msgid "Your password hash method will not be changed!"
 msgstr "Twoje hasło zostało pomyślnie zmienione."
 
 #: plugins/personal/generic/paste_generic.tpl:1
-#: ihtml/themes/default/infoPage.tpl:44
+#: ihtml/themes/default/infoPage.tpl:48
 msgid "User settings"
 msgstr "Ustawienia użytkownika"
 
@@ -2377,20 +2307,20 @@ msgstr "Nazwa Szablonu"
 
 #: plugins/personal/generic/generic.tpl:92
 #: plugins/personal/generic/class_user.inc:1708
-#: ihtml/themes/default/infoPage.tpl:16
+#: ihtml/themes/default/infoPage.tpl:20
 msgid "Personal title"
 msgstr "Osobisty tytuł"
 
 #: plugins/personal/generic/generic.tpl:102
 #: plugins/personal/generic/class_user.inc:1709
-#: ihtml/themes/default/infoPage.tpl:17
+#: ihtml/themes/default/infoPage.tpl:21
 msgid "Academic title"
 msgstr "Tytuł naukowy"
 
 #: plugins/personal/generic/generic.tpl:117
 #: plugins/personal/generic/class_user.inc:1368
 #: plugins/personal/generic/class_user.inc:1711
-#: ihtml/themes/default/infoPage.tpl:19
+#: ihtml/themes/default/infoPage.tpl:23
 msgid "Date of birth"
 msgstr "Data urodzenia"
 
@@ -2466,7 +2396,7 @@ msgstr "Numer pracownika"
 
 #: plugins/personal/generic/generic.tpl:330
 #: plugins/personal/generic/class_user.inc:1725
-#: ihtml/themes/default/infoPage.tpl:33
+#: ihtml/themes/default/infoPage.tpl:37
 msgid "Employee type"
 msgstr "Typ pracownika"
 
@@ -2519,7 +2449,7 @@ msgstr "Jednostka"
 
 #: plugins/personal/generic/generic.tpl:535
 #: plugins/personal/generic/class_user.inc:1665
-#: ihtml/themes/default/infoPage.tpl:29
+#: ihtml/themes/default/infoPage.tpl:33
 msgid "Street"
 msgstr "Ulica"
 
@@ -2617,7 +2547,7 @@ msgstr "Ta aplikacja nie jest już dostępna."
 
 #: plugins/personal/generic/class_user.inc:1051
 msgid ""
-"Cannot save user picture, GOsa requires the package 'imagemagick' or 'php5-"
+"Cannot save user picture: GOsa requires the package 'imagemagick' or 'php5-"
 "imagick' to be installed!"
 msgstr ""
 
@@ -2662,12 +2592,12 @@ msgid "Login restrictions"
 msgstr "Hasło wygasa"
 
 #: plugins/personal/generic/class_user.inc:1722
-#: ihtml/themes/default/infoPage.tpl:30
+#: ihtml/themes/default/infoPage.tpl:34
 msgid "Department number"
 msgstr "Numer departamentu"
 
 #: plugins/personal/generic/class_user.inc:1724
-#: ihtml/themes/default/infoPage.tpl:32
+#: ihtml/themes/default/infoPage.tpl:36
 msgid "Employee number"
 msgstr "Numer pracownika"
 
@@ -2693,11 +2623,12 @@ msgid "Fax number"
 msgstr "Numer fax"
 
 #: plugins/personal/generic/class_user.inc:1737
-#: ihtml/themes/default/infoPage.tpl:18
+#: ihtml/themes/default/infoPage.tpl:22
 msgid "Home postal address"
 msgstr "Adres domowy"
 
 #: plugins/personal/generic/class_user.inc:1738
+#: ihtml/themes/default/infoPage.tpl:25
 msgid "Home phone number"
 msgstr "Numer telefonu domowego"
 
@@ -2944,12 +2875,12 @@ msgstr "Migruj"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:204
 #, php-format
-msgid "Migration failed for object %s, dn already exists!"
+msgid "Migration failed for object %s: DN already exists!"
 msgstr ""
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:208
 #, php-format
-msgid "Migration failed for object %s, please check if it already exists!"
+msgid "Migration failed for object %s: please check if it already exists!"
 msgstr ""
 
 #: plugins/addons/propertyEditor/migrate.tpl:3
@@ -3054,7 +2985,7 @@ msgstr ""
 msgid "Dynamic object"
 msgstr "Obiekt GOsa"
 
-#: plugins/generic/welcome/welcome.tpl:8 ihtml/themes/default/infoPage.tpl:62
+#: plugins/generic/welcome/welcome.tpl:8 ihtml/themes/default/infoPage.tpl:66
 msgid "The GOsa team"
 msgstr "Zespół GOsa"
 
@@ -4391,6 +4322,10 @@ msgid ""
 "add the object class '%s' manually."
 msgstr ""
 
+#: setup/class_setup.inc:183
+msgid "Setup"
+msgstr "Ustawienia"
+
 #: setup/class_setup.inc:195
 msgid "Completed"
 msgstr "Zakończono"
@@ -4607,15 +4542,7 @@ msgstr "Sprowadź sesję SSL"
 msgid "User information"
 msgstr "pokaż informacje"
 
-#: ihtml/themes/default/infoPage.tpl:21
-msgid "Home phone"
-msgstr "Telefon domowy"
-
-#: ihtml/themes/default/infoPage.tpl:27
-msgid "Organizational unit"
-msgstr "Jednostka organizacyjna"
-
-#: ihtml/themes/default/infoPage.tpl:51
+#: ihtml/themes/default/infoPage.tpl:55
 #, fuzzy
 msgid "Administrative contact"
 msgstr "Ustawienia administracyjne"
@@ -6223,7 +6150,7 @@ msgstr ""
 msgid ""
 "Enables event logging in GOsa. Setting it to 'On' make GOsa log every action "
 "a user performs via syslog. If you use this in combination with rsyslog and "
-"configure it to mysql logging, you can browse all events in GOsa."
+"configure it to MySQL logging, you can browse all events in GOsa."
 msgstr ""
 
 #: include/class_core.inc:279
@@ -6979,6 +6906,40 @@ msgstr ""
 #: include/class_pathNavigator.inc:86
 msgid "Welcome to GOsa"
 msgstr "Witaj w GOsa"
+
+#, fuzzy
+#~ msgid "List of items"
+#~ msgstr "Lista użytkowników"
+
+#, fuzzy
+#~ msgid "Edit item"
+#~ msgstr "Edytuj filtry"
+
+#, fuzzy
+#~ msgid "Remove item"
+#~ msgstr "Usuń obrazek"
+
+#, fuzzy
+#~ msgid "Container"
+#~ msgstr "Kontynuuj"
+
+#, fuzzy
+#~ msgid "Config management"
+#~ msgstr "Zarządzanie systemem"
+
+#, fuzzy
+#~ msgid "Distribution"
+#~ msgstr "Opis"
+
+#, fuzzy
+#~ msgid "Component"
+#~ msgstr "Komponent Domeny"
+
+#~ msgid "Home phone"
+#~ msgstr "Telefon domowy"
+
+#~ msgid "Organizational unit"
+#~ msgstr "Jednostka organizacyjna"
 
 #, fuzzy
 #~ msgid "Max"

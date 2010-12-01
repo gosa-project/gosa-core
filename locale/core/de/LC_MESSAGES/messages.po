@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-01 15:07+0100\n"
+"POT-Creation-Date: 2010-12-01 16:21+0100\n"
 "PO-Revision-Date: 2010-11-24 16:25+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -30,7 +30,6 @@ msgstr ""
 #: plugins/admin/groups/userGroupSelect/selectUserGroup-filter.xml:21
 #: plugins/admin/groups/group-filter.xml:17
 #: plugins/admin/departments/dep-filter.xml:17
-#: plugins/admin/newConfigManagement/DeviceConfig-filter.xml:14
 #: plugins/admin/ogroups/ogroup-filter.xml:18
 #: plugins/admin/ogroups/objectSelect/selectObject-filter.xml:32
 #: plugins/personal/posix/trustSelect/trust-filter.xml:17
@@ -112,7 +111,6 @@ msgstr "Rolle"
 #: plugins/admin/departments/class_domain.inc:56
 #: plugins/admin/departments/class_domain.inc:58
 #: plugins/admin/departments/class_domain.inc:90
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:34
 #: plugins/admin/ogroups/ogroup-list.xml:41
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:97
 #: plugins/admin/ogroups/class_ogroup.inc:157
@@ -168,7 +166,6 @@ msgstr "Name"
 #: plugins/admin/departments/generic.tpl:19
 #: plugins/admin/departments/class_domain.inc:63
 #: plugins/admin/departments/class_domain.inc:91
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:42
 #: plugins/admin/ogroups/ogroup-list.xml:49
 #: plugins/admin/ogroups/generic.tpl:15
 #: plugins/admin/ogroups/objectSelect/selectObject-list.xml:105
@@ -193,7 +190,6 @@ msgstr "Beschreibung"
 #: plugins/admin/acl/acl-list.xml:65 plugins/admin/users/user-list.xml:78
 #: plugins/admin/groups/group-list.xml:62
 #: plugins/admin/departments/dep-list.xml:87
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:50
 #: plugins/admin/ogroups/ogroup-list.xml:62
 #: plugins/addons/propertyEditor/property-list.xml:96
 #: include/class_listing.inc:1183
@@ -213,7 +209,6 @@ msgstr "Anlegen"
 #: plugins/admin/groups/group-list.xml:98
 #: plugins/admin/departments/dep-list.xml:160
 #: plugins/admin/departments/dep-list.xml:181
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:64
 #: plugins/admin/ogroups/ogroup-list.xml:98
 #: plugins/personal/generic/generic_certs.tpl:22
 #: plugins/personal/generic/generic_certs.tpl:48
@@ -361,8 +356,6 @@ msgstr ""
 #: plugins/admin/groups/class_group.inc:758
 #: plugins/admin/groups/class_group.inc:1096
 #: plugins/admin/departments/class_department.inc:317
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:42
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:94
 #: plugins/admin/ogroups/class_ogroup.inc:402
 #: plugins/personal/generic/class_user.inc:297
 #: plugins/personal/generic/class_user.inc:429
@@ -579,7 +572,7 @@ msgstr "Vorlage"
 #: plugins/personal/generic/class_user.inc:1703
 #: plugins/personal/generic/class_user.inc:1857
 #: plugins/generic/references/class_reference.inc:87
-#: ihtml/themes/default/infoPage.tpl:15
+#: ihtml/themes/default/infoPage.tpl:19
 msgid "Given name"
 msgstr "Vorname"
 
@@ -638,7 +631,7 @@ msgstr "UNIX-Einstellungen bearbeiten"
 #: plugins/admin/groups/class_groupManagement.inc:165
 #: plugins/admin/ogroups/tabs_ogroups.inc:155
 #: plugins/generic/infoPage/class_infoPage.inc:112
-#: ihtml/themes/default/infoPage.tpl:20
+#: ihtml/themes/default/infoPage.tpl:24
 msgid "Mail"
 msgstr "Mail"
 
@@ -827,7 +820,7 @@ msgstr "Benutzer"
 #: plugins/admin/groups/class_group.inc:1200
 #: plugins/personal/generic/class_user.inc:1702
 #: plugins/generic/references/class_reference.inc:87
-#: ihtml/themes/default/infoPage.tpl:14
+#: ihtml/themes/default/infoPage.tpl:18
 msgid "Surname"
 msgstr "Nachname"
 
@@ -1406,7 +1399,7 @@ msgstr "Land"
 #: plugins/admin/departments/generic.tpl:95
 #: plugins/personal/generic/generic.tpl:436
 #: plugins/personal/generic/class_user.inc:1734
-#: ihtml/themes/default/infoPage.tpl:28
+#: ihtml/themes/default/infoPage.tpl:32
 msgid "Location"
 msgstr "Ort"
 
@@ -1473,6 +1466,7 @@ msgstr ""
 
 #: plugins/admin/departments/dep-filter.xml:35
 #: plugins/admin/departments/generic.tpl:4
+#: ihtml/themes/default/infoPage.tpl:31
 msgid "Organizational Unit"
 msgstr "Organisationseinheit"
 
@@ -1485,7 +1479,7 @@ msgstr "Organisationseinheit"
 #: plugins/admin/departments/class_departmentManagement.inc:241
 #: plugins/personal/generic/generic.tpl:298
 #: plugins/personal/generic/class_user.inc:1720 setup/setup_feedback.tpl:10
-#: setup/setup_feedback.tpl:12 ihtml/themes/default/infoPage.tpl:26
+#: setup/setup_feedback.tpl:12 ihtml/themes/default/infoPage.tpl:30
 msgid "Organization"
 msgstr "Organisation"
 
@@ -1614,61 +1608,6 @@ msgstr ""
 "scrollen und auf den 'Fortfahren'-Knopf drücken, um mit der "
 "Abteilungsverwaltung fort zu fahren."
 
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:10
-msgid "List of items"
-msgstr "Liste der Items"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:75
-msgid "Edit item"
-msgstr "Item bearbeiten"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.xml:82
-msgid "Remove item"
-msgstr "Item entfernen"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:9
-msgid "Container"
-msgstr "Container"
-
-#: plugins/admin/newConfigManagement/DeviceConfig-list.tpl:10
-msgid "Item"
-msgstr "Item"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:8
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:9
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:352
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:353
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:359
-msgid "Config management"
-msgstr "Konfigurationsverwaltung"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:42
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:95
-#, php-format
-msgid "Failed to load distributions, error was '%s'!"
-msgstr ""
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:262
-msgid "No selectable install methods returned!"
-msgstr ""
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:263
-#: setup/class_setup.inc:183
-msgid "Setup"
-msgstr "Einrichtung"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:278
-msgid "Distribution"
-msgstr "Distribution"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:284
-msgid "Release"
-msgstr "Release"
-
-#: plugins/admin/newConfigManagement/class_newConfigManagement.inc:290
-msgid "Component"
-msgstr "Komponente"
-
 #: plugins/admin/ogroups/paste_generic.tpl:1
 msgid "Paste object group"
 msgstr "Objektgruppe einfügen"
@@ -1678,11 +1617,10 @@ msgid "Please enter the new object group name"
 msgstr "Bitte geben Sie einen Namen für die neue Objektgruppe ein"
 
 #: plugins/admin/ogroups/paste_generic.tpl:16
-msgid ""
-"Warning: systems can only inherit from a "
-"single object group!"
+msgid "Warning: systems can only inherit from a single object group!"
 msgstr ""
-"Mitglieder kopieren. Warnung: Systeme können nur von einer einzelnen Gruppe erben!"
+"Mitglieder kopieren. Warnung: Systeme können nur von einer einzelnen Gruppe "
+"erben!"
 
 #: plugins/admin/ogroups/ogroup-list.xml:11
 msgid "List of object groups"
@@ -2046,7 +1984,7 @@ msgid "Shell"
 msgstr "Shell"
 
 #: plugins/personal/posix/class_posixAccount.inc:1310
-#: setup/setup_migrate.tpl:49 ihtml/themes/default/infoPage.tpl:13
+#: setup/setup_migrate.tpl:49 ihtml/themes/default/infoPage.tpl:17
 msgid "User ID"
 msgstr "Benutzer-ID"
 
@@ -2237,7 +2175,7 @@ msgid "Your password hash method will not be changed!"
 msgstr "Ihre Passwort-Hash-Methode wird nicht verändert!"
 
 #: plugins/personal/generic/paste_generic.tpl:1
-#: ihtml/themes/default/infoPage.tpl:44
+#: ihtml/themes/default/infoPage.tpl:48
 msgid "User settings"
 msgstr "Benutzer-Einstellungen"
 
@@ -2328,20 +2266,20 @@ msgstr "Name der Vorlage"
 
 #: plugins/personal/generic/generic.tpl:92
 #: plugins/personal/generic/class_user.inc:1708
-#: ihtml/themes/default/infoPage.tpl:16
+#: ihtml/themes/default/infoPage.tpl:20
 msgid "Personal title"
 msgstr "Titel"
 
 #: plugins/personal/generic/generic.tpl:102
 #: plugins/personal/generic/class_user.inc:1709
-#: ihtml/themes/default/infoPage.tpl:17
+#: ihtml/themes/default/infoPage.tpl:21
 msgid "Academic title"
 msgstr "Akademischer Titel"
 
 #: plugins/personal/generic/generic.tpl:117
 #: plugins/personal/generic/class_user.inc:1368
 #: plugins/personal/generic/class_user.inc:1711
-#: ihtml/themes/default/infoPage.tpl:19
+#: ihtml/themes/default/infoPage.tpl:23
 msgid "Date of birth"
 msgstr "Geburtsdatum"
 
@@ -2417,7 +2355,7 @@ msgstr "Angestellten-Nr."
 
 #: plugins/personal/generic/generic.tpl:330
 #: plugins/personal/generic/class_user.inc:1725
-#: ihtml/themes/default/infoPage.tpl:33
+#: ihtml/themes/default/infoPage.tpl:37
 msgid "Employee type"
 msgstr "Anstellungsart"
 
@@ -2470,7 +2408,7 @@ msgstr "Referat"
 
 #: plugins/personal/generic/generic.tpl:535
 #: plugins/personal/generic/class_user.inc:1665
-#: ihtml/themes/default/infoPage.tpl:29
+#: ihtml/themes/default/infoPage.tpl:33
 msgid "Street"
 msgstr "Straße"
 
@@ -2566,11 +2504,11 @@ msgstr "Die gewählte Passwort-Methode ist nicht mehr verfügbar."
 
 #: plugins/personal/generic/class_user.inc:1051
 msgid ""
-"Cannot save user picturer: GOsa requires the package 'imagemagick' or 'php5-"
+"Cannot save user picture: GOsa requires the package 'imagemagick' or 'php5-"
 "imagick' to be installed!"
 msgstr ""
-"Das Benutzerbild kann nicht gespeichert werden: GOsa benötigt die Pakete 'imagemagick' "
-"oder 'php5-imagick'!"
+"Das Benutzerbild kann nicht gespeichert werden: GOsa benötigt die Pakete "
+"'imagemagick' oder 'php5-imagick'!"
 
 #: plugins/personal/generic/class_user.inc:1177
 msgid "Cannot build RDN: no + allowed to build sub RDN!"
@@ -2612,12 +2550,12 @@ msgid "Login restrictions"
 msgstr "Anmeldungs-Einschränkungen"
 
 #: plugins/personal/generic/class_user.inc:1722
-#: ihtml/themes/default/infoPage.tpl:30
+#: ihtml/themes/default/infoPage.tpl:34
 msgid "Department number"
 msgstr "Abteilungsnummer"
 
 #: plugins/personal/generic/class_user.inc:1724
-#: ihtml/themes/default/infoPage.tpl:32
+#: ihtml/themes/default/infoPage.tpl:36
 msgid "Employee number"
 msgstr "Personalnummer"
 
@@ -2642,11 +2580,12 @@ msgid "Fax number"
 msgstr "Faxnummer"
 
 #: plugins/personal/generic/class_user.inc:1737
-#: ihtml/themes/default/infoPage.tpl:18
+#: ihtml/themes/default/infoPage.tpl:22
 msgid "Home postal address"
 msgstr "Private Adresse"
 
 #: plugins/personal/generic/class_user.inc:1738
+#: ihtml/themes/default/infoPage.tpl:25
 msgid "Home phone number"
 msgstr "Telefonnummer (privat)"
 
@@ -2879,6 +2818,7 @@ msgid "Migrate"
 msgstr "Migrieren"
 
 #: plugins/addons/propertyEditor/migration/class_migrateRDN.inc:204
+#, php-format
 msgid "Migration failed for object %s: DN already exists!"
 msgstr "Migration des Objektes %s ist fehlgeschlagen: DN existiert bereits!"
 
@@ -2995,7 +2935,7 @@ msgstr ""
 msgid "Dynamic object"
 msgstr "Dynamisches Objekt"
 
-#: plugins/generic/welcome/welcome.tpl:8 ihtml/themes/default/infoPage.tpl:62
+#: plugins/generic/welcome/welcome.tpl:8 ihtml/themes/default/infoPage.tpl:66
 msgid "The GOsa team"
 msgstr "Das GOsa Team"
 
@@ -4323,6 +4263,10 @@ msgstr ""
 "Die strukturelle Objekt-Typ Ihres Wurzel-Objektes kann nicht konvertiert "
 "werden. Bitte fügen Sie die Objekt-Klasse '%s' manuell hinzu."
 
+#: setup/class_setup.inc:183
+msgid "Setup"
+msgstr "Einrichtung"
+
 #: setup/class_setup.inc:195
 msgid "Completed"
 msgstr "Abgeschlossen"
@@ -4547,16 +4491,7 @@ msgstr "SSL Sitzung"
 msgid "User information"
 msgstr "Benutzer-Information"
 
-#: ihtml/themes/default/infoPage.tpl:21
-msgid "Home phone"
-msgstr "Telefonnummer (privat)"
-
-#: ihtml/themes/default/infoPage.tpl:27
-#, fuzzy
-msgid "Organizational unit"
-msgstr "Organisationseinheit"
-
-#: ihtml/themes/default/infoPage.tpl:51
+#: ihtml/themes/default/infoPage.tpl:55
 msgid "Administrative contact"
 msgstr "Kontakt zu Ihrem Administrator"
 
@@ -6151,11 +6086,12 @@ msgstr "Datenbankdatei für die GOsa Nutzungsstatistik."
 msgid ""
 "Enables event logging in GOsa. Setting it to 'On' make GOsa log every action "
 "a user performs via syslog. If you use this in combination with rsyslog and "
-"configure it to mysql logging, you can browse all events in GOsa."
+"configure it to MySQL logging, you can browse all events in GOsa."
 msgstr ""
 "Aktiviert die GOsa Ereignis-Protokollierung. Setzen Sie es auf 'An' um GOsa "
-"jede Nutzeraktion via Syslog protokollieren zu lassen. In Kombination mit dem "
-"rsyslog Plugin mit aktiviertem MySQL, können Sie diese Events in GOsa durchsuchen."
+"jede Nutzeraktion via Syslog protokollieren zu lassen. In Kombination mit "
+"dem rsyslog Plugin mit aktiviertem MySQL, können Sie diese Events in GOsa "
+"durchsuchen."
 
 #: include/class_core.inc:279
 msgid ""
@@ -6174,8 +6110,8 @@ msgid ""
 "Specify the minimum number of characters that have to differ between old and "
 "newly entered passwords."
 msgstr ""
-"Gibt die minimale Anzahl von Zeichen an, die sich zwischen neuem und altem Passwort "
-"unterscheiden müssen."
+"Gibt die minimale Anzahl von Zeichen an, die sich zwischen neuem und altem "
+"Passwort unterscheiden müssen."
 
 #: include/class_core.inc:309
 msgid ""
@@ -6197,6 +6133,7 @@ msgstr ""
 "dass sensible Daten angezeigt werden."
 
 #: include/class_core.inc:319
+#, php-format
 msgid "Related option"
 msgstr "Verwandte Einstellung"
 
@@ -6206,7 +6143,8 @@ msgid ""
 "may produce some ACL related false error messages!"
 msgstr ""
 "Anzeigen von Meldungen die bei der Plugin-Entwicklung hilfreich sein können. "
-"Achtung: diese Einstellung kann im Bezug auf ACLs fehlerhafte Meldungen erzeugen."
+"Achtung: diese Einstellung kann im Bezug auf ACLs fehlerhafte Meldungen "
+"erzeugen."
 
 #: include/class_core.inc:340
 msgid ""
@@ -6214,17 +6152,20 @@ msgid ""
 "'On' because it enables efficient methods to create missing subtrees in the "
 "LDAP."
 msgstr ""
-"Aktiviert LDAP-Schema-Prüfungen während der Anmeldung. Es wird empfohlen diese "
-"Einstellung zu aktivieren, da sie zusätzlich eine effektivere Methode zum "
-"Erzeugen von fehlenden Unterbäumen aktiviert."
+"Aktiviert LDAP-Schema-Prüfungen während der Anmeldung. Es wird empfohlen "
+"diese Einstellung zu aktivieren, da sie zusätzlich eine effektivere Methode "
+"zum Erzeugen von fehlenden Unterbäumen aktiviert."
 
 #: include/class_core.inc:350
 msgid "Enable copy and paste for most objects managed by GOsa."
-msgstr "Aktiviert Kopieren und Einfügen für die meisten von GOsa verwalteten Objekte."
+msgstr ""
+"Aktiviert Kopieren und Einfügen für die meisten von GOsa verwalteten Objekte."
 
 #: include/class_core.inc:360
 msgid "Enable PHP security checks for disabled register_global settings."
-msgstr "Aktiviert PHP-Sicherheitsprüfungen für deaktivierte register_global Einstellungen."
+msgstr ""
+"Aktiviert PHP-Sicherheitsprüfungen für deaktivierte register_global "
+"Einstellungen."
 
 #: include/class_core.inc:370
 msgid "Enable automatic redirection to HTTPS based administration."
@@ -6255,8 +6196,8 @@ msgid ""
 "Specify the maximum number of entries GOsa will request from an LDAP server. "
 "A warning is displayed if this limit is exceeded."
 msgstr ""
-"Gibt die maximale Anzahl von Einträgen an, die GOsa vom LDAP-Server anfordert. "
-"Bei Überschreitung wird eine Warnung angezeigt."
+"Gibt die maximale Anzahl von Einträgen an, die GOsa vom LDAP-Server "
+"anfordert. Bei Überschreitung wird eine Warnung angezeigt."
 
 #: include/class_core.inc:420
 msgid "Disable checks for LDAP size limits."
@@ -6287,7 +6228,8 @@ msgid ""
 "Number of seconds a LDAP query is allowed to take until GOsa aborts the "
 "request."
 msgstr ""
-"Anzahl der Sekunden, ab denen eine LDAP-Abfrage als gescheitert behandelt wird."
+"Anzahl der Sekunden, ab denen eine LDAP-Abfrage als gescheitert behandelt "
+"wird."
 
 #: include/class_core.inc:482
 msgid "Enables storing of user filters in browser cookies."
@@ -6299,7 +6241,8 @@ msgstr "Aktiviert Webseiten-Komprimierung."
 
 #: include/class_core.inc:503
 msgid "LDAP attribute which is used to detect changes."
-msgstr "LDAP-Attribut welches für das Feststellen von Änderungen verwendet wird."
+msgstr ""
+"LDAP-Attribut welches für das Feststellen von Änderungen verwendet wird."
 
 #: include/class_core.inc:514
 msgid ""
@@ -6316,9 +6259,9 @@ msgid ""
 "Number of seconds after an inactive session expires. This may be overridden "
 "by some systems php.ini/crontab mechanism."
 msgstr ""
-"Anzahl der Sekunden nach denen eine inaktive Sitzung abläuft. Dies kann "
-"bei einigen Systemen durch einen php.ini/crontab Machnismus ausser Kraft "
-"gesetzt werden."
+"Anzahl der Sekunden nach denen eine inaktive Sitzung abläuft. Dies kann bei "
+"einigen Systemen durch einen php.ini/crontab Machnismus ausser Kraft gesetzt "
+"werden."
 
 #: include/class_core.inc:545
 msgid "Template engine compile directory."
@@ -6330,8 +6273,8 @@ msgid ""
 "Logical AND of the integer values below that controls the debug output on "
 "every page load: %s"
 msgstr ""
-"Logische UND-Verknüpfung von integer-Werten die die Debug-Ausgaben auf "
-"jeder Seite steuern: %s"
+"Logische UND-Verknüpfung von integer-Werten die die Debug-Ausgaben auf jeder "
+"Seite steuern: %s"
 
 #: include/class_core.inc:576
 msgid ""
@@ -6357,8 +6300,8 @@ msgid ""
 "Specify whether 'cn' or 'uid' style user DNs are generated. For more "
 "sophisticated control use the 'accountRDN' setting."
 msgstr ""
-"Gibt an ob die Benutzer-DN im cn- oder uid-Stil generiert werden soll. "
-"Ist die Erzeugung komplizierter, nutzen Sie die 'accountRDN' Einstellung."
+"Gibt an ob die Benutzer-DN im cn- oder uid-Stil generiert werden soll. Ist "
+"die Erzeugung komplizierter, nutzen Sie die 'accountRDN' Einstellung."
 
 #: include/class_core.inc:617
 msgid "Location component for user storage inside of departments."
@@ -6373,49 +6316,45 @@ msgid ""
 "Count base for group IDs. For dynamic ID assignment use the 'nextIdHook' "
 "setting."
 msgstr ""
-"Zählbasis für Gruppen-IDs. Soll dies dynamisch erfolgen, nutzen Sie die "
-" 'nextIdHook' Einstellung."
+"Zählbasis für Gruppen-IDs. Soll dies dynamisch erfolgen, nutzen Sie die  "
+"'nextIdHook' Einstellung."
 
 #: include/class_core.inc:647
 msgid ""
 "Count base for user IDs. For dynamic ID assignment use the 'nextIdHook' "
 "setting."
 msgstr ""
-"Zählbasis für Benutzer-IDs. Soll dies dynamisch erfolgen, nutzen Sie die "
-" 'nextIdHook' Einstellung."
+"Zählbasis für Benutzer-IDs. Soll dies dynamisch erfolgen, nutzen Sie die  "
+"'nextIdHook' Einstellung."
 
 #: include/class_core.inc:657
 msgid ""
 "Lowest assignable group ID for use with the idAllocationMethod set to 'pool'."
-msgstr ""
-"Niedrigste zuweisbare Gruppen-Id, wenn idAllocationMethod 'pool' ist."
+msgstr "Niedrigste zuweisbare Gruppen-Id, wenn idAllocationMethod 'pool' ist."
 
 #: include/class_core.inc:667
 msgid ""
 "Highest assignable group ID for use with the idAllocationMethod set to "
 "'pool'."
-msgstr ""
-"Höchste zuweisbare Gruppen-Id, wenn idAllocationMethod 'pool' ist."
+msgstr "Höchste zuweisbare Gruppen-Id, wenn idAllocationMethod 'pool' ist."
 
 #: include/class_core.inc:677
 msgid ""
 "Lowest assignable user ID for use with the idAllocationMethod set to 'pool'."
-msgstr ""
-"Niedrigste zuweisbare Benutzer-Id, wenn idAllocationMethod 'pool' ist."
+msgstr "Niedrigste zuweisbare Benutzer-Id, wenn idAllocationMethod 'pool' ist."
 
 #: include/class_core.inc:687
 msgid ""
 "Highest assignable user ID for use with the idAllocationMethod set to 'pool'."
-msgstr ""
-"Höchste zuweisbare Benutzer-Id, wenn idAllocationMethod 'pool' ist."
+msgstr "Höchste zuweisbare Benutzer-Id, wenn idAllocationMethod 'pool' ist."
 
 #: include/class_core.inc:697
 msgid ""
 "Count base for user IDs. For dynamic ID assignment use the 'baseIdHook' "
 "setting."
 msgstr ""
-"Zählbasis für Benutzer-IDs. Soll dies dynamisch erfolgen, nutzen Sie die "
-" 'baseIdHook' Einstellung."
+"Zählbasis für Benutzer-IDs. Soll dies dynamisch erfolgen, nutzen Sie die  "
+"'baseIdHook' Einstellung."
 
 #: include/class_core.inc:707
 msgid "Connection URL for use with the gosa-ng service."
@@ -6435,7 +6374,9 @@ msgstr "Verbindungs URI für den gosa-si Dienst (abgekündigt)."
 
 #: include/class_core.inc:747
 msgid "Number of seconds after a gosa-si connection is considered 'dead'."
-msgstr "Anzahl der Sekunden nach denen eine gosa-si Verbindung als 'tot' betrachtet wird."
+msgstr ""
+"Anzahl der Sekunden nach denen eine gosa-si Verbindung als 'tot' betrachtet "
+"wird."
 
 #: include/class_core.inc:758
 msgid "User attribute which is used for log in."
@@ -6455,7 +6396,9 @@ msgstr ""
 
 #: include/class_core.inc:789
 msgid "Enable the use of {sasl} instead of {kerberos} for user realms."
-msgstr "Aktiviert die Verwendung von {sasl} anstelle von {kerberos} für Benutzer-Realms."
+msgstr ""
+"Aktiviert die Verwendung von {sasl} anstelle von {kerberos} für Benutzer-"
+"Realms."
 
 #: include/class_core.inc:799
 msgid ""
@@ -6475,15 +6418,17 @@ msgstr ""
 
 #: include/class_core.inc:819
 msgid "Script to be called for finding the next free id for groups or users."
-msgstr "Skript welches zum Auffinden der nächsten freien Gruppen- oder Benutzer-ID verwendet wird."
+msgstr ""
+"Skript welches zum Auffinden der nächsten freien Gruppen- oder Benutzer-ID "
+"verwendet wird."
 
 #: include/class_core.inc:828
 msgid ""
 "Descriptive string for the automatic ID generator. Please read the FAQ file "
 "for more information."
 msgstr ""
-"Beschreibende Zeichenkette für den automatischen ID-Generator. Nähere Angaben finden "
-"Sie in der FAQ."
+"Beschreibende Zeichenkette für den automatischen ID-Generator. Nähere "
+"Angaben finden Sie in der FAQ."
 
 #: include/class_core.inc:838
 msgid "Enable strict checking for user IDs and group names."
@@ -6510,18 +6455,19 @@ msgid ""
 "Namespace rule to create user folders. Please read the FAQ file for more "
 "information."
 msgstr ""
-"Regel zum erzeugen von Benutzer-Ordnern. Nähere Angaben finden Sie in der FAQ."
+"Regel zum erzeugen von Benutzer-Ordnern. Nähere Angaben finden Sie in der "
+"FAQ."
 
 #: include/class_core.inc:889
 msgid ""
 "Namespace rule to create folders. Please read the FAQ file for more "
 "information."
-msgstr ""
-"Regel zum erzeugen von Ordnern. Nähere Angaben finden Sie in der FAQ."
+msgstr "Regel zum erzeugen von Ordnern. Nähere Angaben finden Sie in der FAQ."
 
 #: include/class_core.inc:899
 msgid "Seconds after an IMAP connection is considered dead."
-msgstr "Anzahl der Sekunden nach denen eine IMAP-Verbindung als 'tot' behandelt wird."
+msgstr ""
+"Anzahl der Sekunden nach denen eine IMAP-Verbindung als 'tot' behandelt wird."
 
 #: include/class_core.inc:910
 msgid "Class name of the mail method to be used."
@@ -6538,7 +6484,8 @@ msgid ""
 "Directory to store vacation templates. Please read the FAQ file for more "
 "information."
 msgstr ""
-"Verzeichnis welches Urlaubs-Vorlagen enthält. Nähere Angaben finden Sie in der FAQ."
+"Verzeichnis welches Urlaubs-Vorlagen enthält. Nähere Angaben finden Sie in "
+"der FAQ."
 
 #: include/class_core.inc:940
 msgid "Enable TLS for LDAP connections."
@@ -6553,8 +6500,8 @@ msgid ""
 "Maintain sambaIdmapEntry objects to improve performance on some Samba "
 "versions."
 msgstr ""
-"Aktiviert die Verwaltung von sambaIdmapEntry Objekten um die "
-"Performance bei einigen Samba-Versionen zu erhöhen."
+"Aktiviert die Verwaltung von sambaIdmapEntry Objekten um die Performance bei "
+"einigen Samba-Versionen zu erhöhen."
 
 #: include/class_core.inc:970
 msgid "Enable checks to determine whether an account is expired or not."
@@ -6571,7 +6518,8 @@ msgid ""
 "String containing the RID base for Samba setups without the Domain object in "
 "LDAP."
 msgstr ""
-"Zeichenkette mit der RID-Basis von Samba-Einrichtungen ohne Domain-Objekt im LDAP."
+"Zeichenkette mit der RID-Basis von Samba-Einrichtungen ohne Domain-Objekt im "
+"LDAP."
 
 #: include/class_core.inc:1000
 msgid "Enable manual object snapshots."
@@ -6594,8 +6542,8 @@ msgid ""
 "Method for user and group ID generation. Note: only the 'traditional' method "
 "is safe due to PHP limitations."
 msgstr ""
-"Zu verwendende Methode für die Benutzer- und Gruppen-ID Generierung. Hinweis: "
-"nur 'traditional' ist aufgrund von Einschränkungen von PHP sicher."
+"Zu verwendende Methode für die Benutzer- und Gruppen-ID Generierung. "
+"Hinweis: nur 'traditional' ist aufgrund von Einschränkungen von PHP sicher."
 
 #: include/class_core.inc:1050
 msgid "URI of server to be used for snapshots."
@@ -6976,55 +6924,3 @@ msgstr ""
 #: include/class_pathNavigator.inc:86
 msgid "Welcome to GOsa"
 msgstr "Willkommen bei GOsa"
-
-#~ msgid ""
-#~ "The 'htaccessAuthentication' variable tells GOsa to use either htaccess "
-#~ "authentication or LDAP authentication. This can be used if you want to "
-#~ "use i.e. Kerberos to authenticate the users."
-#~ msgstr ""
-#~ "Die Option 'htaccessAuthentication' teilt GOsa mit eine LDAP-basierte "
-#~ "oder eine htaccess-Authentifizierung zu verwenden. Dies kann nützlich "
-#~ "sein wenn Sie beispielsweise über Kerberos authentifizieren möchten."
-
-#~ msgid "Here is an example command:"
-#~ msgstr "Hier ein Beispiel-Kommando:"
-
-#~ msgid "Max"
-#~ msgstr "Maximum"
-
-#~ msgid "Welcome %s!"
-#~ msgstr "Willkommen %s!"
-
-#~ msgid ""
-#~ "The 'ogroupRDN' statement defines the location where new object groups "
-#~ "will be created. The default is 'ou=groups,'."
-#~ msgstr ""
-#~ "Die 'ogroupRDN' Option definiert den Ablage-Container für neue Objekt-"
-#~ "Gruppen.Der Standard ist 'ou=groups,'."
-
-#~ msgid ""
-#~ "The 'aclRoleRDN' statement defines the location where new ACL roles will "
-#~ "be created. The default is 'ou=aclroles,'."
-#~ msgstr ""
-#~ "Die Option 'aclRoleRDN' definiert den Ablageort für neue ACL-Rollen. Der "
-#~ "Standard ist 'ou=aclroles,'."
-
-#~ msgid "FALSE"
-#~ msgstr "Aus"
-
-#~ msgid "TRUE"
-#~ msgstr "An"
-
-#~ msgid ""
-#~ "The 'accountRDN' option tells GOsa to use a placeholder pattern for "
-#~ "generating account RDNs. A pattern can include attribute names prefaced "
-#~ "by a %% and normal text: %s. This will generate a RDN consisting of "
-#~ "cn=.... filled with surname and given name of the edited account. This "
-#~ "option disables the use of accountPrimaryAttribute and personalTitleInDn."
-#~ msgstr ""
-#~ "Die Option 'accountRDN' teilt GOsa mit, wie eine Konto-RDN "
-#~ "zusammengesetzt werden soll. Das Vorgabemuster kann Attributnamen mit "
-#~ "vorangestelltem %% und normalen text enthalten: %s. Dies erstellt eine "
-#~ "RDN, bestehend aus cn=...., aufgeüfllt mit Nach- und Vornamen des "
-#~ "bearbeiteten Kontos. Diese Option deaktiviert die Nutzung von "
-#~ "accountPrimaryAttribute und personalTitleInDn."
