@@ -48,8 +48,9 @@ VERSION=$(cat rpm_src/gosa-core/Changelog  | grep "^\*" | sed s/"^[^0-9]*"//g | 
 
 case "$distribution" in 
  "RHEL" ) 
+	pwd=`pwd`
 	rm -rf /var/tmp/gosa*
-	build_path='/root/rpmbuild/'
+	build_path=$pwd/rpmbuild/
 	target='redhat'
 	;;
  "SLES" ) 
