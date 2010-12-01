@@ -1,6 +1,6 @@
-diff -urNad gosa-2.6.0+svn11288~/include/php_setup.inc gosa-2.6.0+svn11288/include/php_setup.inc
---- gosa-2.6.0+svn11288~/include/php_setup.inc	2008-06-11 15:55:59.000000000 +0200
-+++ gosa-2.6.0+svn11288/include/php_setup.inc	2008-06-11 15:56:00.000000000 +0200
+diff -urNad -x .svn test/include/php_setup.inc gosa-core/include/php_setup.inc
+--- test/include/php_setup.inc	2010-12-01 09:13:42.798749001 +0100
++++ gosa-core/include/php_setup.inc	2010-12-01 10:22:39.236749000 +0100
 @@ -20,7 +20,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
@@ -10,10 +10,10 @@ diff -urNad gosa-2.6.0+svn11288~/include/php_setup.inc gosa-2.6.0+svn11288/inclu
  
  function gosaRaiseError($errno, $errstr, $errfile, $errline)
  {
-diff -urNad gosa-2.6.0+svn11288~/update-gosa gosa-2.6.0+svn11288/update-gosa
---- gosa-2.6.0+svn11288~/update-gosa	2008-06-11 15:55:59.000000000 +0200
-+++ gosa-2.6.0+svn11288/update-gosa	2008-06-11 16:02:30.000000000 +0200
-@@ -169,20 +169,20 @@
+diff -urNad -x .svn test/update-gosa gosa-core/update-gosa
+--- test/update-gosa	2010-12-01 10:08:16.766749002 +0100
++++ gosa-core/update-gosa	2010-12-01 10:22:50.352748973 +0100
+@@ -183,20 +183,20 @@
  
  	/* For each language, merge the target .mo to the compiled directory. */
  	foreach ($languages as $language => $po_files){
