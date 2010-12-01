@@ -44,7 +44,7 @@ fi
 # Detect build version 
 ##
 VERSION=$(cat rpm_src/gosa-core/debian/changelog | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
-
+VERSION=$(cat rpm_src/gosa-core/Changelog  | grep "^\*" | sed s/"^[^0-9]*"//g | head -n1)
 
 case "$distribution" in 
  "RHEL" ) 
