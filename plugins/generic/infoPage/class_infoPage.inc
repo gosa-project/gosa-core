@@ -135,21 +135,24 @@ class infoPage extends plugin
             }
         }
 
-        #TODO: Permission
-        if(!isset($this->attrs['jpegPhoto'])){
-            #echo "No image...";
-        }
-
         // Convert address
-        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "homePostalAddress")) && isset($this->attrs['homePostalAddress'][0])){
+        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "homePostalAddress")) && 
+                isset($this->attrs['homePostalAddress'][0])){
             $smarty->assign("homePostalAddress", preg_replace("/\n/", "<br>", $this->attrs['homePostalAddress'][0]));
         }
 
-        session::set('binary',$this->attrs['jpegPhoto'][0]);
-        session::set('binarytype',"image/jpeg");
+        // Assign JPEG Photo only if it is set and if we are allowed to view it.
+        $smarty->assign("jpegPhoto", "");
+        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "userPicture")) && 
+                isset($this->attrs['jpegPhoto'][0])){
+            session::set('binary',$this->attrs['jpegPhoto'][0]);
+            session::set('binarytype',"image/jpeg");
+            $smarty->assign("jpegPhoto", $this->attrs['jpegPhoto']);
+        }
 
         // Set date of birth
-        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "dateOfBirth")) && isset($this->attrs['dateOfBirth'][0])){
+        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "dateOfBirth")) && 
+                isset($this->attrs['dateOfBirth'][0])){
             $smarty->assign("dateOfBirth", date('d.m.Y',strtotime($this->attrs['dateOfBirth'][0])));
         }
 

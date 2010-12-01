@@ -5,8 +5,12 @@
 
     <table width="100%">
         <tr>
-            <td>
-                    <img src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
+            <td style='width:147px; height:200px; background-color:gray; vertical-align: middle;' >
+                {if $jpegPhoto == ""}
+                    <img  src="plugins/users/images/default.jpg" alt=''>
+                {else}
+                    <img  src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
+                {/if}
             </td>
             <td style="width:33%">
                 <table>
