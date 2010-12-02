@@ -50,6 +50,12 @@
     <div class="clear"></div>
 {/if}
 
+{if !$personalInfoAllowed && $plugins == ""}
+    <div style='width:100%;text-align:center;padding-top:100px;padding-bottom:100px'>
+    <b>{t}You have no permission to edit any properties. Please contact your administrator.{/t}</b>
+    </div>
+{/if}
+
 {if $managersCnt != 0}
     <hr>
     <h3>{t}Administrative contact{/t}</h3>
