@@ -12,7 +12,7 @@
 
    <div class='plugin-area' style='margin:10px;'>
     <div class='plugin'>
-    {$errors}
+    {if isset($errors)}{$errors}{/if}
     {$header}
     <hr>
     {$contents}
