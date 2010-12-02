@@ -15,7 +15,6 @@ A:  Just create a user template and pre-fill all values you need. You
     https://oss.gonicus.de/labs/gosa/wiki/PluginInstallationUserTemplates
 
 
-
 Q:  I can see passwords in my logs and in my process list while executing 
     commands, such as postcreate/passwordHook/aso.
 
@@ -43,7 +42,6 @@ A:  The best way to execute scripts with sensitive data is to use envrionmental
     ---
 
 
-
 Q:  Can GOsa execute commands 'BEFORE' creating/editing/removing users,departments, etc. 
 
 A:  Yes. Edit /etc/gosa/gosa.conf's menu section. 
@@ -56,7 +54,6 @@ A:  Yes. Edit /etc/gosa/gosa.conf's menu section.
     ---
 
 
-
 Q:  Can GOsa execute commands 'AFTER' creating/editing/removing users,departments, etc. 
 
 A:  Yes. Edit /etc/gosa/gosa.conf's menu section. 
@@ -67,7 +64,6 @@ A:  Yes. Edit /etc/gosa/gosa.conf's menu section.
     ---
     postcreate="/usr/bin/sudo /usr/local/sbin/ftp.setperms %uid %givenName"
     ---
-
 
 
 Q:  I'd like to  modify the look of GOsa to fit our CI. How can I create anown theme? 
