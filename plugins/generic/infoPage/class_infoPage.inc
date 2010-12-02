@@ -109,7 +109,7 @@ class infoPage extends plugin
                 $phone = "<tr><td>&nbsp;"._("Phone number").":</td><td><i>".set_post($managers[$dn]['telephoneNumber'][0])."</i></td></tr>";
             }
             if(isset($managers[$dn]['mail'][0])){
-                $mail = "<tr><td>&nbsp;"._("Mail").":</td><td><i>".set_post($managers[$dn]['mail'][0])."</i></td></tr>";
+                $mail = "<tr><td>&nbsp;"._("Mail").":</td><td><i><a href='mailto:".set_post($managers[$dn]['mail'][0])."'>".set_post($managers[$dn]['mail'][0])."</i></td></tr>";
             }
             $managers[$dn]['str'] = "<table cellpadding='2' style='border:1px solid #CCC'>{$name}{$phone}{$mail}</table>";
         }
