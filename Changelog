@@ -2,7 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.7
-  - Updated design. CSS 3, mostly w3c conform.
+  - Updated design. CSS3, mostly w3c conform.
   - Updated and fixed english wording.
   - Rewrote filtering methods, allows to define self-made filters.
   - Rewrote reference tabs, it now resolve the users acls.
