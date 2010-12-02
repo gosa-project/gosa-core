@@ -5,14 +5,14 @@
 
     <table width="100%">
         <tr>
-            <td style='width:147px; height:200px; background-color:gray; vertical-align: middle;' >
+            <td style='width:200px; vertical-align: middle;' >
                 {if $jpegPhoto == ""}
                     <img  src="plugins/users/images/default.jpg" alt=''>
                 {else}
-                    <img  src="getbin.php?rand={$rand}" alt='' style='max-width:147px; max-height: 200px; vertical-align: middle;' >
+                    <img  src="getbin.php?rand={$rand}" alt='' style='border:1px solid #CCC; max-width:147px; max-height: 200px; vertical-align: middle;' >
                 {/if}
             </td>
-            <td style="width:33%">
+            <td style="width:40%">
                 <table>
                     {if $uid != ""}<tr><td>{t}User ID{/t}:</td><td><i>{$uid}</i></td></tr>{/if}
                     {if $sn != ""}<tr><td>{t}Surname{/t}:</td><td><i>{$sn}</i></td></tr>{/if}
