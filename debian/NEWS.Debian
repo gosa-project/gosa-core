@@ -16,5 +16,3 @@ include         /etc/ldap/schema/gosa/trust.schema
 After adapting you can remove the gosa schema in /etc/ldap/schema
 
 Benoit Mortier 01/05/2010
-
-

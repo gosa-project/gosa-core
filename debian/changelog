@@ -1,6 +1,6 @@
-gosa (2.6.99-1) unstable; urgency=low
+gosa (2.7-1) unstable; urgency=low
 
-  * Updated debian directory for trunk
+  * New upstream release
 
  -- Cajus Pollmeier <cajus@debian.org>  Mon, 04 Oct 2010 10:45:44 +0200
 

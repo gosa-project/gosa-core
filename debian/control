@@ -116,7 +116,7 @@ Description: Provide gettext support for Smarty
 Package: gosa-plugin-connectivity
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: connectivity plugin for GOsa²
  Connectivity base plugin - base for really small plugins.
  .
@@ -126,7 +126,7 @@ Description: connectivity plugin for GOsa²
 Package: gosa-plugin-dhcp
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: dhcp plugin for GOsa²
  DHCP service management plugin.
  .
@@ -147,7 +147,7 @@ Description: LDAP schema for GOsa² dhcp plugin
 Package: gosa-plugin-dns
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: dns plugin for GOsa²
  DNS service management plugin.
  .
@@ -168,7 +168,7 @@ Description: LDAP schema for GOsa² dns plugin
 Package: gosa-plugin-fai
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-goto
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: fai plugin for GOsa²
  FAI plugin for managing Linux system deployment.
  .
@@ -189,7 +189,7 @@ Description: LDAP schema for GOsa² fai plugin
 Package: gosa-plugin-gofax
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: gofax plugin for GOsa²
  GOfax management with report functionality
  .
@@ -199,7 +199,7 @@ Description: gofax plugin for GOsa²
 Package: gosa-plugin-gofon
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: gofon plugin for GOsa²
  GOfon management with report functionality
  .
@@ -209,7 +209,7 @@ Description: gofon plugin for GOsa²
 Package: gosa-plugin-goto
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: goto plugin for GOsa²
  GOto desktop management plugin
  .
@@ -219,7 +219,7 @@ Description: goto plugin for GOsa²
 Package: gosa-plugin-kolab
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity, gosa-plugin-mail
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: kolab plugin for GOsa²
  Kolab2 account management plugin
  .
@@ -240,7 +240,7 @@ Description: LDAP schema for GOsa² kolab plugin
 Package: gosa-plugin-ldapmanager
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: ldapmanager plugin for GOsa²
  LDAP import and export management plugin
  .
@@ -250,7 +250,7 @@ Description: ldapmanager plugin for GOsa²
 Package: gosa-plugin-mail
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: base mail plugin for GOsa²
  Mail management base plugin
  .
@@ -260,7 +260,7 @@ Description: base mail plugin for GOsa²
 Package: gosa-plugin-mit-krb5
 Architecture: all
 Conflicts: gosa-plugin-heimdal 
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
 Description: mit-krb5 plugin for GOsa²
  MIT kerberos management plugin
@@ -282,7 +282,7 @@ Description: LDAP schema for GOsa² mit-krb5 plugin
 Package: gosa-plugin-nagios
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: nagios plugin for GOsa²
  Nagios account settings management
  .
@@ -303,7 +303,7 @@ Description: LDAP schema for GOsa² nagios plugin
 Package: gosa-plugin-netatalk
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: netatalk plugin for GOsa²
  Netatalk account management plugin
  .
@@ -313,7 +313,7 @@ Description: netatalk plugin for GOsa²
 Package: gosa-plugin-opengroupware
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-mail, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: opengroupware plugin for GOsa²
  Opengroupware account management plugin
  .
@@ -323,7 +323,7 @@ Description: opengroupware plugin for GOsa²
 Package: gosa-plugin-openxchange
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-mail, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: openxchange plugin for GOsa²
  Open-Xchange account management plugin
  .
@@ -344,7 +344,7 @@ Description: LDAP schema for GOsa² openxchange plugin
 Package: gosa-plugin-opsi
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-fai, gosa-plugin-goto
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: opsi plugin for GOsa²
  opsi plugin for managing windows system and software deployment
  .
@@ -354,7 +354,7 @@ Description: opsi plugin for GOsa²
 Package: gosa-plugin-phpgw
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-mail, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: phpgw plugin for GOsa²
  PHP Groupware connectivity plugin
  .
@@ -375,7 +375,7 @@ Description: LDAP schema for GOsa² phpgw plugin
 Package: gosa-plugin-phpscheduleit
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: phpscheduleit plugin for GOsa²
  PHP scheduleit connectivity plugin
  .
@@ -396,7 +396,7 @@ Description: LDAP schema for GOsa² phpscheduleit plugin
 Package: gosa-plugin-pptp
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: pptp plugin for GOsa²
  PPTP connectivity plugin
  .
@@ -417,7 +417,7 @@ Description: LDAP schema for GOsa² pptp plugin
 Package: gosa-plugin-pureftpd
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: pureftpd plugin for GOsa²
  PureFTPD connectivity plugin.
  .
@@ -438,7 +438,7 @@ Description: LDAP schema for GOsa² pureftpd plugin
 Package: gosa-plugin-rolemanagement
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: rolemanagement plugin for GOsa²
  Role Management plugin.
  .
@@ -448,7 +448,7 @@ Description: rolemanagement plugin for GOsa²
 Package: gosa-plugin-rsyslog
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-systems
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: rsyslog plugin for GOsa²
  Syslog and GOsa logging plugin.
  .
@@ -458,7 +458,7 @@ Description: rsyslog plugin for GOsa²
 Package: gosa-plugin-samba
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: samba3 plugin for GOsa²
  Plugin for Samba 3 management.
  .
@@ -468,7 +468,7 @@ Description: samba3 plugin for GOsa²
 Package: gosa-plugin-scalix
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: scalix plugin for GOsa²
  Scalix account management plugin.
  .
@@ -478,7 +478,7 @@ Description: scalix plugin for GOsa²
 Package: gosa-plugin-squid
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: squid plugin for GOsa²
  Squid connectivity plugin.
  .
@@ -488,7 +488,7 @@ Description: squid plugin for GOsa²
 Package: gosa-plugin-ssh
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: ssh plugin for GOsa²
  SSH key management plugin.
  .
@@ -509,7 +509,7 @@ Description: LDAP schema for GOsa² ssh plugin
 Package: gosa-plugin-sudo
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: sudo plugin for GOsa²
  Sudo management plugin.
  .
@@ -530,7 +530,7 @@ Description: LDAP schema for GOsa² sudo plugin
 Package: gosa-plugin-systems
 Architecture: all
 Depends: ${misc:Depends}, gosa
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: systems plugin for GOsa²
  Systems management base plugin.
  .
@@ -540,7 +540,7 @@ Description: systems plugin for GOsa²
 Package: gosa-plugin-uw-imap
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-mail
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: uw-imap plugin for GOsa²
  UW imap mail method.
  .
@@ -550,7 +550,7 @@ Description: uw-imap plugin for GOsa²
 Package: gosa-plugin-webdav
 Architecture: all
 Depends: ${misc:Depends}, gosa, gosa-plugin-connectivity
-Breaks: gosa (<<2.6)
+Breaks: gosa (<<2.7)
 Description: webdav plugin for GOsa²
  WebDAV connectivity plugin.
  .
