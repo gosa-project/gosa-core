@@ -83,13 +83,11 @@ A:  Themes are splitted into two parts. ihtml/ contains templates which
     * style.css          -> stylesheets used by GOsa
 
 
-
 Q:  How can I let a person do administrative tasks under a specific department? 
 
 A:  GOsa 2.6 implements a flexible but complex ACL management, please have a look at 
     the following wiki page: https://oss.gonicus.de/labs/gosa/wiki/DocumentationWritingACLs2.6
     If you have still questions, please use the mailing list or the forum.
-
 
 
 Q:  What about applications? 
@@ -104,12 +102,10 @@ A:  GOsa can manage desktop applications in ldap. Create a group and put all use
     desktop.
 
 
-
 Q:  What's this terminal stuff? 
 
 A:  GOto is - similar to LTSP - a ldap based diskless client system. It is available
     from our projects page.
-
 
 
 Q:  I can't select any mailservers. What's wrong? 
