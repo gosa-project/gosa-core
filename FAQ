@@ -609,7 +609,6 @@ A:  You need to add the following objectClasses to your accounts:
     The setup will automatically migrate those accounts, see migration step in GOsa setup!
 
 
-
 Q:  Is it possible to login with the users mail address too?  
 
 A:  Yes, just add the following line to your gosa.conf:
@@ -629,12 +628,10 @@ A:  Yes, just add the following line to your gosa.conf:
     ---
 
 
-
 Q:  GOsa doesn't seem to follow my referrals. What can I do? 
 
 A:  Place the option 'ldapFollowReferrals = "true"' inside your locations definition
     and you should be fine.
-
 
 
 Q:  GOsa is not in my native language, can I translate it to my language? 
