@@ -108,7 +108,7 @@ class passwordMethod
             $userPassword = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$userPassword);
 
             // Only lock samba hashes if samba passwords are enabled
-            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) == "";
+            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) != "";
             if($smbPasswdEnabled){
                 $sambaLMPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaLMPassword);
                 $sambaNTPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaNTPassword);
@@ -187,7 +187,7 @@ class passwordMethod
             $userPassword = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$userPassword);
 
             // Update samba hashes only if its enabled.
-            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) == "";
+            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) != "";
             if($smbPasswdEnabled){
                 $sambaLMPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaLMPassword);
                 $sambaNTPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaNTPassword);
