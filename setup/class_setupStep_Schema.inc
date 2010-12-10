@@ -53,7 +53,7 @@ class Step_Schema extends setup_step
         // Detect Schema Info
         $ldap = new ldapMultiplexer($ldap_l);
         $ldap->cd($cv['base']);
-        $objectclasses = $ldap->get_objectclasses();
+        $objectclasses = $ldap->get_objectclasses(TRUE);
    
         // Check if we can find something
         $ldap->set_size_limit(1);
