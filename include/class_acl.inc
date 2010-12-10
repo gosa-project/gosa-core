@@ -252,7 +252,7 @@ class acl extends plugin
     $this->sectionList->setHeight("120px");
     $this->sectionList->setColspecs(array('200px','*'));
     $this->sectionList->setHeader(array(_("Section"),_("Description")));
-    $this->sectionList->setDefaultSortColumn(1);
+    $this->sectionList->setDefaultSortColumn(0);
     $this->sectionList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
 
     $this->roleList = new sortableListing();
