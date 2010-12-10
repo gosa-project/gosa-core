@@ -164,7 +164,7 @@ class aclrole extends acl
     $this->sectionList->setHeight("400px");
     $this->sectionList->setColspecs(array('200px','*'));
     $this->sectionList->setHeader(array(_("Category"),_("Description")));
-    $this->sectionList->setDefaultSortColumn(1);
+    $this->sectionList->setDefaultSortColumn(0);
     $this->sectionList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
   }
 
