@@ -93,7 +93,7 @@
 			{t}Admin password{/t}
 		</div>
 		<div class='step4_value'>
-			<input type='password' name='password' maxlength='20' size='20' value='{$password}'>
+			<input type='password' name='password' value='{$password}'>
 		</div>
 	</div>
 
