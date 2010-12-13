@@ -83,7 +83,7 @@
         </tr>
         <tr>
             <td>{t}Administrator password{/t}</td>
-            <td><input type='password' name='password' maxlength='20' size='20' value='{$password}'></td>
+            <td><input type='password' name='password' value='{$password}'></td>
         </tr>
     </table>
 
