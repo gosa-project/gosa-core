@@ -689,8 +689,18 @@ function ldap_expired_account($config, $userdn, $uid)
 
     // Fetch required attributes 
     foreach(array('shadowExpire','shadowLastChange','shadowMax','shadowMin',
-                'shadowInactive','shadowWarning') as $attr){
+                'shadowInactive','shadowWarning','sambaKickoffTime') as $attr){
         $$attr = (isset($attrs[$attr][0]))? $attrs[$attr][0] : null;
+    }
+
+
+    // Check if the account has reached its kick off limitations.
+    // ---------------------------------------------------------
+    // Once the accout reaches the kick off limit it has expired.
+    if($sambaKickoffTime !== null){
+        if(time() >= $sambaKickoffTime){
+            return(POSIX_ACCOUNT_EXPIRED);
+        }
     }
 
 
