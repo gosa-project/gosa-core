@@ -371,7 +371,7 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.13 NAME 'gosaWebDAVAccount'
         DESC 'GOsa webdav enabling account (v2.7)'
         SUP top AUXILIARY
         MUST ( cn $ uid )
-        MAY ( gosaWebDAVQuota ) )
+        MAY ( gosaWebDAVQuota )  )
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.14 NAME 'gosaIntranetAccount'
 		DESC 'GOsa Inatrent enabling account (v2.7)'
