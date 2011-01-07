@@ -98,6 +98,7 @@ input[type=password]{
 textarea, select {
   border:1px solid #DDD;
   margin-bottom:2px;
+  background-color:white;
 }
 
 textarea[disabled], select:disabled, select[size="1"]:disabled {
