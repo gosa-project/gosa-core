@@ -3779,10 +3779,11 @@ function gen_uids($rule, $attributes)
         if(!isset($match[5])){
             $replacements[$match[0]][] = $attributes[$match[2]];
     
-        // Start given but no end, so just add a simple character
+        // Start given but no end, so just add a single character
         }elseif(!isset($match[7])){
             if(isset($attributes[$match[2]][$match[5]])){
-                $replacements[$match[0]][] = $attributes[$match[2]][$match[5]];
+                $tmp = " ".$attributes[$match[2]];
+                $replacements[$match[0]][] = trim($tmp[$match[5]]);
             }
 
         // Add all values in range
@@ -3790,8 +3791,9 @@ function gen_uids($rule, $attributes)
             $str = "";
             for($i=$match[5]; $i<= $match[7]; $i++){
                 if(isset($attributes[$match[2]][$i])){
-                    $str .= $attributes[$match[2]][$i];
-                    $replacements[$match[0]][] = $str;
+                    $tmp = " ".$attributes[$match[2]];
+                    $str .= $tmp[$i];
+                    $replacements[$match[0]][] = trim($str);
                 }
             }
         }
