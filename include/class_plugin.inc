@@ -595,7 +595,7 @@ class plugin
     $this->attrs= $ldap->fetch();
 
     $values = array();
-    foreach($this->attributes as $name){
+    foreach(array('uid','sn','givenName') as $name){
         if(isset($this->parent->$name)){
             $value = $this->parent->$name;
             if(is_numeric($name)) continue;
