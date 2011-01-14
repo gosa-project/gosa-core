@@ -3717,11 +3717,14 @@ function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
     }
     krsort($hits);
 
+    // Add lower case placeholders to avoid errors
+    foreach($attrs as $key => $attr) $attrs[strtolower($key)] = $attr;
+
     // Replace the placeholder in the given string now.
     foreach($hits as $match){
 
         // Avoid errors about undefined index.
-        $name = $match[2];
+        $name = strtolower($match[2]);
         if(!isset($attrs[$name])) $attrs[$name] = $default;
 
         // Calculate the replacement
