@@ -343,7 +343,17 @@ class userManagement extends management
                   $attrs = $ldap->fetch();
                   exec($this->config->get_cfg_value("passwordHook")." ".
                           escapeshellarg($attrs['uid'][0])." ".escapeshellarg($new_password), $resarr);
+                  $check_hook_output = "";
+                  if(count($resarr) > 0) {
+                      $check_hook_output= join('\n', $resarr);
+                  }
+                  if(!empty($check_hook_output)){
+                      $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),$check_hook_output);
+                      msg_dialog::displayChecks($message);
+                      return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+                  }
               }
+
 
               // The user has to change his password on next login
               // - We are going to update samba and posix attributes here, to enforce
