@@ -320,11 +320,25 @@ class userManagement extends management
                     }
                 }
 
+                // Call external check hook to validate the password change
+                if(!count($message)){
+                    $attrs = array();
+                    $attrs['current_password'] = '';
+                    $attrs['new_password'] = $new_password;
+                    $checkRes = password::callCheckHook($this->config,$this->dn,$attrs);
+                    if(count($checkRes)){
+                        $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"), 
+                                implode($checkRes));
+                    }
+                }
+
                 // Display errors
                 if (count($message) != 0){
                     msg_dialog::displayChecks($message);
                     return($smarty->fetch(get_template_path('password.tpl', TRUE)));
                 }
+
+
 
                 // Change cassword 
                 if(isset($this->force_hash_type[$this->dn])){
