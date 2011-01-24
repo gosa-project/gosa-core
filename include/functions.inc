@@ -3710,7 +3710,7 @@ function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
     // Get all matching parts of the given string and sort them by
     //  length, to avoid replacing strings like '%uidNumber' with 'uid'
     //  instead of 'uidNumber'; The longest tring at first.
-    preg_match_all('/(\{?%([a-z0-9]+)(\[(([0-9]+)(\-([0-9]+))?)\])?\}?)/i', $str ,$matches, PREG_SET_ORDER);
+    preg_match_all('/(\{?%([a-z0-9_]+)(\[(([0-9_]+)(\-([0-9_]+))?)\])?\}?)/i', $str ,$matches, PREG_SET_ORDER);
     $hits = array();
     foreach($matches as $match){
         $hits[strlen($match[2]).$match[0]] = $match;
