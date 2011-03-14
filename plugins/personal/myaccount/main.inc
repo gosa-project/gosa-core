@@ -53,12 +53,16 @@ if (! $cleanup ){
 
             $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true); 
             $MyAccountTabs->setReadOnly(TRUE);
+            $MyAccountTabs->enableAutoSaveObject(FALSE);
             session::set('MyAccountTabs',$MyAccountTabs);
         }
     }
 
     if(session::is_set('MyAccountTabs')){
         $MyAccountTabs = session::get('MyAccountTabs');
+
+
+        $call_save_object = !$MyAccountTabs->read_only;
 
         /* Enter edit mode? */
         if ((isset($_POST['edit'])) && (!session::is_set('edit'))){
@@ -115,6 +119,12 @@ if (! $cleanup ){
             if($lock_msg){
                 $display = $lock_msg;
             }else{
+
+                // Reenabled auto saveing of POST values.
+                if($call_save_object){
+                    $MyAccountTabs->enableAutoSaveObject(TRUE);
+                }
+
                 $display.= $MyAccountTabs->execute ();
             }
         }
