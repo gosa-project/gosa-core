@@ -29,107 +29,6 @@ class MyAccountTabs extends tabs
     echo "Implement remove Lock !!!!!";;
   }
 
-  
-
-# var $base;
-#
-# /* Template adaption variables
-#  */
-# var $uid  ="";
-# var $givenName = "";
-# var $sn;
-#
-# function usertabs($config, $data, $dn, $cat = "", $hide_refs = FALSE, $hide_acls = FALSE)
-# {
-#   tabs::tabs($config, $data, $dn, 'users',$hide_refs, $hide_acls);
-#   $this->base= $this->by_object['user']->base;
-#
-#   $this->uid = &$this->by_object['user']->uid;
-#   $this->sn = &$this->by_object['user']->sn;
-#   $this->givenName = &$this->by_object['user']->givenName;
-#
-#   /* Add references/acls/snapshots */
-#   $this->addSpecialTabs();
-#
-# }
-#
-# function save_object($save_current= FALSE)
-# {
-#   tabs::save_object($save_current);
-#
-#   /* Update reference, transfer variables */
-#   $baseobject= $this->by_object['user'];
-#   foreach ($this->by_object as $name => $obj){
-#
-#     /* Adding uid to sub plugins of connectivity */
-#     if($name == "connectivity"){
-#       foreach ($obj->plugin_name as $plg_name){
-#         if(isset($obj->plugin[$plg_name]->uid)){
-#           $obj->plugin[$plg_name]->uid = $baseobject->uid;
-#         }
-#       }
-#     }
-#
-#     /* Don't touch base object */
-#     if ($name != 'user'){
-#       $obj->parent= &$this;
-#       $obj->uid= $baseobject->uid;
-#       $obj->sn= $baseobject->uid;
-#       $obj->givenName= $baseobject->uid;
-#     }
-#
-#     /* Copy mail if needed */
-#     if ($name == "gofaxAccount"){
-#       if (isset($this->by_object['mailAccount']) && $this->by_object['mailAccount']->is_account){
-#         $obj->mail= $this->by_object['mailAccount']->mail;
-#       }
-#     }
-#
-#     $this->by_object[$name]= $obj;
-#
-#     /* Update parent in base object */
-#     $this->by_object['user']->parent= &$this;
-#   }
-#
-#   /* Move facsimile / phone number if nessecary */
-#   if ($this->last == "user" && isset($this->by_object['gofaxAccount'])){
-#
-#     /* Move number to fax plugin */
-#     $this->by_object['gofaxAccount']->facsimileTelephoneNumber=
-#       $this->by_object['user']->facsimileTelephoneNumber;
-#
-#     /* Move phone number if plugin exists */
-#     if (isset($this->by_object['phoneAccount']) && 
-#         !$this->by_object['phoneAccount']->is_account){
-#       $this->by_object['phoneAccount']->phoneNumbers= array();
-#       if ($this->by_object['user']->telephoneNumber != ""){
-#         $this->by_object['phoneAccount']->phoneNumbers[$this->by_object['user']->telephoneNumber]= $this->by_object['user']->telephoneNumber;
-#       }
-#     }
-#   }
-#
-#   /* Move number from fax plugin */
-#   if ($this->last == "gofaxAccount"){
-#
-#     $this->by_object['user']->facsimileTelephoneNumber=
-#       $this->by_object['gofaxAccount']->facsimileTelephoneNumber;
-#   }
-#
-#   /* Move number from fax plugin */
-#   if ($this->last == "phoneAccount" && $this->by_object['phoneAccount']->is_account){
-#     reset($this->by_object['phoneAccount']->phoneNumbers);
-#     $number= key($this->by_object['phoneAccount']->phoneNumbers);
-#
-#     /* Only the first phoneAccount number, if it is not empty */
-#     if(!empty($number)){
-#       $this->by_object['user']->telephoneNumber= $number;
-#     }
-#   }
-#
-#   /* Possibly change acl base */
-#   $this->set_acl_base();
-# }
-#
   function save($ignore_account= FALSE)
   {
       /* Check for new 'dn', in order to propagate the
@@ -156,25 +55,6 @@ class MyAccountTabs extends tabs
 
       return tabs::save();
   }
-#
-#
-# function set_template_mode()
-# {
-#   foreach ($this->by_object as $key => $obj){
-#     $this->by_object[$key]->is_template= TRUE;
-#   }
-# }
-# 
-# function saveCopyDialog()
-# {
-#   tabs::saveCopyDialog();
-#   $baseobject= $this->by_object['user'];
-#   $uid = $baseobject->uid;
-#   foreach($this->by_object as  $name => $obj){
-#     $this->by_object[$name]->uid = $uid;
-#   }
-# }
-#
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
