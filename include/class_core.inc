@@ -1051,7 +1051,16 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => FALSE)
+                                "mandatory"     => FALSE),
+                        array(
+                                "name"          => "forceTranslit",
+                                "type"          => "bool",
+                                "default"       => "false",
+                                "description"   => _("Force to use internal translate function (fix for generation of uid for cyrillic sn and givenName)."),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => TRUE)
                             )));
     }
 }
