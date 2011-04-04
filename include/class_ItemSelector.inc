@@ -117,7 +117,7 @@ class ItemSelector {
         foreach ($bases as $path => $data) {
 
             // Build path style display
-            $this->pathMapping[$path]= $path == $this->releaseBase? '/' : $data['name'];
+            $this->pathMapping[$path]= preg_replace("/^".preg_quote($this->releaseBase,'/')."/i", "", $path);
             $this->releaseInfo[$path]['name'] = $data['name'];
             $this->releaseInfo[$path]['description'] = $data['desc'];
         }
