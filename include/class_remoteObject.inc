@@ -165,14 +165,20 @@ class remoteObject
      * @param   Mixed   The new value for the property.
      * @return  Boolean true on success else false.
      */
-    function __setProperty($name, $value)
+    function __setProperty($name, $value, $forceSave = FALSE)
     {
-        $this->rpcHandle->setObjectProperty($this->ref_id, $name,$value);
-        if($this->rpcHandle->success()){
+        if($this->directStorage || $forceSave){
+            $this->rpcHandle->setObjectProperty($this->ref_id, $name,$value);
+            if($this->rpcHandle->success()){
+                $this->__addPropValueToCache($name, $value);
+                return(TRUE);
+            }else{
+                return(FALSE);
+            }
+        }else{
             $this->__addPropValueToCache($name, $value);
             return(TRUE);
         }
-        return(FALSE);
     }
 
 
@@ -191,6 +197,7 @@ class remoteObject
             return(NULL);
         }else{
             $this->__addPropValueToCache($name, $res);
+            $this->values[$name] = $res;
             return($res);
         }
     }
@@ -244,6 +251,29 @@ class remoteObject
     function __clearCache()
     {
         $this->cache = array();
+    }
+
+    
+    /* \brief   See commit();
+     */
+    function save()
+    {
+        return($this->commit());
+    }
+
+    
+    /*! \brief  Saves property modifications back to the server.
+     *          This is only necessary in directStorage mode.
+     * @param   Boolean     If set to true all attributes will be saved, even not modified.
+     */
+    function commit($saveUntouchedPropertiesToo = FALSE)
+    {
+        foreach($this->properties as $prop){
+            if($this->__propIsCached($prop)) continue;
+            if($saveUntouchedPropertiesToo || $this->values[$prop] != $this->__getPropFromCache($prop)){
+                $this->__setProperty($prop, $this->__getPropFromCache($prop), TRUE);
+            }
+        }
     }
 
 
