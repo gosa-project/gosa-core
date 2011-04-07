@@ -1,5 +1,11 @@
 <?php
 
+
+/*! \brief  This class represents a server side object.
+ *          All actions preformed on this object will be executed
+ *           on the server using RPC calls.
+ *          Properties will bestored directly (directStorage=TRUE) or when commit() is called.
+ */
 class remoteObject
 {
     private $rpcHandle;
@@ -12,6 +18,22 @@ class remoteObject
 
     private $cache = array();
 
+    // When set to true, property modifications will be 
+    //  transfered to the server, immediately.
+    // If it is false, changes will be transfered when 
+    //  commit() is called.
+    private $directStorage=FALSE;
+
+
+    /*!\brief   Constructs the remoteObject.
+     * @param   jsonRPC     The rpc connection handle. 
+     * @param   String      The type of the object, e.g. 'user'.
+     * @param   Array       A list of available properties.
+     * @param   Array       A list of values for the properties.
+     * @param   Array       A list of methods provided by this object. 
+     * @param   String      A string that represents the object call.
+     * @return  String      The server side object ID, used to identify the object.
+     */
     function __construct(&$rpcHandle, $type, $properties, $values, $methods, $object_id, $ref_id)
     {
         $this->rpcHandle = $rpcHandle;
@@ -25,29 +47,49 @@ class remoteObject
     }
 
 
+    /*!\brief   Returns the object type. 
+     * @return  String  The type of the object. E.g. 'user'.
+     */
     function getType()
     {
         return($this->type);
     }
-    
+
+
+    /*!\brief   Returns a list of available property names.
+     * @return  Array   A list of property names.
+     */
     function getProperties()
     {
         return($this->properties);
     }
-    
+
+
+    /*!\brief   Returns the objects reference ID.
+     * @return  String the server side object id.
+     */
     function getReferenceId()
     {
-        return($this->red_id);
+        return($this->ref_id);
     }
-   
+
+
+    /*!\brief  Clears all object modification when in not in 
+     *          'directStorage' mode.
+     */
     function clearCache()
     {
         $this->__clearCache();
     }
- 
 
-    // Enables calls like  get_property() and set_property()
-    //  and allow to call the dynamic methods
+
+    /*!\brief   Catch all method for undefined function calls.
+     *          This method detects setter, getter and methods calls
+     *           and forwards them to the right object method.
+     * @param   String  The name of the function to call. 
+     * @param   Array   A list of parameters.
+     * @return  Mixed   E.g. The answer from the server.
+     */
     function __call($name, $args)
     {
         // Check if such an attribute is registered
@@ -64,12 +106,22 @@ class remoteObject
             }
         }
 
-        echo "<br><b>Calling: {$name}</b>";
-        #return($this->rpcHandle->$name($args));
+        // Forward to the call to the backend.
+        $fArgs = array();
+        $fArgs[] = $this->ref_id;
+        $fArgs[] = $name;
+        $fArgs = array_merge($fArgs, $args);
+        $res = call_user_func_array(array($this->rpcHandle,"dispatchObjectMethod"), $fArgs);
+        return($res);
     }
 
 
-    // Enables calls like  $object->mailAddress = 'test';
+    /*!\brief   A catch all method for setter calls. 
+     *           
+     * @param   String  The name of the property to set. 
+     * @param   String  The value to use.
+     * @return
+     */
     function __set($varName, $value)
     {
         // Set property value
@@ -88,6 +140,10 @@ class remoteObject
     }
 
 
+    /*!\brief   A catch all method for getter calls. 
+     * @param   String  The name of the requested property. 
+     * @return  Mixed.
+     */
     function __get($varName)
     {
         if(in_array($varName, $this->properties)){
@@ -103,7 +159,12 @@ class remoteObject
         return(NULL);
     }
 
-    
+
+    /*!\brief   Internal method used to set properties. 
+     * @param   String  The name of property to set.
+     * @param   Mixed   The new value for the property.
+     * @return  Boolean true on success else false.
+     */
     function __setProperty($name, $value)
     {
         $this->rpcHandle->setObjectProperty($this->ref_id, $name,$value);
@@ -115,6 +176,10 @@ class remoteObject
     }
 
 
+    /*!\brief   Internal method used to get property values. 
+     * @param   String  The name of the property. 
+     * @return  Mixed.
+     */
     function __getProperty($name, $force = FALSE)
     {
         if(!$force && $this->__propIsCached($name)){
@@ -130,7 +195,10 @@ class remoteObject
         }
     }
 
-    
+
+    /*!\brief   Closes the object on the server side. 
+     * @return  The closing status. 
+     */
     function close()
     {
         $res = $this->rpcHandle->closeObject($this->ref_id);
@@ -140,27 +208,49 @@ class remoteObject
         return($this->rpcHandle->success());
     }
 
-    
+
+    /*!\brief   Internal method used to add property values  to the cache.
+     * @param   String  The name of the propterty to add. 
+     * @param   String  The value of the property to add. 
+     */
     function __addPropValueToCache($name, $value)
     {
         $this->cache[$name] = $value;
     }
 
+
+    /*!\brief   Internal method used to fetch property values from the cache. 
+     * @param   String  The name of the property to fetch. 
+     * @return  Mixed.
+     */
     function __getPropFromCache($name)
     {
         return($this->cache[$name]);
     }
 
+
+    /*!\brief   Internal method to check whether a property value is cached or not. 
+     * @param   String  The name of the property.
+     * @return  Boolean True on success else false
+     */
     function __propIsCached($name)
     {
         return(isset($this->cache[$name]));
     }
 
+
+    /*!\brief   Clears the internal property cache.
+     */
     function __clearCache()
     {
         $this->cache = array();
     }
 
+
+    /*!\brief   Internal method which removes a property from the cache. 
+     * @param   String  The name of the property. 
+     * @return
+     */
     function __removePropFromCache($name)
     {
         if($this->__propIsCached($name)){
