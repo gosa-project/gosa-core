@@ -2,6 +2,9 @@ GOsa2 changelog
 ===============
 
 * gosa 2.6.13
+  - Update package dependencies to include php5-curl.
+  - Updated ACL checks to be case insensitive.
+  - Updated samba account expiration calculations.
 
 * gosa 2.6.12
   - Escaped command line arguments in some locations
