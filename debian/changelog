@@ -1,6 +1,8 @@
-gosa (2.7-1) unstable; urgency=low
+gosa (2.7.1-1) unstable; urgency=low
 
   * New upstream release
+  * Updated packaging to not include smarty (Closes: #620489)
+  * Fixed case of POSIX (Closes: #620486)
 
  -- Cajus Pollmeier <cajus@debian.org>  Mon, 04 Oct 2010 10:45:44 +0200
 
