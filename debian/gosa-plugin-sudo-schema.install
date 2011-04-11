@@ -1,1 +1,1 @@
-sudo/contrib/sudo.schema	/etc/ldap/schema/gosa
+sudo/contrib/sudo.ldif	/etc/ldap/schema/gosa

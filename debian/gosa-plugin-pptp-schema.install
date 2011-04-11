@@ -1,1 +1,1 @@
-pptp/contrib/pptp.schema	/etc/ldap/schema/gosa
+pptp/contrib/pptp.ldif	/etc/ldap/schema/gosa

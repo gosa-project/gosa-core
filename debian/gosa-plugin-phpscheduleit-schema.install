@@ -1,1 +1,1 @@
-phpscheduleit/contrib/phpscheduleit.schema	/etc/ldap/schema/gosa
+phpscheduleit/contrib/phpscheduleit.ldif	/etc/ldap/schema/gosa
