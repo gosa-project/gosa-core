@@ -5,3 +5,6 @@
 
 override_dh_compress:
 	dh_compress --exclude=gosa.conf
+
+override_dh_install:
+	dh_install --exclude=*ttf
