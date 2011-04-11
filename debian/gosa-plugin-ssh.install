@@ -1,4 +1,3 @@
 ssh/personal		/usr/share/gosa/plugins
-ssh/help/guide.xml	/usr/share/gosa/doc/plugins/ssh
 ssh/locale		/usr/share/gosa/locale/plugins/ssh
 ssh/contrib		/usr/share/doc/gosa-plugin-ssh
