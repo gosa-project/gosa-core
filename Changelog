@@ -1,5 +1,11 @@
 GOsa2 changelog
 ===============
+* gosa 2.7.1
+  - Updated passwordHook behaviour
+  - Readded sambaKickoffTime to samba tab.
+  - Updated account expiration checks.
+  - Fixed acl resolution to be case insensitive.
+  - Fixed mail address check for user templates.
 
 * gosa 2.7
   - Updated design. CSS3, mostly w3c conform.
