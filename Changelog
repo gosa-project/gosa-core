@@ -1,5 +1,8 @@
 GOsa2 changelog
 ===============
+
+* gosa 2.6.13
+
 * gosa 2.6.12
   - Escaped command line arguments in some locations
   - Updated password handling and hooks, allows sepcial chars in passwords

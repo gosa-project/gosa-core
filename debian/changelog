@@ -1,3 +1,9 @@
+gosa (2.6.13-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 11 Apr 2011 10:03:16 +0200
+
 gosa (2.6.11-2) unstable; urgency=low
 
   * Corrected wrong dirs on gosa-plugin-mail 
