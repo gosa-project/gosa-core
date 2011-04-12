@@ -78,13 +78,6 @@ $config= session::global_get('config');
 $config->check_and_reload();
 $config->configRegistry->reload();
 
-// Validate LDAP schema if not done already
-if( $config->boolValueIsTrue('core','schemaCheck') && 
-    !$config->configRegistry->schemaCheckFinished() && 
-    !$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE)){
-    $config->configRegistry->displayRequirementErrors();
-}
-
 /* Enable compressed output */
 if ($config->get_cfg_value("core","sendCompressedOutput") == "true"){
   ob_start("ob_gzhandler");
@@ -148,6 +141,13 @@ putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
 $GLOBALS['t_language']= $lang;
 $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
+
+// Validate LDAP schema if not done already
+if( $config->boolValueIsTrue('core','schemaCheck') && 
+    !$config->configRegistry->schemaCheckFinished() && 
+    !$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE)){
+    $config->configRegistry->displayRequirementErrors();
+}
 
 /* Check if the config is up to date */
 $config->check_config_version();
