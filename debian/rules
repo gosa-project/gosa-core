@@ -4,8 +4,8 @@
 	dh $@
 
 override_dh_compress:
-	dh_compress --exclude=gosa.conf
-	dh_compress gosa.conf.5
+	dh_compress
+	gzip -d debian/gosa/usr/share/doc/gosa/gosa.conf.gz
 
 override_dh_install:
 	dh_install --exclude=*ttf
