@@ -1,0 +1,36 @@
+OpenLDAP setup using cn=config
+==============================
+
+In order to include additional schema files into your cn=config driven
+LDAP setup, add the required schema files this way:
+
+# ldapadd -Y EXTERNAL -H ldapi:/// -f your_schema_file.ldif
+
+The GOsa schema packages include .schema and .ldif versions of the
+schema files.
+
+This for loop might help when adding schema files to a (nearly) fully
+stuffed installation:
+
+8<----------------------------------------------------------------------------
+for schema in \
+	gosa/samba3.ldif \
+	gosa/gosystem.ldif \
+	gosa/gofon.ldif \
+	gosa/gofax.ldif \
+	gosa/goto.ldif \
+	gosa/goserver.ldif \
+	gosa/gosa-samba3.ldif \
+	gosa/goto-mime.ldif \
+	gosa/trust.ldif \
+	gosa/pureftpd.ldif \
+	gosa/fai.ldif \
+	gosa/sudo.ldif \
+	gosa/openssh-lpk.ldif \
+	gosa/nagios.ldif \
+	gosa/kolab2.ldif \
+	dyngroup.ldif; do
+
+	ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/$schema || exit 1
+done
+8<----------------------------------------------------------------------------
