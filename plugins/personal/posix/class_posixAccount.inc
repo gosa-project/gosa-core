@@ -93,6 +93,10 @@ class posixAccount extends plugin
   var $multiple_support = TRUE;
   var $groupMembership_some = array();
 
+  // group SortableListing
+  var $groupList = null;
+  var $groupListData = null;
+
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
   function posixAccount (&$config, $dn= NULL, $parent =NULL)
@@ -104,6 +108,8 @@ class posixAccount extends plugin
 
     /* Load bases attributes */
     plugin::plugin($config, $dn, $parent);
+
+    $groupImage = image('plugins/groups/images/select_group.png');
 
     $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, $parent);
     $this->trustModeDialog->setAcl('users/posixAccount');
@@ -156,14 +162,17 @@ class posixAccount extends plugin
       }
 
       /* Get group membership */
+      $this->groupListData = array();
       $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(objectClass=posixGroup)(memberUid=".$this->uid."))", array("cn", "description"));
 
       while ($attrs= $ldap->fetch()){
         if (!isset($attrs["description"][0])){
           $entry= $attrs["cn"][0];
+          $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs["cn"][0], "");
         } else {
           $entry= $attrs["cn"][0]." [".$attrs["description"][0]."]";
+          $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs["cn"][0], $attrs["description"][0]);
         }
         $this->groupMembership[$ldap->getDN()]= $entry;
       }
@@ -232,6 +241,20 @@ class posixAccount extends plugin
     asort ($this->secondaryGroups);
 
     $this->ui = get_userinfo();
+
+
+    // Create group-list
+    $this->groupList = new sortableListing(array(), array());
+    $this->groupList->setHeader(array(_("~"), _("Group"), _("Description")));
+    $this->groupList->setEditable(false);
+    $this->groupList->setDeleteable(true);
+    $this->groupList->setInstantDelete(false);
+    $this->groupList->setEditable(false);
+    $this->groupList->setReorderable(false);
+    $this->groupList->setDefaultSortColumn(1);
+    $this->groupList->setWidth("100%");
+    $this->groupList->setHeight("150px");
+    $this->groupList->setAcl("rwcdm");
   }
 
 
@@ -318,6 +341,14 @@ class posixAccount extends plugin
       $this->groupSelect= NULL;
     }
 
+    // Remove groups that were removed by list
+    $this->groupList->save_object();
+    $actionL = $this->groupList->getAction();
+    if($actionL['action'] == "delete") {
+        $key = $this->groupList->getData($actionL['targets'][0]);
+        $this->delGroup(array($key));
+    }
+
     // Remove groups from currently selected groups.
     if (isset($_POST['delete_groupmembership']) && 
         isset($_POST['group_list']) && count($_POST['group_list'])){
@@ -325,9 +356,24 @@ class posixAccount extends plugin
       $this->delGroup (get_post('group_list'));
     }
 
-    /* Templates now! */
-    $smarty= get_smarty();
+    // Build group-list data
+    $dDisp = array();
+    $dData = array();
 
+    foreach($this->groupListData as $key => $value) {
+        $dData[$key] = $key;
+        $dDisp[$key] = array('data' => $value);
+    }
+
+    $this->groupList->setListData($dData, $dDisp);
+    $this->groupList->update();
+
+    /* Templates now! */
+    $smarty = get_smarty();
+
+
+
+    $smarty->assign("groupList", $this->groupList->render());
 
 
     // Handle trust mode dialog
@@ -986,6 +1032,7 @@ class posixAccount extends plugin
   {
     /* include global link_info */
     $ldap= $this->config->get_ldap_link();
+    $groupImage = image("plugins/groups/images/select_group.png");
 
     /* Walk through groups and add the descriptive entry if not exists */
     foreach ($groups as $value){
@@ -993,6 +1040,7 @@ class posixAccount extends plugin
       if (!array_key_exists($value, $this->groupMembership)){
         $ldap->cat($value, array('cn', 'description', 'dn'));
         $attrs= $ldap->fetch();
+        $dsc = "&nbsp;";
         error_reporting (0);
         if (!isset($attrs['description'][0])){
           $entry= $attrs["cn"][0];
@@ -1004,6 +1052,20 @@ class posixAccount extends plugin
 
         if(obj_is_writable($attrs['dn'],"groups/group","memberUid")){
           $this->groupMembership[$attrs['dn']]= $entry;
+
+          /* Add new group to groupList */
+          $this->groupListData[$attrs['dn']] = array();
+          $this->groupListData[$attrs['dn']][] = $groupImage;
+          $this->groupListData[$attrs['dn']][] = $attrs['cn'][0];
+          if(isset($attrs["description"])) {
+            $this->groupListData[$attrs['dn']][] = $attrs['description'][0];
+          } else {
+            $this->groupListData[$attrs['dn']][] = "";
+          }
+          if($this->multiple_support_active) {
+            $this->groupListData[$attrs['dn']][] = _("all");
+          }
+
           if($this->multiple_support_active && isset($this->groupMembership_some[$attrs['dn']])){
             unset($this->groupMembership_some[$attrs['dn']]);
           }
@@ -1024,10 +1086,12 @@ class posixAccount extends plugin
     foreach($groups as $dn_to_del){
       if(isset($this->groupMembership[$dn_to_del]) && obj_is_writable($dn_to_del,"groups/group","memberUid")){
         unset($this->groupMembership[$dn_to_del]);
+        unset($this->groupListData[$dn_to_del]);
       }
       if($this->multiple_support_active){
         if(isset($this->groupMembership_some[$dn_to_del]) && obj_is_writable($dn_to_del,"groups/group","memberUid")){
           unset($this->groupMembership_some[$dn_to_del]);
+          unset($this->groupListData[$dn_to_del]);
         }
       }
     }
@@ -1418,12 +1482,17 @@ class posixAccount extends plugin
     plugin::init_multiple_support($attrs,$all);
     $this->trustModeDialog->init_multiple_support($attrs,$all);
 
+    // set header for multiple support
+    $this->groupList->setHeader(array(_("~"), _("Group"), _("Description"), _("Members")));
+
     /* Some dummy values */
     $groups_some = array();
     $groups_all  = array();
     $groups_uid  = array();
     $uids        = array();
     $first       = TRUE;
+
+    $groupImage = image('plugins/groups/images/select_group.png');
 
     /* Get all groups used by currently edited users */
     $uid_filter="";  
@@ -1435,9 +1504,18 @@ class posixAccount extends plugin
     $uid_filter = "(&(objectClass=posixGroup)(|".$uid_filter."))";
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search($uid_filter,array("dn","cn","memberUid"));
+    $ldap->search($uid_filter,array("dn","cn","memberUid","description"));
     while($group = $ldap->fetch()){
       $groups_some[$group['dn']] = $group['cn'][0];
+
+      $desc = "&nbsp;";
+      if(isset($group['description'])) $desc = $group['description'][0];
+
+      $this->groupListData[$group['dn']] = array($groupImage,
+        $group['cn'][0],
+        $desc,
+        _("some"));
+ 
       for($i = 0 ; $i < $group['memberUid']['count'] ; $i++){
         $groups_uid[$group['dn']][] = $group['memberUid'][$i];
       }
@@ -1458,11 +1536,14 @@ class posixAccount extends plugin
     $this->groupMembership = $groups_all;
 
     /* Create an array of all grouops used by all users */
-    foreach( $groups_all as $dn => $cn){
-      if(isset($groups_some[$dn])){
+    foreach($groups_all as $dn => $cn) {
+      if(isset($groups_some[$dn])) {
         unset($groups_some[$dn]);
+        $this->groupListData[$dn][3] = _("all");
       }
     }
+
+
     $this->groupMembership_some = $groups_some;
     $this->primaryGroup = $this->gidNumber;
 
