@@ -242,7 +242,6 @@ class posixAccount extends plugin
 
     $this->ui = get_userinfo();
 
-
     // Create group-list
     $this->groupList = new sortableListing(array(), array());
     $this->groupList->setHeader(array(_("~"), _("Group"), _("Description")));
@@ -371,10 +370,7 @@ class posixAccount extends plugin
     /* Templates now! */
     $smarty = get_smarty();
 
-
-
     $smarty->assign("groupList", $this->groupList->render());
-
 
     // Handle trust mode dialog
     $trustModeDialog = $this->trustModeDialog->execute();
@@ -1542,7 +1538,6 @@ class posixAccount extends plugin
         $this->groupListData[$dn][3] = _("all");
       }
     }
-
 
     $this->groupMembership_some = $groups_some;
     $this->primaryGroup = $this->gidNumber;
