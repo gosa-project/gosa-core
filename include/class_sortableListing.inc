@@ -290,6 +290,7 @@ class sortableListing {
         // Render table body if we've read permission
         $result.= " <tbody id='".$this->id."'>\n";
         $reorderable= $this->reorderable?"":" style='cursor:default'";
+
         if (strpos($this->acl, 'r') !== false) {
             foreach ($this->mapping as $nr => $row) {
                 $editable= $this->editable?" onClick='$(\"edit_".$this->id."_$nr\").click()'":"";
@@ -489,7 +490,13 @@ class sortableListing {
         // Remove mapping
         $index= array_search($id, $this->mapping);
         if ($index !== false) {
+            $target = $this->mapping[$index];
             unset($this->mapping[$index]);
+            if(isset($this->displayData[$target])){
+                unset($this->displayData[$target]);
+                unset($this->data[$target]);
+                unset($this->keys[$target]);
+            }
             $this->mapping= array_values($this->mapping);
             $this->modified= true;
         }
@@ -531,11 +538,11 @@ class sortableListing {
 
         // Extract data
         $tmp= array();
-        foreach($this->displayData as $item) {
+        foreach($this->displayData as $key => $item) {
             if (isset($item[$this->sortColumn])){
-                $tmp[]= $item[$this->sortColumn];
+                $tmp[$key]= $item[$this->sortColumn];
             } else {
-                $tmp[]= "";
+                $tmp[$key]= "";
             }
         }
 
@@ -573,17 +580,16 @@ class sortableListing {
         }
 
         // Append to data and mapping
+        $this->displayData[]= $displayEntry['data'];
+        $this->mapping[]= max(array_keys($this->displayData));
+        $this->modified= true;
         if ($key) {
             $this->data[$key]= $entry;
             $this->keys[]= $key;
         } else {
             $this->data[]= $entry;
-            $this->keys[]= count($this->mapping);
+            $this->keys[]= max(array_keys($this->displayData));
         }
-        $this->displayData[]= $displayEntry['data'];
-        $this->mapping[]= count($this->mapping);
-        $this->modified= true;
-
         // Find the number of coluns
         reset($this->displayData);
         $first= current($this->displayData);
