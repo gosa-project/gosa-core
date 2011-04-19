@@ -121,21 +121,22 @@ class jsonRPC {
      */
     public function get_error()
     {
+        $error = "";
         if($this->lastStats['http_code'] != 200){
             $error = $this->getHttpStatusCodeMessage($this->lastStats['http_code']);
-            if(isset($this->lastResult['error']['error']) && is_array($this->lastResult['error']['error'])){
-                $err = $this->lastResult['error']['error'];
-                $message = call_user_func_array(sprintf,$err);
-                $error .= $message;
-            }elseif(isset($this->lastResult['error']['message'])){
-                $error .= ": ".$this->lastResult['error']['message']; 
-            }
-            return($error);
-        }else{
-            return(curl_error($this->curlHandler));
         }
+        if(isset($this->lastResult['error']['error']) && is_array($this->lastResult['error']['error'])){
+            $err = $this->lastResult['error']['error'];
+            $message = call_user_func_array(sprintf,$err);
+            $error .= $message;
+        }elseif(isset($this->lastResult['error']['message'])){
+            $error .= $this->lastResult['error']['message']; 
+        }
+        if($error){
+            return(trim($error, ": "));
+        }
+        return(curl_error($this->curlHandler));
     }
-
     
 
     /*! \brief      Returns TRUE if the last action was successfull else FALSE.
@@ -144,6 +145,7 @@ class jsonRPC {
     public function success()
     {
         return(curl_errno($this->curlHandler) == 0 && 
+                !isset($this->lastResult['error']) && 
                 isset($this->lastStats['http_code']) && 
                 $this->lastStats['http_code'] == 200);
     }
