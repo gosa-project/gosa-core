@@ -58,6 +58,7 @@ class acl extends plugin
 
     var $sectionList = NULL;
     var $roleList = NULL;
+    var $aclMemberList = NULL;
 
     function acl (&$config, $parent, $dn= NULL)
     {
@@ -264,6 +265,18 @@ class acl extends plugin
     $this->roleList->setHeader(array(_("Used"),_("Name"),_("Description")));
     $this->roleList->setDefaultSortColumn(1);
     $this->roleList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
+
+        $this->aclMemberList = new sortableListing(array(), array(), false);
+        $this->aclMemberList->setEditable(false);
+        $this->aclMemberList->setDeleteable(true);
+        $this->aclMemberList->setInstantDelete(false);
+        $this->aclMemberList->sortingEnabled(true);
+        $this->aclMemberList->setWidth("100%");
+        $this->aclMemberList->setHeight("150px");
+        //$this->aclMemberList->setColspecs(array('20px','*','*'));
+        $this->aclMemberList->setHeader(array(_("~"),_("Name"),_("Description")));
+        $this->aclMemberList->setDefaultSortColumn(1);
+        $this->aclMemberList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
     }
 
 
@@ -337,7 +350,7 @@ class acl extends plugin
             $this->dialog= TRUE;
             $this->loadAclEntry();
         }
-
+        
         foreach($_POST as $name => $post){
 
             $post =get_post($name);
@@ -515,10 +528,90 @@ class acl extends plugin
         }
 
         /* Remove from list? */
-        if (isset($_POST['del']) && isset($_POST['recipient'])){
-            foreach ($_POST['recipient'] as $key){
+        if (isset($_POST['del']) && isset($_POST['recipient'])) {
+            foreach ($_POST['recipient'] as $key) {
                 unset($this->recipients[$key]);
             }
+        }
+
+        $this->aclMemberList->save_object();
+        $actionL = $this->aclMemberList->getAction();
+        if($actionL['action'] == "delete") {
+            $key = $this->aclMemberList->getData($actionL['targets'][0]);
+            unset($this->recipients[$key]);
+            $this->aclMemberList->deleteEntry($actionL['targets'][0]);
+        }
+
+        /* Adds the 'all-users' peudo-group to the acl */
+        if(isset($_POST['add_all_users'])) {
+            if(!isset($this->recipients['G:*'])) {
+                $this->recipients['G:*'] = _("All users");
+
+                $key = "G:*";
+                $vData = array("data" => array(image("plugins/groups/images/select_group.png"),
+                    _("All users"),
+                    _("Pseudo-group for all users.")));
+
+                $this->aclMemberList->addEntry($key, $vData, $key);
+            }
+        }
+
+        /* Show User/Group-Add-Dialog */
+        if(isset($_POST['add_user_or_group'])) {
+            $this->dialog = new userGroupSelect($this->config, get_userinfo());
+        }
+
+        /* If dialog is confirmed */
+        if(isset($_POST['userGroupSelect_save']) &&
+            $this->dialog instanceof userGroupSelect) {
+
+            $groupIcon = image("plugins/groups/images/select_group.png");
+            $userIcon  = image("plugins/users/images/select_user.png");
+
+            if($this->acl_is_writeable("")) {
+                foreach($this->dialog->save() as $entry) {
+                    if(in_array("posixGroup", $entry['objectClass'])) {
+                        $key = "G:" . $entry['dn'];
+                        $vData = array("data" => array($groupIcon, $entry['cn'][0], $entry['description'][0]));
+
+                        $this->recipients[$key] = $entry['cn'][0];
+                    }
+                    else if(isset($entry['uid'])) {
+                        $key = "U:" . $entry['dn'];
+                        $vData = array("data" => array($userIcon, $entry['uid'][0], $entry['cn'][0]));
+                        
+                        $lData = array($key => $key);
+                        $this->recipients["U:" . $entry['dn']] = $entry['uid'][0];
+                    }
+                    else {
+                        // Error
+                        break;
+                    }
+
+                    $this->aclMemberList->addEntry($key, $vData, $key);
+                }
+            }
+
+            unset($this->dialog);
+            $this->dialog = true;
+        }
+
+        /* If dialog is canceled */
+        if(isset($_POST['userGroupSelect_cancel']) &&
+            $this->dialog instanceof userGroupSelect) {
+            unset($this->dialog);
+            $this->dialog = true;
+        }
+
+        if($this->dialog instanceof userGroupSelect) {
+            // filter current members out
+            $used = array();
+            foreach(array_keys($this->recipients) as $key) {
+                $used['dn'][] = substr($key, 2);
+            }
+
+            session::set('filterBlacklist', $used);
+            return $this->dialog->execute();
         }
 
         /* Create templating instance */
@@ -623,6 +716,16 @@ class acl extends plugin
             }
             $smarty->assign('sources', set_post($tmp));
             $smarty->assign('recipients', set_post($this->recipients));
+
+            /* Generate ACL member list */
+            if($this->acl_is_writeable("")) {
+                $this->aclMemberList->setDeleteable(true);
+            } else {
+                $this->aclMemberList->setDeleteable(false);
+            }
+
+            $this->aclMemberList->update();
+            $smarty->assign("aclMemberList", $this->aclMemberList->render());
 
             /* Acl selector if scope is base */
             if ($this->aclType == 'base'){
@@ -1138,6 +1241,39 @@ class acl extends plugin
             $this->recipients= $acl['members'];
             $this->aclContents= (isset($acl['acl'])) ? $acl['acl'] :"";
             $this->aclFilter= $acl['filter'];
+
+            /* Add members to aclMemberList */
+            $vData = array();
+            $lData = array();
+            foreach($this->recipients as $key => $val) {
+                // split name and description
+                $match = NULL;
+                preg_match_all("/^([^\[]+)( \[(.*)\])?$/", $val, $match);
+
+                $name = "";
+                $desc = "";
+                $icon = NULL;
+                if($key == "G:*") {
+                    $name = _("All users");
+                    $desc = _("Pseudo-group for all users.");
+                    $icon = image("plugins/groups/images/select_group.png");
+                }
+                else if($key[0] == 'U') { // is user?
+                    $name = $match[3][0];
+                    $desc = $match[1][0];
+                    $icon = image("plugins/users/images/select_user.png");
+                }
+                else { // or group?
+                    $name = $match[1][0];
+                    $desc = $match[3][0];
+                    $icon = image("plugins/groups/images/select_group.png");
+                }
+
+                $lData[$key] = $key;
+                $vData[$key] = array("data" => array($icon, $name, $desc));
+            }
+
+            $this->aclMemberList->setListData($lData, $vData);
         }
 
         $this->wasNewEntry= $new;

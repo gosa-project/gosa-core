@@ -25,36 +25,36 @@ define ('LIST_MARKED', 1);
 define ('LIST_DISABLED', 2);
 
 class sortableListing {
-    private $header= null;
-    private $colspecs= null;
-    private $reorderable= true;
-    private $width= "400px";
-    private $height= "100px";
-    private $cssclass= "";
-    private $id;
+    public $header= null;
+    public $colspecs= null;
+    public $reorderable= true;
+    public $width= "400px";
+    public $height= "100px";
+    public $cssclass= "";
+    public $id;
 
-    private $sortingEnabled= true;
-    private $data= array();
-    private $keys= array();
-    private $modes= array();
-    private $displayData= array();
-    private $columns= 0;
-    private $deleteable= false;
-    private $editable= false;
-    private $colorAlternate= false;
-    private $instantDelete= true;
-    private $action;
-    private $mapping;
-    private $current_mapping;
-    private $active_index;
-    private $scrollPosition= 0;
-    private $sortColumn= 0;
-    private $sortDirection= array();
+    public $sortingEnabled= true;
+    public $data= array();
+    public $keys= array();
+    public $modes= array();
+    public $displayData= array();
+    public $columns= 0;
+    public $deleteable= false;
+    public $editable= false;
+    public $colorAlternate= false;
+    public $instantDelete= true;
+    public $action;
+    public $mapping;
+    public $current_mapping;
+    public $active_index;
+    public $scrollPosition= 0;
+    public $sortColumn= 0;
+    public $sortDirection= array();
 
-    private $acl= "";
-    private $modified= false;
+    public $acl= "";
+    public $modified= false;
 
-	
+
     public function sortableListing($data= array(), $displayData= null, $reorderable= false)
     {
         global $config;
@@ -101,17 +101,17 @@ class sortableListing {
         $this->sortColumn = $id;
     }
 
-	/*
-	* 
-	* Examples
-	* DatenARray ($data)
-	* @param: array( arbitrary object, arbitrary object)
-	* Datenarray will be manipulated by add, del and sort operations. According to this it will be returned from this widget.
-	* The index of a data entry must correspond to the entry of the "display array" following.
-	* DisplayArray ($displyData)
-	* @param: array("eins" array( "data"=> array("Uno", "2", "x" ) , "zwei" array( "data"=> array("Due", "3", "y" ))) ;
-	* label pointing on a list of columns that will be shown in the list.
-	*/
+    /*
+     * 
+     * Examples
+     * DatenARray ($data)
+     * @param: array( arbitrary object, arbitrary object)
+     * Datenarray will be manipulated by add, del and sort operations. According to this it will be returned from this widget.
+     * The index of a data entry must correspond to the entry of the "display array" following.
+     * DisplayArray ($displyData)
+     * @param: array("eins" array( "data"=> array("Uno", "2", "x" ) , "zwei" array( "data"=> array("Due", "3", "y" ))) ;
+     * label pointing on a list of columns that will be shown in the list.
+     */
     public function setListData($data, $displayData= null)
     {
         // Save data to display
@@ -125,13 +125,13 @@ class sortableListing {
         $this->setDisplayData($displayData);
     }
 
-	//setting flat data 
+    //setting flat data 
     private function setData($data)
     {
         $this->data= $data;
     }
 
-	// collecting the display data -
+    // collecting the display data -
     private function setDisplayData($data)
     {
         if (!is_array($data)) {
@@ -229,7 +229,7 @@ class sortableListing {
 
 
     public function render()
-    {
+    {	
         $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
         $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
         $action_width= 0;
@@ -427,6 +427,10 @@ class sortableListing {
             foreach ($_POST as $key => $value) {
                 $value = get_post($key);
                 if (preg_match('/^del_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
+
+
+                    if(!isset($this->mapping[$matches[1]])) return;
+
                     $this->active_index= $this->mapping[$matches[1]];
 
                     // Ignore request if mode requests it
@@ -451,6 +455,9 @@ class sortableListing {
             foreach ($_POST as $key => $value) {
                 $value = get_post($key);
                 if (preg_match('/^edit_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
+
+                    if(!isset($this->mapping[$matches[1]])) return;
+
                     $this->active_index= $this->mapping[$matches[1]];
 
                     // Ignore request if mode requests it
@@ -485,16 +492,18 @@ class sortableListing {
     }
 
 
-    private function deleteEntry($id)
+    public function deleteEntry($id)
     {
         // Remove mapping
         $index= array_search($id, $this->mapping);
         if ($index !== false) {
             $target = $this->mapping[$index];
+            $key = $this->keys[$target];
+
             unset($this->mapping[$index]);
             if(isset($this->displayData[$target])){
                 unset($this->displayData[$target]);
-                unset($this->data[$target]);
+                unset($this->data[$key]);
                 unset($this->keys[$target]);
             }
             $this->mapping= array_values($this->mapping);

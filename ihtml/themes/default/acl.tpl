@@ -50,59 +50,15 @@
     </table>
 
 	<hr>
-  <h3>{t}Members{/t}</h3>
-	<table style="width:100%" summary='{t}Member selection{/t}'>
-	 <tr>
-	  <td style="width:48%">
-	   {t}Use members from{/t}
-	   <select name="target" onChange="document.mainform.submit()" size=1>
-			{html_options options=$targets selected=$target}
-			<option disabled>&nbsp;</option>
-	   </select>
-	   {if $javascript eq 'false'}<button type='submit' name='refresh'>{t}Apply{/t}</button>{/if}
-    </td>
-    <td>&nbsp;</td>
-    <td>{t}Members{/t}</td>
-	 <tr>
-	  <td style="width:48%">
-		{if !$acl_writeable}
-	   <select style="width:100%;height:180px;" disabled name="dummy_s[]" size="20" multiple title="{t}List message possible targets{/t}">
-				{html_options options=$sources}
-				<option disabled>&nbsp;</option>
-	   </select>
-		{else}
-	   <select style="width:100%;height:180px;" name="source[]" size="20" multiple title="{t}List message possible targets{/t}">
-				{html_options options=$sources}
-				<option disabled>&nbsp;</option>
-	   </select>
-		{/if}
-	  </td>
-	  <td>
+    <h3>{t}Members{/t}</h3>
+    {$aclMemberList}
+    <button type='submit'
+      {if !$acl_writeable} disabled="disabled" {/if}
+      name='add_user_or_group'>{msgPool type=addButton}</button>&nbsp;
 
-		{if $acl_writeable}
-	   <button type='submit' name='add'>&gt;</button>
-
-	   <br><br>
-	   <button type='submit' name='del'>&lt;</button>
-
-		{/if}
-	  </td>
-	  <td style="width:48%">
-		{if !$acl_writeable}
-	   <select style="width:100%;height:180px;" disabled name="dummy_r[]" size="20" multiple title="{t}List message recipients{/t}">
-				{html_options options=$recipients}
-				<option disabled>&nbsp;</option>
-	   </select>
-
-		{else}
-	   <select style="width:100%;height:180px;" name="recipient[]" size="20" multiple title="{t}List message recipients{/t}">
-				{html_options options=$recipients}
-				<option disabled>&nbsp;</option>
-	   </select>
-		{/if}
-	  </td>
-	 </tr>
-	</table>
+    <button type='submit'
+      {if !$acl_writeable} disabled="disabled" {/if}
+      name='add_all_users'>Add all users</button>&nbsp;
 
 	{if $aclType ne 'reset'}
 	{if $aclType ne 'role'}
