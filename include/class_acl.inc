@@ -273,7 +273,7 @@ class acl extends plugin
         $this->aclMemberList->sortingEnabled(true);
         $this->aclMemberList->setWidth("100%");
         $this->aclMemberList->setHeight("150px");
-        //$this->aclMemberList->setColspecs(array('20px','*','*'));
+        $this->aclMemberList->setColspecs(array('20px','*','*'));
         $this->aclMemberList->setHeader(array(_("~"),_("Name"),_("Description")));
         $this->aclMemberList->setDefaultSortColumn(1);
         $this->aclMemberList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
