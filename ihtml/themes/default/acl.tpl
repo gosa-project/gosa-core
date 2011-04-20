@@ -58,7 +58,7 @@
 
     <button type='submit'
       {if !$acl_writeable} disabled="disabled" {/if}
-      name='add_all_users'>Add all users</button>&nbsp;
+      name='add_all_users'>{t}Add all users{/t}</button>&nbsp;
 
 	{if $aclType ne 'reset'}
 	{if $aclType ne 'role'}
