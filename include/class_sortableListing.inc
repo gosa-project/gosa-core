@@ -25,34 +25,34 @@ define ('LIST_MARKED', 1);
 define ('LIST_DISABLED', 2);
 
 class sortableListing {
-    public $header= null;
-    public $colspecs= null;
-    public $reorderable= true;
-    public $width= "400px";
-    public $height= "100px";
-    public $cssclass= "";
-    public $id;
+    private $header= null;
+    private $colspecs= null;
+    private $reorderable= true;
+    private $width= "400px";
+    private $height= "100px";
+    private $cssclass= "";
+    private $id;
 
-    public $sortingEnabled= true;
-    public $data= array();
-    public $keys= array();
-    public $modes= array();
-    public $displayData= array();
-    public $columns= 0;
-    public $deleteable= false;
-    public $editable= false;
-    public $colorAlternate= false;
-    public $instantDelete= true;
-    public $action;
-    public $mapping;
-    public $current_mapping;
-    public $active_index;
-    public $scrollPosition= 0;
-    public $sortColumn= 0;
-    public $sortDirection= array();
+    private $sortingEnabled= true;
+    private $data= array();
+    private $keys= array();
+    private $modes= array();
+    private $displayData= array();
+    private $columns= 0;
+    private $deleteable= false;
+    private $editable= false;
+    private $colorAlternate= false;
+    private $instantDelete= true;
+    private $action;
+    private $mapping;
+    private $current_mapping;
+    private $active_index;
+    private $scrollPosition= 0;
+    private $sortColumn= 0;
+    private $sortDirection= array();
 
-    public $acl= "";
-    public $modified= false;
+    private $acl= "";
+    private $modified= false;
 
 
     public function sortableListing($data= array(), $displayData= null, $reorderable= false)
