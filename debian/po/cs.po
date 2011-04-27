@@ -36,4 +36,4 @@ msgstr ""
 #. Description
 #: ../gosa-desktop.templates:1001
 msgid "Enter the URL in order to set this default."
-msgstr "Chcete-li dané URL nastavit jako výchozí, zadejte je zde."
+msgstr "Chcete-li danou URL nastavit jako výchozí, zadejte ji zde."
