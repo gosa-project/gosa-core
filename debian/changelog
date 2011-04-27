@@ -1,3 +1,9 @@
+gosa (2.7.1-2) unstable; urgency=low
+
+  * Updated debconf translation (Closes: #624209)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Wed, 27 Apr 2011 08:32:00 +0200
+
 gosa (2.7.1-1) unstable; urgency=low
 
   * New upstream release
