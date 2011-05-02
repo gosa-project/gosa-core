@@ -2227,15 +2227,15 @@ msgid ""
 "This account has %s settings enabled. To disable them, you'll need to remove "
 "the %s settings first!"
 msgstr ""
-"Ce compte possède %s paramètres activés. Pour le désactiver vous devez au "
-"préalable supprimer les %s paramètres !"
+"Ce compte possède les paramètres %s activés. Pour les désactiver vous devez au "
+"préalable supprimer les paramètres %s !"
 
 #: include/utils/class_msgPool.inc:405
 #, php-format
 msgid ""
 "This account has %s settings disabled. You can enable them by clicking below."
 msgstr ""
-"Ce compte possède %s paramètres desactivés. Vous pouvez les activer en "
+"Ce compte possède les paramètres %s desactivés. Vous pouvez les activer en "
 "clicquant ci dessous."
 
 #: include/utils/class_msgPool.inc:408 include/utils/class_msgPool.inc:415
