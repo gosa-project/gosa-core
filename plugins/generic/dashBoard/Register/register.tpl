@@ -68,7 +68,7 @@
 {if $step == 2 && $default == "registrate"}
     <h3>{t}Registration complete{/t}</h3>
     <p>
-        {t}GOsa instance sucessfully registered{/t}
+        {t}GOsa instance successfully registered{/t}
     </p>
     <hr>
     <div class="plugin-actions">

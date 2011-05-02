@@ -340,7 +340,7 @@ class userManagement extends management
 
 
 
-                // Change cassword 
+                // Change password 
                 if(isset($this->force_hash_type[$this->dn])){
                     if(!change_password ($this->dn, $new_password,0,$this->force_hash_type[$this->dn],'', $message)){
                         msg_dialog::displayChecks(array($message));
