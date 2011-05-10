@@ -121,6 +121,11 @@ class remoteObject
             $fArgs[] = $name;
             $fArgs = array_merge($fArgs, $args);
             $res = call_user_func_array(array($this->rpcHandle,"dispatchObjectMethod"), $fArgs);
+
+            if(!$this->rpcHandle->success()){
+                trigger_error($this->rpcHandle->get_error());
+            }
+
             return($res);
         }
 
