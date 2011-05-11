@@ -15,6 +15,8 @@ class remoteObject
     private $object_id;
     private $ref_id;
     private $values;
+    private $success;
+    private $lastError;
 
     private $cache = array();
 
@@ -116,6 +118,8 @@ class remoteObject
 
         // Forward to the call to the backend.
         if(in_array($name, $this->methods)){
+            $this->lastError = "";
+            $this->success = TRUE;
             $fArgs = array();
             $fArgs[] = $this->ref_id;
             $fArgs[] = $name;
@@ -123,7 +127,9 @@ class remoteObject
             $res = call_user_func_array(array($this->rpcHandle,"dispatchObjectMethod"), $fArgs);
 
             if(!$this->rpcHandle->success()){
-                trigger_error($this->rpcHandle->get_error());
+                $this->success = FALSE;
+                $this->lastError = $this->rpcHandle->get_error();
+                trigger_error($this->lastError);
             }
 
             return($res);
@@ -131,6 +137,12 @@ class remoteObject
 
         // Show an error, we do not know what to to with this..
         trigger_error("Unknown method '{$name}' called for {$this->object_id}!");
+    }
+
+
+    function success()
+    {
+        return($this->success);
     }
 
 
