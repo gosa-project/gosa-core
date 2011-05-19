@@ -250,7 +250,7 @@ class acl extends plugin
     $this->sectionList->setDeleteable(false);
     $this->sectionList->setEditable(false);
     $this->sectionList->setWidth("100%");
-    $this->sectionList->setHeight("120px");
+    $this->sectionList->setHeight("220px");
     $this->sectionList->setColspecs(array('200px','*'));
     $this->sectionList->setHeader(array(_("Section"),_("Description")));
     $this->sectionList->setDefaultSortColumn(0);

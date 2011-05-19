@@ -145,6 +145,11 @@ class remoteObject
         return($this->success);
     }
 
+    function getError()
+    {
+        return($this->lastError);
+    }
+
 
     /*!\brief   A catch all method for setter calls. 
      *           
