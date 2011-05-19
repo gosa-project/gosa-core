@@ -225,7 +225,7 @@ if ($config->get_cfg_value("htaccessAuthentication") == "true" ){
     exit;
   }
   if ($server == ""){
-    msg_dialog::display(_("Error"), _("User information is not unique accross the configured LDAP trees!"), FATAL_ERROR_DIALOG);
+    msg_dialog::display(_("Error"), _("User information is not unique across the configured LDAP trees!"), FATAL_ERROR_DIALOG);
     exit;
   }
 
