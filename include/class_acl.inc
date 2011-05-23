@@ -330,6 +330,8 @@ class acl extends plugin
             $this->dialog= TRUE;
             $this->currentIndex= count($this->gosaAclEntry);
             $this->loadAclEntry(TRUE);
+            $this->aclMemberList->setListData(array());
+            $this->aclMemberList->update();
         }
 
         $new_acl= array();
