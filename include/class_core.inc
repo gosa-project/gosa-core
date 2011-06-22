@@ -159,12 +159,12 @@ class core extends plugin {
                 break;
             case 'timezone': 
                 $tmp = timezone::_get_tz_zones();
-                foreach($tmp['TIMEZONES'] as $name => $offset){
+                foreach($tmp['TIMEZONES'] as $tzname => $offset){
                     if($offset >= 0){
-                        $list[$name] = $name." ( + ".sprintf("%0.2f",$offset/(60*60))." "._("hours").")";
+                        $list[$tzname] = $tzname." ( + ".sprintf("%0.2f",$offset/(60*60))." "._("hours").")";
                     }else{
                         $offset = $offset * -1;
-                        $list[$name] = $name." ( - ".sprintf("%0.2f",($offset/(60*60)))." "._("hours").")";
+                        $list[$tzname] = $tzname." ( - ".sprintf("%0.2f",($offset/(60*60)))." "._("hours").")";
                     }
                 }
                 break;
@@ -177,9 +177,9 @@ class core extends plugin {
                     $tmp = mailMethod::get_methods();
                 }
                 $list =array();
-                foreach($tmp as $name => $value){
-                    $name = preg_replace('/^mailMethod/','', $name);
-                    $list[$name] = $value;
+                foreach($tmp as $vName => $vValue){
+                    $vName = preg_replace('/^mailMethod/','', $vName);
+                    $list[$vName] = $vValue;
                 }
                 $list[''] = _("None");
                 break;
