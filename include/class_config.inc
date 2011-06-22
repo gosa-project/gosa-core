@@ -450,6 +450,8 @@ class config  {
      */
     function load_servers ()
     {
+        $this->configRegistry->reload();
+
         /* Only perform actions if current is set */
         if ($this->current === NULL){
             return;
