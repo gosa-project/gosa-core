@@ -29,6 +29,7 @@ class listing {
     var $departmentRootVisible= false;
     var $multiSelect= false;
     var $singleSelect= false;
+    var $noAclChecks= false;
     var $template;
     var $headline;
     var $base;
@@ -170,7 +171,7 @@ class listing {
         $this->xmlData= $this->xmlData["list"];
 
         // Load some definition values
-        foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect","singleSelect", "baseMode") as $token) {
+        foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect","singleSelect", "baseMode", "noAclChecks") as $token) {
             if (isset($this->xmlData['definition'][$token]) &&
                     $this->xmlData['definition'][$token] == "true"){
                 $this->$token= true;
@@ -653,18 +654,20 @@ class listing {
         $this->entries= $this->filter->query();
 
         // Check entry acls
-        foreach($this->entries as $row => $entry){
-            $acl = "";
-            $found = false;
-            foreach($this->aclToObjectClass as $category => $ocs){
-                if(count(array_intersect($ocs, $entry['objectClass']))){
-                    $acl .= $ui->get_permissions($entry['dn'],$category, 0);
-                    $found = true;
+        if(!$this->noAclChecks){
+            foreach($this->entries as $row => $entry){
+                $acl = "";
+                $found = false;
+                foreach($this->aclToObjectClass as $category => $ocs){
+                    if(count(array_intersect($ocs, $entry['objectClass']))){
+                        $acl .= $ui->get_permissions($entry['dn'],$category, 0);
+                        $found = true;
+                    }
                 }
-            }
-            if(!preg_match("/r/", $acl) && $found){
-                unset($this->entries[$row]);
-                continue;
+                if(!preg_match("/r/", $acl) && $found){
+                    unset($this->entries[$row]);
+                    continue;
+                }
             }
         }
 
