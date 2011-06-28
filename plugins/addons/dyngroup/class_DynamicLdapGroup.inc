@@ -96,6 +96,19 @@ class DynamicLdapGroup extends plugin
     }
 
 
+    /*!\brief    Checks whether the given attribute is managed by this dyngroup extension or not.
+     */
+    function isAttributeDynamic($attr)
+    {
+        if($this->is_account){
+            foreach($this->labeledURIparsed as $uri){
+                if($uri['attr'] == $uri) return(TRUE);
+            }
+        }
+        return(FALSE);
+    }
+
+
     public function check ()
     {
         $messages = plugin::check();
