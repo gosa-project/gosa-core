@@ -592,16 +592,23 @@ class userManagement extends management
 
             if ($ldap->count () != 0){
                 msg_dialog::displayChecks(array(msgPool::duplicated(_("Name"))));
+                $smarty->assign("edit_uid", "");
             }else{
 
                 // Preset uid field by using the idGenerator 
                 $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
                 if ($this->config->get_cfg_value("core","idGenerator") != ""){
-                    $uids= gen_uids ($this->config->get_cfg_value("core","idGenerator"), $attributes);
-                    if (count($uids)){
-                        $smarty->assign("edit_uid", "false");
-                        $smarty->assign("uids", $uids);
-                        $this->uid= current($uids);
+                    $genStr = $this->config->get_cfg_value("core","idGenerator");
+                    $smarty->assign("edit_uid", "");
+                    if(!empty($genStr)){
+                        $uids= gen_uids($genStr, $attributes);
+                        if (count($uids)){
+                            $smarty->assign("edit_uid", "false");
+                            $smarty->assign("uids", $uids);
+                            $this->uid= current($uids);
+                        }else{
+                            msg_dialog::displayChecks(array(_("Cannot generate a unique id, please specify it manually!")));
+                        }
                     }
                 } else {
                     $smarty->assign("edit_uid", "");
