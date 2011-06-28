@@ -32,11 +32,22 @@
     <td><b>{t}Login{/t}</b></td>
     <td>
       {if $edit_uid eq "false"}
-      <select size="1" name="uid">
-        {html_options output=$uids values=$uids selected=$uid}
-      </select>
-      {else}
-      <input type='text' name="uid" size="30" maxlength="40" value="{$uid}">
+        {if $allowModificationOfUid == "true"}
+           <select size="1" name="uidSelect" id='uidSelect' onChange="
+                document.getElementById('uid').value = document.getElementById('uidSelect').value;">
+            {html_options output=$uids values=$uids selected=$uid}
+          </select>
+          <input type='text' id="uid" name="uid" size="30" maxlength="40" value="{$uid}" 
+                style="display: none;">
+          <img src="images/lists/edit.png" onClick="$('uid').toggle();" 
+                title="{t}Modify the uid proposal{/t}">
+        {else}
+           <select size="1" name="uid">
+            {html_options output=$uids values=$uids selected=$uid}
+          </select>
+        {/if}
+      {else}                    
+          <input type='text' id="uid" name="uid" size="30" maxlength="40" value="{$uid}">
       {/if}
     </td>
   </tr>

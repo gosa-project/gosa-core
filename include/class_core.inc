@@ -496,6 +496,16 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "allowModificationOfUid",
+                                "type"          => "bool",
+                                "default"       => "false",
+                                "description"   => _("Allows to modify uid-proposals when creating a new user from a user-template."),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => FALSE),
+
+                        array(
                                 "name"          => "modificationDetectionAttribute",
                                 "type"          => "switch",
                                 "default"       => "entryCSN",
