@@ -496,7 +496,7 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
-                                "name"          => "allowModificationOfUid",
+                                "name"          => "allowUidProposalModification",
                                 "type"          => "bool",
                                 "default"       => "false",
                                 "description"   => _("Allows to modify uid-proposals when creating a new user from a user-template."),

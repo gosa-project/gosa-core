@@ -32,7 +32,7 @@
     <td><b>{t}Login{/t}</b></td>
     <td>
       {if $edit_uid eq "false"}
-        {if $allowModificationOfUid == "true"}
+        {if $allowUidProposalModification == "true"}
            <select size="1" name="uidSelect" id='uidSelect' onChange="
                 document.getElementById('uid').value = document.getElementById('uidSelect').value;">
             {html_options output=$uids values=$uids selected=$uid}
