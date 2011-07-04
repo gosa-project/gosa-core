@@ -66,7 +66,7 @@ class ogroup extends plugin
     var $view_logged = FALSE;
 
     var $copyMembers = TRUE;
-
+    var $wasDyGroup = FALSE;
     var $baseSelector;
 
     /* Already assigned Workstations. Will be hidden in selection. 
@@ -361,6 +361,17 @@ class ogroup extends plugin
             $data[$key] = $dn;
             $lData[$key] = array('data'=> array(image($image),$name));
         }
+
+        if($this->isRestrictedByDynGroup()){
+            $this->memberListing->setDeleteable(false);
+            $smarty->assign("memberACL", preg_replace("/[^r]/", "", $this->getacl("member")));
+            $smarty->assign("isRestrictedByDynGroup", TRUE);
+            
+        }else{
+            $this->memberListing->setDeleteable(true);
+            $smarty->assign("isRestrictedByDynGroup", FALSE);
+        }
+
         $this->memberListing->setListData($data,$lData);
         $this->memberListing->update();
         $smarty->assign("memberList",$this->memberListing->render());
@@ -371,6 +382,17 @@ class ogroup extends plugin
         }
 
         return ($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+    }
+
+
+    function isRestrictedByDynGroup()
+    {
+        $bool = FALSE;
+        if(isset($this->parent->by_object['DynamicLdapGroup'])){
+            $bool = $this->parent->by_object['DynamicLdapGroup']->isAttributeDynamic('member');
+        }
+        $this->wasDyGroup |= $bool;
+        return($bool);
     }
 
 
@@ -710,9 +732,11 @@ class ogroup extends plugin
         plugin::save();
 
         /* Move members to target array */
-        $this->attrs['member'] =array();
-        foreach ($this->member as $key => $desc){
-            $this->attrs['member'][]= LDAP::fix($key);
+        if(!$this->wasDyGroup && !$this->isRestrictedByDynGroup()){
+            $this->attrs['member'] =array();
+            foreach ($this->member as $key => $desc){
+                $this->attrs['member'][]= LDAP::fix($key);
+            }
         }
 
         $ldap= $this->config->get_ldap_link();

@@ -37,15 +37,22 @@
     {$trustModeDialog}
   </td>
   <td style='padding-left:10px;' class='left-border'>
+   {if $isRestrictedByDynGroup}
+   <b>{t}The group members are part of a dyn-group and cannot be managed!{/t}</b>
+    <br>
+    <br>
+    {/if}
 
    <b><LABEL for="members">{t}Member objects{/t}</LABEL></b>&nbsp;({$combinedObjects})
    <br>
 {render acl=$memberACL}
    {$memberList}
 {/render}
+{if !$isRestrictedByDynGroup}
 {render acl=$memberACL}
    <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>&nbsp;
 {/render}
+{/if}
   </td>
  </tr>
 </table>
