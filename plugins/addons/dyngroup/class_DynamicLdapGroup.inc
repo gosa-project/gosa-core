@@ -102,7 +102,7 @@ class DynamicLdapGroup extends plugin
     {
         if($this->is_account){
             foreach($this->labeledURIparsed as $uri){
-                if($uri['attr'] == $uri) return(TRUE);
+                if($uri['attr'] == $attr) return(TRUE);
             }
         }
         return(FALSE);
