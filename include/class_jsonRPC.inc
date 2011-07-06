@@ -127,7 +127,8 @@ class jsonRPC {
         }
         if(isset($this->lastResult['error']['error']) && is_array($this->lastResult['error']['error'])){
             $err = $this->lastResult['error']['error'];
-            $message = call_user_func_array(sprintf,$err);
+            #$message = call_user_func_array(sprintf,$err);
+            $message = $err;
             $error .= $message;
         }elseif(isset($this->lastResult['error']['message'])){
             $error .= $this->lastResult['error']['message']; 
