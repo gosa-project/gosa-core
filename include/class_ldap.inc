@@ -115,6 +115,21 @@ class LDAP
      */
     static function updateSpecialCharHandling()
     {
+        global $config;
+
+        // Load results from the session if they exists.
+        if(session::is_set('LDAP::updateSpecialCharHandling')){
+            $data = session::get('LDAP::updateSpecialCharHandling');
+            $attrs = array("characterMap", "characterMapRegFrom", "characterMapRegTo", "readableMapRegFrom", "readableMapRegTo");
+            foreach($attrs as $attr){
+                LDAP::$$attr = $data[$attr];
+            }
+            
+            $attrs = array(implode(LDAP::$characterMapRegFrom,', '),implode(LDAP::$characterMapRegTo,', '));
+            @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"(Cached) Detected special-char handling for LDAP actions");
+            return;
+        }
+
         // Set a default character handling.
         LDAP::$characterMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/");
         LDAP::$characterMapRegTo = array("\,", "(", ")", "/", '\"');
@@ -150,6 +165,14 @@ class LDAP
                 LDAP::$characterMap = array();
             }
         }
+        
+        // Store results in the session.
+        $attrs = array("characterMap", "characterMapRegFrom", "characterMapRegTo", "readableMapRegFrom", "readableMapRegTo");
+        $data = array();
+        foreach($attrs as $attr){
+            $data[$attr] = LDAP::$$attr;
+        }
+        session::set("LDAP::updateSpecialCharHandling", $data);
 
         $attrs = array(implode(LDAP::$characterMapRegFrom,', '),implode(LDAP::$characterMapRegTo,', '));
         @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"Detected special-char handling for LDAP actions");
