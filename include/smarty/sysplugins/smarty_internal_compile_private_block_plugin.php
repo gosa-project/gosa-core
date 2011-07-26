@@ -1,34 +1,42 @@
 <?php
 /**
-* Smarty Internal Plugin Compile Block Plugin
-* 
-* Compiles code for the execution of block plugin
-* 
-* @package Smarty
-* @subpackage Compiler
-* @author Uwe Tews 
-*/
+ * Smarty Internal Plugin Compile Block Plugin
+ * 
+ * Compiles code for the execution of block plugin
+ * 
+ * @package Smarty
+ * @subpackage Compiler
+ * @author Uwe Tews 
+ */
+
 /**
-* Smarty Internal Plugin Compile Block Plugin Class
-*/
+ * Smarty Internal Plugin Compile Block Plugin Class
+ */
 class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_CompileBase {
+	// attribute definitions
+    public $optional_attributes = array('_any'); 
+
     /**
-    * Compiles code for the execution of block plugin
-    * 
-    * @param array $args array with attributes from parser
-    * @param string $tag name of block function
-    * @param object $compiler compiler object
-    * @return string compiled code
-    */
-    public function compile($args, $compiler, $tag, $function)
+     * Compiles code for the execution of block plugin
+     * 
+     * @param array $args array with attributes from parser
+     * @param object $compiler compiler object
+     * @param array $parameter array with compilation parameter
+     * @param string $tag name of block plugin
+     * @param string $function PHP function name
+     * @return string compiled code
+     */
+    public function compile($args, $compiler, $parameter, $tag, $function)
     {
         $this->compiler = $compiler;
-        if (strlen($tag) < 6 || substr_compare($tag, 'close', -5, 5) != 0) {
+        if (strlen($tag) < 6 || substr($tag, -5) != 'close') {
             // opening tag of block plugin
-            $this->required_attributes = array();
-            $this->optional_attributes = array('_any'); 
-            // check and get attributes
-            $_attr = $this->_get_attributes($args); 
+        	// check and get attributes
+        	$_attr = $this->_get_attributes($args); 
+        	if ($_attr['nocache'] === true) {
+            	$this->compiler->tag_nocache = true;
+        	}
+       		unset($_attr['nocache']);
             // convert attributes into parameter array string
             $_paramsArray = array();
             foreach ($_attr as $_key => $_value) {
@@ -44,11 +52,7 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
             // maybe nocache because of nocache variables or nocache plugin
             $this->compiler->nocache = $this->compiler->nocache | $this->compiler->tag_nocache; 
             // compile code
-            if (is_array($function)) {
-                $output = '<?php $_block_repeat=true; call_user_func_array(array(\'' . $function[0] . '\',\'' . $function[1] . '\'),(array(' . $_params . ', null, $_smarty_tpl->smarty, $_block_repeat, $_smarty_tpl));while ($_block_repeat) { ob_start();?>';
-            } else {
-                $output = '<?php $_block_repeat=true; ' . $function . '(' . $_params . ', null, $_smarty_tpl->smarty, $_block_repeat, $_smarty_tpl);while ($_block_repeat) { ob_start();?>';
-            } 
+            $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$_params}); \$_block_repeat=true; {$function}({$_params}, null, \$_smarty_tpl, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
         } else {
             // must endblock be nocache?
             if ($this->compiler->nocache) {
@@ -59,14 +63,15 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
             // This tag does create output
             $this->compiler->has_output = true; 
             // compile code
-            if (is_array($function)) {
-            var_dump('error');
-                $output = '<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo call_user_func_array(array(\'' . $function[0] . '\',\'' . $function[1] . '\'),(array(' . $_params . ', $_block_content, $_smarty_tpl->smarty, $_block_repeat, $_smarty_tpl)); }?>';
+            if (!isset($parameter['modifier_list'])) {
+            	$mod_pre = $mod_post ='';
             } else {
-                $output = '<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo ' . $function . '(' . $_params . ', $_block_content, $_smarty_tpl->smarty, $_block_repeat, $_smarty_tpl); }?>';
-            } 
+            	$mod_pre = ' ob_start(); ';
+            	$mod_post = 'echo '.$this->compiler->compileTag('private_modifier',array(),array('modifierlist'=>$parameter['modifier_list'],'value'=>'ob_get_clean()')).';';
+            }
+            $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo {$function}({$_params}, \$_block_content, \$_smarty_tpl, \$_block_repeat); ".$mod_post." } array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
         } 
-        return $output;
+        return $output . "\n";
     } 
 } 
 

@@ -7,7 +7,6 @@
  * @subpackage PluginsFunction
  */
 
-
 /**
  * Smarty {math} function plugin
  *
@@ -18,11 +17,10 @@
  *          (Smarty online manual)
  * @author   Monte Ohrt <monte at ohrt dot com>
  * @param array $params parameters
- * @param object $smarty Smarty object
  * @param object $template template object
  * @return string|null
  */
-function smarty_function_math($params, $smarty, $template)
+function smarty_function_math($params, $template)
 {
     // be sure equation parameter is present
     if (empty($params['equation'])) {
@@ -39,7 +37,7 @@ function smarty_function_math($params, $smarty, $template)
     }
 
     // match all vars in equation, make sure all are passed
-    preg_match_all("!(?:0x[a-fA-F0-9]+)|([a-zA-Z][a-zA-Z0-9_]+)!",$equation, $match);
+    preg_match_all("!(?:0x[a-fA-F0-9]+)|([a-zA-Z][a-zA-Z0-9_]*)!",$equation, $match);
     $allowed_funcs = array('int','abs','ceil','cos','exp','floor','log','log10',
                            'max','min','pi','pow','rand','round','sin','sqrt','srand','tan');
     
@@ -64,7 +62,7 @@ function smarty_function_math($params, $smarty, $template)
             $equation = preg_replace("/\b$key\b/", " \$params['$key'] ", $equation);
         }
     }
-
+    $smarty_math_result = null;
     eval("\$smarty_math_result = ".$equation.";");
 
     if (empty($params['format'])) {
@@ -81,4 +79,5 @@ function smarty_function_math($params, $smarty, $template)
         }
     }
 }
+
 ?>

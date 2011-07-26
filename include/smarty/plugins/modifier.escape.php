@@ -1,26 +1,25 @@
 <?php
-
 /**
-* Smarty plugin
-* 
-* @package Smarty
-* @subpackage PluginsModifier
-*/
-
+ * Smarty plugin
+ * 
+ * @package Smarty
+ * @subpackage PluginsModifier
+ */
+ 
 /**
-* Smarty escape modifier plugin
-* 
-* Type:     modifier<br>
-* Name:     escape<br>
-* Purpose:  escape string for output
-* 
-* @link http://smarty.php.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
-* @author Monte Ohrt <monte at ohrt dot com> 
-* @param string $string input string
-* @param string $esc_type escape type
-* @param string $char_set character set
-* @return string escaped input string
-*/
+ * Smarty escape modifier plugin
+ * 
+ * Type:     modifier<br>
+ * Name:     escape<br>
+ * Purpose:  escape string for output
+ * 
+ * @link http://smarty.php.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
+ * @author Monte Ohrt <monte at ohrt dot com> 
+ * @param string $string input string
+ * @param string $esc_type escape type
+ * @param string $char_set character set
+ * @return string escaped input string
+ */
 function smarty_modifier_escape($string, $esc_type = 'html', $char_set = SMARTY_RESOURCE_CHAR_SET)
 {
     switch ($esc_type) {
@@ -67,12 +66,8 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = SMARTY_
             return strtr($string, array('\\' => '\\\\', "'" => "\\'", '"' => '\\"', "\r" => '\\r', "\n" => '\\n', '</' => '<\/'));
 
         case 'mail': 
-            // safe way to display e-mail address on a web page
-            if ($smarty->has_mb) {
-                return mb_str_replace(array('@', '.'), array(' [AT] ', ' [DOT] '), $string);
-            } else {
-                return str_replace(array('@', '.'), array(' [AT] ', ' [DOT] '), $string);
-            } 
+          require_once(SMARTY_PLUGINS_DIR . 'shared.mb_str_replace.php');
+          return smarty_mb_str_replace(array('@', '.'), array(' [AT] ', ' [DOT] '), $string);
 
         case 'nonstd': 
             // escape non-standard chars, such as ms document quotes
@@ -90,21 +85,6 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = SMARTY_
 
         default:
             return $string;
-    } 
-    if (!function_exists("mb_str_replace")) {
-        // simulate the missing PHP mb_str_replace function
-        function mb_str_replace($needle, $replacement, $haystack)
-        {
-            $needle_len = mb_strlen($needle);
-            $replacement_len = mb_strlen($replacement);
-            $pos = mb_strpos($haystack, $needle, 0);
-            while ($pos !== false) {
-                $haystack = mb_substr($haystack, 0, $pos) . $replacement
-                 . mb_substr($haystack, $pos + $needle_len);
-                $pos = mb_strpos($haystack, $needle, $pos + $replacement_len);
-            } 
-            return $haystack;
-        } 
     } 
 } 
 
