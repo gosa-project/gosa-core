@@ -3938,5 +3938,12 @@ function gosa_fopen($filename, $mode)
     }
 }
 
+
+/*\brief    Our own in_array method which defaults to a strict mode.
+ */
+function in_array_strict($needle, $haystack, $strict = TRUE){
+    return(in_array($needle, $haystack, $strict));
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
