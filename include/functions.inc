@@ -3941,10 +3941,8 @@ function gosa_fopen($filename, $mode)
 
 /*\brief    Our own in_array method which defaults to a strict mode.
  */
-function in_array_strict($needle, $haystack, $strict = TRUE){
-    if(!$strict){
-        syslog(1, "!");
-    }
+function in_array_strict($needle, $haystack, $strict = TRUE)
+{
     return(in_array($needle, $haystack, $strict));
 }
 
