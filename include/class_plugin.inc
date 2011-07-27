@@ -544,7 +544,7 @@ class plugin
     foreach ($this->attributes as $val){
 
       /* Skip the ones in skip list */
-      if (in_array($val, $skip)){
+      if (in_array_strict($val, $skip)){
         continue;
       }
 
@@ -1057,7 +1057,7 @@ class plugin
     // Update 'manager' attributes from gosaDepartment and inetOrgPerson 
     $filter = "(&(objectClass=inetOrgPerson)(manager=".LDAP::prepare4filter(LDAP::fix($src_dn))."))";
     $ocs = $ldap->get_objectclasses();
-    if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['gosaDepartment']['MAY'])){
+    if(isset($ocs['gosaDepartment']['MAY']) && in_array_strict('manager', $ocs['gosaDepartment']['MAY'])){
       $filter = "(|".$filter."(&(objectClass=gosaDepartment)(manager=".LDAP::prepare4filter(LDAP::fix($src_dn)).")))";
     }
     $leaf_deps=  get_list($filter,array("all"),$this->config->current['BASE'], 
@@ -1158,7 +1158,7 @@ class plugin
    */
   function handle_post_events($mode, $addAttrs= array())
   {
-    if(!in_array($mode, array('add','remove','modify'))){
+    if(!in_array_strict($mode, array('add','remove','modify'))){
       trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", $mode));
       return;
     }
@@ -1183,7 +1183,7 @@ class plugin
    */
   function handle_pre_events($mode, $addAttrs= array())
   {
-    if(!in_array($mode, array('add','remove','modify'))){
+    if(!in_array_strict($mode, array('add','remove','modify'))){
       trigger_error(sprintf("Invalid pre event type given %s! Valid types are [add,modify,remove].", $mode));
       return;
     }
@@ -1299,7 +1299,7 @@ class plugin
     if(count($this->objectclasses)){
       $this->is_account = TRUE;
       foreach($this->objectclasses as $class){
-        if(!in_array($class,$source['objectClass'])){
+        if(!in_array_strict($class,$source['objectClass'])){
           $this->is_account = FALSE;
         }
       }
@@ -2038,7 +2038,7 @@ class plugin
   {
     $ret = array();
     foreach($this->attributes as $attr){
-      if(in_array($attr,$this->multi_boxes)){
+      if(in_array_strict($attr,$this->multi_boxes)){
         $ret[$attr] = $this->$attr;
       }
     }

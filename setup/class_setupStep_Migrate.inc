@@ -432,7 +432,7 @@ class Step_Migrate extends setup_step
        *  and verify that he is in a valid department
        */
       if( !preg_match("/".preg_quote("dc=addressbook,", '/')."/",$group_db_base) &&
-          !in_array($group_db_base,$valid_deps)
+          !in_array_strict($group_db_base,$valid_deps)
         ){
         $attrs['selected'] = FALSE;
         $attrs['ldif']     = "";
@@ -510,7 +510,7 @@ class Step_Migrate extends setup_step
        *  and verify that he is in a valid department
        */
       if( !preg_match("/dc=addressbook,/",$people_db_base) &&
-          !in_array($people_db_base,$valid_deps)
+          !in_array_strict($people_db_base,$valid_deps)
          ){
         $attrs['selected'] = FALSE;
         $attrs['ldif']     = "";
@@ -773,7 +773,7 @@ class Step_Migrate extends setup_step
        */
       if(preg_match("/^.*,[ ]*cn=/",$dn)){
         $cn_dn = preg_replace("/^.*,[ ]*cn=/","cn=",$dn);
-        if(in_array($cn_dn,$this->group_list)){
+        if(in_array_strict($cn_dn,$this->group_list)){
           $skip = true;
         }
       }
@@ -2044,7 +2044,7 @@ class Step_Migrate extends setup_step
 
     /* Root object doesn't exists 
      */
-    if(!in_array("gosaDepartment",$attrs['objectClass'])){
+    if(!in_array_strict("gosaDepartment",$attrs['objectClass'])){
       if($just_check){
 
         $this->rootOC_details = array();	
@@ -2066,7 +2066,7 @@ class Step_Migrate extends setup_step
         $dep_types = departmentManagement::get_support_departments();
         $dep_type ="";
         foreach($dep_types as $dep_name => $dep_class){
-          if(in_array($dep_class['CLASS'], $attrs['objectClass'])){
+          if(in_array_strict($dep_class['CLASS'], $attrs['objectClass'])){
             $dep_type = $dep_name;
             break;
           }
@@ -2457,7 +2457,7 @@ class Step_Migrate extends setup_step
   function cleanup_array($attrs)
   {
     foreach($attrs as $key => $value) {
-      if(is_numeric($key) || in_array($key,array("count","dn"))){
+      if(is_numeric($key) || in_array_strict($key,array("count","dn"))){
         unset($attrs[$key]);
       }
       if(is_array($value) && isset($value['count'])){
@@ -2610,7 +2610,7 @@ class Step_Migrate extends setup_step
         $ldap->cd($cv['base']);
         $ldap->cat($device['DN']);
         $attrs = $ldap->fetch();
-        if(in_array($device['OLD_DEVICE'],$attrs['gotoHotplugDevice'])){
+        if(in_array_strict($device['OLD_DEVICE'],$attrs['gotoHotplugDevice'])){
 
           /* Create new hotplug device object 'gotoDevice'
            */ 
@@ -2848,7 +2848,7 @@ class Step_Migrate extends setup_step
         for ($j= 0; $j < $info['gosaApplicationParameter']['count']; $j++){
           $p= preg_replace("/^([^:]+):.*$/", "$1", $info['gosaApplicationParameter'][$j]);
 
-          if(!isset($amap[$info['cn'][0]]) || !in_array($p, $amap[$info['cn'][0]])){
+          if(!isset($amap[$info['cn'][0]]) || !in_array_strict($p, $amap[$info['cn'][0]])){
             $amap[$info['cn'][0]][]= $p;
           }
         }
@@ -3196,7 +3196,7 @@ class Step_Migrate extends setup_step
     for($i=0;$i< $base_attrs['objectClass']['count']; $i++){
       $ocs[] = $base_attrs['objectClass'][$i];
     }
-    if(!in_array("gosaACL",$ocs)){
+    if(!in_array_strict("gosaACL",$ocs)){
       $ocs[] = "gosaACL";
     }
 
@@ -3261,7 +3261,7 @@ class Step_Migrate extends setup_step
       for($i=0;$i<$base_data['objectClass']['count'];$i++){
         $base_entry .= "objectClass: ".$base_data['objectClass'][$i]."\n";
       }
-      if(!in_array("gosaACL",$base_data['objectClass'])){
+      if(!in_array_strict("gosaACL",$base_data['objectClass'])){
         $base_entry .= "<b>objectClass: gosaACL</b>\n";
       }
       if(isset($base_data['gosaAclEntry'])){

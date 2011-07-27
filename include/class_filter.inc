@@ -393,7 +393,7 @@ class filter {
       $attributes= $query['attribute'];
 
       // ObjectClass is required to check permissions later.
-      if(!in_array('objectClass', $attributes)) $attributes[] = 'objectClass';
+      if(!in_array_strict('objectClass', $attributes)) $attributes[] = 'objectClass';
 
       // Generate final filter
       foreach ($this->elements as $tag => $element) {
@@ -494,7 +494,7 @@ class filter {
     }
 
     // ObjectClass is required to check permissions later.
-    if(!in_array('objectClass', $attributes)) $attributes[] = 'objectClass';
+    if(!in_array_strict('objectClass', $attributes)) $attributes[] = 'objectClass';
 
     // Make filter
     $filter= preg_replace("/\\$$tag/", normalizeLdap($value), $filter);

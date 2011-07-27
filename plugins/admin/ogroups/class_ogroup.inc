@@ -558,7 +558,7 @@ class ogroup extends plugin
           /* Skip workstations which are already assigned to an object group.
            */
           if ($this->gosaGroupObjects == "[W]" || $this->gosaGroupObjects == "[T]"){
-            if(in_array($attrs['dn'],$this->used_workstations)){
+            if(in_array_strict($attrs['dn'],$this->used_workstations)){
               continue;
             }
           }
@@ -702,7 +702,7 @@ class ogroup extends plugin
           "T" => "gotoTerminal",
           "F" => "goFonHardware",
           "P" => "gotoPrinter") as $index => $class){
-      if (in_array($class, $attrs['objectClass'])){
+      if (in_array_strict($class, $attrs['objectClass'])){
         $type= $index;
         break;
       }
@@ -716,7 +716,7 @@ class ogroup extends plugin
   {
     /* Person? */
     $name =""; 
-    if (in_array('gosaAccount', $attrs['objectClass'])){
+    if (in_array_strict('gosaAccount', $attrs['objectClass'])){
       if(isset($attrs['sn']) && isset($attrs['givenName'])){
         $name= $attrs['sn'][0].", ".$attrs['givenName'][0];
       } else {

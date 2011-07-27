@@ -154,7 +154,7 @@ class tests {
                           "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/","",$ip);
 
                   $mask = preg_replace("/^\//","",$mask);
-                  if((in_array("$mask",$res)) && preg_match("/^[0-9\.]/",$mask)){
+                  if((in_array_strict("$mask",$res)) && preg_match("/^[0-9\.]/",$mask)){
                           return(TRUE);
                   }
           }

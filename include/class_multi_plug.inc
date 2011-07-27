@@ -213,7 +213,7 @@ class multi_plug
             $add[$key]['count'] = count($add[$key]);
           }
           for($i=0;$i<$add[$key]['count'];$i++){
-            if(!in_array($add[$key][$i],$base[$key])){
+            if(!in_array_strict($add[$key][$i],$base[$key])){
               $base[$key][] = $add[$key][$i];
               $base[$key]['count']++;
             }
@@ -245,7 +245,7 @@ class multi_plug
             $base[$key]['count'] = count($base[$key]);
           }
         for($i = 0 ; $i < $base[$key]['count'] ; $i ++){
-          if(isset($base[$key][$i]) && in_array($base[$key][$i],$minus[$key])){
+          if(isset($base[$key][$i]) && in_array_strict($base[$key][$i],$minus[$key])){
             $tmp[] = $base[$key][$i];
           }
         }

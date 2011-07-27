@@ -579,7 +579,7 @@ function ldap_login_user ($username, $password)
   if($config->get_cfg_value("loginAttribute") != ""){
     $tmp = explode(",", $config->get_cfg_value("loginAttribute")); 
     foreach($tmp as $attr){
-      if(in_array($attr,$allowed_attributes)){
+      if(in_array_strict($attr,$allowed_attributes)){
         $verify_attr[] = $attr;
       }
     }
@@ -3551,7 +3551,7 @@ function get_next_id_traditional($attrib, $dn)
     $base= get_base_from_hook($dn, $attrib);
   }
   for ($id= $base; $id++; $id < $hwm){
-    if (!in_array($id, $ids)){
+    if (!in_array_strict($id, $ids)){
       return ($id);
     }
   }
@@ -3575,6 +3575,13 @@ function mark($needle, $haystack, $ignorecase= true)
   }
 
   return $result.$haystack;
+}
+
+/*\brief    Our own in_array method which defaults to a strict mode.
+ */
+function in_array_strict($needle, $haystack, $strict = TRUE)
+{
+    return(in_array($needle, $haystack, $strict));
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

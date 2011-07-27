@@ -113,7 +113,7 @@ class reference extends plugin
 
 		/* Add more information? */
 		$addon= "";
-		if (in_array($attrs['dn'], $this->fold)){
+		if (in_array_strict($attrs['dn'], $this->fold)){
 			$memberattr= "";
 			if (isset($attrs['memberUid'])){
 				unset($attrs['memberUid']['count']);

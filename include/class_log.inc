@@ -98,7 +98,7 @@ class log {
   {
     $msgs = array();
 
-    if(!isset($entry['action']) || !in_array($entry['action'],array("modify","create","remove","copy","snapshot","view","security","debug"))){
+    if(!isset($entry['action']) || !in_array_strict($entry['action'],array("modify","create","remove","copy","snapshot","view","security","debug"))){
       $msgs[] = sprintf(_("Invalid option '%s' specified!"), $entry['action']);
     }
 

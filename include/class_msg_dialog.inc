@@ -41,7 +41,7 @@ class msg_dialog
 
 		if(empty($s_message)) return;
 	
-		if(!in_array($i_type,array(INFO_DIALOG,WARNING_DIALOG,ERROR_DIALOG,CONFIRM_DIALOG,FATAL_ERROR_DIALOG,OK_CANCEL_DIALOG))){
+		if(!in_array_strict($i_type,array(INFO_DIALOG,WARNING_DIALOG,ERROR_DIALOG,CONFIRM_DIALOG,FATAL_ERROR_DIALOG,OK_CANCEL_DIALOG))){
 			trigger_error("Invalid msg_dialog type.");
 			$i_type = INFO_DIALOG;
 		}

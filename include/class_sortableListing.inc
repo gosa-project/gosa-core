@@ -68,7 +68,7 @@ class sortableListing {
 
     // Generate instance wide unique ID
     $id = "";
-    while($id == "" || in_array($id, $usedIds)){
+    while($id == "" || in_array_strict($id, $usedIds)){
 
         // Wait 1 msec to ensure that we definately get a new id
         if($id != "") usleep(1);
@@ -538,7 +538,7 @@ class sortableListing {
   {
     // Only add if not already there
     if (!$key) {
-      if (in_array($entry, $this->data)) {
+      if (in_array_strict($entry, $this->data)) {
         return;
       }
     } else {
