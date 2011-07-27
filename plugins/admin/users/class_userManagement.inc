@@ -483,6 +483,7 @@ class userManagement extends management
       $smarty->assign("template",  array_pop($target));
       $smarty->assign("templates", $templates);
       $smarty->assign("edit_uid", "");
+      $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("allowUidProposalModification", "false"));
       return($smarty->fetch(get_template_path('template.tpl', TRUE)));
 
       // -> See 'templateContinue' for further handling!
@@ -519,6 +520,7 @@ class userManagement extends management
       $smarty->assign("template", "none");
       $smarty->assign("templates", $templates);
       $smarty->assign("edit_uid", "");
+      $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("allowUidProposalModification", "false"));
       return($smarty->fetch(get_template_path('template.tpl', TRUE)));
 
       // -> See 'templateContinue' for further handling!
@@ -572,6 +574,7 @@ class userManagement extends management
       $smarty->assign("templates",$templates);
       $smarty->assign("got_uid", $this->got_uid);
       $smarty->assign("edit_uid",false);
+      $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("allowUidProposalModification", "false"));
       return($smarty->fetch(get_template_path('template.tpl', TRUE)));
     }
 
@@ -620,6 +623,7 @@ class userManagement extends management
         $smarty->assign("template", $_POST['template']);
       }
       $smarty->assign("templates",$templates); 
+      $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("allowUidProposalModification", "false"));
       return($smarty->fetch(get_template_path('template.tpl', TRUE)));
     }
 
