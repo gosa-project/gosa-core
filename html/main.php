@@ -140,7 +140,7 @@ if (!session::global_is_set('plist')){
   /* Initially load all classes */
   $class_list= get_declared_classes();
   foreach ($class_mapping as $class => $path){
-    if (!in_array($class, $class_list)){
+    if (!in_array_strict($class, $class_list)){
       if (is_readable("$BASE_DIR/$path")){
         require_once("$BASE_DIR/$path");
       } else {
