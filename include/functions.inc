@@ -73,7 +73,7 @@ define('DES3_CBC_MD5',5);
 define('DES3_CBC_SHA1',16);
 
 /* Include required files */
-require_once("class_location.inc");
+include_once("class_location.inc");
 require_once ("functions_debug.inc");
 require_once ("accept-to-gettext.inc");
 
@@ -3550,6 +3550,9 @@ function image($path, $action= "", $title= "", $align= "middle")
   $label= null;
 
   // Bail out, if there's no style file
+  if(!class_exists('session')){
+    return "";    
+  }
   if(!session::global_is_set("img-styles")){
 
     // Get theme
