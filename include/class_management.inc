@@ -1016,7 +1016,7 @@ class management
    */
   function handle_post_events($mode, $addAttrs= array())
   {
-    if(!in_array($mode, array('add','remove','modify'))){
+    if(!in_array_strict($mode, array('add','remove','modify'))){
       trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", bold($mode)));
       return;
     }

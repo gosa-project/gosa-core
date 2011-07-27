@@ -76,7 +76,7 @@ class Step_Schema extends setup_step
         $this->is_completed = count($objectclasses);
 
         // Now check if the core requirements are fulfilled.
-        if(in_array('core', $disabled)){
+        if(in_array_strict('core', $disabled)){
             $message = "";
             $this->is_completed = FALSE;
             $coreDefs = core::plInfo();

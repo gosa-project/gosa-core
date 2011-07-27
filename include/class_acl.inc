@@ -572,7 +572,7 @@ class acl extends plugin
 
             if($this->acl_is_writeable("")) {
                 foreach($this->dialog->save() as $entry) {
-                    if(in_array("posixGroup", $entry['objectClass'])) {
+                    if(in_array_strict("posixGroup", $entry['objectClass'])) {
                         $key = "G:" . $entry['dn'];
                         $vData = array("data" => array($groupIcon, $entry['cn'][0], $entry['description'][0]));
 

@@ -756,7 +756,7 @@ class config  {
             /* Detect department type */
             $type_data = array();
             foreach($types as $t => $data){
-                if(in_array($data['OC'],$attrs['objectClass'])){
+                if(in_array_strict($data['OC'],$attrs['objectClass'])){
                     $type_data = $data;
                     break;
                 }

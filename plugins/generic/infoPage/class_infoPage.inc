@@ -57,7 +57,7 @@ class infoPage extends plugin
     function checkAccess($class)
     {
         foreach($this->ui->ocMapping as $cat => $aclClasses){
-            if(in_array($class, $aclClasses)){
+            if(in_array_strict($class, $aclClasses)){
                 if(preg_match('/[rw]/',$this->ui->get_permissions($this->ui->dn, "{$cat}/{$class}", ''))){
                     return(TRUE);
                 }

@@ -629,14 +629,14 @@ class user extends plugin
     $ui =get_userinfo();
     foreach($this->attributes as $val){
       $smarty->assign("$val", set_post($this->$val));
-      if(in_array($val,$this->multi_boxes)){
+      if(in_array_strict($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
         $smarty->assign("use_".$val,FALSE);
       }
     }
     foreach(array("base","pw_storage","edit_picture") as $val){
-      if(in_array($val,$this->multi_boxes)){
+      if(in_array_strict($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
         $smarty->assign("use_".$val,FALSE);
@@ -753,7 +753,7 @@ class user extends plugin
     // Update 'manager' attributes from gosaDepartment and inetOrgPerson
     $filter = "(&(objectClass=inetOrgPerson)(manager=".LDAP::prepare4filter($this->dn)."))";
     $ocs = $ldap->get_objectclasses();
-    if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['gosaDepartment']['MAY'])){
+    if(isset($ocs['gosaDepartment']['MAY']) && in_array_strict('manager', $ocs['gosaDepartment']['MAY'])){
       $filter = "(|".$filter."(&(objectClass=gosaDepartment)(manager=".LDAP::prepare4filter($this->dn).")))";
     }
     $leaf_deps=  get_list($filter,array("all"),$this->config->current['BASE'],
@@ -1387,7 +1387,7 @@ class user extends plugin
       return(FALSE);
     }else{
 
-      if(in_array("pw_storage",$this->multi_boxes)){
+      if(in_array_strict("pw_storage",$this->multi_boxes)){
         return(TRUE);
       }
       return($this->pw_storage != $this->last_pw_storage && !$this->is_template);
@@ -1509,7 +1509,7 @@ class user extends plugin
       /* Walk through govattrs */
       foreach ($this->govattrs as $val){
 
-        if (in_array($val, $skip)){
+        if (in_array_strict($val, $skip)){
           continue;
         }
 
@@ -1755,10 +1755,10 @@ class user extends plugin
   function get_multi_edit_values()
   {
     $ret = plugin::get_multi_edit_values();
-    if(in_array("pw_storage",$this->multi_boxes)){
+    if(in_array_strict("pw_storage",$this->multi_boxes)){
       $ret['pw_storage'] = $this->pw_storage;
     }
-    if(in_array("edit_picture",$this->multi_boxes)){
+    if(in_array_strict("edit_picture",$this->multi_boxes)){
       $ret['jpegPhoto'] = $this->jpegPhoto;
       $ret['photoData'] = $this->photoData;
       $ret['old_jpegPhoto'] = $this->old_jpegPhoto;
@@ -1771,7 +1771,7 @@ class user extends plugin
       unset($ret['cn']);
     }
     $ret['is_modified'] = $this->is_modified;
-    if(in_array("base",$this->multi_boxes)){
+    if(in_array_strict("base",$this->multi_boxes)){
       $ret['orig_base']="Changed_by_Multi_Plug";
       $ret['base']=$this->base;
     }
@@ -1838,25 +1838,25 @@ class user extends plugin
     if($this->dn == "new") {
       $this->set_acl_base($this->base);
     }
-    if (!tests::is_url($this->labeledURI) && in_array("labeledURI",$this->multi_boxes)){
+    if (!tests::is_url($this->labeledURI) && in_array_strict("labeledURI",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Homepage"));
     }
-    if (!tests::is_phone_nr($this->telephoneNumber) && in_array("telephoneNumber",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->telephoneNumber) && in_array_strict("telephoneNumber",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Phone"), $this->telephoneNumber, "/[\/0-9 ()+*-]/");
     }
-    if (!tests::is_phone_nr($this->facsimileTelephoneNumber) &&  in_array("facsimileTelephoneNumber",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->facsimileTelephoneNumber) &&  in_array_strict("facsimileTelephoneNumber",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Fax"), $this->facsimileTelephoneNumber, "/[\/0-9 ()+*-]/");
     }
-    if (!tests::is_phone_nr($this->mobile) && in_array("mobile",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->mobile) && in_array_strict("mobile",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Mobile"), $this->mobile, "/[\/0-9 ()+*-]/");
     }
-    if (!tests::is_phone_nr($this->pager) && in_array("pager",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->pager) && in_array_strict("pager",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Pager"), $this->pager, "/[\/0-9 ()+*-]/");
     }
-    if (preg_match ('/[,+"?\'()=<>;\\\\]/', $this->givenName) && in_array("givenName",$this->multi_boxes)){
+    if (preg_match ('/[,+"?\'()=<>;\\\\]/', $this->givenName) && in_array_strict("givenName",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Given name"), $this->giveName, '/[^,+"?\'()=<>;\\\\]/');
     }
-    if (preg_match ('/[,+"?\'()=<>;\\\\]/', $this->sn) && in_array("sn",$this->multi_boxes)){
+    if (preg_match ('/[,+"?\'()=<>;\\\\]/', $this->sn) && in_array_strict("sn",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Name"), $this->sn, '/[^,+"?\'()=<>;\\\\]/');
     }
     return($message);
@@ -1922,7 +1922,7 @@ class user extends plugin
 
     // Update loginRestrictions, keep my settings while ip is optional
     foreach($attrs['gosaLoginRestriction_some'] as $ip){
-      if(in_array($ip, $this->gosaLoginRestriction) && in_array($ip, $attrs['gosaLoginRestriction'])){
+      if(in_array_strict($ip, $this->gosaLoginRestriction) && in_array_strict($ip, $attrs['gosaLoginRestriction'])){
         $lR[] = $ip;
       }
     }
@@ -1945,7 +1945,7 @@ class user extends plugin
     $data = array();
     foreach($all as $ip){
       $data['data'][] = $ip;
-      if(!in_array($ip, $this->gosaLoginRestriction)){
+      if(!in_array_strict($ip, $this->gosaLoginRestriction)){
         $data['displayData'][] = array('mode' => LIST_MARKED , 'data' => array($ip.' ('._("Entries differ").')'));
       }else{
         $data['displayData'][] = array('mode' => 0 , 'data' => array($ip));

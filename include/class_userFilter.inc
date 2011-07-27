@@ -228,8 +228,8 @@ class userFilter extends plugin
  
         // The filter is visible if it is shared or if is one of our own creations.
         //  ... and enabled.
-        $visible = in_array('enable', $tmp['flags']) && 
-          ($attrs['dn'] == $ui->dn || in_array('share', $tmp['flags']));
+        $visible = in_array_strict('enable', $tmp['flags']) && 
+          ($attrs['dn'] == $ui->dn || in_array_strict('share', $tmp['flags']));
          
         // Add filter if it matches the category list
         if($visible && (count($category) == 0 || array_intersect($category, $tmp['categories']))){ 

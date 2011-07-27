@@ -252,7 +252,7 @@ class aclResolver
                                 $ldap->cat($gdn,array('memberUid'));
                                 if($ldap->count()){
                                     $attrs = $ldap->fetch();
-                                    if(isset($attrs['memberUid']) && in_array($this->validateUid, $attrs['memberUid'])){
+                                    if(isset($attrs['memberUid']) && in_array_strict($this->validateUid, $attrs['memberUid'])){
                                         $found = TRUE;
                                         $groups[] = $name;
                                         continue;

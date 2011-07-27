@@ -116,7 +116,7 @@ class tabs
     $baseobject= NULL;
     foreach($this->by_object as $name => $object){
       $class = get_class($object);
-      if(in_array($class,array("reference","acl"))) continue;
+      if(in_array_strict($class,array("reference","acl"))) continue;
       if ($baseobject === NULL){
         $baseobject= new $class($this->config, $this->dn);
         $baseobject->enable_CSN_check();

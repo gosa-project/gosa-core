@@ -137,7 +137,7 @@ class department extends plugin
         // If the 'manager' attribute is present in gosaDepartment allow to manage it.
         $ldap = $this->config->get_ldap_link();
         $ocs = $ldap->get_objectclasses();
-        if(isset($ocs['gosaDepartment']['MAY']) && in_array('manager', $ocs['gosaDepartment']['MAY'])){
+        if(isset($ocs['gosaDepartment']['MAY']) && in_array_strict('manager', $ocs['gosaDepartment']['MAY'])){
             $this->manager_enabled = TRUE;
 
             // Detect the managers name

@@ -71,7 +71,7 @@ class objectSelect extends management
     static function filterDepLabel($row,$dn,$pid,$base,$objectClass, $cn)
     {
         $cn = $cn[0];
-        if(!in_array('gosaDepartment', $objectClass)){
+        if(!in_array_strict('gosaDepartment', $objectClass)){
             return($cn);
         }
         if($dn == $base){

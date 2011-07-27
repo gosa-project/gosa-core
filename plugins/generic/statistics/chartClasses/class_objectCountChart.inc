@@ -21,7 +21,7 @@ class objectCountChart extends statChart
         $seriesCnt = 0;
 
         foreach($gData['objectCountPerInterval'] as $category => $count){
-            if(empty($category) || in_array($category, $this->skipSeries)) continue;
+            if(empty($category) || in_array_strict($category, $this->skipSeries)) continue;
 
             // Add results to our data set.
             $dataSet->AddPoint($count, $category);

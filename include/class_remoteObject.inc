@@ -99,25 +99,25 @@ class remoteObject
         if(preg_match("/^get/", $name)){
             $varName = ucfirst(preg_replace("/^get/","", $name));
             $varName2 = lcfirst($varName);
-            if(in_array($varName, $this->properties)){
+            if(in_array_strict($varName, $this->properties)){
                 $force = isset($args[0]) && $args[0];
                 return($this->__getProperty($varName, $force));
-            }elseif(in_array($varName2, $this->properties)){
+            }elseif(in_array_strict($varName2, $this->properties)){
                 $force = isset($args[0]) && $args[0];
                 return($this->__getProperty($varName2, $force));
             } 
         }elseif(preg_match("/^set/", $name)){
             $varName = ucfirst(preg_replace("/^set/","", $name));
             $varName2 = lcfirst($varName);
-            if(in_array($varName, $this->properties)){
+            if(in_array_strict($varName, $this->properties)){
                 return($this->__setProperty($varName, $args[0]));
-            }elseif(in_array($varName2, $this->properties)){
+            }elseif(in_array_strict($varName2, $this->properties)){
                 return($this->__setProperty($varName2, $args[0]));
             }
         }
 
         // Forward to the call to the backend.
-        if(in_array($name, $this->methods)){
+        if(in_array_strict($name, $this->methods)){
             $this->lastError = "";
             $this->success = TRUE;
             $fArgs = array();
@@ -160,7 +160,7 @@ class remoteObject
     function __set($varName, $value)
     {
         // Set property value
-        if(in_array($varName, $this->properties)){
+        if(in_array_strict($varName, $this->properties)){
             return($this->__setProperty($varName, $value));
         }
 
@@ -181,7 +181,7 @@ class remoteObject
      */
     function __get($varName)
     {
-        if(in_array($varName, $this->properties)){
+        if(in_array_strict($varName, $this->properties)){
             return($this->__getProperty($varName));
         }
 

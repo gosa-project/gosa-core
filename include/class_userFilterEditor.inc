@@ -42,8 +42,8 @@ class userFilterEditor extends plugin
                 $this->queries[] = $query;
             }
             $this->selectedCategories = $entry['categories'];
-            $this->share = in_array("share",$entry['flags']);
-            $this->enable = in_array("enable",$entry['flags']);
+            $this->share = in_array_strict("share",$entry['flags']);
+            $this->enable = in_array_strict("enable",$entry['flags']);
         }
         $this->orig_name = $this->name;
 

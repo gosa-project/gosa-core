@@ -84,7 +84,7 @@ class DynamicLdapGroup extends plugin
             list($base,$attr,$scope,$filter) = preg_split("/\?/",$entry); 
             
             // Ignore entries that do not have a valid scope value (one,base,sub)
-            if(!in_array($scope,array('base','one','sub'))) continue;
+            if(!in_array_strict($scope,array('base','one','sub'))) continue;
 
             // Append parsed uri
             $scope = array_search($scope,$this->scopes);
@@ -130,7 +130,7 @@ class DynamicLdapGroup extends plugin
             // Check for invalid attributes
             if(empty($entry['attr'])){
                 $messages[] = msgPool::required(_("Attribute")." {$nr}");
-            }elseif(in_array(strtolower($entry['attr']), array('objectclass'))){
+            }elseif(in_array_strict(strtolower($entry['attr']), array('objectclass'))){
                 $messages[] = msgPool::reserved(_("Attribute")." {$nr}");
             }
 

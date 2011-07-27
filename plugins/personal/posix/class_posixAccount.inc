@@ -134,7 +134,7 @@ class posixAccount extends plugin
 
       /* Correct is_account. shadowAccount is not required. */
       if (isset($this->attrs['objectClass']) &&
-          in_array ('posixAccount', $this->attrs['objectClass'])){
+          in_array_strict('posixAccount', $this->attrs['objectClass'])){
 
         $this->is_account= TRUE;
       }
@@ -226,7 +226,7 @@ class posixAccount extends plugin
     }
 
     /* Insert possibly missing loginShell */
-    if ($this->loginShell != "" && !in_array($this->loginShell, $this->loginShellList)){
+    if ($this->loginShell != "" && !in_array_strict($this->loginShell, $this->loginShellList)){
       $this->loginShellList[]= $this->loginShell;
     }
 
@@ -494,7 +494,7 @@ class posixAccount extends plugin
     $smarty->assign("force_idsACL", $this->getacl("uidNumber").$this->getacl("gidNumber"));
 
     foreach(array("primaryGroup","activate_shadowWarning","activate_shadowInactive","activate_shadowMin","activate_shadowMax","activate_shadowExpire","mustchangepassword") as $val){
-      if(in_array($val,$this->multi_boxes)){
+      if(in_array_strict($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
         $smarty->assign("use_".$val,FALSE);
@@ -504,7 +504,7 @@ class posixAccount extends plugin
 
     /* Load attributes and acl's */
     foreach($this->attributes as $val){
-      if(in_array($val,$this->multi_boxes)){
+      if(in_array_strict($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
         $smarty->assign("use_".$val,FALSE);
@@ -974,47 +974,47 @@ class posixAccount extends plugin
   function multiple_check()
   {
     $message = plugin::multiple_check();
-    if ($this->homeDirectory == "" && in_array("homeDirectory",$this->multi_boxes)){
+    if ($this->homeDirectory == "" && in_array_strict("homeDirectory",$this->multi_boxes)){
       $message[]= msgPool::required(_("Home directory"));
     }
-    if (!tests::is_path($this->homeDirectory) && in_array("homeDirectory",$this->multi_boxes)){
+    if (!tests::is_path($this->homeDirectory) && in_array_strict("homeDirectory",$this->multi_boxes)){
       $message[]= msgPool::invalid(_("Home directory"), "", "", "/home/yourname" );
     }
 
     /* Check shadow settings, well I like spaghetties... */
-    if ($this->activate_shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
+    if ($this->activate_shadowMin && in_array_strict("activate_shadowMin",$this->multi_boxes)){
       if (!tests::is_id($this->shadowMin)){
         $message[]= msgPool::invalid(_("shadowMin"), $this->shadowMin, "/[0-9]/");
       }
     }
-    if ($this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
+    if ($this->activate_shadowMax && in_array_strict("activate_shadowMax",$this->multi_boxes)){
       if (!tests::is_id($this->shadowMax)){
         $message[]= msgPool::invalid(_("shadowMax"), $this->shadowMax, "/[0-9]/");
       }
     }
-    if ($this->activate_shadowWarning && in_array("activate_shadowWarning",$this->multi_boxes)){
+    if ($this->activate_shadowWarning && in_array_strict("activate_shadowWarning",$this->multi_boxes)){
       if (!tests::is_id($this->shadowWarning)){
         $message[]= msgPool::invalid(_("shadowWarning"), $this->shadowWarning, "/[0-9]/");
       }
-      if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
+      if (!$this->activate_shadowMax && in_array_strict("activate_shadowMax",$this->multi_boxes)){
         $message[]= msgPool::depends("shadowWarning", "shadowMax");
       }
-      if ($this->shadowWarning > $this->shadowMax && in_array("activate_shadowWarning",$this->multi_boxes)){
+      if ($this->shadowWarning > $this->shadowMax && in_array_strict("activate_shadowWarning",$this->multi_boxes)){
         $message[]= msgPool::toobig("shadowWarning", "shadowMax");
       }
-      if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
+      if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin && in_array_strict("activate_shadowMin",$this->multi_boxes)){
         $message[]= msgPool::tosmall("shadowWarning", "shadowMin");
       }
     }
-    if ($this->activate_shadowInactive && in_array("activate_shadowInactive",$this->multi_boxes)){
+    if ($this->activate_shadowInactive && in_array_strict("activate_shadowInactive",$this->multi_boxes)){
       if (!tests::is_id($this->shadowInactive)){
         $message[]= msgPool::invalid(_("shadowInactive"), $this->shadowInactive, "/[0-9]/");
       }
-      if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
+      if (!$this->activate_shadowMax && in_array_strict("activate_shadowMax",$this->multi_boxes)){
         $message[]= msgPool::depends("shadowInactive", "shadowMax");
       }
     }
-    if ($this->activate_shadowMin && $this->activate_shadowMax && in_array("activate_shadowMin",$this->multi_boxes)){
+    if ($this->activate_shadowMin && $this->activate_shadowMax && in_array_strict("activate_shadowMin",$this->multi_boxes)){
       if ($this->shadowMin > $this->shadowMax){
         $message[]= msgPool::toobig("shadowMin", "shadowMax");
       }
@@ -1393,17 +1393,17 @@ class posixAccount extends plugin
     $ret['groupMembership']     = $this->groupMembership;
     $ret['groupMembership_some']= $this->groupMembership_some;
 
-    if(in_array("primaryGroup",$this->multi_boxes)){
+    if(in_array_strict("primaryGroup",$this->multi_boxes)){
       $ret['primaryGroup'] = $this->primaryGroup;
     }
     foreach(array("shadowWarning","shadowInactive","shadowMin","shadowMax", "shadowExpire") as $entry){
       $active = "activate_".$entry;
-      if(in_array($active,$this->multi_boxes)){
+      if(in_array_strict($active,$this->multi_boxes)){
         $ret[$entry] = $this->$entry;
         $ret[$active] = $this->$active;
       }
     }
-    if(in_array("mustchangepassword",$this->multi_boxes)){
+    if(in_array_strict("mustchangepassword",$this->multi_boxes)){
       $ret['mustchangepassword'] = $this->mustchangepassword;
     }
     return($ret);
@@ -1435,7 +1435,7 @@ class posixAccount extends plugin
       foreach(array("shadowMin","shadowMax","shadowExpire","shadowInactive","shadowWarning") as $var) {
         if($this->acl_is_writeable($var)){
           $activate_var = "activate_".$var;
-          if(in_array($activate_var, $this->multi_boxes)){
+          if(in_array_strict($activate_var, $this->multi_boxes)){
             if(isset($_POST['activate_'.$var])){
               $this->$activate_var  = true;
               $this->$var      = get_post($var);
@@ -1448,7 +1448,7 @@ class posixAccount extends plugin
       }
 
       /* Restore shadow value, if the shadow attribute isn't used */
-      if(!in_array("activate_shadowExpire",$this->multi_boxes)){
+      if(!in_array_strict("activate_shadowExpire",$this->multi_boxes)){
         $this->shadowExpire = $expire_tmp;
       }
 
@@ -1521,7 +1521,7 @@ class posixAccount extends plugin
     $groups_all = $groups_some;
     foreach($groups_all as $id => $group){
       foreach($uids as $uid){
-        if(!in_array($uid,$groups_uid[$id])){
+        if(!in_array_strict($uid,$groups_uid[$id])){
           unset($groups_all[$id]);
           break;
         }

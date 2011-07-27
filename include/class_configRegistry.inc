@@ -334,7 +334,7 @@ class configRegistry{
                     if(count($info) > 2){
                         foreach($info as $name => $value){
                             
-                            if(!in_array($name, array('CLASS','NAME'))){
+                            if(!in_array_strict($name, array('CLASS','NAME'))){
                                 $class= $info['CLASS'];    
                                 $this->fileStoredProperties[$class][strtolower($name)] = $value;
                             }
@@ -355,7 +355,7 @@ class configRegistry{
                 
                     if(count($entry) > 2 ){
                         foreach($entry as $name => $value){
-                            if(!in_array($name, array('CLASS','ACL'))){
+                            if(!in_array_strict($name, array('CLASS','ACL'))){
                                 $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
                             }
                         }
@@ -375,7 +375,7 @@ class configRegistry{
 
                 if(count($entry) > 2 ){
                     foreach($entry as $name => $value){
-                        if(!in_array($name, array('CLASS','ACL'))){
+                        if(!in_array_strict($name, array('CLASS','ACL'))){
                             $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
                         }
                     }
@@ -567,7 +567,7 @@ class configRegistry{
         foreach($this->properties as $prop){
 
             // Is this property modified
-            if(in_array($prop->getStatus(),array('modified','removed'))){
+            if(in_array_strict($prop->getStatus(),array('modified','removed'))){
 
                 // Check if we've to migrate something before we can make the changes effective. 
                 if($prop->migrationRequired()){
@@ -681,7 +681,7 @@ class gosaProperty
 
     static function isBool($message,$class,$name,$value, $type)
     {
-        $match = in_array($value,array('true','false',''));
+        $match = in_array_strict($value,array('true','false',''));
 
         // Display the reason for failing this check.         
         if($message && ! $match){
@@ -912,7 +912,7 @@ class gosaProperty
 
     function setValue($str) 
     {
-        if(in_array($this->getStatus(), array('modified'))){
+        if(in_array_strict($this->getStatus(), array('modified'))){
             $this->tmp_value = $str; 
         }elseif($this->value != $str){
             $this->setStatus('modified'); 
@@ -923,7 +923,7 @@ class gosaProperty
     function getValue($temporary = FALSE) 
     { 
         if($temporary){
-            if(in_array($this->getStatus(), array('modified','removed'))){
+            if(in_array_strict($this->getStatus(), array('modified','removed'))){
                 return($this->tmp_value); 
             }else{
                 return($this->value); 
@@ -945,7 +945,7 @@ class gosaProperty
 
     function restoreDefault() 
     {
-        if(in_array($this->getStatus(),array('ldap'))){
+        if(in_array_strict($this->getStatus(),array('ldap'))){
             $this->setStatus('removed'); 
 
             // Second check for values in the config file.
@@ -1024,7 +1024,7 @@ class gosaProperty
 
     private function setStatus($state) 
     {
-        if(!in_array($state, array('ldap','file','undefined','modified','removed'))) {
+        if(!in_array_strict($state, array('ldap','file','undefined','modified','removed'))) {
             trigger_error("Unknown property status given '{$state}' for {$this->class}:{$this->name}!");
         }else{
             $this->status = $state; 
