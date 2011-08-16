@@ -1,5 +1,9 @@
 GOsa2 changelog
 ===============
+
+* gosa 2.7.2
+   - Updated bundeled smarty to 3.0.8
+
 * gosa 2.7.1
   - Updated passwordHook behaviour
   - Readded sambaKickoffTime to samba tab.
