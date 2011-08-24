@@ -29,6 +29,7 @@ class password extends plugin
   var $proposal = "";
   var $proposalEnabled = FALSE;
   var $proposalSelected = FALSE;
+  var $proposalInitialized = FALSE;
 
   var $forcedHash = NULL;
 
@@ -37,12 +38,6 @@ class password extends plugin
   {
       plugin::plugin($config, $dn, $parent);
 
-      // Try to generate a password proposal, if this is successfull
-      //  then preselect the proposal usage.
-      $this->refreshProposal();
-      if($this->proposal != ""){
-          $this->proposalSelected = TRUE;
-      }
   }
 
   function forceHash($hash)
@@ -58,6 +53,16 @@ class password extends plugin
 
   function execute()
   {
+      // Try to generate a password proposal, if this is successfull
+      //  then preselect the proposal usage.
+      if(!$this->proposalInitialized){
+          $this->refreshProposal();
+          if($this->proposal != ""){
+              $this->proposalSelected = TRUE;
+          }
+          $this->proposalInitialized = TRUE;
+      }
+
     plugin::execute();
     $smarty = get_smarty();
     $smarty->assign("usePrototype", "true");
