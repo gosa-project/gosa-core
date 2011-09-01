@@ -2907,9 +2907,14 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $attrs= array();
         if (!$mode && !empty($tmp)){
             $attrs= generate_smb_nt_hash($password);
-            $shadow = (isset($attrs["shadowLastChange"][0]))?(int)(date("U") / 86400):0;
-            if ($shadow != 0){
-                $attrs['shadowLastChange']= $shadow;
+            if(!count($attrs) || !is_array($attrs)){
+                msg_dialog::display(tr("Error"),tr("Cannot generate SAMBA hash!"),ERROR_DIALOG);
+                return(FALSE);    
+            }else{
+                $shadow = (isset($attrs["shadowLastChange"][0]))?(int)(date("U") / 86400):0;
+                if ($shadow != 0){
+                    $attrs['shadowLastChange']= $shadow;
+                }
             }
         }
 
@@ -3063,7 +3068,7 @@ function generate_smb_nt_hash($password)
     $hash = $rpc->mksmbhash($password);
     if(!$rpc->success()){
         msg_dialog::display(_("Error"),msgPool::rpcError($rpc->get_error()),ERROR_DIALOG);
-        return("");
+        return(array());
     }
 
   }elseif ($config->get_cfg_value("core","gosaSupportURI") != ""){
@@ -3093,7 +3098,7 @@ function generate_smb_nt_hash($password)
 
     if ($hash == "") {
       msg_dialog::display(_("Configuration error"), sprintf(_("Generating SAMBA hash by running %s failed: check %s!"), bold($config->get_cfg_value("core",'sambaHashHook'), bold("sambaHashHook"))), ERROR_DIALOG);
-      return ("");
+      return(array());
     }
   }
 
