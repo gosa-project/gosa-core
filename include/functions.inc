@@ -3024,9 +3024,9 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
     // Update shadow timestamp?
     if (isset($attrs["shadowLastChange"][0])){
-      $shadow= (int)(date("U") / 86400);
+        $shadow= (int)(date("U") / 86400);
     } else {
-      $shadow= 0;
+        $shadow= 0;
     }
 
     // Write back modified entry
@@ -3039,9 +3039,14 @@ function change_password ($dn, $password, $mode=0, $hash= "")
         // Create SMB Password
         if ($config->get_cfg_value('sambaHashHook', NULL)) { 
             $attrs= generate_smb_nt_hash($password);
-
-            if ($shadow != 0){
-                $attrs['shadowLastChange']= $shadow;
+            if(!count($attrs) || !is_array($attrs)){
+                msg_dialog::display(tr("Error"),tr("Cannot generate SAMBA hash!"),ERROR_DIALOG);
+                return(FALSE);    
+            }else{
+                $shadow = (isset($attrs["shadowLastChange"][0]))?(int)(date("U") / 86400):0;
+                if ($shadow != 0){
+                    $attrs['shadowLastChange']= $shadow;
+                }
             }
         }
     }
@@ -3113,7 +3118,7 @@ function generate_smb_nt_hash($password)
 
     if ($hash == "") {
       msg_dialog::display(_("Configuration error"), _("Cannot generate samba hash!"), ERROR_DIALOG);
-      return ("");
+      return (array());
     }
   } else {
 	  $tmp= $config->get_cfg_value('sambaHashHook')." ".escapeshellarg($password);
@@ -3126,7 +3131,7 @@ function generate_smb_nt_hash($password)
 
     if ($hash == "") {
       msg_dialog::display(_("Configuration error"), sprintf(_("Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"),$config->get_cfg_value('sambaHashHook')), ERROR_DIALOG);
-      return ("");
+      return (array());
     }
   }
 
