@@ -29,19 +29,13 @@ class password extends plugin
     var $proposal = "";
     var $proposalEnabled = FALSE;
     var $proposalSelected = FALSE;
+    var $proposalInitialized = FALSE;
 
     var $forcedHash = NULL;
 
     function password(&$config, $dn= NULL, $parent= NULL)
     {
         plugin::plugin($config, $dn, $parent);
-
-        // Try to generate a password proposal, if this is successfull 
-        //  then preselect the proposal usage. 
-        $this->refreshProposal();
-        if($this->proposal != ""){
-            $this->proposalSelected = TRUE;
-        }
     }
 
     
@@ -63,6 +57,17 @@ class password extends plugin
         plugin::execute();
         $smarty = get_smarty();
         $ui = get_userinfo();
+
+
+        // Try to generate a password proposal, if this is successfull 
+        //  then preselect the proposal usage. 
+        if(!$this->proposalInitialized){
+            $this->refreshProposal();
+            if($this->proposal != ""){
+                $this->proposalSelected = TRUE;
+            }
+            $this->proposalInitialized = TRUE;
+        }
 
         /* Get acls */
         $password_ACLS = $ui->get_permissions($ui->dn,"users/password");

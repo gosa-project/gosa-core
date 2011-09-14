@@ -96,18 +96,25 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
                                 "\n\n".
                                 "*** PHP error information ***\n\n");
       }
-    
-    if (session::is_set('js') && session::get('js')==FALSE){
+   
+     
+    if (class_exists('session') && session::is_set('js') && session::get('js')==FALSE){
       $error_collector= "<div>";
     } else {
+
+        $warning_image = (is_callable('image')) ? 
+            image('images/toolbar-warning.png') : "<image src='images/toolbar-warning.png' border=0>";
+        $mailto_image = (is_callable('image')) ? 
+            image('images/mailto.png') : "<image src='images/mailto.png' border=0>";
+
         $error_collector= "
         <table summary=\"\" class='error-collector'>
           <tr>
-           <td style='width:32px'>".image('images/toolbar-warning.png')."</td>
+           <td style='width:32px'>{$warning_image}</td>
            <td><span>"._("Generating this page caused the PHP interpreter to raise some errors!")."</span></td>
            <td align='right'>
             <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
-                ".image('images/mailto.png')."&nbsp;"._("Send bug report")."
+                {$mailto_image}&nbsp;"._("Send bug report")."
             </a>
            </td>
            <td align='right'>

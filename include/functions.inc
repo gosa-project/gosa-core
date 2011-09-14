@@ -73,7 +73,7 @@ define('DES3_CBC_MD5',5);
 define('DES3_CBC_SHA1',16);
 
 /* Include required files */
-require_once("class_location.inc");
+include_once("class_location.inc");
 require_once ("functions_debug.inc");
 require_once ("accept-to-gettext.inc");
 
@@ -2890,9 +2890,14 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $attrs= array();
         if (!$mode && !empty($tmp)){
             $attrs= generate_smb_nt_hash($password);
-            $shadow = (isset($attrs["shadowLastChange"][0]))?(int)(date("U") / 86400):0;
-            if ($shadow != 0){
-                $attrs['shadowLastChange']= $shadow;
+            if(!count($attrs) || !is_array($attrs)){
+                msg_dialog::display(tr("Error"),tr("Cannot generate SAMBA hash!"),ERROR_DIALOG);
+                return(FALSE);    
+            }else{
+                $shadow = (isset($attrs["shadowLastChange"][0]))?(int)(date("U") / 86400):0;
+                if ($shadow != 0){
+                    $attrs['shadowLastChange']= $shadow;
+                }
             }
         }
 
@@ -3046,7 +3051,7 @@ function generate_smb_nt_hash($password)
     $hash = $rpc->mksmbhash($password);
     if(!$rpc->success()){
         msg_dialog::display(_("Error"),msgPool::rpcError($rpc->get_error()),ERROR_DIALOG);
-        return("");
+        return(array());
     }
 
   }elseif ($config->get_cfg_value("core","gosaSupportURI") != ""){
@@ -3076,7 +3081,7 @@ function generate_smb_nt_hash($password)
 
     if ($hash == "") {
       msg_dialog::display(_("Configuration error"), sprintf(_("Generating SAMBA hash by running %s failed: check %s!"), bold($config->get_cfg_value("core",'sambaHashHook'), bold("sambaHashHook"))), ERROR_DIALOG);
-      return ("");
+      return(array());
     }
   }
 
@@ -3533,6 +3538,9 @@ function image($path, $action= "", $title= "", $align= "middle")
   $label= null;
 
   // Bail out, if there's no style file
+  if(!class_exists('session')){
+    return "";    
+  }
   if(!session::global_is_set("img-styles")){
 
     // Get theme
