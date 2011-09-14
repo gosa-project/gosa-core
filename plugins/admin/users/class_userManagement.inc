@@ -274,8 +274,8 @@ class userManagement extends management
             $ldap->cat($this->dn);
             $attrs = $ldap->fetch();
             $this->passwordChangeForceable = 
-                    in_array('sambaAccount', $attrs['objectClass']) || 
-                    (in_array('posixAccount', $attrs['objectClass']) && isset($attrs['shadowMax']));
+                    in_array_strict('sambaAccount', $attrs['objectClass']) || 
+                    (in_array_strict('posixAccount', $attrs['objectClass']) && isset($attrs['shadowMax']));
             $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
             $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
 
@@ -363,8 +363,8 @@ class userManagement extends management
                     $ldap->cd($this->config->current['BASE']);
                     $ldap->cat($this->dn);
                     $attrs = $ldap->fetch();
-                    $samba = in_array('sambaSamAccount', $attrs['objectClass']);
-                    $posix = in_array('posixAccount', $attrs['objectClass']);
+                    $samba = in_array_strict('sambaSamAccount', $attrs['objectClass']);
+                    $posix = in_array_strict('posixAccount', $attrs['objectClass']);
 
                     // Update the posix shadow flag...
                     if($posix){

@@ -78,11 +78,11 @@ class trustModeDialog extends plugin
         if($ldap->count() != 0){
             $attrs = $ldap->fetch();
             $img = $desc = "";
-            if(in_array("gotoWorkstation",$attrs['objectClass'])){
+            if(in_array_strict("gotoWorkstation",$attrs['objectClass'])){
                 $img = image('plugins/systems/images/select_workstation.png'); 
-            }elseif(in_array("gotoTerminal",$attrs['objectClass'])){
+            }elseif(in_array_strict("gotoTerminal",$attrs['objectClass'])){
                 $img = image('plugins/systems/images/select_terminal.png'); 
-            }elseif(in_array("goServer",$attrs['objectClass'])){
+            }elseif(in_array_strict("goServer",$attrs['objectClass'])){
                 $img = image('plugins/systems/images/select_server.png'); 
             }
             if(isset($attrs['description'][0])) {
@@ -180,7 +180,7 @@ class trustModeDialog extends plugin
             $smarty->assign("emptyArrAccess",false);
 
 
-        $smarty->assign($smarty->assign("use_trustmode",in_array("trustmode", $this->multi_boxes)));
+        $smarty->assign($smarty->assign("use_trustmode",in_array_strict("trustmode", $this->multi_boxes)));
         $smarty->assign("multiple_support" , $this->multiple_support_active);
 #        $this->trustList->update();
         $smarty->assign("trustList", $this->trustList->render());
@@ -258,7 +258,7 @@ class trustModeDialog extends plugin
     public function get_multi_edit_values()
     {
         $ret = plugin::get_multi_edit_values();
-        if(in_array("trustmode",$this->multi_boxes)){
+        if(in_array_strict("trustmode",$this->multi_boxes)){
             $ret['trustModel'] = $this->trustModel;
             $ret['accessTo'] = $this->accessTo;
         }

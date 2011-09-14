@@ -21,7 +21,7 @@ class categoryActionsOverTime extends statChart
         $dataSet = new pData;  
         $seriesCnt = 0;
         foreach($gData['actionsGraph'] as $category => $entriesPerDate){
-            if(empty($category) || in_array($category, $this->skipSeries)) continue;
+            if(empty($category) || in_array_strict($category, $this->skipSeries)) continue;
 
             // Add results to our data set.
             $dataSet->AddPoint($entriesPerDate, $category);
@@ -44,7 +44,7 @@ class categoryActionsOverTime extends statChart
 
         // Create a dataSet containing all series 
         $allSeriesDataSet = clone $dataSet;
-        if(!in_array('errorsPerInterval', $this->skipSeries)){
+        if(!in_array_strict('errorsPerInterval', $this->skipSeries)){
             $allSeriesDataSet->AddPoint($gData['errorsPerInterval'], 'Errors');
             $allSeriesDataSet->SetSerieName(_('Error'), 'Errors');
             $allSeriesDataSet->AddSerie('Errors');
@@ -86,7 +86,7 @@ class categoryActionsOverTime extends statChart
         // Do we've to add the errors series?
         // If we have to, then add the error-data-series.
         //  and set the color for the new error-series to red.
-        if(!in_array('errorsPerInterval', $this->skipSeries)){
+        if(!in_array_strict('errorsPerInterval', $this->skipSeries)){
 
             // Set the color for the error Series to 'red'. 
             // This has to be done before drawing the legend.
@@ -101,7 +101,7 @@ class categoryActionsOverTime extends statChart
 
         // Draw the error graph on top of the other graphs now.
         // But remove the category-graph before. 
-        if(!in_array('errorsPerInterval', $this->skipSeries)){
+        if(!in_array_strict('errorsPerInterval', $this->skipSeries)){
 
             // Remove all graph series and add the error-series, then draw the new graph.
             // (It is not relevant if it was really added before, so we simply remove all series!)

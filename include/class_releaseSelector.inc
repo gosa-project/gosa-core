@@ -46,7 +46,7 @@ class releaseSelector {
 
         // Generate instance wide unique ID
         $pid = "";
-        while($pid == "" || in_array($pid, $usedIds)){
+        while($pid == "" || in_array_strict($pid, $usedIds)){
 
             // Wait 1 msec to ensure that we definately get a new id
             if($pid != "") usleep(1);

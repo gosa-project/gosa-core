@@ -53,13 +53,13 @@ class remoteObject
         // Check if such an attribute is registered
         if(preg_match("/^get_/", $name)){
             $varName = preg_replace("/^get_/","", $name);
-            if(in_array($varName, $this->properties)){
+            if(in_array_strict($varName, $this->properties)){
                 $force = isset($args[0]) && $args[0];
                 return($this->__getProperty($varName, $force));
             } 
         }elseif(preg_match("/^set_/", $name)){
             $varName = preg_replace("/^set_/","", $name);
-            if(in_array($varName, $this->properties)){
+            if(in_array_strict($varName, $this->properties)){
                 return($this->__setProperty($varName, $args[0]));
             }
         }
@@ -73,7 +73,7 @@ class remoteObject
     function __set($varName, $value)
     {
         // Set property value
-        if(in_array($varName, $this->properties)){
+        if(in_array_strict($varName, $this->properties)){
             return($this->__setProperty($varName, $value));
         }
 
@@ -90,7 +90,7 @@ class remoteObject
 
     function __get($varName)
     {
-        if(in_array($varName, $this->properties)){
+        if(in_array_strict($varName, $this->properties)){
             return($this->__getProperty($varName));
         }
 

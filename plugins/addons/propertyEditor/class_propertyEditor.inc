@@ -131,7 +131,7 @@ class propertyEditor extends management
         // Walk trough all properties and check if we have modified something
         $all = $this->config->configRegistry->getAllProperties();
         foreach($all as $prop){
-            $modified = in_array($prop->getStatus(),array('modified','removed'));
+            $modified = in_array_strict($prop->getStatus(),array('modified','removed'));
             if($modified) break;
         }
        

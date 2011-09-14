@@ -591,7 +591,7 @@ function ldap_login_user ($username, $password)
   if($config->get_cfg_value("core","loginAttribute") != ""){
     $tmp = explode(",", $config->get_cfg_value("core","loginAttribute")); 
     foreach($tmp as $attr){
-      if(in_array($attr,$allowed_attributes)){
+      if(in_array_strict($attr,$allowed_attributes)){
         $verify_attr[] = $attr;
       }
     }
@@ -3503,7 +3503,7 @@ function get_next_id_traditional($attrib, $dn)
     $base= get_base_from_hook($dn, $attrib);
   }
   for ($id= $base; $id++; $id < pow(2,32)){
-    if (!in_array($id, $ids)){
+    if (!in_array_strict($id, $ids)){
       return ($id);
     }
   }
@@ -3920,6 +3920,14 @@ function gosa_fopen($filename, $mode)
     if(move_uploaded_file($filename, $tempfile)){ 
        return fopen( $tempfile, $mode );
     }
+}
+
+
+/*\brief    Our own in_array method which defaults to a strict mode.
+ */
+function in_array_strict($needle, $haystack, $strict = TRUE)
+{
+    return(in_array($needle, $haystack, $strict));
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

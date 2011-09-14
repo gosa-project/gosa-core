@@ -373,7 +373,7 @@ class userinfo
         if(!isset($this->ocMapping[$aclCategory])){
             trigger_error("Invalid ACL category '".$aclCategory."'! ({$object})");
             return("");
-        }elseif(isset($aclClass) && !in_array($aclClass, $this->ocMapping[$aclCategory])){
+        }elseif(isset($aclClass) && !in_array_strict($aclClass, $this->ocMapping[$aclCategory])){
             trigger_error("Invalid ACL class '".$aclClass."'! ({$object})");
             return("");
         }

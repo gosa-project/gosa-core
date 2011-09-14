@@ -104,7 +104,7 @@ class statChart{
         $str = "<input type='hidden' name='{$this->graphName}_posted' value='1'>";
         $list = $this->getSeriesList();
         foreach($list as $key => $item){
-            $checked = (in_array($key, $this->skipSeries))? '': 'checked';
+            $checked = (in_array_strict($key, $this->skipSeries))? '': 'checked';
             $str .= "<span style='padding-right:20px'>".
                     "   <input id='addSeries_{$this->graphName}_{$key}' type='checkbox' ".
                     "       name='addSeries_{$this->graphName}_{$key}' value='1'".

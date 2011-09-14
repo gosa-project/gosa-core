@@ -366,12 +366,12 @@ class statistics extends plugin
         $gData['objectCountPerInterval'] = array(); 
         foreach($res['objectCountPerInterval'] as $category => $data){
             if(empty($category)) continue;
-            if(in_array($category,$mapSystems)){
+            if(in_array_strict($category,$mapSystems)){
                 $category = 'systems';
             }
 
             // Skip series which are not interesting for us
-            if(!in_array($category,array('users','groups','department','systems','ogroups','fai'))){
+            if(!in_array_strict($category,array('users','groups','department','systems','ogroups','fai'))){
                 $category = 'remaining';
             }
 

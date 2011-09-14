@@ -63,7 +63,7 @@ class ogrouptabs extends tabs
                 if(isset($this->by_object['ogroup']->objcache[$dn])){
                     $obj = $this->by_object['ogroup']->objcache[$dn];
                     if(isset($obj['objectClass'])){
-                        if(in_array("goFonAccount",$obj['objectClass'])){
+                        if(in_array_strict("goFonAccount",$obj['objectClass'])){
                             $usePhoneTab = true;
                         }
                     }
@@ -135,7 +135,7 @@ class ogrouptabs extends tabs
                     if(isset($this->by_object['ogroup']->objcache[$dn])){
                         $obj = $this->by_object['ogroup']->objcache[$dn];
                         if(isset($obj['objectClass'])){
-                            if(in_array("goFonAccount",$obj['objectClass'])){
+                            if(in_array_strict("goFonAccount",$obj['objectClass'])){
                                 $this->by_name['phonequeue']= _("Phone queue");
                                 $this->by_object['phonequeue']= new phonequeue($this->config, $this->dn);
                                 $this->by_object['phonequeue']->parent= &$this;

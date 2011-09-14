@@ -4,7 +4,7 @@
 
 // Load supporter class only if FPDF is loaded
 $classes= get_declared_classes();
-if(in_array('FPDF', $classes)) {
+if(in_array_strict('FPDF', $classes)) {
   include('class_PDF.inc');
 }
 
@@ -141,7 +141,7 @@ class pdfExporter
   {
     // Check if class defined
     $classes= get_declared_classes();
-    if(in_array('FPDF', $classes)) {
+    if(in_array_strict('FPDF', $classes)) {
       return array("exportPDF" => array( "label" => _("PDF"), "image" => "images/lists/pdf.png", "class"=> "pdfExporter", "mime" => "application/pdf", "filename" => "export.pdf" ));
     } else {
       return null;

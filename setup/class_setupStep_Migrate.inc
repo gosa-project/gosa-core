@@ -715,7 +715,7 @@ class Step_Migrate extends setup_step
 
         /* Root object doesn't exists 
          */
-        if(!in_array("gosaDepartment",$attrs['objectClass'])){
+        if(!in_array_strict("gosaDepartment",$attrs['objectClass'])){
             if($just_check){
 
                 $this->rootOC_details = array();	
@@ -737,7 +737,7 @@ class Step_Migrate extends setup_step
                 $dep_types = departmentManagement::get_support_departments();
                 $dep_type ="";
                 foreach($dep_types as $dep_name => $dep_class){
-                    if(in_array($dep_class['CLASS'], $attrs['objectClass'])){
+                    if(in_array_strict($dep_class['CLASS'], $attrs['objectClass'])){
                         $dep_type = $dep_name;
                         break;
                     }

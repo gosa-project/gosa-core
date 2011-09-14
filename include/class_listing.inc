@@ -848,11 +848,11 @@ function getObjectType($types, $classes)
         foreach ($ocs as $oc){
             if (preg_match('/^!(.*)$/', $oc, $match)) {
                 $oc= $match[1];
-                if (in_array($oc, $classes)) {
+                if (in_array_strict($oc, $classes)) {
                     $found= false;
                 }
             } else {
-                if (!in_array($oc, $classes)) {
+                if (!in_array_strict($oc, $classes)) {
                     $found= false;
                 }
             }
@@ -932,12 +932,12 @@ function filterActions($dn, $row, $classes)
             $objectclass= $action['objectclass'];
             if (preg_match('/^!(.*)$/', $objectclass, $m)){
                 $objectclass= $m[1];
-                if(in_array($objectclass, $classes)) {
+                if(in_array_strict($objectclass, $classes)) {
                     $result.= image('images/empty.png');
                     continue;
                 }
             } elseif (is_string($objectclass)) {
-                if(!in_array($objectclass, $classes)) {
+                if(!in_array_strict($objectclass, $classes)) {
                     $result.= image('images/empty.png');
                     continue;
                 }
@@ -1403,14 +1403,14 @@ function getDepartments()
 
     // Analyze list of departments
     foreach ($res as $department) {
-        if (!in_array($department['dn'], $validDepartments)) {
+        if (!in_array_strict($department['dn'], $validDepartments)) {
             continue;
         }
 
         // Add the attribute where we use for sorting
         $oc= null;
         foreach(array_keys($types) as $type) {
-            if (in_array($type, $department['objectClass'])) {
+            if (in_array_strict($type, $department['objectClass'])) {
                 $oc= $type;
                 break;
             }

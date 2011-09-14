@@ -131,7 +131,7 @@ class group extends plugin
         }
 
         /* Set mail flag */
-        if (isset($this->attrs['objectClass']) && in_array('gosaMailAccount', $this->attrs['objectClass'])){
+        if (isset($this->attrs['objectClass']) && in_array_strict('gosaMailAccount', $this->attrs['objectClass'])){
             $this->has_mailAccount= TRUE;
         }
 
@@ -423,14 +423,14 @@ class group extends plugin
         $smarty->assign("multiple_support",$this->multiple_support_active);
 
         foreach($this->attributes as $val){
-            if(in_array($val,$this->multi_boxes)){
+            if(in_array_strict($val,$this->multi_boxes)){
                 $smarty->assign("use_".$val,TRUE);
             }else{
                 $smarty->assign("use_".$val,FALSE);
             }
         }
         foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group") as $val){
-            if(in_array($val,$this->multi_boxes)){
+            if(in_array_strict($val,$this->multi_boxes)){
                 $smarty->assign("use_".$val,TRUE);
             }else{
                 $smarty->assign("use_".$val,FALSE);
@@ -1135,7 +1135,7 @@ class group extends plugin
         $ret = array_merge($ret,$this->trustModeDialog->get_multi_edit_values());
 
         foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group") as $attr){    
-            if(in_array($attr,$this->multi_boxes)){
+            if(in_array_strict($attr,$this->multi_boxes)){
                 $ret[$attr] = $this->$attr;
             }
         }
@@ -1169,7 +1169,7 @@ class group extends plugin
 
         if (isset($all['memberUid'])){
             for ($i= 0; $i<$all['memberUid']['count']; $i++){
-                if(!in_array($all['memberUid'][$i],$this->memberUid)){
+                if(!in_array_strict($all['memberUid'][$i],$this->memberUid)){
                     $this->memberUid_used_by_some[$all['memberUid'][$i]]= $all['memberUid'][$i];
                 }
             }
@@ -1250,7 +1250,7 @@ class group extends plugin
         }
 
         // Detect samba groups and adapt its values.
-        $this->smbgroup = in_array('sambaGroupMapping', $source['objectClass']);
+        $this->smbgroup = in_array_strict('sambaGroupMapping', $source['objectClass']);
         if ($this->smbgroup) { 
             $this->sambaSID = $this->getSambaSID(); 
         } 
@@ -1286,7 +1286,7 @@ class group extends plugin
 
         /* Update groupMembership, keep optinal group */
         foreach($attrs['memberUid_used_by_some'] as $uid){
-            if(in_array($uid,$this->memberUid)){
+            if(in_array_strict($uid,$this->memberUid)){
                 $users[$uid] = $uid;
             }
         }

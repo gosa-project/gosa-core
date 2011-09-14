@@ -764,7 +764,7 @@ class LDAP
                     /* Get name of first matching objectClass */
                     $ocname= "";
                     foreach($classes as $class){
-                        if (isset($class['MUST']) && in_array($type, $class['MUST'])){
+                        if (isset($class['MUST']) && in_array_strict($type, $class['MUST'])){
 
                             /* Look for first classes that is structural... */
                             if (isset($class['STRUCTURAL'])){
@@ -965,7 +965,7 @@ class LDAP
 
         // Check scope values
         $scope = trim($scope);
-        if(!empty($scope) && !in_array($scope, array('base', 'one', 'sub', 'children'))){
+        if(!empty($scope) && !in_array_strict($scope, array('base', 'one', 'sub', 'children'))){
             trigger_error(sprintf("Invalid parameter for scope '%s', please use 'base', 'one', 'sub' or 'children'."), $scope);
             return(NULL);
         }
@@ -1280,7 +1280,7 @@ class LDAP
                     $attrs = $this->fetch($srp);
                     foreach($attrs as $name => $value ){
                         if(!is_numeric($name)){
-                            if(in_array($name,array("dn","count"))) continue;
+                            if(in_array_strict($name,array("dn","count"))) continue;
                             if(!isset($data[$name])){
                                 $data[$name] = array();
                             }
@@ -1375,7 +1375,7 @@ class LDAP
 
                     case ')': if ($name != ""){
                                   $v = $this->value2container($value);
-                                  if(in_array($name, array('MUST', 'MAY')) && !is_array($v)){
+                                  if(in_array_strict($name, array('MUST', 'MAY')) && !is_array($v)){
                                       $v = array($v);
                                   }
                                   $objectclasses[$ocname][$name]= $v;
@@ -1394,7 +1394,7 @@ class LDAP
                     case 'MAY':
                               if ($name != ""){
                                   $v = $this->value2container($value);
-                                  if(in_array($name, array('MUST', 'MAY')) && !is_array($v)){
+                                  if(in_array_strict($name, array('MUST', 'MAY')) && !is_array($v)){
                                       $v = array($v);
                                   }
                                   $objectclasses[$ocname][$name]= $v;

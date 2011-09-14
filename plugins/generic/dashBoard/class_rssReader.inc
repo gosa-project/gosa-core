@@ -73,7 +73,7 @@ class rssReader{
     {
 
         // Do not try to sort for invalid attributes.
-        if(!in_array($sortBy, self::$attributes)){
+        if(!in_array_strict($sortBy, self::$attributes)){
             trigger_error("Invalid sortby attribute '{$sortBy}'!");
             return($feedRes);
         }

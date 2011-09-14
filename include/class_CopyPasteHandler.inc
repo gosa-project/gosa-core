@@ -73,7 +73,7 @@ class CopyPasteHandler {
       return(FALSE);
     }
 
-    if(!in_array($action,array("cut","copy"))){
+    if(!in_array_strict($action,array("cut","copy"))){
       trigger_error(sprintf("Specified action %s does not exists for copy & paste.", bold($action)));
       return(FALSE);
     } 
