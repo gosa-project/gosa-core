@@ -450,6 +450,8 @@ class config  {
      */
     function load_servers ()
     {
+        $this->configRegistry->reload();
+
         /* Only perform actions if current is set */
         if ($this->current === NULL){
             return;
@@ -462,7 +464,7 @@ class config  {
         /* Search mailMethod konfiguration in main section too 
          */
         $tmp = $this->get_cfg_value("core","mailMethod");
-        if ($tmp){
+        if ($tmp == ""){
             $ldap->search ("(objectClass=goMailServer)", array('cn'));
             $this->data['SERVERS']['IMAP']= array();
             while ($attrs= $ldap->fetch()){
