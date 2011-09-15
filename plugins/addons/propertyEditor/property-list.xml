@@ -10,6 +10,7 @@
     <module>all</module>
     <label>List of configuration settings</label>
     <defaultSortColumn>1</defaultSortColumn>
+    <noAclChecks>true</noAclChecks>
 
     <objectType>
       <label>Property not used</label>
