@@ -270,7 +270,7 @@ function resizeHandler (e) {
         		contentHeight-= height + 25;
       		}
 
-		if (Prototype.Browser.Gecko || Prototype.Browser.IE) {
+		if (Prototype.Browser.IE) {
 	      		document.getElementById('d_scrollbody').style.height = contentHeight+23+'px';
 	      		document.getElementById('t_nscrollbody').style.height = contentHeight+'px';
 		} else {
