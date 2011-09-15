@@ -119,6 +119,23 @@ $REWRITE= array( "ä" => "ae",
     "ñ" => "ny",
     "Ñ" => "Ny" );
 
+/*! \brief Cyrillic (russian) fonetic transliteration (converts russian letters to ASCII and backward according to GOST 7.79-2000 )
+ *  \param  string 'str' Source string in russian codepage
+ *  \return string Translitered string value.
+ */
+function cyrillic2ascii($str) {
+    $ru = array('а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',  'ъ', 'ы', 'ь', 'э', 'ю', 'я',
+                'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'H', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',  'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 
+                'ґ', 'є', 'ї', 'Ґ', 'Є', 'Ї'
+    );
+    $en = array('a', 'b', 'v', 'g', 'd', 'e', 'jo','zh','z', 'i', 'jj','k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'kh','c', 'ch','sh','shh','"', 'y', '\'','eh','ju','ja',
+                'A', 'B', 'V', 'G', 'D', 'E', 'Jo','Je','Z', 'I', 'Jj','K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'Kh','C', 'CH','SH','Shh','"', 'Y', '\'','Eh','Ju','Ja',
+                'g', 'ye','yi','G', 'Ye','Yi'
+    );
+
+    return str_replace($ru, $en, $str);
+}
+
 
 /*! \brief Does autoloading for classes used in GOsa.
  *
@@ -197,9 +214,9 @@ function make_seed() {
 }
 
 
-/*! \brief Debug level action 
+/*! \brief DEBUG level action 
  *
- * Print a DEBUG level if specified debug level of the level matches the 
+ * print a DEBUG level if specified debug level of the level matches the 
  * the configured debug level.
  *
  * \param int 'level' The log level of the message (should use the constants,
@@ -3718,7 +3735,7 @@ function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
     // Get all matching parts of the given string and sort them by
     //  length, to avoid replacing strings like '%uidNumber' with 'uid'
     //  instead of 'uidNumber'; The longest tring at first.
-    preg_match_all('/(\{?%([a-z0-9]+)(\[(([0-9]+)(\-([0-9]+))?)\])?\}?)/i', $str ,$matches, PREG_SET_ORDER);
+    preg_match_all('/(\{?%([a-z0-9_]+)(\[(([0-9_]+)(\-([0-9_]+))?)\])?\}?)/i', $str ,$matches, PREG_SET_ORDER);
     $hits = array();
     foreach($matches as $match){
         $hits[strlen($match[2]).$match[0]] = $match;
@@ -3770,13 +3787,20 @@ function gen_uids($rule, $attributes)
     $ldap = $config->get_ldap_link();
     $ldap->cd($config->current['BASE']);
 
-
+    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $rule, "Processing");
+    
     // Strip out non ascii chars
     foreach($attributes as $name => $value){
-        $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);
+        if ( $config->get_cfg_value("core", "forceTranslit") == "true" ) {
+             $value = cyrillic2ascii($value);
+        } else {
+             $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);
+        }
         $value = preg_replace('/[^(\x20-\x7F)]*/','',$value);
         $attributes[$name] = strtolower($value);
     }
+    
+    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $attributes, "Prepare");
 
     // Search for '{%...[n-m]}
     // Get all matching parts of the given string and sort them by
@@ -3813,12 +3837,12 @@ function gen_uids($rule, $attributes)
     // Create proposal array
     $rules = array($rule);
     foreach($replacements as $tag => $values){
-        $rules = gen_uid_proposals($rules, $tag,$values);
+        $rules = gen_uid_proposals($rules, $tag, $values);
     }
     
 
     // Search for id tags {id:3} / {id#3}
-    preg_match_all('/\{id(#|:)([0-9])+\}/i', $rule ,$matches, PREG_SET_ORDER);
+    preg_match_all('/\{id(#|:)([0-9])+\}/i', $rule, $matches, PREG_SET_ORDER);
     $idReplacements = array();
     foreach($matches as $match){
         if(count($match) != 3) continue;
