@@ -170,29 +170,44 @@
    <table summary="" style="width:100%">
     <tr>
      <td style="width:50%">
-	{if $multiple_support}
-        <h3>{t}Common group members{/t}</h3>
-        {render acl=$memberUidACL}
-            {$commonList}
-        {/render}
-        {render acl=$memberUidACL}
-          <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
-        {/render}
-        
-        <br>
-        <h3>{t}Partial group members{/t}</h3>
-        {render acl=$memberUidACL}
-            {$partialList}
-        {/render}
-	{else}
-        <h3>{t}Group members{/t}</h3>
-        {render acl=$memberUidACL}
-            {$memberList}
-        {/render}
-        {render acl=$memberUidACL}
-          <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
-        {/render}
-	{/if}
+
+      {if $restrictedByDynGroup}
+        <b>{t}The group members are part of a dyn-group and cannot be managed!{/t}</b>
+        {if $multiple_support}
+            {render acl=$memberUidACL}
+                {$commonList}
+            {/render}
+        {else}
+            {render acl=$memberUidACL}
+                {$memberList}
+            {/render}
+        {/if}
+      {else}
+
+        {if $multiple_support}
+            <h3>{t}Common group members{/t}</h3>
+            {render acl=$memberUidACL}
+                {$commonList}
+            {/render}
+            {render acl=$memberUidACL}
+              <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
+            {/render}
+            
+            <br>
+            <h3>{t}Partial group members{/t}</h3>
+            {render acl=$memberUidACL}
+                {$partialList}
+            {/render}
+        {else}
+            <h3>{t}Group members{/t}</h3>
+            {render acl=$memberUidACL}
+                {$memberList}
+            {/render}
+            {render acl=$memberUidACL}
+              <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
+            {/render}
+        {/if}
+      {/if}
      </td>
     </tr> 
    </table>

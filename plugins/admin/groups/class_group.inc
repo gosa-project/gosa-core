@@ -203,7 +203,7 @@ class group extends plugin
         // Prepare lists
         $this->memberList = new sortableListing();
         $this->memberList->setDeleteable(true);
-        $this->memberList->setInstantDelete(true);
+        $this->memberList->setInstantDelete(false);
         $this->memberList->setEditable(false);
         $this->memberList->setWidth("100%");
         $this->memberList->setHeight("300px");
@@ -327,8 +327,8 @@ class group extends plugin
             foreach($this->members as $uid => $member){
                 $data[$uid] = $member;
                 $givenName = $sn = _("Unknown");
-                if(isset($member['sn'][0])) $sn = $member['sn'][0];
-                if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+                if(isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
+                if(isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
                 if(isset($member['sn'])){
                     $image = image('plugins/users/images/select_user.png');
@@ -336,6 +336,8 @@ class group extends plugin
                 $lData[$uid] = array('data' => array($image,$sn, $givenName, $uid));
             }
             $this->memberList->setListData($data,$lData);
+            $bool = $this->isRestrictedByDynGroup();
+            $this->memberList->setDeleteable(!$bool);
             $this->memberList->update();
             $smarty->assign("memberList", $this->memberList->render());
         }else{
@@ -362,11 +364,11 @@ class group extends plugin
 
             $data = $lData = array();
             foreach($this->memberUid_used_by_some as $uid => $member){
-                $member = $this->members[$member];
+                $member = (isset($this->members[$member])) ? $this->members[$member] : NULL;
                 $data[$uid] = $member;
                 $givenName = $sn = _("Unknown");
-                if(isset($member['sn'][0])) $sn = $member['sn'][0];
-                if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+                if(isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
+                if(isset($member['givenName'][0]) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
                 if(isset($member['sn'])){
                     $image = image('plugins/users/images/select_user.png');
@@ -437,7 +439,24 @@ class group extends plugin
             }
         }
 
+        $bool = $this->isRestrictedByDynGroup();
+        $smarty->assign("restrictedByDynGroup", $bool);
+        if($bool){
+            $smarty->assign("memberUidACL", preg_replace("/[^r]/","",$this->getacl('memberUid')));
+             
+        }
         return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+    }
+
+
+    function isRestrictedByDynGroup()
+    {
+        $bool = FALSE;
+        if(isset($this->parent->by_object['DynamicLdapGroup'])){
+            $bool = $this->parent->by_object['DynamicLdapGroup']->isAttributeDynamic('memberUid') ||
+                $this->parent->by_object['DynamicLdapGroup']->isAttributeDynamic('member');
+        }
+        return($bool);
     }
 
     function addUser($uid)
@@ -794,7 +813,8 @@ class group extends plugin
         }
 
         /* Take members array */
-        if (count ($this->memberUid)){
+        
+        if (!$this->isRestrictedByDynGroup() && count ($this->memberUid)){
             $this->attrs['memberUid']= array_values(array_unique($this->memberUid));
         }
 
@@ -808,7 +828,6 @@ class group extends plugin
             $this->attrs['member'] = array();
             if (count($this->memberUid)){
                 foreach($this->attrs['memberUid'] as $uid) {
-
                     if(isset($this->dnMapping[$uid])){
                         $this->attrs['member'][]= $this->dnMapping[$uid];
                     }
@@ -1183,7 +1202,7 @@ class group extends plugin
         //  - ond one which represents those users which are only part of SOME groups.
         $this->commonList = new sortableListing();
         $this->commonList->setDeleteable(true);
-        $this->commonList->setInstantDelete(true);
+        $this->commonList->setInstantDelete(false);
         $this->commonList->setEditable(false);
         $this->commonList->setWidth("100%");
         $this->commonList->setHeight("120px");
@@ -1193,7 +1212,7 @@ class group extends plugin
 
         $this->partialList = new sortableListing();
         $this->partialList->setDeleteable(true);
-        $this->partialList->setInstantDelete(true);
+        $this->partialList->setInstantDelete(false);
         $this->partialList->setEditable(false);
         $this->partialList->setWidth("100%");
         $this->partialList->setHeight("120px");
