@@ -117,7 +117,7 @@ class ItemSelector {
         foreach ($bases as $path => $data) {
 
             // Build path style display
-            $this->pathMapping[$path]= $path == $this->releaseBase? '/' : $data['name'];
+            $this->pathMapping[$path]= preg_replace("/^".preg_quote($this->releaseBase,'/')."\/?/i", "/", $path);
             $this->releaseInfo[$path]['name'] = $data['name'];
             $this->releaseInfo[$path]['description'] = $data['desc'];
         }
@@ -138,13 +138,14 @@ class ItemSelector {
         if(isset($_REQUEST["BPID_{$this->pid}"]) && $_REQUEST["BPID_{$this->pid}"] == $this->pid) {
             if (isset($_POST['bs_rebase_'.$this->pid])) {
                 $new_base= base64_decode(get_post('bs_rebase_'.$this->pid));
-
-                if (isset($this->pathMapping[$new_base])) {
-                    $this->base= $new_base;
-                    $this->action= 'rebase';
-                } else {
-                    $this->lastState= false;
-                    return false;
+                if($new_base){
+                    if (isset($this->pathMapping[$new_base])) {
+                        $this->base= $new_base;
+                        $this->action= 'rebase';
+                    } else {
+                        $this->lastState= false;
+                        return false;
+                    }
                 }
             }else{
                 // Input field set?
@@ -234,6 +235,7 @@ class ItemSelector {
                     });";
         }
         $this->tree.= "</script>";
+        $selected= $this->base == $this->releaseBase?"Selected":"";
         $this->tree.= "<div class='treeList' 
                             style=' display:none;
                                     max-height:".$this->height."px' 
@@ -242,17 +244,25 @@ class ItemSelector {
                                     window.clearTimeout(rtimer);\" 
                             onmouseout=\"
                                     rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\">
+                        <a                     class='treeList$selected' $link>/&nbsp;["._("Root")."]</a>
                         <ul class='treeList'>\n";
 
         $first= true;
         $last_indent= 1;
 
+        $baseDepth = 0;
         foreach ($this->pathMapping as $base => $dummy) {
+
+            // Do not render the base element
+            if($base == $this->releaseBase){
+                $baseDepth = 1;
+                continue;
+            }
 
             // Build path style display
             $elements= explode('/', substr($base, strlen($this->releaseBase), strlen($base)));
-            $indent= count($elements) ;
-      
+            $indent= count($elements) - $baseDepth ;
+        
             if (!$first && ($indent == $last_indent)) {
                 $this->tree.= "</li>\n";
             }

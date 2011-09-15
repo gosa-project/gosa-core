@@ -29,6 +29,7 @@ class listing {
     var $departmentRootVisible= false;
     var $multiSelect= false;
     var $singleSelect= false;
+    var $noAclChecks= false;
     var $template;
     var $headline;
     var $base;
@@ -55,7 +56,7 @@ class listing {
     var $height= 0;
     var $scrollPosition= 0;
     var $baseSelector;
-
+    var $aclToObjectClass = array();
 
     function listing($source, $isString = FALSE)
     {
@@ -170,7 +171,7 @@ class listing {
         $this->xmlData= $this->xmlData["list"];
 
         // Load some definition values
-        foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect","singleSelect", "baseMode") as $token) {
+        foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect","singleSelect", "baseMode", "noAclChecks") as $token) {
             if (isset($this->xmlData['definition'][$token]) &&
                     $this->xmlData['definition'][$token] == "true"){
                 $this->$token= true;
@@ -194,6 +195,10 @@ class listing {
                 $this->objectTypes[$tmp['objectClass']]= $tmp;
                 if (isset($this->xmlData['definition']['objectType'][$index]['category'])){
                     $this->categories[]= $otype['category'];
+
+                    if(isset($otype['category']) && isset($otype['class'])){
+                        $this->aclToObjectClass[$otype['category']."/".$otype['class']][] = $otype['objectClass'];
+                    }
                 }
             }
         }
@@ -302,7 +307,7 @@ class listing {
             $height= $this->height;
         }
 
-        $result.= "<div class='listContainer' id='d_scrollbody' style='min-height:".($height+25)."px;'>\n";
+        $result.= "<div class='listContainer' id='d_scrollbody' style='height:{$height}px; overflow: auto;min-height:".($height+25)."px;'>\n";
         $result.= "<table summary='$this->headline' style='width:100%;table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
         $this->numColumns= count($this->colprops) + (($this->multiSelect|$this->singleSelect)?1:0);
 
@@ -385,6 +390,7 @@ class listing {
         }
 
         // Fill with contents, sort as configured
+        $ui = get_userinfo();
         foreach ($this->entries as $row => $entry) {
             $trow= "";
 
@@ -646,6 +652,24 @@ class listing {
         // Update filter and refresh entries
         $this->filter->setBase($this->base);
         $this->entries= $this->filter->query();
+
+        // Check entry acls
+        if(!$this->noAclChecks){
+            foreach($this->entries as $row => $entry){
+                $acl = "";
+                $found = false;
+                foreach($this->aclToObjectClass as $category => $ocs){
+                    if(count(array_intersect($ocs, $entry['objectClass']))){
+                        $acl .= $ui->get_permissions($entry['dn'],$category, 0);
+                        $found = true;
+                    }
+                }
+                if(!preg_match("/r/", $acl) && $found){
+                    unset($this->entries[$row]);
+                    continue;
+                }
+            }
+        }
 
         // Fix filter if querie returns NULL
         if ($this->entries == null) {

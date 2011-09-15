@@ -54,7 +54,7 @@ class sortableListing {
     private $acl= "";
     private $modified= false;
 
-	
+
     public function sortableListing($data= array(), $displayData= null, $reorderable= false)
     {
         global $config;
@@ -101,17 +101,17 @@ class sortableListing {
         $this->sortColumn = $id;
     }
 
-	/*
-	* 
-	* Examples
-	* DatenARray ($data)
-	* @param: array( arbitrary object, arbitrary object)
-	* Datenarray will be manipulated by add, del and sort operations. According to this it will be returned from this widget.
-	* The index of a data entry must correspond to the entry of the "display array" following.
-	* DisplayArray ($displyData)
-	* @param: array("eins" array( "data"=> array("Uno", "2", "x" ) , "zwei" array( "data"=> array("Due", "3", "y" ))) ;
-	* label pointing on a list of columns that will be shown in the list.
-	*/
+    /*
+     * 
+     * Examples
+     * DatenARray ($data)
+     * @param: array( arbitrary object, arbitrary object)
+     * Datenarray will be manipulated by add, del and sort operations. According to this it will be returned from this widget.
+     * The index of a data entry must correspond to the entry of the "display array" following.
+     * DisplayArray ($displyData)
+     * @param: array("eins" array( "data"=> array("Uno", "2", "x" ) , "zwei" array( "data"=> array("Due", "3", "y" ))) ;
+     * label pointing on a list of columns that will be shown in the list.
+     */
     public function setListData($data, $displayData= null)
     {
         // Save data to display
@@ -125,13 +125,13 @@ class sortableListing {
         $this->setDisplayData($displayData);
     }
 
-	//setting flat data 
+    //setting flat data 
     private function setData($data)
     {
         $this->data= $data;
     }
 
-	// collecting the display data -
+    // collecting the display data -
     private function setDisplayData($data)
     {
         if (!is_array($data)) {
@@ -229,7 +229,7 @@ class sortableListing {
 
 
     public function render()
-    {
+    {	
         $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
         $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
         $action_width= 0;
@@ -290,6 +290,7 @@ class sortableListing {
         // Render table body if we've read permission
         $result.= " <tbody id='".$this->id."'>\n";
         $reorderable= $this->reorderable?"":" style='cursor:default'";
+
         if (strpos($this->acl, 'r') !== false) {
             foreach ($this->mapping as $nr => $row) {
                 $editable= $this->editable?" onClick='$(\"edit_".$this->id."_$nr\").click()'":"";
@@ -426,6 +427,10 @@ class sortableListing {
             foreach ($_POST as $key => $value) {
                 $value = get_post($key);
                 if (preg_match('/^del_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
+
+
+                    if(!isset($this->mapping[$matches[1]])) return;
+
                     $this->active_index= $this->mapping[$matches[1]];
 
                     // Ignore request if mode requests it
@@ -450,6 +455,9 @@ class sortableListing {
             foreach ($_POST as $key => $value) {
                 $value = get_post($key);
                 if (preg_match('/^edit_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
+
+                    if(!isset($this->mapping[$matches[1]])) return;
+
                     $this->active_index= $this->mapping[$matches[1]];
 
                     // Ignore request if mode requests it
@@ -484,12 +492,20 @@ class sortableListing {
     }
 
 
-    private function deleteEntry($id)
+    public function deleteEntry($id)
     {
         // Remove mapping
         $index= array_search($id, $this->mapping);
         if ($index !== false) {
+            $target = $this->mapping[$index];
+            $key = $this->keys[$target];
+
             unset($this->mapping[$index]);
+            if(isset($this->displayData[$target])){
+                unset($this->displayData[$target]);
+                unset($this->data[$key]);
+                unset($this->keys[$target]);
+            }
             $this->mapping= array_values($this->mapping);
             $this->modified= true;
         }
@@ -531,11 +547,11 @@ class sortableListing {
 
         // Extract data
         $tmp= array();
-        foreach($this->displayData as $item) {
+        foreach($this->displayData as $key => $item) {
             if (isset($item[$this->sortColumn])){
-                $tmp[]= $item[$this->sortColumn];
+                $tmp[$key]= $item[$this->sortColumn];
             } else {
-                $tmp[]= "";
+                $tmp[$key]= "";
             }
         }
 
@@ -573,17 +589,16 @@ class sortableListing {
         }
 
         // Append to data and mapping
+        $this->displayData[]= $displayEntry['data'];
+        $this->mapping[]= max(array_keys($this->displayData));
+        $this->modified= true;
         if ($key) {
             $this->data[$key]= $entry;
             $this->keys[]= $key;
         } else {
             $this->data[]= $entry;
-            $this->keys[]= count($this->mapping);
+            $this->keys[]= max(array_keys($this->displayData));
         }
-        $this->displayData[]= $displayEntry['data'];
-        $this->mapping[]= count($this->mapping);
-        $this->modified= true;
-
         // Find the number of coluns
         reset($this->displayData);
         $first= current($this->displayData);
