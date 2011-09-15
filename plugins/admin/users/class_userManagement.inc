@@ -340,7 +340,7 @@ class userManagement extends management
 
 
 
-                // Change cassword 
+                // Change password 
                 if(isset($this->force_hash_type[$this->dn])){
                     if(!change_password ($this->dn, $new_password,0,$this->force_hash_type[$this->dn],'', $message)){
                         msg_dialog::displayChecks(array($message));
@@ -481,6 +481,7 @@ class userManagement extends management
             $smarty->assign("template",  array_pop($target));
             $smarty->assign("templates", $templates);
             $smarty->assign("edit_uid", "");
+            $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("core","allowUidProposalModification"));
             return($smarty->fetch(get_template_path('template.tpl', TRUE)));
 
             // -> See 'templateContinue' for further handling!
@@ -517,6 +518,7 @@ class userManagement extends management
             $smarty->assign("template", "none");
             $smarty->assign("templates", $templates);
             $smarty->assign("edit_uid", "");
+            $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("core","allowUidProposalModification"));
             return($smarty->fetch(get_template_path('template.tpl', TRUE)));
 
             // -> See 'templateContinue' for further handling!
@@ -570,6 +572,7 @@ class userManagement extends management
             $smarty->assign("templates",$templates);
             $smarty->assign("got_uid", $this->got_uid);
             $smarty->assign("edit_uid",false);
+            $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("core","allowUidProposalModification"));
             return($smarty->fetch(get_template_path('template.tpl', TRUE)));
         }
 
@@ -592,16 +595,23 @@ class userManagement extends management
 
             if ($ldap->count () != 0){
                 msg_dialog::displayChecks(array(msgPool::duplicated(_("Name"))));
+                $smarty->assign("edit_uid", "");
             }else{
 
                 // Preset uid field by using the idGenerator 
                 $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
                 if ($this->config->get_cfg_value("core","idGenerator") != ""){
-                    $uids= gen_uids ($this->config->get_cfg_value("core","idGenerator"), $attributes);
-                    if (count($uids)){
-                        $smarty->assign("edit_uid", "false");
-                        $smarty->assign("uids", $uids);
-                        $this->uid= current($uids);
+                    $genStr = $this->config->get_cfg_value("core","idGenerator");
+                    $smarty->assign("edit_uid", "");
+                    if(!empty($genStr)){
+                        $uids= gen_uids($genStr, $attributes);
+                        if (count($uids)){
+                            $smarty->assign("edit_uid", "false");
+                            $smarty->assign("uids", $uids);
+                            $this->uid= current($uids);
+                        }else{
+                            msg_dialog::displayChecks(array(_("Cannot generate a unique id, please specify it manually!")));
+                        }
                     }
                 } else {
                     $smarty->assign("edit_uid", "");
@@ -618,6 +628,7 @@ class userManagement extends management
                 $smarty->assign("template", get_post('template'));
             }
             $smarty->assign("templates",$templates); 
+            $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("core","allowUidProposalModification"));
             return($smarty->fetch(get_template_path('template.tpl', TRUE)));
         }
 
