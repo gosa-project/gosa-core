@@ -2750,7 +2750,7 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
 function get_post($name)
 {
     if(!isset($_POST[$name])){
-        trigger_error("Requested POST value (".$name.") does not exists, you should add a check to prevent this message.");
+        trigger_error("Requested POST value (".$name.") does not exist, you should add a check to prevent this message.");
         return(FALSE);
     }
 
