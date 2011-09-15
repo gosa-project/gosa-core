@@ -159,12 +159,12 @@ class core extends plugin {
                 break;
             case 'timezone': 
                 $tmp = timezone::_get_tz_zones();
-                foreach($tmp['TIMEZONES'] as $name => $offset){
+                foreach($tmp['TIMEZONES'] as $tzname => $offset){
                     if($offset >= 0){
-                        $list[$name] = $name." ( + ".sprintf("%0.2f",$offset/(60*60))." "._("hours").")";
+                        $list[$tzname] = $tzname." ( + ".sprintf("%0.2f",$offset/(60*60))." "._("hours").")";
                     }else{
                         $offset = $offset * -1;
-                        $list[$name] = $name." ( - ".sprintf("%0.2f",($offset/(60*60)))." "._("hours").")";
+                        $list[$tzname] = $tzname." ( - ".sprintf("%0.2f",($offset/(60*60)))." "._("hours").")";
                     }
                 }
                 break;
@@ -177,9 +177,9 @@ class core extends plugin {
                     $tmp = mailMethod::get_methods();
                 }
                 $list =array();
-                foreach($tmp as $name => $value){
-                    $name = preg_replace('/^mailMethod/','', $name);
-                    $list[$name] = $value;
+                foreach($tmp as $vName => $vValue){
+                    $vName = preg_replace('/^mailMethod/','', $vName);
+                    $list[$vName] = $vValue;
                 }
                 $list[''] = _("None");
                 break;
@@ -496,6 +496,16 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "allowUidProposalModification",
+                                "type"          => "bool",
+                                "default"       => "false",
+                                "description"   => _("Allows to modify uid-proposals when creating a new user from a user-template."),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => FALSE),
+
+                        array(
                                 "name"          => "modificationDetectionAttribute",
                                 "type"          => "switch",
                                 "default"       => "entryCSN",
@@ -572,7 +582,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "sambaHashHook",
                                 "type"          => "command",
-                                "default"       => "perl -MCrypt::SmbHash -e \"print join(q[:], ntlmgen \\\$ARGV[0]), $/;\"",
+                                "default"       => "perl -MCrypt::SmbHash -e \"print join(q[:], ntlmgen %password), $/;\"",
                                 "description"   => _("Command to create Samba NT/LM hashes. Required for password synchronization if you don't use supplementary services."),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
@@ -1051,7 +1061,16 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => FALSE)
+                                "mandatory"     => FALSE),
+                        array(
+                                "name"          => "forceTranslit",
+                                "type"          => "bool",
+                                "default"       => "false",
+                                "description"   => _("Enable transliteration of cyrillic characters for UID generation."),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => TRUE)
                             )));
     }
 }
