@@ -42,6 +42,21 @@ class tabs
   var $read_only = FALSE; // Used when the entry is opened as "readonly" due to locks.
   var $hide_refs = FALSE;
   var $hide_acls = FALSE;
+
+  // Normally 'save_object()' is called automatically when 'execute()' is called, but 
+  //  sometimes we do not want this behaviour, e.g. when a tab is opened readonly.
+  // If we call save_object for a 'read-only' tab, values may get lost.
+  var $skip_save_object = FALSE; 
+
+
+  /*! \brief    Enables or disables to automatic call to 'save_object' for a plugin,
+   *             when 'execute()' is called.
+   */
+  function enableAutoSaveObject($bool)
+  {
+    $this->skip_save_object = ($bool == FALSE);
+  }
+    
   
   function tabs(&$config, $data, $dn, $acl_category= "", $hide_refs = FALSE, $hide_acls = FALSE)
   {
@@ -135,11 +150,13 @@ class tabs
       }
     }
 
-    // Save last tab object 
-    if ($this->last == $this->current){
-      $this->save_object(TRUE);
-    } else {
-      $this->save_object(FALSE);
+    // Save last tab object
+    if(!$this->skip_save_object){
+        if ($this->last == $this->current){
+          $this->save_object(TRUE);
+        } else {
+          $this->save_object(FALSE);
+        }
     }
 
     /* If multiple edit is enabled for this tab, 
