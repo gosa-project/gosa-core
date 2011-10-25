@@ -13,8 +13,9 @@ DM-Upload-Allowed: yes
 
 Package: gosa
 Architecture: all
-Depends: php5, php5-cli, apache2 | lighttpd | httpd , exim4 | mail-transport-agent, php5-gd, php5-imap, php5-ldap, php5-mcrypt, php5-mysql, php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, libcrypt-smbhash-perl, php5-recode, smarty3-gettext, smarty3-gosa, gettext, ${misc:Depends}, libapache2-mod-php5 | php5-cgi, php5-curl, ttf-liberation
+Depends: php5, php5-cli, apache2 | lighttpd | httpd , exim4 | mail-transport-agent, php5-gd, php5-imap, php5-ldap, php5-mcrypt, php5-mysql, php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, libcrypt-smbhash-perl, php5-recode, smarty3, gettext, ${misc:Depends}, libapache2-mod-php5 | php5-cgi, php5-curl, ttf-liberation
 Suggests: gosa-si-server, cyrus21-imapd (>= 2.1.11), postfix-ldap, slapd, gosa-schema, php5-suhosin, php-apc, php-fpdf
+Conflicts: smarty3-gosa, smarty3-gettext, smarty-acl-render
 Description: Web Based LDAP Administration Program
  Provided is access to posix, shadow, samba, proxy, fax, pureftp and
  kerberos accounts. It is able to manage the postfix/cyrus server
@@ -85,30 +86,6 @@ Architecture: all
 Depends: ${misc:Depends}, gosa
 Description: Dutch online help for GOsa
  This package includes the Dutch online documentation for GOsa²
- .
- GOsa² is a combination of system-administrator and end-user web
- interface, designed to handle LDAP based setups.
-
-Package: smarty3-gosa
-Architecture: all
-Depends: ${misc:Depends}, smarty3
-Suggests: gosa
-Description: Provide ACL based rendering for Smarty
- smarty3-gosa provides acl based rendering support for Smarty,
- the popular PHP templating engine (http://smarty.php.net/). This
- module is mainly used by GOsa².
- .
- GOsa² is a combination of system-administrator and end-user web
- interface, designed to handle LDAP based setups.
-
-Package: smarty3-gettext
-Architecture: all
-Depends: ${misc:Depends}, smarty3
-Suggests: gosa
-Description: Provide gettext support for Smarty
- smarty3-gettext provides getext based rendering support for Smarty,
- the popular PHP templating engine (http://smarty.php.net/). This
- module is mainly used by GOsa².
  .
  GOsa² is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
