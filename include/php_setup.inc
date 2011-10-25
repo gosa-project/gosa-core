@@ -308,17 +308,17 @@ if(defined('SMARTY_PHP_REMOVE')){
 }                                                                                                                       
 
 // Register GOsa contributed smarty plugins
-$d = opendir("$BASE_DIR/include/smartyAddons");
-while($file = readdir($d)){
-    if(preg_match("/\.php$/", $file)) require_once("$BASE_DIR/include/smartyAddons/{$file}");
-}
+#$d = opendir("$BASE_DIR/include/smartyAddons");
+#while($file = readdir($d)){
+#    if(preg_match("/\.php$/", $file)) require_once("$BASE_DIR/include/smartyAddons/{$file}");
+#}
 
 #$smarty->registerPlugin("block", "tr", "smarty_block_tr");
-$smarty->registerPlugin("block", "t", "smarty_block_t");
-$smarty->registerPlugin("block", "render", "smarty_block_render");
-$smarty->registerPlugin("function", "msgPool", "smarty_function_msgPool");
-$smarty->registerPlugin("function", "image", "smarty_function_image");
-$smarty->registerPlugin("function", "factory", "smarty_function_factory");
+#$smarty->registerPlugin("block", "t", "smarty_block_t");
+#$smarty->registerPlugin("block", "render", "smarty_block_render");
+#$smarty->registerPlugin("function", "msgPool", "smarty_function_msgPool");
+#$smarty->registerPlugin("function", "image", "smarty_function_image");
+#$smarty->registerPlugin("function", "factory", "smarty_function_factory");
 
 /* Global FPDF define */
 define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
