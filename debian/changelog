@@ -1,3 +1,13 @@
+gosa (2.7.2-1) unstable; urgency=low
+
+  * New upstream release
+  * Added danish template translation (Closes: #628223)
+  * Removed extra spurious Czech translation file (Closes: #624209)
+  * Upstream has followed the whishlist bug (Closes: #629315)
+  * Fixed an incorrect warning issue (Closes: #629318)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Tue, 25 Oct 2011 13:48:03 +0200
+
 gosa (2.7.1-2) unstable; urgency=low
 
   * Updated debconf translation (Closes: #624209)

@@ -1,0 +1,38 @@
+# Danish translation gosa.
+# Copyright (C) gosa & nedenstående oversættere.
+# This file is distributed under the same license as the gosa package.
+# Joe Hansen (joedalton2@yahoo.dk), 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gosa\n"
+"Report-Msgid-Bugs-To: cajus@debian.org\n"
+"POT-Creation-Date: 2008-12-01 10:40+0100\n"
+"PO-Revision-Date: 2011-05-28 18:30+01:00\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../gosa-desktop.templates:1001
+msgid "URL to your GOsa installation:"
+msgstr "Adresse til din GOsa-installation:"
+
+#. Type: string
+#. Description
+#: ../gosa-desktop.templates:1001
+msgid ""
+"The gosa start script can automatically point your browser to a system wide "
+"default location of your GOsa instance."
+msgstr ""
+"Startskriptet for gosa kan automatisk pege din browser til en fælles "
+"standardlokation for din GOsa-instans."
+
+#. Type: string
+#. Description
+#: ../gosa-desktop.templates:1001
+msgid "Enter the URL in order to set this default."
+msgstr "Indtast adressen (URL) for at angive denne standard."
