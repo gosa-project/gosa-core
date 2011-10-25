@@ -1,7 +1,7 @@
 Author: <cajus@debian.org>
 Description: Fix location of auto-generated class mapping file
---- a/include/class_config.inc
-+++ b/include/class_config.inc
+--- a/gosa-core/include/class_config.inc
++++ b/gosa-core/include/class_config.inc
 @@ -116,12 +116,12 @@
             if we have installed or removed plugins. 
           */
@@ -17,8 +17,8 @@ Description: Fix location of auto-generated class mapping file
          session::global_set("class_location.inc:timestamp",$tmp['mtime']);
  
          if($this->filename != "" && filemtime($this->filename) != $this->last_modified){
---- a/include/functions.inc
-+++ b/include/functions.inc
+--- a/gosa-core/include/functions.inc
++++ b/gosa-core/include/functions.inc
 @@ -73,7 +73,7 @@
  define('DES3_CBC_SHA1',16);
  
@@ -28,8 +28,8 @@ Description: Fix location of auto-generated class mapping file
  require_once ("functions_debug.inc");
  require_once ("accept-to-gettext.inc");
  
---- a/update-gosa
-+++ b/update-gosa
+--- a/gosa-core/update-gosa
++++ b/gosa-core/update-gosa
 @@ -21,7 +21,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */

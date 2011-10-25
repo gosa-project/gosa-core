@@ -1,7 +1,7 @@
 Author: <cajus@debian.org>
 Description: Fixed location of auto-generated locales
---- a/include/php_setup.inc
-+++ b/include/php_setup.inc
+--- a/gosa-core/include/php_setup.inc
++++ b/gosa-core/include/php_setup.inc
 @@ -20,7 +20,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
@@ -11,8 +11,8 @@ Description: Fixed location of auto-generated locales
  
  function gosaRaiseError($errno, $errstr, $errfile, $errline)
  {
---- a/update-gosa
-+++ b/update-gosa
+--- a/gosa-core/update-gosa
++++ b/gosa-core/update-gosa
 @@ -185,20 +185,20 @@
  
  	/* For each language, merge the target .mo to the compiled directory. */

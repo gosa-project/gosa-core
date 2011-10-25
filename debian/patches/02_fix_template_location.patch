@@ -1,7 +1,7 @@
 Author: <cajus@debian.org>
 Description: Fix location of configuration template.
---- a/include/functions.inc
-+++ b/include/functions.inc
+--- a/gosa-core/include/functions.inc
++++ b/gosa-core/include/functions.inc
 @@ -44,7 +44,7 @@
  }
  
