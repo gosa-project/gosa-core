@@ -4,7 +4,7 @@ GOsa2 changelog
 * gosa 2.7.2
   - Updated bundeled smarty to 3.0.8
   - Introduced sortable listing to ACL and posix dialogs
-  - Fixed problem with mail-method parameters read from ldap
+  - Fixed problem with mail-method parameters that were read from ldap
   - Added flag to allow modification of generated uid proposals
   - Improved dyngroup to not write dynamic values back to the ldap
   - Hardening: Replaced in_array calls with a method that uses a strict matching
