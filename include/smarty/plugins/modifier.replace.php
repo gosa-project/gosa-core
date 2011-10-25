@@ -15,19 +15,17 @@
  * @link http://smarty.php.net/manual/en/language.modifier.replace.php replace (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com> 
  * @author Uwe Tews 
- * @param string $string  input string
- * @param string $search  text to search for
- * @param string $replace replacement text
+ * @param string $ 
+ * @param string $ 
+ * @param string $ 
  * @return string 
  */
 function smarty_modifier_replace($string, $search, $replace)
 {
-    if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
-        require_once(SMARTY_PLUGINS_DIR . 'shared.mb_str_replace.php');
-        return smarty_mb_str_replace($search, $replace, $string);
+    if (function_exists('mb_split')) {
+    	require_once(SMARTY_PLUGINS_DIR . 'shared.mb_str_replace.php');
+    	return smarty_mb_str_replace($search, $replace, $string);
     }
-    
     return str_replace($search, $replace, $string);
 } 
-
 ?>

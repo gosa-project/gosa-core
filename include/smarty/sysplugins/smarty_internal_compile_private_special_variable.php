@@ -1,26 +1,22 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Special Smarty Variable
- *
+ * 
  * Compiles the special $smarty variables
- *
+ * 
  * @package Smarty
  * @subpackage Compiler
- * @author Uwe Tews
+ * @author Uwe Tews 
  */
 
 /**
  * Smarty Internal Plugin Compile special Smarty Variable Class
- *
- * @package Smarty
- * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_CompileBase {
-
     /**
      * Compiles code for the speical $smarty variables
-     *
-     * @param array  $args     array with attributes from parser
+     * 
+     * @param array $args array with attributes from parser
      * @param object $compiler compiler object
      * @return string compiled code
      */
@@ -42,7 +38,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 if (isset($compiler->smarty->security_policy) && !$compiler->smarty->security_policy->allow_super_globals) {
                     $compiler->trigger_template_error("(secure mode) super globals not permitted");
                     break;
-                }
+                } 
                 $compiled_ref = '$_COOKIE';
                 break;
 
@@ -55,15 +51,15 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 if (isset($compiler->smarty->security_policy) && !$compiler->smarty->security_policy->allow_super_globals) {
                     $compiler->trigger_template_error("(secure mode) super globals not permitted");
                     break;
-                }
+                } 
                 $compiled_ref = '$_'.strtoupper($variable);
                 break;
 
             case 'template':
-                return 'basename($_smarty_tpl->source->filepath)';
+                return 'basename($_smarty_tpl->getTemplateFilepath())';
 
             case 'current_dir':
-                return 'dirname($_smarty_tpl->source->filepath)';
+                return 'dirname($_smarty_tpl->getTemplateFilepath())';
 
             case 'version':
                 $_version = Smarty::SMARTY_VERSION;
@@ -73,7 +69,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 if (isset($compiler->smarty->security_policy) && !$compiler->smarty->security_policy->allow_constants) {
                     $compiler->trigger_template_error("(secure mode) constants not permitted");
                     break;
-                }
+                } 
                 return '@' . trim($_index[1], "'");
 
             case 'config':
@@ -89,16 +85,15 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
             default:
                 $compiler->trigger_template_error('$smarty.' . trim($_index[0], "'") . ' is invalid');
                 break;
-        }
+        } 
         if (isset($_index[1])) {
             array_shift($_index);
             foreach ($_index as $_ind) {
                 $compiled_ref = $compiled_ref . "[$_ind]";
-            }
-        }
+            } 
+        } 
         return $compiled_ref;
-    }
-
-}
+    } 
+} 
 
 ?>
