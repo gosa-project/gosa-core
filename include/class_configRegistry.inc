@@ -225,6 +225,7 @@ class configRegistry{
      */
     function getDisabledPlugins()
     {
+        return(array());
         return($this->pluginsDeactivated);
     }
 
