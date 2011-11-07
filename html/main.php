@@ -272,7 +272,8 @@ $remove_lock= FALSE;
 
 /* Check if we have changed the selected plugin 
 */
-if($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
+if(($old_plugin_dir != $plugin_dir && $old_plugin_dir != "") || 
+    (isset($_GET['reset']) && $_GET['reset'] == 1)){
   if (is_file("$old_plugin_dir/main.inc")){
     $cleanup = $remove_lock = TRUE;
     require ("$old_plugin_dir/main.inc");
