@@ -11,6 +11,7 @@ GOsa2 changelog
   - Updated samba password hashing and its error handling.
   - Updated Kolab tab, to use a sortable list for mynetworks entries.
   - Updated cleansing of FAI object in ldap, thanks to psc.
+  - Fixed removal of FAI-template and profile entries.
 
 * gosa 2.7.1
   - Updated passwordHook behaviour
