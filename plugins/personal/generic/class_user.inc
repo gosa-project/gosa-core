@@ -250,6 +250,7 @@ class user extends plugin
     }
     $this->gosaLoginRestrictionWidget= new sortableListing($this->gosaLoginRestriction);
     $this->gosaLoginRestrictionWidget->setDeleteable(true);
+    $this->gosaLoginRestrictionWidget->setInstantDelete(true);
     $this->gosaLoginRestrictionWidget->setColspecs(array('*'));
     $this->gosaLoginRestrictionWidget->setWidth("100%");
     $this->gosaLoginRestrictionWidget->setHeight("70px");
