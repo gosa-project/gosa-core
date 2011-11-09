@@ -42,7 +42,7 @@ class sortableListing {
     private $deleteable= false;
     private $editable= false;
     private $colorAlternate= false;
-    private $instantDelete= true;
+    private $instantDelete= false;
     private $action;
     private $mapping;
     private $current_mapping;
