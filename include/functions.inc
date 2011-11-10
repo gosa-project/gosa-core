@@ -2879,7 +2879,9 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         // If we've still no valid hashing method detected, then try to extract if from the userPassword attribute.
         elseif(isset($attrs['userPassword'][0]) && preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)){
             $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
-            $hash = $test->get_hash_name();
+            if($test){
+                $hash = $test->get_hash_name();
+            }
         }
 
         // No current password was found and no hash is enforced, so we've to use the config default here.
@@ -3763,7 +3765,7 @@ function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
         $value  = substr($attrs[$name], $start, $end);
 
         // Use values which are valid for shell execution?
-        if($shellArg) $value = escapeshellarg($value);
+        if($shellArg) $value = escapeshellcmd($value);
 
         // Replace the placeholder within the string.
         $str = preg_replace("/".preg_quote($match[0],'/')."/", $value, $str);
