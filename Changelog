@@ -12,7 +12,7 @@ GOsa2 changelog
   - Updated Kolab tab, to use a sortable list for mynetworks entries.
   - Updated cleansing of FAI object in ldap, thanks to psc.
   - Fixed removal of FAI-template and profile entries.
-  - Fixed problems with $ in check-, pre- and posthooks.
+  - Fixed problems with $ in samba-hash-, check-, pre- and posthooks.
 
 * gosa 2.7.1
   - Updated passwordHook behaviour
