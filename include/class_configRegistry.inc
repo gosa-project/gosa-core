@@ -337,7 +337,7 @@ class configRegistry{
                             
                             if(!in_array_strict($name, array('CLASS','NAME'))){
                                 $class= $info['CLASS'];    
-                                $this->fileStoredProperties[$class][strtolower($name)] = $value;
+                                $this->fileStoredProperties[strtolower($class)][strtolower($name)] = $value;
                             }
                         }
                     }
