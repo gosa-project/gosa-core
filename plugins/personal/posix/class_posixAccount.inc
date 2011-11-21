@@ -660,9 +660,10 @@ class posixAccount extends plugin
     }
     if ($this->mustchangepassword){
       $this->shadowLastChange= (int)(date("U") / 86400) - $this->shadowMax - 1;
-    } else {
-#      $this->shadowLastChange= (int)(date("U") / 86400);
+    } elseif($this->shadowLastChange == 0) {
+      $this->shadowLastChange= array();
     }
+
     if (!$this->activate_shadowWarning){
       $this->shadowWarning= "0";
     }
