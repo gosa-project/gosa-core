@@ -27,7 +27,7 @@ class csvExporter
     foreach ($entries as $row) {
       foreach ($columns as $index) {
         if (isset($row["_sort$index"])){
-          $this->result.= trim($row["_sort$index"]).";";
+          $this->result.= trim(utf8_encode(html_entity_decode($row["_sort$index"]))).";";
         } else {
           $this->result.= ";";
         }
