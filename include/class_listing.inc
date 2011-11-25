@@ -473,11 +473,13 @@ class listing {
         // Add the footer if requested
         if ($this->showFooter) {
             $result.= "<div class='nlistFooter'><div style='padding:3px'>";
-
             foreach ($this->objectTypes as $objectType) {
                 if (isset($this->objectTypeCount[$objectType['label']])) {
                     $label= _($objectType['label']);
                     $result.= image($objectType['image'], null, $label)."&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;";
+                }elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
+                    $label= _($objectType['label']);
+                    $result.= image($objectType['image'], null, $label)."&nbsp;".$this->objectTypeCount[$objectType['objectClass']]."&nbsp;&nbsp;";
                 }
             }
 
