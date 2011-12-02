@@ -2912,17 +2912,13 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
             if(!count($attrs) || !is_array($attrs)){
                 msg_dialog::display(_("Error"),_("Cannot generate SAMBA hash!"),ERROR_DIALOG);
                 return(FALSE);    
-            }else{
-                $shadow = (isset($attrs["shadowLastChange"][0]))?(int)(date("U") / 86400):0;
-                if ($shadow != 0){
-                    $attrs['shadowLastChange']= $shadow;
-                }
             }
         }
 
         // Write back the new password hash 
         $ldap->cd($dn);
         $attrs['userPassword']= $newpass;
+        $attrs['shadowLastChange'] = (int)(date("U") / 86400);
 
         // Prepare a special attribute list, which will be used for event hook calls
         $attrsEvent = array();
