@@ -2861,7 +2861,7 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
     // Fetch the current object data, to be able to detect the current hashing method
     //  and to be able to rollback changes once has an error occured.
     $ldap = $config->get_ldap_link();
-    $ldap->cat ($dn, array("shadowLastChange", "userPassword","sambaNTPassword","sambaLMPassword", "uid"));
+    $ldap->cat ($dn, array("shadowLastChange", "userPassword","sambaNTPassword","sambaLMPassword", "uid", "objectClass"));
     $attrs = $ldap->fetch ();
     $initialAttrs = $attrs;
 
@@ -2918,7 +2918,11 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         // Write back the new password hash 
         $ldap->cd($dn);
         $attrs['userPassword']= $newpass;
-        $attrs['shadowLastChange'] = (int)(date("U") / 86400);
+
+        // For posixUsers - Set the last changed value.
+        if(in_array_strict("shadowAccount", $initialAttrs['objectClass'])){
+            $attrs['shadowLastChange'] = (int)(date("U") / 86400);
+        }
 
         // Prepare a special attribute list, which will be used for event hook calls
         $attrsEvent = array();
