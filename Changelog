@@ -1,7 +1,7 @@
 GOsa2 changelog
 ===============
 
-* gosa 2.7.2
+* gosa 2.7.3
   - Fixed some listing problems.
   - Dhcp plugin overview shows all hosts now.
   - Fixed problems with $ in samba-hash-, check-, pre- and posthooks.
