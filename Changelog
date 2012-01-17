@@ -2,6 +2,19 @@ GOsa2 changelog
 ===============
 
 * gosa 2.7.2
+  - Fixed some listing problems.
+  - Dhcp plugin overview shows all hosts now.
+  - Fixed problems with $ in samba-hash-, check-, pre- and posthooks.
+  - Fixed problem with password changes beeing forced on login for newly created user.
+  - This fixed a bug where properties stored in gosa.conf did not take effect.
+  - Fixed group membership adaption when creating a user using a template.
+  - Added checks to ensure that valid hostnames/fqdns are created.
+  - Fixed removal of FAI profiles, hooks, scripts.
+  - Readded statusbar to fai management plugin.
+  - Fixed progressbar reload in fai installation status plugin.
+  - Fixed several opsi plugin bugs.
+
+* gosa 2.7.2
   - Updated bundeled smarty to 3.1.4.
   - Introduced sortable listing to ACL and posix dialogs.
   - Fixed problem with mail-method parameters that were read from ldap.
@@ -12,7 +25,6 @@ GOsa2 changelog
   - Updated Kolab tab, to use a sortable list for mynetworks entries.
   - Updated cleansing of FAI object in ldap, thanks to psc.
   - Fixed removal of FAI-template and profile entries.
-  - Fixed problems with $ in samba-hash-, check-, pre- and posthooks.
 
 * gosa 2.7.1
   - Updated passwordHook behaviour
