@@ -21,7 +21,7 @@ function smarty_function_factory($params, &$smarty)
         case 'password' :
 
             // Maxlength has a default of 40 characters
-            $maxlengthReady = (empty($maxlength))?'maxlength="40"': $maxlengthReady; 
+            $maxlengthReady = (empty($maxlength))?'': $maxlengthReady; 
             $str .= "<input {$nameReady} {$idReady} {$valueReady} {$maxlengthReady}
             {$titleReady} {$onfocusReady} {$onkeyupReady} {$disabled} type='password'
             onkeypress=\"
