@@ -3,14 +3,14 @@ GOsa2 changelog
 
 * gosa 2.7.3
   - Fixed some listing problems.
-  - Dhcp plugin overview shows all hosts now.
+  - Made DHCP plugin overview show all hosts.
   - Fixed problems with $ in samba-hash-, check-, pre- and posthooks.
   - Fixed problem with password changes beeing forced on login for newly created user.
   - This fixed a bug where properties stored in gosa.conf did not take effect.
   - Fixed group membership adaption when creating a user using a template.
   - Added checks to ensure that valid hostnames/fqdns are created.
   - Fixed removal of FAI profiles, hooks, scripts.
-  - Readded statusbar to fai management plugin.
+  - Re-added statusbar to fai management plugin.
   - Fixed progressbar reload in fai installation status plugin.
   - Fixed several opsi plugin bugs.
 
