@@ -1,1 +1,2 @@
 phpgw/contrib/phpgwaccount.ldif	/etc/ldap/schema/gosa
+phpgw/contrib/phpgwaccount.schema	/etc/ldap/schema/gosa

@@ -1,1 +1,2 @@
 ssh/contrib/openssh-lpk.ldif	/etc/ldap/schema/gosa
+ssh/contrib/openssh-lpk.schema	/etc/ldap/schema/gosa

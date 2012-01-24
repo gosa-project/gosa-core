@@ -1,1 +1,2 @@
+mit-krb5/contrib/hdb.schema	/etc/ldap/schema/gosa
 mit-krb5/contrib/hdb.ldif	/etc/ldap/schema/gosa
