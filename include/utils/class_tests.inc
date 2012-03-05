@@ -48,7 +48,7 @@ class tests {
   /*! \brief Test if the given string contains characters allowed in a DNS name */
   public static function is_dns_name($str, &$reason = "", &$regex = "")
   {
-    $regex = "[a-z0-9\.\-]";
+    $regex = "[a-z0-9_\.\-]";
     if(preg_match("/\./", $str) && strlen($str) >= 255){
         $reason = 1;
         return(FALSE);
