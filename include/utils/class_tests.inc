@@ -49,18 +49,37 @@ class tests {
   public static function is_dns_name($str, &$reason = "", &$regex = "")
   {
     $regex = "[a-z0-9\.\-]";
+  
+    # Check over all length
     if(preg_match("/\./", $str) && strlen($str) >= 255){
         $reason = 1;
         return(FALSE);
     }
+  
+    # Check hostname length
     if(strlen(preg_replace("/\..*$/", "", $str)) > 63){
         $reason = 2;
         return(FALSE);
-    }    
-    if(!preg_match("/^{$regex}*$/i",$str)){
+    }
+  
+    # Split host and domain part
+    $tmp = preg_split("/\./", $str, 2);
+    $host = $tmp[0];
+    $domain = count($tmp) == 1 ? NULL : $tmp[1];
+  
+    if(!preg_match("/^{$regex}*$/i", $host)){
         $reason = 3;
         return(FALSE);
     }
+  
+    if ($domain) {
+        $regex = "[a-z0-9\.\-_]";
+        if(!preg_match("/^{$regex}*$/i", $domain)){
+            $reason = 4;
+            return(FALSE);
+        }
+    }
+  
     return(TRUE);
   }
 
