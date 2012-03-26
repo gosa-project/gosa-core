@@ -292,10 +292,7 @@ function get_browser_language()
   $gosa_languages= get_languages();
 
   /* Move supported languages to flat list */
-  $langs= array();
-  foreach($gosa_languages as $lang => $dummy){
-    $langs[]= $lang.'.UTF-8';
-  }
+  $langs = array_map(function($lang){return $lang.'.UTF-8';}, array_keys($gosa_languages));
 
   /* Return gettext based string */
   return (al2gt($langs, 'text/html'));
@@ -1201,9 +1198,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
       }
     }
   }
-#  if(microtime(TRUE) - $start > 0.1){
-#    echo sprintf("<pre>GET_SUB_LIST  %s .| %f  --- $base -----$filter ---- $flags</pre>",__LINE__,microtime(TRUE) - $start);
-#  }
+
   return($result);
 }
 
