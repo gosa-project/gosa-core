@@ -195,13 +195,14 @@ class Step_Checks extends setup_step
     /* PHP Configuration checks */
 
     /* Register_globals off */
-    $N = "register_globals = <b>off</b>";
-    $D = _("register_globals is a PHP mechanism to register all global variables to be accessible from scripts without changing the scope. This may be a security risk.");
-    $S = _("Search for 'register_globals' in your php.ini and switch it to 'Off'.");
-    $R = ini_get("register_globals") == 0;
-    $M = FALSE;
-    $this->config_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-
+    if (version_compare(PHP_VERSION, "5.3", "<")) {
+      $N = "register_globals = <b>off</b>";
+      $D = _("register_globals is a PHP mechanism to register all global variables to be accessible from scripts without changing the scope. This may be a security risk.");
+      $S = _("Search for 'register_globals' in your php.ini and switch it to 'Off'.");
+      $R = ini_get("register_globals") == 0;
+      $M = FALSE;
+      $this->config_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
+    }
 
     /* session lifetime set to >=86400 seconds ? */
     $N = "session.gc_maxlifetime &gt;= <b>86400</b>";
@@ -253,17 +254,9 @@ class Step_Checks extends setup_step
     $M = FALSE;
     $this->config_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
-    /* Automatic quoting must be turned on */
-    $N = "magic_quotes_gpc = <b>"._("On")."</b>";
-    $D = _("Increase your server security by setting magic_quotes_gpc to 'on'. PHP will escape all quotes in strings in this case."); 
-    $S = _("Search for 'magic_quotes_gpc' in your php.ini and set it to 'On'."); 
-    $R = ini_get('magic_quotes_gpc'); 
-    $M = TRUE;
-    $this->config_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-
     /* Emulating old stuff? */
     $N = "zend.ze1_compatibility_mode = <b>"._("Off")."</b>";
-    $D = _("Increase your server performance by setting magic_quotes_gpc to 'off'."); 
+    $D = _("Increase your server performance by setting zend.ze1_compatibility_mode to 'off'."); 
     $S = _("Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."); 
     $R = !ini_get('zend.ze1_compatibility_mode'); 
     $M = FALSE;

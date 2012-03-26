@@ -2757,18 +2757,12 @@ function get_post($name)
     // Handle Posted Arrays
     $tmp = array();
     if(is_array($_POST[$name]) && !is_string($_POST[$name])){
-
         if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){
-          foreach($_POST[$name] as $key => $val){
-            $tmp[$key] = stripcslashes($val);
-          } 
+          $tmp = array_map("stripcslashes", $_POST);
         } else {
-          foreach($_POST[$name] as $key => $val){
-            $tmp[$key] = $val;
-          } 
+          $tmp = $_POST;
         }
         return($tmp);
-
     }else{
 
         if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){
