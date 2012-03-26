@@ -2757,16 +2757,21 @@ function get_post($name)
     // Handle Posted Arrays
     $tmp = array();
     if(is_array($_POST[$name]) && !is_string($_POST[$name])){
-        foreach($_POST[$name] as $key => $val){
-            if(get_magic_quotes_gpc()){
-                $val = stripcslashes($val);
-            }
+
+        if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){
+          foreach($_POST[$name] as $key => $val){
+            $tmp[$key] = stripcslashes($val);
+          } 
+        } else {
+          foreach($_POST[$name] as $key => $val){
             $tmp[$key] = $val;
-        } 
+          } 
+        }
         return($tmp);
+
     }else{
 
-        if(get_magic_quotes_gpc()){
+        if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){
             $val = stripcslashes($_POST[$name]);
         }else{
             $val = $_POST[$name];
