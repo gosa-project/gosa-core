@@ -35,26 +35,33 @@ if [ ! -f /etc/gosa/gosa.secrets ]; then
     chmod 600 /etc/gosa/gosa.secrets
 fi
 
-if [ -d /etc/apache2/conf.d ]; then
+if [ -d /etc/apache2/conf-available ]; then
 
-  # Copy GOsa configuration to conf.d directories
-  if [ ! -L /etc/apache2/conf.d/gosa.conf ]; then
+  # Copy GOsa configuration to conf-available directories
+  if [ ! -L /etc/apache2/conf-available/gosa.conf ]; then
 
     # Remove old instances of this file
-    if [ -f /etc/apache2/conf.d/gosa.conf ]; then
-      echo "Found old gosa apache configuration in /etc/apache2/conf.d - moving it to gosa.conf.orig..."
+    if [ -f /etc/apache2/conf-available/gosa.conf ]; then
+      echo "Found old gosa apache configuration in /etc/apache2/conf-available - moving it to gosa.conf.orig..."
       echo "Please check for changes in /etc/gosa/gosa-apache.conf if you modified this file!"
-      mv /etc/apache2/conf.d/gosa.conf /etc/apache2/conf.d/gosa.conf.orig
+      mv /etc/apache2/conf-available/gosa.conf /etc/apache2/conf-available/gosa.conf.orig
     fi
 
     echo "Making /gosa available in /etc/apache2/conf.d"
 
     # Add GOsa include file
-    ln -s /etc/gosa/gosa-apache.conf /etc/apache2/conf.d/gosa.conf
+    ln -s /etc/gosa/gosa-apache.conf /etc/apache2/conf-available/gosa.conf
+
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+      . /usr/share/apache2/apache2-maintscript-helper
+      apache2_invoke enconf gosa
+    fi
   fi
   
   # Add support for RequestHeader
-  a2enmod headers
+  if ! apache2_invoke enmod headers ; then
+      echo "Failed to enable the apache2 headers module!"
+  fi
 
   # Finally restart servers
   if [ -x /usr/sbin/invoke-rc.d ]; then

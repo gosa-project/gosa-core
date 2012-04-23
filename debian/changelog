@@ -1,8 +1,9 @@
 gosa (2.7.4-1) unstable; urgency=low
 
   * New upstream release
+  * Apache2 transition to 2.4 (Closes: #669852)
 
- -- Cajus Pollmeier <cajus@debian.org>  Mon, 26 Mar 2012 10:23:34 +0200
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 23 Apr 2012 10:54:39 +0200
 
 gosa (2.7.3-2) unstable; urgency=low
 
