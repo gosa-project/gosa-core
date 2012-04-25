@@ -1,0 +1,50 @@
+Index: gosa-2.6.11/systems/admin/systems/class_termDNS.inc
+===================================================================
+--- gosa-2.6.11.orig/systems/admin/systems/class_termDNS.inc	2010-08-06 17:35:50.000000000 +0200
++++ gosa-2.6.11/systems/admin/systems/class_termDNS.inc	2012-01-30 09:29:56.000000000 +0100
+@@ -471,9 +471,15 @@
+ 
+   function remove_from_parent()
+   {
++
++    $ldap = $this->config->get_ldap_link();
++
++    /************
++     * DNS Handling
++     ************/
++
+     if($this->DNS_is_account){
+ 
+-      $ldap = $this->config->get_ldap_link();
+ 
+       $tmp = array();
+       $this->dnsEntry['exists'] = false;
+@@ -489,6 +495,19 @@
+         }
+       }
+     }
++
++
++    /************
++     * DHCP Handling 
++     ************/
++
++    /* DHCP removed */
++    if($this->dhcp_is_Account){
++      $ldap->rmdir_recursive($this->dhcpHostEntry['dn']);
++      if (!$ldap->success()){
++        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dhcpHostEntry['dn'], LDAP_DEL, get_class()));
++      }
++    }
+   }
+ 
+ 
+@@ -786,7 +805,7 @@
+           ($this->dhcpHostEntry['dhcpStatements'] == "" || count($this->dhcpHostEntry['dhcpStatements']) == 0) ){
+         unset($this->dhcpHostEntry['dhcpStatements']);
+       }
+-  
++
+       /* DHCP removed */
+       if($this->initial_dhcp_is_Account && !$this->dhcp_is_Account){
+         $ldap->rmdir_recursive($this->dhcpHostEntry['dn']);

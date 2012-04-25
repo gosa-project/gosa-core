@@ -1,0 +1,18 @@
+Index: gosa-2.6.11/gosa-core/include/functions.inc
+===================================================================
+--- gosa-2.6.11.orig/gosa-core/include/functions.inc	2012-01-30 08:55:48.000000000 +0100
++++ gosa-2.6.11/gosa-core/include/functions.inc	2012-01-30 09:26:14.000000000 +0100
+@@ -2103,6 +2103,13 @@
+ {
+   global $config;
+ 
++  // Strip out non ascii chars                                    
++  foreach($attributes as $name => $value){                        
++      $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);      
++      $value = preg_replace('/[^(\x20-\x7F)]*/','',$value);       
++      $attributes[$name] = $value;                                
++  }                                                               
++
+   /* Search for keys and fill the variables array with all 
+      possible values for that key. */
+   $part= "";
