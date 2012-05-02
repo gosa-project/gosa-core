@@ -232,13 +232,19 @@ class posixAccount extends plugin
 
     /* Generate group list */
     $this->ui = get_userinfo(); 
-    $this->secondaryGroups[]= "- "._("automatic")." -";
+    $this->secondaryGroups[0]= "- "._("automatic")." -";
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=posixGroup)", array("cn", "gidNumber"));
     while($attrs = $ldap->fetch()){
       $this->secondaryGroups[$attrs['gidNumber'][0]]= $attrs['cn'][0];
     }
     asort ($this->secondaryGroups);
+
+    // Templates do not have a gidNumber
+    if($this->gidNumber == 2147483647){
+      $this->gidNumber = "";
+      $this->primaryGroup = 0;
+    }
 
     $this->ui = get_userinfo();
 
@@ -706,7 +712,9 @@ class posixAccount extends plugin
      * - .. if we couldn't find a group with the same name, we will create a new one, 
      *    using the users uid as cn and a generated uniqe gidNumber. 
      * */
-    if ($this->primaryGroup == 0 || $this->force_ids){
+    if($this->is_template && !$this->primaryGroup){
+      $this->gidNumber = 2147483647;
+    }elseif ($this->primaryGroup == 0 || $this->force_ids){
 
       /* Search for existing group */
       $ldap = $this->config->get_ldap_link();
@@ -1114,10 +1122,16 @@ class posixAccount extends plugin
     $this->addGroup($groups);
 
     /* Fix primary group settings */
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=posixGroup)(cn=$template)(gidNumber=".$this->gidNumber."))", array("cn"));
-    if ($ldap->count() != 1){
-      $this->primaryGroup= $this->gidNumber;
+    if($this->gidNumber == 2147483647){
+      $this->gidNumber = "";
+    }
+
+    if($this->gidNumber){
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(objectClass=posixGroup)(cn=$template)(gidNumber=".$this->gidNumber."))", array("cn"));
+      if ($ldap->count() != 1){
+        $this->primaryGroup= $this->gidNumber;
+      }
     }
 
     $ldap->cd($this->config->current['BASE']);
