@@ -283,11 +283,12 @@ class user extends plugin
     plugin::execute();
 
     /* Set list ACL */
+    $restrict_writeable = $this->acl_is_writeable('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit')));
     $this->gosaLoginRestrictionWidget->setAcl($this->getacl('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit'))));
     $this->gosaLoginRestrictionWidget->update();
 
     /* Handle add/delete for restriction mode */
-    if (isset($_POST['add_res']) && isset($_POST['res'])) {
+    if (isset($_POST['add_res']) && isset($_POST['res']) && $restrict_writeable){
       $val= validate($_POST['res']);
       if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/', $val) ||
           preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+)$/', $val) ||
@@ -625,13 +626,13 @@ class user extends plugin
     /* Set acls */
     $tmp = $this->plinfo();
     foreach($tmp['plProvidedAcls'] as $val => $translation){
-      $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
+        $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
     }
 
     // Special ACL for gosaLoginRestrictions - 
     // In case of multiple edit, we need a readonly ACL for the list. 
     $smarty->assign('gosaLoginRestriction_ONLY_R_ACL', 
-      preg_replace("/[^r]/i","", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit')))));
+      preg_replace("/[^r]/i","", $this->getacl("gosaLoginRestriction",(!is_object($this->parent) && !session::is_set('edit')))));
 
     $smarty->assign("pwmode", $pwd_methods);
     $smarty->assign("pwmode_select", $this->pw_storage);
@@ -1683,7 +1684,7 @@ class user extends plugin
 
           "userPicture"       => _("User picture"),
 
-          "gosaLoginRestriction" => _("Login restrictions"),         
+          "gosaLoginRestriction" => _("Login restrictions"),
 
           "o"                 => _("Organization"),
           "ou"                => _("Department"),
@@ -1705,7 +1706,8 @@ class user extends plugin
           "homePostalAddress" => _("Home postal address"),
           "homePhone"         => _("Home phone number"),
           "labeledURI"        => _("Homepage"),
-          "userPassword"      => _("User password method"), 
+	  "userPassword"      => _("User password method"), 
+          	  	
           "Certificate"       => _("User certificates"))
 
         );
