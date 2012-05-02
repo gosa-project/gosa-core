@@ -1448,6 +1448,7 @@ class user extends plugin
       $this->jpegPhoto= "*removed*";
     }
 
+    clearstatcache();
     $fd = fopen ($filename, "rb");
     $this->photoData= fread ($fd, filesize ($filename));
     session::set('binary',$this->photoData);
@@ -1461,6 +1462,7 @@ class user extends plugin
   /* Load certificate from file to object */
   function set_cert($cert, $filename)
   {
+    clearstatcache();
     if(!$this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))) return;
     $fd = fopen ($filename, "rb");
     if (filesize($filename)>0) {
