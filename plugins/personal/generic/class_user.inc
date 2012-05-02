@@ -652,7 +652,7 @@ class user extends plugin
 
     // Special ACL for gosaLoginRestrictions - 
     // In case of multiple edit, we need a readonly ACL for the list. 
-    $smarty->assign('gosaLoginRestriction_ONLY_R_ACL', preg_replace("/[^r]/i","", $this->getacl($val)));
+    $smarty->assign('gosaLoginRestriction_ONLY_R_ACL', preg_replace("/[^r]/i","", $this->getacl("gosaLoginRestriction")));
 
     $smarty->assign("pwmode", set_post($pwd_methods));
     $smarty->assign("pwmode_select", set_post($this->pw_storage));
