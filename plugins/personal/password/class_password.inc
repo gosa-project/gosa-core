@@ -32,6 +32,9 @@ class password extends plugin
     var $proposalInitialized = FALSE;
 
     var $forcedHash = NULL;
+    var $userPassword = "";
+    var $attributes=array('userPassword');
+
 
     function password(&$config, $dn= NULL, $parent= NULL)
     {
@@ -72,6 +75,7 @@ class password extends plugin
         /* Get acls */
         $password_ACLS = $ui->get_permissions($ui->dn,"users/password");
         $smarty->assign("ChangeACL" ,  $password_ACLS);
+        $smarty->assign("SASL" , preg_match("/^{SASL}/i", $this->userPassword));
         $smarty->assign("NotAllowed" , !preg_match("/w/i",$password_ACLS));
 
         /* Display expiration template */

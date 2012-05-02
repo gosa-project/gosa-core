@@ -910,6 +910,11 @@ class user extends plugin
     /* First use parents methods to do some basic fillup in $this->attrs */
     plugin::save ();
 
+    if($this->pw_storage == "sasl"){
+        $tmp = new passwordMethodsasl($this->config,$this->dn);
+        $this->attrs['userPassword'] = $tmp->generate_hash("dummy");
+    }
+
     if ($this->dateOfBirth != ""){
       if(!is_array($this->attrs['dateOfBirth'])) {
         #TODO: use $lang to convert date

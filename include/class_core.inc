@@ -803,6 +803,16 @@ DEBUG_SI      = 256"),
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "SASLRealm",
+                                "type"          => "string",
+                                "default"       => "REALM",
+                                "description"   => _("The SASL realm to use for password storage."),
+                                "check"         => "",
+                                "migrate"       => "",
+                                "group"         => "password",
+                                "mandatory"     => FALSE),
+
+                        array(
                                 "name"          => "rfc2307bis",
                                 "type"          => "bool",
                                 "default"       => "false",

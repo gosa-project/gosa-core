@@ -1,3 +1,12 @@
+
+{if $SASL}
+    
+    <br>
+    <b>{t}Your password cannot be changed from within GOsa{/t}</b>
+
+<input type="hidden" name="ignore">
+{else}
+
 <script type="text/javascript" src="include/pwdStrength.js"></script>
 
 <p>
@@ -143,3 +152,4 @@
     updateFields();
 </script>
 
+{/if}
