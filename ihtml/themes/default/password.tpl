@@ -31,7 +31,7 @@
 {$php_errors}
 
 {if $changed}
-<div class='success'">
+<div class='success'>
 <img class='center' src='images/true.png' alt='{t}Success{/t}' title='{t}Success{/t}'>&nbsp;<b>{t}Your password has been changed successfully.{/t}</b>
 </div>
 {else}
@@ -76,15 +76,15 @@
       </tr>
       <tr>
        <td>{t}Current password{/t}</td>
-       <td><input type='password' name='current_password' maxlength='40' value='' title='{t}Current password{/t}' onFocus="nextfield= 'new_password';"></td>
+       <td><input type='password' name='current_password' value='' title='{t}Current password{/t}' onFocus="nextfield= 'new_password';"></td>
       </tr>
       <tr>
        <td>{t}New password{/t}</td>
-       <td><input type='password' name='new_password' id="new_password" maxlength='40' value='' title='{t}New password{/t}' onFocus="nextfield= 'new_password_repeated';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
+       <td><input type='password' name='new_password' id="new_password" value='' title='{t}New password{/t}' onFocus="nextfield= 'new_password_repeated';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
       </tr>
       <tr>
        <td>{t}New password repeated{/t}</td>
-       <td><input type='password' name='new_password_repeated' maxlength='40' value='' title='{t}New password repeated{/t}' onFocus="nextfield= 'apply';"></td>
+       <td><input type='password' name='new_password_repeated' value='' title='{t}New password repeated{/t}' onFocus="nextfield= 'apply';"></td>
       </tr>
       <tr>
        <td>{t}Password strength{/t}</td>
