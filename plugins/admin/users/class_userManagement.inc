@@ -142,6 +142,13 @@ class userManagement extends management
                 trigger_error("Unknown tab: ".$tab);
             }
         }
+
+        // Enable template mode if this is a gosaUserTemplate
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        if($ldap->object_match_filter($this->tabObject->dn, "(objectClass=gosaUserTemplate)")){
+            $this->tabObject->set_template_mode ();
+        }
     }
 
 
