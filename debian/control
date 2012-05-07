@@ -258,7 +258,7 @@ Description: LDAP schema for GOsa² mit-krb5 plugin
 
 Package: gosa-plugin-nagios
 Architecture: all
-Depends: ${misc:Depends}, gosa
+Depends: ${misc:Depends}, gosa, libswitch-perl | perl (<< 5.10.1-13)
 Breaks: gosa (<<2.7)
 Description: nagios plugin for GOsa²
  Nagios account settings management
@@ -279,7 +279,7 @@ Description: LDAP schema for GOsa² nagios plugin
 
 Package: gosa-plugin-netatalk
 Architecture: all
-Depends: ${misc:Depends}, gosa, gosa-plugin-systems
+Depends: ${misc:Depends}, gosa, gosa-plugin-systems, gosa-plugin-goto
 Breaks: gosa (<<2.7)
 Description: netatalk plugin for GOsa²
  Netatalk account management plugin

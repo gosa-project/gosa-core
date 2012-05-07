@@ -2,6 +2,10 @@ gosa (2.7.4-1) unstable; urgency=low
 
   * New upstream release
   * Apache2 transition to 2.4 (Closes: #669852)
+  * Corrected dependency of the netatalk plugin (Closes: #606980)
+  * Corrected dependency for deprecated Switch library (Closes: #629336)
+  * Made user id editable when applying templates (Closes: #629446)
+  * Added a conflict for no longer supported plugins (Closes: #608918, #608920)
 
  -- Cajus Pollmeier <cajus@debian.org>  Mon, 23 Apr 2012 10:54:39 +0200
 
