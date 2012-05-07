@@ -5,6 +5,15 @@ GOsa2 changelog
   - Fixed problem in setup checks that seem to access a bool value by
     string index.
   - Robustness improvements for PHP 5.3/5.4 compatibility.
+  - Fixed problems with sieve login and TLS.
+  - Made asterisk delimiter configurable.
+  - Enabled template mode even when editing a template.
+  - Do not create primary groups for templates.
+  - Allow to modfiy the mail address when cyrus is used as mail method 
+    and accounts are identified by uid.
+  - Added SASL password method.
+  - Fixed ACL resolution for login restrictions.
+  - Fixed pronlems with unsaved user pictures.
 
 * gosa 2.7.3
   - Fixed some listing problems.
