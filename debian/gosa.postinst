@@ -38,25 +38,25 @@ fi
 if [ -d /etc/apache2/conf-available ]; then
 
   # Copy GOsa configuration to conf-available directories
-  if [ ! -L /etc/apache2/conf-available/gosa.conf ]; then
+  #if [ ! -L /etc/apache2/conf-available/gosa.conf ]; then
 
-    # Remove old instances of this file
-    if [ -f /etc/apache2/conf-available/gosa.conf ]; then
-      echo "Found old gosa apache configuration in /etc/apache2/conf-available - moving it to gosa.conf.orig..."
-      echo "Please check for changes in /etc/gosa/gosa-apache.conf if you modified this file!"
-      mv /etc/apache2/conf-available/gosa.conf /etc/apache2/conf-available/gosa.conf.orig
-    fi
+  #  # Remove old instances of this file
+  #  if [ -f /etc/apache2/conf-available/gosa.conf ]; then
+  #    echo "Found old gosa apache configuration in /etc/apache2/conf-available - moving it to gosa.conf.orig..."
+  #    echo "Please check for changes in /etc/apache2/conf-available/gosa.conf if you modified this file!"
+  #    mv /etc/apache2/conf-available/gosa.conf /etc/apache2/conf-available/gosa.conf.orig
+  #  fi
 
-    echo "Making /gosa available in /etc/apache2/conf.d"
+  #  echo "Making /gosa available in /etc/apache2/conf.d"
 
-    # Add GOsa include file
-    ln -s /etc/gosa/gosa-apache.conf /etc/apache2/conf-available/gosa.conf
+  #  # Add GOsa include file
+  #  ln -s /etc/gosa/gosa-apache.conf /etc/apache2/conf-available/gosa.conf
 
-    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
-      . /usr/share/apache2/apache2-maintscript-helper
-      apache2_invoke enconf gosa
-    fi
-  fi
+  #  if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+  #    . /usr/share/apache2/apache2-maintscript-helper
+  #    apache2_invoke enconf gosa
+  #  fi
+  #fi
   
   # Add support for RequestHeader
   if ! apache2_invoke enmod headers ; then
@@ -64,11 +64,11 @@ if [ -d /etc/apache2/conf-available ]; then
   fi
 
   # Finally restart servers
-  if [ -x /usr/sbin/invoke-rc.d ]; then
-    invoke-rc.d apache2 reload
-  else
-    /etc/init.d/apache2 reload
-  fi
+  #if [ -x /usr/sbin/invoke-rc.d ]; then
+  #  invoke-rc.d apache2 reload
+  #else
+  #  /etc/init.d/apache2 reload
+  #fi
 fi
 
 if [ -d /etc/lighttpd/conf-available ]; then
