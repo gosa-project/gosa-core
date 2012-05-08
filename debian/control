@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: GOsa packages maintainers group <gosa-pkg@oss.gonicus.de>
 Uploaders: Cajus Pollmeier <cajus@debian.org>
-Build-Depends: debhelper (>= 7.0.50~)
+Build-Depends: debhelper (>= 7.0.50~), dh-apache2
 Build-Depends-Indep: po-debconf
 Standards-Version: 3.9.1
 Homepage: https://oss.gonicus.de/labs/gosa/
@@ -14,6 +14,7 @@ DM-Upload-Allowed: yes
 Package: gosa
 Architecture: all
 Depends: php5, php5-cli, apache2 | lighttpd | httpd , exim4 | mail-transport-agent, php5-gd, php5-imap, php5-ldap, php5-mcrypt, php5-mysql, php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, libcrypt-smbhash-perl, php5-recode, smarty3, gettext, ${misc:Depends}, libapache2-mod-php5 | php5-cgi, php5-curl, ttf-liberation
+Recommends: ${misc:Recommends}
 Suggests: gosa-si-server, cyrus21-imapd (>= 2.1.11), postfix-ldap, slapd, gosa-schema, php5-suhosin, php-apc, php-fpdf
 Conflicts: smarty3-gosa, smarty3-gettext, smarty-acl-render
 Description: Web Based LDAP Administration Program
