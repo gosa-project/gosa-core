@@ -1,3 +1,9 @@
+gosa (2.6.11-3+squeeze2) stable; urgency=low
+
+  * Backport shellvar escaping code. Closes: #665950.
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 11 Jun 2012 13:52:18 +020
+
 gosa (2.6.11-3+squeeze1) stable; urgency=low
 
   * Fix DHCP host removal. Closes: #650258

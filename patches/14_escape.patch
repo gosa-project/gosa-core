@@ -1,0 +1,18 @@
+Description: Allow passwords to contain special chars and still work with hook scripts
+Author: Fabian Hickert <hickert@gonicus.de>
+Index: functions.inc
+===================================================================
+--- a/gosa-core/include/functions.inc	(revision 21128)
++++ b/gosa-core/include/functions.inc	(working copy)
+@@ -3059,8 +3059,8 @@
+ 
+       if ($command != ""){
+         /* Walk through attribute list */
+-        $command= preg_replace("/%userPassword/", $password, $command);
+-        $command= preg_replace("/%dn/", $dn, $command);
++        $command= preg_replace("/%userPassword/", escapeshellarg($password), $command);
++        $command= preg_replace("/%dn/", escapeshellarg($dn), $command);
+ 
+         if (check_command($command)){
+           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+
