@@ -1,3 +1,18 @@
+gosa (2.7.4-3) unstable; urgency=low
+
+  * Reverted Apache2 transition because it has been aborted. Closes: #674357.
+  * Checked if the package runs with debian packaged smarty 
+    3.1.x. Closes: #672398.
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 18 Jun 2012 14:29:03 +0200
+
+gosa (2.7.4-2) unstable; urgency=low
+
+  * More robustness for the postinst scripts. Closes: #673168.
+  * Hide duplicate message of update-gosa.
+
+ -- Cajus Pollmeier <cajus@debian.org>  Thu, 17 May 2012 20:29:09 +0200
+
 gosa (2.7.4-1) unstable; urgency=low
 
   * New upstream release

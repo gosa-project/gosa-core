@@ -1,0 +1,11 @@
+--- a/gosa-core/update-gosa
++++ b/gosa-core/update-gosa
+@@ -547,7 +547,7 @@
+          // Is this image already there?
+          $checksum= md5_file($path);
+          if (in_array($checksum, $checksums)) {
+-           $warnings[]= "! Warning: images $indexPath seems to be a duplicate of ".array_search($checksum, $checksums);
++           #$warnings[]= "! Warning: images $indexPath seems to be a duplicate of ".array_search($checksum, $checksums);
+            $duplicates[$indexPath]= array_search($checksum, $checksums);
+            $duplicates[$greyIndexPath]= preg_replace('/\.png$/', '-grey.png', array_search($checksum, $checksums));
+            continue;

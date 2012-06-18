@@ -6,6 +6,7 @@ gosa-core/include			/usr/share/gosa
 gosa-core/locale			/usr/share/gosa
 gosa-core/plugins			/usr/share/gosa
 gosa-core/setup				/usr/share/gosa
+debian/gosa-apache.conf			/etc/gosa
 debian/gosa-lighttpd.conf		/etc/gosa
 gosa-core/contrib/shells		/etc/gosa
 gosa-core/contrib/encodings		/etc/gosa
