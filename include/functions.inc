@@ -3576,6 +3576,10 @@ function image($path, $action= "", $title= "", $align= "middle")
   }
   $styles= session::global_get('img-styles');
 
+  if (!array_key_exists($path, $styles)) {
+    return "";
+  }
+
   /* Extract labels from path */
   if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
     $label= $matches[1];
@@ -3603,6 +3607,7 @@ function image($path, $action= "", $title= "", $align= "middle")
   if ($title != "") {
     $title= "title='$title'";
   }
+
   if ($action == "") {
     return "<div class='img' $title style='".$styles[$path]."$align'>$lbl</div>";
   } else {
