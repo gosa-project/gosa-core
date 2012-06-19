@@ -1,3 +1,10 @@
+gosa (2.7.4-4) unstable; urgency=low
+
+  * New smarty3 package fixes problems with template loading. This
+    release removes the workarounds for that issue.
+
+ -- Cajus Pollmeier <cajus@debian.org>  Tue, 19 Jun 2012 09:36:39 +0200
+
 gosa (2.7.4-3) unstable; urgency=low
 
   * Reverted Apache2 transition because it has been aborted. Closes: #674357.
