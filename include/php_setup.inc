@@ -296,9 +296,8 @@ ini_set("include_path",".:$BASE_DIR/include:$BASE_DIR/include/utils/excel:/usr/s
 
 /* Do smarty setup */
 require("smarty/Smarty.class.php");
-$smarty = new Smarty;
-$smarty->template_dir = $BASE_DIR.'/ihtml/';
-$smarty->caching= false;
+$smarty = new Smarty();
+$smarty->setCaching(false);
 
 // To be able to switch between smarty version 2/3                                                                      
 if(defined('SMARTY_PHP_REMOVE')){                                                                                       

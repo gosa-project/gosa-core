@@ -88,7 +88,7 @@ class Step_Ldap extends setup_step
       $base_to_append = substr($base_to_append,0,17)."...";
     }
     $smarty->assign("base_to_append",$base_to_append);
-    return($smarty -> fetch (get_template_path("../setup/setup_ldap.tpl")));
+    return($smarty->fetch (get_template_path("setup_ldap.tpl")));
   }
 
   function get_connection_status()

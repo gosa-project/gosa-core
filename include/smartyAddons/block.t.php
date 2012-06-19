@@ -73,6 +73,11 @@ function smarty_gettext_strarg($str)
 function smarty_block_t($params, $text, &$smarty)
 {
 	$text = stripslashes($text);
+
+	//TODO: need to figure out why this happens for every string...
+	if ($text == "") {
+		return ("");
+	}
 	
 	// set escape mode
 	if (isset($params['escape'])) {
@@ -119,7 +124,7 @@ function smarty_block_t($params, $text, &$smarty)
 				break;
 		}
 	}
-	
+
 	return $text;
 }
 

@@ -504,10 +504,11 @@ class pluglist
      */
     function get_path($index)
     {
+	global $BASE_DIR;
         if(!isset($this->dirlist[$index])){
             return ("");
         }
-        return ("../".$this->dirlist[$index]);
+        return ("$BASE_DIR/".$this->dirlist[$index]);
     }
 
 
