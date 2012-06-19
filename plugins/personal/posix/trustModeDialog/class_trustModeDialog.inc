@@ -180,7 +180,7 @@ class trustModeDialog extends plugin
             $smarty->assign("emptyArrAccess",false);
 
 
-        $smarty->assign($smarty->assign("use_trustmode",in_array_strict("trustmode", $this->multi_boxes)));
+        $smarty->assign("use_trustmode",in_array_strict("trustmode", $this->multi_boxes));
         $smarty->assign("multiple_support" , $this->multiple_support_active);
 #        $this->trustList->update();
         $smarty->assign("trustList", $this->trustList->render());
