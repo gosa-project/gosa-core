@@ -167,6 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
 /* Enable compressed output */
 if ($config->get_cfg_value("core","sendCompressedOutput") != "") {
+    ob_end_clean();
     ob_start("ob_gzhandler");
 }
 

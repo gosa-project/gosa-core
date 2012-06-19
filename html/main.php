@@ -80,6 +80,7 @@ $config->configRegistry->reload();
 
 /* Enable compressed output */
 if ($config->get_cfg_value("core","sendCompressedOutput") == "true"){
+  ob_end_clean();
   ob_start("ob_gzhandler");
 }
 
