@@ -592,7 +592,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "passwordDefaultHash",
                                 "type"          => "switch",
-                                "default"       => "crypt/md5",
+                                "default"       => "ssha",
                                 "defaults"      => "core::getPropertyValues",
                                 "description"   => _("Default hash to be used for newly created user passwords."),
                                 "check"         => "",
