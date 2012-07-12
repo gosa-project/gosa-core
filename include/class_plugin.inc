@@ -1696,6 +1696,9 @@ class plugin
                   if($displayErrors){
                       $message= msgPool::cmdexecfailed($cmd,$command, get_class($plugin));
                       msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+                  }else{
+                      $message= msgPool::cmdexecfailed($cmd,"...", get_class($plugin));
+                      msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
                   }
               }elseif(is_array($arr)){
                   @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: ".$arr);
