@@ -3704,7 +3704,7 @@ function detectLdapSpecialCharHandling()
    
         // Extract the interessting characters out of the dn and the 
         //  initially used $name for the entry. 
-        $mapDNstr = preg_replace("/^o=GOsaLdapEncoding_([^,]*),.*$/","\\1", trim(ldap_get_dn($ldapCID, $re)));
+        $mapDNstr = preg_replace("/^o=GOsaLdapEncoding_(.*),".preg_quote($config->current['BASE'])."$/","\\1", trim(ldap_get_dn($ldapCID, $re)));
         $mapDN = preg_split("/_/", $mapDNstr,0, PREG_SPLIT_NO_EMPTY);
 
         $mapNameStr = preg_replace("/^GOsaLdapEncoding_/","",$dnName);
