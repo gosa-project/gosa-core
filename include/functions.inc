@@ -2922,14 +2922,14 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $attrsEvent = array();
         foreach($initialAttrs as $name => $value){
             if(!is_numeric($name))
-                $attrsEvent[$name] = escapeshellarg($value[0]);
+                $attrsEvent[$name] = $value[0];
         }
-        $attrsEvent['dn'] = escapeshellarg($initialAttrs['dn']);
+        $attrsEvent['dn'] = $initialAttrs['dn'];
         foreach($attrs as $name => $value){
-            $attrsEvent[$name] = escapeshellarg($value);
+            $attrsEvent[$name] = $value;
         }
-        $attrsEvent['current_password'] = escapeshellarg($old_password);
-        $attrsEvent['new_password'] = escapeshellarg($password);
+        $attrsEvent['current_password'] = $old_password;
+        $attrsEvent['new_password'] = $password;
 
         // Call the premodify hook now
         $passwordPlugin = new password($config,$dn);
@@ -3002,8 +3002,8 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         if($preRollback){
             new log("modify","users/passwordMethod",$dn,array(),"Rolling back premodify hook!");
             $oldpass= $test->generate_hash($old_password);
-            $attrsEvent['current_password'] = escapeshellarg($password);
-            $attrsEvent['new_password'] = escapeshellarg($old_password);
+            $attrsEvent['current_password'] = $password;
+            $attrsEvent['new_password'] = $old_password;
             foreach(array("userPassword","sambaNTPassword","sambaLMPassword") as $attr){
                 if(isset($initialAttrs[$attr][0])) $attrsEvent[$attr] = $initialAttrs[$attr][0];
             }
@@ -3767,7 +3767,7 @@ function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
         $value  = substr($attrs[$name], $start, $end);
 
         // Use values which are valid for shell execution?
-        if($shellArg) $value = escapeshellcmd($value);
+        if($shellArg) $value = escapeshellarg($value);
 
         // Replace the placeholder within the string.
         $str = preg_replace("/".preg_quote($match[0],'/')."/", $value, $str);
