@@ -2757,7 +2757,7 @@ function get_post($name)
         } else {
           $tmp = $_POST;
         }
-        return($tmp);
+        return($tmp[$name]);
     }else{
 
         if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){

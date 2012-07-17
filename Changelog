@@ -1,6 +1,12 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.7.5
+  - Fixed problem that occured when certain POST variables get
+    transferred in a wrong way.
+  - Fixed an issue with the LDAP special character detection
+    that just worked with OpenLDAP.
+
 * gosa 2.7.4
   - Fixed problem in setup checks that seem to access a bool value by
     string index.
