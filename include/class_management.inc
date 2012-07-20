@@ -166,7 +166,7 @@ class management
     if ($this->filter) {
       $this->filter->update();
       session::global_set(get_class($this)."_filter", $this->filter);
-      session::set('autocomplete', $this->filter);
+      session::set('autocomplete', get_class($this)."_filter");
     }
 
     // Handle actions (POSTs and GETs)

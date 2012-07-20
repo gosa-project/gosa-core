@@ -84,7 +84,8 @@ if (isset($_GET['type']) && $_GET['type'] == "base" && isset($_GET['pid'])) {
 
     /* Is there a filter object arround? */
     if (session::is_set("autocomplete")){
-        $filter= session::get("autocomplete");
+		$name= session::get("autocomplete");
+		$filter = session::get($name);
         $filter->processAutocomplete();
     }
 }
