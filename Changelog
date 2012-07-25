@@ -6,6 +6,8 @@ GOsa2 changelog
     transferred in a wrong way.
   - Fixed an issue with the LDAP special character detection
     that just worked with OpenLDAP.
+  - Fixed two false positive messages that occur when renaming groups.
+  - Made samba primary group selectable for users.
 
 * gosa 2.7.4
   - Fixed problem in setup checks that seem to access a bool value by
