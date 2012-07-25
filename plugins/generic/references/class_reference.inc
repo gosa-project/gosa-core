@@ -159,7 +159,8 @@ class reference extends plugin
         $smarty->assign('objectList', $this->objectList);
         $smarty->assign("acls",$this->aclResolver->getReadableACL());
 
-        session::set('autocomplete', $this->aclResolver);
+		session::set("generic::aclResolver", $this->aclResolver);
+        session::set('autocomplete', "generic::aclResolver");
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
     }
 }
