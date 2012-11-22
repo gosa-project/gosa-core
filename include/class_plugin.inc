@@ -1665,7 +1665,16 @@ class plugin
 
               // Try to open the process
               @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command,"Execute");
-              $process = proc_open($command, $descriptorspec, $pipes);
+              preg_match("/^(.* )?(\/.*)$/", $s, $matches);
+              $command = $matches[2];
+              $env = Array();
+              preg_match_all("/ ?([^=]+)=('[^']*')/", $matches[1], $tmp, PREG_SET_ORDER);
+              foreach($tmp as $e) {
+                  $env[$e[1]] = trim($e[2], "'");
+              }
+
+              $process = proc_open($command, $descriptorspec, $pipes, NULL, $env);
+
               if (is_resource($process)) {
 
                   // Write the password to stdin
