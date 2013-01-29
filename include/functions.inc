@@ -2861,7 +2861,13 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
 
     // If no hashing method is enforced, then detect what method we've to use.
     $hash = strtolower($hash);
-    if(empty($hash)){
+    $default_method = $config->get_cfg_value('core','passwordDefaultHash');
+
+    // Do not modify the password at all.
+    if($default_method == "Remote"){
+      $test = new $available[$default_method]($config,$dn);
+      $test->set_hash($hash);
+    }else if(empty($hash)){
 
         // Do we need clear-text password for this object?
         if(isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
@@ -2880,8 +2886,13 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
 
         // No current password was found and no hash is enforced, so we've to use the config default here.
         $hash = $config->get_cfg_value('core','passwordDefaultHash');
-        $test = new $available[$hash]($config,$dn);
-        $test->set_hash($hash);
+        if(!isset($available[$hash])){
+          msg_dialog::display(_("Error"),_("Invalid password method set!"), ERROR_DIALOG);
+          return(FALSE);    
+        }else{
+          $test = new $available[$hash]($config,$dn);
+          $test->set_hash($hash);
+        }
     }else{
         $test = new $available[$hash]($config,$dn);
         $test->set_hash($hash);
@@ -2896,26 +2907,28 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $test->dn = $dn;
         $test->attrs = $attrs;
         $newpass= $test->generate_hash($password);
-
-        // Do we have to append samba attributes too?
-        // - sambaNTPassword / sambaLMPassword
-        $tmp = $config->get_cfg_value('core','sambaHashHook');
-        $attrs= array();
-        if (!$mode && !empty($tmp)){
-            $attrs= generate_smb_nt_hash($password);
-            if(!count($attrs) || !is_array($attrs)){
-                msg_dialog::display(_("Error"),_("Cannot generate SAMBA hash!"),ERROR_DIALOG);
-                return(FALSE);    
-            }
-        }
-
-        // Write back the new password hash 
         $ldap->cd($dn);
-        $attrs['userPassword']= $newpass;
 
-        // For posixUsers - Set the last changed value.
-        if(in_array_strict("shadowAccount", $initialAttrs['objectClass'])){
+        $attrs= array();
+        if($newpass !== NULL){
+
+          // Do we have to append samba attributes too?
+          // - sambaNTPassword / sambaLMPassword
+          $tmp = $config->get_cfg_value('core','sambaHashHook');
+          if (!$mode && !empty($tmp)){
+              $attrs= generate_smb_nt_hash($password);
+              if(!count($attrs) || !is_array($attrs)){
+                  msg_dialog::display(_("Error"),_("Cannot generate SAMBA hash!"),ERROR_DIALOG);
+                  return(FALSE);    
+              }
+          }
+
+          $attrs['userPassword'] = $newpass;
+
+          // For posixUsers - Set the last changed value.
+          if(in_array_strict("shadowAccount", $initialAttrs['objectClass'])){
             $attrs['shadowLastChange'] = (int)(date("U") / 86400);
+          }
         }
 
         // Prepare a special attribute list, which will be used for event hook calls
