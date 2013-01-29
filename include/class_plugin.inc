@@ -1665,7 +1665,7 @@ class plugin
 
               // Try to open the process
               @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command,"Execute");
-              preg_match("/^(.* )?(\/.*)$/", $s, $matches);
+              preg_match("/^(.* )?(\/.*)$/", $command, $matches);
               $command = $matches[2];
               $env = Array();
               preg_match_all("/ ?([^=]+)=('[^']*')/", $matches[1], $tmp, PREG_SET_ORDER);
