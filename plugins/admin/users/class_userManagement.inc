@@ -109,6 +109,7 @@ class userManagement extends management
         $this->registerAction("edit_environment","editEntry");
         $this->registerAction("edit_gofaxAccount","editEntry");
         $this->registerAction("edit_phoneAccount","editEntry");
+        $this->registerAction("edit_zarafaAccount","editEntry");
     }
 
 
@@ -934,6 +935,10 @@ class userManagement extends management
                     "plugin" => "environment",
                     "alt" => _("Environment"),
                     "title" => _("Edit environment properties")),
+                "zarafa-user" => array("image" => "plugins/zarafa/images/zarafa_user_small.png",
+                    "plugin" => "zarafaAccount",
+                    "alt" => _("Zarafa"),
+                    "title" => _("Edit Zarafa properties")),
                 "goFaxAccount" => array("image" => "plugins/users/images/fax_small.png",
                         "plugin" => "gofaxAccount",
                         "alt" => _("FAX"),

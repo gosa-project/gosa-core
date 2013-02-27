@@ -69,6 +69,7 @@ class groupManagement extends management
         $this->registerAction("edit_environment","editEntry");
         $this->registerAction("edit_appgroup","editEntry");
         $this->registerAction("edit_mailgroup","editEntry");
+        $this->registerAction("edit_zarafagroup", "editEntry");
 
         $this->registerAction("sendMessage", "sendMessage");
         $this->registerAction("saveEventDialog", "saveEventDialog");
@@ -189,6 +190,15 @@ class groupManagement extends management
                             "alt" => _("Menu"),
                             "title" => _("Edit start menu properties")
                          ),
+
+                "zarafa-group" => 
+                    array(
+                            "image" => "plugins/zarafa/images/zarafa_user_small.png",
+                            "plugin" => "zarafagroup",
+                            "alt" => _("Zarafa"),
+                            "title" => _("Edit Zarafa properties")
+                         ),
+
 
                 "gotoEnvironment" => 
                     array(
