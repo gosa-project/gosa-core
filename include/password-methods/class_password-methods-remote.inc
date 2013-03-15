@@ -26,9 +26,8 @@ class passwordMethodRemote extends passwordMethod
   var $uid = "";
   var $realm = "";
   
-  function __construct($config, $dn)
+  function __construct($config, $dn="")
   {
-    if($dn == "" || $dn == "new") return;
   }
 
   function is_available()
