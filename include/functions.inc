@@ -2943,6 +2943,9 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         }
         $attrsEvent['current_password'] = $old_password;
         $attrsEvent['new_password'] = $password;
+        $attrsEvent['bind_dn'] = $config->current['ADMINDN'];
+        $attrsEvent['bind_server'] = $config->current['SERVER'];
+        $attrsEvent['bind_password'] = $config->get_credentials($config->current['ADMINPASSWORD']);
 
         // Call the premodify hook now
         $passwordPlugin = new password($config,$dn);
