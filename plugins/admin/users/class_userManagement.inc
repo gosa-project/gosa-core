@@ -935,10 +935,6 @@ class userManagement extends management
                     "plugin" => "environment",
                     "alt" => _("Environment"),
                     "title" => _("Edit environment properties")),
-                "zarafa-user" => array("image" => "plugins/zarafa/images/zarafa_user_small.png",
-                    "plugin" => "zarafaAccount",
-                    "alt" => _("Zarafa"),
-                    "title" => _("Edit Zarafa properties")),
                 "goFaxAccount" => array("image" => "plugins/users/images/fax_small.png",
                         "plugin" => "gofaxAccount",
                         "alt" => _("FAX"),
@@ -946,7 +942,8 @@ class userManagement extends management
                 "goFonAccount" => array("image" => "plugins/gofon/images/select_phone.png",
                         "plugin" => "phoneAccount",
                         "alt" => _("Phone"),
-                        "title" => _("Edit phone properties")));
+                        "title" => _("Edit phone properties")),
+              );
 
         // Walk thru map
         foreach ($map as $oc => $properties) {
@@ -956,6 +953,13 @@ class userManagement extends management
                 $result.= image('images/empty.png');
             }
         }
+
+        if(in_array_ics("zarafa-contact", $classes)){
+          $result.= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+        } else if(in_array_ics("zarafa-user", $classes)){
+          $result.= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+        }
+
         return $result;
     }
 
