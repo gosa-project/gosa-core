@@ -558,6 +558,7 @@ class config  {
                     $this->data['SERVERS']['FON'][0]= array(
                             'DN'      => $attrs['dn'],
                             'SERVER'  => $attrs['cn'][0],
+                            'CONNECT_ID'  => $attrs['cn'][0],
                             'LOGIN'   => $attrs['goFonAdmin'][0],
                             'PASSWORD'  => $attrs['goFonPassword'][0],
                             'DB'    => "gophone",
@@ -572,6 +573,7 @@ class config  {
                 $this->data['SERVERS']['FON'][$attrs['dn']]= array(
                         'DN'      => $attrs['dn'],
                         'SERVER'  => $attrs['cn'][0],
+                        'CONNECT_ID'  => $attrs['cn'][0],
                         'LOGIN'   => $attrs['goFonAdmin'][0],
                         'PASSWORD'  => $attrs['goFonPassword'][0],
                         'DB'    => "gophone",
