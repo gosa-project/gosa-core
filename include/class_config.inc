@@ -550,6 +550,7 @@ class config  {
         $ldap->cd ($this->current['BASE']);
         $ldap->search ("(objectClass=goFonServer)");
         $this->data['SERVERS']['FON']= array();
+        $connect_attr = $this->get_cfg_value("phoneAccount","connectAttribute");
         if ($ldap->count()){
             while ($attrs= $ldap->fetch()){
 
@@ -558,7 +559,7 @@ class config  {
                     $this->data['SERVERS']['FON'][0]= array(
                             'DN'      => $attrs['dn'],
                             'SERVER'  => $attrs['cn'][0],
-                            'CONNECT_ID'  => $attrs['cn'][0],
+                            'CONNECT_ID'  => $attrs[$connect_attr][0],
                             'LOGIN'   => $attrs['goFonAdmin'][0],
                             'PASSWORD'  => $attrs['goFonPassword'][0],
                             'DB'    => "gophone",
@@ -573,7 +574,7 @@ class config  {
                 $this->data['SERVERS']['FON'][$attrs['dn']]= array(
                         'DN'      => $attrs['dn'],
                         'SERVER'  => $attrs['cn'][0],
-                        'CONNECT_ID'  => $attrs['cn'][0],
+                        'CONNECT_ID'  => $attrs[$connect_attr][0],
                         'LOGIN'   => $attrs['goFonAdmin'][0],
                         'PASSWORD'  => $attrs['goFonPassword'][0],
                         'DB'    => "gophone",
