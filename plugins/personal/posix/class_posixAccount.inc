@@ -155,7 +155,7 @@ class posixAccount extends plugin
         }
       } elseif (($this->shadowLastChange + $this->shadowMin) >= $current){
         $this->status= _("active").", "._("password not changeable");
-      } elseif (($this->shadowLastChange + $this->shadowMax) >= $current){
+      } elseif (($this->shadowLastChange + $this->shadowMax) <= $current){
         $this->status= _("active").", "._("password expired");
       } else {
         $this->status= _("active");
