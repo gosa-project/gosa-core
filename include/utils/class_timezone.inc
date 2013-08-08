@@ -69,6 +69,7 @@ class timezone {
         }
       }
     }
+    ksort($timezones);
     return(array("TIMEZONES" => @$timezones, "DST_ZONES" => @$dst_timezones));
   }
 }
