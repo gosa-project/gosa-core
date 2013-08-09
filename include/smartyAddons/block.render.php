@@ -17,7 +17,7 @@ function smarty_block_render($params, $text, &$smarty)
 	if (session::is_set('debugLevel') && session::get('debugLevel') & DEBUG_ACL ){
 		echo "<font color='blue' size='2'>&nbsp;".$acl."</font>";
 	}
-
+	
 
 
 	/* Parameter : checkbox, checked
@@ -30,21 +30,20 @@ function smarty_block_render($params, $text, &$smarty)
 
 		/* Detect name and id of the current object */
 		$use_text = preg_replace("/\n/"," ",$text);
-		$name = preg_replace('/^.* name[ ]*=[ ]*("|\')([^\"\' ]*).*$/i',"\\2",$use_text);	
+		$name = preg_replace('/^.*? name[ ]*=[ ]*("|\')([^\"\' ]*).*$/i',"\\2",$use_text,1);
 
 		/* Detect id */
-		if(preg_match("/ id=(\"|')[^\"']*(\"|')/i",$text)){
-			$id = preg_replace('/^.* id[ ]*=[ ]*("|\')([^\"\' ]*).*$/i',"\\2",$use_text);	
+		if(preg_match("/ id=(\"|')[^\"']*(\"|')/i",$text,$id_match)){
+			$id = preg_replace('/^.*? id[ ]*=[ ]*("|\')([^\"\' ]*).*$/i',"\\2",$use_text,1);
 		}else{
 			$id = "";
 		}
-		
+
 		/* Is the box checked? */
 		isset($params['checked'])&&$params['checked'] ? $check = " checked " : $check = "";
 
 		/* If name isset, we have a html input field */	
 		if(!empty($name)){
-
 			/* Print checkbox */
 			echo "<input type='checkbox' name='use_".$name."' ".$check." 
 					onClick=\"changeState('".$name."');\" class='center'>";
@@ -87,7 +86,7 @@ function smarty_block_render($params, $text, &$smarty)
 			$to   [] = "disabled name=";
 		}
 
-		$text 	= preg_replace($from,$to,$text);
+		//$text 	= preg_replace($from,$to,$text);
 
 		/* Replace picture if object is disabled */
 		if(isset($params['disable_picture'])){
