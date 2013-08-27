@@ -2753,10 +2753,9 @@ function get_post($name)
     $tmp = array();
     if(is_array($_POST[$name]) && !is_string($_POST[$name])){
         if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){
-          $tmp = array_map("stripcslashes", $_POST);
-        } else {
-          $tmp = $_POST;
+          array_walk_recursive($_POST, "stripcslashes");
         }
+        $tmp = $_POST;
         return($tmp[$name]);
     }else{
 
