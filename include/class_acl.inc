@@ -424,7 +424,7 @@ class acl extends plugin
                 $this->aclContents = "";
                 $this->aclContents = base64_decode(get_post('selected_role'));
             }else{
-                if(is_string($this->aclContents))
+                if(!is_string($this->aclContents))
                     $this->aclContents = array();
             }
         }
