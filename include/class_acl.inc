@@ -309,11 +309,18 @@ class acl extends plugin
         if(isset($entry['acl']) && is_array($entry['acl'])){
             $acl = implode(array_keys($entry['acl']),", ");
         }else{
-            $acl="";
+            if($entry['type'] == 'role') {
+                $roleArray = '';
+                foreach($this->roles[$entry['acl']]['acls'][0]['acl'] as $roleAcl => $key) {
+                     $roleArray[] = $roleAcl;
+                }
+                $acl = implode(', ', $roleArray);
+            } else {
+                $acl="";
+            }
         }
         return(array('data' => array($member, $acl, $this->aclTypes[$entry['type']])));
     }
-
 
 
     function execute()
