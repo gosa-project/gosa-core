@@ -74,6 +74,14 @@ class passwordMethodCrypt extends passwordMethod
       $salt .= "\$";
     }
 
+    if ($this->hash == "crypt/sha512"){ 
+      $salt = "\$6\$";
+      for ($i = 0; $i < 8; $i++) { 
+          $salt .= get_random_char();
+      }
+      $salt .= "\$";
+    }
+
     return "{CRYPT}".crypt($pwd, $salt);
   }
 
@@ -95,6 +103,10 @@ class passwordMethodCrypt extends passwordMethod
 
     if (CRYPT_BLOWFISH == 1) {
       $hashes[]= "crypt/blowfish";
+    }
+
+    if (CRYPT_SHA512 == 1) {
+      $hashes[] = "crypt/sha512";
     }
 
     return $hashes;
@@ -123,6 +135,10 @@ class passwordMethodCrypt extends passwordMethod
 
     if (preg_match('/^(\$2\$|\$2a\$)/', $password_hash)){
       return "crypt/blowfish";
+    }
+
+    if (preg_match('/^\$6\$/', $password_hash)){
+      return "crypt/sha512";
     }
 
     return "";
