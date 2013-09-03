@@ -174,6 +174,7 @@ class aclrole extends acl
       if(!$this->list){
           $this->list = new sortableListing($this->gosaAclTemplate,array(),TRUE);
           $this->list->setDeleteable(true);
+          $this->list->setInstantDelete(true);
           $this->list->setEditable(true);
           $this->list->setColspecs(array('*'));
           $this->list->setWidth("100%");
@@ -257,8 +258,8 @@ class aclrole extends acl
         foreach ($this->ocMapping[$idx] as $key){
           if(isset($this->aclContents[$idx])) 
             unset($this->aclContents[$idx]);
-          if(isset($this->aclContents["$idx/$key"])) 
-            unset($this->aclContents["$idx/$key"]);
+          if(isset($this->aclContents[$idx.'/'.$key])) 
+            unset($this->aclContents[$idx.'/'.$key]);
         }
         continue;
       }
@@ -427,6 +428,7 @@ class aclrole extends acl
 
       $this->sectionList->setListData($data,$lData);
       $this->sectionList->update();
+
       $smarty->assign("aclList", $this->sectionList->render());
 
       $smarty->assign("aclType", $this->aclType);
@@ -772,7 +774,7 @@ class aclrole extends acl
 
     // Check if a wrong base was supplied
     if(!$this->baseSelector->checkLastBaseUpdate()){
-      $message[]= msgPool::check_base();;
+      $message[]= msgPool::check_base();
     }
  
     /* Check if we are allowed to create or move this object

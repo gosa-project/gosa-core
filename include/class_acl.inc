@@ -266,17 +266,18 @@ class acl extends plugin
     $this->roleList->setDefaultSortColumn(1);
     $this->roleList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
 
-        $this->aclMemberList = new sortableListing(array(), array(), false);
-        $this->aclMemberList->setEditable(false);
-        $this->aclMemberList->setDeleteable(true);
-        $this->aclMemberList->setInstantDelete(false);
-        $this->aclMemberList->sortingEnabled(true);
-        $this->aclMemberList->setWidth("100%");
-        $this->aclMemberList->setHeight("150px");
-        $this->aclMemberList->setColspecs(array('20px','*','*'));
-        $this->aclMemberList->setHeader(array(_("~"),_("Name"),_("Description")));
-        $this->aclMemberList->setDefaultSortColumn(1);
-        $this->aclMemberList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
+    $this->aclMemberList = new sortableListing(array(), array(), false);
+    $this->aclMemberList->setEditable(false);
+    $this->aclMemberList->setDeleteable(true);
+    $this->aclMemberList->setInstantDelete(false);
+    $this->aclMemberList->sortingEnabled(true);
+    $this->aclMemberList->setWidth("100%");
+    $this->aclMemberList->setHeight("150px");
+    $this->aclMemberList->setColspecs(array('20px','*','*'));
+    $this->aclMemberList->setHeader(array(_("~"),_("Name"),_("Description")));
+    $this->aclMemberList->setDefaultSortColumn(1);
+    $this->aclMemberList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
+    
     }
 
 
@@ -285,6 +286,7 @@ class acl extends plugin
         if(!$this->list){ 
             $this->list = new sortableListing($this->gosaAclEntry,array(),TRUE);
             $this->list->setDeleteable(true);
+            $this->list->setInstantDelete(true);
             $this->list->setEditable(true);
             $this->list->setColspecs(array('*'));
             $this->list->setWidth("100%");
@@ -359,7 +361,7 @@ class acl extends plugin
             $this->dialog= TRUE;
             $this->loadAclEntry();
         }
-        
+
         foreach($_POST as $name => $post){
 
             $post =get_post($name);
