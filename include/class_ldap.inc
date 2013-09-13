@@ -1020,7 +1020,7 @@ class LDAP
         if (is_resource($process)) {
 
             // Write the password to stdin
-            fwrite($pipes[0], $pwd);
+            fwrite($pipes[0], $pwd."\n");
             fclose($pipes[0]);
 
             // Get results from stdout and stderr
