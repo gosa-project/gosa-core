@@ -3591,13 +3591,14 @@ function image($path, $action= "", $title= "", $align= "middle")
   }
   $styles= session::global_get('img-styles');
 
-  if (!array_key_exists($path, $styles)) {
-    return "";
-  }
-
   /* Extract labels from path */
   if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
     $label= $matches[1];
+  }
+
+  $baseImage = str_replace('['.$label.']', '', $path);
+  if (!array_key_exists($baseImage, $styles)) { 
+    return "";
   }
 
   $lbl= "";
