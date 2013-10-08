@@ -1282,7 +1282,7 @@ float:left;
 margin:0 3px 0 0;
 padding:0;       
 font-size:13px;  
-line-height:1 5em;
+line-height:5em;
 list-style-type:none;
 }                    
 
@@ -1348,7 +1348,7 @@ div.search-filter {
   border:1px solid #CCC;
   border-left:0;
   background-color:white;
-  text-align:middle;
+  text-align:center;
   padding:0;
   margin:0;
   float:left;
@@ -1364,7 +1364,7 @@ div.search-filter input[type=text]{
 button.search-filter {
   padding:4px 2px 3px 2px;;
   margin:0;
-  text-align:middle;
+  text-align:center;
   height:25px;
 }
 
@@ -1409,7 +1409,7 @@ float:left;
 margin:0 3px 0 0;
 padding:0;       
 font-size:13px;  
-line-height:1 5em;
+line-height:5em;
 list-style-type:none;
 }                    
 
@@ -1484,7 +1484,6 @@ background-image:none;
 
 .inline-warning {
   font-size:19px;
-  text-align:bottom;
 }
 
 .inline-warning-text {
