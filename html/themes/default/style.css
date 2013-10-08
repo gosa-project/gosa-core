@@ -194,7 +194,6 @@ input[type=submit].img{
   margin:0;
   margin-top:-2px;
   display:inline-block;
-  display:-moz-inline-block;
   background-color:transparent;
   background-repeat:no-repeat;
   position:relative;
@@ -210,7 +209,6 @@ div.tooltip{
 
 div.img{
   display:inline-block;
-  display:-moz-inline-block;
   background-color:transparent;
   background-repeat:no-repeat;
   position:relative;
@@ -308,8 +306,6 @@ div.plugin-area-noMenu {
   box-shadow: 0 1px 0 rgba(0,0,0,0.1);
   -webkit-border-radius:5px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-  -moz-border-radius:5px;
-  -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.1);
 }
 
 .plugin-actions {
@@ -333,11 +329,11 @@ div.plugin-area-noMenu {
   background-color:#F8F8F8;
   border:1px solid #CCC;
   border-radius:5px;
-  -moz-border-radius:5px;
   -webkit-border-radius:5px;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#EEEEEE')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  background: linear-gradient(to bottom, #F8F8F8, #EEE);
 }
 
 ul.path-navigation {
@@ -365,6 +361,7 @@ ul.path-navigation li.path-element:hover {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient()";
   background: -webkit-gradient();
   background: -moz-linear-gradient();
+  background: linear-gradient();
 }
 
 ul.path-navigation li.path-element[title]:hover {
@@ -372,6 +369,7 @@ ul.path-navigation li.path-element[title]:hover {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#E0E0E0')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#E0E0E0));
   background: -moz-linear-gradient(top, #EEE, #E0E0E0);
+  background: linear-gradient(to bottom, #EEE, #E0E0E0);
 }
 
 ul.path-navigation li:hover {
@@ -379,6 +377,7 @@ ul.path-navigation li:hover {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#E0E0E0')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#E0E0E0));
   background: -moz-linear-gradient(top, #EEE, #E0E0E0);
+  background: linear-gradient(to bottom, #EEE, #E0E0E0);
 }
 
 .right-border {
@@ -396,6 +395,7 @@ div.menu {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F5F5F5')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#F5F5F5));
   background: -moz-linear-gradient(top, #FFF, #F5F5F5);
+  background: linear-gradient(to bottom, #FFF, #F5F5F5);
 }
 
 div.menu div {
@@ -410,8 +410,6 @@ div.menu div {
   -webkit-border-bottom-left-radius:5px;
   -webkit-border-bottom-right-radius:5px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-  -moz-border-radius:5px;
-  -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.1);
 }
 
 div.menu ul {
@@ -449,10 +447,9 @@ div.menu ul li.menu-header {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#5B6B8E', endColorstr='#2A4A79')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#5B6B8E), to(#2A4A79));
   background: -moz-linear-gradient(top, #5B6B8E, #2A4A79);
+  background: linear-gradient(to bottom, ##5B6B8E, #2A4A79);
   border-top-left-radius:5px;
   border-top-right-radius:5px;
-  -moz-border-radius-topleft:5px;
-  -moz-border-radius-topright:5px;
   -webkit-border-top-left-radius:5px;
   -webkit-border-top-right-radius:5px;
 }
@@ -468,10 +465,10 @@ button {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#BBBBBB')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#BBB));
   background: -moz-linear-gradient(top, #FFF, #BBB);
+  background: linear-gradient(to bottom, #FFF, #BBB);
   border:1px solid #BBB;
   border-radius:2px;
   -webkit-border-radius:2px;
-  -moz-border-radius:2px;
   outline:none;
   min-width:60px;
 }
@@ -481,6 +478,7 @@ button:active {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#BBBBBB', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 100%, 0 0, from(#FFF), to(#BBB));
   background: -moz-linear-gradient(top, #BBB, #FFF);
+  background: linear-gradient(to bottom, #BBB, #FFF);
 }
 
 button:hover {
@@ -514,10 +512,6 @@ button:focus, .button:active {
   -webkit-border-bottom-right-radius:5px;
   -webkit-border-bottom-left-radius:5px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-  -moz-border-radius-topright:5px;
-  -moz-border-radius-bottomright:5px;
-  -moz-border-radius-bottomleft:5px;
-  -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.1);
 }
 
 .tabs ul {
@@ -537,12 +531,11 @@ button:focus, .button:active {
   border-top-left-radius:5px;
   -webkit-border-top-right-radius:5px;
   -webkit-border-top-left-radius:5px;
-  -moz-border-radius-topleft:5px;
-  -moz-border-radius-topright:5px;
   background-color:#E8E8E8;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#DDDDDD')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#DDD));
   background: -moz-linear-gradient(top, #EEE, #DDD);
+  background: linear-gradient(to bottom, #EEE, #DDD);
   color:#333;
   cursor:pointer;
 }
@@ -552,6 +545,7 @@ button:focus, .button:active {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#FFF));
   background: -moz-linear-gradient(top, #F8F8F8, #FFF);
+  background: linear-gradient(to bottom, #F8F8F8, #FFF);
 }
 
 .tabs li.current {
@@ -559,6 +553,7 @@ button:focus, .button:active {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#FFF));
   background: -moz-linear-gradient(top, #F8F8F8, #FFF);
+  background: linear-gradient(to bottom, #F8F8F8, #FFF);
   margin-top:-2px;
   max-height:14px;
   padding-bottom:6px;
@@ -643,7 +638,6 @@ div.datepicker {
   padding:0;
   box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
   -webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
-  -moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
 }
 
 div.datepicker-calendar table {
@@ -832,8 +826,6 @@ div.listContainer {
   border-right:1px solid #CCC;
   border-top-left-radius:2px;
   border-top-right-radius:2px;
-  -moz-border-radius-topleft:2px;
-  -moz-border-radius-topright:2px;
   -webkit-border-top-left-radius:2px;
   -webkit-border-top-right-radius:2px;
 }
@@ -861,6 +853,7 @@ div.listContainer {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  background: linear-gradient(to bottom, #F8F8F8, #EEE);
   border-right:1px solid #CCC;
   border-bottom:1px solid #CCC;
 }
@@ -948,13 +941,12 @@ div.nlistFooter {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  background: linear-gradient(to bottom, #F8F8F8, #EEE);
   border-left:1px solid #CCC;
   border-right:1px solid #CCC;
   border-bottom:1px solid #CCC;
   border-bottom-left-radius:2px;
   border-bottom-right-radius:2px;
-  -moz-border-radius-bottomleft:2px;
-  -moz-border-radius-bottomright:2px;
   -webkit-border-bottom-left-radius:2px;
   -webkit-border-bottom-right-radius:2px;
   padding:0;
@@ -973,11 +965,11 @@ div.nlistFooter {
   background-color:#F8F8F8;
   border:1px solid #CCC;
   border-radius:2px;
-  -moz-border-radius:2px;
   -webkit-border-radius:2px;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  background: linear-gradient(to bottom, #F8F8F8, #EEE);
   margin-bottom:4px;
   margin-right:-2px;
 }
@@ -1018,7 +1010,6 @@ div.sortableListContainer {
   overflow:auto;
   margin-bottom:2px;
   border-radius:2px;
-  -moz-border-radius:2px;
   -webkit-border-radius:2px;
 }
 
@@ -1027,6 +1018,7 @@ div.sortableListContainer {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  background: linear-gradient(to bottom, #F8F8F8, #EEE);
   padding:4px;
   text-align:left;
   border-left:1px solid #CCC;
@@ -1273,6 +1265,7 @@ border:1px solid #CCC;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
 background:-webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
 background:-moz-linear-gradient(top, #F8F8F8, #EEE);
+background:linear-gradient(to bottom, #F8F8F8, #EEE);
 }                             
 
 #pulldown ul {
@@ -1328,7 +1321,6 @@ border:1px #CCC solid;
 background:#FFF;                         
 box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
 -webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
--moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
 }                                        
 
 #pulldown ul.level2 li,#pulldown ul.level3 li {
@@ -1400,6 +1392,7 @@ height:23px;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
 background:-webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
 background:-moz-linear-gradient(top, #F8F8F8, #EEE);
+background:linear-gradient(to bottom, #F8F8F8, #EEE);
 }                             
 
 #filtermenu ul {
@@ -1456,7 +1449,6 @@ border:1px #CCC solid;
 background:#FFF;                         
 box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
 -webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
--moz-box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
 }                                        
 
 #filtermenu ul.level2 li{
@@ -1508,7 +1500,6 @@ div.progress {
   color: rgba(255,255,255,0.9);
   padding:1px;
   border: 1px solid rgba(0,0,0,0.6);
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
@@ -1539,10 +1530,9 @@ div.progress {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#FFFFFF')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
   background: -moz-linear-gradient(top, #F8F8F8, #EEE);
+  background: linear-gradient(to bottom, #F8F8F8, #EEE);
   border-top-left-radius:5px;
   border-top-right-radius:5px;
-  -moz-border-radius-topleft:5px;
-  -moz-border-radius-topright:5px;
   -webkit-border-top-left-radius:5px;
   -webkit-border-top-right-radius:5px;
   border-bottom:1px solid #CCC;
@@ -1560,11 +1550,11 @@ div.progress {
   background-color:#FFF;
   border:1px solid #CCC;
   border-radius:5px;
-  -moz-border-radius:5px;
   -webkit-border-radius:5px;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F8F8F8')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#F8F8F8));
   background: -moz-linear-gradient(top, #FFF, #F8F8F8);
+  background: linear-gradient(to bottom, #FFF, #F8F8F8);
 }
 
 .login-element-container {
@@ -1623,11 +1613,11 @@ div.progress {
   background-color:#F8F8F8;
   border:2px solid red;
   border-radius:5px;
-  -moz-border-radius:5px;
   -webkit-border-radius:5px;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F0F0F0')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#F0F0F0));
   background: -moz-linear-gradient(top, #FFF, #F0F0F0);
+  background: linear-gradient(to bottom, #FFF, #F0F0F0);
 }
 
 h2 {
@@ -1663,6 +1653,7 @@ tr.acl-viewer-head{
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#DDDDDD')";
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#DDD));
   background: -moz-linear-gradient(top, #EEE, #DDD);
+  background: linear-gradient(to bottom, #EEE, #DDD);
 }
 
 tr.acl-viewer-head td{
