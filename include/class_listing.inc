@@ -396,11 +396,11 @@ class listing {
 
             // Render multi select if needed
             if ($this->multiSelect) {
-                $trow.="<td style='text-align:center;width:20px;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>\n";
+                $trow.="<td style='text-align:center;width:20px;padding:0;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>\n";
             }
 
             if ($this->singleSelect) {
-                $trow.="<td style='text-align:center;width:20px;' class='list0'><input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'></td>\n";
+                $trow.="<td style='text-align:center;width:20px;padding:0;' class='list0'><input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'></td>\n";
             }
 
             foreach ($this->xmlData['table']['column'] as $index => $config) {
@@ -454,11 +454,11 @@ class listing {
             $result.= "<tr>";
             for ($i= 0; $i<$this->numColumns; $i++) {
                 if ($i == 0) {
-                    $result.= "<td class='list1nohighlight' style='$emptyListStyle height:100%;'>&nbsp;</td>";
+                    $result.= "<td class='list1nohighlight' style='$emptyListStyle height: 100%;'>&nbsp;</td>";
                     continue;
                 }
                 if ($i != $this->numColumns-1) {
-                    $result.= "<td class='list1nohighlight' style='$emptyListStyle'>&nbsp;</td>";
+                    $result.= "<td class='list1nohighlight' style='$emptyListStyle '>&nbsp;</td>";
                 } else {
                     $result.= "<td class='list1nohighlight' style='border-right:0;$emptyListStyle'>&nbsp;</td>";
                 }
