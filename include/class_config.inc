@@ -1001,7 +1001,7 @@ class config  {
      * */
     function boolValueIsTrue($class, $name)
     {
-        return(preg_match("/true/i", $this->get_cfg_value($class,$name)));
+        return((bool)preg_match("/true/i", $this->get_cfg_value($class,$name)));
     }
 
 
