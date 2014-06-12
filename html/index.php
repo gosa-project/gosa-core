@@ -388,7 +388,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 
 /* Fill template with required values */
 $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
-$smarty->assign ('username', $username);
+$smarty->assign ('username', set_post($username));
 $smarty->assign ('personal_img', get_template_path('images/login-head.png'));
 $smarty->assign ('password_img', get_template_path('images/password.png'));
 $smarty->assign ('directory_img', get_template_path('images/ldapserver.png'));
