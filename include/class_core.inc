@@ -582,7 +582,7 @@ DEBUG_SI      = 256"),
                         array(
                                 "name"          => "sambaHashHook",
                                 "type"          => "command",
-                                "default"       => "perl -MCrypt::SmbHash -e \"print join(q[:], ntlmgen %password), $/;\"",
+                                "default"       => "perl -MCrypt::SmbHash -e \"use MIME::Base64; print join(q[:], ntlmgen decode_base64('%password')), $/;\"",
                                 "description"   => _("Command to create Samba NT/LM hashes. Required for password synchronization if you don't use supplementary services."),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
