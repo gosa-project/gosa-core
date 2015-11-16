@@ -649,6 +649,7 @@ A:  Yes. Just go to the locale directory and copy the messages.po file somewhere
 
 
 
-Q:  I've problems with more the 16 users in NFS groups. What's wrong?
+Q:  I've problems with a user being a member in more than 16 groups when accessing
+    files on NFS mounted volumes. What's wrong?
 
-A:  Make sure you're using "–manage-gids" to start the rpc.mountd.
+A:  Make sure you're using "--manage-gids" to start the rpc.mountd.
