@@ -88,10 +88,6 @@
   <td>
    <h3>{t}Group membership{/t}
    </h3>
-   {if $groups eq "too_many_for_nfs"}
-   <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
-   <br>
-   {/if}
    {render acl=$groupMembershipACL}
    {$groupList}
    {/render}

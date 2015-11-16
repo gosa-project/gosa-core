@@ -636,7 +636,7 @@ A:  Place the option 'ldapFollowReferrals = "true"' inside your locations defini
 
 Q:  GOsa is not in my native language, can I translate it to my language? 
 
-    Yes. Just go to the locale directory and copy the messages.po file somewhere
+A:  Yes. Just go to the locale directory and copy the messages.po file somewhere
     else. (Translation is splitted into core and plugin translation files). 
     Edit the copy and put your translations into the msgstr lines. To be
     included in next GOsa releases, you may want to send it to the GOsa maintainer.
@@ -646,3 +646,9 @@ Q:  GOsa is not in my native language, can I translate it to my language?
 
     You may need to restart apache, depending on your setup. On Debian, be sure
     to have your locale generated (dpkg-reconfigure locales) before.
+
+
+
+Q:  I've problems with more the 16 users in NFS groups. What's wrong?
+
+A:  Make sure you're using "–manage-gids" to start the rpc.mountd.

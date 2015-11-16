@@ -464,11 +464,7 @@ class posixAccount extends plugin
       $smarty->assign("groupMembership_some", set_post($this->groupMembership_some));
     }
 
-    if (count($this->groupMembership) > 16){
-      $smarty->assign("groups", "too_many_for_nfs");
-    } else {
-      $smarty->assign("groups", "");
-    }
+    $smarty->assign("groups", "");
 
     /* Avoid "Undefined index: forceMode" */
     $smarty->assign("forceMode", "");

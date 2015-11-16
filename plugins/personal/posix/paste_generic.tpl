@@ -64,10 +64,6 @@
     <tr>
      <td>
       
-      {if $groups eq "too_many_for_nfs"}
-      <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
-      <br>
-      {/if}
       <select style="width:100%; height:130px;" name="group_list[]" size=16 multiple>
        {html_options options=$groupMembership}
       </select>
