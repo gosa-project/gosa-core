@@ -40,7 +40,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.14.4 NAME 'gotoMimeEmbeddedApplication'
 #  E: show in external viewer
 #  O: take settings from global mime group
 #  These fields are taken as OR. Additionally you can add a
-#  Q: to ask wether a question should pop up - to save it to
+#  Q: to ask whether a question should pop up - to save it to
 #     the local disc or not.
 attributetype ( 1.3.6.1.4.1.10098.1.1.14.5 NAME 'gotoMimeLeftClickAction'
         DESC 'GOto - Gonicus Terminal Concept, PPD data'
