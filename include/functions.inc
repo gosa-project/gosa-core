@@ -3349,7 +3349,7 @@ function cred_decrypt($input,$password) {
   $size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
   $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
 
-  return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, pack("H*", $input), MCRYPT_MODE_ECB, $iv);
+  return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, pack("H*", $input), MCRYPT_MODE_ECB, $iv), "\0\3\4\n");
 }
 
 
