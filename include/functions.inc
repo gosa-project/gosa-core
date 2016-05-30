@@ -3097,10 +3097,8 @@ function generate_smb_nt_hash($password)
       return ("");
     }
   } else {
-      $password = addcslashes($password, '$'); // <- Escape $ twice for transport from PHP to console-process.
-      $password = addcslashes($password, '$'); 
-      $password = addcslashes($password, '$'); // <- And again once, to be able to use it as parameter for the perl script.
-	  $tmp = $config->get_cfg_value("core",'sambaHashHook');
+      $password = addcslashes($password, '$'); // <- Escape "$" once to be able to use it in pw strings in Perl scripts
+      $tmp = $config->get_cfg_value("core",'sambaHashHook');
       $tmp = preg_replace("/%userPassword/", base64_encode($password), $tmp);
       $tmp = preg_replace("/%password/", base64_encode($password), $tmp);
 	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
