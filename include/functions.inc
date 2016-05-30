@@ -1577,7 +1577,7 @@ function get_uid_regexp()
   if (strict_uid_mode()){
     return "^[a-z0-9_-]+$";
   } else {
-    return "^[a-zA-Z0-9 _.-]+$";
+    return "^[_.A-Za-z0-9][-\@_.A-Za-z0-9]*\$";
   }
 }
 

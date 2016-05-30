@@ -1352,11 +1352,7 @@ class user extends plugin
     /* Check for valid input */
     if ($this->is_modified && !tests::is_uid($this->uid)){
 
-      if (strict_uid_mode()){
-        $message[]= msgPool::invalid(_("Login"), $this->uid, "/[a-z0-9_-]/");
-      } else {
-        $message[]= msgPool::invalid(_("Login"), $this->uid, "/[a-z0-9_-]/i");
-      }
+      $message[]= msgPool::invalid(_("Login"), $this->uid, "/".get_uid_regexp()."/");
     }
     if (!tests::is_url($this->labeledURI)){
       $message[]= msgPool::invalid(_("Homepage"), "", "", "http://www.your-domain.com/yourname");
