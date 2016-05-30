@@ -324,6 +324,23 @@ class tests {
 
     return checkdate($matches[2],$matches[1],$matches[3]);
   }
+
+  /* Check if entry value is a valid date */
+  public static function is_iso8601_date($date)
+  {
+    global $lang;
+
+    if ($date == ""){
+      return (TRUE);
+    }
+
+    if (!preg_match("/^(\d{4})-(\d{2})-(\d{2})$/", $date, $matches)) {
+      return false;
+    }
+
+    return checkdate($matches[2],$matches[3],$matches[1]);
+  }
+
   /*
    * Compares two dates
    * @param $dataA as String in german dateformat
