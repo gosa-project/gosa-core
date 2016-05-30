@@ -274,7 +274,7 @@ class filter {
                 $filter= preg_replace("/\\$/", "*".normalizeLdap($this->value)."*", $filter);
             }
 
-            $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage));
+            $result= array_unique(array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage)), SORT_REGULAR);
         }
 
         return ($result);
