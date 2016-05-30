@@ -270,7 +270,7 @@ class acl extends plugin
     $this->aclMemberList->setEditable(false);
     $this->aclMemberList->setDeleteable(true);
     $this->aclMemberList->setInstantDelete(false);
-    $this->aclMemberList->sortingEnabled(true);
+    $this->aclMemberList->setSortingEnabled(true);
     $this->aclMemberList->setWidth("100%");
     $this->aclMemberList->setHeight("150px");
     $this->aclMemberList->setColspecs(array('20px','*','*'));
