@@ -3591,14 +3591,17 @@ function image($path, $action= "", $title= "", $align= "middle")
   }
   $styles= session::global_get('img-styles');
 
+  /* Extract labels from path */
+  preg_match("/(.*\.png)\[(.*)\]$/", $path, $matches);
+
+  if (count($matches) == 3) {
+    $path = $matches[1];
+    $label= $matches[2];
+  }
+
   /* If there's nothing available, just return nothing */
   if (!array_key_exists($path, $styles)) {
     return "";
-  }
-
-  /* Extract labels from path */
-  if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
-    $label= $matches[1];
   }
 
   $baseImage = str_replace('['.$label.']', '', $path);
@@ -3613,8 +3616,6 @@ function image($path, $action= "", $title= "", $align= "middle")
     } else {
       die("Invalid label specified: $label\n");
     }
-
-    $path= preg_replace("/\[.*\]$/", "", $path);
   }
 
   // Non middle layout?
