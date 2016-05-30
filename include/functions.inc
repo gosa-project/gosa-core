@@ -3591,6 +3591,11 @@ function image($path, $action= "", $title= "", $align= "middle")
   }
   $styles= session::global_get('img-styles');
 
+  /* If there's nothing available, just return nothing */
+  if (!array_key_exists($path, $styles)) {
+    return "";
+  }
+
   /* Extract labels from path */
   if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
     $label= $matches[1];
