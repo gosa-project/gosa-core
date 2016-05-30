@@ -752,7 +752,12 @@ class posixAccount extends plugin
         $g->cn= $groupcn;
         $g->force_gid= 1;
         $g->gidNumber= $this->gidNumber;
-        $g->description= _("Group of user")." ".$this->givenName." ".$this->sn;
+        if (isset($this->parent) && $this->parent !== NULL){
+            $g->description= _("Group of user")." ".$this->parent->by_object['user']->givenName." ".$this->parent->by_object['user']->sn;
+        }
+        else {
+            $g->description= _("Group of user")." ".$this->uid;
+        }
         $g->save ();
 
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
