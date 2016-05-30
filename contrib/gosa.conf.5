@@ -118,9 +118,9 @@ The script gets executed before(pre) and after(post) create, delete or modify ta
 
 This keyword takes a full executable path of a script. Check is
 triggered after you press the
--I "Apply"
+\-I "Apply"
 or
--I "OK"
+\-I "OK"
 button. The complete LDAP entry as it will be written to the
 LDAP is passed to your script. If parts of the entry do not
 match some logic of your script, just print an error message
@@ -557,7 +557,7 @@ can be used to let GOsa generate password proposals for you.
 Whenever you change a password, you can then decide whether to use the proposal or to manually specify a password.
 
 .nf
-/usr/bin/apg -n1
+/usr/bin/apg \-n1
 .fi
 
 .B strictPasswordRules
@@ -1076,7 +1076,7 @@ If you don't have mkntpasswd from the samba distribution installed, you can use
 perl to generate the hash. Keep in mind to pass the value base64 encoded to perl:
 
 .nf
-perl -MCrypt::SmbHash -e "print join(q[:], ntlmgen decode_base64('\\$ARGV[0]')), $/;"
+perl \-MCrypt::SmbHash \-e "print join(q[:], ntlmgen decode_base64('\\$ARGV[0]')), $/;"
 .if
 .PP
 
@@ -1147,7 +1147,7 @@ server or keep it after the account is deleted in LDAP.
 .PP
 The
 .I cyrusAutocreateFolders
-statement contains a comma seperated list of personal IMAP folders that
+statement contains a comma separated list of personal IMAP folders that
 should be created along initial account creation.
 
 .B postfixRestrictionFilters
@@ -1216,7 +1216,7 @@ option.
 
 
 .B mailUserCreation
-This attribute allows to override the user account creation syntax, see
+This attribute allows one to override the user account creation syntax, see
 the
 .I mailFolderCreation
 description for more details. 
@@ -1259,7 +1259,7 @@ The
 .I displayErrors
 statement tells GOsa to show PHP errors in the upper part of the screen. This
 should be disabled in productive deployments, because there might be some
-important passwords arround.
+important passwords around.
 .PP
 
 .B ldapstats
@@ -1277,7 +1277,7 @@ help to find indexing problems or bad search filters.
 The
 .I ignoreAcl
 value tells GOsa to ignore complete ACL sets for the given DN. Add your
-DN here and you'll be able to restore accidently dropped ACLs.
+DN here and you'll be able to restore accidentally dropped ACLs.
 .PP
 
 .B debugLevel
