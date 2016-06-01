@@ -26,7 +26,7 @@ class Step_Schema extends setup_step
     var $not_checked = array();
     var $b_displayCheckbutton = true;
 
-    function Step_Schema()
+    function __construct()
     {
         $this->update_strings();
     }

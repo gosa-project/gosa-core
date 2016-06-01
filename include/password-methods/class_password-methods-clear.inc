@@ -24,7 +24,7 @@ class passwordMethodClear extends passwordMethod
 {
   var $lockable = FALSE;
 
-	function passwordMethodClear($config)
+	function __construct($config)
 	{
 	}
 

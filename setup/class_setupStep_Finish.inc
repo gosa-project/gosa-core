@@ -28,7 +28,7 @@ class Step_Finish extends setup_step
 
   var $b_displayCheckbutton = TRUE;
 
-  function Step_Finish()
+  function __construct()
   {
     $this->update_strings();
   }

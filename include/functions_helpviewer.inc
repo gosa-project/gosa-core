@@ -27,7 +27,7 @@ class parseXml
   var $filename;
   var $entries;
 
-  function parseXml($file)
+  function __construct($file)
   {
     $this->parser   = xml_parser_create();
     $this->filename = $file;

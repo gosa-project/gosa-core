@@ -64,7 +64,7 @@ class department extends plugin
 
     var $is_root_dse = FALSE;
 
-    function department (&$config, $dn)
+    function __construct(&$config, $dn)
     {
         /* Add the default structural obejct class 'locality' if this is a new entry
          */

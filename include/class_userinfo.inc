@@ -43,7 +43,7 @@ class userinfo
 
   /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */
-  function userinfo(&$config, $userdn){
+  function __construct(&$config, $userdn){
     $this->config= &$config;
     $ldap= $this->config->get_ldap_link();
     $ldap->cat($userdn,array('sn', 'givenName', 'uid', 'gidNumber', 'preferredLanguage', 'gosaUnitTag', 'gosaLoginRestriction'));

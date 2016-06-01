@@ -55,7 +55,7 @@ class sortableListing {
     private $modified= false;
 
 
-    public function sortableListing($data= array(), $displayData= null, $reorderable= false)
+    public function __construct($data= array(), $displayData= null, $reorderable= false)
     {
         global $config;
 

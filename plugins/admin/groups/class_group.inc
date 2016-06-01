@@ -75,7 +75,7 @@ class group extends plugin
     private $partialList;   // (Multiple support active)
 
 
-    function group (&$config, $dn= NULL)
+    function __construct(&$config, $dn= NULL)
     {
         /* Set rfc2307bis flag */
         if ($config->get_cfg_value("core","rfc2307bis") == "true"){

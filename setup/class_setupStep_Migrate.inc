@@ -41,7 +41,7 @@ class Step_Migrate extends setup_step
     var $rootOC_details = array();
     var $b_displayCheckbutton = TRUE;
 
-    function Step_Migrate()
+    function __construct()
     {
         $this->update_strings(); 
     }

@@ -85,7 +85,7 @@ class Print_a_class {
 	# print htmlspecialchars( stripslashes ( $_POST['array'] ) );  
 	var $export_hash;
 		
-	function Print_a_class() {
+	function __construct() {
 		$this->export_hash = uniqid('');
 	}
 	

@@ -36,7 +36,7 @@ class password extends plugin
     var $attributes=array('userPassword');
 
 
-    function password(&$config, $dn= NULL, $parent= NULL)
+    function __construct(&$config, $dn= NULL, $parent= NULL)
     {
         plugin::plugin($config, $dn, $parent);
     }

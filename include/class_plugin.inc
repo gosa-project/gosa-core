@@ -143,7 +143,7 @@ class plugin
     \param dn Distinguished name to initialize plugin from
     \sa plugin()
    */
-  function plugin (&$config, $dn= NULL, $object= NULL)
+  function __construct(&$config, $dn= NULL, $object= NULL)
   {
 
     $this->initTime = microtime(TRUE);

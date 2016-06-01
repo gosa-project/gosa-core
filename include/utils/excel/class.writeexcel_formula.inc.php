@@ -77,7 +77,7 @@ var $_formula;
 #
 # Constructor
 #
-function writeexcel_formula($byte_order) {
+function __construct($byte_order) {
 
     $this->parser          = false;
     $this->ptg             = array();

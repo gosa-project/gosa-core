@@ -60,7 +60,7 @@ class acl extends plugin
     var $roleList = NULL;
     var $aclMemberList = NULL;
 
-    function acl (&$config, $parent, $dn= NULL)
+    function __construct(&$config, $parent, $dn= NULL)
     {
         /* Include config object */
         plugin::plugin($config, $dn);

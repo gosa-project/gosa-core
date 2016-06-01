@@ -59,7 +59,7 @@ class aclrole extends acl
   var $list =NULL;
   var $sectionList = NULL;
 
-  function aclrole (&$config,  $dn= NULL)
+  function __construct(&$config,  $dn= NULL)
   {
     /* Include config object */
     plugin::plugin($config, $dn);

@@ -23,7 +23,7 @@
 class acltab extends tabs
 {
 
-  function acltab($config, $data, $dn)
+  function __construct($config, $data, $dn)
   {
     $data = array(array("CLASS" => "acl" , "NAME" => _("ACL")));
 

@@ -308,7 +308,7 @@ class ogrouptabs extends tabs
         return ( $str);
     }  
 
-    function ogrouptabs($config, $data, $dn,$category ="ogroups",$hide_refs = FALSE, $hide_acls = FALSE)
+    function __construct($config, $data, $dn,$category ="ogroups",$hide_refs = FALSE, $hide_acls = FALSE)
     {
 
         tabs::tabs($config, $data, $dn, $category,$hide_refs, $hide_acls);

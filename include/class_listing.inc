@@ -58,7 +58,7 @@ class listing {
     var $baseSelector;
     var $aclToObjectClass = array();
 
-    function listing($source, $isString = FALSE)
+    function __construct($source, $isString = FALSE)
     {
         global $config;
         global $class_mapping;

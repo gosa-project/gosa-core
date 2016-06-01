@@ -29,7 +29,7 @@ class reference extends plugin
     var $objectList ="";
     var $modifyTimestamp = "";
 
-    function reference (&$config, $dn= NULL, $parent = NULL)
+    function __construct(&$config, $dn= NULL, $parent = NULL)
     {
         // Init the plugin
         plugin::plugin($config,$dn,$parent);

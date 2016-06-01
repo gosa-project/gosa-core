@@ -22,7 +22,7 @@
 
 class passwordMethodssha extends passwordMethod
 {
-  function passwordMethodssha($config)
+  function __construct($config)
   {
   }
 

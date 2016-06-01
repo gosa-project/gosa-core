@@ -23,7 +23,7 @@
 class aclroletab extends tabs
 {
 
-  function aclroletab($config, $data, $dn)
+  function __construct($config, $data, $dn)
   {
     $data = array(array("CLASS" => "aclrole" , "NAME" => _("ACL Templates")));
     tabs::tabs($config, $data, $dn,"acl");

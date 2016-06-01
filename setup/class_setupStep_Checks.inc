@@ -29,7 +29,7 @@ class Step_Checks extends setup_step
     
     var $b_displayCheckbutton = TRUE;
 
-  function Step_Checks()
+  function __construct()
   {
     $this->update_strings();
   }

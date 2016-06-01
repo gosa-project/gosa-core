@@ -28,7 +28,7 @@ class Step_Welcome  extends setup_step
 
     var $instanceUUID = "";
     
-  function Step_Welcome()
+  function __construct()
   {
     $this->is_enabled     = TRUE;
     $this->is_active      = TRUE;

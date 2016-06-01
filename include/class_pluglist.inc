@@ -77,7 +77,7 @@ class pluglist
     }
 
 
-    function pluglist(&$config, &$ui)
+    function __construct(&$config, &$ui)
     {
         $this->ui= &$ui;
         $this->config= &$config;

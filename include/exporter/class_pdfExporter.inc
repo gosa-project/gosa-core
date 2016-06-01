@@ -12,7 +12,7 @@ class pdfExporter
 {
   var $result;
 
-  function pdfExporter($headline, $header, $entries, $columns= array()) {
+  function __construct($headline, $header, $entries, $columns= array()) {
     // Bail out if no FPDF available
     if(!class_exists('FPDF')) {
       die(_("No PDF export possible: there is no FPDF library installed."));
