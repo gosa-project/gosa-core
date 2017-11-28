@@ -14,7 +14,7 @@ class dashBoard extends plugin
 
     function __construct($config)
     {
-        plugin::plugin($config, NULL);
+        plugin::__construct($config, NULL);
 
         // Check if we've access to the registration server
         if($this->config->registration->registrationRequired() && $config->registration->isServerAccessible()){

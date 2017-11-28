@@ -88,7 +88,7 @@ class department extends plugin
         }
         $this->objectclasses = array_unique($this->objectclasses);
 
-        plugin::plugin($config, $dn);
+        plugin::__construct($config, $dn);
         $this->is_account= TRUE;
         $this->ui= get_userinfo();
         $this->dn= $dn;

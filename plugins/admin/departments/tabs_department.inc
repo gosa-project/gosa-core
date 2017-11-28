@@ -28,7 +28,7 @@ class deptabs extends tabs
 
   function __construct($config, $data, $dn,$category,$hide_refs = FALSE, $hide_acls = FALSE)
   {
-    tabs::tabs($config, $data, $dn,$category,$hide_refs, $hide_acls);
+    tabs::__construct($config, $data, $dn,$category,$hide_refs, $hide_acls);
 
     /* Detect the base class  (The classs which extends from department)
      */

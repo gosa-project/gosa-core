@@ -32,7 +32,7 @@ class reference extends plugin
     function __construct(&$config, $dn= NULL, $parent = NULL)
     {
         // Init the plugin
-        plugin::plugin($config,$dn,$parent);
+        plugin::__construct($config,$dn,$parent);
 
         // Try to read the 'modifyTimestamp' - this has to be done separately. 
         $ldap = $this->config->get_ldap_link();

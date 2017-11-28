@@ -147,7 +147,7 @@ class user extends plugin
     }
 
     /* Load base attributes */
-    plugin::plugin ($config, $dn);
+    plugin::__construct ($config, $dn);
 
     $this->orig_dn  = $this->dn;
     $this->new_dn   = $dn;
@@ -1884,7 +1884,7 @@ class user extends plugin
    */
   function init_multiple_support($attrs,$all)
   {
-    plugin::init_multiple_support($attrs,$all);
+    plugin::__constructit_multiple_support($attrs,$all);
 
     // Get login restrictions
     if(isset($attrs['gosaLoginRestriction'])){

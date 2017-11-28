@@ -26,7 +26,7 @@ class aclroletab extends tabs
   function __construct($config, $data, $dn)
   {
     $data = array(array("CLASS" => "aclrole" , "NAME" => _("ACL Templates")));
-    tabs::tabs($config, $data, $dn,"acl");
+    tabs::__construct($config, $data, $dn,"acl");
   }
 
   function save($ignore_account= FALSE)

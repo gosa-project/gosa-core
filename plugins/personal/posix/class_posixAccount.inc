@@ -107,7 +107,7 @@ class posixAccount extends plugin
     $this->config= $config;
 
     /* Load bases attributes */
-    plugin::plugin($config, $dn, $parent);
+    plugin::__construct($config, $dn, $parent);
 
     $groupImage = image('plugins/groups/images/select_group.png');
 
@@ -1482,7 +1482,7 @@ class posixAccount extends plugin
    */
   function init_multiple_support($attrs,$all)
   {
-    plugin::init_multiple_support($attrs,$all);
+    plugin::__constructit_multiple_support($attrs,$all);
     $this->trustModeDialog->init_multiple_support($attrs,$all);
 
     // set header for multiple support

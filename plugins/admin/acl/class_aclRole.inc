@@ -62,7 +62,7 @@ class aclrole extends acl
   function __construct(&$config,  $dn= NULL)
   {
     /* Include config object */
-    plugin::plugin($config, $dn);
+    plugin::__construct($config, $dn);
 
     if($this->dn == "new"){
       $ui = get_userinfo();

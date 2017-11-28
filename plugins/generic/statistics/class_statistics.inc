@@ -34,7 +34,7 @@ class statistics extends plugin
 
     function __construct($config)
     {
-        plugin::plugin($config, NULL);
+        plugin::__construct($config, NULL);
     }
 
     function init()

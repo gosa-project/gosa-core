@@ -84,7 +84,7 @@ class group extends plugin
             $this->objectclasses[]= "groupOfNames";
         }
 
-        plugin::plugin ($config, $dn);
+        plugin::__construct ($config, $dn);
 
         $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
         $this->trustModeDialog->setAcl('groups/group');
@@ -1178,7 +1178,7 @@ class group extends plugin
      */
     function init_multiple_support($attrs,$all)
     {
-        plugin::init_multiple_support($attrs,$all);
+        plugin::__constructit_multiple_support($attrs,$all);
         $this->trustModeDialog->init_multiple_support($attrs,$all);
 
         $this->memberUid = array();

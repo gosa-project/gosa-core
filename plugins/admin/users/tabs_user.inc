@@ -32,7 +32,7 @@ class usertabs extends tabs
 
   function __construct($config, $data, $dn, $cat = "", $hide_refs = FALSE, $hide_acls = FALSE)
   {
-    tabs::tabs($config, $data, $dn, 'users',$hide_refs, $hide_acls);
+    tabs::__construct($config, $data, $dn, 'users',$hide_refs, $hide_acls);
     $this->base= $this->by_object['user']->base;
 
     $this->uid = &$this->by_object['user']->uid;

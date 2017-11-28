@@ -12,7 +12,7 @@ class infoPage extends plugin
     {
         $this->config = &$config;
         $this->ui = get_userinfo();
-        plugin::plugin($config, $this->ui->dn);
+        plugin::__construct($config, $this->ui->dn);
 
         // Detect managers for the current user.
         $this->managers = $this->detectManagers();

@@ -63,7 +63,7 @@ class acl extends plugin
     function __construct(&$config, $parent, $dn= NULL)
     {
         /* Include config object */
-        plugin::plugin($config, $dn);
+        plugin::__construct($config, $dn);
 
         /* Load ACL's */
         $this->gosaAclEntry= array();

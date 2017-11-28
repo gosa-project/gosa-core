@@ -42,7 +42,7 @@ class SnapShotDialog extends plugin
 
     function __construct(&$config, $dn, &$parent)
     {
-        plugin::plugin($config,$dn);
+        plugin::__construct($config,$dn);
         $this->parent 	= &$parent;
         $this->ui 		  = get_userinfo();
 

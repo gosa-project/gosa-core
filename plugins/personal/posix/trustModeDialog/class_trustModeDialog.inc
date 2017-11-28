@@ -11,7 +11,7 @@ class trustModeDialog extends plugin
 
     function __construct(&$config, $dn, $parent = NULL)
     {
-        plugin::plugin($config, $dn, $parent);
+        plugin::__construct($config, $dn, $parent);
 
         $this->accessTo = array();
         $this->trustModel= "";
@@ -291,7 +291,7 @@ class trustModeDialog extends plugin
 
     public function init_multiple_support($attrs,$all)
     {
-        plugin::init_multiple_support($attrs,$all);
+        plugin::__constructit_multiple_support($attrs,$all);
 
         if (isset($this->multi_attrs['trustModel'])){
             $this->trustModel= $this->multi_attrs['trustModel'][0];

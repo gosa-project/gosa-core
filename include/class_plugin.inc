@@ -64,7 +64,7 @@ class plugin
     function, else the save function. Should be set to 'TRUE' if
     the construtor detects a valid LDAP object.
 
-    \sa plugin::plugin()
+    \sa plugin::__construct()
    */
   var $is_account= FALSE;
   var $initially_was_account= FALSE;

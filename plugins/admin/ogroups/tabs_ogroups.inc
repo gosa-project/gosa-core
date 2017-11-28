@@ -311,7 +311,7 @@ class ogrouptabs extends tabs
     function __construct($config, $data, $dn,$category ="ogroups",$hide_refs = FALSE, $hide_acls = FALSE)
     {
 
-        tabs::tabs($config, $data, $dn, $category,$hide_refs, $hide_acls);
+        tabs::__construct($config, $data, $dn, $category,$hide_refs, $hide_acls);
         $this->base= $this->by_object['ogroup']->base;
         $this->acl_category = $category;
 

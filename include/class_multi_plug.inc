@@ -54,7 +54,7 @@ CLASS plugin
 Process:
 ========
 
-multi_plug::multi_plug()
+multi_plug::__construct()
   |->o_tab = new tab()                      #Initialize ui handle
   |
   |->handles

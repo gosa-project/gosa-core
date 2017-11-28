@@ -79,7 +79,7 @@ class ogroup extends plugin
 
     function __construct(&$config, $dn= NULL)
     {
-        plugin::plugin ($config, $dn);
+        plugin::__construct ($config, $dn);
 
         $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
         $this->trustModeDialog->setAcl('ogroups/ogroup');
