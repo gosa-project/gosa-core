@@ -19,7 +19,7 @@ generate_po() {
 
   for template in $(find . -name '*.tpl'); do
     echo "* converting .tpl files: $(basename $template)"
-    sed -e 's/{t}/<?php $t= _("/g;s!{/t}!");?>!g' $template > $template.new
+    sed -re 's!\{t(|\ [a-z0-9]+=.*)\}([^\{]*)\{/t\}!<?php $t=_("\2{/t}!g;s!\{/t\}!");?>!g' $template > $template.new
     mv $template.new $template
   done
 
