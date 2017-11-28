@@ -1577,7 +1577,7 @@ function get_uid_regexp()
   if (strict_uid_mode()){
     return "^[a-z0-9_-]+$";
   } else {
-    return "^[a-zA-Z0-9 _.-]+$";
+    return "^[_.A-Za-z0-9][-\@_.A-Za-z0-9]*\$";
   }
 }
 
@@ -3097,10 +3097,8 @@ function generate_smb_nt_hash($password)
       return ("");
     }
   } else {
-      $password = addcslashes($password, '$'); // <- Escape $ twice for transport from PHP to console-process.
-      $password = addcslashes($password, '$'); 
-      $password = addcslashes($password, '$'); // <- And again once, to be able to use it as parameter for the perl script.
-	  $tmp = $config->get_cfg_value("core",'sambaHashHook');
+      $password = addcslashes($password, '$'); // <- Escape "$" once to be able to use it in pw strings in Perl scripts
+      $tmp = $config->get_cfg_value("core",'sambaHashHook');
       $tmp = preg_replace("/%userPassword/", base64_encode($password), $tmp);
       $tmp = preg_replace("/%password/", base64_encode($password), $tmp);
 	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
@@ -3349,7 +3347,7 @@ function cred_decrypt($input,$password) {
   $size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
   $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
 
-  return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, pack("H*", $input), MCRYPT_MODE_ECB, $iv);
+  return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, pack("H*", $input), MCRYPT_MODE_ECB, $iv), "\0\3\4\n");
 }
 
 
@@ -3592,8 +3590,16 @@ function image($path, $action= "", $title= "", $align= "middle")
   $styles= session::global_get('img-styles');
 
   /* Extract labels from path */
-  if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
-    $label= $matches[1];
+  preg_match("/(.*\.png)\[(.*)\]$/", $path, $matches);
+
+  if (count($matches) == 3) {
+    $path = $matches[1];
+    $label= $matches[2];
+  }
+
+  /* If there's nothing available, just return nothing */
+  if (!array_key_exists($path, $styles)) {
+    return "";
   }
 
   $baseImage = str_replace('['.$label.']', '', $path);
@@ -3608,8 +3614,6 @@ function image($path, $action= "", $title= "", $align= "middle")
     } else {
       die("Invalid label specified: $label\n");
     }
-
-    $path= preg_replace("/\[.*\]$/", "", $path);
   }
 
   // Non middle layout?

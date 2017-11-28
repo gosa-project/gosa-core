@@ -113,13 +113,7 @@ class tests {
       return (TRUE);
     }
 
-    /* STRICT adds spaces and case insenstivity to the uid check.
-       This is dangerous and should not be used. */
-    if (strict_uid_mode()){
-      return preg_match ("/^[a-z0-9_-]+$/", $uid);
-    } else {
-      return preg_match ("/^[a-z0-9 _.-]+$/i", $uid);
-    }
+    return preg_match ("/".get_uid_regexp()."/", $uid);
   }
 
 
@@ -237,10 +231,10 @@ class tests {
       return (TRUE);
     }
     if ($template){
-      return preg_match ("/^[._a-z0-9{\[\]}%\+-]+@[_a-{}\[\]%z0-9-]+(\.[a-z0-9-]+)(\.[a-z0-9-]+)*$/i",
+      return preg_match ("/^[a-zA-Z0-9_{\[\]}%]+([.][a-zA-Z0-9_{\[\]}%\+-]+)*[@][a-zA-Z0-9_{\[\]}%-]+([.][a-zA-Z0-9_{\[\]}%-]+)*$/",
           $address);
     } else {
-      return preg_match ("/^[._a-z0-9\+-]+@[_a-z0-9-]+(\.[a-z0-9i-]+)(\.[a-z0-9-]+)*$/i",
+      return preg_match ("/^[a-zA-Z0-9_\+-]+([.][a-zA-Z0-9_\+-]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*$/",
           $address);
     }
   }
@@ -324,6 +318,23 @@ class tests {
 
     return checkdate($matches[2],$matches[1],$matches[3]);
   }
+
+  /* Check if entry value is a valid date */
+  public static function is_iso8601_date($date)
+  {
+    global $lang;
+
+    if ($date == ""){
+      return (TRUE);
+    }
+
+    if (!preg_match("/^(\d{4})-(\d{2})-(\d{2})$/", $date, $matches)) {
+      return false;
+    }
+
+    return checkdate($matches[2],$matches[3],$matches[1]);
+  }
+
   /*
    * Compares two dates
    * @param $dataA as String in german dateformat

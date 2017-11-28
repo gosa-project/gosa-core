@@ -40,7 +40,7 @@ section.
 Add additional dependencies to the Debian tree which did not get
 listed in the
 .I plugin.dsc
-file. This is a comma seperated list of Debian package names.
+file. This is a comma separated list of Debian package names.
 
 .IP "-e mail, --email mail"
 Overrides the Debian packager defined inside the
@@ -52,15 +52,15 @@ file by the one specified by
 
 .nf
 # Check out a plugin from SVN
-svn co https://oss.gonicus.de/repositories/gosa/trunk/gosa-plugins/samba /tmp/samba
+svn co https://oss.gonicus.de/repositories/gosa/trunk/gosa\-plugins/samba /tmp/samba
 
 # Debianize the tree
 cd /tmp
-dh-make-gosa --email cajus@debian.org --release etch --section web samba
+dh-make-gosa \-\-email cajus@debian.org \-\-release etch \-\-section web samba
 
 # Build debian package
 cd samba
-dpkg-buildpackage -uc -us -rfakeroot
+dpkg\-buildpackage \-uc \-us \-rfakeroot
 .fi
 
 To build everything from the subversion repository which is GOsa related, please

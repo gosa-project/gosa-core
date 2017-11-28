@@ -917,9 +917,16 @@ class user extends plugin
 
     if ($this->dateOfBirth != ""){
       if(!is_array($this->attrs['dateOfBirth'])) {
-        #TODO: use $lang to convert date
-        list($day, $month, $year)= explode(".", $this->dateOfBirth);
-        $this->attrs['dateOfBirth'] = sprintf("%04d-%02d-%02d", $year, $month, $day);
+        if (tests::is_iso8601_date($this->dateOfBirth))
+        {
+            /* allow ISO8601 date format as dateOfBirth */
+            $this->attrs['dateOfBirth'] = $this->dateOfBirth;
+        }
+        else {
+            // TODO: use $lang to convert date
+            list($day, $month, $year)= explode(".", $this->dateOfBirth);
+            $this->attrs['dateOfBirth'] = sprintf("%04d-%02d-%02d", $year, $month, $day);
+        }
       }
     }
 
@@ -1345,11 +1352,7 @@ class user extends plugin
     /* Check for valid input */
     if ($this->is_modified && !tests::is_uid($this->uid)){
 
-      if (strict_uid_mode()){
-        $message[]= msgPool::invalid(_("Login"), $this->uid, "/[a-z0-9_-]/");
-      } else {
-        $message[]= msgPool::invalid(_("Login"), $this->uid, "/[a-z0-9_-]/i");
-      }
+      $message[]= msgPool::invalid(_("Login"), $this->uid, "/".get_uid_regexp()."/");
     }
     if (!tests::is_url($this->labeledURI)){
       $message[]= msgPool::invalid(_("Homepage"), "", "", "http://www.your-domain.com/yourname");
@@ -1370,7 +1373,7 @@ class user extends plugin
     }
 
     /* Check dates */
-    if (!tests::is_date($this->dateOfBirth)){
+    if ((!tests::is_date($this->dateOfBirth)) && (!tests::is_iso8601_date($this->dateOfBirth))){
       $message[]= msgPool::invalid(_("Date of birth"), $this->dateOfBirth,"" ,"23.02.2009");
     }
 
