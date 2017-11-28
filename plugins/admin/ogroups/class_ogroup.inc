@@ -459,7 +459,7 @@ class ogroup extends plugin
         $p_f= array("accounts"=> array("OBJ"=>"user", "CLASS"=>"gosaAccount"    ,
                     "DN"=> get_people_ou()           ,"ACL" => "users"), 
                 "groups"          => array("OBJ"=>"group", "CLASS"=>"posixGroup"     ,
-                    "DN"=> get_groups_ou('ogroupRDN') ,"ACL" => "groups"), 
+                    "DN"=> get_ou('group','ogroupRDN') ,"ACL" => "groups"), 
                 "departments"     => array("OBJ"=>"department", "CLASS"=>"gosaDepartment" ,
                     "DN"=> ""                        ,"ACL" => "department"), 
                 "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
