@@ -42,8 +42,6 @@ class passwordMethodsasl extends passwordMethod
     if($ldap->count() == 1){
         $attrs = $ldap->fetch();
         $this->uid = $attrs['uid'][0];
-    }else{
-        trigger_error("Cannot change password, unknown users '".$dn."'");
     }
   }
 

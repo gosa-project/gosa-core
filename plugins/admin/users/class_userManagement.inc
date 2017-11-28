@@ -280,18 +280,6 @@ class userManagement extends management
             $this->proposalSelected = ($this->proposal != "");
             $this->dn = array_pop($this->pwd_change_queue);
 
-            // Do not allow to modify SASL passwords for this customer
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cat($this->dn, array('uid', 'userPassword'));
-            $attrs = $ldap->fetch();
-            $hasSasl = isset($attrs['userPassword'][0]) && preg_match("/^{SASL}/i", $attrs['userPassword'][0]);
-            $getsSasl= !isset($this->force_hash_type[$this->dn]) || $this->force_hash_type[$this->dn] == "sasl";
-            if($getsSasl && $hasSasl){
-                $this->dn = "";
-                $this->handlePasswordQueue();
-                return;
-            }
-
             // Check if we are able to enforce a password change
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
