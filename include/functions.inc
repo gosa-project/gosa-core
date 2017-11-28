@@ -152,6 +152,10 @@ function __gosa_autoload($class_name) {
 	    exit;
     }
 
+    if (preg_match('/^Smarty_.*/', $class_name)) {
+        return;
+    }
+
     if (isset($class_mapping["$class_name"])){
       require_once($BASE_DIR."/".$class_mapping["$class_name"]);
     } else {
