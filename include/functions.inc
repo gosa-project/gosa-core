@@ -3592,8 +3592,11 @@ function image($path, $action= "", $title= "", $align= "middle")
   $styles= session::global_get('img-styles');
 
   /* Extract labels from path */
-  if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
-    $label= $matches[1];
+  preg_match("/(.*\.png)\[(.*)\]$/", $path, $matches);
+
+  if (count($matches) == 3) {
+    $path = $matches[1];
+    $label= $matches[2];
   }
 
   $baseImage = str_replace('['.$label.']', '', $path);
@@ -3608,8 +3611,6 @@ function image($path, $action= "", $title= "", $align= "middle")
     } else {
       die("Invalid label specified: $label\n");
     }
-
-    $path= preg_replace("/\[.*\]$/", "", $path);
   }
 
   // Non middle layout?
