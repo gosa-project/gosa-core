@@ -86,7 +86,7 @@ class sortableListing {
 
         // Set reorderable flag
         $this->reorderable= $reorderable;
-        if (!$reorderable) {
+        if ((!$reorderable) && ($this->sortingEnabled)) {
             $this->sortData();
         }
     }
@@ -274,7 +274,7 @@ class sortableListing {
                     $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending"));
                 }
 
-                if ($this->reorderable) {
+                if (($this->reorderable) || (!$this->sortingEnabled)) {
                     $result.= "   <th$first>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
                 } else {
                     $result.= "   <th$first><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."</a>$sorter</th>";
@@ -368,7 +368,7 @@ class sortableListing {
     {
 
         // Filter GET with "act" attributes
-        if (!$this->reorderable){
+        if ((!$this->reorderable) && ($this->sortingEnabled)) {
             if(isset($_GET['act']) && isset($_GET['PID']) && $this->id == $_GET['PID']) {
 
                 $key= validate($_GET['act']);
@@ -535,7 +535,7 @@ class sortableListing {
     }
 
 
-    public function sortingEnabled($bool = TRUE)
+    public function setSortingEnabled($bool = TRUE)
     {
         $this->sortingEnabled= $bool;
     }
