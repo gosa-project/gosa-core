@@ -30,7 +30,7 @@
 **   
 **   
 ** print_result( result_handle )
-**   prints a mysql_result set returned by mysql_query() as a table
+**   prints a mysqli_result set returned by mysqli_query() as a table
 **   this function is work in progress! use at your own risk
 **
 **
@@ -236,10 +236,11 @@ function print_result($RESULT) {
 	
 	if(!$RESULT) return;
 	
-	$fieldcount = mysql_num_fields($RESULT);
+	$fieldcount = mysqli_num_fields($RESULT);
 	
 	for($i=0; $i<$fieldcount; $i++) {
-		$tables[mysql_field_table($RESULT, $i)]++;
+    $TABLE_NAME = mysqli_fetch_field_direct($RESULT, $i);
+		$tables[$TABLE_NAME->table]++;
 	}
 	
 	print '
@@ -286,16 +287,17 @@ function print_result($RESULT) {
 	print '</tr>';
 	
 	print '<tr>';
-	for($i=0;$i < mysql_num_fields($RESULT);$i++) {
-		$FIELD = mysql_field_name($RESULT, $i);
+	for($i=0;$i < mysqli_num_fields($RESULT);$i++) {
+		$FIELD = mysqli_fetch_field_direct($RESULT, $i);
+    $FIELD = $FIELD->name;
 		$col == '0054A6' ? $col = '003471' : $col = '0054A6';
 		print '<td align="center" bgcolor="#'.$col.'" class="rs_f_th">'.$FIELD.'</td>';
 	}
 	print '</tr>';
 
-	mysql_data_seek($RESULT, 0);
+	mysqli_data_seek($RESULT, 0);
 
-	while($DB_ROW = mysql_fetch_array($RESULT, MYSQL_NUM)) {
+	while($DB_ROW = mysqli_fetch_array($RESULT, MYSQL_NUM)) {
 		$pointer++;
 		if($toggle) {
 			$col1 = "E6E6E6";
@@ -313,7 +315,7 @@ function print_result($RESULT) {
 		print '</tr>';
 	}
 	print '</table>';
-	mysql_data_seek($RESULT, 0);
+	mysqli_data_seek($RESULT, 0);
 }
 
 function _script_globals() {

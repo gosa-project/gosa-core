@@ -138,7 +138,7 @@ class Step_Checks extends setup_step
     $N = msgPool::checkingFor(_("MySQL"));
     $D = _("GOsa requires this module to communicate with several supported databases.");
     $S = msgPool::installPhpModule("MySQL");
-    $R = is_callable("mysql_query");
+    $R = is_callable("mysqli_query");
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 

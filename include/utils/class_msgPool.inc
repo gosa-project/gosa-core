@@ -143,18 +143,6 @@ class msgPool
   }
 
 
-  public static function dbselect($name, $error= "", $dbinfo= "")
-  {
-    if ($error != ""){
-      $error= "<br><br>"._("Error").": ".bold($error);
-    }
-    if ($dbinfo != ""){
-      $error.= "<br><br>"._("Connection information").": ".bold($dbinfo);
-    }
-    return (sprintf(_("Cannot select %s database!"), bold($name)).$error);
-  }
-
-
   public static function noserver($name)
   {
     return (sprintf(_("No %s server defined!"), bold($name)));
