@@ -3822,6 +3822,7 @@ function gen_uids($rule, $attributes)
              $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);
         }
         $value = preg_replace('/[^(\x20-\x7F)]*/','',$value);
+        $value = preg_replace('/\s/', '', $value);
         $attributes[$name] = strtolower($value);
     }
     
