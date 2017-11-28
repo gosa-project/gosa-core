@@ -237,10 +237,10 @@ class tests {
       return (TRUE);
     }
     if ($template){
-      return preg_match ("/^[._a-z0-9{\[\]}%\+-]+@[_a-{}\[\]%z0-9-]+(\.[a-z0-9-]+)(\.[a-z0-9-]+)*$/i",
+      return preg_match ("/^[a-zA-Z0-9_{\[\]}%]+([.][a-zA-Z0-9_{\[\]}%\+-]+)*[@][a-zA-Z0-9_{\[\]}%-]+([.][a-zA-Z0-9_{\[\]}%-]+)*$/",
           $address);
     } else {
-      return preg_match ("/^[._a-z0-9\+-]+@[_a-z0-9-]+(\.[a-z0-9i-]+)(\.[a-z0-9-]+)*$/i",
+      return preg_match ("/^[a-zA-Z0-9_\+-]+([.][a-zA-Z0-9_\+-]+)*[@][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*$/",
           $address);
     }
   }
