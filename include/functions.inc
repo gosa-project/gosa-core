@@ -3833,29 +3833,38 @@ function gen_uids($rule, $attributes)
     preg_match_all('/(\{?%([a-z0-9]+)(\[(([0-9]+)(\-([0-9]+))?)\])?\}?)/i', $rule ,$matches, PREG_SET_ORDER);
     $replacements = array(); 
     foreach($matches as $match){
-        
-        // No start position given, then add the complete value
-        if(!isset($match[5])){
-            $replacements[$match[0]][] = $attributes[$match[2]];
-    
+
+      # initialize the match's replacement array...
+      $replacements[$match[0]] = array();
+
+      // No start position given, then add the complete value
+      if(!isset($match[7])){
+        $replacements[$match[0]][] = $attributes[$match[2]];
+
         // Start given but no end, so just add a single character
-        }elseif(!isset($match[7])){
-            if(isset($attributes[$match[2]][$match[5]])){
-                $tmp = " ".$attributes[$match[2]];
-                $replacements[$match[0]][] = trim($tmp[$match[5]]);
-            }
+      }elseif(!isset($match[7])){
+        if(isset($attributes[$match[2]][$match[5]])){
+          $tmp = " ".$attributes[$match[2]];
+          $replacements[$match[0]][] = trim($tmp[$match[5]]);
+        }
 
         // Add all values in range
-        }else{
-            $str = "";
-            for($i=$match[5]; $i<= $match[7]; $i++){
-                if(isset($attributes[$match[2]][$i])){
-                    $tmp = " ".$attributes[$match[2]];
-                    $str .= $tmp[$i];
-                    $replacements[$match[0]][] = trim($str);
-                }
-            }
+      }else{
+        $str = "";
+        for($i=$match[5]; $i<= $match[7]; $i++){
+          if(isset($attributes[$match[2]][$i])){
+            $tmp = " ".$attributes[$match[2]];
+            $str = substr ($tmp, 1, $i);
+            $replacements[$match[0]][] = trim($str);
+          }
         }
+
+        // if a given attribute's value is shorter than required, use the
+        // full length of the attribute's value
+        if (!$replacements[$match[0]]) {
+          $replacements[$match[0]][] = $attributes[$match[2]];
+        }
+      }
     }
 
     // Create proposal array
