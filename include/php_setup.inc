@@ -177,9 +177,9 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
           }
   
           /* Avoid convertig assoc arrays to string errors */ 
-          if(is_array($arg)){
-            $args.= htmlentities("\"".print_r($arg, true)."\", ");
-          } else {
+          if(!is_array($arg)){
+            //$args.= htmlentities("\"".print_r($arg, true)."\", ");
+//          } else {
             $args.= htmlentities("\"$arg\", ");
           }
         }
