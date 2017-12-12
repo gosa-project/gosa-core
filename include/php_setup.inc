@@ -176,7 +176,12 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
             $arg = "CLASS:&nbsp;".get_class($arg);
           }
   
-          $args.= htmlentities("\"$arg\", ");
+          /* Avoid convertig assoc arrays to string errors */ 
+          if(is_array($arg)){
+            $args.= htmlentities("\"".print_r($arg, true)."\", ");
+          } else {
+            $args.= htmlentities("\"$arg\", ");
+          }
         }
       }
       $args= preg_replace("/, $/", "", $args);
