@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+	update-gosa rescan-i18n
+	update-gosa rescan-classes
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0
