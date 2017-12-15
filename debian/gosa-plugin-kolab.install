@@ -1,4 +1,0 @@
-kolab/admin			/usr/share/gosa/plugins
-kolab/personal			/usr/share/gosa/plugins
-kolab/locale			/usr/share/gosa/locale/plugins/kolab
-kolab/contrib			/usr/share/doc/gosa-plugin-kolab

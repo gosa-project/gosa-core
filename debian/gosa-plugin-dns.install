@@ -1,3 +1,0 @@
-dns/admin			/usr/share/gosa/plugins
-dns/locale			/usr/share/gosa/locale/plugins/dns
-dns/contrib			/usr/share/doc/gosa-plugin-dns

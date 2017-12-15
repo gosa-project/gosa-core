@@ -1,6 +1,0 @@
-html/*			/usr/share/gosa/html/plugins/netgroups/
-locale/*		/usr/share/gosa/locale/plugins/netgroups/
-debian/locale/*		/usr/share/gosa/locale/plugins/netgroups/
-admin/netgroups/*	/usr/share/gosa/plugins/admin/netgroups/
-admin/systems/*		/usr/share/gosa/plugins/admin/systems/
-personal/netgroups/*	/usr/share/gosa/plugins/personal/netgroups
