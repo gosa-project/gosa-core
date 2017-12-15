@@ -58,14 +58,15 @@ dpkg-reconfigure locales).
 For gosa-plugins, every plugin has a locales directory. Translation works
 like described for gosa-core.
 
+Always run ``update-gosa`` after you've added translations in order to
+let GOsa compile and re-sync the translations.
+
+
 ## Contribute Translations
 
 You may want your translations to be included in the main [GOsa
 repository](https://github.com/gosa-project), then just file and issue
 for the correct GOsa component and attach the ``.po`` there.
-
-Always run ``update-gosa`` after you've added translations in order to
-let GOsa compile and re-sync the translations.
 
 
 ## Notes
