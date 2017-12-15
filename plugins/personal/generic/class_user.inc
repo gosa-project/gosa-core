@@ -1887,7 +1887,7 @@ class user extends plugin
    */
   function init_multiple_support($attrs,$all)
   {
-    plugin::__constructit_multiple_support($attrs,$all);
+    plugin::init_multiple_support($attrs,$all);
 
     // Get login restrictions
     if(isset($attrs['gosaLoginRestriction'])){
