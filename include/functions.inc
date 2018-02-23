@@ -3351,7 +3351,7 @@ function cred_decrypt($input, $password, $cipher = "aes-256-cbc") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
     $ivlen = openssl_cipher_iv_length($cipher);
     $iv = openssl_random_pseudo_bytes($ivlen);
-    return openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv );
+    return rtrim(openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv ), "\0\3\4\n");
   }
 
   return null;
