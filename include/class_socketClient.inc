@@ -35,10 +35,10 @@ class Socket_Client
   private $b_encrypt  = FALSE;
 
   /* Crypto information */
-  private $td= NULL;
   private $ckey= "";
-  private $ks;
   private $iv;
+  private $openssl_cipher = "aes-256-cbc";
+  private $iv_len = -1;
 
 
   public function __construct($host, $port, $connect = TRUE, $timeout = 3){
@@ -46,6 +46,8 @@ class Socket_Client
     $this->port= $port;
     $this->timeout= $timeout;
     $this->reset_error();
+
+    $this->iv_len = openssl_cipher_iv_length($openssl_cipher);
 
     /* Connect if needed */
     if($connect){
@@ -56,14 +58,8 @@ class Socket_Client
 
   public function setEncryptionKey($key)
   {
-    if(!function_exists("mcrypt_get_iv_size")){
-      $this->set_error(msgPool::missingext("mcrypt"));
-      $this->ckey = "";
-      $this->b_encrypt = FALSE;
-    }
-
     if ($this->connected()){
-      $this->ckey = substr(md5($key), 0, $this->ks);
+      $this->ckey = md5($key);
       $this->b_encrypt = TRUE;
     }
 
@@ -74,8 +70,7 @@ class Socket_Client
   private function encrypt($data)
   {
     if($this->b_encrypt){
-      mcrypt_generic_init($this->td, $this->ckey, $this->iv);
-      $data = base64_encode(mcrypt_generic($this->td, $data));
+      $data = base64_encode(openssl_encrypt($data, $this->openssl_cipher, $this->ckey, OPENSSL_RAW_DATA, $this->iv));
     }
     return($data);
   }
@@ -85,9 +80,7 @@ class Socket_Client
   {
     /* decrypt data */
     if($this->b_encrypt && strlen($data)){
-      $data = base64_decode($data);
-      mcrypt_generic_init($this->td, $this->ckey, $this->iv);
-      $data = mdecrypt_generic($this->td, $data);
+      $data = openssl_decrypt(base64_decode($data), $this->openssl_cipher, $this->ckey, OPENSSL_RAW_DATA, $this->iv);
     }
     return($data);
   }
@@ -109,12 +102,8 @@ class Socket_Client
     }else{
       $this->b_data_send = TRUE;
 
-      /* Open the cipher */
-      $this->td = mcrypt_module_open('rijndael-128', '', 'cbc', '');
-
       /* Create the IV and determine the keysize length */
-      $this->iv = substr(md5('GONICUS GmbH'),0, mcrypt_enc_get_iv_size($this->td));
-      $this->ks = mcrypt_enc_get_key_size($this->td);
+      $this->iv = substr(md5('GONICUS GmbH'),0, $this->iv_len);
     }
   }
 
@@ -210,9 +199,6 @@ class Socket_Client
     if($this->handle){
       fclose($this->handle);
     }
-
-    /* Terminate decryption handle and close module */
-    @mcrypt_generic_deinit($this->td);
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
