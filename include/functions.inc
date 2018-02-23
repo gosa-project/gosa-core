@@ -3337,23 +3337,25 @@ function get_random_char () {
 }
 
 
-function cred_encrypt($input, $password) {
+function cred_encrypt($input, $password, $cipher = "aes-256-cbc") {
+  if (in_array($cipher, openssl_get_cipher_methods())) {
+    $ivlen = openssl_cipher_iv_length($cipher);
+    $iv = openssl_random_pseudo_bytes($ivlen);
+    return bin2hex(openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv));
+  }
 
-  $size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-  $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
-
-  return bin2hex(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $password, $input, MCRYPT_MODE_ECB, $iv));
-
+  return null;
 }
 
+function cred_decrypt($input, $password, $cipher = "aes-256-cbc") {
+  if (in_array($cipher, openssl_get_cipher_methods())) {
+    $ivlen = openssl_cipher_iv_length($cipher);
+    $iv = openssl_random_pseudo_bytes($ivlen);
+    return openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv );
+  }
 
-function cred_decrypt($input,$password) {
-  $size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-  $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
-
-  return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, pack("H*", $input), MCRYPT_MODE_ECB, $iv), "\0\3\4\n");
+  return null;
 }
-
 
 function get_object_info()
 {
