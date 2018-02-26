@@ -80,7 +80,7 @@ class Socket_Client
   {
     /* decrypt data */
     if($this->b_encrypt && strlen($data)){
-      $data = openssl_decrypt(base64_decode($data), $this->openssl_cipher, $this->ckey, OPENSSL_RAW_DATA, $this->iv);
+      $data = openssl_decrypt(base64_decode($data), $this->openssl_cipher, $this->ckey, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $this->iv);
     }
     return($data);
   }

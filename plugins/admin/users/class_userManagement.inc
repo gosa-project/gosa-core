@@ -164,28 +164,7 @@ class userManagement extends management
      */ 
     function sendMessage($action="",$target=array(),$all=array())
     {
-        if(class_available("DaemonEvent")){
-            $uids = array();
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cd($this->config->current['BASE']);
-            foreach($target as $dn){
-                $ldap->cat($dn,array('uid'));
-                $attrs = $ldap->fetch();
-                if(isset($attrs['uid'][0])){
-                    $uids[] = $attrs['uid'][0];
-                }
-            }
-            if(count($uids)){
-                $events = DaemonEvent::get_event_types(USER_EVENT);
-                $event = "DaemonEvent_notify";
-                if(isset($events['BY_CLASS'][$event])){
-                    $type = $events['BY_CLASS'][$event];
-                    $this->dialogObject = new $type['CLASS_NAME']($this->config);
-                    $this->dialogObject->add_users($uids);
-                    $this->dialogObject->set_type(SCHEDULED_EVENT);
-                }
-            }
-        }
+      return;
     }
 
 
@@ -197,13 +176,6 @@ class userManagement extends management
         $msgs = $this->dialogObject->check();
         if(count($msgs)){
             msg_dialog::displayChecks($msgs);
-        }else{
-            $o_queue = new gosaSupportDaemon();
-            $o_queue->append($this->dialogObject);
-            if($o_queue->is_error()){
-                msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
-            }
-            $this->closeDialogs();
         }
     }
 
