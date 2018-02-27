@@ -3323,7 +3323,7 @@ function get_random_char () {
 }
 
 
-function cred_encrypt($input, $password, $cipher = "aes-256-cbc") {
+function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
     $ivlen = openssl_cipher_iv_length($cipher);
     $iv = openssl_random_pseudo_bytes($ivlen);
@@ -3333,7 +3333,7 @@ function cred_encrypt($input, $password, $cipher = "aes-256-cbc") {
   return null;
 }
 
-function cred_decrypt($input, $password, $cipher = "aes-256-cbc") {
+function cred_decrypt($input, $password, $cipher = "aes-256-ecb") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
     $ivlen = openssl_cipher_iv_length($cipher);
     $iv = openssl_random_pseudo_bytes($ivlen);
