@@ -305,7 +305,7 @@ $smarty->assign('params', $params);
 
 /* Fill template with required values */
 $smarty->assign('date', gmdate("D, d M Y H:i:s"));
-$smarty->assign('uid', $uid);
+$smarty->assign('uid', set_post($uid));
 $smarty->assign('password_img', get_template_path('images/password.png'));
 
 /* Displasy SSL mode warning? */
