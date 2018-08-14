@@ -3112,8 +3112,8 @@ function NThash($Input)
   $pwInput=iconv('UTF-8','UTF-16LE',$Input);
 
   // Encrypt it with the MD4 hash
-  if (phpversion("hash") ){
-    $MD4Hash=bin2hex(hash('md4',$pwInput));
+  if (extension_loaded("hash")) {
+    $MD4Hash=hash('md4',$pwInput);
   } else {
     $MD4Hash=bin2hex(mhash(MHASH_MD4,$pwInput));
   }
@@ -3150,18 +3150,17 @@ function LMhash_DESencrypt($Input)
 
   //Each keys is used to DES-encrypt the constant ASCII string "KGS!@#$%"
   //(resulting in two 8-byte ciphertext values).
-  if (phpversion("openssl")) {
+  if (extension_loaded('openssl')) {
     $is = openssl_cipher_iv_length('des-ecb');
-    $iv = openssl_random_pseudo_bytes($iv);
+    $iv = openssl_random_pseudo_bytes($is);
     $key0 = "";
     foreach ($key as $k)
       $key0 .= chr($k);
-    $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, $options=0, $iv);
+    $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv);
   } else {
     $is = mcrypt_get_iv_size(MCRYPT_DES, MCRYPT_MODE_ECB);
     $iv = mcrypt_create_iv($is, MCRYPT_RAND);
     $key0 = "";
-
     foreach ($key as $k)
       $key0 .= chr($k);
     $LMHash = mcrypt_encrypt(MCRYPT_DES, $key0, $msg, MCRYPT_MODE_ECB, $iv);
