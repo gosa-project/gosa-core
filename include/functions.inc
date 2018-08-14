@@ -3090,7 +3090,7 @@ function generate_smb_nt_hash($password)
 
     $nt=NThash($password);
     $lm=LMhash($password);
-
+    $hash="$lm:$nt";
   }
 
   list($lm,$nt)= explode(":", trim($hash));
@@ -3123,8 +3123,11 @@ function NThash($Input)
   return($hash);
 }
 
+// Really Really should disable this and just output invalid junk
+// since this hashing method is very very broken...
 function LMhash($Input)
 {
+  // return('abunchofinvalidjunk!');
   $Input = strtoupper(substr($Input,0,14));
   $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
   $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
