@@ -3087,21 +3087,10 @@ function generate_smb_nt_hash($password)
     }
 
   } else {
-      $password = addcslashes($password, '$'); // <- Escape "$" once to be able to use it in pw strings in Perl scripts
-      $tmp = $config->get_cfg_value("core",'sambaHashHook');
-      $tmp = preg_replace("/%userPassword/", base64_encode($password), $tmp);
-      $tmp = preg_replace("/%password/", base64_encode($password), $tmp);
-	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
 
- 	  exec($tmp, $ar);
-	  flush();
-	  reset($ar);
-	  $hash= current($ar);
+    $nt=NThash($password);
+    $lm=LMhash($password);
 
-    if ($hash == "") {
-      msg_dialog::display(_("Configuration error"), sprintf(_("Generating SAMBA hash by running %s failed: check %s!"), bold($config->get_cfg_value("core",'sambaHashHook'), bold("sambaHashHook"))), ERROR_DIALOG);
-      return(array());
-    }
   }
 
   list($lm,$nt)= explode(":", trim($hash));
@@ -3114,6 +3103,71 @@ function generate_smb_nt_hash($password)
   return($attrs);
 }
 
+// NT and LM functions with version checks for hash vs mhash and openssl vs mcrypt
+// (openssl and hash methods added by tmackey)
+// Original code from http://php.net/manual/en/ref.hash.php
+function NThash($Input)
+{
+  // Convert the password from UTF8 to UTF16 (little endian)
+  $pwInput=iconv('UTF-8','UTF-16LE',$Input);
+
+  // Encrypt it with the MD4 hash
+  if (phpversion("hash") ){
+    $MD4Hash=bin2hex(hash('md4',$pwInput));
+  } else {
+    $MD4Hash=bin2hex(mhash(MHASH_MD4,$pwInput));
+  }
+
+  // Make it uppercase, not necessary, but it's common to do so with NTLM hashes
+  $hash=strtoupper($MD4Hash);
+  return($hash);
+}
+
+function LMhash($Input)
+{
+  $Input = strtoupper(substr($Input,0,14));
+  $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
+  $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
+  return strtoupper($p1.$p2);
+}
+
+function LMhash_DESencrypt($Input)
+{
+  $msg = "KGS!@#$%";
+  $key = array();
+  $tmp = array();
+  $len = strlen($Input);
+  for ($i=0; $i<7; ++$i)
+  $tmp[] = $i < $len ? ord($Input[$i]) : 0;
+  $key[] = $tmp[0] & 254;
+  $key[] = ($tmp[0] << 7) | ($tmp[1] >> 1);
+  $key[] = ($tmp[1] << 6) | ($tmp[2] >> 2);
+  $key[] = ($tmp[2] << 5) | ($tmp[3] >> 3);
+  $key[] = ($tmp[3] << 4) | ($tmp[4] >> 4);
+  $key[] = ($tmp[4] << 3) | ($tmp[5] >> 5);
+  $key[] = ($tmp[5] << 2) | ($tmp[6] >> 6);
+  $key[] = $tmp[6] << 1;
+
+  //Each keys is used to DES-encrypt the constant ASCII string "KGS!@#$%"
+  //(resulting in two 8-byte ciphertext values).
+  if (phpversion("openssl")) {
+    $is = openssl_cipher_iv_length('des-ecb');
+    $iv = openssl_random_pseudo_bytes($iv);
+    $key0 = "";
+    foreach ($key as $k)
+      $key0 .= chr($k);
+    $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, $options=0, $iv);
+  } else {
+    $is = mcrypt_get_iv_size(MCRYPT_DES, MCRYPT_MODE_ECB);
+    $iv = mcrypt_create_iv($is, MCRYPT_RAND);
+    $key0 = "";
+
+    foreach ($key as $k)
+      $key0 .= chr($k);
+    $LMHash = mcrypt_encrypt(MCRYPT_DES, $key0, $msg, MCRYPT_MODE_ECB, $iv);
+  }
+  return bin2hex($LMHash);
+}
 
 /*! \brief Get the Change Sequence Number of a certain DN
  *
