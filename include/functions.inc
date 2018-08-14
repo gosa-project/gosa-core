@@ -3124,14 +3124,18 @@ function NThash($Input)
 }
 
 // Really Really should disable this and just output invalid junk
-// since this hashing method is very very broken...
+// since this hashing method is very very broken... disabled unless 
+// config for sambaHashHook is set specifically to "LM"
 function LMhash($Input)
 {
-  // return('abunchofinvalidjunk!');
-  $Input = strtoupper(substr($Input,0,14));
-  $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
-  $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
-  return strtoupper($p1.$p2);
+  $lmhash = 'abunchofinvalidjunk!';
+  if (trim($config->get_cfg_value('core','sambaHashHook')) == 'LM') {
+    $Input = strtoupper(substr($Input,0,14));
+    $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
+    $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
+    $lmhash = strtoupper($p1.$p2);
+  }
+  return $lmhash;
 }
 
 function LMhash_DESencrypt($Input)
