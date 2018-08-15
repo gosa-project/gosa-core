@@ -98,9 +98,25 @@ For every plugin, you can provide at least seven additional hooks:
 .I postmodify
 and
 .I check.
+.PP
 These can be used to perform special actions when a plugins gets
 a create, delete, modify or check request. As a parameter, these
 keywords get a shell script or program to the task.
+.PP
+NOTE: Any hook call using data input from users (ie: passwords) should take measures
+to prevent shell injection attacks that could lead to RCE. Specifically with Passwords,
+Gosa has been updated to base64 encode new_password and current_password used for all hook
+calls to mitigate this risk. All other values get escapeShellArg() escaped only, which
+can be exploited in certain conditions. Any hook using a password value needs to base64
+decode the value before using it.
+.PP
+.B Example password hook:
+to run a single command, like gam, to update passwords, in User Password premodify:
+.PP
+.RS
+/usr/local/bin/gam update user %uid password $(echo %new_password|base64 -d)
+.RE
+.PP
 
 .I The
 .B create / delete / modify
