@@ -254,7 +254,6 @@ class posixAccount extends plugin
     $this->groupList->setEditable(false);
     $this->groupList->setDeleteable(true);
     $this->groupList->setInstantDelete(false);
-    $this->groupList->setEditable(false);
     $this->groupList->setReorderable(false);
     $this->groupList->setDefaultSortColumn(1);
     $this->groupList->setHeight("150px");
