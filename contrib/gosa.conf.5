@@ -988,10 +988,12 @@ should return an integer value.
 The
 .I passwordDefaultHash
 statement defines the default password hash to choose for new accounts. Valid values are
-.I crypt/standard-des, crypt/md5, crypt/enhanced-des, crypt/blowfish, md5, sha, ssha, smd5, clear
+.I crypt/standard-des, crypt/md5, crypt/enhanced-des, crypt/blowfish, crypt/sha256, crypt/sha512,
+.I md5, sha, ssha, smd5, clear
 and
 .I sasl.
-These values will be overridden when using templates.
+The complete list is displayed in the "Password storage" pull-down menu in each user's "Generic/Personal Information" view.
+These values will be overridden when using templates. 
 .PP
 
 .B idGenerator
