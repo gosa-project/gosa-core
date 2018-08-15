@@ -3103,8 +3103,8 @@ function generate_smb_nt_hash($password)
   return($attrs);
 }
 
-// NT and LM functions with version checks for hash vs mhash and openssl vs mcrypt
-// (openssl and hash methods added by tmackey)
+// NT and LM hashing functions 
+// using openssl and hash methods (no more mcrypt)
 // Original code from http://php.net/manual/en/ref.hash.php
 function NThash($Input)
 {
@@ -3125,11 +3125,11 @@ function NThash($Input)
 
 // Really Really should disable this and just output invalid junk
 // since this hashing method is very very broken... disabled unless 
-// config for sambaHashHook is set specifically to "LM"
+// config for sambaHashHook is set specifically to "NTLM+LM"
 function LMhash($Input)
 {
   $lmhash = 'abunchofinvalidjunk!';
-  if (trim($config->get_cfg_value('core','sambaHashHook')) == 'LM') {
+  if (trim($config->get_cfg_value('core','sambaHashHook')) == 'NTLM+LM') {
     $Input = strtoupper(substr($Input,0,14));
     $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
     $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
@@ -3157,21 +3157,12 @@ function LMhash_DESencrypt($Input)
 
   //Each keys is used to DES-encrypt the constant ASCII string "KGS!@#$%"
   //(resulting in two 8-byte ciphertext values).
-  if (extension_loaded('openssl')) {
-    $is = openssl_cipher_iv_length('des-ecb');
-    $iv = openssl_random_pseudo_bytes($is);
-    $key0 = "";
-    foreach ($key as $k)
-      $key0 .= chr($k);
-    $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv);
-  } else {
-    $is = mcrypt_get_iv_size(MCRYPT_DES, MCRYPT_MODE_ECB);
-    $iv = mcrypt_create_iv($is, MCRYPT_RAND);
-    $key0 = "";
-    foreach ($key as $k)
-      $key0 .= chr($k);
-    $LMHash = mcrypt_encrypt(MCRYPT_DES, $key0, $msg, MCRYPT_MODE_ECB, $iv);
-  }
+  $is = openssl_cipher_iv_length('des-ecb');
+  $iv = openssl_random_pseudo_bytes($is);
+  $key0 = "";
+  foreach ($key as $k)
+    $key0 .= chr($k);
+  $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv);
   return bin2hex($LMHash);
 }
 

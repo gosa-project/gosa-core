@@ -1075,9 +1075,11 @@ If not blank, Gosa will generate an NTLM hash when a user's password is set, and
 will lock/unlock this when the account is locked/unlocked using internal functions.
 LM hashing is intentionally broken (sets the LM hash to a non-valid string) as the
 method is ancient, broken, and rainbow tables exist for all passwords to it. IFF it
-is needed, set this field to "LM" and a valid LM hash will be set.
-Note that Gosa does not use this to specify an actual Hook command, it only cares
-if its empty, not empty, or contains "LM". Safe default: "YES" or leave blank.
+is needed, set this field to "NTLM+LM" and a valid LM hash will be set along side
+the NTLM one. Note that Gosa does not use this to specify an actual Hook command,
+it only cares if its empty, not empty, or contains "NTLM+LM".
+.PP
+Safe default: "NTLM" or leave blank.
 .PP
 
 .B sambaIdmapping
