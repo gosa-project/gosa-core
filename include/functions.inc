@@ -3088,21 +3088,10 @@ function generate_smb_nt_hash($password)
     }
 
   } else {
-      $password = addcslashes($password, '$'); // <- Escape "$" once to be able to use it in pw strings in Perl scripts
-      $tmp = $config->get_cfg_value("core",'sambaHashHook');
-      $tmp = preg_replace("/%userPassword/", base64_encode($password), $tmp);
-      $tmp = preg_replace("/%password/", base64_encode($password), $tmp);
-	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
 
- 	  exec($tmp, $ar);
-	  flush();
-	  reset($ar);
-	  $hash= current($ar);
-
-    if ($hash == "") {
-      msg_dialog::display(_("Configuration error"), sprintf(_("Generating SAMBA hash by running %s failed: check %s!"), bold($config->get_cfg_value("core",'sambaHashHook'), bold("sambaHashHook"))), ERROR_DIALOG);
-      return(array());
-    }
+    $nt=NThash($password);
+    $lm=LMhash($password);
+    $hash="$lm:$nt";
   }
 
   list($lm,$nt)= explode(":", trim($hash));
@@ -3115,6 +3104,68 @@ function generate_smb_nt_hash($password)
   return($attrs);
 }
 
+// NT and LM hashing functions 
+// using openssl and hash methods (no more mcrypt)
+// Original code from http://php.net/manual/en/ref.hash.php
+function NThash($Input)
+{
+  // Convert the password from UTF8 to UTF16 (little endian)
+  $pwInput=iconv('UTF-8','UTF-16LE',$Input);
+
+  // Encrypt it with the MD4 hash
+  if (extension_loaded("hash")) {
+    $MD4Hash=hash('md4',$pwInput);
+  } else {
+    $MD4Hash=bin2hex(mhash(MHASH_MD4,$pwInput));
+  }
+
+  // Make it uppercase, not necessary, but it's common to do so with NTLM hashes
+  $hash=strtoupper($MD4Hash);
+  return($hash);
+}
+
+// Really Really should disable this and just output invalid junk
+// since this hashing method is very very broken... disabled unless 
+// config for sambaHashHook is set specifically to "NTLM+LM"
+function LMhash($Input)
+{
+  $lmhash = 'abunchofinvalidjunk!';
+  if (trim($config->get_cfg_value('core','sambaHashHook')) == 'NTLM+LM') {
+    $Input = strtoupper(substr($Input,0,14));
+    $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
+    $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
+    $lmhash = strtoupper($p1.$p2);
+  }
+  return $lmhash;
+}
+
+function LMhash_DESencrypt($Input)
+{
+  $msg = "KGS!@#$%";
+  $key = array();
+  $tmp = array();
+  $len = strlen($Input);
+  for ($i=0; $i<7; ++$i)
+  $tmp[] = $i < $len ? ord($Input[$i]) : 0;
+  $key[] = $tmp[0] & 254;
+  $key[] = ($tmp[0] << 7) | ($tmp[1] >> 1);
+  $key[] = ($tmp[1] << 6) | ($tmp[2] >> 2);
+  $key[] = ($tmp[2] << 5) | ($tmp[3] >> 3);
+  $key[] = ($tmp[3] << 4) | ($tmp[4] >> 4);
+  $key[] = ($tmp[4] << 3) | ($tmp[5] >> 5);
+  $key[] = ($tmp[5] << 2) | ($tmp[6] >> 6);
+  $key[] = $tmp[6] << 1;
+
+  //Each keys is used to DES-encrypt the constant ASCII string "KGS!@#$%"
+  //(resulting in two 8-byte ciphertext values).
+  $is = openssl_cipher_iv_length('des-ecb');
+  $iv = openssl_random_pseudo_bytes($is);
+  $key0 = "";
+  foreach ($key as $k)
+    $key0 .= chr($k);
+  $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv);
+  return bin2hex($LMHash);
+}
 
 /*! \brief Get the Change Sequence Number of a certain DN
  *
