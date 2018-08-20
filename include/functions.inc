@@ -2944,8 +2944,9 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         foreach($attrs as $name => $value){
             $attrsEvent[$name] = $value;
         }
-        $attrsEvent['current_password'] = $old_password;
-        $attrsEvent['new_password'] = $password;
+        // base64_encode passwords to avoide shell injection via user-set passwords
+        $attrsEvent['current_password'] = base64_encode($old_password);
+        $attrsEvent['new_password'] = base64_encode($password);
         $attrsEvent['bind_dn'] = $config->current['ADMINDN'];
         $attrsEvent['bind_server'] = $config->current['SERVER'];
         $attrsEvent['bind_password'] = $config->get_credentials($config->current['ADMINPASSWORD']);
