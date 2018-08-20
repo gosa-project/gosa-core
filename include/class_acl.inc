@@ -432,7 +432,7 @@ class acl extends plugin
             if(isset($_POST['selected_role']) && $_POST['aclType'] == 'role'){
                 $this->aclContents = "";
                 $this->aclContents = base64_decode(get_post('selected_role'));
-            }else{
+            }elseif (isset($_POST['cancel_new_acl'])){
                 if(!is_string($this->aclContents))
                     $this->aclContents = array();
             }
