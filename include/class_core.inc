@@ -476,6 +476,16 @@ class core extends plugin {
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "useAutoComplete",
+                                "type"          => "bool",
+                                "default"       => "true",
+                                "description"   => _("use autocompletion in search boxes (performs preliminarily ldap searches)."),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => FALSE),
+
+                        array(
                                 "name"          => "storeFilterSettings",
                                 "type"          => "bool",
                                 "default"       => "true",
