@@ -424,11 +424,8 @@ class sortableListing {
         // Delete requested?
         $this->action = "";
         if (strpos($this->acl, 'd') !== false){
-            foreach ($_POST as $key => $value) {
-                $value = get_post($key);
+            foreach (array_keys($_POST) as $key) {
                 if (preg_match('/^del_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
-
-
                     if(!isset($this->mapping[$matches[1]])) return;
 
                     $this->active_index= $this->mapping[$matches[1]];
@@ -452,10 +449,8 @@ class sortableListing {
 
         // Edit requested?
         if (strpos($this->acl, 'w') !== false){
-            foreach ($_POST as $key => $value) {
-                $value = get_post($key);
+            foreach (array_keys($_POST) as $key) {
                 if (preg_match('/^edit_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
-
                     if(!isset($this->mapping[$matches[1]])) return;
 
                     $this->active_index= $this->mapping[$matches[1]];
