@@ -46,6 +46,7 @@
     <tr>
       <td>
         <input type='radio' value='1' name='proposalSelected' id='proposalSelected_true'
+            onClick="changeState('new_password'); changeState('repeated_password');"
             {if $proposalSelected} checked {/if}>&nbsp;<b><LABEL for="proposalSelected_true">{t}Use proposal{/t}</LABEL></b>
       </td>
       <td>
@@ -64,6 +65,7 @@
     <tr>
       <td>
         <input type='radio' value='0' name='proposalSelected' id='proposalSelected_false'
+            onClick="changeState('new_password'); changeState('repeated_password'); nextfield='new_password'; focus_field('new_password');"
             {if !$proposalSelected} checked {/if}>&nbsp;<b><LABEL for="proposalSelected_false">{t}Manually specify a password{/t}</LABEL></b>
       </td>
     </tr>
@@ -71,13 +73,13 @@
       <td style='padding-left:40px;'><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
       <td>
           {factory type='password' name='new_password' id='new_password' 
-              onkeyup="testPasswordCss(\$('new_password').value)"  onfocus="nextfield= 'repeated_password';"}
+              onkeyup="testPasswordCss(\$('new_password').value)"  onfocus="nextfield= 'repeated_password';" disabled=1}
       </td>
     </tr>
     <tr>
       <td style='padding-left:40px;'><b><LABEL for="repeated_password">{t}Repeat new password{/t}</LABEL></b></td>
       <td>
-          {factory type='password' name='repeated_password' id='repeated_password' onfocus="nextfield= 'password_finish';"}
+          {factory type='password' name='repeated_password' id='repeated_password' onfocus="nextfield= 'password_finish';" disabled=1}
       </td>
     </tr>
     <tr>
@@ -103,9 +105,7 @@
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
   nextfield= 'current_password';
-	focus_field('current_password');
-  -->
+  focus_field('current_password');
 </script>
 
