@@ -481,9 +481,9 @@ $display= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'))
 $cookie = array();
 
 if(isset($_COOKIE['GOsa_Filter_Settings'])){
-  $cookie = unserialize(base64_decode($_COOKIE['GOsa_Filter_Settings']));
+  $cookie = json_decode(base64_decode($_COOKIE['GOsa_Filter_Settings']));
 }elseif(isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])){
-  $cookie = unserialize(base64_decode($HTTP_COOKIE_VARS['GOsa_Filter_Settings']));
+  $cookie = json_decode(base64_decode($HTTP_COOKIE_VARS['GOsa_Filter_Settings']));
 }
 
 /* Save filters? */
@@ -497,7 +497,7 @@ if($config->get_cfg_value("core","storeFilterSettings") == "true"){
   if(isset($_GET['plug'])){
     $cookie[$ui->dn]['plug'] = $_GET['plug'];
   }
-  @setcookie("GOsa_Filter_Settings",base64_encode(serialize($cookie)),time() + (60*60*24));
+  @setcookie("GOsa_Filter_Settings",base64_encode(json_encode($cookie)),time() + (60*60*24));
 }
 
 /* Show page... */

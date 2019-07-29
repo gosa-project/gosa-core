@@ -338,9 +338,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
                 if(isset($_COOKIE['GOsa_Filter_Settings']) || isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])) {
 
                     if(isset($_COOKIE['GOsa_Filter_Settings'])) {
-                        $cookie_all = unserialize(base64_decode($_COOKIE['GOsa_Filter_Settings']));
+                        $cookie_all = json_decode(base64_decode($_COOKIE['GOsa_Filter_Settings']));
                     }else{
-                        $cookie_all = unserialize(base64_decode($HTTP_COOKIE_VARS['GOsa_Filter_Settings']));
+                        $cookie_all = json_decode(base64_decode($HTTP_COOKIE_VARS['GOsa_Filter_Settings']));
                     }
                     if(isset($cookie_all[$ui->dn])) {
                         $cookie = $cookie_all[$ui->dn];
