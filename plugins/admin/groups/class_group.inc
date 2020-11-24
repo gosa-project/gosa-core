@@ -25,7 +25,7 @@ class group extends plugin
     /* Group attributes */
     var $cn= "";
     var $gidNumber= "";
-    var $memberUid_used_by_some= array();
+    var $members_used_by_some= array();
 
     /* Helpers */
     var $base= "";
@@ -54,6 +54,7 @@ class group extends plugin
     var $view_logged = FALSE;
     var $allowGroupsWithSameNameInOtherSubtrees = true;
     var $baseSelector;
+    var $dns= array();
 
     /* attribute list for save action */
     var $attributes= array("cn", "description", "gidNumber","sambaGroupType","sambaSID","member");
@@ -104,9 +105,6 @@ class group extends plugin
             }
             ksort ($this->members);
         }
-
-        /* Get group list */
-
 
         /* Save gidNumber for later use */
         if (isset($this->attrs['gidNumber'])){
@@ -242,7 +240,7 @@ class group extends plugin
             // Check if list is available, depends on multi- or sinlge- group editing. 
             if($this->$list){
                 // ensure we can delete group members if we have
-                // write permission to the memberUid attribute
+                // write permission to the member attribute
                 $mu_acl = $this->getacl("member");
                 if (preg_match("/w/",$mu_acl) && !preg_match("/d/",$mu_acl)) {
                     $this->$list->setAcl($mu_acl.'d');
@@ -260,8 +258,11 @@ class group extends plugin
         }
 
         /* Add objects? */
+        if (!$this->dns[0]) {
+            $this->dns[] = $this->dn;
+        }
         if (isset($_POST["edit_membership"]) && preg_match("/w/",$this->getacl("member"))){
-            $this->userSelect= new userSelect($this->config, get_userinfo());
+            $this->userSelect= new userSelect($this->config, get_userinfo(), $this->dns);
         }
 
         /* Add objects finished? */
@@ -330,9 +331,9 @@ class group extends plugin
         if(!$this->multiple_support_active){
             $this->memberList->setAcl($this->getacl("member"));
             $data = $lData = array();
-            foreach($this->members as $uid => $member){
-                if ($uid !== $this->cn) {                
-                    $data[$uid] = $member;
+            foreach($this->members as $cn => $member){
+                if ($cn !== $this->cn) {                
+                    $data[$cn] = $member;
                     $givenName = $sn = $cn = _("Unknown");
                     // if(isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
                     if (isset($member['cn']) && isset($member['cn'][0])) $cn = $member['cn'][0];
@@ -343,7 +344,7 @@ class group extends plugin
                     }elseif(isset($member['gidNumber'])){
                         $image = image('plugins/groups/images/select_group.png');
                     }
-                    $lData[$uid] = array('data' => array($image,$cn/*,$sn,$givenName*/, $data[$uid]['uid'][0] ?? ""));
+                    $lData[$cn] = array('data' => array($image,$cn/*,$sn,$givenName*/, $data[$cn]['uid'][0] ?? ""));
                 }
             }
             $this->memberList->setListData($data,$lData);
@@ -357,36 +358,42 @@ class group extends plugin
             $this->partialList->setAcl($this->getacl("member"));
 
             $data = $lData = array();
-            foreach($this->members as $uid => $member){
-                $member = $this->members[$member];
-                $data[$uid] = $member;
-                $givenName = $sn = $cn = _("Unknown");
-                //if(isset($member['sn'][0])) $sn = $member['sn'][0];
-                if(isset($member['cn'][0])) $cn = $member['cn'][0];
-                //if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
-                $image = image('images/false.png');
-                if(isset($member['sn'])){
-                    $image = image('plugins/users/images/select_user.png');
+            foreach($this->members as $cn => $member){
+                if (!in_array($member['dn'], $this->dns)) {
+                    $data[$cn] = $member;
+                    $givenName = $sn = $cn = _("Unknown");
+                    //if(isset($member['sn'][0])) $sn = $member['sn'][0];
+                    if(isset($member['cn'][0])) $cn = $member['cn'][0];
+                    //if(isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+                    $image = image('images/false.png');
+                    if(isset($member['sn'])){
+                        $image = image('plugins/users/images/select_user.png');
+                    }elseif(isset($member['gidNumber'])){
+                        $image = image('plugins/groups/images/select_group.png');
+                    }
+                    $lData[$cn] = array('data' => array($image,$cn/*,$sn,$givenName,*/,$data[$cn]['uid'][0] ?? ""));
                 }
-                $lData[$uid] = array('data' => array($image,$cn/*,$sn,$givenName,*/,$uid));
             }
             $this->commonList->setListData($data,$lData);
             $this->commonList->update();
             $smarty->assign("commonList", $this->commonList->render());
 
             $data = $lData = array();
-            foreach($this->members_used_by_some as $uid => $member){
-                $member = (isset($this->members[$member])) ?? NULL;
-                $data[$uid] = $member;
-                $givenName = $sn = $cn = _("Unknown");
-                //if(isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
-                if(isset($member['cn']) && isset($member['cn'][0])) $cn = $member['cn'][0];
-                //if(isset($member['givenName'][0]) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
-                $image = image('images/false.png');
-                if(isset($member['sn'])){
-                    $image = image('plugins/users/images/select_user.png');
+            foreach($this->members_used_by_some as $cn => $member){
+                if (!in_array($member['dn'], $this->dns)) {
+                    $data[$cn] = $member;
+                    $givenName = $sn = $cn = _("Unknown");
+                    //if(isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
+                    if(isset($member['cn']) && isset($member['cn'][0])) $cn = $member['cn'][0];
+                    //if(isset($member['givenName'][0]) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+                    $image = image('images/false.png');
+                    if(isset($member['sn'])){
+                        $image = image('plugins/users/images/select_user.png');
+                    }elseif(isset($member['gidNumber'])){
+                        $image = image('plugins/groups/images/select_group.png');
+                    }
+                    $lData[$cn] = array('data' => array($image,$cn/*,$sn, $givenName*/, $data[$cn]['uid'][0] ?? ""));
                 }
-                $lData[$uid] = array('data' => array($image,$cn/*,$sn, $givenName*/, $uid));
             }
             $this->partialList->setListData($data,$lData);
             $this->partialList->update();
@@ -455,7 +462,7 @@ class group extends plugin
         $bool = $this->isRestrictedByDynGroup();
         $smarty->assign("restrictedByDynGroup", $bool);
         if($bool){
-            $smarty->assign("memberUidACL", preg_replace("/[^r]/","",$this->getacl('member')));
+            $smarty->assign("memberACL", preg_replace("/[^r]/","",$this->getacl('member')));
              
         }
         return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
@@ -475,18 +482,17 @@ class group extends plugin
     function addUser($dn)
     {
         /* In mutliple edit we have to handle two arrays.
-         *  memberUid               : Containing users used in all groups
-         *  memberUid_used_by_some  : Those which are not used in all groups
+         *  members               : Containing users used in all groups
+         *  members_used_by_some  : Those which are not used in all groups
          * So we have to remove the given $uid from the ..used_by_some array first.
          */
         if($this->multiple_support_active){
-            if(isset($this->memberUid_used_by_some[$dn])){
-                unset($this->memberUid_used_by_some[$dn]);
+            if(isset($this->members_used_by_some[$dn])){
+                unset($this->members_used_by_some[$dn]);
             }
         }  
 
-        /* Ensure that the requested object is known to the group class 
-         */
+        /* Ensure that the requested object is known to the group class */
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $ldap->cat($dn,array("dn","cn","uid","sn","givenName","gidNumber"));
@@ -507,7 +513,6 @@ class group extends plugin
                 $this->members[$attrs['cn'][0]] = $attrs;
             }
         }
-        
     }
 
 
@@ -518,13 +523,13 @@ class group extends plugin
         }
 
         /* We have two array contianing group members in multiple edit.
-         *  this->memberUid             : Groups used by all currently edited groups 
-         *  this->memberUid_used_by_some: Used by some 
+         *  this->members             : Groups used by all currently edited groups 
+         *  this->members_used_by_some: Used by some 
          * So we have to remove the specified uid from both arrays.
          */
         if($this->multiple_support_active){
-            if(isset($this->memberUid_used_by_some[$id])){
-                unset($this->memberUid_used_by_some[$id]);
+            if(isset($this->members_used_by_some[$id])){
+                unset($this->members_used_by_some[$id]);
             }
         }
     }
@@ -537,7 +542,7 @@ class group extends plugin
         $ldap->cd($this->config->current['BASE']);
 
 
-        /* Resolve still unresolved memberuids to fill the list with sn/giveName attributes 
+        /* Resolve still unresolved members to fill the list with sn/giveName attributes 
            (Store gathered sn/givenName informations in $this->allusers too, 
            to be prepared when adding/deleting users)
          */    
@@ -546,11 +551,11 @@ class group extends plugin
     
 
         // Merge in partial uids in multiple edit
-        $allUids = array_keys($this->members);
+        $allMember = array_keys($this->members);
         if($this->multiple_support_active) {
-            $allUids = array_merge($allUids,  array_keys($this->memberUid_used_by_some));
+            $allMember = array_merge($allMember,  array_keys($this->members_used_by_some));
         }
-        $allUids = array_values($allUids);
+        $allMember = array_values($allMember);
 
         // To resolve the usernames out of the 'uid' we've to perform ldap queries. 
         // To keep the amount of queries as short as possible, we combine the query 
@@ -567,15 +572,15 @@ class group extends plugin
             $maxPerRound = count($allUids);
         }
 
-        for ( $added = 0; $added < count($allUids); $added += $maxPerRound ) {
+        for ( $added = 0; $added < count($allMember); $added += $maxPerRound ) {
 
             // First build the query....
             $start = $added;
             $end = $added + $maxPerRound;
             $filter = "";
             for ( $done = $start; $done < $end; $done++ ) {
-                if(!isset($allUids[$done])) break;
-                $value = $allUids[$done];
+                if(!isset($allMember[$done])) break;
+                $value = $allMember[$done];
                 $filter .= "(cn=".normalizeLdap($value).")";
             }
 
@@ -592,7 +597,7 @@ class group extends plugin
             if(!isset($this->members[$value])){
                 $this->members[$value] = "";
             }
-        }  
+        }
     }
 
 
@@ -823,18 +828,16 @@ class group extends plugin
         }
 
         /* Add member dn's for RFC2307bis Support */
-        if ($this->rfc2307bis){
-            $temp = array();
-            if (count($this->members)){
-                foreach($this->members as $member) {
-                    if ($member['dn'] !== $this->dn) {
-                        $temp[] = $member['dn'];
-                    }   
-                }
-                $this->attrs['member']= $temp;
-            }else {
-                $this->attrs['member']= $this->dn;
+        $temp = array();
+        if (count($this->members)) {
+            foreach($this->members as $member) {
+                if ($member['dn'] !== $this->dn) {
+                    $temp[] = $member['dn'];
+                }   
             }
+            $this->attrs['member']= $temp;
+        }else {
+            $this->attrs['member']= $this->dn;
         }
 
         /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
@@ -1081,11 +1084,10 @@ class group extends plugin
 
                     "sambaGroupType"    => _("Samba group type"),
                     "sambaDomainName"   => _("Samba domain name"),
-                    "accessTo"        => _("System trust"),
+                    "accessTo"          => _("System trust"),
                     "fonGroup"          => _("Phone pickup group"),
                     "nagiosGroup"       => _("Nagios group"),
 
-                    "memberUid"         => _("Group member"),
                     "member"            => _("Group member"))
                 ));
     }
@@ -1161,7 +1163,7 @@ class group extends plugin
         }
 
         $ret['member'] = $this->members;
-        $ret['memberUid_used_by_some'] = $this->memberUid_used_by_some;
+        $ret['members_used_by_some'] = $this->members_used_by_some;
         return($ret);
     }
 
@@ -1178,22 +1180,35 @@ class group extends plugin
         plugin::init_multiple_support($attrs,$all);
         $this->trustModeDialog->init_multiple_support($attrs,$all);
 
+        // sort out members_used_by_some in $diff array
+        $diff= array_diff($all['member'],$attrs['member'] ?? [""]);
+
+        $this->dns = $all['dn'];
         $this->members = array();
         $this->members_used_by_some = array();
+
+        // fetch Members in all Groups to $members for multiple edit
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
         if (isset($attrs['member'])){
-            for ($i= 0; $i<$attrs['member']['count']; $i++){
-                $this->members[$attrs['member'][$i]]= $attrs['member'][$i];
+            foreach ($attrs['member'] as $member => $dn) {
+                $ldap->cat($dn,array("dn","cn","uid","sn","givenName","gidNumber"));
+                while ($attr = $ldap->fetch()) {
+                    $this->members[$attr['cn'][0]]= $attr;
+                }
             }
             ksort($this->members);
         }
 
-        if (isset($all['member'])){
-            for ($i= 0; $i<$all['member']['count']; $i++){
-                if(!in_array_strict($all['member'][$i],$this->members)){
-                    $this->memberUid_used_by_some[$all['member'][$i]]= $all['member'][$i];
+        // fetch all Member in $diff to $members_used_by_some for multiple edit
+        if (isset($diff)){
+            foreach ($diff as $member => $dn) {
+                $ldap->cat($dn,array("dn","cn","uid","sn","givenName","gidNumber"));
+                while ($allAttr = $ldap->fetch()) {
+                    $this->members_used_by_some[$allAttr['cn'][0]]= $allAttr;
                 }
             }
-            ksort($this->memberUid_used_by_some);
+            ksort($this->members_used_by_some);
         }
 
         $this->reload(TRUE);
@@ -1207,8 +1222,8 @@ class group extends plugin
         $this->commonList->setEditable(false);
         $this->commonList->setWidth("100%");
         $this->commonList->setHeight("120px");
-        $this->commonList->setHeader(array('~',_("Given name"),_("Surname"),_("UID")));
-        $this->commonList->setColspecs(array('20px','*','*','*','20px'));
+        $this->commonList->setHeader(array('~',_("Common Name"),_("UID")));
+        $this->commonList->setColspecs(array('20px','*','*','20px'));
         $this->commonList->setDefaultSortColumn(1);
 
         $this->partialList = new sortableListing();
@@ -1217,8 +1232,8 @@ class group extends plugin
         $this->partialList->setEditable(false);
         $this->partialList->setWidth("100%");
         $this->partialList->setHeight("120px");
-        $this->partialList->setHeader(array('~',_("Given name"),_("Surname"),_("UID")));
-        $this->partialList->setColspecs(array('20px','*','*','*','20px'));
+        $this->partialList->setHeader(array('~',_("Common Name"),_("UID")));
+        $this->partialList->setColspecs(array('20px','*','*','20px'));
         $this->partialList->setDefaultSortColumn(1);
     }
 
@@ -1299,22 +1314,24 @@ class group extends plugin
         $this->trustModeDialog->enable_multiple_support();
     }
 
-
+    /* Set all members of edited groups in $members */
     function set_multi_edit_values($attrs)
     {
         $users = array();
 
         /* Update groupMembership, keep optinal group */
-        foreach($attrs['memberUid_used_by_some'] as $uid){
-            if(in_array_strict($uid,$this->members)){
-                $users[$uid] = $uid;
+        foreach($attrs['members_used_by_some'] as $member){
+            if(in_array_strict($member,$this->members)){
+                $users[] = $member;
             }
         }
 
         /* Update groupMembership, add forced groups */
-        foreach($attrs['member'] as $uid){
-            $users[$uid] = $uid;
+        foreach($attrs['member'] as $member){
+
+            $users[] = $member;
         }
+        
         plugin::set_multi_edit_values($attrs);
         $this->trustModeDialog->set_multi_edit_values($attrs);
         $this->members = $users;

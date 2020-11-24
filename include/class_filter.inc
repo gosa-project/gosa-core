@@ -3,7 +3,7 @@
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
- * ID: $$Id$$
+ * ID: $$Id: class_filter.inc 19251 2010-07-29 13:21:27Z hickert $$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,11 +37,13 @@ class filter {
     var $scopeMode= "auto";
     var $converter= null;
     var $pid;
+    var $customConstraints = array();
 
 
     function __construct($filename)
     {
         global $config;
+
 
         // Load eventually passed filename
         if (!$this->load($filename)) {
@@ -277,7 +279,40 @@ class filter {
             $result= array_unique(array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage)), SORT_REGULAR);
         }
 
-        return ($result);
+
+        /* If we had additional Constraints filter the $result array */
+        $finalResult = array();
+        
+        function callback($var){
+            
+        }
+        if ($this->customConstraints) {
+            $finalResult = $this->constraintFilter($this->customConstraints, $result);
+        } else {
+            $finalResult = $result;
+        }
+
+        return ($finalResult);
+    }
+
+    /* Iterate the result array with the given constraints */
+    function constraintFilter(array $const, array $res)
+    {
+        $tmp = array();
+        for ($i=0; $i < count($res); $i++) {
+            foreach ($const as $filter => $value) {
+                if (!in_array($res[$i][$filter], $value)){
+                    $tmp[] = $res[$i];
+                };
+            }
+        }
+        return $tmp;
+    }
+
+    /* add additional Client side filter */
+    function addConstraint($filter)
+    { 
+        $this->customConstraints = $filter;
     }
 
 
