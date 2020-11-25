@@ -21,7 +21,6 @@
  */
 
 class filter {
-
     var $searches= array();
     var $xmlSearches= array();
     var $attributes= array();
@@ -39,17 +38,14 @@ class filter {
     var $pid;
     var $customConstraints = array();
 
-
     function __construct($filename)
     {
         global $config;
-
 
         // Load eventually passed filename
         if (!$this->load($filename)) {
             die("Cannot parse $filename!");
         }
-
         $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE)); 
     }
 
@@ -279,28 +275,23 @@ class filter {
             $result= array_unique(array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage)), SORT_REGULAR);
         }
 
-
         /* If we had additional Constraints filter the $result array */
         $finalResult = array();
-        
-        function callback($var){
-            
-        }
         if ($this->customConstraints) {
             $finalResult = $this->constraintFilter($this->customConstraints, $result);
         } else {
             $finalResult = $result;
         }
-
         return ($finalResult);
     }
 
-    /* Iterate the result array with the given constraints */
-    function constraintFilter(array $const, array $res)
+    /* iterate the result array with the given constraints */
+    function constraintFilter(array $constraints, array $res)
     {
         $tmp = array();
+        /* Check for every occurenc of the contraints and sort them <output></output> */
         for ($i=0; $i < count($res); $i++) {
-            foreach ($const as $filter => $value) {
+            foreach ($constraints as $filter => $value) {
                 if (!in_array($res[$i][$filter], $value)){
                     $tmp[] = $res[$i];
                 };
@@ -309,8 +300,8 @@ class filter {
         return $tmp;
     }
 
-    /* add additional Client side filter */
-    function addConstraint($filter)
+    /* set additional Client side filter */
+    function setConstraint($filter)
     { 
         $this->customConstraints = $filter;
     }

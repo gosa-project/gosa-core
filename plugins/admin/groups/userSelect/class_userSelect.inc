@@ -22,7 +22,6 @@
 
 class userSelect extends management
 {
-    
     public $plHeadline = "User selection";
     protected $skipFooter = TRUE;
     protected $skipHeader = TRUE;
@@ -31,23 +30,18 @@ class userSelect extends management
     {
         $this->config = $config;
         $this->ui = $ui;
-
         $this->storagePoints = array(get_ou("core", "userRDN"),get_ou("core", "groupRDN"));
-        # $this->storagePoints = array( get_ou("core", "groupRDN"));
+
         // Build filter
         if (session::global_is_set(get_class($this)."_filter")){
             $filter= session::global_get(get_class($this)."_filter");
-            $filter->customConstraints['dn'] = $dns;
+            $filter->setConstraint(['dn' => $dns]);
         } else {
             $filter = new filter(get_template_path("user-filter.xml", true, dirname(__FILE__)));
             $filter->setObjectStorage($this->storagePoints);
-            $filter->addConstraint(['dn' => $dns]);
+            $filter->setConstraint(['dn' => $dns]);
         }
-        
-
         $this->setFilter($filter);
-
-        
 
         // Build headpage
         $headpage = new listing(get_template_path("user-list.xml", true, dirname(__FILE__)));
