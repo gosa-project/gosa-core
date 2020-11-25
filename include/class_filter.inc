@@ -289,7 +289,7 @@ class filter {
     function constraintFilter(array $constraints, array $res)
     {
         $tmp = array();
-        /* Check for every occurenc of the contraints and sort them <output></output> */
+        /* Check for every occurenc of the contraints and sort them out */
         for ($i=0; $i < count($res); $i++) {
             foreach ($constraints as $filter => $value) {
                 if (!in_array($res[$i][$filter], $value)){
