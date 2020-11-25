@@ -484,7 +484,7 @@ class group extends plugin
         }
     }
 
-
+    // remove the member using the array id
     function removeMember($id)
     {
         if(isset($this->members[$id])){
@@ -506,17 +506,12 @@ class group extends plugin
     /* Reload data */
     function reload(array $attrs)
     {
+        unset($attrs['member']['count']);
+        $arr= array();
         if (isset($attrs['member'][0])){
-            $tmp= array();
-            $arr= array();
-            foreach ($attrs['member'] as $member => $dn) {
-                if ($member !== 'count') {
-                    $tmp[$member]= $dn;
-                }
-            }
             $ldap= $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
-            foreach ($tmp as $member => $dn) {
+            foreach ($attrs['member'] as $member => $dn) {
                 $ldap->cat($dn,array("dn","cn","uid","sn","givenName","gidNumber"));
                 while ($attr = $ldap->fetch()) {
                     $arr[$attr['cn'][0]]= $attr;
@@ -526,9 +521,9 @@ class group extends plugin
         }
 
         /* check if all members are resolved */
-        foreach ($tmp as $value){
-            if(!isset($tmp[$value])){
-                $tmp[$value] = "";
+        foreach ($arr as $value){
+            if(!isset($arr[$value])){
+                $arr[$value] = "";
             }
         }
         return $arr;
@@ -1096,9 +1091,6 @@ class group extends plugin
     /* Initialize plugin with given atribute arrays */
     function init_multiple_support($attrs,$all)
     {
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
-
         plugin::init_multiple_support($attrs,$all);
         $this->trustModeDialog->init_multiple_support($attrs,$all);
 
@@ -1122,9 +1114,7 @@ class group extends plugin
 
         // get all members who are not in all groups for multiple edit
         if (isset($diff['member'])){
-            echo 'test';
             $this->members_used_by_some = $this->reload($diff);
-            
             ksort($this->members_used_by_some);
         }
 
