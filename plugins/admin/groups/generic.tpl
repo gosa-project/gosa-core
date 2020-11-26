@@ -174,11 +174,11 @@
       {if $restrictedByDynGroup}
         <b>{t}The group members are part of a dyn-group and cannot be managed!{/t}</b>
         {if $multiple_support}
-            {render acl=$memberUidACL}
+            {render acl=$memberACL}
                 {$commonList}
             {/render}
         {else}
-            {render acl=$memberUidACL}
+            {render acl=$memberACL}
                 {$memberList}
             {/render}
         {/if}
@@ -186,24 +186,24 @@
 
         {if $multiple_support}
             <h3>{t}Common group members{/t}</h3>
-            {render acl=$memberUidACL}
+            {render acl=$memberACL}
                 {$commonList}
             {/render}
-            {render acl=$memberUidACL}
+            {render acl=$memberACL}
               <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
             
             <br>
             <h3>{t}Partial group members{/t}</h3>
-            {render acl=$memberUidACL}
+            {render acl=$memberACL}
                 {$partialList}
             {/render}
         {else}
             <h3>{t}Group members{/t}</h3>
-            {render acl=$memberUidACL}
+            {render acl=$memberACL}
                 {$memberList}
             {/render}
-            {render acl=$memberUidACL}
+            {render acl=$memberACL}
               <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
         {/if}
@@ -220,7 +220,6 @@
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
+  // First input field on page
 	focus_field('cn');
-  -->
 </script>

@@ -3,7 +3,7 @@
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
- * ID: $$Id$$
+ * ID: $$Id: class_filter.inc 19251 2010-07-29 13:21:27Z hickert $$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
  */
 
 class filter {
-
     var $searches= array();
     var $xmlSearches= array();
     var $attributes= array();
@@ -37,7 +36,7 @@ class filter {
     var $scopeMode= "auto";
     var $converter= null;
     var $pid;
-
+    var $customConstraints = array();
 
     function __construct($filename)
     {
@@ -47,7 +46,6 @@ class filter {
         if (!$this->load($filename)) {
             die("Cannot parse $filename!");
         }
-
         $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE)); 
     }
 
@@ -277,7 +275,35 @@ class filter {
             $result= array_unique(array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage)), SORT_REGULAR);
         }
 
-        return ($result);
+        /* If we had additional Constraints filter the $result array */
+        $finalResult = array();
+        if ($this->customConstraints) {
+            $finalResult = $this->constraintFilter($this->customConstraints, $result);
+        } else {
+            $finalResult = $result;
+        }
+        return ($finalResult);
+    }
+
+    /* iterate the result array with the given constraints */
+    function constraintFilter(array $constraints, array $res)
+    {
+        $tmp = array();
+        /* Check for every occurenc of the contraints and sort them out */
+        for ($i=0; $i < count($res); $i++) {
+            foreach ($constraints as $filter => $value) {
+                if (!in_array($res[$i][$filter], $value)){
+                    $tmp[] = $res[$i];
+                };
+            }
+        }
+        return $tmp;
+    }
+
+    /* set additional Client side filter */
+    function setConstraint($filter)
+    { 
+        $this->customConstraints = $filter;
     }
 
 

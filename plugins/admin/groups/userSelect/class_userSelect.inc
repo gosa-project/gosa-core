@@ -22,24 +22,24 @@
 
 class userSelect extends management
 {
-
     public $plHeadline = "User selection";
     protected $skipFooter = TRUE;
     protected $skipHeader = TRUE;
 
-    function __construct($config,$ui)
+    function __construct($config,$ui,array $dns)
     {
         $this->config = $config;
         $this->ui = $ui;
-
-        $this->storagePoints = array(get_ou("core", "userRDN"));
+        $this->storagePoints = array(get_ou("core", "userRDN"),get_ou("core", "groupRDN"));
 
         // Build filter
         if (session::global_is_set(get_class($this)."_filter")){
             $filter= session::global_get(get_class($this)."_filter");
+            $filter->setConstraint(['dn' => $dns]);
         } else {
             $filter = new filter(get_template_path("user-filter.xml", true, dirname(__FILE__)));
             $filter->setObjectStorage($this->storagePoints);
+            $filter->setConstraint(['dn' => $dns]);
         }
         $this->setFilter($filter);
 
