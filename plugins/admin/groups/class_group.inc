@@ -757,7 +757,7 @@ class group extends plugin
             }
             $this->attrs['member']= $temp;
         }else {
-            $this->attrs['member']= $this->dn;
+            $this->attrs['member'][]= $this->dn;
         }
 
         // Save data. Using 'modify' implies that the entry is already present, 
@@ -766,7 +766,7 @@ class group extends plugin
         if ($ldap->fetch()){
             // Modify needs array() to remove values :-( 
             if (!count($this->members)){
-                $this->attrs['member']= $this->dn;;
+                $this->attrs['member'][]= $this->dn;;
             }
             if (!$this->smbgroup){
                 $this->attrs['sambaGroupType']= array();
@@ -792,11 +792,9 @@ class group extends plugin
                 msg_dialog::display(_("Warning"),sprintf(_("The gidNumber '%s' is already in use by %s!"),$this->gidNumber,$cns) , WARNING_DIALOG );
             }
         }
-        
+
         // check if members are added to the group and delete redundancies
-        if ($this->dn !== $this->attrs['member'] && !in_array($this->dn, $this->attrs['member'])) {
-            $this->attrs['member'] = array_unique($this->attrs['member']);
-        }
+        $this->attrs['member'] = array_unique($this->attrs['member']);
 
         // if the member array is empty nothing is saved or updated
         if (count($this->attrs['member'])) {
