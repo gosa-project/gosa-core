@@ -3,7 +3,7 @@
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
- * ID: $$Id$$
+ * ID: $$Id: class_posixAccount.inc 21142 2012-05-02 12:24:10Z hickert $$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -164,7 +164,7 @@ class posixAccount extends plugin
       /* Get group membership */
       $this->groupListData = array();
       $ldap->cd($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=posixGroup)(memberUid=".$this->uid."))", array("cn", "description"));
+      $ldap->search("(&(objectClass=posixGroup)(member=".$dn."))", array("cn", "description"));
 
       while ($attrs= $ldap->fetch()){
         if (!isset($attrs["description"][0])){
@@ -463,7 +463,11 @@ class posixAccount extends plugin
       $smarty->assign("groupMembership_some", set_post($this->groupMembership_some));
     }
 
-    $smarty->assign("groups", "");
+    if (count($this->groupMembership) > 16){
+      $smarty->assign("groups", "too_many_for_nfs");
+    } else {
+      $smarty->assign("groups", "");
+    }
 
     /* Avoid "Undefined index: forceMode" */
     $smarty->assign("forceMode", "");
@@ -858,7 +862,7 @@ class posixAccount extends plugin
       if (!isset($this->savedGroupMembership[$key])){
         $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key,"groups");
         $g->set_acl_base($key);
-        $g->by_object['group']->addUser($this->uid);
+        $g->by_object['group']->addMember($this->dn);
         $g->save();
       }
     }
@@ -868,7 +872,7 @@ class posixAccount extends plugin
       if (!isset($this->groupMembership[$key])){
         $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key,"groups");
         $g->set_acl_base($key);
-        $g->by_object['group']->removeUser ($this->uid);
+        $g->by_object['group']->removeMember($this->dn);
         $g->save();
       }
     }
@@ -1143,7 +1147,8 @@ class posixAccount extends plugin
     }
 
     /* Adjust shadow checkboxes */
-    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive") as $val){
+    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
+          "shadowExpire") as $val){
       if ($this->$val != 0){
         $oval= "activate_".$val;
         $this->$oval= "1";
