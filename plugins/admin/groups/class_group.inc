@@ -232,8 +232,8 @@ class group extends plugin
                 $action = $this->$list->getAction();
                 if($action['action'] == 'delete' && preg_match("/w/",$this->getacl("member"))){
                     foreach ($action['targets'] as $id){
-                        $value = $this->$list->getKey($id);
-                        $this->removeMember($value);
+                        $value = $this->$list->getData($id);
+                        $this->removeMember($value['dn']);
                     }
                 }
             }
@@ -486,10 +486,12 @@ class group extends plugin
     }
 
     // remove the member using the array id
-    function removeMember($id)
+    function removeMember($dn)
     {
-        if(isset($this->members[$id])){
-            unset($this->members[$id]);
+        foreach ($this->members as $key => $member) {
+            if ($dn == $member['dn']) {
+                unset($this->members[$key]);
+            }
         }
 
         /** 
@@ -499,8 +501,10 @@ class group extends plugin
          * So we have to remove the specified member from both arrays.
         */ 
         if($this->multiple_support_active){
-            if(isset($this->members_used_by_some[$id])){
-                unset($this->members_used_by_some[$id]);
+            foreach ($this->members_used_by_some as $key => $member) {
+                if ($dn == $member) {
+                    unset($this->members_used_by_some[$key]);
+                }
             }
         }
     }
@@ -757,7 +761,7 @@ class group extends plugin
             }
             $this->attrs['member']= $temp;
         }else {
-            $this->attrs['member'][]= $this->dn;
+            $this->attrs['member'] = [$this->dn];
         }
 
         // Save data. Using 'modify' implies that the entry is already present, 
@@ -766,7 +770,7 @@ class group extends plugin
         if ($ldap->fetch()){
             // Modify needs array() to remove values :-( 
             if (!count($this->members)){
-                $this->attrs['member'][]= $this->dn;;
+                $this->attrs['member']= [$this->dn];
             }
             if (!$this->smbgroup){
                 $this->attrs['sambaGroupType']= array();
