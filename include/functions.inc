@@ -3375,11 +3375,10 @@ function get_random_char () {
 }
 
 
-function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
+function cred_encrypt($input, $password) {
+  $cipher = "aes-256-ecb";
   if (in_array($cipher, openssl_get_cipher_methods())) {
-    $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return bin2hex(openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv));
+    return bin2hex(openssl_encrypt($input, $cipher, $password));
   }
 
   return null;
@@ -3387,9 +3386,7 @@ function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
 
 function cred_decrypt($input, $password, $cipher = "aes-256-ecb") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
-    $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return rtrim(openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv ), "\0\3\4\n");
+    return rtrim(openssl_decrypt(pack("H*", $input), $cipher, $password, $options=0, ), "\0\3\4\n");
   }
 
   return null;
