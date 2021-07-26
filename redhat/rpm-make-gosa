@@ -1,0 +1,145 @@
+#!/bin/sh
+
+configfile=gosa-plugin-${1}.spec
+path="rpm_src/gosa-plugins/${1}"
+
+echo "Reading plugin parameters..."
+
+name=$(awk /name/ ${path}/plugin.dsc | awk '{ print $3 }')
+description=$(awk /description/ ${path}/plugin.dsc | awk -F '"' '{ print $2 }')
+version=$(awk /version/ ${path}/plugin.dsc | awk '{ print $3 }')
+author=$(awk /author/ ${path}/plugin.dsc | awk -F '"' '{ print $2 }')
+homepage=$(awk /homepage/ ${path}/plugin.dsc | awk '{ print $3 }')
+depends=$(sed -n 's/^depends\s*=\s*//p' ${path}/plugin.dsc | sed 's/^/ /;s/,/ /g;s/\s\s*/ /g;s/ / gosa-plugin-/g;s/^ //;s/ /,/')
+conflicts=$(awk /conflicts/ ${path}/plugin.dsc | awk '{ print $3 }')
+provides=$(awk /provides/ ${path}/plugin.dsc | awk '{ print $3 }')
+release=0
+
+
+cat << EOF | sed -e "s%@@NAME@@%$name%g" \
+		-e "s%@@DESCRIPTION@@%$description%g" \
+		-e "s%@@VERSION@@%$version%g" \
+		-e "s%@@AUTHOR@@%$author%g" \
+		-e "s%@@HOMEPAGE@@%$homepage%g" \
+		-e "s%@@DEPENDS@@%$depends%g" \
+		-e "s%@@CONFLICTS@@%$conflicts%g" \
+		-e "s%@@PROVIDES@@%$provides%g" \
+		-e "s%@@RELEASE@@%$release%g" \
+		-e "s%@@.*@@%not_defined%g" > $configfile
+
+# Some sort of "detection" of suse
+%{?suse_version:%define suse 1}
+%{!?suse_version:%define suse 0}
+
+# Define Packagename, e.g.:
+# rpmbuild --rebuild --define 'sourcename gosa' gosa.srpm
+%{!?sourcename:%define sourcename %{name}-%{version}}
+
+#
+# Distribution
+#
+Summary:                @@DESCRIPTION@@
+Name:                   gosa-plugin-@@NAME@@
+Version:                @@VERSION@@
+Release:                @@RELEASE@@
+License:                GPL
+Source:                 ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
+URL:                    @@HOMEPAGE@@
+Group:                  System/Administration
+Vendor:                 GONICUS GmbH
+Packager:               @@AUTHOR@@
+Buildarch:              noarch
+%if %{suse}
+Requires:               gosa >= 2.6.0, @@DEPENDS@@
+%else
+Requires:               gosa >= 2.6.0, @@DEPENDS@@
+%endif
+BuildRoot:              %{_tmppath}/%{name}-%{version}-root
+BuildArch:              noarch
+
+%if %{suse}
+        %{echo:Building SuSE rpm}
+        %define docdir /usr/share/doc/packages/gosa
+%else
+        %{echo:Building other rpm}
+        %define webconf /etc/httpd/conf.d/
+        %define docdir /usr/share/doc/gosa-%{version}
+%endif
+
+%description
+@@DESCRIPTION@@
+
+%prep
+%setup -q -n %{sourcename}
+
+%build
+
+%install
+
+# Move extra HTML and images
+mkdir -p %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
+
+echo "%{buildroot} <<---------" 
+
+if [ -e ./html/* ]; then
+	mv ./html/* %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
+fi
+
+# Move contrib if available
+mkdir -p %{buildroot}/usr/share/doc/%{name}
+if [ -e ./contrib/* ]; then
+	mv ./contrib %{buildroot}/usr/share/doc/%{name}
+fi
+
+# Move help
+mkdir -p %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
+if [ -e ./help/* ]; then
+	mv ./help/* %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
+fi
+
+# Copy etc
+mkdir -p %{buildroot}/etc/gosa
+if [ -e ./etc/* ]; then
+	mv ./etc/* %{buildroot}/etc/gosa
+fi
+
+# Move localization
+mkdir -p %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
+if [ -e ./locale/* ]; then
+	mv ./locale/* %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
+fi
+
+# Move plugin itself
+mkdir -p %{buildroot}/usr/share/gosa/plugins/@@NAME@@
+mv ./* %{buildroot}/usr/share/gosa/plugins/@@NAME@@
+
+%post
+/usr/sbin/update-gosa
+
+%postun
+/usr/sbin/update-gosa
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root)
+%attr (-,root,root) /usr/share/gosa/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/gosa/doc/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/gosa/locale/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/gosa/html/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/doc/%{name}
+%attr (-,root,root) /etc/gosa/
+EOF
+
+# Create eventually missing directories
+[ ! -d ${2}/SOURCES ] && mkdir -p ${2}/SOURCES
+[ ! -d ${2}/SPECS ]   && mkdir -p ${2}/SPECS
+
+mv $configfile ${2}/SPECS
+cp -r ./rpm_src/gosa-plugins/${1} /tmp/gosa-plugin-${1}-${version}
+cd /tmp/
+tar cjf ${2}/SOURCES/gosa-plugin-${1}-${version}.tar.bz2 ./gosa-plugin-${1}-${version}
+rm -rf gosa-plugin-${1}-${version}
+echo "Done."
+exit 0

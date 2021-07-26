@@ -1,0 +1,41 @@
+
+=head1 NAME
+
+update-locale - update localization files
+
+=head1 SYNOPSIS
+
+update-locale [-h] [-g] [-y]
+
+=head1 DESCRIPTION
+
+update-locale is a script that update/generate the .po files for GOsa
+
+=over 3
+
+=item B<-g>        extract strings from GOsa and generate po files
+
+=item B<-y>        assume yes
+
+=item B<-h>        help
+
+=back
+
+=head1 BUGS
+
+Please report any bugs, or post any suggestions, to the GOsa mailing list <gosa-devel@oss.gonicus.de> or to <https://oss.gonicus.de/labs/gosa>
+
+
+=head1 LICENCE AND COPYRIGHT
+
+This code is part of GOsa (L<http://www.gosa-project.org>)
+
+Copyright (C) 2003-2009 GONICUS GmbH
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+=cut
+

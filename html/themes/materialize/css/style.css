@@ -1,0 +1,251 @@
+/* -- global tag setup -- */
+
+html {
+    font-size: 12px !important;
+}
+td, th {
+    padding: 0px 0px !important;
+    height: 37px;
+    max-height: 37px;
+}
+hr {
+    background-color: lightslategray;
+    height: 1px !important;
+    border: 0;
+}
+
+/* -- END -- */
+
+/* -- center of screen -- */
+
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+/* -- END -- */
+
+/* -- special font-setup -- */
+
+.welcome {
+    font-size: 18px !important;
+}
+
+/* -- END -- */
+
+/* -- input/textarea/checkbox setup -- */
+
+/* label color */
+.input-field label {
+    color: gray;
+}
+/* label focus color */
+.input-field input[type=text]:focus+label {
+    color: #2A3278 !important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #2A3278 !important;
+    box-shadow: 0 1px 0 0 #2A3278 !important;
+}
+.input-field input[type=text]:hover {
+    border-bottom: 1px solid #2A3278 !important;
+    box-shadow: 0 1px 0 0 #2A3278 !important;
+}
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #D55A0A !important;
+    box-shadow: 0 1px 0 0 #D55A0A !important;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #2A3278 !important;
+}
+
+.proposal {
+    width: 180px;
+    border: 1px solid #CCC;
+    padding: 3px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+}
+
+textarea.materialize-textarea {
+    min-height: 10rem !important;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever)::after {
+    border: 2px solid black !important;
+    background-color: #2A3278 !important;
+}
+
+/* -- END -- */
+
+/* lifetime icon align*/
+
+.lifetime {
+    padding-top: .5rem;
+}
+
+/* -- margin and padding set and fix -- */
+
+.mtop {
+    margin-top: 1rem;
+}
+
+.mg2 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.mgb-off {
+    margin-bottom: 0 !important;
+}
+
+.padding-off {
+    padding: 0 !important;
+}
+
+/* generic for row-class */
+.row.nomb {
+    margin-bottom: 0 !important;
+}
+
+/* generic for collection-class */
+.collection-item {
+    padding-inline: 5px !important;
+}
+
+/* generic for collapsible-class */
+.collapsible-header {
+    padding-block: 5px !important;
+}
+
+/* img */
+.h-center {
+    margin: auto !important;
+}
+
+a.brand-logo {
+    padding-block: 1rem !important;
+}
+
+/* -- END -- */
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+
+/* -- generic card setup -- */
+
+.card-min-height {
+    min-height: 12rem;
+}
+
+.card-title {
+    font-size: 20px !important;
+}
+
+.card .card-action {
+    padding: 16px 0 !important; 
+}
+
+/* -- END -- */
+
+/* -- Curson settings -- */
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer_off {
+    cursor: default !important;
+}
+
+/* -- END -- */
+
+/* -- colors -- */
+
+.gonicus-color {
+    background-color: rgba(42, 50, 120, 1) !important;
+}
+
+.collection .collection-item.active {
+    background-color: rgba(42, 50, 120, .6) !important;
+    color: white !important;
+}
+
+td a {
+    color: black;
+}
+
+/* -- END -- */
+
+/* -- Datepicker setup -- */
+
+.datepicker-date-display {
+    background-color: #2A3278 !important;
+}
+
+.datepicker-table td.is-today {
+    color: #2A3278 !important;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+    color: #2A3278 !important;
+}
+
+/*  */
+
+/* -- acl view -- */
+
+.acl_container {
+    border: 1px solid;
+    padding: 1rem;
+    background-color: lightgray;
+}
+
+.acl-member {
+    border: 1px solid lightgrey;
+    min-height: 10rem;
+    padding: 1rem;
+    margin-block-end: 1rem;
+    border-radius: .25rem;
+}
+
+/* -- END -- */
+
+/* -- Drowpdown -- */
+
+.valign-dropdown li>* {
+    display: flex;
+    align-items: center;
+}
+
+.valign-dropdown {
+    width: auto !important;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: black !important;
+    padding: 0px 0px !important;
+}
+
+/* -- END -- */
+
+/* -- Pagination -- */
+
+.pagination li.active {
+    background-color: #2A3278 !important;
+}
+
+/* -- END -- */

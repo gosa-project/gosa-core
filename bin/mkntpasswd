@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -x
+
+if [ $# -ne 1 ] && [ $# -ne 2 ]; then
+	echo "Usage: mkntpwd [-b] <password>"
+	exit 1
+fi
+
+if [ "$1" = "-b" ]; then
+    shift;
+    b64_encoded_pw=true
+fi
+
+
+# Render hash using perl
+if [ -n "$b64_encoded_pw" ]; then
+	perl -MCrypt::SmbHash -MMIME::Base64 -e "ntlmgen decode_base64(\"\$ARGV[0]\"), \$lm, \$nt; print \"\$lm:\$nt\";" "$1"
+else
+	perl -MCrypt::SmbHash -e "ntlmgen \"\$ARGV[0]\", \$lm, \$nt; print \"\$lm:\$nt\";" "$1"
+fi
+
+exit 0

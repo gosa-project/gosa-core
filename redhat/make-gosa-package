@@ -1,0 +1,178 @@
+#!/bin/sh
+
+if [ $# -ne 2 ]; then
+	echo "Usage: $(basename $0) (RHEL|SLES|OpenSuse) svn-tag"
+        echo "        svn-tag can be 'trunk' or a version like '2.6.8'"
+	exit 1
+fi
+
+# Prepare Variables depending on build system
+##
+release=$2
+distribution=$1
+NOT_RELEASED="heimdal dak dfs glpi opsi apache2 ssh uw-imap"
+if [ "$release" != "trunk" ]
+then
+	release="tags/$release"
+fi
+
+
+# Export the requested SVN release
+##
+if [ ! -d rpm_src ] 
+then 
+  mkdir rpm_src;
+fi
+
+
+if [ ! -d rpm_src/gosa-core ] 
+then
+svn export https://oss.gonicus.de/repositories/gosa/$release/gosa-core \
+    ./rpm_src/gosa-core  
+else
+	echo "SVN export of 'gosa-core' exists, skipping!"
+fi
+
+if [ ! -d rpm_src/gosa-plugins ]
+then
+svn export https://oss.gonicus.de/repositories/gosa/$release/gosa-plugins \
+    ./rpm_src/gosa-plugins
+else
+	echo "SVN export of 'gosa-plugins' exists, skipping!"
+fi
+
+# Detect build version 
+##
+VERSION=$(cat rpm_src/gosa-core/debian/changelog | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
+VERSION=$(cat rpm_src/gosa-core/Changelog  | grep "^\*" | sed s/"^[^0-9]*"//g | head -n1)
+
+case "$distribution" in 
+ "RHEL" ) 
+	pwd=`pwd`
+	rm -rf /var/tmp/gosa*
+	build_path=$pwd/rpmbuild/
+	target='redhat'
+	;;
+ "SLES" ) 
+	build_path='/usr/src/packages'
+	target='SLES'
+	;;
+ "OpenSuse" ) 
+	rm -rf /var/tmp/rpm-tmp*
+	build_path='/usr/src/packages'
+	target='suse'
+	;;
+ * ) 
+	echo "$distribution is unknown"
+	exit 1;
+	;;
+esac
+
+# Clean up
+## 
+echo ".. some cleanup in '$build_path'"
+rm -rf $build_path/RPMS/noarch/gosa*
+rm -rf $build_path/SOURCES/gosa*
+rm -rf $build_path/SPECS/gosa*
+rm -rf rpm_src/gosa-$VERSION
+
+PATHS='BUILD SPECS RPMS SOURCES'
+for path in $PATHS; do
+	if [ ! -d $build_path/$path ] 
+	then 
+ 		mkdir -p $build_path/$path
+	fi
+done
+
+# Create SRC tar 
+##
+echo "Creating source tar.gz for gosa-$VERSION"
+cp -a rpm_src/gosa-core rpm_src/gosa-$VERSION
+cd rpm_src
+tar cfj $build_path/SOURCES/gosa-$VERSION.tar.bz2 gosa-$VERSION
+cd ..
+
+# Copy patches 
+##
+echo "Copying build patches"
+cp rpm_src/gosa-$VERSION/redhat/*.patch $build_path/SOURCES/
+
+# Prepare spec file, replace Version 
+##
+echo "Preparing spec file"
+sed "s/^Version:.*$/Version:            $VERSION/" \
+     rpm_src/gosa-$VERSION/redhat/gosa.spec > $build_path/SPECS/gosa.spec
+
+
+# Build GOsa RPM 
+##
+echo "Try to build package ... rpmbuild" 
+rpmbuild -bb --buildroot $build_path $build_path/SPECS/gosa.spec
+if [ $? != 0 ]
+then
+	echo "Error: Build error" 
+	exit 1
+fi
+
+#
+# Build GOsa plugins
+#
+
+# Create a list of all available plugins  
+## 
+MAKE_PLUGINS=$(ls -1 rpm_src/gosa-plugins/*/plugin.dsc \
+   | sed 's/^.*\/\([^\/]*\)\/plugin.dsc$/\1/')
+
+# Skip black listed plugins
+##
+for i in $NOT_RELEASED; do
+	MAKE_PLUGINS=$(echo -n $MAKE_PLUGINS | sed "s/$i//")
+done
+
+# Try to create plugin specfiles and try to build
+##
+for plugin in $MAKE_PLUGINS; do
+
+	echo "# $plugin "
+
+        ./gosa-core/redhat/rpm-make-gosa $plugin $build_path
+	if [ $? != 0 ]
+	then 
+ 		echo "Error: Could not prepare build process"
+		exit 1
+        fi
+
+        rpmbuild -bb $build_path/SPECS/gosa-plugin-$plugin.spec 
+	if [ $? != 0 ]
+	then 
+		echo "Error: Build error in $plugin"
+		exit 1
+	fi
+done
+
+echo ""
+echo ""
+echo ""
+echo "#### Build done "
+
+if [ ! -d "RPMS/$target" ] 
+then 
+	mkdir -p "RPMS/$target"
+	
+	echo "Copying rpms to '$curdir/RPMS/$target'"
+	curdir=`pwd`
+	cp $build_path/RPMS/noarch/gosa* "RPMS/$target"
+fi
+
+
+if [ "$distribution" == "OpenSuse" ]
+then
+	cd "RPMS/$target"
+	curdir=`pwd`
+	echo "Creating repostory in '$curdir'"
+	createrepo .
+fi
+
+
+
+

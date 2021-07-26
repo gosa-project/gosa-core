@@ -1,0 +1,114 @@
+GOsa 2.6 QUICK INSTALL
+======================
+
+Prequisite:
+
+You have a system up and running. It has apache and PHP installed
+and there is a blank (or prefilled) but working LDAP available.
+
+---
+
+Installing GOsa from source:
+
+Unpack the GOsa tarball and move the main gosa directory to
+a place your webserver is configured to find it. The default
+location will be /usr/share/gosa. For later reference, I assume
+that you've choosen this path, too.
+
+Create the directory /var/spool/gosa for the smarty compile directory.
+Make it read/write for the webserver (additional chmod 770). You may
+want to move it elsewhere, configure it in gosa.conf.
+
+Create the configuration directory /etc/gosa and make sure
+that your webserver can read it.
+
+As a summmary, you now have these directories for GOsa:
+
+/etc/gosa
+/var/spool/gosa
+/usr/share/gosa
+
+Update the class cache:
+
+Run "update-gosa" from the GOsa main directory.
+
+After this has been done, include settings for GOsa in your apache
+config:
+
+# Set alias to gosa
+Alias /gosa /usr/share/gosa/html
+
+Assumed you've installed PHP >= 5.2.0, reload your apache webserver
+and do your first GOsa dry run without configuration:
+
+http[s]://your-server/gosa
+
+GOsa setup will perform some basic system checks about general
+prerequisites. The setup asks some questions and provides a
+basic gosa.conf to save in /etc/gosa. Follow the instructions
+until you're able to log in.
+
+You're done. Lets play with the GUI.
+
+---
+
+* Installing from Packages
+
+If you install GOsa from packages, all the steps from above will
+be done automatically. Go to the setup:
+
+http[s]://your-server/gosa
+
+GOsa setup will perform some basic system checks about general
+prerequisites. The setup asks some questions and provides a
+basic gosa.conf to save in /etc/gosa. Follow the instructions
+until you're able to log in.
+
+You're done. Lets play with the GUI.
+
+---
+
+* Migrating an existing tree
+
+To migrate an existing LDAP tree, you've to do all steps from above,
+plus some modifications:
+
+- GOsa only shows users that have the objectClass gosaAccount
+  This one has been introduced for several reasons. First, there are
+  cases you want to hide special accounts from regular admins (i.e.
+  a samba admin account which is used to log windows machines into
+  their domain, where chaning a password by accident has bad consequences).
+  Secondly the gosaAccount keeps the lm/nt password hashes and the
+  attributes for the last password change - with the consequence that
+  adding a samba account "later" will not require the user to reset
+  the password.
+
+- GOsa only recognizes subtrees (or departments in GOsa's view of things)
+  that have the objectClass gosaDepartment. You can hide subtrees from GOsa
+  by not putting this objectClass inside.
+
+The GOsa setup may be used to do these migrations, but it is not meant
+to work in every possible circumstance. For the first time:
+
+DO NOT WORK ON PRODUCTIVE DATA IF YOU DON'T KNOW WHAT YOU'RE DOING!
+
+That should be all. Entries should be visible in GOsa now. Be aware that if
+your naming policy of user cn's differs from the way GOsa handles it, the
+entries get rewritten to a GOsa style dn.
+
+---
+
+* Further information
+
+To improve this piece of software, please report all kind of errors, either
+using the bug tracker on www.gosa-project.org or the button on the upper
+right.
+
+Documentation: https://www.gosa-project.org
+Mailinglist:   https://oss.gonicus.de/mailman/listinfo/gosa/
+Upgrade hints: https://oss.gonicus.de/labs/gosa/wiki/DocumentationInstallingUpdatingGOsa
+
+Have fun!
+
+---
+Cajus Pollmeier <pollmeier@gonicus.de>

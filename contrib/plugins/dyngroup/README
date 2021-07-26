@@ -1,0 +1,100 @@
+# ----------------------------------------------------------------------------- #
+#  README                                                                       #
+#  Author(s): Thomas Chemineau - thomas.chemineau<at>gmail.com                  #
+# ----------------------------------------------------------------------------- #
+
+
+1. What this plugin can do ?
+
+  This plugin allow administrator to modify LDAP groups to be populated through
+  dynamic list feature in OpenLDAP.
+
+  To do that, you have to activate the dynlist overlay in OpenLDAP, and
+  configure the overlay as decribed bellow. Once the overlay is enabled, member
+  of a dynamic group will be auto populated.
+
+  This plugin should be configured to appears in groups and departments, under
+  GOsa. A department could not be a dynamic group, but it can be renamed. This
+  operation could break LDAP search URLs into dynamic group definition. To
+  prevent this, this plugin could modify LDAP search URLs when departments and
+  groups are renamed into the LDAP tree.
+
+  WARNINGS:
+  Be carefull, GOsa may manage uid into memberUid, and not DN. So, in this
+  particular case, you can not store DN into memberUid attribute. The main
+  drawback, in this particular case, is that you can not build LDAP URLs into
+  dynamic group to search for users directly. The alternative is to look for
+  memberUid into groups.
+
+
+2. How to activate the dynlist overlay in OpenLDAP ?
+
+  Edit the configuration file (slapd.conf), and put the following lines into
+  the definition of your database:
+
+    overlay dynlist
+    dynlist-attrset labeledUriObject labeledURI
+
+  See http://www.openldap.org/doc/admin24/overlays.html#Dynamic%20Lists to have
+  more informations on dynamic list overlay.
+
+  If your OpenLDAP server loads modules dnamically, you have to load the
+  dynlist overlay but putting the following lines in the global section of the
+  configuration files:
+
+    moduleload dynlist
+
+  Finaly, if you do not want GOsa users to modify memberUid values, you could
+  add an ACL. This ACL will works only if GOsa is connected on your OpenLDAP
+  server under an application account (and not under the rootdn defined into
+  the configuration of your LDAP database in slapd.conf):
+
+    # Disable modify on memberUid for all entries which contains
+    # gosaGroupOfURLs, because these are dynamic, and we do not want users to
+    # edit the memberUid attribute.
+    access to filter="objectClass=gosaGroupOfURLs" attrs=memberUid
+      by * read
+
+  Verify that LDAP schemas of GOsa contains the definition of the objectclass
+  named "gosaGroupOfURLs". You have two solutions: the first one is to add it
+  into the schema named gosa-samba3:
+
+    objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.21
+      NAME 'gosaGroupOfURLs'
+      DESC 'Allow a group to be populated through a labeledURI values'
+      SUP top
+      AUXILIARY
+      MAY ( labeledURI ) )
+
+  The second one, recommended, is to copy the file gosa-dyngroup.schema into
+  your OpenLDAP schema directory. Then edit slapd.conf and add the inclusion
+  to this new schema.
+
+  You can now restart your OpenLDAP server :)
+
+
+3. How to enable this feature in GOsa ?
+
+  It is very easy. Edit /etc/gosa/gosa.conf, and add the following line in
+  the grouptabs section:
+
+    <tab class="DynamicLdapGroup" name="Dynamic group" />
+
+  Then, add the following line in the deptabs section:
+
+    <tab class="DynamicLdapGroup" name="Dynamic group" />
+
+  Then, put the plugin in /usr/share/gosa/plugins/addons, and update GOsa cache
+  via the update-gosa command.
+
+
+4. Known restrictions in OpenLDAP
+
+  You can't search yet on memberUid in a filter:
+    http://www.openldap.org/lists/openldap-software/200812/msg00030.html
+    http://www.openldap.org/lists/openldap-software/200901/msg00079.html
+
+  You have to prefer to use the LDAP compare operation:
+    http://www.openldap.org/lists/openldap-software/200909/msg00073.html
+    http://www.openldap.org/lists/openldap-software/200909/msg00125.html
+

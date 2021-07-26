@@ -1,0 +1,1059 @@
+\chapter{openLDAP}
+\section{Introduction,What is LDAP?}
+\subsection{Directory Services, X.500}
+
+A directory is a search information specialised database based on attributes.
+
+X.500|ISO 9594\cite{x500}  is a standard of ITU-S(International Telecommunication Union - Telecommunication Standardisation Burean),  previously known like CCITT, to solve the problem of directories. Based on the works made with X.400 (a directory for electronic mail) and the works of ISO (International Standards Organisation) and ECMA (European Computer Manufacturers Association).\\
+
+The X.501|ISO 9594 part 2. define the models, as the information must be organized, the model of user information, the model of administrative information and the directory service, which defines as the information must be distributed between several systems.\\
+
+In X.509|ISO 9594 part 8. the standard of authentication and security used for SSL.\\
+
+X.525|ISO 9594 part 9.  indicates as the replication must be between systems.\\
+
+In X.519|ISO 9594 part 5. the communication protocols are defined, among them the one that have greater importance to us that is DAP - the protocol of access to directories - it defines that operations can be done with the connection: bind, unbind, the objects (entry) and its operation: add, eliminate, modify, search, list, compare, etc.\\
+
+DAP is a protocol to complex to make servers and clients usable for Internet, then a comfortable protocol must be created to handle these directories: LDAP.\\
+
+LDAP (Lightweight Directory Access Protocol) is a protocol thought for update and search of Internet (TCP/IP) oriented directories. \\
+
+The last LDAP version is 3 and it is covered by the RFCs: 2251\cite{2251}, 2252\cite{2252}, 2253\cite{2253}, 2254\cite{2254}, 2255\cite{2255}, 2256\cite{2256} y 3377\cite{3377}.\\
+\newpage
+\subsection{Basic Concepts of LDAP}
+
+\begin{itemize}
+\item[]Entry\\
+An Entry is a collection of attributes identified by its DN (distinguished name). A DN is unique in all the tree and therefore it identifies clearly the entrance to which refers. As example: CN=Alex O=CHAOSDIMENSION C=ES must identify to the object of common name \'Alex\' that is in organization \'CHAOSDIMENSION\' and country is \'ES\' (Spain). A RDN(names distinguished relative) is a part of the DN, in a way that concatenating the RDNs they give as result the DN. Of the previous example  CN=Alex is a RDN.
+
+\item[]Object Class\\
+A Object Class is a special attribute (ObjectClass) that defines attributes that are required and allowed in an entry. The values of the Objects Classes are defined in the schema. All the entrances must have a ObjectClass attribute. It isn\'t allowed to add attributes to the entries that aren\'t allowed by definitions of the Objects Classes of the entry.
+
+\item[]Attrib\\
+An Attribute is a type with one or more values associated. It is identified by a OID (object identifier). The attribute type indicates if can have more of a value of this attribute in an entry, the values that can have and how they can be searched.
+
+\item[]Schema\\
+A Schema is a collection of definitions of types of attributes, Objects Classes  and information that the server use to do the searches, to introduce values in an attribute, and to allow operations to add or to modify.
+
+To create a search, we must consider several important parameters:
+\item[]Filter\\
+\begin{list}{}{}
+\item[Base Object]
+Un DN que sera a partir del cual realizaremos la busqueda.
+
+\item[Scope]
+It can have several values.
+\begin{list}{}{}
+\item[base] it will only search in the level base. 
+\item[sub]  it will make a recursive search by all the tree from the level base 
+\item[one] search a level below the level base.
+\end{list}
+
+\item[Size Limit]
+It restricts the number of entries given back as result of a search.
+
+\item[Time Limit]
+It restricts the execution maximum time of a search.
+
+\item[Filter]
+A chain that defines the conditions that must be completed to find an entry.
+
+\end{list}
+
+The filters can be concatenated with ' and', ' or' and ' not' to create more complex filters. For example a filter with base O=CHAOSDIMENSION, C=ES, scope base and filter (CN=Alex) would find the entry CN=Alex , O=CHAOSDIMENSION, C=ES.
+
+\end{itemize}
+\newpage
+\subsection{LDAP Servers}
+
+LDAP is supported by numerous servers being the knownest Directory Active of Microsoft, eDirectory of Novell, Oracle Internet Directory of Oracle, iPlanet Directory Server of SUN and finally but not less important openLDAP.
+
+This manual teach about the use and installation of openLDAP, since this supported by practically all the distributions of linux and their license fulfills the openSource standard. 
+
+For more information about LDAP see LDAP Linux HowTo\cite{llh}, Using LDAP\cite{ul}, openLDAP administrator Guide\cite{oag} and in Spanish the LDAP relative part of the magnify manual Ldap+Samba+Cups+Pykota\cite{lscp}. 
+
+\section{Installation}
+Most distributions have packages of openLDAP. The use apt-get in debian, Urpmi in Mandrake, up2date in redhat or Yast2 in Suse is outside this manual. This manual explain the necessary work for the construction and configuration from the sources.
+
+\subsection{Downloading openLDAP}
+\label{down_ldap}
+Downloading openLDAP 
+
+Although they are not really necessary, there is several packages that have to be installed before openLDAP because we need them.
+
+The first of them is \textbf{openSSL}, it exists in all the distributions and has documentation in is webpage\cite{ssldoc}. 
+
+The sources can be downloaded from \htmladdnormallink{http://www.openssl.org/source/}{http://www.openssl.org/source/}
+
+The second is \textbf{Kerberos Services v5}, which have two implementations, one is \htmladdnormallink{MIT Kerberos V}{http://web.mit.edu/kerberos/www} and the other is \htmladdnormallink{Heimdal Kerberos}{http://www.pdc.kth.se/heimdal}, both have good documentation and are widely supported by all the distributions. 
+
+It could also be interesting to have the \textbf{Cyrus SASL} libraries installed (Simple Cyrus's Authentication and Security Layer) that could be obtained from \htmladdnormallink{http://asg.web.cmu.edu/sasl/}{http://asg.web.cmu.edu/sasl/sasl-library.html}, Cyrus SASL makes use of openSSL and Kerberos/GSSAPI for authentication. 
+
+At last we will need a database for openLDAP, with respect to this manual this will be given through the \htmladdnormallink{\textbf{Sleepycat Software Berkeley DB}}{http://www.sleepycat.com/} libraries, we will need it if we want to use LDBM (Berkeley DB version 3) or BDB (Berkeley DB version 4). Also they exist in the majority of the distributions. 
+
+Once obtained and compiled the necessary libraries we download the \htmladdnormallink{sources of openLDAP}{http://www.openldap.org/software/download/} in /usr/src (for example) and decompressed in that directory (for example with tar -zxvf openldap-2.X.XX.tgz).
+\newpage
+\subsection{Install Options}
+
+The following options are for openLDAP version 2.2.xx that can differ from versions 2.0.XX and 2.1.XX. 
+
+We executed \htmladdnormallink{./configure}{http://warping.sourceforge.net/gosa/contrib/en/configure.sh} with the following options:
+
+\begin{itemize}
+\item[](Directories)\\
+\begin{tabular}{|ll|}\hline
+--prefix=/usr & \\
+--libexecdir='\${prefix}/lib' & \\
+--sysconfdir=/etc & \\
+--localstatedir=/var/run & \\
+--mandir='\${prefix}/share/man' & \\
+--with-subdir=ldap & \\
+\hline \end{tabular}
+
+\item[](Basic Options)\\
+\begin{tabular}{|ll|}\hline
+--enable-syslog & \\
+--enable-proctitle & \\
+--enable-ipv6 & $\rightarrow$Sockets IPv6\\
+--enable-local & $\rightarrow$Sockets Unix\\
+--with-cyrus-sasl & $\rightarrow$Supported authentication Cyrus SASL\\
+--with-threads & $\rightarrow$Support thread of execution\\
+--with-tls & $\rightarrow$Support TLS/SSL\\
+--enable-dynamic & $\rightarrow$Dynamic compilation\\
+\hline \end{tabular}
+
+\item[](Slapd Options)\\
+\begin{tabular}{|ll|}\hline
+--enable-slapd & $\rightarrow$To compile the server in addition to the libraries\\
+--enable-cleartext & $\rightarrow$It allows send clear text passwords\\
+--enable-crypt & $\rightarrow$Send crypther passwords with DES.\\
+--enable-spasswd & $\rightarrow$Verification of passwords through SASL\\
+--enable-modules & $\rightarrow$Support of dynamic modules\\
+--enable-aci & $\rightarrow$Support of ACIs by objects (Experimental)\\
+--enable-rewrite & $\rightarrow$Rewriting of DN in recovery of LDAP\\
+--enable-rlookups & $\rightarrow$Inverse search of the name of the client workstation\\
+--enable-slp & $\rightarrow$SLPv2 support\\
+--enable-wrappers & $\rightarrow$Support TCP wrappers\\
+\hline \end{tabular}
+
+\item[](Support)\\
+\begin{tabular}{|ll|}\hline
+--enable-bdb=yes & $\rightarrow$Berkeley version 4 support\\
+--enable-dnssrv=mod & \\
+--enable-ldap=mod & $\rightarrow$It supports another LDAP server as database\\
+--enable-ldbm=mod & \\
+--with-ldbm-api=berkeley & $\rightarrow$Berkeley version 3 support\\
+--enable-meta=mod & $\rightarrow$Metadirectory support\\
+--enable-monitor=mod & \\
+--enable-null=mod & \\
+--enable-passwd=mod & \\
+--enable-perl=mod & $\rightarrow$Perl scripts support\\
+--enable-shell=mod & $\rightarrow$Shell scripts support\\
+--enable-sql=mod & $\rightarrow$Relational database support\\
+\hline \end{tabular}
+\end{itemize}
+
+Then do:\\
+\#make \&\& make install 
+\newpage
+\section{Configuration}
+\subsection{Basic}
+
+\noindent The configuration of the LDAP server slapd of openLDAP is in /etc/ldap/slapd.conf 
+
+\noindent A \htmladdnormallink{basic configuration}{http://warping.sourceforge.net/gosa/contrib/en/basic_slapd.conf} would be like this: 
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{Basic LDAP COnfiguration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{Basic LDAP COnfiguration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{Basic LDAP COnfiguration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+\# Schema and objectClass definitions, basic configuration & \\
+include         /etc/ldap/schema/core.schema & \\
+include         /etc/ldap/schema/cosine.schema & \\
+include         /etc/ldap/schema/inetorgperson.schema & \\
+include         /etc/ldap/schema/openldap.schema & \\
+include         /etc/ldap/schema/nis.schema & \\
+include         /etc/ldap/schema/misc.schema & \\
+ & \\
+\# Force entries to match schemas for their ObjectClasses & \\
+schemacheck             on & \\
+ & \\
+\# Password hash, default crypt type & \\
+\# Puede ser: \{SHA\}, \{MD5\}, \{MD4\}, \{CRYPT\}, \{CLEARTEXT\} & \\
+password-hash           \{CRYPT\} & \\
+ & \\
+\# Default search base & \\
+defaultsearchbase       "dc=CHAOSDIMENSION,dc=ORG" & \\
+ & \\
+\#Used by init scripts to stop and to start the server. & \\
+pidfile         /var/run/slapd.pid & \\
+ & \\
+\# Arguments passed to the server. & \\
+argsfile        /var/run/slapd.args & \\
+ & \\
+\# Level of log information & \\
+loglevel        1024 & \\
+ & \\
+\# Where and which modules load & \\
+modulepath      /usr/lib/ldap & \\
+moduleload      back\_bdb \# Berkeley BD version 4 & \\
+ & \\
+\#definitions of the database & \\
+database        bdb & \\
+ & \\
+\# The base of the directory & \\
+suffix          "dc=CHAOSDIMENSION,dc=ORG"  & \\
+ & \\
+\# Here is the definition of the administrator of the directory and his key & \\
+\# In this example is " tester"  & \\
+\# The crypt key can be extract with  & \\
+\# makepasswd --crypt --clearfrom file\_with\_user\_name & \\
+ & \\
+rootdn  \verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"|  & \\
+rootpw  \{crypt\}OuorOLd3VqvC2 & \\
+ & \\
+\# here are the attributes that we indexed to make searchs & \\
+index   default                                                sub & \\
+index   uid,mail                                               eq & \\
+index   cn,sn,givenName,ou                                     pres,eq,sub & \\
+index   objectClass                                            pres,eq & \\
+ & \\
+\# Directory where the database is located & \\
+directory       " /var/lib/ldap"  & \\
+ & \\
+\# We say if wished to keep the date of the last modification & \\
+lastmod off & \\
+ & \\
+\#Administrator access & \\
+access to * & \\
+        by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| =wrscx & \\
+        by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| =wrscx & \\
+        by * read & \\
+\end{longtable}
+\end{center}
+
+\newpage
+\subsection{GOsa Specifications}
+
+GOsa adds several schemas for the control of certain services and characteristics of users. \\
+
+The necessary schemas for GOsa are in the package, in the contrib section, they need to be copied in /etc/ldap/schema. \\
+
+A \htmladdnormallink{recommended configuration}{http://warping.sourceforge.net/gosa/contrib/en/gosa_slapd.conf} of /etc/ldap/slapd.conf is the following one: \\
+
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{LDAP GOsa Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{LDAP GOsa Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{LDAP GOsa Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+\# Schema and objectClass definitions, basic configuration & \\
+include         /etc/ldap/schema/core.schema & \\
+include         /etc/ldap/schema/cosine.schema & \\
+include         /etc/ldap/schema/inetorgperson.schema & \\
+include         /etc/ldap/schema/openldap.schema & \\
+include         /etc/ldap/schema/nis.schema & \\
+include         /etc/ldap/schema/misc.schema & \\
+ & \\
+\# These schemes would be present in GOsa. In the case of samba3 & \\
+\# we must change samba.schema and gosa.schema by samba3.schema & \\
+\# and gosa+samba3.schema & \\
+include		/etc/ldap/schema/samba3.schema & \\
+include		/etc/ldap/schema/pureftpd.schema & \\
+include		/etc/ldap/schema/gohard.schema & \\
+include		/etc/ldap/schema/gofon.schema & \\
+include		/etc/ldap/schema/goto.schema & \\
+include		/etc/ldap/schema/gosa+samba3.schema & \\
+include		/etc/ldap/schema/gofax.schema & \\
+include		/etc/ldap/schema/goserver.schema & \\
+ & \\
+\# Force entries to match schemas for their ObjectClasses & \\
+schemacheck             on & \\
+ & \\
+\# Password hash, type of key encryption & \\
+\# Can be: \{SHA\}, \{SMD5\}, \{MD4\}, \{CRYPT\}, \{CLEARTEXT\} & \\
+password-hash           \{CRYPT\} & \\
+ & \\
+\# Default search base. & \\
+defaultsearchbase       " dc=CHAOSDIMENSION,dc=ORG"  & \\
+ & \\
+\# Used by init scripts to stop and to start the server. & \\
+pidfile         /var/run/slapd.pid & \\
+ & \\
+\# Arguments passed to the server. & \\
+argsfile        /var/run/slapd.args & \\
+ & \\
+\# Log level information & \\
+loglevel        1024 & \\
+ & \\
+\# Where and which modules to load. & \\
+modulepath      /usr/lib/ldap & \\
+moduleload      back\_bdb \# Berkeley BD version 4 & \\
+ & \\
+\# Some performance parameters & \\
+threads 64 & \\
+concurrency 32 & \\
+conn\_max\_pending 100 & \\
+conn\_max\_pending\_auth 250 & \\
+reverse-lookup off & \\
+sizelimit 1000 & \\
+timelimit 30 & \\
+idletimeout 30 & \\
+ & \\
+\# specific limitations & \\
+limits anonymous    size.soft=500 time.soft=5 & \\
+ & \\
+\# Definitions of the database & \\
+database        bdb & \\
+cachesize       5000 & \\
+checkpoint	512 720 & \\
+mode		0600 & \\
+ & \\
+\# The diretory base. & \\
+suffix          " dc=CHAOSDIMENSION,dc=ORG"  & \\
+ & \\
+\# Here is the definition of the administrator of the directory and his key & \\
+\# In this example is " tester"  & \\
+\# The crypt key can be extract with  & \\
+\# makepasswd --crypt --clearfrom file\_with\_user\_name & \\
+ & \\
+rootdn  \verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"|  & \\
+rootpw  \{crypt\}OuorOLd3VqvC2 & \\
+ & \\
+\# That attributes we indexed to make search & \\
+index   default                                                sub & \\
+index   uid,mail                                               eq & \\
+index   gosaMailAlternateAddress,gosaMailForwardingAddress     eq & \\
+index   cn,sn,givenName,ou                                     pres,eq,sub & \\
+index   objectClass                                            pres,eq & \\
+index   uidNumber,gidNumber,memberuid                          eq & \\
+index   gosaSubtreeACL,gosaObject,gosaUser                     pres,eq & \\
+ & \\
+\# Indexing for Samba 3
+index   sambaSID                                               eq & \\
+index   sambaPrimaryGroupSID                                   eq & \\
+index   sambaDomainName                                        eq & \\
+ & \\
+\# Who can change the user keys & \\
+\# ,only by the own user if is authenticate & \\
+\# or by the administrator & \\
+access to attr=sambaPwdLastSet,sambaPwdMustChange,sambaPwdCanChange & \\
+        by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+        by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+	by anonymous auth & \\
+	by self write & \\
+	by * none  & \\
+access to attr=userPassword,shadowMax,shadowExpire & \\
+        by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+        by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+	by anonymous auth & \\
+	by self write & \\
+	by * none  & \\
+ & \\
+\# Acess deny to imap keys, fax or kerberos saved in & \\
+\# LDAP & \\
+access to attr=goImapPassword & \\
+	by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+	by * none  & \\
+access to attr=goKrbPassword & \\
+	by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+	by * none  & \\
+access to attr=goFaxPassword & \\
+	by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+	by * none  & \\
+ & \\
+\# Permit that server write the LastUser attribute & \\
+access to attr=gotoLastUser & \\
+	by * write & \\
+ & \\
+\# The samba keys by defect only can be changed & \\
+\# by the user if has been authenticate. & \\
+access to attr=sambaLmPassword,sambaNtPassword & \\
+	by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+	by anonymous auth & \\
+	by self write & \\
+	by * none & \\
+ & \\
+\# Allow write access for terminal administrator & \\
+access to dn=" ou=incoming,dc=CHAOSDIMENSION,dc=ORG"  & \\
+	by dn=\verb|"cn=terminal-admin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+ & \\
+access to dn.subtree=" ou=incoming,dc=CHAOSDIMENSION,dc=ORG"  & \\
+	by dn=\verb|"cn=terminal-admin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| write & \\
+	by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| write & \\
+ & \\
+\# Directory where is the database & \\
+directory       " /var/lib/ldap"  & \\
+ & \\
+\# Indicate if we wished to keep the modification last date & \\
+lastmod off & \\
+ & \\
+\# Administrator access & \\
+access to * & \\
+        by dn=\verb|"cn=ldapadmin,dc=CHAOSDIMENSION,dc=ORG"| =wrscx & \\
+        by dn.regex=\verb|"uid=[^{}/]+/admin\+(realm=CHAOSDIMENSION.LOCAL)?"| =wrscx & \\
+        by * read & \\
+\end{longtable}
+\end{center}
+
+
+\section{Utilization}
+\subsection{PAM/NSS Configuration}
+
+NSS (Network Security Service Libraries) 
+
+NSS is a basic component of the system, is used for control of accounts POSIX, to be able to use LDAP for accounts POSIX (of the system), we will use NSS\_LDAP, that can be downloaded of \htmladdnormallink{http://www.padl.com/OSS/nss\_ldap.html}{http://www.padl.com/OSS/nss\_ldap.html} , we decompressed it in /usr/src and executed:\\ 
+
+\noindent \#cd /usr/src/nss\_ldap\\
+\noindent \#./configure \&\& make \&\& make install\\
+
+The basic configuration of NSS are in /etc/nsswitch.conf and must be left like this for what we want.
+
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{NSSWITCH Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{NSSWITCH Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{NSSWITCH Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+passwd:         files ldap & \# These are the lines that we changed so that ldap makes requests\\
+group:          files ldap & \#\\
+shadow:         files ldap & \#\\
+ & \\
+hosts:          files dns & \\
+networks:       files & \\
+ & \\
+protocols:      db files & \\
+services:       db files & \\
+ethers:         db files & \\
+rpc:            db files & \\
+ & \\
+netgroup:       nis & \\
+\end{longtable}
+\end{center}
+
+
+\newpage
+The NSS-LDAP configuration is saved in /etc/nss-ldap.conf and a valid configuration for GOsa would be this: 
+
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{NSS Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{NSS Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{NSS Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+host ip.servidor.ldap & \# Here we will put our LDAP server LDAP\\
+base ou=people,dc=CHAOSDIMENSION,dc=ORG & \# Here is where are going to go the users and\\
+ & \# their passwords. OU means organizational\\
+ & \# unit and OU=people is the place where\\
+ & \# GOsa save the characteristics of the users\\
+ldap\_version 3 & \# Supported Version of LDAP \\
+ & \# (the use of version 3 is recommended)\\
+nss\_base\_passwd ou=people,dc=CHAOSDIMENSION,DC=ORG?one & \# Where we search for POSIX characteristics\\
+nss\_base\_shadow ou=people,dc=CHAOSDIMENSION,DC=ORG?one & \# Where we search for the passwords\\
+nss\_base\_group ou=groups,dc=CHAOSDIMENSION,DC=ORG?one & \# Where is the POSIX group characteristics\\
+\end{longtable}
+\end{center}
+
+PAM (Pluggable Authentication Modules) is a package of dynamic libraries that allow to system administrators to choose in which way the applications authenticates the users. 
+
+PAM is in all the distributions, save the configurations of each module in /etc/pam.d and have the dynamic libraries in /lib/security. 
+
+We are going to concentrate on one of the PAM modules: pam\_ldap. This module will serve to us so that the applications that don't  use LDAP and use the system base of authentication and control of sessions, indirectly accede LDAP for authentication. 
+
+With PAM\_LDAP and the infrastructure of PAM we gain that POSIX users of the system, work through LDAP and they can be created with GOsa.
+
+PAM\_LDAP can be downloaded from \htmladdnormallink{http://www.padl.com/OSS/pam\_ldap.html}{http://www.padl.com/OSS/pam\_ldap.html}, we decompressed it is /usr/src and we executed the clasic: \\
+
+\#./configure \&\& make \&\& make install\\
+\\
+The configuration of this module will be in /etc/pam\_ldap.conf, a basic working configuration will be like this:
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{PAM Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+host ip.servidor.ldap & \# Here we put where will be our LDAP server\\
+base ou=people,dc=CHAOSDIMENSION,dc=ORG & \# Here is where are going to go the users and their passwords.\\
+ & \# OU means organizational unit\\
+ & \# and OU=people is the place where GOsa\\
+ & \# save the users characteristics\\
+ldap\_version 3 & \# Supported Version of LDAP (very recommended version 3)\\
+scope one & \# In gosa the users are at the same level, we did not need to descend.\\
+rootbinddn cn=ldapadmin,dc=solaria,dc=es & \# Here is the LDAP administrator DN of the server,\\
+ & \# is necessary, since the server\\
+ & \# will give access to the encrypted passwords to the administrator.\\
+pam\_password md5 & \# Indicate as password are encrypted.\\
+\end{longtable}
+\end{center}
+
+
+In the file /etc/secret we will put the LDAP administrator password, this file, like the previous one only could be accessible by root.
+
+Now, in order to be able to use LDAP authentication with the services, we will have to configure three pam configuration files:\\
+Control of accounts /etc/pam.d/common-account:
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{PAM common-account Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM common-account Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM common-account Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+account required          pam\_unix.so & \# Always required\\
+account sufficient        pam\_ldap.so & \# The calls to ldap\\
+\end{longtable}
+\end{center}
+
+
+Authentication control /etc/pam.d/common-auth:
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{PAM common-auth Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM common-auth Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM common-auth Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+auth     sufficient     pam\_unix.so & \# Authentication Standar\\
+auth     sufficient     pam\_ldap.so try\_first\_pass & \# LDAP Authentication in the first attempt\\
+auth     required       pam\_env.so & \\
+auth     required       pam\_securetty.so & \\
+auth     required       pam\_unix\_auth.so & \\
+auth     required       pam\_warn.so & \\
+auth     required       pam\_deny.so & \\
+\end{longtable}
+\end{center}
+
+
+Session control /etc/pam.d/common-session:
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{PAM common-session Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM common-session Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{PAM common-session Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+session required        pam\_limits.so & \\
+session required        pam\_unix.so & \# Standar UNIX session\\
+session optional        pam\_ldap.so & \# LDAP based session\\
+\end{longtable}
+\end{center}
+
+This configuration will be necessary to use POSIX and SAMBA at least.
+\newpage
+\subsection{Replication}
+
+If we have more that one domain we must have a distributed structure, that is more efficient against failures. A basic structure would be a master server with a complete LDAP tree and servers with LDAP subtrees that only have the part of the tree for the domain they control.
+
+This way GOsa controls the master server and the domain servers through a process called replication.
+
+The replication is made in the configuration of ldap, but it is not executed by the daemon slapd, but another one called slurp. Its configuration is made in the database that we want to replicate, like in the basic example we have only configured a database that will be added at the end of the configuration file /etc/ldap/slapd.conf: 
+
+\begin{center}
+\begin{longtable}{|ll|}\hline
+\caption{Replica Configuration}\\
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{Replica Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{2}{|c|}{\textbf{Replica Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{2}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{2}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+\# Replica configuration & \\
+\#Used by init scripts to stop and to start the server. & \\
+replica-pidfile         /var/run/slurp.pid & \\
+ & \\
+\# Arguments passed to the server. & \\
+replica-argsfile        /var/run/slapd.args & \\
+ & \\
+\# Place where we recorded the log of replica, is used by slurpd & \\
+replogfile      /var/lib/ldap/replog & \\
+\# The replicas  & \\
+\# Slave1 replica indication & \\
+replica & \\
+\#URI direction of slave1 & \\
+uri=ldap://ip.server.slave1 & \\
+\#That we are going to reply & \\
+\# from the master server & \\
+suffix=" dc=domain1,dc=CHAOSDIMENSION,dc=ORG" & \\
+\#How we are going to authenticate & \\
+bindmethod=simple & \\
+\# reply DN of the slave1 & \\
+binddn=\verb|"cn=esclavo1,ou=people,dc=dominio1,dc=CHAOSDIMENSION,dc=ORG"| & \\
+\#Password of slave1 reply DN & \\
+credentials=" tester" & \\
+\# Slave2 replica indication & \\
+replica & \\
+uri=ldap://ip.server.slave2 & \\
+suffix=" dc=domain2,dc=CHAOSDIMENSION,dc=ORG" & \\
+bindmethod=simple & \\
+binddn=\verb|"cn=esclavo2,ou=people,dc=dominio2,dc=CHAOSDIMENSION,dc=ORG"| & \\
+credentials=" tester" & \\
+\end{longtable}
+\end{center}
+
+
+By simplicity we suppose that both slaved servers are configured like the master, excepted the replica configuration of the master and the indications at the slaves of who is the master server.
+
+In the slaved servers we must add at the end of /etc/ldap/slapd.conf: 
+
+In slave 1:\\
+
+\begin{tabular}{|ll|}\hline
+\# Who can update the server & \\
+updatedn \verb|"cn=slave1,dc=domain1,dc=CHAOSDIMENSION,dc=ORG"| & \\
+\# From where & \\
+updateref ldap://ip.server.master & \\
+\#Access allow & \\
+access to dn.subtree= " dc=domain1,dc=CHAOSDIMENSION,dc=ORG" & \\
+by dn= \verb|"cn=slave1,dc=domain1,dc=CHAOSDIMENSION,dc=ORG"|  =wrscx & \\
+by * none & \\
+\hline\end{tabular}
+\vspace{0.5cm}
+
+In slave 2:\\
+
+\begin{tabular}{|ll|}\hline
+\# Who can update the server & \\
+updatedn \verb|"cn=slave2,dc=domain2,dc=CHAOSDIMENSION,dc=ORG"| & \\
+\#From where & \\
+updateref ldap://ip.server.master & \\
+\#Access allow & \\
+access to dn.subtree= " dc=domain2,dc=CHAOSDIMENSION,dc=ORG" & \\
+by dn= \verb|"cn=slave2,dc=domain2,dc=CHAOSDIMENSION,dc=ORG"| =wrscx & \\
+by * none & \\
+\hline\end{tabular}
+\vspace{0.5cm}
+
+Also we must create the replica users in the corresponding databases. That will be explained in the following point.
+
+\subsection{Data Load}
+
+
+In this point we will give the initial data of our necessary LDAP tree for GOsa. Also we will show how upload the data and what to do in the case of a unique servant or in a case where there are replicas. 
+
+The load can be done of two ways, one is trought of slapadd and the other is trought of ldapadd.\\
+In the first case the load is made against the database, this replication does not exist and then will not be update the data in LDAP server until is initiated again, \textbf{the load of data this way must be done with the server stopped}. In the second case, the load will be trought LDAP and it will update self and will be replicated in the pertinent way.
+
+For a load from zero of the database, we will have to do it from slapadd, with the daemon slapd stopped. 
+
+The way slapadd must be used is: \\
+
+\noindent \#slapadd -v -l fichero\_con\_datos.ldif\\
+
+LDIF is the standard format to save data from LDAP. GOsa come with its own ldif of example, in following two points we will explain how it must be used for our necessities.
+\vspace{1cm}
+
+\subsubsection{Server Alone}
+
+This is the most basic case, here isn't replication and only we need a single tree. In our example we will suppose that our GOsa tree is in dc=CHAOSDIMENSION, dc=ORG.\\
+
+We will load the data with a script, called \htmladdnormallink{load.sh}{http://warping.sourceforge.net/gosa/contrib/en/load.sh}, this simplified the steps to load. The parameters of script will be: DN of the base, IMAP Server adn Kerberos Realm.
+\begin{center}
+\begin{longtable}{|l|}\hline
+\caption{Load Data on Single Server Configuration}\\
+\hline \hline
+\multicolumn{1}{|c|}{\textbf{Load Data on Single Server Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{1}{|c|}{\textbf{Load Data on Single Server Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{1}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{1}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+\#!/bin/sh\\
+\\
+if [ \$\{\#@\} != 3 ]\\
+then\\
+\verb|    |echo "The parameters DN base, IMAP Server and Kerberos server are needed"\\
+\verb|    |echo "For example: ./carga.sh dc=CHAOSDIMENSION,dc=ORG imap.solaria krb.solaria"\\
+\verb|    |exit\\
+fi\\
+\\
+DC=`echo \$1|cut -d\textbackslash= -f 2|cut -d\textbackslash, -f 1`\\
+IMAP=\$2\\
+KRB=\$3\\
+\\
+slapadd \verb|<<| EOF\\
+dn: \$1\\
+objectClass: dcObject\\
+objectClass: organization\\
+description: Base object\\
+dc: \$DC\\
+o: My own Organization\\
+\\
+dn: cn=terminal-admin,\$1\\
+objectClass: person\\
+cn: terminal-admin\\
+sn: Upload user\\
+description: GOto Upload Benutzer\\
+userPassword:: e2tlcmJlcm9zfXRlcm1pbmFsYWRtaW5AR09OSUNVUy5MT0NBTAo=\\
+\\
+dn: ou=systems,\$1\\
+objectClass: organizationalUnit\\
+ou: systems\\
+\\
+dn: ou=terminals,ou=systems,\$1\\
+objectClass: organizationalUnit\\
+ou: terminals\\
+\\
+dn: ou=servers,ou=systems,\$1\\
+objectClass: organizationalUnit\\
+ou: servers\\
+\\
+dn: ou=people,\$1\\
+objectClass: organizationalUnit\\
+ou: people\\
+\\
+dn: ou=groups,\$1\\
+objectClass: organizationalUnit\\
+ou: groups\\
+\\
+dn: cn=default,ou=terminals,ou=systems,\$1\\
+objectClass: gotoTerminal\\
+cn: default\\
+gotoMode: disabled\\
+gotoXMethod: query\\
+gotoRootPasswd: tyogUVSVZlEPs\\
+gotoXResolution: 1024x768\\
+gotoXColordepth: 16\\
+gotoXKbModel: pc104\\
+gotoXKbLayout: de\\
+gotoXKbVariant: nodeadkeys\\
+gotoSyslogServer: lts-1\\
+gotoSwapServer: lts-1:/export/swap\\
+gotoLpdServer: lts-1:/export/spool\\
+gotoNtpServer: lts-1\\
+gotoScannerClients: lts-1.\$DC.local\\
+gotoFontPath: inet/lts-1:7110\\
+gotoXdmcpServer: lts-1\\
+gotoFilesystem: afs-1:/export/home /home nfs exec,dev,suid,rw,hard,nolock,fg,rsize=8192 1 1\\
+\\
+dn: cn=admin,ou=people,\$1\\
+objectClass: person\\
+objectClass: organizationalPerson\\
+objectClass: inetOrgPerson\\
+objectClass: gosaAccount\\
+uid: admin\\
+cn: admin\\
+givenName: admin\\
+sn: GOsa main administrator\\
+sambaLMPassword: 10974C6EFC0AEE1917306D272A9441BB\\
+sambaNTPassword: 38F3951141D0F71A039CFA9D1EC06378\\
+userPassword:: dGVzdGVy\\
+\\
+dn: cn=administrators,ou=groups,\$1\\
+objectClass: gosaObject\\
+objectClass: posixGroup\\
+objectClass: top\\
+gosaSubtreeACL: :all\\
+cn: administrators\\
+gidNumber: 999\\
+memberUid: admin\\
+\\
+dn: cn=lts-1,ou=servers,ou=systems,\$1\\
+objectClass: goTerminalServer\\
+objectClass: goServer\\
+goXdmcpIsEnabled: true\\
+macAddress: 00:B0:D0:F0:DE:1D\\
+cn: lts-1\\
+goFontPath: inet/lts-1:7110\\
+\\
+dn: cn=afs-1,ou=servers,ou=systems,\$1\\
+objectClass: goNfsServer\\
+objectClass: goNtpServer\\
+objectClass: goLdapServer\\
+objectClass: goSyslogServer\\
+objectClass: goCupsServer\\
+objectClass: goServer\\
+macAddress: 00:B0:D0:F0:DE:1C\\
+cn: afs-1\\
+goExportEntry: /export/terminals 10.3.64.0/255.255.252.0(ro,async,no\_root\_squash)\\
+goExportEntry: /export/spool 10.3.64.0/255.255.252.0(rw,sync,no\_root\_squash)\\
+goExportEntry: /export/swap 10.3.64.0/255.255.252.0(rw,sync,no\_root\_squash)\\
+goExportEntry: /export/home 10.3.64.0/255.255.252.0(rw,sync,no\_root\_squash)\\
+goLdapBase: \$1\\
+\\
+dn: cn=vserver-02,ou=servers,ou=systems,\$1\\
+objectClass: goImapServer\\
+objectClass: goServer\\
+macAddress: 00:B0:D0:F0:DE:1F\\
+cn: vserver-02\\
+goImapName: imap://\$IMAP\\
+goImapConnect: {\$IMAP:143}\\
+goImapAdmin: cyrus\\
+goImapPassword: secret\\
+goImapSieveServer: \$IMAP\\
+goImapSievePort: 2000\\
+\\
+dn: cn=kerberos,ou=servers,ou=systems,\$1\\
+objectClass: goKrbServer\\
+objectClass: goServer\\
+macAddress: 00:B0:D0:F0:DE:1E\\
+cn: kerberos\\
+goKrbRealm: \$KRB\\
+goKrbAdmin: admin/admin\\
+goKrbPassword: secret\\
+\\
+dn: cn=fax,ou=servers,ou=systems,\$1\\
+objectClass: goFaxServer\\
+objectClass: goServer\\
+macAddress: 00:B0:D0:F0:DE:10\\
+cn: fax\\
+goFaxAdmin: fax\\
+goFaxPassword: secret\\
+\\
+dn: ou=incoming,\$1\\
+objectClass: organizationalUnit\\
+ou: incoming\\
+\\
+EOF\\
+\end{longtable}
+\end{center}
+
+
+\subsubsection{Master Server and two slaves}
+
+The data will be loaded with the same script of the previous section, in the master and in the slaves, with the following differences:\\
+
+In the master "DC=CHAOSDIMENSION, dc=ORG" we will execute this script \htmladdnormallink{creating\_base.sh}{http://warping.sourceforge.net/gosa/contrib/en/creating\_base.sh} to create the base: \\
+
+\begin{center}
+\begin{longtable}{|l|}\hline
+\caption{Create Base Configuration}\\
+\hline \hline
+\multicolumn{1}{|c|}{\textbf{Create Base Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{1}{|c|}{\textbf{Create Base Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{1}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{1}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+\#!/bin/sh\\
+\\
+if [ \$\{\#@\} != 1 ]\\
+then\\
+\verb|    |echo "Is needed the parameter base DN of the master"\\
+\verb|    |echo "For example creating\_base.sh dc=CHAOSDIMENSION,dc=ORG"\\
+\verb|    |exit\\
+fi\\
+\\
+DC=`echo \$1|cut -d\textbackslash= -f 2|cut -d\textbackslash, -f 1`\\
+\\
+slapadd \verb|<<|  EOF\\
+dn: \$1\\
+objectClass: dcObject\\
+objectClass: organization\\
+description: Base object\\
+dc: \$DC\\
+o: My own Base Organization\\
+EOF\\
+\end{longtable}
+\end{center}
+
+
+Also with the script of the previous section we will load the domains\\ "DC=domain1, DC=CHAOSDIMENSION, DC=ORG" and "DC=domain2, DC=CHAOSDIMENSION, DC=ORG". \\
+
+In slave1 we will execute script with "DC=domain1, DC=CHAOSDIMENSION, DC=ORG" and in slave2 with "DC=domain2, DC=CHAOSDIMENSION, DC=ORG". In both cases both LDAP slave servers will be configured for their own DN.\\
+
+At last we need to create the user for the replica, who could make it with the following script (\htmladdnormallink{user\_replica.sh}{http://warping.sourceforge.net/gosa/contrib/en/user\_replica.sh}) with the name of the user and the DN base: \\
+
+\begin{center}
+\begin{longtable}{|l|}\hline
+\caption{Create replica user Configuration}\\
+\hline \hline
+\multicolumn{1}{|c|}{\textbf{Create replica user Configuration}}\\
+\hline \hline
+\endfirsthead
+\hline \hline
+\multicolumn{1}{|c|}{\textbf{Create replica user Configuration (continuation)}}\\
+\hline \hline
+\endhead
+\hline
+\multicolumn{1}{|c|}{Continue $\ldots$}\\
+\hline
+\endfoot
+\hline
+\multicolumn{1}{|c|}{\textbf{End}}\\
+\hline
+\endlastfoot
+\#!/bin/sh\\
+\\
+if [ \$\{\#@\} != 2 ]\\
+then\\
+\verb|    |echo "Are needed the parameters name of user and DN base for replica"\\
+\verb|    |echo "For example user\_replica.sh replicator dc=domain1,dc=CHAOSDIMENSION,dc=ORG"\\
+\verb|    |exit\\
+fi\\
+\\
+KEY=`makepasswd --crypt --chars=7 \textbackslash\\ --string="abcdefghijklmnopqrstuvwxyz1234567890"`\\
+PASS=`echo \$KEY|awk '\{ print \$1\}'`\\
+CRYPT=`echo \$KEY|awk '\{ print \$2\}'`\\
+
+echo "Creating user \$1 with password: \$PASS"\\
+
+slapadd \verb|<<| EOF\\
+dn: cn=\$1,ou=people,\$2\\
+displayName: Debian User,,,\\
+userPassword: \{crypt\} \$CRYPT\\
+sambaLMPassword: \\
+sambaNTPassword: \\
+sn: \$1\\
+givenName: \$1\\
+cn: \$1\\
+homeDirectory: /home/\$1\\
+loginShell: /bin/false\\
+uidNumber: 10000\\
+gidNumber: 100\\
+gecos: \$1\\
+shadowMin: 0\\
+shadowMax: 99999\\
+shadowWarning: 7\\
+shadowInactive: 0\\
+shadowLastChange: 12438\\
+gosaDefaultLanguage: en\_EN\\
+uid: \$1\\
+objectClass: posixAccount\\
+objectClass: shadowAccount\\
+objectClass: person\\
+objectClass: organizationalPerson\\
+objectClass: inetOrgPerson\\
+objectClass: gosaAccount\\
+objectClass: top\\
+EOF\\
+\end{longtable}
+\end{center}
+
+

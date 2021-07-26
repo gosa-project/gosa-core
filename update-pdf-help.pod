@@ -1,0 +1,32 @@
+
+=head1 NAME
+
+update-pdf-help - Create pdf documentation from online documentation
+
+=head1 SYNOPSIS
+
+update-pdf-help
+
+=head1 DESCRIPTION
+
+update-pdf-help is a script that create pdf docomentation for offline 
+reading from online documentation.
+
+=head1 BUGS
+
+Please report any bugs, or post any suggestions, to the GOsa mailing list <gosa-devel@oss.gonicus.de> or to <https://oss.gonicus.de/labs/gosa>
+
+
+=head1 LICENCE AND COPYRIGHT
+
+This code is part of GOsa (L<http://www.gosa-project.org>)
+
+Copyright (C) 2003-2009 GONICUS GmbH
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+=cut
+

@@ -1,0 +1,9 @@
+These RPM-Packages do not support selinux. To make use of GOsa, please
+
+* Create a selinux policy for the RPM package to work correctly. Send
+  your work to pollmeier@gonicus.de in order to be included in the next
+  upstream package.
+
+* Disable selinux by typing
+  # setenforce 0
+
