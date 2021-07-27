@@ -3936,10 +3936,10 @@ function gen_uids($rule, $attributes)
 
   @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $attributes, "Prepare");
 
-  // Search for '{%...[n-m]}
+  // Search for '{%...[min-max]}'
   // Get all matching parts of the given string and sort them by
   //  length, to avoid replacing strings like '%uidNumber' with 'uid'
-  //  instead of 'uidNumber'; The longest tring at first.
+  //  instead of 'uidNumber'; The longest string at first.
   preg_match_all('/(\{?%([a-z0-9]+)(\[(([0-9]+)(\-([0-9]+))?)\])?\}?)/i', $rule, $matches, PREG_SET_ORDER);
   $replacements = array();
   foreach ($matches as $match) {
@@ -3947,13 +3947,23 @@ function gen_uids($rule, $attributes)
     # initialize the match's replacement array...
     $replacements[$match[0]] = array();
 
+    # parameter 'min': don't allow '0' as start position (if set), rewrite to '1'
+    if (isset ($match[5]) && ($match[5] == 0)) {
+        $match[5] = 1;
+    }
+
+    # parameter 'max':  don't allow '0' as end position (if set), rewrite to '1'
+    if (isset ($match[7]) && ($match[7] == 0)) {
+        $match[7] = 1;
+    }
+
     // No start position given, then add the complete value
     if (!isset($match[7])) {
       $replacements[$match[0]][] = $attributes[$match[2]];
 
       // Start given but no end, so just add a single character
     } elseif (!isset($match[7])) {
-      if (isset($attributes[$match[2]][$match[5]])) {
+      if (isset($attributes[$match[2]][$match[5]-1])) {
         $tmp = " " . $attributes[$match[2]];
         $replacements[$match[0]][] = trim($tmp[$match[5]]);
       }
@@ -3962,7 +3972,7 @@ function gen_uids($rule, $attributes)
     } else {
       $str = "";
       for ($i = $match[5]; $i <= $match[7]; $i++) {
-        if (isset($attributes[$match[2]][$i])) {
+        if (isset($attributes[$match[2]][$i-1])) {
           $tmp = " " . $attributes[$match[2]];
           $str = substr($tmp, 1, $i);
           $replacements[$match[0]][] = trim($str);
