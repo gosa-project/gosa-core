@@ -148,15 +148,19 @@ class baseSelector {
         }
 
         if(check_for_materialize_theme()) {
+            $name = explode(",", $this->base);
+            $root = explode(",", $config->current['BASE']);
+            $baseName = $name == $root ? "/" : str_replace('dc=', "", $name[0]);
+
             $this->tree="   <div class='input-field col s12'>
-                                <p class='prefix'>/</p>
+                                <i class='material-icons prefix'>account_tree</i>
                                 <input 
                                     type='text' 
                                     id='autocomplete-input' 
                                     class='dropdown-trigger' 
                                     data-target='autocomplete' 
                                     autocomplete='off' 
-                                    value=''>
+                                    value='".$baseName."'>
                             </div>";
 
             $selected= $this->base == $config->current['BASE'] ? "active" : "";

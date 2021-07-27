@@ -28,7 +28,7 @@ hr {
 
 /* -- END -- */
 
-/* -- special font-setup -- */
+/* -- particular font-setup -- */
 
 .welcome {
     font-size: 18px !important;
@@ -89,7 +89,7 @@ textarea.materialize-textarea {
 
 /* -- END -- */
 
-/* lifetime icon align*/
+/* -- lifetime icon align -- */
 
 .lifetime {
     padding-top: .5rem;
@@ -153,10 +153,6 @@ a.brand-logo {
 
 .card-title {
     font-size: 20px !important;
-}
-
-.card .card-action {
-    padding: 16px 0 !important; 
 }
 
 /* -- END -- */

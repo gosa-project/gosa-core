@@ -1370,16 +1370,16 @@ function renderNavigation()
     if($config->get_cfg_value("core","theme") == "materialize"){
         /* Draw root button */
         if($enableRoot){
-            $result["ROOT"]= image("<i class='material-icons input-icons md-24'>account_tree</i>", 'ROOT', _("Root"));
+            $result["ROOT"]= image("<i class='material-icons input-icons md-24'>first_page</i>", 'ROOT', _("Root"));
         }else{
-            $result["ROOT"]= image("<i class='material-icons grey-text md-24'>account_tree</i>", null, _("Root"));
+            $result["ROOT"]= image("<i class='material-icons grey-text md-24'>first_page</i>", null, _("Root"));
         }
 
         /* Draw back button */
         if($enableBack){
-            $result["BACK"]= image("<i class='material-icons input-icons md-24'>arrow_back</i>", 'BACK', _("Go to preceding level"));
+            $result["BACK"]= image("<i class='material-icons input-icons md-24'>chevron_left</i>", 'BACK', _("Go to preceding level"));
         }else{
-            $result["BACK"]= image("<i class='material-icons grey-text md-24'>arrow_back</i>", null, _("Go to preceding level"));
+            $result["BACK"]= image("<i class='material-icons grey-text md-24'>chevron_left</i>", null, _("Go to preceding level"));
         }
 
         /* Draw home button */
@@ -1649,7 +1649,7 @@ function recurseActions($actions, $level)
                     $result.="  <ul class='collection' onClick='\$(\"act\").value= '".$action['name']."';\$(\"exec_act\").click();'>
                                     <li class='collection-item'>
                                         <a href='#'>
-                                            $img
+                                            $img&nbsp;
                                             "._($action['label'])."
                                         </a>
                                     </li>
