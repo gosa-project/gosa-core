@@ -20,6 +20,13 @@ playing with a
 installation. The Debian Edu mainserver has GOsa pre-installed and set up
 out-of-the box.
 
+## Project Status
+
+This project won't receive functional updates any time soon.
+We will create and merge fixes to keep GOsa² usable and secure
+if necessary.
+If you find a security issue or a bug feel free to raise an issue.
+
 
 ## Translations
 
