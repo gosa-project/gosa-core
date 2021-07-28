@@ -341,10 +341,48 @@ class pluglist
             foreach ($cfg as $headline => $plug){
                 $col= 0;
 
-                $this->iconmenu .= "\n        <div class='clear'></div>";
-                if($add_hr){
-                    $add_hr = FALSE;
-                    $this->iconmenu .= "\n        <hr>";
+                    if($add_hr){
+                        $add_hr = FALSE;
+                        $this->iconmenu .= "\n        <hr>";
+                    }
+                    $this->iconmenu .= "\n        <span class='card-title'>". _($headline)."</span>";
+
+                    foreach ($plug as $info){
+
+                        // Get Plugin info
+                        list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
+                        $this->registeredIconEntries[] = $index;
+
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if(isset($disabledPlugins[$info['CLASS']])) continue;
+
+                        // Add a seperating row
+                        if (($col % 4) == 0){ 
+                            $this->iconmenu.="\n    <div class='row'>";
+                        }
+
+                        $this->iconmenu.= "\n   <a class='col s3 pointer black-text'>";
+                        $this->iconmenu.= "\n       <div class='card horizontal card-min-height valign-wrapper' onclick='openPlugin({$index})'>";
+                        $this->iconmenu.= "\n           <div class='card-image'>";
+                        $this->iconmenu.= "\n               <i class='material-icons md-48 mg2'>$icon</i>";
+                        $this->iconmenu.= "\n           </div>";
+                        $this->iconmenu.= "\n           <div class='card-stacked'>";
+                        $this->iconmenu.= "\n               <div class='card-content'>";
+                        $this->iconmenu.= "\n                   <span class='card-title'>{$title}</span>";
+                        $this->iconmenu.= "\n                   <p>{$desc}</p>";
+                        $this->iconmenu.= "\n               </div>";
+                        $this->iconmenu.= "\n           </div>";
+                        $this->iconmenu.= "\n       </div>";
+                        $this->iconmenu.= "\n   </a>";
+                        $col++ ;
+
+                        if (($col % 4) == 0 && $col != 0){ 
+                            $this->iconmenu.="\n    </div>";
+                        }
+                    }
+                    $this->iconmenu.="\n    </div>";
+
+                    $add_hr = TRUE;
                 }
                 $this->iconmenu .= "\n        <h3 class='icon-menu-title'>". _($headline)."</h3>";
 
@@ -409,7 +447,50 @@ class pluglist
                 }
             }
 
-            $this->pathMenu = 
+            if (check_for_materialize_theme()) {
+
+                // Check if we've at least one entry defined ih the iconmenu
+                if(isset($this->config->data['SHORTCUTMENU'])){
+                    $icfg= &$this->config->data['SHORTCUTMENU'];
+                    $rcfg = array_reverse($icfg);
+                    foreach($rcfg as $id => $plug){
+                        list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
+                        $this->registeredShortCutEntries[] = $index;
+
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if(isset($disabledPlugins[$plug['CLASS']])) continue;
+
+                        $this->pathMenu.="  <li>
+                                                <a onClick='openPlugin({$index})' title='{$title}'>
+                                                    <i class='material-icons'>home</i>
+                                                </a>
+                                            </li>";
+                    }
+                }
+
+                // Place the navigator part, this will be replaced during runtime.
+                $this->pathMenu .="     %navigator%";
+
+                // Check if we've at least one entry defined ih the pathmenu
+                if(isset($this->config->data['PATHMENU'])){
+                    $cfg= &$this->config->data['PATHMENU'];
+                    $rcfg = array_reverse($cfg);
+                    $first = true;
+                    $this->pathMenu.="  <div class='user-control'>";
+                    foreach($rcfg as $id => $plug){
+                        list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
+                        $this->registeredPathEntries[] = $index;
+
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if(isset($disabledPlugins[$plug['CLASS']])) continue;
+
+                        $this->pathMenu.="  <li onClick='openPlugin({$index})'><a href='#'><b>{$title}</b></a></li>";
+                    }
+                    $this->pathMenu.="  </div>";
+                }
+
+            } else {
+                $this->pathMenu = 
                 "\n        <div class='plugin-path'>".
                 "\n          <ul class='path-navigation'>";
 

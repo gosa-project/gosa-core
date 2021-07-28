@@ -650,10 +650,19 @@ class plugin
     } else {
       $state= "";
     }
-    $display = "<div class='plugin-enable-header'>\n";
-    $display.= "<p>$text</p>\n";
-    $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
-    $display.= "</div>\n";
+    $display = check_for_materialize_theme() ?
+                "<div class='card'>
+                  <div class='card-content'>
+                    <span class='card-title'>$text</span>
+                  </div>
+                  <div class='card-action'>
+                    <button class='btn-small gonicus-color' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
+                  </div>
+                </div>" : 
+                "<div class='plugin-enable-header'>
+                    <p>$text</p>
+                    <button type='submit' name=\"modify_state\" ".$state.">$button_text</button>
+                  </div>";
 
     return($display);
   }
@@ -667,10 +676,22 @@ class plugin
     } else {
       $state= "";
     }
-    $display = "<div class='plugin-disable-header'>\n";
-    $display.= "<p>$text</p>\n";
-    $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
-    $display.= "</div>\n";
+    $display =  (check_for_materialize_theme() ? 
+                  "<div class='card'>
+                      <div class='card-content'>
+                        <span class='card-title'>$text</span>
+                      </div>
+                    <div class='card-action'>
+                      <button class='btn-small gonicus-color' type='submit' name='modify_state' ".$state.">
+                        $button_text
+                      </button>
+                    </div>" : 
+                  "<div class='plugin-disable-header'>
+                    <p>$text</p>
+                    <button type='submit' name=\"modify_state\" ".$state.">
+                      $button_text
+                    </button>
+                  </div>");
     return($display);
   }
 

@@ -1,0 +1,27 @@
+.btn-extra-small {
+    height: 19.8px;
+    line-height: 19.8px;
+    font-size: 10px;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 0 2px 2px 0;
+    padding: 0 16px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.wide {
+    width: 100px;
+}
+
+.half {
+    width: 49px;
+}
+
+.btn-small {
+    height: 2rem !important;
+    line-height: 2rem !important;
+    font-size: unset !important;
+}

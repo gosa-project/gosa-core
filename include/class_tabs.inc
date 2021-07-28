@@ -259,7 +259,13 @@ class tabs
 
       // Take care about notifications 
       $obj = $this->by_object[$class];
-      $tabClass = ($this->current == $class) ? "current" :"";
+      if (check_for_materialize_theme()) {
+        $activeClass = ($this->current == $class) ? "active gonicus-color white-text" :"black-text";
+      } else {
+        $tabClass = ($this->current == $class) ? "current" :"";
+      }
+      // check for first tab
+      $tabClass = (check_for_materialize_theme() ? " tab col s2 pointer" : $tabClass);
       if ( $this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)){
         $tabClass .= " info";
       }
