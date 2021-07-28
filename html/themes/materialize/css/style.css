@@ -33,7 +33,6 @@ hr {
 
 .input-field {
     position: relative;
-    margin-top: unset !important;
     margin-bottom: unset !important;
 }
 
@@ -138,7 +137,7 @@ textarea.materialize-textarea {
 /* -- generic card setup -- */
 
 .card-min-height {
-    min-height: 9rem;
+    min-height: 13rem;
 }
 
 .card-title {
