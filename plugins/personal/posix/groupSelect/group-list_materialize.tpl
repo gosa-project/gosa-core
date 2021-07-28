@@ -1,7 +1,3 @@
-<div>
-  <span class="black-text"><h5>{$HEADLINE}&nbsp;{$SIZELIMIT}</h5></span>
-</div>
-<hr>
 <div class="row mgb-off valign-wrapper">
   <div class="col s2">
     <div class="row mgb-off">
@@ -15,6 +11,7 @@
   <div class="col s2 center-align">{$ACTIONS}</div>
   {$FILTER}
 </div>
+<span class="black-text"><h6>{$HEADLINE}&nbsp;{$SIZELIMIT}</h6></span>
 <hr>
   
 {$LIST}
