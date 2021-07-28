@@ -1,11 +1,5 @@
-
-<div class='card no-shadow'>
-  <div class="card-content">
     {$iconmenu}
-  </div>
-</div>
 
-<div class="clear"></div>
 <hr>
 <div class="copynotice">
   &copy; 2002-{$year} 

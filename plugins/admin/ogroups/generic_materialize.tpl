@@ -23,7 +23,9 @@
 
         <div class="row">
           {render acl=$baseACL}
-          {$base}
+          <div class="input-field col s3">
+            {$base}
+          </div>
           {/render}
         </div>
       </div>
@@ -45,11 +47,12 @@
         {render acl=$memberACL}
         {$memberList}
         {/render}
-    
+
         {if !$isRestrictedByDynGroup}
         <div class="card-action">
           {render acl=$memberACL}
-          <button class="btn-small gonicus-color" type='submit' name='edit_membership'>{msgPool type=addButton}</button>&nbsp;
+          <button class="btn-small gonicus-color" type='submit' name='edit_membership'>{msgPool
+            type=addButton}</button>&nbsp;
           {/render}
         </div>
         {/if}

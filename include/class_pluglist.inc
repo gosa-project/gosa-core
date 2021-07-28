@@ -394,11 +394,11 @@ class pluglist
                         if(isset($disabledPlugins[$info['CLASS']])) continue;
 
                         // Add a seperating row
-                        if (($col % 3) == 0){ 
+                        if (($col % 4) == 0){ 
                             $this->iconmenu.="\n    <div class='row'>";
                         }
 
-                        $this->iconmenu.= "\n   <a class='col s4 pointer black-text'>";
+                        $this->iconmenu.= "\n   <a class='col s3 pointer black-text'>";
                         $this->iconmenu.= "\n       <div class='card horizontal card-min-height valign-wrapper' onclick='openPlugin({$index})'>";
                         $this->iconmenu.= "\n           <div class='card-image'>";
                         $this->iconmenu.= "\n               <i class='material-icons md-48 mg2'>$icon</i>";
@@ -413,7 +413,7 @@ class pluglist
                         $this->iconmenu.= "\n   </a>";
                         $col++ ;
 
-                        if (($col % 3) == 0 && $col != 0){ 
+                        if (($col % 4) == 0 && $col != 0){ 
                             $this->iconmenu.="\n    </div>";
                         }
                     }
@@ -495,9 +495,6 @@ class pluglist
             }
 
             if (check_for_materialize_theme()) {
-                $this->pathMenu ="  <nav>
-                                        <div class='nav-wrapper gonicus-color'>
-                                            <ul class='left'>";
 
                 // Check if we've at least one entry defined ih the iconmenu
                 if(isset($this->config->data['SHORTCUTMENU'])){
@@ -519,14 +516,14 @@ class pluglist
                 }
 
                 // Place the navigator part, this will be replaced during runtime.
-                $this->pathMenu .="     %navigator%
-                                    </ul>
-                                    <ul class='right'>";
+                $this->pathMenu .="     %navigator%";
 
                 // Check if we've at least one entry defined ih the pathmenu
                 if(isset($this->config->data['PATHMENU'])){
                     $cfg= &$this->config->data['PATHMENU'];
                     $rcfg = array_reverse($cfg);
+                    $first = true;
+                    $this->pathMenu.="  <div class='user-control'>";
                     foreach($rcfg as $id => $plug){
                         list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
                         $this->registeredPathEntries[] = $index;
@@ -534,10 +531,10 @@ class pluglist
                         // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
                         if(isset($disabledPlugins[$plug['CLASS']])) continue;
 
-                        $this->pathMenu.="  <li class='right' onClick='openPlugin({$index})'><a href='#'><b>{$title}</b></a></li>";
+                        $this->pathMenu.="  <li onClick='openPlugin({$index})'><a href='#'><b>{$title}</b></a></li>";
                     }
+                    $this->pathMenu.="  </div>";
                 }
-                $this->pathMenu.="  </ul></div></nav>";
 
             } else {
                 $this->pathMenu = 

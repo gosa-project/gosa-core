@@ -2,6 +2,7 @@
 
 html {
     font-size: 12px !important;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 td, th {
     padding: 0px 0px !important;
@@ -28,15 +29,13 @@ hr {
 
 /* -- END -- */
 
-/* -- particular font-setup -- */
-
-.welcome {
-    font-size: 18px !important;
-}
-
-/* -- END -- */
-
 /* -- input/textarea/checkbox setup -- */
+
+.input-field {
+    position: relative;
+    margin-top: unset !important;
+    margin-bottom: unset !important;
+}
 
 /* label color */
 .input-field label {
@@ -134,21 +133,12 @@ textarea.materialize-textarea {
     margin: auto !important;
 }
 
-a.brand-logo {
-    padding-block: 1rem !important;
-}
-
 /* -- END -- */
-
-.no-shadow {
-    box-shadow: none !important;
-}
-
 
 /* -- generic card setup -- */
 
 .card-min-height {
-    min-height: 12rem;
+    min-height: 9rem;
 }
 
 .card-title {
@@ -245,3 +235,31 @@ td a {
 }
 
 /* -- END -- */
+
+nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+    height: 3rem !important;
+    line-height: 3rem !important;
+}
+
+nav .brand-logo {
+    display: unset !important;
+    float: left;
+}
+
+nav div div {
+    padding-left: 12rem;
+}
+
+.breadcrumb {
+    font-size: unset !important;
+}
+
+.user-control {
+    position: absolute;
+    margin-left: 30rem;
+}
+
+.control-panel {
+    border: 1px solid lightslategray;
+    border-radius: 2px;
+}

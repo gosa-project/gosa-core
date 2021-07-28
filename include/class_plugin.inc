@@ -651,7 +651,7 @@ class plugin
       $state= "";
     }
     $display = check_for_materialize_theme() ?
-                "<div class='card no-shadow'>
+                "<div class='card'>
                   <div class='card-content'>
                     <span class='card-title'>$text</span>
                   </div>
@@ -677,7 +677,7 @@ class plugin
       $state= "";
     }
     $display =  (check_for_materialize_theme() ? 
-                  "<div class='card no-shadow'>
+                  "<div class='card'>
                       <div class='card-content'>
                         <span class='card-title'>$text</span>
                       </div>

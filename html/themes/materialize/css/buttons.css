@@ -19,3 +19,9 @@
 .half {
     width: 49px;
 }
+
+.btn-small {
+    height: 2rem !important;
+    line-height: 2rem !important;
+    font-size: unset !important;
+}

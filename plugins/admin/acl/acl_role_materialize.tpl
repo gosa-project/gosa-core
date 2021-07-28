@@ -19,7 +19,9 @@
 		</div>
 
 		{render acl=$baseACL}
-		{$base}
+		<div class="input-field col s3">
+			{$base}
+		</div>
 		{/render}
 	</div>
 </div>

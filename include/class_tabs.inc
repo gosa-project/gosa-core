@@ -271,7 +271,7 @@ class tabs
         $tabClass = ($this->current == $class) ? "current" :"";
       }
       // check for first tab
-      $tabClass = (check_for_materialize_theme() ? " tab col s3 pointer" : $tabClass);
+      $tabClass = (check_for_materialize_theme() ? " tab col s2 pointer" : $tabClass);
       if ( $this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)){
         $tabClass .= " info";
       }

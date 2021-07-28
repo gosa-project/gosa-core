@@ -130,7 +130,9 @@
     {/literal}
 
     {render acl=$baseACL checkbox=$multiple_support checked=$use_base}
-    {$base}
+    <div class="input-field col s3">
+                        {$base}
+                    </div>
     {/render}
 
   </div>
