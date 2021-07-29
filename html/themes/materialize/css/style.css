@@ -249,7 +249,8 @@ nav div div {
     padding-left: 12rem;
 }
 
-.breadcrumb {
+.breadcrumb::before {
+    color: lightslategray !important;
     font-size: unset !important;
 }
 

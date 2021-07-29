@@ -78,15 +78,15 @@ class pathNavigator
       $sTitle = "";
       foreach($list as $entry){
           $title = (!empty($entry['TITLE']))? 'title="'.htmlentities(LDAP::fix($entry['TITLE']),ENT_COMPAT,'UTF-8').'"': '';
-          $path.="  <li class='breadcrumb' {$title}>{$entry['NAME']}</li>";
+          $path.="  <span class='breadcrumb black-text' {$title}>{$entry['NAME']}</span>";
           $sTitle .= " - ".$entry['NAME'];
       }
 
       // If no path is given then show a simple 'Welcome to GOsa' string.
       if(empty($path)){
-        $path = " <li class='welcome'>
+        $path = " <span class='breadcrumb black-text'>
                     "._("Welcome to GOsa")."
-                  </li>";
+                  </span>";
       }
 
       $smarty = get_smarty();
