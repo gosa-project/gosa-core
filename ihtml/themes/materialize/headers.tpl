@@ -13,10 +13,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
 
-    <link rel="stylesheet" href="themes/materialize/css/style.css">
+    <link rel="stylesheet" href="themes/materialize/css/materialize.css">
     <link rel="stylesheet" href="themes/materialize/css/icons.css">
     <link rel="stylesheet" href="themes/materialize/css/buttons.css">
-    <link rel="stylesheet" href="themes/materialize/css/materialize.css">
+    <link rel="stylesheet" href="themes/materialize/css/style.css">
+    <link rel="stylesheet" href="themes/materialize/css/styles.css">
 
 
 
