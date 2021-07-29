@@ -16,13 +16,13 @@ class userFilter extends plugin
    */
   static function userFilteringAvailable()
   {
-    if(!session::is_set('userFilter::__constructingAvailable')){
+    if(!session::is_set('userFilter::userFilteringAvailable')){
       global $config;
       $ldap = $config->get_ldap_link();
       $ocs = $ldap->get_objectclasses();
-      session::set('userFilter::__constructingAvailable', isset($ocs['gosaProperties']));
+      session::set('userFilter::userFilteringAvailable', isset($ocs['gosaProperties']));
     }
-    return(session::get('userFilter::__constructingAvailable'));
+    return(session::get('userFilter::userFilteringAvailable'));
   }
   
  
