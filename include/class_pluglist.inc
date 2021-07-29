@@ -20,86 +20,80 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class pluglist 
+class pluglist
 {
-    // The id of the last registered plugin id 
-    var $index= 0;
+    // The id of the last registered plugin id
+    public $index = 0;
 
-    var $config= NULL;
-    var $ui= NULL;
+    public $config = null;
+    public $ui = null;
 
     // Contains a list of the paths for all registered plugins.
-    var $dirlist= array();
+    public $dirlist = [];
 
     // Seems to be used in the help menu to generate an overview.
-    var $headlines = array();
+    public $headlines = [];
     // Remember stuff in here.
-    var $silly_cache= array();
+    public $silly_cache = [];
 
     // The pluglist keeps track of all registered plugins.
     // (Registered plugins are those we are able to access)
-    var $pluginList = array();
+    public $pluginList = [];
 
-    // Some cache vars to avoid regenration of the menus.   
-    var $pathMenu = "";
-    var $menu= "";
-    var $iconmenu= "";
-    var $breadcrumb= "";
+    // Some cache vars to avoid regenration of the menus.
+    public $pathMenu = '';
+    public $menu = '';
+    public $iconmenu = '';
 
     // Classes plInfo list
-    var $info = array();
-    var $registeredMenuEntries = array();
-    var $registeredPathEntries = array();
-    var $registeredIconEntries = array();
-    var $registeredShortCutEntries = array();
+    public $info = [];
+    public $registeredMenuEntries = [];
+    public $registeredPathEntries = [];
+    public $registeredIconEntries = [];
+    public $registeredShortCutEntries = [];
 
-
-    function getRegisteredMenuEntries ()
+    public function getRegisteredMenuEntries()
     {
-        return($this->registeredMenuEntries);
+        return $this->registeredMenuEntries;
     }
 
-
-    function getRegisteredPathEntries ()
+    public function getRegisteredPathEntries()
     {
-        return($this->registeredPathEntries);
+        return $this->registeredPathEntries;
     }
 
-
-    function getRegisteredIconEntries ()
+    public function getRegisteredIconEntries()
     {
-        return($this->registeredIconEntries);
+        return $this->registeredIconEntries;
     }
 
-
-    function getRegisteredShortCutEntries ()
+    public function getRegisteredShortCutEntries()
     {
-        return($this->registeredShortCutEntries);
+        return $this->registeredShortCutEntries;
     }
 
-
-    function __construct(&$config, &$ui)
+    public function __construct(&$config, &$ui)
     {
-        $this->ui= &$ui;
-        $this->config= &$config;
+        $this->ui = &$ui;
+        $this->config = &$config;
         $this->loadPluginList();
     }
 
-    function loadPluginList()
+    public function loadPluginList()
     {
-        $this->pluginList = array();
+        $this->pluginList = [];
 
         /* Fill info part of pluglist */
-        $classes= get_declared_classes();
-        foreach ($classes as $cname){
+        $classes = get_declared_classes();
+        foreach ($classes as $cname) {
             $cmethods = get_class_methods($cname);
-            if (in_array_ics('plInfo',$cmethods)){
-                $this->info[$cname]= call_user_func(array($cname, 'plInfo'));
+            if (in_array_ics('plInfo', $cmethods)) {
+                $this->info[$cname] = call_user_func([$cname, 'plInfo']);
             }
         }
 
-        if(!session::is_set('maxC')){
-            session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
+        if (!session::is_set('maxC')) {
+            session::set('maxC', 'RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP');
         }
         //
         //   // Now generate menu - usually they are cached
@@ -108,179 +102,225 @@ class pluglist
         //   $this->genPathMenu();
     }
 
-
     /*! \brief    Tries to register a plugin in the pluglist
      *            Checks existence and ACL for the given plugin.
-     *            Returns true in case of success else false. 
+     *            Returns true in case of success else false.
      */
-    function registerPlugin(&$plug)
+    public function registerPlugin(&$plug)
     {
         global $class_mapping;
 
-        // Clean ACL string, we do not want any spaces or lines breaks here. 
+        // Clean ACL string, we do not want any spaces or lines breaks here.
         $plug['ACL'] = trim($plug['ACL']);
 
         // Clean ACL string, we do not want any spaces or lines breaks here.
         $acl = trim($plug['ACL']);
-        if(preg_match("/,/",$acl)){
-            $acls = explode(",",$acl);
-        }else{
-            $acls = array($acl);
+        if (preg_match('/,/', $acl)) {
+            $acls = explode(',', $acl);
+        } else {
+            $acls = [$acl];
         }
-        foreach($acls as $key => $aclEntry){
+        foreach ($acls as $key => $aclEntry) {
             $aclEntry = trim($aclEntry);
-            $tmp = preg_replace("/[^a-z0-9\/:]/i","",$aclEntry);
+            $tmp = preg_replace("/[^a-z0-9\/:]/i", '', $aclEntry);
 
             // Check if cleaned 'acl' tag doesn't match the configured one from the gosa.conf.
             // Display a notification to tell the user that there is something wrong.
-            if($tmp != $aclEntry){
-                trigger_error("Please check acl='{$aclEntry}' tag for plugin '{$plug['CLASS']}' in your gosa.conf, it contains invalid characters!" );
+            if ($tmp != $aclEntry) {
+                trigger_error("Please check acl='{$aclEntry}' tag for plugin '{$plug['CLASS']}' in your gosa.conf, it contains invalid characters!");
             }
             $acls[$key] = $tmp;
         }
-        $plug['ACL'] = implode(',',$acls);
-
+        $plug['ACL'] = implode(',', $acls);
 
         // Check class
-        if (!isset($plug['CLASS'])){
+        if (!isset($plug['CLASS'])) {
             msg_dialog::display(
-                    _("Configuration error"),
-                    _("The configuration format has changed: please run the setup again!"),
+                    _('Configuration error'),
+                    _('The configuration format has changed: please run the setup again!'),
                     FATAL_ERROR_DIALOG);
             exit();
         }
-        if (!plugin_available($plug['CLASS'])){
-            return(FALSE);
+        if (!plugin_available($plug['CLASS'])) {
+            return false;
         }
-        if (!$this->check_access($plug['ACL'])){
-            return(FALSE);
+        if (!$this->check_access($plug['ACL'])) {
+            return false;
         }
         $this->dirlist[$this->index] = dirname($class_mapping[$plug['CLASS']]);
         $this->pluginList[$this->index] = $plug['CLASS'];
-        $this->index++;
-        return(TRUE);
-    }
+        ++$this->index;
 
+        return true;
+    }
 
     /*! \brief  Check whether we are allowed to modify the given acl or not..
      *		This function is used to check which plugins are visible.
-     *		
+     *
      *  @param	The acl tag to check for, eg. 	"users/user:self", "systems", ...
      *  @return	Boolean TRUE on success else FALSE
      */
-    function check_access($aclname)
+    public function check_access($aclname)
     {
         if (isset($this->silly_cache[$aclname])) {
             return $this->silly_cache[$aclname];
         }
 
         // Split given acl string into an array. e.g. "user,systems" => array("users","systems");
-        $acls_to_check = array();
-        if(preg_match("/,/",$aclname)){
-            $acls_to_check = explode(",",$aclname);
-        }else{
-            $acls_to_check = array($aclname);
+        $acls_to_check = [];
+        if (preg_match('/,/', $aclname)) {
+            $acls_to_check = explode(',', $aclname);
+        } else {
+            $acls_to_check = [$aclname];
         }
 
-        foreach($acls_to_check as $acl_to_check){
-
+        foreach ($acls_to_check as $acl_to_check) {
             // Remove spaces and line breaks.
             $acl_to_check = trim($acl_to_check);
-            $acl_to_check = preg_replace("/ /","",$acl_to_check);
+            $acl_to_check = preg_replace('/ /', '', $acl_to_check);
 
-            if($acl_to_check == "none"){
-                $this->silly_cache[$aclname]= TRUE;
-                return(TRUE);
+            if ($acl_to_check == 'none') {
+                $this->silly_cache[$aclname] = true;
+
+                return true;
             }
 
-            /* Check if the given acl tag is only valid for self acl entries  
-             *          <plugin acl="users/user:self" class="user"...  
-             */	
-            if(preg_match("/:self$/",$acl_to_check)){
-                $acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
-                if(strpos($acl_to_check,"/")){
-                    if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
-                        $this->silly_cache[$aclname]= TRUE;
-                        return(TRUE);
+            /* Check if the given acl tag is only valid for self acl entries
+             *          <plugin acl="users/user:self" class="user"...
+             */
+            if (preg_match('/:self$/', $acl_to_check)) {
+                $acl_to_check = preg_replace('/:self$/', '', $acl_to_check);
+                if (strpos($acl_to_check, '/')) {
+                    if ($this->ui->get_permissions($this->ui->dn, $acl_to_check, '') != '') {
+                        $this->silly_cache[$aclname] = true;
+
+                        return true;
                     }
-                }else{
-                    if($this->ui->get_category_permissions($this->ui->dn,$acl_to_check,"") != ""){
-                        $this->silly_cache[$aclname]= TRUE;
-                        return(TRUE);
+                } else {
+                    if ($this->ui->get_category_permissions($this->ui->dn, $acl_to_check, '') != '') {
+                        $this->silly_cache[$aclname] = true;
+
+                        return true;
                     }
                 }
-            }else{
+            } else {
+                // No self acls. Check if we have any acls for the given ACL type
+                $deps = $this->ui->get_module_departments($acl_to_check, true);
+                if (count($deps)) {
+                    $this->silly_cache[$aclname] = true;
 
-                // No self acls. Check if we have any acls for the given ACL type 
-                $deps = $this->ui->get_module_departments($acl_to_check,TRUE);
-                if(count($deps)){
-                    $this->silly_cache[$aclname]= TRUE;
-                    return TRUE;
+                    return true;
                 }
             }
         }
 
-        $this->silly_cache[$aclname]= FALSE;
-        return (FALSE);
+        $this->silly_cache[$aclname] = false;
+
+        return false;
     }
 
-
-
-    /*! \brief    Generate the GOsa Main-Menu here (The menu on the left), 
+    /*! \brief    Generate the GOsa Main-Menu here (The menu on the left),
      *             this usually only done once during login.
      *            -----------------------------------------------------------------
-     *            Do NOT add style changes here manually, use the style.css or 
+     *            Do NOT add style changes here manually, use the style.css or
      *             if you prefer create your own theme!!
      *            -----------------------------------------------------------------
      */
-    function gen_menu()
+    public function gen_menu()
     {
-        if ($this->menu == ""){
-
+        if ($this->menu == '') {
             // First load the menu plugins and try to register them in the pluglist
             //  if this fails for some reason, then remove the plugin from the menu.
-            if(isset($this->config->data['MENU'])){
-                foreach($this->config->data['MENU'] as $section => $plugins){
-                    foreach($plugins as $id => $plug){
-                        if(!$this->registerPlugin($this->config->data['MENU'][$section][$id])){ 
-                            unset($this->config->data['MENU'][$section][$id]); 
+            if (isset($this->config->data['MENU'])) {
+                foreach ($this->config->data['MENU'] as $section => $plugins) {
+                    foreach ($plugins as $id => $plug) {
+                        if (!$this->registerPlugin($this->config->data['MENU'][$section][$id])) {
+                            unset($this->config->data['MENU'][$section][$id]);
                         }
                     }
 
-                    // Remove empty sections 
-                    if(count($this->config->data['MENU'][$section]) == 0){ 
-                        unset($this->config->data['MENU'][$section]); 
-                    } 
+                    // Remove empty sections
+                    if (count($this->config->data['MENU'][$section]) == 0) {
+                        unset($this->config->data['MENU'][$section]);
+                    }
                 }
             }
 
             $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
-            $cfg= $this->config->data['MENU'];
-            $menu = "";
-            foreach ($cfg as $headline => $plug){
+            $cfg = $this->config->data['MENU'];
+            $menu = '';
 
 
-                if(!count($plug)) continue;
+                foreach ($cfg as $headline => $plug) {
+                    if (!count($plug)) {
+                        continue;
+                    }
 
-                $menu.= "\n        <div class='menu'>";
-                $menu.= "\n          <ul>";
-                $menu.= "\n            <li class='menu-header'>"._($headline)."</li>";
-                $id = 0;
-                foreach ($plug as $info){
+                    $menu .= '    <li '.($main ? "class='active'" : '').">
+                                    <div class='collapsible-header gonicus-color white-text center-align'><h6>"._($headline)."</h6></div>
+                                    <div class='collapsible-body padding-off'>
+                                        <ul class='collection'>";
 
-                    // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                    if(isset($disabledPlugins[$info['CLASS']])) continue;
+                    $id = 0;
+                    $main = false;
+                    foreach ($plug as $info) {
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if (isset($disabledPlugins[$info['CLASS']])) {
+                            continue;
+                        }
 
-                    // Used to detect the last element in the menu
-                    $id ++;
+                        // Used to detect the last element in the menu
+                        ++$id;
 
-                    list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
-                    $class= "";
-                    if($id == count($plug)) $class=" class='menu-last' ";
-                    $menu .=  "\n            <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title."</li>";
+                        list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
+                        $menu .= "  <li id='plugMenuId_{$index}' class='collection-item pointer' onClick='return openPlugin({$index});'><span>".$title.'</span></li>';
 
-                    $this->registeredMenuEntries[] = $index;
+                        $this->registeredMenuEntries[] = $index;
+                    }
+                    $menu .= "\n         </ul>";
+                    $menu .= "\n     </div>";
+                    $menu .= "\n </li>";
+                }
+                if (count($this->registeredMenuEntries)) {
+                    $this->menu = "{$menu}";
+                }
+            } else {
+                foreach ($cfg as $headline => $plug) {
+                    if (!count($plug)) {
+                        continue;
+                    }
+
+                    $menu .= "    <div class='menu'>
+                                    <ul>
+                                        <li class='menu-header'>"._($headline).'</li>';
+                    $id = 0;
+                    foreach ($plug as $info) {
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if (isset($disabledPlugins[$info['CLASS']])) {
+                            continue;
+                        }
+
+                        // Used to detect the last element in the menu
+                        ++$id;
+
+                        list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
+                        $class = '';
+                        if ($id == count($plug)) {
+                            $class = " class='menu-last' ";
+                        }
+                        $menu .= "\n            <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title.'</li>';
+
+                        $this->registeredMenuEntries[] = $index;
+                    }
+                    $menu .= "\n          </ul>";
+                    $menu .= "\n          <div style='font-size:0'>&nbsp;</div>";
+                    $menu .= "\n        </div>\n";
+                    $menu .= "\n        <div style='font-size:0'>&nbsp;</div>";
+                    $menu .= "\n        <div class='v-spacer'></div>\n";
+                }
+                if (count($this->registeredMenuEntries)) {
+                    $this->menu = "\n<div class='navigation'>\n{$menu}</div>";
                 }
                 $menu.= "\n          </ul>";
                 $menu.= "\n          <div style='font-size:0'>&nbsp;</div>";
@@ -294,7 +334,7 @@ class pluglist
 
             // Add javascript method to print out warning messages while leaving an unsaved form.
             // We do it in here to get the string translated.
-            $this->menu .=  
+            $this->menu .=
                 "\n      <script language='javascript' type='text/javascript'>".
                 "\n        function openPlugin(id, plugin){".
                 "\n          if(plugin){ ".
@@ -302,218 +342,260 @@ class pluglist
                 "\n          }else{".
                 "\n             plugin = '';".
                 "\n          }".
-                "\n          return question(\""._("You are currently editing a database entry. Do you want to discard the changes?")."\",".
+                "\n          return question(\""._('You are currently editing a database entry. Do you want to discard the changes?').'",'.
                 "\n            \"main.php?plug=\" + id + \"&reset=1\" + plugin);".
-                "\n        }".
-                "\n      </script>\n"; 
-        }
-
-        // Use javascript to mark the currently selected plugin.
-        $menu = $this->menu;
-        if(isset($_GET['plug'])){
-            $menu.= 
-                "\n      <script language='javascript' type='text/javascript'>".
-                "\n        if($('plugMenuId_".$_GET['plug']."')){".
-                "\n          $('plugMenuId_".$_GET['plug']."').className= 'current'".
                 "\n        }".
                 "\n      </script>\n";
         }
 
+        // Use javascript to mark the currently selected plugin.
+        $menu = $this->menu;
+        if (isset($_GET['plug'])) {
+            $menu .= "    <script language='javascript' type='text/javascript'>
+                            if($('plugMenuId_".$_GET['plug']."')){
+                            $('plugMenuId_".$_GET['plug']."').className=".(check_for_materialize_theme() ? "'collection-item pointer active black-text'" : "'current'").'
+                            }
+                        </script>';
+        }
+
         // Return the generated/cached gosa menu.
-        return ($menu);
+        return $menu;
     }
 
 
     /*! \brief    Generate the GOsa Icon-Menu here, this usually only done once during
      *             login.
      *            -----------------------------------------------------------------
-     *            Do NOT add style changes here manually, use the style.css or 
+     *            Do NOT add style changes here manually, use the style.css or
      *             if you prefer create your own theme!!
      *            -----------------------------------------------------------------
      */
-    function show_iconmenu()
+    public function show_iconmenu()
     {
-        $add_hr =FALSE;
-        if ($this->iconmenu == ""){
-
+        $add_hr = false;
+        if ($this->iconmenu == '') {
             $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
-            $cfg= $this->config->data['MENU'];
-            foreach ($cfg as $headline => $plug){
-                $col= 0;
+            $cfg = $this->config->data['MENU'];
+            if (check_for_materialize_theme()) {
+                foreach ($cfg as $headline => $plug) {
+                    $col = 0;
 
-                    if($add_hr){
-                        $add_hr = FALSE;
+                    if ($add_hr) {
+                        $add_hr = false;
                         $this->iconmenu .= "\n        <hr>";
                     }
-                    $this->iconmenu .= "\n        <span class='card-title'>". _($headline)."</span>";
+                    $this->iconmenu .= "\n        <h2 class='card-title'>"._($headline).'</h2>';
 
-                    foreach ($plug as $info){
-
+                    foreach ($plug as $info) {
                         // Get Plugin info
                         list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
                         $this->registeredIconEntries[] = $index;
 
                         // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                        if(isset($disabledPlugins[$info['CLASS']])) continue;
+                        if (isset($disabledPlugins[$info['CLASS']])) {
+                            continue;
+                        }
 
                         // Add a seperating row
-                        if (($col % 4) == 0){ 
-                            $this->iconmenu.="\n    <div class='row'>";
+                        if (($col % 6) == 0) {
+                            $this->iconmenu .= "\n    <div class='row'>";
                         }
 
-                        $this->iconmenu.= "\n   <a class='col s3 pointer black-text'>";
-                        $this->iconmenu.= "\n       <div class='card horizontal card-min-height valign-wrapper' onclick='openPlugin({$index})'>";
-                        $this->iconmenu.= "\n           <div class='card-image'>";
-                        $this->iconmenu.= "\n               <i class='material-icons md-48 mg2'>$icon</i>";
-                        $this->iconmenu.= "\n           </div>";
-                        $this->iconmenu.= "\n           <div class='card-stacked'>";
-                        $this->iconmenu.= "\n               <div class='card-content'>";
-                        $this->iconmenu.= "\n                   <span class='card-title'>{$title}</span>";
-                        $this->iconmenu.= "\n                   <p>{$desc}</p>";
-                        $this->iconmenu.= "\n               </div>";
-                        $this->iconmenu.= "\n           </div>";
-                        $this->iconmenu.= "\n       </div>";
-                        $this->iconmenu.= "\n   </a>";
-                        $col++ ;
+                        $this->iconmenu .= "\n   <a class='col s2 pointer black-text'>";
+                        $this->iconmenu .= "\n       <div class='card horizontal valign-wrapper' onclick='openPlugin({$index})'>";
+                        $this->iconmenu .= "\n           <div class='card-image'>";
+                        $this->iconmenu .= "\n               <i class='material-icons md-30'>$icon</i>";
+                        $this->iconmenu .= "\n           </div>";
+                        $this->iconmenu .= "\n           <div class='card-stacked'>";
+                        $this->iconmenu .= "\n               <div class='card-content'>";
+                        $this->iconmenu .= "\n                   <h3 class='card-title'>{$title}</h3>";
+                        $this->iconmenu .= "\n                   <p>{$desc}</p>";
+                        $this->iconmenu .= "\n               </div>";
+                        $this->iconmenu .= "\n           </div>";
+                        $this->iconmenu .= "\n       </div>";
+                        $this->iconmenu .= "\n   </a>";
+                        ++$col;
 
-                        if (($col % 4) == 0 && $col != 0){ 
-                            $this->iconmenu.="\n    </div>";
+                        if (($col % 6) == 0 && $col != 0) {
+                            $this->iconmenu .= "\n    </div>";
                         }
                     }
-                    $this->iconmenu.="\n    </div>";
+                    $this->iconmenu .= "\n    </div>";
 
-                    $add_hr = TRUE;
+                    $add_hr = true;
                 }
-                $this->iconmenu .= "\n        <h3 class='icon-menu-title'>". _($headline)."</h3>";
+            } else {
+                foreach ($cfg as $headline => $plug) {
+                    $col = 0;
 
-                foreach ($plug as $info){
-
-                    // Get Plugin info
-                    list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
-                    $this->registeredIconEntries[] = $index;
-
-                    // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                    if(isset($disabledPlugins[$info['CLASS']])) continue;
-
-                    // Add a seperating row
-                    if (($col % 4) == 0){ 
-                        $this->iconmenu .= "\n        <div class='clear'></div>";
+                    $this->iconmenu .= "\n        <div class='clear'></div>";
+                    if ($add_hr) {
+                        $add_hr = false;
+                        $this->iconmenu .= "\n        <hr>";
                     }
+                    $this->iconmenu .= "\n        <h3 class='icon-menu-title'>"._($headline).'</h3>';
 
-                    $this->iconmenu.= "\n        <div class='icon-menu-item' style='width: 25%;' onclick='openPlugin({$index})'>";
-                    $this->iconmenu.= "\n          ".image($icon);
-                    $this->iconmenu.= "\n          <div class='dsc'>";
-                    $this->iconmenu.= "\n            <h1>{$title}</h1>";
-                    $this->iconmenu.= "\n            <p>{$desc}</p>";
-                    $this->iconmenu.= "\n          </div>";
-                    $this->iconmenu.= "\n        </div>";
-                    $col++ ;
+                    foreach ($plug as $info) {
+                        // Get Plugin info
+                        list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
+                        $this->registeredIconEntries[] = $index;
+
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if (isset($disabledPlugins[$info['CLASS']])) {
+                            continue;
+                        }
+
+                        // Add a seperating row
+                        if (($col % 4) == 0) {
+                            $this->iconmenu .= "\n        <div class='clear'></div>";
+                        }
+
+                        $this->iconmenu .= "\n        <div class='icon-menu-item' style='width: 25%;' onclick='openPlugin({$index})'>";
+                        $this->iconmenu .= "\n          ".image($icon);
+                        $this->iconmenu .= "\n          <div class='dsc'>";
+                        $this->iconmenu .= "\n            <h1>{$title}</h1>";
+                        $this->iconmenu .= "\n            <p>{$desc}</p>";
+                        $this->iconmenu .= "\n          </div>";
+                        $this->iconmenu .= "\n        </div>";
+                        ++$col;
+                    }
+                    $add_hr = true;
                 }
                 $add_hr = TRUE;
             }
         }
-        return ($this->iconmenu);
+
+        return $this->iconmenu;
     }
 
 
     /*! \brieg    Generates and the path menu (the one on the upper right) and keeps
-     *             the generated HTML content, so we are not forced to generate it on every 
+     *             the generated HTML content, so we are not forced to generate it on every
      *             page request.
      *            (See <pathMenu> of your gosa.conf)
      */
-    function genPathMenu()
+    public function genPathMenu()
     {
-        if(empty($this->pathMenu)){
-
+        if (empty($this->pathMenu)) {
             $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
 
             // Now load the icon menu and try to register the plugins in the pluglist
             //  if this fails for some reason, then remove the plugins from the menu.
-            if(isset($this->config->data['SHORTCUTMENU'])){
-                foreach($this->config->data['SHORTCUTMENU'] as $id => $plugin){
-                    if(!$this->registerPlugin($this->config->data['SHORTCUTMENU'][$id])){
-                        unset($this->config->data['SHORTCUTMENU'][$id]); 
-                    } 
+            if (isset($this->config->data['SHORTCUTMENU'])) {
+                foreach ($this->config->data['SHORTCUTMENU'] as $id => $plugin) {
+                    if (!$this->registerPlugin($this->config->data['SHORTCUTMENU'][$id])) {
+                        unset($this->config->data['SHORTCUTMENU'][$id]);
+                    }
                 }
             }
 
             // Now load the path menu and try to register the plugins in the pluglist
             //  if this fails for some reason, then remove the plugin from the menu.
-            if(isset($this->config->data['PATHMENU'])){
-                foreach($this->config->data['PATHMENU'] as $id => $plugin){
-                    if(!$this->registerPlugin($this->config->data['PATHMENU'][$id])){
-                        unset($this->config->data['PATHMENU'][$id]); 
-                    } 
+            if (isset($this->config->data['PATHMENU'])) {
+                foreach ($this->config->data['PATHMENU'] as $id => $plugin) {
+                    if (!$this->registerPlugin($this->config->data['PATHMENU'][$id])) {
+                        unset($this->config->data['PATHMENU'][$id]);
+                    }
                 }
             }
 
             if (check_for_materialize_theme()) {
+                // Check if we've at least one entry defined ih the iconmenu
+                if (isset($this->config->data['SHORTCUTMENU'])) {
+                    $icfg = &$this->config->data['SHORTCUTMENU'];
+                    $rcfg = array_reverse($icfg);
+                    foreach ($rcfg as $id => $plug) {
+                        list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
+                        $this->registeredShortCutEntries[] = $index;
+
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if (isset($disabledPlugins[$plug['CLASS']])) {
+                            continue;
+                        }
+
+                        $this->pathMenu .= "  <li>
+                                                <a onClick='openPlugin({$index})' title='{$title}'>
+                                                    <i class='material-icons'>home</i>
+                                                </a>
+                                            </li>";
+                    }
+                }
+
+                // Place the navigator part, this will be replaced during runtime.
+                $this->pathMenu .= '     %navigator%';
 
                 // Check if we've at least one entry defined ih the pathmenu
-                if(isset($this->config->data['PATHMENU'])){
-                    $cfg= &$this->config->data['PATHMENU'];
+                if (isset($this->config->data['PATHMENU'])) {
+                    $cfg = &$this->config->data['PATHMENU'];
                     $rcfg = array_reverse($cfg);
                     $first = true;
-                    $this->pathMenu.="  <div class='user-control'>";
-                    foreach($rcfg as $id => $plug){
+                    $this->pathMenu .= "  <div class='user-control'>";
+                    foreach ($rcfg as $id => $plug) {
                         list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
                         $this->registeredPathEntries[] = $index;
 
                         // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                        if(isset($disabledPlugins[$plug['CLASS']])) continue;
+                        if (isset($disabledPlugins[$plug['CLASS']])) {
+                            continue;
+                        }
 
-                        $this->pathMenu.="  <li onClick='openPlugin({$index})'><a href='#'><b>{$title}</b></a></li>";
+                        $this->pathMenu .= "  <li onClick='openPlugin({$index})'><a href='#'><b>{$title}</b></a></li>";
                     }
-                    $this->pathMenu.="  </div>";
+                    $this->pathMenu .= '  </div>';
                 }
-
             } else {
-                $this->pathMenu = 
+                $this->pathMenu =
                 "\n        <div class='plugin-path'>".
                 "\n          <ul class='path-navigation'>";
 
-            // Check if we've at least one entry defined ih the iconmenu
-            if(isset($this->config->data['SHORTCUTMENU'])){
-                $icfg= &$this->config->data['SHORTCUTMENU'];
-                $rcfg = array_reverse($icfg);
-                foreach($rcfg as $id => $plug){
-                    list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
-                    $this->registeredShortCutEntries[] = $index;
+                // Check if we've at least one entry defined ih the iconmenu
+                if (isset($this->config->data['SHORTCUTMENU'])) {
+                    $icfg = &$this->config->data['SHORTCUTMENU'];
+                    $rcfg = array_reverse($icfg);
+                    foreach ($rcfg as $id => $plug) {
+                        list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
+                        $this->registeredShortCutEntries[] = $index;
 
-                    // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                    if(isset($disabledPlugins[$plug['CLASS']])) continue;
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if (isset($disabledPlugins[$plug['CLASS']])) {
+                            continue;
+                        }
 
-                    $cssClass= (!isset($rcfg[$id+1]))? 'left' : 'left right-border';
-                    $this->pathMenu.= "            
-                        <li class='{$cssClass}' onClick='openPlugin({$index})' title='{$title}'>".
-                        image(get_template_path($shortIcon))."</li>";
+                        $cssClass = (!isset($rcfg[$id + 1])) ? 'left' : 'left right-border';
+                        $this->pathMenu .= "
+                            <li class='{$cssClass}' onClick='openPlugin({$index})' title='{$title}'>".
+                            image(get_template_path($shortIcon)).'</li>';
+                    }
                 }
-            }
 
-            // Place the navigator part, this will be replaced during runtime.
-            $this->pathMenu .= "\n            %navigator%";
+                // Place the navigator part, this will be replaced during runtime.
+                $this->pathMenu .= "\n            %navigator%";
 
-            // Check if we've at least one entry defined ih the pathmenu
-            if(isset($this->config->data['PATHMENU'])){
-                $cfg= &$this->config->data['PATHMENU'];
-                $rcfg = array_reverse($cfg);
-                foreach($rcfg as $id => $plug){
-                    list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
-                    $this->registeredPathEntries[] = $index;
+                // Check if we've at least one entry defined ih the pathmenu
+                if (isset($this->config->data['PATHMENU'])) {
+                    $cfg = &$this->config->data['PATHMENU'];
+                    $rcfg = array_reverse($cfg);
+                    foreach ($rcfg as $id => $plug) {
+                        list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
+                        $this->registeredPathEntries[] = $index;
 
-                    // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                    if(isset($disabledPlugins[$plug['CLASS']])) continue;
+                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                        if (isset($disabledPlugins[$plug['CLASS']])) {
+                            continue;
+                        }
 
-                    $this->pathMenu.= "\n            <li class='right left-border' onClick='openPlugin({$index})'>{$title}</li>";
+                        $this->pathMenu .= "\n            <li class='right left-border' onClick='openPlugin({$index})'>{$title}</li>";
+                    }
                 }
+                $this->pathMenu .= "\n          </ul>";
+                $this->pathMenu .= "\n        </div>";
             }
-            $this->pathMenu.= "\n          </ul>";
-            $this->pathMenu.= "\n        </div>";
         }
 
         $menu = pathNavigator::getCurrentPath();
-        return check_for_materialize_theme() ? $this->pathMenu : (preg_replace("/%navigator%/", $menu, $this->pathMenu)); 
+
+        return preg_replace('/%navigator%/', $menu, $this->pathMenu);
     }
     
     function genBreadcrumb()
@@ -527,134 +609,121 @@ class pluglist
                     list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
                     $this->registeredShortCutEntries[] = $index;
 
-                    // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                    if(isset($disabledPlugins[$plug['CLASS']])) continue;
-
-                    $this->breadcrumb.="<div class='col s12'>
-                                            <a class='breadcrumb black-text' onClick='openPlugin({$index})' title='{$title}'>
-                                                <i class='material-icons'>home</i>
-                                            </a>";
-                }
-            }
-
-            // Place the navigator part, this will be replaced during runtime.
-            $this->breadcrumb .="     %navigator%
-                                    </div>";
-        }
-
-        $menu = pathNavigator::getCurrentPath();
-        return (preg_replace("/%navigator%/", $menu, $this->breadcrumb));
-    }
-    /*! \brief    Returns additional info for a given class name, like 
-     *             plugin-icon, title, description and the index of the element 
+    /*! \brief    Returns additional info for a given class name, like
+     *             plugin-icon, title, description and the index of the element
      in the pluglist which uses this class.
      */
-    function getPlugData($class)
+    public function getPlugData($class)
     {
         global $class_mapping;
-        $vars= get_class_vars($class);
-        $plHeadline= _($vars['plHeadline']);
-        $plDescription= _($vars['plDescription']);
-        $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon']: "plugin.png";
-        $plShortIcon = (isset($vars['plShortIcon'])) ? $vars['plShortIcon']: "plugin.png";
+        $vars = get_class_vars($class);
+        $plHeadline = _($vars['plHeadline']);
+        $plDescription = _($vars['plDescription']);
+        if (check_for_materialize_theme()) {
+            $plIcon = (isset($vars['matIcon'])) ? $vars['matIcon'] : 'block';
+        } else {
+            $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon'] : 'plugin.png';
+        }
+        $plShortIcon = (isset($vars['plShortIcon'])) ? $vars['plShortIcon'] : 'plugin.png';
 
-        $index= $this->get_index($class);
+        $index = $this->get_index($class);
 
         /* Check if class is available. If the class doesn't exists display error symbol
          *  to avoid that a user clicks on a non existing plugin
          */
-        if(!$vars){
-            $plHeadline = $plDescription = _("Unknown");
-            $plIcon = "error.png";
+        if (!$vars) {
+            $plHeadline = $plDescription = _('Unknown');
+            $plIcon = 'error.png';
             $index = '';
-        } 
+        }
 
         // Detect the correct position of the plugin icon
-        if(!preg_match("/\//",$plIcon)){
-            $image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', 
-                        $class_mapping[$class])."/images/$plIcon");
-        }else{
-            $image = $plIcon; 
+        if (!check_for_materialize_theme()) {
+            if (!preg_match("/\//", $plIcon)) {
+                $image = get_template_path('plugins/'.preg_replace('%^.*/([^/]+)/[^/]+$%', '\1',
+                            $class_mapping[$class])."/images/$plIcon");
+            } else {
+                $image = $plIcon;
+            }
+        } else {
+            $image = $plIcon;
         }
+
         // Detect the correct position of the plugin icon
-        if(!preg_match("/\//",$plShortIcon)){
-            $shortImage= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', 
+        if (!preg_match("/\//", $plShortIcon)) {
+            $shortImage = get_template_path('plugins/'.preg_replace('%^.*/([^/]+)/[^/]+$%', '\1',
                         $class_mapping[$class])."/images/$plShortIcon");
-        }else{
-            $shortImage = $plShortIcon; 
+        } else {
+            $shortImage = $plShortIcon;
         }
-        return(array($index, $plHeadline, $plDescription, $image, $shortImage));
-    }
 
+        return [$index, $plHeadline, $plDescription, $image, $shortImage];
+    }
 
     /*! \brief    Returns the installation path of a plugin.
      *            e.g. '../plugins/admin/mimetypes'
      */
-    function get_path($index)
+    public function get_path($index)
     {
-        if(!isset($this->dirlist[$index])){
-            return ("");
+        if (!isset($this->dirlist[$index])) {
+            return '';
         }
-        return ("../".$this->dirlist[$index]);
-    }
 
+        return '../'.$this->dirlist[$index];
+    }
 
     /*! \brief    Returns the plugins id for a given class.
      */
-    function get_index($class)
+    public function get_index($class)
     {
-        return (array_search($class, $this->pluginList));
+        return array_search($class, $this->pluginList);
     }
-
 
     /*! \brief    Returns the plugins id for a given class.
      */
-    function get_class($index)
+    public function get_class($index)
     {
-        return($this->pluginList[$index]);
+        return $this->pluginList[$index];
     }
 
-
-    /*! \brief  This function checks if we are allowed to view the plugin with the given id 
+    /*! \brief  This function checks if we are allowed to view the plugin with the given id
      *
      *  @param  $plug_id  Integer  The ID of the plugin.
      *  @return Boolean   TRUE if we are allowed to view the plugin else FASLE
      */
-    function plugin_access_allowed($plug_id)
+    public function plugin_access_allowed($plug_id)
     {
-        return(isset($this->pluginList[$plug_id]) && $plug_id != "");
+        return isset($this->pluginList[$plug_id]) && $plug_id != '';
     }
 
-
-    /*! \brief  Force the menu to be recreated 
+    /*! \brief  Force the menu to be recreated
      */
-    function reset_menus()
+    public function reset_menus()
     {
-        $this->menu = "";
-        $this->iconmenu ="";
+        $this->menu = '';
+        $this->iconmenu = '';
     }
-
 
     /*! \brief    Generates an array containing plugin names (headlines) and theirs ids.
-     *            This is just used in the helpviewer.php  
+     *            This is just used in the helpviewer.php
      */
-    function gen_headlines()
+    public function gen_headlines()
     {
-        $ret = array();
-        if(count($this->headlines) == 0){
-            foreach($this->config->data['MENU'] as $headline => $plugins){
-                foreach( $plugins as $id => $plug){
-                    if (plugin_available($plug['CLASS'])){
+        $ret = [];
+        if (count($this->headlines) == 0) {
+            foreach ($this->config->data['MENU'] as $headline => $plugins) {
+                foreach ($plugins as $id => $plug) {
+                    if (plugin_available($plug['CLASS'])) {
                         $attrs = (get_class_vars($plug['CLASS']));
                         $ret[$id]['HEADLINE'] = $headline;
-                        $ret[$id]['NAME']	  = $attrs['plHeadline'];
+                        $ret[$id]['NAME'] = $attrs['plHeadline'];
                     }
                 }
             }
             $this->headlines = $ret;
         }
-        return($this->headlines);
+
+        return $this->headlines;
     }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

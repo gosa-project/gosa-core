@@ -1,21 +1,26 @@
 /* -- global tag setup -- */
 
 html {
-    font-size: 12px !important;
+    /* font-size: 12px !important; */
     font-family: Arial, Helvetica, sans-serif !important;
 }
-td, th {
+
+td,
+th {
     padding: 0px 0px !important;
     height: 37px;
     max-height: 37px;
 }
+
 hr {
     background-color: lightslategray;
     height: 1px !important;
     border: 0;
 }
 
+
 /* -- END -- */
+
 
 /* -- center of screen -- */
 
@@ -25,9 +30,11 @@ hr {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-  }
+}
+
 
 /* -- END -- */
+
 
 /* -- input/textarea/checkbox setup -- */
 
@@ -36,34 +43,52 @@ hr {
     margin-bottom: unset !important;
 }
 
+
 /* label color */
+
 .input-field label {
     color: gray;
 }
+
+
 /* label focus color */
+
 .input-field input[type=text]:focus+label {
     color: #2A3278 !important;
 }
+
+
 /* label underline focus color */
+
 .input-field input[type=text]:focus {
     border-bottom: 1px solid #2A3278 !important;
     box-shadow: 0 1px 0 0 #2A3278 !important;
 }
+
 .input-field input[type=text]:hover {
     border-bottom: 1px solid #2A3278 !important;
     box-shadow: 0 1px 0 0 #2A3278 !important;
 }
+
+
 /* valid color */
+
 .input-field input[type=text].valid {
     border-bottom: 1px solid #D55A0A !important;
     box-shadow: 0 1px 0 0 #D55A0A !important;
 }
+
+
 /* invalid color */
+
 .input-field input[type=text].invalid {
     border-bottom: 1px solid #000;
     box-shadow: 0 1px 0 0 #000;
 }
+
+
 /* icon prefix focus color */
+
 .input-field .prefix.active {
     color: #2A3278 !important;
 }
@@ -85,13 +110,16 @@ textarea.materialize-textarea {
     background-color: #2A3278 !important;
 }
 
+
 /* -- END -- */
+
 
 /* -- lifetime icon align -- */
 
 .lifetime {
     padding-top: .5rem;
 }
+
 
 /* -- margin and padding set and fix -- */
 
@@ -112,27 +140,37 @@ textarea.materialize-textarea {
     padding: 0 !important;
 }
 
+
 /* generic for row-class */
+
 .row.nomb {
     margin-bottom: 0 !important;
 }
 
+
 /* generic for collection-class */
+
 .collection-item {
     padding-inline: 5px !important;
 }
 
+
 /* generic for collapsible-class */
+
 .collapsible-header {
     padding-block: 5px !important;
 }
 
+
 /* img */
+
 .h-center {
     margin: auto !important;
 }
 
+
 /* -- END -- */
+
 
 /* -- generic card setup -- */
 
@@ -140,11 +178,14 @@ textarea.materialize-textarea {
     min-height: 13rem;
 }
 
-.card-title {
+
+/* .card-title {
     font-size: 20px !important;
-}
+} */
+
 
 /* -- END -- */
+
 
 /* -- Curson settings -- */
 
@@ -156,7 +197,9 @@ textarea.materialize-textarea {
     cursor: default !important;
 }
 
+
 /* -- END -- */
+
 
 /* -- colors -- */
 
@@ -173,7 +216,9 @@ td a {
     color: black;
 }
 
+
 /* -- END -- */
+
 
 /* -- Datepicker setup -- */
 
@@ -185,11 +230,16 @@ td a {
     color: #2A3278 !important;
 }
 
-.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+.datepicker-cancel,
+.datepicker-clear,
+.datepicker-today,
+.datepicker-done {
     color: #2A3278 !important;
 }
 
+
 /*  */
+
 
 /* -- acl view -- */
 
@@ -207,7 +257,9 @@ td a {
     border-radius: .25rem;
 }
 
+
 /* -- END -- */
+
 
 /* -- Drowpdown -- */
 
@@ -220,12 +272,15 @@ td a {
     width: auto !important;
 }
 
-.dropdown-content li > a, .dropdown-content li > span {
+.dropdown-content li>a,
+.dropdown-content li>span {
     color: black !important;
     padding: 0px 0px !important;
 }
 
+
 /* -- END -- */
+
 
 /* -- Pagination -- */
 
@@ -233,9 +288,13 @@ td a {
     background-color: #2A3278 !important;
 }
 
+
 /* -- END -- */
 
-nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+nav,
+nav .nav-wrapper i,
+nav a.sidenav-trigger,
+nav a.sidenav-trigger i {
     height: 3rem !important;
     line-height: 3rem !important;
 }
