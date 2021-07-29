@@ -209,6 +209,7 @@ if (session::global_is_set('plugin_dir')){
 $plist->gen_headlines();
 $plist->gen_menu();
 $plist->genPathMenu();
+$plist->genBreadcrumb();
 
 /* check if we are using account expiration */
 $smarty->assign("hideMenus", FALSE);
@@ -418,6 +419,9 @@ if (is_file("$plugin_dir/main.inc")){
 /* Print_out last ErrorMessage repeated string. */
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign ("pathMenu", $plist->genPathMenu());
+if (check_for_materilize_theme) {
+  $smarty->assign ("breadcrumb", $plist->genBreadcrumb());
+}
 $smarty->assign("contents", $display);
 $smarty->assign("sessionLifetime", $config->get_cfg_value('core','sessionLifetime'));
 
