@@ -59,6 +59,7 @@
             <!-- Plugin Content-->
             <div class="col s11">
                 <div class="card {if $noMenuMode}-noMenu{/if}">
+                        <span class="card-title">{$breadcrumb}</span>
                     <div class="card-content">
                         {$contents}
                     </div>

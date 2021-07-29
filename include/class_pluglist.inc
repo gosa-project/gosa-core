@@ -44,6 +44,7 @@ class pluglist
     public $pathMenu = '';
     public $menu = '';
     public $iconmenu = '';
+    public $breadcrumb = '';
 
     // Classes plInfo list
     public $info = [];
@@ -492,30 +493,6 @@ class pluglist
             }
 
             if (check_for_materialize_theme()) {
-                // Check if we've at least one entry defined ih the iconmenu
-                if (isset($this->config->data['SHORTCUTMENU'])) {
-                    $icfg = &$this->config->data['SHORTCUTMENU'];
-                    $rcfg = array_reverse($icfg);
-                    foreach ($rcfg as $id => $plug) {
-                        list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
-                        $this->registeredShortCutEntries[] = $index;
-
-                        // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
-                        if (isset($disabledPlugins[$plug['CLASS']])) {
-                            continue;
-                        }
-
-                        $this->pathMenu .= "  <li>
-                                                <a onClick='openPlugin({$index})' title='{$title}'>
-                                                    <i class='material-icons'>home</i>
-                                                </a>
-                                            </li>";
-                    }
-                }
-
-                // Place the navigator part, this will be replaced during runtime.
-                $this->pathMenu .= '     %navigator%';
-
                 // Check if we've at least one entry defined ih the pathmenu
                 if (isset($this->config->data['PATHMENU'])) {
                     $cfg = &$this->config->data['PATHMENU'];
@@ -586,7 +563,40 @@ class pluglist
 
         $menu = pathNavigator::getCurrentPath();
 
-        return preg_replace('/%navigator%/', $menu, $this->pathMenu);
+        return check_for_materialize_theme() ? $this->pathMenu : (preg_replace('/%navigator%/', $menu, $this->pathMenu));
+    }
+
+    public function genBreadcrumb()
+    {
+        if (empty($this->breadcrumb)) {
+            // Check if we've at least one entry defined ih the iconmenu
+            if (isset($this->config->data['SHORTCUTMENU'])) {
+                $icfg = &$this->config->data['SHORTCUTMENU'];
+                $rcfg = array_reverse($icfg);
+                foreach ($rcfg as $id => $plug) {
+                    list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
+                    $this->registeredShortCutEntries[] = $index;
+
+                    // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                    if (isset($disabledPlugins[$plug['CLASS']])) {
+                        continue;
+                    }
+
+                    $this->breadcrumb .= "<div class='col s12'>
+                                            <a class='breadcrumb black-text' onClick='openPlugin({$index})' title='{$title}'>
+                                                <i class='material-icons'>home</i>
+                                            </a>";
+                }
+            }
+
+            // Place the navigator part, this will be replaced during runtime.
+            $this->breadcrumb .= '     %navigator%
+                                    </div>';
+        }
+
+        $menu = pathNavigator::getCurrentPath();
+
+        return preg_replace('/%navigator%/', $menu, $this->breadcrumb);
     }
 
     /*! \brief    Returns additional info for a given class name, like
