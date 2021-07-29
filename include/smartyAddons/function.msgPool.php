@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_msgPool($params, &$smarty)
+function smarty_function_msgPool($params, $smarty)
 {
 	if(class_available("msgPool") && isset($params['type'])){
 		$parameter = array();

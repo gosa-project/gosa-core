@@ -318,7 +318,6 @@ while($file = readdir($d)){
     if(preg_match("/\.php$/", $file)) require_once("$BASE_DIR/include/smartyAddons/{$file}");
 }
 
-#$smarty->registerPlugin("block", "tr", "smarty_block_tr");
 $smarty->registerPlugin("block", "t", "smarty_block_t");
 $smarty->registerPlugin("block", "render", "smarty_block_render");
 $smarty->registerPlugin("function", "msgPool", "smarty_function_msgPool");
