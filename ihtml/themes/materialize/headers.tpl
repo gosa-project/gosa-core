@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="themes/materialize/css/styles.css">
     <link rel="stylesheet" href="themes/materialize/css/cards.css">
     <link rel="stylesheet" href="themes/materialize/css/breadcrumb.css">
-    <link rel="stylesheet" href="themes/materialize/css/navigation.css">
+    <link rel="stylesheet" href="themes/materialize/css/header.css">
+    <link rel="stylesheet" href="themes/materialize/css/menu.css">
 
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -32,6 +33,6 @@
     <script language="javascript" src="include/controls.js" type="text/javascript"></script>
     <script language="javascript" src="include/pulldown.js" type="text/javascript"></script>
     <script language="javascript" src="include/datepicker.js" type="text/javascript"></script>
-    <script language="javascript" src="themes/materialize/js/navigation.js" type="text/javascript"></script>
+    <script language="javascript" src="themes/materialize/js/header.js" type="text/javascript"></script>
 
   </head>
