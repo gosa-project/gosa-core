@@ -508,7 +508,13 @@ class pluglist
                             continue;
                         }
 
-                        $this->pathMenu .= "  <li onClick='openPlugin({$index})'><a href='#'><b>{$title}</b></a></li>";
+                        if ($title == 'Passwort ändern') {
+                            $navicon = "<span class='material-icons'>vpn_key</span>";
+                        } elseif ($title == 'Mein Konto') {
+                            $navicon = "<span class='material-icons'>person</span>";
+                        }
+
+                        $this->pathMenu .= "  <li onClick='openPlugin({$index})'>{$navicon} {$title}</a></li>";
                     }
                     $this->pathMenu .= '  </div>';
                 }
@@ -582,8 +588,8 @@ class pluglist
                         continue;
                     }
 
-                    $this->breadcrumb .= "<div class='col s12'>
-                                            <a class='breadcrumb black-text' onClick='openPlugin({$index})' title='{$title}'>
+                    $this->breadcrumb .= "<div class='col s12 breadcrumb-container'>
+                                            <a class='breadcrumb-nav black-text' onClick='openPlugin({$index})' title='{$title}'>
                                                 <i class='material-icons'>home</i>
                                             </a>";
                 }

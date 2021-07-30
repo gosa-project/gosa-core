@@ -1,0 +1,50 @@
+.card h2.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.card h3.card-title {
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+.card .card-content hr {
+    margin-bottom: 20px;
+}
+
+.card-content .card {
+    height: 172px;
+    max-height: 172px;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.card-content .card .card-image {
+    height: 30px;
+}
+
+.card-content .card .card-stacked {
+    height: 120px;
+}
+
+.card-content .card .card-content {
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-content .card .card-content .card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-content .card .card-content p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
