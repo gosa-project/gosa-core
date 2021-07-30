@@ -540,7 +540,13 @@ class pluglist
                             continue;
                         }
 
-                        $this->pathMenu .= "  <li onClick='openPlugin({$index})'><a href='#'><b>{$title}</b></a></li>";
+                        if ($title == 'Passwort ändern') {
+                            $navicon = "<span class='material-icons'>vpn_key</span>";
+                        } elseif ($title == 'Mein Konto') {
+                            $navicon = "<span class='material-icons'>person</span>";
+                        }
+
+                        $this->pathMenu .= "  <li onClick='openPlugin({$index})'>{$navicon} {$title}</a></li>";
                     }
                     $this->pathMenu .= '  </div>';
                 }
@@ -608,6 +614,28 @@ class pluglist
                 foreach($rcfg as $id => $plug){
                     list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
                     $this->registeredShortCutEntries[] = $index;
+
+                    // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
+                    if (isset($disabledPlugins[$plug['CLASS']])) {
+                        continue;
+                    }
+
+                    $this->breadcrumb .= "<div class='col s12 breadcrumb-container'>
+                                            <a class='breadcrumb-nav black-text' onClick='openPlugin({$index})' title='{$title}'>
+                                                <i class='material-icons'>home</i>
+                                            </a>";
+                }
+            }
+
+            // Place the navigator part, this will be replaced during runtime.
+            $this->breadcrumb .= '     %navigator%
+                                    </div>';
+        }
+
+        $menu = pathNavigator::getCurrentPath();
+
+        return preg_replace('/%navigator%/', $menu, $this->breadcrumb);
+    }
 
     /*! \brief    Returns additional info for a given class name, like
      *             plugin-icon, title, description and the index of the element

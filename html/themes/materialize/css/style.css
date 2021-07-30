@@ -150,16 +150,18 @@ textarea.materialize-textarea {
 
 /* generic for collection-class */
 
-.collection-item {
+
+/* .collection-item {
     padding-inline: 5px !important;
-}
+} */
 
 
 /* generic for collapsible-class */
 
-.collapsible-header {
+
+/* .collapsible-header {
     padding-block: 5px !important;
-}
+} */
 
 
 /* img */
@@ -291,27 +293,31 @@ td a {
 
 /* -- END -- */
 
-nav,
+
+/* nav,
 nav .nav-wrapper i,
 nav a.sidenav-trigger,
 nav a.sidenav-trigger i {
     height: 3rem !important;
     line-height: 3rem !important;
-}
+} */
 
-nav .brand-logo {
+
+/* nav .brand-logo {
     display: unset !important;
     float: left;
-}
+} */
 
-nav div div {
+
+/* nav div div {
     padding-left: 12rem;
-}
+} */
 
-.breadcrumb::before {
+
+/* .breadcrumb::before {
     color: lightslategray !important;
     font-size: unset !important;
-}
+} */
 
 .user-control {
     position: absolute;
