@@ -209,10 +209,11 @@ textarea.materialize-textarea {
     background-color: rgba(42, 50, 120, 1) !important;
 }
 
-.collection .collection-item.active {
+
+/* .collection .collection-item.active {
     background-color: rgba(42, 50, 120, .6) !important;
     color: white !important;
-}
+} */
 
 td a {
     color: black;

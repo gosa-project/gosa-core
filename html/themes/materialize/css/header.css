@@ -30,10 +30,6 @@ nav ul.right {
     text-align: center;
 }
 
-#more-options form {
-    height: auto;
-}
-
 #more-options li {
     display: flex;
     flex-direction: row;
@@ -41,9 +37,28 @@ nav ul.right {
     align-content: center;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 10px;
+    padding: 5px 10px;
+    border-left: 4px solid transparent;
+    -webkit-transition: border 0.5s ease-out;
+    -o-transition: border 0.5s ease-out;
+    transition: border 0.5s ease-out;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 #more-options li span {
-    margin-right: 5px;
+    margin-right: 10px;
+}
+
+#more-options li.active,
+#more-options li:hover {
+    border-left-color: #2A3278;
+    background: #FFFFFF;
+}
+
+#more-options form {
+    height: auto;
+}
+
+.dropdown-content li {
+    min-height: 33px;
 }

@@ -1,0 +1,21 @@
+.collapsible {
+    box-shadow: none;
+}
+
+.collapsible-header {
+    padding: 5px 10px;
+}
+
+.collection .collection-item {
+    padding: 5px 10px;
+    border-left: 4px solid transparent;
+    -webkit-transition: border 0.5s ease-out;
+    -o-transition: border 0.5s ease-out;
+    transition: border 0.5s ease-out;
+}
+
+.collection .collection-item.active,
+.collection .collection-item:hover {
+    border-left-color: #2A3278;
+    background: #FFFFFF;
+}
