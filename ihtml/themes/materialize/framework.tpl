@@ -91,7 +91,7 @@
     <script type='text/javascript'>
         setTimeout(function logout() {
             document.location = 'logout.php';
-        }, { $sessionLifetime } * 1000);
+        }, {$sessionLifetime} * 1000);
 
 
         // Append change handler to all input fields.

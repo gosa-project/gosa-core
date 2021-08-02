@@ -71,40 +71,33 @@
   <actionmenu>
 
     <action>
-     <type>sub</type>
-     <image>add_circle</image>
-     <label>Create</label>
+      <type>sub</type>
+      <image>add_circle</image>
+      <label>Create</label>
 
-     <action>
-      <name>new</name>
-      <type>entry</type>
-      <image>groups</image>
-      <label>Role</label>
-     </action>
-
+      <action>
+        <name>new</name>
+        <type>entry</type>
+        <image>groups</image>
+        <label>Role</label>
+      </action>
     </action>
 
     <action>
-      <type>separator</type>
-    </action>
+      <type>sub</type>
+      <image>settings</image>
+      <label>Manage</label>
 
-    <action>
-      <name>remove</name>
-      <type>entry</type>
-      <image>delete</image>
-      <label>Remove</label>
-    </action>
-
-    <action>
-      <type>separator</type>
+      <action>
+        <name>remove</name>
+        <type>entry</type>
+        <image>delete</image>
+        <label>Remove</label>
+      </action>
     </action>
 
     <action>
       <type>exporter</type>
-    </action>
-
-    <action>
-      <type>separator</type>
     </action>
 
     <action>

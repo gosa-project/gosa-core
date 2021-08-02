@@ -1975,10 +1975,9 @@ class listing
             // Presets
             $result = '';
 
-            // Draw entries
-            $result .= "  <li$separator></li>
-                        <ul class='collection with-header'>
-                            <li class='collection-header'><h5>"._('Export list').'</h5></li>';
+        // Draw entries
+        $result.="  <ul class='collection with-header'>
+                        <li class='collection-header'><h5>"._("Export list")."</h5></li>";
 
             // Export CVS as build in exporter
             foreach ($this->exporter as $action => $exporter) {

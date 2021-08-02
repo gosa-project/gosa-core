@@ -85,25 +85,32 @@
     </action>
 
     <action>
-      <name>edit</name>
-      <type>entry</type>
-      <image>edit</image>
-      <label>Edit</label>
-    </action>
+      <type>sub</type>
+      <image>settings</image>
+      <label>Manage</label>
 
-    <action>
-      <name>remove</name>
-      <type>entry</type>
-      <image>delete</image>
-      <label>Remove</label>
-    </action>
+      <action>
+        <name>edit</name>
+        <type>entry</type>
+        <image>edit</image>
+        <label>Edit</label>
+      </action>
 
-    <action>
-      <name>sendMessage</name>
-      <type>entry</type>
-      <depends>DaemonEvent_notify</depends>
-      <image>notifications</image>
-      <label>Send message</label>
+      <action>
+        <name>remove</name>
+        <type>entry</type>
+        <image>delete</image>
+        <label>Remove</label>
+      </action>
+
+      <action>
+        <name>sendMessage</name>
+        <type>entry</type>
+        <depends>DaemonEvent_notify</depends>
+        <image>notifications</image>
+        <label>Send message</label>
+      </action>
+
     </action>
 
     <action>
