@@ -138,26 +138,23 @@
       <label>Department</label>
       <image>create_new_folder</image>
      </action>
-
     </action>
 
     <action>
-      <type>separator</type>
+      <type>sub</type>
+      <image>settings</image>
+      <label>Manage</label>
+
+      <action>
+        <name>remove</name>
+        <type>entry</type>
+        <image>delete</image>
+        <label>Remove</label>
+      </action>
     </action>
 
     <action>
       <type>exporter</type>
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
-      <name>remove</name>
-      <type>entry</type>
-      <image>delete</image>
-      <label>Remove</label>
     </action>
 
   </actionmenu>

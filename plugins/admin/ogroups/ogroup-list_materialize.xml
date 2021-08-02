@@ -81,41 +81,35 @@
     </action>
 
     <action>
-      <type>separator</type>
-    </action>
+     <type>sub</type>
+     <image>settings</image>
+     <label>Manage</label>
 
-    <action>
-      <name>edit</name>
-      <type>entry</type>
-      <image>edit</image>
-      <label>Edit</label>
-    </action>
+      <action>
+        <name>edit</name>
+        <type>entry</type>
+        <image>edit</image>
+        <label>Edit</label>
+      </action>
 
-    <action>
-      <name>remove</name>
-      <type>entry</type>
-      <image>delete</image>
-      <label>Remove</label>
-    </action>
+      <action>
+        <name>remove</name>
+        <type>entry</type>
+        <image>delete</image>
+        <label>Remove</label>
+      </action>
 
-    <action>
-      <name>sendMessage</name>
-      <type>entry</type>
-      <depends>DaemonEvent_notify</depends>
-      <image>notifications</image>
-      <label>Send message</label>
-    </action>
-
-    <action>
-      <type>separator</type>
+      <action>
+        <name>sendMessage</name>
+        <type>entry</type>
+        <depends>DaemonEvent_notify</depends>
+        <image>notifications</image>
+        <label>Send message</label>
+      </action>
     </action>
 
     <action>
       <type>exporter</type>
-    </action>
-
-    <action>
-      <type>separator</type>
     </action>
 
     <action>

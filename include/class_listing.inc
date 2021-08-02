@@ -2022,9 +2022,8 @@ function renderExporterMenu($separator)
         $result = "";
 
         // Draw entries
-        $result.="  <li$separator></li>
-                        <ul class='collection with-header'>
-                            <li class='collection-header'><h5>"._("Export list")."</h5></li>";
+        $result.="  <ul class='collection with-header'>
+                        <li class='collection-header'><h5>"._("Export list")."</h5></li>";
 
         // Export CVS as build in exporter
         foreach ($this->exporter as $action => $exporter) {
