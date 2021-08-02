@@ -530,7 +530,6 @@ class pluglist
                     $cfg = &$this->config->data['PATHMENU'];
                     $rcfg = array_reverse($cfg);
                     $first = true;
-                    $this->pathMenu .= "  <div class='user-control'>";
                     foreach ($rcfg as $id => $plug) {
                         list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
                         $this->registeredPathEntries[] = $index;
@@ -548,7 +547,6 @@ class pluglist
 
                         $this->pathMenu .= "  <li onClick='openPlugin({$index})'>{$navicon} {$title}</a></li>";
                     }
-                    $this->pathMenu .= '  </div>';
                 }
             } else {
                 $this->pathMenu =

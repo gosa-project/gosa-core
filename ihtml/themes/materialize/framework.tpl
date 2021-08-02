@@ -33,7 +33,7 @@
                             <input type="hidden" name="php_c_check" value="1">
                         </li>
                     </form>
-                    <li>{$pathMenu}</li>
+                    {$pathMenu}
                 </ul>
             </ul>
         </div>

@@ -35,7 +35,7 @@ class userManagement extends management
     var $pwd_change_queue = array();
     var $force_hash_type = array();
 
-    // Tab definition 
+    // Tab definition
     protected $tabClass = "usertabs";
     protected $tabType = "USERTABS";
     protected $aclCategory = "users";
@@ -82,7 +82,7 @@ class userManagement extends management
 
         parent::__construct($config, $ui, "users", $headpage);
 
-        // Register special user actions 
+        // Register special user actions
         $this->registerAction("lock",   "lockEntry");
         $this->registerAction("lockUsers",   "lockUsers");
         $this->registerAction("unlockUsers", "lockUsers");
@@ -100,7 +100,7 @@ class userManagement extends management
         $this->registerAction("saveEventDialog", "saveEventDialog");
         $this->registerAction("abortEventDialog", "closeDialogs");
 
-        // Register shortcut icon actions 
+        // Register shortcut icon actions
         $this->registerAction("edit_user","editEntry");
         $this->registerAction("edit_posixAccount","editEntry");
         $this->registerAction("edit_mailAccount","editEntry");
@@ -113,7 +113,7 @@ class userManagement extends management
     }
 
 
-    // Inject user actions 
+    // Inject user actions
     function detectPostActions()
     {
         $action = management::detectPostActions();
@@ -136,7 +136,7 @@ class userManagement extends management
         if($str) return($str);
 
         if(preg_match("/^edit_/",$action)){
-            $tab = preg_replace("/^edit_/","",$action); 
+            $tab = preg_replace("/^edit_/","",$action);
             if(isset($this->tabObject->by_object[$tab])){
                 $this->tabObject->current = $tab;
             }else{
@@ -161,7 +161,7 @@ class userManagement extends management
 
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
-     */ 
+     */
     function sendMessage($action="",$target=array(),$all=array())
     {
       return;
@@ -169,7 +169,7 @@ class userManagement extends management
 
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
-     */ 
+     */
     function saveEventDialog()
     {
         $this->dialogObject->save_object();
@@ -180,8 +180,8 @@ class userManagement extends management
     }
 
 
-    /*! \brief  Intiates template creation. 
-     */ 
+    /*! \brief  Intiates template creation.
+     */
     function newTemplate($action,$entry)
     {
         $this->newEntry();
@@ -190,7 +190,7 @@ class userManagement extends management
 
 
     /*! \brief  Queues a set of users for password changes
-     */ 
+     */
     function changePassword($action="",$target=array(),$all=array())
     {
         $this->dn ="";
@@ -205,7 +205,7 @@ class userManagement extends management
 
             if(!preg_match("/w/",$this->ui->get_permissions($dn,$this->aclCategory."/password"))){
                 unset($this->pwd_change_queue[$key]);
-                $disallowed[] = $dn; 
+                $disallowed[] = $dn;
             }
         }
         if(count($disallowed)){
@@ -213,7 +213,7 @@ class userManagement extends management
         }
 
         // Now display change dialog.
-        return($this->handlePasswordQueue()); 
+        return($this->handlePasswordQueue());
     }
 
 
@@ -257,8 +257,8 @@ class userManagement extends management
             $ldap->cd($this->config->current['BASE']);
             $ldap->cat($this->dn);
             $attrs = $ldap->fetch();
-            $this->passwordChangeForceable = 
-                    in_array_strict('sambaAccount', $attrs['objectClass']) || 
+            $this->passwordChangeForceable =
+                    in_array_strict('sambaAccount', $attrs['objectClass']) ||
                     (in_array_strict('posixAccount', $attrs['objectClass']) && isset($attrs['shadowMax']));
             $smarty->assign("passwordChangeForceable" , $this->passwordChangeForceable);
             $smarty->assign("enforcePasswordChange" , $this->enforcePasswordChange);
@@ -296,7 +296,7 @@ class userManagement extends management
                     $repeated_password = get_post('repeated_password');
                 }
 
-                // Check posted passwords now.            
+                // Check posted passwords now.
                 $message= array();
                 if ($new_password != $repeated_password){
                     $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
@@ -313,7 +313,7 @@ class userManagement extends management
                     $attrs['new_password'] = $new_password;
                     $checkRes = password::callCheckHook($this->config,$this->dn,$attrs);
                     if(count($checkRes)){
-                        $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"), 
+                        $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),
                                 implode($checkRes));
                     }
                 }
@@ -326,7 +326,7 @@ class userManagement extends management
 
 
 
-                // Change password 
+                // Change password
                 if(isset($this->force_hash_type[$this->dn])){
                     if(!change_password ($this->dn, $new_password,0,$this->force_hash_type[$this->dn],'', $message)){
                         msg_dialog::displayChecks(array($message));
@@ -338,7 +338,7 @@ class userManagement extends management
                         return($smarty->fetch(get_template_path('password.tpl', TRUE)));
                     }
                 }
-        
+
                 // The user has to change his password on next login
                 // - We are going to update samba and posix attributes here, to enforce
                 //   such a password change.
@@ -368,7 +368,7 @@ class userManagement extends management
 #                       $posixAccount->shadowExpire = date('d.m.Y', time() - (1 * 24 * 60 *60));
 #                       $posixAccount->save();
                     }
-                   
+
                     // Update the samba kickoff flag...
                     if($samba){
                         $sambaAccount = new sambaAccount($this->config, $this->dn);
@@ -399,9 +399,9 @@ class userManagement extends management
     }
 
 
-    /*! \brief  Save user modifications. 
+    /*! \brief  Save user modifications.
      *          Whenever we save a 'new' user, request a password change for him.
-     */ 
+     */
     function saveChanges()
     {
         $str = management::saveChanges();
@@ -430,8 +430,8 @@ class userManagement extends management
         $str = management::cancelEdit();
         if(!empty($str)) return($str);
 
-        if(isset($this->last_tabObject->by_object['user']) && 
-                $this->last_tabObject->by_object['user']->dn != "new" &&  
+        if(isset($this->last_tabObject->by_object['user']) &&
+                $this->last_tabObject->by_object['user']->dn != "new" &&
                 $this->last_tabObject->by_object['user']->password_change_needed()){
             $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
             $this->pwd_change_queue[] = $this->last_tabObject->dn;
@@ -440,10 +440,10 @@ class userManagement extends management
     }
 
 
-    /*! \brief  Intiates user creation. 
-     *          If we've user templates, then the user will be asked to use to use one. 
+    /*! \brief  Intiates user creation.
+     *          If we've user templates, then the user will be asked to use to use one.
      *          -> See 'templateContinue' for further handling.
-     */ 
+     */
     function newUserFromTemplate($action="",$target=array(),$all=array())
     {
         // Call parent method, it knows whats to do, locking and so on ...
@@ -453,7 +453,7 @@ class userManagement extends management
         // Reset uid selection.
         $this->got_uid= "";
 
-        // Use template if there are any of them 
+        // Use template if there are any of them
         $templates = array();
         $templates['none']= _("none");
         $templates = array_merge($templates,$this->get_templates());
@@ -476,11 +476,11 @@ class userManagement extends management
 
 
 
-    /*! \brief  Intiates user creation. 
-     *          If we've user templates, then the user will be asked 
-     *           if he wants to use one. 
+    /*! \brief  Intiates user creation.
+     *          If we've user templates, then the user will be asked
+     *           if he wants to use one.
      *          -> See 'templateContinue' for further handling.
-     */ 
+     */
     function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
     {
 
@@ -513,11 +513,11 @@ class userManagement extends management
 
 
     /* !\brief  This method is called whenever a template selection was displayed.
-     *          Here we act on the use selection. 
+     *          Here we act on the use selection.
      *          - Does the user want to create a user from template?
      *          - Create user without template?
-     *          - Input correct, every value given and valid? 
-     */ 
+     *          - Input correct, every value given and valid?
+     */
     function templateContinue()
     {
         // Get the list of available templates.
@@ -539,13 +539,13 @@ class userManagement extends management
         }
 
         /********************
-         * 1   We've had input errors - Display errors and show input dialog again. 
+         * 1   We've had input errors - Display errors and show input dialog again.
          ********************/
 
         if (count($message) > 0){
             msg_dialog::displayChecks($message);
 
-            // Preset input fields with user input. 
+            // Preset input fields with user input.
             $smarty = get_smarty();
             foreach(array("sn", "givenName", "uid", "template") as $attr){
                 if(isset($_POST[$attr])){
@@ -584,7 +584,7 @@ class userManagement extends management
                 $smarty->assign("edit_uid", "");
             }else{
 
-                // Preset uid field by using the idGenerator 
+                // Preset uid field by using the idGenerator
                 $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
                 if ($this->config->get_cfg_value("core","idGenerator") != ""){
                     $genStr = $this->config->get_cfg_value("core","idGenerator");
@@ -606,21 +606,21 @@ class userManagement extends management
                 $this->got_uid= true;
             }
 
-            // Assign user input 
+            // Assign user input
             foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
                 $smarty->assign("$attr", set_post($this->$attr));
             }
             if (isset($_POST['template'])){
                 $smarty->assign("template", get_post('template'));
             }
-            $smarty->assign("templates",$templates); 
+            $smarty->assign("templates",$templates);
             $smarty->assign("allowUidProposalModification", $this->config->get_cfg_value("core","allowUidProposalModification"));
             return($smarty->fetch(get_template_path('template.tpl', TRUE)));
         }
 
 
         /********************
-         * 3   No template - Ok. Lets fill the data into the user object and skip templating here. 
+         * 3   No template - Ok. Lets fill the data into the user object and skip templating here.
          ********************/
         if (get_post('template') == 'none'){
             foreach(array("sn", "givenName", "uid") as $attr){
@@ -629,18 +629,18 @@ class userManagement extends management
                 }
             }
 
-            // The user Tab object is already instantiated, so just go back and let the 
+            // The user Tab object is already instantiated, so just go back and let the
             //  management class do the rest.
             return("");
         }
 
 
         /********************
-         * 4   Template selected and uid given - Ok, then lets adapt tempalte values. 
+         * 4   Template selected and uid given - Ok, then lets adapt tempalte values.
          ********************/
         if(isset($_POST['uid'])){
 
-            // Move user supplied data to sub plugins 
+            // Move user supplied data to sub plugins
             foreach(array("uid","sn","givenName") as $attr){
                 $this->$attr = get_post($attr);
                 $this->tabObject->$attr       = $this->$attr;
@@ -653,7 +653,7 @@ class userManagement extends management
             $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/i')."/", '', $template_dn);
             $this->tabObject->by_object['user']->base= $template_base;
 
-            // The user Tab object is already instantiated, so just go back and let the 
+            // The user Tab object is already instantiated, so just go back and let the
             //  management class do the rest.
             return("");
         }
@@ -661,7 +661,7 @@ class userManagement extends management
 
 
     /* !\brief  This method applies a template to a set of users.
-     */ 
+     */
     function templatizeUsers($action="",$target=array(),$all=array())
     {
         $this->dns = array();
@@ -688,10 +688,10 @@ class userManagement extends management
 
 
     /* !\brief  This method is called whenever the templatize dialog was used.
-     */ 
+     */
     function templatizeContinue()
     {
-        // Template readable? 
+        // Template readable?
         $template= get_post('template');
         $acl = $this->ui->get_permissions($template, $this->aclCategory."/".$this->aclPlugin);
         if (preg_match('/r/', $acl)){
@@ -713,13 +713,13 @@ class userManagement extends management
         }
 
         // Cleanup!
-        $this->remove_lock(); 
+        $this->remove_lock();
         $this->closeDialogs();
     }
 
 
     /* !\brief  Lock/unlock multiple users.
-     */ 
+     */
     function lockUsers($action,$target,$all)
     {
         if(!count($target)) return;
@@ -732,7 +732,7 @@ class userManagement extends management
 
 
     /* !\brief  Locks/unlocks the given user(s).
-     */ 
+     */
     function lockEntry($action,$entry, $all, $type = "toggle")
     {
 
@@ -786,7 +786,7 @@ class userManagement extends management
                             $hn= $hn[0];
                         }
                         msg_dialog::display(_("Account locking"),
-                                sprintf(_("Password method '%s' does not support locking. Account (%s) has not been locked!"), 
+                                sprintf(_("Password method '%s' does not support locking. Account (%s) has not been locked!"),
                                     $hn,$dn),WARNING_DIALOG);
                     }
                 }else{
@@ -798,7 +798,7 @@ class userManagement extends management
 
 
     /* !\brief  This method returns a list of all available templates.
-     */ 
+     */
     function get_templates()
     {
         $templates= array();
@@ -871,7 +871,7 @@ class userManagement extends management
     static function filterProperties($row, $classes)
     {
         $result= "";
-        $map= array( "gosaAccount" => array( "image" => "plugins/users/images/select_user.png",
+        $map= array( "gosaAccount" => array( "image" => (check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : "plugins/users/images/select_user.png"),
                     "plugin" => "user",
                     "alt" => _("Generic"),
                     "title" => _("Edit generic properties")),
@@ -915,7 +915,9 @@ class userManagement extends management
         }
 
         if(in_array_ics("zarafa-contact", $classes)){
-          $result.= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+          $result.= (check_for_materialize_theme() ?
+                        image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties")) :
+                        image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties")));
         } else if(in_array_ics("zarafa-user", $classes)){
           $result.= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
         }
@@ -923,6 +925,6 @@ class userManagement extends management
         return $result;
     }
 
-} 
+}
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

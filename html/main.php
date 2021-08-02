@@ -45,7 +45,7 @@ session::set('errorsAlreadyPosted',array());
 session::global_set('runtime_cache',array());
 session::set('limit_exceeded',FALSE);
 
-// Count number of page reloads 
+// Count number of page reloads
 if(!session::is_set('clicks')){
     session::set('clicks', 0);
 }
@@ -65,7 +65,7 @@ if (!session::global_is_set('config')){
   new log("security","login","",array(),"main.php called without session - logging out") ;
   header ("Location: logout.php");
   exit;
-} 
+}
 
 /* Check for uniqe ip address */
 $ui= session::global_get('ui');
@@ -96,7 +96,7 @@ if(session::global_get('_LAST_PAGE_REQUEST') == ""){
   /* get time difference between last page reload */
   $request_time = (time()- session::global_get('_LAST_PAGE_REQUEST'));
 
-  /* If page wasn't reloaded for more than max_life seconds 
+  /* If page wasn't reloaded for more than max_life seconds
    * kill session
    */
   if($request_time > $max_life){
@@ -145,8 +145,8 @@ $GLOBALS['t_language']= $lang;
 $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 
 // Validate LDAP schema if not done already
-if( $config->boolValueIsTrue('core','schemaCheck') && 
-    !$config->configRegistry->schemaCheckFinished() && 
+if( $config->boolValueIsTrue('core','schemaCheck') &&
+    !$config->configRegistry->schemaCheckFinished() &&
     !$config->configRegistry->validateSchemata($force=FALSE,$disableIncompatiblePlugins=TRUE)){
     $config->configRegistry->displayRequirementErrors();
 }
@@ -205,7 +205,7 @@ if (session::global_is_set('plugin_dir')){
   $old_plugin_dir= "";
 }
 
-// Generate menus 
+// Generate menus
 $plist->gen_headlines();
 $plist->gen_menu();
 $plist->genPathMenu();
@@ -215,7 +215,7 @@ $plist->genBreadcrumb();
 $smarty->assign("hideMenus", FALSE);
 if ($config->boolValueIsTrue("core","handleExpiredAccounts")){
     $expired= ldap_expired_account($config, $ui->dn, $ui->username);
- 
+
     if ($expired == POSIX_WARN_ABOUT_EXPIRATION && !session::is_set('POSIX_WARN_ABOUT_EXPIRATION__DONE')){
 
         // The users password is about to xpire soon, display a warning message.
@@ -257,25 +257,25 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
     $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
 }
 
-// Display the welcome page for admins (iconmenu) and an info page for those 
+// Display the welcome page for admins (iconmenu) and an info page for those
 //  who are not allowed to adminstrate anything (user)
 if(count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('currentPlugin') == "welcome"){
     session::global_set('plugin_dir',"infoPage");
     session::global_set('currentPlugin','welcome');
     $plugin_dir= "$BASE_DIR/plugins/generic/infoPage";
-} 
+}
 
 /* Handle plugin locks.
-    - Remove the plugin from session if we switched to another. (cleanup) 
+    - Remove the plugin from session if we switched to another. (cleanup)
     - Remove all created locks if "reset" was posted.
     - Remove all created locks if we switched to another plugin.
 */
 $cleanup    = FALSE;
 $remove_lock= FALSE;
 
-/* Check if we have changed the selected plugin 
+/* Check if we have changed the selected plugin
 */
-if(($old_plugin_dir != $plugin_dir && $old_plugin_dir != "") || 
+if(($old_plugin_dir != $plugin_dir && $old_plugin_dir != "") ||
     (isset($_GET['reset']) && $_GET['reset'] == 1)){
   if (is_file("$old_plugin_dir/main.inc")){
     $cleanup = $remove_lock = TRUE;
@@ -356,7 +356,7 @@ if (session::global_get('js')==FALSE){
 }
 
 
-$loggedin = sprintf(_("You're logged in as %s"), 
+$loggedin = sprintf(_("You're logged in as %s"),
     "<span>".$ui->cn." [".$ui->username."] / ".$config->current['NAME']."</span> &nbsp;");
 if($ui->ignore_acl_for_current_user()){
     $loggedin = "<font color='red'>"._("ACLs are disabled")."</font>&nbsp;".$loggedin;
@@ -372,7 +372,7 @@ $smarty->assign ("go_corner", get_template_path('images/go_corner.png'));
 $smarty->assign ("go_left", get_template_path('images/go_left.png'));
 $smarty->assign ("go_help", get_template_path('images/help.png'));
 
-/* reload navigation if language changed*/  
+/* reload navigation if language changed*/
 if($reload_navigation){
   $plist->menu="";
 }
@@ -388,17 +388,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if(session::global_is_set('LOCK_VARS_USED_GET')){
       foreach(session::global_get('LOCK_VARS_USED_GET') as $name => $value){
         $_GET[$name]  = $value;
-      } 
-    } 
+      }
+    }
     if(session::global_is_set('LOCK_VARS_USED_POST')){
       foreach(session::global_get('LOCK_VARS_USED_POST') as $name => $value){
         $_POST[$name] = $value;
-      } 
+      }
     }
     if(session::global_is_set('LOCK_VARS_USED_REQUEST')){
       foreach(session::global_get('LOCK_VARS_USED_REQUEST') as $name => $value){
         $_REQUEST[$name] = $value;
-      } 
+      }
     }
   }
 }
@@ -419,7 +419,7 @@ if (is_file("$plugin_dir/main.inc")){
 /* Print_out last ErrorMessage repeated string. */
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign ("pathMenu", $plist->genPathMenu());
-if (check_for_materilize_theme) {
+if (check_for_materialize_theme()) {
   $smarty->assign ("breadcrumb", $plist->genBreadcrumb());
 }
 $smarty->assign("contents", $display);
@@ -479,7 +479,7 @@ if (isset($_POST['_channel_'])){
 $display= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl')).
           $smarty->fetch(get_template_path('framework.tpl'));
 
-/* Save dialog filters and selected base in a cookie. 
+/* Save dialog filters and selected base in a cookie.
    So we may be able to restore the filter an base settings on reload.
 */
 $cookie = array();

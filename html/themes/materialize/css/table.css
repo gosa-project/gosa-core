@@ -1,0 +1,74 @@
+#tree-table th,
+#tree-table td {
+    position: relative;
+    padding: 5px 10px;
+    height: 38px;
+    max-height: 38px;
+    line-height: initial;
+}
+
+#tree-table tr {
+    height: 38px;
+    max-height: 38px;
+}
+
+#tree-table thead th a {
+    padding-left: 0;
+}
+
+#tree-table thead .checkbox-column,
+#tree-table thead .icon-column {
+    width: 38px
+}
+
+#tree-table i.material-icons {
+    font-size: 18px;
+}
+
+#tree-table input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
+}
+
+#tree-table input+i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0;
+}
+
+#tree-table .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#tree-table .action-wrapper input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
+}
+
+#tree-table .action-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+#tree-table td.last-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+[type="checkbox"]+span:not(.lever) {
+    padding-left: 0;
+}

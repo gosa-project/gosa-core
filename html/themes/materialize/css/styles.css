@@ -48,3 +48,7 @@ a {
 .content-area .col.content {
     padding-right: 0;
 }
+
+.content .card-content h2 {
+    margin-top: 0;
+}
