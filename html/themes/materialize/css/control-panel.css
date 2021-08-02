@@ -1,0 +1,160 @@
+/* Control Panel */
+
+.content .card-content .control-panel {
+    height: 26px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.content .card-content .control-panel+hr {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+
+/* Control Panel - Navigation elements */
+
+.content .card-content .control-panel .navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content .card-content .control-panel .navigation i {
+    font-size: 18px;
+}
+
+.content .card-content .control-panel .navigation .refresh {
+    position: relative;
+}
+
+.content .card-content .control-panel .navigation .refresh input {
+    height: 18px;
+    width: 18px;
+    padding: 0;
+}
+
+.content .card-content .control-panel .navigation .refresh i {
+    font-size: 18px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+/* Control Panel - LDAP Tree */
+
+.content .card-content .control-panel .ldap-tree .search-field {
+    position: relative;
+    margin: 0;
+    height: 26px;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field i {
+    position: absolute;
+    top: 4px;
+    left: 0.75rem;
+    font-size: 18px;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field input {
+    height: 24px;
+    width: 90%;
+    width: calc(100% - 28px);
+    margin: 0;
+    margin-left: 28px;
+}
+
+.content .card-content .control-panel .ldap-tree .submit {
+    position: relative;
+    margin: 0;
+    height: 26px;
+}
+
+.content .card-content .control-panel .ldap-tree .submit i {
+    font-size: 18px;
+    position: absolute;
+    left: 0.75rem;
+    top: 4px;
+}
+
+.content .card-content .control-panel .ldap-tree .submit input {
+    height: 18px;
+    width: 18px;
+    padding: 0;
+}
+
+
+/* Control Panel - Actions */
+
+.content .card-content .control-panel .actions {
+    height: 26px;
+}
+
+.content .card-content .control-panel .actions a.btn {
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    text-transform: none;
+}
+
+.content .card-content .control-panel .actions a i {
+    font-size: 18px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content {
+    font-size: 18px;
+}
+
+
+/* Control Panel - Filter */
+
+.content .card-content .control-panel .filtermenu a.btn {
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    text-transform: none;
+}
+
+.content .card-content .control-panel .filtermenu a i {
+    font-size: 18px;
+}
+
+
+/* Control Panel - Search Field */
+
+.content .card-content .control-panel .search-field {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    height: 26px;
+}
+
+.content .card-content .control-panel .search-field input {
+    height: 24px;
+    margin: 0;
+    margin-right: 0.75rem;
+}
+
+.content .card-content .control-panel .search-field button.btn {
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    text-transform: none;
+    margin: 0;
+    margin-left: 0.75rem;
+}

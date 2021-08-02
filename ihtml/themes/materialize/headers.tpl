@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="themes/materialize/css/breadcrumb.css">
     <link rel="stylesheet" href="themes/materialize/css/header.css">
     <link rel="stylesheet" href="themes/materialize/css/menu.css">
+    <link rel="stylesheet" href="themes/materialize/css/control-panel.css">
+    <link rel="stylesheet" href="themes/materialize/css/table.css">
 
     <link rel="shortcut icon" href="favicon.ico">
 

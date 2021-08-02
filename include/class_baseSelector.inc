@@ -138,7 +138,7 @@ class baseSelector {
                         }
                     }
                 }
-            } 
+            }
 
         }
 
@@ -152,14 +152,14 @@ class baseSelector {
             $root = explode(",", $config->current['BASE']);
             $baseName = $name == $root ? "/" : str_replace('dc=', "", $name[0]);
 
-            $this->tree="   <div class='input-field col s12'>
-                                <i class='material-icons prefix'>account_tree</i>
-                                <input 
-                                    type='text' 
-                                    id='autocomplete-input' 
-                                    class='dropdown-trigger' 
-                                    data-target='autocomplete' 
-                                    autocomplete='off' 
+            $this->tree="   <div class='search-field col s10'>
+                                <i class='material-icons'>account_tree</i>
+                                <input
+                                    type='text'
+                                    id='autocomplete-input'
+                                    class='dropdown-trigger'
+                                    data-target='autocomplete'
+                                    autocomplete='off'
                                     value='".$baseName."'>
                             </div>";
 
@@ -180,21 +180,21 @@ class baseSelector {
                                     </div>
                                 </li>";
 
-            
+
 
             $first= true;
             $indent= 2;
 
             foreach ($this->pathMapping as $base => $dummy) {
-    
+
                 // Skip root for tree
                 if ($base == $config->current['BASE']) {
                     continue;
                 }
-    
+
                 // Build path style display
                 $elements = explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
-    
+
                 $indent = count($elements);
                 $col = 2;
 
@@ -210,13 +210,13 @@ class baseSelector {
                                         <p>".$this->gennonbreaks($config->department_info[$base]['description'])."</p>
                                     </div>
                                 </li>";
-                                    
-    
+
+
                 $last_indent = $indent;
                 $first = false;
             }
-    
-            // Close tree                    
+
+            // Close tree
             $this->tree.="  </ul>";
 
             // Autocompleter
@@ -256,34 +256,34 @@ class baseSelector {
                 onmouseout=\"   mouseIsStillOver=false;
             rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
                 value=\"".htmlentities(LDAP::makeReadable($this->pathMapping[$this->base]),ENT_COMPAT,'utf-8')."\">";
-    
-    
+
+
             // Autocompleter
             $this->tree.= "<div id='autocomplete_".$this->pid."' class='autocomplete'></div>".
                 "<script type='text/javascript'>".
-                "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."', 
-                 'autocomplete.php?type=base&pid={$this->pid}', 
+                "new Ajax.Autocompleter('bs_input_".$this->pid."', 'autocomplete_".$this->pid."',
+                 'autocomplete.php?type=base&pid={$this->pid}',
                 { minChars: 3, frequency: 0.5 });";
             if ($this->submitButton) {
                 $this->tree.= "$('bs_input_".$this->pid."').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
             }
             $this->tree.= "</script>";
-    
+
             $selected= $this->base == $config->current['BASE']?"Selected":"";
             $this->tree.= "<div class='treeList' style='display:none;max-height:".$this->height."px' id='bs_".$this->pid."' onmouseover=\"window.clearTimeout(rtimer);\" onmouseout=\"rtimer= Element.hide.delay(0.25, 'bs_".$this->pid."')\"><a class='treeList$selected' $link>/&nbsp;["._("Root")."]</a><ul class='treeList'>\n";
             $first= true;
             $last_indent= 2;
-    
+
             foreach ($this->pathMapping as $base => $dummy) {
-    
+
                 // Skip root for tree
                 if ($base == $config->current['BASE']) {
                     continue;
                 }
-    
+
                 // Build path style display
                 $elements = explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
-    
+
                 $indent= count($elements);
                 if (!$first && ($indent == $last_indent)) {
                     $this->tree.= "</li>\n";
@@ -304,11 +304,11 @@ class baseSelector {
                     $this->gennonbreaks($config->department_info[$base]['name']).
                     ($config->department_info[$base]['description']==''?'':'&nbsp;<span class="informal">['.$this->gennonbreaks($config->department_info[$base]['description']).']</span>').
                     "</a>";
-    
+
                 $last_indent= $indent;
                 $first= false;
             }
-    
+
             // Close tree
             for ($i= 1; $i<$last_indent; $i++) {
                 $this->tree.= "</li></ul>\n";
@@ -319,7 +319,7 @@ class baseSelector {
         // Draw submitter if required
         if ($this->submitButton) {
             $this->tree.= (check_for_materialize_theme() ?
-                            "<div class='col s2'>".image("<i class='material-icons input-icons md-24'>keyboard_return</i>", "submit_base".$this->pid, _("Submit"))."</div>" :
+                            "<div class='col s2 submit'>".image("<i class='material-icons'>keyboard_return</i>", "submit_base".$this->pid, _("Submit"))."</div>" :
                             image('images/lists/submit.png', "submit_base_".$this->pid, _("Submit")));
         }
         $this->tree.= "<input type='submit' style='display:none' name='submit_tree_base_".$this->pid."' id='submit_tree_base_".$this->pid."'>";
@@ -347,7 +347,7 @@ class baseSelector {
             // print(image($config->department_info[$base]['img']));
             $key = $this->gennonbreaks($config->department_info[$base]['name']);
             $key .= $config->department_info[$base]['description'] == '' ? '' : " - [".$this->gennonbreaks($config->department_info[$base]['description'])."]";
-            
+
             $ldapTree[$key] = null;
         }
         return json_encode($ldapTree);
