@@ -1571,8 +1571,9 @@ function renderExporterMenu($separator)
     // Presets
     $result = "";
 
-    // Draw entries
-    $result.= "<li$separator><a href='#'>".image('images/lists/export.png')."&nbsp;"._("Export list")."&nbsp;".image("images/forward-arrow.png")."</a><ul class='level3'>";
+        // Draw entries
+        $result.="  <ul class='collection with-header'>
+                        <li class='collection-header'><h5>"._("Export list")."</h5></li>";
 
     // Export CVS as build in exporter
     foreach ($this->exporter as $action => $exporter) {
