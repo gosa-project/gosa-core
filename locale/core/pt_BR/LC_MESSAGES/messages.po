@@ -3205,6 +3205,13 @@ msgstr "Não há nenhuma conta de administrador GOsa no seu LDAP"
 msgid "Create"
 msgstr "Criar"
 
+#: setup/class_setupStep_Migrate.inc:309
+#: plugins/admin/ogroups/ogroup-list.xml:73
+#: plugins/admin/users/user-list.xml:89 plugins/admin/groups/group-list.xml:73
+#: plugins/admin/acl/acl-list.xml:76 plugins/admin/departments/dep-list.xml:98
+msgid "Manage"
+msgstr "Gerenciar"
+
 #: setup/class_setupStep_Migrate.inc:377
 msgid "Migration error"
 msgstr "Erro de migração"
