@@ -6,7 +6,7 @@
     <departmentRootVisible>true</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
-    <template>acl-list_materialize.tpl</template>
+    <template>../../../ihtml/themes/materialize/list.tpl</template>
     <module>acl</module>
     <label>List of ACLs</label>
     <defaultSortColumn>1</defaultSortColumn>
