@@ -6,7 +6,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
-    <template>../plugins/admin/ogroups/objectSelect/selectObject-list_materialize.tpl</template>
+    <template>../../../ihtml/themes/materialize/list-select.tpl</template>
     <module>users</module>
     <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>

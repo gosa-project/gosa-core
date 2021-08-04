@@ -6,7 +6,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
-    <template>dep-list_materialize.tpl</template>
+    <template>../../../ihtml/themes/materialize/list.tpl</template>
     <module>departments</module>
     <label>List of structural objects</label>
     <defaultSortColumn>1</defaultSortColumn>

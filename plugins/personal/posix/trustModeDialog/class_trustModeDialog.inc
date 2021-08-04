@@ -113,14 +113,14 @@ class trustModeDialog extends plugin
         }
 
         // Cancel trust and group dialog
-        if (isset($_POST['add_ws_cancel'])){
+        if (isset($_POST['add_ws_cancel']) || isset($_POST['cancel-abort'])){
             $this->groupSelect= NULL;
             $this->trustSelect= NULL;
             $this->dialog= FALSE;
         }
 
         // Add selected machines to trusted ones.
-        if (isset($_POST["add_ws_finish"]) && $this->trustSelect){
+        if ((isset($_POST["add_ws_finish"]) || isset($_POST['ok-save'])) && $this->trustSelect){
             $trusts = $this->trustSelect->detectPostActions();
             if(isset($trusts['targets'])){
                 $headpage = $this->trustSelect->getHeadpage();
