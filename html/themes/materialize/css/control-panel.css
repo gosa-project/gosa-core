@@ -11,6 +11,7 @@
     border: none;
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 20px;
 }
 
 .content .card-content .control-panel+hr {
@@ -28,10 +29,16 @@
     align-content: center;
     justify-content: space-between;
     align-items: center;
+    padding: 0 10px;
 }
 
 .content .card-content .control-panel .navigation i {
     font-size: 18px;
+    margin-right: 20px;
+}
+
+.content .card-content .control-panel .navigation i:last-child {
+    margin-right: 0;
 }
 
 .content .card-content .control-panel .navigation .refresh {
@@ -54,6 +61,10 @@
 
 /* Control Panel - LDAP Tree */
 
+.content .card-content .control-panel .ldap-tree {
+    padding: 0 10px;
+}
+
 .content .card-content .control-panel .ldap-tree .search-field {
     position: relative;
     margin: 0;
@@ -63,7 +74,7 @@
 .content .card-content .control-panel .ldap-tree .search-field i {
     position: absolute;
     top: 4px;
-    left: 0.75rem;
+    left: 0;
     font-size: 18px;
 }
 
@@ -91,6 +102,8 @@
 .content .card-content .control-panel .ldap-tree .submit input {
     height: 18px;
     width: 18px;
+    margin-left: 0.75rem;
+    margin-top: 4px;
     padding: 0;
 }
 
@@ -99,6 +112,7 @@
 
 .content .card-content .control-panel .actions {
     height: 26px;
+    padding: 0 10px;
 }
 
 .content .card-content .control-panel .actions a.btn {
@@ -145,6 +159,10 @@
 
 
 /* Control Panel - Filter */
+
+.content .card-content .control-panel .filtermenu {
+    padding: 0 10px;
+}
 
 .content .card-content .control-panel .filtermenu a.btn {
     height: 26px;
@@ -196,8 +214,9 @@
     align-content: center;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
     height: 26px;
+    margin: 0;
+    padding: 0 10px;
 }
 
 .content .card-content .control-panel .search-field input {

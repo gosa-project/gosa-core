@@ -149,7 +149,7 @@ class baseSelector {
 
         $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($config->current['BASE'])."';  $('submit_tree_base_".$this->pid."').click();\"";
 
-            $this->tree="   <div class='search-field col s10'>
+            $this->tree="   <div class='search-field'>
                                 <i class='material-icons'>account_tree</i>
                                 <input
                                     type='text'
@@ -303,7 +303,7 @@ class baseSelector {
         // Draw submitter if required
         if ($this->submitButton) {
             $this->tree.= (check_for_materialize_theme() ?
-                            "<div class='col s2 submit'>".image("<i class='material-icons'>keyboard_return</i>", "submit_base".$this->pid, _("Submit"))."</div>" :
+                            "<div class='submit'>".image("<i class='material-icons'>keyboard_return</i>", "submit_base".$this->pid, _("Submit"))."</div>" :
                             image('images/lists/submit.png', "submit_base_".$this->pid, _("Submit")));
         }
         $this->tree.= "</script>";
