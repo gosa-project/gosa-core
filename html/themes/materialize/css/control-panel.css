@@ -112,6 +112,12 @@
     font-size: 18px;
 }
 
+.content .card-content .control-panel .actions .dropdown-content {
+    min-width: 200px;
+    margin: 0;
+    border-bottom: 0;
+}
+
 .content .card-content .control-panel .actions .dropdown-content ul.collection.with-header {
     margin: 0;
     border-bottom: 0;
@@ -151,6 +157,10 @@
     font-size: 18px;
 }
 
+.content .card-content .control-panel .filtermenu .dropdown-content .collection.valign-dropdown {
+    margin: 0;
+}
+
 .content .card-content .control-panel .filtermenu .dropdown-content a {
     font-size: 12px;
     margin-left: 34px;
@@ -162,6 +172,18 @@
 
 .content .card-content .control-panel .filtermenu .dropdown-content i {
     margin: 0 10px 0 0;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content .divider {
+    background-color: lightslategray;
+    height: 1px;
+    border: 0;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:nth-child(5),
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:nth-child(7),
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:last-child {
+    border-bottom: 0;
 }
 
 
