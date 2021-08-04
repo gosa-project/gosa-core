@@ -83,6 +83,10 @@
     align-items: center;
 }
 
-[type="checkbox"]+span:not(.lever) {
+#tree-table [type="checkbox"]+span:not(.lever) {
     padding-left: 0;
+}
+
+.table-summary i {
+    font-size: 18px;
 }

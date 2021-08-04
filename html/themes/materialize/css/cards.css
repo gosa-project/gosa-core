@@ -21,6 +21,7 @@
     justify-content: flex-end;
     align-items: center;
     padding: 20px 10px 0px 10px;
+    border-top: none;
 }
 
 .card .card-content .card-action button {
