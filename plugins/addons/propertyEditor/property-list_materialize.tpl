@@ -21,16 +21,13 @@
   </div>
 </div>
 
-<hr>
 
-<div class="red lighten-3 z-depth-1 center-align">
+<div class="attention">
   <label>
     <input type='checkbox' name='warningAccepted' value='1' id='warningAccepted'/>
-    <span class="black-text">{t}I understand that there are certain risks, but I want to modify properties!{/t}</span>
+    <span>{t}I understand that there are certain risks, but I want to modify properties!{/t}</span>
   </label>
 </div>
-
-<hr>
 
 <div class="card-action">
   <button class="btn-small gonicus-color" name='goOn'>{msgPool type='okButton'}</button>

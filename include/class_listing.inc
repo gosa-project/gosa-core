@@ -543,7 +543,7 @@ class listing
 
             // Add the footer if requested
             if ($this->showFooter) {
-                $result .= '<div>';
+                $result .= '<div class="table-summary">';
                 foreach ($this->objectTypes as $objectType) {
                     if (isset($this->objectTypeCount[$objectType['label']])) {
                         $label = _($objectType['label']);

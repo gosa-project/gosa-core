@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="themes/materialize/css/menu.css">
     <link rel="stylesheet" href="themes/materialize/css/control-panel.css">
     <link rel="stylesheet" href="themes/materialize/css/table.css">
+    <link rel="stylesheet" href="themes/materialize/css/warnings.css">
 
     <link rel="shortcut icon" href="favicon.ico">
 
