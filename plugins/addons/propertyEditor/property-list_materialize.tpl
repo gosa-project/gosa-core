@@ -41,29 +41,25 @@
 
 <script language="javascript" src="include/tooltip.js" type="text/javascript"></script>
 
-<hr>
 <div>
   <span class="black-text">
-    <h5>
+    <h2>
       {$HEADLINE}&nbsp;{$SIZELIMIT}
       {if $ignoreLdapProperties}
       - <span class="red-text">{t}Ignoring LDAP defined properties!{/t}</span>
       {/if}
-    </h5>
+    </h2>
   </span>
 </div>
-<hr>
-<div class="row mgb-off valign-wrapper">
-  <div class="col s1">
-    <div class="row mgb-off">
-      <div class="col s12">{$RELOAD}</div>
-    </div>    
+<div class="control-panel">
+  <div class="navigation">
+    <div class="refresh">{$RELOAD}</div>
   </div>
-  <div class="col s2 center-align">{$ACTIONS}</div>
+  <div class="actions center-align">{$ACTIONS}</div>
   {$FILTER}
 </div>
 <hr>
-  
+
 {$LIST}
 <input type="hidden" name="ignore">
 

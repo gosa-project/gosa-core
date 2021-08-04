@@ -13,6 +13,22 @@
     margin-bottom: 20px;
 }
 
+.card .card-content .card-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 10px 0px 10px;
+}
+
+.card .card-content .card-action button {
+    margin-left: 20px;
+    font-size: 12px;
+    text-transform: none;
+}
+
 .card-content .card {
     height: 172px;
     max-height: 172px;

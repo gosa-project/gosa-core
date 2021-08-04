@@ -63,7 +63,7 @@ class propertyEditor extends management
             $this->closeDialogs();
         }
 
-        // Once accepted hide the warning message        
+        // Once accepted hide the warning message
         if(isset($_POST['warningAccepted'])){
             $this->warningAccepted = TRUE;
         }
@@ -71,7 +71,7 @@ class propertyEditor extends management
         // Execute registered management event listeners.
         $this->handleActions($this->detectPostActions());
 
-        // Handle properties that have to be migrated 
+        // Handle properties that have to be migrated
         if(isset($_POST['propertyMigrate_cancel']) && count($this->toBeMigrated)){
             unset($this->toBeMigrated[0]);
             $this->toBeMigrated = array_values($this->toBeMigrated);
@@ -94,7 +94,7 @@ class propertyEditor extends management
         if(count($this->toBeMigrated)){
             $first = $this->toBeMigrated[0]->getMigrationClass();
             $first->save_object();
-    
+
             // We've no problems with this property anymore.
             while($first instanceOf propertyMigration && !$first->checkForIssues()){
                 $this->toBeMigrated[0]->save();
@@ -104,7 +104,7 @@ class propertyEditor extends management
                     $first = $this->toBeMigrated[0]->getMigrationClass();
                 }else{
                     $first = NULL;
-                    
+
                     // Nothing to migrate and everything is fine, reload the list now.
                     if(!count($this->toBeMigrated)){
                         $this->config->configRegistry->reload($force=TRUE);
@@ -135,7 +135,7 @@ class propertyEditor extends management
             $modified = in_array_strict($prop->getStatus(),array('modified','removed'));
             if($modified) break;
         }
-       
+
         $smarty = get_smarty();
         $smarty->assign('is_modified', $modified);
         return(management::renderList());
@@ -184,7 +184,7 @@ class propertyEditor extends management
                 $prop->restoreDefault();
             }
         }
-    } 
+    }
 
     static function propertyGroup($group, $description = array())
     {
@@ -260,10 +260,10 @@ class propertyEditor extends management
             case 'integer':
                 $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
                 break;
-            default: echo $type[0].$name."  ";$res = ""; 
+            default: echo $type[0].$name."  ";$res = "";
         }
-       
-        // Check if it is a required value. 
+
+        // Check if it is a required value.
         if($mandatory[0] && empty($value)){
            $res.= "<rowClass:entry-error/>";
         }

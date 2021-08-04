@@ -217,7 +217,7 @@ class filter
 
             $content = $this->renderFilterMenu();
 
-            $content .= "     <div class='search-field col s3'>
+            $content .= "     <div class='search-field'>
                                 ".$this->getTextfield('search_filter', set_post($this->value), $s)."
                                 <button class='btn gonicus-color' type='submit' title='"._('Search')."'>
                                     <i class='material-icons white-text md-18'>search</i>
@@ -526,7 +526,7 @@ class filter
                             });
                         </script>";
 
-            $gridClass = "class='col s1 filtermenu'";
+            $gridClass = "class='filtermenu'";
         } else {
             // Load shortcut
             $result = "<ul class='level1' id='filter-root'><li><a href='#'>".image('images/filter.png').image('images/lists/sort-down.png').'</a>';

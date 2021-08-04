@@ -25,6 +25,20 @@
     font-size: 18px;
 }
 
+#tree-table select {
+    display: block;
+    height: 29px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+}
+
+#tree-table select:focus {
+    outline: none;
+}
+
 #tree-table input {
     width: 18px;
     height: 18px;
