@@ -1575,7 +1575,7 @@ class listing
 
             if (isset($action['image'])) {
                 $img = (check_for_materialize_theme() ?
-                    "<i class='material-icons right'>".$action['image'].'</i>' :
+                    "<i class='material-icons'>".$action['image'].'</i>' :
                     image($action['image']).'&nbsp;');
             }
 
@@ -1974,23 +1974,24 @@ class listing
         if (check_for_materialize_theme()) {
             // Presets
             $result = '';
-
-        // Draw entries
-        $result.="  <ul class='collection with-header'>
-                        <li class='collection-header'><h5>"._("Export list")."</h5></li>";
+            // Draw entries
+            $result.="    <li class='pointer_off'>
+                            <ul class='collection with-header'>
+                                <li class='collection-header pointer_off'><h3>"._("Export list")."</h3></li>";
 
             // Export CVS as build in exporter
             foreach ($this->exporter as $action => $exporter) {
-                $result .= "<li class='collection-item'>
-                        <a href='#' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>
-                            <i class='material-icons right'>".$exporter['image'].'</i>
-                            '.$exporter['label'].'
-                        </a>
-                    </li>';
+                $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>
+                                <a href='#'>
+                                    <i class='material-icons'>".$exporter['image'].'</i>
+                                    '.$exporter['label'].'
+                                </a>
+                            </li>';
             }
 
             // Finalize list
-            $result .= '</ul>';
+            $result .= '</ul>
+                    </li>';
         } else {
             // Presets
             $result = '';

@@ -112,8 +112,29 @@
     font-size: 18px;
 }
 
-.content .card-content .control-panel .actions .dropdown-content {
-    font-size: 18px;
+.content .card-content .control-panel .actions .dropdown-content ul.collection.with-header {
+    margin: 0;
+    border-bottom: 0;
+}
+
+.content .card-content .control-panel .actions .dropdown-content li.collection-header {
+    padding: 10px 10px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content li.collection-item {
+    padding: 5px 10px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content h3 {
+    margin: 0 auto;
+}
+
+.content .card-content .control-panel .actions .dropdown-content a {
+    font-size: 12px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content a i {
+    margin: 0 10px 0 0;
 }
 
 
@@ -128,6 +149,19 @@
 
 .content .card-content .control-panel .filtermenu a i {
     font-size: 18px;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content a {
+    font-size: 12px;
+    margin-left: 34px;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content a.active {
+    margin-left: 0;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content i {
+    margin: 0 10px 0 0;
 }
 
 
