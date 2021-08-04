@@ -1,0 +1,91 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: polski\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:22+0100\n"
+"PO-Revision-Date: 2009-09-05 15:16+0100\n"
+"Last-Translator: Piort Rybicki <meritus@innervision.pl>\n"
+"Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: iso-8859-2\n"
+"X-Poedit-Basepath: tedst\n"
+
+#: personal/connectivity/intranet.tpl:4
+#, fuzzy
+msgid "Intra net account"
+msgstr "Konto Intranet"
+
+#: personal/connectivity/class_connectivity.inc:15
+#: personal/connectivity/class_connectivity.inc:274
+msgid "Connectivity"
+msgstr "Połączenia"
+
+#: personal/connectivity/class_connectivity.inc:16
+#, fuzzy
+msgid "Manage connectivity user settings"
+msgstr "Ogólne ustawienia użytkownika"
+
+#: personal/connectivity/class_connectivity.inc:277
+#: personal/connectivity/class_intranetAccount.inc:208
+msgid "My account"
+msgstr "Moje konto "
+
+#: personal/connectivity/class_connectivity.inc:281
+#: personal/connectivity/class_intranetAccount.inc:217
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "dodatek Połączeń"
+
+#: personal/connectivity/class_intranetAccount.inc:16
+#, fuzzy
+msgid "Intra net"
+msgstr "Inranet"
+
+#: personal/connectivity/class_intranetAccount.inc:18
+msgid "Manage user properties of that belong to the internal network"
+msgstr ""
+
+#: personal/connectivity/class_intranetAccount.inc:126
+#: personal/connectivity/class_intranetAccount.inc:195
+msgid "LDAP error"
+msgstr "błąd LDAP"
+
+#: personal/connectivity/class_intranetAccount.inc:205
+#, fuzzy
+msgid "Intra-net"
+msgstr "Inranet"
+
+#: personal/connectivity/class_intranetAccount.inc:217
+#, fuzzy
+msgid "Intra-net account settings"
+msgstr "Ustawienia konta Intranet"
+
+#~ msgid "This does something"
+#~ msgstr "To robi coś"
+
+#~ msgid "This account has no connectivity extensions."
+#~ msgstr "To konto nie posiada rozszerzeń do Połączeń"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Cancel"
+#~ msgstr "Anuluj"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr ""
+#~ "Kliknij przycisk 'Edytuj' poniżej, aby zmienić informacje w tym oknie"
+
+#~ msgid "Edit"
+#~ msgstr "Edytuj"
+
+#~ msgid "Removing of user/intranet account with dn '%s' failed."
+#~ msgstr "Usuwanie konta intranet z dn '%s' nieudane."
+
+#~ msgid "Saving of user/intranet account with dn '%s' failed."
+#~ msgstr "Zapisywanie konta intranet z dn '%s' nieudane."

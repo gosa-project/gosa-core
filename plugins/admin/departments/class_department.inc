@@ -196,7 +196,7 @@ class department extends plugin
                     $this->dialog = NULL;
                 }
             }
-            if(isset($_POST['add_users_cancel'])){
+            if(isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort'])){
                 $this->dialog = NULL;
             }
             if($this->dialog) return($this->dialog->execute());

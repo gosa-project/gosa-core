@@ -201,7 +201,7 @@ class ogroup extends plugin
 
 
             /* Add objects to group */
-            if (isset($_POST['objectSelect_save']) && $this->objectSelect instanceOf objectSelect){
+            if ((isset($_POST['objectSelect_save']) || isset($_POST['ok-save'])) && $this->objectSelect instanceOf objectSelect){
                 $objects = $this->objectSelect->save();
                 $skipped = FALSE;
                 foreach($objects as $object){
@@ -302,7 +302,7 @@ class ogroup extends plugin
         }
 
         /* Add objects finished? */
-        if (isset($_POST["objectSelect_cancel"])){
+        if (isset($_POST["objectSelect_cancel"]) || isset($_POST['cancel-abort'])){
             $this->objectSelect= FALSE;
         }
 

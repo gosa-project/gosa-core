@@ -573,7 +573,7 @@ class acl extends plugin
         }
 
         /* If dialog is confirmed */
-        if(isset($_POST['userGroupSelect_save']) &&
+        if((isset($_POST['userGroupSelect_save']) || isset($_POST['ok-save'])) &&
             $this->dialog instanceof userGroupSelect) {
 
             $groupIcon = image("plugins/groups/images/select_group.png");
@@ -608,7 +608,7 @@ class acl extends plugin
         }
 
         /* If dialog is canceled */
-        if(isset($_POST['userGroupSelect_cancel']) &&
+        if((isset($_POST['userGroupSelect_cancel']) || isset($_POST['cancel-abort'])) &&
             $this->dialog instanceof userGroupSelect) {
             unset($this->dialog);
             $this->dialog = true;

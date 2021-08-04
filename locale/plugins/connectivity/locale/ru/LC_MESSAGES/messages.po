@@ -1,0 +1,90 @@
+# Translation of messages.po to Russian
+# Valia V. Vaneeva <fattie@altlinux.ru>, 2004.
+# $Id: messages.po,v 1.61 2005/04/18 10:37:13 migor-guest Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:22+0100\n"
+"PO-Revision-Date: 2005-04-18 14:35+0300\n"
+"Last-Translator: Igor Muratov <migor@altlinux.org>\n"
+"Language-Team: ALT Linux Team\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: poEdit 1.3.1\n"
+
+#: personal/connectivity/intranet.tpl:4
+#, fuzzy
+msgid "Intra net account"
+msgstr "Создать телефонный аккаунт"
+
+#: personal/connectivity/class_connectivity.inc:15
+#: personal/connectivity/class_connectivity.inc:274
+msgid "Connectivity"
+msgstr "Подключение"
+
+#: personal/connectivity/class_connectivity.inc:16
+#, fuzzy
+msgid "Manage connectivity user settings"
+msgstr "Общая информация о пользователе"
+
+#: personal/connectivity/class_connectivity.inc:277
+#: personal/connectivity/class_intranetAccount.inc:208
+msgid "My account"
+msgstr "Моя учетная запись"
+
+#: personal/connectivity/class_connectivity.inc:281
+#: personal/connectivity/class_intranetAccount.inc:217
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Подключение"
+
+#: personal/connectivity/class_intranetAccount.inc:16
+#, fuzzy
+msgid "Intra net"
+msgstr "Создать телефонный аккаунт"
+
+#: personal/connectivity/class_intranetAccount.inc:18
+msgid "Manage user properties of that belong to the internal network"
+msgstr ""
+
+#: personal/connectivity/class_intranetAccount.inc:126
+#: personal/connectivity/class_intranetAccount.inc:195
+#, fuzzy
+msgid "LDAP error"
+msgstr "Ошибка LDAP:"
+
+#: personal/connectivity/class_intranetAccount.inc:205
+#, fuzzy
+msgid "Intra-net"
+msgstr "Создать телефонный аккаунт"
+
+#: personal/connectivity/class_intranetAccount.inc:217
+#, fuzzy
+msgid "Intra-net account settings"
+msgstr "Создать телефонный аккаунт"
+
+#~ msgid "This does something"
+#~ msgstr "Что-то будет"
+
+#~ msgid "This account has no connectivity extensions."
+#~ msgstr "В этой учетной записи нет атрибутов для подключения."
+
+#~ msgid "Cancel"
+#~ msgstr "Отмена"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr "Нажмите 'Изменить' чтобы отредактировать данные в этой форме."
+
+#~ msgid "Edit"
+#~ msgstr "Изменить"
+
+#, fuzzy
+#~ msgid "Removing of user/intranet account with dn '%s' failed."
+#~ msgstr "Удалить настройки эл. почты"
+
+#, fuzzy
+#~ msgid "Saving of user/intranet account with dn '%s' failed."
+#~ msgstr "Создать телефонный аккаунт"

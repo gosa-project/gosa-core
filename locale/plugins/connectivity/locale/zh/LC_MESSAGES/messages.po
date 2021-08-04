@@ -1,0 +1,96 @@
+# translation of messages.po to Chinese Simplified
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+# Jiang Xin <worldhello.net@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:22+0100\n"
+"PO-Revision-Date: 2007-06-03 12:27+0800\n"
+"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Language-Team: Chinese Simplified <zh@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: personal/connectivity/intranet.tpl:4
+#, fuzzy
+msgid "Intra net account"
+msgstr "内联网账号"
+
+#: personal/connectivity/class_connectivity.inc:15
+#: personal/connectivity/class_connectivity.inc:274
+msgid "Connectivity"
+msgstr "互联"
+
+#: personal/connectivity/class_connectivity.inc:16
+#, fuzzy
+msgid "Manage connectivity user settings"
+msgstr "通用队列设置"
+
+#: personal/connectivity/class_connectivity.inc:277
+#: personal/connectivity/class_intranetAccount.inc:208
+msgid "My account"
+msgstr "我的账号"
+
+#: personal/connectivity/class_connectivity.inc:281
+#: personal/connectivity/class_intranetAccount.inc:217
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "互联"
+
+#: personal/connectivity/class_intranetAccount.inc:16
+#, fuzzy
+msgid "Intra net"
+msgstr "内联网"
+
+#: personal/connectivity/class_intranetAccount.inc:18
+msgid "Manage user properties of that belong to the internal network"
+msgstr ""
+
+#: personal/connectivity/class_intranetAccount.inc:126
+#: personal/connectivity/class_intranetAccount.inc:195
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP 错误:"
+
+#: personal/connectivity/class_intranetAccount.inc:205
+#, fuzzy
+msgid "Intra-net"
+msgstr "内联网"
+
+#: personal/connectivity/class_intranetAccount.inc:217
+#, fuzzy
+msgid "Intra-net account settings"
+msgstr "内联网账号"
+
+#, fuzzy
+#~ msgid "This does something"
+#~ msgstr "******"
+
+#~ msgid "This account has no connectivity extensions."
+#~ msgstr "这个账号没有互联扩展。"
+
+#~ msgid "Ok"
+#~ msgstr "好"
+
+#~ msgid "Cancel"
+#~ msgstr "取消"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"
+
+#, fuzzy
+#~ msgid "Removing of user/intranet account with dn '%s' failed."
+#~ msgstr "删除 dn 为 '%s' 的 user/kolab 账号失败。"
+
+#, fuzzy
+#~ msgid "Saving of user/intranet account with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 的 user/kolab 账号为空。"

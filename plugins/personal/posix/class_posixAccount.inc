@@ -330,12 +330,12 @@ class posixAccount extends plugin
     }
 
     // Cancel group dialog
-    if (isset($_POST['add_groups_cancel'])){
+    if (isset($_POST['add_groups_cancel']) || isset($_POST['cancel-abort'])){
       $this->groupSelect= NULL;
     }
 
     // Add groups selected in groupSelect dialog to ours.
-    if (isset($_POST['add_groups_finish']) && $this->groupSelect){
+    if ((isset($_POST['add_groups_finish']) || isset($_POST['ok-save'])) && $this->groupSelect){
       $groups = $this->groupSelect->detectPostActions();
       if(isset($groups['targets'])){
         $this->addGroup ($groups['targets']);
@@ -1249,7 +1249,7 @@ class posixAccount extends plugin
 
     /* If the group-add dialog is closed, call execute 
        to ensure that the membership is updatd */
-    if(isset($_POST['add_groups_finish']) || isset($_POST['add_groups_cancel'])){
+    if((isset($_POST['add_groups_finish']) || isset($_POST['ok-save'])) || (isset($_POST['add_groups_cancel']) || isset($_POST['cancel-abort']))){
       $this->execute();
       $this->groupSelect =NULL;
     }
