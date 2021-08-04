@@ -461,14 +461,14 @@ class filter
                 $label = htmlentities(_($conf['label']), ENT_COMPAT, 'UTF-8');
                 if ($tag == $this->search) {
                     $result .= " <li class='collection-item'>
-                                    <a href='#'>
+                                    <a href='#' class='active'>
                                         ".image("<i class='material-icons'>checked</i>").'
                                         '.$label.'
                                     </a>
                                 </li>';
                 } else {
                     $result .= " <li class='collection-item'>
-                                    <a href='#' class='right' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>
+                                    <a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>
                                         ".$label.'
                                     </a>
                                 </li>';
@@ -505,7 +505,7 @@ class filter
             if ($this->scopeMode == 'auto') {
                 $result .= " <li$separator></li>
                             <li class='collection-item'>
-                                <a href='#' onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>
+                                <a href='#' class='search-subtree".($this->scope == 'one' ? " '" : " active'")." onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>
                                     ".($this->scope == 'one' ? '' : "<i class='material-icons left'>checked</i>").'
                                     '._('Search in subtrees').'
                                 </a>
@@ -516,7 +516,7 @@ class filter
             $result .= " <li$separator></li>
                             <li class='collection-item'>
                                 <a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>
-                                    <i class='material-icons right'>settings</i>
+                                    <i class='material-icons'>settings</i>
                                 "._('Edit filters').'...
                                 </a>
                             </li>';

@@ -91,14 +91,16 @@
       <action>
         <name>new</name>
         <type>entry</type>
-        <image>manage-accounts</image>
+        <image>person_add</image>
+        <!-- <image>manage-accounts</image> -->
         <label>User</label>
       </action>
 
       <action>
         <name>new_template</name>
         <type>entry</type>
-        <image>person_add</image>
+        <image>note_add</image>
+        <!-- <image>person_add</image> -->
         <label>Template</label>
       </action>
     </action>
@@ -125,7 +127,8 @@
       <action>
         <name>password</name>
         <type>entry</type>
-        <image>password</image>
+        <image>vpn_key</image>
+        <!-- <image>password</image> -->
         <label>Change password</label>
       </action>
 
