@@ -330,7 +330,7 @@ class listing {
 
         if (check_for_materialize_theme()) {
             
-            $result.="  <div class='section scrollspy' id='d_scrollbody'>
+            $result.="  <div id='d_scrollbody'>
                             <table id='tree-table' class='highlight responsive-table'>";
             $this->numColumns= count($this->colprops) + (($this->multiSelect|$this->singleSelect)?1:0);
     
@@ -571,12 +571,6 @@ class listing {
             $result.= $switch?"<input type='hidden' id='list_workaround'>":"";
     
             // Add scroll positioner
-            $result.="  <script type='text/javascript'>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var elems = document.querySelectorAll('.scrollspy');
-                                var instances = M.ScrollSpy.init(elems, {});
-                            });
-                        </script>";
             $result.="  <script type='text/javascript'>
                             function test() {
                                 var paging = window.location.href;
@@ -1533,21 +1527,10 @@ function renderActionMenu()
         // Load shortcut
         $actions= &$this->xmlData['actionmenu']['action'];
 
-        $result.="  <a class='dropdown$level btn-small gonicus-color' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._("Actions")."</a>
+        $result.="  <a class='dropdown-menu btn-small gonicus-color' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._("Actions")."</a>
                         <ul class='dropdown-content' id='$level'>";
 
-        $result.= $this->recurseActions($actions, $level)."</ul></>";
-
-        $result.="  <script type='text/javascript'>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var elems = document.querySelectorAll('.dropdown$level');
-                                var instances = M.Dropdown.init(elems, {
-                                    'constrainWidth': false,
-                                    'coverTrigger': false,
-                                    'hover': true,
-                                });
-                            });
-                        </script>";
+        $result.= $this->recurseActions($actions, $level)."</ul>";
 
         return $result;
                             

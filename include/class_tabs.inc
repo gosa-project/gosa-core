@@ -181,7 +181,7 @@ class tabs
         $display =  (check_for_materialize_theme() ? 
                       "{$tabs}
                       <input type='hidden' name='arg' value=''>
-                      <div>
+                      <div class='scroll'>
                         {$display}
                       </div>" : 
                       "{$tabs}

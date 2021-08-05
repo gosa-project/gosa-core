@@ -30,10 +30,3 @@
 <div class="row">
     <button class="btn-small gonicus-color" name='addUri'>{msgPool type='addButton'}</button>
 </div>
-
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
-    });
-</script>

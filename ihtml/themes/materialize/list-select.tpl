@@ -20,7 +20,9 @@
 </div>
 <hr>
 
-{$LIST}
+<div>
+    {$LIST}
+</div>
 
 <div class="card-action">
     <button class="btn-small gonicus-color" type="submit" name="ok-save">{msgPool type=okButton}</button>

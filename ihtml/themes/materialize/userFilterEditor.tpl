@@ -85,10 +85,3 @@
   <button class="btn-small gonicus-color" type='submit' name='cancelFilterSettings'>{msgPool
     type='cancelButton'}</button>
 </div>
-
-<script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, {});
-  });
-</script>

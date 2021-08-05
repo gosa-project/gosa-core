@@ -215,10 +215,3 @@
     // First input field on page
     focus_field('cn');
 </script>
-
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
-      });
-</script>

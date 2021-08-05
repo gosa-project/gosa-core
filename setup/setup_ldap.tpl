@@ -152,19 +152,9 @@
     </table>
 {/if}
 {/if}
-<script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
-
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
-      });
-</script>
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
 	focus_field('location');
-  -->
 </script>
 

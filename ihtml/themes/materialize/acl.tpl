@@ -27,13 +27,7 @@
 			{/if}
 		{/if}
 		<label>{t}ACL type{/t}</label>
-	</div>
-	<script type="text/javascript">
-		document.addEventListener('DOMContentLoaded', function() {
-			var elems = document.querySelectorAll('select');
-			var instances = M.FormSelect.init(elems, {});
-		  });
-	</script>
+		</div>
 	<div class="input-field col s12">
 		{if !$acl_writeable}
 			<input id="acl_filter" type="text" value='{$aclFilter}' disabled name='dummy_f'>

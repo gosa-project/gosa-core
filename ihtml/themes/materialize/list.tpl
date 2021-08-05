@@ -16,5 +16,7 @@
 </span>
 <hr>
 
-{$LIST}
+<div>
+    {$LIST}
+</div>
 <input type="hidden" name="ignore">

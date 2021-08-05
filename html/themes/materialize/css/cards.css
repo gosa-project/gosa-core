@@ -14,8 +14,8 @@
 }
 
 .card-content .card {
-    height: 172px;
-    max-height: 172px;
+    /* height: 172px; */
+    min-height: 172px;
     padding: 20px;
     flex-direction: column;
     justify-content: flex-start;

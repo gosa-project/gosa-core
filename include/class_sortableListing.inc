@@ -231,7 +231,7 @@ class sortableListing {
     public function render()
     {	
         if(check_for_materialize_theme()) {
-            $result = " <div id='scroll_".$this->id."' class='scrollspy acl-member'>
+            $result = " <div id='scroll_".$this->id."' class='acl-member'>
                             <table ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
             if (strpos($this->acl, 'w') === false) {
                 $edit_image = $this->editable?image("<i class='material-icons'>edit</i>"):"";

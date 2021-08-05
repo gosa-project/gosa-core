@@ -651,13 +651,9 @@ class plugin
       $state= "";
     }
     $display = check_for_materialize_theme() ?
-                "<div class='card'>
-                  <div class='card-content'>
-                    <span class='card-title'>$text</span>
-                  </div>
-                  <div class='card-action'>
-                    <button class='btn-small gonicus-color' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
-                  </div>
+                "<span class='card-title'>$text</span>
+                <div class='card-action'>
+                  <button class='btn-small gonicus-color' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
                 </div>" : 
                 "<div class='plugin-enable-header'>
                     <p>$text</p>
@@ -677,15 +673,12 @@ class plugin
       $state= "";
     }
     $display =  (check_for_materialize_theme() ? 
-                  "<div class='card'>
-                      <div class='card-content'>
-                        <span class='card-title'>$text</span>
-                      </div>
-                    <div class='card-action'>
-                      <button class='btn-small gonicus-color' type='submit' name='modify_state' ".$state.">
-                        $button_text
-                      </button>
-                    </div>" : 
+                  "<span class='card-title'>$text</span>
+                  <div class='card-action'>
+                    <button class='btn-small gonicus-color' type='submit' name='modify_state' ".$state.">
+                      $button_text
+                    </button>
+                  </div>" : 
                   "<div class='plugin-disable-header'>
                     <p>$text</p>
                     <button type='submit' name=\"modify_state\" ".$state.">

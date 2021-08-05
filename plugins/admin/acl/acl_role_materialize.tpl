@@ -85,11 +85,6 @@
 </div>
 {/if}
 
-<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('select');
-		var instances = M.FormSelect.init(elems, {});
-	  });
-</script>
+
 
 <input type='hidden' name='acl_role_posted' value='1'>

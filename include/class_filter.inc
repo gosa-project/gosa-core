@@ -462,7 +462,7 @@ class filter {
     {
 
         if(check_for_materialize_theme()) {
-            $result="   <a class='dropdown-filter btn-small gonicus-color' data-target='filter-dropdown'>
+            $result="   <a class='dropdown-menu btn-small gonicus-color' data-target='filter-dropdown'>
                             <i class='material-icons right'>arrow_drop_down</i>
                             <i class='material-icons'>filter_alt</i>
                         </a>";
@@ -539,18 +539,6 @@ class filter {
                             </li>";
 
             $result.="</ul></li></ul>";
-
-            $result.="  <script type='text/javascript'>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var elems = document.querySelectorAll('.dropdown-filter');
-                                var instances = M.Dropdown.init(elems, {
-                                    'constrainWidth': false,
-                                    'coverTrigger': false,
-                                    'hover': true,
-                                    'alignment': 'right',
-                                });
-                            });
-                        </script>";
             
             $gridClass="class='col s1'";
         } else {
