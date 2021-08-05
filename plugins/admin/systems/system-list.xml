@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <definition>
+    <departmentBrowser>true</departmentBrowser>
+    <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>true</baseMode>
+    <multiSelect>true</multiSelect>
+    <template>system-list.tpl</template>
+    <label>List of systems</label>
+    <defaultSortColumn>1</defaultSortColumn>
+
+    <objectType>
+      <label>Device</label>
+      <objectClass>registeredDevice</objectClass>
+      <category>Device</category>
+      <class>Device</class>
+      <image>images/lists/edit.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Opsi host</label>
+      <objectClass>FAKE_OC_OpsiHost</objectClass>
+      <category>opsi</category>
+      <class>opsiGeneric</class>
+      <image>plugins/systems/images/select_winstation.png</image>
+    </objectType>
+
+    <objectType>
+      <label>New workstation</label>
+      <objectClass>FAKE_OC_NewWorkstation</objectClass>
+      <category>workstation</category>
+      <class>workgeneric</class>
+      <image>plugins/systems/images/select_workstation.png[new]</image>
+    </objectType>
+
+    <objectType>
+      <label>Locked server</label>
+      <objectClass>goServer__IS_LOCKED</objectClass>
+      <category>server</category>
+      <class>servgeneric</class>
+      <image>plugins/systems/images/select_server.png[locked]</image>
+    </objectType>
+
+    <objectType>
+      <label>Locked workstation</label>
+      <objectClass>gotoWorkstation__IS_LOCKED</objectClass>
+      <category>workstation</category>
+      <class>workgeneric</class>
+      <image>plugins/systems/images/select_workstation.png[locked]</image>
+    </objectType>
+
+    <objectType>
+      <label>Locked terminal</label>
+      <objectClass>gotoTerminal__IS_LOCKED</objectClass>
+      <category>terminal</category>
+      <class>termgeneric</class>
+      <image>plugins/systems/images/select_terminal.png[locked]</image>
+    </objectType>
+
+
+    <objectType>
+      <label>New terminal</label>
+      <objectClass>FAKE_OC_NewTerminal</objectClass>
+      <category>terminal</category>
+      <class>termgeneric</class>
+      <image>plugins/systems/images/select_terminal.png[new]</image>
+    </objectType>
+
+    <objectType>
+      <label>New unknown device</label>
+      <objectClass>FAKE_OC_ArpNewDevice</objectClass>
+      <category>incoming</category>
+      <class>ArpNewDevice</class>
+      <image>images/lists/element.png[new]</image>
+    </objectType>
+
+    <objectType>
+      <label>New device</label>
+      <objectClass>FAKE_OC_NewDevice</objectClass>
+      <category>incoming</category>
+      <class>systemManagement</class>
+      <image>images/lists/element.png[new]</image>
+    </objectType>
+
+    <objectType>
+      <label>Workstation template</label>
+      <objectClass>FAKE_OC_WorkstationTemplate</objectClass>
+      <category>workstation</category>
+      <class>workgeneric</class>
+      <image>plugins/systems/images/select_default.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Terminal template</label>
+      <objectClass>FAKE_OC_TerminalTemplate</objectClass>
+      <category>terminal</category>
+      <class>termgeneric</class>
+      <image>plugins/systems/images/select_default.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Windows workstation</label>
+      <objectClass>FAKE_OC_winstation</objectClass>
+      <category>winworkstation</category>
+      <class>wingeneric</class>
+      <image>plugins/systems/images/select_winstation.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Server</label>
+      <objectClass>goServer</objectClass>
+      <category>server</category>
+      <class>servgeneric</class>
+      <image>plugins/systems/images/select_server.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Workstation</label>
+      <objectClass>gotoWorkstation</objectClass>
+      <category>workstation</category>
+      <class>workgeneric</class>
+      <image>plugins/systems/images/select_workstation.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Terminal</label>
+      <objectClass>gotoTerminal</objectClass>
+      <category>terminal</category>
+      <class>termgeneric</class>
+      <image>plugins/systems/images/select_terminal.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Printer</label>
+      <objectClass>gotoPrinter</objectClass>
+      <category>printer</category>
+      <class>printgeneric</class>
+      <image>plugins/systems/images/select_printer.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Phone</label>
+      <objectClass>goFonHardware</objectClass>
+      <category>phone</category>
+      <class>phoneGeneric</class>
+      <image>plugins/systems/images/select_phone.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Component</label>
+      <objectClass>ieee802Device</objectClass>
+      <category>component</category>
+      <class>componentGeneric</class>
+      <image>plugins/systems/images/select_component.png</image>
+    </objectType>
+
+  </definition>
+
+  <table>
+    <layout>|20px;c|||80px|170px;r|</layout>
+
+    <department>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </department>
+
+    <department>
+      <value>%{filter:departmentLink(row,dn,description)}</value>
+      <span>2</span>
+    </department>
+
+    <column>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </column>
+
+    <column>
+      <label>Name</label>
+      <sortAttribute>cn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:filterLink(row,dn,"%s",cn,pid)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Description</label>
+      <sortAttribute>description</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:filterSystemDescription(row,dn,pid,state,description)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Release</label>
+      <sortAttribute>description</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:systemRelease(row,dn,"%s",objectClass,FAIclass)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Actions</label>
+      <value>%{filter:actions(dn,row,objectClass)}</value>
+    </column>
+
+  </table>
+
+  <actionmenu>
+
+    <action>
+     <type>sub</type>
+     <image>images/lists/element.png[new]</image>
+     <label>Create</label>
+
+     <action>
+      <name>new_device</name>
+      <type>entry</type>
+      <image>images/lists/edit.png</image>
+      <label>Device</label>
+      <depends>Device</depends>
+     </action>
+
+     <action>
+      <name>new_goServer</name>
+      <type>entry</type>
+      <image>plugins/systems/images/select_server.png[new]</image>
+      <label>Server</label>
+      <depends>servgeneric</depends>
+     </action>
+
+     <action>
+      <name>new_gotoWorkstation</name>
+      <type>entry</type>
+      <image>plugins/systems/images/select_workstation.png[new]</image>
+      <label>Workstation</label>
+      <depends>workgeneric</depends>
+     </action>
+
+     <action>
+      <name>new_gotoTerminal</name>
+      <type>entry</type>
+      <image>plugins/systems/images/select_terminal.png[new]</image>
+      <label>Terminal</label>
+      <depends>termgeneric</depends>
+     </action>
+
+     <action>
+      <name>new_gotoPrinter</name>
+      <type>entry</type>
+      <image>plugins/systems/images/select_printer.png[new]</image>
+      <label>Network printer</label>
+      <depends>printgeneric</depends>
+     </action>
+
+     <action>
+      <name>new_goFonHardware</name>
+      <type>entry</type>
+      <image>plugins/systems/images/select_phone.png[new]</image>
+      <label>Phone</label>
+      <depends>phoneGeneric</depends>
+     </action>
+
+     <action>
+      <name>new_ieee802Device</name>
+      <type>entry</type>
+      <image>plugins/systems/images/select_component.png[new]</image>
+      <label>Network device</label>
+      <depends>componentGeneric</depends>
+     </action>
+
+     <action>
+      <name>new_FAKE_OC_OpsiHost</name>
+      <type>entry</type>
+      <image>plugins/systems/images/select_winstation.png[new]</image>
+      <label>Opsi client</label>
+      <depends>opsi</depends>
+     </action>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+     <type>sub</type>
+     <image>images/rocket.png</image>
+     <label>Trigger action</label>
+
+      <action>
+        <name>T_DaemonEvent_halt</name>
+        <depends>DaemonEvent_halt</depends>
+        <type>entry</type>
+        <image>images/lists/reload.png</image>
+        <label>Halt </label>
+      </action>
+
+      <action>
+        <name>T_DaemonEvent_reboot</name>
+        <depends>DaemonEvent_reboot</depends>
+        <type>entry</type>
+        <image>images/lists/reload.png</image>
+        <label>Reboot</label>
+      </action>
+
+      <action>
+        <name>T_DaemonEvent_wakeup</name>
+        <depends>DaemonEvent_wakeup</depends>
+        <type>entry</type>
+        <image>images/lists/on.png</image>
+        <label>Wakeup</label>
+      </action>
+
+      <action>
+        <name>T_DaemonEvent_update</name>
+        <depends>DaemonEvent_update</depends>
+        <type>entry</type>
+        <image>plugins/goto/images/update.png</image>
+        <label>Update</label>
+      </action>
+
+      <action>
+        <name>T_DaemonEvent_lock</name>
+        <depends>DaemonEvent_lock</depends>
+        <type>entry</type>
+        <image>images/lists/locked.png</image>
+        <label>Lock</label>
+      </action>
+
+      <action>
+        <name>T_DaemonEvent_activate</name>
+        <depends>DaemonEvent_activate</depends>
+        <type>entry</type>
+        <image>images/lists/unlocked.png</image>
+        <label>Activate</label>
+      </action>
+
+      <action>
+        <name>T_DaemonEvent_reinstall</name>
+        <depends>DaemonEvent_reinstall</depends>
+        <type>entry</type>
+        <image>plugins/goto/images/reinstall.png</image>
+        <label>Reinstall</label>
+      </action>
+
+
+    </action>
+
+
+
+    <action>
+     <type>sub</type>
+     <image>plugins/systems/images/clock.png</image>
+     <label>Schedule action</label>
+
+      <action>
+        <name>S_DaemonEvent_halt</name>
+        <depends>DaemonEvent_halt</depends>
+        <type>entry</type>
+        <image>images/lists/off.png</image>
+        <label>Halt</label>
+      </action>
+
+      <action>
+        <name>S_DaemonEvent_reboot</name>
+        <depends>DaemonEvent_reboot</depends>
+        <type>entry</type>
+        <image>images/lists/reload.png</image>
+        <label>Reboot</label>
+      </action>
+
+      <action>
+        <name>S_DaemonEvent_wakeup</name>
+        <depends>DaemonEvent_wakeup</depends>
+        <type>entry</type>
+        <image>images/lists/on.png</image>
+        <label>Wakeup</label>
+      </action>
+
+      <action>
+        <name>S_DaemonEvent_update</name>
+        <depends>DaemonEvent_update</depends>
+        <type>entry</type>
+        <image>plugins/goto/images/update.png</image>
+        <label>Update</label>
+      </action>
+
+      <action>
+        <name>S_DaemonEvent_lock</name>
+        <depends>DaemonEvent_lock</depends>
+        <type>entry</type>
+        <image>images/lists/locked.png</image>
+        <label>Lock</label>
+      </action>
+
+      <action>
+        <name>S_DaemonEvent_activate</name>
+        <depends>DaemonEvent_activate</depends>
+        <type>entry</type>
+        <image>images/lists/unlocked.png</image>
+        <label>Activate</label>
+      </action>
+
+      <action>
+        <name>S_DaemonEvent_reinstall</name>
+        <depends>DaemonEvent_reinstall</depends>
+        <type>entry</type>
+        <image>plugins/goto/images/reinstall.png</image>
+        <label>Reinstall</label>
+      </action>
+
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <name>activateMultiple</name>
+      <depends>DaemonEvent_activate</depends>
+      <type>entry</type>
+      <image>images/lists/unlocked.png</image>
+      <label>Activate systems</label>
+    </action>
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <label>Remove</label>
+    </action>
+
+    <action>
+      <type>exporter</type>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <type>copypaste</type>
+    </action>
+
+    <action>
+      <type>snapshot</type>
+    </action>
+
+  </actionmenu>
+
+  <actiontriggers snapshot="true" copypaste="true">
+
+    <action>
+      <name>setPassword</name>
+      <type>entry</type>
+      <objectclass>FAKE_OC_PWD_changeAble</objectclass>
+      <image>images/lists/key.png</image>
+      <label>Change password</label>
+    </action>
+
+
+    <action>
+      <name>createISO</name>
+      <type>entry</type>
+      <objectclass>gotoWorkstation</objectclass>
+      <objectclass>FAIobject</objectclass>
+      <image>plugins/systems/images/cdrom.png</image>
+      <acl>workstation/workgeneric[createFAICD:w]</acl>
+      <label>Create ISO</label>
+    </action>
+
+    <action>
+      <name>cp</name>
+      <type>copypaste</type>
+    </action>
+
+    <action>
+      <name>edit</name>
+      <type>entry</type>
+      <image>images/lists/edit.png</image>
+      <label>Edit device</label>
+    </action>
+
+    <action>
+      <name>snapshot</name>
+      <type>snapshot</type>
+    </action>
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <acl>%acl[d]</acl>
+      <label>Remove system</label>
+    </action>
+
+  </actiontriggers>
+
+</list>

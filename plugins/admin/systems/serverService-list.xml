@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+  <definition>
+    <departmentBrowser>false</departmentBrowser>
+    <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>false</baseMode>
+    <multiSelect>true</multiSelect>
+    <template>serverService-list.tpl</template>
+    <label>List of services</label>
+    <defaultSortColumn>1</defaultSortColumn>
+    <noAclChecks>true</noAclChecks>
+
+    <objectType>
+      <label>Service</label>
+      <objectClass>FAKE_OC_ServerService</objectClass>
+      <category>server</category>
+      <class>ServerService</class>
+      <image>images/lits/lists/element.png[new]</image>
+    </objectType>
+
+  </definition>
+
+  <table>
+    <layout>|18px;c||170px;r|</layout>
+
+    <column>
+      <label>!</label>
+      <sortAttribute>Status</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:filterServiceStatus(row,dn,"%s",Status)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Description</label>
+      <sortAttribute>Message</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:link(row,dn,"%s",Message)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Actions</label>
+      <value>%{filter:actions(dn,row,objectClass)}</value>
+    </column>
+
+  </table>
+
+  <actionmenu>
+
+    %SERVICES%
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <label>Remove</label>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <name>start</name>
+      <type>entry</type>
+      <image>images/status_start.png</image>
+      <label>Start</label>
+    </action>
+
+    <action>
+      <name>stop</name>
+      <type>entry</type>
+      <image>images/status_stop.png</image>
+      <label>Stop</label>
+    </action>
+
+    <action>
+      <name>restart</name>
+      <type>entry</type>
+      <image>images/lists/reload.png</image>
+      <label>Restart</label>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <type>exporter</type>
+    </action>
+
+  </actionmenu>
+
+  <actiontriggers snapshot="false" copypaste="false">
+
+    <action>
+      <name>start</name>
+      <type>entry</type>
+      <image>images/status_start.png</image>
+      <objectclass>AllowStart</objectclass> 
+      <label>Start</label>
+    </action>
+
+    <action>
+      <name>stop</name>
+      <type>entry</type>
+      <image>images/status_stop.png</image>
+      <objectclass>AllowStop</objectclass> 
+      <label>Stop</label>
+    </action>
+
+    <action>
+      <name>restart</name>
+      <type>entry</type>
+      <image>images/lists/reload.png</image>
+      <objectclass>AllowRestart</objectclass> 
+      <label>Restart</label>
+    </action>
+
+    <action>
+      <name>edit</name>
+      <type>entry</type>
+      <image>images/lists/edit.png</image>
+      <objectclass>AllowEdit</objectclass> 
+      <label>Edit service</label>
+    </action>
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <objectclass>AllowRemove</objectclass> 
+      <label>Remove service</label>
+    </action>
+
+  </actiontriggers>
+
+</list>
