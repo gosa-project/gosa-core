@@ -220,6 +220,7 @@
 }
 
 .content .card-content .control-panel .search-field input {
+    font-size: 12px;
     height: 24px;
     margin: 0;
     margin-right: 0.75rem;
