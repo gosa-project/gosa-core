@@ -1,12 +1,12 @@
 {if !$warningAccepted}
 
 <div class="row valign-wrapper">
-  <div class="col s2">
-    {image path='<i class="material-icons md-48 orange-text">warning</i>'}
+  <div class="col s2 attention-icon">
+    {image path='<i class="material-icons orange-text">warning</i>'}
   </div>
 
-  <div class="col s10">
-    <h3>{t}Attention{/t}</h3>
+  <div class="col s10 attention-content">
+    <h2>{t}Attention{/t}</h2>
 
     <p>
       {t}Modifying properties may break your setup, destroy or mess up your LDAP database, lead to security holes or it can even make a login impossible!{/t}
@@ -18,15 +18,14 @@
     <p>
       {t}If you've debarred yourself, you can try to set 'ignoreLdapProperties' to 'true' in your gosa.conf main section. This will make GOsa ignore LDAP based property values.{/t}
     </p>
+
+    <div class="attention">
+      <label>
+        <input type='checkbox' name='warningAccepted' value='1' id='warningAccepted'/>
+        <span>{t}I understand that there are certain risks, but I want to modify properties!{/t}</span>
+      </label>
+    </div>
   </div>
-</div>
-
-
-<div class="attention">
-  <label>
-    <input type='checkbox' name='warningAccepted' value='1' id='warningAccepted'/>
-    <span>{t}I understand that there are certain risks, but I want to modify properties!{/t}</span>
-  </label>
 </div>
 
 <div class="card-action">

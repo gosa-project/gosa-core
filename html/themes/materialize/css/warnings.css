@@ -1,9 +1,17 @@
+.attention-icon {
+    text-align: center;
+}
+
+.attention-icon i {
+    font-size: 80px;
+}
+
 .attention {
     color: #842029;
     background-color: #f8d7da;
     border-color: #f5c2c7;
+    margin-top: 20px;
     padding: 20px;
-    margin-left: 16.6666666667%;
 }
 
 .attention label {
