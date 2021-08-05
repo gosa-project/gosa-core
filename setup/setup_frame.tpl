@@ -10,17 +10,33 @@
   <form action='setup.php' name='mainform' method='post' enctype='multipart/form-data'>
    {$msg_dialogs}
 
-   <div class='plugin-area' style='margin:10px;'>
-    <div class='plugin'>
-    {if isset($errors)}{$errors}{/if}
-    {$header}
-    <hr>
-    {$contents}
-    <hr>
-    {$bottom}
-   </div>
-   </div>
-   <input type='hidden' name='setup_goto_step' value=''>
-  </form>
+    
+    <div class="row">
+        <form action='setup.php' name='mainform' method='post' enctype='multipart/form-data'>
+            {$msg_dialogs}
+    
+            {if isset($errors)}{$errors}{/if}
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">{$header}</span>
+                                {$contents}
+                            </div>
+                            <div class="card-action">
+                                {$bottom}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <input type='hidden' name='setup_goto_step' value=''>
+        </form>
+    </div>
+    
+    <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
+    <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
+
  </body>
 </html>

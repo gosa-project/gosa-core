@@ -444,8 +444,9 @@ class filter
 
     public function renderFilterMenu()
     {
-        if (check_for_materialize_theme()) {
-            $result = "   <a class='dropdown-filter btn gonicus-color' data-target='filter-dropdown'>
+
+        if(check_for_materialize_theme()) {
+            $result="   <a class='dropdown-menu btn-small gonicus-color' data-target='filter-dropdown'>
                             <i class='material-icons right'>arrow_drop_down</i>
                             <i class='material-icons'>filter_alt</i>
                         </a>";
@@ -521,21 +522,9 @@ class filter
                                 </a>
                             </li>';
 
-            $result .= '</ul></li></ul>';
-
-            $result .= "  <script type='text/javascript'>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var elems = document.querySelectorAll('.dropdown-filter');
-                                var instances = M.Dropdown.init(elems, {
-                                    'constrainWidth': false,
-                                    'coverTrigger': false,
-                                    'hover': false,
-                                    'alignment': 'right',
-                                });
-                            });
-                        </script>";
-
-            $gridClass = "class='filtermenu'";
+            $result.="</ul></li></ul>";
+            
+            $gridClass="class='col s1'";
         } else {
             // Load shortcut
             $result = "<ul class='level1' id='filter-root'><li><a href='#'>".image('images/filter.png').image('images/lists/sort-down.png').'</a>';

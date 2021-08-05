@@ -66,7 +66,6 @@
 
                 <!-- Plugin Content-->
                 <div class="col s11 content">
-                    <div class="breadcrumb-nav" style="display: none">{$breadcrumb}</div>
                     <div class="card {if $noMenuMode}-noMenu{/if}">
                         <div class="card-content">
                             {$contents}
@@ -109,12 +108,6 @@
     </script>
 
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
-
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.collapsible');
-            var instances = M.Collapsible.init(elems, {});
-        });
-    </script>
+    <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
 
 </body>

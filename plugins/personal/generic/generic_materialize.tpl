@@ -10,13 +10,6 @@
     {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
     <button class="btn-small gonicus-color" type="submit" name="edit_picture">{t}Change picture{/t}...</button>
     {/render}
-
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.materialboxed');
-        var instances = M.Materialbox.init(elems, {});
-      });
-    </script>
   </div>
   <div class="col s5">
     {if $is_template ne "true"}
@@ -84,16 +77,6 @@
     <div class="input-field">
       {render acl=$dateOfBirthACL}
       <input class="datepicker" type="text" id="dateOfBirth" name="dateOfBirth" value="{$dateOfBirth}">
-      {if $dateOfBirthACL|regex_replace:"/[cdmr]/":"" == "w"}
-      {literal}
-      <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-          var elems = document.querySelectorAll('.datepicker');
-          var instances = M.Datepicker.init(elems, {});
-        });
-      </script>
-      {/literal}
-      {/if}
       {/render}
       <label for="dateOfBirth">{t}Date of birth{/t}</label>
     </div>
@@ -119,15 +102,6 @@
       {/render}
       <label for="preferredLanguage">{t}Preferred language{/t}</label>
     </div>
-
-    {literal}
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
-      });
-    </script>
-    {/literal}
 
     {render acl=$baseACL checkbox=$multiple_support checked=$use_base}
     <div class="input-field col s3">
@@ -313,13 +287,6 @@
         {render acl=$managerACL}
         {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
         {/render}
-
-        <script type="text/javascript">
-          document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.tooltipped');
-            var instances = M.Tooltip.init(elems, {});
-          });
-        </script>
         {/if}
       </div>
 
@@ -548,13 +515,6 @@
       {/render}
       <label for="publicVisible">{t}Public visible{/t}</label>
     </div>
-
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
-      });
-    </script>
 
   </div>
   {/if}

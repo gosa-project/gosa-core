@@ -176,12 +176,17 @@ class tabs
             "\n        </div>";
     }else{
 
-        $display =   
-            "\n        {$tabs}".
-            "\n        <input type='hidden' name='arg' value=''>".
-            "\n        <div class='tab-content'>".
-            "\n          {$display}".
-            "\n        </div>";
+        $display =  (check_for_materialize_theme() ? 
+                      "{$tabs}
+                      <input type='hidden' name='arg' value=''>
+                      <div class='scroll'>
+                        {$display}
+                      </div>" : 
+                      "{$tabs}
+                      <input type='hidden' name='arg' value=''>
+                      <div class='tab-content'>
+                        {$display}
+                      </div>");
     }
 
     // Detect if we've modifications right now.

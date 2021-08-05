@@ -230,30 +230,18 @@ class sortableListing {
 
     public function render()
     {	
-        $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
-        $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
-        $action_width= 0;
-        if (strpos($this->acl, 'w') === false) {
-            $edit_image= $this->editable?image("images/lists/edit-grey.png"):"";
-        } else {
-            $edit_image= $this->editable?image('images/lists/edit.png', "%ID", _("Edit this entry")):"";
-        }
-        if (strpos($this->acl, 'w') === false) {
-            $delete_image= $this->deleteable?image('images/lists/trash-grey.png'):"";
-        } else {
-            $delete_image= $this->deleteable?image('images/lists/trash.png', "%ID", _("Delete this entry")):"";
-        }
-
-        // Do we need colspecs?
-        $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
-        if ($this->colspecs) {
-            $result.= " <colgroup>\n";
-            for ($i= 0; $i<$this->columns; $i++) {
-                if(isset($this->colspecs[$i]) && $this->colspecs[$i] != '*'){
-                    $result.= "  <col style='width:".($this->colspecs[$i])."'>\n";
-                }else{
-                    $result.= "  <col>\n";
-                }
+        if(check_for_materialize_theme()) {
+            $result = " <div id='scroll_".$this->id."' class='acl-member'>
+                            <table ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
+            if (strpos($this->acl, 'w') === false) {
+                $edit_image = $this->editable?image("<i class='material-icons'>edit</i>"):"";
+            } else {
+                $edit_image = $this->editable?image("<i class='material-icons'>edit</i>", "%ID", _("Edit this entry")):"";
+            }
+            if (strpos($this->acl, 'w') === false) {
+                $delete_image= $this->deleteable?image("<i class='material-icons'>delete</i>"):"";
+            } else {
+                $delete_image= $this->deleteable?image("<i class='material-icons'>delete</i>", "%ID", _("Delete this entry")):"";
             }
 
             // Extend by another column if we've actions specified

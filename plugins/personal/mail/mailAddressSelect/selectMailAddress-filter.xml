@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <category>users</category>
+    <initial>true</initial>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>cn</attribute>
+    <attribute>description</attribute>
+    <attribute>mail</attribute>
+    <attribute>uid</attribute>
+    <attribute>sn</attribute>
+    <attribute>givenName</attribute>
+    <attribute>gotoHotplugDevice</attribute>
+    <default>default</default>
+    <scope>auto</scope>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Default filter</label>
+    <query>
+      <backend>NOACL</backend>
+      <filter>(&amp;(objectClass=gosaMailAccount)(mail=$))</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+</filterdef>
