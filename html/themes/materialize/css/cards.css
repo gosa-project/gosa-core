@@ -1,11 +1,12 @@
-.card {
+.card.first-level {
     margin-top: 0;
     max-height: calc(100vh - 134px);
     overflow: hidden;
 }
 
-.card-content {
+.card-content.first-level {
     max-height: inherit;
+    overflow: auto;
 }
 
 .card h2.card-title {

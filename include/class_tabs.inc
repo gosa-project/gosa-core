@@ -184,7 +184,7 @@ class tabs
                           {$tabs}
                         </div>
                         <input type='hidden' name='arg' value=''>
-                        <div class='content-wrapper'>
+                        <div class='content-wrapper card-content-scroll'>
                           {$display}
                         </div>
                       </div>" :

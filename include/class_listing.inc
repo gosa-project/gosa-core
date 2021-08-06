@@ -322,7 +322,7 @@ class listing
         }
 
         if (check_for_materialize_theme()) {
-            $result .= "  <div class='section scrollspy' id='d_scrollbody'>
+            $result .= "  <div class='section scrollspy card-content-scroll' id='d_scrollbody'>
                             <table id='tree-table' class='highlight responsive-table'>";
             $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
 
