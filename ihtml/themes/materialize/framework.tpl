@@ -66,8 +66,9 @@
 
                 <!-- Plugin Content-->
                 <div class="col s11 content">
-                    <div class="card {if $noMenuMode}-noMenu{/if}">
-                        <div class="card-content">
+                    <div class="breadcrumb-nav" style="display: none">{$breadcrumb}</div>
+                    <div class="card first-level {if $noMenuMode}-noMenu{/if}">
+                        <div class="card-content first-level">
                             {$contents}
                         </div>
                     </div>
@@ -108,6 +109,20 @@
     </script>
 
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
-    <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems, {});
+
+            let scrollElem = document.querySelectorAll('.card-content-scroll');
+
+            if (scrollElem.length !== 0) {
+                let cardContent = document.querySelector('.card-content');
+                cardContent.style.overflow = "hidden"
+            }
+        });
+    </script>
+
 
 </body>
