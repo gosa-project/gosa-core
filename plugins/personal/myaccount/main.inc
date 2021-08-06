@@ -24,14 +24,14 @@
 /* Remove locks created by this plugin
 */
 $lock_msg="";
-if ($remove_lock || 
-        isset($_POST['edit_cancel']) || 
+if ($remove_lock ||
+        isset($_POST['edit_cancel']) ||
         isset($_POST['password_cancel'])){
     del_lock($ui->dn);
 }
 
 /* Reset requested? */
-if (isset($_POST['edit_cancel']) || $cleanup || isset($_POST['password_changed'])){ 
+if (isset($_POST['edit_cancel']) || $cleanup || isset($_POST['password_changed'])){
     session::un_set ('edit');
     session::un_set ('MyAccountTabs');
 }
@@ -51,7 +51,7 @@ if (! $cleanup ){
                     ERROR_DIALOG);
         }else{
 
-            $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true); 
+            $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true);
             $MyAccountTabs->setReadOnly(TRUE);
             $MyAccountTabs->enableAutoSaveObject(FALSE);
             session::set('MyAccountTabs',$MyAccountTabs);
@@ -94,7 +94,7 @@ if (! $cleanup ){
                     $MyAccountTabs->password_change_needed = TRUE;
                 }else{
                     session::un_set ('MyAccountTabs');
-                    $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true); 
+                    $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true);
                     $MyAccountTabs->setReadOnly(TRUE);
                 }
             } else {
@@ -102,7 +102,7 @@ if (! $cleanup ){
             }
         }
 
-        // Build up password class to make password-hash changes 
+        // Build up password class to make password-hash changes
         //  effective, by setting a new password.
         if($MyAccountTabs->password_change_needed){
             if(!isset($MyAccountTabs->passwordClass)){
@@ -137,19 +137,27 @@ if (! $cleanup ){
         /* Show page footer depending on the mode */
         if (!$MyAccountTabs->is_modal_dialog() && empty($lock_msg) && !$MyAccountTabs->password_change_needed){
 
-            $display.= "<div class='plugin-actions'>";
+            if (check_for_materialize_theme()) {
+                $display.=" <div class='card-action'><div class='row'>";
 
-            /* Are we in edit mode? */
-            if (session::is_set('edit')){
-                $display.= "<button class='button' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-                $display.= "<button class='button' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
+                /* Are we in edit mode? */
+                if (session::is_set('edit')){
+                    $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
+                    $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
+                } else {
+                    if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
+                        $display.= "<button class='btn-small gonicus-color' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                    }
+                    $display.= "<input type='hidden' name='ignore'>\n";
+                }
+                $display.=" </div></div>";
             } else {
                 if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
                     $display.= "<button class='button' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
                 }
                 $display.= "<input type='hidden' name='ignore'>\n";
             }
-            $display.= "</div>\n";
+
         }
     }
 }

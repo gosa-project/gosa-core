@@ -1,3 +1,13 @@
+.card {
+    margin-top: 0;
+    max-height: calc(100vh - 134px);
+    overflow: hidden;
+}
+
+.card-content {
+    max-height: inherit;
+}
+
 .card h2.card-title {
     font-size: 20px;
     font-weight: bold;
@@ -64,4 +74,12 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+}
+
+.card .card-content .card-action {
+    padding: 20px 0px 0px 0px;
+}
+
+.card .card-content .card-action .row {
+    margin: 0;
 }

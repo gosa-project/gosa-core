@@ -1,12 +1,13 @@
-.collapsible {
+.menu .collapsible {
+    margin-top: 0;
     box-shadow: none;
 }
 
-.collapsible-header {
+.menu .collapsible-header {
     padding: 5px 10px;
 }
 
-.collection .collection-item {
+.menu .collection .collection-item {
     padding: 5px 10px;
     border-left: 4px solid transparent;
     -webkit-transition: border 0.5s ease-out;
@@ -14,8 +15,8 @@
     transition: border 0.5s ease-out;
 }
 
-.collection .collection-item.active,
-.collection .collection-item:hover {
+.menu .collection .collection-item.active,
+.menu .collection .collection-item:hover {
     border-left-color: #2A3278;
     background: #FFFFFF;
 }
