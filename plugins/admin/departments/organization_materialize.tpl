@@ -64,13 +64,6 @@
                 {render acl=$managerACL}
                 {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
                 {/render}
-
-                <script type="text/javascript">
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var elems = document.querySelectorAll('.tooltipped');
-                        var instances = M.Tooltip.init(elems, {});
-                    });
-                </script>
             </div>
         </div>
         {/if}

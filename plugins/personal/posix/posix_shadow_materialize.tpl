@@ -49,16 +49,6 @@
           value="{$shadowExpire}">
         {/render}
       </div>
-      {if $shadowExpireACL|regex_replace:"/[cdmr]/":"" == "w"}
-      <script type="text/javascript">
-        {literal}
-        document.addEventListener('DOMContentLoaded', function () {
-          var elems = document.querySelectorAll('.datepicker');
-          var instances = M.Datepicker.init(elems, {});
-        });
-        {/literal}
-      </script>
-      {/if}
     </div>
 
     <!-- shadowInactive -->

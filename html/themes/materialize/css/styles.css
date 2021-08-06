@@ -9,7 +9,7 @@ body {
     margin: 0;
     font-family: "LiberationSans", Arial, Verdana, sans-serif;
     font-size: 12px;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 h1 {
@@ -48,7 +48,7 @@ input {
 
 .content-area {
     margin-top: 20px;
-    padding: 12px
+    padding: 12px;
 }
 
 .content-area .col.menu {

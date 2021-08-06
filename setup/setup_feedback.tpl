@@ -172,14 +172,4 @@
 <button class="btn-small gonicus-color" type='submit' name='send_feedback'>{t}Send feedback{/t}</button>
 
 {/if}
-
-<script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
-
-<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('select');
-		var instances = M.FormSelect.init(elems, {});
-	  });
-</script>
-
 <input type='hidden' name='step_feedback' value='1'>

@@ -76,6 +76,7 @@
   </div>
 
   <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
+  <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
 
   <script type="text/javascript">
     document.cookie = "gosatest=empty;path=/";
@@ -83,13 +84,6 @@
       document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
     else
       document.write("<div class='card-panel red lighten-3'>{$cookies}<\/div>");
-  </script>
-
-  <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('select');
-      var instances = M.FormSelect.init(elems, {});
-    });
   </script>
 
   <script language="JavaScript" type="text/javascript">

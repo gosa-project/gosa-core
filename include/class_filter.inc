@@ -514,18 +514,6 @@ class filter
 
             $result .= '</ul></li></ul>';
 
-            $result .= "  <script type='text/javascript'>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var elems = document.querySelectorAll('.dropdown-filter');
-                                var instances = M.Dropdown.init(elems, {
-                                    'constrainWidth': false,
-                                    'coverTrigger': false,
-                                    'hover': false,
-                                    'alignment': 'right',
-                                });
-                            });
-                        </script>";
-
             $gridClass = "class='filtermenu'";
         } else {
             // Load shortcut

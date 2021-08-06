@@ -561,13 +561,7 @@ class listing
             $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
 
             // Add scroll positioner
-            $result .= "  <script type='text/javascript'>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var elems = document.querySelectorAll('.scrollspy');
-                                var instances = M.ScrollSpy.init(elems, {});
-                            });
-                        </script>";
-            $result .= "  <script type='text/javascript'>
+            $result.="  <script type='text/javascript'>
                             function test() {
                                 var paging = window.location.href;
                                 next_paging = '';
@@ -1505,21 +1499,10 @@ class listing
             // Load shortcut
             $actions = &$this->xmlData['actionmenu']['action'];
 
-            $result .= "  <a class='dropdown$level btn gonicus-color' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
+            $result .= "  <a class='dropdown-menu btn gonicus-color' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
                         <ul class='dropdown-content' id='$level'>";
 
             $result .= $this->recurseActions($actions, $level).'</ul></>';
-
-            $result .= "  <script type='text/javascript'>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var elems = document.querySelectorAll('.dropdown$level');
-                                var instances = M.Dropdown.init(elems, {
-                                    'constrainWidth': false,
-                                    'coverTrigger': false,
-                                    'hover': false,
-                                });
-                            });
-                        </script>";
 
             return $result;
         } else {
