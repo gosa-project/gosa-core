@@ -102,9 +102,10 @@ hr {
     padding-bottom: 4px;
 }
 
-textarea.materialize-textarea {
+
+/* textarea.materialize-textarea {
     min-height: 10rem !important;
-}
+} */
 
 [type="checkbox"].filled-in:checked+span:not(.lever)::after {
     border: 2px solid black !important;

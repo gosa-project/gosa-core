@@ -1,7 +1,7 @@
-<h5>{t}Personal information{/t}</h5>
+<h2>{t}Personal information{/t}</h2>
 
-<div class="row">
-  <div class="col s2 center-align">
+<div class="row content">
+  <div class="col s2 center-align user-image">
     {if !$userPicture_is_readable}
     <img src="plugins/users/images/default.jpg" alt='' class="materialboxed h-center">
     {else}
@@ -98,7 +98,6 @@
       <label for="dateOfBirth">{t}Date of birth{/t}</label>
     </div>
 
-    <br>
     <div class="input-field">
       {render acl=$genderACL}
       <select size="2" name="gender" id="gender" disabled>
@@ -110,7 +109,6 @@
 
     {/if}
 
-    <br>
     <div class="input-field">
       {render acl=$preferredLanguageACL checkbox=$multiple_support checked=$use_preferredLanguage}
       <select size="1" id="preferredLanguage" name="preferredLanguage">
@@ -124,13 +122,15 @@
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
+        var instances = M.FormSelect.init(elems, {
+          belowOrigin: true
+        });
       });
     </script>
     {/literal}
 
     {render acl=$baseACL checkbox=$multiple_support checked=$use_base}
-    <div class="input-field col s3">
+    <div class="input-field ldap-tree">
                         {$base}
                     </div>
     {/render}
@@ -177,35 +177,35 @@
 
     {if $is_template ne "true" && !$multiple_support}
 
-    <div class="input-field">
-      <div class="col s6">
-        {t}Certificates{/t}
-      </div>
-      <div class="col s6">
-        {render acl=$CertificatesACL mode=read_active}
-        <button class="btn-small gonicus-color" id="edit_cert" type="submit" name="edit_cert">{t}Edit
-          certificates{/t}...</button>
-        {/render}
-      </div>
+    <div class="input-field certificate">
+      {* <p>{t}Certificates{/t}</p> *}
+
+      {render acl=$CertificatesACL mode=read_active}
+      <button class="btn-small" id="edit_cert" type="submit" name="edit_cert">{t}Edit certificates{/t}...</button>
+      {/render}
     </div>
 
     {/if}
 
     {if !$multiple_support}
 
-    <label>{t}Restrict login to{/t}</label>
-    {render acl=$gosaLoginRestrictionACL}
-    {$gosaLoginRestrictionWidget}
-    {/render}
+    <div class="input-field acl-member-wrapper">
+      <label>{t}Restrict login to{/t}</label>
+      {render acl=$gosaLoginRestrictionACL}
+      {$gosaLoginRestrictionWidget}
+      {/render}
+    </div>
 
-    <div class="input-field">
+    <div class="file-field input-field">
       {render acl=$gosaLoginRestrictionACL}
-      <input type="text" id="res" name="res" maxlength=33 value="{t}IP or network{/t}"
-        onFocus='document.getElementById("res").value=""'>
+        <button class="btn btn-small" id="add_res" type="submit" name="add_res">{t}Add{/t}</button>
       {/render}
-      {render acl=$gosaLoginRestrictionACL}
-      <button class="btn-small gonicus-color" id="add_res" type="submit" name="add_res">{t}Add{/t}</button>
-      {/render}
+      <div class="file-path-wrapper">
+        {render acl=$gosaLoginRestrictionACL}
+          <input type="text" id="res" name="res" maxlength=33 value="{t}IP or network{/t}"
+          onFocus='document.getElementById("res").value=""'>
+        {/render}
+      </div>
     </div>
 
     {else}
@@ -285,78 +285,71 @@
       {/render}
       <label for="employeeType">{t}Employee type{/t}</label>
     </div>
+  </div>
 
+  <div class="col s4">
     {if !$multiple_support}
-
-    <div class="row valign-wrapper">
-
-      <div class="col s6">
-        <div class="input-field">
-          {render acl=$managerACL}
+      <div class="input-field manager">
+        {render acl=$managerACL}
           <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
-          {/render}
-          <label for="manager_name">{t}Manager{/t}</label>
+        {/render}
+        <label for="manager_name">{t}Manager{/t}</label>
+        <div class="icons">
+          <div class="icon">
+            {render acl=$managerACL}
+            {image path="<i class='material-icons input-icons'>edit</i>" action="editManager"}
+            {/render}
+          </div>
+
+          {if $manager!=""}
+            <div class="icon">
+              {render acl=$managerACL}
+              {image path="<i class='material-icons input-icons tooltipped' data-postion='bottom'
+                data-tooltip='{$manager}'>info</i>" title="{$manager}"}
+              {/render}
+            </div>
+
+            <div class="icon">
+              {render acl=$managerACL}
+              {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
+              {/render}
+            </div>
+
+            <script type="text/javascript">
+              document.addEventListener('DOMContentLoaded', function () {
+                var elems = document.querySelectorAll('.tooltipped');
+                var instances = M.Tooltip.init(elems, {});
+              });
+            </script>
+          {/if}
         </div>
       </div>
-
-      <div class="col s6">
-        {render acl=$managerACL}
-        {image path="<i class='material-icons input-icons'>edit</i>" action="editManager"}
-        {/render}
-
-        {if $manager!=""}
-        {render acl=$managerACL}
-        {image path="<i class='material-icons input-icons md-24 tooltipped' data-postion='bottom'
-          data-tooltip='{$manager}'>info</i>" title="{$manager}"}
-        {/render}
-
-        {render acl=$managerACL}
-        {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
-        {/render}
-
-        <script type="text/javascript">
-          document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.tooltipped');
-            var instances = M.Tooltip.init(elems, {});
-          });
-        </script>
-        {/if}
-      </div>
-
-    </div>
-
     {else}
-
-    <div class="row valign-wrapper">
-
-      <div class="col s1">
-        <input type='checkbox' value="1" name="use_manager" id="use_manager" {if $use_manager} checked {/if}
+      <div class="input-field manager">
+        <div class="icons prefix">
+          <input type='checkbox' value="1" name="use_manager" id="use_manager" {if $use_manager} checked {/if}
           onClick="document.mainform.submit();">
-      </div>
-
-      <div class="col s6">
-        <div class="input-field">
-          <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
-          <label for="manager_name">{t}Manager{/t}</label>
         </div>
-      </div>
-
-      <div class="col s5">
+        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
+        <label for="manager_name">{t}Manager{/t}</label>
         {if $use_manager}
-        {image path="<i class='material-icons'>edit</i>" action="editManager" acl=$managerACL}
-        {if $manager!=""}
-        {image path="<i class='material-icons'>info</i>" title="{$manager}" acl=$managerACL}
-        {image path="<i class='material-icons'>delete</i>" action="removeManager" acl=$managerACL}
-        {/if}
+          <div class="icons">
+            <div class="icon">
+              {image path="<i class='material-icons'>edit</i>" action="editManager" acl=$managerACL}
+            </div>
+            {if $manager!=""}
+              <div class="icon">
+                {image path="<i class='material-icons'>info</i>" title="{$manager}" acl=$managerACL}
+              </div>
+              <div class="icon">
+                {image path="<i class='material-icons'>delete</i>" action="removeManager" acl=$managerACL}
+              </div>
+            {/if}
+          </div>
         {/if}
       </div>
-
-    </div>
-
     {/if}
 
-  </div>
-  <div class="col s4">
     <div class="input-field">
       {render acl=$roomNumberACL checkbox=$multiple_support checked=$use_roomNumber}
       <input type="text" id="roomNumber" name="roomNumber" maxlength=60 value="{$roomNumber}">
@@ -388,7 +381,8 @@
       {/render}
       <label for="pager">{t}Pager{/t}</label>
     </div>
-
+  </div>
+  <div class="col s4">
     <div class="input-field">
       {render acl=$facsimileTelephoneNumberACL checkbox=$multiple_support checked=$use_facsimileTelephoneNumber}
       <input type="text" id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" maxlength=60
@@ -396,8 +390,7 @@
       {/render}
       <label for="facsimileTelephoneNumber">{t}Fax{/t}</label>
     </div>
-  </div>
-  <div class="col s4">
+
     <div class="input-field">
       {render acl=$lACL checkbox=$multiple_support checked=$use_l}
       <input type="text" id="l" name="l" maxlength=60 value="{$l}">
@@ -552,7 +545,9 @@
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, {});
+        var instances = M.FormSelect.init(elems, {
+          belowOrigin: true
+        });
       });
     </script>
 

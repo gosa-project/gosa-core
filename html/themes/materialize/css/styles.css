@@ -35,9 +35,19 @@ p {
 a {
     text-decoration: none;
     color: inherit;
+    font-size: 12px;
+}
+
+i,
+button,
+button.btn,
+button.btn-small,
+input {
+    font-size: 12px;
 }
 
 .content-area {
+    margin-top: 20px;
     padding: 12px
 }
 

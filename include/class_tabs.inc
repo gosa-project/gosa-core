@@ -34,7 +34,7 @@ class tabs
   var $by_name= array();
   var $by_object= array();
   var $SubDialog = false;
-  var $acl_category; 
+  var $acl_category;
   var $multiple_support_active = FALSE;
   var $isPluginModified = FALSE;
 
@@ -44,10 +44,10 @@ class tabs
   var $hide_refs = FALSE;
   var $hide_acls = FALSE;
 
-  // Normally 'save_object()' is called automatically when 'execute()' is called, but 
+  // Normally 'save_object()' is called automatically when 'execute()' is called, but
   //  sometimes we do not want this behaviour, e.g. when a tab is opened readonly.
   // If we call save_object for a 'read-only' tab, values may get lost.
-  var $skip_save_object = FALSE; 
+  var $skip_save_object = FALSE;
 
 
   /*! \brief    Enables or disables to automatic call to 'save_object' for a plugin,
@@ -57,8 +57,8 @@ class tabs
   {
     $this->skip_save_object = ($bool == FALSE);
   }
-    
-  
+
+
   function __construct(&$config, $data, $dn, $acl_category= "", $hide_refs = FALSE, $hide_acls = FALSE)
   {
     /* Save dn */
@@ -106,13 +106,13 @@ class tabs
     if(isset($_GET['pluginTab'])){
         $tab = $_GET['pluginTab'];
         if(isset($this->by_name[$tab])) $this->current = $tab;
-    } 
+    }
   }
 
- 
+
   /*! \brief Reinitializes the tab classes with fresh ldap values.
              This maybe usefull if for example the apply button was pressed.
-   */ 
+   */
   function re_init()
   {
     $baseobject= NULL;
@@ -141,7 +141,7 @@ class tabs
 
     pathNavigator::registerPlugin($this);
 
-    // Rotate current to last 
+    // Rotate current to last
     $this->last= $this->current;
 
     // Look for pressed tab button
@@ -161,7 +161,7 @@ class tabs
         }
     }
 
-    /* If multiple edit is enabled for this tab, 
+    /* If multiple edit is enabled for this tab,
        we have tho display different templates */
     if(!$this->multiple_support_active){
       $display= $this->by_object[$this->current]->execute();
@@ -172,18 +172,22 @@ class tabs
 
     if($this->is_modal_dialog()){
         $display = (check_for_materialize_theme() ?
-                      "{$display}" :  
+                      "{$display}" :
                       "<div class='plugin'>
                         {$display}
                       </div>");
     }else{
 
-        $display =  (check_for_materialize_theme() ? 
-                      "{$tabs}
-                      <input type='hidden' name='arg' value=''>
-                      <div>
-                        {$display}
-                      </div>" : 
+        $display =  (check_for_materialize_theme() ?
+                      "<div class='user-info'>
+                        <div class='card-tabs'>
+                          {$tabs}
+                        </div>
+                        <input type='hidden' name='arg' value=''>
+                        <div class='content-wrapper'>
+                          {$display}
+                        </div>
+                      </div>" :
                       "{$tabs}
                       <input type='hidden' name='arg' value=''>
                       <div class='tab-content'>
@@ -193,7 +197,7 @@ class tabs
 
     // Detect if we've modifications right now.
     // - A plugin state has to be changed, this is not a goo solution, but
-    //   currently it does what we want. 
+    //   currently it does what we want.
     //   (It would be better to ask the plugins if something has changed)
     $this->isPluginModified |= isset($_POST['modify_state']);
 
@@ -250,7 +254,7 @@ class tabs
   {
     if($this->is_modal_dialog()) return("");
 
-    $display =  (check_for_materialize_theme() ? "<div class='row mtop'><div class='col s12'><ul class='tabs'>" : "<div class='tabs'><ul>");
+    $display =  (check_for_materialize_theme() ? "<div class='row'><div class='col s12'><ul class='tabs'>" : "<div class='tabs'><ul>");
 
     $firstTab = true;
     foreach ($this->by_name as $class => $name){
@@ -260,13 +264,13 @@ class tabs
         $title= mb_substr($title,0, 25, 'UTF-8')."...";
       }
 
-      // nobr causes w3c warnings so we use &nbsp; to keep the tab name in one line 
+      // nobr causes w3c warnings so we use &nbsp; to keep the tab name in one line
       $title= str_replace(" ","&nbsp;",$title);
 
-      // Take care about notifications 
+      // Take care about notifications
       $obj = $this->by_object[$class];
       if (check_for_materialize_theme()) {
-        $activeClass = ($this->current == $class) ? "active gonicus-color white-text" :"black-text";
+        $activeClass = ($this->current == $class) ? "active" :"";
       } else {
         $tabClass = ($this->current == $class) ? "current" :"";
       }
@@ -389,7 +393,7 @@ class tabs
     }
   }
 
-	
+
   /* Save attributes posted by copy & paste dialog
    */
   function saveCopyDialog()
@@ -456,9 +460,9 @@ class tabs
     }
   }
 
- 
+
   /*!   \brief    Checks if one of the used tab plugins supports multiple edit.
-        @param    boolean Returns TRUE if at least one plugins supports multiple edit. 
+        @param    boolean Returns TRUE if at least one plugins supports multiple edit.
   */
   function multiple_support_available()
   {
@@ -468,12 +472,12 @@ class tabs
       }
     }
     return(FALSE);
-  }  
+  }
 
 
   /*!   \brief    Enables multiple edit support for the given tab.
                   All unsupported plugins will be disabled.
-        @param    boolean Returns TRUE if at least one plugin supports multiple edit 
+        @param    boolean Returns TRUE if at least one plugin supports multiple edit
   */
   function enable_multiple_support()
   {

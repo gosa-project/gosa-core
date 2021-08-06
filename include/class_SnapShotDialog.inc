@@ -21,7 +21,7 @@
  */
 
 /* Snap shot dialog class */
-class SnapShotDialog extends plugin 
+class SnapShotDialog extends plugin
 {
     var $config;
     var $attributes= array("CurrentDescription");
@@ -30,7 +30,7 @@ class SnapShotDialog extends plugin
     var $display_restore_dialog= false;		      /* Defines the restore mode */
     var $display_all_removed_objects= false; 		/* Specifies which objects will be listed, all
                                                        snapshots for a single entry or all snapshots
-                                                       of already deleted objects  */	
+                                                       of already deleted objects  */
     var $dialog= true;
     var $del_dn= "";
     var $ui;
@@ -101,7 +101,7 @@ class SnapShotDialog extends plugin
 
         if($this->display_restore_dialog){
 
-            /* Should we only display all snapshots of already deleted objects 
+            /* Should we only display all snapshots of already deleted objects
                or the snapshots for the given object dn */
             $res = array();
             $tmp = array();
@@ -121,7 +121,7 @@ class SnapShotDialog extends plugin
 
             $this->snapList->setAcl('rwcdm');
 
-            $list_of_elements = array();			
+            $list_of_elements = array();
 
             /* Walk through all entries and setup the display text */
             foreach($tmp as $key => $entry){
@@ -134,7 +134,7 @@ class SnapShotDialog extends plugin
             /* Sort generated list */
             krsort($list_of_elements);
 
-            /* Add Elements to list */	
+            /* Add Elements to list */
             $this->last_list = $list_of_elements;
 
             $data = $lData = array();
@@ -149,7 +149,7 @@ class SnapShotDialog extends plugin
                             $time_stamp,
                             htmlentities(utf8_decode(LDAP::fix($display_data))),
                             str_replace("%KEY",base64_encode($entry['dn']), $actions)));
-            }		
+            }
 
             $this->snapList->setListData($data, $lData);
             $this->snapList->update();
@@ -179,7 +179,7 @@ class SnapShotDialog extends plugin
 
 
     function save_object()
-    {	
+    {
         //        plugin::save_object();
         foreach($this->attributes as $name){
             if(isset($_POST[$name])){
