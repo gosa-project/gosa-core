@@ -110,4 +110,15 @@
 
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
     <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            let scrollElem = document.querySelectorAll('.card-content-scroll');
+
+            if (scrollElem.length !== 0) {
+                let cardContent = document.querySelector('.card-content');
+                cardContent.style.overflow = "hidden"
+            }
+        });
+    </script>
+
 </body>
