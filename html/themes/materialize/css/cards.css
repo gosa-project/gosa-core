@@ -1,7 +1,6 @@
 .card.first-level {
     margin-top: 0;
     max-height: calc(100vh - 134px);
-    overflow: hidden;
 }
 
 .card-content.first-level {
