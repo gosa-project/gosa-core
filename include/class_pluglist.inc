@@ -387,6 +387,7 @@ class pluglist
                     }
                     $this->iconmenu .= "\n        <h2 class='card-title'>"._($headline).'</h2>';
 
+                    $plugCount = count($plug);
                     foreach ($plug as $info) {
                         // Get Plugin info
                         list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
@@ -417,7 +418,7 @@ class pluglist
                         $this->iconmenu .= "\n   </a>";
                         ++$col;
 
-                        if (($col % 6) == 0 && $col != 0) {
+                        if (($col % 6) == 0 && $col != 0 && $col != $plugCount) {
                             $this->iconmenu .= "\n    </div>";
                         }
                     }

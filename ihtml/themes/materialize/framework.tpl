@@ -109,12 +109,9 @@
     </script>
 
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
-
+    <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.collapsible');
-            var instances = M.Collapsible.init(elems, {});
-
             let scrollElem = document.querySelectorAll('.card-content-scroll');
 
             if (scrollElem.length !== 0) {
@@ -123,6 +120,5 @@
             }
         });
     </script>
-
 
 </body>
