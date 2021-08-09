@@ -409,4 +409,3 @@
    changeStates();
    focus_field('mail');
 </script>
-{/if}
