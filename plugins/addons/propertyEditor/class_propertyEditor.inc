@@ -225,7 +225,7 @@ class propertyEditor extends management
                 $res = $value." &nbsp;<i>(".CONFIG_DIR.'/'.CONFIG_FILE.")</i>";
                 break;
             case 'bool':
-                $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
+                $res = "<select id='$name' size=1 name=\"{$name}\" style='width:{$ssize}'>";
                 $false = (preg_match('/true/i', $value)) ? '' : "selected";
                 $true  = (preg_match('/true/i', $value)) ? "selected" : '';
                 $res.= "<option {$false} value='false'>"._("Off")."</option>";
@@ -235,7 +235,7 @@ class propertyEditor extends management
                 if(!empty($defaults[0])){
                     $data = call_user_func(preg_split("/::/", $defaults[0]), $class[0],$cn[0],$value, $type[0]);
                     if(is_array($data)){
-                        $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
+                        $res = "<select id='$name' size=1 name=\"{$name}\" style='width:{$ssize}'>";
                         foreach($data as $oValue => $oDesc){
                             if($oValue == $value){
                                 $res.="<option selected value=\"{$oValue}\">{$oDesc}</option>\n";

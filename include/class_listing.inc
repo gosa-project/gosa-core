@@ -1337,7 +1337,7 @@ class listing
             $enableHome = false;
         }
 
-        if ($config->get_cfg_value('core', 'theme') == 'materialize') {
+        if (check_for_materialize_theme()) {
             /* Draw root button */
             if ($enableRoot) {
                 $result['ROOT'] = image("<i class='material-icons input-icons md-24'>first_page</i>", 'ROOT', _('Root'));
