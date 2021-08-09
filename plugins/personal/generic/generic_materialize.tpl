@@ -229,7 +229,7 @@
 
 <hr>
 
-<h5>{t}Organizational information{/t}</h5>
+<h3>{t}Organizational information{/t}</h3>
 
 <div class="row">
   {if $governmentmode ne "true"}
