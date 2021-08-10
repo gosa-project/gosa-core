@@ -1,5 +1,5 @@
 <div class="row setting">
-  <div class="col s6">
+  <div class="col s12 xl6">
     <h3>{t}Generic{/t}</h3>
 
     <div class="input-field">
@@ -84,7 +84,7 @@
     {/if}
   </div>
 
-  <div class="col s6">
+  <div class="col s12 xl6">
     <h3>{t}Group membership{/t}</h3>
 
     {render acl=$groupMembershipACL}
@@ -101,7 +101,7 @@
 
 <div class="row setting">
 
-  <div class="col s6">
+  <div class="col s12 xl6">
     {if $sshPublicKey == 1}
       {render acl=$sshPublicKeyACL}
       <h3>{t}SSH keys{/t}</h3>
@@ -112,7 +112,7 @@
     {include file="$pwmode.tpl"}
   </div>
 
-  <div class="col s6">
+  <div class="col s12 xl6">
     {$trustModeDialog}
   </div>
 

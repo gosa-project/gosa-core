@@ -47,7 +47,7 @@
 
             <div class="col s12 content-area">
                 <!-- Menü -->
-                <div class="col s1 menu">
+                <div class="col s2 xl1 menu">
                     <ul class="collapsible">
                         {$menu}
                     </ul>
@@ -56,7 +56,7 @@
                 {$msg_dialogs}
 
                 <!-- Plugin Content-->
-                <div class="col s11 content">
+                <div class="col s10 xl11 content">
                     <div class="breadcrumb-nav" style="display: none">{$breadcrumb}</div>
                     <div class="card first-level {if $noMenuMode}-noMenu{/if}">
                         <div class="card-content first-level">

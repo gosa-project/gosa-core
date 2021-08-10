@@ -120,6 +120,7 @@
     line-height: 26px;
     font-size: 12px;
     text-transform: none;
+    white-space: nowrap;
 }
 
 .content .card-content .control-panel .actions a i {
@@ -169,6 +170,7 @@
     line-height: 26px;
     font-size: 12px;
     text-transform: none;
+    white-space: nowrap;
 }
 
 .content .card-content .control-panel .filtermenu a i {
