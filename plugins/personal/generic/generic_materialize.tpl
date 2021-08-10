@@ -168,16 +168,14 @@
       {/render}
     </div>
 
-    <div class="file-field input-field">
+    <div class="input-field add">
+      {render acl=$gosaLoginRestrictionACL}
+        <input type="text" id="res" name="res" maxlength=33 onFocus='document.getElementById("res").value=""'>
+      {/render}
       {render acl=$gosaLoginRestrictionACL}
         <button class="btn btn-small" id="add_res" type="submit" name="add_res">{t}Add{/t}</button>
       {/render}
-      <div class="file-path-wrapper">
-        {render acl=$gosaLoginRestrictionACL}
-          <input type="text" id="res" name="res" maxlength=33 value="{t}IP or network{/t}"
-          onFocus='document.getElementById("res").value=""'>
-        {/render}
-      </div>
+      <label for="res">{t}IP or network{/t}</label>
     </div>
 
     {else}
@@ -218,7 +216,7 @@
 
 <hr>
 
-<h5>{t}Organizational information{/t}</h5>
+<h3>{t}Organizational information{/t}</h3>
 
 <div class="row">
   {if $governmentmode ne "true"}

@@ -154,6 +154,31 @@
     text-transform: initial;
 }
 
+.user-info .content-wrapper .input-field.add {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info .content-wrapper .input-field.add .select-wrapper {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.user-info .content-wrapper .input-field.add button {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    color: #000;
+    width: auto;
+    text-transform: initial;
+}
+
 .user-info .content-wrapper .input-field.manager input:first-child {
     width: calc(100% - 84px);
 }
@@ -200,4 +225,150 @@
 .user-info .content-wrapper .input-field.manager [type="checkbox"]:not(:checked),
 .user-info .content-wrapper .input-field.manager [type="checkbox"]:checked {
     opacity: 1;
+}
+
+.user-info .content-wrapper hr+h3 {
+    margin-top: 0;
+}
+
+
+/* POSIX/Mail Settings */
+
+.user-info .content-wrapper .card-action.settings {
+    justify-content: flex-start;
+}
+
+.user-info .content-wrapper .card-action.settings button {
+    margin-left: 0;
+}
+
+.user-info .content-wrapper .setting .col.s6:first-child {
+    padding-right: 20px;
+}
+
+.user-info .content-wrapper .setting .col.s6:last-child {
+    padding-left: 20px;
+}
+
+.user-info [type="checkbox"]+span:not(.lever) {
+    font-size: 12px;
+    color: #000000;
+}
+
+.user-info .account-settings label,
+.user-info .leave-settings label {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+/* POSIX Settings */
+
+.user-info .account-settings label input {
+    width: auto;
+    max-width: 100px;
+    text-align: center;
+}
+
+.user-info .account-settings label span input[type=text]:not(.browser-default) {
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+}
+
+.user-info .account-settings .inline-date-picker .input-field i {
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 6px;
+}
+
+.user-info .account-settings .inline-date-picker .input-field.inline {
+    vertical-align: unset;
+    margin-top: 0;
+}
+
+
+/* Mail Settings */
+
+.user-info .contingent .list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.user-info .contingent label {
+    font-size: 12px;
+    color: #000000;
+}
+
+.user-info .contingent label span {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.user-info .contingent label span input[type=text]:not(.browser-default) {
+    max-width: 200px;
+    width: auto;
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.user-info .leave-notification {
+    margin-left: 35px;
+}
+
+.user-info .leave-notification textarea {
+    max-width: 100%;
+}
+
+.user-info .leave-settings .spam-option {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.user-info .leave-settings .spam-option .row {
+    width: calc(100% - 35px);
+}
+
+.user-info .leave-settings .spam-option .row .col.s6 {
+    margin-top: 0;
+}
+
+.user-info .leave-settings .spam-option .row .col.s6 label {
+    min-width: 300px;
+    width: max-content;
+    left: 0;
+}
+
+.user-info .leave-settings .forward-messages {
+    position: relative;
+}
+
+.user-info .leave-settings .forward-messages button {
+    white-space: nowrap;
+}
+
+.user-info .leave-settings .forward-messages .move-in {
+    margin-left: 35px;
 }
