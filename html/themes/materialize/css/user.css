@@ -45,6 +45,61 @@
     padding: 0 24px;
 }
 
+
+/* Image */
+
+.user-info .content-wrapper .user-image button {
+    margin-top: 20px;
+}
+
+.user-info .content-wrapper .user-image img {
+    max-width: 145px;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.user-image .preview-image img {
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.user-image .image-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.user-image .image-action button {
+    margin-right: 20px;
+}
+
+.user-image .image-action .file-field {
+    margin: 0;
+}
+
+.user-image .image-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.user-image .image-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.user-image .image-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+
+/* Others */
+
 .user-info .content-wrapper .input-field {
     height: 39px;
 }
