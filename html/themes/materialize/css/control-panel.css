@@ -175,6 +175,10 @@
     font-size: 18px;
 }
 
+.content .card-content .control-panel .filtermenu .dropdown-content {
+    min-width: 200px;
+}
+
 .content .card-content .control-panel .filtermenu .dropdown-content .collection.valign-dropdown {
     margin: 0;
 }
@@ -198,8 +202,7 @@
     border: 0;
 }
 
-.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:nth-child(5),
-.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:nth-child(7),
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item .search-subtree,
 .content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:last-child {
     border-bottom: 0;
 }

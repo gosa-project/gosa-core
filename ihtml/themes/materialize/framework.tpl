@@ -15,15 +15,6 @@
                 <li class="mg2">
                     {$loggedin}
                 </li>
-                <li>
-                    <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>
-                        <i class="material-icons md-18 md-dark white-text pointer mg2" title='{t}Log out{/t}'
-                            onclick="return question('{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}',
-                                    'logout.php?forcedlogout');">logout</i>
-                        <input type='hidden' name='forcedlogout' value='1'>
-                        <input type="hidden" name="php_c_check" value="1">
-                    </form>
-                </li>
                 <li><a class="dropdown-nav-more" data-target="more-options"><i class="material-icons">more_vert</i></a></li>
                 <ul id="more-options" class="dropdown-content">
                     <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>
@@ -110,15 +101,5 @@
 
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
     <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            let scrollElem = document.querySelectorAll('.card-content-scroll');
-
-            if (scrollElem.length !== 0) {
-                let cardContent = document.querySelector('.card-content');
-                cardContent.style.overflow = "hidden"
-            }
-        });
-    </script>
-
+    <script type="text/javascript" defer src="themes/materialize/js/main.js"></script>
 </body>
