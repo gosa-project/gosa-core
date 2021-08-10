@@ -1,5 +1,5 @@
 <div class="row setting">
-   <div class="col s6">
+   <div class="col s12 xl6">
       <h3>{t}Generic{/t}</h3>
       {if !$multiple_support}
          <div class="input-field">
@@ -58,7 +58,7 @@
       </div>
    </div>
 
-   <div class="col s6">
+   <div class="col s12 xl6">
       {if !$multiple_support}
          <h3>{t}Alternative addresses{/t}</h3>
 
@@ -125,7 +125,7 @@
 <hr>
 
 <div class="row setting leave-settings">
-   <div class="col s6">
+   <div class="col s12 xl6">
       <p>
          {render acl=$gosaMailDeliveryModeIACL checkbox=$multiple_support checked=$use_drop_own_mails}
             <label>
@@ -195,7 +195,7 @@
       </div>
    </div>
 
-   <div class="col s6">
+   <div class="col s12 xl6">
       <div class="spam-option">
          <label>
             {render acl=$gosaMailDeliveryModeSACL checkbox=$multiple_support checked=$use_use_spam_filter}

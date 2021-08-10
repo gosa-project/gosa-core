@@ -1,7 +1,7 @@
 <h2>{t}Personal information{/t}</h2>
 
 <div class="row content">
-  <div class="col s2 center-align user-image">
+  <div class="col s12 xl2 center-align user-image">
     {if !$userPicture_is_readable}
     <img src="plugins/users/images/default.jpg" alt='' class="materialboxed h-center">
     {else}
@@ -11,7 +11,7 @@
     <button class="btn-small gonicus-color" type="submit" name="edit_picture">{t}Change picture{/t}...</button>
     {/render}
   </div>
-  <div class="col s5">
+  <div class="col s6 xl5">
     {if $is_template ne "true"}
 
     <div class="input-field">
@@ -108,7 +108,7 @@
     {/render}
 
   </div>
-  <div class="col s5">
+  <div class="col s6 xl5">
     <div class="input-field">
       {render acl=$homePostalAddressACL checkbox=$multiple_support checked=$use_homePostalAddress}
       <textarea class="materialize-textarea" id="homePostalAddress" name="homePostalAddress">
