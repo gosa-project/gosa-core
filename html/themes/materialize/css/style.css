@@ -331,3 +331,7 @@ nav a.sidenav-trigger i {
     border: 1px solid lightslategray;
     border-radius: 2px;
 }
+
+.context {
+    cursor: context-menu;
+}

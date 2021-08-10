@@ -28,7 +28,6 @@
     font-feature-settings: 'liga';
 }
 
-
 /* Rules for sizing the icon. */
 
 .material-icons.md-18 {
@@ -59,7 +58,6 @@
     font-size: 100px;
 }
 
-
 /* Rules for using icons as black on a light background. */
 
 .material-icons.md-dark {
@@ -69,7 +67,6 @@
 .material-icons.md-dark.md-inactive {
     color: rgba(0, 0, 0, 0.26);
 }
-
 
 /* Rules for using icons as white on a dark background. */
 
@@ -81,18 +78,22 @@
     color: rgba(255, 255, 255, 0.3);
 }
 
+.material-icons.md-disabled {
+    color: rgba(189, 195, 199, 1)
+}
+
 .material-icons.valign {
     position: relative;
     top: 4rem;
 }
 
-
 /* Icons inside input element */
 
 input.input-btn+i.input-icons {
-    position: absolute;
+    /* position: absolute; */
     margin-left: -2.25rem;
     margin-top: .5rem;
+    font-size: 24px;
 }
 
 input.input-btn {

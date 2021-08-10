@@ -330,8 +330,4 @@
 
    changeStates();
    focus_field('mail');
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> design-cleanup

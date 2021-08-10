@@ -9,9 +9,9 @@
 
   <script type="text/javascript" src="include/pwdStrength.js"></script>
 
-  <h5>
+  <h3>
     {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
-  </h5>
+  </h3>
 
   <hr>
 
