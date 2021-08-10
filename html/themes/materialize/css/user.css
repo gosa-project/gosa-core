@@ -45,10 +45,6 @@
     padding: 0 24px;
 }
 
-.user-info .content-wrapper .user-image button {
-    margin-top: 20px;
-}
-
 .user-info .content-wrapper .input-field {
     height: 39px;
 }
@@ -276,10 +272,11 @@
 }
 
 .user-info .account-settings label span input[type=text]:not(.browser-default) {
-    min-height: 30px;
-    height: 30px!important;
+    min-height: 24px;
+    height: 24px!important;
     font-size: 12px;
     padding: 0;
+    margin-bottom: 0;
 }
 
 .user-info .account-settings .inline-date-picker .input-field i {
@@ -291,6 +288,7 @@
 .user-info .account-settings .inline-date-picker .input-field.inline {
     vertical-align: unset;
     margin-top: 0;
+    height: 25px;
 }
 
 
