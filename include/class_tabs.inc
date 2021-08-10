@@ -178,7 +178,7 @@ class tabs
     }else{
 
         $display =  (check_for_materialize_theme() ?
-                      "<div class='user-info'>
+                      "<div class='object-info'>
                         <div class='card-tabs'>
                           {$tabs}
                         </div>

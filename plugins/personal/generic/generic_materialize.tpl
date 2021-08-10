@@ -114,8 +114,8 @@
 
     {render acl=$baseACL checkbox=$multiple_support checked=$use_base}
     <div class="input-field ldap-tree">
-                        {$base}
-                    </div>
+      {$base}
+    </div>
     {/render}
 
   </div>
@@ -181,10 +181,10 @@
 
     <div class="input-field add">
       {render acl=$gosaLoginRestrictionACL}
-        <input type="text" id="res" name="res" maxlength=33 onFocus='document.getElementById("res").value=""'>
+      <input type="text" id="res" name="res" maxlength=33 onFocus='document.getElementById("res").value=""'>
       {/render}
       {render acl=$gosaLoginRestrictionACL}
-        <button class="btn btn-small" id="add_res" type="submit" name="add_res">{t}Add{/t}</button>
+      <button class="btn btn-small" id="add_res" type="submit" name="add_res">{t}Add{/t}</button>
       {/render}
       <label for="res">{t}IP or network{/t}</label>
     </div>
@@ -270,65 +270,85 @@
 
   <div class="col s4">
     {if !$multiple_support}
-      <div class="input-field manager">
-        {render acl=$managerACL}
-          <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
-        {/render}
-        <label for="manager_name">{t}Manager{/t}</label>
-        <div class="icons">
-          <div class="icon">
-            {render acl=$managerACL}
-            {image path="<i class='material-icons input-icons'>edit</i>" action="editManager"}
-            {/render}
-          </div>
-
-          {if $manager!=""}
-            <div class="icon">
-              {render acl=$managerACL}
-              {image path="<i class='material-icons input-icons tooltipped' data-postion='bottom'
-                data-tooltip='{$manager}'>info</i>" title="{$manager}"}
-              {/render}
-            </div>
-
-            <div class="icon">
-              {render acl=$managerACL}
-              {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
-              {/render}
-            </div>
-
-            <script type="text/javascript">
-              document.addEventListener('DOMContentLoaded', function () {
-                var elems = document.querySelectorAll('.tooltipped');
-                var instances = M.Tooltip.init(elems, {});
-              });
-            </script>
-          {/if}
+    <div class="input-field manager">
+      {render acl=$managerACL}
+      <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
+      {/render}
+      <label for="manager_name">{t}Manager{/t}</label>
+      <div class="icons">
+        <div class="icon">
+          {render acl=$managerACL}
+          {image path="<i class='material-icons input-icons'>edit</i>" action="editManager"}
+          {/render}
         </div>
-      </div>
-    {else}
-      <div class="input-field manager">
-        <div class="icons prefix">
-          <input type='checkbox' value="1" name="use_manager" id="use_manager" {if $use_manager} checked {/if}
-          onClick="document.mainform.submit();">
+
+        {if $manager!=""}
+        <div class="icon">
+          {render acl=$managerACL}
+          {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
+          {/render}
         </div>
-        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
-        <label for="manager_name">{t}Manager{/t}</label>
-        {if $use_manager}
-          <div class="icons">
-            <div class="icon">
-              {image path="<i class='material-icons'>edit</i>" action="editManager" acl=$managerACL}
-            </div>
-            {if $manager!=""}
-              <div class="icon">
-                {image path="<i class='material-icons'>info</i>" title="{$manager}" acl=$managerACL}
-              </div>
-              <div class="icon">
-                {image path="<i class='material-icons'>delete</i>" action="removeManager" acl=$managerACL}
-              </div>
-            {/if}
-          </div>
+
+        <div class="icon">
+          {render acl=$managerACL}
+          {image path="<i class='material-icons input-icons tooltipped' data-postion='bottom'
+            data-tooltip='{$manager}'>info</i>" title="{$manager}"}
+          {/render}
+        </div>
+        {else}
+        <div class="icon">
+          {render acl=$managerACL}
+          {image path="<i class='material-icons md-disabled'>delete</i>"}
+          {/render}
+        </div>
+
+        <div class="icon">
+          {render acl=$managerACL}
+          {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom'
+            data-tooltip='{t}Manager{/t}'>info</i>"}
+          {/render}
+        </div>
         {/if}
       </div>
+    </div>
+    {else}
+    <div class="input-field manager">
+      <div class="icons prefix">
+        <input type='checkbox' value="1" name="use_manager" id="use_manager" {if $use_manager} checked {/if}
+          onClick="document.mainform.submit();">
+      </div>
+      <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
+      <label for="manager_name">{t}Manager{/t}</label>
+      {if $use_manager}
+      <div class="icons">
+        <div class="icon">
+          {image path="<i class='material-icons'>edit</i>" action="editManager" acl=$managerACL}
+        </div>
+        {if $manager!=""}
+        <div class="icon">
+          {image path="<i class='material-icons'>info</i>" title="{$manager}" acl=$managerACL}
+        </div>
+        <div class="icon">
+          {image path="<i class='material-icons'>delete</i>" action="removeManager" acl=$managerACL}
+        </div>
+
+        {else}
+        <div class="icon">
+          {render acl=$managerACL}
+          {image path="<i class='material-icons md-disabled'>delete</i>"}
+          {/render}
+        </div>
+
+        <div class="icon">
+          {render acl=$managerACL}
+          {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom'
+            data-tooltip='{t}Manager{/t}'>info</i>"}
+          {/render}
+        </div>
+        {/if}
+      </div>
+      {/if}
+    </div>
     {/if}
 
     <div class="input-field">

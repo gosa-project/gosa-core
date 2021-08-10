@@ -95,3 +95,7 @@
 .table-summary i {
     font-size: 18px;
 }
+
+th, td {
+    padding: unset;
+}

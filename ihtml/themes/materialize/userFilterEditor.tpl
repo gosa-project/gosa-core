@@ -1,4 +1,4 @@
-<h5>{t}Filter editor{/t}</h5>
+<h3>{t}Filter editor{/t}</h3>
 
 <hr>
 
