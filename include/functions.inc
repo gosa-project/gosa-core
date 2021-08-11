@@ -3129,6 +3129,7 @@ function NThash($Input)
 // config for sambaHashHook is set specifically to "NTLM+LM"
 function LMhash($Input)
 {
+  global $config;
   $lmhash = 'abunchofinvalidjunk!';
   if (trim($config->get_cfg_value('core','sambaHashHook')) == 'NTLM+LM') {
     $Input = strtoupper(substr($Input,0,14));
