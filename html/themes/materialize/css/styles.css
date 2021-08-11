@@ -78,6 +78,13 @@ input {
     padding: 0;
 }
 
+.input-field:not(.login) label {
+    -webkit-transform: translateY(-14px) scale(0.8);
+    transform: translateY(-14px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
 .dropdown-content {
     min-width: 200px;
     margin: 0;
