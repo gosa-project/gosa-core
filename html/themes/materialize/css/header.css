@@ -6,22 +6,41 @@ nav {
     align-content: center;
     justify-content: space-between;
     align-items: center;
+    height: 40px;
 }
 
 nav .nav-wrapper {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
 }
 
 nav .brand-logo {
     margin-left: 12px;
+    line-height: initial;
+    position: initial;
+    font-size: initial;
 }
 
 nav .brand-logo img {
     vertical-align: middle;
+    height: 25px;
 }
 
-nav ul.right {
+nav .nav-menu {
+    height: 40px;
     vertical-align: middle;
+    line-height: 40px;
+}
+
+nav .nav-menu li,
+nav .nav-menu li a.dropdown-nav-more i {
+    max-height: 40px;
+    line-height: 40px;
 }
 
 #more-options {
