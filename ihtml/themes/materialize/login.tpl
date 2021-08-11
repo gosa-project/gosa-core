@@ -77,7 +77,7 @@
   </div>
 
   <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
-  <script type="text/javascript" src="themes/materialize/js/eventListener.js"></script>
+  <script type="text/javascript" defer src="themes/materialize/js/eventListener.js"></script>
 
   <script type="text/javascript">
     document.cookie = "gosatest=empty;path=/";
