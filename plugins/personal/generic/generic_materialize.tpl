@@ -83,7 +83,7 @@
 
     <div class="input-field">
       {render acl=$genderACL}
-      <select size="2" name="gender" id="gender" disabled>
+      <select size="2" name="gender" id="gender">
         {html_options options=$gender_list selected=$gender}
       </select>
       {/render}
