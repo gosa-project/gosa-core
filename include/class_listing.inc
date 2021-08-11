@@ -358,10 +358,6 @@ class listing
                             </tr>";
             }
 
-            // Line color alternation
-            $alt = 0;
-            $deps = 0;
-
             // Draw department browser if configured and we're not in sub mode
             $this->useSpan = false;
             if ($this->departmentBrowser && $this->filter->scope != 'sub') {
@@ -400,10 +396,7 @@ class listing
                         $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
                     }
                     $result .= $rowResult;
-                    ++$alt;
                 }
-
-                $deps = $alt;
             }
 
             // definte rows to render for one page of pagination
@@ -509,28 +502,29 @@ class listing
             // Complete list by sorting entries for _sort$index and appending them to the output
             $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
             foreach ($entryIterator as $row => $entry) {
-                // Apply label to objecttype icon?
-                if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
-                    if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                        $objectType = image("<i class='material-icons'>".$matches[1].'['.$m[1].']</i>', null, LDAP::fix(base64_decode($matches[2])));
-                    } else {
-                        $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                if (($row + 1) <= ($side * $prow) && ($row + 1) >= ($side * $prow - 9)) {
+                    // Apply label to objecttype icon?
+                    if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
+                        if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
+                            $objectType = image("<i class='material-icons'>".$matches[1].'['.$m[1].']</i>', null, LDAP::fix(base64_decode($matches[2])));
+                        } else {
+                            $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                        }
+                        $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
+                        $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
                     }
-                    $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
-                    $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
-                }
 
-                // Apply custom class to row?
-                if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
-                    $result .= "<tr class='".$matches[1]."'>\n";
-                    $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
-                } else {
-                    $result .= '<tr>';
-                    $result .= $entry['_rendered'];
-                }
+                    // Apply custom class to row?
+                    if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
+                        $result .= "<tr class='".$matches[1]."'>\n";
+                        $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
+                    } else {
+                        $result .= '<tr>';
+                        $result .= $entry['_rendered'];
+                    }
 
-                $result .= '</tr>';
-                ++$alt;
+                    $result .= '</tr>';
+                }
             }
 
             // Close list body
