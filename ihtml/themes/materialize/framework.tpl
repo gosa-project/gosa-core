@@ -5,7 +5,7 @@
             <a href="main.php?global_check=1" class="brand-logo" alt="GOsa²">
                 <img src="themes/materialize/images/logo.png">
             </a>
-            <ul class="right">
+            <ul class="nav-menu">
                 <li class="mg2">
                     <div class='lifetime'>
                         <canvas id="sTimeout" width="22" height="22"
