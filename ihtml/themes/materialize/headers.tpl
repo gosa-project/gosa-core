@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="themes/materialize/css/user.css">
     <link rel="stylesheet" href="themes/materialize/css/login.css">
     <link rel="stylesheet" href="themes/materialize/css/password.css">
+    <link rel="stylesheet" href="themes/materialize/css/modal.css">
 
     <link rel="shortcut icon" href="favicon.ico">
 
