@@ -84,26 +84,26 @@
       <div class="col s6">
         <div class="col s8 offset-s4">
           <div class="password-conditions">
-            <h3>Passwort Optimierungsliste:</p>
+            <h3>Der Weg zum optimalen Passwort:</p>
             <ul>
               <li class="condition">
                 <i id="pw-length" class='material-icons'>close</i>
-                Das Passwort muss mindestens 8 Zeichen umfassen.
+                Das Passwort sollte mindestens 8 Zeichen umfassen.
               </li>
               <li class="condition">
                 <i id="pw-lowercase" class='material-icons'>close</i>
-                Das Passwort sollte Kleinbuchstaben enthalten
+                Das Passwort sollte Kleinbuchstaben enthalten.
               </li>
               <li class="condition">
                 <i id="pw-uppercase" class='material-icons'>close</i>
-                Das Passwort sollte Großbuchstaben enthalten
+                Das Passwort sollte Großbuchstaben enthalten.
               </li>
               <li class="condition">
                 <i id="pw-numbers" class='material-icons'>close</i>
-                Das Passwort sollte Ziffern enthalten</li>
+                Das Passwort sollte Ziffern enthalten.</li>
               <li class="condition">
                 <i id="pw-special" class='material-icons'>close</i>
-                Das Passwort sollte Sonderzeichen enthalten (!, @, #, $, %, ^, &, *, ?, _, ~)
+                Das Passwort sollte min. 1 Sonderzeichen enthalten z.B !, @, #, $, %, ^, &, *, ?, _, ~
               </li>
             </ul>
           </div>
