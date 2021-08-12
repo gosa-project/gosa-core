@@ -651,7 +651,7 @@ class plugin
       $state= "";
     }
     $display = check_for_materialize_theme() ?
-                "<h2 class='card-title'>Einstellungen</h2>
+                "<h2 class='card-title'>"._(Preferences)."</h2>
                  <p>$text</p>
                  <div class='card-action settings'>
                   <button class='btn-small gonicus-color' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
@@ -674,7 +674,7 @@ class plugin
       $state= "";
     }
     $display =  (check_for_materialize_theme() ?
-                  "<h2 class='card-title'>Einstellungen</h2>
+                  "<h2 class='card-title'>"._(Preferences)."</h2>
                    <p>$text</p>
                    <div class='card-action settings'>
                       <button class='btn-small gonicus-color' type='submit' name='modify_state' ".$state.">
