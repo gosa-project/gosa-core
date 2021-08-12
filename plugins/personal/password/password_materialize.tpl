@@ -8,7 +8,7 @@
 {else}
   <script type="text/javascript" src="include/pwdStrength.js"></script>
 
-  <div class="change-password">
+  <div class="content-wrapper card-content-scroll change-password">
     <h2>Passwort ändern</h2>
     <p>
       {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
