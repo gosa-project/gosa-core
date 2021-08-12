@@ -1,11 +1,12 @@
 .card.first-level {
     margin-top: 0;
+    margin-bottom: 0;
     max-height: calc(100vh - 134px);
 }
 
 .card-content.first-level {
     max-height: inherit;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .card h2.card-title {
@@ -59,12 +60,12 @@
 
 .card-content .card .card-content {
     padding: 0;
-    overflow: hidden;
+    overflow-y: hidden;
     text-overflow: ellipsis;
 }
 
 .card-content .card .card-content .card-title {
-    overflow: hidden;
+    overflow-y: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
