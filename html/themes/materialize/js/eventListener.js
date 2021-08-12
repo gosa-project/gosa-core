@@ -1,28 +1,34 @@
 // js for select dropdown
 var select = document.querySelectorAll('select');
-var instances = M.FormSelect.init(select, {
-    belowOrigin: true
-});
+var dropdownOptions = {
+    dropdownOptions: {
+        'constrainWidth': true,
+        'coverTrigger': false,
+        'hover': false,
+        'alignment': 'right',
+    }
+}
+var selectInstances = M.FormSelect.init(select, dropdownOptions);
 
 // js for accordion menu
 var collaps = document.querySelectorAll('.collapsible');
-var instances = M.Collapsible.init(collaps, {});
+var collapsInstances = M.Collapsible.init(collaps, {});
 
 // js for tooltip
 var ttip = document.querySelectorAll('.tooltipped');
-var instances = M.Tooltip.init(ttip, {});
+var ttipInstances = M.Tooltip.init(ttip, {});
 
 // js for images
 var mbox = document.querySelectorAll('.materialboxed');
-var instances = M.Materialbox.init(mbox, {});
+var mboxInstances = M.Materialbox.init(mbox, {});
 
 // js for datepicker
 var dp = document.querySelectorAll('.datepicker');
-var instances = M.Datepicker.init(dp, {});
+var dpInstances = M.Datepicker.init(dp, {});
 
 // js for dropdowns
 var ddmenu = document.querySelectorAll('.dropdown-menu');
-var instances = M.Dropdown.init(ddmenu, {
+var ddmenuInstances = M.Dropdown.init(ddmenu, {
     'constrainWidth': false,
     'coverTrigger': false,
     'hover': false,
@@ -31,17 +37,23 @@ var instances = M.Dropdown.init(ddmenu, {
 
 // js for dropdowns
 var ddfilter = document.querySelectorAll('.dropdown-filter');
-var instances = M.Dropdown.init(ddfilter, {
+var ddfilterInstances = M.Dropdown.init(ddfilter, {
     'constrainWidth': false,
     'coverTrigger': false,
     'hover': false,
     'alignment': 'right',
 });
 
-var elems = document.querySelectorAll('.dropdown-nav-more');
-var instances = M.Dropdown.init(elems, {
+var nav = document.querySelectorAll('.dropdown-nav-more');
+var navInstances = M.Dropdown.init(nav, {
     'constrainWidth': false,
     'coverTrigger': false,
     'hover': false,
     'alignment': 'right',
+});
+
+var autocomplete = document.querySelector('#autocomplete-input');
+var acInstances = M.Dropdown.init(autocomplete, {
+    'coverTrigger': false,
+    'hover': false,
 });
