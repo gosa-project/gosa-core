@@ -21,8 +21,8 @@
       <hr>
     {/if}
 
-    <div class="row">
-      <div class="col s6">
+    <div class="row first-level">
+      <div class="col s6 first-level">
         <div class="row">
           <div class="col s6 input-field password">
             {factory class='left' type='password' name='current_password' id='current_password' onfocus="nextfield='new_password';"}
