@@ -67,7 +67,7 @@ input {
 }
 
 .card-content-scroll {
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .input-field:not(.login) input,

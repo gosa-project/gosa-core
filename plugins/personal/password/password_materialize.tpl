@@ -8,7 +8,7 @@
 {else}
   <script type="text/javascript" src="include/pwdStrength.js"></script>
 
-  <div class="change-password">
+  <div class="content-wrapper card-content-scroll change-password">
     <h2>{t}Change password{/t}</h2>
     <p>
       {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
@@ -21,8 +21,8 @@
       <hr>
     {/if}
 
-    <div class="row">
-      <div class="col s6">
+    <div class="row first-level">
+      <div class="col s6 first-level">
         <div class="row">
           <div class="col s6 input-field password">
             {factory class='left' type='password' name='current_password' id='current_password' onfocus="nextfield='new_password';"}
