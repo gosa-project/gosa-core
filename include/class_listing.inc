@@ -322,6 +322,19 @@ class listing
         }
 
         if (check_for_materialize_theme()) {
+            // get items per page
+            $prow = isset($_GET['items']) ? (int)$_GET['items'] : 10;
+                
+            // start on page 1
+            $page = 1;
+
+            // get selected page
+            if (!isset($_GET['page'])) {
+                $selectedPage = 1;
+            } else {
+                $selectedPage = $_GET['page'];
+            }
+
             $result .= "  <div class='section scrollspy card-content-scroll' id='d_scrollbody'>
                             <table id='tree-table' class='highlight responsive-table'>";
             $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
@@ -357,10 +370,6 @@ class listing
                                 <td colspan='$this->numColumns'></td>
                             </tr>";
             }
-
-            // Line color alternation
-            $alt = 0;
-            $deps = 0;
 
             // Draw department browser if configured and we're not in sub mode
             $this->useSpan = false;
@@ -400,68 +409,16 @@ class listing
                         $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
                     }
                     $result .= $rowResult;
-                    ++$alt;
                 }
-
-                $deps = $alt;
             }
 
-            // definte rows to render for one page of pagination
-            $prow = 10;
-
-            // skil paginator if only one page is filled
-            if (count($this->entries) / $prow > 1) {
-                // set the paginator for current view
-                $paginator = "   <div class='container center-align'>
-                                    <ul class='pagination' id='pager'>";
-                $page = 1;
-
-                // evaluate selected page
-                if (!isset($_GET['page'])) {
-                    $selectedPage = 1;
-                } else {
-                    $selectedPage = $_GET['page'];
-                }
-
-                $pageLink = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=".($selectedPage - 1)."'";
-                $paginator .= $selectedPage > 1 ?
-                                "<li><a $pageLink><i class='material-icons'>chevron_left</i></a></li>" :
-                                "<li class='disabled'><a href='#!'><i class='material-icons'>chevron_left</i></a></li>";
-
-                foreach ($this->entries as $row => $entry) {
-                    if (($row + 1) % $prow == 0) {
-                        $pageLink = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=".$page."'";
-                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a $pageLink>$page</a></li>";
-                        ++$page;
-                    }
-                    $last = ($row + 1) % $prow;
-                }
-                if ($last != 0) {
-                    $pageLink = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=".$page."'";
-                    $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a $pageLink>$page</a></li>";
-                }
-
-                $pageLink = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=".($selectedPage + 1)."'";
-                $paginator .= $selectedPage < $page ?
-                                "<li><a $pageLink><i class='material-icons'>chevron_right</i></a></li>" :
-                                "<li class='disabled'><a href='#!'><i class='material-icons'>chevron_right</i></a></li>";
-
-                $paginator .= '       </ul>
-                            </div>';
-            }
+            
 
             // Fill with contents, sort as configured
             $ui = get_userinfo();
 
-            // set page to render
-            if (!isset($_GET['page'])) {
-                $side = 1;
-            } else {
-                $side = $_GET['page'];
-            }
-
             foreach ($this->entries as $row => $entry) {
-                if (($row + 1) <= ($side * $prow) && ($row + 1) >= ($side * $prow - 9)) {
+                if (($row + 1) <= ($selectedPage * $prow) && ($row + 1) >= (($selectedPage - 1) * $prow)) {
                     $trow = '';
 
                     // Render multi select if needed
@@ -509,35 +466,38 @@ class listing
             // Complete list by sorting entries for _sort$index and appending them to the output
             $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
             foreach ($entryIterator as $row => $entry) {
-                // Apply label to objecttype icon?
-                if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
-                    if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                        $objectType = image("<i class='material-icons'>".$matches[1].'['.$m[1].']</i>', null, LDAP::fix(base64_decode($matches[2])));
-                    } else {
-                        $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                if (($row + 1) <= ($selectedPage * $prow) && ($row + 1) >= (($selectedPage - 1) * $prow)) {
+                    // Apply label to objecttype icon?
+                    if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
+                        if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
+                            $objectType = image("<i class='material-icons'>".$matches[1].'['.$m[1].']</i>', null, LDAP::fix(base64_decode($matches[2])));
+                        } else {
+                            $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                        }
+                        $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
+                        $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
                     }
-                    $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
-                    $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
-                }
 
-                // Apply custom class to row?
-                if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
-                    $result .= "<tr class='".$matches[1]."'>\n";
-                    $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
-                } else {
-                    $result .= '<tr>';
-                    $result .= $entry['_rendered'];
-                }
+                    // Apply custom class to row?
+                    if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
+                        $result .= "<tr class='".$matches[1]."'>\n";
+                        $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
+                    } else {
+                        $result .= '<tr>';
+                        $result .= $entry['_rendered'];
+                    }
 
-                $result .= '</tr>';
-                ++$alt;
+                    $result .= '</tr>';
+                }
             }
+
+            $pagination = $this->setPaginator($prow, $page, $selectedPage);
 
             // Close list body
             $result .= '         </tbody>
                             </table>
 
-                                    '.$paginator.'
+                                    '.$pagination.'
 
                         </div>';
 
@@ -559,22 +519,6 @@ class listing
 
             // Close list
             $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
-
-            // Add scroll positioner
-            $result.="  <script type='text/javascript'>
-                            function test() {
-                                var paging = window.location.href;
-                                next_paging = '';
-
-                                if(paging.indexOf('?') > -1) {
-                                    next_paging = paging+='?page=$page';
-                                } else {
-                                    next_paging = paging;
-                                }
-
-                                window.location = next_paging;
-                            }
-                        </script>";
         } else {
             $result .= "<div class='listContainer' id='d_scrollbody' style='height:{$height}px; overflow: auto;min-height:".($height + 25)."px;'>\n";
             $result .= "<table summary='$this->headline' style='width:100%;table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
@@ -795,6 +739,85 @@ class listing
         }
 
         return $smarty->fetch($file);
+    }
+
+    function setPaginator($prow, $page, $selectedPage)
+    {
+        // skip paginator if only one page is filled
+        if (count($this->entries) / $prow > 1) {
+            // set the paginator for current view
+            $itemValue = 1;
+            $paginator = "  <div class='row'>
+                                <div class='col s1'>
+                                    <div class='input-field inline'>
+                                        <select id='page-items' onchange='setItemCount()'>";
+            for ($i=10; $i <= 100; $i = $i + 5) {
+                if ($i != $prow) {
+                    $paginator .= "<option value=".$this->setPageLink($page, $i).">".$i."</option>";
+                } else {
+                    $paginator .= "<option value='".$itmeValue."' disabled selected>".$prow."</option>";
+                }
+                ++$itemValue;
+            }
+            $paginator .= "             </select>
+                                        <label>Items per page</label>
+                                    </div>
+                                </div>
+                                <div class='col s6'>
+                                    <ul class='pagination valign-wrapper' id='pager'>";
+            
+
+            // first page
+            $paginator .= $selectedPage > 1 ?
+                            "<li><a href=".$this->setPageLink($page, $prow)."><i class='material-icons'>first_page</i></a></li>" :
+                            "<li class='disabled'><a href='#!'><i class='material-icons'>first_page</i></a></li>";
+
+            // next page
+            $pageLink = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=".($selectedPage - 1)."&amp;items=".$prow."'";
+            $paginator .= $selectedPage > 1 ?
+                            "<li><a href=".$this->setPageLink($selectedPage-1, $prow)."><i class='material-icons'>chevron_left</i></a></li>" :
+                            "<li class='disabled'><a href='#!'><i class='material-icons'>chevron_left</i></a></li>";
+
+            foreach ($this->entries as $row => $entry) {
+                if (($row + 1) % $prow == 0) {
+                    if (in_array($page, range($selectedPage - 1, $selectedPage + 1))) {
+                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+                    }
+                    if ($selectedPage == 1 && $page == 3) {
+                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+                    }
+                    ++$page;
+                }
+                $last = ($row + 1) % $prow != 0;
+            }
+
+            // append page if remaining entries not fill modulo of $prow
+            if ($last && in_array($selectedPage, range($page -1, $page))) {
+                $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+            }
+            
+
+            // next page
+            $paginator .= $selectedPage < $page ?
+                            "<li><a href=".$this->setPageLink(($selectedPage + 1), $prow)."><i class='material-icons'>chevron_right</i></a></li>" :
+                            "<li class='disabled'><a href='#!'><i class='material-icons'>chevron_right</i></a></li>";
+
+            // last page
+            $paginator .= $selectedPage < $page ?
+                            "<li><a href=".$this->setPageLink($page, $prow)."><i class='material-icons'>last_page</i></a></li>" :
+                            "<li class='disabled'><a href='#!'><i class='material-icons'>last_page</i></a></li>";
+
+            $paginator .= '         </ul>
+                                </div>
+                            </div>';
+        }
+
+        return $paginator;
+    }
+
+    function setPageLink($page, $items)
+    {
+        return "?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=$page&amp;items=$items";
     }
 
     public function update()

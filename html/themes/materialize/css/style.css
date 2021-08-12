@@ -335,3 +335,7 @@ nav a.sidenav-trigger i {
 .context {
     cursor: context-menu;
 }
+
+.select-dropdown {
+    overflow-y: auto;
+}
