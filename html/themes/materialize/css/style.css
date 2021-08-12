@@ -289,9 +289,10 @@ td a {
 
 /* -- Pagination -- */
 
-.pagination li.active {
+
+/* .pagination li.active {
     background-color: #2A3278 !important;
-}
+} */
 
 
 /* -- END -- */
@@ -336,6 +337,7 @@ nav a.sidenav-trigger i {
     cursor: context-menu;
 }
 
-.select-dropdown {
+
+/* .select-dropdown {
     overflow-y: auto;
-}
+} */

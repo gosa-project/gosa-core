@@ -216,8 +216,12 @@ class baseSelector {
             // Close tree
             $this->tree.="  </ul>";
 
-            onmouseout=\"   mouseIsStillOver=false;
-        rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
+            // Autocompleter
+            $this->tree.="  <script type='text/javascript'>";
+            if ($this->submitButton) {
+                $this->tree.="  $('autocomplete-input').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
+            }
+            $this->tree.="  </script>";
 
             value=\"".htmlentities(LDAP::makeReadable($this->pathMapping[$this->base]),ENT_COMPAT,'utf-8')."\">";
 

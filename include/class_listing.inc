@@ -324,7 +324,7 @@ class listing
         if (check_for_materialize_theme()) {
             // get items per page
             $prow = isset($_GET['items']) ? (int)$_GET['items'] : 10;
-                
+
             // start on page 1
             $page = 1;
 
@@ -411,8 +411,6 @@ class listing
                     $result .= $rowResult;
                 }
             }
-
-            
 
             // Fill with contents, sort as configured
             $ui = get_userinfo();
@@ -914,10 +912,9 @@ class listing
         if (count($this->entries) / $prow > 1) {
             // set the paginator for current view
             $itemValue = 1;
-            $paginator = "  <div class='row'>
-                                <div class='col s1'>
-                                    <div class='input-field inline'>
-                                        <select id='page-items' onchange='setItemCount()'>";
+            $paginator = "  <div class='pagination-wrapper'>
+                                <div class='input-field page-items'>
+                                    <select id='page-items' onchange='setItemCount()'>";
             for ($i=10; $i <= 100; $i = $i + 5) {
                 if ($i != $prow) {
                     $paginator .= "<option value=".$this->setPageLink($page, $i).">".$i."</option>";
@@ -926,13 +923,11 @@ class listing
                 }
                 ++$itemValue;
             }
-            $paginator .= "             </select>
-                                        <label>Items per page</label>
-                                    </div>
+
+            $paginator .= "         </select>
+                                    <label class='page-items-label'>Items per page</label>
                                 </div>
-                                <div class='col s6'>
-                                    <ul class='pagination valign-wrapper' id='pager'>";
-            
+                                <ul class='pagination valign-wrapper' id='pager'>";
 
             // first page
             $paginator .= $selectedPage > 1 ?
@@ -962,7 +957,7 @@ class listing
             if ($last && in_array($selectedPage, range($page -1, $page))) {
                 $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
             }
-            
+
 
             // next page
             $paginator .= $selectedPage < $page ?
@@ -974,8 +969,7 @@ class listing
                             "<li><a href=".$this->setPageLink($page, $prow)."><i class='material-icons'>last_page</i></a></li>" :
                             "<li class='disabled'><a href='#!'><i class='material-icons'>last_page</i></a></li>";
 
-            $paginator .= '         </ul>
-                                </div>
+            $paginator .= '     </ul>
                             </div>';
         }
 

@@ -86,7 +86,7 @@ input {
 }
 
 .dropdown-content {
-    min-width: 200px;
+    /* min-width: 200px; */
     margin: 0;
     border-bottom: 0;
 }
