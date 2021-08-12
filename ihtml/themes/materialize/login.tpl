@@ -19,16 +19,16 @@
       {$msg_dialogs}
 
       {if $ssl}
-        <div class='card-panel attention'>
-          <i class="material-icons">warning</i>
-          {$ssl}
-        </div>
+      <div class='card-panel attention'>
+        <i class="material-icons">warning</i>
+        {$ssl}
+      </div>
       {/if}
       {if $lifetime}
-        <div class='card-panel attention'>
-          <i class="material-icons">warning</i>
-          {$lifetime}
-        </div>
+      <div class='card-panel attention'>
+        <i class="material-icons">warning</i>
+        {$lifetime}
+      </div>
       {/if}
 
       <div class='card login-wrapper'>
@@ -37,7 +37,8 @@
 
           <div class="container">
             <div class="input-field login">
-              <input type="text" name="username" maxlength="40" data-length="40" value="{$username}" onfocus="nextfield = 'password'">
+              <input type="text" name="username" maxlength="40" data-length="40" value="{$username}"
+                onfocus="nextfield = 'password'">
               <label for="username">{t}User name{/t}</label>
             </div>
             <div class="input-field login">
@@ -48,16 +49,16 @@
         </div>
 
         {if $message || $errors}
-          <div class="attention">
-            <i class="material-icons">error</i>
+        <div class="attention">
+          <i class="material-icons">error</i>
 
-            {if $message}
-              <div class='center-align'>{$message}</div>
-            {/if}
-            {if $errors}
-              <div class='center-align'>{$errors}</div>
-            {/if}
-          </div>
+          {if $message}
+          <div class='center-align'>{$message}</div>
+          {/if}
+          {if $errors}
+          <div class='center-align'>{$errors}</div>
+          {/if}
+        </div>
         {/if}
 
         <div class="card-action">
@@ -67,7 +68,8 @@
             </select>
           </div>
 
-          <button class="btn-small gonicus-color" type="submit" name="login" id="login" title="{t}Click here to log in{/t}">{t}Log in{/t}</button>
+          <button class="btn-small gonicus-color" type="submit" name="login" id="login"
+            title="{t}Click here to log in{/t}">{t}Log in{/t}</button>
         </div>
 
       </div>

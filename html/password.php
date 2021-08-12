@@ -24,9 +24,9 @@ function displayPWchanger()
 {
     global $smarty;
 
-    $smarty->assign ("logo", image(get_template_path("images/logo.png")));
-    $smarty->assign ("date", date("l, dS F Y H:i:s O"));
-    $smarty->display(get_template_path('password.tpl'));
+    $smarty->assign("logo", image(get_template_path("images/logo.png")));
+    $smarty->assign("date", date("l, dS F Y H:i:s O"));
+    $smarty->display(get_template_path(check_for_materialize_theme() ? "password_materialize.tpl" : 'password.tpl'));
     exit();
 }
 
@@ -61,7 +61,8 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)) {
         _("Fatal error"),
         sprintf(
             _("GOsa configuration %s/%s is not readable. Aborted."),
-            CONFIG_DIR, CONFIG_FILE
+            CONFIG_DIR,
+            CONFIG_FILE
         ),
         FATAL_ERROR_DIALOG
     );
@@ -79,28 +80,32 @@ foreach ($config->data['LOCATIONS'] as $key => $ignored) {
 
 if (isset($_POST['server'])) {
     $directory= get_post('server');
-}elseif (isset($_GET['directory'])) {
+} elseif (isset($_GET['directory'])) {
     $directory= $_GET['directory'];
 } else {
     $directory= $config->data['MAIN']['DEFAULT'];
     if (!isset($servers[$directory])) {
         $directory = key($servers);
     }
-    
 }
 
-// Set location and reload the configRegistry - we've now access to the ldap. 
-if(isset($servers[$directory])){
+// Set location and reload the configRegistry - we've now access to the ldap.
+if (isset($servers[$directory])) {
     $config->set_current($directory);
     $config->check_and_reload();
-    $config->configRegistry->reload(TRUE);
+    $config->configRegistry->reload(true);
 }
 session::global_set('plist', new pluglist($config, $ui));
 
-session::global_set('debugLevel', $config->get_cfg_value("core","debugLevel"));
+session::global_set('debugLevel', $config->get_cfg_value("core", "debugLevel"));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     @DEBUG(
-        DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config"
+        DEBUG_CONFIG,
+        __LINE__,
+        __FUNCTION__,
+        __FILE__,
+        $config->data,
+        "config"
     );
 }
 
@@ -124,10 +129,10 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))) {
 clean_smarty_compile_dir($smarty->compile_dir);
 
 /* Language setup */
-if ($config->get_cfg_value("core","language") == "") {
+if ($config->get_cfg_value("core", "language") == "") {
     $lang= get_browser_language();
 } else {
-    $lang= $config->get_cfg_value("core","language");
+    $lang= $config->get_cfg_value("core", "language");
 }
 $lang.=".UTF-8";
 putenv("LANGUAGE=");
@@ -141,7 +146,7 @@ $domain = 'messages';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
-$smarty->assign ("title","GOsa");
+$smarty->assign("title", "GOsa");
 if (isset($_GET['directory']) && isset($servers[$_GET['directory']])) {
     $smarty->assign("show_directory_chooser", false);
     $directory= validate($_GET['directory']);
@@ -157,8 +162,12 @@ session::global_set('config', $config);
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     @DEBUG(
-        DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
-        $lang, "Setting language to"
+        DEBUG_TRACE,
+        __LINE__,
+        __FUNCTION__,
+        __FILE__,
+        $lang,
+        "Setting language to"
     );
 }
 
@@ -167,24 +176,23 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 $ssl= "";
 if (!isset($_SERVER['HTTPS']) ||
     !stristr($_SERVER['HTTPS'], "on")) {
-
-        if (empty($_SERVER['REQUEST_URI'])) {
-            $ssl= "https://".$_SERVER['HTTP_HOST'].
+    if (empty($_SERVER['REQUEST_URI'])) {
+        $ssl= "https://".$_SERVER['HTTP_HOST'].
                 $_SERVER['PATH_INFO'];
-        } else {
-            $ssl= "https://".$_SERVER['HTTP_HOST'].
+    } else {
+        $ssl= "https://".$_SERVER['HTTP_HOST'].
                 $_SERVER['REQUEST_URI'];
-        }
+    }
 }
 
 /* If SSL is forced, just forward to the SSL enabled site */
-if ($config->get_cfg_value("core","forceSSL") == 'true' && $ssl != '') {
+if ($config->get_cfg_value("core", "forceSSL") == 'true' && $ssl != '') {
     header("Location: $ssl");
     exit;
 }
 
 /* Check for selected password method */
-$method= $config->get_cfg_value("core","passwordDefaultHash");
+$method= $config->get_cfg_value("core", "passwordDefaultHash");
 if (isset($_GET['method'])) {
     $method= validate($_GET['method']);
     $tmp = new passwordMethod($config, "dummy");
@@ -229,38 +237,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
 
 
     // Get configuration flags for further input checks.
-    $check_differ = $config->get_cfg_value("core","passwordMinDiffer") != "";
-    $differ       = $config->get_cfg_value("core","passwordMinDiffer");
-    $check_length = $config->get_cfg_value("core","passwordMinLength") != "";
-    $length       = $config->get_cfg_value("core","passwordMinLength");
+    $check_differ = $config->get_cfg_value("core", "passwordMinDiffer") != "";
+    $differ       = $config->get_cfg_value("core", "passwordMinDiffer");
+    $check_length = $config->get_cfg_value("core", "passwordMinLength") != "";
+    $length       = $config->get_cfg_value("core", "passwordMinLength");
 
     // Once an error has occured it is stored here.
     $message = array();
 
     // Perform GOsa password policy checks
-    if(!tests::is_uid($uid)) {
+    if (!tests::is_uid($uid)) {
         $message[]= msgPool::invalid(_("Login"));
-    }elseif(empty($current_password)){
+    } elseif (empty($current_password)) {
         $message[] = _("You need to specify your current password in order to proceed.");
-    }elseif($new_password  != $repeated_password){
+    } elseif ($new_password  != $repeated_password) {
         $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-    }elseif($new_password == ""){
+    } elseif ($new_password == "") {
         $message[] = _("The password you've entered as 'New password' is empty.");
-    }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
+    } elseif ($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))) {
         $message[] = _("The password used as new and current are too similar.");
-    }elseif($check_length && (strlen($new_password) < $length)){
+    } elseif ($check_length && (strlen($new_password) < $length)) {
         $message[] = _("The password used as new is to short.");
-    }elseif(!passwordMethod::is_harmless($new_password)){
+    } elseif (!passwordMethod::is_harmless($new_password)) {
         $message[] = _("The password contains possibly problematic Unicode characters!");
     }
 
     // Connect as the given user and load its ACLs
-    if(!count($message)){
+    if (!count($message)) {
         $ui= ldap_login_user($uid, $current_password);
-        if ($ui === NULL) {
+        if ($ui === null) {
             $message[]= _("Please check the username/password combination!");
         } else {
-            $tmp= new acl($config, NULL, $ui->dn);
+            $tmp= new acl($config, null, $ui->dn);
             $ui->ocMapping= $tmp->ocMapping;
             $ui->loadACL();
             $acls = $ui->get_permissions($ui->dn, "users/password");
@@ -271,28 +279,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])) {
     }
 
     // Call external check hook to validate the password change
-    if(!count($message)){
+    if (!count($message)) {
         $attrs = array();
         $attrs['current_password'] = ($current_password);
         $attrs['new_password'] = ($new_password);
-        $checkRes = password::callCheckHook($config,$ui->dn,$attrs);
-        if(count($checkRes)){
-            $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),implode($checkRes));
+        $checkRes = password::callCheckHook($config, $ui->dn, $attrs);
+        if (count($checkRes)) {
+            $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"), implode($checkRes));
         }
     }
 
     // Display error messages
     if (count($message) != 0) {
         msg_dialog::displayChecks($message);
-    } else
-
-        // Try to change the password
-        if(!change_password($ui->dn, $_POST['new_password'], FALSE, $method,get_post('current_password'),$msg)){
-            msg_dialog::displayChecks(array($msg));
-        } else {
-            gosa_log("User/password has been changed");
-            $smarty->assign("changed", true);
-        }
+    } elseif // Try to change the password
+        (!change_password($ui->dn, $_POST['new_password'], false, $method, get_post('current_password'), $msg)) {
+        msg_dialog::displayChecks(array($msg));
+    } else {
+        gosa_log("User/password has been changed");
+        $smarty->assign("changed", true);
+    }
 }
 
 /* Parameter fill up */
@@ -309,7 +315,7 @@ $smarty->assign('uid', set_post($uid));
 $smarty->assign('password_img', get_template_path('images/password.png'));
 
 /* Displasy SSL mode warning? */
-if ($ssl != "" && $config->get_cfg_value("core","warnSSL") == 'true') {
+if ($ssl != "" && $config->get_cfg_value("core", "warnSSL") == 'true') {
     $smarty->assign(
         "ssl",
         "<b>"._("Warning").":</b> "._("Session will not be encrypted.").
@@ -324,7 +330,8 @@ if ($ssl != "" && $config->get_cfg_value("core","warnSSL") == 'true') {
 $smarty->assign("JS", session::global_get('js'));
 $smarty->assign("PHPSESSID", session_id());
 if (session::is_set('errors')) {
-    $smarty->assign("errors", session::get('errors'));;
+    $smarty->assign("errors", session::get('errors'));
+    ;
 }
 if ($error_collector != "") {
     $smarty->assign("php_errors", $error_collector."</div>");

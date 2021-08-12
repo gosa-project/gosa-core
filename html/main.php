@@ -362,7 +362,10 @@ if($ui->ignore_acl_for_current_user()){
     $loggedin = "<font color='red'>"._("ACLs are disabled")."</font>&nbsp;".$loggedin;
 }
 
+$userName = $ui->username;
+
 $smarty->assign ("loggedin", $loggedin);
+$smarty->assign ("userName", $userName);
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
 $smarty->assign ("go_base", get_template_path('images/dtree.png'));
 $smarty->assign ("go_home", get_template_path('images/gohome.png'));

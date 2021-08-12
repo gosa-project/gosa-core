@@ -143,7 +143,7 @@
             <!-- check, if cookies are enabled -->
             <p class='warning'>
                 <script language="JavaScript" type="text/javascript">
-                    document.cookie = "gosatest=empty;path=/";
+                        document.cookie = "gosatest=empty;path=/";
                     if (document.cookie.indexOf("gosatest=") > -1)
                         document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
                     else
@@ -159,7 +159,7 @@
     </div>
 
     <script language="JavaScript" type="text/javascript">
-        next_msg_dialog();
+            next_msg_dialog();
     </script>
 
 </body>
