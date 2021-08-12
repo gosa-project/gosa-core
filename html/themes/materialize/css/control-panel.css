@@ -204,6 +204,10 @@
     border: 0;
 }
 
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item {
+    padding: 5px 10px;
+}
+
 .content .card-content .control-panel .filtermenu .dropdown-content li.collection-item .search-subtree,
 .content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:last-child {
     border-bottom: 0;
