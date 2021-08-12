@@ -69,7 +69,7 @@ function displayLogin()
 
     /* Displasy SSL mode warning? */
     if ($ssl != "" && $config->get_cfg_value("core",'warnSSL') == 'true') {
-        $smarty->assign("ssl", sprintf(_("This session is not encrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">".bold(_("here"))."</a>"));
+        $smarty->assign("ssl", sprintf(_("This session is not encrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">&nbsp;<b>".(_("here"))."</b>&nbsp;</a>"));
     } else {
         $smarty->assign("ssl", "");
     }
