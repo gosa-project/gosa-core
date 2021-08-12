@@ -1,0 +1,24 @@
+.modal {
+    width: 35%;
+}
+
+.modal .modal-content.attention-elem i:first-child,
+.modal .modal-content.attention-elem h2 {
+    color: #842029;
+}
+
+.modal .modal-footer {
+    height: auto;
+    padding: 24px;
+}
+
+.modal .modal-footer {
+    height: auto;
+    padding: 0 24px 24px 24px;
+}
+
+.modal .modal-footer button.btn-small {
+    height: auto;
+    margin: 0;
+    margin-left: 10px;
+}
