@@ -6387,6 +6387,30 @@ msgstr "Twoje hasło zostało pomyślnie zmienione."
 msgid "Your Password has expired. Please choose a new password."
 msgstr "Twoje hasło wygasło !! Proszę wybrać inne hasło"
 
+#: plugins/personal/password/password.tpl
+msgid "Password requirements"
+msgstr "Wymagania dotyczące hasła"
+
+#: plugins/personal/password/password.tpl
+msgid "The password must have at least 8 characters."
+msgstr "Hasło musi składać się z co najmniej 8 znaków."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain lower case letters."
+msgstr "Hasło musi zawierać małe litery."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain upper case letters."
+msgstr "Hasło musi zawierać duże litery."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain digits."
+msgstr "Hasło musi zawierać cyfry."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain at least 1 special character, e.g."
+msgstr "Hasło musi zawierać co najmniej 1 znak specjalny, np."
+
 #: plugins/generic/welcome/class_welcome.inc:5
 #: plugins/generic/welcome/class_welcome.inc:6
 #, fuzzy

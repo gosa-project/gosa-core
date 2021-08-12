@@ -6359,6 +6359,30 @@ msgstr "Votre méthode de hachage de mot de passe ne sera pas changé!"
 msgid "Your Password has expired. Please choose a new password."
 msgstr "Votre mot de passe à expiré. Choisissez un nouveau mot de passe."
 
+#: plugins/personal/password/password.tpl
+msgid "Password requirements"
+msgstr "Exigences en matière de mot de passe"
+
+#: plugins/personal/password/password.tpl
+msgid "The password must have at least 8 characters."
+msgstr "Le mot de passe doit comporter au moins 8 caractères."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain lower case letters."
+msgstr "Le mot de passe doit contenir des lettres minuscules."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain upper case letters."
+msgstr "Le mot de passe doit contenir des lettres majuscules."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain digits."
+msgstr "Le mot de passe doit contenir des chiffres."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain at least 1 special character, e.g."
+msgstr "Le mot de passe doit contenir au moins un caractère spécial, par ex."
+
 #: plugins/generic/welcome/class_welcome.inc:5
 #: plugins/generic/welcome/class_welcome.inc:6
 msgid "Back to main menu"

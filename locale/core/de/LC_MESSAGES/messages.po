@@ -6429,6 +6429,30 @@ msgstr "Ihre Passwort-Hash-Methode wird nicht verändert!"
 msgid "Your Password has expired. Please choose a new password."
 msgstr "Das Nutzer-Passwort ist abgelaufen, bitte setzen Sie ein Neues!"
 
+#: plugins/personal/password/password.tpl
+msgid "Password requirements"
+msgstr "Passwort Anforderungen"
+
+#: plugins/personal/password/password.tpl
+msgid "The password must have at least 8 characters."
+msgstr "Das Passwort muss aus mindestens 8 Zeichen bestehen."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain lower case letters."
+msgstr "Das Passwort muss Kleinbuchstaben enthalten."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain upper case letters."
+msgstr "Das Kennwort muss Großbuchstaben enthalten."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain digits."
+msgstr "Das Passwort muss Ziffern enthalten."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain at least 1 special character, e.g."
+msgstr "Das Passwort muss mindestens 1 Sonderzeichen enthalten, z. B."
+
 #: plugins/generic/welcome/class_welcome.inc:5
 #: plugins/generic/welcome/class_welcome.inc:6
 msgid "Back to main menu"

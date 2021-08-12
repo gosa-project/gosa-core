@@ -8,8 +8,8 @@
 {else}
   <script type="text/javascript" src="include/pwdStrength.js"></script>
 
-  <div class="content-wrapper card-content-scroll change-password">
-    <h2>Passwort ändern</h2>
+  <div class="change-password">
+    <h2>{t}Change password{/t}</h2>
     <p>
       {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
     </p>
@@ -84,26 +84,27 @@
       <div class="col s6">
         <div class="col s8 offset-s4">
           <div class="password-conditions">
-            <h3>Der Weg zum optimalen Passwort:</p>
+            <h3>{t}Password requirements{/t}:</p>
             <ul>
               <li class="condition">
                 <i id="pw-length" class='material-icons'>close</i>
-                Das Passwort sollte mindestens 8 Zeichen umfassen.
+                {t}The password must have at least 8 characters.{/t}
               </li>
               <li class="condition">
                 <i id="pw-lowercase" class='material-icons'>close</i>
-                Das Passwort sollte Kleinbuchstaben enthalten.
+                {t}The password must contain lower case letters.{/t}
               </li>
               <li class="condition">
                 <i id="pw-uppercase" class='material-icons'>close</i>
-                Das Passwort sollte Großbuchstaben enthalten.
+                {t}The password must contain upper case letters.{/t}
               </li>
               <li class="condition">
                 <i id="pw-numbers" class='material-icons'>close</i>
-                Das Passwort sollte Ziffern enthalten.</li>
+                {t}The password must contain digits.{/t}
+              </li>
               <li class="condition">
                 <i id="pw-special" class='material-icons'>close</i>
-                Das Passwort sollte min. 1 Sonderzeichen enthalten z.B !, @, #, $, %, ^, &, *, ?, _, ~
+                {t}The password must contain at least 1 special character, e.g.{/t} !, @, #, $, %, ^, &, *, ?, _, ~.
               </li>
             </ul>
           </div>
@@ -113,7 +114,7 @@
   </div>
 
   <div class="card-action">
-    <button class="btn-small gonicus-color right" type='submit' name='password_finish'>{t}Set password{/t}</button>
+    <button class="btn-small gonicus-color right" type='submit' id="password_finish" name='password_finish' disabled>{t}Set password{/t}</button>
     <button class="btn-small gonicus-color right mg2" type=reset id="password_cancel" name="password_cancel">{t}Clear
       fields{/t}</button>
   </div>

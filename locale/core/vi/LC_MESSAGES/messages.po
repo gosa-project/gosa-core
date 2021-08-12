@@ -6462,6 +6462,30 @@ msgstr "Mật khẩu của bạn đã được thay đổi thành công."
 msgid "Your Password has expired. Please choose a new password."
 msgstr "Mật khẩu của bạn đã hết hạn. Xin hãy chọn một mật khẩu mới!"
 
+#: plugins/personal/password/password.tpl
+msgid "Password requirements"
+msgstr "Yêu cầu mật khẩu"
+
+#: plugins/personal/password/password.tpl
+msgid "The password must have at least 8 characters."
+msgstr "Mật khẩu phải có ít nhất 8 ký tự."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain lower case letters."
+msgstr "Mật khẩu phải chứa các chữ cái thường."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain upper case letters."
+msgstr "Mật khẩu phải chứa các chữ cái viết hoa."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain digits."
+msgstr "Mật khẩu phải chứa các chữ số."
+
+#: plugins/personal/password/password.tpl
+msgid "The password must contain at least 1 special character, e.g."
+msgstr "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt, ví dụ:"
+
 #: plugins/generic/welcome/class_welcome.inc:5
 #: plugins/generic/welcome/class_welcome.inc:6
 #, fuzzy
