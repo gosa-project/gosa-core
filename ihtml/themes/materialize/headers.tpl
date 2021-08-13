@@ -25,12 +25,11 @@
     <link rel="stylesheet" href="themes/materialize/css/control-panel.css">
     <link rel="stylesheet" href="themes/materialize/css/table.css">
     <link rel="stylesheet" href="themes/materialize/css/warnings.css">
-    <link rel="stylesheet" href="themes/materialize/css/user.css">
+    <link rel="stylesheet" href="themes/materialize/css/object.css">
     <link rel="stylesheet" href="themes/materialize/css/login.css">
     <link rel="stylesheet" href="themes/materialize/css/password.css">
     <link rel="stylesheet" href="themes/materialize/css/modal.css">
     <link rel="stylesheet" href="themes/materialize/css/pagination.css">
-    <link rel="stylesheet" href="themes/materialize/css/collection.css">
 
     <link rel="shortcut icon" href="favicon.ico">
 
