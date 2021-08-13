@@ -220,14 +220,7 @@ class baseSelector {
             $this->tree.="  </ul>";
 
             // Autocompleter
-            $this->tree.="  <script type='text/javascript'>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    var elems = document.querySelectorAll('.dropdown-trigger');
-                                    var instances = M.Dropdown.init(elems, {
-                                        'coverTrigger': false,
-                                        'hover': true,
-                                    });
-                                });";
+            $this->tree.="  <script type='text/javascript'>";
             if ($this->submitButton) {
                 $this->tree.="  $('autocomplete-input').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
             }
