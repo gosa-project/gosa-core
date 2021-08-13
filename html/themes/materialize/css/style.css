@@ -1,17 +1,8 @@
 /* -- global tag setup -- */
-
 html {
     /* font-size: 12px !important; */
     font-family: Arial, Helvetica, sans-serif !important;
 }
-
-
-/* td,
-th {
-    padding: 0px 0px !important;
-    height: 37px;
-    max-height: 37px;
-} */
 
 hr {
     background-color: lightslategray;
@@ -19,12 +10,7 @@ hr {
     border: 0;
 }
 
-
-/* -- END -- */
-
-
 /* -- center of screen -- */
-
 .center-screen {
     display: flex;
     flex-direction: column;
@@ -33,33 +19,19 @@ hr {
     min-height: 100vh;
 }
 
-
-/* -- END -- */
-
-
 /* -- input/textarea/checkbox setup -- */
-
 .input-field {
     position: relative;
     margin-bottom: unset !important;
 }
 
-
-/* label color */
-
 .input-field label {
     color: gray;
 }
 
-
-/* label focus color */
-
 .input-field input[type=text]:focus+label {
     color: #2A3278 !important;
 }
-
-
-/* label underline focus color */
 
 .input-field input[type=text]:focus {
     border-bottom: 1px solid #2A3278 !important;
@@ -71,24 +43,15 @@ hr {
     box-shadow: 0 1px 0 0 #2A3278 !important;
 }
 
-
-/* valid color */
-
 .input-field input[type=text].valid {
     border-bottom: 1px solid #D55A0A !important;
     box-shadow: 0 1px 0 0 #D55A0A !important;
 }
 
-
-/* invalid color */
-
 .input-field input[type=text].invalid {
     border-bottom: 1px solid #000;
     box-shadow: 0 1px 0 0 #000;
 }
-
-
-/* icon prefix focus color */
 
 .input-field .prefix.active {
     color: #2A3278 !important;
@@ -102,29 +65,17 @@ hr {
     padding-bottom: 4px;
 }
 
-
-/* textarea.materialize-textarea {
-    min-height: 10rem !important;
-} */
-
 [type="checkbox"].filled-in:checked+span:not(.lever)::after {
     border: 2px solid black !important;
     background-color: #2A3278 !important;
 }
 
-
-/* -- END -- */
-
-
 /* -- lifetime icon align -- */
-
 .lifetime {
     padding-top: .5rem;
 }
 
-
 /* -- margin and padding set and fix -- */
-
 .mtop {
     margin-top: 1rem;
 }
@@ -144,55 +95,21 @@ hr {
 
 
 /* generic for row-class */
-
 .row.nomb {
     margin-bottom: 0 !important;
 }
 
-
-/* generic for collection-class */
-
-
-/* .collection-item {
-    padding-inline: 5px !important;
-} */
-
-
-/* generic for collapsible-class */
-
-
-/* .collapsible-header {
-    padding-block: 5px !important;
-} */
-
-
 /* img */
-
 .h-center {
     margin: auto !important;
 }
 
-
-/* -- END -- */
-
-
 /* -- generic card setup -- */
-
 .card-min-height {
     min-height: 13rem;
 }
 
-
-/* .card-title {
-    font-size: 20px !important;
-} */
-
-
-/* -- END -- */
-
-
 /* -- Curson settings -- */
-
 .pointer {
     cursor: pointer;
 }
@@ -201,29 +118,15 @@ hr {
     cursor: default !important;
 }
 
-
-/* -- END -- */
-
-
 /* -- colors -- */
 
 .gonicus-color {
     background-color: rgba(42, 50, 120, 1) !important;
 }
 
-
-/* .collection .collection-item.active {
-    background-color: rgba(42, 50, 120, .6) !important;
-    color: white !important;
-} */
-
 td a {
     color: black;
 }
-
-
-/* -- END -- */
-
 
 /* -- Datepicker setup -- */
 
@@ -242,10 +145,6 @@ td a {
     color: #2A3278 !important;
 }
 
-
-/*  */
-
-
 /* -- acl view -- */
 
 .acl_container {
@@ -261,10 +160,6 @@ td a {
     margin-block-end: 1rem;
     border-radius: .25rem;
 }
-
-
-/* -- END -- */
-
 
 /* -- Drowpdown -- */
 
@@ -283,46 +178,6 @@ td a {
     padding: 0px 0px !important;
 }
 
-
-/* -- END -- */
-
-
-/* -- Pagination -- */
-
-
-/* .pagination li.active {
-    background-color: #2A3278 !important;
-} */
-
-
-/* -- END -- */
-
-
-/* nav,
-nav .nav-wrapper i,
-nav a.sidenav-trigger,
-nav a.sidenav-trigger i {
-    height: 3rem !important;
-    line-height: 3rem !important;
-} */
-
-
-/* nav .brand-logo {
-    display: unset !important;
-    float: left;
-} */
-
-
-/* nav div div {
-    padding-left: 12rem;
-} */
-
-
-/* .breadcrumb::before {
-    color: lightslategray !important;
-    font-size: unset !important;
-} */
-
 .user-control {
     position: absolute;
     margin-left: 30rem;
@@ -336,8 +191,3 @@ nav a.sidenav-trigger i {
 .context {
     cursor: context-menu;
 }
-
-
-/* .select-dropdown {
-    overflow-y: auto;
-} */
