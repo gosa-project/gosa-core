@@ -86,9 +86,18 @@ input {
 }
 
 .dropdown-content {
-    /* min-width: 200px; */
     margin: 0;
     border-bottom: 0;
+}
+
+.dropdown-content li {
+    min-height: 33px;
+}
+
+.ellipsis-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
@@ -131,4 +140,8 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 [type="checkbox"]:checked+span:not(.lever):before {
     border-right: 2px solid #5a5a5a;
     border-bottom: 2px solid #5a5a5a;
+}
+
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #2A3278;
 }

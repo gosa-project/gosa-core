@@ -79,6 +79,6 @@ nav .nav-menu li a.dropdown-nav-more i {
     height: auto;
 }
 
-.dropdown-content li {
+.nav-menu .dropdown-content li {
     min-height: 33px;
 }

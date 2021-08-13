@@ -168,20 +168,21 @@ class baseSelector
 
             // First entry is Base at Start
 
-            $this->tree.="      <li class='collection-item-tree' $link>
-                                    <i class='material-icons'>/</i>
-                                    <span>["._("Root")."]</span>
-                                    <p>"._("Base")."</p>
+            $this->tree.="      <li class='collection-item valign-wrapper' $link>
+                                    <i class='material-icons'>code</i>
+
+                                    <div class='description'>
+                                        <p class='title'>["._("Root")."]</p>
+                                        <p>"._("Base")."</p>
+                                    </div>
                                 </li>";
-
-
 
             $first= true;
             $indent= 2;
 
             foreach ($this->pathMapping as $base => $dummy) {
                 $pathbase = explode(",", $base);
-                
+
 
                 // Skip root for tree
                 if ($base == $config->current['BASE']) {
@@ -191,7 +192,7 @@ class baseSelector
                 // Build path style display
                 $elements = explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
 
-                
+
 
                 if ($this->base == $base) {
                     $reverseElements = array_reverse($elements);
@@ -215,12 +216,14 @@ class baseSelector
                 $selected = $this->base == $base ? "active" : "";
                 $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
 
-                $this->tree.="  <li class='collection-item-tree' $link>";                      
-                $this->tree.="      <i class='material-icons' style='margin-left: ".$indent."0px;'>".$config->department_info[$base]['img']."</i>
-                                    <span class=''>".$this->gennonbreaks($config->department_info[$base]['name'])."</span>
-                                    <p class='right'>".$this->gennonbreaks($config->department_info[$base]['description'])."</p>
-                                </li>";
+                $this->tree.="  <li class='collection-item valign-wrapper' style='padding-left:".($indent * 5 + 5)."px;' $link>
+                                    <i class='material-icons'>".$config->department_info[$base]['img']."</i>
 
+                                    <div class='description'>
+                                        <p class='title ellipsis-text'>".$this->gennonbreaks($config->department_info[$base]['name'])."</p>
+                                        <p class='ellipsis-text'>".$this->gennonbreaks($config->department_info[$base]['description'])."</p>
+                                    </div>
+                                </li>";
 
                 $last_indent = $indent;
                 $first = false;
