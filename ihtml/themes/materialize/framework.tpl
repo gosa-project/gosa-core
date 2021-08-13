@@ -15,6 +15,7 @@
 
                 <li><a class="dropdown-nav-more" data-target="more-options"><i class="material-icons">more_vert</i></a></li>
                 <ul id="more-options" class="dropdown-content">
+                    {$pathMenu}
                     <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>
                         <li title='{t}Log out{/t}' onclick="return question('{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}', 'logout.php?forcedlogout');">
                             <span class="material-icons">logout</span> Logout {$userName}
@@ -22,7 +23,6 @@
                             <input type="hidden" name="php_c_check" value="1">
                         </li>
                     </form>
-                    {$pathMenu}
                 </ul>
             </ul>
         </div>
