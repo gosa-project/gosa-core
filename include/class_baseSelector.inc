@@ -31,7 +31,6 @@ class baseSelector {
     protected $pathMapping;
     protected $lastState;
 
-
     function __construct($bases, $base= "")
     {
         // Initialize pid
@@ -184,6 +183,9 @@ class baseSelector {
 
             foreach ($this->pathMapping as $base => $dummy) {
 
+                $pathbase = explode(",", $base);
+                
+
                 // Skip root for tree
                 if ($base == $config->current['BASE']) {
                     continue;
@@ -191,6 +193,24 @@ class baseSelector {
 
                 // Build path style display
                 $elements = explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
+
+                
+
+                if ($this->base == $base) {
+                    $reverseElements = array_reverse($elements);
+                    foreach ($reverseElements as $value) {
+                        if ($value) {
+                            $this->tree.="  <script type='text/javascript'>
+                                                var breadcrumb = document.getElementById('breadcrumb-container');
+                                                var p = document.createElement('p');
+                                                p.className = 'breadcrumb-point black-text';
+                                                var breadcrumbText = document.createTextNode('".substr($value, 3)."');
+                                                p.appendChild(breadcrumbText);
+                                                breadcrumb.appendChild(p);
+                                            </script>";
+                        }
+                    }
+                }                
 
                 $indent = count($elements);
                 $col = 2;
@@ -222,8 +242,9 @@ class baseSelector {
                 $this->tree.="  $('autocomplete-input').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
             }
             $this->tree.="  </script>";
+        } else {
 
-            value=\"".htmlentities(LDAP::makeReadable($this->pathMapping[$this->base]),ENT_COMPAT,'utf-8')."\">";
+            $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($config->current['BASE'])."';  $('submit_tree_base_".$this->pid."').click();\"";
 
 
             $this->tree= "<input style='width:160px' type='text' size='35'

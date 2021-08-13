@@ -619,7 +619,7 @@ class pluglist
                         continue;
                     }
 
-                    $this->breadcrumb .= "<div class='col s12 breadcrumb-container'>
+                    $this->breadcrumb .= "<div id='breadcrumb-container' class='col s12 breadcrumb-container'>
                                             <a class='breadcrumb-nav black-text' onClick='openPlugin({$index})' title='{$title}'>
                                                 <i class='material-icons'>home</i>
                                             </a>";
