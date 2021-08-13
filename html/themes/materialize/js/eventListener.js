@@ -26,7 +26,6 @@ var mboxInstances = M.Materialbox.init(mbox, {});
 var dp = document.querySelectorAll('.datepicker');
 var dpInstances = M.Datepicker.init(dp, {});
 
-// js for dropdowns
 var ddmenu = document.querySelectorAll('.dropdown-menu');
 var ddmenuInstances = M.Dropdown.init(ddmenu, {
     'constrainWidth': false,
@@ -35,7 +34,6 @@ var ddmenuInstances = M.Dropdown.init(ddmenu, {
     'alignment': 'right',
 });
 
-// js for dropdowns
 var ddfilter = document.querySelectorAll('.dropdown-filter');
 var ddfilterInstances = M.Dropdown.init(ddfilter, {
     'constrainWidth': false,
@@ -52,8 +50,10 @@ var navInstances = M.Dropdown.init(nav, {
     'alignment': 'right',
 });
 
+// js for input
 var autocomplete = document.querySelector('#autocomplete-input');
 var acInstances = M.Dropdown.init(autocomplete, {
+    'constrainWidth': false,
     'coverTrigger': false,
     'hover': false,
     'constrainWidth': false,
