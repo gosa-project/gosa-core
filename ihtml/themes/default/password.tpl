@@ -1,7 +1,7 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>GOsa - {t}Change your password{/t}</title>
     <meta name="generator" content="my hands">
     <meta name="description" content="GOsa - Login">
@@ -14,7 +14,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
 
-    <style type="text/css">@import url('themes/default/style.css');</style>
+    <style type="text/css">
+        @import url('themes/default/style.css');
+    </style>
     <link rel="stylesheet" type="text/css" href="themes/default/printer.css" media="print">
 
     <!--[if IE]>
@@ -25,9 +27,11 @@
 
     <!-- Include correct theme icon sets -->
     <style type="text/css">
-      div.img, div.img div, input[type=submit].img{
-        background-image:url(themes/default/images/img.png);
-      }
+        div.img,
+        div.img div,
+        input[type=submit].img {
+            background-image: url(themes/default/images/img.png);
+        }
     </style>
     <link rel="shortcut icon" href="favicon.ico">
     <script language="javascript" src="include/prototype.js" type="text/javascript"></script>
@@ -38,9 +42,9 @@
     <script language="javascript" src="include/controls.js" type="text/javascript"></script>
     <script language="javascript" src="include/pulldown.js" type="text/javascript"></script>
     <script language="javascript" src="include/datepicker.js" type="text/javascript"></script>
-  </head>
+</head>
 
-  <body>
+<body>
 
     {$php_errors}
 
@@ -52,65 +56,68 @@
 
     <div style='padding:3px;'>
 
-    <form action='password.php{$params}' method='post' name='mainform' onSubmit='js_check(this);return true;'>
+        <form action='password.php{$params}' method='post' name='mainform' onSubmit='js_check(this);return true;'>
 
-        {$msg_dialogs}
+            {$msg_dialogs}
 
-        {if $changed}
+            {if $changed}
 
             <h3>{t}Your password has been changed successfully.{/t}</h3>
 
-        {else}
+            {else}
 
-                <h3>{t}Password change{/t}</h3>
+            <h3>{t}Password change{/t}</h3>
 
-                {if $ssl}<div class='login-warning'>{$ssl}</div>{/if}
+            {if $ssl}<div class='login-warning'>{$ssl}</div>{/if}
 
-                <!-- Display error message on demand -->
-                {if $message}<div class='login-warning'>{$message}</div>{/if}
+            <!-- Display error message on demand -->
+            {if $message}<div class='login-warning'>{$message}</div>{/if}
 
-                <p class="infotext">{t}Enter the current password and the new password (twice) in the fields below and press the 'Set password' button.{/t}</p>
+            <p class="infotext">{t}Enter the current password and the new password (twice) in the fields below and press
+                the 'Set password' button.{/t}</p>
 
-                <table summary="{t}Change password{/t}">
-                    {if $show_directory_chooser}
-                        <tr>
-                            <td>{t}Directory{/t}</td>
-                            <td>
-                                <select name='server'  title='{t}Directory{/t}'>
-                                    {html_options options=$server_options selected=$server_id}
-                                </select>
-                            </td>
-                        </tr>
-                    {/if}
+            <table summary="{t}Change password{/t}">
+                {if $show_directory_chooser}
+                <tr>
+                    <td>{t}Directory{/t}</td>
+                    <td>
+                        <select name='server' title='{t}Directory{/t}'>
+                            {html_options options=$server_options selected=$server_id}
+                        </select>
+                    </td>
+                </tr>
+                {/if}
                 <tr>
                     <td><b>{t}User name{/t}</b></td>
                     <td>
                         {if $display_username}
-                            <input type='text' name='uid' maxlength='40' value='{$uid}' 
-                                title='{t}User name{/t}' onFocus="nextfield= 'current_password';">
+                        <input type='text' name='uid' maxlength='40' value='{$uid}' title='{t}User name{/t}'
+                            onFocus="nextfield= 'current_password';">
                         {else}
-                            <i>{$uid}</i>
+                        <i>{$uid}</i>
                         {/if}
                     </td>
                 </tr>
                 <tr>
                     <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
                     <td>
-                        {factory type='password' name='current_password' id='current_password' onfocus="nextfield= 'new_password';"}
+                        {factory type='password' name='current_password' id='current_password' onfocus="nextfield=
+                        'new_password';"}
                     </td>
                 </tr>
                 <tr>
                     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
                     <td>
                         {factory type='password' name='new_password' id='new_password'
-                            onkeyup="testPasswordCss(\$('new_password').value)"  onfocus="nextfield= 'new_password_repeated';"}
+                        onkeyup="testPasswordCss(\$('new_password').value)" onfocus="nextfield=
+                        'new_password_repeated';"}
                     </td>
                 </tr>
                 <tr>
                     <td><b><LABEL for="new_password_repeated">{t}Repeat new password{/t}</LABEL></b></td>
                     <td>
-                        {factory type='password' name='new_password_repeated' id='new_password_repeated' 
-                                onfocus="nextfield= 'password_finish';"}
+                        {factory type='password' name='new_password_repeated' id='new_password_repeated'
+                        onfocus="nextfield= 'password_finish';"}
                     </td>
                 </tr>
                 <tr>
@@ -118,7 +125,7 @@
                     <td>
                         <span id="meterEmpty" style="padding:0;margin:0;width:100%;
                                 background-color:#DC143C;display:block;height:7px;">
-                        <span id="meterFull" style="padding:0;margin:0;z-index:100;
+                            <span id="meterFull" style="padding:0;margin:0;z-index:100;
                                 width:0;background-color:#006400;display:block;height:7px;"></span></span>
                     </td>
                 </tr>
@@ -127,33 +134,34 @@
             <hr>
 
             <div class="plugin-actions">
-                <button type='submit' name='apply' 
-                    title='{t}Click here to change your password{/t}'>{t}Set password{/t}</button>
+                <button type='submit' name='apply' title='{t}Click here to change your password{/t}'>{t}Set
+                    password{/t}</button>
                 <input type='hidden' id='formSubmit'>
             </div>
 
 
             <!-- check, if cookies are enabled -->
             <p class='warning'>
-             <script language="JavaScript" type="text/javascript">
+                <script language="JavaScript" type="text/javascript">
                     document.cookie = "gosatest=empty;path=/";
-                    if (document.cookie.indexOf( "gosatest=") > -1 )
+                    if (document.cookie.indexOf("gosatest=") > -1)
                         document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
                     else
                         document.write("{$cookies}");
-             </script>
+                </script>
             </p>
 
-          {$errors}
-          <input type="hidden" name="php_c_check" value="1">
+            {$errors}
+            <input type="hidden" name="php_c_check" value="1">
 
-        {/if}
-    </form>
+            {/if}
+        </form>
     </div>
 
     <script language="JavaScript" type="text/javascript">
         next_msg_dialog();
     </script>
 
-  </body>
+</body>
+
 </html>

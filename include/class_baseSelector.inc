@@ -20,8 +20,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class baseSelector {
-
+class baseSelector
+{
     private $base;
     private $pid;
     private $action;
@@ -31,11 +31,10 @@ class baseSelector {
     protected $pathMapping;
     protected $lastState;
 
-
-    function __construct($bases, $base= "")
+    public function __construct($bases, $base= "")
     {
         // Initialize pid
-        $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
+        $this->pid= preg_replace("/[^0-9]/", "", microtime(true));
 
         // Transfer data
         $this->setBases($bases);
@@ -43,19 +42,19 @@ class baseSelector {
     }
 
 
-    function setSubmitButton($flag)
+    public function setSubmitButton($flag)
     {
         $this->submitButton= $flag;
     }
 
 
-    function setHeight($value)
+    public function setHeight($value)
     {
         $this->height= $value;
     }
 
 
-    function setBase($base)
+    public function setBase($base)
     {
         if (isset($this->pathMapping[$base])) {
             $this->base= $base;
@@ -64,19 +63,19 @@ class baseSelector {
     }
 
 
-    function checkBase($base)
+    public function checkBase($base)
     {
         return isset($this->pathMapping[$base]);
     }
 
 
-    function checkLastBaseUpdate()
+    public function checkLastBaseUpdate()
     {
         return $this->lastState;
     }
 
 
-    function setBases($bases)
+    public function setBases($bases)
     {
         global $config;
 
@@ -92,7 +91,7 @@ class baseSelector {
             $elements= array_reverse($elements, true);
 
             $this->pathMapping[$base]= $base == $config->current['BASE']? '/' : ldap::fix(preg_replace('/(^|,)[a-z0-9]+=/i', '/', implode(',', $elements)));
-            $this->pathMapping[$base]= LDAP::makeReadable(  $this->pathMapping[$base]);
+            $this->pathMapping[$base]= LDAP::makeReadable($this->pathMapping[$base]);
         }
 
         // Save bases to session for autocompletion
@@ -101,14 +100,14 @@ class baseSelector {
     }
 
 
-    function update($force= false)
+    public function update($force= false)
     {
         global $config;
 
         // Analyze for base changes if needed
         $this->action= null;
         $last_base= $this->base;
-        if(isset($_REQUEST['BPID']) && $_REQUEST['BPID'] == $this->pid) {
+        if (isset($_REQUEST['BPID']) && $_REQUEST['BPID'] == $this->pid) {
             if (isset($_POST['bs_rebase_'.$this->pid]) && !empty($_POST['bs_rebase_'.$this->pid])) {
                 $new_base= base64_decode(get_post('bs_rebase_'.$this->pid));
 
@@ -119,7 +118,7 @@ class baseSelector {
                     $this->lastState= false;
                     return false;
                 }
-            }else{
+            } else {
 
                 // Input field set?
                 if (isset($_POST['bs_input_'.$this->pid])) {
@@ -139,7 +138,6 @@ class baseSelector {
                     }
                 }
             }
-
         }
 
         /* Skip if there's no change */
@@ -147,7 +145,7 @@ class baseSelector {
             return true;
         }
 
-        if(check_for_materialize_theme()) {
+        if (check_for_materialize_theme()) {
             $name = explode(",", $this->base);
             $root = explode(",", $config->current['BASE']);
             $baseName = $name == $root ? "/" : str_replace('dc=', "", $name[0]);
@@ -183,6 +181,8 @@ class baseSelector {
             $indent= 2;
 
             foreach ($this->pathMapping as $base => $dummy) {
+                $pathbase = explode(",", $base);
+
 
                 // Skip root for tree
                 if ($base == $config->current['BASE']) {
@@ -191,6 +191,24 @@ class baseSelector {
 
                 // Build path style display
                 $elements = explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
+
+
+
+                if ($this->base == $base) {
+                    $reverseElements = array_reverse($elements);
+                    foreach ($reverseElements as $value) {
+                        if ($value) {
+                            $this->tree.="  <script type='text/javascript'>
+                                                var breadcrumb = document.getElementById('breadcrumb-container');
+                                                var p = document.createElement('p');
+                                                p.className = 'breadcrumb-point black-text';
+                                                var breadcrumbText = document.createTextNode('".substr($value, 3)."');
+                                                p.appendChild(breadcrumbText);
+                                                breadcrumb.appendChild(p);
+                                            </script>";
+                        }
+                    }
+                }
 
                 $indent = count($elements);
                 $col = 2;
@@ -220,9 +238,7 @@ class baseSelector {
                 $this->tree.="  $('autocomplete-input').observe('keypress', function(event) { if(event.keyCode == Event.KEY_RETURN) { $('submit_base_".$this->pid."').click(); } });";
             }
             $this->tree.="  </script>";
-
         } else {
-
             $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($config->current['BASE'])."';  $('submit_tree_base_".$this->pid."').click();\"";
 
 
@@ -243,7 +259,7 @@ class baseSelector {
             rtimer=showIt.delay(0.25); \"
                 onmouseout=\"   mouseIsStillOver=false;
             rtimer=Element.hide.delay(0.25,'bs_".$this->pid."')\"
-                value=\"".htmlentities(LDAP::makeReadable($this->pathMapping[$this->base]),ENT_COMPAT,'utf-8')."\">";
+                value=\"".htmlentities(LDAP::makeReadable($this->pathMapping[$this->base]), ENT_COMPAT, 'utf-8')."\">";
 
 
             // Autocompleter
@@ -318,7 +334,7 @@ class baseSelector {
         return true;
     }
 
-    function getLdapTree()
+    public function getLdapTree()
     {
         global $config;
 
@@ -342,28 +358,28 @@ class baseSelector {
     }
 
 
-    function gennonbreaks($string)
+    public function gennonbreaks($string)
     {
         return str_replace('-', '&#8209;', str_replace(' ', '&nbsp;', $string));
     }
 
 
-    function render()
+    public function render()
     {
         return $this->tree;
     }
 
 
-    function getBase()
+    public function getBase()
     {
         return $this->base;
     }
 
 
-    function getAction()
+    public function getAction()
     {
         // Do not do anything if this is not our BPID, or there's even no BPID available...
-        if(!isset($_REQUEST['BPID']) || $_REQUEST['BPID'] != $this->pid) {
+        if (!isset($_REQUEST['BPID']) || $_REQUEST['BPID'] != $this->pid) {
             return;
         }
 
@@ -373,7 +389,4 @@ class baseSelector {
 
         return null;
     }
-
 }
-
-?>

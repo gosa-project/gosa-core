@@ -12,19 +12,17 @@
                             title="{$sessionLifetime}|{t}Session expires in %d!{/t}"></canvas>
                     </div>
                 </li>
-                <li class="mg2">
-                    {$loggedin}
-                </li>
+
                 <li><a class="dropdown-nav-more" data-target="more-options"><i class="material-icons">more_vert</i></a></li>
                 <ul id="more-options" class="dropdown-content">
+                    {$pathMenu}
                     <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>
                         <li title='{t}Log out{/t}' onclick="return question('{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}', 'logout.php?forcedlogout');">
-                            <span class="material-icons">logout</span> Logout
+                            <span class="material-icons">logout</span> Logout {$userName}
                             <input type='hidden' name='forcedlogout' value='1'>
                             <input type="hidden" name="php_c_check" value="1">
                         </li>
                     </form>
-                    {$pathMenu}
                 </ul>
             </ul>
         </div>
