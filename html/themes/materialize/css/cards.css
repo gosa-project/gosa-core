@@ -84,3 +84,54 @@
 .card .card-content .card-action .row {
     margin: 0;
 }
+
+.content .card-content .control-panel .ldap-tree .search-field .collection .collection-item-tree {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field .collection .collection-item-tree span {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field .collection .collection-item-tree p {
+    font-size: 12px;
+    color: grey;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field .collection .collection-item-tree i {
+    position: relative;
+    top: unset;
+    margin-right: 1rem;
+}
+
+.object-info .content-wrapper .ldap-tree .search-field .collection .collection-item-tree {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 5px 10px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+}
+
+.object-info .content-wrapper .ldap-tree .search-field .collection .collection-item-tree span {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.object-info .content-wrapper .ldap-tree .search-field .collection .collection-item-tree p {
+    font-size: 12px;
+    color: grey;
+}
+
+.object-info .content-wrapper .ldap-tree .search-field .collection .collection-item-tree i {
+    position: relative;
+    top: unset;
+    margin-right: 1rem;
+}

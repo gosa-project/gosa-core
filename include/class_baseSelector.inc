@@ -169,6 +169,7 @@ class baseSelector
             // First entry is Base at Start
 
             $this->tree.="      <li class='collection-item-tree' $link>
+                                    <i class='material-icons'>/</i>
                                     <span>["._("Root")."]</span>
                                     <p>"._("Base")."</p>
                                 </li>";
@@ -214,9 +215,10 @@ class baseSelector
                 $selected = $this->base == $base ? "active" : "";
                 $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
 
-                $this->tree.="  <li class='collection-item-tree' $link>
-                                        <span>".$this->gennonbreaks($config->department_info[$base]['name'])."</span>
-                                        <p class='right'>".$this->gennonbreaks($config->department_info[$base]['description'])."</p>
+                $this->tree.="  <li class='collection-item-tree' $link>";                      
+                $this->tree.="      <i class='material-icons' style='margin-left: ".$indent."0px;'>".$config->department_info[$base]['img']."</i>
+                                    <span class=''>".$this->gennonbreaks($config->department_info[$base]['name'])."</span>
+                                    <p class='right'>".$this->gennonbreaks($config->department_info[$base]['description'])."</p>
                                 </li>";
 
 
