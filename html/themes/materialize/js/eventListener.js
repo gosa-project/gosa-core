@@ -55,6 +55,5 @@ var autocomplete = document.querySelector('#autocomplete-input');
 var acInstances = M.Dropdown.init(autocomplete, {
     'constrainWidth': false,
     'coverTrigger': false,
-    'hover': false,
-    'constrainWidth': false,
+    'hover': false
 });

@@ -182,7 +182,7 @@ class baseSelector
 
             foreach ($this->pathMapping as $base => $dummy) {
                 $pathbase = explode(",", $base);
-                
+
 
                 // Skip root for tree
                 if ($base == $config->current['BASE']) {
@@ -192,7 +192,7 @@ class baseSelector
                 // Build path style display
                 $elements = explode(',', substr($base, 0, strlen($base) - strlen($config->current['BASE'])));
 
-                
+
 
                 if ($this->base == $base) {
                     $reverseElements = array_reverse($elements);
