@@ -266,11 +266,7 @@
     line-height: 30px;
     min-width: 18px;
     width: auto;
-    /* margin-left: 10px; */
-}
-
-.object-info .content-wrapper .input-field.manager .icons .icon:last-child {
-    margin-left: 0;
+    margin-left: 10px;
 }
 
 .object-info .content-wrapper .input-field.manager [type="checkbox"]:not(:checked),
