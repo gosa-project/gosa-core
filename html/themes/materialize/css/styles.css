@@ -94,6 +94,12 @@ input {
     min-height: 33px;
 }
 
+.ellipsis-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 /* Override the Materialize color */
 

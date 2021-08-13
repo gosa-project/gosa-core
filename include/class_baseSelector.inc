@@ -171,16 +171,13 @@ class baseSelector {
             // First entry is Base at Start
 
             $this->tree.="      <li class='collection-item valign-wrapper' $link>
-                                    <div class='col s1'>
-                                        <b class='right'>&lt;/&gt;</b>
-                                    </div>
-                                    <div class='col s11'>
-                                        <span class='title'>["._("Root")."]</span>
+                                    <i class='material-icons'>code</i>
+
+                                    <div class='description'>
+                                        <p class='title'>["._("Root")."]</p>
                                         <p>"._("Base")."</p>
                                     </div>
                                 </li>";
-
-
 
             $first= true;
             $indent= 2;
@@ -201,16 +198,14 @@ class baseSelector {
                 $selected = $this->base == $base ? "active" : "";
                 $link= "onclick=\"\$('bs_rebase_".$this->pid."').value='".base64_encode($base)."';$('submit_tree_base_".$this->pid."').click();\"";
 
-                $this->tree.="  <li class='collection-item valign-wrapper' $link>
-                                    <div class='col s".$indent."'>
-                                        <i class='material-icons right'>".$config->department_info[$base]['img']."</i>
-                                    </div>
-                                    <div class='col s".(11 - ($indent - 1))."'>
-                                        <span class='title'>".$this->gennonbreaks($config->department_info[$base]['name'])."</span>
-                                        <p>".$this->gennonbreaks($config->department_info[$base]['description'])."</p>
+                $this->tree.="  <li class='collection-item valign-wrapper' style='padding-left:".($indent * 5 + 5)."px;' $link>
+                                    <i class='material-icons'>".$config->department_info[$base]['img']."</i>
+
+                                    <div class='description'>
+                                        <p class='title ellipsis-text'>".$this->gennonbreaks($config->department_info[$base]['name'])."</p>
+                                        <p class='ellipsis-text'>".$this->gennonbreaks($config->department_info[$base]['description'])."</p>
                                     </div>
                                 </li>";
-
 
                 $last_indent = $indent;
                 $first = false;

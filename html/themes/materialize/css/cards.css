@@ -65,7 +65,7 @@
 }
 
 .card-content .card .card-content .card-title {
-    overflow-y: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
