@@ -37,16 +37,12 @@
 
 <script language="javascript" src="include/tooltip.js" type="text/javascript"></script>
 
-<div>
-  <span class="black-text">
-    <h2>
-      {$HEADLINE}&nbsp;{$SIZELIMIT}
-      {if $ignoreLdapProperties}
-      - <span class="red-text">{t}Ignoring LDAP defined properties!{/t}</span>
-      {/if}
-    </h2>
-  </span>
-</div>
+<h2>
+  {$HEADLINE}&nbsp;{$SIZELIMIT}
+  {if $ignoreLdapProperties}
+  - <span class="red-text">{t}Ignoring LDAP defined properties!{/t}</span>
+  {/if}
+</h2>
 <div class="control-panel">
   <div class="navigation">
     <div class="refresh">{$RELOAD}</div>

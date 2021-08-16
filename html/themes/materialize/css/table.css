@@ -1,5 +1,5 @@
 .section.card-content-scroll {
-    max-height: calc(100vh - 306px);
+    max-height: calc(100vh - 370px);
 }
 
 #tree-table th,
