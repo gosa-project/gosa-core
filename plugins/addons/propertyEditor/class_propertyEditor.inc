@@ -222,7 +222,7 @@ class propertyEditor extends management
 
         switch($type[0]){
             case 'noLdap':
-                $res = $value." &nbsp;<i>(".CONFIG_DIR.'/'.CONFIG_FILE.")</i>";
+                $res = $value." &nbsp;(".CONFIG_DIR.'/'.CONFIG_FILE.")";
                 break;
             case 'bool':
                 $res = "<select id='$name' size=1 name=\"{$name}\" style='width:{$ssize}'>";
@@ -248,8 +248,17 @@ class propertyEditor extends management
                 }
                 break;
             case 'command':
-                $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
-                $res.= image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                if (check_for_materialize_theme()) {
+                    $res = "<div class='valign-wrapper'>
+                                <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">";
+                    $res.= "    <div class='command-icon'>    
+                                    ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
+                                </div>
+                            </div>";
+                }else {
+                    $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
+                    $res.= image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                }
                 break;
             case 'dn':
             case 'rdn':
