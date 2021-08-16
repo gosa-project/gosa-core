@@ -100,7 +100,7 @@
 
 /* Others */
 
-.user-info .content-wrapper .input-field {
+.object-info .content-wrapper .input-field {
     height: 39px;
 }
 
@@ -114,6 +114,11 @@
     height: 30px!important;
     font-size: 12px;
     padding: 0;
+}
+
+.object-info .content-wrapper .input-field textarea {
+    overflow-y: auto;
+    padding-top: 1em;
 }
 
 .object-info .content-wrapper .input-field.certificate {
@@ -143,6 +148,10 @@
 
 .object-info .content-wrapper .select-wrapper {
     margin-bottom: 8px;
+}
+
+.datepicker-calendar .selects-container .select-wrapper {
+    margin-bottom: 0;
 }
 
 .object-info .content-wrapper .select-wrapper+label {
@@ -323,11 +332,12 @@
 }
 
 .object-info .account-settings label span input[type=text]:not(.browser-default) {
-    min-height: 30px;
-    height: 30px!important;
+    min-height: 24px;
+    height: 24px!important;
     font-size: 12px;
     padding: 0;
     margin-bottom: 0;
+    color: red;
 }
 
 .object-info .account-settings .inline-date-picker .input-field i {

@@ -24,7 +24,17 @@ var mboxInstances = M.Materialbox.init(mbox, {});
 
 // js for datepicker
 var dp = document.querySelectorAll('.datepicker');
-var dpInstances = M.Datepicker.init(dp, {});
+let currentDate = new Date();
+let minDate = new Date(1920, 1, 1);
+let dateOptions = {
+    'format': 'dd.mm.yyyy',
+    'minDate': minDate,
+    'maxDate': currentDate,
+    'firstDay': 1,
+    'defaultDate': currentDate,
+    'yearRange': [minDate.getFullYear(), currentDate.getFullYear()]
+}
+var dpInstances = M.Datepicker.init(dp, dateOptions);
 
 var ddmenu = document.querySelectorAll('.dropdown-menu');
 var ddmenuInstances = M.Dropdown.init(ddmenu, {
