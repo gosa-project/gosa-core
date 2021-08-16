@@ -3,7 +3,7 @@ let scrollElem = document.querySelectorAll('.card-content-scroll');
 
 if (scrollElem.length !== 0) {
     let cardContent = document.querySelector('.card-content');
-    cardContent.style.overflowY = "hidden"
+    cardContent.style.overflowY = "visible"
 }
 
 // Function to change the visibility of the password

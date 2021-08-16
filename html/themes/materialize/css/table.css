@@ -2,7 +2,8 @@
     max-height: calc(100vh - 306px);
 }
 
-#tree-table th, #tree-table td {
+#tree-table th,
+#tree-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -19,7 +20,8 @@
     padding-left: 0;
 }
 
-#tree-table thead .checkbox-column, #tree-table thead .icon-column {
+#tree-table thead .checkbox-column,
+#tree-table thead .icon-column {
     width: 38px
 }
 
@@ -31,13 +33,24 @@
     outline: none;
 }
 
+#tree-table .select-wrapper {
+    width: fit-content;
+}
+
 #tree-table .select-wrapper input {
     width: auto;
     max-width: 200px;
-    min-height: 30px;
-    height: 30px!important;
+    min-height: 27px;
+    height: 27px!important;
     font-size: 12px;
     padding: 0;
+    margin: 0;
+}
+
+#tree-table .select-wrapper ul li {
+    padding: 5px 10px;
+    min-height: 31px;
+    max-height: 31px;
 }
 
 #tree-table input {
@@ -96,6 +109,7 @@
     font-size: 18px;
 }
 
-th, td {
+th,
+td {
     padding: unset;
 }
