@@ -35,10 +35,35 @@ class password extends plugin
     var $userPassword = "";
     var $attributes=array('userPassword');
 
+    /* Password checks */
+    var $pwLength;
+    var $check_special = true;
+    var $check_lower = true;
+    var $check_upper = true;
+    var $check_digits = true;
+
 
     function __construct(&$config, $dn= NULL, $parent= NULL)
     {
         plugin::__construct($config, $dn, $parent);
+
+        $smarty = get_smarty();
+        $this->pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
+        $smarty->assign("pwLength", $this->pwLength);
+        if (check_for_materialize_theme()) {
+            if ($this->check_special) {
+                $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
+            }
+            if ($this->check_lower) {
+                $smarty->assign("lower", _("The password must contain lower case letters."));
+            }
+            if ($this->check_upper) {
+                $smarty->assign("upper", _("The password must contain upper case letters."));
+            }
+            if ($this->check_digits) {
+                $smarty->assign("digits", _("The password must contain digits."));
+            }
+        }
     }
 
     
@@ -112,8 +137,14 @@ class password extends plugin
             // Get configuration flags for further input checks.
             $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
             $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
-            $check_length = $this->config->get_cfg_value("core","passwordMinLength") != "";
-            $length       = $this->config->get_cfg_value("core","passwordMinLength");
+            $length       = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
+
+            if (check_for_materialize_theme()) {
+                $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
+                $lower          = "/[a-z]/";
+                $upper          = "/[A-Z]/";
+                $digits         = "/[0-9]/i";
+            }
 
             // Once an error has occured it is stored here.
             $message = array();
@@ -132,8 +163,18 @@ class password extends plugin
                 $message[] = _("The password you've entered as 'New password' is empty.");
             }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
                 $message[] = _("The password used as new and current are too similar.");
-            }elseif($check_length && (strlen($new_password) < $length)){
-                $message[] = _("The password used as new is to short.");
+            }elseif((strlen($new_password) < $length)){
+                $message[] = _("The password must have at least $length characters.");
+            }elseif(check_for_materialize_theme()) {
+                if($this->check_lower && !preg_match($lower, $new_password)) {
+                    $message[] = _("The password must contain lowercase letters.");
+                }elseif($this->check_upper && !preg_match($upper, $new_password)) {
+                    $message[] = _("The password must contain uppercase letters.");
+                }elseif($this->check_digits && !preg_match($digits, $new_password)) {
+                    $message[] = _("The password must contain digits.");
+                }elseif($this->check_special && !preg_match($special, $new_password)) {
+                    $message[] = _("The password must contain at least 1 special character, e.g. !, @, #, $, %, ^, &, *, ?, _, ~.");
+                }
             }elseif(!passwordMethod::is_harmless($new_password)){
                 $message[] = _("The password contains possibly problematic Unicode characters!");
             }
@@ -175,6 +216,7 @@ class password extends plugin
                     return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
                 }
             }
+            $smarty->assign("pwLength", $length);
         }
         return($smarty->fetch(get_template_path("password.tpl", TRUE)));
     } 
@@ -192,6 +234,9 @@ class password extends plugin
     {
         $command = $config->configRegistry->getPropertyValue("password","check");
         if (!empty($command)){
+            echo '<pre>';
+            var_dump($attrs);
+            echo '</pre>';
 
             // Build up ldif to send to the check hook
             $ldif= "dn: $dn\n";

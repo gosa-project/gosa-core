@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="col s6">
         <div class="col s8 offset-s4">
           <div class="password-conditions">
@@ -88,24 +88,32 @@
             <ul>
               <li class="condition">
                 <i id="pw-length" class='material-icons'>close</i>
-                {t}The password must have at least 8 characters.{/t}
+                {t}The password must have at least {$pwLength} characters.{/t}
               </li>
+              {if $lower}
               <li class="condition">
                 <i id="pw-lowercase" class='material-icons'>close</i>
-                {t}The password must contain lower case letters.{/t}
+                {t}{$lower}{/t}
               </li>
+              {/if}
+              {if $upper}
               <li class="condition">
                 <i id="pw-uppercase" class='material-icons'>close</i>
-                {t}The password must contain upper case letters.{/t}
+                {$upper}
               </li>
+              {/if}
+              {if $digits}
               <li class="condition">
                 <i id="pw-numbers" class='material-icons'>close</i>
-                {t}The password must contain digits.{/t}
+                {$digits}
               </li>
+              {/if}
+              {if $special}
               <li class="condition">
                 <i id="pw-special" class='material-icons'>close</i>
-                {t}The password must contain at least 1 special character, e.g.{/t} !, @, #, $, %, ^, &, *, ?, _, ~.
+                {$special} !, @, #, $, %, ^, &, *, ?, _, ~.
               </li>
+              {/if}
             </ul>
           </div>
         </div>
