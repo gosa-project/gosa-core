@@ -138,7 +138,7 @@ if (! $cleanup ){
         if (!$MyAccountTabs->is_modal_dialog() && empty($lock_msg) && !$MyAccountTabs->password_change_needed){
 
             if (check_for_materialize_theme()) {
-                $display.=" <div class='card-action'><div class='row'>";
+                $display.=" <div class='card-action'>";
 
                 /* Are we in edit mode? */
                 if (session::is_set('edit')){
@@ -150,7 +150,7 @@ if (! $cleanup ){
                     }
                     $display.= "<input type='hidden' name='ignore'>\n";
                 }
-                $display.=" </div></div>";
+                $display.=" </div>";
             } else {
                 $display.= "<div class='plugin-actions'>";
 

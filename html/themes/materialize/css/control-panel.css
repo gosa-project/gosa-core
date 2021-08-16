@@ -107,21 +107,21 @@
     padding: 0;
 }
 
-.content .card-content .control-panel .ldap-tree #autocomplete {
+.ldap-tree #autocomplete {
     min-width: 250px;
     max-width: 250px;
 }
 
-.content .card-content .control-panel .ldap-tree #autocomplete li {
+.ldap-tree #autocomplete li {
     padding: 5px 10px;
 }
 
-.content .card-content .control-panel .ldap-tree #autocomplete li i {
+.ldap-tree #autocomplete li i {
     position: initial;
     margin-right: 10px;
 }
 
-.content .card-content .control-panel .ldap-tree #autocomplete li p.title {
+.ldap-tree #autocomplete li p.title {
     font-weight: bold;
 }
 
