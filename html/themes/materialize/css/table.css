@@ -113,3 +113,19 @@ th,
 td {
     padding: unset;
 }
+
+#tree-table .command-icon input + i {
+    position: relative;
+    margin: -1.9rem;
+}
+
+/* #tree-table .command-input {
+    width: unset;
+    padding: unset;
+} */
+
+#tree-table .command-input[type="text"]:not(.browser-default){
+    width: unset;
+    padding: unset;
+    margin: 0 10px 0 0;
+}
