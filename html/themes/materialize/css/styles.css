@@ -67,6 +67,7 @@ input {
 }
 
 .card-content-scroll {
+    overflow: hidden;
     overflow-y: auto;
 }
 
@@ -83,6 +84,15 @@ input {
     transform: translateY(-14px) scale(0.8);
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
+}
+
+.select-wrapper+label {
+    top: 0;
+    font-size: 16px;
+}
+
+.input-field>label {
+    font-size: 16px;
 }
 
 .dropdown-content {
