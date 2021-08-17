@@ -906,7 +906,7 @@ class listing
         return $smarty->fetch($file);
     }
 
-    function setPaginator($prow, $page, $selectedPage)
+    public function setPaginator($prow, $page, $selectedPage)
     {
         // skip paginator if only one page is filled
         if (count($this->entries) / $prow > 1) {
@@ -976,7 +976,7 @@ class listing
         return $paginator;
     }
 
-    function setPageLink($page, $items)
+    public function setPageLink($page, $items)
     {
         return "?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=$page&amp;items=$items";
     }
@@ -1750,15 +1750,38 @@ class listing
             }
 
             if (check_for_materialize_theme()) {
+                // skip headline if all action entrys have missing dependencies
+                $missingDepsAll = $missing;
+                foreach ($action['action'] as $act) {
+                    if (isset($act['depends'])) {
+                        $deps = is_array($act['depends']) ? $act['depends'] : [$act['depends']];
+                        foreach ($deps as $clazz) {
+                            if (!isset($class_mapping[$clazz])) {
+                                $missingDepsAll = true;
+                                continue 2;
+                            } else {
+                                $missingDepsAll = false;
+                                break;
+                            }
+                        }
+                    } else {
+                        $missingDepsAll = false;
+                        break;
+                    }
+                }
+                if ($missingDepsAll) {
+                    continue;
+                }
+
                 // Dive into subs
                 if ($action['type'] == 'sub' && isset($action['action'])) {
                     ++$level;
 
-                    $result .= "  <li class='pointer_off'>
-                                <ul class='collection with-header'>";
+                    $result .= "<li class='pointer_off'>
+                                    <ul class='collection with-header'>";
 
                     if (isset($action['label'])) {
-                        $result .= " <li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
+                        $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
                     } else {
                         $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
                     }
@@ -1777,21 +1800,21 @@ class listing
 
                 if (isset($action['label'])) {
                     if ($level < 1) {
-                        $result .= "  <ul class='collection' onClick='\$(\"act\").value= '".$action['name']."';\$(\"exec_act\").click();'>
-                                    <li class='collection-item'>
+                        $result .= "<ul class='collection' onClick='\$(\"act\").value= '".$action['name']."';\$(\"exec_act\").click();'>
+                                        <li class='collection-item'>
+                                            <a href='#'>
+                                                $img&nbsp;
+                                                "._($action['label']).'
+                                            </a>
+                                        </li>
+                                    </ul>';
+                    } else {
+                        $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>
                                         <a href='#'>
-                                            $img&nbsp;
+                                            $img
                                             "._($action['label']).'
                                         </a>
-                                    </li>
-                                </ul>';
-                    } else {
-                        $result .= "  <li class='collection-item' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>
-                                    <a href='#'>
-                                        $img
-                                        "._($action['label']).'
-                                    </a>
-                                </li>';
+                                    </li>';
                     }
                 }
 

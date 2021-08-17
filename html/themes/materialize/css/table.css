@@ -119,11 +119,6 @@ td {
     margin: -1.9rem;
 }
 
-/* #tree-table .command-input {
-    width: unset;
-    padding: unset;
-} */
-
 #tree-table .command-input[type="text"]:not(.browser-default){
     width: unset;
     padding: unset;
