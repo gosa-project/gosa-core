@@ -103,10 +103,16 @@
   <actionmenu>
 
     <action>
-      <name>remove</name>
-      <type>entry</type>
-      <image>delete</image>
-      <label>Remove</label>
+      <type>sub</type>
+      <image>settings</image>
+      <label>Manage</label>
+
+      <action>
+        <name>remove</name>
+        <type>entry</type>
+        <image>delete</image>
+        <label>Remove</label>
+      </action>
     </action>
 
     <action>
