@@ -1,0 +1,100 @@
+.acl-content-wrapper button {
+    margin-top: 20px;
+}
+
+.acl-content-wrapper .acl-setting-buttons button,
+.acl-content-wrapper .card-action button {
+    margin-top: 0;
+}
+
+.acl-ds-head.card-content-scroll {
+    max-height: calc(100vh - 279px);
+}
+
+.acl-ds-create.card-content-scroll,
+.acl-ds-edit.card-content-scroll {
+    max-height: calc(100vh - 282px);
+}
+
+.acl-ds-create h3 {
+    margin: 0 0 1em 0;
+}
+
+.acl-ds-create .members {
+    margin-bottom: 20px;
+}
+
+.acl-for-object .acl-object-wrapper {
+    -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    border-top: 1px solid #e0e0e0;
+    padding: 1em;
+    margin: 1px;
+    margin-top: 10px;
+}
+
+.acl-for-object .acl-object-wrapper .object-head-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.acl-for-object .acl-object-wrapper .object-head-wrapper .object-name {
+    font-weight: bold;
+}
+
+.acl-for-object .acl-object-wrapper .object-body-wrapper .row,
+.acl-for-object .acl_container .row {
+    margin-bottom: 0;
+}
+
+.acl-for-object .acl-object-wrapper .object-body-wrapper label,
+.acl-for-object .acl_container label {
+    position: relative;
+}
+
+.acl-for-object .acl-object-wrapper .object-body-wrapper label input,
+.acl-for-object .acl_container label input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+}
+
+.acl-for-object .acl_container {
+    border: 1px solid #e0e0e0;
+    padding: 1em 1em 2px 1em;
+    background-color: initial;
+}
+
+.acl-for-object .acl_container label,
+.acl-for-object .acl-object-wrapper .object-body-wrapper label {
+    margin-right: 10px;
+}
+
+.acl-for-object .acl_container label:last-child,
+.acl-for-object .acl-object-wrapper .object-body-wrapper label:last-child {
+    margin-right: 0;
+}
+
+.acl-for-object .acl_container label span,
+.acl-for-object .acl-object-wrapper .object-body-wrapper label span {
+    padding-left: 28px;
+    color: #000000;
+}
+
+.acl-for-object .acl_container .option-grp {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
