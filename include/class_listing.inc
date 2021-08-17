@@ -1750,51 +1750,33 @@ class listing
             }
 
             if (check_for_materialize_theme()) {
-                // skip headline if all action entrys have missing dependencies
-                $missingDepsAll = $missing;
-                foreach ($action['action'] as $act) {
-                    if (isset($act['depends'])) {
-                        $deps = is_array($act['depends']) ? $act['depends'] : [$act['depends']];
-                        foreach ($deps as $clazz) {
-                            if (!isset($class_mapping[$clazz])) {
-                                $missingDepsAll = true;
-                                continue 2;
-                            } else {
-                                $missingDepsAll = false;
-                                break;
-                            }
-                        }
-                    } else {
-                        $missingDepsAll = false;
-                        break;
-                    }
-                }
-                if ($missingDepsAll) {
-                    continue;
-                }
-
+                // count entries
+                $count = $this->countValidEntries($action);
+                
                 // Dive into subs
                 if ($action['type'] == 'sub' && isset($action['action'])) {
-                    ++$level;
+                    if ($count > 0) {
+                        ++$level;
 
-                    $result .= "<li class='pointer_off'>
+                        $result .= "<li class='pointer_off'>
                                     <ul class='collection with-header'>";
 
-                    if (isset($action['label'])) {
-                        $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
-                    } else {
-                        $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
+                        if (isset($action['label'])) {
+                            $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
+                        } else {
+                            $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
+                        }
+
+                        // Ensure we've an array of actions, this enables sub menus with only one action.
+                        if (isset($action['action']['type'])) {
+                            $action['action'] = [$action['action']];
+                        }
+
+                        $result .= $this->recurseActions($action['action'], $level).'</ul>';
+
+                        --$level;
+                        $separator = '';
                     }
-
-                    // Ensure we've an array of actions, this enables sub menus with only one action.
-                    if (isset($action['action']['type'])) {
-                        $action['action'] = [$action['action']];
-                    }
-
-                    $result .= $this->recurseActions($action['action'], $level).'</ul>';
-
-                    --$level;
-                    $separator = '';
                     continue;
                 }
 
@@ -1892,6 +1874,24 @@ class listing
         }
 
         return $result;
+    }
+
+    public function countValidEntries($action)
+    {
+        $count = 0;
+        foreach ($action['action'] as $act) {
+            if (isset($act['depends'])) {
+                $deps = is_array($act['depends']) ? $act['depends'] : [$act['depends']];
+                foreach ($deps as $clazz) {
+                    if (isset($class_mapping[$clazz])) {
+                        ++$count;
+                    }
+                }
+            } else {
+                ++$count;
+            }
+        }
+        return $count;
     }
 
     public function hasActionPermission($action, $dn, $classes = null)
