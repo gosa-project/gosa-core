@@ -91,7 +91,7 @@
     {$groupList}
     {/render}
     {render acl=$groupMembershipACL}
-    <button class="btn-small gonicus-color" type='submit' name='edit_groupmembership'>{msgPool
+    <button class="btn-small" type='submit' name='edit_groupmembership'>{msgPool
       type=addButton}</button>&nbsp;
     {/render}
   </div>

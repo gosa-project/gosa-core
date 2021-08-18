@@ -20,9 +20,23 @@
     width: 49px;
 }
 
+button *,
+button.btn-small,
+div.btn-small {
+    background-color: transparent;
+    color: #000;
+    text-transform: initial;
+}
 
-/* .btn-small {
-    height: 2rem !important;
-    line-height: 2rem !important;
-    font-size: unset !important;
-} */
+button *:hover,
+button.btn-small:hover,
+div.btn-small:hover {
+    background-color: rgba(42, 50, 120, 1);
+    color: #fff;
+}
+
+button *.gonicus-color,
+button.btn-small.gonicus-color {
+    background-color: rgba(42, 50, 120, 1);
+    color: #fff;
+}

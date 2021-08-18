@@ -95,6 +95,18 @@ input {
     font-size: 16px;
 }
 
+label {
+    position: relative;
+}
+
+label input[type="checkbox"] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+}
+
 .dropdown-content {
     margin: 0;
     border-bottom: 0;
