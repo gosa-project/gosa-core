@@ -232,16 +232,35 @@ class sortableListing {
     {	
         if(check_for_materialize_theme()) {
             $result = " <div id='scroll_".$this->id."' class='scrollspy acl-member'>
-                            <table ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
+                            <table id='generic-table' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
             if (strpos($this->acl, 'w') === false) {
-                $edit_image = $this->editable?image("<i class='material-icons'>edit</i>"):"";
+                $edit_image = $this->editable?image("<i class='material-icons grey'>edit</i>"):"";
             } else {
-                $edit_image = $this->editable?image("<i class='material-icons'>edit</i>", "%ID", _("Edit this entry")):"";
+                $edit_image = $this->editable?image("<i class='material-icons input-icons'>edit</i>", "%ID", _("Edit this entry")):"";
             }
             if (strpos($this->acl, 'w') === false) {
-                $delete_image= $this->deleteable?image("<i class='material-icons'>delete</i>"):"";
+                $delete_image= $this->deleteable?image("<i class='material-icons grey'>delete</i>"):"";
             } else {
-                $delete_image= $this->deleteable?image("<i class='material-icons'>delete</i>", "%ID", _("Delete this entry")):"";
+                $delete_image= $this->deleteable?image("<i class='material-icons input-icons'>delete</i>", "%ID", _("Delete this entry")):"";
+            }
+
+            // Do we need colspecs?
+            $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
+            if ($this->colspecs) {
+                $result.= " <colgroup>\n";
+                for ($i= 0; $i<$this->columns; $i++) {
+                    if(isset($this->colspecs[$i]) && $this->colspecs[$i] != '*'){
+                        $result.= "  <col style='width:".($this->colspecs[$i])."'>\n";
+                    }else{
+                        $result.= "  <col>\n";
+                    }
+                }
+    
+                // Extend by another column if we've actions specified
+                if ($action_width) {
+                    $result.= "  <col style='width:".$action_width."px' >\n";
+                }
+                $result.= " </colgroup>\n";
             }
 
             // Do we need a header?
@@ -269,7 +288,7 @@ class sortableListing {
             }
 
             // Render table body if we've read permission
-            $result.= "<tbody>";
+            $result.= "<tbody id='".$this->id."'>";
             $reorderable= $this->reorderable ? "" : " style='cursor:default'";
     
             if (strpos($this->acl, 'r') !== false) {
@@ -302,9 +321,16 @@ class sortableListing {
                     }
     
                     if ($action_width) {
-                        $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
-                            str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
+                        $result.="  <td class='action-column'>
+                                        <div class='action-wrapper'>
+                                            ".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image)."
+                                        </div>
+                                        <div class='action-wrapper'>
+                                            ".str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."
+                                        </div>
+                                    </td>";
                     }
+                    $result.= "  </tr>\n";
                 }
             }
             $result.= "         </tbody>
@@ -460,8 +486,6 @@ class sortableListing {
             $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
             $result.= '</script>';
         }
-        
-
         return $result;
     }
 

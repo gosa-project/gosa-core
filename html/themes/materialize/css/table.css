@@ -124,3 +124,37 @@ td {
     padding: unset;
     margin: 0 10px 0 0;
 }
+
+#generic-table td.action-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#generic-table .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#generic-table .action-wrapper input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
+}
+
+#generic-table .action-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+#generic-table i.material-icons {
+    font-size: 18px;
+}
