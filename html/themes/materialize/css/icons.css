@@ -99,4 +99,5 @@ input.input-btn+i.input-icons {
 input.input-btn {
     z-index: 1;
     position: relative;
+    width: 24px;
 }
