@@ -355,6 +355,13 @@
 
 /* Mail Settings */
 
+.object-info .content-wrapper label button {
+    max-height: 25px;
+    min-height: 25px;
+    line-height: 25px;
+    margin: 0 10px;
+}
+
 .object-info .contingent .list {
     display: flex;
     flex-direction: row;

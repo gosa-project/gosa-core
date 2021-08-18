@@ -8,7 +8,7 @@
     <img src="getbin.php?rand={$rand}" alt='' class="materialboxed h-center">
     {/if}
     {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
-    <button class="btn-small gonicus-color" type="submit" name="edit_picture">{t}Change picture{/t}...</button>
+    <button class="btn-small" type="submit" name="edit_picture">{t}Change picture{/t}...</button>
     {/render}
   </div>
   <div class="col s6 xl5">

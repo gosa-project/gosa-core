@@ -12,7 +12,7 @@
 				{$aclList}
 			</div>
 			{if $acl_createable}
-				<button class="btn-small gonicus-color" type='submit' name='new_acl'>{t}New ACL{/t}</button>
+				<button class="btn-small" type='submit' name='new_acl'>{t}New ACL{/t}</button>
 			{/if}
 		{/if}
 
@@ -49,11 +49,11 @@
 				<div class="members">
 					<h3>{t}Members{/t}</h3>
 					{$aclMemberList}
-					<button class="btn-small gonicus-color" type='submit'
+					<button class="btn-small" type='submit'
 					{if !$acl_writeable} disabled="disabled" {/if}
 					name='add_user_or_group'>{msgPool type=addButton}</button>
 
-					<button class="btn-small gonicus-color" type='submit'
+					<button class="btn-small" type='submit'
 					{if !$acl_writeable} disabled="disabled" {/if}
 					name='add_all_users'>{t}Add all users{/t}</button>
 				</div>
