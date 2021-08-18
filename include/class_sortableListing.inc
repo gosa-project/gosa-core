@@ -244,55 +244,15 @@ class sortableListing {
                 $delete_image= $this->deleteable?image("<i class='material-icons'>delete</i>", "%ID", _("Delete this entry")):"";
             }
 
-            // Extend by another column if we've actions specified
-            if ($action_width) {
-                $result.= "  <col style='width:".$action_width."px' >\n";
-            }
-            $result.= " </colgroup>\n";
-        }
-
-        // Do we need a header?
-        if ($this->header) {
-            $result.= " <thead>\n  <tr>\n";
-            $first= " style='border-left:0'";
-            for ($i= 0; $i<$this->columns; $i++) {
-                $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
-                $sorter= "";
-                if ($i == $this->sortColumn){
-                    $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending"));
-                }
-
-                if (($this->reorderable) || (!$this->sortingEnabled)) {
-                    $result.= "   <th$first>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
-                } else {
-                    $result.= "   <th$first><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."</a>$sorter</th>";
-                }
-                $first= "";
-            }
-            if ($action_width) {
-                $result.= "<th>&nbsp;</th>";
-            }
-            $result.= "\n  </tr>\n </thead>\n";
-        }
-
-        // Render table body if we've read permission
-        $result.= " <tbody id='".$this->id."'>\n";
-        $reorderable= $this->reorderable?"":" style='cursor:default'";
-
-        if (strpos($this->acl, 'r') !== false) {
-            foreach ($this->mapping as $nr => $row) {
-                $editable= $this->editable?" onClick='$(\"edit_".$this->id."_$nr\").click()'":"";
-
-                $id= "";
-                if (isset($this->modes[$row])) {
-                    switch ($this->modes[$row]) {
-                        case LIST_DISABLED:
-                            $id= " sortableListItemDisabled";
-                            $editable= "";
-                            break;
-                        case LIST_MARKED:
-                            $id= " sortableListItemMarked";
-                            break;
+            // Do we need a header?
+            if ($this->header) {
+                $result.="  <thead>
+                                <tr>";
+                for ($i= 0; $i<$this->columns; $i++) {
+                    $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
+                    $sorter= "";
+                    if ($i == $this->sortColumn){
+                        $sorter= "&nbsp;".image("<i class='material-icons'>keyboard_arrow_".($this->sortDirection[$i]?"up":"down"), null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending")."</i>");
                     }
                 }
 
