@@ -252,7 +252,7 @@ class sortableListing {
                     $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
                     $sorter= "";
                     if ($i == $this->sortColumn){
-                        $sorter= "&nbsp;".image("<i class='material-icons'>keyboard_arrow_".($this->sortDirection[$i]?"up":"down"), null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending"));
+                        $sorter= "&nbsp;".image("<i class='material-icons'>keyboard_arrow_".($this->sortDirection[$i]?"up":"down"), null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending")."</i>");
                     }
     
                     if (($this->reorderable) || (!$this->sortingEnabled)) {
