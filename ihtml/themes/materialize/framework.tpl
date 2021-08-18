@@ -13,11 +13,13 @@
                     </div>
                 </li>
 
-                <li><a class="dropdown-nav-more" data-target="more-options"><i class="material-icons">more_vert</i></a></li>
+                <li><a class="dropdown-nav-more" data-target="more-options"><i class="material-icons">more_vert</i></a>
+                </li>
                 <ul id="more-options" class="dropdown-content">
                     {$pathMenu}
                     <form action='logout.php' name='logoutframe' method='post' enctype='multipart/form-data'>
-                        <li title='{t}Log out{/t}' onclick="return question('{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}', 'logout.php?forcedlogout');">
+                        <li title='{t}Log out{/t}'
+                            onclick="return question('{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}', 'logout.php?forcedlogout');">
                             <span class="material-icons">logout</span> Logout {$userName}
                             <input type='hidden' name='forcedlogout' value='1'>
                             <input type="hidden" name="php_c_check" value="1">
@@ -97,6 +99,7 @@
         }
     </script>
 
+    <script type="text/javascript" defer src="themes/materialize/js/pickerLanguage.js"></script>
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
     <script type="text/javascript" defer src="themes/materialize/js/eventListener.js"></script>
     <script type="text/javascript" defer src="themes/materialize/js/main.js"></script>

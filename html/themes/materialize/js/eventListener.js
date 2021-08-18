@@ -22,20 +22,6 @@ var ttipInstances = M.Tooltip.init(ttip, {});
 var mbox = document.querySelectorAll('.materialboxed');
 var mboxInstances = M.Materialbox.init(mbox, {});
 
-// js for datepicker
-var dp = document.querySelectorAll('.datepicker');
-let currentDate = new Date();
-let minDate = new Date(1920, 1, 1);
-let dateOptions = {
-    'format': 'dd.mm.yyyy',
-    'minDate': minDate,
-    'maxDate': currentDate,
-    'firstDay': 1,
-    'defaultDate': currentDate,
-    'yearRange': [minDate.getFullYear(), currentDate.getFullYear()]
-}
-var dpInstances = M.Datepicker.init(dp, dateOptions);
-
 var ddmenu = document.querySelectorAll('.dropdown-menu');
 var ddmenuInstances = M.Dropdown.init(ddmenu, {
     'constrainWidth': false,
@@ -67,3 +53,21 @@ var acInstances = M.Dropdown.init(autocomplete, {
     'coverTrigger': false,
     'hover': false
 });
+
+if (document.getElementById('lang')) {
+    var lang = document.getElementById('lang').value;
+}
+var languages = language();
+var dp = document.querySelectorAll('.datepicker');
+let currentDate = new Date();
+let minDate = new Date(1920, 1, 1);
+let dateOptions = {
+    'format': 'dd mmm, yyyy',
+    'minDate': minDate,
+    'maxDate': currentDate,
+    'firstDay': 1,
+    'defaultDate': currentDate,
+    'yearRange': [minDate.getFullYear(), currentDate.getFullYear()],
+    'i18n': languages[lang]
+}
+var dpInstances = M.Datepicker.init(dp, dateOptions);
