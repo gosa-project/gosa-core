@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/*! \brief ACL management plugin */ 
+/*! \brief ACL management plugin */
 class acl extends plugin
 {
     /* Definitions */
@@ -245,7 +245,7 @@ class acl extends plugin
 
     $this->updateList();
 
-    // Prepare lists 
+    // Prepare lists
     $this->sectionList = new sortableListing();
     $this->sectionList->setDeleteable(false);
     $this->sectionList->setEditable(false);
@@ -277,13 +277,13 @@ class acl extends plugin
     $this->aclMemberList->setHeader(array(_("~"),_("Name"),_("Description")));
     $this->aclMemberList->setDefaultSortColumn(1);
     $this->aclMemberList->setAcl('rwcdm'); // All ACLs, we filter on our own here.
-    
+
     }
 
 
     function updateList()
     {
-        if(!$this->list){ 
+        if(!$this->list){
             $this->list = new sortableListing($this->gosaAclEntry,array(),TRUE);
             $this->list->setDeleteable(true);
             $this->list->setInstantDelete(true);
@@ -296,11 +296,11 @@ class acl extends plugin
         }
 
 
-        // Add ACL entries to the listing 
+        // Add ACL entries to the listing
         $lData = array();
         foreach($this->gosaAclEntry as $id => $entry){
             $lData[] = $this->convertForListing($entry);
-        }    
+        }
         $this->list->setListData($this->gosaAclEntry, $lData);
     }
 
@@ -590,7 +590,7 @@ class acl extends plugin
                     else if(isset($entry['uid'])) {
                         $key = "U:" . $entry['dn'];
                         $vData = array("data" => array($userIcon, $entry['uid'][0], $entry['cn'][0]));
-                        
+
                         $lData = array($key => $key);
                         $this->recipients["U:" . $entry['dn']] = $entry['uid'][0];
                     }
@@ -643,8 +643,8 @@ class acl extends plugin
 
             if($this->aclType != 'role'){
 
-                // Create a map of all used sections, this allows us to simply hide the remove button 
-                //  if no acl is configured for the given section 
+                // Create a map of all used sections, this allows us to simply hide the remove button
+                //  if no acl is configured for the given section
                 // e.g. ';all;department/country;users/user;
                 $usedList = ";".implode(';', array_keys($this->aclContents)).";";
 
@@ -653,21 +653,21 @@ class acl extends plugin
                 foreach ($this->aclObjects as $section => $dsc){
                     $summary= "";
                     foreach($this->ocMapping[$section] as $oc){
-                        if (isset($this->aclContents[$oc]) && 
-                                count($this->aclContents[$oc]) && 
+                        if (isset($this->aclContents[$oc]) &&
+                                count($this->aclContents[$oc]) &&
                                 isset($this->aclContents[$oc][0]) &&
                                 $this->aclContents[$oc][0] != ""){
 
                             $summary.= "$oc, ";
                             continue;
                         }
-                        if (isset($this->aclContents["$section/$oc"]) && 
+                        if (isset($this->aclContents["$section/$oc"]) &&
                                 count($this->aclContents["$section/$oc"])){
                             $summary.= "$oc, ";
                             continue;
                         }
-                        if (isset($this->aclContents[$oc]) && 
-                                !isset($this->aclContents[$oc][0]) && 
+                        if (isset($this->aclContents[$oc]) &&
+                                !isset($this->aclContents[$oc][0]) &&
                                 count($this->aclContents[$oc])){
                             $summary.= "$oc, ";
                         }
@@ -683,13 +683,13 @@ class acl extends plugin
 
                     $actions ="";
                     if($this->acl_is_readable("")){
-                        $actions.= image('images/lists/edit.png','cat_edit_'.$section, 
+                        $actions.= image('images/lists/edit.png','cat_edit_'.$section,
                                 msgPool::editButton(_("category ACL")));
                     }
                     if($this->acl_is_removeable() && preg_match("/;".$section."(;|\/)/", $usedList)){
-                        $actions.= image('images/lists/trash.png','cat_del_'.$section, 
+                        $actions.= image('images/lists/trash.png','cat_del_'.$section,
                                 msgPool::delButton(_("category ACL")));
-                    }   
+                    }
                     $data[] = $section;
                     $lData[] = array('data'=>array($dsc, $summary, $actions));
                 }
@@ -771,7 +771,7 @@ class acl extends plugin
         /* Show main page */
         $smarty->assign("dialogState", $this->dialogState);
 
-        /* Assign acls */ 
+        /* Assign acls */
         $smarty->assign("acl_createable",$this->acl_is_createable());
         $smarty->assign("acl_writeable" ,$this->acl_is_writeable(""));
         $smarty->assign("acl_readable"  ,$this->acl_is_readable(""));
@@ -817,7 +817,7 @@ class acl extends plugin
 
         $data = $lData = array();
         foreach($list as $dn => $values){
-            if($dn == $selected){    
+            if($dn == $selected){
                 $option = "<input type='radio' name='selected_role' value='".base64_encode($dn)."' checked>";
             }else{
                 $option = "<input type='radio' name='selected_role' value='".base64_encode($dn)."'>";
@@ -828,7 +828,7 @@ class acl extends plugin
         $this->roleList->setListData($data,$lData);
         $this->roleList->update();
         return($this->roleList->render());
-    } 
+    }
 
 
     function buildAclSelector($list)
@@ -844,6 +844,7 @@ class acl extends plugin
 
         if($this->acl_is_writeable("")){
             if(check_for_materialize_theme()) {
+                $display .= "<div class='acl-setting-buttons'>";
                 $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
                 $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
                 $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button> - ";
@@ -870,6 +871,7 @@ class acl extends plugin
                 $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
                 $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
                 $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
+                $display .= "</div>";
             } else {
                 $display .= "<button type='button' ".$style." name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
                 $display .= "<button type='button' ".$style." name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
@@ -915,7 +917,7 @@ class acl extends plugin
 
             $currentAcl= $this->aclContents[$key];
 
-            /* Get the overall plugin acls 
+            /* Get the overall plugin acls
              */
             $overall_acl ="";
             if(isset($currentAcl[0])){
@@ -934,21 +936,21 @@ class acl extends plugin
                 $back_color = "#C8C8C8";
             }
 
-            if(isset($_SERVER['HTTP_USER_AGENT']) && 
-                    (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || 
+            if(isset($_SERVER['HTTP_USER_AGENT']) &&
+                    (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) ||
                     (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
                 $display.= check_for_materialize_theme() ?
-                            "<div class='row'>
-                                <div class='col s6'>
-                                    "._("Object").": $name
-                                </div>
-                                <div class='col s6'>
-                                    <button class='btn-extra-small gonicus-color white-text right' type='button' onclick=\"$('{$tname}').toggle();\">
-                                        "._("Show/hide advanced settings")."
-                                    </button>
-                                </div>
-                            </div>
-                            <hr>" :
+                            "<div class='acl-object-wrapper'>
+                                <div class='object-head-wrapper'>
+                                    <div class='object-name'>
+                                        "._("Object").": $name
+                                    </div>
+                                    <div class='advanced-settings'>
+                                        <button class='btn-extra-small gonicus-color white-text right' type='button' onclick=\"$('{$tname}').toggle();\">
+                                            "._("Show/hide advanced settings")."
+                                        </button>
+                                    </div>
+                                </div>":
                             "<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
                                 <tr>
                                     <td style='background-color:{$back_color};height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>
@@ -958,17 +960,17 @@ class acl extends plugin
                                 </tr>";
             } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
                 $display.= check_for_materialize_theme() ?
-                            "<div class='row'>
-                                <div class='col s6'>
-                                    "._("Object").": $name
-                                </div>
-                                <div class='col s6'>
-                                    <button class='btn-extra-small gonicus-color white-text right' type='button' onclick=\"$('{$tname}').toggle();\">
-                                        "._("Show/hide advanced settings")."
-                                    </button>
-                                </div>
-                            </div>
-                            <hr>" :
+                            "<div class='acl-object-wrapper'>
+                                <div class='object-head-wrapper'>
+                                    <div class='object-name'>
+                                        "._("Object").": $name
+                                    </div>
+                                    <div class='advanced-settings'>
+                                        <button class='btn-extra-small gonicus-color white-text right' type='button' onclick=\"$('{$tname}').toggle();\">
+                                            "._("Show/hide advanced settings")."
+                                        </button>
+                                    </div>
+                                </div>":
                             "<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
                                 <tr>
                                     <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>
@@ -977,10 +979,12 @@ class acl extends plugin
                                 </tr>";
             } else {
                 $display.= check_for_materialize_theme() ?
-                            "<div class='row'>
-                                <div class ='col s6'>"._("Object").": $name</div>
-                            </div>
-                            <hr>" :
+                            "<div class='acl-object-wrapper'>
+                                <div class='object-head-wrapper'>
+                                    <div class='object-name'>
+                                        "._("Object").": $name
+                                    </div>
+                                </div>" :
                             "<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
                                 <tr>
                                     <td style='background-color:#C8C8C8;height:1.8em;' colspan=$cols><b>"._("Object").": $name</b></td>
@@ -989,23 +993,25 @@ class acl extends plugin
 
             /* Generate options */
             $spc= "&nbsp;&nbsp;";
-            $options= $this->mkchkbx($key."_0_c",  _("Create objects"), preg_match('/c/', $overall_acl)).$spc;
-            $options.= $this->mkchkbx($key."_0_m", _("Move objects"), preg_match('/m/', $overall_acl)).$spc;
-            $options.= $this->mkchkbx($key."_0_d", _("Remove objects"), preg_match('/d/', $overall_acl)).$spc;
+            $options= $this->mkchkbx($key."_0_c",  _("Create objects"), preg_match('/c/', $overall_acl));
+            $options.= $this->mkchkbx($key."_0_m", _("Move objects"), preg_match('/m/', $overall_acl));
+            $options.= $this->mkchkbx($key."_0_d", _("Remove objects"), preg_match('/d/', $overall_acl));
             if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']){
-                $options.= $this->mkchkbx($key."_0_s", _("Restrict changes to user's own object"), preg_match('/s/', $overall_acl)).$spc;
+                $options.= $this->mkchkbx($key."_0_s", _("Restrict changes to user's own object"), preg_match('/s/', $overall_acl));
             }
 
             /* Global options */
-            $more_options= $this->mkchkbx($key."_0_r",  _("read"), preg_match('/r/', $overall_acl)).$spc;
+            $more_options= $this->mkchkbx($key."_0_r",  _("read"), preg_match('/r/', $overall_acl));
             $more_options.= $this->mkchkbx($key."_0_w", _("write"), preg_match('/w/', $overall_acl));
 
             $display.= check_for_materialize_theme() ?
-                        "<div class='row'>
-                            <div class='col s6'>$options</div>
-                            <div class='col s6'>"._("Complete object").": $more_options</div>
+                        "<div class='object-body-wrapper'>
+                            <div class='row'>
+                                <div class='col s9'>$options</div>
+                                <div class='col s3'>"._("Complete object").": $more_options</div>
+                            </div>
                         </div>
-                        <hr>" :
+                    </div>" :
                         "<tr>
                             <td style='background-color:#E0E0E0' colspan=".($cols-1).">$options</td>
                             <td style='background-color:#D4D4D4'>&nbsp;"._("Complete object").": $more_options</td>
@@ -1019,9 +1025,9 @@ class acl extends plugin
             }
 
             if(session::global_get('js')) {
-                if(isset($_SERVER['HTTP_USER_AGENT']) && 
+                if(isset($_SERVER['HTTP_USER_AGENT']) &&
                         (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
-                    $display.= check_for_materialize_theme() ? 
+                    $display.= check_for_materialize_theme() ?
                                 "<div class='acl_container' id='$tname' style='overflow:hidden; display:none;'>
                                     <div class='row'>" :
                                 "<tr id='tr_$tname' style='vertical-align:top;height:0px;'>
@@ -1036,7 +1042,6 @@ class acl extends plugin
                                     <td colspan=".$cols.">
                                         <div id='$tname' style='position:absolute;overflow:hidden;display:none;;vertical-align:top;width:100%;'>
                                             <table style='width:100%;' summary='{$name}'>";
-                }else{
                 }
             }
 
@@ -1067,16 +1072,24 @@ class acl extends plugin
                         $end= "";
                     }
                 }
-                
+
 
                 /* Collect list of attributes */
                 $state= "";
                 if (isset($currentAcl[$attr])){
                     $state= $currentAcl[$attr];
                 }
-                $display.= check_for_materialize_theme() ? 
+
+                $display.= check_for_materialize_theme() ?
                             "<div class='col s".(12 / $cols)."'>
-                                <b>$dsc</b> ($attr)<br>".$this->mkrwbx($key."_".$attr, $state)."
+                                <div class='option-grp'>
+                                    <div class='option-name'>
+                                        $dsc ($attr)
+                                    </div>
+                                    <div class='options'>
+                                        ".$this->mkrwbx($key."_".$attr, $state)."
+                                    </div>
+                                </div>
                             </div>$end" :
                             "<td style='border-top:1px solid #A0A0A0;${rb}width:".(int)(100/$cols)."%'>
                                 <b>$dsc</b> ($attr)<br>".$this->mkrwbx($key."_".$attr, $state)."
@@ -1085,13 +1098,13 @@ class acl extends plugin
 
             /* Fill missing td's if needed */
             if (--$cnt != $cols && $cnt != 0){
-                $display.= str_repeat("\n    <td style='border-top:1px solid #A0A0A0; width:".(int)(100/$cols)."%'>&nbsp;</td>", $cols-$cnt); 
+                $display.= str_repeat("\n    <td style='border-top:1px solid #A0A0A0; width:".(int)(100/$cols)."%'>&nbsp;</td>", $cols-$cnt);
             }
 
             if(session::global_get('js')) {
-                if(isset($_SERVER['HTTP_USER_AGENT']) && 
-                        (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || 
-                        (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT'])) || 
+                if(isset($_SERVER['HTTP_USER_AGENT']) &&
+                        (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) ||
+                        (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT'])) ||
                         (preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT']))) {
                     $display.= check_for_materialize_theme() ?
                                 "   </div>
@@ -1118,7 +1131,7 @@ class acl extends plugin
             return check_for_materialize_theme() ?
                     "<label>
                         <input type='checkbox' id='acl_$tname' name='acl_$tname' $state>
-                        <span class='black-text'>$text</span>
+                        <span>$text</span>
                     </label>" :
                     "<input id='acl_$tname' type='checkbox' name='acl_$name' $state>
                     <label for='acl_$tname'>$text</label>";
@@ -1140,14 +1153,14 @@ class acl extends plugin
         $tname= preg_replace("/[^a-z0-9]/i","_",$name);
 
         if($this->acl_is_writeable("")){
-            return check_for_materialize_theme() ? 
+            return check_for_materialize_theme() ?
                     "<label>
                         <input type='checkbox' id='acl_$tname_r' name='acl_${name}_r' $rstate>
-                        <span class='black-text'>"._("read")."</span>
+                        <span>"._("read")."</span>
                     </label>
                     <label>
                         <input type='checkbox' id='acl_$tname_w' name='acl_${name}_w' $wstate>
-                        <span class='black-text'>"._("write")."</span>
+                        <span>"._("write")."</span>
                     </label>" :
                     "<input id='acl_".$tname."_r' type='checkbox' name='acl_${name}_r' $rstate>
                     <label for='acl_".$tname."_r'>"._("read")."</label>
@@ -1157,11 +1170,11 @@ class acl extends plugin
             return check_for_materialize_theme() ?
                     "<label>
                         <input type='checkbox' name='dummy_".microtime(1)."' disabled $rstate>
-                        <span class='black-text'>"._("read")."&nbsp;</span>
+                        <span>"._("read")."</span>
                     </label>
                     <label>
                         <input type='checkbox' name='dummy_".microtime(1)."' disabled $wstate>
-                        <span class='black-text'>"._("write")."</span>
+                        <span>"._("write")."</span>
                     </label>" :
                     "<input disabled type=checkbox name='dummy_".microtime(1)."' $rstate>"._("read")."
                     <input disabled type=checkbox name='dummy_".microtime(1)."' $wstate>"._("write");
@@ -1315,7 +1328,7 @@ class acl extends plugin
 
             if($entry['type'] == "role"){
 
-                if(isset($this->roles[$entry['acl']])){  
+                if(isset($this->roles[$entry['acl']])){
                     $summary.= sprintf(_("ACL role: %s"), $this->roles[$entry['acl']]['cn']);
                 }else{
                     $summary.= sprintf(_("ACL role: %s"), "<i>"._("unknown ACL role")."</i>");
@@ -1473,7 +1486,7 @@ class acl extends plugin
                 $final.= preg_replace('/,$/', '', $acl);
             }
 
-            /* Append additional filter options 
+            /* Append additional filter options
              */
             if(!empty($entry['filter'])){
                 $final .= ":".base64_encode($entry['filter']);
@@ -1501,7 +1514,7 @@ class acl extends plugin
 
             /* Remove object class */
             $this->attrs['objectClass']= array_remove_entries(array('gosaAcl'), $this->attrs['objectClass']);
-        }    
+        }
 
         /* Do LDAP modifications */
         $ldap= $this->config->get_ldap_link();
@@ -1572,38 +1585,38 @@ class acl extends plugin
 
     /* Remove acls defined for $src */
     static function remove_acl_for($dn)
-    {                                  
-        global $config;                  
+    {
+        global $config;
 
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*".base64_encode($dn)."*))",array("gosaAclEntry","dn"));
-        $new_entries= array();                                                                                      
-        while($attrs = $ldap->fetch()){                                                                             
-            if (!isset($attrs['gosaAclEntry'])) {                                                                     
-                continue;                                                                                               
-            }                                                                                                         
-            unset($attrs['gosaAclEntry']['count']);                                                                   
+        $new_entries= array();
+        while($attrs = $ldap->fetch()){
+            if (!isset($attrs['gosaAclEntry'])) {
+                continue;
+            }
+            unset($attrs['gosaAclEntry']['count']);
 
             // Remove entry directly
             foreach($attrs['gosaAclEntry'] as $id => $entry){
-                $parts= explode(':',$entry);                     
-                $members= explode(',',$parts[2]);                
-                $new_members= array();                         
-                foreach($members as $member) {                 
-                    if (base64_decode($member) != $dn) {         
-                        $new_members[]= $member;                   
-                    } else {                                     
+                $parts= explode(':',$entry);
+                $members= explode(',',$parts[2]);
+                $new_members= array();
+                foreach($members as $member) {
+                    if (base64_decode($member) != $dn) {
+                        $new_members[]= $member;
+                    } else {
                         gosa_log("modify","users/acl",$attrs['dn'],array(),sprintf("Removed acl for %s on object %s.",$dn,$attrs['dn']));
-                    }                                                                                                                  
-                }                                                                                                                    
+                    }
+                }
 
                 /* We can completely remove the entry if there are no members anymore */
-                if (count($new_members)) {                                              
-                    $parts[2]= implode(",", $new_members);                                
-                    $new_entries[]= implode(":", $parts);                                 
-                }                                                                       
-            }                                                                         
+                if (count($new_members)) {
+                    $parts[2]= implode(",", $new_members);
+                    $new_entries[]= implode(":", $parts);
+                }
+            }
 
             // There should be a modification, so write it back
             $ldap->cd($attrs['dn']);
@@ -1644,7 +1657,7 @@ class acl extends plugin
     }
 
 
-    // We are only interessted in our own acls ... 
+    // We are only interessted in our own acls ...
     function set_acl_category($category)
     {
         plugin::set_acl_category("acl");

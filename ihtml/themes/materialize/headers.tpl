@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="themes/materialize/css/password.css">
     <link rel="stylesheet" href="themes/materialize/css/modal.css">
     <link rel="stylesheet" href="themes/materialize/css/pagination.css">
+    <link rel="stylesheet" href="themes/materialize/css/acl.css">
 
     <link rel="shortcut icon" href="favicon.ico">
 
