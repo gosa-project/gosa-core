@@ -76,6 +76,7 @@
 
     <div class="input-field">
       {render acl=$dateOfBirthACL}
+      <input type="text" id="lang" value="{$lang}" hidden="true">
       <input class="datepicker" type="text" id="dateOfBirth" name="dateOfBirth" value="{$dateOfBirth}">
       {/render}
       <label for="dateOfBirth">{t}Date of birth{/t}</label>
