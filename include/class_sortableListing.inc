@@ -62,7 +62,7 @@ class sortableListing {
         // Save data to display
         $this->setListData($data, $displayData);
 
-        // Get list of used IDs 
+        // Get list of used IDs
         if(!session::is_set('sortableListing_USED_IDS')){
             session::set('sortableListing_USED_IDS',array());
         }
@@ -102,7 +102,7 @@ class sortableListing {
     }
 
     /*
-     * 
+     *
      * Examples
      * DatenARray ($data)
      * @param: array( arbitrary object, arbitrary object)
@@ -125,7 +125,7 @@ class sortableListing {
         $this->setDisplayData($displayData);
     }
 
-    //setting flat data 
+    //setting flat data
     private function setData($data)
     {
         $this->data= $data;
@@ -229,7 +229,7 @@ class sortableListing {
 
 
     public function render()
-    {	
+    {
         if(check_for_materialize_theme()) {
             $result = " <div id='scroll_".$this->id."' class='scrollspy acl-member'>
                             <table id='generic-table' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
@@ -255,7 +255,7 @@ class sortableListing {
                         $result.= "  <col>\n";
                     }
                 }
-    
+
                 // Extend by another column if we've actions specified
                 if ($action_width) {
                     $result.= "  <col style='width:".$action_width."px' >\n";
@@ -273,7 +273,7 @@ class sortableListing {
                     if ($i == $this->sortColumn){
                         $sorter= "&nbsp;".image("<i class='material-icons'>keyboard_arrow_".($this->sortDirection[$i]?"up":"down"), null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending")."</i>");
                     }
-    
+
                     if (($this->reorderable) || (!$this->sortingEnabled)) {
                         $result.= "   <th>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
                     } else {
@@ -290,11 +290,11 @@ class sortableListing {
             // Render table body if we've read permission
             $result.= "<tbody id='".$this->id."'>";
             $reorderable= $this->reorderable ? "" : " style='cursor:default'";
-    
+
             if (strpos($this->acl, 'r') !== false) {
                 foreach ($this->mapping as $nr => $row) {
                     $editable= $this->editable ? " onClick='$(\"edit_".$this->id."_$nr\").click()'" : "";
-    
+
                     $id= "";
                     if (isset($this->modes[$row])) {
                         switch ($this->modes[$row]) {
@@ -309,9 +309,9 @@ class sortableListing {
                     }
 
                     $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
-        
+
                     foreach ($this->displayData[$row] as $column) {
-    
+
                         // Do NOT use the onClick statement for columns that contain links or buttons.
                         if(preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)){
                             $result.= "   <td>".$column."</td>";
@@ -319,16 +319,23 @@ class sortableListing {
                             $result.= "   <td $editable>".$column."</td>\n";
                         }
                     }
-    
+
                     if ($action_width) {
-                        $result.="  <td class='action-column'>
-                                        <div class='action-wrapper'>
+                        $result.="  <td class='action-column'>";
+
+                        if ($edit_image) {
+                            $result.="  <div class='action-wrapper'>
                                             ".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image)."
-                                        </div>
-                                        <div class='action-wrapper'>
+                                        </div>";
+                        }
+
+                        if ($delete_image) {
+                            $result.="  <div class='action-wrapper'>
                                             ".str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."
-                                        </div>
-                                    </td>";
+                                        </div>";
+                        }
+
+                        $result.="  </td>";
                     }
                     $result.= "  </tr>\n";
                 }
@@ -354,7 +361,7 @@ class sortableListing {
             $result.= '$("scroll_'.$this->id.'").scrollTop= '.$this->scrollPosition.';';
             $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
             $result.= '</script>';
-    
+
         } else {
             $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
             $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
@@ -369,7 +376,7 @@ class sortableListing {
             } else {
                 $delete_image= $this->deleteable?image('images/lists/trash.png', "%ID", _("Delete this entry")):"";
             }
-    
+
             // Do we need colspecs?
             $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
             if ($this->colspecs) {
@@ -381,14 +388,14 @@ class sortableListing {
                         $result.= "  <col>\n";
                     }
                 }
-    
+
                 // Extend by another column if we've actions specified
                 if ($action_width) {
                     $result.= "  <col style='width:".$action_width."px' >\n";
                 }
                 $result.= " </colgroup>\n";
             }
-    
+
             // Do we need a header?
             if ($this->header) {
                 $result.= " <thead>\n  <tr>\n";
@@ -399,7 +406,7 @@ class sortableListing {
                     if ($i == $this->sortColumn){
                         $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending"));
                     }
-    
+
                     if (($this->reorderable) || (!$this->sortingEnabled)) {
                         $result.= "   <th$first>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
                     } else {
@@ -412,15 +419,15 @@ class sortableListing {
                 }
                 $result.= "\n  </tr>\n </thead>\n";
             }
-    
+
             // Render table body if we've read permission
             $result.= " <tbody id='".$this->id."'>\n";
             $reorderable= $this->reorderable?"":" style='cursor:default'";
-    
+
             if (strpos($this->acl, 'r') !== false) {
                 foreach ($this->mapping as $nr => $row) {
                     $editable= $this->editable?" onClick='$(\"edit_".$this->id."_$nr\").click()'":"";
-    
+
                     $id= "";
                     if (isset($this->modes[$row])) {
                         switch ($this->modes[$row]) {
@@ -433,12 +440,12 @@ class sortableListing {
                                 break;
                         }
                     }
-    
+
                     $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
                     $first= " style='border:0'";
-    
+
                     foreach ($this->displayData[$row] as $column) {
-    
+
                         // Do NOT use the onClick statement for columns that contain links or buttons.
                         if(preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)){
                             $result.= "   <td$first>".$column."</td>\n";
@@ -447,16 +454,16 @@ class sortableListing {
                         }
                         $first= "";
                     }
-    
+
                     if ($action_width) {
                         $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
                             str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
                     }
-    
+
                     $result.= "  </tr>\n";
                 }
             }
-    
+
             // Add spacer
             $result.= "  <tr class='sortableListItemFill' style='height:100%'><td style='border:0'></td>";
             $num= $action_width?$this->columns:$this->columns-1;
@@ -464,12 +471,12 @@ class sortableListing {
                 $result.= "<td class='sortableListItemFill'></td>";
             }
             $result.= "</tr>\n";
-    
+
             $result.= " </tbody>\n</table>\n</div>\n";
             #$result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
             $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
             $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
-    
+
             // Append script stuff if needed
             $result.= '<script type="text/javascript" language="javascript">';
             if ($this->reorderable) {
