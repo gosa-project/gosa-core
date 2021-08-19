@@ -414,7 +414,6 @@ class config  {
             }
             asort($bases);
             reset($bases);
-            var_dump($bases);
         }
 
         /* SERVER not defined? Load the one with the shortest base */
