@@ -1,0 +1,92 @@
+.card-content-scroll {
+    overflow: hidden;
+    overflow-y: auto;
+    height: auto;
+}
+
+
+/*
+ * Always the same: 158px
+ *  - Navigation 40px
+ *  - Breadcrump 30px
+ *  - Card Margin Top 20px
+ *  - Card ContentPadding Top 24px
+ *  - Card ContentPadding Bottom 24px
+ *  - Card Margin Bottom 20px
+ *
+ * Variable values:
+ *  1. h2 + margin-bottom 44px
+ *  2. card-action + padding-top 53px
+ *  2.2 card-action 33px
+ *  3. button under the table + margin-top 53px
+ *  4. control panel + margin-bottom + hr 52px
+ *  5. table margin 30px
+ *  6. table summary 33px
+ *  7. Tab Nav -24px + 68px = 44px
+ *  8. h2 + margin-bottom + p 58px
+ *  9. p + margin-bottom 38px
+ */
+
+
+/*
+ * Table without actions
+ * 158px + 44px (1.) + 52px (4.) + 30px (5.) + 33px (6.)
+ */
+
+.table-wrapper.card-content-scroll {
+    max-height: calc(100vh - 317px);
+}
+
+
+/*
+ * Table with actions
+ * 158px + 44px (1.) + 52px (4.) + 30px (5.) + 33px (6.) + 33px (2.2)
+ */
+
+.plus-actions .table-wrapper.card-content-scroll {
+    max-height: calc(100vh - 350px);
+}
+
+
+/*
+ * ACL - Card content - Access rights
+ * 158px + 44px (7.) + 44px (1.) + 53px (3.) + 53px (2.)
+ */
+
+.acl-ds-head.card-content-scroll {
+    max-height: calc(100vh - 352px);
+}
+
+
+/*
+ * ACL - Card content - Access rights
+ * 158px + 44px (1.) + 53px (2.)
+ */
+
+.acl-ds-create.card-content-scroll,
+.acl-ds-edit.card-content-scroll {
+    max-height: calc(100vh - 255px);
+}
+
+
+/*
+ * Mein Konto / Benutzer anlegen - Allgemein + Posix + Mail
+ * 158px + 44px (7.) + 53px (2.)
+ * Mein Konto / Benutzer anlegen - Certificate
+ * 158px + 44px (1.) + 53px (2.)
+ */
+
+.object-info .content-wrapper.card-content-scroll,
+.certificate.content-wrapper .card-content-scroll {
+    max-height: calc(100vh - 255px);
+}
+
+
+/*
+ * Password
+ * 158px + 44px (1.) + 38px (9.) + 53px (2.)
+ */
+
+.change-password .password-wrapper.card-content-scroll {
+    max-height: calc(100vh - 293px);
+}

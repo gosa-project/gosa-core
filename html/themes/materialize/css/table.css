@@ -1,5 +1,6 @@
-.section.card-content-scroll {
-    max-height: calc(100vh - 370px);
+.table-wrapper {
+    padding: 0;
+    margin: 20px 0;
 }
 
 #tree-table th,
@@ -101,10 +102,6 @@
     padding-left: 0;
 }
 
-.table-summary {
-    padding-top: 10px;
-}
-
 .table-summary i {
     font-size: 18px;
 }
@@ -114,12 +111,12 @@ td {
     padding: unset;
 }
 
-#tree-table .command-icon input + i {
+#tree-table .command-icon input+i {
     position: relative;
     margin: -1.9rem;
 }
 
-#tree-table .command-input[type="text"]:not(.browser-default){
+#tree-table .command-input[type="text"]:not(.browser-default) {
     width: unset;
     padding: unset;
     margin: 0 10px 0 0;
@@ -157,4 +154,8 @@ td {
 
 #generic-table i.material-icons {
     font-size: 18px;
+}
+
+.card .card-content .plus-actions+.card-action {
+    padding: 0;
 }

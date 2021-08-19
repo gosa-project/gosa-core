@@ -5,10 +5,10 @@
   </div>
 
   <div class="image-action">
-    <button class="btn-small gonicus-color" type='submit' name='picture_remove'>{t}Remove picture{/t} </button>
+    <button class="btn-small" type='submit' name='picture_remove'>{t}Remove picture{/t} </button>
 
     <div class="file-field input-field">
-      <div class="btn-small gonicus-color">
+      <div class="btn-small">
         <span>{t}Browse{/t}</span>
         <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
         <input id="picture_file" name="picture_file" type="file" accept="image/*.jpg">

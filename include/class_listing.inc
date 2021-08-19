@@ -335,7 +335,7 @@ class listing
                 $selectedPage = $_GET['page'];
             }
 
-            $result .= "  <div class='section scrollspy card-content-scroll' id='d_scrollbody'>
+            $result .= "  <div class='section scrollspy table-wrapper card-content-scroll' id='d_scrollbody'>
                             <table id='tree-table' class='highlight responsive-table'>";
             $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
 
@@ -1588,7 +1588,7 @@ class listing
             if (check_for_materialize_theme()) {
                 // count entries
                 $count = $this->countValidEntries($action);
-                
+
                 // Dive into subs
                 if ($action['type'] == 'sub' && isset($action['action'])) {
                     if ($count > 0) {

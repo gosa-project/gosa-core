@@ -88,7 +88,7 @@
    </div>
 </div>
 
-<hr>
+<hr class="divider">
 
 <div class="row setting">
    <div class="col s12">
@@ -111,7 +111,7 @@
             <span>{t}Use custom sieve script{/t} <b>({t}disables all Mail options!{/t})</b></span>
             {if $allowSieveManagement}
                {render acl=$sieveManagementACL}
-               <button class="btn-small gonicus-color" type='submit' name='sieveManagement' id="sieveManagement" {if
+               <button class="btn-small" type='submit' name='sieveManagement' id="sieveManagement" {if
                   $own_script=="" } disabled{/if}>
                   {t}Sieve Management{/t}
                </button>
@@ -122,7 +122,7 @@
    </div>
 </div>
 
-<hr>
+<hr class="divider">
 
 <div class="row setting leave-settings">
    <div class="col s12 xl6">
@@ -287,7 +287,7 @@
    </div>
 </div>
 
-<hr>
+<hr class="divider">
 
 <h3>{t}Advanced mail options{/t}</h3>
 

@@ -6,7 +6,7 @@
       <div class="container">
         <div class="card">
           <div class="card-content">
-            <div class="content-wrapper card-content-scroll">
+            <div class="content-wrapper">
               <h2 class="card-title">{t}Your GOsa session has expired!{/t}</h2>
               <p>
                 {t}It has been a while since your last interaction with GOsa took place. Your session has been closed for security reasons. Please login again to continue with administrative tasks.{/t}
