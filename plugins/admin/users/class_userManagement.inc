@@ -227,6 +227,13 @@ class userManagement extends management
 
     function handlePasswordQueue()
     {
+        /* Password checks */
+        $pwLength;
+        $check_special = true;
+        $check_lower = true;
+        $check_upper = true;
+        $check_digits = true;
+
         // skip if nothing is to do
         if(empty($this->dn) && !count($this->pwd_change_queue)) return;
 
@@ -237,6 +244,23 @@ class userManagement extends management
         $this->enforcePasswordChange = isset($_POST['new_password']) && isset($_POST['enforcePasswordChange']);
 
         $smarty = get_smarty();
+
+        $pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
+        $smarty->assign("pwLength", $pwLength);
+        if (check_for_materialize_theme()) {
+            if ($check_special) {
+                $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
+            }
+            if ($check_lower) {
+                $smarty->assign("lower", _("The password must contain lower case letters."));
+            }
+            if ($check_upper) {
+                $smarty->assign("upper", _("The password must contain upper case letters."));
+            }
+            if ($check_digits) {
+                $smarty->assign("digits", _("The password must contain digits."));
+            }
+        }
         $smarty->assign("proposal" , set_post($this->proposal));
         $smarty->assign("proposalEnabled" , $this->proposalEnabled);
         $smarty->assign("proposalSelected" , $this->proposalSelected);
@@ -296,14 +320,41 @@ class userManagement extends management
                     $repeated_password = get_post('repeated_password');
                 }
 
+                // Get configuration flags for further input checks.
+                $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
+                $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
+                $length       = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
+
+                if (check_for_materialize_theme()) {
+                    $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
+                    $lower          = "/[a-z]/";
+                    $upper          = "/[A-Z]/";
+                    $digits         = "/[0-9]/i";
+                }
+
                 // Check posted passwords now.
                 $message= array();
-                if ($new_password != $repeated_password){
-                    $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-                } else {
-                    if ($new_password == ""){
-                        $message[] = msgPool::required(_("New password"));
+                // Perform GOsa password policy checks 
+                if($new_password  != $repeated_password){
+                    $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+                }elseif($new_password == ""){
+                    $message[] = _("The password you've entered as 'New password' is empty.");
+                }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
+                    $message[] = _("The password used as new and current are too similar.");
+                }elseif((strlen($new_password) < $length)){
+                    $message[] = _("The password must have at least $length characters.");
+                }elseif(check_for_materialize_theme()) {
+                    if($check_lower && !preg_match($lower, $new_password)) {
+                        $message[] = _("The password must contain lowercase letters.");
+                    }elseif($check_upper && !preg_match($upper, $new_password)) {
+                        $message[] = _("The password must contain uppercase letters.");
+                    }elseif($check_digits && !preg_match($digits, $new_password)) {
+                        $message[] = _("The password must contain digits.");
+                    }elseif($check_special && !preg_match($special, $new_password)) {
+                        $message[] = _("The password must contain at least 1 special character, e.g. !, @, #, $, %, ^, &, *, ?, _, ~.");
                     }
+                }elseif(!passwordMethod::is_harmless($new_password)){
+                    $message[] = _("The password contains possibly problematic Unicode characters!");
                 }
 
                 // Call external check hook to validate the password change

@@ -35,35 +35,10 @@ class password extends plugin
     var $userPassword = "";
     var $attributes=array('userPassword');
 
-    /* Password checks */
-    var $pwLength;
-    var $check_special = true;
-    var $check_lower = true;
-    var $check_upper = true;
-    var $check_digits = true;
-
 
     function __construct(&$config, $dn= NULL, $parent= NULL)
     {
         plugin::__construct($config, $dn, $parent);
-
-        $smarty = get_smarty();
-        $this->pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
-        $smarty->assign("pwLength", $this->pwLength);
-        if (check_for_materialize_theme()) {
-            if ($this->check_special) {
-                $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
-            }
-            if ($this->check_lower) {
-                $smarty->assign("lower", _("The password must contain lower case letters."));
-            }
-            if ($this->check_upper) {
-                $smarty->assign("upper", _("The password must contain upper case letters."));
-            }
-            if ($this->check_digits) {
-                $smarty->assign("digits", _("The password must contain digits."));
-            }
-        }
     }
 
     
@@ -86,6 +61,29 @@ class password extends plugin
         $smarty = get_smarty();
         $ui = get_userinfo();
 
+        /* Password checks */
+        $check_special = true;
+        $check_lower = true;
+        $check_upper = true;
+        $check_digits = true;
+        $pwLength;
+
+        $pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
+        $smarty->assign("pwLength", $pwLength);
+        if (check_for_materialize_theme()) {
+            if ($check_special) {
+                $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
+            }
+            if ($check_lower) {
+                $smarty->assign("lower", _("The password must contain lower case letters."));
+            }
+            if ($check_upper) {
+                $smarty->assign("upper", _("The password must contain upper case letters."));
+            }
+            if ($check_digits) {
+                $smarty->assign("digits", _("The password must contain digits."));
+            }
+        }
 
         // Try to generate a password proposal, if this is successfull 
         //  then preselect the proposal usage. 
@@ -148,12 +146,6 @@ class password extends plugin
 
             // Once an error has occured it is stored here.
             $message = array();
-
-            // Call the check hook
-            $attrs = array();
-            $attrs['current_password'] = ($current_password);
-            $attrs['new_password'] = ($new_password);
-
             // Perform GOsa password policy checks 
             if(empty($current_password)){
                 $message[] = _("You need to specify your current password in order to proceed.");
@@ -166,13 +158,13 @@ class password extends plugin
             }elseif((strlen($new_password) < $length)){
                 $message[] = _("The password must have at least $length characters.");
             }elseif(check_for_materialize_theme()) {
-                if($this->check_lower && !preg_match($lower, $new_password)) {
+                if($check_lower && !preg_match($lower, $new_password)) {
                     $message[] = _("The password must contain lowercase letters.");
-                }elseif($this->check_upper && !preg_match($upper, $new_password)) {
+                }elseif($check_upper && !preg_match($upper, $new_password)) {
                     $message[] = _("The password must contain uppercase letters.");
-                }elseif($this->check_digits && !preg_match($digits, $new_password)) {
+                }elseif($check_digits && !preg_match($digits, $new_password)) {
                     $message[] = _("The password must contain digits.");
-                }elseif($this->check_special && !preg_match($special, $new_password)) {
+                }elseif($check_special && !preg_match($special, $new_password)) {
                     $message[] = _("The password must contain at least 1 special character, e.g. !, @, #, $, %, ^, &, *, ?, _, ~.");
                 }
             }elseif(!passwordMethod::is_harmless($new_password)){
@@ -181,9 +173,13 @@ class password extends plugin
 
             // Call external check hook to validate the password change
             if(!count($message)){
-                $checkRes = $this->callCheckHook($this->config,$this->dn,$attrs);
+                $attrs = array();
+                $attrs['current_password'] = '';
+                $attrs['new_password'] = $new_password;
+                $checkRes = password::callCheckHook($this->config,$this->dn,$attrs);
                 if(count($checkRes)){
-                    $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),implode($checkRes));
+                    $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),
+                            implode($checkRes));
                 }
             }
 
