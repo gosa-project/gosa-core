@@ -4,7 +4,9 @@
 }
 
 #tree-table th,
-#tree-table td {
+#tree-table td,
+#generic-table th,
+#generic-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -12,12 +14,18 @@
     line-height: initial;
 }
 
-#tree-table tr {
+#tree-table tr,
+#generic-table tr {
     height: 38px;
     max-height: 38px;
 }
 
-#tree-table thead th a {
+#generic-table thead th {
+    vertical-align: baseline;
+}
+
+#tree-table thead th a,
+#generic-table thead th a {
     padding-left: 0;
 }
 
@@ -26,7 +34,8 @@
     width: 38px
 }
 
-#tree-table i.material-icons {
+#tree-table i.material-icons,
+#generic-table i.material-icons {
     font-size: 18px;
 }
 
@@ -54,42 +63,60 @@
     max-height: 31px;
 }
 
-#tree-table input {
+#tree-table input,
+#generic-table input {
     width: 18px;
     height: 18px;
     padding: 0;
     vertical-align: top;
 }
 
-#tree-table input+i {
+#tree-table input+i,
+#generic-table input+i {
     position: absolute;
     top: 10px;
     left: 10px;
     margin: 0;
 }
 
-#tree-table .action-wrapper {
+#generic-table .action-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+}
+
+#tree-table .action-wrapper,
+#generic-table .action-wrapper {
     position: relative;
     height: 18px;
     font-size: 18px;
     margin-right: 10px;
 }
 
-#tree-table .action-wrapper input {
+#tree-table .action-wrapper input,
+#generic-table .action-wrapper input {
     width: 18px;
     height: 18px;
     padding: 0;
     vertical-align: top;
 }
 
-#tree-table .action-wrapper i {
+#tree-table .action-wrapper i,
+#generic-table .action-wrapper i {
     position: absolute;
     top: 0;
     left: 0;
     margin: 0;
 }
 
-#tree-table td.last-column {
+#generic-table .action-wrapper:last-child {
+    margin-right: 0;
+}
+
+#tree-table td.last-column,
+#generic-table td.last-column {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -109,17 +136,6 @@
 th,
 td {
     padding: unset;
-}
-
-#tree-table .command-icon input+i {
-    position: relative;
-    margin: -1.9rem;
-}
-
-#tree-table .command-input[type="text"]:not(.browser-default) {
-    width: unset;
-    padding: unset;
-    margin: 0 10px 0 0;
 }
 
 .card .card-content .plus-actions+.card-action {
