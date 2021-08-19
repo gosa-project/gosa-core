@@ -12,21 +12,27 @@
             <div class="col s4">
                 <span>{if $Certificate_readable}{$userCertificateinfo}{/if}</span>
             </div>
-            <div class="col s4">
-                <label>
-                    {if $userCertificate_state ne "true"}
-                        {render acl=$CertificateACL}
-                            <input id="userCertificate_file" name="userCertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
-                        {/render}
-                    {else}
-                        {render acl=$CertificateACL}
-                            <button type='submit' name='remove_userCertificate'>{t}Remove{/t}</button>
-                        {/render}
-                    {/if}
-                </label>
+            <div class="col s4 certificate-upload">
+                {if $userCertificate_state ne "true"}
+                    {render acl=$CertificateACL}
+                        <div class="file-field input-field">
+                            <div class="btn-small">
+                                <span>Datei auswählen</span>
+                                <input id="userCertificate_file" name="userCertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input placeholder='Keine Datei ausgewählt' type="text" class="file-path validate">
+                            </div>
+                        </div>
+                    {/render}
+                {else}
+                    {render acl=$CertificateACL}
+                        <button class="btn-small" type='submit' name='remove_userCertificate'>{t}Remove{/t}</button>
+                    {/render}
+                {/if}
             </div>
         </div>
-        <hr>
+        <hr class="divider">
         <div class="row">
             <div class="col s4">
                 {t}S/MIME certificate{/t}
@@ -34,23 +40,28 @@
             <div class="col s4">
                 <span>{if $Certificate_readable}{$userSMIMECertificateinfo}{/if}</span>
             </div>
-            <div class="col s4">
-                <label>
-                    {if $userSMIMECertificate_state ne "true"}
+            <div class="col s4 certificate-upload">
+                {if $userSMIMECertificate_state ne "true"}
                     {render acl=$CertificateACL}
-                    <input id="userSMIMECertificate_file" name="userSMIMECertificate_file" type="file" size="20" maxlength="255"
-                        accept="text/*.*">
+                        <div class="file-field input-field">
+                            <div class="btn-small">
+                                <span>Datei auswählen</span>
+                                <input id="userSMIMECertificate_file" name="userSMIMECertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input placeholder='Keine Datei ausgewählt' type="text" class="file-path validate">
+                            </div>
+                        </div>
                     {/render}
-                    {else}
+                {else}
                     {render acl=$CertificateACL}
-                    <button type='submit' name='remove_userSMIMECertificate'>
+                        <button type='submit' name='remove_userSMIMECertificate'>
                         {t}Remove{/t}</button>
                     {/render}
-                    {/if}
-                </label>
+                {/if}
             </div>
         </div>
-        <hr>
+        <hr class="divider">
         <div class="row">
             <div class="col s4">
                 {t}PKCS12 certificate{/t}
@@ -58,26 +69,32 @@
             <div class="col s4">
                 <span>{if $Certificate_readable}{$userPKCS12info}{/if}</span>
             </div>
-            <div class="col s4">
-                <label>
-                    {if $userPKCS12_state ne "true"}
+            <div class="col s4 certificate-upload">
+                {if $userPKCS12_state ne "true"}
                     {render acl=$CertificateACL}
-                    <input id="userPKCS12_file" name="userPKCS12_file" type="file" size="20" maxlength="255" accept="text/*.*">
+                        <div class="file-field input-field">
+                            <div class="btn-small">
+                                <span>Datei auswählen</span>
+                                <input id="userPKCS12_file" name="userPKCS12_file" type="file" size="20" maxlength="255" accept="text/*.*">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input placeholder='Keine Datei ausgewählt' type="text" class="file-path validate">
+                            </div>
+                        </div>
                     {/render}
-                    {else}
+                {else}
                     {render acl=$CertificateACL}
-                    <button type='submit' name='remove_userPKCS12'>
+                        <button type='submit' name='remove_userPKCS12'>
                         {t}Remove{/t}</button>
                     {/render}
-                    {/if}
-                </label>
+                {/if}
             </div>
         </div>
     </div>
 </div>
 
 {if $governmentmode eq "true"}
-    <hr>
+    <hr class="divider">
     <div class="row">
         <div class="col s4">
             {t}Certificate serial number{/t}
@@ -85,8 +102,7 @@
         <div class="col s8">
             <label>
                 {render acl=$CertificateACL}
-                <input type='text' id="certificateSerialNumber" name="certificateSerialNumber" size=10 maxlength=20
-                    value="{$certificateSerialNumber}">
+                    <input type='text' id="certificateSerialNumber" name="certificateSerialNumber" size=10 maxlength=20 value="{$certificateSerialNumber}">
                 {/render}
             </label>
         </div>

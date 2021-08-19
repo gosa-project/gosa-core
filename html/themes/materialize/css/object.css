@@ -131,7 +131,6 @@
 .object-info .content-wrapper .input-field.certificate button {
     height: 30px;
     line-height: 30px;
-    /* margin-left: 20px; */
     margin-bottom: 8px;
     background-color: transparent;
     color: #000;
@@ -283,6 +282,26 @@
 
 .object-info .content-wrapper hr+h3 {
     margin-top: 0;
+}
+
+
+/* Certificate */
+
+.certificate .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.certificate .certificate-upload .input-field,
+.certificate .certificate-upload .file-path-wrapper input {
+    margin: 0;
+}
+
+.certificate .certificate-upload div.btn-small {
+    height: 30px;
+    line-height: 30px;
 }
 
 
