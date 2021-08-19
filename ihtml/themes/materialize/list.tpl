@@ -13,7 +13,6 @@
 </div>
 <hr>
 
-<div>
-    {$LIST}
-</div>
+{$LIST}
+
 <input type="hidden" name="ignore">

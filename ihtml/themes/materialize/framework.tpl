@@ -57,7 +57,6 @@
 
                 <!-- Plugin Content-->
                 <div class="col s10 xl11 content">
-                    <div class="breadcrumb-nav" style="display: none">{$breadcrumb}</div>
                     <div class="card first-level {if $noMenuMode}-noMenu{/if}">
                         <div class="card-content first-level">
                             {$contents}

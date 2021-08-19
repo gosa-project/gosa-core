@@ -4,11 +4,17 @@ let scrollElem = document.querySelectorAll('.card-content-scroll');
 if (scrollElem.length !== 0) {
     let cardContent = document.querySelector('.card-content');
     cardContent.style.overflowY = "visible"
+
+    if (scrollElem.length > 1) {
+        let outerScrollElem = document.querySelector('.card-content-scroll');
+        outerScrollElem.style.overflowY = "visible"
+        outerScrollElem.style.height = "auto"
+    }
 }
 
 // Function to change the visibility of the password
 document.querySelectorAll('.toggle-pw').forEach(icon => {
-    icon.addEventListener('click', function () {
+    icon.addEventListener('click', function() {
         let input = this.parentElement.querySelector('input');
 
         if (input.getAttribute('type') == 'password') {
@@ -37,7 +43,7 @@ var pwButton = document.getElementById("password_finish")
 
 // When the user starts to type something inside the password field
 if (input) {
-    input.onkeyup = function () {
+    input.onkeyup = function() {
         testPasswordCss(input.value);
 
         // Validate length

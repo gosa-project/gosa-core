@@ -88,7 +88,7 @@
    </div>
 </div>
 
-<hr>
+<hr class="divider">
 
 <div class="row setting">
    <div class="col s12">
@@ -122,7 +122,7 @@
    </div>
 </div>
 
-<hr>
+<hr class="divider">
 
 <div class="row setting leave-settings">
    <div class="col s12 xl6">
@@ -287,7 +287,7 @@
    </div>
 </div>
 
-<hr>
+<hr class="divider">
 
 <h3>{t}Advanced mail options{/t}</h3>
 

@@ -226,7 +226,7 @@
   </div>
 </div>
 
-<hr>
+<hr class="divider">
 
 <h3>{t}Organizational information{/t}</h3>
 

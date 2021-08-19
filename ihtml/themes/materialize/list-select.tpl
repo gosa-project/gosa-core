@@ -11,10 +11,11 @@
   <div class="actions center-align">{$ACTIONS}</div>
   {$FILTER}
 </div>
+
 <hr>
 
-<div>
-    {$LIST}
+<div class="plus-actions">
+  {$LIST}
 </div>
 
 <div class="card-action">

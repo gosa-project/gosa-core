@@ -383,7 +383,7 @@ class pluglist
 
                     if ($add_hr) {
                         $add_hr = false;
-                        $this->iconmenu .= "\n        <hr>";
+                        $this->iconmenu .= "\n        <hr class='divider'>";
                     }
                     $this->iconmenu .= "\n        <h2 class='card-title'>"._($headline).'</h2>';
 
@@ -403,7 +403,7 @@ class pluglist
                             $this->iconmenu .= "\n    <div class='row'>";
                         }
 
-                        $this->iconmenu .= "\n   <a class='col s4 xl2 pointer black-text'>";
+                        $this->iconmenu .= "\n   <a class='col s4 xl2 pointer'>";
                         $this->iconmenu .= "\n       <div class='card horizontal valign-wrapper' onclick='openPlugin({$index})'>";
                         $this->iconmenu .= "\n           <div class='card-image'>";
                         $this->iconmenu .= "\n               <i class='material-icons md-30'>$icon</i>";
