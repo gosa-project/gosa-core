@@ -586,7 +586,7 @@ class user extends plugin
           $smarty->assign($cert."info",$str);
           $smarty->assign($cert."_state","true");
         } else {
-          $smarty->assign($cert."info", "<i>"._("No certificate installed")."</i>");
+          $smarty->assign($cert."info", check_for_materialize_theme() ?  "<p>"._("No certificate installed")."</p>" : "<i>"._("No certificate installed")."</i>");
           $smarty->assign($cert."_state","");
         }
       }
