@@ -14,4 +14,5 @@
 <hr>
 
 {$LIST}
+
 <input type="hidden" name="ignore">

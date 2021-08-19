@@ -66,11 +66,6 @@ input {
     margin-top: 0;
 }
 
-.card-content-scroll {
-    overflow: hidden;
-    overflow-y: auto;
-}
-
 .input-field:not(.login) input,
 .input-field textarea {
     min-height: 30px;
@@ -120,6 +115,14 @@ label input[type="checkbox"] {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+hr {
+    margin: 0;
+}
+
+hr.divider {
+    margin: 20px 0;
 }
 
 
