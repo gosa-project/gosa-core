@@ -2,15 +2,15 @@
 	{if !$acl_readable}
 	<h2>{msgPool type=permView}</h2>
 	{else}
-	{if $dialogState eq 'head'}
-	<h2>{t}Assigned ACL for current entry{/t}</h2>
-	<div class="acl-ds-head card-content-scroll">
-		{$aclList}
-	</div>
-	{if $acl_createable}
-	<button class="btn-small gonicus-color" type='submit' name='new_acl'>{t}New ACL{/t}</button>
-	{/if}
-	{/if}
+		{if $dialogState eq 'head'}
+			<h2>{t}Assigned ACL for current entry{/t}</h2>
+			<div class="acl-ds-head card-content-scroll">
+				{$aclList}
+			</div>
+			{if $acl_createable}
+				<button class="btn-small" type='submit' name='new_acl'>{t}New ACL{/t}</button>
+			{/if}
+		{/if}
 
 	{if $dialogState eq 'create'}
 	<h2>{t}New ACL{/t}</h2>
@@ -43,15 +43,17 @@
 			</div>
 		</div>
 
-		<div class="members">
-			<h3>{t}Members{/t}</h3>
-			{$aclMemberList}
-			<button class="btn-small gonicus-color" type='submit' {if !$acl_writeable} disabled="disabled" {/if}
-				name='add_user_or_group'>{msgPool type=addButton}</button>
+				<div class="members">
+					<h3>{t}Members{/t}</h3>
+					{$aclMemberList}
+					<button class="btn-small" type='submit'
+					{if !$acl_writeable} disabled="disabled" {/if}
+					name='add_user_or_group'>{msgPool type=addButton}</button>
 
-			<button class="btn-small gonicus-color" type='submit' {if !$acl_writeable} disabled="disabled" {/if}
-				name='add_all_users'>{t}Add all users{/t}</button>
-		</div>
+					<button class="btn-small" type='submit'
+					{if !$acl_writeable} disabled="disabled" {/if}
+					name='add_all_users'>{t}Add all users{/t}</button>
+				</div>
 
 		{if $aclType ne 'reset'}
 		{if $aclType ne 'role'}
@@ -79,9 +81,12 @@
 		{/if}
 	</div>
 
-	<div class="card-action">
-		{if $acl_writeable}
-		<button class="btn gonicus-color" type='submit' name='submit_new_acl'>{t}Apply{/t}</button>
+			<div class="card-action">
+				{if $acl_writeable}
+					<button class="btn-small gonicus-color" type='submit' name='submit_new_acl'>{t}Apply{/t}</button>
+				{/if}
+				<button class="btn-small gonicus-color mg2" type='submit' name='cancel_new_acl'>{t}Cancel{/t}</button>
+			</div>
 		{/if}
 		<button class="btn gonicus-color mg2" type='submit' name='cancel_new_acl'>{t}Cancel{/t}</button>
 	</div>

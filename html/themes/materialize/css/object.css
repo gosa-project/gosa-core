@@ -40,8 +40,6 @@
 /* Content */
 
 .object-info .content-wrapper {
-    overflow-y: auto;
-    height: calc(100vh - 274px);
     padding: 0 24px;
 }
 
@@ -325,6 +323,14 @@
 
 /* POSIX Settings */
 
+.object-info .card-action.settings {
+    margin-bottom: 20px;
+}
+
+.object-info h3 {
+    margin-top: 0px;
+}
+
 .object-info .account-settings label input {
     width: auto;
     max-width: 100px;
@@ -354,6 +360,13 @@
 
 
 /* Mail Settings */
+
+.object-info .content-wrapper label button {
+    max-height: 25px;
+    min-height: 25px;
+    line-height: 25px;
+    margin: 0 10px;
+}
 
 .object-info .contingent .list {
     display: flex;

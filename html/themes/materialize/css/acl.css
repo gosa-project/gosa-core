@@ -7,13 +7,8 @@
     margin-top: 0;
 }
 
-.acl-ds-head.card-content-scroll {
-    max-height: calc(100vh - 279px);
-}
-
-.acl-ds-create.card-content-scroll,
-.acl-ds-edit.card-content-scroll {
-    max-height: calc(100vh - 282px);
+.acl-ds-head .acl-member {
+    margin-bottom: 0;
 }
 
 .acl-ds-create h3 {

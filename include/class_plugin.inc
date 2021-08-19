@@ -654,7 +654,7 @@ class plugin
                 "<h2 class='card-title'>"._(Preferences)."</h2>
                  <p>$text</p>
                  <div class='card-action settings'>
-                  <button class='btn-small gonicus-color' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
+                  <button class='btn-small' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
                  </div>" :
                 "<div class='plugin-enable-header'>
                     <p>$text</p>
@@ -677,7 +677,7 @@ class plugin
                   "<h2 class='card-title'>"._(Preferences)."</h2>
                    <p>$text</p>
                    <div class='card-action settings'>
-                      <button class='btn-small gonicus-color' type='submit' name='modify_state' ".$state.">
+                      <button class='btn-small' type='submit' name='modify_state' ".$state.">
                         $button_text
                       </button>
                    </div>" :
