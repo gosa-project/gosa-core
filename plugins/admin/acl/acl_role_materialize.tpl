@@ -1,7 +1,6 @@
 {if $dialogState eq 'head'}
 
 <h5>{t}Assigned ACL for current entry{/t}</h5>
-
 <div class="row">
 	<div class="col s6">
 		<div class="input-field">
