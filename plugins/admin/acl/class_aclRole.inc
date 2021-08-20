@@ -195,9 +195,9 @@ class aclrole extends acl
 
   function convertForListing($entry)
   {
-    $member = implode($entry['members'],", ");
-    $acl = implode(array_keys($entry['acl']),", ");
-    $type = implode(array_keys($entry['acl']),", ");
+    $member = implode(", ", $entry['members']);
+    $acl = implode(", ", array_keys($entry['acl']));
+    $type = implode(", ", array_keys($entry['acl']));
     return(array('data' => array($acl, $this->aclTypes[$entry['type']])));
   }
 
@@ -388,6 +388,10 @@ class aclrole extends acl
       // e.g. ';all;department/country;users/user;
       $usedList = ";".implode(array_keys($this->aclContents),';').";";
 
+      echo '<pre>';
+      var_dump($this->aclObject);
+      echo '</pre>';
+
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){
         $summary= "";
@@ -409,7 +413,7 @@ class aclrole extends acl
 
         /* Set summary... */
         if ($summary == ""){
-          $summary= '<i>'._("No ACL settings for this category").'</i>';
+          $summary= check_for_materialize_theme() ? '<p>'._("No ACL settings for this category!").'</p>' : '<i>'._("No ACL settings for this category!").'</i>';;
         } else {
           $summary= sprintf(_("ACL for these objects: %s"), preg_replace('/, $/', '', $summary));
         }
@@ -460,7 +464,7 @@ class aclrole extends acl
     foreach(array("cn","description") as $name){
       $smarty->assign($name,set_post($this->$name));
     }
-    return ($smarty->fetch (get_template_path('acl_role.tpl',dirname(__FILE__))));
+    return ($smarty->fetch (get_template_path(check_for_materialize_theme() ? 'acl_role_materialize.tpl' : 'acl_role.tpl', dirname(__FILE__))));
   }
 
   function sort_by_priority($list)

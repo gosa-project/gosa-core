@@ -675,7 +675,7 @@ class acl extends plugin
 
                     /* Set summary... */
                     if ($summary == ""){
-                        $summary= '<i>'._("No ACL settings for this category!").'</i>';
+                        $summary= check_for_materialize_theme() ? '<p>'._("No ACL settings for this category!").'</p>' : '<i>'._("No ACL settings for this category!").'</i>';
                     } else {
                         $summary= trim($summary,", ");
                         $summary= " ".sprintf(_("ACLs for: %s"), $summary);
@@ -1124,7 +1124,7 @@ class acl extends plugin
             $tname= preg_replace("/[^a-z0-9]/i","_",$name);
             return check_for_materialize_theme() ?
                     "<label>
-                        <input type='checkbox' id='acl_$tname' name='acl_$tname' $state>
+                        <input type='checkbox' id='acl_$tname' name='acl_$name' $state>
                         <span>$text</span>
                     </label>" :
                     "<input id='acl_$tname' type='checkbox' name='acl_$name' $state>
@@ -1144,11 +1144,11 @@ class acl extends plugin
         if($this->acl_is_writeable("")){
             return check_for_materialize_theme() ?
                     "<label>
-                        <input type='checkbox' id='acl_$tname_r' name='acl_${name}_r' $rstate>
+                        <input type='checkbox' id='acl_".$tname."_r' name='acl_${name}_r' $rstate>
                         <span>"._("read")."</span>
                     </label>
                     <label>
-                        <input type='checkbox' id='acl_$tname_w' name='acl_${name}_w' $wstate>
+                        <input type='checkbox' id='acl_".$tname."_w' name='acl_${name}_w' $wstate>
                         <span>"._("write")."</span>
                     </label>" :
                     "<input id='acl_".$tname."_r' type='checkbox' name='acl_${name}_r' $rstate>

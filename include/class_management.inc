@@ -317,7 +317,7 @@ class management
                 if ($this->displayApplyBtn) {
                     $str.=" <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>";
                 }
-                $str.=" <button class='btn-small gonicus-color' ype=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                $str.=" <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                 </div>";
             } else {
                 $str.=" <p style=\"text-align:right\">
