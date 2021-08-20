@@ -233,6 +233,7 @@ class sortableListing {
         if(check_for_materialize_theme()) {
             $result = " <div id='scroll_".$this->id."' class='scrollspy acl-member'>
                             <table id='generic-table' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
+
             if (strpos($this->acl, 'w') === false) {
                 $edit_image = $this->editable?image("<i class='material-icons grey'>edit</i>"):"";
             } else {
@@ -243,6 +244,8 @@ class sortableListing {
             } else {
                 $delete_image= $this->deleteable?image("<i class='material-icons input-icons'>delete</i>", "%ID", _("Delete this entry")):"";
             }
+
+            $actionsHeader = _('Actions');
 
             // Do we need colspecs?
             $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
@@ -281,10 +284,8 @@ class sortableListing {
                     }
                     $first= "";
                 }
-
-                if ($action_width) {
-                    $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
-                        str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
+                if ($action_width && $this->displayData) {
+                    $result.= "<th>".$actionsHeader."</th>";
                 }
 
                 $result.= "  </tr>\n";

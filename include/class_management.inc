@@ -86,6 +86,8 @@ class management
     // Attributes managed by this plugin, can be used in post events;
     public $attributes = array();
 
+    var $logout = false;
+
     public function __construct(&$config, $ui, $plugname, $headpage)
     {
         $this->plugname = $plugname;
@@ -393,6 +395,10 @@ class management
                 }
             }
             add_lock($this->dns, $this->ui->dn);
+
+            if (in_array($this->ui->dn, $this->dns)) {
+                $this->logout = true;
+            }
 
             // Display confirmation dialog.
             $smarty = get_smarty();
@@ -1018,6 +1024,10 @@ class management
         $this->dialogObject = null;
         $this->skipFooter = false;
         set_object_info();
+        if ($this->logout) {
+            header("Location: logout.php");
+            exit();
+        }
     }
 
 
@@ -1026,6 +1036,7 @@ class management
      */
     protected function cancelEdit()
     {
+        $this->logout = false;
         $this->remove_lock();
         $this->closeDialogs();
     }
