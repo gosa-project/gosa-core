@@ -56,6 +56,10 @@
     object-fit: cover;
 }
 
+.user-image img {
+    margin: 0 auto;
+}
+
 .user-image .preview-image img {
     overflow-y: hidden;
     max-width: 100%;
@@ -329,7 +333,8 @@
 }
 
 .object-info .account-settings label,
-.object-info .leave-settings label {
+.object-info .leave-settings label,
+.object-info label {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -356,7 +361,8 @@
     text-align: center;
 }
 
-.object-info .account-settings label span input[type=text]:not(.browser-default) {
+.object-info .account-settings label span input[type=text]:not(.browser-default),
+.object-info .group-wrapper label span input[type=text]:not(.browser-default) {
     min-height: 24px;
     height: 24px!important;
     font-size: 12px;
@@ -461,4 +467,69 @@
 
 .object-info .leave-settings .forward-messages .move-in {
     margin-left: 35px;
+}
+
+
+/* Group content */
+
+.object-info .group-wrapper .input-gid input {
+    width: auto;
+}
+
+
+/* Group - Dyngroup content */
+
+.object-info .dyngroup-wrapper .action {
+    margin-top: 20px;
+}
+
+
+/* Group - Mail content */
+
+.object-info .group-mail-wrapper .row {
+    margin-top: 20px;
+}
+
+.object-info .group-mail-wrapper .row:first-child {
+    margin-top: 0;
+}
+
+.object-info .group-mail-wrapper .contingent .list {
+    padding: 0 0 8px 0;
+}
+
+.object-info .group-mail-wrapper .contingent .input-field {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.object-info .group-mail-wrapper .contingent .input-field span {
+    margin-left: 10px;
+}
+
+.object-info .group-mail-wrapper .folder-setting {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 39px;
+    margin-top: 25px;
+}
+
+.object-info .group-mail-wrapper .folder-setting .input-field {
+    width: calc((100% - 39px) / 2)
+}
+
+.object-info .group-mail-wrapper .folder-setting .input-field:first-child {
+    margin-right: 20px;
+}
+
+.object-info .group-mail-wrapper .folder-setting .action {
+    margin-left: 10px;
 }

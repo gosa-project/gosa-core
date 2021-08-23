@@ -445,7 +445,7 @@ class filter
 
             $result .= "  <ul class='dropdown-content' id='filter-dropdown'>
                             <li>
-                                <ul class='collection valign-dropdown'>";
+                                <ul class='collection'>";
 
             // Build in filters
             foreach ($this->xmlSearches as $tag => $conf) {

@@ -7,18 +7,18 @@
             <img class="responsive-img" src="themes/default/images/logo.png">
             </a>
             <ul class="right hide-on-med-and-down">
-                <li class="mg2">
+                <li>
                     {$version}
                 </li>
             </ul>
         </div>
     </nav>
 
-    
+
     <div class="row">
         <form action='setup.php' name='mainform' method='post' enctype='multipart/form-data'>
             {$msg_dialogs}
-    
+
             {if isset($errors)}{$errors}{/if}
             <div class="container">
                 <div class="row">
@@ -34,11 +34,11 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
             <input type='hidden' name='setup_goto_step' value=''>
         </form>
     </div>
-    
+
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
     <script type="text/javascript" defer src="themes/materialize/js/eventListener.js"></script>
 

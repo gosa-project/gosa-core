@@ -6,7 +6,7 @@
                 <img src="themes/materialize/images/logo.png">
             </a>
             <ul class="nav-menu">
-                <li class="mg2">
+                <li>
                     <div class='lifetime'>
                         <canvas id="sTimeout" width="22" height="22"
                             title="{$sessionLifetime}|{t}Session expires in %d!{/t}"></canvas>
