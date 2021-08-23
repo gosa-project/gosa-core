@@ -396,6 +396,7 @@ class management
             }
             add_lock($this->dns, $this->ui->dn);
 
+            // if user delete himself log him out instead of closing dialog only
             if (in_array($this->ui->dn, $this->dns)) {
                 $this->logout = true;
             }
