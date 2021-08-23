@@ -313,9 +313,9 @@ class group extends plugin
                     if (isset($values['cn']) && isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-                        $image = image('plugins/users/images/select_user.png');
+                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : 'plugins/users/images/select_user.png');
                     }elseif(isset($values['gidNumber'])){
-                        $image = image('plugins/groups/images/select_group.png');
+                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
                     }
                     $lData[$member] = array('data' => array($image,$cn, $data[$member]['uid'][0] ?? ""));
                 }
@@ -338,9 +338,9 @@ class group extends plugin
                     if(isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-                        $image = image('plugins/users/images/select_user.png');
+                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : 'plugins/users/images/select_user.png');
                     }elseif(isset($values['gidNumber'])){
-                        $image = image('plugins/groups/images/select_group.png');
+                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
                     }
                     $lData[$member] = array('data' => array($image,$cn,$data[$member]['uid'][0] ?? ""));
                 }
@@ -357,9 +357,9 @@ class group extends plugin
                     if(isset($values['cn']) && isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-                        $image = image('plugins/users/images/select_user.png');
+                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : 'plugins/users/images/select_user.png');
                     }elseif(isset($values['gidNumber'])){
-                        $image = image('plugins/groups/images/select_group.png');
+                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
                     }
                     $lData[$member] = array('data' => array($image,$cn,$data[$member]['uid'][0] ?? ""));
                 }

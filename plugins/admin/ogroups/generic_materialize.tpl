@@ -43,7 +43,7 @@
     {if !$isRestrictedByDynGroup}
     <div class="card-action">
       {render acl=$memberACL}
-      <button class="btn-small gonicus-color" type='submit' name='edit_membership'>{msgPool
+      <button class="btn-small" type='submit' name='edit_membership'>{msgPool
         type=addButton}</button>&nbsp;
       {/render}
     </div>

@@ -35,19 +35,8 @@ class ogroup extends plugin
             "F" => "goFonHardware",
             "P" => "gotoPrinter");
 
-    var  $typeToImage = array(
-            "Y" => "plugins/users/images/select_template.png",
-            "U" => "plugins/users/images/select_user.png",
-            "G" => "plugins/groups/images/select_group.png",
-            "A" => "plugins/ogroups/images/application.png",
-            "D" => "plugins/departments/images/department.png",
-            "S" => "plugins/ogroups/images/server.png",
-            "W" => "plugins/ogroups/images/workstation.png",
-            "O" => "plugins/ogroups/images/winstation.png",
-            "T" => "plugins/ogroups/images/terminal.png",
-            "F" => "plugins/ogroups/images/phone.png",
-            "P" => "plugins/ogroups/images/printer.png",
-            "I" => "images/false.png");
+    var  $typeToImage = array();
+            
 
 
     /* Variables */
@@ -79,6 +68,36 @@ class ogroup extends plugin
 
     function __construct(&$config, $dn= NULL)
     {
+        $this->typeToImage = check_for_materialize_theme() ?
+                array(
+                    "Y" => "<i class='material-icons'>web_asset</i>",
+                    "U" => "<i class='material-icons'>person</i>",
+                    "G" => "<i class='material-icons'>groups</i>",
+                    "A" => "<i class='material-icons'>apps</i>",
+                    "D" => "<i class='material-icons'>domain</i>",
+                    "S" => "<i class='material-icons'>dns</i>",
+                    "W" => "<i class='material-icons'>computer</i>",
+                    "O" => "<i class='material-icons'>desktop_windows</i>",
+                    "T" => "<i class='material-icons'>monitor</i>",
+                    "F" => "<i class='material-icons'>monitor</i>",
+                    "P" => "<i class='material-icons'>printer</i>",
+                    "I" => "<i class='material-icons'>not_interested</i>"
+                ) : 
+                array(
+                    "Y" => "plugins/users/images/select_template.png",
+                    "U" => "plugins/users/images/select_user.png",
+                    "G" => "plugins/groups/images/select_group.png",
+                    "A" => "plugins/ogroups/images/application.png",
+                    "D" => "plugins/departments/images/department.png",
+                    "S" => "plugins/ogroups/images/server.png",
+                    "W" => "plugins/ogroups/images/workstation.png",
+                    "O" => "plugins/ogroups/images/winstation.png",
+                    "T" => "plugins/ogroups/images/terminal.png",
+                    "F" => "plugins/ogroups/images/phone.png",
+                    "P" => "plugins/ogroups/images/printer.png",
+                    "I" => "images/false.png"
+                );
+
         plugin::__construct ($config, $dn);
 
         $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
