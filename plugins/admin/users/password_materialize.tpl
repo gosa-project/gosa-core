@@ -114,7 +114,7 @@
 
 <div class="card-action">
   <button class="btn-small gonicus-color" type='submit' name='password_finish'>{t}Set password{/t}</button>
-  <button class="btn-small gonicus-color mg2" type='submit' id='password_cancel' name='password_cancel'>{msgPool
+  <button class="btn-small gonicus-color" type='submit' id='password_cancel' name='password_cancel'>{msgPool
     type=cancelButton}</button>
 </div>
 

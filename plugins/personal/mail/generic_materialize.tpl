@@ -4,19 +4,20 @@
       {if !$multiple_support}
          <div class="input-field">
             {if !$isModifyableMail && $initially_was_account && !$is_template}
-            <input type='text' disabled size=30 value="{$mail}">
+               <input type='text' disabled size=30 value="{$mail}">
             {else}
                {if $domainSelectionEnabled}
-               {render acl=$mailACL}
-               <input type='text' id="mail" name="mail" size=20 maxlength=65 value="{$mail}">
-               {/render}
-               @<select name='MailDomain' size=1>
-                  {html_options values=$MailDomains output=$MailDomains selected=$MailDomain}
-               </select>
+                  {render acl=$mailACL}
+                     <input type='text' id="mail" name="mail" size=20 maxlength=65 value="{$mail}">
+                  {/render}
+
+                  @<select name='MailDomain' size=1>
+                     {html_options values=$MailDomains output=$MailDomains selected=$MailDomain}
+                  </select>
                {else}
-               {render acl=$mailACL}
-               <input type='text' id="mail" name="mail" size=35 maxlength=65 value="{$mail}">
-               {/render}
+                  {render acl=$mailACL}
+                     <input type='text' id="mail" name="mail" size=35 maxlength=65 value="{$mail}">
+                  {/render}
                {/if}
             {/if}
             <label for="mail">{t}Primary address{/t}{$must}</label>
@@ -24,16 +25,17 @@
 
          <div class="input-field">
             {if !$isModifyableServer && $initially_was_account && !$is_template}
-            <input type='text' disabled size=30 value="{$gosaMailServer}">
+               <input type='text' disabled size=30 value="{$gosaMailServer}">
             {else}
-            {render acl=$gosaMailServerACL}
-            <select size="1" id="gosaMailServer" name="gosaMailServer"
-               title="{t}Specify the mail server where the user will be hosted on{/t}">
-               {html_options values=$MailServers output=$MailServers selected=$gosaMailServer}
-               <option disabled>&nbsp;</option>
-            </select>
-            <label>{t}Server{/t}</label>
-            {/render}
+               {render acl=$gosaMailServerACL}
+                  <select size="1" id="gosaMailServer" name="gosaMailServer"
+                     title="{t}Specify the mail server where the user will be hosted on{/t}">
+                     {html_options values=$MailServers output=$MailServers selected=$gosaMailServer}
+                     <option disabled>&nbsp;</option>
+                  </select>
+
+                  <label>{t}Server{/t}</label>
+               {/render}
             {/if}
          </div>
       {/if}
@@ -206,7 +208,7 @@
             {/render}
          </label>
          <div class="row">
-            <div class="input-field col s6">
+            <div class="col s6">
                <div class="input-field">
                   {render acl=$gosaSpamSortLevelACL checkbox=$multiple_support checked=$use_gosaSpamSortLevel}
                   <select {if $own_script !="" } disabled {/if} id="gosaSpamSortLevel" size="1" name="gosaSpamSortLevel"
@@ -218,7 +220,7 @@
                </div>
             </div>
 
-            <div class="input-field col s6">
+            <div class="col s6">
                <div class="input-field">
                   {render acl=$gosaSpamMailboxACL checkbox=$multiple_support checked=$use_gosaSpamMailbox}
                   <select {if $own_script !="" } disabled {/if} size="1" id="gosaSpamMailbox" name="gosaSpamMailbox">

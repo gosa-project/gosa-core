@@ -6,7 +6,7 @@
         <img class="responsive-img" src="themes/default/images/logo.png">
       </div>
       <ul class="right hide-on-med-and-down">
-        <li class="mg2">
+        <li>
           {$version}
         </li>
       </ul>

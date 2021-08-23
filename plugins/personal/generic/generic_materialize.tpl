@@ -3,9 +3,9 @@
 <div class="row content">
   <div class="col s12 xl2 center-align user-image">
     {if !$userPicture_is_readable}
-    <img src="plugins/users/images/default.jpg" alt='' class="materialboxed h-center">
+    <img src="plugins/users/images/default.jpg" alt='' class="materialboxed">
     {else}
-    <img src="getbin.php?rand={$rand}" alt='' class="materialboxed h-center">
+    <img src="getbin.php?rand={$rand}" alt='' class="materialboxed">
     {/if}
     {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
     <button class="btn-small" type="submit" name="edit_picture">{t}Change picture{/t}...</button>

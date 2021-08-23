@@ -14,8 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9">
 
     <link rel="stylesheet" href="themes/materialize/css/materialize.css">
-    <link rel="stylesheet" href="themes/materialize/css/style.css">
-    <link rel="stylesheet" href="themes/materialize/css/styles.css">
+    <link rel="stylesheet" href="themes/materialize/css/main.css">
+    <link rel="stylesheet" href="themes/materialize/css/input-field.css">
     <link rel="stylesheet" href="themes/materialize/css/login.css">
     <link rel="stylesheet" href="themes/materialize/css/header.css">
     <link rel="stylesheet" href="themes/materialize/css/breadcrumb.css">

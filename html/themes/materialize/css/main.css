@@ -66,27 +66,8 @@ input {
     margin-top: 0;
 }
 
-.input-field:not(.login) input,
-.input-field textarea {
-    min-height: 30px;
-    height: 30px!important;
-    font-size: 12px;
-    padding: 0;
-}
-
-.input-field:not(.login) label {
-    -webkit-transform: translateY(-14px) scale(0.8);
-    transform: translateY(-14px) scale(0.8);
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-}
-
 .select-wrapper+label {
     top: 0;
-    font-size: 16px;
-}
-
-.input-field>label {
     font-size: 16px;
 }
 
@@ -111,6 +92,12 @@ label input[type="checkbox"] {
     min-height: 33px;
 }
 
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: #000000;
+    padding: 0;
+}
+
 .ellipsis-text {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -119,10 +106,50 @@ label input[type="checkbox"] {
 
 hr {
     margin: 0;
+    border: 0;
 }
 
 hr.divider {
     margin: 20px 0;
+}
+
+
+/* -- Curson settings -- */
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer_off {
+    cursor: default;
+}
+
+
+/* -- colors -- */
+
+.gonicus-color {
+    background-color: rgba(42, 50, 120, 1) !important;
+}
+
+
+/* -- Datepicker setup -- */
+
+.datepicker-date-display {
+    background-color: rgba(42, 50, 120, 1);
+}
+
+.datepicker-table td.is-today {
+    background-color: #e0e0e0;
+    color: #000000;
+}
+
+.datepicker-day-button:focus {
+    background-color: rgba(42, 50, 120, 1);
+}
+
+.datepicker-table td.is-selected {
+    background-color: rgba(42, 50, 120, 1);
+    color: #FFFFFF;
 }
 
 

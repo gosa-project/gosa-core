@@ -32,8 +32,8 @@ class aclroletab extends tabs
   function save($ignore_account= FALSE)
   {
     $baseobject= $this->by_object['aclrole'];
-    $cn      = preg_replace('/,/', '\,', $baseobject->cn); 
-    $cn      = preg_replace('/"/', '\"', $cn); 
+    $cn      = preg_replace('/,/', '\,', $baseobject->cn);
+    $cn      = preg_replace('/"/', '\"', $cn);
 
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
@@ -60,19 +60,32 @@ class aclroletab extends tabs
   {
     tabs::save_object();
   }
-  
+
   function execute()
   {
     $display= tabs::execute();
     if($this->read_only){
-      $display.= "<div class='plugin-actions'>";
-      $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
-      $display.= "</div>";
+      $display.= check_for_materialize_theme() ?
+                  "<div class='row'>
+                    <div class='card-action'>
+                      <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                    </div>
+                  </div>":
+                  "<div class='plugin-actions'>
+                    <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                  </div>";
     }elseif(!$this->by_object['aclrole']->dialog){
-      $display.= "<p style=\"text-align:right\">\n";
-      $display.= "  <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>\n";
-      $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
-      $display.= "</p>";
+      $display.= check_for_materialize_theme() ?
+                  "<div class='row'>
+                    <div class='card-action'>
+                      <button class='btn-small gonicus-color' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
+                      <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                    </div>
+                  </div>":
+                  "<p style=\"text-align:right\">
+                    <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
+                    <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                  </p>";
     }
     return($display);
   }

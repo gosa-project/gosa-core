@@ -1,6 +1,6 @@
 <body>
 
-  <div class="logout-box center-screen">
+  <div class="logout-box">
     <form action='index.php' method='post' name='mainform'>
 
       <div class="container">

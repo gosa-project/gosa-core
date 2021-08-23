@@ -15,8 +15,15 @@
     margin: 0 0 1em 0;
 }
 
+.acl-member {
+    border: 1px solid lightgrey;
+    min-height: 10rem;
+    padding: 1rem;
+    border-radius: .25rem;
+}
+
 .acl-ds-create .members {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .acl-for-object .acl-object-wrapper {
