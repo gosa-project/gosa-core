@@ -23,7 +23,6 @@
 <button class="btn-small" type='submit' name='execute'>{t}Test{/t}</button>
 
 {if $output}
-<hr>
 {$output}
 {/if}
 

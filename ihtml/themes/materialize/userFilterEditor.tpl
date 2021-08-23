@@ -1,9 +1,8 @@
-<h3>{t}Filter editor{/t}</h3>
+<h2>{t}Filter editor{/t}</h2>
 
-<hr>
-
-<div class="row">
-  <div class="col s6">
+<div class="row content">
+  <div class="filter-editor">
+    <div class="col s6 xl6">
     <div class="input-field">
       <input type='text' name='name' id='name' value="{$name}">
       <label for='name'>{t}Name{/t}{$must}</label>
@@ -34,51 +33,56 @@
         <span>{t}Enabled{/t}</span>
       </label>
     </p>
+
+    <button class="btn-small" type='submit' name='addQuery'>{msgPool type='addButton'}</button>
+
+    {foreach from=$queries item=item key=key}
+    <h4>{t}Query{/t} #{$key}</h4>
+    <div class="input-field">
+      <select name='backend_{$key}' size='1'>
+        {html_options output=$backends values=$backends selected=$item.backend}
+      </select>
+    </div>
+
+    <button class="btn-small" type='submit' name='removeQuery_{$key}'>{msgPool type='delButton'}</button>
+
+    <div class="input-field">
+      <textarea class="materialize-textarea" name='filter_{$key}' id='filter_{$key}'>
+        {$item.filter}
+      </textarea>
+    </div>
+    {/foreach}
   </div>
 
-  <div class="col s6">
+  <div class="col s6 xl6">
     <div class="input-field">
       <select id='usedCategory' name='usedCategory[]' size='4' multiple style='width:100%;'>
         {html_options options=$selectedCategories}
       </select>
-      <label>{t}Categories where the filter is visible{/t}</label><br>
+      <label>{t}Categories where the filter is visible{/t}</label>
     </div>
 
-    <div class="row">
-      <div class="input-field col s4">
-        <select id='availableCategory' name='availableCategory' size='1'
-          onChange="$('manualCategory').value=$('availableCategory').options[$('availableCategory').selectedIndex].value">
-          <option value=''>&nbsp;</option>
-          {html_options values=$availableCategories output=$availableCategories}
-        </select>
-      </div>
-
-      <div class="input-field col s4">
-        <input type='text' id='manualCategory' name='manualCategory' value=''>
-      </div>
-
-      <div class="col s4">
-        <button class="btn-small gonicus-color" type='submit' name='addCategory'>{msgPool type='addButton'}</button>
-        <button class="btn-small gonicus-color" type='submit' name='delCategory'>{msgPool type='delButton'}</button>
-      </div>
+    <div class="input-field">
+      <select id='availableCategory' name='availableCategory' size='1'
+        onChange="$('manualCategory').value=$('availableCategory').options[$('availableCategory').selectedIndex].value">
+        <option value=''>&nbsp;</option>
+        {html_options values=$availableCategories output=$availableCategories}
+      </select>
     </div>
 
+    <div class="input-field">
+      <input type='text' id='manualCategory' name='manualCategory' value=''>
+    </div>
+
+    <button class="btn-small" type='submit' name='addCategory'>{msgPool type='addButton'}</button>
+    <button class="btn-small" type='submit' name='delCategory'>{msgPool type='delButton'}</button>
   </div>
+  </div>
+  
 </div>
 
 
-{foreach from=$queries item=item key=key}
-<b>{t}Query{/t} #{$key}</b>
-<select name='backend_{$key}' size='1'>
-  {html_options output=$backends values=$backends selected=$item.backend}
-</select>
-<button class="btn-small gonicus-color" type='submit' name='removeQuery_{$key}'>{msgPool type='delButton'}</button>
-<textarea name='filter_{$key}' id='filter_{$key}' cols="0" style='width:100%; height: 120px;'>{$item.filter}</textarea>
-<hr>
-{/foreach}
-<button class="btn-small gonicus-color" type='submit' name='addQuery'>{msgPool type='addButton'}</button>
 <input type='hidden' value='1' name='userFilterEditor'>
-<br>
 
 <div class="card-action">
   <button class="btn-small gonicus-color" type='submit' name='saveFilterSettings'>{msgPool type='saveButton'}</button>

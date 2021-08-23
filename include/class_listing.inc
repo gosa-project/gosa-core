@@ -1255,9 +1255,6 @@ class listing
                 $result.= "<div class='action-wrapper'>";
                 $label = $this->processElementFilter($action['label'], $this->entries[$row], $row);
                 $image = $this->processElementFilter($action['image'], $this->entries[$row], $row);
-                if ($action['name'] == 'remove' && in_array("cn=".$ui->cn, explode(",", $dn))) {
-                    echo "found"; 
-                }
                 $result .= (check_for_materialize_theme() ?
                         image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label) :
                         image($image, 'listing_'.$action['name']."_$row", $label));
