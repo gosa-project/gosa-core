@@ -261,8 +261,8 @@ class pluglist
                     }
 
                     $menu .= '    <li '.($main ? "class='active'" : '').">
-                                    <div class='collapsible-header gonicus-color white-text center-align'><h6>"._($headline)."</h6></div>
-                                    <div class='collapsible-body padding-off'>
+                                    <div class='collapsible-header gonicus-color'><h4>"._($headline)."</h4></div>
+                                    <div class='collapsible-body'>
                                         <ul class='collection'>";
 
                     $id = 0;

@@ -41,3 +41,14 @@
 .login-wrapper .card-action .input-field {
     margin-top: 0;
 }
+
+
+/* Logout */
+
+.logout-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
