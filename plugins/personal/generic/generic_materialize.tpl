@@ -292,8 +292,7 @@
 
         <div class="icon">
           {render acl=$managerACL}
-          {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom'
-            data-tooltip='{t}Manager{/t}'>info</i>"}
+          {image path="<i class='material-icons md-disabled context'>info</i>"}
           {/render}
         </div>
         {/if}
@@ -312,27 +311,27 @@
         <div class="icon">
           {image path="<i class='material-icons'>edit</i>" action="editManager" acl=$managerACL}
         </div>
+
         {if $manager!=""}
-        <div class="icon">
-          {image path="<i class='material-icons'>info</i>" title="{$manager}" acl=$managerACL}
-        </div>
-        <div class="icon">
-          {image path="<i class='material-icons'>delete</i>" action="removeManager" acl=$managerACL}
-        </div>
+          <div class="icon">
+            {image path="<i class='material-icons'>delete</i>" action="removeManager" acl=$managerACL}
+          </div>
 
+          <div class="icon">
+            {image path="<i class='material-icons'>info</i>" title="{$manager}" acl=$managerACL}
+          </div>
         {else}
-        <div class="icon">
-          {render acl=$managerACL}
-          {image path="<i class='material-icons md-disabled'>delete</i>"}
-          {/render}
-        </div>
+          <div class="icon">
+            {render acl=$managerACL}
+            {image path="<i class='material-icons md-disabled'>delete</i>"}
+            {/render}
+          </div>
 
-        <div class="icon">
-          {render acl=$managerACL}
-          {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom'
-            data-tooltip='{t}Manager{/t}'>info</i>"}
-          {/render}
-        </div>
+          <div class="icon">
+            {render acl=$managerACL}
+            {image path="<i class='material-icons md-disabled context'>info</i>"}
+            {/render}
+          </div>
         {/if}
       </div>
       {/if}
