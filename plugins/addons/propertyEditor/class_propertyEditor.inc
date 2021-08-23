@@ -248,11 +248,11 @@ class propertyEditor extends management
                 break;
             case 'command':
                 if (check_for_materialize_theme()) {
-                    $res = "<div class='valign-wrapper'>
+                    $res = "<div class='valign-wrapper' style='width:{$isize};width:calc({$isize} + 28px)'>
                                 <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">";
-                    $res.= "    <div class='command-icon'>    
+                    $res.= "    <label>
                                     ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
-                                </div>
+                                </label>
                             </div>";
                 }else {
                     $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
@@ -266,7 +266,9 @@ class propertyEditor extends management
             case 'file':
             case 'string':
             case 'integer':
-                $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
+                $res = "<div class='input-field'>
+                            <input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
+                        </div>";
                 break;
             default: echo $type[0].$name."  ";$res = "";
         }
