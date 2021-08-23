@@ -14,6 +14,14 @@
     line-height: initial;
 }
 
+th,
+th a,
+th a.btn-flat,
+td,
+td a {
+    color: #000000;
+}
+
 #tree-table tr,
 #generic-table tr {
     height: 38px;

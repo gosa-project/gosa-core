@@ -1,0 +1,44 @@
+.input-field {
+    position: relative;
+    margin-bottom: unset;
+}
+
+.input-field label {
+    font-size: 16px;
+    color: gray;
+}
+
+.input-field:not(.login) input,
+.input-field textarea {
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+}
+
+.input-field:not(.login) label {
+    -webkit-transform: translateY(-14px) scale(0.8);
+    transform: translateY(-14px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.input-field input[type=text]:focus,
+.input-field input[type=text]:hover {
+    border-bottom: 1px solid #2A3278;
+    box-shadow: 0 1px 0 0 #2A3278;
+}
+
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #00c853;
+    box-shadow: 0 1px 0 0 #00c853;
+}
+
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid #D55A0A;
+    box-shadow: 0 1px 0 0 #D55A0A;
+}
+
+.input-field .prefix.active {
+    color: #2A3278;
+}

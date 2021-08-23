@@ -1,7 +1,7 @@
 <div class="user-image">
   <h5>{t}User picture{/t}</h5>
   <div class="grey preview-image">
-    <img src="getbin.php?rand={$rand}" alt='' class="materialboxed h-center">
+    <img src="getbin.php?rand={$rand}" alt='' class="materialboxed">
   </div>
 
   <div class="image-action">
