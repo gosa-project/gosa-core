@@ -20,10 +20,6 @@ hr {
 }
 
 /* -- input/textarea/checkbox setup -- */
-.input-field {
-    position: relative;
-    margin-bottom: unset !important;
-}
 
 .input-field label {
     color: gray;
@@ -190,4 +186,8 @@ td a {
 
 .context {
     cursor: context-menu;
+}
+
+div.command div.col {
+    margin-left: unset !important;
 }
