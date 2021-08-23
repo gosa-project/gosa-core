@@ -197,3 +197,11 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 .select-wrapper input.select-dropdown:focus {
     border-bottom: 1px solid #2A3278;
 }
+
+.content .filter-editor .select-wrapper {
+    margin-bottom: 8px;
+}
+
+.content .filter-editor .input-field {
+    height: 39px;
+}
