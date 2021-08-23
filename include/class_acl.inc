@@ -1381,17 +1381,17 @@ class acl extends plugin
                 if($key == "G:*") {
                     $name = _("All users");
                     $desc = _("Pseudo-group for all users.");
-                    $icon = image("plugins/groups/images/select_group.png");
+                    $icon = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : "plugins/groups/images/select_group.png");
                 }
                 else if($key[0] == 'U') { // is user?
                     $name = $match[3][0];
                     $desc = $match[1][0];
-                    $icon = image("plugins/users/images/select_user.png");
+                    $icon = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : "plugins/users/images/select_user.png");
                 }
                 else { // or group?
                     $name = $match[1][0];
                     $desc = $match[3][0];
-                    $icon = image("plugins/groups/images/select_group.png");
+                    $icon = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : "plugins/groups/images/select_group.png");
                 }
 
                 $lData[$key] = $key;

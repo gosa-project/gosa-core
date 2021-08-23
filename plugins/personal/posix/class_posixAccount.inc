@@ -109,7 +109,7 @@ class posixAccount extends plugin
     /* Load bases attributes */
     plugin::__construct($config, $dn, $parent);
 
-    $groupImage = image('plugins/groups/images/select_group.png');
+    $groupImage = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
 
     $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, $parent);
     $this->trustModeDialog->setAcl('users/posixAccount');
@@ -1040,7 +1040,7 @@ class posixAccount extends plugin
   {
     /* include global link_info */
     $ldap= $this->config->get_ldap_link();
-    $groupImage = image("plugins/groups/images/select_group.png");
+    $groupImage = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : "plugins/groups/images/select_group.png");
 
     /* Walk through groups and add the descriptive entry if not exists */
     foreach ($groups as $value){
@@ -1504,7 +1504,7 @@ class posixAccount extends plugin
     $uids        = array();
     $first       = TRUE;
 
-    $groupImage = image('plugins/groups/images/select_group.png');
+    $groupImage = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
 
     /* Get all groups used by currently edited users */
     $uid_filter="";  
