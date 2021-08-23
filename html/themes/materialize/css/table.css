@@ -73,20 +73,35 @@ td a {
     max-height: 31px;
 }
 
-#tree-table input,
-#generic-table input {
+#tree-table .input-field {
+    margin-top: 0;
+}
+
+#tree-table .input-field input,
+#tree-table .valign-wrapper input {
+    margin-bottom: 0;
+    min-height: 20px;
+    height: 20px!important;
+}
+
+#tree-table label input,
+#generic-table label input {
     width: 18px;
     height: 18px;
     padding: 0;
     vertical-align: top;
 }
 
-#tree-table input+i,
-#generic-table input+i {
+#tree-table .valign-wrapper label {
+    width: 28px;
+    height: 18px;
+}
+
+#tree-table .valign-wrapper label i.input-icons {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    margin: 0;
+    right: 0;
+    bottom: 0;
+    color: #000;
 }
 
 #generic-table .action-column {
