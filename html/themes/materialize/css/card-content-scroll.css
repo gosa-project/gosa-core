@@ -51,33 +51,35 @@
 /*
  * ACL - Card content - Access rights
  * 158px + 44px (7.) + 44px (1.) + 53px (3.) + 53px (2.)
+ *
+ * Filter - Filter edit
+ * 158px + 44px (7.) + 44px (1.) + 53px (3.) + 53px (2.)
  */
 
-.acl-ds-head.card-content-scroll {
+.acl-ds-head.card-content-scroll,
+.user-filter.card-content-scroll {
     max-height: calc(100vh - 352px);
-}
-
-
-/*
- * ACL - Card content - Access rights
- * 158px + 44px (1.) + 53px (2.)
- */
-
-.acl-ds-create.card-content-scroll,
-.acl-ds-edit.card-content-scroll {
-    max-height: calc(100vh - 255px);
 }
 
 
 /*
  * Mein Konto / Benutzer anlegen - Allgemein + Posix + Mail
  * 158px + 44px (7.) + 53px (2.)
+ *
  * Mein Konto / Benutzer anlegen - Certificate
+ * 158px + 44px (1.) + 53px (2.)
+ *
+ * ACL - Card content - Access rights - Create
+ * 158px + 44px (1.) + 53px (2.)
+ *
+ * ACL - Card content - Access rights - Edit
  * 158px + 44px (1.) + 53px (2.)
  */
 
 .object-info .content-wrapper.card-content-scroll,
-.certificate.content-wrapper .card-content-scroll {
+.certificate.content-wrapper .card-content-scroll,
+.acl-ds-create.card-content-scroll,
+.acl-ds-edit.card-content-scroll {
     max-height: calc(100vh - 255px);
 }
 
