@@ -2,21 +2,19 @@
 
 <div>
     {if $completeACL|regex_replace:"/[cdmw]/":"" == "r"}
-        <button class="btn-small gonicus-color" type='submit' name='viewLdif'>{t}Show raw object entry{/t}</button>
+        <button class="btn-small" type='submit' name='viewLdif'>{t}Show raw object entry{/t}</button>
     {/if}
 
     {if !$someACL|regex_replace:"/[cdmw]/":"" == "r"}
         {msgPool type='permView'}
     {else}
         {if $modifyTimestamp==""}
-            {t}Last modification{/t}: {t}Unknown{/t}
+            <span>{t}Last modification{/t}: {t}Unknown{/t}</span>
         {else}
-            {t}Last modification{/t}: {$modifyTimestamp}
+            <span class="right">{t}Last modification{/t}: {$modifyTimestamp}</span>
         {/if}
     {/if}
 </div>
-
-<hr class="divider">
 
 <div>
     {if $objectList!=""}
