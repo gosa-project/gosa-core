@@ -49,6 +49,16 @@ input {
     font-size: 12px;
 }
 
+.input-field textarea {
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+    overflow-y: auto;
+    padding-top: 1em;
+    max-width: 100%;
+}
+
 .content-area {
     margin-top: 20px;
     padding: 12px;
@@ -196,12 +206,4 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 
 .select-wrapper input.select-dropdown:focus {
     border-bottom: 1px solid #2A3278;
-}
-
-.content .filter-editor .select-wrapper {
-    margin-bottom: 8px;
-}
-
-.content .filter-editor .input-field {
-    height: 39px;
 }

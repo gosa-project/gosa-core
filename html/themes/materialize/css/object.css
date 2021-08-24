@@ -382,6 +382,10 @@
     height: 25px;
 }
 
+.object-info .posix-settings .acl-member {
+    margin-bottom: 20px;
+}
+
 
 /* Mail Settings */
 

@@ -74,12 +74,16 @@
  *
  * ACL - Card content - Access rights - Edit
  * 158px + 44px (1.) + 53px (2.)
+ *
+ * Filter - Filter edit - Add
+ * 158px + 44px (1.) + 53px (2.)
  */
 
 .object-info .content-wrapper.card-content-scroll,
 .certificate.content-wrapper .card-content-scroll,
 .acl-ds-create.card-content-scroll,
-.acl-ds-edit.card-content-scroll {
+.acl-ds-edit.card-content-scroll,
+.filter-wrapper .content-wrapper.card-content-scroll {
     max-height: calc(100vh - 255px);
 }
 
