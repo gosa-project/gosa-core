@@ -43,6 +43,16 @@ nav .nav-menu li a.dropdown-nav-more i {
     line-height: 40px;
 }
 
+nav .nav-menu li .lifetime {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 9px;
+}
+
 #more-options {
     width: 150px;
     color: black;
