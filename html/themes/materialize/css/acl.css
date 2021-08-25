@@ -11,6 +11,10 @@
     margin-bottom: 0;
 }
 
+.acl-content-wrapper .acl-ds-head .ldap-tree {
+    margin-bottom: 20px;
+}
+
 .acl-ds-create h3 {
     margin: 0 0 1em 0;
 }
