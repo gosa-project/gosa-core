@@ -2,7 +2,7 @@
 	{if $dialogState eq 'head'}
 		<h2>{t}Assigned ACL for current entry{/t}</h2>
 
-		<div class="acl-ds-head card-content-scroll">
+		<div class="acl-role-head card-content-scroll">
 			<div class="row">
 				<div class="col s6">
 					<div class="input-field">
@@ -34,37 +34,33 @@
 			</div>
 
 			{$aclList}
+
+			{render acl=$gosaAclTemplateACL}
+				<button class="btn-small" type='submit' name='new_acl'>{t}New ACL{/t}</button>
+			{/render}
 		</div>
-
-		{render acl=$gosaAclTemplateACL}
-			<button class="btn-small" type='submit' name='new_acl'>{t}New ACL{/t}</button>
-		{/render}
-
 	{/if}
 
 	{if $dialogState eq 'create'}
 
-		<div class="row">
-			<div class="col s1">
-				<h2>{t}ACL type{/t}</h2>
+		<div class="content-head">
+			<h2>{t}ACL type{/t}</h2>
+
+			<div class="input-field">
+				<select size="1" name="aclType" title="{t}Select an ACL type{/t}" onChange="document.mainform.submit()">
+					{html_options options=$aclTypes selected=$aclType}
+					<option disabled>&nbsp;</option>
+				</select>
 			</div>
-			<div class="col s3">
-				<div class="input-field">
-					<select size="1" name="aclType" title="{t}Select an ACL type{/t}" onChange="document.mainform.submit()">
-						{html_options options=$aclTypes selected=$aclType}
-						<option disabled>&nbsp;</option>
-					</select>
-				</div>
-			</div>
+
+			{if $javascript eq 'false'}
+				<button class="btn-small" type='submit' name='refresh'>{msgPool type=applyButton}</button>
+			{/if}
 		</div>
 
-		<div class="acl-ds-create card-content-scroll">
-			{if $javascript eq 'false'}
-				<button type='submit' name='refresh'>{msgPool type=applyButton}</button>
-			{/if}
+		<h3>{t}List of available ACL categories{/t}</h3>
 
-			<h3>{t}List of available ACL categories{/t}</h3>
-
+		<div class="acl-role-create card-content-scroll">
 			{$aclList}
 		</div>
 
@@ -81,7 +77,7 @@
 
 		<h2>{$headline}</h2>
 
-		<div class="acl-ds-edit card-content-scroll">
+		<div class="acl-role-edit card-content-scroll">
 			{render acl=$gosaAclTemplateACL}
 				{$aclSelector}
 			{/render}
