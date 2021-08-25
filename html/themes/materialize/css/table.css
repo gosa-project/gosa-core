@@ -49,6 +49,23 @@ td a {
     font-size: 18px;
 }
 
+#tree-table .entry-locked .entry-locked-td {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#tree-table .entry-locked .entry-locked-td i {
+    margin-left: 10px;
+}
+
+#tree-table .entry-locked .entry-locked-td i:first-child {
+    margin-left: 0;
+}
+
 #tree-table select:focus {
     outline: none;
 }

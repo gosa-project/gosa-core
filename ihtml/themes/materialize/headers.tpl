@@ -32,7 +32,9 @@
     <link rel="stylesheet" href="themes/materialize/css/object.css">
     <link rel="stylesheet" href="themes/materialize/css/password.css">
     <link rel="stylesheet" href="themes/materialize/css/acl.css">
-    <link rel="stylesheet" href="themes/materialize/css/reference.css">
+    <link rel="stylesheet" href="themes/materialize/css/addons.css">
+    <link rel="stylesheet" href="themes/materialize/css/filter.css">
+    <link rel="stylesheet" href="themes/materialize/css/template.css">
 
     <link rel="shortcut icon" href="favicon.ico">
 
