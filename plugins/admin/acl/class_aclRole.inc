@@ -71,7 +71,7 @@ class aclrole extends acl
       $this->base = preg_replace("/^[^,]+,[^,]+,/","",$this->dn);
       new log("view","acl/".get_class($this),$this->dn);
     }
-   
+
     /* Load ACL's */
     $this->gosaAclTemplate= array();
     if (isset($this->attrs["gosaAclTemplate"])){
@@ -256,9 +256,9 @@ class aclrole extends acl
       if (preg_match('/^cat_del_.*/', $name) && $this->acl_is_writeable("gosaAclTemplate")){
         $idx= preg_replace('/^cat_del_(.*)$/', '\1', $name);
         foreach ($this->ocMapping[$idx] as $key){
-          if(isset($this->aclContents[$idx])) 
+          if(isset($this->aclContents[$idx]))
             unset($this->aclContents[$idx]);
-          if(isset($this->aclContents[$idx.'/'.$key])) 
+          if(isset($this->aclContents[$idx.'/'.$key]))
             unset($this->aclContents[$idx.'/'.$key]);
         }
         continue;
@@ -284,11 +284,11 @@ class aclrole extends acl
         }
       }
     }
-   
+
     if(isset($_POST['acl_dummy_0_0_0'])){
       $aclDialog= TRUE;
     }
- 
+
     /* Only be interested in new acl's, if we're in the right _POST place */
     if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])){
 
@@ -382,15 +382,11 @@ class aclrole extends acl
 
       /* Draw list */
       $data = $lData = array();
-    
+
       // Create a map of all used sections, this allows us to simply hide the remove button
       //  if no acl is configured for the given section
       // e.g. ';all;department/country;users/user;
       $usedList = ";".implode(array_keys($this->aclContents),';').";";
-
-      echo '<pre>';
-      var_dump($this->aclObject);
-      echo '</pre>';
 
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){
@@ -559,14 +555,14 @@ class aclrole extends acl
               }
               $acl.= ',';
             }
-            
+
           }
         }
         $final.= preg_replace('/,$/', '', $acl);
       }
 
       $tmp_acl[]= $final;
-    } 
+    }
 
     /* Call main method */
     plugin::save();
@@ -618,7 +614,7 @@ class aclrole extends acl
   function remove_from_parent()
   {
     $ldap = $this->config->get_ldap_link();
-    $serach_for = "*:role:".base64_encode($this->dn).":*"; 
+    $serach_for = "*:role:".base64_encode($this->dn).":*";
     $ldap->search ("(&(objectClass=gosaACL)(gosaAclEntry=".$serach_for."))",array('dn','cn','sn','givenName','uid'));
     $all_names = "";
 
@@ -641,7 +637,7 @@ class aclrole extends acl
       msg_dialog::display(_("Object in use"), sprintf(_("This role cannot be removed while it is in use by these objects:")."<br><br>%s", $all_names), WARNING_DIALOG);
       return;
     }
-        
+
     $ldap->rmDir($this->dn);
     new log("remove","acl/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
     if (!$ldap->success()){
@@ -669,7 +665,7 @@ class aclrole extends acl
   {
     plugin::save_object();
     if(isset($_POST['acl_role_posted'])){
-     
+
       /* Refresh base */
       if ($this->acl_is_moveable($this->base)){
         if (!$this->baseSelector->update()) {
@@ -690,7 +686,7 @@ class aclrole extends acl
       $this->cn = get_post('cn');
     }
   }
-  
+
 
   function getCopyDialog()
   {
@@ -703,15 +699,15 @@ class aclrole extends acl
     return($ret);
   }
 
-  
+
   function PrepareForCopyPaste($source)
   {
     plugin::PrepareForCopyPaste($source);
-    
+
     $source_o = new aclrole($this->config,$source['dn']);
     $this->gosaAclTemplate = $source_o->gosaAclTemplate;
   }
-  
+
 
   /* Return plugin informations for acl handling  */
   static function plInfo()
@@ -758,7 +754,7 @@ class aclrole extends acl
     if(empty($this->cn)){
       $message[] = msgPool::required(_("Name"));
     }
-  
+
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     if($this->cn != $this->orig_cn){
@@ -770,8 +766,8 @@ class aclrole extends acl
           }
         }
       }
-    } 
- 
+    }
+
     if(!count($this->gosaAclTemplate)){
       $message[] = msgPool::required(_("ACL"));
     }
@@ -780,7 +776,7 @@ class aclrole extends acl
     if(!$this->baseSelector->checkLastBaseUpdate()){
       $message[]= msgPool::check_base();
     }
- 
+
     /* Check if we are allowed to create or move this object
      */
     if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
