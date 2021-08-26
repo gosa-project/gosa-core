@@ -60,12 +60,12 @@
                 {html_options values=$availableCategories output=$availableCategories}
             </select>
 
-            <label for="availableCategory">Kategorie Vorschläge</label>
+            <label for="availableCategory">{t}Choose category{/t}</label>
           </div>
 
           <div class="col s5 input-field">
             <input type='text' id='manualCategory' name='manualCategory' value=''>
-            <label for="manualCategory">Neue Kategorie</label>
+            <label for="manualCategory">{t}Category to be attached{/t}</label>
           </div>
 
           <div class="col s2 action">

@@ -3,10 +3,7 @@
     margin: 20px 0;
 }
 
-#tree-table th,
-#tree-table td,
-#generic-table th,
-#generic-table td {
+#tree-table th, #tree-table td, #generic-table th, #generic-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -14,16 +11,11 @@
     line-height: initial;
 }
 
-th,
-th a,
-th a.btn-flat,
-td,
-td a {
+th, th a, th a.btn-flat, td, td a {
     color: #000000;
 }
 
-#tree-table tr,
-#generic-table tr {
+#tree-table tr, #generic-table tr {
     height: 38px;
     max-height: 38px;
 }
@@ -32,21 +24,29 @@ td a {
     vertical-align: baseline;
 }
 
-#tree-table thead th a,
-#generic-table thead th a {
+#tree-table thead th a, #generic-table thead th a {
     padding-left: 0;
     text-transform: initial;
     font-size: 12px;
 }
 
-#tree-table thead .checkbox-column,
-#tree-table thead .icon-column {
+#tree-table thead .checkbox-column, #tree-table thead .icon-column {
     width: 38px
 }
 
-#tree-table i.material-icons,
-#generic-table i.material-icons {
+#tree-table i.material-icons, #generic-table i.material-icons {
     font-size: 18px;
+}
+
+#generic-table input.input-btn {
+    z-index: 1;
+    position: relative;
+}
+
+#generic-table i.input-icons {
+    position: absolute;
+    left: 16px;
+    margin-top: 8px;
 }
 
 #tree-table select:focus {
@@ -77,15 +77,13 @@ td a {
     margin-top: 0;
 }
 
-#tree-table .input-field input,
-#tree-table .valign-wrapper input {
+#tree-table .input-field input, #tree-table .valign-wrapper input {
     margin-bottom: 0;
     min-height: 20px;
     height: 20px!important;
 }
 
-#tree-table label input,
-#generic-table label input {
+#tree-table label input, #generic-table label input {
     width: 18px;
     height: 18px;
     padding: 0;
@@ -112,24 +110,21 @@ td a {
     align-items: center;
 }
 
-#tree-table .action-wrapper,
-#generic-table .action-wrapper {
+#tree-table .action-wrapper, #generic-table .action-wrapper {
     position: relative;
     height: 18px;
     font-size: 18px;
     margin-right: 10px;
 }
 
-#tree-table .action-wrapper input,
-#generic-table .action-wrapper input {
+#tree-table .action-wrapper input, #generic-table .action-wrapper input {
     width: 18px;
     height: 18px;
     padding: 0;
     vertical-align: top;
 }
 
-#tree-table .action-wrapper i,
-#generic-table .action-wrapper i {
+#tree-table .action-wrapper i, #generic-table .action-wrapper i {
     position: absolute;
     top: 0;
     left: 0;
@@ -140,8 +135,7 @@ td a {
     margin-right: 0;
 }
 
-#tree-table td.last-column,
-#generic-table td.last-column {
+#tree-table td.last-column, #generic-table td.last-column {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -158,8 +152,7 @@ td a {
     font-size: 18px;
 }
 
-th,
-td {
+th, td {
     padding: unset;
 }
 

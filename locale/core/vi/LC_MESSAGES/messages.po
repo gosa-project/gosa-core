@@ -4361,6 +4361,14 @@ msgstr ""
 msgid "Query"
 msgstr "người dùng"
 
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Choose Category"
+msgstr "Chọn danh mục"
+
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Category to be attached"
+msgstr "Danh mục được đính kèm"
+
 #: ihtml/themes/default/snapshotdialog.tpl:3
 msgid "Restoring object snapshots"
 msgstr "Phục hồi chế độ snapshot của đối tượng"

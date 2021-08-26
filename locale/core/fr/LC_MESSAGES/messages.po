@@ -4318,6 +4318,14 @@ msgstr "Catégories dans lequel les filtres sont visibles"
 msgid "Query"
 msgstr "Requète"
 
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Choose Category"
+msgstr "Choisir la catégorie"
+
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Category to be attached"
+msgstr "Catégorie à joindre"
+
 #: ihtml/themes/default/snapshotdialog.tpl:3
 msgid "Restoring object snapshots"
 msgstr "Restaurer des copie instantanés des objets"
