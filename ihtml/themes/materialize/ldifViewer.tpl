@@ -10,5 +10,5 @@
 {/if}
 <hr>
 <div class="plugin-actions">
-    <button name='cancelLdifViewer'>{msgPool type='cancelButton'}</button>
+    <button class="btn-small" name='cancelLdifViewer'>{msgPool type='cancelButton'}</button>
 </div>

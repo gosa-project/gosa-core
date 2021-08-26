@@ -147,8 +147,16 @@ class aclResolver
                                     </div>
                                     <div class='submit'>
                                         ".image("<i class='material-icons input-icons'>keyboard_return</i>", "aclTargetSubmit")."
-                                    </div>";
-
+                                    </div>
+                                    <div id='autocomplete' class='autocomplete'></div>
+                                    <script type='text/javascript'>
+                                        new Ajax.Autocompleter(
+                                                'aclTarget', 
+                                                'autocomplete', 
+                                                'autocomplete.php', 
+                                                { minChars: 3, frequency: 0.5 });
+                                    </script>";
+                                    
                 $user = "<h3>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h3>";
 
                 $str  = "<div class='acl-reference valign-wrapper'>
@@ -159,7 +167,7 @@ class aclResolver
 
                 foreach ($this->affectingACLs as $dn => $acls) {
                     $str.= " <div class='acl-viewer'>
-                                <h2>".$dn."</h2>";
+                                <h3>".$dn."</h3>";
                                 
                     foreach ($acls as $acl) {
             
@@ -186,7 +194,7 @@ class aclResolver
                         $found = false;
                         foreach ($acl['members'] as $type => $name) {
             
-                                    // Check if we're part of the members
+                            // Check if we're part of the members
                             if (preg_match("/^U:/", $type)) {
                                 if (preg_match("/^U:".preg_quote($this->validateDn, '/')."/", $type)) {
                                     $users[] = $name;
@@ -226,9 +234,9 @@ class aclResolver
                         if ($acl['type']!='reset') {
                             foreach ($acl['acl'] as $type => $acl) {
                                 if (isset($this->classMapping[$type])) {
-                                    $defs .= "<li>".$this->classMapping[$type].": ".$this->aclToString($acl)."</li>";
+                                    $defs .= "<li class='collection-item'>".$this->classMapping[$type].":</li>".$this->aclToString($acl);
                                 } else {
-                                    $defs .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
+                                    $defs .= "<li class='collection-item'>".$type.":</li>".$this->aclToString($acl);
                                 }
                             }
                         }
@@ -236,9 +244,8 @@ class aclResolver
                         $str.= "    <ul class='collapsible'>   
                                         <li>
                                             <div class='collapsible-header'>
-                                                <ul>
-                                                    <li>".implode('</li><li>', $users)."</li>
-                                                    <li>".implode('</li><li>', $groups)."</li>
+                                                    <div>".implode(' - ', $users)."<span class='secondary-content black-text'>".$aclType."</span></div>
+                                                    ".implode(' - ', $groups)."
                                                 <ul>
                                             </div>
                                             <div class='collapsible-body'>";
@@ -249,20 +256,18 @@ class aclResolver
                             $class = "acl-viewer-blocked";
                         }
                         if (!empty($filter)) {
-                            $filter = " <b>"._("Filter")."</b>
-                                        <ul>
-                                            <li>
-                                                ".$filter."
-                                            </li>
+                            $filter = " <ul class='collection with-header'>
+                                            <li class='collection-header'>"._("Filter")."</li>
+                                            ".$filter."
                                         </ul>";
                         }
                         if (!empty($defs)) {
-                            $defs = "   <b>"._("ACLs")."</b>
-                                        <ul>
+                            $defs = "   <ul class='collection with-header'>
+                                            <li class='collection-header'>"._("ACLs")."</li>
                                             ".$defs."
                                         </ul>";
                         }
-                        $str.= "<div class='row'><div class='col s3'>".$filter."</div><div class='col s3'>".$defs."</div></div>";
+                        $str.= "<div class='row'><div class='col s3'>".$defs."</div><div class='col s3'>".$filter."</div></div>";
                         $str.= "</div></ul>";
                     }
                 }
@@ -432,34 +437,63 @@ class aclResolver
 
     public function aclToString($acls)
     {
-        $str ="<ul class='acl-category-list'>";
-        foreach ($acls as $name => $acl) {
-            if ($name == "0") {
-                $name = _("All");
+        if (check_for_materialize_theme()) {
+            $str = "<ul class='collection with-header'>";
+            foreach ($acls as $name => $acl) {
+                if ($name == "0") {
+                    $name = _("All");
+                }
+                $str .= "<li class='collection-header'>".$name."</li>";
+                if (preg_match("/s/", $acl)) {
+                    $str.="<li class='collection-item'><u>"._("Restrict changes to user's own object").'</u></li>';
+                }
+                if (preg_match("/r/", $acl)) {
+                    $str.="<li class='collection-item'>"._("read").'</li>';
+                }
+                if (preg_match("/w/", $acl)) {
+                    $str.="<li class='collection-item'>"._("write").'</li>';
+                }
+                if (preg_match("/c/", $acl)) {
+                    $str.="<li class='collection-item'>"._("create").'</li>';
+                }
+                if (preg_match("/d/", $acl)) {
+                    $str.="<li class='collection-item'>"._("remove").'</li>';
+                }
+                if (preg_match("/m/", $acl)) {
+                    $str.="<li class='collection-item'>"._("move").'</li>';
+                }
             }
-            $str .= "<li><b>".$name.":</b> ";
-            $str .= "<ul class='acl-list'>";
-            if (preg_match("/s/", $acl)) {
-                $str.="<li><u>"._("Restrict changes to user's own object").'</u></li>';
+            return $str."</ul>";
+        } else {
+            $str ="<ul class='acl-category-list'>";
+            foreach ($acls as $name => $acl) {
+                if ($name == "0") {
+                    $name = _("All");
+                }
+                $str .= "<li><b>".$name.":</b> ";
+                $str .= "<ul class='acl-list'>";
+                if (preg_match("/s/", $acl)) {
+                    $str.="<li><u>"._("Restrict changes to user's own object").'</u></li>';
+                }
+                if (preg_match("/r/", $acl)) {
+                    $str.="<li>"._("read").'</li>';
+                }
+                if (preg_match("/w/", $acl)) {
+                    $str.="<li>"._("write").'</li>';
+                }
+                if (preg_match("/c/", $acl)) {
+                    $str.="<li>"._("create").'</li>';
+                }
+                if (preg_match("/d/", $acl)) {
+                    $str.="<li>"._("remove").'</li>';
+                }
+                if (preg_match("/m/", $acl)) {
+                    $str.="<li>"._("move").'</li>';
+                }
+                $str.= "</ul>";
             }
-            if (preg_match("/r/", $acl)) {
-                $str.="<li>"._("read").'</li>';
-            }
-            if (preg_match("/w/", $acl)) {
-                $str.="<li>"._("write").'</li>';
-            }
-            if (preg_match("/c/", $acl)) {
-                $str.="<li>"._("create").'</li>';
-            }
-            if (preg_match("/d/", $acl)) {
-                $str.="<li>"._("remove").'</li>';
-            }
-            if (preg_match("/m/", $acl)) {
-                $str.="<li>"._("move").'</li>';
-            }
-            $str.= "</ul>";
+            return($str."</ul>");
         }
-        return($str."</ul>");
     }
 
     public function processAutocomplete()
