@@ -4469,6 +4469,14 @@ msgstr ""
 msgid "Query"
 msgstr "gebruikers"
 
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Choose Category"
+msgstr "Kies Categorie"
+
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Category to be attached"
+msgstr "Bij te voegen categorie"
+
 #: ihtml/themes/default/snapshotdialog.tpl:3
 #, fuzzy
 msgid "Restoring object snapshots"

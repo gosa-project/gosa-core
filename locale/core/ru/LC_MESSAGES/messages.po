@@ -4410,6 +4410,14 @@ msgstr ""
 msgid "Query"
 msgstr "пользователи"
 
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Choose Category"
+msgstr "Выберите категорию"
+
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Category to be attached"
+msgstr "Категория, которую нужно прикрепить"
+
 #: ihtml/themes/default/snapshotdialog.tpl:3
 #, fuzzy
 msgid "Restoring object snapshots"

@@ -4399,6 +4399,14 @@ msgstr "Kategorien in denen der Filter sichtbar ist"
 msgid "Query"
 msgstr "Abfrage"
 
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Choose Category"
+msgstr "Kategorie wählen"
+
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Category to be attached"
+msgstr "Zuzuordnende Kategorie"
+
 #: ihtml/themes/default/snapshotdialog.tpl:3
 msgid "Restoring object snapshots"
 msgstr "Stelle Objekt-Snapshots wieder her"

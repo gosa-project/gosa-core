@@ -4316,6 +4316,14 @@ msgstr ""
 msgid "Query"
 msgstr "Kwerenda"
 
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Choose Category"
+msgstr "Wybierz kategorię"
+
+#: ihtml/themes/default/userFilterEditor.tpl:69
+msgid "Category to be attached"
+msgstr "Kategoria, która ma być dołączona"
+
 #: ihtml/themes/default/snapshotdialog.tpl:3
 msgid "Restoring object snapshots"
 msgstr "Odtwarzanie obiektu snapshotów"
