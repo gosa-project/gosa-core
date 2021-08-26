@@ -4400,7 +4400,7 @@ msgid "Query"
 msgstr "Abfrage"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
-msgid "Choose Category"
+msgid "Choose category"
 msgstr "Kategorie wählen"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69

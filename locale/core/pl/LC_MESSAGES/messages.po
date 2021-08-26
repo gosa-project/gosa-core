@@ -4317,7 +4317,7 @@ msgid "Query"
 msgstr "Kwerenda"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
-msgid "Choose Category"
+msgid "Choose category"
 msgstr "Wybierz kategorię"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69

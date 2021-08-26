@@ -4319,7 +4319,7 @@ msgid "Query"
 msgstr "Requète"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
-msgid "Choose Category"
+msgid "Choose category"
 msgstr "Choisir la catégorie"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69

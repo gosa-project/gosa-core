@@ -4353,7 +4353,7 @@ msgid "Query"
 msgstr "用户"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
-msgid "Choose Category"
+msgid "Choose category"
 msgstr "选择类别"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
