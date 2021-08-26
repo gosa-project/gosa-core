@@ -4362,7 +4362,7 @@ msgid "Query"
 msgstr "người dùng"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
-msgid "Choose Category"
+msgid "Choose category"
 msgstr "Chọn danh mục"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69

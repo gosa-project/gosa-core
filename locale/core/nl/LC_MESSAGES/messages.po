@@ -4470,7 +4470,7 @@ msgid "Query"
 msgstr "gebruikers"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
-msgid "Choose Category"
+msgid "Choose category"
 msgstr "Kies Categorie"
 
 #: ihtml/themes/default/userFilterEditor.tpl:69
