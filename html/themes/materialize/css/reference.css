@@ -1,0 +1,51 @@
+.acl-reference {
+    margin-top: 2rem;
+}
+
+.object-info .content-wrapper .acl-reference .search-field {
+    position: relative;
+    margin-top: -1.5rem;
+    margin-left: 1rem;
+    height: 26px;
+    width: 30%;
+}
+
+.acl-reference .search-field input {
+    height: 24px;
+    width: 90%;
+    margin: 0 8px 0 0;
+}
+
+.acl-reference .submit {
+    position: relative;
+    height: 26px;
+}
+
+.acl-reference .submit input.input-btn + i.input-icons {
+    position: absolute;
+    font-size: 18px;
+    margin-left: -18px;
+    margin-top: 4px;
+}
+
+.acl-reference .submit input.input-btn {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    margin-top: 4px;
+    padding: 0;
+}
+
+.acl-viewer .collapsible .collapsible-header {
+    display: block;
+}
+
+.acl-viewer .collapsible .collapsible-body .collection .collection-header {
+    font-weight: bold;
+    padding: unset;
+}
+
+.acl-viewer .collapsible .collapsible-body .collection .collection-item {
+    padding: unset;
+    padding-left: 10px;
+}
