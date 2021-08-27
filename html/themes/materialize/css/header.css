@@ -35,12 +35,23 @@ nav .nav-menu {
     height: 40px;
     vertical-align: middle;
     line-height: 40px;
+    margin-right: 12px;
 }
 
 nav .nav-menu li,
 nav .nav-menu li a.dropdown-nav-more i {
     max-height: 40px;
     line-height: 40px;
+}
+
+nav .nav-menu li .lifetime {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 9px;
 }
 
 #more-options {
