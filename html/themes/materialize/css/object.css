@@ -382,7 +382,9 @@
     height: 25px;
 }
 
-.object-info .posix-settings .acl-member {
+.object-info .posix-settings .acl-member,
+.object-info .group-wrapper .acl-member,
+.object-info .ogroup-wrapper .acl-member {
     margin-bottom: 20px;
 }
 
