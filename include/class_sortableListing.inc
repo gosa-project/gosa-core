@@ -231,6 +231,7 @@ class sortableListing {
     public function render()
     {
         if(check_for_materialize_theme()) {
+
             $result = " <div id='scroll_".$this->id."' class='scrollspy acl-member'>
                             <table id='generic-table' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
 
@@ -314,7 +315,6 @@ class sortableListing {
                     $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
 
                     foreach ($this->displayData[$row] as $column) {
-
                         // Do NOT use the onClick statement for columns that contain links or buttons.
                         if(preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)){
                             $result.= "   <td>".$column."</td>";
@@ -563,7 +563,7 @@ class sortableListing {
             foreach (array_keys($_POST) as $key) {
                 if (preg_match('/^del_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
                     if(!isset($this->mapping[$matches[1]])) return;
-
+                    
                     $this->active_index= $this->mapping[$matches[1]];
 
                     // Ignore request if mode requests it
@@ -753,7 +753,11 @@ class sortableListing {
 
 
     public function getKey($index) {
-        return isset($this->keys[$index])?$this->keys[$index]:null;
+        if (is_array($index)) {
+            return isset($this->keys[$index[0]])?$this->keys[$index[0]]:null;
+        } else {
+            return isset($this->keys[$index[0]])?$this->keys[$index]:null;
+        }
     }
 
     public function getData($index) {

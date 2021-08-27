@@ -388,10 +388,6 @@ class aclrole extends acl
       // e.g. ';all;department/country;users/user;
       $usedList = ";".implode(';', array_keys($this->aclContents)).";";
 
-      echo '<pre>';
-      var_dump($this->aclObject);
-      echo '</pre>';
-
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){
         $summary= "";

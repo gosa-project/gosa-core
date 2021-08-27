@@ -79,7 +79,7 @@
 
     <div class="row query-wrapper">
       <div class="col s12">
-        <button class="btn-small" type='submit' name='addQuery'>{msgPool type='addButton'}</button>
+        <button class="btn-small" type='submit' name='addQuery'>{msgPool type='addButton' what='Query'}</button>
       </div>
 
       {foreach from=$queries item=item key=key}

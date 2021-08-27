@@ -230,9 +230,6 @@ class password extends plugin
     {
         $command = $config->configRegistry->getPropertyValue("password","check");
         if (!empty($command)){
-            echo '<pre>';
-            var_dump($attrs);
-            echo '</pre>';
 
             // Build up ldif to send to the check hook
             $ldif= "dn: $dn\n";
