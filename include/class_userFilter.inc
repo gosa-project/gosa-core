@@ -187,14 +187,7 @@ class userFilter extends plugin
             if (isset($this->filters[$key])) {
                 unset($this->filters[$key]);
                 $this->filterWidget->deleteEntry($key);
-                echo '<pre>';
-                var_dump($this->filterWidget);
-                echo '</pre>';
                 $this->filterWidget->update();
-                
-                echo '<pre>';
-                var_dump($this->filters);
-                echo '</pre>';
             }
         }
 
