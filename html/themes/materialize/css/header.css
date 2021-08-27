@@ -35,6 +35,7 @@ nav .nav-menu {
     height: 40px;
     vertical-align: middle;
     line-height: 40px;
+    margin-right: 12px;
 }
 
 nav .nav-menu li,

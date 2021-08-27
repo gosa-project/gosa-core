@@ -23,17 +23,17 @@
 require_once("class_setupStep.inc");
 
 
-class setup 
+class setup
 {
-    var $i_steps  = 9;  // Number of setup steps 
+    var $i_steps  = 9;  // Number of setup steps
     var $i_current= 1;  // Current step
     var $i_last   = 1;  // Last setup step;
-    var $o_steps  = array(); 
+    var $o_steps  = array();
     var $captured_values = array();
 
     function __construct()
     {
-        $i = 1; 
+        $i = 1;
         $this->o_steps[$i++] = new Step_Welcome();
 #    $this->o_steps[$i++] = new Step_Language();
         $this->o_steps[$i++] = new Step_Checks();
@@ -111,7 +111,7 @@ class setup
         /* Check if step was selected */
         if(isset($_GET['step']) || isset($_POST['next']) || isset($_POST['last'])){
 
-            /* check if current setup step is completed now 
+            /* check if current setup step is completed now
                and activate the next step if possible */
             for($i = 1 ; $i <= $this->i_steps ; $i ++ ){
                 if($this->o_steps[$i]->is_completed()){
@@ -168,7 +168,7 @@ class setup
                 $found = true;
             }
 
-            if($found){ 
+            if($found){
                 $this->o_steps[$key]->set_enabled(false);
                 $this->o_steps[$key]->set_completed(false);
             }
@@ -192,7 +192,7 @@ class setup
             $b_completed= $step -> is_completed();
 
             if($b_completed){
-                $s = "<img src='images/true.png' alt='"._("Completed")."' class='center'>&nbsp;"; 
+                $s = "<img src='images/true.png' alt='"._("Completed")."' class='center'>&nbsp;";
             }else{
                 $s = "<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
             }
@@ -217,14 +217,13 @@ class setup
 
     function get_bottom_html()
     {
-        /* Skip adding forward/backward button,   
-         *  if the currently opened step is a sub dialog 
+        /* Skip adding forward/backward button,
+         *  if the currently opened step is a sub dialog
          */
         if($this->o_steps[$this->i_current]->dialog){
             $str ="";
         }else{
-            $str =" <div class='row'>
-                        <div class='col s5 offset-s7'>";
+            $str ="";
 
             if(isset($this->o_steps[$this->i_current -1]) && $this->o_steps[$this->i_current -1]->is_enabled()){
                 $str .= "<button class='btn-small gonicus-color' type='submit' name='last'>".msgPool::backButton()."</button>";
@@ -233,11 +232,10 @@ class setup
             }
 
             if($this->o_steps[$this->i_current]->b_displayCheckbutton){
-                $str .= "&nbsp;<button class='btn-small gonicus-color' type='submit' name='test'>"._("Check again")."</button>";
+                $str .= "<button class='btn-small gonicus-color' type='submit' name='test'>"._("Check again")."</button>";
             }
 
-            $str .= "&nbsp;<button class='btn-small gonicus-color' type='submit' name='next'>"._("Next")."</button>";
-            $str .="</div></div>";
+            $str .= "<button class='btn-small gonicus-color' type='submit' name='next'>"._("Next")."</button>";
         }
         return($str);
     }
@@ -251,17 +249,9 @@ class setup
         $page = $this->i_current ." / ".count($this->o_steps);
 
 
-        $str = "<div class='row'>
-                    <div class='col s1'>
-                        <i class='material-icons md-48'>lightbulb_outline</i>
-                    </div>
-                    <div class='col s9'>
-                        <h5>{$title}</h5>                    
-                    </div>
-                    <div class='col s1 right-align'>
-                        {$page}
-                    </div>
-                </div>";
+        $str = "<i class='material-icons md-30'>lightbulb_outline</i>
+                <h1>{$title}</h1>
+                <div class='page'>{$page}</div>";
         return ($str);
     }
 
