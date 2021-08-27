@@ -5075,11 +5075,11 @@ msgstr "Удалить изображение"
 #: plugins/admin/users/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the user password use the fields below. The changes take effect "
+"To change the password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
-"В полях ниже вы можете изменить пароль выбранного пользователя. Изменения "
+"Для изменения пароля используйте поля ниже. Изменения "
 "вступят в силу немедленно. Пожалуйста, запомните новый пароль, так как иначе "
 "пользователь не сможет войти в систему."
 

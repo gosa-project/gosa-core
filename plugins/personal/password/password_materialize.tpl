@@ -11,7 +11,7 @@
   <div class="content-wrapper card-content-scroll change-password">
     <h2>{t}Change password{/t}</h2>
     <p>
-      {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
+      {t}To change the password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
     </p>
 
     {if $passwordExpired}

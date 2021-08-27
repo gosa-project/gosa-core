@@ -5048,11 +5048,11 @@ msgstr "Remover usuário"
 #: plugins/admin/users/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the user password use the fields below. The changes take effect "
+"To change the password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
-"Para alterar a senha do usuário utilizar os campos abaixo. As alterações "
+"Para alterar a senha, utilize os campos abaixo. As alterações "
 "terão efeito imediatamente. Por favor, memorize a nova senha, porque o "
 "usuário não seria capaz de fazer login sem ele."
 

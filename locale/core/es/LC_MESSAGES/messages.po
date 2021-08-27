@@ -5038,11 +5038,11 @@ msgstr "Eliminar usuario"
 
 #: plugins/admin/users/password.tpl:4
 msgid ""
-"To change the user password use the fields below. The changes take effect "
+"To change the password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
-"Para cambiar la contraseña del usuario use los campos a continuación. Los "
+"Para cambiar la contraseña, utilice los siguientes campos. Los "
 "cambios tomarán efecto inmediatamente. Por favor, recuerde la nueva "
 "contraseña, el usuario no podrá autenticarse sin ella."
 

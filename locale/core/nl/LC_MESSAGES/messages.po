@@ -5130,11 +5130,11 @@ msgstr "Plaatje verwijderen"
 
 #: plugins/admin/users/password.tpl:4
 msgid ""
-"To change the user password use the fields below. The changes take effect "
+"To change the password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
-"Gebruik de velden hieronder om het gebruikers wachtwoord te veranderen. De "
+"Gebruik de onderstaande velden om het wachtwoord te wijzigen. De "
 "veranderingen worden onmiddelijk doorgevoerd. Onthoud het nieuwe wachtwoord "
 "a.u.b. aangezien de gebruiker niet in kan loggen zonder dit wachtwoord."
 
