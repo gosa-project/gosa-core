@@ -5029,11 +5029,11 @@ msgstr "Xóa ảnh "
 
 #: plugins/admin/users/password.tpl:4
 msgid ""
-"To change the user password use the fields below. The changes take effect "
+"To change the password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
-"Để thay đổi mật khẩu người dùng sử dụng các trường dưới đây. Việc thay đổi "
+"Để thay đổi mật khẩu, hãy sử dụng các trường bên dưới. Việc thay đổi "
 "sẽ có hiệu lực ngay lập tức. Hãy nhớ mật mã mới bởi người dùng sẽ không thể "
 "đăng nhập nếu thiếu nó."
 

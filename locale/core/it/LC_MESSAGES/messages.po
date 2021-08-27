@@ -5033,10 +5033,13 @@ msgstr "Elimina foto"
 
 #: plugins/admin/users/password.tpl:4
 msgid ""
-"To change the user password use the fields below. The changes take effect "
+"To change the password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
+"Per cambiare la password usa i campi sottostanti. Le modifiche hanno effetto "
+"immediato. Si prega di memorizzare la nuova password, perché l'utente non sarà "
+"in grado di accedere senza di essa."
 
 #: plugins/admin/users/password.tpl:11 plugins/admin/users/password.tpl:39
 #, fuzzy
