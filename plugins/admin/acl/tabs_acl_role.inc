@@ -66,21 +66,17 @@ class aclroletab extends tabs
     $display= tabs::execute();
     if($this->read_only){
       $display.= check_for_materialize_theme() ?
-                  "<div class='row'>
-                    <div class='card-action'>
-                      <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                    </div>
+                  "<div class='card-action'>
+                    <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                   </div>":
                   "<div class='plugin-actions'>
                     <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                   </div>";
     }elseif(!$this->by_object['aclrole']->dialog){
       $display.= check_for_materialize_theme() ?
-                  "<div class='row'>
-                    <div class='card-action'>
-                      <button class='btn-small gonicus-color' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
-                      <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                    </div>
+                  "<div class='card-action'>
+                    <button class='btn-small gonicus-color' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
+                    <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                   </div>":
                   "<p style=\"text-align:right\">
                     <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
