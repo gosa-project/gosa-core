@@ -173,6 +173,7 @@ class userFilterEditor extends plugin
                             }
 
                             foreach($this->queries as $key => $query){
+
                                 if(isset($_POST['removeQuery_'.$key])){
                                     unset($this->queries[$key]);
                                     $this->queries = array_values($this->queries);

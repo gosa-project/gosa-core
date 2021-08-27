@@ -386,7 +386,7 @@ class aclrole extends acl
       // Create a map of all used sections, this allows us to simply hide the remove button
       //  if no acl is configured for the given section
       // e.g. ';all;department/country;users/user;
-      $usedList = ";".implode(array_keys($this->aclContents),';').";";
+      $usedList = ";".implode(';', array_keys($this->aclContents)).";";
 
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){

@@ -307,7 +307,6 @@ class msgPool
     return $what == "" ? sprintf(_("Add")): sprintf(_("Add %s"), $what);
   }
 
-
   public static function delButton($what= "")
   {
     return $what == "" ? sprintf(_("Delete")): sprintf(_("Delete %s"), $what);
