@@ -1,73 +1,97 @@
-	{if $method == "default"}
-		<p>{t}During the LDAP inspection, we're going to check for several common pitfalls that may occur when migration to GOsa base LDAP administration. You may want to fix the problems below, in order to provide smooth services.{/t}
-		</p>
+<div class="content-wrapper card-content-scroll">
+    {if $method == "default"}
+        <p>{t}During the LDAP inspection, we're going to check for several common pitfalls that may occur when migration to GOsa base LDAP administration. You may want to fix the problems below, in order to provide smooth services.{/t}
+        </p>
 
-        <table style='width:100%' summary='{t}Checks{/t}'>
-            {foreach from=$checks item=val key=key}
-                <tr> 
-                    <td>
-                        <b>{$checks.$key.TITLE}</b>&nbsp; {$checks.$key.STATUS_MSG}
-                        {if $checks.$key.ERROR_MSG}
-                            <p>
-                                {$checks.$key.ERROR_MSG}
-                            </p>
-                        {/if}
-                    </td>
-                </tr>
-            {/foreach}
-        </table>
+        <div class="setup-ldap-table card-content-scroll">
+            <div class="row">
+                <div class="col s12">
+                    <table class="striped">
+                        <caption>{t}Checks{/t}</caption>
+                        <tbody>
+                            {foreach from=$checks item=val key=key}
+                                <tr>
+                                    <td>
+                                        <b>{$checks.$key.TITLE}</b>
+                                    </td>
+                                    <td>
+                                        {$checks.$key.STATUS_MSG}
+                                    </td>
+                                    <td>
+                                        {if $checks.$key.ERROR_MSG}
+                                            {$checks.$key.ERROR_MSG}
+                                        {/if}
+                                    </td>
+                                </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-	{elseif $method == "rootOC_migrate_dialog"}
+    {elseif $method == "rootOC_migrate_dialog"}
+        <h2>{t}Add required object classes to the LDAP base{/t}</h2>
 
-			<h2>{t}Add required object classes to the LDAP base{/t}</h2>
+        <div class="migrate-wrapper card-content-scroll">
+            <div class="row">
+                <div class="col s6">
+                    <h3>{t}Current{/t}</h3>
+                    <pre>{$details.current}</pre>
+                </div>
+                <div class="col s6">
+                    <h3>{t}After migration{/t}</h3>
+                    <pre>{$details.target}</pre>
+                </div>
+            </div>
+        </div>
 
-			<b>{t}Current{/t}</b>
-			<pre>{$details.current}</pre>
+        <div class="plugin-actions card-action">
+            <button class="btn-small gonicus-color" type='submit' name='rootOC_migrate_start'>{t}Migrate{/t}</button>
+            <button class="btn-small gonicus-color" type='submit' name='rootOC_dialog_cancel'>{t}Close{/t}</button>
+        </div>
 
-			<br>
-			<b>{t}After migration{/t}</b>
-    		<pre>{$details.target}</pre>
+    {elseif $method == "create_acls"}
 
-			<br>
-			<button type='submit' name='rootOC_migrate_start'>{t}Migrate{/t}</button>
-			<hr>	
-			<div class="plugin-actions">
-				<button type='submit' name='rootOC_dialog_cancel'>{t}Close{/t}</button>
-			</div>
+        <h2>{t}Create a new GOsa administrator account{/t}</h2>
+        <p>{t}This dialog will automatically add a new super administrator to your LDAP tree.{/t}</p>
 
-		{elseif $method == "create_acls"}
+        <div class="row">
+            <div class="col s12 xl6 create-admin-account">
+                <div class="input-field">
+                    <input id="admin-name" type='text' name='admin-name' value='System administrator' disabled>
+                    <label for="admin-name">{t}Name{/t}:</label>
+                </div>
+            </div>
+            <div class="col s12 xl6 connection-setting">
+                <div class="input-field">
+                    <input id="user-id" type='text' value='{$new_user_uid}' name='new_user_uid'>
+                    <label for="user-id">{t}User ID{/t}:</label>
+                </div>
+            </div>
+            <div class="col s12 xl6 connection-setting">
+                <div class="input-field">
+                    <input id="admin-pw" type='password' value='{$new_user_password}' name='new_user_password'>
+                    <label for="admin-pw">{t}Password{/t}:</label>
+                </div>
+            </div>
+            <div class="col s12 xl6 connection-setting">
+                <div class="input-field">
+                    <input id="admin-pw-again" type='password' value='{$new_user_password2}' name='new_user_password2'>
+                    <label for="admin-pw-again">{t}Password (again){/t}:</label>
+                </div>
+            </div>
+        </div>
 
-    <h2>{t}Create a new GOsa administrator account{/t}</h2>
-    <p>{t}This dialog will automatically add a new super administrator to your LDAP tree.{/t}</p>
+        <script language="JavaScript" type="text/javascript">
+            <!-- // First input field on page
+                focus_field('new_user_password');
+            -->
+        </script>
 
-    <table summary="{t}Name{/t}">
-        <tr>
-            <td>{t}Name{/t}:</td>
-            <td><i>System administrator</i></td>
-        </tr>
-        <tr>
-            <td>{t}User ID{/t}:&nbsp;</td>
-            <td><input type='text' value='{$new_user_uid}' name='new_user_uid'><br></td>
-        </tr>
-        <tr>
-            <td>{t}Password{/t}:&nbsp;</td>
-            <td><input type='password' value='{$new_user_password}' name='new_user_password'><br></td>
-        </tr>
-        <tr>    
-            <td>{t}Password (again){/t}:&nbsp;</td>
-            <td><input type='password' value='{$new_user_password2}' name='new_user_password2'></td>
-        </tr>
-    </table>
-
-    <script language="JavaScript" type="text/javascript">
-        <!-- // First input field on page
-            focus_field('new_user_password');
-        -->
-    </script>
-
-    <hr>	
-    <div class="plugin-actions">
-        <button type='submit' name='create_admin_user'>{t}Apply{/t}</button>	
-        <button type='submit' name='create_acls_cancel'>{t}Cancel{/t}</button>
-    </div>
-{/if}
+        <div class="plugin-actions card-action setup-exception">
+            <button class="btn-small gonicus-color" type='submit' name='create_admin_user'>{t}Apply{/t}</button>
+            <button class="btn-small gonicus-color" type='submit' name='create_acls_cancel'>{t}Cancel{/t}</button>
+        </div>
+    {/if}
+</div>

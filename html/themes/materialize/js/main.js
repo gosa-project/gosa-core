@@ -3,13 +3,30 @@ let scrollElem = document.querySelectorAll('.card-content-scroll');
 
 if (scrollElem.length !== 0) {
     let cardContent = document.querySelector('.card-content');
-    cardContent.style.overflowY = "visible"
+    cardContent.style.overflowY = "visible";
 
     if (scrollElem.length > 1) {
         let outerScrollElem = document.querySelector('.card-content-scroll');
-        outerScrollElem.style.overflowY = "visible"
-        outerScrollElem.style.height = "auto"
+        outerScrollElem.style.overflowY = "visible";
+        outerScrollElem.style.height = "auto";
+
+        let checkSetup = document.querySelector('.content-area.setup');
+        if (checkSetup.length !== 0) {
+            outerScrollElem.classList.remove('card-content-scroll');
+        }
     }
+}
+
+// Disable empty container
+let cardActionElem = document.querySelectorAll('.card-action');
+
+if (cardActionElem.length > 1) {
+    cardActionArray = Array.from(cardActionElem);
+    cardActionArray.forEach(element => {
+        if (!element.querySelector("button")) {
+            element.style.padding = "0";
+        }
+    });
 }
 
 // Function to change the visibility of the password
