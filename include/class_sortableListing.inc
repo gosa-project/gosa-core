@@ -317,7 +317,7 @@ class sortableListing {
                     foreach ($this->displayData[$row] as $column) {
                         // Do NOT use the onClick statement for columns that contain links or buttons.
                         if(preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)){
-                            $result.= "   <td>".$column."</td>";
+                            $result.= "   <td><div class='action-wrapper'>".$column."</div></td>";
                         }else{
                             $result.= "   <td $editable>".$column."</td>\n";
                         }

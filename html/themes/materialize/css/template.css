@@ -1,0 +1,9 @@
+.template-wrapper .input-field {
+    margin-top: 35px;
+    margin-top: calc(1rem + 20px);
+}
+
+.template-wrapper .no-templates {
+    margin-top: 20px;
+    font-weight: bold;
+}

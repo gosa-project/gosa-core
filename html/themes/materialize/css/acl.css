@@ -11,6 +11,10 @@
     margin-bottom: 0;
 }
 
+.acl-content-wrapper .acl-role-head .ldap-tree {
+    margin-bottom: 20px;
+}
+
 .acl-ds-create h3 {
     margin: 0 0 1em 0;
 }
@@ -99,4 +103,30 @@
     align-items: flex-start;
     justify-content: flex-start;
     margin-bottom: 10px;
+}
+
+.acl-content-wrapper .content-head {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.acl-content-wrapper .content-head .input-field {
+    margin-left: 20px;
+    margin-top: 0;
+}
+
+.acl-content-wrapper .content-head button {
+    margin-left: 20px;
+}
+
+.acl-content-wrapper .content-head+h3 {
+    margin-top: 0;
+}
+
+.acl-content-wrapper .acl-role-create #generic-table tr:last-child {
+    border: none;
 }

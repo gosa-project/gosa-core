@@ -1,12 +1,12 @@
  <body>
   {$php_errors}
 
-    <nav class="gonicus-color">
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">
-            <img class="responsive-img" src="themes/default/images/logo.png">
+    <nav>
+        <div class="nav-wrapper gonicus-color ">
+            <a href="#" class="brand-logo" alt="GOsa²">
+                <img src="themes/materialize/images/logo.png">
             </a>
-            <ul class="right hide-on-med-and-down">
+            <ul class="nav-menu">
                 <li>
                     {$version}
                 </li>
@@ -14,33 +14,29 @@
         </div>
     </nav>
 
+    <form action='setup.php' name='mainform' method='post' enctype='multipart/form-data'>
+        {$msg_dialogs}
 
-    <div class="row">
-        <form action='setup.php' name='mainform' method='post' enctype='multipart/form-data'>
-            {$msg_dialogs}
+        {if isset($errors)}{$errors}{/if}
+        <div class="container content-area setup">
+            <div class="card first-level">
+                <div class="card-content first-level">
+                    <div class="header-wrapper">{$header}</div>
+                    {$contents}
 
-            {if isset($errors)}{$errors}{/if}
-            <div class="container">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title">{$header}</span>
-                                {$contents}
-                            </div>
-                            <div class="card-action">
-                                {$bottom}
-                            </div>
-                        </div>
+                    <div class="card-action">
+                        {$bottom}
                     </div>
                 </div>
             </div>
-            <input type='hidden' name='setup_goto_step' value=''>
-        </form>
-    </div>
+        </div>
+        <input type='hidden' name='setup_goto_step' value=''>
+    </form>
 
+    <script type="text/javascript" defer src="themes/materialize/js/pickerLanguage.js"></script>
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
     <script type="text/javascript" defer src="themes/materialize/js/eventListener.js"></script>
-
+    <script type="text/javascript" defer src="themes/materialize/js/main.js"></script>
+    <script type="text/javascript" defer src="themes/materialize/js/functions.js"></script>
  </body>
 </html>
