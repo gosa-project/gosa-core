@@ -1,5 +1,5 @@
 <div class="user-image">
-    <h5>{t}User picture{/t}</h5>
+    <h3>{t}User picture{/t}</h3>
     <div class="grey preview-image">
         <img src="getbin.php?rand={$rand}" alt='' class="materialboxed">
     </div>
