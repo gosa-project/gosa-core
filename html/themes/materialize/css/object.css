@@ -476,6 +476,120 @@
 }
 
 
+/* Referenzen */
+
+.object-info .acl-reference .acl-reference-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.object-info .acl-reference .acl-reference-header h3,
+.object-info .acl-reference .acl-viewer .collapsible-header h3,
+.object-info .acl-reference .acl-viewer .card-content h4 {
+    margin: 0;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .input-field {
+    height: 20px;
+    min-width: 400px;
+    margin: 1rem 20px 0 20px;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .input-field input {
+    margin-bottom: 0;
+    min-height: 20px;
+    height: 20px!important;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .submit {
+    position: relative;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .submit input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .submit i {
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-header.top-level {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-header.top-level i {
+    font-size: 18px;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body {
+    padding: 2em;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body h4 {
+    margin-top: 0;
+}
+
+.object-info .acl-reference .acl-viewer .card {
+    height: auto;
+    max-height: initial;
+}
+
+.object-info .acl-reference .acl-viewer .card-content .divider {
+    margin: 10px 0;
+}
+
+.object-info .acl-reference .acl-viewer .card-content ul {
+    padding-left: 18px;
+}
+
+.object-info .acl-reference .acl-viewer .card-content ul li {
+    list-style-type: initial;
+    font-size: 12px;
+    padding: 0 0 5px 0;
+}
+
+.ldap-entry-wrapper pre {
+    margin: 0;
+}
+
+.ldap-entry-wrapper h3 {
+    margin: 0;
+}
+
+
 /* Group content */
 
 .object-info .group-wrapper .input-gid input {

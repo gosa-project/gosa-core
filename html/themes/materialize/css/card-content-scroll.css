@@ -26,6 +26,7 @@
  *  8.  h2 + margin-bottom + p 58px
  *  9.  p + margin-bottom 38px
  *  10. h3 + margin-bottom 37px
+ *  11. h3 + divider 60px
  */
 
 
@@ -120,4 +121,14 @@
 
 .change-password .password-wrapper.card-content-scroll {
     max-height: calc(100vh - 293px);
+}
+
+
+/*
+ * User - Reference - LDAP Entry
+ * 158px + 60px (11.) + 53px (2.)
+ */
+
+.ldap-entry-wrapper .ldap-entry.card-content-scroll {
+    max-height: calc(100vh - 271px);
 }
