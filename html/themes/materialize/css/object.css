@@ -56,6 +56,10 @@
     object-fit: cover;
 }
 
+.user-image h3 {
+    margin-top: 0;
+}
+
 .user-image img {
     margin: 0 auto;
 }
