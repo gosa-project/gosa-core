@@ -301,10 +301,8 @@ class management
         $str = "";
         if (isset($this->tabObject->read_only) && $this->tabObject->read_only == true) {
             $str.=  (check_for_materialize_theme() ?
-                "<div class='containerhello'>
-                  <div class='right'>
+                "<div class='card-action'>
                     <button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>
-                  </div>
                 </div>" :
                 "<p style=\"text-align:right\">
                   <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
