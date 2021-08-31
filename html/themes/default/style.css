@@ -1700,6 +1700,7 @@ div.progress {
         transition: box-shadow .25s;
         transition: box-shadow .25s, -webkit-box-shadow .25s;
         border-radius: 2px;
+        margin: 0;
     }
     
     .logout-box .container .card .card-content {

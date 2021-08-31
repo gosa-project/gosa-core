@@ -67,12 +67,12 @@ class aclResolver
                 "sub" => _("Complete subtree"),
                 "psub" => _("Complete subtree (permanent)"),
                 "role" => _("Use ACL defined in role"));
-    
+
         // Enforce to reload acl result
         $this->renderedList = "";
     }
 
-    
+
     public function reload()
     {
         // Go through all ACLs and get those matching the objects dn.
@@ -108,7 +108,7 @@ class aclResolver
             }
         }
     }
-    
+
 
 
     /*! \brief   Create a human readable HTML result
@@ -132,7 +132,7 @@ class aclResolver
             }
         }
 
- 
+
         if (empty($this->renderedList)) {
             $this->reload();
 
@@ -141,42 +141,52 @@ class aclResolver
             $ui = get_userinfo();
 
             if (check_for_materialize_theme()) {
-                $autocompleter =    "<div class='search-field input-field'>
-                                        <input id='aclTarget' name='aclTarget' type='text' value='' onChange=\"\$('aclTargetSubmit').focus();\">
-                                        <label for='aclTarget'>"._("Enter another user name")."...</label>
-                                    </div>
-                                    <div class='submit'>
-                                        ".image("<i class='material-icons input-icons'>keyboard_return</i>", "aclTargetSubmit")."
+                $autocompleter =    "<div class='acl-name'>
+                                        <div class='search-field input-field'>
+                                            <input id='aclTarget' name='aclTarget' type='text' value='' onChange=\"\$('aclTargetSubmit').focus();\">
+                                            <label for='aclTarget'>"._("Enter another user name")."...</label>
+                                        </div>
+                                        <div class='submit'>
+                                            ".image("<i class='material-icons input-icons'>keyboard_return</i>", "aclTargetSubmit")."
+                                        </div>
                                     </div>
                                     <div id='autocomplete' class='autocomplete'></div>
                                     <script type='text/javascript'>
                                         new Ajax.Autocompleter(
-                                                'aclTarget', 
-                                                'autocomplete', 
-                                                'autocomplete.php', 
+                                                'aclTarget',
+                                                'autocomplete',
+                                                'autocomplete.php',
                                                 { minChars: 3, frequency: 0.5 });
                                     </script>";
-                                    
-                $user = "<h3>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h3>";
 
-                $str  = "<div class='acl-reference valign-wrapper'>
+                $user = "<h2>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h2>";
+
+                $str = "<div class='acl-reference'>";
+
+                $str.= "<div class='acl-reference-header'>
                             ".$user."
                             ".$autocompleter."
                         </div>";
-                        
+
 
                 foreach ($this->affectingACLs as $dn => $acls) {
-                    $str.= " <div class='acl-viewer'>
-                                <h3>".$dn."</h3>";
-                                
+
+                    // Prepare entry icon (department or element?)
+                    $image = (isset($this->config->idepartments[$dn])) ? "<i class='material-icons'>domain</i>" : "<i class='material-icons'>web_asset</i>";
+
+                    $str.= "<ul class='collapsible acl-viewer'>
+                                <li>
+                                    <div class='collapsible-header top-level'>
+                                        ".$image."
+                                        <h3>".$dn."</h3>
+                                    </div>
+                                    <div class='collapsible-body'>
+                                        <ul class='collapsible'>";
+
                     foreach ($acls as $acl) {
-            
-                        // Prepare entry icon (department or element?)
-                        $image = (isset($this->config->idepartments[$dn])) ? "<i class='material-icons'>domain</i>" : "<i class='material-icons'>web_asset</i>";
-            
                         // The acl type (sub,psub,reset...)
                         $aclType = $this->aclTypes[$acl['type']];
-            
+
                         // Does the filter match for current object?
                         $filter ="";
                         $match = true;
@@ -187,13 +197,13 @@ class aclResolver
                                 $filter= "<span>".$filter."</span>";
                             }
                         }
-            
+
                         // Check membership
                         $gmem = $umem = "";
                         $users = $groups = array();
                         $found = false;
                         foreach ($acl['members'] as $type => $name) {
-            
+
                             // Check if we're part of the members
                             if (preg_match("/^U:/", $type)) {
                                 if (preg_match("/^U:".preg_quote($this->validateDn, '/')."/", $type)) {
@@ -203,7 +213,7 @@ class aclResolver
                                 }
                                 $users[] = "<span>".$name."</span>";
                             }
-            
+
                             // Check if we're part of the group members
                             if (preg_match("/^G/", $type)) {
                                 if ($type == "G:*") {
@@ -223,67 +233,116 @@ class aclResolver
                                         }
                                     }
                                 }
-            
+
                                 // Mark groups that doesn't match
                                 $groups[] = "<span>".$name."</span>";
                             }
                         }
-            
+
                         // Build up ACL definition list
                         $defs ="";
                         if ($acl['type']!='reset') {
+                            if (!empty($filter)) {
+                                $innerColSize = "s6";
+                                $colsPerRow = 2;
+                            } else {
+                                $innerColSize = "s3";
+                                $colsPerRow = 4;
+                            }
+
+                            $col = 0;
+                            $maxCount = count($acl['acl']);
                             foreach ($acl['acl'] as $type => $acl) {
+                                // Add a seperating row
+                                if (($col % $colsPerRow) == 0) {
+                                    $defs .= "<div class='row'>";
+                                }
+
                                 if (isset($this->classMapping[$type])) {
-                                    $defs .= "<li class='collection-item'>".$this->classMapping[$type].":</li>".$this->aclToString($acl);
+                                    $defs .= "  <div class='col ".$innerColSize."'>
+                                                    <div class='card'>
+                                                        <div class='card-content'>
+                                                            <h4 class='collection-item'>".$this->classMapping[$type].":</h4>
+                                                            <hr class='divider'>".$this->aclToString($acl)."
+                                                        </div>
+                                                    </div>
+                                                </div>";
                                 } else {
-                                    $defs .= "<li class='collection-item'>".$type.":</li>".$this->aclToString($acl);
+                                    $defs .= "  <div class='col ".$innerColSize."'>
+                                                    <div class='card'>
+                                                        <div class='card-content'>
+                                                            <h4 class='collection-item'>".$type.":</h4>
+                                                            <hr class='divider'>".$this->aclToString($acl)."
+                                                        </div>
+                                                    </div>
+                                                </div>";
+                                }
+                                ++$col;
+
+                                if (($col % $colsPerRow) == 0 && $col != 0) {
+                                    $defs .= "</div>";
                                 }
                             }
                         }
 
-                        $str.= "    <ul class='collapsible'>   
-                                        <li>
-                                            <div class='collapsible-header'>
-                                                    <div>".implode(' - ', $users)."<span class='secondary-content black-text'>".$aclType."</span></div>
-                                                    ".implode(' - ', $groups)."
-                                                <ul>
-                                            </div>
-                                            <div class='collapsible-body'>";
-                               
+                        $str.= "<li>
+                                    <div class='collapsible-header'>
+                                        <h3>".implode(' - ', $users)."</h3>";
+                                        if (!empty($groups)) {
+                                            $str.= "<p>".implode(' - ', $groups)."</p>";
+                                        }
+                                        if (!empty($aclType)) {
+                                            $str.= "<p>".$aclType."</p>";
+                                        }
+                        $str.= "    </div>
+                                    <div class='collapsible-body'>";
+
                         // Display the acl block in a special color if its not matching
                         $class="";
                         if (!$found || !$match) {
                             $class = "acl-viewer-blocked";
                         }
-                        if (!empty($filter)) {
-                            $filter = " <ul class='collection with-header'>
-                                            <li class='collection-header'>"._("Filter")."</li>
-                                            ".$filter."
-                                        </ul>";
+
+                        if (!empty($filter) && !empty($defs)) {
+                            $colSize = "s6";
+                        } else {
+                            $colSize = "s12";
                         }
+
+                        $str.= "<div class='row'>";
+
                         if (!empty($defs)) {
-                            $defs = "   <ul class='collection with-header'>
-                                            <li class='collection-header'>"._("ACLs")."</li>
-                                            ".$defs."
-                                        </ul>";
+                            $str.= "<div class='col ".$colSize."'>
+                                        <h4>"._("ACLs")."</h4>
+                                        ".$defs."
+                                    </div>";
                         }
-                        $str.= "<div class='row'><div class='col s3'>".$defs."</div><div class='col s3'>".$filter."</div></div>";
-                        $str.= "</div></ul>";
+
+                        if (!empty($filter)) {
+                            $str.= "<div class='col ".$colSize."'>
+                                        <h4>"._("Filter")."</h4>
+                                        ".$filter."
+                                    </div>";
+                        }
+
+                        $str.= "</div>";
+                        $str.= "</div></li>";
                     }
+                    $str.= "</ul></div></li></ul>";
                 }
                 $str.= "</div>";
             } else {
                 // Autocompleter template
                 $autocompleter ="
-                <input class='filter_textfield' placeholder='"._("Enter another user name")."...' 
-                    id='aclTarget' name='aclTarget' type='text' value='' 
+                <input class='filter_textfield' placeholder='"._("Enter another user name")."...'
+                    id='aclTarget' name='aclTarget' type='text' value=''
                     onChange=\"\$('aclTargetSubmit').focus();\">
                 <div id='autocomplete' class='autocomplete'></div>
                 <script type='text/javascript'>
                     new Ajax.Autocompleter(
-                            'aclTarget', 
-                            'autocomplete', 
-                            'autocomplete.php', 
+                            'aclTarget',
+                            'autocomplete',
+                            'autocomplete.php',
                             { minChars: 3, frequency: 0.5 });
                 </script>
                 ".image("images/lists/submit.png", "aclTargetSubmit");
@@ -334,7 +393,7 @@ class aclResolver
                 $str .= "</table>";
                 $str .= "<div class='acl-viewer-container'>";
                 $str .= "<table summary='"._("Object permissions")."' cellpadding='0' cellspacing='0' class='acl-viewer'>";
-                        
+
                 foreach ($this->affectingACLs as $dn => $acls) {
                     foreach ($acls as $acl) {
 
@@ -407,7 +466,7 @@ class aclResolver
                                 }
                             }
                         }
-                   
+
                         // Display the acl block in a special color if its not matching
                         $class="";
                         if (!$found || !$match) {
@@ -438,32 +497,34 @@ class aclResolver
     public function aclToString($acls)
     {
         if (check_for_materialize_theme()) {
-            $str = "<ul class='collection with-header'>";
+            $str = "";
             foreach ($acls as $name => $acl) {
                 if ($name == "0") {
                     $name = _("All");
                 }
-                $str .= "<li class='collection-header'>".$name."</li>";
+                $str .= "<p>".$name.":</p>";
+                $str .= "<ul class='acl-list'>";
                 if (preg_match("/s/", $acl)) {
-                    $str.="<li class='collection-item'><u>"._("Restrict changes to user's own object").'</u></li>';
+                    $str.="<li>"._("Restrict changes to user's own object").'</li>';
                 }
                 if (preg_match("/r/", $acl)) {
-                    $str.="<li class='collection-item'>"._("read").'</li>';
+                    $str.="<li>"._("read").'</li>';
                 }
                 if (preg_match("/w/", $acl)) {
-                    $str.="<li class='collection-item'>"._("write").'</li>';
+                    $str.="<li>"._("write").'</li>';
                 }
                 if (preg_match("/c/", $acl)) {
-                    $str.="<li class='collection-item'>"._("create").'</li>';
+                    $str.="<li>"._("create").'</li>';
                 }
                 if (preg_match("/d/", $acl)) {
-                    $str.="<li class='collection-item'>"._("remove").'</li>';
+                    $str.="<li>"._("remove").'</li>';
                 }
                 if (preg_match("/m/", $acl)) {
-                    $str.="<li class='collection-item'>"._("move").'</li>';
+                    $str.="<li>"._("move").'</li>';
                 }
+                $str."</ul>";
             }
-            return $str."</ul>";
+            return $str;
         } else {
             $str ="<ul class='acl-category-list'>";
             foreach ($acls as $name => $acl) {

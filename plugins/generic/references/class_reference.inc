@@ -34,7 +34,7 @@ class reference extends plugin
         // Init the plugin
         plugin::__construct($config,$dn,$parent);
 
-        // Try to read the 'modifyTimestamp' - this has to be done separately. 
+        // Try to read the 'modifyTimestamp' - this has to be done separately.
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $ldap->cat($this->dn, array('modifyTimestamp'));
@@ -75,19 +75,19 @@ class reference extends plugin
             'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
             'msg'    => _("Object group membership"));
 
-        // Check for department manager 
+        // Check for department manager
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=gosaDepartment)(manager=".normalizeLdap($this->dn)."))",
             'attrs'  => array('ou' => _("Name"),'description' => _("Description")),
             'msg'    => _("Department manager"));
 
-        // Check for user manager 
+        // Check for user manager
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=gosaAccount)(manager=".normalizeLdap($this->dn)."))",
             'attrs'  => array('givenName' => _("Given name"),'sn' => _("Surname"),'uid'=>_("UID")),
             'msg'    => _("User manager"));
 
-        // Go through filters and detect possible references  
+        // Go through filters and detect possible references
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $str = "";
@@ -118,10 +118,9 @@ class reference extends plugin
                 }
                 $list->setListData($data, $data);
 
-                $list->update();    
-                $str .= "<h3>".$filter['msg']."</h3>";
+                $list->update();
+                $str .= "<h2>".$filter['msg']."</h2>";
                 $str .= $list->render();
-                $str .= "<div class='v-spacer'></div>";
             }
         }
         $this->objectList = $str;
@@ -141,7 +140,7 @@ class reference extends plugin
             return($this->dialog->execute());
         }
 
-        $smarty = get_smarty();        
+        $smarty = get_smarty();
 
         // Assign permissions
         $tmp = $this->plInfo();
@@ -149,9 +148,9 @@ class reference extends plugin
 
         $category = preg_replace("/\/.*$/", "", $this->acl_category);
         $smarty->assign('aclREAD',  preg_match("/r/",$ui->get_category_permissions($this->dn, 'acl')));
-        $smarty->assign('completeACL',  $ui->has_complete_category_acls($this->dn, $category)); 
+        $smarty->assign('completeACL',  $ui->has_complete_category_acls($this->dn, $category));
         $smarty->assign('someACL',      $ui->get_category_permissions($this->dn, $category));
-        
+
         // Convert the modifyTimestamp to a human readable value
         $tz = timezone::get_default_timezone();
         $smarty->assign('modifyTimestamp', set_post(date('d.m.Y H:i:s', strtotime($this->modifyTimestamp))));
