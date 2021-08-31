@@ -45,7 +45,7 @@ class mailAddressSelect extends management
     $this->setFilter($filter);
 
     // Build headpage
-    $headpage = new listing(get_template_path("selectMailAddress-list.xml", true, dirname(__FILE__)));
+    $headpage = new listing(get_template_path(check_for_materialize_theme() ? "selectMailAddress-list_materialize.xml" : "selectMailAddress-list.xml", true, dirname(__FILE__)));
     $headpage->setFilter($filter);
     $headpage->registerElementFilter("objectName", "mailAddressSelect::objectNameFilter");
     parent::__construct($config, $ui, "mail", $headpage);

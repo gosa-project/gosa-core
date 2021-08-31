@@ -156,6 +156,7 @@
             <div class="row">
                <div class="input-field col s3">
                   {render acl=$gosaVacationMessageACL}
+                  <input type="text" id="lang" value="{$lang}" hidden="true">
                   <input type="text" id="gosaVacationStart" name="gosaVacationStart" class="datepicker"
                      value="{$gosaVacationStart}">
                   <label for="gosaVacationStart">{t}from{/t}</label>

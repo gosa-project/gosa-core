@@ -122,24 +122,44 @@ class ogroupManagement extends management
     static function filterProperties($row, $gosaGroupObjects)
     {
 
-        $conv= array(
-                "Y" => array("plugins/users/images/select_template.png",_("Templates") , "ogroup"),
-                "U" => array("plugins/generic/images/head.png"        ,_("User")        , "ogroup"),
-                "G" => array("plugins/groups/images/select_group.png"       ,_("Group")       , "ogroup"),
-                "A" => array("plugins/ogroups/images/application.png" ,_("Application") , "ogroup"),
-                "D" => array("plugins/departments/department.png"     ,_("Department")  , "ogroup"),
-                "S" => array("plugins/ogroups/images/server.png"      ,_("Server")      , "ogroup"),
-                "F" => array("plugins/ogroups/images/asterisk.png"    ,_("Phone")       , "phonequeue"),
-                "W" => array("plugins/ogroups/images/workstation.png" ,_("Workstation") , "workstartup"),
-                "O" => array("plugins/ogroups/images/winstation.png"  ,_("Windows Install") , "ogroup"),
-                "T" => array("plugins/ogroups/images/terminal.png"    ,_("Terminal")    , "termgroup"),
-                "P" => array("plugins/ogroups/images/printer.png"     ,_("Printer")     , "ogroup"));
+        $conv = check_for_materialize_theme() ?
+            array(
+                "Y" => array("<i class='material-icons input-icons'>web_asset</i>",         _("Templates"),         "ogroup"),
+                "U" => array("<i class='material-icons input-icons'>person</i>",            _("User"),              "ogroup"),
+                "G" => array("<i class='material-icons input-icons'>groups</i>",            _("Group"),             "ogroup"),
+                "A" => array("<i class='material-icons input-icons'>apps</i>",              _("Application"),       "ogroup"),
+                "D" => array("<i class='material-icons input-icons'>domain</i>",            _("Department"),        "ogroup"),
+                "S" => array("<i class='material-icons input-icons'>dns</i>",               _("Server"),            "ogroup"),
+                "F" => array("<i class='material-icons input-icons'>phone</i>",             _("Phone"),             "phonequeue"),
+                "W" => array("<i class='material-icons input-icons'>computer</i>",          _("Workstation"),       "workstartup"),
+                "O" => array("<i class='material-icons input-icons'>desktop_windows</i>",   _("Windows Install"),   "ogroup"),
+                "T" => array("<i class='material-icons input-icons'>web_asset</i>",         _("Terminal"),          "termgroup"),
+                "P" => array("<i class='material-icons input-icons'>printer</i>",           _("Printer"),           "ogroup") 
+            ) :
+            array(
+                "Y" => array("plugins/users/images/select_template.png",    _("Templates"),         "ogroup"),
+                "U" => array("plugins/generic/images/head.png",             _("User"),              "ogroup"),
+                "G" => array("plugins/groups/images/select_group.png",      _("Group"),             "ogroup"),
+                "A" => array("plugins/ogroups/images/application.png",      _("Application"),       "ogroup"),
+                "D" => array("plugins/departments/department.png",          _("Department"),        "ogroup"),
+                "S" => array("plugins/ogroups/images/server.png",           _("Server"),            "ogroup"),
+                "F" => array("plugins/ogroups/images/asterisk.png",         _("Phone"),             "phonequeue"),
+                "W" => array("plugins/ogroups/images/workstation.png",      _("Workstation"),       "workstartup"),
+                "O" => array("plugins/ogroups/images/winstation.png",       _("Windows Install"),   "ogroup"),
+                "T" => array("plugins/ogroups/images/terminal.png",         _("Terminal"),          "termgroup"),
+                "P" => array("plugins/ogroups/images/printer.png",          _("Printer"),           "ogroup")
+            );
 
         $types = preg_replace("/[^a-z]/i","",$gosaGroupObjects[0]);
         $result ="";
         for($i = 0 ; $i < strlen($types); $i++){
             $type = $types[$i];
-            $result.= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
+            if (check_for_materialize_theme()) {
+                $result.= "<div class='action-wrapper'>".image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1])."</div>";
+            } else {
+                $result.= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
+            }
+            
         }
         return($result);
     }

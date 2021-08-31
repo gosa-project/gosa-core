@@ -683,11 +683,11 @@ class acl extends plugin
 
                     $actions ="";
                     if($this->acl_is_readable("")){
-                        $actions.= image('images/lists/edit.png','cat_edit_'.$section,
+                        $actions.= image(check_for_materialize_theme() ? "<i class='material-icons input-icons'>edit</i>" : 'images/lists/edit.png','cat_edit_'.$section,
                                 msgPool::editButton(_("category ACL")));
                     }
                     if($this->acl_is_removeable() && preg_match("/;".$section."(;|\/)/", $usedList)){
-                        $actions.= image('images/lists/trash.png','cat_del_'.$section,
+                        $actions.= image(check_for_materialize_theme() ? "<i class='material-icons input-icons'>delete</i>" : 'images/lists/trash.png','cat_del_'.$section,
                                 msgPool::delButton(_("category ACL")));
                     }
                     $data[] = $section;

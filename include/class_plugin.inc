@@ -1417,8 +1417,8 @@ class plugin
           }
 
           /* Build new acl string */
-          $acl_parts[$id] = implode($members,",");
-          $acls[] = implode($acl_parts,":");
+          $acl_parts[$id] = implode(",", $members);
+          $acls[] = implode(":", $acl_parts);
         }
 
         /* Acls for this object must be adjusted */

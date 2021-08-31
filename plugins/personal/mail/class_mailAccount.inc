@@ -303,12 +303,12 @@ class mailAccount extends plugin
       $this->mailAddressSelect=  new mailAddressSelect($this->config, get_userinfo());
       $this->dialog= TRUE;
     }
-    if (isset($_POST['mailAddressSelect_cancel'])){
+    if (isset($_POST['mailAddressSelect_cancel']) || isset($_POST['ok-save'])){
       $this->mailAddressSelect= FALSE;
       $this->dialog= FALSE;
     }
 
-    if (isset($_POST['mailAddressSelect_save']) && $this->mailAddressSelect instanceOf mailAddressSelect){
+    if (isset($_POST['mailAddressSelect_save']) || isset($_POST['cancel-abort']) && $this->mailAddressSelect instanceOf mailAddressSelect){
 
       if($this->acl_is_writeable("gosaMailForwardingAddress")){
         $list = $this->mailAddressSelect->save();

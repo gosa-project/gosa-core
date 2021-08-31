@@ -333,12 +333,12 @@ class mailgroup extends plugin
             $this->dialog= TRUE;
         }
 
-        if (isset($_POST['mailAddressSelect_cancel'])){
+        if (isset($_POST['mailAddressSelect_cancel']) || isset($_POST['ok-save'])){
             $this->mailAddressSelect= FALSE;
             $this->dialog= FALSE;
         }
 
-        if (isset($_POST['mailAddressSelect_save'])){
+        if (isset($_POST['mailAddressSelect_save']) || isset($_POST['cancel-abort'])){
             if($this->acl_is_writeable("gosaMailForwardingAddress")){
                 $list = $this->mailAddressSelect->save();
                 foreach ($list as $entry){
@@ -932,8 +932,6 @@ class mailgroup extends plugin
         }
     }
 
-
-
     function make_name($attrs)
     {
         $name= "";
@@ -962,7 +960,7 @@ class mailgroup extends plugin
         $smarty->assign("gosaMailAlternateAddress",    set_post($this->gosaMailAlternateAddress));
         $smarty->assign("gosaMailForwardingAddress",   set_post($this->gosaMailForwardingAddress));
         $smarty->assign("mail", set_post($this->mail));
-        $display= $smarty->fetch (get_template_path('paste_mail.tpl', TRUE, dirname(__FILE__)));
+        $display= $smarty->fetch(get_template_path('paste_mail.tpl', TRUE, dirname(__FILE__)));
         $ret = array();
         $ret['string'] = $display;
         $ret['status'] = "";
