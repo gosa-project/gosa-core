@@ -58,7 +58,7 @@ class group extends plugin
 
     // attribute list for save action
     var $attributes= array("cn", "description", "gidNumber","sambaGroupType","sambaSID","member");
-    var $objectclasses= array("top", "posixGroup");
+    var $objectclasses= array("top");
     var $CopyPasteVars  = array("force_gid","fon_group","smbgroup","groupType","sambaSID","sambaDomainName","SID","nagios_group","sambaGroupType");
     var $multiple_support = TRUE;
 

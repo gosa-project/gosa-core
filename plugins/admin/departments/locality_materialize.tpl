@@ -4,16 +4,13 @@
 
 <div class="input-field">
     {render acl=$lACL}
-    <input type='text' id="l" name="l" size=25 maxlength=60 value="{$l}" title="{t}Name of locality to create{/t}">
-    {/render}
+    <input type='text' id="l" name="l" size=25 maxlength=60 value="{$l}" title="{t}Name of locality to create{/t}"> {/render}
     <label for="c">{t}Locality name{/t}{$must}</label>
 </div>
 
 <div class="input-field">
     {render acl=$descriptionACL}
-    <input type='text' id="description" name="description" size=25 maxlength=80 value="{$description}"
-        title="{t}Descriptive text for department{/t}">
-    {/render}
+    <input type='text' id="description" name="description" size=25 maxlength=80 value="{$description}" title="{t}Descriptive text for department{/t}"> {/render}
     <label for="description">{t}Description{/t}{$must}</label>
 </div>
 
@@ -25,48 +22,33 @@
     </div>
     {/render}
 </div>
-{/if}
-
-{if $manager_enabled}
+{/if} {if $manager_enabled}
 <div class="row">
     <div class="input-field col s4 manager">
         {render acl=$managerACL}
-        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
-        {/render}
+        <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'> {/render}
         <label for="manager">{t}Manager{/t}</label>
         <div class="icons">
             <div class="icon">
-                {render acl=$managerACL}
-                {image path="<i class='material-icons input-icons'>edit</i>" action="editManager"}
-                {/render}
+                {render acl=$managerACL} {image path="<i class='material-icons input-icons'>edit</i>" action="editManager"} {/render}
             </div>
 
             {if $manager!=""}
             <div class="icon">
-                {render acl=$managerACL}
-                {image path="<i class='material-icons input-icons md-24 tooltipped' data-postion='bottom'
-                    data-tooltip='{$manager}'>info</i>" title="{$manager}"}
-                {/render}
+                {render acl=$managerACL} {image path="<i class='material-icons input-icons md-24 tooltipped' data-postion='bottom' data-tooltip='{$manager}'>info</i>" title="{$manager}"} {/render}
             </div>
 
             <div class="icon">
-                {render acl=$managerACL}
-                {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
-                {/render}
+                {render acl=$managerACL} {image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"} {/render}
             </div>
 
             {else}
             <div class="icon">
-                {render acl=$managerACL}
-                {image path="<i class='material-icons md-disabled'>delete</i>"}
-                {/render}
+                {render acl=$managerACL} {image path="<i class='material-icons md-disabled'>delete</i>"} {/render}
             </div>
 
             <div class="icon">
-                {render acl=$managerACL}
-                {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom'
-                    data-tooltip='{t}Manager{/t}'>info</i>"}
-                {/render}
+                {render acl=$managerACL} {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom' data-tooltip='{t}Manager{/t}'>info</i>"} {/render}
             </div>
             {/if}
         </div>
