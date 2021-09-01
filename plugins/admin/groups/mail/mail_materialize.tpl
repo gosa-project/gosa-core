@@ -62,7 +62,6 @@
 								{/if}
 							{/foreach}
 						</select>
-<<<<<<< HEAD
                 </div>
                 <div class="action">
                     {image path="<i class='material-icons'>refresh</i>"}
@@ -99,57 +98,6 @@
             <input type='hidden' name='mail_acls_posted' value='1'> {foreach from=$folder_acls item=item key=user} {render acl=$aclACL}
             <div class="input-field">
                 <select size="1" name="acl_value_{$item.post_name}">
-=======
-					</div>
-					<div class="action">
-						{image path="<i class='material-icons'>refresh</i>"}
-					</div>
-				</div>
-			{/if}
-		</div>
-
-		<div class="col s12 xl6">
-			{if !$multiple_support}
-				<h3>{t}Alternative addresses{/t}</h3>
-
-				{render acl=$gosaMailAlternateAddressACL}
-					<div class="input-field alternative-addresses">
-						<select name="alternates_list[]" multiple title="{t}List of alternative mail addresses{/t}">
-							{html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
-							<option disabled>&nbsp;</option>
-						</select>
-					</div>
-				{/render}
-
-				{render acl=$gosaMailAlternateAddressACL}
-					<div class="input-field add">
-						<input type='text' name="alternate_address" value="">
-
-						{render acl=$gosaMailAlternateAddressACL}
-							<button class="btn-small" type='submit' name='add_alternate'>{msgPool type=addButton}</button>
-						{/render}
-
-						{render acl=$gosaMailAlternateAddressACL}
-							<button class="btn-small" type='submit' name='delete_alternate'>{msgPool type=delButton}</button>
-						{/render}
-					</div>
-				{/render}
-			{/if}
-		</div>
-	</div>
-
-	<div class="row">
-		{if !$multiple_support}
-			<div class="col s12 xl6">
-				<h3>{t}IMAP shared folders{/t}</h3>
-
-				<input type='hidden' name='mail_acls_posted' value='1'>
-
-				{foreach from=$folder_acls item=item key=user}
-					{render acl=$aclACL}
-						<div class="input-field">
-							<select size="1" name="acl_value_{$item.post_name}">
->>>>>>> develop
 								{html_options options=$AclTypes selected=$item.acl}
 								<option disabled>&nbsp;</option>
 							</select> {if $user == "__anyone__"}
