@@ -262,7 +262,7 @@ class aclResolver
                                     $defs .= "  <div class='col ".$innerColSize."'>
                                                     <div class='card'>
                                                         <div class='card-content'>
-                                                            <h4 class='collection-item'>".$this->classMapping[$type].":</h4>
+                                                            <p class='collection-item headline'>".$this->classMapping[$type].":</p>
                                                             <hr class='divider'>".$this->aclToString($acl)."
                                                         </div>
                                                     </div>
@@ -271,7 +271,7 @@ class aclResolver
                                     $defs .= "  <div class='col ".$innerColSize."'>
                                                     <div class='card'>
                                                         <div class='card-content'>
-                                                            <h4 class='collection-item'>".$type.":</h4>
+                                                            <p class='collection-item headline'>".$type.":</p>
                                                             <hr class='divider'>".$this->aclToString($acl)."
                                                         </div>
                                                     </div>
@@ -286,12 +286,21 @@ class aclResolver
                         }
 
                         $str.= "<li>
-                                    <div class='collapsible-header'>
-                                        <h3>".implode(' - ', $users)."</h3>";
-                                        if (!empty($groups)) {
+                                    <div class='collapsible-header'>";
+                                        if (!empty($users)) {
+                                            $str.= "<h4>".implode(' - ', $users)."</h4>";
+                                        }
+
+                                        if (!empty($groups) && empty($users)) {
+                                            $str.= "<h4>".implode(' - ', $groups)."</h4>";
+                                        }else if (!empty($groups) && !empty($users)) {
                                             $str.= "<p>".implode(' - ', $groups)."</p>";
                                         }
-                                        if (!empty($aclType)) {
+
+                                        if (!empty($aclType) && empty($users) && empty($groups)) {
+                                            $str.= "<p></p>";
+                                            $str.= "<p>".$aclType."</p>";
+                                        } else if (!empty($aclType)) {
                                             $str.= "<p>".$aclType."</p>";
                                         }
                         $str.= "    </div>
@@ -313,14 +322,14 @@ class aclResolver
 
                         if (!empty($defs)) {
                             $str.= "<div class='col ".$colSize."'>
-                                        <h4>"._("ACLs")."</h4>
+                                        <h5>"._("ACLs")."</h5>
                                         ".$defs."
                                     </div>";
                         }
 
                         if (!empty($filter)) {
                             $str.= "<div class='col ".$colSize."'>
-                                        <h4>"._("Filter")."</h4>
+                                        <h5>"._("Filter")."</h5>
                                         ".$filter."
                                     </div>";
                         }

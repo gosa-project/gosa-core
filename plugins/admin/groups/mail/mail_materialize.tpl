@@ -95,7 +95,7 @@
 				<h3>{t}Alternative addresses{/t}</h3>
 
 				{render acl=$gosaMailAlternateAddressACL}
-					<div class="input-field">
+					<div class="input-field alternative-addresses">
 						<select name="alternates_list[]" multiple title="{t}List of alternative mail addresses{/t}">
 							{html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
 							<option disabled>&nbsp;</option>

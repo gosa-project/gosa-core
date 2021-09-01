@@ -114,7 +114,7 @@
     font-size: 16px;
 }
 
-.object-info .content-wrapper .input-field input,
+.object-info .content-wrapper .input-field input:not([type="checkbox"]),
 .object-info .content-wrapper .input-field textarea {
     min-height: 30px;
     height: 30px!important;
@@ -402,6 +402,24 @@
     margin: 0 10px;
 }
 
+.object-info .input-field.alternative-addresses label {
+    -webkit-transform: initial;
+    transform: initial;
+    -webkit-transform-origin: initial;
+    transform-origin: initial;
+    top: initial;
+    left: initial;
+    margin: 0;
+}
+
+.object-info .input-field.alternative-addresses ul li {
+    padding: 5px 10px;
+}
+
+.object-info .input-field.alternative-addresses input[type="checkbox"]+span:not(.lever) {
+    height: 18px;
+}
+
 .object-info .contingent .list {
     display: flex;
     flex-direction: row;
@@ -536,6 +554,10 @@
     left: 0;
 }
 
+.object-info .acl-reference .acl-viewer .collapsible:not(.top-level) {
+    margin: 0;
+}
+
 .object-info .acl-reference .acl-viewer .collapsible-header {
     display: flex;
     flex-direction: row;
@@ -562,13 +584,18 @@
     padding: 2em;
 }
 
-.object-info .acl-reference .acl-viewer .collapsible-body h4 {
+.object-info .acl-reference .acl-viewer .collapsible-header h4 {
+    margin: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body h5 {
     margin-top: 0;
 }
 
 .object-info .acl-reference .acl-viewer .card {
     height: auto;
     max-height: initial;
+    margin: 0;
 }
 
 .object-info .acl-reference .acl-viewer .card-content .divider {

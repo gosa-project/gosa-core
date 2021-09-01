@@ -64,7 +64,7 @@
       {if !$multiple_support}
          <h3>{t}Alternative addresses{/t}</h3>
 
-         <div class="input-field">
+         <div class="input-field  alternative-addresses">
             {render acl=$gosaMailAlternateAddressACL}
             <select id="alternates_list" style="width:100%;height:100px;" name="alternates_list[]" size="15" multiple
                title="{t}List of alternative mail addresses{/t}">
