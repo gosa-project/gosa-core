@@ -204,6 +204,17 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     border-bottom: 2px solid #5a5a5a;
 }
 
+[type="radio"]:checked+span:after,
+[type="radio"].with-gap:checked+span:after {
+    background-color: #2A3278;
+}
+
+[type="radio"]:checked+span:after,
+[type="radio"].with-gap:checked+span:before,
+[type="radio"].with-gap:checked+span:after {
+    border: 2px solid #2A3278;
+}
+
 .select-wrapper input.select-dropdown:focus {
     border-bottom: 1px solid #2A3278;
 }

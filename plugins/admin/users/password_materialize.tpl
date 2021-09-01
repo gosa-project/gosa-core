@@ -16,7 +16,7 @@
                 <input type='radio' value='1' id='proposalSelected_true' name='proposalSelected'
                   onClick="changeState('new_password'); changeState('repeated_password');" {if $proposalSelected} checked
                   {/if}>
-                <span class="black-text">{t}Use proposal{/t}</span>
+                <span>{t}Use proposal{/t}</span>
               </label>
             </div>
             <div class="col s9">
@@ -26,7 +26,7 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row pw-proposal">
             <div class="col s6">
               <label>
                 <input type='radio' value='0' name='proposalSelected' id='proposalSelected_false'

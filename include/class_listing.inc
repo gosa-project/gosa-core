@@ -746,7 +746,8 @@ class listing
             // set the paginator for current view
             $itemValue = 1;
             $paginator = "  <div class='pagination-wrapper'>
-                                <div class='input-field page-items'>
+                                <div class='page-items'>
+                                    <p>Items per page</p>
                                     <select id='page-items' onchange='setItemCount()'>";
             for ($i=10; $i <= 100; $i = $i + 5) {
                 if ($i != $prow) {
@@ -758,7 +759,6 @@ class listing
             }
 
             $paginator .= "         </select>
-                                    <label class='page-items-label'>Items per page</label>
                                 </div>
                                 <ul class='pagination valign-wrapper' id='pager'>";
 
@@ -776,10 +776,10 @@ class listing
             foreach ($this->entries as $row => $entry) {
                 if (($row + 1) % $prow == 0) {
                     if (in_array($page, range($selectedPage - 1, $selectedPage + 1))) {
-                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : '')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
                     }
                     if ($selectedPage == 1 && $page == 3) {
-                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : '')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
                     }
                     ++$page;
                 }
@@ -788,7 +788,7 @@ class listing
 
             // append page if remaining entries not fill modulo of $prow
             if ($last && in_array($selectedPage, range($page -1, $page))) {
-                $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : 'black-text')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+                $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : '')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
             }
 
 

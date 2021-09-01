@@ -115,7 +115,7 @@
   <p>
     <label>
       <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}>
-      <span class="black-text">{t}Tag department as an independent administrative unit{/t}</span>
+      <span>{t}Tag department as an independent administrative unit{/t}</span>
     </label>
   </p>
 {/render}
