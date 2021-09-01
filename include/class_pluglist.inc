@@ -353,7 +353,7 @@ class pluglist
         if (isset($_GET['plug'])) {
             $menu .= "    <script language='javascript' type='text/javascript'>
                             if($('plugMenuId_".$_GET['plug']."')){
-                            $('plugMenuId_".$_GET['plug']."').className=".(check_for_materialize_theme() ? "'collection-item pointer active black-text'" : "'current'").'
+                            $('plugMenuId_".$_GET['plug']."').className=".(check_for_materialize_theme() ? "'collection-item pointer active'" : "'current'").'
                             }
                         </script>';
         }
@@ -620,7 +620,7 @@ class pluglist
                     }
 
                     $this->breadcrumb .= "<div id='breadcrumb-container' class='col s12 breadcrumb-container'>
-                                            <a class='breadcrumb-nav black-text' onClick='openPlugin({$index})' title='{$title}'>
+                                            <a class='breadcrumb-nav' onClick='openPlugin({$index})' title='{$title}'>
                                                 <i class='material-icons'>home</i>
                                             </a>";
                 }

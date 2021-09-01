@@ -281,7 +281,7 @@ class sortableListing {
                     if (($this->reorderable) || (!$this->sortingEnabled)) {
                         $result.= "   <th>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
                     } else {
-                        $result.= "   <th><a class='black-text' $link>".(isset($this->header[$i])?$this->header[$i]:"")."</a>$sorter</th>";
+                        $result.= "   <th><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."</a>$sorter</th>";
                     }
                     $first= "";
                 }
@@ -566,7 +566,7 @@ class sortableListing {
             foreach (array_keys($_POST) as $key) {
                 if (preg_match('/^del_'.$this->id.'_([0-9]+)$/', $key, $matches)) {
                     if(!isset($this->mapping[$matches[1]])) return;
-                    
+
                     $this->active_index= $this->mapping[$matches[1]];
 
                     // Ignore request if mode requests it

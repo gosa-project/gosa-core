@@ -22,6 +22,7 @@
     -webkit-transition: border 0.5s ease-out;
     -o-transition: border 0.5s ease-out;
     transition: border 0.5s ease-out;
+    color: #000;
 }
 
 .menu .collection .collection-item.active,
