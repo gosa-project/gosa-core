@@ -1,88 +1,83 @@
 <!--//////////////////////      LOCALITY (l)    //////////////////////-->
 
-<span class="card-title">{t}Properties{/t}</span>
+<h2>{t}Properties{/t}</h2>
 
-<div class="input-field">
+<div class="row content">
 	{render acl=$dcACL}
-	<input type='text' id="dc" name="dc" size=25 maxlength=60 value="{$dc}" title="{t}Name of locality to create{/t}">
-	{/render}
-	<label for="dc">{t}Locality name{/t}</label>
-</div>
-
-<div class="input-field">
-	{render acl=$descriptionACL}
-	<input type='text' id="description" name="description" size=25 maxlength=80 value="{$description}"
-		title="{t}Descriptive text for department{/t}">
-	{/render}
-	<label for="description">{t}Description{/t}{$must}</label>
-</div>
-
-{if !$is_root_dse}
-<div class="row">
-	{render acl=$baseACL}
-	<div class="input-field col s4 ldap-tree">
-		{$base}
-	</div>
-	{/render}
-</div>
-{/if}
-
-{if $manager_enabled}
-<div class="row">
-	<div class="input-field col s4 manager">
-		{render acl=$managerACL}
-		<input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
-		{/render}
-		<label for="manager">{t}Manager{/t}</label>
-		<div class="icons">
-			<div class="icon">
-				{render acl=$managerACL}
-				{image path="<i class='material-icons input-icons'>edit</i>" action="editManager"}
-				{/render}
+		<div class="col s6">
+			<div class="input-field">
+				<input type='text' id="dc" name="dc" size=25 maxlength=60 value="{$dc}" title="{t}Name of locality to create{/t}">
+				<label for="dc">{t}Locality name{/t}</label>
 			</div>
-
-			{if $manager!=""}
-			<div class="icon">
-				{render acl=$managerACL}
-				{image path="<i class='material-icons input-icons md-24 tooltipped' data-postion='bottom'
-					data-tooltip='{$manager}'>info</i>" title="{$manager}"}
-				{/render}
-			</div>
-
-			<div class="icon">
-				{render acl=$managerACL}
-				{image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
-				{/render}
-			</div>
-
-			{else}
-			<div class="icon">
-				{render acl=$managerACL}
-				{image path="<i class='material-icons md-disabled'>delete</i>"}
-				{/render}
-			</div>
-
-			<div class="icon">
-				{render acl=$managerACL}
-				{image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom'
-					data-tooltip='{t}Manager{/t}'>info</i>"}
-				{/render}
-			</div>
-			{/if}
 		</div>
-	</div>
-</div>
-{/if}
-<hr>
-<span class="card-title">{t}Administrative settings{/t}</span>
+	{/render}
 
-<div class="input-field">
-	<label>
-		{render acl=$gosaUnitTagACL}
-		<input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}>
+	{render acl=$descriptionACL}
+		<div class="col s6">
+			<div class="input-field">
+				<input type='text' id="description" name="description" size=25 maxlength=80 value="{$description}" title="{t}Descriptive text for department{/t}">
+				<label for="description">{t}Description{/t}{$must}</label>
+			</div>
+		</div>
+	{/render}
+
+	{if !$is_root_dse}
+		{render acl=$baseACL}
+        	<div class="col s6">
+				<div class="input-field ldap-tree">
+					{$base}
+				</div>
+			</div>
 		{/render}
-		<span class="black-text">{t}Tag department as an independent administrative unit{/t}</span>
-	</label>
+	{/if}
+
+	{if $manager_enabled}
+		{render acl=$managerACL}
+			<div class="col s6">
+				<div class="input-field manager">
+					<input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
+					<label for="manager">{t}Manager{/t}</label>
+
+					<div class="icons">
+						<div class="icon">
+							{image path="<i class='material-icons input-icons'>edit</i>" action="editManager"}
+						</div>
+
+						{if $manager!=""}
+							<div class="icon">
+								{image path="<i class='material-icons input-icons tooltipped' data-postion='bottom' data-tooltip='{$manager}'>info</i>" title="{$manager}"}
+							</div>
+
+							<div class="icon">
+								{image path="<i class='material-icons input-icons'>delete</i>" action="removeManager"}
+							</div>
+						{else}
+							<div class="icon">
+								{image path="<i class='material-icons md-disabled'>delete</i>"}
+							</div>
+
+							<div class="icon">
+								{image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom' data-tooltip='{t}Manager{/t}'>info</i>"}
+							</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+		{/render}
+	{/if}
 </div>
+
+<hr class="divider">
+
+<h3>{t}Administrative settings{/t}</h3>
+
+{render acl=$gosaUnitTagACL}
+	<p>
+		<label>
+			<input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}>
+			<span>{t}Tag department as an independent administrative unit{/t}</span>
+		</label>
+	</p>
+{/render}
 
 <input type='hidden' name='dep_generic_posted' value='1'>
