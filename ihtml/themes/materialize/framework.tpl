@@ -98,7 +98,6 @@
         }
     </script>
 
-    <script type="text/javascript" defer src="themes/materialize/js/pickerLanguage.js"></script>
     <script type="text/javascript" src="themes/materialize/js/materialize.js"></script>
     <script type="text/javascript" defer src="themes/materialize/js/eventListener.js"></script>
     <script type="text/javascript" defer src="themes/materialize/js/main.js"></script>

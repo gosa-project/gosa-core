@@ -23,9 +23,8 @@
                     <td style='width:50%; ' class='right-border'>
 
                         {t}Alternative addresses{/t}
-                        <select style="width:100%;" name="alternates_list[]" size=10 multiple title="{t}List of alternative mail addresses{/t}">
+                        <select style="width:100%;" name="alternates_list[]" size=10 multiple title="{t}List of alternative mail addresses{/t}" {if !$gosaMailAlternateAddress} disabled {/if}>
 							{html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
-							<option disabled>&nbsp;</option>
 						</select>
                         <br>
                         <input type='text' name="alternate_address" size="30" align=middle maxlength="60" value="">

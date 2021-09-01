@@ -684,3 +684,10 @@
 .object-info .group-mail-wrapper .folder-setting .action {
     margin-left: 10px;
 }
+
+.object-info .dropdown-content li > span > label {
+    display: contents;
+    top: 1px;
+    left: 0;
+    height: 18px;
+}
