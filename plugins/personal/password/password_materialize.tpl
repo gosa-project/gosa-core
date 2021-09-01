@@ -39,7 +39,7 @@
                   <input type='radio' value='1' id='proposalSelected_true' name='proposalSelected'
                     onClick="changeState('new_password'); changeState('repeated_password');" {if $proposalSelected} checked
                     {/if}>
-                  <span class="black-text">{t}Use proposal{/t}</span>
+                  <span>{t}Use proposal{/t}</span>
                 </label>
               </div>
               <div class="col s9">
@@ -49,7 +49,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row pw-proposal">
               <div class="col s6">
                 <label>
                   <input type='radio' value='0' name='proposalSelected' id='proposalSelected_false'
@@ -124,8 +124,8 @@
   </div>
 
   <div class="card-action">
-    <button class="btn-small gonicus-color right" type='submit' id="password_finish" name='password_finish' disabled>{t}Set password{/t}</button>
-    <button class="btn-small gonicus-color right" type=reset id="password_cancel" name="password_cancel">{t}Clear
+    <button class="btn-small gonicus-color" type='submit' id="password_finish" name='password_finish' disabled>{t}Set password{/t}</button>
+    <button class="btn-small gonicus-color" type=reset id="password_cancel" name="password_cancel">{t}Clear
       fields{/t}</button>
   </div>
 

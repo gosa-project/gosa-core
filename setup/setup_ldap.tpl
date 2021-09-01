@@ -88,7 +88,7 @@
                     <p>
                         {if $append_base_to_admin_dn},{$base_to_append}{/if}
                     </p>
-                    <button class="btn-flat" type="submit" name="resolve_user" title="{t}Select user{/t}"><i class="material-icons black-text md-36">folder_open</i></button>
+                    <button class="btn-flat" type="submit" name="resolve_user" title="{t}Select user{/t}"><i class="material-icons">folder_open</i></button>
                 </div>
 
                 <div class="col s12 xl6 connection-setting">

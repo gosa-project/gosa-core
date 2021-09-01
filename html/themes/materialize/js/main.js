@@ -1,7 +1,7 @@
 // Disable default event for scrolling the card
 let scrollElem = document.querySelectorAll('.card-content-scroll');
 
-if (scrollElem.length !== 0) {
+if (scrollElem && scrollElem.length !== 0) {
     let cardContent = document.querySelector('.card-content');
     cardContent.style.overflowY = "visible";
 
@@ -11,7 +11,7 @@ if (scrollElem.length !== 0) {
         outerScrollElem.style.height = "auto";
 
         let checkSetup = document.querySelector('.content-area.setup');
-        if (checkSetup.length !== 0) {
+        if (checkSetup && checkSetup.length !== 0) {
             outerScrollElem.classList.remove('card-content-scroll');
         }
     }
@@ -20,7 +20,7 @@ if (scrollElem.length !== 0) {
 // Disable empty container
 let cardActionElem = document.querySelectorAll('.card-action');
 
-if (cardActionElem.length > 1) {
+if (cardActionElem && cardActionElem.length > 1) {
     cardActionArray = Array.from(cardActionElem);
     cardActionArray.forEach(element => {
         if (!element.querySelector("button")) {

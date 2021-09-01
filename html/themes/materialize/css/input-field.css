@@ -8,7 +8,7 @@
     color: gray;
 }
 
-.input-field:not(.login) input,
+.input-field:not(.login) input:not([type="checkbox"]),
 .input-field textarea {
     min-height: 30px;
     height: 30px!important;
