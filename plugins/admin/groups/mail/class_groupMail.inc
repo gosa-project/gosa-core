@@ -333,12 +333,12 @@ class mailgroup extends plugin
             $this->dialog= TRUE;
         }
 
-        if (isset($_POST['mailAddressSelect_cancel']) || isset($_POST['ok-save'])){
+        if (isset($_POST['mailAddressSelect_cancel']) || isset($_POST['cancel-abort'])){
             $this->mailAddressSelect= FALSE;
             $this->dialog= FALSE;
         }
 
-        if (isset($_POST['mailAddressSelect_save']) || isset($_POST['cancel-abort'])){
+        if (isset($_POST['mailAddressSelect_save']) || isset($_POST['ok-save'])){
             if($this->acl_is_writeable("gosaMailForwardingAddress")){
                 $list = $this->mailAddressSelect->save();
                 foreach ($list as $entry){
