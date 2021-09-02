@@ -34,39 +34,40 @@
         <div class="row">
 
             {if $hideMenus}
-            <div class='col s12'>
-                <div class="card">
-                    {$contents}
-                    {$msg_dialogs}
-                </div>
-            </div>
-            {else}
-
-            <!-- Breadcrumb -->
-            {$breadcrumb}
-
-            <div class="col s12 content-area">
-                <!-- Menü -->
-                <div class="col s2 xl1 menu">
-                    <ul class="collapsible">
-                        {$menu}
-                    </ul>
-                </div>
-
-                {$msg_dialogs}
-
-                <!-- Plugin Content-->
-                <div class="col s10 xl11 content{if $noMenuMode}-noMenu{/if}">
+                <div class='col s12'>
                     <div class="card first-level">
                         <div class="card-content first-level">
                             {$contents}
+                            {$msg_dialogs}
                         </div>
                     </div>
                 </div>
-            </div>
+            {else}
+                <!-- Breadcrumb -->
+                {$breadcrumb}
+
+                <div class="content-area">
+                    <!-- Menü -->
+                    <div class="menu">
+                        <ul class="collapsible">
+                            {$menu}
+                        </ul>
+                    </div>
+
+                    {$msg_dialogs}
+
+                    <!-- Plugin Content-->
+                    <div class="content{if $noMenuMode}-noMenu{/if}">
+                        <div class="card first-level">
+                            <div class="card-content first-level">
+                                {$contents}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {/if}
         </div>
 
-        {/if}
 
         {if $channel != ""}
         <input type="hidden" name="_channel_" value="{$channel}">

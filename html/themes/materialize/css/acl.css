@@ -11,12 +11,24 @@
     margin-bottom: 0;
 }
 
+.acl-ds-head .acl-member #generic-table tr:last-child {
+    border-bottom: none;
+}
+
 .acl-content-wrapper .acl-role-head .ldap-tree {
     margin-bottom: 20px;
 }
 
 .acl-ds-create h3 {
     margin: 0 0 1em 0;
+}
+
+.acl-ds-create .row .col.xl6:first-child {
+    padding-left: 0;
+}
+
+.acl-ds-create .row .col.xl6:last-child {
+    padding-right: 0;
 }
 
 .acl-member {
@@ -30,7 +42,46 @@
     margin: 20px 0;
 }
 
-.acl-for-object .acl-object-wrapper {
+.acl-content-wrapper .acl-setting-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.acl-content-wrapper .acl-setting-buttons .acl-setting-button-grp {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.acl-content-wrapper .acl-setting-buttons .acl-setting-button-grp .acl-setting-button-grp-small {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.acl-content-wrapper .acl-setting-buttons .acl-setting-button-grp .acl-setting-button-grp-small button {
+    margin: 0;
+}
+
+.acl-content-wrapper .acl-setting-buttons .acl-setting-button-grp .acl-setting-button-grp-small button:first-child {
+    margin-right: 2px;
+}
+
+.acl-content-wrapper .acl-setting-buttons .button-divider {
+    margin: 0 5px;
+}
+
+.acl-content-wrapper .acl-object-wrapper {
     -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
     border-top: 1px solid #e0e0e0;
@@ -39,7 +90,7 @@
     margin-top: 10px;
 }
 
-.acl-for-object .acl-object-wrapper .object-head-wrapper {
+.acl-content-wrapper .acl-object-wrapper .object-head-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -51,22 +102,26 @@
     border-bottom: 1px solid #e0e0e0;
 }
 
-.acl-for-object .acl-object-wrapper .object-head-wrapper .object-name {
+.acl-content-wrapper .acl-object-wrapper .object-head-wrapper .object-name {
     font-weight: bold;
 }
 
-.acl-for-object .acl-object-wrapper .object-body-wrapper .row,
-.acl-for-object .acl_container .row {
+.acl-content-wrapper .acl-object-wrapper .object-head-wrapper .advanced-settings button {
+    margin: 0;
+}
+
+.acl-content-wrapper .acl-object-wrapper .object-body-wrapper .row,
+.acl-content-wrapper .acl_container .row {
     margin-bottom: 0;
 }
 
-.acl-for-object .acl-object-wrapper .object-body-wrapper label,
-.acl-for-object .acl_container label {
+.acl-content-wrapper .acl-object-wrapper .object-body-wrapper label,
+.acl-content-wrapper .acl_container label {
     position: relative;
 }
 
-.acl-for-object .acl-object-wrapper .object-body-wrapper label input,
-.acl-for-object .acl_container label input {
+.acl-content-wrapper .acl-object-wrapper .object-body-wrapper label input,
+.acl-content-wrapper .acl_container label input {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -74,29 +129,29 @@
     width: 18px;
 }
 
-.acl-for-object .acl_container {
+.acl-content-wrapper .acl_container {
     border: 1px solid #e0e0e0;
     padding: 1em 1em 2px 1em;
     background-color: initial;
 }
 
-.acl-for-object .acl_container label,
-.acl-for-object .acl-object-wrapper .object-body-wrapper label {
+.acl-content-wrapper .acl_container label,
+.acl-content-wrapper .acl-object-wrapper .object-body-wrapper label {
     margin-right: 10px;
 }
 
-.acl-for-object .acl_container label:last-child,
-.acl-for-object .acl-object-wrapper .object-body-wrapper label:last-child {
+.acl-content-wrapper .acl_container label:last-child,
+.acl-content-wrapper .acl-object-wrapper .object-body-wrapper label:last-child {
     margin-right: 0;
 }
 
-.acl-for-object .acl_container label span,
-.acl-for-object .acl-object-wrapper .object-body-wrapper label span {
+.acl-content-wrapper .acl_container label span,
+.acl-content-wrapper .acl-object-wrapper .object-body-wrapper label span {
     padding-left: 28px;
     color: #000000;
 }
 
-.acl-for-object .acl_container .option-grp {
+.acl-content-wrapper .acl_container .option-grp {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
@@ -129,4 +184,10 @@
 
 .acl-content-wrapper .acl-role-create #generic-table tr:last-child {
     border: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    .acl-ds-create .row .col.xl6 {
+        padding: 0;
+    }
 }
