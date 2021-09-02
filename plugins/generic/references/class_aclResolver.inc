@@ -243,11 +243,16 @@ class aclResolver
                         $defs ="";
                         if ($acl['type']!='reset') {
                             if (!empty($filter)) {
-                                $innerColSize = "s6";
+                                $innerColSize = "s12 xl6";
                                 $colsPerRow = 2;
                             } else {
-                                $innerColSize = "s3";
-                                $colsPerRow = 4;
+                                if (screen.width < 1200)  {
+                                    $innerColSize = "s6 xl3";
+                                    $colsPerRow = 2;
+                                } else {
+                                    $innerColSize = "s6 xl3";
+                                    $colsPerRow = 4;
+                                }
                             }
 
                             $col = 0;

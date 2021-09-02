@@ -69,16 +69,18 @@ input {
 }
 
 .content-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-top: 20px;
     padding: 12px
 }
 
-.content-area .col.menu {
-    padding-left: 0;
-}
-
-.content-area .col.content {
-    padding-right: 0;
+.content-area .content {
+    width: 100%;
 }
 
 .content .card-content h2 {
@@ -205,7 +207,7 @@ input[type=tel]:not(.browser-default):focus:not([readonly])+label,
 input[type=number]:not(.browser-default):focus:not([readonly])+label,
 input[type=search]:not(.browser-default):focus:not([readonly])+label,
 textarea.materialize-textarea:focus:not([readonly])+label {
-    color: #2A3278;
+    color: initial;
 }
 
 [type="checkbox"]:checked+span:not(.lever):before {
@@ -226,4 +228,23 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 
 .select-wrapper input.select-dropdown:focus {
     border-bottom: 1px solid #2A3278;
+}
+
+button:focus {
+    outline: none;
+    background-color: initial;
+}
+
+@media only screen and (max-width: 1200px) {
+    .content-area {
+        padding: 24px;
+    }
+    .col.s12,
+    .col.s12.xl6 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .col.s12.xl6+.col.s12.xl6 {
+        margin-top: 8px;
+    }
 }

@@ -42,3 +42,24 @@
 .input-field .prefix.active {
     color: #2A3278;
 }
+
+
+/* Multiple Select */
+
+.input-field .select-wrapper.multiple-select label {
+    -webkit-transform: initial;
+    transform: initial;
+    -webkit-transform-origin: initial;
+    transform-origin: initial;
+    top: initial;
+    left: initial;
+    margin: 0;
+}
+
+.input-field .select-wrapper.multiple-select ul li {
+    padding: 5px 10px;
+}
+
+.input-field .select-wrapper.multiple-select input[type="checkbox"]+span:not(.lever) {
+    height: 18px;
+}

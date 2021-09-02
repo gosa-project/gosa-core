@@ -21,6 +21,7 @@
 }
 
 button.btn-small,
+button.btn-extra-small,
 div.btn-small {
     height: 32.4px;
     line-height: 32.4px;
@@ -32,6 +33,7 @@ div.btn-small {
 }
 
 button.btn-small:hover,
+button.btn-extra-small:hover,
 div.btn-small:hover {
     border: 1px solid transparent;
     background-color: rgba(42, 50, 120, 1);

@@ -1,3 +1,8 @@
+.content-area .menu {
+    width: 150px;
+    padding: 0 0.75rem 0 0;
+}
+
 .menu .collapsible {
     margin-top: 0;
     box-shadow: none;
@@ -29,4 +34,10 @@
 .menu .collection .collection-item:hover {
     border-left-color: #2A3278;
     background: #FFFFFF;
+}
+
+@media only screen and (max-width: 1200px) {
+    .content-area .menu {
+        padding: 0 24px 0 0;
+    }
 }

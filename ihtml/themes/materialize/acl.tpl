@@ -17,29 +17,36 @@
 			<div class="acl-ds-create card-content-scroll">
 				<h3>{t}Options{/t}</h3>
 				<div class="row">
-					<div class="input-field col s12 xl6">
-						{if !$acl_writeable}
-							<select id="acl_type" size="1" name="dummy_t" title="{t}Select an ACL type{/t}" disabled>
-								{html_options options=$aclTypes selected=$aclType}
-							</select>
-						{else}
-							<select id="acl_type" size="1" name="aclType" title="{t}Select an ACL type{/t}"
-								onChange="document.mainform.submit()">
-								{html_options options=$aclTypes selected=$aclType}
-							</select size="1">
-							{if $javascript eq 'false'}
-								<button class="btn-small gonicus-btn" type='submit' name='refresh'>{t}Apply{/t}</button>
+					<div class="col s12 xl6">
+						<div class="input-field">
+							{if !$acl_writeable}
+								<select id="acl_type" size="1" name="dummy_t" title="{t}Select an ACL type{/t}" disabled>
+									{html_options options=$aclTypes selected=$aclType}
+								</select>
+							{else}
+								<select id="acl_type" size="1" name="aclType" title="{t}Select an ACL type{/t}"
+									onChange="document.mainform.submit()">
+									{html_options options=$aclTypes selected=$aclType}
+								</select size="1">
+
+								{if $javascript eq 'false'}
+									<button class="btn-small" type='submit' name='refresh'>{t}Apply{/t}</button>
+								{/if}
 							{/if}
-						{/if}
-						<label for="acl_type">{t}ACL type{/t}</label>
+							<label for="acl_type">{t}ACL type{/t}</label>
+						</div>
 					</div>
-					<div class="input-field col s12 xl6">
-						{if !$acl_writeable}
-							<input id="acl_filter" type="text" value='{$aclFilter}' disabled name='dummy_f'>
-						{else}
-							<input id="acl_filter" type='text' value='{$aclFilter}' name='aclFilter'>
-						{/if}
-						<label for="acl_filter">{t}Additional filter options{/t}</label>
+
+					<div class="col s12 xl6">
+						<div class="input-field">
+							{if !$acl_writeable}
+								<input id="acl_filter" type="text" value='{$aclFilter}' disabled name='dummy_f'>
+							{else}
+								<input id="acl_filter" type='text' value='{$aclFilter}' name='aclFilter'>
+							{/if}
+
+							<label for="acl_filter">{t}Additional filter options{/t}</label>
+						</div>
 					</div>
 				</div>
 

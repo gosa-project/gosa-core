@@ -53,7 +53,7 @@ class commandVerifier
             if(!empty($stdout)) $stdout = "<pre>".htmlentities($stdout,ENT_COMPAT,'UTF-8')."</pre>";
             if(!empty($stderr)) $stderr = "<pre>".htmlentities($stderr,ENT_COMPAT,'UTF-8')."</pre>";
             $output = "
-                <table summary='"._("Results")."' class='responsive-table'>
+                <table summary='"._("Results")."'>
                     <tbody>
                         <tr><td><b>Result:</b></td><td>$stdout</td></tr>
                         <tr><td><b>Error:</b></td><td>$stderr</td></tr>

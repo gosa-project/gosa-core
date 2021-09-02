@@ -8,7 +8,7 @@
 
   <div class="password-wrapper card-content-scroll">
     <div class="row first-level">
-      <div class="col s6 first-level">
+      <div class="col s8 xl6 first-level">
         {if $proposalEnabled}
           <div class="row pw-proposal valign-wrapper">
             <div class="col s3">
@@ -71,8 +71,8 @@
         </div>
       </div>
 
-      <div class="col s6">
-        <div class="col s8 offset-s4">
+      <div class="col s4 xl6">
+        <div class="col s12 xl8 offset-xl4">
           <div class="password-conditions">
             <h3>{t}Password requirements{/t}:</h3>
             <ul>
