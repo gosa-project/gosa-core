@@ -194,7 +194,8 @@ class departmentManagement extends management
     $types['domain']['IMG']     = (check_for_materialize_theme() ? "domain" : "plugins/departments/images/domain.png"); 
     $types['domain']['IMG_FULL']= (check_for_materialize_theme() ? "domain" : "plugins/departments/images/domain.png"); ; 
     $types['domain']['TITLE']   = _("Domain"); 
-    $types['domain']['TPL']     = (check_for_materialize_theme() ? "domain_materialize.tpl" : "domain.tpl"); 
+    $types['domain']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "domain.tpl"); 
+    $types['domain']['TR']      = ["domain", "Domain"]; 
 
     /* Domain component 
      */
@@ -206,7 +207,8 @@ class departmentManagement extends management
     $types['dcObject']['IMG']     = (check_for_materialize_theme() ? "router" : "plugins/departments/images/dc.png");
     $types['dcObject']['IMG_FULL']= (check_for_materialize_theme() ? "router" : "plugins/departments/images/dc.png");
     $types['dcObject']['TITLE']   = _("Domain Component");
-    $types['dcObject']['TPL']     = (check_for_materialize_theme() ? "dcObject_materialize.tpl" : "dcObject.tpl");
+    $types['dcObject']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "dcObject.tpl");
+    $types['dcObject']['TR']      = ["locality", "Locality"]; 
 
     /* Country object
      */
@@ -218,7 +220,8 @@ class departmentManagement extends management
     $types['country']['IMG']     = (check_for_materialize_theme() ? "outlined_flag" : "plugins/departments/images/country.png");
     $types['country']['IMG_FULL']= (check_for_materialize_theme() ? "outlined_flag" : "plugins/departments/images/country.png");
     $types['country']['TITLE']   = _("Country");
-    $types['country']['TPL']     = (check_for_materialize_theme() ? "country_materialize.tpl" : "country.tpl");
+    $types['country']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "country.tpl");
+    $types['country']['TR']      = ["country", "Country"]; 
 
     /* Locality object
      */
@@ -230,7 +233,8 @@ class departmentManagement extends management
     $types['locality']['IMG']     = (check_for_materialize_theme() ? "screen_search_desktop" : "plugins/departments/images/locality.png");
     $types['locality']['IMG_FULL']= (check_for_materialize_theme() ? "screen_search_desktop" : "plugins/departments/images/locality.png");
     $types['locality']['TITLE']   = _("Locality");
-    $types['locality']['TPL']     = (check_for_materialize_theme() ? "locality_materialize.tpl" : "locality.tpl");
+    $types['locality']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "locality.tpl");
+    $types['locality']['TR']      = ["locality", "Locality"]; 
 
     /* Organization
      */
@@ -242,7 +246,9 @@ class departmentManagement extends management
     $types['organization']['IMG']     = (check_for_materialize_theme() ? "corporate_fare" : "plugins/departments/images/organization.png");
     $types['organization']['IMG_FULL']= (check_for_materialize_theme() ? "corporate_fare" : "plugins/departments/images/organization.png");
     $types['organization']['TITLE']   = _("Organization");
-    $types['organization']['TPL']     = (check_for_materialize_theme() ? "organization_materialize.tpl" : "organization.tpl");
+    $types['organization']['TPL']     = (check_for_materialize_theme() ? "dep_oExtendedUnit.tpl" : "organization.tpl");
+    $types['organization']['TR']      = ["organization", "Organization"]; 
+
 
     /* Department
      */
@@ -254,7 +260,9 @@ class departmentManagement extends management
     $types['organizationalUnit']['IMG']     = (check_for_materialize_theme() ? "folder" : "images/lists/folder.png"); //plugins/departments/images/department.png";
     $types['organizationalUnit']['IMG_FULL']= (check_for_materialize_theme() ? "folder" : "images/lists/folder.png"); //plugins/departments/images/department.png";
     $types['organizationalUnit']['TITLE']   = _("Department");
-    $types['organizationalUnit']['TPL']     = (check_for_materialize_theme() ? "generic_materialize.tpl" : "generic.tpl");
+    $types['organizationalUnit']['TPL']     = (check_for_materialize_theme() ? "dep_oExtendedUnit.tpl" : "generic.tpl");
+    $types['organizationalUnit']['TR']      = ["department", "Department"]; 
+
     return($types);
   }
 } 

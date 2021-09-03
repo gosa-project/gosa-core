@@ -907,9 +907,10 @@ class acl extends plugin
         $list =$this->sort_by_priority($list);
         foreach ($list as $key => $name){
 
+            
             /* Create sub acl if it does not exist */
             if (!isset($this->aclContents[$key])){
-                $this->aclContents[$key]= array();
+                $this->aclContents = array($key => array()); 
             }
             if(!isset($this->aclContents[$key][0])){
                 $this->aclContents[$key][0]= '';

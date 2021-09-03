@@ -13,7 +13,9 @@
                 <span>{if $Certificate_readable}{$userCertificateinfo}{/if}</span>
             </div>
             <div class="col s4 certificate-upload">
-                {if $userCertificate_state ne "true"} {render acl=$CertificateACL}
+                {if $userCertificate_state ne "true"} 
+                
+                {render acl=$CertificateACL}
                 <div class="file-field input-field">
                     <div class="btn-small">
                         <span>Datei auswählen</span>
@@ -23,8 +25,15 @@
                         <input placeholder='Keine Datei ausgewählt' type="text" class="file-path validate">
                     </div>
                 </div>
-                {/render} {else} {render acl=$CertificateACL}
-                <button class="btn-small" type='submit' name='remove_userCertificate'>{t}Remove{/t}</button> {/render} {/if}
+                {/render} 
+                
+                {else} 
+                
+                {render acl=$CertificateACL}
+                <button class="btn-small" type='submit' name='remove_userCertificate'>{t}Remove{/t}</button> 
+                {/render} 
+                
+                {/if}
             </div>
         </div>
         <hr class="divider">
@@ -36,7 +45,9 @@
                 <span>{if $Certificate_readable}{$userSMIMECertificateinfo}{/if}</span>
             </div>
             <div class="col s4 certificate-upload">
-                {if $userSMIMECertificate_state ne "true"} {render acl=$CertificateACL}
+                {if $userSMIMECertificate_state ne "true"} 
+                
+                {render acl=$CertificateACL}
                 <div class="file-field input-field">
                     <div class="btn-small">
                         <span>Datei auswählen</span>
@@ -46,9 +57,15 @@
                         <input placeholder='Keine Datei ausgewählt' type="text" class="file-path validate">
                     </div>
                 </div>
-                {/render} {else} {render acl=$CertificateACL}
-                <button type='submit' name='remove_userSMIMECertificate'>
-                        {t}Remove{/t}</button> {/render} {/if}
+                {/render} 
+                
+                {else} 
+                
+                {render acl=$CertificateACL}
+                <button type='submit' name='remove_userSMIMECertificate'>{t}Remove{/t}</button> 
+                {/render} 
+                
+                {/if}
             </div>
         </div>
         <hr class="divider">
@@ -60,7 +77,9 @@
                 <span>{if $Certificate_readable}{$userPKCS12info}{/if}</span>
             </div>
             <div class="col s4 certificate-upload">
-                {if $userPKCS12_state ne "true"} {render acl=$CertificateACL}
+                {if $userPKCS12_state ne "true"} 
+                
+                {render acl=$CertificateACL}
                 <div class="file-field input-field">
                     <div class="btn-small">
                         <span>Datei auswählen</span>
@@ -70,9 +89,15 @@
                         <input placeholder='Keine Datei ausgewählt' type="text" class="file-path validate">
                     </div>
                 </div>
-                {/render} {else} {render acl=$CertificateACL}
-                <button type='submit' name='remove_userPKCS12'>
-                        {t}Remove{/t}</button> {/render} {/if}
+                {/render} 
+                
+                {else} 
+                
+                {render acl=$CertificateACL}
+                <button type='submit' name='remove_userPKCS12'>{t}Remove{/t}</button> 
+                {/render} 
+                
+                {/if}
             </div>
         </div>
     </div>
@@ -95,9 +120,10 @@
 {/if}
 
 <div class='plugin-actions card-action'>
+
     {render acl=$CertificateACL}
-    <button class="btn-small gonicus-color" type='submit' name='cert_edit_finish'>
-        {msgPool type=saveButton}</button> {/render}
-    <button class="btn-small gonicus-color" type='submit' name='cert_edit_cancel'>
-        {msgPool type=cancelButton}</button>
+    <button class="btn-small gonicus-color" type='submit' name='cert_edit_finish'>{msgPool type=saveButton}</button> 
+    {/render}
+
+    <button class="btn-small gonicus-color" type='submit' name='cert_edit_cancel'>{msgPool type=cancelButton}</button>
 </div>

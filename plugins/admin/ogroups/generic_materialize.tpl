@@ -6,22 +6,20 @@
     <div class="col s12 xl6">
       <h3>{t}Generic settings{/t}</h3>
 
+      {render acl=$cnACL}
       <div class="input-field">
-        {render acl=$cnACL}
-          <input type='text' name="cn" id="cn" size=25 maxlength=60 value="{$cn}" title="{t}Name of the group{/t}">
-        {/render}
-
+        <input type='text' name="cn" id="cn" size=25 maxlength=60 value="{$cn}" title="{t}Name of the group{/t}">
         <label for="cn">{t}Group name{/t}{$must}</label>
       </div>
+      {/render}
 
+      {render acl=$descriptionACL}
       <div class="input-field">
-        {render acl=$descriptionACL}
-          <input type='text' id="description" name="description" size=40 maxlength=80 value="{$description}"
+        <input type='text' id="description" name="description" size=40 maxlength=80 value="{$description}"
           title="{t}Descriptive text for this group{/t}">
-        {/render}
-
         <label for="description">{t}Description{/t}</label>
       </div>
+      {/render}
 
       {render acl=$baseACL}
         <div class="input-field ldap-tree">

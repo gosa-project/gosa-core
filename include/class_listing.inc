@@ -744,18 +744,16 @@ class listing
         // skip paginator if only one page is filled
         if (count($this->entries) / $prow > 1) {
             // set the paginator for current view
-            $itemValue = 1;
             $paginator = "  <div class='pagination-wrapper'>
                                 <div class='page-items'>
                                     <p>Items per page</p>
                                     <select id='page-items' onchange='setItemCount()'>";
-            for ($i=10; $i <= 100; $i = $i + 5) {
-                if ($i != $prow) {
-                    $paginator .= "<option value=".$this->setPageLink($page, $i).">".$i."</option>";
+            foreach (array(5,10,25,50,75,100) as $index) {
+                if ($index != $prow) {
+                    $paginator .= "<option value=".$this->setPageLink($page, $index).">".$index."</option>";
                 } else {
-                    $paginator .= "<option value='".$itmeValue."' disabled selected>".$prow."</option>";
+                    $paginator .= "<option value='".$index."' disabled selected>".$prow."</option>";
                 }
-                ++$itemValue;
             }
 
             $paginator .= "         </select>
