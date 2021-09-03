@@ -93,3 +93,12 @@ nav .nav-menu li .lifetime {
 .nav-menu .dropdown-content li {
     min-height: 33px;
 }
+
+@media only screen and (max-width: 1200px) {
+    /* Overwrite materialize */
+    nav .brand-logo {
+        left: initial;
+        -webkit-transform: initial;
+        transform: initial;
+    }
+}

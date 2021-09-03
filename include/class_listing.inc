@@ -336,7 +336,7 @@ class listing
             }
 
             $result .= "  <div class='section scrollspy table-wrapper card-content-scroll' id='d_scrollbody'>
-                            <table id='tree-table' class='highlight responsive-table'>";
+                            <table id='tree-table' class='highlight'>";
             $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
 
             // Build list header

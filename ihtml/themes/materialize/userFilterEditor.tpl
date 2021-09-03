@@ -3,7 +3,7 @@
 
   <div class="content-wrapper card-content-scroll">
     <div class="row">
-      <div class="col s6">
+      <div class="col s12 xl6">
         <div class="input-field">
           <input type='text' name='name' id='name' value="{$name}">
           <label for='name'>{t}Name{/t}{$must}</label>
@@ -23,10 +23,12 @@
 
         <div class="row">
           <div class="col s6">
-            <label>
-              <input type='checkbox' name='shareFilter' value='1' {if $share} checked {/if}>
-              <span>{t}Public visible{/t}</span>
-            </label>
+            <p class="checkbox">
+              <label>
+                <input type='checkbox' name='shareFilter' value='1' {if $share} checked {/if}>
+                <span>{t}Public visible{/t}</span>
+              </label>
+            </p>
           </div>
 
           <div class="col s6">
@@ -38,7 +40,7 @@
         </div>
       </div>
 
-      <div class="col s6">
+      <div class="col s12 xl6">
         <div class="row category">
           <div class="col s10 input-field">
             <select id='usedCategory' name='usedCategory[]' size='4' multiple style='width:100%;'>
@@ -83,7 +85,7 @@
       </div>
 
       {foreach from=$queries item=item key=key}
-        <div class="col s6">
+        <div class="col s12 xl6">
           <div class="query-content">
             <div class="query-head">
               <h3>{t}Query{/t} #{$key}</h3>

@@ -102,6 +102,12 @@
  *
  * Filter - Filter edit - Add
  * 158px + 44px (1.) + 53px (2.)
+ *
+ * Directory structure - create organization
+ * 158px + 44px (7.) + 53px (2.)
+ *
+ * Directory structure - create locality
+ * 158px + 44px (7.) + 53px (2.)
  */
 
 .object-info .content-wrapper.card-content-scroll,
@@ -109,7 +115,9 @@
 .acl-role-edit.card-content-scroll,
 .acl-ds-create.card-content-scroll,
 .acl-ds-edit.card-content-scroll,
-.filter-wrapper .content-wrapper.card-content-scroll {
+.filter-wrapper .content-wrapper.card-content-scroll,
+.organization.card-content-scroll,
+.locality.card-content-scroll {
     max-height: calc(100vh - 255px);
 }
 

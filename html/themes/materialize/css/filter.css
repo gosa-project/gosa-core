@@ -63,3 +63,9 @@
     overflow-y: auto;
     max-width: 100%;
 }
+
+@media only screen and (max-width: 1200px) {
+    .filter-wrapper .content-wrapper .query-wrapper .query-content {
+        margin: 12px 1px 1px 1px;
+    }
+}
