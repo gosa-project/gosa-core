@@ -56,7 +56,7 @@ var pwNumbers = document.getElementById("pw-numbers");
 var pwSpecial_eval = document.getElementById("pw-special") != null;
 var pwSpecial = document.getElementById("pw-special");
 let pwStrength = [false, false, false, false, false];
-var pwButton = document.getElementById("password_finish")
+var pwButton = document.getElementsByName("password_finish")
 
 // When the user starts to type something inside the password field
 if (input) {

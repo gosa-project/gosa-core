@@ -38,12 +38,14 @@ th, th a, th a.btn-flat, td, td a {
     font-size: 18px;
 }
 
-#generic-table input.input-btn {
+#generic-table input.input-btn,
+#tree-table input.input-btn {
     z-index: 1;
     position: relative;
 }
 
-#generic-table i.input-icons {
+#generic-table i.input-icons,
+#tree-table i.input-icons {
     position: absolute;
     left: 16px;
     margin-top: 8px;
@@ -83,7 +85,9 @@ th, th a, th a.btn-flat, td, td a {
     height: 20px!important;
 }
 
-#tree-table label input, #generic-table label input {
+#tree-table label input,
+#generic-table label input {
+    margin-left: 1rem;
     width: 18px;
     height: 18px;
     padding: 0;

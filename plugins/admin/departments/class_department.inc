@@ -248,21 +248,16 @@ class department extends plugin
         }
 
         $smarty->assign("dep_type",$this->type);
-
+        $smarty->assign("namingAttr",$this->namingAttr);
 
         $dep_types = departmentManagement::get_support_departments();
-        $tpl ="";
-        foreach($dep_types as $key => $data){
-            if($data['OC'] == $this->type){
-                $tpl = $data['TPL'];
-                break;
-            }
-        }
+        $smarty->assign("trString",$dep_types[$this->type]['TR']);
+        $tpl = $dep_types[$this->type]['TPL'];
         if($tpl == "") {
-            trigger_error("No template specified for container type '".$this->type."', please update epartmentManagement::get_support_departments().");
-            $tpl = "generic.tpl";
+            trigger_error("No template specified for container type '".$this->type."', please update DepartmentManagement::get_support_departments().");
+            $tpl = check_for_materialize_theme() ? "dep_oUnit.tpl" : "generic.tpl";
         }
-        return($smarty->fetch (get_template_path($tpl, TRUE)));
+        return($smarty->fetch(get_template_path($tpl, TRUE)));
     }
 
     function clear_fields()
