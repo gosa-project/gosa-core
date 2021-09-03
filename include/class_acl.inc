@@ -845,32 +845,61 @@ class acl extends plugin
         if($this->acl_is_writeable("")){
             if(check_for_materialize_theme()) {
                 $display .= "<div class='acl-setting-buttons'>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button> - ";
-                $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" >Toggle R</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" >Toggle W</button> - ";
-
-                $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" >R+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" >W+</button>";
-
-                $display .= "<br>";
-
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" >C+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" >C-</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" >M+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" >M-</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" >D+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" >D-</button> - ";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" >R+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" >R-</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" >W+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" >W-</button> - ";
-
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" >R+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
-                $display .= "<button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
+                $display .= "   <div class='acl-setting-button-grp'>";
+                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
+                $display .= "       <div class='acl-setting-button-grp-small'>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" >C+</button>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" >C-</button>";
+                $display .= "       </div>";
+                $display .= "   </div>";
+                $display .= "   <div class='acl-setting-button-grp'>";
+                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
+                $display .= "       <div class='acl-setting-button-grp-small'>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" >M+</button>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" >M-</button>";
+                $display .= "       </div>";
+                $display .= "   </div>";
+                $display .= "   <div class='acl-setting-button-grp'>";
+                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button>";
+                $display .= "       <div class='acl-setting-button-grp-small'>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" >D+</button>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" >D-</button>";
+                $display .= "       </div>";
+                $display .= "   </div>";
+                $display .= "   <div class='button-divider'>";
+                $display .= "       <span>-</span>";
+                $display .= "   </div>";
+                $display .= "   <div class='acl-setting-button-grp'>";
+                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" >Toggle R</button>";
+                $display .= "       <div class='acl-setting-button-grp-small'>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" >R+</button>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" >R-</button>";
+                $display .= "       </div>";
+                $display .= "   </div>";
+                $display .= "   <div class='acl-setting-button-grp'>";
+                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" >Toggle W</button>";
+                $display .= "       <div class='acl-setting-button-grp-small'>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" >W+</button>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" >W-</button>";
+                $display .= "       </div>";
+                $display .= "   </div>";
+                $display .= "   <div class='button-divider'>";
+                $display .= "       <span>-</span>";
+                $display .= "   </div>";
+                $display .= "   <div class='acl-setting-button-grp'>";
+                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" >R+</button>";
+                $display .= "       <div class='acl-setting-button-grp-small'>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" >R+</button>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
+                $display .= "       </div>";
+                $display .= "   </div>";
+                $display .= "   <div class='acl-setting-button-grp'>";
+                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" >W+</button>";
+                $display .= "       <div class='acl-setting-button-grp-small'>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
+                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
+                $display .= "       </div>";
+                $display .= "   </div>";
                 $display .= "</div>";
             } else {
                 $display .= "<button type='button' ".$style." name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
@@ -946,7 +975,7 @@ class acl extends plugin
                                         "._("Object").": $name
                                     </div>
                                     <div class='advanced-settings'>
-                                        <button class='btn-extra-small gonicus-color white-text right' type='button' onclick=\"$('{$tname}').toggle();\">
+                                        <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
                                             "._("Show/hide advanced settings")."
                                         </button>
                                     </div>
@@ -966,7 +995,7 @@ class acl extends plugin
                                         "._("Object").": $name
                                     </div>
                                     <div class='advanced-settings'>
-                                        <button class='btn-extra-small gonicus-color white-text right' type='button' onclick=\"$('{$tname}').toggle();\">
+                                        <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
                                             "._("Show/hide advanced settings")."
                                         </button>
                                     </div>
@@ -1081,7 +1110,7 @@ class acl extends plugin
                 }
 
                 $display.= check_for_materialize_theme() ?
-                            "<div class='col s".(12 / $cols)."'>
+                            "<div class='col s6 xl".(12 / $cols)."'>
                                 <div class='option-grp'>
                                     <div class='option-name'>
                                         $dsc ($attr)

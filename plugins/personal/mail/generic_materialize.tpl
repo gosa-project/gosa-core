@@ -235,10 +235,11 @@
     </div>
 </div>
 
-<hr class="divider">
+   <hr class="divider">
 
-<h3>{t}Advanced mail options{/t}</h3>
+   <h3>{t}Advanced mail options{/t}</h3>
 
+<<<<<<< HEAD
 <div class="row setting">
     <div class="col s12">
         <label>
@@ -249,9 +250,22 @@
       </label>
     </div>
 </div>
+=======
+   <div class="row setting">
+      <div class="col s12">
+      <label>
+            {render acl=$gosaMailDeliveryModeLACL checkbox=$multiple_support checked=$use_only_local}
+            <input {if $own_script !="" } disabled {/if} id='only_local' type=checkbox name="only_local" value="1" {$only_local} title="{t}Select if user can only send and receive inside his own domain{/t}" class="center">
+            {/render}
+            <span>{t}User is only allowed to send and receive local mails{/t}</span>
+         </label>
+      </div>
+   </div>
+>>>>>>> a2a575e017bee06babace43413023abf8486b809
 
-<input type="hidden" name="mailTab" value="mailTab">
+   <input type="hidden" name="mailTab" value="mailTab">
 
+<<<<<<< HEAD
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
     function validateClick() {
@@ -279,3 +293,33 @@
     changeStates();
     focus_field('mail');
 </script>
+=======
+   <!-- Place cursor -->
+   <script language="JavaScript" type="text/javascript">
+      function validateClick() {
+         alert("yes");
+         if (!document.getElementById('use_vacation').checked) {
+            return;
+         }
+      }
+
+      function changeStates() {
+         if ($('own_script').checked) {
+            $("gosaVacationStart", "gosaVacationStop", "gosaVacationMessage").invoke("disable");
+            $("datepicker-gosaVacationStop_image", "datepicker-gosaVacationStart_image").invoke("hide");
+         } else {
+            if ($('use_vacation').checked) {
+               $("gosaVacationStart", "gosaVacationStop", "gosaVacationMessage").invoke("enable");
+               $("datepicker-gosaVacationStop_image", "datepicker-gosaVacationStart_image").invoke("show");
+            } else {
+               $("gosaVacationStart", "gosaVacationStop", "gosaVacationMessage").invoke("disable");
+               $("datepicker-gosaVacationStop_image", "datepicker-gosaVacationStart_image").invoke("hide");
+            }
+         }
+      }
+
+      changeStates();
+      focus_field('mail');
+   </script>
+</div>
+>>>>>>> a2a575e017bee06babace43413023abf8486b809

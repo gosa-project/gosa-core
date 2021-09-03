@@ -130,3 +130,12 @@
     top: unset;
     margin-right: 1rem;
 }
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+    .card-content .card .card-content p {
+        -webkit-line-clamp: 3;
+    }
+    .card-content .card .card-content h3 {
+        font-size: 16px;
+    }
+}
