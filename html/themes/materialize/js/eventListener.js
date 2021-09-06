@@ -67,8 +67,9 @@ let acInstances = M.Dropdown.init(autocomplete, {
     'hover': false
 });
 
+let lang = '';
 if (document.getElementById('lang')) {
-    let lang = document.getElementById('lang').value;
+    lang = document.getElementById('lang').value;
 }
 let languages = language();
 let dp = document.querySelectorAll('.datepicker');

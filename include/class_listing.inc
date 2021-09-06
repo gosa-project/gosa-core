@@ -405,7 +405,7 @@ class listing
 
                     // Apply label to objecttype icon?
                     if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
-                        $objectType = image("<i class='material-icons input-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                        $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
                         $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
                     }
                     $result .= $rowResult;
