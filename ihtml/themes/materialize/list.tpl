@@ -5,7 +5,7 @@
       {$ROOT}
       {$BACK}
       {$HOME}
-      <div class="refresh">{$RELOAD}</div>
+      {$RELOAD}
   </div>
   <div class="ldap-tree valign-wrapper">{$BASE}</div>
   <div class="actions center-align">{$ACTIONS}</div>

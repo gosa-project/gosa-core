@@ -46,7 +46,7 @@
 
   <div class="control-panel">
     <div class="navigation">
-      <div class="refresh">{$RELOAD}</div>
+      {$RELOAD}
     </div>
 
     <div class="actions center-align">{$ACTIONS}</div>
