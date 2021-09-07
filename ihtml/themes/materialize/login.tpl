@@ -1,6 +1,6 @@
 <body>
   {$php_errors}
-  <nav class="gonicus-color">
+  <nav>
     <div class="nav-wrapper">
       <div class="brand-logo valign-wrapper">
         <img class="responsive-img" src="themes/default/images/logo.png">

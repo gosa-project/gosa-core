@@ -1,7 +1,7 @@
 <body>
     {$php_errors}
     <nav>
-        <div class="nav-wrapper gonicus-color ">
+        <div class="nav-wrapper">
             <a href="main.php?global_check=1" class="brand-logo" alt="GOsa²">
                 <img src="themes/materialize/images/logo.png">
             </a>
