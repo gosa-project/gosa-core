@@ -1250,13 +1250,13 @@ class listing
 
             // Render normal entries as usual
             if ($action['type'] == 'entry') {
-                $result.= "<div class='action-wrapper'>";
                 $label = $this->processElementFilter($action['label'], $this->entries[$row], $row);
                 $image = $this->processElementFilter($action['image'], $this->entries[$row], $row);
                 $result .= (check_for_materialize_theme() ?
-                        image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label) :
+                        "<div class='action-wrapper'>"
+                        .image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label).
+                        "</div>" :
                         image($image, 'listing_'.$action['name']."_$row", $label));
-                $result.= "</div>";
             }
 
             // Handle special types
