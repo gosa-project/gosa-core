@@ -452,7 +452,6 @@ class sortableListing
                         $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
 
                         foreach ($this->displayData[$row] as $column) {
-                            echo $column;
                             // Do NOT use the onClick statement for columns that contain links or buttons.
                             if (preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)) {
                                 $result.= "   <td><div class='action-wrapper'>".$column."</div></td>";
@@ -713,9 +712,6 @@ class sortableListing
 
     public function addEntry($entry, $displayEntry= null, $key= null)
     {
-        echo '<pre>';
-        var_dump($displayEntry['data']);
-        echo '</pre>';
         // Only add if not already there
         if (!$key) {
             if (in_array_strict($entry, $this->data)) {

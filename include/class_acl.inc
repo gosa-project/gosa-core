@@ -565,14 +565,14 @@ class acl extends plugin
                 $key = "G:*";
                 switch ($theme) {
                     case 'classic':
-                        $vData = array("plugins/groups/images/select_group.png");
+                        $vData = array("data" => array(image("plugins/groups/images/select_group.png")));
                         break;
                     
                     default:
-                        $vData = array("<i class='material-icons'>groups</i>");
+                        $vData = array("data" => array(image("<i class='material-icons'>groups</i>")));
                         break;
                 }
-                array_push($vData, _("All users"), _("Pseudo-group for all users."));
+                array_push($vData["data"], _("All users"), _("Pseudo-group for all users."));
 
                 $this->aclMemberList->addEntry($key, $vData, $key);
             }
