@@ -279,6 +279,8 @@ class management
      */
     protected function _getTabFooter()
     {
+        $theme = getThemeName();
+
         // Do not display tab footer for non tab objects
         if (!($this->tabObject instanceof tabs || $this->tabObject instanceof multi_plug)) {
             return("");
@@ -300,33 +302,43 @@ class management
         // In case an of locked entry, we may have opened a read-only tab.
         $str = "";
         if (isset($this->tabObject->read_only) && $this->tabObject->read_only == true) {
-            $str.=  (check_for_materialize_theme() ?
-                "<div class='card-action'>
-                    <button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>
-                </div>" :
-                "<p style=\"text-align:right\">
-                  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                </p>");
+            switch ($theme) {
+                case 'classic':
+                    $str .= "<p style=\"text-align:right\">
+                                <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                            </p>";
+                    break;
+                
+                default:
+                    $str .= "<div class='card-action'>
+                                <button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>
+                            </div>";
+                    break;
+            }
             return($str);
         } else {
 
         // Display ok, (apply) and cancel buttons
-            if (check_for_materialize_theme()) {
-                $str.=" <div class='card-action'>
-                  <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>";
-                if ($this->displayApplyBtn) {
-                    $str.=" <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>";
-                }
-                $str.=" <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                </div>";
-            } else {
-                $str.=" <p style=\"text-align:right\">
-                  <button type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>\n&nbsp;\n";
-                if ($this->displayApplyBtn) {
-                    $str.="   <button type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>&nbsp;\n";
-                }
-                $str.="   <button type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                </p>";
+            switch ($theme) {
+                case 'classic':
+                    $str .= "<p style=\"text-align:right\">
+                                <button type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>\n&nbsp;\n";
+                    if ($this->displayApplyBtn) {
+                        $str.=" <button type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>&nbsp;\n";
+                    }
+                    $str.="     <button type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                            </p>";
+                    break;
+                
+                default:
+                    $str.=" <div class='card-action'>
+                                <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>";
+                    if ($this->displayApplyBtn) {
+                        $str.=" <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>";
+                    }
+                    $str.="     <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                            </div>";
+                    break;
             }
         }
         return($str);

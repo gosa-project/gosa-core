@@ -45,7 +45,7 @@ class trustSelect extends management
     $this->setFilter($filter);
 
     // Build headpage
-    $headpage = new listing(get_template_path(check_for_materialize_theme() ? "trust-list_materialize.xml" : "trust-list.xml", true, dirname(__FILE__)));
+    $headpage = new listing(get_template_path("trust-list.xml", true, dirname(__FILE__)));
     $headpage->registerElementFilter("filterProperties", "groupManagement::filterProperties");
     $headpage->setFilter($filter);
     parent::__construct($config, $ui, "groups", $headpage);

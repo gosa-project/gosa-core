@@ -51,9 +51,7 @@ class groupManagement extends management
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = (check_for_materialize_theme() ?
-                  new listing(get_template_path("group-list_materialize.xml", true)) :
-                  new listing(get_template_path("group-list.xml", true)));
+        $headpage = new listing(get_template_path("group-list.xml", true));
         $headpage->registerElementFilter("filterProperties", "groupManagement::filterProperties");
         $headpage->setFilter($filter);
 

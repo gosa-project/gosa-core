@@ -230,27 +230,161 @@ class sortableListing {
 
     public function render()
     {
-        if(check_for_materialize_theme()) {
+        $theme = getThemeName();
+        
+        switch ($theme) {
+            case 'classic':
+                $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
+                $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
+                $action_width= 0;
+                if (strpos($this->acl, 'w') === false) {
+                    $edit_image= $this->editable?image("images/lists/edit-grey.png"):"";
+                } else {
+                    $edit_image= $this->editable?image('images/lists/edit.png', "%ID", _("Edit this entry")):"";
+                }
+                if (strpos($this->acl, 'w') === false) {
+                    $delete_image= $this->deleteable?image('images/lists/trash-grey.png'):"";
+                } else {
+                    $delete_image= $this->deleteable?image('images/lists/trash.png', "%ID", _("Delete this entry")):"";
+                }
 
-            $result = " <div id='scroll_".$this->id."' class='scrollspy acl-member'>
-                            <table id='generic-table' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
+                // Do we need colspecs?
+                $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
+                if ($this->colspecs) {
+                    $result.= " <colgroup>\n";
+                    for ($i= 0; $i < $this->columns; $i++) {
+                        if(isset($this->colspecs[$i]) && $this->colspecs[$i] != '*'){
+                            $result.= "  <col style='width:".($this->colspecs[$i])."'>\n";
+                        }else{
+                            $result.= "  <col>\n";
+                        }
+                    }
 
-            if (strpos($this->acl, 'w') === false) {
+                    // Extend by another column if we've actions specified
+                    if ($action_width) {
+                        $result.= "  <col style='width:".$action_width."px' >\n";
+                    }
+                    $result.= " </colgroup>\n";
+                }
+
+                // Do we need a header?
+                if ($this->header) {
+                    $result.= " <thead>\n  <tr>\n";
+                    $first= " style='border-left:0'";
+                    for ($i= 0; $i<$this->columns; $i++) {
+                        $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
+                        $sorter= "";
+                        if ($i == $this->sortColumn){
+                            $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending"));
+                        }
+
+                        if (($this->reorderable) || (!$this->sortingEnabled)) {
+                            $result.= "   <th$first>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
+                        } else {
+                            $result.= "   <th$first><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."</a>$sorter</th>";
+                        }
+                        $first= "";
+                    }
+                    if ($action_width) {
+                        $result.= "<th>&nbsp;</th>";
+                    }
+                    $result.= "\n  </tr>\n </thead>\n";
+                }
+
+                // Render table body if we've read permission
+                $result .= " <tbody id='".$this->id."'>\n";
+                $reorderable = $this->reorderable ? "" : " style='cursor:default'";
+
+                if (strpos($this->acl, 'r') !== false) {
+                    foreach ($this->mapping as $nr => $row) {
+                        $editable= $this->editable?" onClick='$(\"edit_".$this->id."_$nr\").click()'":"";
+
+                        $id= "";
+                        if (isset($this->modes[$row])) {
+                            switch ($this->modes[$row]) {
+                                case LIST_DISABLED:
+                                    $id= " sortableListItemDisabled";
+                                    $editable= "";
+                                    break;
+                                case LIST_MARKED:
+                                    $id= " sortableListItemMarked";
+                                    break;
+                            }
+                        }
+
+                        $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
+                        $first= " style='border:0'";
+
+                        foreach ($this->displayData[$row] as $column) {
+
+                            // Do NOT use the onClick statement for columns that contain links or buttons.
+                            if(preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)){
+                                $result.= "   <td$first>".$column."</td>\n";
+                            }else{
+                                $result.= "   <td$editable$first>".$column."</td>\n";
+                            }
+                            $first= "";
+                        }
+
+                        if ($action_width) {
+                            $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
+                                str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
+                        }
+
+                        $result.= "  </tr>\n";
+                    }
+                }
+
+                // Add spacer
+                $result.= "  <tr class='sortableListItemFill' style='height:100%'><td style='border:0'></td>";
+                $num= $action_width?$this->columns:$this->columns-1;
+                for ($i= 0; $i<$num; $i++) {
+                    $result.= "<td class='sortableListItemFill'></td>";
+                }
+                $result.= "</tr>\n";
+
+                $result.= " </tbody>\n</table>\n</div>\n";
+                #$result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
+                $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
+                $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
+
+                // Append script stuff if needed
+                $result.= '<script type="text/javascript" language="javascript">';
+                if ($this->reorderable) {
+                    $result.= ' function updateOrder(){';
+                        $result.= '    var ampcharcode= \'%26\';';
+                        $result.= '    var serializeOpts = Sortable.serialize(\''.$this->id.'\')+"='.$this->id.'";';
+                        $result.= '    $("reorder_'.$this->id.'").value= serializeOpts;';
+                        $result.= '    document.mainform.submit();';
+                        $result.= ' }';
+                        $result.= 'Position.includeScrollOffsets = true;';
+                        $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false, constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder});';
+                }
+                $result.= '$("scroll_'.$this->id.'").scrollTop= '.$this->scrollPosition.';';
+                $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
+                $result.= '</script>';
+                break;
+            
+            default:
+                $result = " <div id='scroll_".$this->id."' class='scrollspy acl-member'>
+                <table id='generic-table' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">";
+
+                if (strpos($this->acl, 'w') === false) {
                 $edit_image = $this->editable?image("<i class='material-icons grey'>edit</i>"):"";
-            } else {
+                } else {
                 $edit_image = $this->editable?image("<i class='material-icons input-icons'>edit</i>", "%ID", _("Edit this entry")):"";
-            }
-            if (strpos($this->acl, 'w') === false) {
+                }
+                if (strpos($this->acl, 'w') === false) {
                 $delete_image= $this->deleteable?image("<i class='material-icons grey'>delete</i>"):"";
-            } else {
+                } else {
                 $delete_image= $this->deleteable?image("<i class='material-icons input-icons'>delete</i>", "%ID", _("Delete this entry")):"";
-            }
+                }
 
-            $actionsHeader = _('Actions');
+                $actionsHeader = _('Actions');
 
-            // Do we need colspecs?
-            $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
-            if ($this->colspecs) {
+                // Do we need colspecs?
+                $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
+                if ($this->colspecs) {
                 $result.= " <colgroup>\n";
                 for ($i= 0; $i<$this->columns; $i++) {
                     if(isset($this->colspecs[$i]) && $this->colspecs[$i] != '*'){
@@ -265,10 +399,10 @@ class sortableListing {
                     $result.= "  <col style='width:".$action_width."px' >\n";
                 }
                 $result.= " </colgroup>\n";
-            }
+                }
 
-            // Do we need a header?
-            if ($this->header) {
+                // Do we need a header?
+                if ($this->header) {
                 $result.="  <thead>
                                 <tr>";
                 for ($i= 0; $i<$this->columns; $i++) {
@@ -289,14 +423,15 @@ class sortableListing {
                     $result.= "<th>".$actionsHeader."</th>";
                 }
                 $result.= "\n  </tr>\n </thead>\n";
-            }
+                }
 
-            // Render table body if we've read permission
-            $result.= "<tbody id='".$this->id."'>";
-            $reorderable= $this->reorderable ? "" : " style='cursor:default'";
+                // Render table body if we've read permission
+                $result.= "<tbody id='".$this->id."'>";
+                $reorderable= $this->reorderable ? "" : " style='cursor:default'";
 
-            if (strpos($this->acl, 'r') !== false) {
+                if (strpos($this->acl, 'r') !== false) {
                 foreach ($this->mapping as $nr => $row) {
+                    echo $nr." = > ".$row."<br>";
                     $editable= $this->editable ? " onClick='$(\"edit_".$this->id."_$nr\").click()'" : "";
 
                     $id= "";
@@ -342,16 +477,16 @@ class sortableListing {
                     }
                     $result.= "  </tr>\n";
                 }
-            }
-            $result.= "         </tbody>
+                }
+                $result.= "         </tbody>
                             </table>
                         </div>";
-            #$result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
-            $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
-            $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
+                #$result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
+                $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
+                $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
 
-            $result.= '<script type="text/javascript" language="javascript">';
-            if ($this->reorderable) {
+                $result.= '<script type="text/javascript" language="javascript">';
+                if ($this->reorderable) {
                 $result.= ' function updateOrder(){';
                 $result.= '    var ampcharcode= \'%26\';';
                 $result.= '    var serializeOpts = Sortable.serialize(\''.$this->id.'\')+"='.$this->id.'";';
@@ -360,141 +495,11 @@ class sortableListing {
                 $result.= ' }';
                 $result.= 'Position.includeScrollOffsets = true;';
                 $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false, constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder});';
-            }
-            $result.= '$("scroll_'.$this->id.'").scrollTop= '.$this->scrollPosition.';';
-            $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
-            $result.= '</script>';
-
-        } else {
-            $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='min-width:".$this->width.";height: ".$this->height."'>\n";
-            $result.= "<table summary='"._("Sortable list")."' border='0' cellpadding='0' cellspacing='0' width='100%' style='width:100%' ".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
-            $action_width= 0;
-            if (strpos($this->acl, 'w') === false) {
-                $edit_image= $this->editable?image("images/lists/edit-grey.png"):"";
-            } else {
-                $edit_image= $this->editable?image('images/lists/edit.png', "%ID", _("Edit this entry")):"";
-            }
-            if (strpos($this->acl, 'w') === false) {
-                $delete_image= $this->deleteable?image('images/lists/trash-grey.png'):"";
-            } else {
-                $delete_image= $this->deleteable?image('images/lists/trash.png', "%ID", _("Delete this entry")):"";
-            }
-
-            // Do we need colspecs?
-            $action_width= ($this->editable?30:0) + ($this->deleteable?30:0);
-            if ($this->colspecs) {
-                $result.= " <colgroup>\n";
-                for ($i= 0; $i<$this->columns; $i++) {
-                    if(isset($this->colspecs[$i]) && $this->colspecs[$i] != '*'){
-                        $result.= "  <col style='width:".($this->colspecs[$i])."'>\n";
-                    }else{
-                        $result.= "  <col>\n";
-                    }
                 }
-
-                // Extend by another column if we've actions specified
-                if ($action_width) {
-                    $result.= "  <col style='width:".$action_width."px' >\n";
-                }
-                $result.= " </colgroup>\n";
-            }
-
-            // Do we need a header?
-            if ($this->header) {
-                $result.= " <thead>\n  <tr>\n";
-                $first= " style='border-left:0'";
-                for ($i= 0; $i<$this->columns; $i++) {
-                    $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
-                    $sorter= "";
-                    if ($i == $this->sortColumn){
-                        $sorter= "&nbsp;".image("images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png", null, $this->sortDirection[$i]?_("Sort ascending"):_("Sort descending"));
-                    }
-
-                    if (($this->reorderable) || (!$this->sortingEnabled)) {
-                        $result.= "   <th$first>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
-                    } else {
-                        $result.= "   <th$first><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."</a>$sorter</th>";
-                    }
-                    $first= "";
-                }
-                if ($action_width) {
-                    $result.= "<th>&nbsp;</th>";
-                }
-                $result.= "\n  </tr>\n </thead>\n";
-            }
-
-            // Render table body if we've read permission
-            $result.= " <tbody id='".$this->id."'>\n";
-            $reorderable= $this->reorderable?"":" style='cursor:default'";
-
-            if (strpos($this->acl, 'r') !== false) {
-                foreach ($this->mapping as $nr => $row) {
-                    $editable= $this->editable?" onClick='$(\"edit_".$this->id."_$nr\").click()'":"";
-
-                    $id= "";
-                    if (isset($this->modes[$row])) {
-                        switch ($this->modes[$row]) {
-                            case LIST_DISABLED:
-                                $id= " sortableListItemDisabled";
-                                $editable= "";
-                                break;
-                            case LIST_MARKED:
-                                $id= " sortableListItemMarked";
-                                break;
-                        }
-                    }
-
-                    $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
-                    $first= " style='border:0'";
-
-                    foreach ($this->displayData[$row] as $column) {
-
-                        // Do NOT use the onClick statement for columns that contain links or buttons.
-                        if(preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)){
-                            $result.= "   <td$first>".$column."</td>\n";
-                        }else{
-                            $result.= "   <td$editable$first>".$column."</td>\n";
-                        }
-                        $first= "";
-                    }
-
-                    if ($action_width) {
-                        $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
-                            str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
-                    }
-
-                    $result.= "  </tr>\n";
-                }
-            }
-
-            // Add spacer
-            $result.= "  <tr class='sortableListItemFill' style='height:100%'><td style='border:0'></td>";
-            $num= $action_width?$this->columns:$this->columns-1;
-            for ($i= 0; $i<$num; $i++) {
-                $result.= "<td class='sortableListItemFill'></td>";
-            }
-            $result.= "</tr>\n";
-
-            $result.= " </tbody>\n</table>\n</div>\n";
-            #$result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
-            $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
-            $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
-
-            // Append script stuff if needed
-            $result.= '<script type="text/javascript" language="javascript">';
-            if ($this->reorderable) {
-                $result.= ' function updateOrder(){';
-                    $result.= '    var ampcharcode= \'%26\';';
-                    $result.= '    var serializeOpts = Sortable.serialize(\''.$this->id.'\')+"='.$this->id.'";';
-                    $result.= '    $("reorder_'.$this->id.'").value= serializeOpts;';
-                    $result.= '    document.mainform.submit();';
-                    $result.= ' }';
-                    $result.= 'Position.includeScrollOffsets = true;';
-                    $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false, constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder});';
-            }
-            $result.= '$("scroll_'.$this->id.'").scrollTop= '.$this->scrollPosition.';';
-            $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
-            $result.= '</script>';
+                $result.= '$("scroll_'.$this->id.'").scrollTop= '.$this->scrollPosition.';';
+                $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
+                $result.= '</script>';
+                break;
         }
         return $result;
     }

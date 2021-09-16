@@ -45,9 +45,17 @@ class csvExporter
 
   static function getInfo()
   {
-    return check_for_materialize_theme() ? 
-              array("exportCVS" => array( "label" => _("CSV"), "image" => "format_list_bulleted", "class"=> "csvExporter", "mime" => "text/x-csv", "filename" => "export.csv" )) : 
-              array("exportCVS" => array( "label" => _("CSV"), "image" => "images/lists/csv.png", "class"=> "csvExporter", "mime" => "text/x-csv", "filename" => "export.csv" ));
+    $theme = getThemeName();
+
+    switch ($theme) {
+      case 'classic':
+        return array("exportCVS" => array( "label" => _("CSV"), "image" => "images/lists/csv.png", "class"=> "csvExporter", "mime" => "text/x-csv", "filename" => "export.csv" ));
+        break;
+      
+      default:
+        return array("exportCVS" => array( "label" => _("CSV"), "image" => "format_list_bulleted", "class"=> "csvExporter", "mime" => "text/x-csv", "filename" => "export.csv" ));
+        break;
+    }
   }
 
 }

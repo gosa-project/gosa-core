@@ -27,7 +27,7 @@ class propertyEditor extends management
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path(check_for_materialize_theme() ? "property-list_materialize.xml" : "property-list.xml", true));
+        $headpage = new listing(get_template_path("property-list.xml", true));
         $headpage->registerElementFilter("propertyName", "propertyEditor::propertyName");
         $headpage->registerElementFilter("propertyGroup", "propertyEditor::propertyGroup");
         $headpage->registerElementFilter("propertyClass", "propertyEditor::propertyClass");
@@ -117,7 +117,7 @@ class propertyEditor extends management
                 $smarty = get_smarty();
                 $smarty->assign('content', $content);
                 $smarty->assign('leftSteps', count($this->toBeMigrated));
-                return($smarty->fetch(get_template_path(check_for_materialize_theme() ? 'migrate_materialize.tpl' : 'migrate.tpl',TRUE)));
+                return($smarty->fetch(get_template_path('migrate.tpl',TRUE)));
             }
         }
 
@@ -219,6 +219,7 @@ class propertyEditor extends management
         $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
         $value = set_post($value[0]);
+        $theme = getThemeName();
 
         switch($type[0]){
             case 'noLdap':
@@ -248,16 +249,20 @@ class propertyEditor extends management
                 }
                 break;
             case 'command':
-                if (check_for_materialize_theme()) {
-                    $res = "<div class='valign-wrapper' style='width:{$isize};width:calc({$isize} + 28px)'>
-                                <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">";
-                    $res.= "    <label>
-                                    ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
-                                </label>
-                            </div>";
-                }else {
-                    $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
-                    $res.= image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                switch ($theme) {
+                    case 'classic':
+                        $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
+                                 ".image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                        break;
+                    
+                    default:
+                        $res = "<div class='valign-wrapper' style='width:{$isize};width:calc({$isize} + 28px)'>
+                                    <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">
+                                    <label>
+                                        ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
+                                    </label>
+                                </div>";
+                        break;
                 }
                 break;
             case 'dn':

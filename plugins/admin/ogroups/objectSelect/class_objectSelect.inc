@@ -51,7 +51,7 @@ class objectSelect extends management
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path(check_for_materialize_theme() ? "selectObject-list_materialize.xml" : "selectObject-list.xml", true, dirname(__FILE__)));
+        $headpage = new listing(get_template_path("selectObject-list.xml", true, dirname(__FILE__)));
         $headpage->registerElementFilter("depLabel", "objectSelect::filterDepLabel");
         $this->registerAction("open","openEntry");
         $headpage->setFilter($filter);

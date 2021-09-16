@@ -160,7 +160,7 @@ class reference extends plugin
 
 		session::set("generic::aclResolver", $this->aclResolver);
         session::set('autocomplete', "generic::aclResolver");
-        return ($smarty->fetch (get_template_path( check_for_materialize_theme() ? "contents_materialize.tpl" : "contents.tpl", TRUE, dirname(__FILE__))));
+        return ($smarty->fetch (get_template_path("contents.tpl", TRUE, dirname(__FILE__))));
     }
 }
 

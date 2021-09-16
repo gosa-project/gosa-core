@@ -51,9 +51,7 @@ class aclManagement extends management
     $this->setFilter($filter);
 
     // Build headpage
-    $headpage = (check_for_materialize_theme() ?
-                  new listing(get_template_path("acl-list_materialize.xml", true)) :
-                  new listing(get_template_path("acl-list.xml", true)));
+    $headpage = new listing(get_template_path("acl-list.xml", true));
     $headpage->registerElementFilter("filterLabel", "aclManagement::filterLabel");
     $headpage->setFilter($filter);
 

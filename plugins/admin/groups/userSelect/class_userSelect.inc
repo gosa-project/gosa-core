@@ -44,7 +44,7 @@ class userSelect extends management
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path(check_for_materialize_theme() ? "user-list_materialize.xml" : "user-list.xml", true, dirname(__FILE__)));
+        $headpage = new listing(get_template_path("user-list.xml", true, dirname(__FILE__)));
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "users", $headpage);
     }

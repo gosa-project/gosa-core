@@ -185,7 +185,7 @@ class DynamicLdapGroup extends plugin
         $smarty = get_smarty();
         $smarty->assign('labeledURIparsed',  set_post($this->labeledURIparsed));
         $smarty->assign('scopes', set_post($this->scopes));
-        $display .= $smarty->fetch(get_template_path(check_for_materialize_theme() ? 'dyngroup_materialize.tpl' : 'dyngroup.tpl', TRUE, dirname(__FILE__)));
+        $display .= $smarty->fetch(get_template_path('dyngroup.tpl', TRUE, dirname(__FILE__)));
         return $display;
     }
 

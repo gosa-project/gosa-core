@@ -368,9 +368,9 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
       return ("$BASE_DIR/ihtml/themes/default/$nf/$filename");
     }
     if ($path == ""){
-      return (session::global_get('plugin_dir')."/$filename");
+      return (session::global_get('plugin_dir')."/$theme/$filename");
     } else {
-      return ($path."/$filename");
+      return ($path."/$theme/$filename");
     }
   } else {
     if (file_exists("themes/$theme/$filename")){
@@ -3610,78 +3610,82 @@ function image($path, $action= "", $title= "", $align= "middle")
   global $BASE_DIR;
   $label= null;
 
-  if(check_for_materialize_theme()){
+  $theme = getThemeName();
 
-    if ($action == "") {
-      return "$path";
-    } else {
-      return "<input type='submit' class='btn-flat input-btn' id='$action' value='' name='$action' title='".$title."' $align >$path";
-    }
-  } else{
-    // Bail out, if there's no style file
-    if(!class_exists('session')){
-      return "";
-    }
-    if(!session::global_is_set("img-styles")){
+  switch ($theme) {
+    case 'classic':
+      // Bail out, if there's no style file
+      if(!class_exists('session')){
+        return "";
+      }
+      if(!session::global_is_set("img-styles")){
 
-      // Get theme
-      if (isset ($config)){
-        $theme= $config->get_cfg_value("core","theme");
+        // Get theme
+        if (isset ($config)){
+          $theme= $config->get_cfg_value("core","theme");
+        } else {
+
+          // Fall back to default theme
+          $theme= "default";
+        }
+
+        if (!file_exists("$BASE_DIR/ihtml/themes/$theme/img.styles")){
+          die ("No img.style for this theme found!");
+        }
+
+        session::global_set('img-styles', unserialize(file_get_contents("$BASE_DIR/ihtml/themes/$theme/img.styles")));
+      }
+      $styles= session::global_get('img-styles');
+
+      /* Extract labels from path */
+      preg_match("/(.*\.png)\[(.*)\]$/", $path, $matches);
+
+      if (count($matches) == 3) {
+        $path = $matches[1];
+        $label= $matches[2];
+      }
+
+      $baseImage = str_replace('['.$label.']', '', $path);
+      if (!array_key_exists($baseImage, $styles)) {
+        return "";
+      }
+
+      $lbl= "";
+      if ($label) {
+        if (isset($styles["images/label-".$label.".png"])) {
+          $lbl= "<div style='".$styles["images/label-".$label.".png"]."'></div>";
+        } else {
+          die("Invalid label specified: $label\n");
+        }
+      }
+
+      // Non middle layout?
+      if ($align == "middle") {
+        $align= "";
       } else {
-
-        // Fall back to default theme
-        $theme= "default";
+        $align= ";vertical-align:$align";
       }
 
-      if (!file_exists("$BASE_DIR/ihtml/themes/$theme/img.styles")){
-        die ("No img.style for this theme found!");
+      // Clickable image or not?
+      if ($title != "") {
+        $title= "title='$title'";
       }
 
-      session::global_set('img-styles', unserialize(file_get_contents("$BASE_DIR/ihtml/themes/$theme/img.styles")));
-    }
-    $styles= session::global_get('img-styles');
-
-    /* Extract labels from path */
-    preg_match("/(.*\.png)\[(.*)\]$/", $path, $matches);
-
-    if (count($matches) == 3) {
-      $path = $matches[1];
-      $label= $matches[2];
-    }
-
-    $baseImage = str_replace('['.$label.']', '', $path);
-    if (!array_key_exists($baseImage, $styles)) {
-      return "";
-    }
-
-    $lbl= "";
-    if ($label) {
-      if (isset($styles["images/label-".$label.".png"])) {
-        $lbl= "<div style='".$styles["images/label-".$label.".png"]."'></div>";
+      if ($action == "") {
+        return "<div class='img' $title style='".$styles[$path]."$align'>$lbl</div>";
       } else {
-        die("Invalid label specified: $label\n");
+        return "<input type='submit' class='img' id='$action' value='' name='$action' $title style='".$styles[$path]."$align'>";
       }
-    }
-
-    // Non middle layout?
-    if ($align == "middle") {
-      $align= "";
-    } else {
-      $align= ";vertical-align:$align";
-    }
-
-    // Clickable image or not?
-    if ($title != "") {
-      $title= "title='$title'";
-    }
-
-    if ($action == "") {
-      return "<div class='img' $title style='".$styles[$path]."$align'>$lbl</div>";
-    } else {
-      return "<input type='submit' class='img' id='$action' value='' name='$action' $title style='".$styles[$path]."$align'>";
-    }
+      break;
+    
+    default:
+      if ($action == "") {
+        return "$path";
+      } else {
+        return "<input type='submit' class='btn-flat input-btn' id='$action' value='' name='$action' title='".$title."' $align >$path";
+      }
+      break;
   }
-
 }
 
 /*! \brief    Encodes a complex string to be useable in HTML posts.
@@ -4037,14 +4041,25 @@ function in_array_strict($needle, $haystack, $strict = TRUE)
     return(in_array($needle, $haystack, $strict));
 }
 
-function check_for_materialize_theme() {
+function getThemeName() {
     global $config;
-    $theme = false;
     if ($config) {
-      $theme = $config->get_cfg_value("core", "theme") == "materialize";
+      $theme = $config->get_cfg_value("core", "theme");
     }
     return $theme;
 }
+
+function tempSwitch($arr)
+  {
+    $theme = getThemeName();
+
+    switch ($theme) {
+      case 'classic':
+        return $arr[1];
+      default:
+        return $arr[0];
+    }
+  }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

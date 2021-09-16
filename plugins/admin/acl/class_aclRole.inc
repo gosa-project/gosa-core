@@ -211,6 +211,8 @@ class aclrole extends acl
     $tmp= session::get('plist');
     $plist= $tmp->info;
 
+    $theme = getThemeName();
+
     /* Handle posts */
     if (isset($_POST['new_acl']) && $this->acl_is_writeable("gosaAclTemplate")){
       $this->dialogState= 'create';
@@ -409,17 +411,41 @@ class aclrole extends acl
 
         /* Set summary... */
         if ($summary == ""){
-          $summary= check_for_materialize_theme() ? '<p>'._("No ACL settings for this category!").'</p>' : '<i>'._("No ACL settings for this category!").'</i>';;
+          switch ($theme) {
+            case 'classic':
+              $summary = '<i>'._("No ACL settings for this category!").'</i>';
+              break;
+            
+            default:
+              $summary = '<p>'._("No ACL settings for this category!").'</p>';
+              break;
+          }
         } else {
           $summary= sprintf(_("ACL for these objects: %s"), preg_replace('/, $/', '', $summary));
         }
 
         $action = "";
         if($this->acl_is_readable("gosaAclTemplate")){
-          $action.= check_for_materialize_theme() ? image("<i class='material-icons input-icons'>edit</i>", 'cat_edit_'.$section,_("Edit category ACL")) : image('images/lists/edit.png','cat_edit_'.$section,_("Edit category ACL"));
+          switch ($theme) {
+            case 'classic':
+              $action .= image('images/lists/edit.png', 'cat_edit_'.$section,_("Edit category ACL"));
+              break;
+            
+            default:
+              $action .= image("<i class='material-icons input-icons'>edit</i>", 'cat_edit_'.$section,_("Edit category ACL"));
+              break;
+          }
         }
         if($this->acl_is_writeable("gosaAclTemplate")  && preg_match("/;".$section."(;|\/)/", $usedList)){
-          $action.= check_for_materialize_theme() ? image("<i class='material-icons input-icons'>edit</i>", 'cat_del_'.$section,_("Delete category ACL")) : image('images/lists/trash.png','cat_del_'.$section,_("Delete category ACL"));
+          switch ($theme) {
+            case 'classic':
+              $action .= image('images/lists/trash.png','cat_del_'.$section,_("Delete category ACL"));
+              break;
+            
+            default:
+              $action .= image("<i class='material-icons input-icons'>edit</i>", 'cat_del_'.$section,_("Delete category ACL"));
+              break;
+          }
         }
         $data[] = $section;
         $lData[] = array('data'=>array($dsc, $summary, $action));
@@ -460,7 +486,7 @@ class aclrole extends acl
     foreach(array("cn","description") as $name){
       $smarty->assign($name,set_post($this->$name));
     }
-    return ($smarty->fetch (get_template_path(check_for_materialize_theme() ? 'acl_role_materialize.tpl' : 'acl_role.tpl', dirname(__FILE__))));
+    return ($smarty->fetch (get_template_path('acl_role.tpl', dirname(__FILE__))));
   }
 
   function sort_by_priority($list)

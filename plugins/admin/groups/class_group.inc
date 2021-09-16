@@ -205,6 +205,8 @@ class group extends plugin
         // Call parent execute 
         plugin::execute();
 
+        $theme = getThemeName();
+
         // Log view 
         if($this->is_account && !$this->view_logged){
             $this->view_logged = TRUE;
@@ -313,9 +315,25 @@ class group extends plugin
                     if (isset($values['cn']) && isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : 'plugins/users/images/select_user.png');
+                        switch ($theme) {
+                            case 'classic':
+                                $image = image("plugins/users/images/select_user.png");
+                                break;
+                            
+                            default:
+                                $image = image("<i class='material-icons'>person</i>");
+                                break;
+                        }
                     }elseif(isset($values['gidNumber'])){
-                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
+                        switch ($variable) {
+                            case 'classic':
+                                $image = image("plugins/groups/images/select_group.png");
+                                break;
+                            
+                            default:
+                                $image = image("<i class='material-icons'>groups</i>");
+                                break;
+                        }
                     }
                     $lData[$member] = array('data' => array($image,$cn, $data[$member]['uid'][0] ?? ""));
                 }
@@ -338,9 +356,25 @@ class group extends plugin
                     if(isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : 'plugins/users/images/select_user.png');
+                        switch ($theme) {
+                            case 'classic':
+                                $image = image("plugins/users/images/select_user.png");
+                                break;
+                            
+                            default:
+                                $image = image("<i class='material-icons'>person</i>");
+                                break;
+                        }
                     }elseif(isset($values['gidNumber'])){
-                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
+                        switch ($theme) {
+                            case 'classic':
+                                $image = image("plugins/groups/images/select_group.png");
+                                break;
+                            
+                            default:
+                                $image = image("<i class='material-icons'>groups</i>");
+                                break;
+                        }
                     }
                     $lData[$member] = array('data' => array($image,$cn,$data[$member]['uid'][0] ?? ""));
                 }
@@ -357,9 +391,26 @@ class group extends plugin
                     if(isset($values['cn']) && isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : 'plugins/users/images/select_user.png');
+                        switch ($theme) {
+                            case 'classic':
+                                $image = image("plugins/users/images/select_user.png");
+                                break;
+                            
+                            default:
+                                $image = image("<i class='material-icons'>person</i>");
+                                break;
+                        }
+                        
                     }elseif(isset($values['gidNumber'])){
-                        $image = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
+                        switch ($theme) {
+                            case 'classic':
+                                $image = image("plugins/groups/images/select_group.png");
+                                break;
+                            
+                            default:
+                                $image = image("<i class='material-icons'>groups</i>");
+                                break;
+                        }
                     }
                     $lData[$member] = array('data' => array($image,$cn,$data[$member]['uid'][0] ?? ""));
                 }
@@ -434,7 +485,7 @@ class group extends plugin
             $smarty->assign("memberACL", preg_replace("/[^r]/","",$this->getacl('member')));
              
         }
-        return($smarty->fetch (get_template_path(check_for_materialize_theme() ? 'generic_materialize.tpl' : 'generic.tpl', TRUE)));
+        return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
     }
 
     function isRestrictedByDynGroup()

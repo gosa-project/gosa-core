@@ -25,7 +25,7 @@ if (!$cleanup){
 	$smarty->assign("iconmenu", $plist->show_iconmenu());
 	$smarty->assign("year", date("Y"));
 	$smarty->assign("revision", get_gosa_version());
-	$display= $smarty->fetch(get_template_path(check_for_materialize_theme() ? 'welcome_materialize.tpl' : "welcome.tpl", TRUE));
+	$display= $smarty->fetch(get_template_path("welcome.tpl", TRUE));
 }
 
 ?>

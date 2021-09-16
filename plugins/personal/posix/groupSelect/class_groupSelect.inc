@@ -45,7 +45,7 @@ class groupSelect extends management
     $this->setFilter($filter);
 
     // Build headpage
-    $headpage = new listing(get_template_path(check_for_materialize_theme() ? "group-list_materialize.xml" : "group-list.xml", true, dirname(__FILE__)));
+    $headpage = new listing(get_template_path("group-list.xml", true, dirname(__FILE__)));
     $headpage->setFilter($filter);
     parent::__construct($config, $ui, "groups", $headpage);
   }

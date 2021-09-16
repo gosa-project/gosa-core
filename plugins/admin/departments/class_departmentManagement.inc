@@ -48,9 +48,7 @@ class departmentManagement extends management
     $filter->setObjectStorage(array(''));
 
     // Build headpage
-    $headpage = (check_for_materialize_theme() ?
-                  new listing(get_template_path("dep-list_materialize.xml", true)) :
-                  new listing(get_template_path("dep-list.xml", true)));
+    $headpage = new listing(get_template_path("dep-list.xml", true));
     $headpage->registerElementFilter("depLabel", "departmentManagement::filterDepLabel");
     $headpage->setFilter($filter);
     $this->setFilter($filter);
@@ -191,10 +189,10 @@ class departmentManagement extends management
     $types['domain']['ATTR']    = "dc"; 
     $types['domain']['TAB']     = "DOMAIN_TABS"; 
     $types['domain']['OC']      = "domain"; 
-    $types['domain']['IMG']     = (check_for_materialize_theme() ? "domain" : "plugins/departments/images/domain.png"); 
-    $types['domain']['IMG_FULL']= (check_for_materialize_theme() ? "domain" : "plugins/departments/images/domain.png"); ; 
+    $types['domain']['IMG']     = tempSwitch(array("domain", "plugins/departments/images/domain.png")); 
+    $types['domain']['IMG_FULL']= tempSwitch(array("domain", "plugins/departments/images/domain.png")); 
     $types['domain']['TITLE']   = _("Domain"); 
-    $types['domain']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "domain.tpl"); 
+    $types['domain']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "domain.tpl")); 
     $types['domain']['TR']      = ["domain", "Domain"]; 
 
     /* Domain component 
@@ -204,10 +202,10 @@ class departmentManagement extends management
     $types['dcObject']['ATTR']    = "dc";
     $types['dcObject']['TAB']     = "DCOBJECT_TABS";
     $types['dcObject']['OC']      = "dcObject";
-    $types['dcObject']['IMG']     = (check_for_materialize_theme() ? "router" : "plugins/departments/images/dc.png");
-    $types['dcObject']['IMG_FULL']= (check_for_materialize_theme() ? "router" : "plugins/departments/images/dc.png");
+    $types['dcObject']['IMG']     = tempSwitch(array("router" , "plugins/departments/images/dc.png"));
+    $types['dcObject']['IMG_FULL']= tempSwitch(array("router" , "plugins/departments/images/dc.png"));
     $types['dcObject']['TITLE']   = _("Domain Component");
-    $types['dcObject']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "dcObject.tpl");
+    $types['dcObject']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "dcObject.tpl"));
     $types['dcObject']['TR']      = ["locality", "Locality"]; 
 
     /* Country object
@@ -217,10 +215,10 @@ class departmentManagement extends management
     $types['country']['TAB']     = "COUNTRY_TABS";
     $types['country']['ATTR']    = "c";
     $types['country']['OC']      = "country";
-    $types['country']['IMG']     = (check_for_materialize_theme() ? "outlined_flag" : "plugins/departments/images/country.png");
-    $types['country']['IMG_FULL']= (check_for_materialize_theme() ? "outlined_flag" : "plugins/departments/images/country.png");
+    $types['country']['IMG']     = tempSwitch(array("outlined_flag" , "plugins/departments/images/country.png"));
+    $types['country']['IMG_FULL']= tempSwitch(array("outlined_flag" , "plugins/departments/images/country.png"));
     $types['country']['TITLE']   = _("Country");
-    $types['country']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "country.tpl");
+    $types['country']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "country.tpl"));
     $types['country']['TR']      = ["country", "Country"]; 
 
     /* Locality object
@@ -230,10 +228,10 @@ class departmentManagement extends management
     $types['locality']['TAB']     = "LOCALITY_TABS";
     $types['locality']['ATTR']    = "l";
     $types['locality']['OC']      = "locality";
-    $types['locality']['IMG']     = (check_for_materialize_theme() ? "screen_search_desktop" : "plugins/departments/images/locality.png");
-    $types['locality']['IMG_FULL']= (check_for_materialize_theme() ? "screen_search_desktop" : "plugins/departments/images/locality.png");
+    $types['locality']['IMG']     = tempSwitch(array("screen_search_desktop" , "plugins/departments/images/locality.png"));
+    $types['locality']['IMG_FULL']= tempSwitch(array("screen_search_desktop" , "plugins/departments/images/locality.png"));
     $types['locality']['TITLE']   = _("Locality");
-    $types['locality']['TPL']     = (check_for_materialize_theme() ? "dep_oUnit.tpl" : "locality.tpl");
+    $types['locality']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "locality.tpl"));
     $types['locality']['TR']      = ["locality", "Locality"]; 
 
     /* Organization
@@ -243,10 +241,10 @@ class departmentManagement extends management
     $types['organization']['TAB']     = "ORGANIZATION_TABS";
     $types['organization']['ATTR']    = "o";
     $types['organization']['OC']      = "organization";
-    $types['organization']['IMG']     = (check_for_materialize_theme() ? "corporate_fare" : "plugins/departments/images/organization.png");
-    $types['organization']['IMG_FULL']= (check_for_materialize_theme() ? "corporate_fare" : "plugins/departments/images/organization.png");
+    $types['organization']['IMG']     = tempSwitch(array("corporate_fare" , "plugins/departments/images/organization.png"));
+    $types['organization']['IMG_FULL']= tempSwitch(array("corporate_fare" , "plugins/departments/images/organization.png"));
     $types['organization']['TITLE']   = _("Organization");
-    $types['organization']['TPL']     = (check_for_materialize_theme() ? "dep_oExtendedUnit.tpl" : "organization.tpl");
+    $types['organization']['TPL']     = tempSwitch(array("dep_oExtendedUnit.tpl" , "organization.tpl"));
     $types['organization']['TR']      = ["organization", "Organization"]; 
 
 
@@ -257,10 +255,10 @@ class departmentManagement extends management
     $types['organizationalUnit']['TAB']     = "DEPTABS";
     $types['organizationalUnit']['ATTR']    = "ou";
     $types['organizationalUnit']['OC']      = "organizationalUnit";
-    $types['organizationalUnit']['IMG']     = (check_for_materialize_theme() ? "folder" : "images/lists/folder.png"); //plugins/departments/images/department.png";
-    $types['organizationalUnit']['IMG_FULL']= (check_for_materialize_theme() ? "folder" : "images/lists/folder.png"); //plugins/departments/images/department.png";
+    $types['organizationalUnit']['IMG']     = tempSwitch(array("folder" , "images/lists/folder.png")); //plugins/departments/images/department.png";
+    $types['organizationalUnit']['IMG_FULL']= tempSwitch(array("folder" , "images/lists/folder.png")); //plugins/departments/images/department.png";
     $types['organizationalUnit']['TITLE']   = _("Department");
-    $types['organizationalUnit']['TPL']     = (check_for_materialize_theme() ? "dep_oExtendedUnit.tpl" : "generic.tpl");
+    $types['organizationalUnit']['TPL']     = tempSwitch(array("dep_oExtendedUnit.tpl" , "generic.tpl"));
     $types['organizationalUnit']['TR']      = ["department", "Department"]; 
 
     return($types);

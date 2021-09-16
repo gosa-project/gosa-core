@@ -184,7 +184,7 @@ class trustModeDialog extends plugin
         $smarty->assign("multiple_support" , $this->multiple_support_active);
 #        $this->trustList->update();
         $smarty->assign("trustList", $this->trustList->render());
-        return($smarty->fetch(get_template_path(check_for_materialize_theme() ? "generic_materialize.tpl" : "generic.tpl",TRUE, dirname(__FILE__))));
+        return($smarty->fetch(get_template_path("generic.tpl",TRUE, dirname(__FILE__))));
     }
 
     public function save_object()

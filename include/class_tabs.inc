@@ -134,6 +134,8 @@ class tabs
 
   function execute()
   {
+    $theme = getThemeName();
+
     // Ensure that the currently selected tab is valid.
     if(!isset($this->by_name[$this->current])) {
       $this->current = key($this->by_name);
@@ -161,6 +163,8 @@ class tabs
         }
     }
 
+    
+
     /* If multiple edit is enabled for this tab,
        we have tho display different templates */
     if(!$this->multiple_support_active){
@@ -168,31 +172,43 @@ class tabs
     }else{
       $display= $this->by_object[$this->current]->multiple_execute();
     }
+
     $tabs= $this->gen_tabs();
 
     if($this->is_modal_dialog()){
-        $display = (check_for_materialize_theme() ?
-                      "{$display}" :
-                      "<div class='plugin'>
-                        {$display}
-                      </div>");
-    }else{
-
-        $display =  (check_for_materialize_theme() ?
-                      "<div class='object-info'>
-                        <div class='card-tabs'>
-                          {$tabs}
-                        </div>
-                        <input type='hidden' name='arg' value=''>
-                        <div class='content-wrapper card-content-scroll'>
+        switch ($theme) {
+          case 'classic':
+            $display = "<div class='plugin'>
                           {$display}
-                        </div>
-                      </div>" :
-                      "{$tabs}
-                      <input type='hidden' name='arg' value=''>
-                      <div class='tab-content'>
-                        {$display}
-                      </div>");
+                        </div>";
+            break;
+          
+          default:
+            $display = "{$display}";
+            break;
+        }
+    }else{
+        switch ($theme) {
+          case 'classic':
+            $display = "{$tabs}
+                        <input type='hidden' name='arg' value=''>
+                        <div class='tab-content'>
+                          {$display}
+                        </div>";
+            break;
+          
+          default:
+            $display = "<div class='object-info'>
+                          <div class='card-tabs'>
+                            {$tabs}
+                          </div>
+                          <input type='hidden' name='arg' value=''>
+                          <div class='content-wrapper card-content-scroll'>
+                            {$display}
+                          </div>
+                        </div>";
+            break;
+        }
     }
 
     // Detect if we've modifications right now.
@@ -252,9 +268,19 @@ class tabs
 
   function gen_tabs()
   {
+    $theme = getThemeName();
+
     if($this->is_modal_dialog()) return("");
 
-    $display =  (check_for_materialize_theme() ? "<div class='row'><div class='col s12'><ul class='tabs'>" : "<div class='tabs'><ul>");
+    switch ($theme) {
+      case 'classic':
+        $display = "<div class='tabs'><ul>";
+        break;
+      
+      default:
+        $display = "<div class='row'><div class='col s12'><ul class='tabs'>";
+        break;
+    }
 
     $firstTab = true;
     foreach ($this->by_name as $class => $name){
@@ -269,21 +295,49 @@ class tabs
 
       // Take care about notifications
       $obj = $this->by_object[$class];
-      if (check_for_materialize_theme()) {
+      switch ($theme) {
+        case 'classic':
+          $tabClass = ($this->current == $class) ? "current" :"";
+          break;
+        
+        default:
         $activeClass = ($this->current == $class) ? "active" :"";
-      } else {
-        $tabClass = ($this->current == $class) ? "current" :"";
+          break;
       }
       // check for first tab
-      $tabClass = (check_for_materialize_theme() ? " tab col s2 pointer" : $tabClass);
+      switch ($theme) {
+        case 'classic':
+          $tabClass = $tabClass;
+          break;
+        
+        default:
+          $tabClass = " tab col s2 pointer"; 
+          break;
+      }
       if ( $this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)){
         $tabClass .= " info";
       }
       if(!empty($tabClass)) $tabClass="class='{$tabClass}'";
       $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
-      $display.=" <li {$tabClass} onClick=\"{$onClick}\">".(check_for_materialize_theme() ? "<a href='#' class='$activeClass'>$title</a>" : $title )."</li>";
+      switch ($theme) {
+        case 'classic':
+          $display .= "<li {$tabClass} onClick=\"{$onClick}\">".$title."</li>";
+          break;
+        
+        default:
+          $display .= "<li {$tabClass} onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
+          break;
+      }
     }
-    $display.= (check_for_materialize_theme() ? "</ul></div></div>" : "</ul></div>");
+    switch ($theme) {
+      case 'classic':
+        $display .= "</ul></div>";
+        break;
+      
+      default:
+        $display .= "</ul></div></div>";
+        break;
+    }
     return($display);
   }
 

@@ -214,7 +214,7 @@ class password extends plugin
             }
             $smarty->assign("pwLength", $length);
         }
-        return($smarty->fetch(get_template_path(check_for_materialize_theme() ? "password_materialize.tpl" : "password.tpl", TRUE)));
+        return($smarty->fetch(get_template_path("password.tpl", TRUE)));
     } 
 
     function remove_from_parent()

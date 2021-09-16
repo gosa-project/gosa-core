@@ -45,7 +45,7 @@ class singleUserSelect extends management
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path(check_for_materialize_theme() ? "singleUser-list_materialize.xml" : "singleUser-list.xml", true, dirname(__FILE__)));
+        $headpage = new listing(get_template_path("singleUser-list.xml", true, dirname(__FILE__)));
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "users", $headpage);
     }

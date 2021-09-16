@@ -97,6 +97,8 @@ class posixAccount extends plugin
   var $groupList = null;
   var $groupListData = null;
 
+  var $theme;
+
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
   function __construct(&$config, $dn= NULL, $parent =NULL)
@@ -109,7 +111,17 @@ class posixAccount extends plugin
     /* Load bases attributes */
     plugin::__construct($config, $dn, $parent);
 
-    $groupImage = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
+    $this->theme = getThemeName();
+
+    switch ($this->theme) {
+      case 'classic':
+        $groupImage = image("plugins/groups/images/select_group.png");
+        break;
+      
+      default:
+        $groupImage = image("<i class='material-icons'>groups</i>");
+        break;
+    }
 
     $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, $parent);
     $this->trustModeDialog->setAcl('users/posixAccount');
@@ -414,7 +426,7 @@ class posixAccount extends plugin
 
     /* Depending on pwmode, currently hardcoded because there are no other methods */
     if ( 1 == 1 ){
-      $smarty->assign("pwmode", dirname(__FILE__).(check_for_materialize_theme() ? "/posix_shadow_materialize" : "/posix_shadow"));
+      $smarty->assign("pwmode", dirname(__FILE__).("/".getThemeName()."/posix_shadow"));
 
       $shadowMinACL     =  $this->getacl("shadowMin");
       $smarty->assign("shadowmins", sprintf(_("Password can't be changed up to %s days after last change"), 
@@ -538,7 +550,7 @@ class posixAccount extends plugin
     $smarty->assign("sshPublicKey", $this->ssh?1:0);
 
     $smarty->assign("multiple_support" , $this->multiple_support_active);
-    $display.= $smarty->fetch (get_template_path(check_for_materialize_theme() ? 'generic_materialize.tpl' : 'generic.tpl', TRUE, dirname(__FILE__)));
+    $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
   }
 
@@ -1040,7 +1052,16 @@ class posixAccount extends plugin
   {
     /* include global link_info */
     $ldap= $this->config->get_ldap_link();
-    $groupImage = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : "plugins/groups/images/select_group.png");
+
+    switch ($this->theme) {
+      case 'classic':
+        $groupImage = image("plugins/groups/images/select_group.png");
+        break;
+      
+      default:
+        $groupImage = image("<i class='material-icons'>groups</i>");
+        break;
+    }
 
     /* Walk through groups and add the descriptive entry if not exists */
     foreach ($groups as $value){
@@ -1504,7 +1525,16 @@ class posixAccount extends plugin
     $uids        = array();
     $first       = TRUE;
 
-    $groupImage = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : 'plugins/groups/images/select_group.png');
+    switch ($this->theme) {
+      case 'classic':
+        $groupImage = image("plugins/groups/images/select_group.png");
+        break;
+      
+      default:
+        $groupImage = image("<i class='material-icons'>groups</i>");
+        break;
+    }
+    
 
     /* Get all groups used by currently edited users */
     $uid_filter="";  

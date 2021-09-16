@@ -63,25 +63,39 @@ class aclroletab extends tabs
 
   function execute()
   {
+    $theme = getThemeName();
+
     $display= tabs::execute();
     if($this->read_only){
-      $display.= check_for_materialize_theme() ?
-                  "<div class='card-action'>
-                    <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                  </div>":
-                  "<div class='plugin-actions'>
-                    <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                  </div>";
+      switch ($variable) {
+        case 'classic':
+          $dispaly .= " <div class='plugin-actions'>
+                          <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                        </div>";
+          break;
+        
+        default:
+          $display .= " <div class='card-action'>
+                          <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                        </div>";
+          break;
+      }
     }elseif(!$this->by_object['aclrole']->dialog){
-      $display.= check_for_materialize_theme() ?
-                  "<div class='card-action'>
-                    <button class='btn-small gonicus-color' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
-                    <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                  </div>":
-                  "<p style=\"text-align:right\">
-                    <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
-                    <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                  </p>";
+      switch ($theme) {
+        case 'classic':
+          $display .= " <p style=\"text-align:right\">
+                          <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
+                          <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                        </p>";
+          break;
+        
+        default:
+          $display .= "<div class='card-action'>
+                        <button class='btn-small gonicus-color' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
+                        <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                      </div>";
+          break;
+      }
     }
     return($display);
   }

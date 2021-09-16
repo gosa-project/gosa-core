@@ -422,9 +422,7 @@ if (is_file("$plugin_dir/main.inc")){
 /* Print_out last ErrorMessage repeated string. */
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign ("pathMenu", $plist->genPathMenu());
-if (check_for_materialize_theme()) {
-  $smarty->assign ("breadcrumb", $plist->genBreadcrumb());
-}
+$smarty->assign ("breadcrumb", $plist->genBreadcrumb());
 $smarty->assign("contents", $display);
 $smarty->assign("sessionLifetime", $config->get_cfg_value('core','sessionLifetime'));
 

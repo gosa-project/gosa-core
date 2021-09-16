@@ -416,7 +416,7 @@ class user extends plugin
         $this->set_picture ();
         $this->jpegPhoto= "*removed*";
         $this->is_modified= TRUE;
-        return($smarty->fetch (get_template_path(check_for_materialize_theme() ? "generic_picture_materialize.tpl" : 'generic_picture.tpl', TRUE, dirname(__FILE__))));
+        return($smarty->fetch (get_template_path('generic_picture.tpl', TRUE, dirname(__FILE__))));
       }
     }
 
@@ -543,7 +543,7 @@ class user extends plugin
     /* Display picture dialog */
     if ($this->picture_dialog){
       pathNavigator::registerPlugin(_("User picture"));
-      return($smarty->fetch (get_template_path(check_for_materialize_theme() ? "generic_picture_materialize.tpl" : 'generic_picture.tpl', TRUE, dirname(__FILE__))));
+      return($smarty->fetch (get_template_path('generic_picture.tpl', TRUE, dirname(__FILE__))));
     }
 
     /* Display cert dialog */
@@ -586,7 +586,7 @@ class user extends plugin
           $smarty->assign($cert."info",$str);
           $smarty->assign($cert."_state","true");
         } else {
-          $smarty->assign($cert."info", check_for_materialize_theme() ?  "<p>"._("No certificate installed")."</p>" : "<i>"._("No certificate installed")."</i>");
+          $smarty->assign($cert."info", tempSwitch(array("<p>"._("No certificate installed")."</p>", "<i>"._("No certificate installed")."</i>")));
           $smarty->assign($cert."_state","");
         }
       }
@@ -597,7 +597,7 @@ class user extends plugin
         $smarty->assign("honourIvbbAttributes", "false");
       }
       $smarty->assign("governmentmode", $this->governmentmode);
-      return($smarty->fetch (get_template_path(check_for_materialize_theme() ? "generic_certs_materialize.tpl" : 'generic_certs.tpl', TRUE, dirname(__FILE__))));
+      return($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
     }
 
     /* Prepare password hashes */
@@ -705,7 +705,7 @@ class user extends plugin
     }
     $smarty->assign("multiple_support" , $this->multiple_support_active);
     $smarty->assign("manager_name", set_post($this->manager_name));
-    return($smarty->fetch (get_template_path(check_for_materialize_theme() ? "generic_materialize.tpl" : "generic.tpl", TRUE, dirname(__FILE__))));
+    return($smarty->fetch (get_template_path("generic.tpl", TRUE, dirname(__FILE__))));
   }
 
 

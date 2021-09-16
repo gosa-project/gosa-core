@@ -58,10 +58,14 @@ class listing
     public $baseSelector;
     public $aclToObjectClass = [];
 
+    public $theme = "";
+
     public function __construct($source, $isString = false)
     {
         global $config;
         global $class_mapping;
+
+        $this->theme = getThemeName();
 
         // Initialize pid
         $this->pid = preg_replace('/[^0-9]/', '', microtime(true));
@@ -253,43 +257,52 @@ class listing
                         isset($conf['sortType'])) {
                     $this->sortAttribute = $conf['sortAttribute'];
                     $this->sortType = $conf['sortType'];
-                    if (check_for_materialize_theme()) {
-                        $sorter = image("<i class='material-icons'>keyboard_arrow_".($this->sortDirection[$index] ? 'up' : 'down').'</i>', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top ');
-                    } else {
-                        $sorter = '&nbsp;'.image('images/lists/sort-'.($this->sortDirection[$index] ? 'up' : 'down').'.png', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top');
+                    switch ($this->theme) {
+                        case 'classic':
+                            $sorter = '&nbsp;'.image('images/lists/sort-'.($this->sortDirection[$index] ? 'up' : 'down').'.png', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top');
+                            break;
+                        default:
+                            $sorter = image("<i class='material-icons'>keyboard_arrow_".($this->sortDirection[$index] ? 'up' : 'down').'</i>', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top ');
+                            break;
                     }
                 }
                 $sortable = (isset($conf['sortAttribute']));
 
                 $link = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index'";
                 if (isset($conf['label'])) {
-                    if (check_for_materialize_theme()) {
-                        if ($sortable) {
-                            $this->header[$index] = " <th><a class='btn-flat' $link>"._($conf['label'])."</a>$sorter</th>";
-                        } else {
-                            $this->header[$index] = ' <th>'._($conf['label']).'</th>';
-                        }
-                    } else {
-                        if ($sortable) {
-                            $this->header[$index] = "<td class='listheader' ".$this->colprops[$index]."><a $link>"._($conf['label'])."</a>$sorter</td>";
-                        } else {
-                            $this->header[$index] = "<td class='listheader' ".$this->colprops[$index].'>'._($conf['label']).'</td>';
-                        }
+                    switch ($this->theme) {
+                        case 'classic':
+                            if ($sortable) {
+                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index]."><a $link>"._($conf['label'])."</a>$sorter</td>";
+                            } else {
+                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index].'>'._($conf['label']).'</td>';
+                            }
+                            break;
+                        default:
+                            if ($sortable) {
+                                $this->header[$index] = " <th><a class='btn-flat' $link>"._($conf['label'])."</a>$sorter</th>";
+                            } else {
+                                $this->header[$index] = ' <th>'._($conf['label']).'</th>';
+                            }
+                            break;
                     }
                     $this->plainHeader[] = _($conf['label']);
                 } else {
-                    if (check_for_materialize_theme()) {
-                        if ($sortable) {
-                            $this->header[$index] = "  <th><a class='btn-flat' $link></a>$sorter</th>";
-                        } else {
-                            $this->header[$index] = '  <th class="icon-column"></th>';
-                        }
-                    } else {
-                        if ($sortable) {
-                            $this->header[$index] = "<td class='listheader' ".$this->colprops[$index]."><a $link>&nbsp;</a>$sorter</td>";
-                        } else {
-                            $this->header[$index] = "<td class='listheader' ".$this->colprops[$index].'>&nbsp;</td>';
-                        }
+                    switch ($this->theme) {
+                        case 'classic':
+                            if ($sortable) {
+                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index]."><a $link>&nbsp;</a>$sorter</td>";
+                            } else {
+                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index].'>&nbsp;</td>';
+                            }
+                            break;
+                        default:
+                            if ($sortable) {
+                                $this->header[$index] = "  <th><a class='btn-flat' $link></a>$sorter</th>";
+                            } else {
+                                $this->header[$index] = '  <th class="icon-column"></th>';
+                            }
+                            break;
                     }
 
                     $this->plainHeader[] = '';
@@ -321,131 +334,106 @@ class listing
             $height = $this->height;
         }
 
-        if (check_for_materialize_theme()) {
-            // get items per page
-            $prow = isset($_GET['items']) ? (int)$_GET['items'] : 10;
+        switch ($this->theme) {
+            case 'classic':
+                $result .= "<div class='listContainer' id='d_scrollbody' style='height:{$height}px; overflow: auto;min-height:".($height + 25)."px;'>\n";
+                $result .= "<table summary='$this->headline' style='width:100%;table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
+                $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
 
-            // start on page 1
-            $page = 1;
-
-            // get selected page
-            if (!isset($_GET['page'])) {
-                $selectedPage = 1;
-            } else {
-                $selectedPage = $_GET['page'];
-            }
-
-            $result .= "  <div class='section scrollspy table-wrapper card-content-scroll' id='d_scrollbody'>
-                            <table id='tree-table' class='highlight'>";
-            $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
-
-            // Build list header
-            $result .= '  <thead>
-                            <tr>';
-            if ($this->multiSelect || $this->singleSelect) {
-                $result .= '<th class="checkbox-column">';
-                if ($this->multiSelect) {
-                    $result .= "  <label>
-                                    <input type='checkbox' id='select_all' name='select_all'
-                                        title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >
-                                    <span></span>
-                                </label>";
-                } else {
-                    $result .= '&nbsp;';
-                }
-                $result .= '</th>';
-            }
-            foreach ($this->header as $header) {
-                $result .= $header;
-            }
-            $result .= '      </tr>
-                        </thead>';
-
-            // Build list body
-            $result .= '  <tbody>';
-
-            // No results? Just take an empty colspanned row
-            if (count($this->entries) + count($this->departments) == 0) {
-                $result .= "  <tr>
-                                <td colspan='$this->numColumns'></td>
-                            </tr>";
-            }
-
-            // Draw department browser if configured and we're not in sub mode
-            $this->useSpan = false;
-            if ($this->departmentBrowser && $this->filter->scope != 'sub') {
-                // Fill with department browser if configured this way
-                $departmentIterator = new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
-                foreach ($departmentIterator as $row => $entry) {
-                    $rowResult = '<tr>';
-
-                    // Render multi select if needed
-                    if ($this->multiSelect || $this->singleSelect) {
-                        $rowResult .= '<td></td>';
+                // Build list header
+                $result .= "<thead class='fixedListHeader listHeaderFormat'><tr>\n";
+                if ($this->multiSelect || $this->singleSelect) {
+                    $width = '24px';
+                    if (preg_match('/Konqueror/i', $_SERVER['HTTP_USER_AGENT'])) {
+                        $width = '28px';
                     }
+                    $result .= "<td class='listheader' style='text-align:center;padding:0;width:$width;'>";
+                    if ($this->multiSelect) {
+                        $result .= "<input type='checkbox' id='select_all' name='select_all'
+                            title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >";
+                    } else {
+                        $result .= '&nbsp;';
+                    }
+                    $result .= "</td>\n";
+                }
+                foreach ($this->header as $header) {
+                    $result .= $header;
+                }
+                $result .= "</tr></thead>\n";
 
-                    // Render defined department columns, fill the rest with some stuff
-                    $rest = $this->numColumns - 1;
-                    foreach ($this->xmlData['table']['department'] as $index => $conf) {
-                        $colspan = 1;
-                        if (isset($conf['span'])) {
-                            $colspan = $conf['span'];
-                            $this->useSpan = true;
+                // Build list body
+                $result .= "<tbody class='listScrollContent listBodyFormat' id='t_nscrollbody' style='height:".$height."px;'>\n";
+
+                // No results? Just take an empty colspanned row
+                if (count($this->entries) + count($this->departments) == 0) {
+                    $result .= "<tr><td class='list1nohighlight' colspan='$this->numColumns' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
+                }
+
+                // Line color alternation
+                $alt = 0;
+                $deps = 0;
+
+                // Draw department browser if configured and we're not in sub mode
+                $this->useSpan = false;
+                if ($this->departmentBrowser && $this->filter->scope != 'sub') {
+                    // Fill with department browser if configured this way
+                    $departmentIterator = new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
+                    foreach ($departmentIterator as $row => $entry) {
+                        $rowResult = '<tr>';
+
+                        // Render multi select if needed
+                        if ($this->multiSelect || $this->singleSelect) {
+                            $rowResult .= "<td style='text-align:center;padding:0;' class='list1'>&nbsp;</td>";
                         }
-                        $rowResult .= "<td colspan='$colspan'>".$this->renderCell($conf['value'], $entry, $row).'</td>';
-                        $rest -= $colspan;
+
+                        // Render defined department columns, fill the rest with some stuff
+                        $rest = $this->numColumns - 1;
+                        foreach ($this->xmlData['table']['department'] as $index => $conf) {
+                            $colspan = 1;
+                            if (isset($conf['span'])) {
+                                $colspan = $conf['span'];
+                                $this->useSpan = true;
+                            }
+                            $rowResult .= "<td colspan='$colspan' ".$this->colprops[$index]." class='list1'>".$this->renderCell($conf['value'], $entry, $row).'</td>';
+                            $rest -= $colspan;
+                        }
+
+                        // Fill remaining cols with nothing
+                        $last = $this->numColumns - $rest;
+                        for ($i = 0; $i < $rest; ++$i) {
+                            $rowResult .= '<td '.$this->colprops[$last + $i - 1]." class='list1'>&nbsp;</td>";
+                        }
+                        $rowResult .= '</tr>';
+
+                        // Apply label to objecttype icon?
+                        if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
+                            $objectType = image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
+                            $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
+                        }
+                        $result .= $rowResult;
+                        ++$alt;
                     }
 
-                    // Fill remaining cols with nothing
-                    $last = $this->numColumns - $rest;
-                    for ($i = 0; $i < $rest; ++$i) {
-                        $rowResult .= '<td>&nbsp;</td>';
-                    }
-                    $rowResult .= '</tr>';
-
-                    // Apply label to objecttype icon?
-                    if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
-                        $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
-                        $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
-                    }
-                    $result .= $rowResult;
+                    $deps = $alt;
                 }
-            }
 
-            // Fill with contents, sort as configured
-            $ui = get_userinfo();
-
-            foreach ($this->entries as $row => $entry) {
-                if (($row + 1) <= ($selectedPage * $prow) && ($row + 1) >= (($selectedPage - 1) * $prow)) {
+                // Fill with contents, sort as configured
+                $ui = get_userinfo();
+                foreach ($this->entries as $row => $entry) {
                     $trow = '';
 
                     // Render multi select if needed
                     if ($this->multiSelect) {
-                        $trow .= "    <td>
-                                        <label>
-                                            <input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'>
-                                            <span></span>
-                                        <label>
-                                    </td>";
+                        $trow .= "<td style='text-align:center;width:20px;padding:0;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>\n";
                     }
 
                     if ($this->singleSelect) {
-                        $trow .= "    <td>
-                                        <label>
-                                            <input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'>
-                                            <span></span>
-                                        </label>
-                                    </td>";
+                        $trow .= "<td style='text-align:center;width:20px;padding:0;' class='list0'><input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'></td>\n";
                     }
 
-                    $xmlLenprint = count($this->xmlData['table']['column']) - 1;
                     foreach ($this->xmlData['table']['column'] as $index => $conf) {
                         $renderedCell = $this->renderCell($conf['value'], $entry, $row);
-                        if ($xmlLenprint == $index) {
-                            $trow .= '<td class="last-column">'.$renderedCell.'</td>';
-                        } else {
-                            $trow .= '<td>'.$renderedCell.'</td>';
-                        }
+                        $trow .= '<td '.$this->colprops[$index]." class='list0'>".$renderedCell."</td>\n";
 
                         // Save rendered column
                         $sort = preg_replace('/.*>([^<]+)<.*$/', '$1', $renderedCell);
@@ -459,18 +447,16 @@ class listing
                     // Save rendered entry
                     $this->entries[$row]['_rendered'] = $trow;
                 }
-            }
 
-            // Complete list by sorting entries for _sort$index and appending them to the output
-            $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
-            foreach ($entryIterator as $row => $entry) {
-                if (($row + 1) <= ($selectedPage * $prow) && ($row + 1) >= (($selectedPage - 1) * $prow)) {
+                // Complete list by sorting entries for _sort$index and appending them to the output
+                $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
+                foreach ($entryIterator as $row => $entry) {
                     // Apply label to objecttype icon?
                     if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
                         if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                            $objectType = image("<div class='entry-locked-td'><i class='material-icons'>".$matches[1]."</i><i class='material-icons'>".$m[1]."</i></div>", null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image($matches[1].'['.$m[1].']', null, LDAP::fix(base64_decode($matches[2])));
                         } else {
-                            $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
                         }
                         $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
                         $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
@@ -481,228 +467,259 @@ class listing
                         $result .= "<tr class='".$matches[1]."'>\n";
                         $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
                     } else {
-                        $result .= '<tr>';
+                        $result .= "<tr>\n";
                         $result .= $entry['_rendered'];
+                    }
+
+                    $result .= "</tr>\n";
+                    ++$alt;
+                }
+
+                // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
+                $emptyListStyle = (count($this->entries) + (($this->useSpan && count($this->entries)) ? $deps : 0) == 0) ? 'border:0;' : '';
+                if ((count($this->entries) + $deps) < 22) {
+                    $result .= '<tr>';
+                    for ($i = 0; $i < $this->numColumns; ++$i) {
+                        if ($i == 0) {
+                            $result .= "<td class='list1nohighlight' style='$emptyListStyle height: 100%;'>&nbsp;</td>";
+                            continue;
+                        }
+                        if ($i != $this->numColumns - 1) {
+                            $result .= "<td class='list1nohighlight' style='$emptyListStyle '>&nbsp;</td>";
+                        } else {
+                            $result .= "<td class='list1nohighlight' style='border-right:0;$emptyListStyle'>&nbsp;</td>";
+                        }
                     }
 
                     $result .= '</tr>';
                 }
-            }
 
-            $pagination = $this->setPaginator($prow, $page, $selectedPage);
+                // Close list body
+                $result .= '</tbody></table></div>';
 
-            // Close list body
-            $result .= '         </tbody>
-                            </table>
-
-                                    '.$pagination.'
-
-                        </div>';
-
-            // Add the footer if requested
-            if ($this->showFooter) {
-                $result .= '<div class="table-summary">';
-                foreach ($this->objectTypes as $objectType) {
-                    if (isset($this->objectTypeCount[$objectType['label']])) {
-                        $label = _($objectType['label']);
-                        $result .= image("<i class='material-icons'>".$objectType['image'].'</i>', null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['label']].'&nbsp;&nbsp;';
-                    } elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
-                        $label = _($objectType['label']);
-                        $result .= image("<i class='material-icons'>".$objectType['image'].' </i>', null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['objectClass']].'&nbsp;&nbsp;';
-                    }
-                }
-
-                $result .= '</div>';
-            }
-
-            // Close list
-            $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
-        } else {
-            $result .= "<div class='listContainer' id='d_scrollbody' style='height:{$height}px; overflow: auto;min-height:".($height + 25)."px;'>\n";
-            $result .= "<table summary='$this->headline' style='width:100%;table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
-            $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
-
-            // Build list header
-            $result .= "<thead class='fixedListHeader listHeaderFormat'><tr>\n";
-            if ($this->multiSelect || $this->singleSelect) {
-                $width = '24px';
-                if (preg_match('/Konqueror/i', $_SERVER['HTTP_USER_AGENT'])) {
-                    $width = '28px';
-                }
-                $result .= "<td class='listheader' style='text-align:center;padding:0;width:$width;'>";
-                if ($this->multiSelect) {
-                    $result .= "<input type='checkbox' id='select_all' name='select_all'
-                        title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >";
-                } else {
-                    $result .= '&nbsp;';
-                }
-                $result .= "</td>\n";
-            }
-            foreach ($this->header as $header) {
-                $result .= $header;
-            }
-            $result .= "</tr></thead>\n";
-
-            // Build list body
-            $result .= "<tbody class='listScrollContent listBodyFormat' id='t_nscrollbody' style='height:".$height."px;'>\n";
-
-            // No results? Just take an empty colspanned row
-            if (count($this->entries) + count($this->departments) == 0) {
-                $result .= "<tr><td class='list1nohighlight' colspan='$this->numColumns' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
-            }
-
-            // Line color alternation
-            $alt = 0;
-            $deps = 0;
-
-            // Draw department browser if configured and we're not in sub mode
-            $this->useSpan = false;
-            if ($this->departmentBrowser && $this->filter->scope != 'sub') {
-                // Fill with department browser if configured this way
-                $departmentIterator = new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
-                foreach ($departmentIterator as $row => $entry) {
-                    $rowResult = '<tr>';
-
-                    // Render multi select if needed
-                    if ($this->multiSelect || $this->singleSelect) {
-                        $rowResult .= "<td style='text-align:center;padding:0;' class='list1'>&nbsp;</td>";
-                    }
-
-                    // Render defined department columns, fill the rest with some stuff
-                    $rest = $this->numColumns - 1;
-                    foreach ($this->xmlData['table']['department'] as $index => $conf) {
-                        $colspan = 1;
-                        if (isset($conf['span'])) {
-                            $colspan = $conf['span'];
-                            $this->useSpan = true;
+                // Add the footer if requested
+                if ($this->showFooter) {
+                    $result .= "<div class='nlistFooter'><div style='padding:3px'>";
+                    foreach ($this->objectTypes as $objectType) {
+                        if (isset($this->objectTypeCount[$objectType['label']])) {
+                            $label = _($objectType['label']);
+                            $result .= image($objectType['image'], null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['label']].'&nbsp;&nbsp;';
+                        } elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
+                            $label = _($objectType['label']);
+                            $result .= image($objectType['image'], null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['objectClass']].'&nbsp;&nbsp;';
                         }
-                        $rowResult .= "<td colspan='$colspan' ".$this->colprops[$index]." class='list1'>".$this->renderCell($conf['value'], $entry, $row).'</td>';
-                        $rest -= $colspan;
                     }
 
-                    // Fill remaining cols with nothing
-                    $last = $this->numColumns - $rest;
-                    for ($i = 0; $i < $rest; ++$i) {
-                        $rowResult .= '<td '.$this->colprops[$last + $i - 1]." class='list1'>&nbsp;</td>";
-                    }
-                    $rowResult .= '</tr>';
+                    $result .= '</div></div>';
+                }
 
+                // Close list
+                $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
+
+                // Add scroll positioner
+                $result .= '<script type="text/javascript" language="javascript">';
+                $result .= '$("t_nscrollbody").scrollTop= '.$this->scrollPosition.';';
+                $result .= 'var box = $("t_nscrollbody").onscroll= function() {$("position_'.$this->pid.'").value= this.scrollTop;}';
+                $result .= '</script>';
+                break;
+            default:
+                /** Pagination inizialisation (uncomment for using)
+                 *  get items per page
+                 *  $prow = isset($_GET['items']) ? (int)$_GET['items'] : 10;
+
+                 *  // start on page 1
+                 *  $page = 1;
+
+                 *  // get selected page
+                 *  if (!isset($_GET['page'])) {
+                 *      $selectedPage = 1;
+                 *  } else {
+                 *      $selectedPage = $_GET['page'];
+                 *  }
+                */
+
+                /** if statement in foreachloop to filter results for pagination
+                 * if (($row + 1) <= ($selectedPage * $prow) && ($row + 1) >= (($selectedPage - 1) * $prow))
+                 */
+
+                /** pagination function call
+                 * $pagination = $this->setPaginator($prow, $page, $selectedPage);
+                 */
+        
+                $result .= "  <div class='section scrollspy table-wrapper card-content-scroll' id='d_scrollbody'>
+                                <table id='tree-table' class='highlight'>";
+                $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
+        
+                // Build list header
+                $result .= '  <thead>
+                                <tr>';
+                if ($this->multiSelect || $this->singleSelect) {
+                    $result .= '<th class="checkbox-column">';
+                    if ($this->multiSelect) {
+                        $result .= "  <label>
+                                        <input type='checkbox' id='select_all' name='select_all'
+                                            title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >
+                                        <span></span>
+                                    </label>";
+                    } else {
+                        $result .= '&nbsp;';
+                    }
+                    $result .= '</th>';
+                }
+                foreach ($this->header as $header) {
+                    $result .= $header;
+                }
+                $result .= '      </tr>
+                            </thead>';
+        
+                // Build list body
+                $result .= '  <tbody>';
+        
+                // No results? Just take an empty colspanned row
+                if (count($this->entries) + count($this->departments) == 0) {
+                    $result .= "  <tr>
+                                    <td colspan='$this->numColumns'></td>
+                                </tr>";
+                }
+        
+                // Draw department browser if configured and we're not in sub mode
+                $this->useSpan = false;
+                if ($this->departmentBrowser && $this->filter->scope != 'sub') {
+                    // Fill with department browser if configured this way
+                    $departmentIterator = new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
+                    foreach ($departmentIterator as $row => $entry) {
+                        $rowResult = '<tr>';
+        
+                        // Render multi select if needed
+                        if ($this->multiSelect || $this->singleSelect) {
+                            $rowResult .= '<td></td>';
+                        }
+        
+                        // Render defined department columns, fill the rest with some stuff
+                        $rest = $this->numColumns - 1;
+                        foreach ($this->xmlData['table']['department'] as $index => $conf) {
+                            $colspan = 1;
+                            if (isset($conf['span'])) {
+                                $colspan = $conf['span'];
+                                $this->useSpan = true;
+                            }
+                            $rowResult .= "<td colspan='$colspan'>".$this->renderCell($conf['value'], $entry, $row).'</td>';
+                            $rest -= $colspan;
+                        }
+        
+                        // Fill remaining cols with nothing
+                        $last = $this->numColumns - $rest;
+                        for ($i = 0; $i < $rest; ++$i) {
+                            $rowResult .= '<td>&nbsp;</td>';
+                        }
+                        $rowResult .= '</tr>';
+        
+                        // Apply label to objecttype icon?
+                        if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
+                            $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                            $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
+                        }
+                        $result .= $rowResult;
+                    }
+                }
+        
+                // Fill with contents, sort as configured
+                $ui = get_userinfo();
+        
+                foreach ($this->entries as $row => $entry) {
+                    $trow = '';
+        
+                    // Render multi select if needed
+                    if ($this->multiSelect) {
+                        $trow .= "    <td>
+                                            <label>
+                                                <input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'>
+                                                <span></span>
+                                            <label>
+                                        </td>";
+                    }
+        
+                    if ($this->singleSelect) {
+                        $trow .= "    <td>
+                                            <label>
+                                                <input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'>
+                                                <span></span>
+                                            </label>
+                                        </td>";
+                    }
+        
+                    $xmlLenprint = count($this->xmlData['table']['column']) - 1;
+                    foreach ($this->xmlData['table']['column'] as $index => $conf) {
+                        $renderedCell = $this->renderCell($conf['value'], $entry, $row);
+                        if ($xmlLenprint == $index) {
+                            $trow .= '<td class="last-column">'.$renderedCell.'</td>';
+                        } else {
+                            $trow .= '<td>'.$renderedCell.'</td>';
+                        }
+        
+                        // Save rendered column
+                        $sort = preg_replace('/.*>([^<]+)<.*$/', '$1', $renderedCell);
+                        $sort = preg_replace('/&nbsp;/', '', $sort);
+                        if (preg_match('/</', $sort)) {
+                            $sort = '';
+                        }
+                        $this->entries[$row]["_sort$index"] = $sort;
+                    }
+        
+                    // Save rendered entry
+                    $this->entries[$row]['_rendered'] = $trow;
+                }
+        
+                // Complete list by sorting entries for _sort$index and appending them to the output
+                $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
+                foreach ($entryIterator as $row => $entry) {
                     // Apply label to objecttype icon?
-                    if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
-                        $objectType = image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
-                        $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
+                    if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
+                        if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
+                            $objectType = image("<div class='entry-locked-td'><i class='material-icons'>".$matches[1]."</i><i class='material-icons'>".$m[1]."</i></div>", null, LDAP::fix(base64_decode($matches[2])));
+                        } else {
+                            $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                        }
+                        $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
+                        $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
                     }
-                    $result .= $rowResult;
-                    ++$alt;
-                }
-
-                $deps = $alt;
-            }
-
-            // Fill with contents, sort as configured
-            $ui = get_userinfo();
-            foreach ($this->entries as $row => $entry) {
-                $trow = '';
-
-                // Render multi select if needed
-                if ($this->multiSelect) {
-                    $trow .= "<td style='text-align:center;width:20px;padding:0;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>\n";
-                }
-
-                if ($this->singleSelect) {
-                    $trow .= "<td style='text-align:center;width:20px;padding:0;' class='list0'><input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'></td>\n";
-                }
-
-                foreach ($this->xmlData['table']['column'] as $index => $conf) {
-                    $renderedCell = $this->renderCell($conf['value'], $entry, $row);
-                    $trow .= '<td '.$this->colprops[$index]." class='list0'>".$renderedCell."</td>\n";
-
-                    // Save rendered column
-                    $sort = preg_replace('/.*>([^<]+)<.*$/', '$1', $renderedCell);
-                    $sort = preg_replace('/&nbsp;/', '', $sort);
-                    if (preg_match('/</', $sort)) {
-                        $sort = '';
-                    }
-                    $this->entries[$row]["_sort$index"] = $sort;
-                }
-
-                // Save rendered entry
-                $this->entries[$row]['_rendered'] = $trow;
-            }
-
-            // Complete list by sorting entries for _sort$index and appending them to the output
-            $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
-            foreach ($entryIterator as $row => $entry) {
-                // Apply label to objecttype icon?
-                if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
-                    if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                        $objectType = image($matches[1].'['.$m[1].']', null, LDAP::fix(base64_decode($matches[2])));
+        
+                    // Apply custom class to row?
+                    if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
+                        $result .= "<tr class='".$matches[1]."'>\n";
+                        $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
                     } else {
-                        $objectType = image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
+                        $result .= '<tr>';
+                        $result .= $entry['_rendered'];
                     }
-                    $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
-                    $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
+        
+                    $result .= '</tr>';
                 }
-
-                // Apply custom class to row?
-                if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
-                    $result .= "<tr class='".$matches[1]."'>\n";
-                    $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
-                } else {
-                    $result .= "<tr>\n";
-                    $result .= $entry['_rendered'];
-                }
-
-                $result .= "</tr>\n";
-                ++$alt;
-            }
-
-            // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
-            $emptyListStyle = (count($this->entries) + (($this->useSpan && count($this->entries)) ? $deps : 0) == 0) ? 'border:0;' : '';
-            if ((count($this->entries) + $deps) < 22) {
-                $result .= '<tr>';
-                for ($i = 0; $i < $this->numColumns; ++$i) {
-                    if ($i == 0) {
-                        $result .= "<td class='list1nohighlight' style='$emptyListStyle height: 100%;'>&nbsp;</td>";
-                        continue;
+        
+                // Close list body
+                $result .= '         </tbody>
+                                </table>
+                            </div>';
+        
+                // Add the footer if requested
+                if ($this->showFooter) {
+                    $result .= '<div class="table-summary">';
+                    foreach ($this->objectTypes as $objectType) {
+                        if (isset($this->objectTypeCount[$objectType['label']])) {
+                            $label = _($objectType['label']);
+                            $result .= image("<i class='material-icons'>".$objectType['image'].'</i>', null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['label']].'&nbsp;&nbsp;';
+                        } elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
+                            $label = _($objectType['label']);
+                            $result .= image("<i class='material-icons'>".$objectType['image'].' </i>', null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['objectClass']].'&nbsp;&nbsp;';
+                        }
                     }
-                    if ($i != $this->numColumns - 1) {
-                        $result .= "<td class='list1nohighlight' style='$emptyListStyle '>&nbsp;</td>";
-                    } else {
-                        $result .= "<td class='list1nohighlight' style='border-right:0;$emptyListStyle'>&nbsp;</td>";
-                    }
+        
+                    $result .= '</div>';
                 }
-
-                $result .= '</tr>';
-            }
-
-            // Close list body
-            $result .= '</tbody></table></div>';
-
-            // Add the footer if requested
-            if ($this->showFooter) {
-                $result .= "<div class='nlistFooter'><div style='padding:3px'>";
-                foreach ($this->objectTypes as $objectType) {
-                    if (isset($this->objectTypeCount[$objectType['label']])) {
-                        $label = _($objectType['label']);
-                        $result .= image($objectType['image'], null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['label']].'&nbsp;&nbsp;';
-                    } elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
-                        $label = _($objectType['label']);
-                        $result .= image($objectType['image'], null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['objectClass']].'&nbsp;&nbsp;';
-                    }
-                }
-
-                $result .= '</div></div>';
-            }
-
-            // Close list
-            $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
-
-            // Add scroll positioner
-            $result .= '<script type="text/javascript" language="javascript">';
-            $result .= '$("t_nscrollbody").scrollTop= '.$this->scrollPosition.';';
-            $result .= 'var box = $("t_nscrollbody").onscroll= function() {$("position_'.$this->pid.'").value= this.scrollTop;}';
-            $result .= '</script>';
+        
+                // Close list
+                $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
+                break;
         }
 
         $smarty = get_smarty();
@@ -739,6 +756,7 @@ class listing
         return $smarty->fetch($file);
     }
 
+    // Pagination function excluded in standard
     public function setPaginator($prow, $page, $selectedPage)
     {
         // skip paginator if only one page is filled
@@ -1204,7 +1222,15 @@ class listing
         foreach ($actions as $action) {
             // Skip the entry completely if there's no permission to execute it
             if (!$this->hasActionPermission($action, $dn, $classes)) {
-                $result .= (check_for_materialize_theme() ? image('') : image('images/empty.png'));
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image('images/empty.png');
+                        break;
+                    
+                    default:
+                        $result .= image('');
+                        break;
+                }
                 continue;
             }
 
@@ -1214,12 +1240,28 @@ class listing
                 if (preg_match('/^(.*)!$/', $fa, $m)) {
                     $fa = $m[1];
                     if (isset($this->entries[$row][$fa]) && $this->entries[$row][$fa][0] == $fv) {
-                        $result .= (check_for_materialize_theme() ? image('') : image('images/empty.png'));
+                        switch ($this->theme) {
+                            case 'classic':
+                                $result .= image('images/empty.png');
+                                break;
+                            
+                            default:
+                                $result .= image('');
+                                break;
+                        }
                         continue;
                     }
                 } else {
                     if (!isset($this->entries[$row][$fa]) && !$this->entries[$row][$fa][0] == $fv) {
-                        $result .= (check_for_materialize_theme() ? image('') : image('images/empty.png'));
+                        switch ($this->theme) {
+                            case 'classic':
+                                $result .= image('images/empty.png');
+                                break;
+                            
+                            default:
+                                $result .= image('');
+                                break;
+                        }
                         continue;
                     }
                 }
@@ -1232,17 +1274,41 @@ class listing
                 if (preg_match('/^!(.*)$/', $objectclass, $m)) {
                     $objectclass = $m[1];
                     if (in_array_strict($objectclass, $classes)) {
-                        $result .= (check_for_materialize_theme() ? image('') : image('images/empty.png'));
+                        switch ($this->theme) {
+                            case 'classic':
+                                $result .= image('images/empty.png');
+                                break;
+                            
+                            default:
+                                $result .= image('');
+                                break;
+                        }
                         continue;
                     }
                 } elseif (is_string($objectclass)) {
                     if (!in_array_strict($objectclass, $classes)) {
-                        $result .= (check_for_materialize_theme() ? image('') : image('images/empty.png'));
+                        switch ($this->theme) {
+                            case 'classic':
+                                $result .= image('images/empty.png');
+                                break;
+                            
+                            default:
+                                $result .= image('');
+                                break;
+                        }
                         continue;
                     }
                 } elseif (is_array($objectclass)) {
                     if (count(array_intersect($objectclass, $classes)) != count($objectclass)) {
-                        $result .= (check_for_materialize_theme() ? image('') : image('images/empty.png'));
+                        switch ($this->theme) {
+                            case 'classic':
+                                $result .= image('images/empty.png');
+                                break;
+                            
+                            default:
+                                $result .= image('');
+                                break;
+                        }
                         continue;
                     }
                 }
@@ -1252,11 +1318,17 @@ class listing
             if ($action['type'] == 'entry') {
                 $label = $this->processElementFilter($action['label'], $this->entries[$row], $row);
                 $image = $this->processElementFilter($action['image'], $this->entries[$row], $row);
-                $result .= (check_for_materialize_theme() ?
-                        "<div class='action-wrapper'>"
-                        .image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label).
-                        "</div>" :
-                        image($image, 'listing_'.$action['name']."_$row", $label));
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image($image, 'listing_'.$action['name']."_$row", $label);
+                        break;
+                    
+                    default:
+                        $result .= "<div class='action-wrapper'>"
+                                        .image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label).
+                                    "</div>";
+                        break;
+                }
             }
 
             // Handle special types
@@ -1354,60 +1426,62 @@ class listing
             $enableHome = false;
         }
 
-        if (check_for_materialize_theme()) {
-            /* Draw root button */
-            if ($enableRoot) {
-                $result['ROOT'] = image("<i class='material-icons input-icons md-24'>first_page</i>", 'ROOT', _('Root'));
-            } else {
-                $result['ROOT'] = image("<i class='material-icons grey-text md-24'>first_page</i>", null, _('Root'));
-            }
+        switch ($this->theme) {
+            case 'classic':
+                /* Draw root button */
+                if ($enableRoot) {
+                    $result['ROOT'] = image('images/lists/root.png', 'ROOT', _('Root'));
+                } else {
+                    $result['ROOT'] = image('images/lists/root-grey.png', null, _('Root'));
+                }
 
-            /* Draw back button */
-            if ($enableBack) {
-                $result['BACK'] = image("<i class='material-icons input-icons md-24'>chevron_left</i>", 'BACK', _('Go to preceding level'));
-            } else {
-                $result['BACK'] = image("<i class='material-icons grey-text md-24'>chevron_left</i>", null, _('Go to preceding level'));
-            }
+                /* Draw back button */
+                if ($enableBack) {
+                    $result['BACK'] = image('images/lists/back.png', 'BACK', _('Go to preceding level'));
+                } else {
+                    $result['BACK'] = image('images/lists/back-grey.png', null, _('Go to preceding level'));
+                }
 
-            /* Draw home button */
-            /* Draw home button */
-            if ($enableHome) {
-                $result['HOME'] = image("<i class='material-icons input-icons md-24'>home</i>", 'HOME', _('Go to current users level'));
-            } else {
-                $result['HOME'] = image("<i class='material-icons grey-text md-24'>home</i>", null, _('Go to current users level'));
-            }
+                /* Draw home button */
+                /* Draw home button */
+                if ($enableHome) {
+                    $result['HOME'] = image('images/lists/home.png', 'HOME', _('Go to current users level'));
+                } else {
+                    $result['HOME'] = image('images/lists/home-grey.png', null, _('Go to current users level'));
+                }
 
-            /* Draw reload button, this button is enabled everytime */
-            $result['RELOAD'] = image("<i class='material-icons'>refresh</i>", 'REFRESH', _('Reload list'));
+                /* Draw reload button, this button is enabled everytime */
+                $result['RELOAD'] = image('images/lists/reload.png', 'REFRESH', _('Reload list'));
 
-            return $result;
-        } else {
-            /* Draw root button */
-            if ($enableRoot) {
-                $result['ROOT'] = image('images/lists/root.png', 'ROOT', _('Root'));
-            } else {
-                $result['ROOT'] = image('images/lists/root-grey.png', null, _('Root'));
-            }
+                return $result;
+            
+            default:
+                /* Draw root button */
+                if ($enableRoot) {
+                    $result['ROOT'] = image("<i class='material-icons input-icons md-24'>first_page</i>", 'ROOT', _('Root'));
+                } else {
+                    $result['ROOT'] = image("<i class='material-icons grey-text md-24'>first_page</i>", null, _('Root'));
+                }
 
-            /* Draw back button */
-            if ($enableBack) {
-                $result['BACK'] = image('images/lists/back.png', 'BACK', _('Go to preceding level'));
-            } else {
-                $result['BACK'] = image('images/lists/back-grey.png', null, _('Go to preceding level'));
-            }
+                /* Draw back button */
+                if ($enableBack) {
+                    $result['BACK'] = image("<i class='material-icons input-icons md-24'>chevron_left</i>", 'BACK', _('Go to preceding level'));
+                } else {
+                    $result['BACK'] = image("<i class='material-icons grey-text md-24'>chevron_left</i>", null, _('Go to preceding level'));
+                }
 
-            /* Draw home button */
-            /* Draw home button */
-            if ($enableHome) {
-                $result['HOME'] = image('images/lists/home.png', 'HOME', _('Go to current users level'));
-            } else {
-                $result['HOME'] = image('images/lists/home-grey.png', null, _('Go to current users level'));
-            }
+                /* Draw home button */
+                /* Draw home button */
+                if ($enableHome) {
+                    $result['HOME'] = image("<i class='material-icons input-icons md-24'>home</i>", 'HOME', _('Go to current users level'));
+                } else {
+                    $result['HOME'] = image("<i class='material-icons grey-text md-24'>home</i>", null, _('Go to current users level'));
+                }
 
-            /* Draw reload button, this button is enabled everytime */
-            $result['RELOAD'] = image('images/lists/reload.png', 'REFRESH', _('Reload list'));
+                /* Draw reload button, this button is enabled everytime */
+                $result['RELOAD'] = image("<i class='material-icons input-icons'>refresh</i>", 'REFRESH', _('Reload list'));
 
-            return $result;
+                return $result;
         }
     }
 
@@ -1497,61 +1571,69 @@ class listing
     {
         static $level = 1;
 
-        if (check_for_materialize_theme()) {
-            $result = "  <input type='hidden' name='act' id='act' value=''>
-                    <div style='display:none'>
-                        <input type='submit' name='exec_act' id='exec_act' value=''>
-                    </div>";
+        switch ($this->theme) {
+            case 'classic':
+                $result = "<input type='hidden' name='act' id='act' value=''><div style='display:none'><input type='submit' name='exec_act' id='exec_act' value=''></div>";
 
-            // Don't send anything if the menu is not defined
-            if (!isset($this->xmlData['actionmenu']['action'])) {
+                // Don't send anything if the menu is not defined
+                if (!isset($this->xmlData['actionmenu']['action'])) {
+                    return $result;
+                }
+
+                // Array?
+                if (isset($this->xmlData['actionmenu']['action']['type'])) {
+                    $this->xmlData['actionmenu']['action'] = [$this->xmlData['actionmenu']['action']];
+                }
+
+                // Load shortcut
+                $actions = &$this->xmlData['actionmenu']['action'];
+                $result .= "<ul class='level1' id='root'><li><a href='#'>"._('Actions').'&nbsp;'.image('images/lists/sort-down.png').'</a>';
+
+                // Build ul/li list
+                $result .= $this->recurseActions($actions, $level);
+
+                return "<div id='pulldown'>".$result.'</li></ul></div>';
+            
+            default:
+                $result = " <input type='hidden' name='act' id='act' value=''>
+                            <div style='display:none'>
+                                <input type='submit' name='exec_act' id='exec_act' value=''>
+                            </div>";
+
+                // Don't send anything if the menu is not defined
+                if (!isset($this->xmlData['actionmenu']['action'])) {
+                    return $result;
+                }
+
+                // Array?
+                if (isset($this->xmlData['actionmenu']['action']['type'])) {
+                    $this->xmlData['actionmenu']['action'] = [$this->xmlData['actionmenu']['action']];
+                }
+
+                // Load shortcut
+                $actions = &$this->xmlData['actionmenu']['action'];
+
+                $result .= "  <a class='dropdown-menu btn gonicus-color' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
+                            <ul class='dropdown-content' id='$level'>";
+
+                $result .= $this->recurseActions($actions, $level).'</ul></>';
+
                 return $result;
-            }
-
-            // Array?
-            if (isset($this->xmlData['actionmenu']['action']['type'])) {
-                $this->xmlData['actionmenu']['action'] = [$this->xmlData['actionmenu']['action']];
-            }
-
-            // Load shortcut
-            $actions = &$this->xmlData['actionmenu']['action'];
-
-            $result .= "  <a class='dropdown-menu btn gonicus-color' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
-                        <ul class='dropdown-content' id='$level'>";
-
-            $result .= $this->recurseActions($actions, $level).'</ul></>';
-
-            return $result;
-        } else {
-            $result = "<input type='hidden' name='act' id='act' value=''><div style='display:none'><input type='submit' name='exec_act' id='exec_act' value=''></div>";
-
-            // Don't send anything if the menu is not defined
-            if (!isset($this->xmlData['actionmenu']['action'])) {
-                return $result;
-            }
-
-            // Array?
-            if (isset($this->xmlData['actionmenu']['action']['type'])) {
-                $this->xmlData['actionmenu']['action'] = [$this->xmlData['actionmenu']['action']];
-            }
-
-            // Load shortcut
-            $actions = &$this->xmlData['actionmenu']['action'];
-            $result .= "<ul class='level1' id='root'><li><a href='#'>"._('Actions').'&nbsp;'.image('images/lists/sort-down.png').'</a>';
-
-            // Build ul/li list
-            $result .= $this->recurseActions($actions, $level);
-
-            return "<div id='pulldown'>".$result.'</li></ul></div>';
         }
     }
 
     public function recurseActions($actions, $level)
     {
-        if (!check_for_materialize_theme()) {
-            static $level = 2;
-            $result = "<ul class='level$level'>";
+        switch ($this->theme) {
+            case 'classic':
+                static $level = 2;
+                $result = "<ul class='level$level'>";
+                break;
+            
+            default:
+                break;
         }
+            
         $separator = '';
 
         foreach ($actions as $action) {
@@ -1574,33 +1656,36 @@ class listing
             $img = '';
 
             if (isset($action['image'])) {
-                $img = (check_for_materialize_theme() ?
-                    "<i class='material-icons'>".$action['image'].'</i>' :
-                    image($action['image']).'&nbsp;');
+                switch ($this->theme) {
+                    case 'classic':
+                        $img = image($action['image']).'&nbsp;';
+                        break;
+                    
+                    default:
+                        $img = image("<i class='material-icons'>".$action['image']."</i>");
+                        break;
+                }
             }
 
             if ($action['type'] == 'separator') {
-                $separator = (check_for_materialize_theme() ?
-                            "class='divider' tabiindex='-1'" :
-                            "style='border-top:1px solid #AAA'");
+                switch ($this->theme) {
+                    case 'classic':
+                        $separator = "style='border-top:1px solid #AAA'";
+                        break;
+                    
+                    default:
+                        $separator = "class='divider' tabiindex='-1'";
+                        break;
+                }
             }
 
-            if (check_for_materialize_theme()) {
-                // count entries
-                $count = $this->countValidEntries($action);
-
-                // Dive into subs
-                if ($action['type'] == 'sub' && isset($action['action'])) {
-                    if ($count > 0) {
+            switch ($this->theme) {
+                case 'classic':
+                    // Dive into subs
+                    if ($action['type'] == 'sub' && isset($action['action'])) {
                         ++$level;
-
-                        $result .= "<li class='pointer_off'>
-                                    <ul class='collection with-header'>";
-
                         if (isset($action['label'])) {
-                            $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
-                        } else {
-                            $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
+                            $result .= "<li$separator><a href='#'>$img"._($action['label']).'&nbsp;'.image('images/forward-arrow.png').'</a>';
                         }
 
                         // Ensure we've an array of actions, this enables sub menus with only one action.
@@ -1608,100 +1693,113 @@ class listing
                             $action['action'] = [$action['action']];
                         }
 
-                        $result .= $this->recurseActions($action['action'], $level).'</ul>';
-
+                        $result .= $this->recurseActions($action['action'], $level).'</li>';
                         --$level;
                         $separator = '';
+                        continue;
                     }
-                    continue;
-                }
 
-                if (isset($action['label'])) {
-                    if ($level < 1) {
-                        $result .= "<ul class='collection' onClick='\$(\"act\").value= '".$action['name']."';\$(\"exec_act\").click();'>
-                                        <li class='collection-item'>
+                    // Render entry elseways
+                    if (isset($action['label'])) {
+                        $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>$img"._($action['label']).'</a></li>';
+                    }
+
+                    // Check for special types
+                    switch ($action['type']) {
+                    case 'copypaste':
+                        $cut = !isset($action['cut']) || $action['cut'] != 'false';
+                        $copy = !isset($action['copy']) || $action['copy'] != 'false';
+                        $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
+                        break;
+
+                    case 'snapshot':
+                        $result .= $this->renderSnapshotMenu($separator);
+                        break;
+
+                    case 'exporter':
+                        $result .= $this->renderExporterMenu($separator);
+                        break;
+
+                    case 'daemon':
+                        $result .= $this->renderDaemonMenu($separator);
+                        break;
+                    }
+
+                    $separator = '';
+                    break;
+                
+                default:
+                    // count entries
+                    $count = $this->countValidEntries($action);
+
+                    // Dive into subs
+                    if ($action['type'] == 'sub' && isset($action['action'])) {
+                        if ($count > 0) {
+                            ++$level;
+
+                            $result .= "<li class='pointer_off'>
+                                        <ul class='collection with-header'>";
+
+                            if (isset($action['label'])) {
+                                $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
+                            } else {
+                                $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
+                            }
+
+                            // Ensure we've an array of actions, this enables sub menus with only one action.
+                            if (isset($action['action']['type'])) {
+                                $action['action'] = [$action['action']];
+                            }
+
+                            $result .= $this->recurseActions($action['action'], $level).'</ul>';
+
+                            --$level;
+                            $separator = '';
+                        }
+                        continue;
+                    }
+
+                    if (isset($action['label'])) {
+                        if ($level < 1) {
+                            $result .= "<ul class='collection' onClick='\$(\"act\").value= '".$action['name']."';\$(\"exec_act\").click();'>
+                                            <li class='collection-item'>
+                                                <a href='#'>
+                                                    $img&nbsp;
+                                                    "._($action['label']).'
+                                                </a>
+                                            </li>
+                                        </ul>';
+                        } else {
+                            $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>
                                             <a href='#'>
-                                                $img&nbsp;
+                                                $img
                                                 "._($action['label']).'
                                             </a>
-                                        </li>
-                                    </ul>';
-                    } else {
-                        $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>
-                                        <a href='#'>
-                                            $img
-                                            "._($action['label']).'
-                                        </a>
-                                    </li>';
-                    }
-                }
-
-                // Check for special types
-                switch ($action['type']) {
-                case 'copypaste':
-                    $cut = !isset($action['cut']) || $action['cut'] != 'false';
-                    $copy = !isset($action['copy']) || $action['copy'] != 'false';
-                    $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
-                    break;
-
-                case 'snapshot':
-                    $result .= $this->renderSnapshotMenu($separator);
-                    break;
-
-                case 'exporter':
-                    $result .= $this->renderExporterMenu($separator);
-                    break;
-
-                case 'daemon':
-                    $result .= $this->renderDaemonMenu($separator);
-                    break;
-            }
-            } else {
-                // Dive into subs
-                if ($action['type'] == 'sub' && isset($action['action'])) {
-                    ++$level;
-                    if (isset($action['label'])) {
-                        $result .= "<li$separator><a href='#'>$img"._($action['label']).'&nbsp;'.image('images/forward-arrow.png').'</a>';
+                                        </li>';
+                        }
                     }
 
-                    // Ensure we've an array of actions, this enables sub menus with only one action.
-                    if (isset($action['action']['type'])) {
-                        $action['action'] = [$action['action']];
+                    // Check for special types
+                    switch ($action['type']) {
+                    case 'copypaste':
+                        $cut = !isset($action['cut']) || $action['cut'] != 'false';
+                        $copy = !isset($action['copy']) || $action['copy'] != 'false';
+                        $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
+                        break;
+
+                    case 'snapshot':
+                        $result .= $this->renderSnapshotMenu($separator);
+                        break;
+
+                    case 'exporter':
+                        $result .= $this->renderExporterMenu($separator);
+                        break;
+
+                    case 'daemon':
+                        $result .= $this->renderDaemonMenu($separator);
+                        break;
                     }
-
-                    $result .= $this->recurseActions($action['action'], $level).'</li>';
-                    --$level;
-                    $separator = '';
-                    continue;
-                }
-
-                // Render entry elseways
-                if (isset($action['label'])) {
-                    $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>$img"._($action['label']).'</a></li>';
-                }
-
-                // Check for special types
-                switch ($action['type']) {
-                case 'copypaste':
-                    $cut = !isset($action['cut']) || $action['cut'] != 'false';
-                    $copy = !isset($action['copy']) || $action['copy'] != 'false';
-                    $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
                     break;
-
-                case 'snapshot':
-                    $result .= $this->renderSnapshotMenu($separator);
-                    break;
-
-                case 'exporter':
-                    $result .= $this->renderExporterMenu($separator);
-                    break;
-
-                case 'daemon':
-                    $result .= $this->renderDaemonMenu($separator);
-                    break;
-            }
-
-                $separator = '';
             }
         }
 
@@ -1936,26 +2034,50 @@ class listing
         // Render cut entries
         if ($cut) {
             if ($ui->is_cutable($dn, $category, $class)) {
-                $result .= (check_for_materialize_theme() ?
-                        image("<i class='material-icons>content_cut</i>'", "listing_cut_$row", _('Cut this entry')) :
-                        image('images/lists/cut.png', "listing_cut_$row", _('Cut this entry')));
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image('images/lists/cut.png', "listing_cut_$row", _('Cut this entry'));
+                        break;
+                    
+                    default:
+                        $result .= image("<i class='material-icons>content_cut</i>'", "listing_cut_$row", _('Cut this entry'));
+                        break;
+                }
             } else {
-                $result .= (check_for_materialize_theme() ?
-                        image('', "listing_cut_$row", _('Cut this entry')) :
-                        image('images/empty.png', "listing_cut_$row", _('Cut this entry')));
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image('images/empty.png', "listing_cut_$row", _('Cut this entry'));
+                        break;
+                    
+                    default:
+                        $result .= image('', "listing_cut_$row", _('Cut this entry'));
+                        break;
+                }
             }
         }
 
         // Render copy entries
         if ($copy) {
             if ($ui->is_copyable($dn, $category, $class)) {
-                $result .= (check_for_materialize_theme() ?
-                        image("<i class='material-icons>content_copy</i>", "listing_copy_$row", _('Copy this entry')) :
-                        image('images/lists/copy.png', "listing_copy_$row", _('Copy this entry')));
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image('images/lists/copy.png', "listing_copy_$row", _('Copy this entry'));
+                        break;
+                    
+                    default:
+                        $result .= image("<i class='material-icons>content_copy</i>", "listing_copy_$row", _('Copy this entry'));
+                        break;
+                }
             } else {
-                $result .= (check_for_materialize_theme() ?
-                        image('') :
-                        image('images/empty.png'));
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image('images/empty.png');
+                        break;
+                    
+                    default:
+                        $result .= image('');
+                        break;
+                }
             }
         }
 
@@ -1994,43 +2116,46 @@ class listing
 
     public function renderExporterMenu($separator)
     {
-        if (check_for_materialize_theme()) {
-            // Presets
-            $result = '';
-            // Draw entries
-            $result.="    <li class='pointer_off'>
-                            <ul class='collection with-header'>
-                                <li class='collection-header pointer_off'><h3>"._("Export list")."</h3></li>";
+        switch ($this->theme) {
+            case 'classic':
+                // Presets
+                $result = '';
 
-            // Export CVS as build in exporter
-            foreach ($this->exporter as $action => $exporter) {
-                $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>
-                                <a href='#'>
-                                    <i class='material-icons'>".$exporter['image'].'</i>
-                                    '.$exporter['label'].'
-                                </a>
-                            </li>';
-            }
+                // Draw entries
+                $result .= "<li$separator><a href='#'>".image('images/lists/export.png').'&nbsp;'._('Export list').'&nbsp;'.image('images/forward-arrow.png')."</a><ul class='level3'>";
 
-            // Finalize list
-            $result .= '</ul>
-                    </li>';
-        } else {
-            // Presets
-            $result = '';
+                // Export CVS as build in exporter
+                foreach ($this->exporter as $action => $exporter) {
+                    $result .= "<li><a href='#' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>".image($exporter['image']).'&nbsp;'.$exporter['label'].'</a></li>';
+                }
 
-            // Draw entries
-            $result .= "<li$separator><a href='#'>".image('images/lists/export.png').'&nbsp;'._('Export list').'&nbsp;'.image('images/forward-arrow.png')."</a><ul class='level3'>";
+                // Finalize list
+                $result .= '</ul></li>';
+                break;
+            
+            default:
+                // Presets
+                $result = '';
+                // Draw entries
+                $result.="    <li class='pointer_off'>
+                                <ul class='collection with-header'>
+                                    <li class='collection-header pointer_off'><h3>"._("Export list")."</h3></li>";
 
-            // Export CVS as build in exporter
-            foreach ($this->exporter as $action => $exporter) {
-                $result .= "<li><a href='#' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>".image($exporter['image']).'&nbsp;'.$exporter['label'].'</a></li>';
-            }
+                // Export CVS as build in exporter
+                foreach ($this->exporter as $action => $exporter) {
+                    $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>
+                                    <a href='#'>
+                                        <i class='material-icons'>".$exporter['image'].'</i>
+                                        '.$exporter['label'].'
+                                    </a>
+                                </li>';
+                }
 
-            // Finalize list
-            $result .= '</ul></li>';
+                // Finalize list
+                $result .= "</ul>
+                        </li>";
+                break;
         }
-
         return $result;
     }
 
@@ -2052,9 +2177,15 @@ class listing
             if ($ui->allow_snapshot_restore($dn, $category)) {
                 // Do we have snapshots for this dn?
                 if ($this->snapshotHandler->hasSnapshots($dn)) {
-                    $result .= check_for_materialize_theme() ?
-                    image("<i class='material-icons'>restore</i>", "listing_restore_$row", _('Restore snapshot')) :
-                    image('images/lists/restore.png', "listing_restore_$row", _('Restore snapshot'));
+                    switch ($this->theme) {
+                        case 'classic':
+                            $result .= image('images/lists/restore.png', "listing_restore_$row", _('Restore snapshot'));
+                            break;
+                        
+                        default:
+                            $result .= image("<i class='material-icons'>restore</i>", "listing_restore_$row", _('Restore snapshot'));
+                            break;
+                    }
                 } else {
                     $result .= image("<i class='material-icons'>restore</i>");
                 }
@@ -2062,13 +2193,25 @@ class listing
 
             // Draw snapshot button
             if ($ui->allow_snapshot_create($dn, $category)) {
-                $result .= check_for_materialize_theme() ?
-                image("<i class='material-icons'>save</i>", "listing_snapshot_$row", _('Create new snapshot for this object')) :
-                image('images/snapshot.png', "listing_snapshot_$row", _('Create new snapshot for this object'));
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image('images/snapshot.png', "listing_snapshot_$row", _('Create new snapshot for this object'));
+                        break;
+                    
+                    default:
+                        $result .= image("<i class='material-icons'>save</i>", "listing_snapshot_$row", _('Create new snapshot for this object'));
+                        break;
+                }
             } else {
-                $result .= check_for_materialize_theme() ?
-                        image("<i class='material-icons'>save</i>") :
-                        image('images/empty.png');
+                switch ($this->theme) {
+                    case 'classic':
+                        $result .= image('images/empty.png');
+                        break;
+                    
+                    default:
+                        $result .= image("<i class='material-icons'>save</i>");
+                        break;
+                }
             }
         }
 
