@@ -1,3 +1,4 @@
+@import url("setup.css");
 @import url("main.css");
 @import url("input-field.css");
 @import url("login.css");
@@ -19,4 +20,3 @@
 @import url("addons.css");
 @import url("filter.css");
 @import url("template.css");
-@import url("setup.css");

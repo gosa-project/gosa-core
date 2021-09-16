@@ -578,7 +578,7 @@ class listing
                 // No results? Just take an empty colspanned row
                 if (count($this->entries) + count($this->departments) == 0) {
                     $result .= "  <tr>
-                                    <td colspan='$this->numColumns'></td>
+                                    <td colspan='".$this->numColumns."'></td>
                                 </tr>";
                 }
         
@@ -635,7 +635,7 @@ class listing
                                             <label>
                                                 <input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'>
                                                 <span></span>
-                                            <label>
+                                            </label>
                                         </td>";
                     }
         
