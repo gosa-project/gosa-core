@@ -139,37 +139,197 @@ class aclResolver
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
             $ui = get_userinfo();
+            $theme = getThemeName();
 
-            if (check_for_materialize_theme()) {
-                $autocompleter =    "<div class='acl-name'>
-                                        <div class='search-field input-field'>
-                                            <input id='aclTarget' name='aclTarget' type='text' value='' onChange=\"\$('aclTargetSubmit').focus();\">
-                                            <label for='aclTarget'>"._("Enter another user name")."...</label>
-                                        </div>
-                                        <div class='submit'>
-                                            ".image("<i class='material-icons input-icons'>keyboard_return</i>", "aclTargetSubmit")."
-                                        </div>
-                                    </div>
-                                    <div id='autocomplete' class='autocomplete'></div>
-                                    <script type='text/javascript'>
-                                        new Ajax.Autocompleter(
+            switch ($theme) {
+                case 'classic':
+                    // Autocompleter template
+                    $autocompleter = "  <input class='filter_textfield' placeholder='"._("Enter another user name")."...'
+                                            id='aclTarget' name='aclTarget' type='text' value=''
+                                            onChange=\"\$('aclTargetSubmit').focus();\">
+                                        <div id='autocomplete' class='autocomplete'></div>
+                                        <script type='text/javascript'>
+                                            new Ajax.Autocompleter(
                                                 'aclTarget',
                                                 'autocomplete',
                                                 'autocomplete.php',
                                                 { minChars: 3, frequency: 0.5 });
-                                    </script>";
+                                        </script>
+                                        ".image("images/lists/submit.png", "aclTargetSubmit");
 
-                $user = "<h2>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h2>";
+                    // Base template - each entry start with this
+                    $tpl =
+                    "\n <tr class='acl-viewer-head %s'>".
+                    "\n  <td style='width:20px'>%s</td>".
+                    "\n  <td colspan=2><b>%s</b><div class='right'>%s</div></td>".
+                    "\n </tr>".
+                    "\n %s";
 
-                $str = "<div class='acl-reference'>";
+                    // If the acl consists of a user-object-filter then this template is used.
+                    $filter_tpl =
+                    "\n <tr class='%s'>".
+                    "\n  <td></td>".
+                    "\n  <td><b>"._("Filter")."</b></td>".
+                    "\n  <td><ul class='acl-viewer-items'><li>%s</li></ul></td>".
+                    "\n </tr>";
 
-                $str.= "<div class='acl-reference-header'>
-                            ".$user."
-                            ".$autocompleter."
-                        </div>";
+                    // Used to display ACL owner of type "group"
+                    $gmem_tpl =
+                    "\n <tr class='%s'>".
+                    "\n  <td></td>".
+                    "\n  <td><b>"._("Groups")."</b></td>".
+                    "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
+                    "\n </tr>";
+
+                    // Used to display ACL owner of type "user"
+                    $umem_tpl =
+                    "\n <tr class='%s'>".
+                    "\n  <td></td>".
+                    "\n  <td><b>"._("Users")."</b></td>".
+                    "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
+                    "\n </tr>";
+
+                    // Used to display the acl contents, except 'reset' and 'role'
+                    $acl_tpl =
+                    "\n <tr class='%s'>".
+                    "\n  <td></td>".
+                    "\n  <td><b>"._("ACLs")."</b></td>".
+                    "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
+                    "\n </tr>";
+
+                    $user = "<h3>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h3>";
+                    $str  = "<table summary='"._("Object permissions")."'>";
+                    $str .= " <tr><td>".$user."</td><td>".$autocompleter."</td></tr>";
+                    $str .= "</table>";
+                    $str .= "<div class='acl-viewer-container'>";
+                    $str .= "<table summary='"._("Object permissions")."' cellpadding='0' cellspacing='0' class='acl-viewer'>";
+
+                    foreach ($this->affectingACLs as $dn => $acls) {
+                        foreach ($acls as $acl) {
+
+                            // Prepare entry icon (department or element?)
+                            $image = (isset($this->config->idepartments[$dn])) ? "images/select_department.png":"images/lists/element.png";
+
+                            // The acl type (sub,psub,reset...)
+                            $aclType = $this->aclTypes[$acl['type']];
+
+                            // Does the filter match for current object?
+                            $filter ="";
+                            $match = true;
+                            if (!empty($acl['filter'])) {
+                                $match = $ldap->object_match_filter($this->dn, $acl['filter']);
+                                $filter= $acl['filter'];
+                                if (!$match) {
+                                    $filter= "<span>".$filter."</span>";
+                                }
+                            }
+
+                            // Check membership
+                            $gmem = $umem = "";
+                            $users = $groups = array();
+                            $found = false;
+                            foreach ($acl['members'] as $type => $name) {
+
+                            // Check if we're part of the members
+                                if (preg_match("/^U:/", $type)) {
+                                    if (preg_match("/^U:".preg_quote($this->validateDn, '/')."/", $type)) {
+                                        $users[] = $name;
+                                        $found = true;
+                                        continue;
+                                    }
+                                    $users[] = "<span>".$name."</span>";
+                                }
+
+                                // Check if we're part of the group members
+                                if (preg_match("/^G/", $type)) {
+                                    if ($type == "G:*") {
+                                        $found = true;
+                                        $groups[] = $name;
+                                        continue;
+                                    }
+                                    if (preg_match("/^G:/", $type)) {
+                                        $gdn = preg_replace("/^G:/", "", $type);
+                                        $ldap->cat($gdn, array('memberUid'));
+                                        if ($ldap->count()) {
+                                            $attrs = $ldap->fetch();
+                                            if (isset($attrs['memberUid']) && in_array_strict($this->validateUid, $attrs['memberUid'])) {
+                                                $found = true;
+                                                $groups[] = $name;
+                                                continue;
+                                            }
+                                        }
+                                    }
+
+                                    // Mark groups that doesn't match
+                                    $groups[] = "<span>".$name."</span>";
+                                }
+                            }
+
+                            // Build up ACL definition list
+                            $defs ="";
+                            if ($acl['type']!='reset') {
+                                foreach ($acl['acl'] as $type => $acl) {
+                                    if (isset($this->classMapping[$type])) {
+                                        $defs .= "<li>".$this->classMapping[$type].": ".$this->aclToString($acl)."</li>";
+                                    } else {
+                                        $defs .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
+                                    }
+                                }
+                            }
+
+                            // Display the acl block in a special color if its not matching
+                            $class="";
+                            if (!$found || !$match) {
+                                $class = "acl-viewer-blocked";
+                            }
+                            if (!empty($filter)) {
+                                $filter =sprintf($filter_tpl, $class, $filter);
+                            }
+                            if (!empty($defs)) {
+                                $defs = sprintf($acl_tpl, $class, $defs);
+                            }
+                            if (count($users)) {
+                                $umem = sprintf($umem_tpl, $class, "<li>".implode('</li><li>', $users)."</li>");
+                            }
+                            if (count($groups)) {
+                                $gmem = sprintf($gmem_tpl, $class, "<li>".implode('</li><li>', $groups)."</li>");
+                            }
+                            $str.= sprintf($tpl, $class, image($image), $dn, $aclType, $filter.$gmem.$umem.$defs);
+                        }
+                    }
+                    $str .= "</table><div>";
+                    break;
+                
+                default:
+                    $autocompleter = "  <div class='acl-name'>
+                                            <div class='search-field input-field'>
+                                                <input id='aclTarget' name='aclTarget' type='text' value='' onChange=\"\$('aclTargetSubmit').focus();\">
+                                                <label for='aclTarget'>"._("Enter another user name")."...</label>
+                                            </div>
+                                            <div class='submit'>
+                                                ".image("<i class='material-icons input-icons'>keyboard_return</i>", "aclTargetSubmit")."
+                                            </div>
+                                        </div>
+                                        <div id='autocomplete' class='autocomplete'></div>
+                                        <script type='text/javascript'>
+                                            new Ajax.Autocompleter(
+                                                    'aclTarget',
+                                                    'autocomplete',
+                                                    'autocomplete.php',
+                                                    { minChars: 3, frequency: 0.5 });
+                                        </script>";
+
+                    $user = "<h2>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h2>";
+
+                    $str = "<div class='acl-reference'>";
+
+                    $str.= "<div class='acl-reference-header'>
+                                ".$user."
+                                ".$autocompleter."
+                            </div>";
 
 
-                foreach ($this->affectingACLs as $dn => $acls) {
+                    foreach ($this->affectingACLs as $dn => $acls) {
 
                     // Prepare entry icon (department or element?)
                     $image = (isset($this->config->idepartments[$dn])) ? "<i class='material-icons'>domain</i>" : "<i class='material-icons'>web_asset</i>";
@@ -183,325 +343,169 @@ class aclResolver
                                     <div class='collapsible-body'>
                                         <ul class='collapsible'>";
 
-                    foreach ($acls as $acl) {
-                        // The acl type (sub,psub,reset...)
-                        $aclType = $this->aclTypes[$acl['type']];
+                        foreach ($acls as $acl) {
+                            // The acl type (sub,psub,reset...)
+                            $aclType = $this->aclTypes[$acl['type']];
 
-                        // Does the filter match for current object?
-                        $filter ="";
-                        $match = true;
-                        if (!empty($acl['filter'])) {
-                            $match = $ldap->object_match_filter($this->dn, $acl['filter']);
-                            $filter= $acl['filter'];
-                            if (!$match) {
-                                $filter= "<span>".$filter."</span>";
-                            }
-                        }
-
-                        // Check membership
-                        $gmem = $umem = "";
-                        $users = $groups = array();
-                        $found = false;
-                        foreach ($acl['members'] as $type => $name) {
-
-                            // Check if we're part of the members
-                            if (preg_match("/^U:/", $type)) {
-                                if (preg_match("/^U:".preg_quote($this->validateDn, '/')."/", $type)) {
-                                    $users[] = $name;
-                                    $found = true;
-                                    continue;
+                            // Does the filter match for current object?
+                            $filter ="";
+                            $match = true;
+                            if (!empty($acl['filter'])) {
+                                $match = $ldap->object_match_filter($this->dn, $acl['filter']);
+                                $filter= $acl['filter'];
+                                if (!$match) {
+                                    $filter= "<span>".$filter."</span>";
                                 }
-                                $users[] = "<span>".$name."</span>";
                             }
 
-                            // Check if we're part of the group members
-                            if (preg_match("/^G/", $type)) {
-                                if ($type == "G:*") {
-                                    $found = true;
-                                    $groups[] = $name;
-                                    continue;
+                            // Check membership
+                            $gmem = $umem = "";
+                            $users = $groups = array();
+                            $found = false;
+                            foreach ($acl['members'] as $type => $name) {
+
+                                // Check if we're part of the members
+                                if (preg_match("/^U:/", $type)) {
+                                    if (preg_match("/^U:".preg_quote($this->validateDn, '/')."/", $type)) {
+                                        $users[] = $name;
+                                        $found = true;
+                                        continue;
+                                    }
+                                    $users[] = "<span>".$name."</span>";
                                 }
-                                if (preg_match("/^G:/", $type)) {
-                                    $gdn = preg_replace("/^G:/", "", $type);
-                                    $ldap->cat($gdn, array('memberUid'));
-                                    if ($ldap->count()) {
-                                        $attrs = $ldap->fetch();
-                                        if (isset($attrs['memberUid']) && in_array_strict($this->validateUid, $attrs['memberUid'])) {
-                                            $found = true;
-                                            $groups[] = $name;
-                                            continue;
+
+                                // Check if we're part of the group members
+                                if (preg_match("/^G/", $type)) {
+                                    if ($type == "G:*") {
+                                        $found = true;
+                                        $groups[] = $name;
+                                        continue;
+                                    }
+                                    if (preg_match("/^G:/", $type)) {
+                                        $gdn = preg_replace("/^G:/", "", $type);
+                                        $ldap->cat($gdn, array('memberUid'));
+                                        if ($ldap->count()) {
+                                            $attrs = $ldap->fetch();
+                                            if (isset($attrs['memberUid']) && in_array_strict($this->validateUid, $attrs['memberUid'])) {
+                                                $found = true;
+                                                $groups[] = $name;
+                                                continue;
+                                            }
                                         }
                                     }
+
+                                    // Mark groups that doesn't match
+                                    $groups[] = "<span>".$name."</span>";
                                 }
-
-                                // Mark groups that doesn't match
-                                $groups[] = "<span>".$name."</span>";
                             }
-                        }
 
-                        // Build up ACL definition list
-                        $defs ="";
-                        if ($acl['type']!='reset') {
-                            if (!empty($filter)) {
-                                $innerColSize = "s12 xl6";
-                                $colsPerRow = 2;
-                            } else {
-                                if (screen.width < 1200)  {
-                                    $innerColSize = "s6 xl3";
+                            // Build up ACL definition list
+                            $defs ="";
+                            if ($acl['type']!='reset') {
+                                if (!empty($filter)) {
+                                    $innerColSize = "s12 xl6";
                                     $colsPerRow = 2;
                                 } else {
-                                    $innerColSize = "s6 xl3";
-                                    $colsPerRow = 4;
-                                }
-                            }
-
-                            $col = 0;
-                            $maxCount = count($acl['acl']);
-                            foreach ($acl['acl'] as $type => $acl) {
-                                // Add a seperating row
-                                if (($col % $colsPerRow) == 0) {
-                                    $defs .= "<div class='row'>";
-                                }
-
-                                if (isset($this->classMapping[$type])) {
-                                    $defs .= "  <div class='col ".$innerColSize."'>
-                                                    <div class='card'>
-                                                        <div class='card-content'>
-                                                            <p class='collection-item headline'>".$this->classMapping[$type].":</p>
-                                                            <hr class='divider'>".$this->aclToString($acl)."
-                                                        </div>
-                                                    </div>
-                                                </div>";
-                                } else {
-                                    $defs .= "  <div class='col ".$innerColSize."'>
-                                                    <div class='card'>
-                                                        <div class='card-content'>
-                                                            <p class='collection-item headline'>".$type.":</p>
-                                                            <hr class='divider'>".$this->aclToString($acl)."
-                                                        </div>
-                                                    </div>
-                                                </div>";
-                                }
-                                ++$col;
-
-                                if (($col % $colsPerRow) == 0 && $col != 0) {
-                                    $defs .= "</div>";
-                                }
-                            }
-                        }
-
-                        $str.= "<li>
-                                    <div class='collapsible-header'>";
-                                        if (!empty($users)) {
-                                            $str.= "<h4>".implode(' - ', $users)."</h4>";
-                                        }
-
-                                        if (!empty($groups) && empty($users)) {
-                                            $str.= "<h4>".implode(' - ', $groups)."</h4>";
-                                        }else if (!empty($groups) && !empty($users)) {
-                                            $str.= "<p>".implode(' - ', $groups)."</p>";
-                                        }
-
-                                        if (!empty($aclType) && empty($users) && empty($groups)) {
-                                            $str.= "<p></p>";
-                                            $str.= "<p>".$aclType."</p>";
-                                        } else if (!empty($aclType)) {
-                                            $str.= "<p>".$aclType."</p>";
-                                        }
-                        $str.= "    </div>
-                                    <div class='collapsible-body'>";
-
-                        // Display the acl block in a special color if its not matching
-                        $class="";
-                        if (!$found || !$match) {
-                            $class = "acl-viewer-blocked";
-                        }
-
-                        if (!empty($filter) && !empty($defs)) {
-                            $colSize = "s6";
-                        } else {
-                            $colSize = "s12";
-                        }
-
-                        $str.= "<div class='row'>";
-
-                        if (!empty($defs)) {
-                            $str.= "<div class='col ".$colSize."'>
-                                        <h5>"._("ACLs")."</h5>
-                                        ".$defs."
-                                    </div>";
-                        }
-
-                        if (!empty($filter)) {
-                            $str.= "<div class='col ".$colSize."'>
-                                        <h5>"._("Filter")."</h5>
-                                        ".$filter."
-                                    </div>";
-                        }
-
-                        $str.= "</div>";
-                        $str.= "</div></li>";
-                    }
-                    $str.= "</ul></div></li></ul>";
-                }
-                $str.= "</div>";
-            } else {
-                // Autocompleter template
-                $autocompleter ="
-                <input class='filter_textfield' placeholder='"._("Enter another user name")."...'
-                    id='aclTarget' name='aclTarget' type='text' value=''
-                    onChange=\"\$('aclTargetSubmit').focus();\">
-                <div id='autocomplete' class='autocomplete'></div>
-                <script type='text/javascript'>
-                    new Ajax.Autocompleter(
-                            'aclTarget',
-                            'autocomplete',
-                            'autocomplete.php',
-                            { minChars: 3, frequency: 0.5 });
-                </script>
-                ".image("images/lists/submit.png", "aclTargetSubmit");
-
-                // Base template - each entry start with this
-                $tpl =
-                "\n <tr class='acl-viewer-head %s'>".
-                "\n  <td style='width:20px'>%s</td>".
-                "\n  <td colspan=2><b>%s</b><div class='right'>%s</div></td>".
-                "\n </tr>".
-                "\n %s";
-
-                // If the acl consists of a user-object-filter then this template is used.
-                $filter_tpl =
-                "\n <tr class='%s'>".
-                "\n  <td></td>".
-                "\n  <td><b>"._("Filter")."</b></td>".
-                "\n  <td><ul class='acl-viewer-items'><li>%s</li></ul></td>".
-                "\n </tr>";
-
-                // Used to display ACL owner of type "group"
-                $gmem_tpl =
-                "\n <tr class='%s'>".
-                "\n  <td></td>".
-                "\n  <td><b>"._("Groups")."</b></td>".
-                "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
-                "\n </tr>";
-
-                // Used to display ACL owner of type "user"
-                $umem_tpl =
-                "\n <tr class='%s'>".
-                "\n  <td></td>".
-                "\n  <td><b>"._("Users")."</b></td>".
-                "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
-                "\n </tr>";
-
-                // Used to display the acl contents, except 'reset' and 'role'
-                $acl_tpl =
-                "\n <tr class='%s'>".
-                "\n  <td></td>".
-                "\n  <td><b>"._("ACLs")."</b></td>".
-                "\n  <td><ul class='acl-viewer-items'>%s</ul></td>".
-                "\n </tr>";
-
-                $user = "<h3>".sprintf(_("List of effective ACLs for '%s'"), $this->validateUid)."</h3>";
-                $str  = "<table summary='"._("Object permissions")."'>";
-                $str .= " <tr><td>".$user."</td><td>".$autocompleter."</td></tr>";
-                $str .= "</table>";
-                $str .= "<div class='acl-viewer-container'>";
-                $str .= "<table summary='"._("Object permissions")."' cellpadding='0' cellspacing='0' class='acl-viewer'>";
-
-                foreach ($this->affectingACLs as $dn => $acls) {
-                    foreach ($acls as $acl) {
-
-                        // Prepare entry icon (department or element?)
-                        $image = (isset($this->config->idepartments[$dn])) ? "images/select_department.png":"images/lists/element.png";
-
-                        // The acl type (sub,psub,reset...)
-                        $aclType = $this->aclTypes[$acl['type']];
-
-                        // Does the filter match for current object?
-                        $filter ="";
-                        $match = true;
-                        if (!empty($acl['filter'])) {
-                            $match = $ldap->object_match_filter($this->dn, $acl['filter']);
-                            $filter= $acl['filter'];
-                            if (!$match) {
-                                $filter= "<span>".$filter."</span>";
-                            }
-                        }
-
-                        // Check membership
-                        $gmem = $umem = "";
-                        $users = $groups = array();
-                        $found = false;
-                        foreach ($acl['members'] as $type => $name) {
-
-                        // Check if we're part of the members
-                            if (preg_match("/^U:/", $type)) {
-                                if (preg_match("/^U:".preg_quote($this->validateDn, '/')."/", $type)) {
-                                    $users[] = $name;
-                                    $found = true;
-                                    continue;
-                                }
-                                $users[] = "<span>".$name."</span>";
-                            }
-
-                            // Check if we're part of the group members
-                            if (preg_match("/^G/", $type)) {
-                                if ($type == "G:*") {
-                                    $found = true;
-                                    $groups[] = $name;
-                                    continue;
-                                }
-                                if (preg_match("/^G:/", $type)) {
-                                    $gdn = preg_replace("/^G:/", "", $type);
-                                    $ldap->cat($gdn, array('memberUid'));
-                                    if ($ldap->count()) {
-                                        $attrs = $ldap->fetch();
-                                        if (isset($attrs['memberUid']) && in_array_strict($this->validateUid, $attrs['memberUid'])) {
-                                            $found = true;
-                                            $groups[] = $name;
-                                            continue;
-                                        }
+                                    if (screen.width < 1200) {
+                                        $innerColSize = "s6 xl3";
+                                        $colsPerRow = 2;
+                                    } else {
+                                        $innerColSize = "s6 xl3";
+                                        $colsPerRow = 4;
                                     }
                                 }
 
-                                // Mark groups that doesn't match
-                                $groups[] = "<span>".$name."</span>";
-                            }
-                        }
+                                $col = 0;
+                                $maxCount = count($acl['acl']);
+                                foreach ($acl['acl'] as $type => $acl) {
+                                    // Add a seperating row
+                                    if (($col % $colsPerRow) == 0) {
+                                        $defs .= "<div class='row'>";
+                                    }
 
-                        // Build up ACL definition list
-                        $defs ="";
-                        if ($acl['type']!='reset') {
-                            foreach ($acl['acl'] as $type => $acl) {
-                                if (isset($this->classMapping[$type])) {
-                                    $defs .= "<li>".$this->classMapping[$type].": ".$this->aclToString($acl)."</li>";
-                                } else {
-                                    $defs .= "<li>".$type.": ".$this->aclToString($acl)."</li>";
+                                    if (isset($this->classMapping[$type])) {
+                                        $defs .= "  <div class='col ".$innerColSize."'>
+                                                <div class='card'>
+                                                    <div class='card-content'>
+                                                        <p class='collection-item headline'>".$this->classMapping[$type].":</p>
+                                                        <hr class='divider'>".$this->aclToString($acl)."
+                                                    </div>
+                                                </div>
+                                            </div>";
+                                    } else {
+                                        $defs .= "  <div class='col ".$innerColSize."'>
+                                                <div class='card'>
+                                                    <div class='card-content'>
+                                                        <p class='collection-item headline'>".$type.":</p>
+                                                        <hr class='divider'>".$this->aclToString($acl)."
+                                                    </div>
+                                                </div>
+                                            </div>";
+                                    }
+                                    ++$col;
+
+                                    if (($col % $colsPerRow) == 0 && $col != 0) {
+                                        $defs .= "</div>";
+                                    }
                                 }
                             }
-                        }
 
-                        // Display the acl block in a special color if its not matching
-                        $class="";
-                        if (!$found || !$match) {
-                            $class = "acl-viewer-blocked";
+                            $str.= "<li>
+                                <div class='collapsible-header'>";
+                            if (!empty($users)) {
+                                $str.= "<h4>".implode(' - ', $users)."</h4>";
+                            }
+
+                            if (!empty($groups) && empty($users)) {
+                                $str.= "<h4>".implode(' - ', $groups)."</h4>";
+                            } elseif (!empty($groups) && !empty($users)) {
+                                $str.= "<p>".implode(' - ', $groups)."</p>";
+                            }
+
+                            if (!empty($aclType) && empty($users) && empty($groups)) {
+                                $str.= "<p></p>";
+                                $str.= "<p>".$aclType."</p>";
+                            } elseif (!empty($aclType)) {
+                                $str.= "<p>".$aclType."</p>";
+                            }
+                            $str.= "    </div>
+                                <div class='collapsible-body'>";
+
+                            // Display the acl block in a special color if its not matching
+                            $class="";
+                            if (!$found || !$match) {
+                                $class = "acl-viewer-blocked";
+                            }
+
+                            if (!empty($filter) && !empty($defs)) {
+                                $colSize = "s6";
+                            } else {
+                                $colSize = "s12";
+                            }
+
+                            $str.= "<div class='row'>";
+
+                            if (!empty($defs)) {
+                                $str.= "<div class='col ".$colSize."'>
+                                    <h5>"._("ACLs")."</h5>
+                                    ".$defs."
+                                </div>";
+                            }
+
+                            if (!empty($filter)) {
+                                $str.= "<div class='col ".$colSize."'>
+                                    <h5>"._("Filter")."</h5>
+                                    ".$filter."
+                                </div>";
+                            }
+
+                            $str.= "</div>";
+                            $str.= "</div></li>";
                         }
-                        if (!empty($filter)) {
-                            $filter =sprintf($filter_tpl, $class, $filter);
-                        }
-                        if (!empty($defs)) {
-                            $defs = sprintf($acl_tpl, $class, $defs);
-                        }
-                        if (count($users)) {
-                            $umem = sprintf($umem_tpl, $class, "<li>".implode('</li><li>', $users)."</li>");
-                        }
-                        if (count($groups)) {
-                            $gmem = sprintf($gmem_tpl, $class, "<li>".implode('</li><li>', $groups)."</li>");
-                        }
-                        $str.= sprintf($tpl, $class, image($image), $dn, $aclType, $filter.$gmem.$umem.$defs);
+                        $str.= "</ul></div></li></ul>";
                     }
-                }
-                $str .= "</table><div>";
+                    $str.= "</div>";
+                    break;
             }
             $this->renderedList = $str;
         }
@@ -510,64 +514,68 @@ class aclResolver
 
     public function aclToString($acls)
     {
-        if (check_for_materialize_theme()) {
-            $str = "";
-            foreach ($acls as $name => $acl) {
-                if ($name == "0") {
-                    $name = _("All");
+        $theme = getThemeName();
+
+        switch ($theme) {
+            case 'classic':
+                $str ="<ul class='acl-category-list'>";
+                foreach ($acls as $name => $acl) {
+                    if ($name == "0") {
+                        $name = _("All");
+                    }
+                    $str .= "<li><b>".$name.":</b> ";
+                    $str .= "<ul class='acl-list'>";
+                    if (preg_match("/s/", $acl)) {
+                        $str.="<li><u>"._("Restrict changes to user's own object").'</u></li>';
+                    }
+                    if (preg_match("/r/", $acl)) {
+                        $str.="<li>"._("read").'</li>';
+                    }
+                    if (preg_match("/w/", $acl)) {
+                        $str.="<li>"._("write").'</li>';
+                    }
+                    if (preg_match("/c/", $acl)) {
+                        $str.="<li>"._("create").'</li>';
+                    }
+                    if (preg_match("/d/", $acl)) {
+                        $str.="<li>"._("remove").'</li>';
+                    }
+                    if (preg_match("/m/", $acl)) {
+                        $str.="<li>"._("move").'</li>';
+                    }
+                    $str.= "</ul>";
                 }
-                $str .= "<p>".$name.":</p>";
-                $str .= "<ul class='acl-list'>";
-                if (preg_match("/s/", $acl)) {
-                    $str.="<li>"._("Restrict changes to user's own object").'</li>';
+                return($str."</ul>");
+            
+            default:
+                $str = "";
+                foreach ($acls as $name => $acl) {
+                    if ($name == "0") {
+                        $name = _("All");
+                    }
+                    $str .= "<p>".$name.":</p>";
+                    $str .= "<ul class='acl-list'>";
+                    if (preg_match("/s/", $acl)) {
+                        $str.="<li>"._("Restrict changes to user's own object").'</li>';
+                    }
+                    if (preg_match("/r/", $acl)) {
+                        $str.="<li>"._("read").'</li>';
+                    }
+                    if (preg_match("/w/", $acl)) {
+                        $str.="<li>"._("write").'</li>';
+                    }
+                    if (preg_match("/c/", $acl)) {
+                        $str.="<li>"._("create").'</li>';
+                    }
+                    if (preg_match("/d/", $acl)) {
+                        $str.="<li>"._("remove").'</li>';
+                    }
+                    if (preg_match("/m/", $acl)) {
+                        $str.="<li>"._("move").'</li>';
+                    }
+                    $str."</ul>";
                 }
-                if (preg_match("/r/", $acl)) {
-                    $str.="<li>"._("read").'</li>';
-                }
-                if (preg_match("/w/", $acl)) {
-                    $str.="<li>"._("write").'</li>';
-                }
-                if (preg_match("/c/", $acl)) {
-                    $str.="<li>"._("create").'</li>';
-                }
-                if (preg_match("/d/", $acl)) {
-                    $str.="<li>"._("remove").'</li>';
-                }
-                if (preg_match("/m/", $acl)) {
-                    $str.="<li>"._("move").'</li>';
-                }
-                $str."</ul>";
-            }
-            return $str;
-        } else {
-            $str ="<ul class='acl-category-list'>";
-            foreach ($acls as $name => $acl) {
-                if ($name == "0") {
-                    $name = _("All");
-                }
-                $str .= "<li><b>".$name.":</b> ";
-                $str .= "<ul class='acl-list'>";
-                if (preg_match("/s/", $acl)) {
-                    $str.="<li><u>"._("Restrict changes to user's own object").'</u></li>';
-                }
-                if (preg_match("/r/", $acl)) {
-                    $str.="<li>"._("read").'</li>';
-                }
-                if (preg_match("/w/", $acl)) {
-                    $str.="<li>"._("write").'</li>';
-                }
-                if (preg_match("/c/", $acl)) {
-                    $str.="<li>"._("create").'</li>';
-                }
-                if (preg_match("/d/", $acl)) {
-                    $str.="<li>"._("remove").'</li>';
-                }
-                if (preg_match("/m/", $acl)) {
-                    $str.="<li>"._("move").'</li>';
-                }
-                $str.= "</ul>";
-            }
-            return($str."</ul>");
+                return $str;
         }
     }
 

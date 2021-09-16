@@ -26,7 +26,7 @@ function displayPWchanger()
 
     $smarty->assign("logo", image(get_template_path("images/logo.png")));
     $smarty->assign("date", date("l, dS F Y H:i:s O"));
-    $smarty->display(get_template_path(check_for_materialize_theme() ? "password_materialize.tpl" : 'password.tpl'));
+    $smarty->display(get_template_path('password.tpl'));
     exit();
 }
 

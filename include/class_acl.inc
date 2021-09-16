@@ -111,11 +111,11 @@ class acl extends plugin
 
         /* Groups */
         $ldap->cd($config->current['BASE']);
-#    if ($tag == ""){
-    $ldap->search('(objectClass=posixGroup)', array('cn', 'description'));
-#    } else {
-#      $ldap->search('(&(objectClass=posixGroup)(gosaUnitTag='.$tag.'))', array('cn', 'description'));
-#    }
+        #    if ($tag == ""){
+        $ldap->search('(objectClass=posixGroup)', array('cn', 'description'));
+        #    } else {
+        #      $ldap->search('(&(objectClass=posixGroup)(gosaUnitTag='.$tag.'))', array('cn', 'description'));
+        #    }
     while ($attrs= $ldap->fetch()){
         $dsc= "";
         if (isset($attrs['description'][0])){
@@ -128,11 +128,11 @@ class acl extends plugin
 
     /* Roles */
     $ldap->cd($config->current['BASE']);
-#    if ($tag == ""){
+    #    if ($tag == ""){
     $ldap->search('(objectClass=gosaRole)', array('cn', 'description','gosaAclTemplate','dn'));
-#    } else {
-#     $ldap->search('(&(objectClass=gosaRole)(gosaUnitTag='.$tag.'))', array('cn', 'description','gosaAclTemplate','dn'));
-#    }
+    #    } else {
+    #     $ldap->search('(&(objectClass=gosaRole)(gosaUnitTag='.$tag.'))', array('cn', 'description','gosaAclTemplate','dn'));
+    #    }
     while ($attrs= $ldap->fetch()){
         $dsc= "";
         if (isset($attrs['description'][0])){
@@ -333,6 +333,9 @@ class acl extends plugin
         $tmp= session::global_get('plist');
         $plist= $tmp->info;
 
+        // store theme name
+        $theme = getThemeName();
+
         /* Handle posts */
         if (isset($_POST['new_acl'])){
             $this->dialogState= 'create';
@@ -454,7 +457,7 @@ class acl extends plugin
                     }elseif(isset($this->aclContents[$this->aclObject.'/'.$oc]) && is_array($this->aclContents)){
                         unset($this->aclContents[$this->aclObject.'/'.$oc]);
                     }else{
-#          trigger_error("Huhm?");
+                    #   trigger_error("Huhm?");
                     }
                     if (isset($new_acl[$oc]) && is_array($new_acl)){
                         $this->aclContents[$oc]= $new_acl[$oc];
@@ -559,9 +562,16 @@ class acl extends plugin
                 $this->recipients['G:*'] = _("All users");
 
                 $key = "G:*";
-                $vData = array("data" => array(image("plugins/groups/images/select_group.png"),
-                    _("All users"),
-                    _("Pseudo-group for all users.")));
+                switch ($theme) {
+                    case 'classic':
+                        $vData = array("plugins/groups/images/select_group.png");
+                        break;
+                    
+                    default:
+                        $vData = array("<i class='material-icons'>groups</i>");
+                        break;
+                }
+                array_push($vData, _("All users"), _("Pseudo-group for all users."));
 
                 $this->aclMemberList->addEntry($key, $vData, $key);
             }
@@ -575,9 +585,18 @@ class acl extends plugin
         /* If dialog is confirmed */
         if((isset($_POST['userGroupSelect_save']) || isset($_POST['ok-save'])) &&
             $this->dialog instanceof userGroupSelect) {
-
-            $groupIcon = image("plugins/groups/images/select_group.png");
-            $userIcon  = image("plugins/users/images/select_user.png");
+            switch ($theme) {
+                case 'classic':
+                    $groupIcon = image("plugins/groups/images/select_group.png");
+                    $userIcon  = image("plugins/users/images/select_user.png");
+                    break;
+                
+                default:
+                    $groupIcon = image("<i class='material-icons'>groups</i>");
+                    $userIcon  = image("<i class='material-icons'>person</i>");
+                    break;
+            }                
+        
 
             if($this->acl_is_writeable("")) {
                 foreach($this->dialog->save() as $entry) {
@@ -599,7 +618,7 @@ class acl extends plugin
                         break;
                     }
 
-                    $this->aclMemberList->addEntry($key, $vData, $key);
+                $this->aclMemberList->addEntry($key, $vData, $key);
                 }
             }
 
@@ -630,7 +649,7 @@ class acl extends plugin
 
         $smarty->assign("acl_readable",$this->acl_is_readable(""));
         if(!$this->acl_is_readable("")){
-            return ($smarty->fetch (get_template_path('acl.tpl')));
+            return ($smarty->fetch(get_template_path('acl.tpl')));
         }
 
         if ($this->dialogState == 'head'){
@@ -675,7 +694,15 @@ class acl extends plugin
 
                     /* Set summary... */
                     if ($summary == ""){
-                        $summary= check_for_materialize_theme() ? '<p>'._("No ACL settings for this category!").'</p>' : '<i>'._("No ACL settings for this category!").'</i>';
+                        switch ($theme) {
+                            case 'classic':
+                                $summary = '<i>'._("No ACL settings for this category!").'</i>';
+                                break;
+                            
+                            default:
+                                $summary = '<p>'._("No ACL settings for this category!").'</p>';
+                                break;
+                        }
                     } else {
                         $summary= trim($summary,", ");
                         $summary= " ".sprintf(_("ACLs for: %s"), $summary);
@@ -683,12 +710,26 @@ class acl extends plugin
 
                     $actions ="";
                     if($this->acl_is_readable("")){
-                        $actions.= image(check_for_materialize_theme() ? "<i class='material-icons input-icons'>edit</i>" : 'images/lists/edit.png','cat_edit_'.$section,
-                                msgPool::editButton(_("category ACL")));
+                        switch ($theme) {
+                            case 'classic':
+                                $actions .= image('images/lists/edit.png', 'cat_edit_'.$section, msgPool::editButton(_("category ACL")));
+                                break;
+                            
+                            default:
+                                $actions .= image("<i class='material-icons input-icons'>edit</i>", 'cat_edit_'.$section, msgPool::editButton(_("category ACL")));
+                                break;
+                        }
                     }
                     if($this->acl_is_removeable() && preg_match("/;".$section."(;|\/)/", $usedList)){
-                        $actions.= image(check_for_materialize_theme() ? "<i class='material-icons input-icons'>delete</i>" : 'images/lists/trash.png','cat_del_'.$section,
-                                msgPool::delButton(_("category ACL")));
+                        switch ($theme) {
+                            case 'classic':
+                                $actions .= image('images/lists/trash.png', 'cat_del_'.$section, msgPool::delButton(_("category ACL")));
+                                break;
+                            
+                            default:
+                                $actions .= image("<i class='material-icons input-icons'>delete</i>", 'cat_del_'.$section, msgPool::delButton(_("category ACL")));
+                                break;
+                        }
                     }
                     $data[] = $section;
                     $lData[] = array('data'=>array($dsc, $summary, $actions));
@@ -777,7 +818,7 @@ class acl extends plugin
         $smarty->assign("acl_readable"  ,$this->acl_is_readable(""));
         $smarty->assign("acl_removeable",$this->acl_is_removeable());
 
-        return ($smarty->fetch (get_template_path('acl.tpl')));
+        return ($smarty->fetch(get_template_path('acl.tpl')));
     }
 
 
@@ -843,102 +884,101 @@ class acl extends plugin
         $style = "style='width:100px;'";
 
         if($this->acl_is_writeable("")){
-            if(check_for_materialize_theme()) {
-                $display .= "<div class='acl-setting-buttons'>";
-                $display .= "   <div class='acl-setting-button-grp'>";
-                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
-                $display .= "       <div class='acl-setting-button-grp-small'>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" >C+</button>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" >C-</button>";
-                $display .= "       </div>";
-                $display .= "   </div>";
-                $display .= "   <div class='acl-setting-button-grp'>";
-                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
-                $display .= "       <div class='acl-setting-button-grp-small'>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" >M+</button>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" >M-</button>";
-                $display .= "       </div>";
-                $display .= "   </div>";
-                $display .= "   <div class='acl-setting-button-grp'>";
-                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button>";
-                $display .= "       <div class='acl-setting-button-grp-small'>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" >D+</button>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" >D-</button>";
-                $display .= "       </div>";
-                $display .= "   </div>";
-                $display .= "   <div class='button-divider'>";
-                $display .= "       <span>-</span>";
-                $display .= "   </div>";
-                $display .= "   <div class='acl-setting-button-grp'>";
-                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" >Toggle R</button>";
-                $display .= "       <div class='acl-setting-button-grp-small'>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" >R+</button>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" >R-</button>";
-                $display .= "       </div>";
-                $display .= "   </div>";
-                $display .= "   <div class='acl-setting-button-grp'>";
-                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" >Toggle W</button>";
-                $display .= "       <div class='acl-setting-button-grp-small'>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" >W+</button>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" >W-</button>";
-                $display .= "       </div>";
-                $display .= "   </div>";
-                $display .= "   <div class='button-divider'>";
-                $display .= "       <span>-</span>";
-                $display .= "   </div>";
-                $display .= "   <div class='acl-setting-button-grp'>";
-                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" >R+</button>";
-                $display .= "       <div class='acl-setting-button-grp-small'>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" >R+</button>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
-                $display .= "       </div>";
-                $display .= "   </div>";
-                $display .= "   <div class='acl-setting-button-grp'>";
-                $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" >W+</button>";
-                $display .= "       <div class='acl-setting-button-grp-small'>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
-                $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
-                $display .= "       </div>";
-                $display .= "   </div>";
-                $display .= "</div>";
-            } else {
-                $display .= "<button type='button' ".$style." name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
-                $display .= "<button type='button' ".$style." name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
-                $display .= "<button type='button' ".$style." name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button> - ";
-                $display .= "<button type='button' ".$style." name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" >Toggle R</button>";
-                $display .= "<button type='button' ".$style." name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" >Toggle W</button> - ";
+            switch ($theme) {
+                case 'classic':
+                    $display .= "<button type='button' ".$style." name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
+                    $display .= "<button type='button' ".$style." name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
+                    $display .= "<button type='button' ".$style." name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button> - ";
+                    $display .= "<button type='button' ".$style." name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" >Toggle R</button>";
+                    $display .= "<button type='button' ".$style." name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" >Toggle W</button> - ";
 
-                $display .= "<button type='button' ".$style." name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" >R+</button>";
-                $display .= "<button type='button' ".$style." name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" >W+</button>";
+                    $display .= "<button type='button' ".$style." name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" >R+</button>";
+                    $display .= "<button type='button' ".$style." name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" >W+</button>";
 
-                $display .= "<br>";
+                    $display .= "<br>";
 
-                $style = "style='width:50px;'";
-                $display .= "<button type='button' ".$style." name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" >C+</button>";
-                $display .= "<button type='button' ".$style." name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" >C-</button>";
-                $display .= "<button type='button' ".$style." name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" >M+</button>";
-                $display .= "<button type='button' ".$style." name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" >M-</button>";
-                $display .= "<button type='button' ".$style." name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" >D+</button>";
-                $display .= "<button type='button' ".$style." name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" >D-</button> - ";
-                $display .= "<button type='button' ".$style." name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" >R+</button>";
-                $display .= "<button type='button' ".$style." name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" >R-</button>";
-                $display .= "<button type='button' ".$style." name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" >W+</button>";
-                $display .= "<button type='button' ".$style." name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" >W-</button> - ";
+                    $style = "style='width:50px;'";
+                    $display .= "<button type='button' ".$style." name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" >C+</button>";
+                    $display .= "<button type='button' ".$style." name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" >C-</button>";
+                    $display .= "<button type='button' ".$style." name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" >M+</button>";
+                    $display .= "<button type='button' ".$style." name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" >M-</button>";
+                    $display .= "<button type='button' ".$style." name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" >D+</button>";
+                    $display .= "<button type='button' ".$style." name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" >D-</button> - ";
+                    $display .= "<button type='button' ".$style." name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" >R+</button>";
+                    $display .= "<button type='button' ".$style." name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" >R-</button>";
+                    $display .= "<button type='button' ".$style." name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" >W+</button>";
+                    $display .= "<button type='button' ".$style." name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" >W-</button> - ";
 
-                $display .= "<button type='button' ".$style." name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" >R+</button>";
-                $display .= "<button type='button' ".$style." name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
-                $display .= "<button type='button' ".$style." name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
-                $display .= "<button type='button' ".$style." name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
+                    $display .= "<button type='button' ".$style." name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" >R+</button>";
+                    $display .= "<button type='button' ".$style." name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
+                    $display .= "<button type='button' ".$style." name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
+                    $display .= "<button type='button' ".$style." name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
+                    break;
+                default:
+                    $display .= "<div class='acl-setting-buttons'>";
+                    $display .= "   <div class='acl-setting-button-grp'>";
+                    $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
+                    $display .= "       <div class='acl-setting-button-grp-small'>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" >C+</button>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" >C-</button>";
+                    $display .= "       </div>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='acl-setting-button-grp'>";
+                    $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
+                    $display .= "       <div class='acl-setting-button-grp-small'>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" >M+</button>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" >M-</button>";
+                    $display .= "       </div>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='acl-setting-button-grp'>";
+                    $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" >Toggle D</button>";
+                    $display .= "       <div class='acl-setting-button-grp-small'>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" >D+</button>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" >D-</button>";
+                    $display .= "       </div>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='button-divider'>";
+                    $display .= "       <span>-</span>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='acl-setting-button-grp'>";
+                    $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" >Toggle R</button>";
+                    $display .= "       <div class='acl-setting-button-grp-small'>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" >R+</button>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" >R-</button>";
+                    $display .= "       </div>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='acl-setting-button-grp'>";
+                    $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" >Toggle W</button>";
+                    $display .= "       <div class='acl-setting-button-grp-small'>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" >W+</button>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" >W-</button>";
+                    $display .= "       </div>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='button-divider'>";
+                    $display .= "       <span>-</span>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='acl-setting-button-grp'>";
+                    $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" >R+</button>";
+                    $display .= "       <div class='acl-setting-button-grp-small'>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" >R+</button>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" >R-</button>";
+                    $display .= "       </div>";
+                    $display .= "   </div>";
+                    $display .= "   <div class='acl-setting-button-grp'>";
+                    $display .= "       <button class='btn-extra-small gonicus-color white-text wide' type='button'  name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" >W+</button>";
+                    $display .= "       <div class='acl-setting-button-grp-small'>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" >W+</button>";
+                    $display .= "           <button class='btn-extra-small gonicus-color white-text half' type='button'  name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" >W-</button>";
+                    $display .= "       </div>";
+                    $display .= "   </div>";
+                    $display .= "</div>";
+                    break;
             }
         }
 
         /* Build general objects */
         $list =$this->sort_by_priority($list);
         foreach ($list as $key => $name){
-
-            echo '<pre>';
-            var_dump($this->aclContents);
-            echo '</pre>';
 
             /* Create sub acl if it does not exist */
             if (!isset($this->aclContents[$key])){
@@ -973,56 +1013,79 @@ class acl extends plugin
             if(isset($_SERVER['HTTP_USER_AGENT']) &&
                     (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) ||
                     (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
-                $display.= check_for_materialize_theme() ?
-                            "<div class='acl-object-wrapper'>
-                                <div class='object-head-wrapper'>
-                                    <div class='object-name'>
-                                        "._("Object").": $name
-                                    </div>
-                                    <div class='advanced-settings'>
-                                        <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
-                                            "._("Show/hide advanced settings")."
-                                        </button>
-                                    </div>
-                                </div>":
-                            "<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
+                
+                switch ($theme) {
+                    case 'classic':
+                        $display .="<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
                                 <tr>
                                     <td style='background-color:{$back_color};height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>
                                     <td align='right' style='background-color:{$back_color};height:1.8em;'>
                                         <button type='button' onclick=\"$('{$tname}').toggle();\">"._("Show/hide advanced settings")."</button>
                                     </td>
                                 </tr>";
+                        break;
+                    default:
+                        $display .= "   <div class='acl-object-wrapper'>
+                                            <div class='object-head-wrapper'>
+                                                <div class='object-name'>
+                                                    "._("Object").": $name
+                                                </div>
+                                            <div class='advanced-settings'>
+                                                <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
+                                                    "._("Show/hide advanced settings")."
+                                                </button>
+                                            </div>
+                                        </div>";
+                        break;
+                }
             } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
-                $display.= check_for_materialize_theme() ?
-                            "<div class='acl-object-wrapper'>
-                                <div class='object-head-wrapper'>
-                                    <div class='object-name'>
-                                        "._("Object").": $name
-                                    </div>
-                                    <div class='advanced-settings'>
-                                        <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
-                                            "._("Show/hide advanced settings")."
-                                        </button>
-                                    </div>
-                                </div>":
-                            "<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
-                                <tr>
-                                    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>
-                                    <td align='right' style='background-color:#C8C8C8;height:1.8em;'>
-                                        <button type='button' onclick=\"$('{$tname}').toggle();\">"._("Show/hide advanced settings")."</button></td>
-                                </tr>";
+                switch ($theme) {
+                    case 'classic':
+                        $display .= "   <table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
+                                            <tr>
+                                                <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1).">
+                                                    <b>"._("Object").": $name</b>
+                                                </td>
+                                                <td align='right' style='background-color:#C8C8C8;height:1.8em;'>
+                                                    <button type='button' onclick=\"$('{$tname}').toggle();\">
+                                                        "._("Show/hide advanced settings")."
+                                                    </button>
+                                                </td>
+                                            </tr>";
+                        break;
+                    default:
+                        $display .= "   <div class='acl-object-wrapper'>
+                                            <div class='object-head-wrapper'>
+                                                <div class='object-name'>
+                                                    "._("Object").": $name
+                                                </div>
+                                                <div class='advanced-settings'>
+                                                    <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
+                                                        "._("Show/hide advanced settings")."
+                                                    </button>
+                                                </div>
+                                            </div>";
+                        break;
+                }
             } else {
-                $display.= check_for_materialize_theme() ?
-                            "<div class='acl-object-wrapper'>
-                                <div class='object-head-wrapper'>
-                                    <div class='object-name'>
-                                        "._("Object").": $name
-                                    </div>
-                                </div>" :
-                            "<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
-                                <tr>
-                                    <td style='background-color:#C8C8C8;height:1.8em;' colspan=$cols><b>"._("Object").": $name</b></td>
-                                </tr>";
+                switch ($theme) {
+                    case 'classic':
+                        $display .= "   <table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
+                                            <tr>
+                                                <td style='background-color:#C8C8C8;height:1.8em;' colspan=$cols>
+                                                    <b>"._("Object").": $name</b>
+                                                </td>
+                                            </tr>";
+                        break;
+                    default:
+                        $display .= "   <div class='acl-object-wrapper'>
+                                            <div class='object-head-wrapper'>
+                                                <div class='object-name'>
+                                                    "._("Object").": $name
+                                                </div>
+                                            </div>";
+                        break;
+                }
             }
 
             /* Generate options */
@@ -1038,18 +1101,27 @@ class acl extends plugin
             $more_options= $this->mkchkbx($key."_0_r",  _("read"), preg_match('/r/', $overall_acl));
             $more_options.= $this->mkchkbx($key."_0_w", _("write"), preg_match('/w/', $overall_acl));
 
-            $display.= check_for_materialize_theme() ?
-                        "<div class='object-body-wrapper'>
-                            <div class='row'>
-                                <div class='col s9'>$options</div>
-                                <div class='col s3'>"._("Complete object").": $more_options</div>
-                            </div>
-                        </div>
-                    </div>" :
-                        "<tr>
-                            <td style='background-color:#E0E0E0' colspan=".($cols-1).">$options</td>
-                            <td style='background-color:#D4D4D4'>&nbsp;"._("Complete object").": $more_options</td>
-                        </tr>";
+            switch ($theme) {
+                case 'classic':
+                    $display .= "   <tr>
+                                        <td style='background-color:#E0E0E0' colspan=".($cols-1).">$options</td>
+                                        <td style='background-color:#D4D4D4'>&nbsp;"._("Complete object").": $more_options</td>
+                                    </tr>";
+                    break;
+                default:
+                    $display .= "   <div class='object-body-wrapper'>
+                                        <div class='row'>
+                                            <div class='col s9'>$options</div>
+                                            <div class='col s3'>
+                                                "._("Complete object").": $more_options
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
+                    break;
+            }
+            
+                        
 
             /* Walk through the list of attributes */
             $cnt= 1;
@@ -1061,21 +1133,31 @@ class acl extends plugin
             if(session::global_get('js')) {
                 if(isset($_SERVER['HTTP_USER_AGENT']) &&
                         (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
-                    $display.= check_for_materialize_theme() ?
-                                "<div class='acl_container' id='$tname' style='overflow:hidden; display:none;'>
-                                    <div class='row'>" :
-                                "<tr id='tr_$tname' style='vertical-align:top;height:0px;'>
-                                    <td colspan=".$cols.">
-                                        <div id='$tname' style='overflow:hidden; display:none;vertical-align:top;width:100%;'>
-                                            <table style='width:100%;' summary='{$name}'>";
+                    switch ($theme) {
+                        case 'classic':
+                            $display .= "   <tr id='tr_$tname' style='vertical-align:top;height:0px;'>
+                                                <td colspan=".$cols.">
+                                                    <div id='$tname' style='overflow:hidden; display:none;vertical-align:top;width:100%;'>
+                                                        <table style='width:100%;' summary='{$name}'>";
+                            break;
+                        default:
+                            $display .= "   <div class='acl_container' id='$tname' style='overflow:hidden; display:none;'>
+                                                <div class='row'>";
+                            break;
+                    }
                 } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
-                    $display.= check_for_materialize_theme() ?
-                                "<div class='acl_container' id='$tname' style='position:absolute;overflow:hidden;display:none;'>
-                                    <div class='row'>" :
-                                "<tr id='tr_$tname' style='vertical-align:top;height:0px;'>
-                                    <td colspan=".$cols.">
-                                        <div id='$tname' style='position:absolute;overflow:hidden;display:none;;vertical-align:top;width:100%;'>
-                                            <table style='width:100%;' summary='{$name}'>";
+                    switch ($theme) {
+                        case 'classic':
+                            $display .= "   <tr id='tr_$tname' style='vertical-align:top;height:0px;'>
+                                                <td colspan=".$cols.">
+                                                    <div id='$tname' style='position:absolute;overflow:hidden;display:none;;vertical-align:top;width:100%;'>
+                                                        <table style='width:100%;' summary='{$name}'>";
+                            break;
+                        default:
+                            $display .= "   <div class='acl_container' id='$tname' style='position:absolute;overflow:hidden;display:none;'>
+                                                <div class='row'>";
+                            break;
+                    }
                 }
             }
 
@@ -1089,20 +1171,32 @@ class acl extends plugin
 
                 /* Open table row */
                 if ($cnt == 1){
-                    $display.= "\n  <tr>";
+                    switch ($theme) {
+                        case 'classic':
+                            $display .= '<tr>';
+                            break;
+                        
+                        default:
+                            break;
+                    }
                 }
 
                 /* Close table row */
-                if ($cnt == $cols){
-                    $cnt= 1;
-                    $rb= "";
-                    $end= "\n  </tr>";
-                } else {
-                    $cnt++;
-                    $rb= "border-right:1px solid #A0A0A0;";
-                    $end= "";
+                switch ($theme) {
+                    case 'classic':
+                        if ($cnt == $cols){
+                            $cnt= 1;
+                            $rb= "";
+                            $end= "</tr>";
+                        } else {
+                            $cnt++;
+                            $rb= "border-right:1px solid #A0A0A0;";
+                            $end= "";
+                        }
+                        break;
+                    default:
+                        break;
                 }
-
 
                 /* Collect list of attributes */
                 $state= "";
@@ -1110,20 +1204,25 @@ class acl extends plugin
                     $state= $currentAcl[$attr];
                 }
 
-                $display.= check_for_materialize_theme() ?
-                            "<div class='col s6 xl".(12 / $cols)."'>
-                                <div class='option-grp'>
-                                    <div class='option-name'>
-                                        $dsc ($attr)
-                                    </div>
-                                    <div class='options'>
-                                        ".$this->mkrwbx($key."_".$attr, $state)."
-                                    </div>
-                                </div>
-                            </div>$end" :
-                            "<td style='border-top:1px solid #A0A0A0;${rb}width:".(int)(100/$cols)."%'>
-                                <b>$dsc</b> ($attr)<br>".$this->mkrwbx($key."_".$attr, $state)."
-                            </td>$end";
+                switch ($theme) {
+                    case 'classic':
+                        $display .= "   <td style='border-top:1px solid #A0A0A0;${rb}width:".(int)(100/$cols)."%'>
+                                            <b>$dsc</b> ($attr)<br>".$this->mkrwbx($key."_".$attr, $state)."
+                                        </td>$end";
+                        break;
+                    default:
+                        $display .= "   <div class='col s6 xl".(12 / $cols)."'>
+                                            <div class='option-grp'>
+                                                <div class='option-name'>
+                                                    $dsc ($attr)
+                                                </div>
+                                            <div class='options'>
+                                                ".$this->mkrwbx($key."_".$attr, $state)."
+                                            </div>
+                                        </div>
+                                    </div>$end";
+                        break;
+                }
             }
 
             /* Fill missing td's if needed */
@@ -1136,14 +1235,28 @@ class acl extends plugin
                         (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) ||
                         (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT'])) ||
                         (preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT']))) {
-                    $display.= "\n        </table>".
-                        "\n      </div>".
-                        "\n    </td>".
-                        "\n  </tr>";
+                    switch ($theme) {
+                        case 'classic':
+                            $display .= "   </table>
+                                        </div>
+                                    </td>
+                                </tr>";
+                            break;
+                        default:
+                            $display .= "   </div>
+                                        </div>";
+                            break;
+                    }
                 }
             }
-
-            $display.= "\n</table><br />\n";
+            switch ($theme) {
+                case 'classic':
+                    $display .= "</table><br/>";
+                    break;
+                
+                default:
+                    break;
+            }
         }
 
         return ($display);
@@ -1155,15 +1268,27 @@ class acl extends plugin
         $state= $state?"checked":"";
         if($this->acl_is_writeable("")){
             $tname= preg_replace("/[^a-z0-9]/i","_",$name);
-            return check_for_materialize_theme() ?
-                    "<label>
-                        <input type='checkbox' id='acl_$tname' name='acl_$name' $state>
-                        <span>$text</span>
-                    </label>" :
-                    "<input id='acl_$tname' type='checkbox' name='acl_$name' $state>
-                    <label for='acl_$tname'>$text</label>";
+            switch ($theme) {
+                case 'classic':
+                    return "<input id='acl_$tname' type='checkbox' name='acl_$name' $state>
+                            <label for='acl_$tname'>$text</label>";
+                default:
+                    return "<label>
+                                <input type='checkbox' id='acl_$tname' name='acl_$name' $state>
+                                <span>$text</span>
+                            </label>";
+            }
         }else{
-            return "\n <input type='checkbox' disabled name='dummy_".microtime(1)."' $state>$text";
+            switch ($theme) {
+                case 'classic':
+                    return "<input type='checkbox' disabled name='dummy_".microtime(1)."' $state>$text";
+                default:
+                    return "<label>
+                                <input type='checkbox' name='dummy_".microtime(1)."' disabled $state>
+                                <span>$text</span>
+                            </label>";
+                    break;
+            }
         }
     }
 
@@ -1175,31 +1300,37 @@ class acl extends plugin
         $tname= preg_replace("/[^a-z0-9]/i","_",$name);
 
         if($this->acl_is_writeable("")){
-            return check_for_materialize_theme() ?
-                    "<label>
-                        <input type='checkbox' id='acl_".$tname."_r' name='acl_${name}_r' $rstate>
-                        <span>"._("read")."</span>
-                    </label>
-                    <label>
-                        <input type='checkbox' id='acl_".$tname."_w' name='acl_${name}_w' $wstate>
-                        <span>"._("write")."</span>
-                    </label>" :
-                    "<input id='acl_".$tname."_r' type='checkbox' name='acl_${name}_r' $rstate>
-                    <label for='acl_".$tname."_r'>"._("read")."</label>
-                    <input id='acl_".$tname."_w' type='checkbox' name='acl_${name}_w' $wstate>
-                    <label for='acl_".$tname."_w'>"._("write")."</label>";
+            switch ($theme) {
+                case 'classic':
+                    return "<input id='acl_".$tname."_r' type='checkbox' name='acl_${name}_r' $rstate>
+                            <label for='acl_".$tname."_r'>"._("read")."</label>
+                            <input id='acl_".$tname."_w' type='checkbox' name='acl_${name}_w' $wstate>
+                            <label for='acl_".$tname."_w'>"._("write")."</label>";
+                default:
+                    return "<label>
+                                <input type='checkbox' id='acl_".$tname."_r' name='acl_${name}_r' $rstate>
+                                <span>"._("read")."</span>
+                            </label>
+                            <label>
+                                <input type='checkbox' id='acl_".$tname."_w' name='acl_${name}_w' $wstate>
+                                <span>"._("write")."</span>
+                            </label>" ;
+            }
         }else{
-            return check_for_materialize_theme() ?
-                    "<label>
-                        <input type='checkbox' name='dummy_".microtime(1)."' disabled $rstate>
-                        <span>"._("read")."</span>
-                    </label>
-                    <label>
-                        <input type='checkbox' name='dummy_".microtime(1)."' disabled $wstate>
-                        <span>"._("write")."</span>
-                    </label>" :
-                    "<input disabled type=checkbox name='dummy_".microtime(1)."' $rstate>"._("read")."
-                    <input disabled type=checkbox name='dummy_".microtime(1)."' $wstate>"._("write");
+            switch ($theme) {
+                case 'classic':
+                    return "<input disabled type=checkbox name='dummy_".microtime(1)."' $rstate>"._("read")."
+                            <input disabled type=checkbox name='dummy_".microtime(1)."' $wstate>"._("write");
+                default:
+                    return "<label>
+                                <input type='checkbox' name='dummy_".microtime(1)."' disabled $rstate>
+                                <span>"._("read")."</span>
+                            </label>
+                            <label>
+                                <input type='checkbox' name='dummy_".microtime(1)."' disabled $wstate>
+                                <span>"._("write")."</span>
+                            </label>";
+            }
         }
     }
 
@@ -1387,6 +1518,8 @@ class acl extends plugin
 
     function loadAclEntry($new= FALSE)
     {
+        $theme = getThemeName();
+        
         /* New entry gets presets... */
         if ($new){
             $this->aclType= 'base';
@@ -1414,17 +1547,41 @@ class acl extends plugin
                 if($key == "G:*") {
                     $name = _("All users");
                     $desc = _("Pseudo-group for all users.");
-                    $icon = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : "plugins/groups/images/select_group.png");
+                    switch ($theme) {
+                        case 'classic':
+                            $icon = image("plugins/groups/images/select_group.png");
+                            break;
+                        
+                        default:
+                            $icon = image("<i class='material-icons'>groups</i>");
+
+                            break;
+                    }
                 }
                 else if($key[0] == 'U') { // is user?
                     $name = $match[3][0];
                     $desc = $match[1][0];
-                    $icon = image(check_for_materialize_theme() ? "<i class='material-icons'>person</i>" : "plugins/users/images/select_user.png");
+                    switch ($theme) {
+                        case 'classic':
+                            $icon = image("plugins/users/images/select_user.png");
+                            break;
+                        default:
+                            $icon = image("<i class='material-icons'>person</i>");
+
+                            break;
+                    }
                 }
                 else { // or group?
                     $name = $match[1][0];
                     $desc = $match[3][0];
-                    $icon = image(check_for_materialize_theme() ? "<i class='material-icons'>groups</i>" : "plugins/groups/images/select_group.png");
+                    switch ($theme) {
+                        case 'classic':
+                            $icon = image("plugins/groups/images/select_group.png");
+                            break;
+                        default:
+                            $icon = image("<i class='material-icons'>groups</i>");
+                            break;
+                    }
                 }
 
                 $lData[$key] = $key;

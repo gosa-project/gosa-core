@@ -35,6 +35,8 @@ class userManagement extends management
     var $pwd_change_queue = array();
     var $force_hash_type = array();
 
+    var $theme;
+
     // Tab definition
     protected $tabClass = "usertabs";
     protected $tabType = "USERTABS";
@@ -53,6 +55,8 @@ class userManagement extends management
     {
         $this->config = $config;
         $this->ui = $ui;
+
+        $this->theme = getThemeName();
 
         $this->storagePoints = array(get_ou("core", "userRDN"));
 
@@ -247,19 +251,21 @@ class userManagement extends management
 
         $pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
         $smarty->assign("pwLength", $pwLength);
-        if (check_for_materialize_theme()) {
-            if ($check_special) {
-                $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
-            }
-            if ($check_lower) {
-                $smarty->assign("lower", _("The password must contain lower case letters."));
-            }
-            if ($check_upper) {
-                $smarty->assign("upper", _("The password must contain upper case letters."));
-            }
-            if ($check_digits) {
-                $smarty->assign("digits", _("The password must contain digits."));
-            }
+        switch ($this->theme) {
+            case 'default':
+                if ($check_special) {
+                    $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
+                }
+                if ($check_lower) {
+                    $smarty->assign("lower", _("The password must contain lower case letters."));
+                }
+                if ($check_upper) {
+                    $smarty->assign("upper", _("The password must contain upper case letters."));
+                }
+                if ($check_digits) {
+                    $smarty->assign("digits", _("The password must contain digits."));
+                }
+                break;
         }
         $smarty->assign("proposal" , set_post($this->proposal));
         $smarty->assign("proposalEnabled" , $this->proposalEnabled);
@@ -325,11 +331,13 @@ class userManagement extends management
                 $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
                 $length       = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
 
-                if (check_for_materialize_theme()) {
-                    $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
-                    $lower          = "/[a-z]/";
-                    $upper          = "/[A-Z]/";
-                    $digits         = "/[0-9]/i";
+                switch ($this->theme) {
+                    case 'default':
+                        $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
+                        $lower          = "/[a-z]/";
+                        $upper          = "/[A-Z]/";
+                        $digits         = "/[0-9]/i";
+                        break;
                 }
 
                 // Check posted passwords now.
@@ -343,7 +351,7 @@ class userManagement extends management
                     $message[] = _("The password used as new and current are too similar.");
                 }elseif((strlen($new_password) < $length)){
                     $message[] = _("The password must have at least $length characters.");
-                }elseif(check_for_materialize_theme()) {
+                }elseif($this->theme == 'default') {
                     if($check_lower && !preg_match($lower, $new_password)) {
                         $message[] = _("The password must contain lowercase letters.");
                     }elseif($check_upper && !preg_match($upper, $new_password)) {
@@ -893,12 +901,38 @@ class userManagement extends management
 
     static function filterLockImage($userPassword)
     {
-        $image= "images/empty.png";
+        $theme = getThemeName();
+
+        switch ($theme) {
+            case 'classic':
+                $image = "images/empty.png";
+                break;
+            
+            default:
+            $image = "";
+                break;
+        }
         if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
             if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
-                $image= "images/lists/locked.png";
+                switch ($theme) {
+                    case 'classic':
+                        $image = "images/lists/locked.png";
+                        break;
+                    
+                    default:
+                        $image = "<i class='material-icons'>lock</i>";
+                        break;
+                }
             }else{
-                $image= "images/lists/unlocked.png";
+                switch ($theme) {
+                    case 'classic':
+                        $image = "images/lists/unlocked.png";
+                        break;
+                    
+                    default:
+                        $image = "<i class='material-icons'>lock_open</i>";
+                        break;
+                }
             }
         }
         return $image;
@@ -921,36 +955,37 @@ class userManagement extends management
 
     static function filterProperties($row, $classes)
     {
+        $theme = getThemeName();
         $result= "";
-        $map= array( "gosaAccount" => array( "image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>person</i>" : "plugins/users/images/select_user.png"),
+        $map= array( "gosaAccount" => array( "image" => tempSwitch(array("<i class='material-icons input-icons'>person</i>", "plugins/users/images/select_user.png")),
                     "plugin" => "user",
                     "alt" => _("Generic"),
                     "title" => _("Edit generic properties")),
-                "posixAccount" => array("image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>info</i>" : "images/penguin.png"),
+                "posixAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>info</i>", "images/penguin.png")),
                     "plugin" => "posixAccount",
                     "alt" => _("POSIX"),
                     "title" => _("Edit POSIX properties")),
-                "gosaMailAccount" => array("image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>mail</i>" : "images/mailto.png"),
+                "gosaMailAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>mail</i>", "images/mailto.png")),
                     "alt" => _("Mail"),
                     "plugin" => "mailAccount",
                     "title" => _("Edit mail properties")),
-                "sambaSamAccount" => array("image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>window</i>" : "plugins/systems/images/select_winstation.png"),
+                "sambaSamAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>window</i>", "plugins/systems/images/select_winstation.png")),
                     "plugin" => "sambaAccount",
                     "alt" => _("Samba"),
                     "title" => _("Edit samba properties")),
-                "apple-user" => array("image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>question_answer</i>" : "plugins/netatalk/images/select_netatalk.png"),
+                "apple-user" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>question_answer</i>", "plugins/netatalk/images/select_netatalk.png")),
                     "plugin" => "netatalk",
                     "alt" => _("Netatalk"),
                     "title" => _("Edit Netatalk properties")),
-                "gotoEnvironment" => array("image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>smart_display</i>" : "plugins/users/images/small_environment.png"),
+                "gotoEnvironment" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>smart_display</i>", "plugins/users/images/small_environment.png")),
                     "plugin" => "environment",
                     "alt" => _("Environment"),
                     "title" => _("Edit environment properties")),
-                "goFaxAccount" => array("image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>print</i>" : "plugins/users/images/fax_small.png"),
+                "goFaxAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>print</i>", "plugins/users/images/fax_small.png")),
                         "plugin" => "gofaxAccount",
                         "alt" => _("FAX"),
                         "title" => _("Edit FAX properties")),
-                "goFonAccount" => array("image" => (check_for_materialize_theme() ? "<i class='material-icons input-icons'>phone</i>" : "plugins/gofon/images/select_phone.png"),
+                "goFonAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>phone</i>", "plugins/gofon/images/select_phone.png")),
                         "plugin" => "phoneAccount",
                         "alt" => _("Phone"),
                         "title" => _("Edit phone properties")),
@@ -961,21 +996,42 @@ class userManagement extends management
             if (in_array_ics($oc, $classes)) {
                 $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
             } else {
-                $result.= image('images/empty.png');
+                switch ($theme) {
+                    case 'classic':
+                        $result .= image('images/empty.png');
+                        break;
+                    
+                    default:
+                        $result .= image("");
+                        break;
+                }
             }
         }
 
         if(in_array_ics("zarafa-contact", $classes)){
-          $result.= (check_for_materialize_theme() ?
-                        image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties")) :
-                        image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties")));
+            switch ($theme) {
+                case 'classic':
+                    $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    break;
+                
+                default:
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    break;
+            }
         } else if(in_array_ics("zarafa-user", $classes)){
-          $result.= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+            switch ($theme) {
+                case 'classic':
+                    $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    break;
+                
+                default:
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    break;
+            }
         }
 
         return $result;
     }
-
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

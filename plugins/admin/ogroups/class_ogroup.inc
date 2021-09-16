@@ -68,22 +68,10 @@ class ogroup extends plugin
 
     public function __construct(&$config, $dn= null)
     {
-        $this->typeToImage = check_for_materialize_theme() ?
-                array(
-                    "Y" => "<i class='material-icons'>web_asset</i>",
-                    "U" => "<i class='material-icons'>person</i>",
-                    "G" => "<i class='material-icons'>groups</i>",
-                    "A" => "<i class='material-icons'>apps</i>",
-                    "D" => "<i class='material-icons'>domain</i>",
-                    "S" => "<i class='material-icons'>dns</i>",
-                    "W" => "<i class='material-icons'>computer</i>",
-                    "O" => "<i class='material-icons'>desktop_windows</i>",
-                    "T" => "<i class='material-icons'>monitor</i>",
-                    "F" => "<i class='material-icons'>monitor</i>",
-                    "P" => "<i class='material-icons'>printer</i>",
-                    "I" => "<i class='material-icons'>not_interested</i>"
-                ) :
-                array(
+        $theme = getThemeName();
+        switch ($theme) {
+            case 'classic':
+                $this->typeToImage = array(
                     "Y" => "plugins/users/images/select_template.png",
                     "U" => "plugins/users/images/select_user.png",
                     "G" => "plugins/groups/images/select_group.png",
@@ -97,6 +85,25 @@ class ogroup extends plugin
                     "P" => "plugins/ogroups/images/printer.png",
                     "I" => "images/false.png"
                 );
+                break;
+            
+            default:
+                $this->typeToImage = array(
+                    "Y" => "<i class='material-icons'>web_asset</i>",
+                    "U" => "<i class='material-icons'>person</i>",
+                    "G" => "<i class='material-icons'>groups</i>",
+                    "A" => "<i class='material-icons'>apps</i>",
+                    "D" => "<i class='material-icons'>domain</i>",
+                    "S" => "<i class='material-icons'>dns</i>",
+                    "W" => "<i class='material-icons'>computer</i>",
+                    "O" => "<i class='material-icons'>desktop_windows</i>",
+                    "T" => "<i class='material-icons'>monitor</i>",
+                    "F" => "<i class='material-icons'>monitor</i>",
+                    "P" => "<i class='material-icons'>printer</i>",
+                    "I" => "<i class='material-icons'>not_interested</i>"
+                );
+                break;
+        }
 
         plugin::__construct($config, $dn);
 
@@ -409,7 +416,7 @@ class ogroup extends plugin
             $smarty->assign("$val", set_post($this->$val));
         }
 
-        return ($smarty->fetch(get_template_path(check_for_materialize_theme() ? 'generic_materialize.tpl' : 'generic.tpl', true)));
+        return ($smarty->fetch(get_template_path('generic.tpl', true)));
     }
 
 

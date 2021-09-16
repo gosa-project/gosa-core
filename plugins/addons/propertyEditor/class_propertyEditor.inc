@@ -218,6 +218,7 @@ class propertyEditor extends management
         $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
         $value = set_post($value[0]);
+        $theme = getThemeName();
 
         switch($type[0]){
             case 'noLdap':
@@ -247,16 +248,20 @@ class propertyEditor extends management
                 }
                 break;
             case 'command':
-                if (check_for_materialize_theme()) {
-                    $res = "<div class='valign-wrapper' style='width:{$isize};width:calc({$isize} + 28px)'>
-                                <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">";
-                    $res.= "    <label>
-                                    ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
-                                </label>
-                            </div>";
-                }else {
-                    $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
-                    $res.= image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                switch ($theme) {
+                    case 'classic':
+                        $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
+                                 ".image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                        break;
+                    
+                    default:
+                        $res = "<div class='valign-wrapper' style='width:{$isize};width:calc({$isize} + 28px)'>
+                                    <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">
+                                    <label>
+                                        ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
+                                    </label>
+                                </div>";
+                        break;
                 }
                 break;
             case 'dn':

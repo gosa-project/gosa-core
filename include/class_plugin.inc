@@ -650,17 +650,25 @@ class plugin
     } else {
       $state= "";
     }
-    $display = check_for_materialize_theme() ?
-                "<h2 class='card-title'>"._(Preferences)."</h2>
-                 <p>$text</p>
-                 <div class='card-action settings'>
-                  <button class='btn-small' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
-                 </div>" :
-                "<div class='plugin-enable-header'>
-                    <p>$text</p>
-                    <button type='submit' name=\"modify_state\" ".$state.">$button_text</button>
-                  </div>";
 
+    $theme = getThemeName();
+
+    switch ($theme) {
+      case 'classic':
+        $display = "<div class='plugin-enable-header'>
+                      <p>$text</p>
+                      <button type='submit' name=\"modify_state\" ".$state.">$button_text</button>
+                    </div>";
+        break;
+      
+      default:
+        $display = "<h2 class='card-title'>"._(Preferences)."</h2>
+                      <p>$text</p>
+                      <div class='card-action settings'>
+                        <button class='btn-small' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
+                      </div>";
+        break;
+    }
     return($display);
   }
 
@@ -668,25 +676,34 @@ class plugin
   /*! \brief Show header message for tab dialogs */
   function show_disable_header($button_text, $text, $disabled= FALSE)
   {
+    $theme = getThemeName();
+
     if (($disabled == TRUE) || !$this->acl_is_removeable()){
       $state= "disabled";
     } else {
       $state= "";
     }
-    $display =  (check_for_materialize_theme() ?
-                  "<h2 class='card-title'>"._(Preferences)."</h2>
-                   <p>$text</p>
-                   <div class='card-action settings'>
+
+    switch ($theme) {
+      case 'classic':
+        $display = "<div class='plugin-disable-header'>
+                      <p>$text</p>
+                      <button type='submit' name=\"modify_state\" ".$state.">
+                        $button_text
+                      </button>
+                    </div>";
+        break;
+      
+      default:
+        $display = "<h2 class='card-title'>"._(Preferences)."</h2>
+                    <p>$text</p>
+                    <div class='card-action settings'>
                       <button class='btn-small' type='submit' name='modify_state' ".$state.">
                         $button_text
                       </button>
-                   </div>" :
-                  "<div class='plugin-disable-header'>
-                    <p>$text</p>
-                    <button type='submit' name=\"modify_state\" ".$state.">
-                      $button_text
-                    </button>
-                  </div>");
+                    </div>";
+        break;
+    }
     return($display);
   }
 

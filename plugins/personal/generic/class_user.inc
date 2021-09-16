@@ -586,7 +586,7 @@ class user extends plugin
           $smarty->assign($cert."info",$str);
           $smarty->assign($cert."_state","true");
         } else {
-          $smarty->assign($cert."info", check_for_materialize_theme() ?  "<p>"._("No certificate installed")."</p>" : "<i>"._("No certificate installed")."</i>");
+          $smarty->assign($cert."info", tempSwitch(array("<p>"._("No certificate installed")."</p>", "<i>"._("No certificate installed")."</i>")));
           $smarty->assign($cert."_state","");
         }
       }
@@ -705,7 +705,7 @@ class user extends plugin
     }
     $smarty->assign("multiple_support" , $this->multiple_support_active);
     $smarty->assign("manager_name", set_post($this->manager_name));
-    return($smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__))));
+    return($smarty->fetch (get_template_path("generic.tpl", TRUE, dirname(__FILE__))));
   }
 
 

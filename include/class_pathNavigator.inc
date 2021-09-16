@@ -59,6 +59,8 @@ class pathNavigator
 
     public static function getCurrentPath()
     {
+        $theme = getThemeName();
+
         // Ensure that we've a position value initialized.
         if (!session::is_set('pathNavigator::position')) {
             session::set('pathNavigator::position', []);
@@ -70,46 +72,48 @@ class pathNavigator
             $list = [];
         }
 
-        if (check_for_materialize_theme()) {
-            // Build up title and path string.
-            $path = '';
-            $sTitle = '';
-            foreach ($list as $entry) {
-                $title = (!empty($entry['TITLE'])) ? 'title="'.htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8').'"' : '';
-                $path .= "  <p class='breadcrumb-point' {$title}>{$entry['NAME']}</p>";
-                $sTitle .= ' - '.$entry['NAME'];
-            }
+        switch ($theme) {
+            case 'classic':
+                // Build up title and path string.
+                $path = '';
+                $sTitle = '';
+                foreach ($list as $entry) {
+                    $title = (!empty($entry['TITLE'])) ? 'title="'.htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8').'"' : '';
+                    $path .= "\n<li {$title} class='left path-element'>{$entry['NAME']}</li>";
+                    $sTitle .= ' - '.$entry['NAME'];
+                }
 
-            // If no path is given then show a simple 'Welcome to GOsa' string.
-            if (empty($path)) {
-                $path = " <p class='breadcrumb-point'>
-                    "._('Welcome to GOsa').'
-                  </p>';
-            }
+                // If no path is given then show a simple 'Welcome to GOsa' string.
+                if (empty($path)) {
+                    $path = "<div class='left col s5'>"._('Welcome to GOsa').'</div>';
+                }
 
-            $smarty = get_smarty();
-            $smarty->assign('title', 'GOsa '.$sTitle);
+                $smarty = get_smarty();
+                $smarty->assign('title', 'GOsa '.$sTitle);
 
-            return $path;
-        } else {
-            // Build up title and path string.
-            $path = '';
-            $sTitle = '';
-            foreach ($list as $entry) {
-                $title = (!empty($entry['TITLE'])) ? 'title="'.htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8').'"' : '';
-                $path .= "\n<li {$title} class='left path-element'>{$entry['NAME']}</li>";
-                $sTitle .= ' - '.$entry['NAME'];
-            }
+                return $path;
+            
+            default:
+                // Build up title and path string.
+                $path = '';
+                $sTitle = '';
+                foreach ($list as $entry) {
+                    $title = (!empty($entry['TITLE'])) ? 'title="'.htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8').'"' : '';
+                    $path .= "  <p class='breadcrumb-point' {$title}>{$entry['NAME']}</p>";
+                    $sTitle .= ' - '.$entry['NAME'];
+                }
 
-            // If no path is given then show a simple 'Welcome to GOsa' string.
-            if (empty($path)) {
-                $path = "<div class='left col s5'>"._('Welcome to GOsa').'</div>';
-            }
+                // If no path is given then show a simple 'Welcome to GOsa' string.
+                if (empty($path)) {
+                    $path = " <p class='breadcrumb-point'>
+                        "._('Welcome to GOsa').'
+                    </p>';
+                }
 
-            $smarty = get_smarty();
-            $smarty->assign('title', 'GOsa '.$sTitle);
+                $smarty = get_smarty();
+                $smarty->assign('title', 'GOsa '.$sTitle);
 
-            return $path;
+                return $path;
         }
     }
 
