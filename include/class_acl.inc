@@ -558,6 +558,7 @@ class acl extends plugin
 
         /* Adds the 'all-users' peudo-group to the acl */
         if(isset($_POST['add_all_users'])) {
+
             if(!isset($this->recipients['G:*'])) {
                 $this->recipients['G:*'] = _("All users");
 

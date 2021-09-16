@@ -5,7 +5,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
-    <template>../plugins/personal/posix/groupSelect/group-list.tpl</template>
+    <template>../plugins/personal/posix/groupSelect/classic/group-list.tpl</template>
     <module>groups</module>
     <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>

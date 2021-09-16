@@ -13,8 +13,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
 
-    <style type="text/css">@import url('themes/default/style.css');</style>
-    <link rel="stylesheet" type="text/css" href="themes/default/printer.css" media="print">
+    <style type="text/css">@import url('themes/classic/style.css');</style>
+    <link rel="stylesheet" type="text/css" href="themes/classic/printer.css" media="print">
 
     <!--[if IE]>
     <style type="text/css">
@@ -25,7 +25,7 @@
     <!-- Include correct theme icon sets -->
     <style type="text/css">
       div.img, div.img div, input[type=submit].img{
-        background-image:url(themes/default/images/img.png);
+        background-image:url(themes/classic/images/img.png);
       }
     </style>
     <link rel="shortcut icon" href="favicon.ico">

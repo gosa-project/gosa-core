@@ -5,7 +5,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
-    <template>../plugins/personal/posix/trustSelect/trust-list.tpl</template>
+    <template>../plugins/personal/posix/trustSelect/classic/trust-list.tpl</template>
     <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
     <objectType>

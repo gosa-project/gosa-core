@@ -6,7 +6,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <singleSelect>true</singleSelect>
-    <template>../plugins/admin/groups/singleUserSelect/singleUser-list.tpl</template>
+    <template>../plugins/admin/groups/singleUserSelect/classic/singleUser-list.tpl</template>
     <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
 
