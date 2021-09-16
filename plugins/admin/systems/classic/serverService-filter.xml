@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <category>server</category>
+    <initial>true</initial>
+    <default>default</default>
+    <scope>auto</scope>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>name</attribute>
+    <attribute>Message</attribute>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Default filter</label>
+    <query>
+      <backend>ServerService</backend>
+      <filter>...</filter>
+    </query>
+  </search>
+
+</filterdef>
