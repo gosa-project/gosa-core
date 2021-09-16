@@ -1863,7 +1863,7 @@ class listing
                         $result .= $this->recurseActions($action['action'], $level).'</li>';
                         --$level;
                         $separator = '';
-                        continue;
+                        continue 2;
                     }
 
                     // Render entry elseways
@@ -1923,7 +1923,7 @@ class listing
                             --$level;
                             $separator = '';
                         }
-                        continue;
+                        continue 2;
                     }
 
                     if (isset($action['label'])) {
