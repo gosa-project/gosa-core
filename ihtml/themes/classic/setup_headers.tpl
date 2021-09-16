@@ -16,8 +16,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=9">
 
-    <link rel="stylesheet" href="themes/materialize/css/materialize.css">
-  <link rel="stylesheet" href="themes/materialize/css/style.css">
+    <link rel="stylesheet" href="themes/classic/style.css">
+  <link rel="stylesheet" href="themes/classic/printer.css">
 
   <style type="text/css">@import url('themes/default/style.css');</style>
   <link rel="shortcut icon" href="favicon.ico">

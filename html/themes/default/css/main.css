@@ -68,7 +68,7 @@ input {
     max-width: 100%;
 }
 
-.content-area {
+.content-area:not(.setup) {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
