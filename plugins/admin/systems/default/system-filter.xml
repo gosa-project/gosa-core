@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <initial>true</initial>
+    <category>server</category>
+    <category>workstation</category>
+    <category>terminal</category>
+    <category>opsi</category>
+    <category>incoming</category>
+    <category>phone</category>
+    <category>printer</category>
+    <category>winworkstation</category>
+    <category>component</category>
+    <category>Device</category>
+    <scope>auto</scope>
+    <default>default</default>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>cn</attribute>
+    <attribute>description</attribute>
+    <attribute>gotoMode</attribute>
+    <attribute>FAIstate</attribute>
+    <attribute>FAIclass</attribute>
+    <attribute>macAddress</attribute>
+    <attribute>gotoLastUser</attribute>
+    <attribute>state</attribute>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Default filter</label>
+    <query>
+      <backend>SYSTEMS</backend>
+      <filter>(&amp;
+                (|(objectClass=goServer)
+                  (objectClass=gotoWorkstation)
+                  (objectClass=device)
+                  (objectClass=gotoTerminal)
+                  (objectClass=goFonHardware)
+                  (objectClass=ieee802Device)
+                  (objectClass=gotoPrinter)
+                  (objectClass=sambaSamAccount)
+                )
+                (cn=$)
+              )
+      </filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>all</tag>
+    <label>All systems</label>
+    <query>
+      <backend>SYSTEMS</backend>
+      <filter>(&amp;
+                (|(objectClass=goServer)
+                  (objectClass=gotoWorkstation)
+                  (objectClass=gotoTerminal)
+                  (objectClass=goFonHardware)
+                  (objectClass=ieee802Device)
+                  (objectClass=gotoPrinter)
+                  (objectClass=sambaSamAccount)
+                  (&amp;(objectClass=goHard)(ou:dn:=%systemIncomingRDN))
+                )
+                (cn=$)
+              )
+      </filter>
+    </query>
+    <query>
+      <backend>OPSIHOSTS</backend>
+      <filter>cn=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+
+  <search>
+    <tag>onlyOpsi</tag>
+    <label>Opsi</label>
+    <query>
+      <backend>OPSIHOSTS</backend>
+      <filter>cn=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>incoming</tag>
+    <label>Incoming objects</label>
+    <query>
+      <backend>SYSTEMS</backend>
+      <filter>(&amp;(objectClass=goHard)(ou:dn:=%systemIncomingRDN)(cn=$))</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+</filterdef>
