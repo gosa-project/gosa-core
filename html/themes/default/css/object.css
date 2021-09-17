@@ -692,6 +692,13 @@
     margin-left: 10px;
 }
 
+.object-info .dropdown-content li > span > label {
+    display: contents;
+    top: 1px;
+    left: 0;
+    height: 18px;
+}
+    
 @media only screen and (max-width: 1200px) {
     .object-info .content-wrapper .user-image {
         margin-bottom: 20px;
@@ -718,4 +725,14 @@
         margin-left: 0.75rem;
         margin-right: 0.75rem;
     }
+}
+
+.object-info .kolab-wrapper .multi-check {
+    display: flex;
+}
+
+.object-info .intranet-wrapper {
+    border-top: .5px solid lightslategray;
+    margin-top: 1rem;
+    padding-top: 1rem;
 }
