@@ -134,39 +134,44 @@ if (! $cleanup ){
             session::set('MyAccountTabs',$MyAccountTabs);
         }
 
+        $theme = getThemeName();
+
         /* Show page footer depending on the mode */
         if (!$MyAccountTabs->is_modal_dialog() && empty($lock_msg) && !$MyAccountTabs->password_change_needed){
 
-            if (check_for_materialize_theme()) {
-                $display.=" <div class='card-action'>";
+            switch ($theme) {
+                case 'classic':
+                    $display.= "<div class='plugin-actions'>";
 
-                /* Are we in edit mode? */
-                if (session::is_set('edit')){
-                    $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-                    $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
-                } else {
-                    if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
-                        $display.= "<button class='btn-small gonicus-color' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                    /* Are we in edit mode? */
+                    if (session::is_set('edit')){
+                        $display.= "<button class='button' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
+                        $display.= "<button class='button' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
+                    } else {
+                        if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
+                            $display.= "<button class='button' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                        }
+                        $display.= "<input type='hidden' name='ignore'>\n";
                     }
-                    $display.= "<input type='hidden' name='ignore'>\n";
-                }
-                $display.=" </div>";
-            } else {
-                $display.= "<div class='plugin-actions'>";
+                    $display.= "</div>\n";
+                    break;
+                
+                default:
+                    $display.=" <div class='card-action'>";
 
-                /* Are we in edit mode? */
-                if (session::is_set('edit')){
-                    $display.= "<button class='button' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-                    $display.= "<button class='button' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
-                } else {
-                    if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
-                        $display.= "<button class='button' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                    /* Are we in edit mode? */
+                    if (session::is_set('edit')){
+                        $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
+                        $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
+                    } else {
+                        if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
+                            $display.= "<button class='btn-small gonicus-color' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                        }
+                        $display.= "<input type='hidden' name='ignore'>\n";
                     }
-                    $display.= "<input type='hidden' name='ignore'>\n";
-                }
-                $display.= "</div>\n";
+                    $display.=" </div>";
+                    break;
             }
-
         }
     }
 }
