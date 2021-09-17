@@ -117,10 +117,10 @@
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
+   // First input field on page
 	focus_field('mail');
-  -->
 </script>
+
 {if $multiple_support}
 	<input type="hidden" name="multiple_mail_group_posted" value="1">
 {/if}
