@@ -93,6 +93,8 @@ class kolabAccount extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    $theme = getThemeName();
+
     /* Fill proposed FB URL if empty */
     if (empty($this->calFBURL)) {
       $this->calFBURL= "https://".$this->parent->by_object['mailAccount']->gosaMailServer.
@@ -253,14 +255,28 @@ class kolabAccount extends plugin
           $dis = " disabled ";
         }
       }
-      $invitation.= "<tr><td>";
+
+      switch ($theme) {
+        case 'classic':
+          $invitation.= "<tr><td>";
+          break;
+      }
+      
 
       if(!$this->acl_is_readable("kolabInvitationPolicy"))    {
       }
 
       /* The default entry does not have colons... */
       if (!preg_match('/:/', $entry)){
-        $invitation.= _("Anonymous");
+        switch ($theme) {
+          case 'classic':
+            $invitation.= _("Anonymous");
+            break;
+          
+          default:
+            $label = _("Anonymous");
+            break;
+        }
         $name= "";
         $mode= $entry;
       } else {
@@ -270,12 +286,32 @@ class kolabAccount extends plugin
         if(!$this->acl_is_readable("kolabInvitationPolicy")){
           $name='';
         }
-        $invitation.= "<input type='text'name=\"address$nr\" size=16 maxlength=60  value=\"".set_post($name)."\" id='address".$nr."' ".$dis.">";
+        switch ($theme) {
+          case 'classic':
+            $invitation.= "<input type='text' name=\"address$nr\" size=16 maxlength=60  value=\"".set_post($name)."\" id='address".$nr."' ".$dis.">";
+            break;
+          
+          default:
+            $invitation.= " <div class'input-field'>
+                              <input type='text' name=\"address$nr\" size=16 maxlength=60  value=\"".set_post($name)."\" id='address".$nr."' ".$dis.">
+                            </div>";
+            break;
+        }
       }
-      $invitation.= "</td>";
+      switch ($theme) {
+        case 'classic':
+          $invitation.= "</td>";
+          $invitation.= "<td><select size=\"1\" name=\"policy$nr\" id='policy".$nr."' ".$dis.">";
+          break;
+        
+        default:
+          $invitation.= "<div class='input-field add'>
+                          <select size='1' name='policy$nr' id='policy".$nr." ".$dis."'>";
+          break;
+      }
 
       /* Add mode switch */
-      $invitation.= "<td><select size=\"1\" name=\"policy$nr\" id='policy".$nr."' ".$dis.">";
+      
       foreach($policies as $key => $value){
         if ($key == $mode){
           $invitation.= "<option value=\"$key\" selected>$value</option>";
@@ -286,16 +322,33 @@ class kolabAccount extends plugin
       
       /* Assign buttons */
       $button= "";
-      if ($nr == count($this->kolabInvitationPolicy)-1){
-        $button= "<button type='submit' name=\"add_inv_".$nr."\" id='add".$nr."' ".$dis.">".msgPool::addButton()."</button>";
-      }
-      if ($nr != 0) {
-        $button.= "<button type='submit' name=\"del_inv_".$nr."\" id='remove".$nr."' ".$dis.">".msgPool::delButton()."</button>";
+      switch ($theme) {
+        case 'classic':
+          if ($nr == count($this->kolabInvitationPolicy)-1){
+            $button= "<button type='submit' name=\"add_inv_".$nr."\" id='add".$nr."' ".$dis.">".msgPool::addButton()."</button>";
+          }
+          if ($nr != 0) {
+            $button.= "<button type='submit' name=\"del_inv_".$nr."\" id='remove".$nr."' ".$dis.">".msgPool::delButton()."</button>";
+          }
+          $invitation.= "</select>&nbsp;</td>
+                        <td>$button</td>
+                      </tr>\n";
+          break;
+        
+        default:
+          if ($nr == count($this->kolabInvitationPolicy)-1){
+            $button= "<button class='btn-small' type='submit' name=\"add_inv_".$nr."\" id='add".$nr."' ".$dis.">".msgPool::addButton()."</button>";
+          }
+          if ($nr != 0) {
+            $button.= "<button class='btn-small' type='submit' name=\"del_inv_".$nr."\" id='remove".$nr."' ".$dis.">".msgPool::delButton()."</button>";
+          }
+          $invitation .= "</select>
+                          <label>".$label."</label>"
+                          .$button.
+                          "</div>";
+          break;
       }
       
-      $invitation.= "</select>&nbsp;</td>
-                    <td>$button</td>
-                  </tr>\n";
       $this->imapping[$nr]= $name;
       $nr++;
     }
