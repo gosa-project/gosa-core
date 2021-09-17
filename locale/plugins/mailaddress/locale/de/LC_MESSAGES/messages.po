@@ -1,0 +1,281 @@
+# translation of messages.po to deutsch
+# gosa-plugin-mailaddress Translations
+# Copyright (C) 2015 Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+# This file is distributed under the same license as the gosa-plugin-mailaddress package.
+#
+#
+# Mike Gabriel <mike.gabriel@das-netzwerkteam.de>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-06 22:21+0100\n"
+"PO-Revision-Date: 2019-02-06 22:24+0100\n"
+"Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
+"Language-Team: deutsch <de@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#: admin/groups/mailaddress/class_groupMail.inc:132
+#: admin/groups/mailaddress/class_groupMail.inc:135
+#: admin/groups/mailaddress/class_groupMail.inc:514
+#: personal/mailaddress/class_mailAccount.inc:134
+#: personal/mailaddress/class_mailAccount.inc:137
+#: personal/mailaddress/class_mailAccount.inc:476
+#: personal/mailaddress/class_mailAccount.inc:530
+msgid "Mail"
+msgstr "Mail"
+
+#: admin/groups/mailaddress/class_groupMail.inc:163
+#: admin/groups/mailaddress/class_groupMail.inc:188
+#: admin/groups/mailaddress/class_groupMail.inc:193
+#: admin/groups/mailaddress/class_groupMail.inc:220
+#: admin/groups/mailaddress/class_groupMail.inc:227
+#: admin/groups/mailaddress/class_groupMail.inc:242
+#: personal/mailaddress/class_mailAccount.inc:154
+#: personal/mailaddress/class_mailAccount.inc:434
+msgid "Error"
+msgstr "Fehler"
+
+#: admin/groups/mailaddress/class_groupMail.inc:163
+msgid "Please select an entry!"
+msgstr "Bitte einen Eintrag auswählen"
+
+#: admin/groups/mailaddress/class_groupMail.inc:188
+#: admin/groups/mailaddress/class_groupMail.inc:220
+#: admin/groups/mailaddress/class_groupMail.inc:227
+#: admin/groups/mailaddress/class_groupMail.inc:242
+#: admin/groups/mailaddress/class_groupMail.inc:397
+#: admin/groups/mailaddress/class_groupMail.inc:401
+#: admin/groups/mailaddress/class_groupMail.inc:404
+#: admin/groups/mailaddress/class_groupMail.inc:413
+#: admin/groups/mailaddress/class_groupMail.inc:514
+#: admin/groups/mailaddress/mailaddress.tpl:10
+#: admin/groups/mailaddress/paste_mailaddress.tpl:9
+#: personal/mailaddress/class_mailAccount.inc:332
+#: personal/mailaddress/class_mailAccount.inc:335
+#: personal/mailaddress/class_mailAccount.inc:341
+#: personal/mailaddress/class_mailAccount.inc:346
+#: personal/mailaddress/class_mailAccount.inc:363
+#: personal/mailaddress/class_mailAccount.inc:542
+#: personal/mailaddress/generic.tpl:7 personal/mailaddress/generic.tpl:9
+msgid "Mail address"
+msgstr "Mail-Adresse"
+
+#: admin/groups/mailaddress/class_groupMail.inc:193
+msgid "Cannot add primary address to the list of forwarders!"
+msgstr ""
+"Die Primäre Mail-Addresse kann nicht zur Liste der Weiterleitungen "
+"hinzugefügt werden!"
+
+#: admin/groups/mailaddress/class_groupMail.inc:237
+#: personal/mailaddress/class_mailAccount.inc:358
+#, php-format
+msgid "Address is already in use by group '%s'."
+msgstr "Die Adresse wird bereits von der Gruppe '%s' verwendet."
+
+#: admin/groups/mailaddress/class_groupMail.inc:240
+#: personal/mailaddress/class_mailAccount.inc:361
+#, php-format
+msgid "Address is already in use by user '%s'."
+msgstr "Die Adresse wird bereits von Benutzer '%s' verwendet."
+
+#: admin/groups/mailaddress/class_groupMail.inc:307
+#: admin/groups/mailaddress/class_groupMail.inc:362
+#: personal/mailaddress/class_mailAccount.inc:250
+#: personal/mailaddress/class_mailAccount.inc:292
+msgid "LDAP error"
+msgstr "LDAP-Fehler"
+
+#: admin/groups/mailaddress/class_groupMail.inc:514
+msgid "Group mail"
+msgstr "Mail der Gruppe"
+
+#: admin/groups/mailaddress/class_groupMail.inc:514
+msgid "Alternate addresses"
+msgstr "Alternative Adressen"
+
+#: admin/groups/mailaddress/class_groupMail.inc:514
+msgid "Forwarding addresses"
+msgstr "Weiterleitungsadressen"
+
+#: admin/groups/mailaddress/class_groupMail.inc:558
+#: admin/groups/mailaddress/mailaddress.tpl:27
+#: personal/mailaddress/class_mailAccount.inc:484
+#: personal/mailaddress/generic.tpl:26
+msgid "Mail address pattern"
+msgstr "Mail-Adressschema"
+
+#: admin/groups/mailaddress/class_groupMail.inc:558
+#, php-format
+msgid ""
+"Please make use of the {%cn} placeholder for the group part of the mail "
+"address."
+msgstr ""
+"Bitte den {%cn} Platzhalter für den Gruppenteil der Mail-Adresse verwenden."
+
+#: admin/groups/mailaddress/mailaddress.tpl:1
+#: admin/groups/mailaddress/paste_mailaddress.tpl:1
+msgid "Mail settings"
+msgstr "Mail-Einstellungen"
+
+#: admin/groups/mailaddress/mailaddress.tpl:7
+#: admin/groups/mailaddress/mailaddress.tpl:19
+msgid "Generic"
+msgstr "Allgemein"
+
+#: admin/groups/mailaddress/mailaddress.tpl:8
+#: admin/groups/mailaddress/mailaddress.tpl:20
+#: admin/groups/mailaddress/paste_mailaddress.tpl:6
+msgid "Mail address settings"
+msgstr "Mail-Adresseinstellungen"
+
+#: admin/groups/mailaddress/mailaddress.tpl:22
+#, php-format
+msgid ""
+"Please specify a mail address pattern (e.g., &#123;%cn&#124;@your-domain."
+"com) or leave empty."
+msgstr ""
+"Bitte ein Mail-Adressschema eingeben (z.Bsp. {%cn}@your-domain.com) oder das "
+"Feld freilassen."
+
+#: admin/groups/mailaddress/mailaddress.tpl:42
+#: admin/groups/mailaddress/paste_mailaddress.tpl:26
+msgid "Alternative addresses"
+msgstr "Mail-Aliase"
+
+#: admin/groups/mailaddress/mailaddress.tpl:47
+#: admin/groups/mailaddress/paste_mailaddress.tpl:27
+msgid "List of alternative mail addresses"
+msgstr "Liste mit alternativen Mail-Adressen"
+
+#: admin/groups/mailaddress/mailaddress.tpl:73
+#: admin/groups/mailaddress/mailaddress.tpl:74
+msgid "Advanced mail options"
+msgstr "Erweiterte Mail-Optionen"
+
+#: admin/groups/mailaddress/mailaddress.tpl:79
+#: admin/groups/mailaddress/paste_mailaddress.tpl:40
+msgid "Forward messages to non group members"
+msgstr "Nachrichten an Nicht-Gruppenmitglieder weiterleiten"
+
+#: admin/groups/mailaddress/mailaddress.tpl:87
+msgid "Used in all groups"
+msgstr "Verwendet in allen Gruppen"
+
+#: admin/groups/mailaddress/mailaddress.tpl:90
+msgid "Not used in all groups"
+msgstr "Nicht verwendet in allen Gruppen"
+
+#: admin/groups/mailaddress/paste_mailaddress.tpl:2
+msgid "Paste mail settings"
+msgstr "Mail-Einstellungen Einfügen"
+
+#: admin/groups/mailaddress/paste_mailaddress.tpl:13
+msgid "Mail address for this group"
+msgstr "Mail-Adresse für diese Gruppe"
+
+#: admin/groups/mailaddress/paste_mailaddress.tpl:21
+msgid "Additional mail settings"
+msgstr "Weitere Mail-Einstellungen"
+
+#: personal/mailaddress/class_mailAccount.inc:38
+#: personal/mailaddress/class_mailAccount.inc:128
+#: personal/mailaddress/copypaste.tpl:1 personal/mailaddress/copypaste.tpl:3
+#: personal/mailaddress/copypaste.tpl:5
+msgid "Mail Address"
+msgstr "Mail-Adresse"
+
+#: personal/mailaddress/class_mailAccount.inc:39
+msgid "Manage user mail address"
+msgstr "Mail-Adressen von Benutzern verwalten"
+
+#: personal/mailaddress/class_mailAccount.inc:154
+#: personal/mailaddress/class_mailAccount.inc:434
+msgid "The to be added alias is not a valid email address!"
+msgstr "Der hinzugefügte Alias ist keine gültige E-Mail Adresse!"
+
+#: personal/mailaddress/class_mailAccount.inc:332
+msgid "Examples"
+msgstr "Beispiele"
+
+#: personal/mailaddress/class_mailAccount.inc:332
+msgid "or"
+msgstr "oder"
+
+#: personal/mailaddress/class_mailAccount.inc:484
+msgid "Please make use of placeholders for the user part of the mail address."
+msgstr "Bitte Platzhalter für den Benutzerteil der Mail-Adresse verwenden."
+
+#: personal/mailaddress/class_mailAccount.inc:531
+#: personal/mailaddress/generic.tpl:6
+msgid "User Mail Address"
+msgstr "Mail-Adresse des Benutzers"
+
+#: personal/mailaddress/class_mailAccount.inc:536
+msgid "My account"
+msgstr "Mein Konto"
+
+#: personal/mailaddress/class_mailAccount.inc:543
+msgid "Mail aliases"
+msgstr "Mail Aliase"
+
+#: personal/mailaddress/generic.tpl:1
+msgid "Mail Address Settings"
+msgstr "Mail-Adresseinstellungen"
+
+#: personal/mailaddress/generic.tpl:18
+msgid "Users' Mail Address Scheme"
+msgstr "Mail-Adressschema für Benutzer"
+
+#: personal/mailaddress/generic.tpl:19
+msgid "Mail addresses"
+msgstr "Mail-Adresse"
+
+#: personal/mailaddress/generic.tpl:21
+msgid ""
+"Please specify a mail address pattern (e.g., &#123;%uid&#124;@your-domain."
+"com). Valid placeholders are: &#123;%uid&#124;, &#123;%givenName&#124; and "
+"&#123;%sn&#124;. For no action on the users' mail addresses, please leave "
+"empty."
+msgstr ""
+"Bitte ein Mail-Adressschema eingeben (z.Bsp. {%uid}@your-domain.com). "
+"Gültige Platzhalter sind: {%uid}, {%givenName} und {%sn}. Wenn die Mail-"
+"Adressen der Benutzer unverändert bleiben sollen, dieses Feld bitte "
+"freilassen."
+
+#: personal/mailaddress/generic.tpl:39
+msgid "User's Mail Aliases"
+msgstr "Aliase des Benutzer"
+
+#: personal/mailaddress/generic.tpl:40 personal/mailaddress/generic.tpl:42
+#: personal/mailaddress/generic.tpl:59 personal/mailaddress/copypaste.tpl:17
+msgid "Alias addresses"
+msgstr "Alternative Adressen"
+
+#: personal/mailaddress/generic.tpl:49 personal/mailaddress/copypaste.tpl:25
+msgid "Email alias address"
+msgstr "Mail-Alias"
+
+#: personal/mailaddress/generic.tpl:52 personal/mailaddress/copypaste.tpl:28
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: personal/mailaddress/generic.tpl:58
+msgid "Users' Mail Aliases"
+msgstr "Mail"
+
+#: personal/mailaddress/generic.tpl:61
+msgid "Mass editing of email aliases is not supported."
+msgstr "Das Mehrfachbearbeiten von Mail Aliasen wird nicht unterstützt."
+
+#: personal/mailaddress/copypaste.tpl:13
+msgid "User Mail Aliases"
+msgstr "Mail-Aliase des Benutzers"
+
+#: personal/mailaddress/copypaste.tpl:15
+msgid "Mail Aliases"
+msgstr "Mail-Aliase"
