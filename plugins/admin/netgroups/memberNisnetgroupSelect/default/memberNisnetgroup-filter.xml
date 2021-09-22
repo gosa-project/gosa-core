@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+	<definition>
+		<category>memberNisnetgroups</category>
+		<template>../plugins/admin/netgroups/memberNisnetgroupSelect/memberNisnetgroup-filter.tpl</template>
+		<initial>true</initial>
+		<default>default</default>
+		<attribute>dn</attribute>
+		<attribute>objectClass</attribute>
+		<attribute>cn</attribute>
+		<attribute>uid</attribute>
+		<attribute>description</attribute>
+		<scope>auto</scope>
+	</definition>
+
+
+	<search>
+		<tag>default</tag>
+		<label>Default filter</label>
+		<query>
+			<backend>LDAP</backend>
+			<filter>(&amp;(objectClass=nisNetgroup)(cn=$))</filter>
+		</query>
+	</search>
+
+</filterdef>
