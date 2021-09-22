@@ -29,7 +29,7 @@
   </div>
 
   <div class="card-action">
-    <button class="btn-small gonicus-color" name='goOn'>{msgPool type='okButton'}</button>
+    <button class="btn-small primary" name='goOn'>{msgPool type='okButton'}</button>
   </div>
   <input type="hidden" name="ignore">
 
@@ -60,8 +60,8 @@
   </div>
 
   <div class="card-action">
-    <button class="btn-small gonicus-color" name='saveProperties'>{msgPool type='applyButton'}</button>
-    <button class="btn-small gonicus-color" name='cancelProperties' {if !$is_modified} disabled {/if}>{t}Undo{/t}</button>
+    <button class="btn-small primary" name='saveProperties'>{msgPool type='applyButton'}</button>
+    <button class="btn-small primary" name='cancelProperties' {if !$is_modified} disabled {/if}>{t}Undo{/t}</button>
   </div>
 
   <input type="hidden" name="ignore">

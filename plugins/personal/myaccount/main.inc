@@ -161,11 +161,11 @@ if (! $cleanup ){
 
                     /* Are we in edit mode? */
                     if (session::is_set('edit')){
-                        $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-                        $display.= "<button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
+                        $display.= "<button class='btn-small primary' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
+                        $display.= "<button class='btn-small primary' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
                     } else {
                         if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
-                            $display.= "<button class='btn-small gonicus-color' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                            $display.= "<button class='btn-small primary' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
                         }
                         $display.= "<input type='hidden' name='ignore'>\n";
                     }

@@ -19,13 +19,13 @@
                     <i class="material-icons">close</i>
                 </div>
                 <div class="col s1">
-                    <button class="btn-small gonicus-color right" type='submit' name='resolve_search'>{t}Search{/t}</button>
+                    <button class="btn-small primary right" type='submit' name='resolve_search'>{t}Search{/t}</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12">
-                    <button class="btn-small gonicus-color" type='submit' name='use_selected_user'>{t}Apply{/t}</button>
-                    <button class="btn-small gonicus-color right" type='submit' name='resolve_user'>{t}Cancel{/t}</button>
+                    <button class="btn-small primary" type='submit' name='use_selected_user'>{t}Apply{/t}</button>
+                    <button class="btn-small primary right" type='submit' name='resolve_user'>{t}Cancel{/t}</button>
                 </div>
             </div>
         </form>

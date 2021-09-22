@@ -19,6 +19,6 @@
 </div>
 
 <div class="card-action">
-    <button class="btn-small gonicus-color" type="submit" name="ok-save">{msgPool type=okButton}</button>
-    <button class="btn-small gonicus-color" type="submit" name="cancel-abort">{msgPool type=cancelButton}</button>
+    <button class="btn-small primary" type="submit" name="ok-save">{msgPool type=okButton}</button>
+    <button class="btn-small primary" type="submit" name="cancel-abort">{msgPool type=cancelButton}</button>
 </div>

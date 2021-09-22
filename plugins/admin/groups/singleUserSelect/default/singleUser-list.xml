@@ -6,7 +6,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <singleSelect>true</singleSelect>
-    <template>../../../ihtml/themes/materialize/list-select.tpl</template>
+    <template>../../../ihtml/themes/default/list-select.tpl</template>
     <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
 

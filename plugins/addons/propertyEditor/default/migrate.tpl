@@ -9,7 +9,7 @@
 <hr>
 
 <div class="card-action">
-    <button class="btn-small gonicus-color" name='propertyMigrate_save'>{msgPool type='okButton'}</button>
-    <button class="btn-small gonicus-color" name='propertyMigrate_cancel'>{msgPool type='cancelButton'}</button>
+    <button class="btn-small primary" name='propertyMigrate_save'>{msgPool type='okButton'}</button>
+    <button class="btn-small primary" name='propertyMigrate_cancel'>{msgPool type='cancelButton'}</button>
    </div>
 <input type="hidden" name="ignore">

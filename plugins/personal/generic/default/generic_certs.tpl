@@ -122,8 +122,8 @@
 <div class='plugin-actions card-action'>
 
     {render acl=$CertificateACL}
-    <button class="btn-small gonicus-color" type='submit' name='cert_edit_finish'>{msgPool type=saveButton}</button> 
+    <button class="btn-small primary" type='submit' name='cert_edit_finish'>{msgPool type=saveButton}</button> 
     {/render}
 
-    <button class="btn-small gonicus-color" type='submit' name='cert_edit_cancel'>{msgPool type=cancelButton}</button>
+    <button class="btn-small primary" type='submit' name='cert_edit_cancel'>{msgPool type=cancelButton}</button>
 </div>

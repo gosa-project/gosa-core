@@ -1,6 +1,6 @@
 <body>
     {$php_errors}
-    <nav>
+    <nav class="accent">
         <div class="nav-wrapper">
             <a href="main.php?global_check=1" class="brand-logo" alt="GOsa²">
                 <img src="themes/default/images/logo.png">

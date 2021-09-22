@@ -233,7 +233,7 @@ class filter
 
                 $content .= "   <div class='search-field'>
                                     ".$this->getTextfield('search_filter', set_post($this->value), $s)."
-                                    <button class='btn gonicus-color' type='submit' title='"._('Search')."'>
+                                    <button class='btn primary' type='submit' title='"._('Search')."'>
                                         <i class='material-icons white-text md-18'>search</i>
                                     </button>
                                 </div>";
@@ -489,7 +489,7 @@ class filter
                 $script = '<script type="text/javascript" language="JavaScript">var menu2; menu2= new Menu("filter-root", "menu2", configMenu)</script>';
                 break;
             default:
-                $result = " <a class='dropdown-filter btn gonicus-color' data-target='filter-dropdown'>
+                $result = " <a class='dropdown-filter btn primary' data-target='filter-dropdown'>
                                 <i class='material-icons right'>arrow_drop_down</i>
                                 <i class='material-icons'>filter_alt</i>
                             </a>";

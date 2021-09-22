@@ -225,16 +225,16 @@ class setup
             $str ="";
 
             if(isset($this->o_steps[$this->i_current -1]) && $this->o_steps[$this->i_current -1]->is_enabled()){
-                $str .= "<button class='btn-small gonicus-color' type='submit' name='last'>".msgPool::backButton()."</button>";
+                $str .= "<button class='btn-small primary' type='submit' name='last'>".msgPool::backButton()."</button>";
             }else{
                 $str .= "<button class='btn-small disabled' type='submit' name='last'>".msgPool::backButton()."</button>";
             }
 
             if($this->o_steps[$this->i_current]->b_displayCheckbutton){
-                $str .= "<button class='btn-small gonicus-color' type='submit' name='test'>"._("Check again")."</button>";
+                $str .= "<button class='btn-small primary' type='submit' name='test'>"._("Check again")."</button>";
             }
 
-            $str .= "<button class='btn-small gonicus-color' type='submit' name='next'>"._("Next")."</button>";
+            $str .= "<button class='btn-small primary' type='submit' name='next'>"._("Next")."</button>";
         }
         return($str);
     }
