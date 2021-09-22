@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <definition>
+    <departmentBrowser>true</departmentBrowser>
+    <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>true</baseMode>
+    <multiSelect>true</multiSelect>
+    <template>../../../ihtml/themes/default/list-select.tpl</template>
+    <label>Please select the desired entries</label>
+    <defaultSortColumn>1</defaultSortColumn>
+
+    <objectType>
+      <label>NIS Netgroup</label>
+      <objectClass>nisNetgroup</objectClass>
+      <category>netgroups</category>
+      <class>netgroup</class>
+      <image>connect_without_contact</image>
+    </objectType>
+
+    <objectType>
+      <label>User</label>
+      <objectClass>posixAccount</objectClass>
+      <category>triples</category>
+      <class>triple</class>
+      <image>person</image>
+    </objectType>
+
+   <objectType>
+      <label>Server</label>
+      <objectClass>goServer</objectClass>
+      <category>server</category>
+      <class>servgeneric</class>
+      <image>dns</image>
+    </objectType>
+
+    <objectType>
+      <label>Workstation</label>
+      <objectClass>gotoWorkstation</objectClass>
+      <category>workstation</category>
+      <class>workgeneric</class>
+      <image>computer</image>
+    </objectType>
+
+    <objectType>
+      <label>Terminal</label>
+      <objectClass>gotoTerminal</objectClass>
+      <category>terminal</category>
+      <class>termgeneric</class>
+      <image>monitor</image>
+    </objectType>
+
+    <objectType>
+      <label>Component</label>
+      <objectClass>ieee802Device</objectClass>
+      <category>component</category>
+      <class>componentGeneric</class>
+      <image>inventory_2</image>
+    </objectType>
+
+  </definition>
+
+  <table>
+    <layout>|20px;c|||||</layout>
+
+    <department>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </department>
+
+    <department>
+      <value>%{filter:departmentLink(row,dn,description)}</value>
+      <span>1</span>
+    </department>
+
+    <column>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </column>
+
+    <column>
+      <label>Common name</label>
+      <sortAttribute>cn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{cn}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Login</label>
+      <sortAttribute>uid</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{uid}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Surname</label>
+      <sortAttribute>sn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{sn}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Description</label>
+      <sortAttribute>description</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{description}</value>
+      <export>true</export>
+    </column>
+
+  </table>
+
+  <actionmenu>
+  </actionmenu>
+
+  <actiontriggers snapshot="false" copypaste="false">
+  </actiontriggers>
+
+</list>
