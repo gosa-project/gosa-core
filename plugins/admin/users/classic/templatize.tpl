@@ -18,8 +18,8 @@
     </div>
 
     <div class="plugin-actions card-action">
-      <button class="btn-small gonicus-color" type='submit' name='templatize_continue'>{msgPool type=applyButton}</button>
-      <button class="btn-small gonicus-color" type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
+      <button class="btn-small primary" type='submit' name='templatize_continue'>{msgPool type=applyButton}</button>
+      <button class="btn-small primary" type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
     </div>
   {else}
     <p class="no-templates">
@@ -27,7 +27,7 @@
     </p>
 
     <div class="plugin-actions card-action">
-      <button class="btn-small gonicus-color" type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
+      <button class="btn-small primary" type='submit' name='edit_cancel'>{msgPool type=cancelButton}</button>
     </div>
 
   {/if}

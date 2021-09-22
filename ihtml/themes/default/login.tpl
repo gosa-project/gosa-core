@@ -1,6 +1,6 @@
 <body>
   {$php_errors}
-  <nav>
+  <nav class="accent">
     <div class="nav-wrapper">
       <div class="brand-logo valign-wrapper">
         <img class="responsive-img" src="themes/default/images/logo.png">
@@ -68,7 +68,7 @@
             </select>
           </div>
 
-          <button class="btn-small gonicus-color" type="submit" name="login" id="login"
+          <button class="btn-small primary" type="submit" name="login" id="login"
             title="{t}Click here to log in{/t}">{t}Log in{/t}</button>
         </div>
 

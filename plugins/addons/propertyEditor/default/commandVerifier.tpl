@@ -27,7 +27,7 @@
     {/if}
 
     <div class="card-action">
-        <button class="btn-small gonicus-color" type='submit' name='commandVerifier_save'>{msgPool type='okButton'}</button>
-        <button class="btn-small gonicus-color" type='submit' name='commandVerifier_cancel'>{msgPool type='cancelButton'}</button>
+        <button class="btn-small primary" type='submit' name='commandVerifier_save'>{msgPool type='okButton'}</button>
+        <button class="btn-small primary" type='submit' name='commandVerifier_cancel'>{msgPool type='cancelButton'}</button>
     </div>
 </div>

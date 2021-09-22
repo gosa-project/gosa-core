@@ -303,7 +303,7 @@ class pluglist
                         }
 
                         $menu .= '    <li '.($main ? "class='active'" : '').">
-                                        <div class='collapsible-header gonicus-color'><h4>"._($headline)."</h4></div>
+                                        <div class='collapsible-header primary'><h4>"._($headline)."</h4></div>
                                         <div class='collapsible-body'>
                                             <ul class='collection'>";
 

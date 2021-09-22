@@ -124,8 +124,8 @@
   </div>
 
   <div class="card-action">
-    <button class="btn-small gonicus-color" type='submit' id="password_finish" name='password_finish' disabled>{t}Set password{/t}</button>
-    <button class="btn-small gonicus-color" type=reset id="password_cancel" name="password_cancel">{t}Clear
+    <button class="btn-small primary" type='submit' id="password_finish" name='password_finish' disabled>{t}Set password{/t}</button>
+    <button class="btn-small primary" type=reset id="password_cancel" name="password_cancel">{t}Clear
       fields{/t}</button>
   </div>
 

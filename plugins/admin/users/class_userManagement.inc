@@ -994,7 +994,15 @@ class userManagement extends management
         // Walk thru map
         foreach ($map as $oc => $properties) {
             if (in_array_ics($oc, $classes)) {
-                $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
+                switch ($theme) {
+                    case 'classic':
+                        $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
+                        break;
+                    
+                    default:
+                        $result.= "<div class='property-wrapper'>".image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title'])."</div>";
+                        break;
+                }
             } else {
                 switch ($theme) {
                     case 'classic':

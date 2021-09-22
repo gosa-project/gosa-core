@@ -13,7 +13,7 @@
               </p>
 
               <div class="card-action">
-                <button class="btn-small gonicus-color" name="dummy" id="dummy">
+                <button class="btn-small primary" name="dummy" id="dummy">
                   {t}Login again{/t}
                 </button>
               </div>

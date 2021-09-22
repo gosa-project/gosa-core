@@ -148,10 +148,13 @@ hr.divider {
 
 /* -- colors -- */
 
-.gonicus-color {
+.primary {
     background-color: rgba(42, 50, 120, 1) !important;
 }
 
+.accent {
+    background-color: #db5c01;
+}
 
 /* -- Datepicker setup -- */
 

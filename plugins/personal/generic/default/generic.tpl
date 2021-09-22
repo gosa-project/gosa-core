@@ -200,7 +200,7 @@
         {render acl=$gosaLoginRestrictionACL}
         <div class="input-field">
             <input type="text" id="res" name="res" maxlength=33 value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'> 
-            <button class="btn-small gonicus-color" id="add_res" type="submit" name="add_res">{t}Add{/t}</button> 
+            <button class="btn-small primary" id="add_res" type="submit" name="add_res">{t}Add{/t}</button> 
             <label for="res">{t}Restrict login to{/t}</label>
         </div>
         {/render} 

@@ -12,6 +12,6 @@
   </div>
 
   <div class="plugin-actions card-action">
-      <button class="btn-small gonicus-color" name='cancelLdifViewer'>{msgPool type='cancelButton'}</button>
+      <button class="btn-small primary" name='cancelLdifViewer'>{msgPool type='cancelButton'}</button>
   </div>
 </div>

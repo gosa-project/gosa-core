@@ -22,7 +22,8 @@
 
 button.btn-small,
 button.btn-extra-small,
-div.btn-small {
+div.btn-small,
+.file-field .btn-small {
     height: 32.4px;
     line-height: 32.4px;
     border: 1px solid #e0e0e0;
@@ -40,7 +41,7 @@ div.btn-small:hover {
     color: #fff;
 }
 
-button.btn-small.gonicus-color {
+button.btn-small.primary {
     border: 1px solid transparent;
     background-color: rgba(42, 50, 120, 1);
     color: #fff;

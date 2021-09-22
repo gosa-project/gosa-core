@@ -8,7 +8,7 @@
   <button class="btn-small" type='submit' name='addFilter'>{msgPool type='addButton'}</button>
 
   <div class="plugin-actions card-action">
-    <button class="btn-small gonicus-color" type='submit' name='saveFilter'>{msgPool type='saveButton'}</button>
-    <button class="btn-small gonicus-color" type='submit' name='cancelFilter'>{msgPool type='cancelButton'}</button>
+    <button class="btn-small primary" type='submit' name='saveFilter'>{msgPool type='saveButton'}</button>
+    <button class="btn-small primary" type='submit' name='cancelFilter'>{msgPool type='cancelButton'}</button>
   </div>
 </div>

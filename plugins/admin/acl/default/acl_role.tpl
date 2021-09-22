@@ -62,10 +62,10 @@
 
     <div class="card-action">
         {render acl=$gosaAclTemplateACL}
-        <button class="btn-small gonicus-color" type='submit' name='submit_new_acl'>{msgPool type=applyButton}</button> 
+        <button class="btn-small primary" type='submit' name='submit_new_acl'>{msgPool type=applyButton}</button> 
         {/render}
 
-        <button class="btn-small gonicus-color" type='submit' name='cancel_new_acl'>{msgPool type=cancelButton}</button>
+        <button class="btn-small primary" type='submit' name='cancel_new_acl'>{msgPool type=cancelButton}</button>
     </div>
     {/if} {if $dialogState eq 'edit'}
 
@@ -79,8 +79,8 @@
 
     <div class="card-action">
         {render acl=$gosaAclTemplateACL}
-        <button class="btn-small gonicus-color" type='submit' name='submit_edit_acl'>{msgPool type=applyButton}</button> {/render}
-        <button class="btn-small gonicus-color" type='submit' name='cancel_edit_acl'>{msgPool type=cancelButton}</button>
+        <button class="btn-small primary" type='submit' name='submit_edit_acl'>{msgPool type=applyButton}</button> {/render}
+        <button class="btn-small primary" type='submit' name='cancel_edit_acl'>{msgPool type=cancelButton}</button>
     </div>
     {/if}
     <input type='hidden' name='acl_role_posted' value='1'>

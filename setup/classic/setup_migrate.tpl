@@ -32,7 +32,7 @@
     		<pre>{$details.target}</pre>
 
 			<br>
-			<button class="btn-small gonicus-color" type='submit' name='rootOC_migrate_start'>{t}Migrate{/t}</button>
+			<button class="btn-small primary" type='submit' name='rootOC_migrate_start'>{t}Migrate{/t}</button>
 			<hr>	
 			<div class="plugin-actions">
 				<button type='submit' name='rootOC_dialog_cancel'>{t}Close{/t}</button>
@@ -76,7 +76,7 @@
 
     <hr>	
     <div class="plugin-actions">
-        <button class="btn-small gonicus-color" type='submit' name='create_admin_user'>{t}Apply{/t}</button>	
-        <button class="btn-small gonicus-color" type='submit' name='create_acls_cancel'>{t}Cancel{/t}</button>
+        <button class="btn-small primary" type='submit' name='create_admin_user'>{t}Apply{/t}</button>	
+        <button class="btn-small primary" type='submit' name='create_acls_cancel'>{t}Cancel{/t}</button>
     </div>
 {/if}

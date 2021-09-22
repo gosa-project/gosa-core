@@ -76,7 +76,7 @@ class aclroletab extends tabs
         
         default:
           $display .= " <div class='card-action'>
-                          <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                          <button class='btn-small primary' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                         </div>";
           break;
       }
@@ -91,8 +91,8 @@ class aclroletab extends tabs
         
         default:
           $display .= "<div class='card-action'>
-                        <button class='btn-small gonicus-color' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
-                        <button class='btn-small gonicus-color' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                        <button class='btn-small primary' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
+                        <button class='btn-small primary' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                       </div>";
           break;
       }

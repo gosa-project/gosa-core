@@ -311,7 +311,7 @@ class management
                 
                 default:
                     $str .= "<div class='card-action'>
-                                <button class='btn-small gonicus-color' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>
+                                <button class='btn-small primary' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>
                             </div>";
                     break;
             }
@@ -332,11 +332,11 @@ class management
                 
                 default:
                     $str.=" <div class='card-action'>
-                                <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>";
+                                <button class='btn-small primary' type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>";
                     if ($this->displayApplyBtn) {
-                        $str.=" <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>";
+                        $str.=" <button class='btn-small primary' type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>";
                     }
-                    $str.="     <button class='btn-small gonicus-color' type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                    $str.="     <button class='btn-small primary' type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                             </div>";
                     break;
             }

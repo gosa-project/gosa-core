@@ -1,8 +1,8 @@
  <body>
   {$php_errors}
 
-    <nav>
-        <div class="nav-wrapper gonicus-color ">
+    <nav class="accent">
+        <div class="nav-wrapper primary ">
             <a href="#" class="brand-logo" alt="GOsa²">
                 <img src="themes/default/images/logo.png">
             </a>

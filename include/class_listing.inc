@@ -1780,7 +1780,7 @@ class listing
                 // Load shortcut
                 $actions = &$this->xmlData['actionmenu']['action'];
 
-                $result .= "  <a class='dropdown-menu btn gonicus-color' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
+                $result .= "  <a class='dropdown-menu btn primary' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
                             <ul class='dropdown-content' id='$level'>";
 
                 $result .= $this->recurseActions($actions, $level).'</ul></>';

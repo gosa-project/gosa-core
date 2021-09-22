@@ -20,7 +20,7 @@
     </div>
 
     <div class="card-action">
-        <button class="btn-small gonicus-color" type='submit' name='picture_edit_finish'>{msgPool type=saveButton}</button>
-        <button class="btn-small gonicus-color" type='submit' name='picture_edit_cancel'>{msgPool type=cancelButton}</button>
+        <button class="btn-small primary" type='submit' name='picture_edit_finish'>{msgPool type=saveButton}</button>
+        <button class="btn-small primary" type='submit' name='picture_edit_cancel'>{msgPool type=cancelButton}</button>
     </div>
 </div>

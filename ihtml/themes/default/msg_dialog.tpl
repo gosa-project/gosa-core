@@ -68,10 +68,10 @@
 
 			<div class="modal-footer">
 				{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
-					<button class="btn-small gonicus-color" type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
+					<button class="btn-small primary" type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
 				{elseif $buttononst.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-					<button class="btn-small gonicus-color" type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
-					<button class="btn-small gonicus-color" type='submit' name='MSG_CANCEL{$i_ID}'>{t}Cancel{/t}</button>
+					<button class="btn-small primary" type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
+					<button class="btn-small primary" type='submit' name='MSG_CANCEL{$i_ID}'>{t}Cancel{/t}</button>
 				{/if}
 			</div>
 		</div>
@@ -109,13 +109,13 @@
 
 		<div class="modal-footer">
 			{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
-				<button class="btn-small gonicus-color" id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
+				<button class="btn-small primary" id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
 			{elseif $i_Type == $smarty.const.CONFIRM_DIALOG}
-				<button class="btn-small gonicus-color" id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
-				<button class="btn-small gonicus-color" type='button' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
+				<button class="btn-small primary" id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
+				<button class="btn-small primary" type='button' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
 			{elseif $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-				<button class="btn-small gonicus-color" id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
-				<button class="btn-small gonicus-color" type='submit' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
+				<button class="btn-small primary" id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
+				<button class="btn-small primary" type='submit' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
 			{/if}
 		</div>
 	</div>

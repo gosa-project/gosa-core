@@ -113,8 +113,8 @@
   <input type='hidden' value='1' name='userFilterEditor'>
 
   <div class="card-action">
-    <button class="btn-small gonicus-color" type='submit' name='saveFilterSettings'>{msgPool type='saveButton'}</button>
-    <button class="btn-small gonicus-color" type='submit' name='cancelFilterSettings'>{msgPool
+    <button class="btn-small primary" type='submit' name='saveFilterSettings'>{msgPool type='saveButton'}</button>
+    <button class="btn-small primary" type='submit' name='cancelFilterSettings'>{msgPool
       type='cancelButton'}</button>
   </div>
 </div>

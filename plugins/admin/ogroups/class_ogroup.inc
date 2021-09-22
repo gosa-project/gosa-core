@@ -98,7 +98,7 @@ class ogroup extends plugin
                     "W" => "<i class='material-icons'>computer</i>",
                     "O" => "<i class='material-icons'>desktop_windows</i>",
                     "T" => "<i class='material-icons'>monitor</i>",
-                    "F" => "<i class='material-icons'>monitor</i>",
+                    "F" => "<i class='material-icons'>phone</i>",
                     "P" => "<i class='material-icons'>printer</i>",
                     "I" => "<i class='material-icons'>not_interested</i>"
                 );

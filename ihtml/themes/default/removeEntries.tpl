@@ -17,6 +17,6 @@
 </div>
 
 <div class="card-action">
-  <button class="btn-small gonicus-color" type='submit' name='delete_confirmed'>{msgPool type=delButton}</button>
-  <button class="btn-small gonicus-color" type='submit' name='delete_cancel'>{msgPool type=cancelButton}</button>
+  <button class="btn-small primary" type='submit' name='delete_confirmed'>{msgPool type=delButton}</button>
+  <button class="btn-small primary" type='submit' name='delete_cancel'>{msgPool type=cancelButton}</button>
 </div>
