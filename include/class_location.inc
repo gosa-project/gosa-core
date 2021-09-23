@@ -147,6 +147,7 @@ $class_mapping= array(
                 "MyAccountTabs" => "plugins/personal/myaccount/MyAccountTabs.inc",
                 "MyAccount" => "plugins/personal/myaccount/class_MyAccount.inc",
                 "user" => "plugins/personal/generic/class_user.inc",
+                "webdavAccount" => "plugins/personal/connectivity/webdav/class_webdavAccount.inc",
                 "intranetAccount" => "plugins/personal/connectivity/class_intranetAccount.inc",
                 "connectivity" => "plugins/personal/connectivity/class_connectivity.inc",
                 "infoPage" => "plugins/generic/infoPage/class_infoPage.inc",
