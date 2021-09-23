@@ -1,13 +1,10 @@
 <div class="pwreset-wrapper">
+    <i class="material-icons right" title="{t escape=no}With the GOsa2 Password Management Add-On you can mass reset user passwords in various ways.{/t}">info</i>
     <div class="row">
-        <h2>{t}Password Management{/t}</h2>
-        <p>{t escape=no}With the GOsa2 Password Management Add-On you can mass reset user passwords in various ways.{/t}</p>
         {if $pwreset_configured != TRUE}
         <input type="hidden" name="phase_01">
         
-        <br>
-        
-        <h3>{t}Configure password reset options{/t}</h3>
+        <h2>{t}Configure password reset options{/t}</h2>
         <p>{t}Please configure options for this run of resetting user credentials.{/t}</p>
         
         <hr class="divider">
@@ -61,9 +58,7 @@
         {elseif $pwreset_reviewed != TRUE}
         <input type="hidden" name="phase_02">
 
-        <br>
-
-        <h3>{t}Review password resets{/t}</h3>
+        <h2>{t}Review password resets{/t}</h2>
 
         {if (!empty($accounts))}
         <p>{t}Please review outstanding password reset operations. If individual users should be skipped from this password reset operation, deselect them below.{/t}</p>
@@ -113,9 +108,7 @@
             {/if}
         </div>
         {else}
-        <br>
-
-        <h3>{t}Password reset operations have been accomplished{/t}</h3>
+        <h2>{t}Password reset operations have been accomplished{/t}</h2>
         
         <p>{t}Below you find a status report for this password reset operation. You can copy'n'paste the credentials table below into your favourite spreadsheet application (e.g., LibreOffice Calc).{/t}</p>
         
@@ -166,21 +159,19 @@
     </div>
 </div>
 
-<hr class="divider">
-
 <div class="card-action">
     {if $pwreset_configured != TRUE}
-    <button class="btn-small primary" name="btn_pwreset_configured" type ="submit">{t}Review upcoming password resets{/t}</button>
+    <button class="btn-small primary" name="btn_pwreset_configured" type ="submit" style="overflow: hidden;">{t}Review upcoming password resets{/t}</button>
     {elseif $pwreset_reviewed != TRUE}
     {if (!empty($accounts))}
-    <button class="btn-small primary" name="btn_pwreset_reviewed" type ="submit">{t}Reset passwords of selected accounts{/t}</button>
+    <button class="btn-small primary" name="btn_pwreset_reviewed" type ="submit" style="overflow: hidden;">{t}Reset passwords of selected accounts{/t}</button>
     {else}
     <input type="hidden" name="phase_00">
-    <button class="btn-small primary" name="btn_pwreset_back" type ="submit">{t}Back{/t}</button>
+    <button class="btn-small primary" name="btn_pwreset_back" type ="submit" style="overflow: hidden;">{t}Back{/t}</button>
     {/if}
     {else}
     <input type="hidden" name="phase_00">
-    <button class="btn-small primary" name="btn_pwreset_restart" type ="submit">{t}Restart Password Manager{/t}</button>
+    <button class="btn-small primary" name="btn_pwreset_restart" type ="submit" style="overflow: hidden;">{t}Restart Password Manager{/t}</button>
     {/if}
 </div>
 
