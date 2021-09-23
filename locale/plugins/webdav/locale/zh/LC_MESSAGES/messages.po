@@ -1,0 +1,60 @@
+# translation of messages.po to Chinese Simplified
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+# Jiang Xin <worldhello.net@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:25+0100\n"
+"PO-Revision-Date: 2007-06-03 12:27+0800\n"
+"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Language-Team: Chinese Simplified <zh@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:6
+#: personal/connectivity/webdav/class_webdavAccount.inc:165
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:7
+#, fuzzy
+msgid "Manage WebDAV user settings"
+msgstr "通用队列设置"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:91
+#: personal/connectivity/webdav/class_webdavAccount.inc:146
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP 错误:"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#: personal/connectivity/webdav/webdav.tpl:5
+msgid "WebDAV account"
+msgstr "WebDAV 账号"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "互联"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:174
+msgid "My account"
+msgstr "我的账号"
+
+#, fuzzy
+#~ msgid "This does something"
+#~ msgstr "******"
+
+#, fuzzy
+#~ msgid "Removing of user/webDAV account with dn '%s' failed."
+#~ msgstr "删除 dn 为 '%s' 的 user/kolab 账号失败。"
+
+#, fuzzy
+#~ msgid "Saving of user/webDAV account with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 的 user/kolab 账号为空。"

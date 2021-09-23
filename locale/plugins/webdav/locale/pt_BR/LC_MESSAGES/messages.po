@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GOsa plugins - webdav\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:25+0100\n"
+"PO-Revision-Date: 2010-03-25 10:08-0300\n"
+"Last-Translator: Marcos Amorim <marcosmamorim@gmail.com>\n"
+"Language-Team: Marcos Amorim <marcosmamorim@gmail.com> Clever de Oliveira "
+"<clever@dri.cefetmg.br>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portugueses\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:6
+#: personal/connectivity/webdav/class_webdavAccount.inc:165
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:7
+#, fuzzy
+msgid "Manage WebDAV user settings"
+msgstr "Configurações gerais do usuário"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:91
+#: personal/connectivity/webdav/class_webdavAccount.inc:146
+msgid "LDAP error"
+msgstr "Erro LDAP"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#: personal/connectivity/webdav/webdav.tpl:5
+msgid "WebDAV account"
+msgstr "Conta WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Addon conectividade"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:174
+msgid "My account"
+msgstr "Minha conta"
+
+#~ msgid "This does something"
+#~ msgstr "Isto faz algo"
