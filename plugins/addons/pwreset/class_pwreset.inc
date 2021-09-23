@@ -25,6 +25,7 @@ class pwreset extends plugin
     var $plHeadline= "Password Management";
     var $plDescription= "Password Management Add-On";
     var $plIcon = "plugins/pwreset/images/pwreset.png";
+    var $matIcon = "restart_alt";
 
     /* attribute list for save action */
     var $attributes= array();
