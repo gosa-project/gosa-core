@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: polski\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:25+0100\n"
+"PO-Revision-Date: 2007-07-14 21:45+0100\n"
+"Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
+"Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: iso-8859-2\n"
+"X-Poedit-Basepath: tedst\n"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:6
+#: personal/connectivity/webdav/class_webdavAccount.inc:165
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:7
+#, fuzzy
+msgid "Manage WebDAV user settings"
+msgstr "Ogólne ustawienia użytkownika"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:91
+#: personal/connectivity/webdav/class_webdavAccount.inc:146
+#, fuzzy
+msgid "LDAP error"
+msgstr "błąd LDAP:"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#: personal/connectivity/webdav/webdav.tpl:5
+msgid "WebDAV account"
+msgstr "Konto WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Konto połączeń"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:174
+msgid "My account"
+msgstr "Moje konto "
+
+#~ msgid "This does something"
+#~ msgstr "To robi coś"
+
+#~ msgid "Removing of user/webDAV account with dn '%s' failed."
+#~ msgstr "Usuwanie konta webDAV z dn '%s' nieudane."
+
+#~ msgid "Saving of user/webDAV account with dn '%s' failed."
+#~ msgstr "Zapisywanie konta webDAV z dn '%s' nieudane."

@@ -1,0 +1,62 @@
+# translation of messages.po to Dutch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004.
+#
+# Translator:
+# Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:25+0100\n"
+"PO-Revision-Date: 2006-06-02 16:58+0100\n"
+"Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
+"Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:6
+#: personal/connectivity/webdav/class_webdavAccount.inc:165
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:7
+#, fuzzy
+msgid "Manage WebDAV user settings"
+msgstr "Algemene wachtrij instellingen"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:91
+#: personal/connectivity/webdav/class_webdavAccount.inc:146
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP fout:"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#: personal/connectivity/webdav/webdav.tpl:5
+msgid "WebDAV account"
+msgstr "WebDAV Account"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Verbindingen"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:174
+msgid "My account"
+msgstr "Mijn account"
+
+#~ msgid "This does something"
+#~ msgstr "Dit doet iets"
+
+#, fuzzy
+#~ msgid "Removing of user/webDAV account with dn '%s' failed."
+#~ msgstr "Het verwijderen van het webDAV account is mislukt"
+
+#, fuzzy
+#~ msgid "Saving of user/webDAV account with dn '%s' failed."
+#~ msgstr "Het opslaan van het webDAV account is mislukt"

@@ -1,0 +1,58 @@
+# translation of admin.po to
+# translation of systems.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:25+0100\n"
+"PO-Revision-Date: 2010-01-20 00:31+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:6
+#: personal/connectivity/webdav/class_webdavAccount.inc:165
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:7
+#, fuzzy
+msgid "Manage WebDAV user settings"
+msgstr "Parámetros genéricos del usuario"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:91
+#: personal/connectivity/webdav/class_webdavAccount.inc:146
+msgid "LDAP error"
+msgstr "Error LDAP"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#: personal/connectivity/webdav/webdav.tpl:5
+msgid "WebDAV account"
+msgstr "Cuenta WebDAV"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:166
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Conectividad adicional"
+
+#: personal/connectivity/webdav/class_webdavAccount.inc:174
+msgid "My account"
+msgstr "Mi cuenta"
+
+#~ msgid "This does something"
+#~ msgstr "Esto hace algo"
+
+#~ msgid "Removing of user/webDAV account with dn '%s' failed."
+#~ msgstr "Ha fallado al eliminar la cuenta usuario/WebDAV con dn '%s'."
+
+#~ msgid "Saving of user/webDAV account with dn '%s' failed."
+#~ msgstr "Ha fallado al guardar la cuenta de usuario/WebDAV con dn '%s'."
