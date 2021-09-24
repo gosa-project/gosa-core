@@ -1,0 +1,141 @@
+# translation of admin.po to
+# translation of systems.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-01-20 00:41+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:5
+#: personal/connectivity/squid/class_proxyAccount.inc:330
+msgid "Proxy"
+msgstr "Proxy"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:6
+#, fuzzy
+msgid "Manage Proxy user settings"
+msgstr "Parámetros genéricos del usuario"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:92
+msgid "KB"
+msgstr "Kb"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:92
+msgid "MB"
+msgstr "Mb"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:92
+msgid "GB"
+msgstr "Gb"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "hour"
+msgstr "hora"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "day"
+msgstr "día"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "week"
+msgstr "semana"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "month"
+msgstr "mes"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:183
+#: personal/connectivity/squid/class_proxyAccount.inc:309
+msgid "LDAP error"
+msgstr "Error LDAP"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:204
+#: personal/connectivity/squid/class_proxyAccount.inc:206
+msgid "Quota Setting"
+msgstr "Tamaño de cuota"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:331
+#: personal/connectivity/squid/proxy.tpl:37
+msgid "Proxy account"
+msgstr "Cuenta Proxy"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:331
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Conectividad adicional"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:335
+msgid "My account"
+msgstr "Mi cuenta"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:344
+msgid "Quota"
+msgstr ""
+
+#: personal/connectivity/squid/class_proxyAccount.inc:345
+msgid "Filter unwanted content"
+msgstr "Filtrar contenido no requerido"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:346
+msgid "Limit proxy access"
+msgstr "Limitar acceso al Proxy"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:347
+#: personal/connectivity/squid/proxy.tpl:97
+msgid "Restrict proxy usage by quota"
+msgstr "Restringir el uso del proxy con cuotas"
+
+#: personal/connectivity/squid/proxy.tpl:39
+#, fuzzy
+msgid "Proxy configuration"
+msgstr "Configuración PHP"
+
+#: personal/connectivity/squid/proxy.tpl:45
+msgid "Filter unwanted content (i.e. pornographic or violence related)"
+msgstr "Filtrar contenido indeseable (p.e. pornografía o contenido violento)"
+
+#: personal/connectivity/squid/proxy.tpl:56
+msgid "Limit proxy access to working time"
+msgstr "Limitar acceso al proxy al horario laboral"
+
+#: personal/connectivity/squid/proxy.tpl:58
+#, fuzzy
+msgid "Worktime restrictions"
+msgstr "Restricciones de contraseña"
+
+#: personal/connectivity/squid/proxy.tpl:99
+#, fuzzy
+msgid "Quota configuration"
+msgstr "Descargar configuración"
+
+#: personal/connectivity/squid/proxy.tpl:112
+msgid "per"
+msgstr "por"
+
+#~ msgid "This does something"
+#~ msgstr "Esto hace algo"
+
+#~ msgid "Removing of user/proxy account with dn '%s' failed."
+#~ msgstr "Se ha fallado al eliminar la cuenta de usuario/Proxy con dn '%s'."
+
+#~ msgid "Saving of user/proxy account with dn '%s' failed."
+#~ msgstr "Ha fallado la grabación de la cuenta de usuario/proxy con dn '%s'."
+
+#~ msgid "Numerical value for Quota Setting is empty."
+#~ msgstr "El valor numérico para cuota esta vacío."
+
+#~ msgid "Numerical value for Quota Setting is not valid."
+#~ msgstr "El valor numérico para cuota no es valido."

@@ -1,0 +1,150 @@
+# translation of messages.po to Dutch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004.
+#
+# Translator:
+# Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2006-06-02 16:58+0100\n"
+"Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
+"Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:5
+#: personal/connectivity/squid/class_proxyAccount.inc:330
+msgid "Proxy"
+msgstr "Proxy"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:6
+#, fuzzy
+msgid "Manage Proxy user settings"
+msgstr "Algemene wachtrij instellingen"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:92
+msgid "KB"
+msgstr "KB"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:92
+msgid "MB"
+msgstr "MB"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:92
+msgid "GB"
+msgstr "GB"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "hour"
+msgstr "uur"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "day"
+msgstr "dag"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "week"
+msgstr "week"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:93
+msgid "month"
+msgstr "maand"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:183
+#: personal/connectivity/squid/class_proxyAccount.inc:309
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP fout:"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:204
+#: personal/connectivity/squid/class_proxyAccount.inc:206
+#, fuzzy
+msgid "Quota Setting"
+msgstr "E-mail instellingen"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:331
+#: personal/connectivity/squid/proxy.tpl:37
+msgid "Proxy account"
+msgstr "Proxy account"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:331
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Verbindingen"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:335
+msgid "My account"
+msgstr "Mijn account"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:344
+msgid "Quota"
+msgstr ""
+
+#: personal/connectivity/squid/class_proxyAccount.inc:345
+msgid "Filter unwanted content"
+msgstr ""
+
+#: personal/connectivity/squid/class_proxyAccount.inc:346
+#, fuzzy
+msgid "Limit proxy access"
+msgstr "Beperk proxy gebruik tot tijd"
+
+#: personal/connectivity/squid/class_proxyAccount.inc:347
+#: personal/connectivity/squid/proxy.tpl:97
+msgid "Restrict proxy usage by quota"
+msgstr "Beperk proxy gebruik met quota"
+
+#: personal/connectivity/squid/proxy.tpl:39
+#, fuzzy
+msgid "Proxy configuration"
+msgstr "FAX database"
+
+#: personal/connectivity/squid/proxy.tpl:45
+msgid "Filter unwanted content (i.e. pornographic or violence related)"
+msgstr ""
+"Filter ongewilde inhoud (bijvoorbeeld pornografische of geweld gerelateerde "
+"inhoud)"
+
+#: personal/connectivity/squid/proxy.tpl:56
+msgid "Limit proxy access to working time"
+msgstr "Beperk proxy gebruik tot tijd"
+
+#: personal/connectivity/squid/proxy.tpl:58
+#, fuzzy
+msgid "Worktime restrictions"
+msgstr "Wachtwoord verloopt op"
+
+#: personal/connectivity/squid/proxy.tpl:99
+#, fuzzy
+msgid "Quota configuration"
+msgstr "Systeem configuratie"
+
+#: personal/connectivity/squid/proxy.tpl:112
+msgid "per"
+msgstr "per"
+
+#~ msgid "This does something"
+#~ msgstr "Dit doet iets"
+
+#, fuzzy
+#~ msgid "Removing of user/proxy account with dn '%s' failed."
+#~ msgstr "Het verwijderen van het proxy account is mislukt"
+
+#, fuzzy
+#~ msgid "Saving of user/proxy account with dn '%s' failed."
+#~ msgstr "Het opslaan van het proxy account is mislukt"
+
+#~ msgid "Numerical value for Quota Setting is empty."
+#~ msgstr "De nummerieke waarde opgegeven voor Quota Instellingen is leeg."
+
+#~ msgid "Numerical value for Quota Setting is not valid."
+#~ msgstr ""
+#~ "De nummerieke waarde opgegeven voor Quota Instellingen is niet geldig."

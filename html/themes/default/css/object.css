@@ -727,7 +727,8 @@
     }
 }
 
-.object-info .kolab-wrapper .multi-check {
+.object-info .kolab-wrapper .multi-check,
+.object-info .squid-wrapper .multi-check {
     display: flex;
 }
 
