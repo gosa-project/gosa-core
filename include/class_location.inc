@@ -155,6 +155,7 @@ $class_mapping= array(
                 "user" => "plugins/personal/generic/class_user.inc",
                 "webdavAccount" => "plugins/personal/connectivity/webdav/class_webdavAccount.inc",
                 "intranetAccount" => "plugins/personal/connectivity/class_intranetAccount.inc",
+                "proxyAccount" => "plugins/personal/connectivity/squid/class_proxyAccount.inc",
                 "connectivity" => "plugins/personal/connectivity/class_connectivity.inc",
                 "infoPage" => "plugins/generic/infoPage/class_infoPage.inc",
                 "statistics" => "plugins/generic/statistics/class_statistics.inc",
