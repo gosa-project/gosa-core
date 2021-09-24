@@ -3,7 +3,7 @@
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
- * ID: $$Id: class_groupManagement.inc 14766 2009-11-05 14:30:35Z hickert $$
+ * ID: $$Id: class_roleManagement.inc 14742 2009-11-04 13:18:33Z hickert $$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,33 +20,48 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class userSelect extends management
+class roleManagement extends management
 {
-    public $plHeadline = "User selection";
-    protected $skipFooter = TRUE;
-    protected $skipHeader = TRUE;
+    var $plHeadline     = "Roles";
+    var $plDescription  = "Assign and manage organizational roles";
+    var $plIcon  = "plugins/rolemanagement/images/plugin.png";
+    var $matIcon = "manage_accounts";
 
-    function __construct($config, $ui, array $dns = null)
+    // Tab definition 
+    protected $tabClass = "roletabs";
+    protected $tabType = "ROLETABS";
+    protected $aclCategory = "roles";
+    protected $aclPlugin   = "role";
+    protected $objectName   = "role";
+
+    function __construct($config,$ui)
     {
         $this->config = $config;
         $this->ui = $ui;
-        $this->storagePoints = array(get_ou("core", "userRDN"),get_ou("core", "groupRDN"));
+
+        $this->storagePoints = array(get_ou("roleGeneric", "roleRDN"));
 
         // Build filter
         if (session::global_is_set(get_class($this)."_filter")){
             $filter= session::global_get(get_class($this)."_filter");
-            $filter->setConstraint(['dn' => $dns]);
         } else {
-            $filter = new filter(get_template_path("user-filter.xml", true, dirname(__FILE__)));
+            $filter = new filter(get_template_path("role-filter.xml", true));
             $filter->setObjectStorage($this->storagePoints);
-            $filter->setConstraint(['dn' => $dns]);
         }
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path("user-list.xml", true, dirname(__FILE__)));
+        $headpage = new listing(get_template_path("role-list.xml", true));
         $headpage->setFilter($filter);
-        parent::__construct($config, $ui, "users", $headpage);
+
+        // Add copy&paste and snapshot handler.
+        if ($this->config->boolValueIsTrue("core", "copyPaste")){
+            $this->cpHandler = new CopyPasteHandler($this->config);
+        }
+        if($this->config->get_cfg_value("core","enableSnapshots") == "true"){
+            $this->snapHandler = new SnapshotHandler($this->config);
+        }
+        parent::__construct($config, $ui, "roles", $headpage);
     }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

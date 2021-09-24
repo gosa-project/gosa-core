@@ -1,0 +1,298 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: polski\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2007-07-14 21:45+0100\n"
+"Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
+"Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: iso-8859-2\n"
+"X-Poedit-Basepath: tedst\n"
+
+#: admin/roleManagement/class_roleManagement.inc:25
+#: admin/roleManagement/class_roleGeneric.inc:453
+#, fuzzy
+msgid "Roles"
+msgstr "Pełniona funkcja"
+
+#: admin/roleManagement/class_roleManagement.inc:26
+msgid "Assign and manage organizational roles"
+msgstr ""
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Given name"
+msgstr "Imię"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Surname"
+msgstr "Nazwisko"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "UID"
+msgstr "UID"
+
+#: admin/roleManagement/class_roleGeneric.inc:223
+msgid "Unknown"
+msgstr "Nieznane"
+
+#: admin/roleManagement/class_roleGeneric.inc:278
+#: admin/roleManagement/class_roleGeneric.inc:282
+#: admin/roleManagement/class_roleGeneric.inc:291
+#: admin/roleManagement/class_roleGeneric.inc:470
+#: admin/roleManagement/role-list.xml:41
+#: admin/roleManagement/roleGeneric.tpl:12
+msgid "Name"
+msgstr "Imię"
+
+#: admin/roleManagement/class_roleGeneric.inc:308
+#: admin/roleManagement/class_roleGeneric.inc:350
+#, fuzzy
+msgid "LDAP error"
+msgstr "błąd LDAP:"
+
+#: admin/roleManagement/class_roleGeneric.inc:393
+msgid "Error"
+msgstr "Błąd"
+
+#: admin/roleManagement/class_roleGeneric.inc:443
+#: admin/roleManagement/roleGeneric.tpl:7
+msgid "Generic"
+msgstr "Ogólne"
+
+#: admin/roleManagement/class_roleGeneric.inc:444
+#, fuzzy
+msgid "Role generic"
+msgstr "Zmień nazwę"
+
+#: admin/roleManagement/class_roleGeneric.inc:462
+#, fuzzy
+msgid "RDN for role storage."
+msgstr "Ustawienia profilu Kiosk"
+
+#: admin/roleManagement/class_roleGeneric.inc:471
+#: admin/roleManagement/role-list.xml:49
+#: admin/roleManagement/roleGeneric.tpl:20
+msgid "Description"
+msgstr "Opis"
+
+#: admin/roleManagement/class_roleGeneric.inc:472
+#: admin/roleManagement/role-list.tpl:12
+#: admin/roleManagement/roleGeneric.tpl:30
+msgid "Base"
+msgstr "Kontener"
+
+#: admin/roleManagement/class_roleGeneric.inc:473
+#, fuzzy
+msgid "Telephone number"
+msgstr "Numer telefonu"
+
+#: admin/roleManagement/class_roleGeneric.inc:474
+#, fuzzy
+msgid "FAX number"
+msgstr "Numer fax"
+
+#: admin/roleManagement/class_roleGeneric.inc:475
+#: admin/roleManagement/roleGeneric.tpl:64
+msgid "Occupants"
+msgstr ""
+
+#: admin/roleManagement/role-list.xml:11
+#, fuzzy
+msgid "List of roles"
+msgstr "Lista użytkowników"
+
+#: admin/roleManagement/role-list.xml:15 admin/roleManagement/role-list.xml:74
+msgid "Role"
+msgstr "Pełniona funkcja"
+
+#: admin/roleManagement/role-list.xml:57
+msgid "Actions"
+msgstr "Akcje"
+
+#: admin/roleManagement/role-list.xml:68
+msgid "Create"
+msgstr "Utwórz"
+
+#: admin/roleManagement/role-list.xml:86
+msgid "Edit"
+msgstr "Edytuj"
+
+#: admin/roleManagement/role-list.xml:93
+msgid "Remove"
+msgstr "Usuń"
+
+#: admin/roleManagement/role-list.xml:125
+#: admin/roleManagement/roleGeneric.tpl:1
+#, fuzzy
+msgid "Edit role"
+msgstr "Edytuj makro"
+
+#: admin/roleManagement/role-list.xml:138
+#, fuzzy
+msgid "Remove role"
+msgstr "Usuń obiekt"
+
+#: admin/roleManagement/paste_generic.tpl:1
+#, fuzzy
+msgid "Paste role"
+msgstr "Usuń makro"
+
+#: admin/roleManagement/paste_generic.tpl:4
+#, fuzzy
+msgid "Role name"
+msgstr "Zmień nazwę"
+
+#: admin/roleManagement/paste_generic.tpl:7
+#, fuzzy
+msgid "Please enter the new object role name"
+msgstr "Proszę podać nową nazwę."
+
+#: admin/roleManagement/role-filter.xml:17
+#, fuzzy
+msgid "Default filter"
+msgstr "Parametr"
+
+#: admin/roleManagement/roleGeneric.tpl:10
+#, fuzzy
+msgid "Generic settings"
+msgstr "Ogólne ustawienia użytkownika"
+
+#: admin/roleManagement/roleGeneric.tpl:43
+msgid "Phone number"
+msgstr "Numer telefonu"
+
+#: admin/roleManagement/roleGeneric.tpl:51
+msgid "Fax number"
+msgstr "Numer fax"
+
+#, fuzzy
+#~ msgid "Surename"
+#~ msgstr "Nazwisko"
+
+#~ msgid "Uid"
+#~ msgstr "Uid"
+
+#~ msgid "Telefon number"
+#~ msgstr "Numer telefonu"
+
+#, fuzzy
+#~ msgid "Defailt filter"
+#~ msgstr "Parametr"
+
+#, fuzzy
+#~ msgid "Role management"
+#~ msgstr "Zarządzanie ACL"
+
+#~ msgid "Warning"
+#~ msgstr "Ostrzeżenie"
+
+#~ msgid ""
+#~ "Please double check if you really want to do this since there is no way "
+#~ "for GOsa to get your data back."
+#~ msgstr "Proszę upewnić się czy kontynuować, gdyż nie ma możliwości powrotu."
+
+#~ msgid ""
+#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr ""
+#~ "Jeśli jesteś pewien - naciśnij 'Usuń' aby kontynuować lub 'Anuluj' aby "
+#~ "anulować."
+
+#, fuzzy
+#~ msgid "Filter"
+#~ msgstr "Filtry"
+
+#~ msgid "Choose subtree to place user in"
+#~ msgstr "Wybierz poddrzewo do umieszczenia konta."
+
+#~ msgid "Select a base"
+#~ msgstr "Wybierz bazę"
+
+#~ msgid "Update"
+#~ msgstr "Aktualizuj"
+
+#~ msgid "Submit"
+#~ msgstr "Wyślij"
+
+#~ msgid "Select objects to add"
+#~ msgstr "Wybierz obiekty do dodania"
+
+#~ msgid "Filters"
+#~ msgstr "Filtry"
+
+#~ msgid "Select to search within subtrees"
+#~ msgstr "Zaznacz aby wyszukiwać wewnątrz poddrzew"
+
+#, fuzzy
+#~ msgid "Search in subtrees"
+#~ msgstr "Szukaj wewnątrz tego poddrzewa"
+
+#~ msgid "Display objects of department"
+#~ msgstr "Wyświetl obiekty departamentu"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "Wybierz departament na którym wyszukiwanie będzie bazować"
+
+#~ msgid "Display objects matching"
+#~ msgstr "Wyświetl obiekty pasujące"
+
+#~ msgid "Regular expression for matching object names"
+#~ msgstr "Wyrażenie regularne dla dopasowania nazw obiektów"
+
+#, fuzzy
+#~ msgid "Manage roles"
+#~ msgstr "Użytkownicy domeny"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "Uprawnienia"
+
+#, fuzzy
+#~ msgid "Permission error"
+#~ msgstr "Uprawnienia"
+
+#~ msgid "Group name"
+#~ msgstr "Nazwa grupy"
+
+#, fuzzy
+#~ msgid "Select all"
+#~ msgstr "Wybierz"
+
+#~ msgid "Department"
+#~ msgstr "Departament"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "Wyrażenie regularne dla dopasowania nazw grup"
+
+#~ msgid "Submit department"
+#~ msgstr "Zatwierdź departament"
+
+#~ msgid "edit"
+#~ msgstr "edytuj"
+
+#~ msgid "Edit this entry"
+#~ msgstr "Edytuj ten obiekt"
+
+#~ msgid "delete"
+#~ msgstr "Usuń"
+
+#~ msgid "Delete this entry"
+#~ msgstr "Usuń ten obiekt"
+
+#, fuzzy
+#~ msgid "Number of listed roles"
+#~ msgstr "Nazwa grupy"
+
+#, fuzzy
+#~ msgid "Number of listed departments"
+#~ msgstr "Nazwa departamentu"
+
+#, fuzzy
+#~ msgid "role"
+#~ msgstr "ACLe"

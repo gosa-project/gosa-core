@@ -1,0 +1,301 @@
+# translation of messages.po to Dutch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004.
+#
+# Translator:
+# Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2006-06-02 16:58+0100\n"
+"Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
+"Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/roleManagement/class_roleManagement.inc:25
+#: admin/roleManagement/class_roleGeneric.inc:453
+#, fuzzy
+msgid "Roles"
+msgstr "Funktie"
+
+#: admin/roleManagement/class_roleManagement.inc:26
+msgid "Assign and manage organizational roles"
+msgstr ""
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Given name"
+msgstr "Naam"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Surname"
+msgstr "Achternaam"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "UID"
+msgstr "UID"
+
+#: admin/roleManagement/class_roleGeneric.inc:223
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: admin/roleManagement/class_roleGeneric.inc:278
+#: admin/roleManagement/class_roleGeneric.inc:282
+#: admin/roleManagement/class_roleGeneric.inc:291
+#: admin/roleManagement/class_roleGeneric.inc:470
+#: admin/roleManagement/role-list.xml:41
+#: admin/roleManagement/roleGeneric.tpl:12
+msgid "Name"
+msgstr "Naam"
+
+#: admin/roleManagement/class_roleGeneric.inc:308
+#: admin/roleManagement/class_roleGeneric.inc:350
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP fout:"
+
+#: admin/roleManagement/class_roleGeneric.inc:393
+msgid "Error"
+msgstr "Fout"
+
+#: admin/roleManagement/class_roleGeneric.inc:443
+#: admin/roleManagement/roleGeneric.tpl:7
+msgid "Generic"
+msgstr "Algemeen"
+
+#: admin/roleManagement/class_roleGeneric.inc:444
+#, fuzzy
+msgid "Role generic"
+msgstr "Hernoemen"
+
+#: admin/roleManagement/class_roleGeneric.inc:462
+#, fuzzy
+msgid "RDN for role storage."
+msgstr "Kiosk profiel instellingen"
+
+#: admin/roleManagement/class_roleGeneric.inc:471
+#: admin/roleManagement/role-list.xml:49
+#: admin/roleManagement/roleGeneric.tpl:20
+msgid "Description"
+msgstr "Omschrijving"
+
+#: admin/roleManagement/class_roleGeneric.inc:472
+#: admin/roleManagement/role-list.tpl:12
+#: admin/roleManagement/roleGeneric.tpl:30
+msgid "Base"
+msgstr "Basis"
+
+#: admin/roleManagement/class_roleGeneric.inc:473
+#, fuzzy
+msgid "Telephone number"
+msgstr "Telefoonnummer"
+
+#: admin/roleManagement/class_roleGeneric.inc:474
+#, fuzzy
+msgid "FAX number"
+msgstr "Serienummer"
+
+#: admin/roleManagement/class_roleGeneric.inc:475
+#: admin/roleManagement/roleGeneric.tpl:64
+msgid "Occupants"
+msgstr ""
+
+#: admin/roleManagement/role-list.xml:11
+#, fuzzy
+msgid "List of roles"
+msgstr "Lijst met gebruikers"
+
+#: admin/roleManagement/role-list.xml:15 admin/roleManagement/role-list.xml:74
+msgid "Role"
+msgstr "Funktie"
+
+#: admin/roleManagement/role-list.xml:57
+msgid "Actions"
+msgstr "Acties"
+
+#: admin/roleManagement/role-list.xml:68
+msgid "Create"
+msgstr "Aanmaken"
+
+#: admin/roleManagement/role-list.xml:86
+msgid "Edit"
+msgstr "Bewerken"
+
+#: admin/roleManagement/role-list.xml:93
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: admin/roleManagement/role-list.xml:125
+#: admin/roleManagement/roleGeneric.tpl:1
+#, fuzzy
+msgid "Edit role"
+msgstr "Bewerk share"
+
+#: admin/roleManagement/role-list.xml:138
+#, fuzzy
+msgid "Remove role"
+msgstr "Lidmaatschap objecten"
+
+#: admin/roleManagement/paste_generic.tpl:1
+#, fuzzy
+msgid "Paste role"
+msgstr "Verwijder gebruiker"
+
+#: admin/roleManagement/paste_generic.tpl:4
+#, fuzzy
+msgid "Role name"
+msgstr "Hernoemen"
+
+#: admin/roleManagement/paste_generic.tpl:7
+#, fuzzy
+msgid "Please enter the new object role name"
+msgstr "Geef a.u.b. een nieuwe naam op"
+
+#: admin/roleManagement/role-filter.xml:17
+#, fuzzy
+msgid "Default filter"
+msgstr "Parameters"
+
+#: admin/roleManagement/roleGeneric.tpl:10
+#, fuzzy
+msgid "Generic settings"
+msgstr "Algemene wachtrij instellingen"
+
+#: admin/roleManagement/roleGeneric.tpl:43
+msgid "Phone number"
+msgstr "Telefoonnummer"
+
+#: admin/roleManagement/roleGeneric.tpl:51
+#, fuzzy
+msgid "Fax number"
+msgstr "Serienummer"
+
+#, fuzzy
+#~ msgid "Surename"
+#~ msgstr "Achternaam"
+
+#, fuzzy
+#~ msgid "Telefon number"
+#~ msgstr "Telefoonnummer"
+
+#, fuzzy
+#~ msgid "Defailt filter"
+#~ msgstr "Parameters"
+
+#, fuzzy
+#~ msgid "Role management"
+#~ msgstr "Blokkeerlijst beheer"
+
+#~ msgid "Warning"
+#~ msgstr "Waarschuwing"
+
+#~ msgid ""
+#~ "Please double check if you really want to do this since there is no way "
+#~ "for GOsa to get your data back."
+#~ msgstr ""
+#~ "Controleer a.u.b. of u dit daadwerkelijk wil doen, aangezien er geen "
+#~ "mogelijkheid voor GOsa is om uw data terug te krijgen."
+
+#~ msgid ""
+#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr ""
+#~ "Indien u zeker bent drukt u dan 'Verwijderen' om door te gaan of "
+#~ "'Annuleren' om te annuleren."
+
+#, fuzzy
+#~ msgid "Filter"
+#~ msgstr "Filters"
+
+#~ msgid "Choose subtree to place user in"
+#~ msgstr "Kies de subtree waaronder de gebruiker geplaatst wordt"
+
+#~ msgid "Select a base"
+#~ msgstr "Selecteer een basis"
+
+#~ msgid "Submit"
+#~ msgstr "Verwerk"
+
+#~ msgid "Select objects to add"
+#~ msgstr "Selecteer de toe te voegen objecten"
+
+#~ msgid "Filters"
+#~ msgstr "Filters"
+
+#~ msgid "Select to search within subtrees"
+#~ msgstr "Selecteer om binnen subonderdelen te zoeken"
+
+#, fuzzy
+#~ msgid "Search in subtrees"
+#~ msgstr "Zoek binnen subtree"
+
+#~ msgid "Display objects of department"
+#~ msgstr "Toon objecten van afdeling"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "Selecteer de afdeling waarbinnen gezocht zal worden"
+
+#~ msgid "Display objects matching"
+#~ msgstr "Toon overeenkomende objecten"
+
+#~ msgid "Regular expression for matching object names"
+#~ msgstr "Reguliere expressie voor overeenkomende objectnamen"
+
+#, fuzzy
+#~ msgid "Manage roles"
+#~ msgstr "Windows gebruikers"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "Rechten"
+
+#, fuzzy
+#~ msgid "Permission error"
+#~ msgstr "Rechten"
+
+#~ msgid "Group name"
+#~ msgstr "Groepnaam"
+
+#, fuzzy
+#~ msgid "Select all"
+#~ msgstr "Selecteer"
+
+#~ msgid "Department"
+#~ msgstr "Afdeling"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "Reguliere expressie voor overeenkomende groepnamen"
+
+#~ msgid "Submit department"
+#~ msgstr "Verwerk afdeling"
+
+#~ msgid "edit"
+#~ msgstr "Bewerk"
+
+#~ msgid "Edit this entry"
+#~ msgstr "Bewerk deze invoer"
+
+#~ msgid "delete"
+#~ msgstr "Verwijder"
+
+#~ msgid "Delete this entry"
+#~ msgstr "Verwijder deze invoer"
+
+#, fuzzy
+#~ msgid "Number of listed roles"
+#~ msgstr "Naam van de groep"
+
+#, fuzzy
+#~ msgid "Number of listed departments"
+#~ msgstr "Naam van de afdeling"
+
+#, fuzzy
+#~ msgid "role"
+#~ msgstr "Rechten"
