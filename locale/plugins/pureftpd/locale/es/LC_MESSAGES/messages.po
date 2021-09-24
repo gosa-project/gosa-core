@@ -1,0 +1,206 @@
+# translation of admin.po to
+# translation of systems.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-01-20 01:07+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:6
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:256
+msgid "FTP"
+msgstr "FTP"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:7
+#, fuzzy
+msgid "Manage FTP user settings"
+msgstr "Parámetros genéricos del usuario"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:140
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:236
+msgid "LDAP error"
+msgstr "Error LDAP"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:192
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:274
+#: personal/connectivity/pureftpd/pureftpd.tpl:24
+msgid "Upload bandwidth"
+msgstr "Ancho de banda ascendente"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:195
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:275
+#: personal/connectivity/pureftpd/pureftpd.tpl:34
+msgid "Download bandwidth"
+msgstr "Ancho de banda descendente"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:199
+msgid "Quota file"
+msgstr "Cuota de ficheros"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:202
+msgid "Quota size"
+msgstr "Tamaño de la cuota"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:205
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:271
+msgid "Upload ratio"
+msgstr "Relación de subida"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:208
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:273
+msgid "Download ratio"
+msgstr "Relación de descarga"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:257
+#, fuzzy
+msgid "Pure-FTPd account"
+msgstr "Cuenta FTP"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:257
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Conectividad adicional"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:261
+msgid "My account"
+msgstr "Mi cuenta"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:270
+msgid "Quota files"
+msgstr "Cuota de ficheros"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:272
+#, fuzzy
+msgid "Quota megabytes"
+msgstr "Cuota en Mbytes"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:276
+msgid "Status"
+msgstr "Estado"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:6
+msgid "FTP account"
+msgstr "Cuenta FTP"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:9
+#, fuzzy
+msgid "FTP configuration"
+msgstr "Configuración PHP"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:16
+#, fuzzy
+msgid "Bandwith settings"
+msgstr "Parámetros de correo"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:20
+msgid "Bandwidth"
+msgstr "Ancho de banda"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:30
+#: personal/connectivity/pureftpd/pureftpd.tpl:40
+msgid "KB/s"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:50
+#, fuzzy
+msgid "Quota settings"
+msgstr "Parámetros de correo"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:54
+msgid "Quota"
+msgstr "Cuota"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:58
+msgid "Files"
+msgstr "Archivos"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:67
+msgid "Size"
+msgstr "Tamaño"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:73
+msgid "MB"
+msgstr "Mb"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:81
+#, fuzzy
+msgid "Ratio settings"
+msgstr "Parámetros de correo"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:85
+msgid "Ratio"
+msgstr "Ratio"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:89
+msgid "Uploaded / downloaded files"
+msgstr "Archivos Subidos / Descargados"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:105
+#: personal/connectivity/pureftpd/pureftpd.tpl:109
+msgid "Miscellaneous"
+msgstr "Varios"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:115
+msgid "Check to disable FTP Access"
+msgstr "Active para desactivar acceso FTP"
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:117
+msgid "Temporary disable FTP access"
+msgstr "Acceso FTP desactivado temporalmente"
+
+#~ msgid "This does something"
+#~ msgstr "Esto hace algo"
+
+#~ msgid "Ftp"
+#~ msgstr "Ftp"
+
+#~ msgid "Pure ftp account"
+#~ msgstr "Cuenta Pure ftp"
+
+#~ msgid "Upload bandwith"
+#~ msgstr "Ancho de banda de subida"
+
+#~ msgid "Download bandwith"
+#~ msgstr "Ancho de banda de descarga"
+
+#~ msgid "kb/s"
+#~ msgstr "Kb/s"
+
+#~ msgid "Removing of user/pureftpd account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la eliminación de la cuenta de usuario/pureftpd con dn '%s'."
+
+#~ msgid "Value specified as 'Upload ratio' is not valid."
+#~ msgstr "El valor especificado en 'Relación de subida'no es válido."
+
+#~ msgid "Saving of user/pureftpd account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la eliminación de la cuenta de usuario/pureftpd con dn '%s'."
+
+#~ msgid "Value specified as 'Upload bandwidth' is not valid."
+#~ msgstr "El valor especificado en 'Ancho de Banda de subida' no es válido."
+
+#~ msgid "Value specified as 'Download bandwidth' is not valid."
+#~ msgstr "El valor especificado en 'Ancho de Banda de descarga' no es válido."
+
+#~ msgid "Value specified as 'Quota files' is not valid."
+#~ msgstr "El valor especificado como 'Cuota de Archivos' no es válido."
+
+#~ msgid "Value specified as 'Quota size' is not valid."
+#~ msgstr "El valor especificado como 'Cuota de Tamaño' no es válido."
+
+#~ msgid "Value specified as 'Download ratio' is not valid."
+#~ msgstr "El valor especificado en 'Relación de descarga' no es válido."

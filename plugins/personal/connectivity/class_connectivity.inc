@@ -15,6 +15,7 @@ class connectivity extends plugin
   var $plHeadline= "Connectivity";
   var $plDescription= "Manage connectivity user settings";
   var $plIcon = "plugins/connectivity/images/plugin.png";
+  var $matIcon = "cable";
 
   /* attribute list for save action */
   var $attributes= array();
@@ -69,6 +70,8 @@ class connectivity extends plugin
     /* Prepare templating */
     $smarty= get_smarty();
 
+    $theme = getThemeName();
+
     /* Do we represent a valid account? */
     if ($this->parent === NULL){
       $enabled= true;
@@ -98,7 +101,15 @@ class connectivity extends plugin
     foreach ($this->plugin_name as $name){
       $this->plugin[$name]->read_only = &$this->read_only;
       if (!$is_first){
-        $display.= '<hr>';
+        switch ($theme) {
+          case 'classic':
+            $display.= "<hr>";
+            break;
+          
+          default:
+            $display.= "<hr class='divider'>";
+            break;
+        }
       } else {
         $is_first= false;
       }

@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:6
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:256
+msgid "FTP"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:7
+msgid "Manage FTP user settings"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:140
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:236
+msgid "LDAP error"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:192
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:274
+#: personal/connectivity/pureftpd/pureftpd.tpl:24
+msgid "Upload bandwidth"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:195
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:275
+#: personal/connectivity/pureftpd/pureftpd.tpl:34
+msgid "Download bandwidth"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:199
+msgid "Quota file"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:202
+msgid "Quota size"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:205
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:271
+msgid "Upload ratio"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:208
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:273
+msgid "Download ratio"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:257
+msgid "Pure-FTPd account"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:257
+msgid "Connectivity add-on"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:261
+msgid "My account"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:270
+msgid "Quota files"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:272
+msgid "Quota megabytes"
+msgstr ""
+
+#: personal/connectivity/pureftpd/class_pureftpdAccount.inc:276
+msgid "Status"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:6
+msgid "FTP account"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:9
+msgid "FTP configuration"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:16
+msgid "Bandwith settings"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:20
+msgid "Bandwidth"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:30
+#: personal/connectivity/pureftpd/pureftpd.tpl:40
+msgid "KB/s"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:50
+msgid "Quota settings"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:54
+msgid "Quota"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:58
+msgid "Files"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:67
+msgid "Size"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:73
+msgid "MB"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:81
+msgid "Ratio settings"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:85
+msgid "Ratio"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:89
+msgid "Uploaded / downloaded files"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:105
+#: personal/connectivity/pureftpd/pureftpd.tpl:109
+msgid "Miscellaneous"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:115
+msgid "Check to disable FTP Access"
+msgstr ""
+
+#: personal/connectivity/pureftpd/pureftpd.tpl:117
+msgid "Temporary disable FTP access"
+msgstr ""
