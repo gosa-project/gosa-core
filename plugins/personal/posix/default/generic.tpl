@@ -101,28 +101,29 @@
   <hr class="divider">
 
   <div class="row setting">
-
-    <div class="col s12 xl6">
-      {if $sshPublicKey == 1}
-        {render acl=$sshPublicKeyACL}
-        <h3>{t}SSH keys{/t}</h3>
-        <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
-        {/render}
-      {/if}
-
-      {include file="$pwmode.tpl"}
-    </div>
-
+      <div class="col s12 xl6">
+        {if $sshPublicKey == 1}
+        <div class="ssh-plug-wrapper">
+          {render acl=$sshPublicKeyACL}
+          <h3>{t}SSH keys{/t}</h3>
+          <button class="btn-small" type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys{/t}</button>
+          {/render}
+          {/if}
+        </div>
+        
+        {include file="$pwmode.tpl"}
+      </div>
+      
     <div class="col s12 xl6">
       {$trustModeDialog}
     </div>
-
+    
   </div>
-
+  
   {if $multiple_support}
   <input type="hidden" name="posix_mulitple_edit" value="1">
   {/if}
-
+  
   <input type="hidden" name="posixTab" value="posixTab">
 
   <!-- Place cursor -->
