@@ -1,0 +1,278 @@
+# translation of messages.po to Italian
+# Copyright (c) 2005 B-Open Solutions srl - http://www.bopen.it/
+# Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
+# Alessandro Amici <a.amici@bopen.it>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2005-11-18 15:26+0100\n"
+"Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
+"Language-Team: Italian\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: admin/roleManagement/class_roleManagement.inc:25
+#: admin/roleManagement/class_roleGeneric.inc:453
+#, fuzzy
+msgid "Roles"
+msgstr "Ruolo"
+
+#: admin/roleManagement/class_roleManagement.inc:26
+msgid "Assign and manage organizational roles"
+msgstr ""
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Given name"
+msgstr "Nome"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Surname"
+msgstr "Cognome"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "UID"
+msgstr "UID"
+
+#: admin/roleManagement/class_roleGeneric.inc:223
+msgid "Unknown"
+msgstr ""
+
+#: admin/roleManagement/class_roleGeneric.inc:278
+#: admin/roleManagement/class_roleGeneric.inc:282
+#: admin/roleManagement/class_roleGeneric.inc:291
+#: admin/roleManagement/class_roleGeneric.inc:470
+#: admin/roleManagement/role-list.xml:41
+#: admin/roleManagement/roleGeneric.tpl:12
+msgid "Name"
+msgstr "Cognome"
+
+#: admin/roleManagement/class_roleGeneric.inc:308
+#: admin/roleManagement/class_roleGeneric.inc:350
+#, fuzzy
+msgid "LDAP error"
+msgstr "Errore LDAP"
+
+#: admin/roleManagement/class_roleGeneric.inc:393
+msgid "Error"
+msgstr ""
+
+#: admin/roleManagement/class_roleGeneric.inc:443
+#: admin/roleManagement/roleGeneric.tpl:7
+msgid "Generic"
+msgstr "Generale"
+
+#: admin/roleManagement/class_roleGeneric.inc:444
+#, fuzzy
+msgid "Role generic"
+msgstr "Cognome"
+
+#: admin/roleManagement/class_roleGeneric.inc:462
+#, fuzzy
+msgid "RDN for role storage."
+msgstr "Opzioni di posta dell'identità"
+
+#: admin/roleManagement/class_roleGeneric.inc:471
+#: admin/roleManagement/role-list.xml:49
+#: admin/roleManagement/roleGeneric.tpl:20
+msgid "Description"
+msgstr "Descrizione"
+
+#: admin/roleManagement/class_roleGeneric.inc:472
+#: admin/roleManagement/role-list.tpl:12
+#: admin/roleManagement/roleGeneric.tpl:30
+msgid "Base"
+msgstr "Base"
+
+#: admin/roleManagement/class_roleGeneric.inc:473
+#, fuzzy
+msgid "Telephone number"
+msgstr "Numero di telefono"
+
+#: admin/roleManagement/class_roleGeneric.inc:474
+#, fuzzy
+msgid "FAX number"
+msgstr "Numero di telefono"
+
+#: admin/roleManagement/class_roleGeneric.inc:475
+#: admin/roleManagement/roleGeneric.tpl:64
+msgid "Occupants"
+msgstr ""
+
+#: admin/roleManagement/role-list.xml:11
+#, fuzzy
+msgid "List of roles"
+msgstr "Lista degli utenti"
+
+#: admin/roleManagement/role-list.xml:15 admin/roleManagement/role-list.xml:74
+msgid "Role"
+msgstr "Ruolo"
+
+#: admin/roleManagement/role-list.xml:57
+msgid "Actions"
+msgstr "Azioni"
+
+#: admin/roleManagement/role-list.xml:68
+msgid "Create"
+msgstr "Creare"
+
+#: admin/roleManagement/role-list.xml:86
+msgid "Edit"
+msgstr "Modifica"
+
+#: admin/roleManagement/role-list.xml:93
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: admin/roleManagement/role-list.xml:125
+#: admin/roleManagement/roleGeneric.tpl:1
+#, fuzzy
+msgid "Edit role"
+msgstr "Modifica contatto"
+
+#: admin/roleManagement/role-list.xml:138
+#, fuzzy
+msgid "Remove role"
+msgstr "Oggetti membri"
+
+#: admin/roleManagement/paste_generic.tpl:1
+#, fuzzy
+msgid "Paste role"
+msgstr "Rimuovi"
+
+#: admin/roleManagement/paste_generic.tpl:4
+#, fuzzy
+msgid "Role name"
+msgstr "Cognome"
+
+#: admin/roleManagement/paste_generic.tpl:7
+#, fuzzy
+msgid "Please enter the new object role name"
+msgstr "Inserisci la URI del server LDAP"
+
+#: admin/roleManagement/role-filter.xml:17
+#, fuzzy
+msgid "Default filter"
+msgstr "Parametro"
+
+#: admin/roleManagement/roleGeneric.tpl:10
+#, fuzzy
+msgid "Generic settings"
+msgstr "Impostazioni generali delle code"
+
+#: admin/roleManagement/roleGeneric.tpl:43
+msgid "Phone number"
+msgstr "Numero di telefono"
+
+#: admin/roleManagement/roleGeneric.tpl:51
+#, fuzzy
+msgid "Fax number"
+msgstr "Numero di telefono"
+
+#, fuzzy
+#~ msgid "Surename"
+#~ msgstr "Cognome"
+
+#, fuzzy
+#~ msgid "Telefon number"
+#~ msgstr "Numero di telefono"
+
+#, fuzzy
+#~ msgid "Defailt filter"
+#~ msgstr "Parametro"
+
+#, fuzzy
+#~ msgid "Role management"
+#~ msgstr "Riferimenti"
+
+#~ msgid "Warning"
+#~ msgstr "Attenzione"
+
+#, fuzzy
+#~ msgid ""
+#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr ""
+#~ "Quindi - Se sei sicuro - premi <i>Rimuovi</i> per continuare o "
+#~ "<i>Annulla</i> per abortire."
+
+#, fuzzy
+#~ msgid "Filter"
+#~ msgstr "Filtri"
+
+#~ msgid "Choose subtree to place user in"
+#~ msgstr "Scegli il subtree per l'utente"
+
+#, fuzzy
+#~ msgid "Select a base"
+#~ msgstr "Rimuovi"
+
+#~ msgid "Filters"
+#~ msgstr "Filtri"
+
+#, fuzzy
+#~ msgid "Select to search within subtrees"
+#~ msgstr "Seleziona per mostrare le applicazioni"
+
+#, fuzzy
+#~ msgid "Search in subtrees"
+#~ msgstr "Seleziona per mostrare le applicazioni"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "Scegli il dipartimento di base per la ricerca"
+
+#, fuzzy
+#~ msgid "Manage roles"
+#~ msgstr "Utenti di Dominio"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "Permessi"
+
+#, fuzzy
+#~ msgid "Permission error"
+#~ msgstr "Permessi"
+
+#~ msgid "Group name"
+#~ msgstr "Nome gruppo"
+
+#, fuzzy
+#~ msgid "Select all"
+#~ msgstr "Rimuovi"
+
+#~ msgid "Department"
+#~ msgstr "Dipartimento"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "Espressioni regolare per selezionare il nome del gruppo"
+
+#~ msgid "Submit department"
+#~ msgstr "Imposta dipartimento"
+
+#~ msgid "edit"
+#~ msgstr "modifica"
+
+#~ msgid "Edit this entry"
+#~ msgstr "Modifica questo record"
+
+#~ msgid "delete"
+#~ msgstr "elimina"
+
+#~ msgid "Delete this entry"
+#~ msgstr "Elimina questo record"
+
+#, fuzzy
+#~ msgid "Number of listed roles"
+#~ msgstr "Nome del gruppo"
+
+#, fuzzy
+#~ msgid "Number of listed departments"
+#~ msgstr "Imposta dipartimento"
+
+#, fuzzy
+#~ msgid "role"
+#~ msgstr "ACL"

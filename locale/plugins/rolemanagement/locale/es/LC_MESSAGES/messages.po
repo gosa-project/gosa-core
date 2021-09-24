@@ -1,0 +1,283 @@
+# translation of admin.po to
+# translation of systems.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-01-28 23:54+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin/roleManagement/class_roleManagement.inc:25
+#: admin/roleManagement/class_roleGeneric.inc:453
+msgid "Roles"
+msgstr "Roles"
+
+#: admin/roleManagement/class_roleManagement.inc:26
+msgid "Assign and manage organizational roles"
+msgstr ""
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Given name"
+msgstr "Nombre de pila"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "Surname"
+msgstr "Apellido"
+
+#: admin/roleManagement/class_roleGeneric.inc:97
+msgid "UID"
+msgstr "UID"
+
+#: admin/roleManagement/class_roleGeneric.inc:223
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: admin/roleManagement/class_roleGeneric.inc:278
+#: admin/roleManagement/class_roleGeneric.inc:282
+#: admin/roleManagement/class_roleGeneric.inc:291
+#: admin/roleManagement/class_roleGeneric.inc:470
+#: admin/roleManagement/role-list.xml:41
+#: admin/roleManagement/roleGeneric.tpl:12
+msgid "Name"
+msgstr "Nombre"
+
+#: admin/roleManagement/class_roleGeneric.inc:308
+#: admin/roleManagement/class_roleGeneric.inc:350
+msgid "LDAP error"
+msgstr "Error LDAP"
+
+#: admin/roleManagement/class_roleGeneric.inc:393
+msgid "Error"
+msgstr "Error"
+
+#: admin/roleManagement/class_roleGeneric.inc:443
+#: admin/roleManagement/roleGeneric.tpl:7
+msgid "Generic"
+msgstr "Genérico"
+
+#: admin/roleManagement/class_roleGeneric.inc:444
+msgid "Role generic"
+msgstr "Rol genérico"
+
+#: admin/roleManagement/class_roleGeneric.inc:462
+#, fuzzy
+msgid "RDN for role storage."
+msgstr "Ruta del almacén de perfiles kiosk"
+
+#: admin/roleManagement/class_roleGeneric.inc:471
+#: admin/roleManagement/role-list.xml:49
+#: admin/roleManagement/roleGeneric.tpl:20
+msgid "Description"
+msgstr "Descripción"
+
+#: admin/roleManagement/class_roleGeneric.inc:472
+#: admin/roleManagement/role-list.tpl:12
+#: admin/roleManagement/roleGeneric.tpl:30
+msgid "Base"
+msgstr "Base"
+
+#: admin/roleManagement/class_roleGeneric.inc:473
+#, fuzzy
+msgid "Telephone number"
+msgstr "Número de teléfono"
+
+#: admin/roleManagement/class_roleGeneric.inc:474
+#, fuzzy
+msgid "FAX number"
+msgstr "Número de Fax"
+
+#: admin/roleManagement/class_roleGeneric.inc:475
+#: admin/roleManagement/roleGeneric.tpl:64
+msgid "Occupants"
+msgstr "Ocupantes"
+
+#: admin/roleManagement/role-list.xml:11
+msgid "List of roles"
+msgstr "Lista de roles"
+
+#: admin/roleManagement/role-list.xml:15 admin/roleManagement/role-list.xml:74
+msgid "Role"
+msgstr "Rol"
+
+#: admin/roleManagement/role-list.xml:57
+msgid "Actions"
+msgstr "Acciones"
+
+#: admin/roleManagement/role-list.xml:68
+msgid "Create"
+msgstr "Crear"
+
+#: admin/roleManagement/role-list.xml:86
+msgid "Edit"
+msgstr "Editar"
+
+#: admin/roleManagement/role-list.xml:93
+msgid "Remove"
+msgstr "Eliminar"
+
+#: admin/roleManagement/role-list.xml:125
+#: admin/roleManagement/roleGeneric.tpl:1
+msgid "Edit role"
+msgstr "Editar rol"
+
+#: admin/roleManagement/role-list.xml:138
+msgid "Remove role"
+msgstr "Eliminar rol"
+
+#: admin/roleManagement/paste_generic.tpl:1
+#, fuzzy
+msgid "Paste role"
+msgstr "Eliminar rol"
+
+#: admin/roleManagement/paste_generic.tpl:4
+msgid "Role name"
+msgstr "Nombre del Rol"
+
+#: admin/roleManagement/paste_generic.tpl:7
+msgid "Please enter the new object role name"
+msgstr "Por favor introduzca un nuevo objeto nombre de rol"
+
+#: admin/roleManagement/role-filter.xml:17
+#, fuzzy
+msgid "Default filter"
+msgstr "Parámetro"
+
+#: admin/roleManagement/roleGeneric.tpl:10
+#, fuzzy
+msgid "Generic settings"
+msgstr "Parámetros genéricos del usuario"
+
+#: admin/roleManagement/roleGeneric.tpl:43
+msgid "Phone number"
+msgstr "Número de teléfono"
+
+#: admin/roleManagement/roleGeneric.tpl:51
+msgid "Fax number"
+msgstr "Número de Fax"
+
+#, fuzzy
+#~ msgid "Surename"
+#~ msgstr "Apellido"
+
+#~ msgid "Uid"
+#~ msgstr "Uid"
+
+#~ msgid "Telefon number"
+#~ msgstr "Número de teléfono"
+
+#, fuzzy
+#~ msgid "Defailt filter"
+#~ msgstr "Parámetro"
+
+#~ msgid "Role management"
+#~ msgstr "Administración de roles"
+
+#~ msgid "Warning"
+#~ msgstr "Aviso"
+
+#~ msgid ""
+#~ "Please double check if you really want to do this since there is no way "
+#~ "for GOsa to get your data back."
+#~ msgstr ""
+#~ "Si está seguro de lo que quiere hacer pulse dos veces, ya que no hay "
+#~ "forma de que GOsa pueda recuperar posteriormente esa información"
+
+#~ msgid ""
+#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr ""
+#~ "Entonces, si esta seguro, presione <i>Eliminar</i> para continuar o "
+#~ "<i>Cancelar</i> para Abortar."
+
+#~ msgid "Filter"
+#~ msgstr "Filtro"
+
+#~ msgid "Choose subtree to place user in"
+#~ msgstr "Elija el subárbol donde colocar al usuario"
+
+#~ msgid "Select a base"
+#~ msgstr "Seleccione una base"
+
+#~ msgid "Update"
+#~ msgstr "Actualizar"
+
+#~ msgid "Submit"
+#~ msgstr "Enviar"
+
+#~ msgid "Select objects to add"
+#~ msgstr "Seleccione los objetos a añadir"
+
+#~ msgid "Filters"
+#~ msgstr "Filtros"
+
+#~ msgid "Select to search within subtrees"
+#~ msgstr "Seleccione para buscar dentro de subárboles"
+
+#~ msgid "Search in subtrees"
+#~ msgstr "Buscar en subárboles"
+
+#~ msgid "Display objects of department"
+#~ msgstr "Mostrar objetos del departamento"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "Escoja el departamento base de la búsqueda"
+
+#~ msgid "Display objects matching"
+#~ msgstr "Mostrar objetos que coincidan"
+
+#~ msgid "Regular expression for matching object names"
+#~ msgstr "Expresiones regulares para buscar nombre de objetos"
+
+#~ msgid "Manage roles"
+#~ msgstr "Administrar roles"
+
+#~ msgid "Permission"
+#~ msgstr "Permiso"
+
+#~ msgid "Permission error"
+#~ msgstr "Error de Permisos"
+
+#~ msgid "Select all"
+#~ msgstr "Seleccione todos"
+
+#~ msgid "Department"
+#~ msgstr "Departamento"
+
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "Expresión regular para buscar nombres de roles"
+
+#~ msgid "Submit department"
+#~ msgstr "Enviar departamento"
+
+#~ msgid "edit"
+#~ msgstr "editar"
+
+#~ msgid "Edit this entry"
+#~ msgstr "Editar esta entrada"
+
+#~ msgid "delete"
+#~ msgstr "eliminar"
+
+#~ msgid "Delete this entry"
+#~ msgstr "Eliminar esta entrada"
+
+#~ msgid "Number of listed roles"
+#~ msgstr "Número de roles mostrados"
+
+#~ msgid "Number of listed departments"
+#~ msgstr "Número de departamentos"
+
+#, fuzzy
+#~ msgid "role"
+#~ msgstr "Roles ACL"
