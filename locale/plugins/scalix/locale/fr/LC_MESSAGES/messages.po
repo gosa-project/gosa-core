@@ -1,0 +1,280 @@
+# translation of messages.po to
+# Benoit Mortier <benoit.mortier@opensides.be>, 2005, 2006, 2007, 2008, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-11-25 23:35+0100\n"
+"Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
+"Language-Team:  <fr@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
+
+#: admin/groups/scalix/class_scalixGroup.inc:15
+#: personal/scalix/class_scalixAccount.inc:458
+msgid "SCALIX account"
+msgstr "Compte SCALIX"
+
+#: admin/groups/scalix/class_scalixGroup.inc:25
+#: personal/scalix/class_scalixAccount.inc:473
+msgid "SCALIX Mail node"
+msgstr "Noeud de mail SCALIX"
+
+#: admin/groups/scalix/class_scalixGroup.inc:26
+#: personal/scalix/class_scalixAccount.inc:474
+msgid "Mailbox class"
+msgstr "Classe du compte de messagerie"
+
+#: admin/groups/scalix/class_scalixGroup.inc:27
+#: personal/scalix/class_scalixAccount.inc:475
+msgid "Server language"
+msgstr "Langue du serveur"
+
+#: admin/groups/scalix/class_scalixGroup.inc:28
+#: personal/scalix/class_scalixAccount.inc:476
+msgid "Administrator"
+msgstr "Administrateur"
+
+#: admin/groups/scalix/class_scalixGroup.inc:29
+#: personal/scalix/class_scalixAccount.inc:477
+msgid "Mailbox administrator"
+msgstr "Administrateur des comptes de messagerie"
+
+#: admin/groups/scalix/class_scalixGroup.inc:30
+#: personal/scalix/class_scalixAccount.inc:478
+msgid "Hide user entry in SCALIX"
+msgstr "Cacher l'entrée de l'utilisateur dans SCALIX"
+
+#: admin/groups/scalix/class_scalixGroup.inc:31
+#: personal/scalix/class_scalixAccount.inc:479
+msgid "Mailbox size limitations"
+msgstr "Limitation de la taille du compte de messagerie"
+
+#: admin/groups/scalix/class_scalixGroup.inc:32
+#: personal/scalix/class_scalixAccount.inc:480
+msgid "Limit outbound"
+msgstr "Limite en sortie"
+
+#: admin/groups/scalix/class_scalixGroup.inc:33
+#: personal/scalix/class_scalixAccount.inc:481
+msgid "Limit inbound"
+msgstr "Limite en entrée"
+
+#: admin/groups/scalix/class_scalixGroup.inc:34
+#: personal/scalix/class_scalixAccount.inc:482
+msgid "Notify user"
+msgstr "Avertir l'utilisateur"
+
+#: admin/groups/scalix/class_scalixGroup.inc:35
+#: personal/scalix/generic.tpl:111 personal/scalix/class_scalixAccount.inc:483
+#: personal/scalix/paste_generic.tpl:6
+msgid "SCALIX email addresses"
+msgstr "Adresse de messagerie SCALIX"
+
+#: personal/scalix/generic.tpl:1
+msgid "SCALIX settings"
+msgstr "Paramètres SCALIX"
+
+#: personal/scalix/generic.tpl:6
+msgid "Generic"
+msgstr "Informations"
+
+#: personal/scalix/generic.tpl:9
+msgid "Mail settings"
+msgstr "Paramètres de messagerie"
+
+#: personal/scalix/generic.tpl:11
+msgid "SCALIX mail node"
+msgstr "Noeud de mail SCALIX"
+
+#: personal/scalix/generic.tpl:20
+msgid "SCALIX mailbox class"
+msgstr "Type de compte de messagerie SCALIX"
+
+#: personal/scalix/generic.tpl:24
+msgid ""
+"Limited users can not make use of the group calendar functionality in SCALIX"
+msgstr ""
+"Les utilisateurs limites ne peuvent pas utiliser les fonctionnalité de "
+"calendrier de groupe de SCALIX"
+
+#: personal/scalix/generic.tpl:33
+msgid "SCALIX server language"
+msgstr "Langue du serveur SCALIX"
+
+#: personal/scalix/generic.tpl:37
+msgid "Message catalog language for client"
+msgstr "Langue pour le client"
+
+#: personal/scalix/generic.tpl:49 personal/scalix/generic.tpl:71
+msgid "Settings"
+msgstr "Paramètres"
+
+#: personal/scalix/generic.tpl:54
+msgid "Select for administrator capabilities"
+msgstr "Sélectionner pour ajouter les droits d'administration"
+
+#: personal/scalix/generic.tpl:54
+msgid "SCALIX Administrator"
+msgstr "Administrateur SCALIX"
+
+#: personal/scalix/generic.tpl:59
+msgid "Select for mailbox administrator capabilities"
+msgstr ""
+"Sélectionnez pour ajouter les droits d'administration sur les comptes de "
+"messagerie"
+
+#: personal/scalix/generic.tpl:59
+msgid "SCALIX Mailbox Administrator"
+msgstr "Administrateur des boites de messagerie SCALIX"
+
+#: personal/scalix/generic.tpl:64
+msgid "Hide user entry from address book"
+msgstr "Cacher l'entrée de l'utilisateur dans le carnet d'adresse"
+
+#: personal/scalix/generic.tpl:64
+msgid "Hide this user entry in SCALIX"
+msgstr "Cacher l'entrée de cet utilisateur dans SCALIX"
+
+#: personal/scalix/generic.tpl:73
+msgid "Limit mailbox size"
+msgstr "Limiter la taille des comptes de messagerie"
+
+#: personal/scalix/generic.tpl:76
+msgid "MB"
+msgstr ""
+
+#: personal/scalix/generic.tpl:84
+msgid "As sanction on mailbox quota overuse, stop user from sending mail"
+msgstr ""
+"Comme sanction pour dépassement du quota du compte de messagerie, empêcher "
+"l'utilisateur d'envoyer des messages"
+
+#: personal/scalix/generic.tpl:84
+msgid "Limit Outbound Mail"
+msgstr "Limiter les messages en sortie"
+
+#: personal/scalix/generic.tpl:89
+msgid "As sanction on mailbox quota overuse, stop user from receiving mail"
+msgstr ""
+"Comme sanction pour dépassement du quota du compte de messagerie, empêcher "
+"l'utilisateur de recevoir des messages"
+
+#: personal/scalix/generic.tpl:89
+msgid "Limit Inbound Mail"
+msgstr "Limiter les messages en entrée"
+
+#: personal/scalix/generic.tpl:94
+msgid "As sanction on mailbox quota overuse, notify the user by email"
+msgstr ""
+"Comme sanction pour dépassement du quota du compte de messagerie, avertir "
+"l'utilisateur par email"
+
+#: personal/scalix/generic.tpl:94
+msgid "Notify User"
+msgstr "Avertir l'utilisateur"
+
+#: personal/scalix/generic.tpl:114 personal/scalix/paste_generic.tpl:8
+msgid "List of SCALIX email addresses"
+msgstr "Liste des adresse de messagerie SCALIX"
+
+#: personal/scalix/class_scalixAccount.inc:16
+msgid "SCALIX"
+msgstr ""
+
+#: personal/scalix/class_scalixAccount.inc:17
+#, fuzzy
+msgid "Manage personal SCALIX settings"
+msgstr "Editer les paramètres Unix"
+
+#: personal/scalix/class_scalixAccount.inc:126
+msgid "This account has no SCALIX extensions."
+msgstr "Ce compte n'a pas d'extension SCALIX."
+
+#: personal/scalix/class_scalixAccount.inc:135
+msgid "Remove SCALIX account"
+msgstr "Supprimer le compte SCALIX"
+
+#: personal/scalix/class_scalixAccount.inc:136
+msgid ""
+"This account has SCALIX synchronization enabled. You can disable it by "
+"clicking below."
+msgstr ""
+"Ce compte possède l'extension SCALIX. Vous pouvez le supprimer en cliquant "
+"sur le bouton ci-dessous."
+
+#: personal/scalix/class_scalixAccount.inc:138
+msgid "Create SCALIX account"
+msgstr "Créer un compte SCALIX"
+
+#: personal/scalix/class_scalixAccount.inc:138
+msgid ""
+"This account has SCALIX synchronization disabled. You can enable it by "
+"clicking below."
+msgstr ""
+"Aucune extension SCALIX n'existe pour ce compte. Vous pouvez en créer une en "
+"cliquant sur le bouton ci-dessous."
+
+#: personal/scalix/class_scalixAccount.inc:236
+#: personal/scalix/class_scalixAccount.inc:342
+msgid "LDAP error"
+msgstr "Erreur LDAP"
+
+#: personal/scalix/class_scalixAccount.inc:259
+#: personal/scalix/class_scalixAccount.inc:266
+#: personal/scalix/class_scalixAccount.inc:273
+#: personal/scalix/class_scalixAccount.inc:283
+#: personal/scalix/class_scalixAccount.inc:503
+#: personal/scalix/class_scalixAccount.inc:512
+msgid "Error"
+msgstr "Erreur"
+
+#: personal/scalix/class_scalixAccount.inc:259
+#: personal/scalix/class_scalixAccount.inc:503
+msgid "Cannot add invalid mail address!"
+msgstr "Impossible d'ajouter une adresse de messagerie non valide !"
+
+#: personal/scalix/class_scalixAccount.inc:266
+#: personal/scalix/class_scalixAccount.inc:283
+msgid "You have no permission to modify these addresses."
+msgstr "Vous n'avez pas les droits nécessaires pour modifier ces adresses."
+
+#: personal/scalix/class_scalixAccount.inc:273
+#: personal/scalix/class_scalixAccount.inc:512
+#, php-format
+msgid "Cannot add mail address: it is already used by user '%s'."
+msgstr ""
+"Impossible d'ajouter l'adresse de messagerie. L'adresse est déjà utilisée "
+"par l'utilisateur '%s'."
+
+#: personal/scalix/class_scalixAccount.inc:364
+msgid "Mail node"
+msgstr "Noeud de messagerie"
+
+#: personal/scalix/class_scalixAccount.inc:367
+msgid "SCALIX object"
+msgstr "Objet SCALIX"
+
+#: personal/scalix/class_scalixAccount.inc:376
+msgid "Email address"
+msgstr "Adresse de messagerie"
+
+#: personal/scalix/class_scalixAccount.inc:383
+msgid "Limit Mailbox"
+msgstr "Limiter la taille du compte de messagerie"
+
+#: personal/scalix/class_scalixAccount.inc:462
+msgid "My account"
+msgstr "Mon Compte"
+
+#: personal/scalix/paste_generic.tpl:1
+msgid "SCALIX paste"
+msgstr "Coller un compte SCALIX"
+
+#~ msgid "This does something"
+#~ msgstr "Ceci fait quelque chose"

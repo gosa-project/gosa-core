@@ -1,0 +1,374 @@
+# translation of messages.po to Chinese Simplified
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+# Jiang Xin <worldhello.net@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2007-06-03 12:27+0800\n"
+"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Language-Team: Chinese Simplified <zh@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: admin/groups/scalix/class_scalixGroup.inc:15
+#: personal/scalix/class_scalixAccount.inc:458
+#, fuzzy
+msgid "SCALIX account"
+msgstr "GLPI 账号"
+
+#: admin/groups/scalix/class_scalixGroup.inc:25
+#: personal/scalix/class_scalixAccount.inc:473
+#, fuzzy
+msgid "SCALIX Mail node"
+msgstr "邮件"
+
+#: admin/groups/scalix/class_scalixGroup.inc:26
+#: personal/scalix/class_scalixAccount.inc:474
+#, fuzzy
+msgid "Mailbox class"
+msgstr "邮件地址"
+
+#: admin/groups/scalix/class_scalixGroup.inc:27
+#: personal/scalix/class_scalixAccount.inc:475
+#, fuzzy
+msgid "Server language"
+msgstr "服务器名称"
+
+#: admin/groups/scalix/class_scalixGroup.inc:28
+#: personal/scalix/class_scalixAccount.inc:476
+msgid "Administrator"
+msgstr "管理员"
+
+#: admin/groups/scalix/class_scalixGroup.inc:29
+#: personal/scalix/class_scalixAccount.inc:477
+#, fuzzy
+msgid "Mailbox administrator"
+msgstr "目录管理员"
+
+#: admin/groups/scalix/class_scalixGroup.inc:30
+#: personal/scalix/class_scalixAccount.inc:478
+msgid "Hide user entry in SCALIX"
+msgstr ""
+
+#: admin/groups/scalix/class_scalixGroup.inc:31
+#: personal/scalix/class_scalixAccount.inc:479
+#, fuzzy
+msgid "Mailbox size limitations"
+msgstr "邮件传递列表"
+
+#: admin/groups/scalix/class_scalixGroup.inc:32
+#: personal/scalix/class_scalixAccount.inc:480
+#, fuzzy
+msgid "Limit outbound"
+msgstr "限制登录时间"
+
+#: admin/groups/scalix/class_scalixGroup.inc:33
+#: personal/scalix/class_scalixAccount.inc:481
+msgid "Limit inbound"
+msgstr ""
+
+#: admin/groups/scalix/class_scalixGroup.inc:34
+#: personal/scalix/class_scalixAccount.inc:482
+#, fuzzy
+msgid "Notify user"
+msgstr "计算机"
+
+#: admin/groups/scalix/class_scalixGroup.inc:35
+#: personal/scalix/generic.tpl:111 personal/scalix/class_scalixAccount.inc:483
+#: personal/scalix/paste_generic.tpl:6
+#, fuzzy
+msgid "SCALIX email addresses"
+msgstr "邮件地址"
+
+#: personal/scalix/generic.tpl:1
+#, fuzzy
+msgid "SCALIX settings"
+msgstr "Posix 设置"
+
+#: personal/scalix/generic.tpl:6
+msgid "Generic"
+msgstr "通用配置"
+
+#: personal/scalix/generic.tpl:9
+msgid "Mail settings"
+msgstr "邮件选项"
+
+#: personal/scalix/generic.tpl:11
+msgid "SCALIX mail node"
+msgstr ""
+
+#: personal/scalix/generic.tpl:20
+#, fuzzy
+msgid "SCALIX mailbox class"
+msgstr "邮件大小"
+
+#: personal/scalix/generic.tpl:24
+msgid ""
+"Limited users can not make use of the group calendar functionality in SCALIX"
+msgstr ""
+
+#: personal/scalix/generic.tpl:33
+#, fuzzy
+msgid "SCALIX server language"
+msgstr "服务器名称"
+
+#: personal/scalix/generic.tpl:37
+msgid "Message catalog language for client"
+msgstr ""
+
+#: personal/scalix/generic.tpl:49 personal/scalix/generic.tpl:71
+#, fuzzy
+msgid "Settings"
+msgstr "Posix 设置"
+
+#: personal/scalix/generic.tpl:54
+#, fuzzy
+msgid "Select for administrator capabilities"
+msgstr "选择模板"
+
+#: personal/scalix/generic.tpl:54
+#, fuzzy
+msgid "SCALIX Administrator"
+msgstr "管理员"
+
+#: personal/scalix/generic.tpl:59
+#, fuzzy
+msgid "Select for mailbox administrator capabilities"
+msgstr "选择模板"
+
+#: personal/scalix/generic.tpl:59
+#, fuzzy
+msgid "SCALIX Mailbox Administrator"
+msgstr "管理员"
+
+#: personal/scalix/generic.tpl:64
+#, fuzzy
+msgid "Hide user entry from address book"
+msgstr "请输入一个邮件地址"
+
+#: personal/scalix/generic.tpl:64
+msgid "Hide this user entry in SCALIX"
+msgstr ""
+
+#: personal/scalix/generic.tpl:73
+#, fuzzy
+msgid "Limit mailbox size"
+msgstr "邮件大小"
+
+#: personal/scalix/generic.tpl:76
+msgid "MB"
+msgstr "MB"
+
+#: personal/scalix/generic.tpl:84
+msgid "As sanction on mailbox quota overuse, stop user from sending mail"
+msgstr ""
+
+#: personal/scalix/generic.tpl:84
+msgid "Limit Outbound Mail"
+msgstr ""
+
+#: personal/scalix/generic.tpl:89
+msgid "As sanction on mailbox quota overuse, stop user from receiving mail"
+msgstr ""
+
+#: personal/scalix/generic.tpl:89
+msgid "Limit Inbound Mail"
+msgstr ""
+
+#: personal/scalix/generic.tpl:94
+msgid "As sanction on mailbox quota overuse, notify the user by email"
+msgstr ""
+
+#: personal/scalix/generic.tpl:94
+msgid "Notify User"
+msgstr ""
+
+#: personal/scalix/generic.tpl:114 personal/scalix/paste_generic.tpl:8
+#, fuzzy
+msgid "List of SCALIX email addresses"
+msgstr "邮件地址"
+
+#: personal/scalix/class_scalixAccount.inc:16
+msgid "SCALIX"
+msgstr ""
+
+#: personal/scalix/class_scalixAccount.inc:17
+#, fuzzy
+msgid "Manage personal SCALIX settings"
+msgstr "Posix 设置"
+
+#: personal/scalix/class_scalixAccount.inc:126
+#, fuzzy
+msgid "This account has no SCALIX extensions."
+msgstr "这个账户未包含 unix 扩展。"
+
+#: personal/scalix/class_scalixAccount.inc:135
+#, fuzzy
+msgid "Remove SCALIX account"
+msgstr "删除 posix 账户"
+
+#: personal/scalix/class_scalixAccount.inc:136
+#, fuzzy
+msgid ""
+"This account has SCALIX synchronization enabled. You can disable it by "
+"clicking below."
+msgstr "这个账户已经启用 posix 功能。要禁用请点击下面按钮。"
+
+#: personal/scalix/class_scalixAccount.inc:138
+#, fuzzy
+msgid "Create SCALIX account"
+msgstr "创建 posix 账户"
+
+#: personal/scalix/class_scalixAccount.inc:138
+#, fuzzy
+msgid ""
+"This account has SCALIX synchronization disabled. You can enable it by "
+"clicking below."
+msgstr "这个账户已经启用 posix 功能。要启用请点击下面按钮。"
+
+#: personal/scalix/class_scalixAccount.inc:236
+#: personal/scalix/class_scalixAccount.inc:342
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP 错误:"
+
+#: personal/scalix/class_scalixAccount.inc:259
+#: personal/scalix/class_scalixAccount.inc:266
+#: personal/scalix/class_scalixAccount.inc:273
+#: personal/scalix/class_scalixAccount.inc:283
+#: personal/scalix/class_scalixAccount.inc:503
+#: personal/scalix/class_scalixAccount.inc:512
+msgid "Error"
+msgstr "错误"
+
+#: personal/scalix/class_scalixAccount.inc:259
+#: personal/scalix/class_scalixAccount.inc:503
+#, fuzzy
+msgid "Cannot add invalid mail address!"
+msgstr "您正在添加一个无效邮件地址"
+
+#: personal/scalix/class_scalixAccount.inc:266
+#: personal/scalix/class_scalixAccount.inc:283
+#, fuzzy
+msgid "You have no permission to modify these addresses."
+msgstr "您无权删除这个部门。"
+
+#: personal/scalix/class_scalixAccount.inc:273
+#: personal/scalix/class_scalixAccount.inc:512
+#, fuzzy, php-format
+msgid "Cannot add mail address: it is already used by user '%s'."
+msgstr "您正在添加的地址已经被用户使用"
+
+#: personal/scalix/class_scalixAccount.inc:364
+#, fuzzy
+msgid "Mail node"
+msgstr "邮件"
+
+#: personal/scalix/class_scalixAccount.inc:367
+#, fuzzy
+msgid "SCALIX object"
+msgstr "成员对象"
+
+#: personal/scalix/class_scalixAccount.inc:376
+#, fuzzy
+msgid "Email address"
+msgstr "邮件地址"
+
+#: personal/scalix/class_scalixAccount.inc:383
+#, fuzzy
+msgid "Limit Mailbox"
+msgstr "邮件大小"
+
+#: personal/scalix/class_scalixAccount.inc:462
+msgid "My account"
+msgstr "我的账号"
+
+#: personal/scalix/paste_generic.tpl:1
+#, fuzzy
+msgid "SCALIX paste"
+msgstr "GLPI 账号"
+
+#, fuzzy
+#~ msgid "This does something"
+#~ msgstr "******"
+
+#, fuzzy
+#~ msgid "List of scalix email addresses"
+#~ msgstr "替代邮件地址列表"
+
+#, fuzzy
+#~ msgid "Scalix paste"
+#~ msgstr "我的账号"
+
+#, fuzzy
+#~ msgid "Scalix email addresses"
+#~ msgstr "邮件地址"
+
+#, fuzzy
+#~ msgid "Scalix account"
+#~ msgstr "我的账号"
+
+#, fuzzy
+#~ msgid "Scalix settings"
+#~ msgstr "邮件选项"
+
+#, fuzzy
+#~ msgid "Scalix server language"
+#~ msgstr "Profile 服务器管理"
+
+#, fuzzy
+#~ msgid "Scalix Administrator"
+#~ msgstr "管理员"
+
+#, fuzzy
+#~ msgid "Scalix"
+#~ msgstr "特殊"
+
+#, fuzzy
+#~ msgid "This account has no scalix extensions."
+#~ msgstr "这个账号没有传真扩展。"
+
+#, fuzzy
+#~ msgid "Remove scalix account"
+#~ msgstr "删除 posix 账户"
+
+#, fuzzy
+#~ msgid "Create scalix account"
+#~ msgstr "创建 posix 账户"
+
+#, fuzzy
+#~ msgid "Scalix object"
+#~ msgstr "我的账号"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
+
+#~ msgid "Add"
+#~ msgstr "添加"
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Cancel"
+#~ msgstr "取消"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"
+
+#, fuzzy
+#~ msgid "There is no scalix mailnode specified."
+#~ msgstr "没有定义邮件服务器。"
+
+#, fuzzy
+#~ msgid "Value in 'Limit Mailbox size' is not valid."
+#~ msgstr "'Quota 大小' 的值无效。"
