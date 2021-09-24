@@ -1,0 +1,443 @@
+# translation of messages.po to Dutch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004.
+#
+# Translator:
+# Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2006-06-02 16:58+0100\n"
+"Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
+"Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/sudo/class_sudoGeneric.inc:112
+msgid "Type"
+msgstr "Type"
+
+#: admin/sudo/class_sudoGeneric.inc:112
+#, fuzzy
+msgid "Member"
+msgstr "Groepsleden"
+
+#: admin/sudo/class_sudoGeneric.inc:112 admin/sudo/class_sudoGeneric.inc:115
+#: admin/sudo/class_sudoGeneric.inc:117 admin/sudo/class_sudoGeneric.inc:119
+#, fuzzy
+msgid "Option"
+msgstr "Opties"
+
+#: admin/sudo/class_sudoGeneric.inc:115
+#, fuzzy
+msgid "System"
+msgstr "Systeem"
+
+#: admin/sudo/class_sudoGeneric.inc:117 admin/sudo/class_sudoGeneric.inc:552
+#, fuzzy
+msgid "Command"
+msgstr "en"
+
+#: admin/sudo/class_sudoGeneric.inc:119 admin/sudo/class_sudoGeneric.inc:366
+msgid "User"
+msgstr "Gebruiker"
+
+#: admin/sudo/class_sudoGeneric.inc:308
+msgid "Error"
+msgstr "Fout"
+
+#: admin/sudo/class_sudoGeneric.inc:367
+msgid "Group"
+msgstr "Groep"
+
+#: admin/sudo/class_sudoGeneric.inc:462
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP fout:"
+
+#: admin/sudo/class_sudoGeneric.inc:476 admin/sudo/class_sudoGeneric.inc:481
+#: admin/sudo/class_sudoGeneric.inc:486 admin/sudo/class_sudoGeneric.inc:495
+#: admin/sudo/class_sudoGeneric.inc:548 admin/sudo/generic.tpl:7
+#: admin/sudo/generic.tpl:34 admin/sudo/sudo-list.xml:32
+#: admin/sudo/paste_generic.tpl:5
+msgid "Name"
+msgstr "Naam"
+
+#: admin/sudo/class_sudoGeneric.inc:525
+#, fuzzy
+msgid "Sudo"
+msgstr "Achternaam"
+
+#: admin/sudo/class_sudoGeneric.inc:526 admin/sudo/class_sudoGeneric.inc:531
+#, fuzzy
+msgid "Sudo role"
+msgstr "! onbekend id"
+
+#: admin/sudo/class_sudoGeneric.inc:539
+#, fuzzy
+msgid "RDN for sudo rule storage."
+msgstr "Kiosk profiel instellingen"
+
+#: admin/sudo/class_sudoGeneric.inc:547
+msgid "System trust"
+msgstr "Systeem vertrouwen"
+
+#: admin/sudo/class_sudoGeneric.inc:549 admin/sudo/generic.tpl:15
+#: admin/sudo/generic.tpl:44 admin/sudo/sudo-list.xml:40
+msgid "Description"
+msgstr "Omschrijving"
+
+#: admin/sudo/class_sudoGeneric.inc:550
+msgid "Users"
+msgstr "Gebruikers"
+
+#: admin/sudo/class_sudoGeneric.inc:551
+#, fuzzy
+msgid "Host"
+msgstr "Inhakers"
+
+#: admin/sudo/class_sudoGeneric.inc:553
+#, fuzzy
+msgid "Run as user"
+msgstr "Windows gebruikers"
+
+#: admin/sudo/class_sudoGeneric.inc:554
+#, fuzzy
+msgid "Access control list"
+msgstr "Toegangsopties"
+
+#: admin/sudo/options.tpl:3 admin/sudo/class_sudoOption.inc:539
+#: admin/sudo/class_sudoOption.inc:546
+#, fuzzy
+msgid "Sudo options"
+msgstr "Onbekend"
+
+#: admin/sudo/options.tpl:5
+#, fuzzy
+msgid "Option name"
+msgstr "Naam van de locatie"
+
+#: admin/sudo/options.tpl:7
+#, fuzzy
+msgid "Value"
+msgstr "man"
+
+#: admin/sudo/options.tpl:8 admin/sudo/class_sudoOption.inc:538
+msgid "Options"
+msgstr "Opties"
+
+#: admin/sudo/options.tpl:89
+#, fuzzy
+msgid "Available options"
+msgstr "Beschikbare programma's"
+
+#: admin/sudo/generic.tpl:3 admin/sudo/generic.tpl:4 admin/sudo/generic.tpl:27
+#: admin/sudo/generic.tpl:29 admin/sudo/generic.tpl:31
+#: admin/sudo/paste_generic.tpl:1
+msgid "Generic"
+msgstr "Algemeen"
+
+#: admin/sudo/generic.tpl:3 admin/sudo/generic.tpl:4
+#: admin/sudo/paste_generic.tpl:1
+msgid "global defaults"
+msgstr ""
+
+#: admin/sudo/generic.tpl:61
+#, fuzzy
+msgid "Users and groups"
+msgstr "groepen"
+
+#: admin/sudo/generic.tpl:73 admin/sudo/generic.tpl:91
+msgid "Add from list"
+msgstr ""
+
+#: admin/sudo/generic.tpl:78
+#, fuzzy
+msgid "Systems"
+msgstr "Systeem"
+
+#: admin/sudo/generic.tpl:99
+#, fuzzy
+msgid "Commands"
+msgstr "en"
+
+#: admin/sudo/generic.tpl:112
+#, fuzzy
+msgid "Run as"
+msgstr "Windows gebruikers"
+
+#: admin/sudo/sudo-list.xml:11
+#, fuzzy
+msgid "List of Sudo roles"
+msgstr "Lijst met gebruikers"
+
+#: admin/sudo/sudo-list.xml:15 admin/sudo/sudo-list.xml:65
+msgid "Role"
+msgstr "Funktie"
+
+#: admin/sudo/sudo-list.xml:48
+msgid "Actions"
+msgstr "Acties"
+
+#: admin/sudo/sudo-list.xml:59
+msgid "Create"
+msgstr "Aanmaken"
+
+#: admin/sudo/sudo-list.xml:72
+#, fuzzy
+msgid "Default"
+msgstr "Verwijderen"
+
+#: admin/sudo/sudo-list.xml:85
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: admin/sudo/sudo-list.xml:117
+#, fuzzy
+msgid "Edit Sudo role"
+msgstr "! onbekend id"
+
+#: admin/sudo/sudo-list.xml:130
+#, fuzzy
+msgid "Remove Sudo role"
+msgstr "! onbekend id"
+
+#: admin/sudo/paste_generic.tpl:2
+#, fuzzy
+msgid "Paste sudo entry"
+msgstr "Plakken"
+
+#: admin/sudo/class_sudoOption.inc:154
+#, fuzzy
+msgid "Unknown option"
+msgstr "Onbekend"
+
+#: admin/sudo/class_sudoOption.inc:155
+#, fuzzy, php-format
+msgid "The Sudo option '%s' is invalid!"
+msgstr "De opgegeven naam is ongeldig."
+
+#: admin/sudo/class_sudoOption.inc:284 admin/sudo/class_sudoOption.inc:286
+#, fuzzy
+msgid "string"
+msgstr "Waarschuwing"
+
+#: admin/sudo/class_sudoOption.inc:284 admin/sudo/class_sudoOption.inc:285
+#: admin/sudo/class_sudoOption.inc:286
+msgid "boolean"
+msgstr ""
+
+#: admin/sudo/class_sudoOption.inc:285
+#, fuzzy
+msgid "integer"
+msgstr "printers"
+
+#: admin/sudo/class_sudoOption.inc:286
+#, fuzzy
+msgid "list"
+msgstr "klasse"
+
+#: admin/sudo/sudo-filter.xml:22
+#, fuzzy
+msgid "Default filter"
+msgstr "Parameters"
+
+#: admin/sudo/sudo-filter.xml:36
+#, fuzzy
+msgid "By member"
+msgstr "Groepsleden"
+
+#: admin/sudo/class_sudoManagement.inc:25
+#, fuzzy
+msgid "Sudo rules"
+msgstr "! onbekend id"
+
+#: admin/sudo/class_sudoManagement.inc:26
+msgid "Manage all aspects of system wide sudoers definitions"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Filter"
+#~ msgstr "Filters"
+
+#~ msgid "Warning"
+#~ msgstr "Waarschuwing"
+
+#~ msgid ""
+#~ "Please double check if you really want to do this since there is no way "
+#~ "for GOsa to get your data back."
+#~ msgstr ""
+#~ "Controleer a.u.b. of u dit daadwerkelijk wil doen, aangezien er geen "
+#~ "mogelijkheid voor GOsa is om uw data terug te krijgen."
+
+#~ msgid ""
+#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr ""
+#~ "Indien u zeker bent drukt u dan 'Verwijderen' om door te gaan of "
+#~ "'Annuleren' om te annuleren."
+
+#~ msgid "disabled"
+#~ msgstr "gedeactiveerd"
+
+#~ msgid "full access"
+#~ msgstr "volledige toegang"
+
+#~ msgid "allow access to these hosts"
+#~ msgstr "sta toegang op deze computers toe"
+
+#~ msgid "Trust mode"
+#~ msgstr "Vertrouwensmodus"
+
+#, fuzzy
+#~ msgid "Sudo management"
+#~ msgstr "Systeembeheer"
+
+#, fuzzy
+#~ msgid "List of users and groups"
+#~ msgstr "groepen"
+
+#, fuzzy
+#~ msgid "Description name"
+#~ msgstr "Omschrijving"
+
+#~ msgid "Add"
+#~ msgstr "Toevoegen"
+
+#~ msgid "Base"
+#~ msgstr "Basis"
+
+#~ msgid "Submit"
+#~ msgstr "Verwerk"
+
+#~ msgid "Select systems to add"
+#~ msgstr "Selecteer de toe te voegen systemen"
+
+#~ msgid "Display systems of department"
+#~ msgstr "Toon systemen van afdeling"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "Selecteer de afdeling waarbinnen gezocht zal worden"
+
+#~ msgid "Display systems matching"
+#~ msgstr "Toon de overeenkomende systemen"
+
+#~ msgid "Regular expression for matching addresses"
+#~ msgstr "Reguliere expresie voor overeenkomende adressen"
+
+#, fuzzy
+#~ msgid "List of systems"
+#~ msgstr "Lijst met gebruikers"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "Workstation"
+#~ msgstr "Werkstation"
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
+
+#, fuzzy
+#~ msgid "Show users"
+#~ msgstr "Toon Samba gebruikers"
+
+#, fuzzy
+#~ msgid "Show groups"
+#~ msgstr "Toon Samba groepen"
+
+#~ msgid "Show servers"
+#~ msgstr "Toon servers"
+
+#~ msgid "Show workstations"
+#~ msgstr "Toon werkstations"
+
+#~ msgid "Show terminals"
+#~ msgstr "Toon terminals"
+
+#, fuzzy
+#~ msgid "Available systems"
+#~ msgstr "Beschikbare programma's"
+
+#~ msgid "Object name"
+#~ msgstr "Objectnaam"
+
+#~ msgid "Select to see terminals"
+#~ msgstr "Selecteer om terminals te zien"
+
+#~ msgid "Select to see servers"
+#~ msgstr "Selecteer om servers te zien"
+
+#~ msgid "Select to see workstations"
+#~ msgstr "Selecteer om werkstations te zien"
+
+#~ msgid "Regular expression for matching group names"
+#~ msgstr "Reguliere expressie voor overeenkomende groepnamen"
+
+#, fuzzy
+#~ msgid "Select the target objects"
+#~ msgstr "Selecteer om afdelingen te zien"
+
+#, fuzzy
+#~ msgid "Select to see users"
+#~ msgstr "Selecteer om servers te zien"
+
+#, fuzzy
+#~ msgid "Select to see groups"
+#~ msgstr "Selecteer om GOsa groepen te zien"
+
+#~ msgid "Apply"
+#~ msgstr "Toepassen"
+
+#, fuzzy
+#~ msgid "If you're sure, press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr ""
+#~ "Indien u zeker bent drukt u dan 'Verwijderen' om door te gaan of "
+#~ "'Annuleren' om te annuleren."
+
+#, fuzzy
+#~ msgid "Sudo role administration"
+#~ msgstr "Groepen beheer"
+
+#, fuzzy
+#~ msgid "Select all"
+#~ msgstr "Selecteer"
+
+#~ msgid "Department"
+#~ msgstr "Afdeling"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "Reguliere expressie voor overeenkomende groepnamen"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role member names"
+#~ msgstr "Reguliere expressie voor overeenkomende objectnamen"
+
+#~ msgid "Edit this entry"
+#~ msgstr "Bewerk deze invoer"
+
+#~ msgid "Delete this entry"
+#~ msgstr "Verwijder deze invoer"
+
+#, fuzzy
+#~ msgid "Number of listed roles"
+#~ msgstr "Naam van de groep"
+
+#, fuzzy
+#~ msgid "Manage sudo roles"
+#~ msgstr "Windows gebruikers"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "Rechten"
+
+#, fuzzy
+#~ msgid "Permission error"
+#~ msgstr "Rechten"

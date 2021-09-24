@@ -1,0 +1,434 @@
+# translation of messages.po to Chinese Simplified
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+# Jiang Xin <worldhello.net@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2007-06-03 12:27+0800\n"
+"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Language-Team: Chinese Simplified <zh@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: admin/sudo/class_sudoGeneric.inc:112
+msgid "Type"
+msgstr "类型"
+
+#: admin/sudo/class_sudoGeneric.inc:112
+#, fuzzy
+msgid "Member"
+msgstr "成员"
+
+#: admin/sudo/class_sudoGeneric.inc:112 admin/sudo/class_sudoGeneric.inc:115
+#: admin/sudo/class_sudoGeneric.inc:117 admin/sudo/class_sudoGeneric.inc:119
+#, fuzzy
+msgid "Option"
+msgstr "选项"
+
+#: admin/sudo/class_sudoGeneric.inc:115
+#, fuzzy
+msgid "System"
+msgstr "系统"
+
+#: admin/sudo/class_sudoGeneric.inc:117 admin/sudo/class_sudoGeneric.inc:552
+#, fuzzy
+msgid "Command"
+msgstr "和"
+
+#: admin/sudo/class_sudoGeneric.inc:119 admin/sudo/class_sudoGeneric.inc:366
+msgid "User"
+msgstr "用户"
+
+#: admin/sudo/class_sudoGeneric.inc:308
+msgid "Error"
+msgstr "错误"
+
+#: admin/sudo/class_sudoGeneric.inc:367
+msgid "Group"
+msgstr "组"
+
+#: admin/sudo/class_sudoGeneric.inc:462
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP 错误:"
+
+#: admin/sudo/class_sudoGeneric.inc:476 admin/sudo/class_sudoGeneric.inc:481
+#: admin/sudo/class_sudoGeneric.inc:486 admin/sudo/class_sudoGeneric.inc:495
+#: admin/sudo/class_sudoGeneric.inc:548 admin/sudo/generic.tpl:7
+#: admin/sudo/generic.tpl:34 admin/sudo/sudo-list.xml:32
+#: admin/sudo/paste_generic.tpl:5
+msgid "Name"
+msgstr "名称"
+
+#: admin/sudo/class_sudoGeneric.inc:525
+#, fuzzy
+msgid "Sudo"
+msgstr "姓"
+
+#: admin/sudo/class_sudoGeneric.inc:526 admin/sudo/class_sudoGeneric.inc:531
+#, fuzzy
+msgid "Sudo role"
+msgstr "! 未知 id"
+
+#: admin/sudo/class_sudoGeneric.inc:539
+#, fuzzy
+msgid "RDN for sudo rule storage."
+msgstr "Kiosk profile 设置"
+
+#: admin/sudo/class_sudoGeneric.inc:547
+msgid "System trust"
+msgstr "信赖的系统"
+
+#: admin/sudo/class_sudoGeneric.inc:549 admin/sudo/generic.tpl:15
+#: admin/sudo/generic.tpl:44 admin/sudo/sudo-list.xml:40
+msgid "Description"
+msgstr "描述"
+
+#: admin/sudo/class_sudoGeneric.inc:550
+msgid "Users"
+msgstr "用户"
+
+#: admin/sudo/class_sudoGeneric.inc:551
+#, fuzzy
+msgid "Host"
+msgstr "钩子"
+
+#: admin/sudo/class_sudoGeneric.inc:553
+#, fuzzy
+msgid "Run as user"
+msgstr "域用户"
+
+#: admin/sudo/class_sudoGeneric.inc:554
+#, fuzzy
+msgid "Access control list"
+msgstr "访问选项"
+
+#: admin/sudo/options.tpl:3 admin/sudo/class_sudoOption.inc:539
+#: admin/sudo/class_sudoOption.inc:546
+#, fuzzy
+msgid "Sudo options"
+msgstr "未知"
+
+#: admin/sudo/options.tpl:5
+#, fuzzy
+msgid "Option name"
+msgstr "位置名称"
+
+#: admin/sudo/options.tpl:7
+#, fuzzy
+msgid "Value"
+msgstr "男"
+
+#: admin/sudo/options.tpl:8 admin/sudo/class_sudoOption.inc:538
+msgid "Options"
+msgstr "选项"
+
+#: admin/sudo/options.tpl:89
+#, fuzzy
+msgid "Available options"
+msgstr "可用的应用程序"
+
+#: admin/sudo/generic.tpl:3 admin/sudo/generic.tpl:4 admin/sudo/generic.tpl:27
+#: admin/sudo/generic.tpl:29 admin/sudo/generic.tpl:31
+#: admin/sudo/paste_generic.tpl:1
+msgid "Generic"
+msgstr "通用配置"
+
+#: admin/sudo/generic.tpl:3 admin/sudo/generic.tpl:4
+#: admin/sudo/paste_generic.tpl:1
+msgid "global defaults"
+msgstr ""
+
+#: admin/sudo/generic.tpl:61
+#, fuzzy
+msgid "Users and groups"
+msgstr "组"
+
+#: admin/sudo/generic.tpl:73 admin/sudo/generic.tpl:91
+msgid "Add from list"
+msgstr ""
+
+#: admin/sudo/generic.tpl:78
+#, fuzzy
+msgid "Systems"
+msgstr "系统"
+
+#: admin/sudo/generic.tpl:99
+#, fuzzy
+msgid "Commands"
+msgstr "和"
+
+#: admin/sudo/generic.tpl:112
+#, fuzzy
+msgid "Run as"
+msgstr "域用户"
+
+#: admin/sudo/sudo-list.xml:11
+#, fuzzy
+msgid "List of Sudo roles"
+msgstr "用户列表"
+
+#: admin/sudo/sudo-list.xml:15 admin/sudo/sudo-list.xml:65
+msgid "Role"
+msgstr "角色"
+
+#: admin/sudo/sudo-list.xml:48
+msgid "Actions"
+msgstr "动作"
+
+#: admin/sudo/sudo-list.xml:59
+msgid "Create"
+msgstr "创建"
+
+#: admin/sudo/sudo-list.xml:72
+#, fuzzy
+msgid "Default"
+msgstr "删除"
+
+#: admin/sudo/sudo-list.xml:85
+msgid "Remove"
+msgstr "删除"
+
+#: admin/sudo/sudo-list.xml:117
+#, fuzzy
+msgid "Edit Sudo role"
+msgstr "! 未知 id"
+
+#: admin/sudo/sudo-list.xml:130
+#, fuzzy
+msgid "Remove Sudo role"
+msgstr "! 未知 id"
+
+#: admin/sudo/paste_generic.tpl:2
+#, fuzzy
+msgid "Paste sudo entry"
+msgstr "粘贴"
+
+#: admin/sudo/class_sudoOption.inc:154
+#, fuzzy
+msgid "Unknown option"
+msgstr "未知"
+
+#: admin/sudo/class_sudoOption.inc:155
+#, fuzzy, php-format
+msgid "The Sudo option '%s' is invalid!"
+msgstr "指定的 branch 名称无效。"
+
+#: admin/sudo/class_sudoOption.inc:284 admin/sudo/class_sudoOption.inc:286
+#, fuzzy
+msgid "string"
+msgstr "警告"
+
+#: admin/sudo/class_sudoOption.inc:284 admin/sudo/class_sudoOption.inc:285
+#: admin/sudo/class_sudoOption.inc:286
+msgid "boolean"
+msgstr ""
+
+#: admin/sudo/class_sudoOption.inc:285
+#, fuzzy
+msgid "integer"
+msgstr "打印机"
+
+#: admin/sudo/class_sudoOption.inc:286
+#, fuzzy
+msgid "list"
+msgstr "类"
+
+#: admin/sudo/sudo-filter.xml:22
+#, fuzzy
+msgid "Default filter"
+msgstr "参数"
+
+#: admin/sudo/sudo-filter.xml:36
+#, fuzzy
+msgid "By member"
+msgstr "组成员"
+
+#: admin/sudo/class_sudoManagement.inc:25
+#, fuzzy
+msgid "Sudo rules"
+msgstr "! 未知 id"
+
+#: admin/sudo/class_sudoManagement.inc:26
+msgid "Manage all aspects of system wide sudoers definitions"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Filter"
+#~ msgstr "过滤器"
+
+#~ msgid "Warning"
+#~ msgstr "警告"
+
+#~ msgid ""
+#~ "Please double check if you really want to do this since there is no way "
+#~ "for GOsa to get your data back."
+#~ msgstr "请再次检查您是否要这么做，因为 GOsa 没有办法将您的数据找回。"
+
+#~ msgid ""
+#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr "所以，如果您确定，请按“删除”继续，否则按“取消”退出。"
+
+#~ msgid "disabled"
+#~ msgstr "禁用"
+
+#~ msgid "full access"
+#~ msgstr "完全访问权限"
+
+#~ msgid "allow access to these hosts"
+#~ msgstr "允许访问这些主机"
+
+#~ msgid "Trust mode"
+#~ msgstr "信赖模式"
+
+#, fuzzy
+#~ msgid "Sudo management"
+#~ msgstr "系统管理"
+
+#, fuzzy
+#~ msgid "List of users and groups"
+#~ msgstr "组"
+
+#, fuzzy
+#~ msgid "Description name"
+#~ msgstr "描述"
+
+#~ msgid "Add"
+#~ msgstr "添加"
+
+#~ msgid "Base"
+#~ msgstr "位置"
+
+#~ msgid "Submit"
+#~ msgstr "提交"
+
+#~ msgid "Select systems to add"
+#~ msgstr "选择要添加的系统"
+
+#~ msgid "Display systems of department"
+#~ msgstr "显示部门的系统"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "选择一个部门来做查询"
+
+#~ msgid "Display systems matching"
+#~ msgstr "显示匹配的系统"
+
+#~ msgid "Regular expression for matching addresses"
+#~ msgstr "匹配地址的正则表达式"
+
+#, fuzzy
+#~ msgid "List of systems"
+#~ msgstr "用户列表"
+
+#~ msgid "Server"
+#~ msgstr "服务器"
+
+#~ msgid "Workstation"
+#~ msgstr "工作站"
+
+#~ msgid "Terminal"
+#~ msgstr "终端"
+
+#, fuzzy
+#~ msgid "Show users"
+#~ msgstr "显示 samba 用户"
+
+#, fuzzy
+#~ msgid "Show groups"
+#~ msgstr "显示 samba 用户组"
+
+#~ msgid "Show servers"
+#~ msgstr "显示服务器"
+
+#~ msgid "Show workstations"
+#~ msgstr "显示工作站"
+
+#~ msgid "Show terminals"
+#~ msgstr "显示终端"
+
+#, fuzzy
+#~ msgid "Available systems"
+#~ msgstr "可用的应用程序"
+
+#~ msgid "Object name"
+#~ msgstr "对象名称"
+
+#~ msgid "Select to see terminals"
+#~ msgstr "选择查看终端"
+
+#~ msgid "Select to see servers"
+#~ msgstr "选择显示服务器"
+
+#~ msgid "Select to see workstations"
+#~ msgstr "选择查看工作站"
+
+#~ msgid "Regular expression for matching group names"
+#~ msgstr "用于匹配组名的正则表达式"
+
+#, fuzzy
+#~ msgid "Select the target objects"
+#~ msgstr "选择查看部门"
+
+#, fuzzy
+#~ msgid "Select to see users"
+#~ msgstr "选择显示服务器"
+
+#, fuzzy
+#~ msgid "Select to see groups"
+#~ msgstr "选择查看 GOsa 组"
+
+#~ msgid "Apply"
+#~ msgstr "应用"
+
+#, fuzzy
+#~ msgid "If you're sure, press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr "所以，如果您确定，请按“删除”继续，否则按“取消”退出。"
+
+#, fuzzy
+#~ msgid "Sudo role administration"
+#~ msgstr "组管理"
+
+#, fuzzy
+#~ msgid "Select all"
+#~ msgstr "选择"
+
+#~ msgid "Department"
+#~ msgstr "部门"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "用于匹配组名的正则表达式"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role member names"
+#~ msgstr "匹配对象名的正则表达式"
+
+#~ msgid "Edit this entry"
+#~ msgstr "编辑这条记录"
+
+#~ msgid "Delete this entry"
+#~ msgstr "删除这个条目"
+
+#, fuzzy
+#~ msgid "Number of listed roles"
+#~ msgstr "组名称"
+
+#, fuzzy
+#~ msgid "Manage sudo roles"
+#~ msgstr "域用户"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "允许"
+
+#, fuzzy
+#~ msgid "Permission error"
+#~ msgstr "允许"
