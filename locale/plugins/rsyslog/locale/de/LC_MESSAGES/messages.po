@@ -1,0 +1,261 @@
+# translation of messages.po to deutsch
+# translation of messages.po to
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+#
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004, 2005, 2006, 2008, 2009.
+# Jan Wenzel <jan.wenzel@gonicus.de>, 2004,2005, 2008.
+# Stefan Koehler <stefan.koehler@GONICUS.de>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-09-17 10:49+0100\n"
+"Last-Translator: Fabian Hickert <Fabian.Hickert@GONICUS.DE>\n"
+"Language-Team: de <kde-i18n-de@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:29
+msgid "Logging"
+msgstr "Protokollierung"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:68
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:175
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:176
+msgid "Logging service"
+msgstr "Protokoll-Dienst"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:82
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:189
+msgid "User"
+msgstr "Benutzer"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:85
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:188
+#: admin/systems/services/rsyslog/rSyslogServer.tpl:11
+msgid "Database"
+msgstr "Datenbank"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:88
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:190
+#: admin/systems/services/rsyslog/rSyslogServer.tpl:29
+msgid "Password"
+msgstr "Passwort"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:150
+msgid "LDAP error"
+msgstr "LDAP-Fehler"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:176
+msgid "Services"
+msgstr "Dienste"
+
+#: admin/systems/services/rsyslog/class_rSyslogServer.inc:191
+msgid "Allow view of entries on this server"
+msgstr "Anzeige von Einträgen auf diesen Server erlauben"
+
+#: admin/systems/services/rsyslog/rSyslogServer.tpl:2
+msgid "Syslog logging"
+msgstr "Syslog Protokollierung"
+
+#: admin/systems/services/rsyslog/rSyslogServer.tpl:7
+msgid "Server provides a Syslog MySQL database"
+msgstr "Server stellt eine Syslog MySQL-Datenbank zur Verfügung"
+
+#: admin/systems/services/rsyslog/rSyslogServer.tpl:9
+msgid "rSyslog database settings"
+msgstr "rSyslog Datenbank Einstellungen"
+
+#: admin/systems/services/rsyslog/rSyslogServer.tpl:20
+msgid "Database user"
+msgstr "Datenbank-Benutzer"
+
+#: addons/rsyslog/class_rsyslog.inc:5 addons/rsyslog/rSyslog.tpl:4
+msgid "System logs"
+msgstr "Systemprotokolle"
+
+#: addons/rsyslog/class_rsyslog.inc:6
+msgid "View recorded systemlogs"
+msgstr "Systemprotokolle betrachten"
+
+#: addons/rsyslog/class_rsyslog.inc:117 addons/rsyslog/class_rsyslog.inc:123
+msgid "-"
+msgstr "-"
+
+#: addons/rsyslog/class_rsyslog.inc:119 addons/rsyslog/class_rsyslog.inc:125
+msgid "All"
+msgstr "Alle"
+
+#: addons/rsyslog/class_rsyslog.inc:151
+#, php-format
+msgid "%s entries match the filter"
+msgstr "%s Einträge passten auf den Filter"
+
+#: addons/rsyslog/class_rsyslog.inc:229
+#, php-format
+msgid "The selected server '%s' does not exists!"
+msgstr "Der ausgewählte Server '%s' existiert nicht!"
+
+#: addons/rsyslog/class_rsyslog.inc:382
+msgid "Emergency"
+msgstr "Notfall"
+
+#: addons/rsyslog/class_rsyslog.inc:383
+msgid "Alert"
+msgstr "Alarm"
+
+#: addons/rsyslog/class_rsyslog.inc:384
+msgid "Critical"
+msgstr "Kritisch"
+
+#: addons/rsyslog/class_rsyslog.inc:385 addons/rsyslog/rSyslog.tpl:75
+msgid "Error"
+msgstr "Fehler"
+
+#: addons/rsyslog/class_rsyslog.inc:386
+msgid "Warning"
+msgstr "Warnung"
+
+#: addons/rsyslog/class_rsyslog.inc:387
+msgid "Notice"
+msgstr "Hinweis"
+
+#: addons/rsyslog/class_rsyslog.inc:388
+msgid "Informational"
+msgstr "Informativ"
+
+#: addons/rsyslog/class_rsyslog.inc:389
+msgid "Debug"
+msgstr "Fehlersuche"
+
+#: addons/rsyslog/class_rsyslog.inc:395 addons/rsyslog/class_rsyslog.inc:430
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Unbekannt (%s)"
+
+#: addons/rsyslog/class_rsyslog.inc:401
+msgid "Kernel"
+msgstr "Kern"
+
+#: addons/rsyslog/class_rsyslog.inc:402
+msgid "User level"
+msgstr "Benutzer Ebene"
+
+#: addons/rsyslog/class_rsyslog.inc:403
+msgid "Mail system"
+msgstr "Mailsystem"
+
+#: addons/rsyslog/class_rsyslog.inc:404
+msgid "System daemon"
+msgstr "Systemdienste"
+
+#: addons/rsyslog/class_rsyslog.inc:405 addons/rsyslog/class_rsyslog.inc:411
+msgid "Security"
+msgstr "Sicherheit"
+
+#: addons/rsyslog/class_rsyslog.inc:406
+msgid "Internal"
+msgstr "Intern"
+
+#: addons/rsyslog/class_rsyslog.inc:407
+msgid "Printing"
+msgstr "Drucksystem"
+
+#: addons/rsyslog/class_rsyslog.inc:408
+msgid "News"
+msgstr "Newssystem"
+
+#: addons/rsyslog/class_rsyslog.inc:409
+msgid "UUCP"
+msgstr "UUCP"
+
+#: addons/rsyslog/class_rsyslog.inc:410
+msgid "Cron"
+msgstr "Cron"
+
+#: addons/rsyslog/class_rsyslog.inc:412
+msgid "FTP"
+msgstr "FTP"
+
+#: addons/rsyslog/class_rsyslog.inc:413
+msgid "NTP"
+msgstr "NTP"
+
+#: addons/rsyslog/class_rsyslog.inc:414
+msgid "Log audit"
+msgstr "Log audit"
+
+#: addons/rsyslog/class_rsyslog.inc:415
+msgid "Log alert"
+msgstr "Log alarm"
+
+#: addons/rsyslog/class_rsyslog.inc:416
+msgid "Clock"
+msgstr "Zeit"
+
+#: addons/rsyslog/rSyslog.tpl:7
+msgid "Filter"
+msgstr "Filter"
+
+#: addons/rsyslog/rSyslog.tpl:10
+msgid "Server"
+msgstr "Server"
+
+#: addons/rsyslog/rSyslog.tpl:17
+msgid "Host"
+msgstr "System"
+
+#: addons/rsyslog/rSyslog.tpl:24 addons/rsyslog/rSyslog.tpl:128
+msgid "Severity"
+msgstr "Schwere"
+
+#: addons/rsyslog/rSyslog.tpl:31
+msgid "From"
+msgstr "Von"
+
+#: addons/rsyslog/rSyslog.tpl:47
+msgid "till"
+msgstr "bis"
+
+#: addons/rsyslog/rSyslog.tpl:63 addons/rsyslog/rSyslog.tpl:67
+msgid "Search"
+msgstr "Suchen"
+
+#: addons/rsyslog/rSyslog.tpl:84
+msgid "Entry list"
+msgstr "Eintragsliste"
+
+#: addons/rsyslog/rSyslog.tpl:88
+msgid "Date"
+msgstr "Datum"
+
+#: addons/rsyslog/rSyslog.tpl:98
+msgid "Source"
+msgstr "Quelle"
+
+#: addons/rsyslog/rSyslog.tpl:108
+msgid "Header"
+msgstr "Betreff"
+
+#: addons/rsyslog/rSyslog.tpl:118
+msgid "Facility"
+msgstr "Facility"
+
+#: addons/rsyslog/rSyslog.tpl:138
+msgid "Message"
+msgstr "Nachricht"
+
+#~ msgid "View systemlogs that got recorded with rsyslog"
+#~ msgstr "Betrachte System-Logs die von rSyslog aufgezeichnet wurden"
+
+#~ msgid "Priority"
+#~ msgstr "Priorität"
