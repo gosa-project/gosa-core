@@ -167,7 +167,7 @@ class ogroupManagement extends management
                     break;
                 
                 default:
-                    $result .= "<div class='action-wrapper'>".image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1])."</div>";
+                    $result .= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
                     break;
             }
         }

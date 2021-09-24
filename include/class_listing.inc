@@ -1491,9 +1491,7 @@ class listing
                         break;
                     
                     default:
-                        $result .= "<div class='action-wrapper'>"
-                                        .image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label).
-                                    "</div>";
+                        $result .= image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label);
                         break;
                 }
             }

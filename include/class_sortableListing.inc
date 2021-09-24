@@ -454,7 +454,7 @@ class sortableListing
                         foreach ($this->displayData[$row] as $column) {
                             // Do NOT use the onClick statement for columns that contain links or buttons.
                             if (preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)) {
-                                $result.= "   <td><div class='action-wrapper'>".$column."</div></td>";
+                                $result.= "   <td class='last-column'>".$column."</td>";
                             } else {
                                 $result.= "   <td $editable>".$column."</td>\n";
                             }
@@ -464,14 +464,10 @@ class sortableListing
                             $result.="  <td class='action-column'>";
 
                             if ($edit_image) {
-                                $result.="  <div class='action-wrapper'>
-                                            ".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image)."
-                                        </div>";
+                                $result.= str_replace('%ID', "edit_".$this->id."_$nr", $edit_image);
                             }
                             if ($delete_image) {
-                                $result.="  <div class='action-wrapper'>
-                                            ".str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."
-                                        </div>";
+                                $result.= str_replace('%ID', "del_".$this->id."_$nr", $delete_image);
                             }
 
                             $result.="  </td>";

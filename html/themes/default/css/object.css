@@ -771,3 +771,37 @@
     height: unset;
     max-width: 40%;
 }
+
+.object-info .sudo-options-wrapper .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.object-info .sudo-options-wrapper .action-wrapper input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
+}
+
+.object-info .sudo-options-wrapper .action-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.object-info .sudo-options-wrapper .input-field.table-content{
+    margin: 0;
+    max-width: 10rem;
+}
+
+.object-info .sudo-options-wrapper table{
+    border: .5px solid grey;
+}
+
+.object-info .sudo-options-wrapper table td, th{
+    padding: 0 15px;
+}

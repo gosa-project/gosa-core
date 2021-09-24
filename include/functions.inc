@@ -3683,7 +3683,7 @@ function image($path, $action= "", $title= "", $align= "middle")
       if ($action == "") {
         return "$path";
       } else {
-        return "<input type='submit' class='btn-flat input-btn' id='$action' value='' name='$action' title='".$title."' $align >$path";
+        return "<div class='action-wrapper'><input type='submit' class='btn-flat input-btn' id='$action' value='' name='$action' title='".$title."' $align >$path</div>";
       }
       break;
   }
@@ -4044,6 +4044,7 @@ function in_array_strict($needle, $haystack, $strict = TRUE)
 
 function getThemeName() {
     global $config;
+    $theme = "default";
     if ($config) {
       $theme = $config->get_cfg_value("core", "theme");
     }
