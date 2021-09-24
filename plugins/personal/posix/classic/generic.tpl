@@ -107,7 +107,7 @@
    {if $sshPublicKey == 1}
      {render acl=$sshPublicKeyACL}
      <h3>{t}SSH keys{/t}</h3>
-     <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys...{/t}</button>
+     <button type='submit' name='edit_sshpublickey'>{t}Edit public ssh keys{/t}</button>
      {/render}
    {/if}
 

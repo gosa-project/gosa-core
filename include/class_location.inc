@@ -139,6 +139,7 @@ $class_mapping= array(
                 "aclManagement" => "plugins/admin/acl/class_aclManagement.inc",
                 "migrate_aclRoleRDN" => "plugins/admin/acl/migration/class_migrate_aclRoleRDN.inc",
                 "netgroupAccount" => "plugins/personal/netgroups/class_netgroupAccount.inc",
+                "sshPublicKey" => "plugins/personal/ssh/class_sshPublicKey.inc",
                 "password" => "plugins/personal/password/class_password.inc",
                 "filterLDAPBlacklist" => "plugins/personal/posix/groupSelect/class_filterLDAPBlacklist.inc",
                 "groupSelect" => "plugins/personal/posix/groupSelect/class_groupSelect.inc",

@@ -805,3 +805,12 @@
 .object-info .sudo-options-wrapper table td, th{
     padding: 0 15px;
 }
+
+.object-info .ssh-plug-wrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.object-info .ssh-plug-wrapper h3 {
+    margin-right: 15px;
+}
