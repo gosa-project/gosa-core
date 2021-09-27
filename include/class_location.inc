@@ -163,6 +163,7 @@ $class_mapping= array(
                 "webdavAccount" => "plugins/personal/connectivity/webdav/class_webdavAccount.inc",
                 "intranetAccount" => "plugins/personal/connectivity/class_intranetAccount.inc",
                 "pureftpdAccount" => "plugins/personal/connectivity/pureftpd/class_pureftpdAccount.inc",
+                "pptpAccount" => "plugins/personal/connectivity/pptp/class_pptpAccount.inc",
                 "proxyAccount" => "plugins/personal/connectivity/squid/class_proxyAccount.inc",
                 "connectivity" => "plugins/personal/connectivity/class_connectivity.inc",
                 "infoPage" => "plugins/generic/infoPage/class_infoPage.inc",

@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GOsa plugins - pptp\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-03-11 21:08-0300\n"
+"Last-Translator: Marcos Amorim <marcosmamorim@gmail.com>\n"
+"Language-Team: Marcos Amorim <marcosmamorim@gmail.com> Clever de Oliveira "
+"<clever@dri.cefetmg.br>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:26
+#: personal/connectivity/pptp/class_pptpAccount.inc:175
+msgid "PPTP"
+msgstr "PPTP"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:27
+#, fuzzy
+msgid "Manage PPTP user settings"
+msgstr "Configurações gerais do usuário"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:102
+#: personal/connectivity/pptp/class_pptpAccount.inc:157
+msgid "LDAP error"
+msgstr "Erro LDAP"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:176
+#: personal/connectivity/pptp/pptp.tpl:3
+msgid "PPTP account"
+msgstr "Conta PPTP"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:176
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Addon Conectividade"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:180
+msgid "My account"
+msgstr "Minha conta"
+
+#~ msgid "This does something"
+#~ msgstr "Isto faz algo"
