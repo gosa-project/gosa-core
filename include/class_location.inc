@@ -161,6 +161,7 @@ $class_mapping= array(
                 "MyAccount" => "plugins/personal/myaccount/class_MyAccount.inc",
                 "user" => "plugins/personal/generic/class_user.inc",
                 "webdavAccount" => "plugins/personal/connectivity/webdav/class_webdavAccount.inc",
+                "phpscheduleitAccount" => "plugins/personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc",
                 "intranetAccount" => "plugins/personal/connectivity/class_intranetAccount.inc",
                 "pureftpdAccount" => "plugins/personal/connectivity/pureftpd/class_pureftpdAccount.inc",
                 "pptpAccount" => "plugins/personal/connectivity/pptp/class_pptpAccount.inc",

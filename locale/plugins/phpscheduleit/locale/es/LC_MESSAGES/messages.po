@@ -1,0 +1,72 @@
+# translation of admin.po to
+# translation of systems.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-01-20 00:54+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: personal/connectivity/phpscheduleit/phpscheduleit.tpl:3
+#, fuzzy
+msgid "phpScheduleIt account"
+msgstr "Cuenta PHPscheduleit"
+
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:27
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:165
+#, fuzzy
+msgid "phpScheduleIt"
+msgstr "PHP Schedule it"
+
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:28
+#, fuzzy
+msgid "Manage phpScheduleIt user settings"
+msgstr "Configuración PHP Schedule it"
+
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:88
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:145
+msgid "LDAP error"
+msgstr "Error LDAP"
+
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:166
+#, fuzzy
+msgid "phpScheduleIt settings"
+msgstr "Configuración PHP Schedule it"
+
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:166
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Conectividad adicional"
+
+#: personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc:170
+msgid "My account"
+msgstr "Mi cuenta"
+
+#~ msgid "This does something"
+#~ msgstr "Esto hace algo"
+
+#~ msgid "PHPscheduleit"
+#~ msgstr "PHPscheduleit"
+
+#~ msgid "PHP Schedule it"
+#~ msgstr "PHP Schedule it"
+
+#~ msgid "Removing of user/PHPscheduleit account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la eliminación de la cuenta usuario/PHPscheduleit con dn '%s'."
+
+#~ msgid "Saving of user/PHPscheduleit account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la grabación de la cuenta de usuario/PHPscheduleit con dn '%s'."

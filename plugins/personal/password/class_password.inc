@@ -60,6 +60,7 @@ class password extends plugin
         plugin::execute();
         $smarty = get_smarty();
         $ui = get_userinfo();
+        $theme = getThemeName();
 
         /* Password checks */
         $check_special = true;
@@ -70,19 +71,24 @@ class password extends plugin
 
         $pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
         $smarty->assign("pwLength", $pwLength);
-        if (check_for_materialize_theme()) {
-            if ($check_special) {
-                $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
-            }
-            if ($check_lower) {
-                $smarty->assign("lower", _("The password must contain lower case letters."));
-            }
-            if ($check_upper) {
-                $smarty->assign("upper", _("The password must contain upper case letters."));
-            }
-            if ($check_digits) {
-                $smarty->assign("digits", _("The password must contain digits."));
-            }
+        switch ($theme) {
+            case 'classic':
+                break;
+            
+            default:
+                if ($check_special) {
+                    $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
+                }
+                if ($check_lower) {
+                    $smarty->assign("lower", _("The password must contain lower case letters."));
+                }
+                if ($check_upper) {
+                    $smarty->assign("upper", _("The password must contain upper case letters."));
+                }
+                if ($check_digits) {
+                    $smarty->assign("digits", _("The password must contain digits."));
+                }
+                break;
         }
 
         // Try to generate a password proposal, if this is successfull 
@@ -137,11 +143,16 @@ class password extends plugin
             $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
             $length       = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
 
-            if (check_for_materialize_theme()) {
-                $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
-                $lower          = "/[a-z]/";
-                $upper          = "/[A-Z]/";
-                $digits         = "/[0-9]/i";
+            switch ($theme) {
+                case 'classic':
+                    break;
+                
+                default:
+                    $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
+                    $lower          = "/[a-z]/";
+                    $upper          = "/[A-Z]/";
+                    $digits         = "/[0-9]/i";
+                    break;
             }
 
             // Once an error has occured it is stored here.
@@ -157,7 +168,7 @@ class password extends plugin
                 $message[] = _("The password used as new and current are too similar.");
             }elseif((strlen($new_password) < $length)){
                 $message[] = _("The password must have at least $length characters.");
-            }elseif(check_for_materialize_theme()) {
+            }elseif($theme == 'default') {
                 if($check_lower && !preg_match($lower, $new_password)) {
                     $message[] = _("The password must contain lowercase letters.");
                 }elseif($check_upper && !preg_match($upper, $new_password)) {
