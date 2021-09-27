@@ -1,0 +1,59 @@
+# translation of messages.po to Italian
+# Copyright (c) 2005 B-Open Solutions srl - http://www.bopen.it/
+# Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
+# Alessandro Amici <a.amici@bopen.it>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2005-11-18 15:26+0100\n"
+"Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
+"Language-Team: Italian\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:26
+#: personal/connectivity/pptp/class_pptpAccount.inc:175
+msgid "PPTP"
+msgstr ""
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:27
+#, fuzzy
+msgid "Manage PPTP user settings"
+msgstr "Impostazioni generali delle code"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:102
+#: personal/connectivity/pptp/class_pptpAccount.inc:157
+#, fuzzy
+msgid "LDAP error"
+msgstr "Errore LDAP"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:176
+#: personal/connectivity/pptp/pptp.tpl:3
+#, fuzzy
+msgid "PPTP account"
+msgstr "Estenzioni FTP"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:176
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Connettività"
+
+#: personal/connectivity/pptp/class_pptpAccount.inc:180
+msgid "My account"
+msgstr "Identità"
+
+#~ msgid "This does something"
+#~ msgstr "Questo fa qualcosa"
+
+#, fuzzy
+#~ msgid "Removing of user/PPTP account with dn '%s' failed."
+#~ msgstr "Rimuovi le estensioni di posta"
+
+#, fuzzy
+#~ msgid "Saving of user/PPTP account with dn '%s' failed."
+#~ msgstr "Estenzioni FTP"
