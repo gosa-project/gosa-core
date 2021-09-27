@@ -163,15 +163,6 @@ $class_mapping= array(
                 "filterLDAPBlacklist" => "plugins/personal/posix/groupSelect/class_filterLDAPBlacklist.inc",
                 "trustModeDialog" => "plugins/personal/posix/trustModeDialog/class_trustModeDialog.inc",
                 "user" => "plugins/personal/generic/class_user.inc",
-<<<<<<< HEAD
-                "webdavAccount" => "plugins/personal/connectivity/webdav/class_webdavAccount.inc",
-                "phpscheduleitAccount" => "plugins/personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc",
-                "intranetAccount" => "plugins/personal/connectivity/class_intranetAccount.inc",
-                "pureftpdAccount" => "plugins/personal/connectivity/pureftpd/class_pureftpdAccount.inc",
-                "pptpAccount" => "plugins/personal/connectivity/pptp/class_pptpAccount.inc",
-                "proxyAccount" => "plugins/personal/connectivity/squid/class_proxyAccount.inc",
-                "connectivity" => "plugins/personal/connectivity/class_connectivity.inc",
-=======
                 "netgroupAccount" => "plugins/personal/netgroups/class_netgroupAccount.inc",
                 "sshPublicKey" => "plugins/personal/ssh/class_sshPublicKey.inc",
                 "ldifViewer" => "plugins/generic/references/class_ldifViewer.inc",
@@ -185,7 +176,6 @@ $class_mapping= array(
                 "dashBoard" => "plugins/generic/dashBoard/class_dashBoard.inc",
                 "RegistrationDialog" => "plugins/generic/dashBoard/Register/class_RegistrationDialog.inc",
                 "dbChannelStatus" => "plugins/generic/dashBoard/dbChannelStatus/class_dbChannelStatus.inc",
->>>>>>> 7e3d962ca18eb0979f3fde58c42c8cd9464ff413
                 "infoPage" => "plugins/generic/infoPage/class_infoPage.inc",
                 "statChart" => "plugins/generic/statistics/chartClasses/class_statChart.inc",
                 "actionSelectChart" => "plugins/generic/statistics/chartClasses/class_actionSelectChart.inc",
