@@ -1,5 +1,6 @@
 .modal {
     width: 35%;
+    z-index: 150;
 }
 
 .modal .modal-content.attention-elem i:first-child,
