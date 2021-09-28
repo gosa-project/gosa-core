@@ -1,0 +1,177 @@
+# translation of messages.po to Dutch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004.
+#
+# Translator:
+# Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2006-06-02 16:58+0100\n"
+"Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
+"Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:24
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:188
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:301
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:437
+msgid "Open-Xchange"
+msgstr "Open-Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:25
+#, fuzzy
+msgid "Manage Open-Xchange user settings"
+msgstr "Open-Xchange account"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:188
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:192
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:289
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:301
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:305
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:427
+msgid "Error"
+msgstr "Fout"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:192
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:305
+#, fuzzy
+msgid "Open-Xchange database"
+msgstr "Open-Xchange account"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:196
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:309
+#, fuzzy
+msgid "Configuration error"
+msgstr "Configuratie bestand"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:206
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:219
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:329
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:338
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP fout:"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:289
+#, fuzzy
+msgid "Open-Xchange account name"
+msgstr "Open-Xchange account"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:427
+#, fuzzy
+msgid "Cannot save Open-Xchange account!"
+msgstr "Open-Xchange account"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:438
+#, fuzzy
+msgid "Open-Xchange account settings"
+msgstr "Open-Xchange account"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:438
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Verbindingen"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:442
+msgid "My account"
+msgstr "Mijn account"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:451
+#, fuzzy
+msgid "OXAppointmentDays"
+msgstr "Afspraken"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:452
+#, fuzzy
+msgid "OXTaskDays"
+msgstr "Taken"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:453
+#, fuzzy
+msgid "OXTimeZone"
+msgstr "Tijdzone"
+
+#: personal/connectivity/openxchange/oxchange.tpl:2
+#: personal/connectivity/openxchange/oxchange.tpl:18
+msgid "Open-Xchange account"
+msgstr "Open-Xchange account"
+
+#: personal/connectivity/openxchange/oxchange.tpl:2
+#, fuzzy
+msgid ""
+"disabled, no PostgreSQL support detected or the specified database can't be "
+"reached."
+msgstr ""
+"Uitgeschakeld. Er is geen Postgresql ondersteuning gedetecteerd of de "
+"opgegeven database kon niet bereikt worden"
+
+#: personal/connectivity/openxchange/oxchange.tpl:21
+#: personal/connectivity/openxchange/oxchange.tpl:28
+#: personal/connectivity/openxchange/oxchange.tpl:63
+#, fuzzy
+msgid "Open-Xchange configuration"
+msgstr "Open-Xchange Account"
+
+#: personal/connectivity/openxchange/oxchange.tpl:32
+msgid "Remember"
+msgstr "Onthouden"
+
+#: personal/connectivity/openxchange/oxchange.tpl:36
+msgid "Appointment Days"
+msgstr "Afspraken"
+
+#: personal/connectivity/openxchange/oxchange.tpl:42
+#: personal/connectivity/openxchange/oxchange.tpl:52
+msgid "days"
+msgstr "dagen"
+
+#: personal/connectivity/openxchange/oxchange.tpl:45
+msgid "Task Days"
+msgstr "Taken"
+
+#: personal/connectivity/openxchange/oxchange.tpl:67
+msgid "User Information"
+msgstr "Gebruikersinformatie"
+
+#: personal/connectivity/openxchange/oxchange.tpl:71
+msgid "User Timezone"
+msgstr "Tijdzone"
+
+#~ msgid "This does something"
+#~ msgstr "Dit doet iets"
+
+#~ msgid "Open-Xchange Account"
+#~ msgstr "Open-Xchange Account"
+
+#, fuzzy
+#~ msgid "Cannot connect to %s database!"
+#~ msgstr "Kan niet verbinden met de database server!"
+
+#, fuzzy
+#~ msgid "%s database configuration is missing!"
+#~ msgstr "FAX database"
+
+#, fuzzy
+#~ msgid "Removing of user/oxchange addressbook account with dn '%s' failed."
+#~ msgstr "Het verwijderen van het Open-Xchange adresboek is mislukt"
+
+#, fuzzy
+#~ msgid "Saving of user/oxchange account with dn '%s' failed."
+#~ msgstr "Het opslaan van het Open-Xchange account is mislukt"
+
+#, fuzzy
+#~ msgid "Creating of user/oxchange account with dn '%s' failed."
+#~ msgstr "Het opslaan van het Open-Xchange account is mislukt"
+
+#, fuzzy
+#~ msgid "Open-Xchange account name is invalid!"
+#~ msgstr "Open-Xchange account"

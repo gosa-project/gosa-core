@@ -1,0 +1,70 @@
+# translation of messages.po to Dutch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004.
+#
+# Translator:
+# Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2006-06-02 16:58+0100\n"
+"Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
+"Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:5
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:160
+msgid "PHPGroupware"
+msgstr "PHPGroupware"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:6
+#, fuzzy
+msgid "Manage PHPGroupware user settings"
+msgstr "PHPGroupware account"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:85
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:141
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP fout:"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:161
+#, fuzzy
+msgid "PHPGroupware account settings"
+msgstr "PHPGroupware account"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:161
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Verbindingen"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:165
+msgid "My account"
+msgstr "Mijn account"
+
+#: personal/connectivity/phpgw/phpgw.tpl:5
+msgid "PHPGroupware account"
+msgstr "PHPGroupware account"
+
+#~ msgid "This does something"
+#~ msgstr "Dit doet iets"
+
+#, fuzzy
+#~ msgid "PHP GW account settings"
+#~ msgstr "Groep instellingen"
+
+#, fuzzy
+#~ msgid "Removing of user/PHPgw account with dn '%s' failed."
+#~ msgstr "Het verwijderen van het PHPGroupware account is mislukt"
+
+#, fuzzy
+#~ msgid "Saving of user/PHPgw account with dn '%s' failed."
+#~ msgstr "Het opslaan van het PHPGroupware account is mislukt"
