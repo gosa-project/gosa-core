@@ -29,12 +29,12 @@
             </ul>
         </div>
     </nav>
-
+    
+    {$msg_dialogs}
     <form action='main.php{$plug}' id='mainform' name='mainform' method='post' enctype='multipart/form-data'>
         <div class="row">
 
             {if $hideMenus}
-            {$msg_dialogs}
             <div class='col s12'>
                 <div class="card first-level">
                     <div class="card-content first-level">
@@ -45,8 +45,6 @@
             {else}
                 <!-- Breadcrumb -->
                 {$breadcrumb}
-
-                {$msg_dialogs}
                 <div class="content-area">
                     <!-- Menü -->
                     <div class="menu">
