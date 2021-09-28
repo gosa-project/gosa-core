@@ -34,11 +34,11 @@
         <div class="row">
 
             {if $hideMenus}
-                <div class='col s12'>
-                    <div class="card first-level">
-                        <div class="card-content first-level">
-                            {$contents}
-                            {$msg_dialogs}
+            {$msg_dialogs}
+            <div class='col s12'>
+                <div class="card first-level">
+                    <div class="card-content first-level">
+                        {$contents}
                         </div>
                     </div>
                 </div>
@@ -46,6 +46,7 @@
                 <!-- Breadcrumb -->
                 {$breadcrumb}
 
+                {$msg_dialogs}
                 <div class="content-area">
                     <!-- Menü -->
                     <div class="menu">
@@ -54,7 +55,6 @@
                         </ul>
                     </div>
 
-                    {$msg_dialogs}
 
                     <!-- Plugin Content-->
                     <div class="content{if $noMenuMode}-noMenu{/if}">
