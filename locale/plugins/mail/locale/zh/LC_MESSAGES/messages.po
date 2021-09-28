@@ -1,0 +1,3087 @@
+# translation of messages.po to Chinese Simplified
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+# Jiang Xin <worldhello.net@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2007-06-03 12:27+0800\n"
+"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Language-Team: Chinese Simplified <zh@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: admin/ogroups/mail/class_mailogroup.inc:50
+msgid "Remove mail account"
+msgstr "删除邮件账号"
+
+#: admin/ogroups/mail/class_mailogroup.inc:51
+#: admin/ogroups/mail/class_mailogroup.inc:54
+#, fuzzy
+msgid "mail group"
+msgstr "显示邮件组"
+
+#: admin/ogroups/mail/class_mailogroup.inc:53
+msgid "Create mail account"
+msgstr "创建邮件账号"
+
+#: admin/ogroups/mail/class_mailogroup.inc:86
+#: admin/ogroups/mail/class_mailogroup.inc:93
+#: admin/ogroups/mail/class_mailogroup.inc:194
+#: admin/groups/mail/class_groupMail.inc:376
+#: admin/groups/mail/class_groupMail.inc:408
+#: admin/groups/mail/class_groupMail.inc:414
+#: admin/groups/mail/class_groupMail.inc:428
+#: admin/groups/mail/class_groupMail.inc:865
+#: admin/groups/mail/class_groupMail.inc:885
+#: admin/groups/mail/class_groupMail.inc:1006
+#: personal/mail/class_mailAccount.inc:349
+#: personal/mail/class_mailAccount.inc:385
+#: personal/mail/class_mailAccount.inc:390
+#: personal/mail/class_mailAccount.inc:403
+#: personal/mail/class_mailAccount.inc:1032
+#: personal/mail/class_mailAccount.inc:1036
+#: personal/mail/class_mailAccount.inc:1054
+#: personal/mail/class_mailAccount.inc:1488
+#: personal/mail/mailAddressSelect/selectMailAddress-list.xml:56
+msgid "Mail address"
+msgstr "邮件地址"
+
+#: admin/ogroups/mail/class_mailogroup.inc:86
+msgid "your-name@your-domain.com"
+msgstr ""
+
+#: admin/ogroups/mail/class_mailogroup.inc:120
+#: admin/ogroups/mail/class_mailogroup.inc:157
+#: admin/groups/mail/class_groupMail.inc:553
+#: admin/groups/mail/class_groupMail.inc:785
+#: admin/systems/services/imap/class_goImapServer.inc:190
+#: admin/systems/services/mail/class_goMailServer.inc:525
+#: admin/systems/services/virus/class_goVirusServer.inc:154
+#: admin/systems/services/spam/class_goSpamServer.inc:276
+#: personal/mail/class_mailAccount.inc:849
+#: personal/mail/class_mailAccount.inc:922
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP 错误:"
+
+#: admin/ogroups/mail/class_mailogroup.inc:186
+#: admin/ogroups/mail/paste_mail.tpl:4
+#: admin/groups/mail/class_groupMail.inc:285
+#: admin/groups/mail/class_groupMail.inc:287
+#: admin/groups/mail/class_groupMail.inc:288
+#: admin/groups/mail/class_groupMail.inc:293
+#: admin/groups/mail/class_groupMail.inc:295
+#: admin/groups/mail/class_groupMail.inc:296
+#: admin/groups/mail/class_groupMail.inc:853
+#: admin/groups/mail/class_groupMail.inc:998
+#: personal/mail/class_mailAccount.inc:68
+#: personal/mail/class_mailAccount.inc:251
+#: personal/mail/class_mailAccount.inc:259
+#: personal/mail/class_mailAccount.inc:261
+#: personal/mail/class_mailAccount.inc:266
+#: personal/mail/class_mailAccount.inc:268
+#: personal/mail/class_mailAccount.inc:1016
+#: personal/mail/class_mailAccount.inc:1282
+#: personal/mail/class_mailAccount.inc:1448
+msgid "Mail"
+msgstr "邮件"
+
+#: admin/ogroups/mail/class_mailogroup.inc:187
+#, fuzzy
+msgid "Mail group"
+msgstr "显示邮件组"
+
+#: admin/ogroups/mail/mail.tpl:2 admin/groups/mail/mail.tpl:1
+#: admin/groups/mail/paste_mail.tpl:1
+#: admin/systems/services/mail/goMailServer.tpl:3 personal/mail/generic.tpl:1
+#: personal/mail/class_mailAccount.inc:1449 personal/mail/copypaste.tpl:1
+msgid "Mail settings"
+msgstr "邮件选项"
+
+#: admin/ogroups/mail/mail.tpl:9 admin/ogroups/mail/mail.tpl:10
+msgid "Mail distribution list"
+msgstr "邮件传递列表"
+
+#: admin/ogroups/mail/mail.tpl:12 admin/groups/mail/class_groupMail.inc:863
+#: admin/groups/mail/mail.tpl:9 admin/groups/mail/paste_mail.tpl:9
+#: personal/mail/generic.tpl:10 personal/mail/class_mailAccount.inc:1028
+#: personal/mail/copypaste.tpl:6
+msgid "Primary address"
+msgstr "主要地址"
+
+#: admin/ogroups/mail/mail.tpl:15
+msgid "Primary mail address for this distribution list"
+msgstr "此分配列表的主要邮件地址"
+
+#: admin/ogroups/mail/paste_mail.tpl:1
+#, fuzzy
+msgid "Paste group mail settings"
+msgstr "组设置"
+
+#: admin/ogroups/mail/paste_mail.tpl:7
+msgid "Please enter a mail address"
+msgstr "请输入一个邮件地址"
+
+#: admin/groups/mail/class_groupMail.inc:119
+#: admin/groups/mail/class_groupMail.inc:126
+#: admin/groups/mail/class_groupMail.inc:133
+#: admin/groups/mail/class_groupMail.inc:140
+#: admin/groups/mail/class_groupMail.inc:145
+#: admin/groups/mail/class_groupMail.inc:148
+#: admin/groups/mail/class_groupMail.inc:565
+#: admin/groups/mail/class_groupMail.inc:569
+#: admin/groups/mail/class_groupMail.inc:573
+#: admin/groups/mail/class_groupMail.inc:798
+#: admin/groups/mail/class_groupMail.inc:802
+#: admin/groups/mail/class_groupMail.inc:806
+#: admin/groups/mail/class_groupMail.inc:815
+#: personal/mail/class_mailAccount.inc:165
+#: personal/mail/class_mailAccount.inc:172
+#: personal/mail/class_mailAccount.inc:177
+#: personal/mail/class_mailAccount.inc:180
+#: personal/mail/class_mailAccount.inc:858
+#: personal/mail/class_mailAccount.inc:862
+#: personal/mail/class_mailAccount.inc:936
+#: personal/mail/class_mailAccount.inc:940
+#: personal/mail/class_mailAccount.inc:944
+#, fuzzy
+msgid "Mail error"
+msgstr "邮件服务器"
+
+#: admin/groups/mail/class_groupMail.inc:119
+#: personal/mail/class_mailAccount.inc:165
+#, fuzzy, php-format
+msgid "Cannot read quota settings: %s"
+msgstr "无法创建文件 '%s'。"
+
+#: admin/groups/mail/class_groupMail.inc:126
+#: personal/mail/class_mailAccount.inc:172
+#, fuzzy, php-format
+msgid "Cannot get list of mailboxes: %s"
+msgstr "无法删除 IMAP 邮箱。服务器返回 '%s'。"
+
+#: admin/groups/mail/class_groupMail.inc:133
+#, fuzzy, php-format
+msgid "Cannot receive folder types: %s"
+msgstr "IMAP 共享目录"
+
+#: admin/groups/mail/class_groupMail.inc:140
+#, fuzzy, php-format
+msgid "Cannot receive folder permissions: %s"
+msgstr "IMAP 共享目录"
+
+#: admin/groups/mail/class_groupMail.inc:145
+#: admin/groups/mail/class_groupMail.inc:565
+#: admin/groups/mail/class_groupMail.inc:798
+#: personal/mail/class_mailAccount.inc:177
+#: personal/mail/class_mailAccount.inc:858
+#: personal/mail/class_mailAccount.inc:936
+#, php-format
+msgid "Mail method cannot connect: %s"
+msgstr ""
+
+#: admin/groups/mail/class_groupMail.inc:148
+#: personal/mail/class_mailAccount.inc:180
+#, php-format
+msgid "Mailbox '%s' doesn't exists on mail server: %s"
+msgstr ""
+
+#: admin/groups/mail/class_groupMail.inc:306
+msgid ""
+"Remove shared folder from mail server database when entry gets removed in "
+"LDAP"
+msgstr "当条目从 LDAP 中删除后，从邮件服务器数据库中删除共享目录"
+
+#: admin/groups/mail/class_groupMail.inc:307
+msgid "Remove the shared folder and all its contents after saving this account"
+msgstr "在保存完毕该账号后，删除共享目录和其中所有内容"
+
+#: admin/groups/mail/class_groupMail.inc:352
+#: admin/groups/mail/class_groupMail.inc:376
+#: admin/groups/mail/class_groupMail.inc:382
+#: admin/groups/mail/class_groupMail.inc:408
+#: admin/groups/mail/class_groupMail.inc:414
+#: admin/groups/mail/class_groupMail.inc:428
+#: admin/systems/services/spam/class_goSpamServer.inc:152
+#: admin/systems/services/spam/class_goSpamServer.inc:215
+#: addons/mailqueue/class_mailqueue.inc:116
+#: addons/mailqueue/class_mailqueue.inc:150
+#: addons/mailqueue/class_mailqueue.inc:156
+#: personal/mail/sieve/class_My_Tree.inc:660
+#: personal/mail/sieve/class_sieveManagement.inc:221
+#: personal/mail/sieve/class_sieveManagement.inc:226
+#: personal/mail/sieve/class_sieveManagement.inc:232
+#: personal/mail/sieve/class_sieveManagement.inc:238
+#: personal/mail/sieve/class_sieveManagement.inc:448
+#: personal/mail/class_mailAccount.inc:325
+#: personal/mail/class_mailAccount.inc:349
+#: personal/mail/class_mailAccount.inc:355
+#: personal/mail/class_mailAccount.inc:385
+#: personal/mail/class_mailAccount.inc:390
+#: personal/mail/class_mailAccount.inc:403
+msgid "Error"
+msgstr "错误"
+
+#: admin/groups/mail/class_groupMail.inc:352
+#: personal/mail/class_mailAccount.inc:325
+#, fuzzy
+msgid "Please select an entry!"
+msgstr "请选择一个有效的邮件服务器。"
+
+#: admin/groups/mail/class_groupMail.inc:382
+#: personal/mail/class_mailAccount.inc:355
+#, fuzzy
+msgid "Cannot add primary address to the list of forwarders!"
+msgstr "您正在尝试向转发列表添加一条无效邮件地址。"
+
+#: admin/groups/mail/class_groupMail.inc:424
+#: personal/mail/class_mailAccount.inc:399
+#: personal/mail/class_mailAccount.inc:1050
+#, fuzzy, php-format
+msgid "Address is already in use by group '%s'."
+msgstr "您正在添加的地址已经被用户使用"
+
+#: admin/groups/mail/class_groupMail.inc:426
+#: personal/mail/class_mailAccount.inc:401
+#: personal/mail/class_mailAccount.inc:1052
+#, fuzzy, php-format
+msgid "Address is already in use by user '%s'."
+msgstr "您正在添加的地址已经被用户使用"
+
+#: admin/groups/mail/class_groupMail.inc:569
+#: personal/mail/class_mailAccount.inc:862
+#, fuzzy, php-format
+msgid "Cannot remove mailbox: %s"
+msgstr "无法删除 IMAP 邮箱。服务器返回 '%s'。"
+
+#: admin/groups/mail/class_groupMail.inc:573
+#: admin/groups/mail/class_groupMail.inc:815
+#, fuzzy, php-format
+msgid "Cannot update shared folder permissions: %s"
+msgstr "IMAP 共享目录"
+
+#: admin/groups/mail/class_groupMail.inc:676
+#, fuzzy
+msgid "New"
+msgstr "添加用户"
+
+#: admin/groups/mail/class_groupMail.inc:802
+#: personal/mail/class_mailAccount.inc:940
+#, fuzzy, php-format
+msgid "Cannot update mailbox: %s"
+msgstr "无法创建 IMAP 邮箱。服务器返回 '%s'。"
+
+#: admin/groups/mail/class_groupMail.inc:806
+#: personal/mail/class_mailAccount.inc:944
+#, fuzzy, php-format
+msgid "Cannot write quota settings: %s"
+msgstr "无法创建文件 '%s'。"
+
+#: admin/groups/mail/class_groupMail.inc:847
+#, php-format
+msgid ""
+"The group 'cn' has changed. It can't be changed due to the fact that mail "
+"method '%s' relies on it!"
+msgstr ""
+
+#: admin/groups/mail/class_groupMail.inc:872
+#: admin/groups/mail/class_groupMail.inc:1007 admin/groups/mail/mail.tpl:62
+#: personal/mail/generic.tpl:58 personal/mail/class_mailAccount.inc:1062
+#: personal/mail/class_mailAccount.inc:1288
+#: personal/mail/class_mailAccount.inc:1490
+msgid "Quota size"
+msgstr "Quota 大小"
+
+#: admin/groups/mail/class_groupMail.inc:891
+#: personal/mail/class_mailAccount.inc:1502
+#, fuzzy
+msgid "Mail max size"
+msgstr "邮件大小"
+
+#: admin/groups/mail/class_groupMail.inc:899
+msgid "You need to set the maximum mail size in order to reject anything."
+msgstr "为了退信，您需要设定最大的邮件大小。"
+
+#: admin/groups/mail/class_groupMail.inc:903
+#: admin/groups/mail/class_groupMail.inc:1008
+#: personal/mail/class_mailAccount.inc:1489
+msgid "Mail server"
+msgstr "邮件服务器"
+
+#: admin/groups/mail/class_groupMail.inc:999
+#, fuzzy
+msgid "Group mail"
+msgstr "组名"
+
+#: admin/groups/mail/class_groupMail.inc:1009 admin/groups/mail/mail.tpl:75
+#, fuzzy
+msgid "Folder type"
+msgstr "过滤器"
+
+#: admin/groups/mail/class_groupMail.inc:1009
+msgid "Kolab"
+msgstr ""
+
+#: admin/groups/mail/class_groupMail.inc:1010
+#, fuzzy
+msgid "Alternate addresses"
+msgstr "替代地址"
+
+#: admin/groups/mail/class_groupMail.inc:1011
+#, fuzzy
+msgid "Forwarding addresses"
+msgstr "转发邮件到"
+
+#: admin/groups/mail/class_groupMail.inc:1012
+#, fuzzy
+msgid "Only local"
+msgstr "添加本地"
+
+#: admin/groups/mail/class_groupMail.inc:1013
+msgid "Permissions"
+msgstr "允许"
+
+#: admin/groups/mail/mail.tpl:6 admin/systems/services/imap/goImapServer.tpl:1
+#: admin/systems/services/mail/goMailServer.tpl:1 personal/mail/generic.tpl:5
+msgid "Generic"
+msgstr "通用配置"
+
+#: admin/groups/mail/mail.tpl:7
+#, fuzzy
+msgid "Address and mail server settings"
+msgstr "管理设置"
+
+#: admin/groups/mail/mail.tpl:37 addons/mailqueue/contents.tpl:77
+#: personal/mail/generic.tpl:31
+msgid "Server"
+msgstr "服务器"
+
+#: admin/groups/mail/mail.tpl:44 personal/mail/generic.tpl:38
+msgid "Specify the mail server where the user will be hosted on"
+msgstr "描述该用户账号所要创建于的邮件服务器"
+
+#: admin/groups/mail/mail.tpl:58 personal/mail/generic.tpl:54
+msgid "Quota usage"
+msgstr "使用 Quota"
+
+#: admin/groups/mail/mail.tpl:106 admin/groups/mail/paste_mail.tpl:26
+#: personal/mail/generic.tpl:76 personal/mail/copypaste.tpl:41
+msgid "Alternative addresses"
+msgstr "替代地址"
+
+#: admin/groups/mail/mail.tpl:111 admin/groups/mail/paste_mail.tpl:27
+#: personal/mail/generic.tpl:79 personal/mail/copypaste.tpl:43
+msgid "List of alternative mail addresses"
+msgstr "替代邮件地址列表"
+
+#: admin/groups/mail/mail.tpl:138
+#, fuzzy
+msgid "Mail folder configuration"
+msgstr "下载配置"
+
+#: admin/groups/mail/mail.tpl:144
+msgid "IMAP shared folders"
+msgstr "IMAP 共享目录"
+
+#: admin/groups/mail/mail.tpl:147
+#, fuzzy
+msgid "Folder permissions"
+msgstr "成员权限"
+
+#: admin/groups/mail/mail.tpl:151
+msgid "Default permission"
+msgstr "缺省权限"
+
+#: admin/groups/mail/mail.tpl:153
+msgid "Member permission"
+msgstr "成员权限"
+
+#: admin/groups/mail/mail.tpl:172
+#, fuzzy
+msgid "Hide"
+msgstr "邮件头"
+
+#: admin/groups/mail/mail.tpl:175
+#, fuzzy
+msgid "Show"
+msgstr "显示组"
+
+#: admin/groups/mail/mail.tpl:199 admin/groups/mail/mail.tpl:200
+#: personal/mail/generic.tpl:329
+msgid "Advanced mail options"
+msgstr "高级邮件选项"
+
+#: admin/groups/mail/mail.tpl:206 personal/mail/generic.tpl:336
+msgid "Select if user can only send and receive inside his own domain"
+msgstr "选择如果用户只能发送和接收本域内邮件"
+
+#: admin/groups/mail/mail.tpl:208 personal/mail/generic.tpl:338
+msgid "User is only allowed to send and receive local mails"
+msgstr "用户只能发送和接收本地邮件"
+
+#: admin/groups/mail/mail.tpl:216 admin/groups/mail/paste_mail.tpl:40
+msgid "Forward messages to non group members"
+msgstr "转发邮件到非组成员"
+
+#: admin/groups/mail/mail.tpl:224
+#, fuzzy
+msgid "Used in all groups"
+msgstr "请输入一个组。"
+
+#: admin/groups/mail/mail.tpl:227
+#, fuzzy
+msgid "Not used in all groups"
+msgstr "显示实用组"
+
+#: admin/groups/mail/mail.tpl:246 admin/groups/mail/paste_mail.tpl:49
+#: personal/mail/generic.tpl:317 personal/mail/copypaste.tpl:34
+msgid "Add local"
+msgstr "添加本地"
+
+#: admin/groups/mail/paste_mail.tpl:2
+#, fuzzy
+msgid "Paste mail settings"
+msgstr "用户邮件选项"
+
+#: admin/groups/mail/paste_mail.tpl:6
+#, fuzzy
+msgid "Address settings"
+msgstr "应用程序设置"
+
+#: admin/groups/mail/paste_mail.tpl:13
+msgid "Primary mail address for this shared folder"
+msgstr "此共享目录的主要邮件地址"
+
+#: admin/groups/mail/paste_mail.tpl:21
+#, fuzzy
+msgid "Additional mail settings"
+msgstr "应用程序设置"
+
+#: admin/systems/services/imap/goImapServer.tpl:2
+#, fuzzy
+msgid "IMAP service"
+msgstr "IMAP 服务"
+
+#: admin/systems/services/imap/goImapServer.tpl:5
+#: admin/systems/services/mail/goMailServer.tpl:7
+#, fuzzy
+msgid "Generic settings"
+msgstr "通用队列设置"
+
+#: admin/systems/services/imap/goImapServer.tpl:7
+#: admin/systems/services/imap/class_goImapServer.inc:110
+#: admin/systems/services/imap/class_goImapServer.inc:218
+msgid "Server identifier"
+msgstr "服务器标识"
+
+#: admin/systems/services/imap/goImapServer.tpl:16
+#: admin/systems/services/imap/class_goImapServer.inc:114
+#: admin/systems/services/imap/class_goImapServer.inc:116
+#: admin/systems/services/imap/class_goImapServer.inc:219
+msgid "Connect URL"
+msgstr "连接 URL"
+
+#: admin/systems/services/imap/goImapServer.tpl:25
+#: admin/systems/services/imap/class_goImapServer.inc:127
+#: admin/systems/services/imap/class_goImapServer.inc:220
+#, fuzzy
+msgid "Administrator"
+msgstr "系统管理"
+
+#: admin/systems/services/imap/goImapServer.tpl:34
+#: admin/systems/services/imap/class_goImapServer.inc:130
+msgid "Password"
+msgstr "口令"
+
+#: admin/systems/services/imap/goImapServer.tpl:43
+#: admin/systems/services/imap/class_goImapServer.inc:120
+#: admin/systems/services/imap/class_goImapServer.inc:122
+#: admin/systems/services/imap/class_goImapServer.inc:223
+#, fuzzy
+msgid "Sieve connect URL"
+msgstr "连接 URL"
+
+#: admin/systems/services/imap/goImapServer.tpl:57
+#: admin/systems/services/imap/class_goImapServer.inc:224
+#, fuzzy
+msgid "Start IMAP service"
+msgstr "IMAP 服务"
+
+#: admin/systems/services/imap/goImapServer.tpl:63
+#: admin/systems/services/imap/class_goImapServer.inc:225
+#, fuzzy
+msgid "Start IMAP SSL service"
+msgstr "IMAP/SSL 服务"
+
+#: admin/systems/services/imap/goImapServer.tpl:69
+#: admin/systems/services/imap/class_goImapServer.inc:226
+#, fuzzy
+msgid "Start POP3 service"
+msgstr "POP3 服务"
+
+#: admin/systems/services/imap/goImapServer.tpl:75
+#: admin/systems/services/imap/class_goImapServer.inc:227
+#, fuzzy
+msgid "Start POP3 SSL service"
+msgstr "POP3/SSL 服务器"
+
+#: admin/systems/services/imap/goImapServer.tpl:84
+#: admin/systems/services/mail/goMailServer.tpl:215
+msgid "The server must be saved before you can use the status flag."
+msgstr ""
+
+#: admin/systems/services/imap/goImapServer.tpl:86
+#: admin/systems/services/mail/goMailServer.tpl:217
+msgid "The service must be saved before you can use the status flag."
+msgstr ""
+
+#: admin/systems/services/imap/goImapServer.tpl:90
+#: admin/systems/services/mail/goMailServer.tpl:220
+#, fuzzy
+msgid "Set new status"
+msgstr "系统状态"
+
+#: admin/systems/services/imap/goImapServer.tpl:96
+#: admin/systems/services/mail/goMailServer.tpl:226
+#, fuzzy
+msgid "Set status"
+msgstr "系统状态"
+
+#: admin/systems/services/imap/goImapServer.tpl:97
+#: admin/systems/services/mail/goMailServer.tpl:228
+msgid "Execute"
+msgstr "执行"
+
+#: admin/systems/services/imap/class_goImapServer.inc:48
+#, fuzzy
+msgid "IMAP/POP3 service"
+msgstr "IMAP 服务"
+
+#: admin/systems/services/imap/class_goImapServer.inc:53
+#: admin/systems/services/imap/class_goImapServer.inc:216
+#, fuzzy
+msgid "Repair database"
+msgstr "Glpi 数据库"
+
+#: admin/systems/services/imap/class_goImapServer.inc:100
+#, fuzzy
+msgid "IMAP/POP3 (Cyrus) service"
+msgstr "POP3 服务"
+
+#: admin/systems/services/imap/class_goImapServer.inc:123
+#, fuzzy, php-format
+msgid "Valid options are: %s"
+msgstr "邮件选项"
+
+#: admin/systems/services/imap/class_goImapServer.inc:199
+#: admin/systems/services/imap/class_goImapServer.inc:200
+msgid "IMAP/POP3"
+msgstr ""
+
+#: admin/systems/services/imap/class_goImapServer.inc:200
+#: admin/systems/services/mail/class_goMailServer.inc:577
+#: admin/systems/services/virus/class_goVirusServer.inc:220
+#: admin/systems/services/spam/class_goSpamServer.inc:320
+msgid "Services"
+msgstr "服务"
+
+#: admin/systems/services/imap/class_goImapServer.inc:213
+#: admin/systems/services/mail/class_goMailServer.inc:620
+#: admin/systems/services/virus/class_goVirusServer.inc:232
+#: admin/systems/services/spam/class_goSpamServer.inc:338
+#, fuzzy
+msgid "Start"
+msgstr "启动"
+
+#: admin/systems/services/imap/class_goImapServer.inc:214
+#: admin/systems/services/mail/class_goMailServer.inc:621
+#: admin/systems/services/virus/class_goVirusServer.inc:233
+#: admin/systems/services/spam/class_goSpamServer.inc:339
+#: personal/mail/sieve/templates/object_container.tpl:28
+#: personal/mail/sieve/templates/element_stop.tpl:4
+#: personal/mail/sieve/class_sieveManagement.inc:520
+#: personal/mail/sieve/class_sieveManagement.inc:720
+msgid "Stop"
+msgstr "停止"
+
+#: admin/systems/services/imap/class_goImapServer.inc:215
+#: admin/systems/services/mail/class_goMailServer.inc:622
+#: admin/systems/services/virus/class_goVirusServer.inc:234
+#: admin/systems/services/spam/class_goSpamServer.inc:340
+#, fuzzy
+msgid "Restart"
+msgstr "重试"
+
+#: admin/systems/services/imap/class_goImapServer.inc:221
+#, fuzzy
+msgid "Administrator password"
+msgstr "管理员口令"
+
+#: admin/systems/services/mail/class_goMailServer.inc:45
+#: admin/systems/services/mail/class_goMailServer.inc:455
+msgid "Mail SMTP service (Postfix)"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:199
+#: admin/systems/services/mail/class_goMailServer.inc:208
+#: admin/systems/services/mail/class_goMailServer.inc:216
+#, fuzzy
+msgid "Source"
+msgstr "小时"
+
+#: admin/systems/services/mail/class_goMailServer.inc:199
+#: admin/systems/services/mail/class_goMailServer.inc:208
+#: admin/systems/services/mail/class_goMailServer.inc:216
+#, fuzzy
+msgid "Destination"
+msgstr "描述"
+
+#: admin/systems/services/mail/class_goMailServer.inc:199
+#: admin/systems/services/mail/class_goMailServer.inc:208
+#: addons/mailqueue/contents.tpl:7
+#, fuzzy
+msgid "Filter"
+msgstr "过滤器"
+
+#: admin/systems/services/mail/class_goMailServer.inc:216
+msgid "Protocol"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:543
+#: admin/systems/services/mail/class_goMailServer.inc:625
+msgid "Header size limit"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:546
+#, fuzzy
+msgid "Mailbox size limit"
+msgstr "邮件大小"
+
+#: admin/systems/services/mail/class_goMailServer.inc:549
+#, fuzzy
+msgid "Message size limit"
+msgstr "信息"
+
+#: admin/systems/services/mail/class_goMailServer.inc:576
+msgid "Mail SMTP (Postfix)"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:577
+msgid "Mail SMTP - Postfix"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:593
+msgid "File containing user defined protocols."
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:607
+msgid "File containing user defined restriction filters."
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:623
+#: admin/systems/services/mail/goMailServer.tpl:9
+msgid "Visible fully qualified host name"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:624
+msgid "Description"
+msgstr "描述"
+
+#: admin/systems/services/mail/class_goMailServer.inc:626
+#: admin/systems/services/mail/goMailServer.tpl:27
+#, fuzzy
+msgid "Max mailbox size"
+msgstr "邮件大小"
+
+#: admin/systems/services/mail/class_goMailServer.inc:627
+#: admin/systems/services/mail/goMailServer.tpl:36
+#, fuzzy
+msgid "Max message size"
+msgstr "信息"
+
+#: admin/systems/services/mail/class_goMailServer.inc:628
+#: admin/systems/services/mail/goMailServer.tpl:95
+msgid "Domains to accept mail for"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:629
+#: admin/systems/services/mail/goMailServer.tpl:62
+msgid "Local networks"
+msgstr ""
+
+#: admin/systems/services/mail/class_goMailServer.inc:630
+#: admin/systems/services/mail/goMailServer.tpl:46
+#, fuzzy
+msgid "Relay host"
+msgstr "重新加载列表"
+
+#: admin/systems/services/mail/class_goMailServer.inc:631
+#, fuzzy
+msgid "Transport table"
+msgstr "传送时间"
+
+#: admin/systems/services/mail/class_goMailServer.inc:632
+#: admin/systems/services/mail/goMailServer.tpl:154
+#: admin/systems/services/mail/goMailServer.tpl:157
+#, fuzzy
+msgid "Restrictions for sender"
+msgstr "主机通知命令"
+
+#: admin/systems/services/mail/class_goMailServer.inc:633
+#: admin/systems/services/mail/goMailServer.tpl:182
+#: admin/systems/services/mail/goMailServer.tpl:185
+msgid "Restrictions for recipient"
+msgstr ""
+
+#: admin/systems/services/mail/goMailServer.tpl:12
+msgid "The fully qualified host name."
+msgstr ""
+
+#: admin/systems/services/mail/goMailServer.tpl:17
+#, fuzzy
+msgid "Max mail header size"
+msgstr "最大文件大小"
+
+#: admin/systems/services/mail/goMailServer.tpl:22
+#, fuzzy
+msgid "This value specifies the maximal header size."
+msgstr "指定为“名称”的值已经在使用了。"
+
+#: admin/systems/services/mail/goMailServer.tpl:22
+#: admin/systems/services/mail/goMailServer.tpl:32
+#: admin/systems/services/mail/goMailServer.tpl:41
+msgid "KB"
+msgstr "KB"
+
+#: admin/systems/services/mail/goMailServer.tpl:32
+msgid "Defines the maximal size of mail box."
+msgstr ""
+
+#: admin/systems/services/mail/goMailServer.tpl:41
+msgid "Specify the maximal size of a message."
+msgstr ""
+
+#: admin/systems/services/mail/goMailServer.tpl:51
+msgid "Relay messages to following host:"
+msgstr ""
+
+#: admin/systems/services/mail/goMailServer.tpl:59
+#: admin/systems/services/spam/goSpamServer.tpl:31
+#, fuzzy
+msgid "Network settings"
+msgstr "用户设置"
+
+#: admin/systems/services/mail/goMailServer.tpl:64
+#, fuzzy
+msgid "Postfix networks"
+msgstr "Posix 设置"
+
+#: admin/systems/services/mail/goMailServer.tpl:76
+#: admin/systems/services/mail/goMailServer.tpl:109
+#: admin/systems/services/spam/goSpamServer.tpl:47
+msgid "Remove"
+msgstr "删除"
+
+#: admin/systems/services/mail/goMailServer.tpl:87
+#: admin/systems/services/mail/goMailServer.tpl:92
+#, fuzzy
+msgid "Domains and routing"
+msgstr "域管理员"
+
+#: admin/systems/services/mail/goMailServer.tpl:97
+msgid "Postfix is responsible for the following domains:"
+msgstr ""
+
+#: admin/systems/services/mail/goMailServer.tpl:118
+#: admin/systems/services/mail/goMailServer.tpl:121
+#, fuzzy
+msgid "Transports"
+msgstr "传送时间"
+
+#: admin/systems/services/mail/goMailServer.tpl:130
+msgid "Select a transport protocol."
+msgstr ""
+
+#: admin/systems/services/mail/goMailServer.tpl:149
+#, fuzzy
+msgid "Restrictions"
+msgstr "节"
+
+#: admin/systems/services/mail/goMailServer.tpl:165
+#: admin/systems/services/mail/goMailServer.tpl:193
+msgid "Restriction filter"
+msgstr ""
+
+#: admin/systems/services/virus/goVirusServer.tpl:2
+#, fuzzy
+msgid "Anti virus setting"
+msgstr "反病毒"
+
+#: admin/systems/services/virus/goVirusServer.tpl:5
+msgid "Generic virus filtering"
+msgstr "通用病毒过滤"
+
+#: admin/systems/services/virus/goVirusServer.tpl:10
+#: admin/systems/services/virus/goVirusServer.tpl:50
+#, fuzzy
+msgid "Database setting"
+msgstr "数据库用户"
+
+#: admin/systems/services/virus/goVirusServer.tpl:12
+#: admin/systems/services/virus/class_goVirusServer.inc:176
+msgid "Database user"
+msgstr "数据库用户"
+
+#: admin/systems/services/virus/goVirusServer.tpl:20
+#: admin/systems/services/virus/class_goVirusServer.inc:176
+#: admin/systems/services/virus/class_goVirusServer.inc:247
+msgid "Database mirror"
+msgstr "数据库镜像"
+
+#: admin/systems/services/virus/goVirusServer.tpl:29
+#: admin/systems/services/virus/class_goVirusServer.inc:176
+#: admin/systems/services/virus/class_goVirusServer.inc:249
+#, fuzzy
+msgid "HTTP proxy URL"
+msgstr "Http 代理 URL"
+
+#: admin/systems/services/virus/goVirusServer.tpl:37
+#: admin/systems/services/virus/class_goVirusServer.inc:164
+#: admin/systems/services/virus/class_goVirusServer.inc:241
+msgid "Maximum threads"
+msgstr "最大线程数"
+
+#: admin/systems/services/virus/goVirusServer.tpl:41
+msgid "Select number of maximal threads"
+msgstr "选择最大线程数"
+
+#: admin/systems/services/virus/goVirusServer.tpl:52
+msgid "Max directory recursions"
+msgstr "最大目录递归"
+
+#: admin/systems/services/virus/goVirusServer.tpl:60
+#: admin/systems/services/virus/class_goVirusServer.inc:168
+#: admin/systems/services/virus/class_goVirusServer.inc:248
+msgid "Checks per day"
+msgstr "每天检查次数"
+
+#: admin/systems/services/virus/goVirusServer.tpl:72
+#: admin/systems/services/virus/class_goVirusServer.inc:236
+msgid "Enable debugging"
+msgstr "启用 debug"
+
+#: admin/systems/services/virus/goVirusServer.tpl:79
+#: admin/systems/services/virus/class_goVirusServer.inc:237
+msgid "Enable mail scanning"
+msgstr "启用邮件扫描"
+
+#: admin/systems/services/virus/goVirusServer.tpl:88
+msgid "Archive scanning"
+msgstr "文档扫描"
+
+#: admin/systems/services/virus/goVirusServer.tpl:94
+#: admin/systems/services/virus/goVirusServer.tpl:118
+#, fuzzy
+msgid "Archive setting"
+msgstr "文档扫描"
+
+#: admin/systems/services/virus/goVirusServer.tpl:104
+#: admin/systems/services/virus/class_goVirusServer.inc:238
+msgid "Enable scanning of archives"
+msgstr "启用归档扫描"
+
+#: admin/systems/services/virus/goVirusServer.tpl:112
+#: admin/systems/services/virus/class_goVirusServer.inc:239
+msgid "Block encrypted archives"
+msgstr "封锁加密归档"
+
+#: admin/systems/services/virus/goVirusServer.tpl:120
+#: admin/systems/services/virus/class_goVirusServer.inc:165
+#: admin/systems/services/virus/class_goVirusServer.inc:244
+msgid "Maximum file size"
+msgstr "最大文件大小"
+
+#: admin/systems/services/virus/goVirusServer.tpl:130
+msgid "Maximum recursion"
+msgstr "最大递归"
+
+#: admin/systems/services/virus/goVirusServer.tpl:141
+#: admin/systems/services/virus/class_goVirusServer.inc:167
+#: admin/systems/services/virus/class_goVirusServer.inc:246
+msgid "Maximum compression ratio"
+msgstr "最大压缩率"
+
+#: admin/systems/services/virus/class_goVirusServer.inc:45
+#: admin/systems/services/virus/class_goVirusServer.inc:210
+#: admin/systems/services/virus/class_goVirusServer.inc:219
+#: admin/systems/services/virus/class_goVirusServer.inc:220
+msgid "Anti virus"
+msgstr "反病毒"
+
+#: admin/systems/services/virus/class_goVirusServer.inc:163
+#: admin/systems/services/virus/class_goVirusServer.inc:242
+msgid "Maximum directory recursions"
+msgstr "最大目录递归"
+
+#: admin/systems/services/virus/class_goVirusServer.inc:166
+#: admin/systems/services/virus/class_goVirusServer.inc:245
+msgid "Maximum recursions"
+msgstr "最大递归数"
+
+#: admin/systems/services/virus/class_goVirusServer.inc:243
+#, fuzzy
+msgid "Anti virus user"
+msgstr "反病毒"
+
+#: admin/systems/services/spam/goSpamServer.tpl:2
+#: admin/systems/services/spam/goSpamServer.tpl:6
+#, fuzzy
+msgid "Spam taggin"
+msgstr "Spamassassin"
+
+#: admin/systems/services/spam/goSpamServer.tpl:5
+msgid "Spam tagging"
+msgstr ""
+
+#: admin/systems/services/spam/goSpamServer.tpl:8
+#: admin/systems/services/spam/class_goSpamServer.inc:332
+msgid "Rewrite header"
+msgstr "重写信头"
+
+#: admin/systems/services/spam/goSpamServer.tpl:16
+#: admin/systems/services/spam/class_goSpamServer.inc:334
+msgid "Required score"
+msgstr "需要的分数"
+
+#: admin/systems/services/spam/goSpamServer.tpl:19
+#, fuzzy
+msgid "Select required score to tag mail as SPAM"
+msgstr "选择将邮件标记为垃圾邮件需要的分值"
+
+#: admin/systems/services/spam/goSpamServer.tpl:61
+#: admin/systems/services/spam/goSpamServer.tpl:62
+#: admin/systems/services/spam/goSpamServer.tpl:81
+#, fuzzy
+msgid "Flags"
+msgstr "类"
+
+#: admin/systems/services/spam/goSpamServer.tpl:66
+#: admin/systems/services/spam/class_goSpamServer.inc:342
+#, fuzzy
+msgid "Enable use of Bayes filtering"
+msgstr "启用 bayes 过滤"
+
+#: admin/systems/services/spam/goSpamServer.tpl:70
+#, fuzzy
+msgid "Enable Bayes auto learning"
+msgstr "启用 bayes 自动学习"
+
+#: admin/systems/services/spam/goSpamServer.tpl:74
+#: admin/systems/services/spam/class_goSpamServer.inc:344
+msgid "Enable RBL checks"
+msgstr "启用 RBL 检查"
+
+#: admin/systems/services/spam/goSpamServer.tpl:85
+#: admin/systems/services/spam/class_goSpamServer.inc:345
+msgid "Enable use of Razor"
+msgstr "启用 Razor 的使用"
+
+#: admin/systems/services/spam/goSpamServer.tpl:89
+#: admin/systems/services/spam/class_goSpamServer.inc:346
+msgid "Enable use of DDC"
+msgstr "启用 DDC 的使用"
+
+#: admin/systems/services/spam/goSpamServer.tpl:93
+#: admin/systems/services/spam/class_goSpamServer.inc:347
+#, fuzzy
+msgid "Enable use of Pyzor"
+msgstr "启用 Pyzer 的使用"
+
+#: admin/systems/services/spam/goSpamServer.tpl:107
+#: admin/systems/services/spam/goSpamServer.tpl:109
+#: admin/systems/services/spam/class_goSpamServer.inc:335
+#, fuzzy
+msgid "Rules"
+msgstr "规则"
+
+#: admin/systems/services/spam/class_goSpamServer.inc:42
+#: admin/systems/services/spam/class_goSpamServer.inc:319
+#: admin/systems/services/spam/class_goSpamServer.inc:320
+#: admin/systems/services/spam/class_goSpamServer.inc:355
+msgid "Spamassassin"
+msgstr "Spamassassin"
+
+#: admin/systems/services/spam/class_goSpamServer.inc:84
+#: admin/systems/services/spam/goSpamServerRule.tpl:8
+msgid "Rule"
+msgstr "规则"
+
+#: admin/systems/services/spam/class_goSpamServer.inc:215
+#, fuzzy
+msgid "Trusted network"
+msgstr "SMTP 授权网络"
+
+#: admin/systems/services/spam/class_goSpamServer.inc:286
+msgid "Score"
+msgstr ""
+
+#: admin/systems/services/spam/class_goSpamServer.inc:333
+#, fuzzy
+msgid "Trusted networks"
+msgstr "SMTP 授权网络"
+
+#: admin/systems/services/spam/class_goSpamServer.inc:343
+#, fuzzy
+msgid "Enabled Bayes auto learning"
+msgstr "启用 bayes 自动学习"
+
+#: admin/systems/services/spam/goSpamServerRule.tpl:2
+#: personal/mail/sieve/class_sieveManagement.inc:84
+#: personal/mail/mailAddressSelect/selectMailAddress-list.xml:48
+msgid "Name"
+msgstr "名称"
+
+#: addons/mailqueue/class_mailqueue.inc:6
+#: addons/mailqueue/class_mailqueue.inc:337 addons/mailqueue/contents.tpl:4
+msgid "Mail queue"
+msgstr "邮件队列"
+
+#: addons/mailqueue/class_mailqueue.inc:7
+msgid "View and control the mailservers mail processing queue"
+msgstr ""
+
+#: addons/mailqueue/class_mailqueue.inc:211
+msgid "up"
+msgstr "上"
+
+#: addons/mailqueue/class_mailqueue.inc:213
+msgid "down"
+msgstr "下"
+
+#: addons/mailqueue/class_mailqueue.inc:224
+#: addons/mailqueue/class_mailqueue.inc:324
+msgid "All"
+msgstr "全部"
+
+#: addons/mailqueue/class_mailqueue.inc:268
+msgid "no limit"
+msgstr "无限"
+
+#: addons/mailqueue/class_mailqueue.inc:271
+msgid "hour"
+msgstr "小时"
+
+#: addons/mailqueue/class_mailqueue.inc:273
+msgid "hours"
+msgstr "小时"
+
+#: addons/mailqueue/class_mailqueue.inc:325
+msgid "Hold"
+msgstr "挂起"
+
+#: addons/mailqueue/class_mailqueue.inc:326
+#, fuzzy
+msgid "Release"
+msgstr "规则"
+
+#: addons/mailqueue/class_mailqueue.inc:327
+msgid "Active"
+msgstr "活动"
+
+#: addons/mailqueue/class_mailqueue.inc:328
+msgid "Not active"
+msgstr "不活动"
+
+#: addons/mailqueue/class_mailqueue.inc:338
+#: addons/mailqueue/class_mailqueue.inc:343
+#, fuzzy
+msgid "Mail queue add-on"
+msgstr "邮件队列"
+
+#: addons/mailqueue/class_mailqueue.inc:346 addons/mailqueue/contents.tpl:40
+msgid "Release all messages"
+msgstr "解除所有邮件"
+
+#: addons/mailqueue/class_mailqueue.inc:347 addons/mailqueue/contents.tpl:35
+msgid "Hold all messages"
+msgstr "挂起所有邮件"
+
+#: addons/mailqueue/class_mailqueue.inc:348
+#, fuzzy
+msgid "Delete all messages"
+msgstr "解除所有邮件"
+
+#: addons/mailqueue/class_mailqueue.inc:349 addons/mailqueue/contents.tpl:45
+#, fuzzy
+msgid "Re-queue all messages"
+msgstr "所有邮件重入队列"
+
+#: addons/mailqueue/class_mailqueue.inc:350 addons/mailqueue/contents.tpl:118
+msgid "Release message"
+msgstr "解除挂起的邮件"
+
+#: addons/mailqueue/class_mailqueue.inc:351 addons/mailqueue/contents.tpl:125
+msgid "Hold message"
+msgstr "挂起邮件"
+
+#: addons/mailqueue/class_mailqueue.inc:352
+#, fuzzy
+msgid "Delete message"
+msgstr "删除这条信息"
+
+#: addons/mailqueue/class_mailqueue.inc:353
+#, fuzzy
+msgid "Re-queue message"
+msgstr "将此邮件重入队列"
+
+#: addons/mailqueue/class_mailqueue.inc:354
+msgid "Gathering queue data"
+msgstr ""
+
+#: addons/mailqueue/class_mailqueue.inc:355
+#, fuzzy
+msgid "Get header information"
+msgstr "用户一般信息"
+
+#: addons/mailqueue/contents.tpl:9
+#, fuzzy
+msgid "Search on"
+msgstr "查询"
+
+#: addons/mailqueue/contents.tpl:10
+msgid "Select a server"
+msgstr "选择一个服务器"
+
+#: addons/mailqueue/contents.tpl:14
+msgid "Search for"
+msgstr "查询"
+
+#: addons/mailqueue/contents.tpl:16
+msgid "Enter user name to search for"
+msgstr ""
+
+#: addons/mailqueue/contents.tpl:19
+msgid "within the last"
+msgstr "在最近的"
+
+#: addons/mailqueue/contents.tpl:25
+msgid "Search"
+msgstr "查找"
+
+#: addons/mailqueue/contents.tpl:30
+msgid "Remove all messages"
+msgstr "删除所有邮件"
+
+#: addons/mailqueue/contents.tpl:31
+msgid "Remove all messages from selected servers queue"
+msgstr "从所选服务器队列中删除所有邮件"
+
+#: addons/mailqueue/contents.tpl:36
+msgid "Hold all messages in selected servers queue"
+msgstr "从所选服务器队列中挂起所有邮件"
+
+#: addons/mailqueue/contents.tpl:41
+msgid "Release all messages in selected servers queue"
+msgstr "从所选服务器队列中解除所有邮件"
+
+#: addons/mailqueue/contents.tpl:46
+#, fuzzy
+msgid "Re-queue all messages in selected servers queue"
+msgstr "所选服务器队列所有邮件重入队列"
+
+#: addons/mailqueue/contents.tpl:64
+msgid "Search returned no results"
+msgstr "查无结果"
+
+#: addons/mailqueue/contents.tpl:69
+#, fuzzy
+msgid "Phone reports"
+msgstr "显示代理用户"
+
+#: addons/mailqueue/contents.tpl:76
+msgid "ID"
+msgstr "ID"
+
+#: addons/mailqueue/contents.tpl:78
+#: personal/mail/sieve/templates/element_size.tpl:4
+#: personal/mail/sieve/class_sieveManagement.inc:610
+msgid "Size"
+msgstr "大小"
+
+#: addons/mailqueue/contents.tpl:79
+msgid "Arrival"
+msgstr "到达"
+
+#: addons/mailqueue/contents.tpl:80
+msgid "Sender"
+msgstr "发送者"
+
+#: addons/mailqueue/contents.tpl:81
+msgid "Recipient"
+msgstr "收件人"
+
+#: addons/mailqueue/contents.tpl:82
+#: personal/mail/sieve/class_sieveManagement.inc:83
+msgid "Status"
+msgstr "状态"
+
+#: addons/mailqueue/contents.tpl:110
+msgid "Delete this message"
+msgstr "删除这条信息"
+
+#: addons/mailqueue/contents.tpl:133
+#, fuzzy
+msgid "Re-queue this message"
+msgstr "将此邮件重入队列"
+
+#: addons/mailqueue/contents.tpl:140
+#, fuzzy
+msgid "Display header of this message"
+msgstr "显示此邮件邮件头"
+
+#: addons/mailqueue/contents.tpl:159
+#, fuzzy
+msgid "Page selector"
+msgstr "组设置"
+
+#: personal/mail/generic.tpl:7
+#, fuzzy
+msgid "Mail address configuration"
+msgstr "下载配置"
+
+#: personal/mail/generic.tpl:102
+#, fuzzy
+msgid "Mail account configration flags"
+msgstr "配置文件"
+
+#: personal/mail/generic.tpl:120 personal/mail/class_mailAccount.inc:1510
+msgid "Use custom sieve script"
+msgstr "定制过滤脚本"
+
+#: personal/mail/generic.tpl:120
+msgid "disables all Mail options!"
+msgstr "禁用所有邮件选项！"
+
+#: personal/mail/generic.tpl:129
+#, fuzzy
+msgid "Sieve Management"
+msgstr "管理"
+
+#: personal/mail/generic.tpl:145 personal/mail/generic.tpl:182
+#, fuzzy
+msgid "Spam filter configuration"
+msgstr "配置文件"
+
+#: personal/mail/generic.tpl:155
+msgid "Select if you want to forward mails without getting own copies of them"
+msgstr "如果您想转发邮件而且不想保留拷贝的话，请选择"
+
+#: personal/mail/generic.tpl:159
+msgid "No delivery to own mailbox"
+msgstr "不要发送到本人邮箱"
+
+#: personal/mail/generic.tpl:170
+msgid ""
+"Select to automatically response with the vacation message defined below"
+msgstr "选择用下面定义的假期信息作为自动回复"
+
+#: personal/mail/generic.tpl:175
+msgid "Activate vacation message"
+msgstr "启用假期信息"
+
+#: personal/mail/generic.tpl:184 personal/mail/class_mailAccount.inc:1091
+#: personal/mail/class_mailAccount.inc:1312
+msgid "from"
+msgstr "从"
+
+#: personal/mail/generic.tpl:197
+msgid "till"
+msgstr "至"
+
+#: personal/mail/generic.tpl:222
+#, fuzzy
+msgid "Select if you want to filter this mails through Spamassassin"
+msgstr "选择用 spamassassin 过滤邮件"
+
+#: personal/mail/generic.tpl:226
+#, fuzzy
+msgid "Move mails tagged with SPAM level greater than"
+msgstr "过滤邮件当 spam 级别超过"
+
+#: personal/mail/generic.tpl:229
+#, fuzzy
+msgid "Choose SPAM level - smaller values are more sensitive"
+msgstr "选择 spam 级别 ─ 越小越敏感"
+
+#: personal/mail/generic.tpl:233
+msgid "to folder"
+msgstr "到目录"
+
+#: personal/mail/generic.tpl:253
+msgid "Reject mails bigger than"
+msgstr "拒绝邮件大小超过"
+
+#: personal/mail/generic.tpl:256
+msgid "MB"
+msgstr "MB"
+
+#: personal/mail/generic.tpl:269
+#: personal/mail/sieve/templates/object_container.tpl:29
+#: personal/mail/sieve/templates/element_vacation.tpl:46
+#: personal/mail/sieve/class_sieveManagement.inc:521
+#: personal/mail/sieve/class_sieveManagement.inc:721
+#: personal/mail/class_mailAccount.inc:1493
+msgid "Vacation message"
+msgstr "假期信息"
+
+#: personal/mail/generic.tpl:286
+#: personal/mail/sieve/templates/import_script.tpl:12
+#: personal/mail/sieve/templates/edit_frame_base.tpl:7
+msgid "Import"
+msgstr "导入"
+
+#: personal/mail/generic.tpl:293 personal/mail/copypaste.tpl:25
+msgid "Forward messages to"
+msgstr "转发邮件到"
+
+#: personal/mail/generic.tpl:331
+#, fuzzy
+msgid "Delivery settings"
+msgstr "用户设置"
+
+#: personal/mail/class_mail-methods-cyrus.inc:39
+msgid "There are no IMAP compatible mail servers defined!"
+msgstr ""
+
+#: personal/mail/class_mail-methods-cyrus.inc:44
+#, fuzzy
+msgid "Mail server for this account is invalid!"
+msgstr "该账号邮件大小不受限制"
+
+#: personal/mail/class_mail-methods-cyrus.inc:222
+#, fuzzy
+msgid "IMAP error"
+msgstr "LDAP 错误:"
+
+#: personal/mail/class_mail-methods-cyrus.inc:222
+#, fuzzy, php-format
+msgid "Cannot modify IMAP mailbox quota: %s"
+msgstr "无法删除 IMAP 邮箱。服务器返回 '%s'。"
+
+#: personal/mail/class_mail-methods-cyrus.inc:298
+#, fuzzy
+msgid "Mail info"
+msgstr "文件"
+
+#: personal/mail/class_mail-methods-cyrus.inc:299
+#, php-format
+msgid ""
+"LDAP entry has been removed but Cyrus mailbox (%s) is kept.\n"
+"Please delete it manually!"
+msgstr ""
+
+#: personal/mail/class_mail-methods-cyrus.inc:383
+#: personal/mail/class_mail-methods-cyrus.inc:420
+msgid "The module imap_getacl is not implemented!"
+msgstr ""
+
+#: personal/mail/class_mail-methods-cyrus.inc:472
+#, php-format
+msgid "File '%s' does not exist!"
+msgstr ""
+
+#: personal/mail/class_mail-methods-cyrus.inc:473
+msgid "The sieve script may not be written correctly."
+msgstr ""
+
+#: personal/mail/class_mail-methods-cyrus.inc:474
+#: personal/mail/sieve/class_My_Tree.inc:245
+msgid "Warning"
+msgstr "警告"
+
+#: personal/mail/class_mail-methods-cyrus.inc:512
+#: personal/mail/sieve/class_sieveManagement.inc:325
+#, php-format
+msgid "Cannot retrieve SIEVE script: %s"
+msgstr ""
+
+#: personal/mail/class_mail-methods-cyrus.inc:601
+#: personal/mail/sieve/class_sieveManagement.inc:1044
+#, php-format
+msgid "Cannot store SIEVE script: %s"
+msgstr ""
+
+#: personal/mail/class_mail-methods-cyrus.inc:608
+#, php-format
+msgid "Cannot activate SIEVE script: %s"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_Require.inc:73
+#, fuzzy
+msgid "Please specify at least one valid requirement."
+msgstr "请输入一个有效的用户名！"
+
+#: personal/mail/sieve/class_sieveElement_Redirect.inc:24
+#, fuzzy
+msgid "Please specify a valid email address."
+msgstr "请输入一个有效的 iSerial。"
+
+#: personal/mail/sieve/class_sieveElement_Redirect.inc:35
+#, fuzzy
+msgid "Place a mail address here"
+msgstr "请输入一个邮件地址"
+
+#: personal/mail/sieve/class_My_Tree.inc:245
+#, fuzzy
+msgid "Cannot remove last element!"
+msgstr "删除记录"
+
+#: personal/mail/sieve/class_My_Tree.inc:658
+msgid "Require must be the first command in the script."
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_Vacation.inc:148
+#, fuzzy
+msgid "Alternative sender address must be a valid email addresses."
+msgstr "请输入一个有效的 iSerial。"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:4
+#: personal/mail/sieve/templates/element_envelope.tpl:13
+#: personal/mail/sieve/templates/element_envelope.tpl:77
+#: personal/mail/sieve/templates/element_envelope.tpl:92
+#: personal/mail/sieve/templates/element_envelope.tpl:100
+#: personal/mail/sieve/templates/element_else.tpl:1
+#, fuzzy
+msgid "Sieve envelope"
+msgstr "管理"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:16
+#: personal/mail/sieve/templates/element_envelope.tpl:111
+#: personal/mail/sieve/class_sieveManagement.inc:609
+msgid "Envelope"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_envelope.tpl:20
+#: personal/mail/sieve/templates/element_vacation.tpl:17
+#: personal/mail/sieve/templates/element_address.tpl:19
+#: personal/mail/sieve/templates/element_header.tpl:20
+msgid "Normal view"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_envelope.tpl:25
+#: personal/mail/sieve/templates/object_container.tpl:1
+#: personal/mail/sieve/templates/element_elsif.tpl:1
+#: personal/mail/sieve/templates/element_vacation.tpl:1
+#: personal/mail/sieve/templates/block_indent_start.tpl:2
+#: personal/mail/sieve/templates/element_address.tpl:3
+#: personal/mail/sieve/templates/element_address.tpl:12
+#: personal/mail/sieve/templates/element_address.tpl:24
+#: personal/mail/sieve/templates/element_address.tpl:86
+#: personal/mail/sieve/templates/element_address.tpl:101
+#: personal/mail/sieve/templates/element_address.tpl:110
+#: personal/mail/sieve/templates/element_boolean.tpl:1
+#: personal/mail/sieve/templates/element_header.tpl:13
+#: personal/mail/sieve/templates/element_header.tpl:25
+#: personal/mail/sieve/templates/element_header.tpl:78
+#: personal/mail/sieve/templates/element_header.tpl:93
+#: personal/mail/sieve/templates/element_header.tpl:103
+#, fuzzy
+msgid "Sieve element"
+msgstr "删除记录"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:28
+#: personal/mail/sieve/templates/element_address.tpl:27
+#: personal/mail/sieve/templates/element_header.tpl:28
+#, fuzzy
+msgid "Match type"
+msgstr "认证类型"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:31
+#: personal/mail/sieve/templates/element_envelope.tpl:56
+#: personal/mail/sieve/templates/element_envelope.tpl:67
+#: personal/mail/sieve/templates/element_envelope.tpl:121
+#: personal/mail/sieve/templates/element_envelope.tpl:126
+#: personal/mail/sieve/templates/element_address.tpl:30
+#: personal/mail/sieve/templates/element_address.tpl:55
+#: personal/mail/sieve/templates/element_address.tpl:65
+#: personal/mail/sieve/templates/element_address.tpl:76
+#: personal/mail/sieve/templates/element_address.tpl:129
+#: personal/mail/sieve/templates/element_address.tpl:134
+#: personal/mail/sieve/templates/element_boolean.tpl:5
+#: personal/mail/sieve/templates/element_header.tpl:31
+#: personal/mail/sieve/templates/element_header.tpl:56
+#: personal/mail/sieve/templates/element_header.tpl:67
+#: personal/mail/sieve/templates/element_header.tpl:122
+#: personal/mail/sieve/templates/element_header.tpl:127
+#, fuzzy
+msgid "Boolean value"
+msgstr "缺省值"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:39
+#: personal/mail/sieve/templates/element_address.tpl:38
+#: personal/mail/sieve/templates/element_header.tpl:39
+#, fuzzy
+msgid "Invert test"
+msgstr "内存测试"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:43
+#: personal/mail/sieve/templates/element_envelope.tpl:46
+#: personal/mail/sieve/templates/element_anyof.tpl:5
+#: personal/mail/sieve/templates/element_anyof.tpl:8
+#: personal/mail/sieve/templates/element_exists.tpl:11
+#: personal/mail/sieve/templates/element_exists.tpl:14
+#: personal/mail/sieve/templates/element_allof.tpl:5
+#: personal/mail/sieve/templates/element_allof.tpl:8
+#: personal/mail/sieve/templates/element_size.tpl:11
+#: personal/mail/sieve/templates/element_size.tpl:14
+msgid "Inverse match"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_envelope.tpl:43
+#: personal/mail/sieve/templates/element_address.tpl:42
+#: personal/mail/sieve/templates/element_header.tpl:43
+msgid "Yes"
+msgstr "是"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:46
+#: personal/mail/sieve/templates/element_address.tpl:45
+#: personal/mail/sieve/templates/element_header.tpl:46
+msgid "No"
+msgstr "否"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:53
+#: personal/mail/sieve/templates/element_address.tpl:62
+#: personal/mail/sieve/templates/element_header.tpl:53
+#, fuzzy
+msgid "Comparator"
+msgstr "计算机"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:64
+#: personal/mail/sieve/templates/element_address.tpl:73
+msgid "Operator"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_envelope.tpl:80
+#: personal/mail/sieve/templates/element_address.tpl:89
+#: personal/mail/sieve/templates/element_header.tpl:81
+msgid "Address fields to include"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_envelope.tpl:84
+#: personal/mail/sieve/templates/element_address.tpl:93
+#: personal/mail/sieve/templates/element_header.tpl:85
+msgid "Values to match for"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_envelope.tpl:114
+#: personal/mail/sieve/templates/element_anyof.tpl:5
+#: personal/mail/sieve/templates/element_exists.tpl:11
+#: personal/mail/sieve/templates/element_address.tpl:122
+#: personal/mail/sieve/templates/element_allof.tpl:5
+#: personal/mail/sieve/templates/element_size.tpl:11
+#: personal/mail/sieve/templates/element_header.tpl:115
+#, fuzzy
+msgid "Not"
+msgstr "否"
+
+#: personal/mail/sieve/templates/element_envelope.tpl:117
+#: personal/mail/sieve/templates/element_exists.tpl:14
+#: personal/mail/sieve/templates/element_address.tpl:125
+#: personal/mail/sieve/templates/element_allof.tpl:8
+#: personal/mail/sieve/templates/element_size.tpl:14
+#: personal/mail/sieve/templates/element_header.tpl:118
+msgid "-"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_envelope.tpl:139
+#: personal/mail/sieve/templates/element_vacation.tpl:50
+#: personal/mail/sieve/templates/element_address.tpl:147
+#: personal/mail/sieve/templates/element_header.tpl:140
+msgid "Expert view"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_redirect.tpl:1
+#, fuzzy
+msgid "Sieve element redirect"
+msgstr "删除记录"
+
+#: personal/mail/sieve/templates/element_redirect.tpl:13
+#: personal/mail/sieve/templates/object_container.tpl:25
+#: personal/mail/sieve/class_sieveManagement.inc:517
+#: personal/mail/sieve/class_sieveManagement.inc:717
+#, fuzzy
+msgid "Redirect"
+msgstr "直接"
+
+#: personal/mail/sieve/templates/element_redirect.tpl:18
+msgid "Redirect mail to following recipients"
+msgstr ""
+
+#: personal/mail/sieve/templates/select_test_type.tpl:1
+#, fuzzy
+msgid "Select the type of test you want to add"
+msgstr "选择要添加的条目"
+
+#: personal/mail/sieve/templates/select_test_type.tpl:3
+#, fuzzy
+msgid "Available test types"
+msgstr "变量属性"
+
+#: personal/mail/sieve/templates/select_test_type.tpl:11
+#: personal/mail/sieve/templates/add_element.tpl:11
+msgid "Continue"
+msgstr "继续"
+
+#: personal/mail/sieve/templates/element_if.tpl:1
+#: personal/mail/sieve/templates/element_anyof.tpl:1
+#: personal/mail/sieve/templates/element_exists.tpl:1
+#: personal/mail/sieve/templates/element_allof.tpl:1
+#, fuzzy
+msgid "Sieve filter"
+msgstr "参数"
+
+#: personal/mail/sieve/templates/element_if.tpl:4
+#: personal/mail/sieve/class_sieveElement_If.inc:834
+#, fuzzy
+msgid "Condition"
+msgstr "连接"
+
+#: personal/mail/sieve/templates/object_container.tpl:8
+#: personal/mail/sieve/templates/object_container_clear.tpl:8
+#, fuzzy
+msgid "Move object up one position"
+msgstr "成员对象"
+
+#: personal/mail/sieve/templates/object_container.tpl:11
+#: personal/mail/sieve/templates/object_container_clear.tpl:11
+msgid "Move object down one position"
+msgstr ""
+
+#: personal/mail/sieve/templates/object_container.tpl:14
+#: personal/mail/sieve/templates/object_container_clear.tpl:14
+#: personal/mail/sieve/templates/object_test_container.tpl:11
+#, fuzzy
+msgid "Remove object"
+msgstr "成员对象"
+
+#: personal/mail/sieve/templates/object_container.tpl:19
+msgid "choose element"
+msgstr ""
+
+#: personal/mail/sieve/templates/object_container.tpl:20
+#: personal/mail/sieve/templates/object_container.tpl:23
+#: personal/mail/sieve/templates/element_keep.tpl:4
+#: personal/mail/sieve/class_sieveManagement.inc:512
+#: personal/mail/sieve/class_sieveManagement.inc:515
+#: personal/mail/sieve/class_sieveManagement.inc:712
+#: personal/mail/sieve/class_sieveManagement.inc:715
+msgid "Keep"
+msgstr ""
+
+#: personal/mail/sieve/templates/object_container.tpl:21
+#: personal/mail/sieve/templates/element_comment.tpl:4
+#: personal/mail/sieve/class_sieveManagement.inc:513
+#: personal/mail/sieve/class_sieveManagement.inc:713
+msgid "Comment"
+msgstr "注释"
+
+#: personal/mail/sieve/templates/object_container.tpl:22
+#: personal/mail/sieve/class_sieveManagement.inc:514
+#: personal/mail/sieve/class_sieveManagement.inc:714
+#, fuzzy
+msgid "File into"
+msgstr "文件"
+
+#: personal/mail/sieve/templates/object_container.tpl:24
+#: personal/mail/sieve/templates/element_discard.tpl:4
+#: personal/mail/sieve/class_sieveManagement.inc:516
+#: personal/mail/sieve/class_sieveManagement.inc:716
+#, fuzzy
+msgid "Discard"
+msgstr "Discs"
+
+#: personal/mail/sieve/templates/object_container.tpl:26
+#: personal/mail/sieve/class_sieveManagement.inc:518
+#: personal/mail/sieve/class_sieveManagement.inc:718
+#, fuzzy
+msgid "Reject"
+msgstr "对象"
+
+#: personal/mail/sieve/templates/object_container.tpl:27
+#: personal/mail/sieve/templates/element_require.tpl:12
+#: personal/mail/sieve/class_sieveManagement.inc:519
+#: personal/mail/sieve/class_sieveManagement.inc:719
+#, fuzzy
+msgid "Require"
+msgstr "需要的分数"
+
+#: personal/mail/sieve/templates/object_container.tpl:30
+#: personal/mail/sieve/class_sieveElement_If.inc:836
+#: personal/mail/sieve/class_sieveManagement.inc:522
+#: personal/mail/sieve/class_sieveManagement.inc:722
+msgid "If"
+msgstr ""
+
+#: personal/mail/sieve/templates/object_container.tpl:31
+#: personal/mail/sieve/templates/element_else.tpl:4
+#: personal/mail/sieve/class_sieveElement_If.inc:840
+#: personal/mail/sieve/class_sieveManagement.inc:581
+#: personal/mail/sieve/class_sieveManagement.inc:757
+#, fuzzy
+msgid "Else"
+msgstr "假"
+
+#: personal/mail/sieve/templates/object_container.tpl:32
+#: personal/mail/sieve/templates/element_elsif.tpl:4
+#: personal/mail/sieve/class_sieveElement_If.inc:838
+#: personal/mail/sieve/class_sieveManagement.inc:583
+#: personal/mail/sieve/class_sieveManagement.inc:759
+#: personal/mail/sieve/class_sieveManagement.inc:764
+msgid "Else If"
+msgstr ""
+
+#: personal/mail/sieve/templates/object_container.tpl:36
+msgid "Add a new object above this one."
+msgstr ""
+
+#: personal/mail/sieve/templates/object_container.tpl:38
+msgid "Add a new object below this one."
+msgstr ""
+
+#: personal/mail/sieve/templates/import_script.tpl:1
+#, fuzzy
+msgid "Import sieve script"
+msgstr "导入脚本"
+
+#: personal/mail/sieve/templates/import_script.tpl:2
+msgid ""
+"Please select the sieve script you want to import. Use the import button to "
+"import the script or the cancel button to abort."
+msgstr ""
+
+#: personal/mail/sieve/templates/import_script.tpl:5
+#, fuzzy
+msgid "Script to import"
+msgstr "脚本路径"
+
+#: personal/mail/sieve/templates/object_container_clear.tpl:1
+#, fuzzy
+msgid "Sieve element clear"
+msgstr "删除记录"
+
+#: personal/mail/sieve/templates/object_test_container.tpl:1
+msgid "Sieve test case"
+msgstr ""
+
+#: personal/mail/sieve/templates/object_test_container.tpl:7
+#, fuzzy
+msgid "Add object"
+msgstr "自动化安装（FAI）对象树"
+
+#: personal/mail/sieve/templates/element_fileinto.tpl:1
+#, fuzzy
+msgid "Sieve: File into"
+msgstr "文件"
+
+#: personal/mail/sieve/templates/element_fileinto.tpl:4
+#, fuzzy
+msgid "Move mail into folder"
+msgstr "到目录"
+
+#: personal/mail/sieve/templates/element_fileinto.tpl:8
+#, fuzzy
+msgid "Select from list"
+msgstr "选择模板"
+
+#: personal/mail/sieve/templates/element_fileinto.tpl:10
+#, fuzzy
+msgid "Manual selection"
+msgstr "邮件选项"
+
+#: personal/mail/sieve/templates/element_fileinto.tpl:19
+#, fuzzy
+msgid "Folder"
+msgstr "过滤器"
+
+#: personal/mail/sieve/templates/element_require.tpl:1
+msgid "Sieve: require"
+msgstr ""
+
+#: personal/mail/sieve/templates/add_element.tpl:1
+msgid "Add a new element"
+msgstr ""
+
+#: personal/mail/sieve/templates/add_element.tpl:2
+#, fuzzy
+msgid "Please select the type of element you want to add"
+msgstr "请选择一个打印机或者取消。"
+
+#: personal/mail/sieve/templates/add_element.tpl:14
+#, fuzzy
+msgid "Abort"
+msgstr "端口"
+
+#: personal/mail/sieve/templates/element_anyof.tpl:12
+#: personal/mail/sieve/class_sieveManagement.inc:613
+msgid "Any of"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_exists.tpl:9
+#: personal/mail/sieve/class_sieveManagement.inc:611
+#, fuzzy
+msgid "Exists"
+msgstr "现存"
+
+#: personal/mail/sieve/templates/element_discard.tpl:1
+#, fuzzy
+msgid "Sieve element discard"
+msgstr "删除记录"
+
+#: personal/mail/sieve/templates/element_discard.tpl:9
+#, fuzzy
+msgid "Discard message"
+msgstr "挂起邮件"
+
+#: personal/mail/sieve/templates/element_vacation.tpl:13
+#, fuzzy
+msgid "Vacation Message"
+msgstr "假期信息"
+
+#: personal/mail/sieve/templates/element_vacation.tpl:23
+#, fuzzy
+msgid "Release interval"
+msgstr "时间间隔"
+
+#: personal/mail/sieve/templates/element_vacation.tpl:27
+msgid "days"
+msgstr "天"
+
+#: personal/mail/sieve/templates/element_vacation.tpl:32
+#, fuzzy
+msgid "Alternative sender addresses"
+msgstr "替代地址"
+
+#: personal/mail/sieve/templates/element_keep.tpl:1
+#, fuzzy
+msgid "Sieve element keep"
+msgstr "删除记录"
+
+#: personal/mail/sieve/templates/element_keep.tpl:9
+#, fuzzy
+msgid "Keep message"
+msgstr "解除挂起的邮件"
+
+#: personal/mail/sieve/templates/element_comment.tpl:1
+#, fuzzy
+msgid "Sieve comment"
+msgstr "系统管理"
+
+#: personal/mail/sieve/templates/element_comment.tpl:8
+msgid "Edit"
+msgstr "编辑"
+
+#: personal/mail/sieve/templates/edit_frame_base.tpl:2
+#, fuzzy
+msgid "Sieve editor"
+msgstr "Sieve 端口"
+
+#: personal/mail/sieve/templates/edit_frame_base.tpl:6
+msgid "Export"
+msgstr "导出"
+
+#: personal/mail/sieve/templates/edit_frame_base.tpl:12
+#, fuzzy
+msgid "View structured"
+msgstr "在子树中查找"
+
+#: personal/mail/sieve/templates/edit_frame_base.tpl:14
+msgid "View source"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_address.tpl:15
+#: personal/mail/sieve/templates/element_address.tpl:119
+#: personal/mail/sieve/class_sieveManagement.inc:607
+msgid "Address"
+msgstr "住址"
+
+#: personal/mail/sieve/templates/element_address.tpl:52
+msgid "Part of address that should be used"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_allof.tpl:12
+#: personal/mail/sieve/class_sieveManagement.inc:612
+#, fuzzy
+msgid "All of"
+msgstr "全部"
+
+#: personal/mail/sieve/templates/management.tpl:1
+#, fuzzy
+msgid "List of sieve scripts"
+msgstr "脚本列表"
+
+#: personal/mail/sieve/templates/management.tpl:5
+msgid ""
+"Connection to the sieve server could not be established, the authentication "
+"attribute is empty."
+msgstr ""
+
+#: personal/mail/sieve/templates/management.tpl:6
+msgid ""
+"Please verify that the attributes UID and mail are not empty and try again."
+msgstr ""
+
+#: personal/mail/sieve/templates/management.tpl:12
+msgid "Connection to the sieve server could not be established."
+msgstr ""
+
+#: personal/mail/sieve/templates/management.tpl:15
+msgid "Possibly the sieve account has not been created yet."
+msgstr ""
+
+#: personal/mail/sieve/templates/management.tpl:19
+#, fuzzy
+msgid ""
+"Be careful. All your changes will be saved directly to sieve, if you use the "
+"save button below."
+msgstr "小心使用这个对话框修改记录类型。当按下保存键时，所有修改马上被保存。"
+
+#: personal/mail/sieve/templates/element_stop.tpl:1
+#, fuzzy
+msgid "Sieve element stop"
+msgstr "删除记录"
+
+#: personal/mail/sieve/templates/element_stop.tpl:9
+msgid "Stop execution here"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_size.tpl:1
+msgid "Sieve test case: size"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_size.tpl:18
+#, fuzzy
+msgid "Select match type"
+msgstr "选择模板"
+
+#: personal/mail/sieve/templates/element_size.tpl:22
+#, fuzzy
+msgid "Select value unit"
+msgstr "选择类别"
+
+#: personal/mail/sieve/templates/remove_script.tpl:6
+msgid ""
+"Please double check if your really want to do this since there is no way for "
+"GOsa to get your data back."
+msgstr "请再次检查您是否要这么做，因为 GOsa 将没有办法将您的数据找回。"
+
+#: personal/mail/sieve/templates/remove_script.tpl:7
+#, fuzzy
+msgid ""
+"Best thing to do before performing this action would be to save the current "
+"script in a file. So - if you've done so - press 'Delete' to continue or "
+"'Cancel' to abort."
+msgstr ""
+"最好在执行这个操作之前，保存当前 LDAP 树中的内容到一个文件。所以，如果您已经"
+"这么做了，按“删除”继续或者按“取消”退出。"
+
+#: personal/mail/sieve/templates/element_boolean.tpl:4
+#, fuzzy
+msgid "Boolean"
+msgstr "布尔值"
+
+#: personal/mail/sieve/templates/element_boolean.tpl:8
+#, fuzzy
+msgid "Update"
+msgstr "更新"
+
+#: personal/mail/sieve/templates/element_reject.tpl:1
+#, fuzzy
+msgid "Sieve: reject"
+msgstr "Sieve 端口"
+
+#: personal/mail/sieve/templates/element_reject.tpl:14
+#, fuzzy
+msgid "Reject mail"
+msgstr "拒绝邮件大小超过"
+
+#: personal/mail/sieve/templates/element_reject.tpl:17
+msgid "This is a multi-line text element"
+msgstr ""
+
+#: personal/mail/sieve/templates/element_reject.tpl:19
+#, fuzzy
+msgid "This is stored as single string"
+msgstr "******"
+
+#: personal/mail/sieve/templates/element_header.tpl:3
+#, fuzzy
+msgid "Sieve header"
+msgstr "重写信头"
+
+#: personal/mail/sieve/templates/element_header.tpl:16
+#: personal/mail/sieve/templates/element_header.tpl:112
+#: personal/mail/sieve/class_sieveManagement.inc:608
+#, fuzzy
+msgid "Header"
+msgstr "邮件头"
+
+#: personal/mail/sieve/templates/element_header.tpl:64
+#, fuzzy
+msgid "operator"
+msgstr "邮件选项"
+
+#: personal/mail/sieve/templates/create_script.tpl:2
+msgid ""
+"Please enter the name for the new script below. Script names must consist of "
+"lower case characters only."
+msgstr ""
+
+#: personal/mail/sieve/templates/create_script.tpl:8
+#, fuzzy
+msgid "Script name"
+msgstr "脚本名称"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:27
+#, fuzzy
+msgid "Complete address"
+msgstr "邮件地址"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:27
+#: personal/mail/sieve/class_sieveElement_If.inc:33
+#, fuzzy
+msgid "Default"
+msgstr "缺省"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:28
+#, fuzzy
+msgid "Domain part"
+msgstr "域"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:29
+#, fuzzy
+msgid "Local part"
+msgstr "位置"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:33
+msgid "Case insensitive"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:34
+msgid "Case sensitive"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:35
+msgid "Numeric"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:39
+msgid "is"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:40
+#, fuzzy
+msgid "reg-ex"
+msgstr "重置"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:41
+#, fuzzy
+msgid "contains"
+msgstr "动作"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:42
+#, fuzzy
+msgid "matches"
+msgstr "分支"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:43
+#, fuzzy
+msgid "count"
+msgstr "账户"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:44
+#, fuzzy
+msgid "value is"
+msgstr "有效"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:48
+msgid "less than"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:49
+msgid "less or equal"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:50
+#, fuzzy
+msgid "equals"
+msgstr "详细"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:51
+msgid "greater or equal"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:52
+#: personal/mail/sieve/class_sieveElement_If.inc:726
+#: personal/mail/sieve/class_sieveElement_If.inc:1059
+#, fuzzy
+msgid "greater than"
+msgstr "创建选项"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:53
+#, fuzzy
+msgid "not equal"
+msgstr "没有示例"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:102
+#, fuzzy
+msgid "Can't save empty tests."
+msgstr "无法保存文件 '%s'。"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:446
+#: personal/mail/sieve/class_sieveElement_If.inc:447
+msgid "empty"
+msgstr "空"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:493
+msgid "Nothing specified right now"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:595
+msgid "Invalid type of address part."
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:605
+msgid "Invalid match type given."
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:621
+msgid "Invalid operator given."
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:638
+#, fuzzy
+msgid "Please specify a valid operator."
+msgstr "请输入一个有效的 iSerial。"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:654
+msgid ""
+"Invalid character found in address attribute. Quotes are not allowed here."
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:669
+#, fuzzy
+msgid ""
+"Invalid character found in value attribute. Quotes are not allowed here."
+msgstr "应用程序名称中包含无效的字符。只允许 a-z 0-9。"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:727
+#: personal/mail/sieve/class_sieveElement_If.inc:1060
+msgid "lower than"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:729
+#: personal/mail/sieve/class_sieveElement_If.inc:1062
+#, fuzzy
+msgid "Megabyte"
+msgstr "创建"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:730
+#: personal/mail/sieve/class_sieveElement_If.inc:1063
+msgid "Kilobyte"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_If.inc:731
+#: personal/mail/sieve/class_sieveElement_If.inc:1064
+#, fuzzy
+msgid "Bytes"
+msgstr "是"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:745
+#, fuzzy
+msgid "Please select a valid match type in the list box below."
+msgstr "请选择一个有效的邮件服务器。"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:759
+#, fuzzy
+msgid "Only numeric values are allowed here."
+msgstr "数字字段只允许填数字。"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:769
+#, fuzzy
+msgid "No valid unit selected"
+msgstr "无有效证书加载"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:876
+#, fuzzy
+msgid "Empty"
+msgstr "空"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:915
+#: personal/mail/sieve/class_sieveManagement.inc:615
+msgid "False"
+msgstr "假"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:915
+#: personal/mail/sieve/class_sieveManagement.inc:614
+msgid "True"
+msgstr "真"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:1134
+#: personal/mail/sieve/class_sieveElement_If.inc:1164
+#, fuzzy
+msgid "Click here to add a new test"
+msgstr "点击这里登录"
+
+#: personal/mail/sieve/class_sieveElement_If.inc:1176
+#, fuzzy
+msgid "Unknown switch type"
+msgstr "未知 FAIstate %s"
+
+#: personal/mail/sieve/class_sieveElement_Reject.inc:21
+msgid "Invalid character found, quotes are not allowed in a reject message."
+msgstr ""
+
+#: personal/mail/sieve/class_sieveElement_Reject.inc:37
+msgid "Your reject text here"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveManagement.inc:85
+msgid "Information"
+msgstr "提示信息"
+
+#: personal/mail/sieve/class_sieveManagement.inc:86
+#, fuzzy
+msgid "Length"
+msgstr "街道"
+
+#: personal/mail/sieve/class_sieveManagement.inc:132
+#: personal/mail/sieve/class_sieveManagement.inc:262
+#, fuzzy
+msgid "Parse failed"
+msgstr "失败"
+
+#: personal/mail/sieve/class_sieveManagement.inc:136
+#: personal/mail/sieve/class_sieveManagement.inc:266
+#, fuzzy
+msgid "Parse successful"
+msgstr "导入成功"
+
+#: personal/mail/sieve/class_sieveManagement.inc:175
+#, php-format
+msgid ""
+"The specified mail server '%s' does not exist within the GOsa configuration."
+msgstr ""
+
+#: personal/mail/sieve/class_sieveManagement.inc:221
+msgid "No script name specified!"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveManagement.inc:226
+#, fuzzy
+msgid "Please use only lowercase script names!"
+msgstr "请提供一个有效的脚本名。"
+
+#: personal/mail/sieve/class_sieveManagement.inc:232
+#, fuzzy
+msgid "Please use only alphabetical characters in script names!"
+msgstr "数字字段只允许填数字。"
+
+#: personal/mail/sieve/class_sieveManagement.inc:238
+#, fuzzy
+msgid "Script name already in use!"
+msgstr "该名称已经被使用。"
+
+#: personal/mail/sieve/class_sieveManagement.inc:315
+#: personal/mail/sieve/class_sieveManagement.inc:325
+#: personal/mail/sieve/class_sieveManagement.inc:362
+#: personal/mail/sieve/class_sieveManagement.inc:366
+#: personal/mail/sieve/class_sieveManagement.inc:415
+#: personal/mail/sieve/class_sieveManagement.inc:419
+#: personal/mail/sieve/class_sieveManagement.inc:452
+#: personal/mail/sieve/class_sieveManagement.inc:538
+#: personal/mail/sieve/class_sieveManagement.inc:771
+#: personal/mail/sieve/class_sieveManagement.inc:1031
+#: personal/mail/sieve/class_sieveManagement.inc:1044
+#, fuzzy
+msgid "SIEVE error"
+msgstr "错误"
+
+#: personal/mail/sieve/class_sieveManagement.inc:315
+#: personal/mail/sieve/class_sieveManagement.inc:362
+#: personal/mail/sieve/class_sieveManagement.inc:1031
+#, fuzzy, php-format
+msgid "Cannot log into SIEVE server: %s"
+msgstr "无法登录到 SIEVE 服务器。服务器返回 '%s'。"
+
+#: personal/mail/sieve/class_sieveManagement.inc:366
+#, fuzzy, php-format
+msgid "Cannot remove SIEVE script: %s"
+msgstr "未知 FAIstate %s"
+
+#: personal/mail/sieve/class_sieveManagement.inc:412
+#, fuzzy
+msgid "Edited"
+msgstr "编辑"
+
+#: personal/mail/sieve/class_sieveManagement.inc:448
+#, fuzzy
+msgid "Uploaded script is empty!"
+msgstr "证书"
+
+#: personal/mail/sieve/class_sieveManagement.inc:450
+#, fuzzy
+msgid "Internal error"
+msgstr "终端服务器"
+
+#: personal/mail/sieve/class_sieveManagement.inc:450
+#, fuzzy, php-format
+msgid "Cannot access temporary file '%s'!"
+msgstr "无法创建文件 '%s'。"
+
+#: personal/mail/sieve/class_sieveManagement.inc:452
+#, fuzzy, php-format
+msgid "Cannot open temporary file '%s'!"
+msgstr "无法打开文件 '%s'。"
+
+#: personal/mail/sieve/class_sieveManagement.inc:538
+msgid "Cannot add new element!"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveManagement.inc:649
+msgid "This script is marked as active"
+msgstr ""
+
+#: personal/mail/sieve/class_sieveManagement.inc:657
+#, fuzzy
+msgid "Activate script"
+msgstr "最后脚本"
+
+#: personal/mail/sieve/class_sieveManagement.inc:673
+#, php-format
+msgid "Can't log into SIEVE server. Server says '%s'."
+msgstr "无法登录到 SIEVE 服务器。服务器返回 '%s'。"
+
+#: personal/mail/sieve/class_sieveManagement.inc:771
+#, fuzzy
+msgid "Cannot insert element at the requested position!"
+msgstr "选择放置部门的子树"
+
+#: personal/mail/sieve/class_sieveManagement.inc:1046
+#, fuzzy
+msgid "Failed to save sieve script"
+msgstr "定制过滤脚本"
+
+#: personal/mail/sieve/class_sieveElement_Comment.inc:21
+msgid "Your comment here"
+msgstr ""
+
+#: personal/mail/class_mailAccount.inc:69
+#, fuzzy
+msgid "Manage personal mail settings"
+msgstr "Posix 设置"
+
+#: personal/mail/class_mailAccount.inc:636
+#: personal/mail/class_mail-methods.inc:141
+#: personal/mail/class_mail-methods.inc:486
+#, fuzzy
+msgid "Configuration error"
+msgstr "配置文件"
+
+#: personal/mail/class_mailAccount.inc:636
+#, fuzzy, php-format
+msgid "No DESC tag in vacation template '%s'!"
+msgstr "假期文件没有 DESC 标签："
+
+#: personal/mail/class_mailAccount.inc:665
+#: personal/mail/class_mailAccount.inc:678
+#: personal/mail/class_mailAccount.inc:712
+#: personal/mail/class_mailAccount.inc:725
+#, fuzzy
+msgid "Permission error"
+msgstr "允许"
+
+#: personal/mail/class_mailAccount.inc:665
+#: personal/mail/class_mailAccount.inc:678
+#: personal/mail/class_mailAccount.inc:712
+#: personal/mail/class_mailAccount.inc:725
+#, fuzzy
+msgid "You have no permission to modify these addresses!"
+msgstr "您无权删除这个部门。"
+
+#: personal/mail/class_mailAccount.inc:759
+#: personal/mail/class_mailAccount.inc:762
+#, fuzzy
+msgid "unknown"
+msgstr "未知"
+
+#: personal/mail/class_mailAccount.inc:958
+#, fuzzy
+msgid "Mail error saving sieve settings"
+msgstr "定制过滤脚本"
+
+#: personal/mail/class_mailAccount.inc:1071
+#: personal/mail/class_mailAccount.inc:1079
+#: personal/mail/class_mailAccount.inc:1297
+#, fuzzy
+msgid "Mail reject size"
+msgstr "邮件大小"
+
+#: personal/mail/class_mailAccount.inc:1083
+#: personal/mail/class_mailAccount.inc:1304
+#, fuzzy
+msgid "Spam folder"
+msgstr "到目录"
+
+#: personal/mail/class_mailAccount.inc:1095
+#: personal/mail/class_mailAccount.inc:1316
+#, fuzzy
+msgid "to"
+msgstr "停止"
+
+#: personal/mail/class_mailAccount.inc:1106
+#: personal/mail/class_mailAccount.inc:1327
+#, fuzzy
+msgid "Vacation interval"
+msgstr "假期信息"
+
+#: personal/mail/class_mailAccount.inc:1453
+msgid "My account"
+msgstr "我的账号"
+
+#: personal/mail/class_mailAccount.inc:1468
+msgid ""
+"Remove mail boxes from the IMAP storage after they their user gets removed."
+msgstr ""
+
+#: personal/mail/class_mailAccount.inc:1478
+msgid ""
+"Comma separated list of folders to be automatically created on user creation."
+msgstr ""
+
+#: personal/mail/class_mailAccount.inc:1492
+#, fuzzy
+msgid "Add vacation information"
+msgstr "组织信息"
+
+#: personal/mail/class_mailAccount.inc:1495
+msgid "Use SPAM filter"
+msgstr ""
+
+#: personal/mail/class_mailAccount.inc:1496
+#, fuzzy
+msgid "SPAM level"
+msgstr "日志级别"
+
+#: personal/mail/class_mailAccount.inc:1497
+#, fuzzy
+msgid "SPAM mail box"
+msgstr "邮件大小"
+
+#: personal/mail/class_mailAccount.inc:1499
+#, fuzzy
+msgid "Sieve management"
+msgstr "系统管理"
+
+#: personal/mail/class_mailAccount.inc:1501
+#, fuzzy
+msgid "Reject due to mail size"
+msgstr "拒绝邮件大小超过"
+
+#: personal/mail/class_mailAccount.inc:1504
+#: personal/mail/class_mailAccount.inc:1509
+#, fuzzy
+msgid "Forwarding address"
+msgstr "主要地址"
+
+#: personal/mail/class_mailAccount.inc:1505
+#, fuzzy
+msgid "Local delivery"
+msgstr "最后传递"
+
+#: personal/mail/class_mailAccount.inc:1506
+#, fuzzy
+msgid "No delivery to own mailbox "
+msgstr "不要发送到本人邮箱"
+
+#: personal/mail/class_mailAccount.inc:1507
+#, fuzzy
+msgid "Mail alternative addresses"
+msgstr "替代地址"
+
+#: personal/mail/mailAddressSelect/selectMailAddress-filter.xml:22
+#, fuzzy
+msgid "Default filter"
+msgstr "参数"
+
+#: personal/mail/mailAddressSelect/selectMailAddress-list.tpl:12
+msgid "Base"
+msgstr "位置"
+
+#: personal/mail/mailAddressSelect/selectMailAddress-list.xml:10
+#, fuzzy
+msgid "Please select the desired entries"
+msgstr "请选择一个打印机或者取消。"
+
+#: personal/mail/mailAddressSelect/selectMailAddress-list.xml:14
+msgid "User"
+msgstr "用户"
+
+#: personal/mail/mailAddressSelect/selectMailAddress-list.xml:22
+msgid "Group"
+msgstr "组"
+
+#: personal/mail/mailAddressSelect/class_mailAddressSelect.inc:29
+#, fuzzy
+msgid "Mail address selection"
+msgstr "邮件地址"
+
+#: personal/mail/class_mail-methods.inc:142
+#, php-format
+msgid "The configured mail attribute '%s' is unsupported!"
+msgstr ""
+
+#: personal/mail/class_mail-methods.inc:487
+#, php-format
+msgid "Mail method '%s' is unknown!"
+msgstr ""
+
+#: personal/mail/class_mail-methods.inc:713
+#: personal/mail/class_mail-methods.inc:714
+#, fuzzy
+msgid "None"
+msgstr "无"
+
+#: personal/mail/class_mail-methods.inc:803
+msgid "Unknown"
+msgstr "未知"
+
+#: personal/mail/class_mail-methods.inc:805
+#, fuzzy
+msgid "Unlimited"
+msgstr "无限"
+
+#: personal/mail/copypaste.tpl:4
+#, fuzzy
+msgid "Address configuration"
+msgstr "下载配置"
+
+#, fuzzy
+#~ msgid "This does something"
+#~ msgstr "******"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "      Maximum threads"
+#~ msgstr "最大线程数"
+
+#~ msgid "Admin user"
+#~ msgstr "管理员"
+
+#~ msgid "Admin password"
+#~ msgstr "管理员口令"
+
+#~ msgid "Un hold"
+#~ msgstr "解除挂起"
+
+#, fuzzy
+#~ msgid "Unhold all messages"
+#~ msgstr "挂起所有邮件"
+
+#, fuzzy
+#~ msgid "Unhold message"
+#~ msgstr "挂起邮件"
+
+#, fuzzy
+#~ msgid "Fileinto"
+#~ msgstr "文件"
+
+#, fuzzy
+#~ msgid "emtpy"
+#~ msgstr "空"
+
+#, fuzzy
+#~ msgid "Reload"
+#~ msgstr "读"
+
+#~ msgid "Select addresses to add"
+#~ msgstr "选择地址添加"
+
+#~ msgid "Filters"
+#~ msgstr "过滤器"
+
+#~ msgid "Display addresses of department"
+#~ msgstr "显示部门地址"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "选择一个部门来做查询"
+
+#~ msgid "Display addresses matching"
+#~ msgstr "显示匹配地址"
+
+#~ msgid "Regular expression for matching addresses"
+#~ msgstr "匹配地址的正则表达式"
+
+#~ msgid "Display addresses of user"
+#~ msgstr "显示用户地址"
+
+#~ msgid "User name of which addresses are shown"
+#~ msgstr "显示属于该地址的用户"
+
+#~ msgid "Folder administrators"
+#~ msgstr "目录管理员"
+
+#~ msgid "Select a specific department"
+#~ msgstr "选择一个特定的部门"
+
+#~ msgid "Choose"
+#~ msgstr "选择"
+
+#~ msgid "Please enter a search string here."
+#~ msgstr "请在这里输入一个查询字符串。"
+
+#~ msgid "with status"
+#~ msgstr "具有状态"
+
+#~ msgid "delete"
+#~ msgstr "删除"
+
+#~ msgid "unhold"
+#~ msgstr "释放"
+
+#~ msgid "hold"
+#~ msgstr "挂起"
+
+#~ msgid "requeue"
+#~ msgstr "重入队列"
+
+#~ msgid "header"
+#~ msgstr "邮件头"
+
+#~ msgid "Up"
+#~ msgstr "上"
+
+#~ msgid "Move up"
+#~ msgstr "向上移动"
+
+#~ msgid "Down"
+#~ msgstr "关闭"
+
+#~ msgid "Move down"
+#~ msgstr "向下移动"
+
+#, fuzzy
+#~ msgid "Add new"
+#~ msgstr "添加用户"
+
+#, fuzzy
+#~ msgid "Remove this object"
+#~ msgstr "删除电话账号"
+
+#, fuzzy
+#~ msgid "Create new script"
+#~ msgstr "创建新用户"
+
+#, fuzzy
+#~ msgid "Script length"
+#~ msgstr "脚本路径"
+
+#, fuzzy
+#~ msgid "Remove script"
+#~ msgstr "导入脚本"
+
+#, fuzzy
+#~ msgid "Edit script"
+#~ msgstr "最后脚本"
+
+#, fuzzy
+#~ msgid "Show users"
+#~ msgstr "显示 samba 用户"
+
+#, fuzzy
+#~ msgid "Show groups"
+#~ msgstr "显示 samba 用户组"
+
+#~ msgid "Select department"
+#~ msgstr "选择类别"
+
+#, fuzzy
+#~ msgid "Cannot connect mail method: %s"
+#~ msgstr "无法打开文件 '%s'。"
+
+#, fuzzy
+#~ msgid "Cannot remove mailbox: %s."
+#~ msgstr "无法删除 IMAP 邮箱。服务器返回 '%s'。"
+
+#, fuzzy
+#~ msgid "Cannot update mailbox: %s."
+#~ msgstr "无法创建 IMAP 邮箱。服务器返回 '%s'。"
+
+#, fuzzy
+#~ msgid "Cannot write quota settings: %s."
+#~ msgstr "无法创建文件 '%s'。"
+
+#, fuzzy
+#~ msgid "Cannot get list of mailboxes! Error was: %s."
+#~ msgstr "无法删除 IMAP 邮箱。服务器返回 '%s'。"
+
+#, fuzzy
+#~ msgid "Cannot connect mail method! Error was: %s."
+#~ msgstr "无法打开文件 '%s'。"
+
+#, fuzzy
+#~ msgid "Cannot remove mailbox! Error was: %s."
+#~ msgstr "无法删除 IMAP 邮箱。服务器返回 '%s'。"
+
+#, fuzzy
+#~ msgid "Cannot update mailbox! Error was: %s."
+#~ msgstr "无法创建 IMAP 邮箱。服务器返回 '%s'。"
+
+#, fuzzy
+#~ msgid "Specify the mail server where the user will  be hosted on"
+#~ msgstr "描述该用户账号所要创建于的邮件服务器"
+
+#~ msgid "Select mail server to place user on"
+#~ msgstr "选择放置用户的邮件服务器"
+
+#~ msgid "not defined"
+#~ msgstr "未定义"
+
+#~ msgid "read"
+#~ msgstr "读"
+
+#~ msgid "post"
+#~ msgstr "贴"
+
+#~ msgid "external post"
+#~ msgstr "外部粘贴"
+
+#~ msgid "append"
+#~ msgstr "附加"
+
+#~ msgid "write"
+#~ msgstr "写"
+
+#, fuzzy
+#~ msgid "admin"
+#~ msgstr "管理员"
+
+#, fuzzy
+#~ msgid "mail"
+#~ msgstr "邮件"
+
+#, fuzzy
+#~ msgid "forward address"
+#~ msgstr "主要地址"
+
+#, fuzzy
+#~ msgid "Cannot forward to users own mail address!"
+#~ msgstr "您正在添加一个无效邮件地址"
+
+#, fuzzy
+#~ msgid "Alternate address"
+#~ msgstr "替代地址"
+
+#~ msgid "Add"
+#~ msgstr "添加"
+
+#, fuzzy
+#~ msgid "Unspecified"
+#~ msgstr "未定义"
+
+#, fuzzy
+#~ msgid "Mails"
+#~ msgstr "邮件"
+
+#, fuzzy
+#~ msgid "Tasks"
+#~ msgstr "任务"
+
+#, fuzzy
+#~ msgid "Journals"
+#~ msgstr "小时"
+
+#~ msgid "Contacts"
+#~ msgstr "联系"
+
+#, fuzzy
+#~ msgid "Notes"
+#~ msgstr "否"
+
+#, fuzzy
+#~ msgid "Inbox"
+#~ msgstr "索引"
+
+#, fuzzy
+#~ msgid "Drafts"
+#~ msgstr "日期"
+
+#, fuzzy
+#~ msgid "Sent items"
+#~ msgstr "系统状态"
+
+#, fuzzy
+#~ msgid "Junk mail"
+#~ msgstr "组名"
+
+#~ msgid ""
+#~ "Please choose valid permission settings. Default permission can't be "
+#~ "emtpy."
+#~ msgstr "请选择一个有效的权限设置。缺省权限不能为空。"
+
+#~ msgid "Mail options"
+#~ msgstr "邮件选项"
+
+#, fuzzy
+#~ msgid ""
+#~ "Mail settings cannot be removed while there are delegations configured!"
+#~ msgstr "这个账号不能被删除因为还有代理人配置。先删除这些代理人。"
+
+#, fuzzy
+#~ msgid "Waiting for kolab to remove mail properties..."
+#~ msgstr "等待 kolab 来删除邮件属性。"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please remove the mail settings first to allow kolab to call its remove "
+#~ "methods!"
+#~ msgstr "请先删除邮件账号，以允许 kolab 调用自己的删除方法。"
+
+#, fuzzy
+#~ msgid "You have no permission to submit a '%s' command!"
+#~ msgstr "您无权查看和编辑 ACL。"
+
+#, fuzzy
+#~ msgid "No mail servers specified!"
+#~ msgstr "没有定义日志主机！"
+
+#~ msgid "There is no mail method '%s' specified in your gosa.conf available."
+#~ msgstr "在您的 gosa.conf 中，没有邮件方法 '%s'。"
+
+#~ msgid ""
+#~ "Adding your one of your own addresses to the forwarders makes no sense."
+#~ msgstr "添加您自己的一个邮件地址到转发地址没有任何意义。"
+
+#, fuzzy
+#~ msgid "alternate address"
+#~ msgstr "替代地址"
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Cancel"
+#~ msgstr "取消"
+
+#~ msgid "Apply"
+#~ msgstr "应用"
+
+#~ msgid "This 'dn' has no valid mail extensions."
+#~ msgstr "这个 'dn' 没有有效邮件扩展。"
+
+#~ msgid ""
+#~ "This account has mail features enabled. You can disable them by clicking "
+#~ "below."
+#~ msgstr "这个账户邮件功能已启用。您可以点击下面的按钮禁用。"
+
+#~ msgid ""
+#~ "This account has mail features disabled. You can enable them by clicking "
+#~ "below."
+#~ msgstr "这个账户邮件功能已禁用。您可以点击下面的按钮来启用。"
+
+#, fuzzy
+#~ msgid "You're trying to add an invalid email address "
+#~ msgstr "您正在尝试向转发列表添加一条无效邮件地址。"
+
+#~ msgid ""
+#~ "You're trying to add an invalid email address to the list of alternate "
+#~ "addresses."
+#~ msgstr "您正在添加一个无效的邮件地址到替代地址列表。"
+
+#~ msgid "The address you're trying to add is already used by user"
+#~ msgstr "您正在添加的地址已经被用户使用"
+
+#~ msgid "The required field 'Primary address' is not set."
+#~ msgstr "要求的字段“主要地址”没有设置。"
+
+#~ msgid "Please enter a valid email addres in 'Primary address' field."
+#~ msgstr "请在“主要地址”栏输入一个有效邮件地址。"
+
+#~ msgid "The primary address you've entered is already in use."
+#~ msgstr "您输入的主要地址已经在使用了。"
+
+#~ msgid "Value in 'Quota size' is not valid."
+#~ msgstr "'Quota 大小' 的值无效。"
+
+#~ msgid "Please specify a vaild mail size for mails to be rejected."
+#~ msgstr "请指定一个将要被退回的邮件大小。"
+
+#, fuzzy
+#~ msgid "Please specify a numeric value for header size limit."
+#~ msgstr "请为重试提供一个数值。"
+
+#, fuzzy
+#~ msgid "Please specify a numeric value for mailbox size limit."
+#~ msgstr "请为过期时间提供一个数值。"
+
+#, fuzzy
+#~ msgid "Please specify a numeric value for message size limit."
+#~ msgstr "请为过期时间提供一个数值。"
+
+#~ msgid "Specified value is not a valid 'trusted network' value."
+#~ msgstr "给出的值不是一个有效的 '可信网络'。"
+
+#~ msgid "Required score must be a numeric value."
+#~ msgstr "需要的分值必须是数字。"
+
+#, fuzzy
+#~ msgid "Please specify a server identifier."
+#~ msgstr "请输入一个有效的 iSerial。"
+
+#, fuzzy
+#~ msgid "Please specify a connect url."
+#~ msgstr "请输入一个名字。"
+
+#, fuzzy
+#~ msgid "Please specify an admin user."
+#~ msgstr "请输入一个名字。"
+
+#, fuzzy
+#~ msgid "Please specify a password for the admin user."
+#~ msgstr "请给出一个有效电话号码。"
+
+#~ msgid "The imap connect string needs to be in the form '%s'."
+#~ msgstr "Imap 连接字符串格式应该为 '%s' 。"
+
+#~ msgid "The sieve port needs to be numeric."
+#~ msgstr "Sieve 端口应为数字。"
+
+#~ msgid "The specified value for '%s' must be a numeric value."
+#~ msgstr "指定 '%s' 的值必须是数字类型。"
+
+#, fuzzy
+#~ msgid "Please specify a valid value for '%s'."
+#~ msgstr "请为“URL”提供一个有效的值。"
+
+#~ msgid ""
+#~ "This group has mail features enabled. You can disable them by clicking "
+#~ "below."
+#~ msgstr "这个组启用了邮件功能。您可以点击下面按钮来禁用。"
+
+#~ msgid ""
+#~ "This group has mail features disabled. You can enable them by clicking "
+#~ "below."
+#~ msgstr "这个组禁用了邮件功能。您可以点击下面按钮来启用。"
+
+#~ msgid "Please enter a valid email address in 'Primary address' field."
+#~ msgstr "请在“主邮件地址”中输入一个有效的邮件地址。"
+
+#~ msgid "Back"
+#~ msgstr "返回"
+
+#, fuzzy
+#~ msgid "Mailqueue"
+#~ msgstr "邮件队列"
+
+#, fuzzy
+#~ msgid "Mailqueue addon"
+#~ msgstr "邮件队列"
+
+#~ msgid "This account has no mail extensions."
+#~ msgstr "这个账号没有邮件扩展。"
+
+#~ msgid "January"
+#~ msgstr "一月"
+
+#~ msgid "February"
+#~ msgstr "二月"
+
+#~ msgid "March"
+#~ msgstr "三月"
+
+#~ msgid "April"
+#~ msgstr "四月"
+
+#~ msgid "May"
+#~ msgstr "五月"
+
+#~ msgid "June"
+#~ msgstr "六月"
+
+#~ msgid "July"
+#~ msgstr "七月"
+
+#~ msgid "August"
+#~ msgstr "八月"
+
+#~ msgid "September"
+#~ msgstr "九月"
+
+#~ msgid "October"
+#~ msgstr "十月"
+
+#~ msgid "November"
+#~ msgstr "十一月"
+
+#~ msgid "December"
+#~ msgstr "十二月"
+
+#, fuzzy
+#~ msgid "Removing of user/mail account with dn '%s' failed."
+#~ msgstr "删除 dn 为 '%s' 的 user/kolab 账号失败。"
+
+#, fuzzy
+#~ msgid "Saving of user/mail account with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 的 user/kolab 账号为空。"
+
+#~ msgid ""
+#~ "There is no valid mailserver specified, please add one in the system "
+#~ "setup."
+#~ msgstr "没有指定有效的邮件服务器，请通过系统设置添加一个。"
+
+#~ msgid "You specified Spam settings, but there is no Folder specified."
+#~ msgstr "您定义了 Spam 设置，但是没有指定目录。"
+
+#~ msgid "Time interval to show vacation message is not valid."
+#~ msgstr "显示假期信息的时间间隔无效。"
+
+#~ msgid "Ok"
+#~ msgstr "好"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
+
+#, fuzzy
+#~ msgid "Saving of object group/mail with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 的 user/kolab 账号为空。"
+
+#, fuzzy
+#~ msgid "Removing of object group/mail with dn '%s' failed."
+#~ msgstr "删除 dn 为 '%s' 的 user/kolab 账号失败。"
+
+#~ msgid "Saving of server services/anti virus with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 服务器服务/反病毒失败。"
+
+#~ msgid "Saving of server services/spamassassin with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 服务器服务/spamassassin 失败。"
+
+#, fuzzy
+#~ msgid "Saving server services/mail with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 服务器服务/spamassassin 失败。"
+
+#, fuzzy
+#~ msgid "Removing of groups/mail with dn '%s' failed."
+#~ msgstr "删除 dn 为 '%s' 的 user/kolab 账号失败。"
+
+#, fuzzy
+#~ msgid "Saving of groups/mail with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 的 user/kolab 账号为空。"

@@ -1,0 +1,70 @@
+# translation of admin.po to
+# translation of systems.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-01-20 00:53+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:5
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:160
+msgid "PHPGroupware"
+msgstr "PHPGroupware"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:6
+#, fuzzy
+msgid "Manage PHPGroupware user settings"
+msgstr "Cuenta PHPGroupware"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:85
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:141
+msgid "LDAP error"
+msgstr "Error LDAP"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:161
+#, fuzzy
+msgid "PHPGroupware account settings"
+msgstr "Cuenta PHPGroupware"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:161
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Conectividad adicional"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:165
+msgid "My account"
+msgstr "Mi cuenta"
+
+#: personal/connectivity/phpgw/phpgw.tpl:5
+msgid "PHPGroupware account"
+msgstr "Cuenta PHPGroupware"
+
+#~ msgid "This does something"
+#~ msgstr "Esto hace algo"
+
+#~ msgid "PHP GW"
+#~ msgstr "PHP GW"
+
+#~ msgid "PHP GW account settings"
+#~ msgstr "Configuración de la cuenta PHP GW"
+
+#~ msgid "Removing of user/PHPgw account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la eliminación de la cuenta de usuario/PHPgw con dn '%s'."
+
+#~ msgid "Saving of user/PHPgw account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la eliminación de la cuenta de usuario/PHPgw con dn '%s'."
