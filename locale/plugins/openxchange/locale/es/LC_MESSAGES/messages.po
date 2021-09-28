@@ -1,0 +1,168 @@
+# translation of admin.po to
+# translation of systems.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-01-20 23:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:24
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:188
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:301
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:437
+msgid "Open-Xchange"
+msgstr "Open-Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:25
+#, fuzzy
+msgid "Manage Open-Xchange user settings"
+msgstr "Configuración de cuenta de Open-Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:188
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:192
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:289
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:301
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:305
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:427
+msgid "Error"
+msgstr "Error"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:192
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:305
+msgid "Open-Xchange database"
+msgstr "Base de datos Open-Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:196
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:309
+msgid "Configuration error"
+msgstr "Error de configuración"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:206
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:219
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:329
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:338
+msgid "LDAP error"
+msgstr "Error LDAP"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:289
+msgid "Open-Xchange account name"
+msgstr "Cuenta Open-Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:427
+msgid "Cannot save Open-Xchange account!"
+msgstr "¡No se puede guardar la cuenta Open-Xchange!"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:438
+msgid "Open-Xchange account settings"
+msgstr "Configuración de cuenta de Open-Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:438
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Conectividad adicional"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:442
+msgid "My account"
+msgstr "Mi cuenta"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:451
+msgid "OXAppointmentDays"
+msgstr "Días de recordatorio OX"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:452
+msgid "OXTaskDays"
+msgstr "Días para tareas OX"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:453
+msgid "OXTimeZone"
+msgstr "Zona de uso horario del usuario OX"
+
+#: personal/connectivity/openxchange/oxchange.tpl:2
+#: personal/connectivity/openxchange/oxchange.tpl:18
+msgid "Open-Xchange account"
+msgstr "Cuenta de Open-Xchange"
+
+#: personal/connectivity/openxchange/oxchange.tpl:2
+#, fuzzy
+msgid ""
+"disabled, no PostgreSQL support detected or the specified database can't be "
+"reached."
+msgstr ""
+"desactivado, No se ha detectado soporte Postgresql, o la base de datos "
+"especificada no puede ser alcanzada"
+
+#: personal/connectivity/openxchange/oxchange.tpl:21
+#: personal/connectivity/openxchange/oxchange.tpl:28
+#: personal/connectivity/openxchange/oxchange.tpl:63
+#, fuzzy
+msgid "Open-Xchange configuration"
+msgstr "Cuenta Open-Xchange"
+
+#: personal/connectivity/openxchange/oxchange.tpl:32
+msgid "Remember"
+msgstr "Recordar"
+
+#: personal/connectivity/openxchange/oxchange.tpl:36
+msgid "Appointment Days"
+msgstr "Días de recordatorio"
+
+#: personal/connectivity/openxchange/oxchange.tpl:42
+#: personal/connectivity/openxchange/oxchange.tpl:52
+msgid "days"
+msgstr "días"
+
+#: personal/connectivity/openxchange/oxchange.tpl:45
+msgid "Task Days"
+msgstr "Días para tareas"
+
+#: personal/connectivity/openxchange/oxchange.tpl:67
+msgid "User Information"
+msgstr "Información de Usuario"
+
+#: personal/connectivity/openxchange/oxchange.tpl:71
+msgid "User Timezone"
+msgstr "Zona de uso horario del usuario"
+
+#~ msgid "This does something"
+#~ msgstr "Esto hace algo"
+
+#~ msgid "Open-Xchange Account"
+#~ msgstr "Cuenta Open-Xchange"
+
+#, fuzzy
+#~ msgid "Cannot connect to %s database!"
+#~ msgstr "¡No puedo conectar al servidor de base de datos postgresql!."
+
+#, fuzzy
+#~ msgid "%s database configuration is missing!"
+#~ msgstr "Configuración de la base de datos de FAX"
+
+#~ msgid "Removing of user/oxchange addressbook account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la eliminación de la cuenta de libreta de direcciones de "
+#~ "usuario/open-xchange con dn '%s'."
+
+#~ msgid "Saving of user/oxchange account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la grabación de la cuenta de usuario/open-xchange con dn '%s'."
+
+#~ msgid "Creating of user/oxchange account with dn '%s' failed."
+#~ msgstr ""
+#~ "Ha fallado la creación de la cuenta de usuario/open-xchange con dn '%s'."
+
+#, fuzzy
+#~ msgid "Open-Xchange account name is invalid!"
+#~ msgstr "Activar la configuración de cuenta de Open-Xchange"

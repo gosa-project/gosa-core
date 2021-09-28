@@ -1,0 +1,133 @@
+# translation of messages.po to
+# Benoit Mortier <benoit.mortier@opensides.be>, 2005, 2006, 2007, 2008, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-11-26 23:37+0100\n"
+"Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
+"Language-Team:  <fr@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:24
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:188
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:301
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:437
+msgid "Open-Xchange"
+msgstr ""
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:25
+#, fuzzy
+msgid "Manage Open-Xchange user settings"
+msgstr "Paramètres du compte Open Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:188
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:192
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:289
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:301
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:305
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:427
+msgid "Error"
+msgstr "Erreur"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:192
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:305
+msgid "Open-Xchange database"
+msgstr "Base de données Open Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:196
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:309
+msgid "Configuration error"
+msgstr "Erreur de configuration"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:206
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:219
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:329
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:338
+msgid "LDAP error"
+msgstr "Erreur LDAP"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:289
+msgid "Open-Xchange account name"
+msgstr "Nom du compte Open Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:427
+msgid "Cannot save Open-Xchange account!"
+msgstr "Impossible de sauver le compte Open Xchange !"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:438
+msgid "Open-Xchange account settings"
+msgstr "Paramètres du compte Open Xchange"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:438
+msgid "Connectivity add-on"
+msgstr "Connectivité"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:442
+msgid "My account"
+msgstr "Mon Compte"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:451
+msgid "OXAppointmentDays"
+msgstr "Rendez vous"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:452
+msgid "OXTaskDays"
+msgstr "Tâches"
+
+#: personal/connectivity/openxchange/class_oxchangeAccount.inc:453
+msgid "OXTimeZone"
+msgstr "Fuseau Horaire de l'utilisateur"
+
+#: personal/connectivity/openxchange/oxchange.tpl:2
+#: personal/connectivity/openxchange/oxchange.tpl:18
+msgid "Open-Xchange account"
+msgstr "Compte Open Xchange"
+
+#: personal/connectivity/openxchange/oxchange.tpl:2
+msgid ""
+"disabled, no PostgreSQL support detected or the specified database can't be "
+"reached."
+msgstr ""
+"désactivé, le support pour Postgresql est manquant. Ou la base de données "
+"spécifiée ne peut pas être contactée."
+
+#: personal/connectivity/openxchange/oxchange.tpl:21
+#: personal/connectivity/openxchange/oxchange.tpl:28
+#: personal/connectivity/openxchange/oxchange.tpl:63
+msgid "Open-Xchange configuration"
+msgstr "Configuration Open-Xchange"
+
+#: personal/connectivity/openxchange/oxchange.tpl:32
+msgid "Remember"
+msgstr "Se souvenir"
+
+#: personal/connectivity/openxchange/oxchange.tpl:36
+msgid "Appointment Days"
+msgstr "Rendez vous"
+
+#: personal/connectivity/openxchange/oxchange.tpl:42
+#: personal/connectivity/openxchange/oxchange.tpl:52
+msgid "days"
+msgstr "jours"
+
+#: personal/connectivity/openxchange/oxchange.tpl:45
+msgid "Task Days"
+msgstr "Tâches"
+
+#: personal/connectivity/openxchange/oxchange.tpl:67
+msgid "User Information"
+msgstr "Information Utilisateur"
+
+#: personal/connectivity/openxchange/oxchange.tpl:71
+msgid "User Timezone"
+msgstr "Zone Horaire de l'utilisateur"
+
+#~ msgid "This does something"
+#~ msgstr "Ceci fait quelque chose"
