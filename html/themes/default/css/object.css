@@ -456,6 +456,34 @@
 }
 
 
+/* Connectivity Settings */
+
+.connectivity-wrapper label span h3 {
+    margin: 0;
+    line-height: 25px;
+}
+
+.connectivity-wrapper .inline-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 35px;
+}
+
+.connectivity-wrapper .inline-wrapper .input-field {
+    margin-top: 0;
+    margin-right: 20px;
+}
+
+.connectivity-wrapper .webdav-wrapper label,
+.connectivity-wrapper .intranet-wrapper label {
+    margin-bottom: 0;
+}
+
+
 /* Multiple Select */
 
 .input-field .select-wrapper.multiple-select label {
@@ -758,11 +786,6 @@
 .object-info .kolab-wrapper .multi-check,
 .object-info .squid-wrapper .multi-check {
     display: flex;
-}
-
-.object-info .intranet-wrapper {
-    margin-top: 1rem;
-    padding-top: 1rem;
 }
 
 .object-info .check-input-wrapper {
