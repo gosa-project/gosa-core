@@ -1,5 +1,6 @@
 <body>
     {$php_errors}
+    {$msg_dialogs}
     <nav class="accent">
         <div class="nav-wrapper">
             <a href="main.php?global_check=1" class="brand-logo" alt="GOsa²">
@@ -30,7 +31,6 @@
         </div>
     </nav>
     
-    {$msg_dialogs}
     <form action='main.php{$plug}' id='mainform' name='mainform' method='post' enctype='multipart/form-data'>
         <div class="row">
 
@@ -39,30 +39,30 @@
                 <div class="card first-level">
                     <div class="card-content first-level">
                         {$contents}
-                        </div>
                     </div>
                 </div>
+            </div>
             {else}
-                <!-- Breadcrumb -->
-                {$breadcrumb}
-                <div class="content-area">
-                    <!-- Menü -->
-                    <div class="menu">
-                        <ul class="collapsible">
-                            {$menu}
-                        </ul>
-                    </div>
+            <!-- Breadcrumb -->
+            {$breadcrumb}
+            <div class="content-area">
+                <!-- Menü -->
+                <div class="menu">
+                    <ul class="collapsible">
+                        {$menu}
+                    </ul>
+                </div>
 
 
-                    <!-- Plugin Content-->
-                    <div class="content{if $noMenuMode}-noMenu{/if}">
-                        <div class="card first-level">
-                            <div class="card-content first-level">
-                                {$contents}
-                            </div>
+                <!-- Plugin Content-->
+                <div class="content{if $noMenuMode}-noMenu{/if}">
+                    <div class="card first-level">
+                        <div class="card-content first-level">
+                            {$contents}
                         </div>
                     </div>
                 </div>
+            </div>
             {/if}
         </div>
 
