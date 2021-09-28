@@ -449,6 +449,13 @@
 }
 
 
+/* Scalix Settings */
+
+.scalix-wrapper label+.input-field {
+    margin-top: 25px;
+}
+
+
 /* Multiple Select */
 
 .input-field .select-wrapper.multiple-select label {
