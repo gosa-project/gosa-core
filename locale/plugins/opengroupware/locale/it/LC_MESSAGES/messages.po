@@ -1,0 +1,116 @@
+# translation of messages.po to Italian
+# Copyright (c) 2005 B-Open Solutions srl - http://www.bopen.it/
+# Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
+# Alessandro Amici <a.amici@bopen.it>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2005-11-18 15:26+0100\n"
+"Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
+"Language-Team: Italian\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: personal/connectivity/opengroupware/opengw.tpl:8
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:391
+#, fuzzy
+msgid "Location team"
+msgstr "Nome locazione"
+
+#: personal/connectivity/opengroupware/opengw.tpl:21
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:392
+#, fuzzy
+msgid "Template user"
+msgstr "Template"
+
+#: personal/connectivity/opengroupware/opengw.tpl:33
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:393
+#, fuzzy
+msgid "Locked"
+msgstr "Lista degli utenti"
+
+#: personal/connectivity/opengroupware/opengw.tpl:49
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:394
+#, fuzzy
+msgid "Teams"
+msgstr "Cellulare"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:6
+#, fuzzy
+msgid "Opengroupware account"
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:7
+#, fuzzy
+msgid "Manage Opengroupware user settings"
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:169
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:175
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:183
+#, fuzzy
+msgid "Configuration error"
+msgstr "File di configurazione"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:175
+#, fuzzy
+msgid "Open Groupware database"
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:183
+#, fuzzy
+msgid "Open Groupware"
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:342
+#, fuzzy
+msgid "OpenGroupware.org account settings"
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:342
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Connettività"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:346
+msgid "My account"
+msgstr "Identità"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:355
+#, fuzzy
+msgid "Server name used for OpenGroupware.org connections."
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:364
+#, fuzzy
+msgid "Password used OpenGroupware.org connections."
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:373
+#, fuzzy
+msgid "Username used for OpenGroupware.org connections."
+msgstr "Estenzioni PHPGroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:382
+msgid "Name of the database used for OpenGroupware.org connections."
+msgstr ""
+
+#~ msgid "This does something"
+#~ msgstr "Questo fa qualcosa"
+
+#, fuzzy
+#~ msgid "Opengroupware"
+#~ msgstr "Estenzioni PHPGroupware"
+
+#, fuzzy
+#~ msgid "%s database configuration is missing!"
+#~ msgstr "Scarica il file di  configurazione"
+
+#, fuzzy
+#~ msgid "Cannot connect to %s database!"
+#~ msgstr "Impossibile connettersi al server del database!"
