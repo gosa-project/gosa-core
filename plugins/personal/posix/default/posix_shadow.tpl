@@ -1,4 +1,4 @@
-<h3 class="card-title">{t}Account settings{/t}</h3>
+<h3>{t}Account settings{/t}</h3>
 
 <div class="account-settings">
   <!-- must_change_password  -->
