@@ -1,0 +1,101 @@
+# translation of messages.po to
+# Benoit Mortier <benoit.mortier@opensides.be>, 2005, 2006, 2007, 2008, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-11-26 23:40+0100\n"
+"Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
+"Language-Team:  <fr@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
+
+#: personal/connectivity/opengroupware/opengw.tpl:8
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:391
+msgid "Location team"
+msgstr "équipe de localisation"
+
+#: personal/connectivity/opengroupware/opengw.tpl:21
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:392
+msgid "Template user"
+msgstr "Modèle d'utilisateur"
+
+#: personal/connectivity/opengroupware/opengw.tpl:33
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:393
+msgid "Locked"
+msgstr "Verrouillé"
+
+#: personal/connectivity/opengroupware/opengw.tpl:49
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:394
+msgid "Teams"
+msgstr "Equipes"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:6
+msgid "Opengroupware account"
+msgstr "Compte Opengroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:7
+#, fuzzy
+msgid "Manage Opengroupware user settings"
+msgstr "Préférences du compte Opengroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:169
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:175
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:183
+msgid "Configuration error"
+msgstr "Erreur de configuration"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:175
+msgid "Open Groupware database"
+msgstr "Base de données Opengroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:183
+msgid "Open Groupware"
+msgstr ""
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:342
+msgid "OpenGroupware.org account settings"
+msgstr "Préférences du compte Opengroupware"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:342
+msgid "Connectivity add-on"
+msgstr "Connectivité"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:346
+msgid "My account"
+msgstr "Mon Compte"
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:355
+#, fuzzy
+msgid "Server name used for OpenGroupware.org connections."
+msgstr "Le nom d'utilisateur à utiliser pour les connexions OpenGroupware.org."
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:364
+#, fuzzy
+msgid "Password used OpenGroupware.org connections."
+msgstr "Le mot de passe à utiliser pour les connections OpenGroupware.org."
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:373
+#, fuzzy
+msgid "Username used for OpenGroupware.org connections."
+msgstr "Le nom d'utilisateur à utiliser pour les connexions OpenGroupware.org."
+
+#: personal/connectivity/opengroupware/class_opengwAccount.inc:382
+#, fuzzy
+msgid "Name of the database used for OpenGroupware.org connections."
+msgstr ""
+"La nom de la base de données à utiliser pour les connexions à OpenGroupware."
+"org."
+
+#~ msgid "This does something"
+#~ msgstr "Ceci fait quelque chose"
+
+#~ msgid "The server/hostname to use for OpenGroupware.org connections."
+#~ msgstr ""
+#~ "Le serveur / nom de l'hôte à utiliser pour les connexions OpenGroupware."
+#~ "org."
