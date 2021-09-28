@@ -193,6 +193,7 @@ $class_mapping= array(
                 "MyAccountTabs" => "plugins/personal/myaccount/MyAccountTabs.inc",
                 "MyAccount" => "plugins/personal/myaccount/class_MyAccount.inc",
                 "user" => "plugins/personal/generic/class_user.inc",
+                "phpgwAccount" => "plugins/personal/connectivity/phpgw/class_phpgwAccount.inc",
                 "webdavAccount" => "plugins/personal/connectivity/webdav/class_webdavAccount.inc",
                 "phpscheduleitAccount" => "plugins/personal/connectivity/phpscheduleit/class_phpscheduleitAccount.inc",
                 "intranetAccount" => "plugins/personal/connectivity/class_intranetAccount.inc",

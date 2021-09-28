@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GOsa plugins - phpgw\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-03-12 18:03-0300\n"
+"Last-Translator: Marcos Amorim <marcosmamorim@gmail.com>\n"
+"Language-Team: Marcos Amorim <marcosmamorim@gmail.com> Clever de Oliveira "
+"<clever@dri.cefetmg.br>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:5
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:160
+msgid "PHPGroupware"
+msgstr "PHPGroupware"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:6
+#, fuzzy
+msgid "Manage PHPGroupware user settings"
+msgstr "Conta PHPGroupware"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:85
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:141
+msgid "LDAP error"
+msgstr "Erro LDAP"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:161
+#, fuzzy
+msgid "PHPGroupware account settings"
+msgstr "Conta PHPGroupware"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:161
+#, fuzzy
+msgid "Connectivity add-on"
+msgstr "Addon conectividade"
+
+#: personal/connectivity/phpgw/class_phpgwAccount.inc:165
+msgid "My account"
+msgstr "Minha conta"
+
+#: personal/connectivity/phpgw/phpgw.tpl:5
+msgid "PHPGroupware account"
+msgstr "Conta PHPGroupware"
+
+#~ msgid "This does something"
+#~ msgstr "Isto faz algo"
+
+#~ msgid "PHP GW"
+#~ msgstr "PHP GW"
+
+#~ msgid "PHP GW account settings"
+#~ msgstr "Configurações da conta PHP GW"
