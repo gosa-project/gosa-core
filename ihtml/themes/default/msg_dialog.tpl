@@ -46,7 +46,7 @@
 	<div id='e_layer{$i_ID}' class="modal" style='top:200px;left:200px;'>
 {/if}
 		<div id="e_layerTitle{$i_ID}" class="modal-content">
-			<div class="row">
+			<div class="attention-head">
 				{if $i_Type == $smarty.const.ERROR_DIALOG}
 					{image path='<i class="material-icons left">error</i>'}
 				{elseif $i_Type == $smarty.const.WARNING_DIALOG}
@@ -58,7 +58,8 @@
 
 				<h2>{$s_Title}</h2>
 			</div>
-			<div class="row">
+
+			<div class="attention-content">
 				<p>
 					{$s_Message}
 				</p>
@@ -87,7 +88,7 @@
 	<div id='e_layer{$i_ID}' class="modal" style='top:200px;left:200px;'>
 {/if}
 		<div id="e_layerTitle{$i_ID}" class="modal-content attention-elem">
-			<div class="row">
+			<div class="attention-head">
 				{if $i_Type == $smarty.const.ERROR_DIALOG}
 					{image path='<i class="material-icons left">error</i>'}
 				{elseif $i_Type == $smarty.const.WARNING_DIALOG}
@@ -99,7 +100,8 @@
 
 				<h2>{$s_Title}</h2>
 			</div>
-			<div class="row">
+
+			<div class="attention-content">
 				<p>
 					{$s_Message}
 				</p>
