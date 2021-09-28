@@ -392,6 +392,52 @@
     margin-bottom: 20px;
 }
 
+.user-image .image-action,
+.ssh-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.ssh-action button {
+    margin-left: 20px;
+}
+
+.ssh-action .file-field {
+    margin: 0;
+    width: 100%;
+}
+
+.ssh-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.ssh-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.ssh-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+
+/* Samba Settings */
+
+.samba-wrapper label+.input-field {
+    margin-top: 25px;
+}
+
+.samba-wrapper .samba-timeout+.samba-devices label {
+    padding-top: 3px;
+    margin-bottom: 11px;
+}
+
 
 /* Mail Settings */
 
@@ -692,40 +738,15 @@
     margin-left: 10px;
 }
 
-.object-info .dropdown-content li > span > label {
+.object-info .dropdown-content li>span>label {
     display: contents;
     top: 1px;
     left: 0;
     height: 18px;
 }
-    
-@media only screen and (max-width: 1200px) {
-    .object-info .content-wrapper .user-image {
-        margin-bottom: 20px;
-    }
-    .object-info .acl-reference .acl-viewer .card {
-        margin-bottom: 10px;
-    }
-    .object-info .posix-settings,
-    .object-info .mail-settings,
-    .object-info .group-mail-wrapper {
-        padding: 0 0.75rem;
-    }
-    .object-info .dyngroup-wrapper .row.valign-wrapper {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-    .object-info .dyngroup-wrapper .row.valign-wrapper .delete-btn {
-        text-align: end;
-    }
-    .object-info .dyngroup-wrapper .row+.divider {
-        display: block;
-        margin-left: 0.75rem;
-        margin-right: 0.75rem;
-    }
-}
+
+
+/* Plugins */
 
 .object-info .kolab-wrapper .multi-check,
 .object-info .squid-wrapper .multi-check {
@@ -749,15 +770,6 @@
 .object-info .check-input-wrapper .input-field {
     margin: 0;
     flex: 1 1 auto;
-}
-
-.object-info .headline-button-wrapper {
-    display: flex;
-    align-items: baseline;
-}
-
-.object-info .headline-button-wrapper h3 {
-    margin-right: 15px;
 }
 
 .object-info .pwreset-wrapper .example-wrapper pre {
@@ -794,24 +806,44 @@
     margin: 0;
 }
 
-.object-info .sudo-options-wrapper .input-field.table-content{
+.object-info .sudo-options-wrapper .input-field.table-content {
     margin: 0;
     max-width: 10rem;
 }
 
-.object-info .sudo-options-wrapper table{
+.object-info .sudo-options-wrapper table {
     border: .5px solid grey;
 }
 
-.object-info .sudo-options-wrapper table td, th{
+.object-info .sudo-options-wrapper table td,
+th {
     padding: 0 15px;
 }
 
-.object-info .ssh-plug-wrapper {
-    display: flex;
-    align-items: baseline;
-}
-
-.object-info .ssh-plug-wrapper h3 {
-    margin-right: 15px;
+@media only screen and (max-width: 1200px) {
+    .object-info .content-wrapper .user-image {
+        margin-bottom: 20px;
+    }
+    .object-info .acl-reference .acl-viewer .card {
+        margin-bottom: 10px;
+    }
+    .object-info .posix-settings,
+    .object-info .mail-settings,
+    .object-info .group-mail-wrapper {
+        padding: 0 0.75rem;
+    }
+    .object-info .dyngroup-wrapper .row.valign-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .object-info .dyngroup-wrapper .row.valign-wrapper .delete-btn {
+        text-align: end;
+    }
+    .object-info .dyngroup-wrapper .row+.divider {
+        display: block;
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
 }

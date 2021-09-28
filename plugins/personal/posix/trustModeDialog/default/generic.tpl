@@ -1,4 +1,4 @@
-<h3 class="card-title">{t}System trust{/t}</h3>
+<h3>{t}System trust{/t}</h3>
 
 {if !$multiple_support}
     <div class="input-field">
