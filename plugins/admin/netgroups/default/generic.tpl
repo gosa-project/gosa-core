@@ -3,20 +3,20 @@
 {/if}
 
 <div class="netgroup-wrapper">
+    <h2>{t}NIS Netgroup{/t}</h2>
+
     <div class="row">
         <div class="col s12 xl6">
-            <h2>{t}NIS Netgroup{/t}</h2>
-
             <div class="input-field">
                 {if $multiple_support}
                 <input type='text' id="dummy1" name="dummy1" value="{t}Multiple edit{/t}" disabled>
                 {else}
-                
+
                 {render acl=$cnACL}
                 <input type='text' id="cn" name="cn" value="{$cn}" title="{t}Name of the NIS Netgroup{/t}">
                 {/render}
                 {/if}
-                        
+
                 <label for="cn">{t}NIS Netgroup name{/t}{$must}</label>
             </div>
 
@@ -38,8 +38,8 @@
 
         <div class="col s12 xl6">
             {render acl=$memberCnACL}
-                {$memberList}
                 <label for="members"><b>{t}NIS Netgroup members{/t}</b></label>
+                {$memberList}
             {/render}
             <button class="btn-small" type=submit name="edit_membership">{msgPool type=addButton}</button>
         </div>
