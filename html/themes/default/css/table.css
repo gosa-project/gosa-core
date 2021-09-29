@@ -149,7 +149,8 @@ td a {
     color: #000;
 }
 
-#generic-table .action-column {
+#generic-table .action-column,
+#tree-table .property-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -187,26 +188,6 @@ td a {
 #generic-table .action-wrapper:last-child,
 #sudo-table .action-wrapper:last-child {
     margin-right: 0;
-}
-
-#tree-table .property-wrapper {
-    position: relative;
-    float: left;
-    margin-right: 10px;
-}
-
-#tree-table .property-wrapper input {
-    padding: 0 9px;
-    margin: auto;
-    height: 18px;
-    line-height: 18px;
-    vertical-align: top;
-}
-
-#tree-table .property-wrapper i {
-    width: 18px;
-    left: 0px;
-    margin: auto;
 }
 
 #tree-table td.last-column,
