@@ -225,7 +225,7 @@ class filter
                 $content .= "<div class='search-filter'>".$this->getTextfield('search_filter', set_post($this->value), $this->searches[$this->search]).'</div>'.
                     "&nbsp;<button class='search-filter' type='submit' title='"._('Search')."'>".image('images/find.png').'</button></td></tr></table>';
                 break;
-            
+
             default:
                 $s = $this->searches[$this->search];
 
@@ -233,8 +233,8 @@ class filter
 
                 $content .= "   <div class='search-field'>
                                     ".$this->getTextfield('search_filter', set_post($this->value), $s)."
-                                    <button class='btn primary' type='submit' title='"._('Search')."'>
-                                        <i class='material-icons white-text md-18'>search</i>
+                                    <button class='btn' type='submit' title='"._('Search')."'>
+                                        <i class='material-icons md-18'>search</i>
                                     </button>
                                 </div>";
                 break;
@@ -489,9 +489,9 @@ class filter
                 $script = '<script type="text/javascript" language="JavaScript">var menu2; menu2= new Menu("filter-root", "menu2", configMenu)</script>';
                 break;
             default:
-                $result = " <a class='dropdown-filter btn primary' data-target='filter-dropdown'>
-                                <i class='material-icons right'>arrow_drop_down</i>
+                $result = " <a class='dropdown-filter' data-target='filter-dropdown'>
                                 <i class='material-icons'>filter_alt</i>
+                                <i class='material-icons'>arrow_drop_down</i>
                             </a>";
 
                 $separator = "class='divider' tabindex='-1'";
