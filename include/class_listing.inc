@@ -545,11 +545,11 @@ class listing
                 /** pagination function call
                  * $pagination = $this->setPaginator($prow, $page, $selectedPage);
                  */
-        
+
                 $result .= "  <div class='section scrollspy table-wrapper card-content-scroll' id='d_scrollbody'>
                                 <table id='tree-table' class='highlight'>";
                 $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
-        
+
                 // Build list header
                 $result .= '  <thead>
                                 <tr>';
@@ -571,17 +571,17 @@ class listing
                 }
                 $result .= '      </tr>
                             </thead>';
-        
+
                 // Build list body
                 $result .= '  <tbody>';
-        
+
                 // No results? Just take an empty colspanned row
                 if (count($this->entries) + count($this->departments) == 0) {
                     $result .= "  <tr>
                                     <td colspan='".$this->numColumns."'></td>
                                 </tr>";
                 }
-        
+
                 // Draw department browser if configured and we're not in sub mode
                 $this->useSpan = false;
                 if ($this->departmentBrowser && $this->filter->scope != 'sub') {
@@ -589,12 +589,12 @@ class listing
                     $departmentIterator = new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
                     foreach ($departmentIterator as $row => $entry) {
                         $rowResult = '<tr>';
-        
+
                         // Render multi select if needed
                         if ($this->multiSelect || $this->singleSelect) {
                             $rowResult .= '<td></td>';
                         }
-        
+
                         // Render defined department columns, fill the rest with some stuff
                         $rest = $this->numColumns - 1;
                         foreach ($this->xmlData['table']['department'] as $index => $conf) {
@@ -606,14 +606,14 @@ class listing
                             $rowResult .= "<td colspan='$colspan'>".$this->renderCell($conf['value'], $entry, $row).'</td>';
                             $rest -= $colspan;
                         }
-        
+
                         // Fill remaining cols with nothing
                         $last = $this->numColumns - $rest;
                         for ($i = 0; $i < $rest; ++$i) {
                             $rowResult .= '<td>&nbsp;</td>';
                         }
                         $rowResult .= '</tr>';
-        
+
                         // Apply label to objecttype icon?
                         if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
                             $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
@@ -622,13 +622,13 @@ class listing
                         $result .= $rowResult;
                     }
                 }
-        
+
                 // Fill with contents, sort as configured
                 $ui = get_userinfo();
-        
+
                 foreach ($this->entries as $row => $entry) {
                     $trow = '';
-        
+
                     // Render multi select if needed
                     if ($this->multiSelect) {
                         $trow .= "    <td>
@@ -638,7 +638,7 @@ class listing
                                             </label>
                                         </td>";
                     }
-        
+
                     if ($this->singleSelect) {
                         $trow .= "    <td>
                                             <label>
@@ -647,7 +647,7 @@ class listing
                                             </label>
                                         </td>";
                     }
-        
+
                     $xmlLenprint = count($this->xmlData['table']['column']) - 1;
                     foreach ($this->xmlData['table']['column'] as $index => $conf) {
                         $renderedCell = $this->renderCell($conf['value'], $entry, $row);
@@ -656,7 +656,7 @@ class listing
                         } else {
                             $trow .= '<td>'.$renderedCell.'</td>';
                         }
-        
+
                         // Save rendered column
                         $sort = preg_replace('/.*>([^<]+)<.*$/', '$1', $renderedCell);
                         $sort = preg_replace('/&nbsp;/', '', $sort);
@@ -665,11 +665,11 @@ class listing
                         }
                         $this->entries[$row]["_sort$index"] = $sort;
                     }
-        
+
                     // Save rendered entry
                     $this->entries[$row]['_rendered'] = $trow;
                 }
-        
+
                 // Complete list by sorting entries for _sort$index and appending them to the output
                 $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
                 foreach ($entryIterator as $row => $entry) {
@@ -683,7 +683,7 @@ class listing
                         $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
                         $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
                     }
-        
+
                     // Apply custom class to row?
                     if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
                         $result .= "<tr class='".$matches[1]."'>\n";
@@ -692,15 +692,15 @@ class listing
                         $result .= '<tr>';
                         $result .= $entry['_rendered'];
                     }
-        
+
                     $result .= '</tr>';
                 }
-        
+
                 // Close list body
                 $result .= '         </tbody>
                                 </table>
                             </div>';
-        
+
                 // Add the footer if requested
                 if ($this->showFooter) {
                     $result .= '<div class="table-summary">';
@@ -713,10 +713,10 @@ class listing
                             $result .= image("<i class='material-icons'>".$objectType['image'].' </i>', null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['objectClass']].'&nbsp;&nbsp;';
                         }
                     }
-        
+
                     $result .= '</div>';
                 }
-        
+
                 // Close list
                 $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
                 break;
@@ -1393,7 +1393,7 @@ class listing
                     case 'classic':
                         $result .= image('images/empty.png');
                         break;
-                    
+
                     default:
                         $result .= image('');
                         break;
@@ -1411,7 +1411,7 @@ class listing
                             case 'classic':
                                 $result .= image('images/empty.png');
                                 break;
-                            
+
                             default:
                                 $result .= image('');
                                 break;
@@ -1424,7 +1424,7 @@ class listing
                             case 'classic':
                                 $result .= image('images/empty.png');
                                 break;
-                            
+
                             default:
                                 $result .= image('');
                                 break;
@@ -1445,7 +1445,7 @@ class listing
                             case 'classic':
                                 $result .= image('images/empty.png');
                                 break;
-                            
+
                             default:
                                 $result .= image('');
                                 break;
@@ -1458,7 +1458,7 @@ class listing
                             case 'classic':
                                 $result .= image('images/empty.png');
                                 break;
-                            
+
                             default:
                                 $result .= image('');
                                 break;
@@ -1471,7 +1471,7 @@ class listing
                             case 'classic':
                                 $result .= image('images/empty.png');
                                 break;
-                            
+
                             default:
                                 $result .= image('');
                                 break;
@@ -1489,7 +1489,7 @@ class listing
                     case 'classic':
                         $result .= image($image, 'listing_'.$action['name']."_$row", $label);
                         break;
-                    
+
                     default:
                         $result .= image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label);
                         break;
@@ -1619,7 +1619,7 @@ class listing
                 $result['RELOAD'] = image('images/lists/reload.png', 'REFRESH', _('Reload list'));
 
                 return $result;
-            
+
             default:
                 /* Draw root button */
                 if ($enableRoot) {
@@ -1758,7 +1758,7 @@ class listing
                 $result .= $this->recurseActions($actions, $level);
 
                 return "<div id='pulldown'>".$result.'</li></ul></div>';
-            
+
             default:
                 $result = " <input type='hidden' name='act' id='act' value=''>
                             <div style='display:none'>
@@ -1778,7 +1778,7 @@ class listing
                 // Load shortcut
                 $actions = &$this->xmlData['actionmenu']['action'];
 
-                $result .= "  <a class='dropdown-menu btn primary' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
+                $result .= "  <a class='dropdown-menu' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
                             <ul class='dropdown-content' id='$level'>";
 
                 $result .= $this->recurseActions($actions, $level).'</ul></>';
@@ -1794,11 +1794,11 @@ class listing
                 static $level = 2;
                 $result = "<ul class='level$level'>";
                 break;
-            
+
             default:
                 break;
         }
-            
+
         $separator = '';
 
         foreach ($actions as $action) {
@@ -1825,7 +1825,7 @@ class listing
                     case 'classic':
                         $img = image($action['image']).'&nbsp;';
                         break;
-                    
+
                     default:
                         $img = image("<i class='material-icons'>".$action['image']."</i>");
                         break;
@@ -1837,7 +1837,7 @@ class listing
                     case 'classic':
                         $separator = "style='border-top:1px solid #AAA'";
                         break;
-                    
+
                     default:
                         $separator = "class='divider' tabiindex='-1'";
                         break;
@@ -1892,7 +1892,7 @@ class listing
 
                     $separator = '';
                     break;
-                
+
                 default:
                     // count entries
                     $count = $this->countValidEntries($action);
@@ -2203,7 +2203,7 @@ class listing
                     case 'classic':
                         $result .= image('images/lists/cut.png', "listing_cut_$row", _('Cut this entry'));
                         break;
-                    
+
                     default:
                         $result .= image("<i class='material-icons>content_cut</i>'", "listing_cut_$row", _('Cut this entry'));
                         break;
@@ -2213,7 +2213,7 @@ class listing
                     case 'classic':
                         $result .= image('images/empty.png', "listing_cut_$row", _('Cut this entry'));
                         break;
-                    
+
                     default:
                         $result .= image('', "listing_cut_$row", _('Cut this entry'));
                         break;
@@ -2228,7 +2228,7 @@ class listing
                     case 'classic':
                         $result .= image('images/lists/copy.png', "listing_copy_$row", _('Copy this entry'));
                         break;
-                    
+
                     default:
                         $result .= image("<i class='material-icons>content_copy</i>", "listing_copy_$row", _('Copy this entry'));
                         break;
@@ -2238,7 +2238,7 @@ class listing
                     case 'classic':
                         $result .= image('images/empty.png');
                         break;
-                    
+
                     default:
                         $result .= image('');
                         break;
@@ -2297,7 +2297,7 @@ class listing
                 // Finalize list
                 $result .= '</ul></li>';
                 break;
-            
+
             default:
                 // Presets
                 $result = '';
@@ -2346,7 +2346,7 @@ class listing
                         case 'classic':
                             $result .= image('images/lists/restore.png', "listing_restore_$row", _('Restore snapshot'));
                             break;
-                        
+
                         default:
                             $result .= image("<i class='material-icons'>restore</i>", "listing_restore_$row", _('Restore snapshot'));
                             break;
@@ -2362,7 +2362,7 @@ class listing
                     case 'classic':
                         $result .= image('images/snapshot.png', "listing_snapshot_$row", _('Create new snapshot for this object'));
                         break;
-                    
+
                     default:
                         $result .= image("<i class='material-icons'>save</i>", "listing_snapshot_$row", _('Create new snapshot for this object'));
                         break;
@@ -2372,7 +2372,7 @@ class listing
                     case 'classic':
                         $result .= image('images/empty.png');
                         break;
-                    
+
                     default:
                         $result .= image("<i class='material-icons'>save</i>");
                         break;
