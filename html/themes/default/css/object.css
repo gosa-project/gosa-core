@@ -795,6 +795,13 @@
 }
 
 
+/* NIS Netgroups */
+
+.object-info .netgroup-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+
 /* Plugins */
 
 .object-info .kolab-wrapper .multi-check,
