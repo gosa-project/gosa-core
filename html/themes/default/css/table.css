@@ -6,7 +6,9 @@
 #tree-table th,
 #tree-table td,
 #generic-table th,
-#generic-table td {
+#generic-table td,
+#sudo-table th,
+#sudo-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -23,7 +25,8 @@ td a {
 }
 
 #tree-table tr,
-#generic-table tr {
+#generic-table tr,
+#sudo-table tr {
     height: 38px;
     max-height: 38px;
 }
@@ -45,19 +48,22 @@ td a {
 }
 
 #tree-table i.material-icons,
-#generic-table i.material-icons {
+#generic-table i.material-icons,
+#sudo-table i.material-icons {
     font-size: 18px;
 }
 
 #generic-table input.input-btn,
-#tree-table input.input-btn {
+#tree-table input.input-btn,
+#sudo-table input.input-btn {
     z-index: 1;
     position: relative;
     width: 18px;
 }
 
 #generic-table i.input-icons,
-#tree-table i.input-icons {
+#tree-table i.input-icons,
+#sudo-table i.input-icons {
     position: absolute;
     left: 16px;
     margin-top: 8px;
@@ -80,15 +86,18 @@ td a {
     margin-left: 0;
 }
 
-#tree-table select:focus {
+#tree-table select:focus,
+#sudo-table select:focus {
     outline: none;
 }
 
-#tree-table .select-wrapper {
+#tree-table .select-wrapper,
+#sudo-table .select-wrapper {
     width: fit-content;
 }
 
-#tree-table .select-wrapper input {
+#tree-table .select-wrapper input,
+#sudo-table .select-wrapper input {
     width: auto;
     max-width: 200px;
     min-height: 27px;
@@ -98,25 +107,29 @@ td a {
     margin: 0;
 }
 
-#tree-table .select-wrapper ul li {
+#tree-table .select-wrapper ul li,
+#sudo-table .select-wrapper ul li {
     padding: 5px 10px;
     min-height: 31px;
     max-height: 31px;
 }
 
-#tree-table .input-field {
+#tree-table .input-field,
+#sudo-table .input-field {
     margin-top: 0;
 }
 
 #tree-table .input-field input,
-#tree-table .valign-wrapper input {
+#tree-table .valign-wrapper input,
+#sudo-table .input-field input {
     margin-bottom: 0;
     min-height: 20px;
     height: 20px!important;
 }
 
 #tree-table label input,
-#generic-table label input {
+#generic-table label input,
+#sudo-table label input {
     margin-left: 1rem;
     width: 18px;
     height: 18px;
@@ -145,7 +158,8 @@ td a {
 }
 
 #tree-table .action-wrapper,
-#generic-table .action-wrapper {
+#generic-table .action-wrapper,
+#sudo-table .action-wrapper {
     position: relative;
     height: 18px;
     font-size: 18px;
@@ -153,7 +167,8 @@ td a {
 }
 
 #tree-table .action-wrapper input,
-#generic-table .action-wrapper input {
+#generic-table .action-wrapper input,
+#sudo-table .action-wrapper input {
     width: 18px;
     height: 18px;
     padding: 0;
@@ -161,14 +176,16 @@ td a {
 }
 
 #tree-table .action-wrapper i,
-#generic-table .action-wrapper i {
+#generic-table .action-wrapper i,
+#sudo-table .action-wrapper i {
     position: absolute;
     top: 0;
     left: 0;
     margin: 0;
 }
 
-#generic-table .action-wrapper:last-child {
+#generic-table .action-wrapper:last-child,
+#sudo-table .action-wrapper:last-child {
     margin-right: 0;
 }
 
@@ -193,7 +210,8 @@ td a {
 }
 
 #tree-table td.last-column,
-#generic-table td.last-column {
+#generic-table td.last-column,
+#sudo-table td.last-column {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -202,7 +220,8 @@ td a {
     align-items: center;
 }
 
-#tree-table [type="checkbox"]+span:not(.lever) {
+#tree-table [type="checkbox"]+span:not(.lever),
+#sudo-table [type="checkbox"]+span:not(.lever) {
     padding-left: 0;
 }
 
