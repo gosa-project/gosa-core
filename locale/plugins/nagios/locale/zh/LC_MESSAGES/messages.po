@@ -1,0 +1,227 @@
+# translation of messages.po to Chinese Simplified
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+# Jiang Xin <worldhello.net@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2007-06-03 12:27+0800\n"
+"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Language-Team: Chinese Simplified <zh@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: personal/nagios/class_nagiosAccount.inc:18
+#: personal/nagios/class_nagiosAccount.inc:105
+#: personal/nagios/class_nagiosAccount.inc:114
+#: personal/nagios/class_nagiosAccount.inc:116
+#: personal/nagios/class_nagiosAccount.inc:272
+msgid "Nagios"
+msgstr "Nagios"
+
+#: personal/nagios/class_nagiosAccount.inc:19
+#, fuzzy
+msgid "Manage personal Nagios settings"
+msgstr "Posix 设置"
+
+#: personal/nagios/class_nagiosAccount.inc:172
+#: personal/nagios/class_nagiosAccount.inc:257
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP 错误:"
+
+#: personal/nagios/class_nagiosAccount.inc:193
+#: personal/nagios/class_nagiosAccount.inc:287 personal/nagios/nagios.tpl:10
+msgid "Alias"
+msgstr "别名"
+
+#: personal/nagios/class_nagiosAccount.inc:196
+#: personal/nagios/class_nagiosAccount.inc:200
+#: personal/nagios/class_nagiosAccount.inc:204
+msgid "Mail"
+msgstr "邮件"
+
+#: personal/nagios/class_nagiosAccount.inc:273
+#, fuzzy
+msgid "Nagios account settings"
+msgstr "Nagios 设置"
+
+#: personal/nagios/class_nagiosAccount.inc:277
+msgid "My account"
+msgstr "我的账号"
+
+#: personal/nagios/class_nagiosAccount.inc:288 personal/nagios/nagios.tpl:19
+msgid "Mail address"
+msgstr "邮件地址"
+
+#: personal/nagios/class_nagiosAccount.inc:289 personal/nagios/nagios.tpl:29
+msgid "Host notification period"
+msgstr "主机通知周期"
+
+#: personal/nagios/class_nagiosAccount.inc:290 personal/nagios/nagios.tpl:42
+msgid "Service notification period"
+msgstr "服务通知周期"
+
+#: personal/nagios/class_nagiosAccount.inc:291 personal/nagios/nagios.tpl:68
+msgid "Host notification options"
+msgstr "主机通知选项"
+
+#: personal/nagios/class_nagiosAccount.inc:292 personal/nagios/nagios.tpl:55
+msgid "Service notification options"
+msgstr "服务通知选项"
+
+#: personal/nagios/class_nagiosAccount.inc:293
+#, fuzzy
+msgid "Pager number"
+msgstr "电话号码"
+
+#: personal/nagios/class_nagiosAccount.inc:295 personal/nagios/nagios.tpl:92
+msgid "Service notification commands"
+msgstr "服务通知命令"
+
+#: personal/nagios/class_nagiosAccount.inc:296 personal/nagios/nagios.tpl:102
+msgid "Host notification commands"
+msgstr "主机通知命令"
+
+#: personal/nagios/class_nagiosAccount.inc:297
+#, fuzzy
+msgid "View system informations"
+msgstr "查看系统信息"
+
+#: personal/nagios/class_nagiosAccount.inc:298
+#, fuzzy
+msgid "View configuration information"
+msgstr "查看配置信息"
+
+#: personal/nagios/class_nagiosAccount.inc:299
+#, fuzzy
+msgid "Trigger system commands"
+msgstr "触发系统命令"
+
+#: personal/nagios/class_nagiosAccount.inc:300
+#, fuzzy
+msgid "View all services"
+msgstr "查看所有服务"
+
+#: personal/nagios/class_nagiosAccount.inc:301
+#, fuzzy
+msgid "View all hosts"
+msgstr "查看所有主机"
+
+#: personal/nagios/class_nagiosAccount.inc:302
+#, fuzzy
+msgid "Trigger all service commands"
+msgstr "触发所有服务命令"
+
+#: personal/nagios/class_nagiosAccount.inc:303
+#, fuzzy
+msgid "Trigger all host commands"
+msgstr "触发所有主机命令"
+
+#: personal/nagios/nagios.tpl:1 personal/nagios/nagios.tpl:7
+#: personal/nagios/nagios.tpl:8
+msgid "Nagios Account"
+msgstr "Nagios 账号"
+
+#: personal/nagios/nagios.tpl:81
+msgid "Pager"
+msgstr "呼机"
+
+#: personal/nagios/nagios.tpl:120
+#, fuzzy
+msgid "Nagios authentication"
+msgstr "Nagios 鉴权"
+
+#: personal/nagios/nagios.tpl:121
+#, fuzzy
+msgid "Nagios account"
+msgstr "Nagios 账号"
+
+#: personal/nagios/nagios.tpl:125
+msgid "view system informations"
+msgstr "查看系统信息"
+
+#: personal/nagios/nagios.tpl:134
+msgid "view configuration information"
+msgstr "查看配置信息"
+
+#: personal/nagios/nagios.tpl:143
+msgid "trigger system commands"
+msgstr "触发系统命令"
+
+#: personal/nagios/nagios.tpl:152
+msgid "view all services"
+msgstr "查看所有服务"
+
+#: personal/nagios/nagios.tpl:161
+msgid "view all hosts"
+msgstr "查看所有主机"
+
+#: personal/nagios/nagios.tpl:170
+msgid "trigger all service commands"
+msgstr "触发所有服务命令"
+
+#: personal/nagios/nagios.tpl:179
+msgid "trigger all host commands"
+msgstr "触发所有主机命令"
+
+#, fuzzy
+#~ msgid "This does something"
+#~ msgstr "******"
+
+#~ msgid "Nagios settings"
+#~ msgstr "Nagios 设置"
+
+#~ msgid "This account has no nagios extensions."
+#~ msgstr "这个账户尚未包含 nagios 扩展。 "
+
+#~ msgid "Remove nagios account"
+#~ msgstr "删除 nagios 账户"
+
+#~ msgid ""
+#~ "This account has nagios features enabled. You can disable them by "
+#~ "clicking below."
+#~ msgstr "该账号已经启用 nagios 功能。您可以点击下面按钮禁用。"
+
+#~ msgid "Create nagios account"
+#~ msgstr "创建 nagios 账户"
+
+#~ msgid ""
+#~ "This account has nagios features disabled. You can enable them by "
+#~ "clicking below."
+#~ msgstr "这个账户 nagios 功能已禁用。您可以点击下面的按钮来启用。"
+
+#, fuzzy
+#~ msgid "Saving of user/nagios account with dn '%s' failed."
+#~ msgstr "保存 dn 为 '%s' 的 user/kolab 账号为空。"
+
+#~ msgid "The required field 'NagiosAlias' is not set."
+#~ msgstr "必须的字段 'NagiosAlias' 没有设置。"
+
+#~ msgid "The required field 'NagiosMail' is not set."
+#~ msgstr "需要的字段 'NagiosMail' 没有设置。"
+
+#~ msgid "Please enter a valid email address in 'NagiosMail' field."
+#~ msgstr "请在 'NagiosMail' 字段输入一个有效的邮件地址。"
+
+#, fuzzy
+#~ msgid "Removing of user/nagios account with dn '%s' failed."
+#~ msgstr "删除 dn 为 '%s' 的 user/kolab 账号失败。"
+
+#~ msgid "Ok"
+#~ msgstr "好"
+
+#~ msgid "Cancel"
+#~ msgstr "取消"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"

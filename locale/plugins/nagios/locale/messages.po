@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: personal/nagios/class_nagiosAccount.inc:18
+#: personal/nagios/class_nagiosAccount.inc:105
+#: personal/nagios/class_nagiosAccount.inc:114
+#: personal/nagios/class_nagiosAccount.inc:116
+#: personal/nagios/class_nagiosAccount.inc:272
+msgid "Nagios"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:19
+msgid "Manage personal Nagios settings"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:172
+#: personal/nagios/class_nagiosAccount.inc:257
+msgid "LDAP error"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:193
+#: personal/nagios/class_nagiosAccount.inc:287 personal/nagios/nagios.tpl:10
+msgid "Alias"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:196
+#: personal/nagios/class_nagiosAccount.inc:200
+#: personal/nagios/class_nagiosAccount.inc:204
+msgid "Mail"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:273
+msgid "Nagios account settings"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:277
+msgid "My account"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:288 personal/nagios/nagios.tpl:19
+msgid "Mail address"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:289 personal/nagios/nagios.tpl:29
+msgid "Host notification period"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:290 personal/nagios/nagios.tpl:42
+msgid "Service notification period"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:291 personal/nagios/nagios.tpl:68
+msgid "Host notification options"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:292 personal/nagios/nagios.tpl:55
+msgid "Service notification options"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:293
+msgid "Pager number"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:295 personal/nagios/nagios.tpl:92
+msgid "Service notification commands"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:296 personal/nagios/nagios.tpl:102
+msgid "Host notification commands"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:297
+msgid "View system informations"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:298
+msgid "View configuration information"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:299
+msgid "Trigger system commands"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:300
+msgid "View all services"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:301
+msgid "View all hosts"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:302
+msgid "Trigger all service commands"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:303
+msgid "Trigger all host commands"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:1 personal/nagios/nagios.tpl:7
+#: personal/nagios/nagios.tpl:8
+msgid "Nagios Account"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:81
+msgid "Pager"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:120
+msgid "Nagios authentication"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:121
+msgid "Nagios account"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:125
+msgid "view system informations"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:134
+msgid "view configuration information"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:143
+msgid "trigger system commands"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:152
+msgid "view all services"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:161
+msgid "view all hosts"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:170
+msgid "trigger all service commands"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:179
+msgid "trigger all host commands"
+msgstr ""
