@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GOsa plugins - netatalk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2010-03-11 20:34-0300\n"
+"Last-Translator: Marcos Amorim <marcosmamorim@gmail.com>\n"
+"Language-Team:  Marcos Amorim <marcosmamorim@gmail.com> Clever de Oliveira "
+"<clever@dri.cefetmg.br> <marcosmamorim@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: personal/netatalk/class_netatalk.inc:36
+#: personal/netatalk/class_netatalk.inc:169
+#: personal/netatalk/class_netatalk.inc:177
+#: personal/netatalk/class_netatalk.inc:178
+#: personal/netatalk/class_netatalk.inc:183
+#: personal/netatalk/class_netatalk.inc:184
+#: personal/netatalk/class_netatalk.inc:186
+#: personal/netatalk/class_netatalk.inc:187
+#: personal/netatalk/class_netatalk.inc:189
+#: personal/netatalk/class_netatalk.inc:190
+#: personal/netatalk/class_netatalk.inc:364
+msgid "Netatalk"
+msgstr "Netatalk"
+
+#: personal/netatalk/class_netatalk.inc:37
+#, fuzzy
+msgid "Manage Netatalk account"
+msgstr "Gerenciar conta netatalk"
+
+#: personal/netatalk/class_netatalk.inc:184
+msgid "POSIX"
+msgstr "POSIX"
+
+#: personal/netatalk/class_netatalk.inc:187
+#, fuzzy
+msgid "Netatalk or NFS share"
+msgstr "compartilhamento netatalk ou NFS"
+
+#: personal/netatalk/class_netatalk.inc:220
+#: personal/netatalk/class_netatalk.inc:376 personal/netatalk/netatalk.tpl:4
+msgid "Share"
+msgstr "Compartilhamento"
+
+#: personal/netatalk/class_netatalk.inc:284
+#: personal/netatalk/class_netatalk.inc:349
+msgid "LDAP error"
+msgstr "Erro LDAP"
+
+#: personal/netatalk/class_netatalk.inc:368
+msgid "My account"
+msgstr "Minha conta"
+
+#: personal/netatalk/class_netatalk.inc:375
+msgid "User home path"
+msgstr "Diretório pessoal"
+
+#: personal/netatalk/netatalk.tpl:1
+#, fuzzy
+msgid "Netatalk configuration"
+msgstr "Configuração do PHP"
+
+#: personal/netatalk/netatalk.tpl:16
+msgid "Path"
+msgstr "Caminho"
+
+#~ msgid "netatalk"
+#~ msgstr "Netatalk"
+
+#~ msgid "Netatalk settings"
+#~ msgstr "Configurações Netatalk"

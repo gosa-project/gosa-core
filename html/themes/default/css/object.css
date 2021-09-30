@@ -820,6 +820,73 @@ th {
     padding: 0 15px;
 }
 
+.object-info .application-wrapper .input-field.add .file-field,
+.object-info .mime-wrapper .input-field.add .file-field {
+    flex-grow: 1;
+}
+
+.object-info .application-wrapper .input-field.add img,
+.object-info .mime-wrapper .input-field.add img {
+    width: 24px;
+    margin: auto 15px;
+}
+
+.object-info .application-wrapper .input-field.textarea {
+    height: unset;
+}
+
+.object-info .application-wrapper .input-field.textarea .materialize-textarea {
+    min-height: 5.5rem;
+    max-height: 5.5rem;
+}
+
+.object-info .application-wrapper .action-wrapper,
+.object-info .app-wrapper .input-field.add .action-wrapper,
+.object-info .app-wrapper .action-wrapper {
+    position: relative;
+}
+
+.object-info .application-wrapper .action-wrapper .input-btn,
+.object-info .app-wrapper .input-field.add .action-wrapper .input-btn,
+.object-info .app-wrapper .action-wrapper .input-btn {
+    width: 24px;
+    padding: unset;
+    line-height: 24px;
+    height: 24px;
+}
+
+.object-info .application-wrapper .action-wrapper .input-icons,
+.object-info .app-wrapper .input-field.add .action-wrapper .input-icons,
+.object-info .app-wrapper .action-wrapper .input-icons {
+    position: absolute;
+    left: 0px;
+}
+
+.object-info .parameter-wrapper table tbody tr td {
+    padding: 0 15px;
+}
+
+.object-info .align-bottom {
+    display: flex;
+}
+
+.object-info .align-bottom .col {
+    align-self: flex-end;
+}
+
+.object-info .app-wrapper table td .inline-icons {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.object-info .app-wrapper table td .seperator {
+    width: 200px; 
+    height: 3px;
+    margin-top: 12px;
+    background-color: #BBBBBB;
+}
+
 @media only screen and (max-width: 1200px) {
     .object-info .content-wrapper .user-image {
         margin-bottom: 20px;
