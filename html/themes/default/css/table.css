@@ -6,7 +6,11 @@
 #tree-table th,
 #tree-table td,
 #generic-table th,
-#generic-table td {
+#generic-table td,
+#sudo-table th,
+#sudo-table td,
+#managepw-table th,
+#managepw-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -23,7 +27,9 @@ td a {
 }
 
 #tree-table tr,
-#generic-table tr {
+#generic-table tr,
+#sudo-table tr,
+#managepw-table tr {
     height: 38px;
     max-height: 38px;
 }
@@ -45,19 +51,25 @@ td a {
 }
 
 #tree-table i.material-icons,
-#generic-table i.material-icons {
+#generic-table i.material-icons,
+#sudo-table i.material-icons,
+#managepw-table i.material-icons {
     font-size: 18px;
 }
 
 #generic-table input.input-btn,
-#tree-table input.input-btn {
+#tree-table input.input-btn,
+#sudo-table input.input-btn,
+#managepw-table input.input-btn {
     z-index: 1;
     position: relative;
     width: 18px;
 }
 
 #generic-table i.input-icons,
-#tree-table i.input-icons {
+#tree-table i.input-icons,
+#sudo-table i.input-icons,
+#managepw-table i.input-icons {
     position: absolute;
     left: 16px;
     margin-top: 8px;
@@ -80,16 +92,23 @@ td a {
     margin-left: 0;
 }
 
-#tree-table select:focus {
+#tree-table select:focus,
+#sudo-table select:focus,
+#managepw-table select:focus {
     outline: none;
 }
 
-#tree-table .select-wrapper {
+#tree-table .select-wrapper,
+#sudo-table .select-wrapper,
+#managepw-table .select-wrapper {
     width: fit-content;
 }
 
-#tree-table .select-wrapper input {
+#tree-table .select-wrapper input,
+#sudo-table .select-wrapper input,
+#managepw-table .select-wrapper input {
     width: auto;
+    width: 200px;
     max-width: 200px;
     min-height: 27px;
     height: 27px!important;
@@ -98,25 +117,33 @@ td a {
     margin: 0;
 }
 
-#tree-table .select-wrapper ul li {
+#tree-table .select-wrapper ul li,
+#sudo-table .select-wrapper ul li,
+#managepw-table .select-wrapper ul li {
     padding: 5px 10px;
     min-height: 31px;
     max-height: 31px;
 }
 
-#tree-table .input-field {
+#tree-table .input-field,
+#sudo-table .input-field,
+#managepw-table .input-field {
     margin-top: 0;
 }
 
 #tree-table .input-field input,
-#tree-table .valign-wrapper input {
+#tree-table .valign-wrapper input,
+#sudo-table .input-field input,
+#managepw-table .input-field input {
     margin-bottom: 0;
     min-height: 20px;
     height: 20px!important;
 }
 
 #tree-table label input,
-#generic-table label input {
+#generic-table label input,
+#sudo-table label input,
+#managepw-table label input {
     margin-left: 1rem;
     width: 18px;
     height: 18px;
@@ -129,6 +156,11 @@ td a {
     height: 18px;
 }
 
+#tree-table .valign-wrapper label .action-wrapper {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
 #tree-table .valign-wrapper label i.input-icons {
     position: absolute;
     right: 0;
@@ -136,7 +168,8 @@ td a {
     color: #000;
 }
 
-#generic-table .action-column {
+#generic-table .action-column,
+#tree-table .property-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -145,7 +178,9 @@ td a {
 }
 
 #tree-table .action-wrapper,
-#generic-table .action-wrapper {
+#generic-table .action-wrapper,
+#sudo-table .action-wrapper,
+#managepw-table .action-wrapper {
     position: relative;
     height: 18px;
     font-size: 18px;
@@ -153,7 +188,9 @@ td a {
 }
 
 #tree-table .action-wrapper input,
-#generic-table .action-wrapper input {
+#generic-table .action-wrapper input,
+#sudo-table .action-wrapper input,
+#managepw-table .action-wrapper input {
     width: 18px;
     height: 18px;
     padding: 0;
@@ -161,39 +198,25 @@ td a {
 }
 
 #tree-table .action-wrapper i,
-#generic-table .action-wrapper i {
+#generic-table .action-wrapper i,
+#sudo-table .action-wrapper i,
+#managepw-table .action-wrapper i {
     position: absolute;
     top: 0;
     left: 0;
     margin: 0;
 }
 
-#generic-table .action-wrapper:last-child {
+#generic-table .action-wrapper:last-child,
+#sudo-table .action-wrapper:last-child,
+#managepw-table .action-wrapper:last-child {
     margin-right: 0;
 }
 
-#tree-table .property-wrapper {
-    position: relative;
-    float: left;
-    margin-right: 10px;
-}
-
-#tree-table .property-wrapper input {
-    padding: 0 9px;
-    margin: auto;
-    height: 18px;
-    line-height: 18px;
-    vertical-align: top;
-}
-
-#tree-table .property-wrapper i {
-    width: 18px;
-    left: 0px;
-    margin: auto;
-}
-
 #tree-table td.last-column,
-#generic-table td.last-column {
+#generic-table td.last-column,
+#sudo-table td.last-column,
+#managepw-table td.last-column {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -202,8 +225,22 @@ td a {
     align-items: center;
 }
 
-#tree-table [type="checkbox"]+span:not(.lever) {
+#tree-table [type="checkbox"]+span:not(.lever),
+#sudo-table [type="checkbox"]+span:not(.lever),
+#managepw-table [type="checkbox"]+span:not(.lever) {
     padding-left: 0;
+}
+
+#managepw-table .input-field {
+    height: unset;
+}
+
+#managepw-table .input-field input {
+    width: 200px;
+}
+
+#managepw-table label {
+    margin-bottom: 0;
 }
 
 .table-summary i {

@@ -8,6 +8,18 @@
     color: #842029;
 }
 
+.modal .modal-content.attention-elem .attention-head {
+    display: inline;
+}
+
+.modal .modal-content.attention-elem .attention-head h2 {
+    margin-bottom: 0;
+}
+
+.modal .modal-content.attention-elem .attention-content p:last-child {
+    margin-bottom: 0;
+}
+
 .modal .modal-footer {
     height: auto;
     padding: 24px;

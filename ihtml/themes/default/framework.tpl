@@ -30,7 +30,7 @@
             </ul>
         </div>
     </nav>
-    
+
     <form action='main.php{$plug}' id='mainform' name='mainform' method='post' enctype='multipart/form-data'>
         <div class="row">
 
@@ -45,14 +45,15 @@
             {else}
             <!-- Breadcrumb -->
             {$breadcrumb}
-            <div class="content-area">
+            <div class="content-area {if $noMenuMode}noMenu{/if}">
                 <!-- Menü -->
+                {if !$noMenuMode}
                 <div class="menu">
                     <ul class="collapsible">
                         {$menu}
                     </ul>
                 </div>
-
+                {/if}
 
                 <!-- Plugin Content-->
                 <div class="content{if $noMenuMode}-noMenu{/if}">

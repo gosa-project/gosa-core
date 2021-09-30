@@ -27,6 +27,7 @@
     -webkit-transition: border 0.5s ease-out;
     -o-transition: border 0.5s ease-out;
     transition: border 0.5s ease-out;
+    line-height: 38px;
 }
 
 .object-info .card-tabs .tabs li a.active,
@@ -449,6 +450,41 @@
 }
 
 
+/* Scalix Settings */
+
+.scalix-wrapper label+.input-field {
+    margin-top: 25px;
+}
+
+
+/* Connectivity Settings */
+
+.connectivity-wrapper label span h3 {
+    margin: 0;
+    line-height: 25px;
+}
+
+.connectivity-wrapper .inline-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 35px;
+}
+
+.connectivity-wrapper .inline-wrapper .input-field {
+    margin-top: 0;
+    margin-right: 20px;
+}
+
+.connectivity-wrapper .webdav-wrapper label,
+.connectivity-wrapper .intranet-wrapper label {
+    margin-bottom: 0;
+}
+
+
 /* Multiple Select */
 
 .input-field .select-wrapper.multiple-select label {
@@ -746,16 +782,56 @@
 }
 
 
+/* Sudo-Role */
+
+.object-info .sudo-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table {
+    border: 1px solid lightgrey;
+    min-height: 10rem;
+    padding: 1rem;
+    border-radius: .25rem;
+}
+
+
+/* NIS Netgroups */
+
+.object-info .netgroup-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+
+/* Password management */
+
+.object-info [type="radio"]+span:not(.lever) {
+    font-size: 12px;
+    color: #000000;
+}
+
+.object-info .pwreset-wrapper label+.input-field {
+    margin-top: 25px;
+}
+
+.object-info .pwreset-wrapper .example-wrapper {
+    height: 54px;
+}
+
+.object-info .pwreset-wrapper .example-wrapper pre {
+    border: .5px solid grey;
+    border-radius: 5px;
+    max-width: 50%;
+    padding: 3px 15px;
+    margin: 10px 0 0 0;
+}
+
+
 /* Plugins */
 
 .object-info .kolab-wrapper .multi-check,
 .object-info .squid-wrapper .multi-check {
     display: flex;
-}
-
-.object-info .intranet-wrapper {
-    margin-top: 1rem;
-    padding-top: 1rem;
 }
 
 .object-info .check-input-wrapper {
@@ -770,54 +846,6 @@
 .object-info .check-input-wrapper .input-field {
     margin: 0;
     flex: 1 1 auto;
-}
-
-.object-info .pwreset-wrapper .example-wrapper pre {
-    border: .5px solid grey;
-    border-radius: 5px;
-    max-width: 50%;
-    padding: 5px 15px;
-}
-
-.object-info .pwreset-wrapper table input[type="text"]:not(.browser-default) {
-    font-size: 12px;
-    height: unset;
-    max-width: 40%;
-}
-
-.object-info .sudo-options-wrapper .action-wrapper {
-    position: relative;
-    height: 18px;
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-.object-info .sudo-options-wrapper .action-wrapper input {
-    width: 18px;
-    height: 18px;
-    padding: 0;
-    vertical-align: top;
-}
-
-.object-info .sudo-options-wrapper .action-wrapper i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-}
-
-.object-info .sudo-options-wrapper .input-field.table-content {
-    margin: 0;
-    max-width: 10rem;
-}
-
-.object-info .sudo-options-wrapper table {
-    border: .5px solid grey;
-}
-
-.object-info .sudo-options-wrapper table td,
-th {
-    padding: 0 15px;
 }
 
 .object-info .application-wrapper .input-field.add .file-field,

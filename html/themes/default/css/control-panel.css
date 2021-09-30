@@ -6,7 +6,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
-    /* justify-content: space-between; */
+    justify-content: flex-start;
     align-items: center;
     border: none;
     margin-left: 0;
@@ -19,22 +19,37 @@
 
 .content .card-content .control-panel .navigation {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
 }
 
 .content .card-content .control-panel .navigation i {
-    font-size: 24px;
-    margin-right: 5px;
+    font-size: 18px;
+    margin-right: 20px;
 }
 
-.content .card-content .control-panel .navigation i.input-icons {
-    margin-left: -1.6rem;
+.content .card-content .control-panel .navigation .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-right: 10px;
 }
 
-.content .card-content .control-panel .navigation input {
-    line-height: 24px;
-    height: 24px;
-    padding: 0 0px;
-    max-width: 24px;
+.content .card-content .control-panel .navigation .action-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.content .card-content .control-panel .navigation .action-wrapper input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
 }
 
 .content .card-content .control-panel .navigation .refresh {
@@ -65,6 +80,8 @@
     position: relative;
     margin: 0;
     height: 26px;
+    margin-right: 5px;
+    padding: 0;
 }
 
 .content .card-content .control-panel .ldap-tree .search-field i {
@@ -91,14 +108,13 @@
 .content .card-content .control-panel .ldap-tree .submit i {
     font-size: 18px;
     position: absolute;
-    left: 10px;
+    left: 0;
     top: 4px;
 }
 
 .content .card-content .control-panel .ldap-tree .submit input {
     height: 18px;
     width: 18px;
-    margin-left: 10px;
     margin-top: 4px;
     padding: 0;
 }
@@ -125,20 +141,28 @@
 /* Control Panel - Actions */
 
 .content .card-content .control-panel .actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
     height: 26px;
     padding: 0 10px;
+    cursor: pointer;
+    min-width: 90px;
 }
 
-.content .card-content .control-panel .actions a.btn {
-    height: 26px;
-    line-height: 26px;
+.content .card-content .control-panel .actions a {
     font-size: 12px;
     text-transform: none;
     white-space: nowrap;
+    font-weight: bold;
 }
 
 .content .card-content .control-panel .actions a i {
     font-size: 18px;
+    margin-left: 5px;
 }
 
 .content .card-content .control-panel .actions .dropdown-content {
@@ -179,16 +203,22 @@
     padding: 0 10px;
 }
 
-.content .card-content .control-panel .filtermenu a.btn {
-    height: 26px;
-    line-height: 26px;
+.content .card-content .control-panel .filtermenu a {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
     font-size: 12px;
     text-transform: none;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .content .card-content .control-panel .filtermenu a i {
     font-size: 18px;
+    margin-left: 5px;
 }
 
 .content .card-content .control-panel .filtermenu .dropdown-content {
@@ -239,49 +269,28 @@
     align-items: center;
     height: 26px;
     margin: 0;
-    padding: 0 10px;
+    padding: 0 0 0 5px;
 }
 
 .content .card-content .control-panel .search-field input {
     font-size: 12px;
     height: 24px;
     margin: 0;
-    margin-right: 0.75rem;
+    margin-right: 10px;
 }
 
 .content .card-content .control-panel .search-field button.btn {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    color: #000000;
     height: 26px;
     line-height: 26px;
     font-size: 12px;
     text-transform: none;
     margin: 0;
-    margin-left: 0.75rem;
+    padding: 0;
 }
 
-@media only screen and (max-width: 1200px) {
-    .content .card-content .control-panel .navigation,
-    .content .card-content .control-panel .ldap-tree,
-    .content .card-content .control-panel .actions,
-    .content .card-content .control-panel .filtermenu,
-    .content .card-content .control-panel .search-field {
-        padding: 0 5px;
-    }
-    .content .card-content .control-panel .navigation {
-        padding-right: 15px;
-    }
-    .content .card-content .control-panel .ldap-tree .submit i {
-        left: 5px;
-    }
-    .content .card-content .control-panel .ldap-tree .submit input {
-        margin-left: 5px;
-    }
-    .content .card-content .control-panel .search-field input {
-        margin-right: 5px;
-    }
-    .content .card-content .control-panel .search-field button.btn {
-        margin-left: 5px;
-    }
-    .content .card-content .control-panel .btn {
-        padding: 0 10px;
-    }
-}
+@media only screen and (max-width: 1200px) {}
