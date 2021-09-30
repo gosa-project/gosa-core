@@ -1,0 +1,612 @@
+# translation of messages.po to Chinese Simplified
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+# Jiang Xin <worldhello.net@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:23+0100\n"
+"PO-Revision-Date: 2007-06-03 12:27+0800\n"
+"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Language-Team: Chinese Simplified <zh@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: html/getxls.php:88
+msgid "Birthday"
+msgstr "生日"
+
+#: html/getxls.php:88 html/getxls.php:283
+msgid "Sex"
+msgstr "性别"
+
+#: html/getxls.php:88 html/getxls.php:229 html/getxls.php:283
+#: html/getxls.php:299 html/getxls.php:303
+msgid "Surname"
+msgstr "姓"
+
+#: html/getxls.php:88 html/getxls.php:225 html/getxls.php:283
+#: html/getxls.php:299
+msgid "Given name"
+msgstr "名"
+
+#: html/getxls.php:88 html/getxls.php:283
+msgid "Language"
+msgstr "语言"
+
+#: html/getxls.php:91 html/getxls.php:92 html/getxls.php:310
+msgid "Users"
+msgstr "用户"
+
+#: html/getxls.php:96 html/getxls.php:343
+#, php-format
+msgid "User list of %s on %s"
+msgstr "%s 用户列表于 %s"
+
+#: html/getxls.php:102 html/getxls.php:137 html/getxls.php:160
+#: html/getxls.php:349 html/getxls.php:366
+msgid "User ID"
+msgstr "用户 ID"
+
+#: html/getxls.php:123 html/getxls.php:286
+msgid "Members"
+msgstr "成员"
+
+#: html/getxls.php:126 html/getxls.php:128 html/getxls.php:311
+msgid "Groups"
+msgstr "用户组"
+
+#: html/getxls.php:133 html/getxls.php:362
+#, php-format
+msgid "Groups of %s on %s"
+msgstr "%s 的用户组于 %s 上"
+
+#: html/getxls.php:157 html/getxls.php:190 html/getxls.php:192
+#: html/getxls.php:199 html/getxls.php:235 html/getxls.php:312
+#: html/getxls.php:383
+msgid "Servers"
+msgstr "服务器"
+
+#: html/getxls.php:160 html/getxls.php:289
+msgid "Description"
+msgstr "描述"
+
+#: html/getxls.php:161 html/getxls.php:313
+msgid "Computers"
+msgstr "计算机"
+
+#: html/getxls.php:171 html/getxls.php:224 html/getxls.php:403
+#: html/getxls.php:423
+msgid "Common name"
+msgstr "常用名"
+
+#: html/getxls.php:187
+msgid "Server name"
+msgstr "服务器名称"
+
+#: html/getxls.php:197 html/getxls.php:381
+#, php-format
+msgid "Servers of %s on %s"
+msgstr "%s服务器于%s"
+
+#: html/getxls.php:224 html/getxls.php:299
+msgid "Display name"
+msgstr "显示名称"
+
+#: html/getxls.php:224 html/getxls.php:299
+msgid "Fax"
+msgstr "传真"
+
+#: html/getxls.php:225 html/getxls.php:292
+msgid "Name"
+msgstr "名称"
+
+#: html/getxls.php:225
+msgid "Home phone"
+msgstr "住宅电话"
+
+#: html/getxls.php:226
+msgid "Home postal address"
+msgstr "住宅地址"
+
+#: html/getxls.php:226 html/getxls.php:300
+msgid "Initials"
+msgstr "中间名"
+
+#: html/getxls.php:226
+msgid "Location"
+msgstr "位置"
+
+#: html/getxls.php:227
+msgid "Mail address"
+msgstr "邮件地址"
+
+#: html/getxls.php:227
+msgid "Mobile phone"
+msgstr "移动电话"
+
+#: html/getxls.php:227 html/getxls.php:300
+msgid "City"
+msgstr "城市"
+
+#: html/getxls.php:228 html/getxls.php:300 html/getxls.php:302
+msgid "Postal address"
+msgstr "地址"
+
+#: html/getxls.php:228 html/getxls.php:302
+msgid "Pager"
+msgstr "呼机"
+
+#: html/getxls.php:228 html/getxls.php:300 html/getxls.php:302
+msgid "Phone number"
+msgstr "电话号码"
+
+#: html/getxls.php:229
+msgid "Address"
+msgstr "住址"
+
+#: html/getxls.php:229
+msgid "Postal code"
+msgstr "邮编"
+
+#: html/getxls.php:230 html/getxls.php:303
+msgid "State"
+msgstr "州/省"
+
+#: html/getxls.php:230
+msgid "Function"
+msgstr "功能"
+
+#: html/getxls.php:233 html/getxls.php:314
+#, fuzzy
+msgid "Address book"
+msgstr "地址簿"
+
+#: html/getxls.php:240 html/getxls.php:416
+#, fuzzy, php-format
+msgid "Address book of %s on %s"
+msgstr "%s 的地址簿，于 %s"
+
+#: html/getxls.php:246
+msgid "Common Name"
+msgstr "常用名"
+
+#: html/getxls.php:283
+msgid "Day of birth"
+msgstr "生日"
+
+#: html/getxls.php:289
+msgid "UID"
+msgstr "UID"
+
+#: html/getxls.php:301
+msgid "Email address"
+msgstr "邮件地址"
+
+#: html/getxls.php:301
+msgid "Mobile"
+msgstr "手机"
+
+#: html/getxls.php:301
+msgid "Organization"
+msgstr "组织/公司"
+
+#: html/getxls.php:301
+msgid "Organizational unit"
+msgstr "组织/公司部门"
+
+#: html/getxls.php:302
+msgid "Postal Code"
+msgstr "邮编"
+
+#: html/getxls.php:303
+msgid "Title"
+msgstr "称谓"
+
+#: html/getxls.php:306
+msgid "Full"
+msgstr "全部"
+
+#: html/getxls.php:397
+#, php-format
+msgid "Computers of %s on %s"
+msgstr "%s计算机于%s"
+
+#: html/getxls.php:480 addons/ldapmanager/class_import.inc:57
+#: addons/ldapmanager/class_exportxls.inc:124
+#: addons/ldapmanager/class_csvimport.inc:109
+#: addons/ldapmanager/class_export.inc:90
+#: addons/ldapmanager/class_export.inc:97
+#, fuzzy
+msgid "Permission error"
+msgstr "允许"
+
+#: html/getxls.php:480
+#, fuzzy
+msgid "You have no permission to do LDAP exports!"
+msgstr "您无权查看和编辑 ACL。"
+
+#: addons/ldapmanager/class_import.inc:6
+#: addons/ldapmanager/class_csvimport.inc:6
+msgid "LDIF export"
+msgstr "LDIF 导出"
+
+#: addons/ldapmanager/class_import.inc:7
+#: addons/ldapmanager/class_exportxls.inc:7
+#: addons/ldapmanager/class_csvimport.inc:7
+#: addons/ldapmanager/class_export.inc:7
+#, fuzzy
+msgid "This does something"
+msgstr "******"
+
+#: addons/ldapmanager/class_import.inc:57
+#, fuzzy
+msgid "You need full write access to the LDAP tree to import data!"
+msgstr "您无权执行这个方法！"
+
+#: addons/ldapmanager/class_import.inc:68
+#: addons/ldapmanager/class_import.inc:75
+#: addons/ldapmanager/class_import.inc:83
+#: addons/ldapmanager/class_exportxls.inc:56
+#: addons/ldapmanager/class_exportxls.inc:111
+#: addons/ldapmanager/class_csvimport.inc:169
+#: addons/ldapmanager/class_csvimport.inc:291
+#: addons/ldapmanager/class_csvimport.inc:343
+#: addons/ldapmanager/class_csvimport.inc:348
+#: addons/ldapmanager/class_csvimport.inc:354
+#: addons/ldapmanager/class_csvimport.inc:359
+#: addons/ldapmanager/class_csvimport.inc:502
+#: addons/ldapmanager/class_export.inc:46
+#: addons/ldapmanager/class_export.inc:103
+msgid "Error"
+msgstr "错误"
+
+#: addons/ldapmanager/class_import.inc:68
+#: addons/ldapmanager/class_import.inc:75
+#: addons/ldapmanager/class_import.inc:83
+#: addons/ldapmanager/class_csvimport.inc:343
+#: addons/ldapmanager/class_csvimport.inc:348
+#: addons/ldapmanager/class_csvimport.inc:354
+#: addons/ldapmanager/class_csvimport.inc:359
+#, fuzzy, php-format
+msgid "Cannot read uploaded file: %s"
+msgstr "无法创建文件 '%s'。"
+
+#: addons/ldapmanager/class_import.inc:68
+#: addons/ldapmanager/class_csvimport.inc:348
+#, fuzzy
+msgid "file is empty"
+msgstr "选择的文件为空。"
+
+#: addons/ldapmanager/class_import.inc:75
+#: addons/ldapmanager/class_csvimport.inc:343
+#: addons/ldapmanager/class_csvimport.inc:354
+#, fuzzy
+msgid "file not found"
+msgstr "文件"
+
+#: addons/ldapmanager/class_import.inc:83
+#: addons/ldapmanager/class_csvimport.inc:359
+msgid "file not readable"
+msgstr ""
+
+#: addons/ldapmanager/class_import.inc:117
+#: addons/ldapmanager/class_import.inc:121
+#: addons/ldapmanager/class_export.inc:73
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP 错误:"
+
+#: addons/ldapmanager/class_import.inc:125
+#, fuzzy
+msgid "Internal error"
+msgstr "终端服务器"
+
+#: addons/ldapmanager/class_import.inc:125
+#, php-format
+msgid "Undefined flag %s!"
+msgstr ""
+
+#: addons/ldapmanager/contentimport.tpl:10
+#, fuzzy
+msgid ""
+"The LDIF import plug-in provides methods to upload a set of entries to your "
+"running LDAP directory as LDIF. You may use this to add new or modify "
+"existing entries. Remember that GOsa will not check your LDIF for GOsa "
+"conformance."
+msgstr ""
+"该 LDIF 导入插件提供上传一个 ldif 格式的数据集到正在运行的 LDAP 目录中的方"
+"法。您可以用这个功能添加或更改记录。注意 GOsa 将不会检查您的 ldif 文档格式。"
+
+#: addons/ldapmanager/contentimport.tpl:17
+msgid "Import LDIF File"
+msgstr "导入 LDIF 文件"
+
+#: addons/ldapmanager/contentimport.tpl:22
+#: addons/ldapmanager/contentcsv.tpl:16
+msgid "Browse"
+msgstr "浏览"
+
+#: addons/ldapmanager/contentimport.tpl:31
+#, fuzzy
+msgid "Modify existing objects, keep untouched attributes"
+msgstr "修改已经存在的属性"
+
+#: addons/ldapmanager/contentimport.tpl:32
+msgid "Overwrite existing objects, all not listed attributes will be removed"
+msgstr ""
+
+#: addons/ldapmanager/contentimport.tpl:41
+#, fuzzy
+msgid "Remove existing entries first"
+msgstr "删除 DNS 记录失败"
+
+#: addons/ldapmanager/contentimport.tpl:48
+msgid "Import successful"
+msgstr "导入成功"
+
+#: addons/ldapmanager/contentimport.tpl:60
+#: addons/ldapmanager/contentcsv.tpl:113 addons/ldapmanager/contentcsv.tpl:117
+msgid "Import"
+msgstr "导入"
+
+#: addons/ldapmanager/contentexportxls.tpl:3
+#, fuzzy
+msgid ""
+"The XLS export plug-in provides methods to download a complete snapshot of "
+"the running LDAP directory as XLS. You may save these files for "
+"documentation."
+msgstr ""
+"该 XLS 导出插件提供将运行中的 LDAP 目录整体导出为 xls 的功能。您可以保存这些"
+"文件用于文档。"
+
+#: addons/ldapmanager/contentexportxls.tpl:10
+#: addons/ldapmanager/contentexport.tpl:9
+msgid "Export single entry"
+msgstr "导出单条记录"
+
+#: addons/ldapmanager/contentexportxls.tpl:14
+#, fuzzy
+msgid "Choose the data you want to export"
+msgstr "选择您要导出的数据"
+
+#: addons/ldapmanager/contentexportxls.tpl:19
+#: addons/ldapmanager/contentexportxls.tpl:31
+#: addons/ldapmanager/contentexportxls.tpl:47
+#: addons/ldapmanager/contentexport.tpl:15
+#: addons/ldapmanager/contentexport.tpl:27
+msgid "Export"
+msgstr "导出"
+
+#: addons/ldapmanager/contentexportxls.tpl:25
+msgid "Export complete XLS for"
+msgstr "导出整个 XLS"
+
+#: addons/ldapmanager/contentexportxls.tpl:39
+msgid "Export IVBB LDIF for"
+msgstr "导出 IVBB LDIF"
+
+#: addons/ldapmanager/contentexportxls.tpl:42
+#, fuzzy
+msgid "Choose the department you want to export"
+msgstr "选择要导出的部门"
+
+#: addons/ldapmanager/contentexportxls.tpl:59
+msgid "Export successful"
+msgstr "导出成功"
+
+#: addons/ldapmanager/contentexportxls.tpl:64
+#, fuzzy
+msgid "Click here to save the complete LDAP database to a XLS file"
+msgstr "点击这里保存整个 LDAP 数据库到一个文件"
+
+#: addons/ldapmanager/contentexportxls.tpl:64
+#, fuzzy
+msgid "Click here to save the LDAP export to a XLS file"
+msgstr "点击这里保存 LDAP 导出为一个 xls 文件"
+
+#: addons/ldapmanager/class_ldif.inc:6
+#, fuzzy
+msgid "LDAP tools"
+msgstr "LDAP 错误:"
+
+#: addons/ldapmanager/class_ldif.inc:7
+msgid "Export LDIF or Excel snapshots of the LDAP tree"
+msgstr ""
+
+#: addons/ldapmanager/class_ldif.inc:42 addons/ldapmanager/class_ldif.inc:43
+#: addons/ldapmanager/class_ldif.inc:48
+msgid "LDAP manager"
+msgstr "LDAP 管理"
+
+#: addons/ldapmanager/class_ldif.inc:43
+#, fuzzy
+msgid "import"
+msgstr "导入"
+
+#: addons/ldapmanager/class_ldif.inc:43
+#, fuzzy
+msgid "export"
+msgstr "导出"
+
+#: addons/ldapmanager/contentexport.tpl:2
+#, fuzzy
+msgid ""
+"The LDIF export plug-in provides methods to download a complete snapshot of "
+"the running LDAP directory as LDIF. You may save these files for backup "
+"purpose or when initializing a new server."
+msgstr ""
+"该 LDIF 导出插件提供将运行中的 LDAP 目录整体导出为 ldif 的功能。您可以保存这"
+"些文件用于备份或者初始化一个新服务器。"
+
+#: addons/ldapmanager/contentexport.tpl:21
+msgid "Export complete LDIF for"
+msgstr "导出整个 LDIF "
+
+#: addons/ldapmanager/class_exportxls.inc:6
+msgid "XLS import"
+msgstr "导入 XLS"
+
+#: addons/ldapmanager/class_exportxls.inc:111
+#, fuzzy
+msgid "Cannot export selected entries!"
+msgstr "选择要添加的对象"
+
+#: addons/ldapmanager/class_exportxls.inc:124
+#: addons/ldapmanager/class_export.inc:91
+#: addons/ldapmanager/class_export.inc:98
+#, fuzzy, php-format
+msgid "You have no permission to export %s!"
+msgstr "您无权进行 LDAP 导出。"
+
+#: addons/ldapmanager/contentcsv.tpl:4
+#, fuzzy
+msgid ""
+"The CSV import plug-in provides methods to generate user accounts from a "
+"file containing Comma Separated Values. The administrator can decide which "
+"columns should be transfered to which attribute. Note that you must have at "
+"least the UID, GIVENNAME and SURNAME set."
+msgstr ""
+"该 CVS 导入插件提供一个从逗号分隔格式文件创建用户账号的功能。管理员可以决定哪"
+"一个列被导入到哪一个属性。注意必须包含 UID, GIVENNAME 和 SURENAME 字段"
+
+#: addons/ldapmanager/contentcsv.tpl:9
+#, fuzzy
+msgid "CSV export"
+msgstr "CSV 导入"
+
+#: addons/ldapmanager/contentcsv.tpl:12
+msgid "Select CSV file to import"
+msgstr "选择要导入的 CSV 文件"
+
+#: addons/ldapmanager/contentcsv.tpl:21
+msgid "Select template"
+msgstr "选择模板"
+
+#: addons/ldapmanager/contentcsv.tpl:36
+msgid "All entries have been written to the LDAP database successfully."
+msgstr "所有记录成功写入 LDAP 数据库。"
+
+#: addons/ldapmanager/contentcsv.tpl:38
+#, fuzzy
+msgid "There was an error during the import of your data."
+msgstr "哎哟! 导入过程中遇到一个错误。"
+
+#: addons/ldapmanager/contentcsv.tpl:41
+msgid "Here is the status report for the import:"
+msgstr "这里是导入过程的状态报告："
+
+#: addons/ldapmanager/contentcsv.tpl:46
+#, fuzzy
+msgid "Status report"
+msgstr "状态"
+
+#: addons/ldapmanager/contentcsv.tpl:82
+msgid "Selected Template"
+msgstr "所选模板"
+
+#: addons/ldapmanager/contentcsv.tpl:85
+#, fuzzy
+msgid "Template selection"
+msgstr "组设置"
+
+#: addons/ldapmanager/class_csvimport.inc:109
+#, fuzzy
+msgid "You've no permission to import CSV files!"
+msgstr "您无权执行 CSV 导入。"
+
+#: addons/ldapmanager/class_csvimport.inc:169
+#, fuzzy, php-format
+msgid "Need at least %s, %s and %s to create users!"
+msgstr "需要 'sn', 'givenName' 和 'uid' 来创建用户。"
+
+#: addons/ldapmanager/class_csvimport.inc:217
+msgid "failed"
+msgstr "失败"
+
+#: addons/ldapmanager/class_csvimport.inc:221
+msgid "OK"
+msgstr ""
+
+#: addons/ldapmanager/class_csvimport.inc:287
+msgid "status"
+msgstr "状态"
+
+#: addons/ldapmanager/class_csvimport.inc:291
+#, fuzzy, php-format
+msgid "Cannot add entry %s!"
+msgstr "未知 FAIstate %s"
+
+#: addons/ldapmanager/class_csvimport.inc:329
+msgid "Information"
+msgstr "提示信息"
+
+#: addons/ldapmanager/class_csvimport.inc:329
+msgid "Nothing to import!"
+msgstr "没有数据导入！"
+
+#: addons/ldapmanager/class_csvimport.inc:502
+#, fuzzy
+msgid "Cannot find CSV data in the selected file!"
+msgstr "无法创建文件 '%s'。"
+
+#: addons/ldapmanager/class_export.inc:6
+msgid "CSV import"
+msgstr "CSV 导入"
+
+#: addons/ldapmanager/class_export.inc:74
+#, fuzzy, php-format
+msgid "No such object %s!"
+msgstr "成员对象"
+
+#: addons/ldapmanager/class_export.inc:104
+#, php-format
+msgid "Failed to generate ldap export, error was '%s'!"
+msgstr ""
+
+#~ msgid "Adressbook"
+#~ msgstr "地址簿"
+
+#~ msgid "Click here to save the complete LDAP database to a xls file"
+#~ msgstr "点击这里保存整个 LDAP 数据库为一个 xls 文件"
+
+#~ msgid "ok"
+#~ msgstr "ok"
+
+#, fuzzy
+#~ msgid "You have no permission to create LDAP dumps!"
+#~ msgstr "您无权删除这个部门。"
+
+#, fuzzy
+#~ msgid "Error in ivbb parameter!"
+#~ msgstr "检查参数"
+
+#, fuzzy
+#~ msgid "Ldap manager"
+#~ msgstr "LDAP 管理"
+
+#~ msgid "Click here to save the LDAP Export "
+#~ msgstr "点击这里保存 LDAP 导出"
+
+#, fuzzy
+#~ msgid "Cannot insert entry '%s'!"
+#~ msgstr "未知 FAIstate %s"
+
+#, fuzzy
+#~ msgid "Ldap manger"
+#~ msgstr "LDAP 管理"
+
+#~ msgid "Surename"
+#~ msgstr "姓"
+
+#~ msgid "Back"
+#~ msgstr "返回"
+
+#, fuzzy
+#~ msgid "Ldap manager addon"
+#~ msgstr "LDAP 管理"
