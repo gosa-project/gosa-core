@@ -99,6 +99,7 @@ td a {
 #tree-table .select-wrapper input,
 #sudo-table .select-wrapper input {
     width: auto;
+    width: 200px;
     max-width: 200px;
     min-height: 27px;
     height: 27px!important;
@@ -140,6 +141,11 @@ td a {
 #tree-table .valign-wrapper label {
     width: 28px;
     height: 18px;
+}
+
+#tree-table .valign-wrapper label .action-wrapper {
+    margin-right: 0;
+    margin-left: 10px;
 }
 
 #tree-table .valign-wrapper label i.input-icons {

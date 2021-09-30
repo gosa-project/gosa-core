@@ -254,9 +254,9 @@ class propertyEditor extends management
                         $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
                                  ".image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
                         break;
-                    
+
                     default:
-                        $res = "<div class='valign-wrapper' style='width:{$isize};width:calc({$isize} + 28px)'>
+                        $res = "<div class='valign-wrapper' style='width:{$isize};'>
                                     <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">
                                     <label>
                                         ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."

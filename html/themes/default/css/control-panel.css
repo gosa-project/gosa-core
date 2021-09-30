@@ -6,7 +6,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
-    /* justify-content: space-between; */
+    justify-content: flex-start;
     align-items: center;
     border: none;
     margin-left: 0;
@@ -153,12 +153,11 @@
     min-width: 90px;
 }
 
-.content .card-content .control-panel .actions a.btn {
-    height: 26px;
-    line-height: 26px;
+.content .card-content .control-panel .actions a {
     font-size: 12px;
     text-transform: none;
     white-space: nowrap;
+    font-weight: bold;
 }
 
 .content .card-content .control-panel .actions a i {
