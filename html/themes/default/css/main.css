@@ -156,6 +156,7 @@ hr.divider {
     background-color: #db5c01;
 }
 
+
 /* -- Datepicker setup -- */
 
 .datepicker-date-display {
@@ -236,6 +237,31 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 button:focus {
     outline: none;
     background-color: initial;
+}
+
+
+/* Views as soon as there is no menu */
+
+.content-area.noMenu {
+    justify-content: center;
+}
+
+.content-area .content-noMenu {
+    width: 80%;
+}
+
+.content-area .content-noMenu .information-wrapper .no-permission {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    color: #842029;
+}
+
+.content-area .content-noMenu .information-wrapper .no-permission h2 {
+    margin: 0;
 }
 
 @media only screen and (max-width: 1200px) {
