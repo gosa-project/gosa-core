@@ -1,0 +1,242 @@
+# translation of messages.po to Italian
+# Copyright (c) 2005 B-Open Solutions srl - http://www.bopen.it/
+# Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
+# Alessandro Amici <a.amici@bopen.it>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:24+0100\n"
+"PO-Revision-Date: 2005-11-18 15:26+0100\n"
+"Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
+"Language-Team: Italian\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: personal/nagios/class_nagiosAccount.inc:18
+#: personal/nagios/class_nagiosAccount.inc:105
+#: personal/nagios/class_nagiosAccount.inc:114
+#: personal/nagios/class_nagiosAccount.inc:116
+#: personal/nagios/class_nagiosAccount.inc:272
+msgid "Nagios"
+msgstr "Nagios"
+
+#: personal/nagios/class_nagiosAccount.inc:19
+#, fuzzy
+msgid "Manage personal Nagios settings"
+msgstr "Impostazioni Unix"
+
+#: personal/nagios/class_nagiosAccount.inc:172
+#: personal/nagios/class_nagiosAccount.inc:257
+#, fuzzy
+msgid "LDAP error"
+msgstr "Errore LDAP"
+
+#: personal/nagios/class_nagiosAccount.inc:193
+#: personal/nagios/class_nagiosAccount.inc:287 personal/nagios/nagios.tpl:10
+#, fuzzy
+msgid "Alias"
+msgstr "Italiano"
+
+#: personal/nagios/class_nagiosAccount.inc:196
+#: personal/nagios/class_nagiosAccount.inc:200
+#: personal/nagios/class_nagiosAccount.inc:204
+msgid "Mail"
+msgstr "Posta"
+
+#: personal/nagios/class_nagiosAccount.inc:273
+#, fuzzy
+msgid "Nagios account settings"
+msgstr "Opzioni di posta dell'identità"
+
+#: personal/nagios/class_nagiosAccount.inc:277
+msgid "My account"
+msgstr "Identità"
+
+#: personal/nagios/class_nagiosAccount.inc:288 personal/nagios/nagios.tpl:19
+msgid "Mail address"
+msgstr "Indirizzo principale"
+
+#: personal/nagios/class_nagiosAccount.inc:289 personal/nagios/nagios.tpl:29
+#, fuzzy
+msgid "Host notification period"
+msgstr "Opzioni applicazione"
+
+#: personal/nagios/class_nagiosAccount.inc:290 personal/nagios/nagios.tpl:42
+#, fuzzy
+msgid "Service notification period"
+msgstr "Opzioni applicazione"
+
+#: personal/nagios/class_nagiosAccount.inc:291 personal/nagios/nagios.tpl:68
+#, fuzzy
+msgid "Host notification options"
+msgstr "Opzioni applicazione"
+
+#: personal/nagios/class_nagiosAccount.inc:292 personal/nagios/nagios.tpl:55
+#, fuzzy
+msgid "Service notification options"
+msgstr "Opzioni applicazione"
+
+#: personal/nagios/class_nagiosAccount.inc:293
+#, fuzzy
+msgid "Pager number"
+msgstr "Numero di telefono"
+
+#: personal/nagios/class_nagiosAccount.inc:295 personal/nagios/nagios.tpl:92
+#, fuzzy
+msgid "Service notification commands"
+msgstr "Opzioni applicazione"
+
+#: personal/nagios/class_nagiosAccount.inc:296 personal/nagios/nagios.tpl:102
+#, fuzzy
+msgid "Host notification commands"
+msgstr "Opzioni applicazione"
+
+#: personal/nagios/class_nagiosAccount.inc:297
+#, fuzzy
+msgid "View system informations"
+msgstr "Informazioni organizzazione"
+
+#: personal/nagios/class_nagiosAccount.inc:298
+#, fuzzy
+msgid "View configuration information"
+msgstr "Informazioni organizzazione"
+
+#: personal/nagios/class_nagiosAccount.inc:299
+#, fuzzy
+msgid "Trigger system commands"
+msgstr "Informazioni organizzazione"
+
+#: personal/nagios/class_nagiosAccount.inc:300
+#, fuzzy
+msgid "View all services"
+msgstr "Dispositivi del client"
+
+#: personal/nagios/class_nagiosAccount.inc:301
+msgid "View all hosts"
+msgstr ""
+
+#: personal/nagios/class_nagiosAccount.inc:302
+#, fuzzy
+msgid "Trigger all service commands"
+msgstr "Dispositivi del client"
+
+#: personal/nagios/class_nagiosAccount.inc:303
+msgid "Trigger all host commands"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:1 personal/nagios/nagios.tpl:7
+#: personal/nagios/nagios.tpl:8
+#, fuzzy
+msgid "Nagios Account"
+msgstr "Contatto"
+
+#: personal/nagios/nagios.tpl:81
+msgid "Pager"
+msgstr "Pager"
+
+#: personal/nagios/nagios.tpl:120
+#, fuzzy
+msgid "Nagios authentication"
+msgstr "Destinazione"
+
+#: personal/nagios/nagios.tpl:121
+#, fuzzy
+msgid "Nagios account"
+msgstr "Contatto"
+
+#: personal/nagios/nagios.tpl:125
+#, fuzzy
+msgid "view system informations"
+msgstr "Informazioni organizzazione"
+
+#: personal/nagios/nagios.tpl:134
+#, fuzzy
+msgid "view configuration information"
+msgstr "Informazioni organizzazione"
+
+#: personal/nagios/nagios.tpl:143
+msgid "trigger system commands"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:152
+msgid "view all services"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:161
+msgid "view all hosts"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:170
+msgid "trigger all service commands"
+msgstr ""
+
+#: personal/nagios/nagios.tpl:179
+msgid "trigger all host commands"
+msgstr ""
+
+#~ msgid "This does something"
+#~ msgstr "Questo fa qualcosa"
+
+#, fuzzy
+#~ msgid "Nagios settings"
+#~ msgstr "Opzioni di posta dell'identità"
+
+#, fuzzy
+#~ msgid "This account has no nagios extensions."
+#~ msgstr "Questa identità non ha le estensioni per la posta"
+
+#, fuzzy
+#~ msgid "Remove nagios account"
+#~ msgstr "Rimuovi le estensioni di posta"
+
+#, fuzzy
+#~ msgid ""
+#~ "This account has nagios features enabled. You can disable them by "
+#~ "clicking below."
+#~ msgstr "Questa identià possiede estensioni di posta."
+
+#, fuzzy
+#~ msgid "Create nagios account"
+#~ msgstr "Crea estensioni di posta"
+
+#, fuzzy
+#~ msgid ""
+#~ "This account has nagios features disabled. You can enable them by "
+#~ "clicking below."
+#~ msgstr "Questa identità non possiede estensioni di posta."
+
+#, fuzzy
+#~ msgid "Saving of user/nagios account with dn '%s' failed."
+#~ msgstr "Crea estensioni di posta"
+
+#, fuzzy
+#~ msgid "The required field 'NagiosAlias' is not set."
+#~ msgstr "Il campo 'Indirizzo principale' non è stao inserito"
+
+#, fuzzy
+#~ msgid "The required field 'NagiosMail' is not set."
+#~ msgstr "Il campo 'Indirizzo principale' non è stao inserito"
+
+#, fuzzy
+#~ msgid "Please enter a valid email address in 'NagiosMail' field."
+#~ msgstr ""
+#~ "Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
+
+#, fuzzy
+#~ msgid "Removing of user/nagios account with dn '%s' failed."
+#~ msgstr "Rimuovi le estensioni di posta"
+
+#~ msgid "Cancel"
+#~ msgstr "Annulla"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr ""
+#~ "Click sul bottone 'Modifica' qui sotto per cambiare le informazioni in "
+#~ "questo dialogo"
+
+#~ msgid "Edit"
+#~ msgstr "Modifica"

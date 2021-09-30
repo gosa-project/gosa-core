@@ -256,6 +256,7 @@ $class_mapping= array(
                 "pptpAccount" => "plugins/personal/connectivity/pptp/class_pptpAccount.inc",
                 "proxyAccount" => "plugins/personal/connectivity/squid/class_proxyAccount.inc",
                 "connectivity" => "plugins/personal/connectivity/class_connectivity.inc",
+                "nagiosAccount" => "plugins/personal/nagios/class_nagiosAccount.inc",
                 "infoPage" => "plugins/generic/infoPage/class_infoPage.inc",
                 "statistics" => "plugins/generic/statistics/class_statistics.inc",
                 "memoryUsageChart" => "plugins/generic/statistics/chartClasses/class_memoryUsageChart.inc",
