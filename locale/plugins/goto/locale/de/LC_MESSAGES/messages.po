@@ -1,0 +1,4268 @@
+# translation of messages.po to deutsch
+# translation of messages.po to
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+#
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004, 2005, 2006, 2008, 2009.
+# Jan Wenzel <jan.wenzel@gonicus.de>, 2004,2005, 2008.
+# Stefan Koehler <stefan.koehler@GONICUS.de>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-12-01 15:00+0100\n"
+"PO-Revision-Date: 2010-09-15 10:30+0100\n"
+"Last-Translator: Fabian Hickert <Fabian.Hickert@GONICUS.DE>\n"
+"Language-Team: de <kde-i18n-de@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: admin/mimetypes/paste_generic.tpl:2 admin/mimetypes/generic.tpl:8
+msgid "Mime-type settings"
+msgstr "MIME-Typ Einstellungen"
+
+#: admin/mimetypes/paste_generic.tpl:5 admin/mimetypes/generic.tpl:2
+#: admin/mimetypes/class_mimetypeGeneric.inc:600
+#: admin/devices/class_deviceGeneric.inc:269
+#: admin/systems/goto/class_printGeneric.inc:996
+#: admin/systems/goto/class_workstationGeneric.inc:697
+#: admin/applications/class_applicationGeneric.inc:582
+#: admin/ogroups/goto/termgroup.tpl:8
+msgid "Generic"
+msgstr "Allgemein"
+
+#: admin/mimetypes/paste_generic.tpl:11 admin/mimetypes/generic.tpl:4
+msgid "Mime-type generic"
+msgstr "MIME-Typ (Allgemein)"
+
+#: admin/mimetypes/paste_generic.tpl:13
+#: admin/mimetypes/mimetype-list-release.xml:74
+#: admin/mimetypes/mimetype-list.xml:74
+msgid "Mime-type"
+msgstr "MIME-Typ"
+
+#: admin/mimetypes/paste_generic.tpl:15 admin/mimetypes/generic.tpl:13
+msgid "Please enter a name for the mime-type here"
+msgstr "Bitte geben Sie hier einen Namen für den MIME-Typ ein"
+
+#: admin/mimetypes/paste_generic.tpl:19
+#: admin/mimetypes/mimetype-list-release.xml:49
+#: admin/mimetypes/mimetype-list.xml:49 admin/mimetypes/generic.tpl:28
+#: admin/mimetypes/class_mimetypeGeneric.inc:161
+#: admin/mimetypes/class_mimetypeGeneric.inc:171
+#: admin/mimetypes/class_mimetypeGeneric.inc:183
+#: admin/mimetypes/class_mimetypeGeneric.inc:628
+#: admin/devices/device-list.xml:49 admin/devices/class_deviceGeneric.inc:101
+#: admin/devices/class_deviceGeneric.inc:296
+#: admin/devices/deviceGeneric.tpl:26
+#: admin/systems/services/shares/class_goShareServer.inc:432
+#: admin/systems/services/shares/class_servNfs.inc:207
+#: admin/systems/services/shares/servnfs.tpl:20
+#: admin/systems/goto/class_printGeneric.inc:1025
+#: admin/systems/goto/ArpNewDevice.tpl:18
+#: admin/systems/goto/workstation.tpl:20 admin/systems/goto/terminal.tpl:20
+#: admin/systems/goto/Device/class_Device.inc:297
+#: admin/systems/goto/Device/Device.tpl:18 admin/systems/goto/printer.tpl:17
+#: admin/systems/goto/printer.tpl:43
+#: admin/systems/goto/class_terminalGeneric.inc:701
+#: admin/systems/goto/class_ArpNewDevice.inc:161
+#: admin/systems/goto/class_workstationGeneric.inc:735
+#: admin/applications/application-list-release.xml:49
+#: admin/applications/class_applicationGeneric.inc:609
+#: admin/applications/application-list.xml:49
+#: admin/applications/generic.tpl:33
+#: admin/ConfigManagement/DeviceConfig-list.xml:42
+#: personal/environment/printerSelect/selectPrinter-list.xml:48
+#: personal/environment/hotplugSelect/selectHotplug-list.xml:48
+#: personal/environment/logonManagement.tpl:18
+#: personal/environment/class_logonManagementDialog.inc:114
+#: addons/goto/events/eventTargetUser-list.xml:57
+#: addons/goto/events/eventTargetSystems-list.xml:73
+#: addons/goto/class_gotomasses.inc:572
+msgid "Description"
+msgstr "Beschreibung"
+
+#: admin/mimetypes/paste_generic.tpl:21
+msgid "Please specify a description for this mime-type here"
+msgstr "Bitte geben Sie hier eine Beschreibung dieses MIME-Typs ein"
+
+#: admin/mimetypes/class_mimetypeManagement.inc:25
+#: admin/mimetypes/class_mimetypeGeneric.inc:610
+msgid "Mime types"
+msgstr "MIME-Typen"
+
+#: admin/mimetypes/class_mimetypeManagement.inc:26
+msgid "Manage file associations that are usable in managed software releases"
+msgstr ""
+"Verwalten von Dateizuordnungen, die in Software-Releases verwendbar sind"
+
+#: admin/mimetypes/class_mimetypeManagement.inc:151
+#: admin/applications/class_applicationManagement.inc:114
+msgid "Branch locked"
+msgstr "Gesperrte Zweige"
+
+#: admin/mimetypes/class_mimetypeManagement.inc:152
+#: admin/applications/class_applicationManagement.inc:115
+#, php-format
+msgid "The following entries are locked, you can't remove them %s."
+msgstr ""
+"Die folgenden Einträge sind gesperrt, sie können nicht entfernt werden %s."
+
+#: admin/mimetypes/class_mimetypeManagement.inc:156
+#: admin/systems/goto/class_printGeneric.inc:1046
+#: admin/systems/goto/class_printGeneric.inc:1068
+#: admin/applications/class_applicationManagement.inc:119
+#: personal/environment/class_environment.inc:597
+msgid "Permission error"
+msgstr "Berechtigungsfehler"
+
+#: admin/mimetypes/mimetype-list-release.tpl:15
+#: admin/systems/goto/workstationStartup.tpl:110
+#: admin/systems/goto/workstationStartup.tpl:153
+#: admin/groups/apps/app_list.tpl:5
+#: admin/groups/apps/class_groupApplication.inc:1391
+#: admin/applications/application-list-release.tpl:9
+msgid "Release"
+msgstr "Release"
+
+#: admin/mimetypes/mimetype-list-release.xml:11
+#: admin/mimetypes/mimetype-list.xml:11
+msgid "List of mime-types"
+msgstr "Liste von MIME-Typen"
+
+#: admin/mimetypes/mimetype-list-release.xml:15
+#: admin/mimetypes/mimetype-list.xml:15 admin/mimetypes/generic.tpl:10
+msgid "Mime type"
+msgstr "MIME-Typ"
+
+#: admin/mimetypes/mimetype-list-release.xml:41
+#: admin/mimetypes/mimetype-list.xml:41
+#: admin/mimetypes/class_mimetypeGeneric.inc:496
+#: admin/mimetypes/class_mimetypeGeneric.inc:626
+#: admin/devices/device-list.xml:41 admin/devices/class_deviceGeneric.inc:98
+#: admin/devices/class_deviceGeneric.inc:127
+#: admin/devices/class_deviceGeneric.inc:294
+#: admin/systems/services/shares/class_goShareServer.inc:428
+#: admin/systems/services/shares/class_servNfs.inc:199
+#: admin/systems/services/shares/class_servNfs.inc:202
+#: admin/systems/services/shares/class_servNfs.inc:235
+#: admin/systems/services/shares/servnfs.tpl:10
+#: admin/systems/goto/class_printGeneric.inc:735
+#: admin/systems/goto/class_printGeneric.inc:745
+#: admin/systems/goto/class_printGeneric.inc:764
+#: admin/systems/goto/class_printGeneric.inc:1023
+#: admin/systems/goto/Device/class_Device.inc:130
+#: admin/systems/goto/Device/class_Device.inc:290
+#: admin/systems/goto/Device/Device.tpl:10
+#: admin/systems/goto/class_workstationStartup.inc:268
+#: admin/systems/goto/class_terminalGeneric.inc:420
+#: admin/systems/goto/class_terminalGeneric.inc:430
+#: admin/systems/goto/class_terminalGeneric.inc:456
+#: admin/systems/goto/class_terminalGeneric.inc:700
+#: admin/systems/goto/class_ArpNewDevice.inc:90
+#: admin/systems/goto/class_ArpNewDevice.inc:160
+#: admin/systems/goto/class_workstationGeneric.inc:443
+#: admin/systems/goto/class_workstationGeneric.inc:448
+#: admin/systems/goto/class_workstationGeneric.inc:478
+#: admin/groups/apps/edit_entry.tpl:45
+#: admin/applications/class_applicationParameters.inc:190
+#: admin/applications/application-list-release.xml:41
+#: admin/applications/class_applicationGeneric.inc:420
+#: admin/applications/class_applicationGeneric.inc:424
+#: admin/applications/class_applicationGeneric.inc:607
+#: admin/applications/class_applicationGeneric.inc:611
+#: admin/applications/application-list.xml:41
+#: admin/ConfigManagement/DeviceConfig-list.xml:34
+#: admin/ConfigManagement/class_AddItemDialog.inc:52
+#: admin/ConfigManagement/class_AddItemDialog.inc:55
+#: admin/ConfigManagement/AddItemDialog.tpl:13
+#: personal/environment/printerSelect/selectPrinter-list.xml:40
+#: personal/environment/hotplugSelect/selectHotplug-list.xml:40
+#: personal/environment/class_logonManagementDialog.inc:106
+#: addons/goto/events/eventTargetUser-list.xml:49
+#: addons/goto/events/eventTargetSystems-list.xml:65
+msgid "Name"
+msgstr "Name"
+
+#: admin/mimetypes/mimetype-list-release.xml:57
+#: admin/mimetypes/mimetype-list.xml:57 admin/devices/device-list.xml:57
+#: admin/applications/application-list-release.xml:57
+#: admin/applications/application-list.xml:57
+#: admin/ConfigManagement/DeviceConfig-list.xml:50
+#: addons/goto/deploy-list.xml:67
+msgid "Actions"
+msgstr "Aktionen"
+
+#: admin/mimetypes/mimetype-list-release.xml:68
+#: admin/mimetypes/mimetype-list.xml:68 admin/devices/device-list.xml:68
+#: admin/applications/application-list-release.xml:68
+#: admin/applications/application-list.xml:68 addons/goto/deploy-list.xml:78
+msgid "Create"
+msgstr "Anlegen"
+
+#: admin/mimetypes/mimetype-list-release.xml:86
+#: admin/mimetypes/mimetype-list.xml:86 admin/devices/device-list.xml:86
+#: admin/systems/goto/workstationStartup.tpl:279
+#: admin/systems/goto/printer.tpl:87
+#: admin/systems/goto/terminalService.tpl:224
+#: admin/systems/goto/terminalStartup.tpl:131
+#: admin/groups/apps/app_list.tpl:93 admin/groups/apps/app_list.tpl:109
+#: admin/groups/apps/app_list.tpl:132
+#: admin/applications/application-list-release.xml:86
+#: admin/applications/application-list.xml:87
+#: admin/ConfigManagement/DeviceConfig-list.xml:64
+#: personal/environment/environment.tpl:228 addons/goto/deploy-list.xml:145
+#: addons/goto/deploy-list.xml:249 addons/goto/class_gotomasses.inc:258
+msgid "Remove"
+msgstr "Entfernen"
+
+#: admin/mimetypes/mimetype-list-release.xml:120
+#: admin/mimetypes/mimetype-list.xml:119
+msgid "Edit mime-type"
+msgstr "MIME-Typ bearbeiten"
+
+#: admin/mimetypes/mimetype-list-release.xml:133
+#: admin/mimetypes/mimetype-list.xml:132
+msgid "Remove mime-type"
+msgstr "MIME-Typ entfernen"
+
+#: admin/mimetypes/mimetype-list.tpl:24 admin/mimetypes/generic.tpl:38
+#: admin/mimetypes/class_mimetypeGeneric.inc:629
+#: admin/devices/device-list.tpl:23 admin/devices/class_deviceGeneric.inc:295
+#: admin/devices/deviceGeneric.tpl:10
+#: admin/systems/services/ldap/class_goLdapServer.inc:81
+#: admin/systems/goto/class_printGeneric.inc:1024
+#: admin/systems/goto/workstation.tpl:36 admin/systems/goto/terminal.tpl:28
+#: admin/systems/goto/Device/class_Device.inc:289
+#: admin/systems/goto/Device/Device.tpl:28 admin/systems/goto/printer.tpl:28
+#: admin/systems/goto/class_terminalGeneric.inc:702
+#: admin/systems/goto/class_workstationGeneric.inc:737
+#: admin/applications/application-list.tpl:12
+#: admin/applications/class_applicationGeneric.inc:608
+#: admin/applications/generic.tpl:42
+#: admin/ConfigManagement/DeviceConfig-list.tpl:9
+#: personal/environment/printerSelect/selectPrinter-list.tpl:12
+#: personal/environment/hotplugSelect/selectHotplug-list.tpl:12
+#: addons/goto/goto_import_file.tpl:43
+#: addons/goto/events/eventTargetUser-list.tpl:12
+#: addons/goto/events/eventTargetSystems-list.tpl:12
+msgid "Base"
+msgstr "Basis"
+
+#: admin/mimetypes/mimetype-filter-release.xml:18
+#: admin/mimetypes/mimetype-filter.xml:18 admin/devices/device-filter.xml:17
+#: admin/applications/application-filter-release.xml:21
+#: admin/applications/application-filter.xml:18
+#: admin/ConfigManagement/DeviceConfig-filter.xml:14
+#: personal/environment/printerSelect/selectPrinter-filter.xml:17
+#: personal/environment/hotplugSelect/selectHotplug-filter.xml:18
+#: addons/goto/deploy-filter.xml:19
+#: addons/goto/events/eventTargetSystems-filter.xml:17
+#: addons/goto/events/eventTargetUser-filter.xml:18
+msgid "Default filter"
+msgstr "Standard-Filter"
+
+#: admin/mimetypes/generic.tpl:18
+msgid "Mime-group"
+msgstr "MIME-Gruppe"
+
+#: admin/mimetypes/generic.tpl:21
+msgid "Categorize this mime type"
+msgstr "Kategorie dieses MIME-Typs"
+
+#: admin/mimetypes/generic.tpl:31
+msgid "Please specify a description"
+msgstr "Bitte geben Sie eine Beschreibung an"
+
+#: admin/mimetypes/generic.tpl:52 admin/applications/generic.tpl:59
+msgid "Picture settings"
+msgstr "Bild-Einstellungen"
+
+#: admin/mimetypes/generic.tpl:55
+#: admin/mimetypes/class_mimetypeGeneric.inc:632
+#: admin/applications/class_applicationGeneric.inc:612
+#: admin/applications/generic.tpl:62
+msgid "Icon"
+msgstr "Symbol"
+
+#: admin/mimetypes/generic.tpl:58
+msgid "Mime-icon"
+msgstr "MIME-Icon"
+
+#: admin/mimetypes/generic.tpl:72
+msgid "Update mime type icon"
+msgstr "Aktualisiere MIME-Typ Icon"
+
+#: admin/mimetypes/generic.tpl:72 admin/applications/generic.tpl:80
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: admin/mimetypes/generic.tpl:89
+msgid "Left click"
+msgstr "Linksklick"
+
+#: admin/mimetypes/generic.tpl:95
+#: admin/mimetypes/class_mimetypeGeneric.inc:633
+msgid "File patterns"
+msgstr "Datei-Muster"
+
+#: admin/mimetypes/generic.tpl:101
+msgid "Please specify a new file pattern"
+msgstr "Bitte geben Sie ein neues Dateimuster an"
+
+#: admin/mimetypes/generic.tpl:104
+msgid "Add a new file pattern"
+msgstr "Erstelle ein neues Dateimuster"
+
+#: admin/mimetypes/generic.tpl:111 admin/mimetypes/generic.tpl:166
+#: admin/groups/apps/class_groupApplication.inc:1378
+#: admin/applications/class_applicationManagement.inc:25
+msgid "Applications"
+msgstr "Anwendungen"
+
+#: admin/mimetypes/generic.tpl:122 admin/mimetypes/generic.tpl:176
+msgid "Enter an application name here"
+msgstr "Geben Sie hier den Namen der Anwendung ein"
+
+#: admin/mimetypes/generic.tpl:125 admin/mimetypes/generic.tpl:180
+msgid "Add application"
+msgstr "Anwendung hinzufügen"
+
+#: admin/mimetypes/generic.tpl:141
+msgid "Embedding"
+msgstr "eingebettet"
+
+#: admin/mimetypes/generic.tpl:151
+msgid "Show file in embedded viewer"
+msgstr "Zeige Datei mit eingebautem Betrachter"
+
+#: admin/mimetypes/generic.tpl:156
+msgid "Show file in external viewer"
+msgstr "Zeige Datei mit externem Programm"
+
+#: admin/mimetypes/generic.tpl:161
+msgid "Ask whether to save to local disk"
+msgstr "Frage nach, ob Datei lokal auf Festplatte gespeichert werden soll"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:161
+#: admin/mimetypes/class_mimetypeGeneric.inc:171
+#: admin/mimetypes/class_mimetypeGeneric.inc:183
+#: admin/systems/ppd/class_printerPPDDialog.inc:473
+msgid "Section"
+msgstr "Section"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:355
+#: admin/devices/class_deviceGeneric.inc:151
+#: admin/devices/class_deviceGeneric.inc:177
+#: admin/systems/services/kiosk/class_goKioskService.inc:78
+#: admin/systems/services/kiosk/class_goKioskService.inc:169
+#: admin/systems/services/kiosk/class_goKioskService.inc:177
+#: admin/systems/services/kiosk/class_goKioskService.inc:180
+#: admin/systems/services/kiosk/class_goKioskService.inc:240
+#: admin/systems/services/shares/class_goShareServer.inc:98
+#: admin/systems/services/shares/class_goShareServer.inc:256
+#: admin/systems/services/shares/class_servNfs.inc:43
+#: admin/systems/services/shares/class_servNfs.inc:46
+#: admin/systems/goto/class_terminalStartup.inc:232
+#: admin/systems/goto/class_printGeneric.inc:461
+#: admin/systems/goto/class_printGeneric.inc:640
+#: admin/systems/goto/class_printGeneric.inc:647
+#: admin/systems/goto/class_printGeneric.inc:701
+#: admin/systems/goto/class_printGeneric.inc:1103
+#: admin/systems/goto/class_printGeneric.inc:1114
+#: admin/systems/goto/Device/class_Device.inc:217
+#: admin/systems/goto/Device/class_InstallRecipe.inc:120
+#: admin/systems/goto/Device/class_InstallRecipe.inc:131
+#: admin/systems/goto/Device/class_InstallRecipe.inc:141
+#: admin/systems/goto/Device/class_InstallRecipe.inc:151
+#: admin/systems/goto/Device/class_InstallRecipe.inc:161
+#: admin/systems/goto/Device/class_InstallRecipe.inc:171
+#: admin/systems/goto/Device/class_InstallRecipe.inc:193
+#: admin/systems/goto/Device/class_InstallRecipe.inc:200
+#: admin/systems/goto/class_workstationStartup.inc:231
+#: admin/systems/goto/class_workstationStartup.inc:244
+#: admin/systems/goto/class_workstationStartup.inc:340
+#: admin/systems/goto/class_workstationStartup.inc:403
+#: admin/systems/goto/class_terminalGeneric.inc:371
+#: admin/systems/goto/class_workstationGeneric.inc:399
+#: admin/applications/class_applicationGeneric.inc:243
+#: admin/applications/class_applicationGeneric.inc:290
+#: admin/applications/class_applicationGeneric.inc:332
+#: admin/applications/class_applicationGeneric.inc:364
+#: admin/applications/class_applicationGeneric.inc:369
+#: admin/applications/class_applicationGeneric.inc:374
+#: admin/applications/class_applicationGeneric.inc:378
+#: admin/ConfigManagement/failed.tpl:2
+#: admin/ConfigManagement/class_TemplateWidget_textEditor.inc:40
+#: admin/ConfigManagement/class_TemplateWidget_textEditor.inc:42
+#: personal/environment/class_environment.inc:605
+#: personal/environment/class_environment.inc:687
+#: personal/environment/class_environment.inc:689
+#: personal/environment/class_environment.inc:691
+#: personal/environment/class_environment.inc:702
+#: personal/environment/class_environment.inc:1007
+#: addons/goto/class_filterGotoEvents.inc:18
+#: addons/goto/class_gotoLogView.inc:61 addons/goto/class_gotoLogView.inc:155
+#: addons/goto/class_gotomasses.inc:178 addons/goto/class_gotomasses.inc:326
+#: addons/goto/class_gotomasses.inc:330 addons/goto/class_gotomasses.inc:480
+#: addons/goto/class_gotomasses.inc:515 addons/goto/class_gotomasses.inc:551
+msgid "Error"
+msgstr "Fehler"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:458
+#: admin/mimetypes/class_mimetypeGeneric.inc:470
+#: admin/mimetypes/class_mimetypeGeneric.inc:485
+#: admin/devices/class_deviceGeneric.inc:214
+#: admin/systems/services/terminal/class_goTerminalServer.inc:102
+#: admin/systems/services/ldap/class_goLdapServer.inc:116
+#: admin/systems/services/kiosk/class_goKioskService.inc:255
+#: admin/systems/services/ntp/class_goNtpServer.inc:98
+#: admin/systems/services/shares/class_goShareServer.inc:191
+#: admin/systems/services/shares/class_goShareServer.inc:284
+#: admin/systems/services/shares/class_goShareServer.inc:300
+#: admin/systems/services/shares/class_goShareServer.inc:313
+#: admin/systems/goto/class_terminalStartup.inc:424
+#: admin/systems/goto/class_printGeneric.inc:658
+#: admin/systems/goto/class_printGeneric.inc:961
+#: admin/systems/goto/class_workstationService.inc:458
+#: admin/systems/goto/Device/class_Device.inc:256
+#: admin/systems/goto/Device/class_Device.inc:264
+#: admin/systems/goto/Device/class_InstallRecipe.inc:437
+#: admin/systems/goto/Device/class_InstallRecipe.inc:457
+#: admin/systems/goto/class_workstationStartup.inc:785
+#: admin/systems/goto/class_terminalGeneric.inc:324
+#: admin/systems/goto/class_terminalGeneric.inc:597
+#: admin/systems/goto/class_ArpNewDevice.inc:128
+#: admin/systems/goto/class_terminalService.inc:596
+#: admin/systems/goto/class_workstationGeneric.inc:348
+#: admin/systems/goto/class_workstationGeneric.inc:595
+#: admin/systems/goto/class_workstationGeneric.inc:612
+#: admin/groups/apps/class_groupApplication.inc:648
+#: admin/groups/apps/class_groupApplication.inc:1335
+#: admin/groups/apps/class_groupApplication.inc:1349
+#: admin/groups/apps/class_groupApplication.inc:1363
+#: admin/applications/class_applicationParameters.inc:158
+#: admin/applications/class_applicationParameters.inc:221
+#: admin/applications/class_applicationGeneric.inc:250
+#: admin/applications/class_applicationGeneric.inc:264
+#: admin/applications/class_applicationGeneric.inc:502
+#: admin/ogroups/goto/class_termgroup.inc:374
+#: personal/environment/class_environment.inc:1077
+#: personal/environment/class_environment.inc:1333
+msgid "LDAP error"
+msgstr "LDAP-Fehler"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:499
+msgid "File pattern"
+msgstr "Datei-Muster"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:601
+msgid "Mime type generic"
+msgstr "MIME-Typ (Allgemein)"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:619
+msgid "RDN for mime type storage."
+msgstr "RDN für die Ablage von Mime-Typen"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:627
+msgid "Mime group"
+msgstr "MIME-Gruppe"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:630
+#: admin/groups/apps/class_groupApplication.inc:59
+#: admin/groups/apps/class_groupApplication.inc:1390
+#: admin/applications/application-list-release.xml:15
+#: admin/applications/application-list-release.xml:74
+#: admin/applications/class_applicationGeneric.inc:588
+#: admin/applications/application-list.xml:15
+#: admin/applications/application-list.xml:74 admin/applications/generic.tpl:1
+msgid "Application"
+msgstr "Anwendung"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:631
+msgid "Left click action"
+msgstr "Linksklick-Aktion"
+
+#: admin/mimetypes/class_mimetypeGeneric.inc:634
+msgid "Embedded applications"
+msgstr "Eingebettete Anwendungen"
+
+#: admin/devices/class_deviceManagement.inc:25
+#: personal/environment/environment.tpl:285
+#: personal/environment/class_environment.inc:1813
+msgid "Hot-plug devices"
+msgstr "Hotplug-Geräte"
+
+#: admin/devices/class_deviceManagement.inc:26
+msgid "Manage hot-plug devices that are assignable to desktop profiles"
+msgstr "Verwalten von Hotplug-Geräten, welche Desktop-Profilen zuordnebar sind"
+
+#: admin/devices/device-list.tpl:9
+msgid "Device listing"
+msgstr "Liste von Geräten"
+
+#: admin/devices/paste_deviceGeneric.tpl:2
+#: admin/devices/class_deviceGeneric.inc:279 admin/devices/deviceGeneric.tpl:2
+msgid "Devices"
+msgstr "Geräte"
+
+#: admin/devices/paste_deviceGeneric.tpl:4
+msgid "Paste device"
+msgstr "Gerät einfügen"
+
+#: admin/devices/paste_deviceGeneric.tpl:7 admin/devices/deviceGeneric.tpl:18
+msgid "Device name"
+msgstr "Gerätename"
+
+#: admin/devices/device-list.xml:11
+msgid "List of devices"
+msgstr "Liste der Geräte"
+
+#: admin/devices/device-list.xml:15 admin/devices/device-list.xml:74
+#: admin/devices/class_deviceGeneric.inc:177
+#: admin/systems/goto/gotoLpdEnable.tpl:39
+#: admin/systems/goto/Device/class_Device.inc:275
+#: admin/systems/goto/Device/class_Device.inc:276
+#: admin/systems/goto/Device/class_Device.inc:284
+#: admin/systems/goto/Device/Device.tpl:7
+#: admin/systems/goto/Device/class_InstallRecipe.inc:468
+#: personal/environment/hotplugSelect/selectHotplug-list.xml:14
+msgid "Device"
+msgstr "Gerät"
+
+#: admin/devices/device-list.xml:118
+msgid "Edit device"
+msgstr "Gerät bearbeiten"
+
+#: admin/devices/device-list.xml:131
+msgid "Remove device"
+msgstr "Gerät entfernen"
+
+#: admin/devices/class_deviceGeneric.inc:30
+msgid "Digital camera"
+msgstr "Digitalkamera"
+
+#: admin/devices/class_deviceGeneric.inc:31
+msgid "USB stick"
+msgstr "USB-Stick"
+
+#: admin/devices/class_deviceGeneric.inc:32
+msgid "CD/DVD drive"
+msgstr "CD/DVD-Laufwerk"
+
+#: admin/devices/class_deviceGeneric.inc:106
+#: admin/devices/class_deviceGeneric.inc:108
+msgid "iSerial"
+msgstr "iSerial"
+
+#: admin/devices/class_deviceGeneric.inc:111
+#: admin/devices/deviceGeneric.tpl:65
+msgid "Product-ID"
+msgstr "Produkt-ID"
+
+#: admin/devices/class_deviceGeneric.inc:114
+#: admin/devices/deviceGeneric.tpl:57
+msgid "Vendor-ID"
+msgstr "Anbieter-ID"
+
+#: admin/devices/class_deviceGeneric.inc:270
+msgid "Device generic"
+msgstr "Allgemeines zum Gerät"
+
+#: admin/devices/class_deviceGeneric.inc:270
+msgid "Hot-plug"
+msgstr "Hotplug"
+
+#: admin/devices/class_deviceGeneric.inc:287
+#: admin/systems/goto/Device/class_Device.inc:311
+msgid "RDN for device storage."
+msgstr "RDN für die Geräte Ablage"
+
+#: admin/devices/class_deviceGeneric.inc:297
+#: admin/systems/services/shares/class_goShareServer.inc:433
+#: admin/systems/services/shares/class_servNfs.inc:193
+#: admin/systems/services/shares/servnfs.tpl:59
+#: admin/systems/goto/workstationService.tpl:57
+#: admin/systems/goto/workstationService.tpl:163
+#: admin/systems/goto/gotoLpdEnable.tpl:29
+#: admin/systems/goto/Device/class_Device.inc:301
+#: admin/systems/goto/Device/Device.tpl:43
+#: admin/systems/goto/terminalService.tpl:51
+#: admin/systems/goto/terminalService.tpl:146
+#: personal/environment/class_environment.inc:273
+msgid "Type"
+msgstr "Typ"
+
+#: admin/devices/class_deviceGeneric.inc:298
+#: admin/systems/goto/class_gotoLpdEnabled.inc:51
+msgid "Serial"
+msgstr "Seriell"
+
+#: admin/devices/class_deviceGeneric.inc:299
+msgid "Vendor"
+msgstr "Hersteller"
+
+#: admin/devices/class_deviceGeneric.inc:300
+msgid "Device ID"
+msgstr "Geräte-ID"
+
+#: admin/devices/deviceGeneric.tpl:4
+msgid "Edit devices"
+msgstr "Geräte bearbeiten"
+
+#: admin/devices/deviceGeneric.tpl:8
+#: admin/systems/services/shares/servnfs.tpl:7
+#: admin/systems/goto/gotoLpdEnable.tpl:15
+#: admin/systems/goto/gotoLpdEnable.tpl:18
+#: admin/systems/goto/gotoLpdEnable.tpl:74
+#: admin/systems/goto/workstation.tpl:6 admin/systems/goto/terminal.tpl:6
+#: admin/systems/goto/printer.tpl:7 admin/applications/generic.tpl:5
+#: addons/goto/events/DaemonEvent_rescan.tpl:33
+#: addons/goto/events/DaemonEvent_rescan.tpl:37
+#: addons/goto/events/DaemonEvent_halt.tpl:33
+#: addons/goto/events/DaemonEvent_halt.tpl:37
+#: addons/goto/events/DaemonEvent_activate.tpl:33
+#: addons/goto/events/DaemonEvent_activate.tpl:37
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:33
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:37
+#: addons/goto/events/DaemonEvent_notify.tpl:69
+#: addons/goto/events/DaemonEvent_notify.tpl:73
+#: addons/goto/events/DaemonEvent_wakeup.tpl:33
+#: addons/goto/events/DaemonEvent_wakeup.tpl:37
+#: addons/goto/events/DaemonEvent_lock.tpl:33
+#: addons/goto/events/DaemonEvent_lock.tpl:37
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:33
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:37
+#: addons/goto/events/DaemonEvent_reinstall.tpl:33
+#: addons/goto/events/DaemonEvent_reinstall.tpl:37
+#: addons/goto/events/DaemonEvent_reboot.tpl:33
+#: addons/goto/events/DaemonEvent_reboot.tpl:37
+#: addons/goto/events/DaemonEvent_localboot.tpl:33
+#: addons/goto/events/DaemonEvent_localboot.tpl:37
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:33
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:37
+#: addons/goto/events/DaemonEvent_update.tpl:33
+#: addons/goto/events/DaemonEvent_update.tpl:37
+msgid "Generic settings"
+msgstr "Allgemeine Benutzereinstellungen"
+
+#: admin/devices/deviceGeneric.tpl:34
+msgid "Device type"
+msgstr "Gerätetyp"
+
+#: admin/devices/deviceGeneric.tpl:37
+msgid "Choose the device type"
+msgstr "Wählen Sie den Gerätetyp"
+
+#: admin/devices/deviceGeneric.tpl:46
+msgid "Serial settings"
+msgstr "Seriennummer-Einstellungen"
+
+#: admin/devices/deviceGeneric.tpl:48
+#: admin/systems/goto/Device/class_Device.inc:291
+#: admin/systems/goto/Device/Device.tpl:102
+msgid "Serial number"
+msgstr "Seriennummer"
+
+#: admin/devices/deviceGeneric.tpl:48
+msgid "(iSerial)"
+msgstr "(iSerial)"
+
+#: admin/devices/deviceGeneric.tpl:57
+msgid "(idVendor)"
+msgstr "(idVendor)"
+
+#: admin/devices/deviceGeneric.tpl:65
+msgid "(idProduct)"
+msgstr "(idProduct)"
+
+#: admin/systems/ppd/printerPPDDialog.tpl:2
+msgid "Printer driver"
+msgstr "Drucker-Treiber"
+
+#: admin/systems/ppd/printerPPDDialog.tpl:13
+#: admin/systems/goto/workstationService.tpl:8
+#: admin/systems/goto/terminalService.tpl:8
+msgid "Model"
+msgstr "Modell"
+
+#: admin/systems/ppd/printerPPDDialog.tpl:16
+msgid "Select"
+msgstr "Auswahl"
+
+#: admin/systems/ppd/printerPPDDialog.tpl:19
+msgid "New driver"
+msgstr "Neuer Treiber"
+
+#: admin/systems/ppd/printerPPDDialog.tpl:24
+#: admin/groups/apps/edit_entry.tpl:28 admin/applications/generic.tpl:143
+#: admin/ConfigManagement/class_TemplateWidget_file.inc:17
+#: addons/goto/goto_import_file.tpl:25
+msgid "Upload"
+msgstr "Hochladen"
+
+#: admin/systems/ppd/printerPPDDialog.tpl:32
+#: admin/systems/goto/gotoLpdEnable.tpl:55
+#: admin/systems/goto/class_gotoLpdEnabled.inc:158
+#: admin/applications/generic.tpl:96
+msgid "Options"
+msgstr "Optionen"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:54
+#: admin/systems/ppd/class_printerPPDDialog.inc:120
+#: admin/systems/goto/class_workstationService.inc:78
+#: admin/systems/goto/class_workstationStartup.inc:1206
+#: admin/systems/goto/class_workstationStartup.inc:1208
+#: admin/systems/goto/class_terminalService.inc:121
+#: admin/ConfigManagement/failed.tpl:10
+#: personal/environment/class_environment.inc:236
+msgid "Configuration error"
+msgstr "Konfigurationsfehler"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:72
+#: admin/systems/ppd/class_printerPPDDialog.inc:140
+#: admin/systems/ppd/class_printerPPDDialog.inc:224
+#: admin/systems/ppd/class_printerPPDDialog.inc:240
+#: admin/systems/ppd/class_printerPPDDialog.inc:248
+#: admin/systems/ppd/class_printerPPDDialog.inc:272
+#: admin/systems/ppd/class_printerPPDDialog.inc:289
+#: admin/systems/ppd/class_printerPPDDialog.inc:313
+#: admin/systems/ppd/class_printerPPDDialog.inc:327
+#: admin/systems/ppd/class_printerPPDDialog.inc:337
+#: admin/systems/ppd/class_printerPPDDialog.inc:341
+#: admin/systems/ppd/class_printerPPDDialog.inc:542
+#: admin/systems/ppd/class_printerPPDDialog.inc:559
+#: admin/systems/ppd/class_printerPPDDialog.inc:562
+#: admin/systems/ppd/class_printerPPDDialog.inc:565
+#: admin/systems/ppd/class_printerPPDSelectionDialog.inc:66
+#: admin/systems/ppd/class_printerPPDSelectionDialog.inc:90
+msgid "PPD error"
+msgstr "PPD-Fehler"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:72
+#, php-format
+msgid "Cannot open PPD '%s'!"
+msgstr "Kann PPD '%s' nicht öffnen!"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:96
+msgid "Can't get PPD information."
+msgstr "Kann PPD-Information nicht lesen"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:121
+#, php-format
+msgid "Cannot open PPD path '%s' for reading and writing!"
+msgstr "Kann PPD-Pfad '%s' nicht zum Lesen und Schreiben öffnen!"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:140
+#: admin/systems/ppd/class_printerPPDDialog.inc:341
+#: admin/ConfigManagement/class_TemplateWidget_textEditor.inc:42
+#: addons/goto/class_goto_import_file.inc:29
+msgid "file is empty"
+msgstr "Datei ist leer"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:289
+#, php-format
+msgid "Cannot parse PPD '%s'!"
+msgstr "Kann PPD '%s' nicht einlesen!"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:316
+msgid "Overwrite existing PPD"
+msgstr "Existierende PPD überschreiben"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:317
+msgid ""
+"There is already a PPD file for this kind of printer. Do you want to "
+"overwrite it?"
+msgstr ""
+"Der von Ihnen gewählte Drucker-Typ verfügt bereits über eine PPD-Datei. "
+"Möchten Sie diese überschreiben?"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:533
+#: admin/systems/ppd/class_printerPPDDialog.inc:536
+msgid "True"
+msgstr "wahr"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:534
+#: admin/systems/ppd/class_printerPPDDialog.inc:537
+msgid "False"
+msgstr "falsch"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:542
+#, php-format
+msgid "PPD type '%s' is not supported!"
+msgstr "PPD-Typ '%s' wird nicht unterstützt!"
+
+#: admin/systems/ppd/class_printerPPDDialog.inc:579
+msgid ""
+"Please select a valid PPD file or use 'Cancel' to go back to printer "
+"configuration."
+msgstr ""
+"Bitte wählen Sie eine gültige PPD-Datei aus oder drücken Sie 'Abbrechen', um "
+"zurück zur Drucker-Konfiguration zu gelangen."
+
+#: admin/systems/ppd/printerPPDSelectionDialog.tpl:1
+msgid "Select objects to add"
+msgstr "Wählen Sie die hinzuzufügenden Objekte"
+
+#: admin/systems/ppd/printerPPDSelectionDialog.tpl:5
+msgid "Close"
+msgstr "Schliessen"
+
+#: admin/systems/ppd/class_ppdManager.inc:23
+#: admin/systems/ppd/class_ppdManager.inc:169
+#: admin/systems/ppd/class_ppdManager.inc:171
+msgid "PPD manager error"
+msgstr "PPD-Manager-Fehler"
+
+#: admin/systems/ppd/class_ppdManager.inc:23
+#, php-format
+msgid "The specified path '%s' does not exist."
+msgstr "Der angegebene Pfad '%s' existiert nicht."
+
+#: admin/systems/ppd/class_ppdManager.inc:169
+#, php-format
+msgid "Specified PPD file '%s' cannot be opened for reading."
+msgstr "Die PPD-Datei '%s' konnte nicht zum Lesen geöffnet werden."
+
+#: admin/systems/ppd/class_ppdManager.inc:171
+#, php-format
+msgid "The temporary file '%s' cannot be opened for writing."
+msgstr "Die temporäre Datei '%s' kann nicht zum Schreiben geöffnet werden."
+
+#: admin/systems/ppd/class_ppdManager.inc:193
+#: admin/systems/ppd/class_ppdManager.inc:331
+msgid "Parsing PPD file failed - file is empty!"
+msgstr "Das Verarbeiten der PPD-Datei ist fehlgeschlagen - die Datei ist leer!"
+
+#: admin/systems/ppd/class_ppdManager.inc:203
+#, php-format
+msgid ""
+"Parsing PPD file %s failed - line too long. Trailing characters have been "
+"ignored!"
+msgstr ""
+"Das Verarbeiten der PPD-Datei '%s' ist fehlgeschlagen - Zeile zu lang. "
+"Nachfolgende Zeichen wurden ausgelassen!"
+
+#: admin/systems/ppd/class_ppdManager.inc:211
+msgid "Nested groups are not supported!"
+msgstr "Verschachtelte Gruppen werden nicht unterstützt!"
+
+#: admin/systems/ppd/class_ppdManager.inc:215
+msgid "Group name not unique!"
+msgstr "Der Gruppenname ist nicht eindeutig!"
+
+#: admin/systems/ppd/class_ppdManager.inc:221
+#: admin/systems/ppd/class_ppdManager.inc:251
+msgid "Symbol values are not supported yet!"
+msgstr "Symbolische Werte werden noch nicht unterstützt!"
+
+#: admin/systems/ppd/class_ppdManager.inc:245
+msgid "Nested options are not supported!"
+msgstr "Verschachtelte Werte werden noch nicht unterstützt."
+
+#: admin/systems/ppd/class_ppdManager.inc:270
+msgid "PickMany is not supported yet!"
+msgstr "Die Option PickMany wird noch nicht unterstützt!"
+
+#: admin/systems/ppd/class_ppdManager.inc:351
+#, php-format
+msgid ""
+"Parsing PPD file %s failed - line too long. Trailing characters have been "
+"ignored"
+msgstr ""
+"Das Verarbeiten der PPD-Datei '%s' ist fehlgeschlagen - Zeile zu lang. "
+"Nachfolgende Zeichen wurden ausgelassen."
+
+#: admin/systems/ppd/class_ppdManager.inc:379
+#, php-format
+msgid "Parsing PPD file %s failed - no information found."
+msgstr ""
+"Das Verarbeiten der PPD-Datei '%s' ist fehlgeschlagen - keine Information "
+"gefunden."
+
+#: admin/systems/ppd/class_printerPPDSelectionDialog.inc:31
+msgid "PPD"
+msgstr "PPD"
+
+#: admin/systems/ppd/class_printerPPDSelectionDialog.inc:115
+#: admin/groups/apps/class_groupApplication.inc:453
+msgid "back"
+msgstr "zurück"
+
+#: admin/systems/ppd/remove_ppd.tpl:3
+#: admin/systems/services/kiosk/class_goKioskService.inc:111
+#: admin/systems/services/kiosk/class_goKioskService.inc:139
+#: admin/ogroups/goto/termgroup.tpl:3
+#: personal/environment/class_environment.inc:141
+#: personal/environment/class_environment.inc:320
+#: personal/environment/class_environment.inc:370
+#: personal/environment/class_environment.inc:374 addons/goto/remove.tpl:2
+msgid "Warning"
+msgstr "Warnung"
+
+#: admin/systems/ppd/remove_ppd.tpl:8
+msgid "The PPD file will be removed from the server and can not be restored."
+msgstr ""
+"Die PPD-Datei wird vom Server entfernt und kann nicht wiederhergestellt "
+"werden."
+
+#: admin/systems/services/cups/goCupsServer.tpl:1
+msgid "Print Service"
+msgstr "Druck-Dienst"
+
+#: admin/systems/services/cups/goCupsServer.tpl:1
+msgid "enabled"
+msgstr "aktiviert"
+
+#: admin/systems/services/cups/class_goCupsServer.inc:27
+#: admin/systems/services/cups/class_goCupsServer.inc:48
+#: admin/systems/services/cups/class_goCupsServer.inc:69
+#: admin/systems/goto/info.tpl:137
+msgid "Print service"
+msgstr "Druck-Dienst"
+
+#: admin/systems/services/cups/class_goCupsServer.inc:68
+msgid "Cups"
+msgstr "CUPS"
+
+#: admin/systems/services/cups/class_goCupsServer.inc:69
+#: admin/systems/services/terminal/class_goTerminalServer.inc:164
+#: admin/systems/services/kiosk/class_goKioskService.inc:276
+#: admin/systems/services/ntp/class_goNtpServer.inc:115
+#: admin/systems/services/shares/class_goShareServer.inc:413
+msgid "Services"
+msgstr "Dienste"
+
+#: admin/systems/services/cups/class_goCupsServer.inc:81
+#: admin/systems/services/terminal/class_goTerminalServer.inc:177
+#: admin/systems/services/ldap/class_goLdapServer.inc:140
+#: admin/systems/services/ntp/class_goNtpServer.inc:127
+#: admin/systems/services/shares/class_goShareServer.inc:425
+msgid "Start"
+msgstr "Start"
+
+#: admin/systems/services/cups/class_goCupsServer.inc:82
+#: admin/systems/services/terminal/class_goTerminalServer.inc:178
+#: admin/systems/services/ldap/class_goLdapServer.inc:141
+#: admin/systems/services/ntp/class_goNtpServer.inc:128
+#: admin/systems/services/shares/class_goShareServer.inc:426
+msgid "Stop"
+msgstr "Beenden"
+
+#: admin/systems/services/cups/class_goCupsServer.inc:83
+#: admin/systems/services/terminal/class_goTerminalServer.inc:179
+#: admin/systems/services/ldap/class_goLdapServer.inc:142
+#: admin/systems/services/ntp/class_goNtpServer.inc:129
+#: admin/systems/services/shares/class_goShareServer.inc:427
+msgid "Restart"
+msgstr "Neustart"
+
+#: admin/systems/services/terminal/goTerminalServer.tpl:1
+#: admin/systems/services/terminal/class_goTerminalServer.inc:26
+#: admin/systems/services/terminal/class_goTerminalServer.inc:75
+#: admin/systems/services/terminal/class_goTerminalServer.inc:163
+#: admin/systems/services/terminal/class_goTerminalServer.inc:164
+#: admin/systems/goto/class_terminalService.inc:703
+#: admin/systems/goto/terminalService.tpl:1
+msgid "Terminal service"
+msgstr "Terminal-Dienst"
+
+#: admin/systems/services/terminal/goTerminalServer.tpl:6
+#: admin/systems/services/terminal/class_goTerminalServer.inc:180
+msgid "Temporary disable login"
+msgstr "Anmeldung sperren (temporär)"
+
+#: admin/systems/services/terminal/goTerminalServer.tpl:8
+msgid "Supported session types"
+msgstr "Unterstützte Sitzungstypen"
+
+#: admin/systems/services/ldap/class_goLdapServer.inc:30
+#: admin/systems/services/ldap/class_goLdapServer.inc:68
+#: admin/systems/services/ldap/class_goLdapServer.inc:128
+#: admin/systems/services/ldap/goLdapServer.tpl:1
+msgid "LDAP service"
+msgstr "LDAP-Dienst"
+
+#: admin/systems/services/ldap/class_goLdapServer.inc:35
+msgid "enter your servers DNS name"
+msgstr "geben Sie den DNS-Namen Ihres Servers an"
+
+#: admin/systems/services/ldap/class_goLdapServer.inc:78
+#: admin/systems/services/ldap/class_goLdapServer.inc:81
+#: admin/systems/services/ldap/goLdapServer.tpl:2
+msgid "LDAP URI"
+msgstr "LDAP URI"
+
+#: admin/systems/services/ldap/class_goLdapServer.inc:81
+#: admin/systems/services/shares/servnfs.tpl:40
+#: admin/systems/goto/class_SelectDeviceType.inc:38
+#: admin/systems/goto/class_ArpNewDevice.inc:38
+#: personal/environment/environment.tpl:127
+#: personal/environment/class_environment.inc:272
+#: addons/goto/events/eventTargetSystems-list.xml:15
+msgid "Server"
+msgstr "Server"
+
+#: admin/systems/services/ldap/class_goLdapServer.inc:81
+#: admin/systems/goto/workstationService.tpl:69
+#: admin/systems/goto/gotoLpdEnable.tpl:47
+#: admin/systems/goto/class_gotoLpdEnabled.inc:155
+#: admin/systems/goto/terminalService.tpl:61
+msgid "Port"
+msgstr "Anschluss"
+
+#: admin/systems/services/ldap/class_goLdapServer.inc:127
+msgid "LDAP"
+msgstr "LDAP"
+
+#: admin/systems/services/ldap/class_goLdapServer.inc:143
+msgid "LDAP base"
+msgstr "LDAP-Basis"
+
+#: admin/systems/services/kiosk/class_goKioskService.inc:34
+#: admin/systems/services/kiosk/class_goKioskService.inc:78
+#: admin/systems/services/kiosk/class_goKioskService.inc:212
+msgid "Kiosk profile service"
+msgstr "Kiosk-Profil-Dienst"
+
+#: admin/systems/services/kiosk/class_goKioskService.inc:62
+#: admin/systems/services/kiosk/class_goKioskService.inc:139
+#: personal/environment/environment.tpl:137
+msgid "Profile"
+msgstr "Profil"
+
+#: admin/systems/services/kiosk/class_goKioskService.inc:111
+#, php-format
+msgid "The profile does not exists '%s'!"
+msgstr "Das Profil '%s' existiert nicht!"
+
+#: admin/systems/services/kiosk/class_goKioskService.inc:169
+#: personal/environment/environment.tpl:116
+#: personal/environment/environment.tpl:152
+#: personal/environment/class_environment.inc:1814
+msgid "Kiosk profile"
+msgstr "Kiosk-Profil"
+
+#: admin/systems/services/kiosk/class_goKioskService.inc:275
+msgid "Kiosk"
+msgstr "Kiosk"
+
+#: admin/systems/services/kiosk/class_goKioskService.inc:276
+#: admin/systems/services/kiosk/goKioskService.tpl:1
+msgid "Kiosk profile management"
+msgstr "Verwaltung der Kiosk-Profile"
+
+#: admin/systems/services/kiosk/goKioskService.tpl:15
+msgid "Server path"
+msgstr "Server-Pfad"
+
+#: admin/systems/services/kiosk/goKioskService.tpl:22
+#: addons/goto/goto_import_file.tpl:24
+msgid "Browse"
+msgstr "Durchsuchen"
+
+#: admin/systems/services/ntp/class_goNtpServer.inc:28
+#: admin/systems/services/ntp/class_goNtpServer.inc:74
+msgid "Time service (NTP)"
+msgstr "Zeit-Dienst (NTP)"
+
+#: admin/systems/services/ntp/class_goNtpServer.inc:114
+msgid "Time service"
+msgstr "Zeit-Dienst"
+
+#: admin/systems/services/ntp/class_goNtpServer.inc:115
+msgid "Time service - NTP"
+msgstr "Zeit-Dienst - NTP"
+
+#: admin/systems/services/ntp/class_goNtpServer.inc:130
+msgid "NTP source"
+msgstr "NTP-Quelle"
+
+#: admin/systems/services/ntp/goNtpServer.tpl:1
+msgid "Time server"
+msgstr "Zeit-Server"
+
+#: admin/systems/services/shares/goShareServer.tpl:1
+#: admin/systems/services/shares/goShareServer.tpl:3
+#: admin/systems/goto/class_terminalStartup.inc:530
+#: admin/systems/goto/workstationStartup.tpl:251
+#: admin/systems/goto/class_workstationStartup.inc:930
+#: admin/systems/goto/terminalStartup.tpl:103
+#: personal/environment/environment.tpl:202
+#: personal/environment/class_environment.inc:1812
+msgid "Shares"
+msgstr "Freigaben"
+
+#: admin/systems/services/shares/goShareServer.tpl:18
+#: admin/systems/goto/printer.tpl:83 admin/groups/apps/app_list.tpl:92
+#: admin/groups/apps/app_list.tpl:131 personal/environment/environment.tpl:264
+#: addons/goto/deploy-list.xml:241
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: admin/systems/services/shares/class_goShareServer.inc:31
+#: admin/systems/services/shares/class_goShareServer.inc:157
+#: admin/systems/services/shares/class_goShareServer.inc:412
+msgid "File service (Shares)"
+msgstr "Datei-Dienst (Freigaben)"
+
+#: admin/systems/services/shares/class_goShareServer.inc:236
+#, php-format
+msgid "Cannot remove share - it is still in use by these objects: %s"
+msgstr ""
+"Die Freigabe konnte nicht entfernt werden - sie wird momentan noch von "
+"folgenden Objekten verwendet: %s"
+
+#: admin/systems/services/shares/class_goShareServer.inc:256
+msgid "share"
+msgstr "Freigabe"
+
+#: admin/systems/services/shares/class_goShareServer.inc:413
+msgid "File service - Shares"
+msgstr "Datei-Dienst - Freigaben"
+
+#: admin/systems/services/shares/class_goShareServer.inc:429
+msgid "Share entries"
+msgstr "Freigaben-Einträge"
+
+#: admin/systems/services/shares/class_goShareServer.inc:430
+#: admin/systems/services/shares/class_goShareServer.inc:431
+msgid "Apple mounts"
+msgstr "Apple Freigaben"
+
+#: admin/systems/services/shares/class_goShareServer.inc:434
+msgid "Character set"
+msgstr "Zeichensatz"
+
+#: admin/systems/services/shares/class_goShareServer.inc:435
+#: admin/systems/services/shares/class_servNfs.inc:179
+#: admin/systems/services/shares/servnfs.tpl:30
+msgid "Path"
+msgstr "Pfad"
+
+#: admin/systems/services/shares/class_goShareServer.inc:436
+#: admin/systems/services/shares/class_servNfs.inc:215
+#: admin/systems/services/shares/servnfs.tpl:124
+msgid "Option"
+msgstr "Option"
+
+#: admin/systems/services/shares/class_goShareServer.inc:437
+#: admin/systems/services/shares/class_servNfs.inc:211
+#: admin/systems/services/shares/servnfs.tpl:30
+msgid "Volume"
+msgstr "Volume"
+
+#: admin/systems/services/shares/class_servNfs.inc:184
+msgid "'Path / Volume' must be of format 'server:port'!"
+msgstr "'Pfad / Volume' muß das Format 'server:port' haben!"
+
+#: admin/systems/services/shares/class_servNfs.inc:188
+msgid "'Path / Volume' must contain at least one '/'!"
+msgstr "'Pfad / Volume' muß mindestens ein '/' enthalten!"
+
+#: admin/systems/services/shares/servnfs.tpl:1
+msgid "Edit share"
+msgstr "Freigabe bearbeiten"
+
+#: admin/systems/services/shares/servnfs.tpl:2
+msgid "NFS setup"
+msgstr "NFS-Einrichtung"
+
+#: admin/systems/services/shares/servnfs.tpl:54
+msgid "Share type"
+msgstr "Freigaben-Typ"
+
+#: admin/systems/services/shares/servnfs.tpl:72
+msgid "Auto-mount share on Apple systems"
+msgstr "Freigabe auf Apple-Systemen automatisch einbinden."
+
+#: admin/systems/services/shares/servnfs.tpl:112
+msgid "Code page"
+msgstr "Codepage"
+
+#: admin/systems/goto/workstationService.tpl:1
+#: admin/systems/goto/class_workstationService.inc:501
+msgid "Workstation service"
+msgstr "Arbeitsstations-Dienst"
+
+#: admin/systems/goto/workstationService.tpl:5
+#: admin/systems/goto/workstationService.tpl:6
+#: admin/systems/goto/terminalService.tpl:5
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: admin/systems/goto/workstationService.tpl:12
+#: admin/systems/goto/terminalService.tpl:11
+msgid "Choose keyboard model"
+msgstr "Wählen Sie das Tastatur-Modell"
+
+#: admin/systems/goto/workstationService.tpl:20
+#: admin/systems/goto/terminalService.tpl:18
+msgid "Layout"
+msgstr "Layout"
+
+#: admin/systems/goto/workstationService.tpl:24
+#: admin/systems/goto/terminalService.tpl:21
+msgid "Choose keyboard layout"
+msgstr "Wählen Sie das Tastatur-Layout"
+
+#: admin/systems/goto/workstationService.tpl:32
+#: admin/systems/goto/terminalService.tpl:28
+msgid "Variant"
+msgstr "Variante"
+
+#: admin/systems/goto/workstationService.tpl:36
+#: admin/systems/goto/terminalService.tpl:31
+msgid "Choose keyboard variant"
+msgstr "Wählen Sie die Tastatur-Variante"
+
+#: admin/systems/goto/workstationService.tpl:54
+#: admin/systems/goto/workstationService.tpl:55
+#: admin/systems/goto/terminalService.tpl:48
+#: admin/systems/goto/terminalService.tpl:49
+msgid "Mouse"
+msgstr "Maus"
+
+#: admin/systems/goto/workstationService.tpl:61
+#: admin/systems/goto/terminalService.tpl:54
+msgid "Choose mouse type"
+msgstr "Wählen Sie den Maus-Typ"
+
+#: admin/systems/goto/workstationService.tpl:73
+#: admin/systems/goto/terminalService.tpl:64
+msgid "Choose mouse port"
+msgstr "Wählen Sie den Maus-Port"
+
+#: admin/systems/goto/workstationService.tpl:91
+#: admin/systems/goto/workstationService.tpl:92
+#: admin/systems/goto/class_workstationService.inc:522
+#: admin/systems/goto/class_terminalService.inc:729
+#: admin/systems/goto/terminalService.tpl:81
+#: admin/systems/goto/terminalService.tpl:82
+msgid "Telephone hardware"
+msgstr "Telefon-Hardware"
+
+#: admin/systems/goto/workstationService.tpl:94
+#: admin/systems/goto/terminalService.tpl:84
+msgid "Telephone"
+msgstr "Telefon"
+
+#: admin/systems/goto/workstationService.tpl:109
+#: admin/systems/goto/workstationService.tpl:112
+#: admin/systems/goto/workstationService.tpl:113
+#: admin/systems/goto/info.tpl:86 admin/systems/goto/terminalService.tpl:97
+#: admin/systems/goto/terminalService.tpl:101
+#: admin/systems/goto/terminalService.tpl:102
+msgid "Graphic device"
+msgstr "Grafikkarte"
+
+#: admin/systems/goto/workstationService.tpl:115
+#: admin/systems/goto/printer.tpl:81
+#: admin/systems/goto/terminalService.tpl:104
+msgid "Driver"
+msgstr "Treiber"
+
+#: admin/systems/goto/workstationService.tpl:119
+#: admin/systems/goto/terminalService.tpl:107
+msgid "Choose graphic driver that is needed by the installed graphic board"
+msgstr ""
+"Wählen Sie den Treiber, der von der installierten Grafikkarte benötigt wird."
+
+#: admin/systems/goto/workstationService.tpl:127
+#: admin/systems/goto/terminalService.tpl:114
+#: personal/environment/environment.tpl:166
+#: personal/environment/class_environment.inc:1816
+msgid "Resolution"
+msgstr "Auflösung"
+
+#: admin/systems/goto/workstationService.tpl:131
+#: admin/systems/goto/terminalService.tpl:117
+msgid "Choose screen resolution used in graphic mode"
+msgstr "Wählen Sie die Auflösung, die im Grafik-Modus genutzt wird"
+
+#: admin/systems/goto/workstationService.tpl:139
+#: admin/systems/goto/terminalService.tpl:124
+msgid "Color depth"
+msgstr "Farbtiefe"
+
+#: admin/systems/goto/workstationService.tpl:143
+#: admin/systems/goto/terminalService.tpl:127
+msgid "Choose color depth used in graphic mode"
+msgstr "Wählen Sie die Farbtiefe, die im Grafik-Modus genutzt wird"
+
+#: admin/systems/goto/workstationService.tpl:160
+#: admin/systems/goto/workstationService.tpl:161
+#: admin/systems/goto/terminalService.tpl:143
+#: admin/systems/goto/terminalService.tpl:144
+msgid "Display device"
+msgstr "Anzeige"
+
+#: admin/systems/goto/workstationService.tpl:164
+#: admin/systems/goto/class_workstationService.inc:85
+#: admin/systems/goto/Device/class_Device.inc:163
+#: admin/systems/goto/class_terminalService.inc:609
+msgid "unknown"
+msgstr "unbekannt"
+
+#: admin/systems/goto/workstationService.tpl:174
+#: admin/systems/goto/terminalService.tpl:155
+msgid "Use DDC for automatic detection"
+msgstr "Verwende DDC zur automatischen Erkennung"
+
+#: admin/systems/goto/workstationService.tpl:177
+#: admin/systems/goto/class_workstationService.inc:402
+#: admin/systems/goto/class_workstationService.inc:404
+#: admin/systems/goto/class_workstationService.inc:410
+#: admin/systems/goto/class_workstationService.inc:513
+#: admin/systems/goto/class_terminalService.inc:718
+#: admin/systems/goto/terminalService.tpl:158
+msgid "Horizontal synchronization"
+msgstr "Horizontale-Synchronisation"
+
+#: admin/systems/goto/workstationService.tpl:182
+#: admin/systems/goto/terminalService.tpl:162
+msgid "Horizontal refresh frequency for installed monitor"
+msgstr "Horizontale Wiederholrate für den installierten Monitor"
+
+#: admin/systems/goto/workstationService.tpl:188
+#: admin/systems/goto/class_workstationService.inc:383
+#: admin/systems/goto/class_workstationService.inc:385
+#: admin/systems/goto/class_workstationService.inc:391
+#: admin/systems/goto/class_workstationService.inc:514
+#: admin/systems/goto/class_terminalService.inc:719
+#: admin/systems/goto/terminalService.tpl:166
+msgid "Vertical synchronization"
+msgstr "Vertikale-Synchronisation"
+
+#: admin/systems/goto/workstationService.tpl:193
+#: admin/systems/goto/terminalService.tpl:170
+msgid "Vertical refresh frequency for installed monitor"
+msgstr "Vertikale Wiederholrate für den installierten Monitor"
+
+#: admin/systems/goto/workstationService.tpl:210
+#: admin/systems/goto/terminalService.tpl:236
+#: admin/systems/goto/terminalService.tpl:240
+msgid "Scan device"
+msgstr "Scanner"
+
+#: admin/systems/goto/workstationService.tpl:213
+#: admin/systems/goto/terminalService.tpl:242
+msgid "Select to start SANE scan service on terminal"
+msgstr "Wählen, um den SANE Scanner-Dienst auf dem Terminal zu starten"
+
+#: admin/systems/goto/workstationService.tpl:216
+#: admin/systems/goto/terminalService.tpl:244
+msgid "Provide scan services"
+msgstr "Bilderfassungsdienste bereitstellen"
+
+#: admin/systems/goto/class_terminalStartup.inc:116
+#: admin/systems/goto/class_terminalStartup.inc:120
+#: admin/systems/goto/class_workstationService.inc:197
+#: admin/systems/goto/class_workstationService.inc:200
+#: admin/systems/goto/class_workstationService.inc:203
+#: admin/systems/goto/class_workstationService.inc:206
+#: admin/systems/goto/class_workstationService.inc:209
+#: admin/systems/goto/class_workstationService.inc:212
+#: admin/systems/goto/class_workstationService.inc:215
+#: admin/systems/goto/class_workstationService.inc:218
+#: admin/systems/goto/class_workstationService.inc:229
+#: admin/systems/goto/class_workstationService.inc:230
+#: admin/systems/goto/class_workstationService.inc:231
+#: admin/systems/goto/class_workstationService.inc:232
+#: admin/systems/goto/class_workstationService.inc:233
+#: admin/systems/goto/class_workstationService.inc:234
+#: admin/systems/goto/class_workstationService.inc:235
+#: admin/systems/goto/class_workstationStartup.inc:177
+#: admin/systems/goto/class_workstationStartup.inc:207
+#: admin/systems/goto/class_terminalGeneric.inc:140
+#: admin/systems/goto/class_terminalGeneric.inc:257
+#: admin/systems/goto/class_terminalGeneric.inc:269
+#: admin/systems/goto/class_terminalService.inc:182
+#: admin/systems/goto/class_terminalService.inc:260
+#: admin/systems/goto/class_terminalService.inc:263
+#: admin/systems/goto/class_terminalService.inc:271
+#: admin/systems/goto/class_terminalService.inc:274
+#: admin/systems/goto/class_terminalService.inc:277
+#: admin/systems/goto/class_terminalService.inc:280
+#: admin/systems/goto/class_terminalService.inc:283
+#: admin/systems/goto/class_terminalService.inc:286
+#: admin/systems/goto/class_terminalService.inc:289
+#: admin/systems/goto/class_workstationGeneric.inc:156
+#: admin/ogroups/goto/class_termgroup.inc:102
+#: admin/ogroups/goto/class_termgroup.inc:114
+msgid "inherited"
+msgstr "geerbt"
+
+#: admin/systems/goto/class_terminalStartup.inc:135
+#, php-format
+msgid ""
+"Command '%s', specified as systemKernelsHook for plug-in '%s' doesn't seem "
+"to exist."
+msgstr ""
+"Das in systemKernelsHook angegebene Kommando '%s' (Modul '%s') scheint nicht "
+"zu existieren."
+
+#: admin/systems/goto/class_terminalStartup.inc:166
+#: admin/systems/goto/class_terminalStartup.inc:529
+#: admin/systems/goto/workstationStartup.tpl:50
+#: admin/systems/goto/class_workstationStartup.inc:259
+#: admin/systems/goto/class_workstationStartup.inc:925
+#: admin/systems/goto/terminalStartup.tpl:6
+msgid "LDAP server"
+msgstr "LDAP-Server"
+
+#: admin/systems/goto/class_terminalStartup.inc:189
+#: admin/systems/goto/class_printGeneric.inc:591
+#: admin/systems/goto/class_terminalInfo.inc:68
+#: admin/systems/goto/class_terminalGeneric.inc:209
+msgid "terminal"
+msgstr "Terminal"
+
+#: admin/systems/goto/class_terminalStartup.inc:232
+#: admin/systems/goto/workstationStartup.tpl:270
+#: admin/systems/goto/class_workstationStartup.inc:403
+#: admin/systems/goto/terminalStartup.tpl:122
+#: personal/environment/class_environment.inc:272
+#: personal/environment/class_environment.inc:689
+#: personal/environment/class_environment.inc:691
+#: personal/environment/class_environment.inc:702
+msgid "Mount point"
+msgstr "Einhänge-Pfad"
+
+#: admin/systems/goto/class_terminalStartup.inc:370
+#: admin/systems/goto/class_workstationStartup.inc:658
+msgid "Fatal error"
+msgstr "Schwerer Fehler"
+
+#: admin/systems/goto/class_terminalStartup.inc:507
+#: admin/systems/goto/class_workstationStartup.inc:916
+msgid "Startup"
+msgstr "Start"
+
+#: admin/systems/goto/class_terminalStartup.inc:508
+msgid "Terminal startup"
+msgstr "Terminal-Start"
+
+#: admin/systems/goto/class_terminalStartup.inc:521
+msgid "Script to check for available kernels"
+msgstr "Skript zum Beziehen der verfügbaren Kernel"
+
+#: admin/systems/goto/class_terminalStartup.inc:531
+#: admin/systems/goto/class_workstationStartup.inc:929
+msgid "Kernel modules"
+msgstr "Kernel-Module"
+
+#: admin/systems/goto/class_terminalStartup.inc:532
+#: admin/systems/goto/workstationStartup.tpl:15
+#: admin/systems/goto/class_workstationStartup.inc:926
+#: admin/systems/goto/terminalStartup.tpl:34
+msgid "Boot kernel"
+msgstr "Boot-Kernel"
+
+#: admin/systems/goto/class_terminalStartup.inc:533
+#: admin/systems/goto/class_workstationStartup.inc:927
+msgid "Kernel parameter"
+msgstr "Kernel-Parameter"
+
+#: admin/systems/goto/gotoLpdEnable.tpl:3
+#: personal/environment/environment.tpl:329
+#: personal/environment/environment.tpl:366
+msgid "Printer settings"
+msgstr "Drucker-Einstellungen"
+
+#: admin/systems/goto/gotoLpdEnable.tpl:9
+#: admin/systems/goto/gotoLpdEnable.tpl:24
+msgid "Enable printer settings"
+msgstr "Drucker-Einstellungen aktivieren"
+
+#: admin/systems/goto/gotoLpdEnable.tpl:63
+msgid "Write only"
+msgstr "Nur schreibend"
+
+#: admin/systems/goto/gotoLpdEnable.tpl:76
+msgid "Bit rate"
+msgstr "Bit-Rate"
+
+#: admin/systems/goto/gotoLpdEnable.tpl:86
+msgid "Flow control"
+msgstr "Flusskontrolle"
+
+#: admin/systems/goto/gotoLpdEnable.tpl:96
+msgid "Parity"
+msgstr "Parität"
+
+#: admin/systems/goto/gotoLpdEnable.tpl:106
+msgid "Bits"
+msgstr "Bits"
+
+#: admin/systems/goto/gencd_frame.tpl:2
+msgid "Your browser does not support the HTML IFRAME element."
+msgstr "Ihr Browser unterstützt keine iframes."
+
+#: admin/systems/goto/class_printGeneric.inc:115
+#: admin/systems/goto/class_printGeneric.inc:1063
+msgid "Internal error"
+msgstr "Interner Fehler"
+
+#: admin/systems/goto/class_printGeneric.inc:115
+#, php-format
+msgid ""
+"Cannot determine a valid department for this object. Setting base to '%s'!"
+msgstr ""
+"Kann keine gültige Abteilung für dieses Objekt ermitteln, setze Basis auf "
+"'%s'."
+
+#: admin/systems/goto/class_printGeneric.inc:298
+#: admin/systems/goto/class_printGeneric.inc:306
+#: admin/systems/goto/class_printGeneric.inc:311
+#: admin/systems/goto/class_printGeneric.inc:361
+#: admin/systems/goto/class_printGeneric.inc:377
+#: admin/systems/goto/class_printGeneric.inc:380
+msgid "Add printer extension"
+msgstr "Drucker-Erweiterung hinzufügen"
+
+#: admin/systems/goto/class_printGeneric.inc:299
+msgid ""
+"Could not initialize printer tab, parameter parent was missing while "
+"construction."
+msgstr ""
+"Konnte den 'Druck'-Reiter nicht initialisieren, der Parameter 'parent' "
+"fehlte während der Erstellung."
+
+#: admin/systems/goto/class_printGeneric.inc:307
+msgid "This is a workstation template, printer tab is disabled."
+msgstr ""
+"Dies ist eine Arbeitsstations-Vorlage, der Drucker-Tab ist deaktiviert."
+
+#: admin/systems/goto/class_printGeneric.inc:312
+msgid "This is a terminal template, printer tab is disabled."
+msgstr "Dies ist eine Terminal-Vorlage, das Drucker-Tab ist deaktiviert."
+
+#: admin/systems/goto/class_printGeneric.inc:354
+#: admin/systems/goto/class_printGeneric.inc:362
+#: admin/systems/goto/class_printGeneric.inc:370
+#: admin/systems/goto/class_printGeneric.inc:373
+#: admin/systems/goto/class_printGeneric.inc:378
+#: admin/systems/goto/class_printGeneric.inc:381
+msgid "printer"
+msgstr "Drucker"
+
+#: admin/systems/goto/class_printGeneric.inc:362
+msgid ""
+"You can't enable it while 'cn' is not present in entry. Possibly you are "
+"currently creating a new terminal template."
+msgstr ""
+"Sie können es nicht aktivieren, solange das 'cn'-Attribut nicht im Eintrag "
+"enthalten ist. Wahrscheinlich erstellen Sie gerade eine neue Terminal-"
+"Vorlage."
+
+#: admin/systems/goto/class_printGeneric.inc:369
+#: admin/systems/goto/class_printGeneric.inc:372
+msgid "Remove printer extension"
+msgstr "Drucker-Erweiterung entfernen"
+
+#: admin/systems/goto/class_printGeneric.inc:565
+#, php-format
+msgid "Your currently selected PPD file '%s' doesn't exist."
+msgstr "Die momentan gewählte PPD-Datei '%s' wurde nicht gefunden."
+
+#: admin/systems/goto/class_printGeneric.inc:571
+msgid "Not defined"
+msgstr "Nicht definiert"
+
+#: admin/systems/goto/class_printGeneric.inc:575
+msgid "Can't get PPD informations."
+msgstr "Kann PPD-Information nicht lesen"
+
+#: admin/systems/goto/class_printGeneric.inc:591
+#: admin/systems/goto/class_printGeneric.inc:593
+#, php-format
+msgid "This printer belongs to %s. You can't rename this printer."
+msgstr "Dieser Drucker gehört zu %s. Sie können ihn nicht umbenennen."
+
+#: admin/systems/goto/class_printGeneric.inc:593
+#: admin/systems/goto/class_workstationStartup.inc:301
+#: admin/systems/goto/class_workstationGeneric.inc:234
+msgid "workstation"
+msgstr "Arbeitsstation"
+
+#: admin/systems/goto/class_printGeneric.inc:640
+#: admin/systems/goto/class_printGeneric.inc:647
+msgid "Object is no printer!"
+msgstr "Das Objekt ist kein Drucker!"
+
+#: admin/systems/goto/class_printGeneric.inc:750
+#: admin/systems/goto/printer.tpl:60
+msgid "Printer URL"
+msgstr "Drucker URL"
+
+#: admin/systems/goto/class_printGeneric.inc:979
+#: admin/systems/goto/class_printGeneric.inc:981
+#: addons/goto/events/eventTargetUser-list.xml:23
+msgid "Group"
+msgstr "Gruppe"
+
+#: admin/systems/goto/class_printGeneric.inc:984
+#: personal/environment/class_environment.inc:273
+#: addons/goto/events/eventTargetUser-list.xml:15
+msgid "User"
+msgstr "Benutzer"
+
+#: admin/systems/goto/class_printGeneric.inc:997
+msgid "Print generic"
+msgstr "Drucken (Alllgemein)"
+
+#: admin/systems/goto/class_printGeneric.inc:1006
+#: admin/systems/goto/printer.tpl:1 admin/systems/goto/terminalService.tpl:252
+#: personal/environment/printerSelect/selectPrinter-list.xml:14
+#: personal/environment/environment.tpl:325
+#: personal/environment/environment.tpl:365
+#: personal/environment/class_environment.inc:1807
+msgid "Printer"
+msgstr "Drucker"
+
+#: admin/systems/goto/class_printGeneric.inc:1014
+msgid "RDN for printer storage."
+msgstr "RDN für die Ablage von Druckern."
+
+#: admin/systems/goto/class_printGeneric.inc:1026
+#: admin/systems/goto/workstation.tpl:28
+#: admin/systems/goto/Device/class_Device.inc:296
+#: admin/systems/goto/Device/Device.tpl:94
+#: admin/systems/goto/class_workstationGeneric.inc:736
+msgid "Location"
+msgstr "Ort"
+
+#: admin/systems/goto/class_printGeneric.inc:1027
+msgid "Labeled URI"
+msgstr "URI"
+
+#: admin/systems/goto/class_printGeneric.inc:1028
+msgid "Mac address"
+msgstr "MAC-Adresse"
+
+#: admin/systems/goto/class_printGeneric.inc:1029
+msgid "Printer PPD"
+msgstr "Drucker-PPD"
+
+#: admin/systems/goto/class_printGeneric.inc:1030
+#: admin/systems/goto/printer.tpl:99 admin/systems/goto/printer.tpl:100
+#: admin/systems/goto/printer.tpl:104 admin/systems/goto/printer.tpl:127
+msgid "Permissions"
+msgstr "Berechtigungen"
+
+#: admin/systems/goto/class_printGeneric.inc:1046
+#: admin/systems/goto/class_printGeneric.inc:1068
+msgid "printer user"
+msgstr "Druckerbenutzer"
+
+#: admin/systems/goto/class_printGeneric.inc:1063
+#, php-format
+msgid "Illegal member type '%s'!"
+msgstr "Ungültiger Mitgliedstyp '%s'!"
+
+#: admin/systems/goto/class_printGeneric.inc:1103
+#, php-format
+msgid "'%s' is already used!"
+msgstr "'%s' wird bereits verwendet!"
+
+#: admin/systems/goto/class_printGeneric.inc:1114
+#, php-format
+msgid "'%s' does not exist!"
+msgstr "'%s' existiert nicht!"
+
+#: admin/systems/goto/workstationStartup.tpl:1
+msgid "Workstation startup"
+msgstr "Arbeitsstation-Startvorgang"
+
+#: admin/systems/goto/workstationStartup.tpl:9
+#: admin/systems/goto/workstationStartup.tpl:10
+#: admin/systems/goto/terminalStartup.tpl:1
+msgid "Boot parameters"
+msgstr "Boot-Parameter"
+
+#: admin/systems/goto/workstationStartup.tpl:33
+#: admin/systems/goto/terminalStartup.tpl:45
+msgid "Custom options"
+msgstr "Angepasste Optionen"
+
+#: admin/systems/goto/workstationStartup.tpl:39
+#: admin/systems/goto/terminalStartup.tpl:50
+msgid ""
+"Enter any parameters that should be passed to the kernel as append line "
+"during boot up"
+msgstr ""
+"Geben Sie die Parameter ein, die dem Kernel beim Starten übergeben werden "
+"sollen"
+
+#: admin/systems/goto/workstationStartup.tpl:55
+#: admin/systems/goto/terminalStartup.tpl:11
+msgid "inherit from group"
+msgstr "von Gruppe übernehmen"
+
+#: admin/systems/goto/workstationStartup.tpl:86
+msgid ""
+"FAI Object assignment disabled. You can't use this feature until FAI is "
+"activated."
+msgstr ""
+"FAI Objektzuweisung nicht aktiv. Sie können dieses Feature nicht verwenden, "
+"bis FAI aktiviert wurde."
+
+#: admin/systems/goto/workstationStartup.tpl:88
+msgid "GOsa support daemon not configured"
+msgstr "GOsa Unterstützungs-Daemon nicht konfiguriert"
+
+#: admin/systems/goto/workstationStartup.tpl:90
+msgid "FAI settings cannot be modified"
+msgstr "FAI-Einstellungen können nicht verändert werden"
+
+#: admin/systems/goto/workstationStartup.tpl:96
+msgid "Check if the GOsa support daemon (gosa-si) is running."
+msgstr "Prüfen Sie, ob der GOsa Unterstützungs-Daemon (gosa-si) läuft."
+
+#: admin/systems/goto/workstationStartup.tpl:98
+msgid "retry"
+msgstr "nochmals versuchen"
+
+#: admin/systems/goto/workstationStartup.tpl:104
+#: admin/systems/goto/workstationStartup.tpl:147
+msgid "FAI class assignment"
+msgstr "FAI-Klassen-Zuordnung"
+
+#: admin/systems/goto/workstationStartup.tpl:107
+#: admin/systems/goto/workstationStartup.tpl:150
+msgid "FAI server"
+msgstr "FAI-Server"
+
+#: admin/systems/goto/workstationStartup.tpl:136
+#: admin/systems/goto/workstationStartup.tpl:183
+msgid "Assigned FAI classes"
+msgstr "Zugewiesene FAI-Klassen"
+
+#: admin/systems/goto/workstationStartup.tpl:214
+msgid "Boot options"
+msgstr "Boot-Optionen"
+
+#: admin/systems/goto/workstationStartup.tpl:222
+#: admin/systems/goto/terminalStartup.tpl:70
+msgid "Kernel modules (format: name parameters)"
+msgstr "Kernel-Module (Format: Name Parameter)"
+
+#: admin/systems/goto/workstationStartup.tpl:225
+#: admin/systems/goto/terminalStartup.tpl:73
+msgid "Add additional modules to load on startup"
+msgstr ""
+"Zusätzliche Module hinzufügen, die während des Starts geladen werden sollen"
+
+#: admin/systems/goto/ArpNewDevice.tpl:1 admin/systems/goto/ArpNewDevice.tpl:5
+msgid "Integrating unknown devices"
+msgstr "Integriere unbekannt Geräte"
+
+#: admin/systems/goto/ArpNewDevice.tpl:3
+msgid ""
+"The current device has been detected by the ARP monitor used by GOsa. You "
+"can integrate this device into your running DHCP/DNS infrastructure by "
+"submitting this form. The device entry will disappear from the list of the "
+"systems and move to the DNS/DHCP configuration."
+msgstr ""
+"Das gewählte Gerät wurde vom ARP-Monitor erkannt, der von GOsa verwendet "
+"wird. Sie können dieses Gerät in Ihre DHCP/DNS-Infrastruktur integrieren, "
+"wenn Sie dieses Formular absenden. Das Gerät wird aus der Liste der Systeme "
+"verschwinden und in die DHCP/DNS-Konfiguration verschoben werden."
+
+#: admin/systems/goto/ArpNewDevice.tpl:9
+msgid "DNS name"
+msgstr "DNS-Name"
+
+#: admin/systems/goto/ArpNewDevice.tpl:32
+msgid "GOto"
+msgstr "GOto"
+
+#: admin/systems/goto/ArpNewDevice.tpl:36
+msgid "GOto integration"
+msgstr "GOto-Integration"
+
+#: admin/systems/goto/ArpNewDevice.tpl:38
+msgid "Target type selection"
+msgstr "Typ des Zielsystems"
+
+#: admin/systems/goto/ArpNewDevice.tpl:41
+#: admin/systems/goto/ArpNewDevice.tpl:44
+#: admin/systems/goto/SelectDeviceType.tpl:23
+#: admin/systems/goto/SelectDeviceType.tpl:24
+msgid "System type"
+msgstr "System-Typ"
+
+#: admin/systems/goto/ArpNewDevice.tpl:50
+#: admin/systems/goto/SelectDeviceType.tpl:36
+msgid "Choose an object group as template"
+msgstr "Wählen Sie eine Objektgruppe als Vorlageobjekt"
+
+#: admin/systems/goto/ArpNewDevice.tpl:53
+#: admin/systems/goto/SelectDeviceType.tpl:37
+#: addons/goto/goto_import_file.tpl:42
+#: addons/goto/events/eventTargetSystems-list.xml:39
+msgid "Object group"
+msgstr "Objektgruppe"
+
+#: admin/systems/goto/ArpNewDevice.tpl:54
+#: admin/systems/goto/SelectDeviceType.tpl:39
+#: addons/goto/class_gotoLogView.inc:140
+msgid "none"
+msgstr "keine"
+
+#: admin/systems/goto/info.tpl:6 admin/systems/goto/info.tpl:7
+#: admin/systems/goto/info.tpl:103
+msgid "System information"
+msgstr "System-Information"
+
+#: admin/systems/goto/info.tpl:11
+msgid "Hardware information"
+msgstr "zeige Hardware-Information"
+
+#: admin/systems/goto/info.tpl:14
+msgid "CPU"
+msgstr "Prozessor"
+
+#: admin/systems/goto/info.tpl:17
+msgid "Memory"
+msgstr "Speicher"
+
+#: admin/systems/goto/info.tpl:20
+msgid "Boot MAC"
+msgstr "MAC-Adresse"
+
+#: admin/systems/goto/info.tpl:24
+msgid "USB support"
+msgstr "USB-Unterstützung"
+
+#: admin/systems/goto/info.tpl:27 admin/systems/goto/info.tpl:101
+msgid "System status"
+msgstr "System-Status"
+
+#: admin/systems/goto/info.tpl:31
+msgid "Inventory number"
+msgstr "Inventarnummer"
+
+#: admin/systems/goto/info.tpl:35
+msgid "Last login"
+msgstr "Letzte Anmeldung"
+
+#: admin/systems/goto/info.tpl:45
+msgid "Device information"
+msgstr "Geräte-Information"
+
+#: admin/systems/goto/info.tpl:48
+msgid "Network devices"
+msgstr "Netzwerk-Geräte"
+
+#: admin/systems/goto/info.tpl:58
+msgid "IDE devices"
+msgstr "IDE-Geräte"
+
+#: admin/systems/goto/info.tpl:68
+msgid "SCSI devices"
+msgstr "SCSI-Geräte"
+
+#: admin/systems/goto/info.tpl:76
+msgid "Floppy device"
+msgstr "Disketten-Laufwerk"
+
+#: admin/systems/goto/info.tpl:80
+msgid "CD-ROM device"
+msgstr "CDROM-Laufwerk"
+
+#: admin/systems/goto/info.tpl:91
+msgid "Audio device"
+msgstr "Soundkarte"
+
+#: admin/systems/goto/info.tpl:107
+#: admin/systems/goto/Device/class_Device.inc:300
+#: admin/systems/goto/Device/Device.tpl:63 addons/goto/deploy-list.xml:59
+#: addons/goto/events/DaemonEvent_rescan.tpl:43
+#: addons/goto/events/DaemonEvent_halt.tpl:43
+#: addons/goto/events/DaemonEvent_activate.tpl:43
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:43
+#: addons/goto/events/DaemonEvent_notify.tpl:79
+#: addons/goto/events/DaemonEvent_wakeup.tpl:43
+#: addons/goto/events/DaemonEvent_memcheck.tpl:43
+#: addons/goto/events/DaemonEvent_lock.tpl:43
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:43
+#: addons/goto/events/DaemonEvent_reinstall.tpl:47
+#: addons/goto/events/DaemonEvent_reboot.tpl:43
+#: addons/goto/events/DaemonEvent_localboot.tpl:43
+#: addons/goto/events/DaemonEvent_faireboot.tpl:43
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:43
+#: addons/goto/events/DaemonEvent_update.tpl:43
+msgid "Status"
+msgstr "Status"
+
+#: admin/systems/goto/info.tpl:109
+msgid "Up since"
+msgstr "Eingeschaltet seit"
+
+#: admin/systems/goto/info.tpl:112
+msgid "CPU load"
+msgstr "Prozessor-Last"
+
+#: admin/systems/goto/info.tpl:115
+msgid "Memory usage"
+msgstr "Speicher-Nutzung"
+
+#: admin/systems/goto/info.tpl:118
+msgid "Swap usage"
+msgstr "Nutzung des virtuellen Speichers"
+
+#: admin/systems/goto/info.tpl:132
+msgid "Service information"
+msgstr "Dienst-Information"
+
+#: admin/systems/goto/info.tpl:134
+msgid "SSH service"
+msgstr "SSH-Dienst"
+
+#: admin/systems/goto/info.tpl:140
+msgid "Scan service"
+msgstr "Scan-Dienst"
+
+#: admin/systems/goto/info.tpl:143
+msgid "Sound service"
+msgstr "Audio-Dienst"
+
+#: admin/systems/goto/info.tpl:146
+msgid "GUI"
+msgstr "GUI"
+
+#: admin/systems/goto/workstation.tpl:1 admin/systems/goto/workstation.tpl:2
+#: admin/systems/goto/terminal.tpl:1
+msgid "Properties"
+msgstr "Eigenschaften"
+
+#: admin/systems/goto/workstation.tpl:9
+msgid "Workstation template"
+msgstr "Vorlage für Arbeitsstation"
+
+#: admin/systems/goto/workstation.tpl:11
+#: admin/systems/goto/class_workstationGeneric.inc:734
+msgid "Workstation name"
+msgstr "Name der Arbeitsstation"
+
+#: admin/systems/goto/workstation.tpl:51
+msgid "Terminal server settings"
+msgstr "Terminal-Server-Einstellungen"
+
+#: admin/systems/goto/workstation.tpl:53 admin/systems/goto/terminal.tpl:46
+#: admin/systems/goto/class_terminalGeneric.inc:704
+#: admin/ogroups/goto/class_termgroup.inc:390
+#: admin/ogroups/goto/termgroup.tpl:50
+msgid "Mode"
+msgstr "Modus"
+
+#: admin/systems/goto/workstation.tpl:56 admin/systems/goto/terminal.tpl:49
+#: admin/ogroups/goto/termgroup.tpl:53
+msgid "Select terminal mode"
+msgstr "Wählen Sie den Terminal-Modus"
+
+#: admin/systems/goto/workstation.tpl:63 admin/systems/goto/terminal.tpl:56
+#: admin/systems/goto/class_workstationGeneric.inc:739
+#: admin/ogroups/goto/class_termgroup.inc:391
+#: admin/ogroups/goto/termgroup.tpl:60
+msgid "Syslog server"
+msgstr "Syslog-Server"
+
+#: admin/systems/goto/workstation.tpl:66 admin/systems/goto/terminal.tpl:59
+#: admin/ogroups/goto/termgroup.tpl:64
+msgid "Choose server to use for logging"
+msgstr "Wählen Sie den Server, der für das Protokollieren genutzt werden soll"
+
+#: admin/systems/goto/workstation.tpl:84 admin/systems/goto/workstation.tpl:87
+#: admin/systems/goto/terminal.tpl:97 admin/systems/goto/terminal.tpl:100
+msgid "Inherit time server attributes"
+msgstr "Zeit-Server-Attribute übernehmen"
+
+#: admin/systems/goto/workstation.tpl:89 admin/systems/goto/terminal.tpl:102
+#: admin/systems/goto/Device/InstallRecipe.tpl:128
+#: admin/systems/goto/class_terminalGeneric.inc:466
+#: admin/systems/goto/class_workstationGeneric.inc:488
+#: admin/systems/goto/class_workstationGeneric.inc:740
+#: admin/ogroups/goto/class_termgroup.inc:146
+#: admin/ogroups/goto/class_termgroup.inc:393
+#: admin/ogroups/goto/termgroup.tpl:14
+msgid "NTP server"
+msgstr "Zeit-Server"
+
+#: admin/systems/goto/workstation.tpl:92 admin/systems/goto/terminal.tpl:105
+#: admin/ogroups/goto/termgroup.tpl:20
+msgid "Choose server to use for synchronizing time"
+msgstr ""
+"Wählen Sie den Server, der zur Zeit-Synchronisation genutzt werden soll"
+
+#: admin/systems/goto/workstation.tpl:123 admin/systems/goto/terminal.tpl:137
+#: admin/ogroups/goto/termgroup.tpl:108
+#: personal/environment/class_environment.inc:273
+msgid "Action"
+msgstr "Aktion"
+
+#: admin/systems/goto/workstation.tpl:125 admin/systems/goto/terminal.tpl:139
+#: admin/ogroups/goto/termgroup.tpl:111
+msgid "Select action to execute for this terminal"
+msgstr "Wählen Sie die auszuführende Aktion für dieses Terminal"
+
+#: admin/systems/goto/workstation.tpl:132
+#: admin/systems/goto/workstation.tpl:136 admin/systems/goto/terminal.tpl:145
+#: admin/applications/class_applicationGeneric.inc:428
+#: admin/applications/class_applicationGeneric.inc:610
+#: admin/applications/generic.tpl:24 admin/ogroups/goto/termgroup.tpl:117
+#: addons/goto/deploy-list.xml:181
+msgid "Execute"
+msgstr "Ausführen"
+
+#: admin/systems/goto/workstation.tpl:142
+msgid "Inherit all values from group"
+msgstr "Alle Werte von Gruppe übernehmen"
+
+#: admin/systems/goto/class_workstationService.inc:88
+#: admin/systems/goto/class_workstationService.inc:89
+#: admin/systems/goto/class_workstationService.inc:90
+#: admin/systems/goto/class_workstationService.inc:91
+#: admin/systems/goto/class_terminalService.inc:128
+#: admin/systems/goto/class_terminalService.inc:129
+#: admin/systems/goto/class_terminalService.inc:130
+#: admin/systems/goto/class_terminalService.inc:131
+msgid "bit"
+msgstr "Bit"
+
+#: admin/systems/goto/class_workstationService.inc:150
+#: admin/systems/goto/class_terminalService.inc:211
+msgid "automatic"
+msgstr "automatisch"
+
+#: admin/systems/goto/class_workstationService.inc:203
+#: admin/systems/goto/class_terminalService.inc:274
+msgid "Bit"
+msgstr "Bit"
+
+#: admin/systems/goto/class_workstationService.inc:316
+#: admin/systems/goto/class_terminalService.inc:420
+msgid "Choose the phone located at the current terminal"
+msgstr "Wählen Sie das sich am momentanen Arbeitsplatz befindende Telefon."
+
+#: admin/systems/goto/class_workstationService.inc:500
+#: admin/systems/goto/class_terminalService.inc:702
+msgid "Service"
+msgstr "Dienst"
+
+#: admin/systems/goto/class_workstationService.inc:509
+#: admin/systems/goto/class_terminalService.inc:712
+msgid "Monitor"
+msgstr "Monitor"
+
+#: admin/systems/goto/class_workstationService.inc:510
+#: admin/systems/goto/class_terminalService.inc:715
+msgid "Graphic driver"
+msgstr "Grafikkarte"
+
+#: admin/systems/goto/class_workstationService.inc:511
+#: admin/systems/goto/class_terminalService.inc:716
+msgid "Graphic resolution"
+msgstr "Auflösung"
+
+#: admin/systems/goto/class_workstationService.inc:512
+#: admin/systems/goto/class_terminalService.inc:717
+msgid "Graphic color depth"
+msgstr "Farbtiefe"
+
+#: admin/systems/goto/class_workstationService.inc:515
+msgid "Use DDC"
+msgstr "Verwende DDC"
+
+#: admin/systems/goto/class_workstationService.inc:516
+#: admin/systems/goto/class_terminalService.inc:721
+msgid "Scanner enabled"
+msgstr "Scanner aktiviert"
+
+#: admin/systems/goto/class_workstationService.inc:517
+#: admin/systems/goto/class_terminalService.inc:723
+msgid "Keyboard model"
+msgstr "Tastatur-Modell"
+
+#: admin/systems/goto/class_workstationService.inc:518
+#: admin/systems/goto/Device/InstallRecipe.tpl:88
+#: admin/systems/goto/Device/class_InstallRecipe.inc:480
+#: admin/systems/goto/class_terminalService.inc:724
+msgid "Keyboard layout"
+msgstr "Tastatur-Layout"
+
+#: admin/systems/goto/class_workstationService.inc:519
+#: admin/systems/goto/class_terminalService.inc:725
+msgid "Keyboard variant"
+msgstr "Tastatur-Variante"
+
+#: admin/systems/goto/class_workstationService.inc:520
+#: admin/systems/goto/class_terminalService.inc:726
+msgid "Mouse type"
+msgstr "Maus-Typ"
+
+#: admin/systems/goto/class_workstationService.inc:521
+#: admin/systems/goto/class_terminalService.inc:727
+msgid "Mouse port"
+msgstr "Maus-Anschluß"
+
+#: admin/systems/goto/class_workstationService.inc:570
+#: admin/systems/goto/class_workstationStartup.inc:834
+#: admin/systems/goto/class_workstationStartup.inc:962
+#: admin/systems/goto/class_workstationStartup.inc:1023
+#: admin/systems/goto/class_terminalGeneric.inc:196
+#: admin/systems/goto/class_terminalGeneric.inc:611
+#: admin/systems/goto/class_terminalService.inc:677
+#: admin/systems/goto/class_workstationGeneric.inc:220
+#: admin/systems/goto/class_workstationGeneric.inc:634
+#: admin/ogroups/goto/class_termgroup.inc:204
+#: addons/goto/class_goto_import_file.inc:127
+#: addons/goto/class_gotomasses.inc:383
+msgid "Service infrastructure"
+msgstr "Dienst-Infrastruktur"
+
+#: admin/systems/goto/terminal.tpl:2
+#: admin/systems/goto/class_SelectDeviceType.inc:38
+#: admin/systems/goto/class_terminalGeneric.inc:673
+#: admin/systems/goto/class_terminalGeneric.inc:683
+#: admin/systems/goto/class_ArpNewDevice.inc:38
+#: addons/goto/events/eventTargetSystems-list.xml:31
+msgid "Terminal"
+msgstr "Terminal"
+
+#: admin/systems/goto/terminal.tpl:9
+msgid "Terminal template"
+msgstr "Terminal-Vorlage"
+
+#: admin/systems/goto/terminal.tpl:11
+msgid "Terminal name"
+msgstr "Terminal-Name"
+
+#: admin/systems/goto/terminal.tpl:44
+msgid "Server and mode settings"
+msgstr "Server-Einstellungen"
+
+#: admin/systems/goto/terminal.tpl:66
+#: admin/systems/goto/class_terminalGeneric.inc:708
+#: admin/ogroups/goto/class_termgroup.inc:395
+#: admin/ogroups/goto/termgroup.tpl:84
+msgid "Swap server"
+msgstr "Auslagerungs-Server"
+
+#: admin/systems/goto/terminal.tpl:69 admin/ogroups/goto/termgroup.tpl:88
+msgid "Choose NFS file system to place swap files on"
+msgstr ""
+"Wählen Sie das NFS-Dateisystem, in dem die Auslagerungsdateien abgelegt "
+"werden sollen"
+
+#: admin/systems/goto/terminal.tpl:76
+#: admin/systems/goto/class_terminalGeneric.inc:707
+#: admin/ogroups/goto/class_termgroup.inc:394
+#: admin/ogroups/goto/termgroup.tpl:73
+msgid "Root server"
+msgstr "Root-Server"
+
+#: admin/systems/goto/terminal.tpl:79 admin/ogroups/goto/termgroup.tpl:77
+msgid "Select NFS root file system to use"
+msgstr "Wählen Sie das NFS-Root-Dateisystem"
+
+#: admin/systems/goto/terminal.tpl:149
+msgid "Inherit all"
+msgstr "Alles übernehmen"
+
+#: admin/systems/goto/Device/SetPassword.tpl:1
+msgid "Set root-user password"
+msgstr "Root-Passwort setzen"
+
+#: admin/systems/goto/Device/SetPassword.tpl:6
+msgid "Password"
+msgstr "Passwort"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:2
+msgid "Installation type"
+msgstr "Installationstyp"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:5
+#: admin/systems/goto/Device/class_InstallRecipe.inc:478
+msgid "Bootstrap method"
+msgstr "Methode zum Bootstrapping"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:14
+#: admin/systems/goto/Device/class_InstallRecipe.inc:479
+#: admin/ConfigManagement/class_ConfigManagement.inc:624
+#: admin/ConfigManagement/class_ConfigManagement.inc:625
+#: admin/ConfigManagement/class_ConfigManagement.inc:631
+msgid "Config management"
+msgstr "Konfigurationsverwaltung"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:28
+msgid "Bootstrap settings"
+msgstr "Bootstrap-Einstellungen"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:32
+msgid "Mirror"
+msgstr "Spiegel"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:41
+msgid "Kickstart template"
+msgstr "Kickstart-Vorlage"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:50
+#: admin/systems/goto/Device/class_InstallRecipe.inc:488
+msgid "Kernel package"
+msgstr "Kernel-Paket"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:61
+msgid "Login"
+msgstr "Kennung"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:70
+msgid "Use root user"
+msgstr "Root-Benutzer verwenden"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:73
+msgid "Set password"
+msgstr "Passwort setzen"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:84
+msgid "Locale"
+msgstr "Lokalisierung"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:97
+#: admin/systems/goto/Device/class_InstallRecipe.inc:481
+msgid "System locale"
+msgstr "System-Lokalisierung"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:108
+#: admin/systems/goto/Device/class_InstallRecipe.inc:483
+msgid "Time"
+msgstr "Zeit"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:115
+msgid "Use UTC"
+msgstr "Verwende UTC"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:119
+#: admin/systems/goto/Device/class_InstallRecipe.inc:482
+msgid "Timezone"
+msgstr "Zeitzone"
+
+#: admin/systems/goto/Device/InstallRecipe.tpl:140
+#: admin/systems/goto/Device/InstallRecipe.tpl:143
+#: admin/systems/goto/Device/class_InstallRecipe.inc:489
+msgid "Partition table"
+msgstr "Partitionstabelle"
+
+#: admin/systems/goto/Device/class_Device.inc:125
+#: admin/systems/goto/Device/class_Device.inc:303
+#: admin/systems/goto/Device/Device.tpl:160 addons/goto/goto_import_file.tpl:5
+msgid "IP address"
+msgstr "IP-Adresse"
+
+#: admin/systems/goto/Device/class_Device.inc:135
+#: admin/systems/goto/Device/class_Device.inc:302
+#: admin/systems/goto/Device/Device.tpl:169
+msgid "MAC address"
+msgstr "MAC-Adresse"
+
+#: admin/systems/goto/Device/class_Device.inc:292
+#: admin/systems/goto/Device/Device.tpl:111
+msgid "See also"
+msgstr "Siehe auch"
+
+#: admin/systems/goto/Device/class_Device.inc:293
+#: admin/systems/goto/Device/Device.tpl:121
+msgid "Owner"
+msgstr "Eigentümer"
+
+#: admin/systems/goto/Device/class_Device.inc:294
+#: admin/systems/goto/Device/Device.tpl:78
+msgid "Organizational Unit"
+msgstr "Organisationseinheit"
+
+#: admin/systems/goto/Device/class_Device.inc:295
+#: admin/systems/goto/Device/Device.tpl:86
+msgid "Organization"
+msgstr "Organisation"
+
+#: admin/systems/goto/Device/class_Device.inc:298
+#: admin/systems/goto/Device/Device.tpl:137
+msgid "Manager"
+msgstr "Verwalter"
+
+#: admin/systems/goto/Device/class_Device.inc:299
+msgid "UUID"
+msgstr "UUID"
+
+#: admin/systems/goto/Device/Device.tpl:40
+msgid "Registration"
+msgstr "Registrierung"
+
+#: admin/systems/goto/Device/Device.tpl:52
+msgid "Device UUID"
+msgstr "Geräte-UUID"
+
+#: admin/systems/goto/Device/Device.tpl:75
+msgid "Orgaizational data"
+msgstr "Organisationsdaten"
+
+#: admin/systems/goto/Device/Device.tpl:157
+msgid "Network settings"
+msgstr "Netzwerk-Einstellungen"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:194
+#, php-format
+msgid "The selected bootstrap method %s is invalid. Using %s instead!"
+msgstr ""
+"Die ausgewählte Bootstrap-Methode %s ist ungültig. Verwende %s stattdessen!"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:201
+#, php-format
+msgid "The selected config management method %s is invalid. Using %s instead!"
+msgstr ""
+"Dis ausgewählte Verwaltungsmethode %s ist ungültig. Verwende %s stattdessen!"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:214
+#: admin/systems/goto/Device/class_InstallRecipe.inc:217
+msgid "hours"
+msgstr "Stunden"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:314
+msgid "Remove install profile"
+msgstr "Installations-Profil entfernen"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:315
+#: admin/systems/goto/Device/class_InstallRecipe.inc:318
+msgid "Install profile"
+msgstr "Installations-Profil"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:317
+msgid "Add install profile"
+msgstr "Installations-Profil hinzufügen"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:469
+msgid "Registered device"
+msgstr "Registriertes Gerät"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:476
+msgid "Member"
+msgstr "Mitglied"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:477
+msgid "Template"
+msgstr "Vorlage"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:484
+msgid "NTP-Server"
+msgstr "NTP-Server"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:485
+msgid "Kickstart mirror"
+msgstr "Kickstart Spiegelserver"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:486
+msgid "Root login enabled"
+msgstr "Root-Anmeldung aktiv"
+
+#: admin/systems/goto/Device/class_InstallRecipe.inc:487
+msgid "Root password hash"
+msgstr "Root-Passwort-Hash"
+
+#: admin/systems/goto/class_SelectDeviceType.inc:38
+#: admin/systems/goto/class_ArpNewDevice.inc:38
+#: admin/systems/goto/class_workstationGeneric.inc:707
+#: addons/goto/events/eventTargetSystems-list.xml:23
+msgid "Workstation"
+msgstr "Arbeitsstation"
+
+#: admin/systems/goto/class_SelectDeviceType.inc:40
+#: admin/systems/goto/class_ArpNewDevice.inc:40
+msgid "Windows workstation"
+msgstr "Windows Arbeitsstation"
+
+#: admin/systems/goto/SelectDeviceType.tpl:3
+msgid ""
+"This system has no system type configured. Please choose a system type for "
+"this object and an optional inheritance group. Press the 'continue' button "
+"to proceed."
+msgstr ""
+"Dieses System hat keinen zugewiesenen Typ. Bitte wählen Sie einen Typ und "
+"eine optionale Gruppe mit vordefinierten Eigenschaften. Drücken Sie 'Weiter' "
+"um fortzufahren."
+
+#: admin/systems/goto/SelectDeviceType.tpl:10
+msgid ""
+"Please select a system type and an optional bundle of predefined settings to "
+"be inherited."
+msgstr ""
+"Bitte wählen Sie einen Systemtyp und (optional) einen Satz von "
+"vordefinierten Einstellungen (werden automatisch übernommen)."
+
+#: admin/systems/goto/SelectDeviceType.tpl:12
+msgid ""
+"Please select a system type and a bundle of predefined settings to be "
+"inherited."
+msgstr ""
+"Bitte wählen Sie einen Systemtyp und (optional) einen Satz von  "
+"vordefinierten Einstellungen."
+
+#: admin/systems/goto/SelectDeviceType.tpl:17
+msgid "System activation"
+msgstr "System-Aktivierung"
+
+#: admin/systems/goto/SelectDeviceType.tpl:20
+msgid "Target system type selection"
+msgstr "Auswahl von Zielsystemen"
+
+#: admin/systems/goto/SelectDeviceType.tpl:33
+msgid "Object group selection"
+msgstr "Objektgruppenauswahl"
+
+#: admin/systems/goto/SelectDeviceType.tpl:51
+msgid "Continue"
+msgstr "Fortsetzen"
+
+#: admin/systems/goto/class_terminalInfo.inc:50
+#: admin/systems/goto/class_terminalInfo.inc:202
+msgid "present"
+msgstr "vorhanden"
+
+#: admin/systems/goto/class_terminalInfo.inc:82
+msgid "unknown status, SNMP support missing"
+msgstr "unbekannter Status, SNMP-Unterstützung fehlt"
+
+#: admin/systems/goto/class_terminalInfo.inc:91
+msgid "This is a virtual terminal which has no properties to show here."
+msgstr ""
+"Dies ist ein virtuelles Terminal, deshalb können an dieser Stelle keine "
+"Informationen angezeigt werden."
+
+#: admin/systems/goto/class_terminalInfo.inc:104
+msgid "on-line"
+msgstr "aktiv"
+
+#: admin/systems/goto/class_terminalInfo.inc:166
+msgid "running"
+msgstr "läuft"
+
+#: admin/systems/goto/class_terminalInfo.inc:169
+msgid "not running"
+msgstr "läuft nicht"
+
+#: admin/systems/goto/class_terminalInfo.inc:172
+msgid "not defined"
+msgstr "nicht definiert"
+
+#: admin/systems/goto/class_terminalInfo.inc:177
+msgid "unknown status"
+msgstr "unbekannter Status"
+
+#: admin/systems/goto/class_terminalInfo.inc:194
+msgid "off-line"
+msgstr "inaktiv"
+
+#: admin/systems/goto/class_terminalInfo.inc:249
+msgid "System info"
+msgstr "System-Information"
+
+#: admin/systems/goto/class_terminalInfo.inc:250
+msgid "System informations"
+msgstr "System-Informationen"
+
+#: admin/systems/goto/class_terminalInfo.inc:262
+msgid "Name of GOto SNMP community."
+msgstr "Name der GOto SNMP Community."
+
+#: admin/systems/goto/printer.tpl:6
+msgid "General"
+msgstr "Allgemein"
+
+#: admin/systems/goto/printer.tpl:9
+msgid "Printer name"
+msgstr "Druckername"
+
+#: admin/systems/goto/printer.tpl:39 admin/systems/goto/printer.tpl:40
+msgid "Details"
+msgstr "Details"
+
+#: admin/systems/goto/printer.tpl:52
+msgid "Printer location"
+msgstr "Drucker-Standort"
+
+#: admin/systems/goto/printer.tpl:69
+msgid "PPD Provider"
+msgstr "PPD Anbieter"
+
+#: admin/systems/goto/printer.tpl:77
+msgid "Driver configuration"
+msgstr "Treiber-Konfiguration"
+
+#: admin/systems/goto/printer.tpl:107
+msgid "Users which are allowed to use this printer"
+msgstr "Benutzer mit Berechtigung, diesen Drucker zu nutzen"
+
+#: admin/systems/goto/printer.tpl:109
+msgid "Users"
+msgstr "Benutzer"
+
+#: admin/systems/goto/printer.tpl:130
+msgid "Users which are allowed to administrate this printer"
+msgstr "Benutzer mit Berechtigung, diesen Drucker zu verwalten"
+
+#: admin/systems/goto/printer.tpl:132
+msgid "Administrators"
+msgstr "Administrator"
+
+#: admin/systems/goto/class_workstationStartup.inc:231
+#, php-format
+msgid "FAI mirror '%s' is not available - setting to mirror 'auto'!"
+msgstr "Der FAI-Mirror '%s' ist nicht verfügbar - setze Mirror auf 'auto'!"
+
+#: admin/systems/goto/class_workstationStartup.inc:244
+#, php-format
+msgid ""
+"FAI release '%s' is not available on mirror '%s' - setting to release '%s'!"
+msgstr ""
+"Das FAI-Release '%s' ist auf dem Mirror '%s' nicht verfügbar - wähle Release "
+"'%s'!"
+
+#: admin/systems/goto/class_workstationStartup.inc:268
+msgid "Classes"
+msgstr "FAI-Klassen"
+
+#: admin/systems/goto/class_workstationStartup.inc:283
+msgid "Please select a 'FAI server' or remove the 'FAI classes'."
+msgstr ""
+"Bitte wählen Sie einen 'FAI-Server' oder entfernen Sie die FAI-Klassen."
+
+#: admin/systems/goto/class_workstationStartup.inc:340
+msgid ""
+"There is already a profile containing a partition table in your "
+"configuration!"
+msgstr ""
+"In Ihrer Konfiguration befindet sich bereits ein Profil, das eine "
+"Partitionstabelle enthält!"
+
+#: admin/systems/goto/class_workstationStartup.inc:558
+msgid "Not available in current setup"
+msgstr "Nicht verfügbar in momentaner Konfiguration"
+
+#: admin/systems/goto/class_workstationStartup.inc:917
+msgid "System startup"
+msgstr "Systemstart"
+
+#: admin/systems/goto/class_workstationStartup.inc:932
+msgid "FAI classes"
+msgstr "FAI-Klassen"
+
+#: admin/systems/goto/class_workstationStartup.inc:933
+msgid "Debian mirror"
+msgstr "Debian Spiegelserver"
+
+#: admin/systems/goto/class_workstationStartup.inc:934
+msgid "Debian release"
+msgstr "Debian-Release"
+
+#: admin/systems/goto/class_workstationStartup.inc:936
+msgid "FAI status flag"
+msgstr "FAI-Status-Flag"
+
+#: admin/systems/goto/class_workstationStartup.inc:1208
+msgid "'repositoryBranchHook' returned no result!"
+msgstr "'repositoryBranchHook' hat kein Ergebnis zurückgeliefert!"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:49
+msgid "USB"
+msgstr "USB"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:50
+msgid "Parallel port"
+msgstr "Parallelport"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:53
+msgid "Software"
+msgstr "Software"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:54
+msgid "Hardware"
+msgstr "Hardware"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:56
+msgid "Even"
+msgstr "Gerade"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:57
+msgid "Odd"
+msgstr "Uneben"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:58
+#: admin/groups/apps/edit_entry.tpl:14
+msgid "None"
+msgstr "Keine"
+
+#: admin/systems/goto/class_gotoLpdEnabled.inc:60
+#: admin/systems/goto/class_gotoLpdEnabled.inc:61
+#: admin/systems/goto/class_gotoLpdEnabled.inc:62
+#: admin/systems/goto/class_gotoLpdEnabled.inc:63
+#: admin/systems/goto/class_gotoLpdEnabled.inc:64
+#: admin/systems/goto/class_gotoLpdEnabled.inc:65
+#: admin/systems/goto/class_gotoLpdEnabled.inc:66
+#: admin/systems/goto/class_gotoLpdEnabled.inc:67
+msgid "bit/s"
+msgstr "bits/s"
+
+#: admin/systems/goto/gencd.tpl:2
+msgid "CD-Install-Image generation"
+msgstr "Erstellung der Installations-CD (Abbild)"
+
+#: admin/systems/goto/gencd.tpl:5
+msgid ""
+"This option enables you to generate FAI install CD images for the selected "
+"workstation. The procedure may take about 10 minutes to complete, so please "
+"be patient after pressing the 'Create ISO-Image' button."
+msgstr ""
+"Diese Option erlaubt es Ihnen, ein Abbild einer FAI-Installations-CD für die "
+"gewählte Arbeitsstation zu erstellen. Dieser Vorgang dauert etwa 10 Minuten, "
+"haben Sie also Geduld, nachdem Sie den Knopf 'Erstelle ISO-Abbild' gedrückt "
+"haben."
+
+#: admin/systems/goto/gencd.tpl:10
+msgid "Create ISO-Image"
+msgstr "Erstelle ISO-Abbild"
+
+#: admin/systems/goto/class_terminalGeneric.inc:121
+#: admin/systems/goto/class_workstationGeneric.inc:138
+#: admin/ogroups/goto/class_termgroup.inc:49
+#: addons/goto/class_gotomasses.inc:192
+msgid "Locked"
+msgstr "Gesperrt"
+
+#: admin/systems/goto/class_terminalGeneric.inc:122
+#: admin/systems/goto/class_workstationGeneric.inc:137
+#: admin/ogroups/goto/class_termgroup.inc:48
+msgid "Activated"
+msgstr "Aktiv"
+
+#: admin/systems/goto/class_terminalGeneric.inc:200
+#: admin/systems/goto/class_workstationGeneric.inc:224
+#: admin/ogroups/goto/class_termgroup.inc:208
+msgid "Event error"
+msgstr "Ereignis-Fehler"
+
+#: admin/systems/goto/class_terminalGeneric.inc:201
+#: admin/systems/goto/class_workstationGeneric.inc:225
+#: admin/ogroups/goto/class_termgroup.inc:209
+#, php-format
+msgid "Event '%s' is not available!"
+msgstr "Das Ereignis '%s' ist nicht verfügbar!"
+
+#: admin/systems/goto/class_terminalGeneric.inc:242
+#: admin/systems/goto/class_workstationGeneric.inc:277
+#: admin/ogroups/goto/class_termgroup.inc:260 addons/goto/deploy-list.xml:84
+#: addons/goto/events/class_DaemonEvent_halt.inc:31
+#: addons/goto/events/class_DaemonEvent_halt.inc:32
+msgid "Switch off"
+msgstr "Ausschalten"
+
+#: admin/systems/goto/class_terminalGeneric.inc:242
+#: admin/systems/goto/class_workstationGeneric.inc:278
+#: admin/ogroups/goto/class_termgroup.inc:261 addons/goto/deploy-list.xml:91
+#: addons/goto/events/class_DaemonEvent_reboot.inc:29
+#: addons/goto/events/class_DaemonEvent_reboot.inc:30
+msgid "Reboot"
+msgstr "Neustarten"
+
+#: admin/systems/goto/class_terminalGeneric.inc:244
+#: admin/systems/goto/class_workstationGeneric.inc:290
+#: addons/goto/deploy-list.xml:98
+#: addons/goto/events/class_DaemonEvent_wakeup.inc:29
+msgid "Wake up"
+msgstr "Aufwecken"
+
+#: admin/systems/goto/class_terminalGeneric.inc:251
+#: admin/ogroups/goto/class_termgroup.inc:96
+msgid "Local swap"
+msgstr "Lokaler Auslagerungsspeicher"
+
+#: admin/systems/goto/class_terminalGeneric.inc:674
+msgid "Terminal generic"
+msgstr "Terminal (Allgemein)"
+
+#: admin/systems/goto/class_terminalGeneric.inc:691
+msgid "RDN for terminal storage."
+msgstr "RDN für die Ablage von Thin-Clients."
+
+#: admin/systems/goto/class_terminalGeneric.inc:705
+msgid "Syslog server enabled"
+msgstr "Protokoll-Server aktiviert"
+
+#: admin/systems/goto/class_terminalGeneric.inc:710
+msgid "NTP server settings"
+msgstr "NTP-Dienst-Einstellungen"
+
+#: admin/systems/goto/class_terminalGeneric.inc:711
+#: admin/systems/goto/class_workstationGeneric.inc:741
+msgid "Root password"
+msgstr "Root-Passwort"
+
+#: admin/systems/goto/class_terminalGeneric.inc:713
+#: admin/systems/goto/class_workstationGeneric.inc:743
+#: admin/ogroups/goto/class_termgroup.inc:392
+msgid "Action flag"
+msgstr "Ablaufstatus"
+
+#: admin/systems/goto/class_ArpNewDevice.inc:139
+#: admin/systems/goto/class_ArpNewDevice.inc:140
+msgid "Unknown incoming objects"
+msgstr "Unbekannte eingehende Objekte"
+
+#: admin/systems/goto/class_ArpNewDevice.inc:152
+msgid "RDN for storing new devices."
+msgstr "RDN zur Ablage von neuen Geräten."
+
+#: admin/systems/goto/class_ArpNewDevice.inc:158
+msgid "Incoming"
+msgstr "Eingehend"
+
+#: admin/systems/goto/class_terminalService.inc:184
+msgid "XDMCP"
+msgstr "XDMCP"
+
+#: admin/systems/goto/class_terminalService.inc:185
+msgid "LDM"
+msgstr "LDM"
+
+#: admin/systems/goto/class_terminalService.inc:186
+msgid "Shell"
+msgstr "Shell"
+
+#: admin/systems/goto/class_terminalService.inc:187
+msgid "Telnet"
+msgstr "Telnet"
+
+#: admin/systems/goto/class_terminalService.inc:188
+msgid "Windows RDP"
+msgstr "Windows RDP"
+
+#: admin/systems/goto/class_terminalService.inc:321
+msgid "This DN has no terminal features."
+msgstr "Dieser 'DN' hat keine Terminal-Erweiterungen."
+
+#: admin/systems/goto/class_terminalService.inc:379
+msgid "Unsupported"
+msgstr "Nicht unterstützt"
+
+#: admin/systems/goto/class_terminalService.inc:501
+#: admin/systems/goto/class_terminalService.inc:506
+msgid "Vertical synchronization range"
+msgstr "Bereich der Vertikalen-Synchronisation"
+
+#: admin/systems/goto/class_terminalService.inc:514
+#: admin/systems/goto/class_terminalService.inc:519
+msgid "Horizontal synchronization range"
+msgstr "Bereich der Horizontalen-Synchronisation"
+
+#: admin/systems/goto/class_terminalService.inc:545
+msgid ""
+"Remote desktop settings contains servers that do not support the selected "
+"connection method."
+msgstr ""
+"Die Einstellungen für den entfernten Desktop beinhalten Server die die "
+"gewählte Verbindungsmethode nicht unterstützen."
+
+#: admin/systems/goto/class_terminalService.inc:713
+msgid "Method"
+msgstr "Methode"
+
+#: admin/systems/goto/class_terminalService.inc:714
+#: admin/systems/goto/terminalService.tpl:183
+#: admin/systems/goto/terminalService.tpl:184
+msgid "Remote desktop"
+msgstr "Entfernte Arbeitsfläche"
+
+#: admin/systems/goto/class_terminalService.inc:720
+msgid "Auto-Sync"
+msgstr "Auto-Sync"
+
+#: admin/systems/goto/class_terminalService.inc:722
+#: admin/systems/goto/class_terminalService.inc:728
+msgid "Printer enabled"
+msgstr "Drucker aktiviert"
+
+#: admin/systems/goto/class_workstationGeneric.inc:279
+#: admin/systems/goto/class_workstationGeneric.inc:292
+#: addons/goto/deploy-list.xml:105
+#: addons/goto/events/class_DaemonEvent_update.inc:29
+#: addons/goto/events/class_DaemonEvent_update.inc:30
+msgid "Software update"
+msgstr "Softwareupdate"
+
+#: admin/systems/goto/class_workstationGeneric.inc:280
+#: admin/systems/goto/class_workstationGeneric.inc:291
+#: admin/ogroups/goto/class_termgroup.inc:265 addons/goto/deploy-list.xml:126
+#: addons/goto/events/class_DaemonEvent_reinstall.inc:32
+#: addons/goto/events/class_DaemonEvent_reinstall.inc:33
+msgid "Reinstall"
+msgstr "Neu-Installation"
+
+#: admin/systems/goto/class_workstationGeneric.inc:281
+#: admin/ogroups/goto/class_termgroup.inc:266
+#: addons/goto/events/class_DaemonEvent_rescan.inc:28
+#: addons/goto/events/class_DaemonEvent_rescan.inc:29
+msgid "Rescan hardware"
+msgstr "Hardware neu erkennen"
+
+#: admin/systems/goto/class_workstationGeneric.inc:282
+#: admin/systems/goto/class_workstationGeneric.inc:293
+#: addons/goto/events/class_DaemonEvent_localboot.inc:28
+#: addons/goto/events/class_DaemonEvent_localboot.inc:29
+msgid "Force local boot"
+msgstr "Erzwinge lokalen Systemstart"
+
+#: admin/systems/goto/class_workstationGeneric.inc:499
+msgid "A valid LDAP server assignment is missing!"
+msgstr "Es fehlt eine gültige LDAP-Server-Zusweisung!"
+
+#: admin/systems/goto/class_workstationGeneric.inc:509
+msgid "Software deployment"
+msgstr "Softwareverteilung"
+
+#: admin/systems/goto/class_workstationGeneric.inc:510
+msgid "This host is currently installing. If you want to save it, press 'OK'."
+msgstr ""
+"Dieses System installiert momentan. Wenn Sie es speichern möchten, drücken "
+"Sie 'OK'."
+
+#: admin/systems/goto/class_workstationGeneric.inc:698
+msgid "Workstation generic"
+msgstr "Arbeitsstation (Allgemein)"
+
+#: admin/systems/goto/class_workstationGeneric.inc:715
+msgid "RDN for workstation storage."
+msgstr "RDN für die Ablage von Arbeitsstationen."
+
+#: admin/systems/goto/class_workstationGeneric.inc:725
+msgid "Script to create system ISO images."
+msgstr "Skript zum Erzeugen von System-ISO-Abbildern."
+
+#: admin/systems/goto/class_workstationGeneric.inc:738
+msgid "Goto mode"
+msgstr "GOto-Modus"
+
+#: admin/systems/goto/class_workstationGeneric.inc:742
+msgid "Create FAI CD"
+msgstr "FAI CD erstellen"
+
+#: admin/systems/goto/terminalService.tpl:6
+msgid "Keyboard settings"
+msgstr "Tastatur-Einstellungen"
+
+#: admin/systems/goto/terminalService.tpl:187
+msgid "Connect method"
+msgstr "Verbindungsmethode"
+
+#: admin/systems/goto/terminalService.tpl:190
+msgid "Choose method to connect to terminal server"
+msgstr "Wählen Sie die Methode der Anbindung an den Terminal-Server"
+
+#: admin/systems/goto/terminalService.tpl:200
+msgid "Terminal server"
+msgstr "Terminal-Server"
+
+#: admin/systems/goto/terminalService.tpl:211
+msgid "Select specific terminal server to use"
+msgstr "Wählen Sie einen bestimmten Terminal-Server"
+
+#: admin/systems/goto/terminalService.tpl:217
+msgid "Add selected server"
+msgstr "Füge gewählten Server hinzu"
+
+#: admin/systems/goto/terminalService.tpl:222
+msgid "Remove selected server"
+msgstr "Entferne gewählten Server"
+
+#: admin/groups/apps/app_list.tpl:1
+msgid "Group application settings"
+msgstr "Gruppen Anwendungs-Einstellungen"
+
+#: admin/groups/apps/app_list.tpl:11
+msgid "Copy menu"
+msgstr "Menü kopieren"
+
+#: admin/groups/apps/app_list.tpl:14
+msgid "Paste menu from"
+msgstr "Menü einfügen von"
+
+#: admin/groups/apps/app_list.tpl:20
+msgid "Delete menu"
+msgstr "Menü entfernen"
+
+#: admin/groups/apps/app_list.tpl:34
+msgid "Application menu"
+msgstr "Anwendungsmenü"
+
+#: admin/groups/apps/app_list.tpl:42
+msgid "Sub entry"
+msgstr "Untereintrag"
+
+#: admin/groups/apps/app_list.tpl:90 admin/groups/apps/app_list.tpl:107
+#: admin/groups/apps/app_list.tpl:129
+msgid "Move up"
+msgstr "Nach oben bewegen"
+
+#: admin/groups/apps/app_list.tpl:91 admin/groups/apps/app_list.tpl:108
+#: admin/groups/apps/app_list.tpl:130
+msgid "Move down"
+msgstr "Nach unten bewegen"
+
+#: admin/groups/apps/app_list.tpl:140
+msgid "add to"
+msgstr "hinzufügen"
+
+#: admin/groups/apps/app_list.tpl:146 admin/groups/apps/app_list.tpl:159
+msgid "Add selected applications to this folder."
+msgstr "Füge gewählte Anwendungen zu diesem Verzeichnis hinzu."
+
+#: admin/groups/apps/app_list.tpl:148
+msgid "Add a separator to this folder."
+msgstr "Füge Feldtrenner zu diesem Verzeichnis hinzu."
+
+#: admin/groups/apps/app_list.tpl:148
+msgid "Separator"
+msgstr "Feldtrenner"
+
+#: admin/groups/apps/class_groupApplication.inc:389
+#: admin/groups/apps/class_groupApplication.inc:393
+msgid "Menu"
+msgstr "Menü"
+
+#: admin/groups/apps/class_groupApplication.inc:445
+msgid "Back"
+msgstr "Zurück"
+
+#: admin/groups/apps/class_groupApplication.inc:1151
+msgid "Not available in release."
+msgstr "Nicht verfügbar in Release."
+
+#: admin/groups/apps/class_groupApplication.inc:1379
+msgid "Group applications"
+msgstr "Anwendungen der Gruppe"
+
+#: admin/groups/apps/class_groupApplication.inc:1392
+#: admin/applications/class_applicationParameters.inc:96
+msgid "Application parameter"
+msgstr "Anwendungs-Parameter"
+
+#: admin/groups/apps/edit_entry.tpl:5
+msgid "Edit application image"
+msgstr "Anwendungsbild bearbeiten"
+
+#: admin/groups/apps/edit_entry.tpl:8
+msgid "Folder image"
+msgstr "Verzeichnisbild"
+
+#: admin/groups/apps/edit_entry.tpl:12
+msgid "Could not load image."
+msgstr "Konnte Bild nicht laden."
+
+#: admin/groups/apps/edit_entry.tpl:24
+msgid "Upload image"
+msgstr "Bild Hochladen"
+
+#: admin/groups/apps/edit_entry.tpl:33
+msgid "Reset image"
+msgstr "Bild zurücksetzen"
+
+#: admin/groups/apps/edit_entry.tpl:34
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: admin/groups/apps/edit_entry.tpl:42
+#: admin/applications/class_applicationGeneric.inc:542
+#: admin/applications/class_applicationGeneric.inc:543
+msgid "Application settings"
+msgstr "Anwendungs-Einstellungen"
+
+#: admin/groups/apps/edit_entry.tpl:43
+msgid "Edit application settings"
+msgstr "Anwendungs-Einstellungen bearbeiten"
+
+#: admin/groups/apps/edit_entry.tpl:55 admin/applications/generic.tpl:97
+msgid "Application options"
+msgstr "Anwendungsoptionen"
+
+#: admin/applications/class_applicationParameters.inc:50
+msgid "Remove options"
+msgstr "Optionen entfernen"
+
+#: admin/applications/class_applicationParameters.inc:50
+#: admin/applications/class_applicationParameters.inc:52
+msgid "parameter"
+msgstr "Parameter"
+
+#: admin/applications/class_applicationParameters.inc:52
+msgid "Create options"
+msgstr "Optionen aktivieren"
+
+#: admin/applications/class_applicationParameters.inc:96
+msgid "Variable"
+msgstr "Variable"
+
+#: admin/applications/class_applicationParameters.inc:96
+msgid "Default value"
+msgstr "Standardwert"
+
+#: admin/applications/class_applicationParameters.inc:128
+msgid "Add option"
+msgstr "Option hinzufügen"
+
+#: admin/applications/class_applicationParameters.inc:247
+msgid "Parameter"
+msgstr "Parameter"
+
+#: admin/applications/class_applicationParameters.inc:248
+msgid "Parameter configuration"
+msgstr "Konfiguration der Parameter"
+
+#: admin/applications/class_applicationParameters.inc:256
+msgid "Application parameter settings"
+msgstr "Konfiguration der Anwendungs-Parameter"
+
+#: admin/applications/application-list-release.xml:11
+#: admin/applications/application-list.xml:11
+msgid "List of applications"
+msgstr "Liste der Anwendungen"
+
+#: admin/applications/application-list-release.xml:120
+#: admin/applications/application-list.xml:119
+msgid "Edit application"
+msgstr "Anwendung bearbeiten"
+
+#: admin/applications/application-list-release.xml:134
+#: admin/applications/application-list.xml:132
+msgid "Remove application"
+msgstr "Anwendung entfernen"
+
+#: admin/applications/class_applicationGeneric.inc:103
+msgid "no example"
+msgstr "kein Beispiel"
+
+#: admin/applications/class_applicationGeneric.inc:138
+msgid "application"
+msgstr "Anwendung"
+
+#: admin/applications/class_applicationGeneric.inc:243
+#, php-format
+msgid "Cannot remove application - it is still in use by these objects: %s"
+msgstr ""
+"Die Anwendung konnte nicht entfernt werden, sie wird momentan noch von "
+"folgenden Objekten verwendet: %s"
+
+#: admin/applications/class_applicationGeneric.inc:364
+msgid "no read permission"
+msgstr "Keine Leseberechtigung"
+
+#: admin/applications/class_applicationGeneric.inc:369
+msgid "cannot resize image"
+msgstr "Kann Bild nicht in der Größe verändern"
+
+#: admin/applications/class_applicationGeneric.inc:374
+msgid "cannot convert image"
+msgstr "Kann Bild nicht konvertieren"
+
+#: admin/applications/class_applicationGeneric.inc:378
+#, php-format
+msgid "cannot save image to '%s'"
+msgstr "Kann Bild nicht unter '%s' speichern"
+
+#: admin/applications/class_applicationGeneric.inc:398
+msgid "Execute path"
+msgstr "Arbeitsverzeichnis"
+
+#: admin/applications/class_applicationGeneric.inc:546
+#: admin/applications/generic.tpl:7 admin/applications/generic.tpl:10
+msgid "Application name"
+msgstr "Name der Anwendung"
+
+#: admin/applications/class_applicationGeneric.inc:551
+#: admin/applications/generic.tpl:19
+msgid "Application name to be displayed (i.e. below icons)"
+msgstr "Angezeigter Name der Anwendung (z.B. unter Symbole)"
+
+#: admin/applications/class_applicationGeneric.inc:583
+msgid "Application generic"
+msgstr "Anwendung (Allgemein)"
+
+#: admin/applications/class_applicationGeneric.inc:600
+msgid "RDN for application storage."
+msgstr "RDN für die Ablage von Anwendungen"
+
+#: admin/applications/class_applicationGeneric.inc:613
+msgid "Script content"
+msgstr "Skript-Inhalt"
+
+#: admin/applications/class_applicationGeneric.inc:615
+#: admin/applications/generic.tpl:104
+msgid "Only executable for members"
+msgstr "Nur ausführbar für Gruppen-Mitglieder"
+
+#: admin/applications/class_applicationGeneric.inc:616
+#: admin/applications/generic.tpl:115
+msgid "Place icon on members desktop"
+msgstr "Platziere das Symbol auf dem Desktop der Gruppenmitglieder"
+
+#: admin/applications/class_applicationGeneric.inc:617
+#: admin/applications/generic.tpl:125
+msgid "Place entry in members launch bar"
+msgstr "Platziere einen Eintrag in der Kontrollleiste der Gruppenmitglieder"
+
+#: admin/applications/class_applicationGeneric.inc:618
+#: admin/applications/generic.tpl:120
+msgid "Place entry in members start menu"
+msgstr "Platziere den Eintrag im Startmenü der Gruppenmitglieder"
+
+#: admin/applications/class_applicationGeneric.inc:619
+#: admin/applications/generic.tpl:109
+msgid "Replace user configuration on startup"
+msgstr "Konfiguration bei jedem Start ersetzen"
+
+#: admin/applications/class_applicationManagement.inc:26
+msgid ""
+"Define and parametrize desktop applications for using them in desktop "
+"profiles"
+msgstr ""
+"Definieren und Parametrieren von Desktop-Anwendungen zur Verwendung in "
+"Desktop-Profilen"
+
+#: admin/applications/generic.tpl:15
+msgid "Display name"
+msgstr "Angezeigter Name"
+
+#: admin/applications/generic.tpl:28
+msgid "Path and/or binary name of application"
+msgstr "Pfad und/oder Name der Anwendung"
+
+#: admin/applications/generic.tpl:80
+msgid "Reload picture from LDAP"
+msgstr "Bild neu laden"
+
+#: admin/applications/generic.tpl:84
+msgid "Remove picture from LDAP"
+msgstr "Entferne Bild aus LDAP"
+
+#: admin/applications/generic.tpl:84
+msgid "Remove picture"
+msgstr "Bild entfernen"
+
+#: admin/applications/generic.tpl:132
+#: personal/environment/class_environment.inc:1817
+#: personal/environment/logonManagement.tpl:57
+msgid "Log on script"
+msgstr "Anmelde-Skript"
+
+#: admin/applications/generic.tpl:135
+#: personal/environment/logonManagement.tpl:56
+msgid "Script"
+msgstr "Skript"
+
+#: admin/applications/generic.tpl:140
+#: personal/environment/logonManagement.tpl:66
+#: addons/goto/class_goto_import_file.inc:29
+#: addons/goto/class_goto_import_file.inc:92
+#: addons/goto/class_goto_import_file.inc:134 addons/goto/deploy-list.xml:138
+#: addons/goto/goto_import_file.tpl:93
+msgid "Import"
+msgstr "Importieren"
+
+#: admin/applications/generic.tpl:146
+msgid "Download"
+msgstr "Herunterladen"
+
+#: admin/ConfigManagement/DeviceConfig-list.xml:10
+msgid "List of items"
+msgstr "Liste der Items"
+
+#: admin/ConfigManagement/DeviceConfig-list.xml:75
+msgid "Edit item"
+msgstr "Item bearbeiten"
+
+#: admin/ConfigManagement/DeviceConfig-list.xml:82
+msgid "Remove item"
+msgstr "Item entfernen"
+
+#: admin/ConfigManagement/class_ConfigManagement.inc:83
+#, php-format
+msgid "Invalid installation method %s selected!"
+msgstr "Ungültige Installationsmethode %s ausgwählt!"
+
+#: admin/ConfigManagement/class_ConfigManagement.inc:84
+#: admin/ConfigManagement/class_ConfigManagement.inc:102
+#: admin/ConfigManagement/class_ConfigManagement.inc:141
+msgid "Setup"
+msgstr "Einrichtung"
+
+#: admin/ConfigManagement/class_ConfigManagement.inc:101
+#, php-format
+msgid "Installation method %s is invalid: no root object found!"
+msgstr "Installationsmethod %s ist ungültig: kein Wurzelobjekt gefunden!"
+
+#: admin/ConfigManagement/class_ConfigManagement.inc:140
+msgid "No selectable install methods available!"
+msgstr "Keine auswählbaren Installationsmethoden verfügbar!"
+
+#: admin/ConfigManagement/TemplateWidget_textEditor.tpl:2
+msgid "The text is write protected due to its encoding. Editing may break it!"
+msgstr ""
+"Dieser Text ist wegen seiner Codierung schreibgeschützt. Änderungen könnten "
+"den Inhalt beschädigen!"
+
+#: admin/ConfigManagement/TemplateWidget_textEditor.tpl:4
+msgid "Edit anyway"
+msgstr "Trotzdem bearbeiten"
+
+#: admin/ConfigManagement/TemplateWidget_textEditor.tpl:11
+msgid "Import text"
+msgstr "Text importieren"
+
+#: admin/ConfigManagement/AddItemDialog.tpl:2
+msgid "Add item"
+msgstr "Item hinzufüfgen"
+
+#: admin/ConfigManagement/AddItemDialog.tpl:4
+msgid ""
+"Please specify a name for the item to add. This name has to be unique within "
+"the item configuration."
+msgstr ""
+"Bitte geben Sie einen Namen für das hinzuzufügende Item an. Dieser Name muss "
+"innerhalb der Item-Konfiguration eindeutig sein."
+
+#: admin/ConfigManagement/DeviceConfig.tpl:1
+msgid "Device Config"
+msgstr "Gerätekonfiguration"
+
+#: admin/ConfigManagement/failed.tpl:4 admin/ConfigManagement/failed.tpl:8
+msgid "Retry"
+msgstr "Wiederholen"
+
+#: admin/ConfigManagement/failed.tpl:6
+msgid "Communication failed"
+msgstr "Kommunikation fehlgeschlagen"
+
+#: admin/ConfigManagement/class_TemplateWidget_textEditor.inc:67
+msgid ""
+"The text encoding has changed from %s to %s. Do you really want to save?"
+msgstr ""
+"Die Text-Codierung hat sich von %s nach %s geändert. Möchten Sie die "
+"Änderungen speichern?"
+
+#: admin/ConfigManagement/class_TemplateWidget_file.inc:9
+msgid "No file uploaded yet"
+msgstr "Bisher wurde keine Datei hochgeladen"
+
+#: admin/ConfigManagement/class_TemplateWidget_file.inc:19
+msgid "File uploaded"
+msgstr "Datei wurde hochgeladen"
+
+#: admin/ConfigManagement/class_TemplateWidget_file.inc:19
+msgid "Bytes"
+msgstr "Bytes"
+
+#: admin/ogroups/goto/class_termgroup.inc:262
+msgid "Instant update"
+msgstr "Sofortiges Update"
+
+#: admin/ogroups/goto/class_termgroup.inc:263
+msgid "Scheduled update"
+msgstr "Geplantes Update"
+
+#: admin/ogroups/goto/class_termgroup.inc:264
+msgid "Wake"
+msgstr "Aufwecken"
+
+#: admin/ogroups/goto/class_termgroup.inc:267
+#: addons/goto/events/class_DaemonEvent_memcheck.inc:28
+#: addons/goto/events/class_DaemonEvent_memcheck.inc:29
+msgid "Memory test"
+msgstr "Speichertest"
+
+#: admin/ogroups/goto/class_termgroup.inc:268
+#: addons/goto/events/class_DaemonEvent_sysinfo.inc:28
+#: addons/goto/events/class_DaemonEvent_sysinfo.inc:29
+msgid "System analysis"
+msgstr "Systemanalyse"
+
+#: admin/ogroups/goto/class_termgroup.inc:382
+msgid "System"
+msgstr "System"
+
+#: admin/ogroups/goto/class_termgroup.inc:383
+msgid "System group"
+msgstr "System-Gruppe"
+
+#: admin/ogroups/goto/termgroup.tpl:3
+msgid ""
+"Actions you choose here influence all systems in this object group. "
+"Additionally, all values editable here can be inherited by the clients "
+"assigned to this object group."
+msgstr ""
+"Aktionen die hier ausgewählt werden beeinflussen alle Systeme dieser "
+"Objektgruppe. Zusätzlich können alle hier einstellbaren Werte von den "
+"Systemen ererbt werden."
+
+#: admin/ogroups/goto/termgroup.tpl:10
+msgid "System settings"
+msgstr "System-Einstellungen"
+
+#: admin/ogroups/goto/termgroup.tpl:48
+msgid "Goto settings"
+msgstr "GOto-Einstellungen"
+
+#: admin/ogroups/goto/termgroup.tpl:104
+msgid "Inherit all values to group members"
+msgstr "Alle Werte auf Mitglieder übertragen"
+
+#: personal/environment/printerSelect/class_printerSelect.inc:29
+msgid "Printer selection"
+msgstr "Druckerauswahl"
+
+#: personal/environment/printerSelect/selectPrinter-list.xml:10
+#: personal/environment/hotplugSelect/selectHotplug-list.xml:10
+msgid "Please select the desired entries"
+msgstr "Bitte wählen Sie die gewünschten Einträge"
+
+#: personal/environment/environment.tpl:4
+msgid "Profiles"
+msgstr "Profile"
+
+#: personal/environment/environment.tpl:6
+#: personal/environment/environment.tpl:198
+#: personal/environment/environment.tpl:281
+msgid "Environment management settings"
+msgstr "Umgebungs-Einstellungen"
+
+#: personal/environment/environment.tpl:12
+#: personal/environment/environment.tpl:47
+msgid "Use profile management"
+msgstr "Benutze Profil-Verwaltung"
+
+#: personal/environment/environment.tpl:16
+#: personal/environment/environment.tpl:57
+msgid "Profile path"
+msgstr "Profil-Pfad"
+
+#: personal/environment/environment.tpl:26
+#: personal/environment/environment.tpl:87
+msgid "MB"
+msgstr "MB"
+
+#: personal/environment/environment.tpl:31
+#: personal/environment/environment.tpl:98
+#: personal/environment/class_environment.inc:1811
+msgid "Cache profile locally"
+msgstr "Profil lokal zwischenspeichern"
+
+#: personal/environment/environment.tpl:37
+msgid "Profile management"
+msgstr "Profil-Verwaltung"
+
+#: personal/environment/environment.tpl:54
+msgid "Profile server management"
+msgstr "Profil-Server-Verwaltung"
+
+#: personal/environment/environment.tpl:81
+#: personal/environment/class_environment.inc:1159
+#: personal/environment/class_environment.inc:1711
+#: personal/environment/class_environment.inc:1810
+msgid "Profile quota"
+msgstr "Profil-Kontingent"
+
+#: personal/environment/environment.tpl:112
+msgid "Kiosk profile settings"
+msgstr "Kiosk-Profil-Einstellungen"
+
+#: personal/environment/environment.tpl:156
+msgid "Manage"
+msgstr "Verwalten"
+
+#: personal/environment/environment.tpl:182
+#: personal/environment/class_environment.inc:1815
+msgid "Resolution changeable during session"
+msgstr "Auflösung änderbar während des Betriebs"
+
+#: personal/environment/environment.tpl:203
+msgid "Share settings"
+msgstr "Freigaben-Einstellungen"
+
+#: personal/environment/environment.tpl:211
+msgid "User used to connect to the share"
+msgstr "Benutzer, der für die Verbindung zur Freigabe verwendet wird"
+
+#: personal/environment/environment.tpl:214
+msgid "Select a share"
+msgstr "Wählen Sie eine Freigabe"
+
+#: personal/environment/environment.tpl:222
+msgid "Mount path"
+msgstr "Einhänge-Pfad"
+
+#: personal/environment/environment.tpl:235
+#: personal/environment/class_environment.inc:597
+msgid "Log on scripts"
+msgstr "Anmelde-Skripte"
+
+#: personal/environment/environment.tpl:236
+#: personal/environment/logonManagement.tpl:1
+#: personal/environment/logonManagement.tpl:5
+msgid "Log on script management"
+msgstr "Verwaltung der Anmelde-Skripte"
+
+#: personal/environment/environment.tpl:245
+#: personal/environment/environment.tpl:294
+#: personal/environment/class_environment.inc:768
+msgid "Used by all users"
+msgstr "Verwendet von allen Benutzern"
+
+#: personal/environment/environment.tpl:247
+#: personal/environment/environment.tpl:296
+#: personal/environment/class_environment.inc:771
+msgid "Used by some users"
+msgstr "Verwendet von einigen Benutzern"
+
+#: personal/environment/environment.tpl:286
+msgid "Hot-plug device settings"
+msgstr "Einstellungen der Hotplug-Geräte"
+
+#: personal/environment/environment.tpl:328
+msgid ""
+"Using this option will overwrite the complete printer settings for all "
+"currently edited objects!"
+msgstr ""
+"Das Verwenden dieser Option wird die Druckereinstellungen aller momentan "
+"bearbeiteten Objekte vollständig überschreiben!"
+
+#: personal/environment/environment.tpl:350
+#: personal/environment/environment.tpl:387
+msgid "Toggle administrator"
+msgstr "Admin-Modus umschalten"
+
+#: personal/environment/environment.tpl:355
+#: personal/environment/environment.tpl:392
+msgid "Toggle default"
+msgstr "Standard umschalten"
+
+#: personal/environment/hotplugSelect/class_hotplugSelect.inc:29
+msgid "Device selection"
+msgstr "Geräte-Auswahl"
+
+#: personal/environment/class_environment.inc:9
+#: personal/environment/class_environment.inc:445
+#: personal/environment/class_environment.inc:446
+#: personal/environment/class_environment.inc:454
+#: personal/environment/class_environment.inc:455
+#: personal/environment/class_environment.inc:458
+#: personal/environment/class_environment.inc:459
+#: personal/environment/class_environment.inc:462
+#: personal/environment/class_environment.inc:463
+#: personal/environment/class_environment.inc:485
+#: personal/environment/class_environment.inc:486
+#: personal/environment/class_environment.inc:490
+#: personal/environment/class_environment.inc:491
+#: personal/environment/class_environment.inc:494
+#: personal/environment/class_environment.inc:495
+#: personal/environment/class_environment.inc:1766
+msgid "Desktop"
+msgstr "Schreibtisch"
+
+#: personal/environment/class_environment.inc:10
+msgid "Manage desktop settings"
+msgstr "Desktop-Einstellungen verwalten"
+
+#: personal/environment/class_environment.inc:141
+#, php-format
+msgid "Device '%s' is not available anymore. It will be removed!"
+msgstr "Das Gerät'%s' ist nicht mehr länger verfügbar. Es wird gelöscht!"
+
+#: personal/environment/class_environment.inc:214
+msgid "auto"
+msgstr "auto"
+
+#: personal/environment/class_environment.inc:236
+#, php-format
+msgid "Cannot open file '%s'!"
+msgstr "Kann Datei '%s' nicht öffnen!"
+
+#: personal/environment/class_environment.inc:272
+msgid "Share name"
+msgstr "Freigabenname"
+
+#: personal/environment/class_environment.inc:283
+#: personal/environment/class_environment.inc:284
+msgid "disabled"
+msgstr "deaktiviert"
+
+#: personal/environment/class_environment.inc:320
+#, php-format
+msgid ""
+"Kiosk profile '%s' located on server '%s' is not available anymore. Kiosk "
+"profile will be disabled!"
+msgstr ""
+"Das Kiosk-Profil '%s', das sich auf dem Server '%s' befindet, ist nicht mehr "
+"verfügbar. Das Kiosk-Profil wird deaktiviert!"
+
+#: personal/environment/class_environment.inc:370
+#, php-format
+msgid "Profile server '%s' is not available anymore. Switched to server '%s'."
+msgstr ""
+"Der Profil-Server '%s' ist nicht mehr verfügbar, Wechsel auf Server '%s'."
+
+#: personal/environment/class_environment.inc:374
+#, php-format
+msgid ""
+"Profile server '%s' is not available anymore. Kiosk profile will be disabled."
+msgstr ""
+"Der Profil-Server '%s' ist nicht mehr verfügbar. Das Kiosk-Profil wird "
+"deaktiviert."
+
+#: personal/environment/class_environment.inc:463
+#: personal/environment/class_environment.inc:495
+#: personal/environment/class_environment.inc:1166
+msgid "POSIX"
+msgstr "POSIX"
+
+#: personal/environment/class_environment.inc:687
+msgid "Share"
+msgstr "Freigabe"
+
+#: personal/environment/class_environment.inc:780
+msgid "Reset password hash"
+msgstr "Passwort zurücksetzen"
+
+#: personal/environment/class_environment.inc:795
+msgid "Group share"
+msgstr "Gruppen-Freigabe"
+
+#: personal/environment/class_environment.inc:805
+msgid "User share"
+msgstr "Benutzer-Freigabe"
+
+#: personal/environment/class_environment.inc:1007
+msgid "Cannot set default printer flag for groups!"
+msgstr "Kann Standarddrucker-Flag nicht für Gruppen setzen!"
+
+#: personal/environment/class_environment.inc:1166
+msgid "environment"
+msgstr "Umgebung"
+
+#: personal/environment/class_environment.inc:1363
+msgid "Administrator"
+msgstr "Administrator"
+
+#: personal/environment/class_environment.inc:1368
+#: personal/environment/class_environment.inc:1809
+msgid "Default printer"
+msgstr "Standard Drucker"
+
+#: personal/environment/class_environment.inc:1767
+msgid "Desktop settings"
+msgstr "Desktop-Einstellungen"
+
+#: personal/environment/class_environment.inc:1771
+msgid "My account"
+msgstr "Mein Konto"
+
+#: personal/environment/class_environment.inc:1775
+msgid "Command to extend the list of possible screen resolutions"
+msgstr "Befehl um die Liste der möglichen Auflösungen zu erweitern"
+
+#: personal/environment/class_environment.inc:1786
+msgid ""
+"File containing additional resolutions for workstations and thin clients."
+msgstr ""
+"Datei mit zusätzlichen Auflösungen für Arbeitsstationen und Thin-Clients."
+
+#: personal/environment/class_environment.inc:1796
+msgid "Directory to store KDE kiosk profiles."
+msgstr "Verzeichnis zur Ablage von KDE-Kiosk-Profilen."
+
+#: personal/environment/class_environment.inc:1808
+msgid "Profile server"
+msgstr "Profilserver"
+
+#: personal/environment/logonManagement.tpl:9
+msgid "Log on script settings"
+msgstr "Einstellungen für Anmelde-Skripte"
+
+#: personal/environment/logonManagement.tpl:11
+#: personal/environment/class_logonManagementDialog.inc:110
+msgid "Script name"
+msgstr "Skriptname"
+
+#: personal/environment/logonManagement.tpl:25
+msgid "Priority"
+msgstr "Priorität"
+
+#: personal/environment/logonManagement.tpl:36
+msgid "Log on script flags"
+msgstr "Optionen für Anmelde-Skripte"
+
+#: personal/environment/logonManagement.tpl:40
+msgid "Last script"
+msgstr "Letztes Skript"
+
+#: personal/environment/logonManagement.tpl:46
+msgid "Script can be replaced by user"
+msgstr "Skript kann vom Benutzer ausgetauscht werden"
+
+#: addons/goto/class_goto_import_file.inc:93
+msgid ""
+"Selected entries will be skipped because of errors. Do you want to proceed?"
+msgstr ""
+"Die ausgewählten Einträge sind fehlerhaft und werden nicht berücksichtig. "
+"Möchten Sie fortfahren?"
+
+#: addons/goto/class_goto_import_file.inc:134
+#, php-format
+msgid "Import complete: %s events successfully send, %s failed"
+msgstr "Import abgeschlossen: %s Vorgänge importiert, %s fehlgeschlagen"
+
+#: addons/goto/class_goto_import_file.inc:171
+#: addons/goto/goto_import_file.tpl:40
+msgid "MAC"
+msgstr "MAC"
+
+#: addons/goto/class_goto_import_file.inc:174 addons/goto/deploy-list.xml:14
+#: addons/goto/goto_import_file.tpl:41
+msgid "Event"
+msgstr "Ereignis"
+
+#: addons/goto/deploy-list.xml:10
+msgid "List of queued jobs"
+msgstr "Liste der geplanten Vorgänge"
+
+#: addons/goto/deploy-list.xml:27 addons/goto/events/DaemonEvent_rescan.tpl:51
+#: addons/goto/events/DaemonEvent_halt.tpl:51
+#: addons/goto/events/class_DaemonEvent_notify.inc:77
+#: addons/goto/events/class_DaemonEvent_notify.inc:78
+#: addons/goto/events/class_DaemonEvent_notify.inc:103
+#: addons/goto/events/DaemonEvent_activate.tpl:51
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:51
+#: addons/goto/events/DaemonEvent_notify.tpl:87
+#: addons/goto/events/DaemonEvent_wakeup.tpl:51
+#: addons/goto/events/DaemonEvent_memcheck.tpl:51
+#: addons/goto/events/DaemonEvent_lock.tpl:51
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:51
+#: addons/goto/events/DaemonEvent_reinstall.tpl:55
+#: addons/goto/events/DaemonEvent_reboot.tpl:51
+#: addons/goto/events/DaemonEvent_localboot.tpl:51
+#: addons/goto/events/DaemonEvent_faireboot.tpl:51
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:51
+#: addons/goto/events/DaemonEvent_update.tpl:51
+msgid "Target"
+msgstr "Ziel"
+
+#: addons/goto/deploy-list.xml:35
+msgid "Task"
+msgstr "Vorgang"
+
+#: addons/goto/deploy-list.xml:43
+msgid "Period"
+msgstr "Intervall"
+
+#: addons/goto/deploy-list.xml:51 addons/goto/events/DaemonEvent_rescan.tpl:11
+#: addons/goto/events/DaemonEvent_halt.tpl:11
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:11
+#: addons/goto/events/DaemonEvent_notify.tpl:30
+#: addons/goto/events/DaemonEvent_wakeup.tpl:11
+#: addons/goto/events/DaemonEvent_memcheck.tpl:11
+#: addons/goto/events/DaemonEvent_lock.tpl:11
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:11
+#: addons/goto/events/DaemonEvent_reinstall.tpl:11
+#: addons/goto/events/DaemonEvent_reboot.tpl:11
+#: addons/goto/events/DaemonEvent_localboot.tpl:11
+#: addons/goto/events/DaemonEvent_faireboot.tpl:11
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:11
+#: addons/goto/events/DaemonEvent_update.tpl:11
+msgid "Schedule"
+msgstr "Plan"
+
+#: addons/goto/deploy-list.xml:112
+#: addons/goto/events/class_DaemonEvent_lock.inc:29
+#: addons/goto/events/class_DaemonEvent_lock.inc:30
+msgid "Lock"
+msgstr "Sperre"
+
+#: addons/goto/deploy-list.xml:119
+#: addons/goto/events/class_DaemonEvent_activate.inc:29
+#: addons/goto/events/class_DaemonEvent_activate.inc:30
+msgid "Unlock"
+msgstr "Sperre aufheben"
+
+#: addons/goto/deploy-list.xml:156 addons/goto/deploy-list.xml:217
+msgid "Resume"
+msgstr "Fortsetzen"
+
+#: addons/goto/deploy-list.xml:163 addons/goto/deploy-list.xml:209
+msgid "Pause"
+msgstr "Pause"
+
+#: addons/goto/deploy-list.xml:170 addons/goto/deploy-list.xml:257
+msgid "Abort"
+msgstr "Abbrechen"
+
+#: addons/goto/deploy-list.xml:193
+msgid "Up"
+msgstr "Auf"
+
+#: addons/goto/deploy-list.xml:201
+msgid "Down"
+msgstr "Ab"
+
+#: addons/goto/deploy-list.xml:225
+msgid "Process now"
+msgstr "Jetzt durchführen"
+
+#: addons/goto/deploy-list.xml:233
+msgid "View logs"
+msgstr "Protokolle einsehen"
+
+#: addons/goto/class_filterGotoEvents.inc:18
+#, php-format
+msgid "Cannot load queue entries: %s"
+msgstr "Kann Warteschlangeneinträge nicht laden: %s"
+
+#: addons/goto/goto_import_file.tpl:1
+msgid "Import jobs"
+msgstr "Vorgänge importieren"
+
+#: addons/goto/goto_import_file.tpl:3
+msgid ""
+"You can import a list of jobs into the GOsa job queue. This should be a "
+"semicolon separated list of items in the following format:"
+msgstr ""
+"Sie können eine Liste von Aufträgen in die GOsa Auftragsliste importieren. "
+"Die Liste sollte aus Einträgen im folgenden Format bestehen, die jeweils "
+"durch ein Semikolon getrennt werden:"
+
+#: addons/goto/goto_import_file.tpl:5
+msgid "time stamp"
+msgstr "Zeitstempel"
+
+#: addons/goto/goto_import_file.tpl:5
+msgid "MAC-address"
+msgstr "MAC-Adresse"
+
+#: addons/goto/goto_import_file.tpl:5
+msgid "job type"
+msgstr "Auftrags-Typ"
+
+#: addons/goto/goto_import_file.tpl:5
+msgid "object group"
+msgstr "Objektgruppe"
+
+#: addons/goto/goto_import_file.tpl:5
+msgid "import base"
+msgstr "Basis für Import"
+
+#: addons/goto/goto_import_file.tpl:5
+msgid "full host name"
+msgstr "Voll qualifizierter Hostname"
+
+#: addons/goto/goto_import_file.tpl:5
+msgid "DHCP group"
+msgstr "DHCP-Gruppe"
+
+#: addons/goto/goto_import_file.tpl:9
+msgid "Example"
+msgstr "Beispiel"
+
+#: addons/goto/goto_import_file.tpl:18
+msgid "Goto import"
+msgstr "GOto-Import"
+
+#: addons/goto/goto_import_file.tpl:21
+msgid "Select list to import"
+msgstr "Wählen Sie die zu importierende Liste"
+
+#: addons/goto/goto_import_file.tpl:36
+msgid "Import summary"
+msgstr "Import-Übersicht"
+
+#: addons/goto/goto_import_file.tpl:39
+#: addons/goto/events/DaemonEvent_rescan.tpl:55
+#: addons/goto/events/DaemonEvent_halt.tpl:55
+#: addons/goto/events/DaemonEvent_activate.tpl:55
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:55
+#: addons/goto/events/DaemonEvent_notify.tpl:91
+#: addons/goto/events/DaemonEvent_wakeup.tpl:55
+#: addons/goto/events/DaemonEvent_memcheck.tpl:55
+#: addons/goto/events/DaemonEvent_lock.tpl:55
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:55
+#: addons/goto/events/DaemonEvent_reinstall.tpl:59
+#: addons/goto/events/DaemonEvent_reboot.tpl:55
+#: addons/goto/events/DaemonEvent_localboot.tpl:55
+#: addons/goto/events/DaemonEvent_faireboot.tpl:55
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:55
+#: addons/goto/events/DaemonEvent_update.tpl:55
+msgid "Time stamp"
+msgstr "Zeitstempel"
+
+#: addons/goto/goto_import_file.tpl:44
+msgid "FQDN"
+msgstr "FQDN"
+
+#: addons/goto/goto_import_file.tpl:45
+#: addons/goto/events/eventTargetSystems-list.xml:81
+msgid "IP"
+msgstr "IP"
+
+#: addons/goto/goto_import_file.tpl:46
+msgid "DHCP"
+msgstr "DHCP"
+
+#: addons/goto/events/DaemonEvent_rescan.tpl:4
+msgid "Goto daemon event: Rescan hardware info"
+msgstr "GOto-Ereignis: Hardware neu erfassen"
+
+#: addons/goto/events/DaemonEvent_rescan.tpl:8
+#: addons/goto/events/DaemonEvent_halt.tpl:8
+#: addons/goto/events/DaemonEvent_activate.tpl:8
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:8
+#: addons/goto/events/DaemonEvent_notify.tpl:31
+#: addons/goto/events/DaemonEvent_wakeup.tpl:8
+#: addons/goto/events/DaemonEvent_memcheck.tpl:8
+#: addons/goto/events/DaemonEvent_lock.tpl:8
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:8
+#: addons/goto/events/DaemonEvent_reinstall.tpl:8
+#: addons/goto/events/DaemonEvent_reboot.tpl:8
+#: addons/goto/events/DaemonEvent_localboot.tpl:8
+#: addons/goto/events/DaemonEvent_faireboot.tpl:8
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:8
+#: addons/goto/events/DaemonEvent_update.tpl:8
+msgid "Schedule options"
+msgstr "Planungseinstellungen"
+
+#: addons/goto/events/DaemonEvent_rescan.tpl:18
+#: addons/goto/events/DaemonEvent_halt.tpl:18
+#: addons/goto/events/DaemonEvent_activate.tpl:18
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:18
+#: addons/goto/events/DaemonEvent_wakeup.tpl:18
+#: addons/goto/events/DaemonEvent_memcheck.tpl:18
+#: addons/goto/events/DaemonEvent_lock.tpl:18
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:18
+#: addons/goto/events/DaemonEvent_reinstall.tpl:18
+#: addons/goto/events/DaemonEvent_reboot.tpl:18
+#: addons/goto/events/DaemonEvent_localboot.tpl:18
+#: addons/goto/events/DaemonEvent_faireboot.tpl:18
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:18
+#: addons/goto/events/DaemonEvent_update.tpl:18
+msgid "Target list"
+msgstr "Ziel-Liste"
+
+#: addons/goto/events/DaemonEvent_rescan.tpl:21
+#: addons/goto/events/DaemonEvent_halt.tpl:21
+#: addons/goto/events/DaemonEvent_activate.tpl:21
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:21
+#: addons/goto/events/DaemonEvent_wakeup.tpl:21
+#: addons/goto/events/DaemonEvent_memcheck.tpl:21
+#: addons/goto/events/DaemonEvent_lock.tpl:21
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:21
+#: addons/goto/events/DaemonEvent_reinstall.tpl:21
+#: addons/goto/events/DaemonEvent_reboot.tpl:21
+#: addons/goto/events/DaemonEvent_localboot.tpl:21
+#: addons/goto/events/DaemonEvent_faireboot.tpl:21
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:21
+#: addons/goto/events/DaemonEvent_update.tpl:21
+msgid "System list"
+msgstr "Systemliste"
+
+#: addons/goto/events/DaemonEvent_rescan.tpl:39
+#: addons/goto/events/DaemonEvent_halt.tpl:39
+#: addons/goto/events/DaemonEvent_activate.tpl:39
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:39
+#: addons/goto/events/DaemonEvent_notify.tpl:75
+#: addons/goto/events/DaemonEvent_wakeup.tpl:39
+#: addons/goto/events/DaemonEvent_memcheck.tpl:39
+#: addons/goto/events/DaemonEvent_lock.tpl:39
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:39
+#: addons/goto/events/DaemonEvent_reinstall.tpl:39
+#: addons/goto/events/DaemonEvent_reboot.tpl:39
+#: addons/goto/events/DaemonEvent_localboot.tpl:39
+#: addons/goto/events/DaemonEvent_faireboot.tpl:39
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:39
+#: addons/goto/events/DaemonEvent_update.tpl:39
+msgid "ID"
+msgstr "ID"
+
+#: addons/goto/events/DaemonEvent_rescan.tpl:47
+#: addons/goto/events/DaemonEvent_halt.tpl:47
+#: addons/goto/events/DaemonEvent_activate.tpl:47
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:47
+#: addons/goto/events/DaemonEvent_notify.tpl:83
+#: addons/goto/events/DaemonEvent_wakeup.tpl:47
+#: addons/goto/events/DaemonEvent_memcheck.tpl:47
+#: addons/goto/events/DaemonEvent_lock.tpl:47
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:47
+#: addons/goto/events/DaemonEvent_reinstall.tpl:51
+#: addons/goto/events/DaemonEvent_reboot.tpl:47
+#: addons/goto/events/DaemonEvent_localboot.tpl:47
+#: addons/goto/events/DaemonEvent_faireboot.tpl:47
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:47
+#: addons/goto/events/DaemonEvent_update.tpl:47
+msgid "Result"
+msgstr "Ergebnis"
+
+#: addons/goto/events/class_DaemonEvent_recreate_fai_server_db.inc:30
+#: addons/goto/events/class_DaemonEvent_recreate_fai_server_db.inc:31
+msgid "Reload FAI server db"
+msgstr "FAI-Server-Datenbank neu laden"
+
+#: addons/goto/events/eventTargetUser-list.xml:11
+msgid "List of users"
+msgstr "Liste der Benutzer"
+
+#: addons/goto/events/DaemonEvent_halt.tpl:4
+msgid "Goto daemon event: Halt"
+msgstr "GOto-Ereignis: Ausschalten"
+
+#: addons/goto/events/class_DaemonEvent_wakeup.inc:30
+msgid "Wake system"
+msgstr "System aufwecken"
+
+#: addons/goto/events/class_DaemonEvent_notify.inc:46
+#: addons/goto/events/class_DaemonEvent_notify.inc:47
+msgid "Send message"
+msgstr "Nachricht senden"
+
+#: addons/goto/events/class_DaemonEvent_notify.inc:94
+#: addons/goto/events/DaemonEvent_notify.tpl:9
+#: addons/goto/events/DaemonEvent_notify.tpl:15
+msgid "Subject"
+msgstr "Betreff"
+
+#: addons/goto/events/class_DaemonEvent_notify.inc:97
+#: addons/goto/events/DaemonEvent_notify.tpl:19
+msgid "Message"
+msgstr "Nachricht"
+
+#: addons/goto/events/class_DaemonEvent_notify.inc:100
+msgid "From"
+msgstr "Von"
+
+#: addons/goto/events/DaemonEvent_activate.tpl:4
+msgid "Goto daemon event: Activate system"
+msgstr "GOto-Ereignis: Aktivieren"
+
+#: addons/goto/events/DaemonEvent_activate.tpl:11
+msgid "Time schedule"
+msgstr "Zeitplan"
+
+#: addons/goto/events/DaemonEvent_installation_activation.tpl:4
+msgid "Goto daemon event: Activate"
+msgstr "GOto-Ereignis: Aktivieren"
+
+#: addons/goto/events/DaemonEvent_notify.tpl:4
+msgid "Goto daemon event: Notification message"
+msgstr "GOto-Ereignis: Benachrichtigung"
+
+#: addons/goto/events/DaemonEvent_notify.tpl:8
+msgid "Message settings"
+msgstr "Nachrichteneinstellungen"
+
+#: addons/goto/events/DaemonEvent_notify.tpl:11
+msgid "Sender"
+msgstr "Absender"
+
+#: addons/goto/events/DaemonEvent_notify.tpl:37
+msgid "Recipient"
+msgstr "Empfänger"
+
+#: addons/goto/events/DaemonEvent_notify.tpl:40
+msgid "Target users"
+msgstr "Zielbenutzer"
+
+#: addons/goto/events/DaemonEvent_notify.tpl:47
+msgid "Target groups"
+msgstr "Zielgruppen"
+
+#: addons/goto/events/DaemonEvent_wakeup.tpl:4
+msgid "Goto daemon event: Wake up"
+msgstr "GOto-Ereignis: Aufwecken"
+
+#: addons/goto/events/DaemonEvent_memcheck.tpl:4
+msgid "Goto daemon event: Memory check"
+msgstr "GOto-Ereignis: Speicherprüfung"
+
+#: addons/goto/events/DaemonEvent_memcheck.tpl:33
+#: addons/goto/events/DaemonEvent_faireboot.tpl:33
+msgid "Repeating jobs"
+msgstr "Periodische Aufträge"
+
+#: addons/goto/events/DaemonEvent_memcheck.tpl:37
+#: addons/goto/events/timestamp_select.tpl:55
+#: addons/goto/events/DaemonEvent_faireboot.tpl:37
+msgid "Job interval"
+msgstr "Aufstrags-Intervall"
+
+#: addons/goto/events/class_DaemonEvent_recreate_fai_release_db.inc:30
+#: addons/goto/events/class_DaemonEvent_recreate_fai_release_db.inc:31
+msgid "Reload FAI release db"
+msgstr "FAI-Release-Datenbank neu laden"
+
+#: addons/goto/events/class_DaemonEvent.inc:130
+#: addons/goto/events/eventTargetSystems-list.xml:89
+msgid "Mac"
+msgstr "MAC"
+
+#: addons/goto/events/class_DaemonEvent.inc:144
+msgid "This job has no template!"
+msgstr "Dieser Auftrag hat keine Vorlage!"
+
+#: addons/goto/events/class_DaemonEvent.inc:159
+#, php-format
+msgid "Create '%s' job"
+msgstr "Erstelle '%s'-Vorgang"
+
+#: addons/goto/events/class_DaemonEvent.inc:229
+msgid "Minutes"
+msgstr "Minuten"
+
+#: addons/goto/events/class_DaemonEvent.inc:230
+msgid "Hours"
+msgstr "Stunden"
+
+#: addons/goto/events/class_DaemonEvent.inc:231
+msgid "Days"
+msgstr "Tage"
+
+#: addons/goto/events/class_DaemonEvent.inc:232
+msgid "Weeks"
+msgstr "Wochen"
+
+#: addons/goto/events/class_DaemonEvent.inc:233
+msgid "Months"
+msgstr "Monate"
+
+#: addons/goto/events/class_DaemonEvent.inc:271
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: addons/goto/events/class_DaemonEvent_installation_activation.inc:28
+#: addons/goto/events/class_DaemonEvent_installation_activation.inc:29
+msgid "Installation activation"
+msgstr "Aktivierung der Installation"
+
+#: addons/goto/events/DaemonEvent_lock.tpl:4
+msgid "Goto daemon event: Lock system"
+msgstr "GOto-Ereignis: Sperren"
+
+#: addons/goto/events/eventTargetSystems-list.xml:11
+msgid "List of target systems"
+msgstr "Liste der Zielsysteme"
+
+#: addons/goto/events/class_DaemonEvent_activate_new.inc:40
+#: addons/goto/events/class_DaemonEvent_activate_new.inc:41
+msgid "Activate new"
+msgstr "Neue Geräte Aktivieren"
+
+#: addons/goto/events/DaemonEvent_sysinfo.tpl:4
+msgid "Goto daemon event: System info"
+msgstr "GOto-Ereignis: System-Information"
+
+#: addons/goto/events/DaemonEvent_reinstall.tpl:4
+msgid "Goto daemon event: Reinstall"
+msgstr "GOto-Ereignis: Neuinstallation"
+
+#: addons/goto/events/DaemonEvent_reinstall.tpl:43
+msgid "Progress"
+msgstr "Fortschritt"
+
+#: addons/goto/events/class_DaemonEvent_goto_reload.inc:37
+msgid "GOto reload"
+msgstr "GOto Aktualisieren"
+
+#: addons/goto/events/class_DaemonEvent_goto_reload.inc:38
+msgid "Reload GOto settings"
+msgstr "GOto-Einstellungen aktualisieren"
+
+#: addons/goto/events/timestamp_select.tpl:1
+msgid "Event scheduling options"
+msgstr "Auftragsplanungsoptionen"
+
+#: addons/goto/events/timestamp_select.tpl:3
+msgid "Year"
+msgstr "Jahr"
+
+#: addons/goto/events/timestamp_select.tpl:4
+msgid "Month"
+msgstr "Monat"
+
+#: addons/goto/events/timestamp_select.tpl:5
+msgid "Day"
+msgstr "Tag"
+
+#: addons/goto/events/timestamp_select.tpl:7
+msgid "Hour"
+msgstr "Stunde"
+
+#: addons/goto/events/timestamp_select.tpl:8
+msgid "Minute"
+msgstr "Minute"
+
+#: addons/goto/events/timestamp_select.tpl:9
+msgid "Second"
+msgstr "Sekunde"
+
+#: addons/goto/events/timestamp_select.tpl:46
+msgid "Periodical jobs"
+msgstr "Periodische Aufträge"
+
+#: addons/goto/events/timestamp_select.tpl:49
+msgid "Periodical job"
+msgstr "Periodischer Auftrag"
+
+#: addons/goto/events/DaemonEvent_reboot.tpl:4
+#: addons/goto/events/DaemonEvent_faireboot.tpl:4
+msgid "Goto daemon event: Reboot"
+msgstr "GOto-Ereignis: Neustart"
+
+#: addons/goto/events/DaemonEvent_localboot.tpl:4
+msgid "Goto daemon event: local boot"
+msgstr "GOto-Ereignis: Lokaler Systemstart"
+
+#: addons/goto/events/class_DaemonEvent_faireboot.inc:28
+#: addons/goto/events/class_DaemonEvent_faireboot.inc:29
+msgid "Abort installation"
+msgstr "Installation abbrechen"
+
+#: addons/goto/events/target_list.tpl:5
+msgid "Apply"
+msgstr "Anwenden"
+
+#: addons/goto/events/target_list.tpl:6
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: addons/goto/events/DaemonEvent_goto_reload.tpl:4
+msgid "Goto daemon event: Reload"
+msgstr "GOto-Ereignis: Reload"
+
+#: addons/goto/events/DaemonEvent_update.tpl:4
+msgid "Goto daemon event: Update system"
+msgstr "GOto-Ereignis: Aktualisierung"
+
+#: addons/goto/events/class_DaemonEvent_reload_ldap_config.inc:28
+#: addons/goto/events/class_DaemonEvent_reload_ldap_config.inc:29
+msgid "Reload LDAP configuration"
+msgstr "LDAP-Konfiguration neu laden"
+
+#: addons/goto/class_gotoLogView.inc:92
+msgid "Date"
+msgstr "Datum"
+
+#: addons/goto/class_gotoLogView.inc:92
+msgid "Filename"
+msgstr "Dateiname"
+
+#: addons/goto/class_gotoLogView.inc:182
+msgid "Log view"
+msgstr "Log-Ansicht"
+
+#: addons/goto/class_gotoLogView.inc:183
+msgid "GOto log view"
+msgstr "GOto Log-Ansicht"
+
+#: addons/goto/remove.tpl:10
+msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+msgstr ""
+"Wenn Sie sicher sind, drücken Sie 'Entfernen' um fortzufahren oder "
+"'Abbrechen' zum Abbruch."
+
+#: addons/goto/class_gotomasses.inc:26
+msgid "Deployment status"
+msgstr "Verteilungs-Status"
+
+#: addons/goto/class_gotomasses.inc:27
+msgid "Monitor and schedule system deployment and update processes"
+msgstr ""
+"Überwachung und Planung von Systemverteilungs- und Aktualisierungsprozessen"
+
+#: addons/goto/class_gotomasses.inc:159
+msgid "immediately"
+msgstr "sofort"
+
+#: addons/goto/class_gotomasses.inc:175
+msgid "Waiting"
+msgstr "Wartend"
+
+#: addons/goto/class_gotomasses.inc:181
+msgid "Processed"
+msgstr "Durchgeführt"
+
+#: addons/goto/class_gotomasses.inc:196
+msgid "Detection"
+msgstr "Erkennung"
+
+#: addons/goto/class_gotomasses.inc:203
+msgid "in progress"
+msgstr "in Bearbeitung"
+
+#: addons/goto/class_gotomasses.inc:227
+msgid "Permission"
+msgstr "Berechtigung"
+
+#: addons/goto/class_gotomasses.inc:259
+#, php-format
+msgid "The following jobs couldn't be deleted, they have to be aborted: %s"
+msgstr ""
+"Die folgenden Aufträge konnten nicht gelöscht werden, sie müssen abgebrochen "
+"werden: %s"
+
+#: addons/goto/class_gotomasses.inc:326 addons/goto/class_gotomasses.inc:480
+#: addons/goto/class_gotomasses.inc:551
+#, php-format
+msgid "Cannot update queue entry: %s"
+msgstr "Kann Warteschlangeneintrag nicht aktualisieren: %s"
+
+#: addons/goto/class_gotomasses.inc:331
+#, php-format
+msgid "Required class '%s' cannot be found: job not aborted!"
+msgstr ""
+"Die erforderliche Klasse '%s' wurde nicht gefunden: Auftrag abgebrochen!"
+
+#: addons/goto/class_gotomasses.inc:515
+#, php-format
+msgid "Cannot update queue entries."
+msgstr "Kann Warteschlangeneinträge nicht aktualisieren."
+
+#: addons/goto/class_gotomasses.inc:565 addons/goto/class_gotomasses.inc:571
+msgid "System deployment"
+msgstr "System-Verteilung"
+
+#: addons/goto/class_gotomasses.inc:566
+msgid "Provide a mechanism to automatically activate systems"
+msgstr "Stelle einen Mechanismus bereit um Systemen automatisch zu aktivieren"
+
+#: addons/goto/log_view.tpl:7
+msgid "Available logs"
+msgstr "Verfügbare Protokolle"
+
+#: addons/goto/log_view.tpl:10
+msgid "View system logs"
+msgstr "System-Protokolle einsehen"
+
+#: addons/goto/log_view.tpl:15
+msgid "Selected log"
+msgstr "Ausgewähltes Protokoll"
+
+#: addons/goto/log_view.tpl:18
+msgid "No logs for this host available!"
+msgstr "Es sind keine Protokolle für dieses System verfügbar!"

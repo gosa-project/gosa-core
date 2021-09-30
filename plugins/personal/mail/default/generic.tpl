@@ -175,7 +175,7 @@
 
             {render acl=$gosaVacationMessageACL checkbox=$multiple_support checked=$use_gosaVacationMessage}
             <b><label for="gosaVacationMessage">{t}Vacation message{/t}</label></b>
-            <textarea {if $own_script !="" } disabled {/if} id="gosaVacationMessage" class="materialize-textare"
+            <textarea {if $own_script !="" } disabled {/if} id="gosaVacationMessage" class="materialize-textarea"
                name="gosaVacationMessage">
                {$gosaVacationMessage}
             </textarea>
