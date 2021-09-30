@@ -1,4 +1,4 @@
-<div style="padding:3px">
+<div class="information-wrapper">
     {if $personalInfoAllowed}
 
     <h3>{t}User information{/t}</h3>
@@ -100,8 +100,9 @@
     {/if}
 
     {if !$personalInfoAllowed && $plugins == ""}
-    <div>
-        <h2 class="center">{t}You have no permission to edit any properties. Please contact your administrator.{/t}</h2>
+    <div class="no-permission attention-head">
+        <i class="material-icons left">error</i>
+        <h2>{t}You have no permission to edit any properties. Please contact your administrator.{/t}</h2>
     </div>
     {/if}
 
@@ -117,6 +118,6 @@
 {/if}
 
 <div class="clear"></div>
-<hr>
+<hr class="divider">
 <div class="copynotice">&copy; 2002-{$year} <a href="http://gosa.gonicus.de">{t}The GOsa team{/t}, {$revision}</a></div>
 <input type="hidden" name="ignore">
