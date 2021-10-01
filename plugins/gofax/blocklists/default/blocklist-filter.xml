@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <category>gofaxlist</category>
+    <initial>true</initial>
+    <scope>auto</scope>
+    <default>default</default>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>cn</attribute>
+    <attribute>description</attribute>
+    <attribute>goFaxRBlocklist</attribute>
+    <attribute>goFaxSBlocklist</attribute>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Default filter</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(|(objectClass=goFaxSBlock)(objectClass=goFaxRBlock))(cn=$))</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>onlyReceive</tag>
+    <label>Receive</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=goFaxRBlock)(cn=$))</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>onlySend</tag>
+    <label>Send</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=goFaxSBlock)(cn=$))</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+</filterdef>

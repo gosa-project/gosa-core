@@ -293,4 +293,30 @@
     padding: 0;
 }
 
+
+/* fax control panel */
+
+.content .card-content .fax-control-panel {
+    height: 26px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: last baseline;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.content .card-content .fax-control-panel .input-field {
+    padding: 0 0 0 5px;
+}
+
+.content .card-content .fax-control-panel button,
+.content .card-content .fax-control-panel .fax-cp-label {
+    margin: 0 5px;
+}
+
 @media only screen and (max-width: 1200px) {}

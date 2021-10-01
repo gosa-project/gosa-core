@@ -6,6 +6,7 @@ class ldif extends plugin
     var $plHeadline= "LDAP tools";
     var $plDescription= "Export LDIF or Excel snapshots of the LDAP tree";
     var $plIcon = "plugins/ldapmanager/images/ldif.png";
+    var $matIcon = "account_tree_outlined";
 
     /* attribute list for save action */
     var $attributes= array();

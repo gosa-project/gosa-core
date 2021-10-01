@@ -1,0 +1,639 @@
+# translation of messages.po to Deutsch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+#
+#
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004, 2005, 2006.
+# Jan Wenzel <jan.wenzel@gonicus.de>, 2004,2005, 2008.
+# Stefan Koehler <stefan.koehler@GONICUS.de>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:23+0100\n"
+"PO-Revision-Date: 2010-09-15 09:02+0100\n"
+"Last-Translator: Fabian Hickert <Fabian.Hickert@GONICUS.DE>\n"
+"Language-Team: German <de@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: html/getfax.php:51
+msgid "Could not connect to database server!"
+msgstr "Konnte nicht zum Datenbankserver verbinden!"
+
+#: html/getfax.php:53
+msgid "Could not select database!"
+msgstr "Konnte die Datenbank nicht auswählen!"
+
+#: html/getfax.php:58 html/getfax.php:62
+msgid "Database query failed!"
+msgstr "Die Datenbank-Abfrage ist fehlgeschlagen!"
+
+#: gofax/faxreports/detail.tpl:1 gofax/faxreports/contents.tpl:3
+msgid "Fax reports"
+msgstr "Fax-Berichte"
+
+#: gofax/faxreports/detail.tpl:5 gofax/faxreports/detail.tpl:6
+msgid "Click on fax to download"
+msgstr "Klicken Sie auf das Fax, um es herunterzuladen"
+
+#: gofax/faxreports/detail.tpl:14
+msgid "Entry list"
+msgstr "Eintrags-Liste"
+
+#: gofax/faxreports/detail.tpl:16
+msgid "FAX ID"
+msgstr "Fax-ID"
+
+#: gofax/faxreports/detail.tpl:20 gofax/faxreports/contents.tpl:37
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:14
+#: admin/systems/services/gofax/class_goFaxServer.inc:68
+msgid "User"
+msgstr "Benutzer"
+
+#: gofax/faxreports/detail.tpl:24
+msgid "Date / Time"
+msgstr "Datum / Zeit"
+
+#: gofax/faxreports/detail.tpl:28 gofax/faxreports/class_faxreport.inc:461
+msgid "Sender MSN"
+msgstr "Absender-MSN"
+
+#: gofax/faxreports/detail.tpl:32 gofax/faxreports/class_faxreport.inc:460
+msgid "Sender ID"
+msgstr "Absender-ID"
+
+#: gofax/faxreports/detail.tpl:36 gofax/faxreports/class_faxreport.inc:463
+msgid "Receiver MSN"
+msgstr "Empfänger-MSN"
+
+#: gofax/faxreports/detail.tpl:40 gofax/faxreports/class_faxreport.inc:462
+msgid "Receiver ID"
+msgstr "Empfänger-ID"
+
+#: gofax/faxreports/detail.tpl:44 gofax/faxreports/contents.tpl:39
+#: gofax/faxreports/class_faxreport.inc:459
+msgid "Status"
+msgstr "Status"
+
+#: gofax/faxreports/detail.tpl:48
+msgid "Status message"
+msgstr "Status-Nachricht"
+
+#: gofax/faxreports/detail.tpl:52 gofax/faxreports/class_faxreport.inc:466
+msgid "Transfer time"
+msgstr "Übertragungszeit"
+
+#: gofax/faxreports/detail.tpl:56 gofax/faxreports/contents.tpl:42
+msgid "# pages"
+msgstr "# Seiten"
+
+#: gofax/faxreports/contents.tpl:6
+msgid "Filter"
+msgstr "Filter"
+
+#: gofax/faxreports/contents.tpl:9 gofax/faxreports/contents.tpl:38
+#: gofax/faxreports/class_faxreport.inc:458
+msgid "Date"
+msgstr "Datum"
+
+#: gofax/faxreports/contents.tpl:17
+msgid "Search for"
+msgstr "Suche nach"
+
+#: gofax/faxreports/contents.tpl:19
+msgid "Enter user name to search for"
+msgstr "Benutzername, nach dem gesucht werden soll"
+
+#: gofax/faxreports/contents.tpl:23
+msgid "Search"
+msgstr "Suchen"
+
+#: gofax/faxreports/contents.tpl:34
+msgid "Phone reports"
+msgstr "Fax-Berichte"
+
+#: gofax/faxreports/contents.tpl:40
+msgid "Sender"
+msgstr "Absender"
+
+#: gofax/faxreports/contents.tpl:41
+msgid "Receiver"
+msgstr "Empfänger"
+
+#: gofax/faxreports/contents.tpl:60
+msgid "Page selector"
+msgstr "Seitenauswahl"
+
+#: gofax/faxreports/contents.tpl:69
+msgid "Search returned no results..."
+msgstr "Die Suche verlief ergebnislos..."
+
+#: gofax/faxreports/class_faxreport.inc:6
+msgid "FAX Reports"
+msgstr "Fax-Berichte"
+
+#: gofax/faxreports/class_faxreport.inc:7
+msgid "View the FAX report or single documents that have been received"
+msgstr "Betrachten von Fax-Reports oder einzelne empfangen Dokumente"
+
+#: gofax/faxreports/class_faxreport.inc:126
+#: gofax/faxreports/class_faxreport.inc:137
+#: gofax/faxreports/class_faxreport.inc:142
+#: gofax/faxreports/class_faxreport.inc:148
+#: gofax/faxreports/class_faxreport.inc:173
+#: gofax/faxreports/class_faxreport.inc:279
+#: gofax/blocklists/class_blocklistGeneric.inc:109
+#: gofax/blocklists/class_blocklistGeneric.inc:170
+#: gofax/faxaccount/class_gofaxAccount.inc:254
+msgid "Error"
+msgstr "Fehler"
+
+#: gofax/faxreports/class_faxreport.inc:126
+msgid "No FAX server found!"
+msgstr "Kein Fax-Server gefunden!"
+
+#: gofax/faxreports/class_faxreport.inc:129
+msgid "Configuration error"
+msgstr "Konfigurationsfehler"
+
+#: gofax/faxreports/class_faxreport.inc:130
+#, php-format
+msgid "Missing %s PHP extension!"
+msgstr "Fehlende %s PHP-Erweiterung"
+
+#: gofax/faxreports/class_faxreport.inc:138
+#, php-format
+msgid "Cannot connect to %s database!"
+msgstr "Konnte nicht zur %s Datenbank verbinden!"
+
+#: gofax/faxreports/class_faxreport.inc:143
+#, php-format
+msgid "Cannot select %s database!"
+msgstr "Konnte keine Auswahl auf %s Datenbank durchführen!"
+
+#: gofax/faxreports/class_faxreport.inc:149
+#: gofax/faxreports/class_faxreport.inc:174
+#: gofax/faxreports/class_faxreport.inc:279
+#, php-format
+msgid "Cannot query %s database!"
+msgstr "Konnte %s Datenbank nicht abfragen!"
+
+#: gofax/faxreports/class_faxreport.inc:192
+msgid "Permission error"
+msgstr "Berechtigungsfehler"
+
+#: gofax/faxreports/class_faxreport.inc:193
+msgid "You have no permission to view this FAX id!"
+msgstr "Sie haben keine Berechtigung um diese Fax-ID anzusehen!"
+
+#: gofax/faxreports/class_faxreport.inc:209
+#: gofax/faxreports/class_faxreport.inc:314
+msgid "Y-M-D"
+msgstr "D.M.Y"
+
+#: gofax/faxreports/class_faxreport.inc:285
+msgid "Insufficient permissions to view this attribute"
+msgstr "Zugriffsrechte nicht ausreichend um das Attribut anzuzeigen"
+
+#: gofax/faxreports/class_faxreport.inc:441
+#: gofax/faxreports/class_faxreport.inc:442
+msgid "View FAX reports"
+msgstr "Fax-Berichte"
+
+#: gofax/faxreports/class_faxreport.inc:442
+msgid "All entries are read-only"
+msgstr "Alle Einträge sind nur lesbar"
+
+#: gofax/faxreports/class_faxreport.inc:456
+msgid "Detailed view and download"
+msgstr "Detaillierte Ansicht und Download"
+
+#: gofax/faxreports/class_faxreport.inc:457
+msgid "Fax ID"
+msgstr "Fax-ID"
+
+#: gofax/faxreports/class_faxreport.inc:458
+msgid "Time"
+msgstr "Zeit"
+
+#: gofax/faxreports/class_faxreport.inc:464
+msgid "Number of pages"
+msgstr "Anzahl der Seiten"
+
+#: gofax/faxreports/class_faxreport.inc:465
+msgid "Status Message"
+msgstr "Status-Nachricht"
+
+#: gofax/blocklists/blocklist-list.tpl:12 gofax/blocklists/generic.tpl:17
+#: gofax/blocklists/class_blocklistGeneric.inc:402
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.tpl:12
+msgid "Base"
+msgstr "Basis"
+
+#: gofax/blocklists/generic.tpl:1 gofax/faxaccount/generic.tpl:8
+#: gofax/faxaccount/paste_generic.tpl:6
+msgid "Generic"
+msgstr "Allgemein"
+
+#: gofax/blocklists/generic.tpl:2 gofax/blocklists/blocklist-list.xml:82
+msgid "Blacklist"
+msgstr "Sperrliste"
+
+#: gofax/blocklists/generic.tpl:6
+msgid "Blacklist generic"
+msgstr "Sperrliste allgemein"
+
+#: gofax/blocklists/generic.tpl:8 gofax/blocklists/paste_generic.tpl:3
+msgid "List name"
+msgstr "Listenname"
+
+#: gofax/blocklists/generic.tpl:12 gofax/blocklists/paste_generic.tpl:5
+msgid "Name of blacklist"
+msgstr "Name der Sperrliste"
+
+#: gofax/blocklists/generic.tpl:32
+#: gofax/blocklists/class_blocklistGeneric.inc:405
+msgid "Blacklist type"
+msgstr "Typ der Sperrliste"
+
+#: gofax/blocklists/generic.tpl:34
+msgid "Type"
+msgstr "Typ"
+
+#: gofax/blocklists/generic.tpl:37
+msgid "Select whether to filter incoming or outgoing calls"
+msgstr "Wählen Sie, ob ein- oder abgehende Rufe gefiltert werden sollen"
+
+#: gofax/blocklists/generic.tpl:45 gofax/blocklists/blocklist-list.xml:57
+#: gofax/blocklists/class_blocklistGeneric.inc:401
+msgid "Description"
+msgstr "Beschreibung"
+
+#: gofax/blocklists/generic.tpl:48
+msgid "Descriptive text for this blacklist"
+msgstr "Beschreibender Text zu dieser Sperrliste"
+
+#: gofax/blocklists/generic.tpl:59 gofax/blocklists/generic.tpl:63
+msgid "Blocked numbers"
+msgstr "Gesperrte Nummern"
+
+#: gofax/blocklists/generic.tpl:87
+msgid "Information"
+msgstr "Information"
+
+#: gofax/blocklists/generic.tpl:89
+msgid "Numbers can also contain wild cards."
+msgstr "Nummern können auch Platzhalter enthalten."
+
+#: gofax/blocklists/blocklist-list.xml:11
+msgid "List of blacklists"
+msgstr "Liste der Sperrlisten"
+
+#: gofax/blocklists/blocklist-list.xml:15
+#: gofax/faxaccount/class_gofaxAccount.inc:831
+msgid "Send blacklist"
+msgstr "Sende-Sperrliste"
+
+#: gofax/blocklists/blocklist-list.xml:23
+#: gofax/faxaccount/class_gofaxAccount.inc:830
+msgid "Receive blacklist"
+msgstr "Emfangs-Sperrliste"
+
+#: gofax/blocklists/blocklist-list.xml:49
+#: gofax/blocklists/class_blocklistGeneric.inc:212
+#: gofax/blocklists/class_blocklistGeneric.inc:215
+#: gofax/blocklists/class_blocklistGeneric.inc:222
+#: gofax/blocklists/class_blocklistGeneric.inc:400
+#: gofax/faxaccount/class_gofaxAccount.inc:103
+msgid "Name"
+msgstr "Name"
+
+#: gofax/blocklists/blocklist-list.xml:65
+msgid "Actions"
+msgstr "Aktionen"
+
+#: gofax/blocklists/blocklist-list.xml:76
+msgid "Create"
+msgstr "Anlegen"
+
+#: gofax/blocklists/blocklist-list.xml:94
+#: gofax/blocklists/blocklist-list.xml:133 gofax/faxaccount/generic.tpl:138
+#: gofax/faxaccount/generic.tpl:147
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: gofax/blocklists/blocklist-list.xml:101
+#: gofax/blocklists/blocklist-list.xml:146
+msgid "Remove"
+msgstr "Entfernen"
+
+#: gofax/blocklists/paste_generic.tpl:1
+msgid "Paste blacklist"
+msgstr "Sperrliste einfügen"
+
+#: gofax/blocklists/class_blocklistManagement.inc:25
+msgid "FAX Blocklists"
+msgstr "Fax-Sperrlisten"
+
+#: gofax/blocklists/class_blocklistManagement.inc:26
+msgid "Manage FAX number blocklists for incoming and outgoing FAX calls"
+msgstr ""
+"Fax-Nummer Blocklisten für eingehende und ausgehende Fax Übertragungen "
+"verwalten"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:9
+msgid "FAX blacklists"
+msgstr "Fax-Sperrlisten"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:10
+#: gofax/faxaccount/class_gofaxAccount.inc:7
+msgid "This does something"
+msgstr "Dies tut etwas"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:109
+#: gofax/faxaccount/class_gofaxAccount.inc:254
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:152
+msgid "send"
+msgstr "senden"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:152
+msgid "receive"
+msgstr "empfangen"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:198
+#: gofax/blocklists/class_blocklistGeneric.inc:284
+#: gofax/faxaccount/class_gofaxAccount.inc:603
+#: gofax/faxaccount/class_gofaxAccount.inc:734
+msgid "LDAP error"
+msgstr "LDAP-Fehler"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:373
+#: gofax/faxaccount/generic.tpl:12 gofax/faxaccount/paste_generic.tpl:10
+#: gofax/faxaccount/class_gofaxAccount.inc:809
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:56
+msgid "Fax"
+msgstr "Fax"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:374
+#: gofax/blocklists/class_blocklistGeneric.inc:382
+#: gofax/blocklists/class_blocklistGeneric.inc:383
+msgid "Fax blacklists"
+msgstr "Fax-Sperrlisten"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:391
+msgid "RDN for facsimile blocklist storage."
+msgstr "RDN für die FAX-Blocklisten Ablage"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:403
+msgid "Send blacklist entries"
+msgstr "Sende-Sperrliste"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:404
+msgid "Receive blacklist entries"
+msgstr "Emfangs-Sperrliste"
+
+#: gofax/blocklists/blocklist-filter.xml:19
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-filter.xml:21
+msgid "Default filter"
+msgstr "Standard-Filter"
+
+#: gofax/blocklists/blocklist-filter.xml:33
+msgid "Receive"
+msgstr "Empfänger"
+
+#: gofax/blocklists/blocklist-filter.xml:47
+msgid "Send"
+msgstr "Absender"
+
+#: gofax/faxaccount/generic.tpl:1
+msgid "Fax account"
+msgstr "Fax Konto"
+
+#: gofax/faxaccount/generic.tpl:10 gofax/faxaccount/paste_generic.tpl:7
+msgid "Generic settings"
+msgstr "Allgemeine Benutzereinstellungen"
+
+#: gofax/faxaccount/generic.tpl:15
+msgid "Multiple edit"
+msgstr "Mehrfaches Bearbeiten"
+
+#: gofax/faxaccount/generic.tpl:19 gofax/faxaccount/paste_generic.tpl:15
+msgid "Fax number for GOfax to trigger on"
+msgstr "Fax-Nummer, auf die GOfax ansprechen soll"
+
+#: gofax/faxaccount/generic.tpl:26 gofax/faxaccount/class_gofaxAccount.inc:824
+msgid "Language"
+msgstr "Sprache"
+
+#: gofax/faxaccount/generic.tpl:31
+msgid "Specify the GOfax communication language for FAX to mail gateway"
+msgstr "Geben Sie die Kommunikations-Sprache für das Fax to Mail-Gateway an"
+
+#: gofax/faxaccount/generic.tpl:39 gofax/faxaccount/class_gofaxAccount.inc:825
+msgid "Delivery format"
+msgstr "Auslieferungsformat"
+
+#: gofax/faxaccount/generic.tpl:43
+msgid "Specify delivery format for FAX to mail gateway"
+msgstr "Geben Sie das Auslieferungsformat des Fax to Mailgateways an"
+
+#: gofax/faxaccount/generic.tpl:58
+msgid "Delivery methods"
+msgstr "Auslieferungsmethode"
+
+#: gofax/faxaccount/generic.tpl:63
+msgid "Temporary disable FAX usage"
+msgstr "Temporäres Abschalten der Fax-Benutzung"
+
+#: gofax/faxaccount/generic.tpl:69
+msgid "Deliver FAX as mail to"
+msgstr "Fax als Mail ausliefern an"
+
+#: gofax/faxaccount/generic.tpl:77 gofax/faxaccount/class_gofaxAccount.inc:828
+msgid "Deliver FAX as mail"
+msgstr "Als Mail ausliefern"
+
+#: gofax/faxaccount/generic.tpl:84 gofax/faxaccount/class_gofaxAccount.inc:829
+msgid "Deliver FAX to printer"
+msgstr "Fax an Drucker weiterleiten"
+
+#: gofax/faxaccount/generic.tpl:97
+msgid "Alternative numbers"
+msgstr "Alternative Fax-Nummern"
+
+#: gofax/faxaccount/generic.tpl:105
+msgid "Alternate FAX numbers"
+msgstr "Alternative Fax-Nummern"
+
+#: gofax/faxaccount/generic.tpl:121
+msgid "Add local"
+msgstr "Lokale hinzufügen"
+
+#: gofax/faxaccount/generic.tpl:132 gofax/faxaccount/generic.tpl:133
+msgid "Blacklists"
+msgstr "Sperrlisten"
+
+#: gofax/faxaccount/generic.tpl:135
+msgid "Blacklists for incoming FAX"
+msgstr "Sperrlisten für eingehendes Fax"
+
+#: gofax/faxaccount/generic.tpl:144
+msgid "Blacklists for outgoing FAX"
+msgstr "Sperrlisten für abgehendes Fax"
+
+#: gofax/faxaccount/paste_generic.tpl:1
+msgid "Paste fax account settings"
+msgstr "Fax-Konto einfügen"
+
+#: gofax/faxaccount/paste_generic.tpl:20
+msgid "Alternate fax numbers will not be copied"
+msgstr "Alternative Fax-Nummern werden nicht kopiert"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:6
+msgid "FAX"
+msgstr "Fax"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:161
+#: gofax/faxaccount/class_gofaxAccount.inc:171
+#: gofax/faxaccount/class_gofaxAccount.inc:174
+msgid "GOfax"
+msgstr "GOfax"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:170
+msgid "Remove FAX account"
+msgstr "Fax-Konto entfernen"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:173
+msgid "Create FAX account"
+msgstr "Fax-Konto erzeugen"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:394
+#: gofax/faxaccount/class_gofaxAccount.inc:477
+msgid "back"
+msgstr "zurück"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:619
+#: gofax/faxaccount/class_gofaxAccount.inc:623
+#: gofax/faxaccount/class_gofaxAccount.inc:823
+msgid "Fax number"
+msgstr "Faxnummer"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:630
+msgid "Mail delivery is requested without target address!"
+msgstr "Die Mailzustellung wurde ohne Zieladresse angefordert!"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:632
+msgid "Mail address"
+msgstr "Mail-Adresse"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:632
+msgid "your-name@your-domain.com"
+msgstr "ihr-name@ihre-domain.com"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:638
+msgid "Printing is requested without a target printer!"
+msgstr "Ausdruck wurden ohne Zieldrucker angefordert!"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:810
+msgid "Fax account settings"
+msgstr "Fax-Konto-Einstellungen"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:826
+msgid "Alternate FAX number"
+msgstr "Alternative Fax-Nummern"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:827
+msgid "Enable/Disable FAX"
+msgstr "FAX aktivieren/deaktivieren"
+
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:10
+msgid "Please select the desired entries"
+msgstr "Bitte wählen Sie die gewünschten Einträge"
+
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:40
+msgid "Given name"
+msgstr "Vorname"
+
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:48
+msgid "Surname"
+msgstr "Nachname"
+
+#: gofax/faxaccount/faxNumberSelect/class_faxNumberSelect.inc:28
+msgid "Fax number selection"
+msgstr "Fax-Nummern Auswahl"
+
+#: gofax/faxaccount/lists.tpl:2
+msgid "Blocklist settings"
+msgstr "Sperrlisten"
+
+#: gofax/faxaccount/lists.tpl:7
+msgid "Blocked numbers/lists"
+msgstr "Gesperrte Nummern/Listen"
+
+#: gofax/faxaccount/lists.tpl:21
+msgid "List of predefined blacklists"
+msgstr "Liste von vordefinierten Sperrlisten"
+
+#: gofax/faxaccount/lists.tpl:22
+msgid "List of blocked numbers"
+msgstr "Liste der gesperrten Nummern"
+
+#: gofax/faxaccount/lists.tpl:29
+msgid "Add the list to the blacklists"
+msgstr "Liste zu den Sperrlisten hinzufügen"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:30
+msgid "FAX database"
+msgstr "Fax-Datenbank"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:59
+msgid "FAX database configuration"
+msgstr "Konfiguration der Fax-Datenbank"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:71
+#: admin/systems/services/gofax/class_goFaxServer.inc:102
+#: admin/systems/services/gofax/goFaxServer.tpl:12
+msgid "Password"
+msgstr "Passwort"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:88
+#: admin/systems/services/gofax/class_goFaxServer.inc:89
+#: admin/systems/services/gofax/goFaxServer.tpl:2
+msgid "Fax database"
+msgstr "Fax-Datenbank"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:89
+msgid "Services"
+msgstr "Dienste"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:101
+msgid "Login name"
+msgstr "Anmeldename"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:104
+msgid "Start"
+msgstr "Start"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:105
+msgid "Stop"
+msgstr "Stopp"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:106
+msgid "Restart"
+msgstr "Neustart"
+
+#: admin/systems/services/gofax/goFaxServer.tpl:1
+msgid "FAX database information"
+msgstr "Informationen der Fax-Datenbank"
+
+#: admin/systems/services/gofax/goFaxServer.tpl:4
+msgid "FAX DB user"
+msgstr "Fax-DB Benutzer"

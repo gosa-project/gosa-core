@@ -13,15 +13,9 @@
 <input type="hidden" name="ignore">
 
 
-<!--
-JS to reload the progress bars.
-
--->
-{literal}
+<!-- JS to reload the progress bars.  -->
 <script type="text/javascript">
-
-/* Get request object handler for this type of browser 
- */
+/* Get request object handler for this type of browser */
 if (typeof XMLHttpRequest != 'undefined')
 {
     xmlHttpObject = new XMLHttpRequest();
@@ -51,8 +45,7 @@ function loadContent()
 {
     var c = 0;
 
-    /* Create array of available progress images once 
-     */
+    /* Create array of available progress images once */
     if(!fai_status.length){
         var progressBars= document.getElementsByTagName ('*') ;
         for(var i=0; i< progressBars.length; i++){
@@ -68,15 +61,13 @@ function loadContent()
     }
 
 	/* Create string of macs used as parameter for getFAIstatus.php
-		to retrieve all progress values.
-     */
+		to retrieve all progress values. */
 	var macs = "";
 	for (var i = 0; i < fai_status.length; i++) {
 		macs += fai_status[i]['MAC'] + ","
 	}
 
-	/* Send request 
-     */
+	/* Send request */
     xmlHttpObject.open('get','getFAIstatus.php?mac=' + macs);
     xmlHttpObject.onreadystatechange = handleContent;
     xmlHttpObject.send(null);
@@ -88,14 +79,12 @@ function handleContent()
 {
     if (xmlHttpObject.readyState == 4)
     {
-		/* Get text and split by newline 
-         */
+		/* Get text and split by newline */
         var text = xmlHttpObject.responseText;
 		var data = text.split("\n");
 
 		/* Walk through progress images and check if the 
-		   progress status has changed 
-		 */
+		   progress status has changed */
 		for (var e = 0; e < fai_status.length; e++) {
 		
 			/* Walk through returned values and parse out 
@@ -121,8 +110,7 @@ function handleContent()
                 if(fai_status[e]["MAC"] == mac){
                     found = true;	
 
-                    /* Check if progress has changed 
-                     */	
+                    /* Check if progress has changed */	
                     if(progress!= 'none'){
                         progressBar.innerHTML = progress + "%";
                     }
@@ -147,9 +135,8 @@ function handleContent()
             }
 			//document.getElementById("text1").value += "\n ";
 
-			/* There was no status send for the current mac. 
-			   This means it was removed from the queue.
-			 */
+            /* There was no status send for the current mac. 
+			   This means it was removed from the queue. */
 			if(!found){
 				document.mainform.submit();				
 			}
@@ -160,4 +147,3 @@ function handleContent()
 
 timer=setTimeout('loadContent()',3000);
 </script>
-{/literal}
