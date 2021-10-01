@@ -343,7 +343,7 @@ class userManagement extends management
 
                 // Check posted passwords now.
                 $message= array();
-                // Perform GOsa password policy checks 
+                // Perform GOsa password policy checks
                 if($new_password  != $repeated_password){
                     $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
                 }elseif($new_password == ""){
@@ -908,7 +908,7 @@ class userManagement extends management
             case 'classic':
                 $image = "images/empty.png";
                 break;
-            
+
             default:
             $image = "";
                 break;
@@ -919,7 +919,7 @@ class userManagement extends management
                     case 'classic':
                         $image = "images/lists/locked.png";
                         break;
-                    
+
                     default:
                         $image = "<i class='material-icons'>lock</i>";
                         break;
@@ -929,7 +929,7 @@ class userManagement extends management
                     case 'classic':
                         $image = "images/lists/unlocked.png";
                         break;
-                    
+
                     default:
                         $image = "<i class='material-icons'>lock_open</i>";
                         break;
@@ -992,24 +992,25 @@ class userManagement extends management
                         "title" => _("Edit phone properties")),
               );
 
+        switch ($theme) {
+            case 'classic':
+                break;
+
+            default:
+                $result.= "<div class='property-wrapper'>";
+                break;
+        }
+
         // Walk thru map
         foreach ($map as $oc => $properties) {
             if (in_array_ics($oc, $classes)) {
-                switch ($theme) {
-                    case 'classic':
-                        $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
-                        break;
-                    
-                    default:
-                        $result.= "<div class='property-wrapper'>".image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title'])."</div>";
-                        break;
-                }
+                $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
             } else {
                 switch ($theme) {
                     case 'classic':
                         $result .= image('images/empty.png');
                         break;
-                    
+
                     default:
                         $result .= image("");
                         break;
@@ -1017,12 +1018,21 @@ class userManagement extends management
             }
         }
 
+        switch ($theme) {
+            case 'classic':
+                break;
+
+            default:
+                $result.= "</div>";
+                break;
+        }
+
         if(in_array_ics("zarafa-contact", $classes)){
             switch ($theme) {
                 case 'classic':
                     $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                     break;
-                
+
                 default:
                     $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                     break;
@@ -1032,7 +1042,7 @@ class userManagement extends management
                 case 'classic':
                     $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                     break;
-                
+
                 default:
                     $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                     break;
