@@ -85,7 +85,7 @@ class pathNavigator
 
                 // If no path is given then show a simple 'Welcome to GOsa' string.
                 if (empty($path)) {
-                    $path = "<div class='left col s5'>"._('Welcome to GOsa').'</div>';
+                    $path = "<li class='left path-element'>"._('Welcome to GOsa').'</li>';
                 }
 
                 $smarty = get_smarty();
