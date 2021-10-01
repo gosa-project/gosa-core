@@ -2,7 +2,7 @@
   {$php_errors}
   <div class='title-bar'>
     <ul>
-      <li>{$logo}</li>
+      <li><img src="{$logo}" alt=""></li>
       <li class='right table-wrapper'>
         <div class='logged-in-label'>{$version}</div>
       </li>

@@ -54,7 +54,7 @@ function displayLogin()
     }
     
     $smarty->assign("title", "GOsa");
-    $smarty->assign("logo", image(get_template_path("images/logo.png")));
+    $smarty->assign("logo", get_template_path("images/logo.png"));
     $smarty->assign('date', gmdate("D, d M Y H:i:s"));
     $smarty->assign('username', set_post($username));
     $smarty->assign('personal_img', get_template_path('images/login-head.png'));

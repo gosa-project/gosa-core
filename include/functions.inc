@@ -3625,7 +3625,6 @@ function image($path, $action= "", $title= "", $align= "middle")
         if (isset ($config)){
           $theme= $config->get_cfg_value("core","theme");
         } else {
-
           // Fall back to default theme
           $theme= "default";
         }
