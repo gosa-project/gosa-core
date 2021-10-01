@@ -29,6 +29,20 @@ if (cardActionElem && cardActionElem.length > 1) {
     });
 }
 
+// Creation of a submenu if the length of the navigation items of the mobile version is too long
+let tabsElem = document.querySelectorAll('.view-xl');
+
+if (tabsElem && tabsElem.length !== 0) {
+    let mobileAreaSelection = document.querySelector('#mobile-area-selection');
+
+    tabsElem.forEach(element => {
+        let newElement = element.cloneNode(true);
+        newElement.classList.remove('view-xl');
+        newElement.classList.add('view-m');
+        mobileAreaSelection.appendChild(newElement);
+    });
+}
+
 // Function to change the visibility of the password
 document.querySelectorAll('.toggle-pw').forEach(icon => {
     icon.addEventListener('click', function() {
