@@ -220,7 +220,8 @@
     text-transform: initial;
 }
 
-.object-info .content-wrapper .input-field.add {
+.object-info .content-wrapper .input-field.add,
+.content .goto-import-wrapper .input-field.add {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -234,7 +235,8 @@
     margin-bottom: 0;
 }
 
-.object-info .content-wrapper .input-field.add button {
+.object-info .content-wrapper .input-field.add button,
+.content .goto-import-wrapper .input-field.add button {
     height: 30px;
     line-height: 30px;
     margin-left: 20px;
@@ -849,7 +851,12 @@
 }
 
 .object-info .application-wrapper .input-field.add .file-field,
-.object-info .mime-wrapper .input-field.add .file-field {
+.object-info .mime-wrapper .input-field.add .file-field
+{
+    flex-grow: 1;
+}
+
+.content .goto-import-wrapper .input-field.add .file-field {
     flex-grow: 1;
 }
 
@@ -913,6 +920,12 @@
     height: 3px;
     margin-top: 12px;
     background-color: #BBBBBB;
+}
+
+.object-info .faxaccount-wrapper .edit-context {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -1,0 +1,1042 @@
+# translation of messages.po to Dutch
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004.
+#
+# Translator:
+# Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-04 15:23+0100\n"
+"PO-Revision-Date: 2006-06-02 16:58+0100\n"
+"Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
+"Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: html/getfax.php:51
+msgid "Could not connect to database server!"
+msgstr "Kan niet verbinden met de database server!"
+
+#: html/getfax.php:53
+msgid "Could not select database!"
+msgstr "De opgegeven database kon niet geselecteerd worden!"
+
+#: html/getfax.php:58 html/getfax.php:62
+msgid "Database query failed!"
+msgstr "De database zoekopdracht is mislukt"
+
+#: gofax/faxreports/detail.tpl:1 gofax/faxreports/contents.tpl:3
+#, fuzzy
+msgid "Fax reports"
+msgstr "Fax rapporten"
+
+#: gofax/faxreports/detail.tpl:5 gofax/faxreports/detail.tpl:6
+msgid "Click on fax to download"
+msgstr "Klik op de Fax om deze te downloaden"
+
+#: gofax/faxreports/detail.tpl:14
+#, fuzzy
+msgid "Entry list"
+msgstr "Exporteer"
+
+#: gofax/faxreports/detail.tpl:16
+msgid "FAX ID"
+msgstr "Fax ID"
+
+#: gofax/faxreports/detail.tpl:20 gofax/faxreports/contents.tpl:37
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:14
+#: admin/systems/services/gofax/class_goFaxServer.inc:68
+msgid "User"
+msgstr "Gebruiker"
+
+#: gofax/faxreports/detail.tpl:24
+msgid "Date / Time"
+msgstr "Datum / Tijd"
+
+#: gofax/faxreports/detail.tpl:28 gofax/faxreports/class_faxreport.inc:461
+msgid "Sender MSN"
+msgstr "Afzender MSN"
+
+#: gofax/faxreports/detail.tpl:32 gofax/faxreports/class_faxreport.inc:460
+msgid "Sender ID"
+msgstr "Afzender ID"
+
+#: gofax/faxreports/detail.tpl:36 gofax/faxreports/class_faxreport.inc:463
+msgid "Receiver MSN"
+msgstr "Ontvanger MSN"
+
+#: gofax/faxreports/detail.tpl:40 gofax/faxreports/class_faxreport.inc:462
+msgid "Receiver ID"
+msgstr "Ontvanger ID"
+
+#: gofax/faxreports/detail.tpl:44 gofax/faxreports/contents.tpl:39
+#: gofax/faxreports/class_faxreport.inc:459
+msgid "Status"
+msgstr "Status"
+
+#: gofax/faxreports/detail.tpl:48
+msgid "Status message"
+msgstr "Status bericht"
+
+#: gofax/faxreports/detail.tpl:52 gofax/faxreports/class_faxreport.inc:466
+msgid "Transfer time"
+msgstr "Overdrachtstijd"
+
+#: gofax/faxreports/detail.tpl:56 gofax/faxreports/contents.tpl:42
+msgid "# pages"
+msgstr "# pagina's"
+
+#: gofax/faxreports/contents.tpl:6
+msgid "Filter"
+msgstr "Filter"
+
+#: gofax/faxreports/contents.tpl:9 gofax/faxreports/contents.tpl:38
+#: gofax/faxreports/class_faxreport.inc:458
+msgid "Date"
+msgstr "Datum"
+
+#: gofax/faxreports/contents.tpl:17
+msgid "Search for"
+msgstr "Zoek naar"
+
+#: gofax/faxreports/contents.tpl:19
+msgid "Enter user name to search for"
+msgstr "Voer de te zoeken gebruikersnaam in"
+
+#: gofax/faxreports/contents.tpl:23
+msgid "Search"
+msgstr "Zoeken"
+
+#: gofax/faxreports/contents.tpl:34
+#, fuzzy
+msgid "Phone reports"
+msgstr "Fax rapporten"
+
+#: gofax/faxreports/contents.tpl:40
+msgid "Sender"
+msgstr "Afzender"
+
+#: gofax/faxreports/contents.tpl:41
+msgid "Receiver"
+msgstr "Ontvanger"
+
+#: gofax/faxreports/contents.tpl:60
+#, fuzzy
+msgid "Page selector"
+msgstr "Groep instellingen"
+
+#: gofax/faxreports/contents.tpl:69
+msgid "Search returned no results..."
+msgstr "De zoekopdracht gaf geen resultaten terug..."
+
+#: gofax/faxreports/class_faxreport.inc:6
+msgid "FAX Reports"
+msgstr "Fax rapporten"
+
+#: gofax/faxreports/class_faxreport.inc:7
+msgid "View the FAX report or single documents that have been received"
+msgstr ""
+
+#: gofax/faxreports/class_faxreport.inc:126
+#: gofax/faxreports/class_faxreport.inc:137
+#: gofax/faxreports/class_faxreport.inc:142
+#: gofax/faxreports/class_faxreport.inc:148
+#: gofax/faxreports/class_faxreport.inc:173
+#: gofax/faxreports/class_faxreport.inc:279
+#: gofax/blocklists/class_blocklistGeneric.inc:109
+#: gofax/blocklists/class_blocklistGeneric.inc:170
+#: gofax/faxaccount/class_gofaxAccount.inc:254
+msgid "Error"
+msgstr "Fout"
+
+#: gofax/faxreports/class_faxreport.inc:126
+msgid "No FAX server found!"
+msgstr ""
+
+#: gofax/faxreports/class_faxreport.inc:129
+#, fuzzy
+msgid "Configuration error"
+msgstr "Configuratie bestand"
+
+#: gofax/faxreports/class_faxreport.inc:130
+#, fuzzy, php-format
+msgid "Missing %s PHP extension!"
+msgstr "Verwijder printer mogelijkheden"
+
+#: gofax/faxreports/class_faxreport.inc:138
+#, fuzzy, php-format
+msgid "Cannot connect to %s database!"
+msgstr ""
+"Kan niet verbinden met de Fax database. Rapporten kunnen niet getoond worden!"
+
+#: gofax/faxreports/class_faxreport.inc:143
+#, fuzzy, php-format
+msgid "Cannot select %s database!"
+msgstr "De opgegeven database kon niet geselecteerd worden!"
+
+#: gofax/faxreports/class_faxreport.inc:149
+#: gofax/faxreports/class_faxreport.inc:174
+#: gofax/faxreports/class_faxreport.inc:279
+#, fuzzy, php-format
+msgid "Cannot query %s database!"
+msgstr "De opgegeven database kon niet geselecteerd worden!"
+
+#: gofax/faxreports/class_faxreport.inc:192
+#, fuzzy
+msgid "Permission error"
+msgstr "Rechten"
+
+#: gofax/faxreports/class_faxreport.inc:193
+#, fuzzy
+msgid "You have no permission to view this FAX id!"
+msgstr "U heeft geen toestemming om deze blokkeerlijst te verwijderen."
+
+#: gofax/faxreports/class_faxreport.inc:209
+#: gofax/faxreports/class_faxreport.inc:314
+msgid "Y-M-D"
+msgstr "J-M-D"
+
+#: gofax/faxreports/class_faxreport.inc:285
+#, fuzzy
+msgid "Insufficient permissions to view this attribute"
+msgstr ""
+"Onvoldoende permissies. Kan attribuut '%s' in goFonMacro niet veranderen."
+
+#: gofax/faxreports/class_faxreport.inc:441
+#: gofax/faxreports/class_faxreport.inc:442
+#, fuzzy
+msgid "View FAX reports"
+msgstr "Fax rapporten"
+
+#: gofax/faxreports/class_faxreport.inc:442
+#, fuzzy
+msgid "All entries are read-only"
+msgstr "Alle velden zijn aanpasbaar"
+
+#: gofax/faxreports/class_faxreport.inc:456
+#, fuzzy
+msgid "Detailed view and download"
+msgstr "Geinstalleerde apparaten"
+
+#: gofax/faxreports/class_faxreport.inc:457
+#, fuzzy
+msgid "Fax ID"
+msgstr "Fax ID"
+
+#: gofax/faxreports/class_faxreport.inc:458
+#, fuzzy
+msgid "Time"
+msgstr "MIME"
+
+#: gofax/faxreports/class_faxreport.inc:464
+#, fuzzy
+msgid "Number of pages"
+msgstr "Naam van de afdeling"
+
+#: gofax/faxreports/class_faxreport.inc:465
+#, fuzzy
+msgid "Status Message"
+msgstr "Status bericht"
+
+#: gofax/blocklists/blocklist-list.tpl:12 gofax/blocklists/generic.tpl:17
+#: gofax/blocklists/class_blocklistGeneric.inc:402
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.tpl:12
+msgid "Base"
+msgstr "Basis"
+
+#: gofax/blocklists/generic.tpl:1 gofax/faxaccount/generic.tpl:8
+#: gofax/faxaccount/paste_generic.tpl:6
+msgid "Generic"
+msgstr "Algemeen"
+
+#: gofax/blocklists/generic.tpl:2 gofax/blocklists/blocklist-list.xml:82
+#, fuzzy
+msgid "Blacklist"
+msgstr "Blokkeerlijsten"
+
+#: gofax/blocklists/generic.tpl:6
+#, fuzzy
+msgid "Blacklist generic"
+msgstr "Blokkeerlijst naam"
+
+#: gofax/blocklists/generic.tpl:8 gofax/blocklists/paste_generic.tpl:3
+msgid "List name"
+msgstr "Lijstnaam"
+
+#: gofax/blocklists/generic.tpl:12 gofax/blocklists/paste_generic.tpl:5
+#, fuzzy
+msgid "Name of blacklist"
+msgstr "Naam van de blokkeerlijst"
+
+#: gofax/blocklists/generic.tpl:32
+#: gofax/blocklists/class_blocklistGeneric.inc:405
+#, fuzzy
+msgid "Blacklist type"
+msgstr "Blokkeerlijst naam"
+
+#: gofax/blocklists/generic.tpl:34
+msgid "Type"
+msgstr "Type"
+
+#: gofax/blocklists/generic.tpl:37
+#, fuzzy
+msgid "Select whether to filter incoming or outgoing calls"
+msgstr "Selecteer of inkomende en uitgaande gesprekken gefilterd moeten worden"
+
+#: gofax/blocklists/generic.tpl:45 gofax/blocklists/blocklist-list.xml:57
+#: gofax/blocklists/class_blocklistGeneric.inc:401
+msgid "Description"
+msgstr "Omschrijving"
+
+#: gofax/blocklists/generic.tpl:48
+#, fuzzy
+msgid "Descriptive text for this blacklist"
+msgstr "Beschrijving van deze blokkeerlijst"
+
+#: gofax/blocklists/generic.tpl:59 gofax/blocklists/generic.tpl:63
+msgid "Blocked numbers"
+msgstr "Geblokkeerde nummers"
+
+#: gofax/blocklists/generic.tpl:87
+msgid "Information"
+msgstr "Informatie"
+
+#: gofax/blocklists/generic.tpl:89
+msgid "Numbers can also contain wild cards."
+msgstr "Nummers kunnen ook wildcards (*?) bevatten."
+
+#: gofax/blocklists/blocklist-list.xml:11
+#, fuzzy
+msgid "List of blacklists"
+msgstr "Lijst met blokkeerlijsten"
+
+#: gofax/blocklists/blocklist-list.xml:15
+#: gofax/faxaccount/class_gofaxAccount.inc:831
+#, fuzzy
+msgid "Send blacklist"
+msgstr "Toon verstuur blokkeerlijsten"
+
+#: gofax/blocklists/blocklist-list.xml:23
+#: gofax/faxaccount/class_gofaxAccount.inc:830
+#, fuzzy
+msgid "Receive blacklist"
+msgstr "Toon ontvangst blokkeerlijsten"
+
+#: gofax/blocklists/blocklist-list.xml:49
+#: gofax/blocklists/class_blocklistGeneric.inc:212
+#: gofax/blocklists/class_blocklistGeneric.inc:215
+#: gofax/blocklists/class_blocklistGeneric.inc:222
+#: gofax/blocklists/class_blocklistGeneric.inc:400
+#: gofax/faxaccount/class_gofaxAccount.inc:103
+msgid "Name"
+msgstr "Naam"
+
+#: gofax/blocklists/blocklist-list.xml:65
+msgid "Actions"
+msgstr "Acties"
+
+#: gofax/blocklists/blocklist-list.xml:76
+msgid "Create"
+msgstr "Aanmaken"
+
+#: gofax/blocklists/blocklist-list.xml:94
+#: gofax/blocklists/blocklist-list.xml:133 gofax/faxaccount/generic.tpl:138
+#: gofax/faxaccount/generic.tpl:147
+msgid "Edit"
+msgstr "Bewerken"
+
+#: gofax/blocklists/blocklist-list.xml:101
+#: gofax/blocklists/blocklist-list.xml:146
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: gofax/blocklists/paste_generic.tpl:1
+#, fuzzy
+msgid "Paste blacklist"
+msgstr "Toon verstuur blokkeerlijsten"
+
+#: gofax/blocklists/class_blocklistManagement.inc:25
+#, fuzzy
+msgid "FAX Blocklists"
+msgstr "Fax blokkades"
+
+#: gofax/blocklists/class_blocklistManagement.inc:26
+msgid "Manage FAX number blocklists for incoming and outgoing FAX calls"
+msgstr ""
+
+#: gofax/blocklists/class_blocklistGeneric.inc:9
+#, fuzzy
+msgid "FAX blacklists"
+msgstr "Fax blokkades"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:10
+#: gofax/faxaccount/class_gofaxAccount.inc:7
+msgid "This does something"
+msgstr "Dit doet iets"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:109
+#: gofax/faxaccount/class_gofaxAccount.inc:254
+#, fuzzy
+msgid "Phone number"
+msgstr "Geblokkeerde nummers"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:152
+msgid "send"
+msgstr "versturen"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:152
+msgid "receive"
+msgstr "ontvangen"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:198
+#: gofax/blocklists/class_blocklistGeneric.inc:284
+#: gofax/faxaccount/class_gofaxAccount.inc:603
+#: gofax/faxaccount/class_gofaxAccount.inc:734
+#, fuzzy
+msgid "LDAP error"
+msgstr "LDAP fout:"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:373
+#: gofax/faxaccount/generic.tpl:12 gofax/faxaccount/paste_generic.tpl:10
+#: gofax/faxaccount/class_gofaxAccount.inc:809
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:56
+msgid "Fax"
+msgstr "Fax"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:374
+#: gofax/blocklists/class_blocklistGeneric.inc:382
+#: gofax/blocklists/class_blocklistGeneric.inc:383
+#, fuzzy
+msgid "Fax blacklists"
+msgstr "Fax blokkades"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:391
+msgid "RDN for facsimile blocklist storage."
+msgstr ""
+
+#: gofax/blocklists/class_blocklistGeneric.inc:403
+#, fuzzy
+msgid "Send blacklist entries"
+msgstr "Toon verstuur blokkeerlijsten"
+
+#: gofax/blocklists/class_blocklistGeneric.inc:404
+#, fuzzy
+msgid "Receive blacklist entries"
+msgstr "Toon ontvangst blokkeerlijsten"
+
+#: gofax/blocklists/blocklist-filter.xml:19
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-filter.xml:21
+#, fuzzy
+msgid "Default filter"
+msgstr "Parameters"
+
+#: gofax/blocklists/blocklist-filter.xml:33
+#, fuzzy
+msgid "Receive"
+msgstr "Ontvanger"
+
+#: gofax/blocklists/blocklist-filter.xml:47
+#, fuzzy
+msgid "Send"
+msgstr "Afzender"
+
+#: gofax/faxaccount/generic.tpl:1
+#, fuzzy
+msgid "Fax account"
+msgstr "Mijn account"
+
+#: gofax/faxaccount/generic.tpl:10 gofax/faxaccount/paste_generic.tpl:7
+#, fuzzy
+msgid "Generic settings"
+msgstr "Algemene wachtrij instellingen"
+
+#: gofax/faxaccount/generic.tpl:15
+msgid "Multiple edit"
+msgstr ""
+
+#: gofax/faxaccount/generic.tpl:19 gofax/faxaccount/paste_generic.tpl:15
+msgid "Fax number for GOfax to trigger on"
+msgstr "Fax nummer waarop GOfax moet reageren"
+
+#: gofax/faxaccount/generic.tpl:26 gofax/faxaccount/class_gofaxAccount.inc:824
+msgid "Language"
+msgstr "Taal"
+
+#: gofax/faxaccount/generic.tpl:31
+#, fuzzy
+msgid "Specify the GOfax communication language for FAX to mail gateway"
+msgstr "Specificeer de GOfax communicatie taal voor de Fax naar E-mail gateway"
+
+#: gofax/faxaccount/generic.tpl:39 gofax/faxaccount/class_gofaxAccount.inc:825
+msgid "Delivery format"
+msgstr "Aflever formaat"
+
+#: gofax/faxaccount/generic.tpl:43
+#, fuzzy
+msgid "Specify delivery format for FAX to mail gateway"
+msgstr "Specificeer het aflever formaat voor de Fax naar E-mail gateway"
+
+#: gofax/faxaccount/generic.tpl:58
+msgid "Delivery methods"
+msgstr "Aflever methodes"
+
+#: gofax/faxaccount/generic.tpl:63
+#, fuzzy
+msgid "Temporary disable FAX usage"
+msgstr "Schakel Fax gebruik tijdelijk uit"
+
+#: gofax/faxaccount/generic.tpl:69
+#, fuzzy
+msgid "Deliver FAX as mail to"
+msgstr "Lever Fax als E-mail af aan"
+
+#: gofax/faxaccount/generic.tpl:77 gofax/faxaccount/class_gofaxAccount.inc:828
+#, fuzzy
+msgid "Deliver FAX as mail"
+msgstr "Lever Fax als E-mail af"
+
+#: gofax/faxaccount/generic.tpl:84 gofax/faxaccount/class_gofaxAccount.inc:829
+#, fuzzy
+msgid "Deliver FAX to printer"
+msgstr "Lever Fax af op printer"
+
+#: gofax/faxaccount/generic.tpl:97
+#, fuzzy
+msgid "Alternative numbers"
+msgstr "Alternatieve Fax nummers"
+
+#: gofax/faxaccount/generic.tpl:105
+#, fuzzy
+msgid "Alternate FAX numbers"
+msgstr "Alternatieve Fax nummers"
+
+#: gofax/faxaccount/generic.tpl:121
+msgid "Add local"
+msgstr "Lokaal toevoegen"
+
+#: gofax/faxaccount/generic.tpl:132 gofax/faxaccount/generic.tpl:133
+#, fuzzy
+msgid "Blacklists"
+msgstr "Blokkeerlijsten"
+
+#: gofax/faxaccount/generic.tpl:135
+#, fuzzy
+msgid "Blacklists for incoming FAX"
+msgstr "Blokkeerlijsten voor te ontvangen Faxen"
+
+#: gofax/faxaccount/generic.tpl:144
+#, fuzzy
+msgid "Blacklists for outgoing FAX"
+msgstr "Blokkeerlijsten voor te versturen Faxen"
+
+#: gofax/faxaccount/paste_generic.tpl:1
+#, fuzzy
+msgid "Paste fax account settings"
+msgstr "Samba Instellingen"
+
+#: gofax/faxaccount/paste_generic.tpl:20
+#, fuzzy
+msgid "Alternate fax numbers will not be copied"
+msgstr "Alternatieve Fax nummers"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:6
+msgid "FAX"
+msgstr "Fax"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:161
+#: gofax/faxaccount/class_gofaxAccount.inc:171
+#: gofax/faxaccount/class_gofaxAccount.inc:174
+#, fuzzy
+msgid "GOfax"
+msgstr "GOsa"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:170
+#, fuzzy
+msgid "Remove FAX account"
+msgstr "Fax account verwijderen"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:173
+#, fuzzy
+msgid "Create FAX account"
+msgstr "Fax account aanmaken"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:394
+#: gofax/faxaccount/class_gofaxAccount.inc:477
+msgid "back"
+msgstr "terug"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:619
+#: gofax/faxaccount/class_gofaxAccount.inc:623
+#: gofax/faxaccount/class_gofaxAccount.inc:823
+#, fuzzy
+msgid "Fax number"
+msgstr "Serienummer"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:630
+msgid "Mail delivery is requested without target address!"
+msgstr ""
+
+#: gofax/faxaccount/class_gofaxAccount.inc:632
+#, fuzzy
+msgid "Mail address"
+msgstr "Het E-mail adres dat u opgegeven heeft is ongeldig."
+
+#: gofax/faxaccount/class_gofaxAccount.inc:632
+msgid "your-name@your-domain.com"
+msgstr ""
+
+#: gofax/faxaccount/class_gofaxAccount.inc:638
+msgid "Printing is requested without a target printer!"
+msgstr ""
+
+#: gofax/faxaccount/class_gofaxAccount.inc:810
+#, fuzzy
+msgid "Fax account settings"
+msgstr "Samba Instellingen"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:826
+#, fuzzy
+msgid "Alternate FAX number"
+msgstr "Alternatieve Fax nummers"
+
+#: gofax/faxaccount/class_gofaxAccount.inc:827
+msgid "Enable/Disable FAX"
+msgstr ""
+
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:10
+#, fuzzy
+msgid "Please select the desired entries"
+msgstr "Voorkeurstaal"
+
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:40
+msgid "Given name"
+msgstr "Naam"
+
+#: gofax/faxaccount/faxNumberSelect/faxNumberSelect-list.xml:48
+msgid "Surname"
+msgstr "Achternaam"
+
+#: gofax/faxaccount/faxNumberSelect/class_faxNumberSelect.inc:28
+#, fuzzy
+msgid "Fax number selection"
+msgstr "Groep instellingen"
+
+#: gofax/faxaccount/lists.tpl:2
+#, fuzzy
+msgid "Blocklist settings"
+msgstr "Blokkeerlijsten"
+
+#: gofax/faxaccount/lists.tpl:7
+msgid "Blocked numbers/lists"
+msgstr "Geblokkeerde nummers/lijsten"
+
+#: gofax/faxaccount/lists.tpl:21
+#, fuzzy
+msgid "List of predefined blacklists"
+msgstr "Lijst met voorgedefiniëerde blokkeerlijstn"
+
+#: gofax/faxaccount/lists.tpl:22
+#, fuzzy
+msgid "List of blocked numbers"
+msgstr "Geblokkeerde nummers"
+
+#: gofax/faxaccount/lists.tpl:29
+#, fuzzy
+msgid "Add the list to the blacklists"
+msgstr "Voeg de lijst toe aan de blokkeerlijsten"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:30
+msgid "FAX database"
+msgstr "FAX database"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:59
+#, fuzzy
+msgid "FAX database configuration"
+msgstr "FAX database"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:71
+#: admin/systems/services/gofax/class_goFaxServer.inc:102
+#: admin/systems/services/gofax/goFaxServer.tpl:12
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:88
+#: admin/systems/services/gofax/class_goFaxServer.inc:89
+#: admin/systems/services/gofax/goFaxServer.tpl:2
+#, fuzzy
+msgid "Fax database"
+msgstr "FAX database"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:89
+msgid "Services"
+msgstr "Services"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:101
+#, fuzzy
+msgid "Login name"
+msgstr "Naam van de locatie"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:104
+#, fuzzy
+msgid "Start"
+msgstr "Opstarten"
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:105
+msgid "Stop"
+msgstr ""
+
+#: admin/systems/services/gofax/class_goFaxServer.inc:106
+#, fuzzy
+msgid "Restart"
+msgstr "Opnieuw proberen"
+
+#: admin/systems/services/gofax/goFaxServer.tpl:1
+#, fuzzy
+msgid "FAX database information"
+msgstr "Free Busy informatie"
+
+#: admin/systems/services/gofax/goFaxServer.tpl:4
+msgid "FAX DB user"
+msgstr "FAX DB gebruiker"
+
+#~ msgid "Click the 'Edit' button below to change informations in this dialog"
+#~ msgstr ""
+#~ "Gebruik de 'Bewerk' knop hieronder om de informatie in deze dialoog te "
+#~ "veranderen"
+
+#~ msgid "FAX settings"
+#~ msgstr "Fax instellingen"
+
+#, fuzzy
+#~ msgid "Alternate fax number"
+#~ msgstr "Alternatieve Fax nummers"
+
+#~ msgid "Deliver fax as mail"
+#~ msgstr "Lever Fax als E-mail af"
+
+#~ msgid "Deliver fax to printer"
+#~ msgstr "Lever Fax af op printer"
+
+#~ msgid "FAX preview - please wait"
+#~ msgstr "Fax voorbeeld - even geduld a.u.b."
+
+#~ msgid "in"
+#~ msgstr "in"
+
+#~ msgid "Select subtree to base search on"
+#~ msgstr "Selecteer de subtree waarbinnen de zoekopdracht plaatsvindt"
+
+#~ msgid "during"
+#~ msgstr "gedurende"
+
+#, fuzzy
+#~ msgid "Insufficient permissions"
+#~ msgstr "Rechten"
+
+#, fuzzy
+#~ msgid "Fax report"
+#~ msgstr "Fax rapporten"
+
+#~ msgid "Warning"
+#~ msgstr "Waarschuwing"
+
+#~ msgid ""
+#~ "Please double check if you really want to do this since there is no way "
+#~ "for GOsa to get your data back."
+#~ msgstr ""
+#~ "Controleer a.u.b. of u dit daadwerkelijk wil doen, aangezien er geen "
+#~ "mogelijkheid voor GOsa is om uw data terug te krijgen."
+
+#~ msgid ""
+#~ "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
+#~ msgstr ""
+#~ "Indien u zeker bent drukt u dan 'Verwijderen' om door te gaan of "
+#~ "'Annuleren' om te annuleren."
+
+#~ msgid "Choose subtree to place group in"
+#~ msgstr "Selecteer de subtree waaronder deze groep geplaatst wordt"
+
+#~ msgid "Select a base"
+#~ msgstr "Selecteer een basis"
+
+#~ msgid "Blocklist management"
+#~ msgstr "Blokkeerlijst beheer"
+
+#~ msgid "Select numbers to add"
+#~ msgstr "Selecteer de toe te voegen nummers"
+
+#~ msgid "Filters"
+#~ msgstr "Filters"
+
+#~ msgid "Display numbers of department"
+#~ msgstr "Toon nummers van afdeling"
+
+#~ msgid "Choose the department the search will be based on"
+#~ msgstr "Selecteer de afdeling waarbinnen gezocht zal worden"
+
+#~ msgid "Display numbers matching"
+#~ msgstr "Toon de overeenkomende nummers"
+
+#~ msgid "Regular expression for matching numbers"
+#~ msgstr "Reguliere expressie voor overeenkomende nummers"
+
+#~ msgid "Display numbers of user"
+#~ msgstr "Toon nummers van gebruiker"
+
+#~ msgid "User name of which numbers are shown"
+#~ msgstr "Gebruikersnaam van de gebruiker wiens nummers getoond worden"
+
+#~ msgid "Submit"
+#~ msgstr "Verwerk"
+
+#~ msgid ""
+#~ "Please double check if your really want to do this since there is no way "
+#~ "for GOsa to get your data back."
+#~ msgstr ""
+#~ "Verzeker u ervan dat u dit daadwerkelijk wil doorvoeren, aangezien het "
+#~ "onmogelijk is voor GOsa om de data terug te halen."
+
+#, fuzzy
+#~ msgid "Select all"
+#~ msgstr "Selecteer"
+
+#~ msgid "Department"
+#~ msgstr "Afdeling"
+
+#~ msgid "Show send blocklists"
+#~ msgstr "Toon verstuur blokkeerlijsten"
+
+#~ msgid "Show receive blocklists"
+#~ msgstr "Toon ontvangst blokkeerlijsten"
+
+#~ msgid "Regular expression for matching list names"
+#~ msgstr "Reguliere expressie voor overeenkomende lijstnamen"
+
+#~ msgid "Submit department"
+#~ msgstr "Verwerk afdeling"
+
+#~ msgid "edit"
+#~ msgstr "Bewerk"
+
+#~ msgid "Edit user"
+#~ msgstr "Bewerk gebruiker"
+
+#~ msgid "delete"
+#~ msgstr "Verwijder"
+
+#~ msgid "Delete user"
+#~ msgstr "Verwijder gebruiker"
+
+#, fuzzy
+#~ msgid "Number of listed '%s'"
+#~ msgstr "Naam van de blokkeerlijst"
+
+#, fuzzy
+#~ msgid "blocklists"
+#~ msgstr "Blokkeerlijsten"
+
+#, fuzzy
+#~ msgid "departments"
+#~ msgstr "Afdeling"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "Rechten"
+
+#, fuzzy
+#~ msgid "blocklist"
+#~ msgstr "Blokkeerlijsten"
+
+#, fuzzy
+#~ msgid "Copy"
+#~ msgstr "kopieer"
+
+#, fuzzy
+#~ msgid "Cut"
+#~ msgstr "knippen"
+
+#~ msgid "Paste"
+#~ msgstr "Plakken"
+
+#~ msgid "cut"
+#~ msgstr "knippen"
+
+#~ msgid "Cut this entry"
+#~ msgstr "Deze invoer knippen"
+
+#~ msgid "copy"
+#~ msgstr "kopieer"
+
+#~ msgid "Copy this entry"
+#~ msgstr "Deze invoer kopieren"
+
+#, fuzzy
+#~ msgid "Faxi number"
+#~ msgstr "Serienummer"
+
+#~ msgid "This account has no fax extensions."
+#~ msgstr "Dit account heeft geen Fax mogelijkheden."
+
+#~ msgid ""
+#~ "This account has fax features enabled. You can disable them by clicking "
+#~ "below."
+#~ msgstr ""
+#~ "Dit account heeft Fax mogelijkheden ingeschakeld. U kunt deze "
+#~ "uitschakelen door de knop hieronder te gebruiken."
+
+#~ msgid ""
+#~ "This account has fax features disabled. You can enable them by clicking "
+#~ "below."
+#~ msgstr ""
+#~ "Dit account heeft Fax mogelijkheden uitgeschakeld. U kunt deze "
+#~ "inschakelen door de knop hieronder te gebruiken."
+
+#, fuzzy
+#~ msgid "Fax is empty!"
+#~ msgstr "Fax rapporten"
+
+#~ msgid "Select to see send blocklists"
+#~ msgstr "Selecteer om de verstuur blokkeerlijsten te zien"
+
+#~ msgid "Select to see receive blocklists"
+#~ msgstr "Selecteer om de ontvangst blokkeerlijsten te zien"
+
+#~ msgid "Select to search within subtrees"
+#~ msgstr "Selecteer om binnen subonderdelen te zoeken"
+
+#, fuzzy
+#~ msgid "Search in subtrees"
+#~ msgstr "Zoek binnen subtree"
+
+#~ msgid "Save"
+#~ msgstr "Opslaan"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuleren"
+
+#, fuzzy
+#~ msgid "The attribute user is empty or contains invalid characters."
+#~ msgstr "Het atribuut '%s' is leeg of bevat ongeldige karakters!"
+
+#, fuzzy
+#~ msgid "The attribute password is empty or contains invalid characters."
+#~ msgstr "Het atribuut '%s' is leeg of bevat ongeldige karakters!"
+
+#~ msgid "Back"
+#~ msgstr "Terug"
+
+#~ msgid "Add"
+#~ msgstr "Toevoegen"
+
+#~ msgid "Delete"
+#~ msgstr "Verwijderen"
+
+#~ msgid "Apply"
+#~ msgstr "Toepassen"
+
+#, fuzzy
+#~ msgid "Name contains invalid characters!"
+#~ msgstr "Vereist veld 'Naam' bevat ongeldige karakters"
+
+#, fuzzy
+#~ msgid "Name is already in use!"
+#~ msgstr "De opgegeven naam wordt al gebruikt."
+
+#~ msgid ""
+#~ "This menu allows you to create, delete and edit selected blocklists. "
+#~ "Having a large size of lists, you might prefer the range selectors on top "
+#~ "of the select box."
+#~ msgstr ""
+#~ "Dit menu maakt het mogelijk om geselecteerde blokkeerlijsten toe te "
+#~ "voegen, bewerken of verwijderen. Indien u veel blokkeerlijsten heeft is "
+#~ "het aan te raden de selectie mogelijkheden te gebruiken."
+
+#, fuzzy
+#~ msgid "Number of listed departments"
+#~ msgstr "Naam van de afdeling"
+
+#, fuzzy
+#~ msgid "You're about to delete the following blocklists(s) %s"
+#~ msgstr "U staat op het punt blokkeerlijst '%s' te verwijderen."
+
+#, fuzzy
+#~ msgid "You have not permission to delete '%s'!"
+#~ msgstr "U heeft geen toestemming om deze blokkeerlijst te verwijderen."
+
+#~ msgid "You're about to delete the blocklist '%s'."
+#~ msgstr "U staat op het punt blokkeerlijst '%s' te verwijderen."
+
+#, fuzzy
+#~ msgid "You have not permission to delete this entry!"
+#~ msgstr "U heeft geen toestemming om deze blokkeerlijst te verwijderen."
+
+#, fuzzy
+#~ msgid "Removing of user/fax account with dn '%s' failed."
+#~ msgstr "Het verwijderen van het algemene gebruikers account is mislukt"
+
+#, fuzzy
+#~ msgid "Saving of user/fax account with dn '%s' failed."
+#~ msgstr "Het opslaan van het algemene gerbuikers account is mislukt"
+
+#, fuzzy
+#~ msgid "Removing of blocklist with dn '%s' failed."
+#~ msgstr "Het verwijderen van het blokeerlijst object is mislukt"
+
+#, fuzzy
+#~ msgid "Saving of blocklist with dn '%s' failed."
+#~ msgstr "Het opslaan van het blokkeerlijst object is mislukt"
+
+#~ msgid "You're trying to add an invalid phone number."
+#~ msgstr "U probeert een ongeldig telefoonnummer toe te voegen."
+
+#~ msgid "The required field 'Fax' is not set."
+#~ msgstr "Het vereiste veld 'Fax' is leeg."
+
+#~ msgid "Please enter a valid telephone number in the 'Fax' field."
+#~ msgstr "Voer a.u.b. een geldig Fax nummer bij het 'Fax' veld in."
+
+#~ msgid "Mail delivery is checked, but no address has been specified."
+#~ msgstr "E-mail aflevering staat aan, alleen is er geen adres opgegeven."
+
+#~ msgid ""
+#~ "Deliver fax to printer, is only possible if valid printer is given. "
+#~ "Please correct your choice."
+#~ msgstr ""
+#~ "Fax afleveren op een printer is alleen mogelijk indien een geldige "
+#~ "printer is opgegeven. Corrigeer uw keuze a.u.b."
+
+#~ msgid "There is no mysql extension available, please check your php setup."
+#~ msgstr ""
+#~ "Er is geen MySQL extensie beschikbaar. Controleer uw PHP installatie a.u."
+#~ "b."
+
+#~ msgid "Can't select fax database for report generation!"
+#~ msgstr "Kan de Fax database voor rapportage niet selecteren!"
+
+#, fuzzy
+#~ msgid "Can't query fax table 'faxlog' for report generation!"
+#~ msgstr "Kan de Fax database voor rapportage niet selecteren!"
+
+#~ msgid "Query for fax database failed!"
+#~ msgstr "De zoekopdracht op de Fax database is mislukt!"
+
+#~ msgid "You have no permission to retrieve informations about this fax id!"
+#~ msgstr ""
+#~ "U heeft geen toestemming om informatie over dit Fax ID op te vragen!"
+
+#, fuzzy
+#~ msgid "You are not allowed to delete the blocklist '%s'!"
+#~ msgstr "U heeft geen toestemming om deze gebruiker te verwijderen!"
+
+#~ msgid "Please specify a valid phone number."
+#~ msgstr "Geef a.u.b. een geldig telefoonnummer op."
+
+#~ msgid "Required field 'Name' is not set."
+#~ msgstr "Vereist veld 'Naam' is leeg."
