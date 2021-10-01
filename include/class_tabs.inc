@@ -162,7 +162,7 @@ class tabs
         }
     }
 
-    
+
 
     /* If multiple edit is enabled for this tab,
        we have tho display different templates */
@@ -181,7 +181,7 @@ class tabs
                           {$display}
                         </div>";
             break;
-          
+
           default:
             $display = "{$display}";
             break;
@@ -195,7 +195,7 @@ class tabs
                           {$display}
                         </div>";
             break;
-          
+
           default:
             $display = "<div class='object-info'>
                           <div class='card-tabs'>
@@ -275,11 +275,15 @@ class tabs
       case 'classic':
         $display = "<div class='tabs'><ul>";
         break;
-      
+
       default:
         $display = "<div class='row'><div class='col s12'><ul class='tabs'>";
         break;
     }
+
+    $firstTab = true;
+    $tabCount = count($this->by_name);
+    $currentTab = 0;
 
     foreach ($this->by_name as $class => $name){
 
@@ -298,41 +302,75 @@ class tabs
         case 'classic':
           $tabClass = ($this->current == $class) ? "current" :"";
           break;
-        
+
         default:
-        $activeClass = ($this->current == $class) ? "active" :"";
+          $activeClass = ($this->current == $class) ? "active" :"";
           break;
       }
+
       // check for first tab
       switch ($theme) {
         case 'classic':
           $tabClass = $tabClass;
           break;
-        
+
         default:
-          $tabClass = " tab col s2 pointer"; 
+          $tabClass = " tab pointer";
           break;
       }
+
       if ( $this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)){
         $tabClass .= " info";
       }
-      if(!empty($tabClass)) $tabClass="class='{$tabClass}'";
+
       $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
       switch ($theme) {
         case 'classic':
+          if(!empty($tabClass)) $tabClass="class='{$tabClass}'";
           $display .= "<li {$tabClass} onClick=\"{$onClick}\">".$title."</li>";
           break;
-        
+
         default:
-          $display .= "<li {$tabClass} onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
+          // 8 is the maximum number mobile and 16 is the maximum number on desktop. The rest is controlled via Javascript.
+          $currentTab++;
+
+          if($tabCount > 8 && $currentTab >= 8) {
+            if($currentTab == 8) {
+              $display .= "<li class='mobile-menu {$tabClass}'>
+                            <a class='dropdown-mobile-area-selection' data-target='mobile-area-selection'><i class='material-icons'>more_vert</i></a>
+                          </li>
+                          <ul id='mobile-area-selection' class='dropdown-content mobile-menu'>
+                          </ul>";
+            }
+
+            if($tabCount > 16) {
+              if($currentTab == 16) {
+                $display .= "<li class='desk-menu {$tabClass}'>
+                              <a class='dropdown-area-selection' data-target='area-selection'><i class='material-icons'>more_vert</i></a>
+                             </li>
+                             <ul id='area-selection' class='dropdown-content desk-menu'>";
+              }
+
+              $display .= "<li class='view-xl {$tabClass}' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
+
+              if($currentTab == $tabCount) {
+                $display .= "</ul>";
+              }
+            } else {
+              $display .= "<li class='view-xl {$tabClass}' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
+            }
+          } else {
+            $display .= "<li class='{$tabClass}' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
+          }
           break;
       }
     }
+
     switch ($theme) {
       case 'classic':
         $display .= "</ul></div>";
         break;
-      
+
       default:
         $display .= "</ul></div></div>";
         break;
