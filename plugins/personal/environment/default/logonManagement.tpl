@@ -21,6 +21,7 @@
 				<label for="LogonPriority">{t}Priority{/t}</label>
 			</div>
 		</div>
+
 		<div class="col s12 xl6">
 			<div class="script-option">
 				<label>

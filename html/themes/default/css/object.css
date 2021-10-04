@@ -489,6 +489,11 @@
 
 /* Connectivity Settings */
 
+.connectivity-wrapper .proxy-account,
+.connectivity-wrapper .opengw-content {
+    margin-left: 35px;
+}
+
 .connectivity-wrapper label span h3 {
     margin: 0;
     line-height: 25px;
