@@ -1,82 +1,73 @@
-<h3>{t}Log on script management{/t}</h3>
+<div class="desk-script-managment card-content-scroll">
+	<h2>{t}Log on script management{/t}</h2>
 
-    <input type="hidden" name="dialogissubmitted" value="1">
+	<input type="hidden" name="dialogissubmitted" value="1">
+	<div class="row">
+		<div class="col s12 xl6">
+			<div class="input-field">
+				<input type="text" name="LogonName" id="LogonName" value="{$LogonName}" {$LogonNameACL}>
+				<label for="LogonName">{t}Script name{/t}</label>
+			</div>
 
-    <table summary="{t}Log on script management{/t}" width="100%">
-    	<tr>
-			<td class='right-border'>
+			<div class="input-field">
+				<input type="text" name="LogonDescription" id="LogonDescription" value="{$LogonDescription}" {$LogonNameACL}>
+				<label for="LogonDescription">{t}Description{/t}</label>
+			</div>
 
-					<table summary="{t}Log on script settings{/t}">
-						<tr>
-							<td><LABEL for="LogonName">{t}Script name{/t}</LABEL>
-							</td>
-							<td>
-								<input type="text" size=20 value="{$LogonName}" name="LogonName" {$LogonNameACL} id="LogonName">
-							</td>
-						</tr>
-						<tr>
-							<td><LABEL for="LogonDescription">{t}Description{/t}</LABEL>
-							</td>
-							<td>
-								<input type="text" size=40 value="{$LogonDescription}" name="LogonDescription" id="LogonDescription"> 
-							</td>
-						</tr>
-						<tr>
-							<td><LABEL for="LogonPriority">{t}Priority{/t}</LABEL>
-							</td><td>
-				            	<select name="LogonPriority" id="LogonPriority" size=1>
-                					{html_options values=$LogonPriorityKeys output=$LogonPrioritys selected=$LogonPriority}
-                				</select>
-							</td>
-						</tr>
-					</table>
-			</td>
-			<td>
+			<div class="input-field">
+				<select size="1" id="LogonPriority" name="LogonPriority">
+					{html_options values=$LogonPriorityKeys output=$LogonPrioritys selected=$LogonPriority}
+				</select>
+				<label for="LogonPriority">{t}Priority{/t}</label>
+			</div>
+		</div>
 
-					<table summary="{t}Log on script flags{/t}">
-						<tr>
-							<td>
-								<input type="checkbox" value="L" name="LogonLast" {$LogonLastCHK} id="LogonLast">
-							<LABEL for="LogonLast">{t}Last script{/t}</LABEL>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="checkbox" value="O" name="LogonOverload" {$LogonOverloadCHK} id="LogonOverload">
-								<LABEL for="LogonOverload">{t}Script can be replaced by user{/t}</LABEL>
-							</td>
-						</tr>
-					</table>
-			</td>
-		</tr>
-	</table>
-	
-  <hr>
+		<div class="col s12 xl6">
+			<div class="script-option">
+				<label>
+					<input type="checkbox" value="L" name="LogonLast" {$LogonLastCHK} id="LogonLast" />
+					<span for="LogonLast">{t}Last script{/t}</span>
+				</label>
 
-	<h3>{t}Script{/t}</h3>
-	<table width="100%" summary="{t}Log on script{/t}">
-		<tr>
-			<td>
-				<textarea style="width:100%;height:400px;" name="LogonData">{$LogonData}</textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="file" name="importFile" id="importFile">
-				<button type='submit' name='StartImport'>{t}Import{/t}</button>
-			</td>
-		</tr>
-	</table>
+				<label class="closing-elem">
+					<input type="checkbox" value="O" name="LogonOverload" {$LogonOverloadCHK} id="LogonOverload" />
+					<span for="LogonOverload">{t}Script can be replaced by user{/t}</span>
+				</label>
+			</div>
+		</div>
+	</div>
 
-  <hr>
-  <div class="plugin-actions">
-    <button type='submit' name='LogonSave'>{msgPool type=applyButton}</button>
-    <button type='submit' name='LogonCancel'>{msgPool type=cancelButton}</button>
-  </div>
+	<hr class="divider">
 
-<script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-	focus_field('LogonName');
-  -->
-</script>
+	<div class="row">
+		<div class="col s12">
+			<h3>{t}Script{/t}</h3>
 
+			<textarea style="width:100%;height:400px;" name="LogonData">{$LogonData}</textarea>
+
+			<div class="import-action">
+				<div class="file-field input-field">
+					<div class="btn-small">
+						<span>{t}Browse{/t}</span>
+						<input type="file" name="importFile" id="importFile">
+					</div>
+					<div class="file-path-wrapper">
+						<input type="text" class="file-path validate">
+					</div>
+				</div>
+				<button class="btn-small" type='submit' name='StartImport'>{t}Import{/t}</button>
+			</div>
+
+			<script language="JavaScript" type="text/javascript">
+			<!-- // First input field on page
+				focus_field('LogonName');
+			-->
+			</script>
+		</div>
+	</div>
+</div>
+
+<div class="plugin-actions card-action">
+	<button class="btn-small primary" type='submit' name='LogonSave'>{msgPool type=applyButton}</button>
+	<button class="btn-small primary" type='submit' name='LogonCancel'>{msgPool type=cancelButton}</button>
+</div>

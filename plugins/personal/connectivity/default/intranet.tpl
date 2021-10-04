@@ -1,8 +1,12 @@
 <div class="intranet-wrapper">
-    {render acl=$gosaIntranetACL checkbox=$multiple_support checked=$use_intranet}
-        <label>
-            <input type="checkbox" name="intranet" value="B" {$intranetState}>
-            <span style="overflow: hidden;"><h3>{t}Intra net account{/t}</h3></span>
-        </label>
-    {/render}
+    <div class="row">
+        <div class="col s12">
+            {render acl=$gosaIntranetACL checkbox=$multiple_support checked=$use_intranet}
+                <label>
+                    <input type="checkbox" name="intranet" value="B" {$intranetState}>
+                    <span style="overflow: hidden;">{t}Intra net account{/t}</span>
+                </label>
+            {/render}
+		</div>
+	</div>
 </div>
