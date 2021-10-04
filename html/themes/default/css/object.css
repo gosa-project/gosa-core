@@ -630,7 +630,7 @@
     margin-bottom: 20px;
 }
 
-.object-info .acl-reference .acl-reference-header h3,
+.object-info .acl-reference .acl-reference-header h2,
 .object-info .acl-reference .acl-viewer .collapsible-header h3,
 .object-info .acl-reference .acl-viewer .card-content h4 {
     margin: 0;
@@ -710,6 +710,14 @@
 
 .object-info .acl-reference .acl-viewer .collapsible-body h5 {
     margin-top: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body .row .row {
+    margin-bottom: 10px;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body .row .row:last-child {
+    margin-bottom: 0;
 }
 
 .object-info .acl-reference .acl-viewer .card {

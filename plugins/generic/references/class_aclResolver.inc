@@ -299,7 +299,7 @@ class aclResolver
                     }
                     $str .= "</table><div>";
                     break;
-                
+
                 default:
                     $autocompleter = "  <div class='acl-name'>
                                             <div class='search-field input-field'>
@@ -327,6 +327,9 @@ class aclResolver
                                 ".$user."
                                 ".$autocompleter."
                             </div>";
+
+                    $str.= "<div class='row'>
+                                <div class='col s12'>";
 
 
                     foreach ($this->affectingACLs as $dn => $acls) {
@@ -504,7 +507,7 @@ class aclResolver
                         }
                         $str.= "</ul></div></li></ul>";
                     }
-                    $str.= "</div>";
+                    $str.= "</div></div></div>";
                     break;
             }
             $this->renderedList = $str;
@@ -546,7 +549,7 @@ class aclResolver
                     $str.= "</ul>";
                 }
                 return($str."</ul>");
-            
+
             default:
                 $str = "";
                 foreach ($acls as $name => $acl) {
