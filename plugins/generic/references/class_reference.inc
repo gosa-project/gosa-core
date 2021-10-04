@@ -119,8 +119,9 @@ class reference extends plugin
                 $list->setListData($data, $data);
 
                 $list->update();
-                $str .= "<h2>".$filter['msg']."</h2>";
+                $str .= "<h2>".$filter['msg']."</h2><div class='row'><div class='col s12'>";
                 $str .= $list->render();
+                $str .= "</div></div>";
             }
         }
         $this->objectList = $str;
