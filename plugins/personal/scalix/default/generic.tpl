@@ -81,7 +81,7 @@
             {/render}
 
             {render acl=$scalixLimitNotifyUserACL}
-               <label>
+               <label class="closing-elem">
                   <input type=checkbox name="scalixLimitNotifyUser" value="1" {$scalixLimitNotifyUser}
                      title="{t}As sanction on mailbox quota overuse, notify the user by email{/t}">
                   <span>{t}Notify User{/t}</span>

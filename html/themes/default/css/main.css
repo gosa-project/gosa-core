@@ -277,7 +277,3 @@ button:focus {
         margin-top: 8px;
     }
 }
-
-ul.tabs li.tab.col {
-    width: unset;
-} 

@@ -96,8 +96,8 @@
    <div class="row setting">
       <div class="col s12">
          {render acl=$gosaMailDeliveryModeCACL}
-            <label>
-               <input class="center" type=checkbox id="own_script" name="own_script" value="1" {$own_script} onClick="
+            <label class="closing-elem">
+               <input class="center" type="checkbox" id="own_script" name="own_script" value="1" {$own_script} onClick="
                   changeState('sieveManagement');
                   changeState('drop_own_mails');
                   changeState('use_vacation');
@@ -132,7 +132,7 @@
          <p>
             {render acl=$gosaMailDeliveryModeIACL checkbox=$multiple_support checked=$use_drop_own_mails}
                <label>
-                  <input {if $own_script !="" } disabled {/if} class="center" id='drop_own_mails' type=checkbox
+                  <input {if $own_script !="" } disabled {/if} class="center" id='drop_own_mails' type="checkbox"
                      name="drop_own_mails" value="1" {$drop_own_mails}
                      title="{t}Select if you want to forward mails without getting own copies of them{/t}" />
                   <span>{t}No delivery to own mailbox{/t}</span>
@@ -143,7 +143,7 @@
          <p>
             {render acl=$gosaMailDeliveryModeVACL checkbox=$multiple_support checked=$use_use_vacation}
                <label>
-                  <input type=checkbox name="use_vacation" value="1" {$use_vacation} id="use_vacation" {if $own_script
+                  <input type="checkbox" name="use_vacation" value="1" {$use_vacation} id="use_vacation" {if $own_script
                      !="" } disabled {/if}
                      title="{t}Select to automatically response with the vacation message defined below{/t}"
                      class="center" onclick="changeStates()">
@@ -203,7 +203,7 @@
          <div class="spam-option">
             <label>
                {render acl=$gosaMailDeliveryModeSACL checkbox=$multiple_support checked=$use_use_spam_filter}
-               <input {if $own_script !="" } disabled {/if} id='use_spam_filter' type=checkbox name="use_spam_filter"
+               <input {if $own_script !="" } disabled {/if} id='use_spam_filter' type="checkbox" name="use_spam_filter"
                   value="1" {$use_spam_filter}
                   title="{t}Select if you want to filter this mails through Spamassassin{/t}" class="center">
                <span></span>
@@ -239,7 +239,7 @@
          <div class="contingent">
             <label>
                {render acl=$gosaMailDeliveryModeRACL checkbox=$multiple_support checked=$use_use_mailsize_limit}
-               <input {if $own_script !="" } disabled {/if} id='use_mailsize_limit' type=checkbox
+               <input {if $own_script !="" } disabled {/if} id='use_mailsize_limit' type="checkbox"
                   name="use_mailsize_limit" value="1" {$use_mailsize_limit} class="center">
                {/render}
                <span>{t}Reject mails bigger than{/t}
@@ -293,13 +293,13 @@
 
    <hr class="divider">
 
-   <h3>{t}Advanced mail options{/t}</h3>
-
    <div class="row setting">
       <div class="col s12">
-      <label>
+         <h3>{t}Advanced mail options{/t}</h3>
+
+         <label class="closing-elem">
             {render acl=$gosaMailDeliveryModeLACL checkbox=$multiple_support checked=$use_only_local}
-            <input {if $own_script !="" } disabled {/if} id='only_local' type=checkbox name="only_local" value="1" {$only_local} title="{t}Select if user can only send and receive inside his own domain{/t}" class="center">
+            <input {if $own_script !="" } disabled {/if} id='only_local' type="checkbox" name="only_local" value="1" {$only_local} title="{t}Select if user can only send and receive inside his own domain{/t}" class="center">
             {/render}
             <span>{t}User is only allowed to send and receive local mails{/t}</span>
          </label>
