@@ -43,6 +43,31 @@
     color: #2A3278;
 }
 
+.input-field.add {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-field.add button {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    color: #000;
+    width: auto;
+    text-transform: initial;
+}
+
+.input-field.add .select-wrapper {
+    width: 100%;
+    margin-bottom: 0;
+}
+
 
 /* Multiple Select */
 

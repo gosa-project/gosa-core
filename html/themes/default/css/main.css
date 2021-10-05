@@ -51,6 +51,14 @@ i {
     font-size: 18px;
 }
 
+h2+.input-field {
+    margin-top: 36px;
+}
+
+h3+.input-field {
+    margin-top: 32px;
+}
+
 button,
 button.btn,
 button.btn-small,
@@ -103,6 +111,46 @@ label input[type="checkbox"] {
     height: 18px;
     width: 18px;
 }
+
+.card-content .row .col.xl6:nth-child(2n+1) {
+    padding-right: 15px;
+}
+
+.card-content .row .col.xl6:last-child {
+    padding-right: 0.75rem;
+}
+
+.card-content .row .col.xl6:nth-child(2n+0) {
+    padding-left: 15px;
+}
+
+
+/* Resizing the checkboxes to the input fields
+ * Predefined class, to use checkboxes with same height as input fields
+ * Unused, please delete this sentence if used */
+
+.size-adjustment label {
+    margin-top: 15px;
+    margin-bottom: unset;
+}
+
+.size-adjustment [type="checkbox"]+span:not(.lever) {
+    height: 31px;
+    padding-top: 3px;
+    margin-bottom: 8px;
+}
+
+.size-adjustment [type="checkbox"]+span:not(.lever):before,
+.size-adjustment [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    top: 3px;
+}
+
+.size-adjustment label input[type="checkbox"] {
+    bottom: 15px;
+}
+
+
+/* Dropdown */
 
 .dropdown-content {
     margin: 0;
