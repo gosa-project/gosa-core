@@ -341,7 +341,7 @@ class aclrole extends acl
 
     /* Save edit acl? */
     if (isset($_POST['submit_edit_acl']) && $this->acl_is_writeable("gosaAclTemplate")){
-      $this->dialogState= 'create';
+      $this->dialogState = 'create';
     }
 
     /* Add acl? */
@@ -443,7 +443,7 @@ class aclrole extends acl
               break;
             
             default:
-              $action .= image("<i class='material-icons input-icons'>edit</i>", 'cat_del_'.$section,_("Delete category ACL"));
+              $action .= image("<i class='material-icons input-icons'>delete</i>", 'cat_del_'.$section,_("Delete category ACL"));
               break;
           }
         }

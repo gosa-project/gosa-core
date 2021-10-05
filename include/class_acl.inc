@@ -60,10 +60,14 @@ class acl extends plugin
     var $roleList = NULL;
     var $aclMemberList = NULL;
 
+    var $theme;
+
     function __construct(&$config, $parent, $dn= NULL)
     {
         /* Include config object */
         plugin::__construct($config, $dn);
+
+        $this->theme = getThemeName();
 
         /* Load ACL's */
         $this->gosaAclEntry= array();
@@ -333,9 +337,6 @@ class acl extends plugin
         $tmp= session::global_get('plist');
         $plist= $tmp->info;
 
-        // store theme name
-        $theme = getThemeName();
-
         /* Handle posts */
         if (isset($_POST['new_acl'])){
             $this->dialogState= 'create';
@@ -563,7 +564,7 @@ class acl extends plugin
                 $this->recipients['G:*'] = _("All users");
 
                 $key = "G:*";
-                switch ($theme) {
+                switch ($this->theme) {
                     case 'classic':
                         $vData = array("data" => array(image("plugins/groups/images/select_group.png")));
                         break;
@@ -586,7 +587,7 @@ class acl extends plugin
         /* If dialog is confirmed */
         if((isset($_POST['userGroupSelect_save']) || isset($_POST['ok-save'])) &&
             $this->dialog instanceof userGroupSelect) {
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     $groupIcon = image("plugins/groups/images/select_group.png");
                     $userIcon  = image("plugins/users/images/select_user.png");
@@ -695,7 +696,7 @@ class acl extends plugin
 
                     /* Set summary... */
                     if ($summary == ""){
-                        switch ($theme) {
+                        switch ($this->theme) {
                             case 'classic':
                                 $summary = '<i>'._("No ACL settings for this category!").'</i>';
                                 break;
@@ -711,7 +712,7 @@ class acl extends plugin
 
                     $actions ="";
                     if($this->acl_is_readable("")){
-                        switch ($theme) {
+                        switch ($this->theme) {
                             case 'classic':
                                 $actions .= image('images/lists/edit.png', 'cat_edit_'.$section, msgPool::editButton(_("category ACL")));
                                 break;
@@ -722,7 +723,7 @@ class acl extends plugin
                         }
                     }
                     if($this->acl_is_removeable() && preg_match("/;".$section."(;|\/)/", $usedList)){
-                        switch ($theme) {
+                        switch ($this->theme) {
                             case 'classic':
                                 $actions .= image('images/lists/trash.png', 'cat_del_'.$section, msgPool::delButton(_("category ACL")));
                                 break;
@@ -885,7 +886,7 @@ class acl extends plugin
         $style = "style='width:100px;'";
 
         if($this->acl_is_writeable("")){
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     $display .= "<button type='button' ".$style." name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" >Toggle C</button>";
                     $display .= "<button type='button' ".$style." name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" >Toggle M</button>";
@@ -1015,7 +1016,7 @@ class acl extends plugin
                     (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) ||
                     (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
                 
-                switch ($theme) {
+                switch ($this->theme) {
                     case 'classic':
                         $display .="<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
                                 <tr>
@@ -1040,7 +1041,7 @@ class acl extends plugin
                         break;
                 }
             } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
-                switch ($theme) {
+                switch ($this->theme) {
                     case 'classic':
                         $display .= "   <table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
                                             <tr>
@@ -1069,7 +1070,7 @@ class acl extends plugin
                         break;
                 }
             } else {
-                switch ($theme) {
+                switch ($this->theme) {
                     case 'classic':
                         $display .= "   <table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
                                             <tr>
@@ -1102,7 +1103,7 @@ class acl extends plugin
             $more_options= $this->mkchkbx($key."_0_r",  _("read"), preg_match('/r/', $overall_acl));
             $more_options.= $this->mkchkbx($key."_0_w", _("write"), preg_match('/w/', $overall_acl));
 
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     $display .= "   <tr>
                                         <td style='background-color:#E0E0E0' colspan=".($cols-1).">$options</td>
@@ -1134,7 +1135,7 @@ class acl extends plugin
             if(session::global_get('js')) {
                 if(isset($_SERVER['HTTP_USER_AGENT']) &&
                         (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
-                    switch ($theme) {
+                    switch ($this->theme) {
                         case 'classic':
                             $display .= "   <tr id='tr_$tname' style='vertical-align:top;height:0px;'>
                                                 <td colspan=".$cols.">
@@ -1147,7 +1148,7 @@ class acl extends plugin
                             break;
                     }
                 } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
-                    switch ($theme) {
+                    switch ($this->theme) {
                         case 'classic':
                             $display .= "   <tr id='tr_$tname' style='vertical-align:top;height:0px;'>
                                                 <td colspan=".$cols.">
@@ -1172,7 +1173,7 @@ class acl extends plugin
 
                 /* Open table row */
                 if ($cnt == 1){
-                    switch ($theme) {
+                    switch ($this->theme) {
                         case 'classic':
                             $display .= '<tr>';
                             break;
@@ -1183,7 +1184,7 @@ class acl extends plugin
                 }
 
                 /* Close table row */
-                switch ($theme) {
+                switch ($this->theme) {
                     case 'classic':
                         if ($cnt == $cols){
                             $cnt= 1;
@@ -1205,7 +1206,7 @@ class acl extends plugin
                     $state= $currentAcl[$attr];
                 }
 
-                switch ($theme) {
+                switch ($this->theme) {
                     case 'classic':
                         $display .= "   <td style='border-top:1px solid #A0A0A0;${rb}width:".(int)(100/$cols)."%'>
                                             <b>$dsc</b> ($attr)<br>".$this->mkrwbx($key."_".$attr, $state)."
@@ -1236,7 +1237,7 @@ class acl extends plugin
                         (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) ||
                         (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT'])) ||
                         (preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT']))) {
-                    switch ($theme) {
+                    switch ($this->theme) {
                         case 'classic':
                             $display .= "   </table>
                                         </div>
@@ -1250,7 +1251,7 @@ class acl extends plugin
                     }
                 }
             }
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     $display .= "</table><br/>";
                     break;
@@ -1269,7 +1270,7 @@ class acl extends plugin
         $state= $state?"checked":"";
         if($this->acl_is_writeable("")){
             $tname= preg_replace("/[^a-z0-9]/i","_",$name);
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     return "<input id='acl_$tname' type='checkbox' name='acl_$name' $state>
                             <label for='acl_$tname'>$text</label>";
@@ -1280,7 +1281,7 @@ class acl extends plugin
                             </label>";
             }
         }else{
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     return "<input type='checkbox' disabled name='dummy_".microtime(1)."' $state>$text";
                 default:
@@ -1301,7 +1302,7 @@ class acl extends plugin
         $tname= preg_replace("/[^a-z0-9]/i","_",$name);
 
         if($this->acl_is_writeable("")){
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     return "<input id='acl_".$tname."_r' type='checkbox' name='acl_${name}_r' $rstate>
                             <label for='acl_".$tname."_r'>"._("read")."</label>
@@ -1318,7 +1319,7 @@ class acl extends plugin
                             </label>" ;
             }
         }else{
-            switch ($theme) {
+            switch ($this->theme) {
                 case 'classic':
                     return "<input disabled type=checkbox name='dummy_".microtime(1)."' $rstate>"._("read")."
                             <input disabled type=checkbox name='dummy_".microtime(1)."' $wstate>"._("write");
@@ -1519,8 +1520,6 @@ class acl extends plugin
 
     function loadAclEntry($new= FALSE)
     {
-        $theme = getThemeName();
-        
         /* New entry gets presets... */
         if ($new){
             $this->aclType= 'base';
@@ -1548,7 +1547,7 @@ class acl extends plugin
                 if($key == "G:*") {
                     $name = _("All users");
                     $desc = _("Pseudo-group for all users.");
-                    switch ($theme) {
+                    switch ($this->theme) {
                         case 'classic':
                             $icon = image("plugins/groups/images/select_group.png");
                             break;
@@ -1562,7 +1561,7 @@ class acl extends plugin
                 else if($key[0] == 'U') { // is user?
                     $name = $match[3][0];
                     $desc = $match[1][0];
-                    switch ($theme) {
+                    switch ($this->theme) {
                         case 'classic':
                             $icon = image("plugins/users/images/select_user.png");
                             break;
@@ -1575,7 +1574,7 @@ class acl extends plugin
                 else { // or group?
                     $name = $match[1][0];
                     $desc = $match[3][0];
-                    switch ($theme) {
+                    switch ($this->theme) {
                         case 'classic':
                             $icon = image("plugins/groups/images/select_group.png");
                             break;

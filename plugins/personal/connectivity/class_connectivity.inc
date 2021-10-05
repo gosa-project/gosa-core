@@ -99,7 +99,7 @@ class connectivity extends plugin
     $is_first= true;
 
     $display.= "<div class='connectivity-wrapper'>";
-    $display.= "<h2>Einstellungen</h2>";
+    $display.= "<h2>"._(Preferences)."</h2>";
 
     foreach ($this->plugin_name as $name){
       $this->plugin[$name]->read_only = &$this->read_only;
