@@ -51,7 +51,6 @@
                     </label>
                 {/render}
 
-<<<<<<< HEAD
             {render acl=$gosaProxyFlagTACL checkbox=$multiple_support checked=$use_filterT}
                 <label>
                     <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$pstate}  onClick="{$ProxyWorkingStateChange}">
@@ -71,43 +70,14 @@
                         <select size="1" id="startMinute" name="startMinute" {if $Tstate!=""} disabled {/if}>
                         {html_options values=$minutes output=$minutes selected=$startminute}
                         </select>
-=======
-                {render acl=$gosaProxyFlagTACL checkbox=$multiple_support checked=$use_filterT}
-                    <label>
-                        <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$pstate}  onClick="javascript:{$ProxyWorkingStateChange}">
-                        <span>{t}Limit proxy access to working time{/t}</span>
-                    </label>
-                {/render}
-
-                {render acl=$gosaProxyFlagTACL}
-                    <div class="inline-wrapper">
-                        <div class="input-field">
-                            <select size="1" id="startHour" name="startHour" {if $Tstate!=""} disabled {/if}  >
-                            {html_options values=$hours output=$hours selected=$starthour}
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <select size="1" id="startMinute" name="startMinute" {if $Tstate!=""} disabled {/if}  >
-                            {html_options values=$minutes output=$minutes selected=$startminute}
-                            </select>
->>>>>>> 285b39535018429ac81989c84faab8a6374ee81e
 
                         </div>
 
-<<<<<<< HEAD
                     <div class="input-field">
                         <select size="1" id="stopHour" name="stopHour" {if $Tstate!=""} disabled {/if}>
                             {html_options values=$hours output=$hours selected=$stophour}
                         </select>
                     </div>
-=======
-                        <div class="input-field">
-                            <select size="1" id="stopHour" name="stopHour" {if $Tstate!=""} disabled {/if} >
-                                {html_options values=$hours output=$hours selected=$stophour}
-                            </select>
-                        </div>
->>>>>>> 285b39535018429ac81989c84faab8a6374ee81e
 
                         <div class="input-field">
                             <select size="1" id="stopMinute" name="stopMinute" {if $Tstate!=""} disabled {/if}>

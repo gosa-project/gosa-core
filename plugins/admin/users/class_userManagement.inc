@@ -1002,7 +1002,6 @@ class userManagement extends management
         }
 
         // Walk thru map
-<<<<<<< HEAD
         switch ($theme) {
             case 'classic':
                 foreach ($map as $oc => $properties) {
@@ -1025,18 +1024,6 @@ class userManagement extends management
                     if (in_array_ics($oc, $classes)) {
                         $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
                     } else {
-=======
-        foreach ($map as $oc => $properties) {
-            if (in_array_ics($oc, $classes)) {
-                $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
-            } else {
-                switch ($theme) {
-                    case 'classic':
-                        $result .= image('images/empty.png');
-                        break;
-
-                    default:
->>>>>>> 285b39535018429ac81989c84faab8a6374ee81e
                         $result .= image("");
                     }
                 }
