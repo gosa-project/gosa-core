@@ -16,15 +16,15 @@
                 <input type='text' id="description" name="description" size=40 maxlength=80 value="{$description}" title="{t}Descriptive text for this group{/t}">
                 <label for="description">{t}Description{/t}</label>
             </div>
-            {/render} 
+            {/render}
 
             {render acl=$baseACL checkbox=$multiple_support checked=$use_base}
             <div class="input-field ldap-tree">
                 {$base}
             </div>
-            {/render} 
-            
-            {if !$multiple_support} 
+            {/render}
+
+            {if !$multiple_support}
             {render acl=$gidNumberACL}
             <div class="input-gid">
                 <label>
@@ -65,14 +65,14 @@
 
                 </div>
             </div>
-            {else} 
+            {else}
 
             {render acl=$sambaGroupTypeACL checkbox=$multiple_support checked=$use_smbgroup}
             <label>
                 <input class="center" type=checkbox name="smbgroup" value="1" {$smbgroup}>
                 <span>{t}Select to create a samba conform group{/t}</span>
-            </label> 
-            {/render} 
+            </label>
+            {/render}
 
             {render acl=$sambaGroupTypeACL checkbox=$multiple_support checked=$use_groupType}
             <div class="input-field">
@@ -81,7 +81,7 @@
                     </select>
                 <label>{t}in domain{/t}</label>
             </div>
-            {/render} 
+            {/render}
 
             {render acl=$sambaDomainNameACL checkbox=$multiple_support checked=$use_sambaDomainName}
             <div class="input-field">
@@ -90,29 +90,32 @@
                     </select>
                 <label>{t}Domain name{/t}</label>
             </div>
-            {/render} 
+            {/render}
 
-            {/if} 
-            {if $pickupGroup == "true"} 
+            {/if}
+            {if $pickupGroup == "true"}
 
             {render acl=$fonGroupACL checkbox=$multiple_support checked=$use_fon_group}
             <label>
                 <input class="center" type=checkbox name="fon_group" value="1" {$fon_group}>
                 <span>{t}Members are in a phone pickup group{/t}</span>
-            </label> 
-            {/render} 
+            </label>
+            {/render}
 
-            {/if} 
-            {if $nagios == "true"} 
+            {/if}
+            {if $nagios == "true"}
 
             {render acl=$nagiosGroupACL checkbox=$multiple_support checked=$use_nagios_group}
             <div class="input-field">
                 <input class="center" type=checkbox name="nagios_group" value="1" {$nagios_group}>
                 <span>{t}Members are in a Nagios group{/t}</span>
             </div>
-            {/render} 
+            {/render}
 
-            {/if} 
+            {/if}
+
+            <hr class="divider">
+
         {$trustModeDialog}
         </div>
 
@@ -120,43 +123,43 @@
             {if $restrictedByDynGroup}
             <h3 class="card-title">{t}The group members are part of a dyn-group and cannot be managed!{/t}</h3>
 
-            {if $multiple_support} 
+            {if $multiple_support}
 
-            {render acl=$memberACL} 
-            {$commonList} 
-            {/render} 
+            {render acl=$memberACL}
+            {$commonList}
+            {/render}
 
-            {else} 
+            {else}
 
-            {render acl=$memberACL} 
-            {$memberList} 
-            {/render} 
+            {render acl=$memberACL}
+            {$memberList}
+            {/render}
 
-            {/if} 
-            {else} 
+            {/if}
+            {else}
             {if $multiple_support}
             <h3 class="card-title">{t}Common group members{/t}</h3>
 
-            {render acl=$memberACL} 
+            {render acl=$memberACL}
             {$commonList}
-            <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button> 
+            <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
 
             <h3 class="card-title">{t}Partial group members{/t}</h3>
 
-            {render acl=$memberACL} 
-            {$partialList} 
-            {/render} 
+            {render acl=$memberACL}
+            {$partialList}
+            {/render}
 
             {else}
             <h3 class="card-title">{t}Group members{/t}</h3>
 
-            {render acl=$memberACL} 
+            {render acl=$memberACL}
             {$memberList}
-            <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button> 
-            {/render} 
-            
-            {/if} 
+            <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button>
+            {/render}
+
+            {/if}
             {/if}
         </div>
     </div>

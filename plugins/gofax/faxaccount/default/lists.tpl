@@ -16,9 +16,9 @@
                 <button class="btn-small" type='submit' name='delete_blocklist_number'>{msgPool type=delButton}</button>
             </div>
         </div>
-        
+
         <div class="col s12 xl6">
-            <b>{t}List of predefined blacklists{/t}</b> 
+            <h3>{t}List of predefined blacklists{/t}</h3>
             {$predefinedList}
             <button class="btn-small" type='submit' name='add_blocklist'>{t}Add the list to the blacklists{/t}</button>
         </div>
