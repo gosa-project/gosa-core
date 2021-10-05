@@ -33,8 +33,8 @@ class management
     public $plHeadline    = "unconfigured";
 
     // The currently used object(s) (e.g. in edit, removal)
-  public $dn = "";  // this is public due to some compatibility problems with class plugin..
-  protected $dns = array();
+    public $dn = "";  // this is public due to some compatibility problems with class plugin..
+    protected $dns = array();
 
     // The last used object(s).
     protected $last_dn = "";
@@ -44,13 +44,13 @@ class management
     protected $storagePoints = array();
 
     // The tab definitions to use for the current object.
-  protected $tabClass = "";         // e.g. usertabs
-  protected $tabType = "";          // e.g. USERTABS
-  protected $aclPlugin = "";        // e.g. generic
-  protected $aclCategory = "";      // e.g. users
-  protected $objectName = "";       // e.g. users
+    protected $tabClass = "";         // e.g. usertabs
+    protected $tabType = "";          // e.g. USERTABS
+    protected $aclPlugin = "";        // e.g. generic
+    protected $aclCategory = "";      // e.g. users
+    protected $objectName = "";       // e.g. users
 
-  // The opened object.
+    // The opened object.
     protected $tabObject = null;
     protected $dialogObject = null;
 
@@ -205,7 +205,7 @@ class management
 
         // Display tab object.
         if ($this->tabObject instanceof tabs || $this->tabObject instanceof multi_plug) {
-#      $this->tabObject->save_object();
+            # $this->tabObject->save_object();
             $display = $this->tabObject->execute();
             $display.= $this->_getTabFooter();
             return($this->getHeader().$display);
@@ -273,7 +273,6 @@ class management
         }
     }
 
-
     /*! \brief  Generates the footer which is used whenever a tab object is
      *           displayed.
      */
@@ -299,9 +298,13 @@ class management
             return("");
         }
 
+        if ($theme == "default") {
+            $acl_mode = preg_match("/^[r]$/", $this->ui->get_category_permissions($this->ui->dn,"users"));
+        }
+
         // In case an of locked entry, we may have opened a read-only tab.
         $str = "";
-        if (isset($this->tabObject->read_only) && $this->tabObject->read_only == true) {
+        if (isset($this->tabObject->read_only) && $this->tabObject->read_only == true || $acl_mode) {
             switch ($theme) {
                 case 'classic':
                     $str .= "<p style=\"text-align:right\">
@@ -343,7 +346,6 @@ class management
         }
         return($str);
     }
-
 
     /*! \brief  Initiates the removal for the given entries
      *           and displays a confirmation dialog.

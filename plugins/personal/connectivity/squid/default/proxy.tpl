@@ -8,10 +8,39 @@
                         <span></span>
                     </label>
 
-                    <label>
-                        <input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {if !$use_proxy} disabled {/if}>
-                        <span><h3>{t}Proxy account{/t}</h3></span>
-                    </label>
+            {render acl=$gosaProxyFlagTACL checkbox=$multiple_support checked=$use_filterT}
+                <label>
+                    <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$pstate}  onClick="{$ProxyWorkingStateChange}">
+                    <span>{t}Limit proxy access to working time{/t}</span>
+                </label>
+            {/render}
+
+            {render acl=$gosaProxyFlagTACL}
+                <div class="inline-wrapper">
+                    <div class="input-field">
+                        <select size="1" id="startHour" name="startHour" {if $Tstate!=""} disabled {/if}>
+                        {html_options values=$hours output=$hours selected=$starthour}
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <select size="1" id="startMinute" name="startMinute" {if $Tstate!=""} disabled {/if}>
+                        {html_options values=$minutes output=$minutes selected=$startminute}
+                        </select>
+
+                    </div>
+
+                    <div class="input-field">
+                        <select size="1" id="stopHour" name="stopHour" {if $Tstate!=""} disabled {/if}>
+                            {html_options values=$hours output=$hours selected=$stophour}
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <select size="1" id="stopMinute" name="stopMinute" {if $Tstate!=""} disabled {/if}>
+                            {html_options values=$minutes output=$minutes selected=$stopminute}
+                        </select>
+                    </div>
                 </div>
             {else}
                 {render acl=$proxyAccountACL}
@@ -92,7 +121,7 @@
         <div class="col s12 xl6">
             {render acl=$gosaProxyFlagBACL checkbox=$multiple_support checked=$use_filterB}
                 <label>
-                    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {if $pstate=="disabled"} disabled {/if} onClick="{$changeB}">
+                    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {$pstate} onClick="{$changeB}">
                     <span>{t}Restrict proxy usage by quota{/t}</span>
                 </label>
             {/render}

@@ -1001,20 +1001,38 @@ class userManagement extends management
         }
 
         // Walk thru map
-        foreach ($map as $oc => $properties) {
-            if (in_array_ics($oc, $classes)) {
-                $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
-            } else {
-                switch ($theme) {
-                    case 'classic':
+        switch ($theme) {
+            case 'classic':
+                foreach ($map as $oc => $properties) {
+                    if (in_array_ics($oc, $classes)) {
+                        $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
+                    } else {
                         $result .= image('images/empty.png');
-                        break;
-
-                    default:
-                        $result .= image("");
-                        break;
+                    }
                 }
-            }
+                if(in_array_ics("zarafa-contact", $classes)){
+                    $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                } else if(in_array_ics("zarafa-user", $classes)){
+                    $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                }
+                break;
+            
+            default:
+                $result .= "<div class='property-wrapper'>";
+                foreach ($map as $oc => $properties) {
+                    if (in_array_ics($oc, $classes)) {
+                        $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
+                    } else {
+                        $result .= image("");
+                    }
+                }
+                if(in_array_ics("zarafa-contact", $classes)){
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                } else if(in_array_ics("zarafa-user", $classes)){
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                }
+                $result .= "</div>";
+                break;
         }
 
         switch ($theme) {

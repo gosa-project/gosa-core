@@ -45,6 +45,8 @@ class proxyAccount extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    $theme = getThemeName();
+
     /* Log view */
     if($this->is_account && !$this->view_logged){
       $this->view_logged = TRUE;
@@ -122,19 +124,35 @@ class proxyAccount extends plugin
 
       /* Create JS activation string for everal input fields  */
       $ProxyWorkingStateChange ="\n";
-      if($this->acl_is_writeable("gosaProxyFlagT")){
-        $ProxyWorkingStateChange.=  "changeState('startHour'); \n";
-        $ProxyWorkingStateChange.=  "changeState('startMinute'); \n";
-        $ProxyWorkingStateChange.=  "changeState('stopHour'); \n";
-        $ProxyWorkingStateChange.=  "changeState('stopMinute'); \n";
-      }
-      $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
-      $changeB = "";
-      if($this->acl_is_writeable("gosaProxyFlagB")){
-        $changeB = 
-          "changeSubselectState('filterB', 'quota_size');
-        changeSubselectState('filterB', 'quota_unit');
-        changeSubselectState('filterB', 'gosaProxyQuotaPeriod');";
+      switch ($theme) {
+        case 'classic':
+          if($this->acl_is_writeable("gosaProxyFlagT")){
+            $ProxyWorkingStateChange.=  "changeState('startHour'); \n";
+            $ProxyWorkingStateChange.=  "changeState('startMinute'); \n";
+            $ProxyWorkingStateChange.=  "changeState('stopHour'); \n";
+            $ProxyWorkingStateChange.=  "changeState('stopMinute'); \n";
+          }
+          $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
+          $changeB = "";
+          if($this->acl_is_writeable("gosaProxyFlagB")){
+            $changeB = 
+              "changeSubselectState('filterB', 'quota_size');
+            changeSubselectState('filterB', 'quota_unit');
+            changeSubselectState('filterB', 'gosaProxyQuotaPeriod');";
+          }
+          break;
+        
+        default:
+          if($this->acl_is_writeable("gosaProxyFlagT")){
+            $ProxyWorkingStateChange.=  "changeState('startHour', 'startMinute', 'stopHour', 'stopMinute');";
+          }
+          $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
+          $changeB = "";
+          if($this->acl_is_writeable("gosaProxyFlagB")){
+            $changeB = 
+              "changeState('quota_size', 'quota_unit', 'gosaProxyQuotaPeriod');";
+          }
+          break;
       }
     }
 

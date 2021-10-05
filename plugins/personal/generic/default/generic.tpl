@@ -531,8 +531,9 @@
 
 
 {if $multiple_support}
-<input type="hidden" name="user_mulitple_edit" value="1"> {/if}
-<input type=hidden name="generic">
+<input type="hidden" name="user_mulitple_edit" value="1"> 
+{/if}
+<input type="hidden" name="generic">
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">

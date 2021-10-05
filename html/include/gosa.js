@@ -148,15 +148,29 @@ function getNextInputElement(element) {
     }
 }
 
-function changeState() {
-    for (var i = 0; i < arguments.length; i++) {
-        var element = $(arguments[i]);
-        if (element.hasAttribute('disabled')) {
-            element.removeAttribute('disabled');
+function changeState(...args) {
+    args.forEach(element => {
+        var element = document.getElementById(element);
+        if (element.disabled) {
+            element.disabled = false;
+            if (element.tagName === 'SELECT') {
+                let dropdownOptions = {
+                    dropdownOptions: {
+                        'constrainWidth': true,
+                        'coverTrigger': false,
+                        'hover': false,
+                        'alignment': 'right',
+                    }
+                }
+                let selectInstances = M.FormSelect.init(element, dropdownOptions);
+            }
         } else {
-            element.setAttribute('disabled', 'disabled');
+            element.disabled = true;
+            if (element.tagName === 'SELECT') {
+                let selectInstances = M.FormSelect.init(element);
+            }
         }
-    }
+    }); 
 }
 
 function changeSelectState(triggerField, myField) {
@@ -185,7 +199,7 @@ function changeTripleSelectState(firstTriggerField, secondTriggerField, myField)
     }
 }
 
-<!-- Second field must be non-checked -->
+// Second field must be non-checked
 function changeTripleSelectState_2nd_neg(firstTriggerField, secondTriggerField, myField) {
     if (
         document.getElementById(firstTriggerField).checked == true &&

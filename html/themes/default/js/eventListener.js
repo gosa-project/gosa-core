@@ -213,3 +213,13 @@ function language() {
         }
     }
 }
+
+function enable_upload(val) {
+    console.log(val);
+    var upload_ssh_btn = document.getElementById('upload_sshpublickey');
+    if (val) {
+        upload_ssh_btn.disabled = false;
+    } else {
+        upload_ssh_btn.disabled = true;
+    }
+}

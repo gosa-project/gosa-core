@@ -14,14 +14,14 @@
         <div class="ssh-action">
           <div class="file-field input-field">
             <div class="btn-small">
-              <span>File</span>
-              <input type=file name="key">
+              <span>{t}Browse{/t}</span>
+              <input type=file name="key" onchange="enable_upload(this.value)">
             </div>
             <div class="file-path-wrapper">
-              <input class="file-path validate" type="text" placeholder="Upload files">
+              <input class="file-path validate" type="text">
             </div>
           </div>
-          <button class="btn-small" type='submit' name='upload_sshpublickey'>{t}Upload key{/t}</button>
+          <button class="btn-small" type='submit' name='upload_sshpublickey' id="upload_sshpublickey" disabled>{t}Upload key{/t}</button>
           <button class="btn-small" type='submit' name='remove_sshpublickey'>{t}Remove key{/t}</button>
         </div>
       {/render}
