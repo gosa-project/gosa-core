@@ -23,12 +23,8 @@
     margin: 0 0 1em 0;
 }
 
-.acl-ds-create .row .col.xl6:first-child {
-    padding-left: 0;
-}
-
-.acl-ds-create .row .col.xl6:last-child {
-    padding-right: 0;
+.acl-ds-create .options+.members {
+    margin: 12px 0 20px 0;
 }
 
 .acl-member {

@@ -489,6 +489,11 @@
 
 /* Connectivity Settings */
 
+.connectivity-wrapper .proxy-account,
+.connectivity-wrapper .opengw-content {
+    margin-left: 35px;
+}
+
 .connectivity-wrapper label span h3 {
     margin: 0;
     line-height: 25px;
@@ -625,7 +630,7 @@
     margin-bottom: 20px;
 }
 
-.object-info .acl-reference .acl-reference-header h3,
+.object-info .acl-reference .acl-reference-header h2,
 .object-info .acl-reference .acl-viewer .collapsible-header h3,
 .object-info .acl-reference .acl-viewer .card-content h4 {
     margin: 0;
@@ -705,6 +710,14 @@
 
 .object-info .acl-reference .acl-viewer .collapsible-body h5 {
     margin-top: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body .row .row {
+    margin-bottom: 10px;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body .row .row:last-child {
+    margin-bottom: 0;
 }
 
 .object-info .acl-reference .acl-viewer .card {
@@ -857,6 +870,80 @@
 }
 
 
+/* Desk Settings */
+
+.object-info .env-wrapper .profile-management {
+    margin-left: 35px;
+}
+
+.object-info .env-wrapper label+.profile-management {
+    margin-top: 25px;
+}
+
+.object-info .env-wrapper .col.alignment-correction {
+    padding-top: 35px;
+}
+
+.object-info .env-wrapper .intermediate-char {
+    margin: 0 10px;
+}
+
+.object-info .env-wrapper button {
+    margin-right: 20px;
+}
+
+.object-info .env-wrapper button:last-of-type {
+    margin-right: 0;
+}
+
+.desk-script-managment h3 {
+    margin-top: 0px;
+}
+
+.desk-script-managment .script-option label {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 15px;
+    height: 39px;
+}
+
+.desk-script-managment .import-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.desk-script-managment .import-action button {
+    margin-right: 20px;
+}
+
+.desk-script-managment .import-action .file-field {
+    margin: 0 20px 0 0;
+}
+
+.desk-script-managment .import-action .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.desk-script-managment .import-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.desk-script-managment .import-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+
 /* Plugins */
 
 .object-info .kolab-wrapper .multi-check,
@@ -879,8 +966,7 @@
 }
 
 .object-info .application-wrapper .input-field.add .file-field,
-.object-info .mime-wrapper .input-field.add .file-field
-{
+.object-info .mime-wrapper .input-field.add .file-field {
     flex-grow: 1;
 }
 
@@ -944,7 +1030,7 @@
 }
 
 .object-info .app-wrapper table td .seperator {
-    width: 200px; 
+    width: 200px;
     height: 3px;
     margin-top: 12px;
     background-color: #BBBBBB;
@@ -954,6 +1040,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+
+/* Generel */
+
+label.closing-elem {
+    margin-bottom: 0;
 }
 
 @media only screen and (max-width: 1200px) {
