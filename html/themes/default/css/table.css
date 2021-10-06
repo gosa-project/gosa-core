@@ -10,7 +10,9 @@
 #sudo-table th,
 #sudo-table td,
 #managepw-table th,
-#managepw-table td {
+#managepw-table td,
+#startmenu-table th,
+#startmenu-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -25,7 +27,8 @@ th, th a, th a.btn-flat, td, td a {
 #tree-table tr,
 #generic-table tr,
 #sudo-table tr,
-#managepw-table tr {
+#managepw-table tr,
+#startmenu-table tr {
     height: 38px;
     max-height: 38px;
 }
@@ -47,14 +50,16 @@ th, th a, th a.btn-flat, td, td a {
 #tree-table i.material-icons,
 #generic-table i.material-icons,
 #sudo-table i.material-icons,
-#managepw-table i.material-icons {
+#managepw-table i.material-icons,
+#startmenu-table i.material-icons {
     font-size: 18px;
 }
 
 #generic-table input.input-btn,
 #tree-table input.input-btn,
 #sudo-table input.input-btn,
-#managepw-table input.input-btn {
+#managepw-table input.input-btn,
+#startmenu-table input.input-btn {
     z-index: 1;
     position: relative;
     width: 18px;
@@ -63,7 +68,8 @@ th, th a, th a.btn-flat, td, td a {
 #generic-table i.input-icons,
 #tree-table i.input-icons,
 #sudo-table i.input-icons,
-#managepw-table i.input-icons {
+#managepw-table i.input-icons,
+#startmenu-table i.input-icons {
     position: absolute;
     left: 16px;
     margin-top: 8px;
@@ -88,19 +94,22 @@ th, th a, th a.btn-flat, td, td a {
 
 #tree-table select:focus,
 #sudo-table select:focus,
-#managepw-table select:focus {
+#managepw-table select:focus,
+#startmenu-table select:focus {
     outline: none;
 }
 
 #tree-table .select-wrapper,
 #sudo-table .select-wrapper,
-#managepw-table .select-wrapper {
+#managepw-table .select-wrapper,
+#startmenu-table .select-wrapper {
     width: fit-content;
 }
 
 #tree-table .select-wrapper input,
 #sudo-table .select-wrapper input,
-#managepw-table .select-wrapper input {
+#managepw-table .select-wrapper input,
+#startmenu-table .select-wrapper input {
     width: auto;
     width: 200px;
     max-width: 200px;
@@ -113,7 +122,8 @@ th, th a, th a.btn-flat, td, td a {
 
 #tree-table .select-wrapper ul li,
 #sudo-table .select-wrapper ul li,
-#managepw-table .select-wrapper ul li {
+#managepw-table .select-wrapper ul li,
+#startmenu-table .select-wrapper ul li {
     padding: 5px 10px;
     min-height: 31px;
     max-height: 31px;
@@ -121,14 +131,16 @@ th, th a, th a.btn-flat, td, td a {
 
 #tree-table .input-field,
 #sudo-table .input-field,
-#managepw-table .input-field {
+#managepw-table .input-field,
+#startmenu-table .input-field {
     margin-top: 0;
 }
 
 #tree-table .input-field input,
 #tree-table .valign-wrapper input,
 #sudo-table .input-field input,
-#managepw-table .input-field input {
+#managepw-table .input-field input,
+#startmenu-table .input-field input {
     margin-bottom: 0;
     min-height: 20px;
     height: 20px!important;
@@ -137,7 +149,8 @@ th, th a, th a.btn-flat, td, td a {
 #tree-table label input,
 #generic-table label input,
 #sudo-table label input,
-#managepw-table label input {
+#managepw-table label input,
+#startmenu-table label input {
     margin-left: 1rem;
     width: 18px;
     height: 18px;
@@ -174,7 +187,8 @@ th, th a, th a.btn-flat, td, td a {
 #tree-table .action-wrapper,
 #generic-table .action-wrapper,
 #sudo-table .action-wrapper,
-#managepw-table .action-wrapper {
+#managepw-table .action-wrapper,
+#startmenu-table .action-wrapper {
     position: relative;
     height: 18px;
     font-size: 18px;
@@ -184,7 +198,8 @@ th, th a, th a.btn-flat, td, td a {
 #tree-table .action-wrapper input,
 #generic-table .action-wrapper input,
 #sudo-table .action-wrapper input,
-#managepw-table .action-wrapper input {
+#managepw-table .action-wrapper input,
+#startmenu-table .action-wrapper input {
     width: 18px;
     height: 18px;
     padding: 0;
@@ -194,7 +209,8 @@ th, th a, th a.btn-flat, td, td a {
 #tree-table .action-wrapper i,
 #generic-table .action-wrapper i,
 #sudo-table .action-wrapper i,
-#managepw-table .action-wrapper i {
+#managepw-table .action-wrapper i,
+#startmenu-table .action-wrapper i {
     position: absolute;
     top: 0;
     left: 0;
@@ -203,7 +219,8 @@ th, th a, th a.btn-flat, td, td a {
 
 #generic-table .action-wrapper:last-child,
 #sudo-table .action-wrapper:last-child,
-#managepw-table .action-wrapper:last-child {
+#managepw-table .action-wrapper:last-child,
+#startmenu-table .action-wrapper:last-child {
     margin-right: 0;
 }
 
@@ -219,9 +236,18 @@ th, th a, th a.btn-flat, td, td a {
     align-items: center;
 }
 
+#startmenu-table td.icon-column {
+    width: 38px;
+}
+
+#startmenu-table td hr.divider {
+    margin: 0;
+}
+
 #tree-table [type="checkbox"]+span:not(.lever),
 #sudo-table [type="checkbox"]+span:not(.lever),
-#managepw-table [type="checkbox"]+span:not(.lever) {
+#managepw-table [type="checkbox"]+span:not(.lever),
+#startmenu-table [type="checkbox"]+span:not(.lever) {
     padding-left: 0;
 }
 
