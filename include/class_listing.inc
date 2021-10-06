@@ -1610,7 +1610,6 @@ class listing
 
                 // Load shortcut
                 $actions = &$this->xmlData['actionmenu']['action'];
-
                 $result .= "  <a class='dropdown-menu' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
                             <ul class='dropdown-content' id='$level'>";
 
@@ -1622,6 +1621,8 @@ class listing
 
     public function recurseActions($actions, $level)
     {
+        global $class_mapping;
+
         switch ($this->theme) {
             case 'classic':
                 static $level = 2;
@@ -1633,12 +1634,12 @@ class listing
         }
 
         $separator = '';
-
         foreach ($actions as $action) {
             // Skip the entry completely if there's no permission to execute it
             if (!$this->hasActionPermission($action, $this->filter->base)) {
                 continue;
             }
+            
 
             // Skip entry if there're missing dependencies
             if (isset($action['depends'])) {
@@ -1727,33 +1728,28 @@ class listing
                     break;
 
                 default:
-                    // count entries
-                    $count = $this->countValidEntries($action);
-
                     // Dive into subs
                     if ($action['type'] == 'sub' && isset($action['action'])) {
-                        if ($count > 0) {
-                            ++$level;
+                        ++$level;
 
-                            $result .= "<li class='pointer_off'>
-                                        <ul class='collection with-header'>";
+                        $result .= "<li class='pointer_off'>
+                                    <ul class='collection with-header'>";
 
-                            if (isset($action['label'])) {
-                                $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
-                            } else {
-                                $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
-                            }
-
-                            // Ensure we've an array of actions, this enables sub menus with only one action.
-                            if (isset($action['action']['type'])) {
-                                $action['action'] = [$action['action']];
-                            }
-
-                            $result .= $this->recurseActions($action['action'], $level).'</ul>';
-
-                            --$level;
-                            $separator = '';
+                        if (isset($action['label'])) {
+                            $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
+                        } else {
+                            $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
                         }
+
+                        // Ensure we've an array of actions, this enables sub menus with only one action.
+                        if (isset($action['action']['type'])) {
+                            $action['action'] = [$action['action']];
+                        }
+
+                        $result .= $this->recurseActions($action['action'], $level).'</ul>';
+
+                        --$level;
+                        $separator = '';
                         continue 2;
                     }
 
