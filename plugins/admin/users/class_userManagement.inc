@@ -920,7 +920,7 @@ class userManagement extends management
                         break;
 
                     default:
-                        $image = "<i class='material-icons'>lock</i>";
+                        $image = "<i class='material-icons'>lock";
                         break;
                 }
             }else{
@@ -930,7 +930,7 @@ class userManagement extends management
                         break;
 
                     default:
-                        $image = "<i class='material-icons'>lock_open</i>";
+                        $image = "<i class='material-icons'>lock_open";
                         break;
                 }
             }
@@ -956,53 +956,63 @@ class userManagement extends management
     static function filterProperties($row, $classes)
     {
         $theme = getThemeName();
+
         $result= "";
-        $map= array( "gosaAccount" => array( "image" => tempSwitch(array("<i class='material-icons input-icons'>person</i>", "plugins/users/images/select_user.png")),
-                    "plugin" => "user",
-                    "alt" => _("Generic"),
-                    "title" => _("Edit generic properties")),
-                "posixAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>info</i>", "images/penguin.png")),
-                    "plugin" => "posixAccount",
-                    "alt" => _("POSIX"),
-                    "title" => _("Edit POSIX properties")),
-                "gosaMailAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>mail</i>", "images/mailto.png")),
-                    "alt" => _("Mail"),
-                    "plugin" => "mailAccount",
-                    "title" => _("Edit mail properties")),
-                "sambaSamAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>window</i>", "plugins/systems/images/select_winstation.png")),
-                    "plugin" => "sambaAccount",
-                    "alt" => _("Samba"),
-                    "title" => _("Edit samba properties")),
-                "apple-user" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>question_answer</i>", "plugins/netatalk/images/select_netatalk.png")),
-                    "plugin" => "netatalk",
-                    "alt" => _("Netatalk"),
-                    "title" => _("Edit Netatalk properties")),
-                "gotoEnvironment" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>smart_display</i>", "plugins/users/images/small_environment.png")),
-                    "plugin" => "environment",
-                    "alt" => _("Environment"),
-                    "title" => _("Edit environment properties")),
-                "goFaxAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>print</i>", "plugins/users/images/fax_small.png")),
-                        "plugin" => "gofaxAccount",
-                        "alt" => _("FAX"),
-                        "title" => _("Edit FAX properties")),
-                "goFonAccount" => array("image" => tempSwitch(array("<i class='material-icons input-icons'>phone</i>", "plugins/gofon/images/select_phone.png")),
+
+        switch ($theme) {
+            case 'classic':
+                $map= array( 
+                    "gosaAccount" => array( 
+                        "image"     => "plugins/users/images/select_user.png",
+                        "plugin"    => "user",
+                        "alt"       => _("Generic"),
+                        "title"     => _("Edit generic properties")
+                    ),
+                    "posixAccount" => array(
+                        "image"     => "images/penguin.png",
+                        "plugin"    => "posixAccount",
+                        "alt"       => _("POSIX"),
+                        "title"     => _("Edit POSIX properties")
+                    ),
+                    "gosaMailAccount" => array(
+                        "image"     => "images/mailto.png",
+                        "alt"       => _("Mail"),
+                        "plugin"    => "mailAccount",
+                        "title"     => _("Edit mail properties")
+                    ),
+                    "sambaSamAccount" => array(
+                        "image"     => "plugins/systems/images/select_winstation.png",
+                        "plugin"    => "sambaAccount",
+                        "alt"       => _("Samba"),
+                        "title"     => _("Edit samba properties")
+                    ),
+                    "apple-user" => array(
+                        "image"     => "plugins/netatalk/images/select_netatalk.png",
+                        "plugin"    => "netatalk",
+                        "alt"       => _("Netatalk"),
+                        "title"     => _("Edit Netatalk properties")
+                    ),
+                    "gotoEnvironment" => array(
+                        "image"     => "plugins/users/images/small_environment.png",
+                        "plugin"    => "environment",
+                        "alt"       => _("Environment"),
+                        "title"     => _("Edit environment properties")
+                    ),
+                    "goFaxAccount" => array(
+                        "image"     => "plugins/users/images/fax_small.png",
+                        "plugin"    => "gofaxAccount",
+                        "alt"       => _("FAX"),
+                        "title"     => _("Edit FAX properties")
+                    ),
+                    "goFonAccount" => array(
+                        "image" => "phone",
                         "plugin" => "phoneAccount",
                         "alt" => _("Phone"),
-                        "title" => _("Edit phone properties")),
-              );
+                        "title" => _("Edit phone properties")
+                    ),
+                );
 
-        switch ($theme) {
-            case 'classic':
-                break;
-
-            default:
-                $result.= "<div class='property-wrapper'>";
-                break;
-        }
-
-        // Walk thru map
-        switch ($theme) {
-            case 'classic':
+                // Walk thru map
                 foreach ($map as $oc => $properties) {
                     if (in_array_ics($oc, $classes)) {
                         $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
@@ -1010,6 +1020,7 @@ class userManagement extends management
                         $result .= image('images/empty.png');
                     }
                 }
+
                 if(in_array_ics("zarafa-contact", $classes)){
                     $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                 } else if(in_array_ics("zarafa-user", $classes)){
@@ -1018,52 +1029,76 @@ class userManagement extends management
                 break;
             
             default:
-                $result .= "<div class='property-wrapper'>";
+                $map= array( 
+                    "gosaAccount" => array( 
+                        "image"     => "person",
+                        "plugin"    => "user",
+                        "alt"       => _("Generic"),
+                        "title"     => _("Edit generic properties")
+                    ),
+                    "posixAccount" => array(
+                        "image"     => "info",
+                        "plugin"    => "posixAccount",
+                        "alt"       => _("POSIX"),
+                        "title"     => _("Edit POSIX properties")
+                    ),
+                    "gosaMailAccount" => array(
+                        "image"     => "mail",
+                        "alt"       => _("Mail"),
+                        "plugin"    => "mailAccount",
+                        "title"     => _("Edit mail properties")
+                    ),
+                    "sambaSamAccount" => array(
+                        "image" => "window",
+                        "plugin" => "sambaAccount",
+                        "alt" => _("Samba"),
+                        "title" => _("Edit samba properties")
+                    ),
+                    "apple-user" => array(
+                        "image"     => "question_answer",
+                        "plugin"    => "netatalk",
+                        "alt"       => _("Netatalk"),
+                        "title"     => _("Edit Netatalk properties")
+                    ),
+                    "gotoEnvironment" => array(
+                        "image"     => "smart_display",
+                        "plugin"    => "environment",
+                        "alt"       => _("Environment"),
+                        "title"     => _("Edit environment properties")
+                    ),
+                    "goFaxAccount" => array(
+                        "image"     => "print",
+                        "plugin"    => "gofaxAccount",
+                        "alt"       => _("FAX"),
+                        "title"     => _("Edit FAX properties")
+                    ),
+                    "goFonAccount" => array(
+                        "image" => "phone",
+                        "plugin" => "phoneAccount",
+                        "alt" => _("Phone"),
+                        "title" => _("Edit phone properties")
+                    ),
+                );
+
+                $result.= "<div class='property-wrapper'>";
+
+                // Walk thru map
                 foreach ($map as $oc => $properties) {
                     if (in_array_ics($oc, $classes)) {
-                        $result.= image($properties['image'], "listing_edit_".$properties['plugin']."_$row", $properties['title']);
+                        $result.= image("<i class='material-icons'>".$properties['image']."</i>", "listing_edit_".$properties['plugin']."_$row", $properties['title']);
                     } else {
                         $result .= image("");
                     }
                 }
+
                 if(in_array_ics("zarafa-contact", $classes)){
-                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    $result .= image("<i class='material-icons'>portrait", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                 } else if(in_array_ics("zarafa-user", $classes)){
-                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    $result .= image("<i class='material-icons'>portrait", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                 }
+
                 $result .= "</div>";
                 break;
-        }
-
-        switch ($theme) {
-            case 'classic':
-                break;
-
-            default:
-                $result.= "</div>";
-                break;
-        }
-
-        if(in_array_ics("zarafa-contact", $classes)){
-            switch ($theme) {
-                case 'classic':
-                    $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
-                    break;
-
-                default:
-                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
-                    break;
-            }
-        } else if(in_array_ics("zarafa-user", $classes)){
-            switch ($theme) {
-                case 'classic':
-                    $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
-                    break;
-
-                default:
-                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
-                    break;
-            }
         }
 
         return $result;

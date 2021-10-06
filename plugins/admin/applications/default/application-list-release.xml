@@ -6,7 +6,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>false</baseMode>
     <multiSelect>true</multiSelect>
-    <template>application-list-release.tpl</template>
+    <template>../../../ihtml/themes/default/list.tpl</template>
     <module>application</module>
     <label>List of applications</label>
     <defaultSortColumn>1</defaultSortColumn>
@@ -16,7 +16,7 @@
       <objectClass>gosaApplication</objectClass>
       <category>application</category>
       <class>application</class>
-      <image>plugins/goto/images/select_application.png</image>
+      <image>app</image>
     </objectType>
 
   </definition>
@@ -70,7 +70,7 @@
      <action>
       <name>new</name>
       <type>entry</type>
-      <image>plugins/goto/images/select_application.png[new]</image>
+      <image>app</image>
       <label>Application</label>
      </action>
     </action>

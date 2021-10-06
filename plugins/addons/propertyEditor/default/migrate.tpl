@@ -1,8 +1,8 @@
-<hr>
+<hr class="divider">
 <div>
   <span class="black-text"><h5>{t}Property migration assistant{/t} - {t}Migration steps left{/t}: {$leftSteps}</h5></span>
 </div>
-<hr>
+<hr class="divider">
 <div class="row valign-wrapper">
     {$content}
 </div>
