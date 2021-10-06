@@ -34,6 +34,14 @@
     border-top: none;
 }
 
+.card .card-content .card-action.settings {
+    justify-content: flex-start;
+}
+
+.card .card-content .card-action.settings button {
+    margin-left: 0;
+}
+
 .card .card-content .card-action button {
     margin-left: 20px;
     font-size: 12px;
