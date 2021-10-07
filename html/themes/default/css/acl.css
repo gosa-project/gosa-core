@@ -38,6 +38,10 @@
     margin: 20px 0;
 }
 
+.acl-ds-create .members .btn-small {
+    margin-right: 20px;
+}
+
 .acl-content-wrapper .acl-setting-buttons {
     display: flex;
     flex-direction: row;

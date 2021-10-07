@@ -91,7 +91,7 @@ class applicationParameters extends plugin
       $this->option_name[]= "";
       $this->option_value[]= "";
     }
-    
+
 
 
     $acl = $this->getacl("gosaApplicationParameter");
@@ -132,17 +132,9 @@ class applicationParameters extends plugin
         $table.= "</table>";
         $table.="<button type=\"submit\" name=\"add_option\" $tag >"._("Add option")."</button>";
         break;
-      
+
       default:
-        $table= "<table>
-                  <thead>
-                    <tr> 
-                      <th>"._("Variable")."</th>
-                      <th>"._("Default value")."</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>";
+        $table= "<div class='parameter-content'>";
         if (count ($this->option_name)){
 
           for ($i= 0; $i < count($this->option_name); $i++){
@@ -159,27 +151,26 @@ class applicationParameters extends plugin
               $value= "";
             }
 
-            $table.=  "<tr>
-                        <td>
-                          <div class='input-field'>
-                            <input type='text' name=\"option$i\" size=25 maxlength=50 value=\"".set_post($name)."\" ".$tag.">
-                          </div>
-                        </td>
-                        <td>
-                          <div class='input-field'>
-                            <input type='text' name=\"value$i\" size=60 maxlength=250 value=\"".set_post($value)."\" ".$tag.">
-                          </div>    
-                        </td>
-                        <td><button class='btn-extra-small' type=\"submit\" name=\"remove$i\" ".$tag.">".msgPool::delButton()."</button></td>
-                      </tr>";
+            $table.=  "<div class='parameter-option'>
+                        <div class='input-field'>
+                          <input type='text' name=\"option$i\" size=25 maxlength=50 value=\"".set_post($name)."\" ".$tag.">
+                          <label for=\"option$i\">"._("Variable")."</label>
+                        </div>
+                        <div class='input-field'>
+                          <input type='text' name=\"value$i\" size=60 maxlength=250 value=\"".set_post($value)."\" ".$tag.">
+                          <label for=\"value$i\">"._("Default value")."</label>
+                        </div>
+                        <div class='action-wrapper'>
+                          <button class='btn-extra-small' type=\"submit\" name=\"remove$i\" ".$tag.">".msgPool::delButton()."</button>
+                        </div>
+                      </div>";
           }
         }
-        $table.=  " </tbody>
-                  </table>";
+        $table.=  "</div>";
         $table.="<button class='btn-small' type=\"submit\" name=\"add_option\" $tag >"._("Add option")."</button>";
         break;
     }
-    
+
 
     /* Show main page */
     $smarty= get_smarty();
@@ -206,7 +197,7 @@ class applicationParameters extends plugin
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         $this->attributes, "Save");
     $this->cleanup();
-    $ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs);
 
     if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
@@ -269,7 +260,7 @@ class applicationParameters extends plugin
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         $this->attributes, "Save");
     $this->cleanup();
-    $ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs);
 
     if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
@@ -279,7 +270,7 @@ class applicationParameters extends plugin
     $this->handle_post_events('modify');
   }
 
- 
+
   function PrepareForCopyPaste($source)
   {
     plugin::PrepareForCopyPaste($source);
@@ -307,7 +298,7 @@ class applicationParameters extends plugin
           "plCategory"    => array("application"),
 
           "plProvidedAcls"=> array(
-            "gosaApplicationParameter"      => _("Application parameter settings"))  
+            "gosaApplicationParameter"      => _("Application parameter settings"))
           ));
   }
 

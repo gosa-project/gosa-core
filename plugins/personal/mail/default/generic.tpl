@@ -65,7 +65,7 @@
          {if !$multiple_support}
             <h3>{t}Alternative addresses{/t}</h3>
 
-            <div class="input-field  alternative-addresses">
+            <div class="input-field alternative-addresses">
                {render acl=$gosaMailAlternateAddressACL}
                <select id="alternates_list" style="width:100%;height:100px;" name="alternates_list[]" size="15" multiple
                   title="{t}List of alternative mail addresses{/t}">
@@ -175,10 +175,12 @@
 
             {render acl=$gosaVacationMessageACL checkbox=$multiple_support checked=$use_gosaVacationMessage}
             <b><label for="gosaVacationMessage">{t}Vacation message{/t}</label></b>
-            <textarea {if $own_script !="" } disabled {/if} id="gosaVacationMessage" class="materialize-textarea"
-               name="gosaVacationMessage">
-               {$gosaVacationMessage}
-            </textarea>
+            <div class="input-field textarea-multiple">
+               <textarea {if $own_script !="" } disabled {/if} id="gosaVacationMessage" class="materialize-textarea multiple"
+                  name="gosaVacationMessage">
+                  {$gosaVacationMessage}
+               </textarea>
+            </div>
             {/render}
 
             {if $show_templates eq "true"}
