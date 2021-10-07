@@ -9,7 +9,7 @@
 }
 
 .input-field:not(.login) input:not([type="checkbox"]),
-.input-field textarea {
+.input-field textarea:not(.multiple) {
     min-height: 30px;
     height: 30px!important;
     font-size: 12px;
@@ -87,4 +87,22 @@
 
 .input-field .select-wrapper.multiple-select input[type="checkbox"]+span:not(.lever) {
     height: 18px;
+}
+
+
+/* Textarea multiple line */
+
+.input-field.textarea-multiple {
+    height: auto;
+}
+
+.input-field textarea.multiple {
+    max-width: 100%;
+    min-height: 30px;
+    max-height: 250px;
+    font-size: 12px;
+    padding: 0;
+    overflow-y: auto;
+    padding-top: 1em;
+    resize: vertical;
 }
