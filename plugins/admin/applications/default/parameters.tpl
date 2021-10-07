@@ -1,3 +1,7 @@
 <div class="parameter-wrapper">
-    {$table}
+    <div class="row">
+        <div class="col s12 xl12">
+            {$table}
+        </div>
+    </div>
 </div>

@@ -135,7 +135,7 @@
 
 /* Others */
 
-.object-info .content-wrapper .input-field {
+.object-info .content-wrapper .input-field:not(.textarea-multiple) {
     height: 39px;
 }
 
@@ -144,7 +144,7 @@
 }
 
 .object-info .content-wrapper .input-field input:not([type="checkbox"]),
-.object-info .content-wrapper .input-field textarea {
+.object-info .content-wrapper .input-field textarea:not(.multiple) {
     min-height: 30px;
     height: 30px!important;
     font-size: 12px;
@@ -575,8 +575,8 @@
     margin-left: 35px;
 }
 
-.object-info .leave-notification textarea {
-    max-width: 100%;
+.object-info .leave-notification .input-field textarea.multiple {
+    margin-bottom: 0;
 }
 
 .object-info .leave-settings .spam-option {
@@ -1094,6 +1094,122 @@
 }
 
 
+/* Role */
+
+.object-info .role-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+
+/* Application */
+
+.object-info .application-wrapper .symbol-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-text {
+    margin-right: 20px;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-content {
+    margin-right: 20px;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-content .symbol {
+    height: 54px;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-content .symbol img {
+    height: 48px;
+    width: auto;
+    object-fit: cover;
+}
+
+.application-wrapper .script-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.application-wrapper .script-action button {
+    margin-right: 20px;
+}
+
+.application-wrapper .script-action .file-field {
+    margin: 0;
+    margin-right: 20px;
+}
+
+.application-wrapper .script-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.application-wrapper .script-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.application-wrapper .script-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+.object-info .application-wrapper .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+}
+
+.object-info .application-wrapper .action-wrapper input {
+    width: 18px;
+    min-height: 18px;
+    height: 18px!important;
+    padding: 0;
+    vertical-align: top;
+}
+
+.object-info .application-wrapper .action-wrapper i {
+    font-size: 18px;
+    height: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    line-height: 18px;
+}
+
+
+/* Application - Parameter */
+
+.parameter-wrapper .parameter-content .parameter-option {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.parameter-wrapper .parameter-content .parameter-option .input-field {
+    width: calc(50% - 50px);
+    margin-right: 20px;
+}
+
+.parameter-wrapper .parameter-content .parameter-option .action-wrapper {
+    width: 100px;
+}
+
+
 /* Plugins */
 
 .object-info .kolab-wrapper .multi-check,
@@ -1115,7 +1231,6 @@
     flex: 1 1 auto;
 }
 
-.object-info .application-wrapper .input-field.add .file-field,
 .object-info .mime-wrapper .input-field.add .file-field {
     flex-grow: 1;
 }
@@ -1124,39 +1239,9 @@
     flex-grow: 1;
 }
 
-.object-info .application-wrapper .input-field.add img,
 .object-info .mime-wrapper .input-field.add img {
     width: 24px;
     margin: auto 15px;
-}
-
-.object-info .application-wrapper .input-field.textarea {
-    height: unset;
-}
-
-.object-info .application-wrapper .input-field.textarea .materialize-textarea {
-    min-height: 5.5rem;
-    max-height: 5.5rem;
-}
-
-.object-info .application-wrapper .action-wrapper {
-    position: relative;
-}
-
-.object-info .application-wrapper .action-wrapper .input-btn {
-    width: 24px;
-    padding: unset;
-    line-height: 24px;
-    height: 24px;
-}
-
-.object-info .application-wrapper .action-wrapper .input-icons {
-    position: absolute;
-    left: 0px;
-}
-
-.object-info .parameter-wrapper table tbody tr td {
-    padding: 0 15px;
 }
 
 .object-info .align-bottom {
@@ -1165,12 +1250,6 @@
 
 .object-info .align-bottom .col {
     align-self: flex-end;
-}
-
-.object-info .app-wrapper table td .inline-icons {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
 }
 
 

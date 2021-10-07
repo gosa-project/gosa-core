@@ -123,9 +123,9 @@
 	<div class="row">
 		{if !$multiple_support}
 			<div class="col s12 xl6">
-				<h3>{t}IMAP shared folders{/t}</h3>
-
 				<input type='hidden' name='mail_acls_posted' value='1'>
+
+				<h3>{t}IMAP shared folders{/t}</h3>
 
 				{foreach from=$folder_acls item=item key=user}
 					{render acl=$aclACL}
@@ -219,13 +219,11 @@
 		<div class="col s12">
 			<h3 class="card-title">{t}Advanced mail options{/t}</h3>
 
-			<div class="input-field">
-				{render acl=$gosaMailDeliveryModeIACL}
-					<input type="checkbox" name="only_local" value="1" {$only_local} title="{t}Select if user can only send and receive inside his own domain{/t}">
-				{/render}
+			{render acl=$gosaMailDeliveryModeIACL}
+				<input type="checkbox" name="only_local" value="1" {$only_local} title="{t}Select if user can only send and receive inside his own domain{/t}">
+			{/render}
 
-				<span>{t}User is only allowed to send and receive local mails{/t}</span>
-			</div>
+			<span>{t}User is only allowed to send and receive local mails{/t}</span>
 		</div>
 	</div>
 	<input type="hidden" name='mailedit' value='1'>

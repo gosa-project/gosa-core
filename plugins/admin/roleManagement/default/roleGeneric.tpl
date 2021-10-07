@@ -16,9 +16,11 @@
         <label for="description">{t}Description{/t}</label>
       </div>
       {/render}
-      
+
       {render acl=$baseACL}
-      {$base}
+      <div class="input-field ldap-tree">
+        {$base}
+      </div>
       {/render}
 
       {render acl=$telephoneNumberACL}
@@ -38,7 +40,7 @@
 
     <div class="col s12 xl6">
       <h3>{t}Occupants{/t}</h3>
-      
+
       {render acl=$roleOccupantACL}
         {$memberList}
       {/render}

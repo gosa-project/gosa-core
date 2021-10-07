@@ -1,10 +1,9 @@
 <div class="ogroup-wrapper">
+  <h2>{t}Generic settings{/t}</h2>
+
   <div class="row">
-
     <input type="hidden" name="ogroupedit" value="1">
-
     <div class="col s12 xl6">
-      <h3>{t}Generic settings{/t}</h3>
 
       {render acl=$cnACL}
       <div class="input-field">
@@ -26,6 +25,8 @@
           {$base}
         </div>
       {/render}
+
+      <hr class="divider">
 
       {$trustModeDialog}
     </div>
