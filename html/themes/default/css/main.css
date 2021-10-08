@@ -278,6 +278,13 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     border: 2px solid #2A3278;
 }
 
+[type="radio"]+span:before,
+[type="radio"]+span:after {
+    width: 18px;
+    height: 18px;
+    margin: 2px 0;
+}
+
 .select-wrapper input.select-dropdown:focus {
     border-bottom: 1px solid #2A3278;
 }

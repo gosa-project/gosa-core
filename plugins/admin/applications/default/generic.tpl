@@ -58,8 +58,8 @@
                         <div class="file-field">
                             <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                             <div class="btn-small">
-                            <span>{t}Browse{/t}</span>
-                            <input name="picture_file" type="file" size="20" maxlength="255" accept="image/*.png" id="picture_file">
+                                <span>{t}Browse{/t}</span>
+                                <input name="picture_file" type="file" size="20" maxlength="255" accept="image/*.png" id="picture_file">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text">
