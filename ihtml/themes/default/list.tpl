@@ -11,7 +11,6 @@
   <div class="actions center-align">{$ACTIONS}</div>
   {$FILTER}
 </div>
-<hr>
 
 {$LIST}
 
