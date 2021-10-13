@@ -1,153 +1,245 @@
 
-{if !$ACL}
-	<h3>{msgPool type=permView}</h3>
-{else}
+<div class="system-wrapper">
+     <div class="system-info">
+          {if !$ACL}
+               <h2>{msgPool type=permView}</h2>
+          {else}
+               <div class="row">
+                    <div class="col s12 xl6">
+                         <h2>{t}System information{/t}</h2>
 
-<h3>{t}System information{/t}</h3>
-<table summary="{t}System information{/t}" style="width:100%;">
- <tr>
-  <td style='width:50%'>
+                         <table class="sys-info-table striped">
+                              <tbody>
+                                   <tr>
+                                        <td>
+                                             {t}CPU{/t}
+                                        </td>
+                                        <td>
+                                             {$ghCpuType}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}Memory{/t}
+                                        </td>
+                                        <td>
+                                             {$ghMemSize}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}Boot MAC{/t}
+                                        </td>
+                                        <td>
+                                             {$macAddress}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}USB support{/t}
+                                        </td>
+                                        <td>
+                                             {$ghUsbSupport}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}System status{/t}
+                                        </td>
+                                        <td>
+                                             {$status}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}Inventory number{/t}
+                                        </td>
+                                        <td>
+                                             {$ghInventoryNumber}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}Last login{/t}
+                                        </td>
+                                        <td>
+                                             {$gotoLastUser}
+                                        </td>
+                                   </tr>
+                              </tbody>
+                         </table>
+                    </div>
 
-   <table summary="{t}Hardware information{/t}">
-    <tr>
-     <td>
-<b>{t}CPU{/t}</b></td><td>{$ghCpuType}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Memory{/t}</b></td><td>{$ghMemSize}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Boot MAC{/t}</b></td><td>{$macAddress}</td>
-    </tr>
-    <tr>
-     <td>
-<b>{t}USB support{/t}</b></td><td>{$ghUsbSupport}<div style="height:20px;"></div></td>
-    </tr>
-    <tr>
-     <td><b>{t}System status{/t}</b></td>
-     <td>{$status}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Inventory number{/t}</b></td>
-     <td>{$ghInventoryNumber}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Last login{/t}</b></td>
-     <td>{$gotoLastUser}</td>
-    </tr>
-   </table>
-  </td>
-  <td class='left-border'>
+                    <div class="col s12 xl6">
+                         <h2>Hardware-Information</h2>
 
-   &nbsp;
-  </td>
-  <td>
-   <table summary="{t}Device information{/t}">
-    <tr>
-     <td>
-<b>{t}Network devices{/t}</b></td>
-     <td>
-      {foreach item=netcard from=$ghNetNic}
-        {$netcard}<br>
-      {/foreach}
-     </td>
-    </tr>
-    <tr><td colspan=2><div style="height:10px;"></div></td></tr>
-    <tr>
-     <td>
-<b>{t}IDE devices{/t}</b></td>
-     <td>
-       {foreach item=idedev from=$ghIdeDev}
-         {$idedev}<br>
-       {/foreach}
-     </td>
-    </tr>
-    <tr><td colspan=2><div style="height:10px;"></div></td></tr>
-    <tr>
-     <td>
-<b>{t}SCSI devices{/t}</b></td>
-     <td>
-       {foreach item=scsidev from=$ghScsiDev}
-         {$scsidev}<br>
-       {/foreach}
-     </td>
-    </tr>
-    <tr>
-     <td><b>{t}Floppy device{/t}</b></td>
-     <td>{$FloppyDevice}</td>
-    </tr>
-    <tr>
-     <td><b>{t}CD-ROM device{/t}</b></td>
-     <td>{$CdromDevice}</td>
-    </tr>
-    <tr><td colspan=2><div style="height:10px;"></div></td></tr>
-    <tr>
-     <td>
-<b>{t}Graphic device{/t}</b></td>
-     <td>{$ghGfxAdapter}</td>
-    </tr>
-    <tr>
-     <td>
-<b>{t}Audio device{/t}</b></td>
-     <td>{$ghSoundAdapter}</td>
-    </tr>
-   </table>
-  </td>
- </tr>
-</table>
+                         <table class="sys-info-table striped">
+                              <tbody>
+                                   <tr>
+                                        <td>
+                                             {t}Network devices{/t}
+                                        </td>
+                                        <td>
+                                             {foreach item=netcard from=$ghNetNic}
+                                                  {$netcard}
+                                             {/foreach}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}IDE devices{/t}
+                                        </td>
+                                        <td>
+                                             {foreach item=idedev from=$ghIdeDev}
+                                                  {$idedev}
+                                             {/foreach}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}SCSI devices{/t}
+                                        </td>
+                                        <td>
+                                             {foreach item=scsidev from=$ghScsiDev}
+                                                  {$scsidev}
+                                             {/foreach}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}Floppy device{/t}
+                                        </td>
+                                        <td>
+                                             {$FloppyDevice}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}CD-ROM device{/t}
+                                        </td>
+                                        <td>
+                                             {$CdromDevice}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}Graphic device{/t}
+                                        </td>
+                                        <td>
+                                             {$ghGfxAdapter}
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                             {t}Audio device{/t}
+                                        </td>
+                                        <td>
+                                             {$ghSoundAdapter}
+                                        </td>
+                                   </tr>
+                              </tbody>
+                         </table>
+                    </div>
+               </div>
 
-{if $active eq "true"}
-<br>
-<h3 style="border-top:1px solid #A0A0A0; padding-top:5px;">{image path="images/lists/on.png"} {t}System status{/t}
-</h3>
-<table summary="{t}System information{/t}" style="width:100%">
- <tr>
-  <td style='width:50%'>
+               {if $active eq "true"}
+                    <div class="head-content">
+                         {image path="<i class='material-icons input-icons'>lightbulb_outline</i>"}
+                         <h2>{t}System status{/t}</h2>
+                    </div>
 
-   <table summary="{t}Status{/t}">
-    <tr>
-     <td><b>{t}Up since{/t}</b></td><td>{$uptime}</td>
-    </tr>
-    <tr>
-     <td><b>{t}CPU load{/t}</b></td><td>{$load}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Memory usage{/t}</b></td><td>{$mem}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Swap usage{/t}</b></td><td>{$swap}</td>
-    </tr>
-    <tr>
-     <td colspan=2>&nbsp;</td>
-    </tr>
-    {$partitions}
-   </table>
-  </td>
-  <td class='left-border'>
+                    <div class="row">
+                         <div class="col s12 xl6">
+                              <h3>{t}System information{/t}</h3>
 
-   &nbsp;
-  </td>
-  <td>
+                              <table class="sys-info-table striped">
+                                   <tbody>
+                                        <tr>
+                                        <td>
+                                             {t}Up since{/t}
+                                        </td>
+                                        <td>
+                                             {$uptime}
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>
+                                             {t}CPU load{/t}
+                                        </td>
+                                        <td>
+                                             {$load}
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>
+                                             {t}Memory usage{/t}
+                                        </td>
+                                        <td>
+                                             {$mem}
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>
+                                             {t}Swap usage{/t}
+                                        </td>
+                                        <td>
+                                             {$swap}
+                                        </td>
+                                        </tr>
+                                   </tbody>
+                              </table>
+                         </div>
 
-   <table summary="{t}Service information{/t}">
-    <tr>
-     <td><b>{t}SSH service{/t}</b></td><td>{$sshd}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Print service{/t}</b></td><td>{$cupsd}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Scan service{/t}</b></td><td>{$saned}</td>
-    </tr>
-    <tr>
-     <td><b>{t}Sound service{/t}</b></td><td>{$artsd}</td>
-    </tr>
-    <tr>
-     <td><b>{t}GUI{/t}</b></td><td>{$X}</td>
-    </tr>
-   </table>
-  </td>
- </tr>
-</table>
-{/if}
-{/if}
+                         <div class="col s12 xl6">
+                              <h3>Service information</h3>
+
+                              <table class="sys-info-table striped">
+                                   <tbody>
+                                        <tr>
+                                        <td>
+                                             {t}SSH service{/t}
+                                        </td>
+                                        <td>
+                                             {$sshd}
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>
+                                             {t}Print service{/t}
+                                        </td>
+                                        <td>
+                                             {$cupsd}
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>
+                                             {t}Scan service{/t}
+                                        </td>
+                                        <td>
+                                             {$saned}
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>
+                                             {t}Sound service{/t}
+                                        </td>
+                                        <td>
+                                             {$artsd}
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>
+                                             {t}GUI{/t}
+                                        </td>
+                                        <td>
+                                             {$X}
+                                        </td>
+                                        </tr>
+                                   </tbody>
+                              </table>
+                         </div>
+                    </div>
+               {/if}
+          {/if}
+     </div>
+</div>

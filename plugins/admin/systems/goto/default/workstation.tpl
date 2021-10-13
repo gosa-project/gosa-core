@@ -1,148 +1,156 @@
-<h3>{t}Properties{/t}</h3>
-<table summary="{t}Properties{/t}" style="width:100%;">
- <tr>
-  <td style='width:50%; '>
+<div class="system-wrapper">
+     <div class="system-workstation">
+          <h3>{t}Properties{/t}</h3>
 
-   <table summary="{t}Generic settings{/t}">
-    <tr>
-{if $cn eq 'wdefault'}
-     <td colspan=2>{t}Workstation template{/t}</td>
-{else}
-     <td><LABEL for="cn">{t}Workstation name{/t}</LABEL>{$must}</td>
-     <td>
-{render acl=$cnACL}
-      <input type='text' name="cn" id="cn" size=18 value="{$cn}">
-{/render}
-     </td>
-{/if}
-    </tr>
-    <tr>
-     <td><LABEL for="description">{t}Description{/t}</LABEL></td>
-     <td>
-{render acl=$descriptionACL}
-      <input type='text' name="description" id="description" size=18 maxlength=60 value="{$description}">
-{/render}
-     </td>
-    </tr>
-    <tr>
-     <td><LABEL for="cn">{t}Location{/t}</LABEL></td>
-     <td>
-{render acl=$lACL}
-      <input type='text' name="l" id="l" size=18 maxlength=60 value="{$l}">
-{/render}
-     </td>
-    </tr>
-    <tr>
-     <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
-     <td>
-{render acl=$baseACL}
-       {$base}
-{/render}
-     </td>
-    </tr>
-   </table>
+          <div class="row">
+               <div class="col s12 xl6">
+                    {if $cn eq 'wdefault'}
+                         <p>{t}Workstation template{/t}</p>
+                    {else}
+                         {render acl=$cnACL}
+                              <div class="input-field">
+                                   <input type="text" name="cn" id="cn" value="{$cn}">
+                                   <label for="cn">{t}Workstation name{/t}{$must}</label>
+                              </div>
+                         {/render}
+                    {/if}
 
-   <hr>
-	  {$host_key}
+                    {render acl=$descriptionACL}
+                         <div class="input-field">
+                              <input type="text" name="description" id="description" value="{$description}" maxlength=60>
+                              <label for="description">{t}Description{/t}</label>
+                         </div>
+                    {/render}
 
-  </td>
-  <td class='left-border'>
+                    {render acl=$lACL}
+                         <div class="input-field">
+                              <input type="text" name="l" id="l" value="{$l}" maxlength=60>
+                              <label for="l">{t}Location{/t}</label>
+                         </div>
+                    {/render}
 
-   <table summary="{t}Terminal server settings{/t}">
-    <tr>
-     <td>{t}Mode{/t}</td>
-     <td>
-{render acl=$gotoModeACL}
-      <select name="gotoMode" title="{t}Select terminal mode{/t}" size=1>
-       {html_options options=$modes selected=$gotoMode_select}
-      </select>
-{/render}
-     </td>
-    </tr>
-    <tr>
-     <td><LABEL for="gotoSyslogServer">{t}Syslog server{/t}</LABEL></td>
-     <td>
-{render acl=$gotoSyslogServerACL}
-      <select id="gotoSyslogServer" name="gotoSyslogServer" title="{t}Choose server to use for logging{/t}" size=1>
-       {html_options options=$syslogservers selected=$gotoSyslogServer_select}
-      </select>
-{/render}
-     </td>
-    </tr>
-   </table>
+                    {render acl=$baseACL}
+                         <div class="input-field ldap-tree">
+                              <label for="base">{t}Base{/t}{$must}</label>
+                              {$base}
+                         </div>
+                    {/render}
 
-   <hr>
+                    {if $host_key}
+                         <hr class="divider">
 
-    {if $member_of_ogroup}
-    {render acl=$gotoNtpServerACL}
-            <input type="checkbox" value="1" name="inheritTimeServer"
-                {if $inheritTimeServer} checked {/if}
-                onClick="javascript:
-                        changeState('gotoNtpServerSelected');
-                        changeState('gotoNtpServers');
-                        changeState('addNtpServer');
-                        changeState('delNtpServer');">{t}Inherit time server attributes{/t}
-    {/render}
-    {else}
-      <input disabled type='checkbox' name='option_disabled'>{t}Inherit time server attributes{/t}
-    {/if}
-         <LABEL for="gotoNtpServerSelected">{t}NTP server{/t}</LABEL>
-    {render acl=$gotoNtpServerACL}
-          <select name="gotoNtpServerSelected[]" id="gotoNtpServerSelected" multiple size=5 style="width:100%;"
-                title="{t}Choose server to use for synchronizing time{/t}" {if $inheritTimeServer} disabled {/if}>
-           {html_options options=$gotoNtpServer_select}
-          </select>
-    {/render}
-         <br>
-    {render acl=$gotoNtpServerACL}
-          <select name="gotoNtpServers" id="gotoNtpServers" {if $inheritTimeServer} disabled {/if}  size=1>
-           {html_options options=$gotoNtpServers}
-          </select>
-    {/render}
-    {render acl=$gotoNtpServerACL}
-            <button type='submit' name='addNtpServer' id="addNtpServer"
-             {if $inheritTimeServer} disabled {/if}>{msgPool type=addButton}</button>
-    {/render}
-    {render acl=$gotoNtpServerACL}
-            <button type='submit' name='delNtpServer' id="delNtpServer"
-             {if $inheritTimeServer} disabled {/if}>{msgPool type=delButton}</button>
-    {/render}
+                         {$host_key}
+                    {/if}
+               </div>
 
-  </td>
- </tr>
-</table>
+               <div class="col s12 xl6">
+                    {render acl=$gotoModeACL}
+                         <div class="input-field">
+                              <select name="gotoMode" title="{t}Select terminal mode{/t}" size=1>
+                                   {html_options options=$modes selected=$gotoMode_select}
+                              </select>
+                              <label for="gotoMode">{t}Mode{/t}</label>
+                         </div>
+                    {/render}
 
-{if $cn neq 'wdefault'}
-<hr>
+                    {render acl=$gotoSyslogServerACL}
+                         <div class="input-field">
+                              <select name="gotoSyslogServer" id="gotoSyslogServer" title="{t}Choose server to use for logging{/t}" size=1>
+                                   {html_options options=$syslogservers selected=$gotoSyslogServer_select}
+                              </select>
+                              <label for="gotoSyslogServer">{t}Syslog server{/t}</label>
+                         </div>
+                    {/render}
 
-{$netconfig}
-{/if}
-<hr>
+                    <hr class="divider">
 
-{if $fai_activated && $si_activated}
-  <h3>{t}Action{/t}</h3>
-  {render acl=$FAIstateACL}
-     <select size="1" name="saction" title="{t}Select action to execute for this terminal{/t}">
-      <option>&nbsp;</option>
-      {html_options options=$actions}
-     </select>
-  {/render}
-  {if $currently_installing}
-    {render acl=r}
-       <button type='submit' name='action'>{t}Execute{/t}</button>
-    {/render}
-    {else}
-    {render acl=$FAIstateACL}
-       <button type='submit' name='action'>{t}Execute{/t}</button>
-    {/render}
-  {/if}
-{/if}
+                    {if $member_of_ogroup}
+                         {render acl=$gotoNtpServerACL}
+                              <label>
+                                   <input type="checkbox" name="inheritTimeServer" value="1" {if $inheritTimeServer} checked {/if}
+                                   onClick="javascript:
+                                        changeState('gotoNtpServerSelected');
+                                        changeState('gotoNtpServers');
+                                        changeState('addNtpServer');
+                                        changeState('delNtpServer');">
+                                   <span>{t}Inherit time server attributes{/t}</span>
+                              </label>
+                         {/render}
+                    {else}
+                         <label>
+                              <input type="checkbox" name="option_disabled" disabled>
+                              <span>{t}Inherit time server attributes{/t}</span>
+                         </label>
+                    {/if}
 
-{if $member_of_ogroup}
-   <button type='submit' name='inheritAll'>{t}Inherit all values from group{/t}</button>
-{/if}
+                    {render acl=$gotoNtpServerACL}
+                         <div class="input-field">
+                              <select name="gotoNtpServerSelected[]" id="gotoNtpServerSelected" title="{t}Choose server to use for synchronizing time{/t}" size=1 multiple {if $inheritTimeServer} disabled {/if}>
+                                   {html_options options=$gotoNtpServer_select}
+                              </select>
+                              <label for="gotoNtpServerSelected">{t}NTP server{/t}</label>
+                         </div>
 
-<input type="hidden" name="workgeneric_posted" value="1">
+                         <div class="input-field add">
+                              <select name="gotoNtpServers" id="gotoNtpServers" size=1 {if $inheritTimeServer} disabled {/if}>
+                                   {html_options options=$gotoNtpServers}
+                              </select>
+
+                              <button class="btn-small" type="submit" name="addNtpServer" id="addNtpServer"
+                              {if $inheritTimeServer} disabled {/if}>{msgPool type=addButton}</button>
+
+                              <button class="btn-small" type="submit" name="delNtpServer" id="delNtpServer"
+                              {if $inheritTimeServer} disabled {/if}>{msgPool type=delButton}</button>
+                         </div>
+                    {/render}
+               </div>
+          </div>
+     </div>
+
+     {if $cn neq 'wdefault' || $fai_activated && $si_activated || $member_of_ogroup}
+          <hr class="divider">
+
+          <div class="row">
+               {if $cn neq 'wdefault'}
+                    <div class="col s12 xl6">
+                         {$netconfig}
+                    </div>
+               {/if}
+
+               {if $fai_activated && $si_activated}
+                    <div class="col s12 xl6">
+                         <h3>{t}Action{/t}</h3>
+
+                         {render acl=$FAIstateACL}
+                              <div class="input-field add">
+                                   <select name="saction" title="{t}Select action to execute for this terminal{/t}" size=1>
+                                        <option>&nbsp;</option>
+                                        {html_options options=$actions}
+                                   </select>
+
+                                   {if $currently_installing}
+                                        {render acl=r}
+                                             <button class="btn-small" type="submit" name="action">{t}Execute{/t}</button>
+                                        {/render}
+                                   {else}
+                                        {render acl=$FAIstateACL}
+                                             <button class="btn-small" type="submit" name="action">{t}Execute{/t}</button>
+                                        {/render}
+                                   {/if}
+                              </div>
+                         {/render}
+                    </div>
+               {/if}
+
+               {if $member_of_ogroup}
+                    <button class="btn-small" type="submit" name="inheritAll">{t}Inherit all values from group{/t}</button>
+               {/if}
+          </div>
+     {/if}
+
+     <input type="hidden" name="workgeneric_posted" value="1">
+</div>
+
 {if $cn eq 'wdefault'}
 
 <!-- Place cursor -->
@@ -158,4 +166,3 @@
     -->
   </script>
 {/if}
-

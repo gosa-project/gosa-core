@@ -1,82 +1,86 @@
-<table summary="{t}Server{/t}" width="100%">
- <tr>
-  <td style='width:50%;'>
+<div class="system-wrapper">
+  <div class="row">
+    <div class="col s12 xl6">
+      <div class="sys-server-wrapper">
+        <h3>{t}Generic{/t}</h3>
 
-  <h3>{t}Generic{/t}</h3>
-	<table summary="{t}Server settings{/t}">
-	 <tr>
-	  <td><LABEL for="cn">{t}Server name{/t}</LABEL>{$must}</td>
-	  <td>
-{render acl=$cnACL}
-	   <input type='text' name="cn" id="cn" size=20 value="{$cn}">
-{/render}
-	  </td>
-	 </tr>
-	 <tr>
-	  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
-	  <td>
-{render acl=$descriptionACL}
-           <input type='text' name="description" id="description" size=25 maxlength=80 value="{$description}">
-{/render}
-          </td>
-	 </tr>
-   	<tr>
-     <td>{t}Mode{/t}</td>
-     <td>
-{render acl=$gotoModeACL}
-      <select name="gotoMode" title="{t}Select terminal mode{/t}" size=1>
-       {html_options options=$modes selected=$gotoMode}
-      </select>
-{/render}
-     </td>
-    </tr>
- 	 <tr>
-	  <td><br><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
-	  <td>
-	   <br>
-{render acl=$baseACL}
-           {$base}
-{/render}
-	   </td>
-	  </tr>
-	</table>
+        {render acl=$cnACL}
+          <div class="input-field">
+              <input type="text" name="cn" id="cn" value="{$cn}">
+              <label for="cn">{t}Server name{/t}{$must}</label>
+          </div>
+        {/render}
 
-  </td>
-  <td class='left-border'>
-	{$host_key}
-  </td>
- </tr>
-</table>
+        {render acl=$descriptionACL}
+          <div class="input-field">
+              <input type="text" name="description" id="description" value="{$description}" maxlength=80 >
+              <label for="description">{t}Description{/t}</label>
+          </div>
+        {/render}
 
-<hr>
-<br>
+        {render acl=$gotoModeACL}
+          <div class="input-field">
+              <select name="gotoMode" title="{t}Select terminal mode{/t}" size=1>
+                {html_options options=$modes selected=$gotoMode}
+              </select>
+              <label for="gotoMode">{t}Mode{/t}</label>
+          </div>
+        {/render}
 
-{$netconfig}
+        {render acl=$baseACL}
+          <div class="input-field ldap-tree">
+            <label for="base">{t}Base{/t}{$must}</label>
+            {$base}
+          </div>
+        {/render}
 
-{if $fai_activated && $si_activated}
-  <hr>
+        {if $host_key}
+          <hr class="divider">
 
-  <h3>{t}Action{/t}</h3>
+          {$host_key}
+        {/if}
+      </div>
+    </div>
 
-  {if $currently_installing}
-    <i>{t}System installation in progress, the FAI state cannot be changed right now.{/t}</i>
-  {else}
-    {render acl=$FAIstateACL}
-       <select size="1" name="saction" title="{t}Select action to execute for this server{/t}">
-        <option>&nbsp;</option>
-        {html_options options=$actions}
-       </select>
-    {/render}
-    {render acl=$FAIstateACL}
-       <button type='submit' name='action'>{t}Execute{/t}</button>
+    {if $netconfig}
+      <div class="col s12 xl6">
+        {$netconfig}
+      </div>
 
-    {/render}
+      </div>
+
+      {if $fai_activated && $si_activated}
+        <hr class="divider">
+
+        <div class="row">
+      {/if}
+    {/if}
+
+  {if $fai_activated && $si_activated}
+    <div class="col s12 xl6">
+      <h3>{t}Action{/t}</h3>
+
+      {if $currently_installing}
+        <p>{t}System installation in progress, the FAI state cannot be changed right now.{/t}</p>
+      {else}
+        {render acl=$FAIstateACL}
+          <div class="input-field add">
+            <select name="saction" title="{t}Select action to execute for this server{/t}" size=1>
+              <option>&nbsp;</option>
+              {html_options options=$actions}
+            </select>
+            <button class="btn-small" type="submit" name="action">{t}Execute{/t}</button>
+          </div>
+        {/render}
+      {/if}
+    </div>
+  </div>
   {/if}
-{/if}
 
-<!-- Place cursor -->
-<script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-	focus_field('cn');
-  -->
-</script>
+  <!-- Place cursor -->
+  <script language="JavaScript" type="text/javascript">
+    <!-- // First input field on page
+    focus_field('cn');
+    -->
+  </script>
+</div>

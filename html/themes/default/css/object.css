@@ -416,7 +416,8 @@
 .object-info .posix-settings .acl-member,
 .object-info .group-wrapper .acl-member,
 .object-info .ogroup-wrapper .acl-member,
-.faxaccount-wrapper .acl-member {
+.faxaccount-wrapper .acl-member,
+.system-wrapper .acl-member {
     margin-bottom: 20px;
 }
 
@@ -1212,6 +1213,112 @@
 
 .parameter-wrapper .parameter-content .parameter-option .action-wrapper {
     width: 100px;
+}
+
+
+/* Systems */
+
+.system-wrapper .network-wrapper .input-field.add .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+.system-wrapper .network-wrapper .input-field.add .action-wrapper input {
+    width: 18px;
+    min-height: 18px;
+    height: 18px!important;
+    padding: 0;
+    vertical-align: top;
+}
+
+.system-wrapper .network-wrapper .input-field.add .action-wrapper i {
+    font-size: 18px;
+    height: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    line-height: 18px;
+}
+
+.system-wrapper .network-wrapper .mac-manufacturer {
+    margin-top: -8px;
+}
+
+.system-wrapper .network-wrapper label i {
+    margin-left: 10px;
+}
+
+.system-wrapper .fai-wrapper .row+h3,
+.system-wrapper .fai-wrapper .row+h4 {
+    margin-top: 12px;
+}
+
+.system-wrapper .fai-wrapper p+button {
+    margin-top: 10px;
+}
+
+.object-info .checkbox-column label {
+    margin-bottom: 0;
+}
+
+.system-wrapper .system-info .head-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.system-wrapper .system-info .head-content h2 {
+    margin-bottom: 0;
+}
+
+.system-wrapper .system-info .head-content i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.system-wrapper .system-info .sys-info-table .progress {
+    margin: 0;
+    text-align: center;
+}
+
+.system-wrapper .system-devices .display-type {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.system-wrapper .system-devices .display-type p:last-child {
+    margin-left: 10px;
+}
+
+.system-wrapper .system-devices .input-field.add span {
+    margin-left: 10px;
+}
+
+.system-wrapper .system-printer .driver-config {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.system-wrapper .system-printer .driver-config button {
+    margin-left: 20px;
+}
+
+.system-wrapper .system-terminal .member-of-ogroup button {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 8px;
 }
 
 

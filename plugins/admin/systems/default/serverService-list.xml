@@ -53,7 +53,7 @@
     <action>
       <name>remove</name>
       <type>entry</type>
-      <image>images/lists/trash.png</image>
+      <image>delete</image>
       <label>Remove</label>
     </action>
 
@@ -64,21 +64,21 @@
     <action>
       <name>start</name>
       <type>entry</type>
-      <image>images/status_start.png</image>
+      <image>play_arrow</image>
       <label>Start</label>
     </action>
 
     <action>
       <name>stop</name>
       <type>entry</type>
-      <image>images/status_stop.png</image>
+      <image>stop</image>
       <label>Stop</label>
     </action>
 
     <action>
       <name>restart</name>
       <type>entry</type>
-      <image>images/lists/reload.png</image>
+      <image>replay</image>
       <label>Restart</label>
     </action>
 
@@ -97,24 +97,24 @@
     <action>
       <name>start</name>
       <type>entry</type>
-      <image>images/status_start.png</image>
-      <objectclass>AllowStart</objectclass> 
+      <image>play_arrow</image>
+      <objectclass>AllowStart</objectclass>
       <label>Start</label>
     </action>
 
     <action>
       <name>stop</name>
       <type>entry</type>
-      <image>images/status_stop.png</image>
-      <objectclass>AllowStop</objectclass> 
+      <image>stop</image>
+      <objectclass>AllowStop</objectclass>
       <label>Stop</label>
     </action>
 
     <action>
       <name>restart</name>
       <type>entry</type>
-      <image>images/lists/reload.png</image>
-      <objectclass>AllowRestart</objectclass> 
+      <image>replay</image>
+      <objectclass>AllowRestart</objectclass>
       <label>Restart</label>
     </action>
 
@@ -122,15 +122,15 @@
       <name>edit</name>
       <type>entry</type>
       <image>images/lists/edit.png</image>
-      <objectclass>AllowEdit</objectclass> 
+      <objectclass>AllowEdit</objectclass>
       <label>Edit service</label>
     </action>
 
     <action>
       <name>remove</name>
       <type>entry</type>
-      <image>images/lists/trash.png</image>
-      <objectclass>AllowRemove</objectclass> 
+      <image>delete</image>
+      <objectclass>AllowRemove</objectclass>
       <label>Remove service</label>
     </action>
 

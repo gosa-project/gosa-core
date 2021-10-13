@@ -12,8 +12,6 @@
   {$FILTER}
 </div>
 
-<hr>
-
 <div class="plus-actions">
   {$LIST}
 </div>
