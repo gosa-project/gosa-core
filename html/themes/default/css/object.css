@@ -1302,7 +1302,8 @@
     margin-left: 10px;
 }
 
-.system-wrapper .system-printer .driver-config {
+.system-wrapper .system-printer .driver-config,
+.system-wrapper .system-printer-driver .driver-config {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -1311,7 +1312,8 @@
     align-items: center;
 }
 
-.system-wrapper .system-printer .driver-config button {
+.system-wrapper .system-printer .driver-config button,
+.system-wrapper .system-printer-driver .driver-config button {
     margin-left: 20px;
 }
 
@@ -1319,6 +1321,58 @@
     height: 30px;
     line-height: 30px;
     margin-bottom: 8px;
+}
+
+.system-wrapper .system-printer-driver h3 {
+    margin-top: 0;
+}
+
+.system-wrapper .system-printer-driver .input-field.add {
+    justify-content: flex-start;
+    margin-bottom: 8px;
+}
+
+.system-wrapper .system-printer-driver .input-field.add+.input-field {
+    margin-top: 23px;
+}
+
+.system-wrapper .system-printer-driver .input-field .new-driver-action {
+    padding-top: 6px;
+}
+
+.system-wrapper .system-printer-driver .input-field.add button {
+    margin-bottom: 0;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action button {
+    margin-left: 20px;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field {
+    margin: 0;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
 }
 
 
