@@ -955,6 +955,10 @@
     margin-bottom: 0;
 }
 
+.object-info .blocklist-wrapper .blocklist-info h3 {
+    margin-bottom: 8px;
+}
+
 
 /* Startmenu */
 

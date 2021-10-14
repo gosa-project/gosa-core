@@ -60,8 +60,13 @@
       {/render}
     </div>
 
-    <h3>{t}Information{/t}</h3>
-    <p>{t}Numbers can also contain wild cards.{/t}</p>
+    <div class="col s12 xl6">
+      <div class="blocklist-info">
+        <h3>{t}Information{/t}</h3>
+
+        <p>{t}Numbers can also contain wild cards.{/t}</p>
+      </div>
+    </div>
   </div>
 </div>
 
