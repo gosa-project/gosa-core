@@ -1380,6 +1380,43 @@
 }
 
 
+/* LDAP Tools */
+
+.ldap-export-wrapper p+.row,
+.ldapxls-export-wrapper p+.col {
+    margin-top: 20px;
+}
+
+.ldapxls-export-wrapper .ldap-tree-inline,
+.ldap-export-wrapper .ldap-tree-inline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ldap-export-wrapper .ldap-tree,
+.ldapxls-export-wrapper .ldap-tree {
+    flex-grow: 1;
+}
+
+.ldapxls-export-wrapper .ldap-tree-inline button,
+.ldap-export-wrapper .ldap-tree-inline button {
+    margin-left: 20px;
+}
+
+.ldap-database-import,
+.csv-import {
+    margin-top: 20px;
+}
+
+.csv-import .file-field.input-field {
+    margin-top: 0;
+}
+
+
 /* Plugins */
 
 .object-info .kolab-wrapper .multi-check,
