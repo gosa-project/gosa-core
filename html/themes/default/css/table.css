@@ -14,7 +14,9 @@
 #startmenu-table th,
 #startmenu-table td,
 .sys-info-table th,
-.sys-info-table td {
+.sys-info-table td,
+#fax-report-table th,
+#fax-report-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -31,7 +33,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table tr,
 #managepw-table tr,
 #startmenu-table tr,
-.sys-info-table tr {
+.sys-info-table tr,
+#fax-report-table tr {
     height: 38px;
     max-height: 38px;
 }
@@ -55,7 +58,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table i.material-icons,
 #managepw-table i.material-icons,
 #startmenu-table i.material-icons,
-.sys-info-table i.material-icons {
+.sys-info-table i.material-icons,
+#fax-report-table i.material-icons {
     font-size: 18px;
 }
 
@@ -64,7 +68,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table input.input-btn,
 #managepw-table input.input-btn,
 #startmenu-table input.input-btn,
-.sys-info-table input.input-btn {
+.sys-info-table input.input-btn,
+#fax-report-table input.input-btn {
     z-index: 1;
     position: relative;
     width: 18px;
@@ -75,7 +80,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table i.input-icons,
 #managepw-table i.input-icons,
 #startmenu-table i.input-icons,
-.sys-info-table i.input-icons {
+.sys-info-table i.input-icons,
+#fax-report-table i.input-icons {
     position: absolute;
     left: 16px;
     margin-top: 8px;
@@ -102,7 +108,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table select:focus,
 #managepw-table select:focus,
 #startmenu-table select:focus,
-.sys-info-table select:focus {
+.sys-info-table select:focus,
+#fax-report-table select:focus {
     outline: none;
 }
 
@@ -110,7 +117,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .select-wrapper,
 #managepw-table .select-wrapper,
 #startmenu-table .select-wrapper,
-.sys-info-table .select-wrapper {
+.sys-info-table .select-wrapper,
+#fax-report-table .select-wrapper {
     width: fit-content;
 }
 
@@ -118,7 +126,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .select-wrapper input,
 #managepw-table .select-wrapper input,
 #startmenu-table .select-wrapper input,
-.sys-info-table .select-wrapper input {
+.sys-info-table .select-wrapper input,
+#fax-report-table .select-wrapper input {
     width: auto;
     width: 200px;
     max-width: 200px;
@@ -133,7 +142,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .select-wrapper ul li,
 #managepw-table .select-wrapper ul li,
 #startmenu-table .select-wrapper ul li,
-.sys-info-table .select-wrapper ul li {
+.sys-info-table .select-wrapper ul li,
+#fax-report-table .select-wrapper ul li {
     padding: 5px 10px;
     min-height: 31px;
     max-height: 31px;
@@ -143,7 +153,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .input-field,
 #managepw-table .input-field,
 #startmenu-table .input-field,
-.sys-info-table .input-field {
+.sys-info-table .input-field,
+#fax-report-table .input-field {
     margin-top: 0;
 }
 
@@ -152,7 +163,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .input-field input,
 #managepw-table .input-field input,
 #startmenu-table .input-field input,
-.sys-info-table .input-field input {
+.sys-info-table .input-field input,
+#fax-report-table .input-field input {
     margin-bottom: 0;
     min-height: 20px;
     height: 20px!important;
@@ -163,7 +175,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table label input,
 #managepw-table label input,
 #startmenu-table label input,
-.sys-info-table label input {
+.sys-info-table label input,
+#fax-report-table label input {
     margin-left: 1rem;
     width: 18px;
     height: 18px;
@@ -202,7 +215,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .action-wrapper,
 #managepw-table .action-wrapper,
 #startmenu-table .action-wrapper,
-.sys-info-table .action-wrapper {
+.sys-info-table .action-wrapper,
+#fax-report-table .action-wrapper {
     position: relative;
     height: 18px;
     font-size: 18px;
@@ -214,7 +228,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .action-wrapper input,
 #managepw-table .action-wrapper input,
 #startmenu-table .action-wrapper input,
-.sys-info-table .action-wrapper input {
+.sys-info-table .action-wrapper input,
+#fax-report-table .action-wrapper input {
     width: 18px;
     height: 18px;
     padding: 0;
@@ -226,7 +241,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .action-wrapper i,
 #managepw-table .action-wrapper i,
 #startmenu-table .action-wrapper i,
-.sys-info-table .action-wrapper i {
+.sys-info-table .action-wrapper i,
+#fax-report-table .action-wrapper i {
     position: absolute;
     top: 0;
     left: 0;
@@ -237,7 +253,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table .action-wrapper:last-child,
 #managepw-table .action-wrapper:last-child,
 #startmenu-table .action-wrapper:last-child,
-.sys-info-table .action-wrapper:last-child {
+.sys-info-table .action-wrapper:last-child,
+#fax-report-table .action-wrapper:last-child {
     margin-right: 0;
 }
 
@@ -245,7 +262,8 @@ th, th a, th a.btn-flat, td, td a {
 #generic-table td.last-column,
 #sudo-table td.last-column,
 #managepw-table td.last-column,
-.sys-info-table td.last-column {
+.sys-info-table td.last-column,
+#fax-report-table td.last-column {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -266,7 +284,8 @@ th, th a, th a.btn-flat, td, td a {
 #sudo-table [type="checkbox"]+span:not(.lever),
 #managepw-table [type="checkbox"]+span:not(.lever),
 #startmenu-table [type="checkbox"]+span:not(.lever),
-.sys-info-table [type="checkbox"]+span:not(.lever) {
+.sys-info-table [type="checkbox"]+span:not(.lever),
+#fax-report-table [type="checkbox"]+span:not(.lever) {
     padding-left: 0;
 }
 
