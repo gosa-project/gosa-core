@@ -9,14 +9,14 @@
                 {else}
                     {render acl=$acl}
                         <div class="input-field add">
-                            <p id="testi"><i>{$ppdString}</i></p>
-                            <label for="testi">{t}Model{/t}:</label>
+                            <p id="driver-model"><i>{$ppdString}</i></p>
+                            <label for="driver-model">{t}Model{/t}:</label>
 
                             <button class="btn-small" type="submit" name="SelectPPD">{t}Select{/t}</button>
                         </div>
 
                         <div class="input-field">
-                            <div class="new-driver-action" id="testi2">
+                            <div class="new-driver-action" id="new-driver">
                                 <div class="file-field input-field">
                                     <div class="btn-small">
                                         <span>{t}Browse{/t}</span>
@@ -29,7 +29,7 @@
 
                                 <button class="btn-small" type="submit" name="SubmitNewPPDFile">{t}Upload{/t}</button>
                             </div>
-                            <label for="testi2">{t}New driver{/t}:</label>
+                            <label for="new-driver">{t}New driver{/t}:</label>
                         </div>
                     {/render}
                 {/if}

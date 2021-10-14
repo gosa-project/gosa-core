@@ -18,7 +18,9 @@
 #fax-report-table th,
 #fax-report-table td,
 #rSyslog-table th,
-#rSyslog-table td {
+#rSyslog-table td,
+#ldap-tools-table th,
+#ldap-tools-table td {
     position: relative;
     padding: 5px 10px;
     height: 38px;
@@ -37,7 +39,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table tr,
 .sys-info-table tr,
 #fax-report-table tr,
-#rSyslog-table tr {
+#rSyslog-table tr,
+#ldap-tools-table tr {
     height: 38px;
     max-height: 38px;
 }
@@ -63,7 +66,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table i.material-icons,
 .sys-info-table i.material-icons,
 #fax-report-table i.material-icons,
-#rSyslog-table i.material-icons {
+#rSyslog-table i.material-icons,
+#ldap-tools-table i.material-icons {
     font-size: 18px;
 }
 
@@ -74,7 +78,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table input.input-btn,
 .sys-info-table input.input-btn,
 #fax-report-table input.input-btn,
-#rSyslog-table input.input-btn {
+#rSyslog-table input.input-btn,
+#ldap-tools-table input.input-btn {
     z-index: 1;
     position: relative;
     width: 18px;
@@ -87,7 +92,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table i.input-icons,
 .sys-info-table i.input-icons,
 #fax-report-table i.input-icons,
-#rSyslog-table i.input-icons {
+#rSyslog-table i.input-icons,
+#ldap-tools-table i.input-icons {
     position: absolute;
     left: 16px;
     margin-top: 8px;
@@ -116,7 +122,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table select:focus,
 .sys-info-table select:focus,
 #fax-report-table select:focus,
-#rSyslog-table select:focus {
+#rSyslog-table select:focus,
+#ldap-tools-table select:focus {
     outline: none;
 }
 
@@ -126,7 +133,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .select-wrapper,
 .sys-info-table .select-wrapper,
 #fax-report-table .select-wrapper,
-#rSyslog-table .select-wrapper {
+#rSyslog-table .select-wrapper,
+#ldap-tools-table .select-wrapper {
     width: fit-content;
 }
 
@@ -136,7 +144,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .select-wrapper input,
 .sys-info-table .select-wrapper input,
 #fax-report-table .select-wrapper input,
-#rSyslog-table .select-wrapper input {
+#rSyslog-table .select-wrapper input,
+#ldap-tools-table .select-wrapper input {
     width: auto;
     width: 200px;
     max-width: 200px;
@@ -153,7 +162,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .select-wrapper ul li,
 .sys-info-table .select-wrapper ul li,
 #fax-report-table .select-wrapper ul li,
-#rSyslog-table .select-wrapper ul li {
+#rSyslog-table .select-wrapper ul li,
+#ldap-tools-table .select-wrapper ul li {
     padding: 5px 10px;
     min-height: 31px;
     max-height: 31px;
@@ -165,7 +175,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .input-field,
 .sys-info-table .input-field,
 #fax-report-table .input-field,
-#rSyslog-table .input-field {
+#rSyslog-table .input-field,
+#ldap-tools-table .input-field {
     margin-top: 0;
 }
 
@@ -176,7 +187,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .input-field input,
 .sys-info-table .input-field input,
 #fax-report-table .input-field input,
-#rSyslog-table .input-field input {
+#rSyslog-table .input-field input,
+#ldap-tools-table .input-field input {
     margin-bottom: 0;
     min-height: 20px;
     height: 20px!important;
@@ -189,7 +201,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table label input,
 .sys-info-table label input,
 #fax-report-table label input,
-#rSyslog-table label input {
+#rSyslog-table label input,
+#ldap-tools-table label input {
     margin-left: 1rem;
     width: 18px;
     height: 18px;
@@ -230,7 +243,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .action-wrapper,
 .sys-info-table .action-wrapper,
 #fax-report-table .action-wrapper,
-#rSyslog-table .action-wrapper {
+#rSyslog-table .action-wrapper,
+#ldap-tools-table .action-wrapper {
     position: relative;
     height: 18px;
     font-size: 18px;
@@ -244,7 +258,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .action-wrapper input,
 .sys-info-table .action-wrapper input,
 #fax-report-table .action-wrapper input,
-#rSyslog-table .action-wrapper input {
+#rSyslog-table .action-wrapper input,
+#ldap-tools-table .action-wrapper input {
     width: 18px;
     height: 18px;
     padding: 0;
@@ -258,7 +273,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .action-wrapper i,
 .sys-info-table .action-wrapper i,
 #fax-report-table .action-wrapper i,
-#rSyslog-table .action-wrapper i {
+#rSyslog-table .action-wrapper i,
+#ldap-tools-table .action-wrapper i {
     position: absolute;
     top: 0;
     left: 0;
@@ -271,7 +287,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table .action-wrapper:last-child,
 .sys-info-table .action-wrapper:last-child,
 #fax-report-table .action-wrapper:last-child,
-#rSyslog-table .action-wrapper:last-child {
+#rSyslog-table .action-wrapper:last-child,
+#ldap-tools-table .action-wrapper:last-child {
     margin-right: 0;
 }
 
@@ -281,7 +298,8 @@ th, th a, th a.btn-flat, td, td a {
 #managepw-table td.last-column,
 .sys-info-table td.last-column,
 #fax-report-table td.last-column,
-#rSyslog-table td.last-column {
+#rSyslog-table td.last-column,
+#ldap-tools-table td.last-column {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -304,7 +322,8 @@ th, th a, th a.btn-flat, td, td a {
 #startmenu-table [type="checkbox"]+span:not(.lever),
 .sys-info-table [type="checkbox"]+span:not(.lever),
 #fax-report-table [type="checkbox"]+span:not(.lever),
-#rSyslog-table [type="checkbox"]+span:not(.lever) {
+#rSyslog-table [type="checkbox"]+span:not(.lever),
+#ldap-tools-table [type="checkbox"]+span:not(.lever) {
     padding-left: 0;
 }
 
