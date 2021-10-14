@@ -297,13 +297,12 @@
 /* fax control panel */
 
 .content .card-content .fax-control-panel {
-    height: 26px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: flex-start;
-    align-items: last baseline;
+    align-items: center;
     border: none;
     margin-left: 0;
     margin-right: 0;
@@ -311,12 +310,33 @@
 }
 
 .content .card-content .fax-control-panel .input-field {
-    padding: 0 0 0 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.content .card-content .fax-control-panel button,
-.content .card-content .fax-control-panel .fax-cp-label {
-    margin: 0 5px;
+.content .card-content .fax-control-panel .input-field:first-child {
+    margin-left: 0;
+}
+
+.content .card-content .fax-control-panel .input-field:last-child {
+    margin-right: 0;
+}
+
+.content .card-content .fax-control-panel .input-field .select-wrapper {
+    margin-right: 10px;
+}
+
+.content .card-content .fax-control-panel .input-field .select-wrapper:last-child {
+    margin-right: 0;
+}
+
+.content .card-content .fax-control-panel .input-field input {
+    margin-bottom: 0;
+}
+
+.content .card-content .fax-control-panel button {
+    margin-left: 10px;
+    margin-bottom: 0;
 }
 
 @media only screen and (max-width: 1200px) {}
