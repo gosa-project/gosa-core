@@ -523,7 +523,7 @@ class filter
                 $first = true;
                 foreach (userFilter::getFilter($this->category) as $tag => $conf) {
                     if ($tag == $this->search) {
-                        $result .= "<li".($first ? $separator : '')."></li>
+                        $result .= "<li ".($first ? $separator : '')."></li>
                                     <li class='collection-item'>
                                         <div>
                                             "._($conf['description'])."
@@ -533,7 +533,7 @@ class filter
                                         </div>
                                     </li>';
                     } else {
-                        $result .= "<li".($first ? $separator : '')."></li>
+                        $result .= "<li ".($first ? $separator : '')."></li>
                                     <li class='collection-item'>
                                         <div>
                                             "._($conf['description'])."
@@ -546,7 +546,7 @@ class filter
 
                 // Render scope if set to auto
                 if ($this->scopeMode == 'auto') {
-                    $result .= "<li$separator></li>
+                    $result .= "<li $separator></li>
                                 <li class='collection-item'>
                                     <a href='#' class='search-subtree".($this->scope == 'one' ? " '" : " active'")." onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>
                                         ".($this->scope == 'one' ? '' : "<i class='material-icons left'>checked</i>")."
@@ -556,7 +556,7 @@ class filter
                 }
 
                 // Edit filter menu
-                $result .= "<li$separator></li>
+                $result .= "<li $separator></li>
                                 <li class='collection-item'>
                                     <a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>
                                         <i class='material-icons'>settings</i>
