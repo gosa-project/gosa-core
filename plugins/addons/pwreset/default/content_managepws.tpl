@@ -1,10 +1,10 @@
 <div class="pwreset-wrapper">
-    <i class="material-icons right" title="{t escape=no}With the GOsa2 Password Management Add-On you can mass reset user passwords in various ways.{/t}">info</i>
     <div class="row">
         {if $pwreset_configured != TRUE}
         <input type="hidden" name="phase_01">
 
-        <h2>{t}Configure password reset options{/t}</h2>
+        <h2>{t}Configure password reset options{/t}
+        <i class="material-icons tooltip-icon" title="{t escape=no}With the GOsa2 Password Management Add-On you can mass reset user passwords in various ways.{/t}">info</i></h2>
         <p>{t}Please configure options for this run of resetting user credentials.{/t}</p>
 
         <hr class="divider">

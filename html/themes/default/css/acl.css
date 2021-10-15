@@ -182,6 +182,10 @@
     margin-top: 0;
 }
 
+.acl-content-wrapper .content-head .select-wrapper .dropdown-content li {
+    padding: 5px 10px;
+}
+
 .acl-content-wrapper .acl-role-create #generic-table tr:last-child {
     border: none;
 }

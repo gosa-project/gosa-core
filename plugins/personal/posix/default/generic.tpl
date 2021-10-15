@@ -31,52 +31,48 @@
       {if !$multiple_support}
         <div class="row">
           <div class="col s6">
-            <span>{t}Status{/t}</span>
+            <div class="status-info">
+              <p>{t}Status{/t}:</p>
+              <p><i>{$status}</i></p>
+            </div>
           </div>
-
-          <div class="col s6">
-            <span>{$status}</span>
-          </div>
-        </div>
 
         {if $gotoLastSystemLogin}
-          <div class="row">
-            <div class="col s6">
-              <span>{t}Last log-on{/t}</span>
-            </div>
-
-            <div class="col s6">
-              <span>{$gotoLastSystemLogin}</span>
+          <div class="col s6">
+            <div class="status-info">
+              <p>{t}Last log-on{/t}:</p>
+              <p><i>{$gotoLastSystemLogin}</i></p>
             </div>
           </div>
         {/if}
+        </div>
       {/if}
 
       {if !$multiple_support}
         <div class="row">
-          {render acl=$force_idsACL}
-            <div class="col s6 valign-wrapper">
+          <div class="col s6">
+            {render acl=$force_idsACL}
               <label>
                 <input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids} onclick="{$onClickIDS}">
                 <span>{t}Force UID/GID{/t}</span>
               </label>
+            {/render}
+
+            <div class="acl-numbers">
+              {render acl=$uidNumberACL}
+                <div class="input-field">
+                  <input type='text' id="uidNumber" name="uidNumber" size=9 maxlength=9 {$forceMode} value="{$uidNumber}">
+                  <label for="uidNumber">{t}UID{/t}</label>
+                </div>
+              {/render}
+
+              {render acl=$gidNumberACL}
+                <div class="input-field">
+                  <input type='text' id="gidNumber" name="gidNumber" size=9 maxlength=9 {$forceMode} value="{$gidNumber}">
+                  <label for="gidNumber">{t}GID{/t}</label>
+                </div>
+              {/render}
             </div>
-          {/render}
-
-          <div class="col s6">
-            {render acl=$uidNumberACL}
-              <div class="input-field">
-                <input type='text' id="uidNumber" name="uidNumber" size=9 maxlength=9 {$forceMode} value="{$uidNumber}">
-                <label for="uidNumber">{t}UID{/t}</label>
-              </div>
-            {/render}
-
-            {render acl=$gidNumberACL}
-              <div class="input-field">
-                <input type='text' id="gidNumber" name="gidNumber" size=9 maxlength=9 {$forceMode} value="{$gidNumber}">
-                <label for="gidNumber">{t}GID{/t}</label>
-              </div>
-            {/render}
           </div>
 
         </div>

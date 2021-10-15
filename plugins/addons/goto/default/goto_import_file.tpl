@@ -3,8 +3,8 @@
     <p>{t}You can import a list of jobs into the GOsa job queue. This should be a semicolon separated list of items in the following format:{/t}</p>
     <span style="font-style: italic;">{t}time stamp{/t} ; {t}MAC-address{/t} ; {t}job type{/t} ; {t}object group{/t} [ ; {t}import base{/t} ; {t}full host name{/t} ; {t}IP address{/t} ; {t}DHCP group{/t} ]</span>
 
-    <hr class="divider"> 
-	
+    <hr class="divider">
+
 	{if !$count}
     <h5>{t}Example{/t}:</h5>
     <p>20080626162556 <b>;</b> 00:0C:29:99:1E:37 <b>;</b> job_trigger_activate_new <b>;</b> goto-client <b>;</b> dc=test,dc=gonicus,dc=de</p>
@@ -26,11 +26,11 @@
         </div>
     </div>
 
-	
+
 	{if $count}
-    <br>
-    <hr class="divider"> 
-    <table class="striped">
+    <hr class="divider">
+
+    <table id="goto-import-table" class="striped">
 		<thead>
 			<tr>
 				<th>{t}Time stamp{/t}</th>
@@ -44,12 +44,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			{foreach from=$info item=item key=key} 
+			{foreach from=$info item=item key=key}
 			{if !$item.ERROR}
 			<tr>
-			{else} 
+			{else}
 			<tr style='background-color: #F0BBBB;'>
-			{/if} 
+			{/if}
 				<td>{$item.TIMESTAMP}</td>
 				<td>{$item.MAC}</td>
 				<td>{$item.HEADER}</td>
