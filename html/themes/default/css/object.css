@@ -221,7 +221,7 @@
     margin-left: 28px;
 }
 
-.object-info .content-wrapper .acl-member-wrapper {
+.object-info .content-wrapper .input-field.acl-member-wrapper {
     height: auto;
 }
 
@@ -350,14 +350,6 @@
     margin-left: 0;
 }
 
-.object-info .content-wrapper .setting .col.s6:first-child {
-    padding-right: 20px;
-}
-
-.object-info .content-wrapper .setting .col.s6:last-child {
-    padding-left: 20px;
-}
-
 .object-info [type="checkbox"]+span:not(.lever) {
     font-size: 12px;
     color: #000000;
@@ -384,6 +376,24 @@
 
 .object-info h3 {
     margin-top: 0px;
+}
+
+.object-info .posix-settings .status-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.object-info .posix-settings .status-info p:first-child {
+    margin-right: 10px;
+}
+
+.object-info .posix-settings .acl-numbers {
+    margin-left: 35px;
 }
 
 .object-info .account-settings label input {
@@ -775,6 +785,10 @@
     margin-top: 0;
 }
 
+.object-info .group-mail-wrapper .intermediate-char {
+    margin: 0 10px 9px 10px;
+}
+
 .object-info .group-mail-wrapper .contingent .list {
     padding: 0 0 8px 0;
 }
@@ -815,6 +829,10 @@
     margin-left: 10px;
 }
 
+.object-info .group-mail-wrapper .shared-folders .input-field.add .select-wrapper+input {
+    margin-left: 20px;
+}
+
 .object-info .dropdown-content li>span>label {
     display: contents;
     top: 1px;
@@ -849,6 +867,11 @@
 .object-info [type="radio"]+span:not(.lever) {
     font-size: 12px;
     color: #000000;
+}
+
+.object-info .pwreset-wrapper .tooltip-icon {
+    vertical-align: text-bottom;
+    margin-left: 5px;
 }
 
 .object-info .pwreset-wrapper label+.input-field {
@@ -905,8 +928,7 @@
     align-content: center;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 15px;
-    height: 39px;
+    margin-bottom: 10px;
 }
 
 .desk-script-managment .import-action {

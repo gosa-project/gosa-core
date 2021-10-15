@@ -161,7 +161,7 @@ class applicationParameters extends plugin
                           <label for=\"value$i\">"._("Default value")."</label>
                         </div>
                         <div class='action-wrapper'>
-                          <button class='btn-extra-small' type=\"submit\" name=\"remove$i\" ".$tag.">".msgPool::delButton()."</button>
+                          <button class='btn-small' type=\"submit\" name=\"remove$i\" ".$tag.">".msgPool::delButton()."</button>
                         </div>
                       </div>";
           }

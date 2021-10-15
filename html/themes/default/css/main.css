@@ -207,6 +207,10 @@ hr.divider {
 
 /* -- Datepicker setup -- */
 
+.datepicker-calendar {
+    padding: 10px;
+}
+
 .datepicker-date-display {
     background-color: rgba(42, 50, 120, 1);
 }

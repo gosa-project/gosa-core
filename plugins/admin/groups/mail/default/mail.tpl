@@ -2,35 +2,47 @@
 	<div class="row">
 		<div class="col s12 xl6">
 			<h3>{t}Generic{/t}</h3>
+
 			<div class="input-field">
 				{if !$isModifyableMail && $initially_was_account}
 					<input type='text' disabled size=30 value="{$mail}">
 				{else}
 					{if $domainSelectionEnabled}
-						{render acl=$mailACL}
-							<input id="mail" name="mail" value="{$mail}" {if $mailEqualsCN} disabled {/if}>
-						{/render}
+						<div class="input-field add">
+							{render acl=$mailACL}
+								<input id="mail" name="mail" value="{$mail}" {if $mailEqualsCN} disabled {/if}>
+							{/render}
 
-						@<select name='MailDomain' size=1>
-							{html_options values=$MailDomains output=$MailDomains selected=$MailDomain}
-						</select>
+							<span class="intermediate-char">@</span>
+
+							<select name='MailDomain' size=1>
+								{html_options values=$MailDomains output=$MailDomains selected=$MailDomain}
+							</select>
+						</div>
 					{else}
 						{if $mailEqualsCN}
-							<input type='text' disabled name='dummy' value='{$mail}'>
-							@<input type='text' value="{$MailDomain}" name="MailDomain">
+							<div class="input-field add">
+								<input type='text' disabled name='dummy' value='{$mail}'>
+
+								<span class="intermediate-char">@</span>
+
+								<input type='text' value="{$MailDomain}" name="MailDomain">
+							</div>
 						{else}
 							{render acl=$mailACL}
 								<input type='text' id="mail" name="mail" value="{$mail}">
 							{/render}
 						{/if}
 					{/if}
-				<label for="mail">{t}Primary address{/t}{$must}</label>
+
+					<label for="mail">{t}Primary address{/t}{$must}</label>
 				{/if}
 			</div>
 
 			<div class="input-field">
 				{if !$isModifyableServer && $initially_was_account}
 					<input type='text' disabled size=30 value="{$gosaMailServer}">
+					<label>{t}Server{/t}</label>
 				{else}
 					{render acl=$gosaMailServerACL}
 						<select size="1" id="gosaMailServer" name="gosaMailServer"
@@ -47,17 +59,17 @@
       		<div class="contingent">
 				{if $quotaEnabled}
             		<div class="list">
-						{t}Quota usage{/t}
+						{t}Quota usage{/t}:
 						{$quotaUsage}
 					</div>
 
-					<div class="input-field">
-						{render acl=$gosaMailQuotaACL}
-						<input id="gosaMailQuota" name="gosaMailQuota" value="{$gosaMailQuota}" type='text'>
-						{/render}
-						<label for="gosaMailQuota">{t}Quota size{/t}</label>
-						<span class="helper-text">MB</span>
-					</div>
+					{render acl=$gosaMailQuotaACL}
+						<div class="input-field">
+							<input id="gosaMailQuota" name="gosaMailQuota" value="{$gosaMailQuota}" type='text'>
+							<label for="gosaMailQuota">{t}Quota size{/t}</label>
+							<span class="helper-text">MB</span>
+						</div>
+					{/render}
 				{/if}
 			</div>
 
@@ -120,49 +132,53 @@
 		</div>
 	</div>
 
+	<hr class="divider">
+
 	<div class="row">
 		{if !$multiple_support}
 			<div class="col s12 xl6">
 				<input type='hidden' name='mail_acls_posted' value='1'>
 
-				<h3>{t}IMAP shared folders{/t}</h3>
+				<div class="shared-folders">
+					<h3>{t}IMAP shared folders{/t}</h3>
 
-				{foreach from=$folder_acls item=item key=user}
-					{render acl=$aclACL}
-						<div class="input-field">
-							<select size="1" name="acl_value_{$item.post_name}">
-								{html_options options=$AclTypes selected=$item.acl}
-								<option disabled>&nbsp;</option>
-							</select>
+					{foreach from=$folder_acls item=item key=user}
+						{render acl=$aclACL}
+							<div class="input-field {if $user != "__anyone__" && $user != "__member__"}add{/if}">
+								<select size="1" name="acl_value_{$item.post_name}">
+									{html_options options=$AclTypes selected=$item.acl}
+									<option disabled>&nbsp;</option>
+								</select>
 
-							{if $user == "__anyone__"}
-								<label for="default_permissions">{t}Default permission{/t}</label>
-							{elseif $user == "__member__"}
-								<label for="member_permissions">{t}Member permission{/t}</label>
-							{else}
-								<input type='text' name='acl_user_{$item.post_name}' value='{$user}'>
+								{if $user == "__anyone__"}
+									<label for="default_permissions">{t}Default permission{/t}</label>
+								{elseif $user == "__member__"}
+									<label for="member_permissions">{t}Member permission{/t}</label>
+								{else}
+									<input type='text' name='acl_user_{$item.post_name}' value='{$user}'>
+								{/if}
+							</div>
+
+							{if !($user == "__anyone__" || $user == "__member__")}
+								<button class="btn-small" type='submit' name='remove_acl_user_{$item.post_name}'>{msgPool type=delButton}</button>
 							{/if}
-						</div>
+						{/render}
 
-						{if !($user == "__anyone__" || $user == "__member__")}
-							<button class="btn-small" type='submit' name='remove_acl_user_{$item.post_name}'>{msgPool type=delButton}</button>
+						{if $user == "__member__"}
+							{if $show_effective_memeber}
+								<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Hide{/t}</button>
+							{else}
+								<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Show{/t}</button>
+							{/if}
 						{/if}
-					{/render}
 
-					{if $user == "__member__"}
-						{if $show_effective_memeber}
-							<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Hide{/t}</button>
-						{else}
-							<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Show{/t}</button>
+						{if $user == "__member__" && $show_effective_memeber}
+							{foreach from=$Effective item=i key=k}
+								<i>{$k}</i>
+							{/foreach}
 						{/if}
-					{/if}
-
-					{if $user == "__member__" && $show_effective_memeber}
-						{foreach from=$Effective item=i key=k}
-							<i>{$k}</i>
-						{/foreach}
-					{/if}
-				{/foreach}
+					{/foreach}
+				</div>
 			</div>
 		{/if}
 
@@ -215,9 +231,11 @@
 		</div>
 	</div>
 
+	<hr class="divider">
+
 	<div class="row">
 		<div class="col s12">
-			<h3 class="card-title">{t}Advanced mail options{/t}</h3>
+			<h3>{t}Advanced mail options{/t}</h3>
 
 			{render acl=$gosaMailDeliveryModeIACL}
 				<input type="checkbox" name="only_local" value="1" {$only_local} title="{t}Select if user can only send and receive inside his own domain{/t}">
