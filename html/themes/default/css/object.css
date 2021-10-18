@@ -477,6 +477,24 @@
     margin-bottom: 11px;
 }
 
+.samba-login-wrapper h3 {
+    margin-top: 0;
+}
+
+.samba-login-wrapper #samba-login-table .toggle-button {
+    text-align: center;
+}
+
+.samba-login-wrapper #samba-login-table .toggle-button input {
+    margin: 0;
+    width: 30px;
+    padding: 0 5px;
+}
+
+.samba-login-wrapper #samba-login-table .check-days .check-option {
+    padding-left: 23px;
+}
+
 
 /* Mail Settings */
 
