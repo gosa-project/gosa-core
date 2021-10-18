@@ -46,7 +46,7 @@
 
                     {if $manager!=""}
                     <div class="icon">
-                        {image path="<i class='material-icons input-icons tooltipped' data-postion='bottom' data-tooltip='{$manager}'>info</i>" title="{$manager}"}
+                        {image path="<i class='material-icons input-icons tooltipped' data-postion='bottom' data-tooltip='{$manager}'>info_outline</i>" title="{$manager}"}
                     </div>
 
                     <div class="icon">
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="icon">
-                        {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom' data-tooltip='{t}Manager{/t}'>info</i>"}
+                        {image path="<i class='material-icons tooltipped md-disabled context' data-postion='bottom' data-tooltip='{t}Manager{/t}'>info_outline</i>"}
                     </div>
                     {/if}
                 </div>

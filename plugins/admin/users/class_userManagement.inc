@@ -962,8 +962,8 @@ class userManagement extends management
 
         switch ($theme) {
             case 'classic':
-                $map= array( 
-                    "gosaAccount" => array( 
+                $map= array(
+                    "gosaAccount" => array(
                         "image"     => "plugins/users/images/select_user.png",
                         "plugin"    => "user",
                         "alt"       => _("Generic"),
@@ -1028,17 +1028,17 @@ class userManagement extends management
                     $result .= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                 }
                 break;
-            
+
             default:
-                $map= array( 
-                    "gosaAccount" => array( 
+                $map= array(
+                    "gosaAccount" => array(
                         "image"     => "person",
                         "plugin"    => "user",
                         "alt"       => _("Generic"),
                         "title"     => _("Edit generic properties")
                     ),
                     "posixAccount" => array(
-                        "image"     => "info",
+                        "image"     => "info_outline",
                         "plugin"    => "posixAccount",
                         "alt"       => _("POSIX"),
                         "title"     => _("Edit POSIX properties")
