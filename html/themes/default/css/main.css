@@ -106,10 +106,15 @@ label {
 
 label input[type="checkbox"] {
     position: absolute;
-    bottom: 0;
+    top: 3px;
     left: 0;
     height: 18px;
     width: 18px;
+}
+
+table label input[type="checkbox"] {
+    top: initial;
+    bottom: 7px;
 }
 
 .card-content .row .col.xl6:nth-child(2n+1) {
@@ -282,11 +287,19 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     border: 2px solid #2A3278;
 }
 
+[type="radio"]:not(:checked),
+[type="radio"]:checked,
 [type="radio"]+span:before,
 [type="radio"]+span:after {
     width: 18px;
     height: 18px;
     margin: 2px 0;
+}
+
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
+    margin: 0;
+    margin-bottom: 3px;
 }
 
 .select-wrapper input.select-dropdown:focus {

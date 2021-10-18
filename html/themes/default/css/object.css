@@ -396,7 +396,7 @@
     margin-left: 35px;
 }
 
-.object-info .account-settings label input {
+.object-info .account-settings label input:not([type="checkbox"]) {
     width: auto;
     max-width: 100px;
     text-align: center;
