@@ -1,4 +1,4 @@
-<div class="samba-login-wrapper">
+<div class="samba-login-wrapper card-content-scroll">
     {if $acl}
     <!-- Javacript function used to switch a complete row or col of selected hours -->
     <script language="javascript" type="text/javascript">
