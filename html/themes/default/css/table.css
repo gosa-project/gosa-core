@@ -395,3 +395,13 @@ td {
 .card .card-content .plus-actions+.card-action {
     padding: 0;
 }
+
+
+/* Media Queries */
+
+@media only screen and (max-width: 1200px) {
+    #samba-login-table tr {
+        height: initial;
+        max-height: initial;
+    }
+}
