@@ -28,6 +28,7 @@
  *  9.  p + margin-bottom 38px
  *  10. h3 + margin-bottom 37px
  *  11. h3 + divider 60px
+ *  12. p o. margin 18px
  */
 
 
@@ -154,4 +155,14 @@
 
 .pwreset-wrapper.card-content-scroll {
     max-height: calc(100vh - 255px);
+}
+
+
+/*
+ * Samba log on times
+ * 158px + 37px (10.) + 18px (12.) + 53px (2.)
+ */
+
+.samba-login-wrapper.card-content-scroll {
+    max-height: calc(100vh - 266px);
 }
