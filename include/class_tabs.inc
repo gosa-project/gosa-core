@@ -339,7 +339,7 @@ class tabs
               $display .= "<li class='mobile-menu {$tabClass}'>
                             <a class='dropdown-mobile-area-selection' data-target='mobile-area-selection'><i class='material-icons'>more_vert</i></a>
                           </li>
-                          <ul id='mobile-area-selection' class='dropdown-content mobile-menu'>
+                          <ul id='mobile-area-selection' class='dropdown-content'>
                           </ul>";
             }
 
@@ -348,7 +348,7 @@ class tabs
                 $display .= "<li class='desk-menu {$tabClass}'>
                               <a class='dropdown-area-selection' data-target='area-selection'><i class='material-icons'>more_vert</i></a>
                              </li>
-                             <ul id='area-selection' class='dropdown-content desk-menu'>";
+                             <ul id='area-selection' class='dropdown-content'>";
               }
 
               $display .= "<li class='view-xl {$tabClass}' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
