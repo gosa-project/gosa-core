@@ -481,6 +481,10 @@
     margin-top: 0;
 }
 
+.samba-login-wrapper p+#samba-login-table {
+    margin-top: 20px;
+}
+
 .samba-login-wrapper #samba-login-table .toggle-button {
     text-align: center;
 }
