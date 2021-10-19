@@ -1,10 +1,10 @@
-<div class="pwreset-wrapper">
+<div class="pwreset-wrapper card-content-scroll">
     <div class="row">
         {if $pwreset_configured != TRUE}
         <input type="hidden" name="phase_01">
 
         <h2>{t}Configure password reset options{/t}
-        <i class="material-icons tooltip-icon" title="{t escape=no}With the GOsa2 Password Management Add-On you can mass reset user passwords in various ways.{/t}">info_outline</i></h2>
+        <i class="material-icons tooltipped" data-tooltip="{t escape=no}With the GOsa2 Password Management Add-On you can mass reset user passwords in various ways.{/t}">info_outline</i></h2>
         <p>{t}Please configure options for this run of resetting user credentials.{/t}</p>
 
         <hr class="divider">

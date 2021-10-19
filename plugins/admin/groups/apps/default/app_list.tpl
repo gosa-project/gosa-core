@@ -47,7 +47,7 @@
 													{$item.NAME} {$item.INFO}
 												</td>
 												<td class="action-column">
-													<div class="inline-icons">
+													<div class="property-wrapper">
 														{image title="{t}Edit{/t}" action="app_entry_edit{$item.UNIQID}" path='<i class="material-icons input-icons">edit</i>'}
 														{image title="{t}Remove{/t}" action="del_{$item.UNIQID}" path='<i class="material-icons input-icons">delete</i>'}
 														{image title="{t}Move up{/t}" action="up_{$item.UNIQID}" path='<i class="material-icons input-icons">keyboard_arrow_up</i>'}
@@ -72,13 +72,12 @@
 													<b>{$item.NAME}&nbsp; </b>
 												</td>
 												<td class="action-column">
-													<div class="inline-icons">
+													<div class="property-wrapper">
 														{image title="{t}Edit{/t}" action="app_entry_edit{$item.UNIQID}" path='<i class="material-icons input-icons">edit</i>'}
 														{image title="{t}Remove{/t}" action="del_{$item.UNIQID}" path='<i class="material-icons input-icons">delete</i>'}
 														{image title="{t}Move up{/t}" action="up_{$item.UNIQID}" path='<i class="material-icons input-icons">keyboard_arrow_up</i>'}
 														{image title="{t}Move down{/t}" action="down_{$item.UNIQID}" path='<i class="material-icons input-icons">keyboard_arrow_down</i>'}
 													</div>
-
 												</td>
 											</tr>
 							{elseif $item.TYPE == "RELEASE"}
@@ -98,7 +97,7 @@
   													<hr class="divider">
 												</td>
 												<td class="action-column">
-													<div class="inline-icons">
+													<div class="property-wrapper">
 														{image title="{t}Remove{/t}" action="del_{$item.UNIQID}" path='<i class="material-icons input-icons">delete</i>'}
 														{image title="{t}Move up{/t}" action="up_{$item.UNIQID}" path='<i class="material-icons input-icons">keyboard_arrow_up</i>'}
 														{image title="{t}Move down{/t}" action="down_{$item.UNIQID}" path='<i class="material-icons input-icons">keyboard_arrow_down</i>'}
