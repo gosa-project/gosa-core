@@ -86,10 +86,10 @@
 
 
 /*
- * Mein Konto / Benutzer anlegen - Allgemein + Posix + Mail
+ * My account / Create user - General + Posix + Mail
  * 158px + 44px (7.) + 53px (2.)
  *
- * Mein Konto / Benutzer anlegen - Certificate
+ * My account / Create user - Certificate
  * 158px + 44px (1.) + 53px (2.)
 
  * ACL Role (ACL Template) - Edit
@@ -110,7 +110,7 @@
  * Directory structure - create locality
  * 158px + 44px (7.) + 53px (2.)
  *
- * Mein Konto - Desk Plugin - Script Management
+ * My account - Desk Plugin - Script Management
  * 158px + 44px (1.) + 53px (2.)
  */
 
@@ -144,4 +144,14 @@
 
 .ldap-entry-wrapper .ldap-entry.card-content-scroll {
     max-height: calc(100vh - 271px);
+}
+
+
+/*
+ * Password Management
+ * 158px + 44px (7.) + 53px (2.)
+ */
+
+.pwreset-wrapper.card-content-scroll {
+    max-height: calc(100vh - 255px);
 }

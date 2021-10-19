@@ -55,39 +55,35 @@
 
                 {elseif $options[$entry.NAME].TYPE == "BOOL_INTEGER"}
                 <!-- BOOLEAN_INTEGER -->
-                <div class="input-field table-content">
+                <div class="input-field add table-content">
                   <select name="option_selection__{$key}_{$entry_key}" id="option_selection__{$key}_{$entry_key}" size=1
                     onChange="toggle_bool_fields('option_selection__{$key}_{$entry_key}','option_value__{$key}_{$entry_key}');">
                     <option {if $entry.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
                     <option {if $entry.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
                     <option {if $entry.VALUE != "TRUE" && $entry.VALUE != "FALSE"} selected {/if} value="STRING">INTEGER</option>
                   </select>
-                </div>
 
-                <div class="input-field table-content">
                   <input type='text' value="{$entry.VALUE}" name='option_value__{$key}_{$entry_key}'id="option_value__{$key}_{$entry_key}"
                     {if $entry.VALUE == "FALSE" ||  $entry.VALUE == "TRUE"} disabled {/if}>
                 </div>
 
                 {elseif $options[$entry.NAME].TYPE == "STRING_BOOL"}
                 <!-- STRING_BOOLEAN -->
-                <div class="input-field table-content">
+                <div class="input-field add table-content">
                   <select name="option_selection__{$key}_{$entry_key}" id="option_selection__{$key}_{$entry_key}" size=1
                     onChange="toggle_bool_fields('option_selection__{$key}_{$entry_key}','option_value__{$key}_{$entry_key}');">
                     <option {if $entry.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
                     <option {if $entry.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
                     <option {if $entry.VALUE != "TRUE" && $entry.VALUE != "FALSE"} selected {/if} value="STRING">STRING</option>
                   </select>
-                </div>
 
-                <div class="input-field table-content">
                   <input type='text' value="{$entry.VALUE}" name='option_value__{$key}_{$entry_key}' id="option_value__{$key}_{$entry_key}"
                     {if $entry.VALUE == "FALSE" ||  $entry.VALUE == "TRUE"} disabled {/if}>
                 </div>
                 {/if}
                 {/render}
               </td>
-              <td style="display: flex;">
+              <td class="action-column">
               {render acl=$ACL}
                 {image path="<i class='material-icons md-18'>not_interested</i>" action="negOption_{$key}_{$entry_key}"}
               {/render}
