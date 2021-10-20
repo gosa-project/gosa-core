@@ -1,7 +1,7 @@
 <div class="system-wrapper">
 	<div class="row">
 		<div class="col s12 xl6">
-          	<h3>{t}Generic settings{/t}</h3>
+          	<h3>{t}Generic{/t}</h3>
 
 			{render acl=$cnACL}
 				<div class="input-field">

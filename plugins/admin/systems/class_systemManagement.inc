@@ -174,6 +174,8 @@ class systemManagement extends management
                 if(preg_match("/w/",$tabacl)){
                     $this->dn= $dn;
                     set_object_info($this->dn);
+                    $pwLength = 8;
+                    $smarty->assign("pwLength", $pwLength);
                     return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
                 }else{
                     msg_dialog::display(_("Permission error"), _("You have no permission to change this password!"), ERROR_DIALOG);

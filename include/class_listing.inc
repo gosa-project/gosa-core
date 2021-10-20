@@ -614,6 +614,7 @@ class listing
                         }
                         $rowResult .= '</tr>';
 
+                        
                         // Apply label to objecttype icon?
                         if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
                             $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
@@ -676,7 +677,7 @@ class listing
                     // Apply label to objecttype icon?
                     if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
                         if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                            $objectType = image("<div class='entry-locked-td'><i class='material-icons'>".$matches[1]."</i><i class='material-icons'>".$m[1]."</i></div>", null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image("<div class='entry-locked-td'><i class='material-icons'>".$matches[1].'['.$m[1].']'."</i></div>", null, LDAP::fix(base64_decode($matches[2])));
                         } else {
                             $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
                         }
@@ -1092,7 +1093,6 @@ class listing
             }
 
             // Prepare params for function call
-            $params = [];
             preg_match_all('/"[^"]+"|[^,]+/', $match[2], $parts);
             foreach ($parts[0] as $param) {
                 // Row is replaced by the row number

@@ -126,7 +126,6 @@
       <image>autorenew</image>
       <label>Reinstall</label>
      </action>
-    </action>
   
     <action>
       <type>separator</type>
@@ -181,6 +180,7 @@
       <image>play_arrow</image>
       <label>Execute</label>
      </action>
+    </action>
 
   </actionmenu>
 

@@ -46,7 +46,6 @@
         <div class="input-field">
             <select size="1" name="aclType" title="{t}Select an ACL type{/t}" onChange="document.mainform.submit()">
 					{html_options options=$aclTypes selected=$aclType}
-					<option disabled>&nbsp;</option>
 				</select>
         </div>
 

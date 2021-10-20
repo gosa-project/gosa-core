@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="col s12 xl6">
-                         <h2>Hardware-Information</h2>
+                         <h2>{t}Hardware information{/t}</h2>
 
                          <table class="sys-info-table striped">
                               <tbody>

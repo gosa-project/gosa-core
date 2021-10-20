@@ -921,7 +921,7 @@ class userManagement extends management
                         break;
 
                     default:
-                        $image = "<i class='material-icons'>lock";
+                        $image = "<i class='material-icons'>lock</i>";
                         break;
                 }
             }else{
@@ -931,7 +931,7 @@ class userManagement extends management
                         break;
 
                     default:
-                        $image = "<i class='material-icons'>lock_open";
+                        $image = "<i class='material-icons'>lock_open</i>";
                         break;
                 }
             }
@@ -1093,9 +1093,9 @@ class userManagement extends management
                 }
 
                 if(in_array_ics("zarafa-contact", $classes)){
-                    $result .= image("<i class='material-icons'>portrait", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                 } else if(in_array_ics("zarafa-user", $classes)){
-                    $result .= image("<i class='material-icons'>portrait", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
                 }
 
                 $result .= "</div>";

@@ -355,6 +355,10 @@ msgstr "导入成功"
 msgid "Import"
 msgstr "导入"
 
+#: addons/ldapmanager/contentexportxls.tpl
+msgid "Download snapshot of LDAP-Database as xls file"
+msgstr "下载LDAP-数据库的快照为xls文件"
+
 #: addons/ldapmanager/contentexportxls.tpl:3
 #, fuzzy
 msgid ""
@@ -433,6 +437,10 @@ msgstr "导入"
 #, fuzzy
 msgid "export"
 msgstr "导出"
+
+#: addons/ldapmangaer/contentexport.tpl
+msgid "Download snapshot of LDAP-Database"
+msgstr "下载LDAP-数据库的快照"
 
 #: addons/ldapmanager/contentexport.tpl:2
 #, fuzzy

@@ -187,7 +187,6 @@
   <button type='submit' name='CancelZoneChanges'>{msgPool type=cancelButton}</button>
 </div>
 <script language="JavaScript" type="text/javascript">
- <!-- // First input field on page	
+  // First input field on page	
   focus_field('zoneName');  
- -->
 </script>

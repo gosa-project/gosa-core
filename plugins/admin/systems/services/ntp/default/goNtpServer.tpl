@@ -6,7 +6,6 @@
    {render acl=$goTimeSourceACL}
     <select style="width:100%;" id="goTimeEntry" name="goTimeSource[]" size=8 multiple>
      {html_options values=$goTimeSource output=$goTimeSource}
-     <option disabled>&nbsp;</option>
     </select>
    {/render}
    <br>

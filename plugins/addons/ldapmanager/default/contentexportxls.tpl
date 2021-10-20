@@ -1,7 +1,7 @@
 <div class="ldapxls-export-wrapper">
 	<div class="row">
 		{if $LDIFError != FALSE || $type == FALSE}
-			<h2>Download der LDAP-Datenbank als xls-Datei</h2>
+			<h2>{t}Download snapshot of LDAP-Database as xls file{/t}</h2>
 			<p>{t}The XLS export plug-in provides methods to download a complete snapshot of the running LDAP directory as XLS. You may save these files for documentation.{/t}</p>
 
 			<div class="col s12 xl6">

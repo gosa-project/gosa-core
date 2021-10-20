@@ -130,7 +130,6 @@
                                     {render acl=$gotoNtpServerACL}
                                           <div class="input-field add">
                                                 <select name="saction" id="saction" title="{t}Select action to execute for this terminal{/t}" size=1>
-                                                      <option disabled>&nbsp;</option>
                                                       {html_options options=$actions}
                                                 </select>
                                                 <button class="btn-small" type="submit" name="action">{t}Execute{/t}</button>

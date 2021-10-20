@@ -1419,6 +1419,10 @@
     margin-bottom: 0;
 }
 
+.system-wrapper .system-workstaion-startup .input-field.add.mount-point .select-wrapper {
+    margin-right: 15px;
+}
+
 
 /* LDAP Tools */
 
