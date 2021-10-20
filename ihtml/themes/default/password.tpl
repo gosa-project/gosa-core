@@ -101,16 +101,13 @@
                 <tr>
                     <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
                     <td>
-                        {factory type='password' name='current_password' id='current_password' onfocus="nextfield=
-                        'new_password';"}
+                        {factory type='password' name='current_password' id='current_password' onfocus="nextfield='new_password';"}
                     </td>
                 </tr>
                 <tr>
                     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
                     <td>
-                        {factory type='password' name='new_password' id='new_password'
-                        onkeyup="testPasswordCss(\$('new_password').value)" onfocus="nextfield=
-                        'new_password_repeated';"}
+                        {factory type='password' name='new_password' id='new_password' onfocus="nextfield='new_password_repeated';"}
                     </td>
                 </tr>
                 <tr>
