@@ -121,7 +121,7 @@
     <action>
       <name>edit</name>
       <type>entry</type>
-      <image>images/lists/edit.png</image>
+      <image>edit</image>
       <objectclass>AllowEdit</objectclass>
       <label>Edit service</label>
     </action>

@@ -31,7 +31,6 @@
           <div class="input-field">
               <select id="gotoBootKernel" name="gotoBootKernel" size=1>
                 {html_options options=$gotoBootKernels selected=$gotoBootKernel}
-                <option disabled>&nbsp;</option>
               </select>
               <label for="gotoBootKernel">{t}Boot kernel{/t}</label>
           </div>
@@ -57,7 +56,6 @@
             <div class="input-field">
               <select name="modules_list[]" title="{t}Add additional modules to load on startup{/t}" size=1 multiple>
                 {html_options values=$gotoModules output=$gotoModules}
-                <option disabled>&nbsp;</option>
               </select>
             </div>
 
@@ -78,14 +76,12 @@
             <div class="input-field">
               <select name="gotoShare" id="gotoShare" size=1 multiple>
                 {html_options values=$gotoShareKeys output=$gotoShares}
-                <option disabled>&nbsp;</option>
               </select>
             </div>
 
             <div class="input-field">
               <select name="gotoShareSelection" id="gotoShareSelection" size=1>
                 {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
-                <option disabled>&nbsp;</option>
               </select>
             </div>
 

@@ -1,5 +1,3 @@
-
-
 {if $dns_take_over}
  <table summary="" width="100%">
   <tr>
@@ -55,7 +53,10 @@
    </td>
   </tr>
  </table>
- <script language="JavaScript" type="text/javascript"><!-- // First input field on page      focus_field('AddZone');    --></script>
+ <script language="JavaScript" type="text/javascript">
+    // First input field on page      
+    focus_field('AddZone');
+</script>
  
 {/if}
 <hr>

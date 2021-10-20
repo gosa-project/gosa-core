@@ -32,7 +32,6 @@
                      <select size="1" id="gosaMailServer" name="gosaMailServer"
                         title="{t}Specify the mail server where the user will be hosted on{/t}">
                         {html_options values=$MailServers output=$MailServers selected=$gosaMailServer}
-                        <option disabled>&nbsp;</option>
                      </select>
 
                      <label>{t}Server{/t}</label>
@@ -70,7 +69,6 @@
                <select id="alternates_list" style="width:100%;height:100px;" name="alternates_list[]" size="15" multiple
                   title="{t}List of alternative mail addresses{/t}">
                   {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
-                  <option disabled>&nbsp;</option>
                </select>
                {/render}
             </div>
@@ -188,7 +186,6 @@
                   {render acl=$gosaVacationMessageACL}
                   <select id='vacation_template' name="vacation_template" {if $own_script !="" } disabled {/if} size=1>
                      {html_options options=$vacationtemplates selected=$template}
-                     <option disabled>&nbsp;</option>
                   </select>
                   {/render}
                   {render acl=$gosaVacationMessageACL}
@@ -229,7 +226,6 @@
                      {render acl=$gosaSpamMailboxACL checkbox=$multiple_support checked=$use_gosaSpamMailbox}
                      <select {if $own_script !="" } disabled {/if} size="1" id="gosaSpamMailbox" name="gosaSpamMailbox">
                         {html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
-                        <option disabled>&nbsp;</option>
                      </select>
                      <label for="gosaSpamMailbox">{t}to folder{/t}</label>
                      {/render}
@@ -267,7 +263,6 @@
                   <select {if $use_gosaMailForwardingAddress} checked {/if} id="gosaMailForwardingAddress"
                      style="width:100%; height:100px;" name="forwarder_list[]" size=15 multiple>
                      {html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}
-                     <option disabled>&nbsp;</option>
                   </select>
                {/render}
             </div>

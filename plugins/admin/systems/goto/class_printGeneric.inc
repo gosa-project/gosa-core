@@ -495,14 +495,14 @@ class printgeneric extends plugin
         }
 
         // Abort user / group adding dialog 
-        if(isset($_POST['userGroupSelect_cancel'])){
+        if(isset($_POST['userGroupSelect_cancel']) || isset($_POST['cancel-abort'])){
             $this->dialog=FALSE;
             $this->userSelect = NULL;
             $this->adminUserSelect = NULL;
         }
 
         // Save selected users / groups 
-        if(isset($_POST['userGroupSelect_save'])){
+        if(isset($_POST['userGroupSelect_save']) || isset($_POST['ok-save'])){
             $users = array();
             if($this->userSelect instanceOf userGroupSelect){
                 $users = $this->userSelect->save();

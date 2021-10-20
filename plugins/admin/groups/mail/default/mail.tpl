@@ -48,7 +48,6 @@
 						<select size="1" id="gosaMailServer" name="gosaMailServer"
 							title="{t}Specify the mail server where the user will be hosted on{/t}">
 							{html_options values=$MailServers output=$MailServers selected=$gosaMailServer}
-							<option disabled>&nbsp;</option>
 						</select>
 
 						<label>{t}Server{/t}</label>
@@ -110,7 +109,6 @@
 					<div class="input-field alternative-addresses">
 						<select name="alternates_list[]" multiple title="{t}List of alternative mail addresses{/t}">
 							{html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
-							<option disabled>&nbsp;</option>
 						</select>
 					</div>
 				{/render}
@@ -144,33 +142,40 @@
 
 					{foreach from=$folder_acls item=item key=user}
 						{render acl=$aclACL}
-							<div class="input-field {if $user != "__anyone__" && $user != "__member__"}add{/if}">
-								<select size="1" name="acl_value_{$item.post_name}">
-									{html_options options=$AclTypes selected=$item.acl}
-									<option disabled>&nbsp;</option>
-								</select>
-
+						<div class="valign-wrapper">
+							<div class="col s4 xl4">
 								{if $user == "__anyone__"}
-									<label for="default_permissions">{t}Default permission{/t}</label>
+								<h5>{t}Default permission{/t}</h5>
 								{elseif $user == "__member__"}
-									<label for="member_permissions">{t}Member permission{/t}</label>
+								<h5>{t}Member permission{/t}</h5>
 								{else}
-									<input type='text' name='acl_user_{$item.post_name}' value='{$user}'>
+								<div class="input-field">
+									<input type='text' id="acl_user_{$item.post_name}" name='acl_user_{$item.post_name}' value='{$user}'>
+									<label for="acl_user_{$item.post_name}">{t}Name{/t}</label>
+								</div>
 								{/if}
 							</div>
-
-							{if !($user == "__anyone__" || $user == "__member__")}
+							<div class="input-field add col s8 xl8">
+								<select size="1" name="acl_value_{$item.post_name}">
+									{html_options options=$AclTypes selected=$item.acl}
+								</select>
+								
+								{if !($user == "__anyone__" || $user == "__member__")}
 								<button class="btn-small" type='submit' name='remove_acl_user_{$item.post_name}'>{msgPool type=delButton}</button>
-							{/if}
+								{/if}
+								
+								{if $user == "__member__"}
+								{if $show_effective_memeber}
+								<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Hide{/t}</button>
+								{else}
+								<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Show{/t}</button>
+								{/if}
+								{/if}
+							</div>
+						</div>
+
 						{/render}
 
-						{if $user == "__member__"}
-							{if $show_effective_memeber}
-								<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Hide{/t}</button>
-							{else}
-								<button class="btn-small" type='submit' name='show_effective_memeber'>{t}Show{/t}</button>
-							{/if}
-						{/if}
 
 						{if $user == "__member__" && $show_effective_memeber}
 							{foreach from=$Effective item=i key=k}
@@ -179,6 +184,8 @@
 						{/if}
 					{/foreach}
 				</div>
+
+				<button class="btn-small" type='submit' name='add_acl_user'>{msgPool type=addButton}</button>
 			</div>
 		{/if}
 
@@ -199,7 +206,6 @@
 							{/foreach}
 						{else}
 							{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress}
-							<option disabled>&nbsp;</option>
 						{/if}
 					</select>
 				{/render}

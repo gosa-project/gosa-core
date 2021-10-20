@@ -262,12 +262,12 @@ class sudoOption extends plugin
                 if(preg_match("/^delOption/",$name)){
                     $opt = preg_replace("/^delOption_/","",$name);
                     $opt = preg_replace("/_[^_]*$/","",$opt);
-                    $id  = preg_replace("/^.*_([0-9])*$/","\\1",$opt);
                     $opt = preg_replace("/_[0-9]*$/","",$opt);
+                    $id  = preg_replace("/^.*_([0-9])*$/","\\1",$name);
 
                     if(isset($this->sudoOption[$opt][$id])){
                         unset($this->sudoOption[$opt][$id]);
-                    }
+                    } 
                     if(!count($this->sudoOption[$opt])){
                         unset($this->sudoOption[$opt]);
                     }

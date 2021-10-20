@@ -1,5 +1,5 @@
 <div class="ldap-export-wrapper">
-	<h2>Download der LDAP-Datenbank</h2>
+	<h2>{t}Download snapshot of LDAP-Database{/t}</h2>
 	<p>
 		{t}The LDIF export plug-in provides methods to download a complete snapshot of the running LDAP directory as LDIF. You may save these files for backup purpose or when initializing a new server.{/t}
 	</p>

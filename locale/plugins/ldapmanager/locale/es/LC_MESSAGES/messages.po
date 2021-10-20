@@ -351,6 +351,10 @@ msgstr "Importación correcta"
 msgid "Import"
 msgstr "Importar"
 
+#: addons/ldapmanager/contentexportxls.tpl
+msgid "Download snapshot of LDAP-Database as xls file"
+msgstr "Descargue la instantánea de la base de datos LDAP como archivo xls"
+
 #: addons/ldapmanager/contentexportxls.tpl:3
 #, fuzzy
 msgid ""
@@ -428,6 +432,10 @@ msgstr "importar"
 #: addons/ldapmanager/class_ldif.inc:43
 msgid "export"
 msgstr "exportar"
+
+#: addons/ldapmangaer/contentexport.tpl
+msgid "Download snapshot of LDAP-Database"
+msgstr "Descargue la instantánea de la base de datos LDAP"
 
 #: addons/ldapmanager/contentexport.tpl:2
 #, fuzzy

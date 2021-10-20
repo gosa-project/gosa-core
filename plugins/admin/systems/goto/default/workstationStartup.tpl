@@ -159,7 +159,6 @@
           <div class="input-field">
             <select name="modules_list[]" title="{t}Add additional modules to load on startup{/t}" size=1 multiple>
               {html_options values=$gotoModules output=$gotoModules}
-              <option disabled>&nbsp;</option>
             </select>
           </div>
 
@@ -180,18 +179,14 @@
           <div class="input-field">
             <select name="gotoShare" id="gotoShare" size=1 multiple>
               {html_options values=$gotoShareKeys output=$gotoShares}
-              <option disabled>&nbsp;</option>
             </select>
           </div>
-
-          <div class="input-field">
+          
+          <div class="input-field add mount-point">
             <select name="gotoShareSelection" id="gotoShareSelection" size=1>
               {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
-              <option disabled>&nbsp;</option>
             </select>
-          </div>
 
-          <div class="input-field add">
             <input type="text" name="gotoShareMountPoint" id="gotoShareMountPoint" value="{t}Mount point{/t}">
 
             <button class="btn-small" type="submit" name="gotoShareAdd" id="gotoShareAdd">{msgPool type=addButton}</button>
@@ -202,12 +197,11 @@
       </div>
     </div>
   </div>
-
-  <input name="WorkstationStarttabPosted" type="hidden" value="1">
-
-  <script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-  focus_field('gotoLdapServer');
-  -->
-  </script>
 </div>
+
+<input name="WorkstationStarttabPosted" type="hidden" value="1">
+
+<script language="JavaScript" type="text/javascript">
+  // First input field on page
+  focus_field('gotoLdapServer');
+</script>

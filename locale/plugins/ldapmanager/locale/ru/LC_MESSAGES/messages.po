@@ -367,6 +367,10 @@ msgstr "Импорт успешен."
 msgid "Import"
 msgstr "Импортировать"
 
+#: addons/ldapmanager/contentexportxls.tpl
+msgid "Download snapshot of LDAP-Database as xls file"
+msgstr "Загрузить снимок базы данных LDAP в виде файла xls"
+
 #: addons/ldapmanager/contentexportxls.tpl:3
 #, fuzzy
 msgid ""
@@ -448,6 +452,10 @@ msgstr "Импортировать"
 #, fuzzy
 msgid "export"
 msgstr "Экспорт"
+
+#: addons/ldapmangaer/contentexport.tpl
+msgid "Download snapshot of LDAP-Database"
+msgstr "Скачать снимок базы данных LDAP-Database"
 
 #: addons/ldapmanager/contentexport.tpl:2
 #, fuzzy

@@ -351,6 +351,10 @@ msgstr ""
 msgid "Import"
 msgstr "Importa"
 
+#: addons/ldapmanager/contentexportxls.tpl
+msgid "Download snapshot of LDAP-Database as xls file"
+msgstr "Scarica l'istantanea del database LDAP come file xls"
+
 #: addons/ldapmanager/contentexportxls.tpl:3
 msgid ""
 "The XLS export plug-in provides methods to download a complete snapshot of "
@@ -426,6 +430,10 @@ msgstr "Importa"
 #, fuzzy
 msgid "export"
 msgstr "Esporta"
+
+#: addons/ldapmangaer/contentexport.tpl
+msgid "Download snapshot of LDAP-Database"
+msgstr "Scarica l'istantanea di LDAP-Database"
 
 #: addons/ldapmanager/contentexport.tpl:2
 msgid ""

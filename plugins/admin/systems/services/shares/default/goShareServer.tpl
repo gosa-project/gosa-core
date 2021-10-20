@@ -6,7 +6,6 @@
    {render acl=$goExportEntryACL  mode=read_active}
     <select style="width:100%" id="goExportEntry" name="goExportEntryList[]" size=12 multiple >
       {html_options values=$goExportEntry output=$goExportEntryKeys}
-      <option disabled>&nbsp;</option>
     </select>
    {/render}
    <br>

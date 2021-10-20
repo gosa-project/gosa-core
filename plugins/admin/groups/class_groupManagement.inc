@@ -201,49 +201,57 @@ class groupManagement extends management
             
             default:
             $map = array(
-                "posixGroup" => array(
-                    "image" => "group",
-                    "plugin" => "group",
-                    "alt" => _("POSIX"),
-                    "title" => _("Edit POSIX properties")
-                ),
-                "gosaMailAccount" => array(
-                    "image" => "mail",
-                    "plugin" => "mailgroup",
-                    "alt" => _("Mail"),
-                    "title" => _("Edit mail properties")
-                ),
-                "sambaGroupMapping" => array(
-                    "image" => "window",
-                    "plugin" => "group_",
-                    "alt" => _("Samba"),
-                    "title" => _("Edit samba properties")
-                ),
-                "goFonPickupGroup" => array(
-                    "image" => "phone",
-                    "plugin" => "group__",
-                    "alt" => _("Phone"),
-                    "title" => _("Edit phone properties")
-                ),
-                "gotoMenuGroup" => array(
-                    "image" => "menu",
-                    "plugin" => "appgroup",
-                    "alt" => _("Menu"),
-                    "title" => _("Edit start menu properties")
-                ),
-                "zarafa-group" => array(
-                    "image" => "portrait",
-                    "plugin" => "zarafagroup",
-                    "alt" => _("Zarafa"),
-                    "title" => _("Edit Zarafa properties")
-                ),
-                "gotoEnvironment" => array(
-                    "image" => "smart_display",
-                    "plugin" => "environment",
-                    "alt" => _("Environment"),
-                    "title" => _("Edit environment properties")
-                )
-            );
+                    "posixGroup" => array(
+                        "image" => "group",
+                        "plugin" => "group",
+                        "alt" => _("POSIX"),
+                        "title" => _("Edit POSIX properties")
+                    ),
+                    "gosaMailAccount" => array(
+                        "image" => "mail",
+                        "plugin" => "mailgroup",
+                        "alt" => _("Mail"),
+                        "title" => _("Edit mail properties")
+                    ),
+                    "sambaGroupMapping" => array(
+                        "image" => "window",
+                        "plugin" => "group_",
+                        "alt" => _("Samba"),
+                        "title" => _("Edit samba properties")
+                    ),
+                    "goFonPickupGroup" => array(
+                        "image" => "phone",
+                        "plugin" => "group__",
+                        "alt" => _("Phone"),
+                        "title" => _("Edit phone properties")
+                    ),
+                    "gotoMenuGroup" => array(
+                        "image" => "menu",
+                        "plugin" => "appgroup",
+                        "alt" => _("Menu"),
+                        "title" => _("Edit start menu properties")
+                    ),
+                    "zarafa-group" => array(
+                        "image" => "portrait",
+                        "plugin" => "zarafagroup",
+                        "alt" => _("Zarafa"),
+                        "title" => _("Edit Zarafa properties")
+                    ),
+                    "gotoEnvironment" => array(
+                        "image" => "smart_display",
+                        "plugin" => "environment",
+                        "alt" => _("Environment"),
+                        "title" => _("Edit environment properties")
+                    )
+                );
+                // Walk thru map
+                foreach ($map as $oc => $properties) {
+                    if (in_array_ics($oc, $classes)) {
+                        $result.= image("<i class='material-icons'>".$properties['image']."</i>", 'listing_edit_'.$properties['plugin'].'_'.$row, $properties['title']);
+                    } else {
+                        $result.= image();
+                    }
+                }
                 break;
         }
         

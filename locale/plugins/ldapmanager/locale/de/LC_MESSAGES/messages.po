@@ -353,6 +353,10 @@ msgstr "Import erfolgreich"
 msgid "Import"
 msgstr "Importieren"
 
+#: addons/ldapmanager/contentexportxls.tpl
+msgid "Download snapshot of LDAP-Database as xls file"
+msgstr "Snapshot der LDAP-Datenbank als xls-Datei herunterladen"
+
 #: addons/ldapmanager/contentexportxls.tpl:3
 msgid ""
 "The XLS export plug-in provides methods to download a complete snapshot of "
@@ -425,6 +429,10 @@ msgstr "Import"
 #: addons/ldapmanager/class_ldif.inc:43
 msgid "export"
 msgstr "Export"
+
+#: addons/ldapmangaer/contentexport.tpl
+msgid "Download snapshot of LDAP-Database"
+msgstr "Snapshot der LDAP-Datenbank herunterladen"
 
 #: addons/ldapmanager/contentexport.tpl:2
 msgid ""

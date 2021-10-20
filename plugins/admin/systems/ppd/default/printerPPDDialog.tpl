@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<div class="plugin-actions card-action">
+<div class="card-action">
     {if $path_valid}
         {render acl=$acl}
             <button class="btn-small primary" type="submit" name="SavePPD">{msgPool type=applyButton}</button>

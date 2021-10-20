@@ -40,7 +40,7 @@
               <ul>
                 <li class="condition">
                   <i id="pw-length" class="material-icons">close</i>
-                  {t}The password must have at least {if !$pwLength}8{/if}{$pwLength} characters.{/t}
+                  {t}The password must have at least {$pwLength} characters.{/t}
                 </li>
                 {if $lower}
                   <li class="condition">
