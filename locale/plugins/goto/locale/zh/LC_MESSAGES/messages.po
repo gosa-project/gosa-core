@@ -131,6 +131,14 @@ msgstr "允许"
 msgid "Release"
 msgstr "发行"
 
+#: admin/groups/apps/app_list.tpl
+msgid "Folder name"
+msgstr "文件夹名称"
+
+#: admin/groups/apps/app_list.tpl
+msgid "Storage location"
+msgstr "存储位置"
+
 #: admin/mimetypes/mimetype-list-release.xml:11
 #: admin/mimetypes/mimetype-list.xml:11
 #, fuzzy

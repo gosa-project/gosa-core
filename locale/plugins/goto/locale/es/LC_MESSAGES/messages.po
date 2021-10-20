@@ -131,6 +131,14 @@ msgstr "Error de permisos"
 msgid "Release"
 msgstr "Versión"
 
+#: admin/groups/apps/app_list.tpl
+msgid "Folder name"
+msgstr "Nombre de la carpeta"
+
+#: admin/groups/apps/app_list.tpl
+msgid "Storage location"
+msgstr "Ubicación del almacén"
+
 #: admin/mimetypes/mimetype-list-release.xml:11
 #: admin/mimetypes/mimetype-list.xml:11
 #, fuzzy

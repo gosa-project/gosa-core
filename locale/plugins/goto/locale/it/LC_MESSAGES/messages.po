@@ -131,6 +131,14 @@ msgstr "Permessi"
 msgid "Release"
 msgstr "Rimuovi"
 
+#: admin/groups/apps/app_list.tpl
+msgid "Folder name"
+msgstr "Nome della cartella"
+
+#: admin/groups/apps/app_list.tpl
+msgid "Storage location"
+msgstr "Posizione di stoccaggio"
+
 #: admin/mimetypes/mimetype-list-release.xml:11
 #: admin/mimetypes/mimetype-list.xml:11
 #, fuzzy

@@ -130,6 +130,14 @@ msgstr "Права для членов группы"
 msgid "Release"
 msgstr "Набор правил"
 
+#: admin/groups/apps/app_list.tpl
+msgid "Folder name"
+msgstr "Имя папки"
+
+#: admin/groups/apps/app_list.tpl
+msgid "Storage location"
+msgstr "Место хранения"
+
 #: admin/mimetypes/mimetype-list-release.xml:11
 #: admin/mimetypes/mimetype-list.xml:11
 #, fuzzy
