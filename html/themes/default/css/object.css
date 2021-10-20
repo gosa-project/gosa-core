@@ -26,10 +26,13 @@
 }
 
 .object-info .card-tabs .tabs .desk-menu,
+.object-info .card-tabs .tabs .tablet-menu,
 .object-info .card-tabs .tabs .mobile-menu {
     float: right;
 }
 
+.object-info .card-tabs .tabs .only-tablet,
+.object-info .card-tabs .tabs .tablet-menu,
 .object-info .card-tabs .tabs .mobile-menu {
     display: none;
 }
@@ -49,6 +52,7 @@
 }
 
 .object-info .card-tabs .tabs li a.dropdown-mobile-area-selection i,
+.object-info .card-tabs .tabs li a.dropdown-tablet-area-selection i,
 .object-info .card-tabs .tabs li a.dropdown-area-selection i {
     font-size: 18px;
     line-height: 38px;
@@ -135,7 +139,7 @@
 
 /* Others */
 
-.object-info .content-wrapper .input-field:not(.textarea-multiple):not(.table-content) {
+.object-info .content-wrapper .input-field:not(.textarea-multiple):not(.table-content):not(.acl-member-wrapper) {
     height: 39px;
 }
 
@@ -1553,7 +1557,14 @@ label.closing-elem {
         display: inline-block;
     }
     .object-info .card-tabs .tabs .view-xl,
-    .object-info .card-tabs .tabs .desk-menu {
+    .object-info .card-tabs .tabs .desk-menu,
+    .object-info .card-tabs .tabs .only-tablet {
         display: none;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .object-info .card-tabs .tabs .only-tablet {
+        display: inline-block;
     }
 }
