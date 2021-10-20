@@ -29,6 +29,18 @@ if (cardActionElem && cardActionElem.length > 1) {
     });
 }
 
+// Adjustment of scroll height, because the card-action is outside of content-wrapper card-content-scroll
+let contentWrapper = document.querySelector('.content-wrapper.card-content-scroll');
+let pwresetWrapper = document.querySelectorAll('.pwreset-wrapper.card-content-scroll');
+let sambaLoginWrapper = document.querySelectorAll('.samba-login-wrapper.card-content-scroll');
+let cardActionElement = document.querySelectorAll('.card-action');
+
+if (pwresetWrapper && pwresetWrapper.length == 1 && cardActionElement && cardActionElement.length == 1) {
+    contentWrapper.style.maxHeight = "calc(100vh - 202px)";
+} else if (sambaLoginWrapper && sambaLoginWrapper.length == 1 && cardActionElement && cardActionElement.length == 1) {
+    contentWrapper.style.maxHeight = "calc(100vh - 202px)";
+}
+
 // Creation of a submenu if the length of the navigation items of the mobile version is too long
 let tabsElem = document.querySelectorAll('.view-xl');
 

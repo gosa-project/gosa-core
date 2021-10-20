@@ -99,6 +99,7 @@
     </script>
 
     <script type="text/javascript" src="themes/default/js/materialize.js"></script>
+    <script type="text/javascript" src="themes/default/js/dropdown_material_fix.js"></script>
     <script type="text/javascript" defer src="themes/default/js/eventListener.js"></script>
     <script type="text/javascript" defer src="themes/default/js/main.js"></script>
     <script type="text/javascript" defer src="themes/default/js/functions.js"></script>

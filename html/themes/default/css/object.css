@@ -135,7 +135,7 @@
 
 /* Others */
 
-.object-info .content-wrapper .input-field:not(.textarea-multiple) {
+.object-info .content-wrapper .input-field:not(.textarea-multiple):not(.table-content) {
     height: 39px;
 }
 
@@ -481,6 +481,10 @@
     margin-top: 0;
 }
 
+.samba-login-wrapper p+#samba-login-table {
+    margin-top: 20px;
+}
+
 .samba-login-wrapper #samba-login-table .toggle-button {
     text-align: center;
 }
@@ -498,7 +502,7 @@
 
 /* Mail Settings */
 
-.object-info .content-wrapper label button {
+.object-info .content-wrapper label button.inline-button {
     max-height: 25px;
     min-height: 25px;
     line-height: 25px;
@@ -872,6 +876,27 @@
     border-radius: .25rem;
 }
 
+.object-info .sudo-options-wrapper .sudo-options-table .input-field.table-content .select-wrapper {
+    margin-bottom: 0;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table .input-field .select-wrapper {
+    margin-right: 20px;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table tr:last-child:not(:first-child) {
+    border-bottom: none;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table .action-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 
 /* NIS Netgroups */
 
@@ -887,7 +912,7 @@
     color: #000000;
 }
 
-.object-info .pwreset-wrapper .tooltip-icon {
+.object-info .pwreset-wrapper .tooltipped {
     vertical-align: text-bottom;
     margin-left: 5px;
 }
@@ -1015,6 +1040,7 @@
     flex-wrap: nowrap;
     align-content: center;
     align-items: center;
+    justify-content: flex-end;
     margin-left: 10px;
 }
 

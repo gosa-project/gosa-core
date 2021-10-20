@@ -112,7 +112,7 @@
                <span>{t}Use custom sieve script{/t} <b>({t}disables all Mail options!{/t})</b></span>
                {if $allowSieveManagement}
                   {render acl=$sieveManagementACL}
-                  <button class="btn-small" type='submit' name='sieveManagement' id="sieveManagement" {if
+                  <button class="btn-small inline-button" type='submit' name='sieveManagement' id="sieveManagement" {if
                      $own_script=="" } disabled{/if}>
                      {t}Sieve Management{/t}
                   </button>

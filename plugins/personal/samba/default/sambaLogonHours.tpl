@@ -1,4 +1,4 @@
-<div class="samba-login-wrapper">
+<div class="samba-login-wrapper card-content-scroll">
     {if $acl}
     <!-- Javacript function used to switch a complete row or col of selected hours -->
     <script language="javascript" type="text/javascript">
@@ -20,25 +20,19 @@
     <h3>{t}Samba log on times{/t}</h3>
     <p>{t}Specify the hours this user is allowed to log in{/t}</p>
 
-    <table id="samba-login-table" class="striped">
+    <table id="samba-login-table" class="striped responsive-table">
         <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th class="center-align" colspan="24">
-                    <b>{t}Hour{/t}</b>
+            <tr class="hours">
+                <th>{t}Hour{/t}</th>
+
+                {foreach from=$Hours item=hours key=key_hours}
+                <th class="center-align">
+                    {$hours}
                 </th>
+                {/foreach}
             </tr>
         </thead>
         <tbody>
-            <tr class="hours">
-                <td>&nbsp;</td>
-
-                {foreach from=$Hours item=hours key=key_hours}
-                <td class="center-align">
-                    {$hours}
-                </td>
-                {/foreach}
-            </tr>
 
             {if $acl}
             <!-- Add toggle buttons for hours -->
