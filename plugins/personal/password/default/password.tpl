@@ -64,7 +64,7 @@
           <div class="row">
             <div class="col s6 input-field password">
               {factory type='password' name='new_password' id='new_password'
-              onfocus="nextfield= 'repeated_password';"}
+              onkeyup="testPasswordCss(\$('new_password').value)" onfocus="nextfield= 'repeated_password';"}
               <div class="password-security">
                 <span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#ee3d60;display:block;height:3px;">
                 </span>
@@ -125,8 +125,7 @@
 
   <div class="card-action">
     <button class="btn-small primary" type='submit' id="password_finish" name='password_finish' disabled>{t}Set password{/t}</button>
-    <button class="btn-small primary" type=reset id="password_cancel" name="password_cancel">{t}Clear
-      fields{/t}</button>
+    <button class="btn-small primary" type=reset id="password_cancel" name="password_cancel">{t}Clear fields{/t}</button>
   </div>
 
   <input type='hidden' id='formSubmit'>

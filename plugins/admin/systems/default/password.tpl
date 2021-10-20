@@ -14,8 +14,7 @@
         <div class="col s8 xl6 first-level">
           <div class="row">
             <div class="col s6 input-field password">
-              {factory type="password" name="new_password" id="new_password" onkeyup="testPasswordCss(\$('new_password').value)" onfocus="nextfield='repeated_password';"}
-
+              {factory type="password" name="new_password" id="new_password" onfocus="nextfield='repeated_password';"}
               <div class="password-security">
                 <span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#ee3d60;display:block;height:3px;">
                 </span>

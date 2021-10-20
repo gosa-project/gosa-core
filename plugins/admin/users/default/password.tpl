@@ -3,7 +3,7 @@
 <div class="content-wrapper card-content-scroll change-password">
   <h2>{t}Change password{/t}</h2>
   <p>
-    {t}To change the password use the fields below. The changes take effect immediately. Please memorize the newpassword, because the user wouldn't be able to login without it.{/t}
+    {t}To change the password use the fields below. The changes take effect immediately. Please memorize the new password, because the user wouldn't be able to login without it.{/t}
   </p>
 
   <div class="password-wrapper card-content-scroll">
@@ -113,9 +113,8 @@
 </div>
 
 <div class="card-action">
-  <button class="btn-small primary" type='submit' name='password_finish'>{t}Set password{/t}</button>
-  <button class="btn-small primary" type='submit' id='password_cancel' name='password_cancel'>{msgPool
-    type=cancelButton}</button>
+  <button class="btn-small primary" type='submit' id="password_finish" name='password_finish' disabled>{t}Set password{/t}</button>
+  <button class="btn-small primary" type='submit' id='password_cancel' name='password_cancel'>{msgPool type=cancelButton}</button>
 </div>
 
 <input type='hidden' id='formSubmit'>
