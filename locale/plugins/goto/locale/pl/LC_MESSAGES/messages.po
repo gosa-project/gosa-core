@@ -128,6 +128,14 @@ msgstr "Uprawnienia"
 msgid "Release"
 msgstr "Wersja"
 
+#: admin/groups/apps/app_list.tpl
+msgid "Folder name"
+msgstr "Nazwa folderu"
+
+#: admin/groups/apps/app_list.tpl
+msgid "Storage location"
+msgstr "Miejsce przechowywania"
+
 #: admin/mimetypes/mimetype-list-release.xml:11
 #: admin/mimetypes/mimetype-list.xml:11
 #, fuzzy

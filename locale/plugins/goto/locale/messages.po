@@ -123,6 +123,14 @@ msgstr ""
 msgid "Release"
 msgstr ""
 
+#: admin/groups/apps/app_list.tpl
+msgid "Folder name"
+msgstr ""
+
+#: admin/groups/apps/app_list.tpl
+msgid "Storage location"
+msgstr ""
+
 #: admin/mimetypes/mimetype-list-release.xml:11
 #: admin/mimetypes/mimetype-list.xml:11
 msgid "List of mime-types"

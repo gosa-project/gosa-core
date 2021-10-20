@@ -458,7 +458,15 @@ class appgroup extends plugin
         // Append departments for current base 
         $data = $lData = array();
         foreach($departments as $key => $app){
-            $img = image('images/lists/folder.png');
+            switch ($theme) {
+                case 'classic':
+                    $img = image('images/lists/folder.png');
+                    break;
+                
+                default:
+                    $img = image("<i class='material-icons'>folder</i>");
+                    break;
+            }
             $data[$key] = array('TYPE'=>'DEP','ID'=> $app);
             $lData[$key] = array('data' => array($img,"&nbsp;",$app));
 

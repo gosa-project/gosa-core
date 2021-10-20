@@ -118,7 +118,7 @@
 			<div class="input-field add">
 				<div class="input-field">
 					<input type="text" name="menu_folder_name" value="" id="menu_folder_name">
-					<label for="menu_folder_name">Ordnername</label>
+					<label for="menu_folder_name">{t}Folder name{/t}</label>
 				</div>
 
 				<div class="input-field">
@@ -127,7 +127,7 @@
 						<option value="{$key}">{$item}</option>
 					{/foreach}
 					</select>
-					<label for="menu_folder">Reihenfolge</label>
+					<label for="menu_folder">{t}Storage location{/t}</label>
 				</div>
 
 				<button class="btn-small" type='submit' name='add_menu_to_folder' title="{t}Add selected applications to this folder.{/t}">{msgPool type=addButton}</button>

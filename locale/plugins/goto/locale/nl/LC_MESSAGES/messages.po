@@ -134,6 +134,14 @@ msgstr "Rechten"
 msgid "Release"
 msgstr "Distributie versie"
 
+#: admin/groups/apps/app_list.tpl
+msgid "Folder name"
+msgstr "Map naam"
+
+#: admin/groups/apps/app_list.tpl
+msgid "Storage location"
+msgstr "Opslagplaats"
+
 #: admin/mimetypes/mimetype-list-release.xml:11
 #: admin/mimetypes/mimetype-list.xml:11
 #, fuzzy
