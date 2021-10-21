@@ -52,9 +52,11 @@
       {/render}
     {else}
       <label>
-        <input type="checkbox" name="dummy" disabled>
-        <span for="dummy">{t}Enable DHCP for this device{/t} ({t}not configured{/t})</span>
-        {image path="<i class='material-icons input-icons'>refresh</i>"}
+        <p>
+          <input type="checkbox" name="dummy" disabled>
+          <span for="dummy">{t}Enable DHCP for this device{/t} ({t}not configured{/t})</span>
+          {image path="<i class='material-icons input-icons'>refresh</i>"}
+        </p>
       </label>
     {/if}
 
@@ -114,9 +116,11 @@
       {/render}
     {else}
       <label>
-        <input type="checkbox" name="dummy" value="1" disabled {if $DNS_is_account} checked {/if}>
-        <span for="dummy">{t}Enable DNS for this device{/t} ({t}not configured{/t})</span>
-        {image path="<i class='material-icons input-icons'>refresh</i>"}
+        <p>
+          <input type="checkbox" name="dummy" value="1" disabled {if $DNS_is_account} checked {/if}>
+          <span for="dummy">{t}Enable DNS for this device{/t} ({t}not configured{/t})</span>
+          {image path="<i class='material-icons input-icons'>refresh</i>"}
+        </p>
       </label>
 
     {/if}

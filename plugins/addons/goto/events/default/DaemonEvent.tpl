@@ -3,13 +3,13 @@
 		{if $is_new}
 		<div class="col s12 xl6">
 			<h3>{t}Schedule{/t}</h3>
-			
+
 			{$timestamp}
 		</div>
 
 		<div class="col s12 xl6">
 			<h3>{t}System list{/t}</h3>
-            
+
 			{$target_list}
 		</div>
 
@@ -43,6 +43,6 @@
 
 			{$timestamp}
 		</div>
-{/if}
+		{/if}
 	</div>
 </div>

@@ -83,15 +83,19 @@
 
             {render acl=$execForGroupmembersACL}
             <label>
-                <input type=checkbox name="execForGroupmembers" value="1" {$execForGroupmembers}>
-                <span>{t}Only executable for members{/t}</span>
+                <p>
+                    <input type=checkbox name="execForGroupmembers" value="1" {$execForGroupmembers}>
+                    <span>{t}Only executable for members{/t}</span>
+                </p>
             </label>
             {/render}
 
             {render acl=$overwriteConfigACL}
             <label>
-                <input type=checkbox name="overwriteConfig" value="1" {$overwriteConfig}>
-                <span>{t}Replace user configuration on startup{/t}</span>
+                <p>
+                    <input type=checkbox name="overwriteConfig" value="1" {$overwriteConfig}>
+                    <span>{t}Replace user configuration on startup{/t}</span>
+                </p>
             </label>
             {/render}
         </div>
@@ -99,22 +103,28 @@
         <div class="col s12 xl6">
             {render acl=$placeOnDesktopACL}
             <label>
-                <input type=checkbox name="placeOnDesktop" value="1" {$placeOnDesktop}>
-                <span>{t}Place icon on members desktop{/t}</span>
+                <p>
+                    <input type=checkbox name="placeOnDesktop" value="1" {$placeOnDesktop}>
+                    <span>{t}Place icon on members desktop{/t}</span>
+                </p>
             </label>
             {/render}
 
             {render acl=$placeInStartmenuACL}
             <label>
-                <input type=checkbox name="placeInStartmenu" value="1" {$placeInStartmenu}>
-                <span>{t}Place entry in members start menu{/t}</span>
+                <p>
+                    <input type=checkbox name="placeInStartmenu" value="1" {$placeInStartmenu}>
+                    <span>{t}Place entry in members start menu{/t}</span>
+                </p>
             </label>
             {/render}
 
             {render acl=$placeOnKickerACL}
             <label>
-                <input type=checkbox name="placeOnKicker" value="1" {$placeOnKicker}>
-                <span>{t}Place entry in members launch bar{/t}</span>
+                <p>
+                    <input type=checkbox name="placeOnKicker" value="1" {$placeOnKicker}>
+                    <span>{t}Place entry in members launch bar{/t}</span>
+                </p>
             </label>
             {/render}
         </div>

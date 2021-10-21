@@ -28,7 +28,7 @@ define("SYSTEM_EVENT",2);
 define("USER_EVENT"  ,4);
 
 
-/*! \brief    This is the event base class 
+/*! \brief    This is the event base class
   \author   Fabian Hickert <hickert@gonicus.de>
   \version  1.00
   \date     26.02.2008
@@ -36,7 +36,7 @@ define("USER_EVENT"  ,4);
   This is the base class for all new daemon events.
   It implements most of the required functionality.
  */
-class DaemonEvent 
+class DaemonEvent
 {
     /* Menu Strings */
     protected $s_Menu_Name  = "s_Menu_Name not set";  // Diplayed in the ActionsMenu->CreateNew
@@ -44,14 +44,14 @@ class DaemonEvent
     protected $s_Menu_Image = "images/empty.png";     // Image displayed in Actions->New
     protected $s_List_Image = "";                     // Image displayed in event listing
 
-    public $config;          // GOsa configuration object 
+    public $config;          // GOsa configuration object
     protected $data;            // The event data, when edited
 
     protected $a_targets    = array();  // The list of assigned Targets (When newly created)
     protected $s_Schedule_Action = "";       // The deamon command name when newly created. (e.g. job_trigger_action_halt)
     protected $s_Trigger_Action= "";       // The deamon command name when edited. (e.g. trigger_action_halt)
     protected $s_Queued_Action= "";       // The deamon command name when edited. (e.g. trigger_action_halt)
-    protected $timestamp    = 0;        // Event execution time; 
+    protected $timestamp    = 0;        // Event execution time;
     protected $id           = -1;       // The Table ID
     protected $status       = "unknown";// The current event status
     protected $is_new       = TRUE;     // Is TRUE if this is a new event
@@ -133,7 +133,7 @@ class DaemonEvent
     }
 
 
-    /*! \brief  Create the HTML output for the plugin. 
+    /*! \brief  Create the HTML output for the plugin.
       @return String  The generated HTML output.
      */
     public function execute()
@@ -148,14 +148,14 @@ class DaemonEvent
                 $str = "<h3>"._("This job has no template!")."</h3>";
                 $str.= "<hr>";
                 $str.= "<div class='plugin-actions'>
-                            <button type='submit' name='abort_event_dialog'>".msgPool::cancelButton()."</button> 
+                            <button type='submit' name='abort_event_dialog'>".msgPool::cancelButton()."</button>
                         </div>";
                 break;
-            
+
             default:
                 $str = "<h3>"._("This job has no template!")."</h3>
                         <div class='card-action'>
-                            <button class='btn-small' type='submit' name='abort_event_dialog'>".msgPool::cancelButton()."</button> 
+                            <button class='btn-small' type='submit' name='abort_event_dialog'>".msgPool::cancelButton()."</button>
                         </div>";
                 break;
         }
@@ -194,20 +194,20 @@ class DaemonEvent
                             <button type='submit' name='abort_event_dialog'>".msgPool::cancelButton()."</button>
                         </div>";
                 break;
-            
+
             default:
                 $str = "<div class='card-action'>
-                            <button class='btn-small' type='submit' name='save_event_dialog'>".msgPool::saveButton()."</button>
-                            <button class='btn-small' type='submit' name='abort_event_dialog'>".msgPool::cancelButton()."</button>
+                            <button class='btn-small primary' type='submit' name='save_event_dialog'>".msgPool::saveButton()."</button>
+                            <button class='btn-small primary' type='submit' name='abort_event_dialog'>".msgPool::cancelButton()."</button>
                         </div>";
                 break;
         }
-        
+
         return($str);
     }
 
 
-    /*! \brief  Returns HTML representation of a timestamp using <select> boxes. 
+    /*! \brief  Returns HTML representation of a timestamp using <select> boxes.
       @return Returns HTML content.
      */
     public function get_time_select()
@@ -280,7 +280,7 @@ class DaemonEvent
         $smarty->assign("time_minute", set_post($minute));
         $smarty->assign("time_second", set_post($second));
         return($smarty->fetch(get_template_path('timestamp_select.tpl', TRUE, dirname(__FILE__))));
-    } 
+    }
 
 
     /*! \brief  HTML representation of all currently assigned targets.
@@ -303,7 +303,7 @@ class DaemonEvent
             case 'classic':
             $list_footer = "<button type='submit' name='open_target_list'>"._("Add")."</button>";
                 break;
-            
+
             default:
                 $list_footer = "<button class='btn-small' type='submit' name='open_target_list'>"._("Add")."</button>";
                 break;
@@ -319,7 +319,7 @@ class DaemonEvent
     {
         $this->target_add_list_used = TRUE;
 
-        if($this->target_listing == NULL){ 
+        if($this->target_listing == NULL){
             $this->target_listing = new EventAddSystemDialog($this->config,$this);
         }
 
@@ -359,10 +359,10 @@ class DaemonEvent
             if($time_stamp_values_found){
                 $this->timestamp = mktime(
                         get_post('time_hour'),
-                        get_post('time_minute'),        
-                        get_post('time_second'),        
-                        get_post('time_month'),        
-                        get_post('time_day'),        
+                        get_post('time_minute'),
+                        get_post('time_second'),
+                        get_post('time_month'),
+                        get_post('time_day'),
                         get_post('time_year'));
 
                 if(isset($_POST['periodValue'])) $this->periodValue = get_post('periodValue');
@@ -381,12 +381,12 @@ class DaemonEvent
         if($action['action'] == 'delete'){
             $id = $this->targetList->getKey($action['targets'][0]);
             unset($this->a_targets[$id]);
-        } 
+        }
     }
 
 
     /*! \brief  Converts a daemon timestamp into an unix timestamp. \
-      e.g.  20080101125959 -> 1199188799 
+      e.g.  20080101125959 -> 1199188799
       @param  A daemon timestamp  YYYYddmmHHiiss
       @return Integer  A unix timestamp.
      */
@@ -407,7 +407,7 @@ class DaemonEvent
     }
 
 
-    /*! \brief  Returns event information, like menu strings, images ... 
+    /*! \brief  Returns event information, like menu strings, images ...
       @return   Array Event informations.
      */
     public function get_event_info()
@@ -422,13 +422,13 @@ class DaemonEvent
             }
         }
         $data['MenuImage']    = "<img src='".$this->s_Menu_Image."' alt='".$this->s_Menu_Name."' border='0' class='center'>";
-        $data['ListImage']    = "<img src='".$this->s_List_Image."' title='".$this->s_Event_Name."' 
+        $data['ListImage']    = "<img src='".$this->s_List_Image."' title='".$this->s_Event_Name."'
             alt='".$this->s_Event_Name."' border='0' class='center'>";
         return($data);
     }
 
 
-    /*! \brief  Check if we have opened the target add dialog. 
+    /*! \brief  Check if we have opened the target add dialog.
       @return   Boolean TRUE if we have opened the target add dialog else FALSE.
      */
     protected function is_target_list_open()
@@ -502,7 +502,7 @@ class DaemonEvent
     }
 
 
-    /*! \brief  Returns the event tag to schedule a new action 
+    /*! \brief  Returns the event tag to schedule a new action
       @param    Returns the event e.g. 'job_trigger_action_wake'
      */
     public function get_schedule_action()
@@ -511,7 +511,7 @@ class DaemonEvent
     }
 
 
-    /*! \brief  Returns the event tag to schedule a new action 
+    /*! \brief  Returns the event tag to schedule a new action
       @param    Returns the event e.g. 'trigger_action_wake'
      */
     public function get_trigger_action()
@@ -522,8 +522,8 @@ class DaemonEvent
 
     /*! brief  Returns an array containig all attributes \
       That should be written.
-      @return Array e.g. 'status' => 'bla blub'  
-     */ 
+      @return Array e.g. 'status' => 'bla blub'
+     */
     public function save()
     {
         $ret = array();
@@ -549,14 +549,14 @@ class DaemonEvent
 
     /*! \brief  Returns the event targets
       @return Array  All selected targets.
-     */ 
+     */
     public function get_targets()
     {
         return($this->a_targets);
     }
 
 
-    /*! \brief  Returns the event timestamp in GOsa daemon format. 
+    /*! \brief  Returns the event timestamp in GOsa daemon format.
       @return Returns the event timestamp (20081231120000)
      */
     public function get_timestamp($si_type = TRUE)
@@ -582,19 +582,19 @@ class DaemonEvent
     }
 
 
-    /*! \brief Add a target MAC address 
+    /*! \brief Add a target MAC address
       @param Array A List of all target that should be added.
      */
-    public function set_timestamp($stamp) 
+    public function set_timestamp($stamp)
     {
         $this->timestamp = $stamp;
     }
 
 
-    /*! \brief Add a target MAC address 
+    /*! \brief Add a target MAC address
       @param Array A List of all target that should be added.
      */
-    public function add_targets($targets) 
+    public function add_targets($targets)
     {
         foreach($targets as $target){
             $this->a_targets[] = $target;
@@ -607,7 +607,7 @@ class DaemonEvent
     }
 
 
-    /*! \brief Update a class variable from outside 
+    /*! \brief Update a class variable from outside
      */
     public function set_value($name,$value)
     {

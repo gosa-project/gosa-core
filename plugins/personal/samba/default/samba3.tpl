@@ -55,37 +55,43 @@
 
             {if $multiple_support}
                 <label>
-                    <input class="center" type=checkbox name="use_tslogin" id="use_tslogin" value="1" {if $use_tslogin} checked {/if} onClick="changeState('tslogin')">
-                    <span></span>
+                    <p>
+                        <input class="center" type=checkbox name="use_tslogin" id="use_tslogin" value="1" {if $use_tslogin} checked {/if} onClick="changeState('tslogin')">
+                        <span></span>
+                    </p>
                 </label>
                 <label>
-                    <input class="center" type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin}{if !$use_tslogin} disabled {/if}>
-                    <span></span>
+                    <p>
+                        <input class="center" type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin}{if !$use_tslogin} disabled {/if}>
+                        <span></span>
+                    </p>
                 </label>
             {else}
                 {render acl=$AllowLoginOnTerminalServerACL}
                     <label>
-                        <input class="center" type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin} onclick="
-                        changeState('CtxWFHomeDir');
-                        changeState('CtxWFHomeDirDrive');
-                        changeState('CtxWFProfilePath');
-                        changeState('inherit');
-                        changeTripleSelectState_2nd_neg('tslogin','inherit','CtxInitialProgram');
-                        changeTripleSelectState_2nd_neg('tslogin','inherit','CtxWorkDirectory');
-                        changeState('CtxMaxConnectionTimeF');
-                        changeState('CtxMaxDisconnectionTimeF');
-                        changeState('CtxMaxIdleTimeF');
-                        changeTripleSelectState('tslogin','CtxMaxConnectionTimeF','CtxMaxConnectionTime');
-                        changeTripleSelectState('tslogin','CtxMaxDisconnectionTimeF','CtxMaxDisconnectionTime');
-                        changeTripleSelectState('tslogin','CtxMaxIdleTimeF','CtxMaxIdleTime');
-                        changeState('connectclientdrives');
-                        changeState('connectclientprinters');
-                        changeState('defaultprinter');
-                        changeState('shadow');
-                        changeState('brokenconn');
-                        changeState('reconn');
-                        ">
-                        <span>{t}Allow login on terminal server{/t}</span>
+                        <p>
+                            <input class="center" type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin} onclick="
+                            changeState('CtxWFHomeDir');
+                            changeState('CtxWFHomeDirDrive');
+                            changeState('CtxWFProfilePath');
+                            changeState('inherit');
+                            changeTripleSelectState_2nd_neg('tslogin','inherit','CtxInitialProgram');
+                            changeTripleSelectState_2nd_neg('tslogin','inherit','CtxWorkDirectory');
+                            changeState('CtxMaxConnectionTimeF');
+                            changeState('CtxMaxDisconnectionTimeF');
+                            changeState('CtxMaxIdleTimeF');
+                            changeTripleSelectState('tslogin','CtxMaxConnectionTimeF','CtxMaxConnectionTime');
+                            changeTripleSelectState('tslogin','CtxMaxDisconnectionTimeF','CtxMaxDisconnectionTime');
+                            changeTripleSelectState('tslogin','CtxMaxIdleTimeF','CtxMaxIdleTime');
+                            changeState('connectclientdrives');
+                            changeState('connectclientprinters');
+                            changeState('defaultprinter');
+                            changeState('shadow');
+                            changeState('brokenconn');
+                            changeState('reconn');
+                            ">
+                            <span>{t}Allow login on terminal server{/t}</span>
+                        </p>
                     </label>
                 {/render}
             {/if}
@@ -118,9 +124,11 @@
 
             {render acl=$AllowLoginOnTerminalServerACL checkbox=$multiple_support checked=$use_inherit}
                 <label>
-                    <input class="center" type=checkbox id="inherit" name="inherit" {if $inheritstate} checked {/if} {$tsloginstate}
-                    onClick="changeState('CtxInitialProgram'); changeState('CtxWorkDirectory');">
-                    <span>{t}Inherit client configuration{/t}</span>
+                    <p>
+                        <input class="center" type=checkbox id="inherit" name="inherit" {if $inheritstate} checked {/if} {$tsloginstate}
+                        onClick="changeState('CtxInitialProgram'); changeState('CtxWorkDirectory');">
+                        <span>{t}Inherit client configuration{/t}</span>
+                    </p>
                 </label>
             {/render}
 
@@ -148,16 +156,20 @@
 
             {if $multiple_support}
                 <label>
-                    <input type="checkbox" name="use_CtxMaxConnectionTimeF" {if $use_CtxMaxConnectionTimeF} checked {/if} onClick="changeState('CtxMaxConnectionTimeF');" class="center">
-                    <span></span>
+                    <p>
+                        <input type="checkbox" name="use_CtxMaxConnectionTimeF" {if $use_CtxMaxConnectionTimeF} checked {/if} onClick="changeState('CtxMaxConnectionTimeF');" class="center">
+                        <span></span>
+                    </p>
                 </label>
             {/if}
 
             <div class="check-input-wrapper">
                 {render acl=$AllowLoginOnTerminalServerACL}
                     <label>
-                        <input id="CtxMaxConnectionTimeF" type="checkbox" class="center" name="CtxMaxConnectionTimeF" {if !$use_CtxMaxConnectionTimeF && $multiple_support} disabled {/if} value="1" {$CtxMaxConnectionTimeF} onclick="changeState('CtxMaxConnectionTime')" {$tsloginstate}>
-                        <span>{t}Connection{/t}</span>
+                        <p>
+                            <input id="CtxMaxConnectionTimeF" type="checkbox" class="center" name="CtxMaxConnectionTimeF" {if !$use_CtxMaxConnectionTimeF && $multiple_support} disabled {/if} value="1" {$CtxMaxConnectionTimeF} onclick="changeState('CtxMaxConnectionTime')" {$tsloginstate}>
+                            <span>{t}Connection{/t}</span>
+                        </p>
                     </label>
 
                     <div class="input-field ">
@@ -169,8 +181,10 @@
             <div class="check-input-wrapper">
                 {render acl=$AllowLoginOnTerminalServerACL checkbox=$multiple_support checked=$use_CtxMaxDisconnectionTimeF}
                     <label>
-                        <input id="CtxMaxDisconnectionTimeF" type=checkbox name="CtxMaxDisconnectionTimeF" value="1" {$CtxMaxDisconnectionTimeF} onclick="changeState('CtxMaxDisconnectionTime')" {$tsloginstate} class="center">
-                        <span>{t}Disconnection{/t}</span>
+                        <p>
+                            <input id="CtxMaxDisconnectionTimeF" type=checkbox name="CtxMaxDisconnectionTimeF" value="1" {$CtxMaxDisconnectionTimeF} onclick="changeState('CtxMaxDisconnectionTime')" {$tsloginstate} class="center">
+                            <span>{t}Disconnection{/t}</span>
+                        </p>
                     </label>
                 {/render}
 
@@ -184,8 +198,10 @@
             <div class="check-input-wrapper">
                 {render acl=$AllowLoginOnTerminalServerACL checkbox=$multiple_support checked=$use_CtxMaxIdleTimeF}
                     <label>
-                        <input id="CtxMaxIdleTimeF" type=checkbox name="CtxMaxIdleTimeF" value="1" {$CtxMaxIdleTimeF} onclick="changeState('CtxMaxIdleTime')" {$tsloginstate} class="center">
-                        <span>{t}IDLE{/t}</span>
+                        <p>
+                            <input id="CtxMaxIdleTimeF" type=checkbox name="CtxMaxIdleTimeF" value="1" {$CtxMaxIdleTimeF} onclick="changeState('CtxMaxIdleTime')" {$tsloginstate} class="center">
+                            <span>{t}IDLE{/t}</span>
+                        </p>
                     </label>
                 {/render}
 
@@ -202,22 +218,28 @@
 
             {render acl=$AllowLoginOnTerminalServerACL checkbox=$multiple_support checked=$use_connectclientdrives}
                 <label>
-                    <input id="connectclientdrives" type=checkbox name="connectclientdrives" value="1" {$connectclientdrives} {$tsloginstate} class="center">
-                    <span>{t}Connect client drives at log on{/t}</span>
+                    <p>
+                        <input id="connectclientdrives" type=checkbox name="connectclientdrives" value="1" {$connectclientdrives} {$tsloginstate} class="center">
+                        <span>{t}Connect client drives at log on{/t}</span>
+                    </p>
                 </label>
             {/render}
 
             {render acl=$AllowLoginOnTerminalServerACL checkbox=$multiple_support checked=$use_connectclientprinters}
                 <label>
-                    <input id="connectclientprinters" type=checkbox name="connectclientprinters" value="1" {$connectclientprinters}{$tsloginstate} class="center">
-                    <span>{t}Connect client printers at log on{/t}</span>
+                    <p>
+                        <input id="connectclientprinters" type=checkbox name="connectclientprinters" value="1" {$connectclientprinters}{$tsloginstate} class="center">
+                        <span>{t}Connect client printers at log on{/t}</span>
+                    </p>
                 </label>
             {/render}
 
             {render acl=$AllowLoginOnTerminalServerACL checkbox=$multiple_support checked=$use_defaultprinter}
                 <label>
-                    <input id="defaultprinter" type=checkbox name="defaultprinter" value="1" {$defaultprinter} {$tsloginstate} class="center">
-                    <span>{t}Default to main client printer{/t}</span>
+                    <p>
+                        <input id="defaultprinter" type=checkbox name="defaultprinter" value="1" {$defaultprinter} {$tsloginstate} class="center">
+                        <span>{t}Default to main client printer{/t}</span>
+                    </p>
                 </label>
             {/render}
         </div>
@@ -262,44 +284,56 @@
 
             {render acl=$enforcePasswordChangeACL checkbox=$multiple_support checked=$use_enforcePasswordChange}
                 <label>
-                    <input type='checkbox' value='1' name='flag_enforcePasswordChange' {if $flag_enforcePasswordChange} checked {/if} id='flag_enforcePasswordChange'>
-                    <span>{t}Enforce password change{/t}</span>
+                    <p>
+                        <input type='checkbox' value='1' name='flag_enforcePasswordChange' {if $flag_enforcePasswordChange} checked {/if} id='flag_enforcePasswordChange'>
+                        <span>{t}Enforce password change{/t}</span>
+                    </p>
                 </label>
             {/render}
 
             {render acl=$passwordNeverExpiresACL checkbox=$multiple_support checked=$use_passwordNeverExpires}
                 <label>
-                    <input type='checkbox' value='1' name="flag_passwordNeverExpires" {if $flag_passwordNeverExpires} checked {/if} id='flag_passwordNeverExpires'>
-                    <span>{t}The password never expires{/t}</span>
+                    <p>
+                        <input type='checkbox' value='1' name="flag_passwordNeverExpires" {if $flag_passwordNeverExpires} checked {/if} id='flag_passwordNeverExpires'>
+                        <span>{t}The password never expires{/t}</span>
+                    </p>
                 </label>
             {/render}
 
             {render acl=$noPasswordRequiredACL checkbox=$multiple_support checked=$use_noPasswordRequired}
                 <label>
-                    <input type='checkbox' value='1' name="flag_noPasswordRequired" {if $flag_noPasswordRequired} checked {/if} id='flag_noPasswordRequired'>
-                    <span>{t}Login from windows client requires no password{/t}</span>
+                    <p>
+                        <input type='checkbox' value='1' name="flag_noPasswordRequired" {if $flag_noPasswordRequired} checked {/if} id='flag_noPasswordRequired'>
+                        <span>{t}Login from windows client requires no password{/t}</span>
+                    </p>
                 </label>
             {/render}
 
             {render acl=$temporaryDisabledACL checkbox=$multiple_support checked=$use_temporaryDisabled}
                 <label>
-                    <input type='checkbox' value='1' name="flag_temporaryDisabled" {if $flag_temporaryDisabled} checked {/if} id='flag_temporaryDisabled'>
-                    <span>{t}Lock samba account{/t}</span>
+                    <p>
+                        <input type='checkbox' value='1' name="flag_temporaryDisabled" {if $flag_temporaryDisabled} checked {/if} id='flag_temporaryDisabled'>
+                        <span>{t}Lock samba account{/t}</span>
+                    </p>
                 </label>
             {/render}
 
             {render acl=$cannotChangePasswordACL checkbox=$multiple_support checked=$use_cannotChangePassword}
                 <label>
-                    <input type='checkbox' value='1' name='flag_cannotChangePassword' {if $flag_cannotChangePassword} checked {/if} id='flag_cannotChangePassword'>
-                    <span>{t}Cannot change password{/t}</span>
+                    <p>
+                        <input type='checkbox' value='1' name='flag_cannotChangePassword' {if $flag_cannotChangePassword} checked {/if} id='flag_cannotChangePassword'>
+                        <span>{t}Cannot change password{/t}</span>
+                    </p>
                 </label>
             {/render}
 
             <div class="check-input-wrapper">
                 {render acl=$sambaKickoffTimeACL checkbox=$multiple_support checked=$use_sambaKickoffTime}
                     <label>
-                        <input id="flag_sambaKickoffTime" type=checkbox name="flag_sambaKickoffTime" value="1" {if $flag_sambaKickoffTime} checked {/if} class="center">
-                        <span>{t}Account expires after{/t}</span>
+                        <p>
+                            <input id="flag_sambaKickoffTime" type=checkbox name="flag_sambaKickoffTime" value="1" {if $flag_sambaKickoffTime} checked {/if} class="center">
+                            <span>{t}Account expires after{/t}</span>
+                        </p>
                     </label>
                 {/render}
 
@@ -318,8 +352,10 @@
 
             {if $multiple_support}
                 <label>
-                    <input type="checkbox" name="use_workstation_list" {if $use_workstation_list} checked {/if} class="center" onClick="changeState('workstation_list');">
-                    <span></span>
+                    <p>
+                        <input type="checkbox" name="use_workstation_list" {if $use_workstation_list} checked {/if} class="center" onClick="changeState('workstation_list');">
+                        <span></span>
+                    </p>
                 </label>
 
                 <div class="input-field add">

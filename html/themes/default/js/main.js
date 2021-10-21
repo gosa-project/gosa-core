@@ -10,10 +10,10 @@ if (scrollElem && scrollElem.length !== 0) {
         outerScrollElem.style.overflowY = "visible";
         outerScrollElem.style.height = "auto";
 
-        let checkSetup = document.querySelector('.content-area.setup');
-        if (checkSetup && checkSetup.length !== 0) {
-            outerScrollElem.classList.remove('card-content-scroll');
-        }
+        // let checkSetup = document.querySelector('.content-area.setup');
+        // if (checkSetup && checkSetup.length !== 0) {
+        //     outerScrollElem.classList.remove('card-content-scroll');
+        // }
     }
 }
 
@@ -42,17 +42,48 @@ if (pwresetWrapper && pwresetWrapper.length == 1 && cardActionElement && cardAct
 }
 
 // Creation of a submenu if the length of the navigation items of the mobile version is too long
-let tabsElem = document.querySelectorAll('.view-xl');
+let mobileTabsElem = document.querySelectorAll('.view-xl');
+let tablettTabsElem = document.querySelectorAll('.view-xl.view-l');
+let tabsElem = document.querySelectorAll('.view-xl.view-s');
 
-if (tabsElem && tabsElem.length !== 0) {
+if (mobileTabsElem && mobileTabsElem.length !== 0 || tablettTabsElem && tablettTabsElem.length !== 0) {
     let mobileAreaSelection = document.querySelector('#mobile-area-selection');
+    let mobileTabPoint = document.querySelector('.mobile-menu');
+    let tabletAreaSelection = document.querySelector('#tablet-area-selection');
+    let tabletTabPoint = document.querySelector('.tablet-menu');
+    let tabs = document.querySelector('.tabs');
+    let windowWidth = window.innerWidth;
+
+    mobileTabsElem.forEach(element => {
+        let newElement = element.cloneNode(true);
+        newElement.classList.remove('view-xl');
+        newElement.classList.remove('view-l');
+        newElement.classList.remove('view-s');
+        newElement.classList.add('view-m');
+        mobileAreaSelection.appendChild(newElement);
+    });
+
+    tablettTabsElem.forEach(element => {
+        let newElement = element.cloneNode(true);
+        newElement.classList.remove('view-xl');
+        tabletAreaSelection.appendChild(newElement);
+    });
 
     tabsElem.forEach(element => {
         let newElement = element.cloneNode(true);
         newElement.classList.remove('view-xl');
-        newElement.classList.add('view-m');
-        mobileAreaSelection.appendChild(newElement);
+        newElement.classList.remove('view-s');
+        newElement.classList.add('only-tablet');
+        tabs.appendChild(newElement);
     });
+
+    if (windowWidth <= 992) {
+        mobileTabPoint.style.display = "inline-block";
+        tabletTabPoint.style.display = "none";
+    } else if (windowWidth <= 1200) {
+        tabletTabPoint.style.display = "inline-block";
+        mobileTabPoint.style.display = "none";
+    }
 }
 
 // Function to change the visibility of the password

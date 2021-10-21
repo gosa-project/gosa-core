@@ -3,76 +3,86 @@
 <div class="account-settings">
   <!-- must_change_password  -->
   <label>
-    {render acl=$mustchangepasswordACL checkbox=$multiple_support checked=$use_mustchangepassword}
-    <input class="center" type="checkbox" name="mustchangepassword" value="1" {$mustchangepassword}>
-    {/render}
-    <span>{t}User must change password on first login{/t}</span>
+    <p>
+      {render acl=$mustchangepasswordACL checkbox=$multiple_support checked=$use_mustchangepassword}
+      <input class="center" type="checkbox" name="mustchangepassword" value="1" {$mustchangepassword}>
+      {/render}
+      <span>{t}User must change password on first login{/t}</span>
+    </p>
   </label>
 
   <!-- shadowMin -->
   <label>
-    {render acl=$shadowMinACL checkbox=$multiple_support checked=$use_activate_shadowMin}
-    <input type="checkbox" class="center" name="activate_shadowMin" value="1" {$activate_shadowMin}>
-    {/render}
-    <span>
-      {render acl=$shadowMinACL}
-      {$shadowmins}
+    <p>
+      {render acl=$shadowMinACL checkbox=$multiple_support checked=$use_activate_shadowMin}
+      <input type="checkbox" class="center" name="activate_shadowMin" value="1" {$activate_shadowMin}>
       {/render}
-    </span>
+      <span>
+        {render acl=$shadowMinACL}
+        {$shadowmins}
+        {/render}
+      </span>
+    </p>
   </label>
 
   <!-- activate_shadowMax -->
   <label>
-    {render acl=$shadowMaxACL checkbox=$multiple_support checked=$use_activate_shadowMax}
-    <input type="checkbox" class="center" name="activate_shadowMax" value="1" {$activate_shadowMax}>
-    {/render}
-    <span>
-      {render acl=$shadowMaxACL}
-      {$shadowmaxs}
+    <p>
+      {render acl=$shadowMaxACL checkbox=$multiple_support checked=$use_activate_shadowMax}
+      <input type="checkbox" class="center" name="activate_shadowMax" value="1" {$activate_shadowMax}>
       {/render}
-    </span>
+      <span>
+        {render acl=$shadowMaxACL}
+        {$shadowmaxs}
+        {/render}
+      </span>
+    </p>
   </label>
 
   <!-- activate_shadowExpire -->
   <div class="inline-date-picker">
     <label>
-      {render acl=$shadowExpireACL checkbox=$multiple_support checked=$use_activate_shadowExpire}
-      <input type="checkbox" class="center" name="activate_shadowExpire" value="1" {$activate_shadowExpire}>
-      {/render}
-      <span>{t}Password expires on{/t}
-        <div class="input-field inline">
-          <i class="material-icons datepicker right">edit_calendar</i>
+      <p>
+        {render acl=$shadowExpireACL checkbox=$multiple_support checked=$use_activate_shadowExpire}
+        <input type="checkbox" class="center" name="activate_shadowExpire" value="1" {$activate_shadowExpire}>
+        {/render}
+        <span>{t}Password expires on{/t}
           {render acl=$shadowExpireACL}
           <input type="text" id="lang" value="{$lang}" hidden="true">
           <input type="text" id="shadowExpire" name="shadowExpire" class="datepicker" style='width:100px'
             value="{$shadowExpire}">
+          <i class="material-icons datepicker">edit_calendar</i>
           {/render}
-        </div>
-      </span>
+        </span>
+      </p>
     </label>
   </div>
 
   <!-- shadowInactive -->
   <label>
-    {render acl=$shadowInactiveACL checkbox=$multiple_support checked=$use_activate_shadowInactive}
-    <input type="checkbox" class="center" name="activate_shadowInactive" value="1" {$activate_shadowInactive}>
-    {/render}
-    <span>
-      {render acl=$shadowInactiveACL}
-      {$shadowinactives}
+    <p>
+      {render acl=$shadowInactiveACL checkbox=$multiple_support checked=$use_activate_shadowInactive}
+      <input type="checkbox" class="center" name="activate_shadowInactive" value="1" {$activate_shadowInactive}>
       {/render}
-    </span>
+      <span>
+        {render acl=$shadowInactiveACL}
+        {$shadowinactives}
+        {/render}
+      </span>
+    </p>
   </label>
 
   <!-- activate_shadowWarning -->
   <label>
-    {render acl=$shadowWarningACL checkbox=$multiple_support checked=$use_activate_shadowWarning}
-    <input type="checkbox" class="center" name="activate_shadowWarning" value="1" {$activate_shadowWarning}>
-    {/render}
-    <span>
-      {render acl=$shadowWarningACL}
-      {$shadowwarnings}
+    <p>
+      {render acl=$shadowWarningACL checkbox=$multiple_support checked=$use_activate_shadowWarning}
+      <input type="checkbox" class="center" name="activate_shadowWarning" value="1" {$activate_shadowWarning}>
       {/render}
-    </span>
+      <span>
+        {render acl=$shadowWarningACL}
+        {$shadowwarnings}
+        {/render}
+      </span>
+    </p>
   </label>
 </div>

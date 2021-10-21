@@ -34,6 +34,7 @@ h5 {
 
 p {
     font-size: 12px;
+    word-break: break-word;
 }
 
 p.headline {
@@ -64,6 +65,10 @@ button.btn,
 button.btn-small,
 input {
     font-size: 12px;
+}
+
+span {
+    word-break: break-word;
 }
 
 .input-field textarea:not(.multiple) {
@@ -340,10 +345,9 @@ button:focus {
     .content-area {
         padding: 24px;
     }
-    .col.s12,
-    .col.s12.xl6 {
-        padding-left: 0;
-        padding-right: 0;
+    .card-content .row .col.s12,
+    .card-content .row .col.s12.xl6 {
+        padding: 0 0.75rem;
     }
     .col.s12.xl6+.col.s12.xl6 {
         margin-top: 8px;

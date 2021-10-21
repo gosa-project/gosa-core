@@ -38,8 +38,10 @@
 
             {render acl=$goFaxIsEnabledACL checkbox=$multiple_support checked=$use_goFaxIsEnabled}
             <label>
-                <input type=checkbox name="goFaxIsEnabled" value="1" {$goFaxIsEnabled} >
-                <span>{t}Temporary disable FAX usage{/t}</span>
+                <p>
+                    <input type=checkbox name="goFaxIsEnabled" value="1" {$goFaxIsEnabled} >
+                    <span>{t}Temporary disable FAX usage{/t}</span>
+                </p>
             </label>
             {/render}
 
@@ -47,8 +49,10 @@
             <div class="check-input-wrapper">
                 {render acl=$faxtomailACL checkbox=$multiple_support checked=$use_faxtomail}
                 <label>
-                    <input type=checkbox name="faxtomail" value="1" {$faxtomail} >
-                    <span>{t}Deliver FAX as mail to{/t}</span>
+                    <p>
+                        <input type=checkbox name="faxtomail" value="1" {$faxtomail} >
+                        <span>{t}Deliver FAX as mail to{/t}</span>
+                    </p>
                 </label>
                 {/render}
 
@@ -62,8 +66,10 @@
             {else}
             {render acl=$faxtomailACL checkbox=$multiple_support checked=$use_faxtomail}
             <label>
-                <input type=checkbox name="faxtomail" value="1" {$faxtomail} >
-                <span>{t}Deliver FAX as mail{/t}</span>
+                <p>
+                    <input type=checkbox name="faxtomail" value="1" {$faxtomail} >
+                    <span>{t}Deliver FAX as mail{/t}</span>
+                </p>
             </label>
             {/render}
             {/if}
@@ -71,8 +77,10 @@
             <div class="check-input-wrapper">
                 {render acl=$faxtoprinterACL checkbox=$multiple_support checked=$use_faxtoprinter}
                 <label>
-                    <input type=checkbox name="faxtoprinter" value="1" {$faxtoprinter} >
-                    <span>{t}Deliver FAX to printer{/t}</span>
+                    <p>
+                        <input type=checkbox name="faxtoprinter" value="1" {$faxtoprinter} >
+                        <span>{t}Deliver FAX to printer{/t}</span>
+                    </p>
                 </label>
                 {/render}
 

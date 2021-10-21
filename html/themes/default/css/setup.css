@@ -102,11 +102,11 @@
     flex-wrap: nowrap;
     align-content: center;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     height: 54px;
 }
 
-.content-area.setup .content-wrapper .connection-setting input,
+.content-area.setup .content-wrapper .connection-setting input:not([type="checkbox"]),
 .content-area.setup .content-wrapper .connection-setting select,
 .content-area.setup .content-wrapper .connection-setting textarea,
 .content-area.setup .content-wrapper .create-admin-account input {
@@ -130,6 +130,10 @@
 
 .content-area.setup .content-wrapper .authentication-wrapper .connection-setting p {
     margin: 1rem 0 0 10px;
+}
+
+.content-area.setup .content-wrapper .authentication-wrapper .connection-setting .checkbox p {
+    margin: 0;
 }
 
 .content-area.setup .content-wrapper .connection-setting button i {

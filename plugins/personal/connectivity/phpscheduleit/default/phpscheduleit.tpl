@@ -1,6 +1,12 @@
 <div class="phpscheduleit-wrapper">
-    <label class="card-title">
-		<input type="checkbox" name="phpscheduleit" value="B" {$phpscheduleitState} {$gosaphpscheduleitACL}>
-        <span style="overflow: hidden;"><h2>{t}phpScheduleIt account{/t}</h2></span>
-    </label>
+    <div class="row">
+        <div class="col s12">
+            <label>
+                <p>
+                    <input type="checkbox" name="phpscheduleit" value="B" {$phpscheduleitState} {$gosaphpscheduleitACL}>
+                    <span>{t}phpScheduleIt account{/t}</span>
+                </p>
+            </label>
+		</div>
+	</div>
 </div>
