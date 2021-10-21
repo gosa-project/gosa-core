@@ -123,18 +123,24 @@
 
             {render acl=$gotoMimeLeftClickActionACL}
             <label>
-                <input type='radio' name='gotoMimeLeftClickAction_IE' value='I' {if $gotoMimeLeftClickAction_I} checked {/if}>
-                <span>{t}Show file in embedded viewer{/t}</span>
+                <p>
+                    <input type='radio' name='gotoMimeLeftClickAction_IE' value='I' {if $gotoMimeLeftClickAction_I} checked {/if}>
+                    <span>{t}Show file in embedded viewer{/t}</span>
+                </p>
             </label>
 
             <label>
-                <input type='radio' name='gotoMimeLeftClickAction_IE' value='E' {if $gotoMimeLeftClickAction_E} checked {/if}>
-                <span>{t}Show file in external viewer{/t}</span>
+                <p>
+                    <input type='radio' name='gotoMimeLeftClickAction_IE' value='E' {if $gotoMimeLeftClickAction_E} checked {/if}>
+                    <span>{t}Show file in external viewer{/t}</span>
+                </p>
             </label>
 
             <label>
-                <input type='checkbox' name='gotoMimeLeftClickAction_Q' value='1' {if $gotoMimeLeftClickAction_Q} checked {/if}>
-                <span>{t}Ask whether to save to local disk{/t}</span>
+                <p>
+                    <input type='checkbox' name='gotoMimeLeftClickAction_Q' value='1' {if $gotoMimeLeftClickAction_Q} checked {/if}>
+                    <span>{t}Ask whether to save to local disk{/t}</span>
+                </p>
             </label>
             {/render}
         </div>

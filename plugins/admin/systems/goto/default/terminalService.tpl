@@ -103,15 +103,19 @@
                <div class="col s12 xl4">
                     <h3>{t}Display device{/t}</h3>
 
-                    <div class="display-type">
-                         <p>{t}Type{/t}:</p>
-                         {$gotoXMonitor}
-                    </div>
+                    {if $gotoXMonitor}
+                         <div class="display-type">
+                              <p>{t}Type{/t}:</p>
+                              {$gotoXMonitor}
+                         </div>
+                    {/if}
 
                     {render acl=$AutoSyncACL}
                          <label>
-                              <input type="checkbox" name="AutoSync" value="1" {$AutoSyncCHK} onChange="changeState('gotoXHsync');changeState('gotoXVsync');">
-                              <span>{t}Use DDC for automatic detection{/t}</span>
+                              <p>
+                                   <input type="checkbox" name="AutoSync" value="1" {$AutoSyncCHK} onChange="changeState('gotoXHsync');changeState('gotoXVsync');">
+                                   <span>{t}Use DDC for automatic detection{/t}</span>
+                              </p>
                          </label>
                     {/render}
 
@@ -177,8 +181,10 @@
 
                     {render acl=$gotoScannerEnableACL}
                          <label>
-                              <input type="checkbox" name="gotoScannerEnable" value="1" {$gotoScannerEnable} title="{t}Select to start SANE scan service on terminal{/t}">
-                              <span>{t}Provide scan services{/t}</span>
+                              <p>
+                                   <input type="checkbox" name="gotoScannerEnable" value="1" {$gotoScannerEnable} title="{t}Select to start SANE scan service on terminal{/t}">
+                                   <span>{t}Provide scan services{/t}</span>
+                              </p>
                          </label>
                     {/render}
                </div>

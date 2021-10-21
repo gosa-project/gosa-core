@@ -93,10 +93,12 @@
 
                 <div class="col s12 xl6 connection-setting">
                     <label class="checkbox">
-                        <input onClick='document.mainform.submit();'
-                        {if $append_base_to_admin_dn} checked {/if}
-                        type='checkbox' name='append_base_to_admin_dn' value='1'/>
-                        <span>{t}Automatically append LDAP base to administrator DN{/t}</span>
+                        <p>
+                            <input onClick='document.mainform.submit();'
+                            {if $append_base_to_admin_dn} checked {/if}
+                            type='checkbox' name='append_base_to_admin_dn' value='1'/>
+                            <span>{t}Automatically append LDAP base to administrator DN{/t}</span>
+                        </p>
                     </label>
                 </div>
 

@@ -2,12 +2,12 @@
 
 class statChart{
 
-    // Graph data 
+    // Graph data
     protected $statisticData = array();       // Via rpc received stats
-    
+
     // Font used in graphs
     protected $font = "./themes/default/fonts/LiberationSans-Regular.ttf";
-    protected $graphData = array();    
+    protected $graphData = array();
     protected $graphID = 0;
     protected $enableCaching = TRUE;
     protected $skipSeries = array();
@@ -50,7 +50,7 @@ class statChart{
     function getTitle()
     {
         return(_($this->title));
-    }    
+    }
 
 
     function setGraphData($data)
@@ -80,7 +80,7 @@ class statChart{
         }elseif(!empty($cat)){
             $cat = _($cat);
         }
-        return($cat); 
+        return($cat);
     }
 
 
@@ -109,7 +109,7 @@ class statChart{
                     "   <input id='addSeries_{$this->graphName}_{$key}' type='checkbox' ".
                     "       name='addSeries_{$this->graphName}_{$key}' value='1'".
                     "       onClick=\"document.mainform.submit();\" ".
-                    "       {$checked}><LABEL for='addSeries_{$this->graphName}_{$key}'>{$item}</LABEL>".
+                    "       {$checked}><label for='addSeries_{$this->graphName}_{$key}'>{$item}</label>".
                     "   </span>";
         }
         return($str);

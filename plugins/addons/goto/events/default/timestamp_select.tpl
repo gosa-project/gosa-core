@@ -44,17 +44,21 @@
     </div>
 
 	<div class="row">
-		<label class="col s12">
-			<input type="checkbox" name='activate_periodical_job' value='1' {if $activate_periodical_job} checked {/if} 
-				onClick="changeState('periodValue'); changeState('periodType');">
-			<span>{t}Periodical job{/t}</span>
-		</label>
+		<div class="col s12">
+			<label>
+				<p class="periodical-job">
+					<input type="checkbox" name='activate_periodical_job' value='1' {if $activate_periodical_job} checked {/if}
+						onClick="changeState('periodValue'); changeState('periodType');">
+					<span>{t}Periodical job{/t}</span>
+				</p>
+			</label>
+		</div>
 
 		<div class="input-field col s6">
 			<input {if !$activate_periodical_job} disabled {/if} size="4" type='text' id='periodValue' value='{$periodValue}' name='periodValue'>
 			<label for="periodValue">{t}Job interval{/t}</label>
 		</div>
-		
+
 		<div class="input-field col s6">
 			<select name='periodType' id="periodType" {if !$activate_periodical_job} disabled {/if} size=1>
 				{html_options options=$periodTypes selected=$periodType}

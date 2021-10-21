@@ -8,8 +8,10 @@
 	</div>
 
 	<label>
-		<input {if $accepted} checked {/if} type="checkbox" name="accepted"/>
-		<span>{t}I have read the license and accept it{/t}</span>
+		<p>
+			<input {if $accepted} checked {/if} type="checkbox" name="accepted"/>
+			<span>{t}I have read the license and accept it{/t}</span>
+		</p>
 	</label>
 
 	<input type='hidden' name='step_license' value='1'>

@@ -10,31 +10,28 @@
     <div class="row first-level">
       <div class="col s8 xl6 first-level">
         {if $proposalEnabled}
-          <div class="row pw-proposal valign-wrapper">
-            <div class="col s3">
-              <label>
+          <div class="pw-proposal">
+            <label>
+              <p>
                 <input type='radio' value='1' id='proposalSelected_true' name='proposalSelected'
-                  onClick="changeState('new_password'); changeState('repeated_password');" {if $proposalSelected} checked
-                  {/if}>
+                  onClick="changeState('new_password'); changeState('repeated_password');" {if $proposalSelected} checked{/if}>
                 <span>{t}Use proposal{/t}</span>
-              </label>
-            </div>
-            <div class="col s9">
-              <div class="input-field col s10 proposal" id='proposalText'>{$proposal}</div>
-              <div class="col s2 refresh">{image path='<i class="material-icons">refresh</i>' action='refreshProposal'}
-              </div>
-            </div>
-          </div>
 
-          <div class="row pw-proposal">
-            <div class="col s6">
-              <label>
+                <div class="input-field proposal" id='proposalText'>{$proposal}</div>
+                <div class="refresh">
+                  {image path='<i class="material-icons">refresh</i>' action='refreshProposal'}
+                </div>
+              </p>
+            </label>
+
+            <label>
+              <p>
                 <input type='radio' value='0' name='proposalSelected' id='proposalSelected_false'
                   onClick="changeState('new_password'); changeState('repeated_password'); nextfield='new_password'; focus_field('new_password');"
                   {if !$proposalSelected} checked {/if}>
                 <span>{t}Manually specify a password{/t}</span>
-              </label>
-            </div>
+              </p>
+            </label>
           </div>
         {/if}
 
@@ -62,9 +59,11 @@
           {if $passwordChangeForceable}
             <div class="col s6 input-field enforcePasswordChange">
               <label>
-                <input type='checkbox' name='enforcePasswordChange' value='1' id='enforcePasswordChange' {if
-                  $enforcePasswordChange} checked {/if}>
-                <span>{t}Enforce password change on next login.{/t}</span>
+                <p>
+                  <input type='checkbox' name='enforcePasswordChange' value='1' id='enforcePasswordChange' {if
+                    $enforcePasswordChange} checked {/if}>
+                  <span>{t}Enforce password change on next login.{/t}</span>
+                </p>
               </label>
             </div>
           {/if}

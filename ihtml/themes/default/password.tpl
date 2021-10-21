@@ -99,19 +99,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
+                    <td><b><label for="current_password">{t}Current password{/t}</label></b></td>
                     <td>
                         {factory type='password' name='current_password' id='current_password' onfocus="nextfield='new_password';"}
                     </td>
                 </tr>
                 <tr>
-                    <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
+                    <td><b><label for="new_password">{t}New password{/t}</label></b></td>
                     <td>
                         {factory type='password' name='new_password' id='new_password' onfocus="nextfield='new_password_repeated';"}
                     </td>
                 </tr>
                 <tr>
-                    <td><b><LABEL for="new_password_repeated">{t}Repeat new password{/t}</LABEL></b></td>
+                    <td><b><label for="new_password_repeated">{t}Repeat new password{/t}</label></b></td>
                     <td>
                         {factory type='password' name='new_password_repeated' id='new_password_repeated'
                         onfocus="nextfield= 'password_finish';"}

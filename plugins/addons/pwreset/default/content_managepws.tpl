@@ -11,8 +11,10 @@
 
         <div class="col s12 xl6">
             <label>
-                <input {if $preset_pwreset_mode==0} checked {/if} type='radio' name='pwreset_mode' value='0'>
-                <span>{t}Upload a credentials file (CSV format).{/t}</span>
+                <p>
+                    <input {if $preset_pwreset_mode==0} checked {/if} type='radio' name='pwreset_mode' value='0'>
+                    <span>{t}Upload a credentials file (CSV format).{/t}</span>
+                </p>
             </label>
 
             <div class="example-wrapper">
@@ -35,8 +37,10 @@
 
         <div class="col s12 xl6">
             <label>
-                <input {if $preset_pwreset_mode==1} checked {/if} type='radio' name='pwreset_mode' value='1'>
-                <span>{t}Reset passwords of accounts in a certain organizational unit of the LDAP tree.{/t}</span>
+                <p>
+                    <input {if $preset_pwreset_mode==1} checked {/if} type='radio' name='pwreset_mode' value='1'>
+                    <span>{t}Reset passwords of accounts in a certain organizational unit of the LDAP tree.{/t}</span>
+                </p>
             </label>
 
             <div class="input-field">
@@ -81,8 +85,10 @@
                     <tr>
                         <td>
                             <label>
-                                <input value="{$key}" {if $accounts[$key]['checked'] && $accounts[$key]['valid']}checked{/if} {if (!$accounts[$key]['valid'])}disabled{/if} type='checkbox' name='accounts[]' id='account_{$key}'>
-                                <span></span>
+                                <p>
+                                    <input value="{$key}" {if $accounts[$key]['checked'] && $accounts[$key]['valid']}checked{/if} {if (!$accounts[$key]['valid'])}disabled{/if} type='checkbox' name='accounts[]' id='account_{$key}'>
+                                    <span></span>
+                                </p>
                             </label>
                         </td>
                         <td>

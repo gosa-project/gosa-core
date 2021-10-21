@@ -3,8 +3,10 @@
         <div class="col s12">
             {render acl=$gosaIntranetACL checkbox=$multiple_support checked=$use_intranet}
                 <label>
-                    <input type="checkbox" name="intranet" value="B" {$intranetState}>
-                    <span style="overflow: hidden;">{t}Intra net account{/t}</span>
+                    <p>
+                        <input type="checkbox" name="intranet" value="B" {$intranetState}>
+                        <span>{t}Intra net account{/t}</span>
+                    </p>
                 </label>
             {/render}
 		</div>

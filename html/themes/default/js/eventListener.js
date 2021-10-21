@@ -59,6 +59,14 @@ let navInstances = M.Dropdown.init(nav, {
     'alignment': 'right',
 });
 
+let tabletareaSelection = document.querySelectorAll('.dropdown-tablet-area-selection');
+let tabletareaInstances = M.Dropdown.init(tabletareaSelection, {
+    'constrainWidth': false,
+    'coverTrigger': false,
+    'hover': false,
+    'alignment': 'right'
+});
+
 let mobileareaSelection = document.querySelectorAll('.dropdown-mobile-area-selection');
 let mobileareaInstances = M.Dropdown.init(mobileareaSelection, {
     'constrainWidth': false,
