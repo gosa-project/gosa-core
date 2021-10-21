@@ -70,12 +70,14 @@ class password extends plugin
         $pwLength;
 
         $pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
-        $smarty->assign("pwLength", $pwLength);
         switch ($theme) {
             case 'classic':
                 break;
             
             default:
+                if ($pwLength) {
+                    $smarty->assign("length", sprintf(_("The password must have at least %d characters."), $pwLength));
+                }
                 if ($check_special) {
                     $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
                 }
@@ -167,7 +169,7 @@ class password extends plugin
             }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
                 $message[] = _("The password used as new and current are too similar.");
             }elseif((strlen($new_password) < $length)){
-                $message[] = _("The password must have at least $length characters.");
+                $message[] = sprintf(_("The password must have at least %s characters."), $length);
             }elseif($theme == 'default') {
                 if($check_lower && !preg_match($lower, $new_password)) {
                     $message[] = _("The password must contain lowercase letters.");

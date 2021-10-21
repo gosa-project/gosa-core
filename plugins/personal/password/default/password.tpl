@@ -11,7 +11,7 @@
   <div class="content-wrapper card-content-scroll change-password">
     <h2>{t}Change password{/t}</h2>
     <p>
-      {t}To change the password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
+      {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
     </p>
 
     {if $passwordExpired}
@@ -89,12 +89,12 @@
               <ul>
                 <li class="condition">
                   <i id="pw-length" class='material-icons'>close</i>
-                  {t}The password must have at least {$pwLength} characters.{/t}
+                  {$length}
                 </li>
                 {if $lower}
                   <li class="condition">
                     <i id="pw-lowercase" class='material-icons'>close</i>
-                    {t}{$lower}{/t}
+                    {$lower}
                   </li>
                 {/if}
                 {if $upper}

@@ -1297,9 +1297,15 @@ class acl extends plugin
 
     function mkrwbx($name, $state= "")
     {
+        
         $rstate= preg_match('/r/', $state)?'checked':'';
         $wstate= preg_match('/w/', $state)?'checked':'';
         $tname= preg_replace("/[^a-z0-9]/i","_",$name);
+
+        if ($tname == users_user_userPassword) {
+            echo "found <br>";
+            echo $this->acl_is_writeable("");
+        }
 
         if($this->acl_is_writeable("")){
             switch ($this->theme) {

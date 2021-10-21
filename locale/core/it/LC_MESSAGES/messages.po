@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2005-11-18 15:26+0100\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
@@ -13557,9 +13557,10 @@ msgid "Show mail users"
 msgstr "Mostra utenti di posta"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13640,17 +13641,6 @@ msgstr ""
 #: plugins/admin/users/classic/templatize.tpl:26
 msgid "No templates available!"
 msgstr ""
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"Per cambiare la password usa i campi sottostanti. Le modifiche hanno effetto "
-"immediato. Si prega di memorizzare la nuova password, perché l'utente non "
-"sarà in grado di accedere senza di essa."
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -20299,6 +20289,16 @@ msgstr "Cambia la password"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "Per cambiare la password usa i campi sottostanti. Le modifiche hanno "
+#~ "effetto immediato. Si prega di memorizzare la nuova password, perché "
+#~ "l'utente non sarà in grado di accedere senza di essa."
 
 #, fuzzy
 #~ msgid "Mail address for this group"

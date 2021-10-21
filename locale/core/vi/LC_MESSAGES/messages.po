@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VIcore2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2008-07-04 09:59+0200\n"
 "Last-Translator: Stefan Koehler <stefan@gonicus.de>\n"
 "Language-Team: Vietnamese\n"
@@ -13588,9 +13588,10 @@ msgid "Show mail users"
 msgstr "Người dùng mail"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13673,17 +13674,6 @@ msgstr ""
 #: plugins/admin/users/classic/templatize.tpl:26
 msgid "No templates available!"
 msgstr "Không có mẫu nào!"
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"Để thay đổi mật khẩu, hãy sử dụng các trường bên dưới. Việc thay đổi sẽ có "
-"hiệu lực ngay lập tức. Hãy nhớ mật mã mới bởi người dùng sẽ không thể đăng "
-"nhập nếu thiếu nó."
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -20277,6 +20267,16 @@ msgstr "Bạn không được phép thay đổi mật khẩu"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "Để thay đổi mật khẩu, hãy sử dụng các trường bên dưới. Việc thay đổi sẽ "
+#~ "có hiệu lực ngay lập tức. Hãy nhớ mật mã mới bởi người dùng sẽ không thể "
+#~ "đăng nhập nếu thiếu nó."
 
 #, fuzzy
 #~ msgid "Mail address for this group"
