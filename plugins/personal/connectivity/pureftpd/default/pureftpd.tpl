@@ -18,13 +18,13 @@
       <h3>{t}Bandwidth{/t}</h3>
 
       {render acl=$FTPUploadBandwidthACL checkbox=$multiple_support checked=$use_FTPUploadBandwidth}
-        <div class="input field">
-          <input type='text' name="FTPUploadBandwidth" id="FTPUploadBandwidth" maxlength=7 value="{$FTPUploadBandwidth}" {$fstate}>
+        <div class="input-field">
+          <input type='text' name="FTPUploadBandwidth" id="FTPUploadBandwidth" maxlength=7 value="{$FTPUploadBandwidth}" {$fstate} >
           <label for="FTPUploadBandwidth">{t}Upload bandwidth{/t} ({t}KB/s{/t})</label>
         </div>
       {/render}
 
-      {render acl=$FTPDownloadBandwidthACL  checkbox=$multiple_support checked=$use_FTPDownloadBandwidth}
+      {render acl=$FTPDownloadBandwidthACL checkbox=$multiple_support checked=$use_FTPDownloadBandwidth}
         <div class="input-field">
           <input type='text' name="FTPDownloadBandwidth" id="FTPDownloadBandwidth" maxlength=7 value="{$FTPDownloadBandwidth}" {$fstate} >
           <label for="FTPDownloadBandwidth">{t}Download bandwidth{/t} ({t}KB/s{/t})</label>
@@ -75,11 +75,11 @@
       <h3>{t}Miscellaneous{/t}</h3>
 
       {render acl=$FTPStatusACL checkbox=$multiple_support checked=$use_FTPStatus}
-        <div class="input-field">
+        <label>
           <input type=checkbox name="FTPStatus" id="FTPStatus" value="disabled" {$FTPStatus}
             title="{t}Check to disable FTP Access{/t}" {$fstate} class="center">
-          <label for="FTPStatus">{t}Temporary disable FTP access{/t}</label>
-        </div>
+          <span>{t}Temporary disable FTP access{/t}</span>
+        </label>
       {/render}
     </div>
   </div>
