@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2007-06-03 12:27+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -13551,9 +13551,10 @@ msgid "Show mail users"
 msgstr "显示邮件用户"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13633,15 +13634,6 @@ msgstr ""
 #, fuzzy
 msgid "No templates available!"
 msgstr "文件可用。"
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"要改变密码，请使用下面的字段。修改即时生效。请记住新密码，否则无法登录。"
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -20284,6 +20276,14 @@ msgstr "不允许修改口令"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "要改变密码，请使用下面的字段。修改即时生效。请记住新密码，否则无法登录。"
 
 #, fuzzy
 #~ msgid "Mail address for this group"

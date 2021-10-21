@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages-2.6.4-pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2009-03-02 15:03-0300\n"
 "Last-Translator: Clever de Oliveira Jr. <clever@dri.cefetmg.br>\n"
 "Language-Team: Brazilian Portuguese <pt@li.org>\n"
@@ -13260,9 +13260,10 @@ msgid "Show mail users"
 msgstr "Usuários do domínio"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13342,17 +13343,6 @@ msgstr ""
 #: plugins/admin/users/classic/templatize.tpl:26
 msgid "No templates available!"
 msgstr ""
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"Para alterar a palavra-passe utilize os campos abaixo. As alterações surtem "
-"efeito imediatamente. Por favor, memorize a nova senha porque o usuário não "
-"será capaz de acessar o sistema sem ela."
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -19844,6 +19834,16 @@ msgstr "Senha alterada"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "Para alterar a palavra-passe utilize os campos abaixo. As alterações "
+#~ "surtem efeito imediatamente. Por favor, memorize a nova senha porque o "
+#~ "usuário não será capaz de acessar o sistema sem ela."
 
 #, fuzzy
 #~ msgid "Mail address for this group"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2010-01-28 23:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <>\n"
@@ -13594,9 +13594,10 @@ msgid "Show mail users"
 msgstr "Mostrar los usuarios de correo"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13679,17 +13680,6 @@ msgstr ""
 #: plugins/admin/users/classic/templatize.tpl:26
 msgid "No templates available!"
 msgstr "¡No hay plantillas disponibles!"
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"Para cambiar la contraseña, utilice los siguientes campos. Los cambios "
-"tomarán efecto inmediatamente. Por favor, recuerde la nueva contraseña, el "
-"usuario no podrá autenticarse sin ella."
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -20303,6 +20293,16 @@ msgstr "No se permite modificar la contraseña"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "Para cambiar la contraseña, utilice los siguientes campos. Los cambios "
+#~ "tomarán efecto inmediatamente. Por favor, recuerde la nueva contraseña, "
+#~ "el usuario no podrá autenticarse sin ella."
 
 #, fuzzy
 #~ msgid "Mail address for this group"

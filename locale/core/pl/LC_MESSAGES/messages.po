@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2010-04-30 21:15+0100\n"
 "Last-Translator: Piort Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
@@ -13516,9 +13516,10 @@ msgid "Show mail users"
 msgstr "Pokaż użytkowników Poczty"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13600,17 +13601,6 @@ msgstr ""
 #: plugins/admin/users/classic/templatize.tpl:26
 msgid "No templates available!"
 msgstr "Brak szablonów!"
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"Aby zmienić hasło, użyj poniższych pól. Zmiany są wprowadzane "
-"natychmiastowo. Proszę zapamiętać nowe hasło, gdyż bez niego zalogowanie "
-"będzie niemożliwe."
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -20233,6 +20223,16 @@ msgstr "Brak uprawnień do zmiay hasła"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "Aby zmienić hasło, użyj poniższych pól. Zmiany są wprowadzane "
+#~ "natychmiastowo. Proszę zapamiętać nowe hasło, gdyż bez niego zalogowanie "
+#~ "będzie niemożliwe."
 
 #, fuzzy
 #~ msgid "Mail address for this group"

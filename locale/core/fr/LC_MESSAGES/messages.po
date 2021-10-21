@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2011-01-17 01:22+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -13449,9 +13449,10 @@ msgid "Show mail users"
 msgstr "Montrer les utilisateurs de la messagerie"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13531,17 +13532,6 @@ msgstr ""
 #: plugins/admin/users/classic/templatize.tpl:26
 msgid "No templates available!"
 msgstr "Pas de modèles disponibles !"
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"Pour modifier le mot de passe, utilisez les champs ci-dessous. Les "
-"changements prennent effet immédiatement. Veuillez mémoriser le nouveau mot "
-"de passe sinon l'utilisateur ne pourra pas s'identifier sans celui-ci."
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -20102,6 +20092,16 @@ msgstr "Changement de mot de passe"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "Pour modifier le mot de passe, utilisez les champs ci-dessous. Les "
+#~ "changements prennent effet immédiatement. Veuillez mémoriser le nouveau "
+#~ "mot de passe sinon l'utilisateur ne pourra pas s'identifier sans celui-ci."
 
 #, fuzzy
 #~ msgid "Mail address for this group"

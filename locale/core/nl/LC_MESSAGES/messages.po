@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 13:42+0200\n"
+"POT-Creation-Date: 2021-10-21 10:06+0200\n"
 "PO-Revision-Date: 2006-06-02 16:58+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
@@ -13703,9 +13703,10 @@ msgid "Show mail users"
 msgstr "Toon E-mail gebruikers"
 
 #: plugins/admin/users/default/password.tpl:6
+#: plugins/admin/users/classic/password.tpl:4
 #, fuzzy
 msgid ""
-"To change the password use the fields below. The changes take effect "
+"To change the user password use the fields below. The changes take effect "
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
@@ -13788,17 +13789,6 @@ msgstr ""
 #, fuzzy
 msgid "No templates available!"
 msgstr "Bestand is beschikbaar"
-
-#: plugins/admin/users/classic/password.tpl:4
-#, fuzzy
-msgid ""
-"To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user wouldn't be "
-"able to login without it."
-msgstr ""
-"Gebruik de onderstaande velden om het wachtwoord te wijzigen. De "
-"veranderingen worden onmiddelijk doorgevoerd. Onthoud het nieuwe wachtwoord "
-"a.u.b. aangezien de gebruiker niet in kan loggen zonder dit wachtwoord."
 
 #: plugins/admin/users/classic/password.tpl:11
 #: plugins/admin/users/classic/password.tpl:39
@@ -20475,6 +20465,17 @@ msgstr "Het veranderen van het wachtwoord is niet toegestaan"
 #: plugins/addons/pwreset/class_pwreset.inc:61
 msgid "Facilitate mass password resets"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "To change the password use the fields below. The changes take effect "
+#~ "immediately. Please memorize the new password, because the user wouldn't "
+#~ "be able to login without it."
+#~ msgstr ""
+#~ "Gebruik de onderstaande velden om het wachtwoord te wijzigen. De "
+#~ "veranderingen worden onmiddelijk doorgevoerd. Onthoud het nieuwe "
+#~ "wachtwoord a.u.b. aangezien de gebruiker niet in kan loggen zonder dit "
+#~ "wachtwoord."
 
 #, fuzzy
 #~ msgid "Mail address for this group"
