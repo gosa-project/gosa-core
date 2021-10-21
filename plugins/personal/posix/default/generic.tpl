@@ -53,8 +53,10 @@
           <div class="col s6">
             {render acl=$force_idsACL}
               <label>
-                <input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids} onclick="{$onClickIDS}">
-                <span>{t}Force UID/GID{/t}</span>
+                <p>
+                  <input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids} onclick="{$onClickIDS}">
+                  <span>{t}Force UID/GID{/t}</span>
+                </p>
               </label>
             {/render}
 

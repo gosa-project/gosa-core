@@ -34,6 +34,7 @@ h5 {
 
 p {
     font-size: 12px;
+    word-break: break-word;
 }
 
 p.headline {
@@ -64,6 +65,10 @@ button.btn,
 button.btn-small,
 input {
     font-size: 12px;
+}
+
+span {
+    word-break: break-word;
 }
 
 .input-field textarea:not(.multiple) {

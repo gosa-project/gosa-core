@@ -23,18 +23,20 @@
 
         <div class="row">
           <div class="col s6">
-            <p class="checkbox">
-              <label>
+            <label>
+              <p>
                 <input type='checkbox' name='shareFilter' value='1' {if $share} checked {/if}>
                 <span>{t}Public visible{/t}</span>
-              </label>
-            </p>
+              </p>
+            </label>
           </div>
 
           <div class="col s6">
             <label>
-              <input type='checkbox' name='enableFilter' value='1' {if $enable} checked {/if}>
-              <span>{t}Enabled{/t}</span>
+              <p>
+                <input type='checkbox' name='enableFilter' value='1' {if $enable} checked {/if}>
+                <span>{t}Enabled{/t}</span>
+              </p>
             </label>
           </div>
         </div>

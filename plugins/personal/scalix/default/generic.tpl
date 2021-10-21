@@ -35,25 +35,31 @@
          {if !$scalixGroup}
             {render acl=$scalixAdministratorACL}
                <label>
-                  <input type=checkbox name="scalixAdministrator" value="1" {$scalixAdministrator}
-                     title="{t}Select for administrator capabilities{/t}">
-                  <span>{t}SCALIX Administrator{/t}</span>
+                  <p>
+                     <input type=checkbox name="scalixAdministrator" value="1" {$scalixAdministrator}
+                        title="{t}Select for administrator capabilities{/t}">
+                     <span>{t}SCALIX Administrator{/t}</span>
+                  </p>
                </label>
             {/render}
 
             {render acl=$scalixMailboxAdministratorACL}
                <label>
-                  <input type=checkbox name="scalixMailboxAdministrator" value="1" {$scalixMailboxAdministrator}
-                     title="{t}Select for mailbox administrator capabilities{/t}">
-                  <span>{t}SCALIX Mailbox Administrator{/t}</span>
+                  <p>
+                     <input type=checkbox name="scalixMailboxAdministrator" value="1" {$scalixMailboxAdministrator}
+                        title="{t}Select for mailbox administrator capabilities{/t}">
+                     <span>{t}SCALIX Mailbox Administrator{/t}</span>
+                  </p>
                </label>
             {/render}
 
             {render acl=$scalixHideUserEntryACL}
                <label>
-                  <input type=checkbox name="scalixHideUserEntry" value="1" {$scalixHideUserEntry}
-                     title="{t}Hide user entry from address book{/t}">
-                  <span>{t}Hide this user entry in SCALIX{/t}</span>
+                  <p>
+                     <input type=checkbox name="scalixHideUserEntry" value="1" {$scalixHideUserEntry}
+                        title="{t}Hide user entry from address book{/t}">
+                     <span>{t}Hide this user entry in SCALIX{/t}</span>
+                  </p>
                </label>
             {/render}
 
@@ -66,25 +72,31 @@
 
             {render acl=$scalixLimitOutboundMailACL}
                <label>
-                  <input type=checkbox name="scalixLimitOutboundMail" value="1" {$scalixLimitOutboundMail}
-                     title="{t}As sanction on mailbox quota overuse, stop user from sending mail{/t}">
-                  <span>{t}Limit Outbound Mail{/t}</span>
+                  <p>
+                     <input type=checkbox name="scalixLimitOutboundMail" value="1" {$scalixLimitOutboundMail}
+                        title="{t}As sanction on mailbox quota overuse, stop user from sending mail{/t}">
+                     <span>{t}Limit Outbound Mail{/t}</span>
+                  </p>
                </label>
             {/render}
 
             {render acl=$scalixLimitInboundMailACL}
                <label>
-                  <input type=checkbox name="scalixLimitInboundMail" value="1" {$scalixLimitInboundMail}
-                     title="{t}As sanction on mailbox quota overuse, stop user from receiving mail{/t}">
-                  <span>{t}Limit Inbound Mail{/t}</span>
+                  <p>
+                     <input type=checkbox name="scalixLimitInboundMail" value="1" {$scalixLimitInboundMail}
+                        title="{t}As sanction on mailbox quota overuse, stop user from receiving mail{/t}">
+                     <span>{t}Limit Inbound Mail{/t}</span>
+                  </p>
                </label>
             {/render}
 
             {render acl=$scalixLimitNotifyUserACL}
                <label class="closing-elem">
-                  <input type=checkbox name="scalixLimitNotifyUser" value="1" {$scalixLimitNotifyUser}
-                     title="{t}As sanction on mailbox quota overuse, notify the user by email{/t}">
-                  <span>{t}Notify User{/t}</span>
+                  <p>
+                     <input type=checkbox name="scalixLimitNotifyUser" value="1" {$scalixLimitNotifyUser}
+                        title="{t}As sanction on mailbox quota overuse, notify the user by email{/t}">
+                     <span>{t}Notify User{/t}</span>
+                  </p>
                </label>
             {/render}
          {/if}

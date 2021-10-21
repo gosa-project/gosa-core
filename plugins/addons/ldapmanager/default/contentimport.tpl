@@ -31,18 +31,24 @@
 
 			<div class="col s12 xl6">
 				<label>
-					<input type="radio" name="overwrite" id="modify" value="1" checked/>
-					<span>{t}Modify existing objects, keep untouched attributes{/t}</span>
+					<p>
+						<input type="radio" name="overwrite" id="modify" value="1" checked/>
+						<span>{t}Modify existing objects, keep untouched attributes{/t}</span>
+					</p>
 				</label>
 
 				<label>
-					<input type="radio" name="overwrite" id="overwrite" value="0"/>
-					<span>{t}Overwrite existing objects, all not listed attributes will be removed{/t}</span>
+					<p>
+						<input type="radio" name="overwrite" id="overwrite" value="0"/>
+						<span>{t}Overwrite existing objects, all not listed attributes will be removed{/t}</span>
+					</p>
 				</label>
 
 				<label>
-					<input type="checkbox" name="cleanup" id="cleanup" value="1"/>
-					<span for="cleanup">{t}Remove existing entries first{/t}</span>
+					<p>
+						<input type="checkbox" name="cleanup" id="cleanup" value="1"/>
+						<span for="cleanup">{t}Remove existing entries first{/t}</span>
+					</p>
 				</label>
 			</div>
 		</div>

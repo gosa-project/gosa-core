@@ -1,8 +1,10 @@
 {if !$is_account}
 	{render acl=$acl}
 		<label>
-			<input type="checkbox" name="gotoLpdEnable_enabled" onChange="cdocument.mainform.submit();" {if $is_account} checked {/if}>
-			<span>{t}Enable printer settings{/t}</span>
+			<p>
+				<input type="checkbox" name="gotoLpdEnable_enabled" onChange="cdocument.mainform.submit();" {if $is_account} checked {/if}>
+				<span>{t}Enable printer settings{/t}</span>
+			</p>
 		</label>
 	{/render}
 {else}
@@ -11,8 +13,10 @@
 			{render acl=$acl}
 				<div class="col s12 xl6">
 					<label>
-						<input type="checkbox" name="gotoLpdEnable_enabled" onChange="document.mainform.submit();" {if $is_account} checked {/if}>
-						<span>{t}Enable printer settings{/t}</span>
+						<p>
+							<input type="checkbox" name="gotoLpdEnable_enabled" onChange="document.mainform.submit();" {if $is_account} checked {/if}>
+							<span>{t}Enable printer settings{/t}</span>
+						</p>
 					</label>
 
 					<div class="input-field">
@@ -38,8 +42,10 @@
 					</div>
 
 					<label>
-						<input type="checkbox" name="s_WriteOnly" value="Y" {if $s_WriteOnly == "Y"} checked {/if}>
-						<span>{t}Write only{/t}</span>
+						<p>
+							<input type="checkbox" name="s_WriteOnly" value="Y" {if $s_WriteOnly == "Y"} checked {/if}>
+							<span>{t}Write only{/t}</span>
+						</p>
 					</label>
 				</div>
 			{/render}

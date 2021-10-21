@@ -28,12 +28,14 @@
             {render acl=$gidNumberACL}
             <div class="input-gid">
                 <label>
-                            <input type=checkbox name="force_gid" value="1" title="{t}Normally IDs are auto-generated, select to specify manually{/t}" {$force_gid} onclick="changeState('gidNumber')">
-                            <span>
-                                {t}Force GID{/t}
-                                <input type='text' name="gidNumber" size=9 maxlength=9 id="gidNumber" {$forceMode} value="{$gidNumber}" title="{t}Forced ID number{/t}">
-                            </span>
-                        </label>
+                    <p>
+                        <input type=checkbox name="force_gid" value="1" title="{t}Normally IDs are auto-generated, select to specify manually{/t}" {$force_gid} onclick="changeState('gidNumber')">
+                        <span>
+                            {t}Force GID{/t}
+                            <input type='text' name="gidNumber" size=9 maxlength=9 id="gidNumber" {$forceMode} value="{$gidNumber}" title="{t}Forced ID number{/t}">
+                        </span>
+                    </p>
+                </label>
             </div>
             {/render}
 
@@ -41,13 +43,15 @@
                 {render acl=$sambaGroupTypeACL}
                 <div class="col s6">
                     <label>
-                        <input type=checkbox name="smbgroup" value="1" {$smbgroup}
-                        title="{t}Select to create a samba conform group{/t}">
-                        <span>
-                            <select id="groupType" size="1" name="groupType">
-                                {html_options options=$groupTypes selected=$groupType}
-                            </select>
-                        </span>
+                        <p>
+                            <input type=checkbox name="smbgroup" value="1" {$smbgroup}
+                            title="{t}Select to create a samba conform group{/t}">
+                            <span>
+                                <select id="groupType" size="1" name="groupType">
+                                    {html_options options=$groupTypes selected=$groupType}
+                                </select>
+                            </span>
+                        </p>
                     </label>
                 </div>
                 {/render}
@@ -69,8 +73,10 @@
 
             {render acl=$sambaGroupTypeACL checkbox=$multiple_support checked=$use_smbgroup}
             <label>
-                <input class="center" type=checkbox name="smbgroup" value="1" {$smbgroup}>
-                <span>{t}Select to create a samba conform group{/t}</span>
+                <p>
+                    <input class="center" type=checkbox name="smbgroup" value="1" {$smbgroup}>
+                    <span>{t}Select to create a samba conform group{/t}</span>
+                </p>
             </label>
             {/render}
 
@@ -97,8 +103,10 @@
 
             {render acl=$fonGroupACL checkbox=$multiple_support checked=$use_fon_group}
             <label>
-                <input class="center" type=checkbox name="fon_group" value="1" {$fon_group}>
-                <span>{t}Members are in a phone pickup group{/t}</span>
+                <p>
+                    <input class="center" type=checkbox name="fon_group" value="1" {$fon_group}>
+                    <span>{t}Members are in a phone pickup group{/t}</span>
+                </p>
             </label>
             {/render}
 

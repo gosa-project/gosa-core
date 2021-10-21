@@ -18,7 +18,7 @@
       <b>
         <p style="color:red">{t}Your Password has expired. Please choose a new password.{/t}</p>
       </b>
-      <hr>
+      <hr class="divider">
     {/if}
 
     <div class="password-wrapper card-content-scroll">
@@ -33,31 +33,28 @@
           </div>
 
           {if $proposalEnabled}
-            <div class="row pw-proposal valign-wrapper">
-              <div class="col s3">
-                <label>
+            <div class="pw-proposal">
+              <label>
+                <p>
                   <input type='radio' value='1' id='proposalSelected_true' name='proposalSelected'
-                    onClick="changeState('new_password'); changeState('repeated_password');" {if $proposalSelected} checked
-                    {/if}>
+                    onClick="changeState('new_password'); changeState('repeated_password');" {if $proposalSelected} checked{/if}>
                   <span>{t}Use proposal{/t}</span>
-                </label>
-              </div>
-              <div class="col s9">
-                <div class="input-field col s10 proposal" id='proposalText'>{$proposal}</div>
-                <div class="col s2 refresh">{image path='<i class="material-icons">refresh</i>' action='refreshProposal'}
-                </div>
-              </div>
-            </div>
 
-            <div class="row pw-proposal">
-              <div class="col s6">
-                <label>
+                  <div class="input-field proposal" id='proposalText'>{$proposal}</div>
+                  <div class="refresh">
+                    {image path='<i class="material-icons">refresh</i>' action='refreshProposal'}
+                  </div>
+                </p>
+              </label>
+
+              <label>
+                <p>
                   <input type='radio' value='0' name='proposalSelected' id='proposalSelected_false'
                     onClick="changeState('new_password'); changeState('repeated_password'); nextfield='new_password'; focus_field('new_password');"
                     {if !$proposalSelected} checked {/if}>
                   <span>{t}Manually specify a password{/t}</span>
-                </label>
-              </div>
+                </p>
+              </label>
             </div>
           {/if}
 

@@ -11,9 +11,11 @@
       {if $multiple_support}
         {render acl=$gotoProfileACL checkbox=$multiple_support checked=$use_useProfile}
           <label>
-            <input type="checkbox" value="1" {if $useProfile} checked {/if}
-              name="useProfile" id="useProfile">
-            <span>{t}Use profile management{/t}</span>
+            <p>
+              <input type="checkbox" value="1" {if $useProfile} checked {/if}
+                name="useProfile" id="useProfile">
+              <span>{t}Use profile management{/t}</span>
+            </p>
           </label>
         {/render}
 
@@ -32,22 +34,26 @@
           {render acl=$gotoProfileQuotaACL checkbox=$multiple_support checked=$use_gotoProfileQuota}
             <div class="input-field">
               <input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" size="6" id="gotoProfileQuota">
-              <span>{t}Profile quota{/t} ({t}MB{/t})</span>
+              <label for="gotoProfileQuota">{t}Profile quota{/t} ({t}MB{/t})</label>
             </div>
           {/render}
 
           {render acl=$gotoProfileFlagCACL checkbox=$multiple_support checked=$use_gotoProfileFlagC}
             <label>
-              <input class="center" type="checkbox" name="gotoProfileFlagC" value="C" {$gotoProfileFlagCCHK} id="gotoProfileFlagC">
-              <span>{t}Cache profile locally{/t}</span>
+              <p>
+                <input class="center" type="checkbox" name="gotoProfileFlagC" value="C" {$gotoProfileFlagCCHK} id="gotoProfileFlagC">
+                <span>{t}Cache profile locally{/t}</span>
+              </p>
             </label>
           {/render}
         </div>
       {else}
         {render acl=$gotoProfileACL}
           <label>
-            <input type="checkbox" value="1" {$useProfileCHK} name="useProfile" id="useProfile" onclick="changeState('gotoProfileServer');changeState('gotoProfileFlagC');changeState('gotoProfileQuota');">
-            <span>{t}Use profile management{/t}</span>
+            <p>
+              <input type="checkbox" value="1" {$useProfileCHK} name="useProfile" id="useProfile" onclick="changeState('gotoProfileServer');changeState('gotoProfileFlagC');changeState('gotoProfileQuota');">
+              <span>{t}Use profile management{/t}</span>
+            </p>
           </label>
         {/render}
 
@@ -80,8 +86,10 @@
 
           {render acl=$gotoProfileFlagCACL}
             <label>
-              <input class="center" type="checkbox" name="gotoProfileFlagC" value="C" {$gotoProfileFlagCCHK} id="gotoProfileFlagC">
-              <span>{t}Cache profile locally{/t}</span>
+              <p>
+                <input class="center" type="checkbox" name="gotoProfileFlagC" value="C" {$gotoProfileFlagCCHK} id="gotoProfileFlagC">
+                <span>{t}Cache profile locally{/t}</span>
+              </p>
             </label>
           {/render}
         </div>
@@ -92,10 +100,12 @@
       {if $kiosk_enabled}
         {if $multiple_support}
           <label>
-            <input type="checkbox" name="use_kiosk_server" value="1" {if $use_kiosk_server} checked {/if} onClick="
-              changeState('kiosk_server');
-              changeState('kiosk_profile');">
-            <span>{t}Server{/t}</span>
+            <p>
+              <input type="checkbox" name="use_kiosk_server" value="1" {if $use_kiosk_server} checked {/if} onClick="
+                changeState('kiosk_server');
+                changeState('kiosk_profile');">
+              <span>{t}Server{/t}</span>
+            </p>
           </label>
         {/if}
 
@@ -149,8 +159,10 @@
 
       {render acl=$gotoProfileFlagLACL checkbox=$multiple_support checked=$use_gotoProfileFlagL}
         <label>
-          <input type="checkbox" name="gotoProfileFlagL" id="gotoProfileFlagL" value="L" {$gotoProfileFlagLCHK} class="center">
-          <span>{t}Resolution changeable during session{/t}</span>
+          <p>
+            <input type="checkbox" name="gotoProfileFlagL" id="gotoProfileFlagL" value="L" {$gotoProfileFlagLCHK} class="center">
+            <span>{t}Resolution changeable during session{/t}</span>
+          </p>
         </label>
       {/render}
     </div>
@@ -252,8 +264,10 @@
     <div class="col s12 xl6">
       {if $multiple_support}
         <label>
-          <input type="checkbox" name="use_gotoPrinter" value="1" {if $use_gotoPrinter} checked {/if} class="center" onClick="$('div_gotoPrinter').toggle();">
-          <span>{t}Printer{/t}</span>
+          <p>
+            <input type="checkbox" name="use_gotoPrinter" value="1" {if $use_gotoPrinter} checked {/if} class="center" onClick="$('div_gotoPrinter').toggle();">
+            <span>{t}Printer{/t}</span>
+          </p>
         </label>
 
         <div id="div_gotoPrinter" {if !$use_gotoPrinter} style="display: none;" {/if}>

@@ -21,8 +21,10 @@
 
       <div class="attention">
         <label>
-          <input type='checkbox' name='warningAccepted' value='1' id='warningAccepted'/>
-          <span>{t}I understand that there are certain risks, but I want to modify properties!{/t}</span>
+          <p>
+            <input type='checkbox' name='warningAccepted' value='1' id='warningAccepted'/>
+            <span>{t}I understand that there are certain risks, but I want to modify properties!{/t}</span>
+          </p>
         </label>
       </div>
     </div>
