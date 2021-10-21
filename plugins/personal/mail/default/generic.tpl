@@ -50,13 +50,15 @@
             {/if}
 
             <label>
-               <span>{t}Quota size{/t}
-                  {render acl=$gosaMailQuotaACL checkbox=$multiple_support checked=$use_gosaMailQuota}
-                  <input type='text' id="gosaMailQuota" name="gosaMailQuota" size="6" align="middle" maxlength="60"
-                     value="{$gosaMailQuota}">
-                  <span class="helper-text">MB</span>
-                  {/render}
-               </span>
+               <p>
+                  <span>{t}Quota size{/t}
+                     {render acl=$gosaMailQuotaACL checkbox=$multiple_support checked=$use_gosaMailQuota}
+                     <input type='text' id="gosaMailQuota" name="gosaMailQuota" size="6" align="middle" maxlength="60"
+                        value="{$gosaMailQuota}">
+                     <span class="helper-text">MB</span>
+                     {/render}
+                  </span>
+               </p>
             </label>
          </div>
       </div>
@@ -129,28 +131,28 @@
 
    <div class="row setting leave-settings">
       <div class="col s12 xl6">
-         <p>
-            {render acl=$gosaMailDeliveryModeIACL checkbox=$multiple_support checked=$use_drop_own_mails}
-               <label>
+         {render acl=$gosaMailDeliveryModeIACL checkbox=$multiple_support checked=$use_drop_own_mails}
+            <label>
+               <p>
                   <input {if $own_script !="" } disabled {/if} class="center" id='drop_own_mails' type="checkbox"
                      name="drop_own_mails" value="1" {$drop_own_mails}
                      title="{t}Select if you want to forward mails without getting own copies of them{/t}" />
                   <span>{t}No delivery to own mailbox{/t}</span>
-               </label>
-            {/render}
-         </p>
+               </p>
+            </label>
+         {/render}
 
-         <p>
-            {render acl=$gosaMailDeliveryModeVACL checkbox=$multiple_support checked=$use_use_vacation}
-               <label>
+         {render acl=$gosaMailDeliveryModeVACL checkbox=$multiple_support checked=$use_use_vacation}
+            <label>
+               <p>
                   <input type="checkbox" name="use_vacation" value="1" {$use_vacation} id="use_vacation" {if $own_script
                      !="" } disabled {/if}
                      title="{t}Select to automatically response with the vacation message defined below{/t}"
                      class="center" onclick="changeStates()">
                   <span>{t}Activate vacation message{/t}</span>
-               </label>
-            {/render}
-         </p>
+               </p>
+            </label>
+         {/render}
 
          <div class="leave-notification">
             {if $rangeEnabled}
@@ -240,28 +242,30 @@
 
          <div class="contingent">
             <label>
-               {render acl=$gosaMailDeliveryModeRACL checkbox=$multiple_support checked=$use_use_mailsize_limit}
-               <input {if $own_script !="" } disabled {/if} id='use_mailsize_limit' type="checkbox"
-                  name="use_mailsize_limit" value="1" {$use_mailsize_limit} class="center">
-               {/render}
-               <span>{t}Reject mails bigger than{/t}
-                  {render acl=$gosaMailMaxSizeACL checkbox=$multiple_support checked=$use_gosaMailMaxSize}
-                  <input {if $own_script !="" } disabled {/if} id="gosaMailMaxSize" name="gosaMailMaxSize" size="6" align="middle" type='text' maxlength="30" value="{$gosaMailMaxSize}" class="center">
-                  <span class="helper-text">{t}MB{/t}</span>
+               <p>
+                  {render acl=$gosaMailDeliveryModeRACL checkbox=$multiple_support checked=$use_use_mailsize_limit}
+                  <input {if $own_script !="" } disabled {/if} id='use_mailsize_limit' type="checkbox"
+                     name="use_mailsize_limit" value="1" {$use_mailsize_limit} class="center">
                   {/render}
-               </span>
+                  <span>{t}Reject mails bigger than{/t}
+                     {render acl=$gosaMailMaxSizeACL checkbox=$multiple_support checked=$use_gosaMailMaxSize}
+                     <input {if $own_script !="" } disabled {/if} id="gosaMailMaxSize" name="gosaMailMaxSize" size="6" align="middle" type='text' maxlength="30" value="{$gosaMailMaxSize}" class="center">
+                     <span class="helper-text">{t}MB{/t}</span>
+                     {/render}
+                  </span>
+               </p>
             </label>
          </div>
 
          <div class="forward-messages">
-            <p>
-               <label>
+            <label>
+               <p>
                   {if $multiple_support}
                      <input type="checkbox" name="use_gosaMailForwardingAddress" onclick="changeState('gosaMailForwardingAddress');" class="center" {if $use_gosaMailForwardingAddress} checked {/if}>
                   {/if}
                   <span>{t}Forward messages to{/t}</span>
-               </label>
-            </p>
+               </p>
+            </label>
             <div class="input-field {if $multiple_support} move-in {/if}">
                {render acl=$gosaMailForwardingAddressACL}
                   <select {if $use_gosaMailForwardingAddress} checked {/if} id="gosaMailForwardingAddress"

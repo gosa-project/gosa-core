@@ -557,9 +557,11 @@ class listing
                     $result .= '<th class="checkbox-column">';
                     if ($this->multiSelect) {
                         $result .= "  <label>
-                                        <input type='checkbox' id='select_all' name='select_all'
-                                            title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >
-                                        <span></span>
+                                        <p>
+                                            <input type='checkbox' id='select_all' name='select_all'
+                                                title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >
+                                            <span></span>
+                                        </p>
                                     </label>";
                     } else {
                         $result .= '&nbsp;';
@@ -633,8 +635,10 @@ class listing
                     if ($this->multiSelect) {
                         $trow .= "    <td>
                                             <label>
-                                                <input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'>
-                                                <span></span>
+                                                <p>
+                                                    <input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'>
+                                                    <span></span>
+                                                </p>
                                             </label>
                                         </td>";
                     }
@@ -642,8 +646,10 @@ class listing
                     if ($this->singleSelect) {
                         $trow .= "    <td>
                                             <label>
-                                                <input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'>
-                                                <span></span>
+                                                <p>
+                                                    <input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'>
+                                                    <span></span>
+                                                </p>
                                             </label>
                                         </td>";
                     }
@@ -1639,7 +1645,7 @@ class listing
             if (!$this->hasActionPermission($action, $this->filter->base)) {
                 continue;
             }
-            
+
 
             // Skip entry if there're missing dependencies
             if (isset($action['depends'])) {

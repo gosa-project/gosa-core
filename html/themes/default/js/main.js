@@ -10,10 +10,10 @@ if (scrollElem && scrollElem.length !== 0) {
         outerScrollElem.style.overflowY = "visible";
         outerScrollElem.style.height = "auto";
 
-        let checkSetup = document.querySelector('.content-area.setup');
-        if (checkSetup && checkSetup.length !== 0) {
-            outerScrollElem.classList.remove('card-content-scroll');
-        }
+        // let checkSetup = document.querySelector('.content-area.setup');
+        // if (checkSetup && checkSetup.length !== 0) {
+        //     outerScrollElem.classList.remove('card-content-scroll');
+        // }
     }
 }
 

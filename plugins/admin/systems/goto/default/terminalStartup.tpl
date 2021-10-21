@@ -7,8 +7,10 @@
         {render acl=$gotoLdapServerACL}
           {if $member_of_ogroup}
             <label>
-              <input type="checkbox" name="gotoLdap_inherit" value="1" {if $gotoLdap_inherit} checked {/if} onClick="document.mainform.submit();">
-              <span>{t}inherit from group{/t}</span>
+              <p>
+                <input type="checkbox" name="gotoLdap_inherit" value="1" {if $gotoLdap_inherit} checked {/if} onClick="document.mainform.submit();">
+                <span>{t}inherit from group{/t}</span>
+              </p>
             </label>
           {/if}
         {/render}

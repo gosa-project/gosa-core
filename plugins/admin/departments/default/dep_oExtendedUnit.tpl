@@ -113,8 +113,10 @@
         <div class="col s6">
             {render acl=$gosaUnitTagACL}
             <label>
-                <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}>
-                <span>{t}Tag department as an independent administrative unit{/t}</span>
+                <p>
+                    <input id="is_administrational_unit" type=checkbox name="is_administrational_unit" value="1" {$gosaUnitTag}>
+                    <span>{t}Tag department as an independent administrative unit{/t}</span>
+                </p>
             </label>
             {/render}
         </div>

@@ -568,7 +568,7 @@ class acl extends plugin
                     case 'classic':
                         $vData = array("data" => array(image("plugins/groups/images/select_group.png")));
                         break;
-                    
+
                     default:
                         $vData = array("data" => array(image("<i class='material-icons'>groups</i>")));
                         break;
@@ -592,13 +592,13 @@ class acl extends plugin
                     $groupIcon = image("plugins/groups/images/select_group.png");
                     $userIcon  = image("plugins/users/images/select_user.png");
                     break;
-                
+
                 default:
                     $groupIcon = image("<i class='material-icons'>groups</i>");
                     $userIcon  = image("<i class='material-icons'>person</i>");
                     break;
-            }                
-        
+            }
+
 
             if($this->acl_is_writeable("")) {
                 foreach($this->dialog->save() as $entry) {
@@ -700,7 +700,7 @@ class acl extends plugin
                             case 'classic':
                                 $summary = '<i>'._("No ACL settings for this category!").'</i>';
                                 break;
-                            
+
                             default:
                                 $summary = '<p>'._("No ACL settings for this category!").'</p>';
                                 break;
@@ -716,7 +716,7 @@ class acl extends plugin
                             case 'classic':
                                 $actions .= image('images/lists/edit.png', 'cat_edit_'.$section, msgPool::editButton(_("category ACL")));
                                 break;
-                            
+
                             default:
                                 $actions .= image("<i class='material-icons input-icons'>edit</i>", 'cat_edit_'.$section, msgPool::editButton(_("category ACL")));
                                 break;
@@ -727,7 +727,7 @@ class acl extends plugin
                             case 'classic':
                                 $actions .= image('images/lists/trash.png', 'cat_del_'.$section, msgPool::delButton(_("category ACL")));
                                 break;
-                            
+
                             default:
                                 $actions .= image("<i class='material-icons input-icons'>delete</i>", 'cat_del_'.$section, msgPool::delButton(_("category ACL")));
                                 break;
@@ -989,7 +989,7 @@ class acl extends plugin
             if(!isset($this->aclContents[$key][0])){
                 $this->aclContents[$key]= [''];
             }
-            
+
 
             $currentAcl= $this->aclContents[$key];
 
@@ -1015,7 +1015,7 @@ class acl extends plugin
             if(isset($_SERVER['HTTP_USER_AGENT']) &&
                     (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) ||
                     (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
-                
+
                 switch ($this->theme) {
                     case 'classic':
                         $display .="<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
@@ -1113,17 +1113,17 @@ class acl extends plugin
                 default:
                     $display .= "   <div class='object-body-wrapper'>
                                         <div class='row'>
-                                            <div class='col s9'>$options</div>
-                                            <div class='col s3'>
-                                                "._("Complete object").": $more_options
+                                            <div class='col s9 options'>$options</div>
+                                            <div class='col s3 options'>
+                                                <span class='selection-label'>"._("Complete object").":</span> $more_options
                                             </div>
                                         </div>
                                     </div>
                                 </div>";
                     break;
             }
-            
-                        
+
+
 
             /* Walk through the list of attributes */
             $cnt= 1;
@@ -1177,7 +1177,7 @@ class acl extends plugin
                         case 'classic':
                             $display .= '<tr>';
                             break;
-                        
+
                         default:
                             break;
                     }
@@ -1255,7 +1255,7 @@ class acl extends plugin
                 case 'classic':
                     $display .= "</table><br/>";
                     break;
-                
+
                 default:
                     break;
             }
@@ -1276,8 +1276,10 @@ class acl extends plugin
                             <label for='acl_$tname'>$text</label>";
                 default:
                     return "<label>
-                                <input type='checkbox' id='acl_$tname' name='acl_$name' $state>
-                                <span>$text</span>
+                                <p>
+                                    <input type='checkbox' id='acl_$tname' name='acl_$name' $state>
+                                    <span>$text</span>
+                                </p>
                             </label>";
             }
         }else{
@@ -1286,8 +1288,10 @@ class acl extends plugin
                     return "<input type='checkbox' disabled name='dummy_".microtime(1)."' $state>$text";
                 default:
                     return "<label>
-                                <input type='checkbox' name='dummy_".microtime(1)."' disabled $state>
-                                <span>$text</span>
+                                <p>
+                                    <input type='checkbox' name='dummy_".microtime(1)."' disabled $state>
+                                    <span>$text</span>
+                                </p>
                             </label>";
                     break;
             }
@@ -1310,12 +1314,16 @@ class acl extends plugin
                             <label for='acl_".$tname."_w'>"._("write")."</label>";
                 default:
                     return "<label>
-                                <input type='checkbox' id='acl_".$tname."_r' name='acl_${name}_r' $rstate>
-                                <span>"._("read")."</span>
+                                <p>
+                                    <input type='checkbox' id='acl_".$tname."_r' name='acl_${name}_r' $rstate>
+                                    <span>"._("read")."</span>
+                                </p>
                             </label>
                             <label>
-                                <input type='checkbox' id='acl_".$tname."_w' name='acl_${name}_w' $wstate>
-                                <span>"._("write")."</span>
+                                <p>
+                                    <input type='checkbox' id='acl_".$tname."_w' name='acl_${name}_w' $wstate>
+                                    <span>"._("write")."</span>
+                                </p>
                             </label>" ;
             }
         }else{
@@ -1325,12 +1333,16 @@ class acl extends plugin
                             <input disabled type=checkbox name='dummy_".microtime(1)."' $wstate>"._("write");
                 default:
                     return "<label>
-                                <input type='checkbox' name='dummy_".microtime(1)."' disabled $rstate>
-                                <span>"._("read")."</span>
+                                <p>
+                                    <input type='checkbox' name='dummy_".microtime(1)."' disabled $rstate>
+                                    <span>"._("read")."</span>
+                                </p>
                             </label>
                             <label>
-                                <input type='checkbox' name='dummy_".microtime(1)."' disabled $wstate>
-                                <span>"._("write")."</span>
+                                <p>
+                                    <input type='checkbox' name='dummy_".microtime(1)."' disabled $wstate>
+                                    <span>"._("write")."</span>
+                                </p>
                             </label>";
             }
         }
@@ -1551,7 +1563,7 @@ class acl extends plugin
                         case 'classic':
                             $icon = image("plugins/groups/images/select_group.png");
                             break;
-                        
+
                         default:
                             $icon = image("<i class='material-icons'>groups</i>");
 

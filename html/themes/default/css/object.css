@@ -415,16 +415,15 @@
     margin-bottom: 0;
 }
 
-.object-info .account-settings .inline-date-picker .input-field i {
-    font-size: 18px;
+.object-info .account-settings .inline-date-picker input.datepicker {
     margin-left: 10px;
-    margin-top: 6px;
 }
 
-.object-info .account-settings .inline-date-picker .input-field.inline {
-    vertical-align: unset;
-    margin-top: 0;
-    height: 25px;
+.object-info .account-settings .inline-date-picker i {
+    position: absolute;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 3px;
 }
 
 .object-info .posix-settings .acl-member,
@@ -524,8 +523,15 @@
 /* Connectivity Settings */
 
 .connectivity-wrapper .proxy-account,
-.connectivity-wrapper .opengw-content {
+.connectivity-wrapper .opengw-content,
+.connectivity-wrapper .ftp-account,
+.connectivity-wrapper .oxchange-account,
+.connectivity-wrapper .kolab-account {
     margin-left: 35px;
+}
+
+.connectivity-wrapper .ftp-account .intermediate-char {
+    margin: 0 10px;
 }
 
 .connectivity-wrapper label span h3 {
@@ -581,6 +587,7 @@
     align-content: center;
     align-items: center;
     justify-content: flex-start;
+    margin-bottom: 8px;
 }
 
 .object-info .contingent label {
@@ -588,24 +595,15 @@
     color: #000000;
 }
 
-.object-info .contingent label span {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    align-items: center;
-    justify-content: flex-start;
-}
-
 .object-info .contingent label span input[type=text]:not(.browser-default) {
-    max-width: 200px;
-    width: auto;
-    min-height: 30px;
-    height: 30px!important;
+    min-height: 24px;
+    height: 24px!important;
     font-size: 12px;
     padding: 0;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-bottom: 0;
+    width: auto;
+    max-width: 100px;
+    text-align: center;
 }
 
 .object-info .leave-notification {
@@ -1322,7 +1320,17 @@
     margin-top: -8px;
 }
 
+.system-wrapper .network-wrapper label p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .system-wrapper .network-wrapper label i {
+    font-size: 18px;
     margin-left: 10px;
 }
 
@@ -1368,8 +1376,8 @@
     margin-bottom: 8px;
 }
 
-.system-wrapper .system-devices .display-type p:last-child {
-    margin-left: 10px;
+.system-wrapper .system-devices .display-type p:first-child {
+    margin-right: 10px;
 }
 
 .system-wrapper .system-devices .input-field.add span {

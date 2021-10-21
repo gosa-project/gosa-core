@@ -25,13 +25,17 @@
 		<div class="col s12 xl6">
 			<div class="script-option">
 				<label>
-					<input type="checkbox" value="L" name="LogonLast" {$LogonLastCHK} id="LogonLast" />
-					<span for="LogonLast">{t}Last script{/t}</span>
+					<p>
+						<input type="checkbox" value="L" name="LogonLast" {$LogonLastCHK} id="LogonLast" />
+						<span for="LogonLast">{t}Last script{/t}</span>
+					</p>
 				</label>
 
 				<label class="closing-elem">
-					<input type="checkbox" value="O" name="LogonOverload" {$LogonOverloadCHK} id="LogonOverload" />
-					<span for="LogonOverload">{t}Script can be replaced by user{/t}</span>
+					<p>
+						<input type="checkbox" value="O" name="LogonOverload" {$LogonOverloadCHK} id="LogonOverload" />
+						<span for="LogonOverload">{t}Script can be replaced by user{/t}</span>
+					</p>
 				</label>
 			</div>
 		</div>
