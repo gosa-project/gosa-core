@@ -1,27 +1,26 @@
-<table summary="{t}Netatalk configuration{/t}">
-<tr>
-	<td>
-		<label for="apple_user_share">{t}Share{/t}</label>
-	</td>
-	<td>
+<div class="netatalk-wrapper">
+    <div class="row">
+        <div class="col s12 xl6">
+          	<h3>{t}Netatalk configuration{/t}</h3>
 
-{render acl=$netatalkShareACL}
-		<select name="apple_user_share" id="apple_user_share" size=1>
-			{html_options options=$shares selected=$selectedshare}
-		</select>
-{/render}
-	</td>
-<tr>
-	<td>
-		<label for="apple_user_homepath_raw">{t}Path{/t}</label>
-	</td>
-	<td>
-{render acl=$netatalkUserHomepathACL}
-		<input name="apple_user_homepath_raw" id="apple_user_homepath_raw" type="text" value="{$apple_user_homepath_raw}" size="25" maxlength="65"/>
-{/render}
-	</td>
-</tr>
-</table>
+			{render acl=$netatalkShareACL}
+				<div class="input-field">
+					<select id="apple_user_share" size="1" name="apple_user_share">
+						{html_options options=$shares selected=$selectedshare}
+					</select>
+					<label for="apple_user_share">{t}Share{/t}</label>
+				</div>
+			{/render}
+
+            {render acl=$netatalkUserHomepathACL}
+				<div class="input-field">
+					<input type='text' id="apple_user_homepath_raw" name="apple_user_homepath_raw" maxlength=65 value="{$apple_user_homepath_raw}">
+					<label for="apple_user_homepath_raw">{t}Path{/t}</label>
+				</div>
+            {/render}
+		</div>
+	</div>
+</div>
 
 <input type="hidden" name="netatalkTab" value="netatalkTab">
 
