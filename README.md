@@ -1,4 +1,4 @@
-# GOsa 2.7 README
+# GOsa 2.8 README
 
 ## Information
 
@@ -86,3 +86,30 @@ Have fun!
 
 ---
 Cajus Pollmeier <pollmeier@gonicus.de>
+
+
+## Template System
+
+GOsa comes with a new theme and a simplified template system.
+
+The new template system makes it easier to create new themes. For this you need to organize your new templates in a subfolder that has the name of the theme. Code snippets that create visual output are now in switch statements. There you have to add, if necessary, an expression that has the name of the theme.
+
+Example:
+
+```
+switch ($theme) {
+    case '{YourThemeName}':
+        code...
+        break;
+
+    default:
+        code...
+        break;
+}
+```
+
+By default GOsa has the classic design from GOsa 2.7 and a new default design.
+
+The theme is still changed via gosa.conf.
+
+Sebastian Sternfeld <sternfeld@gonicus.de>
