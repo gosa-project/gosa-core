@@ -1,1 +1,0 @@
-{$Kekse} sind gesund
