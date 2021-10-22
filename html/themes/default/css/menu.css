@@ -1,6 +1,6 @@
 .content-area .menu {
-    min-width: 150px;
-    width: 150px;
+    min-width: 160px;
+    width: 160px;
     padding: 0 0.75rem 0 0;
     max-height: calc(100vh - 110px);
 }
