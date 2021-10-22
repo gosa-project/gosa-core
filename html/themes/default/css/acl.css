@@ -164,15 +164,16 @@
 .acl-content-wrapper .acl_container .option-grp .options {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     margin-bottom: 10px;
 }
 
 .acl-content-wrapper .object-body-wrapper .options .selection-label {
     margin-right: 10px;
+    margin-top: 3px;
 }
 
 .acl-content-wrapper .content-head {

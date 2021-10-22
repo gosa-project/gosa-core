@@ -101,6 +101,14 @@ document.querySelectorAll('.toggle-pw').forEach(icon => {
     })
 });
 
+// Adjustment of the paddings when the control panel is visible
+let listWrapperElem = document.querySelector('.card-content.first-level .list-head-wrapper');
+let cardContentFirstLevelElem = document.querySelector('.card-content.first-level');
+
+if (listWrapperElem && cardContentFirstLevelElem) {
+    cardContentFirstLevelElem.style.padding = "0";
+}
+
 // Check password conditions
 var input = document.getElementById("new_password");
 var pwLength = document.getElementById("pw-length");

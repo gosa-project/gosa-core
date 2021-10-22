@@ -39,31 +39,34 @@
 
   <script language="javascript" src="include/tooltip.js" type="text/javascript"></script>
 
-  <h2>
-    {$HEADLINE}&nbsp;{$SIZELIMIT}
-    {if $ignoreLdapProperties}
-    - <span class="red-text">{t}Ignoring LDAP defined properties!{/t}</span>
-    {/if}
-  </h2>
+  <div class="list-head-wrapper">
+    <h2>
+      {$HEADLINE}&nbsp;{$SIZELIMIT}
+      {if $ignoreLdapProperties}
+      - <span class="red-text">{t}Ignoring LDAP defined properties!{/t}</span>
+      {/if}
+    </h2>
 
-  <div class="control-panel">
-    <div class="navigation">
-      {$RELOAD}
+    <div class="control-panel">
+      <div class="navigation">
+        {$RELOAD}
+      </div>
+
+      <div class="actions center-align">{$ACTIONS}</div>
+      {$FILTER}
+    </div>
+  </div>
+
+  <div class="list-content-wrapper">
+
+    <div class="plus-actions">
+      {$LIST}
     </div>
 
-    <div class="actions center-align">{$ACTIONS}</div>
-    {$FILTER}
-  </div>
-
-  <hr>
-
-  <div class="plus-actions">
-    {$LIST}
-  </div>
-
-  <div class="card-action">
-    <button class="btn-small primary" name='saveProperties'>{msgPool type='applyButton'}</button>
-    <button class="btn-small primary" name='cancelProperties' {if !$is_modified} disabled {/if}>{t}Undo{/t}</button>
+    <div class="card-action">
+      <button class="btn-small primary" name='saveProperties'>{msgPool type='applyButton'}</button>
+      <button class="btn-small primary" name='cancelProperties' {if !$is_modified} disabled {/if}>{t}Undo{/t}</button>
+    </div>
   </div>
 
   <input type="hidden" name="ignore">
