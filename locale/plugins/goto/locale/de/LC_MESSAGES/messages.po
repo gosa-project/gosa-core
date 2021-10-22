@@ -1833,7 +1833,7 @@ msgstr "System-Information"
 
 #: admin/systems/goto/info.tpl:11
 msgid "Hardware information"
-msgstr "zeige Hardware-Information"
+msgstr "Hardware-Information"
 
 #: admin/systems/goto/info.tpl:14
 msgid "CPU"
