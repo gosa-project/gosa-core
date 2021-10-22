@@ -10,6 +10,7 @@ GOsa2 changelog
   - Added new default theme for GOsa-core and all plugins. 
     The old theme can be found under classic.
   - Add account menu for the active user in the new default theme.
+  - Added new translations for the new theme.
   - Change of password verification to give better feedback to the user.
   - Modification of visible elements such as buttons etc to improve robustness.
   - Merged .tpl files that were duplicated.
