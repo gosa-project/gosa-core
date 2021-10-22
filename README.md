@@ -79,4 +79,3 @@ Have fun!
 
 ---
 Cajus Pollmeier <pollmeier@gonicus.de>
-# gosa-core_Material-Design

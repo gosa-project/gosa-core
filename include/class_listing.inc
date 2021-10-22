@@ -1742,7 +1742,7 @@ class listing
                                     <ul class='collection with-header'>";
 
                         if (isset($action['label'])) {
-                            $result .= "<li class='collection-header pointer_off'><h3>"._($action['label']).'</h3></li>';
+                            $result .= "<li class='collection-header pointer_off'><h3 id='head'>"._($action['label']).'</h3></li>';
                         } else {
                             $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
                         }
