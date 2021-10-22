@@ -982,6 +982,13 @@ class acl extends plugin
         $list =$this->sort_by_priority($list);
         foreach ($list as $key => $name){
 
+            /* Walk through the list of attributes */
+            $cnt= 1;
+            $splist= array();
+            if(isset($plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'])){
+                $splist= $plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'];
+            }
+
             /* Create sub acl if it does not exist */
             if (!isset($this->aclContents[$key])){
                 $this->aclContents[$key]= array();
@@ -989,7 +996,6 @@ class acl extends plugin
             if(!isset($this->aclContents[$key][0])){
                 $this->aclContents[$key]= [''];
             }
-
 
             $currentAcl= $this->aclContents[$key];
 
@@ -1031,13 +1037,15 @@ class acl extends plugin
                                             <div class='object-head-wrapper'>
                                                 <div class='object-name'>
                                                     "._("Object").": $name
-                                                </div>
-                                            <div class='advanced-settings'>
+                                                </div>";
+                        if ($splist) {
+                            $display .= "   <div class='advanced-settings'>
                                                 <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
                                                     "._("Show/hide advanced settings")."
                                                 </button>
-                                            </div>
-                                        </div>";
+                                            </div>";
+                        }
+                        $display .= "   </div>";
                         break;
                 }
             } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
@@ -1121,15 +1129,6 @@ class acl extends plugin
                                     </div>
                                 </div>";
                     break;
-            }
-
-
-
-            /* Walk through the list of attributes */
-            $cnt= 1;
-            $splist= array();
-            if(isset($plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'])){
-                $splist= $plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'];
             }
 
             if(session::global_get('js')) {
