@@ -59,24 +59,8 @@ let navInstances = M.Dropdown.init(nav, {
     'alignment': 'right',
 });
 
-let tabletareaSelection = document.querySelectorAll('.dropdown-tablet-area-selection');
-let tabletareaInstances = M.Dropdown.init(tabletareaSelection, {
-    'constrainWidth': false,
-    'coverTrigger': false,
-    'hover': false,
-    'alignment': 'right'
-});
-
-let mobileareaSelection = document.querySelectorAll('.dropdown-mobile-area-selection');
-let mobileareaInstances = M.Dropdown.init(mobileareaSelection, {
-    'constrainWidth': false,
-    'coverTrigger': false,
-    'hover': false,
-    'alignment': 'right'
-});
-
-let areaSelection = document.querySelectorAll('.dropdown-area-selection');
-let areaInstances = M.Dropdown.init(areaSelection, {
+let advancedareaSelection = document.querySelectorAll('.dropdown-advanced-area-selection');
+let advancedareaInstances = M.Dropdown.init(advancedareaSelection, {
     'constrainWidth': false,
     'coverTrigger': false,
     'hover': false,
