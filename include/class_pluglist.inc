@@ -260,7 +260,7 @@ class pluglist
                         if (!count($plug)) {
                             continue;
                         }
-    
+
                         $menu .= "    <div class='menu'>
                                         <ul>
                                             <li class='menu-header'>"._($headline).'</li>';
@@ -270,17 +270,17 @@ class pluglist
                             if (isset($disabledPlugins[$info['CLASS']])) {
                                 continue;
                             }
-    
+
                             // Used to detect the last element in the menu
                             ++$id;
-    
+
                             list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
                             $class = '';
                             if ($id == count($plug)) {
                                 $class = " class='menu-last' ";
                             }
                             $menu .= "\n            <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title.'</li>';
-    
+
                             $this->registeredMenuEntries[] = $index;
                         }
                         $menu .= "\n          </ul>";
@@ -293,7 +293,7 @@ class pluglist
                         $this->menu = "\n<div class='navigation'>\n{$menu}</div>";
                     }
                     break;
-                
+
                 default:
                     $main = true;
 
@@ -332,7 +332,7 @@ class pluglist
                     }
                     break;
             }
-            
+
             // Add javascript method to print out warning messages while leaving an unsaved form.
             // We do it in here to get the string translated.
             $this->menu .=
@@ -383,7 +383,7 @@ class pluglist
                 case 'classic':
                     foreach ($cfg as $headline => $plug) {
                         $col = 0;
-    
+
                         $this->iconmenu .= "\n        <div class='clear'></div>";
                         if ($add_hr) {
                             $add_hr = false;
@@ -391,22 +391,22 @@ class pluglist
                         }
 
                         $this->iconmenu .= "\n        <h3 class='icon-menu-title'>"._($headline).'</h3>';
-    
+
                         foreach ($plug as $info) {
                             // Get Plugin info
                             list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
                             $this->registeredIconEntries[] = $index;
-    
+
                             // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
                             if (isset($disabledPlugins[$info['CLASS']])) {
                                 continue;
                             }
-    
+
                             // Add a seperating row
                             if (($col % 4) == 0) {
                                 $this->iconmenu .= "\n        <div class='clear'></div>";
                             }
-    
+
                             $this->iconmenu .= "\n        <div class='icon-menu-item' style='width: 25%;' onclick='openPlugin({$index})'>";
                             $this->iconmenu .= "\n          ".image($icon);
                             $this->iconmenu .= "\n          <div class='dsc'>";
@@ -419,7 +419,7 @@ class pluglist
                         $add_hr = true;
                     }
                     break;
-                
+
                 default:
                     foreach ($cfg as $headline => $plug) {
                         $col = 0;
@@ -443,7 +443,7 @@ class pluglist
 
                             // Add a seperating row
                             if (($col % 6) == 0) {
-                                $this->iconmenu .= "\n    <div class='row'>";
+                                $this->iconmenu .= "\n    <div class='row startpage-iconmenu'>";
                             }
 
                             $this->iconmenu .= "\n   <a class='col s4 xl2 pointer'>";
@@ -554,7 +554,7 @@ class pluglist
                     $this->pathMenu .= "\n          </ul>";
                     $this->pathMenu .= "\n        </div>";
                     break;
-                
+
                 default:
                     // Check if we've at least one entry defined ih the pathmenu
                     if (isset($this->config->data['PATHMENU'])) {
@@ -635,7 +635,7 @@ class pluglist
             case 'classic':
                 $plIcon = (isset($vars['plIcon'])) ? $vars['plIcon'] : 'plugin.png';
                 break;
-            
+
             default:
             $plIcon = (isset($vars['matIcon'])) ? $vars['matIcon'] : 'block';
                 break;
@@ -663,7 +663,7 @@ class pluglist
                     $image = $plIcon;
                 }
                 break;
-            
+
             default:
                 $image = $plIcon;
                 break;
