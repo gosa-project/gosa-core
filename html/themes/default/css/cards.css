@@ -7,6 +7,7 @@
 .card-content.first-level {
     max-height: inherit;
     overflow-y: auto;
+    max-width: calc(100vw - 160px - 24px);
 }
 
 .card-content.first-level .row {
