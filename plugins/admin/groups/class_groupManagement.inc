@@ -249,7 +249,7 @@ class groupManagement extends management
                     if (in_array_ics($oc, $classes)) {
                         $result.= image("<i class='material-icons'>".$properties['image']."</i>", 'listing_edit_'.$properties['plugin'].'_'.$row, $properties['title']);
                     } else {
-                        $result.= image();
+                        $result.= image("");
                     }
                 }
                 break;

@@ -349,9 +349,17 @@ class user extends plugin
 
     /* Do we represent a valid gosaAccount? */
     if (!$this->is_account){
-      $str = "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
-        msgPool::noValidExtension("GOsa")."</b>";
-      return($str);
+      switch ($theme) {
+        case 'classic':
+          $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+          break;
+        
+        default:
+          $symbol = "<i class='material-icons'>error</i>";
+          break;
+      }
+      $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("GOsa"))."</div>";
+      return($display);
     }
 
     /* Password configure dialog handling */
