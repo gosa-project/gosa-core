@@ -82,8 +82,16 @@ class connectivity extends plugin
         }
       }
       if (!$enabled){
-        $display= "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
-          msgPool::noValidExtension()."</b>";
+        switch ($theme) {
+          case 'classic':
+            $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+            break;
+          
+          default:
+            $symbol = "<i class='material-icons'>report</i>";
+            break;
+        }
+        $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_())."</div>";
         $display.= back_to_main();
         return ($display);
       }

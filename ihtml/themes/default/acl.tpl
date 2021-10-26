@@ -98,7 +98,7 @@
 
 			<div class="card-action">
 				{if $acl_writeable}
-					<button class="btn-small primary" type='submit' name='submit_new_acl'>{t}Apply{/t}</button>
+				<button class="btn-small primary" type='submit' name='submit_new_acl'>{t}Apply{/t}</button>
 				{/if}
 				<button class="btn-small primary" type='submit' name='cancel_new_acl'>{t}Cancel{/t}</button>
 			</div>

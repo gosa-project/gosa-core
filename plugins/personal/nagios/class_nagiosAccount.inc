@@ -80,6 +80,8 @@ class nagiosAccount extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    $theme = getThemeName();
+
     /* Log view */
     if($this->is_account && !$this->view_logged){
       $this->view_logged = TRUE;
@@ -101,9 +103,16 @@ class nagiosAccount extends plugin
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent === NULL){
-      $display= "<img alt=\"\"src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
-        msgPool::noValidextension(_("Nagios"))."</b>";
-
+      switch ($theme) {
+        case 'classic':
+          $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+          break;
+        
+        default:
+          $symbol = "<i class='material-icons'>report</i>";
+          break;
+      }
+      $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("Nagios"))."</div>";
       $display.= back_to_main();
       return ($display);
     }

@@ -119,7 +119,7 @@
 </div>
 {/if}
 
-<div class='plugin-actions card-action'>
+<div class='card-action'>
 
     {render acl=$CertificateACL}
     <button class="btn-small primary" type='submit' name='cert_edit_finish'>{msgPool type=saveButton}</button>

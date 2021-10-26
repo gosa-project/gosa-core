@@ -63,11 +63,12 @@ class aclroletab extends tabs
 
   function execute()
   {
+    $display= tabs::execute();
+
     $theme = getThemeName();
 
-    $display= tabs::execute();
     if($this->read_only){
-      switch ($variable) {
+      switch ($theme) {
         case 'classic':
           $dispaly .= " <div class='plugin-actions'>
                           <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
@@ -88,11 +89,10 @@ class aclroletab extends tabs
                           <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
                         </p>";
           break;
-        
         default:
           $display .= "<div class='card-action'>
-                        <button class='btn-small primary' type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
-                        <button class='btn-small primary' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                        <button class='btn-small primary' type=submit name='edit_finish'>".msgPool::okButton()."</button>
+                        <button class='btn-small primary' type=submit name='edit_cancel'>".msgPool::cancelButton()."</button>
                       </div>";
           break;
       }

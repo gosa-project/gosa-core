@@ -380,7 +380,7 @@ class goShareServer extends goService{
                 break;
             }
             default : {
-                          continue;
+                          break;
                       }
         }
         return $mount;
