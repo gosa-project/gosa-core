@@ -25,15 +25,7 @@
     overflow-y: unset;
 }
 
-.object-info .card-tabs .tabs .desk-menu,
-.object-info .card-tabs .tabs .tablet-menu,
-.object-info .card-tabs .tabs .mobile-menu {
-    float: right;
-}
-
-.object-info .card-tabs .tabs .only-tablet,
-.object-info .card-tabs .tabs .tablet-menu,
-.object-info .card-tabs .tabs .mobile-menu {
+.object-info .card-tabs .tabs .advanced-menu {
     display: none;
 }
 
@@ -51,9 +43,7 @@
     padding: 5px 25px;
 }
 
-.object-info .card-tabs .tabs li a.dropdown-mobile-area-selection i,
-.object-info .card-tabs .tabs li a.dropdown-tablet-area-selection i,
-.object-info .card-tabs .tabs li a.dropdown-area-selection i {
+.object-info .card-tabs .tabs li a.dropdown-advanced-area-selection i {
     font-size: 18px;
     line-height: 38px;
 }
@@ -1564,19 +1554,5 @@ label.closing-elem {
         display: block;
         margin-left: 0.75rem;
         margin-right: 0.75rem;
-    }
-    .object-info .card-tabs .tabs .mobile-menu {
-        display: inline-block;
-    }
-    .object-info .card-tabs .tabs .view-xl,
-    .object-info .card-tabs .tabs .desk-menu,
-    .object-info .card-tabs .tabs .only-tablet {
-        display: none;
-    }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
-    .object-info .card-tabs .tabs .only-tablet {
-        display: inline-block;
     }
 }
