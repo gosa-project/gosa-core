@@ -86,6 +86,32 @@ if (mobileTabsElem && mobileTabsElem.length !== 0 || tablettTabsElem && tablettT
     }
 }
 
+
+// Adjust start menu column width to specific display sizes
+let startpageMenu = document.querySelectorAll('.row.startpage-iconmenu');
+let startpagePointer = document.querySelectorAll('.startpage-iconmenu .pointer');
+
+if (startpageMenu && startpageMenu.length !== 0 && startpagePointer && startpagePointer.length !== 0) {
+    let windowWidth = window.innerWidth;
+    pointers = Array.from(startpagePointer);
+
+    if (windowWidth >= 1201 && windowWidth <= 1400) {
+        pointers.forEach(element => {
+            if (element.classList.contains('xl2')) {
+                newElement.classList.remove('xl2');
+                newElement.classList.add('xl3');
+            }
+        });
+    } else {
+        pointers.forEach(element => {
+            if (element.classList.contains('xl3')) {
+                newElement.classList.remove('xl3');
+                newElement.classList.add('xl2');
+            }
+        });
+    }
+}
+
 // Function to change the visibility of the password
 document.querySelectorAll('.toggle-pw').forEach(icon => {
     icon.addEventListener('click', function() {
