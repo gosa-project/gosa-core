@@ -41,48 +41,102 @@ if (pwresetWrapper && pwresetWrapper.length == 1 && cardActionElement && cardAct
     contentWrapper.style.maxHeight = "calc(100vh - 202px)";
 }
 
-// Creation of a submenu if the length of the navigation items of the mobile version is too long
-let mobileTabsElem = document.querySelectorAll('.view-xl');
-let tablettTabsElem = document.querySelectorAll('.view-xl.view-l');
-let tabsElem = document.querySelectorAll('.view-xl.view-s');
+// Debounce Function
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this,
+            args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};
 
-if (mobileTabsElem && mobileTabsElem.length !== 0 || tablettTabsElem && tablettTabsElem.length !== 0) {
-    let mobileAreaSelection = document.querySelector('#mobile-area-selection');
-    let mobileTabPoint = document.querySelector('.mobile-menu');
-    let tabletAreaSelection = document.querySelector('#tablet-area-selection');
-    let tabletTabPoint = document.querySelector('.tablet-menu');
-    let tabs = document.querySelector('.tabs');
+// Automatic adjustment of content navigation during resize
+function automaticAdjustmentNavigation() {
+    const contentNavigationWrapper = document.querySelector('.object-info .card-tabs');
+    const navigationPointer = document.querySelectorAll('.tabs .tab.pointer.menu-pointer');
+
+    if (contentNavigationWrapper && contentNavigationWrapper.length !== 0 &&
+        navigationPointer && navigationPointer.length !== 0) {
+        const advancedAreaSelection = document.querySelector('#advanced-area-selection');
+        const advancedTabPoint = document.querySelector('.advanced-menu');
+        const tabsWrapper = document.querySelector('.object-info .card-tabs .tabs');
+
+        let cardWrapper = contentNavigationWrapper.offsetWidth - 54;
+        let tabPointers = Array.from(navigationPointer);
+        let currentWidth = 0;
+
+        tabPointers.forEach(element => {
+            let previewWidth = currentWidth + element.offsetWidth + 1;
+
+            if (currentWidth <= cardWrapper && previewWidth <= cardWrapper) {
+                currentWidth += element.offsetWidth + 1;
+            } else {
+                advancedAreaSelection.appendChild(element);
+                advancedTabPoint.style.display = "inline-block";
+            }
+        });
+
+        let advancedAreaPointer = document.querySelectorAll('#advanced-area-selection .tab.pointer.menu-pointer');
+        let advancedPointers = Array.from(advancedAreaPointer);
+
+        advancedPointers.forEach(element => {
+            tabsWrapper.insertBefore(element, advancedTabPoint);
+
+            let previewWidth = currentWidth + element.offsetWidth + 1;
+
+            if (currentWidth <= cardWrapper && previewWidth <= cardWrapper) {
+                currentWidth += element.offsetWidth + 1;
+            } else {
+                advancedAreaSelection.appendChild(element);
+            }
+        });
+
+        if (advancedPointers.length == 0) {
+            advancedTabPoint.style.display = "none";
+        }
+    }
+}
+
+automaticAdjustmentNavigation();
+
+let debounceAutomaticAdjustmentNavigation = debounce(automaticAdjustmentNavigation, 50);
+
+window.addEventListener('resize', debounceAutomaticAdjustmentNavigation);
+
+// Adjust start menu column width to specific display sizes
+let startpageMenu = document.querySelectorAll('.row.startpage-iconmenu');
+let startpagePointer = document.querySelectorAll('.startpage-iconmenu .pointer');
+
+if (startpageMenu && startpageMenu.length !== 0 && startpagePointer && startpagePointer.length !== 0) {
     let windowWidth = window.innerWidth;
+    pointers = Array.from(startpagePointer);
 
-    mobileTabsElem.forEach(element => {
-        let newElement = element.cloneNode(true);
-        newElement.classList.remove('view-xl');
-        newElement.classList.remove('view-l');
-        newElement.classList.remove('view-s');
-        newElement.classList.add('view-m');
-        mobileAreaSelection.appendChild(newElement);
-    });
-
-    tablettTabsElem.forEach(element => {
-        let newElement = element.cloneNode(true);
-        newElement.classList.remove('view-xl');
-        tabletAreaSelection.appendChild(newElement);
-    });
-
-    tabsElem.forEach(element => {
-        let newElement = element.cloneNode(true);
-        newElement.classList.remove('view-xl');
-        newElement.classList.remove('view-s');
-        newElement.classList.add('only-tablet');
-        tabs.appendChild(newElement);
-    });
-
-    if (windowWidth <= 992) {
-        mobileTabPoint.style.display = "inline-block";
-        tabletTabPoint.style.display = "none";
-    } else if (windowWidth <= 1200) {
-        tabletTabPoint.style.display = "inline-block";
-        mobileTabPoint.style.display = "none";
+    if (windowWidth >= 1201 && windowWidth <= 1400) {
+        pointers.forEach(element => {
+            if (element.classList.contains('xl2')) {
+                newElement.classList.remove('xl2');
+                newElement.classList.add('xl3');
+            }
+        });
+    } else {
+        pointers.forEach(element => {
+            if (element.classList.contains('xl3')) {
+                newElement.classList.remove('xl3');
+                newElement.classList.add('xl2');
+            }
+        });
     }
 }
 
@@ -206,8 +260,6 @@ if (input) {
             pwStrength[4] = true;
 
         }
-
-        console.log(pwStrength.every(Boolean));
 
         if (pwStrength.every(Boolean)) {
             pwButton.disabled = false;

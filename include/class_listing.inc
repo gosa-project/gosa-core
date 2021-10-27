@@ -1609,6 +1609,7 @@ class listing
                     return $result;
                 }
 
+
                 // Array?
                 if (isset($this->xmlData['actionmenu']['action']['type'])) {
                     $this->xmlData['actionmenu']['action'] = [$this->xmlData['actionmenu']['action']];
@@ -1616,6 +1617,7 @@ class listing
 
                 // Load shortcut
                 $actions = &$this->xmlData['actionmenu']['action'];
+
                 $result .= "  <a class='dropdown-menu' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
                             <ul class='dropdown-content' id='$level'>";
 
@@ -1629,6 +1631,8 @@ class listing
     {
         global $class_mapping;
 
+        $result = "";
+
         switch ($this->theme) {
             case 'classic':
                 static $level = 2;
@@ -1641,6 +1645,7 @@ class listing
 
         $separator = '';
         foreach ($actions as $action) {
+
             // Skip the entry completely if there's no permission to execute it
             if (!$this->hasActionPermission($action, $this->filter->base)) {
                 continue;
@@ -1803,7 +1808,7 @@ class listing
             }
         }
 
-        if (!theme) {
+        if (!$this->theme) {
             $result .= '</ul>';
         }
 

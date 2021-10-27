@@ -497,14 +497,14 @@ class sortableListing
                 $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
                 $result.= '</script>';
                 break;
-        }
+            }
+
         return $result;
     }
 
 
     public function update()
     {
-
         // Filter GET with "act" attributes
         if ((!$this->reorderable) && ($this->sortingEnabled)) {
             if (isset($_GET['act']) && isset($_GET['PID']) && $this->id == $_GET['PID']) {

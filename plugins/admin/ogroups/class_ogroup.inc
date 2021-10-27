@@ -62,14 +62,16 @@ class ogroup extends plugin
      */
     public $used_workstations = array();
 
+    var $theme;
+
     /* attribute list for save action */
     public $attributes= array("cn", "description", "gosaGroupObjects","member");
     public $objectclasses= array("top", "gosaGroupOfNames");
 
     public function __construct(&$config, $dn= null)
     {
-        $theme = getThemeName();
-        switch ($theme) {
+        $this->theme = getThemeName();
+        switch ($this->theme) {
             case 'classic':
                 $this->typeToImage = array(
                     "Y" => "plugins/users/images/select_template.png",
@@ -299,8 +301,16 @@ class ogroup extends plugin
 
         /* Do we represent a valid group? */
         if (!$this->is_account) {
-            $display= "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
-                msgPool::noValidExtension("object group")."</b>";
+            switch ($this->theme) {
+                case 'classic':
+                  $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+                  break;
+                
+                default:
+                  $symbol = "<i class='material-icons'>report</i>";
+                  break;
+            }
+            $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("object group"))."</div>";
             return ($display);
         }
 

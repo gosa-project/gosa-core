@@ -331,53 +331,18 @@ class tabs
           break;
 
         default:
-          // 6 is the maximum number on mobile, 8 is the maximum number on tablet and 16 is the maximum number on desktop. The rest is controlled via Javascript.
           $currentTab++;
 
-          if($tabCount >= 6 && $currentTab >= 6) {
-            if($currentTab == 6) {
-              $display .= "<li class='mobile-menu {$tabClass}'>
-                            <a class='dropdown-mobile-area-selection' data-target='mobile-area-selection'><i class='material-icons'>more_vert</i></a>
-                          </li>
-                          <ul id='mobile-area-selection' class='dropdown-content'>
-                          </ul>";
-            }
+          $display .= "<li class='{$tabClass} menu-pointer' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
 
-            if($currentTab == 8) {
-              $display .= "<li class='tablet-menu {$tabClass}'>
-                            <a class='dropdown-tablet-area-selection' data-target='tablet-area-selection'><i class='material-icons'>more_vert</i></a>
-                          </li>
-                          <ul id='tablet-area-selection' class='dropdown-content'>
-                          </ul>";
-            }
-
-            if($currentTab == 6 || $currentTab == 7) {
-              $menuSize = " view-s";
-            } else if($currentTab >= 8) {
-              $menuSize = " view-l";
-            } else {
-              $menuSize = "";
-            }
-
-            if($tabCount > 16) {
-              if($currentTab == 16) {
-                $display .= "<li class='desk-menu {$tabClass}'>
-                              <a class='dropdown-area-selection' data-target='area-selection'><i class='material-icons'>more_vert</i></a>
-                             </li>
-                             <ul id='area-selection' class='dropdown-content'>";
-              }
-
-              $display .= "<li class='view-xl {$menuSize} {$tabClass}' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
-
-              if($currentTab == $tabCount) {
-                $display .= "</ul>";
-              }
-            } else {
-              $display .= "<li class='view-xl{$menuSize} {$tabClass}' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
-            }
-          } else {
-            $display .= "<li class='{$tabClass}' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
+          if($tabCount == $currentTab) {
+            $display .= "<li class='advanced-menu {$tabClass}'>
+                          <a class='dropdown-advanced-area-selection' data-target='advanced-area-selection'><i class='material-icons'>more_vert</i></a>
+                        </li>
+                        <ul id='advanced-area-selection' class='dropdown-content'>
+                        </ul>";
           }
+
           break;
       }
     }

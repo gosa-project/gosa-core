@@ -341,6 +341,15 @@ button:focus {
     margin: 0;
 }
 
+
+/* Fallback for start menu column width to fit certain display sizes */
+
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {
+    .row.startpage-iconmenu .col.xl2 {
+        width: 25%;
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     .content-area {
         padding: 24px;
