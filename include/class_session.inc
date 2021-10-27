@@ -132,10 +132,9 @@ class session {
         return($ret);
     }
 
-    public static function &global_get($name)
+    public static function global_get($name)
     {
-        $ret = &$_SESSION[$name];
-        return($ret);
+        return $_SESSION[$name];
     }
 
     public static function delete($name)
