@@ -128,7 +128,6 @@
         <name>password</name>
         <type>entry</type>
         <image>vpn_key</image>
-        <image>password</image>
         <label>Change password</label>
       </action>
 

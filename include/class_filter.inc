@@ -445,6 +445,8 @@ class filter
 
     public function renderFilterMenu()
     {
+        $script = "";
+
         switch ($this->theme) {
             case 'classic':
                 // Load shortcut

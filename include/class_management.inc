@@ -143,7 +143,8 @@ class management
         $this->registerAction("cancelFilter", "cancelFilter");
 
         // To temporay disable the filter caching UNcomment this line.
-    #session::global_un_set(get_class($this)."_filter");
+        // !!!!!!! filter settings produce unexpected query behavior !!!!!
+        # session::global_un_set(get_class($this)."_filter");
     }
 
 
@@ -557,7 +558,7 @@ class management
     public function handleActions($action)
     {
         // Start action
-        if (isset($this->actions[$action['action']])) {
+        if (isset($action) && isset($this->actions[$action['action']])) {
             $func = $this->actions[$action['action']];
             if (!isset($action['targets'])) {
                 $action['targets']= array();
