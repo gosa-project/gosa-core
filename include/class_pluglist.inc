@@ -295,20 +295,17 @@ class pluglist
                     break;
 
                 default:
-                    $main = true;
-
                     foreach ($cfg as $headline => $plug) {
                         if (!count($plug)) {
                             continue;
                         }
 
-                        $menu .= '    <li '.($main ? "class='active'" : '').">
+                        $menu .= "    <li class='active'>
                                         <div class='collapsible-header primary'><h4>"._($headline)."</h4></div>
                                         <div class='collapsible-body'>
                                             <ul class='collection'>";
 
                         $id = 0;
-                        $main = false;
                         foreach ($plug as $info) {
                             // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
                             if (isset($disabledPlugins[$info['CLASS']])) {

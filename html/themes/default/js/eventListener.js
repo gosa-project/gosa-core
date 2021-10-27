@@ -24,8 +24,10 @@ let dropdownOptionsMultipleSelect = {
 let multiSelectInstances = M.FormSelect.init(multiSelect, dropdownOptionsMultipleSelect);
 
 // js for accordion menu
-let collaps = document.querySelectorAll('.collapsible');
-let collapsInstances = M.Collapsible.init(collaps, {});
+let collaps = document.querySelectorAll('.collapsible.expandable');
+let collapsInstances = M.Collapsible.init(collaps, {
+    accordion: false,
+});
 
 // js for tooltip
 let ttip = document.querySelectorAll('.tooltipped');
