@@ -49,7 +49,7 @@
                 <!-- Menü -->
                 {if !$noMenuMode}
                 <div class="menu">
-                    <ul class="collapsible">
+                    <ul class="collapsible expandable">
                         {$menu}
                     </ul>
                 </div>
