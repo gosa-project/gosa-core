@@ -45,7 +45,7 @@ i.E.
 
 ---
 
-Q:  Can GOsa execute commands 'AFTER' creating/editing/removing users,departments, etc. 
+### Q:  Can GOsa execute commands 'AFTER' creating/editing/removing users,departments, etc. 
 
 A:  Yes. Edit /etc/gosa/gosa.conf's menu section. 
     Each plugin may has an entry "postremove", "postmodify" and "postcreate".  
@@ -187,7 +187,7 @@ gosa.conf and a template box is show in the vacation mail tab.
 
 ---
 
-Q:  How can I generate automatic ID's for user templates? 
+### Q:  How can I generate automatic ID's for user templates? 
 
 A:  Add an entry describing your id policy in gosa.conf, location section:
 
@@ -317,8 +317,7 @@ to the location section of GOsa. This switch affects LDAP connections for a sing
 
 ---
 
-Q:  Cyrus folder get created in the style user.username. I prefer the unix 
-    hirachystyle user/username. Is it possible to change this? 
+### Q:  Cyrus folder get created in the style user.username. I prefer the unix hirachystyle user/username. Is it possible to change this? 
 
 A:  Yes, add
 
