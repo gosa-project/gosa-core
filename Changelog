@@ -3,9 +3,10 @@ GOsa2 changelog
 
 * gosa 2.8
   - Fixed delete functions in all table widgets.
-  - Fixed deprecated warnings for php v8.0.11.
+  - Fixed deprecated warnings for php v7.4.
+  - Fixed unexpected behavior when switching the list view multiple times.
   - Add new GOsa Logo.
-  - Add simplified template system.
+  - Add simplified template system for plugins and HTML snippets.
   - Added switch statements for HTML-snippets to fit the template system.
   - Added new default theme for GOsa-core and all plugins. 
     The old theme can be found under classic.
