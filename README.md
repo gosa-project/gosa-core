@@ -83,14 +83,23 @@ Cajus Pollmeier <pollmeier@gonicus.de>
 
 ## Template System
 
-GOsa comes with a new theme and a simplified template system.
+GOsa comes with a new theme and a simplified template system for plugins and HTML snippets.
 
-The new template system makes it easier to create new themes. For this you need to organize your new templates in a subfolder that has the name of the theme. Code snippets that create visual output are now in switch statements. There you have to add, if necessary, an expression that has the name of the theme.
+The simplified template system makes it easier to transfer your new themes to all plugins. 
+For this you need to organize your new plugin templates in a subfolder that has the name of the theme. 
+
+Also code snippets that produce visual output are now easy to customize using switch statements. 
+There you need to add an expression with the name of the theme if needed.
 
 Example:
 
+Declare a variable for the theme name in your class or in scope of the function.
+Initialize it with the function `getThemeName()` from the include/functions.inc.
+
+Now you can use it as in the example below.
+
 ```
-switch ($theme) {
+switch (${ThemeVariableName}) {
     case '{YourThemeName}':
         code...
         break;
@@ -102,7 +111,6 @@ switch ($theme) {
 ```
 
 By default GOsa has the classic design from GOsa 2.7 and a new default design.
-
 The theme is still changed via gosa.conf.
 
 Sebastian Sternfeld <sternfeld@gonicus.de>
