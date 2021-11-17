@@ -1,4 +1,4 @@
-# GOsa 2.7 README
+# GOsa 2.8 README
 
 ## Information
 
@@ -19,13 +19,6 @@ playing with a
 [Debian Edu mainserver](https://wiki.debian.org/DebianEdu/Documentation/Stretch/Installation)
 installation. The Debian Edu mainserver has GOsa pre-installed and set up
 out-of-the box.
-
-## Project Status
-
-This project won't receive functional updates any time soon.
-We will create and merge fixes to keep GOsa² usable and secure
-if necessary.
-If you find a security issue or a bug feel free to raise an issue.
 
 
 ## Translations
@@ -86,3 +79,38 @@ Have fun!
 
 ---
 Cajus Pollmeier <pollmeier@gonicus.de>
+
+
+## Template System
+
+GOsa comes with a new theme and a simplified template system for plugins and HTML snippets.
+
+The simplified template system makes it easier to transfer your new themes to all plugins. 
+For this you need to organize your new plugin templates in a subfolder that has the name of the theme. 
+
+Also code snippets that produce visual output are now easy to customize using switch statements. 
+There you need to add an expression with the name of the theme if needed.
+
+Example:
+
+Declare a variable for the theme name in your class or in scope of the function.
+Initialize it with the function `getThemeName()` from the include/functions.inc.
+
+Now you can use it as in the example below.
+
+```
+switch (${ThemeVariableName}) {
+    case '{YourThemeName}':
+        code...
+        break;
+
+    default:
+        code...
+        break;
+}
+```
+
+By default GOsa has the classic design from GOsa 2.7 and a new default design.
+The theme is still changed via gosa.conf.
+
+Sebastian Sternfeld <sternfeld@gonicus.de>

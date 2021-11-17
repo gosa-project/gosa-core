@@ -10,36 +10,59 @@
 
 /**
  * Smarty Internal Plugin Resource Registered
+<<<<<<< HEAD
  *
+=======
+>>>>>>> gosa-core_v2.8
  * Implements the registered resource for Smarty template
  *
  * @package Smarty
  * @subpackage TemplateResources
  * @deprecated
  */
+<<<<<<< HEAD
 class Smarty_Internal_Resource_Registered extends Smarty_Resource {
 
+=======
+class Smarty_Internal_Resource_Registered extends Smarty_Resource
+{
+>>>>>>> gosa-core_v2.8
     /**
      * populate Source Object with meta data from Resource
      *
      * @param Smarty_Template_Source   $source    source object
      * @param Smarty_Internal_Template $_template template object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return void
      */
     public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
         $source->filepath = $source->type . ':' . $source->name;
+<<<<<<< HEAD
         $source->uid = sha1($source->filepath);
         if ($source->smarty->compile_check) {
             $source->timestamp = $this->getTemplateTimestamp($source);
             $source->exists = !!$source->timestamp;
         }
     }
+=======
+        $source->uid = sha1($source->filepath . $source->smarty->_joined_template_dir);
+        $source->timestamp = $this->getTemplateTimestamp($source);
+        $source->exists = !!$source->timestamp;
+    }
+>>>>>>> gosa-core_v2.8
 
     /**
      * populate Source Object with timestamp and exists from Resource
      *
      * @param Smarty_Template_Source $source source object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return void
      */
     public function populateTimestamp(Smarty_Template_Source $source)
@@ -52,13 +75,24 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
      * Get timestamp (epoch) the template source was modified
      *
      * @param Smarty_Template_Source $source source object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return integer|boolean timestamp (epoch) the template was modified, false if resources has no timestamp
      */
     public function getTemplateTimestamp(Smarty_Template_Source $source)
     {
         // return timestamp
         $time_stamp = false;
+<<<<<<< HEAD
         call_user_func_array($source->smarty->registered_resources[$source->type][0][1], array($source->name, &$time_stamp, $source->smarty));
+=======
+        call_user_func_array(
+            $source->smarty->registered_resources[ $source->type ][ 0 ][ 1 ],
+            array($source->name, &$time_stamp, $source->smarty)
+        );
+>>>>>>> gosa-core_v2.8
         return is_numeric($time_stamp) ? (int) $time_stamp : $time_stamp;
     }
 
@@ -66,23 +100,40 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
      * Load template's source by invoking the registered callback into current template object
      *
      * @param Smarty_Template_Source $source source object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
     public function getContent(Smarty_Template_Source $source)
     {
         // return template string
+<<<<<<< HEAD
         $t = call_user_func_array($source->smarty->registered_resources[$source->type][0][0], array($source->name, &$source->content, $source->smarty));
         if (is_bool($t) && !$t) {
             throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
         }
         return $source->content;
+=======
+        $content = null;
+        $t = call_user_func_array(
+            $source->smarty->registered_resources[ $source->type ][ 0 ][ 0 ],
+            array($source->name, &$content, $source->smarty)
+        );
+        if (is_bool($t) && !$t) {
+            throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
+        }
+        return $content;
+>>>>>>> gosa-core_v2.8
     }
 
     /**
      * Determine basename for compiled filename
      *
      * @param Smarty_Template_Source $source source object
+<<<<<<< HEAD
      * @return string resource's basename
      */
     protected function getBasename(Smarty_Template_Source $source)
@@ -93,3 +144,13 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
 }
 
 ?>
+=======
+     *
+     * @return string                 resource's basename
+     */
+    public function getBasename(Smarty_Template_Source $source)
+    {
+        return basename($source->name);
+    }
+}
+>>>>>>> gosa-core_v2.8

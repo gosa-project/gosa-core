@@ -117,7 +117,7 @@ class Step_Finish extends setup_step
     $smarty->assign("msg2", sprintf(_("After downloading and placing the file under %s, please make sure that the user the web server is running with is able to read %s, while other users shouldn't. You may want to execute these commands to achieve this requirement:"),CONFIG_DIR,CONFIG_FILE));
 
     $smarty->assign("cv",$this->parent->captured_values);
-    return($smarty -> fetch (get_template_path("../setup/setup_finish.tpl")));
+    return($smarty -> fetch (get_template_path("../setup/".$GLOBALS['theme']."/setup_finish.tpl")));
   }
 
 
@@ -146,4 +146,3 @@ class Step_Finish extends setup_step
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

@@ -41,7 +41,6 @@ class setup
         $this->o_steps[$i++] = new Step_Ldap();
     $this->o_steps[$i++] = new Step_Schema();
         $this->o_steps[$i++] = new Step_Migrate();
-        $this->o_steps[$i++] = new Step_Feedback();
         $this->o_steps[$i++] = new Step_Finish();
         $this->i_steps = $i-1;
 
@@ -226,17 +225,16 @@ class setup
             $str ="<div class='plugin-actions'>";
 
             if(isset($this->o_steps[$this->i_current -1]) && $this->o_steps[$this->i_current -1]->is_enabled()){
-                $str .= "<button type='submit' name='last'>".msgPool::backButton()."</button>";
+                $str .= "<button class='btn-small primary' type='submit' name='last'>".msgPool::backButton()."</button>";
             }else{
-                $str .= "<button disabled type='submit' name='last'>".msgPool::backButton()."</button>";
+                $str .= "<button class='btn-small disabled' type='submit' name='last'>".msgPool::backButton()."</button>";
             }
 
             if($this->o_steps[$this->i_current]->b_displayCheckbutton){
-                $str .= "&nbsp;<button type='submit' name='test'>"._("Check again")."</button>";
+                $str .= "<button class='btn-small primary' type='submit' name='test'>"._("Check again")."</button>";
             }
 
-            $str .= "&nbsp;<button type='submit' name='next'>"._("Next")."</button>";
-            $str .="</div>";
+            $str .= "<button class='btn-small primary' type='submit' name='next'>"._("Next")."</button>";
         }
         return($str);
     }
@@ -250,18 +248,9 @@ class setup
         $page = $this->i_current ." / ".count($this->o_steps);
 
 
-        $str = "<div style='100%'>
-                    <div style='float: left; '>
-                        <img src='{$image}' alt=''>
-                    </div>
-                    <div style='float: left; margin-left:10px;margin-top:10px;font-size:24px;font-weight:bold;'>
-                        {$title}
-                    </div>
-                    <div style='float: right; margin-top:10px;font-size:24px;font-weight:bold;'>
-                        {$page}
-                    </div>
-                </div>
-                <div class='clear'></div> ";
+        $str = "<i class='material-icons md-30'>lightbulb_outline</i>
+                <h1>{$title}</h1>
+                <div class='page'>{$page}</div>";
         return ($str);
     }
 
@@ -291,4 +280,3 @@ class setup
 
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

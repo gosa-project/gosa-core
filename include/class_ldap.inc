@@ -125,7 +125,7 @@ class LDAP
                 LDAP::$$attr = $data[$attr];
             }
             
-            $attrs = array(implode(LDAP::$characterMapRegFrom,', '),implode(LDAP::$characterMapRegTo,', '));
+            $attrs = array(implode(',', LDAP::$characterMapRegFrom),',', implode(LDAP::$characterMapRegTo,));
             @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"(Cached) Detected special-char handling for LDAP actions");
             return;
         }
@@ -1534,4 +1534,3 @@ class LDAP
 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

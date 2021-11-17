@@ -54,9 +54,17 @@ class commandVerifier
             if(!empty($stderr)) $stderr = "<pre>".htmlentities($stderr,ENT_COMPAT,'UTF-8')."</pre>";
             $output = "
                 <table summary='"._("Results")."'>
+<<<<<<< HEAD
                 <tr><td><b>Result:</b></td><td>$stdout</td></tr>
                 <tr><td><b>Error:</b></td><td>$stderr</td></tr>
                 <tr><td><b>Return code:</b></td><td>$code</td></tr>
+=======
+                    <tbody>
+                        <tr><td><b>Result:</b></td><td>$stdout</td></tr>
+                        <tr><td><b>Error:</b></td><td>$stderr</td></tr>
+                        <tr><td><b>Return code:</b></td><td>$code</td></tr>
+                    </tbody>
+>>>>>>> gosa-core_v2.8
                 </table>";
         }
         $smarty->assign('value', set_post($this->command));

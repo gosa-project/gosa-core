@@ -209,6 +209,7 @@ if (session::global_is_set('plugin_dir')){
 $plist->gen_headlines();
 $plist->gen_menu();
 $plist->genPathMenu();
+$plist->genBreadcrumb();
 
 /* check if we are using account expiration */
 $smarty->assign("hideMenus", FALSE);
@@ -336,7 +337,7 @@ if (isset($_GET['reset'])){
 
 /* show web frontend */
 $smarty->assign ("title","GOsa");
-$smarty->assign ("logo", image(get_template_path("images/logo.png")));
+$smarty->assign ("logo", get_template_path("images/logo.png"));
 $smarty->assign ("logoutimage", get_template_path("images/btn-logout.png"));
 $smarty->assign ("date", date("l, dS F Y H:i:s O"));
 $smarty->assign ("lang", preg_replace('/_.*$/', '', $lang));
@@ -361,7 +362,10 @@ if($ui->ignore_acl_for_current_user()){
     $loggedin = "<font color='red'>"._("ACLs are disabled")."</font>&nbsp;".$loggedin;
 }
 
+$userName = $ui->username;
+
 $smarty->assign ("loggedin", $loggedin);
+$smarty->assign ("userName", $userName);
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
 $smarty->assign ("go_base", get_template_path('images/dtree.png'));
 $smarty->assign ("go_home", get_template_path('images/gohome.png'));
@@ -418,6 +422,7 @@ if (is_file("$plugin_dir/main.inc")){
 /* Print_out last ErrorMessage repeated string. */
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign ("pathMenu", $plist->genPathMenu());
+$smarty->assign ("breadcrumb", $plist->genBreadcrumb());
 $smarty->assign("contents", $display);
 $smarty->assign("sessionLifetime", $config->get_cfg_value('core','sessionLifetime'));
 
@@ -512,4 +517,3 @@ session::global_set('config',$config);
 session::set('errorsAlreadyPosted',array());
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

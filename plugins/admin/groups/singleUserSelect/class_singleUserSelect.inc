@@ -54,7 +54,11 @@ class singleUserSelect extends management
     function detectPostActions()
     {
         $action = management::detectPostActions();
+<<<<<<< HEAD
         if(isset($_POST['add_users_save'])) $action['action'] = "userSelected";
+=======
+        if(isset($_POST['add_users_save']) || isset($_POST['ok-save'])) $action['action'] = "userSelected";
+>>>>>>> gosa-core_v2.8
         return($action);;
     }
 } 

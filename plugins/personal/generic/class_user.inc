@@ -306,13 +306,21 @@ class user extends plugin
     }
 
     // Clear manager attribute if requested
+<<<<<<< HEAD
     if(preg_match("/ removeManager/i", " ".implode(array_keys($_POST),' ')." ")){
+=======
+    if(preg_match("/ removeManager/i", " ".implode(' ', array_keys($_POST))." ")){
+>>>>>>> gosa-core_v2.8
       $this->manager = "";
       $this->manager_name = "";
     }
 
     // Allow to select a new inetOrgPersion:manager 
+<<<<<<< HEAD
     if(preg_match("/ editManager/i", " ".implode(array_keys($_POST),' ')." ")){
+=======
+    if(preg_match("/ editManager/i", " ".implode(' ', array_keys($_POST))." ")){
+>>>>>>> gosa-core_v2.8
       $this->dialog = new singleUserSelect($this->config, get_userinfo());
     }
     if($this->dialog && $this->dialog instanceOf singleUserSelect && count($this->dialog->detectPostActions())){
@@ -326,7 +334,11 @@ class user extends plugin
         $this->dialog = NULL;
       }
     }
+<<<<<<< HEAD
     if(isset($_POST['add_users_cancel'])){
+=======
+    if(isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort'])){
+>>>>>>> gosa-core_v2.8
       $this->dialog = NULL;
     }
     if($this->dialog instanceOf singleUserSelect) return($this->dialog->execute()); 
@@ -349,9 +361,23 @@ class user extends plugin
 
     /* Do we represent a valid gosaAccount? */
     if (!$this->is_account){
+<<<<<<< HEAD
       $str = "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
         msgPool::noValidExtension("GOsa")."</b>";
       return($str);
+=======
+      switch ($theme) {
+        case 'classic':
+          $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+          break;
+        
+        default:
+          $symbol = "<i class='material-icons'>error</i>";
+          break;
+      }
+      $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("GOsa"))."</div>";
+      return($display);
+>>>>>>> gosa-core_v2.8
     }
 
     /* Password configure dialog handling */
@@ -586,7 +612,11 @@ class user extends plugin
           $smarty->assign($cert."info",$str);
           $smarty->assign($cert."_state","true");
         } else {
+<<<<<<< HEAD
           $smarty->assign($cert."info", "<i>"._("No certificate installed")."</i>");
+=======
+          $smarty->assign($cert."info", tempSwitch(array("<p>"._("No certificate installed")."</p>", "<i>"._("No certificate installed")."</i>")));
+>>>>>>> gosa-core_v2.8
           $smarty->assign($cert."_state","");
         }
       }
@@ -705,7 +735,11 @@ class user extends plugin
     }
     $smarty->assign("multiple_support" , $this->multiple_support_active);
     $smarty->assign("manager_name", set_post($this->manager_name));
+<<<<<<< HEAD
     return($smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__))));
+=======
+    return($smarty->fetch (get_template_path("generic.tpl", TRUE, dirname(__FILE__))));
+>>>>>>> gosa-core_v2.8
   }
 
 

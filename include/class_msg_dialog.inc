@@ -176,7 +176,6 @@ class msg_dialog
             }else{
                 $msg_dialogs = session::get('msg_dialogs');
                 foreach($msg_dialogs as $key => $dialog){
-
                     if(preg_match("/".$dialog->get_ID()."/",$seen)){
                         unset($msg_dialogs[$key]);
                     }else{
@@ -186,6 +185,7 @@ class msg_dialog
                     unset($msg_dialogs[$key]);
                 }
                 session::set('msg_dialogs',$msg_dialogs);
+                $return .= "</div>";
             }
             $dialog_ids = preg_replace("/,$/","",$dialog_ids);
 
@@ -199,4 +199,3 @@ class msg_dialog
     }
 
 }
-?>

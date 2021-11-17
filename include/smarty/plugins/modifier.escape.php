@@ -5,6 +5,7 @@
  * @package Smarty
  * @subpackage PluginsModifier
  */
+<<<<<<< HEAD
 
 /**
  * Smarty escape modifier plugin
@@ -15,15 +16,31 @@
  *
  * @link http://www.smarty.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
+=======
+/**
+ * Smarty escape modifier plugin
+ * Type:     modifier
+ * Name:     escape
+ * Purpose:  escape string for output
+ *
+ * @link   http://www.smarty.net/docs/en/language.modifier.escape
+ * @author Monte Ohrt <monte at ohrt dot com>
+ *
+>>>>>>> gosa-core_v2.8
  * @param string  $string        input string
  * @param string  $esc_type      escape type
  * @param string  $char_set      character set, used for htmlspecialchars() or htmlentities()
  * @param boolean $double_encode encode already encoded entitites again, used for htmlspecialchars() or htmlentities()
+<<<<<<< HEAD
+=======
+ *
+>>>>>>> gosa-core_v2.8
  * @return string escaped input string
  */
 function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $double_encode = true)
 {
     static $_double_encode = null;
+<<<<<<< HEAD
     if ($_double_encode === null) {
         $_double_encode = version_compare(PHP_VERSION, '5.2.3', '>=');
     }
@@ -32,6 +49,16 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
         $char_set = Smarty::$_CHARSET;
     }
 
+=======
+    static $is_loaded_1 = false;
+    static $is_loaded_2 = false;
+    if ($_double_encode === null) {
+        $_double_encode = version_compare(PHP_VERSION, '5.2.3', '>=');
+    }
+    if (!$char_set) {
+        $char_set = Smarty::$_CHARSET;
+    }
+>>>>>>> gosa-core_v2.8
     switch ($esc_type) {
         case 'html':
             if ($_double_encode) {
@@ -45,11 +72,29 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                     // php <5.2.3 - prevent double encoding
                     $string = preg_replace('!&(#?\w+);!', '%%%SMARTY_START%%%\\1%%%SMARTY_END%%%', $string);
                     $string = htmlspecialchars($string, ENT_QUOTES, $char_set);
+<<<<<<< HEAD
                     $string = str_replace(array('%%%SMARTY_START%%%', '%%%SMARTY_END%%%'), array('&', ';'), $string);
                     return $string;
                 }
             }
 
+=======
+                    $string = str_replace(
+                        array(
+                            '%%%SMARTY_START%%%',
+                            '%%%SMARTY_END%%%'
+                        ),
+                        array(
+                            '&',
+                            ';'
+                        ),
+                        $string
+                    );
+                    return $string;
+                }
+            }
+        // no break
+>>>>>>> gosa-core_v2.8
         case 'htmlall':
             if (Smarty::$_MBSTRING) {
                 // mb_convert_encoding ignores htmlspecialchars()
@@ -64,6 +109,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                         // php <5.2.3 - prevent double encoding
                         $string = preg_replace('!&(#?\w+);!', '%%%SMARTY_START%%%\\1%%%SMARTY_END%%%', $string);
                         $string = htmlspecialchars($string, ENT_QUOTES, $char_set);
+<<<<<<< HEAD
                         $string = str_replace(array('%%%SMARTY_START%%%', '%%%SMARTY_END%%%'), array('&', ';'), $string);
                         return $string;
                     }
@@ -73,6 +119,26 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 return mb_convert_encoding($string, 'HTML-ENTITIES', $char_set);
             }
 
+=======
+                        $string =
+                            str_replace(
+                                array(
+                                    '%%%SMARTY_START%%%',
+                                    '%%%SMARTY_END%%%'
+                                ),
+                                array(
+                                    '&',
+                                    ';'
+                                ),
+                                $string
+                            );
+                        return $string;
+                    }
+                }
+                // htmlentities() won't convert everything, so use mb_convert_encoding
+                return mb_convert_encoding($string, 'HTML-ENTITIES', $char_set);
+            }
+>>>>>>> gosa-core_v2.8
             // no MBString fallback
             if ($_double_encode) {
                 return htmlentities($string, ENT_QUOTES, $char_set, $double_encode);
@@ -82,6 +148,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 } else {
                     $string = preg_replace('!&(#?\w+);!', '%%%SMARTY_START%%%\\1%%%SMARTY_END%%%', $string);
                     $string = htmlentities($string, ENT_QUOTES, $char_set);
+<<<<<<< HEAD
                     $string = str_replace(array('%%%SMARTY_START%%%', '%%%SMARTY_END%%%'), array('&', ';'), $string);
                     return $string;
                 }
@@ -97,6 +164,30 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
             // escape unescaped single quotes
             return preg_replace("%(?<!\\\\)'%", "\\'", $string);
 
+=======
+                    $string = str_replace(
+                        array(
+                            '%%%SMARTY_START%%%',
+                            '%%%SMARTY_END%%%'
+                        ),
+                        array(
+                            '&',
+                            ';'
+                        ),
+                        $string
+                    );
+                    return $string;
+                }
+            }
+        // no break
+        case 'url':
+            return rawurlencode($string);
+        case 'urlpathinfo':
+            return str_replace('%2F', '/', rawurlencode($string));
+        case 'quotes':
+            // escape unescaped single quotes
+            return preg_replace("%(?<!\\\\)'%", "\\'", $string);
+>>>>>>> gosa-core_v2.8
         case 'hex':
             // escape every byte into hex
             // Note that the UTF-8 encoded character ä will be represented as %c3%a4
@@ -106,11 +197,23 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 $return .= '%' . bin2hex($string[$x]);
             }
             return $return;
+<<<<<<< HEAD
 
         case 'hexentity':
             $return = '';
             if (Smarty::$_MBSTRING) {
                 require_once(SMARTY_PLUGINS_DIR . 'shared.mb_unicode.php');
+=======
+        case 'hexentity':
+            $return = '';
+            if (Smarty::$_MBSTRING) {
+                if (!$is_loaded_1) {
+                    if (!is_callable('smarty_mb_to_unicode')) {
+                        include_once SMARTY_PLUGINS_DIR . 'shared.mb_unicode.php';
+                    }
+                    $is_loaded_1 = true;
+                }
+>>>>>>> gosa-core_v2.8
                 $return = '';
                 foreach (smarty_mb_to_unicode($string, Smarty::$_CHARSET) as $unicode) {
                     $return .= '&#x' . strtoupper(dechex($unicode)) . ';';
@@ -123,11 +226,23 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 $return .= '&#x' . bin2hex($string[$x]) . ';';
             }
             return $return;
+<<<<<<< HEAD
 
         case 'decentity':
             $return = '';
             if (Smarty::$_MBSTRING) {
                 require_once(SMARTY_PLUGINS_DIR . 'shared.mb_unicode.php');
+=======
+        case 'decentity':
+            $return = '';
+            if (Smarty::$_MBSTRING) {
+                if (!$is_loaded_1) {
+                    if (!is_callable('smarty_mb_to_unicode')) {
+                        include_once SMARTY_PLUGINS_DIR . 'shared.mb_unicode.php';
+                    }
+                    $is_loaded_1 = true;
+                }
+>>>>>>> gosa-core_v2.8
                 $return = '';
                 foreach (smarty_mb_to_unicode($string, Smarty::$_CHARSET) as $unicode) {
                     $return .= '&#' . $unicode . ';';
@@ -140,6 +255,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 $return .= '&#' . ord($string[$x]) . ';';
             }
             return $return;
+<<<<<<< HEAD
 
         case 'javascript':
             // escape quotes and backslashes, newlines, etc.
@@ -153,11 +269,67 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
             // no MBString fallback
             return str_replace(array('@', '.'), array(' [AT] ', ' [DOT] '), $string);
 
+=======
+        case 'javascript':
+            // escape quotes and backslashes, newlines, etc.
+            return strtr(
+                $string,
+                array(
+                    '\\' => '\\\\',
+                    "'"  => "\\'",
+                    '"'  => '\\"',
+                    "\r" => '\\r',
+                    "\n" => '\\n',
+                    '</' => '<\/'
+                )
+            );
+        case 'mail':
+            if (Smarty::$_MBSTRING) {
+                if (!$is_loaded_2) {
+                    if (!is_callable('smarty_mb_str_replace')) {
+                        include_once SMARTY_PLUGINS_DIR . 'shared.mb_str_replace.php';
+                    }
+                    $is_loaded_2 = true;
+                }
+                return smarty_mb_str_replace(
+                    array(
+                        '@',
+                        '.'
+                    ),
+                    array(
+                        ' [AT] ',
+                        ' [DOT] '
+                    ),
+                    $string
+                );
+            }
+            // no MBString fallback
+            return str_replace(
+                array(
+                    '@',
+                    '.'
+                ),
+                array(
+                    ' [AT] ',
+                    ' [DOT] '
+                ),
+                $string
+            );
+>>>>>>> gosa-core_v2.8
         case 'nonstd':
             // escape non-standard chars, such as ms document quotes
             $return = '';
             if (Smarty::$_MBSTRING) {
+<<<<<<< HEAD
                 require_once(SMARTY_PLUGINS_DIR . 'shared.mb_unicode.php');
+=======
+                if (!$is_loaded_1) {
+                    if (!is_callable('smarty_mb_to_unicode')) {
+                        include_once SMARTY_PLUGINS_DIR . 'shared.mb_unicode.php';
+                    }
+                    $is_loaded_1 = true;
+                }
+>>>>>>> gosa-core_v2.8
                 foreach (smarty_mb_to_unicode($string, Smarty::$_CHARSET) as $unicode) {
                     if ($unicode >= 126) {
                         $return .= '&#' . $unicode . ';';
@@ -167,7 +339,10 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 }
                 return $return;
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> gosa-core_v2.8
             $_length = strlen($string);
             for ($_i = 0; $_i < $_length; $_i++) {
                 $_ord = ord(substr($string, $_i, 1));
@@ -179,6 +354,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 }
             }
             return $return;
+<<<<<<< HEAD
 
         default:
             return $string;
@@ -186,3 +362,10 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
 }
 
 ?>
+=======
+        default:
+            trigger_error("escape: unsupported type: $esc_type - returning unmodified string", E_USER_NOTICE);
+            return $string;
+    }
+}
+>>>>>>> gosa-core_v2.8

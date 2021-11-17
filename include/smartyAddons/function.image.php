@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_image($params, $smarty)
+function smarty_function_image($params, &$smarty)
 {
   $path = (isset($params['path']))? $params['path'] :"";
   $action = (isset($params['action']))? $params['action'] :"";
@@ -21,5 +21,3 @@ function smarty_function_image($params, $smarty)
     echo image($path,$action,$title);
   }
 }
-  
-?>

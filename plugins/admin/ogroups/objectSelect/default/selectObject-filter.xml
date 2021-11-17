@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <category>users</category>
+    <category>department</category>
+    <category>group</category>
+    <category>server</category>
+    <category>workstation</category>
+    <category>terminal</category>
+    <category>opsi</category>
+    <category>incoming</category>
+    <category>phone</category>
+    <category>printer</category>
+    <category>winworkstation</category>
+    <category>component</category>
+    <initial>true</initial>
+    <default>default</default>
+    <scope>auto</scope>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>cn</attribute>
+    <attribute>sn</attribute>
+    <attribute>ou</attribute>
+    <attribute>uid</attribute>
+    <attribute>givenName</attribute>
+    <attribute>description</attribute>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Default filter</label>
+    <query>
+      <backend>LDAPBlacklist</backend>
+      <filter>(&amp;
+                (|
+                  (objectClass=gosaAccount) 
+                  (objectClass=posixGroup)
+                  (objectClass=goServer)
+                  (objectClass=gotoWorkstation)
+                  (objectClass=gotoTerminal)
+                  (objectClass=gotoPrinter)
+                  (objectClass=goFonHardware)
+                )
+                (cn=$)
+              )
+      </filter>
+    </query>
+    <query>
+      <backend>LDAPDepartmentBlacklist</backend>
+      <filter>(&amp;(objectClass=gosaDepartment)(cn=$))</filter>
+    </query>
+    <autocomplete>
+      <attribute>cn</attribute>
+      <attribute>l</attribute>
+      <attribute>o</attribute>
+      <attribute>dc</attribute>
+      <attribute>c</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+</filterdef>

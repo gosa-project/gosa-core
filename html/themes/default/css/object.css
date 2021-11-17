@@ -1,0 +1,1558 @@
+.object-info {
+    margin: -24px -24px 0 -24px;
+}
+
+
+/* Navigation */
+
+.object-info .card-tabs {
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.object-info .card-tabs .row {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.object-info .card-tabs .row .col {
+    padding: 0;
+}
+
+.object-info .card-tabs .tabs {
+    overflow-x: unset;
+    overflow-y: unset;
+}
+
+.object-info .card-tabs .tabs .advanced-menu {
+    display: none;
+}
+
+.object-info .card-tabs .tabs .tab {
+    text-transform: none;
+}
+
+.object-info .card-tabs .tabs li a {
+    color: #000000;
+    border-bottom: 4px solid transparent;
+    -webkit-transition: border 0.5s ease-out;
+    -o-transition: border 0.5s ease-out;
+    transition: border 0.5s ease-out;
+    line-height: 38px;
+    padding: 5px 25px;
+}
+
+.object-info .card-tabs .tabs li a.dropdown-advanced-area-selection i {
+    font-size: 18px;
+    line-height: 38px;
+}
+
+.object-info .card-tabs .tabs li ul.dropdown-content li {
+    display: block;
+}
+
+.object-info .card-tabs .tabs li a.active,
+.object-info .card-tabs .tabs li a:hover {
+    color: #000000;
+    border-bottom-color: #2A3278;
+    background: #FFFFFF;
+}
+
+
+/* Content */
+
+.object-info .content-wrapper {
+    padding: 0 24px;
+}
+
+
+/* Image */
+
+.object-info .content-wrapper .user-image button {
+    margin-top: 20px;
+}
+
+.object-info .content-wrapper .user-image img {
+    max-width: 145px;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.user-image h3 {
+    margin-top: 0;
+}
+
+.user-image img {
+    margin: 0 auto;
+}
+
+.user-image .preview-image img {
+    overflow-y: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.user-image .image-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.user-image .image-action button {
+    margin-right: 20px;
+}
+
+.user-image .image-action .file-field {
+    margin: 0;
+}
+
+.user-image .image-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.user-image .image-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.user-image .image-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+
+/* Others */
+
+.object-info .content-wrapper .input-field:not(.textarea-multiple):not(.table-content):not(.acl-member-wrapper) {
+    height: 39px;
+}
+
+.object-info .content-wrapper .input-field>label {
+    font-size: 16px;
+}
+
+.object-info .content-wrapper .input-field input:not([type="checkbox"]),
+.object-info .content-wrapper .input-field textarea:not(.multiple) {
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+}
+
+.object-info .content-wrapper .input-field textarea {
+    overflow-y: auto;
+    padding-top: 1em;
+}
+
+.object-info .content-wrapper .input-field.certificate {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-end;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.object-info .content-wrapper .input-field.certificate button {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    color: #000;
+    width: auto;
+    text-transform: initial;
+}
+
+.object-info .content-wrapper .select-wrapper.disabled input:hover {
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.42)!important;
+    box-shadow: none!important;
+}
+
+.object-info .content-wrapper .select-wrapper {
+    margin-bottom: 8px;
+}
+
+.datepicker-calendar .selects-container .select-wrapper {
+    margin-bottom: 0;
+}
+
+.object-info .content-wrapper .select-wrapper+label {
+    top: 0;
+    font-size: 16px;
+}
+
+.object-info .content-wrapper .input-field label {
+    -webkit-transform: translateY(-14px) scale(0.8);
+    transform: translateY(-14px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.object-info .content-wrapper .ldap-tree .search-field {
+    position: relative;
+    margin: 0;
+    height: 26px;
+}
+
+.object-info .content-wrapper .ldap-tree .search-field i {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    font-size: 18px;
+}
+
+.object-info .content-wrapper .ldap-tree .search-field input {
+    height: 24px;
+    width: 90%;
+    width: calc(100% - 28px);
+    margin: 0;
+    margin-left: 28px;
+}
+
+.object-info .content-wrapper .input-field.acl-member-wrapper {
+    height: auto;
+}
+
+.object-info .content-wrapper .acl-member-wrapper .acl-member {
+    min-height: 129px;
+    max-height: 129px;
+    margin-block-start: calc(1rem + 10px);
+    margin-bottom: calc(1rem + 8px);
+}
+
+.object-info .content-wrapper .acl-member-wrapper label {
+    font-size: 16px;
+    top: -10px;
+}
+
+.object-info .content-wrapper .input-field.file-field button {
+    height: 30px;
+    line-height: 30px;
+    margin-right: 20px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    color: #000;
+    width: auto;
+    text-transform: initial;
+}
+
+.object-info .content-wrapper .input-field.add,
+.content .goto-import-wrapper .input-field.add {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.object-info .content-wrapper .input-field.add .select-wrapper {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.object-info .content-wrapper .input-field.add button,
+.content .goto-import-wrapper .input-field.add button {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    color: #000;
+    width: auto;
+    text-transform: initial;
+}
+
+.object-info .content-wrapper .input-field.manager input:first-child {
+    width: calc(100% - 84px);
+}
+
+.object-info .content-wrapper .input-field.manager .icons:not(.prefix) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-end;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+}
+
+.object-info .content-wrapper .input-field.manager .icons i {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 18px;
+    margin: 0;
+}
+
+.object-info .content-wrapper .input-field.manager .icons input {
+    width: 18px;
+}
+
+.object-info .content-wrapper .input-field.manager .icons:not(.prefix) .icon {
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    min-width: 18px;
+    width: auto;
+    margin-left: 10px;
+}
+
+.object-info .content-wrapper .input-field.manager [type="checkbox"]:not(:checked),
+.object-info .content-wrapper .input-field.manager [type="checkbox"]:checked {
+    opacity: 1;
+}
+
+.object-info .content-wrapper hr+h3 {
+    margin-top: 0;
+}
+
+
+/* Certificate */
+
+.certificate .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.certificate .certificate-upload .input-field,
+.certificate .certificate-upload .file-path-wrapper input {
+    margin: 0;
+}
+
+.certificate .certificate-upload div.btn-small {
+    height: 30px;
+    line-height: 30px;
+}
+
+
+/* POSIX/Mail Settings */
+
+.object-info .content-wrapper .card-action.settings button {
+    margin-left: 0;
+}
+
+.object-info [type="checkbox"]+span:not(.lever) {
+    font-size: 12px;
+    color: #000000;
+}
+
+.object-info .account-settings label,
+.object-info .leave-settings label,
+.object-info label {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+/* POSIX Settings */
+
+.object-info .card-action.settings {
+    margin-bottom: 20px;
+}
+
+.object-info h3 {
+    margin-top: 0px;
+}
+
+.object-info .posix-settings .status-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.object-info .posix-settings .status-info p:first-child {
+    margin-right: 10px;
+}
+
+.object-info .posix-settings .acl-numbers {
+    margin-left: 35px;
+}
+
+.object-info .account-settings label input:not([type="checkbox"]) {
+    width: auto;
+    max-width: 100px;
+    text-align: center;
+}
+
+.object-info .account-settings label span input[type=text]:not(.browser-default),
+.object-info .group-wrapper label span input[type=text]:not(.browser-default) {
+    min-height: 24px;
+    height: 24px!important;
+    font-size: 12px;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.object-info .account-settings .inline-date-picker input.datepicker {
+    margin-left: 10px;
+}
+
+.object-info .account-settings .inline-date-picker i {
+    position: absolute;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.object-info .posix-settings .acl-member,
+.object-info .group-wrapper .acl-member,
+.object-info .ogroup-wrapper .acl-member,
+.faxaccount-wrapper .acl-member,
+.system-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+.user-image .image-action,
+.ssh-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.ssh-action button {
+    margin-left: 20px;
+}
+
+.ssh-action .file-field {
+    margin: 0;
+    width: 100%;
+}
+
+.ssh-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.ssh-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.ssh-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+
+/* Samba Settings */
+
+.samba-wrapper label+.input-field {
+    margin-top: 25px;
+}
+
+.samba-wrapper .samba-timeout+.samba-devices label {
+    padding-top: 3px;
+    margin-bottom: 11px;
+}
+
+.samba-login-wrapper h3 {
+    margin-top: 0;
+}
+
+.samba-login-wrapper p+#samba-login-table {
+    margin-top: 20px;
+}
+
+.samba-login-wrapper #samba-login-table .toggle-button {
+    text-align: center;
+}
+
+.samba-login-wrapper #samba-login-table .toggle-button input {
+    margin: 0;
+    width: 30px;
+    padding: 0 5px;
+}
+
+.samba-login-wrapper #samba-login-table .check-days .check-option {
+    padding-left: 23px;
+}
+
+
+/* Mail Settings */
+
+.object-info .content-wrapper label button.inline-button {
+    max-height: 25px;
+    min-height: 25px;
+    line-height: 25px;
+    margin: 0 10px;
+}
+
+
+/* Scalix Settings */
+
+.scalix-wrapper label+.input-field {
+    margin-top: 25px;
+}
+
+
+/* Connectivity Settings */
+
+.connectivity-wrapper .proxy-account,
+.connectivity-wrapper .opengw-content,
+.connectivity-wrapper .ftp-account,
+.connectivity-wrapper .oxchange-account,
+.connectivity-wrapper .kolab-account {
+    margin-left: 35px;
+}
+
+.connectivity-wrapper .ftp-account .intermediate-char {
+    margin: 0 10px;
+}
+
+.connectivity-wrapper label span h3 {
+    margin: 0;
+    line-height: 25px;
+}
+
+.connectivity-wrapper .inline-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 35px;
+}
+
+.connectivity-wrapper .inline-wrapper .input-field {
+    margin-top: 0;
+    margin-right: 20px;
+}
+
+.connectivity-wrapper .webdav-wrapper label,
+.connectivity-wrapper .intranet-wrapper label {
+    margin-bottom: 0;
+}
+
+
+/* Multiple Select */
+
+.input-field .select-wrapper.multiple-select label {
+    -webkit-transform: initial;
+    transform: initial;
+    -webkit-transform-origin: initial;
+    transform-origin: initial;
+    top: initial;
+    left: initial;
+    margin: 0;
+}
+
+.input-field .select-wrapper.multiple-select ul li {
+    padding: 5px 10px;
+}
+
+.input-field .select-wrapper.multiple-select input[type="checkbox"]+span:not(.lever) {
+    height: 18px;
+}
+
+.object-info .contingent .list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+}
+
+.object-info .contingent label {
+    font-size: 12px;
+    color: #000000;
+}
+
+.object-info .contingent label span input[type=text]:not(.browser-default) {
+    min-height: 24px;
+    height: 24px!important;
+    font-size: 12px;
+    padding: 0;
+    margin-bottom: 0;
+    width: auto;
+    max-width: 100px;
+    text-align: center;
+}
+
+.object-info .leave-notification {
+    margin-left: 35px;
+}
+
+.object-info .leave-notification .input-field textarea.multiple {
+    margin-bottom: 0;
+}
+
+.object-info .leave-settings .spam-option {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.object-info .leave-settings .spam-option .row {
+    width: calc(100% - 35px);
+}
+
+.object-info .leave-settings .spam-option .row .col.s6 {
+    margin-top: 0;
+}
+
+.object-info .leave-settings .spam-option .row .col.s6 label {
+    min-width: 300px;
+    width: max-content;
+    left: 0;
+}
+
+.object-info .leave-settings .forward-messages {
+    position: relative;
+}
+
+.object-info .leave-settings .forward-messages button {
+    white-space: nowrap;
+}
+
+.object-info .leave-settings .forward-messages .move-in {
+    margin-left: 35px;
+}
+
+
+/* Referenzen */
+
+.object-info .acl-reference .acl-reference-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+.object-info .acl-reference .acl-reference-header h2,
+.object-info .acl-reference .acl-viewer .collapsible-header h3,
+.object-info .acl-reference .acl-viewer .card-content h4 {
+    margin: 0;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .input-field {
+    height: 20px;
+    min-width: 400px;
+    margin: 1rem 20px 0 20px;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .input-field input {
+    margin-bottom: 0;
+    min-height: 20px;
+    height: 20px!important;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .submit {
+    position: relative;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .submit input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+}
+
+.object-info .acl-reference .acl-reference-header .acl-name .submit i {
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible:not(.top-level) {
+    margin: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-header.top-level {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-header.top-level i {
+    font-size: 18px;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body {
+    padding: 2em;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-header h4 {
+    margin: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body h5 {
+    margin-top: 0;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body .row .row {
+    margin-bottom: 10px;
+}
+
+.object-info .acl-reference .acl-viewer .collapsible-body .row .row:last-child {
+    margin-bottom: 0;
+}
+
+.object-info .acl-reference .acl-viewer .card {
+    height: auto;
+    max-height: initial;
+    margin: 0;
+}
+
+.object-info .acl-reference .acl-viewer .card-content .divider {
+    margin: 10px 0;
+}
+
+.object-info .acl-reference .acl-viewer .card-content ul {
+    padding-left: 18px;
+}
+
+.object-info .acl-reference .acl-viewer .card-content ul li {
+    list-style-type: initial;
+    font-size: 12px;
+    padding: 0 0 5px 0;
+}
+
+.ldap-entry-wrapper pre {
+    margin: 0;
+}
+
+.ldap-entry-wrapper h3 {
+    margin: 0;
+}
+
+
+/* Group content */
+
+.object-info .group-wrapper .input-gid input {
+    width: auto;
+}
+
+
+/* Group - Dyngroup content */
+
+.object-info .dyngroup-wrapper .action {
+    margin-top: 20px;
+}
+
+.object-info .dyngroup-wrapper .row+.divider {
+    display: none;
+}
+
+
+/* Group - Mail content */
+
+.object-info .group-mail-wrapper .row {
+    margin-top: 20px;
+}
+
+.object-info .group-mail-wrapper .row:first-child {
+    margin-top: 0;
+}
+
+.object-info .group-mail-wrapper .intermediate-char {
+    margin: 0 10px 9px 10px;
+}
+
+.object-info .group-mail-wrapper .contingent .list {
+    padding: 0 0 8px 0;
+}
+
+.object-info .group-mail-wrapper .contingent .input-field {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.object-info .group-mail-wrapper .contingent .input-field span {
+    margin-left: 10px;
+}
+
+.object-info .group-mail-wrapper .folder-setting {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 39px;
+    margin-top: 25px;
+}
+
+.object-info .group-mail-wrapper .folder-setting .input-field {
+    width: calc((100% - 39px) / 2)
+}
+
+.object-info .group-mail-wrapper .folder-setting .input-field:first-child {
+    margin-right: 20px;
+}
+
+.object-info .group-mail-wrapper .folder-setting .action {
+    margin-left: 10px;
+}
+
+.object-info .group-mail-wrapper .shared-folders .input-field.add .select-wrapper+input {
+    margin-left: 20px;
+}
+
+.object-info .dropdown-content li>span>label {
+    display: contents;
+    top: 1px;
+    left: 0;
+    height: 18px;
+}
+
+
+/* Sudo-Role */
+
+.object-info .sudo-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table {
+    border: 1px solid lightgrey;
+    min-height: 10rem;
+    padding: 1rem;
+    border-radius: .25rem;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table .input-field.table-content .select-wrapper {
+    margin-bottom: 0;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table .input-field .select-wrapper {
+    margin-right: 20px;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table tr:last-child:not(:first-child) {
+    border-bottom: none;
+}
+
+.object-info .sudo-options-wrapper .sudo-options-table .action-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+/* NIS Netgroups */
+
+.object-info .netgroup-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+
+/* Password management */
+
+.object-info [type="radio"]+span:not(.lever) {
+    font-size: 12px;
+    color: #000000;
+}
+
+.object-info .pwreset-wrapper .tooltipped {
+    vertical-align: text-bottom;
+    margin-left: 5px;
+}
+
+.object-info .pwreset-wrapper label+.input-field {
+    margin-top: 25px;
+}
+
+.object-info .pwreset-wrapper .example-wrapper {
+    height: 54px;
+}
+
+.object-info .pwreset-wrapper .example-wrapper pre {
+    border: .5px solid grey;
+    border-radius: 5px;
+    max-width: 50%;
+    padding: 3px 15px;
+    margin: 10px 0 0 0;
+}
+
+
+/* Desk Settings */
+
+.object-info .env-wrapper .profile-management {
+    margin-left: 35px;
+}
+
+.object-info .env-wrapper label+.profile-management {
+    margin-top: 25px;
+}
+
+.object-info .env-wrapper .col.alignment-correction {
+    padding-top: 35px;
+}
+
+.object-info .env-wrapper .intermediate-char {
+    margin: 0 10px;
+}
+
+.object-info .env-wrapper button {
+    margin-right: 20px;
+}
+
+.object-info .env-wrapper button:last-of-type {
+    margin-right: 0;
+}
+
+.desk-script-managment h3 {
+    margin-top: 0px;
+}
+
+.desk-script-managment .script-option label {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.desk-script-managment .import-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.desk-script-managment .import-action button {
+    margin-right: 20px;
+}
+
+.desk-script-managment .import-action .file-field {
+    margin: 0 20px 0 0;
+}
+
+.desk-script-managment .import-action .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.desk-script-managment .import-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.desk-script-managment .import-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+
+/* Fax-Plugin */
+
+.object-info .faxaccount-wrapper .edit-context {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.object-info .faxaccount-wrapper .edit-context:last-child {
+    margin-bottom: 0;
+}
+
+.object-info .blocklist-wrapper .blocklist-info h3 {
+    margin-bottom: 8px;
+}
+
+
+/* Startmenu */
+
+.app-wrapper .table-box {
+    border: 1px solid lightgrey;
+    min-height: 10rem;
+    padding: 1rem;
+    border-radius: .25rem;
+}
+
+.app-wrapper .property-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 10px;
+}
+
+.app-wrapper .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.object-info .content-wrapper .app-wrapper .action-wrapper input {
+    width: 18px;
+    min-height: 18px;
+    height: 18px!important;
+    padding: 0;
+    vertical-align: top;
+}
+
+.app-wrapper .action-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.app-wrapper .action-wrapper:last-child {
+    margin-right: 0;
+}
+
+.app-wrapper i.material-icons {
+    font-size: 18px;
+}
+
+.app-wrapper .input-field.add .input-field {
+    margin-right: 10px;
+    width: 100%;
+}
+
+.app-wrapper .input-field.add .input-field+.input-field {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.object-info .content-wrapper .app-wrapper .input-field.add button {
+    margin-bottom: 0;
+}
+
+.startmenu-edit-page h3 {
+    margin-top: 0;
+}
+
+.startmenu-edit-page .folder-image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.startmenu-edit-page .folder-image i,
+.startmenu-edit-page .folder-image img,
+.startmenu-edit-page .folder-image i+p {
+    margin-left: 10px;
+}
+
+.startmenu-edit-page .image-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.startmenu-edit-page .image-action button {
+    margin-right: 20px;
+}
+
+.startmenu-edit-page .image-action button:last-child {
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+.startmenu-edit-page .image-action .file-field {
+    margin: 0;
+}
+
+.startmenu-edit-page .image-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.startmenu-edit-page .image-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.startmenu-edit-page .image-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+.startmenu-edit-page .image-action+h3 {
+    margin-top: 20px;
+}
+
+.startmenu-edit-page .app-opt-headline {
+    margin-top: 15px;
+}
+
+.startmenu-edit-page .application-options {
+    width: 840px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.startmenu-edit-page .application-options li {
+    padding-left: 10px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+
+/* Role */
+
+.object-info .role-wrapper .acl-member {
+    margin-bottom: 20px;
+}
+
+
+/* Application / MIME-Types */
+
+.object-info .application-wrapper .symbol-wrapper,
+.object-info .mime-wrapper .symbol-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-text,
+.object-info .mime-wrapper .symbol-wrapper .symbol-text {
+    margin-right: 20px;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-content,
+.object-info .mime-wrapper .symbol-wrapper .symbol-content {
+    margin-right: 20px;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-content .symbol,
+.object-info .mime-wrapper .symbol-wrapper .symbol-content .symbol {
+    height: 54px;
+}
+
+.object-info .application-wrapper .symbol-wrapper .symbol-content .symbol img,
+.object-info .mime-wrapper .symbol-wrapper .symbol-content .symbol img {
+    height: 48px;
+    width: auto;
+    object-fit: cover;
+}
+
+.application-wrapper .script-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.application-wrapper .script-action button {
+    margin-right: 20px;
+}
+
+.application-wrapper .script-action .file-field {
+    margin: 0;
+    margin-right: 20px;
+}
+
+.application-wrapper .script-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.application-wrapper .script-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.application-wrapper .script-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+.object-info .application-wrapper .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+}
+
+.object-info .application-wrapper .action-wrapper input {
+    width: 18px;
+    min-height: 18px;
+    height: 18px!important;
+    padding: 0;
+    vertical-align: top;
+}
+
+.object-info .application-wrapper .action-wrapper i {
+    font-size: 18px;
+    height: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    line-height: 18px;
+}
+
+
+/* Application - Parameter */
+
+.parameter-wrapper .parameter-content .parameter-option {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.parameter-wrapper .parameter-content .parameter-option .input-field {
+    width: calc(50% - 50px);
+    margin-right: 20px;
+}
+
+.parameter-wrapper .parameter-content .parameter-option .action-wrapper {
+    width: 100px;
+}
+
+
+/* Systems */
+
+.system-wrapper .network-wrapper .input-field.add .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+.system-wrapper .network-wrapper .input-field.add .action-wrapper input {
+    width: 18px;
+    min-height: 18px;
+    height: 18px!important;
+    padding: 0;
+    vertical-align: top;
+}
+
+.system-wrapper .network-wrapper .input-field.add .action-wrapper i {
+    font-size: 18px;
+    height: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    line-height: 18px;
+}
+
+.system-wrapper .network-wrapper .mac-manufacturer {
+    margin-top: -8px;
+}
+
+.system-wrapper .network-wrapper label p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.system-wrapper .network-wrapper label i {
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.system-wrapper .fai-wrapper .row+h3,
+.system-wrapper .fai-wrapper .row+h4 {
+    margin-top: 12px;
+}
+
+.system-wrapper .fai-wrapper p+button {
+    margin-top: 10px;
+}
+
+.object-info .checkbox-column label {
+    margin-bottom: 0;
+}
+
+.system-wrapper .system-info .head-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.system-wrapper .system-info .head-content h2 {
+    margin-bottom: 0;
+}
+
+.system-wrapper .system-info .head-content i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.system-wrapper .system-info .sys-info-table .progress {
+    margin: 0;
+    text-align: center;
+}
+
+.system-wrapper .system-devices .display-type {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.system-wrapper .system-devices .display-type p:first-child {
+    margin-right: 10px;
+}
+
+.system-wrapper .system-devices .input-field.add span {
+    margin-left: 10px;
+}
+
+.system-wrapper .system-printer .driver-config,
+.system-wrapper .system-printer-driver .driver-config {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.system-wrapper .system-printer .driver-config button,
+.system-wrapper .system-printer-driver .driver-config button {
+    margin-left: 20px;
+}
+
+.system-wrapper .system-terminal .member-of-ogroup button {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 8px;
+}
+
+.system-wrapper .system-printer-driver h3 {
+    margin-top: 0;
+}
+
+.system-wrapper .system-printer-driver .input-field.add {
+    justify-content: flex-start;
+    margin-bottom: 8px;
+}
+
+.system-wrapper .system-printer-driver .input-field.add+.input-field {
+    margin-top: 23px;
+}
+
+.system-wrapper .system-printer-driver .input-field .new-driver-action {
+    padding-top: 6px;
+}
+
+.system-wrapper .system-printer-driver .input-field.add button {
+    margin-bottom: 0;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action button {
+    margin-left: 20px;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field {
+    margin: 0;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field .btn-small {
+    height: 32.4px;
+    line-height: 32.4px;
+    font-size: 12px;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field .file-path-wrapper {
+    padding-left: 20px;
+}
+
+.system-wrapper .system-printer-driver .new-driver-action .file-field .file-path-wrapper input {
+    margin-bottom: 0;
+}
+
+.system-wrapper .system-workstaion-startup .input-field.add.mount-point .select-wrapper {
+    margin-right: 15px;
+}
+
+
+/* LDAP Tools */
+
+.ldap-export-wrapper p+.row,
+.ldapxls-export-wrapper p+.col {
+    margin-top: 20px;
+}
+
+.ldapxls-export-wrapper .ldap-tree-inline,
+.ldap-export-wrapper .ldap-tree-inline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ldap-export-wrapper .ldap-tree,
+.ldapxls-export-wrapper .ldap-tree {
+    flex-grow: 1;
+}
+
+.ldapxls-export-wrapper .ldap-tree-inline button,
+.ldap-export-wrapper .ldap-tree-inline button {
+    margin-left: 20px;
+}
+
+.ldap-database-import,
+.csv-import {
+    margin-top: 20px;
+}
+
+.csv-import .file-field.input-field {
+    margin-top: 0;
+}
+
+
+/* Plugins */
+
+.object-info .kolab-wrapper .multi-check,
+.object-info .squid-wrapper .multi-check {
+    display: flex;
+}
+
+.object-info .check-input-wrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.object-info .check-input-wrapper label {
+    margin: 0px 15px 0 0;
+}
+
+.object-info .check-input-wrapper .input-field {
+    margin: 0;
+    flex: 1 1 auto;
+}
+
+.content .goto-import-wrapper .input-field.add .file-field {
+    flex-grow: 1;
+}
+
+.object-info .align-bottom {
+    display: flex;
+}
+
+.object-info .align-bottom .col {
+    align-self: flex-end;
+}
+
+
+/* Generel */
+
+label.closing-elem {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .object-info .content-wrapper .user-image {
+        margin-bottom: 20px;
+    }
+    .object-info .acl-reference .acl-viewer .card {
+        margin-bottom: 10px;
+    }
+    .object-info .posix-settings,
+    .object-info .mail-settings,
+    .object-info .group-mail-wrapper {
+        padding: 0 0.75rem;
+    }
+    .object-info .dyngroup-wrapper .row.valign-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .object-info .dyngroup-wrapper .row.valign-wrapper .delete-btn {
+        text-align: end;
+    }
+    .object-info .dyngroup-wrapper .row+.divider {
+        display: block;
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+}

@@ -77,6 +77,14 @@ class acltab extends tabs
   function execute()
   {
     $display= tabs::execute();
+<<<<<<< HEAD
+=======
+
+    $theme = getThemeName();
+
+    switch ($theme) {
+      case 'classic':
+>>>>>>> gosa-core_v2.8
     if($this->read_only){
       $display.= "<div class='plugin-actions'>";
       $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
@@ -87,6 +95,25 @@ class acltab extends tabs
       $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
       $display.= "</p>";
     }
+<<<<<<< HEAD
+=======
+        break;
+      
+      default:
+        if($this->read_only){
+          $display.= "<div class='card-action'>
+                        <button class='btn-small primary' type=submit name='edit_cancel'>".msgPool::cancelButton()."</button>
+                      </div>";
+        }elseif(!$this->by_object['acl']->dialog){
+          $display.= "<div class ='card-action'>
+                        <button class='btn-small primary' type=submit name='edit_finish'>".msgPool::okButton()."</button>
+                        <button class='btn-small primary' type=submit name='edit_cancel'>".msgPool::cancelButton()."</button>
+                      </div>";
+        }
+        break;
+    }
+    
+>>>>>>> gosa-core_v2.8
     return($display);
   }
 }

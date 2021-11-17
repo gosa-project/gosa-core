@@ -6,6 +6,10 @@ class propertyEditor extends management
     var $plHeadline= "Preferences";
     var $plDescription= "Configure global and special GOsa settings like hooks and plug-in parameters";
     var $plIcon  = "plugins/propertyEditor/images/plugin.png";
+<<<<<<< HEAD
+=======
+    var $matIcon        = "settings";
+>>>>>>> gosa-core_v2.8
 
     var $toBeMigrated = array();
 
@@ -218,6 +222,7 @@ class propertyEditor extends management
         $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
         $value = set_post($value[0]);
+<<<<<<< HEAD
 
         switch($type[0]){
             case 'noLdap':
@@ -225,6 +230,16 @@ class propertyEditor extends management
                 break;
             case 'bool':
                 $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
+=======
+        $theme = getThemeName();
+
+        switch($type[0]){
+            case 'noLdap':
+                $res = $value." &nbsp;(".CONFIG_DIR.'/'.CONFIG_FILE.")";
+                break;
+            case 'bool':
+                $res = "<select id='$name' size=1 name=\"{$name}\" style='width:{$ssize}'>";
+>>>>>>> gosa-core_v2.8
                 $false = (preg_match('/true/i', $value)) ? '' : "selected";
                 $true  = (preg_match('/true/i', $value)) ? "selected" : '';
                 $res.= "<option {$false} value='false'>"._("Off")."</option>";
@@ -234,7 +249,11 @@ class propertyEditor extends management
                 if(!empty($defaults[0])){
                     $data = call_user_func(preg_split("/::/", $defaults[0]), $class[0],$cn[0],$value, $type[0]);
                     if(is_array($data)){
+<<<<<<< HEAD
                         $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
+=======
+                        $res = "<select id='$name' size=1 name=\"{$name}\" style='width:{$ssize}'>";
+>>>>>>> gosa-core_v2.8
                         foreach($data as $oValue => $oDesc){
                             if($oValue == $value){
                                 $res.="<option selected value=\"{$oValue}\">{$oDesc}</option>\n";
@@ -247,8 +266,26 @@ class propertyEditor extends management
                 }
                 break;
             case 'command':
+<<<<<<< HEAD
                 $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
                 $res.= image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+=======
+                switch ($theme) {
+                    case 'classic':
+                        $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
+                                 ".image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                        break;
+
+                    default:
+                        $res = "<div class='valign-wrapper' style='width:{$isize};'>
+                                    <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">
+                                    <label>
+                                        ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
+                                    </label>
+                                </div>";
+                        break;
+                }
+>>>>>>> gosa-core_v2.8
                 break;
             case 'dn':
             case 'rdn':
@@ -257,7 +294,13 @@ class propertyEditor extends management
             case 'file':
             case 'string':
             case 'integer':
+<<<<<<< HEAD
                 $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
+=======
+                $res = "<div class='input-field'>
+                            <input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
+                        </div>";
+>>>>>>> gosa-core_v2.8
                 break;
             default: echo $type[0].$name."  ";$res = ""; 
         }

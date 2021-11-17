@@ -1,8 +1,13 @@
 <?php
+<<<<<<< HEAD
 
 /**
  * Smarty Internal Plugin Compile Insert
  *
+=======
+/**
+ * Smarty Internal Plugin Compile Insert
+>>>>>>> gosa-core_v2.8
  * Compiles the {insert} tag
  *
  * @package Smarty
@@ -16,8 +21,13 @@
  * @package Smarty
  * @subpackage Compiler
  */
+<<<<<<< HEAD
 class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
 
+=======
+class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
+{
+>>>>>>> gosa-core_v2.8
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -25,6 +35,10 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('name');
+<<<<<<< HEAD
+=======
+
+>>>>>>> gosa-core_v2.8
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -32,6 +46,10 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('name');
+<<<<<<< HEAD
+=======
+
+>>>>>>> gosa-core_v2.8
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -44,6 +62,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
      * Compiles code for the {insert} tag
      *
      * @param array  $args     array with attributes from parser
+<<<<<<< HEAD
      * @param object $compiler compiler object
      * @return string compiled code
      */
@@ -53,10 +72,28 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
         $_attr = $this->getAttributes($compiler, $args);
         // never compile as nocache code
         $compiler->suppressNocacheProcessing = true;
+=======
+     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     *
+     * @return string compiled code
+     * @throws \SmartyCompilerException
+     * @throws \SmartyException
+     */
+    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    {
+        // check and get attributes
+        $_attr = $this->getAttributes($compiler, $args);
+        $nocacheParam = $compiler->template->caching && ($compiler->tag_nocache || $compiler->nocache);
+        if (!$nocacheParam) {
+            // do not compile as nocache code
+            $compiler->suppressNocacheProcessing = true;
+        }
+>>>>>>> gosa-core_v2.8
         $compiler->tag_nocache = true;
         $_smarty_tpl = $compiler->template;
         $_name = null;
         $_script = null;
+<<<<<<< HEAD
 
         $_output = '<?php ';
         // save posible attributes
@@ -66,24 +103,51 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
             $_assign = $_attr['assign'];
             // create variable to make shure that the compiler knows about its nocache status
             $compiler->template->tpl_vars[trim($_attr['assign'], "'")] = new Smarty_Variable(null, true);
+=======
+        $_output = '<?php ';
+        // save possible attributes
+        eval('$_name = @' . $_attr[ 'name' ] . ';');
+        if (isset($_attr[ 'assign' ])) {
+            // output will be stored in a smarty variable instead of being displayed
+            $_assign = $_attr[ 'assign' ];
+            // create variable to make sure that the compiler knows about its nocache status
+            $var = trim($_attr[ 'assign' ], '\'');
+            if (isset($compiler->template->tpl_vars[ $var ])) {
+                $compiler->template->tpl_vars[ $var ]->nocache = true;
+            } else {
+                $compiler->template->tpl_vars[ $var ] = new Smarty_Variable(null, true);
+            }
+>>>>>>> gosa-core_v2.8
         }
         if (isset($_attr['script'])) {
             // script which must be included
             $_function = "smarty_insert_{$_name}";
             $_smarty_tpl = $compiler->template;
             $_filepath = false;
+<<<<<<< HEAD
             eval('$_script = ' . $_attr['script'] . ';');
+=======
+            eval('$_script = @' . $_attr[ 'script' ] . ';');
+>>>>>>> gosa-core_v2.8
             if (!isset($compiler->smarty->security_policy) && file_exists($_script)) {
                 $_filepath = $_script;
             } else {
                 if (isset($compiler->smarty->security_policy)) {
                     $_dir = $compiler->smarty->security_policy->trusted_dir;
                 } else {
+<<<<<<< HEAD
                     $_dir = $compiler->smarty->trusted_dir;
                 }
                 if (!empty($_dir)) {
                     foreach((array)$_dir as $_script_dir) {
                         $_script_dir = rtrim($_script_dir, '/\\') . DS;
+=======
+                    $_dir = $compiler->smarty instanceof SmartyBC ? $compiler->smarty->trusted_dir : null;
+                }
+                if (!empty($_dir)) {
+                    foreach ((array)$_dir as $_script_dir) {
+                        $_script_dir = rtrim($_script_dir, '/\\') . DIRECTORY_SEPARATOR;
+>>>>>>> gosa-core_v2.8
                         if (file_exists($_script_dir . $_script)) {
                             $_filepath = $_script_dir . $_script;
                             break;
@@ -91,6 +155,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
                     }
                 }
             }
+<<<<<<< HEAD
             if ($_filepath == false) {
                 $compiler->trigger_template_error("{insert} missing script file '{$_script}'", $compiler->lex->taglineno);
             }
@@ -99,6 +164,20 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
             require_once $_filepath;
             if (!is_callable($_function)) {
                 $compiler->trigger_template_error(" {insert} function '{$_function}' is not callable in script file '{$_script}'", $compiler->lex->taglineno);
+=======
+            if ($_filepath === false) {
+                $compiler->trigger_template_error("{insert} missing script file '{$_script}'", null, true);
+            }
+            // code for script file loading
+            $_output .= "require_once '{$_filepath}' ;";
+            include_once $_filepath;
+            if (!is_callable($_function)) {
+                $compiler->trigger_template_error(
+                    " {insert} function '{$_function}' is not callable in script file '{$_script}'",
+                    null,
+                    true
+                );
+>>>>>>> gosa-core_v2.8
             }
         } else {
             $_filepath = 'null';
@@ -107,7 +186,15 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
             if (!is_callable($_function)) {
                 // try plugin
                 if (!$_function = $compiler->getPlugin($_name, 'insert')) {
+<<<<<<< HEAD
                     $compiler->trigger_template_error("{insert} no function or plugin found for '{$_name}'", $compiler->lex->taglineno);
+=======
+                    $compiler->trigger_template_error(
+                        "{insert} no function or plugin found for '{$_name}'",
+                        null,
+                        true
+                    );
+>>>>>>> gosa-core_v2.8
                 }
             }
         }
@@ -121,22 +208,37 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
         $_params = 'array(' . implode(", ", $_paramsArray) . ')';
         // call insert
         if (isset($_assign)) {
+<<<<<<< HEAD
             if ($_smarty_tpl->caching) {
+=======
+            if ($_smarty_tpl->caching && !$nocacheParam) {
+>>>>>>> gosa-core_v2.8
                 $_output .= "echo Smarty_Internal_Nocache_Insert::compile ('{$_function}',{$_params}, \$_smarty_tpl, '{$_filepath}',{$_assign});?>";
             } else {
                 $_output .= "\$_smarty_tpl->assign({$_assign} , {$_function} ({$_params},\$_smarty_tpl), true);?>";
             }
         } else {
+<<<<<<< HEAD
             $compiler->has_output = true;
             if ($_smarty_tpl->caching) {
+=======
+            if ($_smarty_tpl->caching && !$nocacheParam) {
+>>>>>>> gosa-core_v2.8
                 $_output .= "echo Smarty_Internal_Nocache_Insert::compile ('{$_function}',{$_params}, \$_smarty_tpl, '{$_filepath}');?>";
             } else {
                 $_output .= "echo {$_function}({$_params},\$_smarty_tpl);?>";
             }
         }
+<<<<<<< HEAD
         return $_output;
     }
 
 }
 
 ?>
+=======
+        $compiler->template->compiled->has_nocache_code = true;
+        return $_output;
+    }
+}
+>>>>>>> gosa-core_v2.8

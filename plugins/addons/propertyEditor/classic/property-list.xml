@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <definition>
+    <departmentBrowser>false</departmentBrowser>
+    <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>false</baseMode>
+    <multiSelect>true</multiSelect>
+    <template>property-list.tpl</template>
+    <module>all</module>
+    <label>List of configuration settings</label>
+    <defaultSortColumn>1</defaultSortColumn>
+    <noAclChecks>true</noAclChecks>
+
+    <objectType>
+      <label>Property not used</label>
+      <objectClass>undefined</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>images/lists/element.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Property will be restored</label>
+      <objectClass>removed</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>images/lists/trash.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Modified property</label>
+      <objectClass>modified</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>plugins/propertyEditor/images/ldap.png[new]</image>
+    </objectType>
+
+    <objectType>
+      <label>Property configured in LDAP</label>
+      <objectClass>ldap</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>plugins/propertyEditor/images/ldap.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Property configured in config file</label>
+      <objectClass>file</objectClass>
+      <category>all</category>
+      <class>all</class>
+      <image>plugins/propertyEditor/images/file.png</image>
+    </objectType>
+
+  </definition>
+
+  <table>
+    <layout>|20px;c|||||70px;r|</layout>
+
+    <column>
+      <value>%{filter:objectType(dn,objectClass)}</value>
+    </column>
+
+    <column>
+      <label>Name</label>
+      <sortAttribute>cn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:propertyName(class,cn,description,mandatory)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Group</label>
+      <sortAttribute>group</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:propertyGroup(group,description)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Class</label>
+      <sortAttribute>group</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:propertyClass(class,description)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Value</label>
+      <sortAttribute>value</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:propertyValue(class,cn,value,type,default,defaults,check,mandatory)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Actions</label>
+      <value>%{filter:actions(dn,row,objectClass)}</value>
+    </column>
+
+  </table>
+
+  <actionmenu>
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <image>images/lists/trash.png</image>
+      <label>Remove</label>
+    </action>
+
+    <action>
+      <type>exporter</type>
+    </action>
+
+  </actionmenu>
+
+  <actiontriggers snapshot="false" copypaste="false">
+
+    <action>
+      <name>remove</name>
+      <type>entry</type>
+      <objectclass>ldap</objectclass>
+      <image>images/lists/trash.png</image>
+      <label>Restore to default</label>
+    </action>
+
+  </actiontriggers>
+
+</list>

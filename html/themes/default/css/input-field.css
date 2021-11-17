@@ -1,0 +1,108 @@
+.input-field {
+    position: relative;
+    margin-bottom: unset;
+}
+
+.input-field label {
+    font-size: 16px;
+    color: gray;
+}
+
+.input-field:not(.login) input:not([type="checkbox"]),
+.input-field textarea:not(.multiple) {
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+}
+
+.input-field:not(.login) label {
+    -webkit-transform: translateY(-14px) scale(0.8);
+    transform: translateY(-14px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.input-field input[type=text]:focus,
+.input-field input[type=text]:hover {
+    border-bottom: 1px solid #2A3278;
+    box-shadow: 0 1px 0 0 #2A3278;
+}
+
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #00c853;
+    box-shadow: 0 1px 0 0 #00c853;
+}
+
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid #D55A0A;
+    box-shadow: 0 1px 0 0 #D55A0A;
+}
+
+.input-field .prefix.active {
+    color: #2A3278;
+}
+
+.input-field.add {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-field.add button {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    color: #000;
+    width: auto;
+    text-transform: initial;
+}
+
+.input-field.add .select-wrapper {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+
+/* Multiple Select */
+
+.input-field .select-wrapper.multiple-select label {
+    -webkit-transform: initial;
+    transform: initial;
+    -webkit-transform-origin: initial;
+    transform-origin: initial;
+    top: initial;
+    left: initial;
+    margin: 0;
+}
+
+.input-field .select-wrapper.multiple-select ul li {
+    padding: 5px 10px;
+}
+
+.input-field .select-wrapper.multiple-select input[type="checkbox"]+span:not(.lever) {
+    height: 18px;
+}
+
+
+/* Textarea multiple line */
+
+.input-field.textarea-multiple {
+    height: auto;
+}
+
+.input-field textarea.multiple {
+    max-width: 100%;
+    min-height: 30px;
+    max-height: 250px;
+    font-size: 12px;
+    padding: 0;
+    overflow-y: auto;
+    padding-top: 1em;
+    resize: vertical;
+}

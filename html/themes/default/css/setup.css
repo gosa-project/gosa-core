@@ -1,0 +1,278 @@
+.content-area.setup {
+    margin: 20px auto;
+    padding: 0;
+}
+
+.content-area.setup .header-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.content-area.setup .header-wrapper h1 {
+    margin: 0;
+}
+
+.content-area.setup .content-wrapper p:first-child {
+    margin-top: 0;
+}
+
+.content-area.setup .content-wrapper h2 {
+    margin-top: 0;
+}
+
+.content-area.setup .content-wrapper p {
+    margin: 1em 0;
+}
+
+.content-area.setup .content-wrapper p:last-child {
+    margin: 1em 0 0 0;
+}
+
+.content-area.setup .content-wrapper ul.welcome {
+    padding-left: 18px;
+}
+
+.content-area.setup .content-wrapper ul li {
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.content-area.setup .content-wrapper ul li span {
+    font-size: 12px;
+    line-height: 33px;
+}
+
+.content-area.setup .content-wrapper ul.welcome li {
+    list-style-type: initial;
+    padding-left: 0;
+}
+
+
+/* Step 2/8 */
+
+.content-area.setup .content-wrapper .row .col:nth-child(2n+1) {
+    padding-left: 0;
+}
+
+.content-area.setup .content-wrapper .row .col:nth-child(2n+0) {
+    padding-right: 0;
+}
+
+.content-area.setup .content-wrapper table th,
+.content-area.setup .content-wrapper table td {
+    padding: 5px 10px;
+}
+
+.content-area.setup .content-wrapper table td:last-child {
+    text-align: right;
+}
+
+.content-area.setup .content-wrapper table td:nth-child(2n+0) {
+    text-align: center;
+}
+
+
+/* Step 3/8 */
+
+.content-area.setup .content-wrapper .setup-license {
+    margin: 10px 0;
+    border: 1px solid #e0e0e0;
+    max-height: 300px;
+    padding: 5px;
+    overflow: auto;
+}
+
+.content-area.setup .content-wrapper [type="checkbox"]+span:not(.lever) {
+    font-size: 12px;
+    color: #000000;
+}
+
+
+/* Step 4/8 und 6/8 Formular */
+
+.content-area.setup .content-wrapper .connection-setting,
+.content-area.setup .content-wrapper .create-admin-account {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 54px;
+}
+
+.content-area.setup .content-wrapper .connection-setting input:not([type="checkbox"]),
+.content-area.setup .content-wrapper .connection-setting select,
+.content-area.setup .content-wrapper .connection-setting textarea,
+.content-area.setup .content-wrapper .create-admin-account input {
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+}
+
+.content-area.setup .content-wrapper .connection-setting .input-field,
+.content-area.setup .content-wrapper .create-admin-account .input-field {
+    height: 39px;
+    width: 100%;
+}
+
+.content-area.setup .content-wrapper .connection-setting button,
+.content-area.setup .content-wrapper .connection-setting label.checkbox,
+.content-area.setup .content-wrapper .create-admin-account button {
+    margin-top: 1rem;
+}
+
+.content-area.setup .content-wrapper .authentication-wrapper .connection-setting p {
+    margin: 1rem 0 0 10px;
+}
+
+.content-area.setup .content-wrapper .authentication-wrapper .connection-setting .checkbox p {
+    margin: 0;
+}
+
+.content-area.setup .content-wrapper .connection-setting button i {
+    font-size: 18px;
+}
+
+.content-area.setup .content-wrapper .status-wrapper .connection-setting {
+    justify-content: start;
+    align-items: flex-start;
+    height: auto;
+}
+
+.content-area.setup .content-wrapper .status-wrapper .connection-setting .label {
+    margin-right: 20px;
+    color: #000000;
+}
+
+.content-area.setup .content-wrapper .status-wrapper .connection-setting .connection-status p {
+    margin-top: 0;
+}
+
+
+/* Step 5/8 */
+
+.content-area.setup .content-wrapper .attention-content h3 {
+    margin-top: 0;
+}
+
+.content-area.setup .content-wrapper .success-message {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.content-area.setup .content-wrapper .success-message i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.content-area.setup .content-wrapper .success-message p {
+    margin: 0;
+}
+
+
+/* Step 6/8 */
+
+.content-area.setup .content-wrapper table button.create {
+    margin-top: 5px;
+}
+
+.content-area.setup .content-wrapper .setup-ldap-table td:first-child {
+    width: 40%;
+}
+
+.content-area.setup .content-wrapper .setup-ldap-table td:last-child {
+    width: 40%;
+}
+
+.content-area.setup .content-wrapper .migrate-wrapper h3 {
+    margin-top: 0;
+}
+
+.content-area.setup .content-wrapper .migrate-dialog-wrapper .migrate-dialog {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.content-area.setup .content-wrapper .migrate-dialog-wrapper button {
+    margin-right: 20px;
+}
+
+.content-area.setup .content-wrapper .migrate-dialog-wrapper .migrate-dialog .dialog-left {
+    max-width: 200px
+}
+
+.content-area.setup .content-wrapper .migrate-dialog-wrapper .migrate-dialog pre {
+    margin: 0;
+}
+
+
+/* Card Content Scroll */
+
+
+/*
+ * Always the same 128px (o. Breadcrump) + 50px (header-wrapper) + 53px (card-action + padding-top)
+ */
+
+.content-area.setup .card.first-level {
+    max-height: calc(100vh - 80px);
+}
+
+
+/*
+ * Always the same 128px (o. Breadcrump) + 50px (header-wrapper) + 53px (card-action + padding-top)
+ */
+
+.content-area.setup .content-wrapper.card-content-scroll {
+    max-height: calc(100vh - 231px);
+}
+
+
+/*
+ * Always the same 128px (o. Breadcrump)  + 50px (header-wrapper) + 44px (h2 + margin-bottom) + 30px (p + margin-bottom) + 53px (card-action + padding-top)
+ */
+
+.content-area.setup .setup-table.card-content-scroll {
+    max-height: calc(100vh - 305px);
+}
+
+
+/*
+ * Always the same 128px (o. Breadcrump) + 50px (header-wrapper) + 42px (p + margin) + 18px (accept license) + 20px (Margin from license container) + 53px (card-action + padding-top)
+ */
+
+.content-area.setup .setup-license.card-content-scroll {
+    max-height: calc(100vh - 311px);
+}
+
+
+/*
+ * Always the same 128px (o. Breadcrump)  + 50px (header-wrapper) + 48px (p + margin-bottom) + 53px (card-action + padding-top)
+ */
+
+.content-area.setup .setup-ldap-table.card-content-scroll {
+    max-height: calc(100vh - 279px);
+}
+
+
+/*
+ * Always the same 128px (o. Breadcrump)  + 50px (header-wrapper) + 44px (h2 + margin-bottom) + 53px (card-action + padding-top)
+ */
+
+.content-area.setup .migrate-wrapper.card-content-scroll {
+    max-height: calc(100vh - 275px);
+}

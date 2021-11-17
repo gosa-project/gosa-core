@@ -8,19 +8,28 @@
 
 /**
  * Smarty Cache Handler Base for Key/Value Storage Implementations
+<<<<<<< HEAD
  *
+=======
+>>>>>>> gosa-core_v2.8
  * This class implements the functionality required to use simple key/value stores
  * for hierarchical cache groups. key/value stores like memcache or APC do not support
  * wildcards in keys, therefore a cache group cannot be cleared like "a|*" - which
  * is no problem to filesystem and RDBMS implementations.
+<<<<<<< HEAD
  *
+=======
+>>>>>>> gosa-core_v2.8
  * This implementation is based on the concept of invalidation. While one specific cache
  * can be identified and cleared, any range of caches cannot be identified. For this reason
  * each level of the cache group hierarchy can have its own value in the store. These values
  * are nothing but microtimes, telling us when a particular cache group was cleared for the
  * last time. These keys are evaluated for every cache read to determine if the cache has
  * been invalidated since it was created and should hence be treated as inexistent.
+<<<<<<< HEAD
  *
+=======
+>>>>>>> gosa-core_v2.8
  * Although deep hierarchies are possible, they are not recommended. Try to keep your
  * cache groups as shallow as possible. Anything up 3-5 parents should be ok. So
  * »a|b|c« is a good depth where »a|b|c|d|e|f|g|h|i|j|k« isn't. Try to join correlating
@@ -31,6 +40,7 @@
  * @subpackage Cacher
  * @author Rodney Rehm
  */
+<<<<<<< HEAD
 abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 
     /**
@@ -40,6 +50,20 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     protected $contents = array();
     /**
      * cache for timestamps
+=======
+abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource
+{
+    /**
+     * cache for contents
+     *
+     * @var array
+     */
+    protected $contents = array();
+
+    /**
+     * cache for timestamps
+     *
+>>>>>>> gosa-core_v2.8
      * @var array
      */
     protected $timestamps = array();
@@ -49,15 +73,24 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      *
      * @param Smarty_Template_Cached   $cached    cached object
      * @param Smarty_Internal_Template $_template template object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return void
      */
     public function populate(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template)
     {
+<<<<<<< HEAD
         $cached->filepath = $_template->source->uid
                 . '#' . $this->sanitize($cached->source->name)
                 . '#' . $this->sanitize($cached->cache_id)
                 . '#' . $this->sanitize($cached->compile_id);
 
+=======
+        $cached->filepath = $_template->source->uid . '#' . $this->sanitize($cached->source->resource) . '#' .
+                            $this->sanitize($cached->cache_id) . '#' . $this->sanitize($cached->compile_id);
+>>>>>>> gosa-core_v2.8
         $this->populateTimestamp($cached);
     }
 
@@ -65,21 +98,43 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * populate Cached Object with timestamp and exists from Resource
      *
      * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return void
      */
     public function populateTimestamp(Smarty_Template_Cached $cached)
     {
+<<<<<<< HEAD
         if (!$this->fetch($cached->filepath, $cached->source->name, $cached->cache_id, $cached->compile_id, $content, $timestamp, $cached->source->uid)) {
+=======
+        if (!$this->fetch(
+            $cached->filepath,
+            $cached->source->name,
+            $cached->cache_id,
+            $cached->compile_id,
+            $content,
+            $timestamp,
+            $cached->source->uid
+        )
+        ) {
+>>>>>>> gosa-core_v2.8
             return;
         }
         $cached->content = $content;
         $cached->timestamp = (int) $timestamp;
+<<<<<<< HEAD
         $cached->exists = $cached->timestamp;
+=======
+        $cached->exists = !!$cached->timestamp;
+>>>>>>> gosa-core_v2.8
     }
 
     /**
      * Read the cached template and process the header
      *
+<<<<<<< HEAD
      * @param Smarty_Internal_Template $_template template object
      * @param Smarty_Template_Cached $cached cached object
      * @return booelan true or false if the cached content does not exist
@@ -88,17 +143,49 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     {
         if (!$cached) {
             $cached = $_template->cached;
+=======
+     * @param \Smarty_Internal_Template $_smarty_tpl do not change variable name, is used by compiled template
+     * @param Smarty_Template_Cached    $cached      cached object
+     * @param boolean                   $update      flag if called because cache update
+     *
+     * @return boolean                 true or false if the cached content does not exist
+     */
+    public function process(
+        Smarty_Internal_Template $_smarty_tpl,
+        Smarty_Template_Cached $cached = null,
+        $update = false
+    ) {
+        if (!$cached) {
+            $cached = $_smarty_tpl->cached;
+>>>>>>> gosa-core_v2.8
         }
         $content = $cached->content ? $cached->content : null;
         $timestamp = $cached->timestamp ? $cached->timestamp : null;
         if ($content === null || !$timestamp) {
+<<<<<<< HEAD
             if (!$this->fetch($_template->cached->filepath, $_template->source->name, $_template->cache_id, $_template->compile_id, $content, $timestamp, $_template->source->uid)) {
+=======
+            if (!$this->fetch(
+                $_smarty_tpl->cached->filepath,
+                $_smarty_tpl->source->name,
+                $_smarty_tpl->cache_id,
+                $_smarty_tpl->compile_id,
+                $content,
+                $timestamp,
+                $_smarty_tpl->source->uid
+            )
+            ) {
+>>>>>>> gosa-core_v2.8
                 return false;
             }
         }
         if (isset($content)) {
+<<<<<<< HEAD
             $_smarty_tpl = $_template;
             eval("?>" . $content);
+=======
+            eval('?>' . $content);
+>>>>>>> gosa-core_v2.8
             return true;
         }
         return false;
@@ -109,21 +196,68 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      *
      * @param Smarty_Internal_Template $_template template object
      * @param string $content content to cache
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return boolean success
      */
     public function writeCachedContent(Smarty_Internal_Template $_template, $content)
     {
         $this->addMetaTimestamp($content);
+<<<<<<< HEAD
         return $this->write(array($_template->cached->filepath => $content), $_template->properties['cache_lifetime']);
     }
 
     /**
      * Empty cache
      *
+=======
+        return $this->write(array($_template->cached->filepath => $content), $_template->cache_lifetime);
+    }
+
+    /**
+     * Read cached template from cache
+     *
+     * @param Smarty_Internal_Template $_template template object
+     *
+     * @return string|false  content
+     */
+    public function readCachedContent(Smarty_Internal_Template $_template)
+    {
+        $content = $_template->cached->content ? $_template->cached->content : null;
+        $timestamp = null;
+        if ($content === null) {
+            if (!$this->fetch(
+                $_template->cached->filepath,
+                $_template->source->name,
+                $_template->cache_id,
+                $_template->compile_id,
+                $content,
+                $timestamp,
+                $_template->source->uid
+            )
+            ) {
+                return false;
+            }
+        }
+        if (isset($content)) {
+            return $content;
+        }
+        return false;
+    }
+
+    /**
+     * Empty cache
+>>>>>>> gosa-core_v2.8
      * {@internal the $exp_time argument is ignored altogether }}
      *
      * @param Smarty  $smarty   Smarty object
      * @param integer $exp_time expiration time [being ignored]
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return integer number of cache files deleted [always -1]
      * @uses purge() to clear the whole store
      * @uses invalidate() to mark everything outdated if purge() is inapplicable
@@ -138,7 +272,10 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 
     /**
      * Empty cache for a specific template
+<<<<<<< HEAD
      *
+=======
+>>>>>>> gosa-core_v2.8
      * {@internal the $exp_time argument is ignored altogether}}
      *
      * @param Smarty  $smarty        Smarty object
@@ -146,24 +283,41 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * @param string  $cache_id      cache id
      * @param string  $compile_id    compile id
      * @param integer $exp_time      expiration time [being ignored]
+<<<<<<< HEAD
      * @return integer number of cache files deleted [always -1]
+=======
+     *
+     * @return int number of cache files deleted [always -1]
+     * @throws \SmartyException
+>>>>>>> gosa-core_v2.8
      * @uses buildCachedFilepath() to generate the CacheID
      * @uses invalidate() to mark CacheIDs parent chain as outdated
      * @uses delete() to remove CacheID from cache
      */
     public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time)
     {
+<<<<<<< HEAD
         $uid = $this->getTemplateUid($smarty, $resource_name, $cache_id, $compile_id);
         $cid = $uid . '#' . $this->sanitize($resource_name) . '#' . $this->sanitize($cache_id) . '#' . $this->sanitize($compile_id);
+=======
+        $uid = $this->getTemplateUid($smarty, $resource_name);
+        $cid = $uid . '#' . $this->sanitize($resource_name) . '#' . $this->sanitize($cache_id) . '#' .
+               $this->sanitize($compile_id);
+>>>>>>> gosa-core_v2.8
         $this->delete(array($cid));
         $this->invalidate($cid, $resource_name, $cache_id, $compile_id, $uid);
         return -1;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gosa-core_v2.8
     /**
      * Get template's unique ID
      *
      * @param Smarty $smarty        Smarty object
      * @param string $resource_name template name
+<<<<<<< HEAD
      * @param string $cache_id      cache id
      * @param string $compile_id    compile id
      * @return string filepath of cache file
@@ -189,20 +343,45 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
             unset($smarty->template_objects[$_templateId]);
         }
         return $uid;
+=======
+     *
+     * @return string filepath of cache file
+     * @throws \SmartyException
+     */
+    protected function getTemplateUid(Smarty $smarty, $resource_name)
+    {
+        if (isset($resource_name)) {
+            $source = Smarty_Template_Source::load(null, $smarty, $resource_name);
+            if ($source->exists) {
+                return $source->uid;
+            }
+        }
+        return '';
+>>>>>>> gosa-core_v2.8
     }
 
     /**
      * Sanitize CacheID components
      *
      * @param string $string CacheID component to sanitize
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return string sanitized CacheID component
      */
     protected function sanitize($string)
     {
+<<<<<<< HEAD
         // some poeple smoke bad weed
         $string = trim($string, '|');
         if (!$string) {
             return null;
+=======
+        $string = trim($string, '|');
+        if (!$string) {
+            return '';
+>>>>>>> gosa-core_v2.8
         }
         return preg_replace('#[^\w\|]+#S', '_', $string);
     }
@@ -217,6 +396,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * @param string  $content       cached content
      * @param integer &$timestamp    cached timestamp (epoch)
      * @param string  $resource_uid  resource's uid
+<<<<<<< HEAD
      * @return boolean success
      */
     protected function fetch($cid, $resource_name = null, $cache_id = null, $compile_id = null, &$content = null, &$timestamp = null, $resource_uid = null)
@@ -227,26 +407,57 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 
         if ($content && ($timestamp = $this->getMetaTimestamp($content))) {
             $invalidated = $this->getLatestInvalidationTimestamp($cid, $resource_name, $cache_id, $compile_id, $resource_uid);
+=======
+     *
+     * @return boolean success
+     */
+    protected function fetch(
+        $cid,
+        $resource_name = null,
+        $cache_id = null,
+        $compile_id = null,
+        &$content = null,
+        &$timestamp = null,
+        $resource_uid = null
+    ) {
+        $t = $this->read(array($cid));
+        $content = !empty($t[ $cid ]) ? $t[ $cid ] : null;
+        $timestamp = null;
+        if ($content && ($timestamp = $this->getMetaTimestamp($content))) {
+            $invalidated =
+                $this->getLatestInvalidationTimestamp($cid, $resource_name, $cache_id, $compile_id, $resource_uid);
+>>>>>>> gosa-core_v2.8
             if ($invalidated > $timestamp) {
                 $timestamp = null;
                 $content = null;
             }
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> gosa-core_v2.8
         return !!$content;
     }
 
     /**
      * Add current microtime to the beginning of $cache_content
+<<<<<<< HEAD
      *
+=======
+>>>>>>> gosa-core_v2.8
      * {@internal the header uses 8 Bytes, the first 4 Bytes are the seconds, the second 4 Bytes are the microseconds}}
      *
      * @param string &$content the content to be cached
      */
     protected function addMetaTimestamp(&$content)
     {
+<<<<<<< HEAD
         $mt = explode(" ", microtime());
         $ts = pack("NN", $mt[1], (int) ($mt[0] * 100000000));
+=======
+        $mt = explode(' ', microtime());
+        $ts = pack('NN', $mt[ 1 ], (int)($mt[ 0 ] * 100000000));
+>>>>>>> gosa-core_v2.8
         $content = $ts . $content;
     }
 
@@ -254,14 +465,27 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * Extract the timestamp the $content was cached
      *
      * @param string &$content the cached content
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return float the microtime the content was cached
      */
     protected function getMetaTimestamp(&$content)
     {
+<<<<<<< HEAD
         $s = unpack("N", substr($content, 0, 4));
         $m = unpack("N", substr($content, 4, 4));
         $content = substr($content, 8);
         return $s[1] + ($m[1] / 100000000);
+=======
+        extract(unpack('N1s/N1m/a*content', $content));
+        /**
+         * @var  int $s
+         * @var  int $m
+         */
+        return $s + ($m / 100000000);
+>>>>>>> gosa-core_v2.8
     }
 
     /**
@@ -272,15 +496,29 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * @param string $cache_id      cache id
      * @param string $compile_id    compile id
      * @param string $resource_uid  source's uid
+<<<<<<< HEAD
      * @return void
      */
     protected function invalidate($cid = null, $resource_name = null, $cache_id = null, $compile_id = null, $resource_uid = null)
     {
+=======
+     *
+     * @return void
+     */
+    protected function invalidate(
+        $cid = null,
+        $resource_name = null,
+        $cache_id = null,
+        $compile_id = null,
+        $resource_uid = null
+    ) {
+>>>>>>> gosa-core_v2.8
         $now = microtime(true);
         $key = null;
         // invalidate everything
         if (!$resource_name && !$cache_id && !$compile_id) {
             $key = 'IVK#ALL';
+<<<<<<< HEAD
         }
         // invalidate all caches by template
         else if ($resource_name && !$cache_id && !$compile_id) {
@@ -298,6 +536,27 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
         else {
             $key = 'IVK#CID#' . $cid;
         }
+=======
+        } // invalidate all caches by template
+        else {
+            if ($resource_name && !$cache_id && !$compile_id) {
+                $key = 'IVK#TEMPLATE#' . $resource_uid . '#' . $this->sanitize($resource_name);
+            } // invalidate all caches by cache group
+            else {
+                if (!$resource_name && $cache_id && !$compile_id) {
+                    $key = 'IVK#CACHE#' . $this->sanitize($cache_id);
+                } // invalidate all caches by compile id
+                else {
+                    if (!$resource_name && !$cache_id && $compile_id) {
+                        $key = 'IVK#COMPILE#' . $this->sanitize($compile_id);
+                    } // invalidate by combination
+                    else {
+                        $key = 'IVK#CID#' . $cid;
+                    }
+                }
+            }
+        }
+>>>>>>> gosa-core_v2.8
         $this->write(array($key => $now));
     }
 
@@ -309,10 +568,23 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * @param string $cache_id      cache id
      * @param string $compile_id    compile id
      * @param string $resource_uid  source's filepath
+<<<<<<< HEAD
      * @return float the microtime the CacheID was invalidated
      */
     protected function getLatestInvalidationTimestamp($cid, $resource_name = null, $cache_id = null, $compile_id = null, $resource_uid = null)
     {
+=======
+     *
+     * @return float  the microtime the CacheID was invalidated
+     */
+    protected function getLatestInvalidationTimestamp(
+        $cid,
+        $resource_name = null,
+        $cache_id = null,
+        $compile_id = null,
+        $resource_uid = null
+    ) {
+>>>>>>> gosa-core_v2.8
         // abort if there is no CacheID
         if (false && !$cid) {
             return 0;
@@ -321,7 +593,10 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
         if (!($_cid = $this->listInvalidationKeys($cid, $resource_name, $cache_id, $compile_id, $resource_uid))) {
             return 0;
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> gosa-core_v2.8
         // there are no InValidationKeys
         if (!($values = $this->read($_cid))) {
             return 0;
@@ -333,19 +608,37 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 
     /**
      * Translate a CacheID into the list of applicable InvalidationKeys.
+<<<<<<< HEAD
      *
      * Splits "some|chain|into|an|array" into array( '#clearAll#', 'some', 'some|chain', 'some|chain|into', ... )
+=======
+     * Splits 'some|chain|into|an|array' into array( '#clearAll#', 'some', 'some|chain', 'some|chain|into', ... )
+>>>>>>> gosa-core_v2.8
      *
      * @param string $cid           CacheID to translate
      * @param string $resource_name template name
      * @param string $cache_id      cache id
      * @param string $compile_id    compile id
      * @param string $resource_uid  source's filepath
+<<<<<<< HEAD
      * @return array list of InvalidationKeys
      * @uses $invalidationKeyPrefix to prepend to each InvalidationKey
      */
     protected function listInvalidationKeys($cid, $resource_name = null, $cache_id = null, $compile_id = null, $resource_uid = null)
     {
+=======
+     *
+     * @return array  list of InvalidationKeys
+     * @uses   $invalidationKeyPrefix to prepend to each InvalidationKey
+     */
+    protected function listInvalidationKeys(
+        $cid,
+        $resource_name = null,
+        $cache_id = null,
+        $compile_id = null,
+        $resource_uid = null
+    ) {
+>>>>>>> gosa-core_v2.8
         $t = array('IVK#ALL');
         $_name = $_compile = '#';
         if ($resource_name) {
@@ -357,7 +650,10 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
             $t[] = 'IVK#COMPILE' . $_compile;
         }
         $_name .= '#';
+<<<<<<< HEAD
         // some poeple smoke bad weed
+=======
+>>>>>>> gosa-core_v2.8
         $cid = trim($cache_id, '|');
         if (!$cid) {
             return $t;
@@ -388,7 +684,12 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      *
      * @param Smarty $smarty Smarty object
      * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
      * @return booelan true or false if cache is locked
+=======
+     *
+     * @return boolean               true or false if cache is locked
+>>>>>>> gosa-core_v2.8
      */
     public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
@@ -402,6 +703,11 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      *
      * @param Smarty $smarty Smarty object
      * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
+=======
+     *
+     * @return bool|void
+>>>>>>> gosa-core_v2.8
      */
     public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
@@ -415,6 +721,11 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      *
      * @param Smarty $smarty Smarty object
      * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
+=======
+     *
+     * @return bool|void
+>>>>>>> gosa-core_v2.8
      */
     public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
@@ -427,26 +738,47 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * Read values for a set of keys from cache
      *
      * @param array $keys list of keys to fetch
+<<<<<<< HEAD
      * @return array list of values with the given keys used as indexes
      */
     protected abstract function read(array $keys);
+=======
+     *
+     * @return array list of values with the given keys used as indexes
+     */
+    abstract protected function read(array $keys);
+>>>>>>> gosa-core_v2.8
 
     /**
      * Save values for a set of keys to cache
      *
      * @param array $keys   list of values to save
      * @param int   $expire expiration time
+<<<<<<< HEAD
      * @return boolean true on success, false on failure
      */
     protected abstract function write(array $keys, $expire=null);
+=======
+     *
+     * @return boolean true on success, false on failure
+     */
+    abstract protected function write(array $keys, $expire = null);
+>>>>>>> gosa-core_v2.8
 
     /**
      * Remove values from cache
      *
      * @param array $keys list of keys to delete
+<<<<<<< HEAD
      * @return boolean true on success, false on failure
      */
     protected abstract function delete(array $keys);
+=======
+     *
+     * @return boolean true on success, false on failure
+     */
+    abstract protected function delete(array $keys);
+>>>>>>> gosa-core_v2.8
 
     /**
      * Remove *all* values from cache
@@ -457,7 +789,11 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     {
         return false;
     }
+<<<<<<< HEAD
 
 }
 
 ?>
+=======
+}
+>>>>>>> gosa-core_v2.8

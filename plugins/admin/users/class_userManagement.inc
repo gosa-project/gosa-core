@@ -25,6 +25,10 @@ class userManagement extends management
     var $plHeadline     = "Users";
     var $plDescription  = "Manage aspects of user accounts like generic, POSIX, samba and mail settings";
     var $plIcon  = "plugins/users/images/user.png";
+<<<<<<< HEAD
+=======
+    var $matIcon        = "account_circle";
+>>>>>>> gosa-core_v2.8
 
     var $sn = "";
     var $givenName = "";
@@ -35,6 +39,11 @@ class userManagement extends management
     var $pwd_change_queue = array();
     var $force_hash_type = array();
 
+<<<<<<< HEAD
+=======
+    var $theme;
+
+>>>>>>> gosa-core_v2.8
     // Tab definition 
     protected $tabClass = "usertabs";
     protected $tabType = "USERTABS";
@@ -54,6 +63,11 @@ class userManagement extends management
         $this->config = $config;
         $this->ui = $ui;
 
+<<<<<<< HEAD
+=======
+        $this->theme = getThemeName();
+
+>>>>>>> gosa-core_v2.8
         $this->storagePoints = array(get_ou("core", "userRDN"));
 
         // Build filter
@@ -227,6 +241,16 @@ class userManagement extends management
 
     function handlePasswordQueue()
     {
+<<<<<<< HEAD
+=======
+        /* Password checks */
+        $pwLength;
+        $check_special = true;
+        $check_lower = true;
+        $check_upper = true;
+        $check_digits = true;
+
+>>>>>>> gosa-core_v2.8
         // skip if nothing is to do
         if(empty($this->dn) && !count($this->pwd_change_queue)) return;
 
@@ -237,6 +261,28 @@ class userManagement extends management
         $this->enforcePasswordChange = isset($_POST['new_password']) && isset($_POST['enforcePasswordChange']);
 
         $smarty = get_smarty();
+<<<<<<< HEAD
+=======
+
+        $pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
+        $smarty->assign("pwLength", $pwLength);
+        switch ($this->theme) {
+            case 'default':
+                if ($check_special) {
+                    $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
+                }
+                if ($check_lower) {
+                    $smarty->assign("lower", _("The password must contain lower case letters."));
+                }
+                if ($check_upper) {
+                    $smarty->assign("upper", _("The password must contain upper case letters."));
+                }
+                if ($check_digits) {
+                    $smarty->assign("digits", _("The password must contain digits."));
+                }
+                break;
+        }
+>>>>>>> gosa-core_v2.8
         $smarty->assign("proposal" , set_post($this->proposal));
         $smarty->assign("proposalEnabled" , $this->proposalEnabled);
         $smarty->assign("proposalSelected" , $this->proposalSelected);
@@ -296,6 +342,7 @@ class userManagement extends management
                     $repeated_password = get_post('repeated_password');
                 }
 
+<<<<<<< HEAD
                 // Check posted passwords now.            
                 $message= array();
                 if ($new_password != $repeated_password){
@@ -304,6 +351,45 @@ class userManagement extends management
                     if ($new_password == ""){
                         $message[] = msgPool::required(_("New password"));
                     }
+=======
+                // Get configuration flags for further input checks.
+                $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
+                $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
+                $length       = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
+
+                switch ($this->theme) {
+                    case 'default':
+                        $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
+                        $lower          = "/[a-z]/";
+                        $upper          = "/[A-Z]/";
+                        $digits         = "/[0-9]/i";
+                        break;
+                }
+
+                // Check posted passwords now.
+                $message= array();
+                // Perform GOsa password policy checks
+                if($new_password  != $repeated_password){
+                    $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+                }elseif($new_password == ""){
+                    $message[] = _("The password you've entered as 'New password' is empty.");
+                }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
+                    $message[] = _("The password used as new and current are too similar.");
+                }elseif((strlen($new_password) < $length)){
+                    $message[] = _("The password must have at least $length characters.");
+                }elseif($this->theme == 'default') {
+                    if($check_lower && !preg_match($lower, $new_password)) {
+                        $message[] = _("The password must contain lowercase letters.");
+                    }elseif($check_upper && !preg_match($upper, $new_password)) {
+                        $message[] = _("The password must contain uppercase letters.");
+                    }elseif($check_digits && !preg_match($digits, $new_password)) {
+                        $message[] = _("The password must contain digits.");
+                    }elseif($check_special && !preg_match($special, $new_password)) {
+                        $message[] = _("The password must contain at least 1 special character, e.g. !, @, #, $, %, ^, &, *, ?, _, ~.");
+                    }
+                }elseif(!passwordMethod::is_harmless($new_password)){
+                    $message[] = _("The password contains possibly problematic Unicode characters!");
+>>>>>>> gosa-core_v2.8
                 }
 
                 // Call external check hook to validate the password change
@@ -842,12 +928,47 @@ class userManagement extends management
 
     static function filterLockImage($userPassword)
     {
+<<<<<<< HEAD
         $image= "images/empty.png";
         if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
             if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
                 $image= "images/lists/locked.png";
             }else{
                 $image= "images/lists/unlocked.png";
+=======
+        $theme = getThemeName();
+
+        switch ($theme) {
+            case 'classic':
+                $image = "images/empty.png";
+                break;
+
+            default:
+            $image = "";
+                break;
+        }
+        if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
+            if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
+                switch ($theme) {
+                    case 'classic':
+                        $image = "images/lists/locked.png";
+                        break;
+
+                    default:
+                        $image = "<i class='material-icons'>lock</i>";
+                        break;
+                }
+            }else{
+                switch ($theme) {
+                    case 'classic':
+                        $image = "images/lists/unlocked.png";
+                        break;
+
+                    default:
+                        $image = "<i class='material-icons'>lock_open</i>";
+                        break;
+                }
+>>>>>>> gosa-core_v2.8
             }
         }
         return $image;
@@ -870,6 +991,7 @@ class userManagement extends management
 
     static function filterProperties($row, $classes)
     {
+<<<<<<< HEAD
         $result= "";
         $map= array( "gosaAccount" => array( "image" => "plugins/users/images/select_user.png",
                     "plugin" => "user",
@@ -903,6 +1025,63 @@ class userManagement extends management
                         "plugin" => "phoneAccount",
                         "alt" => _("Phone"),
                         "title" => _("Edit phone properties")),
+=======
+        $theme = getThemeName();
+
+        $result= "";
+
+        switch ($theme) {
+            case 'classic':
+                $map= array(
+                    "gosaAccount" => array(
+                        "image"     => "plugins/users/images/select_user.png",
+                        "plugin"    => "user",
+                        "alt"       => _("Generic"),
+                        "title"     => _("Edit generic properties")
+                    ),
+                    "posixAccount" => array(
+                        "image"     => "images/penguin.png",
+                        "plugin"    => "posixAccount",
+                        "alt"       => _("POSIX"),
+                        "title"     => _("Edit POSIX properties")
+                    ),
+                    "gosaMailAccount" => array(
+                        "image"     => "images/mailto.png",
+                        "alt"       => _("Mail"),
+                        "plugin"    => "mailAccount",
+                        "title"     => _("Edit mail properties")
+                    ),
+                    "sambaSamAccount" => array(
+                        "image"     => "plugins/systems/images/select_winstation.png",
+                        "plugin"    => "sambaAccount",
+                        "alt"       => _("Samba"),
+                        "title"     => _("Edit samba properties")
+                    ),
+                    "apple-user" => array(
+                        "image"     => "plugins/netatalk/images/select_netatalk.png",
+                        "plugin"    => "netatalk",
+                        "alt"       => _("Netatalk"),
+                        "title"     => _("Edit Netatalk properties")
+                    ),
+                    "gotoEnvironment" => array(
+                        "image"     => "plugins/users/images/small_environment.png",
+                        "plugin"    => "environment",
+                        "alt"       => _("Environment"),
+                        "title"     => _("Edit environment properties")
+                    ),
+                    "goFaxAccount" => array(
+                        "image"     => "plugins/users/images/fax_small.png",
+                        "plugin"    => "gofaxAccount",
+                        "alt"       => _("FAX"),
+                        "title"     => _("Edit FAX properties")
+                    ),
+                    "goFonAccount" => array(
+                        "image" => "phone",
+                        "plugin" => "phoneAccount",
+                        "alt" => _("Phone"),
+                        "title" => _("Edit phone properties")
+                    ),
+>>>>>>> gosa-core_v2.8
               );
 
         // Walk thru map
@@ -919,10 +1098,90 @@ class userManagement extends management
         } else if(in_array_ics("zarafa-user", $classes)){
           $result.= image("plugins/zarafa/images/zarafa_user_small.png", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
         }
+<<<<<<< HEAD
 
         return $result;
     }
 
+=======
+                break;
+
+            default:
+                $map= array(
+                    "gosaAccount" => array(
+                        "image"     => "person",
+                        "plugin"    => "user",
+                        "alt"       => _("Generic"),
+                        "title"     => _("Edit generic properties")
+                    ),
+                    "posixAccount" => array(
+                        "image"     => "info_outline",
+                        "plugin"    => "posixAccount",
+                        "alt"       => _("POSIX"),
+                        "title"     => _("Edit POSIX properties")
+                    ),
+                    "gosaMailAccount" => array(
+                        "image"     => "mail",
+                        "alt"       => _("Mail"),
+                        "plugin"    => "mailAccount",
+                        "title"     => _("Edit mail properties")
+                    ),
+                    "sambaSamAccount" => array(
+                        "image" => "window",
+                        "plugin" => "sambaAccount",
+                        "alt" => _("Samba"),
+                        "title" => _("Edit samba properties")
+                    ),
+                    "apple-user" => array(
+                        "image"     => "question_answer",
+                        "plugin"    => "netatalk",
+                        "alt"       => _("Netatalk"),
+                        "title"     => _("Edit Netatalk properties")
+                    ),
+                    "gotoEnvironment" => array(
+                        "image"     => "smart_display",
+                        "plugin"    => "environment",
+                        "alt"       => _("Environment"),
+                        "title"     => _("Edit environment properties")
+                    ),
+                    "goFaxAccount" => array(
+                        "image"     => "print",
+                        "plugin"    => "gofaxAccount",
+                        "alt"       => _("FAX"),
+                        "title"     => _("Edit FAX properties")
+                    ),
+                    "goFonAccount" => array(
+                        "image" => "phone",
+                        "plugin" => "phoneAccount",
+                        "alt" => _("Phone"),
+                        "title" => _("Edit phone properties")
+                    ),
+                );
+
+                $result.= "<div class='property-wrapper'>";
+
+                // Walk thru map
+                foreach ($map as $oc => $properties) {
+                    if (in_array_ics($oc, $classes)) {
+                        $result.= image("<i class='material-icons'>".$properties['image']."</i>", "listing_edit_".$properties['plugin']."_$row", $properties['title']);
+                    } else {
+                        $result .= image("");
+                    }
+                }
+
+                if(in_array_ics("zarafa-contact", $classes)){
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                } else if(in_array_ics("zarafa-user", $classes)){
+                    $result .= image("<i class='material-icons'>portrait</i>", "listing_edit_zarafaAccount_$row", _("Edit Zarafa properties"));
+                }
+
+                $result .= "</div>";
+                break;
+        }
+
+        return $result;
+    }
+>>>>>>> gosa-core_v2.8
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

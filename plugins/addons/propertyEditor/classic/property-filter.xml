@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+
+  <definition>
+    <category>all</category>
+    <initial>true</initial>
+    <default>default</default>
+    <scope>one</scope>
+    <attribute>dummy</attribute>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Effective properties</label>
+    <query>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>status=(ldap|file|modified|removed)§cn=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>status</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>modified</tag>
+    <label>Modified properties</label>
+    <query>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>status=(modified|removed)§cn=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>status</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>all</tag>
+    <label>All properties</label>
+    <query>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>cn=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>status</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>ldap</tag>
+    <label>LDAP properties</label>
+    <query>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>status=(ldap|modified|removed)§cn=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>status</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+  <search>
+    <tag>byGroup</tag>
+    <label>Search for property groups</label>
+    <query>
+      <backend>CONFIGPROPERTIES</backend>
+      <filter>group=$</filter>
+    </query>
+    <autocomplete>
+      <attribute>status</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+
+</filterdef>

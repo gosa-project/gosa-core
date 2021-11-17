@@ -1,6 +1,6 @@
 <?php
 
-function smarty_block_render($params, $text)
+function smarty_block_render($params, $text, &$smarty)
 {
 	/* Skip closing tag </render> */	
 	if(empty($text)) {
@@ -121,5 +121,3 @@ function smarty_block_render($params, $text)
 
 	return $text;
 }
-
-?>

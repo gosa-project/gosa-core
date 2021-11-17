@@ -1,6 +1,21 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.8
+  - Fixed delete functions in all table widgets.
+  - Fixed deprecated warnings for php v7.4.
+  - Fixed unexpected behavior when switching the list view multiple times.
+  - Add new GOsa Logo.
+  - Add simplified template system for plugins and HTML snippets.
+  - Added switch statements for HTML-snippets to fit the template system.
+  - Added new default theme for GOsa-core and all plugins. 
+    The old theme can be found under classic.
+  - Add account menu for the active user in the new default theme.
+  - Added new translations for the new theme.
+  - Change of password verification to give better feedback to the user.
+  - Modification of visible elements such as buttons etc to improve robustness.
+  - Merged .tpl files that were duplicated.
+
 * gosa 2.7.5
   - Fixed problem that occured when certain POST variables get
     transferred in a wrong way.

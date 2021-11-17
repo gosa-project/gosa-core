@@ -25,6 +25,10 @@ class ogroupManagement extends management
     var $plHeadline     = "Object groups";
     var $plDescription  = "Combine different types of objects to make use of this relationship";
     var $plIcon  = "plugins/ogroups/images/plugin.png";
+<<<<<<< HEAD
+=======
+    var $matIcon        = "group_work";
+>>>>>>> gosa-core_v2.8
 
     // Tab definition 
     protected $tabClass = "ogrouptabs";
@@ -121,7 +125,14 @@ class ogroupManagement extends management
 
     static function filterProperties($row, $gosaGroupObjects)
     {
+<<<<<<< HEAD
 
+=======
+        $theme = getThemeName();
+
+        switch ($theme) {
+            case 'classic':
+>>>>>>> gosa-core_v2.8
         $conv= array(
                 "Y" => array("plugins/users/images/select_template.png",_("Templates") , "ogroup"),
                 "U" => array("plugins/generic/images/head.png"        ,_("User")        , "ogroup"),
@@ -133,13 +144,48 @@ class ogroupManagement extends management
                 "W" => array("plugins/ogroups/images/workstation.png" ,_("Workstation") , "workstartup"),
                 "O" => array("plugins/ogroups/images/winstation.png"  ,_("Windows Install") , "ogroup"),
                 "T" => array("plugins/ogroups/images/terminal.png"    ,_("Terminal")    , "termgroup"),
+<<<<<<< HEAD
                 "P" => array("plugins/ogroups/images/printer.png"     ,_("Printer")     , "ogroup"));
+=======
+                    "P" => array("plugins/ogroups/images/printer.png",          _("Printer"),           "ogroup")
+                );
+                break;
+            
+            default:
+                $conv = array(
+                    "Y" => array("<i class='material-icons input-icons'>web_asset</i>",         _("Templates"),         "ogroup"),
+                    "U" => array("<i class='material-icons input-icons'>person</i>",            _("User"),              "ogroup"),
+                    "G" => array("<i class='material-icons input-icons'>groups</i>",            _("Group"),             "ogroup"),
+                    "A" => array("<i class='material-icons input-icons'>apps</i>",              _("Application"),       "ogroup"),
+                    "D" => array("<i class='material-icons input-icons'>domain</i>",            _("Department"),        "ogroup"),
+                    "S" => array("<i class='material-icons input-icons'>dns</i>",               _("Server"),            "ogroup"),
+                    "F" => array("<i class='material-icons input-icons'>phone</i>",             _("Phone"),             "phonequeue"),
+                    "W" => array("<i class='material-icons input-icons'>computer</i>",          _("Workstation"),       "workstartup"),
+                    "O" => array("<i class='material-icons input-icons'>desktop_windows</i>",   _("Windows Install"),   "ogroup"),
+                    "T" => array("<i class='material-icons input-icons'>web_asset</i>",         _("Terminal"),          "termgroup"),
+                    "P" => array("<i class='material-icons input-icons'>printer</i>",           _("Printer"),           "ogroup") 
+                );
+                break;
+        }
+>>>>>>> gosa-core_v2.8
 
         $types = preg_replace("/[^a-z]/i","",$gosaGroupObjects[0]);
         $result ="";
         for($i = 0 ; $i < strlen($types); $i++){
             $type = $types[$i];
+<<<<<<< HEAD
             $result.= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
+=======
+            switch ($theme) {
+                case 'classic':
+                    $result .= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
+                    break;
+                
+                default:
+                    $result .= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
+                    break;
+            }
+>>>>>>> gosa-core_v2.8
         }
         return($result);
     }

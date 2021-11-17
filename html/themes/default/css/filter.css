@@ -1,0 +1,71 @@
+/* User Filter */
+
+.filter-wrapper button {
+    margin-top: 20px;
+}
+
+.filter-wrapper .content-wrapper .input-field {
+    height: 39px;
+}
+
+.filter-wrapper .content-wrapper .select-wrapper {
+    margin-bottom: 8px;
+}
+
+.filter-wrapper .content-wrapper .category .action,
+.filter-wrapper .content-wrapper .add-category .action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: baseline;
+}
+
+.filter-wrapper .content-wrapper .category .action button,
+.filter-wrapper .content-wrapper .add-category .action button {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.filter-wrapper .content-wrapper .query-wrapper button {
+    margin-top: 0;
+}
+
+.filter-wrapper .content-wrapper .query-wrapper .query-content {
+    -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    border-top: 1px solid #e0e0e0;
+    padding: 1em;
+    margin: 20px 1px 1px 1px;
+}
+
+.filter-wrapper .content-wrapper .query-wrapper .query-head {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.filter-wrapper .content-wrapper .query-wrapper .textarea-wrapper {
+    height: 98px;
+    display: flex;
+    align-content: flex-end;
+    align-items: flex-end;
+}
+
+.filter-wrapper .content-wrapper .query-wrapper .materialize-textarea {
+    max-height: 90px;
+    font-size: 12px;
+    padding: 0;
+    overflow-y: auto;
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .filter-wrapper .content-wrapper .query-wrapper .query-content {
+        margin: 12px 1px 1px 1px;
+    }
+}

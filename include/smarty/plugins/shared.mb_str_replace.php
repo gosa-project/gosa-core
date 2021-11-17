@@ -6,6 +6,7 @@
  * @subpackage PluginsShared
  */
 if (!function_exists('smarty_mb_str_replace')) {
+<<<<<<< HEAD
 
     /**
      * Multibyte string replace
@@ -14,6 +15,16 @@ if (!function_exists('smarty_mb_str_replace')) {
      * @param string $replace the replacement string
      * @param string $subject the source string
      * @param int    &$count  number of matches found
+=======
+    /**
+     * Multibyte string replace
+     *
+     * @param string|string[] $search  the string to be searched
+     * @param string|string[] $replace the replacement string
+     * @param string          $subject the source string
+     * @param int             &$count  number of matches found
+     *
+>>>>>>> gosa-core_v2.8
      * @return string replaced string
      * @author Rodney Rehm
      */
@@ -25,7 +36,11 @@ if (!function_exists('smarty_mb_str_replace')) {
         if (is_array($subject)) {
             // call mb_replace for each single string in $subject
             foreach ($subject as &$string) {
+<<<<<<< HEAD
                 $string = &smarty_mb_str_replace($search, $replace, $string, $c);
+=======
+                $string = smarty_mb_str_replace($search, $replace, $string, $c);
+>>>>>>> gosa-core_v2.8
                 $count += $c;
             }
         } elseif (is_array($search)) {
@@ -50,6 +65,10 @@ if (!function_exists('smarty_mb_str_replace')) {
         }
         return $subject;
     }
+<<<<<<< HEAD
 
 }
 ?>
+=======
+}
+>>>>>>> gosa-core_v2.8

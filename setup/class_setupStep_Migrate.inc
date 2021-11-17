@@ -305,8 +305,8 @@ class Step_Migrate extends setup_step
             }else{
                 $this->checks['acls']['STATUS']    = FALSE;
                 $this->checks['acls']['STATUS_MSG']= _("Failed");
-                $this->checks['acls']['ERROR_MSG']= _("There is no GOsa administrator account inside your LDAP.")."&nbsp;";
-                $this->checks['acls']['ERROR_MSG'].= "<button type='submit' name='create_acls'>"._("Create")."</button>";
+                $this->checks['acls']['ERROR_MSG']= _("There is no GOsa administrator account inside your LDAP.");
+                $this->checks['acls']['ERROR_MSG'].= "<br><button class='btn-small create' type='submit' name='create_acls'>"._("Create")."</button>";
             }
         }
 
@@ -660,7 +660,11 @@ class Step_Migrate extends setup_step
                 $this->checks['root']['STATUS']    = FALSE;
                 $this->checks['root']['STATUS_MSG']= _("Failed");
                 $this->checks['root']['ERROR_MSG'] =  _("The LDAP root object is missing. It is required to use your LDAP service.").'&nbsp;';
+<<<<<<< HEAD
                 $this->checks['root']['ERROR_MSG'].=  "<button type='submit' name='retry_root_create'>"._("Try to create root object")."</button>";
+=======
+                $this->checks['root']['ERROR_MSG'].=  "<button class='btn-small' type='submit' name='retry_root_create'>"._("Try to create root object")."</button>";
+>>>>>>> gosa-core_v2.8
                 return(FALSE);
             }else{
 
@@ -673,7 +677,11 @@ class Step_Migrate extends setup_step
                     $this->checks['root']['STATUS']    = FALSE;
                     $this->checks['root']['STATUS_MSG']= _("Failed");
                     $this->checks['root']['ERROR_MSG'] = _("Root object couldn't be created, you should try it on your own.");
+<<<<<<< HEAD
                     $this->checks['root']['ERROR_MSG'].= "&nbsp;<button type='submit' name='retry_root_create'>"._("Try to create root object")."</button>";
+=======
+                    $this->checks['root']['ERROR_MSG'].= "&nbsp;<button class='btn-small' type='submit' name='retry_root_create'>"._("Try to create root object")."</button>";
+>>>>>>> gosa-core_v2.8
                     return($res);;
                 }
             }
@@ -800,7 +808,11 @@ class Step_Migrate extends setup_step
                  */
                 $this->checks['rootOC']['STATUS']    = FALSE;
                 $this->checks['rootOC']['STATUS_MSG']= _("Failed");
+<<<<<<< HEAD
                 $this->checks['rootOC']['ERROR_MSG'] = "&nbsp;<button type='submit' 
+=======
+                $this->checks['rootOC']['ERROR_MSG'] = "<button class='btn-small' type='submit'
+>>>>>>> gosa-core_v2.8
                     name='root_add_objectclasses'>"._("Migrate")."</button>";
 
                 return(FALSE);

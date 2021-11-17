@@ -1,0 +1,50 @@
+.content-area .menu {
+    min-width: 160px;
+    width: 160px;
+    padding: 0 0.75rem 0 0;
+    max-height: calc(100vh - 110px);
+}
+
+.menu .collapsible {
+    margin-top: 0;
+    box-shadow: none;
+}
+
+.menu .collapsible li.active ul.collection {
+    max-height: calc(100vh - 204px);
+    overflow-y: auto;
+}
+
+.menu .collapsible-header {
+    padding: 5px 10px;
+}
+
+.menu .collapsible-header h4 {
+    margin: 12px 0 7px 0;
+    color: #FFFFFF;
+}
+
+.menu .collapsible-body {
+    padding: 0;
+}
+
+.menu .collection .collection-item {
+    padding: 5px 10px;
+    border-left: 4px solid transparent;
+    -webkit-transition: border 0.5s ease-out;
+    -o-transition: border 0.5s ease-out;
+    transition: border 0.5s ease-out;
+    color: #000;
+}
+
+.menu .collection .collection-item.active,
+.menu .collection .collection-item:hover {
+    border-left-color: #2A3278;
+    background: #FFFFFF;
+}
+
+@media only screen and (max-width: 1200px) {
+    .content-area .menu {
+        padding: 0 24px 0 0;
+    }
+}

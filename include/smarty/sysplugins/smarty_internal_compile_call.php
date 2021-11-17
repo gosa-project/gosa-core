@@ -1,7 +1,10 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Function_Call
+<<<<<<< HEAD
  *
+=======
+>>>>>>> gosa-core_v2.8
  * Compiles the calls of user defined tags defined by {function}
  *
  * @package Smarty
@@ -15,8 +18,13 @@
  * @package Smarty
  * @subpackage Compiler
  */
+<<<<<<< HEAD
 class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
 
+=======
+class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase
+{
+>>>>>>> gosa-core_v2.8
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -24,6 +32,10 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('name');
+<<<<<<< HEAD
+=======
+
+>>>>>>> gosa-core_v2.8
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -31,6 +43,10 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('name');
+<<<<<<< HEAD
+=======
+
+>>>>>>> gosa-core_v2.8
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -44,7 +60,11 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
      *
      * @param array  $args      array with attributes from parser
      * @param object $compiler  compiler object
+<<<<<<< HEAD
      * @param array  $parameter array with compilation parameter
+=======
+     *
+>>>>>>> gosa-core_v2.8
      * @return string compiled code
      */
     public function compile($args, $compiler)
@@ -53,6 +73,7 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
         $_attr = $this->getAttributes($compiler, $args);
         // save possible attributes
         if (isset($_attr['assign'])) {
+<<<<<<< HEAD
             // output will be stored in a smarty variable instead of beind displayed
             $_assign = $_attr['assign'];
         }
@@ -63,6 +84,16 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
         unset($_attr['name'], $_attr['assign'], $_attr['nocache']);
         // set flag (compiled code of {function} must be included in cache file
         if ($compiler->nocache || $compiler->tag_nocache) {
+=======
+            // output will be stored in a smarty variable instead of being displayed
+            $_assign = $_attr[ 'assign' ];
+        }
+        //$_name = trim($_attr['name'], "''");
+        $_name = $_attr[ 'name' ];
+        unset($_attr[ 'name' ], $_attr[ 'assign' ], $_attr[ 'nocache' ]);
+        // set flag (compiled code of {function} must be included in cache file
+        if (!$compiler->template->caching || $compiler->nocache || $compiler->tag_nocache) {
+>>>>>>> gosa-core_v2.8
             $_nocache = 'true';
         } else {
             $_nocache = 'false';
@@ -75,6 +106,7 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
                 $_paramsArray[] = "'$_key'=>$_value";
             }
         }
+<<<<<<< HEAD
         if (isset($compiler->template->properties['function'][$_name]['parameter'])) {
             foreach ($compiler->template->properties['function'][$_name]['parameter'] as $_key => $_value) {
                 if (!isset($_attr[$_key])) {
@@ -128,3 +160,18 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
 }
 
 ?>
+=======
+        $_params = 'array(' . implode(',', $_paramsArray) . ')';
+        //$compiler->suppressNocacheProcessing = true;
+        // was there an assign attribute
+        if (isset($_assign)) {
+            $_output =
+                "<?php ob_start();\n\$_smarty_tpl->smarty->ext->_tplFunction->callTemplateFunction(\$_smarty_tpl, {$_name}, {$_params}, {$_nocache});\n\$_smarty_tpl->assign({$_assign}, ob_get_clean());?>\n";
+        } else {
+            $_output =
+                "<?php \$_smarty_tpl->smarty->ext->_tplFunction->callTemplateFunction(\$_smarty_tpl, {$_name}, {$_params}, {$_nocache});?>\n";
+        }
+        return $_output;
+    }
+}
+>>>>>>> gosa-core_v2.8

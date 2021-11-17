@@ -1,0 +1,4 @@
+{
+    "smarty.highlight": true,
+    "files.associations": { "*.inc": "php"}
+}

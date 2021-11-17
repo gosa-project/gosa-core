@@ -1,6 +1,7 @@
 <?php
 /**
  * Smarty plugin
+<<<<<<< HEAD
  * @package Smarty
  * @subpackage PluginsModifier
  */
@@ -10,12 +11,29 @@
  * 
  * Type:     modifier<br>
  * Name:     spacify<br>
+=======
+ *
+ * @package    Smarty
+ * @subpackage PluginsModifier
+ */
+/**
+ * Smarty spacify modifier plugin
+ * Type:     modifier
+ * Name:     spacify
+>>>>>>> gosa-core_v2.8
  * Purpose:  add spaces between characters in a string
  * 
  * @link http://smarty.php.net/manual/en/language.modifier.spacify.php spacify (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com> 
+<<<<<<< HEAD
  * @param string $string       input string
  * @param string $spacify_char string to insert between characters.
+=======
+ *
+ * @param string $string       input string
+ * @param string $spacify_char string to insert between characters.
+ *
+>>>>>>> gosa-core_v2.8
  * @return string
  */
 function smarty_modifier_spacify($string, $spacify_char = ' ')
@@ -23,5 +41,8 @@ function smarty_modifier_spacify($string, $spacify_char = ' ')
     // well… what about charsets besides latin and UTF-8?
     return implode($spacify_char, preg_split('//' . Smarty::$_UTF8_MODIFIER, $string, -1, PREG_SPLIT_NO_EMPTY));
 } 
+<<<<<<< HEAD
 
 ?>
+=======
+>>>>>>> gosa-core_v2.8

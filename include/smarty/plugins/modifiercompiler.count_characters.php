@@ -5,6 +5,7 @@
  * @package Smarty
  * @subpackage PluginsModifierCompiler
  */
+<<<<<<< HEAD
 
 /**
  * Smarty count_characters modifier plugin
@@ -21,6 +22,25 @@
 function smarty_modifiercompiler_count_characters($params, $compiler)
 {
     if (!isset($params[1]) || $params[1] != 'true') {
+=======
+/**
+ * Smarty count_characters modifier plugin
+ * Type:     modifier
+ * Name:     count_characters
+ * Purpose:  count the number of characters in a text
+ *
+ * @link   http://www.smarty.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online
+ *         manual)
+ * @author Uwe Tews
+ *
+ * @param array $params parameters
+ *
+ * @return string with compiled code
+ */
+function smarty_modifiercompiler_count_characters($params)
+{
+    if (!isset($params[ 1 ]) || $params[ 1 ] !== 'true') {
+>>>>>>> gosa-core_v2.8
         return 'preg_match_all(\'/[^\s]/' . Smarty::$_UTF8_MODIFIER . '\',' . $params[0] . ', $tmp)';
     }
     if (Smarty::$_MBSTRING) {
@@ -29,5 +49,8 @@ function smarty_modifiercompiler_count_characters($params, $compiler)
     // no MBString fallback
     return 'strlen(' . $params[0] . ')';
 }
+<<<<<<< HEAD
 
 ?>
+=======
+>>>>>>> gosa-core_v2.8

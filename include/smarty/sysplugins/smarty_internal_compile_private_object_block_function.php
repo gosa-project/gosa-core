@@ -1,7 +1,10 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Object Block Function
+<<<<<<< HEAD
  *
+=======
+>>>>>>> gosa-core_v2.8
  * Compiles code for registered objects as block function
  *
  * @package Smarty
@@ -15,6 +18,7 @@
  * @package Smarty
  * @subpackage Compiler
  */
+<<<<<<< HEAD
 class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Internal_CompileBase {
 
     /**
@@ -46,6 +50,22 @@ class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Inter
             }
             unset($_attr['nocache']);
             // convert attributes into parameter array string
+=======
+class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Internal_Compile_Private_Block_Plugin
+{
+    /**
+     * Setup callback and parameter array
+     *
+     * @param \Smarty_Internal_TemplateCompilerBase $compiler
+     * @param array                                 $_attr attributes
+     * @param string                                $tag
+     * @param string                                $method
+     *
+     * @return array
+     */
+    public function setup(Smarty_Internal_TemplateCompilerBase $compiler, $_attr, $tag, $method)
+    {
+>>>>>>> gosa-core_v2.8
             $_paramsArray = array();
             foreach ($_attr as $_key => $_value) {
                 if (is_int($_key)) {
@@ -54,6 +74,7 @@ class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Inter
                     $_paramsArray[] = "'$_key'=>$_value";
                 }
             }
+<<<<<<< HEAD
             $_params = 'array(' . implode(",", $_paramsArray) . ')';
 
             $this->openTag($compiler, $tag . '->' . $method, array($_params, $compiler->nocache));
@@ -86,3 +107,9 @@ class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Inter
 }
 
 ?>
+=======
+        $callback = array("\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]", "->{$method}");
+        return array($callback, $_paramsArray, "array(\$_block_plugin{$this->nesting}, '{$method}')");
+    }
+}
+>>>>>>> gosa-core_v2.8

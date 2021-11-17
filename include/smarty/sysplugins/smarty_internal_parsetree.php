@@ -1,8 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Smarty Internal Plugin Templateparser Parsetrees
  *
  * These are classes to build parsetrees in the template parser
+=======
+ * Smarty Internal Plugin Templateparser Parsetree
+ * These are classes to build parsetree in the template parser
+>>>>>>> gosa-core_v2.8
  *
  * @package Smarty
  * @subpackage Compiler
@@ -15,6 +20,7 @@
  * @subpackage Compiler
  * @ignore
  */
+<<<<<<< HEAD
 abstract class _smarty_parsetree {
 
     /**
@@ -24,11 +30,19 @@ abstract class _smarty_parsetree {
     public $parser;
     /**
      * Buffer content
+=======
+abstract class Smarty_Internal_ParseTree
+{
+    /**
+     * Buffer content
+     *
+>>>>>>> gosa-core_v2.8
      * @var mixed
      */
     public $data;
 
     /**
+<<<<<<< HEAD
      * Return buffer
      *
      * @return string  buffer content
@@ -393,3 +407,29 @@ class _smarty_linebreak extends _smarty_parsetree {
 }
 
 ?>
+=======
+     * Subtree array
+     *
+     * @var array
+     */
+    public $subtrees = array();
+
+    /**
+     * Return buffer
+     *
+     * @param \Smarty_Internal_Templateparser $parser
+     *
+     * @return string buffer content
+     */
+    abstract public function to_smarty_php(Smarty_Internal_Templateparser $parser);
+
+    /**
+     * Template data object destructor
+     */
+    public function __destruct()
+    {
+        $this->data = null;
+        $this->subtrees = null;
+    }
+}
+>>>>>>> gosa-core_v2.8

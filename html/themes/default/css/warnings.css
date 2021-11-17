@@ -1,0 +1,35 @@
+.attention-icon {
+    text-align: center;
+}
+
+.attention-icon i {
+    font-size: 80px;
+}
+
+.attention {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.attention label {
+    color: #842029;
+}
+
+.attention [type="checkbox"]+span:not(.lever) {
+    color: #842029;
+}
+
+.attention [type="checkbox"]:checked+span:not(.lever):before {
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid #842029;
+    border-bottom: 2px solid #842029;
+}
+
+.attention [type="checkbox"]+span:not(.lever):before,
+.attention [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    border: 2px solid #842029;
+}

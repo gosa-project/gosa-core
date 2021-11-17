@@ -1,0 +1,364 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "LiberationSans", Arial, Verdana, sans-serif;
+    font-size: 12px;
+    overflow-y: hidden;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+p {
+    font-size: 12px;
+    word-break: break-word;
+}
+
+p.headline {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 12px;
+}
+
+i {
+    font-size: 12px;
+}
+
+h2+.input-field {
+    margin-top: 36px;
+}
+
+h3+.input-field {
+    margin-top: 32px;
+}
+
+button,
+button.btn,
+button.btn-small,
+input {
+    font-size: 12px;
+}
+
+span {
+    word-break: break-word;
+}
+
+.input-field textarea:not(.multiple) {
+    min-height: 30px;
+    height: 30px!important;
+    font-size: 12px;
+    padding: 0;
+    overflow-y: auto;
+    padding-top: 1em;
+    max-width: 100%;
+}
+
+.content-area:not(.setup) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding: 12px;
+}
+
+.content-area .content {
+    width: 100%;
+}
+
+.content .card-content h2 {
+    margin-top: 0;
+}
+
+.select-wrapper+label {
+    top: 0;
+    font-size: 16px;
+}
+
+label {
+    position: relative;
+}
+
+label input[type="checkbox"] {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+}
+
+table label input[type="checkbox"] {
+    top: initial;
+    bottom: 7px;
+}
+
+.card-content .row .col.xl6:nth-child(2n+1) {
+    padding-right: 15px;
+}
+
+.card-content .row .col.xl6:last-child {
+    padding-right: 0.75rem;
+}
+
+.card-content .row .col.xl6:nth-child(2n+0) {
+    padding-left: 15px;
+}
+
+
+/* Resizing the checkboxes to the input fields
+ * Predefined class, to use checkboxes with same height as input fields
+ * Unused, please delete this sentence if used */
+
+.size-adjustment label {
+    margin-top: 15px;
+    margin-bottom: unset;
+}
+
+.size-adjustment [type="checkbox"]+span:not(.lever) {
+    height: 31px;
+    padding-top: 3px;
+    margin-bottom: 8px;
+}
+
+.size-adjustment [type="checkbox"]+span:not(.lever):before,
+.size-adjustment [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    top: 3px;
+}
+
+.size-adjustment label input[type="checkbox"] {
+    bottom: 15px;
+}
+
+
+/* Dropdown */
+
+.dropdown-content {
+    margin: 0;
+    border-bottom: 0;
+}
+
+.dropdown-content li {
+    min-height: 33px;
+}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: #000000;
+    padding: 0;
+}
+
+.ellipsis-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+hr {
+    margin: 0;
+    border: 0;
+}
+
+hr.divider {
+    margin: 20px 0;
+}
+
+
+/* -- Curson settings -- */
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer_off {
+    cursor: default;
+}
+
+
+/* -- colors -- */
+
+.primary {
+    background-color: rgba(42, 50, 120, 1) !important;
+}
+
+.accent {
+    background-color: #db5c01;
+}
+
+
+/* -- Datepicker setup -- */
+
+.datepicker-calendar {
+    padding: 10px;
+}
+
+.datepicker-date-display {
+    background-color: rgba(42, 50, 120, 1);
+}
+
+.datepicker-table td.is-today {
+    background-color: #e0e0e0;
+    color: #000000;
+}
+
+.datepicker-day-button:focus {
+    background-color: rgba(42, 50, 120, 1);
+}
+
+.datepicker-table td.is-selected {
+    background-color: rgba(42, 50, 120, 1);
+    color: #FFFFFF;
+}
+
+
+/* Override the Materialize color */
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #2A3278;
+    -webkit-box-shadow: 0 1px 0 0 #2A3278;
+    box-shadow: 0 1px 0 0 #2A3278;
+}
+
+input:not([type]):focus:not([readonly])+label,
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=url]:not(.browser-default):focus:not([readonly])+label,
+input[type=time]:not(.browser-default):focus:not([readonly])+label,
+input[type=date]:not(.browser-default):focus:not([readonly])+label,
+input[type=datetime]:not(.browser-default):focus:not([readonly])+label,
+input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label,
+input[type=tel]:not(.browser-default):focus:not([readonly])+label,
+input[type=number]:not(.browser-default):focus:not([readonly])+label,
+input[type=search]:not(.browser-default):focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label {
+    color: initial;
+}
+
+[type="checkbox"]:checked+span:not(.lever):before {
+    border-right: 2px solid #5a5a5a;
+    border-bottom: 2px solid #5a5a5a;
+}
+
+[type="radio"]:checked+span:after,
+[type="radio"].with-gap:checked+span:after {
+    background-color: #2A3278;
+}
+
+[type="radio"]:checked+span:after,
+[type="radio"].with-gap:checked+span:before,
+[type="radio"].with-gap:checked+span:after {
+    border: 2px solid #2A3278;
+}
+
+[type="radio"]:not(:checked),
+[type="radio"]:checked,
+[type="radio"]+span:before,
+[type="radio"]+span:after {
+    width: 18px;
+    height: 18px;
+    margin: 2px 0;
+}
+
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
+    margin: 0;
+    margin-bottom: 3px;
+}
+
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #2A3278;
+}
+
+button:focus {
+    outline: none;
+    background-color: initial;
+}
+
+
+/* Views as soon as there is no menu */
+
+.content-area.noMenu {
+    justify-content: center;
+}
+
+.content-area .content-noMenu {
+    width: 80%;
+}
+
+.content-area .content-noMenu .information-wrapper .no-permission {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    color: #842029;
+}
+
+.content-area .content-noMenu .information-wrapper .no-permission h2 {
+    margin: 0;
+}
+
+
+/* Fallback for start menu column width to fit certain display sizes */
+
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {
+    .row.startpage-iconmenu .col.xl2 {
+        width: 25%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .content-area {
+        padding: 24px;
+    }
+    .card-content .row .col.s12,
+    .card-content .row .col.s12.xl6 {
+        padding: 0 0.75rem;
+    }
+    .col.s12.xl6+.col.s12.xl6 {
+        margin-top: 8px;
+    }
+}

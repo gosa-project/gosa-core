@@ -1,0 +1,352 @@
+/* Control Panel */
+
+.content .card-content .control-panel {
+    height: 26px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/* Control Panel - Navigation elements */
+
+.content .card-content .control-panel .navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+
+.content .card-content .control-panel .navigation i {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.content .card-content .control-panel .navigation .action-wrapper {
+    position: relative;
+    height: 18px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.content .card-content .control-panel .navigation .action-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.content .card-content .control-panel .navigation .action-wrapper input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
+}
+
+.content .card-content .control-panel .navigation .refresh {
+    position: relative;
+}
+
+.content .card-content .control-panel .navigation .refresh input {
+    height: 18px;
+    width: 18px;
+    padding: 0;
+}
+
+.content .card-content .control-panel .navigation .refresh i {
+    font-size: 18px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+/* Control Panel - LDAP Tree */
+
+.content .card-content .control-panel .ldap-tree {
+    padding: 0 10px;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field {
+    position: relative;
+    margin: 0;
+    height: 26px;
+    margin-right: 5px;
+    padding: 0;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field i {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    font-size: 18px;
+}
+
+.content .card-content .control-panel .ldap-tree .search-field input {
+    height: 24px;
+    width: 90%;
+    width: calc(100% - 28px);
+    margin: 0;
+    margin-left: 28px;
+}
+
+.content .card-content .control-panel .ldap-tree .submit {
+    position: relative;
+    margin: 0;
+    height: 26px;
+}
+
+.content .card-content .control-panel .ldap-tree .submit i {
+    font-size: 18px;
+    position: absolute;
+    left: 0;
+    top: 4px;
+}
+
+.content .card-content .control-panel .ldap-tree .submit input {
+    height: 18px;
+    width: 18px;
+    margin-top: 4px;
+    padding: 0;
+}
+
+.ldap-tree #autocomplete {
+    min-width: 250px;
+    max-width: 250px;
+}
+
+.ldap-tree #autocomplete li {
+    padding: 5px 10px;
+}
+
+.ldap-tree #autocomplete li i {
+    position: initial;
+    margin-right: 10px;
+}
+
+.ldap-tree #autocomplete li p.title {
+    font-weight: bold;
+}
+
+
+/* Control Panel - Actions */
+
+.content .card-content .control-panel .actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 26px;
+    padding: 0 10px;
+    cursor: pointer;
+    min-width: 90px;
+}
+
+.content .card-content .control-panel .actions a {
+    font-size: 12px;
+    text-transform: none;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.content .card-content .control-panel .actions a i {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content {
+    min-width: 200px;
+    margin: 0;
+    border-bottom: 0;
+}
+
+.content .card-content .control-panel .actions .dropdown-content ul.collection.with-header {
+    margin: 0;
+    border-bottom: 0;
+}
+
+.content .card-content .control-panel .actions .dropdown-content li.collection-header {
+    padding: 10px 10px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content li.collection-item {
+    padding: 5px 10px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content h3 {
+    margin: 0 auto;
+}
+
+.content .card-content .control-panel .actions .dropdown-content a {
+    font-size: 12px;
+}
+
+.content .card-content .control-panel .actions .dropdown-content a i {
+    margin: 0 10px 0 0;
+}
+
+
+/* Control Panel - Filter */
+
+.content .card-content .control-panel .filtermenu {
+    padding: 0 10px;
+}
+
+.content .card-content .control-panel .filtermenu a {
+    font-size: 12px;
+    text-transform: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.content .card-content .control-panel .filtermenu a.dropdown-filter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    text-transform: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.content .card-content .control-panel .filtermenu a i {
+    font-size: 18px;
+}
+
+.content .card-content .control-panel .filtermenu a.dropdown-filter i {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content {
+    min-width: 200px;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content .collection {
+    margin: 0;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content a {
+    font-size: 12px;
+    margin-left: 34px;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content a.active {
+    margin-left: 0;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content i {
+    margin: 0 10px 0 0;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content .divider {
+    background-color: lightslategray;
+    height: 1px;
+    border: 0;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item {
+    padding: 5px 10px;
+}
+
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item .search-subtree,
+.content .card-content .control-panel .filtermenu .dropdown-content li.collection-item:last-child {
+    border-bottom: 0;
+}
+
+
+/* Control Panel - Search Field */
+
+.content .card-content .control-panel .search-field {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    height: 26px;
+    margin: 0;
+    padding: 0 0 0 5px;
+}
+
+.content .card-content .control-panel .search-field input {
+    font-size: 12px;
+    height: 24px;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.content .card-content .control-panel .search-field button.btn {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    color: #000000;
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    text-transform: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* fax control panel */
+
+.content .card-content .fax-control-panel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.content .card-content .fax-control-panel .input-field {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.content .card-content .fax-control-panel .input-field:first-child {
+    margin-left: 0;
+}
+
+.content .card-content .fax-control-panel .input-field:last-child {
+    margin-right: 0;
+}
+
+.content .card-content .fax-control-panel .input-field .select-wrapper {
+    margin-right: 10px;
+}
+
+.content .card-content .fax-control-panel .input-field .select-wrapper:last-child {
+    margin-right: 0;
+}
+
+.content .card-content .fax-control-panel .input-field input {
+    margin-bottom: 0;
+}
+
+.content .card-content .fax-control-panel button {
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1200px) {}

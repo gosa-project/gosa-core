@@ -5,6 +5,7 @@
  * @package Smarty
  * @subpackage Debug
  */
+<<<<<<< HEAD
 
 /**
  * Smarty debug_print_var modifier plugin
@@ -48,6 +49,57 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
             } 
             break;
             
+=======
+/**
+ * Smarty debug_print_var modifier plugin
+ * Type:     modifier
+ * Name:     debug_print_var
+ * Purpose:  formats variable contents for display in the console
+ *
+ * @author Monte Ohrt <monte at ohrt dot com>
+ *
+ * @param array|object $var     variable to be formatted
+ * @param int          $max     maximum recursion depth if $var is an array or object
+ * @param int          $length  maximum string length if $var is a string
+ * @param int          $depth   actual recursion depth
+ * @param array        $objects processed objects in actual depth to prevent recursive object processing
+ *
+ * @return string
+ */
+function smarty_modifier_debug_print_var($var, $max = 10, $length = 40, $depth = 0, $objects = array())
+{
+    $_replace = array("\n" => '\n', "\r" => '\r', "\t" => '\t');
+    switch (gettype($var)) {
+        case 'array':
+            $results = '<b>Array (' . count($var) . ')</b>';
+            if ($depth === $max) {
+                break;
+            }
+            foreach ($var as $curr_key => $curr_val) {
+                $results .= '<br>' . str_repeat('&nbsp;', $depth * 2) . '<b>' . strtr($curr_key, $_replace) .
+                            '</b> =&gt; ' .
+                            smarty_modifier_debug_print_var($curr_val, $max, $length, ++$depth, $objects);
+                $depth--;
+            }
+            break;
+        case 'object':
+            $object_vars = get_object_vars($var);
+            $results = '<b>' . get_class($var) . ' Object (' . count($object_vars) . ')</b>';
+            if (in_array($var, $objects)) {
+                $results .= ' called recursive';
+                break;
+            }
+            if ($depth === $max) {
+                break;
+            }
+            $objects[] = $var;
+            foreach ($object_vars as $curr_key => $curr_val) {
+                $results .= '<br>' . str_repeat('&nbsp;', $depth * 2) . '<b> -&gt;' . strtr($curr_key, $_replace) .
+                            '</b> = ' . smarty_modifier_debug_print_var($curr_val, $max, $length, ++$depth, $objects);
+                $depth--;
+            }
+            break;
+>>>>>>> gosa-core_v2.8
         case 'boolean' :
         case 'NULL' :
         case 'resource' :
@@ -62,12 +114,18 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
             } 
             $results = '<i>' . $results . '</i>';
             break;
+<<<<<<< HEAD
             
+=======
+>>>>>>> gosa-core_v2.8
         case 'integer' :
         case 'float' :
             $results = htmlspecialchars((string) $var);
             break;
+<<<<<<< HEAD
             
+=======
+>>>>>>> gosa-core_v2.8
         case 'string' :
             $results = strtr($var, $_replace);
             if (Smarty::$_MBSTRING) {
@@ -79,10 +137,15 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
                     $results = substr($var, 0, $length - 3) . '...';
                 }
             }
+<<<<<<< HEAD
 
             $results = htmlspecialchars('"' . $results . '"');
             break;
             
+=======
+            $results = htmlspecialchars('"' . $results . '"', ENT_QUOTES, Smarty::$_CHARSET);
+            break;
+>>>>>>> gosa-core_v2.8
         case 'unknown type' :
         default :
             $results = strtr((string) $var, $_replace);
@@ -95,6 +158,7 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
                     $results = substr($results, 0, $length - 3) . '...';
                 }
             }
+<<<<<<< HEAD
              
             $results = htmlspecialchars($results);
     } 
@@ -103,3 +167,9 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
 } 
 
 ?>
+=======
+            $results = htmlspecialchars($results, ENT_QUOTES, Smarty::$_CHARSET);
+    }
+    return $results;
+}
+>>>>>>> gosa-core_v2.8

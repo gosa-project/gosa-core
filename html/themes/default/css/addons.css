@@ -1,0 +1,54 @@
+/* Command verification */
+
+.command-verification .command {
+    margin-bottom: 20px;
+}
+
+.command-verification .input-field {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.command-verification .input-field button {
+    margin-left: 20px;
+    margin-bottom: 8px;
+    min-height: 30px;
+    height: 30px!important;
+    line-height: 30px;
+}
+
+.command-verification table td {
+    padding: 1em 0;
+    font-size: 12px;
+}
+
+.command-verification table td pre {
+    margin: 0;
+}
+
+.command-verification table td:first-child {
+    width: 150px;
+}
+
+.command-verification table tr:last-child {
+    border-bottom: none;
+}
+
+
+/* Deployment status */
+
+.daemonevent-wrapper h3 {
+    margin-top: 0;
+}
+
+.daemonevent-wrapper .timestamp-wrapper .periodical-job {
+    margin-bottom: 8px;
+}
+
+.daemonevent-wrapper .acl-member {
+    margin-bottom: 20px;
+}

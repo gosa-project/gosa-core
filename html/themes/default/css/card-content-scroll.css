@@ -1,0 +1,168 @@
+.card-content-scroll {
+    overflow: hidden;
+    overflow-y: auto;
+    height: auto;
+    padding-bottom: 1px!important;
+}
+
+
+/*
+ * Always the same: 158px
+ *  - Navigation 40px
+ *  - Breadcrump 30px
+ *  - Card Margin Top 20px
+ *  - Card ContentPadding Top 24px
+ *  - Card ContentPadding Bottom 24px
+ *  - Card Margin Bottom 20px
+ *
+ * Variable values:
+ *  1.  h2 + margin-bottom 44px
+ *  2.  card-action + padding-top 53px
+ *  2.2 card-action 33px
+ *  3.  button under the table + margin-top 53px
+ *  4.  control panel + margin-bottom + hr 52px
+ *  5.  table margin 30px
+ *  6.  table summary 33px
+ *  7.  Tab Nav -24px + 68px = 44px
+ *  8.  h2 + margin-bottom + p 58px
+ *  9.  p + margin-bottom 38px
+ *  10. h3 + margin-bottom 37px
+ *  11. h3 + divider 60px
+ *  12. p o. margin 18px
+ */
+
+
+/*
+ * Table without actions
+ * 158px + 44px (1.) + 52px (4.) + 30px (5.) + 33px (6.)
+ */
+
+.table-wrapper.card-content-scroll {
+    max-height: calc(100vh - 317px);
+}
+
+
+/*
+ * Table with actions
+ * 158px + 44px (1.) + 52px (4.) + 30px (5.) + 33px (6.) + 33px (2.2)
+ */
+
+.plus-actions .table-wrapper.card-content-scroll {
+    max-height: calc(100vh - 350px);
+}
+
+
+/*
+ * ACL - Card content - Access rights
+ * 158px + 44px (7.) + 44px (1.) + 53px (3.) + 53px (2.)
+ *
+ * Filter - Filter edit
+ * 158px + 44px (7.) + 44px (1.) + 53px (3.) + 53px (2.)
+ */
+
+.acl-ds-head.card-content-scroll,
+.user-filter.card-content-scroll {
+    max-height: calc(100vh - 352px);
+}
+
+
+/*
+ * ACL Role (ACL Template) - Head
+ * 158px + 44px (7.) + 44px (1.) + 53px (2.)
+ */
+
+.acl-role-head.card-content-scroll {
+    max-height: calc(100vh - 299px);
+}
+
+
+/*
+ * ACL Role (ACL Template) - Create
+ * 158px + 44px (1.) + 37px (10.) + 53px (2.)
+ */
+
+.acl-role-create.card-content-scroll {
+    max-height: calc(100vh - 292px);
+}
+
+
+/*
+ * My account / Create user - General + Posix + Mail
+ * 158px + 44px (7.) + 53px (2.)
+ *
+ * My account / Create user - Certificate
+ * 158px + 44px (1.) + 53px (2.)
+
+ * ACL Role (ACL Template) - Edit
+ * 158px + 44px (1.) + 53px (2.)
+ *
+ * ACL - Card content - Access rights - Create
+ * 158px + 44px (1.) + 53px (2.)
+ *
+ * ACL - Card content - Access rights - Edit
+ * 158px + 44px (1.) + 53px (2.)
+ *
+ * Filter - Filter edit - Add
+ * 158px + 44px (1.) + 53px (2.)
+ *
+ * Directory structure - create organization
+ * 158px + 44px (7.) + 53px (2.)
+ *
+ * Directory structure - create locality
+ * 158px + 44px (7.) + 53px (2.)
+ *
+ * My account - Desk Plugin - Script Management
+ * 158px + 44px (1.) + 53px (2.)
+ */
+
+.object-info .content-wrapper.card-content-scroll,
+.certificate.content-wrapper .card-content-scroll,
+.acl-role-edit.card-content-scroll,
+.acl-ds-create.card-content-scroll,
+.acl-ds-edit.card-content-scroll,
+.filter-wrapper .content-wrapper.card-content-scroll,
+.organization.card-content-scroll,
+.locality.card-content-scroll,
+.desk-script-managment.card-content-scroll {
+    max-height: calc(100vh - 255px);
+}
+
+
+/*
+ * Password
+ * 158px + 44px (1.) + 38px (9.) + 53px (2.)
+ */
+
+.change-password .password-wrapper.card-content-scroll {
+    max-height: calc(100vh - 293px);
+}
+
+
+/*
+ * User - Reference - LDAP Entry
+ * 158px + 60px (11.) + 53px (2.)
+ */
+
+.ldap-entry-wrapper .ldap-entry.card-content-scroll {
+    max-height: calc(100vh - 271px);
+}
+
+
+/*
+ * Password Management
+ * 158px + 44px (7.) + 53px (2.)
+ */
+
+.pwreset-wrapper.card-content-scroll {
+    max-height: calc(100vh - 255px);
+}
+
+
+/*
+ * Samba log on times
+ * 158px + 37px (10.) + 18px (12.) + 53px (2.)
+ */
+
+.samba-login-wrapper.card-content-scroll {
+    max-height: calc(100vh - 266px);
+}

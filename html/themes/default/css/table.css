@@ -1,0 +1,407 @@
+.table-wrapper {
+    padding: 0;
+    margin: 20px 0;
+}
+
+#tree-table th,
+#tree-table td,
+#generic-table th,
+#generic-table td,
+#sudo-table th,
+#sudo-table td,
+#managepw-table th,
+#managepw-table td,
+#startmenu-table th,
+#startmenu-table td,
+.sys-info-table th,
+.sys-info-table td,
+#fax-report-table th,
+#fax-report-table td,
+#rSyslog-table th,
+#rSyslog-table td,
+#ldap-tools-table th,
+#ldap-tools-table td,
+#goto-import-table th,
+#goto-import-table td,
+#samba-login-table th,
+#samba-login-table td {
+    position: relative;
+    padding: 5px 10px;
+    height: 38px;
+    max-height: 38px;
+    line-height: initial;
+}
+
+th,
+th a,
+th a.btn-flat,
+td,
+td a {
+    color: #000000;
+}
+
+#tree-table tr,
+#generic-table tr,
+#sudo-table tr,
+#managepw-table tr,
+#startmenu-table tr,
+.sys-info-table tr,
+#fax-report-table tr,
+#rSyslog-table tr,
+#ldap-tools-table tr,
+#goto-import-table tr,
+#samba-login-table tr {
+    height: 38px;
+    max-height: 38px;
+}
+
+#generic-table thead th {
+    vertical-align: baseline;
+}
+
+#tree-table thead th a,
+#generic-table thead th a {
+    padding-left: 0;
+    text-transform: initial;
+    font-size: 12px;
+}
+
+#tree-table thead .checkbox-column,
+#tree-table thead .icon-column {
+    width: 38px
+}
+
+#tree-table i.material-icons,
+#generic-table i.material-icons,
+#sudo-table i.material-icons,
+#managepw-table i.material-icons,
+#startmenu-table i.material-icons,
+.sys-info-table i.material-icons,
+#fax-report-table i.material-icons,
+#rSyslog-table i.material-icons,
+#ldap-tools-table i.material-icons,
+#goto-import-table i.material-icons,
+#samba-login-table i.material-icons {
+    font-size: 18px;
+}
+
+#generic-table input.input-btn,
+#tree-table input.input-btn,
+#sudo-table input.input-btn,
+#managepw-table input.input-btn,
+#startmenu-table input.input-btn,
+.sys-info-table input.input-btn,
+#fax-report-table input.input-btn,
+#rSyslog-table input.input-btn,
+#ldap-tools-table input.input-btn,
+#goto-import-table input.input-btn,
+#samba-login-table input.input-btn {
+    z-index: 1;
+    position: relative;
+    width: 18px;
+}
+
+#generic-table i.input-icons,
+#tree-table i.input-icons,
+#sudo-table i.input-icons,
+#managepw-table i.input-icons,
+#startmenu-table i.input-icons,
+.sys-info-table i.input-icons,
+#fax-report-table i.input-icons,
+#rSyslog-table i.input-icons,
+#ldap-tools-table i.input-icons,
+#goto-import-table i.input-icons,
+#samba-login-table i.input-icons {
+    position: absolute;
+    left: 16px;
+    margin-top: 8px;
+}
+
+#tree-table .entry-locked .entry-locked-td {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#tree-table .entry-locked .entry-locked-td i {
+    margin-left: 10px;
+}
+
+#tree-table .entry-locked .entry-locked-td i:first-child {
+    margin-left: 0;
+}
+
+#tree-table select:focus,
+#sudo-table select:focus,
+#managepw-table select:focus,
+#startmenu-table select:focus,
+.sys-info-table select:focus,
+#fax-report-table select:focus,
+#rSyslog-table select:focus,
+#ldap-tools-table select:focus,
+#goto-import-table select:focus,
+#samba-login-table select:focus {
+    outline: none;
+}
+
+#tree-table .select-wrapper,
+#sudo-table .select-wrapper,
+#managepw-table .select-wrapper,
+#startmenu-table .select-wrapper,
+.sys-info-table .select-wrapper,
+#fax-report-table .select-wrapper,
+#rSyslog-table .select-wrapper,
+#ldap-tools-table .select-wrapper,
+#goto-import-table .select-wrapper,
+#samba-login-table .select-wrapper {
+    width: fit-content;
+}
+
+#tree-table .select-wrapper input,
+#sudo-table .select-wrapper input,
+#managepw-table .select-wrapper input,
+#startmenu-table .select-wrapper input,
+.sys-info-table .select-wrapper input,
+#fax-report-table .select-wrapper input,
+#rSyslog-table .select-wrapper input,
+#ldap-tools-table .select-wrapper input,
+#goto-import-table .select-wrapper input,
+#samba-login-table .select-wrapper input {
+    width: auto;
+    width: 200px;
+    max-width: 200px;
+    min-height: 27px;
+    height: 27px!important;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+#tree-table .select-wrapper ul li,
+#sudo-table .select-wrapper ul li,
+#managepw-table .select-wrapper ul li,
+#startmenu-table .select-wrapper ul li,
+.sys-info-table .select-wrapper ul li,
+#fax-report-table .select-wrapper ul li,
+#rSyslog-table .select-wrapper ul li,
+#ldap-tools-table .select-wrapper ul li,
+#goto-import-table .select-wrapper ul li,
+#samba-login-table .select-wrapper ul li {
+    padding: 5px 10px;
+    min-height: 31px;
+    max-height: 31px;
+}
+
+#tree-table .input-field,
+#sudo-table .input-field,
+#managepw-table .input-field,
+#startmenu-table .input-field,
+.sys-info-table .input-field,
+#fax-report-table .input-field,
+#rSyslog-table .input-field,
+#ldap-tools-table .input-field,
+#goto-import-table .input-field,
+#samba-login-table .input-field {
+    margin-top: 0;
+}
+
+#tree-table .input-field input,
+#tree-table .valign-wrapper input,
+#sudo-table .input-field input,
+#managepw-table .input-field input,
+#startmenu-table .input-field input,
+.sys-info-table .input-field input,
+#fax-report-table .input-field input,
+#rSyslog-table .input-field input,
+#ldap-tools-table .input-field input,
+#goto-import-table .input-field input,
+#samba-login-table .input-field input {
+    margin-bottom: 0;
+    min-height: 20px;
+    height: 20px!important;
+}
+
+#tree-table label input,
+#generic-table label input,
+#sudo-table label input,
+#managepw-table label input,
+#startmenu-table label input,
+.sys-info-table label input,
+#fax-report-table label input,
+#rSyslog-table label input,
+#ldap-tools-table label input,
+#goto-import-table label input,
+#samba-login-table label input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
+}
+
+#tree-table .valign-wrapper label {
+    width: 28px;
+    height: 18px;
+}
+
+#tree-table .valign-wrapper label .action-wrapper {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+#tree-table .valign-wrapper label i.input-icons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #000;
+}
+
+#generic-table .action-column,
+#tree-table .property-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+}
+
+#tree-table .action-wrapper,
+#generic-table .action-wrapper,
+#sudo-table .action-wrapper,
+#managepw-table .action-wrapper,
+#startmenu-table .action-wrapper,
+.sys-info-table .action-wrapper,
+#fax-report-table .action-wrapper,
+#rSyslog-table .action-wrapper,
+#ldap-tools-table .action-wrapper,
+#goto-import-table .action-wrapper,
+#samba-login-table .action-wrapper {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#tree-table .action-wrapper input,
+#generic-table .action-wrapper input,
+#sudo-table .action-wrapper input,
+#managepw-table .action-wrapper input,
+#startmenu-table .action-wrapper input,
+.sys-info-table .action-wrapper input,
+#fax-report-table .action-wrapper input,
+#rSyslog-table .action-wrapper input,
+#ldap-tools-table .action-wrapper input,
+#goto-import-table .action-wrapper input,
+#samba-login-table .action-wrapper input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: top;
+}
+
+#tree-table .action-wrapper i,
+#generic-table .action-wrapper i,
+#sudo-table .action-wrapper i,
+#managepw-table .action-wrapper i,
+#startmenu-table .action-wrapper i,
+.sys-info-table .action-wrapper i,
+#fax-report-table .action-wrapper i,
+#rSyslog-table .action-wrapper i,
+#ldap-tools-table .action-wrapper i,
+#goto-import-table .action-wrapper i,
+#samba-login-table .action-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+#generic-table .action-wrapper:last-child,
+#sudo-table .action-wrapper:last-child,
+#managepw-table .action-wrapper:last-child,
+#startmenu-table .action-wrapper:last-child,
+.sys-info-table .action-wrapper:last-child,
+#fax-report-table .action-wrapper:last-child,
+#rSyslog-table .action-wrapper:last-child,
+#ldap-tools-table .action-wrapper:last-child,
+#goto-import-table .action-wrapper:last-child,
+#samba-login-table .action-wrapper:last-child {
+    margin-right: 0;
+}
+
+#tree-table td.last-column,
+#generic-table td.last-column,
+#sudo-table td.last-column,
+#managepw-table td.last-column,
+.sys-info-table td.last-column,
+#fax-report-table td.last-column,
+#rSyslog-table td.last-column,
+#ldap-tools-table td.last-column,
+#goto-import-table td.last-column,
+#samba-login-table td.last-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#startmenu-table td.icon-column {
+    width: 38px;
+}
+
+#startmenu-table td hr.divider {
+    margin: 0;
+}
+
+#tree-table [type="checkbox"]+span:not(.lever),
+#sudo-table [type="checkbox"]+span:not(.lever),
+#managepw-table [type="checkbox"]+span:not(.lever),
+#startmenu-table [type="checkbox"]+span:not(.lever),
+.sys-info-table [type="checkbox"]+span:not(.lever),
+#fax-report-table [type="checkbox"]+span:not(.lever),
+#rSyslog-table [type="checkbox"]+span:not(.lever),
+#ldap-tools-table [type="checkbox"]+span:not(.lever),
+#goto-import-table [type="checkbox"]+span:not(.lever),
+#samba-login-table [type="checkbox"]+span:not(.lever) {
+    padding-left: 0;
+}
+
+#managepw-table .input-field {
+    height: unset;
+}
+
+#managepw-table .input-field input {
+    width: 200px;
+}
+
+#managepw-table label {
+    margin-bottom: 0;
+}
+
+.table-summary i {
+    font-size: 18px;
+}
+
+th,
+td {
+    padding: unset;
+}
+
+.card .card-content .plus-actions+.card-action {
+    padding: 0;
+}
+
+
+/* Media Queries */
+
+@media only screen and (max-width: 1200px) {
+    #samba-login-table tr {
+        height: initial;
+        max-height: initial;
+    }
+}

@@ -10,23 +10,36 @@
 
     /**
     * This class does contain all necessary methods for the HTML cache on file system
+<<<<<<< HEAD
     *
+=======
+>>>>>>> gosa-core_v2.8
     * Implements the file system as resource for the HTML cache Version ussing nocache inserts.
     *
     * @package Smarty
     * @subpackage Cacher
     */
+<<<<<<< HEAD
     class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
 
+=======
+class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
+{
+>>>>>>> gosa-core_v2.8
         /**
         * populate Cached Object with meta data from Resource
         *
         * @param Smarty_Template_Cached   $cached    cached object
         * @param Smarty_Internal_Template $_template template object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
         * @return void
         */
         public function populate(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template)
         {
+<<<<<<< HEAD
             $_source_file_path = str_replace(':', '.', $_template->source->filepath);
             $_cache_id = isset($_template->cache_id) ? preg_replace('![^\w\|]+!', '_', $_template->cache_id) : null;
             $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
@@ -63,23 +76,78 @@
             $cached->filepath = $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
             $cached->timestamp = @filemtime($cached->filepath);
             $cached->exists = !!$cached->timestamp;
+=======
+        $source = &$_template->source;
+        $smarty = &$_template->smarty;
+        $_compile_dir_sep = $smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
+        $_filepath = sha1($source->uid . $smarty->_joined_template_dir);
+        $cached->filepath = $smarty->getCacheDir();
+        if (isset($_template->cache_id)) {
+            $cached->filepath .= preg_replace(
+                                     array(
+                                         '![^\w|]+!',
+                                         '![|]+!'
+                                     ),
+                                     array(
+                                         '_',
+                                         $_compile_dir_sep
+                                     ),
+                                     $_template->cache_id
+                                 ) . $_compile_dir_sep;
+        }
+        if (isset($_template->compile_id)) {
+            $cached->filepath .= preg_replace('![^\w]+!', '_', $_template->compile_id) . $_compile_dir_sep;
+        }
+        // if use_sub_dirs, break file into directories
+        if ($smarty->use_sub_dirs) {
+            $cached->filepath .= $_filepath[ 0 ] . $_filepath[ 1 ] . DIRECTORY_SEPARATOR . $_filepath[ 2 ] .
+                                 $_filepath[ 3 ] .
+                                 DIRECTORY_SEPARATOR .
+                                 $_filepath[ 4 ] . $_filepath[ 5 ] . DIRECTORY_SEPARATOR;
+        }
+        $cached->filepath .= $_filepath;
+        $basename = $source->handler->getBasename($source);
+        if (!empty($basename)) {
+            $cached->filepath .= '.' . $basename;
+        }
+        if ($smarty->cache_locking) {
+            $cached->lock_id = $cached->filepath . '.lock';
+        }
+        $cached->filepath .= '.php';
+        $cached->timestamp = $cached->exists = is_file($cached->filepath);
+        if ($cached->exists) {
+            $cached->timestamp = filemtime($cached->filepath);
+        }
+>>>>>>> gosa-core_v2.8
         }
 
         /**
         * populate Cached Object with timestamp and exists from Resource
         *
         * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
         * @return void
         */
         public function populateTimestamp(Smarty_Template_Cached $cached)
         {
+<<<<<<< HEAD
             $cached->timestamp = @filemtime($cached->filepath);
             $cached->exists = !!$cached->timestamp;
+=======
+        $cached->timestamp = $cached->exists = is_file($cached->filepath);
+        if ($cached->exists) {
+            $cached->timestamp = filemtime($cached->filepath);
+        }
+>>>>>>> gosa-core_v2.8
         }
 
         /**
         * Read the cached template and process its header
         *
+<<<<<<< HEAD
         * @param Smarty_Internal_Template $_template template object
         * @param Smarty_Template_Cached $cached cached object
         * @return booelan true or false if the cached content does not exist
@@ -88,6 +156,26 @@
         {
             $_smarty_tpl = $_template;
             return @include $_template->cached->filepath;
+=======
+     * @param \Smarty_Internal_Template $_smarty_tpl do not change variable name, is used by compiled template
+     * @param Smarty_Template_Cached    $cached      cached object
+     * @param bool                      $update      flag if called because cache update
+     *
+     * @return boolean true or false if the cached content does not exist
+     */
+    public function process(
+        Smarty_Internal_Template $_smarty_tpl,
+        Smarty_Template_Cached $cached = null,
+        $update = false
+    ) {
+        $_smarty_tpl->cached->valid = false;
+        if ($update && defined('HHVM_VERSION')) {
+            eval('?>' . file_get_contents($_smarty_tpl->cached->filepath));
+            return true;
+        } else {
+            return @include $_smarty_tpl->cached->filepath;
+        }
+>>>>>>> gosa-core_v2.8
         }
 
         /**
@@ -95,6 +183,7 @@
         *
         * @param Smarty_Internal_Template $_template template object
         * @param string                   $content   content to cache
+<<<<<<< HEAD
         * @return boolean success
         */
         public function writeCachedContent(Smarty_Internal_Template $_template, $content)
@@ -103,6 +192,31 @@
                 $_template->cached->timestamp = @filemtime($_template->cached->filepath);
                 $_template->cached->exists = !!$_template->cached->timestamp;
                 if ($_template->cached->exists) {
+=======
+     *
+     * @return bool success
+     * @throws \SmartyException
+     */
+    public function writeCachedContent(Smarty_Internal_Template $_template, $content)
+    {
+        if ($_template->smarty->ext->_writeFile->writeFile(
+                $_template->cached->filepath,
+                $content,
+                $_template->smarty
+            ) === true
+        ) {
+            if (function_exists('opcache_invalidate')
+                && (!function_exists('ini_get') || strlen(ini_get('opcache.restrict_api'))) < 1
+            ) {
+                opcache_invalidate($_template->cached->filepath, true);
+            } elseif (function_exists('apc_compile_file')) {
+                apc_compile_file($_template->cached->filepath);
+            }
+            $cached = $_template->cached;
+            $cached->timestamp = $cached->exists = is_file($cached->filepath);
+            if ($cached->exists) {
+                $cached->timestamp = filemtime($cached->filepath);
+>>>>>>> gosa-core_v2.8
                     return true;
                 }
             }
@@ -110,29 +224,65 @@
         }
 
         /**
+<<<<<<< HEAD
         * Empty cache
         *
         * @param Smarty_Internal_Template $_template template object
         * @param integer                  $exp_time  expiration time (number of seconds, not timestamp)
+=======
+     * Read cached template from cache
+     *
+     * @param Smarty_Internal_Template $_template template object
+     *
+     * @return string  content
+     */
+    public function readCachedContent(Smarty_Internal_Template $_template)
+    {
+        if (is_file($_template->cached->filepath)) {
+            return file_get_contents($_template->cached->filepath);
+        }
+        return false;
+    }
+
+    /**
+     * Empty cache
+     *
+     * @param Smarty  $smarty
+     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     *
+>>>>>>> gosa-core_v2.8
         * @return integer number of cache files deleted
         */
         public function clearAll(Smarty $smarty, $exp_time = null)
         {
+<<<<<<< HEAD
             return $this->clear($smarty, null, null, null, $exp_time);
+=======
+        return $smarty->ext->_cacheResourceFile->clear($smarty, null, null, null, $exp_time);
+>>>>>>> gosa-core_v2.8
         }
 
         /**
         * Empty cache for a specific template
         *
+<<<<<<< HEAD
         * @param Smarty  $_template     template object
+=======
+     * @param Smarty  $smarty
+>>>>>>> gosa-core_v2.8
         * @param string  $resource_name template name
         * @param string  $cache_id      cache id
         * @param string  $compile_id    compile id
         * @param integer $exp_time      expiration time (number of seconds, not timestamp)
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> gosa-core_v2.8
         * @return integer number of cache files deleted
         */
         public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time)
         {
+<<<<<<< HEAD
             $_cache_id = isset($cache_id) ? preg_replace('![^\w\|]+!', '_', $cache_id) : null;
             $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
             $_dir_sep = $smarty->use_sub_dirs ? '/' : '^';
@@ -227,6 +377,9 @@
                 }
             }
             return $_count;
+=======
+        return $smarty->ext->_cacheResourceFile->clear($smarty, $resource_name, $cache_id, $compile_id, $exp_time);
+>>>>>>> gosa-core_v2.8
         }
 
         /**
@@ -234,7 +387,12 @@
         *
         * @param Smarty $smarty Smarty object
         * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
         * @return booelan true or false if cache is locked
+=======
+     *
+     * @return boolean true or false if cache is locked
+>>>>>>> gosa-core_v2.8
         */
         public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
         {
@@ -243,8 +401,17 @@
             } else {
                 clearstatcache();
             }
+<<<<<<< HEAD
             $t = @filemtime($cached->lock_id);
             return $t && (time() - $t < $smarty->locking_timeout);
+=======
+        if (is_file($cached->lock_id)) {
+            $t = filemtime($cached->lock_id);
+            return $t && (time() - $t < $smarty->locking_timeout);
+        } else {
+            return false;
+        }
+>>>>>>> gosa-core_v2.8
         }
 
         /**
@@ -252,6 +419,11 @@
         *
         * @param Smarty $smarty Smarty object
         * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
+=======
+     *
+     * @return bool|void
+>>>>>>> gosa-core_v2.8
         */
         public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
         {
@@ -264,6 +436,11 @@
         *
         * @param Smarty $smarty Smarty object
         * @param Smarty_Template_Cached $cached cached object
+<<<<<<< HEAD
+=======
+     *
+     * @return bool|void
+>>>>>>> gosa-core_v2.8
         */
         public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
         {
@@ -271,5 +448,8 @@
             @unlink($cached->lock_id);
         }
     }
+<<<<<<< HEAD
 
 ?>
+=======
+>>>>>>> gosa-core_v2.8

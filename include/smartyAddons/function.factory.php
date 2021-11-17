@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_factory($params, $smarty)
+function smarty_function_factory($params, &$smarty)
 {
 
     // Capture params
@@ -33,5 +33,3 @@ function smarty_function_factory($params, $smarty)
     }
     return($str);
 }
-  
-?>

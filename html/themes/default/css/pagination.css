@@ -1,0 +1,68 @@
+.pagination-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination-wrapper .select-wrapper input {
+    margin-bottom: 0;
+}
+
+.pagination-wrapper .select-wrapper ul li {
+    text-align: center;
+}
+
+.pagination-wrapper .page-items {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.pagination-wrapper .page-items p {
+    margin-right: 10px;
+}
+
+.pagination-wrapper .page-items input {
+    min-height: 20px;
+    height: 20px!important;
+    font-size: 12px;
+    padding: 0;
+    width: 100px;
+}
+
+.pagination-wrapper .page-items ul li {
+    font-size: 12px;
+    min-height: 20px;
+    line-height: 20px;
+}
+
+.pagination-wrapper .page-items ul li span {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.pagination-wrapper .pagination li {
+    height: 20px;
+    line-height: 20px;
+}
+
+.pagination-wrapper .pagination li a {
+    font-size: 12px;
+    line-height: 18px;
+    padding: 0 5px;
+}
+
+.pagination-wrapper .pagination li i {
+    font-size: 18px;
+}
+
+.pagination-wrapper .pagination li.active {
+    background-color: #2A3278;
+}
