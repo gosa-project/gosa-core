@@ -7,7 +7,7 @@ GOsa2 changelog
   - Fixed unexpected behavior when switching the list view multiple times.
   - Add new GOsa Logo.
   - Add simplified template system for plugins and HTML snippets.
-  - Added switch statements for HTML-snippets to fit the template system.
+  - Added global function for handling HTML snippets that can be customized to the theme.
   - Added new default theme for GOsa-core and all plugins. 
     The old theme can be found under classic.
   - Add account menu for the active user in the new default theme.
