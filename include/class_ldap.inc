@@ -1485,7 +1485,7 @@ class LDAP
     }
 
 
-    function get_naming_contexts($server, $admin= "", $password= "")
+    static function get_naming_contexts($server, $admin= "", $password= "")
     {
         /* Build LDAP connection */
         $ds= ldap_connect ($server);
