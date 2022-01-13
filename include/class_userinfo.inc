@@ -219,7 +219,7 @@ class userinfo
   
             /* Remember which ACL set has speicial user filter 
              */
-            if(isset($acl_set['filter']{1})){
+            if(isset($acl_set['filter'][1])){
               $this->ACLperPath_usesFilter[$sdn] = TRUE;
             }
           
