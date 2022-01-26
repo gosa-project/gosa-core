@@ -217,3 +217,7 @@ function enable_upload(val) {
         upload_ssh_btn.disabled = true;
     }
 }
+
+// js for modal
+let modal = document.querySelectorAll('.modal')
+let modalInstance = M.Modal.init(modal, {})
