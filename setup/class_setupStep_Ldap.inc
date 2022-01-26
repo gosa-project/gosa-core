@@ -29,6 +29,7 @@ class Step_Ldap extends setup_step
   var $base       = "";
   var $append_base_to_admin_dn = FALSE;
   var $admin_given = "";
+  var $policy = FALSE;
 
   var $connect_id = FALSE;
   var $bind_id    = FALSE;
@@ -38,11 +39,11 @@ class Step_Ldap extends setup_step
   var $tls            = FALSE;
 
   var $rfc2307bis             = FALSE;
-  var $attributes = array("connection","location","admin","password","base","admin_given","append_base_to_admin_dn","tls","rfc2307bis");
+  var $attributes = array("connection", "location", "admin", "password", "base", "admin_given", "append_base_to_admin_dn", "tls", "rfc2307bis");
 
-  var $header_image= "images/setup/ldap.png";
+  var $header_image = "images/setup/ldap.png";
 
-    var $b_displayCheckbutton = TRUE;
+  var $b_displayCheckbutton = TRUE;
   function __construct()
   {
     $this->update_strings();
@@ -60,35 +61,37 @@ class Step_Ldap extends setup_step
   function execute()
   {
     $smarty = get_smarty();
-    foreach($this->attributes as $attr){
-      $smarty->assign($attr,htmlentities($this->$attr,ENT_QUOTES,"UTF-8"));
+    foreach ($this->attributes as $attr) {
+      $smarty->assign($attr, htmlentities($this->$attr, ENT_QUOTES, "UTF-8"));
     }
 
     /* Assign connection status */
-    $smarty->assign("connection_status",$this->get_connection_status());
+    $smarty->assign("connection_status", $this->get_connection_status());
+
+    $smarty->assign("policy", $this->policy);
 
     /* Handle namingContext detection */
     $attr = @LDAP::get_naming_contexts($this->connection);
     unset($attr['count']);
-    $smarty->assign("namingContexts",$attr);
-    $smarty->assign("namingContextsCount",count($attr));
-    $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
+    $smarty->assign("namingContexts", $attr);
+    $smarty->assign("namingContextsCount", count($attr));
+    $smarty->assign("bool", array(FALSE => _("No"), TRUE => _("Yes")));
 
     /* Addign resolved users */
-    $smarty->assign("resolve_user",$this->resolve_user);
-    if($this->resolve_user){
+    $smarty->assign("resolve_user", $this->resolve_user);
+    if ($this->resolve_user) {
       $tmp = $this->resolve_user();
-      $smarty->assign("resolved_users",$tmp);
-      $smarty->assign("resolved_users_count",count($tmp));
-      $smarty->assign("resolve_filter",$this->resolve_filter);
+      $smarty->assign("resolved_users", $tmp);
+      $smarty->assign("resolved_users_count", count($tmp));
+      $smarty->assign("resolve_filter", $this->resolve_filter);
     }
 
     $base_to_append = $this->base;
-    if(strlen($base_to_append) > 20){
-      $base_to_append = substr($base_to_append,0,17)."...";
+    if (strlen($base_to_append) > 20) {
+      $base_to_append = substr($base_to_append, 0, 17) . "...";
     }
-    $smarty->assign("base_to_append",$base_to_append);
-    return($smarty -> fetch (get_template_path("../setup/".$GLOBALS['theme']."/setup_ldap.tpl")));
+    $smarty->assign("base_to_append", $base_to_append);
+    return ($smarty->fetch(get_template_path("../setup/" . $GLOBALS['theme'] . "/setup_ldap.tpl")));
   }
 
   function get_connection_status()
@@ -99,29 +102,31 @@ class Step_Ldap extends setup_step
     @ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
     $this->connect_id = ldap_connect($this->connection);
 
-    if($this->tls){
-      if(@ldap_set_option($this->connect_id, LDAP_OPT_REFERRALS, 0))
-        if(@ldap_start_tls($this->connect_id))
+    if ($this->tls) {
+      if (@ldap_set_option($this->connect_id, LDAP_OPT_REFERRALS, 0))
+        if (@ldap_start_tls($this->connect_id))
           $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
       @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
-    }else{
+    } else {
       @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
       $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
     }
 
-    if(!$this->bind_id){
-      $str = sprintf(_("Anonymous bind to server '%s' failed!"),$this->connection);
-      if(!empty($this->admin)){
-        $str = sprintf(_("Bind as user '%s' failed!"),$this->admin,$this->connection);
+
+
+    if (!$this->bind_id) {
+      $str = sprintf(_("Anonymous bind to server '%s' failed!"), $this->connection);
+      if (!empty($this->admin)) {
+        $str = sprintf(_("Bind as user '%s' failed!"), $this->admin, $this->connection);
       }
-      return("<p style='color:red'>".$str."</p>");
-    }else{
-      if(empty($this->admin)){
+      return ("<p style='color:red'>" . $str . "</p>");
+    } else {
+      if (empty($this->admin)) {
         $str = sprintf(_("Anonymous bind to server '%s' succeeded."), $this->connection);
-        return("<p><span style='color:blue'>".$str."</span><br><span style='color:red'>"._("Please specify user and password!")."</span></p>");
-      }else{
-        $str = sprintf(_("Bind as user '%s' to server '%s' succeeded!"),$this->admin,$this->connection);
-        return("<p style='color:green'>".$str."</p>");
+        return ("<p><span style='color:blue'>" . $str . "</span><br><span style='color:red'>" . _("Please specify user and password!") . "</span></p>");
+      } else {
+        $str = sprintf(_("Bind as user '%s' to server '%s' succeeded!"), $this->admin, $this->connection);
+        return ("<p style='color:green'>" . $str . "</p>");
       }
     }
   }
@@ -133,88 +138,122 @@ class Step_Ldap extends setup_step
 
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap_l = new LDAP("","",$this->connection, FALSE, $this->tls);
+    $ldap_l = new LDAP("", "", $this->connection, FALSE, $this->tls);
     $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($this->base);
-    $ldap->search("(&(objectClass=person)(|(uid=".$filter.")(cn=".$filter.")))");
+    $ldap->search("(&(objectClass=person)(|(uid=" . $filter . ")(cn=" . $filter . ")))");
     $tmp = array();
-    while($attrs = $ldap->fetch()){
-      $tmp[base64_encode($attrs['dn'])]= LDAP::fix($attrs['dn']);
+    while ($attrs = $ldap->fetch()) {
+      $tmp[base64_encode($attrs['dn'])] = LDAP::fix($attrs['dn']);
       natcasesort($tmp);
     }
-    return($tmp);
+    return ($tmp);
   }
 
 
   function save_object()
   {
     $reset = FALSE;
-    foreach($this->attributes as $attr){
-      if(isset($_POST[$attr])){
-        if(in_array_strict($attr,array("base","connection")) && $this->$attr != get_post($attr)){
+    foreach ($this->attributes as $attr) {
+      if (isset($_POST[$attr])) {
+        if (in_array_strict($attr, array("base", "connection")) && $this->$attr != get_post($attr)) {
           $reset = TRUE;
         }
         $this->$attr = get_post($attr);
       }
     }
 
-    if($reset){
-      $this->parent->disable_steps_from(($this->parent->step_name_to_id(get_class($this))) +1);
+    if ($reset) {
+      $this->parent->disable_steps_from(($this->parent->step_name_to_id(get_class($this))) + 1);
       $attr = @LDAP::get_naming_contexts($this->connection);
-      if(is_array($attr) && !in_array_strict(get_post("base"),$attr)){
-        if(isset($attr[0])){
+      if (is_array($attr) && !in_array_strict(get_post("base"), $attr)) {
+        if (isset($attr[0])) {
           $this->base = $attr[0];
         }
       }
     }
 
-    if(isset($_POST['resolve_user_x'])){
+    if (isset($_POST['resolve_user_x'])) {
       $this->resolve_user = !$this->resolve_user;
     }
-    if(isset($_POST['resolve_user'])){
+    if (isset($_POST['resolve_user'])) {
       $this->resolve_user = !$this->resolve_user;
     }
 
     /* Hide backward forward button*/
     $this->dialog = $this->resolve_user;
 
-    if(isset($_POST['resolve_filter'])){
+    if (isset($_POST['resolve_filter'])) {
       $this->resolve_filter = get_post('resolve_filter');
     }
 
-    if(isset($_POST['use_selected_user'])){
+    if (isset($_POST['use_selected_user'])) {
 
-      if(isset($_POST['admin_to_use'])){
+      if (isset($_POST['admin_to_use'])) {
         $this->admin = base64_decode(get_post('admin_to_use'));
         $this->resolve_user = false;
       }
     }
 
-    if(isset($_POST['append_base_to_admin_dn'])){
+    if (isset($_POST['append_base_to_admin_dn'])) {
       $this->append_base_to_admin_dn = TRUE;
-    }else{
+    } else {
       $this->append_base_to_admin_dn = FALSE;
     }
 
-    if($this->append_base_to_admin_dn){
-      $base = $this->base;
-      if(!preg_match("/,$/",$this->admin_given)){
-        $base = ",".$base;
+    if (isset($_POST['policy'])) {
+      $this->policy = TRUE;
+      if (isset($_POST['next'])) {
+        $this->connect_id = ldap_connect($this->connection);
+        @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
+        $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
+
+        // Enalbe policy overlay
+        $overlay_dn = 'cn=module{0},cn=config';
+        $policy_attr = 'olcModuleLoad';
+        $policy_overlay[$policy_attr] = 'ppolicy';
+
+        // dont do any if policy overlay allready enabled
+        $res = ldap_search($this->connect_id, 'cn=config', '(objectClass=olcModuleList)', array($policy_attr));
+        $entries = ldap_get_entries($this->connect_id, $res);
+
+        $grep = preg_grep(sprintf('/.*%s/', $policy_overlay[$policy_attr]), $entries[0][strtolower($policy_attr)]);
+        if (empty($grep)) {
+          ldap_mod_add($this->connect_id, $overlay_dn, $policy_overlay);
+
+          // Configure policy overlay
+          $conf_dn = 'olcOverlay=ppolicy,olcDatabase={1}mdb,cn=config';
+          $policy_conf = array();
+          $policy_conf['objectClass'] = 'olcPpolicyConfig';
+          $policy_conf['olcOverlay'] = 'ppolicy';
+          $policy_conf['olcPPolicyDefault'] = 'cn=ppolicy,' . $this->base;
+          $policy_conf['olcPPolicyUseLockout'] = 'FALSE';
+          $policy_conf['olcPPolicyHashCleartext'] = 'TRUE';
+
+          ldap_add($this->connect_id, $conf_dn, $policy_conf);
+        }
       }
-      $this->admin = $this->admin_given.$base;
-    }else{
+    } else {
+      $this->policy = FALSE;
+    }
+
+    if ($this->append_base_to_admin_dn) {
+      $base = $this->base;
+      if (!preg_match("/,$/", $this->admin_given)) {
+        $base = "," . $base;
+      }
+      $this->admin = $this->admin_given . $base;
+    } else {
       $this->admin = $this->admin_given;
     }
 
     $this->get_connection_status();
-    if($this->bind_id && !empty($this->admin) && !empty($this->base)){
-      $this->is_completed =TRUE;
-    }else{
-      $this->is_completed =FALSE;
+    if ($this->bind_id && !empty($this->admin) && !empty($this->base)) {
+      $this->is_completed = TRUE;
+    } else {
+      $this->is_completed = FALSE;
     }
-
   }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
