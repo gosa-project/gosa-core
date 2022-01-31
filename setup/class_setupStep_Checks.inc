@@ -226,7 +226,7 @@ class Step_Checks extends setup_step
     $N = "memory_limit &gt;= <b>32</b>";
     $D = _("GOsa needs at least 32MB of memory. Setting it below this limit may cause errors that are not reproducible! Increase it for larger setups.");
     $S = _("Search for 'memory_limit' in your php.ini and set it to '32M' or higher.");
-    $R = ini_get('memory_limit') >= 32 ;
+    $R = (int)ini_get('memory_limit') >= 32;
     $M = TRUE;
     $this->config_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
