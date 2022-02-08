@@ -1,7 +1,6 @@
 <div class="content-wrapper card-content-scroll">
     {if $method == "default"}
-    <p>{t}During the LDAP inspection, we're going to check for several common pitfalls that may occur when migration to
-        GOsa base LDAP administration. You may want to fix the problems below, in order to provide smooth services.{/t}
+    <p>{t}During the LDAP inspection, we're going to check for several common pitfalls that may occur when migration to GOsa base LDAP administration. You may want to fix the problems below, in order to provide smooth services.{/t}
     </p>
 
     <div class="setup-ldap-table card-content-scroll">
@@ -97,59 +96,7 @@
         <button class="btn-small primary" type='submit' name='create_acls_cancel'>{t}Cancel{/t}</button>
     </div>
 
-    {elseif $method == "add_pwd_policy"}
-    <h2>Create the password policy </h2>
-
-    <div class="row">
-        <div class="col s12 xl6">
-            <div class="input-field">
-                <input type="text" id="pwdFailureCountInterval" {if $pwdFailureCountInterval} value="{$pwdFailureCountInterval}" {/if} name="pwdFailureCountInterval">
-                <label for="pwdFailureCountInterval">Failure count interval</label>
-            </div>
-
-            <div class="valign-wrapper" style="display: flex;">
-                <label>
-                    <input type="checkbox" name="enable_pwdInHistory" id="enable_pwdInHistory" onclick="enableHistoryInput()">
-                    <span>Enable maximum number of used Passwords stored</span>
-                </label>
-                <div class="input-field" style="margin-left: 15px;">
-                    <input type="text" id="pwdInHistory" name="pwdInHistory" disabled {if $pwdInHistory} value="{$pwdInHistory}" {/if}>
-                </div>
-            </div>
-
-            <div class="input-field">
-                <input type="text" id="pwdMaxFailure" name="pwdMaxFailure" {if $pwdMaxFailure} value="{$pwdMaxFailure}" {/if}>
-                <label for="pwdMaxFailure">Maximum login attempts</label>
-            </div>
-
-            <div class="input-field">
-                <input type="text" id="pwdLockoutDuration" name="pwdLockoutDuration" {if $pwdLockoutDuration} value="{$pwdLockoutDuration}" {/if}> 
-                <label for="pwdLockoutDuration">Waiting time in seconds, after too many consecutive failed connection attempts.</label>
-            </div>
-
-            <div class="input-field">
-                <input type="text" id="pwdMinLength" name="pwdMinLength" {if $pwdMinLength} value="{$pwdMinLength}" {/if}>
-                <label for="pwdMinLength">Minimum number of characters for password</label>
-            </div>
-        </div>
-    </div>
-
-    <script language="JavaScript" type="text/javascript">
-        // First input field on page
-        focus_field('pwdFailureCountInterval');
-
-        function enableHistoryInput() {
-            var chkEnableHistory = document.getElementById('enable_pwdInHistory');
-            var enableHistory = document.getElementById('pwdInHistory');
-            enableHistory.disabled = !chkEnableHistory.checked;
-        }
-
-    </script>
-
-    <div class="plugin-actions card-action setup-exception">
-        <button class="btn-small primary" type='submit' name='create_pwd_policy'>{t}Apply{/t}</button>
-        <button class="btn-small primary" type='submit' name='create_pwd_cancel'>{t}Cancel{/t}</button>
-    </div>
+    
 
     {/if}
 </div>

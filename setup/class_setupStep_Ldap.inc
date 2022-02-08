@@ -29,7 +29,6 @@ class Step_Ldap extends setup_step
   var $base       = "";
   var $append_base_to_admin_dn = FALSE;
   var $admin_given = "";
-  var $policy = FALSE;
 
   var $connect_id = FALSE;
   var $bind_id    = FALSE;
@@ -67,8 +66,6 @@ class Step_Ldap extends setup_step
 
     /* Assign connection status */
     $smarty->assign("connection_status", $this->get_connection_status());
-
-    $smarty->assign("policy", $this->policy);
 
     /* Handle namingContext detection */
     $attr = @LDAP::get_naming_contexts($this->connection);
@@ -111,8 +108,6 @@ class Step_Ldap extends setup_step
       @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
       $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
     }
-
-
 
     if (!$this->bind_id) {
       $str = sprintf(_("Anonymous bind to server '%s' failed!"), $this->connection);
@@ -199,42 +194,6 @@ class Step_Ldap extends setup_step
       $this->append_base_to_admin_dn = TRUE;
     } else {
       $this->append_base_to_admin_dn = FALSE;
-    }
-
-    if (isset($_POST['policy'])) {
-      $this->policy = TRUE;
-      if (isset($_POST['next'])) {
-        $this->connect_id = ldap_connect($this->connection);
-        @ldap_set_option($this->connect_id, LDAP_OPT_PROTOCOL_VERSION, 3);
-        $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
-
-        // Enalbe policy overlay
-        $overlay_dn = 'cn=module{0},cn=config';
-        $policy_attr = 'olcModuleLoad';
-        $policy_overlay[$policy_attr] = 'ppolicy';
-
-        // dont do any if policy overlay allready enabled
-        $res = ldap_search($this->connect_id, 'cn=config', '(objectClass=olcModuleList)', array($policy_attr));
-        $entries = ldap_get_entries($this->connect_id, $res);
-
-        $grep = preg_grep(sprintf('/.*%s/', $policy_overlay[$policy_attr]), $entries[0][strtolower($policy_attr)]);
-        if (empty($grep)) {
-          ldap_mod_add($this->connect_id, $overlay_dn, $policy_overlay);
-
-          // Configure policy overlay
-          $conf_dn = 'olcOverlay=ppolicy,olcDatabase={1}mdb,cn=config';
-          $policy_conf = array();
-          $policy_conf['objectClass'] = 'olcPpolicyConfig';
-          $policy_conf['olcOverlay'] = 'ppolicy';
-          $policy_conf['olcPPolicyDefault'] = 'cn=ppolicy,' . $this->base;
-          $policy_conf['olcPPolicyUseLockout'] = 'FALSE';
-          $policy_conf['olcPPolicyHashCleartext'] = 'TRUE';
-
-          ldap_add($this->connect_id, $conf_dn, $policy_conf);
-        }
-      }
-    } else {
-      $this->policy = FALSE;
     }
 
     if ($this->append_base_to_admin_dn) {

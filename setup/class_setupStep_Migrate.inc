@@ -41,14 +41,6 @@ class Step_Migrate extends setup_step
     var $rootOC_details = array();
     var $b_displayCheckbutton = TRUE;
 
-    /* Create pwd policy attributes */
-    var $pwdPolicy_create_dialog = FALSE;
-    var $pwdPolicy_create_confirmed = FALSE;
-
-    var $policy_dn = 'cn=ppolicy,dc=gosa,dc=de'; // (add your LDAP domain e.g. dc=gosa,dc=de)
-    var $policy_conf = array();
-
-
     function __construct()
     {
         $this->update_strings();
@@ -96,14 +88,6 @@ class Step_Migrate extends setup_step
         $this->checks['acls']['ACTION'] = "";
 
         $this->check_administrativeAccount();
-
-        $this->checks['policy']['TITLE']    = "Checking password policy";
-        $this->checks['policy']['STATUS']   = FALSE;
-        $this->checks['policy']['STATUS_MSG'] = "";
-        $this->checks['policy']['ERROR_MSG'] = "";
-        $this->checks['policy']['ACTION'] = "";
-
-        $this->check_policy();
     }
 
 
@@ -336,7 +320,7 @@ class Step_Migrate extends setup_step
                 $this->checks['acls']['STATUS']    = FALSE;
                 $this->checks['acls']['STATUS_MSG'] = _("Failed");
                 $this->checks['acls']['ERROR_MSG'] = _("There is no GOsa administrator account inside your LDAP.");
-                $this->checks['acls']['ACTION'] .= "<button class='btn-small create' type='submit' name='create_acls'>" . _("Create") . "</button>";
+                $this->checks['acls']['ACTION'] = "<button class='btn-small create' type='submit' name='create_acls'>" . _("Create") . "</button>";
             }
         }
 
@@ -634,46 +618,6 @@ class Step_Migrate extends setup_step
             return ($smarty->fetch(get_template_path("setup_migrate.tpl", TRUE, dirname(__FILE__))));
         }
 
-        /************
-         * Password policy -- Create
-         ************/
-
-        if (isset($_POST['add_pw_policy'])) {
-            $this->policy_conf = $this->init_default_policy_config();
-            $this->pwdPolicy_create_dialog = TRUE;
-            $this->dialog = TRUE;
-        }
-
-        if (isset($_POST['create_pwd_policy'])) {
-            $this->pwdPolicy_create_confirmed = TRUE;
-            $this->pwdPolicy_create_dialog = FALSE;
-            $this->dialog = FALSE;
-        }
-
-        if (isset($_POST['create_pwd_cancel'])) {
-            $this->pwdPolicy_create_confirmed = FALSE;
-            $this->pwdPolicy_create_dialog = FALSE;
-            $this->dialog = FALSE;
-        }
-
-        if ($this->pwdPolicy_create_dialog) {
-            $smarty = get_smarty();
-            $smarty->assign('pwdFailureCountInterval', $this->policy_conf['pwdFailureCountInterval']);
-            $smarty->assign('pwdInHistory', $this->policy_conf['pwdInHistory']);
-            $smarty->assign('pwdMaxFailure', $this->policy_conf['pwdMaxFailure']);
-            $smarty->assign('pwdLockoutDuration', $this->policy_conf['pwdLockoutDuration']);
-            $smarty->assign('pwdMinLength', $this->policy_conf['pwdMinLength']);
-            $smarty->assign('method', "add_pwd_policy");
-            $this->check_policy();
-            return ($smarty->fetch(get_template_path("setup_migrate.tpl", TRUE, dirname(__FILE__))));
-        }
-
-        if ($this->pwdPolicy_create_confirmed) {
-            $this->create_policy_config();
-            $this->pwdPolicy_create_confirmed = FALSE;
-            $this->check_policy();
-        }
-
         $smarty = get_smarty();
         $smarty->assign("checks", $this->checks);
         $smarty->assign("method", "default");
@@ -928,97 +872,6 @@ class Step_Migrate extends setup_step
             }
         }
         return (preg_replace("/\n$/", "", $ret));
-    }
-
-    function check_policy()
-    {
-        // Establish ldap connection
-        $cv = $this->parent->captured_values;
-        $ldap_l = new LDAP(
-            $cv['admin'],
-            $cv['password'],
-            $cv['connection'],
-            FALSE,
-            $cv['tls']
-        );
-
-        $ldap = new ldapMultiplexer($ldap_l);
-
-        /* Check if policy object exists */
-        $ldap->cd($this->policy_dn);
-        $ldap->cat($this->policy_dn);
-        if (!$ldap->count()) {
-            $this->checks['policy']['STATUS']    = FALSE;
-            $this->checks['policy']['STATUS_MSG'] = _("LDAP query failed");
-            $this->checks['policy']['ERROR_MSG'] = "Possibly the 'pwdPolicy' configuration is missing.";
-            $this->checks['policy']['ACTION'] = "<button class='btn-small' type='submit' name='add_pw_policy'>Add policy</button>";
-            return;
-        } else {
-            $this->checks['policy']['STATUS']    = TRUE;
-            $this->checks['policy']['STATUS_MSG'] = _("OK");
-            $this->checks['policy']['ERROR_MSG'] = "";
-            $this->checks['policy']['ACTION'] = "";
-        }
-    }
-
-    function init_default_policy_config() {
-        return array(
-            'cn' => 'ppolicy',
-            'objectClass' => array(
-                'device', 
-                'pwdPolicyChecker', 
-                'pwdPolicy'),
-            'pwdAllowUserChange' => 'TRUE',     // Specifies whether users are allowed to change their own passwords or not.
-            'pwdAttribute' => 'userPassword',   // Name of the attribute to which the password policy is applied - NOTE: the only value accepted is 'userPassword'.
-            'pwdCheckQuality' => '1',           /* Indicates if and how password syntax will be checked while a password is being modified or added.
-                                                * - 0 = No syntax checking.
-                                                * - 1 = Syntax checking, if the server is unable to check the syntax, password will be accepted.
-                                                * - 2 = Syntax checking without exceptions, return an error refusing the password.
-                                                */
-            'pwdMinLength' => '5',              // Minimum number of characters that will be accepted in a password.
-            'pwdExpireWarning' => '0',          // Seconds before a password is due to expire, warning messages will be returned.
-            'pwdFailureCountInterval' => '30',  // Seconds after which old consecutive failed bind attempts are purged from the failure counter.
-            'pwdInHistory' => '0',              // Maximum number of used passwords that will be stored in 'pwdHistory'.
-            'pwdLockout' => 'TRUE',             /* The action when a user has reached max failed Login attempts. 
-                                                * TRUE = not allowed to Login, 
-                                                * False = allowed to Login regardless of the failures
-                                                */
-            'pwdLockoutDuration' => '30',       // Seconds during which the password cannot be used after reach max Login attempts.
-            'pwdMaxFailure' => '5',             // Consecutive failed bind attempts.
-            'pwdMaxAge' => '0',                 // Seconds after which a modified password will expire.
-            'pwdMinAge' => '0',                 // Seconds that must elapse between modifications allowed to the password.
-            'pwdMustChange' => 'FALSE',         // Users must change their passwords when they bind for the first time.
-            'pwdSafeModify' => 'FALSE',         // User's existing password must be sent along with their new password when changing a password.
-            );
-    }
-
-    function create_policy_config()
-    {
-        foreach ($_POST as $key => $value) {
-            if (array_key_exists($key, $this->policy_conf)) {
-                $this->policy_conf[$key] = $value;
-            }
-        }
-
-        // Establish ldap connection
-        $cv = $this->parent->captured_values;
-        $ldap_l = new LDAP(
-            $cv['admin'],
-            $cv['password'],
-            $cv['connection'],
-            FALSE,
-            $cv['tls']
-        );
-
-        $ldap = new ldapMultiplexer($ldap_l);
-        $ldap->cd($this->policy_dn);
-        if (isset($this->policy_conf)) {
-            $res = $ldap->add($this->policy_conf);
-
-            if (!$res) {
-                msg_dialog::display(_("LDAP error"), $ldap->get_error(), ERROR_DIALOG);
-            }
-        }
     }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

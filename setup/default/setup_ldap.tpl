@@ -1,8 +1,7 @@
 <div class="content-wrapper card-content-scroll">
     <div class="row">
         <div class="col s12 xl6">
-            {t}The main data source used in GOsa is LDAP. In order to access the information stored there, please enter
-            the required information.{/t}
+            {t}The main data source used in GOsa is LDAP. In order to access the information stored there, please enter the required information.{/t}
         </div>
 
         <div class="col s12 xl6">
@@ -128,23 +127,6 @@
 
     <hr class="divider">
 
-    <div class="policy-wrapper">
-        <h2>Activate account policy overlay </h2>
-        <div class="row">
-            <div class="col s12 xl6 policy-overlay">
-                <label>
-                    <input type="checkbox" {if $policy} checked {/if} id="policy-overlay" name="policy" value="1">
-                    <span>Use account policy?</span>
-                </label>
-            </div>
-            <div class="col s12 xl6">
-                <button data-target="instruction" class="btn-small modal-trigger"><i class="material-icons left">help_outline</i>Enable policy instuction</button>
-            </div>
-        </div>
-    </div>
-
-    <hr class="divider">
-
     <div class="schema-wrapper">
         <h2>{t}Schema based settings{/t}</h2>
 
@@ -160,42 +142,6 @@
         </div>
     </div>
     {/if}
-
-
-    <!-- Instruction modal -->
-    <div id="instruction" class="modal">
-        <div class="modal-content">
-            <h4>Enable policy overlay</h4>
-            <p>To enable the policy overlay you need to include the ppolicy schema in ldap. Set access rights to server configuration for the LDAP Administrator</p>
-            <p>Create <i>acces-admin.ldif</i> with folowing content:</p>
-            <div class="policy_instruction_code">
-                <code>
-                    dn: olcDatabase={0}config,cn=config <br>
-                    changeType: modify <br>
-                    add: olcAccess <br>
-                    olcAccess: to * by dn.exact=cn=<b>(Administrator)</b>,<b>(Base dn)</b>
-                    manage by * break
-                </code>
-            </div>
-            <p>Execute the modify command on the LDAP-Server</p>
-            <div class="policy_instruction_code">
-                <code>
-                    sudo ldapmodify -Y external -H ldapi:/// -f acces-admin.ldif
-                </code>
-            </div>
-            <p>Enable ppolicy schema - NOTE: By default, the ppolicy schema is installed, but not
-                enabled.
-            </p>
-            <div class="policy_instruction_code">
-                <code>
-                    ldapmodify -x -a -H ldap://localhost -D <b>(Administrator)</b>,<b>(Base dn)</b> -w <b>(Password)</b> -f (Path to .ldif e.g. /etc/ldap/schema/ppolicy.ldif)
-                </code>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close btn-flat">Close</a>
-        </div>
-    </div>
 
     <!-- Place cursor -->
     <script language="JavaScript" type="text/javascript">

@@ -48,12 +48,12 @@
 		<div id="e_layerTitle{$i_ID}" class="modal-content">
 			<div class="attention-head">
 				{if $i_Type == $smarty.const.ERROR_DIALOG}
-					{image path='<i class="material-icons left">error</i>'}
+					<i class="material-icons left">error</i>
 				{elseif $i_Type == $smarty.const.WARNING_DIALOG}
-					{image path='<i class="material-icons left">warning</i>'}
+					<i class="material-icons left">warning</i>
 				{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG ||
 					$i_Type == $smarty.const.OK_CANCEL_DIALOG}
-					{image path='<i class="material-icons left">info_outline</i>'}
+					<i class="material-icons left">info_outline</i>
 				{/if}
 
 				<h2>{$s_Title}</h2>
@@ -90,12 +90,12 @@
 		<div id="e_layerTitle{$i_ID}" class="modal-content attention-elem">
 			<div class="attention-head">
 				{if $i_Type == $smarty.const.ERROR_DIALOG}
-					{image path='<i class="material-icons left">error</i>'}
+					<i class="material-icons left">error</i>
 				{elseif $i_Type == $smarty.const.WARNING_DIALOG}
-					{image path='<i class="material-icons left">warning</i>'}
+					<i class="material-icons left">warning</i>
 				{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG ||
 					$i_Type == $smarty.const.OK_CANCEL_DIALOG}
-					{image path='<i class="material-icons left">info_outline</i>'}
+					<i class="material-icons left">info_outline</i>
 				{/if}
 
 				<h2>{$s_Title}</h2>
