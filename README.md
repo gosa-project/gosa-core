@@ -117,6 +117,10 @@ Sebastian Sternfeld <sternfeld@gonicus.de>
 
 ## Debug GOsa² core and plugins using Xdebug
 
+**DISCLAIMER**: DO NOT, and I repeat **DO NOT** use this on production webservers!
+Enabling a debugger can easily lead to *compromised* data, data *loss*, Remote code execution and more!
+So please, use a isolated development server, without any important user data.
+
 1. Install the `php-xdebug` package on your GOsa² server by executing the following command:
 
 Debian (9+): `sudo apt install php-xdebug`
