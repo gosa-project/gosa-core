@@ -125,7 +125,7 @@ class LDAP
                 self::$$attr = $data[$attr];
             }
             
-            $attrs = array(implode(',', self::$characterMapRegFrom),',', implode(self::$characterMapRegTo,));
+            $attrs = array(implode(", ", self::$characterMapRegFrom), implode(", ", self::$characterMapRegTo));
             @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"(Cached) Detected special-char handling for LDAP actions");
             return;
         }
@@ -174,7 +174,7 @@ class LDAP
         }
         session::set("self::updateSpecialCharHandling", $data);
 
-        $attrs = array(implode(', ', self::$characterMapRegFrom),implode(', ', self::$characterMapRegTo));
+        $attrs = array(implode(", ", self::$characterMapRegFrom),implode(", ", self::$characterMapRegTo));
         @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"Detected special-char handling for LDAP actions");
     }
 
