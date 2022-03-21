@@ -1,7 +1,7 @@
 <div class="policy-wrapper">
-    {if !$policy_config}
-    <h2>Activate account policy overlay </h2>
+    {if !$policy_config && !$twoFactor_config}
     <div class="row">
+        <h2>Activate account policy overlay</h2>
         <div class="col s12 xl6 policy-overlay">
             <label>
                 <input onclick="document.mainform.submit()" type="checkbox" {if $policy} checked {/if} id="policy-overlay" name="policy" value="1">
@@ -13,7 +13,17 @@
             <button {if !$policy} disabled {/if} class="btn-small" type="submit" name="config_policy">Config policies</button>
         </div>
     </div>
-    {else}
+
+    <div class="row">
+        <h2>Activate two factor authentication</h2>
+        <div class="col s12 xl6 two-factor-overlay">
+            <label>
+                <input onclick="document.mainform.submit()" type="checkbox" {if $twoFactor} checked {/if} id="two-factor-overlay" name="twoFactor" value="1">
+                <span>Use two factor authentication?</span>
+            </label>
+        </div>
+    </div>
+    {elseif $policy_config}
     <h2>Create the password policy </h2>
     
     <div class="row">
@@ -60,6 +70,10 @@
         <button class="btn-small primary" type='submit' name='create_policy'>{t}Apply{/t}</button>
         <button class="btn-small primary" type='submit' name='create_policy_cancel'>{t}Cancel{/t}</button>
     </div>
+    {elseif $twoFactor_config}
+        <div>
+            2FA works!
+        </div>
     {/if}
 </div>
 
