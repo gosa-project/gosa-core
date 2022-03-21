@@ -13,7 +13,8 @@
     font-weight: bold;
 }
 
-.login-wrapper .attention {
+.login-wrapper .attention, 
+.tfa-auth-wrapper .attention {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -24,7 +25,8 @@
 }
 
 .login-wrapper .attention i,
-.card-panel.attention i {
+.card-panel.attention i, 
+.tfa-auth-wrapper .attention i {
     margin-right: 10px;
     font-size: 18px;
 }
@@ -42,6 +44,25 @@
     margin-top: 0;
 }
 
+.tfa-auth-wrapper .card-content{
+    display: grid;
+    grid-auto-flow: row;
+    grid-row-gap: 1rem;
+}
+
+.tfa-auth-wrapper .card-content .qr-headline {
+    font-weight: bold;
+}
+
+.tfa-auth-wrapper .card-content .qr-wrapper img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tfa-auth-wrapper .card-content .input-field .prefix {
+    top: 0;
+}
 
 /* Logout */
 
