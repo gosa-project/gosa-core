@@ -31,6 +31,10 @@ class Step_Policy extends setup_step
 
     var $policy_settings = array();
 
+    var $twoFactor = FALSE;
+    var $twoFactor_config = FALSE;
+    var $twoFactor_ou = '';
+
     var $b_displayCheckbutton = TRUE;
 
 
@@ -52,6 +56,10 @@ class Step_Policy extends setup_step
 
         $this->cv = $this->parent->captured_values;
 
+
+        /**
+         * Policy setup
+         */
         if (isset($_POST['policy'])) {
             $this->policy = TRUE;
             $this->load_policy_module();
@@ -90,8 +98,22 @@ class Step_Policy extends setup_step
             $this->create_default_policies();
         }
 
+        /**
+         * 2FA setup
+         */
+        if (isset($_POST['twoFactor'])) {
+            $this->twoFactor = TRUE;
+            $this->load_otp_module();
+            $this->set_otp_topLevelParams($this->twoFactor);
+        } else {
+            $this->twoFactor = FALSE;
+            $this->set_otp_topLevelParams($this->twoFactor);
+        }
+
         $smarty->assign('policy', $this->policy);
         $smarty->assign('policy_config', $this->policy_config);
+        $smarty->assign('twoFactor', $this->twoFactor);
+        $smarty->assign('twoFactor_config', $this->twoFactor_config);
         return ($smarty->fetch(get_template_path("../setup/" . $GLOBALS['theme'] . "/setup_policy.tpl")));
     }
 
@@ -140,12 +162,12 @@ class Step_Policy extends setup_step
         $policy_overlay = array(
             'objectClass' => 'olcOverlayConfig',
             'objectClass' => 'olcPpolicyConfig',
-            'olcOverlay' => 'ppolicy',
+            'olcOverlay' => 'ppolicy.la',
             'olcPPolicyDefault' => $this->policy_dn,
             'olcPPolicyHashCleartext' => 'TRUE',
         );
 
-        $ldap = $this->auth_ldap('cn=config', $this->cv['password'], $this->cv['connection'], $this->cv['tls']);
+        $ldap = $this->auth_ldap('cn=admin,cn=config', $this->cv['password'], $this->cv['connection'], $this->cv['tls']);
         $ldap->cd($conf_dn);
 
         if ($create) {
@@ -241,6 +263,47 @@ class Step_Policy extends setup_step
                 'pwdMustChange' => 'FALSE',         // Users must change their passwords when they bind for the first time.
                 'pwdSafeModify' => 'FALSE',         // User's existing password must be sent along with their new password when changing a password.
             );
+        }
+    }
+
+    function load_otp_module()
+    {
+        $otp_dn = 'cn=module{0},cn=config';
+        $otp_module['olcModuleLoad'] = 'otp.la';
+
+        $ldap = $this->auth_ldap('cn=admin,cn=config', $this->cv['password'], $this->cv['connection'], $this->cv['tls']);
+        $ldap->cd($otp_dn);
+
+        $ldap->mod_add($otp_module, $otp_dn);
+    }
+
+    function set_otp_topLevelParams($create)
+    {
+        $this->twoFactor_ou = 'ou=otp,ou=configs,ou=systems,' . $this->cv['base'];
+        $otp_params['objectClass'] = 'oathTOTPParams';
+        $otp_params['oathOTPLength'] = '6';
+        # choose SHA1, algorithm OIDs are specified in RFC 8018
+        $otp_params['oathHMACAlgorithm'] = '1.2.840.113549.2.7';
+        $otp_params['oathTOTPTimeStepPeriod'] = '30';
+        $otp_params['oathTOTPTimeStepWindow'] = '3';
+
+        $ldap = $this->auth_ldap($this->cv['admin'], $this->cv['password'], $this->cv['connection'], $this->cv['tls']);
+        $ldap->cd($this->cv['base']);
+
+        if ($create) {
+            $ldap->create_missing_trees($this->twoFactor_ou);
+            if ($ldap->dn_exists($this->twoFactor_ou)) {
+                $ldap->mod_add($otp_params, $this->twoFactor_ou);
+            }
+        } else {
+            $pt = $this->twoFactor_ou;
+
+            foreach (explode(',', $pt) as $value) {
+                if (!in_array($value, explode(',', $this->cv['base']))) {
+                    $ldap->rmdir($pt);
+                    $pt = str_replace($value . ',', '', $pt);
+                }
+            }
         }
     }
 
