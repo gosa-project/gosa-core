@@ -76,6 +76,7 @@ define('DES3_CBC_SHA1', 16);
 include_once("class_location.inc");
 require_once("functions_debug.inc");
 require_once("accept-to-gettext.inc");
+require_once("tfa_verification.inc");
 
 /* Define constants for debugging */
 define("DEBUG_TRACE",   1); /*! Debug level for tracing of common actions (save, check, etc.) */
@@ -732,7 +733,7 @@ function ldap_check_otp_activation()
 }
 
 /* Request LDAP for otp configuration */
-function ldap_get_otp_values($userinfo)
+function ldap_get_otp_values($dn)
 {
   global $config;
 
@@ -748,7 +749,7 @@ function ldap_get_otp_values($userinfo)
 
   /* Get configuration dn from user attribute "oathTOTPParams" */
   $otp_config = 'oathTOTPParams';
-  $config_dn = $ldap->get_attribute($userinfo->dn, $otp_config);
+  $config_dn = $ldap->get_attribute($dn, $otp_config);
 
   /* Get configuration values for authentication config */
   $otp_values = array('oathOTPLength', 'oathTOTPTimeStepPeriod');
@@ -760,7 +761,7 @@ function ldap_get_otp_values($userinfo)
 }
 
 /* Request LDAP if user are ready for tfa */
-function ldap_check_tfa_params($userinfo)
+function ldap_check_tfa_params($uid)
 {
   global $config;
 
@@ -775,7 +776,7 @@ function ldap_check_tfa_params($userinfo)
   }
   $ldap->cd($config->current['BASE']);
 
-  $filter = "(&(uid=" . $userinfo->uid . ")(objectClass=oathTOTPUser))";
+  $filter = "(&(uid=" . $uid . ")(objectClass=oathTOTPUser))";
   $ldap->search($filter, ['uid']);
   if ($ldap->count()) {
     return TRUE;
@@ -816,11 +817,42 @@ function ldap_set_two_factor_params($dn)
 
   $ldap->mod_add($TOTPParams, $dn);
 
-  return ($ldap->get_error() === "Success");
+  return [($ldap->get_error() === "Success"), $ldap->get_error];
+}
+
+function ldap_unset_two_factor_params($dn)
+{
+  global $config;
+
+  $ldap = $config->get_ldap_link();
+  if (!$ldap->success()) {
+    msg_dialog::display(
+      _("LDAP error"),
+      msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH) . "<br><br>" . session::get('errors'),
+      FATAL_ERROR_DIALOG
+    );
+    exit();
+  }
+
+  /* fetch the dn for top level otp parameters */
+  $filter = "(&(objectClass=oathTOTPParams)(objectClass=organizationalUnit))";
+  $ldap->search($filter, ['dn']);
+  $res = $ldap->fetch();
+
+  /* Define attributes for user specific OTP-Parameter */
+  $TOTPParams = array();
+  $TOTPParams['objectClass'] = ['oathTOTPToken', 'oathTOTPUser'];
+  $TOTPParams['oathTOTPParams'] = array();
+  $TOTPParams['oathSecret'] = array();
+  $TOTPParams['oathTOTPToken'] = array();
+
+  $ldap->rm($TOTPParams, $dn);
+
+  return [($ldap->get_error() === "Success"), $ldap->get_error];
 }
 
 /* Get the binary secret form user entry */
-function get_otp_secret($userinfo)
+function get_otp_secret($dn, $uid)
 {
   global $config;
 
@@ -834,17 +866,29 @@ function get_otp_secret($userinfo)
     exit();
   }
 
-  $res = $ldap->get_attribute($userinfo->dn, "oathSecret");
+  $res = $ldap->get_attribute($dn, "oathSecret");
 
   if ($res) {
     return $res;
   } else {
     msg_dialog::display(
       "Attribute is empty",
-      "No secret set for user $userinfo->uid",
+      "No secret set for user $uid",
       WARNING_DIALOG
     );
   }
+}
+
+/* Get the generated QR code */
+function get_qrCode ($uid, $token) 
+{
+  return generate_qrCode($uid, $token);
+}
+
+// Return the result of the tfa validation
+function get_secret_verification ($token, $code, $otp_config)
+{
+  return verify_secret($token, $code, $otp_config);
 }
 
 /*! \brief      Checks the posixAccount status by comparing the shadow attributes.
