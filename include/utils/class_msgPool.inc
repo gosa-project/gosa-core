@@ -368,6 +368,32 @@ class msgPool
     }
   }
 
+  public static function verifyTFA($qr_code)
+  {
+    $qr = "<img class='materialboxed' src='$qr_code' alt='qr code is broken or empty'>";
+    $input = "<input type='text' id='validation' name='validation' maxlength='6'>";
+    return $info =  "<p>
+                      "._('Your two factor authentication is enabled and must be used for a successful login.') . "
+                    </p>
+                    " . _('Please install Google Authenticator App in your phone, open it and then scan the QR-Code to add GOsa-Application authentication. After you install this application on your smartphone, enter the code from Google Authenticator in the input field that appears after login to complete the verification process.') . "
+                    <p>
+                    " . _('To complete the activation you need to enter the code. The QR code is displayed only once. If the code is no longer available, you must notify an administrator to disable the two factor authentication.') . "
+                    <p>
+                    <div class='row'>
+                      <div class='valign-wrapper'>
+                        <div class='col s6 xl6'>
+                        " . $qr . "
+                        </div>
+                        <div class='col s6 xl6'>
+                          <div class='input-field'>
+                            " . $input . "
+                            <label>" . _('Enter code') . "</label>
+                          <div>
+                        </div>
+                      </div>
+                    </div>";
+  }
+
 
   public static function featuresDisabled($name, $depends= "")
   {
@@ -558,6 +584,15 @@ class msgPool
     return _("The supplied base is not valid and has been reset to its previous value!");
   }
 
+  public static function check_tfa($img, $dn)
+  {
+    $message = array();
+    $message['img'] = $img;
+    $message['info'] = sprintf(_("To complete the activation for %s, you must enter the code from the app."), $dn);
+    $message['hint'] = _("If the code is not available or does not work, contact an administrator.");
+
+    return $message;
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
