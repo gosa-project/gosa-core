@@ -144,10 +144,5 @@ $class_mapping= array(
                 "multi_plug" => "include/class_multi_plug.inc",
                 "userFilterEditor" => "include/class_userFilterEditor.inc",
                 "Print_a_class" => "include/functions_debug.inc",
-                "FixedBitNotation" => "include/sonata/FixedBitNotation.php",
-                "GoogleAuthenticator" => "include/sonata/GoogleAuthenticator.php",
-                "GoogleAuthenticatorInterface" => "include/sonata/GoogleAuthenticatorInterface.php",
-                "GoogleQrUrl" => "include/sonata/GoogleQrUrl.php",
-                "RuntimeException" => "include/sonata/RuntimeException.php",
                 "pluglist" => "include/class_pluglist.inc",
  );
