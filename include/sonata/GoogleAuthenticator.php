@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 
 // namespace Sonata\GoogleAuthenticator;
+include "GoogleAuthenticatorInterface.php";
 
 /**
  * @see https://github.com/google/google-authenticator/wiki/Key-Uri-Format
@@ -175,4 +176,4 @@ final class GoogleAuthenticator implements GoogleAuthenticatorInterface
 }
 
 // NEXT_MAJOR: Remove class alias
-// class_alias('Sonata\GoogleAuthenticator\GoogleAuthenticator', 'Google\Authenticator\GoogleAuthenticator', false);
+//class_alias('Sonata\GoogleAuthenticator\GoogleAuthenticator', 'Google\Authenticator\GoogleAuthenticator', false);
