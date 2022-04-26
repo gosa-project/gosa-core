@@ -28,9 +28,9 @@ include "sonata/GoogleAuthenticator.php";
 include "sonata/GoogleQrUrl.php";
 
 /* Generates the QR-Code grafic */
-function generate_qrCode ($userinfo, $token)
+function generate_qrCode ($uid, $token)
 {
-    return GoogleQrUrl::generate($userinfo->uid, bin2base32($token), 'GOsa');
+    return GoogleQrUrl::generate($uid, bin2base32($token), 'GOsa');
 }
 
 /* Verify the entered code with the user specific secret */
