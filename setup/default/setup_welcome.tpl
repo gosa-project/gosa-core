@@ -27,7 +27,7 @@
 	</p>
 
 	<pre>
-		echo -n <b>{$auth_id}</b> &gt; {$path}
+		echo <b>{$auth_id}</b> &gt {$path}
 	</pre>
 
 	<p>
