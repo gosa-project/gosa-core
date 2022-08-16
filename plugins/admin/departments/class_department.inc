@@ -172,11 +172,7 @@ class department extends plugin
         $smarty= get_smarty();
 
         // Clear manager attribute if requested
-<<<<<<< HEAD
         if(preg_match("/ removeManager/i", " ".implode(array_keys($_POST),' ')." ")){
-=======
-        if(preg_match("/ removeManager/i", " ".implode(' ', array_keys($_POST))." ")){
->>>>>>> gosa-core_v2.8
             $this->manager = "";
             $this->manager_name = "";
         }
@@ -185,11 +181,7 @@ class department extends plugin
         if($this->manager_enabled){
 
             // Allow to select a new inetOrgPersion:manager
-<<<<<<< HEAD
             if(preg_match("/ editManager/i", " ".implode(array_keys($_POST),' ')." ")){
-=======
-            if(preg_match("/ editManager/i", " ".implode(' ', array_keys($_POST))." ")){
->>>>>>> gosa-core_v2.8
                 $this->dialog = new singleUserSelect($this->config, get_userinfo());
             }
             if($this->dialog && count($this->dialog->detectPostActions())){
@@ -204,11 +196,7 @@ class department extends plugin
                     $this->dialog = NULL;
                 }
             }
-<<<<<<< HEAD
             if(isset($_POST['add_users_cancel'])){
-=======
-            if(isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort'])){
->>>>>>> gosa-core_v2.8
                 $this->dialog = NULL;
             }
             if($this->dialog) return($this->dialog->execute());
@@ -260,7 +248,6 @@ class department extends plugin
         }
 
         $smarty->assign("dep_type",$this->type);
-<<<<<<< HEAD
 
 
         $dep_types = departmentManagement::get_support_departments();
@@ -274,16 +261,6 @@ class department extends plugin
         if($tpl == "") {
             trigger_error("No template specified for container type '".$this->type."', please update epartmentManagement::get_support_departments().");
             $tpl = "generic.tpl";
-=======
-        $smarty->assign("namingAttr",$this->namingAttr);
-
-        $dep_types = departmentManagement::get_support_departments();
-        $smarty->assign("trString",$dep_types[$this->type]['TR']);
-        $tpl = $dep_types[$this->type]['TPL'];
-        if($tpl == "") {
-            trigger_error("No template specified for container type '".$this->type."', please update DepartmentManagement::get_support_departments().");
-            $tpl = check_for_materialize_theme() ? "dep_oUnit.tpl" : "generic.tpl";
->>>>>>> gosa-core_v2.8
         }
         return($smarty->fetch (get_template_path($tpl, TRUE)));
     }

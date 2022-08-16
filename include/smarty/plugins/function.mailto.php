@@ -5,7 +5,6 @@
  * @package Smarty
  * @subpackage PluginsFunction
  */
-<<<<<<< HEAD
 
 /**
  * Smarty {mailto} function plugin
@@ -16,59 +15,35 @@
  * Purpose:  automate mailto address link creation, and optionally encode them.<br>
  * Params:
  * <pre>
-=======
-/**
- * Smarty {mailto} function plugin
- * Type:     function
- * Name:     mailto
- * Date:     May 21, 2002
- * Purpose:  automate mailto address link creation, and optionally encode them.
- * Params:
- *
->>>>>>> gosa-core_v2.8
  * - address    - (required) - e-mail address
  * - text       - (optional) - text to display, default is address
  * - encode     - (optional) - can be one of:
  *                             * none : no encoding (default)
  *                             * javascript : encode with javascript
  *                             * javascript_charcode : encode with javascript charcode
-<<<<<<< HEAD
  *                             * hex : encode with hexidecimal (no javascript)
-=======
- *                             * hex : encode with hexadecimal (no javascript)
->>>>>>> gosa-core_v2.8
  * - cc         - (optional) - address(es) to carbon copy
  * - bcc        - (optional) - address(es) to blind carbon copy
  * - subject    - (optional) - e-mail subject
  * - newsgroups - (optional) - newsgroup(s) to post to
  * - followupto - (optional) - address(es) to follow up to
  * - extra      - (optional) - extra tags for the href link
-<<<<<<< HEAD
  * </pre>
  * Examples:
  * <pre>
-=======
- *
- * Examples:
- *
->>>>>>> gosa-core_v2.8
  * {mailto address="me@domain.com"}
  * {mailto address="me@domain.com" encode="javascript"}
  * {mailto address="me@domain.com" encode="hex"}
  * {mailto address="me@domain.com" subject="Hello to you!"}
  * {mailto address="me@domain.com" cc="you@domain.com,they@domain.com"}
  * {mailto address="me@domain.com" extra='class="mailto"'}
-<<<<<<< HEAD
  * </pre>
-=======
->>>>>>> gosa-core_v2.8
  *
  * @link http://www.smarty.net/manual/en/language.function.mailto.php {mailto}
  *          (Smarty online manual)
  * @version 1.2
  * @author Monte Ohrt <monte at ohrt dot com>
  * @author credits to Jason Sweat (added cc, bcc and subject functionality)
-<<<<<<< HEAD
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
  * @return string
@@ -78,28 +53,13 @@ function smarty_function_mailto($params, $template)
     static $_allowed_encoding = array('javascript' => true, 'javascript_charcode' => true, 'hex' => true, 'none' => true);
     $extra = '';
 
-=======
- *
- * @param array $params parameters
- *
- * @return string
- */
-function smarty_function_mailto($params)
-{
-    static $_allowed_encoding =
-        array('javascript' => true, 'javascript_charcode' => true, 'hex' => true, 'none' => true);
-    $extra = '';
->>>>>>> gosa-core_v2.8
     if (empty($params['address'])) {
         trigger_error("mailto: missing 'address' parameter",E_USER_WARNING);
         return;
     } else {
         $address = $params['address'];
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
     $text = $address;
     // netscape and mozilla do not decode %40 (@) in BCC field (bug?)
     // so, don't encode it.
@@ -111,22 +71,14 @@ function smarty_function_mailto($params)
             case 'cc':
             case 'bcc':
             case 'followupto':
-<<<<<<< HEAD
                 if (!empty($value))
                     $mail_parms[] = $var . '=' . str_replace($search, $replace, rawurlencode($value));
                 break;
 
-=======
-                if (!empty($value)) {
-                    $mail_parms[] = $var . '=' . str_replace($search, $replace, rawurlencode($value));
-                }
-                break;
->>>>>>> gosa-core_v2.8
             case 'subject':
             case 'newsgroups':
                 $mail_parms[] = $var . '=' . rawurlencode($value);
                 break;
-<<<<<<< HEAD
 
             case 'extra':
             case 'text':
@@ -149,34 +101,10 @@ function smarty_function_mailto($params)
     if ($encode == 'javascript') {
         $string = 'document.write(\'<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>\');';
 
-=======
-            case 'extra':
-            case 'text':
-                $$var = $value;
-            // no break
-            default:
-        }
-    }
-    if ($mail_parms) {
-        $address .= '?' . join('&', $mail_parms);
-    }
-    $encode = (empty($params[ 'encode' ])) ? 'none' : $params[ 'encode' ];
-    if (!isset($_allowed_encoding[ $encode ])) {
-        trigger_error(
-            "mailto: 'encode' parameter must be none, javascript, javascript_charcode or hex",
-            E_USER_WARNING
-        );
-        return;
-    }
-    // FIXME: (rodneyrehm) document.write() excues me what? 1998 has passed!
-    if ($encode === 'javascript') {
-        $string = 'document.write(\'<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>\');';
->>>>>>> gosa-core_v2.8
         $js_encode = '';
         for ($x = 0, $_length = strlen($string); $x < $_length; $x++) {
             $js_encode .= '%' . bin2hex($string[$x]);
         }
-<<<<<<< HEAD
 
         return '<script type="text/javascript">eval(unescape(\'' . $js_encode . '\'))</script>';
     } elseif ($encode == 'javascript_charcode') {
@@ -195,18 +123,6 @@ function smarty_function_mailto($params)
 
         return $_ret;
     } elseif ($encode == 'hex') {
-=======
-        return '<script type="text/javascript">eval(unescape(\'' . $js_encode . '\'))</script>';
-    } elseif ($encode === 'javascript_charcode') {
-        $string = '<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>';
-        for ($x = 0, $y = strlen($string); $x < $y; $x++) {
-            $ord[] = ord($string[ $x ]);
-        }
-        $_ret = "<script type=\"text/javascript\" language=\"javascript\">\n" . "{document.write(String.fromCharCode(" .
-                implode(',', $ord) . "))" . "}\n" . "</script>\n";
-        return $_ret;
-    } elseif ($encode === 'hex') {
->>>>>>> gosa-core_v2.8
         preg_match('!^(.*)(\?.*)$!', $address, $match);
         if (!empty($match[2])) {
             trigger_error("mailto: hex encoding does not work with extra attributes. Try javascript.",E_USER_WARNING);
@@ -224,10 +140,7 @@ function smarty_function_mailto($params)
         for ($x = 0, $_length = strlen($text); $x < $_length; $x++) {
             $text_encode .= '&#x' . bin2hex($text[$x]) . ';';
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
         $mailto = "&#109;&#97;&#105;&#108;&#116;&#111;&#58;";
         return '<a href="' . $mailto . $address_encode . '" ' . $extra . '>' . $text_encode . '</a>';
     } else {
@@ -235,8 +148,5 @@ function smarty_function_mailto($params)
         return '<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>';
     }
 }
-<<<<<<< HEAD
 
 ?>
-=======
->>>>>>> gosa-core_v2.8

@@ -64,7 +64,6 @@ class aclroletab extends tabs
   function execute()
   {
     $display= tabs::execute();
-<<<<<<< HEAD
     if($this->read_only){
       $display.= "<div class='plugin-actions'>";
       $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
@@ -74,40 +73,6 @@ class aclroletab extends tabs
       $display.= "  <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>\n";
       $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
       $display.= "</p>";
-=======
-
-    $theme = getThemeName();
-
-    if($this->read_only){
-      switch ($theme) {
-        case 'classic':
-          $dispaly .= " <div class='plugin-actions'>
-                          <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                        </div>";
-          break;
-        
-        default:
-          $display .= " <div class='card-action'>
-                          <button class='btn-small primary' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                        </div>";
-          break;
-      }
-    }elseif(!$this->by_object['aclrole']->dialog){
-      switch ($theme) {
-        case 'classic':
-          $display .= " <p style=\"text-align:right\">
-                          <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
-                          <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
-                        </p>";
-          break;
-        default:
-          $display .= "<div class='card-action'>
-                        <button class='btn-small primary' type=submit name='edit_finish'>".msgPool::okButton()."</button>
-                        <button class='btn-small primary' type=submit name='edit_cancel'>".msgPool::cancelButton()."</button>
-                      </div>";
-          break;
-      }
->>>>>>> gosa-core_v2.8
     }
     return($display);
   }

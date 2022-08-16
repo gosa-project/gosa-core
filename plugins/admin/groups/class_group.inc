@@ -58,11 +58,7 @@ class group extends plugin
 
     // attribute list for save action
     var $attributes= array("cn", "description", "gidNumber","sambaGroupType","sambaSID","member");
-<<<<<<< HEAD
     var $objectclasses= array("top", "posixGroup");
-=======
-    var $objectclasses= array("top");
->>>>>>> gosa-core_v2.8
     var $CopyPasteVars  = array("force_gid","fon_group","smbgroup","groupType","sambaSID","sambaDomainName","SID","nagios_group","sambaGroupType");
     var $multiple_support = TRUE;
 
@@ -209,11 +205,6 @@ class group extends plugin
         // Call parent execute 
         plugin::execute();
 
-<<<<<<< HEAD
-=======
-        $theme = getThemeName();
-
->>>>>>> gosa-core_v2.8
         // Log view 
         if($this->is_account && !$this->view_logged){
             $this->view_logged = TRUE;
@@ -222,20 +213,7 @@ class group extends plugin
 
         // Do we represent a valid group? 
         if (!$this->is_account && $this->parent === NULL){
-<<<<<<< HEAD
             $display= "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".msgPool::noValidExtension()."</b>";
-=======
-            switch ($theme) {
-                case 'classic':
-                  $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
-                  break;
-                
-                default:
-                  $symbol = "<i class='material-icons'>report</i>";
-                  break;
-              }
-              $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_())."</div>";
->>>>>>> gosa-core_v2.8
             return ($display);
         }
 
@@ -267,20 +245,12 @@ class group extends plugin
         }
 
         // Add objects finished? 
-<<<<<<< HEAD
         if (isset($_POST["add_users_cancel"])){
-=======
-        if (isset($_POST["add_users_cancel"]) || isset($_POST['cancel-abort'])){
->>>>>>> gosa-core_v2.8
             $this->userSelect= NULL;
         }
 
         // Add user to group 
-<<<<<<< HEAD
         if (isset($_POST['add_users_finish']) && $this->userSelect){
-=======
-        if (isset($_POST['add_users_finish']) || isset($_POST['ok-save']) && $this->userSelect){
->>>>>>> gosa-core_v2.8
 
             $users = $this->userSelect->detectPostActions();
             if(isset($users['targets'])){
@@ -343,31 +313,9 @@ class group extends plugin
                     if (isset($values['cn']) && isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-<<<<<<< HEAD
                         $image = image('plugins/users/images/select_user.png');
                     }elseif(isset($values['gidNumber'])){
                         $image = image('plugins/groups/images/select_group.png');
-=======
-                        switch ($theme) {
-                            case 'classic':
-                                $image = image("plugins/users/images/select_user.png");
-                                break;
-                            
-                            default:
-                                $image = image("<i class='material-icons'>person</i>");
-                                break;
-                        }
-                    }elseif(isset($values['gidNumber'])){
-                        switch ($variable) {
-                            case 'classic':
-                                $image = image("plugins/groups/images/select_group.png");
-                                break;
-                            
-                            default:
-                                $image = image("<i class='material-icons'>groups</i>");
-                                break;
-                        }
->>>>>>> gosa-core_v2.8
                     }
                     $lData[$member] = array('data' => array($image,$cn, $data[$member]['uid'][0] ?? ""));
                 }
@@ -390,31 +338,9 @@ class group extends plugin
                     if(isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-<<<<<<< HEAD
                         $image = image('plugins/users/images/select_user.png');
                     }elseif(isset($values['gidNumber'])){
                         $image = image('plugins/groups/images/select_group.png');
-=======
-                        switch ($theme) {
-                            case 'classic':
-                                $image = image("plugins/users/images/select_user.png");
-                                break;
-                            
-                            default:
-                                $image = image("<i class='material-icons'>person</i>");
-                                break;
-                        }
-                    }elseif(isset($values['gidNumber'])){
-                        switch ($theme) {
-                            case 'classic':
-                                $image = image("plugins/groups/images/select_group.png");
-                                break;
-                            
-                            default:
-                                $image = image("<i class='material-icons'>groups</i>");
-                                break;
-                        }
->>>>>>> gosa-core_v2.8
                     }
                     $lData[$member] = array('data' => array($image,$cn,$data[$member]['uid'][0] ?? ""));
                 }
@@ -431,32 +357,9 @@ class group extends plugin
                     if(isset($values['cn']) && isset($values['cn'][0])) $cn = $values['cn'][0];
                     $image = image('images/false.png');
                     if(isset($values['sn'])){
-<<<<<<< HEAD
                         $image = image('plugins/users/images/select_user.png');
                     }elseif(isset($values['gidNumber'])){
                         $image = image('plugins/groups/images/select_group.png');
-=======
-                        switch ($theme) {
-                            case 'classic':
-                                $image = image("plugins/users/images/select_user.png");
-                                break;
-                            
-                            default:
-                                $image = image("<i class='material-icons'>person</i>");
-                                break;
-                        }
-                        
-                    }elseif(isset($values['gidNumber'])){
-                        switch ($theme) {
-                            case 'classic':
-                                $image = image("plugins/groups/images/select_group.png");
-                                break;
-                            
-                            default:
-                                $image = image("<i class='material-icons'>groups</i>");
-                                break;
-                        }
->>>>>>> gosa-core_v2.8
                     }
                     $lData[$member] = array('data' => array($image,$cn,$data[$member]['uid'][0] ?? ""));
                 }

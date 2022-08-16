@@ -101,8 +101,9 @@ class Step_Schema extends setup_step
             $smarty->assign('message', $message);
         }
         $smarty->assign('checkFailed', !$this->is_completed);
-        return($smarty->fetch (get_template_path("../setup/".$GLOBALS['theme']."/setup_schema.tpl")));
+        return($smarty->fetch (get_template_path("../setup/setup_schema.tpl")));
     }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

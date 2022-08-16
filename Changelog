@@ -16,6 +16,7 @@ GOsa2 changelog
   - Modification of visible elements such as buttons etc to improve robustness.
   - Merged .tpl files that were duplicated.
 
+
 * gosa 2.7.5
   - Fixed problem that occured when certain POST variables get
     transferred in a wrong way.

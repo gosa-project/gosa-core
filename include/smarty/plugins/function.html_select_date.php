@@ -5,7 +5,6 @@
  * @package Smarty
  * @subpackage PluginsFunction
  */
-<<<<<<< HEAD
 
 /**
  * @ignore
@@ -25,15 +24,6 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  * 
  * ChangeLog:
  * <pre>
-=======
-/**
- * Smarty {html_select_date} plugin
- * Type:     function
- * Name:     html_select_date
- * Purpose:  Prints the dropdowns for date selection.
- * ChangeLog:
- *
->>>>>>> gosa-core_v2.8
  *            - 1.0 initial release
  *            - 1.1 added support for +/- N syntax for begin
  *              and end year values. (Monte)
@@ -49,10 +39,7 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  *              of 0000-00-00 dates (cybot, boots)
  *            - 2.0 complete rewrite for performance,  
  *              added attributes month_names, *_id
-<<<<<<< HEAD
  * </pre>
-=======
->>>>>>> gosa-core_v2.8
  * 
  * @link http://www.smarty.net/manual/en/language.function.html.select.date.php {html_select_date}
  *      (Smarty online manual)
@@ -60,33 +47,12 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  * @author Andrei Zmievski 
  * @author Monte Ohrt <monte at ohrt dot com> 
  * @author Rodney Rehm
-<<<<<<< HEAD
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
  * @return string 
  */
 function smarty_function_html_select_date($params, $template)
 {
-=======
- *
- * @param array                     $params parameters
- *
- * @param \Smarty_Internal_Template $template
- *
- * @return string
- * @throws \SmartyException
- */
-function smarty_function_html_select_date($params, Smarty_Internal_Template $template)
-{
-    $template->_checkPlugins(
-        array(
-            array(
-                'function' => 'smarty_function_escape_special_chars',
-                'file'     => SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php'
-            )
-        )
-    );
->>>>>>> gosa-core_v2.8
     // generate timestamps used for month names only
     static $_month_timestamps = null;
     static $_current_year = null;
@@ -97,34 +63,20 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
             $_month_timestamps[$i] = mktime(0, 0, 0, $i, 1, 2000);
         }
     }
-<<<<<<< HEAD
 
     /* Default values. */
     $prefix = "Date_";
-=======
-    /* Default values. */
-    $prefix = 'Date_';
->>>>>>> gosa-core_v2.8
     $start_year = null;
     $end_year = null;
     $display_days = true;
     $display_months = true;
     $display_years = true;
-<<<<<<< HEAD
     $month_format = "%B";
     /* Write months as numbers by default  GL */
     $month_value_format = "%m";
     $day_format = "%02d";
     /* Write day values using this format MB */
     $day_value_format = "%d";
-=======
-    $month_format = '%B';
-    /* Write months as numbers by default  GL */
-    $month_value_format = '%m';
-    $day_format = '%02d';
-    /* Write day values using this format MB */
-    $day_value_format = '%d';
->>>>>>> gosa-core_v2.8
     $year_as_text = false;
     /* Display years in reverse order? Ie. 2000,1999,.... */
     $reverse_years = false;
@@ -160,15 +112,11 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
     $day_id = null;
     $month_id = null;
     $year_id = null;
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
     foreach ($params as $_key => $_value) {
         switch ($_key) {
             case 'time':
                 if (!is_array($_value) && $_value !== null) {
-<<<<<<< HEAD
                     $time = smarty_make_timestamp($_value);
                 }
                 break;
@@ -181,26 +129,6 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
                 }
                 break;
                 
-=======
-                    $template->_checkPlugins(
-                        array(
-                            array(
-                                'function' => 'smarty_make_timestamp',
-                                'file'     => SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php'
-                            )
-                        )
-                    );
-                    $time = smarty_make_timestamp($_value);
-                }
-                break;
-            case 'month_names':
-                if (is_array($_value) && count($_value) === 12) {
-                    $$_key = $_value;
-                } else {
-                    trigger_error('html_select_date: month_names must be an array of 12 strings', E_USER_NOTICE);
-                }
-                break;
->>>>>>> gosa-core_v2.8
             case 'prefix':
             case 'field_array':
             case 'start_year':
@@ -229,10 +157,7 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
             case 'year_id':
                 $$_key = (string)$_value;
                 break;
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
             case 'display_days':
             case 'display_months':
             case 'display_years':
@@ -240,33 +165,22 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
             case 'reverse_years':
                 $$_key = (bool)$_value;
                 break;
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
             default:
                 if (!is_array($_value)) {
                     $extra_attrs .= ' ' . $_key . '="' . smarty_function_escape_special_chars($_value) . '"';
                 } else {
-<<<<<<< HEAD
                     trigger_error("html_select_date: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
-=======
-                    trigger_error("html_select_date: extra attribute '{$_key}' cannot be an array", E_USER_NOTICE);
->>>>>>> gosa-core_v2.8
                 } 
                 break;
         } 
     }
-<<<<<<< HEAD
     
-=======
->>>>>>> gosa-core_v2.8
     // Note: date() is faster than strftime()
     // Note: explode(date()) is faster than date() date() date()
     if (isset($params['time']) && is_array($params['time'])) {
         if (isset($params['time'][$prefix . 'Year'])) {
             // $_REQUEST[$field_array] given
-<<<<<<< HEAD
             foreach (array('Y' => 'Year',  'm' => 'Month', 'd' => 'Day') as $_elementKey => $_elementName) {
                 $_variableName = '_' . strtolower($_elementName);
                 $$_variableName = isset($params['time'][$prefix . $_elementName])
@@ -283,29 +197,6 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
                     : date($_elementKey);
             }
             $time = mktime(0, 0, 0, $_month, $_day, $_year);
-=======
-            foreach (array(
-                'Y' => 'Year',
-                'm' => 'Month',
-                'd' => 'Day'
-            ) as $_elementKey => $_elementName) {
-                $_variableName = '_' . strtolower($_elementName);
-                $$_variableName =
-                    isset($params[ 'time' ][ $prefix . $_elementName ]) ? $params[ 'time' ][ $prefix . $_elementName ] :
-                        date($_elementKey);
-            }
-        } elseif (isset($params[ 'time' ][ $field_array ][ $prefix . 'Year' ])) {
-            // $_REQUEST given
-            foreach (array(
-                'Y' => 'Year',
-                'm' => 'Month',
-                'd' => 'Day'
-            ) as $_elementKey => $_elementName) {
-                $_variableName = '_' . strtolower($_elementName);
-                $$_variableName = isset($params[ 'time' ][ $field_array ][ $prefix . $_elementName ]) ?
-                    $params[ 'time' ][ $field_array ][ $prefix . $_elementName ] : date($_elementKey);
-            }
->>>>>>> gosa-core_v2.8
         } else {
             // no date found, use NOW
             list($_year, $_month, $_day) = $time = explode('-', date('Y-m-d'));
@@ -319,57 +210,33 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
     } else {
         list($_year, $_month, $_day) = $time = explode('-', date('Y-m-d', $time));
     }
-<<<<<<< HEAD
 
     // make syntax "+N" or "-N" work with $start_year and $end_year
     // Note preg_match('!^(\+|\-)\s*(\d+)$!', $end_year, $match) is slower than trim+substr
     foreach (array('start', 'end') as $key) {
-=======
-    // make syntax "+N" or "-N" work with $start_year and $end_year
-    // Note preg_match('!^(\+|\-)\s*(\d+)$!', $end_year, $match) is slower than trim+substr
-    foreach (array(
-        'start',
-        'end'
-    ) as $key) {
->>>>>>> gosa-core_v2.8
         $key .= '_year';
         $t = $$key;
         if ($t === null) {
             $$key = (int)$_current_year;
-<<<<<<< HEAD
         } else if ($t[0] == '+') {
             $$key = (int)($_current_year + trim(substr($t, 1)));
         } else if ($t[0] == '-') {
             $$key = (int)($_current_year - trim(substr($t, 1)));
-=======
-        } elseif ($t[ 0 ] === '+') {
-            $$key = (int)($_current_year + (int)trim(substr($t, 1)));
-        } elseif ($t[ 0 ] === '-') {
-            $$key = (int)($_current_year - (int)trim(substr($t, 1)));
->>>>>>> gosa-core_v2.8
         } else {
             $$key = (int)$$key;
         }
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
     // flip for ascending or descending
     if (($start_year > $end_year && !$reverse_years) || ($start_year < $end_year && $reverse_years)) {
         $t = $end_year;
         $end_year = $start_year;
         $start_year = $t;
     }
-<<<<<<< HEAD
 
     // generate year <select> or <input>
     if ($display_years) {
         $_html_years = '';
-=======
-    // generate year <select> or <input>
-    if ($display_years) {
->>>>>>> gosa-core_v2.8
         $_extra = '';
         $_name = $field_array ? ($field_array . '[' . $prefix . 'Year]') : ($prefix . 'Year');
         if ($all_extra) {
@@ -378,35 +245,20 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
         if ($year_extra) {
             $_extra .= ' ' . $year_extra;
         }
-<<<<<<< HEAD
         
         if ($year_as_text) {
             $_html_years = '<input type="text" name="' . $_name . '" value="' . $_year . '" size="4" maxlength="4"' . $_extra . $extra_attrs . ' />';
-=======
-        if ($year_as_text) {
-            $_html_years =
-                '<input type="text" name="' . $_name . '" value="' . $_year . '" size="4" maxlength="4"' . $_extra .
-                $extra_attrs . ' />';
->>>>>>> gosa-core_v2.8
         } else {
             $_html_years = '<select name="' . $_name . '"';
             if ($year_id !== null || $all_id !== null) {
                 $_html_years .= ' id="' . smarty_function_escape_special_chars( 
-<<<<<<< HEAD
                     $year_id !== null ? ( $year_id ? $year_id : $_name ) : ( $all_id ? ($all_id . $_name) : $_name ) 
-=======
-                        $year_id !== null ?
-                            ($year_id ? $year_id : $_name) :
-                            ($all_id ? ($all_id . $_name) :
-                                $_name)
->>>>>>> gosa-core_v2.8
                 ) . '"';
             }
             if ($year_size) {
                 $_html_years .= ' size="' . $year_size . '"';
             } 
             $_html_years .= $_extra . $extra_attrs . '>' . $option_separator;
-<<<<<<< HEAD
             
             if (isset($year_empty) || isset($all_empty)) {
                 $_html_years .= '<option value="">' . ( isset($year_empty) ? $year_empty : $all_empty ) . '</option>' . $option_separator;
@@ -426,22 +278,6 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
     // generate month <select> or <input>
     if ($display_months) {
         $_html_month = '';
-=======
-            if (isset($year_empty) || isset($all_empty)) {
-                $_html_years .= '<option value="">' . (isset($year_empty) ? $year_empty : $all_empty) . '</option>' .
-                                $option_separator;
-            }
-            $op = $start_year > $end_year ? -1 : 1;
-            for ($i = $start_year; $op > 0 ? $i <= $end_year : $i >= $end_year; $i += $op) {
-                $_html_years .= '<option value="' . $i . '"' . ($_year == $i ? ' selected="selected"' : '') . '>' . $i .
-                                '</option>' . $option_separator;
-            }
-            $_html_years .= '</select>';
-        }
-    }
-    // generate month <select> or <input>
-    if ($display_months) {
->>>>>>> gosa-core_v2.8
         $_extra = '';
         $_name = $field_array ? ($field_array . '[' . $prefix . 'Month]') : ($prefix . 'Month');
         if ($all_extra) {
@@ -450,28 +286,17 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
         if ($month_extra) {
             $_extra .= ' ' . $month_extra;
         }
-<<<<<<< HEAD
         
         $_html_months = '<select name="' . $_name . '"';
         if ($month_id !== null || $all_id !== null) {
             $_html_months .= ' id="' . smarty_function_escape_special_chars( 
                 $month_id !== null ? ( $month_id ? $month_id : $_name ) : ( $all_id ? ($all_id . $_name) : $_name ) 
-=======
-        $_html_months = '<select name="' . $_name . '"';
-        if ($month_id !== null || $all_id !== null) {
-            $_html_months .= ' id="' . smarty_function_escape_special_chars(
-                    $month_id !== null ?
-                        ($month_id ? $month_id : $_name) :
-                        ($all_id ? ($all_id . $_name) :
-                            $_name)
->>>>>>> gosa-core_v2.8
             ) . '"';
         }
         if ($month_size) {
             $_html_months .= ' size="' . $month_size . '"';
         } 
         $_html_months .= $_extra . $extra_attrs . '>' . $option_separator;
-<<<<<<< HEAD
         
         if (isset($month_empty) || isset($all_empty)) {
             $_html_months .= '<option value="">' . ( isset($month_empty) ? $month_empty : $all_empty ) . '</option>' . $option_separator;
@@ -492,24 +317,6 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
     // generate day <select> or <input>
     if ($display_days) {
         $_html_day = '';
-=======
-        if (isset($month_empty) || isset($all_empty)) {
-            $_html_months .= '<option value="">' . (isset($month_empty) ? $month_empty : $all_empty) . '</option>' .
-                             $option_separator;
-        }
-        for ($i = 1; $i <= 12; $i++) {
-            $_val = sprintf('%02d', $i);
-            $_text = isset($month_names) ? smarty_function_escape_special_chars($month_names[ $i ]) :
-                ($month_format === '%m' ? $_val : strftime($month_format, $_month_timestamps[ $i ]));
-            $_value = $month_value_format === '%m' ? $_val : strftime($month_value_format, $_month_timestamps[ $i ]);
-            $_html_months .= '<option value="' . $_value . '"' . ($_val == $_month ? ' selected="selected"' : '') .
-                             '>' . $_text . '</option>' . $option_separator;
-        }
-        $_html_months .= '</select>';
-    }
-    // generate day <select> or <input>
-    if ($display_days) {
->>>>>>> gosa-core_v2.8
         $_extra = '';
         $_name = $field_array ? ($field_array . '[' . $prefix . 'Day]') : ($prefix . 'Day');
         if ($all_extra) {
@@ -518,27 +325,17 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
         if ($day_extra) {
             $_extra .= ' ' . $day_extra;
         }
-<<<<<<< HEAD
         
         $_html_days = '<select name="' . $_name . '"';
         if ($day_id !== null || $all_id !== null) {
             $_html_days .= ' id="' . smarty_function_escape_special_chars( 
                 $day_id !== null ? ( $day_id ? $day_id : $_name ) : ( $all_id ? ($all_id . $_name) : $_name ) 
-=======
-        $_html_days = '<select name="' . $_name . '"';
-        if ($day_id !== null || $all_id !== null) {
-            $_html_days .= ' id="' .
-                           smarty_function_escape_special_chars(
-                               $day_id !== null ? ($day_id ? $day_id : $_name) :
-                                   ($all_id ? ($all_id . $_name) : $_name)
->>>>>>> gosa-core_v2.8
             ) . '"';
         }
         if ($day_size) {
             $_html_days .= ' size="' . $day_size . '"';
         } 
         $_html_days .= $_extra . $extra_attrs . '>' . $option_separator;
-<<<<<<< HEAD
         
         if (isset($day_empty) || isset($all_empty)) {
             $_html_days .= '<option value="">' . ( isset($day_empty) ? $day_empty : $all_empty ) . '</option>' . $option_separator;
@@ -556,21 +353,6 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
         $_html_days .= '</select>';
     }
 
-=======
-        if (isset($day_empty) || isset($all_empty)) {
-            $_html_days .= '<option value="">' . (isset($day_empty) ? $day_empty : $all_empty) . '</option>' .
-                           $option_separator;
-        }
-        for ($i = 1; $i <= 31; $i++) {
-            $_val = sprintf('%02d', $i);
-            $_text = $day_format === '%02d' ? $_val : sprintf($day_format, $i);
-            $_value = $day_value_format === '%02d' ? $_val : sprintf($day_value_format, $i);
-            $_html_days .= '<option value="' . $_value . '"' . ($_val == $_day ? ' selected="selected"' : '') . '>' .
-                           $_text . '</option>' . $option_separator;
-        }
-        $_html_days .= '</select>';
-    }
->>>>>>> gosa-core_v2.8
     // order the fields for output
     $_html = '';
     for ($i=0; $i <= 2; $i++) {
@@ -584,10 +366,7 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
                     $_html .= $_html_years;
                 }
             break;
-<<<<<<< HEAD
             
-=======
->>>>>>> gosa-core_v2.8
             case 'm':
             case 'M':
                 if (isset($_html_months)) {
@@ -597,10 +376,7 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
                     $_html .= $_html_months;
                 }
             break;
-<<<<<<< HEAD
             
-=======
->>>>>>> gosa-core_v2.8
             case 'd':
             case 'D':
                 if (isset($_html_days)) {
@@ -614,8 +390,5 @@ function smarty_function_html_select_date($params, Smarty_Internal_Template $tem
     }
     return $_html;
 }
-<<<<<<< HEAD
 
 ?>
-=======
->>>>>>> gosa-core_v2.8

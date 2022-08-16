@@ -25,10 +25,6 @@ class departmentManagement extends management
   var $plHeadline     = "Directory structure";
   var $plDescription  = "Manage organizations, organizational units, localities, countries and more";
   var $plIcon         = "plugins/departments/images/plugin.png";
-<<<<<<< HEAD
-=======
-  var $matIcon        = "source";
->>>>>>> gosa-core_v2.8
 
   // Tab definition 
   protected $tabClass = "deptabs";
@@ -192,18 +188,10 @@ class departmentManagement extends management
     $types['domain']['ATTR']    = "dc"; 
     $types['domain']['TAB']     = "DOMAIN_TABS"; 
     $types['domain']['OC']      = "domain"; 
-<<<<<<< HEAD
     $types['domain']['IMG']     = "plugins/departments/images/domain.png"; 
     $types['domain']['IMG_FULL']= "plugins/departments/images/domain.png"; 
     $types['domain']['TITLE']   = _("Domain"); 
     $types['domain']['TPL']     = "domain.tpl"; 
-=======
-    $types['domain']['IMG']     = tempSwitch(array("domain", "plugins/departments/images/domain.png")); 
-    $types['domain']['IMG_FULL']= tempSwitch(array("domain", "plugins/departments/images/domain.png")); 
-    $types['domain']['TITLE']   = _("Domain"); 
-    $types['domain']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "domain.tpl")); 
-    $types['domain']['TR']      = ["domain", "Domain"]; 
->>>>>>> gosa-core_v2.8
 
     /* Domain component 
      */
@@ -212,18 +200,10 @@ class departmentManagement extends management
     $types['dcObject']['ATTR']    = "dc";
     $types['dcObject']['TAB']     = "DCOBJECT_TABS";
     $types['dcObject']['OC']      = "dcObject";
-<<<<<<< HEAD
     $types['dcObject']['IMG']     = "plugins/departments/images/dc.png";
     $types['dcObject']['IMG_FULL']= "plugins/departments/images/dc.png";
     $types['dcObject']['TITLE']   = _("Domain Component");
     $types['dcObject']['TPL']     = "dcObject.tpl";
-=======
-    $types['dcObject']['IMG']     = tempSwitch(array("router" , "plugins/departments/images/dc.png"));
-    $types['dcObject']['IMG_FULL']= tempSwitch(array("router" , "plugins/departments/images/dc.png"));
-    $types['dcObject']['TITLE']   = _("Domain Component");
-    $types['dcObject']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "dcObject.tpl"));
-    $types['dcObject']['TR']      = ["locality", "Locality"]; 
->>>>>>> gosa-core_v2.8
 
     /* Country object
      */
@@ -232,18 +212,10 @@ class departmentManagement extends management
     $types['country']['TAB']     = "COUNTRY_TABS";
     $types['country']['ATTR']    = "c";
     $types['country']['OC']      = "country";
-<<<<<<< HEAD
     $types['country']['IMG']     = "plugins/departments/images/country.png";
     $types['country']['IMG_FULL']= "plugins/departments/images/country.png";
     $types['country']['TITLE']   = _("Country");
     $types['country']['TPL']     = "country.tpl";
-=======
-    $types['country']['IMG']     = tempSwitch(array("outlined_flag" , "plugins/departments/images/country.png"));
-    $types['country']['IMG_FULL']= tempSwitch(array("outlined_flag" , "plugins/departments/images/country.png"));
-    $types['country']['TITLE']   = _("Country");
-    $types['country']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "country.tpl"));
-    $types['country']['TR']      = ["country", "Country"]; 
->>>>>>> gosa-core_v2.8
 
     /* Locality object
      */
@@ -252,18 +224,10 @@ class departmentManagement extends management
     $types['locality']['TAB']     = "LOCALITY_TABS";
     $types['locality']['ATTR']    = "l";
     $types['locality']['OC']      = "locality";
-<<<<<<< HEAD
     $types['locality']['IMG']     = "plugins/departments/images/locality.png";
     $types['locality']['IMG_FULL']= "plugins/departments/images/locality.png";
     $types['locality']['TITLE']   = _("Locality");
     $types['locality']['TPL']     = "locality.tpl";
-=======
-    $types['locality']['IMG']     = tempSwitch(array("screen_search_desktop" , "plugins/departments/images/locality.png"));
-    $types['locality']['IMG_FULL']= tempSwitch(array("screen_search_desktop" , "plugins/departments/images/locality.png"));
-    $types['locality']['TITLE']   = _("Locality");
-    $types['locality']['TPL']     = tempSwitch(array("dep_oUnit.tpl" , "locality.tpl"));
-    $types['locality']['TR']      = ["locality", "Locality"]; 
->>>>>>> gosa-core_v2.8
 
     /* Organization
      */
@@ -272,19 +236,10 @@ class departmentManagement extends management
     $types['organization']['TAB']     = "ORGANIZATION_TABS";
     $types['organization']['ATTR']    = "o";
     $types['organization']['OC']      = "organization";
-<<<<<<< HEAD
     $types['organization']['IMG']     = "plugins/departments/images/organization.png";
     $types['organization']['IMG_FULL']= "plugins/departments/images/organization.png";
     $types['organization']['TITLE']   = _("Organization");
     $types['organization']['TPL']     = "organization.tpl";
-=======
-    $types['organization']['IMG']     = tempSwitch(array("corporate_fare" , "plugins/departments/images/organization.png"));
-    $types['organization']['IMG_FULL']= tempSwitch(array("corporate_fare" , "plugins/departments/images/organization.png"));
-    $types['organization']['TITLE']   = _("Organization");
-    $types['organization']['TPL']     = tempSwitch(array("dep_oExtendedUnit.tpl" , "organization.tpl"));
-    $types['organization']['TR']      = ["organization", "Organization"]; 
-
->>>>>>> gosa-core_v2.8
 
     /* Department
      */
@@ -293,19 +248,10 @@ class departmentManagement extends management
     $types['organizationalUnit']['TAB']     = "DEPTABS";
     $types['organizationalUnit']['ATTR']    = "ou";
     $types['organizationalUnit']['OC']      = "organizationalUnit";
-<<<<<<< HEAD
     $types['organizationalUnit']['IMG']     = "images/lists/folder.png";//plugins/departments/images/department.png";
     $types['organizationalUnit']['IMG_FULL']= "images/lists/folder-full.png";//:wplugins/departments/images/department.png";
     $types['organizationalUnit']['TITLE']   = _("Department");
     $types['organizationalUnit']['TPL']     = "generic.tpl";
-=======
-    $types['organizationalUnit']['IMG']     = tempSwitch(array("folder" , "images/lists/folder.png")); //plugins/departments/images/department.png";
-    $types['organizationalUnit']['IMG_FULL']= tempSwitch(array("folder" , "images/lists/folder.png")); //plugins/departments/images/department.png";
-    $types['organizationalUnit']['TITLE']   = _("Department");
-    $types['organizationalUnit']['TPL']     = tempSwitch(array("dep_oExtendedUnit.tpl" , "generic.tpl"));
-    $types['organizationalUnit']['TR']      = ["department", "Department"]; 
-
->>>>>>> gosa-core_v2.8
     return($types);
   }
 } 
