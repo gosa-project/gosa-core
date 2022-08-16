@@ -25,10 +25,6 @@ class aclManagement extends management
   var $plHeadline     = "Access control";
   var $plDescription  = "Control access to GOsa managed objects down to attribute and action level";
   var $plIcon  = "plugins/acl/images/plugin.png";
-<<<<<<< HEAD
-=======
-  var $matIcon        = "lock";
->>>>>>> gosa-core_v2.8
 
   // Tab definition 
   protected $tabClass = "aclroletab";

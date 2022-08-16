@@ -60,42 +60,7 @@ class password extends plugin
         plugin::execute();
         $smarty = get_smarty();
         $ui = get_userinfo();
-<<<<<<< HEAD
 
-=======
-        $theme = getThemeName();
-
-        /* Password checks */
-        $check_special = true;
-        $check_lower = true;
-        $check_upper = true;
-        $check_digits = true;
-        $pwLength;
-
-        $pwLength = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
-        switch ($theme) {
-            case 'classic':
-                break;
-            
-            default:
-                if ($pwLength) {
-                    $smarty->assign("length", sprintf(_("The password must have at least %d characters."), $pwLength));
-                }
-                if ($check_special) {
-                    $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
-                }
-                if ($check_lower) {
-                    $smarty->assign("lower", _("The password must contain lower case letters."));
-                }
-                if ($check_upper) {
-                    $smarty->assign("upper", _("The password must contain upper case letters."));
-                }
-                if ($check_digits) {
-                    $smarty->assign("digits", _("The password must contain digits."));
-                }
-                break;
-        }
->>>>>>> gosa-core_v2.8
 
         // Try to generate a password proposal, if this is successfull 
         //  then preselect the proposal usage. 
@@ -147,7 +112,6 @@ class password extends plugin
             // Get configuration flags for further input checks.
             $check_differ = $this->config->get_cfg_value("core","passwordMinDiffer") != "";
             $differ       = $this->config->get_cfg_value("core","passwordMinDiffer");
-<<<<<<< HEAD
             $check_length = $this->config->get_cfg_value("core","passwordMinLength") != "";
             $length       = $this->config->get_cfg_value("core","passwordMinLength");
 
@@ -159,24 +123,6 @@ class password extends plugin
             $attrs['current_password'] = ($current_password);
             $attrs['new_password'] = ($new_password);
 
-=======
-            $length       = $this->config->get_cfg_value("core","passwordMinLength") != "" ?: 8;
-
-            switch ($theme) {
-                case 'classic':
-                    break;
-                
-                default:
-                    $special        = "/[!,@,#,$,%,^,&,*,?,_,~]/i";
-                    $lower          = "/[a-z]/";
-                    $upper          = "/[A-Z]/";
-                    $digits         = "/[0-9]/i";
-                    break;
-            }
-
-            // Once an error has occured it is stored here.
-            $message = array();
->>>>>>> gosa-core_v2.8
             // Perform GOsa password policy checks 
             if(empty($current_password)){
                 $message[] = _("You need to specify your current password in order to proceed.");
@@ -186,42 +132,17 @@ class password extends plugin
                 $message[] = _("The password you've entered as 'New password' is empty.");
             }elseif($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))){
                 $message[] = _("The password used as new and current are too similar.");
-<<<<<<< HEAD
             }elseif($check_length && (strlen($new_password) < $length)){
                 $message[] = _("The password used as new is to short.");
-=======
-            }elseif((strlen($new_password) < $length)){
-                $message[] = sprintf(_("The password must have at least %s characters."), $length);
-            }elseif($theme == 'default') {
-                if($check_lower && !preg_match($lower, $new_password)) {
-                    $message[] = _("The password must contain lowercase letters.");
-                }elseif($check_upper && !preg_match($upper, $new_password)) {
-                    $message[] = _("The password must contain uppercase letters.");
-                }elseif($check_digits && !preg_match($digits, $new_password)) {
-                    $message[] = _("The password must contain digits.");
-                }elseif($check_special && !preg_match($special, $new_password)) {
-                    $message[] = _("The password must contain at least 1 special character, e.g. !, @, #, $, %, ^, &, *, ?, _, ~.");
-                }
->>>>>>> gosa-core_v2.8
             }elseif(!passwordMethod::is_harmless($new_password)){
                 $message[] = _("The password contains possibly problematic Unicode characters!");
             }
 
             // Call external check hook to validate the password change
             if(!count($message)){
-<<<<<<< HEAD
                 $checkRes = $this->callCheckHook($this->config,$this->dn,$attrs);
                 if(count($checkRes)){
                     $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),implode($checkRes));
-=======
-                $attrs = array();
-                $attrs['current_password'] = '';
-                $attrs['new_password'] = $new_password;
-                $checkRes = password::callCheckHook($this->config,$this->dn,$attrs);
-                if(count($checkRes)){
-                    $message[] = sprintf(_("Check-hook reported a problem: %s. Password change canceled!"),
-                            implode($checkRes));
->>>>>>> gosa-core_v2.8
                 }
             }
 
@@ -254,10 +175,6 @@ class password extends plugin
                     return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
                 }
             }
-<<<<<<< HEAD
-=======
-            $smarty->assign("pwLength", $length);
->>>>>>> gosa-core_v2.8
         }
         return($smarty->fetch(get_template_path("password.tpl", TRUE)));
     } 

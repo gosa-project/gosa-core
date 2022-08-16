@@ -5,7 +5,6 @@
  * @package Smarty
  * @subpackage PluginsFunction
  */
-<<<<<<< HEAD
 
 /**
  * Smarty {cycle} function plugin
@@ -16,16 +15,6 @@
  * Purpose:  cycle through given values<br>
  * Params:
  * <pre>
-=======
-/**
- * Smarty {cycle} function plugin
- * Type:     function
- * Name:     cycle
- * Date:     May 3, 2002
- * Purpose:  cycle through given values
- * Params:
- *
->>>>>>> gosa-core_v2.8
  * - name      - name of cycle (optional)
  * - values    - comma separated list of values to cycle, or an array of values to cycle
  *               (this can be left out for subsequent calls)
@@ -34,7 +23,6 @@
  * - advance   - boolean - whether or not to advance the cycle
  * - delimiter - the value delimiter, default is ","
  * - assign    - boolean, assigns to template var instead of printed.
-<<<<<<< HEAD
  * </pre>
  * Examples:<br>
  * <pre>
@@ -42,14 +30,6 @@
  * {cycle name=row values="one,two,three" reset=true}
  * {cycle name=row}
  * </pre>
-=======
- *
- * Examples:
- *
- * {cycle values="#eeeeee,#d0d0d0d"}
- * {cycle name=row values="one,two,three" reset=true}
- * {cycle name=row}
->>>>>>> gosa-core_v2.8
  *
  * @link http://www.smarty.net/manual/en/language.function.cycle.php {cycle}
  *       (Smarty online manual)
@@ -58,7 +38,6 @@
  * @author credit to Gerard <gerard@interfold.com>
  * @author credit to Jason Sweat <jsweat_php@yahoo.com>
  * @version  1.3
-<<<<<<< HEAD
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
  * @return string|null
@@ -68,22 +47,10 @@ function smarty_function_cycle($params, $template)
 {
     static $cycle_vars;
 
-=======
- *
- * @param array                    $params   parameters
- * @param Smarty_Internal_Template $template template object
- *
- * @return string|null
- */
-function smarty_function_cycle($params, $template)
-{
-    static $cycle_vars;
->>>>>>> gosa-core_v2.8
     $name = (empty($params['name'])) ? 'default' : $params['name'];
     $print = (isset($params['print'])) ? (bool)$params['print'] : true;
     $advance = (isset($params['advance'])) ? (bool)$params['advance'] : true;
     $reset = (isset($params['reset'])) ? (bool)$params['reset'] : false;
-<<<<<<< HEAD
 
     if (!isset($params['values'])) {
         if(!isset($cycle_vars[$name]['values'])) {
@@ -93,65 +60,38 @@ function smarty_function_cycle($params, $template)
     } else {
         if(isset($cycle_vars[$name]['values'])
             && $cycle_vars[$name]['values'] != $params['values'] ) {
-=======
-    if (!isset($params[ 'values' ])) {
-        if (!isset($cycle_vars[ $name ][ 'values' ])) {
-            trigger_error('cycle: missing \'values\' parameter');
-            return;
-        }
-    } else {
-        if (isset($cycle_vars[ $name ][ 'values' ]) && $cycle_vars[ $name ][ 'values' ] !== $params[ 'values' ]) {
->>>>>>> gosa-core_v2.8
             $cycle_vars[$name]['index'] = 0;
         }
         $cycle_vars[$name]['values'] = $params['values'];
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
     if (isset($params['delimiter'])) {
         $cycle_vars[$name]['delimiter'] = $params['delimiter'];
     } elseif (!isset($cycle_vars[$name]['delimiter'])) {
         $cycle_vars[$name]['delimiter'] = ',';
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
     if(is_array($cycle_vars[$name]['values'])) {
         $cycle_array = $cycle_vars[$name]['values'];
     } else {
         $cycle_array = explode($cycle_vars[$name]['delimiter'],$cycle_vars[$name]['values']);
     }
-<<<<<<< HEAD
 
     if(!isset($cycle_vars[$name]['index']) || $reset ) {
         $cycle_vars[$name]['index'] = 0;
     }
 
-=======
-    if (!isset($cycle_vars[ $name ][ 'index' ]) || $reset) {
-        $cycle_vars[ $name ][ 'index' ] = 0;
-    }
->>>>>>> gosa-core_v2.8
     if (isset($params['assign'])) {
         $print = false;
         $template->assign($params['assign'], $cycle_array[$cycle_vars[$name]['index']]);
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
     if($print) {
         $retval = $cycle_array[$cycle_vars[$name]['index']];
     } else {
         $retval = null;
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
     if($advance) {
         if ( $cycle_vars[$name]['index'] >= count($cycle_array) -1 ) {
             $cycle_vars[$name]['index'] = 0;
@@ -159,13 +99,8 @@ function smarty_function_cycle($params, $template)
             $cycle_vars[$name]['index']++;
         }
     }
-<<<<<<< HEAD
 
     return $retval;
 }
 
 ?>
-=======
-    return $retval;
-}
->>>>>>> gosa-core_v2.8

@@ -133,7 +133,7 @@ switch ($reason) {
 8<----------------------------------------------------------------------------
 
 
-Always use braces for single line blocks:
+Always use use braces for single line blocks:
 
 8<----------------------------------------------------------------------------
 if ($value) {

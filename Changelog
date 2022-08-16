@@ -1,6 +1,7 @@
 GOsa2 changelog
 ===============
 
+<<<<<<< HEAD
 * gosa 2.8
   - Fixed delete functions in all table widgets.
   - Fixed deprecated warnings for php v7.4.
@@ -16,6 +17,8 @@ GOsa2 changelog
   - Modification of visible elements such as buttons etc to improve robustness.
   - Merged .tpl files that were duplicated.
 
+=======
+>>>>>>> parent of 01260fc18... merge into master
 * gosa 2.7.5
   - Fixed problem that occured when certain POST variables get
     transferred in a wrong way.

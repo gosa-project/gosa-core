@@ -70,7 +70,7 @@ function smarty_gettext_strarg($str)
  *   - plural - The plural version of the text (2nd parameter of ngettext())
  *   - count - The item count for plural mode (3rd parameter of ngettext())
  */
-function smarty_block_t($params, $text, &$smarty)
+function smarty_block_t($params, $text)
 {
 	if ($text == "") {
 		return "";
@@ -126,3 +126,5 @@ function smarty_block_t($params, $text, &$smarty)
 	
 	return $text;
 }
+
+?>

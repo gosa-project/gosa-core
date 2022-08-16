@@ -6,10 +6,6 @@ class welcome extends plugin
    var $plDescription = "Back to main menu";
    var $plShortIcon = 'home.png';
    var $plIcon = 'home.png';
-<<<<<<< HEAD
-=======
-   var $matIcon         = "home";
->>>>>>> gosa-core_v2.8
 
 }
 
