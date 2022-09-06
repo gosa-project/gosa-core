@@ -3,7 +3,9 @@ function setItemCount() {
 }
 
 // validate input for two factor authentication
-function verify_input(code) {
+function verify_input() {
+    let code = document.getElementById("code").value;
+    console.log(code)
     let input_data = code;
     let form_data = new FormData();
     let request = new XMLHttpRequest();

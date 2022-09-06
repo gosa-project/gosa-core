@@ -26,5 +26,6 @@
     <script language="javascript" src="include/controls.js" type="text/javascript"></script>
     <script language="javascript" src="include/pulldown.js" type="text/javascript"></script>
     <script language="javascript" src="include/datepicker.js" type="text/javascript"></script>
+    <script type="text/javascript" defer src="themes/default/js/functions.js"></script>
 
   </head>
