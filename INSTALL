@@ -1,12 +1,105 @@
-GOsa 2.6 QUICK INSTALL
-======================
+Prequisite:
+
+* You have a system up and running. It has apache and PHP installed
+and there is a blank (or prefilled) but working LDAP available.
+---
+
+GOsa 2.8.1 INSTALL
+================
+
+Recommendations:
+
+* PHP Version 7.4
+* OpenLDAP 2.4, 
+* To use the two factor authentication `cn=config` must have a password set. This must be identical to the admin password.
+
+Example: set password for `cn=config`
+
+```
+# config_pw.ldif
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+replace: olcRootPW
+olcRootPW: {password}
+```
+`$ sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f config_pw.ldif`
+
+## Install gosa schema for LDAP:
+To successfully complete the installation of GOsa, the gosa schema must be included on the LDAP. In the current versions of OpenLDAP, this no longer needs to happen via ldap.conf.
+
+After the LDAP is configured and ready, the GOsa schema can be included as follows:
+
+```
+# install gosa schema
+$ sudo apt install gosa-schema
+
+# create convert.conf file
+$ sudo vim /etc/ldap/gosa_convert.conf
+
+# add the following lines
+# Can be extended for individual scheme. Care must be taken to add dependencies in the correct order.
+include /etc/ldap/schema/core.schema
+include /etc/ldap/schema/cosine.schema
+include /etc/ldap/schema/nis.schema
+include /etc/ldap/schema/inetorgperson.schema
+
+include /etc/ldap/schema/gosa/samba3.schema
+include /etc/ldap/schema/gosa/gofon.schema
+include /etc/ldap/schema/gosa/gosystem.schema
+include /etc/ldap/schema/gosa/goto.schema
+include /etc/ldap/schema/gosa/gosa-samba3.schema
+include /etc/ldap/schema/gosa/gofax.schema
+include /etc/ldap/schema/gosa/goserver.schema
+include /etc/ldap/schema/gosa/goto-mime.schema
+include /etc/ldap/schema/gosa/trust.schema
+# save and exit the file
+
+# make temporary slaptest folder and test the conversion of gosa_convert.conf
+$ mkdir /tmp/gosa_schema_convert
+$ slaptest -f /etc/ldap/gosa_convert.conf -F /tmp/gosa_schema_convert
+
+# copy the converted files to your slapd.d folder and set the permissions
+$ sudo cp -p /tmp/gosa_schema_convert/cn\=config/cn\=schema/* /etc/ldap/slapd.d/cn\=config/cn\=schema/
+$ sudo chown -R openldap:openldap /etc/ldap/slapd.d/
+
+# restart the service
+$ sudo service slapd restart
+```
+
+---
+
+## Installing GOsa 2.8.1 from Repository:
 
 Prequisite:
 
-You have a system up and running. It has apache and PHP installed
-and there is a blank (or prefilled) but working LDAP available.
+Create the following folders with the associated permissions
+### Main GOsa directory
+- /usr/share/gosa (Or the destination folder of your choice)
+  - `$ sudo chmod -R 755 /path/to/directory`
+  - Set alias to GOsa in your apache web-server config file: `Alias /gosa /usr/share/gosa/html`
+### Smarty compile directory
+- /var/spool/gosa
+  - `$ sudo chown www-data /var/spool/gosa && sudo chmod 770 /var/spool/gosa`
+### Config directory
+- /etc/gosa
+  - `$ sudo chmod 755 /etc/gosa`
 
----
+### Update the class cache
+- Run `./update-gosa` from the GOsa main directory. Restart your webserver.
+- After successful update start your first GOSA dry run without configuration.
+    * http[s]://your-server/gosa
+
+### Go through setup
+- The GOsa setup performs some basic system checks on common prerequisites. Optional settings such as bruteforce protection can be set during the process. Finally, a basic configuration (gosa.conf) is provided for download. Follow the instructions
+until you are able to log in.
+
+#### You're done. Have Fun.
+
+Sebastian Sternfeld <sternfeld@gonicus.de>
+
+GOsa 2.6 QUICK INSTALL
+======================
 
 Installing GOsa from source:
 
