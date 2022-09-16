@@ -5,7 +5,6 @@ function setItemCount() {
 // validate input for two factor authentication
 function verify_input() {
     let code = document.getElementById("code").value;
-    console.log(code)
     let input_data = code;
     let form_data = new FormData();
     let request = new XMLHttpRequest();
@@ -14,7 +13,7 @@ function verify_input() {
     
     request.open('POST', window.location);
     request.send(form_data);
-    
+
     if (input_data.length == 6) {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200 && request.responseText == "true") {

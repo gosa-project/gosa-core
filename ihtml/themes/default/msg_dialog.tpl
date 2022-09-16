@@ -131,7 +131,7 @@
 								<img src="{$s_Message['img']}" alt="{t}QR-Code is broken or empty{/t}">
 							</div>
 							<div class="input-field col s12 xl6">
-								<input type="text" name="code" id="code" maxlength="6" oninput="verify_input(this.value)">
+								<input type="text" name="code" id="code" maxlength="6" oninput="verify_input()">
 								<label for="code">{t}Enter code{/t}</label>
 							</div>
 						</div>
