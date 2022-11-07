@@ -233,7 +233,7 @@ class userManagement extends management
     function handlePasswordQueue()
     {
         /* Password checks */
-        $pwLength;
+        $pwLength = "";
         $check_special = true;
         $check_lower = true;
         $check_upper = true;
@@ -316,6 +316,10 @@ class userManagement extends management
             $dn  = $this->dn;
             $acl = $this->ui->get_permissions($dn, "users/password");
             $cacl= $this->ui->get_permissions($dn, "users/user");
+            print($this->dn);
+            echo '<pre>';
+            var_dump($this->ui->get_permissions($dn, "users/password"));
+            echo '</pre>';
             if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)){
 
                 // Get posted passwords
@@ -422,11 +426,11 @@ class userManagement extends management
                         $ldap->cd($this->dn);
                         $ldap->modify($new_attrs);
 
-#                       $posixAccount = new posixAccount($this->config, $this->dn);
-#                       $posixAccount->is_modified=TRUE;
-#                       $posixAccount->activate_shadowExpire=1;
-#                       $posixAccount->shadowExpire = date('d.m.Y', time() - (1 * 24 * 60 *60));
-#                       $posixAccount->save();
+                        # $posixAccount = new posixAccount($this->config, $this->dn);
+                        # $posixAccount->is_modified=TRUE;
+                        # $posixAccount->activate_shadowExpire=1;
+                        # $posixAccount->shadowExpire = date('d.m.Y', time() - (1 * 24 * 60 *60));
+                        # $posixAccount->save();
                     }
 
                     // Update the samba kickoff flag...
@@ -442,20 +446,20 @@ class userManagement extends management
                 new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
                 $this->dn ="";
 
-            } else {
-                msg_dialog::display(_("Password change"),
-                        _("You have no permission to change this users password!"),
-                        WARNING_DIALOG);
-            }
+            } // else {
+            //     msg_dialog::display(_("Password change"),
+            //             _("You have no permission to change this users password!"),
+            //             WARNING_DIALOG);
+            // }
         }
 
-        // Cleanup
-        if(!count($this->pwd_change_queue) && $this->dn=""){
-            $this->remove_lock();
-            $this->closeDialogs();
-        }else{
-            return($this->handlePasswordQueue());
-        }
+        // // Cleanup
+        // if(!count($this->pwd_change_queue) && $this->dn=""){
+        //     $this->remove_lock();
+        //     $this->closeDialogs();
+        // }else{
+        //     return($this->handlePasswordQueue());
+        // }
     }
 
 
@@ -1106,4 +1110,3 @@ class userManagement extends management
     }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

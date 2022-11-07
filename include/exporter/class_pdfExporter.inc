@@ -1,6 +1,8 @@
 <?php
 // Try to load PDF library
-@include_once('fpdf/fpdf.php');
+if (file_exists('fpdf/fpdf.php')) {
+  @include_once('fpdf/fpdf.php');
+}
 
 // Load supporter class only if FPDF is loaded
 $classes= get_declared_classes();

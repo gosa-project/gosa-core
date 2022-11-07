@@ -783,6 +783,7 @@ class aclrole extends acl
 
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
+    
     if($this->cn != $this->orig_cn){
       $ldap->search("(&(objectClass=gosaRole)(cn=".$this->cn."))");
       if($ldap->count()) {

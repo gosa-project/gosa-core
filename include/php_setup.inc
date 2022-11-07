@@ -305,12 +305,13 @@ $smarty = new Smarty;
 $smarty->template_dir = $BASE_DIR.'/ihtml/';
 $smarty->caching= false;
 
+## Deprecated in smarty v 4
 // To be able to switch between smarty version 2/3                                                                      
-if(defined('SMARTY_PHP_REMOVE')){                                                                                       
-    $smarty->php_handling= SMARTY_PHP_REMOVE;                                                                           
-}else{                                                                                                                  
-    $smarty->php_handling= Smarty::PHP_REMOVE;                                                                          
-}                                                                                                                       
+// if(defined('SMARTY_PHP_REMOVE')){                                                                                       
+//     $smarty->php_handling= SMARTY_PHP_REMOVE;                                                                           
+// }else{                                                                                                                  
+//     $smarty->php_handling= Smarty::PHP_REMOVE;                                                                          
+// }                                                                                                                       
 
 // Register GOsa contributed smarty plugins
 $d = opendir("$BASE_DIR/include/smartyAddons");

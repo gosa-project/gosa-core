@@ -142,7 +142,7 @@
                 <script language="JavaScript" type="text/javascript">
                         document.cookie = "gosatest=empty;path=/";
                     if (document.cookie.indexOf("gosatest=") > -1)
-                        document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
+                        document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT;samesite=lax";
                     else
                         document.write("{$cookies}");
                 </script>

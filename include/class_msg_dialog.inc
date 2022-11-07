@@ -110,8 +110,7 @@ class msg_dialog
     {
         if($this->i_Type == FATAL_ERROR_DIALOG)	{
             $display = 
-                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"
-                \"http://www.w3.org/TR/html4/transitional.dtd\">
+                "<!DOCTYPE html>
                 <html><head>
                 <title>GOsa startup failed</title>
                 </head><body>

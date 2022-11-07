@@ -352,7 +352,7 @@ class userinfo
     }
 
     /* Push cache answer? */
-    $ACL_CACHE = &session::global_get('ACL_CACHE');
+    $ACL_CACHE = session::global_get('ACL_CACHE');
     if (isset($ACL_CACHE["$dn+$object+$attribute"])){
       $ret = $ACL_CACHE["$dn+$object+$attribute"];
       if($skip_write){

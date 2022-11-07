@@ -380,6 +380,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 
             stats::log('global', 'global', array(), $action = 'login', $amount = 1, 0);
 
+            session_write_close();
+
             if (isset($plug) && isset($plist->dirlist[$plug])) {
                 header("Location: main.php?plug=".$plug."&amp;global_check=1");
             } else {
