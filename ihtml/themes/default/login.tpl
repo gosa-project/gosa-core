@@ -82,9 +82,9 @@
   <script type="text/javascript" defer src="themes/default/js/eventListener.js"></script>
 
   <script type="text/javascript">
-    document.cookie = "gosatest=empty;path=/";
+    document.cookie = "gosatest=empty;path=/;samesite=lax";
     if (document.cookie.indexOf("gosatest=") > -1)
-      document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
+      document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT;samesite=lax";
     else
       document.write("<div class='card-panel red lighten-3'>{$cookies}<\/div>");
   </script>

@@ -39,10 +39,9 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  *              of 0000-00-00 dates (cybot, boots)
  *            - 2.0 complete rewrite for performance,  
  *              added attributes month_names, *_id
- * </pre>
- * 
- * @link http://www.smarty.net/manual/en/language.function.html.select.date.php {html_select_date}
- *      (Smarty online manual)
+ *
+ * @link    https://www.smarty.net/manual/en/language.function.html.select.date.php {html_select_date}
+ *           (Smarty online manual)
  * @version 2.0
  * @author Andrei Zmievski 
  * @author Monte Ohrt <monte at ohrt dot com> 

@@ -114,7 +114,8 @@ class Step_Finish extends setup_step
     $smarty->assign("CONFIG_DIR",CONFIG_DIR);
     $smarty->assign("CONFIG_FILE" , CONFIG_FILE);
 
-    $smarty->assign("msg2", sprintf(_("After downloading and placing the file under %s, please make sure that the user the web server is running with is able to read %s, while other users shouldn't. You may want to execute these commands to achieve this requirement:"),CONFIG_DIR,CONFIG_FILE));
+    $smarty->assign("msg2", sprintf(_("Download gosa.conf and place it under %s."),CONFIG_DIR));
+    $smarty->assign("msg3", sprintf(_("After that, please make sure that the user under which the web server is running can read the %s. Other users must not be able to do this. To meet these requirements, you can run these commands in the console."), CONFIG_FILE));
 
     $smarty->assign("cv",$this->parent->captured_values);
     return($smarty -> fetch (get_template_path("../setup/".$GLOBALS['theme']."/setup_finish.tpl")));

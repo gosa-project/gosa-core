@@ -31,13 +31,14 @@
  * {cycle name=row}
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.cycle.php {cycle}
- *       (Smarty online manual)
- * @author Monte Ohrt <monte at ohrt dot com>
- * @author credit to Mark Priatel <mpriatel@rogers.com>
- * @author credit to Gerard <gerard@interfold.com>
- * @author credit to Jason Sweat <jsweat_php@yahoo.com>
- * @version  1.3
+ * @link    https://www.smarty.net/manual/en/language.function.cycle.php {cycle}
+ *           (Smarty online manual)
+ * @author  Monte Ohrt <monte at ohrt dot com>
+ * @author  credit to Mark Priatel <mpriatel@rogers.com>
+ * @author  credit to Gerard <gerard@interfold.com>
+ * @author  credit to Jason Sweat <jsweat_php@yahoo.com>
+ * @version 1.3
+ *
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
  * @return string|null

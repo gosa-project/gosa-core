@@ -61,19 +61,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, session::get_all(), "_SESSION");
 
 /* Logged in? Simple security check */
-if (!session::global_is_set('config')){
-  new log("security","login","",array(),"main.php called without session - logging out") ;
-  header ("Location: logout.php");
-  exit;
-}
+// if (!session::global_is_set('config')){
+//   new log("security","login","",array(),"main.php called without session - logging out") ;
+//   header ("Location: logout.php");
+//   exit;
+// }
 
 /* Check for uniqe ip address */
 $ui= session::global_get('ui');
-if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
-  new log("security","login","",array(),"main.php called with session which has a changed IP address.") ;
-  header ("Location: logout.php");
-  exit;
-}
+// if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
+//   new log("security","login","",array(),"main.php called with session which has a changed IP address.") ;
+//   header ("Location: logout.php");
+//   exit;
+// }
 $config= session::global_get('config');
 $config->check_and_reload();
 $config->configRegistry->reload();

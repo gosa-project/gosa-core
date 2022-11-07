@@ -110,6 +110,9 @@ class Smarty_Internal_Data {
     /**
      * appends values to template variables
      *
+     * @api  Smarty::append()
+     * @link https://www.smarty.net/docs/en/api.append.tpl
+     *
      * @param array|string $tpl_var the template variable name(s)
      * @param mixed        $value   the value to append
      * @param boolean      $merge   flag if array elements shall be merged
@@ -200,10 +203,14 @@ class Smarty_Internal_Data {
     /**
      * Returns a single or all template variables
      *
-     * @param string  $varname        variable name or null
-     * @param string  $_ptr           optional pointer to data object
-     * @param boolean $search_parents include parent templates?
-     * @return string variable value or or array of variables
+     * @api  Smarty::getTemplateVars()
+     * @link https://www.smarty.net/docs/en/api.get.template.vars.tpl
+     *
+     * @param string                                                  $varName       variable name or null
+     * @param \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty $_ptr          optional pointer to data object
+     * @param bool                                                    $searchParents include parent templates?
+     *
+     * @return mixed variable value or or array of variables
      */
     public function getTemplateVars($varname = null, $_ptr = null, $search_parents = true)
     {
@@ -287,42 +294,7 @@ class Smarty_Internal_Data {
     }
 
     /**
-     * gets the object of a Smarty variable
-     *
-     * @param string  $variable the name of the Smarty variable
-     * @param object  $_ptr     optional pointer to data object
-     * @param boolean $search_parents search also in parent data
-     * @return object the object of the variable
-     */
-    public function getVariable($variable, $_ptr = null, $search_parents = true, $error_enable = true)
-    {
-        if ($_ptr === null) {
-            $_ptr = $this;
-        } while ($_ptr !== null) {
-            if (isset($_ptr->tpl_vars[$variable])) {
-                // found it, return it
-                return $_ptr->tpl_vars[$variable];
-            }
-            // not found, try at parent
-            if ($search_parents) {
-                $_ptr = $_ptr->parent;
-            } else {
-                $_ptr = null;
-            }
-        }
-        if (isset(Smarty::$global_tpl_vars[$variable])) {
-            // found it, return it
-            return Smarty::$global_tpl_vars[$variable];
-        }
-        if ($this->smarty->error_unassigned && $error_enable) {
-            // force a notice
-            $x = $$variable;
-        }
-        return new Undefined_Smarty_Variable;
-    }
-
-    /**
-     * gets  a config variable
+     * Follow the parent chain an merge template and config variables
      *
      * @param string $variable the name of the config variable
      * @return mixed the value of the config variable

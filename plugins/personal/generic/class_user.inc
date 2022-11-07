@@ -280,6 +280,8 @@ class user extends plugin
   /* execute generates the html output for this node */
   function execute()
   {
+    $theme = getThemeName();
+    
     /* Call parent execute */
     plugin::execute();
 
@@ -1328,6 +1330,7 @@ class user extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(uid=$this->uid)", array("uid"));
     $ldap->fetch();
+
     if ($ldap->count() != 0 && $this->dn == 'new'){
       $message[]= msgPool::duplicated(_("Login"));
     }
@@ -1350,8 +1353,8 @@ class user extends plugin
         $message[]= msgPool::required(_("Login"));
       }
       if ($this->config->get_cfg_value("core","accountPrimaryAttribute") != "uid"){
-        $ldap->cat($this->new_dn);
-        if ($ldap->count() != 0 && $this->dn != $this->new_dn && $this->dn == 'new'){
+        $ldap->cat($ldap->count);
+        if ($ldap->count != 0 && $this->dn != $this->new_dn && $this->dn == 'new'){
           $message[]= msgPool::duplicated(_("Name"));
         }
       }

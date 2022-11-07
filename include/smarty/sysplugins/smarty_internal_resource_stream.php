@@ -11,16 +11,15 @@
 */
 
 /**
-* Smarty Internal Plugin Resource Stream
-*
-* Implements the streams as resource for Smarty template
-*
-* @link http://php.net/streams
-* @package Smarty
-* @subpackage TemplateResources
-*/
-class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
-
+ * Smarty Internal Plugin Resource Stream
+ * Implements the streams as resource for Smarty template
+ *
+ * @link       https://php.net/streams
+ * @package    Smarty
+ * @subpackage TemplateResources
+ */
+class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled
+{
     /**
     * populate Source Object with meta data from Resource
     *

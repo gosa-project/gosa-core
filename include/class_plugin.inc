@@ -662,7 +662,7 @@ class plugin
         break;
       
       default:
-        $display = "<h2 class='card-title'>"._(Preferences)."</h2>
+        $display = "<h2 class='card-title'>"._('Preferences')."</h2>
                       <p>$text</p>
                       <div class='card-action settings'>
                         <button class='btn-small' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
@@ -695,7 +695,7 @@ class plugin
         break;
       
       default:
-        $display = "<h2 class='card-title'>"._(Preferences)."</h2>
+        $display = "<h2 class='card-title'>"._('Preferences')."</h2>
                     <p>$text</p>
                     <div class='card-action settings'>
                       <button class='btn-small' type='submit' name='modify_state' ".$state.">

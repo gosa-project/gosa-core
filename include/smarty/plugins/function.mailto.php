@@ -39,8 +39,8 @@
  * {mailto address="me@domain.com" extra='class="mailto"'}
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.mailto.php {mailto}
- *          (Smarty online manual)
+ * @link    https://www.smarty.net/manual/en/language.function.mailto.php {mailto}
+ *           (Smarty online manual)
  * @version 1.2
  * @author Monte Ohrt <monte at ohrt dot com>
  * @author credits to Jason Sweat (added cc, bcc and subject functionality)
@@ -97,32 +97,20 @@ function smarty_function_mailto($params, $template)
         trigger_error("mailto: 'encode' parameter must be none, javascript, javascript_charcode or hex", E_USER_WARNING);
         return;
     }
-    // FIXME: (rodneyrehm) document.write() excues me what? 1998 has passed!
-    if ($encode == 'javascript') {
-        $string = 'document.write(\'<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>\');';
-
+    if ($encode === 'javascript') {
+	    $string = '<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>';
         $js_encode = '';
         for ($x = 0, $_length = strlen($string); $x < $_length; $x++) {
             $js_encode .= '%' . bin2hex($string[$x]);
         }
-
-        return '<script type="text/javascript">eval(unescape(\'' . $js_encode . '\'))</script>';
-    } elseif ($encode == 'javascript_charcode') {
+        return '<script type="text/javascript">document.write(unescape(\'' . $js_encode . '\'))</script>';
+    } elseif ($encode === 'javascript_charcode') {
         $string = '<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>';
-
-        for($x = 0, $y = strlen($string); $x < $y; $x++) {
-            $ord[] = ord($string[$x]);
+        for ($x = 0, $_length = strlen($string); $x < $_length; $x++) {
+            $ord[] = ord($string[ $x ]);
         }
-
-        $_ret = "<script type=\"text/javascript\" language=\"javascript\">\n"
-            . "{document.write(String.fromCharCode("
-            . implode(',', $ord)
-            . "))"
-            . "}\n"
-            . "</script>\n";
-
-        return $_ret;
-    } elseif ($encode == 'hex') {
+	    return '<script type="text/javascript">document.write(String.fromCharCode(' . implode(',', $ord) . '))</script>';
+    } elseif ($encode === 'hex') {
         preg_match('!^(.*)(\?.*)$!', $address, $match);
         if (!empty($match[2])) {
             trigger_error("mailto: hex encoding does not work with extra attributes. Try javascript.",E_USER_WARNING);

@@ -30,7 +30,7 @@
 class config  {
 
     /* XML parser */
-    var $parser;
+    static $parser;
     var $config_found= FALSE;
     var $tags= array();
     var $level= 0;
@@ -78,11 +78,11 @@ class config  {
      * */
     function __construct($filename, $basedir= "")
     {
-        $this->parser = xml_parser_create();
+        // $this->parser = xml_parser_create();
+        config::$parser = xml_parser_create();
         $this->basedir= $basedir;
-
-        xml_set_object($this->parser, $this);
-        xml_set_element_handler($this->parser, "tag_open", "tag_close");
+        xml_set_object(config::$parser, $this);
+        xml_set_element_handler(config::$parser, "tag_open", "tag_close");
 
         /* Parse config file directly? */
         if ($filename != ""){
@@ -133,9 +133,8 @@ class config  {
             $this->section= "";
             $this->currentLocation= "";
 
-            $this->parser = xml_parser_create();
-            xml_set_object($this->parser, $this);
-            xml_set_element_handler($this->parser, "tag_open", "tag_close");
+            xml_set_object(config::$parser, $this);
+            xml_set_element_handler(config::$parser, "tag_open", "tag_close");
             $this->parse($this->filename);
             $this->set_current($this->current['NAME']);
         }
@@ -164,10 +163,10 @@ class config  {
         $fh= fopen($filename, "r"); 
         $xmldata= fread($fh, 100000);
         fclose($fh);
-        if(!xml_parse($this->parser, chop($xmldata))){
+        if(!xml_parse(config::$parser, chop($xmldata))){
             $msg = sprintf(_("XML error in gosa.conf: %s at line %d"),
-                    bold(xml_error_string(xml_get_error_code($this->parser))),
-                    bold(xml_get_current_line_number($this->parser)));
+                    bold(xml_error_string(xml_get_error_code(config::$parser))),
+                    bold(xml_get_current_line_number(config::$parser)));
             msg_dialog::display(_("Configuration error"), $msg, FATAL_ERROR_DIALOG);
             exit;
         }
