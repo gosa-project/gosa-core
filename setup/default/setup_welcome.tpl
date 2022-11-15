@@ -45,7 +45,7 @@
 
 	<div class="row valign-wrapper">
 		<div class="col s6 xl6">
-			<textarea class="copy-area" spellcheck="false" type="text" id="config_tmp">sudo service apache2stop&#13;&#10;sudo sed -i 's/Tmp=true/Tmp=false/' /lib/systemd/system/apache2.service&#13;&#10;sudosystemctl daemon-reload&#13;&#10;sudo service apache2 start</textarea>
+			<textarea class="copy-area" spellcheck="false" type="text" id="config_tmp">sudo service apache2 stop&#13;&#10;sudo sed -i 's/Tmp=true/Tmp=false/' /lib/systemd/system/apache2.service&#13;&#10;sudo systemctl daemon-reload&#13;&#10;sudo service apache2 start</textarea>
 		</div>
 		<div class="col s2 xl2">
 			<button class="btn-extra-small tooltipped" data-postion="top" data-tooltip="Copy to clipboard" onclick="copy_to_clipboard('config_tmp')">
