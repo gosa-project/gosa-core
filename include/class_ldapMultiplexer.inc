@@ -51,7 +51,12 @@ class ldapMultiplexer {
 
 
   public function __get($memberName) {
-    return $this->object->$memberName;
+    $property = new ReflectionProperty($this->object, $memberName);
+    if ($property->isStatic()) {
+      return $this->object::$$memberName;
+    } else {
+      return $this->object->$memberName;
+    }
   }
 
 }
