@@ -8,6 +8,7 @@
             "port": 9003,
             // server -> local
             "pathMappings": {
+                "/usr/sbin/gosa-encrypt-passwords": "${workspaceRoot}/bin/gosa-encrypt-passwords",
                 "/usr/share/gosa/": "${workspaceRoot}"
             },
             "postDebugTask": "sleep-task",
