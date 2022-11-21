@@ -28,6 +28,7 @@ class configRegistry{
     // Name of enabled plugins found in gosa.conf.
     private $activePlugins = array();
 
+    private $mapByName;
 
     /*! \brief      Constructs the config registry 
      *  @param      config  The configuration object

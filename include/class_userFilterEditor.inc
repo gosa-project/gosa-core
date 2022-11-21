@@ -23,6 +23,7 @@ class userFilterEditor extends plugin
     public $orig_name = "";
     public $backends = array('LDAP','LDAPBlacklist', 'SYSTEMS', 'FAI', 'GroupLDAP','ACL', 'OPSIPackages','APPLICATIONS','MIMETYPES','CONFIGPROPERTIES');  
 
+    var $initTime;
 
     /*! \brief    Instantiate the filter editing dialog. 
      *            Parses the filter info into editable data.

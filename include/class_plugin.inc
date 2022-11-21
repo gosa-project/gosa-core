@@ -136,6 +136,8 @@ class plugin
   var $selected_edit_values = array();
   var $multi_boxes = array();
 
+  var $initTime;
+
   /*! \brief plugin constructor
 
     If 'dn' is set, the node loads the given 'dn' from LDAP
