@@ -1207,7 +1207,7 @@ class acl extends plugin
 
                 switch ($this->theme) {
                     case 'classic':
-                        $display .= "   <td style='border-top:1px solid #A0A0A0;${rb}width:".(int)(100/$cols)."%'>
+                        $display .= "   <td style='border-top:1px solid #A0A0A0;{$rb}width:".(int)(100/$cols)."%'>
                                             <b>$dsc</b> ($attr)<br>".$this->mkrwbx($key."_".$attr, $state)."
                                         </td>$end";
                         break;
@@ -1308,20 +1308,20 @@ class acl extends plugin
         if($this->acl_is_writeable("")){
             switch ($this->theme) {
                 case 'classic':
-                    return "<input id='acl_".$tname."_r' type='checkbox' name='acl_${name}_r' $rstate>
+                    return "<input id='acl_".$tname."_r' type='checkbox' name='acl_{$name}_r' $rstate>
                             <label for='acl_".$tname."_r'>"._("read")."</label>
-                            <input id='acl_".$tname."_w' type='checkbox' name='acl_${name}_w' $wstate>
+                            <input id='acl_".$tname."_w' type='checkbox' name='acl_{$name}_w' $wstate>
                             <label for='acl_".$tname."_w'>"._("write")."</label>";
                 default:
                     return "<label>
                                 <p>
-                                    <input type='checkbox' id='acl_".$tname."_r' name='acl_${name}_r' $rstate>
+                                    <input type='checkbox' id='acl_".$tname."_r' name='acl_{$name}_r' $rstate>
                                     <span>"._("read")."</span>
                                 </p>
                             </label>
                             <label>
                                 <p>
-                                    <input type='checkbox' id='acl_".$tname."_w' name='acl_${name}_w' $wstate>
+                                    <input type='checkbox' id='acl_".$tname."_w' name='acl_{$name}_w' $wstate>
                                     <span>"._("write")."</span>
                                 </p>
                             </label>" ;
