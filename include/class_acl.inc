@@ -62,6 +62,8 @@ class acl extends plugin
 
     var $theme;
 
+    var $targets;
+
     function __construct(&$config, $parent, $dn= NULL)
     {
         /* Include config object */

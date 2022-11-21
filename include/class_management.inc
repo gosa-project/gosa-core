@@ -88,6 +88,8 @@ class management
 
     var $logout = false;
 
+    var $initTime;
+
     public function __construct(&$config, $ui, $plugname, $headpage)
     {
         $this->plugname = $plugname;

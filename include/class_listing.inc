@@ -57,6 +57,9 @@ class listing
     public $scrollPosition = 0;
     public $baseSelector;
     public $aclToObjectClass = [];
+    public $showFooter;
+    public $plainHeader;
+    public $categories;
 
     public $theme = "";
 

@@ -4,7 +4,7 @@ class infoPage extends plugin
 {
     private $ui;
     private $managers;
-
+    private $plugins;
 
     /*! \brief
      */
