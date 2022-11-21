@@ -505,19 +505,27 @@ class LDAP
 
     function count($srp)
     {
-        if($this->hascon){
-            if($this->hasres[$srp]){
-                $rv = @ldap_count_entries(self::$cid, self::$sr[$srp]);
-                $this->error = @ldap_error(self::$cid);
-                return($rv);
-            }else{
-                $this->error = "Perform a Fetch with no Search";
-                return("");
-            }
-        }else{
+        if(!$this->hascon) {
             $this->error = "Could not connect to LDAP server";
             return("");
         }
+
+        if(!$this->hasres[$srp]) {
+            $this->error = "Perform a Fetch with no Search";
+            return("");
+        }
+
+        $result = self::$sr[$srp];
+        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+            if (!$result instanceof LDAP\Result) {
+                $this->error = "Search result was not type of LDAP\\Result.";
+                return("");
+            }
+        }
+
+        $rv = @ldap_count_entries(self::$cid, $result);
+        $this->error = @ldap_error(self::$cid);
+        return($rv);
     }
 
     function rm($attrs = array(), $dn = "")
