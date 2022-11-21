@@ -380,6 +380,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 
             stats::log('global', 'global', array(), $action = 'login', $amount = 1, 0);
 
+            unset($config->ldap->re); // Avoid serializing results.
             session_write_close();
 
             if (isset($plug) && isset($plist->dirlist[$plug])) {
