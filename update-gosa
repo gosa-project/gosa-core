@@ -538,7 +538,7 @@ function rescan_images($path, $theme)
          }
 
          // Load image
-         $img= imageCreateFromPng($path);
+         $img= imagecreatefrompng($path);
          $width= imageSX($img);
          $height= imageSY($img);
          imageDestroy($img);
@@ -677,13 +677,13 @@ function rescan_images($path, $theme)
     if (preg_match('/-grey\.png$/', $imagePath)) {
       if (!function_exists("imageFilter")){
         exec("convert ".$paths[$imagePath]." -colorspace Gray /tmp/grey-converted.png");
-        $src= imageCreateFromPng("/tmp/grey-converted.png");
+        $src= imagecreatefrompng("/tmp/grey-converted.png");
       } else {
-        $src= imageCreateFromPng($paths[$imagePath]);
+        $src= imagecreatefrompng($paths[$imagePath]);
         imageFilter($src, IMG_FILTER_GRAYSCALE);
       }
     } else {
-      $src= imageCreateFromPng($paths[$imagePath]);
+      $src= imagecreatefrompng($paths[$imagePath]);
     }
 
     // Merge image
