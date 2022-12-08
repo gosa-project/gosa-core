@@ -172,7 +172,7 @@ class acl extends plugin
             }
         }
         if (in_array_ics('organizationalUnit', $oc)){
-            $this->isContainer= TRUE;
+            $this->isContainer = TRUE;
         }
     } else {
         if (is_array($this->$attrs) && in_array('objectClass', $this->attrs)) {
