@@ -88,27 +88,15 @@ class configRegistry{
     {
         // Read objectClasses from ldap
         if(count($objectClassesToUse)){
-            $this->setObjectClasses($objectClassesToUse);
+            $this->objectClasses = $objectClassesToUse;
         }elseif(!count($this->objectClasses)){
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
-            $this->setObjectClasses($ldap->get_objectclasses());
+            $this->objectClasses = $ldap->get_objectclasses();
         }
 
         return($this->_validateSchemata($force, $disableIncompatiblePlugins));
     }
-
-
-    /*! \brief      Sets the list object classes to use while validation the schema. (See 'validateSchemata')
-     *              This is called from the GOsa-Setup
-     *  @param      Array       The list of object classes (usually LDAP::get_objectlclasses()).
-     *  @return     void  
-     */
-    function setObjectClasses($ocs)
-    {
-        $this->objectClasses = $ocs;
-    }
-
 
     /*! \brief      Returns an array which contains all unresolved schemata requirements.
      *  @return     Array       An array containing all errors/issues  
