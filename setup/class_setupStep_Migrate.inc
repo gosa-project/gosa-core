@@ -198,8 +198,11 @@ class Step_Migrate extends setup_step
             /* Collect a list of available GOsa users and groups
              */
             $users = array();
-            $ldap->search("(&(objectClass=gosaAccount)(objectClass=person)".
-                    "(objectClass=inetOrgPerson)(objectClass=organizationalPerson))",array("uid","dn"));
+            $ldap->search(
+                "(&(objectClass=gosaAccount)(objectClass=person)" .
+                "(objectClass=inetOrgPerson)(objectClass=organizationalPerson))" ,
+                array("uid","dn"));
+
             while($user_attrs = $ldap->fetch()){
                 $users[$user_attrs['dn']] = $user_attrs['uid'][0];
                 $rusers[$user_attrs['uid'][0]] = $user_attrs['dn'];

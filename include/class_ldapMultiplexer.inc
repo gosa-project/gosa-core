@@ -31,10 +31,10 @@ class ldapMultiplexer {
  
   public function __construct(&$object) {
     /* Store object */
-    $this->object= $object;
+    $this->object = $object;
 
     /* Set result resource */
-    $this->sr= $this->object->getSearchResource();
+    $this->sr = $this->object->getSearchResource();
   }
  
   public function __call($methodName, $parameters) {
