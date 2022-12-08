@@ -74,7 +74,12 @@ $ui= session::global_get('ui');
 //   header ("Location: logout.php");
 //   exit;
 // }
-$config= session::global_get('config');
+
+$config = session::global_get('config');
+if (!isset($config)) {
+  die("Could not get config object. Please contact your system administrator or try again later.\n");
+}
+
 $config->check_and_reload();
 $config->configRegistry->reload();
 
