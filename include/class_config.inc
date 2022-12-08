@@ -354,8 +354,7 @@ class config  {
      */
     function get_ldap_link($sizelimit= FALSE)
     {
-        if($this->ldap === NULL || !is_resource($this->ldap->cid)){
-
+        if($this->ldap === NULL || (isset($this->ldap->cid) && !is_resource($this->ldap->cid))) {
             /* Build new connection */
             $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
                     $this->current['ADMINDN'], $this->get_credentials($this->current['ADMINPASSWORD']));
