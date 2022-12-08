@@ -1520,7 +1520,7 @@ class LDAP
         $r= ldap_bind ($ds, $admin, $password);
 
         /* Get base to look for naming contexts */
-        $sr  = @ldap_read ($ds, "", "objectClass=*", array("+"));
+        $sr  = @ldap_read ($ds, "", "objectClass=*", array(0 => "+"));
         $attr= @ldap_get_entries($ds,$sr);
 
         return ($attr[0]['namingcontexts']);
