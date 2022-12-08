@@ -1381,9 +1381,16 @@ class LDAP
             return($objectclasses);
         }
 
-# Get base to look for schema 
-        $sr = @ldap_read (self::$cid, "", "objectClass=*", array("subschemaSubentry"));
-        $attr = @ldap_get_entries(self::$cid,$sr);
+        # Make sure we are connected to LDAP.
+        $_cid = self::$cid;
+        if (is_null($_cid)) {
+            self::connect();
+            $_cid = self::$cid;
+        }
+
+        # Get base to look for schema
+        $sr = @ldap_read ($_cid, "", "objectClass=*", array("subschemaSubentry"));
+        $attr = @ldap_get_entries($_cid, $sr);
         if (!isset($attr[0]['subschemasubentry'][0])){
             return array();
         }
@@ -1391,8 +1398,8 @@ class LDAP
         /* Get list of objectclasses and fill array */
         $nb= $attr[0]['subschemasubentry'][0];
         $objectclasses= array();
-        $sr= ldap_read (self::$cid, $nb, "objectClass=*", array("objectclasses"));
-        $attrs= ldap_get_entries(self::$cid,$sr);
+        $sr= ldap_read ($_cid, $nb, "objectClass=*", array("objectclasses"));
+        $attrs= ldap_get_entries($_cid,$sr);
         if (!isset($attrs[0])){
             return array();
         }
@@ -1401,6 +1408,7 @@ class LDAP
                 continue;
             }
             $name= "OID";
+            $value = "";
             $pattern= explode(' ', $val);
             $ocname= preg_replace("/^.* NAME\s+\(*\s*'([^']+)'\s*\)*.*$/", '\\1', $val);
             $objectclasses[$ocname]= array();
