@@ -2338,6 +2338,10 @@ function progressbar($percentage, $width= 200, $height= 14, $showText= false, $c
  */
 function array_key_ics($ikey, $items)
 {
+  if (is_null($items) || !is_array($items)) {
+    return ('');
+  }
+
   $tmp= array_change_key_case($items, CASE_LOWER);
   $ikey= strtolower($ikey);
   if (isset($tmp[$ikey])){

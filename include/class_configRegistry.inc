@@ -115,7 +115,8 @@ class configRegistry{
     private function _validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
     {
         // We cannot check without readable schema info
-        if(!count($this->objectClasses)){
+        $_objectClasses = $this->objectClasses;
+        if(!is_null($_objectClasses) && !count($_objectClasses)){
             return(TRUE); 
         }
 
