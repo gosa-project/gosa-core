@@ -1,0 +1,49 @@
+# IP of tjener debugging/test server
+ip = 10.0.2.2
+debugging_server_root_password = "12345678"
+
+package_version = $(shell /usr/bin/dpkg-parsechangelog -S version)
+CODENAME ?= bullseye
+
+all: upload install
+
+build: clean packages
+
+packages: ../gosa_$(package_version)_all.deb
+#	../gosa-dev_$(package_version)_all.deb \
+#	../gosa-desktop_$(package_version)_all.deb \
+#	../gosa-schema_$(package_version)_all.deb \
+#	../gosa-help-en_$(package_version)_all.deb \
+#	../gosa-help-de_$(package_version)_all.deb \
+#	../gosa-help-nl_$(package_version)_all.deb \
+#	../gosa-help-fr_$(package_version)_all.deb \
+
+../%.deb:
+	-rm -rf debian/
+	cp -r ../gosa-core/debian .
+	debuild -uc -us -S -d
+	cd .. && sbuild --no-run-lintian -sAd $(CODENAME) $(shell basename -s _all.deb $@).dsc -j16
+
+clean:
+	-cd .. && rm -v *.deb *.changes *.build *.buildinfo *.dsc *.tar.xz
+
+upload: | packages
+	#-cd .. && ssh root@$(ip) "rm -rfv /root/*.deb"
+	scp ../gosa*_$(package_version)_all.deb root@$(ip):/root
+
+uninstall:
+	-ssh root@$(ip) "apt-get remove -y gosa gosa-dev gosa-desktop gosa-schema gosa-help-en gosa-help-de gosa-help-fr gosa-help-nl"
+	#ssh root@$(ip) "apt-get remove -y gosa"
+
+install: uninstall upload
+	ssh root@$(ip) "apt-get install /root/gosa_$(package_version)_all.deb -y --allow-downgrades"
+	#ssh root@$(ip) "apt-get install --fix-broken"
+	ssh root@$(ip) "systemctl restart apache2"
+
+prepare_debugging_server:
+	# 1. Disable uif
+	# 2. Enable root login in /etc/ssh/sshd_config
+	# 3. Copy SSH public key to server
+	echo $(debugging_server_root_password) | ssh-copy-id root@$(ip)
+	# 4. Install a few helpful packages
+	ssh root@$(ip) "apt update; apt install devscripts git git-extras build-essential nano mc vim sudo -y"
