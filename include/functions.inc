@@ -2048,14 +2048,13 @@ function to_byte($value) {
 /*! \brief Check if a value exists in an array (case-insensitive)
  *
  * This is just as http://php.net/in_array except that the comparison
- * is case-insensitive.
+ * is case-insensitive. See: https://stackoverflow.com/a/2166524
  *
- * \param string 'value' needle
- * \param array 'items' haystack
+ * \param string 'needle'
+ * \param array 'haystack'
  */
-function in_array_ics($value, $items)
-{
-	return preg_grep('/^'.preg_quote($value, '/').'$/i', $items);
+function in_array_ics($needle, $haystack) {
+  return in_array(strtolower($needle), array_map('strtolower', $haystack));
 }
 
 
