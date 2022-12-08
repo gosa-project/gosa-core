@@ -1388,8 +1388,12 @@ class listing
 
         $params = [func_get_arg(2)];
 
+        // If we failed to collect enough parameters we shouldn't call sprintf!
+        $found_args = false;
+
         // Collect sprintf params
         for ($i = 3; $i < func_num_args(); ++$i) {
+            $found_args = true;
             $val = func_get_arg($i);
             if (is_array($val)) {
                 $params[] = $val[0];
@@ -1399,7 +1403,14 @@ class listing
         }
 
         $result = '&nbsp;';
-        $trans = call_user_func_array('sprintf', $params);
+
+        if (!$found_args && is_array($params) && count($params) > 0 && strlen($params[0]) >= 0) {
+            # Okay, we definitely have a string at $params[0] and *no* extra
+            # parameters could be found.
+            return $result;
+        }
+
+        $trans = sprintf(...$params);
         if ($trans != '') {
             return "<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='{$titleAttr}'>".set_post($trans).'</a>';
         }
