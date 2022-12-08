@@ -2,11 +2,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "install-on-tjener",
-            "command": "./scripts/install-core-on-tjener.sh",
-            "args": [
-                ""
-            ],
+            "label": "make all",
+            "command": "make -f Makefile-debian.debug build all",
+            "args": [],
             "type": "shell",
             "presentation": {
                 "reveal": "silent"
