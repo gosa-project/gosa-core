@@ -41,6 +41,8 @@ class configRegistry{
         // Detect classes that have a plInfo method 
         global $class_mapping;
         foreach ($class_mapping as $cname => $path){
+            if (str_starts_with($cname, "_")) continue;
+
             $cmethods = get_class_methods($cname);
             if (is_array($cmethods) && in_array_ics('plInfo',$cmethods)){
 
