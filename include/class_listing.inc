@@ -1277,7 +1277,20 @@ class listing
             // add an empty picture here.
             if (isset($action['objectclass'])) {
                 $objectclass = $action['objectclass'];
-                if (preg_match('/^!(.*)$/', $objectclass, $m)) {
+                if (is_array($objectclass)) {
+                    if (count(array_intersect($objectclass, $classes)) != count($objectclass)) {
+                        switch ($this->theme) {
+                            case 'classic':
+                                $result .= image('images/empty.png');
+                                break;
+
+                            default:
+                                $result .= image('');
+                                break;
+                        }
+                        continue;
+                    }
+                } elseif (preg_match('/^!(.*)$/', $objectclass, $m)) {
                     $objectclass = $m[1];
                     if (in_array_strict($objectclass, $classes)) {
                         switch ($this->theme) {
@@ -1293,19 +1306,6 @@ class listing
                     }
                 } elseif (is_string($objectclass)) {
                     if (!in_array_strict($objectclass, $classes)) {
-                        switch ($this->theme) {
-                            case 'classic':
-                                $result .= image('images/empty.png');
-                                break;
-
-                            default:
-                                $result .= image('');
-                                break;
-                        }
-                        continue;
-                    }
-                } elseif (is_array($objectclass)) {
-                    if (count(array_intersect($objectclass, $classes)) != count($objectclass)) {
                         switch ($this->theme) {
                             case 'classic':
                                 $result .= image('images/empty.png');
