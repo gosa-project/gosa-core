@@ -216,7 +216,7 @@ class propertyEditor extends management
     static function propertyValue($class,$cn,$value,$type,$default,$defaults,$check,$mandatory)
     {
         $ssize  = "208px";
-        $isize  = "200px";
+        $isize  = "400px";
         $name  = "{$class[0]}:{$cn[0]}";
         $value = set_post($value[0]);
         $theme = getThemeName();
