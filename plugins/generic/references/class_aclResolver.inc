@@ -409,7 +409,7 @@ class aclResolver
                                     $innerColSize = "s12 xl6";
                                     $colsPerRow = 2;
                                 } else {
-                                    if (screen.width < 1200) {
+                                    if ($_SESSION["screen_width"] > 1200) {
                                         $innerColSize = "s6 xl3";
                                         $colsPerRow = 2;
                                     } else {
