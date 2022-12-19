@@ -25,6 +25,7 @@
 
 /* Define globals for revision comparing */
 $svn_path = '$HeadURL$';
+$git_tag_folder = '../.git/refs/tags/';
 $svn_revision = '$Revision$';
 
 /* Configuration file location */
@@ -2068,7 +2069,7 @@ function validate($string)
 /*! \brief Evaluate the current GOsa version from the build in revision string */
 function get_gosa_version()
 {
-    global $svn_revision, $svn_path;
+    global $svn_revision, $svn_path, $git_tag_folder;
 
     /* Extract informations */
     $revision= preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
@@ -2096,6 +2097,21 @@ function get_gosa_version()
     // The trunk version
     if(preg_match("#/trunk/#i", $svn_path)){
         return (sprintf(_("GOsa development snapshot (Rev %s)"), bold($revision)));
+    }
+
+    /**
+     * If we had a git tag version
+     * use this instead
+     */
+    if ($tags = scandir($git_tag_folder))
+    {
+      foreach ($tags as $tag)
+      {
+        if (preg_match("/^(\d)/", $tag))
+        {
+          $release = $tag;
+        }
+      }
     }
 
     return (sprintf(_("GOsa $release"), $revision));
