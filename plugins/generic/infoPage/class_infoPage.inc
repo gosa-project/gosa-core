@@ -4,7 +4,7 @@ class infoPage extends plugin
 {
     private $ui;
     private $managers;
-
+    private $plugins;
 
     /*! \brief
      */
@@ -128,7 +128,8 @@ class infoPage extends plugin
                     "academicTitle","dateOfBirth","homePostalAddress","homePhone","departmentNumber",
                     "employeeNumber","employeeType") as $attr){
             $smarty->assign($attr, "");
-            if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", $attr))
+            $perms = $this->ui->get_permissions($this->ui->dn,"users/user", $attr);
+            if(preg_match("/r/", $perms)
                     && isset($this->attrs[$attr][0])){
                 $smarty->assign($attr, set_post($this->attrs[$attr][0]));
                 $personalInfoAllowed = TRUE;

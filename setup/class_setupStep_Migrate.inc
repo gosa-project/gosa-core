@@ -41,6 +41,10 @@ class Step_Migrate extends setup_step
     var $rootOC_details = array();
     var $b_displayCheckbutton = TRUE;
 
+    var $migrate_users;
+    var $acl_migrate_dialog;
+    var $migrate_acl_base_entry;
+
     function __construct()
     {
         $this->update_strings();
@@ -194,8 +198,11 @@ class Step_Migrate extends setup_step
             /* Collect a list of available GOsa users and groups
              */
             $users = array();
-            $ldap->search("(&(objectClass=gosaAccount)(objectClass=person)".
-                    "(objectClass=inetOrgPerson)(objectClass=organizationalPerson))",array("uid","dn"));
+            $ldap->search(
+                "(&(objectClass=gosaAccount)(objectClass=person)" .
+                "(objectClass=inetOrgPerson)(objectClass=organizationalPerson))" ,
+                array("uid","dn"));
+
             while($user_attrs = $ldap->fetch()){
                 $users[$user_attrs['dn']] = $user_attrs['uid'][0];
                 $rusers[$user_attrs['uid'][0]] = $user_attrs['dn'];

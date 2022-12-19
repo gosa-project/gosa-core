@@ -1,4 +1,13 @@
 {
+    "files.associations": {
+        "*.inc": "php"
+    },
     "smarty.highlight": true,
-    "files.associations": { "*.inc": "php"}
+    "intelephense.environment.phpVersion": "8.2",
+    "editor.rulers": [
+        85
+    ],
+    "[php]": {
+        "editor.formatOnType": true
+    }
 }

@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Make & Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            // server -> local
+            "pathMappings": {
+                "/usr/sbin/gosa-encrypt-passwords": "${workspaceRoot}/bin/gosa-encrypt-passwords",
+                "/usr/sbin/update-gosa": "${workspaceRoot}/update-gosa",
+                "/usr/share/gosa/": "${workspaceRoot}"
+            },
+            "postDebugTask": "sleep-task",
+            "preLaunchTask": "make all",
+            "log": true,
+        },
+        {
+            "name": "Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            // server -> local
+            "pathMappings": {
+                "/usr/sbin/gosa-encrypt-passwords": "${workspaceRoot}/bin/gosa-encrypt-passwords",
+                "/usr/share/gosa/": "${workspaceRoot}"
+            },
+            "postDebugTask": "sleep-task",
+            "log": true,
+        },
+    ]
+}

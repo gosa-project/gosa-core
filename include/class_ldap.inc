@@ -125,7 +125,7 @@ class LDAP
                 self::$$attr = $data[$attr];
             }
             
-            $attrs = array(implode(',', self::$characterMapRegFrom),',', implode(self::$characterMapRegTo,));
+            $attrs = array(implode(", ", self::$characterMapRegFrom), implode(", ", self::$characterMapRegTo));
             @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"(Cached) Detected special-char handling for LDAP actions");
             return;
         }
@@ -174,7 +174,7 @@ class LDAP
         }
         session::set("self::updateSpecialCharHandling", $data);
 
-        $attrs = array(implode(', ', self::$characterMapRegFrom),implode(', ', self::$characterMapRegTo));
+        $attrs = array(implode(", ", self::$characterMapRegFrom),implode(", ", self::$characterMapRegTo));
         @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"Detected special-char handling for LDAP actions");
     }
 
@@ -469,7 +469,7 @@ class LDAP
 
     function clearResult($srp)
     {
-        if($this->hasres[$srp]){
+        if($this->hasres[$srp]) {
             $this->hasres[$srp] = false;
             if (!is_bool(self::$sr[$srp])) {
                 @ldap_free_result(self::$sr[$srp]);
@@ -505,19 +505,27 @@ class LDAP
 
     function count($srp)
     {
-        if($this->hascon){
-            if($this->hasres[$srp]){
-                $rv = @ldap_count_entries(self::$cid, self::$sr[$srp]);
-                $this->error = @ldap_error(self::$cid);
-                return($rv);
-            }else{
-                $this->error = "Perform a Fetch with no Search";
-                return("");
-            }
-        }else{
+        if(!$this->hascon) {
             $this->error = "Could not connect to LDAP server";
             return("");
         }
+
+        if(!$this->hasres[$srp]) {
+            $this->error = "Perform a Fetch with no Search";
+            return("");
+        }
+
+        $result = self::$sr[$srp];
+        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+            if (!$result instanceof LDAP\Result) {
+                $this->error = "Search result was not type of LDAP\\Result.";
+                return("");
+            }
+        }
+
+        $rv = @ldap_count_entries(self::$cid, $result);
+        $this->error = @ldap_error(self::$cid);
+        return($rv);
     }
 
     function rm($attrs = array(), $dn = "")
@@ -1373,9 +1381,16 @@ class LDAP
             return($objectclasses);
         }
 
-# Get base to look for schema 
-        $sr = @ldap_read (self::$cid, "", "objectClass=*", array("subschemaSubentry"));
-        $attr = @ldap_get_entries(self::$cid,$sr);
+        # Make sure we are connected to LDAP.
+        $_cid = self::$cid;
+        if (is_null($_cid)) {
+            self::connect();
+            $_cid = self::$cid;
+        }
+
+        # Get base to look for schema
+        $sr = @ldap_read ($_cid, "", "objectClass=*", array("subschemaSubentry"));
+        $attr = @ldap_get_entries($_cid, $sr);
         if (!isset($attr[0]['subschemasubentry'][0])){
             return array();
         }
@@ -1383,8 +1398,8 @@ class LDAP
         /* Get list of objectclasses and fill array */
         $nb= $attr[0]['subschemasubentry'][0];
         $objectclasses= array();
-        $sr= ldap_read (self::$cid, $nb, "objectClass=*", array("objectclasses"));
-        $attrs= ldap_get_entries(self::$cid,$sr);
+        $sr= ldap_read ($_cid, $nb, "objectClass=*", array("objectclasses"));
+        $attrs= ldap_get_entries($_cid,$sr);
         if (!isset($attrs[0])){
             return array();
         }
@@ -1393,6 +1408,7 @@ class LDAP
                 continue;
             }
             $name= "OID";
+            $value = "";
             $pattern= explode(' ', $val);
             $ocname= preg_replace("/^.* NAME\s+\(*\s*'([^']+)'\s*\)*.*$/", '\\1', $val);
             $objectclasses[$ocname]= array();
@@ -1504,7 +1520,7 @@ class LDAP
         $r= ldap_bind ($ds, $admin, $password);
 
         /* Get base to look for naming contexts */
-        $sr  = @ldap_read ($ds, "", "objectClass=*", array("+"));
+        $sr  = @ldap_read ($ds, "", "objectClass=*", array(0 => "+"));
         $attr= @ldap_get_entries($ds,$sr);
 
         return ($attr[0]['namingcontexts']);

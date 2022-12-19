@@ -171,8 +171,8 @@ td a {
 #goto-import-table .select-wrapper input,
 #samba-login-table .select-wrapper input {
     width: auto;
-    width: 200px;
-    max-width: 200px;
+    width: 400px;
+    max-width: 400px;
     min-height: 27px;
     height: 27px!important;
     font-size: 12px;
@@ -192,7 +192,7 @@ td a {
 #samba-login-table .select-wrapper ul li {
     padding: 5px 10px;
     min-height: 31px;
-    max-height: 31px;
+    line-break: unset;
 }
 
 #tree-table .input-field,

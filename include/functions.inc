@@ -2048,14 +2048,13 @@ function to_byte($value) {
 /*! \brief Check if a value exists in an array (case-insensitive)
  *
  * This is just as http://php.net/in_array except that the comparison
- * is case-insensitive.
+ * is case-insensitive. See: https://stackoverflow.com/a/2166524
  *
- * \param string 'value' needle
- * \param array 'items' haystack
+ * \param string 'needle'
+ * \param array 'haystack'
  */
-function in_array_ics($value, $items)
-{
-	return preg_grep('/^'.preg_quote($value, '/').'$/i', $items);
+function in_array_ics($needle, $haystack) {
+  return in_array(strtolower($needle), array_map('strtolower', $haystack));
 }
 
 
@@ -2267,7 +2266,7 @@ function progressbar($percentage, $width= 200, $height= 14, $showText= false, $c
 {
   $text= "";
   $class= "";
-  $style= "width:${width}px;height:${height}px;";
+  $style= "width:{$width}px;height:{$height}px;";
 
   // Fix percentage range
   $percentage= floor($percentage);
@@ -2338,6 +2337,10 @@ function progressbar($percentage, $width= 200, $height= 14, $showText= false, $c
  */
 function array_key_ics($ikey, $items)
 {
+  if (is_null($items) || !is_array($items)) {
+    return ('');
+  }
+
   $tmp= array_change_key_case($items, CASE_LOWER);
   $ikey= strtolower($ikey);
   if (isset($tmp[$ikey])){
@@ -3376,12 +3379,18 @@ function get_random_char () {
      }
 }
 
-
 function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
     $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return bin2hex(openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv));
+    $iv = "";
+    if ($ivlen > 0) {
+      $iv = openssl_random_pseudo_bytes($ivlen);
+    }
+
+    $encrypted = openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv);
+    if ($encrypted == false) return null;
+
+    return bin2hex($encrypted);
   }
 
   return null;
@@ -3390,8 +3399,15 @@ function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
 function cred_decrypt($input, $password, $cipher = "aes-256-ecb") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
     $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return rtrim(openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv ), "\0\3\4\n");
+    $iv = "";
+    if ($ivlen > 0) {
+      $iv = openssl_random_pseudo_bytes($ivlen);
+    }
+    // If openssl_decrypt returns false: It can be a wrong `input` or the
+    // password in gosa.conf is not encrypted.
+    $decrypted = openssl_decrypt(pack("H*", $input), $cipher, $password, 0, $iv);
+    if ($decrypted == false) return null;
+    return rtrim($decrypted, "\0\3\4\n");
   }
 
   return null;
@@ -3442,8 +3458,8 @@ function get_next_id_pool($attrib) {
   global $config;
 
   /* Fill informational values */
-  $min= $config->get_cfg_value("core","${attrib}PoolMin");
-  $max= $config->get_cfg_value("core","${attrib}PoolMax");
+  $min= $config->get_cfg_value("core","{$attrib}PoolMin");
+  $max= $config->get_cfg_value("core","{$attrib}PoolMax");
 
   /* Sanity check */
   if ($min >= $max) {

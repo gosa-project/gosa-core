@@ -62,6 +62,8 @@ class acl extends plugin
 
     var $theme;
 
+    var $targets;
+
     function __construct(&$config, $parent, $dn= NULL)
     {
         /* Include config object */
@@ -170,10 +172,12 @@ class acl extends plugin
             }
         }
         if (in_array_ics('organizationalUnit', $oc)){
-            $this->isContainer= TRUE;
+            $this->isContainer = TRUE;
         }
     } else {
-        $oc=  $this->attrs['objectClass'];
+        if (is_array($this->$attrs) && in_array('objectClass', $this->attrs)) {
+            $oc = $this->attrs['objectClass'];
+        }
     }
 
     /* Extract available categories from plugin info list */
@@ -209,13 +213,13 @@ class acl extends plugin
                     if(!isset($data['objectClass'])) continue;
                     if (is_array($data['objectClass'])){
                         foreach($data['objectClass'] as $objectClass){
-                            if (in_array_ics($objectClass, $oc)){
+                            if (!is_null($oc) && in_array_ics($objectClass, $oc)){
                                 $this->myAclObjects[$idx.'/'.$class]= $acls['plDescription'];
                                 break;
                             }
                         }
                     } else {
-                        if (in_array_ics($data['objectClass'], $oc)){
+                        if (!is_null($oc) && in_array_ics($data['objectClass'], $oc)){
                             $this->myAclObjects[$idx.'/'.$class]= $acls['plDescription'];
                         }
                     }

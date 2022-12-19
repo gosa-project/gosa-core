@@ -28,6 +28,7 @@ class configRegistry{
     // Name of enabled plugins found in gosa.conf.
     private $activePlugins = array();
 
+    private $mapByName;
 
     /*! \brief      Constructs the config registry 
      *  @param      config  The configuration object
@@ -40,6 +41,8 @@ class configRegistry{
         // Detect classes that have a plInfo method 
         global $class_mapping;
         foreach ($class_mapping as $cname => $path){
+            if (str_starts_with($cname, "_")) continue;
+
             $cmethods = get_class_methods($cname);
             if (is_array($cmethods) && in_array_ics('plInfo',$cmethods)){
 
@@ -85,27 +88,15 @@ class configRegistry{
     {
         // Read objectClasses from ldap
         if(count($objectClassesToUse)){
-            $this->setObjectClasses($objectClassesToUse);
+            $this->objectClasses = $objectClassesToUse;
         }elseif(!count($this->objectClasses)){
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
-            $this->setObjectClasses($ldap->get_objectclasses());
+            $this->objectClasses = $ldap->get_objectclasses();
         }
 
         return($this->_validateSchemata($force, $disableIncompatiblePlugins));
     }
-
-
-    /*! \brief      Sets the list object classes to use while validation the schema. (See 'validateSchemata')
-     *              This is called from the GOsa-Setup
-     *  @param      Array       The list of object classes (usually LDAP::get_objectlclasses()).
-     *  @return     void  
-     */
-    function setObjectClasses($ocs)
-    {
-        $this->objectClasses = $ocs;
-    }
-
 
     /*! \brief      Returns an array which contains all unresolved schemata requirements.
      *  @return     Array       An array containing all errors/issues  
@@ -124,7 +115,8 @@ class configRegistry{
     private function _validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
     {
         // We cannot check without readable schema info
-        if(!count($this->objectClasses)){
+        $_objectClasses = $this->objectClasses;
+        if(!is_null($_objectClasses) && !count($_objectClasses)){
             return(TRUE); 
         }
 

@@ -1277,7 +1277,20 @@ class listing
             // add an empty picture here.
             if (isset($action['objectclass'])) {
                 $objectclass = $action['objectclass'];
-                if (preg_match('/^!(.*)$/', $objectclass, $m)) {
+                if (is_array($objectclass)) {
+                    if (count(array_intersect($objectclass, $classes)) != count($objectclass)) {
+                        switch ($this->theme) {
+                            case 'classic':
+                                $result .= image('images/empty.png');
+                                break;
+
+                            default:
+                                $result .= image('');
+                                break;
+                        }
+                        continue;
+                    }
+                } elseif (preg_match('/^!(.*)$/', $objectclass, $m)) {
                     $objectclass = $m[1];
                     if (in_array_strict($objectclass, $classes)) {
                         switch ($this->theme) {
@@ -1293,19 +1306,6 @@ class listing
                     }
                 } elseif (is_string($objectclass)) {
                     if (!in_array_strict($objectclass, $classes)) {
-                        switch ($this->theme) {
-                            case 'classic':
-                                $result .= image('images/empty.png');
-                                break;
-
-                            default:
-                                $result .= image('');
-                                break;
-                        }
-                        continue;
-                    }
-                } elseif (is_array($objectclass)) {
-                    if (count(array_intersect($objectclass, $classes)) != count($objectclass)) {
                         switch ($this->theme) {
                             case 'classic':
                                 $result .= image('images/empty.png');
@@ -1385,8 +1385,12 @@ class listing
 
         $params = [func_get_arg(2)];
 
+        // If we failed to collect enough parameters we shouldn't call sprintf!
+        $found_args = false;
+
         // Collect sprintf params
         for ($i = 3; $i < func_num_args(); ++$i) {
+            $found_args = true;
             $val = func_get_arg($i);
             if (is_array($val)) {
                 $params[] = $val[0];
@@ -1396,7 +1400,14 @@ class listing
         }
 
         $result = '&nbsp;';
-        $trans = call_user_func_array('sprintf', $params);
+
+        if (!$found_args && is_array($params) && count($params) > 0 && strlen($params[0]) >= 0) {
+            # Okay, we definitely have a string at $params[0] and *no* extra
+            # parameters could be found.
+            return $result;
+        }
+
+        $trans = sprintf(...$params);
         if ($trans != '') {
             return "<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='{$titleAttr}'>".set_post($trans).'</a>';
         }

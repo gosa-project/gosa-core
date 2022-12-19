@@ -49,7 +49,7 @@ class Step_Finish extends setup_step
     $smarty->assign("config_checksum", md5(file_get_contents(CONFIG_TEMPLATE_DIR.$this->gosa_conf_contrib)));
     $str =  $smarty->fetch(CONFIG_TEMPLATE_DIR.$this->gosa_conf_contrib);
     return($str);
-  }  
+  }
 
 
   function execute()

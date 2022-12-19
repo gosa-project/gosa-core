@@ -2,7 +2,7 @@
 let select = document.querySelectorAll('select');
 let dropdownOptions = {
     dropdownOptions: {
-        'constrainWidth': true,
+        'constrainWidth': false,
         'coverTrigger': false,
         'hover': false,
         'alignment': 'right',
