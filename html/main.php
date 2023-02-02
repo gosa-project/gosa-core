@@ -482,16 +482,6 @@ if (isset($_POST['_channel_'])){
 	$smarty->assign("channel", "");
 }
 
-/** Set screen size in session */
-if (!isset($_SESSION['screen_width'])) {
-  if (isset($_REQUEST['width'])) {
-    $_SESSION['screen_width'] = $_REQUEST['width'];
-    #header('Location: ' . $_SERVER['PHP_SELF']);
-  } else {
-    echo '<script type="text/javascript">window.location = "' . $_SERVER['PHP_SELF'] . '?width="+screen.width</script>';
-  }
-}
-
 $display= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl')).
           $smarty->fetch(get_template_path('framework.tpl'));
 
