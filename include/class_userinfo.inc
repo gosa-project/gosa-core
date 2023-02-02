@@ -40,6 +40,7 @@ class userinfo
   var $ignoreACL = NULL;
   var $ACLperPath = array();
   var $ACLperPath_usesFilter = array();
+  var $allACLs = array();
 
   /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */

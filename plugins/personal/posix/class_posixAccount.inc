@@ -74,6 +74,7 @@ class posixAccount extends plugin
   var $ui= array();
   var $ssh= null;
   var $sshAcl= "";
+  var $trustModeDialog;
 
   var $view_logged= false;
 

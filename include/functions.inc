@@ -2830,8 +2830,12 @@ function set_post($value)
     if($value === TRUE || $value === FALSE ) return($value);
 
     // Return a fixed string which can then be used in HTML fields without
-    //  breaking the layout or the values. This allows to use '"<> in input fields.
-    return(htmlentities($value, ENT_QUOTES, 'utf-8'));
+    // breaking the layout or the values. This allows to use '"<> in input fields.
+    $_ret_string = "";
+    if (!empty($value)) {
+        $_ret_string = htmlentities($value, ENT_QUOTES, 'utf-8');
+    }
+    return($_ret_string);
 }
 
 

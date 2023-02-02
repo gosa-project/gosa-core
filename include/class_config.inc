@@ -66,8 +66,8 @@ class config  {
 
     var $instanceUUID = "";
 
-    private $jsonRPChandle = NULL; 
-
+    private $jsonRPChandle = NULL;
+    public $registration = NULL;
     public $configRegistry = NULL;
 
     /*! \brief Class constructor of the config class

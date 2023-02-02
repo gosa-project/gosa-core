@@ -471,7 +471,7 @@ class LDAP
     {
         if($this->hasres[$srp]) {
             $this->hasres[$srp] = false;
-            if (!is_bool(self::$sr[$srp])) {
+            if (!is_null(self::$sr[$srp]) && !is_bool(self::$sr[$srp])) {
                 @ldap_free_result(self::$sr[$srp]);
             }
         }
