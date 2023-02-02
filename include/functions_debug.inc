@@ -2,7 +2,7 @@
 /************************************************ 
 ** Title.........: Debug Lib
 ** Version.......: 0.5.4
-** Author........: Thomas Schüßler <tulpe@atomar.de> 
+** Author........: Thomas SchÃ¼ÃŸler <tulpe@atomar.de> 
 ** Filename......: debuglib.php(s)
 ** Last changed..: 16. July 2003
 ** License.......: Free to use. Postcardware ;)
@@ -406,12 +406,12 @@ function show_vars($show_all_vars = FALSE, $show_object_vars = FALSE) {
 function pre($sql_string, $simple_mode = FALSE) {
 	
 	if(!$simple_mode) {
-		# erste leere Zeile im SQL löschen
+		# erste leere Zeile im SQL lÃ¶schen
 		$sql_string = preg_replace('/\^s+/m','', $sql_string);
-		# letze leere Zeile im SQL löschen
+		# letze leere Zeile im SQL lÃ¶schen
 		$sql_string = preg_replace('/\s+$/m','', $sql_string);
 		
-		# kleinste Anzahl von führenden TABS zählen
+		# kleinste Anzahl von fÃ¼hrenden TABS zÃ¤hlen
 		preg_match_all('/^\t+/m', $sql_string, $matches);
 		$minTabCount = strlen(min($matches[0]));
 		
