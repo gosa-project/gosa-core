@@ -1099,6 +1099,7 @@ class listing
             }
 
             // Prepare params for function call
+            $params = array();
             preg_match_all('/"[^"]+"|[^,]+/', $match[2], $parts);
             foreach ($parts[0] as $param) {
                 // Row is replaced by the row number
@@ -1144,15 +1145,29 @@ class listing
                 }
             }
 
+            try {
+                $callback = "$method";
+                $reflection = new ReflectionMethod($cl, $callback);
+                $_param_count = $reflection->getNumberOfParameters();
+            } catch (ReflectionException $th) {
+                error_log("Exception occured for match='$match' while trying to find function '$callback': " . $th);
+                continue;
+            }
+
+            if ($_param_count > count($params)) {
+                error_log("ERROR: Number of expected parameters is greater than collected parameters! For match='$match'.");
+                continue;
+            }
+
             // Replace information
             if ($cl == 'listing') {
-                // Non static call - seems to result in errors
-                $data = @preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array([$this, "$method"], $params), $data);
+                // Non static call
+                $data = @preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array(array($this, $callback), $params), $data);
             } else {
                 // Static call
-                $data = preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array([$cl, $method], $params), $data);
+                $data = preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array(array($cl, $callback), $params), $data);
             }
-        }
+         }
 
         return $data;
     }
