@@ -21,8 +21,10 @@ packages: ../gosa_$(package_version)_all.deb
 ../%.deb:
 	-rm -rf debian/
 	cp -r ../gosa-core/debian .
-	debuild -uc -us -S -d
+	-quilt push -a
+	debuild --no-lintian -uc -us -S -d
 	cd .. && sbuild --no-run-lintian -sAd $(CODENAME) $(shell basename -s _all.deb $@).dsc -j16
+	-quilt pop -a
 
 clean:
 	-cd .. && rm -v *.deb *.changes *.build *.buildinfo *.dsc *.tar.xz

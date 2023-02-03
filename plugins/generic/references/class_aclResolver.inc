@@ -14,6 +14,9 @@ class aclResolver
     private $acl_category;
     private $parent;
 
+    private $config;
+    private $dn;
+
     // Used for the autocompleter
     private $userMap;
 
