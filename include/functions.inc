@@ -3404,12 +3404,13 @@ function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
     $ivlen = openssl_cipher_iv_length($cipher);
     $iv = "";
     if ($ivlen > 0) {
-      $iv = openssl_random_pseudo_bytes($ivlen);
+      // fallback to a cipher that can handle empty iv strings
+      // we cannot handle IVs currently, as we need to store them somewhere persistently
+      // between encryption and decryption
+      $cipher = "aes-256-ecb";
     }
-
-    $encrypted = openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv);
+    $encrypted = openssl_encrypt($input, $cipher, $password, $options=0, $iv);
     if ($encrypted == false) return null;
-
     return bin2hex($encrypted);
   }
 
@@ -3421,11 +3422,14 @@ function cred_decrypt($input, $password, $cipher = "aes-256-ecb") {
     $ivlen = openssl_cipher_iv_length($cipher);
     $iv = "";
     if ($ivlen > 0) {
-      $iv = openssl_random_pseudo_bytes($ivlen);
+      // fallback to a cipher that can handle empty iv strings
+      // we cannot handle IVs currently, as we need to store them somewhere persistently
+      // between encryption and decryption
+      $cipher = "aes-256-ecb";
     }
     // If openssl_decrypt returns false: It can be a wrong `input` or the
     // password in gosa.conf is not encrypted.
-    $decrypted = openssl_decrypt(pack("H*", $input), $cipher, $password, 0, $iv);
+    $decrypted = openssl_decrypt(hex2bin($input), $cipher, $password, $options=0, $iv);
     if ($decrypted == false) return null;
     return rtrim($decrypted, "\0\3\4\n");
   }
