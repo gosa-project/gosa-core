@@ -28,6 +28,9 @@ $svn_path = '$HeadURL$';
 $git_tag_folder = '../.git/refs/tags/';
 $svn_revision = '$Revision$';
 
+/* Optional path to file in which the GOsa version is located at. */
+$gosa_version_file = "";
+
 /* Configuration file location */
 if(!isset($_SERVER['CONFIG_DIR'])){
   define ("CONFIG_DIR", "/etc/gosa");
@@ -2069,7 +2072,15 @@ function validate($string)
 /*! \brief Evaluate the current GOsa version from the build in revision string */
 function get_gosa_version()
 {
-    global $svn_revision, $svn_path, $git_tag_folder;
+    global $svn_revision, $svn_path, $git_tag_folder, $gosa_version_file;
+
+    if (file_exists($gosa_version_file)) {
+      $gosa_version = file_get_contents($gosa_version_file);
+      $gosa_version = trim($gosa_version);
+      if (isset($gosa_version) && !empty($gosa_version)) {
+        return ($gosa_version);
+      }
+    }
 
     /* Extract informations */
     $revision= preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
