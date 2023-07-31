@@ -50,5 +50,5 @@ class groupSelect extends management
     parent::__construct($config, $ui, "groups", $headpage);
   }
 } 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

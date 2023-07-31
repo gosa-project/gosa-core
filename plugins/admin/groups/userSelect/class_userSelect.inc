@@ -49,5 +49,5 @@ class userSelect extends management
         parent::__construct($config, $ui, "users", $headpage);
     }
 } 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

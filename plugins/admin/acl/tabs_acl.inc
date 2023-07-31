@@ -90,5 +90,5 @@ class acltab extends tabs
     return($display);
   }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

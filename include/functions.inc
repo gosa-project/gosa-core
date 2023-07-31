@@ -4027,5 +4027,5 @@ function in_array_strict($needle, $haystack, $strict = TRUE)
     return(in_array($needle, $haystack, $strict));
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

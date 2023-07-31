@@ -21,34 +21,34 @@
  */
 
 /* Basic setup, remove eventually registered sessions */
-require_once ("../include/php_setup.inc");
-require_once ("functions.inc");
+require_once("../include/php_setup.inc");
+require_once("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
 
 /* try to start session, so we can remove userlocks, 
   if the old session is still available */
-@session::start();
-session::set('errorsAlreadyPosted',array());
-if(session::global_is_set('ui')){
-  
+session::start();
+session::set('errorsAlreadyPosted', array());
+if (session::global_is_set('ui')) {
+
   /* Get config & ui informations */
-  $ui= session::global_get("ui");
-  
-  /* config used for del_user_locks & some lines below to detect the language */  
-  $config= session::global_get("config");
+  $ui = session::global_get("ui");
+
+  /* config used for del_user_locks & some lines below to detect the language */
+  $config = session::global_get("config");
 
   /* Remove all locks of this user */
   del_user_locks($ui->dn);
-  
-  /* Write something to log */  
-  new log("security","logout","",array(),"User \"".$ui->username."\" logged out") ;
+
+  /* Write something to log */
+  new log("security", "logout", "", array(), "User \"" . $ui->username . "\" logged out");
 }
 
 /* Language setup */
-if ((!isset($config)) || $config->get_cfg_value("core","language") == ""){
-  $lang= get_browser_language();
+if ((!isset($config)) || $config->get_cfg_value("core", "language") == "") {
+  $lang = get_browser_language();
 } else {
-  $lang= $config->get_cfg_value("core","language");
+  $lang = $config->get_cfg_value("core", "language");
 }
 
 // Try to keep track of logouts, this will fail if our session has already expired. 
@@ -58,8 +58,8 @@ stats::log('global', 'global', array(),  $action = 'logout', $amount = 1, 0);
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
-$GLOBALS['t_language']= $lang;
-$GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
+$GLOBALS['t_language'] = $lang;
+$GLOBALS['t_gettext_message_dir'] = $BASE_DIR . '/locale/';
 
 /* Set the text domain as 'messages' */
 $domain = 'messages';
@@ -67,46 +67,46 @@ bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
 /* Create smarty & Set template compile directory */
-$smarty= new smarty();
-if (isset($config)){
-	$smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory");
+$smarty = new smarty();
+if (isset($config)) {
+  $smarty->compile_dir = $config->get_cfg_value("core", "templateCompileDirectory");
 } else {
-	$smarty->compile_dir= '/var/spool/gosa/';
+  $smarty->compile_dir = '/var/spool/gosa/';
 }
 
-if(!is_writeable($smarty->compile_dir)){
+if (!is_writeable($smarty->compile_dir)) {
 
-    header('location: index.php');
-    exit();
+  header('location: index.php');
+  exit();
 }
 
-$smarty->assign ("title","GOsa");
-    
+$smarty->assign("title", "GOsa");
+
 /* If GET request is posted, the logout was forced by pressing the link */
-if (isset($_POST['forcedlogout']) || isset($_GET['forcedlogout'])){
-  
+if (isset($_POST['forcedlogout']) || isset($_GET['forcedlogout'])) {
+
   /* destroy old session */
-  session::destroy ();
-  
+  session::destroy();
+
   /* If we're not using htaccess authentication, just redirect... */
-  if (isset($config) && $config->get_cfg_value("core","htaccessAuthentication") == "true"){
+  if (isset($config) && $config->get_cfg_value("core", "htaccessAuthentication") == "true") {
 
     /* Else notice that the user has to close the browser... */
-    $smarty->display (get_template_path('headers.tpl'));
-    $smarty->display (get_template_path('logout-close.tpl'));
-    exit;
+    $smarty->display(get_template_path('headers.tpl'));
+    $smarty->display(get_template_path('logout-close.tpl'));
+    exit();
   }
 
-  header ("Location: index.php");
+  header("Location: index.php");
   exit();
+} else {  // The logout wasn't forced, so the session is invalid 
 
-}else{  // The logout wasn't forced, so the session is invalid 
-  
 
-  $smarty->display (get_template_path('headers.tpl'));
-  $smarty->display (get_template_path('logout.tpl'));
-  exit;
+  $smarty->display(get_template_path('headers.tpl'));
+  $smarty->display(get_template_path('logout.tpl'));
+  exit();
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>
+
 </html>

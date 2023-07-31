@@ -158,5 +158,5 @@ if(function_exists("get_gosa_version")){
 }
 
 echo $header.$smarty->fetch("../setup/setup_frame.tpl");
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

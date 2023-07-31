@@ -52,5 +52,5 @@ if ( $cleanup ){
     session::set('departmentManagement',$departmentManagement);
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

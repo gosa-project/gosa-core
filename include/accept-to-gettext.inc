@@ -208,5 +208,5 @@ function al2gt($gettextlangs, $mime)
   return $curgtlang;
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

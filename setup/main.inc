@@ -31,5 +31,5 @@ $display= $setup->execute();
 /* Store changes  in session */
 session::set('setup',$setup);
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

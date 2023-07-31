@@ -51,5 +51,5 @@ if (session::is_set('binaryfile')) {
 echo session::get('binary');
 error_reporting (E_ALL | E_STRICT);
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

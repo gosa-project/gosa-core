@@ -840,7 +840,7 @@ class userManagement extends management
     }
 
 
-    static function filterLockImage($userPassword)
+    static function filterLockImage($userPassword = [])
     {
         $image= "images/empty.png";
         if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
@@ -854,7 +854,7 @@ class userManagement extends management
     }
 
 
-    static function filterLockLabel($userPassword)
+    static function filterLockLabel($userPassword = [])
     {
         $label= "";
         if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
@@ -924,5 +924,5 @@ class userManagement extends management
     }
 
 } 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>

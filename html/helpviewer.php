@@ -270,5 +270,5 @@ if(isset($_POST['search'])){
   $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
   echo $display;
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>
