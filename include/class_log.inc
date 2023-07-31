@@ -28,11 +28,12 @@
   This is the base class for the GOsa logging functionality.
   All logging should lead to this class. 
  */
-class log {
+class log
+{
 
   var $config;
 
- /*! \brief logging constructor
+  /*! \brief logging constructor
 
     \param action         One of these values (modify|create|remove|snapshot|copy)
     \param objecttype     represents the current edited objecttype, like users/user
@@ -42,52 +43,52 @@ class log {
 
     \sa log()
    */
-  function __construct($action,$objecttype,$object,$changes_array = array(),$result = "")
+  function __construct($action, $objecttype, $object, $changes_array = array(), $result = "")
   {
-    if(!is_array($changes_array)){
+    if (!is_array($changes_array)) {
       trigger_error("log(string,string,string,array(),bool). Forth parameter must be an array.");
       $changes_array = array();
     }
 
-    $entry = array(); 
-    if(!session::global_is_set('config')){
-      $entry['user']= "unkown";
-    }else{
+    $entry = array();
+    if (!session::global_is_set('config')) {
+      $entry['user'] = "unkown";
+    } else {
 
       $this->config = session::global_get('config');
-      $ui           = get_userinfo(); 
-      $entry['user']= @$ui->dn;
+      $ui           = get_userinfo();
+      $entry['user'] = $ui->dn;
     }
 
     /* Create string out of changes */
-    $changes  ="";
-    foreach($changes_array as $str ){
-      $changes .= $str.",";
+    $changes  = "";
+    foreach ($changes_array as $str) {
+      $changes .= $str . ",";
     }
-    $changes = preg_replace("/,$/","",$changes );
-    
+    $changes = preg_replace("/,$/", "", $changes);
+
     /* Create data object */
     $entry['timestamp'] = time();
     $entry['action']    = $action;
-    $entry['objecttype']= $objecttype;
+    $entry['objecttype'] = $objecttype;
     $entry['object']    = $object;
     $entry['changes']   = $changes;
     $entry['result']    = $result;
 
-    if(!isset($this->config) && empty($entry['user'])){
+    if (!isset($this->config) && empty($entry['user'])) {
       $entry['user']  = "unknown";
     }
 
     /* Check if all given values are valid */
     global $config;
-    $msgs = @log::check($entry);
-    if(count($msgs)){
-      foreach($msgs as $msg){
-        trigger_error("Logging failed, reason was: ".$msg);
+    $msgs = log::check($entry);
+    if (count($msgs)) {
+      foreach ($msgs as $msg) {
+        trigger_error("Logging failed, reason was: " . $msg);
         msg_dialog::display(_("Internal error"), sprintf(_("Logging failed: %s"), $msg), ERROR_DIALOG);
       }
-    }else{
-      if(is_object($config) && $config->boolValueIsTrue("core","logging")){
+    } else {
+      if (is_object($config) && $config->boolValueIsTrue("core", "logging")) {
         $this->log_into_syslog($entry);
       }
     }
@@ -98,40 +99,36 @@ class log {
   {
     $msgs = array();
 
-    if(!isset($entry['action']) || !in_array_strict($entry['action'],array("modify","create","remove","copy","snapshot","view","security","debug"))){
+    if (!isset($entry['action']) || !in_array_strict($entry['action'], array("modify", "create", "remove", "copy", "snapshot", "view", "security", "debug"))) {
       $msgs[] = sprintf(_("Invalid option %s specified!"), bold($entry['action']));
     }
 
-    if(!isset($entry['objecttype'])){
+    if (!isset($entry['objecttype'])) {
       $msgs[] = _("Specified 'objectType' is empty or invalid!");
     }
-  
-    return($msgs);
+
+    return ($msgs);
   }
 
-   
+
   /* This function is used to into the systems syslog */
   function log_into_syslog($entry)
   {
-    $str= "";
+    $str = "";
 
-    if(!empty($entry['action']))        $str .= "({$entry['action']}) ";
+    if (!empty($entry['action']))        $str .= "({$entry['action']}) ";
 
     // Add object and object type if set.
-    if(!empty($entry['object']) && !empty($entry['objecttype'])){
-        $str .= "{$entry['object']} of type {$entry['objecttype']} ";
-    }elseif(!empty($entry['object'])){
-        $str .= "{$entry['object']} ";
-    }elseif(!empty($entry['objecttype'])){
-        $str .= "{$entry['objecttype']} ";
+    if (!empty($entry['object']) && !empty($entry['objecttype'])) {
+      $str .= "{$entry['object']} of type {$entry['objecttype']} ";
+    } elseif (!empty($entry['object'])) {
+      $str .= "{$entry['object']} ";
+    } elseif (!empty($entry['objecttype'])) {
+      $str .= "{$entry['objecttype']} ";
     }
-    if(!empty($entry['changes'])) $str .= "{$entry['changes']} ";
-    if(!empty($entry['result']))  $str .= ": {$entry['result']} ";
+    if (!empty($entry['changes'])) $str .= "{$entry['changes']} ";
+    if (!empty($entry['result']))  $str .= ": {$entry['result']} ";
 
     gosa_log($str);
   }
-
 }
-
-
-?>

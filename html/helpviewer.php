@@ -58,7 +58,7 @@ $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 $domain = 'messages';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
-@DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
+DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
 $smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory");
 $smarty->assign("title", "GOsa - "._("Help browser"));
@@ -110,7 +110,7 @@ if(session::global_is_set('current_class_for_help')){
   $str = $xml->parse();
 
   /* __LANG__ is used as placeholder for the used language*/
-  $helpdir= @preg_replace("/__LANG__/i",$lang,$str[(session::global_get('current_class_for_help'))]['PATH']);
+  $helpdir= preg_replace("/__LANG__/i",$lang,$str[(session::global_get('current_class_for_help'))]['PATH']);
 
   /* If there is no entry in the xml file for this class, display an error message */
   if($helpdir == ""){
