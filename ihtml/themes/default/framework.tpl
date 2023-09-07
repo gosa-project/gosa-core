@@ -59,19 +59,22 @@
    logout.delay({$sessionLifetime});
 
 
-   // Append change handler to all input fields. 
-   if($('pluginModified') != null && $('pluginModified').value == 0){
-       for(i=0;i<document.forms.length;i++){
-           for(e=0;e<document.forms[i].elements.length;e++){
-               var ele = document.forms[i].elements[e];
-               Event.observe(ele, 'change', 
-                    function () {
-                        $('pluginModified').value |= 1;
-                    });
-           }
-       }
-   }
+        // Append change handler to all input fields.
+        if ($('pluginModified') != null && $('pluginModified').value == 0) {
+            for (i = 0; i < document.forms.length; i++) {
+                for (e = 0; e < document.forms[i].elements.length; e++) {
+                    var ele = document.forms[i].elements[e];
+                    Event.observe(ele, 'change',
+                        function () {
+                            $('pluginModified').value |= 1;
+                        });
+                }
+            }
+        }
+    </script>
 
-  </script>    
- </body>
-</html>
+    <script type="text/javascript" src="themes/default/js/materialize.js"></script>
+    <script type="text/javascript" src="themes/default/js/dropdown_material_fix.js"></script>
+    <script type="text/javascript" defer src="themes/default/js/eventListener.js"></script>
+    <script type="text/javascript" defer src="themes/default/js/main.js"></script>
+</body>

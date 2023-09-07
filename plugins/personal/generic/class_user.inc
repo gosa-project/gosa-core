@@ -31,6 +31,7 @@
   from/to the LDAP. It does syntax checking and displays the formulars required.
  */
 
+
 class user extends plugin
 {
   /* Definitions */
@@ -111,13 +112,12 @@ class user extends plugin
   var $manager = "";
   var $manager_name = "";
 
-
   /* attribute list for save action */
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
       "homePostalAddress", "homePhone", "labeledURI", "ou", "o", "dateOfBirth", "gender","preferredLanguage",
       "departmentNumber", "employeeNumber", "employeeType", "l", "st","jpegPhoto",
       "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
-      "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate", "gosaLoginRestriction", "manager");
+      "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate", "gosaLoginRestriction", "manager", "oathTOTPToken");
 
   var $objectclasses= array("top", "person", "organizationalPerson", "inetOrgPerson",
       "gosaAccount");
@@ -133,11 +133,17 @@ class user extends plugin
 
   var $governmentmode = FALSE;
 
+  var $otp_status = FALSE;
+  var $tfa_params = FALSE;
+  var $qr_code = "";
+  var $token = "";
+  var $oathTOTPToken = "";
+
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
   function __construct(&$config, $dn= NULL)
   {
-    global $lang;
+    global $lang, $ui;
 
     $this->config= $config;
     /* Configuration is fine, allways */
@@ -274,12 +280,27 @@ class user extends plugin
         $this->manager_name = "("._("unknown")."!): ".$this->manager;
       }
     }
+
+    /* Check for otp activation on LDAP 
+    *  if we are not the User himself deactivate the tfa option
+    */
+    if (ldap_check_otp_activation() /*&& ($ui->dn == $this->dn)*/) {
+      $this->otp_status = TRUE;
+    }
+    if (ldap_check_tfa_params($this->uid)) {
+      $this->tfa_params = TRUE;
+
+      // get secret token from user and generate the QR-Code image
+      $token = get_otp_secret($this->dn, $this->uid);
+      $this->qr_code = get_qrCode($this->uid, $token);
+    }
   }
 
 
   /* execute generates the html output for this node */
   function execute()
   {
+    
     /* Call parent execute */
     plugin::execute();
 
@@ -349,9 +370,17 @@ class user extends plugin
 
     /* Do we represent a valid gosaAccount? */
     if (!$this->is_account){
-      $str = "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
-        msgPool::noValidExtension("GOsa")."</b>";
-      return($str);
+      switch (getThemeName()) {
+        case 'classic':
+          $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+          break;
+        
+        default:
+          $symbol = "<i class='material-icons'>error</i>";
+          break;
+      }
+      $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("GOsa"))."</div>";
+      return($display);
     }
 
     /* Password configure dialog handling */
@@ -705,7 +734,35 @@ class user extends plugin
     }
     $smarty->assign("multiple_support" , $this->multiple_support_active);
     $smarty->assign("manager_name", set_post($this->manager_name));
-    return($smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__))));
+    $smarty->assign("otp_status", $this->otp_status);
+    $smarty->assign("tfa_params", $this->tfa_params);
+    if ($this->tfa_params) {
+      $smarty->assign('qr_code', $this->qr_code);
+    }
+
+    if (isset($_POST['cancel_verification']) && $this->otp_status) {
+      if (ldap_check_tfa_params($this->uid)) {
+        $success = ldap_unset_two_factor_params($this->dn);
+
+        if (!$success[0]) {
+          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($success[1], $this->dn, LDAP_DEL, get_class()));
+        }
+      }
+
+      echo "OK";
+    }
+
+    if (isset($_POST['secret'])) {
+      $code = $_POST['secret'];
+      $this->token = get_otp_secret($this->dn, $this->uid);
+      $opt_config = ldap_get_otp_values($this->dn);
+      $res = verify_secret($this->token, $code, $opt_config);
+    
+      echo json_encode($res);
+      exit;
+    } else {
+      return($smarty->fetch(get_template_path("generic.tpl", TRUE, dirname(__FILE__))));
+    }
   }
 
 
@@ -1065,6 +1122,38 @@ class user extends plugin
                     ERROR_DIALOG);
 
         }
+    }
+
+    if (isset($_POST['tfa_activation']) && $this->otp_status) {
+      if (!ldap_check_tfa_params($this->uid)) {
+        $success = ldap_set_two_factor_params($this->dn);
+
+        if (!$success[0]) {
+          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($success[1], $this->dn, LDAP_DEL, get_class()));
+        } else {
+          $this->token = get_otp_secret($this->dn, $this->uid);
+          $this->qr_code = get_qrCode($this->uid, $this->token);
+          msg_dialog::display(_("Verify two factor authentication"), msgPool::check_tfa($this->qr_code, $this->uid), VERIFY_INPUT);
+        }
+      }
+    }
+
+    if (isset($_POST['code'])) {
+      $code = $_POST['code'];
+      $opt_config = ldap_get_otp_values($this->dn);
+      $res = verify_secret($this->token, $code, $opt_config);
+
+      echo json_encode($res);
+    }
+
+    if (isset($_POST['tfa_deactivation']) && $this->otp_status) {
+      if (ldap_check_tfa_params($this->uid)) {
+        $success = ldap_unset_two_factor_params($this->dn);
+
+        if (!$success[0]) {
+          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($success[1], $this->dn, LDAP_DEL, get_class()));
+        }
+      }
     }
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
@@ -1749,8 +1838,10 @@ class user extends plugin
           "homePhone"         => _("Home phone number"),
           "labeledURI"        => _("Homepage"),
           "userPassword"      => _("User password method"), 
-          "Certificate"       => _("User certificates"))
+          "Certificate"       => _("User certificates"),
 
+          ""
+          )
         );
 
 #   /* Append government attributes if required */

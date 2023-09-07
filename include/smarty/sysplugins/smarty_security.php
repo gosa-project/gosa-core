@@ -19,21 +19,9 @@
 /**
  * This class does contain the security settings
  */
-class Smarty_Security {
+class Smarty_Security
+{
 
-    /**
-     * This determines how Smarty handles "<?php ... ?>" tags in templates.
-     * possible values:
-     * <ul>
-     *   <li>Smarty::PHP_PASSTHRU -> echo PHP tags as they are</li>
-     *   <li>Smarty::PHP_QUOTE    -> escape tags as entities</li>
-     *   <li>Smarty::PHP_REMOVE   -> remove php tags</li>
-     *   <li>Smarty::PHP_ALLOW    -> execute php tags</li>
-     * </ul>
-     *
-     * @var integer
-     */
-    public $php_handling = Smarty::PHP_PASSTHRU;
     /**
      * This is the list of template directories that are considered secure.
      * $template_dir is in this list implicitly.
@@ -69,13 +57,8 @@ class Smarty_Security {
      * To disable all PHP functions set $php_functions = null.
      * @var array
      */
-    public $php_functions = array(
-        'isset', 'empty',
-        'count', 'sizeof',
-        'in_array', 'is_array',
-        'time',
-        'nl2br',
-    );
+    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time',);
+
     /**
      * This is an array of trusted PHP modifiers.
      *

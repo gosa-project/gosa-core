@@ -22,11 +22,10 @@
  * - output     (required) - if not options supplied) - array
  * - id         (optional) - string default not set
  * - class      (optional) - string default not set
- * </pre>
- * 
- * @link http://www.smarty.net/manual/en/language.function.html.options.php {html_image}
- *      (Smarty online manual)
- * @author Monte Ohrt <monte at ohrt dot com> 
+ *
+ * @link   https://www.smarty.net/manual/en/language.function.html.options.php {html_image}
+ *           (Smarty online manual)
+ * @author Monte Ohrt <monte at ohrt dot com>
  * @author Ralf Strehle (minor optimization) <ralf dot strehle at yahoo dot de>
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object

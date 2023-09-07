@@ -13,8 +13,8 @@
  * Name:     fetch<br>
  * Purpose:  fetch file, web or ftp data and display results
  *
- * @link http://www.smarty.net/manual/en/language.function.fetch.php {fetch}
- *       (Smarty online manual)
+ * @link   https://www.smarty.net/manual/en/language.function.fetch.php {fetch}
+ *         (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
@@ -185,12 +185,10 @@ function smarty_function_fetch($params, $template)
                     $content .= fgets($fp,4096);
                 }
                 fclose($fp);
-                $csplit = preg_split("!\r\n\r\n!",$content,2);
-
-                $content = $csplit[1];
-
-                if(!empty($params['assign_headers'])) {
-                    $template->assign($params['assign_headers'],preg_split("!\r\n!",$csplit[0]));
+                $csplit = preg_split("!\r\n\r\n!", $content, 2);
+                $content = $csplit[ 1 ];
+                if (!empty($params[ 'assign_headers' ])) {
+                    $template->assign($params[ 'assign_headers' ], preg_split("!\r\n!", $csplit[ 0 ]));
                 }
             }
         } else {

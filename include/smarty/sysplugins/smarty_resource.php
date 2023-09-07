@@ -15,22 +15,8 @@
  * @package Smarty
  * @subpackage TemplateResources
  */
-abstract class Smarty_Resource {
-    /**
-     * cache for Smarty_Template_Source instances
-     * @var array
-     */
-    public static $sources = array();
-    /**
-     * cache for Smarty_Template_Compiled instances
-     * @var array
-     */
-    public static $compileds = array();
-    /**
-     * cache for Smarty_Resource instances
-     * @var array
-     */
-    public static $resources = array();
+abstract class Smarty_Resource
+{
     /**
      * resource types provided by the core
      * @var array
@@ -377,21 +363,8 @@ abstract class Smarty_Resource {
         }
 
         // try registered resource
-        if (isset($smarty->registered_resources[$type])) {
-            if ($smarty->registered_resources[$type] instanceof Smarty_Resource) {
-                $smarty->_resource_handlers[$type] = $smarty->registered_resources[$type];
-                // note registered to smarty is not kept unique!
-                return $smarty->_resource_handlers[$type];
-            }
-
-            if (!isset(self::$resources['registered'])) {
-                self::$resources['registered'] = new Smarty_Internal_Resource_Registered();
-            }
-            if (!isset($smarty->_resource_handlers[$type])) {
-                $smarty->_resource_handlers[$type] = self::$resources['registered'];
-            }
-
-            return $smarty->_resource_handlers[$type];
+        if (isset($smarty->registered_resources[ $type ])) {
+            return $smarty->_cache[ 'resource_handlers' ][ $type ] = $smarty->registered_resources[ $type ];
         }
 
         // try sysplugins dir

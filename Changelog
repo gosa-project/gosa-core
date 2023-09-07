@@ -1,5 +1,11 @@
 GOsa2 changelog
 ===============
+* gosa 2.8.1
+  - Update template engine to smarty 4.1.
+  - Add Brutforce Protection:
+    - Implement MFA (optionally)
+    - Prerequisites for an LDAP login policy implemented.
+    - Extend Install instructions
 
 * gosa 2.8
   - Fixed delete functions in all table widgets.

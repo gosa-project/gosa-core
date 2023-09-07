@@ -31,13 +31,14 @@
  * {cycle name=row}
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.cycle.php {cycle}
- *       (Smarty online manual)
- * @author Monte Ohrt <monte at ohrt dot com>
- * @author credit to Mark Priatel <mpriatel@rogers.com>
- * @author credit to Gerard <gerard@interfold.com>
- * @author credit to Jason Sweat <jsweat_php@yahoo.com>
- * @version  1.3
+ * @link    https://www.smarty.net/manual/en/language.function.cycle.php {cycle}
+ *           (Smarty online manual)
+ * @author  Monte Ohrt <monte at ohrt dot com>
+ * @author  credit to Mark Priatel <mpriatel@rogers.com>
+ * @author  credit to Gerard <gerard@interfold.com>
+ * @author  credit to Jason Sweat <jsweat_php@yahoo.com>
+ * @version 1.3
+ *
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
  * @return string|null
@@ -46,15 +47,13 @@
 function smarty_function_cycle($params, $template)
 {
     static $cycle_vars;
-
-    $name = (empty($params['name'])) ? 'default' : $params['name'];
-    $print = (isset($params['print'])) ? (bool)$params['print'] : true;
-    $advance = (isset($params['advance'])) ? (bool)$params['advance'] : true;
-    $reset = (isset($params['reset'])) ? (bool)$params['reset'] : false;
-
-    if (!isset($params['values'])) {
-        if(!isset($cycle_vars[$name]['values'])) {
-            trigger_error("cycle: missing 'values' parameter");
+    $name = (empty($params[ 'name' ])) ? 'default' : $params[ 'name' ];
+    $print = (isset($params[ 'print' ])) ? (bool)$params[ 'print' ] : true;
+    $advance = (isset($params[ 'advance' ])) ? (bool)$params[ 'advance' ] : true;
+    $reset = (isset($params[ 'reset' ])) ? (bool)$params[ 'reset' ] : false;
+    if (!isset($params[ 'values' ])) {
+        if (!isset($cycle_vars[ $name ][ 'values' ])) {
+            trigger_error('cycle: missing \'values\' parameter');
             return;
         }
     } else {

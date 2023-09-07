@@ -22,13 +22,13 @@
  * Smarty mailing list. Send a blank e-mail to
  * smarty-discussion-subscribe@googlegroups.com
  *
- * @link http://www.smarty.net/
- * @copyright 2008 New Digital Group, Inc.
- * @author Monte Ohrt <monte at ohrt dot com>
- * @author Uwe Tews
- * @author Rodney Rehm
- * @package Smarty
- * @version 3.1-DEV
+ * @link      https://www.smarty.net/
+ * @copyright 2018 New Digital Group, Inc.
+ * @copyright 2018 Uwe Tews
+ * @author    Monte Ohrt <monte at ohrt dot com>
+ * @author    Uwe Tews   <uwe dot tews at gmail dot com>
+ * @author    Rodney Rehm
+ * @package   Smarty
  */
 
 /**
@@ -59,20 +59,6 @@ if (!defined('SMARTY_PLUGINS_DIR')) {
 if (!defined('SMARTY_MBSTRING')) {
     define('SMARTY_MBSTRING', function_exists('mb_split'));
 }
-if (!defined('SMARTY_RESOURCE_CHAR_SET')) {
-    // UTF-8 can only be done properly when mbstring is available!
-    /**
-     * @deprecated in favor of Smarty::$_CHARSET
-     */
-    define('SMARTY_RESOURCE_CHAR_SET', SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1');
-}
-if (!defined('SMARTY_RESOURCE_DATE_FORMAT')) {
-    /**
-     * @deprecated in favor of Smarty::$_DATE_FORMAT
-     */
-    define('SMARTY_RESOURCE_DATE_FORMAT', '%b %e, %Y');
-}
-
 /**
  * register the class autoloader
  */
@@ -113,8 +99,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
      * smarty version
      */
-    const SMARTY_VERSION = 'Smarty-3.1.14';
-
+    const SMARTY_VERSION = '4.1.0';
     /**
      * define variable scopes
      */
@@ -140,12 +125,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
     const COMPILECHECK_ON = 1;
     const COMPILECHECK_CACHEMISS = 2;
     /**
-     * modes for handling of "<?php ... ?>" tags in templates.
+     * define debug modes
      */
-    const PHP_PASSTHRU = 0; //-> print tags as plain text
-    const PHP_QUOTE = 1; //-> escape tags as entities
-    const PHP_REMOVE = 2; //-> escape tags as entities
-    const PHP_ALLOW = 3; //-> escape tags as entities
+    const DEBUG_OFF        = 0;
+    const DEBUG_ON         = 1;
+    const DEBUG_INDIVIDUAL = 2;
+
     /**
      * filter types
      */
@@ -184,12 +169,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
      * The character set to adhere to (e.g. "UTF-8")
      */
-    public static $_CHARSET = SMARTY_RESOURCE_CHAR_SET;
+    public static $_CHARSET = SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1';
+
     /**
      * The date format to be used internally
      * (accepts date() and strftime())
      */
-    public static $_DATE_FORMAT = SMARTY_RESOURCE_DATE_FORMAT;
+    public static $_DATE_FORMAT = '%b %e, %Y';
+
     /**
      * Flag denoting if PCRE should run in UTF-8 mode
      */
@@ -351,12 +338,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
      * @var Smarty_Security
      */
     public $security_policy = null;
-    /**
-     * controls handling of PHP-blocks
-     *
-     * @var integer
-     */
-    public $php_handling = self::PHP_PASSTHRU;
+
     /**
      * controls if the php template file resource is allowed
      *
@@ -709,16 +691,17 @@ class Smarty extends Smarty_Internal_TemplateBase {
      * @param string $resource_name template name
      * @return boolean status
      */
-    public function templateExists($resource_name)
-    {
-        // create template object
-        $save = $this->template_objects;
-        $tpl = new $this->template_class($resource_name, $this);
-        // check if it does exists
-        $result = $tpl->source->exists;
-        $this->template_objects = $save;
-        return $result;
-    }
+    protected $accessMap = array(
+        'template_dir' => 'TemplateDir', 'config_dir' => 'ConfigDir',
+        'plugins_dir'  => 'PluginsDir', 'compile_dir' => 'CompileDir',
+        'cache_dir'    => 'CacheDir',
+    );
+
+    /**
+     * PHP7 Compatibility mode
+     * @var bool
+     */
+    private $isMutingUndefinedOrNullWarnings = false;
 
     /**
      * Returns a single or all global  variables
@@ -745,36 +728,18 @@ class Smarty extends Smarty_Internal_TemplateBase {
     }
 
     /**
-     * Empty cache folder
+     * Check if a template resource exists
      *
-     * @param integer $exp_time expiration time
-     * @param string  $type     resource type
-     * @return integer number of cache files deleted
-     */
-    function clearAllCache($exp_time = null, $type = null)
-    {
-        // load cache resource and call clearAll
-        $_cache_resource = Smarty_CacheResource::load($this, $type);
-        Smarty_CacheResource::invalidLoadedCache($this);
-        return $_cache_resource->clearAll($this, $exp_time);
-    }
-
-    /**
-     * Empty cache for a specific template
+     * @param string $resource_name template name
      *
-     * @param string  $template_name template name
-     * @param string  $cache_id      cache id
-     * @param string  $compile_id    compile id
-     * @param integer $exp_time      expiration time
-     * @param string  $type          resource type
-     * @return integer number of cache files deleted
+     * @return bool status
+     * @throws \SmartyException
      */
-    public function clearCache($template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null)
+    public function templateExists($resource_name)
     {
-        // load cache resource and call clear
-        $_cache_resource = Smarty_CacheResource::load($this, $type);
-        Smarty_CacheResource::invalidLoadedCache($this);
-        return $_cache_resource->clear($this, $template_name, $cache_id, $compile_id, $exp_time);
+        // create source object
+        $source = Smarty_Template_Source::load(null, $this, $resource_name);
+        return $source->exists;
     }
 
     /**
@@ -1499,35 +1464,63 @@ class SmartyException extends Exception {
     }
 }
 
-/**
- * Smarty compiler exception class
- * @package Smarty
- */
-class SmartyCompilerException extends SmartyException  {
-}
-
-/**
- * Autoloader
- */
-function smartyAutoload($class)
-{
-    $_class = strtolower($class);
-    $_classes = array(
-        'smarty_config_source' => true,
-        'smarty_config_compiled' => true,
-        'smarty_security' => true,
-        'smarty_cacheresource' => true,
-        'smarty_cacheresource_custom' => true,
-        'smarty_cacheresource_keyvaluestore' => true,
-        'smarty_resource' => true,
-        'smarty_resource_custom' => true,
-        'smarty_resource_uncompiled' => true,
-        'smarty_resource_recompiled' => true,
-    );
-
-    if (!strncmp($_class, 'smarty_internal_', 16) || isset($_classes[$_class])) {
-        include SMARTY_SYSPLUGINS_DIR . $_class . '.php';
+    /**
+     * Normalize and set directory string
+     *
+     * @param string $dirName cache_dir or compile_dir
+     * @param string $dir     filepath of folder
+     */
+    private function _normalizeDir($dirName, $dir)
+    {
+        $this->{$dirName} = $this->_realpath(rtrim($dir, "/\\") . DIRECTORY_SEPARATOR, true);
     }
+
+    /**
+     * Normalize template_dir or config_dir
+     *
+     * @param bool $isConfig true for config_dir
+     */
+    private function _normalizeTemplateConfig($isConfig)
+    {
+        if ($isConfig) {
+            $processed = &$this->_processedConfigDir;
+            $dir = &$this->config_dir;
+        } else {
+            $processed = &$this->_processedTemplateDir;
+            $dir = &$this->template_dir;
+        }
+        if (!is_array($dir)) {
+            $dir = (array)$dir;
+        }
+        foreach ($dir as $k => $v) {
+            if (!isset($processed[ $k ])) {
+                $dir[ $k ] = $v = $this->_realpath(rtrim($v, "/\\") . DIRECTORY_SEPARATOR, true);
+                $processed[ $k ] = true;
+            }
+        }
+        $isConfig ? $this->_configDirNormalized = true : $this->_templateDirNormalized = true;
+        $isConfig ? $this->_joined_config_dir = join('#', $this->config_dir) :
+            $this->_joined_template_dir = join('#', $this->template_dir);
+    }
+
+    /**
+     * Activates PHP7 compatibility mode:
+     * - converts E_WARNINGS for "undefined array key" and "trying to read property of null" errors to E_NOTICE
+     *
+     * @void
+     */
+    public function muteUndefinedOrNullWarnings(): void {
+        $this->isMutingUndefinedOrNullWarnings = true;
+    }
+
+    /**
+     * Indicates if PHP7 compatibility mode is set.
+     * @bool
+     */
+    public function isMutingUndefinedOrNullWarnings(): bool {
+        return $this->isMutingUndefinedOrNullWarnings;
+    }
+
 }
 
 ?>

@@ -16,9 +16,10 @@
  * Input:    string to catenate<br>
  * Example:  {$var|cat:"foo"}
  *
- * @link http://smarty.php.net/manual/en/language.modifier.cat.php cat
- *          (Smarty online manual)
- * @author   Uwe Tews
+ * @link   https://www.smarty.net/manual/en/language.modifier.cat.php cat
+ *           (Smarty online manual)
+ * @author Uwe Tews
+ *
  * @param array $params parameters
  * @return string with compiled code
  */

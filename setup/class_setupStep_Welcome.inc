@@ -26,8 +26,8 @@ class Step_Welcome  extends setup_step
   var $attributes     = array('instanceUUID');
   var $header_image   = "images/setup/welcome.png";
 
-    var $instanceUUID = "";
-    
+  var $instanceUUID = "";
+
   function __construct()
   {
     $this->is_enabled     = TRUE;
@@ -49,14 +49,14 @@ class Step_Welcome  extends setup_step
     $smarty = get_smarty();
     $smarty->assign('auth_id', session_id());
 
-    $smarty->assign("path",'/tmp/gosa.auth');
+    $smarty->assign("path", '/tmp/gosa.auth');
     return($smarty->fetch(get_template_path("setup_welcome.tpl",TRUE,dirname(__FILE__))));
   }
 
   function save_object()
   {
     $id = "";
-    
+
     /* Get auth ID from file */
     $path = '/tmp/gosa.auth';
     if (file_exists($path) && is_readable($path)){

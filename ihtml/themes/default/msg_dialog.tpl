@@ -43,41 +43,58 @@
 {else}
 
 
-	{if !$JS}
+{if !$JS}
+{if $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG || $i_Type == $smarty.const.VERIFY_INPUT}
+	<div id='e_layer{$i_ID}' class="modal" style='top:200px;left:200px;'>
+{else}
+	<div id='e_layer{$i_ID}' class="modal" style='top:200px;left:200px;'>
+{/if}
+		<div id="e_layerTitle{$i_ID}" class="modal-content">
+			<div class="attention-head">
+				{if $i_Type == $smarty.const.ERROR_DIALOG}
+					<i class="material-icons left">error</i>
+				{elseif $i_Type == $smarty.const.WARNING_DIALOG}
+					<i class="material-icons left">warning</i>
+				{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG ||
+					$i_Type == $smarty.const.OK_CANCEL_DIALOG || $i_Type == $smarty.const.VERIFY_INPUT}
+					<i class="material-icons left">info_outline</i>
+				{/if}
 
-		{if $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-		<div id='e_layer{$i_ID}' class="infoMsgDialog" style='top:200px;left:200px;'>
-    {else}
-		<div id='e_layer{$i_ID}' class="errorMsgDialog" style='top:200px;left:200px;'>
-    {/if}
-
-			<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
-			<table summary='{t}Error message title{/t}'><tr><td>
-		{if $i_Type == $smarty.const.ERROR_DIALOG}
-						{image path='images/error.png'}
-		{elseif $i_Type == $smarty.const.WARNING_DIALOG}
-						{image path='images/warning.png'}
-		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-						{image path='images/warning.png'}
-		{/if}
-			</td><td style='font-size: 1.1em;vertical-align:middle;font-weight:bold;'>{$s_Title}</td></tr>
-			</table>
+				<h2>{$s_Title}</h2>
 			</div>
-			<table summary='{t}Error message{/t}' 
-          style='width:100%; border-top: solid 1px #BBBBBB;' cellspacing=0 cellpadding=2 border=0>
-				<tr>
-					<td style='width:100%;padding:7px; padding-bottom:14px'>
-						{$s_Message}
-						<br>
-					</td>
-				</tr>
-				<tr>
-					<td colspan='2' align='center'>
+
+			<div class="attention-content">
+				{if $i_Type == $smarty.const.VERIFY_INPUT}
+					<p>{$s_Message['info']}</p>
+					<p>{$s_Message['hint']}</p>
+					<div class="row">
+						<div class="valign-wrapper">
+							<div class="col s12 xl6">
+								<img src="{$s_Message['img']}" alt="{t}QR-Code is broken or empty{/t}">
+							</div>
+							<div class="input-field col s12 xl6">
+								<input type="text" name="code" id="code" maxlength="6" oninput="verify_input()">
+								<label for="code">{t}Enter code{/t}</label>
+							</div>
+						</div>
+					</div>
+				{else}
+				<p>
+					{$s_Message}
+				</p>
+				{/if}
+			</div>
+		</div>
+
+		<div class="modal-footer">
 		{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button> 
-		{elseif $buttononst.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
-						<button type='submit' name='MSG_CANCEL{$i_ID}'>{t}Cancel{/t}</button>
+			<button class="btn-small primary" type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
+		{elseif $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
+			<button class="btn-small primary" type='submit' name='MSG_OK{$i_ID}'>{t}OK{/t}</button>
+			<button class="btn-small primary" type='submit' name='MSG_CANCEL{$i_ID}'>{t}Cancel{/t}</button>
+		{elseif $i_Type == $smarty.const.VERIFY_INPUT}
+			<button class="btn-small primary" id="VERIFY_OK" type="button" name="VERIFY_OK" onClick='next_msg_dialog();' disabled>{t}Verify{/t}</button>
+			<button class="btn-small primary" type="button" name="VERIFY_CANCEL" onclick="cancel_verification();">{t}Cancel{/t}</button>
 		{/if}
 					</td>
 				</tr>
@@ -93,57 +110,61 @@
 		
 		{/if}
 
-    {if $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-    <div id='e_layer{$i_ID}' class="infoMsgDialog" style='top:200px;left:200px;'>
-    {else}
-    <div id='e_layer{$i_ID}' class="errorMsgDialog" style='top:200px;left:200px;'>
-    {/if}
+{if $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
+	<div id='e_layer{$i_ID}' class="modal" style='top:200px;left:200px;'>
+{else}
+	<div id='e_layer{$i_ID}' class="modal" style='top:200px;left:200px;'>
+{/if}
+		<div id="e_layerTitle{$i_ID}" class="modal-content attention-elem">
+			<div class="attention-head">
+				{if $i_Type == $smarty.const.ERROR_DIALOG}
+					<i class="material-icons left">error</i>
+				{elseif $i_Type == $smarty.const.WARNING_DIALOG}
+					<i class="material-icons left">warning</i>
+				{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG ||
+					$i_Type == $smarty.const.OK_CANCEL_DIALOG || $i_Type == $smarty.const.VERIFY_INPUT}
+					<i class="material-icons left">info_outline</i>
+				{/if}
 
-		<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
-			<table summary='{t}Error message title{/t}'><tr><td>
-		{if $i_Type == $smarty.const.ERROR_DIALOG}
-						{image path='images/error.png'}
-		{elseif $i_Type == $smarty.const.WARNING_DIALOG}
-						{image path='images/warning.png'}
-		{elseif $i_Type == $smarty.const.INFO_DIALOG || $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-						{image path='images/info.png'}
-		{/if}
-			</td><td style='font-size: 1.1em;vertical-align:middle; font-weight:bold;'>{$s_Title}</td></tr>
-		</table>
+				<h2>{$s_Title}</h2>
+			</div>
+
+			<div class="attention-content">
+				{if $i_Type == $smarty.const.VERIFY_INPUT}
+					<p>{$s_Message['info']}</p>
+					<p>{$s_Message['hint']}</p>
+					<span id="test"></span>
+					<div class="row">
+						<div class="valign-wrapper">
+							<div class="col s12 xl6">
+								<img src="{$s_Message['img']}" alt="{t}QR-Code is broken or empty{/t}">
+							</div>
+							<div class="input-field col s12 xl6">
+								<input type="text" name="code" id="code" maxlength="6" oninput="verify_input()">
+								<label for="code">{t}Enter code{/t}</label>
+							</div>
+						</div>
+					</div>
+				{else}
+				<p>
+					{$s_Message}
+				</p>
+				{/if}
+			</div>
+			{if $s_Trace != "" && $i_TraceCnt != 0}
+				<div onClick="$('trace_{$i_ID}').toggle();"><u>Trace</u></div>
+			{/if}
 		</div>
 
-			<table summary='{t}Error message{/t}' 
-        style='z-index:250;width:100%; border-top: solid 1px #BBBBBB;' cellspacing=0 cellpadding=2 border=0>
-				<tr>
-					<td style='width:100%;padding:7px; padding-bottom:14px;'>
-						{$s_Message}
-						<br>
-					</td>
-					{if $s_Trace != "" && $i_TraceCnt != 0}
-					<td style='width:20px;cursor:pointer;'>
-						<div onClick="$('trace_{$i_ID}').toggle();"><u>Trace</u></div>
-					</td>
-					{/if}
-				</tr>
-				<tr>
-					{if $s_Trace != "" && $i_TraceCnt != 0}
-					<td colspan='3' align='center' style="border-top: solid 1px #BBBBBB;">
-					{else}
-					<td colspan='2' align='center' style="border-top: solid 1px #BBBBBB;">
-					{/if}
+		<div class="modal-footer">
 		{if $i_Type == $smarty.const.ERROR_DIALOG || $i_Type == $smarty.const.WARNING_DIALOG || $i_Type == $smarty.const.INFO_DIALOG}
-						<button id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}OK{/t}</button>
-		{elseif $i_Type == $smarty.const.CONFIRM_DIALOG}
-						<button id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}OK{/t}</button>
-						<button type='button' name='MSG_CANCEL{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
-		{elseif $i_Type == $smarty.const.OK_CANCEL_DIALOG}
-						<button id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}OK{/t}</button>
-						<button type='submit' name='MSG_CANCEL{$i_ID}' 
-              onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
+			<button class="btn-small primary" id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
+		{elseif $i_Type == $smarty.const.CONFIRM_DIALOG || $i_Type == $smarty.const.OK_CANCEL_DIALOG}
+			<button class="btn-small primary" id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}OK{/t}</button>
+			<button class="btn-small primary" type='button' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
+		{elseif $i_Type == $smarty.const.VERIFY_INPUT}
+			<button class="btn-small primary" id="VERIFY_OK" type="button" name="VERIFY_OK" onClick='next_msg_dialog();' disabled>{t}Verify{/t}</button>
+			<button class="btn-small primary" type="button" name="VERIFY_CANCEL" onclick="cancel_verification();">{t}Cancel{/t}</button>
 		{/if}
 					</td>
 				</tr>

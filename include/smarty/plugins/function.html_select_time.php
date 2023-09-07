@@ -5,16 +5,6 @@
  * @package Smarty
  * @subpackage PluginsFunction
  */
-
-/**
- * @ignore
- */
-require_once(SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php');
-/**
- * @ignore
- */
-require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
-
 /**
  * Smarty {html_select_time} function plugin
  *
@@ -22,8 +12,8 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  * Name:     html_select_time<br>
  * Purpose:  Prints the dropdowns for time selection
  *
- * @link http://www.smarty.net/manual/en/language.function.html.select.time.php {html_select_time}
- *          (Smarty online manual)
+ * @link   https://www.smarty.net/manual/en/language.function.html.select.time.php {html_select_time}
+ *           (Smarty online manual)
  * @author Roberto Berto <roberto@berto.net>
  * @author Monte Ohrt <monte AT ohrt DOT com>
  * @param array                    $params   parameters

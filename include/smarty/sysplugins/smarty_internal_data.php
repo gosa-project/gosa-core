@@ -55,9 +55,7 @@ class Smarty_Internal_Data {
     {
         if (is_array($tpl_var)) {
             foreach ($tpl_var as $_key => $_val) {
-                if ($_key != '') {
-                    $this->tpl_vars[$_key] = new Smarty_variable($_val, $nocache);
-                }
+                $this->assign($_key, $_val, $nocache);
             }
         } else {
             if ($tpl_var != '') {
@@ -109,6 +107,9 @@ class Smarty_Internal_Data {
 
     /**
      * appends values to template variables
+     *
+     * @api  Smarty::append()
+     * @link https://www.smarty.net/docs/en/api.append.tpl
      *
      * @param array|string $tpl_var the template variable name(s)
      * @param mixed        $value   the value to append
@@ -274,9 +275,14 @@ class Smarty_Internal_Data {
     /**
      * load a config file, optionally load just selected sections
      *
-     * @param string $config_file filename
-     * @param mixed  $sections    array of section names, single section or null
-     * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
+     * @api  Smarty::getTemplateVars()
+     * @link https://www.smarty.net/docs/en/api.get.template.vars.tpl
+     *
+     * @param string                                                  $varName       variable name or null
+     * @param \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty $_ptr          optional pointer to data object
+     * @param bool                                                    $searchParents include parent templates?
+     *
+     * @return mixed variable value or or array of variables
      */
     public function configLoad($config_file, $sections = null)
     {
@@ -284,65 +290,6 @@ class Smarty_Internal_Data {
         $config = new Smarty_Internal_Config($config_file, $this->smarty, $this);
         $config->loadConfigVars($sections);
         return $this;
-    }
-
-    /**
-     * gets the object of a Smarty variable
-     *
-     * @param string  $variable the name of the Smarty variable
-     * @param object  $_ptr     optional pointer to data object
-     * @param boolean $search_parents search also in parent data
-     * @return object the object of the variable
-     */
-    public function getVariable($variable, $_ptr = null, $search_parents = true, $error_enable = true)
-    {
-        if ($_ptr === null) {
-            $_ptr = $this;
-        } while ($_ptr !== null) {
-            if (isset($_ptr->tpl_vars[$variable])) {
-                // found it, return it
-                return $_ptr->tpl_vars[$variable];
-            }
-            // not found, try at parent
-            if ($search_parents) {
-                $_ptr = $_ptr->parent;
-            } else {
-                $_ptr = null;
-            }
-        }
-        if (isset(Smarty::$global_tpl_vars[$variable])) {
-            // found it, return it
-            return Smarty::$global_tpl_vars[$variable];
-        }
-        if ($this->smarty->error_unassigned && $error_enable) {
-            // force a notice
-            $x = $$variable;
-        }
-        return new Undefined_Smarty_Variable;
-    }
-
-    /**
-     * gets  a config variable
-     *
-     * @param string $variable the name of the config variable
-     * @return mixed the value of the config variable
-     */
-    public function getConfigVariable($variable, $error_enable = true)
-    {
-        $_ptr = $this;
-        while ($_ptr !== null) {
-            if (isset($_ptr->config_vars[$variable])) {
-                // found it, return it
-                return $_ptr->config_vars[$variable];
-            }
-            // not found, try at parent
-            $_ptr = $_ptr->parent;
-        }
-        if ($this->smarty->error_unassigned && $error_enable) {
-            // force a notice
-            $x = $$variable;
-        }
-        return null;
     }
 
     /**

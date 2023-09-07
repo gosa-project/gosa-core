@@ -16,7 +16,7 @@
  * Example:  {$var|strip} {$var|strip:"&nbsp;"}<br>
  * Date:     September 25th, 2002
  *
- * @link http://www.smarty.net/manual/en/language.modifier.strip.php strip (Smarty online manual)
+ * @link   https://www.smarty.net/manual/en/language.modifier.strip.php strip (Smarty online manual)
  * @author Uwe Tews
  * @param array $params parameters
  * @return string with compiled code

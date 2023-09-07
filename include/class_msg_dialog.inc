@@ -26,6 +26,7 @@ define("ERROR_DIALOG"		, 10003);
 define("CONFIRM_DIALOG"		, 10004);
 define("OK_CANCEL_DIALOG"	, 10005);
 define("FATAL_ERROR_DIALOG"	, 10006);
+define("VERIFY_INPUT"       , 10007);
 
 class msg_dialog
 {
@@ -41,7 +42,7 @@ class msg_dialog
 
         if(empty($s_message)) return;
 
-        if(!in_array_strict($i_type,array(INFO_DIALOG,WARNING_DIALOG,ERROR_DIALOG,CONFIRM_DIALOG,FATAL_ERROR_DIALOG,OK_CANCEL_DIALOG))){
+        if(!in_array_strict($i_type,array(INFO_DIALOG,WARNING_DIALOG,ERROR_DIALOG,CONFIRM_DIALOG,FATAL_ERROR_DIALOG,OK_CANCEL_DIALOG,VERIFY_INPUT))){
             trigger_error("Invalid msg_dialog type.");
             $i_type = INFO_DIALOG;
         }

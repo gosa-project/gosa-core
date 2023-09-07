@@ -12,7 +12,7 @@
  * Name:     indent<br>
  * Purpose:  indent lines of text
  *
- * @link http://www.smarty.net/manual/en/language.modifier.indent.php indent (Smarty online manual)
+ * @link   https://www.smarty.net/manual/en/language.modifier.indent.php indent (Smarty online manual)
  * @author Uwe Tews
  * @param array $params parameters
  * @return string with compiled code

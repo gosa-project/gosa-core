@@ -67,37 +67,6 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         $this->openTag($compiler, 'foreach', array('foreach', $compiler->nocache, $item, $key));
         // maybe nocache because of nocache variables
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
-
-        if (isset($_attr['name'])) {
-            $name = $_attr['name'];
-            $has_name = true;
-            $SmartyVarName = '$smarty.foreach.' . trim($name, '\'"') . '.';
-        } else {
-            $name = null;
-            $has_name = false;
-        }
-        $ItemVarName = '$' . trim($item, '\'"') . '@';
-        // evaluates which Smarty variables and properties have to be computed
-        if ($has_name) {
-            $usesSmartyFirst = strpos($tpl->source->content, $SmartyVarName . 'first') !== false;
-            $usesSmartyLast = strpos($tpl->source->content, $SmartyVarName . 'last') !== false;
-            $usesSmartyIndex = strpos($tpl->source->content, $SmartyVarName . 'index') !== false;
-            $usesSmartyIteration = strpos($tpl->source->content, $SmartyVarName . 'iteration') !== false;
-            $usesSmartyShow = strpos($tpl->source->content, $SmartyVarName . 'show') !== false;
-            $usesSmartyTotal = strpos($tpl->source->content, $SmartyVarName . 'total') !== false;
-        } else {
-            $usesSmartyFirst = false;
-            $usesSmartyLast = false;
-            $usesSmartyTotal = false;
-            $usesSmartyShow = false;
-        }
-
-        $usesPropFirst = $usesSmartyFirst || strpos($tpl->source->content, $ItemVarName . 'first') !== false;
-        $usesPropLast = $usesSmartyLast || strpos($tpl->source->content, $ItemVarName . 'last') !== false;
-        $usesPropIndex = $usesPropFirst || strpos($tpl->source->content, $ItemVarName . 'index') !== false;
-        $usesPropIteration = $usesPropLast || strpos($tpl->source->content, $ItemVarName . 'iteration') !== false;
-        $usesPropShow = strpos($tpl->source->content, $ItemVarName . 'show') !== false;
-        $usesPropTotal = $usesSmartyTotal || $usesSmartyShow || $usesPropShow || $usesPropLast || strpos($tpl->source->content, $ItemVarName . 'total') !== false;
         // generate output code
         $output = "<?php ";
         $output .= " \$_smarty_tpl->tpl_vars[$item] = new Smarty_Variable; \$_smarty_tpl->tpl_vars[$item]->_loop = false;\n";
@@ -131,9 +100,11 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
                 $output .= " \$_smarty_tpl->tpl_vars['smarty']->value['foreach'][$name]['show']=(\$_smarty_tpl->tpl_vars[$item]->total > 0);\n";
             }
         }
-        $output .= "foreach (\$_from as \$_smarty_tpl->tpl_vars[$item]->key => \$_smarty_tpl->tpl_vars[$item]->value){\n\$_smarty_tpl->tpl_vars[$item]->_loop = true;\n";
-        if ($key != null) {
-            $output .= " \$_smarty_tpl->tpl_vars[$key]->value = \$_smarty_tpl->tpl_vars[$item]->key;\n";
+        $output .= "{$itemVar}->do_else = true;\n";
+        $output .= "if (\$_from !== null) foreach (\$_from as {$keyTerm}{$itemVar}->value) {\n";
+        $output .= "{$itemVar}->do_else = false;\n";
+        if (isset($attributes[ 'key' ]) && isset($itemAttr[ 'key' ])) {
+            $output .= "\$_smarty_tpl->tpl_vars['{$key}']->value = {$itemVar}->key;\n";
         }
         if ($usesPropIteration) {
             $output .= " \$_smarty_tpl->tpl_vars[$item]->iteration++;\n";

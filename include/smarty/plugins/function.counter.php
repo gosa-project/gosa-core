@@ -13,8 +13,9 @@
  * Purpose:  print out a counter value
  *
  * @author Monte Ohrt <monte at ohrt dot com>
- * @link http://www.smarty.net/manual/en/language.function.counter.php {counter}
- *       (Smarty online manual)
+ * @link   https://www.smarty.net/manual/en/language.function.counter.php {counter}
+ *         (Smarty online manual)
+ *
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
  * @return string|null
@@ -22,15 +23,9 @@
 function smarty_function_counter($params, $template)
 {
     static $counters = array();
-
-    $name = (isset($params['name'])) ? $params['name'] : 'default';
-    if (!isset($counters[$name])) {
-        $counters[$name] = array(
-            'start'=>1,
-            'skip'=>1,
-            'direction'=>'up',
-            'count'=>1
-            );
+    $name = (isset($params[ 'name' ])) ? $params[ 'name' ] : 'default';
+    if (!isset($counters[ $name ])) {
+        $counters[ $name ] = array('start' => 1, 'skip' => 1, 'direction' => 'up', 'count' => 1);
     }
     $counter =& $counters[$name];
 

@@ -5,12 +5,6 @@
  * @package Smarty
  * @subpackage PluginsModifierCompiler
  */
-
-/**
- * @ignore
- */
-require_once( SMARTY_PLUGINS_DIR .'shared.literal_compiler_param.php' );
-
 /**
  * Smarty escape modifier plugin
  *
@@ -18,18 +12,23 @@ require_once( SMARTY_PLUGINS_DIR .'shared.literal_compiler_param.php' );
  * Name:     escape<br>
  * Purpose:  escape string for output
  *
- * @link http://www.smarty.net/docsv2/en/language.modifier.escape count_characters (Smarty online manual)
+ * @link   https://www.smarty.net/docsv2/en/language.modifier.escape count_characters (Smarty online manual)
  * @author Rodney Rehm
  * @param array $params parameters
  * @return string with compiled code
  */
 function smarty_modifiercompiler_escape($params, $compiler)
 {
-    static $_double_encode = null;
-    if ($_double_encode === null) {
-        $_double_encode = version_compare(PHP_VERSION, '5.2.3', '>=');
-    }
-    
+    static $_double_encode = true;
+    static $is_loaded = false;
+    $compiler->template->_checkPlugins(
+        array(
+            array(
+                'function' => 'smarty_literal_compiler_param',
+                'file'     => SMARTY_PLUGINS_DIR . 'shared.literal_compiler_param.php'
+            )
+        )
+    );
     try {
         $esc_type = smarty_literal_compiler_param($params, 1, 'html');
         $char_set = smarty_literal_compiler_param($params, 2, Smarty::$_CHARSET);
@@ -104,8 +103,10 @@ function smarty_modifiercompiler_escape($params, $compiler)
 
             case 'javascript':
                 // escape quotes and backslashes, newlines, etc.
-                return 'strtr(' . $params[0] . ', array("\\\\" => "\\\\\\\\", "\'" => "\\\\\'", "\"" => "\\\\\"", "\\r" => "\\\\r", "\\n" => "\\\n", "</" => "<\/" ))';
-
+                // see https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
+                return 'strtr(' .
+                       $params[ 0 ] .
+                       ', array("\\\\" => "\\\\\\\\", "\'" => "\\\\\'", "\"" => "\\\\\"", "\\r" => "\\\\r", "\\n" => "\\\n", "</" => "<\/", "<!--" => "<\!--", "<s" => "<\s", "<S" => "<\S" ))';
         }
     } catch(SmartyException $e) {
         // pass through to regular plugin fallback

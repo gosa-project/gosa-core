@@ -22,12 +22,11 @@
  * - width       - (optional) - image width (default actual width)
  * - basedir     - (optional) - base directory for absolute paths, default is environment variable DOCUMENT_ROOT
  * - path_prefix - prefix for path output (optional, default empty)
- * </pre>
- * 
- * @link http://www.smarty.net/manual/en/language.function.html.image.php {html_image}
- *      (Smarty online manual)
- * @author Monte Ohrt <monte at ohrt dot com> 
- * @author credits to Duda <duda@big.hu> 
+ *
+ * @link    https://www.smarty.net/manual/en/language.function.html.image.php {html_image}
+ *          (Smarty online manual)
+ * @author  Monte Ohrt <monte at ohrt dot com>
+ * @author  credits to Duda <duda@big.hu>
  * @version 1.0
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object
@@ -131,17 +130,15 @@ function smarty_function_html_image($params, $template)
                 return;
             } 
         }
-
-        if (!isset($params['width'])) {
-            $width = $_image_data[0];
-        } 
-        if (!isset($params['height'])) {
-            $height = $_image_data[1];
-        } 
-    } 
-
-    if (isset($params['dpi'])) {
-        if (strstr($_SERVER['HTTP_USER_AGENT'], 'Mac')) {
+        if (!isset($params[ 'width' ])) {
+            $width = $_image_data[ 0 ];
+        }
+        if (!isset($params[ 'height' ])) {
+            $height = $_image_data[ 1 ];
+        }
+    }
+    if (isset($params[ 'dpi' ])) {
+        if (strstr($_SERVER[ 'HTTP_USER_AGENT' ], 'Mac')) {
             // FIXME: (rodneyrehm) wrong dpi assumption
             // don't know who thought this up… even if it was true in 1998, it's definitely wrong in 2011.
             $dpi_default = 72;

@@ -41,7 +41,7 @@ class setup
         $this->o_steps[$i++] = new Step_Ldap();
     $this->o_steps[$i++] = new Step_Schema();
         $this->o_steps[$i++] = new Step_Migrate();
-        $this->o_steps[$i++] = new Step_Feedback();
+        $this->o_steps[$i++] = new Step_Policy();
         $this->o_steps[$i++] = new Step_Finish();
         $this->i_steps = $i-1;
 

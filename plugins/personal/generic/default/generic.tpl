@@ -4,8 +4,10 @@
     <div class="col s12 xl2 center-align user-image">
         {if !$userPicture_is_readable}
         <img src="plugins/users/images/default.jpg" alt='' class="materialboxed"> {else}
-        <img src="getbin.php?rand={$rand}" alt='' class="materialboxed"> {/if} {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
-        <button class="btn-small" type="submit" name="edit_picture">{t}Change picture{/t}...</button> {/render}
+        <img src="getbin.php?rand={$rand}" alt='' class="materialboxed"> {/if} 
+        {render acl=$userPictureACL checkbox=$multiple_support checked=$use_edit_picture}
+        <button class="btn-small" type="submit" name="edit_picture">{t}Change picture{/t}...</button> 
+        {/render}
     </div>
     <div class="col s6 xl5">
         {if $is_template ne "true"}
@@ -252,7 +254,6 @@
         </div>
         {/render}
     </div>
-
     <div class="col s4">
         {if !$multiple_support}
         {render acl=$managerACL}
@@ -305,7 +306,8 @@
             </div>
 
             <input type='text' name='manager_name' id='manager_name' value='{$manager_name}' disabled title='{$manager}'>
-            <label for="manager_name">{t}Manager{/t}</label> {if $use_manager}
+            <label for="manager_name">{t}Manager{/t}</label> 
+            {if $use_manager}
 
             <div class="icons">
                 <div class="icon">
@@ -529,6 +531,47 @@
     {/if}
 </div>
 
+{if $otp_status}
+<hr class="divider">
+
+<h2>{t}Two Factor Authentication{/t}</h2>
+
+<div class="row">
+    {if $tfa_params}
+
+    <div class="col s6 xl12">
+        <div class="qr-hint">
+            <h4>{t}Your two factor authentication is enabled and must be used for a successful login.{/t}</h4>
+        </div>
+
+        <hr class="divider">
+
+        <label>
+            <input type="checkbox" name="tfa_deactivation" id="tfa_deactivation">
+            <span>{t}Deactivate two factor authentication{/t}</span>
+        </label>
+    </div>
+    {else}
+    <div class="col s6 xl12">
+        
+        <p>{t}Adding two-step verification keeps your account secure, even if your password is stolen.{/t}</p>
+        <br>
+        <p>
+            {t}After you have activated the two-step verification for your account, you will first need to log in as usual. In the second step you will be sent a one-time password (OTP). You can enter/scan this manually or via a QR code into a two-factor authenticator. The generated 6-digit code is then entered for the second verification.{/t}
+        </p>
+        <br>
+        <p>
+            {t}For example, the Google Authenticator is suitable for authentication. Downloadable from the Google App Store for Android or the Apple Store for Apple smartphones.{/t}
+        </p>
+
+        <label>
+            <input type="checkbox" name="tfa_activation" id="tfa_activation">
+            <span>{t}Activate two factor authentication{/t}</span>
+        </label>
+    </div>
+    {/if}
+</div>
+{/if}
 
 {if $multiple_support}
 <input type="hidden" name="user_mulitple_edit" value="1">

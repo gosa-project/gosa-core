@@ -297,7 +297,7 @@ ini_set("register_globals",0);
 ini_set("track_vars",1);
 ini_set("display_errors",1);
 ini_set("report_memleaks",1);
-ini_set("include_path",".:$BASE_DIR/include:$BASE_DIR/include/utils/excel:/usr/share/php");
+ini_set("include_path",".:$BASE_DIR/include:$BASE_DIR/include/utils/excel:/usr/share/php:$BASE_DIR/include/sonata");
 
 /* Do smarty setup */
 require("smarty/Smarty.class.php");
@@ -305,12 +305,13 @@ $smarty = new Smarty;
 $smarty->template_dir = $BASE_DIR.'/ihtml/';
 $smarty->caching= false;
 
+// !!!! Deprecated in version 4 !!!!
 // To be able to switch between smarty version 2/3                                                                      
-if(defined('SMARTY_PHP_REMOVE')){                                                                                       
-    $smarty->php_handling= SMARTY_PHP_REMOVE;                                                                           
-}else{                                                                                                                  
-    $smarty->php_handling= Smarty::PHP_REMOVE;                                                                          
-}                                                                                                                       
+// if(defined('SMARTY_PHP_REMOVE')){                                                                                       
+//     $smarty->php_handling= SMARTY_PHP_REMOVE;                                                                           
+// }else{                                                                                                                  
+//     $smarty->php_handling= Smarty::PHP_REMOVE;                                                                          
+// }                                                                                                                       
 
 // Register GOsa contributed smarty plugins
 $d = opendir("$BASE_DIR/include/smartyAddons");

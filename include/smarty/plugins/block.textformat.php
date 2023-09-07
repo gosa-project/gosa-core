@@ -23,8 +23,9 @@
  * - wrap_boundary - boolean (true)
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.textformat.php {textformat}
- *       (Smarty online manual)
+ * @link   https://www.smarty.net/manual/en/language.function.textformat.php {textformat}
+ *         (Smarty online manual)
+ *
  * @param array                    $params   parameters
  * @param string                   $content  contents of the block
  * @param Smarty_Internal_Template $template template object
@@ -76,9 +77,6 @@ function smarty_block_textformat($params, $content, $template, &$repeat)
     }
     // split into paragraphs
     $_paragraphs = preg_split('![\r\n]{2}!', $content);
-    $_output = '';
-
-
     foreach ($_paragraphs as &$_paragraph) {
         if (!$_paragraph) {
             continue;

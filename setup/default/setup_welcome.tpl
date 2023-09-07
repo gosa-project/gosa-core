@@ -19,16 +19,38 @@
 		{t}If you've collected the needed information, unlock the setup process like shown in the next paragraph.{/t}
 	</p>
 
-	<hr class="divider">
+	<hr class="divider"/>
 
 	<h2>{t}Starting the setup{/t}</h2>
 	<p>
-		{t}For security reasons you need to authenticate the installation by creating the file '/tmp/gosa.auth', containing the current session ID on the servers local filesystem. This can be done by executing the following command:{/t}
+		{t}For security reasons you need to authenticate the installation by creating the file '/tmp/gosa.auth', containing the current session ID on the servers local filesystem. This can be done by executing the following command:{/t}	
 	</p>
 
-	<pre>
-		echo -n <b>{$auth_id}</b> &gt; {$path}
-	</pre>
+	<div class="row valign-wrapper">
+		<div class="col s6 xl6">
+			<textarea class="copy-area" spellcheck="false" type="text" id="session_id">echo -n {$auth_id} &gt; {$path}</textarea>
+		</div>
+		<div class="col s2 xl2">
+			<button class="btn-extra-small tooltipped" data-postion="top" data-tooltip="Copy to clipboard" onclick="copy_to_clipboard('session_id')">
+				<i class="tiny material-icons">content_copy</i>
+			</button>
+		</div>
+	</div>
+
+	<p>
+		{t}If you have difficulties with the systemd PrivateTemp, you should temporarily disable it for the installation as follows:{/t}
+	</p>
+
+	<div class="row valign-wrapper">
+		<div class="col s6 xl6">
+			<textarea class="copy-area" spellcheck="false" type="text" id="config_tmp">sudo service apache2 stop&#13;&#10;sudo sed -i 's/Tmp=true/Tmp=false/' /lib/systemd/system/apache2.service&#13;&#10;sudo systemctl daemon-reload&#13;&#10;sudo service apache2 start</textarea>
+		</div>
+		<div class="col s2 xl2">
+			<button class="btn-extra-small tooltipped" data-postion="top" data-tooltip="Copy to clipboard" onclick="copy_to_clipboard('config_tmp')">
+				<i class="tiny material-icons">content_copy</i>
+			</button>
+		</div>
+	</div>
 
 	<p>
 		{t}Click the 'Next' button when you've finished.{/t}

@@ -140,21 +140,10 @@
     font-size: 18px;
 }
 
-.content-area.setup .content-wrapper .status-wrapper .connection-setting {
-    justify-content: start;
-    align-items: flex-start;
-    height: auto;
+.policy_instruction_code {
+    border: #e0e0e0 1px solid;
+    padding: 5px;
 }
-
-.content-area.setup .content-wrapper .status-wrapper .connection-setting .label {
-    margin-right: 20px;
-    color: #000000;
-}
-
-.content-area.setup .content-wrapper .status-wrapper .connection-setting .connection-status p {
-    margin-top: 0;
-}
-
 
 /* Step 5/8 */
 
@@ -180,20 +169,19 @@
     margin: 0;
 }
 
-
 /* Step 6/8 */
 
 .content-area.setup .content-wrapper table button.create {
     margin-top: 5px;
 }
 
-.content-area.setup .content-wrapper .setup-ldap-table td:first-child {
+/* .content-area.setup .content-wrapper .setup-ldap-table td:first-child {
     width: 40%;
 }
 
 .content-area.setup .content-wrapper .setup-ldap-table td:last-child {
     width: 40%;
-}
+} */
 
 .content-area.setup .content-wrapper .migrate-wrapper h3 {
     margin-top: 0;

@@ -19,9 +19,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 
     /**
      * Compiles code for the {for} tag
-     *
-     * Smarty 3 does implement two different sytaxes:
-     *
+     * Smarty supports two different syntax's:
      * - {for $var in $array}
      * For looping over arrays or iterators
      *
@@ -138,11 +136,9 @@ class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase {
         }
 
         list($openTag, $compiler->nocache) = $this->closeTag($compiler, array('for', 'forelse'));
-
-        if ($openTag == 'forelse') {
-            return "<?php }  ?>";
-        } else {
-            return "<?php }} ?>";
+        $output = "<?php }\n";
+        if ($openTag !== 'forelse') {
+            $output .= "}\n";
         }
     }
 
