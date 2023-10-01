@@ -571,6 +571,16 @@ olcAttributeTypes: (
   )
 #
 ################################################################################
+olcAttributeTypes: (
+  1.3.6.1.4.1.19414.2.1.3
+  NAME 'alias'
+  DESC 'RFC1274: RFC822 Mailbox'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256}
+)
+#
+################################################################################
 #
 olcObjectClasses: (
   1.3.6.1.4.1.10098.1.2.1.19.1
@@ -625,7 +635,7 @@ olcObjectClasses: (
   SUP top
   AUXILIARY
   MUST ( mail $ gosaMailServer $ gosaMailDeliveryMode )
-  MAY ( gosaMailQuota $ gosaMailAlternateAddress $ gosaMailForwardingAddress $ gosaMailMaxSize $ gosaSpamSortLevel $ gosaSpamMailbox $ gosaVacationMessage $ gosaVacationStart $ gosaVacationStop $ gosaSharedFolderTarget $ acl )
+  MAY ( alias $ gosaMailQuota $ gosaMailAlternateAddress $ gosaMailForwardingAddress $ gosaMailMaxSize $ gosaSpamSortLevel $ gosaSpamMailbox $ gosaVacationMessage $ gosaVacationStart $ gosaVacationStop $ gosaSharedFolderTarget $ acl )
   )
 #
 ################################################################################
