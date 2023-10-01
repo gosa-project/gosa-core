@@ -3374,12 +3374,18 @@ function get_random_char () {
      }
 }
 
-
 function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
     $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return bin2hex(openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv));
+    $iv = "";
+    if ($ivlen > 0) {
+      $iv = openssl_random_pseudo_bytes($ivlen);
+    }
+
+    $encrypted = openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv);
+    if ($encrypted == false) return null;
+
+    return bin2hex($encrypted);
   }
 
   return null;
@@ -3388,8 +3394,15 @@ function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
 function cred_decrypt($input, $password, $cipher = "aes-256-ecb") {
   if (in_array($cipher, openssl_get_cipher_methods())) {
     $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return rtrim(openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv ), "\0\3\4\n");
+    $iv = "";
+    if ($ivlen > 0) {
+      $iv = openssl_random_pseudo_bytes($ivlen);
+    }
+    // If openssl_decrypt returns false: It can be a wrong `input` or the
+    // password in gosa.conf is not encrypted.
+    $decrypted = openssl_decrypt(pack("H*", $input), $cipher, $password, 0, $iv);
+    if ($decrypted == false) return null;
+    return rtrim($decrypted, "\0\3\4\n");
   }
 
   return null;
