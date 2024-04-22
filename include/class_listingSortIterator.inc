@@ -89,23 +89,23 @@ class listingSortIterator implements Iterator {
     }
   }
 
-  function rewind() {
-    return reset($this->data);
+  function rewind(): void {
+    reset($this->data);
   }
 
-  function current() {
+  function current(): mixed {
     return current($this->data);
   }
 
-  function key() {
+  function key(): mixed {
     return key($this->data);
   }
 
-  function next() {
-    return next($this->data);
+  function next(): void {
+    next($this->data);
   }
 
-  function valid() {
+  function valid(): bool {
     return key($this->data) !== null;
   }
 }

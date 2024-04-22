@@ -39,9 +39,9 @@ class LDAP
     var $hascon   =false;
     var $reconnect=false;
     var $tls      = false;
-    var $cid;
+    static $cid;
     var $hasres   = array();
-    var $sr       = array();
+    static $sr       = array();
     var $re       = array();
     var $basedn   ="";
     var $start    = array(); // 0 if we are fetching the first entry, otherwise 1
@@ -60,7 +60,7 @@ class LDAP
         global $config;
         $this->follow_referral= $follow_referral;
         $this->tls=$tls;
-        $this->binddn=LDAP::convert($binddn);
+        $this->binddn=self::convert($binddn);
 
         $this->bindpw=$bindpw;
         $this->hostname=$hostname;
@@ -77,7 +77,7 @@ class LDAP
 
     function getSearchResource()
     {
-        $this->sr[$this->srp]= NULL;
+        self::$sr[$this->srp]= NULL;
         $this->start[$this->srp]= 0;
         $this->hasres[$this->srp]= false;
         return $this->srp++;
@@ -110,7 +110,7 @@ class LDAP
 
     /* \brief     Tests for the special-char handling of the currently used ldap database 
      *             and updates the LDAP class correspondingly.
-     *            This affects the LDAP::fix function and allows us to write 
+     *            This affects the self::fix function and allows us to write 
      *             dns containing  , " ( )
      */
     static function updateSpecialCharHandling()
@@ -118,51 +118,52 @@ class LDAP
         global $config;
 
         // Load results from the session if they exists.
-        if(session::is_set('LDAP::updateSpecialCharHandling')){
-            $data = session::get('LDAP::updateSpecialCharHandling');
+        if(session::is_set('self::updateSpecialCharHandling')){
+            $data = session::get('self::updateSpecialCharHandling');
             $attrs = array("characterMap", "characterMapRegFrom", "characterMapRegTo", "readableMapRegFrom", "readableMapRegTo");
             foreach($attrs as $attr){
-                LDAP::$$attr = $data[$attr];
+                self::$$attr = $data[$attr];
             }
             
-            $attrs = array(implode(LDAP::$characterMapRegFrom,', '),implode(LDAP::$characterMapRegTo,', '));
+
+            $attrs = array(implode(',', self::$characterMapRegFrom),',', implode(self::$characterMapRegTo,));
             @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"(Cached) Detected special-char handling for LDAP actions");
             return;
         }
 
         // Set a default character handling.
-        LDAP::$characterMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/");
-        LDAP::$characterMapRegTo = array("\,", "(", ")", "/", '\"');
+        self::$characterMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/");
+        self::$characterMapRegTo = array("\,", "(", ")", "/", '\"');
 
         // Set a default mapping to make readable strings out of dns.
-        LDAP::$readableMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/",
+        self::$readableMapRegFrom = array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/",
                 "/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//", "/\\\\22/", '/\\\\"/');
-        LDAP::$readableMapRegTo = array(",", "(", ")", "/", '"',",", ",", "(", ")", "/", '"', '"');
+        self::$readableMapRegTo = array(",", "(", ")", "/", '"',",", ",", "(", ")", "/", '"', '"');
 
-        if(LDAP::$characterMap === NULL){
-            LDAP::$characterMap = detectLdapSpecialCharHandling();
+        if(self::$characterMap === NULL){
+            self::$characterMap = detectLdapSpecialCharHandling();
 
             // Check if character-detection was successfull, if it wasn't use a fallback.
-            if(LDAP::$characterMap !== NULL){
-                LDAP::$characterMapRegFrom = array();
-                LDAP::$characterMapRegTo = array();
-                LDAP::$readableMapRegFrom = array();
-                LDAP::$readableMapRegTo = array();
-                foreach(LDAP::$characterMap as $from => $to){
+            if(self::$characterMap !== NULL){
+                self::$characterMapRegFrom = array();
+                self::$characterMapRegTo = array();
+                self::$readableMapRegFrom = array();
+                self::$readableMapRegTo = array();
+                foreach(self::$characterMap as $from => $to){
                    
                     // Append entry character conversion  
-                    LDAP::$characterMapRegFrom[] = "/".preg_quote(LDAP::convert($from),'/')."/";
-                    LDAP::$characterMapRegTo[] = addslashes($to);
+                    self::$characterMapRegFrom[] = "/".preg_quote(self::convert($from),'/')."/";
+                    self::$characterMapRegTo[] = addslashes($to);
 
                     // Append entry make readable array
-                    LDAP::$readableMapRegFrom[] = "/".preg_quote($to,'/')."/";
-                    LDAP::$readableMapRegFrom[] = "/".preg_quote(LDAP::convert($to),'/')."/";
-                    LDAP::$readableMapRegTo[] = stripslashes($from);
-                    LDAP::$readableMapRegTo[] = stripslashes($from);
+                    self::$readableMapRegFrom[] = "/".preg_quote($to,'/')."/";
+                    self::$readableMapRegFrom[] = "/".preg_quote(self::convert($to),'/')."/";
+                    self::$readableMapRegTo[] = stripslashes($from);
+                    self::$readableMapRegTo[] = stripslashes($from);
                 }
             }else{
                 // To avoid querying a hundred times without any success, stop here.
-                LDAP::$characterMap = array();
+                self::$characterMap = array();
             }
         }
         
@@ -170,11 +171,11 @@ class LDAP
         $attrs = array("characterMap", "characterMapRegFrom", "characterMapRegTo", "readableMapRegFrom", "readableMapRegTo");
         $data = array();
         foreach($attrs as $attr){
-            $data[$attr] = LDAP::$$attr;
+            $data[$attr] = self::$$attr;
         }
-        session::set("LDAP::updateSpecialCharHandling", $data);
+        session::set("self::updateSpecialCharHandling", $data);
 
-        $attrs = array(implode(LDAP::$characterMapRegFrom,', '),implode(LDAP::$characterMapRegTo,', '));
+        $attrs = array(implode(', ', self::$characterMapRegFrom),implode(', ', self::$characterMapRegTo));
         @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"Detected special-char handling for LDAP actions");
     }
 
@@ -186,8 +187,8 @@ class LDAP
      */
     static function makeReadable($dn)
     {
-        if(LDAP::$characterMap === NULL) LDAP::updateSpecialCharHandling();
-        return (preg_replace(LDAP::$readableMapRegFrom,LDAP::$readableMapRegTo,$dn));
+        if(self::$characterMap === NULL) self::updateSpecialCharHandling();
+        return (preg_replace(self::$readableMapRegFrom,self::$readableMapRegTo,$dn));
     }
 
 
@@ -200,12 +201,12 @@ class LDAP
      */
     static function fix($dn)
     {
-        if (SPECIALS_OVERRIDE == TRUE){
+        if (SPECIALS_OVERRIDE == TRUE && $dn != ""){
 
             // Update the conversion instruction set.
-            if(LDAP::$characterMap === NULL) LDAP::updateSpecialCharHandling();
+            if(self::$characterMap === NULL) self::updateSpecialCharHandling();
 
-            return (preg_replace(LDAP::$characterMapRegFrom,LDAP::$characterMapRegTo,$dn));
+            return (preg_replace(self::$characterMapRegFrom,self::$characterMapRegTo,$dn));
         } else {
             return ($dn);
         }
@@ -216,7 +217,7 @@ class LDAP
        requests. I.e. member=....                                               */
     static function prepare4filter($dn)
     {
-        $fixed= normalizeLdap(str_replace('\\\\', '\\\\\\', LDAP::fix($dn)));
+        $fixed= normalizeLdap(str_replace('\\\\', '\\\\\\', self::fix($dn)));
         return str_replace('\\,', '\\\\,', $fixed);
     }
 
@@ -225,18 +226,18 @@ class LDAP
     {
         $this->hascon=false;
         $this->reconnect=false;
-        if ($this->cid= @ldap_connect($this->hostname)) {
-            @ldap_set_option($this->cid, LDAP_OPT_PROTOCOL_VERSION, 3);
+        if (self::$cid= @ldap_connect($this->hostname)) {
+            @ldap_set_option(self::$cid, LDAP_OPT_PROTOCOL_VERSION, 3);
             if (function_exists("ldap_set_rebind_proc") && $this->follow_referral) {
-                @ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
-                @ldap_set_rebind_proc($this->cid, array(&$this, "rebind"));
+                @ldap_set_option(self::$cid, LDAP_OPT_REFERRALS, 1);
+                @ldap_set_rebind_proc(self::$cid, array(&$this, "rebind"));
             }
             if (function_exists("ldap_start_tls") && $this->tls){
-                @ldap_start_tls($this->cid);
+                @ldap_start_tls(self::$cid);
             }
 
             $this->error = "No Error";
-            if ($bid = @ldap_bind($this->cid, LDAP::fix($this->binddn), $this->bindpw)) {
+            if ($bid = @ldap_bind(self::$cid, self::fix($this->binddn), $this->bindpw)) {
                 $this->error = "Success";
                 $this->hascon=true;
             } else {
@@ -256,7 +257,7 @@ class LDAP
     function rebind($ldap, $referral)
     {
         $credentials= $this->get_credentials($referral);
-        if (@ldap_bind($ldap, LDAP::fix($credentials['ADMINDN']), $credentials['ADMINPASSWORD'])) {
+        if (@ldap_bind($ldap, self::fix($credentials['ADMINDN']), $credentials['ADMINPASSWORD'])) {
             $this->error = "Success";
             $this->hascon=true;
             $this->reconnect= true;
@@ -270,21 +271,21 @@ class LDAP
     function reconnect()
     {
         if ($this->reconnect){
-            @ldap_unbind($this->cid);
-            $this->cid = NULL;
+            @ldap_unbind(self::$cid);
+            self::$cid = NULL;
         }
     }
 
     function unbind()
     {
-        @ldap_unbind($this->cid);
-        $this->cid = NULL;
+        @ldap_unbind(self::$cid);
+        self::$cid = NULL;
     }
 
     function disconnect()
     {
         if($this->hascon){
-            @ldap_close($this->cid);
+            @ldap_close(self::$cid);
             $this->hascon=false;
         }
     }
@@ -294,7 +295,7 @@ class LDAP
         if ($dir == ".."){
             $this->basedn = $this->getParentDir();
         } else {
-            $this->basedn = LDAP::convert($dir);
+            $this->basedn = self::convert($dir);
         }
     }
 
@@ -303,7 +304,7 @@ class LDAP
         if ($basedn==""){
             $basedn = $this->basedn;
         } else {
-            $basedn = LDAP::convert($basedn);
+            $basedn = self::convert($basedn);
         }
         return(preg_replace("/[^,]*[,]*[ ]*(.*)/", "$1", $basedn));
     }
@@ -316,8 +317,8 @@ class LDAP
 
             $start = microtime(true);
             $this->clearResult($srp);
-            $this->sr[$srp] = @ldap_search($this->cid, LDAP::fix($this->basedn), $filter, $attrs);
-            $this->error = @ldap_error($this->cid);
+            self::$sr[$srp] = @ldap_search(self::$cid, self::fix($this->basedn), $filter, $attrs);
+            $this->error = @ldap_error(self::$cid);
             $this->resetResult($srp);
             $this->hasres[$srp]=true;
 
@@ -329,12 +330,12 @@ class LDAP
                 }
             }
 
-            $this->log("LDAP operation: time=".(microtime(true)-$start)." operation=search('".LDAP::fix($this->basedn)."', '$filter')");
+            $this->log("LDAP operation: time=".(microtime(true)-$start)." operation=search('".self::fix($this->basedn)."', '$filter')");
 
             // Create statistic table entry 
             stats::log('ldap', $class = get_class($this), $category = array(),  $action = __FUNCTION__, 
                     $amount = 1, $duration = (microtime(TRUE) - $start));
-            return($this->sr[$srp]);
+            return(self::$sr[$srp]);
         }else{
             $this->error = "Could not connect to LDAP server";
             return("");
@@ -350,11 +351,11 @@ class LDAP
             if ($basedn == "")
                 $basedn = $this->basedn;
             else
-                $basedn= LDAP::convert($basedn);
+                $basedn= self::convert($basedn);
 
             $start = microtime(true);
-            $this->sr[$srp] = @ldap_list($this->cid, LDAP::fix($basedn), $filter,$attrs);
-            $this->error = @ldap_error($this->cid);
+            self::$sr[$srp] = @ldap_list(self::$cid, self::fix($basedn), $filter,$attrs);
+            $this->error = @ldap_error(self::$cid);
             $this->resetResult($srp);
             $this->hasres[$srp]=true;
 
@@ -366,13 +367,13 @@ class LDAP
                 }
             }
 
-            $this->log("LDAP operation: time=".(microtime(true) - $start)." operation=ls('".LDAP::fix($basedn)."', '$filter')");
+            $this->log("LDAP operation: time=".(microtime(true) - $start)." operation=ls('".self::fix($basedn)."', '$filter')");
 
             // Create statistic table entry 
             stats::log('ldap', $class = get_class($this), $category = array(),  $action = __FUNCTION__, 
                     $amount = 1, $duration = (microtime(TRUE) - $start));
 
-            return($this->sr[$srp]);
+            return(self::$sr[$srp]);
         }else{
             $this->error = "Could not connect to LDAP server";
             return("");
@@ -383,13 +384,17 @@ class LDAP
     {
         if($this->hascon){
             if ($this->reconnect) $this->connect();
+            
+            if (self::fix($dn) == "new") $dn = $this->basedn;
+
 
             $this->clearResult($srp);
-            $this->sr[$srp] = @ldap_read($this->cid, LDAP::fix($dn), $filter,$attrs);
-            $this->error = @ldap_error($this->cid);
+            self::$sr[$srp] = @ldap_read(self::$cid, self::fix($dn), $filter,$attrs);
+            
+            $this->error = @ldap_error(self::$cid);
             $this->resetResult($srp);
             $this->hasres[$srp]=true;
-            return($this->sr[$srp]);
+            return(self::$sr[$srp]);
         }else{
             $this->error = "Could not connect to LDAP server";
             return("");
@@ -400,8 +405,8 @@ class LDAP
     {
         if($this->hascon){
             if ($this->reconnect) $this->connect();
-            $res =  @ldap_read($this->cid, LDAP::fix($dn), $filter, array("objectClass"));
-            $rv =   @ldap_count_entries($this->cid, $res);
+            $res =  @ldap_read(self::$cid, self::fix($dn), $filter, array("objectClass"));
+            $rv =   @ldap_count_entries(self::$cid, $res);
             return($rv);
         }else{
             $this->error = "Could not connect to LDAP server";
@@ -413,10 +418,10 @@ class LDAP
     {
         /* Ignore zero settings */
         if ($size == 0){
-            @ldap_set_option($this->cid, LDAP_OPT_SIZELIMIT, 10000000);
+            @ldap_set_option(self::$cid, LDAP_OPT_SIZELIMIT, 10000000);
         }
         if($this->hascon){
-            @ldap_set_option($this->cid, LDAP_OPT_SIZELIMIT, $size);
+            @ldap_set_option(self::$cid, LDAP_OPT_SIZELIMIT, $size);
         } else {
             $this->error = "Could not connect to LDAP server";
         }
@@ -429,21 +434,21 @@ class LDAP
             if($this->hasres[$srp]){
                 if ($this->start[$srp] == 0)
                 {
-                    if ($this->sr[$srp]){
+                    if (self::$sr[$srp]){
                         $this->start[$srp] = 1;
-                        $this->re[$srp]= @ldap_first_entry($this->cid, $this->sr[$srp]);
+                        $this->re[$srp]= @ldap_first_entry(self::$cid, self::$sr[$srp]);
                     } else {
                         return array();
                     }
                 } else {
-                    $this->re[$srp]= @ldap_next_entry($this->cid, $this->re[$srp]);
+                    $this->re[$srp]= @ldap_next_entry(self::$cid, $this->re[$srp]);
                 }
                 if ($this->re[$srp])
                 {
-                    $att= @ldap_get_attributes($this->cid, $this->re[$srp]);
-                    $att['dn']= trim(LDAP::convert(@ldap_get_dn($this->cid, $this->re[$srp])));
+                    $att= @ldap_get_attributes(self::$cid, $this->re[$srp]);
+                    $att['dn']= trim(self::convert(@ldap_get_dn(self::$cid, $this->re[$srp])));
                 }
-                $this->error = @ldap_error($this->cid);
+                $this->error = @ldap_error(self::$cid);
                 if (!isset($att)){
                     $att= array();
                 }
@@ -467,7 +472,9 @@ class LDAP
     {
         if($this->hasres[$srp]){
             $this->hasres[$srp] = false;
-            @ldap_free_result($this->sr[$srp]);
+            if (!is_bool(self::$sr[$srp])) {
+                @ldap_free_result(self::$sr[$srp]);
+            }
         }
     }
 
@@ -482,10 +489,10 @@ class LDAP
                 }
                 else
                 {
-                    $rv = @ldap_get_dn($this->cid, $this->re[$srp]);
+                    $rv = @ldap_get_dn(self::$cid, $this->re[$srp]);
 
-                    $this->error = @ldap_error($this->cid);
-                    return(trim(LDAP::convert($rv)));
+                    $this->error = @ldap_error(self::$cid);
+                    return(trim(self::convert($rv)));
                 }
             }else{
                 $this->error = "Perform a Fetch with no Search";
@@ -501,8 +508,8 @@ class LDAP
     {
         if($this->hascon){
             if($this->hasres[$srp]){
-                $rv = @ldap_count_entries($this->cid, $this->sr[$srp]);
-                $this->error = @ldap_error($this->cid);
+                $rv = @ldap_count_entries(self::$cid, self::$sr[$srp]);
+                $this->error = @ldap_error(self::$cid);
                 return($rv);
             }else{
                 $this->error = "Perform a Fetch with no Search";
@@ -514,15 +521,15 @@ class LDAP
         }
     }
 
-    function rm($attrs = "", $dn = "")
+    function rm($attrs = array(), $dn = "")
     {
         if($this->hascon){
             if ($this->reconnect) $this->connect();
             if ($dn == "")
                 $dn = $this->basedn;
 
-            $r = ldap_mod_del($this->cid, LDAP::fix($dn), $attrs);
-            $this->error = @ldap_error($this->cid);
+            $r = ldap_mod_del(self::$cid, self::fix($dn), $attrs);
+            $this->error = @ldap_error(self::$cid);
             return($r);
         }else{
             $this->error = "Could not connect to LDAP server";
@@ -530,15 +537,17 @@ class LDAP
         }
     }
 
-    function mod_add($attrs = "", $dn = "")
+    function mod_add($attrs = array(), $dn = "")
     {
+        print($attrs);
+
         if($this->hascon){
             if ($this->reconnect) $this->connect();
             if ($dn == "")
                 $dn = $this->basedn;
 
-            $r = @ldap_mod_add($this->cid, LDAP::fix($dn), $attrs);
-            $this->error = @ldap_error($this->cid);
+            $r = @ldap_mod_add(self::$cid, self::fix($dn), $attrs);
+            $this->error = @ldap_error(self::$cid);
             return($r);
         }else{
             $this->error = "Could not connect to LDAP server";
@@ -553,8 +562,8 @@ class LDAP
             if ($dn == "")
                 $dn = $this->basedn;
 
-            $r = @ldap_mod_replace($this->cid, LDAP::fix($dn), $attrs);
-            $this->error = @ldap_error($this->cid);
+            $r = @ldap_mod_replace(self::$cid, self::fix($dn), $attrs);
+            $this->error = @ldap_error(self::$cid);
             return($r);
         }else{
             $this->error = "Could not connect to LDAP server";
@@ -566,8 +575,8 @@ class LDAP
     {
         if($this->hascon){
             if ($this->reconnect) $this->connect();
-            $r = @ldap_delete($this->cid, LDAP::fix($deletedn));
-            $this->error = @ldap_error($this->cid);
+            $r = @ldap_delete(self::$cid, self::fix($deletedn));
+            $this->error = @ldap_error(self::$cid);
             return($r ? $r : 0);
         }else{
             $this->error = "Could not connect to LDAP server";
@@ -607,8 +616,8 @@ class LDAP
 
         if($this->hascon){
             if ($this->reconnect) $this->connect();
-            $r= ldap_rename($this->cid,@LDAP::fix($source), @LDAP::fix($dest_rdn),@LDAP::fix($parent),TRUE); 
-            $this->error = ldap_error($this->cid);
+            $r= ldap_rename(self::$cid,@self::fix($source), @self::fix($dest_rdn),@self::fix($parent),TRUE); 
+            $this->error = ldap_error(self::$cid);
 
             /* Check if destination dn exists, if not the 
                server may not support this operation */
@@ -650,8 +659,8 @@ class LDAP
             }
 
             /* Finally Delete own Node */
-            $r = @ldap_delete($this->cid, LDAP::fix($deletedn));
-            $this->error = @ldap_error($this->cid);
+            $r = @ldap_delete(self::$cid, self::fix($deletedn));
+            $this->error = @ldap_error(self::$cid);
             return($r ? $r : 0);
         }else{
             $this->error = "Could not connect to LDAP server";
@@ -689,8 +698,8 @@ class LDAP
         if($this->hascon){
             $start = microtime(TRUE);
             if ($this->reconnect) $this->connect();
-            $r = @ldap_modify($this->cid, LDAP::fix($this->basedn), $attrs);
-            $this->error = @ldap_error($this->cid);
+            $r = @ldap_modify(self::$cid, self::fix($this->basedn), $attrs);
+            $this->error = @ldap_error(self::$cid);
             if(!$this->success()){
                 $this->error.= $this->makeReadableErrors($this->error,$attrs);
             }
@@ -710,8 +719,8 @@ class LDAP
         if($this->hascon){
             $start = microtime(TRUE);
             if ($this->reconnect) $this->connect();
-            $r = @ldap_add($this->cid, LDAP::fix($this->basedn), $attrs);
-            $this->error = @ldap_error($this->cid);
+            $r = @ldap_add(self::$cid, self::fix($this->basedn), $attrs);
+            $this->error = @ldap_error(self::$cid);
             if(!$this->success()){
                 $this->error.= $this->makeReadableErrors($this->error,$attrs);
             }
@@ -776,7 +785,7 @@ class LDAP
 
             } else {
                 $type= preg_replace('/^([^=]+)=.*$/', '\\1', $cdn);
-                $param= LDAP::fix(preg_replace('/^[^=]+=([^,]+).*$/', '\\1', $cdn));
+                $param= self::fix(preg_replace('/^[^=]+=([^,]+).*$/', '\\1', $cdn));
                 $param=preg_replace(array('/\\\\,/','/\\\\"/'),array(',','"'),$param);
 
                 $na= array();
@@ -901,13 +910,13 @@ class LDAP
     {
         $data= "";
         if ($this->reconnect) $this->connect();
-        $sr= @ldap_read($this->cid, LDAP::fix($dn), "objectClass=*", array("$name"));
+        $sr= @ldap_read(self::$cid, self::fix($dn), "objectClass=*", array("$name"));
 
         /* fill data from LDAP */
         if ($sr) {
-            $ei= @ldap_first_entry($this->cid, $sr);
+            $ei= @ldap_first_entry(self::$cid, $sr);
             if ($ei) {
-                if ($info= @ldap_get_values_len($this->cid, $ei, "$name")){
+                if ($info= @ldap_get_values_len(self::$cid, $ei, "$name")){
                     $data= $info[0];
                 }
             }
@@ -924,7 +933,7 @@ class LDAP
     function get_additional_error()
     {
         $error= "";
-        @ldap_get_option ($this->cid, LDAP_OPT_ERROR_STRING, $error);
+        @ldap_get_option (self::$cid, LDAP_OPT_ERROR_STRING, $error);
         return ($error);
     }
 
@@ -950,21 +959,21 @@ class LDAP
         }
     }
 
-    function get_credentials($url, $referrals= NULL)
+    static function get_credentials($url, $referrals= NULL)
     {
         $ret= array();
         $url= preg_replace('!\?\?.*$!', '', $url);
         $server= preg_replace('!^([^:]+://[^/]+)/.*$!', '\\1', $url);
 
         if ($referrals === NULL){
-            $referrals= $this->referrals;
+            $referrals= self::$referrals;
         }
 
         if (isset($referrals[$server])){
             return ($referrals[$server]);
         } else {
-            $ret['ADMINDN']= LDAP::fix($this->binddn);
-            $ret['ADMINPASSWORD']= $this->bindpw;
+            $ret['ADMINDN']= self::fix(self::$binddn);
+            $ret['ADMINPASSWORD']= self::$bindpw;
         }
 
         return ($ret);
@@ -1063,7 +1072,7 @@ class LDAP
 
     function dn_exists($dn)
     {
-        return @ldap_list($this->cid, LDAP::fix($dn), "(objectClass=*)", array("objectClass"));
+        return @ldap_list(self::$cid, self::fix($dn), "(objectClass=*)", array("objectClass"));
     }
 
 
@@ -1089,7 +1098,7 @@ class LDAP
 
         /* FIX ldif */
         $last = "";
-        $tmp  = "";
+        $tmp  = array();
         $i = 0;
         foreach($entries as $entry){
             if(preg_match("/^ /",$entry)){
@@ -1255,7 +1264,7 @@ class LDAP
                         $datas[$attr[0]]['count']=1;             
                         $data[$attr[0]]=$new;
                     } else {
-                        $cnt = $datas[$attr[0]]['count'];           
+                        $cnt = $data[$attr[0]]['count'];           
                         $cnt ++;
                         $data[$attr[0]][$cnt]=$attr[1];
                         $datas[$attr[0]]['count'] = $cnt;
@@ -1366,8 +1375,8 @@ class LDAP
         }
 
 # Get base to look for schema 
-        $sr = @ldap_read ($this->cid, "", "objectClass=*", array("subschemaSubentry"));
-        $attr = @ldap_get_entries($this->cid,$sr);
+        $sr = @ldap_read (self::$cid, "", "objectClass=*", array("subschemaSubentry"));
+        $attr = @ldap_get_entries(self::$cid,$sr);
         if (!isset($attr[0]['subschemasubentry'][0])){
             return array();
         }
@@ -1375,8 +1384,8 @@ class LDAP
         /* Get list of objectclasses and fill array */
         $nb= $attr[0]['subschemasubentry'][0];
         $objectclasses= array();
-        $sr= ldap_read ($this->cid, $nb, "objectClass=*", array("objectclasses"));
-        $attrs= ldap_get_entries($this->cid,$sr);
+        $sr= ldap_read (self::$cid, $nb, "objectClass=*", array("objectclasses"));
+        $attrs= ldap_get_entries(self::$cid,$sr);
         if (!isset($attrs[0])){
             return array();
         }
@@ -1533,5 +1542,3 @@ class LDAP
     }
 
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

@@ -77,35 +77,50 @@
             $cached->exists = !!$cached->timestamp;
         }
 
-        /**
-        * Read the cached template and process its header
-        *
-        * @param Smarty_Internal_Template $_template template object
-        * @param Smarty_Template_Cached $cached cached object
-        * @return booelan true or false if the cached content does not exist
-        */
-        public function process(Smarty_Internal_Template $_template, Smarty_Template_Cached $cached=null)
-        {
-            $_smarty_tpl = $_template;
-            return @include $_template->cached->filepath;
-        }
+    /**
+     * Empty cache
+     *
+     * @param Smarty  $smarty
+     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     *
+     * @return integer number of cache files deleted
+     */
+    public function clearAll(Smarty $smarty, $exp_time = null)
+    {
+        return $smarty->ext->_cacheResourceFile->clear($smarty, null, null, null, $exp_time);
+    }
 
-        /**
-        * Write the rendered template output to cache
-        *
-        * @param Smarty_Internal_Template $_template template object
-        * @param string                   $content   content to cache
-        * @return boolean success
-        */
-        public function writeCachedContent(Smarty_Internal_Template $_template, $content)
-        {
-            if (Smarty_Internal_Write_File::writeFile($_template->cached->filepath, $content, $_template->smarty) === true) {
-                $_template->cached->timestamp = @filemtime($_template->cached->filepath);
-                $_template->cached->exists = !!$_template->cached->timestamp;
-                if ($_template->cached->exists) {
-                    return true;
-                }
-            }
+    /**
+     * Empty cache for a specific template
+     *
+     * @param Smarty  $smarty
+     * @param string  $resource_name template name
+     * @param string  $cache_id      cache id
+     * @param string  $compile_id    compile id
+     * @param integer $exp_time      expiration time (number of seconds, not timestamp)
+     *
+     * @return integer number of cache files deleted
+     */
+    public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time)
+    {
+        return $smarty->ext->_cacheResourceFile->clear($smarty, $resource_name, $cache_id, $compile_id, $exp_time);
+    }
+
+    /**
+     * Check is cache is locked for this template
+     *
+     * @param Smarty                 $smarty Smarty object
+     * @param Smarty_Template_Cached $cached cached object
+     *
+     * @return boolean true or false if cache is locked
+     */
+    public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        clearstatcache(true, $cached->lock_id ?? '');
+        if (null !== $cached->lock_id && is_file($cached->lock_id)) {
+            $t = filemtime($cached->lock_id);
+            return $t && (time() - $t < $smarty->locking_timeout);
+        } else {
             return false;
         }
 

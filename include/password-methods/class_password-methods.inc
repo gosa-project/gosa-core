@@ -235,7 +235,7 @@ class passwordMethod
     static function get_available_methods()
     {
         global $class_mapping, $config;
-        $ret =false;
+        $ret = array();
         $i =0;
 
         /* Only */

@@ -48,7 +48,7 @@ class posixAccount extends plugin
   var $shadowWarning= "0";
   var $shadowLastChange= "0";
   var $shadowInactive= "0";
-  var $shadowExpire= "";
+  var string $shadowExpire = "";
   var $accessTo= array();
 
   var $glist=array();
@@ -207,7 +207,7 @@ class posixAccount extends plugin
     if ($this->shadowExpire == 0){
       $this->shadowExpire= "";
     } else {
-      $this->shadowExpire= date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
+      $this->shadowExpire= date('d.m.Y', intval($this->shadowExpire) * 60 * 60 * 24);
     }
 
 

@@ -655,6 +655,25 @@ class plugin
     $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
     $display.= "</div>\n";
 
+
+    $theme = getThemeName();
+
+    switch ($theme) {
+      case 'classic':
+        $display = "<div class='plugin-enable-header'>
+                      <p>$text</p>
+                      <button type='submit' name=\"modify_state\" ".$state.">$button_text</button>
+                    </div>";
+        break;
+      
+      default:
+        $display = "<h2 class='card-title'>"._('Preferences')."</h2>
+                      <p>$text</p>
+                      <div class='card-action settings'>
+                        <button class='btn-small' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
+                      </div>";
+        break;
+    }
     return($display);
   }
 
@@ -667,10 +686,28 @@ class plugin
     } else {
       $state= "";
     }
-    $display = "<div class='plugin-disable-header'>\n";
-    $display.= "<p>$text</p>\n";
-    $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
-    $display.= "</div>\n";
+
+
+    switch ($theme) {
+      case 'classic':
+        $display = "<div class='plugin-disable-header'>
+                      <p>$text</p>
+                      <button type='submit' name=\"modify_state\" ".$state.">
+                        $button_text
+                      </button>
+                    </div>";
+        break;
+      
+      default:
+        $display = "<h2 class='card-title'>"._('Preferences')."</h2>
+                    <p>$text</p>
+                    <div class='card-action settings'>
+                      <button class='btn-small' type='submit' name='modify_state' ".$state.">
+                        $button_text
+                      </button>
+                    </div>";
+        break;
+    }
     return($display);
   }
 
@@ -1712,6 +1749,3 @@ class plugin
       }
   }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

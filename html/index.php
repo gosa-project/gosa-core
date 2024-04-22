@@ -379,10 +379,12 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 
             stats::log('global', 'global', array(),  $action = 'login', $amount = 1, 0);
 
-            if(isset($plug) && isset($plist->dirlist[$plug])) {
-                header ("Location: main.php?plug=".$plug."&amp;global_check=1");
-            }else{
-                header ("Location: main.php?global_check=1");
+            session_write_close();
+
+            if (isset($plug) && isset($plist->dirlist[$plug])) {
+                header("Location: main.php?plug=".$plug."&amp;global_check=1");
+            } else {
+                header("Location: main.php?global_check=1");
             }
             exit;
         }
@@ -437,7 +439,6 @@ if (session::is_set('errors') && session::get('errors') != "") {
 $smarty->assign("focus", $focus);
 displayLogin();
 
-// vim:tabstop=2:expandtab:shiftwidth=2:softtabstop=2:filetype=php:syntax:ruler:
 ?>
 
 </body>

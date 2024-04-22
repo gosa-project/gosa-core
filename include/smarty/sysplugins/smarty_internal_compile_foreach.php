@@ -67,6 +67,67 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         $this->openTag($compiler, 'foreach', array('foreach', $compiler->nocache, $item, $key));
         // maybe nocache because of nocache variables
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
+        // generate output code
+        $output = "<?php\n";
+        $output .= "\$_from = \$_smarty_tpl->smarty->ext->_foreach->init(\$_smarty_tpl, $from, " .
+                   var_export($item, true);
+        if ($name || $needTotal || $key) {
+            $output .= ', ' . var_export($needTotal, true);
+        }
+        if ($name || $key) {
+            $output .= ', ' . var_export($key, true);
+        }
+        if ($name) {
+            $output .= ', ' . var_export($name, true) . ', ' . var_export($namedAttr, true);
+        }
+        $output .= ");\n";
+        if (isset($itemAttr[ 'show' ])) {
+            $output .= "{$itemVar}->show = ({$itemVar}->total > 0);\n";
+        }
+        if (isset($itemAttr[ 'iteration' ])) {
+            $output .= "{$itemVar}->iteration = 0;\n";
+        }
+        if (isset($itemAttr[ 'index' ])) {
+            $output .= "{$itemVar}->index = -1;\n";
+        }
+        $output .= "{$itemVar}->do_else = true;\n";
+        $output .= "if (\$_from !== null) foreach (\$_from as {$keyTerm}{$itemVar}->value) {\n";
+        $output .= "{$itemVar}->do_else = false;\n";
+        if (isset($attributes[ 'key' ]) && isset($itemAttr[ 'key' ])) {
+            $output .= "\$_smarty_tpl->tpl_vars['{$key}']->value = {$itemVar}->key;\n";
+        }
+        if (isset($itemAttr[ 'iteration' ])) {
+            $output .= "{$itemVar}->iteration++;\n";
+        }
+        if (isset($itemAttr[ 'index' ])) {
+            $output .= "{$itemVar}->index++;\n";
+        }
+        if (isset($itemAttr[ 'first' ])) {
+            $output .= "{$itemVar}->first = !{$itemVar}->index;\n";
+        }
+        if (isset($itemAttr[ 'last' ])) {
+            $output .= "{$itemVar}->last = {$itemVar}->iteration === {$itemVar}->total;\n";
+        }
+        if (isset($foreachVar)) {
+            if (isset($namedAttr[ 'iteration' ])) {
+                $output .= "{$foreachVar}->value['iteration']++;\n";
+            }
+            if (isset($namedAttr[ 'index' ])) {
+                $output .= "{$foreachVar}->value['index']++;\n";
+            }
+            if (isset($namedAttr[ 'first' ])) {
+                $output .= "{$foreachVar}->value['first'] = !{$foreachVar}->value['index'];\n";
+            }
+            if (isset($namedAttr[ 'last' ])) {
+                $output .= "{$foreachVar}->value['last'] = {$foreachVar}->value['iteration'] === {$foreachVar}->value['total'];\n";
+            }
+        }
+        if (!empty($itemAttr)) {
+            $output .= "{$local}saved = {$itemVar};\n";
+        }
+        $output .= '?>';
+        return $output;
+    }
 
         if (isset($_attr['name'])) {
             $name = $_attr['name'];

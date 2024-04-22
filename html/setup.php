@@ -101,7 +101,7 @@ if (!isset($_GET['js']) && !session::global_is_set('js')){
 
 $lang = session::global_get('lang');
 /* Append .UTF-8 to language string if necessary */
-if(!preg_match("/utf(-)8$/i",$lang)){
+if($lang && !preg_match("/utf(-)8$/i",$lang)){
   $lang .= ".UTF-8";
 }
 putenv("LANGUAGE=");

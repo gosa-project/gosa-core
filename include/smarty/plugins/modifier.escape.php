@@ -13,7 +13,7 @@
  * Name:     escape<br>
  * Purpose:  escape string for output
  *
- * @link http://www.smarty.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
+ * @link   https://www.smarty.net/docs/en/language.modifier.escape
  * @author Monte Ohrt <monte at ohrt dot com>
  * @param string  $string        input string
  * @param string  $esc_type      escape type
@@ -23,11 +23,9 @@
  */
 function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $double_encode = true)
 {
-    static $_double_encode = null;
-    if ($_double_encode === null) {
-        $_double_encode = version_compare(PHP_VERSION, '5.2.3', '>=');
-    }
-    
+    static $_double_encode = true;
+    static $is_loaded_1 = false;
+    static $is_loaded_2 = false;
     if (!$char_set) {
         $char_set = Smarty::$_CHARSET;
     }
@@ -143,8 +141,21 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
 
         case 'javascript':
             // escape quotes and backslashes, newlines, etc.
-            return strtr($string, array('\\' => '\\\\', "'" => "\\'", '"' => '\\"', "\r" => '\\r', "\n" => '\\n', '</' => '<\/'));
-
+            return strtr(
+                $string,
+                array(
+                    '\\' => '\\\\',
+                    "'"  => "\\'",
+                    '"'  => '\\"',
+                    "\r" => '\\r',
+                    "\n" => '\\n',
+                    '</' => '<\/',
+                    // see https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
+                    '<!--' => '<\!--',
+                    '<s'   => '<\s',
+                    '<S'   => '<\S'
+                )
+            );
         case 'mail':
             if (Smarty::$_MBSTRING) {
                 require_once(SMARTY_PLUGINS_DIR . 'shared.mb_str_replace.php');

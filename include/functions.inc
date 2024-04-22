@@ -242,7 +242,7 @@ function DEBUG($level, $line, $function, $file, $data, $info="")
     if($config instanceOf config){
         $debugLevel = $config->get_cfg_value('core', 'debugLevel');
     }
-    if ($debugLevel & $level){
+    if ($debugLevel && $level){
         $output= "DEBUG[$level] ";
         if ($function != ""){
             $output.= "($file:$function():$line) - $info: ";
@@ -297,6 +297,7 @@ function get_browser_language()
 
   /* Move supported languages to flat list */
   $langs = array_map(function($lang){return $lang.'.UTF-8';}, array_keys($gosa_languages));
+
 
   /* Return gettext based string */
   return (al2gt($langs, 'text/html'));

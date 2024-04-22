@@ -260,8 +260,108 @@ class aclResolver
                                 }
                             }
 
-                            // Mark groups that doesn't match 
-                            $groups[] = "<span>".$name."</span>";
+                            // Build up ACL definition list
+                            $defs ="";
+                            if ($acl['type']!='reset') {
+                                if (!empty($filter)) {
+                                    $innerColSize = "s12 xl6";
+                                    $colsPerRow = 2;
+                                } else {
+                                    if ($_SESSION["screen_width"] > 1200) {
+                                        $innerColSize = "s6 xl3";
+                                        $colsPerRow = 2;
+                                    } else {
+                                        $innerColSize = "s6 xl3";
+                                        $colsPerRow = 4;
+                                    }
+                                }
+
+                                $col = 0;
+                                $maxCount = count($acl['acl']);
+                                foreach ($acl['acl'] as $type => $acl) {
+                                    // Add a seperating row
+                                    if (($col % $colsPerRow) == 0) {
+                                        $defs .= "<div class='row'>";
+                                    }
+
+                                    if (isset($this->classMapping[$type])) {
+                                        $defs .= "  <div class='col ".$innerColSize."'>
+                                                <div class='card'>
+                                                    <div class='card-content'>
+                                                        <p class='collection-item headline'>".$this->classMapping[$type].":</p>
+                                                        <hr class='divider'>".$this->aclToString($acl)."
+                                                    </div>
+                                                </div>
+                                            </div>";
+                                    } else {
+                                        $defs .= "  <div class='col ".$innerColSize."'>
+                                                <div class='card'>
+                                                    <div class='card-content'>
+                                                        <p class='collection-item headline'>".$type.":</p>
+                                                        <hr class='divider'>".$this->aclToString($acl)."
+                                                    </div>
+                                                </div>
+                                            </div>";
+                                    }
+                                    ++$col;
+
+                                    if (($col % $colsPerRow) == 0 && $col != 0) {
+                                        $defs .= "</div>";
+                                    }
+                                }
+                            }
+
+                            $str.= "<li>
+                                <div class='collapsible-header'>";
+                            if (!empty($users)) {
+                                $str.= "<h4>".implode(' - ', $users)."</h4>";
+                            }
+
+                            if (!empty($groups) && empty($users)) {
+                                $str.= "<h4>".implode(' - ', $groups)."</h4>";
+                            } elseif (!empty($groups) && !empty($users)) {
+                                $str.= "<p>".implode(' - ', $groups)."</p>";
+                            }
+
+                            if (!empty($aclType) && empty($users) && empty($groups)) {
+                                $str.= "<p></p>";
+                                $str.= "<p>".$aclType."</p>";
+                            } elseif (!empty($aclType)) {
+                                $str.= "<p>".$aclType."</p>";
+                            }
+                            $str.= "    </div>
+                                <div class='collapsible-body'>";
+
+                            // Display the acl block in a special color if its not matching
+                            $class="";
+                            if (!$found || !$match) {
+                                $class = "acl-viewer-blocked";
+                            }
+
+                            if (!empty($filter) && !empty($defs)) {
+                                $colSize = "s6";
+                            } else {
+                                $colSize = "s12";
+                            }
+
+                            $str.= "<div class='row'>";
+
+                            if (!empty($defs)) {
+                                $str.= "<div class='col ".$colSize."'>
+                                    <h5>"._("ACLs")."</h5>
+                                    ".$defs."
+                                </div>";
+                            }
+
+                            if (!empty($filter)) {
+                                $str.= "<div class='col ".$colSize."'>
+                                    <h5>"._("Filter")."</h5>
+                                    ".$filter."
+                                </div>";
+                            }
+
+                            $str.= "</div>";
+                            $str.= "</div></li>";
                         }
                     }
 
