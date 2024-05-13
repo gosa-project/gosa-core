@@ -90,6 +90,10 @@ class management
 
     protected $initTime = 0;
 
+    protected $is_new = false;
+    protected $is_single_edit = true;
+    protected $is_multiple_edit = false;
+
     public function __construct(&$config, $ui, $plugname, $headpage)
     {
         $this->plugname = $plugname;
