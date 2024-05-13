@@ -16,6 +16,8 @@ class aclResolver
 
     // Used for the autocompleter
     private $userMap;
+    private $dn;
+    private $config;
 
     public function __construct($config, $dn, $parent)
     {
