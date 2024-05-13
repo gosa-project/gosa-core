@@ -157,7 +157,7 @@ class departmentManagement extends management
 
 
   // A filter which allows to open a department by clicking on the departments name.
-  static function filterDepLabel($row,$dn,$params,$ou,$pid,$base)
+  static function filterDepLabel($row,$dn,$pid,$ou,$base)
   {
     $ou = $ou[0];
     if(LDAP::convert($dn) == $base){
