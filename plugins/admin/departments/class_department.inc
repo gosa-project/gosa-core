@@ -23,33 +23,35 @@
 class department extends plugin
 {
     /* department attributes */
-    var $ou= "";
-    var $description= "";
-    var $base= "";
-    var $st= "";
-    var $l= "";
-    var $postalAddress= "";
-    var $businessCategory= "";
-    var $telephoneNumber= "";
-    var $facsimileTelephoneNumber= "";
-    var $is_administrational_unit= false;
-    var $gosaUnitTag= "";
+    var $ou = "";
+    var $description = "";
+    var $base = "";
+    var $st = "";
+    var $l = "";
+    var $postalAddress = "";
+    var $businessCategory = "";
+    var $telephoneNumber = "";
+    var $facsimileTelephoneNumber = "";
+    var $is_administrational_unit = false;
+    var $gosaUnitTag = "";
     var $view_logged = FALSE;
 
-    var $type ="organizationalUnit";
+    var $type = "organizationalUnit";
     var $namingAttr = "ou";
 
     /* Headpage attributes */
-    var $last_dep_sorting= "invalid";
-    var $departments= array();
+    var $last_dep_sorting = "invalid";
+    var $departments = array();
     var $must_be_tagged = false;
 
     /* attribute list for save action */
-    var $attributes= array("ou", "description", "businessCategory", "st", "l", "postalAddress",
-            "telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag", "manager");
+    var $attributes = array(
+        "ou", "description", "businessCategory", "st", "l", "postalAddress",
+        "telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag", "manager"
+    );
 
     /* Do not append the structural object classes here, they are added dynamically in the constructor */
-    var $objectclasses= array("top", "gosaDepartment");
+    var $objectclasses = array("top", "gosaDepartment");
     var $structuralOC = array("organizationalUnit");
 
     var $initially_was_tagged = false;
@@ -59,10 +61,11 @@ class department extends plugin
     var $baseSelector;
 
     var $manager_enabled = FALSE;
-    var $manager_name ="";
-    var $manager ="";
+    var $manager_name = "";
+    var $manager = "";
 
     var $is_root_dse = FALSE;
+    var $ui;
 
     function __construct(&$config, $dn)
     {
@@ -70,52 +73,52 @@ class department extends plugin
          */
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        if($dn == "" || $dn == "new" || !$ldap->dn_exists($dn)){
-            $this->objectclasses = array_merge($this->structuralOC,$this->objectclasses);
-        }else{
+        if ($dn == "" || $dn == "new" || !$ldap->dn_exists($dn)) {
+            $this->objectclasses = array_merge($this->structuralOC, $this->objectclasses);
+        } else {
             $ldap->cat($dn, array("structuralObjectClass"));
-            $attrs= $ldap->fetch();
-            if(isset($attrs['structuralObjectClass']['count'])){
-                for($i = 0 ; $i < $attrs['structuralObjectClass']['count'] ; $i++){
+            $attrs = $ldap->fetch();
+            if (isset($attrs['structuralObjectClass']['count'])) {
+                for ($i = 0; $i < $attrs['structuralObjectClass']['count']; $i++) {
                     $this->objectclasses[] = $attrs['structuralObjectClass'][$i];
                 }
-            }else{
+            } else {
 
                 /* Could not detect structural object class for this object, fall back to the default 'locality'
                  */
-                $this->objectclasses = array_merge($this->structuralOC,$this->objectclasses);
+                $this->objectclasses = array_merge($this->structuralOC, $this->objectclasses);
             }
         }
         $this->objectclasses = array_unique($this->objectclasses);
 
         plugin::__construct($config, $dn);
-        $this->is_account= TRUE;
-        $this->ui= get_userinfo();
-        $this->dn= $dn;
-        $this->orig_dn= $dn;
+        $this->is_account = TRUE;
+        $this->ui = get_userinfo();
+        $this->dn = $dn;
+        $this->orig_dn = $dn;
 
         /* Save current naming attribuet 
          */
         $nA      = $this->namingAttr;
-        $orig_nA = "orig_".$nA;
+        $orig_nA = "orig_" . $nA;
         $this->$orig_nA = $this->$nA;
 
-        $this->config= $config;
+        $this->config = $config;
 
         /* Set base */
-        if ($this->dn == "new"){
-            $ui= get_userinfo();
-            if(session::is_set('CurrentMainBase')){
+        if ($this->dn == "new") {
+            $ui = get_userinfo();
+            if (session::is_set('CurrentMainBase')) {
                 $this->base = session::get('CurrentMainBase');
-            }else{
-                $this->base= dn2base($ui->dn);
+            } else {
+                $this->base = dn2base($ui->dn);
             }
         } else {
-            $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
+            $this->base = preg_replace("/^[^,]+,/", "", $this->dn);
         }
 
         // Special handling for the rootDSE
-        if($this->dn == $this->config->current['BASE']){
+        if ($this->dn == $this->config->current['BASE']) {
             $this->base = $this->dn;
             $this->is_root_dse = TRUE;
         }
@@ -123,13 +126,13 @@ class department extends plugin
         $this->orig_base = $this->base;
 
         /* Is administrational Unit? */
-        if ($dn != "new" && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])){
-            $this->is_administrational_unit= true;
+        if ($dn != "new" && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])) {
+            $this->is_administrational_unit = true;
             $this->initially_was_tagged = true;
         }
 
         /* Instanciate base selector */
-        $this->baseSelector= new baseSelector($this->get_allowed_bases(), $this->base);
+        $this->baseSelector = new baseSelector($this->get_allowed_bases(), $this->base);
         $this->baseSelector->setSubmitButton(false);
         $this->baseSelector->setHeight(300);
         $this->baseSelector->update(true);
@@ -137,19 +140,19 @@ class department extends plugin
         // If the 'manager' attribute is present in gosaDepartment allow to manage it.
         $ldap = $this->config->get_ldap_link();
         $ocs = $ldap->get_objectclasses();
-        if(isset($ocs['gosaDepartment']['MAY']) && in_array_strict('manager', $ocs['gosaDepartment']['MAY'])){
+        if (isset($ocs['gosaDepartment']['MAY']) && in_array_strict('manager', $ocs['gosaDepartment']['MAY'])) {
             $this->manager_enabled = TRUE;
 
             // Detect the managers name
             $this->manager_name = "";
             $ldap = $this->config->get_ldap_link();
-            if(!empty($this->manager)){
+            if (!empty($this->manager)) {
                 $ldap->cat($this->manager, array('cn'));
-                if($ldap->count()){
+                if ($ldap->count()) {
                     $attrs = $ldap->fetch();
                     $this->manager_name = $attrs['cn'][0];
-                }else{
-                    $this->manager_name = "("._("Unknown")."!): ".$this->manager;
+                } else {
+                    $this->manager_name = "(" . _("Unknown") . "!): " . $this->manager;
                 }
             }
         }
@@ -161,32 +164,32 @@ class department extends plugin
         plugin::execute();
 
         /* Log view */
-        if($this->is_account && !$this->view_logged){
+        if ($this->is_account && !$this->view_logged) {
             $this->view_logged = TRUE;
-            new log("view","department/".get_class($this),$this->dn);
+            new log("view", "department/" . get_class($this), $this->dn);
         }
 
         /* Reload departments */
         $this->config->get_departments();
         $this->config->make_idepartments();
-        $smarty= get_smarty();
+        $smarty = get_smarty();
 
         // Clear manager attribute if requested
-        if(preg_match("/ removeManager/i", " ".implode(array_keys($_POST),' ')." ")){
+        if (preg_match("/ removeManager/i", " " . implode(' ', array_keys($_POST)) . " ")) {
             $this->manager = "";
             $this->manager_name = "";
         }
 
         // Allow to manager manager attribute
-        if($this->manager_enabled){
+        if ($this->manager_enabled) {
 
             // Allow to select a new inetOrgPersion:manager
-            if(preg_match("/ editManager/i", " ".implode(array_keys($_POST),' ')." ")){
+            if (preg_match("/ editManager/i", " " . implode(' ', array_keys($_POST)) . " ")) {
                 $this->dialog = new singleUserSelect($this->config, get_userinfo());
             }
-            if($this->dialog && count($this->dialog->detectPostActions())){
+            if ($this->dialog && count($this->dialog->detectPostActions())) {
                 $users = $this->dialog->detectPostActions();
-                if(isset($users['action']) && $users['action'] =='userSelected' && isset($users['targets']) && count($users['targets'])){
+                if (isset($users['action']) && $users['action'] == 'userSelected' && isset($users['targets']) && count($users['targets'])) {
 
                     $headpage = $this->dialog->getHeadpage();
                     $dn = $users['targets'][0];
@@ -196,46 +199,46 @@ class department extends plugin
                     $this->dialog = NULL;
                 }
             }
-            if(isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort'])){
+            if (isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort'])) {
                 $this->dialog = NULL;
             }
-            if($this->dialog) return($this->dialog->execute());
+            if ($this->dialog) return ($this->dialog->execute());
         }
-        $smarty->assign("manager",$this->manager);
+        $smarty->assign("manager", $this->manager);
         $smarty->assign("manager_name", set_post($this->manager_name));
-        $smarty->assign("manager_enabled",$this->manager_enabled);
+        $smarty->assign("manager_enabled", $this->manager_enabled);
 
 
         $tmp = $this->plInfo();
-        foreach($tmp['plProvidedAcls'] as $name => $translation){
-            $smarty->assign($name."ACL",$this->getacl($name));
+        foreach ($tmp['plProvidedAcls'] as $name => $translation) {
+            $smarty->assign($name . "ACL", $this->getacl($name));
         }
 
         /* Hide base selector, if this object represents the base itself 
          */
         $smarty->assign("is_root_dse", $this->is_root_dse);
-        if($this->is_root_dse){
-            $nA = $this->namingAttr."ACL";
-            $smarty->assign($nA,$this->getacl($this->namingAttr,TRUE));
+        if ($this->is_root_dse) {
+            $nA = $this->namingAttr . "ACL";
+            $smarty->assign($nA, $this->getacl($this->namingAttr, TRUE));
         }
 
         /* Hide all departments, that are subtrees of this department */
         $bases = $this->get_allowed_bases();
-        if(($this->dn == "new")||($this->dn == "")){
+        if (($this->dn == "new") || ($this->dn == "")) {
             $tmp = $bases;
-        }else{
-            $tmp	= array();	
-            foreach($bases as $dn=>$base){
+        } else {
+            $tmp    = array();
+            foreach ($bases as $dn => $base) {
                 /* Only attach departments which are not a subtree of this one */
-                if(!preg_match("/".preg_quote($this->dn)."/",$dn)){
-                    $tmp[$dn]=$base;
+                if (!preg_match("/" . preg_quote($this->dn) . "/", $dn)) {
+                    $tmp[$dn] = $base;
                 }
             }
         }
         $this->baseSelector->setBases($tmp);
         $this->baseSelector->update(TRUE);
 
-        foreach ($this->attributes as $val){
+        foreach ($this->attributes as $val) {
             $smarty->assign("$val", set_post($this->$val));
         }
         $smarty->assign("base", $this->baseSelector->render());
@@ -247,17 +250,17 @@ class department extends plugin
             $smarty->assign("gosaUnitTag", "");
         }
 
-        $smarty->assign("dep_type",$this->type);
-        $smarty->assign("namingAttr",$this->namingAttr);
+        $smarty->assign("dep_type", $this->type);
+        $smarty->assign("namingAttr", $this->namingAttr);
 
         $dep_types = departmentManagement::get_support_departments();
-        $smarty->assign("trString",$dep_types[$this->type]['TR']);
+        $smarty->assign("trString", $dep_types[$this->type]['TR']);
         $tpl = $dep_types[$this->type]['TPL'];
-        if($tpl == "") {
-            trigger_error("No template specified for container type '".$this->type."', please update DepartmentManagement::get_support_departments().");
+        if ($tpl == "") {
+            trigger_error("No template specified for container type '" . $this->type . "', please update DepartmentManagement::get_support_departments().");
             $tpl = check_for_materialize_theme() ? "dep_oUnit.tpl" : "generic.tpl";
         }
-        return($smarty->fetch(get_template_path($tpl, TRUE)));
+        return ($smarty->fetch(get_template_path($tpl, TRUE)));
     }
 
     function clear_fields()
@@ -265,18 +268,18 @@ class department extends plugin
         $this->dn   = "";
         $this->base = "";
 
-        foreach ($this->attributes as $val){
-            $this->$val= "";
+        foreach ($this->attributes as $val) {
+            $this->$val = "";
         }
     }
 
     function remove_from_parent()
     {
-        $ldap= $this->config->get_ldap_link();
-        $ldap->cd ($this->dn);
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->dn);
         $ldap->rmdir_recursive($this->dn);
-        new log("remove","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
-        if (!$ldap->success()){
+        new log("remove", "department/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+        if (!$ldap->success()) {
             msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
         }
 
@@ -291,8 +294,8 @@ class department extends plugin
 
     /* Save data to object */
     function save_object()
-    {	
-        if (isset($_POST['dep_generic_posted'])){
+    {
+        if (isset($_POST['dep_generic_posted'])) {
 
             $nA = $this->namingAttr;
             $old_nA = $this->$nA;
@@ -307,30 +310,30 @@ class department extends plugin
             $this->base = $base_tmp;
 
             /* Refresh base */
-            if ($this->acl_is_moveable($this->base)){
+            if ($this->acl_is_moveable($this->base)) {
                 if (!$this->baseSelector->update()) {
                     msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
                 }
                 if ($this->base != $this->baseSelector->getBase()) {
-                    $this->base= $this->baseSelector->getBase();
-                    $this->is_modified= TRUE;
+                    $this->base = $this->baseSelector->getBase();
+                    $this->is_modified = TRUE;
                 }
             }
 
 
             /* Save tagging flag */
-            if ($this->acl_is_writeable("gosaUnitTag")){
-                if (isset($_POST['is_administrational_unit'])){
-                    $this->is_administrational_unit= true;
+            if ($this->acl_is_writeable("gosaUnitTag")) {
+                if (isset($_POST['is_administrational_unit'])) {
+                    $this->is_administrational_unit = true;
                 } else {
-                    $this->is_administrational_unit= false;
+                    $this->is_administrational_unit = false;
                 }
             }
 
             /* If this is the root directory service entry then avoid
                changing the naming attribute of this entry.
              */
-            if($this->dn == $this->config->current['BASE']){
+            if ($this->dn == $this->config->current['BASE']) {
                 $this->$nA = $old_nA;
             }
         }
@@ -341,49 +344,49 @@ class department extends plugin
     function check()
     {
         /* Call common method to give check the hook */
-        $message= plugin::check();
+        $message = plugin::check();
 
         /* Check for presence of this department */
-        $ldap= $this->config->get_ldap_link();
-        $ldap->ls ("(&(ou=".$this->ou.")(objectClass=organizationalUnit))", $this->base, array('dn'));
-        if ($this->orig_dn == "new" && $ldap->count()){
-            $message[]= msgPool::duplicated(_("Name"));
-        } elseif ($this->orig_dn != $this->dn && $ldap->count()){
-            $message[]= msgPool::duplicated(_("Name"));
+        $ldap = $this->config->get_ldap_link();
+        $ldap->ls("(&(ou=" . $this->ou . ")(objectClass=organizationalUnit))", $this->base, array('dn'));
+        if ($this->orig_dn == "new" && $ldap->count()) {
+            $message[] = msgPool::duplicated(_("Name"));
+        } elseif ($this->orig_dn != $this->dn && $ldap->count()) {
+            $message[] = msgPool::duplicated(_("Name"));
         }
 
         /* All required fields are set? */
-        if ($this->ou == ""){
-            $message[]= msgPool::required(_("Name"));
+        if ($this->ou == "") {
+            $message[] = msgPool::required(_("Name"));
         }
-        if ($this->description == ""){
-            $message[]= msgPool::required(_("Description"));
-        }
-
-        if(tests::is_department_name_reserved($this->ou,$this->base)){
-            $message[]= msgPool::reserved(_("Name"));
+        if ($this->description == "") {
+            $message[] = msgPool::required(_("Description"));
         }
 
-        if (preg_match ('/[#+:=>\\\\\/]/', $this->ou)){
-            $message[]= msgPool::invalid(_("Name"), $this->ou, "/[^#+:=>\\\\\/]/");
+        if (tests::is_department_name_reserved($this->ou, $this->base)) {
+            $message[] = msgPool::reserved(_("Name"));
         }
-        if (!tests::is_phone_nr($this->telephoneNumber)){
-            $message[]= msgPool::invalid(_("Phone"), $this->telephoneNumber, "/[\/0-9 ()+*-]/");
+
+        if (preg_match('/[#+:=>\\\\\/]/', $this->ou)) {
+            $message[] = msgPool::invalid(_("Name"), $this->ou, "/[^#+:=>\\\\\/]/");
         }
-        if (!tests::is_phone_nr($this->facsimileTelephoneNumber)){
-            $message[]= msgPool::invalid(_("Fax"), $this->facsimileTelephoneNumber, "/[\/0-9 ()+*-]/");
+        if (!tests::is_phone_nr($this->telephoneNumber)) {
+            $message[] = msgPool::invalid(_("Phone"), $this->telephoneNumber, "/[\/0-9 ()+*-]/");
+        }
+        if (!tests::is_phone_nr($this->facsimileTelephoneNumber)) {
+            $message[] = msgPool::invalid(_("Fax"), $this->facsimileTelephoneNumber, "/[\/0-9 ()+*-]/");
         }
 
         // Check if a wrong base was supplied
-        if(!$this->baseSelector->checkLastBaseUpdate()){
-            $message[]= msgPool::check_base();;
+        if (!$this->baseSelector->checkLastBaseUpdate()) {
+            $message[] = msgPool::check_base();;
         }
 
         /* Check if we are allowed to create or move this object
          */
-        if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
+        if ($this->orig_dn == "new" && !$this->acl_is_createable($this->base)) {
             $message[] = msgPool::permCreate();
-        }elseif($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
+        } elseif ($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
             $message[] = msgPool::permMove();
         }
 
@@ -394,7 +397,7 @@ class department extends plugin
     /* Save to LDAP */
     function save()
     {
-        $ldap= $this->config->get_ldap_link();
+        $ldap = $this->config->get_ldap_link();
 
         /* Ensure that ou is saved too, it is required by objectClass gosaDepartment 
          */
@@ -402,59 +405,59 @@ class department extends plugin
         $this->ou = $this->$nA;
 
         /* Add tag objects if needed */
-        if ($this->is_administrational_unit){
+        if ($this->is_administrational_unit) {
 
             /* If this wasn't tagged before add oc an reset unit tag */
-            if(!$this->initially_was_tagged){
-                $this->objectclasses[]= "gosaAdministrativeUnit";
-                $this->gosaUnitTag= "";
+            if (!$this->initially_was_tagged) {
+                $this->objectclasses[] = "gosaAdministrativeUnit";
+                $this->gosaUnitTag = "";
 
                 /* It seams that this method is called twice, 
                    set this to true. to avoid adding this oc twice */
                 $this->initially_was_tagged = true;
             }
 
-            if ($this->gosaUnitTag == ""){
+            if ($this->gosaUnitTag == "") {
 
                 /* It's unlikely, but check if already used... */
-                $try= 5;
+                $try = 5;
                 $ldap->cd($this->config->current['BASE']);
-                while ($try--){
+                while ($try--) {
 
                     /* Generate microtime stamp as tag */
-                    list($usec, $sec)= explode(" ", microtime());
-                    $time_stamp= preg_replace("/\./", "", $sec.$usec);
+                    list($usec, $sec) = explode(" ", microtime());
+                    $time_stamp = preg_replace("/\./", "", $sec . $usec);
 
-                    $ldap->search("(&(objectClass=gosaAdministrativeUnit)(gosaUnitTag=$time_stamp))",array("gosaUnitTag"));
-                    if ($ldap->count() == 0){
+                    $ldap->search("(&(objectClass=gosaAdministrativeUnit)(gosaUnitTag=$time_stamp))", array("gosaUnitTag"));
+                    if ($ldap->count() == 0) {
                         break;
                     }
                 }
-                if($try == 0) {
+                if ($try == 0) {
                     msg_dialog::display(_("Fatal error"), _("Cannot find an unused tag for this administrative unit!"), WARNING_DIALOG);
                     return;
                 }
-                $this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
+                $this->gosaUnitTag = preg_replace("/\./", "", $sec . $usec);
             }
         }
         $this->skipTagging = TRUE;
         plugin::save();
 
         /* Remove tag information if needed */
-        if (!$this->is_administrational_unit && $this->initially_was_tagged){
-            $tmp= array();
+        if (!$this->is_administrational_unit && $this->initially_was_tagged) {
+            $tmp = array();
 
             /* Remove gosaAdministrativeUnit from this plugin */
-            foreach($this->attrs['objectClass'] as $oc){
-                if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
+            foreach ($this->attrs['objectClass'] as $oc) {
+                if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)) {
                     continue;
                 }
-                if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
-                    $tmp[]= $oc;
+                if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)) {
+                    $tmp[] = $oc;
                 }
             }
-            $this->attrs['objectClass']= $tmp;
-            $this->attrs['gosaUnitTag']= array();
+            $this->attrs['objectClass'] = $tmp;
+            $this->attrs['gosaUnitTag'] = array();
             $this->gosaUnitTag = "";
         }
 
@@ -463,32 +466,32 @@ class department extends plugin
         $ldap->cat($this->dn, array('dn'));
         $ldap->cd($this->dn);
 
-        if ($ldap->count()){
+        if ($ldap->count()) {
             $this->cleanup();
-            $ldap->modify ($this->attrs); 
-            new log("modify","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+            $ldap->modify($this->attrs);
+            new log("modify", "department/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
             $this->handle_post_events('modify');
         } else {
             $ldap->add($this->attrs);
             $this->handle_post_events('add');
-            new log("create","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+            new log("create", "department/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         }
-        if (!$ldap->success()){
+        if (!$ldap->success()) {
             msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
         }
 
         /* The parameter forces only to set must_be_tagged, and don't touch any objects 
            This will be done later */
         $this->tag_objects(true);
-        return(false);
+        return (false);
     }
 
 
     /* Tag objects to have the gosaAdministrativeUnitTag */
     function tag_objects($OnlySetTagFlag = false)
     {
-        if(!$OnlySetTagFlag){
-            $smarty= get_smarty();
+        if (!$OnlySetTagFlag) {
+            $smarty = get_smarty();
             /* Print out html introduction */
             echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
                 <html>
@@ -499,77 +502,77 @@ class department extends plugin
                 </head>
                 <body style="background: none; margin:4px;" id="body" >
                 ';
-            echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".LDAP::fix($this->dn)."</i>")."</h3>";
+            echo "<h3>" . sprintf(_("Tagging '%s'."), "<i>" . LDAP::fix($this->dn) . "</i>") . "</h3>";
         }
 
-        $add= $this->is_administrational_unit;
-        $len= strlen($this->dn);
-        $ldap= $this->config->get_ldap_link();
+        $add = $this->is_administrational_unit;
+        $len = strlen($this->dn);
+        $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->dn);
-        if ($add){
-            $ldap->search('(!(&(objectClass=gosaAdministrativeUnitTag)(gosaUnitTag='.
-                                $this->gosaUnitTag.')))', array('dn'));
+        if ($add) {
+            $ldap->search('(!(&(objectClass=gosaAdministrativeUnitTag)(gosaUnitTag=' .
+                $this->gosaUnitTag . ')))', array('dn'));
         } else {
             $ldap->search('objectClass=gosaAdministrativeUnitTag', array('dn'));
         }
 
         $objects = array();
-        while ($attrs= $ldap->fetch()){
+        while ($attrs = $ldap->fetch()) {
             $objects[] = $attrs;
         }
-        foreach($objects as $attrs){
+        foreach ($objects as $attrs) {
 
             /* Skip self */
-            if ($attrs['dn'] == $this->dn){
+            if ($attrs['dn'] == $this->dn) {
                 continue;
             }
 
             /* Check for confilicting administrative units */
-            $fix= true;
-            foreach ($this->config->adepartments as $key => $tag){
+            $fix = true;
+            foreach ($this->config->adepartments as $key => $tag) {
                 /* This one is shorter than our dn, its not relevant... */
-                if ($len >= strlen($key)){
+                if ($len >= strlen($key)) {
                     continue;
                 }
 
                 /* This one matches with the latter part. Break and don't fix this entry */
-                if (preg_match('/(^|,)'.preg_quote($key, '/').'$/', $attrs['dn'])){
-                    $fix= false;
+                if (preg_match('/(^|,)' . preg_quote($key, '/') . '$/', $attrs['dn'])) {
+                    $fix = false;
                     break;
                 }
             }
 
             /* Fix entry if needed */
-            if ($fix){
-                if($OnlySetTagFlag){
-                    $this->must_be_tagged =true;
+            if ($fix) {
+                if ($OnlySetTagFlag) {
+                    $this->must_be_tagged = true;
                     return;
                 }
-                $this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
-                echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
+                $this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE);
+                echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>";
             }
         }
 
-        if(!$OnlySetTagFlag){
+        if (!$OnlySetTagFlag) {
             $this->must_be_tagged = FALSE;
             echo '<hr>';
-            echo "<div style='width:100%;text-align:right;'>".
-                "<form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>".
-                "<br>".
-                "<input type='submit' name='back' value='"._("Continue")."'>".
-                "<input type='hidden' name='php_c_check' value='1'>".
-                "</form>".
+            echo "<div style='width:100%;text-align:right;'>" .
+                "<form name='form' method='post' action='?plug=" . $_GET['plug'] . "' target='_parent'>" .
+                "<br>" .
+                "<input type='submit' name='back' value='" . _("Continue") . "'>" .
+                "<input type='hidden' name='php_c_check' value='1'>" .
+                "</form>" .
                 "</div>";
-            echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
+            echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>";
         }
     }
 
 
     /* Move/Rename complete trees */
-    function recursive_move($src_dn, $dst_dn,$force = false)
+    function recursive_move($src_dn, $dst_dn, $force = false)
     {
         /* Print header to have styles included */
-        $smarty= get_smarty();
+        $smarty = get_smarty();
 
         echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
             <html>
@@ -580,28 +583,30 @@ class department extends plugin
             </head>
             <body style="background: none; margin:4px;" id="body" >
             ';
-        echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".LDAP::fix($src_dn)."</i>","<i>".LDAP::fix($dst_dn)."</i>")."</h3>";
+        echo "<h3>" . sprintf(_("Moving '%s' to '%s'"), "<i>" . LDAP::fix($src_dn) . "</i>", "<i>" . LDAP::fix($dst_dn) . "</i>") . "</h3>";
 
 
         /* Check if the destination entry exists */
-        $ldap= $this->config->get_ldap_link();
+        $ldap = $this->config->get_ldap_link();
 
         /* Check if destination exists - abort */
         $ldap->cat($dst_dn, array('dn'));
-        if ($ldap->fetch()){
-            trigger_error("Recursive_move ".LDAP::fix($dst_dn)." already exists.",
-                    E_USER_WARNING);
-            echo sprintf("Recursive_move: '%s' already exists", LDAP::fix($dst_dn))."<br>"; 
+        if ($ldap->fetch()) {
+            trigger_error(
+                "Recursive_move " . LDAP::fix($dst_dn) . " already exists.",
+                E_USER_WARNING
+            );
+            echo sprintf("Recursive_move: '%s' already exists", LDAP::fix($dst_dn)) . "<br>";
             return (FALSE);
         }
 
         /* Perform a search for all objects to be moved */
-        $objects= array();
+        $objects = array();
         $ldap->cd($src_dn);
         $ldap->search("(objectClass=*)", array("dn"));
-        while($attrs= $ldap->fetch()){
-            $dn= $attrs['dn'];
-            $objects[$dn]= strlen($dn);
+        while ($attrs = $ldap->fetch()) {
+            $dn = $attrs['dn'];
+            $objects[$dn] = strlen($dn);
         }
 
         /* Sort objects by indent level */
@@ -609,22 +614,22 @@ class department extends plugin
         reset($objects);
 
         /* Copy objects from small to big indent levels by replacing src_dn by dst_dn */
-        foreach ($objects as $object => $len){
+        foreach ($objects as $object => $len) {
 
 
-            $src= str_replace("\\","\\\\",$object);
-            $dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
-            $dst= str_replace($src_dn,$dst_dn,$object);
+            $src = str_replace("\\", "\\\\", $object);
+            $dst = preg_replace("/" . str_replace("\\", "\\\\", $src_dn) . "$/", "$dst_dn", $object);
+            $dst = str_replace($src_dn, $dst_dn, $object);
 
-            echo "<b>"._("Object").":</b> ".LDAP::fix($src)."<br>";
+            echo "<b>" . _("Object") . ":</b> " . LDAP::fix($src) . "<br>";
 
-            $this->update_acls($object, $dst,TRUE);
+            $this->update_acls($object, $dst, TRUE);
 
-            if (!$this->copy($src, $dst)){
-                echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),LDAP::fix($src))."</font>";
+            if (!$this->copy($src, $dst)) {
+                echo "<font color='#FF0000'><br>" . sprintf(_("FAILED to copy %s, aborting operation"), LDAP::fix($src)) . "</font>";
                 return (FALSE);
             }
-            echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
+            echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>";
             flush();
         }
 
@@ -632,165 +637,163 @@ class department extends plugin
         $ldap->cd($src_dn);
         $ldap->recursive_remove();
         $this->orig_dn  = $this->dn = $dst_dn;
-        $this->orig_base= $this->base;     
+        $this->orig_base = $this->base;
         $this->entryCSN = getEntryCSN($this->dn);
 
         echo '<hr>';
 
-        echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
-            <br><input type='submit' name='back' value='"._("Continue")."'>
+        echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=" . $_GET['plug'] . "' target='_parent'>
+            <br><input type='submit' name='back' value='" . _("Continue") . "'>
             </form></div>";
 
-        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
+        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>";
         echo "</body></html>";
 
         return (TRUE);
     }
 
 
-    /* Return plugin informations for acl handling */ 
+    /* Return plugin informations for acl handling */
     static function plInfo()
     {
-        return (array("plShortName"   => _("Generic"),
-                    "plDescription" => _("Departments"),
-                    "plSelfModify"  => FALSE,
-                    "plPriority"    => 0,
-                    "plDepends"     => array(),
-                    "plSection"     => array("administration"),
-                    "plRequirements"=> array(
-                        'ldapSchema' => array('gosaDepartment' => '>=2.7'),
-                        'onFailureDisablePlugin' => array(get_class(),'departmentManagement',
-                            'country','dcObject','domain','locality','organization')
-                        ),
+        return (array(
+            "plShortName"   => _("Generic"),
+            "plDescription" => _("Departments"),
+            "plSelfModify"  => FALSE,
+            "plPriority"    => 0,
+            "plDepends"     => array(),
+            "plSection"     => array("administration"),
+            "plRequirements" => array(
+                'ldapSchema' => array('gosaDepartment' => '>=2.7'),
+                'onFailureDisablePlugin' => array(
+                    get_class(), 'departmentManagement',
+                    'country', 'dcObject', 'domain', 'locality', 'organization'
+                )
+            ),
 
-                    "plCategory"    => array("department" => array("objectClass" => "gosaDepartment", "description" => _("Departments"))),
+            "plCategory"    => array("department" => array("objectClass" => "gosaDepartment", "description" => _("Departments"))),
 
-                    "plProvidedAcls" => array(
-                        "ou"                => _("Department name"),
-                        "description"       => _("Description"),
-                        "businessCategory"  => _("Category"),
-                        "base"              => _("Base"),
+            "plProvidedAcls" => array(
+                "ou"                => _("Department name"),
+                "description"       => _("Description"),
+                "businessCategory"  => _("Category"),
+                "base"              => _("Base"),
 
-                        "st"                => _("State"),
-                        "l"                 => _("Location"),
-                        "postalAddress"     => _("Address"),
-                        "telephoneNumber"   => _("Telephone"),
-                        "facsimileTelephoneNumber" => _("Fax"),
-                        "manager" => _("Manager"),
+                "st"                => _("State"),
+                "l"                 => _("Location"),
+                "postalAddress"     => _("Address"),
+                "telephoneNumber"   => _("Telephone"),
+                "facsimileTelephoneNumber" => _("Fax"),
+                "manager" => _("Manager"),
 
-                        "gosaUnitTag"       => _("Administrative settings"))
-                        ));
+                "gosaUnitTag"       => _("Administrative settings")
+            )
+        ));
     }
 
-    function handle_object_tagging($dn= "", $tag= "", $show= false)
+    function handle_object_tagging($dn = "", $tag = "", $show = false)
     {
         /* No dn? Self-operation... */
-        if ($dn == ""){
-            $dn= $this->dn;
+        if ($dn == "") {
+            $dn = $this->dn;
 
             /* No tag? Find it yourself... */
-            if ($tag == ""){
-                $len= strlen($dn);
+            if ($tag == "") {
+                $len = strlen($dn);
 
-                @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
-                $relevant= array();
-                foreach ($this->config->adepartments as $key => $ntag){
+                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
+                $relevant = array();
+                foreach ($this->config->adepartments as $key => $ntag) {
 
                     /* This one is bigger than our dn, its not relevant... */
-                    if ($len <= strlen($key)){
+                    if ($len <= strlen($key)) {
                         continue;
                     }
 
                     /* This one matches with the latter part. Break and don't fix this entry */
-                    if (preg_match('/(^|,)'.preg_quote($key, '/').'$/', $dn)){
-                        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
-                        $relevant[strlen($key)]= $ntag;
+                    if (preg_match('/(^|,)' . preg_quote($key, '/') . '$/', $dn)) {
+                        @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
+                        $relevant[strlen($key)] = $ntag;
                         continue;
                     }
-
                 }
 
                 /* If we've some relevant tags to set, just get the longest one */
-                if (count($relevant)){
+                if (count($relevant)) {
                     ksort($relevant);
-                    $tmp= array_keys($relevant);
-                    $idx= end($tmp);
-                    $tag= $relevant[$idx];
-                    $this->gosaUnitTag= $tag;
+                    $tmp = array_keys($relevant);
+                    $idx = end($tmp);
+                    $tag = $relevant[$idx];
+                    $this->gosaUnitTag = $tag;
                 }
             }
         }
 
         /* Set tag? */
-        if ($tag != ""){
+        if ($tag != "") {
             /* Set objectclass and attribute */
-            $ldap= $this->config->get_ldap_link();
+            $ldap = $this->config->get_ldap_link();
             $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
-            $attrs= $ldap->fetch();
-            if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
+            $attrs = $ldap->fetch();
+            if (isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag) {
                 if ($show) {
-                    echo sprintf(_("Object '%s' is already tagged"), LDAP::fix($dn))."<br>";
+                    echo sprintf(_("Object '%s' is already tagged"), LDAP::fix($dn)) . "<br>";
                     flush();
                 }
                 return;
             }
-            if (count($attrs)){
-                if ($show){
-                    echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, LDAP::fix($dn))."<br>";
+            if (count($attrs)) {
+                if ($show) {
+                    echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, LDAP::fix($dn)) . "<br>";
                     flush();
                 }
-                $nattrs= array("gosaUnitTag" => $tag);
-                $nattrs['objectClass']= array();
-                for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
-                    $oc= $attrs['objectClass'][$i];
-                    if ($oc != "gosaAdministrativeUnitTag"){
-                        $nattrs['objectClass'][]= $oc;
+                $nattrs = array("gosaUnitTag" => $tag);
+                $nattrs['objectClass'] = array();
+                for ($i = 0; $i < $attrs['objectClass']['count']; $i++) {
+                    $oc = $attrs['objectClass'][$i];
+                    if ($oc != "gosaAdministrativeUnitTag") {
+                        $nattrs['objectClass'][] = $oc;
                     }
                 }
-                $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
+                $nattrs['objectClass'][] = "gosaAdministrativeUnitTag";
                 $ldap->cd($dn);
                 $ldap->modify($nattrs);
-                if (!$ldap->success()){
+                if (!$ldap->success()) {
                     msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()));
                 }
             } else {
-                @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
+                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
             }
-
         } else {
             /* Remove objectclass and attribute */
-            $ldap= $this->config->get_ldap_link();
+            $ldap = $this->config->get_ldap_link();
             $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
-            $attrs= $ldap->fetch();
-            if (isset($attrs['objectClass']) && !in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
-                @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "$dn is not tagged", "Tagging");
+            $attrs = $ldap->fetch();
+            if (isset($attrs['objectClass']) && !in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])) {
+                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "$dn is not tagged", "Tagging");
                 return;
             }
-            if (count($attrs)){
-                if ($show){
-                    echo sprintf(_("Removing tag from object '%s'"), LDAP::fix($dn))."<br>";
+            if (count($attrs)) {
+                if ($show) {
+                    echo sprintf(_("Removing tag from object '%s'"), LDAP::fix($dn)) . "<br>";
                     flush();
                 }
-                $nattrs= array("gosaUnitTag" => array());
-                $nattrs['objectClass']= array();
-                for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
-                    $oc= $attrs['objectClass'][$i];
-                    if ($oc != "gosaAdministrativeUnitTag"){
-                        $nattrs['objectClass'][]= $oc;
+                $nattrs = array("gosaUnitTag" => array());
+                $nattrs['objectClass'] = array();
+                for ($i = 0; $i < $attrs['objectClass']['count']; $i++) {
+                    $oc = $attrs['objectClass'][$i];
+                    if ($oc != "gosaAdministrativeUnitTag") {
+                        $nattrs['objectClass'][] = $oc;
                     }
                 }
                 $ldap->cd($dn);
                 $ldap->modify($nattrs);
-                if (!$ldap->success()){
+                if (!$ldap->success()) {
                     msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()));
                 }
             } else {
-                @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not removing tag ($tag) $dn - seems to have moved away", "Tagging");
+                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not removing tag ($tag) $dn - seems to have moved away", "Tagging");
             }
         }
     }
-
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
