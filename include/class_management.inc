@@ -116,7 +116,7 @@ class management
         }
 
         if (empty($this->plIcon)) {
-            $this->plIcon = "plugins/".$plugname."/images/plugin.png";
+            $this->plIcon = "plugins/" . $plugname . "/images/plugin.png";
         }
 
         // Register default actions
@@ -154,11 +154,11 @@ class management
      */
     public function getAclCategories()
     {
-        $ret= $this->aclCategory;
+        $ret = $this->aclCategory;
         if (!is_array($ret)) {
             $ret = array($ret);
         }
-        return($ret);
+        return ($ret);
     }
 
 
@@ -168,7 +168,7 @@ class management
     public function execute()
     {
         // Ensure that html posts and gets are kept even if we see a 'Entry islocked' dialog.
-        $vars = array('/^act$/','/^listing/','/^PID$/','/^FILTER_PID$/');
+        $vars = array('/^act$/', '/^listing/', '/^PID$/', '/^FILTER_PID$/');
         session::set('LOCK_VARS_TO_USE', $vars);
 
         pathNavigator::registerPlugin($this);
@@ -176,13 +176,13 @@ class management
         /* Display the copy & paste dialog, if it is currently open */
         $ret = $this->copyPasteHandler("", array());
         if ($ret) {
-            return($this->getHeader().$ret);
+            return ($this->getHeader() . $ret);
         }
 
         // Update filter
         if ($this->filter) {
             $this->filter->update();
-            session::global_set(get_class($this)."_filter", $this->filter);
+            session::global_set(get_class($this) . "_filter", $this->filter);
             if ($this->config->get_cfg_value("core", "useAutoComplete") == "true") {
                 session::set('autocomplete', $this->filter);
             }
@@ -191,7 +191,7 @@ class management
         // Handle actions (POSTs and GETs)
         $str = $this->handleActions($this->detectPostActions());
         if ($str) {
-            return($this->getHeader().$str);
+            return ($this->getHeader() . $str);
         }
 
         // Open single dialog objects
@@ -201,8 +201,8 @@ class management
             }
             if (method_exists($this->dialogObject, 'execute')) {
                 $display = $this->dialogObject->execute();
-                $display.= $this->_getTabFooter();
-                return($this->getHeader().$display);
+                $display .= $this->_getTabFooter();
+                return ($this->getHeader() . $display);
             }
         }
 
@@ -210,15 +210,15 @@ class management
         if ($this->tabObject instanceof tabs || $this->tabObject instanceof multi_plug) {
             # $this->tabObject->save_object();
             $display = $this->tabObject->execute();
-            $display.= $this->_getTabFooter();
-            return($this->getHeader().$display);
+            $display .= $this->_getTabFooter();
+            return ($this->getHeader() . $display);
         }
 
         // Set current restore base for snapshot handling.
         if (is_object($this->snapHandler)) {
             $bases = array();
             foreach ($this->storagePoints as $sp) {
-                $bases[] = $sp.$this->headpage->getBase();
+                $bases[] = $sp . $this->headpage->getBase();
             }
 
             // No bases specified? Try base
@@ -240,7 +240,7 @@ class management
         );
 
         // Display list
-        return($this->renderList());
+        return ($this->renderList());
     }
 
     public function editFilter()
@@ -252,17 +252,17 @@ class management
     {
         $this->headpage->update();
         $display = $this->headpage->render();
-        return($this->getHeader().$display);
+        return ($this->getHeader() . $display);
     }
 
     public function getHeadpage()
     {
-        return($this->headpage);
+        return ($this->headpage);
     }
 
     public function getFilter()
     {
-        return($this->filter);
+        return ($this->filter);
     }
 
     /*! \brief  Generates the plugin header which is displayed whenever a tab object is
@@ -272,7 +272,7 @@ class management
     {
         // We do not display any headers right now.
         if (1 || $this->skipHeader) {
-            return("");
+            return ("");
         }
     }
 
@@ -285,24 +285,24 @@ class management
 
         // Do not display tab footer for non tab objects
         if (!($this->tabObject instanceof tabs || $this->tabObject instanceof multi_plug)) {
-            return("");
+            return ("");
         }
 
         // Check if there is a dialog opened - We don't need any buttons in this case.
         if ($this->tabObject->by_object[$this->tabObject->current]) {
             $current = $this->tabObject->by_object[$this->tabObject->current];
             if (isset($current->dialog) && (is_object($current->dialog) || $current->dialog)) {
-                return("");
+                return ("");
             }
         }
 
         // Skip footer if requested;
         if ($this->skipFooter) {
-            return("");
+            return ("");
         }
 
         if ($theme == "default") {
-            $acl_mode = preg_match("/^[r]$/", $this->ui->get_category_permissions($this->ui->dn,"users"));
+            $acl_mode = preg_match("/^[r]$/", $this->ui->get_category_permissions($this->ui->dn, "users"));
         }
 
         // In case an of locked entry, we may have opened a read-only tab.
@@ -311,43 +311,43 @@ class management
             switch ($theme) {
                 case 'classic':
                     $str .= "<p style=\"text-align:right\">
-                                <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                                <button type=submit name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
                             </p>";
                     break;
-                
+
                 default:
                     $str .= "<div class='card-action'>
-                                <button class='btn-small primary' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>
+                                <button class='btn-small primary' type='submit' name='edit_cancel'>" . msgPool::cancelButton() . "</button>
                             </div>";
                     break;
             }
-            return($str);
+            return ($str);
         } else {
 
-        // Display ok, (apply) and cancel buttons
+            // Display ok, (apply) and cancel buttons
             switch ($theme) {
                 case 'classic':
                     $str .= "<p style=\"text-align:right\">
-                                <button type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>\n&nbsp;\n";
+                                <button type=\"submit\" name=\"edit_finish\">" . msgPool::okButton() . "</button>\n&nbsp;\n";
                     if ($this->displayApplyBtn) {
-                        $str.=" <button type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>&nbsp;\n";
+                        $str .= " <button type=\"submit\" name=\"edit_apply\">" . msgPool::applyButton() . "</button>&nbsp;\n";
                     }
-                    $str.="     <button type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                    $str .= "     <button type=\"submit\" name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
                             </p>";
                     break;
-                
+
                 default:
-                    $str.=" <div class='card-action'>
-                                <button class='btn-small primary' type=\"submit\" name=\"edit_finish\">".msgPool::okButton()."</button>";
+                    $str .= " <div class='card-action'>
+                                <button class='btn-small primary' type=\"submit\" name=\"edit_finish\">" . msgPool::okButton() . "</button>";
                     if ($this->displayApplyBtn) {
-                        $str.=" <button class='btn-small primary' type=\"submit\" name=\"edit_apply\">".msgPool::applyButton()."</button>";
+                        $str .= " <button class='btn-small primary' type=\"submit\" name=\"edit_apply\">" . msgPool::applyButton() . "</button>";
                     }
-                    $str.="     <button class='btn-small primary' type=\"submit\" name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                    $str .= "     <button class='btn-small primary' type=\"submit\" name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
                             </div>";
                     break;
             }
         }
-        return($str);
+        return ($str);
     }
 
     /*! \brief  Initiates the removal for the given entries
@@ -357,7 +357,7 @@ class management
      *  @param  Array   'target'  A list of object dns, which should be affected by this method.
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
-    protected function removeEntryRequested($action="", $target=array(), $all=array())
+    protected function removeEntryRequested($action = "", $target = array(), $all = array())
     {
         // Close dialogs and remove locks for currently handled dns
         $this->cancelEdit();
@@ -373,7 +373,7 @@ class management
         foreach ($target as $dn) {
             $entry = $h->getEntry($dn);
             $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
-            $acl = $this->ui->get_permissions($dn, $obj['category']."/".$obj['class']);
+            $acl = $this->ui->get_permissions($dn, $obj['category'] . "/" . $obj['class']);
             if (preg_match("/d/", $acl)) {
                 $this->dns[] = $dn;
             } else {
@@ -387,9 +387,9 @@ class management
         // We've at least one entry to delete.
         if (count($this->dns)) {
 
-      // check locks
-            if ($user= get_multiple_locks($this->dns)) {
-                return(gen_locked_message($user, $this->dns));
+            // check locks
+            if ($user = get_multiple_locks($this->dns)) {
+                return (gen_locked_message($user, $this->dns));
             }
 
             // Add locks
@@ -398,7 +398,7 @@ class management
 
             // Build list of object -labels
             foreach ($h->objectTypes as $type) {
-                $map[$type['objectClass']]= $type['label'];
+                $map[$type['objectClass']] = $type['label'];
             }
 
             foreach ($this->dns as $dn) {
@@ -406,7 +406,7 @@ class management
                 if (isset($map[$tmp])) {
                     $dns_names[LDAP::fix($dn)] = _($map[$tmp]);
                 } else {
-                    $dns_names[] =LDAP::fix($dn);
+                    $dns_names[] = LDAP::fix($dn);
                 }
             }
             add_lock($this->dns, $this->ui->dn);
@@ -420,7 +420,7 @@ class management
             $smarty = get_smarty();
             $smarty->assign("info", msgPool::deleteInfo($dns_names));
             $smarty->assign("multiple", true);
-            return($smarty->fetch(get_template_path('removeEntries.tpl')));
+            return ($smarty->fetch(get_template_path('removeEntries.tpl')));
         }
     }
 
@@ -432,15 +432,14 @@ class management
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
     public function removeEntryConfirmed(
-        $action="",
-        $target=array(),
-        $all=array(),
-        $altTabClass="",
-        $altTabType="",
-        $altAclCategory="",
-        $altAclPlugin=""
-    )
-    {
+        $action = "",
+        $target = array(),
+        $all = array(),
+        $altTabClass = "",
+        $altTabType = "",
+        $altAclCategory = "",
+        $altAclPlugin = ""
+    ) {
         $tabType = $this->tabType;
         $tabClass = $this->tabClass;
         $aclCategory = $this->aclCategory;
@@ -466,14 +465,14 @@ class management
         foreach ($this->dns as $key => $dn) {
             $entry = $h->getEntry($dn);
             $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
-            $acl = $this->ui->get_permissions($dn, $obj['category']."/".$obj['class']);
+            $acl = $this->ui->get_permissions($dn, $obj['category'] . "/" . $obj['class']);
 
             // Check permissions, are we allowed to remove this object?
             if (preg_match("/d/", $acl)) {
 
-        // Delete the object
+                // Delete the object
                 $this->dn = $dn;
-                $this->tabObject= new $tabClass(
+                $this->tabObject = new $tabClass(
                     $this->config,
                     $this->config->data['TABS'][$tabType],
                     $this->dn,
@@ -489,7 +488,7 @@ class management
                 del_lock($this->dn);
             } else {
                 msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-                new log("security", "groups/".get_class($this), $dn, array(), "Tried to trick deletion.");
+                new log("security", "groups/" . get_class($this), $dn, array(), "Tried to trick deletion.");
             }
         }
 
@@ -506,9 +505,9 @@ class management
     {
         if (!is_object($this->headpage)) {
             trigger_error("No valid headpage given....!");
-            return(array());
+            return (array());
         }
-        $action= $this->headpage->getAction();
+        $action = $this->headpage->getAction();
         if (isset($_POST['edit_apply'])) {
             $action['action'] = "apply";
         }
@@ -542,7 +541,7 @@ class management
             $action['action'] = "cancelSnapshot";
         }
         foreach ($_POST as $name => $value) {
-            $once =true;
+            $once = true;
             if (preg_match("/^RestoreSnapShot_/", $name) && $once) {
                 $once = false;
                 $entry = base64_decode(preg_replace("/^RestoreSnapShot_(.*)$/i", "\\1", $name));
@@ -551,7 +550,7 @@ class management
             }
         }
 
-        return($action);
+        return ($action);
     }
 
 
@@ -563,7 +562,7 @@ class management
         if (isset($action) && isset($this->actions[$action['action']])) {
             $func = $this->actions[$action['action']];
             if (!isset($action['targets'])) {
-                $action['targets']= array();
+                $action['targets'] = array();
             }
 
             // Create statistic table entry
@@ -576,7 +575,7 @@ class management
                 $duration = (microtime(true) - $this->initTime)
             );
 
-            return($this->$func($action['action'], $action['targets'], $action));
+            return ($this->$func($action['action'], $action['targets'], $action));
         }
     }
 
@@ -587,7 +586,7 @@ class management
      *  @param  Array   'target'  A list of object dns, which should be affected by this method.
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
-    public function createSnapshotDialog($action="", $target=array(), $all=array())
+    public function createSnapshotDialog($action = "", $target = array(), $all = array())
     {
         @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Snaptshot creation initiated!");
 
@@ -614,7 +613,7 @@ class management
      *  @param  Array   'target'  A list of object dns, which should be affected by this method.
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
-    public function saveSnapshot($action="", $target=array(), $all=array())
+    public function saveSnapshot($action = "", $target = array(), $all = array())
     {
         if (!is_object($this->dialogObject)) {
             return;
@@ -641,7 +640,7 @@ class management
      *  @param  Array   'target'  A list of object dns, which should be affected by this method.
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
-    public function restoreSnapshot($action="", $target=array(), $all=array())
+    public function restoreSnapshot($action = "", $target = array(), $all = array())
     {
         $entry = array_pop($target);
         if (!empty($entry) && $this->ui->allow_snapshot_restore($entry, $this->aclCategory)) {
@@ -660,7 +659,7 @@ class management
 
     /*! \brief  Removes a snapshot object.
      */
-    public function removeSnapshotConfirmed($action="", $target=array(), $all=array())
+    public function removeSnapshotConfirmed($action = "", $target = array(), $all = array())
     {
         $entry = $this->dialogObject->del_dn;
         if (!empty($entry) && $this->ui->allow_snapshot_create($entry, $this->aclCategory)) {
@@ -683,13 +682,13 @@ class management
      *  @param  Array   'target'  A list of object dns, which should be affected by this method.
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
-    public function restoreSnapshotDialog($action="", $target=array(), $all=array())
+    public function restoreSnapshotDialog($action = "", $target = array(), $all = array())
     {
         // Set current restore base for snapshot handling.
         if (is_object($this->snapHandler)) {
             $bases = array();
             foreach ($this->storagePoints as $sp) {
-                $bases[] = $sp.$this->headpage->getBase();
+                $bases[] = $sp . $this->headpage->getBase();
             }
         }
 
@@ -717,7 +716,7 @@ class management
             }
         } else {
 
-      // Display the restore points for a given object.
+            // Display the restore points for a given object.
             $entry = array_pop($target);
             if (!empty($entry) && $this->ui->allow_snapshot_restore($entry, $this->aclCategory)) {
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $entry, "Snaptshot restoring initiated!");
@@ -742,7 +741,7 @@ class management
      *  @param  Array   'target'  A list of object dns, which should be affected by this method.
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
-    public function newEntry($action="", $target=array(), $all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    public function newEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
         /* To handle mutliple object types overload this method.
          * ...
@@ -790,7 +789,7 @@ class management
         } else {
             if (isset($this->config->data['TABS'][$tabType])) {
 
-            // Check if the base plugin is available - it is mostly responsible for object creation and removal.
+                // Check if the base plugin is available - it is mostly responsible for object creation and removal.
                 $first  = $this->config->data['TABS'][$tabType][0];
                 if (!class_available($first['CLASS'])) {
                     msg_dialog::display(
@@ -799,7 +798,7 @@ class management
                         ERROR_DIALOG
                     );
                 } else {
-                    $this->tabObject= new $tabClass($this->config, $this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
+                    $this->tabObject = new $tabClass($this->config, $this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
                     $this->tabObject->set_acl_base($this->headpage->getBase());
                     $this->tabObject->parent = &$this;
                     @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dn, "Create new entry initiated!");
@@ -818,7 +817,7 @@ class management
      *  @param  Array   'target'  A list of object dns, which should be affected by this method.
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
-    public function editEntry($action="", $target=array(), $all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    public function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
         /* To handle mutliple object types overload this method.
          * ...
@@ -871,7 +870,7 @@ class management
             set_object_info($this->dn);
             $user = get_lock($this->dn);
             if ($user != "") {
-                return(gen_locked_message($user, array($this->dn), true));
+                return (gen_locked_message($user, array($this->dn), true));
             }
             add_lock($this->dn, $this->ui->dn);
 
@@ -890,7 +889,7 @@ class management
                         ERROR_DIALOG
                     );
                 } else {
-                    $this->tabObject= new $tab($this->config, $this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
+                    $this->tabObject = new $tab($this->config, $this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
                     @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dn, "Edit entry initiated!");
                     $this->tabObject->set_acl_base($this->dn);
                     $this->tabObject->parent = &$this;
@@ -898,7 +897,7 @@ class management
             }
         } else {
 
-      // We've multiple entries to edit.
+            // We've multiple entries to edit.
             $this->is_new = false;
             $this->is_singel_edit = false;
             $this->is_multiple_edit = true;
@@ -919,7 +918,7 @@ class management
 
                 // Check for locked entries
                 if ($tmp->entries_locked()) {
-                    return($tmp->display_lock_message());
+                    return ($tmp->display_lock_message());
                 }
 
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Edit entry initiated!");
@@ -954,7 +953,7 @@ class management
             $msgs = $this->dialogObject->check();
             if (count($msgs)) {
                 msg_dialog::displayChecks($msgs);
-                return("");
+                return ("");
             } else {
                 $this->dialogObject->save();
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
@@ -981,7 +980,7 @@ class management
             $msgs = $this->tabObject->check();
             if (count($msgs)) {
                 msg_dialog::displayChecks($msgs);
-                return("");
+                return ("");
             } else {
                 $this->tabObject->save();
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
@@ -993,7 +992,7 @@ class management
             $msgs = $this->dialogObject->check();
             if (count($msgs)) {
                 msg_dialog::displayChecks($msgs);
-                return("");
+                return ("");
             } else {
                 $this->dialogObject->save();
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
@@ -1015,7 +1014,7 @@ class management
             $msgs = $this->tabObject->check();
             if (count($msgs)) {
                 msg_dialog::displayChecks($msgs);
-                return("");
+                return ("");
             } else {
                 $this->tabObject->save();
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Modifications applied!");
@@ -1093,18 +1092,17 @@ class management
      *  @param  Array   'all'     A combination of both 'action' and 'target'.
      */
     public function copyPasteHandler(
-        $action="",
-        $target=array(),
-        $all=array(),
-        $altTabClass ="",
+        $action = "",
+        $target = array(),
+        $all = array(),
+        $altTabClass = "",
         $altTabType = "",
-        $altAclCategory="",
-        $altAclPlugin=""
-    )
-    {
+        $altAclCategory = "",
+        $altAclPlugin = ""
+    ) {
         // Return without any actions while copy&paste handler is disabled.
         if (!is_object($this->cpHandler)) {
-            return("");
+            return ("");
         }
 
         $tabType = $this->tabType;
@@ -1152,7 +1150,7 @@ class management
             $this->cpHandler->SetVar("base", $this->headpage->getBase());
             $data = $this->cpHandler->execute();
             if (!empty($data)) {
-                return($data);
+                return ($data);
             }
         }
 
@@ -1160,7 +1158,7 @@ class management
         if (!$this->cpHandler->entries_queued()) {
             $this->cpPastingStarted = false;
         }
-        return("");
+        return ("");
     }
 
 
@@ -1185,32 +1183,32 @@ class management
 
     public function is_modal_dialog()
     {
-        return(is_object($this->tabObject) || is_object($this->dialogObject));
+        return (is_object($this->tabObject) || is_object($this->dialogObject));
     }
 
 
     /*! \brief    Forward command execution request
      *             to the correct method.
      */
-    public function handle_post_events($mode, $addAttrs= array())
+    public function handle_post_events($mode, $addAttrs = array())
     {
-        if (!in_array_strict($mode, array('add','remove','modify'))) {
+        if (!in_array_strict($mode, array('add', 'remove', 'modify'))) {
             trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", bold($mode)));
             return;
         }
         switch ($mode) {
-      case "add":
-        plugin::callHook($this, "POSTCREATE", $addAttrs);
-      break;
+            case "add":
+                plugin::callHook($this, "POSTCREATE", $addAttrs);
+                break;
 
-      case "modify":
-        plugin::callHook($this, "POSTMODIFY", $addAttrs);
-      break;
+            case "modify":
+                plugin::callHook($this, "POSTMODIFY", $addAttrs);
+                break;
 
-      case "remove":
-        plugin::callHook($this, "POSTREMOVE", $addAttrs);
-      break;
-    }
+            case "remove":
+                plugin::callHook($this, "POSTREMOVE", $addAttrs);
+                break;
+        }
     }
 }
 
