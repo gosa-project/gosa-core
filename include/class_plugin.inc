@@ -222,7 +222,7 @@ class plugin
             if (isset($this->attrs['objectClass'])) {
                 if (in_array_ics("gosaUserTemplate", $this->attrs['objectClass'])) {
                     $this->is_template = TRUE;
-                    @DEBUG(
+                    DEBUG(
                         DEBUG_TRACE,
                         __LINE__,
                         __FUNCTION__,
@@ -246,7 +246,7 @@ class plugin
             }
             if ($found) {
                 $this->is_account = TRUE;
-                @DEBUG(
+                DEBUG(
                     DEBUG_TRACE,
                     __LINE__,
                     __FUNCTION__,
@@ -989,7 +989,7 @@ class plugin
         $ldap->create_missing_trees(preg_replace("/^[^,]+,/", "", $dst_dn));
         if (!$ldap->rename_dn($src_dn, $dst_dn)) {
             new log("debug", "LDAP protocol v3 implementation error, ldap_rename failed, falling back to manual copy.", "FROM: $src_dn  -- TO: $dst_dn", array(), $ldap->get_error());
-            @DEBUG(
+            DEBUG(
                 DEBUG_LDAP,
                 __LINE__,
                 __FUNCTION__,
@@ -1282,7 +1282,7 @@ class plugin
             if ($tag == "") {
                 $len = strlen($dn);
 
-                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
+                DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
                 $relevant = array();
                 foreach ($this->config->adepartments as $key => $ntag) {
 
@@ -1293,7 +1293,7 @@ class plugin
 
                     /* This one matches with the latter part. Break and don't fix this entry */
                     if (preg_match('/(^|,)' . preg_quote($key, '/') . '$/', $dn)) {
-                        @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
+                        DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
                         $relevant[strlen($key)] = $ntag;
                         continue;
                     }
@@ -1369,14 +1369,14 @@ class plugin
 
     function set_acl_base($base)
     {
-        @DEBUG(DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__, "<b>" . $base . "</b>", "<b>ACL-Base:</b> ");
+        DEBUG(DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__, "<b>" . $base . "</b>", "<b>ACL-Base:</b> ");
         $this->acl_base = $base;
     }
 
 
     function set_acl_category($category)
     {
-        @DEBUG(DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__, "<b>" . $category . "</b>(/" . get_class($this) . ")", "<b>ACL-Category:</b> ");
+        DEBUG(DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__, "<b>" . $category . "</b>(/" . get_class($this) . ")", "<b>ACL-Category:</b> ");
         $this->acl_category = "$category/";
     }
 
@@ -1541,7 +1541,7 @@ class plugin
                 if ($found) {
 
                     $debug_info = sprintf(_("Changing ACL DN from %s to %s"), bold($old_dn), bold($new_dn));
-                    @DEBUG(DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__, $debug_info, "ACL");
+                    DEBUG(DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__, $debug_info, "ACL");
 
                     $update[$attrs['dn']] = array();
                     foreach ($acls as $acl) {
@@ -1803,7 +1803,7 @@ class plugin
                 ); // stderr
 
                 // Try to open the process
-                @DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+                DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
                 preg_match("/^(.* )?(\/.*)$/", $command, $matches);
                 $command = $matches[2];
                 $env = array();
@@ -1832,8 +1832,8 @@ class plugin
                 }
 
                 if ($returnCode != 0) {
-                    @DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: " . $returnCode);
-                    @DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: " . $err);
+                    DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execution failed code: " . $returnCode);
+                    DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: " . $err);
                     if ($displayErrors) {
                         $message = msgPool::cmdexecfailed($cmd, $command, get_class($plugin));
                         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
@@ -1842,7 +1842,7 @@ class plugin
                         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
                     }
                 } elseif (is_array($arr)) {
-                    @DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: " . $arr);
+                    DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: " . $arr);
                 }
             } elseif ($displayErrors) {
                 $message = msgPool::cmdinvalid($cmd, $command, get_class($plugin));
