@@ -1,0 +1,14 @@
+{
+    "name": "gonicus/uni-bonn_gosa",
+    "description": "GOsa² using composer for plugin handling",
+    "type": "project",
+    "require": {
+        "smarty/smarty": "4.3"
+    },
+    "authors": [
+        {
+            "name": "GONICUS GmbH",
+            "email": "technik@gonicus.de"
+        }
+    ]
+}
