@@ -371,7 +371,7 @@ class baseSelector
 
     public function gennonbreaks($string)
     {
-        return str_replace('-', '&#8209;', str_replace(' ', '&nbsp;', $string));
+        return str_replace('-', '&#8209;', str_replace(' ', '&nbsp;', $string ?? ''));
     }
 
 

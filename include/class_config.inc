@@ -915,7 +915,7 @@ class config
 
             /* If this department is the last in the current tree position 
              * remove it, to avoid generating output for it */
-            if (count($entries['SUB']) == 0) {
+            if ($entries['SUB'] === null || count($entries['SUB']) == 0) {
                 unset($entries['SUB']);
             }
 
