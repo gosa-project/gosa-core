@@ -22,67 +22,65 @@
 
 class deptabs extends tabs
 {
-  var $base= "";
-  var $moved = FALSE;
-  var $base_name = "department";
+    var $base = "";
+    var $moved = FALSE;
+    var $base_name = "department";
 
-  function __construct($config, $data, $dn,$category,$hide_refs = FALSE, $hide_acls = FALSE)
-  {
-    tabs::__construct($config, $data, $dn,$category,$hide_refs, $hide_acls);
+    function __construct($config, $data, $dn, $category, $hide_refs = FALSE, $hide_acls = FALSE)
+    {
+        tabs::__construct($config, $data, $dn, $category, $hide_refs, $hide_acls);
 
-    /* Detect the base class  (The classs which extends from department)
+        /* Detect the base class  (The classs which extends from department)
      */
-    foreach($this->by_object as $name => $object){
-      if($object instanceOf department){
-        $this->base_name = get_class($object);
-        break;
-      }
+        foreach ($this->by_object as $name => $object) {
+            if ($object instanceof department) {
+                $this->base_name = get_class($object);
+                break;
+            }
+        }
+
+
+        /* Add references/acls/snapshots */
+        $this->addSpecialTabs();
+        if (isset($this->by_object['acl'])) {
+            $this->by_object['acl']->skipTagging = TRUE;
+        }
     }
 
-
-    /* Add references/acls/snapshots */
-    $this->addSpecialTabs();
-    if(isset($this->by_object['acl'])){
-      $this->by_object['acl']->skipTagging= TRUE;
-    }
-  }
-
-  function check($ignore_account= FALSE)
-  {
-    return (tabs::check(TRUE));
-  }
-
-  function save($ignore_account= FALSE)
-  {
-    $baseobject= &$this->by_object[$this->base_name];
-    $namingAttr       = $baseobject->namingAttr;
-    $nAV      = preg_replace('/,/', '\,', $baseobject->$namingAttr); 
-    $nAV      = preg_replace('/"/', '\"', $nAV); 
-    $new_dn   = @LDAP::convert($namingAttr.'='.$nAV.','.$baseobject->base);
-
-    // Do not try to move the root DSE
-    if($baseobject->is_root_dse){
-      $new_dn = $baseobject->orig_dn;
+    function check($ignore_account = FALSE)
+    {
+        return (tabs::check(TRUE));
     }
 
-    /* Move group? */
-    if ($this->dn != $new_dn && $this->dn != "new"){
-      $baseobject->move($this->dn,$new_dn);
-    } 
+    function save($ignore_account = FALSE)
+    {
+        $baseobject = &$this->by_object[$this->base_name];
+        $namingAttr       = $baseobject->namingAttr;
+        $nAV      = preg_replace('/,/', '\,', $baseobject->$namingAttr);
+        $nAV      = preg_replace('/"/', '\"', $nAV);
+        $new_dn   = @LDAP::convert($namingAttr . '=' . $nAV . ',' . $baseobject->base);
 
-    /* Update department cache. 
+        // Do not try to move the root DSE
+        if ($baseobject->is_root_dse) {
+            $new_dn = $baseobject->orig_dn;
+        }
+
+        /* Move group? */
+        if ($this->dn != $new_dn && $this->dn != "new") {
+            $baseobject->move($this->dn, $new_dn);
+        }
+
+        /* Update department cache. 
      */
-    if($this->dn != $new_dn){
-      global $config;
-      $config->get_departments();
-    }
+        if ($this->dn != $new_dn) {
+            global $config;
+            $config->get_departments();
+        }
 
-    $this->dn= $new_dn;
-    $baseobject->dn= $this->dn;
-    if (!$ignore_account){
-      tabs::save();
+        $this->dn = $new_dn;
+        $baseobject->dn = $this->dn;
+        if (!$ignore_account) {
+            tabs::save();
+        }
     }
-  }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
