@@ -258,7 +258,8 @@ class department extends plugin
         $tpl = $dep_types[$this->type]['TPL'];
         if ($tpl == "") {
             trigger_error("No template specified for container type '" . $this->type . "', please update DepartmentManagement::get_support_departments().");
-            $tpl = check_for_materialize_theme() ? "dep_oUnit.tpl" : "generic.tpl";
+            // is this correct? before "tempSwitch" we where asking if materialize design is installed
+            $tpl = tempSwitch(["dep_oUnit.tpl", "generic.tpl"]);
         }
         return ($smarty->fetch(get_template_path($tpl, TRUE)));
     }
