@@ -23,82 +23,80 @@
 class aclroletab extends tabs
 {
 
-  function __construct($config, $data, $dn)
-  {
-    $data = array(array("CLASS" => "aclrole" , "NAME" => _("ACL Templates")));
-    tabs::__construct($config, $data, $dn,"acl");
-  }
+    function __construct($config, $data, $dn)
+    {
+        $data = array(array("CLASS" => "aclrole", "NAME" => _("ACL Templates")));
+        tabs::__construct($config, $data, $dn, "acl");
+    }
 
-  function save($ignore_account= FALSE)
-  {
-    $baseobject= $this->by_object['aclrole'];
-    $cn      = preg_replace('/,/', '\,', $baseobject->cn);
-    $cn      = preg_replace('/"/', '\"', $cn);
+    function save($ignore_account = FALSE)
+    {
+        $baseobject = $this->by_object['aclrole'];
+        $cn      = preg_replace('/,/', '\,', $baseobject->cn);
+        $cn      = preg_replace('/"/', '\"', $cn);
 
-    /* Check for new 'dn', in order to propagate the
+        /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
-    $new_dn=  @LDAP::convert('cn='.$cn.",".get_ou("aclrole", "aclRoleRDN").$baseobject->base);
+        $new_dn =  @LDAP::convert('cn=' . $cn . "," . get_ou("aclrole", "aclRoleRDN") . $baseobject->base);
 
-    if ($this->dn != $new_dn){
+        if ($this->dn != $new_dn) {
 
-      /* Write entry on new 'dn' */
-      if ($this->dn != "new"){
-        $baseobject->move($this->dn, $new_dn);
-        $this->by_object['aclrole']= $baseobject;
-      }
+            /* Write entry on new 'dn' */
+            if ($this->dn != "new") {
+                $baseobject->move($this->dn, $new_dn);
+                $this->by_object['aclrole'] = $baseobject;
+            }
 
-      /* Happen to use the new one */
-      $this->dn= $new_dn;
+            /* Happen to use the new one */
+            $this->dn = $new_dn;
+        }
+
+        $ret = tabs::save();
+
+        return $ret;
     }
 
-    $ret= tabs::save();
+    function save_object($ignore_account = FALSE)
+    {
+        tabs::save_object();
+    }
 
-    return $ret;
-  }
+    function execute()
+    {
+        $display = tabs::execute();
 
-  function save_object($ignore_account= FALSE)
-  {
-    tabs::save_object();
-  }
+        $theme = getThemeName();
 
-  function execute()
-  {
-    $display= tabs::execute();
-
-    $theme = getThemeName();
-
-    if($this->read_only){
-      switch ($theme) {
-        case 'classic':
-          $dispaly .= " <div class='plugin-actions'>
-                          <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+        if ($this->read_only) {
+            switch ($theme) {
+                case 'classic':
+                    $display .= " <div class='plugin-actions'>
+                          <button type=submit name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
                         </div>";
-          break;
-        
-        default:
-          $display .= " <div class='card-action'>
-                          <button class='btn-small primary' type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                    break;
+
+                default:
+                    $display .= " <div class='card-action'>
+                          <button class='btn-small primary' type=submit name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
                         </div>";
-          break;
-      }
-    }elseif(!$this->by_object['aclrole']->dialog){
-      switch ($theme) {
-        case 'classic':
-          $display .= " <p style=\"text-align:right\">
-                          <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>
-                          <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>
+                    break;
+            }
+        } elseif (!$this->by_object['aclrole']->dialog) {
+            switch ($theme) {
+                case 'classic':
+                    $display .= " <p style=\"text-align:right\">
+                          <button type=submit name=\"edit_finish\">" . msgPool::okButton() . "</button>
+                          <button type=submit name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
                         </p>";
-          break;
-        default:
-          $display .= "<div class='card-action'>
-                        <button class='btn-small primary' type=submit name='edit_finish'>".msgPool::okButton()."</button>
-                        <button class='btn-small primary' type=submit name='edit_cancel'>".msgPool::cancelButton()."</button>
+                    break;
+                default:
+                    $display .= "<div class='card-action'>
+                        <button class='btn-small primary' type=submit name='edit_finish'>" . msgPool::okButton() . "</button>
+                        <button class='btn-small primary' type=submit name='edit_cancel'>" . msgPool::cancelButton() . "</button>
                       </div>";
-          break;
-      }
+                    break;
+            }
+        }
+        return ($display);
     }
-    return($display);
-  }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
