@@ -23,93 +23,91 @@
 class acltab extends tabs
 {
 
-  function __construct($config, $data, $dn)
-  {
-    $data = array(array("CLASS" => "acl" , "NAME" => _("ACL")));
+    function __construct($config, $data, $dn)
+    {
+        $data = array(array("CLASS" => "acl", "NAME" => _("ACL")));
 
-    /* Save dn */
-    $this->dn= $dn;
-    $this->config= $config;
+        /* Save dn */
+        $this->dn = $dn;
+        $this->config = $config;
 
-    $baseobject= NULL;
+        $baseobject = NULL;
 
-    foreach ($data as $tab){
-      $this->by_name[$tab['CLASS']]= $tab['NAME'];
+        foreach ($data as $tab) {
+            $this->by_name[$tab['CLASS']] = $tab['NAME'];
 
-      
-      if ($baseobject === NULL){
-        if($tab['CLASS'] == "acl"){
-          $baseobject= new $tab['CLASS']($this->config, $this, $this->dn);
-        }else{
-          $baseobject= new $tab['CLASS']($this->config,$this->dn);
+
+            if ($baseobject === NULL) {
+                if ($tab['CLASS'] == "acl") {
+                    $baseobject = new $tab['CLASS']($this->config, $this, $this->dn);
+                } else {
+                    $baseobject = new $tab['CLASS']($this->config, $this->dn);
+                }
+                $this->by_object[$tab['CLASS']] = $baseobject;
+            } else {
+                if ($tab['CLASS'] == "acl") {
+                    $this->by_object[$tab['CLASS']] = new $tab['CLASS']($this->config, $this, $this->dn, $baseobject);
+                } else {
+                    $this->by_object[$tab['CLASS']] = new $tab['CLASS']($this->config, $this->dn, $baseobject);
+                }
+            }
+
+            $this->by_object[$tab['CLASS']]->parent = &$this;
+            $this->by_object[$tab['CLASS']]->set_acl_category("acl");
+            $this->read_only |= $this->by_object[$tab['CLASS']]->read_only;
+
+            /* Initialize current */
+            if ($this->current == "") {
+                $this->current = $tab['CLASS'];
+            }
         }
-        $this->by_object[$tab['CLASS']]= $baseobject;
-      } else {
-        if($tab['CLASS'] == "acl"){
-          $this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config,$this,$this->dn, $baseobject);
-        }else{
-          $this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn, $baseobject);
-        }
-      }
-
-      $this->by_object[$tab['CLASS']]->parent= &$this;
-      $this->by_object[$tab['CLASS']]->set_acl_category("acl");
-      $this->read_only |= $this->by_object[$tab['CLASS']]->read_only;
-
-      /* Initialize current */
-      if ($this->current == ""){
-        $this->current= $tab['CLASS'];
-      }
     }
-  }
 
-  function save($ignore_account= FALSE)
-  {
-    $ret= tabs::save();
-    return $ret;
-  }
-
-  function save_object($ignore_account= FALSE)
-  {
-    tabs::save_object();
-  }
-  
-  function execute()
-  {
-    $display= tabs::execute();
-
-    $theme = getThemeName();
-
-    switch ($theme) {
-      case 'classic':
-        if($this->read_only){
-          $display.= "<div class='plugin-actions'>";
-          $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
-          $display.= "</div>";
-        }elseif(!$this->by_object['acl']->dialog){
-          $display.= "<p style=\"text-align:right\">\n";
-          $display.= "  <button type=submit name=\"edit_finish\">".msgPool::okButton()."</button>\n";
-          $display.= "  <button type=submit name=\"edit_cancel\">".msgPool::cancelButton()."</button>\n";
-          $display.= "</p>";
-        }
-        break;
-      
-      default:
-        if($this->read_only){
-          $display.= "<div class='card-action'>
-                        <button class='btn-small primary' type=submit name='edit_cancel'>".msgPool::cancelButton()."</button>
-                      </div>";
-        }elseif(!$this->by_object['acl']->dialog){
-          $display.= "<div class ='card-action'>
-                        <button class='btn-small primary' type=submit name='edit_finish'>".msgPool::okButton()."</button>
-                        <button class='btn-small primary' type=submit name='edit_cancel'>".msgPool::cancelButton()."</button>
-                      </div>";
-        }
-        break;
+    function save($ignore_account = FALSE)
+    {
+        $ret = tabs::save();
+        return $ret;
     }
-    
-    return($display);
-  }
+
+    function save_object($ignore_account = FALSE)
+    {
+        tabs::save_object();
+    }
+
+    function execute()
+    {
+        $display = tabs::execute();
+
+        $theme = getThemeName();
+
+        switch ($theme) {
+            case 'classic':
+                if ($this->read_only) {
+                    $display .= "<div class='plugin-actions'>";
+                    $display .= "  <button type=submit name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>\n";
+                    $display .= "</div>";
+                } elseif (!$this->by_object['acl']->dialog) {
+                    $display .= "<p style=\"text-align:right\">\n";
+                    $display .= "  <button type=submit name=\"edit_finish\">" . msgPool::okButton() . "</button>\n";
+                    $display .= "  <button type=submit name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>\n";
+                    $display .= "</p>";
+                }
+                break;
+
+            default:
+                if ($this->read_only) {
+                    $display .= "<div class='card-action'>
+                        <button class='btn-small primary' type=submit name='edit_cancel'>" . msgPool::cancelButton() . "</button>
+                      </div>";
+                } elseif (!$this->by_object['acl']->dialog) {
+                    $display .= "<div class ='card-action'>
+                        <button class='btn-small primary' type=submit name='edit_finish'>" . msgPool::okButton() . "</button>
+                        <button class='btn-small primary' type=submit name='edit_cancel'>" . msgPool::cancelButton() . "</button>
+                      </div>";
+                }
+                break;
+        }
+
+        return ($display);
+    }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
