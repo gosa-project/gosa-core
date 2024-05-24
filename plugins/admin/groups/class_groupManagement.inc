@@ -42,8 +42,8 @@ class groupManagement extends management
         $this->storagePoints = array(get_ou("core", "groupRDN"));
 
         // Build filter
-        if (session::global_is_set(get_class($this)."_filter")) {
-            $filter= session::global_get(get_class($this)."_filter");
+        if (session::global_is_set(get_class($this) . "_filter")) {
+            $filter = session::global_get(get_class($this) . "_filter");
         } else {
             $filter = new filter(get_template_path("group-filter.xml", true));
             $filter->setObjectStorage($this->storagePoints);
@@ -80,14 +80,14 @@ class groupManagement extends management
     // Inject user actions
     public function detectPostActions()
     {
-        $action = management::detectPostActions();
+        $action = parent::detectPostActions();
         if (isset($_POST['save_event_dialog'])) {
             $action['action'] = "saveEventDialog";
         }
         if (isset($_POST['abort_event_dialog'])) {
             $action['action'] = "abortEventDialog";
         }
-        return($action);
+        return ($action);
     }
 
 
@@ -105,7 +105,7 @@ class groupManagement extends management
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
      */
-    public function sendMessage($action="", $target=array(), $all=array())
+    public function sendMessage($action = "", $target = array(), $all = array())
     {
         $uids = array();
         $ldap = $this->config->get_ldap_link();
@@ -120,19 +120,19 @@ class groupManagement extends management
     }
 
 
-    public function editEntry($action="", $target=array(), $all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    public function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
-        $str = management::editEntry($action, $target);
+        $str = parent::editEntry($action, $target);
         if (preg_match("/^edit_/", $action)) {
             $tab = preg_replace("/^edit_([^_]*).*$/", "\\1", $action);
             if (isset($this->tabObject->by_object[$tab])) {
                 $this->tabObject->current = $tab;
             } else {
-                trigger_error("Unknown tab: ".$tab);
+                trigger_error("Unknown tab: " . $tab);
             }
         }
         if (!empty($str)) {
-            return($str);
+            return ($str);
         }
     }
 
@@ -140,7 +140,7 @@ class groupManagement extends management
     {
         $theme = getThemeName();
 
-        $result= "";
+        $result = "";
 
         switch ($theme) {
             case 'classic':
@@ -188,19 +188,19 @@ class groupManagement extends management
                         "title" => _("Edit environment properties")
                     )
                 );
-        
+
                 // Walk thru map
                 foreach ($map as $oc => $properties) {
                     if (in_array_ics($oc, $classes)) {
-                        $result.= image($properties['image'], 'listing_edit_'.$properties['plugin'].'_'.$row, $properties['title']);
+                        $result .= image($properties['image'], 'listing_edit_' . $properties['plugin'] . '_' . $row, $properties['title']);
                     } else {
-                        $result.= image('images/empty.png');
+                        $result .= image('images/empty.png');
                     }
                 }
                 break;
-            
+
             default:
-            $map = array(
+                $map = array(
                     "posixGroup" => array(
                         "image" => "group",
                         "plugin" => "group",
@@ -247,15 +247,14 @@ class groupManagement extends management
                 // Walk thru map
                 foreach ($map as $oc => $properties) {
                     if (in_array_ics($oc, $classes)) {
-                        $result.= image("<i class='material-icons'>".$properties['image']."</i>", 'listing_edit_'.$properties['plugin'].'_'.$row, $properties['title']);
+                        $result .= image("<i class='material-icons'>" . $properties['image'] . "</i>", 'listing_edit_' . $properties['plugin'] . '_' . $row, $properties['title']);
                     } else {
-                        $result.= image("");
+                        $result .= image("");
                     }
                 }
                 break;
         }
-        
+
         return $result;
     }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
