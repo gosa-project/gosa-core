@@ -25,13 +25,13 @@ class grouptabs extends tabs
 
 	function __construct($config, $data, $dn, $cat = '', $hide_refs = FALSE, $hide_acls = FALSE)
 	{
-		tabs::__construct($config, $data, $dn, $cat, $hide_refs, $hide_acls);
+		parent::__construct($config, $data, $dn, $cat, $hide_refs, $hide_acls);
 		$this->addSpecialTabs();
 	}
 
 	function save_object($save_current = FALSE)
 	{
-		tabs::save_object($save_current);
+		parent::save_object($save_current);
 
 		/* Update reference, transfer variables */
 		$baseobject = $this->by_object['group'];
@@ -52,7 +52,7 @@ class grouptabs extends tabs
 		if (isset($this->by_object['mailgroup'])) {
 			$this->by_object['mailgroup']->uid = $baseobject->cn;
 		}
-		tabs::delete();
+		parent::delete();
 	}
 
 	function save($ignore_account = FALSE)
@@ -93,14 +93,14 @@ class grouptabs extends tabs
 			$this->dn = $new_dn;
 		}
 
-		$ret = tabs::save();
+		$ret = parent::save();
 
 		return $ret;
 	}
 
 	function saveCopyDialog()
 	{
-		tabs::saveCopyDialog();
+		parent::saveCopyDialog();
 
 		/* Update reference, transfer variables */
 		$baseobject = $this->by_object['group'];

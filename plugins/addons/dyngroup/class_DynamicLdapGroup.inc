@@ -58,6 +58,7 @@ class DynamicLdapGroup extends plugin
     private $_memberUrls = array();
 
     public $orig_dn = "";
+    public $cn = '';
 
     /**
      * Create this object.
