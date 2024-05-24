@@ -1368,14 +1368,14 @@ class listing
         return $result;
     }
 
-    public function filterDepartmentLink($row, $dn, $description)
+    public function filterDepartmentLink($row, $dn, $description = [])
     {
         $attr = $this->departments[$row]['sort-attribute'];
         $name = $this->departments[$row][$attr];
         if (is_array($name)) {
             $name = $name[0];
         }
-        $result = sprintf('%s [%s]', $name, $description[0]);
+        $result = sprintf('%s [%s]', $name, $description[0] ?? '');
 
         return "<a href='?plug=" . $_GET['plug'] . "&amp;PID=$this->pid&amp;act=department_$row' title='$dn'>" . set_post($result) . '</a>';
     }
