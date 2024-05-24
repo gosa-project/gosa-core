@@ -2312,7 +2312,7 @@ function progressbar($percentage, $width = 200, $height = 14, $showText = false,
 {
     $text = "";
     $class = "";
-    $style = "width:${width}px;height:${height}px;";
+    $style = "width:".$width."px;height:".$height."px;";
 
     // Fix percentage range
     $percentage = floor($percentage);
@@ -3493,8 +3493,8 @@ function get_next_id_pool($attrib)
     global $config;
 
     /* Fill informational values */
-    $min = $config->get_cfg_value("core", "${attrib}PoolMin");
-    $max = $config->get_cfg_value("core", "${attrib}PoolMax");
+    $min = $config->get_cfg_value("core", $attrib."PoolMin");
+    $max = $config->get_cfg_value("core", $attrib."PoolMax");
 
     /* Sanity check */
     if ($min >= $max) {
