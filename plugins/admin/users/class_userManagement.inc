@@ -351,8 +351,6 @@ class userManagement extends management
                     $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
                 } elseif ($new_password == "") {
                     $message[] = _("The password you've entered as 'New password' is empty.");
-                } elseif ($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))) {
-                    $message[] = _("The password used as new and current are too similar.");
                 } elseif ((strlen($new_password) < $length)) {
                     $message[] = _("The password must have at least $length characters.");
                 } elseif ($this->theme == 'default') {
