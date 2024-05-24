@@ -34,7 +34,7 @@ class ogroupManagement extends management
     protected $aclPlugin   = "ogroup";
     protected $objectName   = "object group";
 
-    function __construct($config,$ui)
+    function __construct($config, $ui)
     {
         $this->config = $config;
         $this->ui = $ui;
@@ -42,8 +42,8 @@ class ogroupManagement extends management
         $this->storagePoints = array(get_ou("group", "ogroupRDN"));
 
         // Build filter
-        if (session::global_is_set(get_class($this)."_filter")){
-            $filter= session::global_get(get_class($this)."_filter");
+        if (session::global_is_set(get_class($this) . "_filter")) {
+            $filter = session::global_get(get_class($this) . "_filter");
         } else {
             $filter = new filter(get_template_path("ogroup-filter.xml", true));
             $filter->setObjectStorage($this->storagePoints);
@@ -56,18 +56,18 @@ class ogroupManagement extends management
         $headpage->setFilter($filter);
 
         // Add copy&paste and snapshot handler.
-        if ($this->config->boolValueIsTrue("core", "copyPaste")){
+        if ($this->config->boolValueIsTrue("core", "copyPaste")) {
             $this->cpHandler = new CopyPasteHandler($this->config);
         }
-        if($this->config->get_cfg_value("core","enableSnapshots") == "true"){
+        if ($this->config->get_cfg_value("core", "enableSnapshots") == "true") {
             $this->snapHandler = new SnapshotHandler($this->config);
         }
         parent::__construct($config, $ui, "ogroups", $headpage);
 
-        $this->registerAction("edit_ogroup","editEntry");
-        $this->registerAction("edit_phonequeue","editEntry");
-        $this->registerAction("edit_workstartup","editEntry");
-        $this->registerAction("edit_termgroup","editEntry");
+        $this->registerAction("edit_ogroup", "editEntry");
+        $this->registerAction("edit_phonequeue", "editEntry");
+        $this->registerAction("edit_workstartup", "editEntry");
+        $this->registerAction("edit_termgroup", "editEntry");
 
         $this->registerAction("sendMessage", "sendMessage");
         $this->registerAction("saveEventDialog", "saveEventDialog");
@@ -80,24 +80,24 @@ class ogroupManagement extends management
     {
         $action = management::detectPostActions();
 
-        if(isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
-        if(isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
-        return($action);
+        if (isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
+        if (isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
+        return ($action);
     }
 
 
-    function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
-        $str = management::editEntry($action,$target);
-        if(preg_match("/^edit_/",$action)){
-            $tab = preg_replace("/^edit_/","",$action);
-            if(isset($this->tabObject->by_object[$tab])){
+        $str = management::editEntry($action, $target);
+        if (preg_match("/^edit_/", $action)) {
+            $tab = preg_replace("/^edit_/", "", $action);
+            if (isset($this->tabObject->by_object[$tab])) {
                 $this->tabObject->current = $tab;
-            }else{
-                trigger_error("Unknown tab: ".$tab);
+            } else {
+                trigger_error("Unknown tab: " . $tab);
             }
         }
-        if(!empty($str)) return($str);
+        if (!empty($str)) return ($str);
     }
 
 
@@ -107,7 +107,7 @@ class ogroupManagement extends management
     {
         $this->dialogObject->save_object();
         $msgs = $this->dialogObject->check();
-        if(count($msgs)){
+        if (count($msgs)) {
             msg_dialog::displayChecks($msgs);
         }
     }
@@ -115,9 +115,9 @@ class ogroupManagement extends management
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
      */
-    function sendMessage($action="",$target=array(),$all=array())
+    function sendMessage($action = "", $target = array(), $all = array())
     {
-      return;
+        return;
     }
 
     static function filterProperties($row, $gosaGroupObjects)
@@ -140,7 +140,7 @@ class ogroupManagement extends management
                     "P" => array("plugins/ogroups/images/printer.png",          _("Printer"),           "ogroup")
                 );
                 break;
-            
+
             default:
                 $conv = array(
                     "Y" => array("<i class='material-icons input-icons'>web_asset</i>",         _("Templates"),         "ogroup"),
@@ -153,27 +153,25 @@ class ogroupManagement extends management
                     "W" => array("<i class='material-icons input-icons'>computer</i>",          _("Workstation"),       "workstartup"),
                     "O" => array("<i class='material-icons input-icons'>desktop_windows</i>",   _("Windows Install"),   "ogroup"),
                     "T" => array("<i class='material-icons input-icons'>web_asset</i>",         _("Terminal"),          "termgroup"),
-                    "P" => array("<i class='material-icons input-icons'>printer</i>",           _("Printer"),           "ogroup") 
+                    "P" => array("<i class='material-icons input-icons'>printer</i>",           _("Printer"),           "ogroup")
                 );
                 break;
         }
 
-        $types = preg_replace("/[^a-z]/i","",$gosaGroupObjects[0]);
-        $result ="";
-        for($i = 0 ; $i < strlen($types); $i++){
+        $types = preg_replace("/[^a-z]/i", "", $gosaGroupObjects[0]);
+        $result = "";
+        for ($i = 0; $i < strlen($types); $i++) {
             $type = $types[$i];
             switch ($theme) {
                 case 'classic':
-                    $result .= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
+                    $result .= image($conv[$type][0], 'listing_edit_' . $conv[$type][2] . '_' . $row, $conv[$type][1]);
                     break;
-                
+
                 default:
-                    $result .= image($conv[$type][0], 'listing_edit_'.$conv[$type][2].'_'.$row,$conv[$type][1]);
+                    $result .= image($conv[$type][0], 'listing_edit_' . $conv[$type][2] . '_' . $row, $conv[$type][1]);
                     break;
             }
         }
-        return($result);
+        return ($result);
     }
-} 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
+}

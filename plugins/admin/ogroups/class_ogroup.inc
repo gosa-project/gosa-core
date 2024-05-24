@@ -23,35 +23,36 @@
 class ogroup extends plugin
 {
     public $typeToClass = array(
-            "Y" => "gosaUserTemplate",
-            "U" => "gosaAccount",
-            "G" => "posixGroup",
-            "A" => "gosaApplication",
-            "D" => "gosaDepartment",
-            "S" => "goServer",
-            "W" => "gotoWorkstation",
-            "O" => "opsiClient",
-            "T" => "gotoTerminal",
-            "F" => "goFonHardware",
-            "P" => "gotoPrinter");
+        "Y" => "gosaUserTemplate",
+        "U" => "gosaAccount",
+        "G" => "posixGroup",
+        "A" => "gosaApplication",
+        "D" => "gosaDepartment",
+        "S" => "goServer",
+        "W" => "gotoWorkstation",
+        "O" => "opsiClient",
+        "T" => "gotoTerminal",
+        "F" => "goFonHardware",
+        "P" => "gotoPrinter"
+    );
 
     public $typeToImage = array();
-            
+
 
 
     /* Variables */
-    public $cn= "";
-    public $description= "";
-    public $base= "";
-    public $gosaGroupObjects= "";
-    public $objects= array();
-    public $objcache= array();
-    public $memberList= array();
-    public $member= array();
-    public $orig_dn= "";
-    public $orig_cn= "";
-    public $orig_base= "";
-    public $objectSelect= false;
+    public $cn = "";
+    public $description = "";
+    public $base = "";
+    public $gosaGroupObjects = "";
+    public $objects = array();
+    public $objcache = array();
+    public $memberList = array();
+    public $member = array();
+    public $orig_dn = "";
+    public $orig_cn = "";
+    public $orig_base = "";
+    public $objectSelect = false;
     public $view_logged = false;
 
     public $copyMembers = true;
@@ -65,10 +66,12 @@ class ogroup extends plugin
     var $theme;
 
     /* attribute list for save action */
-    public $attributes= array("cn", "description", "gosaGroupObjects","member");
-    public $objectclasses= array("top", "gosaGroupOfNames");
+    public $attributes = array("cn", "description", "gosaGroupObjects", "member");
+    public $objectclasses = array("top", "gosaGroupOfNames");
+    public $trustModeDialog = null;
+    public $memberListing = null;
 
-    public function __construct(&$config, $dn= null)
+    public function __construct(&$config, $dn = null)
     {
         $this->theme = getThemeName();
         switch ($this->theme) {
@@ -88,7 +91,7 @@ class ogroup extends plugin
                     "I" => "images/false.png"
                 );
                 break;
-            
+
             default:
                 $this->typeToImage = array(
                     "Y" => "<i class='material-icons'>web_asset</i>",
@@ -112,7 +115,7 @@ class ogroup extends plugin
         $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, null);
         $this->trustModeDialog->setAcl('ogroups/ogroup');
 
-        $this->orig_dn= $dn;
+        $this->orig_dn = $dn;
 
         $this->member = array();
 
@@ -120,19 +123,19 @@ class ogroup extends plugin
         if (isset($this->attrs['member'])) {
             foreach ($this->attrs['member'] as $key => $value) {
                 if ("$key" != "count") {
-                    $value= @LDAP::convert($value);
-                    $this->member["$value"]= "$value";
+                    $value = @LDAP::convert($value);
+                    $this->member["$value"] = "$value";
                 }
             }
         }
-        $this->is_account= true;
+        $this->is_account = true;
 
         /* Set base */
         if ($this->dn == "new") {
             $ui = get_userinfo();
-            $this->base= dn2base(session::global_is_set("CurrentMainBase")?"cn=dummy,".session::global_get("CurrentMainBase"):$ui->dn);
+            $this->base = dn2base(session::global_is_set("CurrentMainBase") ? "cn=dummy," . session::global_get("CurrentMainBase") : $ui->dn);
         } else {
-            $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("group", "ogroupRDN"), '/')."/i", "", $this->dn);
+            $this->base = preg_replace("/^[^,]+," . preg_quote(get_ou("group", "ogroupRDN"), '/') . "/i", "", $this->dn);
         }
 
         /* Detect all workstations, which are already assigned to an object group
@@ -145,18 +148,18 @@ class ogroup extends plugin
             "none",
             $base,
             array("dn"),
-            GL_NO_ACL_CHECK|GL_SUBSEARCH
+            GL_NO_ACL_CHECK | GL_SUBSEARCH
         );
         $ws_dns = array();
         foreach ($res as $data) {
             $ws_dns[] = $data['dn'];
         }
-        $res=get_list(
+        $res = get_list(
             "(&(member=*)(objectClass=gosaGroupOfNames))",
             "none",
             $base,
-            array("dn","member", "gosaGroupObjects"),
-            GL_NO_ACL_CHECK|GL_SUBSEARCH
+            array("dn", "member", "gosaGroupObjects"),
+            GL_NO_ACL_CHECK | GL_SUBSEARCH
         );
         $this->used_workstations = array();
         foreach ($res as $og) {
@@ -174,15 +177,17 @@ class ogroup extends plugin
 
         /* Get global filter config */
         if (!session::is_set("sysfilter")) {
-            $ui= get_userinfo();
-            $base= get_base_from_people($ui->dn);
-            $sysfilter= array( "depselect"       => $base,
-                    "regex"           => "*");
+            $ui = get_userinfo();
+            $base = get_base_from_people($ui->dn);
+            $sysfilter = array(
+                "depselect"       => $base,
+                "regex"           => "*"
+            );
             session::set("sysfilter", $sysfilter);
         }
 
         /* Instanciate base selector */
-        $this->baseSelector= new baseSelector($this->get_allowed_bases(), $this->base);
+        $this->baseSelector = new baseSelector($this->get_allowed_bases(), $this->base);
         $this->baseSelector->setSubmitButton(false);
         $this->baseSelector->setHeight(300);
         $this->baseSelector->update(true);
@@ -194,8 +199,8 @@ class ogroup extends plugin
         $this->memberListing->setEditable(false);
         $this->memberListing->setWidth("100%");
         $this->memberListing->setHeight("300px");
-        $this->memberListing->setHeader(array("~",_("Name")));
-        $this->memberListing->setColspecs(array('20px','*','20px'));
+        $this->memberListing->setHeader(array("~", _("Name")));
+        $this->memberListing->setColspecs(array('20px', '*', '20px'));
         $this->memberListing->setDefaultSortColumn(1);
 
         $this->reload();
@@ -216,10 +221,10 @@ class ogroup extends plugin
             }
 
             /* Add member and force reload */
-            $this->member[$NewMember]= $NewMember;
+            $this->member[$NewMember] = $NewMember;
 
 
-            $this->memberList[$NewMember]= $this->objcache[$NewMember];
+            $this->memberList[$NewMember] = $this->objcache[$NewMember];
             unset($this->objects[$NewMember]);
             reset($this->memberList);
             $this->reload();
@@ -231,7 +236,7 @@ class ogroup extends plugin
             if ($action['action'] == 'delete') {
                 foreach ($action['targets'] as $id) {
                     $value = $this->memberListing->getKey($id);
-                    $this->objects["$value"]= $this->memberList[$value];
+                    $this->objects["$value"] = $this->memberList[$value];
                     unset($this->memberList["$value"]);
                     unset($this->member["$value"]);
                 }
@@ -257,32 +262,32 @@ class ogroup extends plugin
                     }
 
                     $type  = $this->getObjectType($object);
-                    $name= $this->getObjectName($object);
+                    $name = $this->getObjectName($object);
 
                     /* Fill array */
                     if (isset($object["description"][0])) {
-                        $object= array("text" => "$name [".$object["description"][0]."]", "type" => "$type");
+                        $object = array("text" => "$name [" . $object["description"][0] . "]", "type" => "$type");
                     } elseif (isset($object["uid"][0])) {
-                        $object= array("text" => "$name [".$object["uid"][0]."]", "type" => "$type");
+                        $object = array("text" => "$name [" . $object["uid"][0] . "]", "type" => "$type");
                     } else {
-                        $object= array("text" => "$name", "type" => "$type");
+                        $object = array("text" => "$name", "type" => "$type");
                     }
 
                     if (preg_match("/T/", $tmp) && $type == "W") {
-                        $skipped =true;
+                        $skipped = true;
                     } elseif (preg_match("/W/", $tmp) && $type == "T") {
-                        $skipped =true;
+                        $skipped = true;
                     } else {
-                        $this->memberList["$dn"]= $object;
-                        $this->member["$dn"]= $dn;
+                        $this->memberList["$dn"] = $object;
+                        $this->member["$dn"] = $dn;
                         reset($this->memberList);
                     }
                 }
                 if ($skipped) {
                     msg_dialog::display(_("Information"), _("You cannot combine terminals and workstations in one object group!"), INFO_DIALOG);
                 }
-                $this->objectSelect= false;
-                $this->dialog= false;
+                $this->objectSelect = false;
+                $this->dialog = false;
                 $this->reload();
             }
         }
@@ -295,7 +300,7 @@ class ogroup extends plugin
 
         if (!$this->view_logged) {
             $this->view_logged = true;
-            new log("view", "ogroups/".get_class($this), $this->dn);
+            new log("view", "ogroups/" . get_class($this), $this->dn);
         }
 
 
@@ -303,25 +308,25 @@ class ogroup extends plugin
         if (!$this->is_account) {
             switch ($this->theme) {
                 case 'classic':
-                  $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
-                  break;
-                
+                    $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+                    break;
+
                 default:
-                  $symbol = "<i class='material-icons'>report</i>";
-                  break;
+                    $symbol = "<i class='material-icons'>report</i>";
+                    break;
             }
-            $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("object group"))."</div>";
+            $display = "<div class='valign-wrapper'>" . $symbol . msgPool::noValidExtension(_("object group")) . "</div>";
             return ($display);
         }
 
 
         /* Load templating engine */
-        $smarty= get_smarty();
+        $smarty = get_smarty();
 
 
         $tmp = $this->plInfo();
         foreach ($tmp['plProvidedAcls'] as $name => $translation) {
-            $smarty->assign($name."ACL", $this->getacl($name));
+            $smarty->assign($name . "ACL", $this->getacl($name));
         }
 
         /***********
@@ -333,7 +338,7 @@ class ogroup extends plugin
         $trustModeDialog = $this->trustModeDialog->execute();
         if ($this->trustModeDialog->trustSelect) {
             $this->dialog = true;
-            return($trustModeDialog);
+            return ($trustModeDialog);
         }
         $smarty->assign("trustModeDialog", $trustModeDialog);
 
@@ -344,43 +349,45 @@ class ogroup extends plugin
 
         /* Add objects? */
         if (isset($_POST["edit_membership"])) {
-            $this->objectSelect= new objectSelect($this->config, get_userinfo());
+            $this->objectSelect = new objectSelect($this->config, get_userinfo());
         }
 
         /* Add objects finished? */
         if (isset($_POST["objectSelect_cancel"]) || isset($_POST['cancel-abort'])) {
-            $this->objectSelect= false;
+            $this->objectSelect = false;
         }
 
         /* Manage object add dialog */
         if ($this->objectSelect) {
-            session::set('filterBlacklist', array('dn'=> $this->member));
-            $this->dialog= true;
-            return($this->objectSelect->execute());
+            session::set('filterBlacklist', array('dn' => $this->member));
+            $this->dialog = true;
+            return ($this->objectSelect->execute());
         }
 
         /* Assemble combine string */
         if ($this->gosaGroupObjects == "[]") {
             $smarty->assign("combinedObjects", _("none"));
         } elseif (strlen($this->gosaGroupObjects) > 4) {
-            $smarty->assign("combinedObjects", "<font color=red>"._("too many different objects!")."</font>");
+            $smarty->assign("combinedObjects", "<font color=red>" . _("too many different objects!") . "</font>");
         } else {
-            $conv= array(   "U" => _("users"),
-                    "G" => _("groups"),
-                    "A" => _("applications"),
-                    "D" => _("departments"),
-                    "S" => _("servers"),
-                    "W" => _("workstations"),
-                    "O" => _("Windows workstations"),
-                    "T" => _("terminals"),
-                    "F" => _("phones"),
-                    "P" => _("printers"));
+            $conv = array(
+                "U" => _("users"),
+                "G" => _("groups"),
+                "A" => _("applications"),
+                "D" => _("departments"),
+                "S" => _("servers"),
+                "W" => _("workstations"),
+                "O" => _("Windows workstations"),
+                "T" => _("terminals"),
+                "F" => _("phones"),
+                "P" => _("printers")
+            );
 
-            $type= preg_replace('/[\[\]]/', '', $this->gosaGroupObjects);
-            $p1= $conv[$type[0]];
+            $type = preg_replace('/[\[\]]/', '', $this->gosaGroupObjects);
+            $p1 = $conv[$type[0]];
             error_reporting(0);
             if (isset($type[1]) && preg_match('/[UGADSFOWTP]/', $type[1])) {
-                $p2= $conv[$type[1]];
+                $p2 = $conv[$type[1]];
                 $smarty->assign("combinedObjects", sprintf("'%s' and '%s'", $p1, $p2));
             } else {
                 $smarty->assign("combinedObjects", "$p1");
@@ -405,7 +412,7 @@ class ogroup extends plugin
                 }
             }
             $data[$key] = $dn;
-            $lData[$key] = array('data'=> array(image($image),$name));
+            $lData[$key] = array('data' => array(image($image), $name));
         }
 
         if ($this->isRestrictedByDynGroup()) {
@@ -437,7 +444,7 @@ class ogroup extends plugin
             $bool = $this->parent->by_object['DynamicLdapGroup']->isAttributeDynamic('member');
         }
         $this->wasDyGroup |= $bool;
-        return($bool);
+        return ($bool);
     }
 
 
@@ -468,8 +475,8 @@ class ogroup extends plugin
                     msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
                 }
                 if ($this->base != $this->baseSelector->getBase()) {
-                    $this->base= $this->baseSelector->getBase();
-                    $this->is_modified= true;
+                    $this->base = $this->baseSelector->getBase();
+                    $this->is_modified = true;
                 }
             }
         }
@@ -484,14 +491,12 @@ class ogroup extends plugin
         ###########*/
 
         $this->objects                = array();
-        $this->ui                     = get_userinfo();
         $filter                       = "";
-        $objectClasses                = array();
 
         $ogfilter               = session::get("ogfilter");
         $regex                  = $ogfilter['regex'];
 
-        $ldap= $this->config->get_ldap_link();
+        $ldap = $this->config->get_ldap_link();
         $ldap->cd($ogfilter['dselect']);
 
 
@@ -499,31 +504,53 @@ class ogroup extends plugin
           Generate Filter
         ###########*/
 
-        $p_f= array("accounts"=> array("OBJ"=>"user", "CLASS"=>"gosaAccount"    ,
-                    "DN"=> get_people_ou()           ,"ACL" => "users"),
-                "groups"          => array("OBJ"=>"group", "CLASS"=>"posixGroup"     ,
-                    "DN"=> get_ou('group', 'ogroupRDN') ,"ACL" => "groups"),
-                "departments"     => array("OBJ"=>"department", "CLASS"=>"gosaDepartment" ,
-                    "DN"=> ""                        ,"ACL" => "department"),
-                "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
-                    "DN"=> get_ou("servgeneric", "serverRDN")        ,"ACL" => "server"),
-                "workstations"    => array("OBJ"=>"workgeneric", "CLASS"=>"gotoWorkstation",
-                    "DN"=> get_ou("workgeneric", "workstationRDN")   ,"ACL" => "workstation"),
-                "winstations"     => array("OBJ"=>"wingeneric", "CLASS"=>"opsiClient",
-                    "DN"=> get_ou("wingeneric", 'sambaMachineAccountRDN')     ,"ACL" => "winstation"),
-                "terminals"       => array("OBJ"=>"termgeneric", "CLASS"=>"gotoTerminal"   ,
-                    "DN"=> get_ou("termgeneric", "terminalRDN")      ,"ACL" => "terminal"),
-                "printers"        => array("OBJ"=>"printgeneric", "CLASS"=>"gotoPrinter"    ,
-                    "DN"=> get_ou("printgeneric", "printerRDN")       ,"ACL" => "printer"),
-                "phones"          => array("OBJ"=>"phoneGeneric", "CLASS"=>"goFonHardware"  ,
-                    "DN"=> get_ou("phoneGeneric", "phoneRDN")         ,"ACL" => "phone"));
+        $p_f = array(
+            "accounts" => array(
+                "OBJ" => "user", "CLASS" => "gosaAccount",
+                "DN" => get_people_ou(), "ACL" => "users"
+            ),
+            "groups"          => array(
+                "OBJ" => "group", "CLASS" => "posixGroup",
+                "DN" => get_ou('group', 'ogroupRDN'), "ACL" => "groups"
+            ),
+            "departments"     => array(
+                "OBJ" => "department", "CLASS" => "gosaDepartment",
+                "DN" => "", "ACL" => "department"
+            ),
+            "servers"         => array(
+                "OBJ" => "servgeneric", "CLASS" => "goServer",
+                "DN" => get_ou("servgeneric", "serverRDN"), "ACL" => "server"
+            ),
+            "workstations"    => array(
+                "OBJ" => "workgeneric", "CLASS" => "gotoWorkstation",
+                "DN" => get_ou("workgeneric", "workstationRDN"), "ACL" => "workstation"
+            ),
+            "winstations"     => array(
+                "OBJ" => "wingeneric", "CLASS" => "opsiClient",
+                "DN" => get_ou("wingeneric", 'sambaMachineAccountRDN'), "ACL" => "winstation"
+            ),
+            "terminals"       => array(
+                "OBJ" => "termgeneric", "CLASS" => "gotoTerminal",
+                "DN" => get_ou("termgeneric", "terminalRDN"), "ACL" => "terminal"
+            ),
+            "printers"        => array(
+                "OBJ" => "printgeneric", "CLASS" => "gotoPrinter",
+                "DN" => get_ou("printgeneric", "printerRDN"), "ACL" => "printer"
+            ),
+            "phones"          => array(
+                "OBJ" => "phoneGeneric", "CLASS" => "goFonHardware",
+                "DN" => get_ou("phoneGeneric", "phoneRDN"), "ACL" => "phone"
+            )
+        );
 
 
         /* Allow searching for applications, if we are not using release managed applications
          */
         if (!$this->IsReleaseManagementActivated()) {
-            $p_f[      "applications"]    = array("OBJ"=>"application", "CLASS"=>"gosaApplication",
-                    "DN"=> get_ou("application", "applicationRDN")   ,"ACL" => "application");
+            $p_f["applications"]    = array(
+                "OBJ" => "application", "CLASS" => "gosaApplication",
+                "DN" => get_ou("application", "applicationRDN"), "ACL" => "application"
+            );
         }
 
         /*###########
@@ -540,16 +567,16 @@ class ogroup extends plugin
                 if ($ogfilter['subtrees']) {
                     $base =  $ogfilter['dselect'];
                 } else {
-                    $base =  $data['DN'].$ogfilter['dselect'];
+                    $base =  $data['DN'] . $ogfilter['dselect'];
                 }
 
 
-                $filter = "(&(objectClass=".$data['CLASS'].")(|(uid=$regex)(cn=$regex)(ou=$regex)))";
+                $filter = "(&(objectClass=" . $data['CLASS'] . ")(|(uid=$regex)(cn=$regex)(ou=$regex)))";
                 $res    = get_list(
                     $filter,
-                    $data['ACL']  ,
+                    $data['ACL'],
                     $base,
-                    array("description", "objectClass", "sn", "givenName", "uid","ou","cn"),
+                    array("description", "objectClass", "sn", "givenName", "uid", "ou", "cn"),
                     $Get_list_flags
                 );
 
@@ -564,16 +591,16 @@ class ogroup extends plugin
                         }
                     }
 
-                    $type= $this->getObjectType($attrs);
-                    $name= $this->getObjectName($attrs);
+                    $type = $this->getObjectType($attrs);
+                    $name = $this->getObjectName($attrs);
 
                     /* Fill array */
                     if (isset($attrs["description"][0])) {
-                        $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+                        $this->objects[$attrs["dn"]] = array("text" => "$name [" . $attrs["description"][0] . "]", "type" => "$type");
                     } elseif (isset($attrs["uid"][0])) {
-                        $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
+                        $this->objects[$attrs["dn"]] = array("text" => "$name [" . $attrs["uid"][0] . "]", "type" => "$type");
                     } else {
-                        $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+                        $this->objects[$attrs["dn"]] = array("text" => "$name", "type" => "$type");
                     }
                 }
             }
@@ -598,23 +625,23 @@ class ogroup extends plugin
 
             /* It has failed, add entry with type flag I (Invalid)*/
             if (!$ldap->success()) {
-                $this->memberList[$dn]= array('text' => _("Non existing DN:")." ".LDAP::fix($dn),"type" => "I");
+                $this->memberList[$dn] = array('text' => _("Non existing DN:") . " " . LDAP::fix($dn), "type" => "I");
             } else {
 
                 /* Append this entry to our all object list */
 
                 /* Fetch object */
-                $attrs= $ldap->fetch();
+                $attrs = $ldap->fetch();
 
-                $type= $this->getObjectType($attrs);
-                $name= $this->getObjectName($attrs);
+                $type = $this->getObjectType($attrs);
+                $name = $this->getObjectName($attrs);
 
                 if (isset($attrs["description"][0])) {
-                    $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+                    $this->objcache[$attrs["dn"]] = array("text" => "$name [" . $attrs["description"][0] . "]", "type" => "$type");
                 } elseif (isset($attrs["uid"][0])) {
-                    $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
+                    $this->objcache[$attrs["dn"]] = array("text" => "$name [" . $attrs["uid"][0] . "]", "type" => "$type");
                 } else {
-                    $this->objcache[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+                    $this->objcache[$attrs["dn"]] = array("text" => "$name", "type" => "$type");
                 }
                 $this->objcache[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
 
@@ -630,18 +657,18 @@ class ogroup extends plugin
 
                 /* Fill array */
                 if (isset($attrs["description"][0])) {
-                    $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+                    $this->objects[$attrs["dn"]] = array("text" => "$name [" . $attrs["description"][0] . "]", "type" => "$type");
                 } else {
-                    $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+                    $this->objects[$attrs["dn"]] = array("text" => "$name", "type" => "$type");
                 }
 
-                $this->memberList[$dn]= $this->objects[$attrs["dn"]];
+                $this->memberList[$dn] = $this->objects[$attrs["dn"]];
             }
         }
         reset($this->memberList);
 
         /* Assemble types of currently combined objects */
-        $objectTypes= "";
+        $objectTypes = "";
         foreach ($this->memberList as $dn => $desc) {
 
             /* Invalid object? */
@@ -650,21 +677,21 @@ class ogroup extends plugin
             }
 
             /* Fine. Add to list. */
-            if (!preg_match('/'.$desc['type'].'/', $objectTypes)) {
-                $objectTypes.= $desc['type'];
+            if (!preg_match('/' . $desc['type'] . '/', $objectTypes)) {
+                $objectTypes .= $desc['type'];
             }
         }
-        $this->gosaGroupObjects= "[$objectTypes]";
+        $this->gosaGroupObjects = "[$objectTypes]";
     }
 
 
     public function getObjectType($attrs)
     {
-        $type= "I";
+        $type = "I";
 
         foreach ($this->typeToClass as $index => $class) {
             if (in_array_strict($class, $attrs['objectClass'])) {
-                $type= $index;
+                $type = $index;
                 break;
             }
         }
@@ -675,18 +702,18 @@ class ogroup extends plugin
     public function getObjectName($attrs)
     {
         /* Person? */
-        $name ="";
+        $name = "";
         if (in_array_strict('gosaAccount', $attrs['objectClass'])) {
             if (isset($attrs['sn']) && isset($attrs['givenName'])) {
-                $name= $attrs['sn'][0].", ".$attrs['givenName'][0];
+                $name = $attrs['sn'][0] . ", " . $attrs['givenName'][0];
             } else {
-                $name= $attrs['uid'][0];
+                $name = $attrs['uid'][0];
             }
         } else {
             if (isset($attrs["cn"][0])) {
-                $name= $attrs['cn'][0];
+                $name = $attrs['cn'][0];
             } else {
-                $name= $attrs['ou'][0];
+                $name = $attrs['ou'][0];
             }
         }
 
@@ -697,25 +724,25 @@ class ogroup extends plugin
     public function check()
     {
         /* Call common method to give check the hook */
-        $message= plugin::check();
+        $message = plugin::check();
 
         /* Permissions for that base? */
         if ($this->base != "") {
-            $new_dn= 'cn='.$this->cn.','.get_ou("group", "ogroupRDN").$this->base;
+            $new_dn = 'cn=' . $this->cn . ',' . get_ou("group", "ogroupRDN") . $this->base;
         } else {
-            $new_dn= $this->dn;
+            $new_dn = $this->dn;
         }
 
         /* Check if we have workstations assigned, that are already assigned to
            another object group.  */
         if ($this->gosaGroupObjects == "[W]" || $this->gosaGroupObjects == "[T]") {
-            $test =array_intersect($this->used_workstations, $this->member);
+            $test = array_intersect($this->used_workstations, $this->member);
             if (count($test)) {
                 $str = "";
                 foreach ($test as $dn) {
-                    $str .= "<li>".$dn."</li>";
+                    $str .= "<li>" . $dn . "</li>";
                 }
-                $message[] = sprintf(_("These systems are already configured by other object groups and cannot be added:")."<br><ul>%s</ul>", $str);
+                $message[] = sprintf(_("These systems are already configured by other object groups and cannot be added:") . "<br><ul>%s</ul>", $str);
             }
         }
 
@@ -724,14 +751,13 @@ class ogroup extends plugin
             $ldap->cat($new_dn, array('dn'));
         }
 
-        if ($ldap->count() !=0) {
-            $message[]= msgPool::duplicated(_("Name"));
+        if ($ldap->count() != 0) {
+            $message[] = msgPool::duplicated(_("Name"));
         }
 
         // Check if a wrong base was supplied
         if (!$this->baseSelector->checkLastBaseUpdate()) {
-            $message[]= msgPool::check_base();
-            ;
+            $message[] = msgPool::check_base();;
         }
 
         /* Set new acl base */
@@ -741,7 +767,7 @@ class ogroup extends plugin
 
         /* must: cn */
         if ($this->cn == "") {
-            $message[]= msgPool::required(_("Name"));
+            $message[] = msgPool::required(_("Name"));
         }
 
         if (preg_match('/[=,+<>#;]/', $this->cn)) {
@@ -750,7 +776,7 @@ class ogroup extends plugin
 
         /* To many different object types? */
         if (strlen($this->gosaGroupObjects) > 4) {
-            $message[]= _("You can combine two different object types at maximum, only!");
+            $message[] = _("You can combine two different object types at maximum, only!");
         }
 
         /* Check if we are allowed to create or move this object
@@ -779,17 +805,17 @@ class ogroup extends plugin
 
         /* Move members to target array */
         if (!$this->wasDyGroup && !$this->isRestrictedByDynGroup()) {
-            $this->attrs['member'] =array();
+            $this->attrs['member'] = array();
             foreach ($this->member as $key => $desc) {
-                $this->attrs['member'][]= LDAP::fix($key);
+                $this->attrs['member'][] = LDAP::fix($key);
             }
         }
 
-        $ldap= $this->config->get_ldap_link();
+        $ldap = $this->config->get_ldap_link();
 
         /* New accounts need proper 'dn', propagate it to remaining objects */
         if ($this->dn == 'new') {
-            $this->dn= 'cn='.$this->cn.','.get_ou("group", "ogroupRDN").$this->base;
+            $this->dn = 'cn=' . $this->cn . ',' . get_ou("group", "ogroupRDN") . $this->base;
         }
 
         /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
@@ -798,11 +824,11 @@ class ogroup extends plugin
         if ($ldap->fetch()) {
             /* Modify needs array() to remove values :-( */
             if (!count($this->member)) {
-                $this->attrs['member']= array();
+                $this->attrs['member'] = array();
             }
-            $mode= "modify";
+            $mode = "modify";
         } else {
-            $mode= "add";
+            $mode = "add";
             $ldap->cd($this->config->current['BASE']);
             $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
         }
@@ -814,18 +840,18 @@ class ogroup extends plugin
         $ldap->$mode($this->attrs);
 
         if ($mode == "add") {
-            new log("create", "ogroups/".get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+            new log("create", "ogroups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         } else {
-            new log("modify", "ogroups/".get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+            new log("modify", "ogroups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         }
 
         /* Trigger post signal */
         $this->handle_post_events($mode);
 
-        $ret= 0;
+        $ret = 0;
         if (!$ldap->success()) {
             msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
-            $ret= 1;
+            $ret = 1;
         } else {
             $this->trustModeDialog->dn = $this->dn;
             $this->trustModeDialog->save();
@@ -838,13 +864,13 @@ class ogroup extends plugin
     {
         plugin::remove_from_parent();
 
-        $ldap= $this->config->get_ldap_link();
+        $ldap = $this->config->get_ldap_link();
         $ldap->rmdir($this->dn);
         if (!$ldap->success()) {
             msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
         }
 
-        new log("remove", "ogroups/".get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+        new log("remove", "ogroups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
 
         /* Trigger remove signal */
         $this->handle_post_events("remove");
@@ -878,7 +904,7 @@ class ogroup extends plugin
         }
 
         $source_o = new ogroup($this->config, $source['dn']);
-        foreach (array("member","gosaGroupObjects")  as $attr) {
+        foreach (array("member", "gosaGroupObjects")  as $attr) {
             $this->$attr = $source_o->$attr;
         }
     }
@@ -893,7 +919,7 @@ class ogroup extends plugin
         $ret = array();
         $ret['string'] = $str;
         $ret['status'] = "";
-        return($ret);
+        return ($ret);
     }
 
     public function saveCopyDialog()
@@ -907,33 +933,34 @@ class ogroup extends plugin
 
     public function IsReleaseManagementActivated()
     {
-        return($this->config->pluginEnabled("faiManagement"));
+        return ($this->config->pluginEnabled("faiManagement"));
     }
 
 
     public static function plInfo()
     {
         return (array(
-                    "plShortName"   => _("Generic"),
-                    "plDescription" => _("Object group generic"),
-                    "plSelfModify"  => false,
-                    "plDepends"     => array(),
-                    "plPriority"    => 1,
-                    "plSection"     => array("administration"),
-                    "plRequirements"=> array(
-                        'ldapSchema' => array('gosaGroupOfNames' => '>=2.7'),
-                        'onFailureDisablePlugin' => array(get_class(), 'ogroupManagement')
-                        ),
-                    "plCategory"    => array("ogroups" => array("description"  => _("Object groups"),
-                            "objectClass"  => "gosaGroupOfNames")),
-                    "plProvidedAcls"=> array(
-                        "cn"                => _("Name"),
-                        "base"              => _("Base"),
-                        "description"       => _("Description"),
-                        "accessTo"          => _("System trust"),
-                        "member"            => _("Member"))
-                    ));
+            "plShortName"   => _("Generic"),
+            "plDescription" => _("Object group generic"),
+            "plSelfModify"  => false,
+            "plDepends"     => array(),
+            "plPriority"    => 1,
+            "plSection"     => array("administration"),
+            "plRequirements" => array(
+                'ldapSchema' => array('gosaGroupOfNames' => '>=2.7'),
+                'onFailureDisablePlugin' => array(get_class(), 'ogroupManagement')
+            ),
+            "plCategory"    => array("ogroups" => array(
+                "description"  => _("Object groups"),
+                "objectClass"  => "gosaGroupOfNames"
+            )),
+            "plProvidedAcls" => array(
+                "cn"                => _("Name"),
+                "base"              => _("Base"),
+                "description"       => _("Description"),
+                "accessTo"          => _("System trust"),
+                "member"            => _("Member")
+            )
+        ));
     }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
