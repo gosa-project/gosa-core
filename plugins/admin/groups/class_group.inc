@@ -239,7 +239,8 @@ class group extends plugin
                     $symbol = "<i class='material-icons'>report</i>";
                     break;
             }
-            $display = "<div class='valign-wrapper'>" . $symbol . msgPool::noValidExtension(_()) . "</div>";
+            // is the error message correct?
+            $display = "<div class='valign-wrapper'>" . $symbol . msgPool::noValidExtension(_('No valid group')) . "</div>";
             return ($display);
         }
 
@@ -281,7 +282,8 @@ class group extends plugin
                     $value = $attrs['uid'][0];
                     $this->addUser($value);
                     $this->members["$value"] = $this->allusers[$value];
-                    $this->reload();
+                    // is this correct reloading $attrs?
+                    $this->reload($attrs);
                 }
             }
             $this->userSelect = NULL;
@@ -520,13 +522,13 @@ class group extends plugin
         }
 
         $this->memberUid[$uid] = $uid;
-        $this->reload();
+        // is this correct reloading $this->attrs?
+        $this->reload($this->attrs);
     }
 
 
     function removeUser($uid)
     {
-        $temp = array();
         if (isset($this->memberUid[$uid])) {
             unset($this->memberUid[$uid]);
         }
@@ -1352,4 +1354,3 @@ class group extends plugin
         return $sid;
     }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
