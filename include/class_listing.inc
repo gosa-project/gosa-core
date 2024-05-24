@@ -844,6 +844,7 @@ class listing
 
     public function setPageLink($page, $items)
     {
+        $index = $this->sortColumn;
         return "?plug=" . $_GET['plug'] . "&amp;PID=" . $this->pid . "&amp;act=SORT_$index&amp;page=$page&amp;items=$items";
     }
 
@@ -1401,9 +1402,15 @@ class listing
             $val = func_get_arg($i);
             if (is_array($val)) {
                 $params[] = $val[0];
-                continue;
+            } else {
+                $params[] = $val;
             }
-            $params[] = $val;
+        }
+
+        // failing at this point may indicate of errors in LDAP data
+        // to avoid an exception add an empty string
+        if (count($params) === 1) {
+            $params[] = '';
         }
 
         $result = '&nbsp;';
@@ -1417,8 +1424,6 @@ class listing
 
     public function renderNavigation()
     {
-        global $config;
-
         $result = [];
         $enableBack = true;
         $enableRoot = true;
@@ -1433,8 +1438,6 @@ class listing
             $enableBack = false;
             $enableRoot = false;
         }
-
-        $listhead = '';
 
         /* Check if we are in users home  department */
         if (!count($deps) || $this->filter->base == get_base_from_people($ui->dn)) {
