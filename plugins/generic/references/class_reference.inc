@@ -22,25 +22,26 @@
 
 class reference extends plugin
 {
-    var $attributes= array('uid','modifyTimestamp');
+    var $attributes = array('uid', 'modifyTimestamp');
     var $aclResolver = NULL;
 
     var $referenceFilters = array();
-    var $objectList ="";
+    var $objectList = "";
     var $modifyTimestamp = "";
+    var $cn = '';
 
-    function __construct(&$config, $dn= NULL, $parent = NULL)
+    function __construct(&$config, $dn = NULL, $parent = NULL)
     {
         // Init the plugin
-        plugin::__construct($config,$dn,$parent);
+        parent::__construct($config, $dn, $parent);
 
         // Try to read the 'modifyTimestamp' - this has to be done separately.
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $ldap->cat($this->dn, array('modifyTimestamp'));
-        if($ldap->count()){
+        if ($ldap->count()) {
             $attrs = $ldap->fetch();
-            if(isset($attrs['modifyTimestamp'][0])){
+            if (isset($attrs['modifyTimestamp'][0])) {
                 $this->modifyTimestamp = $attrs['modifyTimestamp'][0];
             }
         }
@@ -54,48 +55,54 @@ class reference extends plugin
         // Check for group membership
         $this->referenceFilters[] = array(
             'filter' => "(&(objectClass=posixGroup)(memberUid={$this->uid}))",
-            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Group membership"));
+            'attrs'  => array('cn' => _("Name"), 'description' => _("Description")),
+            'msg'    => _("Group membership")
+        );
 
         // Check for group membership in rfc 2307 bis mode
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=posixGroup)(member=".normalizeLdap($this->dn)."))",
-            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Group membership")." (rfc 2307 bis)");
+            'filter' => "(&(objectClass=posixGroup)(member=" . normalizeLdap($this->dn) . "))",
+            'attrs'  => array('cn' => _("Name"), 'description' => _("Description")),
+            'msg'    => _("Group membership") . " (rfc 2307 bis)"
+        );
 
         // Check for role membership
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=organizationalRole)(roleOccupant=".normalizeLdap($this->dn)."))",
-            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Role membership"));
+            'filter' => "(&(objectClass=organizationalRole)(roleOccupant=" . normalizeLdap($this->dn) . "))",
+            'attrs'  => array('cn' => _("Name"), 'description' => _("Description")),
+            'msg'    => _("Role membership")
+        );
 
         // Check for objectGroup membership
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=gosaGroupOfNames)(member=".normalizeLdap($this->dn)."))",
-            'attrs'  => array('cn' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Object group membership"));
+            'filter' => "(&(objectClass=gosaGroupOfNames)(member=" . normalizeLdap($this->dn) . "))",
+            'attrs'  => array('cn' => _("Name"), 'description' => _("Description")),
+            'msg'    => _("Object group membership")
+        );
 
         // Check for department manager
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=gosaDepartment)(manager=".normalizeLdap($this->dn)."))",
-            'attrs'  => array('ou' => _("Name"),'description' => _("Description")),
-            'msg'    => _("Department manager"));
+            'filter' => "(&(objectClass=gosaDepartment)(manager=" . normalizeLdap($this->dn) . "))",
+            'attrs'  => array('ou' => _("Name"), 'description' => _("Description")),
+            'msg'    => _("Department manager")
+        );
 
         // Check for user manager
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=gosaAccount)(manager=".normalizeLdap($this->dn)."))",
-            'attrs'  => array('givenName' => _("Given name"),'sn' => _("Surname"),'uid'=>_("UID")),
-            'msg'    => _("User manager"));
+            'filter' => "(&(objectClass=gosaAccount)(manager=" . normalizeLdap($this->dn) . "))",
+            'attrs'  => array('givenName' => _("Given name"), 'sn' => _("Surname"), 'uid' => _("UID")),
+            'msg'    => _("User manager")
+        );
 
         // Go through filters and detect possible references
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $str = "";
-        foreach($this->referenceFilters as $filter){
+        foreach ($this->referenceFilters as $filter) {
             $ldap->search($filter['filter'], array_keys($filter['attrs']));
-            if(!$ldap->success()){
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_VIEW, get_class()));
-            }elseif($ldap->count()){
+            if (!$ldap->success()) {
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_SEARCH, get_class()));
+            } elseif ($ldap->count()) {
                 $list = new sortableListing();
                 $list->setDeleteable(false);
                 $list->setEditable(false);
@@ -106,12 +113,12 @@ class reference extends plugin
                 $list->setAcl('rwcdm');
 
                 $data = array();
-                while($attrs = $ldap->fetch()){
+                while ($attrs = $ldap->fetch()) {
 
                     $entry = array();
-                    foreach($filter['attrs'] as $name => $desc){
+                    foreach ($filter['attrs'] as $name => $desc) {
                         $$name = "";
-                        if(isset($attrs[$name][0])) $$name = $attrs[$name][0];
+                        if (isset($attrs[$name][0])) $$name = $attrs[$name][0];
                         $entry['data'][] = $$name;
                     }
                     $data[] = $entry;
@@ -119,7 +126,7 @@ class reference extends plugin
                 $list->setListData($data, $data);
 
                 $list->update();
-                $str .= "<h2>".$filter['msg']."</h2><div class='row'><div class='col s12'>";
+                $str .= "<h2>" . $filter['msg'] . "</h2><div class='row'><div class='col s12'>";
                 $str .= $list->render();
                 $str .= "</div></div>";
             }
@@ -130,15 +137,15 @@ class reference extends plugin
     function execute()
     {
         // Mark plugin as viewed
-        plugin::execute();
+        parent::execute();
 
         // Show ldif viewer
-        if(isset($_POST['viewLdif'])){
+        if (isset($_POST['viewLdif'])) {
             $this->dialog = new ldifViewer($this->config, $this->dn);
         }
-        if(isset($_POST['cancelLdifViewer'])) $this->dialog = NULL;
-        if($this->dialog instanceOf ldifViewer){
-            return($this->dialog->execute());
+        if (isset($_POST['cancelLdifViewer'])) $this->dialog = NULL;
+        if ($this->dialog instanceof ldifViewer) {
+            return ($this->dialog->execute());
         }
 
         $smarty = get_smarty();
@@ -148,7 +155,7 @@ class reference extends plugin
         $ui = get_userinfo();
 
         $category = preg_replace("/\/.*$/", "", $this->acl_category);
-        $smarty->assign('aclREAD',  preg_match("/r/",$ui->get_category_permissions($this->dn, 'acl')));
+        $smarty->assign('aclREAD',  preg_match("/r/", $ui->get_category_permissions($this->dn, 'acl')));
         $smarty->assign('completeACL',  $ui->has_complete_category_acls($this->dn, $category));
         $smarty->assign('someACL',      $ui->get_category_permissions($this->dn, $category));
 
@@ -157,12 +164,10 @@ class reference extends plugin
         $smarty->assign('modifyTimestamp', set_post(date('d.m.Y H:i:s', strtotime($this->modifyTimestamp))));
 
         $smarty->assign('objectList', $this->objectList);
-        $smarty->assign("acls",$this->aclResolver->getReadableACL());
+        $smarty->assign("acls", $this->aclResolver->getReadableACL());
 
-		session::set("generic::aclResolver", $this->aclResolver);
+        session::set("generic::aclResolver", $this->aclResolver);
         session::set('autocomplete', "generic::aclResolver");
-        return ($smarty->fetch (get_template_path("contents.tpl", TRUE, dirname(__FILE__))));
+        return ($smarty->fetch(get_template_path("contents.tpl", TRUE, dirname(__FILE__))));
     }
 }
-
-?>
