@@ -119,7 +119,9 @@ class ogroupManagement extends management
         return;
     }
 
-    static function filterProperties($row, $gosaGroupObjects)
+    // make the second parameter optional is more error tolerant but
+    // it also may mask issues with your LDAP data
+    static function filterProperties($row, $gosaGroupObjects = [])
     {
         $theme = getThemeName();
 
@@ -157,7 +159,7 @@ class ogroupManagement extends management
                 break;
         }
 
-        $types = preg_replace("/[^a-z]/i", "", $gosaGroupObjects[0]);
+        $types = preg_replace("/[^a-z]/i", "", $gosaGroupObjects[0] ?? '');
         $result = "";
         for ($i = 0; $i < strlen($types); $i++) {
             $type = $types[$i];
