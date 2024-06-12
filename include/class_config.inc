@@ -72,6 +72,7 @@ class config
     private $jsonRPChandle = NULL;
 
     public $configRegistry = NULL;
+    var $registration = null;
 
     /*! \brief Class constructor of the config class
      *  
@@ -375,7 +376,6 @@ class config
 
             /* Check for connection */
             if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)) {
-                $smarty = get_smarty();
                 msg_dialog::display(_("LDAP error"), _("Cannot bind to LDAP!"), FATAL_ERROR_DIALOG);
                 exit();
             }
