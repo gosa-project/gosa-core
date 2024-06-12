@@ -169,8 +169,8 @@ class acl extends plugin
         } else {
             if (is_array($this->attrs)) {
                 if (in_array('objectClass', $this->attrs)) {
-            $oc =  $this->attrs['objectClass'];
-        }
+                    $oc =  $this->attrs['objectClass'];
+                }
             }
         }
 
@@ -1015,17 +1015,17 @@ class acl extends plugin
             }
 
 
-                    switch ($this->theme) {
-                        case 'classic':
-                            $display .= "   <tr id='tr_$tname' style='vertical-align:top;height:0px;'>
+            switch ($this->theme) {
+                case 'classic':
+                    $display .= "   <tr id='tr_$tname' style='vertical-align:top;height:0px;'>
                                                 <td colspan=" . $cols . ">
                                                     <div id='$tname' style='overflow:hidden; display:none;vertical-align:top;width:100%;'>
                                                         <table style='width:100%;' summary='{$name}'>";
-                            break;
-                        default:
-                            $display .= "   <div class='acl_container' id='$tname' style='overflow:hidden; display:none;'>
+                    break;
+                default:
+                    $display .= "   <div class='acl_container' id='$tname' style='overflow:hidden; display:none;'>
                                                 <div class='row'>";
-                            break;
+                    break;
             }
 
             foreach ($splist as $attr => $dsc) {
