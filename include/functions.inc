@@ -322,7 +322,7 @@ function get_browser_language(): string
  * \param string 'dn' the old DN
  * \param string 'newdn' the new DN
  * */
-function change_ui_dn($dn, $newdn)
+function change_ui_dn(string $dn, string $newdn): void
 {
     $ui = session::global_get('ui');
     if ($ui->dn == $dn) {
@@ -348,7 +348,7 @@ function change_ui_dn($dn, $newdn)
  *  \param  string 'path' User specified path to take as search base
  *  \return string Full path to the template file
  */
-function get_template_path($filename = '', $plugin = FALSE, $path = "")
+function get_template_path(string $filename = '', bool $plugin = FALSE, string $path = ''): string
 {
     global $config, $BASE_DIR;
 
