@@ -117,7 +117,7 @@ class userinfo
             $aclc[$attrs['dn']] = array();
             $ol = array();
             for ($i = 0; $i < $attrs['gosaAclEntry']['count']; $i++) {
-                $ol = array_merge($ol, @acl::explodeAcl($attrs['gosaAclEntry'][$i]));
+                $ol = array_merge($ol, acl::explodeAcl($attrs['gosaAclEntry'][$i]));
             }
             $aclc[$attrs['dn']] = $ol;
         }
@@ -135,7 +135,7 @@ class userinfo
 
                     if (isset($attrs['gosaAclTemplate'])) {
                         for ($i = 0; $i < $attrs['gosaAclTemplate']['count']; $i++) {
-                            $tmp = @acl::explodeAcl($attrs['gosaAclTemplate'][$i]);
+                            $tmp = acl::explodeAcl($attrs['gosaAclTemplate'][$i]);
 
                             foreach ($tmp as $new_acl) {
 
