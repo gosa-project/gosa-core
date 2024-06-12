@@ -641,7 +641,7 @@ class userManagement extends management
             $dn = preg_replace("/^[^,]+,/i", "", get_post('template'));
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($dn);
-            $ldap->search("(&(sn=" . normalizeLdap($this->sn) . ")(givenName=" . normalizeLdap($this->givenName) . "))", array("givenName"));
+            $ldap->search("(&(sn=" . LDAP::escapeValue($this->sn) . ")(givenName=" . LDAP::escapeValue($this->givenName) . "))", array("givenName"));
 
             if ($ldap->count() != 0) {
                 msg_dialog::displayChecks(array(msgPool::duplicated(_("Name"))));

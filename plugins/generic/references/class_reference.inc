@@ -61,35 +61,35 @@ class reference extends plugin
 
         // Check for group membership in rfc 2307 bis mode
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=posixGroup)(member=" . normalizeLdap($this->dn) . "))",
+            'filter' => "(&(objectClass=posixGroup)(member=" . LDAP::escapeValue($this->dn) . "))",
             'attrs'  => array('cn' => _("Name"), 'description' => _("Description")),
             'msg'    => _("Group membership") . " (rfc 2307 bis)"
         );
 
         // Check for role membership
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=organizationalRole)(roleOccupant=" . normalizeLdap($this->dn) . "))",
+            'filter' => "(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::escapeValue($this->dn) . "))",
             'attrs'  => array('cn' => _("Name"), 'description' => _("Description")),
             'msg'    => _("Role membership")
         );
 
         // Check for objectGroup membership
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=gosaGroupOfNames)(member=" . normalizeLdap($this->dn) . "))",
+            'filter' => "(&(objectClass=gosaGroupOfNames)(member=" . LDAP::escapeValue($this->dn) . "))",
             'attrs'  => array('cn' => _("Name"), 'description' => _("Description")),
             'msg'    => _("Object group membership")
         );
 
         // Check for department manager
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=gosaDepartment)(manager=" . normalizeLdap($this->dn) . "))",
+            'filter' => "(&(objectClass=gosaDepartment)(manager=" . LDAP::escapeValue($this->dn) . "))",
             'attrs'  => array('ou' => _("Name"), 'description' => _("Description")),
             'msg'    => _("Department manager")
         );
 
         // Check for user manager
         $this->referenceFilters[] = array(
-            'filter' => "(&(objectClass=gosaAccount)(manager=" . normalizeLdap($this->dn) . "))",
+            'filter' => "(&(objectClass=gosaAccount)(manager=" . LDAP::escapeValue($this->dn) . "))",
             'attrs'  => array('givenName' => _("Given name"), 'sn' => _("Surname"), 'uid' => _("UID")),
             'msg'    => _("User manager")
         );

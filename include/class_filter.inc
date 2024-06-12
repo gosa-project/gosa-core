@@ -283,7 +283,7 @@ class filter
             if ($this->value == '') {
                 $filter = preg_replace('/\$/', '*', $filter);
             } else {
-                $filter = preg_replace('/\$/', '*'.normalizeLdap($this->value).'*', $filter);
+                $filter = preg_replace('/\$/', '*'.LDAP::escapeValue($this->value).'*', $filter);
             }
 
             $result = array_unique(array_merge($result, call_user_func([$backend, 'query'], $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage)), SORT_REGULAR);
@@ -372,7 +372,7 @@ class filter
             if (!isset($class_mapping["$backend"])) {
                 exit('Invalid backend specified in search config.');
             }
-            $filter = preg_replace('/\$/', '*'.normalizeLdap($value).'*', $query['filter']);
+            $filter = preg_replace('/\$/', '*'.LDAP::escapeValue($value).'*', $query['filter']);
 
             $result = array_merge($result, call_user_func([$backend, 'query'], $this->base, $this->scope, $filter, $attributes,
                         $this->category, $this->objectStorage));
