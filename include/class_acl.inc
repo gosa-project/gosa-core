@@ -1714,5 +1714,3 @@ class acl extends plugin
         parent::set_acl_category("acl");
     }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
