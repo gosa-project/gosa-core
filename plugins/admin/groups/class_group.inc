@@ -598,7 +598,7 @@ class group extends plugin
             for ($done = $start; $done < $end; $done++) {
                 if (!isset($allUids[$done])) break;
                 $value = $allUids[$done];
-                $filter .= "(uid=" . normalizeLdap($value) . ")";
+                $filter .= "(uid=" . LDAP::escapeValue($value) . ")";
             }
 
             // Retrieve the data to LDAP

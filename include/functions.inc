@@ -2437,13 +2437,6 @@ function saveFilter($a_filter, $values)
 }
 
 
-/*! \brief Escape all LDAP filter relevant characters */
-function normalizeLdap($input)
-{
-    return (addcslashes($input, '()|'));
-}
-
-
 /*! \brief Return the gosa base directory */
 function get_base_dir()
 {
@@ -3781,7 +3774,7 @@ function detectLdapSpecialCharHandling()
     $dnName = 'GOsaLdapEncoding_\,_\"_(_)_\+_/';
 
     // Prapare name to be useable in filters
-    $fixed = normalizeLdap(str_replace('\\\\', '\\\\\\', $name));
+    $fixed = LDAP::escapeValue(str_replace('\\\\', '\\\\\\', $name));
     $filterName = str_replace('\\,', '\\\\,', $fixed);
 
     // Create the target dn
@@ -3791,6 +3784,9 @@ function detectLdapSpecialCharHandling()
     //  detection object.
     $ldapCID = ldap_connect($config->current['SERVER']);
     ldap_set_option($ldapCID, LDAP_OPT_PROTOCOL_VERSION, 3);
+    if (isset($config->current['LDAPTLS']) && $config->current['LDAPTLS'] == "true") {
+        ldap_start_tls($ldapCID);
+    }
     ldap_bind($ldapCID, $config->current['ADMINDN'], $config->current['ADMINPASSWORD']);
     $res = ldap_list(
         $ldapCID,
@@ -4010,7 +4006,7 @@ function gen_uids($rule, $attributes)
                     $start = FALSE;
                     $number = sprintf("%0" . $match[2] . "d", $genID);
                     $testRule = preg_replace("/" . preg_quote($match[0], '/') . "/", $number, $ruleStr);
-                    $ldap->search('uid=' . normalizeLdap($testRule));
+                    $ldap->search('uid=' . LDAP::escapeValue($testRule));
                     $genID++;
                 }
                 $rules[$id] = preg_replace("/" . preg_quote($match[0], '/') . "/", $number, $ruleStr);
@@ -4021,7 +4017,7 @@ function gen_uids($rule, $attributes)
     // Create result set by checking which uid is already used and which is free.
     $ret = array();
     foreach ($rules as $rule) {
-        $ldap->search('uid=' . normalizeLdap($rule));
+        $ldap->search('uid=' . LDAP::escapeValue($rule));
         if (!$ldap->count()) {
             $ret[] =  $rule;
         }
