@@ -112,10 +112,8 @@ class config
      * weither the file changed or not.
      *
      * */
-    function check_and_reload()
+    function check_and_reload(): void
     {
-        global $ui;
-
         /* Check if class_location.inc has changed, this is the case 
            if we have installed or removed plugins. 
          */
