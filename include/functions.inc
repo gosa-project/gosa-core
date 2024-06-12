@@ -176,7 +176,7 @@ spl_autoload_register('__gosa_autoload');
  *  \param  string 'name' The subject of the test
  *  \return boolean True if class is available, else false.
  */
-function class_available($name)
+function class_available(string $name): bool
 {
     global $class_mapping, $config;
 
@@ -196,7 +196,7 @@ function class_available($name)
  * \param string 'plugin' the subject of the check
  * \return boolean True if plugin is available, else FALSE.
  */
-function plugin_available($plugin)
+function plugin_available(string $plugin): bool
 {
     global $class_mapping, $BASE_DIR;
 
@@ -218,7 +218,7 @@ function plugin_available($plugin)
  *
  * \return float a floating point number which can be used to feed srand() with it
  * */
-function make_seed()
+function make_seed(): float
 {
     list($usec, $sec) = explode(' ', microtime());
     return (float) $sec + ((float) $usec * 100000);
@@ -242,7 +242,7 @@ function make_seed()
  * \param string 'info' Optional: Additional information
  *
  * */
-function DEBUG($level, $line, $function, $file, $data, $info = "")
+function DEBUG($level, $line, $function, $file, $data, $info = ""): void
 {
     global $config;
     $debugLevel = 0;
@@ -279,7 +279,7 @@ function DEBUG($level, $line, $function, $file, $data, $info = "")
  *
  * \return string gettext locale string
  */
-function get_browser_language()
+function get_browser_language(): string
 {
     /* Try to use users primary language */
     global $config;
@@ -2312,7 +2312,7 @@ function progressbar($percentage, $width = 200, $height = 14, $showText = false,
 {
     $text = "";
     $class = "";
-    $style = "width:".$width."px;height:".$height."px;";
+    $style = "width:" . $width . "px;height:" . $height . "px;";
 
     // Fix percentage range
     $percentage = floor($percentage);
@@ -2438,28 +2438,25 @@ function saveFilter($a_filter, $values)
 
 
 /*! \brief Return the gosa base directory */
-function get_base_dir()
+function get_base_dir(): string
 {
     global $BASE_DIR;
-
     return $BASE_DIR;
 }
 
 
 /*! \brief Test weither we are allowed to read the object */
-function obj_is_readable($dn, $object, $attribute)
+function obj_is_readable($dn, $object, $attribute): bool
 {
     global $ui;
-
     return preg_match('/r/', $ui->get_permissions($dn, $object, $attribute));
 }
 
 
 /*! \brief Test weither we are allowed to change the object */
-function obj_is_writable($dn, $object, $attribute)
+function obj_is_writable($dn, $object, $attribute): bool
 {
     global $ui;
-
     return preg_match('/w/', $ui->get_permissions($dn, $object, $attribute));
 }
 
@@ -3218,7 +3215,7 @@ function LMhash_DESencrypt($Input)
  * \param string 'dn'
  * \return either the result or "" in any other case
  */
-function getEntryCSN($dn)
+function getEntryCSN(string $dn)
 {
     global $config;
     if (empty($dn) || !is_object($config)) {
@@ -3249,7 +3246,7 @@ function getEntryCSN($dn)
  * \param array 'attrs' The attrs array to be modified.
  *
  * */
-function add_objectClass($classes, &$attrs)
+function add_objectClass($classes, &$attrs): void
 {
     if (is_array($classes)) {
         $list = $classes;
@@ -3268,7 +3265,7 @@ function add_objectClass($classes, &$attrs)
  * Similar to add_objectClass, except that it removes the given
  * objectClasses. See it for the params.
  * */
-function remove_objectClass($classes, &$attrs)
+function remove_objectClass($classes, &$attrs): void
 {
     if (isset($attrs['objectClass'])) {
         /* Array? */
@@ -3486,8 +3483,8 @@ function get_next_id_pool($attrib)
     global $config;
 
     /* Fill informational values */
-    $min = $config->get_cfg_value("core", $attrib."PoolMin");
-    $max = $config->get_cfg_value("core", $attrib."PoolMax");
+    $min = $config->get_cfg_value("core", $attrib . "PoolMin");
+    $max = $config->get_cfg_value("core", $attrib . "PoolMax");
 
     /* Sanity check */
     if ($min >= $max) {
@@ -3917,7 +3914,7 @@ function gen_uids($rule, $attributes)
     $ldap = $config->get_ldap_link();
     $ldap->cd($config->current['BASE']);
 
-    @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $rule, "Processing");
+    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $rule, "Processing");
 
     // Strip out non ascii chars
     foreach ($attributes as $name => $value) {
@@ -3931,7 +3928,7 @@ function gen_uids($rule, $attributes)
         $attributes[$name] = strtolower($value);
     }
 
-    @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $attributes, "Prepare");
+    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $attributes, "Prepare");
 
     // Search for '{%...[n-m]}
     // Get all matching parts of the given string and sort them by
@@ -4027,19 +4024,19 @@ function gen_uids($rule, $attributes)
 }
 
 
-function gen_uid_proposals(&$rules, $tag, $values)
+function gen_uid_proposals(&$rules, $tag, $values): array
 {
-    $newRules = array();
+    $newRules = [];
     foreach ($rules as $rule) {
         foreach ($values as $value) {
             $newRules[] = preg_replace("/" . preg_quote($tag, '/') . "/", $value, $rule);
         }
     }
-    return ($newRules);
+    return $newRules;
 }
 
 
-function gen_uuid()
+function gen_uuid(): string
 {
     return sprintf(
         '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -4098,7 +4095,7 @@ function in_array_strict($needle, $haystack, $strict = TRUE)
     return (in_array($needle, $haystack, $strict));
 }
 
-function getThemeName()
+function getThemeName(): string
 {
     global $config;
     $theme = "default";
