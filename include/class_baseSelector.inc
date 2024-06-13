@@ -262,9 +262,6 @@ class baseSelector
                 $indent = 2;
 
                 foreach ($this->pathMapping as $base => $dummy) {
-                    $pathbase = explode(",", $base);
-
-
                     // Skip root for tree
                     if ($base == $config->current['BASE']) {
                         continue;
@@ -292,8 +289,6 @@ class baseSelector
                     }
 
                     $indent = count($elements);
-                    $col = 2;
-
                     $selected = $this->base == $base ? "active" : "";
                     $link = "onclick=\"\$('bs_rebase_" . $this->pid . "').value='" . base64_encode($base) . "';$('submit_tree_base_" . $this->pid . "').click();\"";
 
