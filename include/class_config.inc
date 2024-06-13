@@ -33,37 +33,37 @@ class config
     /* XML parser */
     static $parser;
     var $config_found = FALSE;
-    var $tags = array();
+    var $tags = [];
     var $level = 0;
     var $gpc = 0;
     var $section = "";
     var $currentLocation = "";
 
     /*! \brief Store configuration for current location */
-    var $current = array();
+    var $current = [];
 
     /* Link to LDAP-server */
     var $ldap = NULL;
-    var $referrals = array();
+    var $referrals = [];
 
     /* \brief Configuration data
      *
      * - $data['SERVERS'] contains server informations.
      * */
     var $data = array(
-        'TABS' => array(), 'LOCATIONS' => array(), 'SERVERS' => array(),
-        'MAIN' => array(),
-        'MENU' => array(), 'SERVICE' => array()
+        'TABS' => [], 'LOCATIONS' => [], 'SERVERS' => [],
+        'MAIN' => [],
+        'MENU' => [], 'SERVICE' => []
     );
     var $basedir = "";
     var $config_version = "NOT SET";
 
     /* Keep a copy of the current deparment list */
-    var $departments = array();
-    var $idepartments = array();
-    var $adepartments = array();
-    var $tdepartments = array();
-    var $department_info = array();
+    var $departments = [];
+    var $idepartments = [];
+    var $adepartments = [];
+    var $tdepartments = [];
+    var $department_info = [];
     var $filename = "";
     var $last_modified = 0;
 
@@ -80,7 +80,7 @@ class config
      *  \param string 'basedir' base directory
      *
      * */
-    function __construct($filename, $basedir = "")
+    function __construct(string $filename, string $basedir = "")
     {
         // $this->parser = xml_parser_create();
         config::$parser = xml_parser_create();
@@ -99,9 +99,9 @@ class config
     }
 
 
-    function getInstanceUUID()
+    function getInstanceUUID(): string
     {
-        return ($this->instanceUUID);
+        return $this->instanceUUID;
     }
 
 
@@ -129,7 +129,7 @@ class config
         if ($this->filename != "" && filemtime($this->filename) != $this->last_modified) {
 
             $this->config_found = FALSE;
-            $this->tags = array();
+            $this->tags = [];
             $this->level = 0;
             $this->gpc = 0;
             $this->section = "";
@@ -151,14 +151,14 @@ class config
      *  \param string 'filename' The filename of the configuration file.
      * */
 
-    function parse($filename)
+    function parse(string $filename): void
     {
         $this->data = array(
-            "TABS"      => array(),
-            "LOCATIONS" => array(),
-            "MAIN"      => array(),
-            "MENU"      => array(),
-            "SERVICE"   => array()
+            "TABS"      => [],
+            "LOCATIONS" => [],
+            "MAIN"      => [],
+            "MENU"      => [],
+            "SERVICE"   => []
         );
 
         $this->last_modified = filemtime($filename);
@@ -218,7 +218,7 @@ class config
 
                 /* Create new array? */
                 if (!isset($this->data['TABS'][$name])) {
-                    $this->data['TABS'][$name] = array();
+                    $this->data['TABS'][$name] = [];
                 }
 
                 /* Add elements */
@@ -246,7 +246,7 @@ class config
 
                     /* Add location elements */
                     if (!isset($this->data['LOCATIONS'][$this->currentLocation]['REFERRAL'])) {
-                        $this->data['LOCATIONS'][$this->currentLocation]['REFERRAL'] = array();
+                        $this->data['LOCATIONS'][$this->currentLocation]['REFERRAL'] = [];
                     }
 
                     $this->data['LOCATIONS'][$this->currentLocation]['REFERRAL'][$server] = $attrs;
@@ -262,16 +262,16 @@ class config
             case 'SECTION':
                 if ($this->tags[$this->level - 2] == 'MENU') {
                     $this->section = $attrs['NAME'];
-                    $this->data['MENU'][$this->section] = array();;
+                    $this->data['MENU'][$this->section] = [];
                 }
                 break;
 
             case 'PATHMENU':
-                $this->data['PATHMENU'] = array();;
+                $this->data['PATHMENU'] = [];
                 break;
 
             case 'SHORTCUTMENU':
-                $this->data['SHORTCUTMENU'] = array();;
+                $this->data['SHORTCUTMENU'] = [];
                 break;
 
                 /* Inser plugins */
@@ -310,7 +310,7 @@ class config
     {
         if (isset($_SERVER['HTTP_GOSAKEY'])) {
             if (!session::global_is_set('HTTP_GOSAKEY_CACHE')) {
-                session::global_set('HTTP_GOSAKEY_CACHE', array());
+                session::global_set('HTTP_GOSAKEY_CACHE', []);
             }
             $cache = session::global_get('HTTP_GOSAKEY_CACHE');
             if (!isset($cache[$creds])) {
@@ -380,7 +380,7 @@ class config
 
             /* Move referrals */
             if (!isset($this->current['REFERRAL'])) {
-                $this->ldap->referrals = array();
+                $this->ldap->referrals = [];
             } else {
                 $this->ldap->referrals = $this->current['REFERRAL'];
             }
@@ -404,7 +404,7 @@ class config
      *  
      *  \param string name the name of the location
      */
-    function set_current($name)
+    function set_current(string $name)
     {
         $this->current = $this->data['LOCATIONS'][$name];
 
@@ -414,8 +414,8 @@ class config
 
         /* Sort referrals, if present */
         if (isset($this->current['REFERRAL'])) {
-            $bases = array();
-            $servers = array();
+            $bases = [];
+            $servers = [];
             foreach ($this->current['REFERRAL'] as $ref) {
                 $server = preg_replace('%^(.*://[^/]+)/.*$%', '\\1', $ref['URI']);
                 $base = preg_replace('%^.*://[^/]+/(.*)$%', '\\1', $ref['URI']);
@@ -476,7 +476,7 @@ class config
         $tmp = $this->get_cfg_value("core", "mailMethod");
         if ($tmp == "") {
             $ldap->search("(objectClass=goMailServer)", array('cn'));
-            $this->data['SERVERS']['IMAP'] = array();
+            $this->data['SERVERS']['IMAP'] = [];
             while ($attrs = $ldap->fetch()) {
                 $name = $attrs['cn'][0];
                 $this->data['SERVERS']['IMAP'][$name] =
@@ -499,7 +499,7 @@ class config
                 )
             );
 
-            $this->data['SERVERS']['IMAP'] = array();
+            $this->data['SERVERS']['IMAP'] = [];
 
             while ($attrs = $ldap->fetch()) {
 
@@ -569,7 +569,7 @@ class config
         /* Get asterisk servers */
         $ldap->cd($this->current['BASE']);
         $ldap->search("(objectClass=goFonServer)");
-        $this->data['SERVERS']['FON'] = array();
+        $this->data['SERVERS']['FON'] = [];
         $connect_attr = $this->get_cfg_value("phoneAccount", "connectAttribute");
         if ($ldap->count()) {
             while ($attrs = $ldap->fetch()) {
@@ -682,9 +682,9 @@ class config
         /* Load Terminalservers */
         $ldap->cd($this->current['BASE']);
         $ldap->search("(objectClass=goTerminalServer)", array("cn", "gotoSessionType"));
-        $this->data['SERVERS']['TERMINAL'] = array();
+        $this->data['SERVERS']['TERMINAL'] = [];
         $this->data['SERVERS']['TERMINAL'][] = "default";
-        $this->data['SERVERS']['TERMINAL_SESSION_TYPES'] = array();
+        $this->data['SERVERS']['TERMINAL_SESSION_TYPES'] = [];
 
 
         while ($attrs = $ldap->fetch()) {
@@ -698,7 +698,7 @@ class config
 
         /* Ldap Server 
          */
-        $this->data['SERVERS']['LDAP'] = array();
+        $this->data['SERVERS']['LDAP'] = [];
         $ldap->cd($this->current['BASE']);
         $ldap->search("(&(objectClass=goLdapServer)(goLdapBase=*))");
         while ($attrs = $ldap->fetch()) {
@@ -720,7 +720,7 @@ class config
         }
 
         /* Get samba servers from LDAP, in case of samba3 */
-        $this->data['SERVERS']['SAMBA'] = array();
+        $this->data['SERVERS']['SAMBA'] = [];
         $ldap->cd($this->current['BASE']);
         $ldap->search("(objectClass=sambaDomain)");
         while ($attrs = $ldap->fetch()) {
@@ -758,10 +758,10 @@ class config
         global $config;
 
         /* Initialize result hash */
-        $result = array();
-        $administrative = array();
+        $result = [];
+        $administrative = [];
         $result['/'] = $this->current['BASE'];
-        $this->tdepartments = array();
+        $this->tdepartments = [];
 
         /* Get all department types from department Management, to be able detect the department type.
            -It is possible that differnty department types have the same name, 
@@ -786,7 +786,7 @@ class config
         while ($attrs = $ldap->fetch()) {
 
             /* Detect department type */
-            $type_data = array();
+            $type_data = [];
             foreach ($types as $t => $data) {
                 if (in_array_strict($data['OC'], $attrs['objectClass'])) {
                     $type_data = $data;
@@ -844,10 +844,10 @@ class config
         $qbase = preg_quote($base, '/');
         $utags = isset($config->current['HONOURUNITTAGS']) && preg_match('/true/i', $config->current['HONOURUNITTAGS']);
 
-        $arr = array();
+        $arr = [];
         $ui = get_userinfo();
 
-        $this->idepartments = array();
+        $this->idepartments = [];
 
         /* Create multidimensional array, with all departments. */
         foreach ($this->departments as $key => $val) {
@@ -904,7 +904,7 @@ class config
     /* Creates display friendly output from make_idepartments */
     function generateDepartmentArray($arr, $depth = -1, $max_size = 256)
     {
-        $ret = array();
+        $ret = [];
         $depth++;
 
         /* Walk through array */
@@ -961,7 +961,7 @@ class config
             array("goExportEntry", "cn"),
             GL_NONE
         );
-        $return = array();
+        $return = [];
         foreach ($tmp as $entry) {
 
             if (isset($entry['goExportEntry']['count'])) {
@@ -997,7 +997,7 @@ class config
     function getShareServerList()
     {
         global $config;
-        $return = array();
+        $return = [];
         $ui = get_userinfo();
         $base = $config->current['BASE'];
         $res = get_sub_list(
@@ -1018,7 +1018,7 @@ class config
             foreach ($entry['goExportEntry'] as $share) {
                 $a_share = explode("|", $share);
                 $sharename = $a_share[0];
-                $data = array();
+                $data = [];
                 $data['NAME']   = $sharename;
                 $data['ACL']    = $acl;
                 $data['SERVER'] = $entry['cn']['0'];
@@ -1151,7 +1151,7 @@ class config
             "{$class}::{$name}" != 'core::config' &&  // <--- This on is never set, only in gosa.conf. 
             "{$class}::{$name}" != 'core::logging'
         ) {  // <--- This one may cause endless recursions in class_log.inc
-            new log("debug", "", "Unconfigured property: '{$class}::{$name}'", array(), '');
+            new log("debug", "", "Unconfigured property: '{$class}::{$name}'", [], '');
         }
 
         // Try to find the property in the config file directly.
