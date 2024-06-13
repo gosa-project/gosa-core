@@ -22,7 +22,7 @@
 
 class baseSelector
 {
-    private $base;
+    private $base = '';
     private $pid;
     private $action;
     private $height = 500;
@@ -31,7 +31,7 @@ class baseSelector
     protected $pathMapping;
     protected $lastState;
 
-    public function __construct($bases, $base = "")
+    public function __construct(array $bases, string $base = "")
     {
         // Initialize pid
         $this->pid = preg_replace("/[^0-9]/", "", microtime(true));
@@ -54,7 +54,7 @@ class baseSelector
     }
 
 
-    public function setBase($base)
+    public function setBase(string $base): void
     {
         if (isset($this->pathMapping[$base])) {
             $this->base = $base;
@@ -75,14 +75,11 @@ class baseSelector
     }
 
 
-    public function setBases($bases)
+    public function setBases(array $bases): void
     {
         global $config;
 
-        $this->pathMapping = array();
-        $selected = $this->base == $config->current['BASE'] ? "Selected" : "";
-        $first = true;
-        $last_indent = 2;
+        $this->pathMapping = [];
 
         foreach ($bases as $base => $dummy) {
 
@@ -100,7 +97,7 @@ class baseSelector
     }
 
 
-    public function update($force = false)
+    public function update(bool $force = false)
     {
         global $config;
 
@@ -349,7 +346,7 @@ class baseSelector
     {
         global $config;
 
-        $ldapTree = array();
+        $ldapTree = [];
         $ldapTree["[" . _("Root") . "]"] = null;
         foreach ($this->pathMapping as $base => $dummy) {
 
