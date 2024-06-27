@@ -319,7 +319,3 @@ $smarty->registerPlugin("function", "factory", "smarty_function_factory");
 
 /* Global FPDF define */
 define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
-
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
