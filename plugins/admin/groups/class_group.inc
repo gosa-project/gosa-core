@@ -84,7 +84,7 @@ class group extends plugin
             $this->objectclasses[] = "groupOfNames";
         }
 
-        plugin::__construct($config, $dn);
+        parent::__construct($config, $dn);
 
         $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, NULL);
         $this->trustModeDialog->setAcl('groups/group');
@@ -218,7 +218,7 @@ class group extends plugin
     function execute()
     {
         // Call parent execute 
-        plugin::execute();
+        parent::execute();
 
         $theme = getThemeName();
 
@@ -633,7 +633,7 @@ class group extends plugin
 
     function remove_from_parent()
     {
-        plugin::remove_from_parent();
+        parent::remove_from_parent();
 
         $ldap = $this->config->get_ldap_link();
         $ldap->rmdir($this->dn);
@@ -684,10 +684,10 @@ class group extends plugin
         // Save additional values for possible next step 
         if (isset($_POST['groupedit'])) {
 
-            // Create a base backup and reset the base directly after calling plugin::save_object();  
+            // Create a base backup and reset the base directly after calling parent::save_object();  
             // Base will be set seperatly a few lines below 
             $base_tmp = $this->base;
-            plugin::save_object();
+            parent::save_object();
             $this->trustModeDialog->save_object();
             $this->base = $base_tmp;
 
@@ -766,7 +766,7 @@ class group extends plugin
             }
         }
 
-        plugin::save();
+        parent::save();
 
         // Remove objectClass for samba/phone support 
         $tmp = array();
@@ -938,7 +938,7 @@ class group extends plugin
     function check()
     {
         // Call common method to give check the hook 
-        $message = plugin::check();
+        $message = parent::check();
 
         // Permissions for that base? 
         if ($this->base != "") {
@@ -1117,12 +1117,12 @@ class group extends plugin
         if (isset($_POST['group_mulitple_edit'])) {
             /** 
              * Create a base backup and reset the base directly
-             * after calling plugin::save_object(); 
+             * after calling parent::save_object(); 
              * Base will be set seperatly a few lines below 
              */
             $base_tmp = $this->base;
-            plugin::multiple_save_object();
-            plugin::save_object();
+            parent::multiple_save_object();
+            parent::save_object();
             $this->trustModeDialog->multiple_save_object();
             $this->base = $base_tmp;
 
@@ -1172,7 +1172,7 @@ class group extends plugin
 
     function get_multi_edit_values()
     {
-        $ret = plugin::get_multi_edit_values();
+        $ret = parent::get_multi_edit_values();
         $ret = array_merge($ret, $this->trustModeDialog->get_multi_edit_values());
 
         foreach (array("base", "smbgroup", "groupType", "sambaDomainName", "fon_group", "nagios_group") as $attr) {
@@ -1195,7 +1195,7 @@ class group extends plugin
     // Initialize plugin with given atribute arrays 
     function init_multiple_support($attrs, $all)
     {
-        plugin::init_multiple_support($attrs, $all);
+        parent::init_multiple_support($attrs, $all);
         $this->trustModeDialog->init_multiple_support($attrs, $all);
 
         $this->memberUid = array();
@@ -1243,7 +1243,7 @@ class group extends plugin
 
     function PrepareForCopyPaste($source)
     {
-        plugin::PrepareForCopyPaste($source);
+        parent::PrepareForCopyPaste($source);
 
         $this->trustModeDialog->PrepareForCopyPaste($source);
 
@@ -1303,14 +1303,14 @@ class group extends plugin
 
     function set_acl_base($base)
     {
-        plugin::set_acl_base($base);
+        parent::set_acl_base($base);
         $this->trustModeDialog->set_acl_base($base);
     }
 
     //! \brief  Enables multiple support for this plugin
     function enable_multiple_support()
     {
-        plugin::enable_multiple_support();
+        parent::enable_multiple_support();
         $this->trustModeDialog->enable_multiple_support();
     }
 
@@ -1331,7 +1331,7 @@ class group extends plugin
             $users[$uid] = $uid;
         }
 
-        plugin::set_multi_edit_values($attrs);
+        parent::set_multi_edit_values($attrs);
         $this->trustModeDialog->set_multi_edit_values($attrs);
         $this->memberUid = $users;
     }
