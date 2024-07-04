@@ -114,7 +114,7 @@ class posixAccount extends plugin
         $this->config = $config;
 
         /* Load bases attributes */
-        plugin::__construct($config, $dn, $parent);
+        parent::__construct($config, $dn, $parent);
 
         $this->theme = getThemeName();
 
@@ -286,7 +286,7 @@ class posixAccount extends plugin
     function execute($isCopyPaste = false)
     {
         /* Call parent execute */
-        plugin::execute();
+        parent::execute();
         $display = "";
 
         /* Log view */
@@ -595,7 +595,7 @@ class posixAccount extends plugin
 
 
         /* Remove and write to LDAP */
-        plugin::remove_from_parent();
+        parent::remove_from_parent();
 
         /* Zero out array */
         $this->attrs['gosaHostACL'] = array();
@@ -647,7 +647,7 @@ class posixAccount extends plugin
     {
         if (isset($_POST['posixTab'])) {
             /* Save values to object */
-            plugin::save_object();
+            parent::save_object();
             $this->trustModeDialog->save_object();
 
             /* Save force GID checkbox */
@@ -885,7 +885,7 @@ class posixAccount extends plugin
             $this->$attr = (int) $this->$attr;
         }
         /* Call parents save to prepare $this->attrs */
-        plugin::save();
+        parent::save();
 
         /* include global link_info */
         $this->cleanup();
@@ -976,7 +976,7 @@ class posixAccount extends plugin
         }
 
         /* Call common method to give check the hook */
-        $message = plugin::check();
+        $message = parent::check();
         $this->attributes = $tmp_attributes;
 
         /* must: homeDirectory */
@@ -1057,7 +1057,7 @@ class posixAccount extends plugin
 
     function multiple_check()
     {
-        $message = plugin::multiple_check();
+        $message = parent::multiple_check();
         if ($this->homeDirectory == "" && in_array_strict("homeDirectory", $this->multi_boxes)) {
             $message[] = msgPool::required(_("Home directory"));
         }
@@ -1193,7 +1193,7 @@ class posixAccount extends plugin
         /* Include global link_info */
         $ldap = $this->config->get_ldap_link();
 
-        plugin::adapt_from_template($dn, $skip);
+        parent::adapt_from_template($dn, $skip);
         $template = $this->attrs['uid'][0];
 
         /* Adapt group membership */
@@ -1383,7 +1383,7 @@ class posixAccount extends plugin
 
     function PrepareForCopyPaste($source)
     {
-        plugin::PrepareForCopyPaste($source);
+        parent::PrepareForCopyPaste($source);
 
         $this->trustModeDialog->PrepareForCopyPaste($source);
 
@@ -1490,7 +1490,7 @@ class posixAccount extends plugin
     /* Return selected values for multiple edit */
     function get_multi_edit_values()
     {
-        $ret = plugin::get_multi_edit_values();
+        $ret = parent::get_multi_edit_values();
         $ret = array_merge($ret, $this->trustModeDialog->get_multi_edit_values());
         $ret['groupMembership']     = $this->groupMembership;
         $ret['groupMembership_some'] = $this->groupMembership_some;
@@ -1522,7 +1522,7 @@ class posixAccount extends plugin
             $expire_tmp = $this->shadowExpire;
 
             /* Update all values */
-            plugin::multiple_save_object();
+            parent::multiple_save_object();
 
             $this->trustModeDialog->multiple_save_object();
 
@@ -1577,7 +1577,7 @@ class posixAccount extends plugin
    */
     function init_multiple_support($attrs, $all)
     {
-        plugin::init_multiple_support($attrs, $all);
+        parent::init_multiple_support($attrs, $all);
         $this->trustModeDialog->init_multiple_support($attrs, $all);
 
         // set header for multiple support
@@ -1689,7 +1689,7 @@ class posixAccount extends plugin
         foreach ($attrs['groupMembership'] as $dn => $cn) {
             $groups[$dn] = $cn;
         }
-        plugin::set_multi_edit_values($attrs);
+        parent::set_multi_edit_values($attrs);
         $this->trustModeDialog->set_multi_edit_values($attrs);
         $this->groupMembership = $groups;
     }
@@ -1705,9 +1705,7 @@ class posixAccount extends plugin
    */
     function enable_multiple_support()
     {
-        plugin::enable_multiple_support();
+        parent::enable_multiple_support();
         $this->trustModeDialog->enable_multiple_support();
     }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
