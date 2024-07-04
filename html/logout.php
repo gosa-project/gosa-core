@@ -107,6 +107,5 @@ if (isset($_POST['forcedlogout']) || isset($_GET['forcedlogout'])){
   $smarty->display (get_template_path('logout.tpl'));
   exit;
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
 </html>

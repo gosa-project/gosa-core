@@ -440,7 +440,6 @@ if (session::is_set('errors') && session::get('errors') != "") {
 $smarty->assign("focus", $focus);
 displayLogin();
 
-// vim:tabstop=2:expandtab:shiftwidth=2:softtabstop=2:filetype=php:syntax:ruler:
 ?>
 
 </body>
