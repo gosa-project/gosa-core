@@ -3153,7 +3153,7 @@ function NThash($Input)
     if (extension_loaded("hash")) {
         $MD4Hash = hash('md4', $pwInput);
     } else {
-        $MD4Hash = bin2hex(mhash(MHASH_MD4, $pwInput));
+        $MD4Hash = bin2hex(hash("md4", $pwInput));
     }
 
     // Make it uppercase, not necessary, but it's common to do so with NTLM hashes
