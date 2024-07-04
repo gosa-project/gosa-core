@@ -21,8 +21,8 @@
  */
 
 /* Basic setup, remove eventually registered sessions */
-@require_once ("../include/php_setup.inc");
-@require_once ("functions.inc");
+require_once ("../include/php_setup.inc");
+require_once ("functions.inc");
 error_reporting (0);
 session_cache_limiter("private");
 session::start();
@@ -51,5 +51,4 @@ if (session::is_set('binaryfile')) {
 echo session::get('binary');
 error_reporting (E_ALL | E_STRICT);
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
