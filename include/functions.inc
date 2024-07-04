@@ -2849,7 +2849,7 @@ function set_post($value)
 
     // Return a fixed string which can then be used in HTML fields without
     //  breaking the layout or the values. This allows to use '"<> in input fields.
-    return (htmlentities($value, ENT_QUOTES, 'utf-8'));
+    return (htmlentities($value ?? '', ENT_QUOTES, 'utf-8'));
 }
 
 
