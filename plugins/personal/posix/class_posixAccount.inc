@@ -1087,7 +1087,7 @@ class posixAccount extends plugin
                 $message[] = msgPool::toobig("shadowWarning", "shadowMax");
             }
             if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin && in_array_strict("activate_shadowMin", $this->multi_boxes)) {
-                $message[] = msgPool::tosmall("shadowWarning", "shadowMin");
+                $message[] = msgPool::toosmall("shadowWarning", "shadowMin");
             }
         }
         if ($this->activate_shadowInactive && in_array_strict("activate_shadowInactive", $this->multi_boxes)) {
