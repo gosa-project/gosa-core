@@ -934,7 +934,7 @@ class posixAccount extends plugin
             if (!isset($this->savedGroupMembership[$key])) {
                 $g = new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $key, "groups");
                 $g->set_acl_base($key);
-                $g->by_object['group']->addMember($this->dn);
+                $g->by_object['group']->addUser($this->uid);
                 $g->save();
             }
         }
@@ -944,7 +944,7 @@ class posixAccount extends plugin
             if (!isset($this->groupMembership[$key])) {
                 $g = new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $key, "groups");
                 $g->set_acl_base($key);
-                $g->by_object['group']->removeMember($this->dn);
+                $g->by_object['group']->removeUser($this->uid);
                 $g->save();
             }
         }
