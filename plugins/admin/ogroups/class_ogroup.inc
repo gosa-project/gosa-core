@@ -38,8 +38,6 @@ class ogroup extends plugin
 
     public $typeToImage = array();
 
-
-
     /* Variables */
     public $cn = "";
     public $description = "";
