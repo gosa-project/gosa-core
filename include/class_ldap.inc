@@ -414,9 +414,18 @@ class LDAP
         return false;
     }
 
+    /**
+     * Get a specified amount of attributes from a given DN entry.
+     *
+     * \param $srp ldap connection handle
+     * \param $dn the dn entry to get attributes from
+     * \param $attrs the attributes you want to get back, defaults to * that means all attributes
+     * \param $filter filter the entries you want to read from ldap
+     * \return bool|\LDAP\Result
+     */
     function cat($srp, $dn, $attrs = array("*"), $filter = "(objectclass=*)"): bool|\LDAP\Result
     {
-        if ($dn === 'new') {
+        if ($dn === 'new' || $dn === null) {
             return false;
         }
         if ($this->hascon) {
@@ -464,7 +473,7 @@ class LDAP
         return false;
     }
 
-    function set_size_limit($size)
+    function set_size_limit(int $size): void
     {
         /* Ignore zero settings */
         if ($size == 0) {
