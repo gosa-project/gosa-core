@@ -470,7 +470,13 @@ class group extends plugin
         return ($bool);
     }
 
-    function addUser($uid)
+    /**
+     * Add user defined by $uid to this group.
+     *
+     * \param $uid user id
+     * \return bool
+     */
+    function addUser(string $uid): bool
     {
         /** 
          * In mutliple edit we have to handle two arrays.
@@ -500,7 +506,7 @@ class group extends plugin
                     ),
                     ERROR_DIALOG
                 );
-                return;
+                return false;
             } elseif ($ldap->count() >= 2) {
                 msg_dialog::display(
                     _("Error"),
@@ -511,7 +517,7 @@ class group extends plugin
                     ),
                     ERROR_DIALOG
                 );
-                return;
+                return false;
             } else {
                 while ($attrs = $ldap->fetch()) {
                     $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
@@ -524,6 +530,7 @@ class group extends plugin
         $this->memberUid[$uid] = $uid;
         // is this correct reloading $this->attrs?
         $this->reload($this->attrs);
+        return true;
     }
 
 
@@ -894,17 +901,15 @@ class group extends plugin
             }
         }
 
-        if ($this->rfc2307bis) {
-            // check if members are added to the group and delete redundancies
-            $this->attrs['member'] = array_unique($this->attrs['member'] ?? []);
+        // check if members are added to the group and delete redundancies
+        $this->attrs['memberUid'] = array_unique($this->attrs['memberUid'] ?? []);
 
-            // if the member array is empty nothing is saved or updated
-            if (count($this->attrs['member'])) {
-                // Write back to ldap 
-                $ldap->cd($this->dn);
-                $this->cleanup();
-                $ldap->$mode($this->attrs);
-            }
+        // if the member array is empty nothing is saved or updated
+        if (count($this->attrs['memberUid'])) {
+            // Write back to ldap
+            $ldap->cd($this->dn);
+            $this->cleanup();
+            $ldap->$mode($this->attrs);
         }
 
         // Remove ACL dependencies too,
