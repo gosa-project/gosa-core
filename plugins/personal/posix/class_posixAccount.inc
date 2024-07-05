@@ -183,7 +183,7 @@ class posixAccount extends plugin
             /* Get group membership */
             $this->groupListData = array();
             $ldap->cd($this->config->current['BASE']);
-            $ldap->search("(&(objectClass=posixGroup)(member=" . $dn . "))", array("cn", "description"));
+            $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->uid . "))", array("cn", "description"));
 
             while ($attrs = $ldap->fetch()) {
                 if (!isset($attrs["description"][0])) {
