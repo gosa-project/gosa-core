@@ -1388,14 +1388,19 @@ class user extends plugin
         }
 
         if (!$this->is_template) {
+            // givenName must be supplied
             if ($this->givenName == "") {
                 $message[] = msgPool::required(_("Given name"));
             }
+
+            // uid must be supplied
             if ($this->uid == "") {
                 $message[] = msgPool::required(_("Login"));
             }
+
+            // check the primary account attribute
             if ($this->config->get_cfg_value("core", "accountPrimaryAttribute") != "uid") {
-                $ldap->cat($ldap->count);
+                $ldap->cat($this->new_dn);
                 if ($ldap->count != 0 && $this->dn != $this->new_dn && $this->dn == 'new') {
                     $message[] = msgPool::duplicated(_("Name"));
                 }
