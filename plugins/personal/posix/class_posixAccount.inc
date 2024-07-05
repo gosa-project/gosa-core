@@ -701,7 +701,6 @@ class posixAccount extends plugin
     /* Save data to LDAP, depending on is_account we save or delete */
     function save()
     {
-
         /* Adapt shadow values */
         if (!$this->activate_shadowExpire) {
             $this->shadowExpire = "0";
@@ -818,7 +817,7 @@ class posixAccount extends plugin
                 }
                 $g->save();
 
-                @DEBUG(
+                DEBUG(
                     DEBUG_TRACE,
                     __LINE__,
                     __FUNCTION__,
@@ -829,7 +828,7 @@ class posixAccount extends plugin
             } else {
                 $attrs = $ldap->fetch();
                 $this->gidNumber = $attrs['gidNumber'][0];
-                @DEBUG(
+                DEBUG(
                     DEBUG_TRACE,
                     __LINE__,
                     __FUNCTION__,
@@ -840,10 +839,9 @@ class posixAccount extends plugin
             }
         } else {
 
-            /* Primary group was selected by user
-       */
+            // Primary group was selected by user
             $this->gidNumber = $this->primaryGroup;
-            @DEBUG(
+            DEBUG(
                 DEBUG_TRACE,
                 __LINE__,
                 __FUNCTION__,
@@ -963,11 +961,7 @@ class posixAccount extends plugin
     /* Check formular input */
     function check()
     {
-        /* Include global link_info */
-        $ldap = $this->config->get_ldap_link();
-
-        /* Append groups as memberGroup: to check hook 
-     */
+        // Append groups as memberGroup: to check hook 
         $tmp_attributes  = $this->attributes;
         $this->attributes[] = "memberGroup";
         $this->memberGroup = array();

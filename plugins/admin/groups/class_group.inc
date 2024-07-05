@@ -222,7 +222,7 @@ class group extends plugin
 
         $theme = getThemeName();
 
-        // Log view 
+        // Log view posixGroup
         if ($this->is_account && !$this->view_logged) {
             $this->view_logged = TRUE;
             new log("view", "groups/" . get_class($this), $this->dn);
@@ -894,15 +894,17 @@ class group extends plugin
             }
         }
 
-        // check if members are added to the group and delete redundancies
-        $this->attrs['member'] = array_unique($this->attrs['member']);
+        if ($this->rfc2307bis) {
+            // check if members are added to the group and delete redundancies
+            $this->attrs['member'] = array_unique($this->attrs['member'] ?? []);
 
-        // if the member array is empty nothing is saved or updated
-        if (count($this->attrs['member'])) {
-            // Write back to ldap 
-            $ldap->cd($this->dn);
-            $this->cleanup();
-            $ldap->$mode($this->attrs);
+            // if the member array is empty nothing is saved or updated
+            if (count($this->attrs['member'])) {
+                // Write back to ldap 
+                $ldap->cd($this->dn);
+                $this->cleanup();
+                $ldap->$mode($this->attrs);
+            }
         }
 
         // Remove ACL dependencies too,
