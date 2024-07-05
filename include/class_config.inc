@@ -393,7 +393,7 @@ class config
 
         $obj  = new ldapMultiplexer($this->ldap);
         if ($sizelimit) {
-            $obj->set_size_limit(session::global_get('size_limit'));
+            $obj->set_size_limit((int)session::global_get('size_limit'));
         } else {
             $obj->set_size_limit(0);
         }
