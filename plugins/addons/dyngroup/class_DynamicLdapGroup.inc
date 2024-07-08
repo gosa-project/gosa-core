@@ -43,19 +43,12 @@ class DynamicLdapGroup extends plugin
     /**
      * Default value for the corresponding attribute found in the $this->attributes
      * array of this plugin.
-     * @var string
      */
-    public $labeledURI = array();
-    public $labeledURIparsed = array();
+    public $labeledURI = [];
+    public $labeledURIparsed = [];
     public $labeledURIdefault = 'ldap:///dc=example,dc=com?memberUid?sub?(objectClass=posixGroup)';
 
     public $scopes = array('base', 'one', 'sub');
-
-    /**
-     * Store values of memberUrl.
-     * @var Array
-     */
-    private $_memberUrls = array();
 
     public $orig_dn = "";
     public $cn = '';
@@ -70,7 +63,7 @@ class DynamicLdapGroup extends plugin
         parent::__construct($config, $dn);
 
         // Load labeledURI values.
-        $this->labeledURI = array();
+        $this->labeledURI = [];
         if (!$this->is_account) {
             $this->labeledURI[] = str_replace('dc=example,dc=com', LDAP::fix($this->dn), $this->labeledURIdefault);
         } elseif (isset($this->attrs['labeledURI'])) {
@@ -80,7 +73,7 @@ class DynamicLdapGroup extends plugin
         }
 
         // Parse labeledURI entries
-        $this->labeledURIparsed = array();
+        $this->labeledURIparsed = [];
         foreach ($this->labeledURI as $entry) {
             list($base, $attr, $scope, $filter) = preg_split("/\?/", $entry);
 
@@ -92,27 +85,30 @@ class DynamicLdapGroup extends plugin
             $this->labeledURIparsed[] = array('base' => $base, 'attr' => $attr, 'scope' => $scope, 'filter' => $filter);
         }
 
-        // Save dn, to be able the check for object movements - put this in plugin::move 
+        // Save dn, to be able the check for object movements - put this in parent::move 
         $this->orig_dn = $this->dn;
     }
 
 
-    /*!\brief    Checks whether the given attribute is managed by this dyngroup extension or not.
+    /**
+     * Checks whether the given attribute is managed by this dyngroup extension or not.
      */
-    function isAttributeDynamic($attr)
+    function isAttributeDynamic($attr): bool
     {
         if ($this->is_account) {
             foreach ($this->labeledURIparsed as $uri) {
-                if ($uri['attr'] == $attr) return (TRUE);
+                if ($uri['attr'] == $attr) return true;
             }
         }
-        return (FALSE);
+        return false;
     }
 
-
-    public function check()
+    /**
+     * Method to do some checks
+     */
+    public function check(): array
     {
-        $messages = plugin::check();
+        $messages = parent::check();
 
         // At least one entry is required. 
         if (!count($this->labeledURIparsed)) {
@@ -129,9 +125,8 @@ class DynamicLdapGroup extends plugin
             }
 
             // Check for invalid attributes
-            if (empty($entry['attr'])) {
-                $messages[] = msgPool::required(_("Attribute") . " {$nr}");
-            } elseif (in_array_strict(strtolower($entry['attr']), array('objectclass'))) {
+            // The "attribute" part of the labeledURI is allowed to be empty!
+            if (in_array_strict(strtolower($entry['attr']), array('objectclass'))) {
                 $messages[] = msgPool::reserved(_("Attribute") . " {$nr}");
             }
 
@@ -156,15 +151,14 @@ class DynamicLdapGroup extends plugin
             }
         }
 
-        return ($messages);
+        return $messages;
     }
-
 
     /**
      * Execute this plugin.
      * @return string HTML to print.
      */
-    public function execute()
+    public function execute(): string
     {
         //
         // Are we trying to modify state of this group ? If so,
@@ -208,7 +202,6 @@ class DynamicLdapGroup extends plugin
         return;
     }
 
-
     /**
      * This function is called when tab is undisplayed. For example, the current user
      * wants to change other settings of this group, but not save it to the LDAP
@@ -245,7 +238,6 @@ class DynamicLdapGroup extends plugin
         $this->labeledURIparsed = array_values($this->labeledURIparsed);
     }
 
-
     /**
      * That will add additionnal information into the current LDAP entry.
      * If this plugin is disable, then it will remove any data that references
@@ -255,7 +247,7 @@ class DynamicLdapGroup extends plugin
     public function save()
     {
         // Build up labeledUri entries
-        $this->labeledURI = array();
+        $this->labeledURI = [];
         foreach ($this->labeledURIparsed as $entry) {
             $scope = $this->scopes[$entry['scope']];
             $filter = $entry['filter'];
@@ -273,10 +265,10 @@ class DynamicLdapGroup extends plugin
         }
     }
 
-
-    /*! \brief      Updates labeledURI entries in ldap.
-     *              Check whether the given src_dn is part of some labeledURI entries
-     *               and then updates the entries to use the dst_dn.
+    /**
+     * Updates labeledURI entries in ldap.
+     * Check whether the given src_dn is part of some labeledURI entries
+     * and then updates the entries to use the dst_dn.
      * @param       $config     The GOsa configuration object.
      * @param       $src_dn     The source 'dn' of the object that was moved.
      * @param       $dst_dn     The target 'dn' of the object that was moved.
@@ -291,10 +283,10 @@ class DynamicLdapGroup extends plugin
             array("dn", "labeledURI"),
             GL_SUBSEARCH | GL_NO_ACL_CHECK
         );
-        $newAttrs = array();
+        $newAttrs = [];
         foreach ($objs as $obj) {
             $changes = false;
-            $attrs = array();
+            $attrs = [];
             for ($i = 0; $i < $obj['labeledURI']['count']; $i++) {
                 $c = $obj['labeledURI'][$i];
                 $c = preg_replace('/' . preg_quote($src_dn, '/') . '/', $dst_dn, $c);
@@ -320,15 +312,15 @@ class DynamicLdapGroup extends plugin
                     trigger_error(sprintf("Failed to dynamic group object for %s: %s", bold($dn), $ldap->get_error()));
                     new log(
                         "debug",
-                        "plugin/plugin::move()",
+                        "plugin/parent::move()",
                         $dn,
-                        array(),
+                        [],
                         " -- ERROR -- Failed to update dynamic groups (labeledURI) - " . $ldap->get_error()
                     );
                 } else {
                     new log(
                         "modify",
-                        "plugin/plugin::move()",
+                        "plugin/parent::move()",
                         $dn,
                         array_keys($data),
                         "Updated dynamic group entries (labeledURI)"
@@ -338,23 +330,22 @@ class DynamicLdapGroup extends plugin
         }
     }
 
-
     /**
      * Static method to set ACL for this plugin.
      */
-    public static function plInfo()
+    public static function plInfo(): array
     {
-        return array(
+        return [
             "plShortName"   => _("Dynamic object"),
             "plDescription" => _("Dynamic object"),
             "plSelfModify"  => TRUE,
-            "plDepends"     => array(),
+            "plDepends"     => [],
             "plPriority"    => 1,
             "plSection"     => array("addon"),
             "plCategory"    => array("groups", "department", "ogroups"),
             "plProvidedAcls" => array(
                 'labeledURI' =>  _('Labeled URI'),
             )
-        );
+        ];
     }
 }
