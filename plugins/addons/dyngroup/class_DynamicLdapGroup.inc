@@ -216,7 +216,7 @@ class DynamicLdapGroup extends plugin
             $this->labeledURIparsed[] =
                 array(
                     'base' => 'ldap:///' . $this->dn,
-                    'attr' => 'memberUid',
+                    'attr' => '',
                     'scope' => 2,
                     'filter' => '(objectClass=posixGroup)'
                 );

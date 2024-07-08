@@ -15,7 +15,7 @@
                 <label>{t}Scope{/t}</label>
             </div>
             <div class="input-field col s6 xl3">
-                    <input type='text' name='attr_{$key}' value='{$item.attr}' id="attr_{$key}">
+                    <input type='text' name='attr_{$key}' value='{$item.attr}' id="attr_{$key}" placeholder='Filter by attribute or leave it empty for result DNs'>
                     <label for="attr_{$key}">{t}Attribute{/t}</label>
             </div>
             <div class="input-field col s6 xl3">
