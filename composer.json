@@ -1,6 +1,6 @@
 {
-    "name": "gonicus/uni-bonn_gosa",
-    "description": "GOsa² using composer for plugin handling",
+    "name": "gonicus/gosa2-core",
+    "description": "GOsa² core files",
     "type": "project",
     "require": {
         "smarty/smarty": "4.3"
