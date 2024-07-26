@@ -760,9 +760,9 @@ class sortableListing
     public function getKey($index)
     {
         if (is_array($index)) {
-            return isset($this->keys[$index[0]])?$this->keys[$index[0]]:null;
+            return $this->keys[$index[0]] ?? null;
         } else {
-            return isset($this->keys[$index[0]])?$this->keys[$index]:null;
+            return $this->keys[$index] ?? null;
         }
     }
 
