@@ -112,8 +112,8 @@ $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 //set the template variable for setup
 $GLOBALS['theme'] = 'default';
 
-/* Set the text domain as 'messages' */
-$domain = 'messages';
+/* Set the text domain as 'core' */
+$domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 

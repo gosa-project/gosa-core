@@ -33,8 +33,8 @@ require_once ("functions.inc");
 /* Set header */
 header("Content-type: text/html; charset=UTF-8");
 
-/* Set the text domain as 'messages' */
-$domain = 'messages';
+/* Set the text domain as 'core' */
+$domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
@@ -109,7 +109,7 @@ if(session::global_get('_LAST_PAGE_REQUEST') == ""){
 }
 
 
-@DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
+DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 
 /* Set template compile directory */
 $smarty->compile_dir= $config->get_cfg_value("core","templateCompileDirectory");
@@ -154,11 +154,11 @@ if( $config->boolValueIsTrue('core','schemaCheck') &&
 /* Check if the config is up to date */
 $config->check_config_version();
 
-/* Set the text domain as 'messages' */
-$domain = 'messages';
+/* Set the text domain as 'core' */
+$domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
-@DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
+DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
 /* Prepare plugin list */
 if (!session::global_is_set('plist')){
