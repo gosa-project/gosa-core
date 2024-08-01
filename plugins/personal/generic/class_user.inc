@@ -111,6 +111,8 @@ class user extends plugin
     var $manager = "";
     var $manager_name = "";
 
+    var $gosaLoginRestriction_some = [];
+
 
     /* attribute list for save action */
     var $attributes = array(
@@ -153,7 +155,7 @@ class user extends plugin
         }
 
         /* Load base attributes */
-        plugin::__construct($config, $dn);
+        parent::__construct($config, $dn);
 
         $this->orig_dn  = $this->dn;
         $this->new_dn   = $dn;
@@ -288,7 +290,7 @@ class user extends plugin
         $theme = getThemeName();
 
         /* Call parent execute */
-        plugin::execute();
+        parent::execute();
 
         /* Set list ACL */
         $this->gosaLoginRestrictionWidget->setAcl($this->getacl('gosaLoginRestriction'));
@@ -844,7 +846,7 @@ class user extends plugin
             $base_tmp = $this->base;
 
             /* Parents save function */
-            plugin::save_object();
+            parent::save_object();
 
             /* Refresh base */
             if (
@@ -946,7 +948,7 @@ class user extends plugin
         if ($this->preferredLanguage == "0") $this->preferredLanguage = "";
 
         /* First use parents methods to do some basic fillup in $this->attrs */
-        plugin::save();
+        parent::save();
 
         if ($this->pw_storage == "sasl") {
             $tmp = new passwordMethodsasl($this->config, $this->dn);
@@ -1185,7 +1187,7 @@ class user extends plugin
             }
             ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
             if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("core", "ldapFollowReferrals") == "true") {
-                ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
+                ldap_set_option($ds, LDAP_OPT_REFERRALS, 1);
                 ldap_set_rebind_proc($ds, array(&$this, "rebind"));
             }
             if ($this->config->get_cfg_value("core", "ldapTLS") == "true") {
@@ -1326,7 +1328,7 @@ class user extends plugin
     function check()
     {
         /* Call common method to give check the hook */
-        $message = plugin::check();
+        $message = parent::check();
 
         /* Configurable password methods should be configured initially. 
      */
@@ -1491,7 +1493,7 @@ class user extends plugin
         $ds = ldap_connect($this->config->current['SERVER']);
         ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
         if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("core", "ldapFollowReferrals") == "true") {
-            ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
+            ldap_set_option($ds, LDAP_OPT_REFERRALS, 1);
             ldap_set_rebind_proc($ds, array(&$this, "rebind"));
         }
         if ($this->config->get_cfg_value("core", "ldapTLS") == "true") {
@@ -1556,7 +1558,7 @@ class user extends plugin
     /* Adapt from given 'dn' */
     function adapt_from_template($dn, $skip = array())
     {
-        plugin::adapt_from_template($dn, $skip);
+        parent::adapt_from_template($dn, $skip);
 
         /* Get password method from template 
      */
@@ -1691,7 +1693,7 @@ class user extends plugin
 
     function PrepareForCopyPaste($source)
     {
-        plugin::PrepareForCopyPaste($source);
+        parent::PrepareForCopyPaste($source);
 
         /* Reset certificate information addepted from source user
        to avoid setting the same user certificate for the destination user. */
@@ -1830,7 +1832,7 @@ class user extends plugin
 
     function get_multi_edit_values()
     {
-        $ret = plugin::get_multi_edit_values();
+        $ret = parent::get_multi_edit_values();
         if (in_array_strict("pw_storage", $this->multi_boxes)) {
             $ret['pw_storage'] = $this->pw_storage;
         }
@@ -1864,7 +1866,7 @@ class user extends plugin
 
         if (!isset($_POST['user_mulitple_edit'])) return;
 
-        plugin::multiple_save_object();
+        parent::multiple_save_object();
 
         /* Get pw_storage mode */
         if (isset($_POST['pw_storage'])) {
@@ -1908,7 +1910,7 @@ class user extends plugin
     function multiple_check()
     {
         /* Call check() to set new_dn correctly ... */
-        $message = plugin::multiple_check();
+        $message = parent::multiple_check();
 
         /* Set the new acl base */
         if ($this->dn == "new") {
@@ -1930,7 +1932,7 @@ class user extends plugin
             $message[] = msgPool::invalid(_("Pager"), $this->pager, "/[\/0-9 ()+*-]/");
         }
         if (preg_match('/[,+"?\'()=<>;\\\\]/', $this->givenName) && in_array_strict("givenName", $this->multi_boxes)) {
-            $message[] = msgPool::invalid(_("Given name"), $this->giveName, '/[^,+"?\'()=<>;\\\\]/');
+            $message[] = msgPool::invalid(_("Given name"), $this->givenName, '/[^,+"?\'()=<>;\\\\]/');
         }
         if (preg_match('/[,+"?\'()=<>;\\\\]/', $this->sn) && in_array_strict("sn", $this->multi_boxes)) {
             $message[] = msgPool::invalid(_("Name"), $this->sn, '/[^,+"?\'()=<>;\\\\]/');
@@ -1952,7 +1954,7 @@ class user extends plugin
    */
     function init_multiple_support($attrs, $all)
     {
-        plugin::init_multiple_support($attrs, $all);
+        parent::init_multiple_support($attrs, $all);
 
         // Get login restrictions
         if (isset($attrs['gosaLoginRestriction'])) {
@@ -2010,7 +2012,7 @@ class user extends plugin
 
         $lR = array_values(array_unique($lR));
         $this->is_modified |=  array_differs($this->gosaLoginRestriction, $lR);
-        plugin::set_multi_edit_values($attrs);
+        parent::set_multi_edit_values($attrs);
         $this->gosaLoginRestriction = $lR;
     }
 
