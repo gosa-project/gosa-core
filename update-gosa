@@ -123,7 +123,7 @@ function get_classes($folder= ".")
     $contents= file($file);
     foreach($contents as $line){
       $line= chop($line);
-      if (preg_match('/^\s*class\s*\w.*$/', $line)){
+      if (preg_match('/^\s*class\s+\w.*$/', $line)){
         $class= preg_replace('/^\s*class\s*(\w+).*$/', '\1', $line);
         $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
       }
