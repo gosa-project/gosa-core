@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class management
+abstract class management
 {
     // Public
     public $config = null;
@@ -592,7 +592,7 @@ class management
      */
     public function createSnapshotDialog($action = "", $target = array(), $all = array())
     {
-        @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Snaptshot creation initiated!");
+        DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Snaptshot creation initiated!");
 
         foreach ($target as $entry) {
             if (!empty($entry) && $this->ui->allow_snapshot_create($entry, $this->aclCategory)) {
@@ -903,7 +903,7 @@ class management
 
             // We've multiple entries to edit.
             $this->is_new = false;
-            $this->is_singel_edit = false;
+            $this->is_single_edit = false;
             $this->is_multiple_edit = true;
 
             // Open multiple edit handler.
