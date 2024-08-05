@@ -30,7 +30,7 @@
   within this class. Extend your plugins from this class.
  */
 
-class plugin
+abstract class plugin
 {
     /*! \brief    The title shown in path menu while this plugin is visible.
    */
