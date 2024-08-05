@@ -56,9 +56,9 @@ session::set('clicks', $clicks);
 pathNavigator::clear();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-  @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
+  DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
 }
-@DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, session::get_all(), "_SESSION");
+DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, session::get_all(), "_SESSION");
 
 /* Logged in? Simple security check */
 // if (!session::global_is_set('config')){
