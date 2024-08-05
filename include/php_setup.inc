@@ -31,8 +31,9 @@ $BASE_DIR = dirname(dirname(__FILE__));
 $ROOT_DIR = $BASE_DIR . "/html";
 error_reporting(E_ALL | E_STRICT);
 
-require_once(VENDOR_DIR . "/autoload.php");
+require_once("class_plugin.inc");
 require_once("class_location.inc");
+require_once(VENDOR_DIR . "/autoload.php");
 
 /*! \brief Does autoloading for classes used in GOsa.
  *
