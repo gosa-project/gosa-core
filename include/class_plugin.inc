@@ -1858,4 +1858,33 @@ abstract class plugin
             }
         }
     }
+
+    /**
+     * We are not able to set a "textdomain()" use for translations with gettext.
+     * The smarty block "{t}...{\t}" is an extension often implemented by many projects.
+     * The extension is able to handle textdomain by using the block like:
+     * 
+     * `<div>{t domain=MyDomain}{\t}</div>`
+     * 
+     * That is not really handy but still valid for smaller templates. If you have complex
+     * templates you need to translate using the "{t}...{\t}" extension you probably don't want
+     * set the domain for each translation block. To avoid this you may stop calling "$smarty->fetch()"
+     * directly and wrap it with a method like this.
+     * 
+     * We switch the textdomain of our template to our own and restore the previous textdomain after
+     * rendering the template.
+     * 
+     * @param string $templatePath path to the template
+     * @param string $domain textdomain you want to use, defaults to "core"
+     * @return string the rendered content
+     */
+    function smarty_fetch(string $templatePath, string $domain = 'core'): string
+    {
+        $smarty = get_smarty();
+        $restoreDomain = textdomain(null);
+        textdomain($domain);
+        $display = $smarty->fetch($templatePath);
+        textdomain($restoreDomain);
+        return $display;
+    }
 }
