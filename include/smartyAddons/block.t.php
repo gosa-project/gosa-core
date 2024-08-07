@@ -1,4 +1,5 @@
 <?php
+
 /**
  * block.t.php - Smarty gettext block plugin
  *
@@ -26,7 +27,7 @@
  * @author	Sagi Bashari <sagi@boom.org.il>
  * @copyright 2004-2005 Sagi Bashari
  */
- 
+
 /**
  * Replaces arguments in a string with their values.
  * Arguments are represented by % followed by their number.
@@ -37,22 +38,22 @@
  */
 function smarty_gettext_strarg($str)
 {
-	$tr = array();
-	$p = 0;
+    $tr = array();
+    $p = 0;
 
-	for ($i=1; $i < func_num_args(); $i++) {
-		$arg = func_get_arg($i);
-		
-		if (is_array($arg)) {
-			foreach ($arg as $aarg) {
-				$tr['%'.++$p] = $aarg;
-			}
-		} else {
-			$tr['%'.++$p] = $arg;
-		}
-	}
-	
-	return strtr($str, $tr);
+    for ($i = 1; $i < func_num_args(); $i++) {
+        $arg = func_get_arg($i);
+
+        if (is_array($arg)) {
+            foreach ($arg as $aarg) {
+                $tr['%' . ++$p] = $aarg;
+            }
+        } else {
+            $tr['%' . ++$p] = $arg;
+        }
+    }
+
+    return strtr($str, $tr);
 }
 
 /**
@@ -72,59 +73,73 @@ function smarty_gettext_strarg($str)
  */
 function smarty_block_t($params, $text, &$smarty)
 {
-	if ($text == "") {
-		return "";
-	}
-	
-	$text = stripslashes($text);
+    if ($text == "") {
+        return "";
+    }
 
-	// set escape mode
-	if (isset($params['escape'])) {
-		$escape = $params['escape'];
-		unset($params['escape']);
-	}
-	
-	// set plural version
-	if (isset($params['plural'])) {
-		$plural = $params['plural'];
-		unset($params['plural']);
-		
-		// set count
-		if (isset($params['count'])) {
-			$count = $params['count'];
-			unset($params['count']);
-		}
-	}
-	
-	// use plural if required parameters are set
-	if (isset($count) && isset($plural)) {
-		$text = ngettext($text, $plural, $count);
-	} else { // use normal
-		$text = gettext($text);
-	}
+    $text = stripslashes($text);
 
-	// run strarg if there are parameters
-	if (count($params)) {
-		$text = smarty_gettext_strarg($text, $params);
-	}
+    // set escape mode
+    if (isset($params['escape'])) {
+        $escape = $params['escape'];
+        unset($params['escape']);
+    }
 
-	if (!isset($escape) || $escape == 'html') { // html escape, default
-	   $text = nl2br(htmlspecialchars($text));
-   } elseif (isset($escape)) {
-		switch ($escape) {
-			case 'javascript':
-			case 'js':
-				// javascript escape
-				$text = str_replace('\'', '\\\'', stripslashes($text));
-				break;
-			case 'url':
-				// url escape
-				$text = urlencode($text);
-				break;
-		}
-	}
-	
-	return $text;
+    // set plural version
+    if (isset($params['plural'])) {
+        $plural = $params['plural'];
+        unset($params['plural']);
+
+        // set count
+        if (isset($params['count'])) {
+            $count = $params['count'];
+            unset($params['count']);
+        }
+    }
+
+    // set domain
+    if (isset($params['domain'])) {
+        $domain = $params['domain'];
+        unset($params['domain']);
+    }
+
+    // use domain if isset
+    if (isset($domain)) {
+        // use plural if required parameters are set
+        if (isset($count) && isset($plural)) {
+            $text = dngettext($domain, $text, $plural, $count);
+        } else { // use normal
+            $text = dgettext($domain, $text);
+        }
+    } else {
+        // use plural if required parameters are set
+        if (isset($count) && isset($plural)) {
+            $text = ngettext($text, $plural, $count);
+        } else { // use normal
+            $text = gettext($text);
+        }
+    }
+
+    // run strarg if there are parameters
+    if (count($params)) {
+        $text = smarty_gettext_strarg($text, $params);
+    }
+
+    if (!isset($escape) || $escape == 'html') { // html escape, default
+        $text = nl2br(htmlspecialchars($text));
+    } elseif (isset($escape)) {
+        switch ($escape) {
+            case 'javascript':
+            case 'js':
+                // javascript escape
+                $text = str_replace('\'', '\\\'', stripslashes($text));
+                break;
+            case 'url':
+                // url escape
+                $text = urlencode($text);
+                break;
+        }
+    }
+
+    return $text;
 }
-
-?>
