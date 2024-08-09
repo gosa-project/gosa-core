@@ -1878,7 +1878,7 @@ abstract class plugin
      * @param string $domain textdomain you want to use, defaults to "core"
      * @return string the rendered content
      */
-    function smarty_fetch(string $templatePath, string $domain = 'core'): string
+    function smartyFetch(string $templatePath, string $domain = 'core'): string
     {
         $smarty = get_smarty();
         $restoreDomain = textdomain(null);
