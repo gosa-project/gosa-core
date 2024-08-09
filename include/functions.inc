@@ -167,20 +167,20 @@ function class_available(string $name): bool
  */
 function plugin_available(string $plugin): bool
 {
-    global $class_mapping, $BASE_DIR;
+    global $composerClassMap, $class_mapping, $BASE_DIR;
 
     if (isset($class_mapping[$plugin])) {
         return is_readable($BASE_DIR . "/" . $class_mapping[$plugin]);
     }
 
-    // for the time being we need to do explicit checks for given parent classes defined in gosa-core
-    $declaredClasses = get_declared_classes();
-    if (in_array($plugin, $declaredClasses) && is_subclass_of($plugin, 'plugin')) {
-        return true;
-    }
+    if (isset($composerClassMap[$plugin])) {
+        if (is_subclass_of($plugin, 'plugin')) {
+            return true;
+        }
 
-    if (in_array($plugin, $declaredClasses) && is_subclass_of($plugin, 'management')) {
-        return true;
+        if (is_subclass_of($plugin, 'management')) {
+            return true;
+        }
     }
 
     return false;
