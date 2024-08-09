@@ -22,7 +22,6 @@
 
 /* Get standard functions */
 require_once ("../include/php_setup.inc");
-require_once ("functions.inc");
 
 // Do not use the GOsa default error handler.
 // To do so we require a valid config object - and at this point 
