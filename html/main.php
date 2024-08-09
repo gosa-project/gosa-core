@@ -290,12 +290,12 @@ if (($old_plugin_dir != $plugin_dir && $old_plugin_dir != "") ||
         require("$old_plugin_dir/main.inc");
         $cleanup = $remove_lock = FALSE;
     }
-} else // elseif
-
+} else {
     /* Reset was posted, remove all created locks for the current plugin */
     if ((isset($_GET['reset']) && $_GET['reset'] == 1) || isset($_POST['delete_lock'])) {
         $remove_lock = TRUE;
     }
+}
 
 /* Check for sizelimits */
 eval_sizelimit();
