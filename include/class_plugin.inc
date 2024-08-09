@@ -106,7 +106,7 @@ abstract class plugin
     var $sn = "";
     var $givenName = "";
     var $acl = "*none*";
-    var $dialog = FALSE;
+    var $dialog = null;
     var $snapDialog = NULL;
 
     /* attribute list for save action */
@@ -972,22 +972,21 @@ abstract class plugin
         return (TRUE);
     }
 
-
-
-    /*! \brief  Rename/Move a given src_dn to the given dest_dn
-   *
-   * Move a given ldap object indentified by $src_dn to the
-   * given destination $dst_dn
-   *
-   * - Ensure that all references are updated (ogroups)
-   * - Update ACLs
-   * - Update accessTo
-   *
-   * \param  string  'src_dn' the source DN.
-   * \param  string  'dst_dn' the destination DN.
-   * \return boolean TRUE on success else FALSE.
-   */
-    function rename($src_dn, $dst_dn)
+    /**
+     * Rename/Move a given src_dn to the given dest_dn
+     *
+     * Move a given ldap object indentified by $src_dn to the
+     * given destination $dst_dn
+     *
+     * - Ensure that all references are updated (ogroups)
+     * - Update ACLs
+     * - Update accessTo
+     *
+     * \param  string  'src_dn' the source DN.
+     * \param  string  'dst_dn' the destination DN.
+     * \return boolean TRUE on success else FALSE.
+     */
+    function rename($src_dn, $dst_dn): bool
     {
         $start = microtime(1);
 
@@ -1008,9 +1007,8 @@ abstract class plugin
             return (FALSE);
         }
 
-        /* Get list of users,groups and roles within this tree,
-        maybe we have to update ACL references.
-     */
+        // Get list of users,groups and roles within this tree,
+        // maybe we have to update ACL references.
         $leaf_objs = get_list(
             "(|(objectClass=posixGroup)(objectClass=gosaAccount)(objectClass=gosaRole))",
             array("all"),
@@ -1085,12 +1083,12 @@ abstract class plugin
         }
 
         /* Update roles to use the new entry dn */
-        if (class_available('roleGeneric')) {
+        if (class_available('RoleGeneric')) {
             $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))", "roles", array(get_ou("roleGeneric", "roleRDN")), $this->config->current['BASE'], array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
             // Walk through all roles
             foreach ($roles as $role) {
-                $role = new roleGeneric($this->config, $role['dn']);
+                $role = new GosaRoleManagement\admin\roleManagement\RoleGeneric($this->config, $role['dn']);
                 $key = array_search($src_dn, $role->roleOccupant);
                 if ($key !== FALSE) {
                     $role->roleOccupant[$key] = $dst_dn;
@@ -1148,8 +1146,6 @@ abstract class plugin
         return (TRUE);
     }
 
-
-
     function move($src_dn, $dst_dn)
     {
         /* Do not copy if only upper- lowercase has changed */
@@ -1167,18 +1163,11 @@ abstract class plugin
             $duration = (microtime(TRUE) - $this->initTime)
         );
 
-        /* Try to move the entry instead of copy & delete
-     */
-        if (TRUE) {
-
-            /* Try to move with ldap routines, if this was not successfull
-          fall back to the old style copy & remove method
-       */
-            if ($this->rename($src_dn, $dst_dn)) {
-                return (TRUE);
-            } else {
-                // See code below.
-            }
+        // Try to move the entry instead of copy & delete
+        // Try to move with ldap routines, if this was not successfull
+        // fall back to the old style copy & remove method
+        if ($this->rename($src_dn, $dst_dn)) {
+            return (TRUE);
         }
 
         /* Copy source to destination */
