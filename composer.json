@@ -7,8 +7,7 @@
     ],
     "require": {
         "php": ">=8.1",
-        "smarty/smarty": "~4.3",
-        "gonicus/gosa2-plugin-mailaddress" : "1.0"
+        "smarty/smarty": "~4.3"
     },
     "authors": [
         {
@@ -19,14 +18,5 @@
     ],
     "support": {
         "issues" : "https://github.com/gosa-project/gosa-core"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../gosa-plugin-mailaddress",
-            "options": {
-                "symlink": false
-            }
-        }
-    ]
+    }
 }
