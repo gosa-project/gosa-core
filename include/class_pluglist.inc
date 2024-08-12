@@ -105,11 +105,15 @@ class pluglist
         //   $this->genPathMenu();
     }
 
-    /*! \brief    Tries to register a plugin in the pluglist
-     *            Checks existence and ACL for the given plugin.
-     *            Returns true in case of success else false.
+    /**
+     * Tries to register a plugin in the pluglist.
+     * Checks existence and ACL for the given plugin.
+     * Returns true in case of success else false.
+     * 
+     * @param &$plug
+     * @return bool
      */
-    public function registerPlugin(&$plug)
+    public function registerPlugin(&$plug): bool
     {
         global $class_mapping;
 
@@ -158,11 +162,12 @@ class pluglist
         return true;
     }
 
-    /*! \brief  Check whether we are allowed to modify the given acl or not..
-     *		This function is used to check which plugins are visible.
+    /**
+     * Check whether we are allowed to modify the given acl or not..
+     * This function is used to check which plugins are visible.
      *
-     *  @param	The acl tag to check for, eg. 	"users/user:self", "systems", ...
-     *  @return	Boolean TRUE on success else FALSE
+     * @param $aclname acl tag to check for, eg. 	"users/user:self", "systems", ...
+     * @return bool TRUE on success else FALSE
      */
     public function check_access($aclname)
     {
@@ -687,7 +692,7 @@ class pluglist
     /*! \brief    Returns the installation path of a plugin.
      *            e.g. '../plugins/admin/mimetypes'
      */
-    public function get_path($index)
+    public function get_path($index): string
     {
         if (!isset($this->dirlist[$index])) {
             return '';
