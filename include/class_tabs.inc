@@ -337,7 +337,7 @@ class tabs
                 $tabClass .= " info";
             }
 
-            $onClick = "document.mainform.arg.value='".addslashes($class)."'; document.mainform.submit();";
+            $onClick = "document.mainform.arg.value='" . addslashes($class) . "'; document.mainform.submit();";
             switch ($theme) {
                 case 'classic':
                     if (!empty($tabClass)) $tabClass = "class='{$tabClass}'";
