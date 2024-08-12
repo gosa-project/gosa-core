@@ -24,7 +24,7 @@
 $start = microtime();
 
 // Will be used in the "stats" plugin later, to be able calculate the elapsed render time.
-$overallRenderTimer = microtime(TRUE);
+$overallRenderTimer = microtime(true);
 
 /* Basic setup, remove eventually registered sessions */
 require_once("../include/php_setup.inc");
@@ -42,7 +42,7 @@ textdomain($domain);
 session::start();
 session::set('errorsAlreadyPosted', array());
 session::global_set('runtime_cache', array());
-session::set('limit_exceeded', FALSE);
+session::set('limit_exceeded', false);
 
 // Count number of page reloads
 if (!session::is_set('clicks')) {
@@ -59,20 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 DEBUG(DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, session::get_all(), "_SESSION");
 
-/* Logged in? Simple security check */
-// if (!session::global_is_set('config')){
-//   new log("security","login","",array(),"main.php called without session - logging out") ;
-//   header ("Location: logout.php");
-//   exit;
-// }
-
 /* Check for uniqe ip address */
 $ui = session::global_get('ui');
-// if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
-//   new log("security","login","",array(),"main.php called with session which has a changed IP address.") ;
-//   header ("Location: logout.php");
-//   exit;
-// }
+
 $config = session::global_get('config');
 $config->check_and_reload();
 $config->configRegistry->reload();
@@ -95,9 +84,8 @@ if (session::global_get('_LAST_PAGE_REQUEST') == "") {
     /* get time difference between last page reload */
     $request_time = (time() - session::global_get('_LAST_PAGE_REQUEST'));
 
-    /* If page wasn't reloaded for more than max_life seconds
-   * kill session
-   */
+    // If page wasn't reloaded for more than max_life seconds
+    // kill session
     if ($request_time > $max_life) {
         session::destroy();
         new log("security", "login", "", array(), "main.php called without session - logging out");
@@ -147,7 +135,7 @@ $GLOBALS['t_gettext_message_dir'] = $BASE_DIR . '/locale/';
 if (
     $config->boolValueIsTrue('core', 'schemaCheck') &&
     !$config->configRegistry->schemaCheckFinished() &&
-    !$config->configRegistry->validateSchemata($force = FALSE, $disableIncompatiblePlugins = TRUE)
+    !$config->configRegistry->validateSchemata($force = false, $disableIncompatiblePlugins = true)
 ) {
     $config->configRegistry->displayRequirementErrors();
 }
@@ -187,7 +175,7 @@ if (!session::global_is_set('plist')) {
     session::global_set('plist', new pluglist($config, $ui));
 
     /* Load ocMapping into userinfo */
-    $tmp = new acl($config, NULL, $ui->dn);
+    $tmp = new acl($config, null, $ui->dn);
     $ui->ocMapping = $tmp->ocMapping;
     session::global_set('ui', $ui);
 }
@@ -220,7 +208,7 @@ $plist->genPathMenu();
 $plist->genBreadcrumb();
 
 /* check if we are using account expiration */
-$smarty->assign("hideMenus", FALSE);
+$smarty->assign("hideMenus", false);
 if ($config->boolValueIsTrue("core", "handleExpiredAccounts")) {
     $expired = ldap_expired_account($config, $ui->dn, $ui->username);
 
@@ -229,18 +217,18 @@ if ($config->boolValueIsTrue("core", "handleExpiredAccounts")) {
         // The users password is about to xpire soon, display a warning message.
         new log("security", "gosa", "", array(), "password for user \"$ui->username\" is about to expire");
         msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
-        session::set('POSIX_WARN_ABOUT_EXPIRATION__DONE', TRUE);
+        session::set('POSIX_WARN_ABOUT_EXPIRATION__DONE', true);
     } elseif ($expired == POSIX_FORCE_PASSWORD_CHANGE) {
 
         // The password is expired, we are now going to enforce a new one from the user.
 
         // Hide the GOsa menus to avoid leaving the enforced password change dialog.
-        $smarty->assign("hideMenus", TRUE);
+        $smarty->assign("hideMenus", true);
         $plug = (isset($_GET['plug'])) ? $_GET['plug'] : null;
 
         // Detect password plugin id:
         $passId =  array_search('password', $plist->pluginList);
-        if ($passId !== FALSE) {
+        if ($passId !== false) {
             $_GET['plug'] = $passId;
         }
     }
@@ -265,7 +253,7 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])) {
 }
 
 // Display the welcome page for admins (iconmenu) and an info page for those
-//  who are not allowed to adminstrate anything (user)
+// who are not allowed to adminstrate anything (user)
 if (count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('currentPlugin') == "welcome") {
     session::global_set('plugin_dir', "infoPage");
     session::global_set('currentPlugin', 'welcome');
@@ -277,8 +265,8 @@ if (count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('curre
     - Remove all created locks if "reset" was posted.
     - Remove all created locks if we switched to another plugin.
 */
-$cleanup    = FALSE;
-$remove_lock = FALSE;
+$cleanup    = false;
+$remove_lock = false;
 
 /* Check if we have changed the selected plugin
 */
@@ -286,14 +274,14 @@ if (($old_plugin_dir != $plugin_dir && $old_plugin_dir != "") ||
     (isset($_GET['reset']) && $_GET['reset'] == 1)
 ) {
     if (is_file("$old_plugin_dir/main.inc")) {
-        $cleanup = $remove_lock = TRUE;
+        $cleanup = $remove_lock = true;
         require("$old_plugin_dir/main.inc");
-        $cleanup = $remove_lock = FALSE;
+        $cleanup = $remove_lock = false;
     }
 } else {
     /* Reset was posted, remove all created locks for the current plugin */
     if ((isset($_GET['reset']) && $_GET['reset'] == 1) || isset($_POST['delete_lock'])) {
-        $remove_lock = TRUE;
+        $remove_lock = true;
     }
 }
 
@@ -354,7 +342,7 @@ if (isset($plug)) {
 } else {
     $plug = "";
 }
-if (session::global_get('js') == FALSE) {
+if (session::global_get('js') == false) {
     $smarty->assign("javascript", "false");
     $smarty->assign("help_method", "href='helpviewer.php$plug' target='_blank'");
 } else {
@@ -526,7 +514,7 @@ if ($config->get_cfg_value("core", "storeFilterSettings") == "true") {
     if (isset($_GET['plug'])) {
         $cookie[$ui->dn]['plug'] = $_GET['plug'];
     }
-    @setcookie("GOsa_Filter_Settings", base64_encode(json_encode($cookie)), time() + (60 * 60 * 24));
+    setcookie("GOsa_Filter_Settings", base64_encode(json_encode($cookie)), time() + (60 * 60 * 24));
 }
 
 /* Show page... */
