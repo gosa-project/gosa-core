@@ -2765,15 +2765,19 @@ function get_languages($languages_in_own_language = FALSE, $strip_region_tag = F
 }
 
 
-/*! \brief Returns contents of the given POST variable and check magic quotes settings
+/**
+ * Returns contents of the given POST variable and check magic quotes settings
  *
  * Depending on the magic quotes settings this returns a stripclashed'ed version of
  * a certain POST variable.
+ * 
+ * @todo get_magic_quotes_gpc is not available any longer so the code was removed
+ * but removing it leaves this function behind and this needs some review later
  *
- * \param string 'name' the POST var to return ($_POST[$name])
- * \return string
+ * @param string $name the POST var to return ($_POST[$name])
+ * @return string
  * */
-function get_post($name)
+function get_post(string $name): string
 {
     if (!isset($_POST[$name])) {
         trigger_error("Requested POST value (" . $name . ") does not exist, you should add a check to prevent this message.");
@@ -2783,32 +2787,28 @@ function get_post($name)
     // Handle Posted Arrays
     $tmp = array();
     if (is_array($_POST[$name]) && !is_string($_POST[$name])) {
-        if (version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()) {
-            array_walk_recursive($_POST, "stripcslashes");
-        }
         $tmp = $_POST;
         return ($tmp[$name]);
     } else {
-
-        if (version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()) {
-            $val = stripcslashes($_POST[$name]);
-        } else {
-            $val = $_POST[$name];
-        }
+        $val = $_POST[$name];
     }
     return ($val);
 }
 
 
-/*! \brief Returns contents of the given POST variable and check magic quotes settings
+/**
+ * Returns contents of the given POST variable and check magic quotes settings
  *
  * Depending on the magic quotes settings this returns a stripclashed'ed version of
  * a certain POST variable.
+ * 
+ * @todo get_magic_quotes_gpc is not available any longer so the code was removed
+ * but removing it leaves this function behind and this needs some review later
  *
- * \param string 'name' the POST var to return ($_POST[$name])
- * \return string
- * */
-function get_binary_post($name)
+ * @param string 'name' the POST var to return ($_POST[$name])
+ * @return string
+ */
+function get_binary_post(string $name)
 {
     if (!isset($_POST[$name])) {
         trigger_error("Requested POST value (" . $name . ") does not exists, you should add a check to prevent this message.");
@@ -2816,11 +2816,8 @@ function get_binary_post($name)
     }
 
     $p = str_replace('\0', '', $_POST[$name]);
-    if (get_magic_quotes_gpc()) {
-        return (stripcslashes($p));
-    } else {
-        return ($_POST[$p]);
-    }
+
+    return ($_POST[$p]);
 }
 
 function set_post($value)
