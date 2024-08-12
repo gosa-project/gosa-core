@@ -278,6 +278,12 @@ if (($old_plugin_dir != $plugin_dir && $old_plugin_dir != "") ||
         require("$old_plugin_dir/main.inc");
         $cleanup = $remove_lock = false;
     }
+
+    if (is_file("$old_plugin_dir/main.php")) {
+        $cleanup = $remove_lock = true;
+        require("$old_plugin_dir/main.php");
+        $cleanup = $remove_lock = false;
+    }
 } else {
     /* Reset was posted, remove all created locks for the current plugin */
     if ((isset($_GET['reset']) && $_GET['reset'] == 1) || isset($_POST['delete_lock'])) {
@@ -407,6 +413,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (is_file("$plugin_dir/main.inc")) {
     $display = "";
     require("$plugin_dir/main.inc");
+} elseif(is_file("$plugin_dir/main.php")) {
+    $display = "";
+    require("$plugin_dir/main.php");
 } else {
     msg_dialog::display(
         _("Plug-in"),
@@ -415,7 +424,6 @@ if (is_file("$plugin_dir/main.inc")) {
     );
     exit();
 }
-
 
 /* Print_out last ErrorMessage repeated string. */
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
