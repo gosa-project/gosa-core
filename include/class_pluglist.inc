@@ -115,7 +115,7 @@ class pluglist
      */
     public function registerPlugin(&$plug): bool
     {
-        global $class_mapping;
+        global $composerClassMap, $class_mapping;
 
         // Clean ACL string, we do not want any spaces or lines breaks here.
         $plug['ACL'] = trim($plug['ACL']);
@@ -155,7 +155,13 @@ class pluglist
         if (!$this->check_access($plug['ACL'])) {
             return false;
         }
-        $this->dirlist[$this->index] = dirname($class_mapping[$plug['CLASS']]);
+
+        $tPath = $class_mapping[$plug['CLASS']] ?? '';
+        if ($tPath === '') {
+            $tPath = $composerClassMap[$plug['CLASS']];
+        }
+
+        $this->dirlist[$this->index] = dirname($tPath);
         $this->pluginList[$this->index] = $plug['CLASS'];
         ++$this->index;
 
@@ -698,7 +704,15 @@ class pluglist
             return '';
         }
 
-        return '../' . $this->dirlist[$index];
+        $tPath = "";
+
+        if (is_dir($this->dirlist[$index])) {
+            $tPath = $this->dirlist[$index];
+        } else {
+            $tPath = '../' . $this->dirlist[$index];
+        }
+
+        return $tPath;
     }
 
     /*! \brief    Returns the plugins id for a given class.
