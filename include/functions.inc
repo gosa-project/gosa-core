@@ -141,20 +141,30 @@ function cyrillic2ascii($str)
     return str_replace($ru, $en, $str);
 }
 
-/*! \brief Checks if a class is available.
- *  \param  string 'name' The subject of the test
- *  \return boolean True if class is available, else false.
+/**
+ * Checks if a class is available.
+ *
+ * @param  string 'name' The subject of the test
+ * @return boolean True if class is available, else false.
  */
-function class_available(string $name): bool
+function class_available(string $className): bool
 {
-    global $class_mapping, $config;
+    global $composerClassMap, $class_mapping, $config;
 
     $disabled = array();
     if ($config instanceof config && $config->configRegistry instanceof configRegistry) {
         $disabled = $config->configRegistry->getDisabledPlugins();
     }
 
-    return (isset($class_mapping[$name]) && !isset($disabled[$name]));
+    if (isset($class_mapping[$className]) && !isset($disabled[$className])) {
+        return true;
+    }
+
+    if (isset($composerClassMap[$className])) {
+        return true;
+    }
+
+    return false;
 }
 
 
