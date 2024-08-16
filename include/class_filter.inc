@@ -38,13 +38,12 @@ class filter
     public $converter = null;
     public $pid;
     public $customConstraints = [];
+    public $autocompleters = [];
 
-    var $theme;
+    public $theme;
 
     public function __construct($filename)
     {
-        global $config;
-
         $this->theme = getThemeName();
 
         // Load eventually passed filename
@@ -153,7 +152,7 @@ class filter
             case 'classic':
                 $size = 30;
                 $maxlength = 30;
-                $result = "<input class='filter_textfield' placeholder='"._('Search')."...' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='".$value."'>";
+                $result = "<input class='filter_textfield' placeholder='" . _('Search') . "...' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='" . $value . "'>";
                 if ($element && isset($element['autocomplete'])) {
                     $frequency = '0.5';
                     $characters = '1';
@@ -163,20 +162,19 @@ class filter
                     if (isset($element['autocomplete']['characters'])) {
                         $characters = $element['autocomplete']['characters'];
                     }
-                    $result .= "<div id='autocomplete$tag' class='autocomplete'></div>".
-                        "<script type='text/javascript'>".
-                        "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });".
+                    $result .= "<div id='autocomplete$tag' class='autocomplete'></div>" .
+                        "<script type='text/javascript'>" .
+                        "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });" .
                         '</script>';
 
                     $this->autocompleters[$tag] = $element;
                 }
                 break;
             default:
-                $result = " <input class='filter_textfield' placeholder='"._('Search')."...' id='$tag' name='$tag' type='text' value='".$value."'>";
+                $result = " <input class='filter_textfield' placeholder='" . _('Search') . "...' id='$tag' name='$tag' type='text' value='" . $value . "'>";
                 break;
         }
         return $result;
-
     }
 
     public function getCurrentBase()
@@ -221,9 +219,9 @@ class filter
     {
         switch ($this->theme) {
             case 'classic':
-                $content = "<table class='filter-wrapper' summary='"._('Search filter')."'><tr><td>".$this->renderFilterMenu().'</td><td>';
-                $content .= "<div class='search-filter'>".$this->getTextfield('search_filter', set_post($this->value), $this->searches[$this->search]).'</div>'.
-                    "&nbsp;<button class='search-filter' type='submit' title='"._('Search')."'>".image('images/find.png').'</button></td></tr></table>';
+                $content = "<table class='filter-wrapper' summary='" . _('Search filter') . "'><tr><td>" . $this->renderFilterMenu() . '</td><td>';
+                $content .= "<div class='search-filter'>" . $this->getTextfield('search_filter', set_post($this->value), $this->searches[$this->search]) . '</div>' .
+                    "&nbsp;<button class='search-filter' type='submit' title='" . _('Search') . "'>" . image('images/find.png') . '</button></td></tr></table>';
                 break;
 
             default:
@@ -232,20 +230,20 @@ class filter
                 $content = $this->renderFilterMenu();
 
                 $content .= "   <div class='search-field'>
-                                    ".$this->getTextfield('search_filter', set_post($this->value), $s)."
-                                    <button class='btn' type='submit' title='"._('Search')."'>
+                                    " . $this->getTextfield('search_filter', set_post($this->value), $s) . "
+                                    <button class='btn' type='submit' title='" . _('Search') . "'>
                                         <i class='material-icons md-18'>search</i>
                                     </button>
                                 </div>";
                 break;
         }
         // Return meta data
-        return "<input type='hidden' name='FILTER_PID' value='".$this->pid."'>".$content;
+        return "<input type='hidden' name='FILTER_PID' value='" . $this->pid . "'>" . $content;
     }
 
     public function query()
     {
-        global $class_mapping;
+        global $class_mapping, $composerClassMap;
         $result = [];
 
         // Return empty list if initial is not set
@@ -261,9 +259,11 @@ class filter
             }
 
             // Is backend available?
-            $backend = 'filter'.$query['backend'];
+            $backend = 'filter' . $query['backend'];
             if (!isset($class_mapping["$backend"])) {
-                exit('Invalid backend specified in search config.');
+                if (!isset($composerClassMap[$query['backend']])) {
+                    exit('Invalid backend specified in search config.');
+                }
             }
 
             // Load filter and attributes
@@ -283,7 +283,7 @@ class filter
             if ($this->value == '') {
                 $filter = preg_replace('/\$/', '*', $filter);
             } else {
-                $filter = preg_replace('/\$/', '*'.LDAP::escapeValue($this->value).'*', $filter);
+                $filter = preg_replace('/\$/', '*' . LDAP::escapeValue($this->value) . '*', $filter);
             }
 
             $result = array_unique(array_merge($result, call_user_func([$backend, 'query'], $this->base, $this->scope, $filter, $this->attributes, $this->category, $this->objectStorage)), SORT_REGULAR);
@@ -368,14 +368,21 @@ class filter
             $queries = [$queries];
         }
         foreach ($queries as $query) {
-            $backend = 'filter'.$query['backend'];
+            $backend = 'filter' . $query['backend'];
             if (!isset($class_mapping["$backend"])) {
                 exit('Invalid backend specified in search config.');
             }
-            $filter = preg_replace('/\$/', '*'.LDAP::escapeValue($value).'*', $query['filter']);
+            $filter = preg_replace('/\$/', '*' . LDAP::escapeValue($value) . '*', $query['filter']);
 
-            $result = array_merge($result, call_user_func([$backend, 'query'], $this->base, $this->scope, $filter, $attributes,
-                        $this->category, $this->objectStorage));
+            $result = array_merge($result, call_user_func(
+                [$backend, 'query'],
+                $this->base,
+                $this->scope,
+                $filter,
+                $attributes,
+                $this->category,
+                $this->objectStorage
+            ));
         }
 
         foreach ($result as $entry) {
@@ -410,7 +417,7 @@ class filter
 
             echo '<ul>';
             foreach ($result as $entry) {
-                echo '<li>'.mark(get_post('search_filter'), $entry).'</li>';
+                echo '<li>' . mark(get_post('search_filter'), $entry) . '</li>';
                 if ($max-- == 0) {
                     break;
                 }
@@ -431,7 +438,7 @@ class filter
             $storage = [$storage];
         }
         foreach ($storage as $location) {
-            $pattern = '/^[^,]+,'.preg_quote($location, '/').'/i';
+            $pattern = '/^[^,]+,' . preg_quote($location, '/') . '/i';
             $base = preg_replace($pattern, '', $dn);
         }
 
@@ -450,7 +457,7 @@ class filter
         switch ($this->theme) {
             case 'classic':
                 // Load shortcut
-                $result = "<ul class='level1' id='filter-root'><li><a href='#'>".image('images/filter.png').image('images/lists/sort-down.png').'</a>';
+                $result = "<ul class='level1' id='filter-root'><li><a href='#'>" . image('images/filter.png') . image('images/lists/sort-down.png') . '</a>';
 
                 // Build ul/li list
                 $separator = " style='border-top:1px solid #AAA' ";
@@ -460,9 +467,9 @@ class filter
                 foreach ($this->xmlSearches as $tag => $conf) {
                     $label = htmlentities(_($conf['label']), ENT_COMPAT, 'UTF-8');
                     if ($tag == $this->search) {
-                        $result .= "<li><a href='#'>".image('images/checked.png').'&nbsp;'.$label.'</a></li>';
+                        $result .= "<li><a href='#'>" . image('images/checked.png') . '&nbsp;' . $label . '</a></li>';
                     } else {
-                        $result .= "<li><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>".image('images/empty.png').'&nbsp;'.$label.'</a></li>';
+                        $result .= "<li><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>" . image('images/empty.png') . '&nbsp;' . $label . '</a></li>';
                     }
                 }
 
@@ -470,9 +477,9 @@ class filter
                 $first = true;
                 foreach (userFilter::getFilter($this->category) as $tag => $conf) {
                     if ($tag == $this->search) {
-                        $result .= '<li'.($first ? $separator : '')."><a href='#'>".image('images/checked.png').'&nbsp;'._($conf['description']).'</a></li>';
+                        $result .= '<li' . ($first ? $separator : '') . "><a href='#'>" . image('images/checked.png') . '&nbsp;' . _($conf['description']) . '</a></li>';
                     } else {
-                        $result .= '<li'.($first ? $separator : '')."><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>".image('images/empty.png').'&nbsp;'._($conf['description']).'</a></li>';
+                        $result .= '<li' . ($first ? $separator : '') . "><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>" . image('images/empty.png') . '&nbsp;' . _($conf['description']) . '</a></li>';
                     }
 
                     $first = false;
@@ -480,11 +487,11 @@ class filter
 
                 // Render scope if set to auto
                 if ($this->scopeMode == 'auto') {
-                    $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>".($this->scope == 'one' ? image('images/empty.png') : image('images/checked.png')).'&nbsp;'._('Search in subtrees').'</a></li>';
+                    $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>" . ($this->scope == 'one' ? image('images/empty.png') : image('images/checked.png')) . '&nbsp;' . _('Search in subtrees') . '</a></li>';
                 }
 
                 // Edit filter menu
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>".image('images/configure.png').'&nbsp;'._('Edit filters').'...</a></li>';
+                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>" . image('images/configure.png') . '&nbsp;' . _('Edit filters') . '...</a></li>';
 
                 $result .= '</ul>';
 
@@ -508,14 +515,14 @@ class filter
                     if ($tag == $this->search) {
                         $result .= " <li class='collection-item'>
                                         <a href='#' class='active'>
-                                            ".image("<i class='material-icons'>checked</i>").'
-                                            '.$label.'
+                                            " . image("<i class='material-icons'>checked</i>") . '
+                                            ' . $label . '
                                         </a>
                                     </li>';
                     } else {
                         $result .= " <li class='collection-item'>
                                         <a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>
-                                            ".$label.'
+                                            " . $label . '
                                         </a>
                                     </li>';
                     }
@@ -525,20 +532,20 @@ class filter
                 $first = true;
                 foreach (userFilter::getFilter($this->category) as $tag => $conf) {
                     if ($tag == $this->search) {
-                        $result .= "<li ".($first ? $separator : '')."></li>
+                        $result .= "<li " . ($first ? $separator : '') . "></li>
                                     <li class='collection-item'>
                                         <div>
-                                            "._($conf['description'])."
+                                            " . _($conf['description']) . "
                                             <a class='secondary-content' href='#'>
-                                                ".image("<i class='material-icons md-18'>checked</i>").'
+                                                " . image("<i class='material-icons md-18'>checked</i>") . '
                                             </a>
                                         </div>
                                     </li>';
                     } else {
-                        $result .= "<li ".($first ? $separator : '')."></li>
+                        $result .= "<li " . ($first ? $separator : '') . "></li>
                                     <li class='collection-item'>
                                         <div>
-                                            "._($conf['description'])."
+                                            " . _($conf['description']) . "
                                             <a class='secondary-content' href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'></a>
                                         </div>
                                     </li>";
@@ -550,9 +557,9 @@ class filter
                 if ($this->scopeMode == 'auto') {
                     $result .= "<li $separator></li>
                                 <li class='collection-item'>
-                                    <a href='#' class='search-subtree".($this->scope == 'one' ? " '" : " active'")." onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>
-                                        ".($this->scope == 'one' ? '' : "<i class='material-icons left'>checked</i>")."
-                                        "._('Search in subtrees')."
+                                    <a href='#' class='search-subtree" . ($this->scope == 'one' ? " '" : " active'") . " onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>
+                                        " . ($this->scope == 'one' ? '' : "<i class='material-icons left'>checked</i>") . "
+                                        " . _('Search in subtrees') . "
                                     </a>
                                 </li>";
                 }
@@ -562,7 +569,7 @@ class filter
                                 <li class='collection-item'>
                                     <a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>
                                         <i class='material-icons'>settings</i>
-                                    "._('Edit filters')."...
+                                    " . _('Edit filters') . "...
                                     </a>
                                 </li>";
 
@@ -571,7 +578,7 @@ class filter
                 $gridClass = "class='filtermenu'";
                 break;
         }
-        return "<div $gridClass id='filtermenu'>".$result."</li></ul></div>$script";
+        return "<div $gridClass id='filtermenu'>" . $result . "</li></ul></div>$script";
     }
 
     public function getFixedFilters()
@@ -579,5 +586,3 @@ class filter
         return array_keys($this->searches);
     }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
