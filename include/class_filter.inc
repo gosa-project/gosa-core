@@ -349,7 +349,7 @@ class filter
 
     public function getCompletitionList($config, $value = '*')
     {
-        global $class_mapping;
+        global $class_mapping, $composerClassMap;
         $res = [];
 
         // Load result attributes
@@ -370,7 +370,9 @@ class filter
         foreach ($queries as $query) {
             $backend = 'filter' . $query['backend'];
             if (!isset($class_mapping["$backend"])) {
-                exit('Invalid backend specified in search config.');
+                if (!isset($composerClassMap[$query['backend']])) {
+                    exit('Invalid backend specified in search config.');
+                }
             }
             $filter = preg_replace('/\$/', '*' . LDAP::escapeValue($value) . '*', $query['filter']);
 
@@ -404,7 +406,6 @@ class filter
 
     public function processAutocomplete()
     {
-        global $class_mapping;
         $result = [];
 
         // Introduce maximum number of entries
