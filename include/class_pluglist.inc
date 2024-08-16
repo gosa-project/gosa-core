@@ -636,7 +636,7 @@ class pluglist
      */
     public function getPlugData($class)
     {
-        global $class_mapping;
+        global $class_mapping, $composerClassMap;
         $vars = get_class_vars($class);
         $plHeadline = _($vars['plHeadline']);
         $plDescription = _($vars['plDescription']);
@@ -683,10 +683,13 @@ class pluglist
 
         // Detect the correct position of the plugin icon
         if (!preg_match("/\//", $plShortIcon)) {
+
+            $tPath = $class_mapping[$class] ?? $composerClassMap[$class] ?? '';
+
             $shortImage = get_template_path('plugins/' . preg_replace(
                 '%^.*/([^/]+)/[^/]+$%',
                 '\1',
-                $class_mapping[$class]
+                $tPath
             ) . "/images/$plShortIcon");
         } else {
             $shortImage = $plShortIcon;
