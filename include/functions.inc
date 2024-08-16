@@ -2775,24 +2775,24 @@ function get_languages($languages_in_own_language = FALSE, $strip_region_tag = F
  * but removing it leaves this function behind and this needs some review later
  *
  * @param string $name the POST var to return ($_POST[$name])
- * @return string
+ * @return
  * */
-function get_post(string $name): string
+function get_post(string $name)
 {
     if (!isset($_POST[$name])) {
         trigger_error("Requested POST value (" . $name . ") does not exist, you should add a check to prevent this message.");
-        return (FALSE);
+        return false;
     }
 
     // Handle Posted Arrays
     $tmp = array();
     if (is_array($_POST[$name]) && !is_string($_POST[$name])) {
         $tmp = $_POST;
-        return ($tmp[$name]);
+        return $tmp[$name];
     } else {
         $val = $_POST[$name];
     }
-    return ($val);
+    return $val;
 }
 
 
