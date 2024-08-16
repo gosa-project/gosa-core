@@ -65,6 +65,7 @@ function __gosa_autoload($class_name)
     if (isset($class_mapping["$class_name"])) {
         require_once($BASE_DIR . "/" . $class_mapping["$class_name"]);
     } else {
+        //var_dump(debug_backtrace());
         echo sprintf(_("Fatal error: cannot instantiate class %s - try running %s to fix this"), bold($class_name), bold("update-gosa"));
         exit;
     }
