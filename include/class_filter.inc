@@ -263,6 +263,8 @@ class filter
             if (!isset($class_mapping["$backend"])) {
                 if (!isset($composerClassMap[$query['backend']])) {
                     exit('Invalid backend specified in search config.');
+                } else {
+                    $backend = $query['backend'];
                 }
             }
 
@@ -372,6 +374,8 @@ class filter
             if (!isset($class_mapping["$backend"])) {
                 if (!isset($composerClassMap[$query['backend']])) {
                     exit('Invalid backend specified in search config.');
+                } else {
+                    $backend = $query['backend'];
                 }
             }
             $filter = preg_replace('/\$/', '*' . LDAP::escapeValue($value) . '*', $query['filter']);
