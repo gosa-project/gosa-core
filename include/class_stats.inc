@@ -1,18 +1,17 @@
 <?php
 
-class stats 
+class stats
 {
+    protected static $lastCpuLoad = "";
+    protected static $lastCpuLoadTimestamp = 0;
 
-    static protected $lastCpuLoad = "";
-    static protected $lastCpuLoadTimestamp = 0;
+    protected static $tableName = "stats";
 
-    static protected $tableName = "stats";
-
-    static protected $lastHandle = NULL;
-    static protected $statsEnabled = FALSE;
+    protected static $lastHandle = null;
+    protected static $statsEnabled = false;
 
 
-    /*! \brief     This method tries to connect the GOsa-stats database and 
+    /*! \brief     This method tries to connect the GOsa-stats database and
      *              then returns a database handle on success else NULL.
      *
      *             (The GOsa-stats database has to be enabled : statsDatabaseEnabled/statsDatabaseDirectory)
@@ -28,56 +27,58 @@ class stats
         global $config;
 
         // Check if Logging is enabled
-        if(!is_object($config) || ! $config instanceOf config){
-            return(NULL);
+        if (!is_object($config) || ! $config instanceof config) {
+            return(null);
         }
 
         $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
-        if(empty($path)){
-            return(NULL);
+        if (empty($path)) {
+            return(null);
         }
 
         // Check if path exists, if not try to create it
-        if(!is_dir($path) ){
+        if (!is_dir($path)) {
             $res = @mkdir($path);
-            if(!$res){
-                return(NULL);
+            if (!$res) {
+                return(null);
             }
         }
 
         // Append a date suffix to the database file, to prevent huge and unusable database files.
-        if($filename == ''){
+        if ($filename == '') {
             $filename = date('Y-m-d');
         }
-        $tableFile = $path.'/'.$filename;
+        $tableFile = $path . '/' . $filename;
 
         // Try to return last valid handle.
-        if(file_exists($tableFile) && 
-                isset(stats::$lastHandle[$filename]) && 
-                stats::$lastHandle[$filename] != NULL &&
-                is_resource(stats::$lastHandle[$filename])){
+        if (
+            file_exists($tableFile) &&
+                isset(stats::$lastHandle[$filename]) &&
+                stats::$lastHandle[$filename] != null &&
+                is_resource(stats::$lastHandle[$filename])
+        ) {
             return(stats::$lastHandle[$filename]);
         }
 
-        // Get statsFile property 
+        // Get statsFile property
         stats::$statsEnabled = $config->boolValueIsTrue('core', 'statsDatabaseEnabled');
-        if(!stats::$statsEnabled){
-            return(NULL);
+        if (!stats::$statsEnabled) {
+            return(null);
         }
 
         // Check for SQLite extension
-        if(!stats::checkSQLiteExtension()){
-            return(NULL);
+        if (!stats::checkSQLiteExtension()) {
+            return(null);
         }
 
         // Check if we are able to read/write the given database file.
-        if(!is_writeable($path) && !is_writeable(dirname($tableFile))){
-            return(NULL);
+        if (!is_writeable($path) && !is_writeable(dirname($tableFile))) {
+            return(null);
         }
 
         // Try to create database, if it exists just open it.
         $handle = sqlite_open($tableFile, 0666, $error);
-        if($handle){
+        if ($handle) {
             stats::createDatabaseOnDemand($handle);
         }
         stats::$lastHandle[$filename] = $handle;
@@ -93,25 +94,25 @@ class stats
         $res = array();
 
         // Check if we're creating logs right now.
-        if(stats::getDatabaseHandle()){
+        if (stats::getDatabaseHandle()) {
             global $config;
 
             // Walk through all files found in the storage path
             $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
             $dir = opendir($path);
-            while($file = readdir($dir)){
-                if(is_file($path.'/'.$file) && !preg_match('/.old$/', $file)) {
+            while ($file = readdir($dir)) {
+                if (is_file($path . '/' . $file) && !preg_match('/.old$/', $file)) {
                     $res[] = $file;
                 }
             }
-        } 
-        return($res);   
+        }
+        return($res);
     }
 
 
     /*! \brief      Check whether the qlite extension is available or not.
      *  @return     boolean     TRUE on success else FALSE
-     */  
+     */
     static function checkSQLiteExtension()
     {
         return(function_exists('sqlite_popen'));
@@ -120,35 +121,35 @@ class stats
 
     /*! \brief      Drops the current stats table and thus enforces a recreation.
      *  @param      handle      The database handle to use.
-     */  
+     */
     static function dropTable($handle)
     {
         $TABLE_NAME = stats::$tableName;
         $query = "DROP TABLE '{$TABLE_NAME}'";
         $ret = sqlite_query($query, $handle);
-        stats::$lastHandle = NULL;
+        stats::$lastHandle = null;
         stats::getDatabaseHandle();
     }
 
 
     /*! \brief      Returns the currently used amount of memory form the PHP process.
      *  @return     int     The amount of bytes used for the PHP process.
-     */  
+     */
     static function get_memory_usage()
     {
         return(memory_get_usage());
     }
 
 
-    /*! \brief      Returns the current CPU load. 
+    /*! \brief      Returns the current CPU load.
      *              The result will be cached and one updated every 5 seconds.
      *  @return     float       The current 'cpu_load'.
-     */  
+     */
     static function get_cpu_load()
     {
         $cur = time();
-        if(empty(stats::$lastCpuLoad) || (($cur - stats::$lastCpuLoadTimestamp) >= 5 )){
-            list($one, $five, $ten) =preg_split("/ /",shell_exec('cat /proc/loadavg'));
+        if (empty(stats::$lastCpuLoad) || (($cur - stats::$lastCpuLoadTimestamp) >= 5 )) {
+            list($one, $five, $ten) = preg_split("/ /", shell_exec('cat /proc/loadavg'));
             stats::$lastCpuLoad = $one;
             stats::$lastCpuLoadTimestamp = $cur;
         }
@@ -159,7 +160,7 @@ class stats
     /*! \brief      This method checks if the 'stats' table is already present,
      *               if it is not then it will be created.
      *  @param      handle      The sqlite database handle
-     */  
+     */
     static function createDatabaseOnDemand($handle)
     {
         $TABLE_NAME = stats::$tableName;
@@ -168,7 +169,7 @@ class stats
         //  if not create it.
         $query = "SELECT name FROM sqlite_master WHERE type='table' and name='{$TABLE_NAME}'";
         $ret = sqlite_query($query, $handle);
-        if(!count(sqlite_fetch_all($ret))){
+        if (!count(sqlite_fetch_all($ret))) {
             $query = "
                 CREATE TABLE {$TABLE_NAME} (
                         ID              INTEGER PRIMARY KEY,
@@ -201,8 +202,8 @@ class stats
      *  @param      int     amount      The amount, e.g. for multiple edit
      *  @param      float   duration    The elapsed time.
      *  @param      string  info        Some infos form the action, e.g. the used hashing mehtod for pwd changes.
-     */  
-    static function log($type, $plugin, $category, $action, $amount = 1, $duration = 0, $info ='')
+     */
+    static function log($type, $plugin, $category, $action, $amount = 1, $duration = 0, $info = '')
     {
         global $config;
         global $clicks;
@@ -210,21 +211,25 @@ class stats
 
         // Get database handle, if it is invalid (NULL) return without creating stats
         $res = stats::getDatabaseHandle();
-        if(!$res) return;
+        if (!$res) {
+            return;
+        }
 
-        // Ensure that 'clicks' and 'overallRenderTimer' are present and set correctly, 
-        //  if not simply create them with dummy values... 
-        //   -- 'clicks' is a counter wich is set in main.php -> Number of page reloads 
+        // Ensure that 'clicks' and 'overallRenderTimer' are present and set correctly,
+        //  if not simply create them with dummy values...
+        //   -- 'clicks' is a counter wich is set in main.php -> Number of page reloads
         //   -- 'overallRenderTimer' is set in main.php -> timestamp of rendering start.
-        if(!isset($clicks) || empty($clicks)) $clicks = 0;
-        if(!isset($overallRenderTimer)){
+        if (!isset($clicks) || empty($clicks)) {
+            $clicks = 0;
+        }
+        if (!isset($overallRenderTimer)) {
             $renderTime = 0;
-        }else{
-            $renderTime = microtime(TRUE) - $overallRenderTimer;
+        } else {
+            $renderTime = microtime(true) - $overallRenderTimer;
 
-            // Now set the overallRenderTimer to the current timestamp - else 
+            // Now set the overallRenderTimer to the current timestamp - else
             //  we will not be able to sum up the render time in a single SQL statement.
-            $overallRenderTimer = microtime(TRUE);
+            $overallRenderTimer = microtime(true);
         }
 
         // Prepare values to be useable within a database
@@ -233,19 +238,19 @@ class stats
         $plugin         = sqlite_escape_string($plugin);
         $action         = sqlite_escape_string($action);
         $timestamp      = time();
-        $mtimestamp     = number_format(microtime(TRUE), 4,'.','');
+        $mtimestamp     = number_format(microtime(true), 4, '.', '');
         $amount         = sqlite_escape_string($amount);
-        $duration       = sqlite_escape_string(number_format($duration, 4,'.',''));
-        $renderTime     = sqlite_escape_string(number_format($renderTime, 4,'.',''));
+        $duration       = sqlite_escape_string(number_format($duration, 4, '.', ''));
+        $renderTime     = sqlite_escape_string(number_format($renderTime, 4, '.', ''));
         $info           = sqlite_escape_string($info);
         $clicks         = sqlite_escape_string($clicks);
         $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
-        $cpu_load       = sqlite_escape_string(number_format(stats::get_cpu_load(),4,'.',''));
+        $cpu_load       = sqlite_escape_string(number_format(stats::get_cpu_load(), 4, '.', ''));
 
-        // Clean up category, which usally comes from acl_category and may still contain 
+        // Clean up category, which usally comes from acl_category and may still contain
         //  some special chars like /
         $tmp = array();
-        foreach($category as $cat){
+        foreach ($category as $cat) {
             $tmp[] = trim($cat, '\/,; ');
         }
         $category = sqlite_escape_string(implode($tmp, ', '));
@@ -265,11 +270,11 @@ class stats
 
 
     /*! \brief      Closes all sqlite handles opened by this class
-     */ 
+     */
     static function closeHandles()
     {
-        foreach(stats::lastHandle as $handle){
-            if($handle && is_resource($handle)){
+        foreach (stats::lastHandle as $handle) {
+            if ($handle && is_resource($handle)) {
                 sqlite_close($handle);
             }
         }
@@ -278,28 +283,30 @@ class stats
 
     /*! \brief      This method returns all entries of the GOsa-stats table.
      *              You can limit the result by setting the from/to parameter (timestamp).
-     *  @param      int     from    The timestamp to start the result from. 
+     *  @param      int     from    The timestamp to start the result from.
      *  @param      int     to      The timestamp to end the request.
      *  @return     array           An array containing the requested entries.
-     */  
+     */
     static function generateStatisticDump($filename)
     {
         // Get database connection
         $TABLE_NAME = stats::$tableName;
         $handle = stats::getDatabaseHandle($filename);
-        if(!$handle) return;        
+        if (!$handle) {
+            return;
+        }
 
-        $query = 
-            "  SELECT ".
-            "      TYPE, PLUGIN, CATEGORY, ACTION, ".
-            "      UUID, DATE(TIMESTAMP, 'unixepoch') as date, ".
-            "      AVG(DURATION), AVG(RENDER_TIME), SUM(AMOUNT), ".
-            "      AVG(MEMORY_USAGE), AVG(CPU_LOAD), INFO ".
-            "  FROM ".
-            "      stats ".
-            "  GROUP BY ".
-            "      TYPE, PLUGIN, CATEGORY, ACTION, UUID, date, INFO ".
-            "  ORDER BY ".
+        $query =
+            "  SELECT " .
+            "      TYPE, PLUGIN, CATEGORY, ACTION, " .
+            "      UUID, DATE(TIMESTAMP, 'unixepoch') as date, " .
+            "      AVG(DURATION), AVG(RENDER_TIME), SUM(AMOUNT), " .
+            "      AVG(MEMORY_USAGE), AVG(CPU_LOAD), INFO " .
+            "  FROM " .
+            "      stats " .
+            "  GROUP BY " .
+            "      TYPE, PLUGIN, CATEGORY, ACTION, UUID, date, INFO " .
+            "  ORDER BY " .
             "      ID ";
 
         // Create Filter and start query
@@ -310,36 +317,36 @@ class stats
 
     static function removeStatsFile($filename)
     {
-        // Get statsFile property 
+        // Get statsFile property
         global $config;
         $path = $config->get_cfg_value('core', 'statsDatabaseDirectory');
         stats::$statsEnabled = $config->boolValueIsTrue('core', 'statsDatabaseEnabled');
-        if(!stats::$statsEnabled){
-            return(NULL);
+        if (!stats::$statsEnabled) {
+            return(null);
         }
 
         // We cannot log while the path to store logs in is empty.
-        if(empty($path)){
-            return(NULL);
+        if (empty($path)) {
+            return(null);
         }
 
         // Check if file exists and then remove it
-        if(isset(stats::$lastHandle[$filename]) && is_resource(stats::$lastHandle[$filename])){
+        if (isset(stats::$lastHandle[$filename]) && is_resource(stats::$lastHandle[$filename])) {
             sqlite_close(stats::$lastHandle[$filename]);
         }
-        if(file_exists($path.'/'.$filename)){
+        if (file_exists($path . '/' . $filename)) {
             #unlink($path.'/'.$filename);
-            rename($path.'/'.$filename,  $path.'/'.$filename.".old");
+            rename($path . '/' . $filename, $path . '/' . $filename . ".old");
         }
     }
 
-    
-    static function getLdapObjectCount($config, $statisticConformResult = FALSE, $date = "")    
+
+    static function getLdapObjectCount($config, $statisticConformResult = false, $date = "")
     {
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        
-        // A list of objectClasses to search for, indexed by their 
+
+        // A list of objectClasses to search for, indexed by their
         //  object-category
         $ocsToSearchFor = array(
                 "department" => array("gosaDepartment"),
@@ -369,9 +376,9 @@ class stats
         // We will later sum up the results using PHP.
         $filter = "";
         $categoryCounter = array();
-        foreach($ocsToSearchFor as $category => $ocs){
-            foreach($ocs as $oc){
-                $filter.= "(objectClass={$oc})";
+        foreach ($ocsToSearchFor as $category => $ocs) {
+            foreach ($ocs as $oc) {
+                $filter .= "(objectClass={$oc})";
             }
             $categoryCounter[$category] = 0;
         }
@@ -379,14 +386,13 @@ class stats
 
         // Initiate the ldap query
         $res = $ldap->search($filter, array('objectClass'));
-        if($ldap->success()) {
-
+        if ($ldap->success()) {
             // Count number of results per category
-            while($entry = $ldap->fetch()){
-                foreach($ocsToSearchFor as $category => $ocs){
-                    if(count(array_intersect($ocs, $entry['objectClass']))){
+            while ($entry = $ldap->fetch()) {
+                foreach ($ocsToSearchFor as $category => $ocs) {
+                    if (count(array_intersect($ocs, $entry['objectClass']))) {
                         $categoryCounter[$category] ++;
-                        break; 
+                        break;
                     }
                 }
             }
@@ -394,16 +400,16 @@ class stats
         arsort($categoryCounter);
 
         // Do we have to return the result as SQL INSERT statement?
-        if($statisticConformResult){ 
+        if ($statisticConformResult) {
             $uuid           = $config->getInstanceUUID();
             $type           = 'objectCount';
             $plugin         = '';
             $action         = '';
-            $date           = (empty($date))?date('Y-m-d'):$date;
+            $date           = (empty($date)) ? date('Y-m-d') : $date;
             $memory_usage   = sqlite_escape_string(stats::get_memory_usage());
-            $cpu_load       = sqlite_escape_string(number_format(stats::get_cpu_load(),4,'.',''));
+            $cpu_load       = sqlite_escape_string(number_format(stats::get_cpu_load(), 4, '.', ''));
             $sql = array();
-            foreach($categoryCounter as $category => $amount){
+            foreach ($categoryCounter as $category => $amount) {
                 $sql[] = array(
                         "type" => $type,
                         "plugin" => $plugin,
@@ -419,10 +425,8 @@ class stats
                         "info" => '');
             }
             return($sql);
-        }else{
-            return($categoryCounter); 
+        } else {
+            return($categoryCounter);
         }
     }
 }
-
-?>

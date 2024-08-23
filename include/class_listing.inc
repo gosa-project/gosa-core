@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -171,8 +172,10 @@ class listing
 
         // Load some definition values
         foreach (['departmentBrowser', 'departmentRootVisible', 'multiSelect', 'singleSelect', 'baseMode', 'noAclChecks'] as $token) {
-            if (isset($this->xmlData['definition'][$token]) &&
-                    $this->xmlData['definition'][$token] == 'true') {
+            if (
+                isset($this->xmlData['definition'][$token]) &&
+                    $this->xmlData['definition'][$token] == 'true'
+            ) {
                 $this->$token = true;
             }
         }
@@ -196,7 +199,7 @@ class listing
                     $this->categories[] = $otype['category'];
 
                     if (isset($otype['category']) && isset($otype['class'])) {
-                        $this->aclToObjectClass[$otype['category'].'/'.$otype['class']][] = $otype['objectClass'];
+                        $this->aclToObjectClass[$otype['category'] . '/' . $otype['class']][] = $otype['objectClass'];
                     }
                 }
             }
@@ -253,36 +256,38 @@ class listing
                 }
 
                 $sorter = '';
-                if ($index == $this->sortColumn && isset($conf['sortAttribute']) &&
-                        isset($conf['sortType'])) {
+                if (
+                    $index == $this->sortColumn && isset($conf['sortAttribute']) &&
+                        isset($conf['sortType'])
+                ) {
                     $this->sortAttribute = $conf['sortAttribute'];
                     $this->sortType = $conf['sortType'];
                     switch ($this->theme) {
                         case 'classic':
-                            $sorter = '&nbsp;'.image('images/lists/sort-'.($this->sortDirection[$index] ? 'up' : 'down').'.png', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top');
+                            $sorter = '&nbsp;' . image('images/lists/sort-' . ($this->sortDirection[$index] ? 'up' : 'down') . '.png', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top');
                             break;
                         default:
-                            $sorter = image("<i class='material-icons'>keyboard_arrow_".($this->sortDirection[$index] ? 'up' : 'down').'</i>', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top ');
+                            $sorter = image("<i class='material-icons'>keyboard_arrow_" . ($this->sortDirection[$index] ? 'up' : 'down') . '</i>', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top ');
                             break;
                     }
                 }
                 $sortable = (isset($conf['sortAttribute']));
 
-                $link = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index'";
+                $link = "href='?plug=" . $_GET['plug'] . "&amp;PID=" . $this->pid . "&amp;act=SORT_$index'";
                 if (isset($conf['label'])) {
                     switch ($this->theme) {
                         case 'classic':
                             if ($sortable) {
-                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index]."><a $link>"._($conf['label'])."</a>$sorter</td>";
+                                $this->header[$index] = "<td class='listheader' " . $this->colprops[$index] . "><a $link>" . _($conf['label']) . "</a>$sorter</td>";
                             } else {
-                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index].'>'._($conf['label']).'</td>';
+                                $this->header[$index] = "<td class='listheader' " . $this->colprops[$index] . '>' . _($conf['label']) . '</td>';
                             }
                             break;
                         default:
                             if ($sortable) {
-                                $this->header[$index] = " <th><a class='btn-flat' $link>"._($conf['label'])."</a>$sorter</th>";
+                                $this->header[$index] = " <th><a class='btn-flat' $link>" . _($conf['label']) . "</a>$sorter</th>";
                             } else {
-                                $this->header[$index] = ' <th>'._($conf['label']).'</th>';
+                                $this->header[$index] = ' <th>' . _($conf['label']) . '</th>';
                             }
                             break;
                     }
@@ -291,9 +296,9 @@ class listing
                     switch ($this->theme) {
                         case 'classic':
                             if ($sortable) {
-                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index]."><a $link>&nbsp;</a>$sorter</td>";
+                                $this->header[$index] = "<td class='listheader' " . $this->colprops[$index] . "><a $link>&nbsp;</a>$sorter</td>";
                             } else {
-                                $this->header[$index] = "<td class='listheader' ".$this->colprops[$index].'>&nbsp;</td>';
+                                $this->header[$index] = "<td class='listheader' " . $this->colprops[$index] . '>&nbsp;</td>';
                             }
                             break;
                         default:
@@ -327,7 +332,7 @@ class listing
 
         // Initialize list
         $result = "<input type='hidden' value='$this->pid' name='PID'>\n";
-        $result .= "<input type='hidden' name='position_".$this->pid."' id='position_".$this->pid."'>\n";
+        $result .= "<input type='hidden' name='position_" . $this->pid . "' id='position_" . $this->pid . "'>\n";
         $height = 450;
         if ($this->height != 0) {
             $result .= "<input type='hidden' value='$this->height' id='d_height'>\n";
@@ -336,7 +341,7 @@ class listing
 
         switch ($this->theme) {
             case 'classic':
-                $result .= "<div class='listContainer' id='d_scrollbody' style='height:{$height}px; overflow: auto;min-height:".($height + 25)."px;'>\n";
+                $result .= "<div class='listContainer' id='d_scrollbody' style='height:{$height}px; overflow: auto;min-height:" . ($height + 25) . "px;'>\n";
                 $result .= "<table summary='$this->headline' style='width:100%;table-layout:fixed' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
                 $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
 
@@ -350,7 +355,7 @@ class listing
                     $result .= "<td class='listheader' style='text-align:center;padding:0;width:$width;'>";
                     if ($this->multiSelect) {
                         $result .= "<input type='checkbox' id='select_all' name='select_all'
-                            title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >";
+                            title='" . _('Select all') . "' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >";
                     } else {
                         $result .= '&nbsp;';
                     }
@@ -362,7 +367,7 @@ class listing
                 $result .= "</tr></thead>\n";
 
                 // Build list body
-                $result .= "<tbody class='listScrollContent listBodyFormat' id='t_nscrollbody' style='height:".$height."px;'>\n";
+                $result .= "<tbody class='listScrollContent listBodyFormat' id='t_nscrollbody' style='height:" . $height . "px;'>\n";
 
                 // No results? Just take an empty colspanned row
                 if (count($this->entries) + count($this->departments) == 0) {
@@ -394,14 +399,14 @@ class listing
                                 $colspan = $conf['span'];
                                 $this->useSpan = true;
                             }
-                            $rowResult .= "<td colspan='$colspan' ".$this->colprops[$index]." class='list1'>".$this->renderCell($conf['value'], $entry, $row).'</td>';
+                            $rowResult .= "<td colspan='$colspan' " . $this->colprops[$index] . " class='list1'>" . $this->renderCell($conf['value'], $entry, $row) . '</td>';
                             $rest -= $colspan;
                         }
 
                         // Fill remaining cols with nothing
                         $last = $this->numColumns - $rest;
                         for ($i = 0; $i < $rest; ++$i) {
-                            $rowResult .= '<td '.$this->colprops[$last + $i - 1]." class='list1'>&nbsp;</td>";
+                            $rowResult .= '<td ' . $this->colprops[$last + $i - 1] . " class='list1'>&nbsp;</td>";
                         }
                         $rowResult .= '</tr>';
 
@@ -433,7 +438,7 @@ class listing
 
                     foreach ($this->xmlData['table']['column'] as $index => $conf) {
                         $renderedCell = $this->renderCell($conf['value'], $entry, $row);
-                        $trow .= '<td '.$this->colprops[$index]." class='list0'>".$renderedCell."</td>\n";
+                        $trow .= '<td ' . $this->colprops[$index] . " class='list0'>" . $renderedCell . "</td>\n";
 
                         // Save rendered column
                         $sort = preg_replace('/.*>([^<]+)<.*$/', '$1', $renderedCell);
@@ -449,12 +454,12 @@ class listing
                 }
 
                 // Complete list by sorting entries for _sort$index and appending them to the output
-                $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
+                $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort' . $this->sortColumn, $this->sortType);
                 foreach ($entryIterator as $row => $entry) {
                     // Apply label to objecttype icon?
                     if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
                         if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                            $objectType = image($matches[1].'['.$m[1].']', null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image($matches[1] . '[' . $m[1] . ']', null, LDAP::fix(base64_decode($matches[2])));
                         } else {
                             $objectType = image($matches[1], null, LDAP::fix(base64_decode($matches[2])));
                         }
@@ -464,7 +469,7 @@ class listing
 
                     // Apply custom class to row?
                     if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
-                        $result .= "<tr class='".$matches[1]."'>\n";
+                        $result .= "<tr class='" . $matches[1] . "'>\n";
                         $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
                     } else {
                         $result .= "<tr>\n";
@@ -503,10 +508,10 @@ class listing
                     foreach ($this->objectTypes as $objectType) {
                         if (isset($this->objectTypeCount[$objectType['label']])) {
                             $label = _($objectType['label']);
-                            $result .= image($objectType['image'], null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['label']].'&nbsp;&nbsp;';
+                            $result .= image($objectType['image'], null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['label']] . '&nbsp;&nbsp;';
                         } elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
                             $label = _($objectType['label']);
-                            $result .= image($objectType['image'], null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['objectClass']].'&nbsp;&nbsp;';
+                            $result .= image($objectType['image'], null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['objectClass']] . '&nbsp;&nbsp;';
                         }
                     }
 
@@ -518,8 +523,8 @@ class listing
 
                 // Add scroll positioner
                 $result .= '<script type="text/javascript" language="javascript">';
-                $result .= '$("t_nscrollbody").scrollTop= '.$this->scrollPosition.';';
-                $result .= 'var box = $("t_nscrollbody").onscroll= function() {$("position_'.$this->pid.'").value= this.scrollTop;}';
+                $result .= '$("t_nscrollbody").scrollTop= ' . $this->scrollPosition . ';';
+                $result .= 'var box = $("t_nscrollbody").onscroll= function() {$("position_' . $this->pid . '").value= this.scrollTop;}';
                 $result .= '</script>';
                 break;
             default:
@@ -559,7 +564,7 @@ class listing
                         $result .= "  <label>
                                         <p>
                                             <input type='checkbox' id='select_all' name='select_all'
-                                                title='"._('Select all')."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >
+                                                title='" . _('Select all') . "' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >
                                             <span></span>
                                         </p>
                                     </label>";
@@ -580,7 +585,7 @@ class listing
                 // No results? Just take an empty colspanned row
                 if (count($this->entries) + count($this->departments) == 0) {
                     $result .= "  <tr>
-                                    <td colspan='".$this->numColumns."'></td>
+                                    <td colspan='" . $this->numColumns . "'></td>
                                 </tr>";
                 }
 
@@ -605,7 +610,7 @@ class listing
                                 $colspan = $conf['span'];
                                 $this->useSpan = true;
                             }
-                            $rowResult .= "<td colspan='$colspan'>".$this->renderCell($conf['value'], $entry, $row).'</td>';
+                            $rowResult .= "<td colspan='$colspan'>" . $this->renderCell($conf['value'], $entry, $row) . '</td>';
                             $rest -= $colspan;
                         }
 
@@ -616,10 +621,10 @@ class listing
                         }
                         $rowResult .= '</tr>';
 
-                        
+
                         // Apply label to objecttype icon?
                         if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $rowResult, $matches)) {
-                            $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image("<i class='material-icons'>" . $matches[1] . '</i>', null, LDAP::fix(base64_decode($matches[2])));
                             $rowResult = preg_replace('/<objectType[^>]+>/', $objectType, $rowResult);
                         }
                         $result .= $rowResult;
@@ -659,9 +664,9 @@ class listing
                     foreach ($this->xmlData['table']['column'] as $index => $conf) {
                         $renderedCell = $this->renderCell($conf['value'], $entry, $row);
                         if ($xmlLenprint == $index) {
-                            $trow .= '<td class="last-column">'.$renderedCell.'</td>';
+                            $trow .= '<td class="last-column">' . $renderedCell . '</td>';
                         } else {
-                            $trow .= '<td>'.$renderedCell.'</td>';
+                            $trow .= '<td>' . $renderedCell . '</td>';
                         }
 
                         // Save rendered column
@@ -678,14 +683,14 @@ class listing
                 }
 
                 // Complete list by sorting entries for _sort$index and appending them to the output
-                $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
+                $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort' . $this->sortColumn, $this->sortType);
                 foreach ($entryIterator as $row => $entry) {
                     // Apply label to objecttype icon?
                     if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
                         if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                            $objectType = image("<div class='entry-locked-td'><i class='material-icons'>".$matches[1].'['.$m[1].']'."</i></div>", null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image("<div class='entry-locked-td'><i class='material-icons'>" . $matches[1] . '[' . $m[1] . ']' . "</i></div>", null, LDAP::fix(base64_decode($matches[2])));
                         } else {
-                            $objectType = image("<i class='material-icons'>".$matches[1].'</i>', null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image("<i class='material-icons'>" . $matches[1] . '</i>', null, LDAP::fix(base64_decode($matches[2])));
                         }
                         $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
                         $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
@@ -693,7 +698,7 @@ class listing
 
                     // Apply custom class to row?
                     if (preg_match("/<rowClass:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $matches)) {
-                        $result .= "<tr class='".$matches[1]."'>\n";
+                        $result .= "<tr class='" . $matches[1] . "'>\n";
                         $result .= preg_replace('/<rowClass[^>]+>/', '', $entry['_rendered']);
                     } else {
                         $result .= '<tr>';
@@ -714,10 +719,10 @@ class listing
                     foreach ($this->objectTypes as $objectType) {
                         if (isset($this->objectTypeCount[$objectType['label']])) {
                             $label = _($objectType['label']);
-                            $result .= image("<i class='material-icons'>".$objectType['image'].'</i>', null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['label']].'&nbsp;&nbsp;';
+                            $result .= image("<i class='material-icons'>" . $objectType['image'] . '</i>', null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['label']] . '&nbsp;&nbsp;';
                         } elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
                             $label = _($objectType['label']);
-                            $result .= image("<i class='material-icons'>".$objectType['image'].' </i>', null, $label).'&nbsp;'.$this->objectTypeCount[$objectType['objectClass']].'&nbsp;&nbsp;';
+                            $result .= image("<i class='material-icons'>" . $objectType['image'] . ' </i>', null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['objectClass']] . '&nbsp;&nbsp;';
                         }
                     }
 
@@ -775,9 +780,9 @@ class listing
                                     <select id='page-items' onchange='setItemCount()'>";
             foreach (array(5,10,25,50,75,100) as $index) {
                 if ($index != $prow) {
-                    $paginator .= "<option value=".$this->setPageLink($page, $index).">".$index."</option>";
+                    $paginator .= "<option value=" . $this->setPageLink($page, $index) . ">" . $index . "</option>";
                 } else {
-                    $paginator .= "<option value='".$index."' disabled selected>".$prow."</option>";
+                    $paginator .= "<option value='" . $index . "' disabled selected>" . $prow . "</option>";
                 }
             }
 
@@ -787,22 +792,22 @@ class listing
 
             // first page
             $paginator .= $selectedPage > 1 ?
-                            "<li><a href=".$this->setPageLink($page, $prow)."><i class='material-icons'>first_page</i></a></li>" :
+                            "<li><a href=" . $this->setPageLink($page, $prow) . "><i class='material-icons'>first_page</i></a></li>" :
                             "<li class='disabled'><a href='#!'><i class='material-icons'>first_page</i></a></li>";
 
             // next page
-            $pageLink = "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=".($selectedPage - 1)."&amp;items=".$prow."'";
+            $pageLink = "href='?plug=" . $_GET['plug'] . "&amp;PID=" . $this->pid . "&amp;act=SORT_$index&amp;page=" . ($selectedPage - 1) . "&amp;items=" . $prow . "'";
             $paginator .= $selectedPage > 1 ?
-                            "<li><a href=".$this->setPageLink($selectedPage-1, $prow)."><i class='material-icons'>chevron_left</i></a></li>" :
+                            "<li><a href=" . $this->setPageLink($selectedPage - 1, $prow) . "><i class='material-icons'>chevron_left</i></a></li>" :
                             "<li class='disabled'><a href='#!'><i class='material-icons'>chevron_left</i></a></li>";
 
             foreach ($this->entries as $row => $entry) {
                 if (($row + 1) % $prow == 0) {
                     if (in_array($page, range($selectedPage - 1, $selectedPage + 1))) {
-                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : '')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+                        $paginator .= "<li class='" . ($selectedPage == $page ? 'active white-text' : '') . "'><a href=" . $this->setPageLink($page, $prow) . ">$page</a></li>";
                     }
                     if ($selectedPage == 1 && $page == 3) {
-                        $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : '')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+                        $paginator .= "<li class='" . ($selectedPage == $page ? 'active white-text' : '') . "'><a href=" . $this->setPageLink($page, $prow) . ">$page</a></li>";
                     }
                     ++$page;
                 }
@@ -810,19 +815,19 @@ class listing
             }
 
             // append page if remaining entries not fill modulo of $prow
-            if ($last && in_array($selectedPage, range($page -1, $page))) {
-                $paginator .= "<li class='".($selectedPage == $page ? 'active white-text' : '')."'><a href=".$this->setPageLink($page, $prow).">$page</a></li>";
+            if ($last && in_array($selectedPage, range($page - 1, $page))) {
+                $paginator .= "<li class='" . ($selectedPage == $page ? 'active white-text' : '') . "'><a href=" . $this->setPageLink($page, $prow) . ">$page</a></li>";
             }
 
 
             // next page
             $paginator .= $selectedPage < $page ?
-                            "<li><a href=".$this->setPageLink(($selectedPage + 1), $prow)."><i class='material-icons'>chevron_right</i></a></li>" :
+                            "<li><a href=" . $this->setPageLink(($selectedPage + 1), $prow) . "><i class='material-icons'>chevron_right</i></a></li>" :
                             "<li class='disabled'><a href='#!'><i class='material-icons'>chevron_right</i></a></li>";
 
             // last page
             $paginator .= $selectedPage < $page ?
-                            "<li><a href=".$this->setPageLink($page, $prow)."><i class='material-icons'>last_page</i></a></li>" :
+                            "<li><a href=" . $this->setPageLink($page, $prow) . "><i class='material-icons'>last_page</i></a></li>" :
                             "<li class='disabled'><a href='#!'><i class='material-icons'>last_page</i></a></li>";
 
             $paginator .= '     </ul>
@@ -834,7 +839,7 @@ class listing
 
     public function setPageLink($page, $items)
     {
-        return "?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index&amp;page=$page&amp;items=$items";
+        return "?plug=" . $_GET['plug'] . "&amp;PID=" . $this->pid . "&amp;act=SORT_$index&amp;page=$page&amp;items=$items";
     }
 
     public function update()
@@ -867,8 +872,8 @@ class listing
         // Do not do anything if this is not our PID
         if ($refresh || !(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid)) {
             // Save position if set
-            if (isset($_POST['position_'.$this->pid]) && is_numeric($_POST['position_'.$this->pid])) {
-                $this->scrollPosition = get_post('position_'.$this->pid);
+            if (isset($_POST['position_' . $this->pid]) && is_numeric($_POST['position_' . $this->pid])) {
+                $this->scrollPosition = get_post('position_' . $this->pid);
             }
 
             // Override the base if we got a message from the browser navigation
@@ -888,13 +893,13 @@ class listing
             if (isset($_POST['exec_act']) && $_POST['act'] != '') {
                 if (preg_match('/^export.*$/', $_POST['act']) && isset($this->exporter[$_POST['act']])) {
                     $exporter = $this->exporter[get_post('act')];
-                    $userinfo = ', '._('created by').' '.$ui->cn.' - '.strftime('%A, %d. %B %Y, %H:%M:%S');
-                    $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort'.$this->sortColumn, $this->sortType);
+                    $userinfo = ', ' . _('created by') . ' ' . $ui->cn . ' - ' . strftime('%A, %d. %B %Y, %H:%M:%S');
+                    $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort' . $this->sortColumn, $this->sortType);
                     $sortedEntries = [];
                     foreach ($entryIterator as $entry) {
                         $sortedEntries[] = $entry;
                     }
-                    $instance = new $exporter['class']($this->headline.$userinfo, $this->plainHeader, $sortedEntries, $this->exportColumns);
+                    $instance = new $exporter['class']($this->headline . $userinfo, $this->plainHeader, $sortedEntries, $this->exportColumns);
                     $type = call_user_func([$exporter['class'], 'getInfo']);
                     $type = $type[get_post('act')];
                     send_binary_content($instance->query(), $type['filename'], $type = $type['mime']);
@@ -1147,10 +1152,10 @@ class listing
             // Replace information
             if ($cl == 'listing') {
                 // Non static call - seems to result in errors
-                $data = @preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array([$this, "$method"], $params), $data);
+                $data = @preg_replace('/' . preg_quote($match[0]) . '/', call_user_func_array([$this, "$method"], $params), $data);
             } else {
                 // Static call
-                $data = preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array([$cl, $method], $params), $data);
+                $data = preg_replace('/' . preg_quote($match[0]) . '/', call_user_func_array([$cl, $method], $params), $data);
             }
         }
 
@@ -1196,7 +1201,7 @@ class listing
         $objectType = $this->getObjectType($this->objectTypes, $classes);
         if ($objectType) {
             $this->objectDnMapping[$dn] = $objectType['objectClass'];
-            $result = '<objectType:'.$objectType['image'].':'.base64_encode(LDAP::fix($dn)).'/>';
+            $result = '<objectType:' . $objectType['image'] . ':' . base64_encode(LDAP::fix($dn)) . '/>';
             if (!isset($this->objectTypeCount[$objectType['label']])) {
                 $this->objectTypeCount[$objectType['label']] = 0;
             }
@@ -1326,11 +1331,11 @@ class listing
                 $image = $this->processElementFilter($action['image'], $this->entries[$row], $row);
                 switch ($this->theme) {
                     case 'classic':
-                        $result .= image($image, 'listing_'.$action['name']."_$row", $label);
+                        $result .= image($image, 'listing_' . $action['name'] . "_$row", $label);
                         break;
 
                     default:
-                        $result .= image("<i class='material-icons input-icons'>".$image.'</i>', 'listing_'.$action['name']."_$row", $label);
+                        $result .= image("<i class='material-icons input-icons'>" . $image . '</i>', 'listing_' . $action['name'] . "_$row", $label);
                         break;
                 }
             }
@@ -1366,7 +1371,7 @@ class listing
         }
         $result = sprintf('%s [%s]', $name, $description[0]);
 
-        return "<a href='?plug=".$_GET['plug']."&amp;PID=$this->pid&amp;act=department_$row' title='$dn'>".set_post($result).'</a>';
+        return "<a href='?plug=" . $_GET['plug'] . "&amp;PID=$this->pid&amp;act=department_$row' title='$dn'>" . set_post($result) . '</a>';
     }
 
     public function filterLink()
@@ -1398,7 +1403,7 @@ class listing
         $result = '&nbsp;';
         $trans = call_user_func_array('sprintf', $params);
         if ($trans != '') {
-            return "<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='{$titleAttr}'>".set_post($trans).'</a>';
+            return "<a href='?plug=" . $_GET['plug'] . "&amp;PID=$pid&amp;act=listing_edit_$row' title='{$titleAttr}'>" . set_post($trans) . '</a>';
         }
 
         return $result;
@@ -1497,8 +1502,8 @@ class listing
         }
 
         // Save position if set
-        if (isset($_POST['position_'.$this->pid]) && is_numeric($_POST['position_'.$this->pid])) {
-            $this->scrollPosition = get_post('position_'.$this->pid);
+        if (isset($_POST['position_' . $this->pid]) && is_numeric($_POST['position_' . $this->pid])) {
+            $this->scrollPosition = get_post('position_' . $this->pid);
         }
 
         $result = ['targets' => [], 'action' => ''];
@@ -1591,12 +1596,12 @@ class listing
 
                 // Load shortcut
                 $actions = &$this->xmlData['actionmenu']['action'];
-                $result .= "<ul class='level1' id='root'><li><a href='#'>"._('Actions').'&nbsp;'.image('images/lists/sort-down.png').'</a>';
+                $result .= "<ul class='level1' id='root'><li><a href='#'>" . _('Actions') . '&nbsp;' . image('images/lists/sort-down.png') . '</a>';
 
                 // Build ul/li list
                 $result .= $this->recurseActions($actions, $level);
 
-                return "<div id='pulldown'>".$result.'</li></ul></div>';
+                return "<div id='pulldown'>" . $result . '</li></ul></div>';
 
             default:
                 $result = " <input type='hidden' name='act' id='act' value=''>
@@ -1618,10 +1623,10 @@ class listing
                 // Load shortcut
                 $actions = &$this->xmlData['actionmenu']['action'];
 
-                $result .= "  <a class='dropdown-menu' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>"._('Actions')."</a>
+                $result .= "  <a class='dropdown-menu' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>" . _('Actions') . "</a>
                             <ul class='dropdown-content' id='$level'>";
 
-                $result .= $this->recurseActions($actions, $level).'</ul></>';
+                $result .= $this->recurseActions($actions, $level) . '</ul></>';
 
                 return $result;
         }
@@ -1645,7 +1650,6 @@ class listing
 
         $separator = '';
         foreach ($actions as $action) {
-
             // Skip the entry completely if there's no permission to execute it
             if (!$this->hasActionPermission($action, $this->filter->base)) {
                 continue;
@@ -1668,11 +1672,11 @@ class listing
             if (isset($action['image'])) {
                 switch ($this->theme) {
                     case 'classic':
-                        $img = image($action['image']).'&nbsp;';
+                        $img = image($action['image']) . '&nbsp;';
                         break;
 
                     default:
-                        $img = image("<i class='material-icons'>".$action['image']."</i>");
+                        $img = image("<i class='material-icons'>" . $action['image'] . "</i>");
                         break;
                 }
             }
@@ -1695,7 +1699,7 @@ class listing
                     if ($action['type'] == 'sub' && isset($action['action'])) {
                         ++$level;
                         if (isset($action['label'])) {
-                            $result .= "<li$separator><a href='#'>$img"._($action['label']).'&nbsp;'.image('images/forward-arrow.png').'</a>';
+                            $result .= "<li$separator><a href='#'>$img" . _($action['label']) . '&nbsp;' . image('images/forward-arrow.png') . '</a>';
                         }
 
                         // Ensure we've an array of actions, this enables sub menus with only one action.
@@ -1703,7 +1707,7 @@ class listing
                             $action['action'] = [$action['action']];
                         }
 
-                        $result .= $this->recurseActions($action['action'], $level).'</li>';
+                        $result .= $this->recurseActions($action['action'], $level) . '</li>';
                         --$level;
                         $separator = '';
                         continue 2;
@@ -1711,28 +1715,28 @@ class listing
 
                     // Render entry elseways
                     if (isset($action['label'])) {
-                        $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>$img"._($action['label']).'</a></li>';
+                        $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"" . $action['name'] . "\";\$(\"exec_act\").click();'>$img" . _($action['label']) . '</a></li>';
                     }
 
                     // Check for special types
                     switch ($action['type']) {
-                    case 'copypaste':
-                        $cut = !isset($action['cut']) || $action['cut'] != 'false';
-                        $copy = !isset($action['copy']) || $action['copy'] != 'false';
-                        $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
-                        break;
+                        case 'copypaste':
+                            $cut = !isset($action['cut']) || $action['cut'] != 'false';
+                            $copy = !isset($action['copy']) || $action['copy'] != 'false';
+                            $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
+                            break;
 
-                    case 'snapshot':
-                        $result .= $this->renderSnapshotMenu($separator);
-                        break;
+                        case 'snapshot':
+                            $result .= $this->renderSnapshotMenu($separator);
+                            break;
 
-                    case 'exporter':
-                        $result .= $this->renderExporterMenu($separator);
-                        break;
+                        case 'exporter':
+                            $result .= $this->renderExporterMenu($separator);
+                            break;
 
-                    case 'daemon':
-                        $result .= $this->renderDaemonMenu($separator);
-                        break;
+                        case 'daemon':
+                            $result .= $this->renderDaemonMenu($separator);
+                            break;
                     }
 
                     $separator = '';
@@ -1747,9 +1751,9 @@ class listing
                                     <ul class='collection with-header'>";
 
                         if (isset($action['label'])) {
-                            $result .= "<li class='collection-header pointer_off'><h3 id='head'>"._($action['label']).'</h3></li>';
+                            $result .= "<li class='collection-header pointer_off'><h3 id='head'>" . _($action['label']) . '</h3></li>';
                         } else {
-                            $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>"._($action['image']).'</i></li>';
+                            $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>" . _($action['image']) . '</i></li>';
                         }
 
                         // Ensure we've an array of actions, this enables sub menus with only one action.
@@ -1757,7 +1761,7 @@ class listing
                             $action['action'] = [$action['action']];
                         }
 
-                        $result .= $this->recurseActions($action['action'], $level).'</ul>';
+                        $result .= $this->recurseActions($action['action'], $level) . '</ul>';
 
                         --$level;
                         $separator = '';
@@ -1766,19 +1770,19 @@ class listing
 
                     if (isset($action['label'])) {
                         if ($level < 1) {
-                            $result .= "<ul class='collection' onClick='\$(\"act\").value= '".$action['name']."';\$(\"exec_act\").click();'>
+                            $result .= "<ul class='collection' onClick='\$(\"act\").value= '" . $action['name'] . "';\$(\"exec_act\").click();'>
                                             <li class='collection-item'>
                                                 <a href='#'>
                                                     $img&nbsp;
-                                                    "._($action['label']).'
+                                                    " . _($action['label']) . '
                                                 </a>
                                             </li>
                                         </ul>';
                         } else {
-                            $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"".$action['name']."\";\$(\"exec_act\").click();'>
+                            $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"" . $action['name'] . "\";\$(\"exec_act\").click();'>
                                             <a href='#'>
                                                 $img
-                                                "._($action['label']).'
+                                                " . _($action['label']) . '
                                             </a>
                                         </li>';
                         }
@@ -1786,23 +1790,23 @@ class listing
 
                     // Check for special types
                     switch ($action['type']) {
-                    case 'copypaste':
-                        $cut = !isset($action['cut']) || $action['cut'] != 'false';
-                        $copy = !isset($action['copy']) || $action['copy'] != 'false';
-                        $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
-                        break;
+                        case 'copypaste':
+                            $cut = !isset($action['cut']) || $action['cut'] != 'false';
+                            $copy = !isset($action['copy']) || $action['copy'] != 'false';
+                            $result .= $this->renderCopyPasteMenu($separator, $copy, $cut);
+                            break;
 
-                    case 'snapshot':
-                        $result .= $this->renderSnapshotMenu($separator);
-                        break;
+                        case 'snapshot':
+                            $result .= $this->renderSnapshotMenu($separator);
+                            break;
 
-                    case 'exporter':
-                        $result .= $this->renderExporterMenu($separator);
-                        break;
+                        case 'exporter':
+                            $result .= $this->renderExporterMenu($separator);
+                            break;
 
-                    case 'daemon':
-                        $result .= $this->renderDaemonMenu($separator);
-                        break;
+                        case 'daemon':
+                            $result .= $this->renderDaemonMenu($separator);
+                            break;
                     }
                     break;
             }
@@ -1851,7 +1855,7 @@ class listing
                 // Replace %acl if available
                 if ($classes) {
                     $otype = $this->getObjectType($this->objectTypes, $classes);
-                    $acl = str_replace('%acl', $otype['category'].'/'.$otype['class'], $acl);
+                    $acl = str_replace('%acl', $otype['category'] . '/' . $otype['class'], $acl);
                 }
 
                 // Split for category and plugins if needed
@@ -1949,7 +1953,7 @@ class listing
         $filter = '(&(objectClass=gosaDepartment)(|';
         $attrs = ['description', 'objectClass'];
         foreach ($types as $name => $data) {
-            $filter .= '(objectClass='.$data['OC'].')';
+            $filter .= '(objectClass=' . $data['OC'] . ')';
             $attrs[] = $data['ATTR'];
         }
         $filter .= '))';
@@ -2001,13 +2005,13 @@ class listing
         if ($read) {
             // Copy entry
             if ($copy) {
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"copy\";\$(\"exec_act\").click();'>".image('images/lists/copy.png').'&nbsp;'._('Copy').'</a></li>';
+                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"copy\";\$(\"exec_act\").click();'>" . image('images/lists/copy.png') . '&nbsp;' . _('Copy') . '</a></li>';
                 $separator = '';
             }
 
             // Cut entry
             if ($cut) {
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"cut\";\$(\"exec_act\").click();'>".image('images/lists/cut.png').'&nbsp;'._('Cut').'</a></li>';
+                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"cut\";\$(\"exec_act\").click();'>" . image('images/lists/cut.png') . '&nbsp;' . _('Cut') . '</a></li>';
                 $separator = '';
             }
         }
@@ -2015,9 +2019,9 @@ class listing
         // Draw entries that allow pasting entries
         if ($paste) {
             if ($this->copyPasteHandler->entries_queued()) {
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"paste\";\$(\"exec_act\").click();'>".image('images/lists/paste.png').'&nbsp;'._('Paste').'</a></li>';
+                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"paste\";\$(\"exec_act\").click();'>" . image('images/lists/paste.png') . '&nbsp;' . _('Paste') . '</a></li>';
             } else {
-                $result .= "<li$separator><a href='#'>".image('images/lists/paste-grey.png').'&nbsp;'._('Paste').'</a></li>';
+                $result .= "<li$separator><a href='#'>" . image('images/lists/paste-grey.png') . '&nbsp;' . _('Paste') . '</a></li>';
             }
         }
 
@@ -2110,9 +2114,9 @@ class listing
 
             // Draw icons according to the restore flag
             if ($restore) {
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"restore\";\$(\"exec_act\").click();'>".image('images/lists/restore.png').'&nbsp;'._('Restore snapshots').'</a></li>';
+                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"restore\";\$(\"exec_act\").click();'>" . image('images/lists/restore.png') . '&nbsp;' . _('Restore snapshots') . '</a></li>';
             } else {
-                $result .= "<li$separator><a href='#'>".image('images/lists/restore-grey.png').'&nbsp;'._('Restore snapshots').'</a></li>';
+                $result .= "<li$separator><a href='#'>" . image('images/lists/restore-grey.png') . '&nbsp;' . _('Restore snapshots') . '</a></li>';
             }
         }
 
@@ -2127,11 +2131,11 @@ class listing
                 $result = '';
 
                 // Draw entries
-                $result .= "<li$separator><a href='#'>".image('images/lists/export.png').'&nbsp;'._('Export list').'&nbsp;'.image('images/forward-arrow.png')."</a><ul class='level3'>";
+                $result .= "<li$separator><a href='#'>" . image('images/lists/export.png') . '&nbsp;' . _('Export list') . '&nbsp;' . image('images/forward-arrow.png') . "</a><ul class='level3'>";
 
                 // Export CVS as build in exporter
                 foreach ($this->exporter as $action => $exporter) {
-                    $result .= "<li><a href='#' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>".image($exporter['image']).'&nbsp;'.$exporter['label'].'</a></li>';
+                    $result .= "<li><a href='#' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>" . image($exporter['image']) . '&nbsp;' . $exporter['label'] . '</a></li>';
                 }
 
                 // Finalize list
@@ -2142,16 +2146,16 @@ class listing
                 // Presets
                 $result = '';
                 // Draw entries
-                $result.="    <li class='pointer_off'>
+                $result .= "    <li class='pointer_off'>
                                 <ul class='collection with-header'>
-                                    <li class='collection-header pointer_off'><h3>"._("Export list")."</h3></li>";
+                                    <li class='collection-header pointer_off'><h3>" . _("Export list") . "</h3></li>";
 
                 // Export CVS as build in exporter
                 foreach ($this->exporter as $action => $exporter) {
                     $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"$action\";\$(\"exec_act\").click();'>
                                     <a href='#'>
-                                        <i class='material-icons'>".$exporter['image'].'</i>
-                                        '.$exporter['label'].'
+                                        <i class='material-icons'>" . $exporter['image'] . '</i>
+                                        ' . $exporter['label'] . '
                                     </a>
                                 </li>';
                 }

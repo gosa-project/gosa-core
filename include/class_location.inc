@@ -1,5 +1,6 @@
 <?php
-$class_mapping= array(
+
+$class_mapping = array(
                 "dbInformation" => "plugins/generic/dashBoard/dbInformation/class_dbInformation.inc",
                 "dashBoard" => "plugins/generic/dashBoard/class_dashBoard.inc",
                 "dbNotifications" => "plugins/generic/dashBoard/dbNotifications/class_dbNotifications.inc",

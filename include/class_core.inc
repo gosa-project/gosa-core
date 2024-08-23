@@ -3,9 +3,9 @@
 /*
  *   How to use plugin::plInfo()
  *   ===================
- *   
+ *
  *   The function returns a descriptive array of the plugin,
- *    which will then be used by GOsa to populate the plugin, its ACLs, 
+ *    which will then be used by GOsa to populate the plugin, its ACLs,
  *    its properties, its schema requirements aso.
  *
  *
@@ -14,29 +14,29 @@
  *
  *   plShortName    |-> The name of the plugin in short (e.g. Posix)
  *                  |   This short-name will be shown for example in the ACL definitions.
- *                  | 
- *                  | 
+ *                  |
+ *                  |
  *   plDescription  |-> A descriptive text for the plugin (e.g. User posix account extension)
- *                  |   This will be shown in the ACL definitions.   
- *                  | 
- *                  | 
+ *                  |   This will be shown in the ACL definitions.
+ *                  |
+ *                  |
  *   plSelfModify   |-> If set to true this plugin allows to set 'self' ACLs.
  *                  |   For exampe to allow to change the users own password, but not the others.
- *                  | 
- *                  | 
+ *                  |
+ *                  |
  *   plDepends      |-> The plugins dependencies to other classes (e.g. sambaAccount requires posixAccount)
- *                  |  
- *                  | 
+ *                  |
+ *                  |
  *   plPriority     |-> The priority of the plugin, this influences the ACL listings only.
- *                  | 
- *                  | 
+ *                  |
+ *                  |
  *   plSection      |-> The section of this plugin 'administration', 'personal', 'addons'
- *                  | 
- *                  | 
- *   plCategory     |-> The plugin category this plugins belongs to (e.g. users, groups, departments) 
- *                  | 
- *                  | 
- *   plRequirements |-> Plugin requirements. 
+ *                  |
+ *                  |
+ *   plCategory     |-> The plugin category this plugins belongs to (e.g. users, groups, departments)
+ *                  |
+ *                  |
+ *   plRequirements |-> Plugin requirements.
  *                  | |
  *                  | |-> [activePlugin]           The schame checks will only be performed if the given plugin is enabled
  *                  | |                             in the gosa.conf definitions.
@@ -46,14 +46,14 @@
  *                  | |                            Syntax [[objectClass => 'version'], ... ]
  *                  | |                            Version can be emtpy which just checks for the existence of the class.
  *                  | |
- *                  | |-> [onFailureDisablePlugin] A list of plugins that which will be disabled if the 
+ *                  | |-> [onFailureDisablePlugin] A list of plugins that which will be disabled if the
  *                  |                               requirements couldn't be fillfulled.
  *                  |
  *                  |      ---------------------------------------------
  *                  |      EXAMPLE:
  *                  |      ---------------------------------------------
  *                  |      "plRequirements"=> array(
- *                  |         'activePlugin' => 'applicationManagement', 
+ *                  |         'activePlugin' => 'applicationManagement',
  *                  |         'ldapSchema' => array(
  *                  |             'gosaObject' => '',
  *                  |             'gosaAccount' => '>=2.7',
@@ -68,7 +68,7 @@
  *                  |      ---------------------------------------------
  *                  |
  *                  |
- *                  |         
+ *                  |
  *   plProvidedAcls |-> The ACLs provided by this plugin
  *                  |
  *                  |      ---------------------------------------------
@@ -82,11 +82,11 @@
  *                  |      ---------------------------------------------
  *                  |
  *                  |
- *                  | 
+ *                  |
  *   plProperties   |-> Properties used by the plugin.
  *                  |   Properties which are defined here will be modifyable using the property editor.
  *                  |   To read properties you can use $config->get_cfg_value(className, propertyName)
- *                  | 
+ *                  |
  *                  |      ---------------------------------------------
  *                  |      EXAMPLE:
  *                  |      ---------------------------------------------
@@ -106,44 +106,45 @@
  */
 
 
-class all extends plugin {
+class all extends plugin
+{
     static function plInfo()
     {
         return (array(
                     "plShortName"   => _("All"),
                     "plDescription" => _("All objects"),
-                    "plSelfModify"  => TRUE,
+                    "plSelfModify"  => true,
                     "plDepends"     => array(),
                     "plPriority"    => 0,
                     "plSection"     => array("administration"),
-                    "plCategory"    => array("all" => array("description" => '*&nbsp;'._("All"))),
+                    "plCategory"    => array("all" => array("description" => '*&nbsp;' . _("All"))),
                     "plProvidedAcls"    => array())
                );
     }
 }
 
-class core extends plugin {
-
-    static function getPropertyValues($class,$name,$value,$type)
+class core extends plugin
+{
+    static function getPropertyValues($class, $name, $value, $type)
     {
         $list = array();
-        switch($name){
+        switch ($name) {
             case 'idAllocationMethod':
                 $list = array('traditional' => _('Traditional'), 'pool' => _('Use samba pool'));
                 break;
             case 'passwordDefaultHash':
                 $tmp = passwordMethod::get_available_methods();
-                foreach($tmp['name'] as $id => $method){
+                foreach ($tmp['name'] as $id => $method) {
                     $desc = $tmp[$id]['name'];
                     $list[$method] = $desc;
                 }
                 break;
             case 'theme':
                 $cmd = "cd ../ihtml/themes; find . -name 'img.styles' | sed s/'^[^\/]*\/\([^\/]*\).*'/'\\1'/g";
-                $res = `$cmd`  ; 
+                $res = `$cmd`  ;
                 $list = array();
-                foreach(preg_split("/\n/",$res) as $entry){
-                    if(!empty($entry)){
+                foreach (preg_split("/\n/", $res) as $entry) {
+                    if (!empty($entry)) {
                         $list[$entry] = $entry;
                     }
                 }
@@ -157,47 +158,49 @@ class core extends plugin {
                             'mail' => 'mail',
                             'both' => 'uid & mail');
                 break;
-            case 'timezone': 
+            case 'timezone':
                 $tmp = timezone::_get_tz_zones();
-                foreach($tmp['TIMEZONES'] as $tzname => $offset){
-                    if($offset >= 0){
-                        $list[$tzname] = $tzname." ( + ".sprintf("%0.2f",$offset/(60*60))." "._("hours").")";
-                    }else{
+                foreach ($tmp['TIMEZONES'] as $tzname => $offset) {
+                    if ($offset >= 0) {
+                        $list[$tzname] = $tzname . " ( + " . sprintf("%0.2f", $offset / (60 * 60)) . " " . _("hours") . ")";
+                    } else {
                         $offset = $offset * -1;
-                        $list[$tzname] = $tzname." ( - ".sprintf("%0.2f",($offset/(60*60)))." "._("hours").")";
+                        $list[$tzname] = $tzname . " ( - " . sprintf("%0.2f", ($offset / (60 * 60))) . " " . _("hours") . ")";
                     }
                 }
                 break;
             case 'mailAttribute':
                 $list = array('mail' => 'mail','uid' => 'uid');
                 break;
-            case 'mailMethod': 
+            case 'mailMethod':
                 $tmp = array();
-                if(class_available('mailMethod')){
+                if (class_available('mailMethod')) {
                     $tmp = mailMethod::get_methods();
                 }
-                $list =array();
-                foreach($tmp as $vName => $vValue){
-                    $vName = preg_replace('/^mailMethod/','', $vName);
+                $list = array();
+                foreach ($tmp as $vName => $vValue) {
+                    $vName = preg_replace('/^mailMethod/', '', $vName);
                     $list[$vName] = $vValue;
                 }
                 $list[''] = _("None");
                 break;
             case 'language':
-                $tmp = get_languages(TRUE);
+                $tmp = get_languages(true);
                 $list[""] = _("Automatic");
-                foreach($tmp as $key => $desc){
+                foreach ($tmp as $key => $desc) {
                     $list[$key] = $desc;
                 }
                 break;
-            case 'modificationDetectionAttribute': 
-                $list = array('entryCSN' => 'entryCSN (OpenLdap)','textCSN'=>'textCSN (Sun DS)');
+            case 'modificationDetectionAttribute':
+                $list = array('entryCSN' => 'entryCSN (OpenLdap)','textCSN' => 'textCSN (Sun DS)');
                 break;
-            default: echo $name." ";$list = array();
+            default:
+                echo $name . " ";
+                $list = array();
         }
 
-        if(!isset($list[$value])){
-            $list[$value] = $value." ("._("User value").")";
+        if (!isset($list[$value])) {
+            $list[$value] = $value . " (" . _("User value") . ")";
         }
 
         return($list);
@@ -208,12 +211,12 @@ class core extends plugin {
         return (array(
                     "plShortName" => _("Core"),
                     "plDescription" => _("GOsa core plugin"),
-                    "plSelfModify"  => FALSE,
+                    "plSelfModify"  => false,
                     "plDepends"     => array(),
                     "plPriority"    => 0,
                     "plSection"     => array("administration"),
 
-                    "plRequirements"=> array(
+                    "plRequirements" => array(
                         'ldapSchema' => array(
                             'gosaObject' => '>=2.7',
                             'gosaAccount' => '>=2.7',
@@ -239,7 +242,7 @@ class core extends plugin {
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
                             "group"         => "authentification",
-                            "mandatory"     => TRUE),
+                            "mandatory"     => true),
 
                         array(
                             "name"          => "statsDatabaseEnabled",
@@ -249,7 +252,7 @@ class core extends plugin {
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
                             "group"         => "core",
-                            "mandatory"     => TRUE),
+                            "mandatory"     => true),
 
                         array(
                                 "name"          => "statsDatabaseDirectory",
@@ -259,7 +262,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                             "name"          => "logging",
@@ -270,7 +273,7 @@ class core extends plugin {
                             "check"         => "gosaProperty::isBool",
                             "migrate"       => "",
                             "group"         => "core",
-                            "mandatory"     => TRUE),
+                            "mandatory"     => true),
 
                         array(
                                 "name"          => "listSummary",
@@ -280,7 +283,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "visual",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "passwordMinLength",
@@ -290,7 +293,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "password",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "passwordMinDiffer",
@@ -300,27 +303,27 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "password",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "passwordProposalHook",
                                 "type"          => "command",
                                 "default"       => "",
-                                "description"   => _("Command to generate password proposals. If a command has been specified, the user can decide whether to use an automatic password or a manually specified one.")." "._("Example").": /usr/bin/apg -n1",
+                                "description"   => _("Command to generate password proposals. If a command has been specified, the user can decide whether to use an automatic password or a manually specified one.") . " " . _("Example") . ": /usr/bin/apg -n1",
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
                                 "group"         => "password",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "displayErrors",
                                 "type"          => "bool",
                                 "default"       => "false",
-                                "description"   => _("Enable display of PHP errors on the top of the page. Disable this feature in production environments to avoid the exposure of sensitive data.")." ".sprintf(_("Related option").": developmentMode"),
+                                "description"   => _("Enable display of PHP errors on the top of the page. Disable this feature in production environments to avoid the exposure of sensitive data.") . " " . sprintf(_("Related option") . ": developmentMode"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "developmentMode",
@@ -330,7 +333,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
 
                         array(
@@ -341,7 +344,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "copyPaste",
@@ -351,7 +354,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "copyPaste",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "forceGlobals",
@@ -361,7 +364,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "forceSSL",
@@ -371,7 +374,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "ldapStats",
@@ -381,7 +384,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "ldapFollowReferrals",
@@ -391,7 +394,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "ldap",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "ldapFilterNestingLimit",
@@ -401,17 +404,17 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "ldap",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "ldapSizelimit",
                                 "type"          => "integer",
                                 "default"       => 200,
-                                "description"   => _("Specify the maximum number of entries GOsa will request from an LDAP server. A warning is displayed if this limit is exceeded."), 
+                                "description"   => _("Specify the maximum number of entries GOsa will request from an LDAP server. A warning is displayed if this limit is exceeded."),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "ldapSizeIgnore",
@@ -421,7 +424,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "warnSSL",
@@ -431,7 +434,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "ppdGzip",
@@ -441,7 +444,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "ppd",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
 
                         array(
@@ -452,7 +455,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isDN",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
 
                         array(
@@ -463,7 +466,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isPath",
                                 "migrate"       => "",
                                 "group"         => "ppd",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "ldapMaxQueryTime",
@@ -473,7 +476,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "useAutoComplete",
@@ -483,7 +486,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "storeFilterSettings",
@@ -493,7 +496,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "sendCompressedOutput",
@@ -503,7 +506,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "allowUidProposalModification",
@@ -513,7 +516,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "modificationDetectionAttribute",
@@ -524,7 +527,7 @@ class core extends plugin {
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "language",
@@ -535,7 +538,7 @@ class core extends plugin {
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "theme",
@@ -546,7 +549,7 @@ class core extends plugin {
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "visual",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "sessionLifetime",
@@ -556,7 +559,7 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "templateCompileDirectory",
@@ -566,14 +569,15 @@ class core extends plugin {
                                 "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "debugLevel",
                                 "type"          => "integer",
                                 "default"       => 0,
-                                "description"   => sprintf(_("Logical AND of the integer values below that controls the debug output on every page load: %s"),
-"
+                                "description"   => sprintf(
+                                    _("Logical AND of the integer values below that controls the debug output on every page load: %s"),
+                                    "
 
 DEBUG_TRACE   = 1
 DEBUG_LDAP    = 2
@@ -583,11 +587,12 @@ DEBUG_POST    = 16
 DEBUG_SESSION = 32
 DEBUG_CONFIG  = 64
 DEBUG_ACL     = 128
-DEBUG_SI      = 256"),
+DEBUG_SI      = 256"
+                                ),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "debug",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "sambaHashHook",
@@ -597,7 +602,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
                                 "group"         => "samba",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "passwordDefaultHash",
@@ -608,7 +613,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "password",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
                         array(
                                 "name"          => "strictPasswordRules",
                                 "type"          => "bool",
@@ -617,7 +622,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "password",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "accountPrimaryAttribute",
@@ -628,7 +633,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "userRDN",
@@ -636,9 +641,9 @@ DEBUG_SI      = 256"),
                                 "default"       => "ou=people,",
                                 "description"   => _("Location component for user storage inside of departments."),
                                 "check"         => "gosaProperty::isRdn",
-                                "migrate"       => "migrate_userRDN", 
+                                "migrate"       => "migrate_userRDN",
                                 "group"         => "user",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "groupRDN",
@@ -648,7 +653,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isRdn",
                                 "migrate"       => "migrate_groupRDN",
                                 "group"         => "group",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gidNumberBase",
@@ -658,7 +663,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                        array(
                                 "name"          => "baseIdHook",
@@ -668,7 +673,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gidNumberPoolMin",
@@ -678,7 +683,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gidNumberPoolMax",
@@ -688,7 +693,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "uidNumberPoolMin",
@@ -698,7 +703,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "uidNumberPoolMax",
@@ -708,7 +713,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "uidNumberBase",
@@ -718,7 +723,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gosaRpcServer",
@@ -728,7 +733,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "jsonRPC::testConnectionProperties",
                                 "migrate"       => "",
                                 "group"         => "rpc",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gosaRpcUser",
@@ -738,7 +743,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "rpc",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gosaRpcPassword",
@@ -748,7 +753,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "rpc",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gosaSupportURI",
@@ -758,7 +763,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "gosa-si",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gosaSupportTimeout",
@@ -768,7 +773,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "gosa-si",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "loginAttribute",
@@ -779,7 +784,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "timezone",
@@ -790,7 +795,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "honourUnitTags",
@@ -800,7 +805,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "useSaslForKerberos",
@@ -810,7 +815,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "password",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "SASLRealm",
@@ -820,7 +825,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "password",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "rfc2307bis",
@@ -830,7 +835,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "personalTitleInDN",
@@ -840,7 +845,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "storage location",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "nextIdHook",
@@ -850,7 +855,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isCommand",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
                         array(
                                 "name"          => "idGenerator",
                                 "type"          => "string",
@@ -859,7 +864,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "strictNamingRules",
@@ -869,7 +874,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "minId",
@@ -879,7 +884,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "mailAttribute",
@@ -890,7 +895,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "gosaSharedPrefix",
@@ -900,7 +905,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "mailUserCreation",
@@ -910,7 +915,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "mailFolderCreation",
@@ -920,7 +925,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "imapTimeout",
@@ -930,7 +935,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "mailMethod",
@@ -941,7 +946,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "cyrusUseSlashes",
@@ -951,7 +956,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "vacationTemplateDirectory",
@@ -961,7 +966,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isWriteablePath",
                                 "migrate"       => "",
                                 "group"         => "mail",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "ldapTLS",
@@ -971,7 +976,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "security",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "honourIvbbAttributes",
@@ -981,7 +986,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "sambaIdMapping",
@@ -991,7 +996,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "samba",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "handleExpiredAccounts",
@@ -1001,7 +1006,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "sambaSID",
@@ -1011,7 +1016,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "samba",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "sambaRidBase",
@@ -1021,7 +1026,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isInteger",
                                 "migrate"       => "",
                                 "group"         => "samba",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "enableSnapshots",
@@ -1031,7 +1036,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
 
                         array(
                                 "name"          => "snapshotBase",
@@ -1041,7 +1046,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isDn",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "snapshotAdminDn",
@@ -1051,7 +1056,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isDn",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "snapshotAdminPassword",
@@ -1061,7 +1066,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
 
                         array(
                                 "name"          => "idAllocationMethod",
@@ -1072,7 +1077,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "id",
-                                "mandatory"     => TRUE),
+                                "mandatory"     => true),
                         array(
                                 "name"          => "snapshotURI",
                                 "type"          => "uri",
@@ -1081,7 +1086,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "",
                                 "migrate"       => "",
                                 "group"         => "snapshot",
-                                "mandatory"     => FALSE),
+                                "mandatory"     => false),
                         array(
                                 "name"          => "forceTranslit",
                                 "type"          => "bool",
@@ -1090,8 +1095,7 @@ DEBUG_SI      = 256"),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",
-                                "mandatory"     => TRUE)
+                                "mandatory"     => true)
                             )));
     }
 }
-?>
