@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -140,9 +141,10 @@ class pluglist
         // Check class
         if (!isset($plug['CLASS'])) {
             msg_dialog::display(
-                    _('Configuration error'),
-                    _('The configuration format has changed: please run the setup again!'),
-                    FATAL_ERROR_DIALOG);
+                _('Configuration error'),
+                _('The configuration format has changed: please run the setup again!'),
+                FATAL_ERROR_DIALOG
+            );
             exit();
         }
         if (!plugin_available($plug['CLASS'])) {
@@ -159,10 +161,10 @@ class pluglist
     }
 
     /*! \brief  Check whether we are allowed to modify the given acl or not..
-     *		This function is used to check which plugins are visible.
+     *      This function is used to check which plugins are visible.
      *
-     *  @param	The acl tag to check for, eg. 	"users/user:self", "systems", ...
-     *  @return	Boolean TRUE on success else FALSE
+     *  @param  The acl tag to check for, eg.   "users/user:self", "systems", ...
+     *  @return Boolean TRUE on success else FALSE
      */
     public function check_access($aclname)
     {
@@ -264,7 +266,7 @@ class pluglist
 
                         $menu .= "    <div class='menu'>
                                         <ul>
-                                            <li class='menu-header'>"._($headline).'</li>';
+                                            <li class='menu-header'>" . _($headline) . '</li>';
                         $id = 0;
                         foreach ($plug as $info) {
                             // The Plugin has been deactivated for some reason, perhabs a missing ldap schema.
@@ -280,7 +282,7 @@ class pluglist
                             if ($id == count($plug)) {
                                 $class = " class='menu-last' ";
                             }
-                            $menu .= "\n            <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>".$title.'</li>';
+                            $menu .= "\n            <li id='plugMenuId_{$index}' $class onClick='return openPlugin({$index});'>" . $title . '</li>';
 
                             $this->registeredMenuEntries[] = $index;
                         }
@@ -302,7 +304,7 @@ class pluglist
                         }
 
                         $menu .= "    <li class='active'>
-                                        <div class='collapsible-header primary'><h4>"._($headline)."</h4></div>
+                                        <div class='collapsible-header primary'><h4>" . _($headline) . "</h4></div>
                                         <div class='collapsible-body'>
                                             <ul class='collection'>";
 
@@ -317,7 +319,7 @@ class pluglist
                             ++$id;
 
                             list($index, $title, $desc, $icon) = $this->getPlugData($info['CLASS']);
-                            $menu .= "  <li id='plugMenuId_{$index}' class='collection-item pointer' onClick='return openPlugin({$index});'><span>".$title.'</span></li>';
+                            $menu .= "  <li id='plugMenuId_{$index}' class='collection-item pointer' onClick='return openPlugin({$index});'><span>" . $title . '</span></li>';
 
                             $this->registeredMenuEntries[] = $index;
                         }
@@ -334,16 +336,16 @@ class pluglist
             // Add javascript method to print out warning messages while leaving an unsaved form.
             // We do it in here to get the string translated.
             $this->menu .=
-                "\n      <script language='javascript' type='text/javascript'>".
-                "\n        function openPlugin(id, plugin){".
-                "\n          if(plugin){ ".
-                "\n             plugin = '&pluginTab=' +  plugin".
-                "\n          }else{".
-                "\n             plugin = '';".
-                "\n          }".
-                "\n          return question(\""._('You are currently editing a database entry. Do you want to discard the changes?').'",'.
-                "\n            \"main.php?plug=\" + id + \"&reset=1\" + plugin);".
-                "\n        }".
+                "\n      <script language='javascript' type='text/javascript'>" .
+                "\n        function openPlugin(id, plugin){" .
+                "\n          if(plugin){ " .
+                "\n             plugin = '&pluginTab=' +  plugin" .
+                "\n          }else{" .
+                "\n             plugin = '';" .
+                "\n          }" .
+                "\n          return question(\"" . _('You are currently editing a database entry. Do you want to discard the changes?') . '",' .
+                "\n            \"main.php?plug=\" + id + \"&reset=1\" + plugin);" .
+                "\n        }" .
                 "\n      </script>\n";
         }
 
@@ -351,8 +353,8 @@ class pluglist
         $menu = $this->menu;
         if (isset($_GET['plug'])) {
             $menu .= "    <script language='javascript' type='text/javascript'>
-                            if($('plugMenuId_".$_GET['plug']."')){
-                            $('plugMenuId_".$_GET['plug']."').className=".($this->theme == 'default' ? "'collection-item pointer active'" : "'current'").'
+                            if($('plugMenuId_" . $_GET['plug'] . "')){
+                            $('plugMenuId_" . $_GET['plug'] . "').className=" . ($this->theme == 'default' ? "'collection-item pointer active'" : "'current'") . '
                             }
                         </script>';
         }
@@ -387,7 +389,7 @@ class pluglist
                             $this->iconmenu .= "\n        <hr>";
                         }
 
-                        $this->iconmenu .= "\n        <h3 class='icon-menu-title'>"._($headline).'</h3>';
+                        $this->iconmenu .= "\n        <h3 class='icon-menu-title'>" . _($headline) . '</h3>';
 
                         foreach ($plug as $info) {
                             // Get Plugin info
@@ -405,7 +407,7 @@ class pluglist
                             }
 
                             $this->iconmenu .= "\n        <div class='icon-menu-item' style='width: 25%;' onclick='openPlugin({$index})'>";
-                            $this->iconmenu .= "\n          ".image($icon);
+                            $this->iconmenu .= "\n          " . image($icon);
                             $this->iconmenu .= "\n          <div class='dsc'>";
                             $this->iconmenu .= "\n            <h1>{$title}</h1>";
                             $this->iconmenu .= "\n            <p>{$desc}</p>";
@@ -425,7 +427,7 @@ class pluglist
                             $add_hr = false;
                             $this->iconmenu .= "\n        <hr class='divider'>";
                         }
-                        $this->iconmenu .= "\n        <h2 class='card-title'>"._($headline).'</h2>';
+                        $this->iconmenu .= "\n        <h2 class='card-title'>" . _($headline) . '</h2>';
 
                         $plugCount = count($plug);
                         foreach ($plug as $info) {
@@ -505,7 +507,7 @@ class pluglist
             switch ($this->theme) {
                 case 'classic':
                     $this->pathMenu =
-                    "\n        <div class='plugin-path'>".
+                    "\n        <div class='plugin-path'>" .
                     "\n          <ul class='path-navigation'>";
 
                     // Check if we've at least one entry defined ih the iconmenu
@@ -523,8 +525,8 @@ class pluglist
 
                             $cssClass = (!isset($rcfg[$id + 1])) ? 'left' : 'left right-border';
                             $this->pathMenu .= "
-                                <li class='{$cssClass}' onClick='openPlugin({$index})' title='{$title}'>".
-                                image(get_template_path($shortIcon)).'</li>';
+                                <li class='{$cssClass}' onClick='openPlugin({$index})' title='{$title}'>" .
+                                image(get_template_path($shortIcon)) . '</li>';
                         }
                     }
 
@@ -633,7 +635,7 @@ class pluglist
                 break;
 
             default:
-            $plIcon = (isset($vars['matIcon'])) ? $vars['matIcon'] : 'block';
+                $plIcon = (isset($vars['matIcon'])) ? $vars['matIcon'] : 'block';
                 break;
         }
         $plShortIcon = (isset($vars['plShortIcon'])) ? $vars['plShortIcon'] : 'plugin.png';
@@ -653,8 +655,11 @@ class pluglist
         switch ($this->theme) {
             case 'classic':
                 if (!preg_match("/\//", $plIcon)) {
-                    $image = get_template_path('plugins/'.preg_replace('%^.*/([^/]+)/[^/]+$%', '\1',
-                                $class_mapping[$class])."/images/$plIcon");
+                    $image = get_template_path('plugins/' . preg_replace(
+                        '%^.*/([^/]+)/[^/]+$%',
+                        '\1',
+                        $class_mapping[$class]
+                    ) . "/images/$plIcon");
                 } else {
                     $image = $plIcon;
                 }
@@ -667,8 +672,11 @@ class pluglist
 
         // Detect the correct position of the plugin icon
         if (!preg_match("/\//", $plShortIcon)) {
-            $shortImage = get_template_path('plugins/'.preg_replace('%^.*/([^/]+)/[^/]+$%', '\1',
-                        $class_mapping[$class])."/images/$plShortIcon");
+            $shortImage = get_template_path('plugins/' . preg_replace(
+                '%^.*/([^/]+)/[^/]+$%',
+                '\1',
+                $class_mapping[$class]
+            ) . "/images/$plShortIcon");
         } else {
             $shortImage = $plShortIcon;
         }
@@ -685,7 +693,7 @@ class pluglist
             return '';
         }
 
-        return '../'.$this->dirlist[$index];
+        return '../' . $this->dirlist[$index];
     }
 
     /*! \brief    Returns the plugins id for a given class.
