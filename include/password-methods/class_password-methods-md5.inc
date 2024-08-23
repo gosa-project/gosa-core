@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -22,33 +23,31 @@
 
 class passwordMethodMd5 extends passwordMethod
 {
-	function __construct($config)  
-	{
-	}
+    function __construct($config)
+    {
+    }
 
 
-	function is_available()
-	{
-		if (function_exists('md5')){
-			return(true);
-		}else{
-			return false;
-		}
-	}
+    function is_available()
+    {
+        if (function_exists('md5')) {
+            return(true);
+        } else {
+            return false;
+        }
+    }
 
 
-	function generate_hash($pwd)
-	{
-		return  "{MD5}".base64_encode( pack('H*', md5($pwd)));
-	}
+    function generate_hash($pwd)
+    {
+        return  "{MD5}" . base64_encode(pack('H*', md5($pwd)));
+    }
 
 
-  function get_hash_name()
-  {
-    return "md5";
-  }
-
+    function get_hash_name()
+    {
+        return "md5";
+    }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
