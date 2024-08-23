@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -23,10 +24,10 @@
 class passwordMethod
 {
     var $config = false;
-    var $attrs= array();
-    var $display = FALSE;
-    var $hash= "";
-    var $lockable = TRUE;
+    var $attrs = array();
+    var $display = false;
+    var $hash = "";
+    var $lockable = true;
 
     // Konstructor
     function __construct($config, $dn)
@@ -35,10 +36,10 @@ class passwordMethod
 
     function create_template_hash($attrs)
     {
-        if($this->get_hash_name() == ""){
+        if ($this->get_hash_name() == "") {
             return("{crypt}N0T$3T4N0W");
-        }else{
-            return('{'.$this->get_hash().'}').'N0T$3T4N0W';
+        } else {
+            return('{' . $this->get_hash() . '}') . 'N0T$3T4N0W';
         }
     }
 
@@ -47,24 +48,26 @@ class passwordMethod
     }
 
 
-    function is_locked($config,$dn = "")
+    function is_locked($config, $dn = "")
     {
-        if(!$this->lockable) return FALSE;
+        if (!$this->lockable) {
+            return false;
+        }
 
         /* Get current password hash */
-        $pwd ="";
-        if(!empty($dn)){
+        $pwd = "";
+        if (!empty($dn)) {
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
             $ldap->cat($dn);
             $attrs = $ldap->fetch();
-            if(isset($attrs['userPassword'][0])){
+            if (isset($attrs['userPassword'][0])) {
                 $pwd = $attrs['userPassword'][0];
             }
-        }elseif(isset($this->attrs['userPassword'][0])){
+        } elseif (isset($this->attrs['userPassword'][0])) {
             $pwd = $this->attrs['userPassword'][0];
         }
-        return(preg_match("/^[^\}]*+\}!/",$pwd));
+        return(preg_match("/^[^\}]*+\}!/", $pwd));
     }
 
 
@@ -74,137 +77,149 @@ class passwordMethod
      *                 userPassword: {SHA}!q02NKl9IChNwZEAJxzRdmB6E
      *                 sambaLMPassword: !EBD223B61F8C259AD3B435B51404EE
      *                 sambaNTPassword: !98BB35737013AAF181D0FE9FDA09E
-     */               
-    function lock_account($config,$dn = "")
+     */
+    function lock_account($config, $dn = "")
     {
-        if(!$this->lockable) return FALSE;
+        if (!$this->lockable) {
+            return false;
+        }
 
         /* Get current password hash */
         $userPassword = $sambaLMPassword = $sambaNTPassword = "";
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        if(!empty($dn)){
-            $ldap->cat($dn,array('sambaLMPassword','sambaNTPassword','userPassword'));
+        if (!empty($dn)) {
+            $ldap->cat($dn, array('sambaLMPassword','sambaNTPassword','userPassword'));
             $attrs = $ldap->fetch();
-            $userPassword = (isset($attrs['userPassword'][0])) ? $attrs['userPassword'][0]: "";
-            $sambaLMPassword = (isset($attrs['sambaLMPassword'][0])) ? $attrs['sambaLMPassword'][0]: "";
-            $sambaNTPassword = (isset($attrs['sambaNTPassword'][0])) ? $attrs['sambaNTPassword'][0]: "";
-        }elseif(isset($this->attrs['userPassword'][0])){
+            $userPassword = (isset($attrs['userPassword'][0])) ? $attrs['userPassword'][0] : "";
+            $sambaLMPassword = (isset($attrs['sambaLMPassword'][0])) ? $attrs['sambaLMPassword'][0] : "";
+            $sambaNTPassword = (isset($attrs['sambaNTPassword'][0])) ? $attrs['sambaNTPassword'][0] : "";
+        } elseif (isset($this->attrs['userPassword'][0])) {
             $dn = $this->attrs['dn'];
-            $userPassword = (isset($this->attrs['userPassword'][0])) ? $this->attrs['userPassword'][0]: "";
-            $sambaLMPassword = (isset($this->attrs['sambaLMPassword'][0])) ? $this->attrs['sambaLMPassword'][0]: "";
-            $sambaNTPassword = (isset($this->attrs['sambaNTPassword'][0])) ? $this->attrs['sambaNTPassword'][0]: "";
+            $userPassword = (isset($this->attrs['userPassword'][0])) ? $this->attrs['userPassword'][0] : "";
+            $sambaLMPassword = (isset($this->attrs['sambaLMPassword'][0])) ? $this->attrs['sambaLMPassword'][0] : "";
+            $sambaNTPassword = (isset($this->attrs['sambaNTPassword'][0])) ? $this->attrs['sambaNTPassword'][0] : "";
         }
 
         /* We can only lock/unlock non-empty passwords */
-        if(!empty($userPassword)){
-
+        if (!empty($userPassword)) {
             /* Check if this entry is already locked. */
-            if(preg_match("/^[^\}]*+\}!/",$userPassword)){
-                return(TRUE);
-            }     
+            if (preg_match("/^[^\}]*+\}!/", $userPassword)) {
+                return(true);
+            }
 
             /* Lock entry */
-            $userPassword = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$userPassword);
+            $userPassword = preg_replace("/(^[^\}]+\})(.*$)/", "\\1!\\2", $userPassword);
 
             // Only lock samba hashes if samba passwords are enabled
-            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) != "";
-            if($smbPasswdEnabled){
-                $sambaLMPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaLMPassword);
-                $sambaNTPassword = preg_replace("/^[!]*(.*$)/","!\\1",$sambaNTPassword);
+            $smbPasswdEnabled = trim($config->get_cfg_value('core', 'sambaHashHook')) != "";
+            if ($smbPasswdEnabled) {
+                $sambaLMPassword = preg_replace("/^[!]*(.*$)/", "!\\1", $sambaLMPassword);
+                $sambaNTPassword = preg_replace("/^[!]*(.*$)/", "!\\1", $sambaNTPassword);
             }
 
             // Call external lock hook
             $res = $ldap->cat($dn);
             $hookAttrs = array();
-            foreach($ldap->fetch() as $name => $value){
-                if(is_numeric($name)) continue;
-                if(isset($value[0])) $hookAttrs[$name] = $value[0];
-                if(isset($value) && is_string($value)) $hookAttrs[$name] = $value;
+            foreach ($ldap->fetch() as $name => $value) {
+                if (is_numeric($name)) {
+                    continue;
+                }
+                if (isset($value[0])) {
+                    $hookAttrs[$name] = $value[0];
+                }
+                if (isset($value) && is_string($value)) {
+                    $hookAttrs[$name] = $value;
+                }
             }
             $pwdClass = new password($config, $dn);
-            $pwdClass->callHook($pwdClass, 'PRELOCK',$hookAttrs, $ret);
+            $pwdClass->callHook($pwdClass, 'PRELOCK', $hookAttrs, $ret);
 
             // Update the ldap entry
             $ldap->cd($dn);
             $attrs = array();
             $attrs['userPassword'] = $userPassword;
-    
+
             // Updated samba hashes if samba hashing is enabled
-            if($smbPasswdEnabled){
+            if ($smbPasswdEnabled) {
                 $attrs['sambaLMPassword'] = $sambaLMPassword;
                 $attrs['sambaNTPassword'] = $sambaNTPassword;
             }
 
             $ldap->modify($attrs);
-            if($ldap->success()){
-
+            if ($ldap->success()) {
                 // Call the password post-lock hook, if defined.
-                $pwdClass->callHook($pwdClass, 'POSTLOCK',$hookAttrs, $ret);
+                $pwdClass->callHook($pwdClass, 'POSTLOCK', $hookAttrs, $ret);
             }
             return($ldap->success());
-            
         }
-        return(FALSE);
+        return(false);
     }
 
 
     /*! \brief       Unlocks an account (gosaAccount) which was locked by 'lock_account()'.
      *               For details about the locking mechanism see 'lock_account()'.
-     */               
-    function unlock_account($config,$dn = "")
+     */
+    function unlock_account($config, $dn = "")
     {
-        if(!$this->lockable) return FALSE;
+        if (!$this->lockable) {
+            return false;
+        }
 
         /* Get current password hash */
         $userPassword = $sambaLMPassword = $sambaNTPassword = "";
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        if(!empty($dn)){
-            $ldap->cat($dn,array('sambaLMPassword','sambaNTPassword','userPassword'));
+        if (!empty($dn)) {
+            $ldap->cat($dn, array('sambaLMPassword','sambaNTPassword','userPassword'));
             $attrs = $ldap->fetch();
-            $userPassword = (isset($attrs['userPassword'][0])) ? $attrs['userPassword'][0]: "";
-            $sambaLMPassword = (isset($attrs['sambaLMPassword'][0])) ? $attrs['sambaLMPassword'][0]: "";
-            $sambaNTPassword = (isset($attrs['sambaNTPassword'][0])) ? $attrs['sambaNTPassword'][0]: "";
-        }elseif(isset($this->attrs['userPassword'][0])){
+            $userPassword = (isset($attrs['userPassword'][0])) ? $attrs['userPassword'][0] : "";
+            $sambaLMPassword = (isset($attrs['sambaLMPassword'][0])) ? $attrs['sambaLMPassword'][0] : "";
+            $sambaNTPassword = (isset($attrs['sambaNTPassword'][0])) ? $attrs['sambaNTPassword'][0] : "";
+        } elseif (isset($this->attrs['userPassword'][0])) {
             $dn = $this->attrs['dn'];
-            $userPassword = (isset($this->attrs['userPassword'][0])) ? $this->attrs['userPassword'][0]: "";
-            $sambaLMPassword = (isset($this->attrs['sambaLMPassword'][0])) ? $this->attrs['sambaLMPassword'][0]: "";
-            $sambaNTPassword = (isset($this->attrs['sambaNTPassword'][0])) ? $this->attrs['sambaNTPassword'][0]: "";
+            $userPassword = (isset($this->attrs['userPassword'][0])) ? $this->attrs['userPassword'][0] : "";
+            $sambaLMPassword = (isset($this->attrs['sambaLMPassword'][0])) ? $this->attrs['sambaLMPassword'][0] : "";
+            $sambaNTPassword = (isset($this->attrs['sambaNTPassword'][0])) ? $this->attrs['sambaNTPassword'][0] : "";
         }
 
 
         /* We can only lock/unlock non-empty passwords */
-        if(!empty($userPassword)){
-
+        if (!empty($userPassword)) {
             /* Check if this entry is already locked. */
-            if(!preg_match("/^[^\}]*+\}!/",$userPassword)){
-                return (TRUE);
-            }     
+            if (!preg_match("/^[^\}]*+\}!/", $userPassword)) {
+                return (true);
+            }
 
             /* Lock entry */
 
-            $userPassword = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$userPassword);
+            $userPassword = preg_replace("/(^[^\}]+\})!(.*$)/", "\\1\\2", $userPassword);
 
             // Update samba hashes only if its enabled.
-            $smbPasswdEnabled = trim($config->get_cfg_value('core','sambaHashHook')) != "";
-            if($smbPasswdEnabled){
-                $sambaLMPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaLMPassword);
-                $sambaNTPassword = preg_replace("/^[!]*(.*$)/","\\1",$sambaNTPassword);
+            $smbPasswdEnabled = trim($config->get_cfg_value('core', 'sambaHashHook')) != "";
+            if ($smbPasswdEnabled) {
+                $sambaLMPassword = preg_replace("/^[!]*(.*$)/", "\\1", $sambaLMPassword);
+                $sambaNTPassword = preg_replace("/^[!]*(.*$)/", "\\1", $sambaNTPassword);
             }
 
             // Call external lock hook
             $res = $ldap->cat($dn);
             $hookAttrs = array();
-            foreach($ldap->fetch() as $name => $value){
-                if(is_numeric($name)) continue;
-                if(isset($value[0])) $hookAttrs[$name] = $value[0];
-                if(isset($value) && is_string($value)) $hookAttrs[$name] = $value;
+            foreach ($ldap->fetch() as $name => $value) {
+                if (is_numeric($name)) {
+                    continue;
+                }
+                if (isset($value[0])) {
+                    $hookAttrs[$name] = $value[0];
+                }
+                if (isset($value) && is_string($value)) {
+                    $hookAttrs[$name] = $value;
+                }
             }
             $pwdClass = new password($config, $dn);
-            $pwdClass->callHook($pwdClass, 'PREUNLOCK',$hookAttrs, $ret);
+            $pwdClass->callHook($pwdClass, 'PREUNLOCK', $hookAttrs, $ret);
 
-            // Lock the account by modifying the password hash. 
+            // Lock the account by modifying the password hash.
             $ldap->cd($dn);
 
             // Update the ldap entry
@@ -212,22 +227,21 @@ class passwordMethod
             $attrs['userPassword'] = $userPassword;
 
             // Updated samba hashes if samba hashing is enabled
-            if($smbPasswdEnabled){
+            if ($smbPasswdEnabled) {
                 $attrs['sambaLMPassword'] = $sambaLMPassword;
                 $attrs['sambaNTPassword'] = $sambaNTPassword;
             }
 
             $ldap->modify($attrs);
 
-            if($ldap->success()){
-
+            if ($ldap->success()) {
                 // Call the password post-lock hook, if defined.
                 $pwdClass = new password($config, $dn);
-                $pwdClass->callHook($pwdClass, 'POSTUNLOCK',$hookAttrs, $ret);
+                $pwdClass->callHook($pwdClass, 'POSTUNLOCK', $hookAttrs, $ret);
             }
             return($ldap->success());
         }
-        return(FALSE);
+        return(false);
     }
 
 
@@ -236,41 +250,40 @@ class passwordMethod
     {
         global $class_mapping, $config;
         $ret = array();
-        $i =0;
+        $i = 0;
 
         /* Only */
-        if(!session::is_set("passwordMethod::get_available_methods")){
-            foreach($class_mapping as $class => $path) {
-                if(preg_match('/passwordMethod/i', $class) && !preg_match("/^passwordMethod$/i", $class)){
-                    $name = preg_replace ("/passwordMethod/i", "", $class);
+        if (!session::is_set("passwordMethod::get_available_methods")) {
+            foreach ($class_mapping as $class => $path) {
+                if (preg_match('/passwordMethod/i', $class) && !preg_match("/^passwordMethod$/i", $class)) {
+                    $name = preg_replace("/passwordMethod/i", "", $class);
                     $test = new $class($config, "");
-                    if($test->is_available()) {
-                        $plugs= $test->get_hash_name();
-                        if (!is_array($plugs)){
-                            $plugs= array($plugs);
+                    if ($test->is_available()) {
+                        $plugs = $test->get_hash_name();
+                        if (!is_array($plugs)) {
+                            $plugs = array($plugs);
                         }
 
-                        foreach ($plugs as $plugname){
-
+                        foreach ($plugs as $plugname) {
                             $cfg = $test->is_configurable();
 
-                            $ret['name'][$i]= $plugname;
-                            $ret['class'][$i]=$class;
-                            $ret['is_configurable'][$i]= $cfg;
-                            $ret['object'][$i]= $test;
+                            $ret['name'][$i] = $plugname;
+                            $ret['class'][$i] = $class;
+                            $ret['is_configurable'][$i] = $cfg;
+                            $ret['object'][$i] = $test;
                             $ret['desc'][$i] = $test->get_description();
                             $ret[$i]['name']  = $plugname;
                             $ret[$i]['class'] = $class;
-                            $ret[$i]['object']= $test;
-                            $ret[$i]['is_configurable']= $cfg;
+                            $ret[$i]['object'] = $test;
+                            $ret[$i]['is_configurable'] = $cfg;
                             $ret[$i]['desc'] = $test->get_description();
-                            $ret[$plugname]=$class;                    
+                            $ret[$plugname] = $class;
                             $i++;
                         }
                     }
                 }
             }
-            session::set("passwordMethod::get_available_methods",$ret);
+            session::set("passwordMethod::get_available_methods", $ret);
         }
         return(session::get("passwordMethod::get_available_methods"));
     }
@@ -293,14 +306,14 @@ class passwordMethod
     // besides the userAttribute entry
     function set_password($password)
     {
-        return(TRUE);
+        return(true);
     }
 
 
     // Return true if this password method provides a configuration dialog
     function is_configurable()
     {
-        return FALSE;
+        return false;
     }
 
 
@@ -318,19 +331,18 @@ class passwordMethod
 
 
     // Try to find out if it's our hash...
-    static function get_method($password_hash,$dn = "")
+    static function get_method($password_hash, $dn = "")
     {
         global $config;
 
-        $methods= passwordMethod::get_available_methods();
+        $methods = passwordMethod::get_available_methods();
 
-        foreach ($methods['class'] as $class){
-
-            $test = new $class($config,$dn);
-#        All listed methods are available. 
+        foreach ($methods['class'] as $class) {
+            $test = new $class($config, $dn);
+#        All listed methods are available.
 #        if(!$test->is_available())continue;
-            $method= $test->_extract_method($password_hash);
-            if ($method != ""){
+            $method = $test->_extract_method($password_hash);
+            if ($method != "") {
                 $test->set_hash($method);
                 return $test;
             }
@@ -338,14 +350,14 @@ class passwordMethod
 
         msg_dialog::display(_("Error"), _("Cannot find a suitable password method for the current hash!"), ERROR_DIALOG);
 
-        return NULL;
+        return null;
     }
 
 
     function _extract_method($password_hash)
     {
-        $hash= $this->get_hash_name();
-        if (preg_match("/^\{$hash\}/i", $password_hash)){
+        $hash = $this->get_hash_name();
+        if (preg_match("/^\{$hash\}/i", $password_hash)) {
             return $hash;
         }
 
@@ -357,8 +369,8 @@ class passwordMethod
     {
         global $config;
 
-        $methods= passwordMethod::get_available_methods();
-        $tmp= new $methods[$hash]($config);
+        $methods = passwordMethod::get_available_methods();
+        $tmp = new $methods[$hash]($config);
         $tmp->set_hash($hash);
         return $tmp->generate_hash($password);
     }
@@ -366,7 +378,7 @@ class passwordMethod
 
     function set_hash($hash)
     {
-        $this->hash= $hash;
+        $this->hash = $hash;
     }
 
 
@@ -385,7 +397,7 @@ class passwordMethod
     {
         global $config;
 
-        if ($config->boolValueIsTrue("core","strictPasswordRules")) {
+        if ($config->boolValueIsTrue("core", "strictPasswordRules")) {
             // Do we have UTF8 characters in the password?
             return ($password == utf8_decode($password));
         }
@@ -396,20 +408,17 @@ class passwordMethod
 
     static function getPasswordProposal($config)
     {
-        if($config->configRegistry->propertyExists('core', 'passwordProposalHook')){
+        if ($config->configRegistry->propertyExists('core', 'passwordProposalHook')) {
             $value = $config->configRegistry->getPropertyValue('core', 'passwordProposalHook');
             $core = new core($config);
 
             // No execute the hook and fetch the results.
-            plugin::callHook($core, 'passwordProposalHook', $addAttrs= array(), $ret);
-            if(count($ret) && !empty($ret[0])){
+            plugin::callHook($core, 'passwordProposalHook', $addAttrs = array(), $ret);
+            if (count($ret) && !empty($ret[0])) {
                 return($ret[0]);
             }
         }
         return('');
     }
-
-
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
