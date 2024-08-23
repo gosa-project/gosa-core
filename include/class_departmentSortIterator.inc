@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -20,65 +21,71 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class departmentSortIterator implements Iterator {
-  private $data;
+class departmentSortIterator implements Iterator
+{
+    private $data;
 
-  public function __construct($data, $direction) {
+    public function __construct($data, $direction)
+    {
 
-    function depSort($ao, $bo) {
-      // Override sort attribute from data if needed
-      $attribute_a= $ao['sort-attribute'];
-      $attribute_b= $bo['sort-attribute'];
+        function depSort($ao, $bo)
+        {
+          // Override sort attribute from data if needed
+            $attribute_a = $ao['sort-attribute'];
+            $attribute_b = $bo['sort-attribute'];
 
-      // Extract values from ao and bo
-      $a= $b= "";
-      if (isset($ao[$attribute_a])) {
-        $a= $ao[$attribute_a];
-        if (is_array($a)) {
-          $a= $a[0];
+          // Extract values from ao and bo
+            $a = $b = "";
+            if (isset($ao[$attribute_a])) {
+                $a = $ao[$attribute_a];
+                if (is_array($a)) {
+                    $a = $a[0];
+                }
+            }
+            if (isset($bo[$attribute_b])) {
+                $b = $bo[$attribute_b];
+                if (is_array($b)) {
+                    $b = $b[0];
+                }
+            }
+
+          // Sort for string by default
+            return strnatcmp($a, $b);
         }
-      }
-      if (isset($bo[$attribute_b])) {
-        $b= $bo[$attribute_b];
-        if (is_array($b)) {
-          $b= $b[0];
-        }
-      }
 
-      // Sort for string by default
-      return strnatcmp($a, $b);
+      // Sort for attribute
+        uasort($data, "depSort");
+
+      // Invert if direction is set
+        if ($direction) {
+            $this->data = array_reverse($data, true);
+        } else {
+            $this->data = $data;
+        }
     }
 
-    // Sort for attribute
-    uasort($data, "depSort");
-
-    // Invert if direction is set
-    if ($direction) {
-      $this->data= array_reverse($data, true);
-    } else {
-      $this->data= $data;
+    function rewind(): void
+    {
+        reset($this->data);
     }
-  }
 
-  function rewind(): void {
-    reset($this->data);
-  }
+    function current(): mixed
+    {
+        return current($this->data);
+    }
 
-  function current(): mixed {
-    return current($this->data);
-  }
+    function key(): mixed
+    {
+        return key($this->data);
+    }
 
-  function key(): mixed {
-    return key($this->data);
-  }
+    function next(): void
+    {
+        next($this->data);
+    }
 
-  function next(): void {
-    next($this->data);
-  }
-
-  function valid(): bool {
-    return key($this->data) !== null;
-  }
+    function valid(): bool
+    {
+        return key($this->data) !== null;
+    }
 }
-
-?>
