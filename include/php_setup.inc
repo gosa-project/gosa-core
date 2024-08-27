@@ -35,7 +35,7 @@ require_once("class_plugin.inc");
 require_once("class_location.inc");
 require_once(VENDOR_DIR . "/autoload.php");
 $composerClassMap = require_once(VENDOR_DIR . '/composer/autoload_classmap.php');
-require_once ("functions.inc");
+require_once("functions.inc");
 
 /*! \brief Does autoloading for classes used in GOsa.
  *
