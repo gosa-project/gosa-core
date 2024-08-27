@@ -208,7 +208,6 @@ class pluglist
                 if (strpos($acl_to_check, '/')) {
                     if ($this->ui->get_permissions($this->ui->dn, $acl_to_check, '') != '') {
                         $this->silly_cache[$aclname] = true;
-
                         return true;
                     }
                 } else {

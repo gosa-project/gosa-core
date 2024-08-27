@@ -2425,7 +2425,6 @@ function saveFilter($a_filter, $values)
     return ($a_filter);
 }
 
-
 /*! \brief Return the gosa base directory */
 function get_base_dir(): string
 {
@@ -2532,7 +2531,7 @@ function get_base_from_hook($dn, $attrib)
         if ($command != "") {
             $command .= " '" . LDAP::fix($dn) . "' $attrib";
             if (check_command($command)) {
-                @DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+                DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
                 exec($command, $output);
                 if (preg_match("/^[0-9]+$/", $output[0])) {
                     return ($output[0]);
@@ -2816,7 +2815,6 @@ function get_binary_post(string $name)
     }
 
     $p = str_replace('\0', '', $_POST[$name]);
-
     return ($_POST[$p]);
 }
 
@@ -3795,7 +3793,6 @@ function detectLdapSpecialCharHandling()
         trigger_error(_("GOsa couldn't detect the special character handling used by your ldap!"));
         return (NULL);
     }
-
 
     // Read the character-handling detection entry from the ldap.
     $res = ldap_list(
