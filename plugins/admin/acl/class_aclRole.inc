@@ -628,7 +628,7 @@ class aclrole extends acl
         }
 
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", __CLASS__));
         }
 
         /* Refresh users ACL */
@@ -668,7 +668,7 @@ class aclrole extends acl
         $ldap->rmDir($this->dn);
         new log("remove", "acl/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", __CLASS__));
         }
 
         /* Optionally execute a command after we're done */
@@ -682,7 +682,7 @@ class aclrole extends acl
             unset($og->member[$this->dn]);
             $og->save();
             if (!$ldap->success()) {
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $og->dn, "", get_class()));
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $og->dn, "", __CLASS__));
             }
         }
     }
@@ -749,7 +749,7 @@ class aclrole extends acl
             "plCategory"    => array("acl"),
             "plRequirements" => array(
                 'ldapSchema' => array('gosaAcl' => '>=2.7'),
-                'onFailureDisablePlugin' => array(get_class(), 'aclManagement')
+                'onFailureDisablePlugin' => array(__CLASS__, 'aclManagement')
             ),
             "plProperties" =>
             array(

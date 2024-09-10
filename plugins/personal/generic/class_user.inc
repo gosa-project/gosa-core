@@ -761,7 +761,7 @@ class user extends plugin
         $ldap = $this->config->get_ldap_link();
         $ldap->rmdir($this->dn);
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, __CLASS__));
         }
 
         new log("remove", "users/" . get_class($this), $this->dn, $this->attributes, $ldap->get_error());
@@ -1156,7 +1156,7 @@ class user extends plugin
         $ldap->cd($this->dn);
         $ldap->$mode($this->attrs);
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, __CLASS__));
             return (1);
         }
 
@@ -1758,7 +1758,7 @@ class user extends plugin
                     'gosaAccount' => '>=2.7',
                     'gosaUserTemplate' => '>=2.7'
                 ),
-                'onFailureDisablePlugin' => array(get_class(), 'userManagement', 'user')
+                'onFailureDisablePlugin' => array(__CLASS__, 'userManagement', 'user')
             ),
 
             "plProperties" => array(
