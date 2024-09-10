@@ -281,7 +281,7 @@ class department extends plugin
         $ldap->rmdir_recursive($this->dn);
         new log("remove", "department/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, __CLASS__));
         }
 
         /* Optionally execute a command after we're done */
@@ -478,7 +478,7 @@ class department extends plugin
             new log("create", "department/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         }
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, __CLASS__));
         }
 
         /* The parameter forces only to set must_be_tagged, and don't touch any objects 
@@ -667,7 +667,7 @@ class department extends plugin
             "plRequirements" => array(
                 'ldapSchema' => array('gosaDepartment' => '>=2.7'),
                 'onFailureDisablePlugin' => array(
-                    get_class(), 'departmentManagement',
+                    __CLASS__, 'departmentManagement',
                     'country', 'dcObject', 'domain', 'locality', 'organization'
                 )
             ),
@@ -760,7 +760,7 @@ class department extends plugin
                 $ldap->cd($dn);
                 $ldap->modify($nattrs);
                 if (!$ldap->success()) {
-                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()));
+                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, __CLASS__));
                 }
             } else {
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
@@ -790,7 +790,7 @@ class department extends plugin
                 $ldap->cd($dn);
                 $ldap->modify($nattrs);
                 if (!$ldap->success()) {
-                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()));
+                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, __CLASS__));
                 }
             } else {
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not removing tag ($tag) $dn - seems to have moved away", "Tagging");

@@ -848,7 +848,7 @@ class ogroup extends plugin
 
         $ret = 0;
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, __CLASS__));
             $ret = 1;
         } else {
             $this->trustModeDialog->dn = $this->dn;
@@ -865,7 +865,7 @@ class ogroup extends plugin
         $ldap = $this->config->get_ldap_link();
         $ldap->rmdir($this->dn);
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, __CLASS__));
         }
 
         new log("remove", "ogroups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
@@ -946,7 +946,7 @@ class ogroup extends plugin
             "plSection"     => array("administration"),
             "plRequirements" => array(
                 'ldapSchema' => array('gosaGroupOfNames' => '>=2.7'),
-                'onFailureDisablePlugin' => array(get_class(), 'ogroupManagement')
+                'onFailureDisablePlugin' => array(__CLASS__, 'ogroupManagement')
             ),
             "plCategory"    => array("ogroups" => array(
                 "description"  => _("Object groups"),

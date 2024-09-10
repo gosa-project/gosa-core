@@ -63,7 +63,7 @@
  *                  |             'gosaProperties' => '>=2.7',
  *                  |             'gosaConfig' => '>=2.7'
  *                  |             ),
- *                  |         'onFailureDisablePlugin' => array(get_class(), 'someClassName')
+ *                  |         'onFailureDisablePlugin' => array(__CLASS__, 'someClassName')
  *                  |         ),
  *                  |      ---------------------------------------------
  *                  |
@@ -223,7 +223,7 @@ class core extends plugin {
                             'gosaProperties' => '>=2.7',
                             'gosaConfig' => '>=2.7'
                             ),
-                        'onFailureDisablePlugin' => array(get_class())
+                        'onFailureDisablePlugin' => array(__CLASS__)
                         ),
 
 
