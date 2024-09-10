@@ -620,7 +620,7 @@ class posixAccount extends plugin
         new log("remove", "users/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
 
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, __CLASS__));
         }
 
         /* Delete group only if cn is uid and there are no other
@@ -912,7 +912,7 @@ class posixAccount extends plugin
         }
 
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, __CLASS__));
         }
 
         /* Remove lock needed for unique id generation */
@@ -1453,7 +1453,7 @@ class posixAccount extends plugin
             "plOptions"         => array(),
             "plRequirements" => array(
                 'ldapSchema' => array('posixAccount' => ''),
-                'onFailureDisablePlugin' => array(get_class(), 'sambaAccount', 'netatalk', 'environment')
+                'onFailureDisablePlugin' => array(__CLASS__, 'sambaAccount', 'netatalk', 'environment')
             ),
 
             "plProvidedAcls"  => array(
