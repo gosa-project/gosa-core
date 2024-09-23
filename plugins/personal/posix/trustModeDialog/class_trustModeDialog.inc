@@ -256,7 +256,7 @@ class trustModeDialog extends plugin
                 $ldap->get_error(),
                 $this->dn,
                 LDAP_MOD,
-                get_class()
+                __CLASS__
             ));
         }
     }

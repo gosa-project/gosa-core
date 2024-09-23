@@ -7,7 +7,7 @@ class objectCountChart extends statChart
     function __construct(&$config)
     {
         parent::__construct($config);
-        $this->graphName = get_class();
+        $this->graphName = __CLASS__;
     }
 
 
@@ -48,8 +48,8 @@ class objectCountChart extends statChart
 
         // Read graph from cache?
         $pCache = new pCache($this->cachePath);
-        if($this->enableCaching && $pCache->IsInCache(get_class(),$dataSet->GetData())){
-            $filename =  $pCache->GetHash(get_class(),$dataSet->GetData());
+        if($this->enableCaching && $pCache->IsInCache(__CLASS__,$dataSet->GetData())){
+            $filename =  $pCache->GetHash(__CLASS__,$dataSet->GetData());
             $filename = '/var/spool/gosa/'.$filename;    
             if(file_exists($filename) && is_readable($filename)){
                 $this->graphID = preg_replace("/[^0-9]/","",microtime(TRUE)).rand(0,99999);
@@ -82,7 +82,7 @@ class objectCountChart extends statChart
         $file = '/tmp/graph_'.$this->graphID;
         $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphID,$file);
-        $pCache->WriteToCache(get_class(),$dataSet->GetData(),$chart);   
+        $pCache->WriteToCache(__CLASS__,$dataSet->GetData(),$chart);   
 
         return;
     }

@@ -1582,7 +1582,7 @@ class acl extends plugin
         }
 
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()), ERROR_DIALOG);
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, __CLASS__), ERROR_DIALOG);
         }
 
         /* Refresh users ACLs */
@@ -1676,7 +1676,7 @@ class acl extends plugin
             $new_attrs = array("gosaAclEntry" => $new_entries);
             $ldap->modify($new_attrs);
             if (!$ldap->success()) {
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()), ERROR_DIALOG);
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, __CLASS__), ERROR_DIALOG);
             }
         }
     }

@@ -8,7 +8,6 @@ class pieChart2 extends pieChart1
     function __construct(&$config)
     {
         parent::__construct($config);
-        $this->graphName = get_class();
+        $this->graphName = __CLASS__;
     }
 }
-?>
