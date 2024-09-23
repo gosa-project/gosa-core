@@ -645,7 +645,7 @@ class group extends plugin
         $ldap = $this->config->get_ldap_link();
         $ldap->rmdir($this->dn);
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, __CLASS__));
         }
 
         new log("remove", "groups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
@@ -926,7 +926,7 @@ class group extends plugin
 
         $ret = 0;
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, __CLASS__));
             $ret = 1;
         }
 

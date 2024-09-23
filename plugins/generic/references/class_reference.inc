@@ -101,7 +101,7 @@ class reference extends plugin
         foreach ($this->referenceFilters as $filter) {
             $ldap->search($filter['filter'], array_keys($filter['attrs']));
             if (!$ldap->success()) {
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_SEARCH, get_class()));
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_SEARCH, __CLASS__));
             } elseif ($ldap->count()) {
                 $list = new sortableListing();
                 $list->setDeleteable(false);

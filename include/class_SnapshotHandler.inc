@@ -120,7 +120,7 @@ class SnapshotHandler {
     $this->snapshotLdapBase= $this->config->get_cfg_value("core","snapshotBase");
     $snapshotLdap->cd($this->snapshotLdapBase);
     if (!$snapshotLdap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($snapshotLdap->get_error(), $this->snapshotLdapBase, "", get_class()));
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($snapshotLdap->get_error(), $this->snapshotLdapBase, "", __CLASS__));
     }
 
     return $snapshotLdap;
@@ -277,7 +277,7 @@ class SnapshotHandler {
       $ldap_to -> cd($snapldapbase);
 
       if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", __CLASS__));
       }
 
     }
@@ -326,11 +326,11 @@ class SnapshotHandler {
       $ldap_to->cd($new_dn);
       $ldap_to->add($target);
       if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $new_dn, LDAP_ADD, get_class()));
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $new_dn, LDAP_ADD, __CLASS__));
       }
 
       if (!$ldap->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $new_base, "", get_class()));
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $new_base, "", __CLASS__));
       }
 
     }
@@ -377,7 +377,7 @@ class SnapshotHandler {
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
       if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", __CLASS__));
       }
     }
     /* Prepare bases and some other infos */
@@ -432,7 +432,7 @@ class SnapshotHandler {
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
       if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", __CLASS__));
       }
     }
 
@@ -497,7 +497,7 @@ class SnapshotHandler {
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
       if (!$ldap_to->success()){
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", __CLASS__));
       }
     }
 
@@ -512,7 +512,7 @@ class SnapshotHandler {
     $err = "";
     $ldap->import_complete_ldif($data,$err,false,false);
     if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, "", get_class()));
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, "", __CLASS__));
     }
   }
 

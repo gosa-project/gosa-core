@@ -811,7 +811,7 @@ class Step_Migrate extends setup_step
                 if(isset($this->rootOC_details['mods'])){
                     $res  = $ldap->modify($this->rootOC_details['mods']);
                     if(!$res){
-                        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $cv['base'], LDAP_MOD, get_class()));
+                        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $cv['base'], LDAP_MOD, __CLASS__));
                     }
                     $this->checkBaseOC();
                     $this->check_administrativeAccount();
