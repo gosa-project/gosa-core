@@ -26,15 +26,15 @@ class userSelect extends management
     protected $skipFooter = TRUE;
     protected $skipHeader = TRUE;
 
-    function __construct($config, $ui, array $dns = null)
+    function __construct($config, $ui, array $dns = [])
     {
         $this->config = $config;
         $this->ui = $ui;
-        $this->storagePoints = array(get_ou("core", "userRDN"),get_ou("core", "groupRDN"));
+        $this->storagePoints = array(get_ou("core", "userRDN"), get_ou("core", "groupRDN"));
 
         // Build filter
-        if (session::global_is_set(get_class($this)."_filter")){
-            $filter= session::global_get(get_class($this)."_filter");
+        if (session::global_is_set(get_class($this) . "_filter")) {
+            $filter = session::global_get(get_class($this) . "_filter");
             $filter->setConstraint(['dn' => $dns]);
         } else {
             $filter = new filter(get_template_path("user-filter.xml", true, dirname(__FILE__)));
@@ -48,6 +48,4 @@ class userSelect extends management
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "users", $headpage);
     }
-} 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
+}
