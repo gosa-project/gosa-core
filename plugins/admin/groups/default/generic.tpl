@@ -133,13 +133,13 @@
 
             {if $multiple_support}
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             {/render}
 
             {else}
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             {/render}
 
@@ -148,21 +148,21 @@
             {if $multiple_support}
             <h3 class="card-title">{t}Common group members{/t}</h3>
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
 
             <h3 class="card-title">{t}Partial group members{/t}</h3>
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$partialList}
             {/render}
 
             {else}
             <h3 class="card-title">{t}Group members{/t}</h3>
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}

@@ -95,116 +95,40 @@
 	</td>
 	</tr>
 
-{else}
-    <tr>
-     <td colspan=2>
-{render acl=$sambaGroupTypeACL}
-      <input type=checkbox name="smbgroup" value="1" {$smbgroup}  title="{t}Select to create a samba conform group{/t}">
-{/render}
-{render acl=$sambaGroupTypeACL}
-      <select size="1" name="groupType">
-       {html_options options=$groupTypes selected=$groupType}
-      </select>
-{/render}
-      &nbsp;
-      <LABEL for="">{t}in domain{/t}</LABEL>
-      &nbsp;
-{render acl=$sambaDomainNameACL}
-      <select id="sambaDomainName" size="1" name="sambaDomainName">
-       {html_options values=$sambaDomains output=$sambaDomains selected=$sambaDomainName}
-      </select>
-{/render}
-     </td>
-    </tr>
-    {/if}
-
-	{if $pickupGroup == "true"}
-    <tr>
-      <td colspan=2><hr></td>
-    </tr>
-    <tr>
-      <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
-    </tr>
-    <tr>
-     <td colspan=2>
-{render acl=$fonGroupACL checkbox=$multiple_support checked=$use_fon_group}
-      <input class="center" type=checkbox name="fon_group" value="1" {$fon_group}>{t}Members are in a phone pickup group{/t}
-{/render}
-     </td>
-    </tr>
-	{/if}
-	{if $nagios == "true"}
-    <tr>
-      <td colspan=2><hr></td>
-    </tr>
-    <tr>
-      <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
-    </tr>
-    <tr>
-     <td colspan=2>
-{render acl=$nagiosGroupACL checkbox=$multiple_support checked=$use_nagios_group}
-      <input class="center" type=checkbox name="nagios_group" value="1" {$nagios_group}>{t}Members are in a Nagios group{/t}
-{/render}
-     </td>
-    </tr>
-	{/if}
-    <tr>
-      <td colspan=2><hr></td>
-    </tr>
-    <tr>
-      <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
-    </tr>
-    <tr>
-      <td colspan=2>{$trustModeDialog}</td>
-    </tr>
-   </table>
-
-  </td>
-  <td class='left-border'>
-
-   &nbsp;
-  </td>
-
-  <td>
-
-   <table summary="" style="width:100%">
-    <tr>
-     <td style="width:50%">
-
-      {if $restrictedByDynGroup}
-        <b>{t}The group members are part of a dyn-group and cannot be managed!{/t}</b>
-        {if $multiple_support}
-            {render acl=$memberACL}
-                {$commonList}
+            {if $restrictedByDynGroup}
+            <b>{t}The group members are part of a dyn-group and cannot be managed!{/t}</b>
+            {if $multiple_support}
+            {render acl=$memberUidACL}
+            {$commonList}
             {/render}
-        {else}
-            {render acl=$memberACL}
-                {$memberList}
+            {else}
+            {render acl=$memberUidACL}
+            {$memberList}
             {/render}
         {/if}
       {else}
 
         {if $multiple_support}
             <h3>{t}Common group members{/t}</h3>
-            {render acl=$memberACL}
-                {$commonList}
+            {render acl=$memberUidACL}
+            {$commonList}
             {/render}
-            {render acl=$memberACL}
-              <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
+            {render acl=$memberUidACL}
+            <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
             
             <br>
             <h3>{t}Partial group members{/t}</h3>
-            {render acl=$memberACL}
-                {$partialList}
+            {render acl=$memberUidACL}
+            {$partialList}
             {/render}
         {else}
             <h3>{t}Group members{/t}</h3>
-            {render acl=$memberACL}
-                {$memberList}
+            {render acl=$memberUidACL}
+            {$memberList}
             {/render}
-            {render acl=$memberACL}
-              <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
+            {render acl=$memberUidACL}
+            <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
         {/if}
       {/if}
