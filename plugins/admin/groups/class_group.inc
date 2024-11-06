@@ -62,13 +62,13 @@ class group extends plugin
     var $baseSelector;
     var $dns = array();
 
-    // attribute list for save action
+    /* attribute list for save action */
     var $attributes = array("cn", "description", "gidNumber", "memberUid", "sambaGroupType", "sambaSID");
     var $objectclasses = array("top", "posixGroup");
     var $CopyPasteVars  = array("force_gid", "fon_group", "smbgroup", "groupType", "sambaSID", "sambaDomainName", "SID", "nagios_group", "sambaGroupType");
     var $multiple_support = TRUE;
 
-    // Lists
+    // Lists 
     private $memberList;    // Single group editing
     private $commonList;    // (Multiple support active)
     private $partialList;   // (Multiple support active)
@@ -103,7 +103,7 @@ class group extends plugin
             ksort($this->memberUid);
         }
 
-        // Save gidNumber for later use
+        /* Save gidNumber for later use */
         if (isset($this->attrs['gidNumber'])) {
             $this->saved_gidNumber = $this->attrs['gidNumber'][0];
         }
@@ -130,7 +130,7 @@ class group extends plugin
             }
         }
 
-        // Set email flag
+        // Set mail flag
         if (isset($this->attrs['objectClass']) && in_array_strict('gosaMailAccount', $this->attrs['objectClass'])) {
             $this->has_mailAccount = TRUE;
         }
@@ -184,15 +184,15 @@ class group extends plugin
             }
         } else {
 
-            // Get object base
+            // Get object base 
             $this->base = preg_replace("/^[^,]+," . preg_quote(get_groups_ou(), '/') . "/i", "", $this->dn);
         }
         $this->orig_base = $this->base;
 
-        // This is always an account
+        // This is always an account 
         $this->is_account = TRUE;
 
-        // Instanciate base selector
+        // Instanciate base selector 
         $this->baseSelector = new baseSelector($this->get_allowed_bases(), $this->base);
         $this->baseSelector->setSubmitButton(false);
         $this->baseSelector->setHeight(300);
@@ -213,11 +213,13 @@ class group extends plugin
         if (!$this->dns[0]) {
             $this->dns[] = $this->dn;
         }
+
+        $this->reload();
     }
 
     function execute()
     {
-        // Call parent execute
+        // Call parent execute 
         parent::execute();
 
         $theme = getThemeName();
@@ -228,7 +230,7 @@ class group extends plugin
             new log("view", "groups/" . get_class($this), $this->dn);
         }
 
-        // Do we represent a valid group?
+        // Do we represent a valid group? 
         if (!$this->is_account && $this->parent === NULL) {
             switch ($theme) {
                 case 'classic':
@@ -244,10 +246,10 @@ class group extends plugin
             return ($display);
         }
 
-        // Act on list events
+        // Act on list events 
         foreach (array('memberList', 'commonList', 'partialList') as $list) {
 
-            // Check if list is available, depends on multi- or sinlge- group editing.
+            // Check if list is available, depends on multi- or sinlge- group editing. 
             if ($this->$list) {
                 $this->$list->save_object();
                 $action = $this->$list->getAction();
@@ -261,17 +263,17 @@ class group extends plugin
             }
         }
 
-        // Add objects?
+        /* Add objects? */
         if (isset($_POST["edit_membership"]) && preg_match("/w/", $this->getacl("memberUid"))) {
             $this->userSelect = new userSelect($this->config, get_userinfo());
         }
 
-        // Add objects finished?
+        // Add objects finished? 
         if (isset($_POST["add_users_cancel"]) || isset($_POST['cancel-abort'])) {
             $this->userSelect = NULL;
         }
 
-        // Add user to group
+        // Add user to group 
         if (isset($_POST['add_users_finish']) || isset($_POST['ok-save']) && $this->userSelect) {
 
             $users = $this->userSelect->detectPostActions();
@@ -283,7 +285,7 @@ class group extends plugin
                     $this->addUser($value);
                     $this->members["$value"] = $this->allusers[$value];
                     // is this correct reloading $attrs?
-                    $this->reload($attrs);
+                    $this->reload();
                 }
             }
             $this->userSelect = NULL;
@@ -299,16 +301,19 @@ class group extends plugin
             return ($trustModeDialog);
         }
         $smarty->assign("trustModeDialog", $trustModeDialog);
+
+
+
         $smarty->assign("nagios", $this->config->pluginEnabled("nagiosAccount") && class_available("nagiosAccount"));
         $smarty->assign("pickupGroup", $this->config->pluginEnabled("phoneAccount") && class_available("phoneAccount"));
 
-        // Manage object add dialog
+        // Manage object add dialog 
         if ($this->userSelect) {
             $this->dialog = TRUE;
             return ($this->userSelect->execute());
         }
 
-        // Create base acls
+        // Create base acls 
         $smarty->assign("base", $this->baseSelector->render());
 
         $domains = array();
@@ -318,7 +323,9 @@ class group extends plugin
         $smarty->assign("sambaDomains",     set_post($domains));
         $smarty->assign("sambaDomainName",  set_post($this->sambaDomainName));
         $groupTypes = array(
-            0 => _("Samba group"), 512 => _("Domain administrators"), 513 => _("Domain users"),
+            0 => _("Samba group"),
+            512 => _("Domain administrators"),
+            513 => _("Domain users"),
             514 => _("Domain guests")
         );
 
@@ -330,7 +337,7 @@ class group extends plugin
         $smarty->assign("groupTypes", set_post($groupTypes));
         $smarty->assign("groupType",  set_post($this->groupType));
 
-        // Members and users
+        // Members and users 
         if (!$this->multiple_support_active) {
             $this->memberList->setAcl($this->getacl("memberUid"));
             $data = $lData = array();
@@ -526,7 +533,7 @@ class group extends plugin
 
         $this->memberUid[$uid] = $uid;
         // is this correct reloading $this->attrs?
-        $this->reload($this->attrs);
+        $this->reload();
         return true;
     }
 
@@ -535,6 +542,10 @@ class group extends plugin
     {
         if (isset($this->memberUid[$uid])) {
             unset($this->memberUid[$uid]);
+        }
+
+        if (isset($this->members[$uid])) {
+            unset($this->members[$uid]);
         }
 
         /** 
@@ -551,7 +562,7 @@ class group extends plugin
     }
 
     // reload and receive data from the LDAP
-    function reload(array $attrs)
+    function reload()
     {
         /* Prepare ldap link */
         $ldap = $this->config->get_ldap_link();
@@ -713,10 +724,12 @@ class group extends plugin
                 $this->smbgroup = 0;
             }
 
-            foreach (array(
-                "force_gid"  => "gidNumber",
-                "smbgroup"   => "sambaGroupType"
-            ) as $val => $aclname) {
+            foreach (
+                array(
+                    "force_gid"  => "gidNumber",
+                    "smbgroup"   => "sambaGroupType"
+                ) as $val => $aclname
+            ) {
                 if ($this->acl_is_writeable($aclname)  && isset($_POST["$val"])) {
                     $this->$val = get_post($val);
                 }
