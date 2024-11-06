@@ -151,7 +151,6 @@ class reference extends plugin
         $smarty = get_smarty();
 
         // Assign permissions
-        $tmp = $this->plInfo();
         $ui = get_userinfo();
 
         $category = preg_replace("/\/.*$/", "", $this->acl_category);

@@ -198,11 +198,11 @@
             {if $restrictedByDynGroup}
             <b>{t}The group members are part of a dyn-group and cannot be managed!{/t}</b>
             {if $multiple_support}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             {/render}
             {else}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             {/render}
             {/if}
@@ -210,24 +210,24 @@
 
             {if $multiple_support}
             <h3>{t}Common group members{/t}</h3>
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             {/render}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
 
             <br>
             <h3>{t}Partial group members{/t}</h3>
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$partialList}
             {/render}
             {else}
             <h3>{t}Group members{/t}</h3>
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             {/render}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
             {/if}
