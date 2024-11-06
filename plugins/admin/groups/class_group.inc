@@ -348,7 +348,7 @@ class group extends plugin
                 if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = image('plugins/users/images/select_user.png');
+                    $image = '<i class="material-icons">person</i>';
                 }
                 $lData[$uid] = array('data' => array($image, $sn, $givenName, $uid));
             }
@@ -371,7 +371,7 @@ class group extends plugin
                 if (isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = image('plugins/users/images/select_user.png');
+                    $image = '<i class="material-icons">person</i>';
                 }
                 $lData[$uid] = array('data' => array($image, $sn, $givenName, $uid));
             }
