@@ -316,10 +316,6 @@ class userManagement extends management
             $dn  = $this->dn;
             $acl = $this->ui->get_permissions($dn, "users/password");
             $cacl = $this->ui->get_permissions($dn, "users/user");
-            print($this->dn);
-            echo '<pre>';
-            var_dump($this->ui->get_permissions($dn, "users/password"));
-            echo '</pre>';
             if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)) {
 
                 // Get posted passwords
