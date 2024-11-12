@@ -65,7 +65,7 @@ class ogroup extends plugin
 
     /* attribute list for save action */
     public $attributes = array("cn", "description", "gosaGroupObjects", "member");
-    public $objectclasses = array("top", "gosaGroupOfNames");
+    public $objectclasses = array("top", "groupOfNames", "gosaGroupOfNames");
     public $trustModeDialog = null;
     public $memberListing = null;
 
@@ -504,40 +504,58 @@ class ogroup extends plugin
 
         $p_f = array(
             "accounts" => array(
-                "OBJ" => "user", "CLASS" => "gosaAccount",
-                "DN" => get_people_ou(), "ACL" => "users"
+                "OBJ" => "user",
+                "CLASS" => "gosaAccount",
+                "DN" => get_people_ou(),
+                "ACL" => "users"
             ),
             "groups"          => array(
-                "OBJ" => "group", "CLASS" => "posixGroup",
-                "DN" => get_ou('group', 'ogroupRDN'), "ACL" => "groups"
+                "OBJ" => "group",
+                "CLASS" => "posixGroup",
+                "DN" => get_ou('group', 'ogroupRDN'),
+                "ACL" => "groups"
             ),
             "departments"     => array(
-                "OBJ" => "department", "CLASS" => "gosaDepartment",
-                "DN" => "", "ACL" => "department"
+                "OBJ" => "department",
+                "CLASS" => "gosaDepartment",
+                "DN" => "",
+                "ACL" => "department"
             ),
             "servers"         => array(
-                "OBJ" => "servgeneric", "CLASS" => "goServer",
-                "DN" => get_ou("servgeneric", "serverRDN"), "ACL" => "server"
+                "OBJ" => "servgeneric",
+                "CLASS" => "goServer",
+                "DN" => get_ou("servgeneric", "serverRDN"),
+                "ACL" => "server"
             ),
             "workstations"    => array(
-                "OBJ" => "workgeneric", "CLASS" => "gotoWorkstation",
-                "DN" => get_ou("workgeneric", "workstationRDN"), "ACL" => "workstation"
+                "OBJ" => "workgeneric",
+                "CLASS" => "gotoWorkstation",
+                "DN" => get_ou("workgeneric", "workstationRDN"),
+                "ACL" => "workstation"
             ),
             "winstations"     => array(
-                "OBJ" => "wingeneric", "CLASS" => "opsiClient",
-                "DN" => get_ou("wingeneric", 'sambaMachineAccountRDN'), "ACL" => "winstation"
+                "OBJ" => "wingeneric",
+                "CLASS" => "opsiClient",
+                "DN" => get_ou("wingeneric", 'sambaMachineAccountRDN'),
+                "ACL" => "winstation"
             ),
             "terminals"       => array(
-                "OBJ" => "termgeneric", "CLASS" => "gotoTerminal",
-                "DN" => get_ou("termgeneric", "terminalRDN"), "ACL" => "terminal"
+                "OBJ" => "termgeneric",
+                "CLASS" => "gotoTerminal",
+                "DN" => get_ou("termgeneric", "terminalRDN"),
+                "ACL" => "terminal"
             ),
             "printers"        => array(
-                "OBJ" => "printgeneric", "CLASS" => "gotoPrinter",
-                "DN" => get_ou("printgeneric", "printerRDN"), "ACL" => "printer"
+                "OBJ" => "printgeneric",
+                "CLASS" => "gotoPrinter",
+                "DN" => get_ou("printgeneric", "printerRDN"),
+                "ACL" => "printer"
             ),
             "phones"          => array(
-                "OBJ" => "phoneGeneric", "CLASS" => "goFonHardware",
-                "DN" => get_ou("phoneGeneric", "phoneRDN"), "ACL" => "phone"
+                "OBJ" => "phoneGeneric",
+                "CLASS" => "goFonHardware",
+                "DN" => get_ou("phoneGeneric", "phoneRDN"),
+                "ACL" => "phone"
             )
         );
 
@@ -546,8 +564,10 @@ class ogroup extends plugin
          */
         if (!$this->IsReleaseManagementActivated()) {
             $p_f["applications"]    = array(
-                "OBJ" => "application", "CLASS" => "gosaApplication",
-                "DN" => get_ou("application", "applicationRDN"), "ACL" => "application"
+                "OBJ" => "application",
+                "CLASS" => "gosaApplication",
+                "DN" => get_ou("application", "applicationRDN"),
+                "ACL" => "application"
             );
         }
 
