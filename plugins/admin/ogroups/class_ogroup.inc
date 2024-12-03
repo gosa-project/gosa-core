@@ -65,7 +65,7 @@ class ogroup extends plugin
 
     /* attribute list for save action */
     public $attributes = array("cn", "description", "gosaGroupObjects", "member");
-    public $objectclasses = array("top", "groupOfNames", "gosaGroupOfNames");
+    public $objectclasses = array("top", "gosaGroupOfNames");
     public $trustModeDialog = null;
     public $memberListing = null;
 
