@@ -1,17 +1,14 @@
 <h3>{t}Copy & paste wizard{/t}</h3>
 
 <div class="row content">
-	<b>{$message}</b>
+	<p><b>{$message}</b></p>
 	<br>
 	<br>
 	{if $Complete == false}
-	{t}Some values need to be unique in the complete directory while some combinations make no sense. Please edit the
-	values below to fulfill the policies.{/t}
+	<p>{t}Some values need to be unique in the complete directory while some combinations make no sense. Please edit the values below to fulfill the policies.{/t}</p>
 	<br>
-	{t}Remember that some properties like taken snapshots will not be copied!{/t}&nbsp;
-	{t}Or if you copy or cut an entry within GOsa and delete the source object, you may get errors while pasting this
-	object again!{/t}
-
+	<p>{t}Remember that some properties like taken snapshots will not be copied!{/t}</p>
+	<p>{t}Or if you copy or cut an entry within GOsa and delete the source object, you may get errors while pasting this object again!{/t}</p>
 	<hr>
 	<br>
 	{$AttributesToFix}
