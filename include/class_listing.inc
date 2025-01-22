@@ -896,7 +896,7 @@ class listing
             if (isset($_POST['exec_act']) && $_POST['act'] != '') {
                 if (preg_match('/^export.*$/', $_POST['act']) && isset($this->exporter[$_POST['act']])) {
                     $exporter = $this->exporter[get_post('act')];
-                    $userinfo = ', ' . _('created by') . ' ' . $ui->cn . ' - ' . strftime('%A, %d. %B %Y, %H:%M:%S');
+                    $userinfo = ', ' . _('created by') . ' ' . $ui->cn . ' - ' . date('l, d. F Y, H:i:s');
                     $entryIterator = new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], '_sort' . $this->sortColumn, $this->sortType);
                     $sortedEntries = [];
                     foreach ($entryIterator as $entry) {
