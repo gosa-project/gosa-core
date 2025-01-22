@@ -637,8 +637,6 @@ class listing
                 }
 
                 // Fill with contents, sort as configured
-                $ui = get_userinfo();
-
                 foreach ($this->entries as $row => $entry) {
                     $trow = '';
 
@@ -850,7 +848,6 @@ class listing
 
     public function update()
     {
-        global $config;
         $ui = get_userinfo();
 
         // Take care of base selector
