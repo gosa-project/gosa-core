@@ -121,7 +121,7 @@ class userManagement extends management
     // Inject user actions
     function detectPostActions()
     {
-        $action = management::detectPostActions();
+        $action = parent::detectPostActions();
         if (isset($_POST['template_continue'])) $action['action'] = "templateContinue";
         if (isset($_POST['templatize_continue'])) $action['action'] = "templatizeContinue";
         if (isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
@@ -137,7 +137,7 @@ class userManagement extends management
 
     function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
-        $str = management::editEntry($action, $target);
+        $str = parent::editEntry($action, $target);
         if ($str) return ($str);
 
         if (preg_match("/^edit_/", $action)) {
@@ -160,7 +160,7 @@ class userManagement extends management
 
     function closeDialogs()
     {
-        management::closeDialogs();
+        parent::closeDialogs();
         $this->pwd_change_queue = array();
     }
 
@@ -463,7 +463,7 @@ class userManagement extends management
      */
     function saveChanges()
     {
-        $str = management::saveChanges();
+        $str = parent::saveChanges();
 
         if (!empty($str)) return ($str);
 
@@ -486,7 +486,7 @@ class userManagement extends management
 
     function cancelEdit()
     {
-        $str = management::cancelEdit();
+        $str = parent::cancelEdit();
         if (!empty($str)) return ($str);
 
         if (
@@ -508,7 +508,7 @@ class userManagement extends management
     function newUserFromTemplate($action = "", $target = array(), $all = array())
     {
         // Call parent method, it knows whats to do, locking and so on ...
-        $str = management::newEntry($action, $target, $all);
+        $str = parent::newEntry($action, $target, $all);
         if (!empty($str)) return ($str);
 
         // Reset uid selection.
@@ -546,7 +546,7 @@ class userManagement extends management
     {
 
         // Call parent method, it manages everything, locking, object creation...
-        $str = management::newEntry($action, $target, $all);
+        $str = parent::newEntry($action, $target, $all);
         if (!empty($str)) return ($str);
 
         // If we've at least one template, then ask the user if he wants to use one?
@@ -901,7 +901,7 @@ class userManagement extends management
     ) {
         if ($this->config->boolValueIsTrue("core", "copyPaste")) {
             $this->cpHandler->lastdn = "";
-            $str = management::copyPasteHandler($action, $target, $all);
+            $str = parent::copyPasteHandler($action, $target, $all);
             if ($this->cpHandler->lastdn != "" && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new") {
                 $this->pwd_change_queue[] = $this->cpHandler->lastdn;
                 return ($this->handlePasswordQueue());
