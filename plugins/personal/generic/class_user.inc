@@ -1,5 +1,6 @@
 <?php
-/*
+
+/**
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
@@ -20,15 +21,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/*!
-  \brief   user plugin
-  \author  Cajus Pollmeier <pollmeier@gonicus.de>
-  \version 2.00
-  \date    24.07.2003
-
-  This class provides the functionality to read and write all attributes
-  relevant for person, organizationalPerson, inetOrgPerson and gosaAccount
-  from/to the LDAP. It does syntax checking and displays the formulars required.
+/**
+ * \brief   user plugin
+ * \author  Cajus Pollmeier <pollmeier@gonicus.de>
+ * \version 2.00
+ * \date    24.07.2003
+ *
+ * This class provides the functionality to read and write all attributes
+ * relevant for person, organizationalPerson, inetOrgPerson and gosaAccount
+ * from/to the LDAP. It does syntax checking and displays the formulars required.
  */
 
 class user extends plugin
