@@ -116,24 +116,60 @@ class user extends plugin
 
     /* attribute list for save action */
     var $attributes = array(
-        "sn", "givenName", "uid", "personalTitle", "academicTitle",
-        "homePostalAddress", "homePhone", "labeledURI", "ou", "o", "dateOfBirth", "gender", "preferredLanguage",
-        "departmentNumber", "employeeNumber", "employeeType", "l", "st", "jpegPhoto",
-        "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
-        "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate", "gosaLoginRestriction", "manager"
+        "sn",
+        "givenName",
+        "uid",
+        "personalTitle",
+        "academicTitle",
+        "homePostalAddress",
+        "homePhone",
+        "labeledURI",
+        "ou",
+        "o",
+        "dateOfBirth",
+        "gender",
+        "preferredLanguage",
+        "departmentNumber",
+        "employeeNumber",
+        "employeeType",
+        "l",
+        "st",
+        "jpegPhoto",
+        "roomNumber",
+        "telephoneNumber",
+        "mobile",
+        "pager",
+        "cn",
+        "userPKCS12",
+        "postalAddress",
+        "facsimileTelephoneNumber",
+        "userSMIMECertificate",
+        "gosaLoginRestriction",
+        "manager"
     );
 
     var $objectclasses = array(
-        "top", "person", "organizationalPerson", "inetOrgPerson",
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson",
         "gosaAccount"
     );
 
     /* attributes that are part of the government mode */
     var $govattrs = array(
-        "gouvernmentOrganizationalUnit", "houseIdentifier", "vocation",
-        "ivbbLastDeliveryCollective", "gouvernmentOrganizationalPersonLocality",
-        "gouvernmentOrganizationalUnitDescription", "gouvernmentOrganizationalUnitSubjectArea",
-        "functionalTitle", "certificateSerialNumber", "publicVisible", "street", "role",
+        "gouvernmentOrganizationalUnit",
+        "houseIdentifier",
+        "vocation",
+        "ivbbLastDeliveryCollective",
+        "gouvernmentOrganizationalPersonLocality",
+        "gouvernmentOrganizationalUnitDescription",
+        "gouvernmentOrganizationalUnitSubjectArea",
+        "functionalTitle",
+        "certificateSerialNumber",
+        "publicVisible",
+        "street",
+        "role",
         "postalCode"
     );
 
@@ -141,12 +177,10 @@ class user extends plugin
 
     var $governmentmode = FALSE;
 
-    /* constructor, if 'dn' is set, the node loads the given
-     'dn' from LDAP */
+    // constructor, if 'dn' is set, the node loads the given
+    //'dn' from LDAP
     function __construct(&$config, $dn = NULL)
     {
-        global $lang;
-
         $this->config = $config;
         /* Configuration is fine, allways */
         if ($this->config->get_cfg_value("core", "honourIvbbAttributes") == "true") {
@@ -476,10 +510,14 @@ class user extends plugin
         if ((isset($_POST['edit_cert'])) && $this->acl_is_readable("Certificate")) {
 
             /* Save original values for later reconstruction */
-            foreach (array(
-                "certificateSerialNumber", "userCertificate",
-                "userSMIMECertificate", "userPKCS12"
-            ) as $val) {
+            foreach (
+                array(
+                    "certificateSerialNumber",
+                    "userCertificate",
+                    "userSMIMECertificate",
+                    "userPKCS12"
+                ) as $val
+            ) {
 
                 $oval = "old_$val";
                 $this->$oval = $this->$val;
@@ -494,10 +532,14 @@ class user extends plugin
         if (isset($_POST['cert_edit_cancel'])) {
 
             /* Restore original values in case of 'cancel' */
-            foreach (array(
-                "certificateSerialNumber", "userCertificate",
-                "userSMIMECertificate", "userPKCS12"
-            ) as $val) {
+            foreach (
+                array(
+                    "certificateSerialNumber",
+                    "userCertificate",
+                    "userSMIMECertificate",
+                    "userPKCS12"
+                ) as $val
+            ) {
 
                 $oval = "old_$val";
                 $this->$val = $this->$oval;
@@ -525,8 +567,10 @@ class user extends plugin
             if (isset($_POST['cert_edit_finish'])) {
 
                 /* for all certificates do */
-                foreach (array("userCertificate", "userSMIMECertificate", "userPKCS12")
-                    as $val) {
+                foreach (
+                    array("userCertificate", "userSMIMECertificate", "userPKCS12")
+                    as $val
+                ) {
 
                     /* Check for clean upload */
                     if (
@@ -698,8 +742,15 @@ class user extends plugin
         if ($this->governmentmode) {
             $smarty->assign("governmentmode", "true");
             $ivbbmodes = array(
-                "nein", "", "ivbv", "testa", "ivbv,testa", "internet",
-                "internet,ivbv", "internet,testa", "internet,ivbv,testa"
+                "nein",
+                "",
+                "ivbv",
+                "testa",
+                "ivbv,testa",
+                "internet",
+                "internet,ivbv",
+                "internet,testa",
+                "internet,ivbv,testa"
             );
             $smarty->assign("ivbbmodes", $ivbbmodes);
             foreach ($this->govattrs as $val) {
@@ -938,11 +989,8 @@ class user extends plugin
     /* Save data to LDAP, depending on is_account we save or delete */
     function save()
     {
-        global $lang;
-
-        /* Only force save of changes .... 
-       If this attributes aren't changed, avoid saving.
-     */
+        // Only force save of changes .... 
+        // If this attributes aren't changed, avoid saving.
 
         if ($this->gender == "0") $this->gender = "";
         if ($this->preferredLanguage == "0") $this->preferredLanguage = "";
