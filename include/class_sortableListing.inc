@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2010 GONICUS GmbH
  *
@@ -63,7 +63,7 @@ class sortableListing
 
         // Get list of used IDs
         if (!session::is_set('sortableListing_USED_IDS')) {
-            session::set('sortableListing_USED_IDS', array());
+            session::set('sortableListing_USED_IDS', []);
         }
         $usedIds = session::get('sortableListing_USED_IDS');
 
@@ -681,7 +681,7 @@ class sortableListing
         }
 
         // Extract data
-        $tmp = array();
+        $tmp = [];
         foreach ($this->displayData as $key => $item) {
             if (isset($item[$this->sortColumn])) {
                 $tmp[$key] = $item[$this->sortColumn];
@@ -698,7 +698,7 @@ class sortableListing
         }
 
         // Adapt mapping accordingly
-        $this->mapping = array();
+        $this->mapping = [];
         foreach ($tmp as $key => $value) {
             $this->mapping[] = $key;
         }
@@ -771,7 +771,8 @@ class sortableListing
         return ($this->data[$realkey]);
     }
 
-    public function getListId() {
+    public function getListId()
+    {
         return $this->id;
     }
 }
