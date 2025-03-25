@@ -113,7 +113,8 @@ class infoPage extends plugin
             }
             $managers[$dn]['str'] = "<table cellpadding='2' style='border:1px solid #CCC'>{$name}{$phone}{$mail}</table>";
         }
-        return ($managers);
+
+        return $managers;
     }
 
 
