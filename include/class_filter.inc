@@ -42,7 +42,7 @@ class filter
 
     public $theme;
 
-    public function __construct($filename)
+    public function __construct(string $filename)
     {
         $this->theme = getThemeName();
 
@@ -130,8 +130,6 @@ class filter
 
     public function setSearch($method = null)
     {
-        $patch = null;
-
         // Maybe our search method has gone?
         if (!isset($this->searches[$method])) {
             $method = $this->defaultSearch;
