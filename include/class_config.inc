@@ -43,7 +43,7 @@ class config
     var $current = [];
 
     /* Link to LDAP-server */
-    var \LDAP $ldap = NULL;
+    var ?LDAP $ldap = NULL;
     var $referrals = [];
 
     /* \brief Configuration data
