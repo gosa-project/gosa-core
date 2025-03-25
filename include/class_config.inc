@@ -32,7 +32,7 @@ class config
 
     /* XML parser */
     static $parser;
-    var $config_found = FALSE;
+    var $config_found = false;
     var $tags = [];
     var $level = 0;
     var $gpc = 0;
@@ -43,7 +43,7 @@ class config
     var $current = [];
 
     /* Link to LDAP-server */
-    var ?LDAP $ldap = NULL;
+    var ?LDAP $ldap = null;
     var $referrals = [];
 
     /* \brief Configuration data
@@ -360,9 +360,9 @@ class config
      * file will be used to set the option LDAP_OPT_SIZELIMIT.
      * \return ldapMultiplexer object
      */
-    function get_ldap_link($sizelimit = FALSE)
+    function get_ldap_link($sizelimit = false)
     {
-        if ($this->ldap === NULL || !($this->ldap->cid instanceof LDAP\Connection)) {
+        if ($this->ldap === null || !($this->ldap->cid instanceof LDAP\Connection)) {
 
             /* Build new connection */
             $this->ldap = ldap_init(
@@ -397,7 +397,7 @@ class config
         } else {
             $obj->set_size_limit(0);
         }
-        return ($obj);
+        return $obj;
     }
 
     /*! \brief Set the current location
