@@ -362,7 +362,7 @@ class config
      */
     function get_ldap_link($sizelimit = FALSE)
     {
-        if ($this->ldap === NULL || !is_resource($this->ldap->cid)) {
+        if ($this->ldap === NULL || !($this->ldap->cid instanceof LDAP\Connection)) {
 
             /* Build new connection */
             $this->ldap = ldap_init(
