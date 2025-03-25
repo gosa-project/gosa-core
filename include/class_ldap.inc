@@ -30,14 +30,14 @@ define("SPECIALS_OVERRIDE", true);
 
 class LDAP
 {
-    public static $characterMap = NULL;
-    public static $characterMapRegFrom = NULL;
-    public static $characterMapRegTo = NULL;
-    public static $readableMapRegFrom = NULL;
-    public static $readableMapRegTo = NULL;
+    public static $characterMap = null;
+    public static $characterMapRegFrom = null;
+    public static $characterMapRegTo = null;
+    public static $readableMapRegFrom = null;
+    public static $readableMapRegTo = null;
 
     // connection handle
-    static ?LDAP\Connection $cid;
+    static ?LDAP\Connection $cid = null;
     // search resources (?)
     static $sr    = [];
     // search resource pointer (?)
@@ -270,7 +270,7 @@ class LDAP
             }
 
             $this->error = "No Error";
-            if ($bid = @ldap_bind(self::$cid, self::fix($this->binddn), $this->bindpw)) {
+            if ($bid = ldap_bind(self::$cid, self::fix($this->binddn), $this->bindpw)) {
                 $this->error = "Success";
                 $this->hascon = true;
             } else {
@@ -389,7 +389,7 @@ class LDAP
             }
 
             $start = microtime(true);
-            self::$sr[$srp] = @ldap_list(self::$cid, self::fix($basedn), $filter, $attrs);
+            self::$sr[$srp] = ldap_list(self::$cid, self::fix($basedn), $filter, $attrs);
             $this->error = ldap_error(self::$cid);
             $this->resetResult($srp);
             $this->hasres[$srp] = true;
@@ -1202,10 +1202,10 @@ class LDAP
         }
 
         /* Searching Ldap Tree */
-        $sr = ldap_read($this->cid, LDAP::fix($dn), $filter, $name);
+        $sr = ldap_read(self::$cid, LDAP::fix($dn), $filter, $name);
 
         /* Get the first entry */
-        $entry = ldap_first_entry($this->cid, $sr);
+        $entry = ldap_first_entry(self::$cid, $sr);
 
         /* Get all attributes related to that Objekt */
         $atts = [];
@@ -1217,14 +1217,14 @@ class LDAP
         /* Reset index */
         $i = 1;
         $identifier = [];
-        $attribute = ldap_first_attribute($this->cid, $entry, $identifier);
+        $attribute = ldap_first_attribute(self::$cid, $entry, $identifier);
         while ($attribute) {
             $i++;
             $atts[$i]['name']  = $attribute;
-            $atts[$i]['value'] = ldap_get_values_len($this->cid, $entry, "$attribute");
+            $atts[$i]['value'] = ldap_get_values_len(self::$cid, $entry, "$attribute");
 
             /* Next one */
-            $attribute = ldap_next_attribute($this->cid, $entry, $identifier);
+            $attribute = ldap_next_attribute(self::$cid, $entry, $identifier);
         }
 
         foreach ($atts as $at) {
