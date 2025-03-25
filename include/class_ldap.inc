@@ -37,7 +37,7 @@ class LDAP
     public static $readableMapRegTo = NULL;
 
     // connection handle
-    static LDAP\Connection $cid;
+    static ?LDAP\Connection $cid;
     // search resources (?)
     static $sr    = [];
     // search resource pointer (?)
