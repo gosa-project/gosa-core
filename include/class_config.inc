@@ -43,7 +43,7 @@ class config
     var $current = [];
 
     /* Link to LDAP-server */
-    var $ldap = NULL;
+    var \LDAP $ldap = NULL;
     var $referrals = [];
 
     /* \brief Configuration data
@@ -437,7 +437,7 @@ class config
         }
 
         /* Convert BASE to have escaped special characters */
-        $this->current['BASE'] = @LDAP::convert($this->current['BASE']);
+        $this->current['BASE'] = LDAP::convert($this->current['BASE']);
 
         /* Parse LDAP referral informations */
         if (!isset($this->current['ADMINDN']) || !isset($this->current['ADMINPASSWORD'])) {
