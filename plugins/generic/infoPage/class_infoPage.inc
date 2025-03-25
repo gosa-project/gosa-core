@@ -30,24 +30,23 @@ class infoPage extends plugin
     function getPluginList()
     {
         $plist = session::get('plist');
-        $myAccountID = array_search('MyAccount',$plist->pluginList);
+        $myAccountID = array_search('MyAccount', $plist->pluginList);
         $str = "";
-        foreach($this->config->data['TABS']['MYACCOUNTTABS'] as $pluginData){
+        foreach ($this->config->data['TABS']['MYACCOUNTTABS'] as $pluginData) {
             $plugin = $pluginData['CLASS'];
 
-            if(!$this->checkAccess($plugin)) continue;
+            if (!$this->checkAccess($plugin)) continue;
 
             list($index, $title, $desc, $icon) = $plist->getPlugData($plugin);
-            $str.= "\n        <div class='icon-menu-item' style='width: 20%;' onclick='openPlugin(\"{$myAccountID}\",\"{$plugin}\")'>";
-            $str.= "\n          ".image($icon);
-            $str.= "\n          <div class='dsc'>";
-            $str.= "\n            <h1>{$title}</h1>";
-            $str.= "\n            <p>{$desc}</p>";
-            $str.= "\n          </div>";
-            $str.= "\n        </div>";
-
+            $str .= "\n        <div class='icon-menu-item' style='width: 20%;' onclick='openPlugin(\"{$myAccountID}\",\"{$plugin}\")'>";
+            $str .= "\n          " . image($icon);
+            $str .= "\n          <div class='dsc'>";
+            $str .= "\n            <h1>{$title}</h1>";
+            $str .= "\n            <p>{$desc}</p>";
+            $str .= "\n          </div>";
+            $str .= "\n        </div>";
         }
-        return($str);
+        return ($str);
     }
 
 
@@ -57,14 +56,14 @@ class infoPage extends plugin
      */
     function checkAccess($class)
     {
-        foreach($this->ui->ocMapping as $cat => $aclClasses){
-            if(in_array_strict($class, $aclClasses)){
-                if(preg_match('/[rw]/',$this->ui->get_permissions($this->ui->dn, "{$cat}/{$class}", ''))){
-                    return(TRUE);
+        foreach ($this->ui->ocMapping as $cat => $aclClasses) {
+            if (in_array_strict($class, $aclClasses)) {
+                if (preg_match('/[rw]/', $this->ui->get_permissions($this->ui->dn, "{$cat}/{$class}", ''))) {
+                    return (TRUE);
                 }
             }
         }
-        return(FALSE);
+        return (FALSE);
     }
 
 
@@ -77,44 +76,44 @@ class infoPage extends plugin
     {
 
         // Check if we've an own manager set
-        $ldap = $this->config->get_ldap_link(); 
+        $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $ldap->cat($this->dn, array('manager'));
         $attrs = $ldap->fetch();
         $dns = array();
-        if(isset($attrs['manager'][0])){
+        if (isset($attrs['manager'][0])) {
             $dns['PERSONAL'] = $attrs['manager'][0];
         }
 
         // Get next department manager dn
         $dn = $this->dn;
         $max = 4;
-        while(strlen($dn) >= strlen($this->config->current['BASE']) && $max--){
-            $dn = preg_replace("/^[^,]+,/","",$dn);
+        while (strlen($dn) >= strlen($this->config->current['BASE']) && $max--) {
+            $dn = preg_replace("/^[^,]+,/", "", $dn);
             $ldap->cat($dn, array('manager'));
             $attrs = $ldap->fetch();
-            if(isset($attrs['manager'][0])){
+            if (isset($attrs['manager'][0])) {
                 $dns['DEPARTMENT'] = $attrs['manager'][0];
             }
         }
 
         // Resolve collected manager dns
         $managers = array();
-        foreach($dns as $type => $dn){
-            $ldap->cat($dn,array('sn','givenName','mail','telephoneNumber'));
+        foreach ($dns as $type => $dn) {
+            $ldap->cat($dn, array('sn', 'givenName', 'mail', 'telephoneNumber'));
             $managers[$dn] = $ldap->fetch();
             $managers[$dn]['type'] = $type;
             $name = $phone = $mail = "";
-            $name = "<tr><td colspan='2' style='background-color:#F0F0F0'><b>".set_post($managers[$dn]['givenName'][0])." ".set_post($managers[$dn]['sn'][0])."</b></td></tr>";
-            if(isset($managers[$dn]['telephoneNumber'][0])){
-                $phone = "<tr><td>&nbsp;"._("Phone number").":</td><td><i>".set_post($managers[$dn]['telephoneNumber'][0])."</i></td></tr>";
+            $name = "<tr><td colspan='2' style='background-color:#F0F0F0'><b>" . set_post($managers[$dn]['givenName'][0]) . " " . set_post($managers[$dn]['sn'][0]) . "</b></td></tr>";
+            if (isset($managers[$dn]['telephoneNumber'][0])) {
+                $phone = "<tr><td>&nbsp;" . _("Phone number") . ":</td><td><i>" . set_post($managers[$dn]['telephoneNumber'][0]) . "</i></td></tr>";
             }
-            if(isset($managers[$dn]['mail'][0])){
-                $mail = "<tr><td>&nbsp;"._("Mail").":</td><td><i><a href='mailto:".set_post($managers[$dn]['mail'][0])."'>".set_post($managers[$dn]['mail'][0])."</i></td></tr>";
+            if (isset($managers[$dn]['mail'][0])) {
+                $mail = "<tr><td>&nbsp;" . _("Mail") . ":</td><td><i><a href='mailto:" . set_post($managers[$dn]['mail'][0]) . "'>" . set_post($managers[$dn]['mail'][0]) . "</i></td></tr>";
             }
             $managers[$dn]['str'] = "<table cellpadding='2' style='border:1px solid #CCC'>{$name}{$phone}{$mail}</table>";
         }
-        return($managers);
+        return ($managers);
     }
 
 
@@ -125,40 +124,66 @@ class infoPage extends plugin
     {
         $smarty = get_smarty();
         $personalInfoAllowed = FALSE;
-        foreach(array("uid","sn","givenName","mail","street","l","o","ou","jpegPhoto","personalTitle",
-                    "academicTitle","dateOfBirth","homePostalAddress","homePhone","departmentNumber",
-                    "employeeNumber","employeeType") as $attr){
+        foreach (
+            array(
+                "uid",
+                "sn",
+                "givenName",
+                "mail",
+                "street",
+                "l",
+                "o",
+                "ou",
+                "jpegPhoto",
+                "personalTitle",
+                "academicTitle",
+                "dateOfBirth",
+                "homePostalAddress",
+                "homePhone",
+                "departmentNumber",
+                "employeeNumber",
+                "employeeType"
+            ) as $attr
+        ) {
             $smarty->assign($attr, "");
-            if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", $attr))
-                    && isset($this->attrs[$attr][0])){
+            if (
+                preg_match("/r/", $this->ui->get_permissions($this->ui->dn, "users/user", $attr))
+                && isset($this->attrs[$attr][0])
+            ) {
                 $smarty->assign($attr, set_post($this->attrs[$attr][0]));
                 $personalInfoAllowed = TRUE;
             }
         }
 
         // Convert address
-        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "homePostalAddress")) && 
-                isset($this->attrs['homePostalAddress'][0])){
+        if (
+            preg_match("/r/", $this->ui->get_permissions($this->ui->dn, "users/user", "homePostalAddress")) &&
+            isset($this->attrs['homePostalAddress'][0])
+        ) {
             $smarty->assign("homePostalAddress", preg_replace("/\n/", "<br>", $this->attrs['homePostalAddress'][0]));
-        }else{
+        } else {
             $smarty->assign("homePostalAddress", "");
         }
 
         // Assign JPEG Photo only if it is set and if we are allowed to view it.
         $smarty->assign("jpegPhoto", "");
-        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "userPicture")) && 
-                isset($this->attrs['jpegPhoto'][0])){
-            session::set('binary',$this->attrs['jpegPhoto'][0]);
-            session::set('binarytype',"image/jpeg");
+        if (
+            preg_match("/r/", $this->ui->get_permissions($this->ui->dn, "users/user", "userPicture")) &&
+            isset($this->attrs['jpegPhoto'][0])
+        ) {
+            session::set('binary', $this->attrs['jpegPhoto'][0]);
+            session::set('binarytype', "image/jpeg");
             $smarty->assign("jpegPhoto", $this->attrs['jpegPhoto']);
         }
 
         // Set date of birth
-        if(preg_match("/r/", $this->ui->get_permissions($this->ui->dn,"users/user", "dateOfBirth")) && 
-                isset($this->attrs['dateOfBirth'][0])){
-            $smarty->assign("dateOfBirth", date('d.m.Y',strtotime($this->attrs['dateOfBirth'][0])));
-        }else{
-            $smarty->assign("dateOfBirth","");
+        if (
+            preg_match("/r/", $this->ui->get_permissions($this->ui->dn, "users/user", "dateOfBirth")) &&
+            isset($this->attrs['dateOfBirth'][0])
+        ) {
+            $smarty->assign("dateOfBirth", date('d.m.Y', strtotime($this->attrs['dateOfBirth'][0])));
+        } else {
+            $smarty->assign("dateOfBirth", "");
         }
 
         $smarty->assign("rand", rand(0, 99999999));
@@ -168,8 +193,6 @@ class infoPage extends plugin
         $smarty->assign("managersCnt", count($this->managers));
         $smarty->assign("revision", get_gosa_version());
         $smarty->assign("year", date("Y"));
-        return($smarty->fetch(get_template_path("infoPage.tpl")));
+        return ($smarty->fetch(get_template_path("infoPage.tpl")));
     }
 }
-
-?>

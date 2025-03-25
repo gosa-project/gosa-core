@@ -21,31 +21,30 @@
 
 /* Remove locks created by this plugin
 */
-if ($remove_lock){
-  if(session::is_set('infoPage')){
-	// Nothing to unlock here
-  }
+if ($remove_lock) {
+    if (session::is_set('infoPage')) {
+        // Nothing to unlock here
+    }
 }
 
 /* Remove this plugin from session
 */
-if ( $cleanup ){
-   # session::un_set('infoPage');
-}else{
+if ($cleanup) {
+    # session::un_set('infoPage');
+} else {
 
 
-	/* Create logview object on demand */
-	if (!session::is_set('infoPage')){
-		session::set('infoPage',new infoPage($config));
-	}
-	$infoPage = session::get('infoPage');
+    /* Create logview object on demand */
+    if (!session::is_set('infoPage')) {
+        session::set('infoPage', new infoPage($config));
+    }
+    $infoPage = session::get('infoPage');
 
-	/* Execute formular */
-	$display= $infoPage->save_object();
-	$display= $infoPage->execute ();
-	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
+    /* Execute formular */
+    $display = $infoPage->save_object();
+    $display = $infoPage->execute();
+    $display .= "<input type=\"hidden\" name=\"ignore\">\n";
 
-	/* Store changes  in session */
-	session::set('infoPage',$infoPage);
+    /* Store changes  in session */
+    session::set('infoPage', $infoPage);
 }
-?>
