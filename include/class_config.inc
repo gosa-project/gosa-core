@@ -51,9 +51,12 @@ class config
      * - $data['SERVERS'] contains server informations.
      * */
     var $data = array(
-        'TABS' => [], 'LOCATIONS' => [], 'SERVERS' => [],
+        'TABS' => [],
+        'LOCATIONS' => [],
+        'SERVERS' => [],
         'MAIN' => [],
-        'MENU' => [], 'SERVICE' => []
+        'MENU' => [],
+        'SERVICE' => []
     );
     var $basedir = "";
     var $config_version = "NOT SET";
@@ -83,10 +86,10 @@ class config
     function __construct(string $filename, string $basedir = "")
     {
         // $this->parser = xml_parser_create();
-        config::$parser = xml_parser_create();
+        self::$parser = xml_parser_create();
         $this->basedir = $basedir;
-        xml_set_object(config::$parser, $this);
-        xml_set_element_handler(config::$parser, "tag_open", "tag_close");
+        xml_set_object(self::$parser, $this);
+        xml_set_element_handler(self::$parser, "tag_open", "tag_close");
 
         /* Parse config file directly? */
         if ($filename != "") {
@@ -114,6 +117,8 @@ class config
      * */
     function check_and_reload(): void
     {
+        $this->ldap = null;
+        $this->get_ldap_link();
         /* Check if class_location.inc has changed, this is the case 
            if we have installed or removed plugins. 
          */
@@ -135,8 +140,8 @@ class config
             $this->section = "";
             $this->currentLocation = "";
 
-            xml_set_object(config::$parser, $this);
-            xml_set_element_handler(config::$parser, "tag_open", "tag_close");
+            xml_set_object(self::$parser, $this);
+            xml_set_element_handler(self::$parser, "tag_open", "tag_close");
             $this->parse($this->filename);
             $this->set_current($this->current['NAME']);
         }
@@ -166,11 +171,11 @@ class config
         $fh = fopen($filename, "r");
         $xmldata = fread($fh, 100000);
         fclose($fh);
-        if (!xml_parse(config::$parser, chop($xmldata))) {
+        if (!xml_parse(self::$parser, chop($xmldata))) {
             $msg = sprintf(
                 _("XML error in gosa.conf: %s at line %d"),
-                bold(xml_error_string(xml_get_error_code(config::$parser))),
-                bold(xml_get_current_line_number(config::$parser))
+                bold(xml_error_string(xml_get_error_code(self::$parser))),
+                bold(xml_get_current_line_number(self::$parser))
             );
             msg_dialog::display(_("Configuration error"), $msg, FATAL_ERROR_DIALOG);
             exit;
@@ -212,7 +217,7 @@ class config
         switch ($this->tags[$this->level - 1]) {
 
 
-                /* Handle tab section */
+            /* Handle tab section */
             case 'TAB':
                 $name = $this->tags[$this->level - 2];
 
@@ -225,7 +230,7 @@ class config
                 $this->data['TABS'][$name][] = $attrs;
                 break;
 
-                /* Handle location */
+            /* Handle location */
             case 'LOCATION':
                 if ($this->tags[$this->level - 2] == 'MAIN') {
                     $name = $attrs['NAME'];
@@ -238,7 +243,7 @@ class config
                 }
                 break;
 
-                /* Handle referral tags */
+            /* Handle referral tags */
             case 'REFERRAL':
                 if ($this->tags[$this->level - 2] == 'LOCATION') {
                     $url = $attrs['URI'];
@@ -253,12 +258,12 @@ class config
                 }
                 break;
 
-                /* Load main parameters */
+            /* Load main parameters */
             case 'MAIN':
                 $this->data['MAIN'] = array_merge($this->data['MAIN'], $attrs);
                 break;
 
-                /* Load menu */
+            /* Load menu */
             case 'SECTION':
                 if ($this->tags[$this->level - 2] == 'MENU') {
                     $this->section = $attrs['NAME'];
@@ -274,7 +279,7 @@ class config
                 $this->data['SHORTCUTMENU'] = [];
                 break;
 
-                /* Inser plugins */
+            /* Inser plugins */
             case 'PLUGIN':
                 if (
                     $this->tags[$this->level - 3] == 'MENU' &&
@@ -362,7 +367,7 @@ class config
      */
     function get_ldap_link($sizelimit = false)
     {
-        if ($this->ldap === null || !($this->ldap->cid instanceof LDAP\Connection)) {
+        if ($this->ldap === null || !($this->ldap::$cid instanceof LDAP\Connection)) {
 
             /* Build new connection */
             $this->ldap = ldap_init(
@@ -494,8 +499,12 @@ class config
             $ldap->search(
                 "(&(objectClass=goImapServer)(goImapSieveServer=*))",
                 array(
-                    'goImapName', 'goImapConnect', 'goImapAdmin', 'goImapPassword',
-                    'goImapSieveServer', 'goImapSievePort'
+                    'goImapName',
+                    'goImapConnect',
+                    'goImapAdmin',
+                    'goImapPassword',
+                    'goImapSieveServer',
+                    'goImapSievePort'
                 )
             );
 
@@ -1282,5 +1291,3 @@ class config
         return (FALSE);
     }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
