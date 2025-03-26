@@ -340,6 +340,8 @@ if (!version_compare(phpversion(), "8.1.0", ">=")) {
 $error_collector = "";
 $error_collector_mailto = "";
 
+$config = new config(CONFIG_DIR . "/" . CONFIG_FILE, $BASE_DIR);
+
 set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
 
 $variables_order = "ES";
@@ -348,8 +350,6 @@ ini_set("track_vars", 1);
 ini_set("display_errors", 1);
 ini_set("report_memleaks", 1);
 ini_set("include_path", ".:$BASE_DIR/include:$BASE_DIR/include/utils/excel:/usr/share/php");
-
-$config = new config(CONFIG_DIR . "/" . CONFIG_FILE, $BASE_DIR);
 
 /* Do smarty setup */
 $smarty = new Smarty;
