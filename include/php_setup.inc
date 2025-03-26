@@ -29,7 +29,7 @@ date_default_timezone_set("Europe/Berlin");
 /* Get base dir for reference */
 $BASE_DIR = dirname(dirname(__FILE__));
 $ROOT_DIR = $BASE_DIR . "/html";
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 
 require_once("class_plugin.inc");
 require_once("class_location.inc");
@@ -84,20 +84,20 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
    * e.g. @call_function_but_hide_errors()
    */
     if (error_reporting() == 0) {
-        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT);
+        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
         return;
     }
 
     /* Workaround for buggy imap_open error outputs */
     if (preg_match('/imap_open/', $errstr)) {
-        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT);
+        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
         return;
     }
 
     /* Hide ldap size limit messages */
     if (preg_match('/ldap_error/', $errstr)) {
         if (preg_match('/sizelimit/', $errstr)) {
-            set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT);
+            set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
             return;
         }
     }
@@ -110,7 +110,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
             new log("view", "error", "", array(), "PHP error: $errstr ($errfile, line $errline)");
         }
 
-        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT);
+        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
         return;
     }
 
@@ -279,7 +279,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     $error_collector .= "</table>";
 
     /* Flush in case of fatal errors */
-    set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT);
+    set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
     if (preg_match('/^fatal/i', $errstr)) {
         echo $error_collector . "</div>";
         flush();
@@ -328,9 +328,7 @@ function prepare4mailbody($string)
 }
 
 
-function dummy_error_handler()
-{
-}
+function dummy_error_handler() {}
 
 /* Bail out for incompatible/old PHP versions */
 if (!version_compare(phpversion(), "8.1.0", ">=")) {
@@ -342,7 +340,7 @@ if (!version_compare(phpversion(), "8.1.0", ">=")) {
 $error_collector = "";
 $error_collector_mailto = "";
 
-set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT);
+set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
 
 $variables_order = "ES";
 ini_set("register_globals", 0);
@@ -351,7 +349,7 @@ ini_set("display_errors", 1);
 ini_set("report_memleaks", 1);
 ini_set("include_path", ".:$BASE_DIR/include:$BASE_DIR/include/utils/excel:/usr/share/php");
 
-$config = new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
+$config = new config(CONFIG_DIR . "/" . CONFIG_FILE, $BASE_DIR);
 
 /* Do smarty setup */
 $smarty = new Smarty;
