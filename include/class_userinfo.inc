@@ -30,7 +30,6 @@ class userinfo
     var $restrictions = array();
     var $gidNumber = -1;
     var $language = "";
-    var $config;
     var $gosaUnitTag = "";
     var $subtreeACL = array();
     var $ACL = array();
@@ -44,10 +43,10 @@ class userinfo
 
     /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */
-    function __construct(&$config, $userdn)
+    function __construct($userdn)
     {
-        $this->config = &$config;
-        $ldap = $this->config->get_ldap_link();
+        global $config;
+        $ldap = $config->get_ldap_link();
         $ldap->cat($userdn, array('sn', 'givenName', 'uid', 'gidNumber', 'preferredLanguage', 'gosaUnitTag', 'gosaLoginRestriction'));
         $attrs = $ldap->fetch();
 
@@ -83,7 +82,6 @@ class userinfo
         $this->reset_acl_cache();
     }
 
-
     public function reset_acl_cache()
     {
         /* Initialize ACL_CACHE */
@@ -92,13 +90,15 @@ class userinfo
 
     function loadACL()
     {
+        global $config;
+
         $this->ACL = array();
         $this->allACLs = array();
         $this->groups = array();
         $this->result_cache = array();
         $this->reset_acl_cache();
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
 
         /* Get member groups... */
         $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->uid . "))", array('dn'));
@@ -219,15 +219,12 @@ class userinfo
                     $without_self_acl[$sdn][$dn] = $this->ACL[$dn];
                     foreach ($without_self_acl[$sdn][$dn] as $acl_id => $acl_set) {
 
-                        /* Remember which ACL set has speicial user filter 
-             */
-                        if (isset($acl_set['filter']{
-                        1})) {
+                        // Remember which ACL set has speicial user filter 
+                        if (isset($acl_set['filter']{1})) {
                             $this->ACLperPath_usesFilter[$sdn] = TRUE;
                         }
 
-                        /* Remove all acl entries which are especially for the current user (self acl)
-             */
+                        // Remove all acl entries which are especially for the current user (self acl)
                         if (isset($acl_set['acl'])) {
                             foreach ($acl_set['acl'] as $object => $object_acls) {
                                 if (isset($object_acls[0]) && strpos($object_acls[0], "s") !== FALSE) {
@@ -344,14 +341,17 @@ class userinfo
 
     function get_permissions($dn, $object, $attribute = "", $skip_write = FALSE)
     {
-        /* If we are forced to skip ACLs checks for the current user 
-        then return all permissions.
-     */
+        global $config;
+
+        /**
+         * If we are forced to skip ACLs checks for the current user 
+         * then return all permissions.
+         */
         if ($this->ignore_acl_for_current_user()) {
             if ($skip_write) {
-                return ("rcdm");
+                return "rcdm";
             }
-            return ("rwcdm");
+            return "rwcdm";
         }
 
         /* Push cache answer? */
@@ -371,7 +371,7 @@ class userinfo
             $aclCategory = $object;
         }
 
-        if ($this->config->boolValueIsTrue("core", "developmentMode")) {
+        if ($config->boolValueIsTrue("core", "developmentMode")) {
 
             if (!isset($this->ocMapping[$aclCategory])) {
                 trigger_error("Invalid ACL category '" . $aclCategory . "'! ({$object})");
@@ -389,8 +389,7 @@ class userinfo
             }
         }
 
-        /* Detect the set of ACLs we have to check for this object 
-     */
+        // Detect the set of ACLs we have to check for this object 
         $adn = $dn;
         while (!isset($this->ACLperPath[$adn]) && strpos($adn, ",") !== FALSE) {
             $adn = preg_replace("/^[^,]*+,/", "", $adn);
@@ -402,9 +401,10 @@ class userinfo
             return ("");
         }
 
-        /* If we do not need to respect any user-filter settings 
-        we can skip the per object ACL checks.
-     */
+        /**
+         * If we do not need to respect any user-filter settings 
+         * we can skip the per object ACL checks.
+         */
         $orig_dn = $dn;
         if (!isset($this->ACLperPath_usesFilter[$adn])) {
             $dn = $adn;
@@ -420,9 +420,8 @@ class userinfo
             }
         }
 
-        /* Get ldap object, for later filter checks 
-     */
-        $ldap = $this->config->get_ldap_link();
+        // Get ldap object, for later filter checks 
+        $ldap = $config->get_ldap_link();
 
         $acl = array("r" => "", "w" => "", "c" => "", "d" => "", "m" => "", "a" => "");
 
@@ -435,7 +434,7 @@ class userinfo
         foreach ($path as $element) {
 
             /* Clean potential ACLs for each level */
-            if (isset($this->config->idepartments[$cpath])) {
+            if (isset($config->idepartments[$cpath])) {
                 $acl = $this->cleanACL($acl);
             }
 
@@ -466,14 +465,13 @@ class userinfo
                         }
                     }
 
-                    /* Reset? Just clean the ACL and turn over to the next one... */
+                    // Reset? Just clean the ACL and turn over to the next one... 
                     if ($subacl['type'] == 'reset') {
                         $acl = $this->cleanACL($acl, TRUE);
                         continue;
                     }
 
-                    /* Self ACLs? 
-           */
+                    // Self ACLs? 
                     if ($dn != $this->dn && isset($subacl['acl'][$object][0]) && (strpos($subacl['acl'][$object][0], "s") !== FALSE)) {
                         continue;
                     }
@@ -512,15 +510,15 @@ class userinfo
                         continue;
                     }
 
-                    /* Category ACLs    (e.g. $object = "user/0")
-           */
+                    // Category ACLs    (e.g. $object = "user/0")
                     if (strstr($object, "/0")) {
                         $ocs = preg_replace("/\/0$/", "", $object);
                         if (isset($this->ocMapping[$ocs])) {
 
-                            /* if $attribute is "", then check every single attribute for this object.
-                 if it is 0, then just check the object category ACL.
-               */
+                            /**
+                             * if $attribute is "", then check every single attribute for this object.
+                             * if it is 0, then just check the object category ACL.
+                             */
                             if ($attribute == "") {
                                 foreach ($this->ocMapping[$ocs] as $oc) {
                                     if (isset($subacl['acl'][$ocs . '/' . $oc])) {
@@ -554,7 +552,7 @@ class userinfo
         /* If the requested ACL is for a container object, then alter 
         ACLs by applying cleanACL a last time.
      */
-        if (isset($this->config->idepartments[$dn])) {
+        if (isset($config->idepartments[$dn])) {
             $acl = $this->cleanACL($acl);
         }
 
@@ -573,7 +571,7 @@ class userinfo
         if ($skip_write) {
             $ret = str_replace(array('w', 'c', 'd', 'm'), '', $ret);
         }
-        return ($ret);
+        return $ret;
     }
 
 
@@ -581,15 +579,17 @@ class userinfo
      accessible department) */
     function get_module_departments($module, $skip_self_acls = FALSE)
     {
-        /* If we are forced to skip ACLs checks for the current user 
-        then return all departments as valid.
-     */
+        global $config;
+        /**
+         * If we are forced to skip ACLs checks for the current user 
+         * then return all departments as valid.
+         */
         if ($this->ignore_acl_for_current_user()) {
-            return (array_keys($this->config->idepartments));
+            return (array_keys($config->idepartments));
         }
 
         /* Use cached results if possilbe */
-        $ACL_CACHE = &session::global_get('ACL_CACHE');
+        $ACL_CACHE = session::global_get('ACL_CACHE');
 
         if (!is_array($module)) {
             $module = array($module);
@@ -621,11 +621,11 @@ class userinfo
                         }
                     }
 
-                    if ($found && !isset($this->config->idepartments[$dn])) {
-                        while (!isset($this->config->idepartments[$dn]) && strpos($dn, ",")) {
+                    if ($found && !isset($config->idepartments[$dn])) {
+                        while (!isset($config->idepartments[$dn]) && strpos($dn, ",")) {
                             $dn = preg_replace("/^[^,]+,/", "", $dn);
                         }
-                        if (isset($this->config->idepartments[$dn])) {
+                        if (isset($config->idepartments[$dn])) {
                             $deps[$dn] = $dn;
                         }
                     }
@@ -633,7 +633,7 @@ class userinfo
             }
 
             /* For all gosaDepartments */
-            foreach ($this->config->departments as $dn) {
+            foreach ($config->departments as $dn) {
                 if (isset($deps[$dn])) continue;
                 $acl = "";
                 if (strpos($mod, '/')) {
@@ -727,6 +727,8 @@ class userinfo
   */
     function has_complete_category_acls($dn, $category)
     {
+        global $config;
+
         $acl    = "rwcdm";
         $types  = "rwcdm";
 
@@ -748,7 +750,7 @@ class userinfo
                         }
                     }
                 } else {
-                    if ($this->config->boolValueIsTrue("core", "developmentMode")) {
+                    if ($config->boolValueIsTrue("core", "developmentMode")) {
                         trigger_error("Invalid type of category " . $category);
                     }
                     $acl = "";
@@ -765,12 +767,13 @@ class userinfo
     /*! \brief  Returns TRUE if the current user is configured in IGNORE_ACL=".." in your gosa.conf 
       @param  Return Boolean TRUE if we have to skip ACL checks else FALSE.
    */
-    function ignore_acl_for_current_user()
+    function ignore_acl_for_current_user():bool
     {
+        global $config;
         if ($this->ignoreACL === NULL) {
-            $this->ignoreACL = ($this->config->get_cfg_value("core", "ignoreAcl") == $this->dn);
+            $this->ignoreACL = ($config->get_cfg_value("core", "ignoreAcl") == $this->dn);
         }
-        return ($this->ignoreACL);
+        return $this->ignoreACL;
     }
 
 
