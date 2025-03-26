@@ -66,20 +66,6 @@ $domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
-/* Create smarty & Set template compile directory */
-$smarty = new smarty();
-if (isset($config)) {
-  $smarty->compile_dir = $config->get_cfg_value("core", "templateCompileDirectory");
-} else {
-  $smarty->compile_dir = '/var/spool/gosa/';
-}
-
-if (!is_writeable($smarty->compile_dir)) {
-
-  header('location: index.php');
-  exit();
-}
-
 $smarty->assign("title", "GOsa");
 
 /* If GET request is posted, the logout was forced by pressing the link */
