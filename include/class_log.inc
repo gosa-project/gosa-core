@@ -30,9 +30,6 @@
  */
 class log
 {
-
-    var $config;
-
     /**
      * \brief logging constructor
      *\param action         One of these values (modify|create|remove|snapshot|copy)
@@ -45,6 +42,7 @@ class log
      */
     function __construct($action, $objecttype, $object, $changes_array = [], $result = "")
     {
+        global $config;
         if (!is_array($changes_array)) {
             trigger_error("log(string,string,string,array(),bool). Forth parameter must be an array.");
             $changes_array = [];
@@ -54,10 +52,9 @@ class log
         if (!session::global_is_set('config')) {
             $entry['user'] = "unkown";
         } else {
-
-            $this->config = session::global_get('config');
+            $config = session::global_get('config');
             $ui           = get_userinfo();
-            $entry['user'] = $ui->dn;
+            $entry['user'] = $ui->dn ?? 'unknown';
         }
 
         /* Create string out of changes */
@@ -80,7 +77,6 @@ class log
         }
 
         /* Check if all given values are valid */
-        global $config;
         $msgs = log::check($entry);
         if (count($msgs)) {
             foreach ($msgs as $msg) {
