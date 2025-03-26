@@ -164,8 +164,18 @@ class LDAP
 
         // Set a default mapping to make readable strings out of dns.
         self::$readableMapRegFrom = array(
-            "/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/",
-            "/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//", "/\\\\22/", '/\\\\"/'
+            "/\001CO/",
+            "/\001OB/",
+            "/\001CB/",
+            "/\001SL/",
+            "/\001DQ/",
+            "/\\\\,/",
+            "/\\\\2C/",
+            "/\(/",
+            "/\)/",
+            "/\//",
+            "/\\\\22/",
+            '/\\\\"/'
         );
         self::$readableMapRegTo = array(",", "(", ")", "/", '"', ",", ",", "(", ")", "/", '"', '"');
 
@@ -290,7 +300,7 @@ class LDAP
     function rebind($ldap, $referral): int|null
     {
         $credentials = $this->get_credentials($referral);
-        if (@ldap_bind($ldap, self::fix($credentials['ADMINDN']), $credentials['ADMINPASSWORD'])) {
+        if (ldap_bind($ldap, self::fix($credentials['ADMINDN']), $credentials['ADMINPASSWORD'])) {
             $this->error = "Success";
             $this->hascon = true;
             $this->reconnect = true;
@@ -428,15 +438,18 @@ class LDAP
         if ($dn === 'new' || $dn === null) {
             return false;
         }
+
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
 
             $this->clearResult($srp);
             self::$sr[$srp] = ldap_read(self::$cid, self::fix($dn), $filter, $attrs);
             $this->error = ldap_error(self::$cid);
             $this->resetResult($srp);
             $this->hasres[$srp] = true;
-            return (self::$sr[$srp]);
+            return self::$sr[$srp];
         }
 
         $this->error = "Could not connect to LDAP server";
