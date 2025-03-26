@@ -567,7 +567,7 @@ function ldap_login_user_htaccess($username)
     $attrs = $ldap->fetch();
 
     /* got user dn, fill acl's */
-    $ui = new userinfo($config, $ldap->getDN());
+    $ui = new userinfo($ldap->getDN());
     $ui->username = $attrs['uid'][0];
 
     /* Bail out if we have login restrictions set, for security reasons
@@ -667,7 +667,7 @@ function ldap_login_user($username, $password)
     }
 
     /* got user dn, fill acl's */
-    $ui = new userinfo($config, $ldap->getDN());
+    $ui = new userinfo($ldap->getDN());
     $ui->username = $attrs['uid'][0];
 
     /* Bail out if we have login restrictions set, for security reasons
