@@ -97,7 +97,7 @@ class config
         }
 
         // Load configuration registry
-        $this->configRegistry = new configRegistry($this);
+        $this->configRegistry = new configRegistry();
         $this->registration = new GOsaRegistration($this);
     }
 
