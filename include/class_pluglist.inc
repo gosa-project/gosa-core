@@ -25,7 +25,6 @@ class pluglist
     // The id of the last registered plugin id
     public $index = 0;
 
-    public $config = null;
     public $ui = null;
 
     // Contains a list of the paths for all registered plugins.
@@ -74,10 +73,9 @@ class pluglist
         return $this->registeredShortCutEntries;
     }
 
-    public function __construct(&$config, &$ui)
+    public function __construct($ui)
     {
-        $this->ui = &$ui;
-        $this->config = &$config;
+        $this->ui = $ui;
         $this->loadPluginList();
         $this->theme = getThemeName();
     }
@@ -113,7 +111,7 @@ class pluglist
      * @param &$plug
      * @return bool
      */
-    public function registerPlugin(&$plug): bool
+    public function registerPlugin($plug): bool
     {
         global $composerClassMap, $class_mapping;
 
@@ -149,6 +147,7 @@ class pluglist
             );
             exit();
         }
+
         if (!plugin_available($plug['CLASS'])) {
             return false;
         }
@@ -175,7 +174,7 @@ class pluglist
      * @param $aclname acl tag to check for, eg. 	"users/user:self", "systems", ...
      * @return bool TRUE on success else FALSE
      */
-    public function check_access($aclname)
+    public function check_access($aclname): bool
     {
         if (isset($this->silly_cache[$aclname])) {
             return $this->silly_cache[$aclname];
@@ -206,6 +205,7 @@ class pluglist
             if (preg_match('/:self$/', $acl_to_check)) {
                 $acl_to_check = preg_replace('/:self$/', '', $acl_to_check);
                 if (strpos($acl_to_check, '/')) {
+
                     if ($this->ui->get_permissions($this->ui->dn, $acl_to_check, '') != '') {
                         $this->silly_cache[$aclname] = true;
                         return true;
@@ -242,27 +242,29 @@ class pluglist
      */
     public function gen_menu()
     {
+        global $config;
+
         if ($this->menu == '') {
             // First load the menu plugins and try to register them in the pluglist
             //  if this fails for some reason, then remove the plugin from the menu.
-            if (isset($this->config->data['MENU'])) {
-                foreach ($this->config->data['MENU'] as $section => $plugins) {
+            if (isset($config->data['MENU'])) {
+                foreach ($config->data['MENU'] as $section => $plugins) {
                     foreach ($plugins as $id => $plug) {
-                        if (!$this->registerPlugin($this->config->data['MENU'][$section][$id])) {
-                            unset($this->config->data['MENU'][$section][$id]);
+                        if (!$this->registerPlugin($config->data['MENU'][$section][$id])) {
+                            unset($config->data['MENU'][$section][$id]);
                         }
                     }
 
                     // Remove empty sections
-                    if (count($this->config->data['MENU'][$section]) == 0) {
-                        unset($this->config->data['MENU'][$section]);
+                    if (count($config->data['MENU'][$section]) == 0) {
+                        unset($config->data['MENU'][$section]);
                     }
                 }
             }
 
-            $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
+            $disabledPlugins = $config->configRegistry->getDisabledPlugins();
 
-            $cfg = $this->config->data['MENU'];
+            $cfg = $config->data['MENU'];
             $menu = '';
 
             switch ($this->theme) {
@@ -381,11 +383,12 @@ class pluglist
      */
     public function show_iconmenu()
     {
+        global $config;
         $add_hr = false;
         if ($this->iconmenu == '') {
-            $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
+            $disabledPlugins = $config->configRegistry->getDisabledPlugins();
 
-            $cfg = $this->config->data['MENU'];
+            $cfg = $config->data['MENU'];
 
             switch ($this->theme) {
                 case 'classic':
@@ -491,25 +494,26 @@ class pluglist
      */
     public function genPathMenu()
     {
+        global $config;
         if (empty($this->pathMenu)) {
-            $disabledPlugins = $this->config->configRegistry->getDisabledPlugins();
+            $disabledPlugins = $config->configRegistry->getDisabledPlugins();
 
             // Now load the icon menu and try to register the plugins in the pluglist
             //  if this fails for some reason, then remove the plugins from the menu.
-            if (isset($this->config->data['SHORTCUTMENU'])) {
-                foreach ($this->config->data['SHORTCUTMENU'] as $id => $plugin) {
-                    if (!$this->registerPlugin($this->config->data['SHORTCUTMENU'][$id])) {
-                        unset($this->config->data['SHORTCUTMENU'][$id]);
+            if (isset($config->data['SHORTCUTMENU'])) {
+                foreach ($config->data['SHORTCUTMENU'] as $id => $plugin) {
+                    if (!$this->registerPlugin($config->data['SHORTCUTMENU'][$id])) {
+                        unset($config->data['SHORTCUTMENU'][$id]);
                     }
                 }
             }
 
             // Now load the path menu and try to register the plugins in the pluglist
             //  if this fails for some reason, then remove the plugin from the menu.
-            if (isset($this->config->data['PATHMENU'])) {
-                foreach ($this->config->data['PATHMENU'] as $id => $plugin) {
-                    if (!$this->registerPlugin($this->config->data['PATHMENU'][$id])) {
-                        unset($this->config->data['PATHMENU'][$id]);
+            if (isset($config->data['PATHMENU'])) {
+                foreach ($config->data['PATHMENU'] as $id => $plugin) {
+                    if (!$this->registerPlugin($config->data['PATHMENU'][$id])) {
+                        unset($config->data['PATHMENU'][$id]);
                     }
                 }
             }
@@ -521,8 +525,8 @@ class pluglist
                         "\n          <ul class='path-navigation'>";
 
                     // Check if we've at least one entry defined ih the iconmenu
-                    if (isset($this->config->data['SHORTCUTMENU'])) {
-                        $icfg = &$this->config->data['SHORTCUTMENU'];
+                    if (isset($config->data['SHORTCUTMENU'])) {
+                        $icfg = $config->data['SHORTCUTMENU'];
                         $rcfg = array_reverse($icfg);
                         foreach ($rcfg as $id => $plug) {
                             list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
@@ -544,8 +548,8 @@ class pluglist
                     $this->pathMenu .= "\n            %navigator%";
 
                     // Check if we've at least one entry defined ih the pathmenu
-                    if (isset($this->config->data['PATHMENU'])) {
-                        $cfg = &$this->config->data['PATHMENU'];
+                    if (isset($config->data['PATHMENU'])) {
+                        $cfg = $config->data['PATHMENU'];
                         $rcfg = array_reverse($cfg);
                         foreach ($rcfg as $id => $plug) {
                             list($index, $title, $desc, $icon) = $this->getPlugData($plug['CLASS']);
@@ -565,8 +569,8 @@ class pluglist
 
                 default:
                     // Check if we've at least one entry defined ih the pathmenu
-                    if (isset($this->config->data['PATHMENU'])) {
-                        $cfg = &$this->config->data['PATHMENU'];
+                    if (isset($config->data['PATHMENU'])) {
+                        $cfg = $config->data['PATHMENU'];
                         $rcfg = array_reverse($cfg);
                         $first = true;
                         foreach ($rcfg as $id => $plug) {
@@ -598,10 +602,11 @@ class pluglist
     
     function genBreadcrumb()
     {
+        global $config;
         if (empty($this->breadcrumb)) {
             // Check if we've at least one entry defined ih the iconmenu
-            if(isset($this->config->data['SHORTCUTMENU'])){
-                $icfg= &$this->config->data['SHORTCUTMENU'];
+            if (isset($config->data['SHORTCUTMENU'])) {
+                $icfg = $config->data['SHORTCUTMENU'];
                 $rcfg = array_reverse($icfg);
                 foreach($rcfg as $id => $plug){
                     list($index, $title, $desc, $icon, $shortIcon) = $this->getPlugData($plug['CLASS']);
@@ -754,9 +759,10 @@ class pluglist
      */
     public function gen_headlines()
     {
+        global $config;
         $ret = [];
         if (count($this->headlines) == 0) {
-            foreach ($this->config->data['MENU'] as $headline => $plugins) {
+            foreach ($config->data['MENU'] as $headline => $plugins) {
                 foreach ($plugins as $id => $plug) {
                     if (plugin_available($plug['CLASS'])) {
                         $attrs = (get_class_vars($plug['CLASS']));
