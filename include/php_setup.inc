@@ -351,12 +351,27 @@ ini_set("display_errors", 1);
 ini_set("report_memleaks", 1);
 ini_set("include_path", ".:$BASE_DIR/include:$BASE_DIR/include/utils/excel:/usr/share/php");
 
+$config = new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
+
 /* Do smarty setup */
 $smarty = new Smarty;
-$smarty->template_dir = $BASE_DIR . '/ihtml/';
+$smarty->setTemplateDir($BASE_DIR . '/ihtml/');
+$smarty->setCompileDir($config->get_cfg_value("core", "templateCompileDirectory", '/var/spool/gosa/'));
 $smarty->caching = Smarty::CACHING_OFF;
-// this line was added to avoid strange smarty behaviour on loading system plugins such as "escape"
-$smarty->use_include_path = true;
+$smarty->error_unassigned = true;
+
+
+/* Check for compile directory */
+if (!(is_dir($smarty->getCompileDir()) && is_writable($smarty->getCompileDir()))) {
+    msg_dialog::display(_("Smarty error"), sprintf(
+        _("Compile directory %s is not accessible!"),
+        $smarty->getCompileDir()
+    ), FATAL_ERROR_DIALOG);
+    exit();
+}
+
+/* Check for old files in compile directory */
+clean_smarty_compile_dir($smarty->getCompileDir());
 
 // Register GOsa contributed smarty plugins
 $d = opendir("$BASE_DIR/include/smartyAddons");
