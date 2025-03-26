@@ -586,7 +586,7 @@ function ldap_login_user_htaccess($username)
     /* TODO: check java script for htaccess authentication */
     session::global_set('js', true);
 
-    return ($ui);
+    return $ui;
 }
 
 
