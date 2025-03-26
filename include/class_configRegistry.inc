@@ -3,7 +3,6 @@
 class configRegistry
 {
 
-    public $config = NULL;
     public $properties = array();
     public $ldapStoredProperties = array();
     public $fileStoredProperties = array();
@@ -36,10 +35,8 @@ class configRegistry
      *  @param      config  The configuration object
      *  @return     
      */
-    function __construct($config)
+    function __construct()
     {
-        $this->config = &$config;
-
         // Detect classes that have a plInfo method 
         global $class_mapping;
         foreach ($class_mapping as $cname => $path) {
@@ -86,12 +83,13 @@ class configRegistry
      */
     function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE, $objectClassesToUse = array())
     {
+        global $config;
         // Read objectClasses from ldap
         if (count($objectClassesToUse)) {
             $this->setObjectClasses($objectClassesToUse);
         } elseif (!count($this->objectClasses)) {
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cd($this->config->current['BASE']);
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($config->current['BASE']);
             $this->setObjectClasses($ldap->get_objectclasses());
         }
 
@@ -238,7 +236,6 @@ class configRegistry
             }
         }
         $this->schemaCheckFinished = TRUE;
-        session::un_set('plist');
         return (!$this->schemaCheckFailed);
     }
 
@@ -326,6 +323,7 @@ class configRegistry
      */
     function reload($force = FALSE)
     {
+        global $config;
         // Do not reload the properties everytime, once we have  
         //  everything loaded and registrered skip the reload.
         // Status is 'finished' once we had a ldap connection (logged in)
@@ -338,10 +336,10 @@ class configRegistry
         $this->mapByName = array();
         $this->activePlugins = array('core' => 'core');
 
-        if (!$this->config) return;
+        if (!$config) return;
 
         // Search for config flags defined in the config file (TAB section)
-        foreach ($this->config->data['TABS'] as $tabname => $tabdefs) {
+        foreach ($config->data['TABS'] as $tabname => $tabdefs) {
             foreach ($tabdefs as $info) {
 
                 // Put plugin in list of active plugins
@@ -368,7 +366,7 @@ class configRegistry
             }
         }
 
-        foreach ($this->config->data['MENU'] as $section => $entries) {
+        foreach ($config->data['MENU'] as $section => $entries) {
             foreach ($entries as $entry) {
 
                 if (isset($entry['CLASS'])) {
@@ -389,7 +387,7 @@ class configRegistry
         }
 
         // Search for config flags defined in the config file (PATHMENU)
-        foreach ($this->config->data['PATHMENU'] as $entry) {
+        foreach ($config->data['PATHMENU'] as $entry) {
 
             if (isset($entry['CLASS'])) {
 
@@ -408,13 +406,13 @@ class configRegistry
         }
 
         // Search for config flags defined in the config file (MAIN section)
-        foreach ($this->config->data['MAIN'] as $name => $value) {
+        foreach ($config->data['MAIN'] as $name => $value) {
             $this->fileStoredProperties['core'][strtolower($name)] = $value;
         }
 
         // Search for config flags defined in the config file (Current LOCATION section)
-        if (isset($this->config->current)) {
-            foreach ($this->config->current as $name => $value) {
+        if (isset($config->current)) {
+            foreach ($config->current as $name => $value) {
                 $this->fileStoredProperties['core'][strtolower($name)] = $value;
             }
         }
@@ -430,9 +428,9 @@ class configRegistry
         }
 
         // Search for all config flags defined in the LDAP - BUT only if we ARE logged in. 
-        if (!empty($this->config->current['CONFIG'])) {
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cd($this->config->current['CONFIG']);
+        if (!empty($config->current['CONFIG'])) {
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($config->current['CONFIG']);
             $ldap->search('(&(objectClass=gosaConfig)(gosaSetting=*))', array('cn', 'gosaSetting'));
             while ($attrs = $ldap->fetch()) {
                 $class = $attrs['cn'][0];
@@ -477,7 +475,7 @@ class configRegistry
         }
 
         // We are only finsihed once we are logged in.
-        if (!empty($this->config->current['CONFIG'])) {
+        if (!empty($config->current['CONFIG'])) {
             $this->status = 'finished';
         }
     }
