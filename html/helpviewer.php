@@ -136,7 +136,7 @@ if (session::global_is_set('current_class_for_help')) {
 } elseif (isset($_GET['plug'])) {
     /* This displays helpfiles depending on the current $_GET[plug] */
     $ui = get_userinfo();
-    $tmp                          = new pluglist($config, $ui);
+    $tmp                          = new pluglist($ui);
     $path                         = $tmp->get_path($_GET['plug']);
     $helpobject['currentplug']    = $path;
     $helpobject['file']           = "index.html";
