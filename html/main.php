@@ -59,22 +59,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 DEBUG(DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, session::get_all(), "_SESSION");
 
-/* Check for uniqe ip address */
-$ui = session::global_get('ui');
-
-$config = session::global_get('config');
-$config->check_and_reload();
-$config->configRegistry->reload();
-
-/* Enable compressed output */
-if ($config->get_cfg_value("core", "sendCompressedOutput") == "true") {
-
-    if (ob_get_length() > 0) ob_end_clean();
-    ob_start("ob_gzhandler");
-}
-
 /* Check for invalid sessions */
-if (session::global_get('_LAST_PAGE_REQUEST') == "") {
+if (session::global_get('_LAST_PAGE_REQUEST') != "") {
+    //$config = session::global_get('config');
+    $config->set_current(session::global_get('server'));
+    $config->check_and_reload();
+    $config->configRegistry->reload();
+
+    /* Check for uniqe ip address */
+    $ui = session::global_get('ui');
+    $ui = new userinfo($ui->dn);
+    $ui->loadACL();
+    session::global_set('ui', $ui);
+
+    /* Enable compressed output */
+    if ($config->get_cfg_value("core", "sendCompressedOutput") == "true") {
+
+        if (ob_get_length() > 0) ob_end_clean();
+        ob_start("ob_gzhandler");
+    }
+
+    /* Check for invalid sessions */
     session::global_set('_LAST_PAGE_REQUEST', time());
 } else {
 
@@ -95,12 +100,7 @@ if (session::global_get('_LAST_PAGE_REQUEST') == "") {
     session::global_set('_LAST_PAGE_REQUEST', time());
 }
 
-
 DEBUG(DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
-
-/* Set template compile directory */
-$smarty->compile_dir = $config->get_cfg_value("core", "templateCompileDirectory");
-$smarty->error_unassigned = true;
 
 /* Set default */
 $reload_navigation = false;
@@ -148,7 +148,6 @@ $domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
-
 /* Prepare plugin list */
 if (!session::global_is_set('plist')) {
     /* Initially load all classes */
@@ -172,7 +171,8 @@ if (!session::global_is_set('plist')) {
         }
     }
 
-    session::global_set('plist', new pluglist($config, $ui));
+    $plist = new pluglist($ui);
+    session::global_set('plist', $plist);
 
     /* Load ocMapping into userinfo */
     $tmp = new acl($config, null, $ui->dn);
@@ -251,7 +251,6 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])) {
     session::global_set('currentPlugin', 'welcome');
     $plugin_dir = "$BASE_DIR/plugins/generic/welcome";
 }
-
 // Display the welcome page for admins (iconmenu) and an info page for those
 // who are not allowed to adminstrate anything (user)
 if (count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('currentPlugin') == "welcome") {
@@ -413,7 +412,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (is_file("$plugin_dir/main.inc")) {
     $display = "";
     require("$plugin_dir/main.inc");
-} elseif(is_file("$plugin_dir/main.php")) {
+} elseif (is_file("$plugin_dir/main.php")) {
     $display = "";
     require("$plugin_dir/main.php");
 } else {
@@ -530,5 +529,4 @@ echo $display;
 
 /* Save plist and config */
 session::global_set('plist', $plist);
-session::global_set('config', $config);
 session::set('errorsAlreadyPosted', array());
