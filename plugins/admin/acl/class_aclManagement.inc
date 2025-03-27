@@ -34,7 +34,7 @@ class aclManagement extends management
     protected $aclPlugin   = "acl";
     protected $objectName   = "acl";
 
-    function __construct(&$config, $ui)
+    function __construct($config, $ui)
     {
         $this->config = $config;
         $this->ui = $ui;
@@ -75,7 +75,8 @@ class aclManagement extends management
         $altAclCategory = "",
         $aclPlugin = ""
     ) {
-        @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel confirmed!");
+        global $config;
+        DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel confirmed!");
 
         $headpage = $this->getHeadpage();
         foreach ($this->dns as $key => $dn) {
@@ -94,7 +95,7 @@ class aclManagement extends management
 
                 // Delete the object
                 $this->dn = $dn;
-                $this->tabObject = new $tabClass($this->config, $this->config->data['TABS'][$tabType], $this->dn, 'acl', true, true);
+                $this->tabObject = new $tabClass($config, $config->data['TABS'][$tabType], $this->dn, 'acl', true, true);
                 $this->tabObject->set_acl_base($this->dn);
                 $this->tabObject->delete();
                 $this->tabObject->parent = &$this;

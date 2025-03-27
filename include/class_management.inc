@@ -94,7 +94,7 @@ abstract class management
     protected $is_single_edit = true;
     protected $is_multiple_edit = false;
 
-    public function __construct(&$config, $ui, $plugname, $headpage)
+    public function __construct($config, $ui, $plugname, $headpage)
     {
         $this->plugname = $plugname;
         $this->headpage = $headpage;
@@ -171,6 +171,7 @@ abstract class management
      */
     public function execute()
     {
+        global $config;
         // Ensure that html posts and gets are kept even if we see a 'Entry islocked' dialog.
         $vars = array('/^act$/', '/^listing/', '/^PID$/', '/^FILTER_PID$/');
         session::set('LOCK_VARS_TO_USE', $vars);
@@ -187,7 +188,7 @@ abstract class management
         if ($this->filter) {
             $this->filter->update();
             session::global_set(get_class($this) . "_filter", $this->filter);
-            if ($this->config->get_cfg_value("core", "useAutoComplete") == "true") {
+            if ($config->get_cfg_value("core", "useAutoComplete") == "true") {
                 session::set('autocomplete', $this->filter);
             }
         }
@@ -249,7 +250,8 @@ abstract class management
 
     public function editFilter()
     {
-        $this->dialogObject = new userFilter($this->config, $this->getHeadpage());
+        global $config;
+        $this->dialogObject = new userFilter($config, $this->getHeadpage());
     }
 
     public function renderList()
@@ -444,6 +446,7 @@ abstract class management
         $altAclCategory = "",
         $altAclPlugin = ""
     ) {
+        global $config;
         $tabType = $this->tabType;
         $tabClass = $this->tabClass;
         $aclCategory = $this->aclCategory;
@@ -461,7 +464,7 @@ abstract class management
             $aclPlugin = $altAclPlugin;
         }
 
-        @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel confirmed!");
+        DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel confirmed!");
 
         // Check permissons for each target
         $h = $this->getHeadpage();
@@ -477,8 +480,8 @@ abstract class management
                 // Delete the object
                 $this->dn = $dn;
                 $this->tabObject = new $tabClass(
-                    $this->config,
-                    $this->config->data['TABS'][$tabType],
+                    $config,
+                    $config->data['TABS'][$tabType],
                     $this->dn,
                     $aclCategory,
                     true,
@@ -592,11 +595,12 @@ abstract class management
      */
     public function createSnapshotDialog($action = "", $target = array(), $all = array())
     {
+        global $config;
         DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Snaptshot creation initiated!");
 
         foreach ($target as $entry) {
             if (!empty($entry) && $this->ui->allow_snapshot_create($entry, $this->aclCategory)) {
-                $this->dialogObject = new SnapShotDialog($this->config, $entry, $this);
+                $this->dialogObject = new SnapShotDialog($config, $entry, $this);
                 $this->dialogObject->aclCategories = array($this->aclCategory);
                 $this->dialogObject->parent = &$this;
             } else {
@@ -688,6 +692,7 @@ abstract class management
      */
     public function restoreSnapshotDialog($action = "", $target = array(), $all = array())
     {
+        global $config;
         // Set current restore base for snapshot handling.
         if (is_object($this->snapHandler)) {
             $bases = array();
@@ -706,7 +711,7 @@ abstract class management
             $entry = $this->headpage->getBase();
             if (!empty($entry) && $this->ui->allow_snapshot_restore($entry, $this->aclCategory)) {
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $entry, "Snaptshot restoring initiated!");
-                $this->dialogObject = new SnapShotDialog($this->config, $entry, $this);
+                $this->dialogObject = new SnapShotDialog($config, $entry, $this);
                 $this->dialogObject->set_snapshot_bases($bases);
                 $this->dialogObject->display_all_removed_objects = true;
                 $this->dialogObject->display_restore_dialog = true;
@@ -724,7 +729,7 @@ abstract class management
             $entry = array_pop($target);
             if (!empty($entry) && $this->ui->allow_snapshot_restore($entry, $this->aclCategory)) {
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $entry, "Snaptshot restoring initiated!");
-                $this->dialogObject = new SnapShotDialog($this->config, $entry, $this);
+                $this->dialogObject = new SnapShotDialog($config, $entry, $this);
                 $this->dialogObject->set_snapshot_bases($bases);
                 $this->dialogObject->display_restore_dialog = true;
                 $this->dialogObject->parent = &$this;
@@ -765,6 +770,8 @@ abstract class management
          *   }
          * }
          **/
+
+        global $config;
         $tabType = $this->tabType;
         $tabClass = $this->tabClass;
         $aclCategory = $this->aclCategory;
@@ -791,10 +798,10 @@ abstract class management
         if (empty($tabClass) || empty($tabType)) {
             // No tab type defined
         } else {
-            if (isset($this->config->data['TABS'][$tabType])) {
+            if (isset($config->data['TABS'][$tabType])) {
 
                 // Check if the base plugin is available - it is mostly responsible for object creation and removal.
-                $first  = $this->config->data['TABS'][$tabType][0];
+                $first  = $config->data['TABS'][$tabType][0];
                 if (!class_available($first['CLASS'])) {
                     msg_dialog::display(
                         _("Internal error"),
@@ -802,7 +809,7 @@ abstract class management
                         ERROR_DIALOG
                     );
                 } else {
-                    $this->tabObject = new $tabClass($this->config, $this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
+                    $this->tabObject = new $tabClass($config, $config->data['TABS'][$tabType], $this->dn, $aclCategory);
                     $this->tabObject->set_acl_base($this->headpage->getBase());
                     $this->tabObject->parent = &$this;
                     @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dn, "Create new entry initiated!");
@@ -841,6 +848,8 @@ abstract class management
          *   }
          * }
          **/
+
+        global $config;
 
         // Do not create a new tabObject while there is already one opened,
         //  the user may have just pressed F5 to reload the page.
@@ -885,7 +894,7 @@ abstract class management
                 $tab = $tabClass;
 
                 // Check if the base plugin is available - it is mostly responsible for object creation and removal.
-                $first  = $this->config->data['TABS'][$tabType][0];
+                $first  = $config->data['TABS'][$tabType][0];
                 if (!class_available($first['CLASS'])) {
                     msg_dialog::display(
                         _("Internal error"),
@@ -893,8 +902,8 @@ abstract class management
                         ERROR_DIALOG
                     );
                 } else {
-                    $this->tabObject = new $tab($this->config, $this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
-                    @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dn, "Edit entry initiated!");
+                    $this->tabObject = new $tab($config, $config->data['TABS'][$tabType], $this->dn, $aclCategory);
+                    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dn, "Edit entry initiated!");
                     $this->tabObject->set_acl_base($this->dn);
                     $this->tabObject->parent = &$this;
                 }
@@ -912,9 +921,9 @@ abstract class management
             } else {
                 $this->dns = $target;
                 $tmp = new multi_plug(
-                    $this->config,
+                    $config,
                     $tabClass,
-                    $this->config->data['TABS'][$tabType],
+                    $config->data['TABS'][$tabType],
                     $this->dns,
                     $this->headpage->getBase(),
                     $aclCategory

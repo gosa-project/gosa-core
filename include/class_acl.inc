@@ -328,7 +328,9 @@ class acl extends plugin
 
     function execute()
     {
-        /* Call parent execute */
+        global $config;
+
+        // Call parent execute
         parent::execute();
 
         $tmp = session::global_get('plist');
@@ -576,7 +578,7 @@ class acl extends plugin
 
         /* Show User/Group-Add-Dialog */
         if (isset($_POST['add_user_or_group'])) {
-            $this->dialog = new userGroupSelect($this->config, get_userinfo());
+            $this->dialog = new userGroupSelect($config, get_userinfo());
         }
 
         /* If dialog is confirmed */
@@ -1487,15 +1489,18 @@ class acl extends plugin
 
     function PrepareForCopyPaste($source)
     {
+        global $config;
         parent::PrepareForCopyPaste($source);
 
         $dn = $source['dn'];
-        $acl_c = new acl($this->config, $this->parent, $dn);
+        $acl_c = new acl($config, $this->parent, $dn);
         $this->gosaAclEntry = $acl_c->gosaAclEntry;
     }
 
     function save()
     {
+        global $config;
+
         /* Assemble ACL's */
         $tmp_acl = [];
 
@@ -1572,7 +1577,7 @@ class acl extends plugin
         }
 
         /* Do LDAP modifications */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->cd($this->dn);
         $this->cleanup();
         $ldap->modify($this->attrs);
@@ -1593,10 +1598,12 @@ class acl extends plugin
 
     function remove_from_parent()
     {
+        global $config;
+
         parent::remove_from_parent();
 
         /* include global link_info */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         $ldap->cd($this->dn);
         $this->cleanup();
@@ -1683,11 +1690,12 @@ class acl extends plugin
 
     function update_acl_membership($src, $dst)
     {
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        global $config;
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($src) . "*))", array("gosaAclEntry", "dn"));
         while ($attrs = $ldap->fetch()) {
-            $acl = new acl($this->config, $this->parent, $attrs['dn']);
+            $acl = new acl($config, $this->parent, $attrs['dn']);
             foreach ($acl->gosaAclEntry as $id => $entry) {
                 foreach ($entry['members'] as $m_id => $member) {
                     if ($m_id == "U:" . $src) {

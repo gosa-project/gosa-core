@@ -28,9 +28,9 @@ class SnapshotHandler {
   var $snapshotBases= array();
 
   /* Create handler  */
-  function __construct(&$config)
+  function __construct($config)
   {
-    $this->config = &$config;	
+    $this->config = $config;	
     $config = $this->config;
 
     if($config->get_cfg_value("core","enableSnapshots") == "true"){

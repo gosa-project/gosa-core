@@ -595,15 +595,14 @@ class userinfo
             $module = array($module);
         }
 
-        global $plist;
-        $res = array();
+        $res = [];
         foreach ($module as $mod) {
             if (isset($ACL_CACHE['MODULE_DEPARTMENTS'][$mod])) {
                 $res = array_merge($res, $ACL_CACHE['MODULE_DEPARTMENTS'][$mod]);
                 continue;
             }
 
-            $deps = array();
+            $deps = [];
 
             /* Search for per object ACLs */
             foreach ($this->ACL as $dn => $infos) {
