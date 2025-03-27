@@ -1403,19 +1403,17 @@ function getMenuCache()
 
 
 /*! \brief Return the current userinfo object */
-function &get_userinfo()
+function get_userinfo()
 {
     global $ui;
-
     return $ui;
 }
 
 
 /*! \brief Get global smarty object */
-function &get_smarty()
+function get_smarty()
 {
     global $smarty;
-
     return $smarty;
 }
 
@@ -1802,7 +1800,6 @@ function dn2base($dn)
  * */
 function check_command($cmdline)
 {
-    return (TRUE);
     $cmd = preg_replace("/ .*$/", "", $cmdline);
 
     /* Check if command exists in filesystem */
