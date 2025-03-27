@@ -55,9 +55,9 @@ session::set('clicks', $clicks);
 pathNavigator::clear();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    DEBUG(DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
+    DEBUG(DEBUG_POST, __LINE__, "", __FILE__, $_POST, "_POST");
 }
-DEBUG(DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, session::get_all(), "_SESSION");
+DEBUG(DEBUG_POST, __LINE__, "", __FILE__, session::get_all(), "_SESSION");
 
 /* Check for invalid sessions */
 if (session::global_get('_LAST_PAGE_REQUEST') != "") {
@@ -100,7 +100,7 @@ if (session::global_get('_LAST_PAGE_REQUEST') != "") {
     session::global_set('_LAST_PAGE_REQUEST', time());
 }
 
-DEBUG(DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
+DEBUG(DEBUG_CONFIG, __LINE__, "", __FILE__, $config->data, "config");
 
 /* Set default */
 $reload_navigation = false;
@@ -147,7 +147,7 @@ $config->check_config_version();
 $domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
-DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
+DEBUG(DEBUG_TRACE, __LINE__, "", __FILE__, $lang, "Setting language to");
 /* Prepare plugin list */
 if (!session::global_is_set('plist')) {
     /* Initially load all classes */
