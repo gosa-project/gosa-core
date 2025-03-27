@@ -764,8 +764,6 @@ class config
 
     function get_departments($ignore_dn = "")
     {
-        global $config;
-
         /* Initialize result hash */
         $result = [];
         $administrative = [];

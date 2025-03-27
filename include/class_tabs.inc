@@ -59,11 +59,11 @@ class tabs
     }
 
 
-    function __construct(&$config, $data, $dn, $acl_category = "", $hide_refs = FALSE, $hide_acls = FALSE)
+    function __construct($config, $data, $dn, $acl_category = "", $hide_refs = FALSE, $hide_acls = FALSE)
     {
         /* Save dn */
         $this->dn = $dn;
-        $this->config = &$config;
+        $this->config = $config;
         $this->hide_refs = $hide_refs;
         $this->hide_acls = $hide_acls;
 
@@ -117,16 +117,17 @@ class tabs
    */
     function re_init()
     {
+        global $config;
         $baseobject = NULL;
         foreach ($this->by_object as $name => $object) {
             $class = get_class($object);
             if (in_array_strict($class, array("reference", "acl"))) continue;
             if ($baseobject === NULL) {
-                $baseobject = new $class($this->config, $this->dn);
+                $baseobject = new $class($config, $this->dn);
                 $baseobject->enable_CSN_check();
                 $this->by_object[$name] = $baseobject;
             } else {
-                $this->by_object[$name] = new $class($this->config, $this->dn, $baseobject);
+                $this->by_object[$name] = new $class($config, $this->dn, $baseobject);
             }
             $this->by_object[$name]->parent = &$this;
             $this->by_object[$name]->set_acl_category($this->acl_category);
@@ -253,11 +254,11 @@ class tabs
             return;
         }
 
-        $obj = @$this->by_object[$this->current];
+        $obj = $this->by_object[$this->current];
         $this->disabled = $obj->parent->disabled;
 
         if ($save_current) {
-            @DEBUG(
+            DEBUG(
                 DEBUG_TRACE,
                 __LINE__,
                 __FUNCTION__,
@@ -530,14 +531,15 @@ class tabs
 
     function addSpecialTabs()
     {
+        global $config;
         if (!$this->hide_acls) {
             $this->by_name['acl'] = _("ACL");
-            $this->by_object['acl'] = new acl($this->config, $this, $this->dn);
+            $this->by_object['acl'] = new acl($config, $this, $this->dn);
             $this->by_object['acl']->parent = &$this;
         }
         if (!$this->hide_refs) {
             $this->by_name['reference'] = _("References");
-            $this->by_object['reference'] = new reference($this->config, $this->dn);
+            $this->by_object['reference'] = new reference($config, $this->dn);
             $this->by_object['reference']->parent = &$this;
             $this->by_object['reference']->set_acl_category($this->acl_category);
         }

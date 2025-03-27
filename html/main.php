@@ -65,6 +65,8 @@ if (session::global_get('_LAST_PAGE_REQUEST') != "") {
     $config->set_current(session::global_get('server'));
     $config->check_and_reload();
     $config->configRegistry->reload();
+    $config->get_departments();
+    $config->make_idepartments();
 
     /* Check for uniqe ip address */
     $ui = session::global_get('ui');

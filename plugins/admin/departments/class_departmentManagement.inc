@@ -153,7 +153,8 @@ class departmentManagement extends management
     // Overridden remove request method - Avoid removal of the ldap base.
     protected function removeEntryRequested($action = "", $target = array(), $all = array())
     {
-        $target = array_remove_entries(array($this->config->current['BASE']), $target);
+        global $config;
+        $target = array_remove_entries(array($config->current['BASE']), $target);
         return (parent::removeEntryRequested($action, $target, $all));
     }
 
