@@ -163,7 +163,7 @@ if (!is_readable(CONFIG_DIR . "/" . CONFIG_FILE)) {
 $config = new config(CONFIG_DIR . "/" . CONFIG_FILE, $BASE_DIR);
 session::global_set('debugLevel', $config->get_cfg_value("core", 'debugLevel'));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    DEBUG(DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
+    DEBUG(DEBUG_CONFIG, __LINE__, "", __FILE__, $config->data, "config");
 }
 
 /* Enable compressed output */
@@ -192,7 +192,7 @@ $smarty->assign('nextfield', 'username');
 $smarty->assign("cookies", _("Your browser has cookies disabled: please enable cookies and reload this page before logging in!"));
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
+    DEBUG(DEBUG_TRACE, __LINE__, "", __FILE__, $lang, "Setting language to");
 }
 
 
