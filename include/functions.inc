@@ -858,7 +858,7 @@ function add_lock($object, $user)
         return;
     }
 
-    $cache = &session::global_get("LOCK_CACHE");
+    $cache = session::global_get("LOCK_CACHE");
     if (isset($_POST['open_readonly'])) {
         $cache['READ_ONLY'][$object] = TRUE;
         return;
@@ -991,13 +991,15 @@ function get_lock($object)
     /* Sanity check */
     if ($object == "") {
         msg_dialog::display(_("Internal error"), _("Error while locking entry!"), ERROR_DIALOG);
-        return ("");
+        return "";
     }
 
     /* Allow readonly access, the plugin::__construct will restrict the acls */
-    if (isset($_POST['open_readonly'])) return ("");
+    if (isset($_POST['open_readonly'])){
+        return "";
+    }
 
-    /* Get LDAP link, check for presence of the lock entry */
+    // Get LDAP link, check for presence of the lock entry
     $user = "";
     $ldap = $config->get_ldap_link();
     $ldap->cd($config->get_cfg_value("core", "config"));
@@ -1020,7 +1022,7 @@ function get_lock($object)
         $attrs = $ldap->fetch();
         $user = $attrs['gosaUser'][0];
     }
-    return ($user);
+    return $user;
 }
 
 
