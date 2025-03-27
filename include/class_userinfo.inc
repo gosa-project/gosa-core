@@ -78,13 +78,13 @@ class userinfo
         $this->uid = $attrs['uid'][0];
         $this->ip = $_SERVER['REMOTE_ADDR'];
 
-        /* Initialize ACL_CACHE */
+        // Initialize ACL_CACHE
         $this->reset_acl_cache();
     }
 
+    // Initialize ACL_CACHE
     public function reset_acl_cache()
     {
-        /* Initialize ACL_CACHE */
         session::global_set('ACL_CACHE', array());
     }
 
@@ -250,8 +250,7 @@ class userinfo
     }
 
 
-    /* Returns an array containing all target objects we've permssions on.
-   */
+    // Returns an array containing all target objects we've permssions on.
     function get_acl_target_objects()
     {
         return (array_keys($this->ACLperPath));
@@ -264,12 +263,13 @@ class userinfo
     }
 
 
-    /*! \brief Check if the given object (dn) is copyable
-      @param  String The object dn 
-      @param  String The acl  category (e.g. users) 
-      @param  String The acl  class (e.g. user) 
-      @return Boolean   TRUE if the given object is copyable else FALSE 
-  */
+    /**
+     * \brief Check if the given object (dn) is copyable
+     * @param  string The object dn 
+     * @param  string The acl  category (e.g. users) 
+     * @param  string The acl  class (e.g. user) 
+     * @return boolean   TRUE if the given object is copyable else FALSE 
+     */
     function is_copyable($dn, $object, $class)
     {
         return (preg_match("/r/", $this->has_complete_category_acls($dn, $object)));
@@ -767,7 +767,7 @@ class userinfo
     /*! \brief  Returns TRUE if the current user is configured in IGNORE_ACL=".." in your gosa.conf 
       @param  Return Boolean TRUE if we have to skip ACL checks else FALSE.
    */
-    function ignore_acl_for_current_user():bool
+    function ignore_acl_for_current_user(): bool
     {
         global $config;
         if ($this->ignoreACL === NULL) {

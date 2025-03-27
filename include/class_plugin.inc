@@ -151,13 +151,13 @@ abstract class plugin
     \param dn Distinguished name to initialize plugin from
     \sa plugin()
    */
-    function __construct(&$config, $dn = NULL, $object = NULL)
+    function __construct($config, $dn = NULL, $object = NULL)
     {
 
         $this->initTime = microtime(TRUE);
 
-        /* Configuration is fine, allways */
-        $this->config = &$config;
+        // Configuration is fine, allways
+        $this->config = $config;
         $this->dn = $dn;
 
         // Ensure that we've a valid acl_category set.
@@ -207,7 +207,7 @@ abstract class plugin
             if ($object !== NULL) {
                 $this->attrs = $object->attrs;
             } else {
-                $ldap = $this->config->get_ldap_link();
+                $ldap = $config->get_ldap_link();
                 $ldap->cat($dn);
                 $this->attrs = $ldap->fetch();
             }
@@ -225,8 +225,7 @@ abstract class plugin
                 $this->gosaUnitTag = $this->attrs['gosaUnitTag'][0];
             }
 
-            /* Set the template flag according to the existence of objectClass
-         gosaUserTemplate */
+            // Set the template flag according to the existence of objectClass gosaUserTemplate
             if (isset($this->attrs['objectClass'])) {
                 if (in_array_ics("gosaUserTemplate", $this->attrs['objectClass'])) {
                     $this->is_template = TRUE;
@@ -331,8 +330,10 @@ abstract class plugin
    */
     function remove_from_parent()
     {
+        global $config;
+
         /* include global link_info */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         /* Get current objectClasses in order to add the required ones */
         $ldap->cat($this->dn);
@@ -417,8 +418,10 @@ abstract class plugin
     /*! \brief Save data to LDAP, depending on is_account we save or delete */
     function save()
     {
+        global $config;
+
         /* include global link_info */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         /* Save all plugins */
         $this->entryCSN = "";
@@ -571,15 +574,16 @@ abstract class plugin
     /*! \brief Check formular input */
     function check()
     {
-        $message = array();
+        global $config;
+        $message = [];
 
         /* Skip if we've no config object */
-        if (!isset($this->config) || !is_object($this->config)) {
+        if (!isset($config) || !is_object($config)) {
             return $message;
         }
 
         /* Find hooks entries for this class */
-        $command = $this->config->configRegistry->getPropertyValue(get_class($this), "check");
+        $command = $config->configRegistry->getPropertyValue(get_class($this), "check");
         if ($command != "") {
 
             if (!check_command($command)) {
@@ -644,8 +648,10 @@ abstract class plugin
     /* Adapt from template, using 'dn' */
     function adapt_from_template($dn, $skip = array())
     {
+        global $config;
+
         /* Include global link_info */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         /* Load requested 'dn' to 'attrs' */
         $ldap->cat($dn);
@@ -769,7 +775,8 @@ abstract class plugin
     /* Create unique DN */
     function create_unique_dn2($data, $base)
     {
-        $ldap = $this->config->get_ldap_link();
+        global $config;
+        $ldap = $config->get_ldap_link();
         $base = preg_replace("/^,*/", "", $base);
 
         /* Try to use plain entry first */
@@ -801,7 +808,8 @@ abstract class plugin
     /*! \brief Create unique DN */
     function create_unique_dn($attribute, $base)
     {
-        $ldap = $this->config->get_ldap_link();
+        global $config;
+        $ldap = $config->get_ldap_link();
         $base = preg_replace("/^,*/", "", $base);
 
         /* Try to use plain entry first */
@@ -831,12 +839,13 @@ abstract class plugin
 
     function rebind($ldap, $referral)
     {
-        $credentials = LDAP::get_credentials($referral, $this->config->current['REFERRAL']);
-        if (ldap_bind($ldap, $credentials['ADMIN'], $this->config->get_credentials($credentials['PASSWORD']))) {
+        global $config;
+        $credentials = LDAP::get_credentials($referral, $config->current['REFERRAL']);
+        if (ldap_bind($ldap, $credentials['ADMIN'], $config->get_credentials($credentials['PASSWORD']))) {
             $this->error = "Success";
             $this->hascon = true;
             $this->reconnect = true;
-            return (0);
+            return 0;
         } else {
             $this->error = "Could not bind to " . $credentials['ADMIN'];
             return NULL;
@@ -847,19 +856,20 @@ abstract class plugin
     /* Recursively copy ldap object */
     function _copy($src_dn, $dst_dn)
     {
-        $ldap = $this->config->get_ldap_link();
+        global $config;
+        $ldap = $config->get_ldap_link();
         $ldap->cat($src_dn);
         $attrs = $ldap->fetch();
 
         /* Grummble. This really sucks. PHP ldap doesn't support rdn stuff. */
-        $ds = ldap_connect($this->config->current['SERVER']);
+        $ds = ldap_connect($config->current['SERVER']);
         ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-        if (function_exists("ldap_set_rebind_proc") && isset($this->config->current['REFERRAL'])) {
+        if (function_exists("ldap_set_rebind_proc") && isset($config->current['REFERRAL'])) {
             ldap_set_rebind_proc($ds, array(&$this, "rebind"));
         }
 
-        $pwd = $this->config->get_credentials($this->config->current['ADMINPASSWORD']);
-        $r = ldap_bind($ds, $this->config->current['ADMINDN'], $pwd);
+        $pwd = $config->get_credentials($config->current['ADMINPASSWORD']);
+        $r = ldap_bind($ds, $config->current['ADMINDN'], $pwd);
         $sr = ldap_read($ds, LDAP::fix($src_dn), "objectClass=*");
 
         /* Fill data from LDAP */
@@ -899,7 +909,7 @@ abstract class plugin
 
         /* Save copy */
         $ldap->connect();
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($config->current['BASE']);
 
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $dst_dn));
 
@@ -929,14 +939,16 @@ abstract class plugin
     /* This is a workaround function. */
     function copy($src_dn, $dst_dn)
     {
+        global $config;
+
         /* Rename dn in possible object groups */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->search(
             '(&(objectClass=gosaGroupOfNames)(member=' . @LDAP::prepare4filter($src_dn) . '))',
             array('cn')
         );
         while ($attrs = $ldap->fetch()) {
-            $og = new ogroup($this->config, $ldap->getDN());
+            $og = new ogroup($config, $ldap->getDN());
             unset($og->member[$src_dn]);
             $og->member[$dst_dn] = $dst_dn;
             $og->save();
@@ -988,11 +1000,12 @@ abstract class plugin
      */
     function rename($src_dn, $dst_dn): bool
     {
+        global $config;
         $start = microtime(1);
 
         /* Try to move the source entry to the destination position */
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
         $ldap->create_missing_trees(preg_replace("/^[^,]+,/", "", $dst_dn));
         if (!$ldap->rename_dn($src_dn, $dst_dn)) {
             new log("debug", "LDAP protocol v3 implementation error, ldap_rename failed, falling back to manual copy.", "FROM: $src_dn  -- TO: $dst_dn", array(), $ldap->get_error());
@@ -1027,7 +1040,7 @@ abstract class plugin
             "(&(objectClass=gosaGroupOfNames)(member=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))",
             "ogroups",
             array(get_ou("group", "ogroupRDN")),
-            $this->config->current['BASE'],
+            $config->current['BASE'],
             array("dn"),
             GL_SUBSEARCH | GL_NO_ACL_CHECK
         );
@@ -1035,7 +1048,7 @@ abstract class plugin
         // Walk through all objectGroups
         foreach ($ogroups as $ogroup) {
             // Migrate old to new dn
-            $o_ogroup = new ogroup($this->config, $ogroup['dn']);
+            $o_ogroup = new ogroup($config, $ogroup['dn']);
             if (isset($o_ogroup->member[$src_dn])) {
                 unset($o_ogroup->member[$src_dn]);
             }
@@ -1050,11 +1063,11 @@ abstract class plugin
             "(&(objectClass=gotoEnvironment)(gotoHotplugDeviceDN=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))",
             "users",
             array(get_ou("core", "userRDN"), get_ou("core", "groupRDN")),
-            $this->config->current['BASE'],
+            $config->current['BASE'],
             array("dn", "gotoHotplugDeviceDN"),
             GL_SUBSEARCH | GL_NO_ACL_CHECK
         );
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         foreach ($objects as $obj) {
             $deviceDNS = array();
             for ($i = 0; $i < $obj["gotoHotplugDeviceDN"]['count']; $i++) {
@@ -1072,23 +1085,23 @@ abstract class plugin
         }
 
         // Migrate rfc groups if needed
-        $groups = get_sub_list("(&(objectClass=posixGroup)(member=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))", "groups", array(get_ou("core", "groupRDN")), $this->config->current['BASE'], array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+        $groups = get_sub_list("(&(objectClass=posixGroup)(member=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))", "groups", array(get_ou("core", "groupRDN")), $config->current['BASE'], array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
         // Walk through all POSIX groups
         foreach ($groups as $group) {
 
             // Migrate old to new dn
-            $o_group = new group($this->config, $group['dn']);
+            $o_group = new group($config, $group['dn']);
             $o_group->save();
         }
 
         /* Update roles to use the new entry dn */
         if (class_available('RoleGeneric')) {
-            $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))", "roles", array(get_ou("roleGeneric", "roleRDN")), $this->config->current['BASE'], array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+            $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))", "roles", array(get_ou("roleGeneric", "roleRDN")), $config->current['BASE'], array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
             // Walk through all roles
             foreach ($roles as $role) {
-                $role = new GosaRoleManagement\admin\roleManagement\RoleGeneric($this->config, $role['dn']);
+                $role = new GosaRoleManagement\admin\roleManagement\RoleGeneric($config, $role['dn']);
                 $key = array_search($src_dn, $role->roleOccupant);
                 if ($key !== FALSE) {
                     $role->roleOccupant[$key] = $dst_dn;
@@ -1106,7 +1119,7 @@ abstract class plugin
         $leaf_deps =  get_list(
             $filter,
             array("all"),
-            $this->config->current['BASE'],
+            $config->current['BASE'],
             array("manager", "dn", "objectClass"),
             GL_SUBSEARCH | GL_NO_ACL_CHECK
         );
@@ -1121,7 +1134,7 @@ abstract class plugin
 
         // Migrate 'dyn-groups' here. labeledURIObject
         if (class_available('DynamicLdapGroup')) {
-            DynamicLdapGroup::moveDynGroup($this->config, $src_dn, $dst_dn);
+            DynamicLdapGroup::moveDynGroup($config, $src_dn, $dst_dn);
         }
 
         /* Check if there are gosa departments moved.
@@ -1136,9 +1149,9 @@ abstract class plugin
         );
 
         if (count($leaf_deps)) {
-            $this->config->get_departments();
-            $this->config->make_idepartments();
-            session::global_set("config", $this->config);
+            $config->get_departments();
+            $config->make_idepartments();
+            session::global_set("config", $config);
             $ui = get_userinfo();
             $ui->reset_acl_cache();
         }
@@ -1148,6 +1161,8 @@ abstract class plugin
 
     function move($src_dn, $dst_dn)
     {
+        global $config;
+
         /* Do not copy if only upper- lowercase has changed */
         if (strtolower($src_dn) == strtolower($dst_dn)) {
             return (TRUE);
@@ -1176,7 +1191,7 @@ abstract class plugin
         }
 
         /* Delete source */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->rmdir_recursive($src_dn);
         if (!$ldap->success()) {
             trigger_error(
@@ -1193,8 +1208,10 @@ abstract class plugin
     /* \brief Move/Rename complete trees */
     function recursive_move($src_dn, $dst_dn)
     {
+        global $config;
+
         /* Check if the destination entry exists */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         /* Check if destination exists - abort */
         $ldap->cat($dst_dn, array('dn'));
@@ -1215,9 +1232,7 @@ abstract class plugin
     }
 
 
-    function saveCopyDialog()
-    {
-    }
+    function saveCopyDialog() {}
 
 
     function getCopyDialog()
@@ -1266,7 +1281,9 @@ abstract class plugin
     */
     function tag_attrs(&$at, $dn = "", $tag = "", $show = false)
     {
-        /* Skip tagging? */
+        global $config;
+
+        // Skip tagging?
         if ($this->skipTagging) {
             return;
         }
@@ -1281,7 +1298,7 @@ abstract class plugin
 
                 DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
                 $relevant = array();
-                foreach ($this->config->adepartments as $key => $ntag) {
+                foreach ($config->adepartments as $key => $ntag) {
 
                     /* This one is bigger than our dn, its not relevant... */
                     if ($len < strlen($key)) {
@@ -1351,7 +1368,8 @@ abstract class plugin
    */
     function snapshotEnabled()
     {
-        return $this->config->snapshotEnabled();
+        global $config;
+        return $config->snapshotEnabled();
     }
 
 
@@ -1420,9 +1438,7 @@ abstract class plugin
     }
 
 
-    function acl_have_any_permissions()
-    {
-    }
+    function acl_have_any_permissions() {}
 
 
     function getacl($attribute, $skip_write = FALSE)
@@ -1442,7 +1458,7 @@ abstract class plugin
   */
     function get_allowed_bases()
     {
-        $ui = get_userinfo();
+        global $config;
         $deps = array();
 
         /* Is this a new object ? Or just an edited existing object */
@@ -1452,7 +1468,7 @@ abstract class plugin
             $new = false;
         }
 
-        foreach ($this->config->idepartments as $dn => $name) {
+        foreach ($config->idepartments as $dn => $name) {
             if ($new && $this->acl_is_createable($dn)) {
                 $deps[$dn] = $name;
             } elseif (!$new && $this->acl_is_moveable($dn)) {
@@ -1461,9 +1477,9 @@ abstract class plugin
         }
 
         /* Add current base */
-        if (isset($this->base) && isset($this->config->idepartments[$this->base])) {
-            $deps[$this->base] = $this->config->idepartments[$this->base];
-        } elseif (strtolower($this->dn) == strtolower($this->config->current['BASE'])) {
+        if (isset($this->base) && isset($config->idepartments[$this->base])) {
+            $deps[$this->base] = $config->idepartments[$this->base];
+        } elseif (strtolower($this->dn) == strtolower($config->current['BASE'])) {
         } else {
             trigger_error("Cannot return list of departments, no default base found in class " . get_class($this) . ". " . $this->base);
         }
@@ -1477,6 +1493,8 @@ abstract class plugin
    */
     function update_acls($old_dn, $new_dn, $output_changes = FALSE)
     {
+        global $config;
+
         /* Check if old_dn is empty. This should never happen */
         if (empty($old_dn) || empty($new_dn)) {
             trigger_error("Failed to check acl dependencies, wrong dn given.");
@@ -1497,8 +1515,8 @@ abstract class plugin
 
             /* get_ldap configuration */
             $update = array();
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cd($this->config->current['BASE']);
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($config->current['BASE']);
             $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($old_dn) . "*))", array("cn", "gosaAclEntry"));
             while ($attrs = $ldap->fetch()) {
                 $acls = array();
@@ -1576,7 +1594,8 @@ abstract class plugin
    */
     function init_multiple_support($attrs, $all)
     {
-        $ldap = $this->config->get_ldap_link();
+        global $config;
+        $ldap = $config->get_ldap_link();
         $this->multi_attrs    = $attrs;
         $this->multi_attrs_all = $all;
 

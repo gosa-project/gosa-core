@@ -1673,13 +1673,14 @@ class user extends plugin
     }
 
 
-    /* This avoids that users move themselves out of their rights. 
-   */
-    function allowedBasesToMoveTo()
+    /**
+     * This avoids that users move themselves out of their rights. 
+     */
+    function allowedBasesToMoveTo(): array
     {
         /* Get bases */
         $bases  = $this->get_allowed_bases();
-        return ($bases);
+        return $bases;
     }
 
 
