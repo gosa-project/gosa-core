@@ -59,7 +59,7 @@ class aclrole extends acl
     var $list = NULL;
     var $sectionList = NULL;
 
-    function __construct(&$config,  $dn = NULL)
+    function __construct($config,  $dn = NULL)
     {
         /* Include config object */
         plugin::__construct($config, $dn);
@@ -550,6 +550,8 @@ class aclrole extends acl
 
     function save()
     {
+        global $config;
+
         /* Assemble ACL's */
         $tmp_acl = array();
         foreach ($this->gosaAclTemplate as $prio => $entry) {
@@ -610,7 +612,7 @@ class aclrole extends acl
         }
 
         /* Do LDAP modifications */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         /* Check if object already exists */
         $ldap->cat($this->dn);
@@ -620,7 +622,7 @@ class aclrole extends acl
             $ldap->modify($this->attrs);
             new log("modify", "acl/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         } else {
-            $ldap->cd($this->config->current['BASE']);
+            $ldap->cd($config->current['BASE']);
             $ldap->create_missing_trees(preg_replace("/^[^,]+,/", "", $this->dn));
             $ldap->cd($this->dn);
             $ldap->add($this->attrs);
@@ -640,7 +642,8 @@ class aclrole extends acl
 
     function remove_from_parent()
     {
-        $ldap = $this->config->get_ldap_link();
+        global $config;
+        $ldap = $config->get_ldap_link();
         $serach_for = "*:role:" . base64_encode($this->dn) . ":*";
         $ldap->search("(&(objectClass=gosaACL)(gosaAclEntry=" . $serach_for . "))", array('dn', 'cn', 'sn', 'givenName', 'uid'));
         $all_names = "";
@@ -675,10 +678,10 @@ class aclrole extends acl
         $this->handle_post_events("remove");
 
         /* Delete references to object groups */
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaGroupOfNames)(member=" . LDAP::prepare4filter($this->dn) . "))", array("cn"));
         while ($ldap->fetch()) {
-            $og = new ogroup($this->config, $ldap->getDN());
+            $og = new ogroup($config, $ldap->getDN());
             unset($og->member[$this->dn]);
             $og->save();
             if (!$ldap->success()) {
@@ -729,9 +732,10 @@ class aclrole extends acl
 
     function PrepareForCopyPaste($source)
     {
+        global $config;
         plugin::PrepareForCopyPaste($source);
 
-        $source_o = new aclrole($this->config, $source['dn']);
+        $source_o = new aclrole($config, $source['dn']);
         $this->gosaAclTemplate = $source_o->gosaAclTemplate;
     }
 
@@ -777,14 +781,15 @@ class aclrole extends acl
 
     function check()
     {
+        global $config;
         $message = plugin::check();
 
         if (empty($this->cn)) {
             $message[] = msgPool::required(_("Name"));
         }
 
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
 
         if ($this->cn != $this->orig_cn) {
             $ldap->search("(&(objectClass=gosaRole)(cn=" . $this->cn . "))");
@@ -806,8 +811,7 @@ class aclrole extends acl
             $message[] = msgPool::check_base();
         }
 
-        /* Check if we are allowed to create or move this object
-     */
+        // Check if we are allowed to create or move this object
         if ($this->orig_dn == "new" && !$this->acl_is_createable($this->base)) {
             $message[] = msgPool::permCreate();
         } elseif ($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
