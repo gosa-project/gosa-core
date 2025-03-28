@@ -81,15 +81,34 @@ class posixAccount extends plugin
     /* attribute list for save action */
     var $CopyPasteVars  =
     array(
-        "grouplist", "groupMembership", "activate_shadowMin",
-        "activate_shadowMax", "activate_shadowWarning", "activate_shadowInactive", "activate_shadowExpire",
-        "must_change_password", "printerList", "grouplist", "savedGidNumber", "savedUidNumber"
+        "grouplist",
+        "groupMembership",
+        "activate_shadowMin",
+        "activate_shadowMax",
+        "activate_shadowWarning",
+        "activate_shadowInactive",
+        "activate_shadowExpire",
+        "must_change_password",
+        "printerList",
+        "grouplist",
+        "savedGidNumber",
+        "savedUidNumber"
     );
 
     var $attributes     = array(
-        "homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
-        "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
-        "shadowExpire", "uid", "gotoLastSystemLogin"
+        "homeDirectory",
+        "loginShell",
+        "uidNumber",
+        "gidNumber",
+        "gecos",
+        "shadowMin",
+        "shadowMax",
+        "shadowWarning",
+        "shadowInactive",
+        "shadowLastChange",
+        "shadowExpire",
+        "uid",
+        "gotoLastSystemLogin"
     );
 
     var $objectclasses = array("posixAccount", "shadowAccount");
@@ -145,7 +164,7 @@ class posixAccount extends plugin
             $this->uid = $this->attrs['uid'][0];
         }
 
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         if ($dn !== NULL) {
 
@@ -182,7 +201,7 @@ class posixAccount extends plugin
 
             /* Get group membership */
             $this->groupListData = array();
-            $ldap->cd($this->config->current['BASE']);
+            $ldap->cd($config->current['BASE']);
             $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->uid . "))", array("cn", "description"));
 
             while ($attrs = $ldap->fetch()) {
@@ -213,10 +232,15 @@ class posixAccount extends plugin
         }
 
         /* Adjust shadow checkboxes */
-        foreach (array(
-            "shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
-            "shadowExpire"
-        ) as $val) {
+        foreach (
+            array(
+                "shadowMin",
+                "shadowMax",
+                "shadowWarning",
+                "shadowInactive",
+                "shadowExpire"
+            ) as $val
+        ) {
 
             if ($this->$val != 0) {
                 $oval = "activate_" . $val;
@@ -254,7 +278,7 @@ class posixAccount extends plugin
         /* Generate group list */
         $this->ui = get_userinfo();
         $this->secondaryGroups[0] = "- " . _("automatic") . " -";
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(objectClass=posixGroup)", array("cn", "gidNumber"));
         while ($attrs = $ldap->fetch()) {
             $this->secondaryGroups[$attrs['gidNumber'][0]] = $attrs['cn'][0];
@@ -285,6 +309,7 @@ class posixAccount extends plugin
     /* execute generates the html output for this node */
     function execute($isCopyPaste = false)
     {
+        global $config;
         /* Call parent execute */
         parent::execute();
         $display = "";
@@ -357,7 +382,7 @@ class posixAccount extends plugin
 
         // Display dialog to allow selection of groups
         if (isset($_POST['edit_groupmembership'])) {
-            $this->groupSelect = new groupSelect($this->config, get_userinfo());
+            $this->groupSelect = new groupSelect($config, get_userinfo());
         }
 
         // Cancel group dialog
@@ -424,7 +449,7 @@ class posixAccount extends plugin
 
             // Build up blocklist
             session::set('filterBlacklist', array('dn' => array_keys($this->groupMembership)));
-            return ($this->groupSelect->execute());
+            return $this->groupSelect->execute();
         }
 
         // Handle ssh dialog?
@@ -472,10 +497,15 @@ class posixAccount extends plugin
                 "<input type='text' name=\"shadowWarning\" size=3 maxlength=4 value=\"" . $this->shadowWarning . "\">"
             ));
 
-            foreach (array(
-                "activate_shadowMin", "activate_shadowMax",
-                "activate_shadowExpire", "activate_shadowInactive", "activate_shadowWarning"
-            ) as $val) {
+            foreach (
+                array(
+                    "activate_shadowMin",
+                    "activate_shadowMax",
+                    "activate_shadowExpire",
+                    "activate_shadowInactive",
+                    "activate_shadowWarning"
+                ) as $val
+            ) {
                 if ($this->$val == 1) {
                     $smarty->assign("$val", "checked");
                 } else {
@@ -588,6 +618,7 @@ class posixAccount extends plugin
     /* remove object from parent */
     function remove_from_parent()
     {
+        global $config;
         /* Cancel if there's nothing to do here */
         if ((!$this->initially_was_account) || (!$this->acl_is_removeable())) {
             return;
@@ -603,7 +634,7 @@ class posixAccount extends plugin
         /* Keep uid, because we need it for authentification! */
         unset($this->attrs['uid']);
 
-        @DEBUG(
+        DEBUG(
             DEBUG_LDAP,
             __LINE__,
             __FUNCTION__,
@@ -612,7 +643,7 @@ class posixAccount extends plugin
             $this->attributes,
             "Save"
         );
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->cd($this->dn);
         $this->cleanup();
         $ldap->modify($this->attrs);
@@ -625,7 +656,7 @@ class posixAccount extends plugin
 
         /* Delete group only if cn is uid and there are no other
        members inside */
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=posixGroup)(gidNumber=" . $this->gidNumber . "))", array("cn", "memberUid"));
         if ($ldap->count() != 0) {
             $attrs = $ldap->fetch();
@@ -701,6 +732,7 @@ class posixAccount extends plugin
     /* Save data to LDAP, depending on is_account we save or delete */
     function save()
     {
+        global $config;
         /* Adapt shadow values */
         if (!$this->activate_shadowExpire) {
             $this->shadowExpire = "0";
@@ -765,8 +797,8 @@ class posixAccount extends plugin
         } elseif ($this->primaryGroup == 0 || $this->force_ids) {
 
             /* Search for existing group */
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cd($this->config->current['BASE']);
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($config->current['BASE']);
 
             /* Are we forced to use a special gidNumber? */
             if ($this->force_ids) {
@@ -779,7 +811,7 @@ class posixAccount extends plugin
             if ($ldap->count() == 0) {
 
                 $groupcn = $this->uid;
-                $pri_attr = $this->config->get_cfg_value("core", "accountPrimaryAttribute");
+                $pri_attr = $config->get_cfg_value("core", "accountPrimaryAttribute");
                 $groupdn = preg_replace(
                     '/^' . preg_quote($pri_attr, '/') . '=[^,]+,' . preg_quote(get_people_ou(), '/') . '/i',
                     'cn=' . $groupcn . ',' . get_groups_ou(),
@@ -806,7 +838,7 @@ class posixAccount extends plugin
                 }
 
                 /* Create new primary group and enforce the new gidNumber */
-                $g = new group($this->config, $groupdn);
+                $g = new group($config, $groupdn);
                 $g->cn = $groupcn;
                 $g->force_gid = 1;
                 $g->gidNumber = $this->gidNumber;
@@ -899,7 +931,7 @@ class posixAccount extends plugin
             }
         }
 
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->cd($this->dn);
         unset($this->attrs['uid']);
         $ldap->modify($this->attrs);
@@ -930,7 +962,7 @@ class posixAccount extends plugin
         /* Take care about groupMembership values: add to groups */
         foreach ($this->groupMembership as $key => $value) {
             if (!isset($this->savedGroupMembership[$key])) {
-                $g = new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $key, "groups");
+                $g = new grouptabs($config, $config->data['TABS']['GROUPTABS'], $key, "groups");
                 $g->set_acl_base($key);
                 $g->by_object['group']->addUser($this->uid);
                 $g->save();
@@ -940,7 +972,7 @@ class posixAccount extends plugin
         /* Remove groups not listed in groupMembership */
         foreach ($this->savedGroupMembership as $key => $value) {
             if (!isset($this->groupMembership[$key])) {
-                $g = new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $key, "groups");
+                $g = new grouptabs($config, $config->data['TABS']['GROUPTABS'], $key, "groups");
                 $g->set_acl_base($key);
                 $g->by_object['group']->removeUser($this->uid);
                 $g->save();
@@ -961,6 +993,7 @@ class posixAccount extends plugin
     /* Check formular input */
     function check()
     {
+        global $config;
         // Append groups as memberGroup: to check hook 
         $tmp_attributes  = $this->attributes;
         $this->attributes[] = "memberGroup";
@@ -988,15 +1021,15 @@ class posixAccount extends plugin
             if (!tests::is_id($this->uidNumber)) {
                 $message[] = msgPool::invalid(_("UID"), $this->uidNumber, "/[0-9]/");
             } else {
-                if ($this->uidNumber < $this->config->get_cfg_value("core", "minId")) {
-                    $message[] = msgPool::toosmall(_("UID"), $this->config->get_cfg_value("core", "minId"));
+                if ($this->uidNumber < $config->get_cfg_value("core", "minId")) {
+                    $message[] = msgPool::toosmall(_("UID"), $config->get_cfg_value("core", "minId"));
                 }
             }
             if (!tests::is_id($this->gidNumber)) {
                 $message[] = msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
             } else {
-                if ($this->gidNumber < $this->config->get_cfg_value("core", "minId")) {
-                    $message[] = msgPool::toosmall(_("GID"), $this->config->get_cfg_value("core", "minId"));
+                if ($this->gidNumber < $config->get_cfg_value("core", "minId")) {
+                    $message[] = msgPool::toosmall(_("GID"), $config->get_cfg_value("core", "minId"));
                 }
             }
         }
@@ -1104,8 +1137,9 @@ class posixAccount extends plugin
 
     function addGroup($groups)
     {
+        global $config;
         /* include global link_info */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         switch ($this->theme) {
             case 'classic':
@@ -1184,14 +1218,15 @@ class posixAccount extends plugin
     /* Adapt from template, using 'dn' */
     function adapt_from_template($dn, $skip = array())
     {
+        global $config;
         /* Include global link_info */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         parent::adapt_from_template($dn, $skip);
         $template = $this->attrs['uid'][0];
 
         /* Adapt group membership */
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->attrs["uid"][0] . "))", array("description", "cn"));
 
         $groups = array();
@@ -1206,14 +1241,14 @@ class posixAccount extends plugin
         }
 
         if ($this->gidNumber) {
-            $ldap->cd($this->config->current['BASE']);
+            $ldap->cd($config->current['BASE']);
             $ldap->search("(&(objectClass=posixGroup)(cn=$template)(gidNumber=" . $this->gidNumber . "))", array("cn"));
             if ($ldap->count() != 1) {
                 $this->primaryGroup = $this->gidNumber;
             }
         }
 
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaUserTemplate)(uid=" . $template . ")(accessTo=*))", array("cn", "accessTo"));
         while ($attr = $ldap->fetch()) {
             $tmp = $attr['accessTo'];
@@ -1222,10 +1257,15 @@ class posixAccount extends plugin
         }
 
         /* Adjust shadow checkboxes */
-        foreach (array(
-            "shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
-            "shadowExpire"
-        ) as $val) {
+        foreach (
+            array(
+                "shadowMin",
+                "shadowMax",
+                "shadowWarning",
+                "shadowInactive",
+                "shadowExpire"
+            ) as $val
+        ) {
             if ($this->$val != 0) {
                 $oval = "activate_" . $val;
                 $this->$oval = "1";
@@ -1259,10 +1299,11 @@ class posixAccount extends plugin
 
     function get_used_uid_numbers()
     {
+        global $config;
         $ids = array();
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=posixAccount)(uidNumber=*))", array("uidNumber"));
 
         /* Get list of ids */
@@ -1377,6 +1418,7 @@ class posixAccount extends plugin
 
     function PrepareForCopyPaste($source)
     {
+        global $config;
         parent::PrepareForCopyPaste($source);
 
         $this->trustModeDialog->PrepareForCopyPaste($source);
@@ -1387,8 +1429,8 @@ class posixAccount extends plugin
         $this->savedGidNumber = "";
 
         /* Get group membership */
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $source['uid'][0] . "))", array("cn", "description"));
 
         while ($attrs = $ldap->fetch()) {
@@ -1409,10 +1451,15 @@ class posixAccount extends plugin
 
 
         /* Adjust shadow checkboxes */
-        foreach (array(
-            "shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
-            "shadowExpire"
-        ) as $val) {
+        foreach (
+            array(
+                "shadowMin",
+                "shadowMax",
+                "shadowWarning",
+                "shadowInactive",
+                "shadowExpire"
+            ) as $val
+        ) {
 
             if ($this->$val != 0) {
                 $oval = "activate_" . $val;
@@ -1571,6 +1618,7 @@ class posixAccount extends plugin
    */
     function init_multiple_support($attrs, $all)
     {
+        global $config;
         parent::init_multiple_support($attrs, $all);
         $this->trustModeDialog->init_multiple_support($attrs, $all);
 
@@ -1603,8 +1651,8 @@ class posixAccount extends plugin
             $uid_filter .= "(memberUid=" . $uid . ")";
         }
         $uid_filter = "(&(objectClass=posixGroup)(|" . $uid_filter . "))";
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
         $ldap->search($uid_filter, array("dn", "cn", "memberUid", "description"));
         while ($group = $ldap->fetch()) {
             $groups_some[$group['dn']] = $group['cn'][0];
@@ -1650,10 +1698,15 @@ class posixAccount extends plugin
         $this->primaryGroup = $this->gidNumber;
 
         /* Adjust shadow checkboxes */
-        foreach (array(
-            "shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
-            "shadowExpire"
-        ) as $val) {
+        foreach (
+            array(
+                "shadowMin",
+                "shadowMax",
+                "shadowWarning",
+                "shadowInactive",
+                "shadowExpire"
+            ) as $val
+        ) {
             if ($this->$val != 0) {
                 $oval = "activate_" . $val;
                 $this->$oval = "1";

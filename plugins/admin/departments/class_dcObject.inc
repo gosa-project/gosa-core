@@ -39,10 +39,11 @@ class dcObject extends department
 
     function check()
     {
+        global $config;
         $message = plugin::check();
 
         /* Check for presence of this department */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->ls("(&(dc=" . $this->dc . ")(objectClass=dcObject))", $this->base, array('dn'));
         if ($this->orig_dc == "new" && $ldap->count()) {
             $message[] = msgPool::duplicated(_("Name"));

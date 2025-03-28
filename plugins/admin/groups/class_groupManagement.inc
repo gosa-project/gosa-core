@@ -107,9 +107,10 @@ class groupManagement extends management
      */
     public function sendMessage($action = "", $target = array(), $all = array())
     {
-        $uids = array();
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        global $config;
+        $uids = [];
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
         foreach ($target as $dn) {
             $ldap->cat($dn, array('cn'));
             if ($ldap->count()) {

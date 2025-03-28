@@ -69,7 +69,7 @@ class ogroup extends plugin
     public $trustModeDialog = null;
     public $memberListing = null;
 
-    public function __construct(&$config, $dn = null)
+    public function __construct($config, $dn = null)
     {
         $this->theme = getThemeName();
         switch ($this->theme) {
@@ -108,7 +108,7 @@ class ogroup extends plugin
                 break;
         }
 
-        plugin::__construct($config, $dn);
+        parent::__construct($config, $dn);
 
         $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, null);
         $this->trustModeDialog->setAcl('ogroups/ogroup');
@@ -206,13 +206,15 @@ class ogroup extends plugin
 
     public function AddDelMembership($NewMember = false)
     {
+        global $config;
+
         if ($NewMember) {
 
             // Ensure that we definitely know the new members attributes.
             //  - Fetch unknown objects here.
             if (!isset($this->memberList[$NewMember])) {
-                $ldap = $this->config->get_ldap_link();
-                $ldap->cd($this->config->current['BASE']);
+                $ldap = $config->get_ldap_link();
+                $ldap->cd($config->current['BASE']);
                 $ldap->cat($NewMember);
                 $attrs = $ldap->fetch();
                 $this->objcache[$NewMember] = $attrs;
@@ -293,8 +295,9 @@ class ogroup extends plugin
 
     public function execute()
     {
+        global $config;
         /* Call parent execute */
-        plugin::execute();
+        parent::execute();
 
         if (!$this->view_logged) {
             $this->view_logged = true;
@@ -347,7 +350,7 @@ class ogroup extends plugin
 
         /* Add objects? */
         if (isset($_POST["edit_membership"])) {
-            $this->objectSelect = new objectSelect($this->config, get_userinfo());
+            $this->objectSelect = new objectSelect($config, get_userinfo());
         }
 
         /* Add objects finished? */
@@ -359,7 +362,7 @@ class ogroup extends plugin
         if ($this->objectSelect) {
             session::set('filterBlacklist', array('dn' => $this->member));
             $this->dialog = true;
-            return ($this->objectSelect->execute());
+            return $this->objectSelect->execute();
         }
 
         /* Assemble combine string */
@@ -390,7 +393,7 @@ class ogroup extends plugin
             } else {
                 $smarty->assign("combinedObjects", "$p1");
             }
-            error_reporting(E_ALL | E_STRICT);
+            error_reporting(E_ALL);
         }
 
         /* Assign variables */
@@ -448,7 +451,7 @@ class ogroup extends plugin
 
     public function set_acl_base($base)
     {
-        plugin::set_acl_base($base);
+        parent::set_acl_base($base);
         $this->trustModeDialog->set_acl_base($base);
     }
 
@@ -461,10 +464,10 @@ class ogroup extends plugin
             $this->trustModeDialog->save_object();
 
             /* Create a base backup and reset the
-               base directly after calling plugin::save_object();
+               base directly after calling parent::save_object();
                Base will be set seperatly a few lines below */
             $base_tmp = $this->base;
-            plugin::save_object();
+            parent::save_object();
             $this->base = $base_tmp;
 
             /* Refresh base */
@@ -735,14 +738,15 @@ class ogroup extends plugin
             }
         }
 
-        return ($name);
+        return $name;
     }
 
 
     public function check()
     {
+        global $config;
         /* Call common method to give check the hook */
-        $message = plugin::check();
+        $message = parent::check();
 
         /* Permissions for that base? */
         if ($this->base != "") {
@@ -764,7 +768,7 @@ class ogroup extends plugin
             }
         }
 
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         if (LDAP::fix($this->dn) != LDAP::fix($new_dn)) {
             $ldap->cat($new_dn, array('dn'));
         }
@@ -812,6 +816,7 @@ class ogroup extends plugin
     /* Save to LDAP */
     public function save()
     {
+        global $config;
         // Do not save members if we don't want to.
         // This may be the case if we've copied an ogroup containing systems!
         if (!$this->copyMembers) {
@@ -819,7 +824,7 @@ class ogroup extends plugin
             $this->reload();
         }
 
-        plugin::save();
+        parent::save();
 
         /* Move members to target array */
         if (!$this->wasDyGroup && !$this->isRestrictedByDynGroup()) {
@@ -829,7 +834,7 @@ class ogroup extends plugin
             }
         }
 
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
 
         /* New accounts need proper 'dn', propagate it to remaining objects */
         if ($this->dn == 'new') {
@@ -847,7 +852,7 @@ class ogroup extends plugin
             $mode = "modify";
         } else {
             $mode = "add";
-            $ldap->cd($this->config->current['BASE']);
+            $ldap->cd($config->current['BASE']);
             $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
         }
 
@@ -880,9 +885,10 @@ class ogroup extends plugin
 
     public function remove_from_parent()
     {
-        plugin::remove_from_parent();
+        global $config;
+        parent::remove_from_parent();
 
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->rmdir($this->dn);
         if (!$ldap->success()) {
             msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, __CLASS__));
@@ -897,7 +903,8 @@ class ogroup extends plugin
 
     public function PrepareForCopyPaste($source)
     {
-        plugin::PrepareForCopyPaste($source);
+        global $config;
+        parent::PrepareForCopyPaste($source);
 
         // Preselect "Copy members" state.
         // If we've terminals, workstations or servers in our members list,
@@ -921,14 +928,14 @@ class ogroup extends plugin
             }
         }
 
-        $source_o = new ogroup($this->config, $source['dn']);
+        $source_o = new ogroup($config, $source['dn']);
         foreach (array("member", "gosaGroupObjects")  as $attr) {
             $this->$attr = $source_o->$attr;
         }
     }
 
 
-    public function getCopyDialog()
+    public function getCopyDialog(): array
     {
         $smarty = get_smarty();
         $smarty->assign("cn", set_post($this->cn));
@@ -937,7 +944,7 @@ class ogroup extends plugin
         $ret = array();
         $ret['string'] = $str;
         $ret['status'] = "";
-        return ($ret);
+        return $ret;
     }
 
     public function saveCopyDialog()
@@ -951,7 +958,8 @@ class ogroup extends plugin
 
     public function IsReleaseManagementActivated()
     {
-        return ($this->config->pluginEnabled("faiManagement"));
+        global $config;
+        return $config->pluginEnabled("faiManagement");
     }
 
 

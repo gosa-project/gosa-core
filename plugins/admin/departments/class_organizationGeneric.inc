@@ -24,12 +24,31 @@ class organization extends department
 {
     /* attribute list for save action */
     var $attributes     = array(
-        "o", "ou", "description", "userPassword", "searchGuide",
-        "seeAlso", "businessCategory", "x121Address", "registeredAddress", "manager",
-        "destinationIndicator", "preferredDeliveryMethod", "telexNumber",
-        "telephoneNumber", "internationaliSDNNumber", "facsimileTelephoneNumber", "street",
-        "postOfficeBox", "postalCode", "postalAddress", "physicalDeliveryOfficeName",
-        "st", "l", "teletexTerminalIdentifier", "gosaUnitTag"
+        "o",
+        "ou",
+        "description",
+        "userPassword",
+        "searchGuide",
+        "seeAlso",
+        "businessCategory",
+        "x121Address",
+        "registeredAddress",
+        "manager",
+        "destinationIndicator",
+        "preferredDeliveryMethod",
+        "telexNumber",
+        "telephoneNumber",
+        "internationaliSDNNumber",
+        "facsimileTelephoneNumber",
+        "street",
+        "postOfficeBox",
+        "postalCode",
+        "postalAddress",
+        "physicalDeliveryOfficeName",
+        "st",
+        "l",
+        "teletexTerminalIdentifier",
+        "gosaUnitTag"
     );
 
     var $objectclasses  = array("top", "gosaDepartment");
@@ -77,10 +96,11 @@ class organization extends department
 
     function check()
     {
+        global $config;
         $message = plugin::check();
 
         /* Check for presence of this department */
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->ls("(&(o=" . $this->o . ")(objectClass=organization))", $this->base, array('dn'));
         if ($this->orig_o == "new" && $ldap->count()) {
             $message[] = msgPool::duplicated(_("Name"));

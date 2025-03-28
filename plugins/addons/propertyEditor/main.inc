@@ -21,32 +21,31 @@
 
 /* Remove locks created by this plugin
 */
-if ($remove_lock){
-    if(session::is_set('propertyEditor')){
-        $config->configRegistry->reload($force=TRUE);
+if ($remove_lock) {
+    if (session::is_set('propertyEditor')) {
+        $config->configRegistry->reload($force = TRUE);
     }
 }
 
 
 /* Remove this plugin from session
  */
-if ( $cleanup ){
-    if (session::is_set('propertyEditor')){
+if ($cleanup) {
+    if (session::is_set('propertyEditor')) {
         #session::un_set('propertyEditor');
     }
-}else{
+} else {
 
 
     /* Create logview object on demand */
-    if (!session::is_set('propertyEditor')){
-        session::set('propertyEditor',new propertyEditor($config, get_userinfo()));
+    if (!session::is_set('propertyEditor')) {
+        session::set('propertyEditor', new propertyEditor($config, get_userinfo()));
     }
     $propertyEditor = session::get('propertyEditor');
 
     /* Execute formular */
-    $display= $propertyEditor->execute ();
+    $display = $propertyEditor->execute();
 
     /* Store changes  in session */
-    session::set('propertyEditor',$propertyEditor);
+    session::set('propertyEditor', $propertyEditor);
 }
-?>
