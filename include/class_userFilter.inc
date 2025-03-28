@@ -4,37 +4,39 @@ class userFilter extends plugin
 {
     public $pathTitle = "Filter";
 
-    public $filters = array();
+    public $filters = [];
 
-    public $objectclasses = array('gosaProperties');
-    public $attributes = array('gosaUserDefinedFilter');
-    public $gosaUserDefinedFilter = array();
+    public $objectclasses = ['gosaProperties'];
+    public $attributes = ['gosaUserDefinedFilter'];
+    public $gosaUserDefinedFilter = [];
     private $listing = null;
+    private sortableListing|null $filterWidget = null;
 
-    /*! \brief    Returns true if we are able to read and write userFilters
-     *            (schema has to be present, gosaProperties)
+    /**
+     * Returns true if we are able to read and write userFilters
+     * (schema has to be present, gosaProperties)
      */
     public static function userFilteringAvailable()
     {
+        global $config;
         if (!session::is_set('userFilter::__constructingAvailable')) {
-            global $config;
             $ldap = $config->get_ldap_link();
             $ocs = $ldap->get_objectclasses();
             session::set('userFilter::__constructingAvailable', isset($ocs['gosaProperties']));
         }
-        return (session::get('userFilter::__constructingAvailable'));
+        return session::get('userFilter::__constructingAvailable');
     }
 
 
-    /*! \brief  Initiates the filter editing dialog.
+    /**
+     * Initiates the filter editing dialog.
      */
     public function __construct($config, $listing)
     {
         // Initialize this plugin with the users dn to gather user defined filters.
         $ui = get_userinfo();
-        plugin::__construct($config, $ui->dn);
-        $this->listing = &$listing;
-        $filter = $this->listing->getFilter();
+        parent::__construct($config, $ui->dn);
+        $this->listing = $listing;
 
         // Load list of filters
         if (isset($this->attrs['gosaUserDefinedFilter'])) {
@@ -58,7 +60,8 @@ class userFilter extends plugin
     }
 
 
-    /*! \brief    Parses a filter string into an array.
+    /**
+     * Parses a filter string into an array.
      */
     public static function explodeFilterString($filterStr)
     {
@@ -97,13 +100,13 @@ class userFilter extends plugin
             'flags' => $flags
         );
 
-        return ($tmp);
+        return $tmp;
     }
 
-
-    /*! \brief    Converts the list of filters ($this->filters) into data which is useable
-     *             for the sortableList object ($this->filterWidget).
-     *  @return   Array   An array containg data useable for sortableLists ($this->filterWidget)
+    /**
+     * Converts the list of filters ($this->filters) into data which is useable
+     * for the sortableList object ($this->filterWidget).
+     * @return array An array containg data useable for sortableLists ($this->filterWidget)
      */
     public function convertFilterList()
     {
@@ -118,16 +121,16 @@ class userFilter extends plugin
                 implode(", ", $filter['flags'])
             ));
         }
-        return ($data);
+        return $data;
     }
 
-
-    /*! \brief    Display the user-filter overview as HTML content.
-     *  @return   string    HTML-content showing the user-filter editing dialog.
+    /**
+     * Display the user-filter overview as HTML content.
+     * @return string HTML-content showing the user-filter editing dialog.
      */
     public function execute()
     {
-        plugin::execute();
+        parent::execute();
 
         // Let the filter widget update itself
         $this->filterWidget->update();
@@ -196,20 +199,21 @@ class userFilter extends plugin
         // Display edit dialog
         if ($this->dialog instanceof userFilterEditor) {
             $this->dialog->save_object();
-            return ($this->dialog->execute());
+            return $this->dialog->execute();
         }
 
 
         $smarty = get_smarty();
         $smarty->assign("list", $this->filterWidget->render());
-        return ($smarty->fetch(get_template_path('userFilter.tpl', false)));
+        return $smarty->fetch(get_template_path('userFilter.tpl', false));
     }
 
 
-    /*! \brief    Returns user defined filter for a given list of categories,
-     *             if no categories were specified all enabled filters will be returned.
+    /**
+     * Returns user defined filter for a given list of categories,
+     * if no categories were specified all enabled filters will be returned.
      */
-    public static function getFilter($category = array())
+    public static function getFilter($category = []): array
     {
         global $config;
 
@@ -217,7 +221,7 @@ class userFilter extends plugin
         $ui = get_userinfo();
         $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaProperties)(gosaUserDefinedFilter=*))", array('gosaUserDefinedFilter'));
-        $filter = array();
+        $filter = [];
         while ($attrs = $ldap->fetch()) {
             for ($i = 0; $i < $attrs['gosaUserDefinedFilter']['count']; $i++) {
                 $tmp = userFilter::explodeFilterString($attrs['gosaUserDefinedFilter'][$i]);
@@ -245,14 +249,16 @@ class userFilter extends plugin
                 }
             }
         }
-        return ($filter);
+        return $filter;
     }
 
 
-    /*! \brief    Write user-filter modifications back to the ldap.
+    /**
+     * Write user-filter modifications back to the ldap.
      */
     public function save()
     {
+        global $config;
         // Build up new list of filters
         $attrs = array();
         foreach ($this->filters as $filter) {
@@ -271,9 +277,9 @@ class userFilter extends plugin
         }
         $this->gosaUserDefinedFilter = $attrs;
 
-        plugin::save();
+        parent::save();
 
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ldap->cd($this->dn);
         $ldap->modify($this->attrs);
 
@@ -285,7 +291,8 @@ class userFilter extends plugin
     }
 
 
-    /*! \brief    Do not save any posted values here.
+    /**
+     * Do not save any posted values here.
      */
     public function save_object() {}
 }
