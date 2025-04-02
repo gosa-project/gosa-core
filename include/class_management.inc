@@ -169,7 +169,7 @@ abstract class management
     /*! \brief  Execute this plugin
      *          Handle actions/events, locking, snapshots, dialogs, tabs,...
      */
-    public function execute()
+    public function execute(): string
     {
         global $config;
         // Ensure that html posts and gets are kept even if we see a 'Entry islocked' dialog.
@@ -934,7 +934,7 @@ abstract class management
                     return ($tmp->display_lock_message());
                 }
 
-                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Edit entry initiated!");
+                DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Edit entry initiated!");
 
                 // Now lock entries.
                 if ($tmp->multiple_available()) {
@@ -947,9 +947,10 @@ abstract class management
     }
 
 
-    /*! \brief  Close filter dialog
+    /**
+     * Close filter dialog
      */
-    protected function cancelFilter()
+    protected function cancelFilter(): void
     {
         if ($this->dialogObject instanceof userFilter) {
             $this->remove_lock();
@@ -958,7 +959,8 @@ abstract class management
     }
 
 
-    /*! \brief  Save filter modifcations.
+    /**
+     * Save filter modifcations.
      */
     protected function saveFilter()
     {
@@ -966,10 +968,10 @@ abstract class management
             $msgs = $this->dialogObject->check();
             if (count($msgs)) {
                 msg_dialog::displayChecks($msgs);
-                return ("");
+                return "";
             } else {
                 $this->dialogObject->save();
-                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
+                DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
                 $this->remove_lock();
                 $this->closeDialogs();
 
@@ -996,7 +998,7 @@ abstract class management
                 return ("");
             } else {
                 $this->tabObject->save();
-                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
+                DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
                 $this->remove_lock();
                 $this->closeDialogs();
             }
@@ -1008,7 +1010,7 @@ abstract class management
                 return ("");
             } else {
                 $this->dialogObject->save();
-                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
+                DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Entry saved!");
                 $this->remove_lock();
                 $this->closeDialogs();
             }
@@ -1016,7 +1018,8 @@ abstract class management
     }
 
 
-    /*! \brief  Save object modifications and keep dialogs opened.
+    /**
+     * Save object modifications and keep dialogs opened.
      *          - Calls '::check' to validate the given input.
      *          - Calls '::save' to save back object modifications (e.g. to ldap).
      */
@@ -1027,7 +1030,7 @@ abstract class management
             $msgs = $this->tabObject->check();
             if (count($msgs)) {
                 msg_dialog::displayChecks($msgs);
-                return ("");
+                return "";
             } else {
                 $this->tabObject->save();
                 @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dns, "Modifications applied!");
@@ -1037,8 +1040,9 @@ abstract class management
     }
 
 
-    /*! \brief  This method closes dialogs
-     *           and cleans up the cached object info and the ui.
+    /**
+     * This method closes dialogs
+     * and cleans up the cached object info and the ui.
      */
     protected function closeDialogs()
     {
@@ -1059,10 +1063,11 @@ abstract class management
     }
 
 
-    /*! \brief  Editing an object was caneled.
-     *          Close dialogs/tabs and remove locks.
+    /**
+     * Editing an object was caneled.
+     * Close dialogs/tabs and remove locks.
      */
-    protected function cancelEdit()
+    protected function cancelEdit(): void
     {
         $this->logout = false;
         $this->remove_lock();
@@ -1070,11 +1075,12 @@ abstract class management
     }
 
 
-    /*! \brief  Every click in the list user interface sends an event
-     *           here can we connect those events to a method.
-     *          eg.  ::registerEvent('new','createUser')
-     *          When the action/event new is send, the method 'createUser'
-     *           will be called.
+    /**
+     * Every click in the list user interface sends an event
+     * here can we connect those events to a method.
+     * eg.  ::registerEvent('new','createUser')
+     * When the action/event new is send, the method 'createUser'
+     * will be called.
      */
     public function registerAction($action, $target)
     {
@@ -1082,12 +1088,13 @@ abstract class management
     }
 
 
-    /*! \brief  Removes ldap object locks created by this class.
-     *          Whenever an object is edited, we create locks to avoid
-     *           concurrent modifications.
-     *          This locks will automatically removed here.
+    /**
+     * Removes ldap object locks created by this class.
+     * Whenever an object is edited, we create locks to avoid
+     * concurrent modifications.
+     * This locks will automatically removed here.
      */
-    public function remove_lock()
+    public function remove_lock(): void
     {
         if (!empty($this->dn) && $this->dn != "new") {
             del_lock($this->dn);
@@ -1144,11 +1151,11 @@ abstract class management
             foreach ($target as $dn) {
                 if ($action == "copy" && $this->ui->is_copyable($dn, $aclCategory, $aclPlugin)) {
                     $this->cpHandler->add_to_queue($dn, "copy", $tabClass, $tabType, $aclCategory, $this);
-                    @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $dn, "Entry copied!");
+                    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $dn, "Entry copied!");
                 }
                 if ($action == "cut" && $this->ui->is_cutable($dn, $aclCategory, $aclPlugin)) {
                     $this->cpHandler->add_to_queue($dn, "cut", $tabClass, $tabType, $aclCategory, $this);
-                    @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $dn, "Entry cutted!");
+                    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $dn, "Entry cutted!");
                 }
             }
         }
@@ -1171,7 +1178,7 @@ abstract class management
         if (!$this->cpHandler->entries_queued()) {
             $this->cpPastingStarted = false;
         }
-        return ("");
+        return "";
     }
 
 
@@ -1200,10 +1207,10 @@ abstract class management
     }
 
 
-    /*! \brief    Forward command execution request
-     *             to the correct method.
+    /**
+     * Forward command execution request to the correct method.
      */
-    public function handle_post_events($mode, $addAttrs = array())
+    public function handle_post_events($mode, $addAttrs = array()): void
     {
         if (!in_array_strict($mode, array('add', 'remove', 'modify'))) {
             trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", bold($mode)));
