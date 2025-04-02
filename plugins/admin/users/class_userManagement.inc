@@ -33,8 +33,8 @@ class userManagement extends management
     var $got_uid = "";
     var $edit_uid = "";
 
-    var $pwd_change_queue = array();
-    var $force_hash_type = array();
+    var $pwd_change_queue = [];
+    var $force_hash_type = [];
 
     var $theme;
 
@@ -52,14 +52,11 @@ class userManagement extends management
     protected $passwordChangeForceable = FALSE;
     protected $enforcePasswordChange = FALSE;
 
-    function __construct($config, $ui)
+    public function __construct($config, $ui)
     {
-        $this->config = $config;
-        $this->ui = $ui;
-
         $this->theme = getThemeName();
 
-        $this->storagePoints = array(get_ou("core", "userRDN"));
+        $this->storagePoints = [get_ou("core", "userRDN")];
 
         // Build filter
         if (session::global_is_set(get_class($this) . "_filter")) {
@@ -78,11 +75,11 @@ class userManagement extends management
         $headpage->setFilter($filter);
 
         // Add copy&paste and snapshot handler.
-        if ($this->config->boolValueIsTrue("core", "copyPaste")) {
-            $this->cpHandler = new CopyPasteHandler($this->config);
+        if ($config->boolValueIsTrue("core", "copyPaste")) {
+            $this->cpHandler = new CopyPasteHandler($config);
         }
-        if ($this->config->get_cfg_value("core", "enableSnapshots") == "true") {
-            $this->snapHandler = new SnapshotHandler($this->config);
+        if ($config->get_cfg_value("core", "enableSnapshots") == "true") {
+            $this->snapHandler = new SnapshotHandler($config);
         }
 
         parent::__construct($config, $ui, "users", $headpage);
@@ -135,7 +132,7 @@ class userManagement extends management
     }
 
 
-    function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
+    function editEntry($action = "", $target = [], $all = [], $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
         $str = parent::editEntry($action, $target);
         if ($str) return ($str);
@@ -161,13 +158,13 @@ class userManagement extends management
     function closeDialogs()
     {
         parent::closeDialogs();
-        $this->pwd_change_queue = array();
+        $this->pwd_change_queue = [];
     }
 
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
      */
-    function sendMessage($action = "", $target = array(), $all = array())
+    function sendMessage($action = "", $target = [], $all = [])
     {
         return;
     }
@@ -196,13 +193,13 @@ class userManagement extends management
 
     /*! \brief  Queues a set of users for password changes
      */
-    function changePassword($action = "", $target = array(), $all = array())
+    function changePassword($action = "", $target = [], $all = [])
     {
         $this->dn = "";
         $this->pwd_change_queue = $target;
 
         // Check permisions
-        $disallowed = array();
+        $disallowed = [];
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
 
@@ -342,7 +339,7 @@ class userManagement extends management
                 }
 
                 // Check posted passwords now.
-                $message = array();
+                $message = [];
                 // Perform GOsa password policy checks
                 if ($new_password  != $repeated_password) {
                     $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
@@ -366,7 +363,7 @@ class userManagement extends management
 
                 // Call external check hook to validate the password change
                 if (!count($message)) {
-                    $attrs = array();
+                    $attrs = [];
                     $attrs['current_password'] = '';
                     $attrs['new_password'] = $new_password;
                     $checkRes = password::callCheckHook($this->config, $this->dn, $attrs);
@@ -417,7 +414,7 @@ class userManagement extends management
 
                         $current = floor(date("U") / 60 / 60 / 24);
                         $enforceDate = $current -  $attrs['shadowMax'][0];
-                        $new_attrs = array();
+                        $new_attrs = [];
                         $new_attrs['shadowLastChange'] = $enforceDate;
                         $ldap->cd($this->dn);
                         $ldap->modify($new_attrs);
@@ -439,7 +436,7 @@ class userManagement extends management
                     }
                 }
 
-                new log("modify", "users/" . get_class($this), $this->dn, array(), "Password has been changed");
+                new log("modify", "users/" . get_class($this), $this->dn, [], "Password has been changed");
                 $this->dn = "";
             } // else {
             //     msg_dialog::display(_("Password change"),
@@ -505,7 +502,7 @@ class userManagement extends management
      *          If we've user templates, then the user will be asked to use to use one.
      *          -> See 'templateContinue' for further handling.
      */
-    function newUserFromTemplate($action = "", $target = array(), $all = array())
+    function newUserFromTemplate($action = "", $target = [], $all = [])
     {
         // Call parent method, it knows whats to do, locking and so on ...
         $str = parent::newEntry($action, $target, $all);
@@ -515,7 +512,7 @@ class userManagement extends management
         $this->got_uid = "";
 
         // Use template if there are any of them
-        $templates = array();
+        $templates = [];
         $templates['none'] = _("none");
         $templates = array_merge($templates, $this->get_templates());
 
@@ -542,7 +539,7 @@ class userManagement extends management
      *           if he wants to use one.
      *          -> See 'templateContinue' for further handling.
      */
-    function newEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
+    function newEntry($action = "", $target = [], $all = [], $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
 
         // Call parent method, it manages everything, locking, object creation...
@@ -550,7 +547,7 @@ class userManagement extends management
         if (!empty($str)) return ($str);
 
         // If we've at least one template, then ask the user if he wants to use one?
-        $templates = array();
+        $templates = [];
         $templates['none'] = _("none");
         $templates = array_merge($templates, $this->get_templates());
 
@@ -582,13 +579,13 @@ class userManagement extends management
     function templateContinue()
     {
         // Get the list of available templates.
-        $templates = array();
+        $templates = [];
         $templates['none'] = _("none");
         $templates = array_merge($templates, $this->get_templates());
 
         // Input validation, if someone wants to create a user from a template
         //  then validate the given values.
-        $message = array();
+        $message = [];
         if (!isset($_POST['template']) || (empty($_POST['template']))) {
             $message[] = msgPool::invalid(_("Template"));
         }
@@ -723,9 +720,9 @@ class userManagement extends management
 
     /* !\brief  This method applies a template to a set of users.
      */
-    function templatizeUsers($action = "", $target = array(), $all = array())
+    function templatizeUsers($action = "", $target = [], $all = [])
     {
-        $this->dns = array();
+        $this->dns = [];
         if (count($target)) {
 
             // Get the list of available templates.
@@ -798,8 +795,8 @@ class userManagement extends management
     {
 
         // Filter out entries we are not allowed to modify
-        $disallowed = array();
-        $dns = array();
+        $disallowed = [];
+        $dns = [];
         foreach ($entry as $dn) {
             if (!preg_match("/w/", $this->ui->get_permissions($dn, "users/password"))) {
                 $disallowed[] = $dn;
@@ -868,7 +865,7 @@ class userManagement extends management
      */
     function get_templates()
     {
-        $templates = array();
+        $templates = [];
         $ldap = $this->config->get_ldap_link();
         foreach ($this->config->departments as $key => $value) {
             $acl = $this->ui->get_permissions($value, $this->aclCategory . "/" . $this->aclPlugin);
@@ -892,8 +889,8 @@ class userManagement extends management
 
     function copyPasteHandler(
         $action = "",
-        $target = array(),
-        $all = array(),
+        $target = [],
+        $all = [],
         $altTabClass = "",
         $altTabType = "",
         $altAclCategory = "",
@@ -953,7 +950,7 @@ class userManagement extends management
     }
 
 
-    static function filterLockLabel($userPassword)
+    public static function filterLockLabel($userPassword): string
     {
         $label = "";
         if (isset($userPassword[0]) && preg_match("/^\{[^\}]/", $userPassword[0])) {
