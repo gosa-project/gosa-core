@@ -22,33 +22,26 @@
 
 class passwordMethodMd5 extends passwordMethod
 {
-	function __construct($config)  
-	{
-	}
+	function __construct($config) {}
 
 
 	function is_available()
 	{
-		if (function_exists('md5')){
-			return(true);
-		}else{
-			return false;
+		if (function_exists('md5')) {
+			return true;
 		}
+		return false;
 	}
 
 
 	function generate_hash($pwd)
 	{
-		return  "{MD5}".base64_encode( pack('H*', md5($pwd)));
+		return  "{MD5}" . base64_encode(pack('H*', md5($pwd)));
 	}
 
 
-  function get_hash_name()
-  {
-    return "md5";
-  }
-
+	function get_hash_name()
+	{
+		return "md5";
+	}
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

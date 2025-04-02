@@ -22,46 +22,42 @@
 
 class passwordMethodsasl extends passwordMethod
 {
-  var $dn  = "";
-  var $uid = "";
-  var $realm = "";
-  
-  function __construct($config, $dn)
-  {
-    if($dn == "" || $dn == "new") return;
+    var $dn  = "";
+    var $uid = "";
+    var $realm = "";
 
-    $this->realm = trim($config->get_cfg_value('core','SASLRealm'));
-    if($this->realm == ""){
-        trigger_error(msgPool::cmdnotfound("SASLRealm", _("SASL")));
+    function __construct($config, $dn)
+    {
+        if ($dn == "" || $dn == "new") return;
+
+        $this->realm = trim($config->get_cfg_value('core', 'SASLRealm'));
+        if ($this->realm == "") {
+            trigger_error(msgPool::cmdnotfound("SASLRealm", _("SASL")));
+        }
+
+
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
+        $ldap->cat($dn, array('uid'));
+        if ($ldap->count() == 1) {
+            $attrs = $ldap->fetch();
+            $this->uid = $attrs['uid'][0];
+        }
+    }
+
+    function is_available()
+    {
+        return true;
+    }
+
+    function generate_hash($pwd)
+    {
+        return ("{SASL}" . $this->uid . "@" . $this->realm);
     }
 
 
-    $ldap = $config->get_ldap_link();
-    $ldap->cd($config->current['BASE']);
-    $ldap->cat($dn,array('uid'));
-    if($ldap->count() == 1){
-        $attrs = $ldap->fetch();
-        $this->uid = $attrs['uid'][0];
+    function get_hash_name()
+    {
+        return "sasl";
     }
-  }
-
-  function is_available()
-  {
-      return(true);
-  }
-
-  function generate_hash($pwd)
-  {
-    return("{SASL}".$this->uid."@".$this->realm);
-  }
-
-
-  function get_hash_name()
-  {
-    return "sasl";
-  }
-
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
