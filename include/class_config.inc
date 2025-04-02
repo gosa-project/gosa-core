@@ -1055,9 +1055,9 @@ class config
      *
      *
      * */
-    function boolValueIsTrue($class, $name)
+    function boolValueIsTrue($class, $name): bool
     {
-        return ((bool)preg_match("/true/i", $this->get_cfg_value($class, $name)));
+        return (bool)preg_match("/true/i", $this->get_cfg_value($class, $name));
     }
 
 
@@ -1065,9 +1065,9 @@ class config
     {
         $return = strtoupper($return);
         if (is_array($arr)) {
-            foreach ($arr as &$a) {
+            foreach ($arr as $a) {
                 if (isset($a['CLASS']) && strcasecmp($name, $a['CLASS']) == 0) {
-                    return (isset($a[$return]) ? $a[$return] : "");
+                    return isset($a[$return]) ? $a[$return] : "";
                 } else {
                     $res = $this->__search($a, $name, $return);
                     if ($res != "") {
@@ -1076,7 +1076,7 @@ class config
                 }
             }
         }
-        return ("");
+        return "";
     }
 
 

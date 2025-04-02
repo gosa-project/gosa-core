@@ -108,7 +108,7 @@ class pluglist
      * Checks existence and ACL for the given plugin.
      * Returns true in case of success else false.
      * 
-     * @param &$plug
+     * @param $plug
      * @return bool
      */
     public function registerPlugin($plug): bool

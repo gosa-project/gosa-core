@@ -30,7 +30,7 @@ class ldapMultiplexer
     /* Result resource */
     protected $sr;
 
-    public function __construct(&$object)
+    public function __construct($object)
     {
         /* Store object */
         $this->object = $object;

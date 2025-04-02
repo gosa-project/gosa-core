@@ -644,7 +644,7 @@ class gosaProperty
     function __construct($parent, $classname, $data)
     {
         // Set some basic infos 
-        $this->parent = &$parent;
+        $this->parent = $parent;
         $this->class = $classname;
         $this->data  = $data;
 

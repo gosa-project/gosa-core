@@ -87,10 +87,10 @@ abstract class plugin
 
     This is only used internally.
    */
-    var $attrs = array();
+    var $attrs = [];
 
     /* Keep set of conflicting plugins */
-    var $conflicts = array();
+    var $conflicts = [];
 
     /* Save unit tags */
     var $gosaUnitTag = "";
@@ -110,10 +110,10 @@ abstract class plugin
     var $snapDialog = NULL;
 
     /* attribute list for save action */
-    var $attributes = array();
-    var $objectclasses = array();
+    var $attributes = [];
+    var $objectclasses = [];
     var $is_new = TRUE;
-    var $saved_attributes = array();
+    var $saved_attributes = [];
 
     var $acl_base = "";
     var $acl_category = "";
@@ -128,13 +128,13 @@ abstract class plugin
 
     /* This variable indicates that this class can handle multiple dns at once. */
     var $multiple_support = FALSE;
-    var $multi_attrs      = array();
-    var $multi_attrs_all  = array();
+    var $multi_attrs      = [];
+    var $multi_attrs_all  = [];
 
     /* This aviable indicates, that we are currently in multiple edit handle */
     var $multiple_support_active = FALSE;
-    var $selected_edit_values = array();
-    var $multi_boxes = array();
+    var $selected_edit_values = [];
+    var $multi_boxes = [];
 
     protected $initTime = 0;
     protected $error = "";
@@ -308,10 +308,10 @@ abstract class plugin
         session::global_set('current_class_for_help', get_class($this));
 
         /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
-        session::set('LOCK_VARS_TO_USE', array());
-        session::set('LOCK_VARS_USED_GET', array());
-        session::set('LOCK_VARS_USED_POST', array());
-        session::set('LOCK_VARS_USED_REQUEST', array());
+        session::set('LOCK_VARS_TO_USE', []);
+        session::set('LOCK_VARS_USED_GET', []);
+        session::set('LOCK_VARS_USED_POST', []);
+        session::set('LOCK_VARS_USED_REQUEST', []);
 
         pathNavigator::registerPlugin($this);
 
@@ -338,7 +338,7 @@ abstract class plugin
         /* Get current objectClasses in order to add the required ones */
         $ldap->cat($this->dn);
         $tmp = $ldap->fetch();
-        $oc = array();
+        $oc = [];
         if (isset($tmp['objectClass'])) {
             $oc = $tmp['objectClass'];
             unset($oc['count']);
@@ -346,12 +346,12 @@ abstract class plugin
 
         /* Remove objectClasses from entry */
         $ldap->cd($this->dn);
-        $this->attrs = array();
+        $this->attrs = [];
         $this->attrs['objectClass'] = array_remove_entries_ics($this->objectclasses, $oc);
 
         /* Unset attributes from entry */
         foreach ($this->attributes as $val) {
-            $this->attrs["$val"] = array();
+            $this->attrs["$val"] = [];
         }
 
         /* Unset account info */
@@ -427,14 +427,14 @@ abstract class plugin
         $this->entryCSN = "";
 
         /* Start with empty array */
-        $this->attrs = array();
+        $this->attrs = [];
 
         /* Get current objectClasses in order to add the required ones */
         $ldap->cat($this->dn);
 
         $tmp = $ldap->fetch();
 
-        $oc = array();
+        $oc = [];
         if (isset($tmp['objectClass'])) {
             $oc = $tmp["objectClass"];
             $this->is_new = FALSE;
@@ -451,7 +451,7 @@ abstract class plugin
             if ($this->$val != "") {
                 $this->attrs["$val"] = $this->$val;
             } elseif (!$this->is_new) {
-                $this->attrs["$val"] = array();
+                $this->attrs["$val"] = [];
             }
         }
 
@@ -489,7 +489,7 @@ abstract class plugin
     /*! \brief    Forward command execution requests
    *             to the hook execution method.
    */
-    function handle_pre_events($mode, $addAttrs = array())
+    function handle_pre_events($mode, $addAttrs = [])
     {
         if (!in_array_strict($mode, array('add', 'remove', 'modify'))) {
             trigger_error(sprintf("Invalid pre event type given %s! Valid types are [add,modify,remove].", $mode));
@@ -646,7 +646,7 @@ abstract class plugin
     }
 
     /* Adapt from template, using 'dn' */
-    function adapt_from_template($dn, $skip = array())
+    function adapt_from_template($dn, $skip = [])
     {
         global $config;
 
@@ -657,7 +657,7 @@ abstract class plugin
         $ldap->cat($dn);
         $this->attrs = $ldap->fetch();
 
-        $values = array();
+        $values = [];
         foreach (array('uid', 'sn', 'givenName') as $name) {
             if (isset($this->parent->$name)) {
                 $value = $this->parent->$name;
@@ -678,7 +678,7 @@ abstract class plugin
             if ($this->attrs[$name]['count'] == 1) {
                 $value = fillReplacements($this->attrs[$name][0], $values);
             } else {
-                $value = array();
+                $value = [];
                 for ($i = 0; $i < $this->attrs[$name]['count']; $i++) {
                     $value[] = fillReplacements($this->attrs[$name][$i], $values);
                 }
@@ -865,7 +865,7 @@ abstract class plugin
         $ds = ldap_connect($config->current['SERVER']);
         ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
         if (function_exists("ldap_set_rebind_proc") && isset($config->current['REFERRAL'])) {
-            ldap_set_rebind_proc($ds, array(&$this, "rebind"));
+            ldap_set_rebind_proc($ds, array($this, "rebind"));
         }
 
         $pwd = $config->get_credentials($config->current['ADMINPASSWORD']);
@@ -873,7 +873,7 @@ abstract class plugin
         $sr = ldap_read($ds, LDAP::fix($src_dn), "objectClass=*");
 
         /* Fill data from LDAP */
-        $new = array();
+        $new = [];
         if ($sr) {
             $ei = ldap_first_entry($ds, $sr);
             if ($ei) {
@@ -1008,7 +1008,7 @@ abstract class plugin
         $ldap->cd($config->current['BASE']);
         $ldap->create_missing_trees(preg_replace("/^[^,]+,/", "", $dst_dn));
         if (!$ldap->rename_dn($src_dn, $dst_dn)) {
-            new log("debug", "LDAP protocol v3 implementation error, ldap_rename failed, falling back to manual copy.", "FROM: $src_dn  -- TO: $dst_dn", array(), $ldap->get_error());
+            new log("debug", "LDAP protocol v3 implementation error, ldap_rename failed, falling back to manual copy.", "FROM: $src_dn  -- TO: $dst_dn", [], $ldap->get_error());
             DEBUG(
                 DEBUG_LDAP,
                 __LINE__,
@@ -1069,7 +1069,7 @@ abstract class plugin
         );
         $ldap = $config->get_ldap_link();
         foreach ($objects as $obj) {
-            $deviceDNS = array();
+            $deviceDNS = [];
             for ($i = 0; $i < $obj["gotoHotplugDeviceDN"]['count']; $i++) {
                 $odn = $obj["gotoHotplugDeviceDN"][$i];
                 if ($odn == $src_dn) {
@@ -1279,7 +1279,7 @@ abstract class plugin
        If this is called from departmentGeneric, we have to skip this
         tagging procedure.
     */
-    function tag_attrs(&$at, $dn = "", $tag = "", $show = false)
+    function tag_attrs($at, $dn = "", $tag = "", $show = false)
     {
         global $config;
 
@@ -1297,7 +1297,7 @@ abstract class plugin
                 $len = strlen($dn);
 
                 DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
-                $relevant = array();
+                $relevant = [];
                 foreach ($config->adepartments as $key => $ntag) {
 
                     /* This one is bigger than our dn, its not relevant... */
@@ -1343,7 +1343,7 @@ abstract class plugin
        (objectClass was already removed obove)
      */
         if ($tag == "" && $this->gosaUnitTag) {
-            $at['gosaUnitTag'] = array();
+            $at['gosaUnitTag'] = [];
         }
     }
 
@@ -1378,7 +1378,7 @@ abstract class plugin
    */
     static function plInfo()
     {
-        return array();
+        return [];
     }
 
 
@@ -1459,7 +1459,7 @@ abstract class plugin
     function get_allowed_bases()
     {
         global $config;
-        $deps = array();
+        $deps = [];
 
         /* Is this a new object ? Or just an edited existing object */
         if (!$this->initially_was_account && $this->is_account) {
@@ -1507,19 +1507,19 @@ abstract class plugin
             $ui->dn = $new_dn;
             $ui->loadACL();
             session::global_set('ui', $ui);
-            new log("view", "acl/" . get_class($this), $this->dn, array(), "Updated current object dn from '" . $old_dn . "' to '" . $new_dn . "'");
+            new log("view", "acl/" . get_class($this), $this->dn, [], "Updated current object dn from '" . $old_dn . "' to '" . $new_dn . "'");
         }
 
         /* Object was moved, ensure that all acls will be moved too */
         if ($new_dn != $old_dn && $old_dn != "new") {
 
             /* get_ldap configuration */
-            $update = array();
+            $update = [];
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
             $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($old_dn) . "*))", array("cn", "gosaAclEntry"));
             while ($attrs = $ldap->fetch()) {
-                $acls = array();
+                $acls = [];
                 $found = false;
                 for ($i = 0; $i <  $attrs['gosaAclEntry']['count']; $i++) {
                     $acl_parts = explode(":", $attrs['gosaAclEntry'][$i]);
@@ -1558,7 +1558,7 @@ abstract class plugin
                     $debug_info = sprintf(_("Changing ACL DN from %s to %s"), bold($old_dn), bold($new_dn));
                     DEBUG(DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__, $debug_info, "ACL");
 
-                    $update[$attrs['dn']] = array();
+                    $update[$attrs['dn']] = [];
                     foreach ($acls as $acl) {
                         $update[$attrs['dn']]['gosaAclEntry'][] = $acl;
                     }
@@ -1626,7 +1626,7 @@ abstract class plugin
    */
     function get_multi_edit_values()
     {
-        $ret = array();
+        $ret = [];
         foreach ($this->attributes as $attr) {
             if (in_array_strict($attr, $this->multi_boxes)) {
                 $ret[$attr] = $this->$attr;
@@ -1653,10 +1653,10 @@ abstract class plugin
         session::global_set('current_class_for_help', get_class($this));
 
         /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
-        session::set('LOCK_VARS_TO_USE', array());
-        session::set('LOCK_VARS_USED_GET', array());
-        session::set('LOCK_VARS_USED_POST', array());
-        session::set('LOCK_VARS_USED_REQUEST', array());
+        session::set('LOCK_VARS_TO_USE', []);
+        session::set('LOCK_VARS_USED_GET', []);
+        session::set('LOCK_VARS_USED_POST', []);
+        session::set('LOCK_VARS_USED_REQUEST', []);
 
         return ("Multiple edit is currently not implemented for this plugin.");
     }
@@ -1671,7 +1671,7 @@ abstract class plugin
         }
 
         /* Save values to object */
-        $this->multi_boxes = array();
+        $this->multi_boxes = [];
         foreach ($this->attributes as $val) {
 
             /* Get selected checkboxes from multiple edit */
@@ -1719,7 +1719,7 @@ abstract class plugin
 
     function get_used_snapshot_bases()
     {
-        return (array());
+        return ([]);
     }
 
     function is_modal_dialog()
@@ -1731,7 +1731,7 @@ abstract class plugin
     /*! \brief    Forward command execution requests
    *             to the hook execution method.
    */
-    function handle_post_events($mode, $addAttrs = array())
+    function handle_post_events($mode, $addAttrs = [])
     {
         if (!in_array_strict($mode, array('add', 'remove', 'modify'))) {
             trigger_error(sprintf("Invalid post event type given %s! Valid types are [add,modify,remove].", bold($mode)));
@@ -1760,18 +1760,18 @@ abstract class plugin
     static function callHook(
         $plugin,
         $cmd,
-        $addAttrs = array(),
-        &$returnOutput = array(),
-        &$returnCode = NULL,
-        &$errorOutput = array(),
+        $addAttrs = [],
+        $returnOutput = [],
+        $returnCode = NULL,
+        $errorOutput = [],
         $displayErrors = TRUE
     ) {
         global $config;
         $command = $config->configRegistry->getPropertyValue(get_class($plugin), $cmd);
 
         $returnCode = 0; // Simulate a return code to tell the caller that everythin is fine.
-        $returnOutput = array();
-        $arr = array();
+        $returnOutput = [];
+        $arr = [];
 
         if (!empty($command)) {
 
@@ -1787,7 +1787,7 @@ abstract class plugin
             $addAttrs['location'] = $config->current['NAME'];
 
             // Sort attributes by length, ensures correct replacement
-            $tmp = array();
+            $tmp = [];
             foreach ($addAttrs as $name => $value) {
                 $tmp[$name] =  strlen($name);
             }
@@ -1822,7 +1822,7 @@ abstract class plugin
                 DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
                 preg_match("/^(.* )?(\/.*)$/", $command, $matches);
                 $command = $matches[2];
-                $env = array();
+                $env = [];
                 preg_match_all("/ ?([^=]+)=('[^']*')/", $matches[1], $tmp, PREG_SET_ORDER);
                 foreach ($tmp as $e) {
                     $env[$e[1]] = trim($e[2], "'");

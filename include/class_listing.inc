@@ -120,7 +120,7 @@ class listing
 
     public function setCopyPasteHandler($handler)
     {
-        $this->copyPasteHandler = &$handler;
+        $this->copyPasteHandler = $handler;
     }
 
     public function setHeight($height)
@@ -130,7 +130,7 @@ class listing
 
     public function setSnapshotHandler($handler)
     {
-        $this->snapshotHandler = &$handler;
+        $this->snapshotHandler = $handler;
     }
 
     public function getFilter()
@@ -140,7 +140,7 @@ class listing
 
     public function setFilter($filter)
     {
-        $this->filter = &$filter;
+        $this->filter = $filter;
         if ($this->departmentBrowser) {
             $this->departments = $this->getDepartments();
         }
@@ -1768,7 +1768,7 @@ class listing
                 }
 
                 // Load shortcut
-                $actions = &$this->xmlData['actionmenu']['action'];
+                $actions = $this->xmlData['actionmenu']['action'];
                 $result .= "<ul class='level1' id='root'><li><a href='#'>" . _('Actions') . '&nbsp;' . image('images/lists/sort-down.png') . '</a>';
 
                 // Build ul/li list
@@ -1794,7 +1794,7 @@ class listing
                 }
 
                 // Load shortcut
-                $actions = &$this->xmlData['actionmenu']['action'];
+                $actions = $this->xmlData['actionmenu']['action'];
 
                 $result .= "  <a class='dropdown-menu' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>" . _('Actions') . "</a>
                             <ul class='dropdown-content' id='$level'>";
