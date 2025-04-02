@@ -389,7 +389,7 @@ class user extends plugin
         $smarty->assign("preferredLanguage_list", $language);
 
         /* Get random number for pictures */
-        srand((float)microtime() * 1000000);
+        srand(intval(microtime(true)) * 1000000);
         $smarty->assign("rand", rand(0, 10000));
 
 
