@@ -36,7 +36,7 @@ class remoteObject
      * @param   String      A string that represents the object call.
      * @return  String      The server side object ID, used to identify the object.
      */
-    function __construct(&$rpcHandle, $type, $properties, $values, $methods, $object_id, $ref_id)
+    function __construct($rpcHandle, $type, $properties, $values, $methods, $object_id, $ref_id)
     {
         $this->rpcHandle = $rpcHandle;
         $this->properties = $properties;
