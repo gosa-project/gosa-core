@@ -397,11 +397,12 @@ class passwordMethod
             $core = new core($config);
 
             // No execute the hook and fetch the results.
-            plugin::callHook($core, 'passwordProposalHook', $addAttrs = array(), $ret);
+            $ret = [];
+            plugin::callHook($core, $value, $addAttrs = array(), $ret);
             if (count($ret) && !empty($ret[0])) {
-                return ($ret[0]);
+                return $ret[0];
             }
         }
-        return ('');
+        return '';
     }
 }
