@@ -24,7 +24,7 @@ class ogrouptabs extends tabs
 {
     var $base = "";
     var $acl_category;
-    var $to_remove = array();
+    var $to_remove = [];
 
     /*! \brief Stage an object for removal */
     function remove($object)
@@ -46,11 +46,11 @@ class ogrouptabs extends tabs
 
     function reload($dd)
     {
-        $objects      = preg_replace('/[\[\]]/', '', $dd);
+        $objects = preg_replace('/[\[\]]/', '', $dd);
 
         /* Check if we have a group with a set different mixed objects.
          */
-        $mixed_type = FALSE;
+        $mixed_type = false;
         for ($i = 0; $i < (strlen($objects) - 1); $i++) {
             $mixed_type |= $objects[$i] != $objects[($i + 1)];
         }
@@ -309,19 +309,19 @@ class ogrouptabs extends tabs
         }
     }
 
-    function execute()
+    function execute(): string
     {
         $str = "";
         $this->by_object['ogroup']->AddDelMembership();
         $this->reload($this->by_object['ogroup']->gosaGroupObjects);
-        $str .= tabs::execute();
-        return ($str);
+        $str .= parent::execute();
+        return $str;
     }
 
-    function __construct($config, $data, $dn, $category = "ogroups", $hide_refs = FALSE, $hide_acls = FALSE)
+    function __construct($config, $data, $dn, $category = "ogroups", $hide_refs = false, $hide_acls = false)
     {
 
-        tabs::__construct($config, $data, $dn, $category, $hide_refs, $hide_acls);
+        parent::__construct($config, $data, $dn, $category, $hide_refs, $hide_acls);
         $this->base = $this->by_object['ogroup']->base;
         $this->acl_category = $category;
 
@@ -331,15 +331,15 @@ class ogrouptabs extends tabs
     }
 
 
-    function check($ignore_account = FALSE)
+    function check($ignore_account = false)
     {
-        return (tabs::check(FALSE));
+        return parent::check(false);
     }
 
 
-    function save_object($save_current = FALSE)
+    function save_object($save_current = false)
     {
-        tabs::save_object($save_current);
+        parent::save_object($save_current);
 
         /* Update reference, transfer variables */
         $baseobject = $this->by_object['ogroup'];
@@ -361,7 +361,7 @@ class ogrouptabs extends tabs
     }
 
 
-    function save($ignore_account = FALSE)
+    function save($ignore_account = false)
     {
         $baseobject = $this->by_object['ogroup'];
 
@@ -391,12 +391,12 @@ class ogrouptabs extends tabs
         foreach (array_keys($this->to_remove) as $object) {
             $this->to_remove[$object]->remove_from_parent();
         }
-        tabs::save();
+        parent::save();
     }
 
-    function getCopyDialog()
+    function getCopyDialog(): string
     {
         $this->reload($this->by_object['ogroup']->gosaGroupObjects);
-        return (tabs::getCopyDialog());
+        return parent::getCopyDialog();
     }
 }
