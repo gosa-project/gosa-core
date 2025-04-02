@@ -22,31 +22,25 @@
 
 class passwordMethodRemote extends passwordMethod
 {
-  var $dn  = "";
-  var $uid = "";
-  var $realm = "";
-  
-  function __construct($config, $dn="")
-  {
-  }
+    var $dn  = "";
+    var $uid = "";
+    var $realm = "";
 
-  function is_available()
-  {
-      return(true);
-  }
+    function __construct($config, $dn = "") {}
 
-  function generate_hash($pwd)
-  {
-    return(NULL);
-  }
+    function is_available()
+    {
+        return true;
+    }
+
+    function generate_hash($pwd)
+    {
+        return null;
+    }
 
 
-  function get_hash_name()
-  {
-    return "Remote";
-  }
-
+    function get_hash_name()
+    {
+        return "Remote";
+    }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

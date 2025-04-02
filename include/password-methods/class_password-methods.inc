@@ -102,7 +102,7 @@ class passwordMethod
 
             /* Check if this entry is already locked. */
             if (preg_match("/^[^\}]*+\}!/", $userPassword)) {
-                return (TRUE);
+                return true;
             }
 
             /* Lock entry */
