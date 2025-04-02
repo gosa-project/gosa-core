@@ -27,7 +27,7 @@ class filterLDAP
         $method = ($storeOnBase && !($flags & GL_SUBSEARCH)) ? "ls" : "search";
 
         // Initialize search bases
-        $bases = array();
+        $bases = [];
 
         // Get list of sub bases to search on
         if ($storeOnBase) {

@@ -23,23 +23,21 @@
 class objectSelect extends management
 {
     // Tab definition 
-    protected $skipFooter = TRUE;
-    protected $skipHeader = TRUE;
+    protected $skipFooter = true;
+    protected $skipHeader = true;
 
     var $plHeadline = "Object selection";
 
     function __construct($config, $ui)
     {
-        $this->config = $config;
-        $this->ui = $ui;
         $this->storagePoints = array(
             get_ou("core", "userRDN"),
             get_ou("core", "groupRDN"),
-            get_ou("termgeneric", "terminalRDN"),
-            get_ou("workgeneric", "workstationRDN"),
-            get_ou("servgeneric", "serverRDN"),
-            get_ou("printgeneric", "printerRDN"),
-            get_ou("phoneGeneric", "phoneRDN")
+            // get_ou("termgeneric", "terminalRDN"),
+            // get_ou("workgeneric", "workstationRDN"),
+            // get_ou("servgeneric", "serverRDN"),
+            // get_ou("printgeneric", "printerRDN"),
+            // get_ou("phoneGeneric", "phoneRDN")
         );
 
         // Build filter
@@ -73,21 +71,21 @@ class objectSelect extends management
     {
         $cn = $cn[0];
         if (!in_array_strict('gosaDepartment', $objectClass)) {
-            return ($cn);
+            return $cn;
         }
         if ($dn == $base) {
             $cn = ".";
         }
         $dn = LDAP::fix(func_get_arg(1));
-        return ("<a href='?plug=" . $_GET['plug'] . "&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$cn</a>");
+        return "<a href='?plug=" . $_GET['plug'] . "&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$cn</a>";
     }
 
     function save()
     {
         $act = $this->detectPostActions();
         $headpage = $this->getHeadpage();
-        if (!isset($act['targets'])) return (array());
-        $ret = array();
+        if (!isset($act['targets'])) return [];
+        $ret = [];
         foreach ($act['targets'] as $dn) {
             $ret[] = $headpage->getEntry($dn);
         }
