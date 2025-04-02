@@ -1507,9 +1507,9 @@ function get_ou($class, $name)
     $ou = $config->configRegistry->getPropertyValue($class, $name);
     if ($ou != "") {
         if (!preg_match('/^[^=]+=[^=]+/', $ou)) {
-            $ou = @LDAP::convert("ou=$ou");
+            $ou = LDAP::convert("ou=$ou");
         } else {
-            $ou = @LDAP::convert("$ou");
+            $ou = LDAP::convert("$ou");
         }
 
         if (preg_match("/" . preg_quote($config->current['BASE'], '/') . "$/", $ou)) {
@@ -1518,7 +1518,7 @@ function get_ou($class, $name)
             if (!preg_match("/,$/", $ou)) {
                 return ("$ou,");
             } else {
-                return ($ou);
+                return $ou;
             }
         }
     } else {
@@ -1533,7 +1533,7 @@ function get_ou($class, $name)
  * */
 function get_people_ou()
 {
-    return (get_ou("core", "userRDN"));
+    return get_ou("core", "userRDN");
 }
 
 

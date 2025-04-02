@@ -6,7 +6,7 @@ class filterLDAPBlacklist
     static function query($base, $scope, $filter, $attributes, $category, $objectStorage = "")
     {
         $result = filterLDAP::query($base, $scope, $filter, $attributes, $category, $objectStorage);
-        return (filterLDAPBlacklist::filterByBlacklist($result));
+        return filterLDAPBlacklist::filterByBlacklist($result);
     }
 
     static function filterByBlacklist($entries)
@@ -25,6 +25,6 @@ class filterLDAPBlacklist
                 }
             }
         }
-        return (array_values($entries));
+        return array_values($entries);
     }
 }
