@@ -35,10 +35,7 @@ class ogroupManagement extends management
 
     function __construct($config, $ui)
     {
-        $this->config = $config;
-        $this->ui = $ui;
-
-        $this->storagePoints = array(get_ou("group", "ogroupRDN"));
+        $this->storagePoints = [get_ou("group", "ogroupRDN")];
 
         // Build filter
         if (session::global_is_set(get_class($this) . "_filter")) {
@@ -55,11 +52,11 @@ class ogroupManagement extends management
         $headpage->setFilter($filter);
 
         // Add copy&paste and snapshot handler.
-        if ($this->config->boolValueIsTrue("core", "copyPaste")) {
-            $this->cpHandler = new CopyPasteHandler($this->config);
+        if ($config->boolValueIsTrue("core", "copyPaste")) {
+            $this->cpHandler = new CopyPasteHandler($config);
         }
-        if ($this->config->get_cfg_value("core", "enableSnapshots") == "true") {
-            $this->snapHandler = new SnapshotHandler($this->config);
+        if ($config->get_cfg_value("core", "enableSnapshots") == "true") {
+            $this->snapHandler = new SnapshotHandler($config);
         }
         parent::__construct($config, $ui, "ogroups", $headpage);
 
@@ -74,10 +71,12 @@ class ogroupManagement extends management
     }
 
 
-    // Inject user actions
+    /**
+     * Inject user actions
+     */
     function detectPostActions()
     {
-        $action = management::detectPostActions();
+        $action = parent::detectPostActions();
 
         if (isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
         if (isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
@@ -87,7 +86,7 @@ class ogroupManagement extends management
 
     function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
-        $str = management::editEntry($action, $target);
+        $str = parent::editEntry($action, $target);
         if (preg_match("/^edit_/", $action)) {
             $tab = preg_replace("/^edit_/", "", $action);
             if (isset($this->tabObject->by_object[$tab])) {
@@ -100,7 +99,8 @@ class ogroupManagement extends management
     }
 
 
-    /*! \brief  Sends a message to a set of users using gosa-si events.
+    /**
+     * Sends a message to a set of users using gosa-si events.
      */
     function saveEventDialog()
     {
@@ -112,7 +112,8 @@ class ogroupManagement extends management
     }
 
 
-    /*! \brief  Sends a message to a set of users using gosa-si events.
+    /**
+     * Sends a message to a set of users using gosa-si events.
      */
     function sendMessage($action = "", $target = array(), $all = array())
     {
