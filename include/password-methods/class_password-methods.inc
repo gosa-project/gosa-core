@@ -45,9 +45,7 @@ class passwordMethod
         }
     }
 
-    function get_hash_name()
-    {
-    }
+    function get_hash_name() {}
 
 
     function is_locked($config, $dn = "")
@@ -286,9 +284,7 @@ class passwordMethod
 
     // Method to let password backends remove additional information besides
     // the userPassword attribute
-    function remove_from_parent()
-    {
-    }
+    function remove_from_parent() {}
 
 
     // Method to let passwords backends manage additional information
@@ -314,9 +310,7 @@ class passwordMethod
 
 
     // Save information to LDAP
-    function save($dn)
-    {
-    }
+    function save($dn) {}
 
 
     // Try to find out if it's our hash...
