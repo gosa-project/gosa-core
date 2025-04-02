@@ -919,7 +919,7 @@ class userManagement extends management
     }
 
 
-    static function filterLockImage($userPassword)
+    static function filterLockImage($userPassword = [])
     {
         $theme = getThemeName();
 
@@ -959,7 +959,7 @@ class userManagement extends management
     }
 
 
-    public static function filterLockLabel($userPassword = ''): string
+    public static function filterLockLabel($userPassword = []): string
     {
         $label = "";
         if (isset($userPassword[0]) && preg_match("/^\{[^\}]/", $userPassword[0])) {
