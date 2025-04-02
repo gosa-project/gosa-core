@@ -273,7 +273,7 @@ class LDAP
             ldap_set_option(self::$cid, LDAP_OPT_PROTOCOL_VERSION, 3);
             if (function_exists("ldap_set_rebind_proc") && $this->follow_referral) {
                 ldap_set_option(self::$cid, LDAP_OPT_REFERRALS, 1);
-                ldap_set_rebind_proc(self::$cid, array(&$this, "rebind"));
+                ldap_set_rebind_proc(self::$cid, array($this, "rebind"));
             }
             if (function_exists("ldap_start_tls") && $this->tls) {
                 ldap_start_tls(self::$cid);

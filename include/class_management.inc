@@ -488,7 +488,7 @@ abstract class management
                     true
                 );
                 $this->tabObject->set_acl_base($this->dn);
-                $this->tabObject->parent = &$this;
+                $this->tabObject->parent = $this;
                 $this->tabObject->delete();
 
                 // Remove the lock for the current object.
@@ -602,7 +602,7 @@ abstract class management
             if (!empty($entry) && $this->ui->allow_snapshot_create($entry, $this->aclCategory)) {
                 $this->dialogObject = new SnapShotDialog($config, $entry, $this);
                 $this->dialogObject->aclCategories = array($this->aclCategory);
-                $this->dialogObject->parent = &$this;
+                $this->dialogObject->parent = $this;
             } else {
                 msg_dialog::display(
                     _("Permission"),
@@ -715,7 +715,7 @@ abstract class management
                 $this->dialogObject->set_snapshot_bases($bases);
                 $this->dialogObject->display_all_removed_objects = true;
                 $this->dialogObject->display_restore_dialog = true;
-                $this->dialogObject->parent = &$this;
+                $this->dialogObject->parent = $this;
             } else {
                 msg_dialog::display(
                     _("Permission"),
@@ -732,7 +732,7 @@ abstract class management
                 $this->dialogObject = new SnapShotDialog($config, $entry, $this);
                 $this->dialogObject->set_snapshot_bases($bases);
                 $this->dialogObject->display_restore_dialog = true;
-                $this->dialogObject->parent = &$this;
+                $this->dialogObject->parent = $this;
             } else {
                 msg_dialog::display(
                     _("Permission"),
@@ -811,7 +811,7 @@ abstract class management
                 } else {
                     $this->tabObject = new $tabClass($config, $config->data['TABS'][$tabType], $this->dn, $aclCategory);
                     $this->tabObject->set_acl_base($this->headpage->getBase());
-                    $this->tabObject->parent = &$this;
+                    $this->tabObject->parent = $this;
                     @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dn, "Create new entry initiated!");
                 }
             } else {
@@ -905,7 +905,7 @@ abstract class management
                     $this->tabObject = new $tab($config, $config->data['TABS'][$tabType], $this->dn, $aclCategory);
                     DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $this->dn, "Edit entry initiated!");
                     $this->tabObject->set_acl_base($this->dn);
-                    $this->tabObject->parent = &$this;
+                    $this->tabObject->parent = $this;
                 }
             }
         } else {
