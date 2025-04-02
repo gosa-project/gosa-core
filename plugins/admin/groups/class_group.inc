@@ -27,8 +27,8 @@ class group extends plugin
     var $cn = "";
     var $description = "";
     var $gidNumber = "";
-    var $memberUid = array();
-    var $memberUid_used_by_some = array();
+    var $memberUid = [];
+    var $memberUid_used_by_some = [];
 
     // Helpers
     var $base = "";
@@ -40,10 +40,10 @@ class group extends plugin
     var $sambaDomainName = "DEFAULT";
     var $SID = "";
     var $ridBase = 0;
-    var $members = array();
-    var $users = array();
-    var $member = array();
-    var $allusers = array();
+    var $members = [];
+    var $users = [];
+    var $member = [];
+    var $allusers = [];
     var $saved_gidNumber = "";
     var $oldgroupType = "";
     var $orig_dn = "";
@@ -56,11 +56,11 @@ class group extends plugin
     var $dialog;
     var $rfc2307bis = FALSE;
     var $OnlyShowFirstEntries = 200;
-    var $dnMapping = array();
+    var $dnMapping = [];
     var $view_logged = FALSE;
     var $allowGroupsWithSameNameInOtherSubtrees = true;
     var $baseSelector;
-    var $dns = array();
+    var $dns = [];
 
     /* attribute list for save action */
     var $attributes = array("cn", "description", "gidNumber", "memberUid", "sambaGroupType", "sambaSID");
@@ -95,7 +95,7 @@ class group extends plugin
 
         /* Get member list */
         if (isset($this->attrs['memberUid'][0])) {
-            $tmp = array();
+            $tmp = [];
             for ($i = 0; $i < $this->attrs['memberUid']['count']; $i++) {
                 $tmp[$this->attrs['memberUid'][$i]] = $this->attrs['memberUid'][$i];
             }
@@ -317,7 +317,7 @@ class group extends plugin
         // Create base acls 
         $smarty->assign("base", $this->baseSelector->render());
 
-        $domains = array();
+        $domains = [];
         foreach ($config->data['SERVERS']['SAMBA'] as $name => $content) {
             $domains[$name] = $name;
         }
@@ -341,7 +341,7 @@ class group extends plugin
         // Members and users 
         if (!$this->multiple_support_active) {
             $this->memberList->setAcl($this->getacl("memberUid"));
-            $data = $lData = array();
+            $data = $lData = [];
             foreach ($this->members as $uid => $member) {
                 $data[$uid] = $member;
                 $givenName = $sn = _("Unknown");
@@ -363,7 +363,7 @@ class group extends plugin
             $this->commonList->setAcl($this->getacl("memberUid"));
             $this->partialList->setAcl($this->getacl("memberUid"));
 
-            $data = $lData = array();
+            $data = $lData = [];
             foreach ($this->memberUid as $uid => $member) {
                 $member = $this->members[$member];
                 $data[$uid] = $member;
@@ -380,7 +380,7 @@ class group extends plugin
             $this->commonList->update();
             $smarty->assign("commonList", $this->commonList->render());
 
-            $data = $lData = array();
+            $data = $lData = [];
             foreach ($this->memberUid_used_by_some as $uid => $member) {
                 $member = (isset($this->members[$member])) ? $this->members[$member] : NULL;
                 $data[$uid] = $member;
@@ -682,7 +682,7 @@ class group extends plugin
                 foreach ($entry['members'] as $m_id => $member) {
                     if ($m_id == "G:" . $this->dn || $m_id == "U:" . $this->dn) {
                         unset($acl->gosaAclEntry[$id]['members'][$m_id]);
-                        gosa_log("modify", "groups/acl", $attrs['dn'], array(), sprintf("Removed acl for %s on object %s.", $this->dn, $attrs['dn']));
+                        new log("modify", "groups/acl", $attrs['dn'], [], sprintf("Removed acl for %s on object %s.", $this->dn, $attrs['dn']));
                     }
                 }
             }
@@ -792,7 +792,7 @@ class group extends plugin
         parent::save();
 
         // Remove objectClass for samba/phone support 
-        $tmp = array();
+        $tmp = [];
         for ($i = 0; $i < count($this->attrs["objectClass"]); $i++) {
             if (
                 $this->attrs['objectClass'][$i] != 'sambaGroupMapping' &&
@@ -868,7 +868,7 @@ class group extends plugin
 
         /* Add member dn's for RFC2307bis Support */
         if ($this->rfc2307bis) {
-            $this->attrs['member'] = array();
+            $this->attrs['member'] = [];
             if (count($this->memberUid)) {
                 foreach ($this->attrs['memberUid'] as $uid) {
                     if (isset($this->dnMapping[$uid])) {
@@ -884,13 +884,13 @@ class group extends plugin
         // use 'add' for new entries. So do a check first... 
         $ldap->cat($this->dn, array('dn'));
         if ($ldap->fetch()) {
-            /* Modify needs array() to remove values :-( */
+            /* Modify needs [] to remove values :-( */
             if (!count($this->memberUid)) {
-                $this->attrs['memberUid'] = array();
+                $this->attrs['memberUid'] = [];
             }
             if (!$this->smbgroup) {
-                $this->attrs['sambaGroupType'] = array();
-                $this->attrs['sambaSID'] = array();
+                $this->attrs['sambaGroupType'] = [];
+                $this->attrs['sambaSID'] = [];
             }
             $mode = "modify";
         } else {
@@ -1069,7 +1069,7 @@ class group extends plugin
         $smarty->assign("cn",      set_post($this->cn));
         $smarty->assign("gidNumber", set_post($this->gidNumber));
         $str = $smarty->fetch(get_template_path("paste_generic.tpl", TRUE));
-        $ret = array();
+        $ret = [];
         $ret['string'] = $str;
         $ret['status'] = "";
         return $ret;
@@ -1097,7 +1097,7 @@ class group extends plugin
             "plShortName" => _("Generic"),
             "plDescription" => _("Generic group settings"),
             "plSelfModify"  => FALSE,
-            "plDepends"     => array(),
+            "plDepends"     => [],
             "plPriority"    => 0,
             "plSection"     => array("administration"),
             "plCategory"    => array("groups" => array("objectClass" => "posixGroup", "description" => _("Groups"))),
@@ -1221,8 +1221,8 @@ class group extends plugin
         parent::init_multiple_support($attrs, $all);
         $this->trustModeDialog->init_multiple_support($attrs, $all);
 
-        $this->memberUid = array();
-        $this->memberUid_used_by_some = array();
+        $this->memberUid = [];
+        $this->memberUid_used_by_some = [];
         if (isset($attrs['memberUid'])) {
             for ($i = 0; $i < $attrs['memberUid']['count']; $i++) {
                 $this->memberUid[$attrs['memberUid'][$i]] = $attrs['memberUid'][$i];
@@ -1317,7 +1317,7 @@ class group extends plugin
             $this->sambaSID = $this->getSambaSID();
         }
 
-        $this->memberUid = array();
+        $this->memberUid = [];
         if (isset($source['memberUid'])) {
             for ($i = 0; $i < $source['memberUid']['count']; $i++) {
                 $this->memberUid[] = $source['memberUid'][$i];
@@ -1341,7 +1341,7 @@ class group extends plugin
     // Set all members of edited groups in $members 
     function set_multi_edit_values($attrs)
     {
-        $users = array();
+        $users = [];
 
         /* Update groupMembership, keep optinal group */
         foreach ($attrs['memberUid_used_by_some'] as $uid) {
