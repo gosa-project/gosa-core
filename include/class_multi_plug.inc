@@ -158,9 +158,9 @@ class multi_plug
      */
     $this->o_tab    = new $class($config,$tab,"new",$acl_category, TRUE, TRUE);
     $this->o_tab->set_acl_base($acl_base);
-    $this->by_object = &$this->o_tab->by_object;
-    $this->by_name   = &$this->o_tab->by_name;
-    $this->current   = &$this->o_tab->current;
+    $this->by_object = $this->o_tab->by_object;
+    $this->by_name   = $this->o_tab->by_name;
+    $this->current   = $this->o_tab->current;
 
     /* Check if the specified tab object supports multiple edits 
      */

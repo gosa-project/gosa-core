@@ -91,6 +91,6 @@ class objectSelect extends management
         foreach ($act['targets'] as $dn) {
             $ret[] = $headpage->getEntry($dn);
         }
-        return ($ret);
+        return $ret;
     }
 }
