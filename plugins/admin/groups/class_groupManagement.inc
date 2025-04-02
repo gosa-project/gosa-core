@@ -36,9 +36,6 @@ class groupManagement extends management
 
     public function __construct($config, $ui)
     {
-        $this->config = $config;
-        $this->ui = $ui;
-
         $this->storagePoints = array(get_ou("core", "groupRDN"));
 
         // Build filter
@@ -56,11 +53,11 @@ class groupManagement extends management
         $headpage->setFilter($filter);
 
         // Add copy&paste and snapshot handler.
-        if ($this->config->boolValueIsTrue("core", "copyPaste")) {
-            $this->cpHandler = new CopyPasteHandler($this->config);
+        if ($config->boolValueIsTrue("core", "copyPaste")) {
+            $this->cpHandler = new CopyPasteHandler($config);
         }
-        if ($this->config->get_cfg_value("core", "enableSnapshots") == "true") {
-            $this->snapHandler = new SnapshotHandler($this->config);
+        if ($config->get_cfg_value("core", "enableSnapshots") == "true") {
+            $this->snapHandler = new SnapshotHandler($config);
         }
         parent::__construct($config, $ui, "groups", $headpage);
 

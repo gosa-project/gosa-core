@@ -175,6 +175,6 @@ class ogroupManagement extends management
                     break;
             }
         }
-        return ($result);
+        return $result;
     }
 }
