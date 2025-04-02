@@ -23,14 +23,14 @@
 class userSelect extends management
 {
     public $plHeadline = "User selection";
-    protected $skipFooter = TRUE;
-    protected $skipHeader = TRUE;
+    protected $skipFooter = true;
+    protected $skipHeader = true;
 
-    function __construct($config, $ui, array $dns = [])
+    public function __construct($config, $ui, array $dns = [])
     {
         $this->config = $config;
         $this->ui = $ui;
-        $this->storagePoints = array(get_ou("core", "userRDN"), get_ou("core", "groupRDN"));
+        $this->storagePoints = [get_ou("core", "userRDN"), get_ou("core", "groupRDN")];
 
         // Build filter
         if (session::global_is_set(get_class($this) . "_filter")) {

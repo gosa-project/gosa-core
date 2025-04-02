@@ -3,13 +3,11 @@
 class filterGroupLDAP
 {
 
-    static function query($base, $scope, $filter, $attributes, $category, $objectStorage = [])
+    public static function query($base, $scope, $filter, $attributes, $category, $objectStorage = []): array
     {
-        $result = array();
-        $menu = array();
-        $dn2index = array();
-        $config = session::global_get('config');
-        $ldap = $config->get_ldap_link(TRUE);
+        $result = [];
+        $menu = [];
+        $dn2index = [];
         $flag = ($scope == "sub") ? GL_SUBSEARCH : 0;
         $tmp = filterGroupLDAP::get_list($base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT);
 
@@ -43,7 +41,7 @@ class filterGroupLDAP
     }
 
 
-    static function get_list($base, $filter, $attributes, $category, $objectStorage, $flags = GL_SUBSEARCH)
+    public static function get_list($base, $filter, $attributes, $category, $objectStorage, $flags = GL_SUBSEARCH): array
     {
         $filter = "(|(|(objectClass=gotoMenuEntry)(objectClass=gotoSubmenuEntry))$filter)";
         return filterLDAP::get_list($base, $filter, $attributes, $category, $objectStorage, $flags);

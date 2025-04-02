@@ -23,21 +23,21 @@
 class singleUserSelect extends management
 {
 
-    protected $skipFooter = TRUE;
-    protected $skipHeader = TRUE;
+    protected $skipFooter = true;
+    protected $skipHeader = true;
 
     var $plHeadline = "User selection";
 
-    function __construct($config,$ui)
+    public function __construct($config, $ui)
     {
         $this->config = $config;
         $this->ui = $ui;
 
-        $this->storagePoints = array(get_ou("core", "userRDN"));
+        $this->storagePoints = [get_ou("core", "userRDN")];
 
         // Build filter
-        if (session::global_is_set(get_class($this)."_filter")){
-            $filter= session::global_get(get_class($this)."_filter");
+        if (session::global_is_set(get_class($this) . "_filter")) {
+            $filter = session::global_get(get_class($this) . "_filter");
         } else {
             $filter = new filter(get_template_path("singleUser-filter.xml", true, dirname(__FILE__)));
             $filter->setObjectStorage($this->storagePoints);
@@ -54,9 +54,7 @@ class singleUserSelect extends management
     function detectPostActions()
     {
         $action = management::detectPostActions();
-        if(isset($_POST['add_users_save']) || isset($_POST['ok-save'])) $action['action'] = "userSelected";
-        return($action);;
+        if (isset($_POST['add_users_save']) || isset($_POST['ok-save'])) $action['action'] = "userSelected";
+        return ($action);;
     }
-} 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
+}

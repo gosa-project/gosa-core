@@ -28,15 +28,15 @@ class userGroupSelect extends management
 
     public $plHeadline = "User and group selection";
 
-    function __construct($config,$ui)
+    function __construct($config, $ui)
     {
         $this->config = $config;
         $this->ui = $ui;
-        $this->storagePoints = array(get_ou("core", "userRDN"), get_ou("core", "groupRDN"));
+        $this->storagePoints = [get_ou("core", "userRDN"), get_ou("core", "groupRDN")];
 
         // Build filter
-        if (session::global_is_set(get_class($this)."_filter")){
-            $filter= session::global_get(get_class($this)."_filter");
+        if (session::global_is_set(get_class($this) . "_filter")) {
+            $filter = session::global_get(get_class($this) . "_filter");
         } else {
             $filter = new filter(get_template_path("selectUserGroup-filter.xml", true, dirname(__FILE__)));
             $filter->setObjectStorage($this->storagePoints);
@@ -49,17 +49,15 @@ class userGroupSelect extends management
         parent::__construct($config, $ui, "object", $headpage);
     }
 
-    function save()
+    function save(): array
     {
         $act = $this->detectPostActions();
         $headpage = $this->getHeadpage();
-        if(!isset($act['targets'])) return(array());
-        $ret = array();
-        foreach($act['targets'] as $dn){
+        if (!isset($act['targets'])) return ([]);
+        $ret = [];
+        foreach ($act['targets'] as $dn) {
             $ret[] = $headpage->getEntry($dn);
         }
-        return($ret);
+        return $ret;
     }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

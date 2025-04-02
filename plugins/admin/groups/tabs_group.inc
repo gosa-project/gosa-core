@@ -23,13 +23,13 @@
 class grouptabs extends tabs
 {
 
-	function __construct($config, $data, $dn, $cat = '', $hide_refs = FALSE, $hide_acls = FALSE)
+	public function __construct($config, $data, $dn, $cat = '', $hide_refs = FALSE, $hide_acls = FALSE)
 	{
 		parent::__construct($config, $data, $dn, $cat, $hide_refs, $hide_acls);
 		$this->addSpecialTabs();
 	}
 
-	function save_object($save_current = FALSE)
+	function save_object($save_current = FALSE): void
 	{
 		parent::save_object($save_current);
 
