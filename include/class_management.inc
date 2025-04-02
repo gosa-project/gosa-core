@@ -169,7 +169,7 @@ abstract class management
     /*! \brief  Execute this plugin
      *          Handle actions/events, locking, snapshots, dialogs, tabs,...
      */
-    public function execute(): string
+    public function execute()
     {
         global $config;
         // Ensure that html posts and gets are kept even if we see a 'Entry islocked' dialog.
@@ -371,7 +371,7 @@ abstract class management
         $disallowed = array();
         $this->dns = array();
 
-        @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel requested!");
+        DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel requested!");
 
         // Check permissons for each target
         $h = $this->getHeadpage();
@@ -1067,7 +1067,7 @@ abstract class management
      * Editing an object was caneled.
      * Close dialogs/tabs and remove locks.
      */
-    protected function cancelEdit(): void
+    protected function cancelEdit()
     {
         $this->logout = false;
         $this->remove_lock();
