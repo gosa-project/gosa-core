@@ -24,7 +24,7 @@ class passwordMethod
 {
     var $config = false;
     var $attrs = array();
-    var $display = FALSE;
+    var $display = false;
     var $hash = "";
     var $lockable = TRUE;
     var $dn = '';
@@ -50,7 +50,7 @@ class passwordMethod
 
     function is_locked($config, $dn = "")
     {
-        if (!$this->lockable) return FALSE;
+        if (!$this->lockable) return false;
 
         /* Get current password hash */
         $pwd = "";
@@ -78,7 +78,7 @@ class passwordMethod
      */
     function lock_account($config, $dn = "")
     {
-        if (!$this->lockable) return FALSE;
+        if (!$this->lockable) return false;
 
         /* Get current password hash */
         $userPassword = $sambaLMPassword = $sambaNTPassword = "";
@@ -124,6 +124,7 @@ class passwordMethod
                 if (isset($value) && is_string($value)) $hookAttrs[$name] = $value;
             }
             $pwdClass = new password($config, $dn);
+            $ret = [];
             $pwdClass->callHook($pwdClass, 'PRELOCK', $hookAttrs, $ret);
 
             // Update the ldap entry
@@ -139,13 +140,12 @@ class passwordMethod
 
             $ldap->modify($attrs);
             if ($ldap->success()) {
-
                 // Call the password post-lock hook, if defined.
                 $pwdClass->callHook($pwdClass, 'POSTLOCK', $hookAttrs, $ret);
             }
             return ($ldap->success());
         }
-        return (FALSE);
+        return false;
     }
 
 
@@ -154,7 +154,7 @@ class passwordMethod
      */
     function unlock_account($config, $dn = "")
     {
-        if (!$this->lockable) return FALSE;
+        if (!$this->lockable) return false;
 
         /* Get current password hash */
         $userPassword = $sambaLMPassword = $sambaNTPassword = "";
@@ -202,6 +202,7 @@ class passwordMethod
                 if (isset($value) && is_string($value)) $hookAttrs[$name] = $value;
             }
             $pwdClass = new password($config, $dn);
+            $ret = [];
             $pwdClass->callHook($pwdClass, 'PREUNLOCK', $hookAttrs, $ret);
 
             // Lock the account by modifying the password hash. 
@@ -227,7 +228,7 @@ class passwordMethod
             }
             return ($ldap->success());
         }
-        return (FALSE);
+        return (false);
     }
 
 
@@ -298,7 +299,7 @@ class passwordMethod
     // Return true if this password method provides a configuration dialog
     function is_configurable()
     {
-        return FALSE;
+        return false;
     }
 
 
