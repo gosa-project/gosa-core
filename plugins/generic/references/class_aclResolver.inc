@@ -2,9 +2,9 @@
 
 class aclResolver
 {
-    private $classMapping = array();
-    private $aclTypes = array();
-    private $affectingACLs = array();
+    private $classMapping = [];
+    private $aclTypes = [];
+    private $affectingACLs = [];
 
     private $renderedList = "";
 
@@ -21,7 +21,7 @@ class aclResolver
 
     public function __construct($config, $dn, $parent)
     {
-        $this->config = &$config;
+        $this->config = $config;
         $this->dn = $dn;
         $this->parent = $parent;
 
@@ -34,7 +34,7 @@ class aclResolver
         if (!session::is_set('aclConverter::classMapping')) {
             $tmp = session::global_get('plist');
             $plist = $tmp->info;
-            $map = array();
+            $map = [];
             foreach ($plist as $class => $plInfo) {
                 if (isset($plInfo['plCategory']) && is_array($plInfo['plCategory'])) {
                     foreach ($plInfo['plCategory'] as $category => $desc) {
@@ -121,6 +121,7 @@ class aclResolver
      */
     public function getReadableACL()
     {
+        global $config;
         if (isset($_POST['aclTarget'])) {
             $d = get_post('aclTarget');
             if (isset($this->userMap[$d])) {
@@ -142,9 +143,8 @@ class aclResolver
         if (empty($this->renderedList)) {
             $this->reload();
 
-            $ldap = $this->config->get_ldap_link();
-            $ldap->cd($this->config->current['BASE']);
-            $ui = get_userinfo();
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($config->current['BASE']);
             $theme = getThemeName();
 
             switch ($theme) {
@@ -214,7 +214,7 @@ class aclResolver
                         foreach ($acls as $acl) {
 
                             // Prepare entry icon (department or element?)
-                            $image = (isset($this->config->idepartments[$dn])) ? "images/select_department.png" : "images/lists/element.png";
+                            $image = (isset($config->idepartments[$dn])) ? "images/select_department.png" : "images/lists/element.png";
 
                             // The acl type (sub,psub,reset...)
                             $aclType = $this->aclTypes[$acl['type']];
@@ -232,7 +232,7 @@ class aclResolver
 
                             // Check membership
                             $gmem = $umem = "";
-                            $users = $groups = array();
+                            $users = $groups = [];
                             $found = false;
                             foreach ($acl['members'] as $type => $name) {
 
@@ -341,7 +341,7 @@ class aclResolver
                     foreach ($this->affectingACLs as $dn => $acls) {
 
                         // Prepare entry icon (department or element?)
-                        $image = (isset($this->config->idepartments[$dn])) ? "<i class='material-icons'>domain</i>" : "<i class='material-icons'>web_asset</i>";
+                        $image = (isset($config->idepartments[$dn])) ? "<i class='material-icons'>domain</i>" : "<i class='material-icons'>web_asset</i>";
 
                         $str .= "<ul class='collapsible acl-viewer'>
                                 <li>
@@ -369,7 +369,7 @@ class aclResolver
 
                             // Check membership
                             $gmem = $umem = "";
-                            $users = $groups = array();
+                            $users = $groups = [];
                             $found = false;
                             foreach ($acl['members'] as $type => $name) {
 
@@ -590,8 +590,9 @@ class aclResolver
 
     public function processAutocomplete()
     {
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        global $config;
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
         $ldap->search(
             "(&(objectClass=gosaAccount)(|(sn=*" . get_post('aclTarget') . "*)" .
                 "(uid=*" . get_post('aclTarget') . "*)(givenName=*" . get_post('aclTarget') . "*)))",

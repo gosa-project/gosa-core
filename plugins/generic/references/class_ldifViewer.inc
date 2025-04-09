@@ -6,7 +6,7 @@ class ldifViewer extends plugin
     private $success = FALSE;
     protected $error = "";
 
-    function __construct($config, $dn)
+    public function __construct($config, $dn)
     {
         $this->initTime = microtime(TRUE);
         stats::log(
@@ -18,9 +18,9 @@ class ldifViewer extends plugin
             $duration = (microtime(TRUE) - $this->initTime)
         );
 
-        $this->config = &$config;
+        $this->config = $config;
         $this->dn = $dn;
-        $ldap = $this->config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $this->ldif = $ldap->generateLdif(LDAP::fix($this->dn), '(objectClass=*)', 'base');
         if (!$ldap->success()) {
             msg_dialog::display(
@@ -33,12 +33,12 @@ class ldifViewer extends plugin
         $this->error = $ldap->get_error();
     }
 
-    function execute()
+    public function execute()
     {
         $smarty = get_smarty();
         $smarty->assign('success', $this->success);
         $smarty->assign('error', $this->error);
         $smarty->assign('ldif', set_post($this->ldif));
-        return ($smarty->fetch(get_template_path('ldifViewer.tpl')));
+        return $smarty->fetch(get_template_path('ldifViewer.tpl'));
     }
 }

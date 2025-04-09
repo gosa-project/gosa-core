@@ -23,24 +23,24 @@
 class reference extends plugin
 {
     var $attributes = array('uid', 'modifyTimestamp');
-    var $aclResolver = NULL;
+    var $aclResolver = null;
 
-    var $referenceFilters = array();
+    var $referenceFilters = [];
     var $objectList = "";
     var $modifyTimestamp = "";
     var $cn = '';
 
     var $lists = [];
 
-    function __construct(&$config, $dn = NULL, $parent = NULL)
+    function __construct($config, $dn = null, $parent = null)
     {
         // Init the plugin
         parent::__construct($config, $dn, $parent);
 
         // Try to read the 'modifyTimestamp' - this has to be done separately.
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
-        $ldap->cat($this->dn, array('modifyTimestamp'));
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
+        $ldap->cat($this->dn, ['modifyTimestamp']);
         if ($ldap->count()) {
             $attrs = $ldap->fetch();
             if (isset($attrs['modifyTimestamp'][0])) {
@@ -49,10 +49,10 @@ class reference extends plugin
         }
 
         // Initialize the ACL-resolver
-        $this->aclResolver = new aclResolver($this->config, $this->dn, $this);
+        $this->aclResolver = new aclResolver($config, $this->dn, $this);
 
         // References we may have to other objects.
-        $this->referenceFilters = array();
+        $this->referenceFilters = [];
 
         // Check for group membership
         $this->referenceFilters[] = array(
@@ -109,9 +109,10 @@ class reference extends plugin
 
     function refreshContent()
     {
+        global $config;
         // Go through filters and detect possible references
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
         $str = "";
         foreach ($this->referenceFilters as $filter) {
             $ldap->search($filter['filter'], array_merge(array_keys($filter['attrs']), ['dn']));
@@ -135,7 +136,7 @@ class reference extends plugin
                 $data = [];
                 $displayData = [];
                 while ($attrs = $ldap->fetch()) {
-                    $entry = array();
+                    $entry = [];
                     foreach ($filter['attrs'] as $name => $desc) {
                         $$name = "";
                         if (isset($attrs[$name][0])) $$name = $attrs[$name][0];
@@ -212,6 +213,7 @@ class reference extends plugin
 
     function execute()
     {
+        global $config;
         // Mark plugin as viewed
         parent::execute();
 
@@ -240,11 +242,11 @@ class reference extends plugin
 
         // Show ldif viewer
         if (isset($_POST['viewLdif'])) {
-            $this->dialog = new ldifViewer($this->config, $this->dn);
+            $this->dialog = new ldifViewer($config, $this->dn);
         }
-        if (isset($_POST['cancelLdifViewer'])) $this->dialog = NULL;
+        if (isset($_POST['cancelLdifViewer'])) $this->dialog = null;
         if ($this->dialog instanceof ldifViewer) {
-            return ($this->dialog->execute());
+            return $this->dialog->execute();
         }
 
         $smarty = get_smarty();
@@ -266,6 +268,6 @@ class reference extends plugin
 
         session::set("generic::aclResolver", $this->aclResolver);
         session::set('autocomplete', "generic::aclResolver");
-        return ($smarty->fetch(get_template_path("contents.tpl", TRUE, dirname(__FILE__))));
+        return $smarty->fetch(get_template_path("contents.tpl", TRUE, dirname(__FILE__)));
     }
 }
