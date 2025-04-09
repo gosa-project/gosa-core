@@ -27,23 +27,23 @@ class userinfo
     var $username;
     var $cn;
     var $uid;
-    var $restrictions = array();
+    var $restrictions = [];
     var $gidNumber = -1;
     var $language = "";
     var $gosaUnitTag = "";
-    var $subtreeACL = array();
-    var $ACL = array();
-    var $ocMapping = array();
-    var $groups = array();
-    var $result_cache = array();
+    var $subtreeACL = [];
+    var $ACL = [];
+    var $ocMapping = [];
+    var $groups = [];
+    var $result_cache = [];
     var $ignoreACL = NULL;
-    var $ACLperPath = array();
-    var $ACLperPath_usesFilter = array();
+    var $ACLperPath = [];
+    var $ACLperPath_usesFilter = [];
     var $allACLs = [];
 
     /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */
-    function __construct($userdn)
+    public function __construct($userdn)
     {
         global $config;
         $ldap = $config->get_ldap_link();
@@ -85,17 +85,17 @@ class userinfo
     // Initialize ACL_CACHE
     public function reset_acl_cache()
     {
-        session::global_set('ACL_CACHE', array());
+        session::global_set('ACL_CACHE', []);
     }
 
-    function loadACL()
+    public function loadACL()
     {
         global $config;
 
-        $this->ACL = array();
-        $this->allACLs = array();
-        $this->groups = array();
-        $this->result_cache = array();
+        $this->ACL = [];
+        $this->allACLs = [];
+        $this->groups = [];
+        $this->result_cache = [];
         $this->reset_acl_cache();
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
@@ -108,22 +108,21 @@ class userinfo
 
         /* Crawl through ACLs and move relevant to the tree */
         $ldap->search("(objectClass=gosaACL)", array('dn', 'gosaAclEntry'));
-        $aclp = array();
-        $aclc = array();
+        $aclp = [];
+        $aclc = [];
         while ($attrs = $ldap->fetch()) {
 
             /* Insert links in ACL array */
             $aclp[$attrs['dn']] = substr_count($attrs['dn'], ',');
-            $aclc[$attrs['dn']] = array();
-            $ol = array();
+            $aclc[$attrs['dn']] = [];
+            $ol = [];
             for ($i = 0; $i < $attrs['gosaAclEntry']['count']; $i++) {
                 $ol = array_merge($ol, acl::explodeAcl($attrs['gosaAclEntry'][$i]));
             }
             $aclc[$attrs['dn']] = $ol;
         }
 
-        /* Resolve roles here. 
-     */
+        // Resolve roles here. 
         foreach ($aclc as $dn => $data) {
             foreach ($data as $prio => $aclc_value) {
                 if ($aclc_value['type'] == "role") {
@@ -168,7 +167,7 @@ class userinfo
                     foreach ($type['members'] as $grp => $grpdsc) {
 
                         /* Some group inside the members that is relevant for us? */
-                        if (in_array_ics(@LDAP::convert(preg_replace('/^G:/', '', $grp)), $this->groups)) {
+                        if (in_array_ics(LDAP::convert(preg_replace('/^G:/', '', $grp)), $this->groups)) {
                             $interresting = TRUE;
                         }
 
@@ -187,7 +186,7 @@ class userinfo
 
                 if ($interresting) {
                     if (!isset($this->ACL[$dn])) {
-                        $this->ACL[$dn] = array();
+                        $this->ACL[$dn] = [];
                     }
                     $this->ACL[$dn][$idx] = $type;
                 }
@@ -208,7 +207,7 @@ class userinfo
       For object located in 'ou=dep1,ou=base' we have to both ACLs,
        for objects in 'ou=base' we only have to apply on ACL.
      */
-        $without_self_acl = $all_acl = array();
+        $without_self_acl = $all_acl = [];
         foreach ($this->ACL as $dn => $acl) {
             $sdn = $dn;
             $first = TRUE; // Run at least once 
@@ -253,13 +252,13 @@ class userinfo
     // Returns an array containing all target objects we've permssions on.
     function get_acl_target_objects()
     {
-        return (array_keys($this->ACLperPath));
+        return array_keys($this->ACLperPath);
     }
 
 
     function get_category_permissions($dn, $category, $any_acl = FALSE)
     {
-        return ($this->get_permissions($dn, $category . '/0', ""));
+        return $this->get_permissions($dn, $category . '/0', "");
     }
 
 
@@ -272,7 +271,7 @@ class userinfo
      */
     function is_copyable($dn, $object, $class)
     {
-        return (preg_match("/r/", $this->has_complete_category_acls($dn, $object)));
+        return preg_match("/r/", $this->has_complete_category_acls($dn, $object));
     }
 
 
@@ -298,7 +297,7 @@ class userinfo
   */
     function is_pasteable($dn, $object)
     {
-        return (preg_match("/w/", $this->has_complete_category_acls($dn, $object)));
+        return preg_match("/w/", $this->has_complete_category_acls($dn, $object));
     }
 
 
@@ -335,7 +334,7 @@ class userinfo
         foreach ($object as $category) {
             $r &= preg_match("/r/", $this->has_complete_category_acls($dn, $category));
         }
-        return ($r);
+        return $r;
     }
 
 
@@ -361,7 +360,7 @@ class userinfo
             if ($skip_write) {
                 $ret = str_replace(array('w', 'c', 'd', 'm'), '', $ret);
             }
-            return ($ret);
+            return $ret;
         }
 
         /* Check for correct category and class values... */
@@ -375,16 +374,16 @@ class userinfo
 
             if (!isset($this->ocMapping[$aclCategory])) {
                 trigger_error("Invalid ACL category '" . $aclCategory . "'! ({$object})");
-                return ("");
+                return "";
             } elseif (isset($aclClass) && !in_array_strict($aclClass, $this->ocMapping[$aclCategory])) {
                 trigger_error("Invalid ACL class '" . $aclClass . "'! ({$object})");
-                return ("");
+                return "";
             }
             if (isset($aclClass) && $aclClass != '0' && class_available($aclClass)) {
                 $plInfo = call_user_func(array($aclClass, 'plInfo'));
                 if (!empty($attribute) && !isset($plInfo['plProvidedAcls'][$attribute])) {
                     trigger_error("Invalid ACL attribute '" . $attribute . "'! ({$object})");
-                    return ("");
+                    return "";
                 }
             }
         }
@@ -398,7 +397,7 @@ class userinfo
             $ACL = $this->ACLperPath[$adn];
         } else {
             $ACL_CACHE["$dn+$object+$attribute"] = "";
-            return ("");
+            return "";
         }
 
         /**
@@ -416,14 +415,14 @@ class userinfo
                 if ($skip_write) {
                     $ret = str_replace('w', '', $ret);
                 }
-                return ($ret);
+                return $ret;
             }
         }
 
         // Get ldap object, for later filter checks 
         $ldap = $config->get_ldap_link();
 
-        $acl = array("r" => "", "w" => "", "c" => "", "d" => "", "m" => "", "a" => "");
+        $acl = ["r" => "", "w" => "", "c" => "", "d" => "", "m" => "", "a" => ""];
 
         /* Build dn array */
         $path = explode(',', $dn);
@@ -476,9 +475,8 @@ class userinfo
                         continue;
                     }
 
-                    /* If attribute is "", we want to know, if we've *any* permissions here... 
-              Merge global class ACLs [0] with attributes specific ACLs [attribute].
-           */
+                    // If attribute is "", we want to know, if we've *any* permissions here... 
+                    // Merge global class ACLs [0] with attributes specific ACLs [attribute].
                     if ($attribute == "" && isset($subacl['acl'][$object])) {
                         foreach ($subacl['acl'][$object] as $attr => $dummy) {
                             $acl = $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$object][$attr]);
@@ -510,7 +508,7 @@ class userinfo
                         continue;
                     }
 
-                    // Category ACLs    (e.g. $object = "user/0")
+                    // Category ACLs (e.g. $object = "user/0")
                     if (strstr($object, "/0")) {
                         $ocs = preg_replace("/\/0$/", "", $object);
                         if (isset($this->ocMapping[$ocs])) {
@@ -549,14 +547,13 @@ class userinfo
             }
         }
 
-        /* If the requested ACL is for a container object, then alter 
-        ACLs by applying cleanACL a last time.
-     */
+        // If the requested ACL is for a container object, then alter 
+        // ACLs by applying cleanACL a last time.
         if (isset($config->idepartments[$dn])) {
             $acl = $this->cleanACL($acl);
         }
 
-        /* Assemble string */
+        // Assemble string
         $ret = "";
         foreach ($acl as $key => $value) {
             if ($value !== "") {
@@ -566,6 +563,7 @@ class userinfo
 
         $ACL_CACHE["$dn+$object+$attribute"] = $ret;
         $ACL_CACHE["$orig_dn+$object+$attribute"] = $ret;
+        session::global_set('ACL_CACHE', $ACL_CACHE);
 
         /* Remove write if needed */
         if ($skip_write) {
@@ -575,8 +573,10 @@ class userinfo
     }
 
 
-    /* Extract all departments that are accessible (direct or 'on the way' to an
-     accessible department) */
+    /**
+     * Extract all departments that are accessible (direct or 'on the way' to an
+     * accessible department)
+     */
     function get_module_departments($module, $skip_self_acls = FALSE)
     {
         global $config;
@@ -588,7 +588,7 @@ class userinfo
             return (array_keys($config->idepartments));
         }
 
-        /* Use cached results if possilbe */
+        // Use cached results if possilbe
         $ACL_CACHE = session::global_get('ACL_CACHE');
 
         if (!is_array($module)) {
@@ -666,9 +666,8 @@ class userinfo
 
         foreach (str_split($newACL) as $char) {
 
-            /* Skip "self" ACLs without combination of rwcdm, they have no effect.
-         -self flag without read/write/create/...
-       */
+            // Skip "self" ACLs without combination of rwcdm, they have no effect.
+            // -self flag without read/write/create/...
             if (empty($char)) continue;
 
             /* Skip permanent and subtree entries */
@@ -683,26 +682,26 @@ class userinfo
             }
         }
 
-        return ($acl);
+        return $acl;
     }
 
 
-    function cleanACL($acl, $reset = FALSE)
+    public function cleanACL($acl, $reset = FALSE)
     {
         foreach ($acl as $key => $value) {
 
-            /* Continue, if value is empty or permanent */
+            // Continue, if value is empty or permanent
             if ($value == "" || $value == "p") {
                 continue;
             }
 
-            /* Reset removes everything but 'p' */
+            // Reset removes everything but 'p'
             if ($reset && $value != 'p') {
                 $acl[$key] = "";
                 continue;
             }
 
-            /* Decrease tree level */
+            // Decrease tree level
             if (is_int($value)) {
                 if ($value) {
                     $acl[$key]--;
@@ -712,18 +711,19 @@ class userinfo
             }
         }
 
-        return ($acl);
+        return $acl;
     }
 
 
-    /* #FIXME This could be logical wrong or could be optimized in the future
-     Return combined acls for a given category. 
-     All acls will be combined like boolean AND 
-      As example ('rwcdm' + 'rcd' + 'wrm'= 'r') 
-    
-     Results will be cached in $this->result_cache.
-      $this->result_cache will be resetted if load_acls is called.
-  */
+    /**
+     * #FIXME This could be logical wrong or could be optimized in the future
+     * Return combined acls for a given category. 
+     * All acls will be combined like boolean AND 
+     * As example ('rwcdm' + 'rcd' + 'wrm'= 'r') 
+     *
+     * Results will be cached in $this->result_cache.
+     * $this->result_cache will be resetted if load_acls is called.
+     */
     function has_complete_category_acls($dn, $category)
     {
         global $config;
@@ -759,7 +759,7 @@ class userinfo
                 $acl = $this->result_cache['has_complete_category_acls'][$dn][$category];
             }
         }
-        return ($acl);
+        return $acl;
     }
 
 
