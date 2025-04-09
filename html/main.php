@@ -175,12 +175,13 @@ if (!session::global_is_set('plist')) {
 
     $plist = new pluglist($ui);
     session::global_set('plist', $plist);
-
-    /* Load ocMapping into userinfo */
-    $tmp = new acl($config, null, $ui->dn);
-    $ui->ocMapping = $tmp->ocMapping;
-    session::global_set('ui', $ui);
 }
+
+/* Load ocMapping into userinfo */
+$tmp = new acl($config, null, $ui->dn);
+$ui->ocMapping = $tmp->ocMapping;
+session::global_set('ui', $ui);
+
 $plist = session::global_get('plist');
 
 /* Check for register globals */
