@@ -653,15 +653,22 @@ class userinfo
     }
 
 
-    function mergeACL($acl, $type, $newACL)
+    /**
+     * Function to merge ACL
+     * 
+     * @param mixed $acl
+     * @param mixed $type
+     * @param mixed $newACL
+     */
+    public function mergeACL($acl, $type, $newACL)
     {
-        $at = array("psub" => "p", "sub" => "s", "one" => "1");
+        $at = ["psub" => "p", "sub" => "s", "one" => "1"];
 
         if (strpos($newACL, 'w') !== FALSE && strpos($newACL, 'r') === FALSE) {
             $newACL .= "r";
         }
 
-        /* Ignore invalid characters */
+        // Ignore invalid characters
         $newACL = preg_replace('/[^rwcdm]/', '', $newACL);
 
         foreach (str_split($newACL) as $char) {
@@ -675,7 +682,7 @@ class userinfo
                 continue;
             }
 
-            if ($type == "base" && $acl[$char] != 1) {
+            if ($type === "base" && $acl[$char] != 1) {
                 $acl[$char] = 0;
             } else {
                 $acl[$char] = $at[$type];

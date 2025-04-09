@@ -260,7 +260,6 @@ class reference extends plugin
         $smarty->assign('someACL',      $ui->get_category_permissions($this->dn, $category));
 
         // Convert the modifyTimestamp to a human readable value
-        $tz = timezone::get_default_timezone();
         $smarty->assign('modifyTimestamp', set_post(date('d.m.Y H:i:s', strtotime($this->modifyTimestamp))));
 
         $smarty->assign('objectList', $this->objectList);
