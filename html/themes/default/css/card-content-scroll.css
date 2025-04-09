@@ -51,6 +51,9 @@
     max-height: calc(100vh - 350px);
 }
 
+.plus-actions.relationshipmanager .table-wrapper.card-content-scroll {
+    max-height: calc(100vh - 425px);
+}
 
 /*
  * ACL - Card content - Access rights

@@ -1826,7 +1826,7 @@ class listing
         return $result;
     }
 
-    public function countValidEntries($action)
+    public function countValidEntries($action): int
     {
         $count = 0;
         foreach ($action['action'] as $act) {
