@@ -732,7 +732,7 @@ abstract class plugin
                       </div>";
                 break;
         }
-        return ($display);
+        return $display;
     }
 
 

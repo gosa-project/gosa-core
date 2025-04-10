@@ -162,7 +162,7 @@ abstract class management
         if (!is_array($ret)) {
             $ret = array($ret);
         }
-        return ($ret);
+        return $ret;
     }
 
 

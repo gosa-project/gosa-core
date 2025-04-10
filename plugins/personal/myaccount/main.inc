@@ -23,78 +23,81 @@
 
 /* Remove locks created by this plugin
 */
-$lock_msg="";
-if ($remove_lock ||
-        isset($_POST['edit_cancel']) ||
-        isset($_POST['password_cancel'])){
+$lock_msg = "";
+if (
+    $remove_lock ||
+    isset($_POST['edit_cancel']) ||
+    isset($_POST['password_cancel'])
+) {
     del_lock($ui->dn);
 }
 
 /* Reset requested? */
-if (isset($_POST['edit_cancel']) || $cleanup || isset($_POST['password_changed'])){
-    session::un_set ('edit');
-    session::un_set ('MyAccountTabs');
+if (isset($_POST['edit_cancel']) || $cleanup || isset($_POST['password_changed'])) {
+    session::un_set('edit');
+    session::un_set('MyAccountTabs');
 }
 
 /* Remove this plugin from session
  */
-if (! $cleanup ){
+if (! $cleanup) {
 
     /* Create MyAccountTabs object on demand */
-    if (!session::is_set('MyAccountTabs') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+    if (!session::is_set('MyAccountTabs') || (isset($_GET['reset']) && $_GET['reset'] == 1)) {
 
         // Check if the base plugin is available - it is mostly responsible for object creation and removal.
         $first  = $config->data['TABS']['MYACCOUNTTABS'][0];
-        if(!class_available($first['CLASS'])){
-            msg_dialog::display(_("Internal error"),
-                    sprintf(_("Cannot instantiate tabbed-plug-in, the base plugin (%s) is not available!"), $first['CLASS']),
-                    ERROR_DIALOG);
-        }else{
+        if (!class_available($first['CLASS'])) {
+            msg_dialog::display(
+                _("Internal error"),
+                sprintf(_("Cannot instantiate tabbed-plug-in, the base plugin (%s) is not available!"), $first['CLASS']),
+                ERROR_DIALOG
+            );
+        } else {
 
-            $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true);
+            $MyAccountTabs = new MyAccountTabs($config, $config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true);
             $MyAccountTabs->setReadOnly(TRUE);
             $MyAccountTabs->enableAutoSaveObject(FALSE);
-            session::set('MyAccountTabs',$MyAccountTabs);
+            session::set('MyAccountTabs', $MyAccountTabs);
         }
     }
 
-    if(session::is_set('MyAccountTabs')){
+    if (session::is_set('MyAccountTabs')) {
         $MyAccountTabs = session::get('MyAccountTabs');
 
 
         $call_save_object = !$MyAccountTabs->read_only;
 
         /* Enter edit mode? */
-        if ((isset($_POST['edit'])) && (!session::is_set('edit'))){
+        if ((isset($_POST['edit'])) && (!session::is_set('edit'))) {
 
             /* Check locking */
-            if (($username= get_lock($ui->dn)) != ""){
-                session::set('back_plugin',$plug);
-                session::set('LOCK_VARS_TO_USE',array("/^edit$/","/^plug$/"));
-                $lock_msg =  gen_locked_message ($username, array($ui->dn));
-
-            }else{
+            if (($username = get_lock($ui->dn)) != "") {
+                session::set('back_plugin', $plug);
+                session::set('LOCK_VARS_TO_USE', array("/^edit$/", "/^plug$/"));
+                $lock_msg =  gen_locked_message($username, array($ui->dn));
+            } else {
 
                 /* Lock the current entry */
-                add_lock ($ui->dn, $ui->dn);
-                session::set('edit',TRUE);
+                add_lock($ui->dn, $ui->dn);
+                session::set('edit', TRUE);
                 $MyAccountTabs->setReadOnly(FALSE);
             }
         }
 
-        $info= "";
-        if (isset($_POST['edit_finish'])){
-            $message= $MyAccountTabs->check ();
-            if (count ($message) == 0){
-                $MyAccountTabs->save ();
-                del_lock ($ui->dn);
-                session::un_set ('edit');
+        $info = "";
+        if (isset($_POST['edit_finish'])) {
+            $message = $MyAccountTabs->check();
+            if (count($message) == 0) {
+                $MyAccountTabs->save();
+                del_lock($ui->dn);
+                session::un_set('edit');
                 $MyAccountTabs->setReadOnly(TRUE);
-                if(isset($MyAccountTabs->by_object['user']) && $MyAccountTabs->by_object['user']->password_change_needed()){
+                if (isset($MyAccountTabs->by_object['user']) && $MyAccountTabs->by_object['user']->password_change_needed()) {
                     $MyAccountTabs->password_change_needed = TRUE;
-                }else{
-                    session::un_set ('MyAccountTabs');
-                    $MyAccountTabs= new MyAccountTabs($config,$config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true);
+                } else {
+                    session::un_set('MyAccountTabs');
+                    $MyAccountTabs = new MyAccountTabs($config, $config->data['TABS']['MYACCOUNTTABS'], $ui->dn, "users", true, true);
                     $MyAccountTabs->setReadOnly(TRUE);
                 }
             } else {
@@ -104,81 +107,77 @@ if (! $cleanup ){
 
         // Build up password class to make password-hash changes
         //  effective, by setting a new password.
-        if($MyAccountTabs->password_change_needed){
-            if(!isset($MyAccountTabs->passwordClass)){
+        if ($MyAccountTabs->password_change_needed) {
+            if (!isset($MyAccountTabs->passwordClass)) {
                 $user = $MyAccountTabs->by_object['user'];
-                $MyAccountTabs->passwordClass= new password($config, $ui->dn);
+                $MyAccountTabs->passwordClass = new password($config, $ui->dn);
                 $MyAccountTabs->passwordClass->forceHash($user->pw_storage);
             }
-            $display.= $MyAccountTabs->passwordClass->execute();
+            $display .= $MyAccountTabs->passwordClass->execute();
         }
 
         /* Execute formular */
-        if(!$MyAccountTabs->password_change_needed){
+        if (!$MyAccountTabs->password_change_needed) {
             pathNavigator::registerPlugin(_("My account"));
-            if($lock_msg){
+            if ($lock_msg) {
                 $display = $lock_msg;
-            }else{
+            } else {
 
                 // Reenabled auto saveing of POST values.
-                if($call_save_object){
+                if ($call_save_object) {
                     $MyAccountTabs->enableAutoSaveObject(TRUE);
                 }
 
-                $display.= $MyAccountTabs->execute ();
+                $display .= $MyAccountTabs->execute();
             }
         }
 
         /* Store changes  in session */
-        if (session::is_set('edit')){
-            session::set('MyAccountTabs',$MyAccountTabs);
+        if (session::is_set('edit')) {
+            session::set('MyAccountTabs', $MyAccountTabs);
         }
 
         $theme = getThemeName();
 
         /* Show page footer depending on the mode */
-        if (!$MyAccountTabs->is_modal_dialog() && empty($lock_msg) && !$MyAccountTabs->password_change_needed){
+        if (!$MyAccountTabs->is_modal_dialog() && empty($lock_msg) && !$MyAccountTabs->password_change_needed) {
 
             switch ($theme) {
                 case 'classic':
-                    $display.= "<div class='plugin-actions'>";
+                    $display .= "<div class='plugin-actions'>";
 
                     /* Are we in edit mode? */
-                    if (session::is_set('edit')){
-                        $display.= "<button class='button' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-                        $display.= "<button class='button' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
+                    if (session::is_set('edit')) {
+                        $display .= "<button class='button' type='submit' name='edit_finish'>" . msgPool::okButton() . "</button>\n";
+                        $display .= "<button class='button' type='submit' name='edit_cancel'>" . msgPool::cancelButton() . "</button>\n";
                     } else {
-                        if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
-                            $display.= "<button class='button' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                        if (preg_match("/r/", $ui->get_category_permissions($ui->dn, "users"))) {
+                            $display .= "<button class='button' type='submit' name='edit'>" . msgPool::editButton() . "</button>\n";
                         }
-                        $display.= "<input type='hidden' name='ignore'>\n";
-
+                        $display .= "<input type='hidden' name='ignore'>\n";
                     }
-                    $display.= "</div>\n";
+                    $display .= "</div>\n";
                     break;
-                
+
                 default:
-                    $display.=" <div class='card-action'>";
+                    $display .= " <div class='card-action'>";
 
                     /* Are we in edit mode? */
-                    if (session::is_set('edit')){
-                        $display.= "<button class='btn-small primary' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-                        $display.= "<button class='btn-small primary' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
+                    if (session::is_set('edit')) {
+                        $display .= "<button class='btn-small primary' type='submit' name='edit_finish'>" . msgPool::okButton() . "</button>\n";
+                        $display .= "<button class='btn-small primary' type='submit' name='edit_cancel'>" . msgPool::cancelButton() . "</button>\n";
                     } else {
-                        if (preg_match("/^[r]$/", $ui->get_category_permissions($ui->dn,"users"))) {
-                            break;  
+                        if (preg_match("/^[r]$/", $ui->get_category_permissions($ui->dn, "users"))) {
+                            break;
                         }
-                        if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
-                            $display.= "<button class='btn-small primary' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
+                        if (preg_match("/r/", $ui->get_category_permissions($ui->dn, "users"))) {
+                            $display .= "<button class='btn-small primary' type='submit' name='edit'>" . msgPool::editButton() . "</button>\n";
                         }
-                        $display.= "<input type='hidden' name='ignore'>\n";
+                        $display .= "<input type='hidden' name='ignore'>\n";
                     }
-                    $display.=" </div>";
+                    $display .= " </div>";
                     break;
             }
         }
     }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
