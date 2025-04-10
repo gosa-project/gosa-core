@@ -85,7 +85,6 @@ if (! $cleanup) {
             }
         }
 
-        $info = "";
         if (isset($_POST['edit_finish'])) {
             $message = $MyAccountTabs->check();
             if (count($message) == 0) {
