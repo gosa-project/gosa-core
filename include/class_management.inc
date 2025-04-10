@@ -263,18 +263,18 @@ abstract class management
 
     public function getHeadpage()
     {
-        return ($this->headpage);
+        return $this->headpage;
     }
 
     public function getFilter()
     {
-        return ($this->filter);
+        return $this->filter;
     }
 
     /*! \brief  Generates the plugin header which is displayed whenever a tab object is
      *           opened.
      */
-    protected function getHeader()
+    protected function getHeader(): string
     {
         // We do not display any headers right now.
         if (1 || $this->skipHeader) {
@@ -291,20 +291,20 @@ abstract class management
 
         // Do not display tab footer for non tab objects
         if (!($this->tabObject instanceof tabs || $this->tabObject instanceof multi_plug)) {
-            return ("");
+            return "";
         }
 
         // Check if there is a dialog opened - We don't need any buttons in this case.
         if ($this->tabObject->by_object[$this->tabObject->current]) {
             $current = $this->tabObject->by_object[$this->tabObject->current];
             if (isset($current->dialog) && (is_object($current->dialog) || $current->dialog)) {
-                return ("");
+                return "";
             }
         }
 
         // Skip footer if requested;
         if ($this->skipFooter) {
-            return ("");
+            return "";
         }
 
         if ($theme == "default") {
@@ -327,7 +327,7 @@ abstract class management
                             </div>";
                     break;
             }
-            return ($str);
+            return $str;
         } else {
 
             // Display ok, (apply) and cancel buttons
@@ -353,7 +353,7 @@ abstract class management
                     break;
             }
         }
-        return ($str);
+        return $str;
     }
 
     /*! \brief  Initiates the removal for the given entries
