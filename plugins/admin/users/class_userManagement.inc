@@ -841,7 +841,7 @@ class userManagement extends management
                         }
                     } elseif ($type == "lock" && !$method->is_locked($config, $val['dn'])) {
                         $success = $method->lock_account($config, $val['dn']);
-                    } elseif ($type == "unlock" && $method->is_locked($this->config, $val['dn'])) {
+                    } elseif ($type == "unlock" && $method->is_locked($config, $val['dn'])) {
                         $success = $method->unlock_account($config, $val['dn']);
                     }
 
