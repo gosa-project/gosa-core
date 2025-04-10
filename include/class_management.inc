@@ -274,11 +274,11 @@ abstract class management
     /*! \brief  Generates the plugin header which is displayed whenever a tab object is
      *           opened.
      */
-    protected function getHeader(): string
+    protected function getHeader()
     {
         // We do not display any headers right now.
         if (1 || $this->skipHeader) {
-            return ("");
+            return "";
         }
     }
 
