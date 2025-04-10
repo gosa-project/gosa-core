@@ -465,7 +465,7 @@ class userManagement extends management
     {
         $str = parent::saveChanges();
 
-        if (!empty($str)) return ($str);
+        if (!empty($str)) return $str;
 
         if ($this->last_tabObject instanceof multi_plug) {
             foreach ($this->last_tabObject->a_handles as $user) {
@@ -474,13 +474,13 @@ class userManagement extends management
                     $this->pwd_change_queue[] = $user->dn;
                 }
             }
-            return ($this->handlePasswordQueue());
+            return $this->handlePasswordQueue();
         }
 
         if (isset($this->last_tabObject->by_object['user']) && $this->last_tabObject->by_object['user']->password_change_needed()) {
             $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
             $this->pwd_change_queue[] = $this->last_tabObject->dn;
-            return ($this->handlePasswordQueue());
+            return $this->handlePasswordQueue();
         }
     }
 
@@ -496,7 +496,7 @@ class userManagement extends management
         ) {
             $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
             $this->pwd_change_queue[] = $this->last_tabObject->dn;
-            return ($this->handlePasswordQueue());
+            return $this->handlePasswordQueue();
         }
     }
 
