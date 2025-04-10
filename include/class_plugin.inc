@@ -46,14 +46,14 @@ abstract class plugin
 
     \sa tab
    */
-    var $parent = NULL;
+    var $parent = null;
 
     /*!
     \brief Configuration container
 
     Access to global configuration
    */
-    var $config = NULL;
+    var $config = null;
 
     /*!
     \brief Mark plugin as account
@@ -107,7 +107,7 @@ abstract class plugin
     var $givenName = "";
     var $acl = "*none*";
     var $dialog = null;
-    var $snapDialog = NULL;
+    var $snapDialog = null;
 
     /* attribute list for save action */
     var $attributes = [];
@@ -151,7 +151,7 @@ abstract class plugin
     \param dn Distinguished name to initialize plugin from
     \sa plugin()
    */
-    function __construct($config, $dn = NULL, $object = NULL)
+    function __construct($config, $dn = null, $object = null)
     {
 
         $this->initTime = microtime(TRUE);
@@ -201,10 +201,10 @@ abstract class plugin
         $this->acl_base = $dn;
 
         /* Get LDAP descriptor */
-        if ($dn !== NULL) {
+        if ($dn !== null) {
 
             /* Load data to 'attrs' and save 'dn' */
-            if ($object !== NULL) {
+            if ($object !== null) {
                 $this->attrs = $object->attrs;
             } else {
                 $ldap = $config->get_ldap_link();
@@ -767,7 +767,7 @@ abstract class plugin
                     </div>";
                 break;
         }
-        return ($display);
+        return $display;
     }
 
 
@@ -784,7 +784,7 @@ abstract class plugin
         $attribute = preg_replace('/=.*$/', '', $data);
         $ldap->cat($dn, array('dn'));
         if (!$ldap->fetch()) {
-            return ($dn);
+            return $dn;
         }
 
         /* Look for additional attributes */
@@ -796,12 +796,12 @@ abstract class plugin
             $dn = "$data+$attr=" . $this->$attr . ",$base";
             $ldap->cat($dn, array('dn'));
             if (!$ldap->fetch()) {
-                return ($dn);
+                return $dn;
             }
         }
 
         /* None found */
-        return ("none");
+        return "none";
     }
 
 
@@ -848,7 +848,7 @@ abstract class plugin
             return 0;
         } else {
             $this->error = "Could not bind to " . $credentials['ADMIN'];
-            return NULL;
+            return null;
         }
     }
 
@@ -1762,7 +1762,7 @@ abstract class plugin
         $cmd,
         $addAttrs = [],
         $returnOutput = [],
-        $returnCode = NULL,
+        $returnCode = null,
         $errorOutput = [],
         $displayErrors = TRUE
     ) {
@@ -1828,7 +1828,7 @@ abstract class plugin
                     $env[$e[1]] = trim($e[2], "'");
                 }
 
-                $process = proc_open($command, $descriptorspec, $pipes, NULL, $env);
+                $process = proc_open($command, $descriptorspec, $pipes, null, $env);
 
                 if (is_resource($process)) {
 
