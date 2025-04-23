@@ -336,11 +336,11 @@ class listing
         }
 
         // Initialize list
-        $result = "<input type='hidden' value='$this->pid' name='PID'>\n";
-        $result .= "<input type='hidden' name='position_" . $this->pid . "' id='position_" . $this->pid . "'>\n";
+        $result = '<input type="hidden" value="' . $this->pid . '" name="PID">';
+        $result .= '<input type="hidden" name="position_' . $this->pid . '" id="position_' . $this->pid . '">';
         $height = 450;
         if ($this->height != 0) {
-            $result .= "<input type='hidden' value='$this->height' id='d_height'>\n";
+            $result .= '<input type="hidden" value="' . $this->height . '" id="d_height">';
             $height = $this->height;
         }
 
@@ -354,9 +354,6 @@ class listing
                 $result .= "<thead class='fixedListHeader listHeaderFormat'><tr>\n";
                 if ($this->multiSelect || $this->singleSelect) {
                     $width = '24px';
-                    if (preg_match('/Konqueror/i', $_SERVER['HTTP_USER_AGENT'])) {
-                        $width = '28px';
-                    }
                     $result .= "<td class='listheader' style='text-align:center;padding:0;width:$width;'>";
                     if ($this->multiSelect) {
                         $result .= "<input type='checkbox' id='select_all' name='select_all'
@@ -556,23 +553,23 @@ class listing
                  * $pagination = $this->setPaginator($prow, $page, $selectedPage);
                  */
 
-                $result .= "  <div class='section scrollspy table-wrapper card-content-scroll' id='d_scrollbody'>
-                                <table id='tree-table' class='highlight'>";
+                $result .= '  <div class="section scrollspy table-wrapper card-content-scroll" id="d_scrollbody">
+                                <table id="tree-table" class="highlight">';
                 $this->numColumns = count($this->colprops) + (($this->multiSelect | $this->singleSelect) ? 1 : 0);
 
                 // Build list header
-                $result .= '  <thead>
-                                <tr>';
+                $result .= '<thead>';
+                $result .= '<tr>';
                 if ($this->multiSelect || $this->singleSelect) {
                     $result .= '<th class="checkbox-column">';
                     if ($this->multiSelect) {
-                        $result .= "  <label>
+                        $result .= '<label>
                                         <p>
-                                            <input type='checkbox' id='select_all' name='select_all'
-                                                title='" . _('Select all') . "' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' >
+                                            <input type="checkbox" id="select_all" name="select_all"
+                                                title="' . _('Select all') . '" onClick="toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");" >
                                             <span></span>
                                         </p>
-                                    </label>";
+                                    </label>';
                     } else {
                         $result .= '&nbsp;';
                     }
@@ -581,17 +578,17 @@ class listing
                 foreach ($this->header as $header) {
                     $result .= $header;
                 }
-                $result .= '      </tr>
-                            </thead>';
+                $result .= '</tr>';
+                $result .= '</thead>';
 
                 // Build list body
-                $result .= '  <tbody>';
+                $result .= '<tbody>';
 
                 // No results? Just take an empty colspanned row
                 if (count($this->entries) + count($this->departments) == 0) {
-                    $result .= "  <tr>
-                                    <td colspan='" . $this->numColumns . "'></td>
-                                </tr>";
+                    $result .= '<tr>
+                                    <td colspan="' . $this->numColumns . '"></td>
+                                </tr>';
                 }
 
                 // Draw department browser if configured and we're not in sub mode
@@ -615,7 +612,7 @@ class listing
                                 $colspan = $conf['span'];
                                 $this->useSpan = true;
                             }
-                            $rowResult .= "<td colspan='$colspan'>" . $this->renderCell($conf['value'], $entry, $row) . '</td>';
+                            $rowResult .= '<td colspan="'.$colspan.'">' . $this->renderCell($conf['value'], $entry, $row) . '</td>';
                             $rest -= $colspan;
                         }
 
@@ -642,25 +639,25 @@ class listing
 
                     // Render multi select if needed
                     if ($this->multiSelect) {
-                        $trow .= "    <td>
+                        $trow .= '    <td>
                                             <label>
                                                 <p>
-                                                    <input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'>
+                                                    <input type="checkbox" id="listing_selected_' . $row . '" name="listing_selected_' . $row . '">
                                                     <span></span>
                                                 </p>
                                             </label>
-                                        </td>";
+                                        </td>';
                     }
 
                     if ($this->singleSelect) {
-                        $trow .= "    <td>
+                        $trow .= '    <td>
                                             <label>
                                                 <p>
-                                                    <input type='radio' id='listing_radio_selected_$row' name='listing_radio_selected' value='{$row}'>
+                                                    <input type="radio" id="listing_radio_selected_' . $row . '" name="listing_radio_selected" value="' . $row . '">
                                                     <span></span>
                                                 </p>
                                             </label>
-                                        </td>";
+                                        </td>';
                     }
 
                     $xmlLenprint = count($this->xmlData['table']['column']) - 1;
@@ -691,9 +688,9 @@ class listing
                     // Apply label to objecttype icon?
                     if (preg_match("/<objectType:([^:]+):(.*)\/>/i", $entry['_rendered'], $matches)) {
                         if (preg_match("/<rowLabel:([a-z0-9_-]*)\/>/i", $entry['_rendered'], $m)) {
-                            $objectType = image("<div class='entry-locked-td'><i class='material-icons'>" . $matches[1] . '[' . $m[1] . ']' . "</i></div>", null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image('<div class="entry-locked-td"><i class="material-icons">' . $matches[1] . '[' . $m[1] . ']' . '</i></div>', null, LDAP::fix(base64_decode($matches[2])));
                         } else {
-                            $objectType = image("<i class='material-icons'>" . $matches[1] . '</i>', null, LDAP::fix(base64_decode($matches[2])));
+                            $objectType = image('<i class="material-icons">' . $matches[1] . '</i>', null, LDAP::fix(base64_decode($matches[2])));
                         }
                         $entry['_rendered'] = preg_replace('/<objectType[^>]+>/', $objectType, $entry['_rendered']);
                         $entry['_rendered'] = preg_replace('/<rowLabel[^>]+>/', '', $entry['_rendered']);
@@ -1473,28 +1470,28 @@ class listing
             default:
                 /* Draw root button */
                 if ($enableRoot) {
-                    $result['ROOT'] = image("<i class='material-icons input-icons md-24'>first_page</i>", 'ROOT', _('Root'));
+                    $result['ROOT'] = image('<i class="material-icons input-icons md-24">first_page</i>', 'ROOT', _('Root'));
                 } else {
-                    $result['ROOT'] = image("<i class='material-icons grey-text md-24'>first_page</i>", null, _('Root'));
+                    $result['ROOT'] = image('<i class="material-icons grey-text md-24">first_page</i>', null, _('Root'));
                 }
 
                 /* Draw back button */
                 if ($enableBack) {
-                    $result['BACK'] = image("<i class='material-icons input-icons md-24'>chevron_left</i>", 'BACK', _('Go to preceding level'));
+                    $result['BACK'] = image('<i class="material-icons input-icons md-24">chevron_left</i>', 'BACK', _('Go to preceding level'));
                 } else {
-                    $result['BACK'] = image("<i class='material-icons grey-text md-24'>chevron_left</i>", null, _('Go to preceding level'));
+                    $result['BACK'] = image('<i class="material-icons grey-text md-24">chevron_left</i>', null, _('Go to preceding level'));
                 }
 
                 /* Draw home button */
                 /* Draw home button */
                 if ($enableHome) {
-                    $result['HOME'] = image("<i class='material-icons input-icons md-24'>home</i>", 'HOME', _('Go to current users level'));
+                    $result['HOME'] = image('<i class="material-icons input-icons md-24">home</i>', 'HOME', _('Go to current users level'));
                 } else {
-                    $result['HOME'] = image("<i class='material-icons grey-text md-24'>home</i>", null, _('Go to current users level'));
+                    $result['HOME'] = image('<i class="material-icons grey-text md-24">home</i>', null, _('Go to current users level'));
                 }
 
                 /* Draw reload button, this button is enabled everytime */
-                $result['RELOAD'] = image("<i class='material-icons input-icons'>refresh</i>", 'REFRESH', _('Reload list'));
+                $result['RELOAD'] = image('<i class="material-icons input-icons">refresh</i>', 'REFRESH', _('Reload list'));
 
                 return $result;
         }
@@ -1607,13 +1604,13 @@ class listing
                 // Build ul/li list
                 $result .= $this->recurseActions($actions, $level);
 
-                return "<div id='pulldown'>" . $result . '</li></ul></div>';
+                return '<div id="pulldown">' . $result . '</li></ul></div>';
 
             default:
-                $result = " <input type='hidden' name='act' id='act' value=''>
-                            <div style='display:none'>
-                                <input type='submit' name='exec_act' id='exec_act' value=''>
-                            </div>";
+                $result = ' <input type="hidden" name="act" id="act" value="">
+                            <div style="display:none">
+                                <input type="submit" name="exec_act" id="exec_act" value="">
+                            </div>';
 
                 // Don't send anything if the menu is not defined
                 if (!isset($this->xmlData['actionmenu']['action'])) {
@@ -1629,8 +1626,8 @@ class listing
                 // Load shortcut
                 $actions = $this->xmlData['actionmenu']['action'];
 
-                $result .= "  <a class='dropdown-menu' data-target='$level'><i class='material-icons md-24 right'>arrow_drop_down</i>" . _('Actions') . "</a>
-                            <ul class='dropdown-content' id='$level'>";
+                $result .= '  <a class="dropdown-menu" data-target="' . $level . '"><i class="material-icons md-24 right">arrow_drop_down</i>' . _('Actions') . '</a>
+                            <ul class="dropdown-content" id="' . $level . '">';
 
                 $result .= $this->recurseActions($actions, $level) . '</ul></>';
 
@@ -1647,7 +1644,7 @@ class listing
         switch ($this->theme) {
             case 'classic':
                 static $level = 2;
-                $result = "<ul class='level$level'>";
+                $result = '<ul class="level' . $level . '">';
                 break;
 
             default:
@@ -1683,7 +1680,7 @@ class listing
                         break;
 
                     default:
-                        $img = image("<i class='material-icons'>" . $action['image'] . "</i>");
+                        $img = image('<i class="material-icons">' . $action['image'] . '</i>');
                         break;
                 }
             }
@@ -1691,11 +1688,11 @@ class listing
             if ($action['type'] == 'separator') {
                 switch ($this->theme) {
                     case 'classic':
-                        $separator = "style='border-top:1px solid #AAA'";
+                        $separator = 'style="border-top:1px solid #AAA"';
                         break;
 
                     default:
-                        $separator = "class='divider' tabiindex='-1'";
+                        $separator = 'class="divider" tabiindex="-1"';
                         break;
                 }
             }
@@ -1754,13 +1751,13 @@ class listing
                     if ($action['type'] == 'sub' && isset($action['action'])) {
                         ++$level;
 
-                        $result .= "<li class='pointer_off'>
-                                    <ul class='collection with-header'>";
+                        $result .= '<li class="pointer_off">
+                                    <ul class="collection with-header">';
 
                         if (isset($action['label'])) {
-                            $result .= "<li class='collection-header pointer_off'><h3 id='head'>" . _($action['label']) . '</h3></li>';
+                            $result .= '<li class="collection-header pointer_off"><h3 id="head">' . _($action['label']) . '</h3></li>';
                         } else {
-                            $result .= "<li class='collection-header valign-wrapper'><i class='material-icons right'>" . _($action['image']) . '</i></li>';
+                            $result .= '<li class="collection-header valign-wrapper"><i class="material-icons right">' . _($action['image']) . '</i></li>';
                         }
 
                         // Ensure we've an array of actions, this enables sub menus with only one action.
@@ -1777,19 +1774,23 @@ class listing
 
                     if (isset($action['label'])) {
                         if ($level < 1) {
-                            $result .= "<ul class='collection' onClick='\$(\"act\").value= '" . $action['name'] . "';\$(\"exec_act\").click();'>
-                                            <li class='collection-item'>
-                                                <a href='#'>
-                                                    $img&nbsp;
-                                                    " . _($action['label']) . '
+                            $result .= '<ul class="collection" onClick=\'
+                                                       $("act").value = "' . $action['name'] . '"; $("exec_act").click();
+                                           \'>
+                                            <li class="collection-item">
+                                                <a href="#">
+                                                    ' . $img . '&nbsp;
+                                                    ' . _($action['label']) . '
                                                 </a>
                                             </li>
                                         </ul>';
                         } else {
-                            $result .= "<li class='collection-item' onClick='\$(\"act\").value= \"" . $action['name'] . "\";\$(\"exec_act\").click();'>
-                                            <a href='#'>
-                                                $img
-                                                " . _($action['label']) . '
+                            $result .= '<li class="collection-item" onClick=\'
+                                                        $("act").value = "' . $action['name'] . '"; $("exec_act").click();
+                                            \'>
+                                            <a href="#">'
+                                . $img
+                                . _($action['label']) . '
                                             </a>
                                         </li>';
                         }
