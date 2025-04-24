@@ -367,7 +367,12 @@ function get_template_path(string $filename = '', bool $plugin = FALSE, string $
             return ("$BASE_DIR/ihtml/themes/default/$nf/$filename");
         }
         if ($path == "") {
-            return (session::global_get('plugin_dir') . "/$theme/$filename");
+            if (file_exists(session::global_get('plugin_dir') . "/$theme/$filename")){
+                return (session::global_get('plugin_dir') . "/$theme/$filename");
+            } else {
+                // last resort
+                return $BASE_DIR . $filename;
+            }
         } else {
             return ($path . "/$theme/$filename");
         }
