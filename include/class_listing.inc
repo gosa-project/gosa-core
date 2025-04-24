@@ -566,7 +566,7 @@ class listing
                         $result .= '<label>
                                         <p>
                                             <input type="checkbox" id="select_all" name="select_all"
-                                                title="' . _('Select all') . '" onClick="toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");" >
+                                                title="' . _('Select all') . '" onClick="' . "toggle_all_('listing_selected_[0-9]*$','select_all');" . '" >
                                             <span></span>
                                         </p>
                                     </label>';
@@ -719,10 +719,10 @@ class listing
                     foreach ($this->objectTypes as $objectType) {
                         if (isset($this->objectTypeCount[$objectType['label']])) {
                             $label = _($objectType['label']);
-                            $result .= image("<i class='material-icons'>" . $objectType['image'] . '</i>', null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['label']] . '&nbsp;&nbsp;';
+                            $result .= image('<i class="material-icons">' . $objectType['image'] . '</i>', null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['label']] . '&nbsp;&nbsp;';
                         } elseif (isset($this->objectTypeCount[$objectType['objectClass']])) {
                             $label = _($objectType['label']);
-                            $result .= image("<i class='material-icons'>" . $objectType['image'] . ' </i>', null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['objectClass']] . '&nbsp;&nbsp;';
+                            $result .= image('<i class="material-icons">' . $objectType['image'] . ' </i>', null, $label) . '&nbsp;' . $this->objectTypeCount[$objectType['objectClass']] . '&nbsp;&nbsp;';
                         }
                     }
 
@@ -730,7 +730,7 @@ class listing
                 }
 
                 // Close list
-                $result .= $switch ? "<input type='hidden' id='list_workaround'>" : '';
+                $result .= $switch ? '<input type="hidden" id="list_workaround">' : '';
                 break;
         }
         foreach ($this->header as $header) {
@@ -919,7 +919,7 @@ class listing
         $smarty->assign('BASE', $this->renderBase());
 
         // Assign separator
-        $smarty->assign('SEPARATOR', "<img src='images/lists/seperator.png' alt='-' align='middle' height='16' width='1' class='center'>");
+        $smarty->assign('SEPARATOR', '<img src="images/lists/seperator.png" alt="-" align="middle" height="16" width="1" class="center">');
 
         // Assign summary
         $smarty->assign('HEADLINE', $this->headline);
