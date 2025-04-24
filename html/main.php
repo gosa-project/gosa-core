@@ -95,14 +95,14 @@ if (session::global_get('_LAST_PAGE_REQUEST') != "") {
     // kill session
     if ($request_time > $max_life) {
         session::destroy();
-        new log("security", "login", "", array(), "main.php called without session - logging out");
-        header("Location: logout.php");
+        new log('security', 'login', '', [], 'main.php called without session - logging out');
+        header('Location: logout.php');
         exit;
     }
     session::global_set('_LAST_PAGE_REQUEST', time());
 }
 
-DEBUG(DEBUG_CONFIG, __LINE__, "", __FILE__, $config->data, "config");
+DEBUG(DEBUG_CONFIG, __LINE__, '', __FILE__, $config->data, "config");
 
 /* Set default */
 $reload_navigation = false;
@@ -149,7 +149,7 @@ $config->check_config_version();
 $domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
-DEBUG(DEBUG_TRACE, __LINE__, "", __FILE__, $lang, "Setting language to");
+DEBUG(DEBUG_TRACE, __LINE__, '', __FILE__, $lang, "Setting language to");
 /* Prepare plugin list */
 if (!session::global_is_set('plist')) {
     /* Initially load all classes */
@@ -192,7 +192,7 @@ if (isset($global_check) && $config->boolValueIsTrue("core", "forceGlobals")) {
         FATAL_ERROR_DIALOG
     );
 
-    new log("security", "login", "", array(), "Register globals is on. For security reasons, this should be turned off.");
+    new log("security", "login", '', array(), "Register globals is on. For security reasons, this should be turned off.");
     session::destroy();
     exit;
 }
@@ -201,7 +201,7 @@ if (isset($global_check) && $config->boolValueIsTrue("core", "forceGlobals")) {
 if (session::global_is_set('plugin_dir')) {
     $old_plugin_dir = session::global_get('plugin_dir');
 } else {
-    $old_plugin_dir = "";
+    $old_plugin_dir = '';
 }
 
 // Generate menus
@@ -218,7 +218,7 @@ if ($config->boolValueIsTrue("core", "handleExpiredAccounts")) {
     if ($expired == POSIX_WARN_ABOUT_EXPIRATION && !session::is_set('POSIX_WARN_ABOUT_EXPIRATION__DONE')) {
 
         // The users password is about to xpire soon, display a warning message.
-        new log("security", "gosa", "", array(), "password for user \"$ui->username\" is about to expire");
+        new log("security", "gosa", '', array(), "password for user \"$ui->username\" is about to expire");
         msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
         session::set('POSIX_WARN_ABOUT_EXPIRATION__DONE', true);
     } elseif ($expired == POSIX_FORCE_PASSWORD_CHANGE) {
@@ -244,8 +244,8 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])) {
     $plugin = $plist->get_class($plug);
     session::global_set('currentPlugin', $plugin);
     session::global_set('plugin_dir', $plugin_dir);
-    if ($plugin_dir == "") {
-        new log("security", "gosa", "", array(), "main.php called with invalid plug parameter \"$plug\"");
+    if ($plugin_dir == '') {
+        new log("security", "gosa", '', [], 'main.php called with invalid plug parameter "' . $plug . '"');
         header("Location: logout.php");
         exit;
     }
@@ -272,7 +272,7 @@ $remove_lock = false;
 
 /* Check if we have changed the selected plugin
 */
-if (($old_plugin_dir != $plugin_dir && $old_plugin_dir != "") ||
+if (($old_plugin_dir != $plugin_dir && $old_plugin_dir != '') ||
     (isset($_GET['reset']) && $_GET['reset'] == 1)
 ) {
     if (is_file("$old_plugin_dir/main.inc")) {
@@ -348,7 +348,7 @@ $smarty->assign("must", "<span class='required'>*</span>");
 if (isset($plug)) {
     $plug = "?plug=$plug";
 } else {
-    $plug = "";
+    $plug = '';
 }
 if (session::global_get('js') == false) {
     $smarty->assign("javascript", "false");
@@ -369,16 +369,16 @@ if ($ui->ignore_acl_for_current_user()) {
 
 $userName = $ui->username;
 
-$smarty->assign("loggedin", $loggedin);
-$smarty->assign("userName", $userName);
-$smarty->assign("go_logo", get_template_path('images/go_logo.png'));
-$smarty->assign("go_base", get_template_path('images/dtree.png'));
-$smarty->assign("go_home", get_template_path('images/gohome.png'));
-$smarty->assign("go_out", get_template_path('images/logout.png'));
-$smarty->assign("go_top", get_template_path('images/go_top.png'));
-$smarty->assign("go_corner", get_template_path('images/go_corner.png'));
-$smarty->assign("go_left", get_template_path('images/go_left.png'));
-$smarty->assign("go_help", get_template_path('images/help.png'));
+$smarty->assign('loggedin', $loggedin);
+$smarty->assign('userName', $userName);
+$smarty->assign('go_logo', get_template_path('images/go_logo.png'));
+$smarty->assign('go_base', get_template_path('images/dtree.png'));
+$smarty->assign('go_home', get_template_path('images/gohome.png'));
+$smarty->assign('go_out', get_template_path('images/logout.png'));
+$smarty->assign('go_top', get_template_path('images/go_top.png'));
+$smarty->assign('go_corner', get_template_path('images/go_corner.png'));
+$smarty->assign('go_left', get_template_path('images/go_left.png'));
+$smarty->assign('go_help', get_template_path('images/help.png'));
 
 /* reload navigation if language changed*/
 if ($reload_navigation) {
@@ -420,26 +420,26 @@ if (is_file("$plugin_dir/main.inc")) {
     require("$plugin_dir/main.php");
 } else {
     msg_dialog::display(
-        _("Plug-in"),
-        sprintf(_("Fatal error: Cannot find any plugin definitions for plugin %s!"), bold($plug)),
+        _('Plug-in'),
+        sprintf(_('Fatal error: Cannot find any plugin definitions for plugin %s!'), bold($plug)),
         FATAL_ERROR_DIALOG
     );
     exit();
 }
 
 /* Print_out last ErrorMessage repeated string. */
-$smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
-$smarty->assign("pathMenu", $plist->genPathMenu());
-$smarty->assign("breadcrumb", $plist->genBreadcrumb());
-$smarty->assign("contents", $display);
-$smarty->assign("sessionLifetime", $config->get_cfg_value('core', 'sessionLifetime'));
+$smarty->assign('msg_dialogs', msg_dialog::get_dialogs());
+$smarty->assign('pathMenu', $plist->genPathMenu());
+$smarty->assign('breadcrumb', $plist->genBreadcrumb());
+$smarty->assign('contents', $display);
+$smarty->assign('sessionLifetime', $config->get_cfg_value('core', 'sessionLifetime'));
 
 /* If there's some post, take a look if everything is there... */
 if (isset($_POST) && count($_POST)) {
     if (!isset($_POST['php_c_check'])) {
         msg_dialog::display(
-            _("Configuration Error"),
-            sprintf(_("Fatal error: not all POST variables have been transfered by PHP - please inform your administrator!")),
+            _('Configuration Error'),
+            sprintf(_('Fatal error: not all POST variables have been transfered by PHP - please inform your administrator!')),
             FATAL_ERROR_DIALOG
         );
         exit();
@@ -467,7 +467,7 @@ if (session::is_set('errors') && session::get('errors') != "") {
 $focus = '<script language="JavaScript" type="text/javascript">';
 $focus .= 'next_msg_dialog();';
 $focus .= '</script>';
-$smarty->assign("focus", $focus);
+$smarty->assign('focus', $focus);
 
 /* Set channel if needed */
 #TODO: * move all global session calls to global_

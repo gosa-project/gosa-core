@@ -49,7 +49,7 @@ function displayLogin()
     }
 
     /* Fill template with required values */
-    $username = "";
+    $username = '';
     if (isset($_POST["username"])) {
         $username = get_post("username");
     }
@@ -64,21 +64,21 @@ function displayLogin()
 
     /* Some error to display? */
     if (!isset($message)) {
-        $message = "";
+        $message = '';
     }
     $smarty->assign("message", $message);
 
     /* Displasy SSL mode warning? */
-    if ($ssl != "" && $config->get_cfg_value("core", 'warnSSL') == 'true') {
+    if ($ssl != '' && $config->get_cfg_value("core", 'warnSSL') == 'true') {
         $smarty->assign("ssl", sprintf(_("This session is not encrypted. Click %s to enter an encrypted session."), "<a href=\"$ssl\">&nbsp;<b>" . (_("here")) . "</b>&nbsp;</a>"));
     } else {
-        $smarty->assign("ssl", "");
+        $smarty->assign("ssl", '');
     }
 
     if (!$config->check_session_lifetime()) {
         $smarty->assign("lifetime", _("The configured session lifetime will be overridden by php.ini settings!"));
     } else {
-        $smarty->assign("lifetime", "");
+        $smarty->assign("lifetime", '');
     }
 
     /* Generate server list */
@@ -99,10 +99,10 @@ function displayLogin()
     if (session::is_set('errors')) {
         $smarty->assign("errors", session::get('errors'));
     }
-    if ($error_collector != "") {
+    if ($error_collector != '') {
         $smarty->assign("php_errors", $error_collector . "</div>");
     } else {
-        $smarty->assign("php_errors", "");
+        $smarty->assign("php_errors", '');
     }
     $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 
@@ -130,12 +130,12 @@ if (is_array(session::get_all()) && count(session::get_all())) {
     session::start();
 }
 
-$username = "";
+$username = '';
 
 /* Reset errors */
-session::set('errors', "");
-session::set('errorsAlreadyPosted', "");
-session::set('LastError', "");
+session::set('errors', '');
+session::set('errorsAlreadyPosted', '');
+session::set('LastError', '');
 
 /* Check if we need to run setup */
 if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
@@ -144,7 +144,7 @@ if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
 }
 
 /* Reset errors */
-session::set('errors', "");
+session::set('errors', '');
 
 /* Check for java script */
 if (isset($_POST['javascript']) && $_POST['javascript'] == "true") {
@@ -163,11 +163,11 @@ if (!is_readable(CONFIG_DIR . "/" . CONFIG_FILE)) {
 $config = new config(CONFIG_DIR . "/" . CONFIG_FILE, $BASE_DIR);
 session::global_set('debugLevel', $config->get_cfg_value("core", 'debugLevel'));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    DEBUG(DEBUG_CONFIG, __LINE__, "", __FILE__, $config->data, "config");
+    DEBUG(DEBUG_CONFIG, __LINE__, '', __FILE__, $config->data, "config");
 }
 
 /* Enable compressed output */
-if ($config->get_cfg_value("core", "sendCompressedOutput") != "") {
+if ($config->get_cfg_value("core", "sendCompressedOutput") != '') {
     if (ob_get_length() > 0) {
         ob_end_clean();
     }
@@ -192,12 +192,12 @@ $smarty->assign('nextfield', 'username');
 $smarty->assign("cookies", _("Your browser has cookies disabled: please enable cookies and reload this page before logging in!"));
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    DEBUG(DEBUG_TRACE, __LINE__, "", __FILE__, $lang, "Setting language to");
+    DEBUG(DEBUG_TRACE, __LINE__, '', __FILE__, $lang, "Setting language to");
 }
 
 
 /* Check for SSL connection */
-$ssl = "";
+$ssl = '';
 if (
     !isset($_SERVER['HTTPS']) ||
     !stristr($_SERVER['HTTPS'], "on")
@@ -228,11 +228,11 @@ if ($config->get_cfg_value("core", "htaccessAuthentication") == "true") {
     $tmp = process_htaccess($_SERVER['REMOTE_USER'], isset($_SERVER['KRB5CCNAME']));
     $username = $tmp['username'];
     $server = $tmp['server'];
-    if ($username == "") {
+    if ($username == '') {
         msg_dialog::display(_("Error"), _("Cannot find a valid user for the current HTTP authentication!"), FATAL_ERROR_DIALOG);
         exit;
     }
-    if ($server == "") {
+    if ($server == '') {
         msg_dialog::display(_("Error"), _("Cannot find a unique user for the current HTTP authentication!"), FATAL_ERROR_DIALOG);
         exit;
     }
@@ -244,7 +244,7 @@ if ($config->get_cfg_value("core", "htaccessAuthentication") == "true") {
 if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htaccess_authenticated) {
 
     /* Reset error messages */
-    $message = "";
+    $message = '';
 
     /* Destroy old sessions, they cause a successfull login to relog again ...*/
     if (!session::global_is_set('_LAST_PAGE_REQUEST')) {
@@ -304,9 +304,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             session::global_set('config', $config);
             if (isset($_SERVER['REMOTE_ADDR'])) {
                 $ip = $_SERVER['REMOTE_ADDR'];
-                new log("security", "login", "", array(), "Authentication failed for user \"$username\" [from $ip]");
+                new log('security', "login", '', [], "Authentication failed for user \"$username\" [from $ip]");
             } else {
-                new log("security", "login", "", array(), "Authentication failed for user \"$username\"");
+                new log('security', "login", '', [], "Authentication failed for user \"$username\"");
             }
         } else {
             /* Remove all locks of this user */
@@ -353,16 +353,16 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
                 $expired = ldap_expired_account($config, $ui->dn, $ui->username);
 
                 if ($expired == POSIX_ACCOUNT_EXPIRED) {
-                    $message = _("Account locked. Please contact your system administrator!");
+                    $message = _('Account locked. Please contact your system administrator!');
                     $smarty->assign('nextfield', 'password');
-                    new log("security", "login", "", array(), "Account for user \"$username\" has expired");
+                    new log('security', "login", '', [], "Account for user \"$username\" has expired");
                     displayLogin();
                     exit();
                 }
             }
 
             /* Not account expired or password forced change go to main page */
-            new log("security", "login", "", array(), "User \"$username\" logged in successfully");
+            new log('security', "login", '', array(), "User \"$username\" logged in successfully");
             $plist = new pluglist($ui);
 
             stats::log('global', 'global', array(), $action = 'login', $amount = 1, 0);
@@ -370,9 +370,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             session_write_close();
 
             if (isset($plug) && isset($plist->dirlist[$plug])) {
-                header("Location: main.php?plug=" . $plug . "&amp;global_check=1");
+                header('Location: main.php?plug=' . $plug . '&amp;global_check=1');
             } else {
-                header("Location: main.php?global_check=1");
+                header('Location: main.php?global_check=1');
             }
             exit;
         }
@@ -388,10 +388,10 @@ $smarty->assign('directory_img', get_template_path('images/ldapserver.png'));
 
 /* Some error to display? */
 if (!isset($message)) {
-    $message = "";
+    $message = '';
 }
 
-$smarty->assign("message", $message);
+$smarty->assign('message', $message);
 
 /* Generate server list */
 $servers = array();
@@ -403,23 +403,23 @@ if (isset($_POST['server'])) {
 foreach ($config->data['LOCATIONS'] as $key => $ignored) {
     $servers[$key] = $key;
 }
-$smarty->assign("server_options", $servers);
-$smarty->assign("server_id", $selected);
+$smarty->assign('server_options', $servers);
+$smarty->assign('server_id', $selected);
 
 /* show login screen */
 $smarty->assign("PHPSESSID", session_id());
 if (session::is_set('errors')) {
     $smarty->assign("errors", session::get('errors'));
 }
-if ($error_collector != "") {
+if ($error_collector != '') {
     $smarty->assign("php_errors", preg_replace("/%BUGBODY%/", $error_collector_mailto, $error_collector) . "</div>");
 } else {
-    $smarty->assign("php_errors", "");
+    $smarty->assign("php_errors", '');
 }
 
 /* Set focus to the error button if we've an error message */
-$focus = "";
-if (session::is_set('errors') && session::get('errors') != "") {
+$focus = '';
+if (session::is_set('errors') && session::get('errors') != '') {
     $focus = '<script language="JavaScript" type="text/javascript">';
     $focus .= 'document.forms[0].error_accept.focus();';
     $focus .= '</script>';
