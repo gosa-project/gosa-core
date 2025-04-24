@@ -1877,7 +1877,7 @@ class user extends plugin
         #       $ret["plProvidedAcls"][$attr] = $desc;
         #     }
         #   }
-        return ($ret);
+        return $ret;
     }
 
     function get_multi_edit_values()
