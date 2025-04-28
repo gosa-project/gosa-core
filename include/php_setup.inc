@@ -20,22 +20,22 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-define("LOCALE_DIR", dirname(dirname(__FILE__)) . "/locale/compiled");
-define("VENDOR_DIR", dirname(dirname(__FILE__)) . "/vendor");
+define('LOCALE_DIR', dirname(dirname(__FILE__)) . '/locale/compiled');
+define('VENDOR_DIR', dirname(dirname(__FILE__)) . '/vendor');
 
 /* Set timezone */
-date_default_timezone_set("Europe/Berlin");
+date_default_timezone_set('Europe/Berlin');
 
 /* Get base dir for reference */
 $BASE_DIR = dirname(dirname(__FILE__));
-$ROOT_DIR = $BASE_DIR . "/html";
+$ROOT_DIR = $BASE_DIR . '/html';
 error_reporting(E_ALL);
 
-require_once("class_plugin.inc");
-require_once("class_location.inc");
-require_once(VENDOR_DIR . "/autoload.php");
+require_once('class_plugin.inc');
+require_once('class_location.inc');
+require_once(VENDOR_DIR . '/autoload.php');
 $composerClassMap = require_once(VENDOR_DIR . '/composer/autoload_classmap.php');
-require_once("functions.inc");
+require_once('functions.inc');
 
 /*! \brief Does autoloading for classes used in GOsa.
  *
@@ -49,7 +49,7 @@ function __gosa_autoload($class_name)
     global $class_mapping, $BASE_DIR;
 
     if ($class_mapping === NULL) {
-        echo sprintf(_("Fatal error: no class locations defined - please run %s to fix this"), bold("update-gosa"));
+        echo sprintf(_('Fatal error: no class locations defined - please run %s to fix this'), bold('update-gosa'));
         exit;
     }
 
@@ -65,7 +65,7 @@ function __gosa_autoload($class_name)
     if (isset($class_mapping["$class_name"])) {
         require_once($BASE_DIR . "/" . $class_mapping["$class_name"]);
     } else {
-        echo sprintf(_("Fatal error: cannot instantiate class %s - try running %s to fix this"), bold($class_name), bold("update-gosa"));
+        echo sprintf(_('Fatal error: cannot instantiate class %s - try running %s to fix this'), bold($class_name), bold('update-gosa'));
         exit;
     }
 }
@@ -103,7 +103,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     }
 
     /* Error messages are hidden in GOsa, so we only send them to the logging class and abort here */
-    if (isset($config->data) && $config->get_cfg_value("core", "displayErrors") != "true") {
+    if (isset($config->data) && $config->get_cfg_value('core', 'displayErrors') != "true") {
 
         /* Write to syslog */
         if (class_exists("log") && !preg_match("/No such object/", $errstr)) {
@@ -331,20 +331,20 @@ function prepare4mailbody($string)
 function dummy_error_handler() {}
 
 /* Bail out for incompatible/old PHP versions */
-if (!version_compare(phpversion(), "8.1.0", ">=")) {
-    echo "PHP version needs to be 8.1.0 or above to run GOsa. Aborted.";
+if (!version_compare(phpversion(), '8.1.0', '>=')) {
+    echo 'PHP version needs to be 8.1.0 or above to run GOsa. Aborted.';
     exit();
 }
 
 /* Register error handler */
-$error_collector = "";
-$error_collector_mailto = "";
+$error_collector = '';
+$error_collector_mailto = '';
 
-$config = new config(CONFIG_DIR . "/" . CONFIG_FILE, $BASE_DIR);
+$config = new config(CONFIG_DIR . '/' . CONFIG_FILE, $BASE_DIR);
 
 set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
 
-$variables_order = "ES";
+$variables_order = 'ES';
 ini_set("register_globals", 0);
 ini_set("track_vars", 1);
 ini_set("display_errors", 1);
@@ -377,12 +377,13 @@ while ($file = readdir($d)) {
     if (preg_match("/\.php$/", $file)) require_once("$BASE_DIR/include/smartyAddons/{$file}");
 }
 
-$smarty->registerPlugin("block", "t", "smarty_block_t");
-$smarty->registerPlugin("block", "render", "smarty_block_render");
-$smarty->registerPlugin("function", "msgPool", "smarty_function_msgPool");
-$smarty->registerPlugin("function", "image", "smarty_function_image");
-$smarty->registerPlugin("function", "factory", "smarty_function_factory");
-$smarty->registerPlugin("function", "strpos", "strpos");
+#$smarty->registerPlugin("block", "tr", "smarty_block_tr");
+$smarty->registerPlugin('block', "t", "smarty_block_t");
+$smarty->registerPlugin('block', "render", "smarty_block_render");
+$smarty->registerPlugin('function', "msgPool", "smarty_function_msgPool");
+$smarty->registerPlugin('function', "image", "smarty_function_image");
+$smarty->registerPlugin('function', "factory", "smarty_function_factory");
+$smarty->registerPlugin('function', "strpos", "strpos");
 
 /* Global FPDF define */
 define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');

@@ -149,7 +149,7 @@ $config->check_config_version();
 $domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
-DEBUG(DEBUG_TRACE, __LINE__, '', __FILE__, $lang, "Setting language to");
+DEBUG(DEBUG_TRACE, __LINE__, '', __FILE__, $lang, 'Setting language to');
 /* Prepare plugin list */
 if (!session::global_is_set('plist')) {
     /* Initially load all classes */
@@ -160,11 +160,11 @@ if (!session::global_is_set('plist')) {
                 require_once("$BASE_DIR/$path");
             } else {
                 msg_dialog::display(
-                    _("Fatal error"),
+                    _('Fatal error'),
                     sprintf(
-                        _("Cannot locate file %s - please run %s to fix this"),
+                        _('Cannot locate file %s - please run %s to fix this'),
                         bold("$BASE_DIR/$path"),
-                        bold("update-gosa")
+                        bold('update-gosa')
                     ),
                     FATAL_ERROR_DIALOG
                 );
@@ -185,14 +185,14 @@ session::global_set('ui', $ui);
 $plist = session::global_get('plist');
 
 /* Check for register globals */
-if (isset($global_check) && $config->boolValueIsTrue("core", "forceGlobals")) {
+if (isset($global_check) && $config->boolValueIsTrue('core', 'forceGlobals')) {
     msg_dialog::display(
-        _("PHP configuration"),
-        _("Fatal error: Register globals is active. Please fix this in order to continue."),
+        _('PHP configuration'),
+        _('Fatal error: Register globals is active. Please fix this in order to continue.'),
         FATAL_ERROR_DIALOG
     );
 
-    new log("security", "login", '', array(), "Register globals is on. For security reasons, this should be turned off.");
+    new log('security', 'login', '', [], 'Register globals is on. For security reasons, this should be turned off.');
     session::destroy();
     exit;
 }
@@ -212,21 +212,21 @@ $plist->genBreadcrumb();
 
 /* check if we are using account expiration */
 $smarty->assign("hideMenus", false);
-if ($config->boolValueIsTrue("core", "handleExpiredAccounts")) {
+if ($config->boolValueIsTrue('core', 'handleExpiredAccounts')) {
     $expired = ldap_expired_account($config, $ui->dn, $ui->username);
 
     if ($expired == POSIX_WARN_ABOUT_EXPIRATION && !session::is_set('POSIX_WARN_ABOUT_EXPIRATION__DONE')) {
 
         // The users password is about to xpire soon, display a warning message.
-        new log("security", "gosa", '', array(), "password for user \"$ui->username\" is about to expire");
-        msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
+        new log('security', 'gosa', '', [], 'password for user "' . $ui->username . '" is about to expire');
+        msg_dialog::display(_('Password change'), _('Your password is about to expire, please change your password!'), INFO_DIALOG);
         session::set('POSIX_WARN_ABOUT_EXPIRATION__DONE', true);
     } elseif ($expired == POSIX_FORCE_PASSWORD_CHANGE) {
 
         // The password is expired, we are now going to enforce a new one from the user.
 
         // Hide the GOsa menus to avoid leaving the enforced password change dialog.
-        $smarty->assign("hideMenus", true);
+        $smarty->assign('hideMenus', true);
         $plug = (isset($_GET['plug'])) ? $_GET['plug'] : null;
 
         // Detect password plugin id:
@@ -237,7 +237,7 @@ if ($config->boolValueIsTrue("core", "handleExpiredAccounts")) {
     }
 }
 
-$smarty->assign("noMenuMode", count($plist->getRegisteredMenuEntries()) == 0);
+$smarty->assign('noMenuMode', count($plist->getRegisteredMenuEntries()) == 0);
 if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])) {
     $plug = validate($_GET['plug']);
     $plugin_dir = $plist->get_path($plug);
@@ -245,19 +245,19 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])) {
     session::global_set('currentPlugin', $plugin);
     session::global_set('plugin_dir', $plugin_dir);
     if ($plugin_dir == '') {
-        new log("security", "gosa", '', [], 'main.php called with invalid plug parameter "' . $plug . '"');
-        header("Location: logout.php");
+        new log('security', 'gosa', '', [], 'main.php called with invalid plug parameter "' . $plug . '"');
+        header('Location: logout.php');
         exit;
     }
 } else {
-    session::global_set('plugin_dir', "welcome");
+    session::global_set('plugin_dir', 'welcome');
     session::global_set('currentPlugin', 'welcome');
     $plugin_dir = "$BASE_DIR/plugins/generic/welcome";
 }
 // Display the welcome page for admins (iconmenu) and an info page for those
 // who are not allowed to adminstrate anything (user)
-if (count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('currentPlugin') == "welcome") {
-    session::global_set('plugin_dir', "infoPage");
+if (count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('currentPlugin') == 'welcome') {
+    session::global_set('plugin_dir', 'infoPage');
     session::global_set('currentPlugin', 'welcome');
     $plugin_dir = "$BASE_DIR/plugins/generic/infoPage";
 }
@@ -297,7 +297,7 @@ if (($old_plugin_dir != $plugin_dir && $old_plugin_dir != '') ||
 eval_sizelimit();
 
 /* Check for memory */
-if (function_exists("memory_get_usage")) {
+if (function_exists('memory_get_usage')) {
     if (memory_get_usage() > (to_byte(ini_get('memory_limit')) - 2048000)) {
         msg_dialog::display(_("Configuration error"), _("Running out of memory!"), WARNING_DIALOG);
     }
