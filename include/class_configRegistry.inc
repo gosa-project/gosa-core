@@ -1129,10 +1129,11 @@ class gosaProperty
 
     function save()
     {
+        global $config;
         if ($this->getStatus() == 'modified') {
-            $ldap = $this->parent->config->get_ldap_link();
-            $ldap->cd($this->parent->config->current['BASE']);
-            $dn = "cn={$this->class}," . $this->parent->config->current['CONFIG'];
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($config->current['BASE']);
+            $dn = "cn={$this->class}," . $config->current['CONFIG'];
             $ldap->cat($dn);
             if (!$ldap->count()) {
                 $ldap->cd($dn);
@@ -1170,9 +1171,9 @@ class gosaProperty
             $this->value = $this->tmp_value;
             $this->setStatus('ldap');
         } elseif ($this->getStatus() == 'removed') {
-            $ldap = $this->parent->config->get_ldap_link();
-            $ldap->cd($this->parent->config->current['BASE']);
-            $dn = "cn={$this->class}," . $this->parent->config->current['CONFIG'];
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($config->current['BASE']);
+            $dn = "cn={$this->class}," . $config->current['CONFIG'];
             $ldap->cat($dn);
             $attrs = $ldap->fetch();
             $data = array('gosaSetting' => []);
