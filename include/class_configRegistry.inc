@@ -3,39 +3,39 @@
 class configRegistry
 {
 
-    public $properties = array();
-    public $ldapStoredProperties = array();
-    public $fileStoredProperties = array();
-    public $classToName = array();
+    public $properties = [];
+    public $ldapStoredProperties = [];
+    public $fileStoredProperties = [];
+    public $classToName = [];
 
     public $status = 'none';
 
     // Excludes property values defined in ldap 
-    public $ignoreLdapProperties = FALSE;
+    public $ignoreLdapProperties = false;
 
     // Contains all classes with plInfo
-    public $classesWithInfo = array();
-    public $pluginRequirements  = array();
-    public $categoryToClass  = array();
+    public $classesWithInfo = [];
+    public $pluginRequirements  = [];
+    public $categoryToClass  = [];
 
-    public $objectClasses = array();
+    public $objectClasses = [];
 
-    public $detectedSchemaIssues = array();
-    public $schemaCheckFailed = FALSE;
-    public $schemaCheckFinished = FALSE;
-    public $pluginsDeactivated = array();
+    public $detectedSchemaIssues = [];
+    public $schemaCheckFailed = false;
+    public $schemaCheckFinished = false;
+    public $pluginsDeactivated = [];
 
-    // Name of enabled plugins found in gosa.conf.
-    private $activePlugins = array();
+    // Name of enabled plugins found in gosa.conf
+    private $activePlugins = [];
 
     public $mapByName = [];
 
-
-    /*! \brief      Constructs the config registry 
-     *  @param      config  The configuration object
-     *  @return     
+    /**
+     * Constructs the config registry 
+     * @param config  The configuration object
+     * @return     
      */
-    function __construct()
+    public function __construct()
     {
         // Detect classes that have a plInfo method 
         global $class_mapping;
@@ -61,9 +61,9 @@ class configRegistry
     /*! \brief      Returns a list of plugins used by GOsa.
         @return     Array       An array containing all plugins with theis plInfo data.
      */
-    function getListOfPlugins()
+    public function getListOfPlugins()
     {
-        return ($this->classesWithInfo);
+        return $this->classesWithInfo;
     }
 
 
@@ -72,16 +72,16 @@ class configRegistry
      */
     function schemaCheckFinished()
     {
-        return ($this->schemaCheckFinished);
+        return $this->schemaCheckFinished;
     }
 
 
     /*! \brief      Starts the schema validation
      *  @param      Boolean     'force' Force a re-check.
      *  @param      Boolean     'disableIncompatiblePlugins' Disables of incompatible GOsa-plugins.
-     *  @return     Boolean     True on success else FALSE
+     *  @return     Boolean     True on success else false
      */
-    function validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE, $objectClassesToUse = array())
+    function validateSchemata($force = false, $disableIncompatiblePlugins = false, $objectClassesToUse = [])
     {
         global $config;
         // Read objectClasses from ldap
@@ -93,7 +93,7 @@ class configRegistry
             $this->setObjectClasses($ldap->get_objectclasses());
         }
 
-        return ($this->_validateSchemata($force, $disableIncompatiblePlugins));
+        return $this->_validateSchemata($force, $disableIncompatiblePlugins);
     }
 
 
@@ -113,7 +113,7 @@ class configRegistry
      */
     function getSchemaResults()
     {
-        return ($this->detectedSchemaIssues);
+        return $this->detectedSchemaIssues;
     }
 
 
@@ -122,27 +122,27 @@ class configRegistry
      *  @param      Boolean     'disableIncompatiblePlugins' Disables of incompatible GOsa-plugins.
      *  @return     String  
      */
-    private function _validateSchemata($force = FALSE, $disableIncompatiblePlugins = FALSE)
+    private function _validateSchemata($force = false, $disableIncompatiblePlugins = false)
     {
         // We cannot check without readable schema info
         if (!count($this->objectClasses)) {
-            return (TRUE);
+            return true;
         }
 
         // Don't do things twice unless forced
         if ($this->schemaCheckFinished && !$force) return ($this->schemaCheckFailed);
 
         // Prepare result array
-        $this->detectedSchemaIssues = array();
-        $this->detectedSchemaIssues['missing'] = array();
-        $this->detectedSchemaIssues['versionMismatch'] = array();
+        $this->detectedSchemaIssues = [];
+        $this->detectedSchemaIssues['missing'] = [];
+        $this->detectedSchemaIssues['versionMismatch'] = [];
 
         // Clear last results 
-        $this->pluginsDeactivated = array();
+        $this->pluginsDeactivated = [];
 
         // Collect required schema infos
-        $this->pluginRequirements = array('ldapSchema' => array());
-        $this->categoryToClass = array();
+        $this->pluginRequirements = array('ldapSchema' => []);
+        $this->categoryToClass = [];
 
         // Walk through plugins with requirements, but only check for active plugins.
         foreach ($this->classesWithInfo as $cname => $defs) {
@@ -184,24 +184,24 @@ class configRegistry
             }
         }
 
-        // Check schema requirements now        $missing = $invalid = array();
+        // Check schema requirements now        $missing = $invalid = [];
         foreach ($this->pluginRequirements as $cname => $requirements) {
 
             // Check LDAP schema requirements for this plugins
-            $failure = FALSE;
+            $failure = false;
             if (isset($requirements['ldapSchema'])) {
                 foreach ($requirements['ldapSchema'] as $oc => $version) {
                     if (!$this->ocAvailable($oc)) {
                         $this->detectedSchemaIssues['missing'][$oc] = $oc;
 
-                        $this->schemaCheckFailed = TRUE;
-                        $failure = TRUE;
+                        $this->schemaCheckFailed = true;
+                        $failure = true;
 
                         new log(
                             "debug",
                             "",
                             "LDAP objectClass missing '{$oc}'!",
-                            array(),
+                            [],
                             ''
                         );
                     } elseif (!empty($version)) {
@@ -212,15 +212,15 @@ class configRegistry
                             }
                             $this->detectedSchemaIssues['versionMismatch'][$oc] =
                                 sprintf(_("%s has version %s but %s is required!"), bold($oc), bold($currentVersion), bold($version));
-                            $this->schemaCheckFailed = TRUE;
-                            $failure = TRUE;
+                            $this->schemaCheckFailed = true;
+                            $failure = true;
 
                             new log(
                                 "debug",
                                 "",
                                 "LDAP objectClass version mismatch '{$oc}' " .
                                     "has '{$currentVersion}' but {$version} required!",
-                                array(),
+                                [],
                                 ''
                             );
                         }
@@ -235,22 +235,24 @@ class configRegistry
                 }
             }
         }
-        $this->schemaCheckFinished = TRUE;
-        return (!$this->schemaCheckFailed);
+        $this->schemaCheckFinished = true;
+        return !$this->schemaCheckFailed;
     }
 
 
-    /*! \brief      The function 'validateSchemata' may has disabled some GOsa-Plugins, 
-     *               the list of disabled plugins will be returned here.
-     *  @return     Array       The list of plugins disabled by 'validateSchemata'
+    /**
+     * The function 'validateSchemata' may has disabled some GOsa-Plugins, 
+     * the list of disabled plugins will be returned here.
+     * @return array The list of plugins disabled by 'validateSchemata'
      */
     function getDisabledPlugins()
     {
-        return ($this->pluginsDeactivated);
+        return $this->pluginsDeactivated;
     }
 
 
-    /*! \brief      Displays an error message with all issues detect during the schema validation.
+    /**
+     * Displays an error message with all issues detect during the schema validation.
      */
     function displayRequirementErrors()
     {
@@ -277,10 +279,11 @@ class configRegistry
     }
 
 
-    /*! \brief      Checks to version strings (e.g. '>=v2.8' and '2.9')
-     *  @param      String      The required version with operators (e.g. '>=2.8') 
-     *  @param      String      The version to match for withOUT operators (e.g. '2.9') 
-     *  @return     Boolean     True if version matches else false.  
+    /**
+     * Checks to version strings (e.g. '>=v2.8' and '2.9')
+     * @param      string      The required version with operators (e.g. '>=2.8') 
+     * @param      string      The version to match for withOUT operators (e.g. '2.9') 
+     * @return     boolean     True if version matches else false.  
      */
     private function ocVersionMatch($required, $installed)
     {
@@ -290,38 +293,41 @@ class configRegistry
     }
 
 
-    /*! \brief      Returns the currently installed version of a given object class.
-     *  @param      String      The name of the objectClass to check for. 
-     *  @return     String      The version string of the objectClass (e.g. v2.7) 
+    /**
+     * Returns the currently installed version of a given object class.
+     * @param      string      The name of the objectClass to check for. 
+     * @return     string      The version string of the objectClass (e.g. v2.7) 
      */
     function getObjectClassVersion($oc)
     {
         if (!isset($this->objectClasses[$oc])) {
-            return (NULL);
+            return null;
         } else {
             $version = -1; // unknown
             if (preg_match("/(v[^)]*)/", $this->objectClasses[$oc]['DESC'])) {
                 $version = preg_replace('/^.*\(v([^)]*)\).*$/', "\\1", $this->objectClasses[$oc]['DESC']);
             }
         }
-        return ($version);
+        return $version;
     }
 
 
-    /*! \brief      Check whether the given object class is available or not. 
-     *  @param      String      The name of the objectClass to check for (e.g. 'mailAccount') 
-     *  @return     Boolean     Returns TRUE if the class exists else FALSE.
+    /**
+     * Check whether the given object class is available or not. 
+     * @param      string      The name of the objectClass to check for (e.g. 'mailAccount') 
+     * @return     boolean     Returns true if the class exists else false.
      */
     function ocAvailable($name)
     {
-        return (isset($this->objectClasses[$name]));
+        return isset($this->objectClasses[$name]);
     }
 
 
-    /*! \brief      Re-loads the list of installed GOsa-Properties. 
-     *  @param      Boolean     $force   If force is TRUE, the complete properties list is rebuild..
+    /**
+     * Re-loads the list of installed GOsa-Properties. 
+     * @param      boolean     $force   If force is true, the complete properties list is rebuild..
      */
-    function reload($force = FALSE)
+    function reload($force = false)
     {
         global $config;
         // Do not reload the properties everytime, once we have  
@@ -330,10 +336,10 @@ class configRegistry
         if (!$force && $this->status == 'finished') return;
 
         // Reset everything
-        $this->ldapStoredProperties = array();
-        $this->fileStoredProperties = array();
-        $this->properties = array();
-        $this->mapByName = array();
+        $this->ldapStoredProperties = [];
+        $this->fileStoredProperties = [];
+        $this->properties = [];
+        $this->mapByName = [];
         $this->activePlugins = array('core' => 'core');
 
         if (!$config) return;
@@ -419,12 +425,12 @@ class configRegistry
 
         // Skip searching for LDAP defined properties if 'ignoreLdapProperties' is set to 'true'
         //  in the config. 
-        $this->ignoreLdapProperties = FALSE;
+        $this->ignoreLdapProperties = false;
         if (
             isset($this->fileStoredProperties['core'][strtolower('ignoreLdapProperties')]) &&
             preg_match("/(true|on)/i", $this->fileStoredProperties['core'][strtolower('ignoreLdapProperties')])
         ) {
-            $this->ignoreLdapProperties = TRUE;
+            $this->ignoreLdapProperties = true;
         }
 
         // Search for all config flags defined in the LDAP - BUT only if we ARE logged in. 
@@ -481,7 +487,8 @@ class configRegistry
     }
 
 
-    /*! \brief      Returns TRUE if the property registration has finished without any error.
+    /**
+     * Returns true if the property registration has finished without any error.
      */
     function propertyInitializationComplete()
     {
@@ -489,9 +496,10 @@ class configRegistry
     }
 
 
-    /*! \brief      Registers a GOsa-Property and thus makes it useable by GOsa and its plugins.
-     *  @param      String      $class  The name of the class/plugin that wants to register this property.
-     *  @return     Array       $data   An array containing all data set in plInfo['plProperty]
+    /**
+     * Registers a GOsa-Property and thus makes it useable by GOsa and its plugins.
+     * @param      string      $class  The name of the class/plugin that wants to register this property.
+     * @return     array       $data   An array containing all data set in plInfo['plProperty] !TODO
      */
     function register($class, $data)
     {
@@ -502,92 +510,99 @@ class configRegistry
     }
 
 
-    /*! \brief      Returns all registered properties.
-     *  @return     Array   A list of all properties.
+    /**
+     * Returns all registered properties.
+     * @return     array   A list of all properties.
      */
     public function getAllProperties()
     {
-        return ($this->properties);
+        return $this->properties;
     }
 
 
-    /*! \brief      Checks whether a property exists or not.
-     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
-     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
-     *  @return     Boolean     TRUE if it exists else FALSE.
+    /**
+     * Checks whether a property exists or not.
+     * @param      string      $class  The class name (e.g. 'core' or 'mailAccount') 
+     * @param      string      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     * @return     boolean     true if it exists else false.
      */
     function propertyExists($class, $name)
     {
         $p = strtolower("{$class}::{$name}");
-        return (isset($this->mapByName[$p]));
+        return isset($this->mapByName[$p]);
     }
 
 
-    /*! \brief      Returns the id of a registered property.
-     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
-     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
-     *  @return     Integer     The id for the given property.  
+    /**
+     * Returns the id of a registered property.
+     * @param      string      $class  The class name (e.g. 'core' or 'mailAccount') 
+     * @param      string      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     * @return     integer     The id for the given property.  
      */
     private function getId($class, $name)
     {
         $p = strtolower("{$class}::{$name}");
         if (!isset($this->mapByName[$p])) {
-            return (-1);
+            return -1;
         }
-        return ($this->mapByName[$p]);
+        return $this->mapByName[$p];
     }
 
 
-    /*! \brief      Returns a given property, if it exists.
-     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
-     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
-     *  @return     GOsaPropery     The property or 'NULL' if it doesn't exists.
+    /**
+     * Returns a given property, if it exists.
+     * @param      string      $class  The class name (e.g. 'core' or 'mailAccount') 
+     * @param      string      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     * @return     GOsaProperty|null     The property or 'null' if it doesn't exists.
      */
     function getProperty($class, $name)
     {
         if ($this->propertyExists($class, $name)) {
-            return ($this->properties[$this->getId($class, $name)]);
+            return $this->properties[$this->getId($class, $name)];
         }
-        return (NULL);
+        return null;
     }
 
 
-    /*! \brief      Returns the value for a given property, if it exists.
-     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
-     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
-     *  @return     GOsaPropery     The property value or an empty string if it doesn't exists.
+    /**
+     * Returns the value for a given property, if it exists.
+     * @param      string      $class  The class name (e.g. 'core' or 'mailAccount') 
+     * @param      string      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     * @return     GOsaProperty|string     The property value or an empty string if it doesn't exists.
      */
     function getPropertyValue($class, $name)
     {
         if ($this->propertyExists($class, $name)) {
             $tmp = $this->getProperty($class, $name);
-            return ($tmp->getValue());
+            return $tmp->getValue();
         }
-        return ("");
+        return '';
     }
 
 
-    /*! \brief      Set a new value for a given property, if it exists.
-     *  @param      String      $class  The class name (e.g. 'core' or 'mailAccount') 
-     *  @param      String      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
-     *  @return     
+    /**
+     * Set a new value for a given property, if it exists.
+     * @param      string      $class  The class name (e.g. 'core' or 'mailAccount') 
+     * @param      string      $name   The property name (e.g. 'sessionTimeout' or 'mailMethod')
+     * @return     
      */
     function setPropertyValue($class, $name, $value)
     {
         if ($this->propertyExists($class, $name)) {
             $tmp = $this->getProperty($class, $name);
-            return ($tmp->setValue($value));
+            return $tmp->setValue($value);
         }
-        return ("");
+        return '';
     }
 
 
-    /*! \brief      Save all temporary made property changes and thus make them useable/effective.
-     *  @return     Array       Returns a list of plugins that have to be migrated before they can be saved.
+    /**
+     * Save all temporary made property changes and thus make them useable/effective.
+     * @return     array       Returns a list of plugins that have to be migrated before they can be saved.
      */
     function saveChanges()
     {
-        $migrate = array();
+        $migrate = [];
         foreach ($this->properties as $prop) {
 
             // Is this property modified
@@ -601,7 +616,7 @@ class configRegistry
                 }
             }
         }
-        return ($migrate);
+        return $migrate;
     }
 }
 
@@ -618,12 +633,12 @@ class gosaProperty
     protected $description = "";
     protected $check = "";
     protected $migrate = "";
-    protected $mandatory = FALSE;
+    protected $mandatory = false;
     protected $group = "default";
-    protected $parent = NULL;
-    protected $data = array();
+    protected $parent = null;
+    protected $data = [];
 
-    protected $migrationClass = NULL;
+    protected $migrationClass = null;
 
     /*!  The current property status
      *     'ldap'       Property is stored in ldap 
@@ -634,14 +649,21 @@ class gosaProperty
     protected $status = 'undefined';
 
     protected $attributes = array(
-        'name', 'type', 'default', 'description', 'check',
-        'migrate', 'mandatory', 'group', 'defaults'
+        'name',
+        'type',
+        'default',
+        'description',
+        'check',
+        'migrate',
+        'mandatory',
+        'group',
+        'defaults'
     );
 
 
 
 
-    function __construct($parent, $classname, $data)
+    public function __construct($parent, $classname, $data)
     {
         // Set some basic infos 
         $this->parent = $parent;
@@ -662,7 +684,7 @@ class gosaProperty
     function migrationRequired()
     {
         // Instantiate migration class 
-        if (!empty($this->migrate) && $this->migrationClass == NULL) {
+        if (!empty($this->migrate) && $this->migrationClass == null) {
             if (!class_available($this->migrate)) {
                 trigger_error("Cannot start migration for gosaProperty::'{$this->getName()}' class not found ({$this->migrate})!");
             } else {
@@ -675,30 +697,30 @@ class gosaProperty
                 }
             }
         }
-        if (empty($this->migrate) || $this->migrationClass == NULL) {
-            return (FALSE);
+        if (empty($this->migrate) || $this->migrationClass == null) {
+            return false;
         }
-        return ($this->migrationClass->checkForIssues());
+        return $this->migrationClass->checkForIssues();
     }
 
     function getMigrationClass()
     {
-        return ($this->migrationClass);
+        return $this->migrationClass;
     }
 
     function check()
     {
-        $val = $this->getValue(TRUE);
-        $return = TRUE;
+        $val = $this->getValue(true);
+        $return = true;
         if ($this->mandatory && empty($val)) {
-            $return = FALSE;
+            $return = false;
         }
 
         $check = $this->getCheck();
         if (!empty($val) && !empty($check)) {
-            $res = call_user_func(preg_split("/::/", $this->check), $messages = TRUE, $this->class, $this->name, $val, $this->type);
+            $res = call_user_func(preg_split("/::/", $this->check), $messages = true, $this->class, $this->name, $val, $this->type);
             if (!$res) {
-                $return = FALSE;
+                $return = false;
             }
         }
         return ($return);
@@ -711,7 +733,7 @@ class gosaProperty
         // Display the reason for failing this check.         
         if ($message && !$match) {
             msg_dialog::display(
-                _("Warning"),
+                _('Warning'),
                 sprintf(
                     _("The value %s specified for %s:%s needs to be a bool value!"),
                     bold($value),
@@ -722,17 +744,17 @@ class gosaProperty
             );
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isString($message, $class, $name, $value, $type)
     {
-        $match = TRUE;
+        $match = true;
 
         // Display the reason for failing this check.         
         if ($message && !$match) {
             msg_dialog::display(
-                _("Warning"),
+                _('Warning'),
                 sprintf(
                     _("The value %s specified for %s:%s needs to be a string!"),
                     bold($value),
@@ -743,7 +765,7 @@ class gosaProperty
             );
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isInteger($message, $class, $name, $value, $type)
@@ -753,7 +775,7 @@ class gosaProperty
         // Display the reason for failing this check.         
         if ($message && !$match) {
             msg_dialog::display(
-                _("Warning"),
+                _('Warning'),
                 sprintf(
                     _("The value %s specified for %s:%s needs to be numeric!"),
                     bold($value),
@@ -764,7 +786,7 @@ class gosaProperty
             );
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isPath($message, $class, $name, $value, $type)
@@ -774,7 +796,7 @@ class gosaProperty
         // Display the reason for failing this check.         
         if ($message && !$match) {
             msg_dialog::display(
-                _("Warning"),
+                _('Warning'),
                 sprintf(
                     _("The path %s specified for %s:%s is invalid!"),
                     bold($value),
@@ -785,7 +807,7 @@ class gosaProperty
             );
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isReadablePath($message, $class, $name, $value, $type)
@@ -796,7 +818,7 @@ class gosaProperty
         if ($message && !$match) {
             if (!is_dir($value)) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The folder %s specified for %s:%s does not exists!"),
                         bold($value),
@@ -807,7 +829,7 @@ class gosaProperty
                 );
             } elseif (!is_readable($value)) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The folder %s specified for %s:%s is not readable!"),
                         bold($value),
@@ -819,7 +841,7 @@ class gosaProperty
             }
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isWriteableFile($message, $class, $name, $value, $type)
@@ -833,7 +855,7 @@ class gosaProperty
 
             if (!file_exists($value) && !is_writeable(dirname($value))) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The file %s specified for %s:%s is not writeable!"),
                         bold($value),
@@ -844,7 +866,7 @@ class gosaProperty
                 );
             } elseif (file_exists($value) && !is_writeable($value)) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The file %s specified for %s:%s is not writeable!"),
                         bold($value),
@@ -856,7 +878,7 @@ class gosaProperty
             }
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isWriteablePath($message, $class, $name, $value, $type)
@@ -867,7 +889,7 @@ class gosaProperty
         if ($message && !$match) {
             if (!is_dir($value)) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The folder %s specified for %s:%s does not exists!"),
                         bold($value),
@@ -878,7 +900,7 @@ class gosaProperty
                 );
             } elseif (!is_writeable($value)) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The folder %s specified for %s:%s is not writeable!"),
                         bold($value),
@@ -890,7 +912,7 @@ class gosaProperty
             }
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isReadableFile($message, $class, $name, $value, $type)
@@ -902,7 +924,7 @@ class gosaProperty
 
             if (!is_file($value)) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The file %s specified for %s:%s does not exists!"),
                         bold($value),
@@ -913,7 +935,7 @@ class gosaProperty
                 );
             } elseif (!is_readable($value)) {
                 msg_dialog::display(
-                    _("Warning"),
+                    _('Warning'),
                     sprintf(
                         _("The file %s specified for %s:%s is not readable!"),
                         bold($value),
@@ -925,17 +947,17 @@ class gosaProperty
             }
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isCommand($message, $class, $name, $value, $type)
     {
-        $match = TRUE;
+        $match = true;
 
         // Display the reason for failing this check.         
         if ($message && !$match) {
             msg_dialog::display(
-                _("Warning"),
+                _('Warning'),
                 sprintf(
                     _("The command %s specified for %s:%s is invalid!"),
                     bold($value),
@@ -946,7 +968,7 @@ class gosaProperty
             );
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isDn($message, $class, $name, $value, $type)
@@ -956,7 +978,7 @@ class gosaProperty
         // Display the reason for failing this check.         
         if ($message && !$match) {
             msg_dialog::display(
-                _("Warning"),
+                _('Warning'),
                 sprintf(
                     _("The DN %s specified for %s:%s is invalid!"),
                     bold($value),
@@ -967,7 +989,7 @@ class gosaProperty
             );
         }
 
-        return ($match);
+        return $match;
     }
 
     static function isRdn($message, $class, $name, $value, $type)
@@ -977,7 +999,7 @@ class gosaProperty
         // Display the reason for failing this check.         
         if ($message && !$match) {
             msg_dialog::display(
-                _("Warning"),
+                _('Warning'),
                 sprintf(
                     _("The RDN %s specified for %s:%s is invalid!"),
                     bold($value),
@@ -988,7 +1010,7 @@ class gosaProperty
             );
         }
 
-        return ($match);
+        return $match;
     }
 
     private function _restoreCurrentValue()
@@ -1068,7 +1090,7 @@ class gosaProperty
         }
     }
 
-    function getValue($temporary = FALSE)
+    function getValue($temporary = false)
     {
         if ($temporary) {
             if (in_array_strict($this->getStatus(), array('modified', 'removed'))) {
@@ -1126,7 +1148,7 @@ class gosaProperty
                 }
             } else {
                 $attrs = $ldap->fetch();
-                $data = array();
+                $data = [];
                 $found = false;
                 if (isset($attrs['gosaSetting']['count'])) {
                     for ($i = 0; $i < $attrs['gosaSetting']['count']; $i++) {
@@ -1153,7 +1175,7 @@ class gosaProperty
             $dn = "cn={$this->class}," . $this->parent->config->current['CONFIG'];
             $ldap->cat($dn);
             $attrs = $ldap->fetch();
-            $data = array('gosaSetting' => array());
+            $data = array('gosaSetting' => []);
             for ($i = 0; $i < $attrs['gosaSetting']['count']; $i++) {
                 $set = $attrs['gosaSetting'][$i];
                 if (preg_match("/^{$this->name}:/", $set)) {
@@ -1181,7 +1203,7 @@ class gosaProperty
 
     function isValid()
     {
-        return (TRUE);
+        return (true);
     }
 }
 
