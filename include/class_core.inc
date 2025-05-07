@@ -651,6 +651,16 @@ DEBUG_SI      = 256"),
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "roleRDN",
+                                "type"          => "rdn",
+                                "default"       => "ou=roles,",
+                                "description"   => _("RDN for role storage."),
+                                "check"         => "gosaProperty::isRdn",
+                                "migrate"       => "migrate_roleRDN",
+                                "group"         => "plugin",
+                                "mandatory"     => false),
+
+                        array(
                                 "name"          => "gidNumberBase",
                                 "type"          => "integer",
                                 "default"       => "1000",
