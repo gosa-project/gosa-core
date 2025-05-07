@@ -32,48 +32,48 @@ class aclrole extends acl
 
     /* Helpers */
     var $dialogState = "head";
-    var $aclType = "";
-    var $aclObject = "";
-    var $aclContents = array();
+    var $aclType = '';
+    var $aclObject = '';
+    var $aclContents = [];
     var $target = "group";
-    var $aclTypes = array();
-    var $aclObjects = array();
-    var $recipients = array();
+    var $aclTypes = [];
+    var $aclObjects = [];
+    var $recipients = [];
     var $isContainer = TRUE;
     var $currentIndex = 0;
     var $wasNewEntry = FALSE;
-    var $ocMapping = array();
-    var $savedAclContents = array();
-    var $myAclObjects = array();
+    var $ocMapping = [];
+    var $savedAclContents = [];
+    var $myAclObjects = [];
 
     /* Role attributes */
-    var $gosaAclTemplate = "";
-    var $cn = "";
-    var $orig_cn = "";
-    var $description = "";
+    var $gosaAclTemplate = [];
+    var $cn = '';
+    var $orig_cn = '';
+    var $description = '';
     var $orig_dn;
     var $orig_base;
-    var $base = "";
+    var $base = '';
     var $baseSelector;
 
     var $list = NULL;
     var $sectionList = NULL;
 
-    function __construct($config,  $dn = NULL)
+    public function __construct($config,  $dn = NULL)
     {
         /* Include config object */
         plugin::__construct($config, $dn);
 
-        if ($this->dn == "new") {
+        if ($this->dn == 'new') {
             $ui = get_userinfo();
-            $this->base = dn2base(session::global_is_set("CurrentMainBase") ? "cn=test," . session::global_get("CurrentMainBase") : $ui->dn);
+            $this->base = dn2base(session::global_is_set("CurrentMainBase") ? 'cn=test,' . session::global_get('CurrentMainBase') : $ui->dn);
         } else {
-            $this->base = preg_replace("/^[^,]+,[^,]+,/", "", $this->dn);
-            new log("view", "acl/" . get_class($this), $this->dn);
+            $this->base = preg_replace("/^[^,]+,[^,]+,/", '', $this->dn);
+            new log('view', 'acl/' . get_class($this), $this->dn);
         }
 
         /* Load ACL's */
-        $this->gosaAclTemplate = array();
+        $this->gosaAclTemplate = [];
         if (isset($this->attrs["gosaAclTemplate"])) {
             for ($i = 0; $i < $this->attrs["gosaAclTemplate"]['count']; $i++) {
                 $acl = $this->attrs["gosaAclTemplate"][$i];
@@ -85,7 +85,7 @@ class aclrole extends acl
         /* Extract available categories from plugin info list */
         $tmp = session::get('plist');
         $plist = $tmp->info;
-        $oc = array();
+        $oc = [];
         foreach ($plist as $class => $acls) {
 
             /* Only feed categories */
@@ -97,13 +97,13 @@ class aclrole extends acl
                     /* Non numeric index means -> base object containing more informations */
                     if (preg_match('/^[0-9]+$/', $idx)) {
                         if (!isset($this->ocMapping[$data])) {
-                            $this->ocMapping[$data] = array();
+                            $this->ocMapping[$data] = [];
                             $this->ocMapping[$data][] = '0';
                         }
                         $this->ocMapping[$data][] = $class;
                     } else {
                         if (!isset($this->ocMapping[$idx])) {
-                            $this->ocMapping[$idx] = array();
+                            $this->ocMapping[$idx] = [];
                             $this->ocMapping[$idx][] = '0';
                         }
                         $this->ocMapping[$idx][] = $class;
@@ -173,7 +173,7 @@ class aclrole extends acl
     function updateList()
     {
         if (!$this->list) {
-            $this->list = new sortableListing($this->gosaAclTemplate, array(), TRUE);
+            $this->list = new sortableListing($this->gosaAclTemplate, [], TRUE);
             $this->list->setDeleteable(true);
             $this->list->setInstantDelete(true);
             $this->list->setEditable(true);
@@ -186,7 +186,7 @@ class aclrole extends acl
 
 
         // Add ACL entries to the listing
-        $lData = array();
+        $lData = [];
         foreach ($this->gosaAclTemplate as $id => $entry) {
             $lData[] = $this->convertForListing($entry);
         }
@@ -199,7 +199,7 @@ class aclrole extends acl
         $member = implode(", ", $entry['members']);
         $acl = implode(", ", array_keys($entry['acl']));
         $type = implode(", ", array_keys($entry['acl']));
-        return (array('data' => array($acl, $this->aclTypes[$entry['type']])));
+        return array('data' => array($acl, $this->aclTypes[$entry['type']]));
     }
 
 
@@ -222,7 +222,7 @@ class aclrole extends acl
             $this->loadAclEntry(TRUE);
         }
 
-        $new_acl = array();
+        $new_acl = [];
         $aclDialog = FALSE;
         $firstedit = FALSE;
 
@@ -278,7 +278,7 @@ class aclrole extends acl
 
                 /* Ordinary ACL */
                 if (!isset($new_acl[$object])) {
-                    $new_acl[$object] = array();
+                    $new_acl[$object] = [];
                 }
                 if (isset($new_acl[$object][$attribute])) {
                     $new_acl[$object][$attribute] .= $value;
@@ -293,7 +293,7 @@ class aclrole extends acl
         }
 
         /* Only be interested in new acl's, if we're in the right _POST place */
-        if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])) {
+        if ($aclDialog && $this->aclObject != '' && is_array($this->ocMapping[$this->aclObject])) {
 
             foreach ($this->ocMapping[$this->aclObject] as $oc) {
                 unset($this->aclContents[$oc]);
@@ -346,9 +346,9 @@ class aclrole extends acl
         }
 
         /* Add acl? */
-        if (isset($_POST['add_acl']) && $_POST['aclObject'] != "" && $this->acl_is_writeable("gosaAclTemplate")) {
+        if (isset($_POST['add_acl']) && $_POST['aclObject'] != '' && $this->acl_is_writeable("gosaAclTemplate")) {
             $this->dialogState = 'edit';
-            $this->savedAclContents = array();
+            $this->savedAclContents = [];
             foreach ($this->ocMapping[$this->aclObject] as $oc) {
                 if (isset($this->aclContents[$oc])) {
                     $this->savedAclContents[$oc] = $this->aclContents[$oc];
@@ -384,7 +384,7 @@ class aclrole extends acl
 
 
             /* Draw list */
-            $data = $lData = array();
+            $data = $lData = [];
 
             // Create a map of all used sections, this allows us to simply hide the remove button
             //  if no acl is configured for the given section
@@ -393,11 +393,11 @@ class aclrole extends acl
 
             /* Add settings for all categories to the (permanent) list */
             foreach ($this->aclObjects as $section => $dsc) {
-                $summary = "";
+                $summary = '';
                 foreach ($this->ocMapping[$section] as $oc) {
                     if (
                         isset($this->aclContents[$oc]) && count($this->aclContents[$oc]) && isset($this->aclContents[$oc][0]) &&
-                        $this->aclContents[$oc][0] != ""
+                        $this->aclContents[$oc][0] != ''
                     ) {
 
                         $summary .= "$oc, ";
@@ -413,21 +413,21 @@ class aclrole extends acl
                 }
 
                 /* Set summary... */
-                if ($summary == "") {
+                if ($summary == '') {
                     switch ($theme) {
                         case 'classic':
-                            $summary = '<i>' . _("No ACL settings for this category!") . '</i>';
+                            $summary = '<i>' . _('No ACL settings for this category!') . '</i>';
                             break;
 
                         default:
-                            $summary = '<p>' . _("No ACL settings for this category!") . '</p>';
+                            $summary = '<p>' . _('No ACL settings for this category!') . '</p>';
                             break;
                     }
                 } else {
                     $summary = sprintf(_("ACL for these objects: %s"), preg_replace('/, $/', '', $summary));
                 }
 
-                $action = "";
+                $action = '';
                 if ($this->acl_is_readable("gosaAclTemplate")) {
                     switch ($theme) {
                         case 'classic':
@@ -497,10 +497,10 @@ class aclrole extends acl
         $tmp = session::get('plist');
         $plist = $tmp->info;
         asort($plist);
-        $newSort = array();
+        $newSort = [];
 
         foreach ($list as $name => $translation) {
-            $na  =  preg_replace("/^.*\//", "", $name);
+            $na  =  preg_replace("/^.*\//", '', $name);
             if (!isset($plist[$na]['plPriority'])) {
                 $prio = 0;
             } else {
@@ -512,7 +512,7 @@ class aclrole extends acl
 
         asort($newSort);
 
-        $ret = array();
+        $ret = [];
         foreach ($newSort as $name => $prio) {
             $ret[$name] = $list[$name];
         }
@@ -524,8 +524,8 @@ class aclrole extends acl
         /* New entry gets presets... */
         if ($new) {
             $this->aclType = 'sub';
-            $this->recipients = array();
-            $this->aclContents = array();
+            $this->recipients = [];
+            $this->aclContents = [];
         } else {
             $acl = $this->gosaAclTemplate[$this->currentIndex];
             $this->aclType = $acl['type'];
@@ -553,10 +553,10 @@ class aclrole extends acl
         global $config;
 
         /* Assemble ACL's */
-        $tmp_acl = array();
+        $tmp_acl = [];
         foreach ($this->gosaAclTemplate as $prio => $entry) {
-            $final = "";
-            $members = "";
+            $final = '';
+            $members = '';
             if (isset($entry['members'])) {
                 foreach ($entry['members'] as $key => $dummy) {
                     $members .= base64_encode(preg_replace('/^.:/', '', $key)) . ',';
@@ -603,7 +603,7 @@ class aclrole extends acl
         if (!count($tmp_acl)) {
             /* Remove attribute */
             if ($this->initially_was_account) {
-                $this->attrs["gosaAclTempalte"] = array();
+                $this->attrs["gosaAclTempalte"] = [];
             } else {
                 if (isset($this->attrs["gosaAclTemplate"])) {
                     unset($this->attrs["gosaAclTemplate"]);
@@ -623,14 +623,14 @@ class aclrole extends acl
             new log("modify", "acl/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         } else {
             $ldap->cd($config->current['BASE']);
-            $ldap->create_missing_trees(preg_replace("/^[^,]+,/", "", $this->dn));
+            $ldap->create_missing_trees(preg_replace("/^[^,]+,/", '', $this->dn));
             $ldap->cd($this->dn);
             $ldap->add($this->attrs);
             new log("create", "acl/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         }
 
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", __CLASS__));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, '', __CLASS__));
         }
 
         /* Refresh users ACL */
@@ -646,7 +646,7 @@ class aclrole extends acl
         $ldap = $config->get_ldap_link();
         $serach_for = "*:role:" . base64_encode($this->dn) . ":*";
         $ldap->search("(&(objectClass=gosaACL)(gosaAclEntry=" . $serach_for . "))", array('dn', 'cn', 'sn', 'givenName', 'uid'));
-        $all_names = "";
+        $all_names = '';
 
 
         $cnt = 3;
@@ -659,7 +659,7 @@ class aclrole extends acl
         }
 
         if (!empty($all_names)) {
-            $all_names = preg_replace("/, $/", "", $all_names);
+            $all_names = preg_replace("/, $/", '', $all_names);
             if (!$cnt) {
                 $all_names .= ", ...";
             }
@@ -671,7 +671,7 @@ class aclrole extends acl
         $ldap->rmDir($this->dn);
         new log("remove", "acl/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", __CLASS__));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, '', __CLASS__));
         }
 
         /* Optionally execute a command after we're done */
@@ -685,7 +685,7 @@ class aclrole extends acl
             unset($og->member[$this->dn]);
             $og->save();
             if (!$ldap->success()) {
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $og->dn, "", __CLASS__));
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $og->dn, '', __CLASS__));
             }
         }
     }
@@ -723,9 +723,9 @@ class aclrole extends acl
         $smarty = get_smarty();
         $smarty->assign("cn", set_post($this->cn));
         $str = $smarty->fetch(get_template_path("paste_role.tpl", TRUE, dirname(__FILE__)));
-        $ret = array();
+        $ret = [];
         $ret['string'] = $str;
-        $ret['status'] = "";
+        $ret['status'] = '';
         return ($ret);
     }
 
@@ -747,7 +747,7 @@ class aclrole extends acl
             "plShortName" => _("Role"),
             "plDescription" => _("Access control roles"),
             "plSelfModify"  => FALSE,
-            "plDepends"     => array(),
+            "plDepends"     => [],
             "plPriority"    => 0,
             "plSection"     => array("administration"),
             "plCategory"    => array("acl"),
@@ -818,6 +818,6 @@ class aclrole extends acl
             $message[] = msgPool::permMove();
         }
 
-        return ($message);
+        return $message;
     }
 }
