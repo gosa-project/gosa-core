@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
@@ -22,58 +22,58 @@
 
 class aclManagement extends management
 {
-    var $plHeadline     = "Access control";
-    var $plDescription  = "Control access to GOsa managed objects down to attribute and action level";
-    var $plIcon         = "plugins/acl/images/plugin.png";
-    var $matIcon        = "lock";
+    var $plHeadline     = 'Access control';
+    var $plDescription  = 'Control access to GOsa managed objects down to attribute and action level';
+    var $plIcon         = 'plugins/acl/images/plugin.png';
+    var $matIcon        = 'lock';
 
     // Tab definition 
-    protected $tabClass = "aclroletab";
-    protected $tabType = "ACLROLETAB";
-    protected $aclCategory = "acl";
-    protected $aclPlugin   = "acl";
-    protected $objectName   = "acl";
+    protected $tabClass = 'aclroletab';
+    protected $tabType = 'ACLROLETAB';
+    protected $aclCategory = 'acl';
+    protected $aclPlugin   = 'acl';
+    protected $objectName   = 'acl';
 
-    function __construct($config, $ui)
+    public function __construct($config, $ui)
     {
         $this->config = $config;
         $this->ui = $ui;
 
-        $this->storagePoints = array(get_ou("aclrole", "aclRoleRDN")); // ACLs are attached to department containers
+        $this->storagePoints = array(get_ou('aclrole', 'aclRoleRDN')); // ACLs are attached to department containers
 
         // Build filter
-        if (session::global_is_set(get_class($this) . "_filter")) {
-            $filter = session::global_get(get_class($this) . "_filter");
+        if (session::global_is_set(get_class($this) . '_filter')) {
+            $filter = session::global_get(get_class($this) . '_filter');
         } else {
-            $filter = new filter(get_template_path("acl-filter.xml", true));
+            $filter = new filter(get_template_path('acl-filter.xml', true));
             $filter->setObjectStorage($this->storagePoints);
         }
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path("acl-list.xml", true));
-        $headpage->registerElementFilter("filterLabel", "aclManagement::filterLabel");
+        $headpage = new listing(get_template_path('acl-list.xml', true));
+        $headpage->registerElementFilter('filterLabel', 'aclManagement::filterLabel');
         $headpage->setFilter($filter);
 
         // Add copy&paste and snapshot handler.
-        if ($this->config->boolValueIsTrue("core", "copyPaste")) {
+        if ($this->config->boolValueIsTrue('core', "copyPaste")) {
             $this->cpHandler = new CopyPasteHandler($this->config);
         }
-        if ($this->config->get_cfg_value("core", "enableSnapshots") == "true") {
+        if ($this->config->get_cfg_value('core', "enableSnapshots") == "true") {
             $this->snapHandler = new SnapshotHandler($this->config);
         }
 
-        parent::__construct($this->config, $ui, "acl", $headpage);
+        parent::__construct($this->config, $ui, 'acl', $headpage);
     }
 
     function removeEntryConfirmed(
-        $action = "",
-        $target = array(),
-        $all = array(),
-        $altTabClass = "",
-        $altTabType = "",
-        $altAclCategory = "",
-        $aclPlugin = ""
+        $action = '',
+        $target = [],
+        $all = [],
+        $altTabClass = '',
+        $altTabType = '',
+        $altAclCategory = '',
+        $aclPlugin = ''
     ) {
         global $config;
         DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel confirmed!");
@@ -104,7 +104,7 @@ class aclManagement extends management
                 del_lock($this->dn);
             } else {
                 msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-                new log("security", "groups/" . get_class($this), $dn, array(), "Tried to trick deletion.");
+                new log("security", "groups/" . get_class($this), $dn, [], "Tried to trick deletion.");
             }
         }
 
@@ -114,15 +114,15 @@ class aclManagement extends management
     }
 
 
-    function newEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
+    function newEntry($action = '', $target = [], $all = [], $altTabClass = '', $altTabType = '', $altAclCategory = '')
     {
         $this->skipFooter = TRUE;
         $altTabClass = "aclroletab";
         $altTabType = "ACLROLETAB";
-        return (parent::newEntry($action, $target, $all, $altTabClass, $altTabType, $altAclCategory));
+        return parent::newEntry($action, $target, $all, $altTabClass, $altTabType, $altAclCategory);
     }
 
-    function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
+    function editEntry($action = '', $target = [], $all = [], $altTabClass = '', $altTabType = '', $altAclCategory = '')
     {
         $this->skipFooter = TRUE;
         if (count($target) == 1) {
@@ -147,12 +147,12 @@ class aclManagement extends management
         $action = parent::detectPostActions();
         if (isset($_POST['edit_acl'])) $action['action'] = "edit_acl";
         if (isset($_POST['edit_role'])) $action['action'] = "edit_role";
-        return ($action);
+        return $action;
     }
 
 
     // A filter which allows to open a department by clicking on the departments name.
-    static function filterLabel($row, $dn, $ou = array(), $pid = 0, $base = "")
+    static function filterLabel($row, $dn, $ou = [], $pid = 0, $base = '')
     {
         $ou = $ou[0];
         if ($dn == $base) {
