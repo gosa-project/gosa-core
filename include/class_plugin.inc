@@ -1097,7 +1097,7 @@ abstract class plugin
 
         /* Update roles to use the new entry dn */
         if (class_available('RoleGeneric')) {
-            $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))", "roles", array(get_ou("roleGeneric", "roleRDN")), $config->current['BASE'], array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+            $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))", "roles", array(get_ou('GosaRoleManagement\admin\roleManagement\RoleGeneric', "roleRDN")), $config->current['BASE'], array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
             // Walk through all roles
             foreach ($roles as $role) {
