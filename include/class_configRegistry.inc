@@ -38,8 +38,22 @@ class configRegistry
     public function __construct()
     {
         // Detect classes that have a plInfo method 
-        global $class_mapping;
+        global $class_mapping, $composerClassMap;
         foreach ($class_mapping as $cname => $path) {
+            $cmethods = get_class_methods($cname);
+            if (is_array($cmethods) && in_array_ics('plInfo', $cmethods)) {
+
+                // Get plugin definitions
+                $def = call_user_func(array($cname, 'plInfo'));;
+
+                // Register Post Events (postmodfiy,postcreate,postremove,checkhook)
+                if (count($def)) {
+                    $this->classesWithInfo[$cname] = $def;
+                }
+            }
+        }
+
+        foreach ($composerClassMap as $cname => $path) {
             $cmethods = get_class_methods($cname);
             if (is_array($cmethods) && in_array_ics('plInfo', $cmethods)) {
 

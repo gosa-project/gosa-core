@@ -537,7 +537,7 @@ class CopyPasteHandler
     $roles = get_sub_list(
       "(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::prepare4filter(LDAP::fix($src_dn)) . "))",
       "roles",
-      array(get_ou("roleGeneric", "roleRDN")),
+      array(get_ou('GosaRoleManagement\admin\roleManagement\RoleGeneric', "roleRDN")),
       $this->config->current['BASE'],
       array("dn"),
       GL_SUBSEARCH | GL_NO_ACL_CHECK
@@ -545,7 +545,7 @@ class CopyPasteHandler
 
     // Walk through all roles
     foreach ($roles as $role) {
-      $role = new roleGeneric($this->config, $role['dn']);
+      $role = new GosaRoleManagement\admin\roleManagement\RoleGeneric($this->config, $role['dn']);
       $role->roleOccupant[] = $dst_dn;
       $role->save();
     }

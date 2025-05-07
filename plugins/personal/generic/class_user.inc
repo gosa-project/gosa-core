@@ -862,7 +862,7 @@ class user extends plugin
         $ldap->cd($this->config->current['BASE']);
         $ldap->search("(&(objectClass=organizationalRole)(roleOccupant=" . LDAP::prepare4filter($this->dn) . "))", array("cn"));
         while ($ldap->fetch()) {
-            $role = new roleGeneric($this->config, $ldap->getDN());
+            $role = new GosaRoleManagement\admin\roleManagement\RoleGeneric($this->config, $ldap->getDN());
             $key = array_search($this->dn, $role->roleOccupant);
             if ($key !== FALSE) {
                 unset($role->roleOccupant[$key]);
