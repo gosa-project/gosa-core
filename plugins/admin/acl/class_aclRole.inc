@@ -23,8 +23,8 @@
 class aclrole extends acl
 {
     /* Definitions */
-    var $plHeadline = "Access control roles";
-    var $plDescription = "Edit AC roles";
+    var $plHeadline = 'Access control roles';
+    var $plDescription = 'Edit AC roles';
 
     /* attribute list for save action */
     var $attributes = array('gosaAclTemplate', "cn", "description");
@@ -39,9 +39,9 @@ class aclrole extends acl
     var $aclTypes = [];
     var $aclObjects = [];
     var $recipients = [];
-    var $isContainer = TRUE;
+    var $isContainer = true;
     var $currentIndex = 0;
-    var $wasNewEntry = FALSE;
+    var $wasNewEntry = false;
     var $ocMapping = [];
     var $savedAclContents = [];
     var $myAclObjects = [];
@@ -144,7 +144,7 @@ class aclrole extends acl
         asort($this->aclTypes);
 
         /* Finally - we want to get saved... */
-        $this->is_account = TRUE;
+        $this->is_account = true;
         $this->orig_base = $this->base;
         $this->orig_dn = $this->dn;
         $this->orig_cn = $this->cn;
@@ -173,7 +173,7 @@ class aclrole extends acl
     function updateList()
     {
         if (!$this->list) {
-            $this->list = new sortableListing($this->gosaAclTemplate, [], TRUE);
+            $this->list = new sortableListing($this->gosaAclTemplate, [], true);
             $this->list->setDeleteable(true);
             $this->list->setInstantDelete(true);
             $this->list->setEditable(true);
@@ -217,17 +217,16 @@ class aclrole extends acl
         /* Handle posts */
         if (isset($_POST['new_acl']) && $this->acl_is_writeable("gosaAclTemplate")) {
             $this->dialogState = 'create';
-            $this->dialog = TRUE;
+            $this->dialog = true;
             $this->currentIndex = count($this->gosaAclTemplate);
-            $this->loadAclEntry(TRUE);
+            $this->loadAclEntry(true);
         }
 
         $new_acl = [];
-        $aclDialog = FALSE;
-        $firstedit = FALSE;
+        $aclDialog = false;
+        $firstedit = false;
 
-        /* Act on HTML post and gets here.
-     */
+        /* Act on HTML post and gets here. */
 
         // Get listing actions. Delete or Edit.
         $this->list->save_object();
@@ -236,8 +235,8 @@ class aclrole extends acl
         if ($lAction['action'] == "edit") {
             $this->currentIndex = $lAction['targets'][0];
             $this->dialogState = 'create';
-            $firstedit = TRUE;
-            $this->dialog = TRUE;
+            $firstedit = true;
+            $this->dialog = true;
             $this->loadAclEntry();
         }
         foreach ($_POST as $name => $post) {
@@ -289,7 +288,7 @@ class aclrole extends acl
         }
 
         if (isset($_POST['acl_dummy_0_0_0'])) {
-            $aclDialog = TRUE;
+            $aclDialog = true;
         }
 
         /* Only be interested in new acl's, if we're in the right _POST place */
@@ -315,7 +314,7 @@ class aclrole extends acl
         /* Cancel new acl? */
         if (isset($_POST['cancel_new_acl'])) {
             $this->dialogState = 'head';
-            $this->dialog = FALSE;
+            $this->dialog = false;
             if ($this->wasNewEntry) {
                 unset($this->gosaAclTemplate[$this->currentIndex]);
             }
@@ -327,7 +326,7 @@ class aclrole extends acl
             $this->gosaAclTemplate[$this->currentIndex]['members'] = $this->recipients;
             $this->gosaAclTemplate[$this->currentIndex]['acl'] = $this->aclContents;
             $this->dialogState = 'head';
-            $this->dialog = FALSE;
+            $this->dialog = false;
         }
 
         /* Cancel edit acl? */
@@ -519,7 +518,7 @@ class aclrole extends acl
         return ($ret);
     }
 
-    function loadAclEntry($new = FALSE)
+    function loadAclEntry($new = false)
     {
         /* New entry gets presets... */
         if ($new) {
@@ -541,10 +540,10 @@ class aclrole extends acl
     {
         if (isset($_POST['save_acl']) && $this->acl_is_writeable("gosaAclTemplate")) {
             $this->save();
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
 
@@ -703,7 +702,7 @@ class aclrole extends acl
                 }
                 if ($this->base != $this->baseSelector->getBase()) {
                     $this->base = $this->baseSelector->getBase();
-                    $this->is_modified = TRUE;
+                    $this->is_modified = true;
                 }
             }
         }
@@ -722,7 +721,7 @@ class aclrole extends acl
     {
         $smarty = get_smarty();
         $smarty->assign("cn", set_post($this->cn));
-        $str = $smarty->fetch(get_template_path("paste_role.tpl", TRUE, dirname(__FILE__)));
+        $str = $smarty->fetch(get_template_path("paste_role.tpl", true, dirname(__FILE__)));
         $ret = [];
         $ret['string'] = $str;
         $ret['status'] = '';
@@ -746,7 +745,7 @@ class aclrole extends acl
         return (array(
             "plShortName" => _("Role"),
             "plDescription" => _("Access control roles"),
-            "plSelfModify"  => FALSE,
+            "plSelfModify"  => false,
             "plDepends"     => [],
             "plPriority"    => 0,
             "plSection"     => array("administration"),
@@ -765,7 +764,7 @@ class aclrole extends acl
                     "check"         => "gosaProperty::isRdn",
                     "migrate"       => "migrate_aclRoleRDN",
                     "group"         => "plugin",
-                    "mandatory"     => FALSE
+                    "mandatory"     => false
                 )
             ),
 
