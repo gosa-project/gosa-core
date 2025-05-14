@@ -2984,7 +2984,7 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
 
         // Call the premodify hook now
         $passwordPlugin = new password($config, $dn);
-        plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output, $retCode, $error, $directlyPrintError = false);
+        plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output, $retCode, $error, false);
         if ($retCode === 0 && count($output)) {
             $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"), implode($output));
             return (false);
@@ -3020,7 +3020,7 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
                 $message = _("Password change failed!");
             } else {
                 // Execute the password hook
-                plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrsEvent, $output, $retCode, $error, $directlyPrintError = false);
+                plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrsEvent, $output, $retCode, $error, false);
                 if ($retCode === 0) {
                     if (count($output)) {
                         new log("modify", "users/passwordMethod", $dn, [], "Password change - Post modify hook reported! - FAILED!");
@@ -3058,7 +3058,7 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
                 if (isset($initialAttrs[$attr][0])) $attrsEvent[$attr] = $initialAttrs[$attr][0];
             }
 
-            plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output, $retCode, $error, $directlyPrintError = false);
+            plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output, $retCode, $error, false);
             if ($retCode === 0 && count($output)) {
                 $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"), implode($output));
                 new log("modify", "users/passwordMethod", $dn, [], "Rolling back premodify hook! - FAILED!");
