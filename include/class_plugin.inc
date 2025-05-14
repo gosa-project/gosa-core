@@ -1761,9 +1761,9 @@ abstract class plugin
         $plugin,
         $cmd,
         $addAttrs = [],
-        $returnOutput = [],
-        $returnCode = null,
-        $errorOutput = [],
+        &$returnOutput = [],
+        &$returnCode = null,
+        &$errorOutput = [],
         $displayErrors = TRUE
     ) {
         global $config;
