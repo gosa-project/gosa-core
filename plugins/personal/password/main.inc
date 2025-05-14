@@ -21,38 +21,32 @@
  */
 
 
-/* Remove locks created by this plugin 
-*/
-$lock_msg="";
-if ($remove_lock){
-  if(session::is_set('password')){
+// Remove locks created by this plugin
+$lock_msg = "";
+if ($remove_lock) {
+    if (session::is_set('password')) {
+        session::un_set('password');
+    }
+}
+
+// Remove this plugin from session
+if ($cleanup) {
     session::un_set('password');
-  }
+    session::un_set('edit');
+} else {
+
+    // Reset requested?
+    if (isset($_POST['edit_cancel'])) {
+        session::un_set('edit');
+        session::un_set('password');
+    }
+
+    // Create password object on demand
+    if (!session::is_set('password') || (isset($_GET['reset']) && $_GET['reset'] == 1)) {
+        session::set('password', new password($config, $ui->dn));
+    }
+    $password = session::get('password');
+
+    // Execute formular
+    $display .= $password->execute();
 }
-
-/* Remove this plugin from session 
-*/
-if ( $cleanup ){
-  session::un_set('password');
-  session::un_set('edit');
-}else{
-
-  /* Reset requested? */
-  if (isset($_POST['edit_cancel'])){
-    session::un_set ('edit');
-    session::un_set ('password');
-  }
-
-  /* Create password object on demand */
-  if (!session::is_set('password') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    session::set('password', new password ($config, $ui->dn));
-  }
-  $password = session::get('password');
-
-  /* Execute formular */
-  $display.= $password->execute ();
-
-}
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
