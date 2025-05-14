@@ -23,16 +23,16 @@
 class password extends plugin
 {
     /* Definitions */
-    var $plHeadline     = "Change password";
-    var $plDescription  = "Change user password";
+    var $plHeadline     = 'Change password';
+    var $plDescription  = 'Change user password';
 
-    var $proposal = "";
+    var $proposal = '';
     var $proposalEnabled = false;
     var $proposalSelected = false;
     var $proposalInitialized = false;
 
     var $forcedHash = null;
-    var $userPassword = "";
+    var $userPassword = '';
     var $attributes = array('userPassword');
 
 
@@ -69,7 +69,7 @@ class password extends plugin
         $check_lower = true;
         $check_upper = true;
         $check_digits = true;
-        $pwLength = $config->get_cfg_value("core", "passwordMinLength") != "" ?: 8;
+        $pwLength = $config->get_cfg_value('core', 'passwordMinLength') != '' ?: 8;
 
         switch ($theme) {
             case 'classic':
@@ -77,19 +77,19 @@ class password extends plugin
 
             default:
                 if ($pwLength) {
-                    $smarty->assign("length", sprintf(_("The password must have at least %d characters."), $pwLength));
+                    $smarty->assign('length', sprintf(_('The password must have at least %d characters.'), $pwLength));
                 }
                 if ($check_special) {
-                    $smarty->assign("special", _("The password must contain at least 1 special character, e.g."));
+                    $smarty->assign('special', _('The password must contain at least 1 special character, e.g.'));
                 }
                 if ($check_lower) {
-                    $smarty->assign("lower", _("The password must contain lower case letters."));
+                    $smarty->assign('lower', _('The password must contain lower case letters.'));
                 }
                 if ($check_upper) {
-                    $smarty->assign("upper", _("The password must contain upper case letters."));
+                    $smarty->assign('upper', _('The password must contain upper case letters.'));
                 }
                 if ($check_digits) {
-                    $smarty->assign("digits", _("The password must contain digits."));
+                    $smarty->assign('digits', _('The password must contain digits.'));
                 }
                 break;
         }
@@ -98,21 +98,21 @@ class password extends plugin
         //  then preselect the proposal usage. 
         if (!$this->proposalInitialized) {
             $this->refreshProposal();
-            if ($this->proposal != "") {
+            if ($this->proposal != '') {
                 $this->proposalSelected = true;
             }
             $this->proposalInitialized = true;
         }
 
         /* Get acls */
-        $password_ACLS = $ui->get_permissions($ui->dn, "users/password");
-        $smarty->assign("ChangeACL",  $password_ACLS);
-        $smarty->assign("SASL", preg_match("/^{SASL}/i", $this->userPassword));
-        $smarty->assign("NotAllowed", !preg_match("/w/i", $password_ACLS));
+        $password_ACLS = $ui->get_permissions($ui->dn, 'users/password');
+        $smarty->assign('ChangeACL',  $password_ACLS);
+        $smarty->assign('SASL', preg_match("/^{SASL}/i", $this->userPassword));
+        $smarty->assign('NotAllowed', !preg_match("/w/i", $password_ACLS));
 
         /* Display expiration template */
         $smarty->assign("passwordExpired", false);
-        if ($config->boolValueIsTrue("core", "handleExpiredAccounts")) {
+        if ($config->boolValueIsTrue('core', "handleExpiredAccounts")) {
             $expired = ldap_expired_account($config, $ui->dn, $ui->username);
             $smarty->assign("passwordExpired", $expired & POSIX_FORCE_PASSWORD_CHANGE);
             if ($expired == POSIX_DISALLOW_PASSWORD_CHANGE) {
@@ -142,9 +142,9 @@ class password extends plugin
 
 
             // Get configuration flags for further input checks.
-            $check_differ = $config->get_cfg_value("core", "passwordMinDiffer") != "";
-            $differ       = $config->get_cfg_value("core", "passwordMinDiffer");
-            $length       = $config->get_cfg_value("core", "passwordMinLength") != "" ?: 8;
+            $check_differ = $config->get_cfg_value('core', "passwordMinDiffer") != '';
+            $differ       = $config->get_cfg_value('core', "passwordMinDiffer");
+            $length       = $config->get_cfg_value('core', "passwordMinLength") != '' ?: 8;
 
             switch ($theme) {
                 case 'classic':
@@ -165,7 +165,7 @@ class password extends plugin
                 $message[] = _("You need to specify your current password in order to proceed.");
             } elseif ($new_password  != $repeated_password) {
                 $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-            } elseif ($new_password == "") {
+            } elseif ($new_password == '') {
                 $message[] = _("The password you've entered as 'New password' is empty.");
             } elseif ($check_differ && (substr($current_password, 0, $differ) == substr($new_password, 0, $differ))) {
                 $message[] = _("The password used as new and current are too similar.");
@@ -209,8 +209,8 @@ class password extends plugin
                     $ui->dn,
                     $current_password,
                     $config->current['SERVER'],
-                    $config->get_cfg_value("core", "ldapFollowReferrals") == "true",
-                    $config->get_cfg_value("core", "ldapTLS") == "true"
+                    $config->get_cfg_value('core', "ldapFollowReferrals") == "true",
+                    $config->get_cfg_value('core', "ldapTLS") == "true"
                 );
 
                 /* connection Successfull ? */
@@ -303,40 +303,40 @@ class password extends plugin
                 array(
                     "name"          => "PRELOCK",
                     "type"          => "command",
-                    "default"       => "",
+                    "default"       => '',
                     "description"   => _("Script to be called before a password gets locked."),
                     "check"         => "gosaProperty::isCommand",
-                    "migrate"       => "",
+                    "migrate"       => '',
                     "group"         => "password",
                     "mandatory"     => false
                 ),
                 array(
                     "name"          => "POSTLOCK",
                     "type"          => "command",
-                    "default"       => "",
+                    "default"       => '',
                     "description"   => _("Script to be called after a password gets locked."),
                     "check"         => "gosaProperty::isCommand",
-                    "migrate"       => "",
+                    "migrate"       => '',
                     "group"         => "password",
                     "mandatory"     => false
                 ),
                 array(
                     "name"          => "PREUNLOCK",
                     "type"          => "command",
-                    "default"       => "",
+                    "default"       => '',
                     "description"   => _("Script to be called before a password gets unlocked."),
                     "check"         => "gosaProperty::isCommand",
-                    "migrate"       => "",
+                    "migrate"       => '',
                     "group"         => "password",
                     "mandatory"     => false
                 ),
                 array(
                     "name"          => "POSTUNLOCK",
                     "type"          => "command",
-                    "default"       => "",
+                    "default"       => '',
                     "description"   => _("Script to be called after a password gets unlocked."),
                     "check"         => "gosaProperty::isCommand",
-                    "migrate"       => "",
+                    "migrate"       => '',
                     "group"         => "password",
                     "mandatory"     => false
                 )
