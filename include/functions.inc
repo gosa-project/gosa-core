@@ -2949,7 +2949,7 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
                 $attrs = generate_smb_nt_hash($password);
                 if (!count($attrs) || !is_array($attrs)) {
                     msg_dialog::display(_("Error"), _("Cannot generate SAMBA hash!"), ERROR_DIALOG);
-                    return (false);
+                    return false;
                 }
             }
 
@@ -2977,6 +2977,10 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
         $attrsEvent['bind_dn'] = $config->current['ADMINDN'];
         $attrsEvent['bind_server'] = $config->current['SERVER'];
         $attrsEvent['bind_password'] = $config->get_credentials($config->current['ADMINPASSWORD']);
+
+        $output = [];
+        $retCode = null;
+        $error = [];
 
         // Call the premodify hook now
         $passwordPlugin = new password($config, $dn);
@@ -3042,9 +3046,9 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
         }
 
         // Setting the password in the ldap database or further operation failed, we should now execute
-        //  the plugins pre-event hook, using switched passwords, new/old password.
+        // the plugins pre-event hook, using switched passwords, new/old password.
         // This ensures that passwords which were set outside of GOsa, will be reset to its
-        //  starting value.
+        // starting value.
         if ($preRollback) {
             new log("modify", "users/passwordMethod", $dn, [], "Rolling back premodify hook!");
             $oldpass = $test->generate_hash($old_password);
