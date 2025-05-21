@@ -99,7 +99,7 @@ class posixAccount extends plugin
         "homeDirectory",
         "loginShell",
         "uidNumber",
-        "gidNumber",
+        'gidNumber',
         "gecos",
         "shadowMin",
         "shadowMax",
@@ -139,11 +139,11 @@ class posixAccount extends plugin
 
         switch ($this->theme) {
             case 'classic':
-                $groupImage = image("plugins/groups/images/select_group.png");
+                $groupImage = image('plugins/groups/images/select_group.png');
                 break;
 
             default:
-                $groupImage = image("<i class='material-icons'>groups</i>");
+                $groupImage = image('<i class="material-icons">groups</i>');
                 break;
         }
 
@@ -202,15 +202,15 @@ class posixAccount extends plugin
             /* Get group membership */
             $this->groupListData = array();
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->uid . "))", array("cn", "description"));
+            $ldap->search('(&(objectClass=posixGroup)(memberUid=' . $this->uid . '))', array('cn', "description"));
 
             while ($attrs = $ldap->fetch()) {
                 if (!isset($attrs["description"][0])) {
-                    $entry = $attrs["cn"][0];
-                    $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs["cn"][0], '');
+                    $entry = $attrs['cn'][0];
+                    $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs['cn'][0], '');
                 } else {
-                    $entry = $attrs["cn"][0] . " [" . $attrs["description"][0] . "]";
-                    $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs["cn"][0], $attrs["description"][0]);
+                    $entry = $attrs['cn'][0] . " [" . $attrs["description"][0] . "]";
+                    $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs['cn'][0], $attrs["description"][0]);
                 }
                 $this->groupMembership[$ldap->getDN()] = $entry;
             }
@@ -279,7 +279,7 @@ class posixAccount extends plugin
         $this->ui = get_userinfo();
         $this->secondaryGroups[0] = "- " . _("automatic") . " -";
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(objectClass=posixGroup)", array("cn", "gidNumber"));
+        $ldap->search("(objectClass=posixGroup)", array('cn', 'gidNumber'));
         while ($attrs = $ldap->fetch()) {
             $this->secondaryGroups[$attrs['gidNumber'][0]] = $attrs['cn'][0];
         }
@@ -476,25 +476,25 @@ class posixAccount extends plugin
             $shadowMinACL     =  $this->getacl("shadowMin");
             $smarty->assign("shadowmins", sprintf(
                 _("Password can't be changed up to %s days after last change"),
-                "<input type='text' name=\"shadowMin\" size=3 maxlength=4 value=\'' . $this->shadowMin . "\">"
+                '<input type="text" name="shadowMin" size=3 maxlength=4 value="' . $this->shadowMin . '">'
             ));
 
             $shadowMaxACL     =  $this->getacl("shadowMax");
             $smarty->assign("shadowmaxs", sprintf(
-                _("Password must be changed after %s days"),
-                "<input type='text' name=\"shadowMax\" size=3 maxlength=4 value=\'' . $this->shadowMax . "\">"
+                _('Password must be changed after %s days'),
+                '<input type="text" name="shadowMax" size=3 maxlength=4 value="' . $this->shadowMax . '">'
             ));
 
             $shadowInactiveACL =  $this->getacl("shadowInactive");
             $smarty->assign("shadowinactives", sprintf(
-                _("Disable account after %s days of inactivity after password expiry"),
-                "<input type='text' name=\"shadowInactive\" size=3 maxlength=4 value=\'' . $this->shadowInactive . "\">"
+                _('Disable account after %s days of inactivity after password expiry'),
+                '<input type="text" name="shadowInactive" size=3 maxlength=4 value="' . $this->shadowInactive . '">'
             ));
 
             $shadowWarningACL =  $this->getacl("shadowWarning");
             $smarty->assign("shadowwarnings", sprintf(
-                _("Warn user %s days before password expiry"),
-                "<input type='text' name=\"shadowWarning\" size=3 maxlength=4 value=\'' . $this->shadowWarning . "\">"
+                _('Warn user %s days before password expiry'),
+                '<input type="text" name="shadowWarning" size=3 maxlength=4 value="' . $this->shadowWarning . '">'
             ));
 
             foreach (
@@ -563,11 +563,11 @@ class posixAccount extends plugin
         if (preg_match("/w/", $this->getacl("uidNumber"))) {
             $onClickIDS .= "changeState('uidNumber');";
         }
-        if (preg_match("/w/", $this->getacl("gidNumber"))) {
+        if (preg_match("/w/", $this->getacl('gidNumber'))) {
             $onClickIDS .= "changeState('gidNumber');";
         }
         $smarty->assign("onClickIDS", $onClickIDS);
-        $smarty->assign("force_idsACL", $this->getacl("uidNumber") . $this->getacl("gidNumber"));
+        $smarty->assign("force_idsACL", $this->getacl("uidNumber") . $this->getacl('gidNumber'));
 
         foreach (array("primaryGroup", "activate_shadowWarning", "activate_shadowInactive", "activate_shadowMin", "activate_shadowMax", "activate_shadowExpire", "mustchangepassword") as $val) {
             if (in_array_strict($val, $this->multi_boxes)) {
@@ -657,7 +657,7 @@ class posixAccount extends plugin
         /* Delete group only if cn is uid and there are no other
        members inside */
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=posixGroup)(gidNumber=" . $this->gidNumber . "))", array("cn", "memberUid"));
+        $ldap->search("(&(objectClass=posixGroup)(gidNumber=" . $this->gidNumber . "))", array('cn', "memberUid"));
         if ($ldap->count() != 0) {
             $attrs = $ldap->fetch();
             if (
@@ -682,7 +682,7 @@ class posixAccount extends plugin
             $this->trustModeDialog->save_object();
 
             /* Save force GID checkbox */
-            if ($this->acl_is_writeable("gidNumber") || $this->acl_is_writeable("uidNumber")) {
+            if ($this->acl_is_writeable('gidNumber') || $this->acl_is_writeable("uidNumber")) {
                 if (isset($_POST['force_ids'])) {
                     $data = 1;
                 } else {
@@ -729,15 +729,17 @@ class posixAccount extends plugin
     }
 
 
-    /* Save data to LDAP, depending on is_account we save or delete */
+    /**
+     * Save data to LDAP, depending on is_account we save or delete 
+     */
     function save()
     {
         global $config;
-        /* Adapt shadow values */
+        // Adapt shadow values
         if (!$this->activate_shadowExpire) {
             $this->shadowExpire = "0";
         } else {
-            /* Transform date to days since the beginning */
+            // Transform date to days since the beginning
             list($day, $month, $year) = explode('.', $this->shadowExpire, 3);
             $this->shadowExpire = (int)(mktime(0, 0, 0, $month, $day, $year) / (60 * 60 * 24));
         }
@@ -754,22 +756,19 @@ class posixAccount extends plugin
             $this->shadowWarning = "0";
         }
 
-        /* Check what to do with ID's 
-       Nothing forced, so we may have to generate our own IDs, if not done already.
-     */
+        // Check what to do with ID's 
+        // Nothing forced, so we may have to generate our own IDs, if not done already.
         if ($this->force_ids == 0) {
 
-            /* Handle uidNumber. 
-       * - use existing number if possible
-       * - if not, try to create a new uniqe one.
-       * */
+            // Handle uidNumber. 
+            // - use existing number if possible
+            // - if not, try to create a new uniqe one.
             if ($this->savedUidNumber != '') {
                 $this->uidNumber = $this->savedUidNumber;
             } else {
 
-                /* Calculate new id's. We need to place a lock before calling get_next_id
-           to get real unique values. 
-         */
+                // Calculate new id's. We need to place a lock before calling get_next_id
+                // to get real unique values. 
                 $wait = 10;
                 while (get_lock("uidnumber") != '') {
                     sleep(1);
@@ -785,47 +784,44 @@ class posixAccount extends plugin
             }
         }
 
-
-        /* Handle gidNumber 
-     * - If we do not have a primary group selected (automatic), we will check if there 
-     *    is already a group  with the same name and use this as primary.
-     * - .. if we couldn't find a group with the same name, we will create a new one, 
-     *    using the users uid as cn and a generated uniqe gidNumber. 
-     * */
+        // Handle gidNumber 
+        // - If we do not have a primary group selected (automatic), we will check if there 
+        //   is already a group  with the same name and use this as primary.
+        // - .. if we couldn't find a group with the same name, we will create a new one, 
+        //    using the users uid as cn and a generated uniqe gidNumber. 
         if ($this->is_template && !$this->primaryGroup) {
             $this->gidNumber = 2147483647;
         } elseif ($this->primaryGroup == 0 || $this->force_ids) {
 
-            /* Search for existing group */
+            // Search for existing group
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
 
-            /* Are we forced to use a special gidNumber? */
+            // Are we forced to use a special gidNumber?
             if ($this->force_ids) {
-                $ldap->search("(&(objectClass=posixGroup)(gidNumber=" . $this->gidNumber . "))", array("cn", "gidNumber"));
+                $ldap->search('(&(objectClass=posixGroup)(gidNumber=' . $this->gidNumber . '))', array('cn', 'gidNumber'));
             } else {
-                $ldap->search("(&(objectClass=posixGroup)(gidNumber=*)(cn=" . $this->uid . "))", array("cn", "gidNumber"));
+                $ldap->search('(&(objectClass=posixGroup)(gidNumber=*)(cn=' . $this->uid . '))', array('cn', 'gidNumber'));
             }
 
-            /* No primary group found, create a new one */
-            if ($ldap->count() == 0) {
+            // No primary group found, create a new one
+            if ($ldap->count() === 0) {
 
                 $groupcn = $this->uid;
-                $pri_attr = $config->get_cfg_value("core", "accountPrimaryAttribute");
+                $pri_attr = $config->get_cfg_value('core', "accountPrimaryAttribute");
                 $groupdn = preg_replace(
                     '/^' . preg_quote($pri_attr, '/') . '=[^,]+,' . preg_quote(get_people_ou(), '/') . '/i',
                     'cn=' . $groupcn . ',' . get_groups_ou(),
                     $this->dn
                 );
 
-                /* Request a new and uniqe gidNumber, if required */
+                // Request a new and uniqe gidNumber, if required
                 if (!$this->force_ids) {
-                    $this->gidNumber = get_next_id("gidNumber", $this->dn);
+                    $this->gidNumber = get_next_id('gidNumber', $this->dn);
                 }
 
-                /* If forced gidNumber could not be found, then check if the given group name already exists 
-           we do not want to modify the gidNumber of an existing group.
-         */
+                // If forced gidNumber could not be found, then check if the given group name already exists 
+                // we do not want to modify the gidNumber of an existing group.
                 $cnt = 0;
                 while ($ldap->dn_exists($groupdn) && ($cnt < 100)) {
                     $cnt++;
@@ -837,11 +833,12 @@ class posixAccount extends plugin
                     );
                 }
 
-                /* Create new primary group and enforce the new gidNumber */
+                // Create new primary group and enforce the new gidNumber
                 $g = new group($config, $groupdn);
                 $g->cn = $groupcn;
                 $g->force_gid = 1;
                 $g->gidNumber = $this->gidNumber;
+                $g->addUser($this->uid);
                 if (isset($this->parent) && $this->parent !== NULL) {
                     $g->description = _("Group of user") . " " . $this->parent->by_object['user']->givenName . " " . $this->parent->by_object['user']->sn;
                 } else {
@@ -1021,15 +1018,15 @@ class posixAccount extends plugin
             if (!tests::is_id($this->uidNumber)) {
                 $message[] = msgPool::invalid(_("UID"), $this->uidNumber, "/[0-9]/");
             } else {
-                if ($this->uidNumber < $config->get_cfg_value("core", "minId")) {
-                    $message[] = msgPool::toosmall(_("UID"), $config->get_cfg_value("core", "minId"));
+                if ($this->uidNumber < $config->get_cfg_value('core', "minId")) {
+                    $message[] = msgPool::toosmall(_("UID"), $config->get_cfg_value('core', "minId"));
                 }
             }
             if (!tests::is_id($this->gidNumber)) {
                 $message[] = msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
             } else {
-                if ($this->gidNumber < $config->get_cfg_value("core", "minId")) {
-                    $message[] = msgPool::toosmall(_("GID"), $config->get_cfg_value("core", "minId"));
+                if ($this->gidNumber < $config->get_cfg_value('core', "minId")) {
+                    $message[] = msgPool::toosmall(_("GID"), $config->get_cfg_value('core', "minId"));
                 }
             }
         }
@@ -1160,12 +1157,12 @@ class posixAccount extends plugin
                 $dsc = "&nbsp;";
                 error_reporting(0);
                 if (!isset($attrs['description'][0])) {
-                    $entry = $attrs["cn"][0];
+                    $entry = $attrs['cn'][0];
                 } else {
                     $dsc = preg_replace('/^Group of user/', _("Group of user"), $attrs["description"][0]);
-                    $entry = $attrs["cn"][0] . " [$dsc]";
+                    $entry = $attrs['cn'][0] . " [$dsc]";
                 }
-                error_reporting(E_ALL | E_STRICT);
+                error_reporting(E_ALL);
 
                 if (obj_is_writable($attrs['dn'], "groups/group", "memberUid")) {
                     $this->groupMembership[$attrs['dn']] = $entry;
@@ -1227,7 +1224,7 @@ class posixAccount extends plugin
 
         /* Adapt group membership */
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->attrs["uid"][0] . "))", array("description", "cn"));
+        $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->attrs["uid"][0] . "))", array("description", 'cn'));
 
         $groups = array();
         while ($this->attrs = $ldap->fetch()) {
@@ -1242,14 +1239,14 @@ class posixAccount extends plugin
 
         if ($this->gidNumber) {
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(&(objectClass=posixGroup)(cn=$template)(gidNumber=" . $this->gidNumber . "))", array("cn"));
+            $ldap->search("(&(objectClass=posixGroup)(cn=$template)(gidNumber=" . $this->gidNumber . "))", array('cn'));
             if ($ldap->count() != 1) {
                 $this->primaryGroup = $this->gidNumber;
             }
         }
 
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaUserTemplate)(uid=" . $template . ")(accessTo=*))", array("cn", "accessTo"));
+        $ldap->search("(&(objectClass=gosaUserTemplate)(uid=" . $template . ")(accessTo=*))", array('cn', "accessTo"));
         while ($attr = $ldap->fetch()) {
             $tmp = $attr['accessTo'];
             unset($tmp['count']);
@@ -1392,7 +1389,7 @@ class posixAccount extends plugin
         $smarty->assign("primaryGroup", set_post($this->primaryGroup));
 
         $smarty->assign("uidNumber", set_post($this->uidNumber));
-        $smarty->assign("gidNumber", set_post($this->gidNumber));
+        $smarty->assign('gidNumber', set_post($this->gidNumber));
         $smarty->assign("forceMode", set_post($forceMode));
         $smarty->assign("force_ids", set_post($force_ids));
         if (!count($this->groupMembership)) {
@@ -1431,13 +1428,13 @@ class posixAccount extends plugin
         /* Get group membership */
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $source['uid'][0] . "))", array("cn", "description"));
+        $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $source['uid'][0] . "))", array('cn', "description"));
 
         while ($attrs = $ldap->fetch()) {
             if (!isset($attrs["description"][0])) {
-                $entry = $attrs["cn"][0];
+                $entry = $attrs['cn'][0];
             } else {
-                $entry = $attrs["cn"][0] . " [" . $attrs["description"][0] . "]";
+                $entry = $attrs['cn'][0] . " [" . $attrs["description"][0] . "]";
             }
             $this->groupMembership[$ldap->getDN()] = $entry;
         }
@@ -1509,7 +1506,7 @@ class posixAccount extends plugin
                 "primaryGroup"        =>  _("Primary group"),
                 "loginShell"          =>  _("Shell"),
                 "uidNumber"           =>  _("User ID"),
-                "gidNumber"           =>  _("Group ID"),
+                'gidNumber'           =>  _("Group ID"),
 
                 "shadowLastChange"    =>  _("Shadow last changed"),
                 "gotoLastSystemLogin"    =>  _("Last login"),
@@ -1653,7 +1650,7 @@ class posixAccount extends plugin
         $uid_filter = "(&(objectClass=posixGroup)(|" . $uid_filter . "))";
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        $ldap->search($uid_filter, array("dn", "cn", "memberUid", "description"));
+        $ldap->search($uid_filter, array("dn", 'cn', "memberUid", "description"));
         while ($group = $ldap->fetch()) {
             $groups_some[$group['dn']] = $group['cn'][0];
 

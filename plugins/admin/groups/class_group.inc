@@ -32,10 +32,10 @@ class group extends plugin
 
     // Helpers
     var $base = "";
-    var $force_gid = FALSE;
-    var $fon_group = FALSE;
-    var $smbgroup = FALSE;
-    var $groupType = FALSE;
+    var $force_gid = false;
+    var $fon_group = false;
+    var $smbgroup = false;
+    var $groupType = false;
     var $sambaSID = "";
     var $sambaDomainName = "DEFAULT";
     var $SID = "";
@@ -49,15 +49,15 @@ class group extends plugin
     var $orig_dn = "";
     var $orig_cn = "";
     var $orig_base = "";
-    var $has_mailAccount = FALSE;
+    var $has_mailAccount = false;
     var $userSelect;
-    var $nagios_group = FALSE;
+    var $nagios_group = false;
     var $sambaGroupType;
     var $dialog;
-    var $rfc2307bis = FALSE;
+    var $rfc2307bis = false;
     var $OnlyShowFirstEntries = 200;
     var $dnMapping = [];
-    var $view_logged = FALSE;
+    var $view_logged = false;
     var $allowGroupsWithSameNameInOtherSubtrees = true;
     var $baseSelector;
     var $dns = [];
@@ -75,7 +75,7 @@ class group extends plugin
 
     var $trustModeDialog;
 
-    function __construct($config, $dn = NULL)
+    function __construct($config, $dn = null)
     {
         // Set rfc2307bis flag
         if ($config->get_cfg_value("core", "rfc2307bis") == "true") {
@@ -86,14 +86,14 @@ class group extends plugin
 
         parent::__construct($config, $dn);
 
-        $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, NULL);
+        $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, null);
         $this->trustModeDialog->setAcl('groups/group');
 
         // Load attributes depending on the samba version
         $this->orig_dn = $dn;
         $this->orig_cn = $this->cn;
 
-        /* Get member list */
+        // Get member list
         if (isset($this->attrs['memberUid'][0])) {
             $tmp = [];
             for ($i = 0; $i < $this->attrs['memberUid']['count']; $i++) {
@@ -103,28 +103,28 @@ class group extends plugin
             ksort($this->memberUid);
         }
 
-        /* Save gidNumber for later use */
+        // Save gidNumber for later use
         if (isset($this->attrs['gidNumber'])) {
             $this->saved_gidNumber = $this->attrs['gidNumber'][0];
         }
 
         // Is a samba group?
         if (isset($this->attrs['objectClass'])) {
-            if (array_search('sambaGroupMapping', $this->attrs['objectClass']) == FALSE) {
-                $this->smbgroup = FALSE;
+            if (array_search('sambaGroupMapping', $this->attrs['objectClass']) == false) {
+                $this->smbgroup = false;
             } else {
                 $this->smbgroup = TRUE;
                 if (isset($this->attrs['sambaSID'])) {
                     $this->sambaSID = $this->attrs['sambaSID'][0];
                 }
             }
-            if (array_search('goFonPickupGroup', $this->attrs['objectClass']) == FALSE) {
-                $this->fon_group = FALSE;
+            if (array_search('goFonPickupGroup', $this->attrs['objectClass']) == false) {
+                $this->fon_group = false;
             } else {
                 $this->fon_group = TRUE;
             }
-            if (array_search('nagiosContactGroup', $this->attrs['objectClass']) == FALSE) {
-                $this->nagios_group = FALSE;
+            if (array_search('nagiosContactGroup', $this->attrs['objectClass']) == false) {
+                $this->nagios_group = false;
             } else {
                 $this->nagios_group = TRUE;
             }
@@ -183,7 +183,6 @@ class group extends plugin
                 $this->base = dn2base($ui->dn);
             }
         } else {
-
             // Get object base 
             $this->base = preg_replace("/^[^,]+," . preg_quote(get_groups_ou(), '/') . "/i", "", $this->dn);
         }
@@ -232,7 +231,7 @@ class group extends plugin
         }
 
         // Do we represent a valid group? 
-        if (!$this->is_account && $this->parent === NULL) {
+        if (!$this->is_account && $this->parent === null) {
             switch ($theme) {
                 case 'classic':
                     $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
@@ -271,7 +270,7 @@ class group extends plugin
 
         // Add objects finished? 
         if (isset($_POST["add_users_cancel"]) || isset($_POST['cancel-abort'])) {
-            $this->userSelect = NULL;
+            $this->userSelect = null;
         }
 
         // Add user to group 
@@ -289,13 +288,13 @@ class group extends plugin
                     $this->reload();
                 }
             }
-            $this->userSelect = NULL;
+            $this->userSelect = null;
         }
 
         $smarty = get_smarty();
 
         // Handle trust mode dialog
-        $this->dialog = FALSE;
+        $this->dialog = false;
         $trustModeDialog = $this->trustModeDialog->execute();
         if ($this->trustModeDialog->trustSelect) {
             $this->dialog = TRUE;
@@ -382,7 +381,7 @@ class group extends plugin
 
             $data = $lData = [];
             foreach ($this->memberUid_used_by_some as $uid => $member) {
-                $member = (isset($this->members[$member])) ? $this->members[$member] : NULL;
+                $member = (isset($this->members[$member])) ? $this->members[$member] : null;
                 $data[$uid] = $member;
                 $givenName = $sn = _("Unknown");
                 if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
@@ -446,14 +445,14 @@ class group extends plugin
             if (in_array_strict($val, $this->multi_boxes)) {
                 $smarty->assign("use_" . $val, TRUE);
             } else {
-                $smarty->assign("use_" . $val, FALSE);
+                $smarty->assign("use_" . $val, false);
             }
         }
         foreach (array("base", "smbgroup", "groupType", "sambaDomainName", "fon_group", "nagios_group") as $val) {
             if (in_array_strict($val, $this->multi_boxes)) {
                 $smarty->assign("use_" . $val, TRUE);
             } else {
-                $smarty->assign("use_" . $val, FALSE);
+                $smarty->assign("use_" . $val, false);
             }
         }
 
@@ -467,7 +466,7 @@ class group extends plugin
 
     function isRestrictedByDynGroup(): bool
     {
-        $bool = FALSE;
+        $bool = false;
         if (isset($this->parent->by_object['DynamicLdapGroup'])) {
             $bool = $this->parent->by_object['DynamicLdapGroup']->isAttributeDynamic('memberUid') ||
                 $this->parent->by_object['DynamicLdapGroup']->isAttributeDynamic('member');
@@ -750,14 +749,14 @@ class group extends plugin
                 if (isset($_POST['fon_group'])) {
                     $this->fon_group = TRUE;
                 } else {
-                    $this->fon_group = FALSE;
+                    $this->fon_group = false;
                 }
             }
             if ($this->acl_is_writeable("nagiosGroup")) {
                 if (isset($_POST['nagios_group'])) {
                     $this->nagios_group = TRUE;
                 } else {
-                    $this->nagios_group = FALSE;
+                    $this->nagios_group = false;
                 }
             }
         }
@@ -862,7 +861,7 @@ class group extends plugin
         }
 
         /* New accounts need proper 'dn', propagate it to remaining objects */
-        if ($this->dn == 'new') {
+        if ($this->dn === 'new') {
             $this->dn = 'cn=' . $this->cn . ',' . get_groups_ou() . $this->base;
         }
 
@@ -1096,7 +1095,7 @@ class group extends plugin
         return (array(
             "plShortName" => _("Generic"),
             "plDescription" => _("Generic group settings"),
-            "plSelfModify"  => FALSE,
+            "plSelfModify"  => false,
             "plDepends"     => [],
             "plPriority"    => 0,
             "plSection"     => array("administration"),
@@ -1112,7 +1111,7 @@ class group extends plugin
                     "check"         => "gosaProperty::isRdn",
                     "migrate"       => "migrate_ogroupRDN",
                     "group"         => "plugin",
-                    "mandatory"     => FALSE
+                    "mandatory"     => false
                 )
             ),
 
@@ -1171,7 +1170,7 @@ class group extends plugin
                     if (isset($_POST["$val"])) {
                         $this->$val =  TRUE;
                     } else {
-                        $this->$val =  FALSE;
+                        $this->$val =  false;
                     }
                 }
             }
@@ -1187,7 +1186,7 @@ class group extends plugin
                 if (isset($_POST['fon_group'])) {
                     $this->fon_group = TRUE;
                 } else {
-                    $this->fon_group = FALSE;
+                    $this->fon_group = false;
                 }
             }
         }
