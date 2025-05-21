@@ -27,11 +27,11 @@ class userManagement extends management
     var $plIcon         = "plugins/users/images/user.png";
     var $matIcon        = "account_circle";
 
-    var $sn = "";
-    var $givenName = "";
-    var $uid = "";
-    var $got_uid = "";
-    var $edit_uid = "";
+    var $sn = '';
+    var $givenName = '';
+    var $uid = '';
+    var $got_uid = '';
+    var $edit_uid = '';
 
     var $pwd_change_queue = [];
     var $force_hash_type = [];
@@ -45,7 +45,7 @@ class userManagement extends management
     protected $aclPlugin   = "user";
     protected $objectName   = "user";
 
-    protected $proposal = "";
+    protected $proposal = '';
     protected $proposalEnabled = FALSE;
     protected $proposalSelected = FALSE;
 
@@ -132,14 +132,14 @@ class userManagement extends management
     }
 
 
-    function editEntry($action = "", $target = [], $all = [], $altTabClass = "", $altTabType = "", $altAclCategory = "")
+    function editEntry($action = '', $target = [], $all = [], $altTabClass = '', $altTabType = '', $altAclCategory = '')
     {
         global $config;
         $str = parent::editEntry($action, $target);
         if ($str) return ($str);
 
         if (preg_match("/^edit_/", $action)) {
-            $tab = preg_replace("/^edit_/", "", $action);
+            $tab = preg_replace("/^edit_/", '', $action);
             if (isset($this->tabObject->by_object[$tab])) {
                 $this->tabObject->current = $tab;
             } else {
@@ -165,7 +165,7 @@ class userManagement extends management
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
      */
-    function sendMessage($action = "", $target = [], $all = [])
+    function sendMessage($action = '', $target = [], $all = [])
     {
         return;
     }
@@ -194,10 +194,10 @@ class userManagement extends management
 
     /*! \brief  Queues a set of users for password changes
      */
-    function changePassword($action = "", $target = [], $all = [])
+    function changePassword($action = '', $target = [], $all = [])
     {
         global $config;
-        $this->dn = "";
+        $this->dn = '';
         $this->pwd_change_queue = $target;
 
         // Check permisions
@@ -234,7 +234,7 @@ class userManagement extends management
     {
         global $config;
         /* Password checks */
-        $pwLength = "";
+        $pwLength = '';
         $check_special = true;
         $check_lower = true;
         $check_upper = true;
@@ -251,7 +251,7 @@ class userManagement extends management
 
         $smarty = get_smarty();
 
-        $pwLength = $config->get_cfg_value("core", "passwordMinLength") != "" ?: 8;
+        $pwLength = $config->get_cfg_value("core", "passwordMinLength") != '' ?: 8;
         $smarty->assign("pwLength", $pwLength);
         switch ($this->theme) {
             case 'default':
@@ -281,7 +281,7 @@ class userManagement extends management
 
             // Generate new proposal
             $this->refreshProposal();
-            $this->proposalSelected = ($this->proposal != "");
+            $this->proposalSelected = ($this->proposal != '');
             $this->dn = array_pop($this->pwd_change_queue);
 
             // Check if we are able to enforce a password change
@@ -329,9 +329,9 @@ class userManagement extends management
                 }
 
                 // Get configuration flags for further input checks.
-                $check_differ = $config->get_cfg_value("core", "passwordMinDiffer") != "";
+                $check_differ = $config->get_cfg_value("core", "passwordMinDiffer") != '';
                 $differ       = $config->get_cfg_value("core", "passwordMinDiffer");
-                $length       = $config->get_cfg_value("core", "passwordMinLength") != "" ?: 8;
+                $length       = $config->get_cfg_value("core", "passwordMinLength") != '' ?: 8;
 
                 switch ($this->theme) {
                     case 'default':
@@ -347,7 +347,7 @@ class userManagement extends management
                 // Perform GOsa password policy checks
                 if ($new_password  != $repeated_password) {
                     $message[] = _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
-                } elseif ($new_password == "") {
+                } elseif ($new_password == '') {
                     $message[] = _("The password you've entered as 'New password' is empty.");
                 } elseif ((strlen($new_password) < $length)) {
                     $message[] = _("The password must have at least $length characters.");
@@ -441,7 +441,7 @@ class userManagement extends management
                 }
 
                 new log("modify", "users/" . get_class($this), $this->dn, [], "Password has been changed");
-                $this->dn = "";
+                $this->dn = '';
             } // else {
             //     msg_dialog::display(_("Password change"),
             //             _("You have no permission to change this users password!"),
@@ -450,7 +450,7 @@ class userManagement extends management
         }
 
         // // Cleanup
-        // if(!count($this->pwd_change_queue) && $this->dn=""){
+        // if(!count($this->pwd_change_queue) && $this->dn=''){
         //     $this->remove_lock();
         //     $this->closeDialogs();
         // }else{
@@ -506,7 +506,7 @@ class userManagement extends management
      *          If we've user templates, then the user will be asked to use to use one.
      *          -> See 'templateContinue' for further handling.
      */
-    function newUserFromTemplate($action = "", $target = [], $all = [])
+    function newUserFromTemplate($action = '', $target = [], $all = [])
     {
         global $config;
         // Call parent method, it knows whats to do, locking and so on ...
@@ -514,7 +514,7 @@ class userManagement extends management
         if (!empty($str)) return ($str);
 
         // Reset uid selection.
-        $this->got_uid = "";
+        $this->got_uid = '';
 
         // Use template if there are any of them
         $templates = [];
@@ -525,11 +525,11 @@ class userManagement extends management
         if (count($templates)) {
             $smarty = get_smarty();
             foreach (array("sn", "givenName", "uid", "got_uid") as $attr) {
-                $smarty->assign("$attr", "");
+                $smarty->assign("$attr", '');
             }
             $smarty->assign("template",  array_pop($target));
             $smarty->assign("templates", $templates);
-            $smarty->assign("edit_uid", "");
+            $smarty->assign("edit_uid", '');
             $smarty->assign("allowUidProposalModification", $config->get_cfg_value("core", "allowUidProposalModification"));
             return ($smarty->fetch(get_template_path('template.tpl', TRUE)));
 
@@ -544,7 +544,7 @@ class userManagement extends management
      *           if he wants to use one.
      *          -> See 'templateContinue' for further handling.
      */
-    function newEntry($action = "", $target = [], $all = [], $altTabClass = "", $altTabType = "", $altAclCategory = "")
+    function newEntry($action = '', $target = [], $all = [], $altTabClass = '', $altTabType = '', $altAclCategory = '')
     {
         global $config;
         // Call parent method, it manages everything, locking, object creation...
@@ -562,11 +562,11 @@ class userManagement extends management
 
             // Set default variables, normally empty.
             foreach (array("sn", "givenName", "uid", "got_uid") as $attr) {
-                $smarty->assign($attr, "");
+                $smarty->assign($attr, '');
             }
             $smarty->assign("template", "none");
             $smarty->assign("templates", $templates);
-            $smarty->assign("edit_uid", "");
+            $smarty->assign("edit_uid", '');
             $smarty->assign("allowUidProposalModification", $config->get_cfg_value("core", "allowUidProposalModification"));
             return ($smarty->fetch(get_template_path('template.tpl', TRUE)));
 
@@ -615,7 +615,7 @@ class userManagement extends management
                 if (isset($_POST[$attr])) {
                     $smarty->assign("$attr", set_post(get_post($attr)));
                 } else {
-                    $smarty->assign("$attr", "");
+                    $smarty->assign("$attr", '');
                 }
             }
 
@@ -638,21 +638,21 @@ class userManagement extends management
             $this->givenName      = get_post('givenName');
 
             // Avoid duplicate entries, check if such a user already exists.
-            $dn = preg_replace("/^[^,]+,/i", "", get_post('template'));
+            $dn = preg_replace("/^[^,]+,/i", '', get_post('template'));
             $ldap = $config->get_ldap_link();
             $ldap->cd($dn);
             $ldap->search("(&(sn=" . LDAP::escapeValue($this->sn) . ")(givenName=" . LDAP::escapeValue($this->givenName) . "))", array("givenName"));
 
             if ($ldap->count() != 0) {
                 msg_dialog::displayChecks(array(msgPool::duplicated(_("Name"))));
-                $smarty->assign("edit_uid", "");
+                $smarty->assign("edit_uid", '');
             } else {
 
                 // Preset uid field by using the idGenerator
                 $attributes = array('sn' => $this->sn, 'givenName' => $this->givenName);
-                if ($config->get_cfg_value("core", "idGenerator") != "") {
+                if ($config->get_cfg_value("core", "idGenerator") != '') {
                     $genStr = $config->get_cfg_value("core", "idGenerator");
-                    $smarty->assign("edit_uid", "");
+                    $smarty->assign("edit_uid", '');
                     if (!empty($genStr)) {
                         $uids = gen_uids($genStr, $attributes);
                         if (count($uids)) {
@@ -664,8 +664,8 @@ class userManagement extends management
                         }
                     }
                 } else {
-                    $smarty->assign("edit_uid", "");
-                    $this->uid = "";
+                    $smarty->assign("edit_uid", '');
+                    $this->uid = '';
                 }
                 $this->got_uid = true;
             }
@@ -695,7 +695,7 @@ class userManagement extends management
 
             // The user Tab object is already instantiated, so just go back and let the
             //  management class do the rest.
-            return ("");
+            return ('');
         }
 
 
@@ -719,14 +719,14 @@ class userManagement extends management
 
             // The user Tab object is already instantiated, so just go back and let the
             //  management class do the rest.
-            return ("");
+            return ('');
         }
     }
 
 
     /* !\brief  This method applies a template to a set of users.
      */
-    function templatizeUsers($action = "", $target = [], $all = [])
+    function templatizeUsers($action = '', $target = [], $all = [])
     {
         $this->dns = [];
         if (count($target)) {
@@ -736,7 +736,7 @@ class userManagement extends management
 
             // Check entry locking
             foreach ($target as $dn) {
-                if (($user = get_lock($dn)) != "") {
+                if (($user = get_lock($dn)) != '') {
                     $this->dn = $dn;
                     return (gen_locked_message($user, $dn));
                 }
@@ -897,26 +897,26 @@ class userManagement extends management
 
 
     function copyPasteHandler(
-        $action = "",
+        $action = '',
         $target = [],
         $all = [],
-        $altTabClass = "",
-        $altTabType = "",
-        $altAclCategory = "",
-        $altAclPlugin = ""
+        $altTabClass = '',
+        $altTabType = '',
+        $altAclCategory = '',
+        $altAclPlugin = ''
     ) {
         global $config;
         if ($config->boolValueIsTrue("core", "copyPaste")) {
-            $this->cpHandler->lastdn = "";
+            $this->cpHandler->lastdn = '';
             $str = parent::copyPasteHandler($action, $target, $all);
-            if ($this->cpHandler->lastdn != "" && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new") {
+            if ($this->cpHandler->lastdn != '' && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new") {
                 $this->pwd_change_queue[] = $this->cpHandler->lastdn;
                 return $this->handlePasswordQueue();
             }
             return ($str);
         }
 
-        return "";
+        return '';
     }
 
 
@@ -930,7 +930,7 @@ class userManagement extends management
                 break;
 
             default:
-                $image = "";
+                $image = '';
                 break;
         }
         if (isset($userPassword[0]) && preg_match("/^\{[^\}]/", $userPassword[0])) {
@@ -962,7 +962,7 @@ class userManagement extends management
 
     public static function filterLockLabel($userPassword = []): string
     {
-        $label = "";
+        $label = '';
         if (isset($userPassword[0]) && preg_match("/^\{[^\}]/", $userPassword[0])) {
             if (preg_match("/^[^\}]*+\}!/", $userPassword[0])) {
                 $label = _("Unlock account") . "<rowClass:entry-locked/><rowLabel:locked/>";
@@ -978,7 +978,7 @@ class userManagement extends management
     {
         $theme = getThemeName();
 
-        $result = "";
+        $result = '';
 
         switch ($theme) {
             case 'classic':
@@ -1108,7 +1108,7 @@ class userManagement extends management
                     if (in_array_ics($oc, $classes)) {
                         $result .= image("<i class='material-icons'>" . $properties['image'] . "</i>", "listing_edit_" . $properties['plugin'] . "_$row", $properties['title']);
                     } else {
-                        $result .= image("");
+                        $result .= image('');
                     }
                 }
 
