@@ -20,8 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* Remove locks created by this plugin
- */
+// Remove locks created by this plugin
 if ($remove_lock) {
     if (session::is_set('userManagement')) {
         $macl = session::get('userManagement');
@@ -29,13 +28,12 @@ if ($remove_lock) {
     }
 }
 
-/* Remove this plugin from session
- */
+// Remove this plugin from session
 if ($cleanup) {
     session::un_set('userManagement');
 } else {
 
-    /* Create usermanagement object on demand */
+    // Create usermanagement object on demand
     if (!session::is_set('userManagement')) {
         $userManagement = new userManagement($config, $ui);
         session::set('userManagement', $userManagement);
@@ -43,11 +41,11 @@ if ($cleanup) {
     $userManagement = session::get('userManagement');
     $display = $userManagement->execute();
 
-    /* Reset requested? */
+    // Reset requested?
     if (isset($_GET['reset']) && $_GET['reset'] == 1) {
         session::un_set('userManagement');
     }
 
-    /* Show and save dialog */
+    // Show and save dialog
     session::set('userManagement', $userManagement);
 }

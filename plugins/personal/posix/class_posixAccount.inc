@@ -38,26 +38,26 @@ class posixAccount extends plugin
     var $plDescription = "Edit users POSIX settings";
 
     /* Plugin specific values */
-    var $homeDirectory = "";
+    var $homeDirectory = '';
     var $loginShell = "/bin/bash";
-    var $uidNumber = "";
-    var $gidNumber = "";
-    var $gecos = "";
+    var $uidNumber = '';
+    var $gidNumber = '';
+    var $gecos = '';
     var $shadowMin = "0";
     var $shadowMax = "0";
     var $shadowWarning = "0";
     var $shadowLastChange = "0";
     var $shadowInactive = "0";
-    var string $shadowExpire = "";
+    var string $shadowExpire = '';
     var $accessTo = array();
 
     var $glist = array();
-    var $status = "";
+    var $status = '';
     var $loginShellList = array();
     var $groupMembership = array();
     var $savedGroupMembership = array();
-    var $savedUidNumber = "";
-    var $savedGidNumber = "";
+    var $savedUidNumber = '';
+    var $savedGidNumber = '';
     var $activate_shadowMin = "0";
     var $activate_shadowMax = "0";
     var $activate_shadowWarning = "0";
@@ -65,7 +65,7 @@ class posixAccount extends plugin
     var $activate_shadowExpire = "0";
     var $mustchangepassword = "0";
     var $force_ids = 0;
-    var $gotoLastSystemLogin = "";
+    var $gotoLastSystemLogin = '';
     var $groupSelect = FALSE;
     var $secondaryGroups = array();
     var $primaryGroup = 0;
@@ -73,7 +73,7 @@ class posixAccount extends plugin
     var $grouplist = array();
     var $ui = array();
     var $ssh = null;
-    var $sshAcl = "";
+    var $sshAcl = '';
     var $trustModeDialog = null;
 
     var $view_logged = false;
@@ -113,7 +113,7 @@ class posixAccount extends plugin
 
     var $objectclasses = array("posixAccount", "shadowAccount");
 
-    var $uid = "";
+    var $uid = '';
     var $multiple_support = TRUE;
     var $groupMembership_some = array();
 
@@ -207,7 +207,7 @@ class posixAccount extends plugin
             while ($attrs = $ldap->fetch()) {
                 if (!isset($attrs["description"][0])) {
                     $entry = $attrs["cn"][0];
-                    $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs["cn"][0], "");
+                    $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs["cn"][0], '');
                 } else {
                     $entry = $attrs["cn"][0] . " [" . $attrs["description"][0] . "]";
                     $this->groupListData[$ldap->getDN()] = array($groupImage, $attrs["cn"][0], $attrs["description"][0]);
@@ -250,7 +250,7 @@ class posixAccount extends plugin
 
         /* Convert shadowExpire for usage */
         if ($this->shadowExpire == 0) {
-            $this->shadowExpire = "";
+            $this->shadowExpire = '';
         } else {
             $this->shadowExpire = date('d.m.Y', intval($this->shadowExpire) * 60 * 60 * 24);
         }
@@ -265,13 +265,13 @@ class posixAccount extends plugin
                 }
             }
         } else {
-            if ($this->loginShell == "") {
+            if ($this->loginShell == '') {
                 $this->loginShellList[] = _("unconfigured");
             }
         }
 
         /* Insert possibly missing loginShell */
-        if ($this->loginShell != "" && !in_array_strict($this->loginShell, $this->loginShellList)) {
+        if ($this->loginShell != '' && !in_array_strict($this->loginShell, $this->loginShellList)) {
             $this->loginShellList[] = $this->loginShell;
         }
 
@@ -287,7 +287,7 @@ class posixAccount extends plugin
 
         // Templates do not have a gidNumber
         if ($this->gidNumber == 2147483647) {
-            $this->gidNumber = "";
+            $this->gidNumber = '';
             $this->primaryGroup = 0;
         }
 
@@ -312,7 +312,7 @@ class posixAccount extends plugin
         global $config;
         /* Call parent execute */
         parent::execute();
-        $display = "";
+        $display = '';
 
         /* Log view */
         if ($this->is_account && !$this->view_logged) {
@@ -476,25 +476,25 @@ class posixAccount extends plugin
             $shadowMinACL     =  $this->getacl("shadowMin");
             $smarty->assign("shadowmins", sprintf(
                 _("Password can't be changed up to %s days after last change"),
-                "<input type='text' name=\"shadowMin\" size=3 maxlength=4 value=\"" . $this->shadowMin . "\">"
+                "<input type='text' name=\"shadowMin\" size=3 maxlength=4 value=\'' . $this->shadowMin . "\">"
             ));
 
             $shadowMaxACL     =  $this->getacl("shadowMax");
             $smarty->assign("shadowmaxs", sprintf(
                 _("Password must be changed after %s days"),
-                "<input type='text' name=\"shadowMax\" size=3 maxlength=4 value=\"" . $this->shadowMax . "\">"
+                "<input type='text' name=\"shadowMax\" size=3 maxlength=4 value=\'' . $this->shadowMax . "\">"
             ));
 
             $shadowInactiveACL =  $this->getacl("shadowInactive");
             $smarty->assign("shadowinactives", sprintf(
                 _("Disable account after %s days of inactivity after password expiry"),
-                "<input type='text' name=\"shadowInactive\" size=3 maxlength=4 value=\"" . $this->shadowInactive . "\">"
+                "<input type='text' name=\"shadowInactive\" size=3 maxlength=4 value=\'' . $this->shadowInactive . "\">"
             ));
 
             $shadowWarningACL =  $this->getacl("shadowWarning");
             $smarty->assign("shadowwarnings", sprintf(
                 _("Warn user %s days before password expiry"),
-                "<input type='text' name=\"shadowWarning\" size=3 maxlength=4 value=\"" . $this->shadowWarning . "\">"
+                "<input type='text' name=\"shadowWarning\" size=3 maxlength=4 value=\'' . $this->shadowWarning . "\">"
             ));
 
             foreach (
@@ -509,9 +509,9 @@ class posixAccount extends plugin
                 if ($this->$val == 1) {
                     $smarty->assign("$val", "checked");
                 } else {
-                    $smarty->assign("$val", "");
+                    $smarty->assign("$val", '');
                 }
-                $smarty->assign("$val" . "ACL", $this->getacl(preg_replace("/^.*_/", "", $val)));
+                $smarty->assign("$val" . "ACL", $this->getacl(preg_replace("/^.*_/", '', $val)));
             }
 
             $smarty->assign("mustchangepasswordACL", $this->getacl("mustchangepassword"));
@@ -538,28 +538,28 @@ class posixAccount extends plugin
         if (count($this->groupMembership) > 16) {
             $smarty->assign("groups", "too_many_for_nfs");
         } else {
-            $smarty->assign("groups", "");
+            $smarty->assign("groups", '');
         }
 
         /* Avoid "Undefined index: forceMode" */
-        $smarty->assign("forceMode", "");
+        $smarty->assign("forceMode", '');
 
         /* Checkboxes */
         if ($this->force_ids == 1) {
             $smarty->assign("force_ids", "checked");
             if (session::get('js')) {
-                $smarty->assign("forceMode", "");
+                $smarty->assign("forceMode", '');
             }
         } else {
             if (session::get('js')) {
                 $smarty->assign("forceMode", "disabled");
             }
-            $smarty->assign("force_ids", "");
+            $smarty->assign("force_ids", '');
         }
 
-        /* Create onClick="" action string for the "Force UID/GID" option 
+        /* Create onClick='' action string for the "Force UID/GID" option 
      */
-        $onClickIDS = "";
+        $onClickIDS = '';
         if (preg_match("/w/", $this->getacl("uidNumber"))) {
             $onClickIDS .= "changeState('uidNumber');";
         }
@@ -603,7 +603,7 @@ class posixAccount extends plugin
         if ($this->mustchangepassword) {
             $smarty->assign("mustchangepassword", " checked ");
         } else {
-            $smarty->assign("mustchangepassword", "");
+            $smarty->assign("mustchangepassword", '');
         }
 
         // Add SSH button if available
@@ -763,7 +763,7 @@ class posixAccount extends plugin
        * - use existing number if possible
        * - if not, try to create a new uniqe one.
        * */
-            if ($this->savedUidNumber != "") {
+            if ($this->savedUidNumber != '') {
                 $this->uidNumber = $this->savedUidNumber;
             } else {
 
@@ -771,7 +771,7 @@ class posixAccount extends plugin
            to get real unique values. 
          */
                 $wait = 10;
-                while (get_lock("uidnumber") != "") {
+                while (get_lock("uidnumber") != '') {
                     sleep(1);
 
                     /* Oups - timed out */
@@ -855,7 +855,7 @@ class posixAccount extends plugin
                     __FUNCTION__,
                     __FILE__,
                     sprintf("Primary group '%s' created, using gidNumber '%s'.", $groupcn, $this->gidNumber),
-                    ""
+                    ''
                 );
             } else {
                 $attrs = $ldap->fetch();
@@ -879,35 +879,35 @@ class posixAccount extends plugin
                 __FUNCTION__,
                 __FILE__,
                 sprintf("Primary group '%s' for user '%s' manually selected.", $this->gidNumber, $this->uid),
-                ""
+                ''
             );
         }
 
         if ($this->activate_shadowMin != "1") {
-            $this->shadowMin = "";
+            $this->shadowMin = '';
         }
 
         if (($this->activate_shadowMax != "1") && ($this->mustchangepassword != "1")) {
-            $this->shadowMax = "";
+            $this->shadowMax = '';
         }
 
         if ($this->activate_shadowWarning != "1") {
-            $this->shadowWarning = "";
+            $this->shadowWarning = '';
         }
 
         if ($this->activate_shadowInactive != "1") {
-            $this->shadowInactive = "";
+            $this->shadowInactive = '';
         }
 
         if ($this->activate_shadowExpire != "1") {
-            $this->shadowExpire = "";
+            $this->shadowExpire = '';
         }
 
         /* Fill gecos */
         if (isset($this->parent) && $this->parent !== NULL) {
             $this->gecos = rewrite($this->parent->by_object['user']->cn);
             if (!preg_match('/^[a-z0-9 -]+$/i', $this->gecos)) {
-                $this->gecos = "";
+                $this->gecos = '';
             }
         }
 
@@ -1007,11 +1007,11 @@ class posixAccount extends plugin
         $this->attributes = $tmp_attributes;
 
         /* must: homeDirectory */
-        if ($this->homeDirectory == "") {
+        if ($this->homeDirectory == '') {
             $message[] = msgPool::required(_("Home directory"));
         }
         if (!tests::is_path($this->homeDirectory)) {
-            $message[] = msgPool::invalid(_("Home directory"), "", "", "/home/yourname");
+            $message[] = msgPool::invalid(_("Home directory"), '', '', "/home/yourname");
         }
 
         /* Check ID's if they are forced by user */
@@ -1035,7 +1035,7 @@ class posixAccount extends plugin
         }
 
         /* Check dates */
-        if ($this->activate_shadowExpire && ($this->shadowExpire == "" || !tests::is_date($this->shadowExpire))) {
+        if ($this->activate_shadowExpire && ($this->shadowExpire == '' || !tests::is_date($this->shadowExpire))) {
             $message[] = msgPool::invalid("shadowExpire", $this->shadowExpire);
         }
 
@@ -1085,11 +1085,11 @@ class posixAccount extends plugin
     function multiple_check()
     {
         $message = parent::multiple_check();
-        if ($this->homeDirectory == "" && in_array_strict("homeDirectory", $this->multi_boxes)) {
+        if ($this->homeDirectory == '' && in_array_strict("homeDirectory", $this->multi_boxes)) {
             $message[] = msgPool::required(_("Home directory"));
         }
         if (!tests::is_path($this->homeDirectory) && in_array_strict("homeDirectory", $this->multi_boxes)) {
-            $message[] = msgPool::invalid(_("Home directory"), "", "", "/home/yourname");
+            $message[] = msgPool::invalid(_("Home directory"), '', '', "/home/yourname");
         }
 
         /* Check shadow settings, well I like spaghetties... */
@@ -1177,7 +1177,7 @@ class posixAccount extends plugin
                     if (isset($attrs["description"])) {
                         $this->groupListData[$attrs['dn']][] = $attrs['description'][0];
                     } else {
-                        $this->groupListData[$attrs['dn']][] = "";
+                        $this->groupListData[$attrs['dn']][] = '';
                     }
                     if ($this->multiple_support_active) {
                         $this->groupListData[$attrs['dn']][] = _("all");
@@ -1237,7 +1237,7 @@ class posixAccount extends plugin
 
         /* Fix primary group settings */
         if ($this->gidNumber == 2147483647) {
-            $this->gidNumber = "";
+            $this->gidNumber = '';
         }
 
         if ($this->gidNumber) {
@@ -1279,7 +1279,7 @@ class posixAccount extends plugin
 
         /* Convert shadowExpire for usage */
         if ($this->shadowExpire == 0) {
-            $this->shadowExpire = "";
+            $this->shadowExpire = '';
         } else {
             $this->shadowExpire = date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
         }
@@ -1343,21 +1343,21 @@ class posixAccount extends plugin
     function getCopyDialog()
     {
         /* Skip dialog creation if this is not a valid account*/
-        if (!$this->is_account) return ("");
+        if (!$this->is_account) return ('');
         if ($this->force_ids == 1) {
             $force_ids = "checked";
             if (session::get('js')) {
-                $forceMode = "";
+                $forceMode = '';
             }
         } else {
             if (session::get('js')) {
                 if ($this->acl != "#none#")
                     $forceMode = "disabled";
             }
-            $force_ids = "";
+            $force_ids = '';
         }
 
-        $sta = "";
+        $sta = '';
 
         /* Open group add dialog */
         if (isset($_POST['edit_groupmembership'])) {
@@ -1405,7 +1405,7 @@ class posixAccount extends plugin
         if (count($this->groupMembership) > 16) {
             $smarty->assign("groups", "too_many_for_nfs");
         } else {
-            $smarty->assign("groups", "");
+            $smarty->assign("groups", '');
         }
         $str = $smarty->fetch(get_template_path("paste_generic.tpl", TRUE, dirname(__FILE__)));
 
@@ -1425,8 +1425,8 @@ class posixAccount extends plugin
 
         /* Avoid using the same gid/uid number as source user 
        empty numbers to enforce new ones. */
-        $this->savedUidNumber = "";
-        $this->savedGidNumber = "";
+        $this->savedUidNumber = '';
+        $this->savedGidNumber = '';
 
         /* Get group membership */
         $ldap = $config->get_ldap_link();
@@ -1469,7 +1469,7 @@ class posixAccount extends plugin
 
         /* Convert shadowExpire for usage */
         if ($this->shadowExpire == 0) {
-            $this->shadowExpire = "";
+            $this->shadowExpire = '';
         } else {
             $this->shadowExpire = date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
         }
@@ -1644,7 +1644,7 @@ class posixAccount extends plugin
 
 
         /* Get all groups used by currently edited users */
-        $uid_filter = "";
+        $uid_filter = '';
         for ($i = 0; $i < $this->multi_attrs_all['uid']['count']; $i++) {
             $uid = $this->multi_attrs_all['uid'][$i];
             $uids[] = $uid;

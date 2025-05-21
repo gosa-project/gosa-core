@@ -32,7 +32,7 @@ class usertabs extends tabs
 
     function __construct($config, $data, $dn, $cat = "", $hide_refs = FALSE, $hide_acls = FALSE)
     {
-        tabs::__construct($config, $data, $dn, 'users', $hide_refs, $hide_acls);
+        parent::__construct($config, $data, $dn, 'users', $hide_refs, $hide_acls);
         $this->base = $this->by_object['user']->base;
 
         $this->uid = &$this->by_object['user']->uid;
@@ -45,7 +45,7 @@ class usertabs extends tabs
 
     function save_object($save_current = FALSE)
     {
-        tabs::save_object($save_current);
+        parent::save_object($save_current);
 
         /* Update reference, transfer variables */
         $baseobject = $this->by_object['user'];
@@ -146,7 +146,7 @@ class usertabs extends tabs
 
         $this->dn = $baseobject->new_dn;
 
-        return tabs::save();
+        return parent::save();
     }
 
 
@@ -159,7 +159,7 @@ class usertabs extends tabs
 
     function saveCopyDialog()
     {
-        tabs::saveCopyDialog();
+        parent::saveCopyDialog();
         $baseobject = $this->by_object['user'];
         $uid = $baseobject->uid;
         foreach ($this->by_object as  $name => $obj) {
