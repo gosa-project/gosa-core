@@ -2,7 +2,7 @@
 
 /**
  * This code is part of GOsa (http://www.gosa-project.org)
- * Copyright (C) 2003-2008 GONICUS GmbH
+ * Copyright (C) 2003-2025 GONICUS GmbH
  *
  * ID: $$Id$$
  *
@@ -24,31 +24,31 @@
 class group extends plugin
 {
     // Group attributes
-    var $cn = "";
-    var $description = "";
-    var $gidNumber = "";
+    var $cn = '';
+    var $description = '';
+    var $gidNumber = '';
     var $memberUid = [];
     var $memberUid_used_by_some = [];
 
     // Helpers
-    var $base = "";
+    var $base = '';
     var $force_gid = false;
     var $fon_group = false;
     var $smbgroup = false;
     var $groupType = false;
-    var $sambaSID = "";
-    var $sambaDomainName = "DEFAULT";
-    var $SID = "";
+    var $sambaSID = '';
+    var $sambaDomainName = 'DEFAULT';
+    var $SID = '';
     var $ridBase = 0;
     var $members = [];
     var $users = [];
     var $member = [];
     var $allusers = [];
-    var $saved_gidNumber = "";
-    var $oldgroupType = "";
-    var $orig_dn = "";
-    var $orig_cn = "";
-    var $orig_base = "";
+    var $saved_gidNumber = '';
+    var $oldgroupType = '';
+    var $orig_dn = '';
+    var $orig_cn = '';
+    var $orig_base = '';
     var $has_mailAccount = false;
     var $userSelect;
     var $nagios_group = false;
@@ -62,11 +62,11 @@ class group extends plugin
     var $baseSelector;
     var $dns = [];
 
-    /* attribute list for save action */
-    var $attributes = array("cn", "description", "gidNumber", "memberUid", "sambaGroupType", "sambaSID");
-    var $objectclasses = array("top", "posixGroup");
-    var $CopyPasteVars  = array("force_gid", "fon_group", "smbgroup", "groupType", "sambaSID", "sambaDomainName", "SID", "nagios_group", "sambaGroupType");
-    var $multiple_support = TRUE;
+    // attribute list for save action
+    var $attributes = array('cn', 'description', 'gidNumber', 'memberUid', 'sambaGroupType', 'sambaSID');
+    var $objectclasses = array('top', 'posixGroup');
+    var $CopyPasteVars  = array('force_gid', 'fon_group', 'smbgroup', 'groupType', 'sambaSID', 'sambaDomainName', 'SID', 'nagios_group', 'sambaGroupType');
+    var $multiple_support = true;
 
     // Lists 
     private $memberList;    // Single group editing
@@ -79,7 +79,7 @@ class group extends plugin
     {
         // Set rfc2307bis flag
         if ($config->get_cfg_value("core", "rfc2307bis") == "true") {
-            $this->rfc2307bis = TRUE;
+            $this->rfc2307bis = true;
             $this->attributes[] = "member";
             $this->objectclasses[] = "groupOfNames";
         }
@@ -113,7 +113,7 @@ class group extends plugin
             if (array_search('sambaGroupMapping', $this->attrs['objectClass']) == false) {
                 $this->smbgroup = false;
             } else {
-                $this->smbgroup = TRUE;
+                $this->smbgroup = true;
                 if (isset($this->attrs['sambaSID'])) {
                     $this->sambaSID = $this->attrs['sambaSID'][0];
                 }
@@ -121,23 +121,23 @@ class group extends plugin
             if (array_search('goFonPickupGroup', $this->attrs['objectClass']) == false) {
                 $this->fon_group = false;
             } else {
-                $this->fon_group = TRUE;
+                $this->fon_group = true;
             }
             if (array_search('nagiosContactGroup', $this->attrs['objectClass']) == false) {
                 $this->nagios_group = false;
             } else {
-                $this->nagios_group = TRUE;
+                $this->nagios_group = true;
             }
         }
 
         // Set mail flag
         if (isset($this->attrs['objectClass']) && in_array_strict('gosaMailAccount', $this->attrs['objectClass'])) {
-            $this->has_mailAccount = TRUE;
+            $this->has_mailAccount = true;
         }
 
         // Get samba Domain in case of samba 3
-        if ($this->sambaSID != "") {
-            $this->SID = preg_replace("/-[^-]+$/", "", $this->sambaSID);
+        if ($this->sambaSID != '') {
+            $this->SID = preg_replace("/-[^-]+$/", '', $this->sambaSID);
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
             $ldap->search("(&(objectClass=sambaDomain)(sambaSID=$this->SID))", array("sambaAlgorithmicRidBase"));
@@ -158,10 +158,10 @@ class group extends plugin
                     }
                 }
             } else {
-                if ($this->config->get_cfg_value("core", "sambaRidBase") != "") {
+                if ($this->config->get_cfg_value("core", "sambaRidBase") != '') {
                     $this->sambaDomainName = "DEFAULT";
                     $this->ridBase = $this->config->get_cfg_value("core", "sambaRidBase");
-                    $this->SID = $this->config->get_cfg_value("core", "sambaSID");
+                    $this->SID = $this->config->get_cfg_value("core", 'sambaSID');
                 } else {
                     msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
                 }
@@ -175,7 +175,7 @@ class group extends plugin
             $this->oldgroupType = $this->groupType;
         }
 
-        if ($this->dn == "new") {
+        if ($this->dn === 'new') {
             if (session::is_set('CurrentMainBase')) {
                 $this->base = session::get('CurrentMainBase');
             } else {
@@ -184,12 +184,12 @@ class group extends plugin
             }
         } else {
             // Get object base 
-            $this->base = preg_replace("/^[^,]+," . preg_quote(get_groups_ou(), '/') . "/i", "", $this->dn);
+            $this->base = preg_replace("/^[^,]+," . preg_quote(get_groups_ou(), '/') . "/i", '', $this->dn);
         }
         $this->orig_base = $this->base;
 
         // This is always an account 
-        $this->is_account = TRUE;
+        $this->is_account = true;
 
         // Instanciate base selector 
         $this->baseSelector = new baseSelector($this->get_allowed_bases(), $this->base);
@@ -202,9 +202,9 @@ class group extends plugin
         $this->memberList->setDeleteable(true);
         $this->memberList->setInstantDelete(false);
         $this->memberList->setEditable(false);
-        $this->memberList->setWidth("100%");
-        $this->memberList->setHeight("300px");
-        $this->memberList->setHeader(array('~', _("Surname"), _("Given name"), _("UID")));
+        $this->memberList->setWidth('100%');
+        $this->memberList->setHeight('300px');
+        $this->memberList->setHeader(array('~', _('Surname'), _('Given name'), _('UID')));
         $this->memberList->setColspecs(array('20px', '*', '*', '*', '20px'));
         $this->memberList->setDefaultSortColumn(1);
 
@@ -226,23 +226,23 @@ class group extends plugin
 
         // Log view posixGroup
         if ($this->is_account && !$this->view_logged) {
-            $this->view_logged = TRUE;
-            new log("view", "groups/" . get_class($this), $this->dn);
+            $this->view_logged = true;
+            new log('view', 'groups/' . get_class($this), $this->dn);
         }
 
         // Do we represent a valid group? 
         if (!$this->is_account && $this->parent === null) {
             switch ($theme) {
                 case 'classic':
-                    $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
+                    $symbol = '<img alt="" src="images/small-error.png" align="middle">';
                     break;
 
                 default:
-                    $symbol = "<i class='material-icons'>report</i>";
+                    $symbol = '<i class="material-icons">report</i>';
                     break;
             }
             // is the error message correct?
-            $display = "<div class='valign-wrapper'>" . $symbol . msgPool::noValidExtension(_('No valid group')) . "</div>";
+            $display = '<div class="valign-wrapper">' . $symbol . msgPool::noValidExtension(_('No valid group')) . '</div>';
             return ($display);
         }
 
@@ -253,7 +253,7 @@ class group extends plugin
             if ($this->$list) {
                 $this->$list->save_object();
                 $action = $this->$list->getAction();
-                if ($action['action'] == 'delete' && preg_match("/w/", $this->getacl("memberUid"))) {
+                if ($action['action'] === 'delete' && preg_match("/w/", $this->getacl('memberUid'))) {
                     foreach ($action['targets'] as $id) {
                         $value = $this->$list->getKey($id);
                         unset($this->members["$value"]);
@@ -264,12 +264,12 @@ class group extends plugin
         }
 
         /* Add objects? */
-        if (isset($_POST["edit_membership"]) && preg_match("/w/", $this->getacl("memberUid"))) {
+        if (isset($_POST['edit_membership']) && preg_match("/w/", $this->getacl('memberUid'))) {
             $this->userSelect = new userSelect($config, get_userinfo());
         }
 
         // Add objects finished? 
-        if (isset($_POST["add_users_cancel"]) || isset($_POST['cancel-abort'])) {
+        if (isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort'])) {
             $this->userSelect = null;
         }
 
@@ -297,7 +297,7 @@ class group extends plugin
         $this->dialog = false;
         $trustModeDialog = $this->trustModeDialog->execute();
         if ($this->trustModeDialog->trustSelect) {
-            $this->dialog = TRUE;
+            $this->dialog = true;
             return ($trustModeDialog);
         }
         $smarty->assign("trustModeDialog", $trustModeDialog);
@@ -309,7 +309,7 @@ class group extends plugin
 
         // Manage object add dialog 
         if ($this->userSelect) {
-            $this->dialog = TRUE;
+            $this->dialog = true;
             return ($this->userSelect->execute());
         }
 
@@ -321,7 +321,7 @@ class group extends plugin
             $domains[$name] = $name;
         }
         $smarty->assign("sambaDomains",     set_post($domains));
-        $smarty->assign("sambaDomainName",  set_post($this->sambaDomainName));
+        $smarty->assign('sambaDomainName',  set_post($this->sambaDomainName));
         $groupTypes = array(
             0 => _("Samba group"),
             512 => _("Domain administrators"),
@@ -335,15 +335,15 @@ class group extends plugin
         }
 
         $smarty->assign("groupTypes", set_post($groupTypes));
-        $smarty->assign("groupType",  set_post($this->groupType));
+        $smarty->assign('groupType',  set_post($this->groupType));
 
         // Members and users 
         if (!$this->multiple_support_active) {
-            $this->memberList->setAcl($this->getacl("memberUid"));
+            $this->memberList->setAcl($this->getacl('memberUid'));
             $data = $lData = [];
             foreach ($this->members as $uid => $member) {
                 $data[$uid] = $member;
-                $givenName = $sn = _("Unknown");
+                $givenName = $sn = _('Unknown');
                 if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
                 if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
@@ -356,17 +356,17 @@ class group extends plugin
             $bool = $this->isRestrictedByDynGroup();
             $this->memberList->setDeleteable(!$bool);
             $this->memberList->update();
-            $smarty->assign("memberList", $this->memberList->render());
+            $smarty->assign('memberList', $this->memberList->render());
         } else {
 
-            $this->commonList->setAcl($this->getacl("memberUid"));
-            $this->partialList->setAcl($this->getacl("memberUid"));
+            $this->commonList->setAcl($this->getacl('memberUid'));
+            $this->partialList->setAcl($this->getacl('memberUid'));
 
             $data = $lData = [];
             foreach ($this->memberUid as $uid => $member) {
                 $member = $this->members[$member];
                 $data[$uid] = $member;
-                $givenName = $sn = _("Unknown");
+                $givenName = $sn = _('Unknown');
                 if (isset($member['sn'][0])) $sn = $member['sn'][0];
                 if (isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
@@ -383,7 +383,7 @@ class group extends plugin
             foreach ($this->memberUid_used_by_some as $uid => $member) {
                 $member = (isset($this->members[$member])) ? $this->members[$member] : null;
                 $data[$uid] = $member;
-                $givenName = $sn = _("Unknown");
+                $givenName = $sn = _('Unknown');
                 if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
                 if (isset($member['givenName'][0]) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
@@ -398,32 +398,32 @@ class group extends plugin
         }
 
         // Checkboxes 
-        foreach (array("force_gid", "smbgroup") as $val) {
+        foreach (array('force_gid', 'smbgroup') as $val) {
             if ($this->$val == "1") {
-                $smarty->assign("$val", "checked");
+                $smarty->assign("$val", 'checked');
             } else {
-                $smarty->assign("$val", "");
+                $smarty->assign("$val", '');
             }
         }
         if ($this->force_gid != "1") {
-            $smarty->assign("forceMode", "disabled");
+            $smarty->assign("forceMode", 'disabled');
         } else {
-            $smarty->assign("forceMode", "");
+            $smarty->assign("forceMode", '');
         }
         if ($this->fon_group) {
-            $smarty->assign("fon_group", "checked");
+            $smarty->assign('fon_group', 'checked');
         } else {
-            $smarty->assign("fon_group", "");
+            $smarty->assign('fon_group', '');
         }
 
         if ($this->nagios_group) {
-            $smarty->assign("nagios_group", "checked");
+            $smarty->assign('nagios_group', 'checked');
         } else {
-            $smarty->assign("nagios_group", "");
+            $smarty->assign('nagios_group', '');
         }
 
         // Fields 
-        foreach (array("cn", "description", "gidNumber") as $val) {
+        foreach (array('cn', 'description', 'gidNumber') as $val) {
             $smarty->assign("$val", set_post($this->$val));
         }
 
@@ -439,18 +439,18 @@ class group extends plugin
         }
 
         // Multiple edit handling 
-        $smarty->assign("multiple_support", $this->multiple_support_active);
+        $smarty->assign('multiple_support', $this->multiple_support_active);
 
         foreach ($this->attributes as $val) {
             if (in_array_strict($val, $this->multi_boxes)) {
-                $smarty->assign("use_" . $val, TRUE);
+                $smarty->assign("use_" . $val, true);
             } else {
                 $smarty->assign("use_" . $val, false);
             }
         }
-        foreach (array("base", "smbgroup", "groupType", "sambaDomainName", "fon_group", "nagios_group") as $val) {
+        foreach (array("base", 'smbgroup', 'groupType', 'sambaDomainName', 'fon_group', 'nagios_group') as $val) {
             if (in_array_strict($val, $this->multi_boxes)) {
-                $smarty->assign("use_" . $val, TRUE);
+                $smarty->assign("use_" . $val, true);
             } else {
                 $smarty->assign("use_" . $val, false);
             }
@@ -459,9 +459,9 @@ class group extends plugin
         $bool = $this->isRestrictedByDynGroup();
         $smarty->assign("restrictedByDynGroup", $bool);
         if ($bool) {
-            $smarty->assign("memberUidACL", preg_replace("/[^r]/", "", $this->getacl('memberUid')));
+            $smarty->assign("memberUidACL", preg_replace("/[^r]/", '', $this->getacl('memberUid')));
         }
-        return ($smarty->fetch(get_template_path('generic.tpl', TRUE)));
+        return ($smarty->fetch(get_template_path('generic.tpl', true)));
     }
 
     function isRestrictedByDynGroup(): bool
@@ -500,8 +500,8 @@ class group extends plugin
         if (!isset($this->dnMapping[$uid])) {
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(&(objectClass=gosaAccount)(uid=" . $uid . "))", array("dn", "uid", "sn", "givenName"));
-            if ($ldap->count() == 0) {
+            $ldap->search("(&(objectClass=gosaAccount)(uid=" . $uid . "))", array('dn', 'uid', 'sn', 'givenName'));
+            if ($ldap->count() === 0) {
                 msg_dialog::display(
                     _("Error"),
                     sprintf(
@@ -575,7 +575,7 @@ class group extends plugin
            (Store gathered sn/givenName informations in $this->allusers too, 
            to be prepared when adding/deleting users)
          */
-        $filter = "";
+        $filter = '';
 
 
 
@@ -601,8 +601,8 @@ class group extends plugin
         // 
         // maxPerRound specifies the amount of queries we can combine into a 
         //  single query.
-        $maxPerRound = $config->get_cfg_value("core", "ldapFilterNestingLimit");
-        if ($maxPerRound == "") {
+        $maxPerRound = $config->get_cfg_value('core', 'ldapFilterNestingLimit');
+        if ($maxPerRound === '') {
             $maxPerRound = count($allUids);
         }
 
@@ -611,16 +611,16 @@ class group extends plugin
             // First build the query....
             $start = $added;
             $end = $added + $maxPerRound;
-            $filter = "";
+            $filter = '';
             for ($done = $start; $done < $end; $done++) {
                 if (!isset($allUids[$done])) break;
                 $value = $allUids[$done];
-                $filter .= "(uid=" . LDAP::escapeValue($value) . ")";
+                $filter .= '(uid=' . LDAP::escapeValue($value) . ')';
             }
 
             // Retrieve the data to LDAP
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(&(objectClass=gosaAccount)(|" . $filter . "))", array("dn", "uid", "sn", "givenName"));
+            $ldap->search("(&(objectClass=gosaAccount)(|" . $filter . "))", array('dn', 'uid', 'sn', 'givenName'));
             while ($attrs = $ldap->fetch()) {
                 $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
                 $this->members[$attrs['uid'][0]] = $attrs;
@@ -631,7 +631,7 @@ class group extends plugin
         /* check if all uids are resolved */
         foreach ($this->memberUid as $value) {
             if (!isset($this->members[$value])) {
-                $this->members[$value] = "";
+                $this->members[$value] = '';
             }
         }
     }
@@ -640,8 +640,8 @@ class group extends plugin
     // Create display name, this was used so often that it is excluded into a seperate function 
     function createResultName($attrs)
     {
-        if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])) {
-            $ret =  $attrs["sn"][0] . ", " . $attrs["givenName"][0] . " [" . $attrs["uid"][0] . "]";
+        if (isset($attrs['givenName'][0]) && isset($attrs['sn'][0])) {
+            $ret =  $attrs['sn'][0] . ", " . $attrs['givenName'][0] . " [" . $attrs['uid'][0] . "]";
         } else {
             $ret = $attrs['uid'][0];
         }
@@ -663,7 +663,7 @@ class group extends plugin
 
         // Delete references to object groups 
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaGroupOfNames)(member=" . LDAP::prepare4filter($this->dn) . "))", array("cn"));
+        $ldap->search("(&(objectClass=gosaGroupOfNames)(member=" . LDAP::prepare4filter($this->dn) . "))", array('cn'));
         while ($ldap->fetch()) {
             $og = new ogroup($config, $ldap->getDN());
             unset($og->member[$this->dn]);
@@ -674,7 +674,7 @@ class group extends plugin
 
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($this->dn) . "*))", array("gosaAclEntry", "dn"));
+        $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($this->dn) . "*))", array("gosaAclEntry", 'dn'));
         while ($attrs = $ldap->fetch()) {
             $acl = new acl($config, $this->parent, $attrs['dn']);
             foreach ($acl->gosaAclEntry as $id => $entry) {
@@ -716,21 +716,21 @@ class group extends plugin
                 }
                 if ($this->base != $this->baseSelector->getBase()) {
                     $this->base = $this->baseSelector->getBase();
-                    $this->is_modified = TRUE;
+                    $this->is_modified = true;
                 }
             }
 
             $this->force_gid = 0;
 
             // Only reset sambagroup flag if we are able to write this flag 
-            if ($this->acl_is_writeable("sambaGroupType")) {
+            if ($this->acl_is_writeable('sambaGroupType')) {
                 $this->smbgroup = 0;
             }
 
             foreach (
                 array(
-                    "force_gid"  => "gidNumber",
-                    "smbgroup"   => "sambaGroupType"
+                    'force_gid'  => 'gidNumber',
+                    'smbgroup'   => 'sambaGroupType'
                 ) as $val => $aclname
             ) {
                 if ($this->acl_is_writeable($aclname)  && isset($_POST["$val"])) {
@@ -739,7 +739,7 @@ class group extends plugin
             }
 
             // Save sambaDomain attribute 
-            if ($this->acl_is_writeable("sambaDomainName") && isset($_POST['sambaDomainName'])) {
+            if ($this->acl_is_writeable('sambaDomainName') && isset($_POST['sambaDomainName'])) {
                 $this->sambaDomainName = get_post('sambaDomainName');
                 $this->groupType = get_post('groupType');
             }
@@ -747,14 +747,14 @@ class group extends plugin
             // Save fon attribute 
             if ($this->acl_is_writeable("fonGroup")) {
                 if (isset($_POST['fon_group'])) {
-                    $this->fon_group = TRUE;
+                    $this->fon_group = true;
                 } else {
                     $this->fon_group = false;
                 }
             }
             if ($this->acl_is_writeable("nagiosGroup")) {
                 if (isset($_POST['nagios_group'])) {
-                    $this->nagios_group = TRUE;
+                    $this->nagios_group = true;
                 } else {
                     $this->nagios_group = false;
                 }
@@ -770,12 +770,12 @@ class group extends plugin
 
         // ID handling 
         if ($this->force_gid == 0) {
-            if ($this->saved_gidNumber != "") {
+            if ($this->saved_gidNumber != '') {
                 $this->gidNumber = $this->saved_gidNumber;
             } else {
                 // Calculate new, lock gids 
                 $wait = 10;
-                while (get_lock("gidnumber") != "") {
+                while (get_lock("gidnumber") != '') {
                     sleep(1);
 
                     // timed out? 
@@ -784,7 +784,7 @@ class group extends plugin
                     }
                 }
                 add_lock("gidnumber", "gosa");
-                $this->gidNumber = get_next_id("gidNumber", $this->dn);
+                $this->gidNumber = get_next_id('gidNumber', $this->dn);
             }
         }
 
@@ -808,7 +808,7 @@ class group extends plugin
         // Add samba group functionality 
         if ($this->smbgroup) {
             // Fixed undefined index ...    
-            $this->SID = $this->ridBase = "";
+            $this->SID = $this->ridBase = '';
             if (isset($config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'])) {
                 $this->SID    = $config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'];
             } else {
@@ -825,7 +825,7 @@ class group extends plugin
 
             // Check if we need to create a special entry 
             if ($this->groupType == 0) {
-                if ($this->sambaSID == "" || $this->oldgroupType != $this->groupType) {
+                if ($this->sambaSID == '' || $this->oldgroupType != $this->groupType) {
                     $sid = $this->getSambaSID();
                     $this->attrs['sambaSID'] = $sid;
                     $this->sambaSID = $sid;
@@ -899,15 +899,15 @@ class group extends plugin
         }
 
         // check generated gidNumber, it may be used by another group. 
-        if ($this->gidNumber != "") {
+        if ($this->gidNumber != '') {
             $ldap->cd($config->current['BASE']);
             $chk_attr = "orig_cn";
             if ($this->cn != $this->orig_cn) {
-                $chk_attr = "cn";
+                $chk_attr = 'cn';
             }
-            $ldap->search("(&(!(cn=" . $this->$chk_attr . "))(objectClass=posixGroup)(gidNumber=" . $this->gidNumber . "))", array("cn"));
+            $ldap->search("(&(!(cn=" . $this->$chk_attr . "))(objectClass=posixGroup)(gidNumber=" . $this->gidNumber . "))", array('cn'));
             if ($ldap->count()) {
-                $cns = "";
+                $cns = '';
                 while ($attrs = $ldap->fetch()) {
                     $cns .= $attrs['cn'][0] . ", ";
                 }
@@ -965,14 +965,14 @@ class group extends plugin
         $message = parent::check();
 
         // Permissions for that base? 
-        if ($this->base != "") {
+        if ($this->base != '') {
             $new_dn = 'cn=' . $this->cn . ',' . get_groups_ou() . $this->base;
         } else {
             $new_dn = $this->dn;
         }
 
         // must: cn 
-        if ($this->cn == "" && $this->acl_is_writeable("cn")) {
+        if ($this->cn == '' && $this->acl_is_writeable('cn')) {
             $message[] = msgPool::required(_("Name"));
         }
 
@@ -1000,7 +1000,7 @@ class group extends plugin
             $ldap = $config->get_ldap_link();
             if (($this->cn  != $this->orig_cn) || ($this->orig_dn == "new")) {
                 $ldap->cd(get_groups_ou() . $this->base);
-                $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))", get_groups_ou() . $this->base, array("cn"));
+                $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))", get_groups_ou() . $this->base, array('cn'));
                 if ($ldap->count() != 0) {
                     $message[] = msgPool::duplicated(_("Name"));
                 }
@@ -1009,7 +1009,7 @@ class group extends plugin
             // Check for used 'cn' 
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))", array("cn"));
+            $ldap->search("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))", array('cn'));
             if ($ldap->count() != 0) {
                 // New entry? 
                 if ($this->dn == 'new') {
@@ -1051,26 +1051,25 @@ class group extends plugin
         return $message;
     }
 
-
     function getCopyDialog(): array
     {
         if ($this->force_gid) {
             $used = " checked ";
-            $dis  = "";
+            $dis  = '';
         } else {
-            $used = "";
+            $used = '';
             $dis  = " disabled ";
         }
 
         $smarty = get_smarty();
         $smarty->assign("used",     set_post($used));
         $smarty->assign("dis",     set_post($dis));
-        $smarty->assign("cn",      set_post($this->cn));
-        $smarty->assign("gidNumber", set_post($this->gidNumber));
-        $str = $smarty->fetch(get_template_path("paste_generic.tpl", TRUE));
+        $smarty->assign('cn',      set_post($this->cn));
+        $smarty->assign('gidNumber', set_post($this->gidNumber));
+        $str = $smarty->fetch(get_template_path("paste_generic.tpl", true));
         $ret = [];
         $ret['string'] = $str;
-        $ret['status'] = "";
+        $ret['status'] = '';
         return $ret;
     }
 
@@ -1088,18 +1087,17 @@ class group extends plugin
         }
     }
 
-
     // Return plugin informations for acl handling   
     static function plInfo()
     {
         return (array(
-            "plShortName" => _("Generic"),
+            "plShortName" => _('Generic'),
             "plDescription" => _("Generic group settings"),
             "plSelfModify"  => false,
             "plDepends"     => [],
             "plPriority"    => 0,
             "plSection"     => array("administration"),
-            "plCategory"    => array("groups" => array("objectClass" => "posixGroup", "description" => _("Groups"))),
+            "plCategory"    => array("groups" => array("objectClass" => 'posixGroup', 'description' => _("Groups"))),
 
             "plProperties" =>
             array(
@@ -1107,7 +1105,7 @@ class group extends plugin
                     "name"          => "ogroupRDN",
                     "type"          => "rdn",
                     "default"       => "ou=groups,",
-                    "description"   => _("RDN for object group storage."),
+                    'description'   => _("RDN for object group storage."),
                     "check"         => "gosaProperty::isRdn",
                     "migrate"       => "migrate_ogroupRDN",
                     "group"         => "plugin",
@@ -1116,23 +1114,22 @@ class group extends plugin
             ),
 
             "plProvidedAcls"    => array(
-                "cn"                => _("Name"),
-                "description"       => _("Description"),
+                'cn'                => _("Name"),
+                'description'       => _("Description"),
                 "base"              => _("Base"),
 
-                "gidNumber"         => _("GID"),
+                'gidNumber'         => _("GID"),
 
-                "sambaGroupType"    => _("Samba group type"),
-                "sambaDomainName"   => _("Samba domain name"),
+                'sambaGroupType'    => _("Samba group type"),
+                'sambaDomainName'   => _("Samba domain name"),
                 "accessTo"          => _("System trust"),
                 "fonGroup"          => _("Phone pickup group"),
                 "nagiosGroup"       => _("Nagios group"),
 
-                "memberUid"         => _("Group member")
+                'memberUid'         => _("Group member")
             )
         ));
     }
-
 
     function multiple_save_object()
     {
@@ -1148,7 +1145,7 @@ class group extends plugin
             $this->trustModeDialog->multiple_save_object();
             $this->base = $base_tmp;
 
-            foreach (array("base", "smbgroup", "groupType", "sambaDomainName", "fon_group", "nagios_group") as $attr) {
+            foreach (array("base", 'smbgroup', 'groupType', 'sambaDomainName', 'fon_group', 'nagios_group') as $attr) {
                 if (isset($_POST['use_' . $attr])) {
                     $this->multi_boxes[] = $attr;
                 }
@@ -1161,14 +1158,14 @@ class group extends plugin
                 }
                 if ($this->base != $this->baseSelector->getBase()) {
                     $this->base = $this->baseSelector->getBase();
-                    $this->is_modified = TRUE;
+                    $this->is_modified = true;
                 }
             }
 
-            foreach (array("smbgroup"   => "sambaGroupType", "nagios_group" => "nagiosGroup") as $val => $aclname) {
+            foreach (array('smbgroup'   => 'sambaGroupType', 'nagios_group' => "nagiosGroup") as $val => $aclname) {
                 if ($this->acl_is_writeable($aclname)) {
                     if (isset($_POST["$val"])) {
-                        $this->$val =  TRUE;
+                        $this->$val =  true;
                     } else {
                         $this->$val =  false;
                     }
@@ -1176,7 +1173,7 @@ class group extends plugin
             }
 
             // Save sambaDomain attribute 
-            if ($this->acl_is_writeable("sambaDomainName") && isset($_POST['sambaDomainName'])) {
+            if ($this->acl_is_writeable('sambaDomainName') && isset($_POST['sambaDomainName'])) {
                 $this->sambaDomainName = get_post('sambaDomainName');
                 $this->groupType = get_post('groupType');
             }
@@ -1184,7 +1181,7 @@ class group extends plugin
             // Save fon attribute 
             if ($this->acl_is_writeable("fonGroup")) {
                 if (isset($_POST['fon_group'])) {
-                    $this->fon_group = TRUE;
+                    $this->fon_group = true;
                 } else {
                     $this->fon_group = false;
                 }
@@ -1197,7 +1194,7 @@ class group extends plugin
         $ret = parent::get_multi_edit_values();
         $ret = array_merge($ret, $this->trustModeDialog->get_multi_edit_values());
 
-        foreach (array("base", "smbgroup", "groupType", "sambaDomainName", "fon_group", "nagios_group") as $attr) {
+        foreach (array("base", 'smbgroup', 'groupType', 'sambaDomainName', 'fon_group', 'nagios_group') as $attr) {
             if (in_array_strict($attr, $this->multi_boxes)) {
                 $ret[$attr] = $this->$attr;
             }
@@ -1212,7 +1209,6 @@ class group extends plugin
     {
         return ($this->execute());
     }
-
 
     // Initialize plugin with given atribute arrays 
     function init_multiple_support($attrs, $all)
@@ -1262,7 +1258,6 @@ class group extends plugin
         $this->partialList->setDefaultSortColumn(1);
     }
 
-
     function PrepareForCopyPaste($source)
     {
         global $config;
@@ -1271,8 +1266,8 @@ class group extends plugin
         $this->trustModeDialog->PrepareForCopyPaste($source);
 
         // Get samba Domain in case of samba 3 
-        if ($this->sambaSID != "") {
-            $this->SID = preg_replace("/-[^-]+$/", "", $this->sambaSID);
+        if ($this->sambaSID != '') {
+            $this->SID = preg_replace("/-[^-]+$/", '', $this->sambaSID);
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
             $ldap->search("(&(objectClass=sambaDomain)(sambaSID=$this->SID))", array("sambaAlgorithmicRidBase"));
@@ -1293,10 +1288,10 @@ class group extends plugin
                     }
                 }
             } else {
-                if ($config->get_cfg_value("core", "sambaRidBase") != "") {
+                if ($config->get_cfg_value("core", "sambaRidBase") != '') {
                     $this->sambaDomainName = "DEFAULT";
                     $this->ridBase = $config->get_cfg_value("core", "sambaRidBase");
-                    $this->SID = $config->get_cfg_value("core", "sambaSID");
+                    $this->SID = $config->get_cfg_value("core", 'sambaSID');
                 } else {
                     msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
                 }
@@ -1330,7 +1325,7 @@ class group extends plugin
         $this->trustModeDialog->set_acl_base($base);
     }
 
-    //! \brief  Enables multiple support for this plugin
+    // Enables multiple support for this plugin
     function enable_multiple_support()
     {
         parent::enable_multiple_support();
@@ -1342,14 +1337,14 @@ class group extends plugin
     {
         $users = [];
 
-        /* Update groupMembership, keep optinal group */
+        // Update groupMembership, keep optinal group
         foreach ($attrs['memberUid_used_by_some'] as $uid) {
             if (in_array_strict($uid, $this->memberUid)) {
                 $users[$uid] = $uid;
             }
         }
 
-        /* Update groupMembership, add forced groups */
+        // Update groupMembership, add forced groups
         foreach ($attrs['memberUid'] as $uid) {
             $users[$uid] = $uid;
         }
@@ -1359,17 +1354,16 @@ class group extends plugin
         $this->memberUid = $users;
     }
 
-
-    //! \brief Get a new SambaSID for a group  
+    // Get a new SambaSID for a group
     function getSambaSID()
     {
         global $config;
         $ldap = $config->get_ldap_link();
         $gidNumber = $this->gidNumber;
-        while (TRUE) {
+        while (true) {
             $sid = $this->SID . "-" . ($gidNumber * 2 + $this->ridBase + 1);
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(sambaSID=$sid)", array("sambaSID"));
+            $ldap->search("(sambaSID=$sid)", array('sambaSID'));
             if ($ldap->count() == 0) {
                 break;
             }
