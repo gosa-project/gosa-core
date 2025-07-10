@@ -1,5 +1,6 @@
 {if $multiple_support}
-<input type="hidden" value="1" name="group_mulitple_edit"> {/if}
+<input type="hidden" value="1" name="group_mulitple_edit">
+{/if}
 
 <div class="group-wrapper">
     <div class="row">
@@ -23,6 +24,17 @@
                 {$base}
             </div>
             {/render}
+
+            <div>
+                <label>
+                    <p>
+                        <input type=checkbox name="rfc2307bisIndicator" value="{$rfc2307bisMode}" title="{t}Indicates whether rfc2307bis mode is active or not.{/t}" disabled>
+                        <span>
+                            {t}rfc2307bis{/t}
+                        </span>
+                    </p>
+                </label>
+            </div>
 
             {if !$multiple_support}
             {render acl=$gidNumberACL}
