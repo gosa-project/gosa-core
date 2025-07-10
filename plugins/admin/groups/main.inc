@@ -1,7 +1,7 @@
 <?php
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
- * Copyright (C) 2003-2008 GONICUS GmbH
+ * Copyright (C) 2003-2025 GONICUS GmbH
  *
  * ID: $$Id$$
  *
@@ -20,8 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* Remove locks created by this plugin
- */
+// Remove locks created by this plugin
 if ($remove_lock) {
     if (session::is_set('groupManagement')) {
         $macl = session::get('groupManagement');
@@ -29,13 +28,12 @@ if ($remove_lock) {
     }
 }
 
-/* Remove this plugin from session
- */
+// Remove this plugin from session
 if ($cleanup) {
     session::un_set('groupManagement');
 } else {
 
-    /* Create groupmanagement object on demand */
+    // Create groupmanagement object on demand
     if (!session::is_set('groupManagement')) {
         $groupManagement = new groupManagement($config, $ui);
         session::set('groupManagement', $groupManagement);
@@ -43,11 +41,11 @@ if ($cleanup) {
     $groupManagement = session::get('groupManagement');
     $display = $groupManagement->execute();
 
-    /* Reset requested? */
-    if (isset($_GET['reset']) && $_GET['reset'] == 1) {
+    // Reset requested?
+    if (isset($_GET['reset']) && $_GET['reset'] === 1) {
         session::un_set('groupManagement');
     }
 
-    /* Show and save dialog */
+    // Show and save dialog
     session::set('groupManagement', $groupManagement);
 }

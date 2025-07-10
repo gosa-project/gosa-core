@@ -29,6 +29,8 @@ class group extends plugin
     var $gidNumber = '';
     var $memberUid = [];
     var $memberUid_used_by_some = [];
+    var $member = [];
+    var $member_used_by_some = [];
 
     // Helpers
     var $base = '';
@@ -42,7 +44,6 @@ class group extends plugin
     var $ridBase = 0;
     var $members = [];
     var $users = [];
-    var $member = [];
     var $allusers = [];
     var $saved_gidNumber = '';
     var $oldgroupType = '';
@@ -63,8 +64,8 @@ class group extends plugin
     var $dns = [];
 
     // attribute list for save action
-    var $attributes = array('cn', 'description', 'gidNumber', 'memberUid', 'sambaGroupType', 'sambaSID');
-    var $objectclasses = array('top', 'posixGroup');
+    var $attributes = ['cn', 'description', 'gidNumber', 'memberUid', 'sambaGroupType', 'sambaSID'];
+    var $objectclasses = ['top', 'posixGroup'];
     var $CopyPasteVars  = array('force_gid', 'fon_group', 'smbgroup', 'groupType', 'sambaSID', 'sambaDomainName', 'SID', 'nagios_group', 'sambaGroupType');
     var $multiple_support = true;
 
@@ -74,15 +75,18 @@ class group extends plugin
     private $partialList;   // (Multiple support active)
 
     var $trustModeDialog;
+    var $rfc2307bisDisableNestedGroups = false;
 
     function __construct($config, $dn = null)
     {
         // Set rfc2307bis flag
-        if ($config->get_cfg_value("core", "rfc2307bis") == "true") {
+        if ($config->get_cfg_value('core', "rfc2307bis") == "true") {
             $this->rfc2307bis = true;
             $this->attributes[] = "member";
-            $this->objectclasses[] = "groupOfNames";
+            $this->objectclasses = ['top', 'groupOfNames', 'posixGroup'];
         }
+
+        $this->rfc2307bisDisableNestedGroups = $config->get_cfg_value('core', 'rfc2307bisDisableNestedGroups');
 
         parent::__construct($config, $dn);
 
@@ -94,14 +98,7 @@ class group extends plugin
         $this->orig_cn = $this->cn;
 
         // Get member list
-        if (isset($this->attrs['memberUid'][0])) {
-            $tmp = [];
-            for ($i = 0; $i < $this->attrs['memberUid']['count']; $i++) {
-                $tmp[$this->attrs['memberUid'][$i]] = $this->attrs['memberUid'][$i];
-            }
-            $this->memberUid = $tmp;
-            ksort($this->memberUid);
-        }
+        $this->loadGroupMembers();
 
         // Save gidNumber for later use
         if (isset($this->attrs['gidNumber'])) {
@@ -140,17 +137,17 @@ class group extends plugin
             $this->SID = preg_replace("/-[^-]+$/", '', $this->sambaSID);
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
-            $ldap->search("(&(objectClass=sambaDomain)(sambaSID=$this->SID))", array("sambaAlgorithmicRidBase"));
+            $ldap->search("(&(objectClass=sambaDomain)(sambaSID=$this->SID))", array('sambaAlgorithmicRidBase'));
             if ($ldap->count() != 0) {
                 $attrs = $ldap->fetch();
                 if (isset($attrs['sambaAlgorithmicRidBase'])) {
                     $this->ridBase = $attrs['sambaAlgorithmicRidBase'][0];
                 } else {
-                    $this->ridBase = $this->config->get_cfg_value("core", "sambaRidBase");
+                    $this->ridBase = $this->config->get_cfg_value('core', 'sambaRidBase');
                 }
 
                 // Get domain name for SID
-                $this->sambaDomainName = "DEFAULT";
+                $this->sambaDomainName = 'DEFAULT';
                 foreach ($this->config->data['SERVERS']['SAMBA'] as $key => $val) {
                     if ($val['SID'] == $this->SID) {
                         $this->sambaDomainName = $key;
@@ -158,10 +155,10 @@ class group extends plugin
                     }
                 }
             } else {
-                if ($this->config->get_cfg_value("core", "sambaRidBase") != '') {
-                    $this->sambaDomainName = "DEFAULT";
-                    $this->ridBase = $this->config->get_cfg_value("core", "sambaRidBase");
-                    $this->SID = $this->config->get_cfg_value("core", 'sambaSID');
+                if ($this->config->get_cfg_value('core', "sambaRidBase") != '') {
+                    $this->sambaDomainName = 'DEFAULT';
+                    $this->ridBase = $this->config->get_cfg_value('core', "sambaRidBase");
+                    $this->SID = $this->config->get_cfg_value('core', 'sambaSID');
                 } else {
                     msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
                 }
@@ -253,18 +250,17 @@ class group extends plugin
             if ($this->$list) {
                 $this->$list->save_object();
                 $action = $this->$list->getAction();
-                if ($action['action'] === 'delete' && preg_match("/w/", $this->getacl('memberUid'))) {
+                if ($action['action'] === 'delete' && $this->getMemberAcl("/w/")) {
                     foreach ($action['targets'] as $id) {
                         $value = $this->$list->getKey($id);
-                        unset($this->members["$value"]);
-                        $this->removeUser($value);
+                        $this->removeGroupMember($value);
                     }
                 }
             }
         }
 
-        /* Add objects? */
-        if (isset($_POST['edit_membership']) && preg_match("/w/", $this->getacl('memberUid'))) {
+        // Add objects?
+        if (isset($_POST['edit_membership']) && $this->getMemberAcl("/w/")) {
             $this->userSelect = new userSelect($config, get_userinfo());
         }
 
@@ -275,7 +271,6 @@ class group extends plugin
 
         // Add user to group 
         if (isset($_POST['add_users_finish']) || isset($_POST['ok-save']) && $this->userSelect) {
-
             $users = $this->userSelect->detectPostActions();
             if (isset($users['targets'])) {
                 $headpage = $this->userSelect->getHeadpage();
@@ -495,8 +490,7 @@ class group extends plugin
             }
         }
 
-        /* Ensure that the requested object is known to the group class 
-         */
+        // Ensure that the requested object is known to the group class 
         if (!isset($this->dnMapping[$uid])) {
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
@@ -533,8 +527,6 @@ class group extends plugin
         }
 
         $this->memberUid[$uid] = $uid;
-        // is this correct reloading $this->attrs?
-        $this->reload();
         return true;
     }
 
@@ -566,18 +558,17 @@ class group extends plugin
     function reload()
     {
         global $config;
-        /* Prepare ldap link */
+        // Prepare ldap link
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
 
 
-        /* Resolve still unresolved memberuids to fill the list with sn/giveName attributes 
-           (Store gathered sn/givenName informations in $this->allusers too, 
-           to be prepared when adding/deleting users)
+        /**
+         * Resolve still unresolved memberuids to fill the list with sn/giveName attributes 
+         * (Store gathered sn/givenName informations in $this->allusers too, 
+         * to be prepared when adding/deleting users)
          */
         $filter = '';
-
-
 
         // Merge in partial uids in multiple edit
         $allUids = array_keys($this->memberUid);
@@ -593,21 +584,20 @@ class group extends plugin
 
         // To resolve the usernames out of the 'uid' we've to perform ldap queries. 
         // To keep the amount of queries as short as possible, we combine the query 
-        //  for 'sn','givenName','..' for serveral users in one single query:
+        // for 'sn','givenName','..' for serveral users in one single query:
         //      (|(uid=hans)(uid=peter)(uid=hubert)(..))
         // 
         // Unfortunately there is a filter length limit which causes the query to be invalid,
-        //  we've to split these huge query again into shorter query strings. 
+        // we've to split these huge query again into shorter query strings. 
         // 
         // maxPerRound specifies the amount of queries we can combine into a 
-        //  single query.
+        // single query.
         $maxPerRound = $config->get_cfg_value('core', 'ldapFilterNestingLimit');
         if ($maxPerRound === '') {
             $maxPerRound = count($allUids);
         }
 
         for ($added = 0; $added < count($allUids); $added += $maxPerRound) {
-
             // First build the query....
             $start = $added;
             $end = $added + $maxPerRound;
@@ -620,7 +610,7 @@ class group extends plugin
 
             // Retrieve the data to LDAP
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(&(objectClass=gosaAccount)(|" . $filter . "))", array('dn', 'uid', 'sn', 'givenName'));
+            $ldap->search('(&(objectClass=gosaAccount)(|' . $filter . '))', ['dn', 'uid', 'sn', 'givenName']);
             while ($attrs = $ldap->fetch()) {
                 $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
                 $this->members[$attrs['uid'][0]] = $attrs;
@@ -628,10 +618,29 @@ class group extends plugin
             }
         }
 
-        /* check if all uids are resolved */
+        // check if all uids are resolved
         foreach ($this->memberUid as $value) {
             if (!isset($this->members[$value])) {
                 $this->members[$value] = '';
+            }
+        }
+
+        if ($this->rfc2307bis) {
+            // member dn processing
+            foreach ($this->member as $memberDn) {
+                // Retrieve the data to LDAP
+                $ldap->cd($config->current['BASE']);
+                $ldap->cat($memberDn);
+                while ($attrs = $ldap->fetch()) {
+                    $this->members[$memberDn] = $attrs;
+                }
+            }
+
+            // ensure all member are initialized in members array
+            foreach ($this->member as $memberDn) {
+                if (!isset($this->members[$memberDn])) {
+                    $this->members[$memberDn] = '';
+                }
             }
         }
     }
@@ -671,7 +680,6 @@ class group extends plugin
         }
 
         // Remove ACL dependencies too,
-
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($this->dn) . "*))", array("gosaAclEntry", 'dn'));
@@ -696,7 +704,9 @@ class group extends plugin
     }
 
 
-    // Save data to object 
+    /**
+     * Save data to object 
+     */
     function save_object()
     {
         // Save additional values for possible next step 
@@ -745,14 +755,14 @@ class group extends plugin
             }
 
             // Save fon attribute 
-            if ($this->acl_is_writeable("fonGroup")) {
+            if ($this->acl_is_writeable('fonGroup')) {
                 if (isset($_POST['fon_group'])) {
                     $this->fon_group = true;
                 } else {
                     $this->fon_group = false;
                 }
             }
-            if ($this->acl_is_writeable("nagiosGroup")) {
+            if ($this->acl_is_writeable('nagiosGroup')) {
                 if (isset($_POST['nagios_group'])) {
                     $this->nagios_group = true;
                 } else {
@@ -775,7 +785,7 @@ class group extends plugin
             } else {
                 // Calculate new, lock gids 
                 $wait = 10;
-                while (get_lock("gidnumber") != '') {
+                while (get_lock('gidnumber') != '') {
                     sleep(1);
 
                     // timed out? 
@@ -783,7 +793,7 @@ class group extends plugin
                         break;
                     }
                 }
-                add_lock("gidnumber", "gosa");
+                add_lock('gidnumber', "gosa");
                 $this->gidNumber = get_next_id('gidNumber', $this->dn);
             }
         }
@@ -839,7 +849,7 @@ class group extends plugin
              * making winbind resolve the group names in a reasonable amount
              * of time in combination with larger databases. 
              */
-            if ($config->boolValueIsTrue("core", "sambaIdMapping")) {
+            if ($config->boolValueIsTrue('core', "sambaIdMapping")) {
                 $this->attrs['objectClass'][] = "sambaIdmapEntry";
             }
         }
@@ -949,7 +959,7 @@ class group extends plugin
         $this->trustModeDialog->save();
 
         // Remove gid lock 
-        del_lock("gidnumber");
+        del_lock('gidnumber');
 
         // Post that we've done
         $this->handle_post_events($mode);
@@ -1030,8 +1040,8 @@ class group extends plugin
             if (!tests::is_id($this->gidNumber)) {
                 $message[] = msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
             } else {
-                if ($this->gidNumber < $config->get_cfg_value("core", "minId")) {
-                    $message[] = msgPool::toosmall(_("GID"), $config->get_cfg_value("core", "minId"));
+                if ($this->gidNumber < $config->get_cfg_value('core', "minId")) {
+                    $message[] = msgPool::toosmall(_("GID"), $config->get_cfg_value('core', "minId"));
                 }
             }
         }
@@ -1104,7 +1114,7 @@ class group extends plugin
                 array(
                     "name"          => "ogroupRDN",
                     "type"          => "rdn",
-                    "default"       => "ou=groups,",
+                    'DEFAULT'       => "ou=groups,",
                     'description'   => _("RDN for object group storage."),
                     "check"         => "gosaProperty::isRdn",
                     "migrate"       => "migrate_ogroupRDN",
@@ -1123,8 +1133,8 @@ class group extends plugin
                 'sambaGroupType'    => _("Samba group type"),
                 'sambaDomainName'   => _("Samba domain name"),
                 "accessTo"          => _("System trust"),
-                "fonGroup"          => _("Phone pickup group"),
-                "nagiosGroup"       => _("Nagios group"),
+                'fonGroup'          => _("Phone pickup group"),
+                'nagiosGroup'       => _("Nagios group"),
 
                 'memberUid'         => _("Group member")
             )
@@ -1162,7 +1172,7 @@ class group extends plugin
                 }
             }
 
-            foreach (array('smbgroup'   => 'sambaGroupType', 'nagios_group' => "nagiosGroup") as $val => $aclname) {
+            foreach (array('smbgroup'   => 'sambaGroupType', 'nagios_group' => 'nagiosGroup') as $val => $aclname) {
                 if ($this->acl_is_writeable($aclname)) {
                     if (isset($_POST["$val"])) {
                         $this->$val =  true;
@@ -1179,7 +1189,7 @@ class group extends plugin
             }
 
             // Save fon attribute 
-            if ($this->acl_is_writeable("fonGroup")) {
+            if ($this->acl_is_writeable('fonGroup')) {
                 if (isset($_POST['fon_group'])) {
                     $this->fon_group = true;
                 } else {
@@ -1276,11 +1286,11 @@ class group extends plugin
                 if (isset($attrs['sambaAlgorithmicRidBase'])) {
                     $this->ridBase = $attrs['sambaAlgorithmicRidBase'][0];
                 } else {
-                    $this->ridBase = $config->get_cfg_value("core", "sambaRidBase");
+                    $this->ridBase = $config->get_cfg_value('core', "sambaRidBase");
                 }
 
                 // Get domain name for SID 
-                $this->sambaDomainName = "DEFAULT";
+                $this->sambaDomainName = 'DEFAULT';
                 foreach ($config->data['SERVERS']['SAMBA'] as $key => $val) {
                     if ($val['SID'] == $this->SID) {
                         $this->sambaDomainName = $key;
@@ -1288,10 +1298,10 @@ class group extends plugin
                     }
                 }
             } else {
-                if ($config->get_cfg_value("core", "sambaRidBase") != '') {
-                    $this->sambaDomainName = "DEFAULT";
-                    $this->ridBase = $config->get_cfg_value("core", "sambaRidBase");
-                    $this->SID = $config->get_cfg_value("core", 'sambaSID');
+                if ($config->get_cfg_value('core', "sambaRidBase") != '') {
+                    $this->sambaDomainName = 'DEFAULT';
+                    $this->ridBase = $config->get_cfg_value('core', "sambaRidBase");
+                    $this->SID = $config->get_cfg_value('core', 'sambaSID');
                 } else {
                     msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
                 }
@@ -1370,5 +1380,172 @@ class group extends plugin
             $gidNumber++;
         }
         return $sid;
+    }
+
+    /**
+     * Load group members from LDAP by $this->dn
+     * 
+     * we ignore if rfc2307bis is enabled for now and
+     * just read all entries that are available.
+     */
+    function loadGroupMembers()
+    {
+        if ($this->dn !== 'new') {
+            global $config;
+            $ldap = $config->get_ldap_link();
+            $ldap->cat($this->dn);
+            $ldapGroup = $ldap->fetch();
+
+            // if available get group member by memberUid
+            if (isset($ldapGroup['memberUid'][0])) {
+                $tmp = [];
+                for ($i = 0; $i < $ldapGroup['memberUid']['count']; $i++) {
+                    $tmp[$ldapGroup['memberUid'][$i]] = $ldapGroup['memberUid'][$i];
+                }
+                $this->memberUid = $tmp;
+                ksort($this->memberUid);
+            }
+
+            // if available get group members dn by member
+            if (isset($ldapGroup['member'][0])) {
+                $tmp = [];
+                for ($i = 0; $i < $ldapGroup['member']['count']; $i++) {
+                    // "remove" the groups own dn from member list
+                    // having the own dn added to member array is a common
+                    // behavior if there is no other member available
+                    if ($ldapGroup['member'][$i] !== $this->dn) {
+                        $tmp[$ldapGroup['member'][$i]] = $ldapGroup['member'][$i];
+                    }
+                }
+                $this->member = $tmp;
+                ksort($this->member);
+            }
+        } else {
+            // if we "refresh" group members on a new group with its DN is still 'new'
+            // reset memberUid and member to empty arrays
+            $this->memberUid = [];
+            $this->member = [];
+        }
+    }
+
+    function removeGroupMember(string $member)
+    {
+        if ($this->rfc2307bis) {
+            $memberRemoved = $this->removeMemberEntry($member);
+
+            // if rfc2307bis compatibility mode is enabled
+            // check if deleting the dn in the first place was successful
+            if ($this->rfc2307bisDisableNestedGroups && $memberRemoved) {
+                // if removing the member dn was successful remove the old memberUid also
+                $uid = $this->getUidByDn($member);
+                if ($uid !== '') {
+                    $this->removeUser($uid);
+                } else {
+                    msg_dialog::display(_("Group error"), _("Matching memberUid not found after removing the member dn. That may indicate some serious problems!"), ERROR_DIALOG);
+                }
+            }
+        } else {
+            // remove memberUid
+            $this->removeUser($member);
+        }
+    }
+
+    /**
+     * Remove member DN from member array
+     */
+    function removeMemberEntry(string $member): bool
+    {
+        if (isset($this->member[$member])) {
+            unset($this->member[$member]);
+        } else {
+            return false;
+        }
+
+        /** 
+         * \todo - ignore this for now
+         * 
+         * We have two array contianing group members in multiple edit.
+         * members             : Groups used by all currently edited groups 
+         * members_used_by_some: Used by some 
+         * So we have to remove the specified member from both arrays.
+         */
+        if ($this->multiple_support_active) {
+            if (isset($this->member_used_by_some[$member])) {
+                unset($this->member_used_by_some[$member]);
+            }
+        }
+
+        return true;
+    }
+
+    private function getUidByDn(string $dn): string
+    {
+        global $config;
+        $ldap = $config->get_ldap_link();
+        $ldap->cat($dn);
+        $ldapMember = $ldap->fetch();
+
+        return $ldapMember['uid'][0] ?? '';
+    }
+
+    /**
+     * If rfc2307bis is enabled we have to check the attribute "member"
+     * otherwise "memberUid". Since we may still write/read "memberUid"
+     * in rfc2307bis compatibility mode we ignore seperate ACL values
+     * for these two attributes.
+     */
+    private function getMemberAcl(string $aclMatch)
+    {
+        if ($this->rfc2307bis) {
+            return preg_match($aclMatch, $this->getacl('member'));
+        }
+
+        return preg_match($aclMatch, $this->getacl('memberUid'));
+    }
+
+    /**
+     * Add member by memberUid or member dn depending
+     * on the gosa configuration. If rfc2307bis is enabled
+     * we also check the compatibilty flag "rfc2307bisDisableNestedGroups".
+     * If this is set we will write both attributes.
+     */
+    function addGroupMember(string $member)
+    {
+        $success = false;
+
+        if ($this->rfc2307bis) {
+            $success = $this->addMemberEntry($member);
+
+            if ($this->rfc2307bisDisableNestedGroups) {
+                $uid = $this->getUidByDn($member);
+
+                if ($uid !== '') {
+                    // ignore return value here since adding the $dn may already be successful
+                    // so we have to reload anyway
+                    $this->addUser($member);
+                } else {
+                    msg_dialog::display(_("Group error"), _("Trying to add a new member that is not an user account while rfc2307bis compatibility support is enabled. This is not supported and may damage your LDAP!"), ERROR_DIALOG);
+                }
+            }
+        } else {
+            // add memberUid
+            $success = $this->addUser($member);
+        }
+
+        if ($success) {
+            $this->reload();
+        }
+    }
+
+    /**
+     * simply add the new dn entry to $this->member array
+     */
+    function addMemberEntry(string $member): bool
+    {
+        if (!isset($this->member[$member])) {
+            $this->member[$member] = $member;
+            return true;
+        }
+        return false;
     }
 }
