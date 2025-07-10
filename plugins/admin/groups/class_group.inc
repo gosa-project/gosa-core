@@ -201,7 +201,7 @@ class group extends plugin
         $this->memberList->setEditable(false);
         $this->memberList->setWidth('100%');
         $this->memberList->setHeight('300px');
-        $this->memberList->setHeader(array('~', _('Surname'), _('Given name'), _('UID')));
+        $this->memberList->setHeader(array('~', _('Surname'), _('Given name'), _('UID/GID')));
         $this->memberList->setColspecs(array('20px', '*', '*', '*', '20px'));
         $this->memberList->setDefaultSortColumn(1);
 
@@ -240,7 +240,7 @@ class group extends plugin
             if ($this->$list) {
                 $this->$list->save_object();
                 $action = $this->$list->getAction();
-                if ($action['action'] === 'delete' && $this->getMemberAcl("/w/")) {
+                if ($action['action'] === 'delete' && preg_match("/w/", $this->getMemberAcl())) {
                     foreach ($action['targets'] as $id) {
                         $value = $this->$list->getKey($id);
                         $this->removeGroupMember($value);
@@ -250,7 +250,7 @@ class group extends plugin
         }
 
         // Add objects?
-        if (isset($_POST['edit_membership']) && $this->getMemberAcl("/w/")) {
+        if (isset($_POST['edit_membership']) && preg_match("/w/", $this->getMemberAcl())) {
             $this->userSelect = new userSelect($config, get_userinfo());
         }
 
@@ -267,8 +267,7 @@ class group extends plugin
                 foreach ($users['targets'] as $dn) {
                     $attrs = $headpage->getEntry($dn);
                     $value = $attrs['uid'][0];
-                    $this->addUser($value);
-                    $this->members["$value"] = $this->allusers[$value];
+                    $this->addGroupMember($value);
                     // is this correct reloading $attrs?
                     $this->reload();
                 }
@@ -281,7 +280,7 @@ class group extends plugin
         $trustModeDialog = $this->trustModeDialog->execute();
         if ($this->trustModeDialog->trustSelect) {
             $this->dialog = true;
-            return ($trustModeDialog);
+            return $trustModeDialog;
         }
 
         $smarty->assign('trustModeDialog', $trustModeDialog);
@@ -294,7 +293,7 @@ class group extends plugin
             return $this->userSelect->execute();
         }
 
-        // Create base acls 
+        // Create base acls
         $smarty->assign('base', $this->baseSelector->render());
 
         $domains = [];
@@ -320,19 +319,11 @@ class group extends plugin
 
         // Members and users 
         if (!$this->multiple_support_active) {
-            $this->memberList->setAcl($this->getacl('memberUid'));
-            $data = $lData = [];
-            foreach ($this->members as $uid => $member) {
-                $data[$uid] = $member;
-                $givenName = $sn = _('Unknown');
-                if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
-                if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
-                $image = image('images/false.png');
-                if (isset($member['sn'])) {
-                    $image = '<i class="material-icons">person</i>';
-                }
-                $lData[$uid] = array('data' => array($image, $sn, $givenName, $uid));
-            }
+            $this->memberList->setAcl($this->getMemberAcl());
+            $retVal = $this->createMemberListData();
+            $lData = $retVal['lData'];
+            $data = $retVal['data'];
+
             $this->memberList->setListData($data, $lData);
             $bool = $this->isRestrictedByDynGroup();
             $this->memberList->setDeleteable(!$bool);
@@ -340,8 +331,8 @@ class group extends plugin
             $smarty->assign('memberList', $this->memberList->render());
         } else {
 
-            $this->commonList->setAcl($this->getacl('memberUid'));
-            $this->partialList->setAcl($this->getacl('memberUid'));
+            $this->commonList->setAcl($this->getMemberAcl());
+            $this->partialList->setAcl($this->getMemberAcl());
 
             $data = $lData = [];
             foreach ($this->memberUid as $uid => $member) {
@@ -413,7 +404,7 @@ class group extends plugin
             $smarty->assign($name . "ACL", $this->getacl($name));
         }
 
-        if ($this->acl_is_writeable("base")) {
+        if ($this->acl_is_writeable('base')) {
             $smarty->assign("baseSelect", true);
         } else {
             $smarty->assign("baseSelect", false);
@@ -424,23 +415,23 @@ class group extends plugin
 
         foreach ($this->attributes as $val) {
             if (in_array_strict($val, $this->multi_boxes)) {
-                $smarty->assign("use_" . $val, true);
+                $smarty->assign('use_' . $val, true);
             } else {
-                $smarty->assign("use_" . $val, false);
+                $smarty->assign('use_' . $val, false);
             }
         }
-        foreach (array("base", 'smbgroup', 'groupType', 'sambaDomainName', 'fon_group', 'nagios_group') as $val) {
+        foreach (array('base', 'smbgroup', 'groupType', 'sambaDomainName', 'fon_group', 'nagios_group') as $val) {
             if (in_array_strict($val, $this->multi_boxes)) {
-                $smarty->assign("use_" . $val, true);
+                $smarty->assign('use_' . $val, true);
             } else {
-                $smarty->assign("use_" . $val, false);
+                $smarty->assign('use_' . $val, false);
             }
         }
 
         $bool = $this->isRestrictedByDynGroup();
-        $smarty->assign("restrictedByDynGroup", $bool);
+        $smarty->assign('restrictedByDynGroup', $bool);
         if ($bool) {
-            $smarty->assign("memberUidACL", preg_replace("/[^r]/", '', $this->getacl('memberUid')));
+            $smarty->assign("memberUidACL", preg_replace("/[^r]/", '', $this->getMemberAcl()));
         }
 
         $smarty->assign('rfc2307bisMode', ($this->rfc2307bis) ? '1' : '0');
@@ -1470,13 +1461,13 @@ class group extends plugin
      * in rfc2307bis compatibility mode we ignore seperate ACL values
      * for these two attributes.
      */
-    private function getMemberAcl(string $aclMatch)
+    private function getMemberAcl()
     {
         if ($this->rfc2307bis) {
-            return preg_match($aclMatch, $this->getacl('member'));
+            return $this->getacl('member');
         }
 
-        return preg_match($aclMatch, $this->getacl('memberUid'));
+        return $this->getacl('memberUid');
     }
 
     /**
@@ -1523,5 +1514,44 @@ class group extends plugin
             return true;
         }
         return false;
+    }
+
+    private function createMemberListData()
+    {
+        $lData = [];
+        $data = [];
+        if ($this->rfc2307bis) {
+            foreach ($this->members as $key => $member) {
+                $data[$key] = $member;
+                $givenName = $sn = _('Unknown');
+                $entryId = '';
+                if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
+                if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+                if (isset($member['uid']) && isset($member['uid'][0])) $entryId = $member['uid'][0];
+                if (isset($member['gid']) && isset($member['gid'][0])) $entryId = $member['gid'][0];
+                $image = image('images/false.png');
+                if (isset($member['sn'])) {
+                    $image = '<i class="material-icons">person</i>';
+                }
+                if (isset($member['gid'])) {
+                    $image = '<i class="material-icons">group</i>';
+                }
+                $lData[$key] = array('data' => array($image, $sn, $givenName, $entryId));
+            }
+        } else {
+            foreach ($this->members as $uid => $member) {
+                $data[$uid] = $member;
+                $givenName = $sn = _('Unknown');
+                if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
+                if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+                $image = image('images/false.png');
+                if (isset($member['sn'])) {
+                    $image = '<i class="material-icons">person</i>';
+                }
+                $lData[$uid] = array('data' => array($image, $sn, $givenName, $uid));
+            }
+        }
+
+        return ['lData' => $lData, 'data' => $data];
     }
 }
