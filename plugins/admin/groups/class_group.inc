@@ -442,6 +442,8 @@ class group extends plugin
         if ($bool) {
             $smarty->assign("memberUidACL", preg_replace("/[^r]/", '', $this->getacl('memberUid')));
         }
+
+        $smarty->assign('rfc2307bisMode', ($this->rfc2307bis) ? '1' : '0');
         return ($smarty->fetch(get_template_path('generic.tpl', true)));
     }
 
