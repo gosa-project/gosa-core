@@ -219,7 +219,7 @@ class group extends plugin
         // Call parent execute 
         parent::execute();
 
-        $theme = getThemeName();
+        $smarty = get_smarty();
 
         // Log view posixGroup
         if ($this->is_account && !$this->view_logged) {
@@ -229,18 +229,8 @@ class group extends plugin
 
         // Do we represent a valid group? 
         if (!$this->is_account && $this->parent === null) {
-            switch ($theme) {
-                case 'classic':
-                    $symbol = '<img alt="" src="images/small-error.png" align="middle">';
-                    break;
-
-                default:
-                    $symbol = '<i class="material-icons">report</i>';
-                    break;
-            }
-            // is the error message correct?
-            $display = '<div class="valign-wrapper">' . $symbol . msgPool::noValidExtension(_('No valid group')) . '</div>';
-            return ($display);
+            $smarty->assign('errorMsg', msgPool::noValidExtension(_('No valid group')));
+            return $smarty->fetch(get_template_path('invalid-group.tpl', true));
         }
 
         // Act on list events 
@@ -286,8 +276,6 @@ class group extends plugin
             $this->userSelect = null;
         }
 
-        $smarty = get_smarty();
-
         // Handle trust mode dialog
         $this->dialog = false;
         $trustModeDialog = $this->trustModeDialog->execute();
@@ -295,41 +283,39 @@ class group extends plugin
             $this->dialog = true;
             return ($trustModeDialog);
         }
-        $smarty->assign("trustModeDialog", $trustModeDialog);
 
-
-
-        $smarty->assign("nagios", $config->pluginEnabled("nagiosAccount") && class_available("nagiosAccount"));
-        $smarty->assign("pickupGroup", $config->pluginEnabled("phoneAccount") && class_available("phoneAccount"));
+        $smarty->assign('trustModeDialog', $trustModeDialog);
+        $smarty->assign('nagios', $config->pluginEnabled('nagiosAccount') && class_available('nagiosAccount'));
+        $smarty->assign('pickupGroup', $config->pluginEnabled("phoneAccount") && class_available("phoneAccount"));
 
         // Manage object add dialog 
         if ($this->userSelect) {
             $this->dialog = true;
-            return ($this->userSelect->execute());
+            return $this->userSelect->execute();
         }
 
         // Create base acls 
-        $smarty->assign("base", $this->baseSelector->render());
+        $smarty->assign('base', $this->baseSelector->render());
 
         $domains = [];
         foreach ($config->data['SERVERS']['SAMBA'] as $name => $content) {
             $domains[$name] = $name;
         }
-        $smarty->assign("sambaDomains",     set_post($domains));
+        $smarty->assign('sambaDomains',     set_post($domains));
         $smarty->assign('sambaDomainName',  set_post($this->sambaDomainName));
         $groupTypes = array(
-            0 => _("Samba group"),
-            512 => _("Domain administrators"),
-            513 => _("Domain users"),
-            514 => _("Domain guests")
+            0 => _('Samba group'),
+            512 => _('Domain administrators'),
+            513 => _('Domain users'),
+            514 => _('Domain guests')
         );
 
         // Don't loose special groups! If not key'ed above, add it to the combo box... 	
         if ($this->groupType >= 500 && $this->groupType <= 553 && !isset($groupTypes[$this->groupType])) {
-            $groupTypes[$this->groupType] = sprintf(_("Special group (%d)"), $this->groupType);
+            $groupTypes[$this->groupType] = sprintf(_('Special group (%d)'), $this->groupType);
         }
 
-        $smarty->assign("groupTypes", set_post($groupTypes));
+        $smarty->assign('groupTypes', set_post($groupTypes));
         $smarty->assign('groupType',  set_post($this->groupType));
 
         // Members and users 
@@ -372,7 +358,7 @@ class group extends plugin
             }
             $this->commonList->setListData($data, $lData);
             $this->commonList->update();
-            $smarty->assign("commonList", $this->commonList->render());
+            $smarty->assign('commonList', $this->commonList->render());
 
             $data = $lData = [];
             foreach ($this->memberUid_used_by_some as $uid => $member) {
@@ -401,9 +387,9 @@ class group extends plugin
             }
         }
         if ($this->force_gid != "1") {
-            $smarty->assign("forceMode", 'disabled');
+            $smarty->assign('forceMode', 'disabled');
         } else {
-            $smarty->assign("forceMode", '');
+            $smarty->assign('forceMode', '');
         }
         if ($this->fon_group) {
             $smarty->assign('fon_group', 'checked');
@@ -643,18 +629,6 @@ class group extends plugin
                 }
             }
         }
-    }
-
-
-    // Create display name, this was used so often that it is excluded into a seperate function 
-    function createResultName($attrs)
-    {
-        if (isset($attrs['givenName'][0]) && isset($attrs['sn'][0])) {
-            $ret =  $attrs['sn'][0] . ", " . $attrs['givenName'][0] . " [" . $attrs['uid'][0] . "]";
-        } else {
-            $ret = $attrs['uid'][0];
-        }
-        return $ret;
     }
 
     function remove_from_parent()
