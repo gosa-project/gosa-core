@@ -1102,8 +1102,8 @@ class group extends plugin
                 "accessTo"          => _("System trust"),
                 'fonGroup'          => _("Phone pickup group"),
                 'nagiosGroup'       => _("Nagios group"),
-
-                'memberUid'         => _("Group member")
+                'memberUid'         => _("Group member"),
+                'member'            => _("Group member")
             )
         ));
     }
