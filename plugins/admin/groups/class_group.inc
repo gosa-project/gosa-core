@@ -831,28 +831,28 @@ class group extends plugin
             $this->attrs['objectClass'][] = "nagiosContactGroup";
         }
 
-        /* Take members array */
-
-        if (!$this->isRestrictedByDynGroup() && count($this->memberUid)) {
-            $this->attrs['memberUid'] = array_values(array_unique($this->memberUid));
-        }
-
-        /* New accounts need proper 'dn', propagate it to remaining objects */
+        // New accounts need proper 'dn', propagate it to remaining objects
         if ($this->dn === 'new') {
             $this->dn = 'cn=' . $this->cn . ',' . get_groups_ou() . $this->base;
         }
 
-        /* Add member dn's for RFC2307bis Support */
+        // Add member dn's for RFC2307bis Support
         if ($this->rfc2307bis) {
-            $this->attrs['member'] = [];
-            if (count($this->memberUid)) {
-                foreach ($this->attrs['memberUid'] as $uid) {
-                    if (isset($this->dnMapping[$uid])) {
-                        $this->attrs['member'][] = $this->dnMapping[$uid];
-                    }
-                }
-            } else {
+            if (count($this->member) === 0) {
                 $this->attrs['member'][] = $this->dn;
+            } else {
+                $this->attrs['member'][] = array_unique(array_values($this->member));
+            }
+
+            if ($this->rfc2307bisDisableNestedGroups) {
+                if (!$this->isRestrictedByDynGroup() && count($this->memberUid)) {
+                    $this->attrs['memberUid'] = array_values(array_unique($this->memberUid));
+                }
+            }
+        } else {
+            // Take members array
+            if (!$this->isRestrictedByDynGroup() && count($this->memberUid)) {
+                $this->attrs['memberUid'] = array_values(array_unique($this->memberUid));
             }
         }
 
@@ -892,9 +892,6 @@ class group extends plugin
                 msg_dialog::display(_("Warning"), sprintf(_("The gidNumber '%s' is already in use by %s!"), $this->gidNumber, $cns), WARNING_DIALOG);
             }
         }
-
-        // check if members are added to the group and delete redundancies
-        $this->attrs['memberUid'] = array_unique($this->attrs['memberUid'] ?? []);
 
         // if the member array is empty nothing is saved or updated
         if (count($this->attrs['memberUid'])) {
@@ -1015,13 +1012,13 @@ class group extends plugin
 
         // Check if we are allowed to create or move this object 
         if (
-            !$this->orig_dn === "new" ||
+            !$this->orig_dn === 'new' ||
             $this->orig_base != $this->base ||
             $this->cn != $this->orig_cn
         ) {
-            if ($this->orig_dn === "new" && !$this->acl_is_createable($this->base)) {
+            if ($this->orig_dn === 'new' && !$this->acl_is_createable($this->base)) {
                 $message[] = msgPool::permCreate();
-            } elseif ($this->orig_dn != "new" && !$this->acl_is_moveable($this->base)) {
+            } elseif ($this->orig_dn != 'new' && !$this->acl_is_moveable($this->base)) {
                 $message[] = msgPool::permMove();
             }
         }
@@ -1039,11 +1036,11 @@ class group extends plugin
         }
 
         $smarty = get_smarty();
-        $smarty->assign("used",     set_post($used));
-        $smarty->assign("dis",     set_post($dis));
+        $smarty->assign('used',     set_post($used));
+        $smarty->assign('dis',     set_post($dis));
         $smarty->assign('cn',      set_post($this->cn));
         $smarty->assign('gidNumber', set_post($this->gidNumber));
-        $str = $smarty->fetch(get_template_path("paste_generic.tpl", true));
+        $str = $smarty->fetch(get_template_path('paste_generic.tpl', true));
         $ret = [];
         $ret['string'] = $str;
         $ret['status'] = '';
@@ -1068,13 +1065,13 @@ class group extends plugin
     static function plInfo()
     {
         return (array(
-            "plShortName" => _('Generic'),
-            "plDescription" => _("Generic group settings"),
-            "plSelfModify"  => false,
-            "plDepends"     => [],
-            "plPriority"    => 0,
-            "plSection"     => array("administration"),
-            "plCategory"    => array("groups" => array("objectClass" => 'posixGroup', 'description' => _("Groups"))),
+            'plShortName'   => _('Generic'),
+            'plDescription' => _('Generic group settings'),
+            'plSelfModify'  => false,
+            'plDepends'     => [],
+            'plPriority'    => 0,
+            'plSection'     => ['administration'],
+            'plCategory'    => ['groups' => array('objectClass' => 'posixGroup', 'description' => _('Groups'))],
 
             "plProperties" =>
             array(
@@ -1090,16 +1087,16 @@ class group extends plugin
                 )
             ),
 
-            "plProvidedAcls"    => array(
+            'plProvidedAcls'    => array(
                 'cn'                => _("Name"),
                 'description'       => _("Description"),
-                "base"              => _("Base"),
+                'base'              => _("Base"),
 
                 'gidNumber'         => _("GID"),
 
                 'sambaGroupType'    => _("Samba group type"),
                 'sambaDomainName'   => _("Samba domain name"),
-                "accessTo"          => _("System trust"),
+                'accessTo'          => _("System trust"),
                 'fonGroup'          => _("Phone pickup group"),
                 'nagiosGroup'       => _("Nagios group"),
                 'memberUid'         => _("Group member"),
@@ -1292,6 +1289,15 @@ class group extends plugin
         if (isset($source['memberUid'])) {
             for ($i = 0; $i < $source['memberUid']['count']; $i++) {
                 $this->memberUid[] = $source['memberUid'][$i];
+            }
+        }
+
+        if ($this->rfc2307bis) {
+            $this->member = [];
+            if (isset($source['member'])) {
+                for ($i = 0; $i < $source['member']['count']; $i++) {
+                    $this->member[] = $source['member'][$i];
+                }
             }
         }
     }
