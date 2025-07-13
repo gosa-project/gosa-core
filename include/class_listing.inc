@@ -2010,28 +2010,72 @@ class listing
         }
 
         // Draw entries that allow copy and cut
-        if ($read) {
-            // Copy entry
-            if ($copy) {
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"copy\";\$(\"exec_act\").click();'>" . image('images/lists/copy.png') . '&nbsp;' . _('Copy') . '</a></li>';
-                $separator = '';
-            }
+        switch ($this->theme) {
+            case 'classic':
+                if ($read) {
+                    // Copy entry
+                    if ($copy) {
+                        $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"copy\";\$(\"exec_act\").click();'>" . image('images/lists/copy.png') . '&nbsp;' . _('Copy') . '</a></li>';
+                        $separator = '';
+                    }
+        
+                    // Cut entry
+                    if ($cut) {
+                        $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"cut\";\$(\"exec_act\").click();'>" . image('images/lists/cut.png') . '&nbsp;' . _('Cut') . '</a></li>';
+                        $separator = '';
+                    }
+                }
+                if ($paste) {
+                    if ($this->copyPasteHandler->entries_queued()) {
+                        $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"paste\";\$(\"exec_act\").click();'>" . image('images/lists/paste.png') . '&nbsp;' . _('Paste') . '</a></li>';
+                    } else {
+                        $result .= "<li$separator><a href='#'>" . image('images/lists/paste-grey.png') . '&nbsp;' . _('Paste') . '</a></li>';
+                    }
+                }
 
-            // Cut entry
-            if ($cut) {
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"cut\";\$(\"exec_act\").click();'>" . image('images/lists/cut.png') . '&nbsp;' . _('Cut') . '</a></li>';
-                $separator = '';
-            }
+                break;
+
+            default:
+                $result .= "<li class='pointer-off'>";
+                $result .= "<ul class='collection with_header'>";
+                $result .= "<li class='collection-header pointer_off'>";
+                $result .= "<h3 id='head'>" . _("Tools") . "</h3></li>";
+                if ($read) {
+                    // Copy entry
+                    if ($copy) {
+                        $result .= "<li class='collection-item' onClick='\$(\"act\").value=\"copy\";\$(\"exec_act\").click();'>";
+                        $result .= "<a href='#'>";
+                        $result .= image('<i class="material-icons">content_copy</i>') . _('Copy');
+                        $result .= '</a></li>';
+                    }
+    
+                    // Cut entry
+                    if ($cut) {
+                        $result .= "<li class='collection-item' onClick='\$(\"act\").value=\"cut\";\$(\"exec_act\").click();'>";
+                        $result .= "<a href='#'>";
+                        $result .= image('<i class="material-icons">content_cut</i>') . _('Cut');
+                        $result .= '</a></li>';
+                    }
+                }
+
+
+                if ($paste) {
+                    if ($this->copyPasteHandler->entries_queued()) {
+                        $result .= "<li class='collection-item' onClick='\$(\"act\").value=\"paste\";\$(\"exec_act\").click();'>";
+                        $result .= "<a href='#'>";
+                        $result .= image('<i class="material-icons">content_paste</i>') . _('Paste');
+                        $result .= '</a></li>';
+                    } else {
+                        $result .= "<li class='collection-item'>";
+                        $result .= "<a href='#'>";
+                        $result .= image('<i class="material-icons">content_paste</i>') . _('Paste');
+                        $result .= '</a></li>';
+                    }
+                }
+
+                break;
         }
-
         // Draw entries that allow pasting entries
-        if ($paste) {
-            if ($this->copyPasteHandler->entries_queued()) {
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"paste\";\$(\"exec_act\").click();'>" . image('images/lists/paste.png') . '&nbsp;' . _('Paste') . '</a></li>';
-            } else {
-                $result .= "<li$separator><a href='#'>" . image('images/lists/paste-grey.png') . '&nbsp;' . _('Paste') . '</a></li>';
-            }
-        }
 
         return $result;
     }
@@ -2057,7 +2101,7 @@ class listing
                         break;
 
                     default:
-                        $result .= image("<i class='material-icons>content_cut</i>'", "listing_cut_$row", _('Cut this entry'));
+                        $result .= image('<i class="material-icons">content_cut</i>', "listing_cut_$row", _('Cut this entry'));
                         break;
                 }
             } else {
@@ -2082,7 +2126,7 @@ class listing
                         break;
 
                     default:
-                        $result .= image("<i class='material-icons>content_copy</i>", "listing_copy_$row", _('Copy this entry'));
+                        $result .= image('<i class="material-icons">content_copy</i>', "listing_copy_$row", _('Copy this entry'));
                         break;
                 }
             } else {

@@ -919,13 +919,10 @@ class group extends plugin
         // check if members are added to the group and delete redundancies
         $this->attrs['memberUid'] = array_unique($this->attrs['memberUid'] ?? []);
 
-        // if the member array is empty nothing is saved or updated
-        if (count($this->attrs['memberUid'])) {
-            // Write back to ldap
-            $ldap->cd($this->dn);
-            $this->cleanup();
-            $ldap->$mode($this->attrs);
-        }
+        // Write back to ldap
+        $ldap->cd($this->dn);
+        $this->cleanup();
+        $ldap->$mode($this->attrs);
 
         // Remove ACL dependencies too,
         if ($this->dn != $this->orig_dn && $this->orig_dn != "new") {
