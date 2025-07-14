@@ -1567,12 +1567,12 @@ class group extends plugin
                         }
                     }
                 }
-                if (isset($member['gid']) && isset($member['gid'][0])) $entryId = $member['gid'][0];
+                if (isset($member['gidNumber']) && isset($member['gidNumber'][0])) $entryId = $member['gidNumber'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
                     $image = image('plugins/users/images/select_user.png');
                 }
-                if (isset($member['gid'])) {
+                if (isset($member['gidNumber'])) {
                     $image = image('plugins/groups/images/select_group.png');
                 }
                 $lData[$key] = array('data' => array($image, $sn, $givenName, $entryId));
