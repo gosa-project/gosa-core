@@ -263,10 +263,7 @@ class group extends plugin
         if (isset($_POST['add_users_finish']) || isset($_POST['ok-save']) && $this->userSelect) {
             $users = $this->userSelect->detectPostActions();
             if (isset($users['targets'])) {
-                //$headpage = $this->userSelect->getHeadpage();
                 foreach ($users['targets'] as $dn) {
-                    // $attrs = $headpage->getEntry($dn);
-                    // $value = $attrs['uid'][0];
                     $this->addGroupMember($dn);
                     // is this correct reloading $attrs?
                     $this->reload();
@@ -740,23 +737,25 @@ class group extends plugin
     }
 
 
-    // Save to LDAP 
+    /**
+     * Save to LDAP 
+     */
     function save()
     {
         global $config;
 
         // ID handling 
-        if ($this->force_gid == 0) {
-            if ($this->saved_gidNumber != '') {
+        if ($this->force_gid === 0) {
+            if ($this->saved_gidNumber !== '') {
                 $this->gidNumber = $this->saved_gidNumber;
             } else {
                 // Calculate new, lock gids 
                 $wait = 10;
-                while (get_lock('gidnumber') != '') {
+                while (get_lock('gidnumber') !== '') {
                     sleep(1);
 
                     // timed out? 
-                    if ($wait-- == 0) {
+                    if ($wait-- === 0) {
                         break;
                     }
                 }
@@ -816,8 +815,8 @@ class group extends plugin
              * making winbind resolve the group names in a reasonable amount
              * of time in combination with larger databases. 
              */
-            if ($config->boolValueIsTrue('core', "sambaIdMapping")) {
-                $this->attrs['objectClass'][] = "sambaIdmapEntry";
+            if ($config->boolValueIsTrue('core', 'sambaIdMapping')) {
+                $this->attrs['objectClass'][] = 'sambaIdmapEntry';
             }
         }
 
@@ -839,9 +838,9 @@ class group extends plugin
         // Add member dn's for RFC2307bis Support
         if ($this->rfc2307bis) {
             if (count($this->member) === 0) {
-                $this->attrs['member'][] = $this->dn;
+                $this->attrs['member'] = [$this->dn];
             } else {
-                $this->attrs['member'][] = array_unique(array_values($this->member));
+                $this->attrs['member'] = array_unique(array_values($this->member));
             }
 
             if ($this->rfc2307bisDisableNestedGroups) {
