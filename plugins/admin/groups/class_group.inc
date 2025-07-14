@@ -1071,7 +1071,7 @@ class group extends plugin
             'plDepends'     => [],
             'plPriority'    => 0,
             'plSection'     => ['administration'],
-            'plCategory'    => ['groups' => array('objectClass' => 'posixGroup', 'description' => _('Groups'))],
+            'plCategory'    => ['groups' => ['objectClass' => 'posixGroup', 'description' => _('Groups')]],
 
             "plProperties" =>
             array(
@@ -1087,21 +1087,21 @@ class group extends plugin
                 )
             ),
 
-            'plProvidedAcls'    => array(
+            'plProvidedAcls'    => [
                 'cn'                => _("Name"),
                 'description'       => _("Description"),
                 'base'              => _("Base"),
 
                 'gidNumber'         => _("GID"),
 
-                'sambaGroupType'    => _("Samba group type"),
-                'sambaDomainName'   => _("Samba domain name"),
-                'accessTo'          => _("System trust"),
-                'fonGroup'          => _("Phone pickup group"),
-                'nagiosGroup'       => _("Nagios group"),
-                'memberUid'         => _("Group member"),
-                'member'            => _("Group member")
-            )
+                'sambaGroupType'    => _('Samba group type'),
+                'sambaDomainName'   => _('Samba domain name'),
+                'accessTo'          => _('System trust'),
+                'fonGroup'          => _('Phone pickup group'),
+                'nagiosGroup'       => _('Nagios group'),
+                'memberUid'         => _('Group member'),
+                'member'            => _('Group member')
+            ]
         ));
     }
 
@@ -1181,7 +1181,7 @@ class group extends plugin
 
     function multiple_execute()
     {
-        return ($this->execute());
+        return $this->execute();
     }
 
     // Initialize plugin with given atribute arrays 
