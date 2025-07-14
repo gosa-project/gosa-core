@@ -1566,10 +1566,10 @@ class group extends plugin
                 if (isset($member['gid']) && isset($member['gid'][0])) $entryId = $member['gid'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = image('images/person.png');
+                    $image = image('plugins/users/images/select_user.png');
                 }
                 if (isset($member['gid'])) {
-                    $image = image('images/group.png');
+                    $image = image('plugins/groups/images/select_group.png');
                 }
                 $lData[$key] = array('data' => array($image, $sn, $givenName, $entryId));
             }
@@ -1581,7 +1581,7 @@ class group extends plugin
                 if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = image('images/person.png');
+                    $image = image('plugins/users/images/select_user.png');
                 }
                 $lData[$uid] = array('data' => array($image, $sn, $givenName, $uid));
             }
