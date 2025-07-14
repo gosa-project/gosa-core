@@ -246,6 +246,8 @@ class group extends plugin
                         $this->removeGroupMember($value);
                     }
                 }
+
+                $this->reload();
             }
         }
 
@@ -1064,7 +1066,7 @@ class group extends plugin
         }
     }
 
-    // Return plugin informations for acl handling   
+    // Return plugin informations for acl handling
     static function plInfo()
     {
         return (array(
