@@ -1545,6 +1545,7 @@ class group extends plugin
 
     private function createMemberListData()
     {
+        $smarty = get_smarty();
         $lData = [];
         $data = [];
         if ($this->rfc2307bis) {
@@ -1554,14 +1555,22 @@ class group extends plugin
                 $entryId = '';
                 if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
                 if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
-                if (isset($member['uid']) && isset($member['uid'][0])) $entryId = $member['uid'][0];
+                if (isset($member['uid'])) {
+                    if (isset($member['uid'][0])) {
+                        $entryId = $member['uid'][0];
+
+                        if ($entryId === $key) {
+                            continue;
+                        }
+                    }
+                }
                 if (isset($member['gid']) && isset($member['gid'][0])) $entryId = $member['gid'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = '<i class="material-icons">person</i>';
+                    $image = $smarty->fetch(get_template_path('person-icon.tpl', true));
                 }
                 if (isset($member['gid'])) {
-                    $image = '<i class="material-icons">group</i>';
+                    $image = $smarty->fetch(get_template_path('group-icon.tpl', true));
                 }
                 $lData[$key] = array('data' => array($image, $sn, $givenName, $entryId));
             }
@@ -1573,7 +1582,7 @@ class group extends plugin
                 if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = '<i class="material-icons">person</i>';
+                    $image = $smarty->fetch(get_template_path('person-icon.tpl', true));
                 }
                 $lData[$uid] = array('data' => array($image, $sn, $givenName, $uid));
             }
