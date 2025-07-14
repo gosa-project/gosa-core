@@ -263,11 +263,11 @@ class group extends plugin
         if (isset($_POST['add_users_finish']) || isset($_POST['ok-save']) && $this->userSelect) {
             $users = $this->userSelect->detectPostActions();
             if (isset($users['targets'])) {
-                $headpage = $this->userSelect->getHeadpage();
+                //$headpage = $this->userSelect->getHeadpage();
                 foreach ($users['targets'] as $dn) {
-                    $attrs = $headpage->getEntry($dn);
-                    $value = $attrs['uid'][0];
-                    $this->addGroupMember($value);
+                    // $attrs = $headpage->getEntry($dn);
+                    // $value = $attrs['uid'][0];
+                    $this->addGroupMember($dn);
                     // is this correct reloading $attrs?
                     $this->reload();
                 }
@@ -1502,7 +1502,13 @@ class group extends plugin
             }
         } else {
             // add memberUid
-            $success = $this->addUser($member);
+            $uid = $this->getUidByDn($member);
+
+            if ($uid !== '') {
+                $success = $this->addUser($uid);
+            } else {
+                msg_dialog::display(_("Group error"), _("Trying to add a new member that is not an user account."), ERROR_DIALOG);
+            }
         }
 
         if ($success) {
