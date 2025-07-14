@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2025 GONICUS GmbH
@@ -32,32 +33,20 @@ class userGroupSelect extends management
     {
         $this->config = $config;
         $this->ui = $ui;
-        $this->storagePoints = [get_ou("core", "userRDN"), get_ou("core", "groupRDN")];
+        $this->storagePoints = [get_ou('core', 'userRDN'), get_ou('core', 'groupRDN')];
 
         // Build filter
-        if (session::global_is_set(get_class($this) . "_filter")) {
-            $filter = session::global_get(get_class($this) . "_filter");
+        if (session::global_is_set(get_class($this) . '_filter')) {
+            $filter = session::global_get(get_class($this) . '_filter');
         } else {
-            $filter = new filter(get_template_path("selectUserGroup-filter.xml", true, dirname(__FILE__)));
+            $filter = new filter(get_template_path('selectUserGroup-filter.xml', true, dirname(__FILE__)));
             $filter->setObjectStorage($this->storagePoints);
         }
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path("selectUserGroup-list.xml", true, dirname(__FILE__)));
+        $headpage = new listing(get_template_path('selectUserGroup-list.xml', true, dirname(__FILE__)));
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "object", $headpage);
     }
-
-    // function save(): array
-    // {
-    //     $act = $this->detectPostActions();
-    //     $headpage = $this->getHeadpage();
-    //     if (!isset($act['targets'])) return ([]);
-    //     $ret = [];
-    //     foreach ($act['targets'] as $dn) {
-    //         $ret[] = $headpage->getEntry($dn);
-    //     }
-    //     return $ret;
-    // }
 }
