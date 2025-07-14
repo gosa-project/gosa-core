@@ -1567,10 +1567,10 @@ class group extends plugin
                 if (isset($member['gid']) && isset($member['gid'][0])) $entryId = $member['gid'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = $smarty->fetch(get_template_path('person-icon.tpl', true));
+                    $image = image('images/person.png');
                 }
                 if (isset($member['gid'])) {
-                    $image = $smarty->fetch(get_template_path('group-icon.tpl', true));
+                    $image = image('images/group.png');
                 }
                 $lData[$key] = array('data' => array($image, $sn, $givenName, $entryId));
             }
@@ -1582,7 +1582,7 @@ class group extends plugin
                 if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
-                    $image = $smarty->fetch(get_template_path('person-icon.tpl', true));
+                    $image = image('images/person.png');
                 }
                 $lData[$uid] = array('data' => array($image, $sn, $givenName, $uid));
             }
