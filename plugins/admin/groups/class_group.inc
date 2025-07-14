@@ -42,7 +42,7 @@ class group extends plugin
     var $sambaDomainName = 'DEFAULT';
     var $SID = '';
     var $ridBase = 0;
-    var $members = [];
+    var $members = []; # list content
     var $users = [];
     var $allusers = [];
     var $saved_gidNumber = '';
@@ -631,10 +631,10 @@ class group extends plugin
         $ldap = $config->get_ldap_link();
         $ldap->rmdir($this->dn);
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, __CLASS__));
+            msg_dialog::display(_('LDAP error'), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, __CLASS__));
         }
 
-        new log("remove", "groups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+        new log('remove', 'groups/' . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
 
         // Delete references to object groups 
         $ldap->cd($config->current['BASE']);
@@ -897,7 +897,7 @@ class group extends plugin
         }
 
         // avoid writing memberUid if nested groups are enabled
-        if($this->rfc2307bis && !$this->rfc2307bisDisableNestedGroups){
+        if ($this->rfc2307bis && !$this->rfc2307bisDisableNestedGroups) {
             $this->attrs['memberUid'] = [];
         }
 
@@ -1419,12 +1419,17 @@ class group extends plugin
                 if ($uid !== '') {
                     $this->removeUser($uid);
                 } else {
-                    msg_dialog::display(_("Group error"), _("Matching memberUid not found after removing the member dn. That may indicate some serious problems!"), ERROR_DIALOG);
+                    msg_dialog::display(_('Group error'), _('Matching memberUid not found after removing the member dn. That may indicate some serious problems!'), ERROR_DIALOG);
                 }
             }
         } else {
             // remove memberUid
-            $this->removeUser($member);
+            $uid = $this->getUidByDn($member);
+            if ($uid !== '') {
+                $this->removeUser($uid);
+            } else {
+                msg_dialog::display(_('Group error'), _('Matching memberUid not found after removing the member dn. That may indicate some serious problems!'), ERROR_DIALOG);
+            }
         }
     }
 
@@ -1438,6 +1443,11 @@ class group extends plugin
         } else {
             return false;
         }
+
+        if (isset($this->members[$member])) {
+            unset($this->members[$member]);
+        }
+
 
         /** 
          * \todo - ignore this for now
