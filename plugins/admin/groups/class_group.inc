@@ -1510,7 +1510,7 @@ class group extends plugin
                 if ($uid !== '') {
                     // ignore return value here since adding the $dn may already be successful
                     // so we have to reload anyway
-                    $this->addUser($member);
+                    $this->addUser($uid);
                 } else {
                     msg_dialog::display(_("Group error"), _("Trying to add a new member that is not an user account while rfc2307bis compatibility support is enabled. This is not supported and may damage your LDAP!"), ERROR_DIALOG);
                 }
