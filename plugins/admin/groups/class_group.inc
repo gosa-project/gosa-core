@@ -838,6 +838,8 @@ class group extends plugin
         // Add member dn's for RFC2307bis Support
         if ($this->rfc2307bis) {
             if (count($this->member) === 0) {
+                // for groupOfNames the attribute member is mandatory and needs to be filled with a dummy
+                // to have at least one entry there. Commonly it is your own DN if no other member is available.
                 $this->attrs['member'] = [$this->dn];
             } else {
                 $this->attrs['member'] = array_unique(array_values($this->member));
@@ -867,9 +869,9 @@ class group extends plugin
                 $this->attrs['sambaGroupType'] = [];
                 $this->attrs['sambaSID'] = [];
             }
-            $mode = "modify";
+            $mode = 'modify';
         } else {
-            $mode = "add";
+            $mode = 'add';
             $ldap->cd($config->current['BASE']);
             $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
         }
@@ -877,44 +879,46 @@ class group extends plugin
         // check generated gidNumber, it may be used by another group. 
         if ($this->gidNumber != '') {
             $ldap->cd($config->current['BASE']);
-            $chk_attr = "orig_cn";
+            $chk_attr = 'orig_cn';
             if ($this->cn != $this->orig_cn) {
                 $chk_attr = 'cn';
             }
-            $ldap->search("(&(!(cn=" . $this->$chk_attr . "))(objectClass=posixGroup)(gidNumber=" . $this->gidNumber . "))", array('cn'));
+            $ldap->search('(&(!(cn=' . $this->$chk_attr . '))(objectClass=posixGroup)(gidNumber=' . $this->gidNumber . '))', array('cn'));
             if ($ldap->count()) {
                 $cns = '';
                 while ($attrs = $ldap->fetch()) {
-                    $cns .= $attrs['cn'][0] . ", ";
+                    $cns .= $attrs['cn'][0] . ', ';
                 }
                 $cns = rtrim($cns, ", ");
-                msg_dialog::display(_("Warning"), sprintf(_("The gidNumber '%s' is already in use by %s!"), $this->gidNumber, $cns), WARNING_DIALOG);
+                msg_dialog::display(_('Warning'), sprintf(_("The gidNumber '%s' is already in use by %s!"), $this->gidNumber, $cns), WARNING_DIALOG);
             }
         }
 
-        // if the member array is empty nothing is saved or updated
-        if (count($this->attrs['memberUid'])) {
-            // Write back to ldap
-            $ldap->cd($this->dn);
-            $this->cleanup();
-            $ldap->$mode($this->attrs);
+        // avoid writing memberUid if nested groups are enabled
+        if($this->rfc2307bis && !$this->rfc2307bisDisableNestedGroups){
+            $this->attrs['memberUid'] = [];
         }
 
+        // Write back to ldap
+        $ldap->cd($this->dn);
+        $this->cleanup();
+        $ldap->$mode($this->attrs);
+
         // Remove ACL dependencies too,
-        if ($this->dn != $this->orig_dn && $this->orig_dn != "new") {
+        if ($this->dn != $this->orig_dn && $this->orig_dn != 'new') {
             $tmp = new acl($config, $this->parent, $this->dn);
             $tmp->update_acl_membership($this->orig_dn, $this->dn);
         }
 
         if ($this->initially_was_account) {
-            new log("modify", "groups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+            new log('modify', 'groups/' . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         } else {
-            new log("create", "groups/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+            new log('create', 'groups/' . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         }
 
         $ret = 0;
         if (!$ldap->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, __CLASS__));
+            msg_dialog::display(_('LDAP error'), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, __CLASS__));
             $ret = 1;
         }
 
@@ -927,7 +931,7 @@ class group extends plugin
         // Post that we've done
         $this->handle_post_events($mode);
 
-        return ($ret);
+        return $ret;
     }
 
     function check()
@@ -946,7 +950,7 @@ class group extends plugin
 
         // must: cn 
         if ($this->cn == '' && $this->acl_is_writeable('cn')) {
-            $message[] = msgPool::required(_("Name"));
+            $message[] = msgPool::required(_('Name'));
         }
 
         // Check if a wrong base was supplied
@@ -957,9 +961,9 @@ class group extends plugin
         // Check for valid input 
         if (!tests::is_uid($this->cn)) {
             if (strict_uid_mode()) {
-                $message[] = msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9_-]/");
+                $message[] = msgPool::invalid(_('Name'), $this->cn, "/[a-z0-9_-]/");
             } else {
-                $message[] = msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9 _.-]/i");
+                $message[] = msgPool::invalid(_('Name'), $this->cn, "/[a-z0-9 _.-]/i");
             }
         }
 
@@ -975,7 +979,7 @@ class group extends plugin
                 $ldap->cd(get_groups_ou() . $this->base);
                 $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))", get_groups_ou() . $this->base, array('cn'));
                 if ($ldap->count() != 0) {
-                    $message[] = msgPool::duplicated(_("Name"));
+                    $message[] = msgPool::duplicated(_('Name'));
                 }
             }
         } else {
@@ -986,13 +990,13 @@ class group extends plugin
             if ($ldap->count() != 0) {
                 // New entry? 
                 if ($this->dn == 'new') {
-                    $message[] = msgPool::duplicated(_("Name"));
+                    $message[] = msgPool::duplicated(_('Name'));
                 }
                 // Moved? 
                 elseif ($new_dn != $this->orig_dn) {
                     $ldap->fetch();
                     if ($ldap->getDN() != $this->orig_dn) {
-                        $message[] = msgPool::duplicated(_("Name"));
+                        $message[] = msgPool::duplicated(_('Name'));
                     }
                 }
             }
@@ -1087,7 +1091,7 @@ class group extends plugin
             ),
 
             'plProvidedAcls'    => [
-                'cn'                => _("Name"),
+                'cn'                => _('Name'),
                 'description'       => _("Description"),
                 'base'              => _("Base"),
 
