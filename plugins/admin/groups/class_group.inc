@@ -253,7 +253,11 @@ class group extends plugin
 
         // Add objects?
         if (isset($_POST['edit_membership']) && preg_match("/w/", $this->getMemberAcl())) {
-            $this->userSelect = new userSelect($config, get_userinfo());
+            if($this->rfc2307bis && !$this->rfc2307bisDisableNestedGroups){
+                $this->userSelect = new userGroupSelect($config, get_userinfo());
+            } else {
+                $this->userSelect = new userSelect($config, get_userinfo());
+            }
         }
 
         // Add objects finished? 

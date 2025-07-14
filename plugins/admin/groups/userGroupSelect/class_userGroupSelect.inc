@@ -1,7 +1,7 @@
 <?php
-/*
+/**
  * This code is part of GOsa (http://www.gosa-project.org)
- * Copyright (C) 2003-2008 GONICUS GmbH
+ * Copyright (C) 2003-2025 GONICUS GmbH
  *
  * ID: $$Id: class_target_list.inc 9850 2008-03-14 14:15:12Z hickert $$
  *
@@ -23,10 +23,10 @@
 class userGroupSelect extends management
 {
     // Tab definition 
-    protected $skipFooter = TRUE;
-    protected $skipHeader = TRUE;
+    protected $skipFooter = true;
+    protected $skipHeader = true;
 
-    public $plHeadline = "User and group selection";
+    public $plHeadline = 'User and group selection';
 
     function __construct($config, $ui)
     {
@@ -49,15 +49,15 @@ class userGroupSelect extends management
         parent::__construct($config, $ui, "object", $headpage);
     }
 
-    function save(): array
-    {
-        $act = $this->detectPostActions();
-        $headpage = $this->getHeadpage();
-        if (!isset($act['targets'])) return ([]);
-        $ret = [];
-        foreach ($act['targets'] as $dn) {
-            $ret[] = $headpage->getEntry($dn);
-        }
-        return $ret;
-    }
+    // function save(): array
+    // {
+    //     $act = $this->detectPostActions();
+    //     $headpage = $this->getHeadpage();
+    //     if (!isset($act['targets'])) return ([]);
+    //     $ret = [];
+    //     foreach ($act['targets'] as $dn) {
+    //         $ret[] = $headpage->getEntry($dn);
+    //     }
+    //     return $ret;
+    // }
 }
