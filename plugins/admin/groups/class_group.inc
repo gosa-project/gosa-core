@@ -261,12 +261,12 @@ class group extends plugin
         }
 
         // Add objects finished? 
-        if (isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort'])) {
+        if (isset($_POST['add_users_cancel']) || isset($_POST['cancel-abort']) || isset($_POST['userGroupSelect_cancel'])) {
             $this->userSelect = null;
         }
 
         // Add user to group 
-        if (isset($_POST['add_users_finish']) || isset($_POST['ok-save']) && $this->userSelect) {
+        if (isset($_POST['add_users_finish']) || $_POST['userGroupSelect_save'] || isset($_POST['ok-save']) && $this->userSelect) {
             $users = $this->userSelect->detectPostActions();
             if (isset($users['targets'])) {
                 foreach ($users['targets'] as $dn) {
