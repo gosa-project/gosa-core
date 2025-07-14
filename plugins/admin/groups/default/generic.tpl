@@ -28,7 +28,7 @@
             <div>
                 <label>
                     <p>
-                        <input type=checkbox name="rfc2307bisIndicator" value="{$rfc2307bisMode}" title="{t}Indicates whether rfc2307bis mode is active or not.{/t}" disabled>
+                        <input type=checkbox name="rfc2307bisIndicator" {if $rfc2307bisMode} checked {/if} title="{t}Indicates whether rfc2307bis mode is active or not.{/t}" disabled>
                         <span>
                             {t}rfc2307bis{/t}
                         </span>
