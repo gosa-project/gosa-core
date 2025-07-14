@@ -266,7 +266,7 @@ class group extends plugin
         }
 
         // Add user to group 
-        if (isset($_POST['add_users_finish']) || $_POST['userGroupSelect_save'] || isset($_POST['ok-save']) && $this->userSelect) {
+        if (isset($_POST['add_users_finish']) || isset($_POST['userGroupSelect_save']) || isset($_POST['ok-save']) && $this->userSelect) {
             $users = $this->userSelect->detectPostActions();
             if (isset($users['targets'])) {
                 foreach ($users['targets'] as $dn) {
