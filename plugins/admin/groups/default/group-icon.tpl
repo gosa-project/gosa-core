@@ -1,1 +1,0 @@
-<i class="material-icons">group</i>

@@ -1545,7 +1545,6 @@ class group extends plugin
 
     private function createMemberListData()
     {
-        $smarty = get_smarty();
         $lData = [];
         $data = [];
         if ($this->rfc2307bis) {
