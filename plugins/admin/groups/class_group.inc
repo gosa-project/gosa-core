@@ -254,7 +254,7 @@ class group extends plugin
         // Add objects?
         if (isset($_POST['edit_membership']) && preg_match("/w/", $this->getMemberAcl())) {
             if($this->rfc2307bis && !$this->rfc2307bisDisableNestedGroups){
-                $this->userSelect = new userGroupSelect($config, get_userinfo());
+                $this->userSelect = new userGroupSelect($config, get_userinfo(), [$this->dn]);
             } else {
                 $this->userSelect = new userSelect($config, get_userinfo());
             }
@@ -1572,7 +1572,7 @@ class group extends plugin
                 if (isset($member['sn'])) {
                     $image = image('plugins/users/images/select_user.png');
                 }
-                if (isset($member['gidNumber'])) {
+                if (isset($member['objectClass']) && in_array('posixGroup', $member['objectClass'])) {
                     $image = image('plugins/groups/images/select_group.png');
                 }
                 $lData[$key] = array('data' => array($image, $sn, $givenName, $entryId));

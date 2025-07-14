@@ -29,7 +29,7 @@ class userGroupSelect extends management
 
     public $plHeadline = 'User and group selection';
 
-    function __construct($config, $ui)
+    function __construct($config, $ui, array $dns = [])
     {
         $this->config = $config;
         $this->ui = $ui;
@@ -38,9 +38,11 @@ class userGroupSelect extends management
         // Build filter
         if (session::global_is_set(get_class($this) . '_filter')) {
             $filter = session::global_get(get_class($this) . '_filter');
+            $filter->setConstraint(['dn' => $dns]);
         } else {
             $filter = new filter(get_template_path('selectUserGroup-filter.xml', true, dirname(__FILE__)));
             $filter->setObjectStorage($this->storagePoints);
+            $filter->setConstraint(['dn' => $dns]);
         }
         $this->setFilter($filter);
 
