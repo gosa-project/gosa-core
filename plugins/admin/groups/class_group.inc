@@ -201,7 +201,7 @@ class group extends plugin
         $this->memberList->setEditable(false);
         $this->memberList->setWidth('100%');
         $this->memberList->setHeight('300px');
-        $this->memberList->setHeader(array('~', _('Surname'), _('Given name/Group name'), _('UID/GID-Number')));
+        $this->memberList->setHeader(array('~', _('Surname/Group name'), _('Given name'), _('UID/GID-Number')));
         $this->memberList->setColspecs(array('20px', '*', '*', '*', '20px'));
         $this->memberList->setDefaultSortColumn(1);
 
