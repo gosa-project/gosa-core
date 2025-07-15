@@ -838,7 +838,7 @@ class posixAccount extends plugin
                 $g->cn = $groupcn;
                 $g->force_gid = 1;
                 $g->gidNumber = $this->gidNumber;
-                $g->addUser($this->uid);
+                $g->addGroupMember($this->dn);
                 if (isset($this->parent) && $this->parent !== NULL) {
                     $g->description = _("Group of user") . " " . $this->parent->by_object['user']->givenName . " " . $this->parent->by_object['user']->sn;
                 } else {

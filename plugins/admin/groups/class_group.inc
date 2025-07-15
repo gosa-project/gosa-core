@@ -253,7 +253,7 @@ class group extends plugin
 
         // Add objects?
         if (isset($_POST['edit_membership']) && preg_match("/w/", $this->getMemberAcl())) {
-            if($this->rfc2307bis && !$this->rfc2307bisDisableNestedGroups){
+            if ($this->rfc2307bis && !$this->rfc2307bisDisableNestedGroups) {
                 $this->userSelect = new userGroupSelect($config, get_userinfo(), [$this->dn]);
             } else {
                 $this->userSelect = new userSelect($config, get_userinfo());
@@ -1410,6 +1410,12 @@ class group extends plugin
         }
     }
 
+    /**
+     * Remove group member. Do we use rfc2307 or NIS schema?
+     * If rfc2307 is enabled we remove by DN. Otherwise our
+     * "memberlist" will return the uid and we use that to
+     * delete the member.
+     */
     function removeGroupMember(string $member)
     {
         if ($this->rfc2307bis) {
@@ -1428,12 +1434,7 @@ class group extends plugin
             }
         } else {
             // remove memberUid
-            $uid = $this->getUidByDn($member);
-            if ($uid !== '') {
-                $this->removeUser($uid);
-            } else {
-                msg_dialog::display(_('Group error'), _('Matching memberUid not found after removing the member dn. That may indicate some serious problems!'), ERROR_DIALOG);
-            }
+            $this->removeUser($member);
         }
     }
 
@@ -1500,6 +1501,8 @@ class group extends plugin
      * on the gosa configuration. If rfc2307bis is enabled
      * we also check the compatibilty flag "rfc2307bisDisableNestedGroups".
      * If this is set we will write both attributes.
+     * 
+     * Members are always added by DN. In case we use the NIS schema we lookup the uid.
      */
     function addGroupMember(string $member)
     {
@@ -1558,6 +1561,8 @@ class group extends plugin
                 $entryId = '';
                 if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
                 if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+
+                // avoid memberUid to be added to memberlist
                 if (isset($member['uid'])) {
                     if (isset($member['uid'][0])) {
                         $entryId = $member['uid'][0];
