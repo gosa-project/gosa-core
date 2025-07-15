@@ -560,7 +560,7 @@ class CopyPasteHandler
       if (isset($attrs['uid'][0])) {
         $suid = $attrs['uid'][0];
 
-        $uid = $this->current['object']->uid;
+        $tDn = $this->current['object']->dn;
         $groups = get_sub_list(
           "(&(objectClass=posixGroup)(memberUid={$suid}))",
           "groups",
@@ -573,7 +573,7 @@ class CopyPasteHandler
         // Walk through all POSIX groups
         foreach ($groups as $group) {
           $o_group = new group($this->config, $group['dn']);
-          $o_group->addUser($uid);
+          $o_group->removeGroupMember($tDn);
           $o_group->save();
         }
       }
