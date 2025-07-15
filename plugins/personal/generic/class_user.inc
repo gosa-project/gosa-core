@@ -823,7 +823,7 @@ class user extends plugin
         $ldap->search("(&(objectClass=posixGroup)(memberUid=" . $this->uid . "))", array("uid"));
         while ($ldap->fetch()) {
             $g = new group($this->config, $ldap->getDN());
-            $g->removeUser($this->uid);
+            $g->removeGroupMember($this->uid);
             $g->save();
         }
 
