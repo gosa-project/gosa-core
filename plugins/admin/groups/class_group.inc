@@ -201,7 +201,7 @@ class group extends plugin
         $this->memberList->setEditable(false);
         $this->memberList->setWidth('100%');
         $this->memberList->setHeight('300px');
-        $this->memberList->setHeader(array('~', _('Surname/Group name'), _('Given name'), _('UID/GID-Number')));
+        $this->memberList->setHeader(array('~', _('Surname/Group name'), _('Given name'), _('UID/Description')));
         $this->memberList->setColspecs(array('20px', '*', '*', '*', '20px'));
         $this->memberList->setDefaultSortColumn(1);
 
@@ -1591,7 +1591,7 @@ class group extends plugin
                     if (isset($member['cn']) && isset($member['cn'][0])) $sn = $member['cn'][0];
 
                     // avoid memberUid to be added to memberlist
-                    if (isset($member['gidNumber']) && isset($member['gidNumber'][0])) $entryId = $member['gidNumber'][0];
+                    if (isset($member['description']) && isset($member['description'][0])) $entryId = $member['description'][0];
 
                     $givenName = '-';
 
