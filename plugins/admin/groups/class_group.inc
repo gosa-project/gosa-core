@@ -201,7 +201,7 @@ class group extends plugin
         $this->memberList->setEditable(false);
         $this->memberList->setWidth('100%');
         $this->memberList->setHeight('300px');
-        $this->memberList->setHeader(array('~', _('Surname'), _('Given name'), _('UID/GID')));
+        $this->memberList->setHeader(array('~', _('Surname'), _('Given name/Group name'), _('UID/GID-Number')));
         $this->memberList->setColspecs(array('20px', '*', '*', '*', '20px'));
         $this->memberList->setDefaultSortColumn(1);
 
@@ -1584,29 +1584,37 @@ class group extends plugin
                 $data[$key] = $member;
                 $givenName = $sn = _('Unknown');
                 $entryId = '';
-                if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
-                if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+                $image = image('images/false.png');
 
-                // avoid memberUid to be added to memberlist
-                if (isset($member['uid'])) {
-                    if (isset($member['uid'][0])) {
-                        $entryId = $member['uid'][0];
+                if (isset($member['objectClass']) && in_array('posixGroup', $member['objectClass'])) {
+                    // if current member is of type posixGroup
+                    if (isset($member['cn']) && isset($member['cn'][0])) $sn = $member['cn'][0];
 
-                        if ($entryId === $key) {
-                            continue;
+                    // avoid memberUid to be added to memberlist
+                    if (isset($member['gidNumber']) && isset($member['gidNumber'][0])) $entryId = $member['gidNumber'][0];
+
+                    $givenName = '-';
+
+                    $image = $groupIcon;
+                } else {
+                    // if current member is NOT of type posixGroup
+                    if (isset($member['sn']) && isset($member['sn'][0])) $sn = $member['sn'][0];
+                    if (isset($member['givenName']) && isset($member['givenName'][0])) $givenName = $member['givenName'][0];
+
+                    // avoid memberUid to be added to memberlist
+                    if (isset($member['uid'])) {
+                        if (isset($member['uid'][0])) {
+                            $entryId = $member['uid'][0];
+
+                            if ($entryId === $key) {
+                                continue;
+                            }
                         }
                     }
-                } else {
-                    if (isset($member['gidNumber']) && isset($member['gidNumber'][0])) $entryId = $member['gidNumber'][0];
-                }
 
-                $image = image('images/false.png');
-                if (isset($member['sn'])) {
                     $image = $personIcon;
                 }
-                if (isset($member['objectClass']) && in_array('posixGroup', $member['objectClass'])) {
-                    $image = $groupIcon;
-                }
+
                 $lData[$key] = array('data' => array($image, $sn, $givenName, $entryId));
             }
         } else {
