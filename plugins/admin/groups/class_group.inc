@@ -1599,7 +1599,7 @@ class group extends plugin
                 } else {
                     if (isset($member['gidNumber']) && isset($member['gidNumber'][0])) $entryId = $member['gidNumber'][0];
                 }
-                
+
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
                     $image = $personIcon;
