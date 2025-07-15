@@ -1434,6 +1434,13 @@ class group extends plugin
             }
         } else {
             // remove memberUid
+            $uid = $this->getUidByDn($member);
+
+            // if getUidByDn fails we assume $member to be a uid
+            if ($uid === '') {
+                $uid = $member;
+            }
+
             $this->removeUser($member);
         }
     }
