@@ -1596,8 +1596,10 @@ class group extends plugin
                             continue;
                         }
                     }
+                } else {
+                    if (isset($member['gidNumber']) && isset($member['gidNumber'][0])) $entryId = $member['gidNumber'][0];
                 }
-                if (isset($member['gidNumber']) && isset($member['gidNumber'][0])) $entryId = $member['gidNumber'][0];
+                
                 $image = image('images/false.png');
                 if (isset($member['sn'])) {
                     $image = $personIcon;
