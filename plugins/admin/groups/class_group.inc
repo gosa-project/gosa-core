@@ -155,9 +155,9 @@ class group extends plugin
                     }
                 }
             } else {
-                if ($this->config->get_cfg_value('core', "sambaRidBase") != '') {
+                if ($this->config->get_cfg_value('core', 'sambaRidBase') != '') {
                     $this->sambaDomainName = 'DEFAULT';
-                    $this->ridBase = $this->config->get_cfg_value('core', "sambaRidBase");
+                    $this->ridBase = $this->config->get_cfg_value('core', 'sambaRidBase');
                     $this->SID = $this->config->get_cfg_value('core', 'sambaSID');
                 } else {
                     msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
@@ -1009,12 +1009,12 @@ class group extends plugin
         }
 
         // Check ID 
-        if ($this->force_gid == "1") {
+        if ($this->force_gid == '1') {
             if (!tests::is_id($this->gidNumber)) {
-                $message[] = msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
+                $message[] = msgPool::invalid(_('GID'), $this->gidNumber, "/[0-9]/");
             } else {
-                if ($this->gidNumber < $config->get_cfg_value('core', "minId")) {
-                    $message[] = msgPool::toosmall(_("GID"), $config->get_cfg_value('core', "minId"));
+                if ($this->gidNumber < $config->get_cfg_value('core', 'minId')) {
+                    $message[] = msgPool::toosmall(_('GID'), $config->get_cfg_value('core', 'minId'));
                 }
             }
         }
@@ -1037,11 +1037,11 @@ class group extends plugin
     function getCopyDialog(): array
     {
         if ($this->force_gid) {
-            $used = " checked ";
+            $used = ' checked ';
             $dis  = '';
         } else {
             $used = '';
-            $dis  = " disabled ";
+            $dis  = ' disabled ';
         }
 
         $smarty = get_smarty();
@@ -1101,7 +1101,7 @@ class group extends plugin
                 'description'       => _("Description"),
                 'base'              => _("Base"),
 
-                'gidNumber'         => _("GID"),
+                'gidNumber'         => _('GID'),
 
                 'sambaGroupType'    => _('Samba group type'),
                 'sambaDomainName'   => _('Samba domain name'),
@@ -1183,9 +1183,15 @@ class group extends plugin
             }
         }
 
-        $ret['memberUid'] = $this->memberUid;
-        $ret['memberUid_used_by_some'] = $this->memberUid_used_by_some;
-        return ($ret);
+        if ($this->rfc2307bis) {
+            $ret['member'] = $this->member;
+            $ret['member_used_by_some'] = $this->member_used_by_some;
+        } else {
+            $ret['memberUid'] = $this->memberUid;
+            $ret['memberUid_used_by_some'] = $this->memberUid_used_by_some;
+        }
+
+        return $ret;
     }
 
     function multiple_execute()
@@ -1201,20 +1207,42 @@ class group extends plugin
 
         $this->memberUid = [];
         $this->memberUid_used_by_some = [];
-        if (isset($attrs['memberUid'])) {
-            for ($i = 0; $i < $attrs['memberUid']['count']; $i++) {
-                $this->memberUid[$attrs['memberUid'][$i]] = $attrs['memberUid'][$i];
-            }
-            ksort($this->memberUid);
-        }
 
-        if (isset($all['memberUid'])) {
-            for ($i = 0; $i < $all['memberUid']['count']; $i++) {
-                if (!in_array_strict($all['memberUid'][$i], $this->memberUid)) {
-                    $this->memberUid_used_by_some[$all['memberUid'][$i]] = $all['memberUid'][$i];
+        $this->member = [];
+        $this->member_used_by_some = [];
+
+        if ($this->rfc2307bis) {
+            if (isset($attrs['member'])) {
+                for ($i = 0; $i < $attrs['member']['count']; $i++) {
+                    $this->member[$attrs['member'][$i]] = $attrs['member'][$i];
                 }
+                ksort($this->member);
             }
-            ksort($this->memberUid_used_by_some);
+
+            if (isset($all['member'])) {
+                for ($i = 0; $i < $all['member']['count']; $i++) {
+                    if (!in_array_strict($all['member'][$i], $this->member)) {
+                        $this->member_used_by_some[$all['member'][$i]] = $all['member'][$i];
+                    }
+                }
+                ksort($this->member_used_by_some);
+            }
+        } else {
+            if (isset($attrs['memberUid'])) {
+                for ($i = 0; $i < $attrs['memberUid']['count']; $i++) {
+                    $this->memberUid[$attrs['memberUid'][$i]] = $attrs['memberUid'][$i];
+                }
+                ksort($this->memberUid);
+            }
+
+            if (isset($all['memberUid'])) {
+                for ($i = 0; $i < $all['memberUid']['count']; $i++) {
+                    if (!in_array_strict($all['memberUid'][$i], $this->memberUid)) {
+                        $this->memberUid_used_by_some[$all['memberUid'][$i]] = $all['memberUid'][$i];
+                    }
+                }
+                ksort($this->memberUid_used_by_some);
+            }
         }
 
         // We've two lists in mutliple support  
@@ -1224,9 +1252,9 @@ class group extends plugin
         $this->commonList->setDeleteable(true);
         $this->commonList->setInstantDelete(false);
         $this->commonList->setEditable(false);
-        $this->commonList->setWidth("100%");
-        $this->commonList->setHeight("120px");
-        $this->commonList->setHeader(array('~', _("Common Name"), _("UID")));
+        $this->commonList->setWidth('100%');
+        $this->commonList->setHeight('120px');
+        $this->commonList->setHeader(array('~', _('Common Name'), _('UID')));
         $this->commonList->setColspecs(array('20px', '*', '*', '20px'));
         $this->commonList->setDefaultSortColumn(1);
 
@@ -1234,9 +1262,9 @@ class group extends plugin
         $this->partialList->setDeleteable(true);
         $this->partialList->setInstantDelete(false);
         $this->partialList->setEditable(false);
-        $this->partialList->setWidth("100%");
-        $this->partialList->setHeight("120px");
-        $this->partialList->setHeader(array('~', _("Common Name"), _("UID")));
+        $this->partialList->setWidth('100%');
+        $this->partialList->setHeight('120px');
+        $this->partialList->setHeader(array('~', _('Common Name'), _('UID')));
         $this->partialList->setColspecs(array('20px', '*', '*', '20px'));
         $this->partialList->setDefaultSortColumn(1);
     }
@@ -1253,13 +1281,13 @@ class group extends plugin
             $this->SID = preg_replace("/-[^-]+$/", '', $this->sambaSID);
             $ldap = $config->get_ldap_link();
             $ldap->cd($config->current['BASE']);
-            $ldap->search("(&(objectClass=sambaDomain)(sambaSID=$this->SID))", array("sambaAlgorithmicRidBase"));
+            $ldap->search("(&(objectClass=sambaDomain)(sambaSID=$this->SID))", ['sambaAlgorithmicRidBase']);
             if ($ldap->count() != 0) {
                 $attrs = $ldap->fetch();
                 if (isset($attrs['sambaAlgorithmicRidBase'])) {
                     $this->ridBase = $attrs['sambaAlgorithmicRidBase'][0];
                 } else {
-                    $this->ridBase = $config->get_cfg_value('core', "sambaRidBase");
+                    $this->ridBase = $config->get_cfg_value('core', 'sambaRidBase');
                 }
 
                 // Get domain name for SID 
@@ -1271,17 +1299,17 @@ class group extends plugin
                     }
                 }
             } else {
-                if ($config->get_cfg_value('core', "sambaRidBase") != '') {
+                if ($config->get_cfg_value('core', 'sambaRidBase') != '') {
                     $this->sambaDomainName = 'DEFAULT';
-                    $this->ridBase = $config->get_cfg_value('core', "sambaRidBase");
+                    $this->ridBase = $config->get_cfg_value('core', 'sambaRidBase');
                     $this->SID = $config->get_cfg_value('core', 'sambaSID');
                 } else {
-                    msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
+                    msg_dialog::display(_('Configuration error'), _('Cannot find group SID in your configuration!'), ERROR_DIALOG);
                 }
             }
 
             // Get group type 
-            $this->groupType = (int)substr(strrchr($this->sambaSID, "-"), 1);
+            $this->groupType = (int)substr(strrchr($this->sambaSID, '-'), 1);
             if ($this->groupType < 500 || $this->groupType > 553) {
                 $this->groupType = 0;
             }
@@ -1295,17 +1323,26 @@ class group extends plugin
         }
 
         $this->memberUid = [];
-        if (isset($source['memberUid'])) {
-            for ($i = 0; $i < $source['memberUid']['count']; $i++) {
-                $this->memberUid[] = $source['memberUid'][$i];
-            }
-        }
+        $this->member = [];
 
         if ($this->rfc2307bis) {
-            $this->member = [];
             if (isset($source['member'])) {
                 for ($i = 0; $i < $source['member']['count']; $i++) {
                     $this->member[] = $source['member'][$i];
+                }
+            }
+
+            if ($this->rfc2307bisDisableNestedGroups) {
+                if (isset($source['memberUid'])) {
+                    for ($i = 0; $i < $source['memberUid']['count']; $i++) {
+                        $this->memberUid[] = $source['memberUid'][$i];
+                    }
+                }
+            }
+        } else {
+            if (isset($source['memberUid'])) {
+                for ($i = 0; $i < $source['memberUid']['count']; $i++) {
+                    $this->memberUid[] = $source['memberUid'][$i];
                 }
             }
         }
@@ -1327,23 +1364,42 @@ class group extends plugin
     // Set all members of edited groups in $members 
     function set_multi_edit_values($attrs)
     {
-        $users = [];
+        $members = [];
 
-        // Update groupMembership, keep optinal group
-        foreach ($attrs['memberUid_used_by_some'] as $uid) {
-            if (in_array_strict($uid, $this->memberUid)) {
-                $users[$uid] = $uid;
+        if ($this->rfc2307bis) {
+            // Update groupMembership, keep optinal group
+            foreach ($attrs['member_used_by_some'] as $dn) {
+                if (in_array_strict($dn, $this->member)) {
+                    $members[$dn] = $dn;
+                }
             }
-        }
 
-        // Update groupMembership, add forced groups
-        foreach ($attrs['memberUid'] as $uid) {
-            $users[$uid] = $uid;
+            // Update groupMembership, add forced groups
+            foreach ($attrs['member'] as $dn) {
+                $members[$dn] = $dn;
+            }
+        } else {
+            // Update groupMembership, keep optinal group
+            foreach ($attrs['memberUid_used_by_some'] as $uid) {
+                if (in_array_strict($uid, $this->memberUid)) {
+                    $members[$uid] = $uid;
+                }
+            }
+
+            // Update groupMembership, add forced groups
+            foreach ($attrs['memberUid'] as $uid) {
+                $members[$uid] = $uid;
+            }
         }
 
         parent::set_multi_edit_values($attrs);
         $this->trustModeDialog->set_multi_edit_values($attrs);
-        $this->memberUid = $users;
+
+        if ($this->rfc2307bis) {
+            $this->member = $members;
+        } else {
+            $this->memberUid = $members;
+        }
     }
 
     // Get a new SambaSID for a group
@@ -1353,7 +1409,7 @@ class group extends plugin
         $ldap = $config->get_ldap_link();
         $gidNumber = $this->gidNumber;
         while (true) {
-            $sid = $this->SID . "-" . ($gidNumber * 2 + $this->ridBase + 1);
+            $sid = $this->SID . '-' . ($gidNumber * 2 + $this->ridBase + 1);
             $ldap->cd($config->current['BASE']);
             $ldap->search("(sambaSID=$sid)", array('sambaSID'));
             if ($ldap->count() == 0) {
@@ -1526,7 +1582,7 @@ class group extends plugin
                     // so we have to reload anyway
                     $this->addUser($uid);
                 } else {
-                    msg_dialog::display(_("Group error"), _("Trying to add a new member that is not an user account while rfc2307bis compatibility support is enabled. This is not supported and may damage your LDAP!"), ERROR_DIALOG);
+                    msg_dialog::display(_('Group error'), _('Trying to add a new member that is not an user account while rfc2307bis compatibility support is enabled. This is not supported and may damage your LDAP!'), ERROR_DIALOG);
                 }
             }
         } else {
@@ -1536,7 +1592,7 @@ class group extends plugin
             if ($uid !== '') {
                 $success = $this->addUser($uid);
             } else {
-                msg_dialog::display(_("Group error"), _("Trying to add a new member that is not an user account."), ERROR_DIALOG);
+                msg_dialog::display(_('Group error'), _('Trying to add a new member that is not an user account.'), ERROR_DIALOG);
             }
         }
 
