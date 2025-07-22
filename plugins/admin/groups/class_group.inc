@@ -1518,8 +1518,6 @@ class group extends plugin
 
 
         /** 
-         * \todo - ignore this for now
-         * 
          * We have two array contianing group members in multiple edit.
          * members             : Groups used by all currently edited groups 
          * members_used_by_some: Used by some 
