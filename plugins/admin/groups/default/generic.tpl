@@ -1,5 +1,6 @@
 {if $multiple_support}
-<input type="hidden" value="1" name="group_mulitple_edit"> {/if}
+<input type="hidden" value="1" name="group_mulitple_edit">
+{/if}
 
 <div class="group-wrapper">
     <div class="row">
@@ -23,6 +24,17 @@
                 {$base}
             </div>
             {/render}
+
+            <div>
+                <label>
+                    <p>
+                        <input type=checkbox name="rfc2307bisIndicator" {if $rfc2307bisMode} checked {/if} title="{t}Indicates whether rfc2307bis mode is active or not.{/t}" disabled>
+                        <span>
+                            {t}rfc2307bis{/t}
+                        </span>
+                    </p>
+                </label>
+            </div>
 
             {if !$multiple_support}
             {render acl=$gidNumberACL}
@@ -133,13 +145,13 @@
 
             {if $multiple_support}
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             {/render}
 
             {else}
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             {/render}
 
@@ -148,21 +160,21 @@
             {if $multiple_support}
             <h3 class="card-title">{t}Common group members{/t}</h3>
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
 
             <h3 class="card-title">{t}Partial group members{/t}</h3>
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$partialList}
             {/render}
 
             {else}
             <h3 class="card-title">{t}Group members{/t}</h3>
 
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             <button class="btn-small" type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}

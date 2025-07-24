@@ -7,7 +7,7 @@ class categoryActionsOverTime extends statChart
     function __construct(&$config)
     {
         parent::__construct($config);
-        $this->graphName = get_class();
+        $this->graphName = __CLASS__;
     }
 
 
@@ -56,8 +56,8 @@ class categoryActionsOverTime extends statChart
 
         // Read graph from cache?
         $pCache = new pCache($this->cachePath);
-        if($this->enableCaching && $pCache->IsInCache(get_class(),$allSeriesDataSet->GetData())){
-            $filename =  $pCache->GetHash(get_class(),$allSeriesDataSet->GetData());
+        if($this->enableCaching && $pCache->IsInCache(__CLASS__,$allSeriesDataSet->GetData())){
+            $filename =  $pCache->GetHash(__CLASS__,$allSeriesDataSet->GetData());
             $filename = '/var/spool/gosa/'.$filename;    
             if(file_exists($filename) && is_readable($filename)){
                 $this->graphID = preg_replace("/[^0-9]/","",microtime(TRUE)).rand(0,99999);
@@ -118,7 +118,7 @@ class categoryActionsOverTime extends statChart
         $file = '/tmp/graph_'.$this->graphID;
         $chart->Render($file);
         session::set('statistics::graphFile'.$this->graphID,$file);
-        $pCache->WriteToCache(get_class(),$allSeriesDataSet->GetData(),$chart);   
+        $pCache->WriteToCache(__CLASS__,$allSeriesDataSet->GetData(),$chart);   
 
         return;
     }

@@ -22,7 +22,6 @@
 
 /* Get standard functions */
 require_once ("../include/php_setup.inc");
-require_once ("functions.inc");
 
 // Do not use the GOsa default error handler.
 // To do so we require a valid config object - and at this point 
@@ -110,8 +109,11 @@ setlocale(LC_ALL, $lang);
 $GLOBALS['t_language']= $lang;
 $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 
-/* Set the text domain as 'messages' */
-$domain = 'messages';
+//set the template variable for setup
+$GLOBALS['theme'] = 'default';
+
+/* Set the text domain as 'core' */
+$domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 

@@ -24,6 +24,7 @@
 define ("GOSA_HOME", dirname(__FILE__));
 define ("LOCALE_DIR", GOSA_HOME."/locale");
 define ("PLUGSTATE_DIR", GOSA_HOME."/state");
+define ("VENDOR_DIR", GOSA_HOME."/vendor");
 
 function print_usage()
 {
@@ -102,6 +103,7 @@ function get_classes($folder= ".")
     if (preg_match("/.*\.svn.*/", $file) ||
         preg_match("/.*smarty.*/i",$file) ||
         preg_match("/.*\.tpl.*/",$file) ||
+        preg_match("/vendor/",$file) ||
         ($file==".") ||($file =="..")){
       continue;
     }
@@ -121,7 +123,7 @@ function get_classes($folder= ".")
     $contents= file($file);
     foreach($contents as $line){
       $line= chop($line);
-      if (preg_match('/^\s*class\s*\w.*$/', $line)){
+      if (preg_match('/^\s*class\s+\w.*$/', $line)){
         $class= preg_replace('/^\s*class\s*(\w+).*$/', '\1', $line);
         $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
       }

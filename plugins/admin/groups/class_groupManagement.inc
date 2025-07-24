@@ -22,27 +22,25 @@
 
 class groupManagement extends management
 {
-    var $plHeadline     = "Groups";
-    var $plDescription  = "Manage aspects of groups like members, POSIX, desktop, samba and mail settings";
-    var $plIcon  = "plugins/groups/images/plugin.png";
+    public $plHeadline     = "Groups";
+    public $plDescription  = "Manage aspects of groups like members, POSIX, desktop, samba and mail settings";
+    public $plIcon         = "plugins/groups/images/plugin.png";
+    public $matIcon        = "groups";
 
-    // Tab definition 
+    // Tab definition
     protected $tabClass = "grouptabs";
     protected $tabType = "GROUPTABS";
     protected $aclCategory = "groups";
     protected $aclPlugin   = "group";
     protected $objectName   = "group";
 
-    function __construct($config,$ui)
+    public function __construct($config, $ui)
     {
-        $this->config = $config;
-        $this->ui = $ui;
-
         $this->storagePoints = array(get_ou("core", "groupRDN"));
 
         // Build filter
-        if (session::global_is_set(get_class($this)."_filter")){
-            $filter= session::global_get(get_class($this)."_filter");
+        if (session::global_is_set(get_class($this) . "_filter")) {
+            $filter = session::global_get(get_class($this) . "_filter");
         } else {
             $filter = new filter(get_template_path("group-filter.xml", true));
             $filter->setObjectStorage($this->storagePoints);
@@ -55,20 +53,20 @@ class groupManagement extends management
         $headpage->setFilter($filter);
 
         // Add copy&paste and snapshot handler.
-        if ($this->config->boolValueIsTrue("core", "copyPaste")){
-            $this->cpHandler = new CopyPasteHandler($this->config);
+        if ($config->boolValueIsTrue("core", "copyPaste")) {
+            $this->cpHandler = new CopyPasteHandler($config);
         }
-        if($this->config->get_cfg_value("core","enableSnapshots") == "true"){
-            $this->snapHandler = new SnapshotHandler($this->config);
+        if ($config->get_cfg_value("core", "enableSnapshots") == "true") {
+            $this->snapHandler = new SnapshotHandler($config);
         }
         parent::__construct($config, $ui, "groups", $headpage);
 
-        $this->registerAction("edit_group","editEntry");
-        $this->registerAction("edit_group_","editEntry");
-        $this->registerAction("edit_group__","editEntry");
-        $this->registerAction("edit_environment","editEntry");
-        $this->registerAction("edit_appgroup","editEntry");
-        $this->registerAction("edit_mailgroup","editEntry");
+        $this->registerAction("edit_group", "editEntry");
+        $this->registerAction("edit_group_", "editEntry");
+        $this->registerAction("edit_group__", "editEntry");
+        $this->registerAction("edit_environment", "editEntry");
+        $this->registerAction("edit_appgroup", "editEntry");
+        $this->registerAction("edit_mailgroup", "editEntry");
         $this->registerAction("edit_zarafagroup", "editEntry");
 
         $this->registerAction("sendMessage", "sendMessage");
@@ -77,22 +75,26 @@ class groupManagement extends management
     }
 
     // Inject user actions
-    function detectPostActions()
+    public function detectPostActions()
     {
-        $action = management::detectPostActions();
-        if(isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
-        if(isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
-        return($action);
+        $action = parent::detectPostActions();
+        if (isset($_POST['save_event_dialog'])) {
+            $action['action'] = "saveEventDialog";
+        }
+        if (isset($_POST['abort_event_dialog'])) {
+            $action['action'] = "abortEventDialog";
+        }
+        return ($action);
     }
 
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
      */
-    function saveEventDialog()
+    public function saveEventDialog()
     {
         $this->dialogObject->save_object();
         $msgs = $this->dialogObject->check();
-        if(count($msgs)){
+        if (count($msgs)) {
             msg_dialog::displayChecks($msgs);
         }
     }
@@ -100,14 +102,15 @@ class groupManagement extends management
 
     /*! \brief  Sends a message to a set of users using gosa-si events.
      */
-    function sendMessage($action="",$target=array(),$all=array())
+    public function sendMessage($action = "", $target = array(), $all = array())
     {
-        $uids = array();
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
-        foreach($target as $dn){
-            $ldap->cat($dn,array('cn'));
-            if($ldap->count()){
+        global $config;
+        $uids = [];
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($config->current['BASE']);
+        foreach ($target as $dn) {
+            $ldap->cat($dn, array('cn'));
+            if ($ldap->count()) {
                 $attrs = $ldap->fetch();
                 $uids[] = $attrs['cn'][0];
             }
@@ -115,94 +118,141 @@ class groupManagement extends management
     }
 
 
-    function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+    public function editEntry($action = "", $target = array(), $all = array(), $altTabClass = "", $altTabType = "", $altAclCategory = "")
     {
-        $str = management::editEntry($action,$target);
-        if(preg_match("/^edit_/",$action)){
-            $tab = preg_replace("/^edit_([^_]*).*$/","\\1",$action);
-            if(isset($this->tabObject->by_object[$tab])){
+        $str = parent::editEntry($action, $target);
+        if (preg_match("/^edit_/", $action)) {
+            $tab = preg_replace("/^edit_([^_]*).*$/", "\\1", $action);
+            if (isset($this->tabObject->by_object[$tab])) {
                 $this->tabObject->current = $tab;
-            }else{
-                trigger_error("Unknown tab: ".$tab);
+            } else {
+                trigger_error("Unknown tab: " . $tab);
             }
         }
-        if(!empty($str)) return($str);
+        if (!empty($str)) {
+            return ($str);
+        }
     }
 
-    static function filterProperties($row, $classes)
+    public static function filterProperties($row, $classes)
     {
-        $result= "";
+        $theme = getThemeName();
 
-        $map = array(
-                "posixGroup" => 
-                array(
-                    "image" => "plugins/groups/images/select_group.png",
-                    "plugin" => "group",
-                    "alt" => _("POSIX"),
-                    "title" => _("Edit POSIX properties")
+        $result = "";
+
+        switch ($theme) {
+            case 'classic':
+                $map = array(
+                    "posixGroup" => array(
+                        "image" => "plugins/groups/images/select_group.png",
+                        "plugin" => "group",
+                        "alt" => _("POSIX"),
+                        "title" => _("Edit POSIX properties")
                     ),
-
-                "gosaMailAccount" => 
-                array(
-                    "image" => "plugins/groups/images/mail.png",
-                    "plugin" => "mailgroup",
-                    "alt" => _("Mail"),
-                    "title" => _("Edit mail properties")
+                    "gosaMailAccount" => array(
+                        "image" => "plugins/groups/images/mail.png",
+                        "plugin" => "mailgroup",
+                        "alt" => _("Mail"),
+                        "title" => _("Edit mail properties")
                     ),
-
-                "sambaGroupMapping" => 
-                array(
-                    "image" => "plugins/groups/images/samba.png",
-                    "plugin" => "group_",
-                    "alt" => _("Samba"),
-                    "title" => _("Edit samba properties")
+                    "sambaGroupMapping" => array(
+                        "image" => "plugins/groups/images/samba.png",
+                        "plugin" => "group_",
+                        "alt" => _("Samba"),
+                        "title" => _("Edit samba properties")
                     ),
+                    "goFonPickupGroup" => array(
+                        "image" => "plugins/groups/images/asterisk.png",
+                        "plugin" => "group__",
+                        "alt" => _("Phone"),
+                        "title" => _("Edit phone properties")
+                    ),
+                    "gotoMenuGroup" => array(
+                        "image" => "plugins/groups/images/menu.png",
+                        "plugin" => "appgroup",
+                        "alt" => _("Menu"),
+                        "title" => _("Edit start menu properties")
+                    ),
+                    "zarafa-group" => array(
+                        "image" => "plugins/zarafa/images/zarafa_user_small.png",
+                        "plugin" => "zarafagroup",
+                        "alt" => _("Zarafa"),
+                        "title" => _("Edit Zarafa properties")
+                    ),
+                    "gotoEnvironment" => array(
+                        "image" => "plugins/groups/images/environment.png",
+                        "plugin" => "environment",
+                        "alt" => _("Environment"),
+                        "title" => _("Edit environment properties")
+                    )
+                );
 
-                "goFonPickupGroup" => 
-                    array(
-                            "image" => "plugins/groups/images/asterisk.png",
-                            "plugin" => "group__",
-                            "alt" => _("Phone"),
-                            "title" => _("Edit phone properties")
-                         ),
+                // Walk thru map
+                foreach ($map as $oc => $properties) {
+                    if (in_array_ics($oc, $classes)) {
+                        $result .= image($properties['image'], 'listing_edit_' . $properties['plugin'] . '_' . $row, $properties['title']);
+                    } else {
+                        $result .= image('images/empty.png');
+                    }
+                }
+                break;
 
-                "gotoMenuGroup" => 
-                    array(
-                            "image" => "plugins/groups/images/menu.png",
-                            "plugin" => "appgroup",
-                            "alt" => _("Menu"),
-                            "title" => _("Edit start menu properties")
-                         ),
-
-                "zarafa-group" => 
-                    array(
-                            "image" => "plugins/zarafa/images/zarafa_user_small.png",
-                            "plugin" => "zarafagroup",
-                            "alt" => _("Zarafa"),
-                            "title" => _("Edit Zarafa properties")
-                         ),
-
-
-                "gotoEnvironment" => 
-                    array(
-                            "image" => "plugins/groups/images/environment.png",
-                            "plugin" => "environment",
-                            "alt" => _("Environment"),
-                            "title" => _("Edit environment properties")
-                         )
-                    );
-
-
-        // Walk thru map
-        foreach ($map as $oc => $properties) {
-            if (in_array_ics($oc, $classes)) {
-                $result.= image($properties['image'], 'listing_edit_'.$properties['plugin'].'_'.$row, $properties['title']);
-            } else {
-                $result.= image('images/empty.png');
-            }
+            default:
+                $map = array(
+                    "posixGroup" => array(
+                        "image" => "group",
+                        "plugin" => "group",
+                        "alt" => _("POSIX"),
+                        "title" => _("Edit POSIX properties")
+                    ),
+                    "gosaMailAccount" => array(
+                        "image" => "mail",
+                        "plugin" => "mailgroup",
+                        "alt" => _("Mail"),
+                        "title" => _("Edit mail properties")
+                    ),
+                    "sambaGroupMapping" => array(
+                        "image" => "window",
+                        "plugin" => "group_",
+                        "alt" => _("Samba"),
+                        "title" => _("Edit samba properties")
+                    ),
+                    "goFonPickupGroup" => array(
+                        "image" => "phone",
+                        "plugin" => "group__",
+                        "alt" => _("Phone"),
+                        "title" => _("Edit phone properties")
+                    ),
+                    "gotoMenuGroup" => array(
+                        "image" => "menu",
+                        "plugin" => "appgroup",
+                        "alt" => _("Menu"),
+                        "title" => _("Edit start menu properties")
+                    ),
+                    "zarafa-group" => array(
+                        "image" => "portrait",
+                        "plugin" => "zarafagroup",
+                        "alt" => _("Zarafa"),
+                        "title" => _("Edit Zarafa properties")
+                    ),
+                    "gotoEnvironment" => array(
+                        "image" => "smart_display",
+                        "plugin" => "environment",
+                        "alt" => _("Environment"),
+                        "title" => _("Edit environment properties")
+                    )
+                );
+                // Walk thru map
+                foreach ($map as $oc => $properties) {
+                    if (in_array_ics($oc, $classes)) {
+                        $result .= image("<i class='material-icons'>" . $properties['image'] . "</i>", 'listing_edit_' . $properties['plugin'] . '_' . $row, $properties['title']);
+                    } else {
+                        $result .= image("");
+                    }
+                }
+                break;
         }
+
         return $result;
     }
-} 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
+}

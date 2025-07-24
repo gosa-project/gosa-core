@@ -22,30 +22,24 @@
 
 class passwordMethodClear extends passwordMethod
 {
-  var $lockable = FALSE;
+    var $lockable = false;
 
-	function __construct($config)
-	{
-	}
+    function __construct($config) {}
 
-	function is_available()
-	{
-		return true;
-	}
+    function is_available()
+    {
+        return true;
+    }
 
 
-	function generate_hash($pwd)
-	{
-		return $pwd;       
-	}
+    function generate_hash($pwd)
+    {
+        return $pwd;
+    }
 
-  
-  function get_hash_name()
-  {
-    return ("clear");
-  }
 
+    function get_hash_name()
+    {
+        return "clear";
+    }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

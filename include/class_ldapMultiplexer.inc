@@ -21,39 +21,40 @@
  */
 
 
-class ldapMultiplexer {
+class ldapMultiplexer
+{
 
-  /* Internal stuff */
-  protected $object;
+    /* Internal stuff */
+    protected $object;
 
-  /* Result resource */
-  protected $sr;
- 
-  public function __construct(&$object) {
-    /* Store object */
-    $this->object= $object;
+    /* Result resource */
+    protected $sr;
 
-    /* Set result resource */
-    $this->sr= $this->object->getSearchResource();
-  }
- 
-  public function __call($methodName, $parameters) {
-    /* Add resource pointer if the mentioned methods are used */
-    if (preg_match('/^(search|ls|cat|fetch|clearResult|resetResult|count|getDN|recursive_remove|rmdir_recursive|gen_xls|create_missing_trees|import_single_entry|import_complete_ldif)$/', $methodName)){
-      array_unshift($parameters, $this->sr);
+    public function __construct($object)
+    {
+        /* Store object */
+        $this->object = $object;
+
+        /* Set result resource */
+        $this->sr = $this->object->getSearchResource();
     }
 
-    $class= new ReflectionClass($this->object);
-    $method= $class->getMethod($methodName);
+    public function __call($methodName, $parameters)
+    {
+        /* Add resource pointer if the mentioned methods are used */
+        if (preg_match('/^(search|ls|cat|fetch|clearResult|resetResult|count|getDN|recursive_remove|rmdir_recursive|gen_xls|create_missing_trees|import_single_entry|import_complete_ldif)$/', $methodName)) {
+            array_unshift($parameters, $this->sr);
+        }
 
-    return $method->invokeArgs($this->object, $parameters);
-  }
+        $class = new ReflectionClass($this->object);
+        $method = $class->getMethod($methodName);
+
+        return $method->invokeArgs($this->object, $parameters);
+    }
 
 
-  public function __get($memberName) {
-    return $this->object->$memberName;
-  }
-
+    public function __get($memberName)
+    {
+        return $this->object->$memberName;
+    }
 }
-
-?>

@@ -60,6 +60,12 @@
 
         {else}
         <tr>
+            <td colspan=2>
+                <input type=checkbox name="rfc2307bisIndicator" {if $rfc2307bisMode} checked {/if} title="{t}Indicates whether rfc2307bis mode is active or not.{/t}" disabled>
+                <LABEL for="rfc2307bisIndicator">{t}rfc2307bis{/t}</LABEL>
+            </td>
+        </tr>
+        <tr>
           <td colspan=2>
             {render acl=$gidNumberACL}
             <input type=checkbox name="force_gid" value="1"
@@ -198,11 +204,11 @@
             {if $restrictedByDynGroup}
             <b>{t}The group members are part of a dyn-group and cannot be managed!{/t}</b>
             {if $multiple_support}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             {/render}
             {else}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             {/render}
             {/if}
@@ -210,24 +216,24 @@
 
             {if $multiple_support}
             <h3>{t}Common group members{/t}</h3>
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$commonList}
             {/render}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
 
             <br>
             <h3>{t}Partial group members{/t}</h3>
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$partialList}
             {/render}
             {else}
             <h3>{t}Group members{/t}</h3>
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             {$memberList}
             {/render}
-            {render acl=$memberACL}
+            {render acl=$memberUidACL}
             <button type='submit' name='edit_membership'>{msgPool type=addButton}</button>
             {/render}
             {/if}

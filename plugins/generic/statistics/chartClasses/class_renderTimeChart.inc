@@ -8,14 +8,14 @@ class renderTimeChart extends memoryUsageChart
     function __construct(&$config)
     {
         parent::__construct($config);
-        $this->graphName = get_class();
+        $this->graphName = __CLASS__;
 
         // Generate graph which displays the memory usage over time
         $this->series = array(
-                'max_render' => _('Maximum'),
-                'avg_render' => _('Average'),
-                'min_render' => _('Minimum'));
+            'max_render' => _('Maximum'),
+            'avg_render' => _('Average'),
+            'min_render' => _('Minimum')
+        );
         $this->dataName = "usagePerInterval";
     }
 }
-?>

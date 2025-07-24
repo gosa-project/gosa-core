@@ -78,14 +78,14 @@
   </definition>
 
   <table>
-    <layout>|20px;c|220px||</layout>
+    <layout>|20px;c|180px|100px||</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
     </department>
 
     <department>
-      <value>%{filter:departmentLink(row,dn,description)}</value>
+      <value>%{filter:departmentLink(row,dn,uid,description)}</value>
       <span>1</span>
     </department>
 
@@ -98,6 +98,14 @@
       <sortAttribute>cn</sortAttribute>
       <sortType>string</sortType>
       <value>%{filter:depLabel(row,dn,pid,base,objectClass,cn)}</value>
+      <export>true</export>
+    </column>
+
+    <column>
+      <label>Uid</label>
+      <sortAttribute>uid</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{uid}</value>
       <export>true</export>
     </column>
 

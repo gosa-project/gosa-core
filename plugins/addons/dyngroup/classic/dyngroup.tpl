@@ -18,7 +18,7 @@
      {html_options options=$scopes selected=$item.scope}
     </select>
   </td>
-  <td><input type='text' name='attr_{$key}' value='{$item.attr}'></td>
+  <td><input type='text' name='attr_{$key}' value='{$item.attr}' placeholder='Filter by attribute or leave it empty for result DNs'></td>
   <td><input name='filter_{$key}' type='text' style='width:98%;' value='{$item.filter}'></td>
   <td><button name='delUri_{$key}'>{msgPool type='delButton'}</button></td>
  </tr>

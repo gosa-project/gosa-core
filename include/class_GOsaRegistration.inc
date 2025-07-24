@@ -10,7 +10,7 @@ class GOsaRegistration
 
     private $isRegistered = NULL;    
 
-    function __construct(&$config)
+    function __construct($config)
     {
         // Check if we're registrated 
 

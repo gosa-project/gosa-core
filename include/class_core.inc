@@ -63,7 +63,7 @@
  *                  |             'gosaProperties' => '>=2.7',
  *                  |             'gosaConfig' => '>=2.7'
  *                  |             ),
- *                  |         'onFailureDisablePlugin' => array(get_class(), 'someClassName')
+ *                  |         'onFailureDisablePlugin' => array(__CLASS__, 'someClassName')
  *                  |         ),
  *                  |      ---------------------------------------------
  *                  |
@@ -223,7 +223,7 @@ class core extends plugin {
                             'gosaProperties' => '>=2.7',
                             'gosaConfig' => '>=2.7'
                             ),
-                        'onFailureDisablePlugin' => array(get_class())
+                        'onFailureDisablePlugin' => array(__CLASS__)
                         ),
 
 
@@ -651,6 +651,16 @@ DEBUG_SI      = 256"),
                                 "mandatory"     => FALSE),
 
                         array(
+                                "name"          => "roleRDN",
+                                "type"          => "rdn",
+                                "default"       => "ou=roles,",
+                                "description"   => _("RDN for role storage."),
+                                "check"         => "gosaProperty::isRdn",
+                                "migrate"       => "migrate_roleRDN",
+                                "group"         => "plugin",
+                                "mandatory"     => false),
+
+                        array(
                                 "name"          => "gidNumberBase",
                                 "type"          => "integer",
                                 "default"       => "1000",
@@ -826,7 +836,16 @@ DEBUG_SI      = 256"),
                                 "name"          => "rfc2307bis",
                                 "type"          => "bool",
                                 "default"       => "false",
-                                "description"   => _("Enable RFC 2307bis style groups. This combines the use of 'member' and 'memberUid' attributes."),
+                                "description"   => _("Enable RFC 2307bis groups."),
+                                "check"         => "gosaProperty::isBool",
+                                "migrate"       => "",
+                                "group"         => "core",
+                                "mandatory"     => FALSE),
+                        array(
+                                "name"          => "rfc2307bisDisableNestedGroups",
+                                "type"          => "bool",
+                                "default"       => "false",
+                                "description"   => _("Disable nested groups for RFC 2307bis style groups. This combines the use of 'member' and 'memberUid' attributes."),
                                 "check"         => "gosaProperty::isBool",
                                 "migrate"       => "",
                                 "group"         => "core",

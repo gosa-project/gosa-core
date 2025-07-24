@@ -1,0 +1,28 @@
+{
+    "name": "gonicus/gosa2-core",
+    "description": "GOsa² core files",
+    "type": "project",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "require": {
+        "php": ">=8.1",
+        "smarty/smarty": "~4.3",
+        "gonicus/gosa2-plugin-mailaddress": "dev-composer",
+        "gonicus/gosa2-plugin-rolemanagement": "dev-composer",
+        "gonicus/gosa2-plugin-ldapmanager": "dev-composer",
+        "gonicus/gosa2-plugin-systems": "dev-composer",
+        "gonicus/gosa2-plugin-relationshipmanager": "dev-composer"
+    },
+    "authors": [
+        {
+            "name": "Benjamin Zapiec",
+            "role": "Developer",
+            "homepage": "https://www.gonicus.de"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/gosa-project/gosa-core"
+    }
+}
+

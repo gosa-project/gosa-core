@@ -30,14 +30,14 @@ define("SPECIALS_OVERRIDE", true);
 
 class LDAP
 {
-    public static $characterMap = NULL;
-    public static $characterMapRegFrom = NULL;
-    public static $characterMapRegTo = NULL;
-    public static $readableMapRegFrom = NULL;
-    public static $readableMapRegTo = NULL;
+    public static $characterMap = null;
+    public static $characterMapRegFrom = null;
+    public static $characterMapRegTo = null;
+    public static $readableMapRegFrom = null;
+    public static $readableMapRegTo = null;
 
     // connection handle
-    static $cid;
+    static ?LDAP\Connection $cid = null;
     // search resources (?)
     static $sr    = [];
     // search resource pointer (?)
@@ -164,8 +164,18 @@ class LDAP
 
         // Set a default mapping to make readable strings out of dns.
         self::$readableMapRegFrom = array(
-            "/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/",
-            "/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//", "/\\\\22/", '/\\\\"/'
+            "/\001CO/",
+            "/\001OB/",
+            "/\001CB/",
+            "/\001SL/",
+            "/\001DQ/",
+            "/\\\\,/",
+            "/\\\\2C/",
+            "/\(/",
+            "/\)/",
+            "/\//",
+            "/\\\\22/",
+            '/\\\\"/'
         );
         self::$readableMapRegTo = array(",", "(", ")", "/", '"', ",", ",", "(", ")", "/", '"', '"');
 
@@ -263,14 +273,14 @@ class LDAP
             ldap_set_option(self::$cid, LDAP_OPT_PROTOCOL_VERSION, 3);
             if (function_exists("ldap_set_rebind_proc") && $this->follow_referral) {
                 ldap_set_option(self::$cid, LDAP_OPT_REFERRALS, 1);
-                ldap_set_rebind_proc(self::$cid, array(&$this, "rebind"));
+                ldap_set_rebind_proc(self::$cid, array($this, "rebind"));
             }
             if (function_exists("ldap_start_tls") && $this->tls) {
                 ldap_start_tls(self::$cid);
             }
 
             $this->error = "No Error";
-            if ($bid = @ldap_bind(self::$cid, self::fix($this->binddn), $this->bindpw)) {
+            if ($bid = ldap_bind(self::$cid, self::fix($this->binddn), $this->bindpw)) {
                 $this->error = "Success";
                 $this->hascon = true;
             } else {
@@ -283,14 +293,14 @@ class LDAP
                 }
             }
         } else {
-            $this->error = "Could not connect to LDAP server";
+            $this->error = 'Could not connect to LDAP server';
         }
     }
 
     function rebind($ldap, $referral): int|null
     {
         $credentials = $this->get_credentials($referral);
-        if (@ldap_bind($ldap, self::fix($credentials['ADMINDN']), $credentials['ADMINPASSWORD'])) {
+        if (ldap_bind($ldap, self::fix($credentials['ADMINDN']), $credentials['ADMINPASSWORD'])) {
             $this->error = "Success";
             $this->hascon = true;
             $this->reconnect = true;
@@ -370,7 +380,7 @@ class LDAP
             return (self::$sr[$srp]);
         }
 
-        $this->error = "Could not connect to LDAP server";
+        $this->error = 'Could not connect to LDAP server';
         return false;
     }
 
@@ -389,7 +399,7 @@ class LDAP
             }
 
             $start = microtime(true);
-            self::$sr[$srp] = @ldap_list(self::$cid, self::fix($basedn), $filter, $attrs);
+            self::$sr[$srp] = ldap_list(self::$cid, self::fix($basedn), $filter, $attrs);
             $this->error = ldap_error(self::$cid);
             $this->resetResult($srp);
             $this->hasres[$srp] = true;
@@ -410,27 +420,39 @@ class LDAP
             return (self::$sr[$srp]);
         }
 
-        $this->error = "Could not connect to LDAP server";
+        $this->error = 'Could not connect to LDAP server';
         return false;
     }
 
+    /**
+     * Get a specified amount of attributes from a given DN entry.
+     *
+     * \param $srp ldap connection handle
+     * \param $dn the dn entry to get attributes from
+     * \param $attrs the attributes you want to get back, defaults to * that means all attributes
+     * \param $filter filter the entries you want to read from ldap
+     * \return bool|\LDAP\Result
+     */
     function cat($srp, $dn, $attrs = array("*"), $filter = "(objectclass=*)"): bool|\LDAP\Result
     {
-        if ($dn === 'new') {
+        if ($dn === 'new' || $dn === null) {
             return false;
         }
+
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
 
             $this->clearResult($srp);
             self::$sr[$srp] = ldap_read(self::$cid, self::fix($dn), $filter, $attrs);
             $this->error = ldap_error(self::$cid);
             $this->resetResult($srp);
             $this->hasres[$srp] = true;
-            return (self::$sr[$srp]);
+            return self::$sr[$srp];
         }
 
-        $this->error = "Could not connect to LDAP server";
+        $this->error = 'Could not connect to LDAP server';
         return false;
     }
 
@@ -459,12 +481,12 @@ class LDAP
                 return ($rv);
             }
         } else {
-            $this->error = "Could not connect to LDAP server";
+            $this->error = 'Could not connect to LDAP server';
         }
         return false;
     }
 
-    function set_size_limit($size)
+    function set_size_limit(int $size): void
     {
         /* Ignore zero settings */
         if ($size == 0) {
@@ -473,7 +495,7 @@ class LDAP
         if ($this->hascon) {
             ldap_set_option(self::$cid, LDAP_OPT_SIZELIMIT, $size);
         } else {
-            $this->error = "Could not connect to LDAP server";
+            $this->error = 'Could not connect to LDAP server';
         }
     }
 
@@ -500,14 +522,14 @@ class LDAP
                 if (!isset($att)) {
                     $att = [];
                 }
-                return ($att);
+                return $att;
             } else {
-                $this->error = "Perform a fetch with no search";
-                return ("");
+                $this->error = 'Perform a fetch with no search';
+                return '';
             }
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -549,12 +571,12 @@ class LDAP
                     return (trim(self::convert($rv)));
                 }
             } else {
-                $this->error = "Perform a Fetch with no Search";
-                return ("");
+                $this->error = 'Perform a fetch with no search';
+                return '';
             }
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -572,12 +594,12 @@ class LDAP
     function count($srp): int
     {
         if (!$this->hascon) {
-            $this->error = "Could not connect to LDAP server";
+            $this->error = 'Could not connect to LDAP server';
             return 0;
         }
 
         if (!$this->hasres[$srp]) {
-            $this->error = "Perform a Fetch with no Search";
+            $this->error = 'Perform a fetch with no search';
             return 0;
         }
 
@@ -600,7 +622,7 @@ class LDAP
             }
         } else {
             if (!is_resource($result)) {
-                $this->error = "Search result was not type of Resource";
+                $this->error = 'Search result was not type of Resource';
                 return 0;
             }
         }
@@ -627,8 +649,8 @@ class LDAP
             $this->error = ldap_error(self::$cid);
             return ($r);
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -645,8 +667,8 @@ class LDAP
             $this->error = ldap_error(self::$cid);
             return ($r);
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -661,8 +683,8 @@ class LDAP
             $this->error = ldap_error(self::$cid);
             return ($r);
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -674,8 +696,8 @@ class LDAP
             $this->error = ldap_error(self::$cid);
             return ($r ? $r : 0);
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -719,7 +741,7 @@ class LDAP
             $r &= is_resource($this->dn_exists($dest));
             return ($r);
         } else {
-            $this->error = "Could not connect to LDAP server";
+            $this->error = 'Could not connect to LDAP server';
             return (false);
         }
     }
@@ -758,8 +780,8 @@ class LDAP
             $this->error = ldap_error(self::$cid);
             return ($r ? $r : 0);
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -767,7 +789,7 @@ class LDAP
     {
         global $config;
 
-        if ($this->success()) return ("");
+        if ($this->success()) return '';
 
         $str = "";
         if (preg_match("/^objectClass: value #([0-9]*) invalid per syntax$/", $this->get_additional_error())) {
@@ -788,7 +810,7 @@ class LDAP
     function modify($attrs)
     {
         if (count($attrs) == 0) {
-            return (0);
+            return 0;
         }
         if ($this->hascon) {
             $start = microtime(true);
@@ -812,8 +834,8 @@ class LDAP
             return ($r ? $r : 0);
         }
 
-        $this->error = "Could not connect to LDAP server";
-        return ("");
+        $this->error = 'Could not connect to LDAP server';
+        return '';
     }
 
     function add($attrs)
@@ -839,8 +861,8 @@ class LDAP
 
             return ($r ? $r : 0);
         } else {
-            $this->error = "Could not connect to LDAP server";
-            return ("");
+            $this->error = 'Could not connect to LDAP server';
+            return '';
         }
     }
 
@@ -923,7 +945,7 @@ class LDAP
 
                     /* Bail out, if we've nothing to do... */
                     if ($ocname == "") {
-                        msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN %s: no object class found"), bold($type)), FATAL_ERROR_DIALOG);
+                        msg_dialog::display(_('Internal error'), sprintf(_('Cannot automatically create subtrees with RDN %s: no object class found'), bold($type)), FATAL_ERROR_DIALOG);
                         exit();
                     }
 
@@ -984,7 +1006,7 @@ class LDAP
 
                     print_a(array($cdn, $na));
 
-                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $cdn, LDAP_ADD, get_class()));
+                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $cdn, LDAP_ADD, __CLASS__));
                     return false;
                 }
             }
@@ -1030,9 +1052,9 @@ class LDAP
             }
         }
         if ($r_array == 0) {
-            return ($data);
+            return $data;
         } else {
-            return ($info);
+            return $info;
         }
     }
 
@@ -1090,7 +1112,7 @@ class LDAP
             $ret['ADMINPASSWORD'] = self::$bindpw;
         }
 
-        return ($ret);
+        return $ret;
     }
 
 
@@ -1193,10 +1215,10 @@ class LDAP
         }
 
         /* Searching Ldap Tree */
-        $sr = ldap_read($this->cid, LDAP::fix($dn), $filter, $name);
+        $sr = ldap_read(self::$cid, LDAP::fix($dn), $filter, $name);
 
         /* Get the first entry */
-        $entry = ldap_first_entry($this->cid, $sr);
+        $entry = ldap_first_entry(self::$cid, $sr);
 
         /* Get all attributes related to that Objekt */
         $atts = [];
@@ -1208,14 +1230,14 @@ class LDAP
         /* Reset index */
         $i = 1;
         $identifier = [];
-        $attribute = ldap_first_attribute($this->cid, $entry, $identifier);
+        $attribute = ldap_first_attribute(self::$cid, $entry, $identifier);
         while ($attribute) {
             $i++;
             $atts[$i]['name']  = $attribute;
-            $atts[$i]['value'] = ldap_get_values_len($this->cid, $entry, "$attribute");
+            $atts[$i]['value'] = ldap_get_values_len(self::$cid, $entry, "$attribute");
 
             /* Next one */
-            $attribute = ldap_next_attribute($this->cid, $entry, $identifier);
+            $attribute = ldap_next_attribute(self::$cid, $entry, $identifier);
         }
 
         foreach ($atts as $at) {
@@ -1488,7 +1510,7 @@ class LDAP
         }
 
         if (!$this->success()) {
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $dn, "", get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $dn, "", __CLASS__));
         }
 
         return ($ret);

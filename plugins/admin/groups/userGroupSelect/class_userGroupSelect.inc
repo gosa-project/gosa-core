@@ -1,7 +1,8 @@
 <?php
-/*
+
+/**
  * This code is part of GOsa (http://www.gosa-project.org)
- * Copyright (C) 2003-2008 GONICUS GmbH
+ * Copyright (C) 2003-2025 GONICUS GmbH
  *
  * ID: $$Id: class_target_list.inc 9850 2008-03-14 14:15:12Z hickert $$
  *
@@ -23,43 +24,31 @@
 class userGroupSelect extends management
 {
     // Tab definition 
-    protected $skipFooter = TRUE;
-    protected $skipHeader = TRUE;
+    protected $skipFooter = true;
+    protected $skipHeader = true;
 
-    public $plHeadline = "User and group selection";
+    public $plHeadline = 'User and group selection';
 
-    function __construct($config,$ui)
+    function __construct($config, $ui, array $dns = [])
     {
         $this->config = $config;
         $this->ui = $ui;
-        $this->storagePoints = array(get_ou("core", "userRDN"), get_ou("core", "groupRDN"));
+        $this->storagePoints = [get_ou('core', 'userRDN'), get_ou('core', 'groupRDN')];
 
         // Build filter
-        if (session::global_is_set(get_class($this)."_filter")){
-            $filter= session::global_get(get_class($this)."_filter");
+        if (session::global_is_set(get_class($this) . '_filter')) {
+            $filter = session::global_get(get_class($this) . '_filter');
+            $filter->setConstraint(['dn' => $dns]);
         } else {
-            $filter = new filter(get_template_path("selectUserGroup-filter.xml", true, dirname(__FILE__)));
+            $filter = new filter(get_template_path('selectUserGroup-filter.xml', true, dirname(__FILE__)));
             $filter->setObjectStorage($this->storagePoints);
+            $filter->setConstraint(['dn' => $dns]);
         }
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path("selectUserGroup-list.xml", true, dirname(__FILE__)));
+        $headpage = new listing(get_template_path('selectUserGroup-list.xml', true, dirname(__FILE__)));
         $headpage->setFilter($filter);
         parent::__construct($config, $ui, "object", $headpage);
     }
-
-    function save()
-    {
-        $act = $this->detectPostActions();
-        $headpage = $this->getHeadpage();
-        if(!isset($act['targets'])) return(array());
-        $ret = array();
-        foreach($act['targets'] as $dn){
-            $ret[] = $headpage->getEntry($dn);
-        }
-        return($ret);
-    }
 }
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

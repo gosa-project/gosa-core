@@ -95,7 +95,7 @@ if(isset($servers[$directory])){
     $config->check_and_reload();
     $config->configRegistry->reload(TRUE);
 }
-session::global_set('plist', new pluglist($config, $ui));
+session::global_set('plist', new pluglist($ui));
 
 session::global_set('debugLevel', $config->get_cfg_value("core","debugLevel"));
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
@@ -136,8 +136,8 @@ setlocale(LC_ALL, $lang);
 $GLOBALS['t_language']= $lang;
 $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 
-/* Set the text domain as 'messages' */
-$domain = 'messages';
+/* Set the text domain as 'core' */
+$domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 

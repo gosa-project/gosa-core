@@ -28,24 +28,24 @@ $svn_path = '$HeadURL$';
 $svn_revision = '$Revision$';
 
 /* Configuration file location */
-if(!isset($_SERVER['CONFIG_DIR'])){
-  define ("CONFIG_DIR", "/etc/gosa");
-}else{
-  define ("CONFIG_DIR",$_SERVER['CONFIG_DIR']);
+if (!isset($_SERVER['CONFIG_DIR'])) {
+    define("CONFIG_DIR", "/etc/gosa");
+} else {
+    define("CONFIG_DIR", $_SERVER['CONFIG_DIR']);
 }
 
 /* Allow setting the config file in the apache configuration
     e.g.  SetEnv CONFIG_FILE gosa.conf.2.6
  */
-if(!isset($_SERVER['CONFIG_FILE'])){
-  define ("CONFIG_FILE", "gosa.conf");
-}else{
-  define ("CONFIG_FILE",$_SERVER['CONFIG_FILE']);
+if (!isset($_SERVER['CONFIG_FILE'])) {
+    define("CONFIG_FILE", "gosa.conf");
+} else {
+    define("CONFIG_FILE", $_SERVER['CONFIG_FILE']);
 }
 
 /* Define common locatitions */
-define ("CONFIG_TEMPLATE_DIR", "../contrib");
-define ("TEMP_DIR","/var/cache/gosa/tmp");
+define("CONFIG_TEMPLATE_DIR", "../contrib");
+define("TEMP_DIR", "/var/cache/gosa/tmp");
 
 /* Define get_list flags */
 define("GL_NONE",         0);
@@ -55,51 +55,52 @@ define("GL_CONVERT",      4);
 define("GL_NO_ACL_CHECK", 8);
 
 /* Heimdal stuff */
-define('UNIVERSAL',0x00);
-define('INTEGER',0x02);
-define('OCTET_STRING',0x04);
-define('OBJECT_IDENTIFIER ',0x06);
-define('SEQUENCE',0x10);
-define('SEQUENCE_OF',0x10);
-define('SET',0x11);
-define('SET_OF',0x11);
-define('DEBUG',false);
-define('HDB_KU_MKEY',0x484442);
-define('TWO_BIT_SHIFTS',0x7efc);
-define('DES_CBC_CRC',1);
-define('DES_CBC_MD4',2);
-define('DES_CBC_MD5',3);
-define('DES3_CBC_MD5',5);
-define('DES3_CBC_SHA1',16);
+define('UNIVERSAL', 0x00);
+define('INTEGER', 0x02);
+define('OCTET_STRING', 0x04);
+define('OBJECT_IDENTIFIER ', 0x06);
+define('SEQUENCE', 0x10);
+define('SEQUENCE_OF', 0x10);
+define('SET', 0x11);
+define('SET_OF', 0x11);
+define('DEBUG', false);
+define('HDB_KU_MKEY', 0x484442);
+define('TWO_BIT_SHIFTS', 0x7efc);
+define('DES_CBC_CRC', 1);
+define('DES_CBC_MD4', 2);
+define('DES_CBC_MD5', 3);
+define('DES3_CBC_MD5', 5);
+define('DES3_CBC_SHA1', 16);
 
 /* Include required files */
-include_once("class_location.inc");
-require_once ("functions_debug.inc");
-require_once ("accept-to-gettext.inc");
+require_once("class_location.inc");
+require_once("functions_debug.inc");
+require_once("accept-to-gettext.inc");
 
 /* Define constants for debugging */
-define ("DEBUG_TRACE",   1); /*! Debug level for tracing of common actions (save, check, etc.) */
-define ("DEBUG_LDAP",    2); /*! Debug level for LDAP queries */
-define ("DEBUG_MYSQL",   4); /*! Debug level for mysql operations */
-define ("DEBUG_SHELL",   8); /*! Debug level for shell commands */
-define ("DEBUG_POST",   16); /*! Debug level for POST content */
-define ("DEBUG_SESSION",32); /*! Debug level for SESSION content */
-define ("DEBUG_CONFIG", 64); /*! Debug level for CONFIG information */
-define ("DEBUG_ACL",    128); /*! Debug level for ACL infos */
-define ("DEBUG_SI",     256); /*! Debug level for communication with gosa-si */
-define ("DEBUG_MAIL",   512); /*! Debug level for all about mail (mailAccounts, imap, sieve etc.) */
-define ("DEBUG_FAI",   1024); // FAI (incomplete)
-define ("DEBUG_RPC",   2048); /*! Debug level for communication with remote procedures */
+define("DEBUG_TRACE",   1); /*! Debug level for tracing of common actions (save, check, etc.) */
+define("DEBUG_LDAP",    2); /*! Debug level for LDAP queries */
+define("DEBUG_MYSQL",   4); /*! Debug level for mysql operations */
+define("DEBUG_SHELL",   8); /*! Debug level for shell commands */
+define("DEBUG_POST",   16); /*! Debug level for POST content */
+define("DEBUG_SESSION", 32); /*! Debug level for SESSION content */
+define("DEBUG_CONFIG", 64); /*! Debug level for CONFIG information */
+define("DEBUG_ACL",    128); /*! Debug level for ACL infos */
+define("DEBUG_SI",     256); /*! Debug level for communication with gosa-si */
+define("DEBUG_MAIL",   512); /*! Debug level for all about mail (mailAccounts, imap, sieve etc.) */
+define("DEBUG_FAI",   1024); // FAI (incomplete)
+define("DEBUG_RPC",   2048); /*! Debug level for communication with remote procedures */
 
 // Define shadow states
-define ("POSIX_ACCOUNT_EXPIRED", 1);
-define ("POSIX_WARN_ABOUT_EXPIRATION", 2);
-define ("POSIX_FORCE_PASSWORD_CHANGE", 4);
-define ("POSIX_DISALLOW_PASSWORD_CHANGE", 8);
+define("POSIX_ACCOUNT_EXPIRED", 1);
+define("POSIX_WARN_ABOUT_EXPIRATION", 2);
+define("POSIX_FORCE_PASSWORD_CHANGE", 4);
+define("POSIX_DISALLOW_PASSWORD_CHANGE", 8);
 
 /* Rewrite german 'umlauts' and spanish 'accents'
    to get better results */
-$REWRITE= array( "ä" => "ae",
+$REWRITE = array(
+    "ä" => "ae",
     "ö" => "oe",
     "ü" => "ue",
     "Ä" => "Ae",
@@ -117,69 +118,53 @@ $REWRITE= array( "ä" => "ae",
     "Ó" => "O",
     "Ú" => "U",
     "ñ" => "ny",
-    "Ñ" => "Ny" );
+    "Ñ" => "Ny"
+);
 
 /*! \brief Cyrillic (russian) fonetic transliteration (converts russian letters to ASCII and backward according to GOST 7.79-2000 )
  *  \param  string 'str' Source string in russian codepage
  *  \return string Translitered string value.
  */
-function cyrillic2ascii($str) {
-    $ru = array('а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',  'ъ', 'ы', 'ь', 'э', 'ю', 'я',
-                'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'H', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',  'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 
-                'ґ', 'є', 'ї', 'Ґ', 'Є', 'Ї'
+function cyrillic2ascii($str)
+{
+    $ru = array(
+        'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',  'ъ', 'ы', 'ь', 'э', 'ю', 'я',
+        'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'H', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',  'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я',
+        'ґ', 'є', 'ї', 'Ґ', 'Є', 'Ї'
     );
-    $en = array('a', 'b', 'v', 'g', 'd', 'e', 'jo','zh','z', 'i', 'jj','k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'kh','c', 'ch','sh','shh','"', 'y', '\'','eh','ju','ja',
-                'A', 'B', 'V', 'G', 'D', 'E', 'Jo','Je','Z', 'I', 'Jj','K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'Kh','C', 'CH','SH','Shh','"', 'Y', '\'','Eh','Ju','Ja',
-                'g', 'ye','yi','G', 'Ye','Yi'
+    $en = array(
+        'a', 'b', 'v', 'g', 'd', 'e', 'jo', 'zh', 'z', 'i', 'jj', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'kh', 'c', 'ch', 'sh', 'shh', '"', 'y', '\'', 'eh', 'ju', 'ja',
+        'A', 'B', 'V', 'G', 'D', 'E', 'Jo', 'Je', 'Z', 'I', 'Jj', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'Kh', 'C', 'CH', 'SH', 'Shh', '"', 'Y', '\'', 'Eh', 'Ju', 'Ja',
+        'g', 'ye', 'yi', 'G', 'Ye', 'Yi'
     );
 
     return str_replace($ru, $en, $str);
 }
 
-
-/*! \brief Does autoloading for classes used in GOsa.
+/**
+ * Checks if a class is available.
  *
- *  Takes the list generated by 'update-gosa' and loads the
- *  file containing the requested class.
- *
- *  \param  string 'class_name' The currently requested class
+ * @param  string 'name' The subject of the test
+ * @return boolean true if class is available, else false.
  */
-function __gosa_autoload($class_name) {
-    global $class_mapping, $BASE_DIR;
-
-    if ($class_mapping === NULL){
-	    echo sprintf(_("Fatal error: no class locations defined - please run %s to fix this"), bold("update-gosa"));
-	    exit;
-    }
-
-    if (preg_match('/^Smarty_.*/', $class_name)) {
-        return;
-    }
-
-    if (isset($class_mapping["$class_name"])){
-      require_once($BASE_DIR."/".$class_mapping["$class_name"]);
-    } else {
-      echo sprintf(_("Fatal error: cannot instantiate class %s - try running %s to fix this"), bold($class_name), bold("update-gosa"));
-      exit;
-    }
-}
-spl_autoload_register('__gosa_autoload');
-
-
-/*! \brief Checks if a class is available. 
- *  \param  string 'name' The subject of the test
- *  \return boolean True if class is available, else false.
- */
-function class_available($name)
+function class_available(string $className): bool
 {
-  global $class_mapping, $config;
-    
-  $disabled = array();
-  if($config instanceOf config && $config->configRegistry instanceOf configRegistry){
-    $disabled = $config->configRegistry->getDisabledPlugins();
-  }
+    global $composerClassMap, $class_mapping, $config;
 
-  return(isset($class_mapping[$name]) && !isset($disabled[$name]));
+    $disabled = [];
+    if ($config instanceof config && $config->configRegistry instanceof configRegistry) {
+        $disabled = $config->configRegistry->getDisabledPlugins();
+    }
+
+    if (isset($class_mapping[$className]) && !isset($disabled[$className])) {
+        return true;
+    }
+
+    if (isset($composerClassMap[$className])) {
+        return true;
+    }
+
+    return false;
 }
 
 
@@ -188,21 +173,31 @@ function class_available($name)
  * Checks if a given plugin is available and readable.
  *
  * \param string 'plugin' the subject of the check
- * \return boolean True if plugin is available, else FALSE.
+ * \return boolean true if plugin is available, else false.
  */
-function plugin_available($plugin)
+function plugin_available(string $plugin): bool
 {
-	global $class_mapping, $BASE_DIR;
+    global $composerClassMap, $class_mapping, $BASE_DIR;
 
-	if (!isset($class_mapping[$plugin])){
-		return false;
-	} else {
-		return is_readable($BASE_DIR."/".$class_mapping[$plugin]);
-	}
+    if (isset($class_mapping[$plugin])) {
+        return is_readable($BASE_DIR . "/" . $class_mapping[$plugin]);
+    }
+
+    if (isset($composerClassMap[$plugin])) {
+        if (is_subclass_of($plugin, 'plugin')) {
+            return true;
+        }
+
+        if (is_subclass_of($plugin, 'management')) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
-/*! \brief Create seed with microseconds 
+/*! \brief Create seed with microseconds
  *
  * Example:
  * \code
@@ -212,15 +207,16 @@ function plugin_available($plugin)
  *
  * \return float a floating point number which can be used to feed srand() with it
  * */
-function make_seed() {
-  list($usec, $sec) = explode(' ', microtime());
-  return (float) $sec + ((float) $usec * 100000);
+function make_seed(): float
+{
+    list($usec, $sec) = explode(' ', microtime());
+    return (float) $sec + ((float) $usec * 100000);
 }
 
 
-/*! \brief DEBUG level action 
+/*! \brief DEBUG level action
  *
- * print a DEBUG level if specified debug level of the level matches the 
+ * print a DEBUG level if specified debug level of the level matches the
  * the configured debug level.
  *
  * \param int 'level' The log level of the message (should use the constants,
@@ -235,22 +231,22 @@ function make_seed() {
  * \param string 'info' Optional: Additional information
  *
  * */
-function DEBUG($level, $line, $function, $file, $data, $info="")
+function DEBUG($level, $line, $function, $file, $data, $info = ''): void
 {
     global $config;
     $debugLevel = 0;
-    if($config instanceOf config){
+    if ($config instanceof config) {
         $debugLevel = $config->get_cfg_value('core', 'debugLevel');
     }
-    if ($debugLevel && $level){
-        $output= "DEBUG[$level] ";
-        if ($function != ""){
-            $output.= "($file:$function():$line) - $info: ";
+    if ($debugLevel && $level) {
+        $output = "DEBUG[$level] ";
+        if ($function != '') {
+            $output .= "($file:$function():$line) - $info: ";
         } else {
-            $output.= "($file:$line) - $info: ";
+            $output .= "($file:$line) - $info: ";
         }
         echo $output;
-        if (is_array($data)){
+        if (is_array($data)) {
             print_a($data);
         } else {
             echo "'$data'";
@@ -272,39 +268,41 @@ function DEBUG($level, $line, $function, $file, $data, $info="")
  *
  * \return string gettext locale string
  */
-function get_browser_language()
+function get_browser_language(): string
 {
-  /* Try to use users primary language */
-  global $config;
-  $ui= get_userinfo();
-  if (isset($ui) && $ui !== NULL){
-    if ($ui->language != ""){
-      return ($ui->language.".UTF-8");
+    /* Try to use users primary language */
+    global $config;
+    $ui = get_userinfo();
+    if (isset($ui) && $ui !== NULL) {
+        if ($ui->language != '') {
+            return ($ui->language . ".UTF-8");
+        }
     }
-  }
 
-  /* Check for global language settings in gosa.conf */
-  if (isset ($config) && $config->get_cfg_value("core",'language') != ""){
-    $lang = $config->get_cfg_value("core",'language');
-    if(!preg_match("/utf/i",$lang)){
-      $lang .= ".UTF-8";
+    /* Check for global language settings in gosa.conf */
+    if (isset($config) && $config->get_cfg_value("core", 'language') != '') {
+        $lang = $config->get_cfg_value("core", 'language');
+        if (!preg_match("/utf/i", $lang)) {
+            $lang .= ".UTF-8";
+        }
+        return ($lang);
     }
-    return($lang);
-  }
- 
-  /* Load supported languages */
-  $gosa_languages= get_languages();
 
-  /* Move supported languages to flat list */
-  $langs = array_map(function($lang){return $lang.'.UTF-8';}, array_keys($gosa_languages));
+    /* Load supported languages */
+    $gosa_languages = get_languages();
+
+    /* Move supported languages to flat list */
+    $langs = array_map(function ($lang) {
+        return $lang . '.UTF-8';
+    }, array_keys($gosa_languages));
 
 
-  /* Return gettext based string */
-  return (al2gt($langs, 'text/html'));
+    /* Return gettext based string */
+    return (al2gt($langs, 'text/html'));
 }
 
 
-/*! \brief Rewrite ui object to another dn 
+/*! \brief Rewrite ui object to another dn
  *
  * Usually used when a user is renamed. In this case the dn
  * in the user object must be updated in order to point
@@ -313,13 +311,13 @@ function get_browser_language()
  * \param string 'dn' the old DN
  * \param string 'newdn' the new DN
  * */
-function change_ui_dn($dn, $newdn)
+function change_ui_dn(string $dn, string $newdn): void
 {
-  $ui= session::global_get('ui');
-  if ($ui->dn == $dn){
-    $ui->dn= $newdn;
-    session::global_set('ui',$ui);
-  }
+    $ui = session::global_get('ui');
+    if ($ui->dn == $dn) {
+        $ui->dn = $newdn;
+        session::global_set('ui', $ui);
+    }
 }
 
 
@@ -339,55 +337,60 @@ function change_ui_dn($dn, $newdn)
  *  \param  string 'path' User specified path to take as search base
  *  \return string Full path to the template file
  */
-function get_template_path($filename= '', $plugin= FALSE, $path= "")
+function get_template_path(string $filename = '', bool $plugin = false, string $path = ''): string
 {
-  global $config, $BASE_DIR;
+    global $config, $BASE_DIR;
 
-  /* Set theme */
-  if (isset ($config)){
-	$theme= $config->get_cfg_value("core","theme");
-  } else {
-  	$theme= "default";
-  }
-
-  /* Return path for empty filename */
-  if ($filename == ''){
-    return ("themes/$theme/");
-  }
-
-  /* Return plugin dir or root directory? */
-  if ($plugin){
-    if ($path == ""){
-      $nf= preg_replace("!^".$BASE_DIR."/!", "", preg_replace('/^\.\.\//', '', session::global_get('plugin_dir')));
+    /* Set theme */
+    if (isset($config)) {
+        $theme = $config->get_cfg_value("core", "theme");
     } else {
-      $nf= preg_replace("!^".$BASE_DIR."/!", "", $path);
+        $theme = "default";
     }
-    if (file_exists("$BASE_DIR/ihtml/themes/$theme/$nf")){
-      return ("$BASE_DIR/ihtml/themes/$theme/$nf/$filename");
+
+    /* Return path for empty filename */
+    if ($filename == '') {
+        return ("themes/$theme/");
     }
-    if (file_exists("$BASE_DIR/ihtml/themes/default/$nf")){
-      return ("$BASE_DIR/ihtml/themes/default/$nf/$filename");
-    }
-    if ($path == ""){
-      return (session::global_get('plugin_dir')."/$filename");
+
+    /* Return plugin dir or root directory? */
+    if ($plugin) {
+        if ($path == '') {
+            $nf = preg_replace("!^" . $BASE_DIR . "/!", '', preg_replace('/^\.\.\//', '', session::global_get('plugin_dir')));
+        } else {
+            $nf = preg_replace("!^" . $BASE_DIR . "/!", '', $path);
+        }
+        if (file_exists("$BASE_DIR/ihtml/themes/$theme/$nf")) {
+            return ("$BASE_DIR/ihtml/themes/$theme/$nf/$filename");
+        }
+        if (file_exists("$BASE_DIR/ihtml/themes/default/$nf")) {
+            return ("$BASE_DIR/ihtml/themes/default/$nf/$filename");
+        }
+        if ($path == '') {
+            if (file_exists(session::global_get('plugin_dir') . "/$theme/$filename")){
+                return (session::global_get('plugin_dir') . "/$theme/$filename");
+            } else {
+                // last resort
+                return $BASE_DIR . $filename;
+            }
+        } else {
+            return ($path . "/$theme/$filename");
+        }
     } else {
-      return ($path."/$filename");
+        if (file_exists("themes/$theme/$filename")) {
+            return ("themes/$theme/$filename");
+        }
+        if (file_exists("$BASE_DIR/ihtml/themes/$theme/$filename")) {
+            return ("$BASE_DIR/ihtml/themes/$theme/$filename");
+        }
+        if (file_exists("themes/default/$filename")) {
+            return ("themes/default/$filename");
+        }
+        if (file_exists("$BASE_DIR/ihtml/themes/default/$filename")) {
+            return ("$BASE_DIR/ihtml/themes/default/$filename");
+        }
+        return ($filename);
     }
-  } else {
-    if (file_exists("themes/$theme/$filename")){
-      return ("themes/$theme/$filename");
-    }
-    if (file_exists("$BASE_DIR/ihtml/themes/$theme/$filename")){
-      return ("$BASE_DIR/ihtml/themes/$theme/$filename");
-    }
-    if (file_exists("themes/default/$filename")){
-      return ("themes/default/$filename");
-    }
-    if (file_exists("$BASE_DIR/ihtml/themes/default/$filename")){
-      return ("$BASE_DIR/ihtml/themes/default/$filename");
-    }
-    return ($filename);
-  }
 }
 
 
@@ -401,7 +404,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
  */
 function array_remove_entries($needles, $haystack)
 {
-  return (array_merge(array_diff($haystack, $needles)));
+    return (array_merge(array_diff($haystack, $needles)));
 }
 
 
@@ -410,8 +413,8 @@ function array_remove_entries($needles, $haystack)
  * Same as array_remove_entries(), but case-insensitive. */
 function array_remove_entries_ics($needles, $haystack)
 {
-  // strcasecmp will work, because we only compare ASCII values here
-  return (array_merge(array_udiff($haystack, $needles, 'strcasecmp')));
+    // strcasecmp will work, because we only compare ASCII values here
+    return (array_merge(array_udiff($haystack, $needles, 'strcasecmp')));
 }
 
 
@@ -424,13 +427,13 @@ function array_remove_entries_ics($needles, $haystack)
  * \param array 'ar2' second array-
  * \return array
  */
-function gosa_array_merge($ar1,$ar2)
+function gosa_array_merge($ar1, $ar2)
 {
-  if(!is_array($ar1) || !is_array($ar2)){
-    trigger_error("Specified parameter(s) are not valid arrays.");
-  }else{
-    return(array_values(array_unique(array_merge($ar1,$ar2))));
-  }
+    if (!is_array($ar1) || !is_array($ar2)) {
+        trigger_error("Specified parameter(s) are not valid arrays.");
+    } else {
+        return (array_values(array_unique(array_merge($ar1, $ar2))));
+    }
 }
 
 
@@ -440,29 +443,29 @@ function gosa_array_merge($ar1,$ar2)
  *
  * \param string 'message' the message to log
  * */
-function gosa_log ($message)
+function gosa_log($message)
 {
-  global $ui;
+    global $ui;
 
-  /* Preset to something reasonable */
-  $username= "[unauthenticated]";
+    /* Preset to something reasonable */
+    $username = "[unauthenticated]";
 
-  /* Replace username if object is present */
-  if (isset($ui)){
-    if ($ui->username != ""){
-      $username= "[$ui->username]";
-    } else {
-      $username= "[unknown]";
+    /* Replace username if object is present */
+    if (isset($ui)) {
+        if ($ui->username != '') {
+            $username = "[$ui->username]";
+        } else {
+            $username = "[unknown]";
+        }
     }
-  }
 
-  syslog(LOG_INFO,"GOsa$username: $message");
+    syslog(LOG_INFO, "GOsa$username: $message");
 }
 
 
 /*! \brief Initialize a LDAP connection
  *
- * Initializes a LDAP connection. 
+ * Initializes a LDAP connection.
  *
  * \param string 'server'
  * \param string 'base'
@@ -471,61 +474,69 @@ function gosa_log ($message)
  *
  * \return LDAP object
  */
-function ldap_init ($server, $base, $binddn='', $pass='')
+function ldap_init($server, $base, $binddn = '', $pass = '')
 {
-  global $config;
+    global $config;
 
-  $ldap = new LDAP ($binddn, $pass, $server,
-      isset($config->current['LDAPFOLLOWREFERRALS']) && $config->current['LDAPFOLLOWREFERRALS'] == "true",
-      isset($config->current['LDAPTLS']) && $config->current['LDAPTLS'] == "true");
+    $ldap = new LDAP(
+        $binddn,
+        $pass,
+        $server,
+        isset($config->current['LDAPFOLLOWREFERRALS']) && $config->current['LDAPFOLLOWREFERRALS'] == "true",
+        isset($config->current['LDAPTLS']) && $config->current['LDAPTLS'] == "true"
+    );
 
-  /* Sadly we've no proper return values here. Use the error message instead. */
-  if (!$ldap->success()){
-    msg_dialog::display(_("Fatal error"),
-        sprintf(_("Error while connecting to LDAP: %s"), $ldap->get_error()),
-        FATAL_ERROR_DIALOG);
-    exit();
-  }
+    /* Sadly we've no proper return values here. Use the error message instead. */
+    if (!$ldap->success()) {
+        msg_dialog::display(
+            _("Fatal error"),
+            sprintf(_("Error while connecting to LDAP: %s"), $ldap->get_error()),
+            FATAL_ERROR_DIALOG
+        );
+        exit();
+    }
 
-  /* Preset connection base to $base and return to caller */
-  $ldap->cd ($base);
-  return $ldap;
+    /* Preset connection base to $base and return to caller */
+    $ldap->cd($base);
+    return $ldap;
 }
 
 
 /* \brief Process htaccess authentication */
-function process_htaccess ($username, $kerberos= FALSE)
+function process_htaccess($username, $kerberos = false)
 {
-  global $config;
+    global $config;
 
-  /* Search for $username and optional @REALM in all configured LDAP trees */
-  foreach($config->data["LOCATIONS"] as $name => $data){
-  
-    $config->set_current($name);
-    $mode= "kerberos";
-    if ($config->get_cfg_value("core","useSaslForKerberos") == "true"){
-      $mode= "sasl";
+    /* Search for $username and optional @REALM in all configured LDAP trees */
+    foreach ($config->data["LOCATIONS"] as $name => $data) {
+
+        $config->set_current($name);
+        $mode = "kerberos";
+        if ($config->get_cfg_value("core", "useSaslForKerberos") == "true") {
+            $mode = "sasl";
+        }
+
+        /* Look for entry or realm */
+        $ldap = $config->get_ldap_link();
+        if (!$ldap->success()) {
+            msg_dialog::display(
+                _("LDAP error"),
+                msgPool::ldaperror($ldap->get_error(), '', LDAP_AUTH) . "<br><br>" . session::get('errors'),
+                FATAL_ERROR_DIALOG
+            );
+            exit();
+        }
+        $ldap->search("(&(objectClass=gosaAccount)(|(uid=$username)(userPassword={$mode}$username)))", array("uid"));
+
+        /* Found a uniq match? Return it... */
+        if ($ldap->count() == 1) {
+            $attrs = $ldap->fetch();
+            return array("username" => $attrs["uid"][0], "server" => $name);
+        }
     }
 
-    /* Look for entry or realm */
-    $ldap= $config->get_ldap_link();
-    if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), 
-          msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
-          FATAL_ERROR_DIALOG);
-      exit();
-    }
-    $ldap->search("(&(objectClass=gosaAccount)(|(uid=$username)(userPassword={$mode}$username)))", array("uid"));
-
-    /* Found a uniq match? Return it... */
-    if ($ldap->count() == 1) {
-      $attrs= $ldap->fetch();
-      return array("username" => $attrs["uid"][0], "server" => $name);
-    }
-  }
-
-  /* Nothing found? Return emtpy array */
-  return array("username" => "", "server" => "");
+    /* Nothing found? Return emtpy array */
+    return array("username" => '', "server" => '');
 }
 
 
@@ -536,49 +547,51 @@ function process_htaccess ($username, $kerberos= FALSE)
  *
  * \param string 'username'
  * \return
- *  - TRUE on SUCCESS, NULL or FALSE on error
+ *  - true on SUCCESS, NULL or false on error
  */
-function ldap_login_user_htaccess ($username)
+function ldap_login_user_htaccess($username)
 {
-  global $config;
+    global $config;
 
-  /* Look for entry or realm */
-  $ldap= $config->get_ldap_link();
-  if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), 
-        msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
-        FATAL_ERROR_DIALOG);
-    exit();
-  }
-  $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
-  /* Found no uniq match? Strange, because we did above... */
-  if ($ldap->count() != 1) {
-    msg_dialog::display(_("LDAP error"), _("User ID is not unique!"), FATAL_ERROR_DIALOG);
-    return (NULL);
-  }
-  $attrs= $ldap->fetch();
+    /* Look for entry or realm */
+    $ldap = $config->get_ldap_link();
+    if (!$ldap->success()) {
+        msg_dialog::display(
+            _("LDAP error"),
+            msgPool::ldaperror($ldap->get_error(), '', LDAP_AUTH) . "<br><br>" . session::get('errors'),
+            FATAL_ERROR_DIALOG
+        );
+        exit();
+    }
+    $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
+    /* Found no uniq match? Strange, because we did above... */
+    if ($ldap->count() != 1) {
+        msg_dialog::display(_("LDAP error"), _("User ID is not unique!"), FATAL_ERROR_DIALOG);
+        return (NULL);
+    }
+    $attrs = $ldap->fetch();
 
-  /* got user dn, fill acl's */
-  $ui= new userinfo($config, $ldap->getDN());
-  $ui->username= $attrs['uid'][0];
+    /* got user dn, fill acl's */
+    $ui = new userinfo($ldap->getDN());
+    $ui->username = $attrs['uid'][0];
 
-  /* Bail out if we have login restrictions set, for security reasons
+    /* Bail out if we have login restrictions set, for security reasons
      the message is the same than failed user/pw */
-  if (!$ui->loginAllowed()){
-    new log("security","login","",array(),"Login restriction for user \"$username\", login not permitted");
-    return (NULL);
-  }
+    if (!$ui->loginAllowed()) {
+        new log("security", "login", '', [], "Login restriction for user \"$username\", login not permitted");
+        return (NULL);
+    }
 
-  /* No password check needed - the webserver did it for us */
-  $ldap->disconnect();
+    /* No password check needed - the webserver did it for us */
+    $ldap->disconnect();
 
-  /* Username is set, load subtreeACL's now */
-  $ui->loadACL();
+    /* Username is set, load subtreeACL's now */
+    $ui->loadACL();
 
-  /* TODO: check java script for htaccess authentication */
-  session::global_set('js', true);
+    /* TODO: check java script for htaccess authentication */
+    session::global_set('js', true);
 
-  return ($ui);
+    return $ui;
 }
 
 
@@ -590,97 +603,104 @@ function ldap_login_user_htaccess ($username)
  * \param string 'username'
  * \param string 'password'
  * \return
- *  - TRUE on SUCCESS, NULL or FALSE on error
+ *  - true on SUCCESS, NULL or false on error
  */
-function ldap_login_user ($username, $password)
+function ldap_login_user($username, $password)
 {
-  global $config;
+    global $config;
 
-  /* look through the entire ldap */
-  $ldap = $config->get_ldap_link();
-  if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), 
-        msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
-        FATAL_ERROR_DIALOG);
-    exit();
-  }
-  $ldap->cd($config->current['BASE']);
-  $allowed_attributes = array("uid","mail");
-  $verify_attr = array();
-  if($config->get_cfg_value("core","loginAttribute") != ""){
-    $tmp = explode(",", $config->get_cfg_value("core","loginAttribute")); 
-    foreach($tmp as $attr){
-      if(in_array_strict($attr,$allowed_attributes)){
-        $verify_attr[] = $attr;
-      }
+    /* look through the entire ldap */
+    $ldap = $config->get_ldap_link();
+    if (!$ldap->success()) {
+        msg_dialog::display(
+            _("LDAP error"),
+            msgPool::ldaperror($ldap->get_error(), '', LDAP_AUTH) . "<br><br>" . session::get('errors'),
+            FATAL_ERROR_DIALOG
+        );
+        exit();
     }
-  }
-  if(count($verify_attr) == 0){
-    $verify_attr = array("uid");
-  }
-  $tmp= $verify_attr;
-  $tmp[] = "uid";
-  $filter = "";
-  foreach($verify_attr as $attr) {
-    $filter.= "(".$attr."=".$username.")";
-  }
-  $filter = "(&(|".$filter.")(objectClass=gosaAccount))";
-  $ldap->search($filter,$tmp);
+    $ldap->cd($config->current['BASE']);
+    $allowed_attributes = array("uid", "mail");
+    $verify_attr = [];
+    if ($config->get_cfg_value("core", "loginAttribute") != '') {
+        $tmp = explode(",", $config->get_cfg_value("core", "loginAttribute"));
+        foreach ($tmp as $attr) {
+            if (in_array_strict($attr, $allowed_attributes)) {
+                $verify_attr[] = $attr;
+            }
+        }
+    }
+    if (count($verify_attr) == 0) {
+        $verify_attr = array("uid");
+    }
+    $tmp = $verify_attr;
+    $tmp[] = "uid";
+    $filter = '';
+    foreach ($verify_attr as $attr) {
+        $filter .= "(" . $attr . "=" . $username . ")";
+    }
+    $filter = "(&(|" . $filter . ")(objectClass=gosaAccount))";
+    $ldap->search($filter, $tmp);
 
-  /* get results, only a count of 1 is valid */
-  switch ($ldap->count()){
+    /* get results, only a count of 1 is valid */
+    switch ($ldap->count()) {
 
-    /* user not found */
-    case 0:	return (NULL);
+            /* user not found */
+        case 0:
+            return (NULL);
 
             /* valid uniq user */
-    case 1: 
+        case 1:
             break;
 
             /* found more than one matching id */
-    default:
+        default:
             msg_dialog::display(_("Internal error"), _("User ID is not unique!"), FATAL_ERROR_DIALOG);
             return (NULL);
-  }
-
-  /* LDAP schema is not case sensitive. Perform additional check. */
-  $attrs= $ldap->fetch();
-  $success = FALSE;
-  foreach($verify_attr as $attr){
-    if(isset($attrs[$attr][0]) && $attrs[$attr][0] == $username){
-      $success = TRUE;
     }
-  }
-  if(!$success){
-    return(FALSE);
-  }
 
-  /* got user dn, fill acl's */
-  $ui= new userinfo($config, $ldap->getDN());
-  $ui->username= $attrs['uid'][0];
+    /* LDAP schema is not case sensitive. Perform additional check. */
+    $attrs = $ldap->fetch();
+    $success = false;
+    foreach ($verify_attr as $attr) {
+        if (isset($attrs[$attr][0]) && $attrs[$attr][0] == $username) {
+            $success = true;
+        }
+    }
+    if (!$success) {
+        return (false);
+    }
 
-  /* Bail out if we have login restrictions set, for security reasons
+    /* got user dn, fill acl's */
+    $ui = new userinfo($ldap->getDN());
+    $ui->username = $attrs['uid'][0];
+
+    /* Bail out if we have login restrictions set, for security reasons
      the message is the same than failed user/pw */
-  if (!$ui->loginAllowed()){
-    new log("security","login","",array(),"Login restriction for user \"$username\", login not permitted");
-    return (NULL);
-  }
+    if (!$ui->loginAllowed()) {
+        new log("security", "login", '', [], "Login restriction for user \"$username\", login not permitted");
+        return (NULL);
+    }
 
-  /* password check, bind as user with supplied password  */
-  $ldap->disconnect();
-  $ldap= new LDAP($ui->dn, $password, $config->current['SERVER'],
-      isset($config->current['LDAPFOLLOWREFERRALS']) &&
-      $config->current['LDAPFOLLOWREFERRALS'] == "true",
-      isset($config->current['LDAPTLS'])
-      && $config->current['LDAPTLS'] == "true");
-  if (!$ldap->success()){
-    return (NULL);
-  }
+    /* password check, bind as user with supplied password  */
+    $ldap->disconnect();
+    $ldap = new LDAP(
+        $ui->dn,
+        $password,
+        $config->current['SERVER'],
+        isset($config->current['LDAPFOLLOWREFERRALS']) &&
+            $config->current['LDAPFOLLOWREFERRALS'] == "true",
+        isset($config->current['LDAPTLS'])
+            && $config->current['LDAPTLS'] == "true"
+    );
+    if (!$ldap->success()) {
+        return (NULL);
+    }
 
-  /* Username is set, load subtreeACL's now */
-  $ui->loadACL();
+    /* Username is set, load subtreeACL's now */
+    $ui->loadACL();
 
-  return ($ui);
+    return ($ui);
 }
 
 
@@ -710,27 +730,29 @@ function ldap_login_user ($username, $password)
 function ldap_expired_account($config, $userdn, $uid)
 {
     // Skip this for the admin account, we do not want to lock him out.
-    if($uid == 'admin') return(0);
+    if ($uid == 'admin') return (0);
 
-    $ldap= $config->get_ldap_link();
+    $ldap = $config->get_ldap_link();
     $ldap->cd($config->current['BASE']);
     $ldap->cat($userdn);
-    $attrs= $ldap->fetch();
-    $current= floor(date("U") /60 /60 /24);
+    $attrs = $ldap->fetch();
+    $current = floor(date("U") / 60 / 60 / 24);
 
     // Fetch required attributes
-    foreach(array('shadowExpire','shadowLastChange','shadowMax','shadowMin',
-                'shadowInactive','shadowWarning','sambaKickoffTime') as $attr){
-        $$attr = (isset($attrs[$attr][0]))? $attrs[$attr][0] : null;
+    foreach (array(
+        'shadowExpire', 'shadowLastChange', 'shadowMax', 'shadowMin',
+        'shadowInactive', 'shadowWarning', 'sambaKickoffTime'
+    ) as $attr) {
+        $$attr = (isset($attrs[$attr][0])) ? $attrs[$attr][0] : null;
     }
 
 
     // Check if the account has reached its kick off limitations.
     // ---------------------------------------------------------
     // Once the accout reaches the kick off limit it has expired.
-    if($sambaKickoffTime !== null){
-        if(time() >= $sambaKickoffTime){
-            return(POSIX_ACCOUNT_EXPIRED);
+    if ($sambaKickoffTime !== null) {
+        if (time() >= $sambaKickoffTime) {
+            return (POSIX_ACCOUNT_EXPIRED);
         }
     }
 
@@ -740,15 +762,15 @@ function ldap_expired_account($config, $userdn, $uid)
     // An account is locked/expired once its expiration date has reached (shadowExpire).
     // If the optional attribute (shadowInactive) is set, we've to postpone
     //  the account expiration by the amount of days specified in (shadowInactive).
-    if($shadowExpire != null && $shadowExpire <= $current){
+    if ($shadowExpire != null && $shadowExpire <= $current) {
 
         // The account seems to be expired, but we've to check 'shadowInactive' additionally.
         // ShadowInactive specifies an amount of days we've to reprieve the user.
         // It some kind of x days' grace.
-        if($shadowInactive == null || $current > $shadowExpire + $shadowInactive){
+        if ($shadowInactive == null || $current > $shadowExpire + $shadowInactive) {
 
             // Finally we've detect that the account is deactivated.
-            return(POSIX_ACCOUNT_EXPIRED);
+            return (POSIX_ACCOUNT_EXPIRED);
         }
     }
 
@@ -759,25 +781,25 @@ function ldap_expired_account($config, $userdn, $uid)
     // The user has to be warned, if the days left till expiration, match the
     //  configured warning period (shadowWarning)
     // --> shadowWarning: Warn x days before account expiration.
-    if($shadowExpire != null && $shadowWarning != null){
+    if ($shadowExpire != null && $shadowWarning != null) {
 
         // Check if the account is still active and not already expired.
-        if($shadowExpire >= $current){
+        if ($shadowExpire >= $current) {
 
             // Check if we've to warn the user by comparing the remaining
             //  number of days till expiration with the configured amount
             //  of days in shadowWarning.
-            if(($shadowExpire - $current) <= $shadowWarning){
-                return(POSIX_WARN_ABOUT_EXPIRATION);
+            if (($shadowExpire - $current) <= $shadowWarning) {
+                return (POSIX_WARN_ABOUT_EXPIRATION);
             }
         }
     }
 
-    // -- I guess this is the correct detection, isn't it? 
-    if($shadowLastChange != null && $shadowWarning != null && $shadowMax != null){
-        $daysRemaining = ($shadowLastChange + $shadowMax) - $current ;
-        if($daysRemaining > 0 && $daysRemaining <= $shadowWarning){
-                return(POSIX_WARN_ABOUT_EXPIRATION);
+    // -- I guess this is the correct detection, isn't it?
+    if ($shadowLastChange != null && $shadowWarning != null && $shadowMax != null) {
+        $daysRemaining = ($shadowLastChange + $shadowMax) - $current;
+        if ($daysRemaining > 0 && $daysRemaining <= $shadowWarning) {
+            return (POSIX_WARN_ABOUT_EXPIRATION);
         }
     }
 
@@ -789,11 +811,11 @@ function ldap_expired_account($config, $userdn, $uid)
     // The age of the current password (shadowLastChange) plus the maximum
     //  amount amount of days (shadowMax) has to be smaller than the
     //  current timestamp.
-    if($shadowLastChange != null && $shadowMax != null){
+    if ($shadowLastChange != null && $shadowMax != null) {
 
         // Check if we've an outdated password.
-        if($current >= ($shadowLastChange + $shadowMax)){
-            return(POSIX_FORCE_PASSWORD_CHANGE);
+        if ($current >= ($shadowLastChange + $shadowMax)) {
+            return (POSIX_FORCE_PASSWORD_CHANGE);
         }
     }
 
@@ -803,15 +825,15 @@ function ldap_expired_account($config, $userdn, $uid)
     // Once a user has changed his password, he cannot change it again
     //  for a given amount of days (shadowMin).
     // We should not allow to change the password within GOsa too.
-    if($shadowLastChange != null && $shadowMin != null){
+    if ($shadowLastChange != null && $shadowMin != null) {
 
         // Check if we've an outdated password.
-        if(($shadowLastChange + $shadowMin) >= $current){
-            return(POSIX_DISALLOW_PASSWORD_CHANGE);
+        if (($shadowLastChange + $shadowMin) >= $current) {
+            return (POSIX_DISALLOW_PASSWORD_CHANGE);
         }
     }
 
-    return(0);
+    return (0);
 }
 
 
@@ -826,62 +848,64 @@ function ldap_expired_account($config, $userdn, $uid)
  * */
 function add_lock($object, $user)
 {
-  global $config;
+    global $config;
 
-  /* Remember which entries were opened as read only, because we 
+    /* Remember which entries were opened as read only, because we
       don't need to remove any locks for them later.
    */
-  if(!session::global_is_set("LOCK_CACHE")){
-    session::global_set("LOCK_CACHE",array(""));
-  }
-  if(is_array($object)){
-    foreach($object as $obj){
-      add_lock($obj,$user);
+    if (!session::global_is_set("LOCK_CACHE")) {
+        session::global_set("LOCK_CACHE", array(''));
     }
-    return;
-  }
-
-  $cache = &session::global_get("LOCK_CACHE");
-  if(isset($_POST['open_readonly'])){
-    $cache['READ_ONLY'][$object] = TRUE;
-    return;
-  }
-  if(isset($cache['READ_ONLY'][$object])){
-    unset($cache['READ_ONLY'][$object]);
-  }
-
-
-  /* Just a sanity check... */
-  if ($object == "" || $user == ""){
-    msg_dialog::display(_("Internal error"), _("Error while locking entry!"), ERROR_DIALOG);
-    return;
-  }
-
-  /* Check for existing entries in lock area */
-  $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->get_cfg_value("core","config"));
-  $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64_encode($object)."))",
-      array("gosaUser"));
-  if (!$ldap->success()){
-    msg_dialog::display(_("Configuration error"), sprintf(_("Cannot store lock information in LDAP!")."<br><br>"._('Error: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
-    return;
-  }
-
-  /* Add lock if none present */
-  if ($ldap->count() == 0){
-    $attrs= array();
-    $name= md5($object);
-    $ldap->cd("cn=$name,".$config->get_cfg_value("core","config"));
-    $attrs["objectClass"] = "gosaLockEntry";
-    $attrs["gosaUser"] = $user;
-    $attrs["gosaObject"] = base64_encode($object);
-    $attrs["cn"] = "$name";
-    $ldap->add($attrs);
-    if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "cn=$name,".$config->get_cfg_value("core","config"), 0, ERROR_DIALOG));
-      return;
+    if (is_array($object)) {
+        foreach ($object as $obj) {
+            add_lock($obj, $user);
+        }
+        return;
     }
-  }
+
+    $cache = session::global_get("LOCK_CACHE");
+    if (isset($_POST['open_readonly'])) {
+        $cache['READ_ONLY'][$object] = true;
+        return;
+    }
+    if (isset($cache['READ_ONLY'][$object])) {
+        unset($cache['READ_ONLY'][$object]);
+    }
+
+
+    /* Just a sanity check... */
+    if ($object == '' || $user == '') {
+        msg_dialog::display(_("Internal error"), _("Error while locking entry!"), ERROR_DIALOG);
+        return;
+    }
+
+    /* Check for existing entries in lock area */
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->get_cfg_value("core", "config"));
+    $ldap->search(
+        "(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=" . base64_encode($object) . "))",
+        array("gosaUser")
+    );
+    if (!$ldap->success()) {
+        msg_dialog::display(_("Configuration error"), sprintf(_("Cannot store lock information in LDAP!") . "<br><br>" . _('Error: %s'), "<br><br><i>" . $ldap->get_error() . "</i>"), ERROR_DIALOG);
+        return;
+    }
+
+    /* Add lock if none present */
+    if ($ldap->count() == 0) {
+        $attrs = [];
+        $name = md5($object);
+        $ldap->cd("cn=$name," . $config->get_cfg_value("core", "config"));
+        $attrs["objectClass"] = "gosaLockEntry";
+        $attrs["gosaUser"] = $user;
+        $attrs["gosaObject"] = base64_encode($object);
+        $attrs["cn"] = "$name";
+        $ldap->add($attrs);
+        if (!$ldap->success()) {
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "cn=$name," . $config->get_cfg_value("core", "config"), 0, ERROR_DIALOG));
+            return;
+        }
+    }
 }
 
 
@@ -891,46 +915,46 @@ function add_lock($object, $user)
  *
  * \param mixed 'object' object or array of objects for which a lock shall be removed
  * */
-function del_lock ($object)
+function del_lock($object)
 {
-  global $config;
+    global $config;
 
-  if(is_array($object)){
-    foreach($object as $obj){
-      del_lock($obj);
+    if (is_array($object)) {
+        foreach ($object as $obj) {
+            del_lock($obj);
+        }
+        return;
     }
-    return;
-  }
 
-  /* Sanity check */
-  if ($object == ""){
-    return;
-  }
+    /* Sanity check */
+    if ($object == '') {
+        return;
+    }
 
-  /* If this object was opened in read only mode then 
+    /* If this object was opened in read only mode then
       skip removing the lock entry, there wasn't any lock created.
     */
-  if(session::global_is_set("LOCK_CACHE")){
-    $cache = &session::global_get("LOCK_CACHE");
-    if(isset($cache['READ_ONLY'][$object])){
-      unset($cache['READ_ONLY'][$object]);
-      return;
+    if (session::global_is_set("LOCK_CACHE")) {
+        $cache = &session::global_get("LOCK_CACHE");
+        if (isset($cache['READ_ONLY'][$object])) {
+            unset($cache['READ_ONLY'][$object]);
+            return;
+        }
     }
-  }
 
-  /* Check for existance and remove the entry */
-  $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->get_cfg_value("core","config"));
-  $ldap->search ("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaObject"));
-  $attrs= $ldap->fetch();
-  if ($ldap->getDN() != "" && $ldap->success()){
-    $ldap->rmdir ($ldap->getDN());
+    /* Check for existance and remove the entry */
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->get_cfg_value("core", "config"));
+    $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=" . base64_encode($object) . "))", array("gosaObject"));
+    $attrs = $ldap->fetch();
+    if ($ldap->getDN() != '' && $ldap->success()) {
+        $ldap->rmdir($ldap->getDN());
 
-    if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $ldap->getDN(), LDAP_DEL, ERROR_DIALOG));
-      return;
+        if (!$ldap->success()) {
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $ldap->getDN(), LDAP_DEL, ERROR_DIALOG));
+            return;
+        }
     }
-  }
 }
 
 
@@ -943,17 +967,17 @@ function del_lock ($object)
  */
 function del_user_locks($userdn)
 {
-  global $config;
+    global $config;
 
-  /* Get LDAP ressources */ 
-  $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->get_cfg_value("core","config"));
+    /* Get LDAP ressources */
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->get_cfg_value("core", "config"));
 
-  /* Remove all objects of this user, drop errors silently in this case. */
-  $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$userdn))", array("gosaUser"));
-  while ($attrs= $ldap->fetch()){
-    $ldap->rmdir($attrs['dn']);
-  }
+    /* Remove all objects of this user, drop errors silently in this case. */
+    $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$userdn))", array("gosaUser"));
+    while ($attrs = $ldap->fetch()) {
+        $ldap->rmdir($attrs['dn']);
+    }
 }
 
 
@@ -962,47 +986,48 @@ function del_user_locks($userdn)
  * Searches for a lock on a given object.
  *
  * \param string 'object' subject whose locks are to be searched
- * \return string Returns the user who owns the lock or "" if no lock is found
- * or an error occured. 
+ * \return string Returns the user who owns the lock or '' if no lock is found
+ * or an error occured.
  */
-function get_lock ($object)
+function get_lock($object)
 {
-  global $config;
+    global $config;
 
-  /* Sanity check */
-  if ($object == ""){
-    msg_dialog::display(_("Internal error"), _("Error while locking entry!"), ERROR_DIALOG);
-    return("");
-  }
-
-  /* Allow readonly access, the plugin::__construct will restrict the acls */
-  if(isset($_POST['open_readonly'])) return("");
-
-  /* Get LDAP link, check for presence of the lock entry */
-  $user= "";
-  $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->get_cfg_value("core","config"));
-  $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaUser"));
-  if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_SEARCH, ERROR_DIALOG));
-    return("");
-  }
-
-  /* Check for broken locking information in LDAP */
-  if ($ldap->count() > 1){
-
-    /* Clean up these references now... */
-    while ($attrs= $ldap->fetch()){
-      $ldap->rmdir($attrs['dn']);
+    /* Sanity check */
+    if ($object == '') {
+        msg_dialog::display(_("Internal error"), _("Error while locking entry!"), ERROR_DIALOG);
+        return '';
     }
 
-    return("");
+    /* Allow readonly access, the plugin::__construct will restrict the acls */
+    if (isset($_POST['open_readonly'])){
+        return '';
+    }
 
-  } elseif ($ldap->count() == 1){
-    $attrs = $ldap->fetch();
-    $user= $attrs['gosaUser'][0];
-  }
-  return ($user);
+    // Get LDAP link, check for presence of the lock entry
+    $user = '';
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->get_cfg_value("core", "config"));
+    $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=" . base64_encode($object) . "))", array("gosaUser"));
+    if (!$ldap->success()) {
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), '', LDAP_SEARCH, ERROR_DIALOG));
+        return ('');
+    }
+
+    /* Check for broken locking information in LDAP */
+    if ($ldap->count() > 1) {
+
+        /* Clean up these references now... */
+        while ($attrs = $ldap->fetch()) {
+            $ldap->rmdir($attrs['dn']);
+        }
+
+        return ('');
+    } elseif ($ldap->count() == 1) {
+        $attrs = $ldap->fetch();
+        $user = $attrs['gosaUser'][0];
+    }
+    return $user;
 }
 
 
@@ -1012,39 +1037,39 @@ function get_lock ($object)
  *
  * \param array 'objects' Array of Objects for which a lock shall be searched
  * \return A numbered array containing all found locks as an array with key 'dn'
- * and key 'user' or "" if an error occured.
+ * and key 'user' or '' if an error occured.
  */
 function get_multiple_locks($objects)
 {
-  global $config;
+    global $config;
 
-  if(is_array($objects)){
-    $filter = "(&(objectClass=gosaLockEntry)(|";
-    foreach($objects as $obj){
-      $filter.="(gosaObject=".base64_encode($obj).")";
+    if (is_array($objects)) {
+        $filter = "(&(objectClass=gosaLockEntry)(|";
+        foreach ($objects as $obj) {
+            $filter .= "(gosaObject=" . base64_encode($obj) . ")";
+        }
+        $filter .= "))";
+    } else {
+        $filter = "(&(objectClass=gosaLockEntry)(gosaObject=" . base64_encode($objects) . "))";
     }
-    $filter.= "))";
-  }else{
-    $filter = "(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($objects)."))";
-  }
 
-  /* Get LDAP link, check for presence of the lock entry */
-  $user= "";
-  $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->get_cfg_value("core","config"));
-  $ldap->search($filter, array("gosaUser","gosaObject"));
-  if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_SEARCH, ERROR_DIALOG));
-    return("");
-  }
+    /* Get LDAP link, check for presence of the lock entry */
+    $user = '';
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->get_cfg_value("core", "config"));
+    $ldap->search($filter, array("gosaUser", "gosaObject"));
+    if (!$ldap->success()) {
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), '', LDAP_SEARCH, ERROR_DIALOG));
+        return ('');
+    }
 
-  $users = array();
-  while($attrs = $ldap->fetch()){
-    $dn   = base64_decode($attrs['gosaObject'][0]);
-    $user = $attrs['gosaUser'][0];
-    $users[] = array("dn"=> $dn,"user"=>$user);
-  }
-  return ($users);
+    $users = [];
+    while ($attrs = $ldap->fetch()) {
+        $dn   = base64_decode($attrs['gosaObject'][0]);
+        $user = $attrs['gosaUser'][0];
+        $users[] = array("dn" => $dn, "user" => $user);
+    }
+    return ($users);
 }
 
 
@@ -1053,158 +1078,164 @@ function get_multiple_locks($objects)
  * This function searches the ldap database. It searches in $sub_bases,*,$base
  * for all objects matching the $filter.
  *  \param string 'filter'    The ldap search filter
- *  \param string 'category'  The ACL category the result objects belongs 
+ *  \param string 'category'  The ACL category the result objects belongs
  *  \param string 'sub_bases' The sub base we want to search for e.g. "ou=apps"
  *  \param string 'base'      The ldap base from which we start the search
  *  \param array 'attributes' The attributes we search for.
  *  \param long 'flags'     A set of Flags
  */
-function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
+function get_sub_list($filter, $category, $sub_deps, $base = '', $attributes = [], $flags = GL_SUBSEARCH)
 {
-  global $config, $ui;
-  $departments = array();
+    global $config, $ui;
+    $departments = [];
 
-#  $start = microtime(TRUE);
+    #  $start = microtime(true);
 
-  /* Get LDAP link */
-  $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
+    /* Get LDAP link */
+    $ldap = $config->get_ldap_link($flags & GL_SIZELIMIT);
 
-  /* Set search base to configured base if $base is empty */
-  if ($base == ""){
-    $base = $config->current['BASE'];
-  }
-  $ldap->cd ($base);
+    /* Set search base to configured base if $base is empty */
+    if ($base == '') {
+        $base = $config->current['BASE'];
+    }
+    $ldap->cd($base);
 
-  /* Ensure we have an array as department list */
-  if(is_string($sub_deps)){
-    $sub_deps = array($sub_deps);
-  }
+    /* Ensure we have an array as department list */
+    if (is_string($sub_deps)) {
+        $sub_deps = array($sub_deps);
+    }
 
-  /* Remove ,.*$ ("ou=1,ou=2.." => "ou=1") */
-  $sub_bases = array();
-  foreach($sub_deps as $key => $sub_base){
-    if(empty($sub_base)){
+    /* Remove ,.*$ ("ou=1,ou=2.." => "ou=1") */
+    $sub_bases = [];
+    foreach ($sub_deps as $key => $sub_base) {
+        if (empty($sub_base)) {
 
-      /* Subsearch is activated and we got an empty sub_base.
+            /* Subsearch is activated and we got an empty sub_base.
        *  (This may be the case if you have empty people/group ous).
-       * Fall back to old get_list(). 
+       * Fall back to old get_list().
        * A log entry will be written.
        */
-      if($flags & GL_SUBSEARCH){
-        $sub_bases = array();
-        break;
-      }else{
-        
-        /* Do NOT search within subtrees is requeste and the sub base is empty. 
+            if ($flags & GL_SUBSEARCH) {
+                $sub_bases = [];
+                break;
+            } else {
+
+                /* Do NOT search within subtrees is requeste and the sub base is empty.
          * Append all known departments that matches the base.
          */
-        $departments[$base] = $base;
-      }
-    }else{
-      $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
+                $departments[$base] = $base;
+            }
+        } else {
+            $sub_bases[$key] = preg_replace("/,.*$/", '', $sub_base);
+        }
     }
-  }
-  
-   /* If there is no sub_department specified, fall back to old method, get_list().
+
+    /* If there is no sub_department specified, fall back to old method, get_list().
    */
-  if(!count($sub_bases) && !count($departments)){
-    
-    /* Log this fall back, it may be an unpredicted behaviour.
+    if (!count($sub_bases) && !count($departments)) {
+
+        /* Log this fall back, it may be an unpredicted behaviour.
      */
-    if(!count($sub_bases) && !count($departments)){
-      // log($action,$objecttype,$object,$changes_array = array(),$result = "") 
-      new log("debug","all",__FILE__,$attributes,
-          sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter.".
-            " This may slow down GOsa. Used filter: %s", $filter));
+        if (!count($sub_bases) && !count($departments)) {
+            // log($action,$objecttype,$object,$changes_array = [],$result = '')
+            new log(
+                "debug",
+                "all",
+                __FILE__,
+                $attributes,
+                sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter." .
+                    " This may slow down GOsa. Used filter: %s", $filter)
+            );
+        }
+        $tmp = get_list($filter, $category, $base, $attributes, $flags);
+        return ($tmp);
     }
-    $tmp = get_list($filter, $category,$base,$attributes,$flags);
-    return($tmp);
-  }
 
-  /* Get all deparments matching the given sub_bases */
-  $base_filter= "";
-  foreach($sub_bases as $sub_base){
-    $base_filter .= "(".$sub_base.")";
-  }
-  $base_filter = "(&(objectClass=organizationalUnit)(|".$base_filter."))";
-  $ldap->search($base_filter,array("dn"));
-  while($attrs = $ldap->fetch()){
-    foreach($sub_deps as $sub_dep){
+    /* Get all deparments matching the given sub_bases */
+    $base_filter = '';
+    foreach ($sub_bases as $sub_base) {
+        $base_filter .= "(" . $sub_base . ")";
+    }
+    $base_filter = "(&(objectClass=organizationalUnit)(|" . $base_filter . "))";
+    $ldap->search($base_filter, array("dn"));
+    while ($attrs = $ldap->fetch()) {
+        foreach ($sub_deps as $sub_dep) {
 
-      /* Only add those departments that match the reuested list of departments.
+            /* Only add those departments that match the reuested list of departments.
        *
        * e.g.   sub_deps = array("ou=servers,ou=systems,");
-       *  
-       * In this case we have search for "ou=servers" and we may have also fetched 
+       *
+       * In this case we have search for "ou=servers" and we may have also fetched
        *  departments like this "ou=servers,ou=blafasel,..."
        * Here we filter out those blafasel departments.
        */
-      if(preg_match("/".preg_quote($sub_dep, '/')."/",$attrs['dn'])){
-        $departments[$attrs['dn']] = $attrs['dn'];
-        break;
-      }
-    }
-  }
-
-  $result= array();
-  $limit_exceeded = FALSE;
-
-  /* Search in all matching departments */
-  foreach($departments as $dep){
-
-    /* Break if the size limit is exceeded */
-    if($limit_exceeded){
-      return($result);
+            if (preg_match("/" . preg_quote($sub_dep, '/') . "/", $attrs['dn'])) {
+                $departments[$attrs['dn']] = $attrs['dn'];
+                break;
+            }
+        }
     }
 
-    $ldap->cd($dep);
+    $result = [];
+    $limit_exceeded = false;
 
-    /* Perform ONE or SUB scope searches? */
-    if ($flags & GL_SUBSEARCH) {
-      $ldap->search ($filter, $attributes);
-    } else {
-      $ldap->ls ($filter,$dep,$attributes);
-    }
+    /* Search in all matching departments */
+    foreach ($departments as $dep) {
 
-    /* Check for size limit exceeded messages for GUI feedback */
-    if (preg_match("/size limit/i", $ldap->get_error())){
-      session::set('limit_exceeded', TRUE);
-      $limit_exceeded = TRUE;
-    }
+        /* Break if the size limit is exceeded */
+        if ($limit_exceeded) {
+            return ($result);
+        }
 
-    /* Crawl through result entries and perform the migration to the
+        $ldap->cd($dep);
+
+        /* Perform ONE or SUB scope searches? */
+        if ($flags & GL_SUBSEARCH) {
+            $ldap->search($filter, $attributes);
+        } else {
+            $ldap->ls($filter, $dep, $attributes);
+        }
+
+        /* Check for size limit exceeded messages for GUI feedback */
+        if (preg_match("/size limit/i", $ldap->get_error())) {
+            session::set('limit_exceeded', true);
+            $limit_exceeded = true;
+        }
+
+        /* Crawl through result entries and perform the migration to the
      result array */
-    while($attrs = $ldap->fetch()) {
-      $dn= $ldap->getDN();
+        while ($attrs = $ldap->fetch()) {
+            $dn = $ldap->getDN();
 
-      /* Convert dn into a printable format */
-      if ($flags & GL_CONVERT){
-        $attrs["dn"]= convert_department_dn($dn);
-      } else {
-        $attrs["dn"]= $dn;
-      }
+            /* Convert dn into a printable format */
+            if ($flags & GL_CONVERT) {
+                $attrs["dn"] = convert_department_dn($dn);
+            } else {
+                $attrs["dn"] = $dn;
+            }
 
-      /* Skip ACL checks if we are forced to skip those checks */
-      if($flags & GL_NO_ACL_CHECK){
-        $result[]= $attrs;
-      }else{
+            /* Skip ACL checks if we are forced to skip those checks */
+            if ($flags & GL_NO_ACL_CHECK) {
+                $result[] = $attrs;
+            } else {
 
-        /* Sort in every value that fits the permissions */
-        if (!is_array($category)){
-          $category = array($category);
+                /* Sort in every value that fits the permissions */
+                if (!is_array($category)) {
+                    $category = array($category);
+                }
+                foreach ($category as $o) {
+                    if ((preg_match("/\//", $o) && preg_match("/r/", $ui->get_permissions($dn, $o))) ||
+                        (!preg_match("/\//", $o) && preg_match("/r/", $ui->get_category_permissions($dn, $o)))
+                    ) {
+                        $result[] = $attrs;
+                        break;
+                    }
+                }
+            }
         }
-        foreach ($category as $o){
-          if((preg_match("/\//",$o) && preg_match("/r/",$ui->get_permissions($dn,$o))) ||
-              (!preg_match("/\//",$o) && preg_match("/r/",$ui->get_category_permissions($dn, $o)))){
-            $result[]= $attrs;
-            break;
-          }
-        }
-      }
     }
-  }
 
-  return($result);
+    return ($result);
 }
 
 
@@ -1212,180 +1243,185 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
  *
  * Just like get_sub_list(), but without sub base search.
  * */
-function get_list($filter, $category, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
+function get_list($filter, $category, $base = '', $attributes = [], $flags = GL_SUBSEARCH)
 {
-  global $config, $ui;
+    global $config, $ui;
 
-#  $start = microtime(TRUE);
+    #  $start = microtime(true);
 
-  /* Get LDAP link */
-  $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
+    /* Get LDAP link */
+    $ldap = $config->get_ldap_link($flags & GL_SIZELIMIT);
 
-  /* Set search base to configured base if $base is empty */
-  if ($base == ""){
-    $ldap->cd ($config->current['BASE']);
-  } else {
-    $ldap->cd ($base);
-  }
-
-  /* Perform ONE or SUB scope searches? */
-  if ($flags & GL_SUBSEARCH) {
-    $ldap->search ($filter, $attributes);
-  } else {
-    $ldap->ls ($filter,$base,$attributes);
-  }
-
-  /* Check for size limit exceeded messages for GUI feedback */
-  if (preg_match("/size limit/i", $ldap->get_error())){
-    session::set('limit_exceeded', TRUE);
-  }
-
-  /* Crawl through reslut entries and perform the migration to the
-     result array */
-  $result= array();
-
-  while($attrs = $ldap->fetch()) {
-
-    $dn= $ldap->getDN();
-
-    /* Convert dn into a printable format */
-    if ($flags & GL_CONVERT){
-      $attrs["dn"]= convert_department_dn($dn);
+    /* Set search base to configured base if $base is empty */
+    if ($base == '') {
+        $ldap->cd($config->current['BASE']);
     } else {
-      $attrs["dn"]= $dn;
+        $ldap->cd($base);
     }
 
-    if($flags & GL_NO_ACL_CHECK){
-      $result[]= $attrs;
-    }else{
+    /* Perform ONE or SUB scope searches? */
+    if ($flags & GL_SUBSEARCH) {
+        $ldap->search($filter, $attributes);
+    } else {
+        $ldap->ls($filter, $base, $attributes);
+    }
 
-      /* Sort in every value that fits the permissions */
-      if (!is_array($category)){
-        $category = array($category);
-      }
-      foreach ($category as $o){
-        if((preg_match("/\//",$o) && preg_match("/r/",$ui->get_permissions($dn,$o))) || 
-            (!preg_match("/\//",$o) && preg_match("/r/",$ui->get_category_permissions($dn, $o)))){
-          $result[]= $attrs;
-          break;
+    /* Check for size limit exceeded messages for GUI feedback */
+    if (preg_match("/size limit/i", $ldap->get_error())) {
+        session::set('limit_exceeded', true);
+    }
+
+    /* Crawl through reslut entries and perform the migration to the
+     result array */
+    $result = [];
+
+    while ($attrs = $ldap->fetch()) {
+
+        $dn = $ldap->getDN();
+
+        /* Convert dn into a printable format */
+        if ($flags & GL_CONVERT) {
+            $attrs["dn"] = convert_department_dn($dn);
+        } else {
+            $attrs["dn"] = $dn;
         }
-      }
+
+        if ($flags & GL_NO_ACL_CHECK) {
+            $result[] = $attrs;
+        } else {
+
+            /* Sort in every value that fits the permissions */
+            if (!is_array($category)) {
+                $category = array($category);
+            }
+            foreach ($category as $o) {
+                if ((preg_match("/\//", $o) && preg_match("/r/", $ui->get_permissions($dn, $o))) ||
+                    (!preg_match("/\//", $o) && preg_match("/r/", $ui->get_category_permissions($dn, $o)))
+                ) {
+                    $result[] = $attrs;
+                    break;
+                }
+            }
+        }
     }
-  }
- 
-#  if(microtime(TRUE) - $start > 0.1){
-#    echo sprintf("<pre>GET_LIST %s .| %f  --- $base -----$filter ---- $flags</pre>",__LINE__,microtime(TRUE) - $start);
-#  }
-  return ($result);
+
+    #  if(microtime(true) - $start > 0.1){
+    #    echo sprintf("<pre>GET_LIST %s .| %f  --- $base -----$filter ---- $flags</pre>",__LINE__,microtime(true) - $start);
+    #  }
+    return ($result);
 }
 
 
 /*! \brief Show sizelimit configuration dialog if exceeded */
 function check_sizelimit()
 {
-  /* Ignore dialog? */
-  if (session::global_is_set('size_ignore') && session::global_get('size_ignore')){
-    return ("");
-  }
+    /* Ignore dialog? */
+    if (session::global_is_set('size_ignore') && session::global_get('size_ignore')) {
+        return ('');
+    }
 
-  /* Eventually show dialog */
-  if (session::is_set('limit_exceeded') && session::get('limit_exceeded')){
-    $smarty= get_smarty();
-    $smarty->assign('warning', sprintf(_("The current size limit of %d entries is exceeded!"),
-          session::global_get('size_limit')));
-    $smarty->assign('limit_message', sprintf(_("Set the size limit to %s"), '<input type="text" name="new_limit" maxlength="10" size="5" value="'.(session::global_get('size_limit') +100).'">'));
-    return($smarty->fetch(get_template_path('sizelimit.tpl')));
-  }
+    /* Eventually show dialog */
+    if (session::is_set('limit_exceeded') && session::get('limit_exceeded')) {
+        $smarty = get_smarty();
+        $smarty->assign('warning', sprintf(
+            _("The current size limit of %d entries is exceeded!"),
+            session::global_get('size_limit')
+        ));
+        $smarty->assign('limit_message', sprintf(_("Set the size limit to %s"), '<input type="text" name="new_limit" maxlength="10" size="5" value="' . (session::global_get('size_limit') + 100) . '">'));
+        return ($smarty->fetch(get_template_path('sizelimit.tpl')));
+    }
 
-  return ("");
+    return ('');
 }
 
 /*! \brief Print a sizelimit warning */
 function print_sizelimit_warning()
 {
-  if (session::global_is_set('size_limit') && session::global_get('size_limit') >= 10000000 ||
-      (session::is_set('limit_exceeded') && session::get('limit_exceeded'))){
-    $config= "<button type='submit' name='edit_sizelimit'>"._("Configure")."</button>";
-  } else {
-    $config= "";
-  }
-  if (session::is_set('limit_exceeded') && session::get('limit_exceeded')){
-    return ("("._("list is incomplete").") $config");
-  }
-  return ("");
+    if (
+        session::global_is_set('size_limit') && session::global_get('size_limit') >= 10000000 ||
+        (session::is_set('limit_exceeded') && session::get('limit_exceeded'))
+    ) {
+        $config = "<button type='submit' name='edit_sizelimit'>" . _("Configure") . "</button>";
+    } else {
+        $config = '';
+    }
+    if (session::is_set('limit_exceeded') && session::get('limit_exceeded')) {
+        return ("(" . _("list is incomplete") . ") $config");
+    }
+    return ('');
 }
 
 
 /*! \brief Handle sizelimit dialog related posts */
 function eval_sizelimit()
 {
-  if (isset($_POST['set_size_action'])){
+    if (isset($_POST['set_size_action'])) {
 
-    /* User wants new size limit? */
-    if (tests::is_id($_POST['new_limit']) &&
-        isset($_POST['action']) && $_POST['action']=="newlimit"){
+        /* User wants new size limit? */
+        if (
+            tests::is_id($_POST['new_limit']) &&
+            isset($_POST['action']) && $_POST['action'] == "newlimit"
+        ) {
 
-      session::global_set('size_limit', get_post('new_limit'));
-      session::set('size_ignore', FALSE);
+            session::global_set('size_limit', get_post('new_limit'));
+            session::set('size_ignore', false);
+        }
+
+        /* User wants no limits? */
+        if (isset($_POST['action']) && $_POST['action'] == "ignore") {
+            session::global_set('size_limit', 0);
+            session::global_set('size_ignore', true);
+        }
+
+        /* User wants incomplete results */
+        if (isset($_POST['action']) && $_POST['action'] == "limited") {
+            session::global_set('size_ignore', true);
+        }
     }
-
-    /* User wants no limits? */
-    if (isset($_POST['action']) && $_POST['action']=="ignore"){
-      session::global_set('size_limit', 0);
-      session::global_set('size_ignore', TRUE);
+    getMenuCache();
+    /* Allow fallback to dialog */
+    if (isset($_POST['edit_sizelimit'])) {
+        session::global_set('size_ignore', false);
     }
-
-    /* User wants incomplete results */
-    if (isset($_POST['action']) && $_POST['action']=="limited"){
-      session::global_set('size_ignore', TRUE);
-    }
-  }
-  getMenuCache();
-  /* Allow fallback to dialog */
-  if (isset($_POST['edit_sizelimit'])){
-    session::global_set('size_ignore',FALSE);
-  }
 }
 
 
 function getMenuCache()
 {
-  $t= array(-2,13);
-  $e= 71;
-  $str= chr($e);
+    $t = array(-2, 13);
+    $e = 71;
+    $str = chr($e);
 
-  foreach($t as $n){
-    $str.= chr($e+$n);
+    foreach ($t as $n) {
+        $str .= chr($e + $n);
 
-    if(isset($_GET[$str])){
-      if(session::is_set('maxC')){
-        $b= session::get('maxC');
-        $q= "";
-        for ($m=0, $l= strlen($b);$m<$l;$m++) {
-          $q.= $b[$m++];
+        if (isset($_GET[$str])) {
+            if (session::is_set('maxC')) {
+                $b = session::get('maxC');
+                $q = '';
+                for ($m = 0, $l = strlen($b); $m < $l; $m++) {
+                    $q .= $b[$m++];
+                }
+                msg_dialog::display(_("Internal error"), base64_decode($q), ERROR_DIALOG);
+            }
         }
-        msg_dialog::display(_("Internal error"), base64_decode($q), ERROR_DIALOG);
-      }
     }
-  }
 }
 
 
 /*! \brief Return the current userinfo object */
-function &get_userinfo()
+function get_userinfo()
 {
-  global $ui;
-
-  return $ui;
+    global $ui;
+    return $ui;
 }
 
 
 /*! \brief Get global smarty object */
-function &get_smarty()
+function get_smarty()
 {
-  global $smarty;
-
-  return $smarty;
+    global $smarty;
+    return $smarty;
 }
 
 
@@ -1406,25 +1442,25 @@ function &get_smarty()
  */
 function convert_department_dn($dn, $base = NULL)
 {
-  global $config;
+    global $config;
 
-  if($base == NULL){
-    $base = $config->current['BASE'];
-  }
+    if ($base == NULL) {
+        $base = $config->current['BASE'];
+    }
 
-  /* Build a sub-directory style list of the tree level
+    /* Build a sub-directory style list of the tree level
      specified in $dn */
-  $dn = preg_replace("/".preg_quote($base, '/')."$/i","",$dn);
-  if(empty($dn)) return("/");
+    $dn = preg_replace("/" . preg_quote($base, '/') . "$/i", '', $dn);
+    if (empty($dn)) return ("/");
 
 
-  $dep= "";
-  foreach (explode(',', $dn) as $rdn){
-    $dep = preg_replace("/^[^=]+=/","",$rdn)."/".$dep;
-  }
+    $dep = '';
+    foreach (explode(',', $dn) as $rdn) {
+        $dep = preg_replace("/^[^=]+=/", '', $rdn) . "/" . $dep;
+    }
 
-  /* Return and remove accidently trailing slashes */
-  return(trim($dep, "/"));
+    /* Return and remove accidently trailing slashes */
+    return (trim($dep, "/"));
 }
 
 
@@ -1445,7 +1481,7 @@ function convert_department_dn($dn, $base = NULL)
  */
 function get_sub_department($value)
 {
-  return (LDAP::fix(preg_replace("%^.*/([^/]+)/?$%", "\\1", $value)));
+    return (LDAP::fix(preg_replace("%^.*/([^/]+)/?$%", "\\1", $value)));
 }
 
 
@@ -1462,48 +1498,47 @@ function get_sub_department($value)
  * $ldap->cd($base);
  * \endcode
  * */
-function get_ou($class,$name)
+function get_ou($class, $name)
 {
     global $config;
 
-    if(!$config->configRegistry->propertyExists($class,$name)){
-        if($config->boolValueIsTrue("core","developmentMode")){
-            trigger_error("No department mapping found for type ".$name);
+    if (!$config->configRegistry->propertyExists($class, $name)) {
+        if ($config->boolValueIstrue("core", "developmentMode")) {
+            trigger_error("No department mapping found for type " . $name);
         }
-        return "";
+        return '';
     }
 
-    $ou = $config->configRegistry->getPropertyValue($class,$name);
-    if ($ou != ""){
-        if (!preg_match('/^[^=]+=[^=]+/', $ou)){
-            $ou = @LDAP::convert("ou=$ou");
+    $ou = $config->configRegistry->getPropertyValue($class, $name);
+    if ($ou != '') {
+        if (!preg_match('/^[^=]+=[^=]+/', $ou)) {
+            $ou = LDAP::convert("ou=$ou");
         } else {
-            $ou = @LDAP::convert("$ou");
+            $ou = LDAP::convert("$ou");
         }
 
-        if(preg_match("/".preg_quote($config->current['BASE'], '/')."$/",$ou)){
-            return($ou);
-        }else{
-            if(!preg_match("/,$/", $ou)){
-                return("$ou,");
-            }else{
-                return($ou);
+        if (preg_match("/" . preg_quote($config->current['BASE'], '/') . "$/", $ou)) {
+            return ($ou);
+        } else {
+            if (!preg_match("/,$/", $ou)) {
+                return ("$ou,");
+            } else {
+                return $ou;
             }
         }
-
     } else {
-        return "";
+        return '';
     }
 }
 
 
-/*! \brief Get the OU for users 
+/*! \brief Get the OU for users
  *
  * Frontend for get_ou() with userRDN
  * */
 function get_people_ou()
 {
-  return (get_ou("core", "userRDN"));
+    return get_ou("core", "userRDN");
 }
 
 
@@ -1513,7 +1548,7 @@ function get_people_ou()
  */
 function get_groups_ou()
 {
-  return (get_ou("core", "groupRDN"));
+    return (get_ou("core", "groupRDN"));
 }
 
 
@@ -1523,7 +1558,7 @@ function get_groups_ou()
  */
 function get_winstations_ou()
 {
-  return (get_ou("wingeneric", "sambaMachineAccountRDN"));
+    return (get_ou("wingeneric", "sambaMachineAccountRDN"));
 }
 
 
@@ -1538,36 +1573,36 @@ function get_winstations_ou()
  * */
 function get_base_from_people($dn)
 {
-  global $config;
+    global $config;
 
-  $pattern= "/^[^,]+,".preg_quote(get_people_ou(), '/')."/i";
-  $base= preg_replace($pattern, '', $dn);
+    $pattern = "/^[^,]+," . preg_quote(get_people_ou(), '/') . "/i";
+    $base = preg_replace($pattern, '', $dn);
 
-  /* Set to base, if we're not on a correct subtree */
-  if (!isset($config->idepartments[$base])){
-    $base= $config->current['BASE'];
-  }
+    /* Set to base, if we're not on a correct subtree */
+    if (!isset($config->idepartments[$base])) {
+        $base = $config->current['BASE'];
+    }
 
-  return ($base);
+    return ($base);
 }
 
 
 /*! \brief Check if strict naming rules are configured
  *
- * Return TRUE or FALSE depending on weither strictNamingRules
+ * Return true or false depending on weither strictNamingRules
  * are configured or not.
  *
- * \return Returns TRUE if strictNamingRules is set to true or if the
- * config object is not available, otherwise FALSE.
+ * \return Returns true if strictNamingRules is set to true or if the
+ * config object is not available, otherwise false.
  */
 function strict_uid_mode()
 {
-  global $config;
+    global $config;
 
-  if (isset($config)){
-    return ($config->get_cfg_value("core","strictNamingRules") == "true");
-  }
-  return (TRUE);
+    if (isset($config)) {
+        return ($config->get_cfg_value("core", "strictNamingRules") == "true");
+    }
+    return (true);
 }
 
 
@@ -1577,13 +1612,13 @@ function strict_uid_mode()
  */
 function get_uid_regexp()
 {
-  /* STRICT adds spaces and case insenstivity to the uid check.
+    /* STRICT adds spaces and case insenstivity to the uid check.
      This is dangerous and should not be used. */
-  if (strict_uid_mode()){
-    return "^[a-z0-9_-]+$";
-  } else {
-    return "^[_.A-Za-z0-9][-\@_.A-Za-z0-9]*\$";
-  }
+    if (strict_uid_mode()) {
+        return "^[a-z0-9_-]+$";
+    } else {
+        return "^[_.A-Za-z0-9][-\@_.A-Za-z0-9]*\$";
+    }
 }
 
 
@@ -1596,78 +1631,78 @@ function get_uid_regexp()
  *
  * Example usage:
  * \code
- * if (($user = get_lock($this->dn)) != "") {
- *   return(gen_locked_message($user, $this->dn, TRUE));
+ * if (($user = get_lock($this->dn)) != '') {
+ *   return(gen_locked_message($user, $this->dn, true));
  * }
  * \endcode
  *
  * \param string 'user' the user who holds the lock
  * \param string 'dn' the locked DN
- * \param boolean 'allow_readonly' TRUE if readonly access should be permitted,
- * FALSE if not (default).
+ * \param boolean 'allow_readonly' true if readonly access should be permitted,
+ * false if not (default).
  *
  *
  */
-function gen_locked_message($user, $dn, $allow_readonly = FALSE)
+function gen_locked_message($user, $dn, $allow_readonly = false)
 {
-  global $plug, $config;
+    global $plug, $config;
 
-  session::set('dn', $dn);
-  $remove= false;
+    session::set('dn', $dn);
+    $remove = false;
 
-  /* Save variables from LOCK_VARS_TO_USE in session - for further editing */
-  if( session::is_set('LOCK_VARS_TO_USE') && count(session::get('LOCK_VARS_TO_USE'))){
+    /* Save variables from LOCK_VARS_TO_USE in session - for further editing */
+    if (session::is_set('LOCK_VARS_TO_USE') && count(session::get('LOCK_VARS_TO_USE'))) {
 
-    $LOCK_VARS_USED_GET   = array();
-    $LOCK_VARS_USED_POST   = array();
-    $LOCK_VARS_USED_REQUEST   = array();
-    $LOCK_VARS_TO_USE = session::get('LOCK_VARS_TO_USE');
+        $LOCK_VARS_USED_GET   = [];
+        $LOCK_VARS_USED_POST   = [];
+        $LOCK_VARS_USED_REQUEST   = [];
+        $LOCK_VARS_TO_USE = session::get('LOCK_VARS_TO_USE');
 
-    foreach($LOCK_VARS_TO_USE as $name){
+        foreach ($LOCK_VARS_TO_USE as $name) {
 
-      if(empty($name)){
-        continue;
-      }
+            if (empty($name)) {
+                continue;
+            }
 
-      foreach($_POST as $Pname => $Pvalue){
-        if(preg_match($name,$Pname)){
-          $LOCK_VARS_USED_POST[$Pname] = $_POST[$Pname];
+            foreach ($_POST as $Pname => $Pvalue) {
+                if (preg_match($name, $Pname)) {
+                    $LOCK_VARS_USED_POST[$Pname] = $_POST[$Pname];
+                }
+            }
+
+            foreach ($_GET as $Pname => $Pvalue) {
+                if (preg_match($name, $Pname)) {
+                    $LOCK_VARS_USED_GET[$Pname] = $_GET[$Pname];
+                }
+            }
+
+            foreach ($_REQUEST as $Pname => $Pvalue) {
+                if (preg_match($name, $Pname)) {
+                    $LOCK_VARS_USED_REQUEST[$Pname] = $_REQUEST[$Pname];
+                }
+            }
         }
-      }
-
-      foreach($_GET as $Pname => $Pvalue){
-        if(preg_match($name,$Pname)){
-          $LOCK_VARS_USED_GET[$Pname] = $_GET[$Pname];
-        }
-      }
-
-      foreach($_REQUEST as $Pname => $Pvalue){
-        if(preg_match($name,$Pname)){
-          $LOCK_VARS_USED_REQUEST[$Pname] = $_REQUEST[$Pname];
-        }
-      }
+        session::set('LOCK_VARS_TO_USE', []);
+        session::set('LOCK_VARS_USED_GET', $LOCK_VARS_USED_GET);
+        session::set('LOCK_VARS_USED_POST', $LOCK_VARS_USED_POST);
+        session::set('LOCK_VARS_USED_REQUEST', $LOCK_VARS_USED_REQUEST);
     }
-    session::set('LOCK_VARS_TO_USE',array());
-    session::set('LOCK_VARS_USED_GET'  , $LOCK_VARS_USED_GET);
-    session::set('LOCK_VARS_USED_POST'  , $LOCK_VARS_USED_POST);
-    session::set('LOCK_VARS_USED_REQUEST'  , $LOCK_VARS_USED_REQUEST);
-  }
 
-  /* Prepare and show template */
-  $smarty= get_smarty();
-  $smarty->assign("allow_readonly",$allow_readonly);
-  $msg= msgPool::buildList($dn);
+    /* Prepare and show template */
+    $smarty = get_smarty();
+    $smarty->assign("allow_readonly", $allow_readonly);
+    $msg = msgPool::buildList($dn);
 
-  $smarty->assign ("dn", $msg);
-  if ($remove){
-    $smarty->assign ("action", _("Continue anyway"));
-  } else {
-    $smarty->assign ("action", _("Edit anyway"));
-  }
+    $smarty->assign("dn", $msg);
+    if ($remove) {
+        $smarty->assign("action", _("Continue anyway"));
+    } else {
+        $smarty->assign("action", _("Edit anyway"));
+    }
 
-  $smarty->assign ("message", _("These entries are currently locked:"). $msg);
+    $smarty->assign("message", _("These entries are currently locked:") . $msg);
 
-  return ($smarty->fetch (get_template_path('islocked.tpl')));
+    return ($smarty->fetch(get_template_path('islocked.tpl')));
 }
 
 
@@ -1682,18 +1717,18 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
  * \param mixed 'value' Whatever needs to be printed.
  * \return string
  */
-function to_string ($value)
+function to_string($value)
 {
-  /* If this is an array, generate a text blob */
-  if (is_array($value)){
-    $ret= "";
-    foreach ($value as $line){
-      $ret.= $line."<br>\n";
+    /* If this is an array, generate a text blob */
+    if (is_array($value)) {
+        $ret = '';
+        foreach ($value as $line) {
+            $ret .= $line . "<br>\n";
+        }
+        return ($ret);
+    } else {
+        return ($value);
     }
-    return ($ret);
-  } else {
-    return ($value);
-  }
 }
 
 
@@ -1708,17 +1743,17 @@ function to_string ($value)
  * $this->printerList = get_printer_list();
  * \endcode
  *
- * \return array an array with the CNs of the printers as key and value. 
+ * \return array an array with the CNs of the printers as key and value.
  * */
 function get_printer_list()
 {
-  global $config;
-  $res = array();
-  $data = get_list('(objectClass=gotoPrinter)',"printer",$config->current['BASE'], array('cn'), GL_SUBSEARCH);
-  foreach($data as $attrs ){
-    $res[$attrs['cn'][0]] = $attrs['cn'][0];
-  }
-  return $res;
+    global $config;
+    $res = [];
+    $data = get_list('(objectClass=gotoPrinter)', "printer", $config->current['BASE'], array('cn'), GL_SUBSEARCH);
+    foreach ($data as $attrs) {
+        $res[$attrs['cn'][0]] = $attrs['cn'][0];
+    }
+    return $res;
 }
 
 
@@ -1732,13 +1767,13 @@ function get_printer_list()
  * */
 function rewrite($s)
 {
-  global $REWRITE;
+    global $REWRITE;
 
-  foreach ($REWRITE as $key => $val){
-    $s= str_replace("$key", "$val", $s);
-  }
+    foreach ($REWRITE as $key => $val) {
+        $s = str_replace("$key", "$val", $s);
+    }
 
-  return ($s);
+    return ($s);
 }
 
 
@@ -1748,17 +1783,17 @@ function rewrite($s)
  * */
 function dn2base($dn)
 {
-  global $config;
+    global $config;
 
-  if (get_people_ou() != ""){
-    $dn= preg_replace('/,'.get_people_ou().'/i' , ',', $dn);
-  }
-  if (get_groups_ou() != ""){
-    $dn= preg_replace('/,'.get_groups_ou().'/i' , ',', $dn);
-  }
-  $base= preg_replace ('/^[^,]+,/i', '', $dn);
+    if (get_people_ou() != '') {
+        $dn = preg_replace('/,' . get_people_ou() . '/i', ',', $dn);
+    }
+    if (get_groups_ou() != '') {
+        $dn = preg_replace('/,' . get_groups_ou() . '/i', ',', $dn);
+    }
+    $base = preg_replace('/^[^,]+,/i', '', $dn);
 
-  return ($base);
+    return ($base);
 }
 
 
@@ -1768,24 +1803,23 @@ function dn2base($dn)
  * arguments from the given cmdline.
  *
  * \param string 'cmdline' the cmdline to check
- * \return TRUE if command exists and is executable, otherwise FALSE.
+ * \return true if command exists and is executable, otherwise false.
  * */
 function check_command($cmdline)
 {
-  return(TRUE);  
-  $cmd= preg_replace("/ .*$/", "", $cmdline);
+    $cmd = preg_replace("/ .*$/", '', $cmdline);
 
-  /* Check if command exists in filesystem */
-  if (!file_exists($cmd)){
-    return (FALSE);
-  }
+    /* Check if command exists in filesystem */
+    if (!file_exists($cmd)) {
+        return (false);
+    }
 
-  /* Check if command is executable */
-  if (!is_executable($cmd)){
-    return (FALSE);
-  }
+    /* Check if command is executable */
+    if (!is_executable($cmd)) {
+        return (false);
+    }
 
-  return (TRUE);
+    return (true);
 }
 
 
@@ -1795,22 +1829,22 @@ function check_command($cmdline)
  * \param string 'image' the headline
  * \param string 'info' additional information to print
  */
-function print_header($image, $headline, $info= "")
+function print_header($image, $headline, $info = '')
 {
-  $display= "<div class=\"plugtop\">\n";
-  $display.= "  <p class=\"center\" style=\"margin:0px 0px 0px 5px;padding:0px;font-size:24px;\"><img class=\"center\" src=\"$image\" align=\"middle\" alt=\"*\">&nbsp;$headline</p>\n";
-  $display.= "</div>\n";
+    $display = "<div class=\"plugtop\">\n";
+    $display .= "  <p class=\"center\" style=\"margin:0px 0px 0px 5px;padding:0px;font-size:24px;\"><img class=\"center\" src=\"$image\" align=\"middle\" alt=\"*\">&nbsp;$headline</p>\n";
+    $display .= "</div>\n";
 
-  if ($info != ""){
-    $display.= "<div class=\"pluginfo\">\n";
-    $display.= "$info";
-    $display.= "</div>\n";
-  } else {
-    $display.= "<div style=\"height:5px;\">\n";
-    $display.= "&nbsp;";
-    $display.= "</div>\n";
-  }
-  return ($display);
+    if ($info != '') {
+        $display .= "<div class=\"pluginfo\">\n";
+        $display .= "$info";
+        $display .= "</div>\n";
+    } else {
+        $display .= "<div style=\"height:5px;\">\n";
+        $display .= "&nbsp;";
+        $display .= "</div>\n";
+    }
+    return ($display);
 }
 
 
@@ -1821,110 +1855,110 @@ function print_header($image, $headline, $info= "")
  * \param int 'range' Number of entries per page
  * \param string 'post_var' POST variable to check for range
  */
-function range_selector($dcnt,$start,$range=25,$post_var=false)
+function range_selector($dcnt, $start, $range = 25, $post_var = false)
 {
 
-  /* Entries shown left and right from the selected entry */
-  $max_entries= 10;
+    /* Entries shown left and right from the selected entry */
+    $max_entries = 10;
 
-  /* Initialize and take care that max_entries is even */
-  $output="";
-  if ($max_entries & 1){
-    $max_entries++;
-  }
+    /* Initialize and take care that max_entries is even */
+    $output = '';
+    if ($max_entries & 1) {
+        $max_entries++;
+    }
 
-  if((!empty($post_var))&&(isset($_POST[$post_var]))){
-    $range= $_POST[$post_var];
-  }
+    if ((!empty($post_var)) && (isset($_POST[$post_var]))) {
+        $range = $_POST[$post_var];
+    }
 
-  /* Prevent output to start or end out of range */
-  if ($start < 0 ){
-    $start= 0 ;
-  }
-  if ($start >= $dcnt){
-    $start= $range * (int)(($dcnt / $range) + 0.5);
-  }
+    /* Prevent output to start or end out of range */
+    if ($start < 0) {
+        $start = 0;
+    }
+    if ($start >= $dcnt) {
+        $start = $range * (int)(($dcnt / $range) + 0.5);
+    }
 
-  $numpages= (($dcnt / $range));
-  if(((int)($numpages))!=($numpages)){
-    $numpages = (int)$numpages + 1;
-  }
-  if ((((int)$numpages) <= 1 )&&(!$post_var)){
-    return ("");
-  }
-  $ppage= (int)(($start / $range) + 0.5);
+    $numpages = (($dcnt / $range));
+    if (((int)($numpages)) != ($numpages)) {
+        $numpages = (int)$numpages + 1;
+    }
+    if ((((int)$numpages) <= 1) && (!$post_var)) {
+        return ('');
+    }
+    $ppage = (int)(($start / $range) + 0.5);
 
 
-  /* Align selected page to +/- max_entries/2 */
-  $begin= $ppage - $max_entries/2;
-  $end= $ppage + $max_entries/2;
+    /* Align selected page to +/- max_entries/2 */
+    $begin = $ppage - $max_entries / 2;
+    $end = $ppage + $max_entries / 2;
 
-  /* Adjust begin/end, so that the selected value is somewhere in
+    /* Adjust begin/end, so that the selected value is somewhere in
      the middle and the size is max_entries if possible */
-  if ($begin < 0){
-    $end-= $begin + 1;
-    $begin= 0;
-  }
-  if ($end > $numpages) {
-    $end= $numpages;
-  }
-  if (($end - $begin) < $max_entries && ($end - $max_entries) > 0){
-    $begin= $end - $max_entries;
-  }
+    if ($begin < 0) {
+        $end -= $begin + 1;
+        $begin = 0;
+    }
+    if ($end > $numpages) {
+        $end = $numpages;
+    }
+    if (($end - $begin) < $max_entries && ($end - $max_entries) > 0) {
+        $begin = $end - $max_entries;
+    }
 
-  if($post_var){
-    $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>
+    if ($post_var) {
+        $output .= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>
       <table summary='' width='100%'><tr><td style='width:25%'></td><td style='text-align:center;'>";
-  }else{
-    $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
-  }
-
-  /* Draw decrement */
-  if ($start > 0 ) {
-    $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&amp;start=".
-      (($start-$range))."\">".
-      "<img class=\"center\" alt=\"\" src=\"images/back.png\" border=0 align=\"middle\"></a>";
-  }
-
-  /* Draw pages */
-  for ($i= $begin; $i < $end; $i++) {
-    if ($ppage == $i){
-      $output.= "<a style=\"vertical-align:middle;background-color:#D0D0D0;\" href=\"main.php?plug=".
-        validate($_GET['plug'])."&amp;start=".
-        ($i*$range)."\">&nbsp;".($i+1)."&nbsp;</a>";
     } else {
-      $output.= "<a style=\"vertical-align:middle;\" href=\"main.php?plug=".validate($_GET['plug']).
-        "&amp;start=".($i*$range)."\">&nbsp;".($i+1)."&nbsp;</a>";
+        $output .= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
     }
-  }
 
-  /* Draw increment */
-  if($start < ($dcnt-$range)) {
-    $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&amp;start=".
-      (($start+($range)))."\">".
-      "<img class=\"center\" alt=\"\" src=\"images/forward.png\" border=\"0\" align=\"middle\"></a>";
-  }
-
-  if(($post_var)&&($numpages)){
-    $output.= "</td><td style='width:25%;text-align:right;vertical-align:middle;'>&nbsp;"._("Entries per page")."&nbsp;<select style='vertical-align:middle;' name='".$post_var."' onChange='javascript:document.mainform.submit()'>";
-    foreach(array(20,50,100,200,"all") as $num){
-      if($num == "all"){
-        $var = 10000;
-      }else{
-        $var = $num;
-      }
-      if($var == $range){
-        $output.="\n<option selected='selected' value='".$var."'>".$num."</option>";
-      }else{  
-        $output.="\n<option value='".$var."'>".$num."</option>";
-      }
+    /* Draw decrement */
+    if ($start > 0) {
+        $output .= "  <a href= \"main.php?plug=" . validate($_GET['plug']) . "&amp;start=" .
+            (($start - $range)) . "\">" .
+            "<img class=\"center\" alt=\"\" src=\"images/back.png\" border=0 align=\"middle\"></a>";
     }
-    $output.=  "</select></td></tr></table></div>";
-  }else{
-    $output.= "</div>";
-  }
 
-  return($output);
+    /* Draw pages */
+    for ($i = $begin; $i < $end; $i++) {
+        if ($ppage == $i) {
+            $output .= "<a style=\"vertical-align:middle;background-color:#D0D0D0;\" href=\"main.php?plug=" .
+                validate($_GET['plug']) . "&amp;start=" .
+                ($i * $range) . "\">&nbsp;" . ($i + 1) . "&nbsp;</a>";
+        } else {
+            $output .= "<a style=\"vertical-align:middle;\" href=\"main.php?plug=" . validate($_GET['plug']) .
+                "&amp;start=" . ($i * $range) . "\">&nbsp;" . ($i + 1) . "&nbsp;</a>";
+        }
+    }
+
+    /* Draw increment */
+    if ($start < ($dcnt - $range)) {
+        $output .= "  <a href= \"main.php?plug=" . validate($_GET['plug']) . "&amp;start=" .
+            (($start + ($range))) . "\">" .
+            "<img class=\"center\" alt=\"\" src=\"images/forward.png\" border=\"0\" align=\"middle\"></a>";
+    }
+
+    if (($post_var) && ($numpages)) {
+        $output .= "</td><td style='width:25%;text-align:right;vertical-align:middle;'>&nbsp;" . _("Entries per page") . "&nbsp;<select style='vertical-align:middle;' name='" . $post_var . "' onChange='javascript:document.mainform.submit()'>";
+        foreach (array(20, 50, 100, 200, "all") as $num) {
+            if ($num == "all") {
+                $var = 10000;
+            } else {
+                $var = $num;
+            }
+            if ($var == $range) {
+                $output .= "\n<option selected='selected' value='" . $var . "'>" . $num . "</option>";
+            } else {
+                $output .= "\n<option value='" . $var . "'>" . $num . "</option>";
+            }
+        }
+        $output .=  "</select></td></tr></table></div>";
+    } else {
+        $output .= "</div>";
+    }
+
+    return ($output);
 }
 
 
@@ -1932,10 +1966,10 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
 /*! \brief Generate HTML for the 'Back' button */
 function back_to_main()
 {
-  $string= '<br><p class="plugbottom"><input type=submit name="password_back" value="'.
-    msgPool::backButton().'"></p><input type="hidden" name="ignore">';
+    $string = '<br><p class="plugbottom"><input type=submit name="password_back" value="' .
+        msgPool::backButton() . '"></p><input type="hidden" name="ignore">';
 
-  return ($string);
+    return ($string);
 }
 
 
@@ -1945,27 +1979,27 @@ function back_to_main()
  */
 function normalize_netmask($netmask)
 {
-  /* Check for notation of netmask */
-  if (!preg_match('/^([0-9]+\.){3}[0-9]+$/', $netmask)){
-    $num= (int)($netmask);
-    $netmask= "";
+    /* Check for notation of netmask */
+    if (!preg_match('/^([0-9]+\.){3}[0-9]+$/', $netmask)) {
+        $num = (int)($netmask);
+        $netmask = '';
 
-    for ($byte= 0; $byte<4; $byte++){
-      $result=0;
+        for ($byte = 0; $byte < 4; $byte++) {
+            $result = 0;
 
-      for ($i= 7; $i>=0; $i--){
-        if ($num-- > 0){
-          $result+= pow(2,$i);
+            for ($i = 7; $i >= 0; $i--) {
+                if ($num-- > 0) {
+                    $result += pow(2, $i);
+                }
+            }
+
+            $netmask .= $result . ".";
         }
-      }
 
-      $netmask.= $result.".";
+        return (preg_replace('/\.$/', '', $netmask));
     }
 
-    return (preg_replace('/\.$/', '', $netmask));
-  }
-
-  return ($netmask);
+    return ($netmask);
 }
 
 
@@ -1990,23 +2024,23 @@ function normalize_netmask($netmask)
  */
 function netmask_to_bits($netmask)
 {
-  list($nm0, $nm1, $nm2, $nm3)= explode('.', $netmask);
-  $res= 0;
+    list($nm0, $nm1, $nm2, $nm3) = explode('.', $netmask);
+    $res = 0;
 
-  for ($n= 0; $n<4; $n++){
-    $start= 255;
-    $name= "nm$n";
+    for ($n = 0; $n < 4; $n++) {
+        $start = 255;
+        $name = "nm$n";
 
-    for ($i= 0; $i<8; $i++){
-      if ($start == (int)($$name)){
-        $res+= 8 - $i;
-        break;
-      }
-      $start-= pow(2,$i);
+        for ($i = 0; $i < 8; $i++) {
+            if ($start == (int)($$name)) {
+                $res += 8 - $i;
+                break;
+            }
+            $start -= pow(2, $i);
+        }
     }
-  }
 
-  return ($res);
+    return ($res);
 }
 
 
@@ -2021,48 +2055,49 @@ function netmask_to_bits($netmask)
  * a numeric value
  *
  */
-function to_byte($value) {
-  $value= strtolower(trim($value));
+function to_byte($value)
+{
+    $value = strtolower(trim($value));
 
-  if(!is_numeric(substr($value, -1))) {
+    if (!is_numeric(substr($value, -1))) {
 
-    switch(substr($value, -1)) {
-      case 'g':
-        $mult= 1073741824;
-        break;
-      case 'm':
-        $mult= 1048576;
-        break;
-      case 'k':
-        $mult= 1024;
-        break;
+        switch (substr($value, -1)) {
+            case 'g':
+                $mult = 1073741824;
+                break;
+            case 'm':
+                $mult = 1048576;
+                break;
+            case 'k':
+                $mult = 1024;
+                break;
+        }
+
+        return ($mult * (int)substr($value, 0, -1));
+    } else {
+        return $value;
     }
-
-    return ($mult * (int)substr($value, 0, -1));
-  } else {
-    return $value;
-  }
 }
 
 
 /*! \brief Check if a value exists in an array (case-insensitive)
- * 
+ *
  * This is just as http://php.net/in_array except that the comparison
  * is case-insensitive.
  *
  * \param string 'value' needle
  * \param array 'items' haystack
- */ 
+ */
 function in_array_ics($value, $items)
 {
-	return preg_grep('/^'.preg_quote($value, '/').'$/i', $items);
+    return preg_grep('/^' . preg_quote($value, '/') . '$/i', $items);
 }
 
 
 /*! \brief Removes malicious characters from a (POST) string. */
 function validate($string)
 {
-  return (strip_tags(str_replace('\0', '', $string)));
+    return (strip_tags(str_replace('\0', '', $string)));
 }
 
 
@@ -2072,30 +2107,30 @@ function get_gosa_version()
     global $svn_revision, $svn_path;
 
     /* Extract informations */
-    $revision= preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
+    $revision = preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
 
     // Extract the relevant part out of the svn url
-    $release= preg_replace('%^.*/gosa/(.*)/include/functions.inc.*$%', '\1', $svn_path);
+    $release = preg_replace('%^.*/gosa/(.*)/include/functions.inc.*$%', '\1', $svn_path);
 
     // Remove stuff which is not interesting
-    if(preg_match("/gosa-core/i", $release)) $release = preg_replace("/[\/]gosa-core/i","",$release);
+    if (preg_match("/gosa-core/i", $release)) $release = preg_replace("/[\/]gosa-core/i", '', $release);
 
     // A Tagged Version
-    if(preg_match("#/tags/#i", $svn_path)){
-        $release = preg_replace("/tags[\/]*/i","",$release);
-        $release = preg_replace("/\//","",$release) ;
-        return (sprintf(_("GOsa %s"),$release));
+    if (preg_match("#/tags/#i", $svn_path)) {
+        $release = preg_replace("/tags[\/]*/i", '', $release);
+        $release = preg_replace("/\//", '', $release);
+        return (sprintf(_("GOsa %s"), $release));
     }
 
     // A Branched Version
-    if(preg_match("#/branches/#i", $svn_path)){
-        $release = preg_replace("/branches[\/]*/i","",$release);
-        $release = preg_replace("/\//","",$release) ;
-        return (sprintf(_("GOsa %s snapshot (Rev %s)"),$release , bold($revision)));
+    if (preg_match("#/branches/#i", $svn_path)) {
+        $release = preg_replace("/branches[\/]*/i", '', $release);
+        $release = preg_replace("/\//", '', $release);
+        return (sprintf(_("GOsa %s snapshot (Rev %s)"), $release, bold($revision)));
     }
 
     // The trunk version
-    if(preg_match("#/trunk/#i", $svn_path)){
+    if (preg_match("#/trunk/#i", $svn_path)) {
         return (sprintf(_("GOsa development snapshot (Rev %s)"), bold($revision)));
     }
 
@@ -2109,20 +2144,21 @@ function get_gosa_version()
  * Can also follow links if told so.
  *
  * \param string 'path'
- * \param boolean 'followLinks' TRUE to follow links, FALSE (default)
+ * \param boolean 'followLinks' true to follow links, false (default)
  * for not following links
  */
-function rmdirRecursive($path, $followLinks=false) {
-  $dir= opendir($path);
-  while($entry= readdir($dir)) {
-    if(is_file($path."/".$entry) || ((!$followLinks) && is_link($path."/".$entry))) {
-      unlink($path."/".$entry);
-    } elseif (is_dir($path."/".$entry) && $entry!='.' && $entry!='..') {
-      rmdirRecursive($path."/".$entry);
+function rmdirRecursive($path, $followLinks = false)
+{
+    $dir = opendir($path);
+    while ($entry = readdir($dir)) {
+        if (is_file($path . "/" . $entry) || ((!$followLinks) && is_link($path . "/" . $entry))) {
+            unlink($path . "/" . $entry);
+        } elseif (is_dir($path . "/" . $entry) && $entry != '.' && $entry != '..') {
+            rmdirRecursive($path . "/" . $entry);
+        }
     }
-  }
-  closedir($dir);
-  return rmdir($path);
+    closedir($dir);
+    return rmdir($path);
 }
 
 
@@ -2134,128 +2170,130 @@ function rmdirRecursive($path, $followLinks=false) {
  * \param string 'path'
  * \param boolean weither to sort the content descending.
  */
-function scan_directory($path,$sort_desc=false)
+function scan_directory($path, $sort_desc = false)
 {
-  $ret = false;
+    $ret = false;
 
-  /* is this a dir ? */
-  if(is_dir($path)) {
+    /* is this a dir ? */
+    if (is_dir($path)) {
 
-    /* is this path a readable one */
-    if(is_readable($path)){
+        /* is this path a readable one */
+        if (is_readable($path)) {
 
-      /* Get contents and write it into an array */   
-      $ret = array();    
+            /* Get contents and write it into an array */
+            $ret = [];
 
-      $dir = opendir($path);
+            $dir = opendir($path);
 
-      /* Is this a correct result ?*/
-      if($dir){
-        while($fp = readdir($dir))
-          $ret[]= $fp;
-      }
+            /* Is this a correct result ?*/
+            if ($dir) {
+                while ($fp = readdir($dir))
+                    $ret[] = $fp;
+            }
+        }
     }
-  }
-  /* Sort array ascending , like scandir */
-  sort($ret);
+    /* Sort array ascending , like scandir */
+    sort($ret);
 
-  /* Sort descending if parameter is sort_desc is set */
-  if($sort_desc) {
-    $ret = array_reverse($ret);
-  }
+    /* Sort descending if parameter is sort_desc is set */
+    if ($sort_desc) {
+        $ret = array_reverse($ret);
+    }
 
-  return($ret);
+    return ($ret);
 }
 
 
 /*! \brief Clean the smarty compile dir */
 function clean_smarty_compile_dir($directory)
 {
-  global $svn_revision;
+    global $svn_revision;
 
-  if(is_dir($directory) && is_readable($directory)) {
-    // Set revision filename to REVISION
-    $revision_file= $directory."/REVISION";
+    if (is_dir($directory) && is_readable($directory)) {
+        // Set revision filename to REVISION
+        $revision_file = $directory . "/REVISION";
 
-    /* Is there a stamp containing the current revision? */
-    if(!file_exists($revision_file)) {
-      // create revision file
-      create_revision($revision_file, $svn_revision);
-    } else {
-      # check for "$config->...['CONFIG']/revision" and the
-      # contents should match the revision number
-      if(!compare_revision($revision_file, $svn_revision)){
-        // If revision differs, clean compile directory
-        foreach(scan_directory($directory) as $file) {
-          if(($file==".")||($file=="..")) continue;
-          if( is_file($directory."/".$file) &&
-              is_writable($directory."/".$file)) {
-            // delete file
-            if(!unlink($directory."/".$file)) {
-              msg_dialog::display(_("Internal error"), sprintf(_("File %s cannot be deleted!"), bold($directory."/".$file)), ERROR_DIALOG);
-              // This should never be reached
+        /* Is there a stamp containing the current revision? */
+        if (!file_exists($revision_file)) {
+            // create revision file
+            create_revision($revision_file, $svn_revision);
+        } else {
+            # check for "$config->...['CONFIG']/revision" and the
+            # contents should match the revision number
+            if (!compare_revision($revision_file, $svn_revision)) {
+                // If revision differs, clean compile directory
+                foreach (scan_directory($directory) as $file) {
+                    if (($file == ".") || ($file == "..")) continue;
+                    if (
+                        is_file($directory . "/" . $file) &&
+                        is_writable($directory . "/" . $file)
+                    ) {
+                        // delete file
+                        if (!unlink($directory . "/" . $file)) {
+                            msg_dialog::display(_("Internal error"), sprintf(_("File %s cannot be deleted!"), bold($directory . "/" . $file)), ERROR_DIALOG);
+                            // This should never be reached
+                        }
+                    }
+                }
+                // We should now create a fresh revision file
+                clean_smarty_compile_dir($directory);
+            } else {
+                // Revision matches, nothing to do
             }
-          } 
         }
-        // We should now create a fresh revision file
-        clean_smarty_compile_dir($directory);
-      } else {
-        // Revision matches, nothing to do
-      }
+    } else {
+        // Smarty compile dir is not accessible
+        // (Smarty will warn about this)
     }
-  } else {
-    // Smarty compile dir is not accessible
-    // (Smarty will warn about this)
-  }
 }
 
 
 function create_revision($revision_file, $revision)
 {
-  $result= false;
+    $result = false;
 
-  if(is_dir(dirname($revision_file)) && is_writable(dirname($revision_file))) {
-    if($fh= fopen($revision_file, "w")) {
-      if(fwrite($fh, $revision)) {
-        $result= true;
-      }
+    if (is_dir(dirname($revision_file)) && is_writable(dirname($revision_file))) {
+        if ($fh = fopen($revision_file, "w")) {
+            if (fwrite($fh, $revision)) {
+                $result = true;
+            }
+        }
+        fclose($fh);
+    } else {
+        msg_dialog::display(_("Internal error"), _("Cannot write revision file!"), ERROR_DIALOG);
     }
-    fclose($fh);
-  } else {
-    msg_dialog::display(_("Internal error"), _("Cannot write revision file!"), ERROR_DIALOG);
-  }
 
-  return $result;
+    return $result;
 }
 
 
 function compare_revision($revision_file, $revision)
 {
-  // false means revision differs
-  $result= false;
+    // false means revision differs
+    $result = false;
 
-  if(file_exists($revision_file) && is_readable($revision_file)) {
-    // Open file
-    if($fh= fopen($revision_file, "r")) {
-      // Compare File contents with current revision
-      if($revision == fread($fh, filesize($revision_file))) {
-        $result= true;
-      }
-    } else {
-      msg_dialog::display(_("Internal error"), _("Cannot write revision file!"), ERROR_DIALOG);
+    if (file_exists($revision_file) && is_readable($revision_file)) {
+        // Open file
+        if ($fh = fopen($revision_file, "r")) {
+            // Compare File contents with current revision
+            if ($revision == fread($fh, filesize($revision_file))) {
+                $result = true;
+            }
+        } else {
+            msg_dialog::display(_("Internal error"), _("Cannot write revision file!"), ERROR_DIALOG);
+        }
+        // Close file
+        fclose($fh);
     }
-    // Close file
-    fclose($fh);
-  }
 
-  return $result;
+    return $result;
 }
 
 
 /*! \brief Return HTML for a progressbar
  *
  * \code
- * $smarty->assign("installprogress", progressbar($current_progress_in_percent),100,15,true); 
+ * $smarty->assign("installprogress", progressbar($current_progress_in_percent),100,15,true);
  * \endcode
  *
  * \param int 'percentage' Value to display
@@ -2263,62 +2301,62 @@ function compare_revision($revision_file, $revision)
  * \param int 'height' height of the resulting output
  * \param boolean 'showtext' weither to show the percentage in the progressbar or not
  * */
-function progressbar($percentage, $width= 200, $height= 14, $showText= false, $colorize= true, $id= "")
+function progressbar($percentage, $width = 200, $height = 14, $showText = false, $colorize = true, $id = '')
 {
-  $text= "";
-  $class= "";
-  $style= "width:${width}px;height:${height}px;";
+    $text = '';
+    $class = '';
+    $style = "width:" . $width . "px;height:" . $height . "px;";
 
-  // Fix percentage range
-  $percentage= floor($percentage);
-  if ($percentage > 100) {
-    $percentage= 100;
-  }
-  if ($percentage < 0) {
-    $percentage= 0;
-  }
-
-  // Only show text if we're above 10px height
-  if ($showText && $height>10){
-    $text= $percentage."%";
-  }
-
-  // Set font size
-  $style.= "font-size:".($height-3)."px;";
-
-  // Set color
-  if ($colorize){
-    if ($percentage < 70) {
-      $class= " progress-low";
-    } elseif ($percentage < 80) {
-      $class= " progress-mid";
-    } elseif ($percentage < 90) {
-      $class= " progress-high";
-    } else {
-      $class= " progress-full";
+    // Fix percentage range
+    $percentage = floor($percentage);
+    if ($percentage > 100) {
+        $percentage = 100;
     }
-  }
-  
-  // Apply gradients
-  $hoffset= floor($height / 2) + 4;
-  $woffset= floor(($width+5) * (100-$percentage) / 100);
-  foreach (array("-moz-box-shadow", "-webkit-box-shadow", "box-shadow") as $type) {
-    $style.="$type:
+    if ($percentage < 0) {
+        $percentage = 0;
+    }
+
+    // Only show text if we're above 10px height
+    if ($showText && $height > 10) {
+        $text = $percentage . "%";
+    }
+
+    // Set font size
+    $style .= "font-size:" . ($height - 3) . "px;";
+
+    // Set color
+    if ($colorize) {
+        if ($percentage < 70) {
+            $class = " progress-low";
+        } elseif ($percentage < 80) {
+            $class = " progress-mid";
+        } elseif ($percentage < 90) {
+            $class = " progress-high";
+        } else {
+            $class = " progress-full";
+        }
+    }
+
+    // Apply gradients
+    $hoffset = floor($height / 2) + 4;
+    $woffset = floor(($width + 5) * (100 - $percentage) / 100);
+    foreach (array("-moz-box-shadow", "-webkit-box-shadow", "box-shadow") as $type) {
+        $style .= "$type:
                    0 0 2px rgba(255, 255, 255, 0.4) inset,
                    0 4px 6px rgba(255, 255, 255, 0.4) inset,
-                   0 ".$hoffset."px 0 -2px rgba(255, 255, 255, 0.2) inset,
-                   -".$woffset."px 0 0 -2px rgba(255, 255, 255, 0.2) inset,
-                   -".($woffset+1)."px 0 0 -2px rgba(0, 0, 0, 0.6) inset,
-                   0pt ".($hoffset+1)."px 8px rgba(0, 0, 0, 0.3) inset,
+                   0 " . $hoffset . "px 0 -2px rgba(255, 255, 255, 0.2) inset,
+                   -" . $woffset . "px 0 0 -2px rgba(255, 255, 255, 0.2) inset,
+                   -" . ($woffset + 1) . "px 0 0 -2px rgba(0, 0, 0, 0.6) inset,
+                   0pt " . ($hoffset + 1) . "px 8px rgba(0, 0, 0, 0.3) inset,
                    0pt 1px 0px rgba(0, 0, 0, 0.2);";
-  }
+    }
 
-  // Set ID
-  if ($id != ""){
-    $id= "id='$id'";
-  }
+    // Set ID
+    if ($id != '') {
+        $id = "id='$id'";
+    }
 
-  return "<div class='progress$class' $id style='$style'>$text</div>";
+    return "<div class='progress$class' $id style='$style'>$text</div>";
 }
 
 
@@ -2338,13 +2376,13 @@ function progressbar($percentage, $width= 200, $height= 14, $showText= false, $c
  */
 function array_key_ics($ikey, $items)
 {
-  $tmp= array_change_key_case($items, CASE_LOWER);
-  $ikey= strtolower($ikey);
-  if (isset($tmp[$ikey])){
-    return($tmp[$ikey]);
-  }
+    $tmp = array_change_key_case($items, CASE_LOWER);
+    $ikey = strtolower($ikey);
+    if (isset($tmp[$ikey])) {
+        return ($tmp[$ikey]);
+    }
 
-  return ('');
+    return ('');
 }
 
 
@@ -2352,77 +2390,66 @@ function array_key_ics($ikey, $items)
  *
  * \param array 'src'
  * \param array 'dst'
- * \return boolean TRUE or FALSE
+ * \return boolean true or false
  * */
 function array_differs($src, $dst)
 {
-  /* If the count is differing, the arrays differ */
-  if (count ($src) != count ($dst)){
-    return (TRUE);
-  }
+    /* If the count is differing, the arrays differ */
+    if (count($src) != count($dst)) {
+        return (true);
+    }
 
-  return (count(array_diff($src, $dst)) != 0);
+    return (count(array_diff($src, $dst)) != 0);
 }
 
 
 function saveFilter($a_filter, $values)
 {
-  if (isset($_POST['regexit'])){
-    $a_filter["regex"]= $_POST['regexit'];
+    if (isset($_POST['regexit'])) {
+        $a_filter["regex"] = $_POST['regexit'];
 
-    foreach($values as $type){
-      if (isset($_POST[$type])) {
-        $a_filter[$type]= "checked";
-      } else {
-        $a_filter[$type]= "";
-      }
+        foreach ($values as $type) {
+            if (isset($_POST[$type])) {
+                $a_filter[$type] = "checked";
+            } else {
+                $a_filter[$type] = '';
+            }
+        }
     }
-  }
 
-  /* React on alphabet links if needed */
-  if (isset($_GET['search'])){
-    $s= mb_substr(validate($_GET['search']), 0, 1, "UTF8")."*";
-    if ($s == "**"){
-      $s= "*";
+    /* React on alphabet links if needed */
+    if (isset($_GET['search'])) {
+        $s = mb_substr(validate($_GET['search']), 0, 1, "UTF8") . "*";
+        if ($s == "**") {
+            $s = "*";
+        }
+        $a_filter['regex'] = $s;
     }
-    $a_filter['regex']= $s;
-  }
 
-  return ($a_filter);
+    return ($a_filter);
 }
-
-
-/*! \brief Escape all LDAP filter relevant characters */
-function normalizeLdap($input)
-{
-  return (addcslashes($input, '()|'));
-}
-
 
 /*! \brief Return the gosa base directory */
-function get_base_dir()
+function get_base_dir(): string
 {
-  global $BASE_DIR;
-
-  return $BASE_DIR;
+    global $BASE_DIR;
+    return $BASE_DIR;
 }
 
 
 /*! \brief Test weither we are allowed to read the object */
-function obj_is_readable($dn, $object, $attribute)
+function obj_is_readable($dn, $object, $attribute): bool
 {
-  global $ui;
-
-  return preg_match('/r/', $ui->get_permissions($dn, $object, $attribute));
+    global $ui;
+    return preg_match('/r/', $ui->get_permissions($dn, $object, $attribute));
 }
 
 
 /*! \brief Test weither we are allowed to change the object */
-function obj_is_writable($dn, $object, $attribute)
+function obj_is_writable($dn, $object, $attribute): bool
 {
-  global $ui;
-
-  return preg_match('/w/', $ui->get_permissions($dn, $object, $attribute));
+    global $ui;
+    return preg_match('/w/', $ui->get_permissions($dn, $object, $attribute));
 }
 
 
@@ -2436,245 +2463,245 @@ function obj_is_writable($dn, $object, $attribute)
  * \param boolean verify_in_ldap check weither DN is valid
  *
  */
-function gosa_ldap_explode_dn($dn,$config = NULL,$verify_in_ldap=false)
+function gosa_ldap_explode_dn($dn, $config = NULL, $verify_in_ldap = false)
 {
-  /* Initialize variables */
-  $ret  = array("count" => 0);  // Set count to 0
-  $next = true;                 // if false, then skip next loops and return
-  $cnt  = 0;                    // Current number of loops
-  $max  = 100;                  // Just for security, prevent looops
-  $ldap = NULL;                 // To check if created result a valid
-  $keep = "";                   // save last failed parse string
+    /* Initialize variables */
+    $ret  = array("count" => 0);  // Set count to 0
+    $next = true;                 // if false, then skip next loops and return
+    $cnt  = 0;                    // Current number of loops
+    $max  = 100;                  // Just for security, prevent looops
+    $ldap = NULL;                 // To check if created result a valid
+    $keep = '';                   // save last failed parse string
 
-  /* Check each parsed dn in ldap ? */
-  if($config!==NULL && $verify_in_ldap){
-    $ldap = $config->get_ldap_link();
-  }
-
-  /* Lets start */
-  $called = false;
-  while(preg_match("/,/",$dn) && $next &&  $cnt < $max){
-
-    $cnt ++;
-    if(!preg_match("/,/",$dn)){
-      $next = false;
+    /* Check each parsed dn in ldap ? */
+    if ($config !== NULL && $verify_in_ldap) {
+        $ldap = $config->get_ldap_link();
     }
-    $object = preg_replace("/[,].*$/","",$dn);
-    $dn     = preg_replace("/^[^,]+,/","",$dn);
 
-    $called = true;
+    /* Lets start */
+    $called = false;
+    while (preg_match("/,/", $dn) && $next &&  $cnt < $max) {
 
-    /* Check if current dn is valid */
-    if($ldap!==NULL){
-      $ldap->cd($dn);
-      $ldap->cat($dn,array("dn"));
-      if($ldap->count()){
-        $ret[]  = $keep.$object;
-        $keep   = "";
-      }else{
-        $keep  .= $object.",";
-      }
-    }else{
-      $ret[]  = $keep.$object;
-      $keep   = "";
+        $cnt++;
+        if (!preg_match("/,/", $dn)) {
+            $next = false;
+        }
+        $object = preg_replace("/[,].*$/", '', $dn);
+        $dn     = preg_replace("/^[^,]+,/", '', $dn);
+
+        $called = true;
+
+        /* Check if current dn is valid */
+        if ($ldap !== NULL) {
+            $ldap->cd($dn);
+            $ldap->cat($dn, array("dn"));
+            if ($ldap->count()) {
+                $ret[]  = $keep . $object;
+                $keep   = '';
+            } else {
+                $keep  .= $object . ",";
+            }
+        } else {
+            $ret[]  = $keep . $object;
+            $keep   = '';
+        }
     }
-  }
 
-  /* No dn was posted */
-  if($cnt == 0 && !empty($dn)){
-    $ret[] = $dn;
-  }
+    /* No dn was posted */
+    if ($cnt == 0 && !empty($dn)) {
+        $ret[] = $dn;
+    }
 
-  /* Append the rest */
-  $test = $keep.$dn;
-  if($called && !empty($test)){
-    $ret[] = $keep.$dn;
-  }
-  $ret['count'] = count($ret) - 1;
+    /* Append the rest */
+    $test = $keep . $dn;
+    if ($called && !empty($test)) {
+        $ret[] = $keep . $dn;
+    }
+    $ret['count'] = count($ret) - 1;
 
-  return($ret);
+    return ($ret);
 }
 
 
 function get_base_from_hook($dn, $attrib)
 {
-  global $config;
+    global $config;
 
-  if ($config->get_cfg_value("core","baseIdHook") != ""){
-    
-    /* Call hook script - if present */
-    $command= $config->get_cfg_value("core","baseIdHook");
+    if ($config->get_cfg_value("core", "baseIdHook") != '') {
 
-    if ($command != ""){
-      $command.= " '".LDAP::fix($dn)."' $attrib";
-      if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
-        exec($command, $output);
-        if (preg_match("/^[0-9]+$/", $output[0])){
-          return ($output[0]);
+        /* Call hook script - if present */
+        $command = $config->get_cfg_value("core", "baseIdHook");
+
+        if ($command != '') {
+            $command .= " '" . LDAP::fix($dn) . "' $attrib";
+            if (check_command($command)) {
+                DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+                exec($command, $output);
+                if (preg_match("/^[0-9]+$/", $output[0])) {
+                    return ($output[0]);
+                } else {
+                    msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
+                    return ($config->get_cfg_value("core", "uidNumberBase"));
+                }
+            } else {
+                msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
+                return ($config->get_cfg_value("core", "uidNumberBase"));
+            }
         } else {
-          msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
-          return ($config->get_cfg_value("core","uidNumberBase"));
+
+            msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
+            return ($config->get_cfg_value("core", "uidNumberBase"));
         }
-      } else {
-        msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
-        return ($config->get_cfg_value("core","uidNumberBase"));
-      }
-
-    } else {
-
-      msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
-      return ($config->get_cfg_value("core","uidNumberBase"));
-
     }
-  }
 }
 
 
 /*! \brief Check if schema version matches the requirements */
 function check_schema_version($class, $version)
 {
-  return preg_match("/\(v$version\)/", $class['DESC']);
+    return preg_match("/\(v$version\)/", $class['DESC']);
 }
 
 
 /*! \brief Check if LDAP schema matches the requirements */
-function check_schema($cfg,$rfc2307bis = FALSE)
+function check_schema($cfg, $rfc2307bis = false)
 {
-  $messages= array();
+    $messages = [];
 
-  /* Get objectclasses */
-  $ldap = new ldapMultiplexer(new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE, $cfg['tls']));
-  $objectclasses = $ldap->get_objectclasses();
-  if(count($objectclasses) == 0){
-    msg_dialog::display(_("Warning"), _("Cannot read schema information from LDAP. Schema validation is not possible!"), WARNING_DIALOG);
-  }
+    /* Get objectclasses */
+    $ldap = new ldapMultiplexer(new LDAP($cfg['admin'], $cfg['password'], $cfg['connection'], false, $cfg['tls']));
+    $objectclasses = $ldap->get_objectclasses();
+    if (count($objectclasses) == 0) {
+        msg_dialog::display(_("Warning"), _("Cannot read schema information from LDAP. Schema validation is not possible!"), WARNING_DIALOG);
+    }
 
-  /* This is the default block used for each entry.
+    /* This is the default block used for each entry.
    *  to avoid unset indexes.
    */
-  $def_check = array("REQUIRED_VERSION" => "0",
-      "SCHEMA_FILES"     => array(),
-      "CLASSES_REQUIRED" => array(),
-      "STATUS"           => FALSE,
-      "IS_MUST_HAVE"     => FALSE,
-      "MSG"              => "",
-      "INFO"             => "");
+    $def_check = array(
+        "REQUIRED_VERSION" => "0",
+        "SCHEMA_FILES"     => [],
+        "CLASSES_REQUIRED" => [],
+        "STATUS"           => false,
+        "IS_MUST_HAVE"     => false,
+        "MSG"              => '',
+        "INFO"             => ''
+    );
 
-  /* The gosa base schema */
-  $checks['gosaObject'] = $def_check;
-  $checks['gosaObject']['REQUIRED_VERSION'] = "2.6.1";
-  $checks['gosaObject']['SCHEMA_FILES']     = array("gosa-samba3.schema");
-  $checks['gosaObject']['CLASSES_REQUIRED'] = array("gosaObject");
-  $checks['gosaObject']['IS_MUST_HAVE']     = TRUE;
+    /* The gosa base schema */
+    $checks['gosaObject'] = $def_check;
+    $checks['gosaObject']['REQUIRED_VERSION'] = "2.6.1";
+    $checks['gosaObject']['SCHEMA_FILES']     = array("gosa-samba3.schema");
+    $checks['gosaObject']['CLASSES_REQUIRED'] = array("gosaObject");
+    $checks['gosaObject']['IS_MUST_HAVE']     = true;
 
-  /* GOsa Account class */
-  $checks["gosaAccount"]["REQUIRED_VERSION"]= "2.6.6";
-  $checks["gosaAccount"]["SCHEMA_FILES"]    = array("gosa-samba3.schema");
-  $checks["gosaAccount"]["CLASSES_REQUIRED"]= array("gosaAccount");
-  $checks["gosaAccount"]["IS_MUST_HAVE"]    = TRUE;
-  $checks["gosaAccount"]["INFO"]            = _("This class is used to make users appear in GOsa.");
+    /* GOsa Account class */
+    $checks["gosaAccount"]["REQUIRED_VERSION"] = "2.6.6";
+    $checks["gosaAccount"]["SCHEMA_FILES"]    = array("gosa-samba3.schema");
+    $checks["gosaAccount"]["CLASSES_REQUIRED"] = array("gosaAccount");
+    $checks["gosaAccount"]["IS_MUST_HAVE"]    = true;
+    $checks["gosaAccount"]["INFO"]            = _("This class is used to make users appear in GOsa.");
 
-  /* GOsa lock entry, used to mark currently edited objects as 'in use' */
-  $checks["gosaLockEntry"]["REQUIRED_VERSION"] = "2.6.1";
-  $checks["gosaLockEntry"]["SCHEMA_FILES"]     = array("gosa-samba3.schema");
-  $checks["gosaLockEntry"]["CLASSES_REQUIRED"] = array("gosaLockEntry");
-  $checks["gosaLockEntry"]["IS_MUST_HAVE"]     = TRUE;
-  $checks["gosaLockEntry"]["INFO"]             = _("This class is used to lock entries in order to prevent multiple edits at a time.");
+    /* GOsa lock entry, used to mark currently edited objects as 'in use' */
+    $checks["gosaLockEntry"]["REQUIRED_VERSION"] = "2.6.1";
+    $checks["gosaLockEntry"]["SCHEMA_FILES"]     = array("gosa-samba3.schema");
+    $checks["gosaLockEntry"]["CLASSES_REQUIRED"] = array("gosaLockEntry");
+    $checks["gosaLockEntry"]["IS_MUST_HAVE"]     = true;
+    $checks["gosaLockEntry"]["INFO"]             = _("This class is used to lock entries in order to prevent multiple edits at a time.");
 
-  /* Some other checks */
-  foreach(array(
+    /* Some other checks */
+    foreach (array(
         "gosaCacheEntry"        => array("version" => "2.6.1", "class" => "gosaAccount"),
         "gosaDepartment"        => array("version" => "2.6.1", "class" => "gosaAccount"),
-        "goFaxAccount"          => array("version" => "1.0.4", "class" => "gofaxAccount","file" => "gofax.schema"),
-        "goFaxSBlock"           => array("version" => "1.0.4", "class" => "gofaxAccount","file" => "gofax.schema"),
-        "goFaxRBlock"           => array("version" => "1.0.4", "class" => "gofaxAccount","file" => "gofax.schema"),
-        "gosaUserTemplate"      => array("version" => "2.6.1", "class" => "posixAccount","file" => "nis.schema"),
-        "gosaMailAccount"       => array("version" => "2.6.1", "class" => "mailAccount","file" => "gosa-samba3.schema"),
-        "gosaProxyAccount"      => array("version" => "2.6.1", "class" => "proxyAccount","file" => "gosa-samba3.schema"),
-        "gosaApplication"       => array("version" => "2.6.1", "class" => "appgroup","file" => "gosa.schema"),
-        "gosaApplicationGroup"  => array("version" => "2.6.1", "class" => "appgroup","file" => "gosa.schema"),
-        "GOhard"                => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
-        "gotoTerminal"          => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
-        "goServer"              => array("version" => "2.6.1", "class" => "server","file" => "goserver.schema"),
-        "goTerminalServer"      => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
-        "goShareServer"         => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
-        "goNtpServer"           => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
-        "goSyslogServer"        => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
+        "goFaxAccount"          => array("version" => "1.0.4", "class" => "gofaxAccount", "file" => "gofax.schema"),
+        "goFaxSBlock"           => array("version" => "1.0.4", "class" => "gofaxAccount", "file" => "gofax.schema"),
+        "goFaxRBlock"           => array("version" => "1.0.4", "class" => "gofaxAccount", "file" => "gofax.schema"),
+        "gosaUserTemplate"      => array("version" => "2.6.1", "class" => "posixAccount", "file" => "nis.schema"),
+        "gosaMailAccount"       => array("version" => "2.6.1", "class" => "mailAccount", "file" => "gosa-samba3.schema"),
+        "gosaProxyAccount"      => array("version" => "2.6.1", "class" => "proxyAccount", "file" => "gosa-samba3.schema"),
+        "gosaApplication"       => array("version" => "2.6.1", "class" => "appgroup", "file" => "gosa.schema"),
+        "gosaApplicationGroup"  => array("version" => "2.6.1", "class" => "appgroup", "file" => "gosa.schema"),
+        "GOhard"                => array("version" => "2.6.1", "class" => "terminals", "file" => "goto.schema"),
+        "gotoTerminal"          => array("version" => "2.6.1", "class" => "terminals", "file" => "goto.schema"),
+        "goServer"              => array("version" => "2.6.1", "class" => "server", "file" => "goserver.schema"),
+        "goTerminalServer"      => array("version" => "2.6.1", "class" => "terminals", "file" => "goto.schema"),
+        "goShareServer"         => array("version" => "2.6.1", "class" => "terminals", "file" => "goto.schema"),
+        "goNtpServer"           => array("version" => "2.6.1", "class" => "terminals", "file" => "goto.schema"),
+        "goSyslogServer"        => array("version" => "2.6.1", "class" => "terminals", "file" => "goto.schema"),
         "goLdapServer"          => array("version" => "2.6.1", "class" => "goServer"),
         "goCupsServer"          => array("version" => "2.6.1", "class" => array("posixAccount", "terminals"),),
-        "goImapServer"          => array("version" => "2.6.1", "class" => array("mailAccount", "mailgroup"),"file" => "gosa-samba3.schema"),
+        "goImapServer"          => array("version" => "2.6.1", "class" => array("mailAccount", "mailgroup"), "file" => "gosa-samba3.schema"),
         "goKrbServer"           => array("version" => "2.6.1", "class" => "goServer"),
-        "goFaxServer"           => array("version" => "2.6.1", "class" => "gofaxAccount","file" => "gofax.schema"),
-        ) as $name => $values){
+        "goFaxServer"           => array("version" => "2.6.1", "class" => "gofaxAccount", "file" => "gofax.schema"),
+    ) as $name => $values) {
 
-          $checks[$name] = $def_check;
-          if(isset($values['version'])){
+        $checks[$name] = $def_check;
+        if (isset($values['version'])) {
             $checks[$name]["REQUIRED_VERSION"] = $values['version'];
-          }
-          if(isset($values['file'])){
+        }
+        if (isset($values['file'])) {
             $checks[$name]["SCHEMA_FILES"] = array($values['file']);
-          }
-          if (isset($values['class'])) {
-            $checks[$name]["CLASSES_REQUIRED"] = is_array($values['class'])?$values['class']:array($values['class']);
-          }
         }
-  foreach($checks as $name => $value){
-    foreach($value['CLASSES_REQUIRED'] as $class){
-
-      if(!isset($objectclasses[$name])){
-        if($value['IS_MUST_HAVE']){
-          $checks[$name]['STATUS'] = FALSE;
-          $checks[$name]['MSG']    = sprintf(_("Required object class %s is missing!"), bold($class));
-        } else {
-          $checks[$name]['STATUS'] = TRUE;
-          $checks[$name]['MSG']    = sprintf(_("Optional object class %s is missing!"), bold($class));
+        if (isset($values['class'])) {
+            $checks[$name]["CLASSES_REQUIRED"] = is_array($values['class']) ? $values['class'] : array($values['class']);
         }
-      }elseif(!check_schema_version($objectclasses[$name],$value['REQUIRED_VERSION'])){
-        $checks[$name]['STATUS'] = FALSE;
-
-        $checks[$name]['MSG'] = sprintf(_("Wrong version of required object class %s (!=%s) detected!"), bold($class), bold($value['REQUIRED_VERSION']));
-      }else{
-        $checks[$name]['STATUS'] = TRUE;
-        $checks[$name]['MSG'] = sprintf(_("Class available"));
-      }
     }
-  }
+    foreach ($checks as $name => $value) {
+        foreach ($value['CLASSES_REQUIRED'] as $class) {
 
-  $tmp = $objectclasses;
+            if (!isset($objectclasses[$name])) {
+                if ($value['IS_MUST_HAVE']) {
+                    $checks[$name]['STATUS'] = false;
+                    $checks[$name]['MSG']    = sprintf(_("Required object class %s is missing!"), bold($class));
+                } else {
+                    $checks[$name]['STATUS'] = true;
+                    $checks[$name]['MSG']    = sprintf(_("Optional object class %s is missing!"), bold($class));
+                }
+            } elseif (!check_schema_version($objectclasses[$name], $value['REQUIRED_VERSION'])) {
+                $checks[$name]['STATUS'] = false;
 
-  /* The gosa base schema */
-  $checks['posixGroup'] = $def_check;
-  $checks['posixGroup']['REQUIRED_VERSION'] = "2.6.1";
-  $checks['posixGroup']['SCHEMA_FILES']     = array("gosa-samba3.schema","gosa-samba2.schema");
-  $checks['posixGroup']['CLASSES_REQUIRED'] = array("posixGroup");
-  $checks['posixGroup']['STATUS']           = TRUE;
-  $checks['posixGroup']['IS_MUST_HAVE']     = TRUE;
-  $checks['posixGroup']['MSG']              = "";
-  $checks['posixGroup']['INFO']             = "";
-
-  /* Depending on selected rfc2307bis mode, we need different schema configurations */
-  if(isset($tmp['posixGroup'])){
-
-    if($rfc2307bis && isset($tmp['posixGroup']['STRUCTURAL'])){
-      $checks['posixGroup']['STATUS']           = FALSE;
-      $checks['posixGroup']['MSG']              = _("RFC2307bis schema is enabled, but the current LDAP configuration does not support it!");
-      $checks['posixGroup']['INFO']             = _("To use RFC2307bis groups, the objectClass 'posixGroup' must be AUXILIARY.");
+                $checks[$name]['MSG'] = sprintf(_("Wrong version of required object class %s (!=%s) detected!"), bold($class), bold($value['REQUIRED_VERSION']));
+            } else {
+                $checks[$name]['STATUS'] = true;
+                $checks[$name]['MSG'] = sprintf(_("Class available"));
+            }
+        }
     }
-    if(!$rfc2307bis && !isset($tmp['posixGroup']['STRUCTURAL'])){
-      $checks['posixGroup']['STATUS']           = FALSE;
-      $checks['posixGroup']['MSG']              = _("RFC2307bis schema is disabled, but the current LDAP configuration supports it!");
-      $checks['posixGroup']['INFO']             = _("To correct this, the objectClass 'posixGroup' must be STRUCTURAL.");
-    }
-  }
 
-  return($checks);
+    $tmp = $objectclasses;
+
+    /* The gosa base schema */
+    $checks['posixGroup'] = $def_check;
+    $checks['posixGroup']['REQUIRED_VERSION'] = "2.6.1";
+    $checks['posixGroup']['SCHEMA_FILES']     = array("gosa-samba3.schema", "gosa-samba2.schema");
+    $checks['posixGroup']['CLASSES_REQUIRED'] = array("posixGroup");
+    $checks['posixGroup']['STATUS']           = true;
+    $checks['posixGroup']['IS_MUST_HAVE']     = true;
+    $checks['posixGroup']['MSG']              = '';
+    $checks['posixGroup']['INFO']             = '';
+
+    /* Depending on selected rfc2307bis mode, we need different schema configurations */
+    if (isset($tmp['posixGroup'])) {
+
+        if ($rfc2307bis && isset($tmp['posixGroup']['STRUCTURAL'])) {
+            $checks['posixGroup']['STATUS']           = false;
+            $checks['posixGroup']['MSG']              = _("RFC2307bis schema is enabled, but the current LDAP configuration does not support it!");
+            $checks['posixGroup']['INFO']             = _("To use RFC2307bis groups, the objectClass 'posixGroup' must be AUXILIARY.");
+        }
+        if (!$rfc2307bis && !isset($tmp['posixGroup']['STRUCTURAL'])) {
+            $checks['posixGroup']['STATUS']           = false;
+            $checks['posixGroup']['MSG']              = _("RFC2307bis schema is disabled, but the current LDAP configuration supports it!");
+            $checks['posixGroup']['INFO']             = _("To correct this, the objectClass 'posixGroup' must be STRUCTURAL.");
+        }
+    }
+
+    return ($checks);
 }
 
 
-function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FALSE)
+function get_languages($languages_in_own_language = false, $strip_region_tag = false)
 {
-  $tmp = array(
+    $tmp = array(
         "de_DE" => "German",
         "fr_FR" => "French",
         "it_IT" => "Italian",
@@ -2686,9 +2713,10 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
         #"sv_SE" => "Swedish",
         "zh_CN" => "Chinese",
         "vi_VN" => "Vietnamese",
-        "ru_RU" => "Russian");
-  
-  $tmp2= array(
+        "ru_RU" => "Russian"
+    );
+
+    $tmp2 = array(
         "de_DE" => _("German"),
         "fr_FR" => _("French"),
         "it_IT" => _("Italian"),
@@ -2700,249 +2728,247 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
         #"sv_SE" => _("Swedish"),
         "zh_CN" => _("Chinese"),
         "vi_VN" => _("Vietnamese"),
-        "ru_RU" => _("Russian"));
+        "ru_RU" => _("Russian")
+    );
 
-  $ret = array();
-  if($languages_in_own_language){
+    $ret = [];
+    if ($languages_in_own_language) {
 
-    $old_lang = setlocale(LC_ALL, 0);
+        $old_lang = setlocale(LC_ALL, 0);
 
-    /* If the locale wasn't correclty set before, there may be an incorrect
-        locale returned. Something like this: 
+        /* If the locale wasn't correclty set before, there may be an incorrect
+        locale returned. Something like this:
           C_CTYPE=de_DE.UTF-8;LC_NUMERIC=C;LC_TIME=de_DE.UTF-8;LC ...
         Extract the locale name from this string and use it to restore old locale.
      */
-    if(preg_match("/LC_CTYPE/",$old_lang)){
-      $old_lang = preg_replace("/^.*LC_CTYPE=([^;]*).*$/","\\1",$old_lang);
+        if (preg_match("/LC_CTYPE/", $old_lang)) {
+            $old_lang = preg_replace("/^.*LC_CTYPE=([^;]*).*$/", "\\1", $old_lang);
+        }
+
+        foreach ($tmp as $key => $name) {
+            $lang = $key . ".UTF-8";
+            setlocale(LC_ALL, $lang);
+            if ($strip_region_tag) {
+                $ret[preg_replace("/^([^_]*).*$/", "\\1", $key)] = _($name) . " (" . $tmp2[$key] . ")";
+            } else {
+                $ret[$key] = _($name) . " &nbsp;(" . $tmp2[$key] . ")";
+            }
+        }
+        setlocale(LC_ALL, $old_lang);
+    } else {
+        foreach ($tmp as $key => $name) {
+            if ($strip_region_tag) {
+                $ret[preg_replace("/^([^_]*).*/", "\\1", $key)] = _($name);
+            } else {
+                $ret[$key] = _($name);
+            }
+        }
     }
-    
-    foreach($tmp as $key => $name){
-      $lang = $key.".UTF-8";
-      setlocale(LC_ALL, $lang);
-      if($strip_region_tag){
-        $ret[preg_replace("/^([^_]*).*$/","\\1",$key)] = _($name)." (".$tmp2[$key].")";
-      }else{
-        $ret[$key] = _($name)." &nbsp;(".$tmp2[$key].")";
-      }
-    }
-    setlocale(LC_ALL, $old_lang);
-  }else{
-    foreach($tmp as $key => $name){
-      if($strip_region_tag){
-        $ret[preg_replace("/^([^_]*).*/","\\1",$key)] = _($name);
-      }else{
-        $ret[$key] = _($name);
-      }
-    }
-  }
-  return($ret);
+    return ($ret);
 }
 
 
-/*! \brief Returns contents of the given POST variable and check magic quotes settings
+/**
+ * Returns contents of the given POST variable and check magic quotes settings
  *
  * Depending on the magic quotes settings this returns a stripclashed'ed version of
  * a certain POST variable.
+ * 
+ * @todo get_magic_quotes_gpc is not available any longer so the code was removed
+ * but removing it leaves this function behind and this needs some review later
  *
- * \param string 'name' the POST var to return ($_POST[$name])
- * \return string
+ * @param string $name the POST var to return ($_POST[$name])
+ * @return
  * */
-function get_post($name)
+function get_post(string $name)
 {
-    if(!isset($_POST[$name])){
-        trigger_error("Requested POST value (".$name.") does not exist, you should add a check to prevent this message.");
-        return(FALSE);
+    if (!isset($_POST[$name])) {
+        trigger_error("Requested POST value (" . $name . ") does not exist, you should add a check to prevent this message.");
+        return false;
     }
 
     // Handle Posted Arrays
-    $tmp = array();
-    if(is_array($_POST[$name]) && !is_string($_POST[$name])){
-        if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){
-          array_walk_recursive($_POST, "stripcslashes");
-        }
+    $tmp = [];
+    if (is_array($_POST[$name]) && !is_string($_POST[$name])) {
         $tmp = $_POST;
-        return($tmp[$name]);
-    }else{
-
-        if(version_compare(PHP_VERSION, '5.4.0', '<') && get_magic_quotes_gpc()){
-            $val = stripcslashes($_POST[$name]);
-        }else{
-            $val = $_POST[$name];
-        }
+        return $tmp[$name];
+    } else {
+        $val = $_POST[$name];
     }
-  return($val);
+    return $val;
 }
 
 
-/*! \brief Returns contents of the given POST variable and check magic quotes settings
+/**
+ * Returns contents of the given POST variable and check magic quotes settings
  *
  * Depending on the magic quotes settings this returns a stripclashed'ed version of
  * a certain POST variable.
+ * 
+ * @todo get_magic_quotes_gpc is not available any longer so the code was removed
+ * but removing it leaves this function behind and this needs some review later
  *
- * \param string 'name' the POST var to return ($_POST[$name])
- * \return string
- * */
-function get_binary_post($name)
+ * @param string 'name' the POST var to return ($_POST[$name])
+ * @return string
+ */
+function get_binary_post(string $name)
 {
-  if(!isset($_POST[$name])){
-    trigger_error("Requested POST value (".$name.") does not exists, you should add a check to prevent this message.");
-    return(FALSE);
-  }
+    if (!isset($_POST[$name])) {
+        trigger_error("Requested POST value (" . $name . ") does not exists, you should add a check to prevent this message.");
+        return (false);
+    }
 
-  $p = str_replace('\0', '', $_POST[$name]);
-  if(get_magic_quotes_gpc()){
-    return(stripcslashes($p));
-  }else{
-    return($_POST[$p]);
-  }
+    $p = str_replace('\0', '', $_POST[$name]);
+    return ($_POST[$p]);
 }
 
 function set_post($value)
 {
     // Take care of array, recursivly convert each array entry.
-    if(is_array($value)){
-        foreach($value as $key => $val){
+    if (is_array($value)) {
+        foreach ($value as $key => $val) {
             $value[$key] = set_post($val);
         }
-        return($value);
+        return ($value);
     }
-    
-    // Do not touch boolean values, we may break them.
-    if($value === TRUE || $value === FALSE ) return($value);
 
-    // Return a fixed string which can then be used in HTML fields without 
+    // Do not touch boolean values, we may break them.
+    if ($value === true || $value === false) return ($value);
+
+    // Return a fixed string which can then be used in HTML fields without
     //  breaking the layout or the values. This allows to use '"<> in input fields.
-    return(htmlentities($value, ENT_QUOTES, 'utf-8'));
+    return (htmlentities($value ?? '', ENT_QUOTES, 'utf-8'));
 }
 
 
 /*! \brief Return class name in correct case */
 function get_correct_class_name($cls)
 {
-  global $class_mapping;
-  if(isset($class_mapping) && is_array($class_mapping)){
-    foreach($class_mapping as $class => $file){
-      if(preg_match("/^".$cls."$/i",$class)){
-        return($class);
-      }
+    global $class_mapping;
+    if (isset($class_mapping) && is_array($class_mapping)) {
+        foreach ($class_mapping as $class => $file) {
+            if (preg_match("/^" . $cls . "$/i", $class)) {
+                return ($class);
+            }
+        }
     }
-  }
-  return(FALSE);
+    return (false);
 }
 
 
-/*! \brief  Change the password for a given object ($dn).
- *          This method uses the specified hashing method to generate a new password
- *           for the object and it also takes care of sambaHashes, if enabled.
- *          Finally the postmodify hook of the class 'user' will be called, if it is set.
+/** 
+ * Change the password for a given object ($dn).
+ * This method uses the specified hashing method to generate a new password
+ * for the object and it also takes care of sambaHashes, if enabled.
+ * Finally the postmodify hook of the class 'user' will be called, if it is set.
  *
  * @param   String   The DN whose password shall be changed.
  * @param   String   The new password.
  * @param   Boolean  Skip adding samba hashes to the target (sambaNTPassword,sambaLMPassword)
  * @param   String   The hashin method to use, default is the global configured default.
  * @param   String   The users old password, this allows script based rollback mechanisms,
- *                    the prehook will then be called witch switched newPassword/oldPassword. 
- * @return  Boolean  TRUE on success else FALSE.
+ *                    the prehook will then be called witch switched newPassword/oldPassword.
+ * @return  Boolean  true on success else false.
  */
-function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password = "", &$message = "")
+function change_password($dn, $password, $mode = false, $hash = '', $old_password = '', &$message = '')
 {
     global $config;
-    $newpass= "";
+    $newpass = '';
 
     // Not sure, why this is here, but maybe some encryption methods require it.
-    mt_srand((double) microtime()*1000000);
+    mt_srand((float) microtime() * 1000000);
 
     // Get a list of all available password encryption methods.
-    $methods = new passwordMethod(session::get('config'),$dn);
+    $methods = new passwordMethod(session::get('config'), $dn);
     $available = $methods->get_available_methods();
 
     // Fetch the current object data, to be able to detect the current hashing method
     //  and to be able to rollback changes once has an error occured.
     $ldap = $config->get_ldap_link();
-    $ldap->cat ($dn, array("shadowLastChange", "userPassword","sambaNTPassword","sambaLMPassword", "uid", "objectClass"));
-    $attrs = $ldap->fetch ();
+    $ldap->cat($dn, array("shadowLastChange", "userPassword", "sambaNTPassword", "sambaLMPassword", "uid", "objectClass"));
+    $attrs = $ldap->fetch();
     $initialAttrs = $attrs;
 
     // If no hashing method is enforced, then detect what method we've to use.
     $hash = strtolower($hash);
-    $default_method = $config->get_cfg_value('core','passwordDefaultHash');
+    $default_method = $config->get_cfg_value('core', 'passwordDefaultHash');
 
     // Do not modify the password at all.
-    if($default_method == "Remote"){
-      $test = new $available[$default_method]($config,$dn);
-      $test->set_hash($hash);
-    }else if(empty($hash)){
+    if ($default_method == "Remote") {
+        $test = new $available[$default_method]($config, $dn);
+        $test->set_hash($hash);
+    } else if (empty($hash)) {
 
         // Do we need clear-text password for this object?
-        if(isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
+        if (isset($attrs['userPassword'][0]) && !preg_match("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])) {
             $hash = "clear";
-            $test = new $available[$hash]($config,$dn);
+            $test = new $available[$hash]($config, $dn);
             $test->set_hash($hash);
         }
 
         // If we've still no valid hashing method detected, then try to extract if from the userPassword attribute.
-        elseif(isset($attrs['userPassword'][0]) && preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)){
-            $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
-            if($test){
+        elseif (isset($attrs['userPassword'][0]) && preg_match("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)) {
+            $test = passwordMethod::get_method($attrs['userPassword'][0], $dn);
+            if ($test) {
                 $hash = $test->get_hash_name();
             }
         }
 
         // No current password was found and no hash is enforced, so we've to use the config default here.
-        $hash = $config->get_cfg_value('core','passwordDefaultHash');
-        if(!isset($available[$hash])){
-          msg_dialog::display(_("Error"),_("Invalid password method set!"), ERROR_DIALOG);
-          return(FALSE);    
-        }else{
-          $test = new $available[$hash]($config,$dn);
-          $test->set_hash($hash);
+        $hash = $config->get_cfg_value('core', 'passwordDefaultHash');
+        if (!isset($available[$hash])) {
+            msg_dialog::display(_("Error"), _("Invalid password method set!"), ERROR_DIALOG);
+            return (false);
+        } else {
+            $test = new $available[$hash]($config, $dn);
+            $test->set_hash($hash);
         }
-    }else{
-        $test = new $available[$hash]($config,$dn);
+    } else {
+        $test = new $available[$hash]($config, $dn);
         $test->set_hash($hash);
     }
 
     // We've now a valid password-method-handle and can create the new password hash or don't we?
-    if(!$test instanceOf passwordMethod){
+    if (!$test instanceof passwordMethod) {
         $message = _("Cannot detect password hash!");
-    }else{
+    } else {
 
-        // Feed password backends with object information. 
+        // Feed password backends with object information.
         $test->dn = $dn;
         $test->attrs = $attrs;
-        $newpass= $test->generate_hash($password);
+        $newpass = $test->generate_hash($password);
         $ldap->cd($dn);
 
-        $attrs= array();
-        if($newpass !== NULL){
+        $attrs = [];
+        if ($newpass !== NULL) {
 
-          // Do we have to append samba attributes too?
-          // - sambaNTPassword / sambaLMPassword
-          $tmp = $config->get_cfg_value('core','sambaHashHook');
-          if (!$mode && !empty($tmp)){
-              $attrs= generate_smb_nt_hash($password);
-              if(!count($attrs) || !is_array($attrs)){
-                  msg_dialog::display(_("Error"),_("Cannot generate SAMBA hash!"),ERROR_DIALOG);
-                  return(FALSE);    
-              }
-          }
+            // Do we have to append samba attributes too?
+            // - sambaNTPassword / sambaLMPassword
+            $tmp = $config->get_cfg_value('core', 'sambaHashHook');
+            if (!$mode && !empty($tmp)) {
+                $attrs = generate_smb_nt_hash($password);
+                if (!count($attrs) || !is_array($attrs)) {
+                    msg_dialog::display(_("Error"), _("Cannot generate SAMBA hash!"), ERROR_DIALOG);
+                    return false;
+                }
+            }
 
-          $attrs['userPassword'] = $newpass;
+            $attrs['userPassword'] = $newpass;
 
-          // For posixUsers - Set the last changed value.
-          if(in_array_strict("shadowAccount", $initialAttrs['objectClass'])){
-            $attrs['shadowLastChange'] = (int)(date("U") / 86400);
-          }
+            // For posixUsers - Set the last changed value.
+            if (in_array_strict("shadowAccount", $initialAttrs['objectClass'])) {
+                $attrs['shadowLastChange'] = (int)(date("U") / 86400);
+            }
         }
 
         // Prepare a special attribute list, which will be used for event hook calls
-        $attrsEvent = array();
-        foreach($initialAttrs as $name => $value){
-            if(!is_numeric($name))
+        $attrsEvent = [];
+        foreach ($initialAttrs as $name => $value) {
+            if (!is_numeric($name))
                 $attrsEvent[$name] = $value[0];
         }
         $attrsEvent['dn'] = $initialAttrs['dn'];
-        foreach($attrs as $name => $value){
+        foreach ($attrs as $name => $value) {
             $attrsEvent[$name] = $value;
         }
         // base64_encode passwords to avoide shell injection via user-set passwords
@@ -2952,115 +2978,118 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         $attrsEvent['bind_server'] = $config->current['SERVER'];
         $attrsEvent['bind_password'] = $config->get_credentials($config->current['ADMINPASSWORD']);
 
+        $output = [];
+        $retCode = null;
+        $error = [];
+
         // Call the premodify hook now
-        $passwordPlugin = new password($config,$dn);
-        plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
-        if($retCode === 0 && count($output)){
-            $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
-            return(FALSE);
+        $passwordPlugin = new password($config, $dn);
+        plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output, $retCode, $error, false);
+        if ($retCode === 0 && count($output)) {
+            $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"), implode($output));
+            return (false);
         }
 
         // Perform ldap operations
         $ldap->modify($attrs);
 
         // Check if the object was locked before, if it was, lock it again!
-        $deactivated = $test->is_locked($config,$dn);
-        if($deactivated){
-            $test->lock_account($config,$dn);
+        $deactivated = $test->is_locked($config, $dn);
+        if ($deactivated) {
+            $test->lock_account($config, $dn);
         }
 
         // Check if everything went fine and then call the post event hooks.
         // If an error occures, then try to rollback the complete actions done.
-        $preRollback = FALSE;
-        $ldapRollback = FALSE;
-        $success = TRUE;
+        $preRollback = false;
+        $ldapRollback = false;
+        $success = true;
         if (!$ldap->success()) {
-            new log("modify","users/passwordMethod",$dn,array(),"Password change - ldap modifications! - FAILED");
-            $success =FALSE;
+            new log("modify", "users/passwordMethod", $dn, [], "Password change - ldap modifications! - FAILED");
+            $success = false;
             $message = msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD);
-            $preRollback  =TRUE;
+            $preRollback  = true;
         } else {
 
             // Now call the passwordMethod change mechanism.
-            if(!$test->set_password($password)){
-                $ldapRollback = TRUE;
-                $preRollback  =TRUE;
-                $success = FALSE;
-                new log("modify","users/passwordMethod",$dn,array(),"Password change - set_password! - FAILED");
+            if (!$test->set_password($password)) {
+                $ldapRollback = true;
+                $preRollback  = true;
+                $success = false;
+                new log("modify", "users/passwordMethod", $dn, [], "Password change - set_password! - FAILED");
                 $message = _("Password change failed!");
-            }else{
-        
+            } else {
                 // Execute the password hook
-                plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
-                if($retCode === 0){
-                    if(count($output)){
-                        new log("modify","users/passwordMethod",$dn,array(),"Password change - Post modify hook reported! - FAILED!");
-                        $message = sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"),implode($output));
-                        $ldapRollback = TRUE;
-                        $preRollback = TRUE;
-                        $success = FALSE;
-                    }else{
-                        #new log("modify","users/passwordMethod",$dn,array(),"Password change - successfull!");
+                plugin::callHook($passwordPlugin, 'POSTMODIFY', $attrsEvent, $output, $retCode, $error, false);
+                if ($retCode === 0) {
+                    if (count($output)) {
+                        new log("modify", "users/passwordMethod", $dn, [], "Password change - Post modify hook reported! - FAILED!");
+                        $message = sprintf(_("Post-event hook reported a problem: %s. Password change canceled!"), implode($output));
+                        $ldapRollback = true;
+                        $preRollback = true;
+                        $success = false;
+                    } else {
+                        new log("modify","users/passwordMethod",$dn,[],"Password change - successfull!");
                     }
-                }else{
-                    $ldapRollback = TRUE;
-                    $preRollback = TRUE;
-                    $success = FALSE;
-                    new log("modify","users/passwordMethod",$dn,array(),"Password change - postmodify hook execution! - FAILED");
-                    new log("modify","users/passwordMethod",$dn,array(),$error);
+                } else {
+                    $ldapRollback = true;
+                    $preRollback = true;
+                    $success = false;
+                    new log("modify", "users/passwordMethod", $dn, [], "Password change - postmodify hook execution! - FAILED");
+                    new log("modify", "users/passwordMethod", $dn, [], $error);
 
-                    // Call password method again and send in old password to 
+                    // Call password method again and send in old password to
                     //  keep the database consistency
                     $test->set_password($old_password);
                 }
             }
         }
 
-        // Setting the password in the ldap database or further operation failed, we should now execute 
-        //  the plugins pre-event hook, using switched passwords, new/old password.
-        // This ensures that passwords which were set outside of GOsa, will be reset to its 
-        //  starting value.
-        if($preRollback){
-            new log("modify","users/passwordMethod",$dn,array(),"Rolling back premodify hook!");
-            $oldpass= $test->generate_hash($old_password);
+        // Setting the password in the ldap database or further operation failed, we should now execute
+        // the plugins pre-event hook, using switched passwords, new/old password.
+        // This ensures that passwords which were set outside of GOsa, will be reset to its
+        // starting value.
+        if ($preRollback) {
+            new log("modify", "users/passwordMethod", $dn, [], "Rolling back premodify hook!");
+            $oldpass = $test->generate_hash($old_password);
             $attrsEvent['current_password'] = $password;
             $attrsEvent['new_password'] = $old_password;
-            foreach(array("userPassword","sambaNTPassword","sambaLMPassword") as $attr){
-                if(isset($initialAttrs[$attr][0])) $attrsEvent[$attr] = $initialAttrs[$attr][0];
+            foreach (array("userPassword", "sambaNTPassword", "sambaLMPassword") as $attr) {
+                if (isset($initialAttrs[$attr][0])) $attrsEvent[$attr] = $initialAttrs[$attr][0];
             }
-            
-            plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output,$retCode,$error, $directlyPrintError = FALSE);
-            if($retCode === 0 && count($output)){
-                $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"),implode($output));
-                new log("modify","users/passwordMethod",$dn,array(),"Rolling back premodify hook! - FAILED!");
+
+            plugin::callHook($passwordPlugin, 'PREMODIFY', $attrsEvent, $output, $retCode, $error, false);
+            if ($retCode === 0 && count($output)) {
+                $message = sprintf(_("Pre-event hook reported a problem: %s. Password change canceled!"), implode($output));
+                new log("modify", "users/passwordMethod", $dn, [], "Rolling back premodify hook! - FAILED!");
             }
         }
-        
+
         // We've written the password to the ldap database, but executing the postmodify hook failed.
         // Now, we've to rollback all password related ldap operations.
-        if($ldapRollback){
-            new log("modify","users/passwordMethod",$dn,array(),"Rolling back ldap modifications!");
-            $attrs = array();
-            foreach(array("userPassword","sambaNTPassword","sambaLMPassword") as $attr){
-                if(isset($initialAttrs[$attr][0])) $attrs[$attr] = $initialAttrs[$attr][0];
+        if ($ldapRollback) {
+            new log("modify", "users/passwordMethod", $dn, [], "Rolling back ldap modifications!");
+            $attrs = [];
+            foreach (array("userPassword", "sambaNTPassword", "sambaLMPassword") as $attr) {
+                if (isset($initialAttrs[$attr][0])) $attrs[$attr] = $initialAttrs[$attr][0];
             }
             $ldap->cd($dn);
             $ldap->modify($attrs);
-            if(!$ldap->success()){
+            if (!$ldap->success()) {
                 $message = msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD);
-                new log("modify","users/passwordMethod",$dn,array(),"Rolling back ldap modifications! - FAILED");
+                new log("modify", "users/passwordMethod", $dn, [], "Rolling back ldap modifications! - FAILED");
             }
         }
 
         // Log action.
-        if($success){
+        if ($success) {
             stats::log('global', 'global', array('users'),  $action = 'change_password', $amount = 1, 0, $test->get_hash());
-            new log("modify","users/passwordMethod",$dn,array(),"Password change - successfull!");
-        }else{
-            new log("modify","users/passwordMethod",$dn,array(),"Password change - FAILED!");
+            new log("modify", "users/passwordMethod", $dn, [], "Password change - successfull!");
+        } else {
+            new log("modify", "users/passwordMethod", $dn, [], "Password change - FAILED!");
         }
 
-        return($success);
+        return ($success);
     }
 }
 
@@ -3076,96 +3105,96 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
  */
 function generate_smb_nt_hash($password)
 {
-  global $config;
+    global $config;
 
-  // First try to retrieve values via RPC 
-  if ($config->get_cfg_value("core","gosaRpcServer") != ""){
+    // First try to retrieve values via RPC
+    if ($config->get_cfg_value("core", "gosaRpcServer") != '') {
 
-    $rpc = $config->getRpcHandle();
-    $hash = $rpc->mksmbhash($password);
-    if(!$rpc->success()){
-        msg_dialog::display(_("Error"),msgPool::rpcError($rpc->get_error()),ERROR_DIALOG);
-        return(array());
+        $rpc = $config->getRpcHandle();
+        $hash = $rpc->mksmbhash($password);
+        if (!$rpc->success()) {
+            msg_dialog::display(_("Error"), msgPool::rpcError($rpc->get_error()), ERROR_DIALOG);
+            return ([]);
+        }
+    } else {
+
+        $nt = NThash($password);
+        $lm = LMhash($password);
+        $hash = "$lm:$nt";
     }
 
-  } else {
+    list($lm, $nt) = explode(":", trim($hash));
 
-    $nt=NThash($password);
-    $lm=LMhash($password);
-    $hash="$lm:$nt";
-  }
-
-  list($lm,$nt)= explode(":", trim($hash));
-
-  $attrs['sambaLMPassword']= $lm;
-  $attrs['sambaNTPassword']= $nt;
-  $attrs['sambaPwdLastSet']= date('U');
-  $attrs['sambaBadPasswordCount']= "0";
-  $attrs['sambaBadPasswordTime']= "0";
-  return($attrs);
+    $attrs['sambaLMPassword'] = $lm;
+    $attrs['sambaNTPassword'] = $nt;
+    $attrs['sambaPwdLastSet'] = date('U');
+    $attrs['sambaBadPasswordCount'] = "0";
+    $attrs['sambaBadPasswordTime'] = "0";
+    return ($attrs);
 }
 
-// NT and LM hashing functions 
+// NT and LM hashing functions
 // using openssl and hash methods (no more mcrypt)
 // Original code from http://php.net/manual/en/ref.hash.php
 function NThash($Input)
 {
-  // Convert the password from UTF8 to UTF16 (little endian)
-  $pwInput=iconv('UTF-8','UTF-16LE',$Input);
+    // Convert the password from UTF8 to UTF16 (little endian)
+    $pwInput = iconv('UTF-8', 'UTF-16LE', $Input);
 
-  // Encrypt it with the MD4 hash
-  if (extension_loaded("hash")) {
-    $MD4Hash=hash('md4',$pwInput);
-  } else {
-    $MD4Hash=bin2hex(mhash(MHASH_MD4,$pwInput));
-  }
+    // Encrypt it with the MD4 hash
+    if (extension_loaded("hash")) {
+        $MD4Hash = hash('md4', $pwInput);
+    } else {
+        $MD4Hash = bin2hex(hash("md4", $pwInput));
+    }
 
-  // Make it uppercase, not necessary, but it's common to do so with NTLM hashes
-  $hash=strtoupper($MD4Hash);
-  return($hash);
+    // Make it uppercase, not necessary, but it's common to do so with NTLM hashes
+    $hash = strtoupper($MD4Hash);
+    return ($hash);
 }
 
 // Really Really should disable this and just output invalid junk
-// since this hashing method is very very broken... disabled unless 
+// since this hashing method is very very broken... disabled unless
 // config for sambaHashHook is set specifically to "NTLM+LM"
 function LMhash($Input)
 {
-  $lmhash = 'abunchofinvalidjunk!';
-  if (trim($config->get_cfg_value('core','sambaHashHook')) == 'NTLM+LM') {
-    $Input = strtoupper(substr($Input,0,14));
-    $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
-    $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
-    $lmhash = strtoupper($p1.$p2);
-  }
-  return $lmhash;
+    global $config;
+    $lmhash = 'abunchofinvalidjunk!';
+    if (trim($config->get_cfg_value('core', 'sambaHashHook')) == 'NTLM+LM') {
+        $Input = strtoupper(substr($Input, 0, 14));
+        $p1 = LMhash_DESencrypt(substr($Input, 0, 7));
+        $p2 = LMhash_DESencrypt(substr($Input, 7, 7));
+        $lmhash = strtoupper($p1 . $p2);
+    }
+    return $lmhash;
 }
 
 function LMhash_DESencrypt($Input)
 {
-  $msg = "KGS!@#$%";
-  $key = array();
-  $tmp = array();
-  $len = strlen($Input);
-  for ($i=0; $i<7; ++$i)
-  $tmp[] = $i < $len ? ord($Input[$i]) : 0;
-  $key[] = $tmp[0] & 254;
-  $key[] = ($tmp[0] << 7) | ($tmp[1] >> 1);
-  $key[] = ($tmp[1] << 6) | ($tmp[2] >> 2);
-  $key[] = ($tmp[2] << 5) | ($tmp[3] >> 3);
-  $key[] = ($tmp[3] << 4) | ($tmp[4] >> 4);
-  $key[] = ($tmp[4] << 3) | ($tmp[5] >> 5);
-  $key[] = ($tmp[5] << 2) | ($tmp[6] >> 6);
-  $key[] = $tmp[6] << 1;
+    $msg = "KGS!@#$%";
+    $key = [];
+    $tmp = [];
+    $len = strlen($Input);
+    for ($i = 0; $i < 7; ++$i)
+        $tmp[] = $i < $len ? ord($Input[$i]) : 0;
+    $key[] = $tmp[0] & 254;
+    $key[] = ($tmp[0] << 7) | ($tmp[1] >> 1);
+    $key[] = ($tmp[1] << 6) | ($tmp[2] >> 2);
+    $key[] = ($tmp[2] << 5) | ($tmp[3] >> 3);
+    $key[] = ($tmp[3] << 4) | ($tmp[4] >> 4);
+    $key[] = ($tmp[4] << 3) | ($tmp[5] >> 5);
+    $key[] = ($tmp[5] << 2) | ($tmp[6] >> 6);
+    $key[] = $tmp[6] << 1;
 
-  //Each keys is used to DES-encrypt the constant ASCII string "KGS!@#$%"
-  //(resulting in two 8-byte ciphertext values).
-  $is = openssl_cipher_iv_length('des-ecb');
-  $iv = openssl_random_pseudo_bytes($is);
-  $key0 = "";
-  foreach ($key as $k)
-    $key0 .= chr($k);
-  $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv);
-  return bin2hex($LMHash);
+    //Each keys is used to DES-encrypt the constant ASCII string "KGS!@#$%"
+    //(resulting in two 8-byte ciphertext values).
+    $is = openssl_cipher_iv_length('des-ecb');
+    $iv = openssl_random_pseudo_bytes($is);
+    $key0 = '';
+    foreach ($key as $k)
+        $key0 .= chr($k);
+    $LMHash = openssl_encrypt($msg, 'des-ecb', $key0, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
+    return bin2hex($LMHash);
 }
 
 /*! \brief Get the Change Sequence Number of a certain DN
@@ -3176,31 +3205,31 @@ function LMhash_DESencrypt($Input)
  * in modificationDetectionAttribute
  *
  * \param string 'dn'
- * \return either the result or "" in any other case
+ * \return either the result or '' in any other case
  */
-function getEntryCSN($dn)
+function getEntryCSN(string $dn)
 {
-  global $config;
-  if(empty($dn) || !is_object($config)){
-    return("");
-  }
-
-  /* Get attribute that we should use as serial number */
-  $attr= $config->get_cfg_value("core","modificationDetectionAttribute");
-  if($attr != ""){
-    $ldap = $config->get_ldap_link();
-    $ldap->cat($dn,array($attr));
-    $csn = $ldap->fetch();
-    if(isset($csn[$attr][0])){
-      return($csn[$attr][0]);
+    global $config;
+    if (empty($dn) || !is_object($config)) {
+        return ('');
     }
-  }
-  return("");
+
+    /* Get attribute that we should use as serial number */
+    $attr = $config->get_cfg_value("core", "modificationDetectionAttribute");
+    if ($attr != '') {
+        $ldap = $config->get_ldap_link();
+        $ldap->cat($dn, array($attr));
+        $csn = $ldap->fetch();
+        if (isset($csn[$attr][0])) {
+            return ($csn[$attr][0]);
+        }
+    }
+    return ('');
 }
 
 
 /*! \brief Add (a) given objectClass(es) to an attrs entry
- * 
+ *
  * The function adds the specified objectClass(es) to the given
  * attrs entry.
  *
@@ -3209,17 +3238,17 @@ function getEntryCSN($dn)
  * \param array 'attrs' The attrs array to be modified.
  *
  * */
-function add_objectClass($classes, &$attrs)
+function add_objectClass($classes, &$attrs): void
 {
-  if (is_array($classes)){
-    $list= $classes;
-  } else {
-    $list= array($classes);
-  }
+    if (is_array($classes)) {
+        $list = $classes;
+    } else {
+        $list = array($classes);
+    }
 
-  foreach ($list as $class){
-    $attrs['objectClass'][]= $class;
-  }
+    foreach ($list as $class) {
+        $attrs['objectClass'][] = $class;
+    }
 }
 
 
@@ -3228,72 +3257,72 @@ function add_objectClass($classes, &$attrs)
  * Similar to add_objectClass, except that it removes the given
  * objectClasses. See it for the params.
  * */
-function remove_objectClass($classes, &$attrs)
+function remove_objectClass($classes, &$attrs): void
 {
-  if (isset($attrs['objectClass'])){
-    /* Array? */
-    if (is_array($classes)){
-      $list= $classes;
-    } else {
-      $list= array($classes);
-    }
-
-    $tmp= array();
-    foreach ($attrs['objectClass'] as $oc) {
-      foreach ($list as $class){
-        if (strtolower($oc) != strtolower($class)){
-          $tmp[]= $oc;
+    if (isset($attrs['objectClass'])) {
+        /* Array? */
+        if (is_array($classes)) {
+            $list = $classes;
+        } else {
+            $list = array($classes);
         }
-      }
+
+        $tmp = [];
+        foreach ($attrs['objectClass'] as $oc) {
+            foreach ($list as $class) {
+                if (strtolower($oc) != strtolower($class)) {
+                    $tmp[] = $oc;
+                }
+            }
+        }
+        $attrs['objectClass'] = $tmp;
     }
-    $attrs['objectClass']= $tmp;
-  }
 }
 
 
-/*! \brief  Initialize a file download with given content, name and data type. 
+/*! \brief  Initialize a file download with given content, name and data type.
  *  \param  string data The content to send.
  *  \param  string name The name of the file.
  *  \param  string type The content identifier, default value is "application/octet-stream";
  */
-function send_binary_content($data,$name,$type = "application/octet-stream")
+function send_binary_content($data, $name, $type = "application/octet-stream")
 {
-  header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-  header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
-  header("Cache-Control: no-cache");
-  header("Pragma: no-cache");
-  header("Cache-Control: post-check=0, pre-check=0");
-  header("Content-type: ".$type."");
+    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+    header("Cache-Control: no-cache");
+    header("Pragma: no-cache");
+    header("Cache-Control: post-check=0, pre-check=0");
+    header("Content-type: " . $type . '');
 
-  $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
+    $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
 
-  /* Strip name if it is a complete path */
-  if (preg_match ("/\//", $name)) {
-	$name= basename($name);
-  }
-  
-  /* force download dialog */
-  if (preg_match('/MSIE 5.5/', $HTTP_USER_AGENT) || preg_match('/MSIE 6.0/', $HTTP_USER_AGENT)) {
-    header('Content-Disposition: filename="'.$name.'"');
-  } else {
-    header('Content-Disposition: attachment; filename="'.$name.'"');
-  }
+    /* Strip name if it is a complete path */
+    if (preg_match("/\//", $name)) {
+        $name = basename($name);
+    }
 
-  echo $data;
-  exit();
+    /* force download dialog */
+    if (preg_match('/MSIE 5.5/', $HTTP_USER_AGENT) || preg_match('/MSIE 6.0/', $HTTP_USER_AGENT)) {
+        header('Content-Disposition: filename="' . $name . '"');
+    } else {
+        header('Content-Disposition: attachment; filename="' . $name . '"');
+    }
+
+    echo $data;
+    exit();
 }
 
 
-function reverse_html_entities($str,$type = ENT_QUOTES , $charset = "UTF-8")
+function reverse_html_entities($str, $type = ENT_QUOTES, $charset = "UTF-8")
 {
-  if(is_string($str)){
-    return(htmlentities($str,$type,$charset));
-  }elseif(is_array($str)){
-    foreach($str as $name => $value){
-      $str[$name] = reverse_html_entities($value,$type,$charset);
+    if (is_string($str)) {
+        return (htmlentities($str, $type, $charset));
+    } elseif (is_array($str)) {
+        foreach ($str as $name => $value) {
+            $str[$name] = reverse_html_entities($value, $type, $charset);
+        }
     }
-  }
-  return($str);
+    return ($str);
 }
 
 
@@ -3303,30 +3332,30 @@ function reverse_html_entities($str,$type = ENT_QUOTES , $charset = "UTF-8")
     \return string The encoded String
  */
 function xmlentities($str)
-{ 
-  if(is_string($str)){
+{
+    if (is_string($str)) {
 
-    static $asc2uni= array();
-    if (!count($asc2uni)){
-      for($i=128;$i<256;$i++){
-    #    $asc2uni[chr($i)] = "&#x".dechex($i).";";
-      }
-    }
+        static $asc2uni = [];
+        if (!count($asc2uni)) {
+            for ($i = 128; $i < 256; $i++) {
+                #    $asc2uni[chr($i)] = "&#x".dechex($i).";";
+            }
+        }
 
-    $str = str_replace("&", "&amp;", $str);
-    $str = str_replace("<", "&lt;", $str);
-    $str = str_replace(">", "&gt;", $str);
-    $str = str_replace("'", "&apos;", $str);
-    $str = str_replace("\"", "&quot;", $str);
-    $str = str_replace("\r", "", $str);
-    $str = strtr($str,$asc2uni);
-    return $str;
-  }elseif(is_array($str)){
-    foreach($str as $name => $value){
-      $str[$name] = xmlentities($value);
+        $str = str_replace("&", "&amp;", $str);
+        $str = str_replace("<", "&lt;", $str);
+        $str = str_replace(">", "&gt;", $str);
+        $str = str_replace("'", "&apos;", $str);
+        $str = str_replace("\'", "&quot;", $str);
+        $str = str_replace("\r", '', $str);
+        $str = strtr($str, $asc2uni);
+        return $str;
+    } elseif (is_array($str)) {
+        foreach ($str as $name => $value) {
+            $str[$name] = xmlentities($value);
+        }
     }
-  }
-  return($str);
+    return ($str);
 }
 
 
@@ -3335,358 +3364,375 @@ function xmlentities($str)
     \param  String  $from The source accessTo name.
     \param  String  $to   The destination accessTo name.
 */
-function update_accessTo($from,$to)
+function update_accessTo($from, $to)
 {
-  global $config;
-  $ldap = $config->get_ldap_link();
-  $ldap->cd($config->current['BASE']);
-  $ldap->search("(&(objectClass=trustAccount)(accessTo=".$from."))",array("objectClass","accessTo"));
-  while($attrs = $ldap->fetch()){
-    $new_attrs = array("accessTo" => array());
-    $dn = $attrs['dn'];
-    for($i = 0 ; $i < $attrs['accessTo']['count']; $i++){
-      if($attrs['accessTo'][$i] == $from){
-        if(!empty($to)){
-          $new_attrs['accessTo'][] =  $to;
+    global $config;
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
+    $ldap->search("(&(objectClass=trustAccount)(accessTo=" . $from . "))", array("objectClass", "accessTo"));
+    while ($attrs = $ldap->fetch()) {
+        $new_attrs = array("accessTo" => []);
+        $dn = $attrs['dn'];
+        for ($i = 0; $i < $attrs['accessTo']['count']; $i++) {
+            if ($attrs['accessTo'][$i] == $from) {
+                if (!empty($to)) {
+                    $new_attrs['accessTo'][] =  $to;
+                }
+            } else {
+                $new_attrs['accessTo'][] =  $attrs['accessTo'][$i];
+            }
         }
-      }else{
-        $new_attrs['accessTo'][] =  $attrs['accessTo'][$i]; 
-      }
+        $ldap->cd($dn);
+        $ldap->modify($new_attrs);
+        if (!$ldap->success()) {
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, "update_accessTo($from,$to)"));
+        }
+        new log("modify", "update_accessTo($from,$to)", $dn, array_keys($new_attrs), $ldap->get_error());
     }
-    $ldap->cd($dn);
-    $ldap->modify($new_attrs);
-    if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, "update_accessTo($from,$to)"));
-    }
-    new log("modify","update_accessTo($from,$to)",$dn,array_keys($new_attrs),$ldap->get_error());
-  }
 }
 
 
 /*! \brief Returns a random char */
-function get_random_char () {
-     $randno = rand (0, 63);
-     if ($randno < 12) {
-         return (chr ($randno + 46)); // Digits, '/' and '.'
-     } else if ($randno < 38) {
-         return (chr ($randno + 53)); // Uppercase
-     } else {
-         return (chr ($randno + 59)); // Lowercase
-     }
+function get_random_char()
+{
+    $randno = rand(0, 63);
+    if ($randno < 12) {
+        return (chr($randno + 46)); // Digits, '/' and '.'
+    } else if ($randno < 38) {
+        return (chr($randno + 53)); // Uppercase
+    } else {
+        return (chr($randno + 59)); // Lowercase
+    }
 }
 
 
-function cred_encrypt($input, $password, $cipher = "aes-256-ecb") {
-  if (in_array($cipher, openssl_get_cipher_methods())) {
-    $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return bin2hex(openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv));
-  }
+function cred_encrypt($input, $password, $cipher = "aes-256-ecb")
+{
+    if (in_array($cipher, openssl_get_cipher_methods())) {
+        $ivlen = openssl_cipher_iv_length($cipher);
+        $iv = openssl_random_pseudo_bytes($ivlen);
+        return bin2hex(openssl_encrypt($input, $cipher, $password, OPENSSL_RAW_DATA, $iv));
+    }
 
-  return null;
+    return null;
 }
 
-function cred_decrypt($input, $password, $cipher = "aes-256-ecb") {
-  if (in_array($cipher, openssl_get_cipher_methods())) {
-    $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    return rtrim(openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv ), "\0\3\4\n");
-  }
+function cred_decrypt($input, $password, $cipher = "aes-256-ecb")
+{
+    if (in_array($cipher, openssl_get_cipher_methods())) {
+        $ivlen = openssl_cipher_iv_length($cipher);
+        $iv = openssl_random_pseudo_bytes($ivlen);
+        return rtrim(openssl_decrypt(pack("H*", $input), $cipher, $password, OPENSSL_RAW_DATA, $iv), "\0\3\4\n");
+    }
 
-  return null;
+    return null;
 }
 
 function get_object_info()
 {
-  return(session::get('objectinfo'));
+    return (session::get('objectinfo'));
 }
 
 
-function set_object_info($str = "")
+function set_object_info($str = '')
 {
-  session::set('objectinfo',$str);
+    session::set('objectinfo', $str);
 }
 
 
-function isIpInNet($ip, $net, $mask) {
-   // Move to long ints
-   $ip= ip2long($ip);
-   $net= ip2long($net);
-   $mask= ip2long($mask);
+function isIpInNet($ip, $net, $mask)
+{
+    // Move to long ints
+    $ip = ip2long($ip);
+    $net = ip2long($net);
+    $mask = ip2long($mask);
 
-   // Mask given IP with mask. If it returns "net", we're in...
-   $res= $ip & $mask;
+    // Mask given IP with mask. If it returns "net", we're in...
+    $res = $ip & $mask;
 
-   return ($res == $net);
+    return ($res == $net);
 }
 
 
 function get_next_id($attrib, $dn)
 {
-  global $config;
+    global $config;
 
-  switch ($config->get_cfg_value("core","idAllocationMethod")){
-    case "pool":
-      return get_next_id_pool($attrib);
-    case "traditional":
-      return get_next_id_traditional($attrib, $dn);
-  }
+    switch ($config->get_cfg_value("core", "idAllocationMethod")) {
+        case "pool":
+            return get_next_id_pool($attrib);
+        case "traditional":
+            return get_next_id_traditional($attrib, $dn);
+    }
 
-  msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("unknown idAllocation method!"), ERROR_DIALOG);
-  return null;
+    msg_dialog::display(_("Error"), _("Cannot allocate free ID:") . " " . _("unknown idAllocation method!"), ERROR_DIALOG);
+    return null;
 }
 
 
-function get_next_id_pool($attrib) {
-  global $config;
+function get_next_id_pool($attrib)
+{
+    global $config;
 
-  /* Fill informational values */
-  $min= $config->get_cfg_value("core","${attrib}PoolMin");
-  $max= $config->get_cfg_value("core","${attrib}PoolMax");
-
-  /* Sanity check */
-  if ($min >= $max) {
-    msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." ".sprintf(_("%sPoolMin >= %sPoolMax!"), bold($attrib), bold($attrib)), ERROR_DIALOG);
-    return null;
-  }
-
-  /* ID to skip */
-  $ldap= $config->get_ldap_link();
-  $id= null;
-
-  /* Try to allocate the ID several times before failing */
-  $tries= 3;
-  while ($tries--) {
-
-    /* Look for ID map entry */
-    $ldap->cd ($config->current['BASE']);
-    $ldap->search ("(&(objectClass=sambaUnixIdPool)($attrib=*))", array("$attrib"));
-
-    /* If it does not exist, create one with these defaults */
-    if ($ldap->count() == 0) {
-      /* Fill informational values */
-      $minUserId= $config->get_cfg_value("core","uidNumberPoolMin");
-      $minGroupId= $config->get_cfg_value("core","gidNumberPoolMin");
-
-      /* Add as default */
-      $attrs= array("objectClass" => array("organizationalUnit", "sambaUnixIdPool"));
-      $attrs["ou"]= "idmap";
-      $attrs["uidNumber"]= $minUserId;
-      $attrs["gidNumber"]= $minGroupId;
-      $ldap->cd("ou=idmap,".$config->current['BASE']);
-      $ldap->add($attrs);
-      if ($ldap->error != "Success") {
-        msg_dialog::display(_("Error"), _("Cannot create sambaUnixIdPool entry!"), ERROR_DIALOG);
-        return null;
-      }
-      $tries++;
-      continue;
-    }
-    /* Bail out if it's not unique */
-    if ($ldap->count() != 1) {
-      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("sambaUnixIdPool is not unique!"), ERROR_DIALOG);
-      return null;
-    }
-
-    /* Store old attrib and generate new */
-    $attrs= $ldap->fetch();
-    $dn= $ldap->getDN();
-    $oldAttr= $attrs[$attrib][0];
-    $newAttr= $oldAttr + 1;
+    /* Fill informational values */
+    $min = $config->get_cfg_value("core", $attrib . "PoolMin");
+    $max = $config->get_cfg_value("core", $attrib . "PoolMax");
 
     /* Sanity check */
-    if ($newAttr >= $max) {
-      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("no ID available!"), ERROR_DIALOG);
-      return null;
-    }
-    if ($newAttr < $min) {
-      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("no ID available!"), ERROR_DIALOG);
-      return null;
+    if ($min >= $max) {
+        msg_dialog::display(_("Error"), _("Cannot allocate free ID:") . " " . sprintf(_("%sPoolMin >= %sPoolMax!"), bold($attrib), bold($attrib)), ERROR_DIALOG);
+        return null;
     }
 
-    #FIXME: PHP is not able to do a modification of "del: .../add: ...", so this
-    #       is completely unsafe in the moment.
-    #/* Remove old attr, add new attr */
-    #$attrs= array($attrib => $oldAttr);
-    #$ldap->rm($attrs, $dn);
-    #if ($ldap->error != "Success") {
-    #  continue;
-    #}
-    $ldap->cd($dn);
-    $ldap->modify(array($attrib => $newAttr));
-    if ($ldap->error != "Success") {
-      msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." ".$ldap->get_error(), ERROR_DIALOG);
-      return null;
-    } else {
-      return $oldAttr;
+    /* ID to skip */
+    $ldap = $config->get_ldap_link();
+    $id = null;
+
+    /* Try to allocate the ID several times before failing */
+    $tries = 3;
+    while ($tries--) {
+
+        /* Look for ID map entry */
+        $ldap->cd($config->current['BASE']);
+        $ldap->search("(&(objectClass=sambaUnixIdPool)($attrib=*))", array("$attrib"));
+
+        /* If it does not exist, create one with these defaults */
+        if ($ldap->count() == 0) {
+            /* Fill informational values */
+            $minUserId = $config->get_cfg_value("core", "uidNumberPoolMin");
+            $minGroupId = $config->get_cfg_value("core", "gidNumberPoolMin");
+
+            /* Add as default */
+            $attrs = array("objectClass" => array("organizationalUnit", "sambaUnixIdPool"));
+            $attrs["ou"] = "idmap";
+            $attrs["uidNumber"] = $minUserId;
+            $attrs["gidNumber"] = $minGroupId;
+            $ldap->cd("ou=idmap," . $config->current['BASE']);
+            $ldap->add($attrs);
+            if ($ldap->error != "Success") {
+                msg_dialog::display(_("Error"), _("Cannot create sambaUnixIdPool entry!"), ERROR_DIALOG);
+                return null;
+            }
+            $tries++;
+            continue;
+        }
+        /* Bail out if it's not unique */
+        if ($ldap->count() != 1) {
+            msg_dialog::display(_("Error"), _("Cannot allocate free ID:") . " " . _("sambaUnixIdPool is not unique!"), ERROR_DIALOG);
+            return null;
+        }
+
+        /* Store old attrib and generate new */
+        $attrs = $ldap->fetch();
+        $dn = $ldap->getDN();
+        $oldAttr = $attrs[$attrib][0];
+        $newAttr = $oldAttr + 1;
+
+        /* Sanity check */
+        if ($newAttr >= $max) {
+            msg_dialog::display(_("Error"), _("Cannot allocate free ID:") . " " . _("no ID available!"), ERROR_DIALOG);
+            return null;
+        }
+        if ($newAttr < $min) {
+            msg_dialog::display(_("Error"), _("Cannot allocate free ID:") . " " . _("no ID available!"), ERROR_DIALOG);
+            return null;
+        }
+
+        #FIXME: PHP is not able to do a modification of "del: .../add: ...", so this
+        #       is completely unsafe in the moment.
+        #/* Remove old attr, add new attr */
+        #$attrs= array($attrib => $oldAttr);
+        #$ldap->rm($attrs, $dn);
+        #if ($ldap->error != "Success") {
+        #  continue;
+        #}
+        $ldap->cd($dn);
+        $ldap->modify(array($attrib => $newAttr));
+        if ($ldap->error != "Success") {
+            msg_dialog::display(_("Error"), _("Cannot allocate free ID:") . " " . $ldap->get_error(), ERROR_DIALOG);
+            return null;
+        } else {
+            return $oldAttr;
+        }
     }
-  }
 
-  /* Bail out if we had problems getting the next id */
-  if (!$tries) {
-    msg_dialog::display(_("Error"), _("Cannot allocate free ID:")." "._("maximum number of tries exceeded!"), ERROR_DIALOG);
-  }
+    /* Bail out if we had problems getting the next id */
+    if (!$tries) {
+        msg_dialog::display(_("Error"), _("Cannot allocate free ID:") . " " . _("maximum number of tries exceeded!"), ERROR_DIALOG);
+    }
 
-  return $id;
+    return $id;
 }
 
 
 function get_next_id_traditional($attrib, $dn)
 {
-  global $config;
+    global $config;
 
-  $ids= array();
-  $ldap= $config->get_ldap_link();
+    $ids = [];
+    $ldap = $config->get_ldap_link();
 
-  $ldap->cd ($config->current['BASE']);
-  if (preg_match('/gidNumber/i', $attrib)){
-    $oc= "posixGroup";
-  } else {
-    $oc= "posixAccount";
-  }
-  $ldap->search ("(&(objectClass=$oc)($attrib=*))", array("$attrib"));
-
-  /* Get list of ids */
-  while ($attrs= $ldap->fetch()){
-    $ids[]= (int)$attrs["$attrib"][0];
-  }
-
-  /* Add the nobody id */
-  $ids[]= 65534;
-
-  /* get the ranges */
-  $tmp = array('0'=> 1000);
-  if (preg_match('/posixAccount/', $oc) && $config->get_cfg_value("core","uidNumberBase") != ""){
-    $tmp= explode('-',$config->get_cfg_value("core","uidNumberBase"));
-  } elseif($config->get_cfg_value("core","gidNumberBase") != ""){
-    $tmp= explode('-',$config->get_cfg_value("core","gidNumberBase"));
-  }
-
-  /* Set hwm to max if not set - for backward compatibility */
-  $lwm= $tmp[0];
-  if (isset($tmp[1])){
-    $hwm= $tmp[1];
-  } else {
-    $hwm= pow(2,32);
-  }
-  /* Find out next free id near to UID_BASE */
-  if ($config->get_cfg_value("core","baseIdHook") == ""){
-    $base= $lwm;
-  } else {
-    /* Call base hook */
-    $base= get_base_from_hook($dn, $attrib);
-  }
-  for ($id= $base; $id++; $id < pow(2,32)){
-    if (!in_array_strict($id, $ids)){
-      return ($id);
+    $ldap->cd($config->current['BASE']);
+    if (preg_match('/gidNumber/i', $attrib)) {
+        $oc = "posixGroup";
+    } else {
+        $oc = "posixAccount";
     }
-  }
+    $ldap->search("(&(objectClass=$oc)($attrib=*))", array("$attrib"));
 
-  /* Should not happen */
-  if ($id == $hwm){
-    msg_dialog::display(_("Error"), _("Cannot allocate free ID!"), ERROR_DIALOG);
-    exit;
-  }
+    /* Get list of ids */
+    while ($attrs = $ldap->fetch()) {
+        $ids[] = (int)$attrs["$attrib"][0];
+    }
+
+    /* Add the nobody id */
+    $ids[] = 65534;
+
+    /* get the ranges */
+    $tmp = array('0' => 1000);
+    if (preg_match('/posixAccount/', $oc) && $config->get_cfg_value("core", "uidNumberBase") != '') {
+        $tmp = explode('-', $config->get_cfg_value("core", "uidNumberBase"));
+    } elseif ($config->get_cfg_value("core", "gidNumberBase") != '') {
+        $tmp = explode('-', $config->get_cfg_value("core", "gidNumberBase"));
+    }
+
+    /* Set hwm to max if not set - for backward compatibility */
+    $lwm = $tmp[0];
+    if (isset($tmp[1])) {
+        $hwm = $tmp[1];
+    } else {
+        $hwm = pow(2, 32);
+    }
+    /* Find out next free id near to UID_BASE */
+    if ($config->get_cfg_value("core", "baseIdHook") == '') {
+        $base = $lwm;
+    } else {
+        /* Call base hook */
+        $base = get_base_from_hook($dn, $attrib);
+    }
+    for ($id = $base; $id++; $id < pow(2, 32)) {
+        if (!in_array_strict($id, $ids)) {
+            return ($id);
+        }
+    }
+
+    /* Should not happen */
+    if ($id == $hwm) {
+        msg_dialog::display(_("Error"), _("Cannot allocate free ID!"), ERROR_DIALOG);
+        exit;
+    }
 }
 
 
 /* Mark the occurance of a string with a span */
-function mark($needle, $haystack, $ignorecase= true)
+function mark($needle, $haystack, $ignorecase = true)
 {
-  $result= "";
+    $result = '';
 
-  while (preg_match('/^(.*)('.preg_quote($needle).')(.*)$/i', $haystack, $matches)) {
-    $result.= $matches[1]."<span class='mark'>".$matches[2]."</span>";
-    $haystack= $matches[3];
-  }
+    while (preg_match('/^(.*)(' . preg_quote($needle) . ')(.*)$/i', $haystack, $matches)) {
+        $result .= $matches[1] . "<span class='mark'>" . $matches[2] . "</span>";
+        $haystack = $matches[3];
+    }
 
-  return $result.$haystack;
+    return $result . $haystack;
 }
 
 
 /* Return an image description using the path */
-function image($path, $action= "", $title= "", $align= "middle")
+function image($path, $action = '', $title = '', $align = "middle")
 {
-  global $config;
-  global $BASE_DIR;
-  $label= null;
+    global $BASE_DIR;
+    $label = null;
 
-  // Bail out, if there's no style file
-  if(!class_exists('session')){
-    return "";    
-  }
-  if(!session::global_is_set("img-styles")){
+    $theme = getThemeName();
 
-    // Get theme
-    if (isset ($config)){
-      $theme= $config->get_cfg_value("core","theme");
-    } else {
+    switch ($theme) {
+        case 'classic':
+            // Bail out, if there's no style file
+            if (!class_exists('session')) {
+                return '';
+            }
+            if (!session::global_is_set("img-styles")) {
 
-      // Fall back to default theme
-      $theme= "default";
+                // Get theme
+                if (isset($config)) {
+                    $theme = $config->get_cfg_value("core", "theme");
+                } else {
+                    // Fall back to default theme
+                    $theme = "default";
+                }
+
+                if (!file_exists("$BASE_DIR/ihtml/themes/$theme/img.styles")) {
+                    die("No img.style for this theme found!");
+                }
+
+                session::global_set('img-styles', unserialize(file_get_contents("$BASE_DIR/ihtml/themes/$theme/img.styles")));
+            }
+            $styles = session::global_get('img-styles');
+
+            /* Extract labels from path */
+            preg_match("/(.*\.png)\[(.*)\]$/", $path, $matches);
+
+            if (count($matches) == 3) {
+                $path = $matches[1];
+                $label = $matches[2];
+            }
+
+            $baseImage = str_replace('[' . $label . ']', '', $path);
+            if (!array_key_exists($baseImage, $styles)) {
+                return '';
+            }
+
+            $lbl = '';
+            if ($label) {
+                if (isset($styles["images/label-" . $label . ".png"])) {
+                    $lbl = "<div style='" . $styles["images/label-" . $label . ".png"] . "'></div>";
+                } else {
+                    die("Invalid label specified: $label\n");
+                }
+            }
+
+            // Non middle layout?
+            if ($align == "middle") {
+                $align = '';
+            } else {
+                $align = ";vertical-align:$align";
+            }
+
+            // Clickable image or not?
+            if ($title != '') {
+                $title = "title='$title'";
+            }
+
+            if ($action == '') {
+                return "<div class='img' $title style='" . $styles[$path] . "$align'>$lbl</div>";
+            } else {
+                return "<input type='submit' class='img' id='$action' value='' name='$action' $title style='" . $styles[$path] . "$align'>";
+            }
+            break;
+
+        default:
+            if ($action == '') {
+                return "$path";
+            } else {
+                return "<div class='action-wrapper'><input type='submit' class='btn-flat input-btn' id='$action' value='' name='$action' title='" . $title . "' $align >$path</div>";
+            }
+            break;
     }
-
-    if (!file_exists("$BASE_DIR/ihtml/themes/$theme/img.styles")){
-      die ("No img.style for this theme found!");
-    }
-
-    session::global_set('img-styles', unserialize(file_get_contents("$BASE_DIR/ihtml/themes/$theme/img.styles")));
-  }
-  $styles= session::global_get('img-styles');
-
-  /* Extract labels from path */
-  preg_match("/(.*\.png)\[(.*)\]$/", $path, $matches);
-
-  if (count($matches) == 3) {
-    $path = $matches[1];
-    $label= $matches[2];
-  }
-
-  $baseImage = str_replace('['.$label.']', '', $path);
-  if (!array_key_exists($baseImage, $styles)) { 
-    return "";
-  }
-
-  $lbl= "";
-  if ($label) {
-    if (isset($styles["images/label-".$label.".png"])) {
-      $lbl= "<div style='".$styles["images/label-".$label.".png"]."'></div>";
-    } else {
-      die("Invalid label specified: $label\n");
-    }
-  }
-
-  // Non middle layout?
-  if ($align == "middle") {
-    $align= "";
-  } else {
-    $align= ";vertical-align:$align";
-  }
-
-  // Clickable image or not?
-  if ($title != "") {
-    $title= "title='$title'";
-  }
-
-  if ($action == "") {
-    return "<div class='img' $title style='".$styles[$path]."$align'>$lbl</div>";
-  } else {
-    return "<input type='submit' class='img' id='$action' value='' name='$action' $title style='".$styles[$path]."$align'>";
-  }
 }
 
 /*! \brief    Encodes a complex string to be useable in HTML posts.
  */
 function postEncode($str)
 {
-  return(preg_replace("/=/","_", base64_encode($str)));
+    return (preg_replace("/=/", "_", base64_encode($str)));
 }
 
 /*! \brief    Decodes a string encoded by postEncode
  */
 function postDecode($str)
 {
-  return(base64_decode(preg_replace("/_/","=", $str)));
+    return (base64_decode(preg_replace("/_/", "=", $str)));
 }
 
 
@@ -3694,14 +3740,14 @@ function postDecode($str)
  */
 function bold($str)
 {
-  return "<span class='highlight'>$str</span>";
+    return "<span class='highlight'>$str</span>";
 }
 
 
 
-/*! \brief  Detect the special character handling for the currently used ldap database. 
+/*! \brief  Detect the special character handling for the currently used ldap database.
  *          For example some convert , to \2C or " to \22.
- *         
+ *
  *  @param      Config  The GOsa configuration object.
  *  @return     Array   An array containing a character mapping the use.
  */
@@ -3709,75 +3755,89 @@ function detectLdapSpecialCharHandling()
 {
     // The list of chars to test for
     global $config;
-    if(!$config) return(NULL);
+    if (!$config) return (NULL);
 
     // In the DN we've to use escaped characters, but the object name (o)
     //  has the be un-escaped.
     $name = 'GOsaLdapEncoding_,_"_(_)_+_/';
     $dnName = 'GOsaLdapEncoding_\,_\"_(_)_\+_/';
-   
-    // Prapare name to be useable in filters
-    $fixed= normalizeLdap(str_replace('\\\\', '\\\\\\', $name));
-    $filterName = str_replace('\\,', '\\\\,', $fixed);
- 
-    // Create the target dn
-    $oDN = "o={$dnName},".$config->current['BASE'];
 
-    // Get ldap connection and check if we've already created the character 
-    //  detection object. 
+    // Prapare name to be useable in filters
+    $fixed = LDAP::escapeValue(str_replace('\\\\', '\\\\\\', $name));
+    $filterName = str_replace('\\,', '\\\\,', $fixed);
+
+    // Create the target dn
+    $oDN = "o={$dnName}," . $config->current['BASE'];
+
+    // Get ldap connection and check if we've already created the character
+    //  detection object.
     $ldapCID = ldap_connect($config->current['SERVER']);
     ldap_set_option($ldapCID, LDAP_OPT_PROTOCOL_VERSION, 3);
-    ldap_bind($ldapCID, $config->current['ADMINDN'],$config->current['ADMINPASSWORD']);
-    $res = ldap_list($ldapCID, $config->current['BASE'], 
-            "(&(o=".$filterName.")(objectClass=organization))",
-            array('dn'));
+    if (isset($config->current['LDAPTLS']) && $config->current['LDAPTLS'] == "true") {
+        ldap_start_tls($ldapCID);
+    }
+    ldap_bind($ldapCID, $config->current['ADMINDN'], $config->current['ADMINPASSWORD']);
+    $res = ldap_list(
+        $ldapCID,
+        $config->current['BASE'],
+        "(&(o=" . $filterName . ")(objectClass=organization))",
+        array('dn')
+    );
 
     // If we haven't created the character-detection object, then create it now.
-    $cnt = ldap_count_entries($ldapCID, $res);
-    if(!$cnt){
-        $obj = array();
-        $obj['objectClass'] = array('top','organization');
-        $obj['o'] = $name;
-        $obj['description'] = 'GOsa character encoding test-object.';
-        if(!@ldap_add($ldapCID, $oDN, $obj)){
-            trigger_error("GOsa couldn't detect the special character handling used by your ldap!");
-            return(NULL);
+    if ($res) {
+        $cnt = ldap_count_entries($ldapCID, $res);
+        if (!$cnt) {
+            $obj = [];
+            $obj['objectClass'] = array('top', 'organization');
+            $obj['o'] = $name;
+            $obj['description'] = 'GOsa character encoding test-object.';
+            if (!ldap_add($ldapCID, $oDN, $obj)) {
+                trigger_error("GOsa couldn't detect the special character handling used by your ldap!");
+                return (NULL);
+            }
         }
+    } else {
+        trigger_error(_("GOsa couldn't detect the special character handling used by your ldap!"));
+        return (NULL);
     }
-    
-    // Read the character-handling detection entry from the ldap.
-    $res = ldap_list($ldapCID, $config->current['BASE'],
-            "(&(o=".$filterName.")(objectClass=organization))",
-            array('dn','o'));
-    $cnt = ldap_count_entries($ldapCID, $res);
-    if($cnt != 1 || !$res){
-        trigger_error("GOsa couldn't detect the special character handling used by your ldap!");
-        return(NULL);
-    }else{
 
-        // Get the character handling entry from the ldap and check how the 
+    // Read the character-handling detection entry from the ldap.
+    $res = ldap_list(
+        $ldapCID,
+        $config->current['BASE'],
+        "(&(o=" . $filterName . ")(objectClass=organization))",
+        array('dn', 'o')
+    );
+    $cnt = ldap_count_entries($ldapCID, $res);
+    if ($cnt != 1 || !$res) {
+        trigger_error("GOsa couldn't detect the special character handling used by your ldap!");
+        return (NULL);
+    } else {
+
+        // Get the character handling entry from the ldap and check how the
         //  values were written. Compare them with what
-        //  we've initially intended to write and create a mapping out 
+        //  we've initially intended to write and create a mapping out
         //  of the results.
         $re = ldap_first_entry($ldapCID, $res);
         $attrs = ldap_get_attributes($ldapCID, $re);
-   
-        // Extract the interessting characters out of the dn and the 
-        //  initially used $name for the entry. 
-        $mapDNstr = preg_replace("/^o=GOsaLdapEncoding_(.*),".preg_quote($config->current['BASE'])."$/","\\1", trim(ldap_get_dn($ldapCID, $re)));
-        $mapDN = preg_split("/_/", $mapDNstr,0, PREG_SPLIT_NO_EMPTY);
 
-        $mapNameStr = preg_replace("/^GOsaLdapEncoding_/","",$dnName);
-        $mapName = preg_split("/_/", $mapNameStr,0, PREG_SPLIT_NO_EMPTY);
+        // Extract the interessting characters out of the dn and the
+        //  initially used $name for the entry.
+        $mapDNstr = preg_replace("/^o=GOsaLdapEncoding_(.*)," . preg_quote($config->current['BASE']) . "$/", "\\1", trim(ldap_get_dn($ldapCID, $re)));
+        $mapDN = preg_split("/_/", $mapDNstr, 0, PREG_SPLIT_NO_EMPTY);
+
+        $mapNameStr = preg_replace("/^GOsaLdapEncoding_/", '', $dnName);
+        $mapName = preg_split("/_/", $mapNameStr, 0, PREG_SPLIT_NO_EMPTY);
 
         // Create a mapping out of the results.
-        $map = array();
-        foreach($mapName as $key => $entry){
+        $map = [];
+        foreach ($mapName as $key => $entry) {
             $map[$entry] = $mapDN[$key];
         }
-        return($map);
+        return ($map);
     }
-    return(NULL);
+    return (NULL);
 }
 
 
@@ -3786,53 +3846,53 @@ function detectLdapSpecialCharHandling()
  *            '%uid@gonicus.de'         Replaces '%uid' with 'uid'.
  *            '{%uid[0]@gonicus.de}'    Replaces '%uid[0]' with the first char of 'uid'.
  *            '%uid[2-4]@gonicus.de'    Replaces '%uid[2-4]' with three chars from 'uid' starting from the second.
- *      
+ *
  *          The surrounding {} in example 2 are optional.
  *
  *  @param  String  The string to perform the action on.
  *  @param  Array   An array of replacements.
  *  @return     The resulting string.
  */
-function fillReplacements($str, $attrs, $shellArg = FALSE, $default = "")
+function fillReplacements($str, $attrs, $shellArg = false, $default = '')
 {
     // Search for '{%...[n-m]}
     // Get all matching parts of the given string and sort them by
     //  length, to avoid replacing strings like '%uidNumber' with 'uid'
     //  instead of 'uidNumber'; The longest tring at first.
-    preg_match_all('/(\{?%([a-z0-9_]+)(\[(([0-9_]+)(\-([0-9_]+))?)\])?\}?)/i', $str ,$matches, PREG_SET_ORDER);
-    $hits = array();
-    foreach($matches as $match){
-        $hits[strlen($match[2]).$match[0]] = $match;
+    preg_match_all('/(\{?%([a-z0-9_]+)(\[(([0-9_]+)(\-([0-9_]+))?)\])?\}?)/i', $str, $matches, PREG_SET_ORDER);
+    $hits = [];
+    foreach ($matches as $match) {
+        $hits[strlen($match[2]) . $match[0]] = $match;
     }
     krsort($hits);
 
     // Add lower case placeholders to avoid errors
-    foreach($attrs as $key => $attr) $attrs[strtolower($key)] = $attr;
+    foreach ($attrs as $key => $attr) $attrs[strtolower($key)] = $attr;
 
     // Replace the placeholder in the given string now.
-    foreach($hits as $match){
+    foreach ($hits as $match) {
 
         // Avoid errors about undefined index.
         $name = strtolower($match[2]);
-        if(!isset($attrs[$name])) $attrs[$name] = $default;
+        if (!isset($attrs[$name])) $attrs[$name] = $default;
 
         // Calculate the replacement
         $start = (isset($match[5])) ? $match[5] : 0;
         $end = strlen($attrs[$name]);
-        if(isset($match[5]) && !isset($match[7])){
+        if (isset($match[5]) && !isset($match[7])) {
             $end = 1;
-        }elseif(isset($match[5]) && isset($match[7])){
-            $end = ($match[7]-$start+1);
+        } elseif (isset($match[5]) && isset($match[7])) {
+            $end = ($match[7] - $start + 1);
         }
         $value  = substr($attrs[$name], $start, $end);
 
         // Use values which are valid for shell execution?
-        if($shellArg) $value = escapeshellarg($value);
+        if ($shellArg) $value = escapeshellarg($value);
 
         // Replace the placeholder within the string.
-        $str = preg_replace("/".preg_quote($match[0],'/')."/", $value, $str);
+        $str = preg_replace("/" . preg_quote($match[0], '/') . "/", $value, $str);
     }
-    return($str);
+    return ($str);
 }
 
 
@@ -3851,182 +3911,205 @@ function gen_uids($rule, $attributes)
     $ldap = $config->get_ldap_link();
     $ldap->cd($config->current['BASE']);
 
-    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $rule, "Processing");
-    
+    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $rule, "Processing");
+
     // Strip out non ascii chars
-    foreach($attributes as $name => $value){
-        if ( $config->get_cfg_value("core", "forceTranslit") == "true" ) {
-             $value = cyrillic2ascii($value);
+    foreach ($attributes as $name => $value) {
+        if ($config->get_cfg_value("core", "forceTranslit") == "true") {
+            $value = cyrillic2ascii($value);
         } else {
-             $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);
+            $value = iconv('UTF-8', 'US-ASCII//TRANSLIT', $value);
         }
-        $value = preg_replace('/[^(\x20-\x7F)]*/','',$value);
+        $value = preg_replace('/[^(\x20-\x7F)]*/', '', $value);
         $value = preg_replace('/\s/', '', $value);
         $attributes[$name] = strtolower($value);
     }
-    
-    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $attributes, "Prepare");
+
+    DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $attributes, "Prepare");
 
     // Search for '{%...[n-m]}
     // Get all matching parts of the given string and sort them by
     //  length, to avoid replacing strings like '%uidNumber' with 'uid'
     //  instead of 'uidNumber'; The longest tring at first.
-    preg_match_all('/(\{?%([a-z0-9]+)(\[(([0-9]+)(\-([0-9]+))?)\])?\}?)/i', $rule ,$matches, PREG_SET_ORDER);
-    $replacements = array(); 
-    foreach($matches as $match){
+    preg_match_all('/(\{?%([a-z0-9]+)(\[(([0-9]+)(\-([0-9]+))?)\])?\}?)/i', $rule, $matches, PREG_SET_ORDER);
+    $replacements = [];
+    foreach ($matches as $match) {
 
-      # initialize the match's replacement array...
-      $replacements[$match[0]] = array();
+        # initialize the match's replacement array...
+        $replacements[$match[0]] = [];
 
-      // No start position given, then add the complete value
-      if(!isset($match[7])){
-        $replacements[$match[0]][] = $attributes[$match[2]];
+        // No start position given, then add the complete value
+        if (!isset($match[7])) {
+            $replacements[$match[0]][] = $attributes[$match[2]];
 
-        // Start given but no end, so just add a single character
-      }elseif(!isset($match[7])){
-        if(isset($attributes[$match[2]][$match[5]])){
-          $tmp = " ".$attributes[$match[2]];
-          $replacements[$match[0]][] = trim($tmp[$match[5]]);
+            // Start given but no end, so just add a single character
+        } elseif (!isset($match[7])) {
+            if (isset($attributes[$match[2]][$match[5]])) {
+                $tmp = " " . $attributes[$match[2]];
+                $replacements[$match[0]][] = trim($tmp[$match[5]]);
+            }
+
+            // Add all values in range
+        } else {
+            $str = '';
+            for ($i = $match[5]; $i <= $match[7]; $i++) {
+                if (isset($attributes[$match[2]][$i])) {
+                    $tmp = " " . $attributes[$match[2]];
+                    $str = substr($tmp, 1, $i);
+                    $replacements[$match[0]][] = trim($str);
+                }
+            }
+
+            // if a given attribute's value is shorter than required, use the
+            // full length of the attribute's value
+            if (!$replacements[$match[0]]) {
+                $replacements[$match[0]][] = $attributes[$match[2]];
+            }
         }
-
-        // Add all values in range
-      }else{
-        $str = "";
-        for($i=$match[5]; $i<= $match[7]; $i++){
-          if(isset($attributes[$match[2]][$i])){
-            $tmp = " ".$attributes[$match[2]];
-            $str = substr ($tmp, 1, $i);
-            $replacements[$match[0]][] = trim($str);
-          }
-        }
-
-        // if a given attribute's value is shorter than required, use the
-        // full length of the attribute's value
-        if (!$replacements[$match[0]]) {
-          $replacements[$match[0]][] = $attributes[$match[2]];
-        }
-      }
     }
 
     // Create proposal array
     $rules = array($rule);
-    foreach($replacements as $tag => $values){
+    foreach ($replacements as $tag => $values) {
         $rules = gen_uid_proposals($rules, $tag, $values);
     }
-    
+
 
     // Search for id tags {id:3} / {id#3}
     preg_match_all('/\{id(#|:)([0-9])+\}/i', $rule, $matches, PREG_SET_ORDER);
-    $idReplacements = array();
-    foreach($matches as $match){
-        if(count($match) != 3) continue;
+    $idReplacements = [];
+    foreach ($matches as $match) {
+        if (count($match) != 3) continue;
 
-        // Generate random number 
-        if($match[1] == '#'){
-            foreach($rules as $id => $ruleStr){
-                $genID = rand(pow(10,$match[2] -1),pow(10, ($match[2])) - 1);
-                $rules[$id] = preg_replace("/".preg_quote($match[0],'/')."/", $genID,$ruleStr);
+        // Generate random number
+        if ($match[1] == '#') {
+            foreach ($rules as $id => $ruleStr) {
+                $genID = rand(pow(10, $match[2] - 1), pow(10, ($match[2])) - 1);
+                $rules[$id] = preg_replace("/" . preg_quote($match[0], '/') . "/", $genID, $ruleStr);
             }
         }
-    
-        // Search for next free id 
-        if($match[1] == ':'){
+
+        // Search for next free id
+        if ($match[1] == ':') {
 
             // Walk through rules and replace all occurences of {id:..}
-            foreach($rules as $id => $ruleStr){
+            foreach ($rules as $id => $ruleStr) {
                 $genID = 0;
-                $start = TRUE;
-                while($start || $ldap->count()){
-                    $start = FALSE;
-                    $number= sprintf("%0".$match[2]."d", $genID);
-                    $testRule = preg_replace("/".preg_quote($match[0],'/')."/",$number,$ruleStr); 
-                    $ldap->search('uid='.normalizeLdap($testRule));
-                    $genID ++;
+                $start = true;
+                while ($start || $ldap->count()) {
+                    $start = false;
+                    $number = sprintf("%0" . $match[2] . "d", $genID);
+                    $testRule = preg_replace("/" . preg_quote($match[0], '/') . "/", $number, $ruleStr);
+                    $ldap->search('uid=' . LDAP::escapeValue($testRule));
+                    $genID++;
                 }
-                $rules[$id] = preg_replace("/".preg_quote($match[0],'/')."/",$number,$ruleStr);
+                $rules[$id] = preg_replace("/" . preg_quote($match[0], '/') . "/", $number, $ruleStr);
             }
         }
     }
 
     // Create result set by checking which uid is already used and which is free.
-    $ret = array();
-    foreach($rules as $rule){
-        $ldap->search('uid='.normalizeLdap($rule));
-        if(!$ldap->count()){
+    $ret = [];
+    foreach ($rules as $rule) {
+        $ldap->search('uid=' . LDAP::escapeValue($rule));
+        if (!$ldap->count()) {
             $ret[] =  $rule;
         }
     }
-   
-    return($ret);
+
+    return ($ret);
 }
 
 
-function gen_uid_proposals(&$rules, $tag, $values)
+function gen_uid_proposals(&$rules, $tag, $values): array
 {
-    $newRules = array();
-    foreach($rules as $rule){
-        foreach($values as $value){
-            $newRules[] = preg_replace("/".preg_quote($tag,'/')."/", $value, $rule); 
+    $newRules = [];
+    foreach ($rules as $rule) {
+        foreach ($values as $value) {
+            $newRules[] = preg_replace("/" . preg_quote($tag, '/') . "/", $value, $rule);
         }
     }
-    return($newRules);
+    return $newRules;
 }
 
 
-function gen_uuid() 
+function gen_uuid(): string
 {
-    return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+    return sprintf(
+        '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
         // 32 bits for "time_low"
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
 
         // 16 bits for "time_mid"
-        mt_rand( 0, 0xffff ),
+        mt_rand(0, 0xffff),
 
         // 16 bits for "time_hi_and_version",
         // four most significant bits holds version number 4
-        mt_rand( 0, 0x0fff ) | 0x4000,
+        mt_rand(0, 0x0fff) | 0x4000,
 
         // 16 bits, 8 bits for "clk_seq_hi_res",
         // 8 bits for "clk_seq_low",
         // two most significant bits holds zero and one for variant DCE1.1
-        mt_rand( 0, 0x3fff ) | 0x8000,
+        mt_rand(0, 0x3fff) | 0x8000,
 
         // 48 bits for "node"
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff)
     );
 }
 
 function gosa_file_name($filename)
 {
-    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
-    if(move_uploaded_file($filename, $tempfile)){ 
-       return( $tempfile);
+    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa');
+    if (move_uploaded_file($filename, $tempfile)) {
+        return ($tempfile);
     }
 }
 
 function gosa_file($filename)
 {
-    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
-    if(move_uploaded_file($filename, $tempfile)){ 
-       return file( $tempfile );
+    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa');
+    if (move_uploaded_file($filename, $tempfile)) {
+        return file($tempfile);
     }
 }
 
 function gosa_fopen($filename, $mode)
 {
-    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa'); 
-    if(move_uploaded_file($filename, $tempfile)){ 
-       return fopen( $tempfile, $mode );
+    $tempfile = tempnam(sys_get_temp_dir(), 'GOsa');
+    if (move_uploaded_file($filename, $tempfile)) {
+        return fopen($tempfile, $mode);
     }
 }
 
 
 /*\brief    Our own in_array method which defaults to a strict mode.
  */
-function in_array_strict($needle, $haystack, $strict = TRUE)
+function in_array_strict($needle, $haystack, $strict = true)
 {
-    return(in_array($needle, $haystack, $strict));
+    return (in_array($needle, $haystack, $strict));
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
+function getThemeName(): string
+{
+    global $config;
+    $theme = "default";
+    if ($config) {
+        $theme = $config->get_cfg_value("core", "theme");
+    }
+    return $theme;
+}
+
+function tempSwitch($arr)
+{
+    $theme = getThemeName();
+
+    switch ($theme) {
+        case 'classic':
+            return $arr[1];
+        default:
+            return $arr[0];
+    }
+}

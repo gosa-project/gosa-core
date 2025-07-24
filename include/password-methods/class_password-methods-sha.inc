@@ -22,43 +22,37 @@
 
 class passwordMethodsha extends passwordMethod
 {
-  function __construct($config)
-  {
-  }
+    function __construct($config) {}
 
-  function is_available()
-  {
-    if (function_exists('sha1')){
-      return(true);
-    }elseif(function_exists('mhash')){
-      return true;
-    }else{
-      return false;
-    }
-  }
+    function is_available()
+    {
+        if (function_exists('sha1')) {
+            return true;
+        } elseif (function_exists('mhash')) {
+            return true;
+        }
 
-
-  function generate_hash($password)
-  {
-    if (function_exists('sha1')) {
-      $hash = "{SHA}" . base64_encode(pack("H*",sha1($password)));
-    }elseif (function_exists('mhash')) {
-      $hash = "{SHA}" . base64_encode(mHash(MHASH_SHA1, $password));
-    }else{
-      msg_dialog::display(_("Configuration error"), msgPool::missingext("mhash"), ERROR_DIALOG);
-      return false;
+        return false;
     }
 
-    return $hash; 
-  }
+
+    function generate_hash($password)
+    {
+        if (function_exists('sha1')) {
+            $hash = "{SHA}" . base64_encode(pack("H*", sha1($password)));
+        } elseif (function_exists('mhash')) {
+            $hash = "{SHA}" . base64_encode(mHash(MHASH_SHA1, $password));
+        } else {
+            msg_dialog::display(_("Configuration error"), msgPool::missingext("mhash"), ERROR_DIALOG);
+            return false;
+        }
+
+        return $hash;
+    }
 
 
-  function get_hash_name()
-  {
-    return "sha";
-  }
-
+    function get_hash_name()
+    {
+        return "sha";
+    }
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

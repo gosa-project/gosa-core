@@ -22,142 +22,135 @@
 
 class passwordMethodCrypt extends passwordMethod
 {
-  function __construct($config)
-  {
-  }
+    function __construct($config) {}
 
 
-  function is_available()
-  {
-    if(function_exists("crypt")){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  function create_template_hash($attrs)
-  {
-    return($this->generate_hash('N0T$3T4N0W').'N0T$3T4N0W');
-  }
-
-
-  function generate_hash($pwd)
-  {
-    if ($this->hash == "crypt/standard-des"){
-      $salt = "";
-      for ($i = 0; $i < 2; $i++) {
-          $salt .= get_random_char();
-      }
+    function is_available()
+    {
+        if (function_exists("crypt")) {
+            return true;
+        }
+        return false;
     }
 
-    if ($this->hash == "crypt/enhanced-des"){
-      $salt = "_";
-      for ($i = 0; $i < 8; $i++) {
-          $salt .= get_random_char();
-      }
+    function create_template_hash($attrs)
+    {
+        return ($this->generate_hash('N0T$3T4N0W') . 'N0T$3T4N0W');
     }
 
-    if ($this->hash == "crypt/md5"){
-      $salt = "\$1\$";
-      for ($i = 0; $i < 8; $i++) {
-          $salt .= get_random_char();
-      }
-      $salt .= "\$";
+
+    function generate_hash($pwd)
+    {
+        if ($this->hash == "crypt/standard-des") {
+            $salt = "";
+            for ($i = 0; $i < 2; $i++) {
+                $salt .= get_random_char();
+            }
+        }
+
+        if ($this->hash == "crypt/enhanced-des") {
+            $salt = "_";
+            for ($i = 0; $i < 8; $i++) {
+                $salt .= get_random_char();
+            }
+        }
+
+        if ($this->hash == "crypt/md5") {
+            $salt = "\$1\$";
+            for ($i = 0; $i < 8; $i++) {
+                $salt .= get_random_char();
+            }
+            $salt .= "\$";
+        }
+
+        if ($this->hash == "crypt/blowfish") {
+            $salt = "\$2a\$07\$";
+            for ($i = 0; $i < CRYPT_SALT_LENGTH; $i++) {
+                $salt .= get_random_char();
+            }
+            $salt .= "\$";
+        }
+
+        if ($this->hash == "crypt/sha256") {
+            $salt = "\$5\$";
+            for ($i = 0; $i < 16; $i++) {
+                $salt .= get_random_char();
+            }
+            $salt .= "\$";
+        }
+
+        if ($this->hash == "crypt/sha512") {
+            $salt = "\$6\$";
+            for ($i = 0; $i < 16; $i++) {
+                $salt .= get_random_char();
+            }
+            $salt .= "\$";
+        }
+        return "{CRYPT}" . crypt($pwd, $salt);
     }
 
-    if ($this->hash == "crypt/blowfish"){
-      $salt = "\$2a\$07\$";
-      for ($i = 0; $i < CRYPT_SALT_LENGTH; $i++) {
-          $salt .= get_random_char();
-      }
-      $salt .= "\$";
+
+    function get_hash_name()
+    {
+        $hashes = array();
+        if (CRYPT_STD_DES == 1) {
+            $hashes[] = "crypt/standard-des";
+        }
+
+        if (CRYPT_EXT_DES == 1) {
+            $hashes[] = "crypt/enhanced-des";
+        }
+
+        if (CRYPT_MD5 == 1) {
+            $hashes[] = "crypt/md5";
+        }
+
+        if (CRYPT_BLOWFISH == 1) {
+            $hashes[] = "crypt/blowfish";
+        }
+
+        if (CRYPT_SHA256 == 1) {
+            $hashes[] = "crypt/sha256";
+        }
+
+        if (CRYPT_SHA512 == 1) {
+            $hashes[] = "crypt/sha512";
+        }
+        return $hashes;
     }
 
-    if ($this->hash == "crypt/sha256"){
-      $salt = "\$5\$";
-      for ($i = 0; $i < 16; $i++) {
-          $salt .= get_random_char();
-      }
-      $salt .= "\$";
+
+    function _extract_method($password_hash)
+    {
+        if (!preg_match('/^{crypt}/i', $password_hash)) {
+            return "";
+        }
+
+        $password_hash = preg_replace('/^{[^}]+}!?/', '', $password_hash);
+
+        if (preg_match("/^[a-zA-Z0-9.\/][a-zA-Z0-9.\/]/", $password_hash)) {
+            return "crypt/standard-des";
+        }
+
+        if (preg_match("/^_[a-zA-Z0-9.\/]/", $password_hash)) {
+            return "crypt/enhanced-des";
+        }
+
+        if (preg_match('/^\$1\$/', $password_hash)) {
+            return "crypt/md5";
+        }
+
+        if (preg_match('/^(\$2\$|\$2a\$)/', $password_hash)) {
+            return "crypt/blowfish";
+        }
+
+        if (preg_match('/^\$5\$/', $password_hash)) {
+            return "crypt/sha256";
+        }
+
+        if (preg_match('/^\$6\$/', $password_hash)) {
+            return "crypt/sha512";
+        }
+        return "";
     }
-
-    if ($this->hash == "crypt/sha512"){
-      $salt = "\$6\$";
-      for ($i = 0; $i < 16; $i++) {
-          $salt .= get_random_char();
-      }
-      $salt .= "\$";
-    }
-    return "{CRYPT}".crypt($pwd, $salt);
-  }
-
-
-  function get_hash_name()
-  {
-    $hashes= array();
-    if (CRYPT_STD_DES == 1) {
-      $hashes[]= "crypt/standard-des";
-    }
-
-    if (CRYPT_EXT_DES == 1) {
-      $hashes[]= "crypt/enhanced-des";
-    }
-
-    if (CRYPT_MD5 == 1) {
-      $hashes[]= "crypt/md5";
-    }
-
-    if (CRYPT_BLOWFISH == 1) {
-      $hashes[]= "crypt/blowfish";
-    }
-
-    if (CRYPT_SHA256 == 1) {
-      $hashes[]= "crypt/sha256";
-    }
-
-    if (CRYPT_SHA512 == 1) {
-      $hashes[]= "crypt/sha512";
-    }
-    return $hashes;
-  }
-
-
-  function _extract_method($password_hash)
-  {
-    if (!preg_match('/^{crypt}/i', $password_hash)){
-      return "";
-    }
-
-    $password_hash= preg_replace('/^{[^}]+}!?/', '', $password_hash);
-
-    if (preg_match("/^[a-zA-Z0-9.\/][a-zA-Z0-9.\/]/", $password_hash)){
-      return "crypt/standard-des";
-    }
-
-    if (preg_match("/^_[a-zA-Z0-9.\/]/", $password_hash)){
-      return "crypt/enhanced-des";
-    }
-    
-    if (preg_match('/^\$1\$/', $password_hash)){
-      return "crypt/md5";
-    }
-
-    if (preg_match('/^(\$2\$|\$2a\$)/', $password_hash)){
-      return "crypt/blowfish";
-    }
-
-    if (preg_match('/^\$5\$/', $password_hash)){
-      return "crypt/sha256";
-    }
-
-    if (preg_match('/^\$6\$/', $password_hash)){
-      return "crypt/sha512";
-    }
-    return "";
-  }
-
 }
-
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
