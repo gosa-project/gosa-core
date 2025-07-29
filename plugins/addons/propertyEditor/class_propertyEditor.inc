@@ -3,9 +3,10 @@
 
 class propertyEditor extends management
 {
-    var $plHeadline= "Preferences";
-    var $plDescription= "Configure global and special GOsa settings like hooks and plug-in parameters";
-    var $plIcon  = "plugins/propertyEditor/images/plugin.png";
+    var $plHeadline     = "Preferences";
+    var $plDescription  = "Configure global and special GOsa settings like hooks and plug-in parameters";
+    var $plIcon         = "plugins/propertyEditor/images/plugin.png";
+    var $matIcon        = "settings";
 
     var $toBeMigrated = array();
 
@@ -62,7 +63,7 @@ class propertyEditor extends management
             $this->closeDialogs();
         }
 
-        // Once accepted hide the warning message        
+        // Once accepted hide the warning message
         if(isset($_POST['warningAccepted'])){
             $this->warningAccepted = TRUE;
         }
@@ -70,7 +71,7 @@ class propertyEditor extends management
         // Execute registered management event listeners.
         $this->handleActions($this->detectPostActions());
 
-        // Handle properties that have to be migrated 
+        // Handle properties that have to be migrated
         if(isset($_POST['propertyMigrate_cancel']) && count($this->toBeMigrated)){
             unset($this->toBeMigrated[0]);
             $this->toBeMigrated = array_values($this->toBeMigrated);
@@ -93,7 +94,7 @@ class propertyEditor extends management
         if(count($this->toBeMigrated)){
             $first = $this->toBeMigrated[0]->getMigrationClass();
             $first->save_object();
-    
+
             // We've no problems with this property anymore.
             while($first instanceOf propertyMigration && !$first->checkForIssues()){
                 $this->toBeMigrated[0]->save();
@@ -103,7 +104,7 @@ class propertyEditor extends management
                     $first = $this->toBeMigrated[0]->getMigrationClass();
                 }else{
                     $first = NULL;
-                    
+
                     // Nothing to migrate and everything is fine, reload the list now.
                     if(!count($this->toBeMigrated)){
                         $this->config->configRegistry->reload($force=TRUE);
@@ -134,7 +135,7 @@ class propertyEditor extends management
             $modified = in_array_strict($prop->getStatus(),array('modified','removed'));
             if($modified) break;
         }
-       
+
         $smarty = get_smarty();
         $smarty->assign('is_modified', $modified);
         return(management::renderList());
@@ -183,7 +184,7 @@ class propertyEditor extends management
                 $prop->restoreDefault();
             }
         }
-    } 
+    }
 
     static function propertyGroup($group, $description = array())
     {
@@ -218,13 +219,14 @@ class propertyEditor extends management
         $isize  = "200px";
         $name  = "{$class[0]}:{$cn[0]}";
         $value = set_post($value[0]);
+        $theme = getThemeName();
 
         switch($type[0]){
             case 'noLdap':
-                $res = $value." &nbsp;<i>(".CONFIG_DIR.'/'.CONFIG_FILE.")</i>";
+                $res = $value." &nbsp;(".CONFIG_DIR.'/'.CONFIG_FILE.")";
                 break;
             case 'bool':
-                $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
+                $res = "<select id='$name' size=1 name=\"{$name}\" style='width:{$ssize}'>";
                 $false = (preg_match('/true/i', $value)) ? '' : "selected";
                 $true  = (preg_match('/true/i', $value)) ? "selected" : '';
                 $res.= "<option {$false} value='false'>"._("Off")."</option>";
@@ -234,7 +236,7 @@ class propertyEditor extends management
                 if(!empty($defaults[0])){
                     $data = call_user_func(preg_split("/::/", $defaults[0]), $class[0],$cn[0],$value, $type[0]);
                     if(is_array($data)){
-                        $res = "<select size=1 name=\"{$name}\" style='width:{$ssize}'>";
+                        $res = "<select id='$name' size=1 name=\"{$name}\" style='width:{$ssize}'>";
                         foreach($data as $oValue => $oDesc){
                             if($oValue == $value){
                                 $res.="<option selected value=\"{$oValue}\">{$oDesc}</option>\n";
@@ -247,8 +249,21 @@ class propertyEditor extends management
                 }
                 break;
             case 'command':
-                $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
-                $res.= image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                switch ($theme) {
+                    case 'classic':
+                        $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
+                                 ".image('images/lists/edit.png', "testCommand_{$name}", _("Test the given command."));
+                        break;
+
+                    default:
+                        $res = "<div class='valign-wrapper' style='width:{$isize};'>
+                                    <input class='command-input' type='text' value=\"{$value}\" name=\"{$name}\">
+                                    <label>
+                                        ".image("<i class='material-icons input-icons'>edit</i>", "testCommand_{$name}", _("Test the given command."))."
+                                    </label>
+                                </div>";
+                        break;
+                }
                 break;
             case 'dn':
             case 'rdn':
@@ -257,12 +272,14 @@ class propertyEditor extends management
             case 'file':
             case 'string':
             case 'integer':
-                $res = "<input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">";
+                $res = "<div class='input-field'>
+                            <input style='width:{$isize}' type='text' value=\"{$value}\" name=\"{$name}\">
+                        </div>";
                 break;
-            default: echo $type[0].$name."  ";$res = ""; 
+            default: echo $type[0].$name."  ";$res = "";
         }
-       
-        // Check if it is a required value. 
+
+        // Check if it is a required value.
         if($mandatory[0] && empty($value)){
            $res.= "<rowClass:entry-error/>";
         }

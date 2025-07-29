@@ -20,12 +20,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-if (!$cleanup){
-	session::set('plugin_dir',dirname(__FILE__));
-	$smarty->assign("iconmenu", $plist->show_iconmenu());
-	$smarty->assign("year", date("Y"));
-	$smarty->assign("revision", get_gosa_version());
-	$display= $smarty->fetch(get_template_path('welcome.tpl', TRUE));
+if (!$cleanup) {
+    session::set('plugin_dir', dirname(__FILE__));
+    $smarty->assign('iconmenu', $plist->show_iconmenu());
+    $smarty->assign('year', date('Y'));
+    $smarty->assign('revision', get_gosa_version());
+    $display = $smarty->fetch(get_template_path('welcome.tpl', true));
 }
-
-?>
