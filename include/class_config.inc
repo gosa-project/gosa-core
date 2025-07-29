@@ -775,7 +775,7 @@ class config
            in this case we have to mark the department name to be able to differentiate.
            (e.g l=Name  or   o=Name)
          */
-        $types = departmentManagement::get_support_departments();
+        $types = \GosaDepartments\admin\departments\DepartmentManagement::get_support_departments();
 
         /* Create a list of attributes to fetch */
         $ldap_values = array("objectClass", "gosaUnitTag", "description");

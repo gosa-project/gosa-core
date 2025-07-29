@@ -184,7 +184,7 @@ class listing
         }
 
         // Fill objectTypes from departments and xml definition
-        $types = departmentManagement::get_support_departments();
+        $types = \GosaDepartments\admin\departments\DepartmentManagement::get_support_departments();
         foreach ($types as $class => $data) {
             $this->objectTypes[$data['OC']] = [
                 'label' => $data['TITLE'],
@@ -1951,7 +1951,7 @@ class listing
         $ui = get_userinfo();
 
         // Get list of supported department types
-        $types = departmentManagement::get_support_departments();
+        $types = \GosaDepartments\admin\departments\DepartmentManagement::get_support_departments();
 
         // Load departments allowed by ACL
         $validDepartments = $ui->get_module_departments($this->categories);

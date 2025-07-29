@@ -724,17 +724,17 @@ class Step_Migrate extends setup_step
                 /* Get list of possible container objects, to be able to detect naming 
                  *  attributes and missing attribute types.
                  */
-                if(!class_available("departmentManagement")){
+                if(!class_available("\GosaDepartments\admin\departments\DepartmentManagement")){
                     $this->checks['rootOC']['STATUS']    = FALSE;
                     $this->checks['rootOC']['STATUS_MSG']= _("Failed");
-                    $this->checks['rootOC']['ERROR_MSG'] = sprintf(_("Missing GOsa object class '%s'!"),"departmentManagement").
+                    $this->checks['rootOC']['ERROR_MSG'] = sprintf(_("Missing GOsa object class '%s'!"),"\GosaDepartments\admin\departments\DepartmentManagement").
                         "&nbsp;"._("Please check your installation.");
                     return;
                 }
 
                 /* Try to detect base class type, e.g. is it a dcObject.
                  */
-                $dep_types = departmentManagement::get_support_departments();
+                $dep_types = \GosaDepartments\admin\departments\DepartmentManagement::get_support_departments();
                 $dep_type ="";
                 foreach($dep_types as $dep_name => $dep_class){
                     if(in_array_strict($dep_class['CLASS'], $attrs['objectClass'])){
