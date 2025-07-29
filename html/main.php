@@ -204,10 +204,11 @@ if (session::global_is_set('plugin_dir')) {
     $old_plugin_dir = '';
 }
 
-// Generate menus 
+// Generate menus
 $plist->gen_headlines();
 $plist->gen_menu();
 $plist->genPathMenu();
+$plist->genBreadcrumb();
 
 /* check if we are using account expiration */
 $smarty->assign("hideMenus", false);
@@ -262,14 +263,14 @@ if (count($plist->getRegisteredMenuEntries()) == 0 && session::global_get('curre
 }
 
 /* Handle plugin locks.
-    - Remove the plugin from session if we switched to another. (cleanup) 
+    - Remove the plugin from session if we switched to another. (cleanup)
     - Remove all created locks if "reset" was posted.
     - Remove all created locks if we switched to another plugin.
 */
 $cleanup    = false;
 $remove_lock = false;
 
-/* Check if we have changed the selected plugin 
+/* Check if we have changed the selected plugin
 */
 if (($old_plugin_dir != $plugin_dir && $old_plugin_dir != '') ||
     (isset($_GET['reset']) && $_GET['reset'] == 1)
@@ -498,7 +499,7 @@ if (!isset($_SESSION['screen_width'])) {
 $display = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl')) .
     $smarty->fetch(get_template_path('framework.tpl'));
 
-/* Save dialog filters and selected base in a cookie. 
+/* Save dialog filters and selected base in a cookie.
    So we may be able to restore the filter an base settings on reload.
 */
 $cookie = array();

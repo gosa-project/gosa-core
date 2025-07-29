@@ -37,7 +37,6 @@ require_once("../setup/class_setupStep_License.inc");
 require_once("../setup/class_setupStep_Ldap.inc");
 require_once("../setup/class_setupStep_Schema.inc");
 require_once("../setup/class_setupStep_Migrate.inc");
-require_once("../setup/class_setupStep_Feedback.inc");
 require_once("../setup/class_setupStep_Finish.inc");
 
 
@@ -159,6 +158,6 @@ if(function_exists("get_gosa_version")){
   $smarty->assign("version","");
 }
 
-echo $header.$smarty->fetch("../setup/setup_frame.tpl");
+echo $header.$smarty->fetch("../setup/$theme/setup_frame.tpl");
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -3,7 +3,7 @@
 /**
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
- * 
+ *
  * ID: $$Id$$
  *
  * This program is free software; you can redistribute it and/or modify
@@ -38,7 +38,7 @@ function displayLogin()
     error_reporting(E_ALL);
 
     /* Check theme compatibility */
-    $theme= $config->get_cfg_value("core",'theme');
+    $theme = $config->get_cfg_value("core", 'theme');
     if (file_exists("$BASE_DIR/ihtml/themes/$theme/blacklist")) {
         $blocks = file("$BASE_DIR/ihtml/themes/$theme/blacklist");
         foreach ($blocks as $block) {
@@ -75,8 +75,8 @@ function displayLogin()
         $smarty->assign("ssl", '');
     }
 
-    if(!$config->check_session_lifetime()) {
-        $smarty->assign ("lifetime", _("The configured session lifetime will be overridden by php.ini settings!"));
+    if (!$config->check_session_lifetime()) {
+        $smarty->assign("lifetime", _("The configured session lifetime will be overridden by php.ini settings!"));
     } else {
         $smarty->assign("lifetime", '');
     }
@@ -91,11 +91,11 @@ function displayLogin()
     foreach ($config->data['LOCATIONS'] as $key => $ignored) {
         $servers[$key] = $key;
     }
-    $smarty->assign ("server_options", $servers);
-    $smarty->assign ("server_id", $selected);
+    $smarty->assign("server_options", $servers);
+    $smarty->assign("server_id", $selected);
 
     /* show login screen */
-    $smarty->assign ("PHPSESSID", session_id());
+    $smarty->assign("PHPSESSID", session_id());
     if (session::is_set('errors')) {
         $smarty->assign("errors", session::get('errors'));
     }
@@ -106,8 +106,8 @@ function displayLogin()
     }
     $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 
-    $smarty->display (get_template_path('headers.tpl'));
-    $smarty->assign("version",get_gosa_version());
+    $smarty->display(get_template_path('headers.tpl'));
+    $smarty->assign("version", get_gosa_version());
     $smarty->display(get_template_path('login.tpl'));
     exit();
 }
@@ -121,11 +121,11 @@ function displayLogin()
 /* Set error handler to own one, initialize time calculation
 and start session. */
 session::start();
-session::set('errorsAlreadyPosted',array());
+session::set('errorsAlreadyPosted', array());
 
-/* Destroy old session if exists. 
+/* Destroy old session if exists.
 Else you will get your old session back, if you not logged out correctly. */
-if(is_array(session::get_all()) && count(session::get_all())) {
+if (is_array(session::get_all()) && count(session::get_all())) {
     session::destroy();
     session::start();
 }
@@ -147,10 +147,10 @@ if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
 session::set('errors', '');
 
 /* Check for java script */
-if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
-    session::global_set('js',TRUE);
-}elseif(isset($_POST['javascript'])) {
-    session::global_set('js',FALSE);
+if (isset($_POST['javascript']) && $_POST['javascript'] == "true") {
+    session::global_set('js', true);
+} elseif (isset($_POST['javascript'])) {
+    session::global_set('js', false);
 }
 
 /* Check if gosa.conf (.CONFIG_FILE) is accessible */
@@ -186,10 +186,10 @@ $GLOBALS['t_gettext_message_dir'] = $BASE_DIR . '/locale/';
 $domain = 'core';
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
-$smarty->assign ('nextfield', 'username');
+$smarty->assign('nextfield', 'username');
 
 /* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
-$smarty->assign ("cookies", _("Your browser has cookies disabled: please enable cookies and reload this page before logging in!"));
+$smarty->assign("cookies", _("Your browser has cookies disabled: please enable cookies and reload this page before logging in!"));
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     DEBUG(DEBUG_TRACE, __LINE__, '', __FILE__, $lang, "Setting language to");
@@ -212,8 +212,8 @@ if (
 }
 
 /* If SSL is forced, just forward to the SSL enabled site */
-if ($config->get_cfg_value("core","forceSSL") == 'true' && $ssl != '') {
-    header ("Location: $ssl");
+if ($config->get_cfg_value("core", "forceSSL") == 'true' && $ssl != '') {
+    header("Location: $ssl");
     exit;
 }
 
@@ -269,7 +269,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     $attrs = $ldap->fetch();
     if (!count($attrs)) {
         $ldap->cd($config->current['BASE']);
-        $ldap->create_missing_trees($config->get_cfg_value("core","config"));
+        $ldap->create_missing_trees($config->get_cfg_value("core", "config"));
     }
 
     /* Check for valid input */
@@ -313,29 +313,27 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             del_user_locks($ui->dn);
 
             /* Save userinfo and plugin structure */
-            session::global_set('ui',$ui);
-            session::global_set('session_cnt',0);
+            session::global_set('ui', $ui);
+            session::global_set('session_cnt', 0);
 
-      /* Let GOsa trigger a new connection for each POST, save
-      config to session. */
+            /* Let GOsa trigger a new connection for each POST, save
+            config to session. */
             $config->get_departments();
             $config->make_idepartments();
-            session::global_set('config',$config);
+            session::global_set('config', $config);
 
             /* Restore filter settings from cookie, if available */
-            if($config->get_cfg_value("core","storeFilterSettings") == "true") {
-
-                if(isset($_COOKIE['GOsa_Filter_Settings']) || isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])) {
-
-                    if(isset($_COOKIE['GOsa_Filter_Settings'])) {
+            if ($config->get_cfg_value("core", "storeFilterSettings") == "true") {
+                if (isset($_COOKIE['GOsa_Filter_Settings']) || isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])) {
+                    if (isset($_COOKIE['GOsa_Filter_Settings'])) {
                         $cookie_all = json_decode(base64_decode($_COOKIE['GOsa_Filter_Settings']), true);
-                    }else{
+                    } else {
                         $cookie_all = json_decode(base64_decode($HTTP_COOKIE_VARS['GOsa_Filter_Settings']), true);
                     }
-                    if(!is_array($cookie_all)) {
+                    if (!is_array($cookie_all)) {
                         $cookie_all = [];
                     }
-                    if(isset($cookie_all[$ui->dn])) {
+                    if (isset($cookie_all[$ui->dn])) {
                         $cookie = $cookie_all[$ui->dn];
                         $cookie_vars = array("MultiDialogFilters", "CurrentMainBase", "plug");
                         foreach ($cookie_vars as $var) {
@@ -382,11 +380,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 }
 
 /* Fill template with required values */
-$smarty->assign ('date', gmdate("D, d M Y H:i:s"));
-$smarty->assign ('username', set_post($username));
-$smarty->assign ('personal_img', get_template_path('images/login-head.png'));
-$smarty->assign ('password_img', get_template_path('images/password.png'));
-$smarty->assign ('directory_img', get_template_path('images/ldapserver.png'));
+$smarty->assign('date', gmdate("D, d M Y H:i:s"));
+$smarty->assign('username', set_post($username));
+$smarty->assign('personal_img', get_template_path('images/login-head.png'));
+$smarty->assign('password_img', get_template_path('images/password.png'));
+$smarty->assign('directory_img', get_template_path('images/ldapserver.png'));
 
 /* Some error to display? */
 if (!isset($message)) {
@@ -409,7 +407,7 @@ $smarty->assign('server_options', $servers);
 $smarty->assign('server_id', $selected);
 
 /* show login screen */
-$smarty->assign ("PHPSESSID", session_id());
+$smarty->assign("PHPSESSID", session_id());
 if (session::is_set('errors')) {
     $smarty->assign("errors", session::get('errors'));
 }
