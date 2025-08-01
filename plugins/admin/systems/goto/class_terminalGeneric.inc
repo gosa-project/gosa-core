@@ -325,7 +325,7 @@ class termgeneric extends plugin
                 new log("remove","terminal/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 
                 if (!$ldap->success()){
-                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+                    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, self::class));
                 }
 
                 /* Remove kerberos key dependencies too */
@@ -599,7 +599,7 @@ another location! */
         }
 
         if (!$ldap->success()){
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, self::class));
         }
 
         /* Send installation activation
@@ -679,7 +679,7 @@ another location! */
                     "plSection"     => array("administration"),
                     "plRequirements"=> array(
                         'ldapSchema' => array('gotoTerminal' => '>=2.7'),
-                        'onFailureDisablePlugin' => array(get_class())
+                        'onFailureDisablePlugin' => array(self::class)
                         ),
                     "plCategory"    => array("terminal" => array( "description"  => _("Terminal"),
                             "objectClass"  => "gotoTerminal")),

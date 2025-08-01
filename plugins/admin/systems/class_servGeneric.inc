@@ -252,7 +252,7 @@ class servgeneric extends plugin
         new log("remove","server/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 
         if (!$ldap->success()){
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, self::class));
         }
 
         /* Delete references to object groups */
@@ -422,7 +422,7 @@ class servgeneric extends plugin
             $mode= "modify";
         }
         if (!$ldap->success()){
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, self::class));
         }
         $this->netConfigDNS->cn = $this->cn;
         $this->netConfigDNS->save();
@@ -496,7 +496,7 @@ class servgeneric extends plugin
                     "plSection"     => array("administration"),           
                     "plRequirements"=> array(
                         'ldapSchema' => array('goServer' => '>=2.7'),
-                        'onFailureDisablePlugin' => array(get_class())
+                        'onFailureDisablePlugin' => array(self::class)
                         ),
                     "plCategory"    => array("server" => array("description"  => _("Server"),
                             "objectClass"  => "goServer")),

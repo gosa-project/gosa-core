@@ -126,6 +126,9 @@ function get_classes($folder= ".")
       if (preg_match('/^\s*class\s+\w.*$/', $line)){
         $class= preg_replace('/^\s*class\s*(\w+).*$/', '\1', $line);
         $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
+      } else if (preg_match('/^\s*abstract class\s+\w.*$/', $line)){
+        $class= preg_replace('/^\s*abstract class\s*(\w+).*$/', '\1', $line);
+        $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
       }
     }
   }
