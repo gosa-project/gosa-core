@@ -13,17 +13,8 @@
         "gonicus/gosa2-plugin-ldapmanager": "dev-composer",
         "gonicus/gosa2-plugin-systems": "dev-composer",
         "gonicus/gosa2-plugin-relationshipmanager": "dev-composer",
-        "gonicus/gosa2-plugin-departments": "@dev"
+        "gonicus/gosa2-plugin-departments": "dev-main"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../gosa2-plugin-departments",
-            "options": {
-                "symlink": false
-            }
-        }
-    ],
     "authors": [
         {
             "name": "Benjamin Zapiec",
