@@ -327,7 +327,7 @@ class workgeneric extends plugin
             $ldap->rmdir($this->dn);
             new log("remove","workstation/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
             if (!$ldap->success()){
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, self::class));
             }
 
             /* Remove kerberos key dependencies too */
@@ -575,7 +575,7 @@ class workgeneric extends plugin
             $ldap->add($this->attrs);
             new log("create","workstation/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
             if (!$ldap->success()){
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, self::class));
             }
 
             $this->netConfigDNS->cn = $this->cn;
@@ -592,7 +592,7 @@ class workgeneric extends plugin
             $this->cleanup();
             $ldap->modify ($this->attrs); 
             if (!$ldap->success()){
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, self::class));
             }
             new log("modify","workstation/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 
@@ -682,7 +682,7 @@ class workgeneric extends plugin
                     "plSection"     => array("administration"),
                     "plRequirements"=> array(
                         'ldapSchema' => array('gotoWorkstation' => '>=2.7'),
-                        'onFailureDisablePlugin' => array(get_class())
+                        'onFailureDisablePlugin' => array(self::class)
                         ),
                     "plCategory"    => array("workstation" => array("description"  => _("Workstation"),
                             "objectClass"  => "gotoWorkstation")),

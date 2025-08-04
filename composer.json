@@ -12,7 +12,8 @@
         "gonicus/gosa2-plugin-rolemanagement": "dev-composer",
         "gonicus/gosa2-plugin-ldapmanager": "dev-composer",
         "gonicus/gosa2-plugin-systems": "dev-composer",
-        "gonicus/gosa2-plugin-relationshipmanager": "dev-composer"
+        "gonicus/gosa2-plugin-relationshipmanager": "dev-composer",
+        "gonicus/gosa2-plugin-departments": "dev-main"
     },
     "authors": [
         {
@@ -25,4 +26,3 @@
         "issues": "https://github.com/gosa-project/gosa-core"
     }
 }
-

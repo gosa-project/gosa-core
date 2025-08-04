@@ -665,7 +665,7 @@ class printgeneric extends plugin
             new log("remove","printer/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 
             if (!$ldap->success()){
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, self::class));
             }
             $this->handle_post_events("remove",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
 
@@ -968,7 +968,7 @@ class printgeneric extends plugin
             new log("modify","printer/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
         }
         if (!$ldap->success()){
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, self::class));
         }
 
 #if(preg_match("/printer/i",$this->BelongsTo)){
@@ -1011,7 +1011,7 @@ class printgeneric extends plugin
                     "plSection"     => array("administration"),
                     "plRequirements"=> array(
                         'ldapSchema' => array('gotoPrinter' => '>=2.7'),
-                        'onFailureDisablePlugin' => array(get_class())
+                        'onFailureDisablePlugin' => array(self::class)
                         ),
                     "plCategory"    => array("printer" => array("description"  => _("Printer"),
                             "objectClass"  => "gotoPrinter"),"workstation","terminal"),
