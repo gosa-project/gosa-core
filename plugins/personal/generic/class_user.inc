@@ -1108,7 +1108,6 @@ class user extends plugin
 
                 $im = new Imagick();
                 $im->readImageBlob($this->photoData);
-                $im->setImageOpacity(1.0);
                 $im->resizeImage(147, 200, Imagick::FILTER_UNDEFINED, 0.5, TRUE);
                 $im->setCompressionQuality(90);
                 $im->setImageFormat('jpeg');
