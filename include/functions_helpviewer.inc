@@ -88,7 +88,7 @@ function genIndex()
       $str .= "<p style='padding-left:20px;'><b>"._($name)."</b> ("._("No help available for this plug-in.").")</p>";
     }
   }
-  return (utf8_decode($str));
+  return (mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8'));
 }
 
 
@@ -452,7 +452,7 @@ function createResultEntry($entry,$res,$name,$max)
           <table summary=\"\"  width=\"98%\" align=\"center\">
             <tr>
               <td height=15>
-                <b>".utf8_encode($entry['headline'])."</b> -".utf8_encode(substr(strip_tags($entry['content']),0,120))."...
+                <b>".mb_convert_encoding($entry['headline'], 'UTF-8', 'ISO-8859-1')."</b> -".mb_convert_encoding(substr(strip_tags($entry['content']),0,120), 'UTF-8', 'ISO-8859-1')."...
               </td>
               <td width=50 valign=\"top\">".progressbar($percentage,50,8)."</td>
              </tr>

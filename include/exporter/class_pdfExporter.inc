@@ -31,7 +31,7 @@ class pdfExporter
     $this->result=new PDF('L', 'mm', 'A4');
     $this->result->AliasNbPages();
     $this->result->SetFont('Helvetica', '', 10);
-    $this->result->setHeadline(utf8_decode($headline));
+    $this->result->setHeadline(mb_convert_encoding($headline, 'ISO-8859-1', 'UTF-8'));
     $this->result->AddPage();
 
     // Analyze for width
@@ -56,7 +56,7 @@ class pdfExporter
 
         foreach ($columns as $order => $index) {
           if (isset($header[$index])){
-            $this->result->Cell($width[$order], 7, utf8_decode($header[$index]), 1, 0, 'C', 1);
+            $this->result->Cell($width[$order], 7, mb_convert_encoding($header[$index], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
           } else {
             $this->result->Cell($width[$order], 7, '', 1, 0, 'C', 1);
           }
@@ -72,7 +72,7 @@ class pdfExporter
       foreach ($columns as $order => $index) {
 
         if (isset($row["_sort$index"])){
-          $this->result->Cell($width[$order], 6, utf8_decode($row["_sort$index"]), 'LR', 0, 'L', $fill);
+          $this->result->Cell($width[$order], 6, mb_convert_encoding($row["_sort$index"], 'ISO-8859-1', 'UTF-8'), 'LR', 0, 'L', $fill);
         } else {
           $this->result->Cell($width[$order], 6, '', 'LR', 0, 'L', $fill);
         }
