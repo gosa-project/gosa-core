@@ -41,14 +41,10 @@ class passwordMethodssha extends passwordMethod
             $salt = substr(pack("H*", sha1($salt . $pwd)), 0, 4);
             $pwd = "{SSHA}" . base64_encode(pack("H*", sha1($pwd . $salt)) . $salt);
             return $pwd;
-        } elseif (function_exists("mhash")) {
-            $salt = mhash_keygen_s2k(MHASH_SHA1, $pwd, substr(pack("h*", md5(mt_rand())), 0, 8), 4);
-            $pwd = "{SSHA}" . base64_encode(mhash(MHASH_SHA1, $pwd . $salt) . $salt);
         } else {
-            msg_dialog::display(_("Configuration error"), msgPool::missingext("mhash"), ERROR_DIALOG);
+            msg_dialog::display(_("Configuration error"), msgPool::missingext("sha1"), ERROR_DIALOG);
             return false;
         }
-        return $pwd;
     }
 
 
