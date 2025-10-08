@@ -25,7 +25,7 @@ require_once("../include/php_setup.inc");
 require_once("functions.inc");
 require_once("functions_helpviewer.inc");
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 restore_error_handler();
 header("Content-type: text/html; charset=UTF-8");
 

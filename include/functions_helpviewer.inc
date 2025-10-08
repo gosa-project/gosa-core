@@ -31,8 +31,7 @@ class parseXml
   {
     $this->parser   = xml_parser_create();
     $this->filename = $file;
-    xml_set_object($this->parser, $this);
-    xml_set_element_handler($this->parser, "tag_open", "tag_close");
+    xml_set_element_handler(self::$parser, [$this, 'tag_open'], [$this, 'tag_close']);
     return($this->entries);
   }
   function parse()
@@ -277,7 +276,7 @@ function search($arr,$word)
   session::un_set('parsed_search_keyword');
   session::set('parsed_search_keyword',"");
 
-  error_reporting(E_ALL | E_STRICT);
+  error_reporting(E_ALL);
 
   /* prepare searchwords */
   $word   = trim($word);
