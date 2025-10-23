@@ -450,8 +450,8 @@ function gosa_log($message)
     /* Preset to something reasonable */
     $username = "[unauthenticated]";
 
-    /* Replace username if object is present */
-    if (isset($ui)) {
+    /* Replace username if object is present and not false */
+    if ($ui) {
         if ($ui->username != '') {
             $username = "[$ui->username]";
         } else {
