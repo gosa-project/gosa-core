@@ -4,8 +4,8 @@
  */
 
  // Standard inclusions      
- include("pChart/pData.class");   
- include("pChart/pChart.class");   
+ include("pData.class");   
+ include("pChart.class");   
   
  // Dataset definition    
  $DataSet = new pData;   
@@ -16,7 +16,7 @@
  $DataSet->SetSerieName("February","Serie2");   
  $DataSet->SetSerieName("March","Serie3");   
  $DataSet->SetYAxisName("Average age");
- $DataSet->SetYAxisUnit("µs");
+ $DataSet->SetYAxisUnit("ï¿½s");
   
  // Initialise the graph   
  $Test = new pChart(700,230);
