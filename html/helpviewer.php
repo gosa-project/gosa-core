@@ -22,8 +22,8 @@
 
 /* Include classes and configs */
 require_once("../include/php_setup.inc");
-require_once("functions.inc");
-require_once("functions_helpviewer.inc");
+require_once("../include/functions.inc");
+require_once("../include/functions_helpviewer.inc");
 
 error_reporting(E_ALL);
 restore_error_handler();

@@ -31,7 +31,7 @@ class password extends plugin
     var $proposalSelected = false;
     var $proposalInitialized = false;
 
-    var $forcedHash = null;
+    var $forcedHash = '';
     var $userPassword = '';
     var $attributes = array('userPassword');
 
@@ -226,7 +226,7 @@ class password extends plugin
                         _("You have no permission to change your password."),
                         WARNING_DIALOG
                     );
-                } elseif (!change_password($ui->dn, $new_password, false, $this->forcedHash, $current_password, $message)) {
+                } elseif (!change_password($ui->dn, $new_password, true, $this->forcedHash, $current_password, $message)) {
                     msg_dialog::display(
                         _("Password change"),
                         $message,
@@ -235,7 +235,7 @@ class password extends plugin
                 } else {
                     $ui->password = $new_password;
                     session::set('ui', $ui);
-                    return ($smarty->fetch(get_template_path("changed.tpl", true)));
+                    return ($smarty->fetch(get_template_path("changed.tpl", true, dirname(__FILE__))));
                 }
             }
             $smarty->assign("pwLength", $length);
