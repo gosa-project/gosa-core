@@ -31,7 +31,7 @@ class parseXml
   {
     $this->parser   = xml_parser_create();
     $this->filename = $file;
-    xml_set_element_handler(self::$parser, [$this, 'tag_open'], [$this, 'tag_close']);
+    xml_set_element_handler($this->parser, [$this, 'tag_open'], [$this, 'tag_close']);
     return($this->entries);
   }
   function parse()
