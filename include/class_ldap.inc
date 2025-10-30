@@ -1230,14 +1230,14 @@ class LDAP
         /* Reset index */
         $i = 1;
         $identifier = [];
-        $attribute = ldap_first_attribute(self::$cid, $entry, $identifier);
+        $attribute = ldap_first_attribute(self::$cid, $entry);
         while ($attribute) {
             $i++;
             $atts[$i]['name']  = $attribute;
             $atts[$i]['value'] = ldap_get_values_len(self::$cid, $entry, "$attribute");
 
             /* Next one */
-            $attribute = ldap_next_attribute(self::$cid, $entry, $identifier);
+            $attribute = ldap_next_attribute(self::$cid, $entry);
         }
 
         foreach ($atts as $at) {
