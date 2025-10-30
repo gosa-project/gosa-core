@@ -361,7 +361,7 @@ class user extends plugin
         if (preg_match("/ editManager/i", " " . implode(' ', array_keys($_POST)) . " ")) {
             $this->dialog = new singleUserSelect($this->config, get_userinfo());
         }
-        if ($this->dialog && $this->dialog instanceof singleUserSelect && count($this->dialog->detectPostActions())) {
+        if ($this->dialog && $this->dialog instanceof singleUserSelect && count($this->dialog->detectPostActions() ?? [])) {
             $users = $this->dialog->detectPostActions();
             if (isset($users['action']) && $users['action'] == 'userSelected' && isset($users['targets']) && count($users['targets'])) {
                 $headpage = $this->dialog->getHeadpage();
