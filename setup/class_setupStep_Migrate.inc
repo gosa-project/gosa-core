@@ -41,6 +41,12 @@ class Step_Migrate extends setup_step
     var $rootOC_details = array();
     var $b_displayCheckbutton = TRUE;
 
+    var $migrate_users = array();
+
+    var $acl_migrate_dialog = FALSE;
+
+    var $migrate_acl_base_entry = "";
+
     function __construct()
     {
         $this->update_strings(); 
