@@ -398,6 +398,7 @@ td {
 
 #tree-table .sorter {
     position: absolute;
+    margin-top: 8px;
 }
 
 
