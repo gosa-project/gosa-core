@@ -276,3 +276,7 @@
 .content-area.setup .migrate-wrapper.card-content-scroll {
     max-height: calc(100vh - 275px);
 }
+
+#breadcrumb-container li.path-element {
+  margin-left: 18px;
+}
