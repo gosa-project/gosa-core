@@ -259,7 +259,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     /* Admin-logon and verify */
     $ldap = $config->get_ldap_link();
     if (is_null($ldap) || !($ldap instanceof ldapMultiplexer)) {
-        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $_POST['login'], 0, __FILE__));
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror("Something went wrong while trying to get a ldap link object with get_ldap_link(). We incorrectly got null or an object of a different type as ldapMultiplexer.", $_POST['login'], 0, __FILE__));
         displayLogin();
         exit();
     }

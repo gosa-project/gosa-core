@@ -4,8 +4,8 @@
  */
 
  // Standard inclusions   
- include("pChart/pData.class");
- include("pChart/pChart.class");
+ include("pData.class");
+ include("pChart.class");
 
  // Dataset definition 
  $DataSet = new pData;
@@ -18,7 +18,7 @@
  $DataSet->SetSerieName("January","Serie1");
  $DataSet->SetSerieName("February","Serie2");
  $DataSet->SetYAxisName("Temperature");
- $DataSet->SetYAxisUnit("°C");
+ $DataSet->SetYAxisUnit("ï¿½C");
  $DataSet->SetXAxisUnit("h");
 
  // Initialise the graph

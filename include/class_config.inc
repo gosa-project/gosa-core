@@ -88,8 +88,7 @@ class config
         // $this->parser = xml_parser_create();
         self::$parser = xml_parser_create();
         $this->basedir = $basedir;
-        xml_set_object(self::$parser, $this);
-        xml_set_element_handler(self::$parser, "tag_open", "tag_close");
+        xml_set_element_handler(self::$parser, [$this, 'tag_open'], [$this, 'tag_close']);
 
         /* Parse config file directly? */
         if ($filename != "") {
@@ -140,8 +139,7 @@ class config
             $this->section = "";
             $this->currentLocation = "";
 
-            xml_set_object(self::$parser, $this);
-            xml_set_element_handler(self::$parser, "tag_open", "tag_close");
+            xml_set_element_handler(self::$parser, [$this, 'tag_open'], [$this, 'tag_close']);
             $this->parse($this->filename);
             $this->set_current($this->current['NAME']);
         }

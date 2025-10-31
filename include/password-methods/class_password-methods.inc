@@ -384,7 +384,7 @@ class passwordMethod
 
         if ($config->boolValueIsTrue("core", "strictPasswordRules")) {
             // Do we have UTF8 characters in the password?
-            return ($password == utf8_decode($password));
+            return ($password == mb_convert_encoding($password, 'ISO-8859-1', 'UTF-8'));
         }
 
         return (true);

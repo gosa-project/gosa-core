@@ -148,7 +148,7 @@ class SnapShotDialog extends plugin
                 $lData[$entry['dn']] = array('data' =>
                 array(
                     $time_stamp,
-                    htmlentities(utf8_decode(LDAP::fix($display_data))),
+                    htmlentities(mb_convert_encoding(LDAP::fix($display_data), 'ISO-8859-1', 'UTF-8')),
                     str_replace("%KEY", base64_encode($entry['dn']), $actions)
                 ));
             }
