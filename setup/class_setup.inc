@@ -257,7 +257,7 @@ class setup
                     <div style='float: left; margin-left:10px;margin-top:10px;font-size:24px;font-weight:bold;'>
                         {$title}
                     </div>
-                    <div style='float: right; margin-top:10px;font-size:24px;font-weight:bold;'>
+                    <div style='float: right; margin-left:10px;margin-top:10px;font-size:24px;font-weight:bold;'>
                         {$page}
                     </div>
                 </div>
