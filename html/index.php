@@ -31,7 +31,7 @@ if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
 
 define('GOSA_SETUP', false);
 require_once "../include/php_setup.inc";
-require_once "class_log.inc";
+require_once "../include/class_log.inc";
 header("Content-type: text/html; charset=UTF-8");
 
 /**
