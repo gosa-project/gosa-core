@@ -648,7 +648,7 @@ class Step_Migrate extends setup_step
         $ldap->set_size_limit(1);
         $res = $ldap->search("(objectClass=*)");
         $ldap->set_size_limit(0);
-        $err = ldap_errno($ldap->cid); 
+        $err = ldap_errno($ldap->get_cid()); 
 
         if( !$res || 
                 $err == 0x20 ||  # LDAP_NO_SUCH_OBJECT
