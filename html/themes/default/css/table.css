@@ -396,6 +396,10 @@ td {
     padding: 0;
 }
 
+#tree-table .sorter {
+    position: absolute;
+}
+
 
 /* Media Queries */
 
