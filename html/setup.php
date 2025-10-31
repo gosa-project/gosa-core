@@ -20,6 +20,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+// makes sure that php_setup.inc doesnt try to ready from gosa.conf
+// which doesnt exist at this point
+define('GOSA_SETUP', true);
+
 /* Get standard functions */
 require_once ("../include/php_setup.inc");
 
