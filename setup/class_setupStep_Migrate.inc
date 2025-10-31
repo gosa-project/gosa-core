@@ -144,8 +144,8 @@ class Step_Migrate extends setup_step
         /* Try to remove created entry 
          */
         $res = $ldap->rmDir($dn);
-        $ldap->cat($dn);
-        if($ldap->count()){
+
+        if(!$res){
             new log("view","setup/".get_class($this),$dn,array(),$ldap->get_error());
             $this->checks['permissions']['STATUS']    = FALSE;
             $this->checks['permissions']['STATUS_MSG']= _("Failed");
@@ -651,9 +651,7 @@ class Step_Migrate extends setup_step
 
         /* Check if root object exists */
         $ldap->cd($cv['base']);
-        $ldap->set_size_limit(1);
-        $res = $ldap->search("(objectClass=*)");
-        $ldap->set_size_limit(0);
+        $res = $ldap->search("(objectClass=*)", ["dn"]);
         $err = ldap_errno($ldap->get_cid()); 
 
         if( !$res || 
