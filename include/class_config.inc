@@ -166,6 +166,15 @@ class config
 
         $this->last_modified = filemtime($filename);
         $this->filename = $filename;
+
+        if(!file_exists($filename)) {
+            die($filename." does not exist!");
+        }
+
+        if(!is_readable($filename)) {
+            die($filename." is not readable!");
+        }
+
         $fh = fopen($filename, "r");
         $xmldata = fread($fh, 100000);
         fclose($fh);
