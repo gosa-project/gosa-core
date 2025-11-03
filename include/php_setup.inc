@@ -350,6 +350,10 @@ if (!GOSA_SETUP) {
     $templateCompileDirectory = $config->get_cfg_value("core", "templateCompileDirectory", '/var/spool/gosa/');
 }
 
+/* Enforce ssl if forced by gosa.conf */
+require_once(__DIR__ . '/ssl_enforce.inc');
+enforce_ssl_if_forced();
+
 set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
 
 $variables_order = 'ES';
