@@ -18,7 +18,7 @@
  $DataSet->SetSerieName("January","Serie1");
  $DataSet->SetSerieName("February","Serie2");
  $DataSet->SetYAxisName("Temperature");
- $DataSet->SetYAxisUnit("�C");
+ $DataSet->SetYAxisUnit("°C");
  $DataSet->SetXAxisUnit("h");
 
  // Initialise the graph
