@@ -21,7 +21,7 @@
  $DataSet->SetSerieName("Gama","Serie3");
  $DataSet->SetXAxisName("Samples IDs");
  $DataSet->SetYAxisName("Test Marker");
- $DataSet->SetYAxisUnit("�m");
+ $DataSet->SetYAxisUnit("µm");
 
  // Initialise the graph
  $Test = new pChart(380,400);
