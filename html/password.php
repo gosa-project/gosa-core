@@ -185,12 +185,6 @@ if (!isset($_SERVER['HTTPS']) ||
     }
 }
 
-/* If SSL is forced, just forward to the SSL enabled site */
-if ($config->get_cfg_value("core", "forceSSL") == 'true' && $ssl != '') {
-    header("Location: $ssl");
-    exit;
-}
-
 /* Check for selected password method */
 $method= $config->get_cfg_value("core", "passwordDefaultHash");
 if (isset($_GET['method'])) {

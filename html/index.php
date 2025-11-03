@@ -210,12 +210,6 @@ if (
     }
 }
 
-/* If SSL is forced, just forward to the SSL enabled site */
-if ($config->get_cfg_value("core", "forceSSL") == 'true' && $ssl != '') {
-    header("Location: $ssl");
-    exit;
-}
-
 /* Do we have htaccess authentification enabled? */
 $htaccess_authenticated = false;
 if ($config->get_cfg_value("core", "htaccessAuthentication") == "true") {
