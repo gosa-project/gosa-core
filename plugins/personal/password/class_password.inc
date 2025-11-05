@@ -226,7 +226,7 @@ class password extends plugin
                         _("You have no permission to change your password."),
                         WARNING_DIALOG
                     );
-                } elseif (!change_password($ui->dn, $new_password, true, $this->forcedHash, $current_password, $message)) {
+                } elseif (!change_password($ui->dn, $new_password, false, $this->forcedHash, $current_password, $message)) {
                     msg_dialog::display(
                         _("Password change"),
                         $message,
