@@ -76,8 +76,14 @@ class Step_Finish extends setup_step
       exit();
     }
 
-    /* Downlaod config */
+    /* Download config */
     if(isset($_POST['getconf'])){
+
+      // Disable every kind of error messages to avoid warnings in the download file
+      $old_error_reporting = error_reporting();
+      $old_display_errors = ini_get('display_errors');
+      error_reporting(0);
+      ini_set('display_errors', '0');
 
       header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
       header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
@@ -97,6 +103,11 @@ class Step_Finish extends setup_step
       $str = preg_replace("/\n[ ]*\n/","",$str);
 
       echo $this->get_conf_data();
+
+      // Restore previous error settings
+      error_reporting($old_error_reporting);
+      ini_set('display_errors', $old_display_errors);
+
       exit();
     }
    
