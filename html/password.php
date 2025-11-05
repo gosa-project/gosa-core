@@ -31,8 +31,8 @@ function displayPWchanger()
 }
 
 /* Load required includes */
-require_once "../include/php_setup.inc";
-require_once "../include/functions.inc";
+require_once("../include/php_setup.inc");
+require_once("../include/functions.inc");
 
 if (!class_exists("log")) {
     require_once("../include/class_log.inc");

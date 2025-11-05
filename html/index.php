@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once "../include/functions.inc";
+require_once("../include/functions.inc");
 
 /* Check if we need to run setup */
 if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
@@ -30,8 +30,8 @@ if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
 }
 
 define('GOSA_SETUP', false);
-require_once "../include/php_setup.inc";
-require_once "../include/class_log.inc";
+require_once("../include/php_setup.inc");
+require_once("../include/class_log.inc");
 header("Content-type: text/html; charset=UTF-8");
 
 /**
