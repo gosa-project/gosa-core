@@ -47,6 +47,8 @@ class Step_Migrate extends setup_step
 
     var $migrate_acl_base_entry = "";
 
+    var $show_details = FALSE;
+
     function __construct()
     {
         $this->update_strings(); 
@@ -451,7 +453,7 @@ class Step_Migrate extends setup_step
 
         $ldap->cd($cv['base']);
 
-        $ldap->cat($dn,array("dn"));
+        $ldap->search($dn,array("dn"));
         if($ldap->count()){
             msg_dialog::display(_("Error"), sprintf(_("Adding an administrative user failed: object '%s' already exists!"), LDAP::fix($dn)), ERROR_DIALOG);
             return(FALSE);  
@@ -721,14 +723,13 @@ class Step_Migrate extends setup_step
          */
         if(!in_array_strict("gosaDepartment",$attrs['objectClass'])){
             if($just_check){
-
                 $this->rootOC_details = array();	
                 $mods = array();
 
                 /* Get list of possible container objects, to be able to detect naming 
                  *  attributes and missing attribute types.
                  */
-                if(!class_available("\GosaDepartments\admin\departments\DepartmentManagement")){
+                if(!class_available("GosaDepartments\admin\departments\DepartmentManagement")){
                     $this->checks['rootOC']['STATUS']    = FALSE;
                     $this->checks['rootOC']['STATUS_MSG']= _("Failed");
                     $this->checks['rootOC']['ERROR_MSG'] = sprintf(_("Missing GOsa object class '%s'!"),"\GosaDepartments\admin\departments\DepartmentManagement").
