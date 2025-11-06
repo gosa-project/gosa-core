@@ -941,7 +941,7 @@ class userManagement extends management
                         break;
 
                     default:
-                        $image = "<i class='material-icons'>lock</i>";
+                        $image = "lock";
                         break;
                 }
             } else {
@@ -951,7 +951,7 @@ class userManagement extends management
                         break;
 
                     default:
-                        $image = "<i class='material-icons'>lock_open</i>";
+                        $image = "lock_open";
                         break;
                 }
             }
