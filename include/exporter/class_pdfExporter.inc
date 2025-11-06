@@ -144,7 +144,7 @@ class pdfExporter
     // Check if class defined
     $classes= get_declared_classes();
     if(in_array_strict('FPDF', $classes)) {
-      return array("exportPDF" => array( "label" => _("PDF"), "image" => "images/lists/pdf.png", "class"=> "pdfExporter", "mime" => "application/pdf", "filename" => "export.pdf" ));
+      return array("exportPDF" => array( "label" => _("PDF"), "image" => "file_download", "class"=> "pdfExporter", "mime" => "application/pdf", "filename" => "export.pdf" ));
     } else {
       return null;
     }

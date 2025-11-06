@@ -45,7 +45,7 @@ class csvExporter
 
   static function getInfo()
   {
-    return array("exportCVS" => array( "label" => _("CSV"), "image" => "images/lists/csv.png", "class"=> "csvExporter", "mime" => "text/x-csv", "filename" => "export.csv" ));
+    return array("exportCVS" => array( "label" => _("CSV"), "image" => "file_download", "class"=> "csvExporter", "mime" => "text/x-csv", "filename" => "export.csv" ));
   }
 
 }
