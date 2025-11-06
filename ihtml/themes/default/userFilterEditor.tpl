@@ -101,9 +101,7 @@
             </div>
 
             <div class="textarea-wrapper">
-              <textarea class="materialize-textarea" name='filter_{$key}' id='filter_{$key}'>
-                {$item.filter}
-              </textarea>
+              <textarea class="materialize-textarea" name='filter_{$key}' id='filter_{$key}'>{$item.filter}</textarea>
             </div>
           </div>
         </div>

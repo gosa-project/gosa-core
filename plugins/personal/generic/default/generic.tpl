@@ -114,9 +114,7 @@
     <div class="col s6 xl5">
         {render acl=$homePostalAddressACL checkbox=$multiple_support checked=$use_homePostalAddress}
         <div class="input-field">
-            <textarea class="materialize-textarea" id="homePostalAddress" name="homePostalAddress">
-                {$homePostalAddress}
-            </textarea>
+            <textarea class="materialize-textarea" id="homePostalAddress" name="homePostalAddress">{$homePostalAddress}</textarea>
             <label for="homePostalAddress">{t}Address{/t}</label>
         </div>
         {/render}
@@ -398,9 +396,7 @@
 
         {render acl=$postalAddressACL checkbox=$multiple_support checked=$use_postalAddress}
         <div class="input-field">
-            <textarea class="materialize-textarea" id="postalAddress" name="postalAddress">
-                {$postalAddress}
-            </textarea>
+            <textarea class="materialize-textarea" id="postalAddress" name="postalAddress">{$postalAddress}</textarea>
             <label for="postalAdress">{t}Address{/t}</label>
         </div>
         {/render}
