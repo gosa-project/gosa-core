@@ -153,7 +153,7 @@
 
         {if $is_template ne "true" && !$multiple_support}
 
-        {render acl=$CertificatesACL mode=read_active}
+        {render acl=$CertificatesACL}
         <div class="input-field certificate">
             <button class="btn-small" id="edit_cert" type="submit" name="edit_cert">{t}Edit certificates{/t}...</button>
         </div>

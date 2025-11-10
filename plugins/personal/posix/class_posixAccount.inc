@@ -741,7 +741,7 @@ class posixAccount extends plugin
         } else {
             // Transform date to days since the beginning
             list($day, $month, $year) = explode('.', $this->shadowExpire, 3);
-            $this->shadowExpire = (int)(mktime(0, 0, 0, $month, $day, $year) / (60 * 60 * 24));
+            $this->shadowExpire = strval((int)(mktime(0, 0, 0, $month, $day, $year) / (60 * 60 * 24)));
         }
         if (!$this->activate_shadowMax) {
             $this->shadowMax = "0";
@@ -1712,7 +1712,7 @@ class posixAccount extends plugin
 
         /* Convert to seconds */
         if (isset($this->multi_attrs['shadowExpire'])) {
-            $this->shadowExpire = $this->convertToSeconds($this->multi_attrs['shadowExpire'][0]);
+            $this->shadowExpire = strval($this->convertToSeconds($this->multi_attrs['shadowExpire'][0]));
         } else {
             $this->activate_shadowExpire = FALSE;
         }

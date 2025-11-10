@@ -32,6 +32,7 @@ class certificate
   var $data;
   var $type;
   var $error;
+  var $info;
 
   /* Initialize all vars*/ 
   function __construct()
@@ -95,7 +96,7 @@ class certificate
     }
 
     /* If cert is loaded correctly and is PEM now, we could read some data out of it */
-    if(count($this->info()) <=1)  {
+    if(is_countable($this->info()) && count($this->info()) <=1)  {
       $this->certificate();
       $this->error = _("Cannot load certificate: only PEM and DER are supported!");
       /* Reset*/
@@ -190,7 +191,7 @@ class certificate
 
   function isvalid()
   {
-    return (($this->type != false)&&(count($this->info)>1));
+    return (($this->type != false)&&is_countable($this->info())&&(count($this->info)>1));
   }
   
 

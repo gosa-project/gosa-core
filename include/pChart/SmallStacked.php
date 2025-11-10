@@ -4,8 +4,8 @@
  */
 
  // Standard inclusions   
- include("pChart/pData.class");
- include("pChart/pChart.class");
+ include("pData.class");
+ include("pChart.class");
 
  // Dataset definition 
  $DataSet = new pData;
@@ -20,7 +20,7 @@
  $DataSet->SetSerieName("Beta","Serie2");
  $DataSet->SetSerieName("Gama","Serie3");
  $DataSet->SetYAxisName("Test Marker");
- $DataSet->SetYAxisUnit("µm");
+ $DataSet->SetYAxisUnit("Âµm");
 
  // Initialise the graph
  $Test = new pChart(210,230);
