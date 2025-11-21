@@ -164,8 +164,17 @@ class config
             "SERVICE"   => []
         );
 
+        if(!file_exists($filename)) {
+            die($filename." does not exist! Did you run the installation wizard?");
+        }
+
+        if(!is_readable($filename)) {
+            die($filename." is not readable!");
+        }
+
         $this->last_modified = filemtime($filename);
         $this->filename = $filename;
+
         $fh = fopen($filename, "r");
         $xmldata = fread($fh, 100000);
         fclose($fh);

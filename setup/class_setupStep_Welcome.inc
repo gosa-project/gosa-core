@@ -56,12 +56,18 @@ class Step_Welcome  extends setup_step
   function save_object()
   {
     $id = "";
-    
+    $displayedError = false;
+
     /* Get auth ID from file */
     $path = '/tmp/gosa.auth';
     if (file_exists($path) && is_readable($path)){
       $contents= file($path);
       $id= chop($contents[0]);
+    } else {
+      if (isset($_POST['next'])) {
+        msg_dialog::display(_("Setup error"), "/tmp/gosa.auth does not exist or is not readable. Did you execute the mentioned command?", ERROR_DIALOG);
+        $displayedError = true;
+      }
     }
 
     /* Continue if we've the correct ID */
@@ -69,6 +75,9 @@ class Step_Welcome  extends setup_step
       $this->is_completed = true;
     } else {
       $this->is_completed = false;
+      if (!$displayedError && isset($_POST['next'])) {
+        msg_dialog::display(_("Setup error"), "The string read from /tmp/gosa.auth does not match the session ID.", ERROR_DIALOG);
+      }
     }
 
   }

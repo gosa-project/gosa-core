@@ -70,6 +70,10 @@ class Step_Ldap extends setup_step
 
     /* Handle namingContext detection */
     $attr = @LDAP::get_naming_contexts($this->connection);
+    if (!$attr) {
+      $attr = [];
+    }
+
     unset($attr['count']);
     $smarty->assign("namingContexts", $attr);
     $smarty->assign("namingContextsCount", count($attr));

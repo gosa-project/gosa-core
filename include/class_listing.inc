@@ -272,7 +272,7 @@ class listing
                             $sorter = '&nbsp;' . image('images/lists/sort-' . ($this->sortDirection[$index] ? 'up' : 'down') . '.png', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top');
                             break;
                         default:
-                            $sorter = image("<i class='material-icons'>keyboard_arrow_" . ($this->sortDirection[$index] ? 'up' : 'down') . '</i>', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top ');
+                            $sorter = image("<i class='sorter material-icons'>keyboard_arrow_" . ($this->sortDirection[$index] ? 'up' : 'down') . '</i>', null, $this->sortDirection[$index] ? _('Sort ascending') : _('Sort descending'), 'text-top ');
                             break;
                     }
                 }

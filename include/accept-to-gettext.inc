@@ -91,10 +91,9 @@ function find_match(
 function al2gt($gettextlangs, $mime)
 {
   /* default to "everything is acceptable", as RFC2616 specifies */
-  $acceptLang = (($_SERVER["HTTP_ACCEPT_LANGUAGE"] == '') ? '*' :
-    $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
-  $acceptChar = (($_SERVER["HTTP_ACCEPT_CHARSET"] == '') ? '*' :
-    $_SERVER["HTTP_ACCEPT_CHARSET"]);
+  $acceptLang  = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '*';
+  $acceptChar  = $_SERVER['HTTP_ACCEPT_CHARSET']  ?? '*';
+
   $alparts = @preg_split("/,/", $acceptLang);
   $acparts = @preg_split("/,/", $acceptChar);
 
@@ -153,12 +152,12 @@ function al2gt($gettextlangs, $mime)
     $noct = @preg_split("/-/", $allang);
 
     $testvals = array(
-      array($alscores[$allang], $acscores[$gtcs]),
-      array($alscores[$noct[0]], $acscores[$gtcs]),
-      array($alscores[$allang], $acscores["*"]),
-      array($alscores[$noct[0]], $acscores["*"]),
-      array($alscores["*"], $acscores[$gtcs]),
-      array($alscores["*"], $acscores["*"])
+      array($alscores[$allang] ?? null, $acscores[$gtcs] ?? null),
+      array($alscores[$noct[0]] ?? null, $acscores[$gtcs] ?? null),
+      array($alscores[$allang] ?? null, $acscores["*"] ?? null),
+      array($alscores[$noct[0]] ?? null, $acscores["*"] ?? null),
+      array($alscores["*"] ?? null, $acscores[$gtcs] ?? null),
+      array($alscores["*"] ?? null, $acscores["*"] ?? null)
     );
 
     $found = FALSE;
@@ -178,6 +177,10 @@ function al2gt($gettextlangs, $mime)
         $found = TRUE;
       }
     }
+  }
+
+  if ($curgtlang === NULL) {
+    $curgtlang = 'en_US.UTF-8';
   }
 
   /* We must re-parse the gettext-string now, since we may have found it
