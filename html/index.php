@@ -21,9 +21,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* Load required includes */
-require_once("../include/php_setup.inc");
 require_once("../include/functions.inc");
+
+/* Check if we need to run setup */
+if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
+    header("location:setup.php");
+    exit();
+}
+
+define('GOSA_SETUP', false);
+require_once("../include/php_setup.inc");
 require_once("../include/class_log.inc");
 header("Content-type: text/html; charset=UTF-8");
 
@@ -135,12 +142,6 @@ $username = '';
 session::set('errors', '');
 session::set('errorsAlreadyPosted', '');
 session::set('LastError', '');
-
-/* Check if we need to run setup */
-if (!file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
-    header("location:setup.php");
-    exit();
-}
 
 /* Reset errors */
 session::set('errors', '');
