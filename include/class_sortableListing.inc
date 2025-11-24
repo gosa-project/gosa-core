@@ -345,7 +345,7 @@ class sortableListing
                 $result .= "</tr>\n";
 
                 $result .= " </tbody>\n</table>\n</div>\n";
-                $result .= " <input type='hidden' name='PID' value='" . $this->id . "' id='PID'>\n";
+                $result .= " <input type='hidden' name='PID_{$this->id}' value='1'>\n";
                 $result .= " <input type='hidden' name='position_" . $this->id . "' id='position_" . $this->id . "'>\n";
                 $result .= " <input type='hidden' name='reorder_" . $this->id . "' id='reorder_" . $this->id . "'>\n";
 
@@ -476,7 +476,7 @@ class sortableListing
                 $result .= "         </tbody>
                             </table>
                         </div>";
-                $result .= " <input type='hidden' name='PID' value='" . $this->id . "' id='PID'>\n";
+                $result .= " <input type='hidden' name='PID_{$this->id}' value='1'>\n";
                 $result .= " <input type='hidden' name='position_" . $this->id . "' id='position_" . $this->id . "'>\n";
                 $result .= " <input type='hidden' name='reorder_" . $this->id . "' id='reorder_" . $this->id . "'>\n";
 
@@ -527,8 +527,8 @@ class sortableListing
 
     public function save_object()
     {
-        // Do not do anything if this is not our PID, or there's even no PID available...
-        if (isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->id) {
+        // Do not do anything if our PID is not set...
+        if (!isset($_REQUEST['PID_' . $this->id])) {
             return;
         }
 
