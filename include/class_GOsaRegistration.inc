@@ -4,6 +4,7 @@ class GOsaRegistration
 {
     
     private $config;
+    private $cache;
     private $server = "http://10.3.64.59:4000";
     private $user = "gosa";
     private $password = "gosa";
