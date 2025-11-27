@@ -57,4 +57,8 @@ class ldapMultiplexer
     {
         return $this->object->$memberName;
     }
+
+    public function get_cid() {
+        return $this->object::$cid;
+    }
 }

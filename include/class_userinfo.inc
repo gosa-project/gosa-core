@@ -40,6 +40,7 @@ class userinfo
     var $ACLperPath = [];
     var $ACLperPath_usesFilter = [];
     var $allACLs = [];
+    var $password = null;
 
     /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */

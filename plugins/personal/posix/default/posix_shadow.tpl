@@ -49,7 +49,7 @@
         <span>{t}Password expires on{/t}
           {render acl=$shadowExpireACL}
           <input type="text" id="lang" value="{$lang}" hidden="true">
-          <input type="text" id="shadowExpire" name="shadowExpire" class="datepicker" style='width:100px'
+          <input type="text" id="shadowExpire" name="shadowExpire" class="futureDatepicker" style='width:100px'
             value="{$shadowExpire}">
           <i class="material-icons datepicker">edit_calendar</i>
           {/render}

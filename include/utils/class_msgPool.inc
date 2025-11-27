@@ -375,7 +375,7 @@ class msgPool
     if ($depends == ""){
       return sprintf(_("This account has %s settings disabled. You can enable them by clicking below."), bold($name));
     } else {
-      if (count($depends) == 1){
+      if (!is_countable($depends) || count($depends) == 1){
         return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), bold($name), bold($depends));
       } else {
         $deps= "";

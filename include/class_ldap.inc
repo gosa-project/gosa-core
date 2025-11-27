@@ -1230,14 +1230,14 @@ class LDAP
         /* Reset index */
         $i = 1;
         $identifier = [];
-        $attribute = ldap_first_attribute(self::$cid, $entry, $identifier);
+        $attribute = ldap_first_attribute(self::$cid, $entry);
         while ($attribute) {
             $i++;
             $atts[$i]['name']  = $attribute;
             $atts[$i]['value'] = ldap_get_values_len(self::$cid, $entry, "$attribute");
 
             /* Next one */
-            $attribute = ldap_next_attribute(self::$cid, $entry, $identifier);
+            $attribute = ldap_next_attribute(self::$cid, $entry);
         }
 
         foreach ($atts as $at) {
@@ -1682,14 +1682,27 @@ class LDAP
         /* Build LDAP connection */
         $ds = ldap_connect($server);
         if (!$ds) {
-            die("Can't bind to LDAP. No check possible!");
+            return false;
         }
+
         ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
         $r = ldap_bind($ds, $admin, $password);
 
+        if (!$r) {
+            return false;
+        }
+
         /* Get base to look for naming contexts */
         $sr  = ldap_read($ds, "", "objectClass=*", array(0 => "+"));
+        if (!$sr) {
+            //die("Can't read LDAP entry!");
+            return false;
+        }
+
         $attr = ldap_get_entries($ds, $sr);
+        if (!$attr) {
+            return false;
+        }
 
         return ($attr[0]['namingcontexts']);
     }

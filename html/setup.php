@@ -20,13 +20,24 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+// makes sure that php_setup.inc doesnt try to ready from gosa.conf
+// which doesnt exist at this point
+define('GOSA_SETUP', true);
+
 /* Get standard functions */
+require_once "../include/functions.inc";
 require_once ("../include/php_setup.inc");
 
 // Do not use the GOsa default error handler.
 // To do so we require a valid config object - and at this point 
 //  we doesn't have one.
 restore_error_handler();
+
+/* Do not allow to access the installation wizard if a config is existing */
+if (file_exists(CONFIG_DIR . "/" . CONFIG_FILE)) {
+    header("location:index.php");
+    exit();
+}
 
 require_once("../setup/class_setup.inc");
 require_once("../setup/class_setupStep.inc");

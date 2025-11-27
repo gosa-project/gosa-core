@@ -49,6 +49,6 @@ if (session::is_set('binaryfile')) {
 }
 
 echo session::get('binary');
-error_reporting (E_ALL | E_STRICT);
+error_reporting (E_ALL);
 
 ?>

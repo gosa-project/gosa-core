@@ -450,8 +450,8 @@ function gosa_log($message)
     /* Preset to something reasonable */
     $username = "[unauthenticated]";
 
-    /* Replace username if object is present */
-    if (isset($ui)) {
+    /* Replace username if object is present and not false */
+    if ($ui) {
         if ($ui->username != '') {
             $username = "[$ui->username]";
         } else {
@@ -2862,13 +2862,13 @@ function get_correct_class_name($cls)
  * for the object and it also takes care of sambaHashes, if enabled.
  * Finally the postmodify hook of the class 'user' will be called, if it is set.
  *
- * @param   String   The DN whose password shall be changed.
- * @param   String   The new password.
- * @param   Boolean  Skip adding samba hashes to the target (sambaNTPassword,sambaLMPassword)
- * @param   String   The hashin method to use, default is the global configured default.
- * @param   String   The users old password, this allows script based rollback mechanisms,
+ * @param   string   The DN whose password shall be changed.
+ * @param   string   The new password.
+ * @param   boolean  Skip adding samba hashes to the target (sambaNTPassword,sambaLMPassword)
+ * @param   string   The hashin method to use, default is the global configured default.
+ * @param   string   The users old password, this allows script based rollback mechanisms,
  *                    the prehook will then be called witch switched newPassword/oldPassword.
- * @return  Boolean  true on success else false.
+ * @return  boolean  true on success else false.
  */
 function change_password($dn, $password, $mode = false, $hash = '', $old_password = '', &$message = '')
 {
@@ -2993,6 +2993,9 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
         // Perform ldap operations
         $ldap->modify($attrs);
 
+        $ldapModifySuccess = $ldap->success();
+        $ldapModifyGetError = $ldap->get_error();
+
         // Check if the object was locked before, if it was, lock it again!
         $deactivated = $test->is_locked($config, $dn);
         if ($deactivated) {
@@ -3004,13 +3007,12 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
         $preRollback = false;
         $ldapRollback = false;
         $success = true;
-        if (!$ldap->success()) {
+        if (!$ldapModifySuccess) {
             new log("modify", "users/passwordMethod", $dn, [], "Password change - ldap modifications! - FAILED");
             $success = false;
-            $message = msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD);
+            $message = msgPool::ldaperror($ldapModifyGetError, $dn, LDAP_MOD);
             $preRollback  = true;
         } else {
-
             // Now call the passwordMethod change mechanism.
             if (!$test->set_password($password)) {
                 $ldapRollback = true;
@@ -3091,6 +3093,8 @@ function change_password($dn, $password, $mode = false, $hash = '', $old_passwor
 
         return ($success);
     }
+
+    return False;
 }
 
 

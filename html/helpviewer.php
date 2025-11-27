@@ -22,10 +22,10 @@
 
 /* Include classes and configs */
 require_once("../include/php_setup.inc");
-require_once("functions.inc");
-require_once("functions_helpviewer.inc");
+require_once("../include/functions.inc");
+require_once("../include/functions_helpviewer.inc");
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 restore_error_handler();
 header("Content-type: text/html; charset=UTF-8");
 
@@ -234,7 +234,7 @@ if (isset($_POST['search'])) {
     $header = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl'));
 
     /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
-    $display = utf8_encode($header . $smarty->fetch(get_template_path('help.tpl')));
+    $display = mb_convert_encoding($header . $smarty->fetch(get_template_path('help.tpl')), 'UTF-8', 'ISO-8859-1');
     echo $display;
 } elseif ((is_dir($helpdir)) && ($fp = opendir($helpdir))) {
 
@@ -257,7 +257,7 @@ if (isset($_POST['search'])) {
     /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
     $smarty->assign("backward", $back);
     $smarty->assign("forward", $for);
-    $display = utf8_encode($header . $smarty->fetch(get_template_path('help.tpl')));
+    $display = mb_convert_encoding($header . $smarty->fetch(get_template_path('help.tpl')), 'UTF-8', 'ISO-8859-1');
     echo $display;
 } else {
 

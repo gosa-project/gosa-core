@@ -88,8 +88,7 @@ class config
         // $this->parser = xml_parser_create();
         self::$parser = xml_parser_create();
         $this->basedir = $basedir;
-        xml_set_object(self::$parser, $this);
-        xml_set_element_handler(self::$parser, "tag_open", "tag_close");
+        xml_set_element_handler(self::$parser, [$this, 'tag_open'], [$this, 'tag_close']);
 
         /* Parse config file directly? */
         if ($filename != "") {
@@ -140,8 +139,7 @@ class config
             $this->section = "";
             $this->currentLocation = "";
 
-            xml_set_object(self::$parser, $this);
-            xml_set_element_handler(self::$parser, "tag_open", "tag_close");
+            xml_set_element_handler(self::$parser, [$this, 'tag_open'], [$this, 'tag_close']);
             $this->parse($this->filename);
             $this->set_current($this->current['NAME']);
         }
@@ -166,8 +164,17 @@ class config
             "SERVICE"   => []
         );
 
+        if(!file_exists($filename)) {
+            die($filename." does not exist! Did you run the installation wizard?");
+        }
+
+        if(!is_readable($filename)) {
+            die($filename." is not readable!");
+        }
+
         $this->last_modified = filemtime($filename);
         $this->filename = $filename;
+
         $fh = fopen($filename, "r");
         $xmldata = fread($fh, 100000);
         fclose($fh);

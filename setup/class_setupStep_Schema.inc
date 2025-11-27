@@ -56,10 +56,8 @@ class Step_Schema extends setup_step
         $objectclasses = $ldap->get_objectclasses(TRUE);
    
         // Check if we can find something
-        $ldap->set_size_limit(1);
-        $res = $ldap->search("(objectClass=*)");  
-        $ldap->set_size_limit(0);
-    
+        $res = $ldap->search("(objectClass=*)", ["dn"]);
+
         // Validate schema
         $cR = new configRegistry(NULL);;
         $cR->validateSchemata(TRUE,TRUE,$objectclasses);

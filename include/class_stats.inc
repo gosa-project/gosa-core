@@ -248,7 +248,7 @@ class stats
         foreach($category as $cat){
             $tmp[] = trim($cat, '\/,; ');
         }
-        $category = sqlite_escape_string(implode($tmp, ', '));
+        $category = sqlite_escape_string(implode(', ', $tmp));
 
         // Create insert statement.
         $TABLE_NAME = stats::$tableName;

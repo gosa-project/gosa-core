@@ -41,7 +41,8 @@ class setup
         $this->o_steps[$i++] = new Step_Ldap();
     $this->o_steps[$i++] = new Step_Schema();
         $this->o_steps[$i++] = new Step_Migrate();
-        $this->o_steps[$i++] = new Step_Feedback();
+        // Step_Feedback is currently removed, cause oss.gonicus.de/gosa-feedback/ does not exist anymore
+        // $this->o_steps[$i++] = new Step_Feedback();
         $this->o_steps[$i++] = new Step_Finish();
         $this->i_steps = $i-1;
 
@@ -257,7 +258,7 @@ class setup
                     <div style='float: left; margin-left:10px;margin-top:10px;font-size:24px;font-weight:bold;'>
                         {$title}
                     </div>
-                    <div style='float: right; margin-top:10px;font-size:24px;font-weight:bold;'>
+                    <div style='float: right; margin-left:10px;margin-top:10px;font-size:24px;font-weight:bold;'>
                         {$page}
                     </div>
                 </div>

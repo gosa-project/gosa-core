@@ -86,7 +86,7 @@ let dp = document.querySelectorAll('.datepicker');
 let currentDate = new Date();
 let minDate = new Date(1920, 1, 1);
 let dateOptions = {
-    'format': 'dd mmm, yyyy',
+    'format': 'dd.mm.yyyy',
     'minDate': minDate,
     'maxDate': currentDate,
     'firstDay': 1,
@@ -95,6 +95,19 @@ let dateOptions = {
     'i18n': languages[lang]
 }
 var dpInstances = M.Datepicker.init(dp, dateOptions);
+
+let futureDp = document.querySelector('.futureDatepicker');
+let maxDate = new Date(3000, 1, 1);
+let futureDateOptions = {
+    'format': 'dd.mm.yyyy',
+    'minDate': currentDate,
+    'maxDate': maxDate,
+    'firstDay': 1,
+    'defaultDate': currentDate,
+    'yearRange': [currentDate.getFullYear(), maxDate.getFullYear()],
+    'i18n': languages[lang]
+}
+var futureDpInstances = M.Datepicker.init(futureDp, futureDateOptions);
 
 function language() {
     return language = {
