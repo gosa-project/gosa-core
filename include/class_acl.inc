@@ -447,7 +447,7 @@ class acl extends plugin
         if ($this->acl_is_writeable("")) {
 
             /* Only be interested in new acl's, if we're in the right _POST place */
-            if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])) {
+            if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject]) && isset($this->ocMapping[$this->aclObject])) {
 
                 foreach ($this->ocMapping[$this->aclObject] as $oc) {
 
@@ -465,11 +465,23 @@ class acl extends plugin
                         $this->aclContents[$this->aclObject . '/' . $oc] = $new_acl[$this->aclObject . '/' . $oc];
                     }
                 }
+
+                if ($this->currentIndex != null && isset($this->gosaAclEntry[$this->currentIndex])) {
+                    $this->gosaAclEntry[$this->currentIndex]['acl'] = $this->aclContents;
+                }
+
+                $this->updateList();
             }
 
             /* Save new acl in case of base edit mode */
-            if ($this->acl_type == 'base' && !$firstedit) {
+            if ($this->acl_type == 'base' && !$firstedit && !empty($new_acl) && !$aclDialog) {
                 $this->aclContents = $new_acl;
+
+                if ($this->currentIndex != null && isset($this->gosaAclEntry[$this->currentIndex])) {
+                    $this->gosaAclEntry[$this->currentIndex]['acl'] = $this->aclContents;
+                }
+
+                $this->updateList();
             }
         }
 
