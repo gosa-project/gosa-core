@@ -918,15 +918,7 @@ class acl extends plugin
                 $splist = $plist[$t_key]['plProvidedAcls'];
             }
 
-            /* Create sub acl if it does not exist */
-            if (!isset($this->aclContents[$key])) {
-                $this->aclContents[$key] = [];
-            }
-            if (!isset($this->aclContents[$key][0])) {
-                $this->aclContents[$key][0] = '';
-            }
-
-            $currentAcl = $this->aclContents[$key];
+            $currentAcl = $this->aclContents[$key] ?? [];
 
             /* Get the overall plugin acls
              */
