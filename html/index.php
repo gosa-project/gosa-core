@@ -234,6 +234,9 @@ if ($config->get_cfg_value("core", "htaccessAuthentication") == "true") {
     $htaccess_authenticated = true;
 }
 
+$apcuCache = new ApcuCache();
+$bruteForceProtector = new BruteForceProtector($apcuCache);
+
 /* Got a formular answer, validate and try to log in */
 if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htaccess_authenticated) {
 
@@ -280,8 +283,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
         }
     }
 
-    if ($ok) {
+    // fetch the 'old' remaining delay before the possible login attempt in this 
+    $bfpCheck = $bruteForceProtector->getCurrentDelay($username);
 
+    if ($bfpCheck > 0 && $bfpCheck < 60) {
+        $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before you try again."), strval($bfpCheck));
+    }
+    else if ($bfpCheck >= 60) {
+        $minutes = intdiv($bfpCheck, 60);
+        $seconds = $bfpCheck % 60;
+        $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before you try again."), strval($minutes), strval($seconds));
+    }
+    else if ($ok) {
         /* Login as user, initialize user ACL's */
         if ($htaccess_authenticated) {
             $ui = ldap_login_user_htaccess($username);
@@ -293,7 +306,21 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $ui = ldap_login_user($username, get_post("password"));
         }
         if ($ui === null || !$ui) {
+            $bruteForceProtector->onFailure($username);
+
+            $bfpCheck = $bruteForceProtector->getCurrentDelay($username);
+
             $message = _("Please check the username/password combination!");
+            
+            if ($bfpCheck > 0 && $bfpCheck < 60) {
+                $message = sprintf(_("Please check the username/password combination and wait %s seconds before you try again."), strval($bfpCheck));
+            }
+            else if ($bfpCheck >= 60) {
+                $minutes = intdiv($bfpCheck, 60);
+                $seconds = $bfpCheck % 60;
+                $message = sprintf(_("Please check the username/password combination and wait %s min %s s before trying again!"), strval($minutes), strval($seconds));
+            }
+            
             $smarty->assign('nextfield', 'password');
             session::global_set('config', $config);
             if (isset($_SERVER['REMOTE_ADDR'])) {
@@ -303,6 +330,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
                 new log('security', "login", '', [], "Authentication failed for user \"$username\"");
             }
         } else {
+            $bruteForceProtector->onSuccess($username);
+
             /* Remove all locks of this user */
             del_user_locks($ui->dn);
 
@@ -379,6 +408,15 @@ $smarty->assign('username', set_post($username));
 $smarty->assign('personal_img', get_template_path('images/login-head.png'));
 $smarty->assign('password_img', get_template_path('images/password.png'));
 $smarty->assign('directory_img', get_template_path('images/ldapserver.png'));
+
+// If a delay is active, assign it to smarty to disable login and show waiting animation via js. Theoratically, when the delay is just cause of too much
+// tries with the current username (not with the ip), the user could change the username and try again. But i think its more user friendly to just
+// leave the javascript waiting/disable stuff instead of checking if the user changes the username input field and then revert the waiting/disable stuff.
+$bfpCheck = $bruteForceProtector->getCurrentDelay($username); // ist eigentlich unnötig aber vlt trzdm schöner so kp
+
+if ($bfpCheck !== 0) {
+    $smarty->assign('remaining_login_delay', $bfpCheck);
+}
 
 /* Some error to display? */
 if (!isset($message)) {

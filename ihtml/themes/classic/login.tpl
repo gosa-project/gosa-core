@@ -23,6 +23,9 @@
         document.write("<div class='login-warning'>{$cookies}<\/div>");
     </script>
 
+    <div class='login-warning' id='login-loader-wrapper'>
+      <p>You have <b>too many failed login attempts</b>... Please wait <b><span id='login-loader-remaining-sec'>a few</span></b> seconds!</p>
+    </div>
 
     <div class='login-box'>
       <div class='login-box-header'>
@@ -88,6 +91,15 @@
     focus_field("{$nextfield}");
     next_msg_dialog();
   </script>
+
+  {if $remaining_login_delay > 0}
+  <script language="JavaScript" type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      const remainingLoginDelay = {$remaining_login_delay};
+      startLoginDelay(remainingLoginDelay);
+    });
+  </script>
+  {/if}
 
 </body>
 

@@ -362,3 +362,7 @@ button:focus {
         margin-top: 8px;
     }
 }
+
+.spinner-accent-only {
+  border-color: #db5c01;
+}

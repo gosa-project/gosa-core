@@ -1785,3 +1785,14 @@
     table.reference-tab {
         width: 100%;
     }
+
+    #login-loader-wrapper { 
+        display: none; /* will be set to flex by js */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #login-loader-wrapper p {
+        margin: 0;
+    }

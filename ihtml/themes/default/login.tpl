@@ -31,6 +31,23 @@
       </div>
       {/if}
 
+      <div class='card-panel' id='login-loader-wrapper'>
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-accent-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <p>You have <b>too many failed login attempts</b>... Please wait <b><span id='login-loader-remaining-sec'>a few</span></b> seconds!</p>
+      </div>
+
       <div class='card login-wrapper'>
         <div class="card-content">
           <h1>{t}Login to GOsa{/t}</h1>
@@ -95,6 +112,15 @@
     focus_field("{$nextfield}");
     next_msg_dialog();
   </script>
+
+  {if $remaining_login_delay > 0}
+  <script language="JavaScript" type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      const remainingLoginDelay = {$remaining_login_delay};
+      startLoginDelay(remainingLoginDelay);
+    });
+  </script>
+  {/if}
 
 </body>
 

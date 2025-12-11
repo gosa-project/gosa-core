@@ -630,6 +630,26 @@ function scrollDown2() {
     document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
 }
 
+function startLoginDelay(remainingLoginDelay) {
+    const loginButton = document.getElementById('login');
+    const loginLoader = document.getElementById('login-loader-wrapper');
+    const loginLoaderRemainingSec = document.getElementById('login-loader-remaining-sec');
+    loginButton.disabled = true;
+    loginLoader.style.display = 'flex';
+
+    loginLoaderRemainingSec.textContent = remainingLoginDelay.toString();
+
+    var interval = setInterval(function() {
+    remainingLoginDelay--;
+
+    if (remainingLoginDelay <= 0) {
+        loginButton.disabled = false;
+        loginLoader.style.display = 'none';
+    }
+
+    loginLoaderRemainingSec.textContent = remainingLoginDelay.toString();
+    }, 1000);
+}
 
 // Global storage for baseSelector timer
 var rtimer;
