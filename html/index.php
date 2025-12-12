@@ -118,6 +118,17 @@ function displayLogin()
     exit();
 }
 
+function getBruteForceProtector(ApcuCache $apcuCache, config $config): BruteForceProtector {
+    // intval() returns 0 on failure. 0 values passed to BruteForceProtector will result in default values.
+    return new BruteForceProtector(
+        $apcuCache,
+        intval($config->get_cfg_value("core", 'bfpTTL')),
+        intval($config->get_cfg_value("core", 'bfpStartDelayAfter')),
+        intval($config->get_cfg_value("core", 'bfpMaxDelay')),
+        intval($config->get_cfg_value("core", 'bfpRateLimitWindow')),
+        intval($config->get_cfg_value("core", 'bfpMaxAttemptsPerWindow'))
+    );
+}
 
 
 /*****************************************************************************
@@ -234,8 +245,10 @@ if ($config->get_cfg_value("core", "htaccessAuthentication") == "true") {
     $htaccess_authenticated = true;
 }
 
+// getBruteForceProtector fetches the configuration from the gosa.conf. Configuration from the LDAP is only accessable after the
+// $config->set_current line in the following if condition, which is why we override the BruteForceProtector there.
 $apcuCache = new ApcuCache();
-$bruteForceProtector = new BruteForceProtector($apcuCache);
+$bruteForceProtector = getBruteForceProtector($apcuCache, $config);
 
 /* Got a formular answer, validate and try to log in */
 if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htaccess_authenticated) {
@@ -282,6 +295,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $ok = false;
         }
     }
+
+    // replace the bruteForceProtector
+    $bruteForceProtector = getBruteForceProtector($apcuCache, $config);
 
     // fetch the 'old' remaining delay before the possible login attempt in this 
     $bfpCheck = $bruteForceProtector->getCurrentDelay($username);
