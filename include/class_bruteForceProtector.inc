@@ -22,17 +22,37 @@
 
 class BruteForceProtector
 {
-    // settings for throttling login attempts with same username
-    private int $startDelayAfter = 3;
-    private int $maxDelaySec = 1800; // 30min
-    private int $ttl = 3600; // 1h
+    private int $startDelayAfter;
+    private int $maxDelaySec;
+    private int $ttl;
+    private int $rateLimitWindowSec;
+    private int $maxAttemptsInWindow;
 
-    // settings for throttling login attempts with same ip address
-    private int $rateLimitWindowSec = 300; // 5 min
-    private int $maxAttemptsInWindow = 20;
-
-    public function __construct(private CacheInterface $cache)
-    {}
+    /**
+     * Creates the BruteForceProtector which starts delays after failed login attempts with same username and
+     * only allows a certain amount of failed login attempts of the same ip within a specified time window.
+     * @param CacheInterface $cache
+     * @param int $ttl Time to live. Store value in the cache for ttl seconds. Default is 1h. Values <= 0 result in default.
+     * @param int $startDelayAfter After how many failed login attempts with same username the delays should start. Default is 3. Values <= 0 result in default.
+     * @param int $maxDelay Maximum delay in seconds after failed attempts with same username. Default is 30min. Values <= 0 result in default.
+     * @param int $rateLimitWindow Length of the window in seconds, that should only allow limited number of failed attempts from same ip. Default is 5min. Values <= 0 result in default.
+     * @param int $maxAttemptsPerWindow Maximum number of failed attempts per window. Default is 20. Values <= 0 result in default.
+     */
+    public function __construct(
+        private CacheInterface $cache,
+        int $ttl = 3600,
+        int $startDelayAfter = 3,
+        int $maxDelay = 1800,
+        int $rateLimitWindow = 300,
+        int $maxAttemptsPerWindow = 20
+    )
+    {
+        $this->ttl = $ttl > 0 ? $ttl : 3600;
+        $this->startDelayAfter = $startDelayAfter > 0 ? $startDelayAfter : 3;
+        $this->maxDelaySec = $maxDelay > 0 ? $maxDelay : 1800;
+        $this->rateLimitWindowSec = $rateLimitWindow > 0 ? $rateLimitWindow : 300;
+        $this->maxAttemptsInWindow = $maxAttemptsPerWindow > 0 ? $maxAttemptsPerWindow : 20;
+    }
 
     /**
      * Returns the current delay of the passed username or the ip address from this request, depending on which one is higher.

@@ -434,6 +434,56 @@ class core extends plugin {
                                 "mandatory"     => TRUE),
 
                         array(
+                                "name"          => "bfpTTL",
+                                "type"          => "integer",
+                                "default"       => 3600,
+                                "description"   => _("Time to live in seconds, for the cache data stored by the Brute Force Protection."),
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "security",
+                                "mandatory"     => FALSE),
+
+                        array(
+                                "name"          => "bfpStartDelayAfter",
+                                "type"          => "integer",
+                                "default"       => 3,
+                                "description"   => _("After this much failed login attempts with the same username, the Brute Force Protection will start to delay the login attempts."),
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "security",
+                                "mandatory"     => FALSE),
+
+                        array(
+                                "name"          => "bfpMaxDelay",
+                                "type"          => "integer",
+                                "default"       => 1800,
+                                "description"   => _("Maximum delay in seconds the Brute Force Protection starts after failed login attempts with the same username."),
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "security",
+                                "mandatory"     => FALSE),
+
+                        array(
+                                "name"          => "bfpRateLimitWindow",
+                                "type"          => "integer",
+                                "default"       => 300,
+                                "description"   => _("Length of the window in seconds, in which the Brute Force Protection only allows a limited number of failed login attempts from the same ip address."),
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "security",
+                                "mandatory"     => FALSE),
+
+                        array(
+                                "name"          => "bfpMaxAttemptsPerWindow",
+                                "type"          => "integer",
+                                "default"       => 20,
+                                "description"   => _("Maximum number of by the  Brute Force Protection allowed failed login attempts from the same ip address per window."),
+                                "check"         => "gosaProperty::isInteger",
+                                "migrate"       => "",
+                                "group"         => "security",
+                                "mandatory"     => FALSE),
+
+                        array(
                                 "name"          => "ppdGzip",
                                 "type"          => "bool",
                                 "default"       => "true",
