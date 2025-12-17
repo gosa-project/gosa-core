@@ -4210,6 +4210,18 @@ msgstr ""
 msgid "Raw LDAP entry"
 msgstr ""
 
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "You have"
+msgstr "Wystąpiła"
+
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "too many failed login attempts"
+msgstr "zbyt duża liczba nieudanych prób logowania"
+
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "Please wait"
+msgstr "Proszę zaczekać"
+
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy
 msgid "Login to GOsa"
