@@ -303,12 +303,12 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     $bfpCheck = $bruteForceProtector->getCurrentDelay($username);
 
     if ($bfpCheck > 0 && $bfpCheck < 60) {
-        $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before you try again."), strval($bfpCheck));
+        $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."), strval($bfpCheck));
     }
     else if ($bfpCheck >= 60) {
         $minutes = intdiv($bfpCheck, 60);
         $seconds = $bfpCheck % 60;
-        $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before you try again."), strval($minutes), strval($seconds));
+        $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."), strval($minutes), strval($seconds));
     }
     else if ($ok) {
         /* Login as user, initialize user ACL's */
@@ -329,7 +329,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $message = _("Please check the username/password combination!");
             
             if ($bfpCheck > 0 && $bfpCheck < 60) {
-                $message = sprintf(_("Please check the username/password combination and wait %s seconds before you try again."), strval($bfpCheck));
+                $message = sprintf(_("Please check the username/password combination and wait %s seconds before trying again!"), strval($bfpCheck));
             }
             else if ($bfpCheck >= 60) {
                 $minutes = intdiv($bfpCheck, 60);

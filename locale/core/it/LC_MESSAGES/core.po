@@ -2748,10 +2748,26 @@ msgstr "Destinazione"
 msgid "Cannot retrieve user information for HTTP authentication!"
 msgstr "Rimuovi"
 
+#: html/index.php:306
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."
+msgstr "Non siamo riusciti a verificare le tue credenziali di accesso perché hai effettuato troppi tentativi di accesso non riusciti. Attendi %s secondi prima di riprovare."
+
+#: html/index.php:311
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."
+msgstr "Non siamo riusciti a verificare le tue credenziali di accesso perché hai effettuato troppi tentativi di accesso non riusciti. Attendi %s min %s s prima di riprovare."
+
 #: html/index.php:312 html/password.php:261
 #, fuzzy
 msgid "Please check the username/password combination!"
 msgstr "Prego inserire un numero di telefono valido!"
+
+#: html/index.php:332
+msgid "Please check the username/password combination and wait %s seconds before trying again!"
+msgstr "Controlla la combinazione nome utente/password e attendi %s secondi prima di riprovare."
+
+#: html/index.php:337
+msgid "Please check the username/password combination and wait %s min %s s before trying again!"
+msgstr "Controlla la combinazione nome utente/password e attendi %s min %s s prima di riprovare."
 
 #: html/index.php:365
 #, fuzzy

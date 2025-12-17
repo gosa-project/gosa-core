@@ -2731,9 +2731,25 @@ msgstr ""
 "Impossible de trouver l'information utilisateur pour l'authentification "
 "HTTP !"
 
+#: html/index.php:306
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."
+msgstr "Nous n'avons pas pu vérifier vos identifiants de connexion car vous avez effectué trop de tentatives de connexion infructueuses. Veuillez patienter %s secondes avant de réessayer."
+
+#: html/index.php:311
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."
+msgstr "Nous n'avons pas pu vérifier vos identifiants de connexion car vous avez effectué trop de tentatives de connexion infructueuses. Veuillez patienter %s min %s s avant de réessayer."
+
 #: html/index.php:312 html/password.php:261
 msgid "Please check the username/password combination!"
 msgstr "Veuillez vérifier le nom d'utilisateur et le mot de passe !"
+
+#: html/index.php:332
+msgid "Please check the username/password combination and wait %s seconds before trying again!"
+msgstr "Veuillez vérifier la combinaison nom d'utilisateur/mot de passe et patienter %s secondes avant de réessayer."
+
+#: html/index.php:337
+msgid "Please check the username/password combination and wait %s min %s s before trying again!"
+msgstr "Veuillez vérifier la combinaison nom d'utilisateur/mot de passe et patienter %s min %s s avant de réessayer."
 
 #: html/index.php:365
 msgid "Account locked. Please contact your system administrator!"
