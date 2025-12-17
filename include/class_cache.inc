@@ -23,14 +23,14 @@
 interface CacheInterface
 {
     /**
-     * Summary of get
+     * Get stored value from the cache by key
      * @param string $key The key used to store the value
      * @return mixed The stored value on success. null on failure.
      */
     public function get(string $key): mixed;
 
     /**
-     * Summary of set
+     * Store the passed value the passed key in the cache
      * @param string $key The key used to store the value
      * @param mixed $value The value to store
      * @param int $ttl Time to live. Store value in the cache for ttl seconds.
@@ -40,14 +40,14 @@ interface CacheInterface
     public function set(string $key, mixed $value, int $ttl = 0): bool;
 
     /**
-     * Summary of delete
+     * Delete value from the cache by key
      * @param string $key The key of the value to delete
      * @return bool 
      */
     public function delete(string $key): bool;
 
     /**
-     * Summary of increment
+     * Increment value in the cache by key
      * @param string $key The key of the value being increased
      * @param int $step The value to increase
      * @return int|false The stored value (after the incrementation) on success. false on failure.
