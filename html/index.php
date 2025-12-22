@@ -118,6 +118,17 @@ function displayLogin()
     exit();
 }
 
+function getBruteForceProtector(ApcuCache $apcuCache, config $config): BruteForceProtector {
+    // intval() returns 0 on failure. 0 values passed to BruteForceProtector will result in default values.
+    return new BruteForceProtector(
+        $apcuCache,
+        intval($config->get_cfg_value("core", 'bfpTTL')),
+        intval($config->get_cfg_value("core", 'bfpStartDelayAfter')),
+        intval($config->get_cfg_value("core", 'bfpMaxDelay')),
+        intval($config->get_cfg_value("core", 'bfpRateLimitWindow')),
+        intval($config->get_cfg_value("core", 'bfpMaxAttemptsPerWindow'))
+    );
+}
 
 
 /*****************************************************************************
@@ -234,6 +245,11 @@ if ($config->get_cfg_value("core", "htaccessAuthentication") == "true") {
     $htaccess_authenticated = true;
 }
 
+// getBruteForceProtector fetches the configuration from the gosa.conf. Configuration from the LDAP is only accessable after the
+// $config->set_current line in the following if condition, which is why we override the BruteForceProtector there.
+$apcuCache = new ApcuCache();
+$bruteForceProtector = getBruteForceProtector($apcuCache, $config);
+
 /* Got a formular answer, validate and try to log in */
 if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htaccess_authenticated) {
 
@@ -266,6 +282,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
         $ldap->create_missing_trees($config->get_cfg_value("core", "config"));
     }
 
+    // replace the bruteForceProtector
+    $bruteForceProtector = getBruteForceProtector($apcuCache, $config);
+
     /* Check for valid input */
     $ok = true;
     if (!$htaccess_authenticated) {
@@ -277,11 +296,24 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $message = _("Please specify your password!");
             $smarty->assign('nextfield', 'password');
             $ok = false;
+        } else {
+            // fetch the 'old' remaining delay before the possible login attempt in this 
+            $bfpCheck = $bruteForceProtector->getCurrentDelay($username);
+
+            if ($bfpCheck > 0 && $bfpCheck < 60) {
+                $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."), strval($bfpCheck));
+                $ok = false;
+            }
+            else if ($bfpCheck >= 60) {
+                $minutes = intdiv($bfpCheck, 60);
+                $seconds = $bfpCheck % 60;
+                $message = sprintf(_("We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."), strval($minutes), strval($seconds));
+                $ok = false;
+            }
         }
     }
 
     if ($ok) {
-
         /* Login as user, initialize user ACL's */
         if ($htaccess_authenticated) {
             $ui = ldap_login_user_htaccess($username);
@@ -293,7 +325,21 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $ui = ldap_login_user($username, get_post("password"));
         }
         if ($ui === null || !$ui) {
+            $bruteForceProtector->onFailure($username);
+
+            $bfpCheck = $bruteForceProtector->getCurrentDelay($username);
+
             $message = _("Please check the username/password combination!");
+            
+            if ($bfpCheck > 0 && $bfpCheck < 60) {
+                $message = sprintf(_("Please check the username/password combination and wait %s seconds before trying again!"), strval($bfpCheck));
+            }
+            else if ($bfpCheck >= 60) {
+                $minutes = intdiv($bfpCheck, 60);
+                $seconds = $bfpCheck % 60;
+                $message = sprintf(_("Please check the username/password combination and wait %s min %s s before trying again!"), strval($minutes), strval($seconds));
+            }
+            
             $smarty->assign('nextfield', 'password');
             session::global_set('config', $config);
             if (isset($_SERVER['REMOTE_ADDR'])) {
@@ -303,6 +349,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
                 new log('security', "login", '', [], "Authentication failed for user \"$username\"");
             }
         } else {
+            $bruteForceProtector->onSuccess($username);
+
             /* Remove all locks of this user */
             del_user_locks($ui->dn);
 
@@ -379,6 +427,17 @@ $smarty->assign('username', set_post($username));
 $smarty->assign('personal_img', get_template_path('images/login-head.png'));
 $smarty->assign('password_img', get_template_path('images/password.png'));
 $smarty->assign('directory_img', get_template_path('images/ldapserver.png'));
+
+if (!$htaccess_authenticated) {
+    // If a delay is active, assign it to smarty to disable login and show waiting animation via js. Theoratically, when the delay is just cause of too much
+    // tries with the current username (not with the ip), the user could change the username and try again. But i think its more user friendly to just
+    // leave the javascript waiting/disable stuff instead of checking if the user changes the username input field and then revert the waiting/disable stuff.
+    $bfpCheck = $bruteForceProtector->getCurrentDelay($username); // ist eigentlich unnötig aber vlt trzdm schöner so kp
+
+    if ($bfpCheck !== 0) {
+        $smarty->assign('remaining_login_delay', $bfpCheck);
+    }
+}
 
 /* Some error to display? */
 if (!isset($message)) {

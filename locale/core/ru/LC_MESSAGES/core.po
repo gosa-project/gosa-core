@@ -2783,10 +2783,26 @@ msgstr "Рабочая станция Windows"
 msgid "Cannot retrieve user information for HTTP authentication!"
 msgstr "Не удается создать квоту IMAP. Ответ сервера: \"%s\"."
 
+#: html/index.php:306
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."
+msgstr "Нам не удалось проверить ваши учетные данные для входа, так как у вас слишком много неудачных попыток входа. Пожалуйста, подождите %s секунд, прежде чем повторить попытку."
+
+#: html/index.php:311
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."
+msgstr "Нам не удалось проверить ваши учетные данные для входа, так как у вас слишком много неудачных попыток входа. Пожалуйста, подождите %s мин %s с, прежде чем повторить попытку."
+
 #: html/index.php:312 html/password.php:261
 #, fuzzy
 msgid "Please check the username/password combination!"
 msgstr "Проверьте, правильно ли вы ввели имя пользователя и пароль."
+
+#: html/index.php:332
+msgid "Please check the username/password combination and wait %s seconds before trying again!"
+msgstr "Пожалуйста, проверьте комбинацию имени пользователя и пароля и подождите %s секунд, прежде чем повторить попытку!"
+
+#: html/index.php:337
+msgid "Please check the username/password combination and wait %s min %s s before trying again!"
+msgstr "Пожалуйста, проверьте комбинацию имени пользователя и пароля и подождите %s мин %s с, прежде чем повторить попытку!"
 
 #: html/index.php:365
 #, fuzzy
@@ -4282,6 +4298,10 @@ msgstr ""
 #: ihtml/themes/default/ldifViewer.tpl:1
 msgid "Raw LDAP entry"
 msgstr ""
+
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "У вас %1слишком много неудачных попыток входа%2... Пожалуйста, подождите %3 мин %4 с!"
 
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy

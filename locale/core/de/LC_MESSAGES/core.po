@@ -2803,9 +2803,25 @@ msgstr "Authentifizierungsfehler"
 msgid "Cannot retrieve user information for HTTP authentication!"
 msgstr "Konnte keine Benutzerinformation für HTTP Authentisierung ermitteln!"
 
+#: html/index.php:306
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."
+msgstr "Ihre Anmeldeinformationen konnten aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen nicht validiert werden. Bitte warten Sie %s Sekunden bevor Sie es erneut versuchen."
+
+#: html/index.php:311
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."
+msgstr "Ihre Anmeldeinformationen konnten aufgrund von zu vielen fehlgeschlagenen Anmeldeversuchen nicht validiert werden. Bitte warten Sie %s min %s s bevor Sie es erneut versuchen."
+
 #: html/index.php:312 html/password.php:261
 msgid "Please check the username/password combination!"
 msgstr "Bitte überprüfen Sie die Kombination von Benutzernamen und Passwort!"
+
+#: html/index.php:332
+msgid "Please check the username/password combination and wait %s seconds before trying again!"
+msgstr "Bitte überprüfen Sie die Kombination aus Benutzername und Passwort und warten Sie %s Sekunden bevor Sie es erneut versuchen."
+
+#: html/index.php:337
+msgid "Please check the username/password combination and wait %s min %s s before trying again!"
+msgstr "Bitte überprüfen Sie die Kombination aus Benutzername und Passwort und warten Sie %s min %s s bevor Sie es erneut versuchen."
 
 #: html/index.php:365
 msgid "Account locked. Please contact your system administrator!"
@@ -4285,6 +4301,10 @@ msgstr ""
 #: ihtml/themes/default/ldifViewer.tpl:1
 msgid "Raw LDAP entry"
 msgstr "Reiner LDAP-Eintrag"
+
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "Sie haben %1zu viele fehlgeschlagene Anmeldeversuche%2... Bitte warten Sie %3 min %4 s!"
 
 #: ihtml/themes/default/login.tpl:31
 msgid "Login to GOsa"

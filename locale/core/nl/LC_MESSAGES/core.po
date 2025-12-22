@@ -2803,10 +2803,26 @@ msgstr "Nagios authenticatie"
 msgid "Cannot retrieve user information for HTTP authentication!"
 msgstr "Kan quota informatie niet ophaleven voor '%s'."
 
+#: html/index.php:306
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."
+msgstr "We konden uw inloggegevens niet verifiëren omdat u te veel mislukte inlogpogingen heeft gedaan. Wacht %s seconden voordat u het opnieuw probeert."
+
+#: html/index.php:311
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."
+msgstr "We konden uw inloggegevens niet verifiëren omdat u te veel mislukte inlogpogingen heeft gedaan. Wacht %s min %s s voordat u het opnieuw probeert."
+
 #: html/index.php:312 html/password.php:261
 #, fuzzy
 msgid "Please check the username/password combination!"
 msgstr "Controleer a.u.b. de gebruikersnaam/wachtwoord combinatie."
+
+#: html/index.php:332
+msgid "Please check the username/password combination and wait %s seconds before trying again!"
+msgstr "Controleer de gebruikersnaam/wachtwoordcombinatie en wacht %s seconden voordat u het opnieuw probeert."
+
+#: html/index.php:337
+msgid "Please check the username/password combination and wait %s min %s s before trying again!"
+msgstr "Controleer de gebruikersnaam/wachtwoordcombinatie en wacht %s min %s s voordat u het opnieuw probeert."
 
 #: html/index.php:365
 #, fuzzy
@@ -4340,6 +4356,10 @@ msgstr ""
 #: ihtml/themes/default/ldifViewer.tpl:1
 msgid "Raw LDAP entry"
 msgstr ""
+
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "Je hebt %1te veel mislukte inlogpogingen%2... Wacht even %3 min %4 s!"
 
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy

@@ -191,6 +191,14 @@ class Step_Checks extends setup_step
     $M = FALSE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
+    /* Php apcu module loaded? */
+    $N = msgPool::checkingFor(_("APCu"));
+    $D = _("GOsa requires this module to communicate with several supported databases.");
+    $S = msgPool::installPhpModule("APCu");
+    $R = ini_get('apc.enabled');
+    $M = TRUE;
+    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
+
 
     /* PHP Configuration checks */
 

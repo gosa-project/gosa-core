@@ -2746,10 +2746,26 @@ msgstr "Nagios 鉴权"
 msgid "Cannot retrieve user information for HTTP authentication!"
 msgstr ""
 
+#: html/index.php:306
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."
+msgstr "由于您的登录失败次数过多，我们无法验证您的登录凭据。请稍等 %s 秒后再试。"
+
+#: html/index.php:311
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."
+msgstr "由于您的登录失败次数过多，我们无法验证您的登录凭据。请稍等 %s 分钟 %s 秒后再试。"
+
 #: html/index.php:312 html/password.php:261
 #, fuzzy
 msgid "Please check the username/password combination!"
 msgstr "请检查用户名/口令。"
+
+#: html/index.php:332
+msgid "Please check the username/password combination and wait %s seconds before trying again!"
+msgstr "请检查用户名/密码组合，并等待 %s 秒后再试！"
+
+#: html/index.php:337
+msgid "Please check the username/password combination and wait %s min %s s before trying again!"
+msgstr "请检查用户名/密码组合，并等待 %s 分钟 %s 秒后再试！"
 
 #: html/index.php:365
 #, fuzzy
@@ -4225,6 +4241,10 @@ msgstr ""
 #: ihtml/themes/default/ldifViewer.tpl:1
 msgid "Raw LDAP entry"
 msgstr ""
+
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "您有%1过多的登录失败尝试%2……请等待 %3 分钟 %4 秒！"
 
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy

@@ -630,6 +630,43 @@ function scrollDown2() {
     document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
 }
 
+function setRemainingLoginDelayElements(remainingLoginDelay) {
+    const loginLoaderRemainingMin = document.getElementById('login-loader-remaining-min');
+    const loginLoaderRemainingSec = document.getElementById('login-loader-remaining-sec');
+    const loginLoaderMinSpan = document.getElementById('login-loader-min-span');
+
+    let minutes = Math.floor(remainingLoginDelay / 60);
+    let seconds = remainingLoginDelay % 60;
+
+    if (minutes == 0) {
+        loginLoaderMinSpan.style.display = 'none';
+    } else {
+        loginLoaderMinSpan.style.display = 'inline';
+        loginLoaderRemainingMin.textContent = minutes.toString();
+    }
+
+    loginLoaderRemainingSec.textContent = seconds.toString();
+}
+
+function startLoginDelay(remainingLoginDelay) {
+    const loginButton = document.getElementById('login');
+    const loginLoader = document.getElementById('login-loader-wrapper');
+    loginButton.disabled = true;
+    loginLoader.style.display = 'flex';
+
+    setRemainingLoginDelayElements(remainingLoginDelay);
+
+    var interval = setInterval(function() {
+        remainingLoginDelay--;
+
+        if (remainingLoginDelay <= 0) {
+            loginButton.disabled = false;
+            loginLoader.style.display = 'none';
+        }
+
+        setRemainingLoginDelayElements(remainingLoginDelay);
+    }, 1000);
+}
 
 // Global storage for baseSelector timer
 var rtimer;

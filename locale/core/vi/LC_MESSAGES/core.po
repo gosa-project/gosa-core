@@ -2751,10 +2751,26 @@ msgstr ""
 "Không thể phục hồi thông tin của người dùng cho việc thẩm  định quyền "
 "htaccess (truy cập ht)!"
 
+#: html/index.php:306
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s seconds before trying again."
+msgstr "Chúng tôi không thể xác minh thông tin đăng nhập của bạn vì bạn đã đăng nhập không thành công quá nhiều lần. Vui lòng đợi %s giây trước khi thử lại."
+
+#: html/index.php:311
+msgid "We were unable to verify your login credentials because you have too many failed login attempts. Please wait %s min %s s before trying again."
+msgstr "Chúng tôi không thể xác minh thông tin đăng nhập của bạn vì bạn đã đăng nhập không thành công quá nhiều lần. Vui lòng đợi %s phút %s giây trước khi thử lại."
+
 #: html/index.php:312 html/password.php:261
 #, fuzzy
 msgid "Please check the username/password combination!"
 msgstr "Xin hãy kiểm tra kết hợp tên người dùng/mật khẩu."
+
+#: html/index.php:332
+msgid "Please check the username/password combination and wait %s seconds before trying again!"
+msgstr "Vui lòng kiểm tra lại tên người dùng/mật khẩu và chờ %s giây trước khi thử lại!"
+
+#: html/index.php:337
+msgid "Please check the username/password combination and wait %s min %s s before trying again!"
+msgstr "Vui lòng kiểm tra lại tên người dùng/mật khẩu và chờ %s phút %s giây trước khi thử lại!"
 
 #: html/index.php:365
 msgid "Account locked. Please contact your system administrator!"
@@ -4246,6 +4262,10 @@ msgstr ""
 #: ihtml/themes/default/ldifViewer.tpl:1
 msgid "Raw LDAP entry"
 msgstr ""
+
+#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "Bạn đã %1đăng nhập không thành công quá nhiều lần%2... Vui lòng chờ %3 phút %4 giây!"
 
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy

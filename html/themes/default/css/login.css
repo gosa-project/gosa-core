@@ -52,3 +52,15 @@
     align-items: center;
     min-height: 100vh;
 }
+
+#login-loader-wrapper { 
+    display: none; /* will be set to flex by js */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-loader-wrapper p {
+    margin: 0;
+    margin-top: 20px;
+}
