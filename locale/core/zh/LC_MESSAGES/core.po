@@ -4243,16 +4243,8 @@ msgid "Raw LDAP entry"
 msgstr ""
 
 #: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "You have"
-msgstr ""
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "too many failed login attempts"
-msgstr "您的登录失败次数过多"
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "Please wait"
-msgstr "请稍等"
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "您有%1过多的登录失败尝试%2……请等待 %3 分钟 %4 秒！"
 
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy

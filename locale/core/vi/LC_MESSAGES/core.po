@@ -4264,16 +4264,8 @@ msgid "Raw LDAP entry"
 msgstr ""
 
 #: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "You have"
-msgstr "Bạn đã đăng"
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "too many failed login attempts"
-msgstr "nhập không thành công quá nhiều lần"
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "Please wait"
-msgstr "Vui lòng chờ"
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "Bạn đã %1đăng nhập không thành công quá nhiều lần%2... Vui lòng chờ %3 phút %4 giây!"
 
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy

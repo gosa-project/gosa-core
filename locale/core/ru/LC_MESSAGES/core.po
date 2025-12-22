@@ -4300,16 +4300,8 @@ msgid "Raw LDAP entry"
 msgstr ""
 
 #: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "You have"
-msgstr "У вас"
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "too many failed login attempts"
-msgstr "слишком много неудачных попыток входа в систему"
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "Please wait"
-msgstr "Подождите"
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "У вас %1слишком много неудачных попыток входа%2... Пожалуйста, подождите %3 мин %4 с!"
 
 #: ihtml/themes/default/login.tpl:31
 #, fuzzy

@@ -4303,16 +4303,8 @@ msgid "Raw LDAP entry"
 msgstr "Reiner LDAP-Eintrag"
 
 #: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "You have"
-msgstr "Sie haben"
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "too many failed login attempts"
-msgstr "zu viele fehlgeschlagene Anmeldeversuche"
-
-#: ihtml/themes/classic/login.tpl:27 ihtml/themes/default/login.tpl:48
-msgid "Please wait"
-msgstr "Bitte warten Sie"
+msgid "You have %1too many failed login attempts%2... Please wait %3 min %4 s!"
+msgstr "Sie haben %1zu viele fehlgeschlagene Anmeldeversuche%2... Bitte warten Sie %3 min %4 s!"
 
 #: ihtml/themes/default/login.tpl:31
 msgid "Login to GOsa"
