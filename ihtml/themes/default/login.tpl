@@ -45,7 +45,13 @@
             </div>
           </div>
         </div>
-        <p>{t}You have{/t} <b>{t}too many failed login attempts{/t}</b>... {t}Please wait{/t} <span id='login-loader-min-span'><b><span id='login-loader-remaining-min'></span></b> min </span><b><span id='login-loader-remaining-sec'></span></b> s!</p>
+        <p>{t
+          escape=no
+          1='<b>' 2='</b>'
+          3='<span id="login-loader-min-span"><b><span id="login-loader-remaining-min"></span></b>'
+          4='</span><b><span id="login-loader-remaining-sec"></span></b>'}
+            You have %1too many failed login attempts%2... Please wait %3 min %4 s!
+        {/t}</p>
       </div>
 
       <div class='card login-wrapper'>
