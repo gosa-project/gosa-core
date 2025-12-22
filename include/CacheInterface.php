@@ -54,32 +54,3 @@ interface CacheInterface
      */
     public function increment(string $key, int $step = 1): int|false;
 }
-
-
-class ApcuCache implements CacheInterface
-{
-    public function get(string $key): mixed
-    {
-        $success = false;
-        $value = apcu_fetch($key, $success);
-        return $success ? $value : null;
-    }
-
-    public function set(string $key, mixed $value, int $ttl = 0): bool
-    {
-        return apcu_store($key, $value, $ttl);
-    }
-
-    public function delete(string $key): bool
-    {
-        return apcu_delete($key);
-    }
-
-    public function increment(string $key, int $step = 1): int|false
-    {
-        if (!apcu_exists($key)) {
-            apcu_store($key, 0);
-        }
-        return apcu_inc($key, $step);
-    }
-}
