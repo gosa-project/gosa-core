@@ -36,21 +36,21 @@ class ogroup extends plugin
         "P" => "gotoPrinter"
     );
 
-    public $typeToImage = array();
+    public $typeToImage = [];
 
     /* Variables */
-    public $cn = "";
-    public $description = "";
-    public $base = "";
-    public $gosaGroupObjects = "";
-    public $objects = array();
-    public $objcache = array();
-    public $memberList = array();
-    public $member = array();
-    public $orig_dn = "";
-    public $orig_cn = "";
-    public $orig_base = "";
-    public $objectSelect = false;
+    public $cn = '';
+    public $description = '';
+    public $base = '';
+    public $gosaGroupObjects = '';
+    public $objects = [];
+    public $objcache = [];
+    public $memberList = [];
+    public $member = [];
+    public $orig_dn = '';
+    public $orig_cn = '';
+    public $orig_base = '';
+    public ?objectSelect $objectSelect = null;
     public $view_logged = false;
 
     public $copyMembers = true;
@@ -59,7 +59,7 @@ class ogroup extends plugin
 
     /* Already assigned Workstations. Will be hidden in selection.
      */
-    public $used_workstations = array();
+    public $used_workstations = [];
 
     var $theme;
 
@@ -115,7 +115,7 @@ class ogroup extends plugin
 
         $this->orig_dn = $dn;
 
-        $this->member = array();
+        $this->member = [];
 
         /* Load member objects */
         if (isset($this->attrs['member'])) {
@@ -133,7 +133,7 @@ class ogroup extends plugin
             $ui = get_userinfo();
             $this->base = dn2base(session::global_is_set("CurrentMainBase") ? "cn=dummy," . session::global_get("CurrentMainBase") : $ui->dn);
         } else {
-            $this->base = preg_replace("/^[^,]+," . preg_quote(get_ou("group", "ogroupRDN"), '/') . "/i", "", $this->dn);
+            $this->base = preg_replace("/^[^,]+," . preg_quote(get_ou("group", "ogroupRDN"), '/') . "/i", '', $this->dn);
         }
 
         /* Detect all workstations, which are already assigned to an object group
@@ -148,7 +148,7 @@ class ogroup extends plugin
             array("dn"),
             GL_NO_ACL_CHECK | GL_SUBSEARCH
         );
-        $ws_dns = array();
+        $ws_dns = [];
         foreach ($res as $data) {
             $ws_dns[] = $data['dn'];
         }
@@ -159,7 +159,7 @@ class ogroup extends plugin
             array("dn", "member", "gosaGroupObjects"),
             GL_NO_ACL_CHECK | GL_SUBSEARCH
         );
-        $this->used_workstations = array();
+        $this->used_workstations = [];
         foreach ($res as $og) {
             if ($og['dn'] == $this->dn) {
                 continue;
@@ -256,7 +256,7 @@ class ogroup extends plugin
                         continue;
                     }
 
-                    $tmp = "";
+                    $tmp = '';
                     foreach ($this->memberList as $obj) {
                         $tmp .= $obj['type'];
                     }
@@ -286,7 +286,7 @@ class ogroup extends plugin
                 if ($skipped) {
                     msg_dialog::display(_("Information"), _("You cannot combine terminals and workstations in one object group!"), INFO_DIALOG);
                 }
-                $this->objectSelect = false;
+                $this->objectSelect = null;
                 $this->dialog = false;
                 $this->reload();
             }
@@ -355,7 +355,7 @@ class ogroup extends plugin
 
         /* Add objects finished? */
         if (isset($_POST["objectSelect_cancel"]) || isset($_POST['cancel-abort'])) {
-            $this->objectSelect = false;
+            $this->objectSelect = null;
         }
 
         /* Manage object add dialog */
@@ -402,7 +402,7 @@ class ogroup extends plugin
 
 
         $this->memberListing->setAcl($this->getacl("member"));
-        $data = $lData = array();
+        $data = $lData = [];
         foreach ($this->member as $key => $dn) {
             $image = 'images/lists/element.png';
             $name = $dn;
@@ -418,7 +418,7 @@ class ogroup extends plugin
 
         if ($this->isRestrictedByDynGroup()) {
             $this->memberListing->setDeleteable(false);
-            $smarty->assign("memberACL", preg_replace("/[^r]/", "", $this->getacl("member")));
+            $smarty->assign("memberACL", preg_replace("/[^r]/", '', $this->getacl("member")));
             $smarty->assign("isRestrictedByDynGroup", true);
         } else {
             $this->memberListing->setDeleteable(true);
@@ -491,8 +491,8 @@ class ogroup extends plugin
           Variable initialisation
         ###########*/
 
-        $this->objects                = array();
-        $filter                       = "";
+        $this->objects                = [];
+        $filter                       = '';
 
         $ogfilter               = session::get("ogfilter");
         $regex                  = $ogfilter['regex'];
@@ -521,7 +521,7 @@ class ogroup extends plugin
             "departments"     => array(
                 "OBJ" => "department",
                 "CLASS" => "gosaDepartment",
-                "DN" => "",
+                "DN" => '',
                 "ACL" => "department"
             ),
             "servers"         => array(
@@ -633,7 +633,7 @@ class ogroup extends plugin
           Build member list and try to detect obsolete entries
         ###########*/
 
-        $this->memberList = array();
+        $this->memberList = [];
 
         /* Walk through all single member entry */
         foreach ($this->member as $dn) {
@@ -669,7 +669,7 @@ class ogroup extends plugin
                 if (isset($attrs['macAddress'][0])) {
                     $this->objcache[$attrs["dn"]]['macAddress']  = $attrs['macAddress'][0];
                 } else {
-                    $this->objcache[$attrs["dn"]]['macAddress']  = "";
+                    $this->objcache[$attrs["dn"]]['macAddress']  = '';
                 }
 
                 if (isset($attrs['uid'])) {
@@ -689,7 +689,7 @@ class ogroup extends plugin
         reset($this->memberList);
 
         /* Assemble types of currently combined objects */
-        $objectTypes = "";
+        $objectTypes = '';
         foreach ($this->memberList as $dn => $desc) {
 
             /* Invalid object? */
@@ -723,7 +723,7 @@ class ogroup extends plugin
     public function getObjectName($attrs)
     {
         /* Person? */
-        $name = "";
+        $name = '';
         if (in_array_strict('gosaAccount', $attrs['objectClass'])) {
             if (isset($attrs['sn']) && isset($attrs['givenName'])) {
                 $name = $attrs['sn'][0] . ", " . $attrs['givenName'][0];
@@ -749,7 +749,7 @@ class ogroup extends plugin
         $message = parent::check();
 
         /* Permissions for that base? */
-        if ($this->base != "") {
+        if ($this->base != '') {
             $new_dn = 'cn=' . $this->cn . ',' . get_ou("group", "ogroupRDN") . $this->base;
         } else {
             $new_dn = $this->dn;
@@ -760,7 +760,7 @@ class ogroup extends plugin
         if ($this->gosaGroupObjects == "[W]" || $this->gosaGroupObjects == "[T]") {
             $test = array_intersect($this->used_workstations, $this->member);
             if (count($test)) {
-                $str = "";
+                $str = '';
                 foreach ($test as $dn) {
                     $str .= "<li>" . $dn . "</li>";
                 }
@@ -788,7 +788,7 @@ class ogroup extends plugin
         }
 
         /* must: cn */
-        if ($this->cn == "") {
+        if ($this->cn == '') {
             $message[] = msgPool::required(_("Name"));
         }
 
@@ -820,7 +820,7 @@ class ogroup extends plugin
         // Do not save members if we don't want to.
         // This may be the case if we've copied an ogroup containing systems!
         if (!$this->copyMembers) {
-            $this->member = array();
+            $this->member = [];
             $this->reload();
         }
 
@@ -828,7 +828,7 @@ class ogroup extends plugin
 
         /* Move members to target array */
         if (!$this->wasDyGroup && !$this->isRestrictedByDynGroup()) {
-            $this->attrs['member'] = array();
+            $this->attrs['member'] = [];
             foreach ($this->member as $key => $desc) {
                 $this->attrs['member'][] = LDAP::fix($key);
             }
@@ -845,9 +845,9 @@ class ogroup extends plugin
            new entries. So do a check first... */
         $ldap->cat($this->dn, array('dn'));
         if ($ldap->fetch()) {
-            /* Modify needs array() to remove values :-( */
+            /* Modify needs [] to remove values :-( */
             if (!count($this->member)) {
-                $this->attrs['member'] = array();
+                $this->attrs['member'] = [];
             }
             $mode = "modify";
         } else {
@@ -941,9 +941,9 @@ class ogroup extends plugin
         $smarty->assign("cn", set_post($this->cn));
         $smarty->assign("copyMembers", $this->copyMembers);
         $str = $smarty->fetch(get_template_path("paste_generic.tpl", true, dirname(__FILE__)));
-        $ret = array();
+        $ret = [];
         $ret['string'] = $str;
-        $ret['status'] = "";
+        $ret['status'] = '';
         return $ret;
     }
 
@@ -969,7 +969,7 @@ class ogroup extends plugin
             "plShortName"   => _("Generic"),
             "plDescription" => _("Object group generic"),
             "plSelfModify"  => false,
-            "plDepends"     => array(),
+            "plDepends"     => [],
             "plPriority"    => 1,
             "plSection"     => array("administration"),
             "plRequirements" => array(
