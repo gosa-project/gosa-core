@@ -158,10 +158,11 @@ $smarty->assign("header", $setup->get_header_html());
 $smarty->assign("bottom", $focus.$setup->get_bottom_html());
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 
-if ($error_collector != ""){
-  $smarty->assign("php_errors", preg_replace("/%BUGBODY%/",$error_collector_mailto,$error_collector)."</div>");
+if (!empty($error_collector['items'])) {
+    $smarty->assign('error_collector', $error_collector);
+    $smarty->assign('php_errors', $smarty->fetch(get_template_path('error_collector.tpl')));
 } else {
-  $smarty->assign("php_errors", "");
+    $smarty->assign("php_errors", "");
 }
 if(function_exists("get_gosa_version")){
   $smarty->assign("version",get_gosa_version());
