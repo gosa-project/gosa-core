@@ -6,11 +6,11 @@
     <button onClick="$('errorbox').toggle();">Toggle details</button>
 </div>
 
-{foreach $error_collector.items as $index => $error}
     <div id='errorbox' style='position:absolute; z-index:150; display: none;'>
+    {foreach $error_collector.items as $index => $error}
         <table width="100%" cellspacing=0 style='color:white; border:2px solid red; background-color:#402005;' class="stacktrace-table">
             <tr>
-                <td colspan=3><h1 style='color:white'>PHP error "{$error.errfile|escape}"</h1></td>
+                <td colspan=3><h1 style='color:white'>PHP error "{$error.errstr|escape}"</h1></td>
             </tr>
             {foreach $error.trace as $trace_entry}
                 <tbody class="trace-pair">
@@ -43,9 +43,10 @@
                 </tbody>
             {/foreach}
         </table>
+        {/foreach}
     </div>
-{/foreach}
 
 <style>
     .trace-pair:nth-of-type(even) { background-color: #404040 }
+    .stacktrace-table h1 { font-size: 20px; }
 </style>
