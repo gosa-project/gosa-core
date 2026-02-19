@@ -1,4 +1,4 @@
-<div id="modal1" class="modal">
+<div id="error-collector-modal" class="modal">
     <div class="modal-content">
         <h4>There was a <b>problem</b> while generating this GOsa page!</h4>
 
@@ -16,10 +16,10 @@
                 <li>
                     <div class="collapsible-header error-count-container">
                         <i class="material-icons">zoom_out_map</i>
-                        <span class="truncate" style="max-width: 75%;">
+                        <span class="truncate">
                             #{$index+1}: {$error.errstr|escape}
                         </span>
-                        <span class="grey-text" style="margin-left: 10px;">
+                        <span class="grey-text collapsible-file-path">
                             {$error.errfile|escape}:{$error.errline|escape}
                         </span>
                     </div>
@@ -78,21 +78,27 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the collapsibles
+        M.Collapsible.init(document.querySelectorAll('.collapsible'));
+
+        // Initialize the modal
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems);
 
-        var modalElem = document.getElementById('modal1');
+        // Open the modal
+        var modalElem = document.getElementById('error-collector-modal');
         var modalInstance = M.Modal.getInstance(modalElem);
         modalInstance.open();
-
-        M.Collapsible.init(document.querySelectorAll('.collapsible'));
     });
 </script>
 <style>
+    .collapsible-file-path { margin-left: 10px; }
+
     .error-count-container {
         display: flex;
         align-items: center;
     }
+
     .stacktrace-table th,
     .stacktrace-table td {
         padding: 8px 12px;
@@ -103,6 +109,7 @@
         table-layout: fixed;
         width: 100%;
     }
+
     .stacktrace-table th:nth-child(1),
     .stacktrace-table td:nth-child(1) { width: 50px; }
 
