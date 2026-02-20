@@ -1330,21 +1330,9 @@ function check_sizelimit()
     return ('');
 }
 
-/*! \brief Print a sizelimit warning */
-function print_sizelimit_warning()
+function shouldShowSizelimitWarning()
 {
-    if (
-        session::global_is_set('size_limit') && session::global_get('size_limit') >= 10000000 ||
-        (session::is_set('limit_exceeded') && session::get('limit_exceeded'))
-    ) {
-        $config = "<button type='submit' name='edit_sizelimit'>" . _("Configure") . "</button>";
-    } else {
-        $config = '';
-    }
-    if (session::is_set('limit_exceeded') && session::get('limit_exceeded')) {
-        return ("(" . _("list is incomplete") . ") $config");
-    }
-    return ('');
+    return session::is_set('limit_exceeded') && session::get('limit_exceeded');
 }
 
 

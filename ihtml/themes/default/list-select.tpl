@@ -1,5 +1,10 @@
 <div class="list-head-wrapper">
-  <h2>{$HEADLINE}&nbsp;{$SIZELIMIT}</h2>
+  <h2>
+    {$HEADLINE}
+    {if $SHOW_SIZELIMIT_WARNING}
+      {t}(list is incomplete){/t} <button class="btn-small primary" style="margin-left: 10px" type='submit' name='edit_sizelimit'>{t}Configure{/t}</button>
+    {/if}
+  </h2>
   <input type="hidden" name="ignore">
   <div class="control-panel">
     <div class="navigation">

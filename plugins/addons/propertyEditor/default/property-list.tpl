@@ -41,7 +41,10 @@
 
   <div class="list-head-wrapper">
     <h2>
-      {$HEADLINE}&nbsp;{$SIZELIMIT}
+      {$HEADLINE}
+      {if $SHOW_SIZELIMIT_WARNING}
+        {t}(list is incomplete){/t} <button class="btn-small primary" style="margin-left: 10px" type='submit' name='edit_sizelimit'>{t}Configure{/t}</button>
+      {/if}
       {if $ignoreLdapProperties}
       - <span class="red-text">{t}Ignoring LDAP defined properties!{/t}</span>
       {/if}
