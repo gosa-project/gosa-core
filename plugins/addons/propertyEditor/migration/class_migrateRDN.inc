@@ -4,9 +4,9 @@
 
 class migrateRDN implements propertyMigration
 {
-    protected $property = NULL;
-    protected $config = NULL;
-    protected $found = array();
+    protected $property = null;
+    protected $config = null;
+    protected $found = [];
     protected $filter = '';
 
     // Additional suffixes or prefixes 
@@ -37,12 +37,12 @@ class migrateRDN implements propertyMigration
 
     function getChanges()
     {
-        return ($this->found);
+        return $this->found;
     }
 
     function checkForIssues()
     {
-        $this->found = array('add' => array(), 'move' => array());
+        $this->found = array('add' => [], 'move' => []);
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $ldap2 = $this->config->get_ldap_link();
@@ -50,7 +50,7 @@ class migrateRDN implements propertyMigration
 
         // Search for possible release deparments/containers - this enables us to
         //  SKIP release based objects - we cannot move them right now.
-        $releases = array();
+        $releases = [];
         $ldap->search("objectClass=FAIbranch");
         while ($attrs = $ldap->fetch()) {
             $releases[$attrs['dn']] = $attrs['dn'];
@@ -105,7 +105,7 @@ class migrateRDN implements propertyMigration
                     if (!preg_match("/^" . preg_quote($targetValue, '/i') . "/", $container)) {
                         $dnTo = $name . "," . $targetValue . $container;
                         if (!$ldap->dn_exists($targetValue . $container)) {
-                            $this->found['add'][$targetValue . $container] = array();
+                            $this->found['add'][$targetValue . $container] = [];
                         }
                         if ($dn != $dnTo) {
                             $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
@@ -139,7 +139,7 @@ class migrateRDN implements propertyMigration
 
                         $dnTo = $name . "," . $targetValue . $container;
                         if (!empty($targetValue) && !$ldap->dn_exists($targetValue . $container)) {
-                            $this->found['add'][$targetValue . $container] = array();
+                            $this->found['add'][$targetValue . $container] = [];
                         }
                         if ($dn != $dnTo) {
                             $this->found['move'][] = array('from' => $dn, 'to' => $dnTo);
@@ -195,7 +195,7 @@ class migrateRDN implements propertyMigration
             }
 
             // Now move the objects to the new traget
-            $tmp = new plugin($this->config, NULL);
+            $tmp = new plugin($this->config, null);
             foreach ($this->found['move'] as $id => $data) {
                 if (isset($_POST["migrateEntry_{$id}"])) {
                     if ($tmp->move($data['from'], $data['to'])) {
@@ -226,6 +226,6 @@ class migrateRDN implements propertyMigration
 
     function check()
     {
-        return (array());
+        return ([]);
     }
 }
