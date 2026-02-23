@@ -55,7 +55,7 @@ class ogroup extends plugin
 
     public $copyMembers = true;
     public $wasDyGroup = false;
-    public $baseSelector;
+    public ?baseSelector $baseSelector = null;
 
     /* Already assigned Workstations. Will be hidden in selection.
      */
@@ -184,7 +184,7 @@ class ogroup extends plugin
             session::set("sysfilter", $sysfilter);
         }
 
-        /* Instanciate base selector */
+        // Instanciate base selector
         $this->baseSelector = new baseSelector($this->get_allowed_bases(), $this->base);
         $this->baseSelector->setSubmitButton(false);
         $this->baseSelector->setHeight(300);
@@ -456,21 +456,21 @@ class ogroup extends plugin
     }
 
 
-    /* Save data to object */
+    // Save data to object
     public function save_object()
     {
-        /* Save additional values for possible next step */
+        // Save additional values for possible next step
         if (isset($_POST['ogroupedit'])) {
             $this->trustModeDialog->save_object();
 
-            /* Create a base backup and reset the
-               base directly after calling parent::save_object();
-               Base will be set seperatly a few lines below */
+            // Create a base backup and reset the
+            // base directly after calling parent::save_object();
+            // Base will be set seperatly a few lines below
             $base_tmp = $this->base;
             parent::save_object();
             $this->base = $base_tmp;
 
-            /* Refresh base */
+            // Refresh base
             if ($this->acl_is_moveable($this->base)) {
                 if (!$this->baseSelector->update()) {
                     msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
