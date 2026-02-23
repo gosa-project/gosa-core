@@ -809,7 +809,7 @@ class ogroup extends plugin
             $message[] = msgPool::permMove();
         }
 
-        return ($message);
+        return $message;
     }
 
 
