@@ -42,6 +42,8 @@ class migrateRDN implements propertyMigration
 
     function checkForIssues()
     {
+        global $config;
+        $this->config = $config;
         $this->found = array('add' => [], 'move' => []);
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
@@ -184,6 +186,8 @@ class migrateRDN implements propertyMigration
 
     function save_object()
     {
+        global $config;
+        $this->config = $config;
         if (isset($_POST["migrateNow" . get_class($this)])) {
             $ldap = $this->config->get_ldap_link();
             $ldap->cd($this->config->current['BASE']);
