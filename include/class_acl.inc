@@ -447,7 +447,7 @@ class acl extends plugin
         if ($this->acl_is_writeable("")) {
 
             /* Only be interested in new acl's, if we're in the right _POST place */
-            if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject]) && isset($this->ocMapping[$this->aclObject])) {
+            if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])) {
 
                 foreach ($this->ocMapping[$this->aclObject] as $oc) {
 
