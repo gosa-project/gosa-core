@@ -465,11 +465,23 @@ class acl extends plugin
                         $this->aclContents[$this->aclObject . '/' . $oc] = $new_acl[$this->aclObject . '/' . $oc];
                     }
                 }
+
+                if ($this->currentIndex != null && isset($this->gosaAclEntry[$this->currentIndex])) {
+                    $this->gosaAclEntry[$this->currentIndex]['acl'] = $this->aclContents;
+                }
+
+                $this->updateList();
             }
 
             /* Save new acl in case of base edit mode */
-            if ($this->acl_type == 'base' && !$firstedit) {
+            if ($this->acl_type == 'base' && !$firstedit && !empty($new_acl) && !$aclDialog) {
                 $this->aclContents = $new_acl;
+
+                if ($this->currentIndex != null && isset($this->gosaAclEntry[$this->currentIndex])) {
+                    $this->gosaAclEntry[$this->currentIndex]['acl'] = $this->aclContents;
+                }
+
+                $this->updateList();
             }
         }
 
@@ -582,8 +594,8 @@ class acl extends plugin
         }
 
         /* If dialog is confirmed */
-        if ((isset($_POST['userGroupSelect_save']) || isset($_POST['ok-save'])) &&
-            $this->dialog instanceof userGroupSelect
+        if (isset($_POST['add_users_finish']) || isset($_POST['userGroupSelect_save']) ||
+            isset($_POST['ok-save']) && $this->dialog instanceof userGroupSelect
         ) {
             switch ($this->theme) {
                 case 'classic':
@@ -597,8 +609,12 @@ class acl extends plugin
                     break;
             }
 
-            if ($this->acl_is_writeable("")) {
-                foreach ($this->dialog->save() as $entry) {
+            $users = $this->dialog->detectPostActions();
+
+            if (isset($users['targets']) && $this->acl_is_writeable("")) {
+                $headpage = $this->dialog->getHeadpage();
+                foreach ($users['targets'] as $dn) {
+                    $entry = $headpage->getEntry($dn);
                     if (in_array_strict("posixGroup", $entry['objectClass'])) {
                         $key = "G:" . $entry['dn'];
                         $vData = array("data" => array($groupIcon, $entry['cn'][0], $entry['description'][0]));
@@ -902,15 +918,7 @@ class acl extends plugin
                 $splist = $plist[$t_key]['plProvidedAcls'];
             }
 
-            /* Create sub acl if it does not exist */
-            if (!isset($this->aclContents[$key])) {
-                $this->aclContents[$key] = [];
-            }
-            if (!isset($this->aclContents[$key][0])) {
-                $this->aclContents[$key][0] = '';
-            }
-
-            $currentAcl = $this->aclContents[$key];
+            $currentAcl = $this->aclContents[$key] ?? [];
 
             /* Get the overall plugin acls
              */
