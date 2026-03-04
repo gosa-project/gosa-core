@@ -1087,7 +1087,7 @@ class group extends plugin
                 array(
                     "name"          => "ogroupRDN",
                     "type"          => "rdn",
-                    'default'       => "ou=groups,",
+                    'default'       => "ou=ogroups,",
                     'description'   => _("RDN for object group storage."),
                     "check"         => "gosaProperty::isRdn",
                     "migrate"       => "migrate_ogroupRDN",
