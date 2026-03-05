@@ -76,9 +76,40 @@ function __gosa_autoload($class_name)
 
 spl_autoload_register('__gosa_autoload');
 
+function format_stacktrace(array $trace): array {
+    $formatted = [];
+    
+    foreach ($trace as $index => $entry) {
+        $frameData = [
+            'index' => $index,
+            'file' => $entry['file'] ?? null,
+            'line' => $entry['line'] ?? null,
+            'function' => $entry['function'] ?? null,
+            'class' => $entry['class'] ?? null,
+            'type' => $entry['type'] ?? null,
+            'args' => []
+        ];
+        
+        // Handle args
+        if (isset($entry['args'])) {
+            foreach ($entry['args'] as $arg) {
+                $frameData['args'][] = is_scalar($arg) || is_null($arg)
+                    ? var_export($arg, true)
+                    : (is_array($arg)
+                        ? 'Array(' . count($arg) . ')'
+                        : 'Object(' . get_class($arg) . ')');
+            }
+        }
+        
+        $formatted[] = $frameData;
+    }
+    
+    return $formatted;
+}
+
 function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
-    global $error_collector, $config, $error_collector_mailto;
+    global $error_collector, $config;
 
     // To avoid recursion - restore original error handler.
     restore_error_handler();
@@ -136,159 +167,23 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
         );
     }
 
-    /* Create header as needed */
-    if ($error_collector == "") {
-
-        /* Mailto body header */
-        if (function_exists("prepare4mailbody")) {
-            $version = "unknown";
-            if (function_exists("get_gosa_version")) {
-                $version = get_gosa_version();
-            }
-            $error_collector_mailto .= prepare4mailbody(
-                "Oups. Seems like you've catched some kind of bug inside GOsa/PHP. You may want to help " .
-                    "us to improve the software stability. If so, please provide some more information below." .
-                    "\n\n" .
-                    "*** GOsa bug report ***" .
-                    "\nGOsa Version: $version" .
-                    "\n\n" .
-                    "Please describe what you did to produce this error as detailed as possible. Can you " .
-                    "reproduce this bug using the demo on http://www.gosa-project.org ?" .
-                    "\n\n" .
-                    "*** PHP error information ***\n\n"
-            );
-        }
-
-
-        if (class_exists('session') && session::is_set('js') && session::get('js') == FALSE) {
-            $error_collector = "<div>";
-        } else {
-
-            $warning_image = (is_callable('image')) ?
-                image('images/toolbar-warning.png') : "<image src='images/toolbar-warning.png' border=0>";
-            $mailto_image = (is_callable('image')) ?
-                image('images/mailto.png') : "<image src='images/mailto.png' border=0>";
-
-            $error_collector = "
-        <table summary=\"\" class='error-collector'>
-          <tr>
-           <td style='width:32px'>{$warning_image}</td>
-           <td><span>" . _("Generating this page caused the PHP interpreter to raise some errors!") . "</span></td>
-           <td align='right'>
-            <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
-                {$mailto_image}&nbsp;" . _("Send bug report") . "
-            </a>
-           </td>
-           <td align='right'>
-            <button onClick=\"$('errorbox').toggle();\">" . _("Toggle details") . "</button>
-            </td>
-          </tr>
-        </table>
-        <div id='errorbox' style='position:absolute; z-index:150; display: none;'>";
-        }
-    }
-
-    /* Create error header */
-    $error_collector .= "<table summary=\"\" width=\"100%\" cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>" . _("PHP error") . " \"$errstr\"</h1></td></tr>";
-
-    $error_collector_mailto .= prepare4mailbody("=== Error === \n");
-    $error_collector_mailto .= prepare4mailbody("PHP error: $errstr ($errfile, line $errline)\n");
-    $error_collector_mailto .= prepare4mailbody("=== /Error === \n\n");
-
     /* Extract traceback data - if available */
     if (function_exists('debug_backtrace')) {
-        $trace = debug_backtrace();
-
-        $error_collector_mailto .= prepare4mailbody("=== Trace ===");
-
-        /* Generate trace history */
-        for ($index = 0, $c = count($trace); $index < $c; $index++) {
-
-
-            $ct = $trace[$index];
-            $loc = "";
-            if (isset($ct['class'])) {
-                $loc .= _("class") . " " . $ct['class'];
-                if (isset($ct['function'])) {
-                    $loc .= " / ";
-                }
-            }
-            if (isset($ct['function'])) {
-                $loc .= _("function") . " " . $ct['function'];
-            }
-            if (isset($ct['type'])) {
-                switch ($ct['type']) {
-                    case "::":
-                        $type = _("static");
-                        break;
-
-                    case "->":
-                        $type = _("method");
-                        break;
-                }
-            } else {
-                $type = "-";
-            }
-            $args = "";
-            if (isset($ct['args'])) {
-                foreach ($ct['args'] as $arg) {
-
-                    /* Avoid convertig object to string errors */
-                    if (is_object($arg)) {
-                        $arg = "CLASS:&nbsp;" . get_class($arg);
-                    }
-
-                    /* Avoid convertig assoc arrays to string errors */
-                    if (!is_array($arg)) {
-                        //$args.= htmlentities("\"".print_r($arg, true)."\", ");
-                        //          } else {
-                        $args .= htmlentities("\"$arg\", ");
-                    }
-                }
-            }
-            $args = preg_replace("/, $/", "", $args);
-            if ($args == "") {
-                $args = "-";
-            }
-            if (isset($ct['file'])) {
-                $file = $ct['file'];
-            } else {
-                $file = "";
-            }
-            if (isset($ct['line'])) {
-                $line = $ct['line'];
-            } else {
-                $line = "";
-            }
-            $color = ($index & 1) ? '#404040' : '606060';
-            $error_collector .= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">" . _("Traceback") . "[$index]: $loc</td>";
-            $error_collector .= "<td>" . _("File") . ": $file (" . _('Line') . " $line)</td><td width=\"10%\">" . _("Type") . ": $type</td></tr>";
-            $error_collector .= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>" . _("Arguments") . ": $args</td></tr>";
-
-            /* Add trace part to mailto body */
-            $error_collector_mailto .= prepare4mailbody(
-                "\nTrace[" . $index . "]:" . $loc .
-                    "\nFile : " . $file .
-                    "\nLine : " . $line .
-                    "\nType : " . $type .
-                    "\n  " . $args .
-                    "\n"
-            );
-        }
+        $trace = debug_backtrace();        
     }
 
-    $error_collector_mailto .= prepare4mailbody("=== /Trace === \n");
-
-    /* Close error table */
-    $error_collector .= "</table>";
-
-    /* Flush in case of fatal errors */
-    set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
-    if (preg_match('/^fatal/i', $errstr)) {
-        echo $error_collector . "</div>";
-        flush();
-        exit;
+    if (function_exists("get_gosa_version")) {
+        $error_collector['version'] = get_gosa_version();
+    } else {
+        $error_collector['version'] = 'unknown';
     }
+
+    $error_collector['items'][] = [
+        'errstr'    => $errstr,
+        'errfile'   => $errfile,
+        'errline'   => $errline,
+        'trace'     => format_stacktrace($trace),
+    ];
 }
 
 
@@ -341,8 +236,7 @@ if (!version_compare(phpversion(), '8.1.0', '>=')) {
 }
 
 /* Register error handler */
-$error_collector = '';
-$error_collector_mailto = '';
+$error_collector = [];
 
 $templateCompileDirectory = '/var/spool/gosa/';
 if (!GOSA_SETUP) {
