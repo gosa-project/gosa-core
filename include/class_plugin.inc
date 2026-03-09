@@ -979,7 +979,10 @@ abstract class plugin
         while ($attrs = $ldap->fetch()) {
             $src = $attrs['dn'];
             $dst = preg_replace("/" . preg_quote($src_dn, '/') . "$/", $dst_dn, $attrs['dn']);
-            $this->_copy($src, $dst);
+
+            if (!$this->_copy($src, $dst)) {
+                return (FALSE);
+            }
         }
         return (TRUE);
     }
