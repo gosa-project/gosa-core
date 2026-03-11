@@ -133,7 +133,17 @@ class ogroup extends plugin
             $ui = get_userinfo();
             $this->base = dn2base(session::global_is_set("CurrentMainBase") ? "cn=dummy," . session::global_get("CurrentMainBase") : $ui->dn);
         } else {
-            $this->base = preg_replace("/^[^,]+," . preg_quote(get_ou("group", "ogroupRDN"), '/') . "/i", '', $this->dn);
+            $pattern = "/^[^,]+," . preg_quote(get_ou("group", "ogroupRDN"), '/') . "/i";
+            $computedBase = preg_replace($pattern, '', $this->dn);
+
+            // Fallback if the regex did not match. In this case we need to cut every attributes except dc and o to avoid setting the whole dn as base.
+            if ($computedBase === $this->dn) {
+                if (preg_match('/((dc|o)=[^,]+.*)$/i', $this->dn, $matches)) {
+                    $computedBase = $matches[1];
+                }
+            }
+
+            $this->base = $computedBase;
         }
 
         /* Detect all workstations, which are already assigned to an object group
