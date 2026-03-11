@@ -738,7 +738,7 @@ class LDAP
 
             /* Check if destination dn exists, if not the 
                server may not support this operation */
-            $r &= is_resource($this->dn_exists($dest));
+            $r = $r && ($this->dn_exists($dest) !== false);
             return ($r);
         } else {
             $this->error = 'Could not connect to LDAP server';
