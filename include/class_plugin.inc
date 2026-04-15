@@ -981,7 +981,7 @@ abstract class plugin
             $dst = preg_replace("/" . preg_quote($src_dn, '/') . "$/", $dst_dn, $attrs['dn']);
 
             if (!$this->_copy($src, $dst)) {
-                return (FALSE);
+                return false;
             }
         }
         return (TRUE);
@@ -1171,7 +1171,7 @@ abstract class plugin
                 "Move failed! Src or Dst DN is invalid.",
                 E_USER_WARNING
             );
-            return (FALSE);
+            return false;
         }
 
         /* Do not copy if only upper- lowercase has changed */
