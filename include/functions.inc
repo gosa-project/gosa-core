@@ -4113,3 +4113,7 @@ function tempSwitch($arr)
             return $arr[0];
     }
 }
+
+function is_valid_dn_syntax($dn) {
+    return ldap_explode_dn($dn, 0) !== false;
+}

@@ -1166,6 +1166,14 @@ abstract class plugin
     {
         global $config;
 
+        if (!is_valid_dn_syntax($src_dn) || !is_valid_dn_syntax($dst_dn)) {
+            trigger_error(
+                "Move failed! Src or Dst DN is invalid.",
+                E_USER_WARNING
+            );
+            return (FALSE);
+        }
+
         /* Do not copy if only upper- lowercase has changed */
         if (strtolower($src_dn) == strtolower($dst_dn)) {
             return (TRUE);
