@@ -736,10 +736,16 @@ class LDAP
             $r = ldap_rename(self::$cid, self::fix($source), self::fix($dest_rdn), self::fix($parent), true);
             $this->error = ldap_error(self::$cid);
 
-            /* Check if destination dn exists, if not the 
-               server may not support this operation */
-            $r &= is_resource($this->dn_exists($dest));
-            return ($r);
+            if (!$r) {
+                return false;
+            }
+
+            if ($this->dn_exists($dest) === false) {
+                $this->error = "Destination DN '$dest' does not exist after ldap_rename.";
+                return false;
+            }
+
+            return true;
         } else {
             $this->error = 'Could not connect to LDAP server';
             return (false);

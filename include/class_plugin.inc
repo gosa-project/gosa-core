@@ -979,7 +979,10 @@ abstract class plugin
         while ($attrs = $ldap->fetch()) {
             $src = $attrs['dn'];
             $dst = preg_replace("/" . preg_quote($src_dn, '/') . "$/", $dst_dn, $attrs['dn']);
-            $this->_copy($src, $dst);
+
+            if (!$this->_copy($src, $dst)) {
+                return false;
+            }
         }
         return (TRUE);
     }
@@ -1162,6 +1165,14 @@ abstract class plugin
     function move($src_dn, $dst_dn)
     {
         global $config;
+
+        if (!is_valid_dn_syntax($src_dn) || !is_valid_dn_syntax($dst_dn)) {
+            trigger_error(
+                "Move failed! Src or Dst DN is invalid.",
+                E_USER_WARNING
+            );
+            return false;
+        }
 
         /* Do not copy if only upper- lowercase has changed */
         if (strtolower($src_dn) == strtolower($dst_dn)) {

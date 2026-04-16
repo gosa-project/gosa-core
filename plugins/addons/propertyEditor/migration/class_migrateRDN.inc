@@ -199,7 +199,7 @@ class migrateRDN implements propertyMigration
             }
 
             // Now move the objects to the new traget
-            $tmp = new plugin($this->config, null);
+            $tmp = new class($this->config, null) extends plugin {};
             foreach ($this->found['move'] as $id => $data) {
                 if (isset($_POST["migrateEntry_{$id}"])) {
                     if ($tmp->move($data['from'], $data['to'])) {
