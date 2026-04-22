@@ -13,7 +13,7 @@
         </h5>
 
         <p class="grey-text">
-            {t}GOsa Version:{/t}
+            {t}GOsa version:{/t}
             {$error_collector.version|escape}
         </p>
 
