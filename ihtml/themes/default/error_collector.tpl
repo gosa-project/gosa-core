@@ -1,14 +1,20 @@
 <div id="error-collector-modal" class="modal">
     <div class="modal-content">
-        <h4>There was a <b>problem</b> while generating this GOsa page!</h4>
+        <h4>
+            {t escape=no
+            1='<b>' 2='</b>'
+            }There was a %1problem%2 while generating this GOsa page!{/t}
+        </h4>
 
         <h5 class="red-text text-darken-3 error-count-container">
             <i class="material-icons left">error</i>
-            PHP errors detected! ({$error_collector.items|@count})
+            {t}PHP errors detected!{/t}
+            ({$error_collector.items|@count})
         </h5>
 
         <p class="grey-text">
-            GOsa Version: {$error_collector.version|escape}
+            {t}GOsa Version:{/t}
+            {$error_collector.version|escape}
         </p>
 
         <ul class="collapsible">
@@ -68,13 +74,22 @@
             {/foreach}
         </ul>
         <p class="grey-text">
-            Click on the elements to open them.
+            {t}Click on the elements to open them.{/t}
         </p>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+            {t}OK{/t}
+        </a>
     </div>
 </div>
+
+<a class="waves-effect waves-light btn-large red" id="floating-error-btn">
+    <i class="material-icons left">error</i>
+    {t escape=no
+    1={$error_collector.items|@count}
+    }%1 error(s) detected!{/t}
+</a>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -88,7 +103,10 @@
         // Open the modal
         var modalElem = document.getElementById('error-collector-modal');
         var modalInstance = M.Modal.getInstance(modalElem);
-        modalInstance.open();
+
+        document.getElementById('floating-error-btn').addEventListener('click', function() {
+            modalInstance.open();
+        });
     });
 </script>
 <style>
@@ -118,4 +136,11 @@
 
     .stacktrace-table th:nth-child(5),
     .stacktrace-table td:nth-child(5) { width: 80px; }
+
+    #floating-error-btn {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        z-index: 1000;
+    }
 </style>

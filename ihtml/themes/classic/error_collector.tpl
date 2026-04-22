@@ -1,16 +1,25 @@
 <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 30px">
     <div style="display: flex; align-items: center">
         <img src='images/toolbar-warning.png' style="margin-right: 20px">
-        <span>Generating this page caused the PHP interpreter to raise some errors!</span>
+        <span>
+            {t}Generating this page caused the PHP interpreter to raise some errors!{/t}
+        </span>
     </div>
-    <button onClick="$('errorbox').toggle();">Toggle details</button>
+    <button onClick="$('errorbox').toggle();">
+        {t}Toggle details{/t}
+    </button>
 </div>
 
     <div id='errorbox' style='position:absolute; z-index:150; display: none;'>
     {foreach $error_collector.items as $index => $error}
         <table width="100%" cellspacing=0 style='color:white; border:2px solid red; background-color:#402005;' class="stacktrace-table">
             <tr>
-                <td colspan=3><h1 style='color:white'>PHP error "{$error.errstr|escape}"</h1></td>
+                <td colspan=3>
+                    <h1 style='color:white'>
+                        {t}PHP error{/t}
+                        "{$error.errstr|escape}"
+                    </h1>
+                </td>
             </tr>
             {foreach $error.trace as $trace_entry}
                 <tbody class="trace-pair">
