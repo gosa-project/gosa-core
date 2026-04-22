@@ -1822,6 +1822,7 @@ msgstr "Cancelar"
 #: setup/class_setupStep_Migrate.inc:303 setup/class_setupStep_Migrate.inc:684
 #: setup/class_setupStep_Migrate.inc:828 setup/setup_checks.tpl:21
 #: setup/setup_checks.tpl:62 ihtml/themes/default/msg_dialog.tpl:77
+#: ihtml/themes/default/error_collector.tpl:82
 #: ihtml/themes/default/msg_dialog.tpl:79
 #: ihtml/themes/default/msg_dialog.tpl:136
 #: ihtml/themes/default/msg_dialog.tpl:139
