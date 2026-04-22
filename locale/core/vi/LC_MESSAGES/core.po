@@ -4033,6 +4033,26 @@ msgstr "Kích vào đây để thay đổi mật khẩu của bạn"
 msgid "Set password"
 msgstr "Đặt mật khẩu"
 
+#: ihtml/themes/default/error_collector.tpl:6
+msgid "There was a %1problem%2 while generating this GOsa page!"
+msgstr "Đã xảy ra %1sự cố%2 trong quá trình tạo trang GOsa này!"
+
+#: ihtml/themes/default/error_collector.tpl:11
+msgid "PHP errors detected!"
+msgstr "Đã phát hiện lỗi PHP!"
+
+#: ihtml/themes/default/error_collector.tpl:16
+msgid "GOsa version:"
+msgstr "Phiên bản GOsa:"
+
+#: ihtml/themes/default/error_collector.tpl:77
+msgid "Click on the elements to open them."
+msgstr "Nhấp chuột vào các phần tử để mở chúng."
+
+#: ihtml/themes/default/error_collector.tpl:91
+msgid "%1 error(s) detected!"
+msgstr "Đã phát hiện %1 lỗi!"
+
 #: ihtml/themes/default/removeEntries.tpl:4
 #: plugins/addons/propertyEditor/property-list.tpl:7
 #, fuzzy

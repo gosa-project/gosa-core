@@ -3999,6 +3999,26 @@ msgstr "Cliquez ici pour changer votre mot de passe"
 msgid "Set password"
 msgstr "Attribuer le mot de passe"
 
+#: ihtml/themes/default/error_collector.tpl:6
+msgid "There was a %1problem%2 while generating this GOsa page!"
+msgstr "Il y a eu un %1problème%2 lors de la génération de cette page GOsa !"
+
+#: ihtml/themes/default/error_collector.tpl:11
+msgid "PHP errors detected!"
+msgstr "Erreurs PHP détectées !"
+
+#: ihtml/themes/default/error_collector.tpl:16
+msgid "GOsa version:"
+msgstr "Version GOsa :"
+
+#: ihtml/themes/default/error_collector.tpl:77
+msgid "Click on the elements to open them."
+msgstr "Cliquez sur les éléments pour les ouvrir."
+
+#: ihtml/themes/default/error_collector.tpl:91
+msgid "%1 error(s) detected!"
+msgstr "%1 erreur(s) détectée(s) !"
+
 #: ihtml/themes/default/removeEntries.tpl:4
 #: plugins/addons/propertyEditor/property-list.tpl:7
 msgid "Attention"

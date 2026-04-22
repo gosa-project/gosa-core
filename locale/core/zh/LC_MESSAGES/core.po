@@ -4020,6 +4020,26 @@ msgstr "点击这里来修改您的口令"
 msgid "Set password"
 msgstr "设置口令"
 
+#: ihtml/themes/default/error_collector.tpl:6
+msgid "There was a %1problem%2 while generating this GOsa page!"
+msgstr "生成此 GOsa 页面时出现 %1problem%2！"
+
+#: ihtml/themes/default/error_collector.tpl:11
+msgid "PHP errors detected!"
+msgstr "检测到PHP错误！"
+
+#: ihtml/themes/default/error_collector.tpl:16
+msgid "GOsa version:"
+msgstr "GOsa 版本："
+
+#: ihtml/themes/default/error_collector.tpl:77
+msgid "Click on the elements to open them."
+msgstr "点击元素即可展开。"
+
+#: ihtml/themes/default/error_collector.tpl:91
+msgid "%1 error(s) detected!"
+msgstr "检测到 %1 个错误！"
+
 #: ihtml/themes/default/removeEntries.tpl:4
 #: plugins/addons/propertyEditor/property-list.tpl:7
 #, fuzzy

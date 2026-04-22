@@ -4047,6 +4047,26 @@ msgstr "Non hai il permesso di cambiare la tua password."
 msgid "Set password"
 msgstr "Cambia password"
 
+#: ihtml/themes/default/error_collector.tpl:6
+msgid "There was a %1problem%2 while generating this GOsa page!"
+msgstr "Si è verificato un %1problema%2 durante la generazione di questa pagina GOsa!"
+
+#: ihtml/themes/default/error_collector.tpl:11
+msgid "PHP errors detected!"
+msgstr "Sono stati rilevati errori PHP!"
+
+#: ihtml/themes/default/error_collector.tpl:16
+msgid "GOsa version:"
+msgstr "Versione GOsa:"
+
+#: ihtml/themes/default/error_collector.tpl:77
+msgid "Click on the elements to open them."
+msgstr "Fai clic sugli elementi per aprirli."
+
+#: ihtml/themes/default/error_collector.tpl:91
+msgid "%1 error(s) detected!"
+msgstr "%1 errore(i) rilevato(i)!"
+
 #: ihtml/themes/default/removeEntries.tpl:4
 #: plugins/addons/propertyEditor/property-list.tpl:7
 #, fuzzy
