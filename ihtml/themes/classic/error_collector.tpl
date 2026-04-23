@@ -47,7 +47,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan=3 style='padding-left:20px;'>Arguments: {$trace_entry.args|@implode:", "}</td>
+                    <td colspan=3 style='padding-left:20px;'>Arguments: {$trace_entry.args|@implode:", "|escape}</td>
                 </tr>
             </tbody>
         {/foreach}

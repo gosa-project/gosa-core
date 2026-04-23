@@ -54,7 +54,7 @@
                                             {else}
                                                 <td>{$trace_entry.function|escape}</td>
                                             {/if}
-                                            <td>{$trace_entry.args|@implode:", "}</td>
+                                            <td>{$trace_entry.args|@implode:", "|escape}</td>
                                             <td>
                                                 {if $trace_entry.type == "->"}
                                                     method
@@ -86,7 +86,7 @@
 
 <a class="waves-effect waves-light btn-large red" id="floating-error-btn">
     <i class="material-icons left">error</i>
-    {t escape=no
+    {t
     1={$error_collector.items|@count}
     }%1 error(s) detected!{/t}
 </a>
