@@ -144,4 +144,6 @@
         left: 24px;
         z-index: 1000;
     }
+
+    #error-collector-modal { width: 60%; }
 </style>
