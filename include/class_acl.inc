@@ -894,24 +894,19 @@ class acl extends plugin
     function buildAclSelector($list)
     {
         global $smarty;
-        $display = "<input type='hidden' name='acl_dummy_0_0_0' value='1'>";
-        $cols = 3;
         $tmp = session::global_get('plist');
         $plist = $tmp->info;
         asort($plist);
 
-        if ($this->acl_is_writeable("")) {
-            $smarty->fetch(get_template_path('aclSelector.tpl'));
-        }
-
         /* Build general objects */
         $list = $this->sort_by_priority($list);
+
+        $aclObjects = [];
 
         //$list contains the available category with an name e.g.: departement/institute
         //$key is eg: "departement/institute" and $name is: "Institute"
         foreach ($list as $key => $name) {
             /* Walk through the list of attributes */
-            $cnt = 1;
             $splist = [];
             $t_key = preg_replace('%^.*/%', '', $key);
             if (isset($plist[$t_key]['plProvidedAcls'])) {
@@ -932,296 +927,46 @@ class acl extends plugin
 
             /* Object header */
             $tname = preg_replace("/[^a-z0-9]/i", "_", $name);
-
-            if ($expand) {
-                $back_color = "#C8C8FF";
-            } else {
-                $back_color = "#C8C8C8";
-            }
-
-            if (
-                isset($_SERVER['HTTP_USER_AGENT']) &&
-                (preg_match("/gecko/i", $_SERVER['HTTP_USER_AGENT'])) ||
-                (preg_match("/presto/i", $_SERVER['HTTP_USER_AGENT']))
-            ) {
-
-                switch ($this->theme) {
-                    case 'classic':
-                        $display .= "<table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
-                                <tr>
-                                    <td style='background-color:{$back_color};height:1.8em;' colspan=" . ($cols - 1) . "><b>" . _("Object") . ": $name</b></td>
-                                    <td align='right' style='background-color:{$back_color};height:1.8em;'>
-                                        <button type='button' onclick=\"$('{$tname}').toggle();\">" . _("Show/hide advanced settings") . "</button>
-                                    </td>
-                                </tr>";
-                        break;
-                    default:
-                        $display .= "   <div class='acl-object-wrapper'>
-                                            <div class='object-head-wrapper'>
-                                                <div class='object-name'>
-                                                    " . _("Object") . ": $name
-                                                </div>";
-                        if ($splist) {
-                            $display .= "   <div class='advanced-settings'>
-                                                <button class='btn-extra-small' type='button' onclick=\"$('{$tname}').toggle();\">
-                                                    " . _("Show/hide advanced settings") . "
-                                                </button>
-                                            </div>";
-                        }
-                        $display .= "   </div>";
-                        break;
-                }
-            } else {
-                switch ($this->theme) {
-                    case 'classic':
-                        $display .= "   <table summary='{$name}' style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>
-                                            <tr>
-                                                <td style='background-color:#C8C8C8;height:1.8em;' colspan=$cols>
-                                                    <b>" . _("Object") . ": $name</b>
-                                                </td>
-                                            </tr>";
-                        break;
-                    default:
-                        $display .= "   <div class='acl-object-wrapper'>
-                                            <div class='object-head-wrapper'>
-                                                <div class='object-name'>
-                                                    " . _("Object") . ": $name
-                                                </div>
-                                            </div>";
-                        break;
-                }
-            }
-
-            /* Generate options */
-            $options = $this->mkchkbx($key . "_0_c",  _("Create objects"), preg_match('/c/', $overall_acl));
-            $options .= $this->mkchkbx($key . "_0_m", _("Move objects"), preg_match('/m/', $overall_acl));
-            $options .= $this->mkchkbx($key . "_0_d", _("Remove objects"), preg_match('/d/', $overall_acl));
-            if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']) {
-                $options .= $this->mkchkbx($key . "_0_s", _("Restrict changes to user's own object"), preg_match('/s/', $overall_acl));
-            }
-
-            /* Global options */
-            $more_options = $this->mkchkbx($key . "_0_r",  _("read"), preg_match('/r/', $overall_acl));
-            $more_options .= $this->mkchkbx($key . "_0_w", _("write"), preg_match('/w/', $overall_acl));
-
-            switch ($this->theme) {
-                case 'classic':
-                    $display .= "   <tr>
-                                        <td style='background-color:#E0E0E0' colspan=" . ($cols - 1) . ">$options</td>
-                                        <td style='background-color:#D4D4D4'>&nbsp;" . _("Complete object") . ": $more_options</td>
-                                    </tr>";
-                    break;
-                default:
-                    $display .= "   <div class='object-body-wrapper'>
-                                        <div class='row'>
-                                            <div class='col s9 options'>$options</div>
-                                            <div class='col s3 options'>
-                                                <span class='selection-label'>" . _("Complete object") . ":</span> $more_options
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>";
-                    break;
-            }
-
-
-            switch ($this->theme) {
-                case 'classic':
-                    $display .= "   <tr id='tr_$tname' style='vertical-align:top;height:0px;'>
-                                                <td colspan=" . $cols . ">
-                                                    <div id='$tname' style='overflow:hidden; display:none;vertical-align:top;width:100%;'>
-                                                        <table style='width:100%;' summary='{$name}'>";
-                    break;
-                default:
-                    $display .= "   <div class='acl_container' id='$tname' style='overflow:hidden; display:none;'>
-                                                <div class='row'>";
-                    break;
-            }
-
+        
+            $attributes = [];
             foreach ($splist as $attr => $dsc) {
-                /* Skip pl* attributes, they are internal... */
-                if (preg_match('/^pl[A-Z]+.*$/', $attr)) {
+                if (preg_match('/^pl[A-Z]+.*$/', $attr))  {
                     continue;
                 }
-
-                /* Open table row */
-                if ($cnt == 1) {
-                    switch ($this->theme) {
-                        case 'classic':
-                            $display .= '<tr>';
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-
-                // initialize end tag since it may be used uninitialized later
-                $end = '';
-
-                /* Close table row */
-                switch ($this->theme) {
-                    case 'classic':
-                        if ($cnt == $cols) {
-                            $cnt = 1;
-                            $rb = "";
-                            $end = "</tr>";
-                        } else {
-                            $cnt++;
-                            $rb = "border-right:1px solid #A0A0A0;";
-                            $end = "";
-                        }
-                        break;
-                    default:
-                        break;
-                }
-
-                /* Collect list of attributes */
-                $state = "";
-                if (isset($currentAcl[$attr])) {
-                    $state = $currentAcl[$attr];
-                }
-
-                switch ($this->theme) {
-                    case 'classic':
-                        $display .= "   <td style='border-top:1px solid #A0A0A0;{$rb}width:" . (int)(100 / $cols) . "%'>
-                                            <b>$dsc</b> ($attr)<br>" . $this->mkrwbx($key . "_" . $attr, $state) . "
-                                        </td>$end";
-                        break;
-                    default:
-                        $display .= "   <div class='col s6 xl" . (12 / $cols) . "'>
-                                            <div class='option-grp'>
-                                                <div class='option-name'>
-                                                    $dsc ($attr)
-                                                </div>
-                                            <div class='options'>
-                                                " . $this->mkrwbx($key . "_" . $attr, $state) . "
-                                            </div>
-                                        </div>
-                                    </div>$end";
-                        break;
-                }
+                $state = $currentAcl[$attr] ?? "";
+                $attributes[$attr] = [
+                    'key' => $attr,
+                    'dsc' => $dsc,
+                    'state' => $state,
+                    'r' => preg_match('/r/', $state),
+                    'w' => preg_match('/w/', $state),
+                ];
             }
 
-            /* Fill missing td's if needed */
-            if (--$cnt != $cols && $cnt != 0) {
-                $display .= str_repeat("\n    <td style='border-top:1px solid #A0A0A0; width:" . (int)(100 / $cols) . "%'>&nbsp;</td>", $cols - $cnt);
-            }
-
-            if (session::global_get('js')) {
-                if (
-                    isset($_SERVER['HTTP_USER_AGENT']) &&
-                    (preg_match("/gecko/i", $_SERVER['HTTP_USER_AGENT'])) ||
-                    (preg_match("/presto/i", $_SERVER['HTTP_USER_AGENT'])) ||
-                    (preg_match("/ie/i", $_SERVER['HTTP_USER_AGENT']))
-                ) {
-                    switch ($this->theme) {
-                        case 'classic':
-                            $display .= "   </table>
-                                        </div>
-                                    </td>
-                                </tr>";
-                            break;
-                        default:
-                            $display .= "   </div>
-                                        </div>";
-                            break;
-                    }
-                }
-            }
-            switch ($this->theme) {
-                case 'classic':
-                    $display .= "</table><br/>";
-                    break;
-
-                default:
-                    break;
-            }
+            $aclObjects[$key] = [
+                'key'  => $key,
+                'name' => $name,
+                'tname' => $tname,
+                'expand' => $expand,
+                'splist' => $splist,
+                'overall' => [
+                    'c' => preg_match('/c/', $overall_acl),
+                    'm' => preg_match('/m/', $overall_acl),
+                    'd' => preg_match('/d/', $overall_acl),
+                    's' => $plist[$t_key]['plSelfModify'] ? preg_match('/s/', $overall_acl) : 0,
+                    'r' => preg_match('/r/', $overall_acl),
+                    'w' => preg_match('/w/', $overall_acl),
+                ],
+                'attributes' => $attributes,
+                'js' => session::global_get('js'),
+                'selfModify' => !empty($plist[$t_key]['plSelfModify'])
+            ];
         }
 
-        return ($display);
-    }
-
-    function mkchkbx($name, $text, $state = FALSE)
-    {
-        $state = $state ? "checked" : "";
-        if ($this->acl_is_writeable("")) {
-            $tname = preg_replace("/[^a-z0-9]/i", "_", $name);
-            switch ($this->theme) {
-                case 'classic':
-                    return "<input id='acl_$tname' type='checkbox' name='acl_$name' $state>
-                            <label for='acl_$tname'>$text</label>";
-                default:
-                    return "<label>
-                                <p>
-                                    <input type='checkbox' id='acl_$tname' name='acl_$name' $state>
-                                    <span>$text</span>
-                                </p>
-                            </label>";
-            }
-        } else {
-            switch ($this->theme) {
-                case 'classic':
-                    return "<input type='checkbox' disabled name='dummy_" . microtime(1) . "' $state>$text";
-                default:
-                    return "<label>
-                                <p>
-                                    <input type='checkbox' name='dummy_" . microtime(1) . "' disabled $state>
-                                    <span>$text</span>
-                                </p>
-                            </label>";
-                    break;
-            }
-        }
-    }
-
-    function mkrwbx($name, $state = "")
-    {
-        $rstate = preg_match('/r/', $state) ? 'checked' : '';
-        $wstate = preg_match('/w/', $state) ? 'checked' : '';
-        $tname = preg_replace("/[^a-z0-9]/i", "_", $name);
-
-        if ($this->acl_is_writeable("")) {
-            switch ($this->theme) {
-                case 'classic':
-                    return "<input id='acl_" . $tname . "_r' type='checkbox' name='acl_{$name}_r' $rstate>
-                            <label for='acl_" . $tname . "_r'>" . _("read") . "</label>
-                            <input id='acl_" . $tname . "_w' type='checkbox' name='acl_{$name}_w' $wstate>
-                            <label for='acl_" . $tname . "_w'>" . _("write") . "</label>";
-                default:
-                    return "<label>
-                                <p>
-                                    <input type='checkbox' id='acl_" . $tname . "_r' name='acl_{$name}_r' $rstate>
-                                    <span>" . _("read") . "</span>
-                                </p>
-                            </label>
-                            <label>
-                                <p>
-                                    <input type='checkbox' id='acl_" . $tname . "_w' name='acl_{$name}_w' $wstate>
-                                    <span>" . _("write") . "</span>
-                                </p>
-                            </label>";
-            }
-        } else {
-            switch ($this->theme) {
-                case 'classic':
-                    return "<input disabled type=checkbox name='dummy_" . microtime(1) . "' $rstate>" . _("read") . "
-                            <input disabled type=checkbox name='dummy_" . microtime(1) . "' $wstate>" . _("write");
-                default:
-                    return "<label>
-                                <p>
-                                    <input type='checkbox' name='dummy_" . microtime(1) . "' disabled $rstate>
-                                    <span>" . _("read") . "</span>
-                                </p>
-                            </label>
-                            <label>
-                                <p>
-                                    <input type='checkbox' name='dummy_" . microtime(1) . "' disabled $wstate>
-                                    <span>" . _("write") . "</span>
-                                </p>
-                            </label>";
-            }
-        }
+        $smarty = get_smarty();
+        $smarty->assign('aclObjects', $aclObjects);
+        $smarty->assign('aclWriteable', $this->acl_is_writeable(""));
+        return $smarty->fetch(get_template_path('aclSelector.tpl'));
     }
 
     /**
