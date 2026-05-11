@@ -455,6 +455,15 @@ class filter
 
     public function renderFilterMenu()
     {
+        global $smarty;
+        $smarty->assign('xmlSearches', $this->xmlSearches);
+        $smarty->assign('search', $this->search);
+        $smarty->assign('userFilters', userFilter::getFilter($this->category));
+        $smarty->assign('scopeMode', $this->scopeMode);
+        $smarty->assign('scope', $this->scope);
+        
+        return $smarty->fetch(get_template_path('filter_menu.tpl'));
+
         $script = "";
 
         switch ($this->theme) {
