@@ -154,34 +154,6 @@ class filter
         $smarty->assign('characters', $element['autocomplete']['characters'] ?? '1');
 
         return $smarty->fetch(get_template_path('filter_textfield.tpl'));
-
-        switch ($this->theme) {
-            case 'classic':
-                $size = 30;
-                $maxlength = 30;
-                $result = "<input class='filter_textfield' placeholder='" . _('Search') . "...' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='" . $value . "'>";
-                if ($element && isset($element['autocomplete'])) {
-                    $frequency = '0.5';
-                    $characters = '1';
-                    if (isset($element['autocomplete']['frequency'])) {
-                        $frequency = $element['autocomplete']['frequency'];
-                    }
-                    if (isset($element['autocomplete']['characters'])) {
-                        $characters = $element['autocomplete']['characters'];
-                    }
-                    $result .= "<div id='autocomplete$tag' class='autocomplete'></div>" .
-                        "<script type='text/javascript'>" .
-                        "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });" .
-                        '</script>';
-
-                    // $this->autocompleters[$tag] = $element;
-                }
-                break;
-            default:
-                $result = " <input class='filter_textfield' placeholder='" . _('Search') . "...' id='$tag' name='$tag' type='text' value='" . $value . "'>";
-                break;
-        }
-        return $result;
     }
 
     public function getCurrentBase()
