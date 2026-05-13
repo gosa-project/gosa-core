@@ -38,7 +38,7 @@ class filter
     public $converter = null;
     public $pid;
     public $customConstraints = [];
-    public $autocompleters = [];
+    // public $autocompleters = [];
 
     public $theme;
 
@@ -146,6 +146,15 @@ class filter
 
     public function getTextfield($tag, $value = '', $element = null)
     {
+        global $smarty;
+        $smarty->assign('tag', $tag);
+        $smarty->assign('value', $value);
+        $smarty->assign('hasAutocomplete', $element && isset($element['autocomplete']));
+        $smarty->assign('frequency', $element['autocomplete']['frequency'] ?? '0.5');
+        $smarty->assign('characters', $element['autocomplete']['characters'] ?? '1');
+
+        return $smarty->fetch(get_template_path('filter_textfield.tpl'));
+
         switch ($this->theme) {
             case 'classic':
                 $size = 30;
@@ -165,7 +174,7 @@ class filter
                         "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });" .
                         '</script>';
 
-                    $this->autocompleters[$tag] = $element;
+                    // $this->autocompleters[$tag] = $element;
                 }
                 break;
             default:
