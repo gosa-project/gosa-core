@@ -189,7 +189,9 @@ abstract class management
             $this->filter->update();
             session::global_set(get_class($this) . "_filter", $this->filter);
             if ($config->get_cfg_value("core", "useAutoComplete") == "true") {
-                session::set('autocomplete', $this->filter);
+                $filterKey = get_class($this) . "_filter";
+                session::set('autocomplete', $filterKey);
+                session::set($filterKey, $this->filter);
             }
         }
 
