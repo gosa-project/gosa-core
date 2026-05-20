@@ -93,7 +93,14 @@
         </td>
         <td>
             <div class='search-filter'>
-                {$textfield nofilter}
+                <input class='filter_textfield' placeholder='{t}Search{/t}...' id='{$tag}' name='{$tag}' type='text' size='30' maxlength='30' value='{$value}'>
+
+                {if $hasAutocomplete}
+                <div id='autocomplete{$tag}' class='autocomplete'></div>
+                <script type='text/javascript'>
+                    new Ajax.Autocompleter('{$tag}', 'autocomplete{$tag}', 'autocomplete.php', { minChars: {$characters}, frequency: {$frequency} });
+                </script>
+                {/if}
             </div>
             &nbsp;<button class='search-filter' type='submit' title='{t}Search{/t}'>
                 <div class='img' style='background-position:-292px -214px;width:16px;height:16px'></div>

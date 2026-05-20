@@ -72,7 +72,7 @@
 </div>
 
 <div class='search-field'>
-    {$textfield nofilter}
+    <input class='filter_textfield' placeholder='{t}Search{/t}...' id='{$tag}' name='{$tag}' type='text' value='{$value}'>
     <button class='btn' type='submit' title='{t}Search{/t}'>
         <i class='material-icons md-18'>search</i>
     </button>
