@@ -38,7 +38,6 @@ class filter
     public $converter = null;
     public $pid;
     public $customConstraints = [];
-    // public $autocompleters = [];
 
     public $theme;
 
