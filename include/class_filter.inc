@@ -196,6 +196,15 @@ class filter
 
     public function render()
     {
+        global $smarty;
+        $s = $this->searches[$this->search];
+        
+        $smarty->assign('filterMenu', $this->renderFilterMenu());
+        $smarty->assign('textfield', $this->getTextfield('search_filter', set_post($this->value), $s));
+        $smarty->assign('pid', $this->pid);
+    
+        return $smarty->fetch(get_template_path('filter.tpl'));
+
         switch ($this->theme) {
             case 'classic':
                 $content = "<table class='filter-wrapper' summary='" . _('Search filter') . "'><tr><td>" . $this->renderFilterMenu() . '</td><td>';
