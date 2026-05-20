@@ -144,18 +144,6 @@ class filter
         }
     }
 
-    public function getTextfield($tag, $value = '', $element = null)
-    {
-        global $smarty;
-        $smarty->assign('tag', $tag);
-        $smarty->assign('value', $value);
-        $smarty->assign('hasAutocomplete', $element && isset($element['autocomplete']));
-        $smarty->assign('frequency', $element['autocomplete']['frequency'] ?? '0.5');
-        $smarty->assign('characters', $element['autocomplete']['characters'] ?? '1');
-
-        return $smarty->fetch(get_template_path('filter_textfield.tpl'));
-    }
-
     public function getCurrentBase()
     {
         if (isset($this->search->base) && (string) $this->search->scope != 'auto') {
@@ -199,19 +187,16 @@ class filter
         global $smarty;
         $s = $this->searches[$this->search];
         
-        // aus render()
-        // $smarty->assign('filterMenu', $this->renderFilterMenu());
-        // $smarty->assign('textfield', $this->getTextfield('search_filter', set_post($this->value), $s));
         $smarty->assign('pid', $this->pid);
 
-        // aus renderFilterMenu()
+        // used by the filter menu
         $smarty->assign('xmlSearches', $this->xmlSearches);
         $smarty->assign('search', $this->search);
         $smarty->assign('userFilters', userFilter::getFilter($this->category));
         $smarty->assign('scopeMode', $this->scopeMode);
         $smarty->assign('scope', $this->scope);
 
-        // aus getTextfield()
+        // used by the textfield
         $smarty->assign('tag', 'search_filter');
         $smarty->assign('value', set_post($this->value));
         $smarty->assign('hasAutocomplete', isset($s['autocomplete']));
@@ -433,18 +418,6 @@ class filter
         }
 
         return $base;
-    }
-
-    public function renderFilterMenu()
-    {
-        global $smarty;
-        $smarty->assign('xmlSearches', $this->xmlSearches);
-        $smarty->assign('search', $this->search);
-        $smarty->assign('userFilters', userFilter::getFilter($this->category));
-        $smarty->assign('scopeMode', $this->scopeMode);
-        $smarty->assign('scope', $this->scope);
-        
-        return $smarty->fetch(get_template_path('filter_menu.tpl'));
     }
 
     public function getFixedFilters()

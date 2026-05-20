@@ -1,1 +1,0 @@
-<input class='filter_textfield' placeholder='{t}Search{/t}...' id='{$tag}' name='{$tag}' type='text' value='{$value}'>
