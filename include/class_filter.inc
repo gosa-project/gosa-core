@@ -199,9 +199,17 @@ class filter
         global $smarty;
         $s = $this->searches[$this->search];
         
-        $smarty->assign('filterMenu', $this->renderFilterMenu());
+        // aus render()
+        // $smarty->assign('filterMenu', $this->renderFilterMenu());
         $smarty->assign('textfield', $this->getTextfield('search_filter', set_post($this->value), $s));
         $smarty->assign('pid', $this->pid);
+
+        // aus renderFilterMenu()
+        $smarty->assign('xmlSearches', $this->xmlSearches);
+        $smarty->assign('search', $this->search);
+        $smarty->assign('userFilters', userFilter::getFilter($this->category));
+        $smarty->assign('scopeMode', $this->scopeMode);
+        $smarty->assign('scope', $this->scope);
     
         return $smarty->fetch(get_template_path('filter.tpl'));
     }
