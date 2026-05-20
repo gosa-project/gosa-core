@@ -204,29 +204,6 @@ class filter
         $smarty->assign('pid', $this->pid);
     
         return $smarty->fetch(get_template_path('filter.tpl'));
-
-        switch ($this->theme) {
-            case 'classic':
-                $content = "<table class='filter-wrapper' summary='" . _('Search filter') . "'><tr><td>" . $this->renderFilterMenu() . '</td><td>';
-                $content .= "<div class='search-filter'>" . $this->getTextfield('search_filter', set_post($this->value), $this->searches[$this->search]) . '</div>' .
-                    "&nbsp;<button class='search-filter' type='submit' title='" . _('Search') . "'>" . image('images/find.png') . '</button></td></tr></table>';
-                break;
-
-            default:
-                $s = $this->searches[$this->search];
-
-                $content = $this->renderFilterMenu();
-
-                $content .= "   <div class='search-field'>
-                                    " . $this->getTextfield('search_filter', set_post($this->value), $s) . "
-                                    <button class='btn' type='submit' title='" . _('Search') . "'>
-                                        <i class='material-icons md-18'>search</i>
-                                    </button>
-                                </div>";
-                break;
-        }
-        // Return meta data
-        return "<input type='hidden' name='FILTER_PID' value='" . $this->pid . "'>" . $content;
     }
 
     public function query()
