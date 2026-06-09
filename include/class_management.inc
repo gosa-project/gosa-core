@@ -287,8 +287,6 @@ abstract class management
      */
     protected function _getTabFooter()
     {
-        $theme = getThemeName();
-
         // Do not display tab footer for non tab objects
         if (!($this->tabObject instanceof tabs || $this->tabObject instanceof multi_plug)) {
             return "";
@@ -307,53 +305,13 @@ abstract class management
             return "";
         }
 
-        if ($theme == "default") {
-            $acl_mode = preg_match("/^[r]$/", $this->ui->get_category_permissions($this->ui->dn, "users"));
-        }
+        $acl_mode = preg_match("/^[r]$/", $this->ui->get_category_permissions($this->ui->dn, "users"));
+        $readOnly = isset($this->tabObject->read_only) && $this->tabObject->read_only == true || $acl_mode;
 
-        // In case an of locked entry, we may have opened a read-only tab.
-        $str = "";
-        if (isset($this->tabObject->read_only) && $this->tabObject->read_only == true || $acl_mode) {
-            switch ($theme) {
-                case 'classic':
-                    $str .= "<p style=\"text-align:right\">
-                                <button type=submit name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
-                            </p>";
-                    break;
-
-                default:
-                    $str .= "<div class='card-action'>
-                                <button class='btn-small primary' type='submit' name='edit_cancel'>" . msgPool::cancelButton() . "</button>
-                            </div>";
-                    break;
-            }
-            return $str;
-        } else {
-
-            // Display ok, (apply) and cancel buttons
-            switch ($theme) {
-                case 'classic':
-                    $str .= "<p style=\"text-align:right\">
-                                <button type=\"submit\" name=\"edit_finish\">" . msgPool::okButton() . "</button>\n&nbsp;\n";
-                    if ($this->displayApplyBtn) {
-                        $str .= " <button type=\"submit\" name=\"edit_apply\">" . msgPool::applyButton() . "</button>&nbsp;\n";
-                    }
-                    $str .= "     <button type=\"submit\" name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
-                            </p>";
-                    break;
-
-                default:
-                    $str .= " <div class='card-action'>
-                                <button class='btn-small primary' type=\"submit\" name=\"edit_finish\">" . msgPool::okButton() . "</button>";
-                    if ($this->displayApplyBtn) {
-                        $str .= " <button class='btn-small primary' type=\"submit\" name=\"edit_apply\">" . msgPool::applyButton() . "</button>";
-                    }
-                    $str .= "     <button class='btn-small primary' type=\"submit\" name=\"edit_cancel\">" . msgPool::cancelButton() . "</button>
-                            </div>";
-                    break;
-            }
-        }
-        return $str;
+        $smarty = get_smarty();
+        $smarty->assign("readOnly", $readOnly);
+        $smarty->assign("displayApplyBtn", $this->displayApplyBtn);
+        return $smarty->fetch(get_template_path('tabFooter.tpl'));
     }
 
     /*! \brief  Initiates the removal for the given entries
