@@ -38,7 +38,6 @@ class filter
     public $converter = null;
     public $pid;
     public $customConstraints = [];
-    public $autocompleters = [];
 
     public $theme;
 
@@ -144,37 +143,6 @@ class filter
         }
     }
 
-    public function getTextfield($tag, $value = '', $element = null)
-    {
-        switch ($this->theme) {
-            case 'classic':
-                $size = 30;
-                $maxlength = 30;
-                $result = "<input class='filter_textfield' placeholder='" . _('Search') . "...' id='$tag' name='$tag' type='text' size='$size' maxlength='{$maxlength}' value='" . $value . "'>";
-                if ($element && isset($element['autocomplete'])) {
-                    $frequency = '0.5';
-                    $characters = '1';
-                    if (isset($element['autocomplete']['frequency'])) {
-                        $frequency = $element['autocomplete']['frequency'];
-                    }
-                    if (isset($element['autocomplete']['characters'])) {
-                        $characters = $element['autocomplete']['characters'];
-                    }
-                    $result .= "<div id='autocomplete$tag' class='autocomplete'></div>" .
-                        "<script type='text/javascript'>" .
-                        "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });" .
-                        '</script>';
-
-                    $this->autocompleters[$tag] = $element;
-                }
-                break;
-            default:
-                $result = " <input class='filter_textfield' placeholder='" . _('Search') . "...' id='$tag' name='$tag' type='text' value='" . $value . "'>";
-                break;
-        }
-        return $result;
-    }
-
     public function getCurrentBase()
     {
         if (isset($this->search->base) && (string) $this->search->scope != 'auto') {
@@ -215,28 +183,26 @@ class filter
 
     public function render()
     {
-        switch ($this->theme) {
-            case 'classic':
-                $content = "<table class='filter-wrapper' summary='" . _('Search filter') . "'><tr><td>" . $this->renderFilterMenu() . '</td><td>';
-                $content .= "<div class='search-filter'>" . $this->getTextfield('search_filter', set_post($this->value), $this->searches[$this->search]) . '</div>' .
-                    "&nbsp;<button class='search-filter' type='submit' title='" . _('Search') . "'>" . image('images/find.png') . '</button></td></tr></table>';
-                break;
+        global $smarty;
+        $s = $this->searches[$this->search];
+        
+        $smarty->assign('pid', $this->pid);
 
-            default:
-                $s = $this->searches[$this->search];
+        // used by the filter menu
+        $smarty->assign('xmlSearches', $this->xmlSearches);
+        $smarty->assign('search', $this->search);
+        $smarty->assign('userFilters', userFilter::getFilter($this->category));
+        $smarty->assign('scopeMode', $this->scopeMode);
+        $smarty->assign('scope', $this->scope);
 
-                $content = $this->renderFilterMenu();
-
-                $content .= "   <div class='search-field'>
-                                    " . $this->getTextfield('search_filter', set_post($this->value), $s) . "
-                                    <button class='btn' type='submit' title='" . _('Search') . "'>
-                                        <i class='material-icons md-18'>search</i>
-                                    </button>
-                                </div>";
-                break;
-        }
-        // Return meta data
-        return "<input type='hidden' name='FILTER_PID' value='" . $this->pid . "'>" . $content;
+        // used by the textfield
+        $smarty->assign('tag', 'search_filter');
+        $smarty->assign('value', set_post($this->value));
+        $smarty->assign('hasAutocomplete', isset($s['autocomplete']));
+        $smarty->assign('frequency', $s['autocomplete']['frequency'] ?? '0.5');
+        $smarty->assign('characters', $s['autocomplete']['characters'] ?? '1');
+    
+        return $smarty->fetch(get_template_path('filter.tpl'));
     }
 
     public function query()
@@ -451,137 +417,6 @@ class filter
         }
 
         return $base;
-    }
-
-    public function renderFilterMenu()
-    {
-        $script = "";
-
-        switch ($this->theme) {
-            case 'classic':
-                // Load shortcut
-                $result = "<ul class='level1' id='filter-root'><li><a href='#'>" . image('images/filter.png') . image('images/lists/sort-down.png') . '</a>';
-
-                // Build ul/li list
-                $separator = " style='border-top:1px solid #AAA' ";
-                $result .= "<ul class='level2'>";
-
-                // Build in filters
-                foreach ($this->xmlSearches as $tag => $conf) {
-                    $label = htmlentities(_($conf['label']), ENT_COMPAT, 'UTF-8');
-                    if ($tag == $this->search) {
-                        $result .= "<li><a href='#'>" . image('images/checked.png') . '&nbsp;' . $label . '</a></li>';
-                    } else {
-                        $result .= "<li><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>" . image('images/empty.png') . '&nbsp;' . $label . '</a></li>';
-                    }
-                }
-
-                // User defined filters
-                $first = true;
-                foreach (userFilter::getFilter($this->category) as $tag => $conf) {
-                    if ($tag == $this->search) {
-                        $result .= '<li' . ($first ? $separator : '') . "><a href='#'>" . image('images/checked.png') . '&nbsp;' . _($conf['description']) . '</a></li>';
-                    } else {
-                        $result .= '<li' . ($first ? $separator : '') . "><a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>" . image('images/empty.png') . '&nbsp;' . _($conf['description']) . '</a></li>';
-                    }
-
-                    $first = false;
-                }
-
-                // Render scope if set to auto
-                if ($this->scopeMode == 'auto') {
-                    $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>" . ($this->scope == 'one' ? image('images/empty.png') : image('images/checked.png')) . '&nbsp;' . _('Search in subtrees') . '</a></li>';
-                }
-
-                // Edit filter menu
-                $result .= "<li$separator><a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>" . image('images/configure.png') . '&nbsp;' . _('Edit filters') . '...</a></li>';
-
-                $result .= '</ul>';
-
-                $script = '<script type="text/javascript" language="JavaScript">var menu2; menu2= new Menu("filter-root", "menu2", configMenu)</script>';
-                break;
-            default:
-                $result = " <a class='dropdown-filter' data-target='filter-dropdown'>
-                                <i class='material-icons'>filter_alt</i>
-                                <i class='material-icons'>arrow_drop_down</i>
-                            </a>";
-
-                $separator = "class='divider' tabindex='-1'";
-
-                $result .= "<ul class='dropdown-content' id='filter-dropdown'>
-                                <li>
-                            <ul class='collection'>";
-
-                // Build in filters
-                foreach ($this->xmlSearches as $tag => $conf) {
-                    $label = htmlentities(_($conf['label']), ENT_COMPAT, 'UTF-8');
-                    if ($tag == $this->search) {
-                        $result .= " <li class='collection-item'>
-                                        <a href='#' class='active'>
-                                            " . image("<i class='material-icons'>checked</i>") . '
-                                            ' . $label . '
-                                        </a>
-                                    </li>';
-                    } else {
-                        $result .= " <li class='collection-item'>
-                                        <a href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'>
-                                            " . $label . '
-                                        </a>
-                                    </li>';
-                    }
-                }
-
-                // User defined filters
-                $first = true;
-                foreach (userFilter::getFilter($this->category) as $tag => $conf) {
-                    if ($tag == $this->search) {
-                        $result .= "<li " . ($first ? $separator : '') . "></li>
-                                    <li class='collection-item'>
-                                        <div>
-                                            " . _($conf['description']) . "
-                                            <a class='secondary-content' href='#'>
-                                                " . image("<i class='material-icons md-18'>checked</i>") . '
-                                            </a>
-                                        </div>
-                                    </li>';
-                    } else {
-                        $result .= "<li " . ($first ? $separator : '') . "></li>
-                                    <li class='collection-item'>
-                                        <div>
-                                            " . _($conf['description']) . "
-                                            <a class='secondary-content' href='#' onClick='\$(\"act\").value= \"filter-$tag\";\$(\"exec_act\").click();'></a>
-                                        </div>
-                                    </li>";
-                    }
-                    $first = false;
-                }
-
-                // Render scope if set to auto
-                if ($this->scopeMode == 'auto') {
-                    $result .= "<li $separator></li>
-                                <li class='collection-item'>
-                                    <a href='#' class='search-subtree" . ($this->scope == 'one' ? " '" : " active'") . " onClick='\$(\"act\").value= \"toggle-subtree\";\$(\"exec_act\").click();'>
-                                        " . ($this->scope == 'one' ? '' : "<i class='material-icons left'>checked</i>") . "
-                                        " . _('Search in subtrees') . "
-                                    </a>
-                                </li>";
-                }
-
-                // Edit filter menu
-                $result .= "<li $separator></li>
-                                <li class='collection-item'>
-                                    <a href='#' onClick='\$(\"act\").value= \"config-filter\";\$(\"exec_act\").click();'>
-                                        <i class='material-icons'>settings</i>
-                                    " . _('Edit filters') . "...
-                                    </a>
-                                </li>";
-
-                $result .= "</ul></li></ul>";
-
-                $gridClass = "class='filtermenu'";
-                break;
-        }
-        return "<div $gridClass id='filtermenu'>" . $result . "</li></ul></div>$script";
     }
 
     public function getFixedFilters()
