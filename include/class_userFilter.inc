@@ -2,10 +2,10 @@
 
 class userFilter extends plugin
 {
-    public $pathTitle= "Filter";
+    public $pathTitle = "Filter";
 
     public $filters = array();
-  
+
     public $objectclasses = array('gosaProperties');
     public $attributes = array('gosaUserDefinedFilter');
     public $gosaUserDefinedFilter = array();
@@ -24,8 +24,8 @@ class userFilter extends plugin
         }
         return(session::get('userFilter::__constructingAvailable'));
     }
-  
- 
+
+
     /*! \brief  Initiates the filter editing dialog.
      */
     public function __construct($config, $listing)
@@ -34,20 +34,20 @@ class userFilter extends plugin
         $ui = get_userinfo();
         plugin::__construct($config, $ui->dn);
         $this->listing = &$listing;
-        $filter= $this->listing->getFilter();
+        $filter = $this->listing->getFilter();
 
         // Load list of filters
         if (isset($this->attrs['gosaUserDefinedFilter'])) {
-            for ($i=0; $i< $this->attrs['gosaUserDefinedFilter']['count']; $i++) {
+            for ($i = 0; $i < $this->attrs['gosaUserDefinedFilter']['count']; $i++) {
                 $tmp = userFilter::explodeFilterString($this->attrs['gosaUserDefinedFilter'][$i]);
                 if (isset($tmp['tag'])) {
-                    $this->filters[$tmp['tag']]= $tmp;
+                    $this->filters[$tmp['tag']] = $tmp;
                 }
             }
         }
 
         // Create the filter list
-        $this->filterWidget= new sortableListing($this->filters, $this->convertFilterList());
+        $this->filterWidget = new sortableListing($this->filters, $this->convertFilterList());
         $this->filterWidget->setDeleteable(true);
         $this->filterWidget->setEditable(true);
         $this->filterWidget->setWidth("100%");
@@ -57,7 +57,7 @@ class userFilter extends plugin
         $this->filterWidget->setAcl($ui->get_permissions($ui->dn, 'users/user', 'gosaUserDefinedFilter'));
     }
 
-  
+
     /*! \brief    Parses a filter string into an array.
      */
     public static function explodeFilterString($filterStr)
@@ -98,7 +98,7 @@ class userFilter extends plugin
 
         return($tmp);
     }
-  
+
 
     /*! \brief    Converts the list of filters ($this->filters) into data which is useable
      *             for the sortableList object ($this->filterWidget).
@@ -109,7 +109,7 @@ class userFilter extends plugin
         $data = array();
         foreach ($this->filters as $name => $filter) {
             $data[$name] = array('data' =>
-          array(
+            array(
             $filter['parent'],
             $filter['tag'],
             htmlentities($filter['description'], ENT_COMPAT, 'UTF-8'),
@@ -126,7 +126,7 @@ class userFilter extends plugin
     public function execute()
     {
         plugin::execute();
-    
+
         // Let the filter widget update itself
         $this->filterWidget->update();
 
@@ -150,12 +150,11 @@ class userFilter extends plugin
                     $msgs = array(msgPool::duplicated(_("Name")));
                     msg_dialog::displayChecks($msgs);
                 } else {
-
           // Remove old entry if filter was renamed
                     if ($orig_name != "" && isset($this->filters[$orig_name])) {
                         unset($this->filters[$orig_name]);
                     }
-          
+
                     // Now append the new filter object.
                     $this->filters[$new_name] = $this->dialog->save();
                     $this->dialog = null;
@@ -169,21 +168,21 @@ class userFilter extends plugin
         $this->filterWidget->save_object();
         $action = $this->filterWidget->getAction();
         if ($action['action'] == 'edit' && count($action['targets']) == 1) {
-            $key= $this->filterWidget->getKey($action['targets'][0]);
+            $key = $this->filterWidget->getKey($action['targets'][0]);
             if (isset($this->filters[$key])) {
-                $this->dialog=new userFilterEditor($this->filters[$key], $this->listing);
+                $this->dialog = new userFilterEditor($this->filters[$key], $this->listing);
             }
         }
 
         // Act on new requests
         if (isset($_POST['addFilter'])) {
-            $this->dialog=new userFilterEditor(array(), $this->listing);
+            $this->dialog = new userFilterEditor(array(), $this->listing);
         }
 
         // Act on remove requests
         $action = $this->filterWidget->getAction();
         if ($action['action'] == 'delete' && count($action['targets']) == 1) {
-            $key= $this->filterWidget->getKey($action['targets']);
+            $key = $this->filterWidget->getKey($action['targets']);
             if (isset($this->filters[$key])) {
                 unset($this->filters[$key]);
                 $this->filterWidget->deleteEntry($key);
@@ -207,22 +206,22 @@ class userFilter extends plugin
     /*! \brief    Returns user defined filter for a given list of categories,
      *             if no categories were specified all enabled filters will be returned.
      */
-    public static function getFilter($category=array())
+    public static function getFilter($category = array())
     {
         global $config;
 
-        $ldap=$config->get_ldap_link();
+        $ldap = $config->get_ldap_link();
         $ui = get_userinfo();
         $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaProperties)(gosaUserDefinedFilter=*))", array('gosaUserDefinedFilter'));
         $filter = array();
         while ($attrs = $ldap->fetch()) {
-            for ($i=0; $i < $attrs['gosaUserDefinedFilter']['count']; $i++) {
+            for ($i = 0; $i < $attrs['gosaUserDefinedFilter']['count']; $i++) {
                 $tmp = userFilter::explodeFilterString($attrs['gosaUserDefinedFilter'][$i]);
                 if (!isset($tmp['tag'])) {
                     continue;
                 }
-          
+
                 // Remove line breaks from the filter, which may were added for better reading.
                 foreach ($tmp['query'] as $key => $query) {
                     $c = preg_split('/\n/', $query['filter']);
@@ -231,12 +230,12 @@ class userFilter extends plugin
                     }
                     $tmp['query'][$key]['filter'] = mb_convert_encoding(implode($c), 'UTF-8');
                 }
- 
+
                 // The filter is visible if it is shared or if is one of our own creations.
                 //  ... and enabled.
                 $visible = in_array_strict('enable', $tmp['flags']) &&
-          ($attrs['dn'] == $ui->dn || in_array_strict('share', $tmp['flags']));
-         
+                ($attrs['dn'] == $ui->dn || in_array_strict('share', $tmp['flags']));
+
                 // Add filter if it matches the category list
                 if ($visible && (count($category) == 0 || array_intersect($category, $tmp['categories']))) {
                     $filter[$tmp['tag']] = $tmp;
@@ -254,17 +253,17 @@ class userFilter extends plugin
         // Build up new list of filters
         $attrs = array();
         foreach ($this->filters as $filter) {
-            $tmp = $filter['parent'].";";
-            $tmp.= implode(',', $filter['categories']).";";
-            $tmp.= $filter['tag'].";";
-            $tmp.= base64_encode($filter['description']).";";
+            $tmp = $filter['parent'] . ";";
+            $tmp .= implode(',', $filter['categories']) . ";";
+            $tmp .= $filter['tag'] . ";";
+            $tmp .= base64_encode($filter['description']) . ";";
 
             // Add queries
             foreach ($filter['query'] as $query) {
-                $tmp.= base64_encode($query['filter']).":".$query['backend'].",";
+                $tmp .= base64_encode($query['filter']) . ":" . $query['backend'] . ",";
             }
-            $tmp = trim($tmp, ",").";";
-            $tmp.= implode(',', $filter['flags']);
+            $tmp = trim($tmp, ",") . ";";
+            $tmp .= implode(',', $filter['flags']);
             $attrs[] = $tmp;
         }
         $this->gosaUserDefinedFilter = $attrs;
@@ -274,15 +273,15 @@ class userFilter extends plugin
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->dn);
         $ldap->modify($this->attrs);
-    
-        new log("modify", "users/".get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
+
+        new log("modify", "users/" . get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
 
         if (!$ldap->success()) {
             msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
         }
     }
 
-  
+
     /*! \brief    Do not save any posted values here.
      */
     public function save_object()

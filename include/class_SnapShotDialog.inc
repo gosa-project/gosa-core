@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -24,15 +25,15 @@
 class SnapShotDialog extends plugin
 {
     var $config;
-    var $attributes= array("CurrentDescription");
-    var $CurrentDescription= "";
-    var $parent= NULL;
-    var $display_restore_dialog= false;		      /* Defines the restore mode */
-    var $display_all_removed_objects= false; 		/* Specifies which objects will be listed, all
+    var $attributes = array("CurrentDescription");
+    var $CurrentDescription = "";
+    var $parent = null;
+    var $display_restore_dialog = false;           /* Defines the restore mode */
+    var $display_all_removed_objects = false;        /* Specifies which objects will be listed, all
                                                        snapshots for a single entry or all snapshots
                                                        of already deleted objects  */
-    var $dialog= true;
-    var $del_dn= "";
+    var $dialog = true;
+    var $del_dn = "";
     var $ui;
     var $acl;
     var $dns = array();
@@ -42,9 +43,9 @@ class SnapShotDialog extends plugin
 
     function __construct(&$config, $dn, &$parent)
     {
-        plugin::__construct($config,$dn);
-        $this->parent 	= &$parent;
-        $this->ui 		  = get_userinfo();
+        plugin::__construct($config, $dn);
+        $this->parent   = &$parent;
+        $this->ui         = get_userinfo();
 
         // Prepare lists
         $this->snapList = new sortableListing();
@@ -55,7 +56,6 @@ class SnapShotDialog extends plugin
         $this->snapList->setHeader(array(_("Date"), _("Name") ));
         $this->snapList->setColspecs(array('140px','*','60px'));
         $this->snapList->setDefaultSortColumn(0);
-
     }
 
 
@@ -74,49 +74,48 @@ class SnapShotDialog extends plugin
 
         $ui = get_userinfo();
         $once = true;
-        foreach($_POST as $name => $value){
+        foreach ($_POST as $name => $value) {
             $value = get_post($name);
-            if((preg_match("/^RemoveSnapShot_/",$name)) && ($once)){
+            if ((preg_match("/^RemoveSnapShot_/", $name)) && ($once)) {
                 $once = false;
-                $entry = preg_replace("/^RemoveSnapShot_/","",$name);
+                $entry = preg_replace("/^RemoveSnapShot_/", "", $name);
                 $entry = base64_decode($entry);
                 $found = false;
-                foreach($this->last_list as $t_stamp => $obj){
-                    if($obj['dn'] == $entry){
+                foreach ($this->last_list as $t_stamp => $obj) {
+                    if ($obj['dn'] == $entry) {
                         $found = true;
                         break;
                     }
                 }
 
-                if($found){
-                    $this->del_dn 	= $entry;
-                    $smarty= get_smarty();
+                if ($found) {
+                    $this->del_dn   = $entry;
+                    $smarty = get_smarty();
                     $smarty->assign("info", sprintf(_("You are about to delete the snapshot %s."), bold(LDAP::fix($this->del_dn))));
-                    return($smarty->fetch (get_template_path('removeSnapshots.tpl')));
+                    return($smarty->fetch(get_template_path('removeSnapshots.tpl')));
                 }
             }
         }
 
         /* We must restore a snapshot */
 
-        if($this->display_restore_dialog){
-
+        if ($this->display_restore_dialog) {
             /* Should we only display all snapshots of already deleted objects
                or the snapshots for the given object dn */
             $res = array();
             $tmp = array();
             $handler = new SnapshotHandler($this->config);
 
-            if($this->display_all_removed_objects){
-                if(count($this->snap_shot_bases)){
-                    foreach($this->snap_shot_bases as $dn){
-                        $tmp = array_merge($tmp,$handler->getAllDeletedSnapshots($dn,true));
+            if ($this->display_all_removed_objects) {
+                if (count($this->snap_shot_bases)) {
+                    foreach ($this->snap_shot_bases as $dn) {
+                        $tmp = array_merge($tmp, $handler->getAllDeletedSnapshots($dn, true));
                     }
-                }else{
-                    $tmp = $handler->getAllDeletedSnapshots($this->snap_shot_bases,true);
+                } else {
+                    $tmp = $handler->getAllDeletedSnapshots($this->snap_shot_bases, true);
                 }
-            }else{
-                $tmp = $handler->Available_SnapsShots($this->dn,true);
+            } else {
+                $tmp = $handler->Available_SnapsShots($this->dn, true);
             }
 
             $this->snapList->setAcl('rwcdm');
@@ -124,8 +123,7 @@ class SnapShotDialog extends plugin
             $list_of_elements = array();
 
             /* Walk through all entries and setup the display text */
-            foreach($tmp as $key => $entry){
-
+            foreach ($tmp as $key => $entry) {
                 /* Check permissions */
                 $TimeStamp = $entry['gosaSnapshotTimestamp'][0];
                 $list_of_elements[$TimeStamp] = $entry;
@@ -138,30 +136,30 @@ class SnapShotDialog extends plugin
             $this->last_list = $list_of_elements;
 
             $data = $lData = array();
-            foreach($list_of_elements as $entry){
-                $actions=  image('images/lists/restore.png','RestoreSnapShot_%KEY',_("Restore snapshot"));
-                $actions.= image('images/lists/trash.png','RemoveSnapShot_%KEY',_("Delete snapshot"));
-                $time_stamp 	= date(_("Y-m-d, H:i:s"),preg_replace("/\-.*$/","",$entry['gosaSnapshotTimestamp'][0]));
-                $display_data 	= $entry['description'][0];
+            foreach ($list_of_elements as $entry) {
+                $actions =  image('images/lists/restore.png', 'RestoreSnapShot_%KEY', _("Restore snapshot"));
+                $actions .= image('images/lists/trash.png', 'RemoveSnapShot_%KEY', _("Delete snapshot"));
+                $time_stamp     = date(_("Y-m-d, H:i:s"), preg_replace("/\-.*$/", "", $entry['gosaSnapshotTimestamp'][0]));
+                $display_data   = $entry['description'][0];
                 $data[$entry['dn']] = $entry;
-                $lData[$entry['dn']] = array('data'=>
+                $lData[$entry['dn']] = array('data' =>
                         array(
                             $time_stamp,
                             htmlentities(utf8_decode(LDAP::fix($display_data))),
-                            str_replace("%KEY",base64_encode($entry['dn']), $actions)));
+                            str_replace("%KEY", base64_encode($entry['dn']), $actions)));
             }
 
             $this->snapList->setListData($data, $lData);
             $this->snapList->update();
-            $smarty->assign("SnapShotList",$this->snapList->render());
-            $smarty->assign("CountSnapShots",count($list_of_elements));
+            $smarty->assign("SnapShotList", $this->snapList->render());
+            $smarty->assign("CountSnapShots", count($list_of_elements));
         }
 
-        $smarty->assign("restore_deleted",$this->display_all_removed_objects);
-        $smarty->assign("RestoreMode",$this->display_restore_dialog);
-        $smarty->assign("CurrentDate",date(_("Y-m-d, H:i:s")));
-        $smarty->assign("CurrentDN",LDAP::fix($this->dn));
-        $smarty->assign("CurrentDescription",set_post($this->CurrentDescription));
+        $smarty->assign("restore_deleted", $this->display_all_removed_objects);
+        $smarty->assign("RestoreMode", $this->display_restore_dialog);
+        $smarty->assign("CurrentDate", date(_("Y-m-d, H:i:s")));
+        $smarty->assign("CurrentDN", LDAP::fix($this->dn));
+        $smarty->assign("CurrentDescription", set_post($this->CurrentDescription));
         return($smarty->fetch(get_template_path("snapshotdialog.tpl")));
     }
 
@@ -169,9 +167,9 @@ class SnapShotDialog extends plugin
     function check()
     {
         $message = plugin::check();
-        if(!$this->display_restore_dialog){
-            if(empty($this->CurrentDescription)){
-                $message[]= msgPool::invalid(_("Description"));
+        if (!$this->display_restore_dialog) {
+            if (empty($this->CurrentDescription)) {
+                $message[] = msgPool::invalid(_("Description"));
             }
         }
         return($message);
@@ -181,8 +179,8 @@ class SnapShotDialog extends plugin
     function save_object()
     {
         //        plugin::save_object();
-        foreach($this->attributes as $name){
-            if(isset($_POST[$name])){
+        foreach ($this->attributes as $name) {
+            if (isset($_POST[$name])) {
                 $this->$name = get_post($name);
             }
         }
@@ -190,4 +188,3 @@ class SnapShotDialog extends plugin
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

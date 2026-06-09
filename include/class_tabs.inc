@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -22,183 +23,190 @@
 
 class tabs
 {
-  var $dn;
-  var $config;
-  var $acl;
-  var $is_template;
-  var $is_new= FALSE;
+    var $dn;
+    var $config;
+    var $acl;
+    var $is_template;
+    var $is_new = false;
 
-  var $last= "";
-  var $current= "";
-  var $disabled= "";
-  var $by_name= array();
-  var $by_object= array();
-  var $SubDialog = false;
-  var $acl_category;
-  var $multiple_support_active = FALSE;
-  var $isPluginModified = FALSE;
+    var $last = "";
+    var $current = "";
+    var $disabled = "";
+    var $by_name = array();
+    var $by_object = array();
+    var $SubDialog = false;
+    var $acl_category;
+    var $multiple_support_active = false;
+    var $isPluginModified = false;
 
-  var $parent = null; // A parent object if available, e.g. a management class.
+    var $parent = null; // A parent object if available, e.g. a management class.
 
-  var $read_only = FALSE; // Used when the entry is opened as "readonly" due to locks.
-  var $hide_refs = FALSE;
-  var $hide_acls = FALSE;
+    var $read_only = false; // Used when the entry is opened as "readonly" due to locks.
+    var $hide_refs = false;
+    var $hide_acls = false;
 
   // Normally 'save_object()' is called automatically when 'execute()' is called, but
   //  sometimes we do not want this behaviour, e.g. when a tab is opened readonly.
   // If we call save_object for a 'read-only' tab, values may get lost.
-  var $skip_save_object = FALSE;
+    var $skip_save_object = false;
 
 
   /*! \brief    Enables or disables to automatic call to 'save_object' for a plugin,
    *             when 'execute()' is called.
    */
-  function enableAutoSaveObject($bool)
-  {
-    $this->skip_save_object = ($bool == FALSE);
-  }
-
-
-  function __construct(&$config, $data, $dn, $acl_category= "", $hide_refs = FALSE, $hide_acls = FALSE)
-  {
-    /* Save dn */
-    $this->dn= $dn;
-    $this->config= &$config;
-    $this->hide_refs = $hide_refs;
-    $this->hide_acls = $hide_acls;
-
-
-    if(!count($data)) {
-      $data[] = array("CLASS" => 'plugin',"NAME" => 'Error');
-      msg_dialog::display(_("Error"),
-        sprintf(_("No plugin definition for %s found: please check the configuration file!"), bold(get_class($this))),
-        "ERROR_DIALOG");
+    function enableAutoSaveObject($bool)
+    {
+        $this->skip_save_object = ($bool == false);
     }
 
-    $baseobject= NULL;
-    $this->acl_category = $acl_category;
-    foreach ($data as &$tab){
 
-      if (!plugin_available($tab['CLASS'])){
-        if($this->config->boolValueIsTrue("core","developmentMode")){
-            trigger_error(sprintf("Unknown class %s!", bold($tab['CLASS'])));
+    function __construct(&$config, $data, $dn, $acl_category = "", $hide_refs = false, $hide_acls = false)
+    {
+      /* Save dn */
+        $this->dn = $dn;
+        $this->config = &$config;
+        $this->hide_refs = $hide_refs;
+        $this->hide_acls = $hide_acls;
+
+
+        if (!count($data)) {
+            $data[] = array("CLASS" => 'plugin',"NAME" => 'Error');
+            msg_dialog::display(
+                _("Error"),
+                sprintf(_("No plugin definition for %s found: please check the configuration file!"), bold(get_class($this))),
+                "ERROR_DIALOG"
+            );
         }
-      	continue;
-      }
-      if ($this->current == "")  $this->current= $tab['CLASS'];
 
-      $this->by_name[$tab['CLASS']]= $tab['NAME'];
+        $baseobject = null;
+        $this->acl_category = $acl_category;
+        foreach ($data as &$tab) {
+            if (!plugin_available($tab['CLASS'])) {
+                if ($this->config->boolValueIsTrue("core", "developmentMode")) {
+                    trigger_error(sprintf("Unknown class %s!", bold($tab['CLASS'])));
+                }
+                continue;
+            }
+            if ($this->current == "") {
+                $this->current = $tab['CLASS'];
+            }
 
-      if ($baseobject === NULL){
-        $baseobject= new $tab['CLASS']($this->config, $this->dn);
-        $baseobject->enable_CSN_check();
-        $this->by_object[$tab['CLASS']]= $baseobject;
-      } else {
-        $this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn, $baseobject);
-      }
+            $this->by_name[$tab['CLASS']] = $tab['NAME'];
 
-      $this->read_only |= $this->by_object[$tab['CLASS']]->read_only;
-      $this->by_object[$tab['CLASS']]->parent= &$this;
-      $this->by_object[$tab['CLASS']]->set_acl_category($this->acl_category);
+            if ($baseobject === null) {
+                $baseobject = new $tab['CLASS']($this->config, $this->dn);
+                $baseobject->enable_CSN_check();
+                $this->by_object[$tab['CLASS']] = $baseobject;
+            } else {
+                $this->by_object[$tab['CLASS']] = new $tab['CLASS']($this->config, $this->dn, $baseobject);
+            }
+
+            $this->read_only |= $this->by_object[$tab['CLASS']]->read_only;
+            $this->by_object[$tab['CLASS']]->parent = &$this;
+            $this->by_object[$tab['CLASS']]->set_acl_category($this->acl_category);
+        }
+
+      // Try to set the current tab to the posted value
+        if (isset($_GET['pluginTab'])) {
+            $tab = $_GET['pluginTab'];
+            if (isset($this->by_name[$tab])) {
+                $this->current = $tab;
+            }
+        }
     }
-
-    // Try to set the current tab to the posted value
-    if(isset($_GET['pluginTab'])){
-        $tab = $_GET['pluginTab'];
-        if(isset($this->by_name[$tab])) $this->current = $tab;
-    }
-  }
 
 
   /*! \brief Reinitializes the tab classes with fresh ldap values.
              This maybe usefull if for example the apply button was pressed.
    */
-  function re_init()
-  {
-    $baseobject= NULL;
-    foreach($this->by_object as $name => $object){
-      $class = get_class($object);
-      if(in_array_strict($class,array("reference","acl"))) continue;
-      if ($baseobject === NULL){
-        $baseobject= new $class($this->config, $this->dn);
-        $baseobject->enable_CSN_check();
-        $this->by_object[$name]= $baseobject;
-      } else {
-        $this->by_object[$name]= new $class($this->config, $this->dn, $baseobject);
-      }
-      $this->by_object[$name]->parent= &$this;
-      $this->by_object[$name]->set_acl_category($this->acl_category);
-    }
-  }
-
-
-  function execute()
-  {
-    $theme = getThemeName();
-
-    // Ensure that the currently selected tab is valid.
-    if(!isset($this->by_name[$this->current])) {
-      $this->current = key($this->by_name);
-    }
-
-    pathNavigator::registerPlugin($this);
-
-    // Rotate current to last
-    $this->last= $this->current;
-
-    // Look for pressed tab button
-    foreach ($this->by_object as $class => &$obj){
-      if (isset($_POST[$class]) || (isset($_POST['arg']) && $_POST['arg'] == "$class")){
-        $this->current= $class;
-        break;
-      }
-    }
-
-    // Save last tab object
-    if(!$this->skip_save_object){
-        if ($this->last == $this->current){
-          $this->save_object(TRUE);
-        } else {
-          $this->save_object(FALSE);
+    function re_init()
+    {
+        $baseobject = null;
+        foreach ($this->by_object as $name => $object) {
+            $class = get_class($object);
+            if (in_array_strict($class, array("reference","acl"))) {
+                continue;
+            }
+            if ($baseobject === null) {
+                $baseobject = new $class($this->config, $this->dn);
+                $baseobject->enable_CSN_check();
+                $this->by_object[$name] = $baseobject;
+            } else {
+                $this->by_object[$name] = new $class($this->config, $this->dn, $baseobject);
+            }
+            $this->by_object[$name]->parent = &$this;
+            $this->by_object[$name]->set_acl_category($this->acl_category);
         }
     }
 
 
+    function execute()
+    {
+        $theme = getThemeName();
 
-    /* If multiple edit is enabled for this tab,
+      // Ensure that the currently selected tab is valid.
+        if (!isset($this->by_name[$this->current])) {
+            $this->current = key($this->by_name);
+        }
+
+        pathNavigator::registerPlugin($this);
+
+      // Rotate current to last
+        $this->last = $this->current;
+
+      // Look for pressed tab button
+        foreach ($this->by_object as $class => &$obj) {
+            if (isset($_POST[$class]) || (isset($_POST['arg']) && $_POST['arg'] == "$class")) {
+                $this->current = $class;
+                break;
+            }
+        }
+
+      // Save last tab object
+        if (!$this->skip_save_object) {
+            if ($this->last == $this->current) {
+                $this->save_object(true);
+            } else {
+                $this->save_object(false);
+            }
+        }
+
+
+
+      /* If multiple edit is enabled for this tab,
        we have tho display different templates */
-    if(!$this->multiple_support_active){
-      $display= $this->by_object[$this->current]->execute();
-    }else{
-      $display= $this->by_object[$this->current]->multiple_execute();
-    }
+        if (!$this->multiple_support_active) {
+            $display = $this->by_object[$this->current]->execute();
+        } else {
+            $display = $this->by_object[$this->current]->multiple_execute();
+        }
 
-    $tabs= $this->gen_tabs();
+        $tabs = $this->gen_tabs();
 
-    if($this->is_modal_dialog()){
-        switch ($theme) {
-          case 'classic':
-            $display = "<div class='plugin'>
+        if ($this->is_modal_dialog()) {
+            switch ($theme) {
+                case 'classic':
+                    $display = "<div class='plugin'>
                           {$display}
                         </div>";
-            break;
+                    break;
 
-          default:
-            $display = "{$display}";
-            break;
-        }
-    }else{
-        switch ($theme) {
-          case 'classic':
-            $display = "{$tabs}
+                default:
+                    $display = "{$display}";
+                    break;
+            }
+        } else {
+            switch ($theme) {
+                case 'classic':
+                    $display = "{$tabs}
                         <input type='hidden' name='arg' value=''>
                         <div class='tab-content'>
                           {$display}
                         </div>";
-            break;
+                    break;
 
-          default:
-            $display = "<div class='object-info'>
+                default:
+                    $display = "<div class='object-info'>
                           <div class='card-tabs'>
                             {$tabs}
                           </div>
@@ -207,375 +215,401 @@ class tabs
                             {$display}
                           </div>
                         </div>";
-            break;
+                    break;
+            }
+        }
+
+      // Detect if we've modifications right now.
+      // - A plugin state has to be changed, this is not a goo solution, but
+      //   currently it does what we want.
+      //   (It would be better to ask the plugins if something has changed)
+        $this->isPluginModified |= isset($_POST['modify_state']);
+
+      // - Capture the plugins modification status.
+        foreach ($this->by_name as $class => $name) {
+            $this->isPluginModified |= (isset($this->by_object[$class]->is_modified)) && $this->by_object[$class]->is_modified;
+        }
+        $display = "<input type='hidden' id='pluginModified' name='pluginModified' value='{$this->isPluginModified}'>" . $display;
+
+        return ($display);
+    }
+
+    function save_object($save_current = false)
+    {
+      /* Save last tab */
+        if ($this->last != "") {
+            @DEBUG(
+                DEBUG_TRACE,
+                __LINE__,
+                __FUNCTION__,
+                __FILE__,
+                $this->last,
+                "Saving"
+            );
+
+            if (!$this->multiple_support_active) {
+                  $this->by_object[$this->last]->save_object();
+            } else {
+                $this->by_object[$this->last]->multiple_save_object();
+            }
+        }
+
+      /* Skip if curent and last are the same object */
+        if ($this->last == $this->current) {
+            return;
+        }
+
+        $obj = @$this->by_object[$this->current];
+        $this->disabled = $obj->parent->disabled;
+
+        if ($save_current) {
+            @DEBUG(
+                DEBUG_TRACE,
+                __LINE__,
+                __FUNCTION__,
+                __FILE__,
+                $this->current,
+                "Saving (current)"
+            );
+
+            if (!$this->multiple_support_active) {
+                $obj->save_object();
+            } else {
+                $obj->multiple_save_object();
+            }
         }
     }
 
-    // Detect if we've modifications right now.
-    // - A plugin state has to be changed, this is not a goo solution, but
-    //   currently it does what we want.
-    //   (It would be better to ask the plugins if something has changed)
-    $this->isPluginModified |= isset($_POST['modify_state']);
 
-    // - Capture the plugins modification status.
-    foreach ($this->by_name as $class => $name){
-        $this->isPluginModified |= (isset($this->by_object[$class]->is_modified)) && $this->by_object[$class]->is_modified;
-    }
-    $display="<input type='hidden' id='pluginModified' name='pluginModified' value='{$this->isPluginModified}'>".$display;
-
-    return ($display);
-  }
-
-  function save_object($save_current= FALSE)
-  {
-    /* Save last tab */
-    if ($this->last != ""){
-      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
-          $this->last, "Saving");
-
-      if(!$this->multiple_support_active){
-        $this->by_object[$this->last]->save_object ();
-      }else{
-        $this->by_object[$this->last]->multiple_save_object();
-      }
+    function is_modal_dialog()
+    {
+        return($this->by_object[$this->current]->is_modal_dialog());
     }
 
-    /* Skip if curent and last are the same object */
-    if ($this->last == $this->current){
-      return;
-    }
+    function gen_tabs()
+    {
+        $theme = getThemeName();
 
-    $obj= @$this->by_object[$this->current];
-    $this->disabled= $obj->parent->disabled;
+        if ($this->is_modal_dialog()) {
+            return("");
+        }
 
-    if ($save_current){
-      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
-          $this->current, "Saving (current)");
+        switch ($theme) {
+            case 'classic':
+                $display = "<div class='tabs'><ul>";
+                break;
 
-      if(!$this->multiple_support_active){
-        $obj->save_object();
-      }else{
-        $obj->multiple_save_object();
-      }
-    }
-  }
+            default:
+                $display = "<div class='row'><div class='col s12'><ul class='tabs'>";
+                break;
+        }
 
+        $firstTab = true;
+        $tabCount = count($this->by_name);
+        $currentTab = 0;
 
-  function is_modal_dialog()
-  {
-    return($this->by_object[$this->current]->is_modal_dialog());
-  }
+        foreach ($this->by_name as $class => $name) {
+          // Shorten string if its too long for the tab headers
+            $title = _($name);
+            if (mb_strlen($title, 'UTF-8') > 28) {
+                $title = mb_substr($title, 0, 25, 'UTF-8') . "...";
+            }
 
-  function gen_tabs()
-  {
-    $theme = getThemeName();
+          // nobr causes w3c warnings so we use &nbsp; to keep the tab name in one line
+            $title = str_replace(" ", "&nbsp;", $title);
 
-    if($this->is_modal_dialog()) return("");
+          // Take care about notifications
+            $obj = $this->by_object[$class];
+            switch ($theme) {
+                case 'classic':
+                    $tabClass = ($this->current == $class) ? "current" : "";
+                    break;
 
-    switch ($theme) {
-      case 'classic':
-        $display = "<div class='tabs'><ul>";
-        break;
+                default:
+                    $activeClass = ($this->current == $class) ? "active" : "";
+                    break;
+            }
 
-      default:
-        $display = "<div class='row'><div class='col s12'><ul class='tabs'>";
-        break;
-    }
+          // check for first tab
+            switch ($theme) {
+                case 'classic':
+                    $tabClass = $tabClass;
+                    break;
 
-    $firstTab = true;
-    $tabCount = count($this->by_name);
-    $currentTab = 0;
+                default:
+                    $tabClass = "tab pointer";
+                    break;
+            }
 
-    foreach ($this->by_name as $class => $name){
-      // Shorten string if its too long for the tab headers
-      $title= _($name);
-      if (mb_strlen($title, 'UTF-8') > 28){
-        $title= mb_substr($title,0, 25, 'UTF-8')."...";
-      }
+            if ($this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)) {
+                $tabClass .= " info";
+            }
 
-      // nobr causes w3c warnings so we use &nbsp; to keep the tab name in one line
-      $title= str_replace(" ","&nbsp;",$title);
+            $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
+            switch ($theme) {
+                case 'classic':
+                    if (!empty($tabClass)) {
+                        $tabClass = "class='{$tabClass}'";
+                    }
+                    $display .= "<li {$tabClass} onClick=\"{$onClick}\">" . $title . "</li>";
+                    break;
 
-      // Take care about notifications
-      $obj = $this->by_object[$class];
-      switch ($theme) {
-        case 'classic':
-          $tabClass = ($this->current == $class) ? "current" :"";
-          break;
+                default:
+                    $currentTab++;
 
-        default:
-          $activeClass = ($this->current == $class) ? "active" :"";
-          break;
-      }
+                    $display .= "<li class='{$tabClass} menu-pointer' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
 
-      // check for first tab
-      switch ($theme) {
-        case 'classic':
-          $tabClass = $tabClass;
-          break;
-
-        default:
-          $tabClass = "tab pointer";
-          break;
-      }
-
-      if ( $this->by_object[$class]->pl_notify && ($obj->is_account || $obj->ignore_account)){
-        $tabClass .= " info";
-      }
-
-      $onClick = "document.mainform.arg.value='{$class}'; document.mainform.submit();";
-      switch ($theme) {
-        case 'classic':
-          if(!empty($tabClass)) $tabClass="class='{$tabClass}'";
-          $display .= "<li {$tabClass} onClick=\"{$onClick}\">".$title."</li>";
-          break;
-
-        default:
-          $currentTab++;
-
-          $display .= "<li class='{$tabClass} menu-pointer' onClick=\"{$onClick}\"><a href='#' class='$activeClass'>$title</a></li>";
-
-          if($tabCount == $currentTab) {
-            $display .= "<li class='advanced-menu {$tabClass}'>
+                    if ($tabCount == $currentTab) {
+                        $display .= "<li class='advanced-menu {$tabClass}'>
                           <a class='dropdown-advanced-area-selection' data-target='advanced-area-selection'><i class='material-icons'>more_vert</i></a>
                         </li>
                         <ul id='advanced-area-selection' class='dropdown-content'>
                         </ul>";
-          }
+                    }
 
-          break;
-      }
-    }
-
-    switch ($theme) {
-      case 'classic':
-        $display .= "</ul></div>";
-        break;
-
-      default:
-        $display .= "</ul></div></div>";
-        break;
-    }
-    return($display);
-  }
-
-
-  function set_acl($acl)
-  {
-  	/* Look for attribute in ACL */
-	  trigger_error("Don't use tabs::set_acl() its obsolete.");
-  }
-
-  function delete()
-  {
-    /* Check if all plugins will ACK for deletion */
-    foreach (array_reverse($this->by_object) as $key => $obj){
-      $reason= $obj->allow_remove();
-      if ($reason != ""){
-        msg_dialog::display(_("Warning"), sprintf(_("Delete process has been canceled by plugin %s: %s"), bold($key), $reason), WARNING_DIALOG);
-        return;
-      }
-    }
-
-    /* Delete for all plugins */
-    foreach (array_reverse($this->by_object) as $obj){
-      $obj->remove_from_parent();
-    }
-  }
-
-  function password_change_needed()
-  {
-    /* Ask all plugins for needed password changes */
-    foreach ($this->by_object as &$obj){
-      if ($obj->password_change_needed()){
-        return TRUE;
-      }
-    }
-
-    return FALSE;
-  }
-
-  function check($ignore_account= FALSE)
-  {
-    $this->save_object(TRUE);
-    $messages= array();
-
-    $current_set = FALSE;
-
-    /* Check all plugins */
-    foreach ($this->by_object as $key => &$obj){
-      if ($obj->is_account || $ignore_account || $obj->ignore_account){
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$key, "Checking");
-
-        if(!$this->multiple_support_active){
-          $msg = $obj->check();
-        }else{
-          $msg = $obj->multiple_check();
+                    break;
+            }
         }
 
-        if (count($msg)){
-          $obj->pl_notify= TRUE;
-          if(!$current_set){
-            $current_set = TRUE;
-            $this->current= $key;
-            $messages = $msg;
-          }
-        }else{
-          $obj->pl_notify= FALSE;
+        switch ($theme) {
+            case 'classic':
+                $display .= "</ul></div>";
+                break;
+
+            default:
+                $display .= "</ul></div></div>";
+                break;
         }
-      }else{
-        $obj->pl_notify= FALSE;
-      }
+        return($display);
     }
-    return ($messages);
-  }
 
-  function save($ignore_account= FALSE)
-  {
-    /* Save all plugins */
-    foreach ($this->by_object as $key => &$obj){
-      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
-          $key, "Saving");
 
-      $obj->dn= $this->dn;
+    function set_acl($acl)
+    {
+      /* Look for attribute in ACL */
+        trigger_error("Don't use tabs::set_acl() its obsolete.");
+    }
 
-      if(!$obj instanceof plugin && !$obj instanceOf management){
-        trigger_error("Something went wrong while saving ".$obj->dn.". Object class '".get_class($obj)."'.");
-      }else{
-
-        if ($obj->is_account || $ignore_account || $obj->ignore_account){
-          if ($obj->save() == 1){
-            return (1);
-          }
-        } else {
-          $obj->remove_from_parent();
+    function delete()
+    {
+      /* Check if all plugins will ACK for deletion */
+        foreach (array_reverse($this->by_object) as $key => $obj) {
+            $reason = $obj->allow_remove();
+            if ($reason != "") {
+                msg_dialog::display(_("Warning"), sprintf(_("Delete process has been canceled by plugin %s: %s"), bold($key), $reason), WARNING_DIALOG);
+                return;
+            }
         }
-      }
-    }
-    return (0);
-  }
 
-  function adapt_from_template($dn, $skip= array())
-  {
-    foreach ($this->by_object as $key => &$obj){
-      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
-          $key, "Adapting");
-      $obj->parent= &$this;
-      $obj->adapt_from_template($dn, $skip);
+      /* Delete for all plugins */
+        foreach (array_reverse($this->by_object) as $obj) {
+            $obj->remove_from_parent();
+        }
     }
-  }
+
+    function password_change_needed()
+    {
+      /* Ask all plugins for needed password changes */
+        foreach ($this->by_object as &$obj) {
+            if ($obj->password_change_needed()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function check($ignore_account = false)
+    {
+        $this->save_object(true);
+        $messages = array();
+
+        $current_set = false;
+
+      /* Check all plugins */
+        foreach ($this->by_object as $key => &$obj) {
+            if ($obj->is_account || $ignore_account || $obj->ignore_account) {
+                @DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $key, "Checking");
+
+                if (!$this->multiple_support_active) {
+                    $msg = $obj->check();
+                } else {
+                    $msg = $obj->multiple_check();
+                }
+
+                if (count($msg)) {
+                    $obj->pl_notify = true;
+                    if (!$current_set) {
+                        $current_set = true;
+                        $this->current = $key;
+                        $messages = $msg;
+                    }
+                } else {
+                    $obj->pl_notify = false;
+                }
+            } else {
+                $obj->pl_notify = false;
+            }
+        }
+        return ($messages);
+    }
+
+    function save($ignore_account = false)
+    {
+      /* Save all plugins */
+        foreach ($this->by_object as $key => &$obj) {
+            @DEBUG(
+                DEBUG_TRACE,
+                __LINE__,
+                __FUNCTION__,
+                __FILE__,
+                $key,
+                "Saving"
+            );
+
+            $obj->dn = $this->dn;
+
+            if (!$obj instanceof plugin && !$obj instanceof management) {
+                  trigger_error("Something went wrong while saving " . $obj->dn . ". Object class '" . get_class($obj) . "'.");
+            } else {
+                if ($obj->is_account || $ignore_account || $obj->ignore_account) {
+                    if ($obj->save() == 1) {
+                        return (1);
+                    }
+                } else {
+                    $obj->remove_from_parent();
+                }
+            }
+        }
+        return (0);
+    }
+
+    function adapt_from_template($dn, $skip = array())
+    {
+        foreach ($this->by_object as $key => &$obj) {
+            @DEBUG(
+                DEBUG_TRACE,
+                __LINE__,
+                __FUNCTION__,
+                __FILE__,
+                $key,
+                "Adapting"
+            );
+            $obj->parent = &$this;
+            $obj->adapt_from_template($dn, $skip);
+        }
+    }
 
 
   /* Save attributes posted by copy & paste dialog
    */
-  function saveCopyDialog()
-  {
-	  foreach ($this->by_object as &$obj){
-		  if($obj->is_account || $obj->ignore_account){
-			  $obj->saveCopyDialog();
-		  }
-	  }
-  }
+    function saveCopyDialog()
+    {
+        foreach ($this->by_object as &$obj) {
+            if ($obj->is_account || $obj->ignore_account) {
+                $obj->saveCopyDialog();
+            }
+        }
+    }
 
 
   /* return copy & paste dialog
    */
-  function getCopyDialog()
-  {
-    $ret = "";
-    $this->SubDialog = false;
-    foreach ($this->by_object as &$obj){
-      if($obj->is_account || $obj->ignore_account){
-        $tmp = $obj->getCopyDialog();
-        if($tmp['status'] == "SubDialog"){
-          $this->SubDialog = true;
-          return($tmp['string']);
-        }else{
-          if(!empty($tmp['string'])){
-            $ret .= $tmp['string'];
-            $ret .= "<hr>";
-          }
+    function getCopyDialog()
+    {
+        $ret = "";
+        $this->SubDialog = false;
+        foreach ($this->by_object as &$obj) {
+            if ($obj->is_account || $obj->ignore_account) {
+                $tmp = $obj->getCopyDialog();
+                if ($tmp['status'] == "SubDialog") {
+                    $this->SubDialog = true;
+                    return($tmp['string']);
+                } else {
+                    if (!empty($tmp['string'])) {
+                        $ret .= $tmp['string'];
+                        $ret .= "<hr>";
+                    }
+                }
+            }
         }
-      }
+        return($ret);
     }
-    return($ret);
-  }
 
 
-  function addSpecialTabs()
-  {
-    if(!$this->hide_acls){
-      $this->by_name['acl']= _("ACL");
-      $this->by_object['acl']= new acl($this->config, $this, $this->dn);
-      $this->by_object['acl']->parent= &$this;
+    function addSpecialTabs()
+    {
+        if (!$this->hide_acls) {
+            $this->by_name['acl'] = _("ACL");
+            $this->by_object['acl'] = new acl($this->config, $this, $this->dn);
+            $this->by_object['acl']->parent = &$this;
+        }
+        if (!$this->hide_refs) {
+            $this->by_name['reference'] = _("References");
+            $this->by_object['reference'] = new reference($this->config, $this->dn);
+            $this->by_object['reference']->parent = &$this;
+            $this->by_object['reference']->set_acl_category($this->acl_category);
+        }
     }
-    if(!$this->hide_refs){
-      $this->by_name['reference']= _("References");
-      $this->by_object['reference']= new reference($this->config, $this->dn);
-      $this->by_object['reference']->parent= &$this;
-      $this->by_object['reference']->set_acl_category($this->acl_category);
-    }
-  }
 
 
-  function set_acl_base($base= "")
-  {
-    /* Update reference, transfer variables */
-    $first= ($base == "");
-    foreach ($this->by_object as &$obj){
-      if ($first){
-        $first= FALSE;
-        $base= $obj->acl_base;
-      } else {
-        $obj->set_acl_base($base);
-      }
+    function set_acl_base($base = "")
+    {
+      /* Update reference, transfer variables */
+        $first = ($base == "");
+        foreach ($this->by_object as &$obj) {
+            if ($first) {
+                $first = false;
+                $base = $obj->acl_base;
+            } else {
+                $obj->set_acl_base($base);
+            }
+        }
     }
-  }
 
 
   /*!   \brief    Checks if one of the used tab plugins supports multiple edit.
         @param    boolean Returns TRUE if at least one plugins supports multiple edit.
   */
-  function multiple_support_available()
-  {
-    foreach($this->by_object as $name => $obj){
-      if($obj->multiple_support){
-        return(TRUE);
-      }
+    function multiple_support_available()
+    {
+        foreach ($this->by_object as $name => $obj) {
+            if ($obj->multiple_support) {
+                return(true);
+            }
+        }
+        return(false);
     }
-    return(FALSE);
-  }
 
 
   /*!   \brief    Enables multiple edit support for the given tab.
                   All unsupported plugins will be disabled.
         @param    boolean Returns TRUE if at least one plugin supports multiple edit
   */
-  function enable_multiple_support()
-  {
-    if(!$this->multiple_support_available()){
-      return(FALSE);
-    }else{
-      $this->multiple_support_active = TRUE;
-      foreach($this->by_object as $name => $obj){
-        if($obj->multiple_support){
-          $this->by_object[$name]->enable_multiple_support();
-        }else{
-          unset($this->by_object[$name]);
-          unset($this->by_name[$name]);
+    function enable_multiple_support()
+    {
+        if (!$this->multiple_support_available()) {
+            return(false);
+        } else {
+            $this->multiple_support_active = true;
+            foreach ($this->by_object as $name => $obj) {
+                if ($obj->multiple_support) {
+                    $this->by_object[$name]->enable_multiple_support();
+                } else {
+                    unset($this->by_object[$name]);
+                    unset($this->by_name[$name]);
+                }
+            }
         }
-      }
+        return(true);
     }
-    return(TRUE);
-  }
 
-  function setReadOnly($s = TRUE)
-  {
-    foreach($this->by_object as $name => $obj){
-      $this->by_object[$name]->read_only = $s;
+    function setReadOnly($s = true)
+    {
+        foreach ($this->by_object as $name => $obj) {
+            $this->by_object[$name]->read_only = $s;
+        }
+        $this->read_only = $s;
     }
-    $this->read_only = $s;
-  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>

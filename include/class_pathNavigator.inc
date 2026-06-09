@@ -78,40 +78,40 @@ class pathNavigator
                 $path = '';
                 $sTitle = '';
                 foreach ($list as $entry) {
-                    $title = (!empty($entry['TITLE'])) ? 'title="'.htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8').'"' : '';
+                    $title = (!empty($entry['TITLE'])) ? 'title="' . htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8') . '"' : '';
                     $path .= "\n<li {$title} class='left path-element'>{$entry['NAME']}</li>";
-                    $sTitle .= ' - '.$entry['NAME'];
+                    $sTitle .= ' - ' . $entry['NAME'];
                 }
 
                 // If no path is given then show a simple 'Welcome to GOsa' string.
                 if (empty($path)) {
-                    $path = "<li class='left path-element'>"._('Welcome to GOsa').'</li>';
+                    $path = "<li class='left path-element'>" . _('Welcome to GOsa') . '</li>';
                 }
 
                 $smarty = get_smarty();
-                $smarty->assign('title', 'GOsa '.$sTitle);
+                $smarty->assign('title', 'GOsa ' . $sTitle);
 
                 return $path;
-            
+
             default:
                 // Build up title and path string.
                 $path = '';
                 $sTitle = '';
                 foreach ($list as $entry) {
-                    $title = (!empty($entry['TITLE'])) ? 'title="'.htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8').'"' : '';
+                    $title = (!empty($entry['TITLE'])) ? 'title="' . htmlentities(LDAP::fix($entry['TITLE']), ENT_COMPAT, 'UTF-8') . '"' : '';
                     $path .= "  <p class='breadcrumb-point' {$title}>{$entry['NAME']}</p>";
-                    $sTitle .= ' - '.$entry['NAME'];
+                    $sTitle .= ' - ' . $entry['NAME'];
                 }
 
                 // If no path is given then show a simple 'Welcome to GOsa' string.
                 if (empty($path)) {
                     $path = " <p class='breadcrumb-point'>
-                        "._('Welcome to GOsa').'
+                        " . _('Welcome to GOsa') . '
                     </p>';
                 }
 
                 $smarty = get_smarty();
-                $smarty->assign('title', 'GOsa '.$sTitle);
+                $smarty->assign('title', 'GOsa ' . $sTitle);
 
                 return $path;
         }

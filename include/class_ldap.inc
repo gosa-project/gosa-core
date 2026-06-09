@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
@@ -30,11 +31,11 @@ define("SPECIALS_OVERRIDE", true);
 
 class LDAP
 {
-    public static $characterMap = NULL;
-    public static $characterMapRegFrom = NULL;
-    public static $characterMapRegTo = NULL;
-    public static $readableMapRegFrom = NULL;
-    public static $readableMapRegTo = NULL;
+    public static $characterMap = null;
+    public static $characterMapRegFrom = null;
+    public static $characterMapRegTo = null;
+    public static $readableMapRegFrom = null;
+    public static $readableMapRegTo = null;
 
     // connection handle
     static $cid;
@@ -56,7 +57,7 @@ class LDAP
     var $hostname = "";
     var $follow_referral = false;
     var $referrals = [];
-    var $max_ldap_query_time = 0;   // 0, empty or negative values will disable this check 
+    var $max_ldap_query_time = 0;   // 0, empty or negative values will disable this check
 
     function __construct($binddn, $bindpw, $hostname, $follow_referral = false, $tls = false)
     {
@@ -96,15 +97,15 @@ class LDAP
 
     /**
      * Return a search resource.
-     * 
+     *
      * The current search resource pointer (?) is
      * used to clear the current pointer value. Afterwards
      * increase the pointer value.
-     * 
+     *
      */
     function getSearchResource(): int
     {
-        self::$sr[$this->srp] = NULL;
+        self::$sr[$this->srp] = null;
         $this->start[$this->srp] = 0;
         $this->hasres[$this->srp] = false;
         return $this->srp++;
@@ -119,7 +120,7 @@ class LDAP
      *  \2C => CO
      *  (   => OB
      *  )   => CB
-     *  /   => SL                                                                  
+     *  /   => SL
      *  \22 => DQ
      */
     static function convert($dn)
@@ -138,9 +139,9 @@ class LDAP
         }
     }
 
-    /* \brief     Tests for the special-char handling of the currently used ldap database 
+    /* \brief     Tests for the special-char handling of the currently used ldap database
      *             and updates the LDAP class correspondingly.
-     *            This affects the self::fix function and allows us to write 
+     *            This affects the self::fix function and allows us to write
      *             dns containing  , " ( )
      */
     static function updateSpecialCharHandling()
@@ -169,18 +170,17 @@ class LDAP
         );
         self::$readableMapRegTo = array(",", "(", ")", "/", '"', ",", ",", "(", ")", "/", '"', '"');
 
-        if (self::$characterMap === NULL) {
+        if (self::$characterMap === null) {
             self::$characterMap = detectLdapSpecialCharHandling();
 
             // Check if character-detection was successfull, if it wasn't use a fallback.
-            if (self::$characterMap !== NULL) {
+            if (self::$characterMap !== null) {
                 self::$characterMapRegFrom = [];
                 self::$characterMapRegTo = [];
                 self::$readableMapRegFrom = [];
                 self::$readableMapRegTo = [];
                 foreach (self::$characterMap as $from => $to) {
-
-                    // Append entry character conversion  
+                    // Append entry character conversion
                     self::$characterMapRegFrom[] = "/" . preg_quote(self::convert($from), '/') . "/";
                     self::$characterMapRegTo[] = addslashes($to);
 
@@ -209,15 +209,17 @@ class LDAP
     }
 
 
-    /*!  \brief     This methods replaces non-readable characters be readable ones, 
+    /*!  \brief     This methods replaces non-readable characters be readable ones,
      *               depends on what were detect in 'updateSpecialCharHandling'.
-     * param       String  The DN/string to cleanup 
+     * param       String  The DN/string to cleanup
      * return      String  The readable string.
      */
     static function makeReadable($dn)
     {
         if ($dn !== null) {
-            if (self::$characterMap === NULL) self::updateSpecialCharHandling();
+            if (self::$characterMap === null) {
+                self::updateSpecialCharHandling();
+            }
             return (preg_replace(self::$readableMapRegFrom, self::$readableMapRegTo, $dn));
         }
 
@@ -226,18 +228,19 @@ class LDAP
 
 
     /* \brief   Function to fix all problematic characters inside a DN by replacing \001XX
-     *           codes to their original values. See "convert" for more information. 
+     *           codes to their original values. See "convert" for more information.
      *          The ',' characters are always expanded to \, (not \2C), since all tested LDAP
-     *           servers seem to take it the correct way.                                 
-     * param String  The DN to convert characters in. 
+     *           servers seem to take it the correct way.
+     * param String  The DN to convert characters in.
      * param String  The converted dn.
      */
     static function fix($dn)
     {
         if (SPECIALS_OVERRIDE == true && $dn != "" && $dn !== null) {
-
             // Update the conversion instruction set.
-            if (self::$characterMap === NULL) self::updateSpecialCharHandling();
+            if (self::$characterMap === null) {
+                self::updateSpecialCharHandling();
+            }
 
             return (preg_replace(self::$characterMapRegFrom, self::$characterMapRegTo, $dn));
         }
@@ -298,21 +301,21 @@ class LDAP
         }
 
         $this->error = "Could not bind to " . $credentials['ADMINDN'];
-        return NULL;
+        return null;
     }
 
     function reconnect(): void
     {
         if ($this->reconnect) {
             ldap_unbind(self::$cid);
-            self::$cid = NULL;
+            self::$cid = null;
         }
     }
 
     function unbind(): void
     {
         ldap_unbind(self::$cid);
-        self::$cid = NULL;
+        self::$cid = null;
     }
 
     function disconnect(): void
@@ -346,7 +349,9 @@ class LDAP
     function search($srp, $filter, $attrs = []): bool|\LDAP\Result
     {
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
 
             $start = microtime(true);
             $this->clearResult($srp);
@@ -365,7 +370,7 @@ class LDAP
 
             $this->log("LDAP operation: time=" . (microtime(true) - $start) . " operation=search('" . self::fix($this->basedn) . "', '$filter')");
 
-            // Create statistic table entry 
+            // Create statistic table entry
             stats::log('ldap', get_class($this), [], __FUNCTION__, 1, microtime(true) - $start);
             return (self::$sr[$srp]);
         }
@@ -404,7 +409,7 @@ class LDAP
 
             $this->log("LDAP operation: time=" . (microtime(true) - $start) . " operation=ls('" . self::fix($basedn) . "', '$filter')");
 
-            // Create statistic table entry 
+            // Create statistic table entry
             stats::log('ldap', get_class($this), [], __FUNCTION__, 1, microtime(true) - $start);
 
             return (self::$sr[$srp]);
@@ -420,7 +425,9 @@ class LDAP
             return false;
         }
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
 
             $this->clearResult($srp);
             self::$sr[$srp] = ldap_read(self::$cid, self::fix($dn), $filter, $attrs);
@@ -436,7 +443,7 @@ class LDAP
 
     /**
      * Count entries get from LDAP with the given filter.
-     * 
+     *
      * \param $dn the dn where we start
      * \param $filter custom filter used for the ldap read
      * \return bool|int
@@ -445,7 +452,7 @@ class LDAP
     {
         // check if hascon
         if ($this->hascon) {
-            // check if reconnect is set 
+            // check if reconnect is set
             if ($this->reconnect) {
                 $this->connect();
             }
@@ -518,10 +525,10 @@ class LDAP
 
     /**
      * Clear search result pointer (?)
-     * 
+     *
      * If there is an LDAP\Result Object available
      * at the given pointer (?) release it.
-     * 
+     *
      * \param $srp - search result pointer that is about to be cleared
      * \return void
      */
@@ -539,7 +546,6 @@ class LDAP
     {
         if ($this->hascon) {
             if ($this->hasres[$srp]) {
-
                 if (!$this->re[$srp]) {
                     $this->error = "Perform a Fetch with no valid Result";
                 } else {
@@ -562,11 +568,11 @@ class LDAP
      * This method will always return an integer.
      * On error a negative value is returned otherwise
      * the actual count is returned.
-     * 
+     *
      * The only exception is for the error "no such object".
      * This error may indicate that there is no technical problem
      * but just no entry available. In this case we return a 0.
-     * 
+     *
      * \param $srp - search resource pointer
      */
     function count($srp): int
@@ -581,7 +587,7 @@ class LDAP
             return 0;
         }
 
-        // if last LDAP operation errnor number was 32 
+        // if last LDAP operation errnor number was 32
         // there is probably no technical issue (BUT WE DON'T KNOW! CHECK YOUR FILTERS!)
         // so return a 0 value
         if (ldap_errno(self::$cid) === 32) {
@@ -619,9 +625,12 @@ class LDAP
     function rm($attrs = [], $dn = "")
     {
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
-            if ($dn == "")
+            if ($this->reconnect) {
+                $this->connect();
+            }
+            if ($dn == "") {
                 $dn = $this->basedn;
+            }
 
             $r = ldap_mod_del(self::$cid, self::fix($dn), $attrs);
             $this->error = ldap_error(self::$cid);
@@ -637,9 +646,12 @@ class LDAP
         print($attrs);
 
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
-            if ($dn == "")
+            if ($this->reconnect) {
+                $this->connect();
+            }
+            if ($dn == "") {
                 $dn = $this->basedn;
+            }
 
             $r = ldap_mod_add(self::$cid, self::fix($dn), $attrs);
             $this->error = ldap_error(self::$cid);
@@ -653,9 +665,12 @@ class LDAP
     function rename($attrs, $dn = "")
     {
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
-            if ($dn == "")
+            if ($this->reconnect) {
+                $this->connect();
+            }
+            if ($dn == "") {
                 $dn = $this->basedn;
+            }
 
             $r = ldap_mod_replace(self::$cid, self::fix($dn), $attrs);
             $this->error = ldap_error(self::$cid);
@@ -669,7 +684,9 @@ class LDAP
     function rmdir($deletedn)
     {
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
             $r = ldap_delete(self::$cid, self::fix($deletedn));
             $this->error = ldap_error(self::$cid);
             return ($r ? $r : 0);
@@ -702,7 +719,7 @@ class LDAP
         }
 
         /* Extract the name and the parent part out ouf source dn.
-           e.g.  cn=herbert,ou=department,dc=... 
+           e.g.  cn=herbert,ou=department,dc=...
            parent   =>  ou=department,dc=...
            dest_rdn =>  cn=herbert
          */
@@ -710,11 +727,13 @@ class LDAP
         $dest_rdn = preg_replace("/,.*$/", "", $dest);
 
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
             $r = ldap_rename(self::$cid, self::fix($source), self::fix($dest_rdn), self::fix($parent), true);
             $this->error = ldap_error(self::$cid);
 
-            /* Check if destination dn exists, if not the 
+            /* Check if destination dn exists, if not the
                server may not support this operation */
             $r &= is_resource($this->dn_exists($dest));
             return ($r);
@@ -736,7 +755,9 @@ class LDAP
     function rmdir_recursive($srp, $deletedn)
     {
         if ($this->hascon) {
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
             $delarray = [];
 
             /* Get sorted list of dn's to delete */
@@ -767,7 +788,9 @@ class LDAP
     {
         global $config;
 
-        if ($this->success()) return ("");
+        if ($this->success()) {
+            return ("");
+        }
 
         $str = "";
         if (preg_match("/^objectClass: value #([0-9]*) invalid per syntax$/", $this->get_additional_error())) {
@@ -792,7 +815,9 @@ class LDAP
         }
         if ($this->hascon) {
             $start = microtime(true);
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
 
             $r = ldap_modify(self::$cid, self::fix($this->basedn), $attrs);
             $this->error = ldap_error(self::$cid);
@@ -800,7 +825,7 @@ class LDAP
                 $this->error .= $this->makeReadableErrors($this->error, $attrs);
             }
 
-            // Create statistic table entry 
+            // Create statistic table entry
             stats::log(
                 'ldap',
                 $class = get_class($this),
@@ -820,14 +845,16 @@ class LDAP
     {
         if ($this->hascon) {
             $start = microtime(true);
-            if ($this->reconnect) $this->connect();
+            if ($this->reconnect) {
+                $this->connect();
+            }
             $r = ldap_add(self::$cid, self::fix($this->basedn), $attrs);
             $this->error = ldap_error(self::$cid);
             if (!$this->success()) {
                 $this->error .= $this->makeReadableErrors($this->error, $attrs);
             }
 
-            // Create statistic table entry 
+            // Create statistic table entry
             stats::log(
                 'ldap',
                 $class = get_class($this),
@@ -888,7 +915,6 @@ class LDAP
 
             /* Create missing entry? */
             if (count($attrs)) {
-
                 /* Catch the tag - if present */
                 if (isset($attrs['gosaUnitTag'][0])) {
                     $tag = $attrs['gosaUnitTag'][0];
@@ -902,12 +928,10 @@ class LDAP
 
                 /* Automatic or traditional? */
                 if (count($classes)) {
-
                     /* Get name of first matching objectClass */
                     $ocname = "";
                     foreach ($classes as $class) {
                         if (isset($class['MUST']) && in_array_strict($type, $class['MUST'])) {
-
                             /* Look for first classes that is structural... */
                             if (isset($class['STRUCTURAL'])) {
                                 $ocname = $class['NAME'];
@@ -946,12 +970,13 @@ class LDAP
                     // Fill in MUST values - but do not overwrite existing ones.
                     if (is_array($classes[$ocname]['MUST'])) {
                         foreach ($classes[$ocname]['MUST'] as $attr) {
-                            if (isset($na[$attr]) && !empty($na[$attr])) continue;
+                            if (isset($na[$attr]) && !empty($na[$attr])) {
+                                continue;
+                            }
                             $na[$attr] = "filled";
                         }
                     }
                 } else {
-
                     /* Use alternative add... */
                     switch ($type) {
                         case 'ou':
@@ -981,7 +1006,6 @@ class LDAP
                 $this->add($na);
 
                 if (!$this->success()) {
-
                     print_a(array($cdn, $na));
 
                     msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $cdn, LDAP_ADD, get_class()));
@@ -1017,7 +1041,9 @@ class LDAP
     function get_attribute($dn, $name, $r_array = 0)
     {
         $data = "";
-        if ($this->reconnect) $this->connect();
+        if ($this->reconnect) {
+            $this->connect();
+        }
         $sr = ldap_read(self::$cid, self::fix($dn), "objectClass=*", array("$name"));
 
         /* fill data from LDAP */
@@ -1049,7 +1075,7 @@ class LDAP
     /**
      * Method to return true if the LDAP "error" is Success otherwise
      * return false.
-     * 
+     *
      * \return bool
      */
     function success(): bool
@@ -1073,13 +1099,13 @@ class LDAP
         return $error;
     }
 
-    static function get_credentials($url, $referrals = NULL)
+    static function get_credentials($url, $referrals = null)
     {
         $ret = [];
         $url = preg_replace('!\?\?.*$!', '', $url);
         $server = preg_replace('!^([^:]+://[^/]+)/.*$!', '\\1', $url);
 
-        if ($referrals === NULL) {
+        if ($referrals === null) {
             $referrals = self::$referrals;
         }
 
@@ -1105,7 +1131,7 @@ class LDAP
         // Ensure that limit is numeric if not skip here.
         if (!empty($limit) && !is_numeric($limit)) {
             trigger_error(sprintf("Invalid parameter for limit '%s', a numeric value is required."), $limit);
-            return (NULL);
+            return (null);
         }
         $limit = (!$limit) ? '' : ' -z ' . $limit;
 
@@ -1113,7 +1139,7 @@ class LDAP
         $scope = trim($scope);
         if (!empty($scope) && !in_array_strict($scope, array('base', 'one', 'sub', 'children'))) {
             trigger_error(sprintf("Invalid parameter for scope '%s', please use 'base', 'one', 'sub' or 'children'."), $scope);
-            return (NULL);
+            return (null);
         }
         $scope = (!empty($scope)) ? ' -s ' . $scope : '';
 
@@ -1121,7 +1147,7 @@ class LDAP
         $check = shell_exec('which ldapsearch');
         if (empty($check)) {
             $this->error = sprintf(_("Command line programm %s is missing!"), bold('ldapsearch'));
-            return (NULL);
+            return (null);
         }
 
         // Prepare parameters to be valid for shell execution
@@ -1132,17 +1158,16 @@ class LDAP
         $filter = escapeshellarg($filter);
         $cmd = "ldapsearch -x -LLLL -D {$admin} {$filter} {$limit} {$scope} -H {$host} -b {$dn} -W ";
 
-        // Create list of process pipes  
+        // Create list of process pipes
         $descriptorspec = array(
             0 => array("pipe", "r"),  // stdin
             1 => array("pipe", "w"),  // stdout
             2 => array("pipe", "w")
         ); // stderr
 
-        // Try to open the process 
+        // Try to open the process
         $process = proc_open($cmd, $descriptorspec, $pipes);
         if (is_resource($process)) {
-
             // Write the password to stdin
             fwrite($pipes[0], $pwd . "\n");
             fclose($pipes[0]);
@@ -1155,7 +1180,7 @@ class LDAP
             // Close the process and check its return value
             if (proc_close($process) != 0) {
                 $this->error = $err;
-                return (NULL);
+                return (null);
             }
         }
         return ($res);
@@ -1220,7 +1245,6 @@ class LDAP
 
         foreach ($atts as $at) {
             for ($i = 0; $i < $at['value']['count']; $i++) {
-
                 /* Check if we must encode the data */
                 if (!preg_match('/^[a-z0-9+@#.=, \/ -]+$/i', $at['value'][$i])) {
                     $ret .= $at['name'] . ":: " . base64_encode($at['value'][$i]) . "\n";
@@ -1238,14 +1262,16 @@ class LDAP
         return @ldap_list(self::$cid, self::fix($dn), "(objectClass=*)", array("objectClass"));
     }
 
-    /*  This function imports ldifs 
-        If DeleteOldEntries is true, the destination entry will be deleted first. 
+    /*  This function imports ldifs
+        If DeleteOldEntries is true, the destination entry will be deleted first.
         If JustModify is true the destination entry will only be touched by the attributes specified in the ldif.
-        if JustMofify id false the destination dn will be overwritten by the new ldif. 
+        if JustMofify id false the destination dn will be overwritten by the new ldif.
      */
     function import_complete_ldif($srp, $str_attr, $error, $JustModify, $DeleteOldEntries)
     {
-        if ($this->reconnect) $this->connect();
+        if ($this->reconnect) {
+            $this->connect();
+        }
 
         /* First we have to split the string into empty lines.
            An empty line indicates an new Entry */
@@ -1272,7 +1298,7 @@ class LDAP
         foreach ($tmp as $entry) {
             $current_line++;
 
-            /* Removing Spaces to .. 
+            /* Removing Spaces to ..
                .. test if a new entry begins */
             $tmp  = str_replace(" ", "", $data);
 
@@ -1286,7 +1312,6 @@ class LDAP
                 $cnt++;
                 $data = "";
             } else {
-
                 /* Append lines ... */
                 if (!empty($tmp2)) {
                     /* check if we need base64_decode for this line */
@@ -1306,7 +1331,7 @@ class LDAP
 
         /* The Data we collected is not in the array all[];
            For example the Data is stored like this..
-           all[0] = "1#dn : .... \n 
+           all[0] = "1#dn : .... \n
            2#ObjectType: person \n ...."
            Now we check every insertblock and try to insert */
         foreach ($all as $single) {
@@ -1333,16 +1358,13 @@ class LDAP
 
             /* The dn address already exists, Don't delete destination entry, overwrite it */
             if (($this->dn_exists($value)) && ((!$JustModify) && (!$DeleteOldEntries))) {
-
                 $usermdir = $usemodify = false;
 
                 /* Delete old entry first, then add new */
             } elseif (($this->dn_exists($value)) && ($DeleteOldEntries)) {
-
                 /* Delete first, then add */
                 $usermdir = true;
             } elseif (($this->dn_exists($value)) && ($JustModify)) {
-
                 /* Modify instead of Add */
                 $usemodify = true;
             }
@@ -1361,7 +1383,7 @@ class LDAP
         return (INSERT_OK);
     }
 
-    /* Imports a single entry 
+    /* Imports a single entry
        If $delete is true;  The old entry will be deleted if it exists.
        if $modify is true;  All variables that are not touched by the new ldif will be kept.
        if $modify is false; The new ldif overwrites the old entry, and all untouched attributes get lost.
@@ -1375,20 +1397,20 @@ class LDAP
         }
 
 
-        if ($this->reconnect) $this->connect();
+        if ($this->reconnect) {
+            $this->connect();
+        }
 
         $ret = false;
         $rows = preg_split("/\n/", $str_attr);
         $data = false;
 
         foreach ($rows as $row) {
-
             /* Check if we use Linenumbers (when import_complete_ldif is called we use
                Linenumbers) Linenumbers are use like this 123#attribute : value */
             if (!empty($row)) {
                 if (strpos($row, "#") != false) {
-
-                    /* We are using line numbers 
+                    /* We are using line numbers
                        Because there is a # before a : */
                     $tmp1 = explode("#", $row);
                     $current_line = $tmp1[0];
@@ -1431,7 +1453,6 @@ class LDAP
 
         /* If dn is an index of data, we should try to insert the data */
         if (isset($data['dn'])) {
-
             /* Fix dn */
             $tmp = gosa_ldap_explode_dn($data['dn']);
             unset($tmp['count']);
@@ -1460,15 +1481,15 @@ class LDAP
             unset($data['dn']);
 
             if (!$modify) {
-
                 $this->cat($srp, $dn);
                 if ($this->count($srp)) {
-
                     /* The destination entry exists, overwrite it with the new entry */
                     $attrs = $this->fetch($srp);
                     foreach ($attrs as $name => $value) {
                         if (!is_numeric($name)) {
-                            if (in_array_strict($name, array("dn", "count"))) continue;
+                            if (in_array_strict($name, array("dn", "count"))) {
+                                continue;
+                            }
                             if (!isset($data[$name])) {
                                 $data[$name] = [];
                             }
@@ -1476,12 +1497,10 @@ class LDAP
                     }
                     $ret = $this->modify($data);
                 } else {
-
                     /* The destination entry doesn't exists, create it */
                     $ret = $this->add($data);
                 }
             } else {
-
                 /* Keep all vars that aren't touched by this ldif */
                 $ret = $this->modify($data);
             }
@@ -1560,7 +1579,6 @@ class LDAP
 
             foreach ($pattern as $chunk) {
                 switch ($chunk) {
-
                     case '(':
                         $value = "";
                         break;

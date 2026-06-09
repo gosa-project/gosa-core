@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This code is part of GOsa (https://gosa.gonicus.de)
  * Copyright (C) 2008 Cajus Pollmeier
@@ -18,61 +19,58 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class timezone {
-
-  /* This function returns the offset for the default timezone. 
+class timezone
+{
+  /* This function returns the offset for the default timezone.
    * $stamp is used to detect summer or winter time.
    * In case of PHP5, the integrated timezone functions are used.
    */
-  static public function get_default_timezone($stamp = NULL)
-  {
-    global $config;
-    $tz ="";
+    public static function get_default_timezone($stamp = null)
+    {
+        global $config;
+        $tz = "";
 
-    /* Default return value if zone could not be detected */
-    $zone = array("name" => "unconfigured", "value" => 0);
+      /* Default return value if zone could not be detected */
+        $zone = array("name" => "unconfigured", "value" => 0);
 
-    /* Use current timestamp if $stamp is not set */
-    if($stamp === NULL){
-      $stamp = time();
+      /* Use current timestamp if $stamp is not set */
+        if ($stamp === null) {
+            $stamp = time();
+        }
+
+      /* Is there a timezone configured in the gosa configuration (gosa.conf) */
+        if ($config->get_cfg_value("core", "timezone") != "") {
+          /* Get zonename */
+            $tz = $config->get_cfg_value("core", "timezone");
+
+            if (!@date_default_timezone_set($tz)) {
+                msg_dialog::display(_("Configuration error"), sprintf(_("The configured timezone %s is not valid!"), bold($tz)), ERROR_DIALOG);
+            }
+            $tz_delta = date("Z", $stamp);
+            $tz_delta = $tz_delta / 3600 ;
+            return(array("name" => $tz, "value" => $tz_delta));
+        }
+        return($zone);
     }
-
-    /* Is there a timezone configured in the gosa configuration (gosa.conf) */
-    if ($config->get_cfg_value("core","timezone") != ""){
-
-      /* Get zonename */
-      $tz = $config->get_cfg_value("core","timezone");
-
-      if(!@date_default_timezone_set($tz)){
-        msg_dialog::display(_("Configuration error"), sprintf(_("The configured timezone %s is not valid!"), bold($tz)), ERROR_DIALOG);
-      }
-      $tz_delta = date("Z", $stamp);
-      $tz_delta = $tz_delta / 3600 ;
-      return(array("name" => $tz, "value" => $tz_delta));
-
-    }
-    return($zone);
-  }
 
 
   /* Return zone informations */
-  static public function _get_tz_zones()
-  {
-    $timezone_identifiers = DateTimeZone::listIdentifiers();
-    $timezones = array();
-    $zones = DateTimeZone::listAbbreviations();
-    foreach($zones as $group){
-      foreach($group as $zone)  {
-        $timezones[$zone['timezone_id']] = $zone['offset'];
-        if($zone['dst']){
-          $dst_timezones[$zone['timezone_id']] = 1;
+    public static function _get_tz_zones()
+    {
+        $timezone_identifiers = DateTimeZone::listIdentifiers();
+        $timezones = array();
+        $zones = DateTimeZone::listAbbreviations();
+        foreach ($zones as $group) {
+            foreach ($group as $zone) {
+                $timezones[$zone['timezone_id']] = $zone['offset'];
+                if ($zone['dst']) {
+                    $dst_timezones[$zone['timezone_id']] = 1;
+                }
+            }
         }
-      }
+        ksort($timezones);
+        return(array("TIMEZONES" => @$timezones, "DST_ZONES" => @$dst_timezones));
     }
-    ksort($timezones);
-    return(array("TIMEZONES" => @$timezones, "DST_ZONES" => @$dst_timezones));
-  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
