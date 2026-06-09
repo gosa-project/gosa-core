@@ -68,7 +68,7 @@ class Step_License extends setup_step
     $smarty -> assign("license_found",$this->license_found);
     $smarty -> assign("accepted",$this->accepted);
 
-    return($smarty -> fetch (get_template_path("../setup/".$GLOBALS['theme']."/setup_license.tpl")));
+    return($smarty -> fetch (get_template_path("../setup/setup_license.tpl")));
   }
 
   
@@ -91,3 +91,4 @@ class Step_License extends setup_step
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

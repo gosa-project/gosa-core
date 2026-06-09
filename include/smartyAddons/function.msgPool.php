@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_msgPool($params, &$smarty)
+function smarty_function_msgPool($params, $smarty)
 {
 	if(class_available("msgPool") && isset($params['type'])){
 		$parameter = array();
@@ -18,3 +18,4 @@ function smarty_function_msgPool($params, &$smarty)
 		trigger_error("Unknown class msgPool.");
 	}
 }
+?>

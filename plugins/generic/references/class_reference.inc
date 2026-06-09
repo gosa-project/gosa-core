@@ -119,15 +119,9 @@ class reference extends plugin
                 $list->setListData($data, $data);
 
                 $list->update();    
-<<<<<<< HEAD
                 $str .= "<h3>".$filter['msg']."</h3>";
                 $str .= $list->render();
                 $str .= "<div class='v-spacer'></div>";
-=======
-                $str .= "<h2>".$filter['msg']."</h2><div class='row'><div class='col s12'>";
-                $str .= $list->render();
-                $str .= "</div></div>";
->>>>>>> gosa-core_v2.8
             }
         }
         $this->objectList = $str;
@@ -167,11 +161,7 @@ class reference extends plugin
 
 		session::set("generic::aclResolver", $this->aclResolver);
         session::set('autocomplete', "generic::aclResolver");
-<<<<<<< HEAD
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE, dirname(__FILE__))));
-=======
-        return ($smarty->fetch (get_template_path("contents.tpl", TRUE, dirname(__FILE__))));
->>>>>>> gosa-core_v2.8
     }
 }
 

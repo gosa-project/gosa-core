@@ -134,19 +134,9 @@ if (! $cleanup ){
             session::set('MyAccountTabs',$MyAccountTabs);
         }
 
-<<<<<<< HEAD
         /* Show page footer depending on the mode */
         if (!$MyAccountTabs->is_modal_dialog() && empty($lock_msg) && !$MyAccountTabs->password_change_needed){
 
-=======
-        $theme = getThemeName();
-
-        /* Show page footer depending on the mode */
-        if (!$MyAccountTabs->is_modal_dialog() && empty($lock_msg) && !$MyAccountTabs->password_change_needed){
-
-            switch ($theme) {
-                case 'classic':
->>>>>>> gosa-core_v2.8
             $display.= "<div class='plugin-actions'>";
 
             /* Are we in edit mode? */
@@ -158,35 +148,8 @@ if (! $cleanup ){
                     $display.= "<button class='button' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
                 }
                 $display.= "<input type='hidden' name='ignore'>\n";
-<<<<<<< HEAD
             }
             $display.= "</div>\n";
-=======
-
-                    }
-                    $display.= "</div>\n";
-                    break;
-                
-                default:
-                    $display.=" <div class='card-action'>";
-
-                    /* Are we in edit mode? */
-                    if (session::is_set('edit')){
-                        $display.= "<button class='btn-small primary' type='submit' name='edit_finish'>".msgPool::okButton()."</button>\n";
-                        $display.= "<button class='btn-small primary' type='submit' name='edit_cancel'>".msgPool::cancelButton()."</button>\n";
-                    } else {
-                        if (preg_match("/^[r]$/", $ui->get_category_permissions($ui->dn,"users"))) {
-                            break;  
-                        }
-                        if(preg_match("/r/",$ui->get_category_permissions($ui->dn,"users"))){
-                            $display.= "<button class='btn-small primary' type='submit' name='edit'>".msgPool::editButton()."</button>\n";
-                        }
-                        $display.= "<input type='hidden' name='ignore'>\n";
-                    }
-                    $display.=" </div>";
-                    break;
-            }
->>>>>>> gosa-core_v2.8
         }
     }
 }

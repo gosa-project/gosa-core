@@ -132,9 +132,10 @@ class session {
         return($ret);
     }
 
-    public static function global_get($name)
+    public static function &global_get($name)
     {
-        return $_SESSION[$name];
+        $ret = &$_SESSION[$name];
+        return($ret);
     }
 
     public static function delete($name)
@@ -225,3 +226,4 @@ class session {
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

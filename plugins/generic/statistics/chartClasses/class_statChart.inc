@@ -109,11 +109,7 @@ class statChart{
                     "   <input id='addSeries_{$this->graphName}_{$key}' type='checkbox' ".
                     "       name='addSeries_{$this->graphName}_{$key}' value='1'".
                     "       onClick=\"document.mainform.submit();\" ".
-<<<<<<< HEAD
                     "       {$checked}><LABEL for='addSeries_{$this->graphName}_{$key}'>{$item}</LABEL>".
-=======
-                    "       {$checked}><label for='addSeries_{$this->graphName}_{$key}'>{$item}</label>".
->>>>>>> gosa-core_v2.8
                     "   </span>";
         }
         return($str);

@@ -5,38 +5,20 @@
  * @package Smarty
  * @subpackage PluginsModifierCompiler
  */
-<<<<<<< HEAD
 
 /**
  * Smarty wordwrap modifier plugin
  * 
  * Type:     modifier<br>
  * Name:     wordwrap<br>
-=======
-/**
- * Smarty wordwrap modifier plugin
- * Type:     modifier
- * Name:     wordwrap
->>>>>>> gosa-core_v2.8
  * Purpose:  wrap a string of text at a given length
  * 
  * @link http://smarty.php.net/manual/en/language.modifier.wordwrap.php wordwrap (Smarty online manual)
  * @author Uwe Tews 
-<<<<<<< HEAD
  * @param array $params parameters
  * @return string with compiled code
  */
 function smarty_modifiercompiler_wordwrap($params, $compiler)
-=======
- *
- * @param array                                 $params parameters
- * @param \Smarty_Internal_TemplateCompilerBase $compiler
- *
- * @return string with compiled code
- * @throws \SmartyException
- */
-function smarty_modifiercompiler_wordwrap($params, Smarty_Internal_TemplateCompilerBase $compiler)
->>>>>>> gosa-core_v2.8
 {
     if (!isset($params[1])) {
         $params[1] = 80;
@@ -49,7 +31,6 @@ function smarty_modifiercompiler_wordwrap($params, Smarty_Internal_TemplateCompi
     } 
     $function = 'wordwrap';
     if (Smarty::$_MBSTRING) {
-<<<<<<< HEAD
     if ($compiler->template->caching && ($compiler->tag_nocache | $compiler->nocache)) {
             $compiler->template->required_plugins['nocache']['wordwrap']['modifier']['file'] = SMARTY_PLUGINS_DIR .'shared.mb_wordwrap.php';
             $compiler->template->required_plugins['nocache']['wordwrap']['modifier']['function'] = 'smarty_mb_wordwrap';
@@ -63,9 +44,3 @@ function smarty_modifiercompiler_wordwrap($params, Smarty_Internal_TemplateCompi
 } 
 
 ?>
-=======
-        $function = $compiler->getPlugin('mb_wordwrap', 'modifier');
-    }
-    return $function . '(' . $params[ 0 ] . ',' . $params[ 1 ] . ',' . $params[ 2 ] . ',' . $params[ 3 ] . ')';
-}
->>>>>>> gosa-core_v2.8

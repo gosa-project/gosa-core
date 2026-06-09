@@ -1,13 +1,8 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Rdelim
-<<<<<<< HEAD
  *
  * Compiles the {rdelim} tag
-=======
- * Compiles the {rdelim} tag
- *
->>>>>>> gosa-core_v2.8
  * @package Smarty
  * @subpackage Compiler
  * @author Uwe Tews
@@ -19,7 +14,6 @@
  * @package Smarty
  * @subpackage Compiler
  */
-<<<<<<< HEAD
 class Smarty_Internal_Compile_Rdelim extends Smarty_Internal_CompileBase {
 
     /**
@@ -45,23 +39,3 @@ class Smarty_Internal_Compile_Rdelim extends Smarty_Internal_CompileBase {
 }
 
 ?>
-=======
-class Smarty_Internal_Compile_Rdelim extends Smarty_Internal_Compile_Ldelim
-{
-    /**
-     * Compiles code for the {rdelim} tag
-     * This tag does output the right delimiter.
-     *
-     * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
-     *
-     * @return string compiled code
-     * @throws \SmartyCompilerException
-     */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
-    {
-        parent::compile($args, $compiler);
-        return $compiler->smarty->right_delimiter;
-    }
-}
->>>>>>> gosa-core_v2.8

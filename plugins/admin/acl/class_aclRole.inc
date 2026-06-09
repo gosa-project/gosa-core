@@ -195,15 +195,9 @@ class aclrole extends acl
 
   function convertForListing($entry)
   {
-<<<<<<< HEAD
     $member = implode($entry['members'],", ");
     $acl = implode(array_keys($entry['acl']),", ");
     $type = implode(array_keys($entry['acl']),", ");
-=======
-    $member = implode(", ", $entry['members']);
-    $acl = implode(", ", array_keys($entry['acl']));
-    $type = implode(", ", array_keys($entry['acl']));
->>>>>>> gosa-core_v2.8
     return(array('data' => array($acl, $this->aclTypes[$entry['type']])));
   }
 
@@ -217,11 +211,6 @@ class aclrole extends acl
     $tmp= session::get('plist');
     $plist= $tmp->info;
 
-<<<<<<< HEAD
-=======
-    $theme = getThemeName();
-
->>>>>>> gosa-core_v2.8
     /* Handle posts */
     if (isset($_POST['new_acl']) && $this->acl_is_writeable("gosaAclTemplate")){
       $this->dialogState= 'create';
@@ -397,11 +386,7 @@ class aclrole extends acl
       // Create a map of all used sections, this allows us to simply hide the remove button
       //  if no acl is configured for the given section
       // e.g. ';all;department/country;users/user;
-<<<<<<< HEAD
       $usedList = ";".implode(array_keys($this->aclContents),';').";";
-=======
-      $usedList = ";".implode(';', array_keys($this->aclContents)).";";
->>>>>>> gosa-core_v2.8
 
       /* Add settings for all categories to the (permanent) list */
       foreach ($this->aclObjects as $section => $dsc){
@@ -424,52 +409,17 @@ class aclrole extends acl
 
         /* Set summary... */
         if ($summary == ""){
-<<<<<<< HEAD
           $summary= '<i>'._("No ACL settings for this category").'</i>';
-=======
-          switch ($theme) {
-            case 'classic':
-              $summary = '<i>'._("No ACL settings for this category!").'</i>';
-              break;
-            
-            default:
-              $summary = '<p>'._("No ACL settings for this category!").'</p>';
-              break;
-          }
->>>>>>> gosa-core_v2.8
         } else {
           $summary= sprintf(_("ACL for these objects: %s"), preg_replace('/, $/', '', $summary));
         }
 
         $action = "";
         if($this->acl_is_readable("gosaAclTemplate")){
-<<<<<<< HEAD
           $action.= image('images/lists/edit.png','cat_edit_'.$section,_("Edit category ACL"));
         }
         if($this->acl_is_writeable("gosaAclTemplate")  && preg_match("/;".$section."(;|\/)/", $usedList)){
           $action.= image('images/lists/trash.png','cat_del_'.$section,_("Delete category ACL"));
-=======
-          switch ($theme) {
-            case 'classic':
-              $action .= image('images/lists/edit.png', 'cat_edit_'.$section,_("Edit category ACL"));
-              break;
-            
-            default:
-              $action .= image("<i class='material-icons input-icons'>edit</i>", 'cat_edit_'.$section,_("Edit category ACL"));
-              break;
-          }
-        }
-        if($this->acl_is_writeable("gosaAclTemplate")  && preg_match("/;".$section."(;|\/)/", $usedList)){
-          switch ($theme) {
-            case 'classic':
-              $action .= image('images/lists/trash.png','cat_del_'.$section,_("Delete category ACL"));
-              break;
-            
-            default:
-              $action .= image("<i class='material-icons input-icons'>delete</i>", 'cat_del_'.$section,_("Delete category ACL"));
-              break;
-          }
->>>>>>> gosa-core_v2.8
         }
         $data[] = $section;
         $lData[] = array('data'=>array($dsc, $summary, $action));

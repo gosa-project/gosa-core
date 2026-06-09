@@ -650,25 +650,11 @@ class plugin
     } else {
       $state= "";
     }
+    $display = "<div class='plugin-enable-header'>\n";
+    $display.= "<p>$text</p>\n";
+    $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
+    $display.= "</div>\n";
 
-    $theme = getThemeName();
-
-    switch ($theme) {
-      case 'classic':
-        $display = "<div class='plugin-enable-header'>
-                      <p>$text</p>
-                      <button type='submit' name=\"modify_state\" ".$state.">$button_text</button>
-                    </div>";
-        break;
-      
-      default:
-        $display = "<h2 class='card-title'>"._(Preferences)."</h2>
-                      <p>$text</p>
-                      <div class='card-action settings'>
-                        <button class='btn-small' type='submit' name=\"modify_state\" ".$state.">$button_text</button>
-                      </div>";
-        break;
-    }
     return($display);
   }
 
@@ -676,34 +662,15 @@ class plugin
   /*! \brief Show header message for tab dialogs */
   function show_disable_header($button_text, $text, $disabled= FALSE)
   {
-    $theme = getThemeName();
-
     if (($disabled == TRUE) || !$this->acl_is_removeable()){
       $state= "disabled";
     } else {
       $state= "";
     }
-
-    switch ($theme) {
-      case 'classic':
-        $display = "<div class='plugin-disable-header'>
-                      <p>$text</p>
-                      <button type='submit' name=\"modify_state\" ".$state.">
-                        $button_text
-                      </button>
-                    </div>";
-        break;
-      
-      default:
-        $display = "<h2 class='card-title'>"._(Preferences)."</h2>
-                    <p>$text</p>
-                    <div class='card-action settings'>
-                      <button class='btn-small' type='submit' name='modify_state' ".$state.">
-                        $button_text
-                      </button>
-                    </div>";
-        break;
-    }
+    $display = "<div class='plugin-disable-header'>\n";
+    $display.= "<p>$text</p>\n";
+    $display.= "<button type='submit' name=\"modify_state\" ".$state.">$button_text</button>\n";
+    $display.= "</div>\n";
     return($display);
   }
 
@@ -1434,8 +1401,8 @@ class plugin
           }
 
           /* Build new acl string */ 
-          $acl_parts[$id] = implode(",", $members);
-          $acls[] = implode(":", $acl_parts);
+          $acl_parts[$id] = implode($members,",");
+          $acls[] = implode($acl_parts,":");
         }
 
         /* Acls for this object must be adjusted */
@@ -1747,3 +1714,4 @@ class plugin
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

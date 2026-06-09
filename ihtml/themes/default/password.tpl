@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 
 <!DOCTYPE html>
 <html>
-=======
-<!DOCTYPE html>
-<html>
-
->>>>>>> gosa-core_v2.8
   <head>
     <title>GOsa - {t}Change your password{/t}</title>
     <meta name="generator" content="my hands">
@@ -20,13 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
 
-<<<<<<< HEAD
     <style type="text/css">@import url('themes/default/style.css');</style>
-=======
-    <style type="text/css">
-        @import url('themes/default/style.css');
-    </style>
->>>>>>> gosa-core_v2.8
     <link rel="stylesheet" type="text/css" href="themes/default/printer.css" media="print">
 
     <!--[if IE]>
@@ -37,13 +25,7 @@
 
     <!-- Include correct theme icon sets -->
     <style type="text/css">
-<<<<<<< HEAD
       div.img, div.img div, input[type=submit].img{
-=======
-        div.img,
-        div.img div,
-        input[type=submit].img {
->>>>>>> gosa-core_v2.8
         background-image:url(themes/default/images/img.png);
       }
     </style>
@@ -87,12 +69,7 @@
                 <!-- Display error message on demand -->
                 {if $message}<div class='login-warning'>{$message}</div>{/if}
 
-<<<<<<< HEAD
                 <p class="infotext">{t}Enter the current password and the new password (twice) in the fields below and press the 'Set password' button.{/t}</p>
-=======
-            <p class="infotext">{t}Enter the current password and the new password (twice) in the fields below and press
-                the 'Set password' button.{/t}</p>
->>>>>>> gosa-core_v2.8
 
                 <table summary="{t}Change password{/t}">
                     {if $show_directory_chooser}
@@ -109,30 +86,20 @@
                     <td><b>{t}User name{/t}</b></td>
                     <td>
                         {if $display_username}
-<<<<<<< HEAD
                             <input type='text' name='uid' maxlength='40' value='{$uid}' 
                                 title='{t}User name{/t}' onFocus="nextfield= 'current_password';">
-=======
-                        <input type='text' name='uid' maxlength='40' value='{$uid}' title='{t}User name{/t}'
-                            onFocus="nextfield= 'current_password';">
->>>>>>> gosa-core_v2.8
                         {else}
                             <i>{$uid}</i>
                         {/if}
                     </td>
                 </tr>
                 <tr>
-<<<<<<< HEAD
                     <td><b><LABEL for="current_password">{t}Current password{/t}</LABEL></b></td>
-=======
-                    <td><b><label for="current_password">{t}Current password{/t}</label></b></td>
->>>>>>> gosa-core_v2.8
                     <td>
                         {factory type='password' name='current_password' id='current_password' onfocus="nextfield= 'new_password';"}
                     </td>
                 </tr>
                 <tr>
-<<<<<<< HEAD
                     <td><b><LABEL for="new_password">{t}New password{/t}</LABEL></b></td>
                     <td>
                         {factory type='password' name='new_password' id='new_password'
@@ -141,15 +108,6 @@
                 </tr>
                 <tr>
                     <td><b><LABEL for="new_password_repeated">{t}Repeat new password{/t}</LABEL></b></td>
-=======
-                    <td><b><label for="new_password">{t}New password{/t}</label></b></td>
-                    <td>
-                        {factory type='password' name='new_password' id='new_password' onfocus="nextfield='new_password_repeated';"}
-                    </td>
-                </tr>
-                <tr>
-                    <td><b><label for="new_password_repeated">{t}Repeat new password{/t}</label></b></td>
->>>>>>> gosa-core_v2.8
                     <td>
                         {factory type='password' name='new_password_repeated' id='new_password_repeated' 
                                 onfocus="nextfield= 'password_finish';"}
@@ -169,13 +127,8 @@
             <hr>
 
             <div class="plugin-actions">
-<<<<<<< HEAD
                 <button type='submit' name='apply' 
                     title='{t}Click here to change your password{/t}'>{t}Set password{/t}</button>
-=======
-                <button type='submit' name='apply' title='{t}Click here to change your password{/t}'>{t}Set
-                    password{/t}</button>
->>>>>>> gosa-core_v2.8
                 <input type='hidden' id='formSubmit'>
             </div>
 
@@ -183,19 +136,13 @@
             <!-- check, if cookies are enabled -->
             <p class='warning'>
              <script language="JavaScript" type="text/javascript">
-<<<<<<< HEAD
                 <!--
-=======
->>>>>>> gosa-core_v2.8
                     document.cookie = "gosatest=empty;path=/";
                     if (document.cookie.indexOf( "gosatest=") > -1 )
                         document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
                     else
                         document.write("{$cookies}");
-<<<<<<< HEAD
                 -->
-=======
->>>>>>> gosa-core_v2.8
              </script>
             </p>
 
@@ -211,8 +158,4 @@
     </script>
 
   </body>
-<<<<<<< HEAD
-=======
-
->>>>>>> gosa-core_v2.8
 </html>
