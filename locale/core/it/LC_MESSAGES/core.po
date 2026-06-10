@@ -1873,6 +1873,7 @@ msgstr "Annulla"
 #: setup/class_setupStep_Migrate.inc:303 setup/class_setupStep_Migrate.inc:684
 #: setup/class_setupStep_Migrate.inc:828 setup/setup_checks.tpl:21
 #: setup/setup_checks.tpl:62 ihtml/themes/default/msg_dialog.tpl:77
+#: ihtml/themes/default/error_collector.tpl:82
 #: ihtml/themes/default/msg_dialog.tpl:79
 #: ihtml/themes/default/msg_dialog.tpl:136
 #: ihtml/themes/default/msg_dialog.tpl:139
@@ -4045,6 +4046,31 @@ msgstr "Non hai il permesso di cambiare la tua password."
 #: plugins/personal/password/password.tpl:112
 msgid "Set password"
 msgstr "Cambia password"
+
+# Machine translated using Google Translate or DeepL
+#: ihtml/themes/default/error_collector.tpl:6
+msgid "There was a %1problem%2 while generating this GOsa page!"
+msgstr "Si è verificato un %1problema%2 durante la generazione di questa pagina GOsa!"
+
+# Machine translated using Google Translate or DeepL
+#: ihtml/themes/default/error_collector.tpl:11
+msgid "PHP errors detected!"
+msgstr "Sono stati rilevati errori PHP!"
+
+# Machine translated using Google Translate or DeepL
+#: ihtml/themes/default/error_collector.tpl:16
+msgid "GOsa version:"
+msgstr "Versione GOsa:"
+
+# Machine translated using Google Translate or DeepL
+#: ihtml/themes/default/error_collector.tpl:77
+msgid "Click on the elements to open them."
+msgstr "Fai clic sugli elementi per aprirli."
+
+# Machine translated using Google Translate or DeepL
+#: ihtml/themes/default/error_collector.tpl:91
+msgid "%1 error(s) detected!"
+msgstr "%1 errore(i) rilevato(i)!"
 
 #: ihtml/themes/default/removeEntries.tpl:4
 #: plugins/addons/propertyEditor/property-list.tpl:7

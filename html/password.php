@@ -327,10 +327,11 @@ if (session::is_set('errors')) {
     $smarty->assign("errors", session::get('errors'));
     ;
 }
-if ($error_collector != "") {
-    $smarty->assign("php_errors", $error_collector."</div>");
+if (!empty($error_collector['items'])) {
+    $smarty->assign('error_collector', $error_collector);
+    $smarty->assign('php_errors', $smarty->fetch(get_template_path('error_collector.tpl')));
 } else {
-    $smarty->assign("php_errors", "");
+    $smarty->assign('php_errors', '');
 }
 
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
