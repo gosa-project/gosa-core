@@ -3985,22 +3985,27 @@ msgstr "Kliknij tutaj aby zmienić swoje hasło"
 msgid "Set password"
 msgstr "Ustaw hasło"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:6
 msgid "There was a %1problem%2 while generating this GOsa page!"
 msgstr "Wystąpił %1problem%2 podczas generowania tej strony GOsa!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:11
 msgid "PHP errors detected!"
 msgstr "Wykryto błędy PHP!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:16
 msgid "GOsa version:"
 msgstr "Wersja GOsa:"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:77
 msgid "Click on the elements to open them."
 msgstr "Kliknij na elementy, aby je otworzyć."
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:91
 msgid "%1 error(s) detected!"
 msgstr "Wykryto %1 błędów!"

@@ -4054,22 +4054,27 @@ msgstr "Clique aqui para alterar sua senha"
 msgid "Set password"
 msgstr "Salvar senha"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:6
 msgid "There was a %1problem%2 while generating this GOsa page!"
 msgstr "Ocorreu um %1problema%2 ao gerar esta página GOsa!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:11
 msgid "PHP errors detected!"
 msgstr "Erros de PHP detectados!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:16
 msgid "GOsa version:"
 msgstr "Versão GOsa:"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:77
 msgid "Click on the elements to open them."
 msgstr "Clique nos elementos para abri-los."
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:91
 msgid "%1 error(s) detected!"
 msgstr "%1 erro(s) detectado(s)!"

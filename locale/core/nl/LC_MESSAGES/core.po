@@ -4126,22 +4126,27 @@ msgstr "Klik hier om uw wachtwoord te veranderen."
 msgid "Set password"
 msgstr "Wachtwoord instellen"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:6
 msgid "There was a %1problem%2 while generating this GOsa page!"
 msgstr "Er is een %1probleem%2 opgetreden tijdens het genereren van deze GOsa-pagina!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:11
 msgid "PHP errors detected!"
 msgstr "PHP-fouten gedetecteerd!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:16
 msgid "GOsa version:"
 msgstr "GOsa-versie:"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:77
 msgid "Click on the elements to open them."
 msgstr "Klik op de elementen om ze te openen."
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:91
 msgid "%1 error(s) detected!"
 msgstr "Er is %1 fout(en) gedetecteerd!"

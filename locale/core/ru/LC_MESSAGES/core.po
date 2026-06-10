@@ -4070,22 +4070,27 @@ msgstr "У вас недостаточно прав для смены своег
 msgid "Set password"
 msgstr "Изменить пароль"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:6
 msgid "There was a %1problem%2 while generating this GOsa page!"
 msgstr "При генерации этой страницы GOsa возникла %1проблема%2!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:11
 msgid "PHP errors detected!"
 msgstr "Обнаружены ошибки PHP!"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:16
 msgid "GOsa version:"
 msgstr "Версия GOsa:"
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:77
 msgid "Click on the elements to open them."
 msgstr "Нажмите на элементы, чтобы открыть их."
 
+# Machine translated using Google Translate or DeepL
 #: ihtml/themes/default/error_collector.tpl:91
 msgid "%1 error(s) detected!"
 msgstr "Обнаружено %1 ошибка!"
