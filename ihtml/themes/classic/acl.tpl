@@ -19,12 +19,12 @@
 		<td>
 			{if !$acl_writeable}
 			<select size="1" name="dummy_t" title="{t}Select an ACL type{/t}" disabled>
-				{html_options options=$aclTypes selected=$aclType}
+				{html_options options=$acl_types selected=$acl_type}
 				<option disabled>&nbsp;</option>
 			</select>&nbsp;
 			{else}
-			<select size="1" name="aclType" title="{t}Select an ACL type{/t}" onChange="document.mainform.submit()">
-				{html_options options=$aclTypes selected=$aclType}
+			<select size="1" name="acl_type" title="{t}Select an ACL type{/t}" onChange="document.mainform.submit()">
+				{html_options options=$acl_types selected=$acl_type}
 				<option disabled>&nbsp;</option>
 			</select size=1>&nbsp;
 			{if $javascript eq 'false'}
@@ -56,9 +56,9 @@
 <button type='submit' {if !$acl_writeable} disabled="disabled" {/if} name='add_all_users'>{t}Add all
 	users{/t}</button>&nbsp;
 
-{if $aclType ne 'reset'}
-{if $aclType ne 'role'}
-{if $aclType ne 'base'}
+{if $acl_type ne 'reset'}
+{if $acl_type ne 'role'}
+{if $acl_type ne 'base'}
 <hr>
 
 <h3>{t}List of available ACL categories{/t}</h3>
@@ -67,13 +67,13 @@
 {/if}
 {/if}
 
-{if $aclType eq 'base'}
+{if $acl_type eq 'base'}
 <hr>
 <h3>{t}ACL for this object{/t}</h3>
 {$aclSelector}
 {/if}
 
-{if $aclType eq 'role'}
+{if $acl_type eq 'role'}
 <hr>
 <h3>{t}Available roles{/t}</h3>
 {$roleSelector}
