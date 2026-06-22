@@ -672,3 +672,8 @@ function startLoginDelay(remainingLoginDelay) {
 var rtimer;
 
 // vim:ts=2:syntax
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the collapsibles
+    M.Collapsible.init(document.querySelectorAll('.collapsible'));
+});
