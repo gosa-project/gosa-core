@@ -671,9 +671,9 @@ function startLoginDelay(remainingLoginDelay) {
 // Global storage for baseSelector timer
 var rtimer;
 
-// vim:ts=2:syntax
-
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the collapsibles
     M.Collapsible.init(document.querySelectorAll('.collapsible'));
 });
+
+// vim:ts=2:syntax
