@@ -319,6 +319,7 @@ class sortableListing
                         foreach ($this->displayData[$row] as $column) {
 
                             // Do NOT use the onClick statement for columns that contain links or buttons.
+                            $column = $column ?? "";
                             if (preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column)) {
                                 $result .= "   <td$first>" . $column . "</td>\n";
                             } else {
@@ -451,6 +452,7 @@ class sortableListing
 
                         foreach ($this->displayData[$row] as $column) {
                             // Do NOT use the onClick statement for columns that contain links or buttons.
+                            $column = $column ?? "";
                             if (!is_null($column) && (preg_match("<.*type=.submit..*>", $column) || preg_match("<a.*href=.*>", $column))) {
                                 $result .= "   <td class='last-column'>" . $column . "</td>";
                             } else {
