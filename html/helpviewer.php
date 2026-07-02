@@ -116,7 +116,7 @@ if (session::global_is_set('current_class_for_help')) {
     if ($helpdir == "") {
 
         $smarty->assign("help_contents", "<br><h2>" . _("There is no help file specified for this class")) . "</h2>";
-        $header = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl'));
+        $header = $smarty->fetch(get_template_path('headers.tpl'));
         $display = ($header . $smarty->fetch(get_template_path('help.tpl')));
         echo $display;
         session::global_un_set('current_class_for_help');
@@ -223,7 +223,7 @@ if (isset($_POST['search'])) {
     /* read all available directories */
     $index = readfiles($helpdir, $prefix, $suffix, false, false);
     $smarty->assign("help_contents", ((searchlist($index, search($index, $_POST['search_string']), 10))));
-    $header = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl'));
+    $header = $smarty->fetch(get_template_path('headers.tpl'));
 
     /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
     $display = ($header . $smarty->fetch(get_template_path('help.tpl')));
@@ -231,7 +231,7 @@ if (isset($_POST['search'])) {
 } elseif (((empty($helpdir))) || ($helpdir == "/")) {
     /* Generate Index and display it */
     $smarty->assign("help_contents", genIndex());
-    $header = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl'));
+    $header = $smarty->fetch(get_template_path('headers.tpl'));
 
     /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
     $display = mb_convert_encoding($header . $smarty->fetch(get_template_path('help.tpl')), 'UTF-8', 'ISO-8859-1');
@@ -252,7 +252,7 @@ if (isset($_POST['search'])) {
 
     /* Display the help contents */
     $smarty->assign("help_contents", $index[$helpobject['file']]['content']);
-    $header = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl'));
+    $header = $smarty->fetch(get_template_path('headers.tpl'));
 
     /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
     $smarty->assign("backward", $back);
@@ -263,7 +263,7 @@ if (isset($_POST['search'])) {
 
     /* There was a file requested which actually doesn't exists */
     $smarty->assign("help_contents", "<h2>" . sprintf(_("Help directory '%s' is not accessible, can't read any help files."), $helpdir)) . "</h2><br>";
-    $header = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl'));
+    $header = $smarty->fetch(get_template_path('headers.tpl'));
     $display = ($header . $smarty->fetch(get_template_path('help.tpl')));
     echo $display;
 }

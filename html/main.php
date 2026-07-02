@@ -497,7 +497,7 @@ if (!isset($_SESSION['screen_width'])) {
     }
 }
 
-$display = "<!-- headers.tpl-->" . $smarty->fetch(get_template_path('headers.tpl')) .
+$display = $smarty->fetch(get_template_path('headers.tpl')) .
     $smarty->fetch(get_template_path('framework.tpl'));
 
 /* Save dialog filters and selected base in a cookie.
