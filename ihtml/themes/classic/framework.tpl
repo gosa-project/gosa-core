@@ -56,7 +56,7 @@
     function logout() {
       document.location = 'logout.php';
     }
-    logout.delay({ $sessionLifetime });
+    logout.delay({$sessionLifetime});
 
 
     // Append change handler to all input fields. 
