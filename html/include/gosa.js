@@ -153,7 +153,7 @@ function changeState(...args) {
         var element = document.getElementById(element);
         if (element.disabled) {
             element.disabled = false;
-            if (element.tagName === 'SELECT') {
+            if (element.tagName === 'SELECT' && typeof M !== 'undefined' && M.FormSelect) {
                 let dropdownOptions = {
                     dropdownOptions: {
                         'constrainWidth': true,
@@ -166,7 +166,7 @@ function changeState(...args) {
             }
         } else {
             element.disabled = true;
-            if (element.tagName === 'SELECT') {
+            if (element.tagName === 'SELECT' && typeof M !== 'undefined' && M.FormSelect) {
                 let selectInstances = M.FormSelect.init(element);
             }
         }
