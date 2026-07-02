@@ -673,7 +673,9 @@ var rtimer;
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the collapsibles
-    M.Collapsible.init(document.querySelectorAll('.collapsible'));
+    if (typeof M !== 'undefined' && M.Collapsible) {
+        M.Collapsible.init(document.querySelectorAll('.collapsible'));
+    }
 });
 
 // vim:ts=2:syntax
