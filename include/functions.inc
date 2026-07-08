@@ -238,7 +238,7 @@ function DEBUG($level, $line, $function, $file, $data, $info = ''): void
     if ($config instanceof config) {
         $debugLevel = $config->get_cfg_value('core', 'debugLevel');
     }
-    if ($debugLevel && $level) {
+    if (intval($debugLevel) & $level) { // Make bitwise AND operation.
         $output = "DEBUG[$level] ";
         if ($function != '') {
             $output .= "($file:$function():$line) - $info: ";
