@@ -1844,7 +1844,13 @@ abstract class plugin
                     // Close the process and check its return value
                     $returnCode = proc_close($process);
                     $returnOutput = preg_split("/\n/", $arr, 0, PREG_SPLIT_NO_EMPTY);
+                    if (!is_array($returnOutput)) {
+                        $returnOutput = array(); // Make sure returnOutput is always an array.
+                    }
                     $errorOutput = preg_split("/\n/", $err, 0, PREG_SPLIT_NO_EMPTY);
+                    if (!is_array($errorOutput)) {
+                        $errorOutput = array(); // Make sure errorOutput is always an array.
+                    }
                 }
 
                 if ($returnCode != 0) {
@@ -1857,8 +1863,9 @@ abstract class plugin
                         $message = msgPool::cmdexecfailed($cmd, "...", get_class($plugin));
                         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
                     }
-                } elseif (is_array($arr)) {
-                    DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Result: " . $arr);
+                } else {
+                    DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Success result (stdout):<br>" . implode("<br>", $returnOutput));
+                    DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Success result (stderr):<br>" . implode("<br>", $errorOutput));
                 }
             } elseif ($displayErrors) {
                 $message = msgPool::cmdinvalid($cmd, $command, get_class($plugin));
