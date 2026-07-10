@@ -224,7 +224,7 @@
 
         {render acl=$ouACL checkbox=$multiple_support checked=$use_ou}
         <div class="input-field">
-            <input type="text" id="ou" name="ou" maxlength=60 value="{$o}">
+            <input type="text" id="ou" name="ou" maxlength=60 value="{$ou}">
             <label for="ou">{t}Department{/t}</label>
         </div>
         {/render}
