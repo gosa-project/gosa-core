@@ -58,10 +58,10 @@
 
     <table summary="{t}Password expiration settings{/t}" border="0" cellpadding="0" cellspacing="0">
      <tr>
-      <td>
+      <td style="vertical-align:middle">
        {t}Password expires on{/t}&nbsp;
       </td>
-      <td style='width:125px'>
+      <td style='width:200px'>
 
        {render acl=$shadowExpireACL}
         <input type="text" id="shadowExpire" name="shadowExpire" class="date" style='width:100px' value="{$shadowExpire}">

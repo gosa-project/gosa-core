@@ -29,12 +29,12 @@
 								<div class="input-field">
 									{if !$acl_writeable}
 										<select id="acl_type" size="1" name="dummy_t" title="{t}Select an ACL type{/t}" disabled>
-											{html_options options=$aclTypes selected=$aclType}
+											{html_options options=$acl_types selected=$acl_type}
 										</select>
 									{else}
-										<select id="acl_type" size="1" name="aclType" title="{t}Select an ACL type{/t}"
+										<select id="acl_type" size="1" name="acl_type" title="{t}Select an ACL type{/t}"
 											onChange="document.mainform.submit()">
-											{html_options options=$aclTypes selected=$aclType}
+											{html_options options=$acl_types selected=$acl_type}
 										</select size="1">
 
 										{if $javascript eq 'false'}
@@ -68,9 +68,9 @@
 								name='add_all_users'>{t}Add all users{/t}</button>
 						</div>
 
-						{if $aclType ne 'reset'}
-							{if $aclType ne 'role'}
-								{if $aclType ne 'base'}
+						{if $acl_type ne 'reset'}
+							{if $acl_type ne 'role'}
+								{if $acl_type ne 'base'}
 									<div class="acl-categories">
 										<h3>{t}List of available ACL categories{/t}</h3>
 										{$aclList}
@@ -79,14 +79,14 @@
 							{/if}
 						{/if}
 
-						{if $aclType eq 'base'}
+						{if $acl_type eq 'base'}
 							<div class="acl-for-object">
 								<h3>{t}ACL for this object{/t}</h3>
 								{$aclSelector}
 							</div>
 						{/if}
 
-						{if $aclType eq 'role'}
+						{if $acl_type eq 'role'}
 							<div class="acl-roles">
 								<h3>{t}Available roles{/t}</h3>
 								{$roleSelector}

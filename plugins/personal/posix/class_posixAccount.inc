@@ -242,14 +242,14 @@ class posixAccount extends plugin
             ) as $val
         ) {
 
-            if ($this->$val != 0) {
+            if ($this->$val != 0 && $this->$val !== "") {
                 $oval = "activate_" . $val;
                 $this->$oval = "1";
             }
         }
 
         /* Convert shadowExpire for usage */
-        if ($this->shadowExpire == 0) {
+        if ($this->shadowExpire == 0 || $this->shadowExpire == "") {
             $this->shadowExpire = '';
         } else {
             $this->shadowExpire = date('d.m.Y', intval($this->shadowExpire) * 60 * 60 * 24);
@@ -909,6 +909,10 @@ class posixAccount extends plugin
         }
 
         foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowExpire") as $attr) {
+            if (is_string($this->$attr) && empty($this->$attr)) {
+                continue;
+            }
+
             $this->$attr = (int) $this->$attr;
         }
         /* Call parents save to prepare $this->attrs */
@@ -1263,7 +1267,7 @@ class posixAccount extends plugin
                 "shadowExpire"
             ) as $val
         ) {
-            if ($this->$val != 0) {
+            if ($this->$val != 0 && $this->$val !== "") {
                 $oval = "activate_" . $val;
                 $this->$oval = "1";
             }
@@ -1275,7 +1279,7 @@ class posixAccount extends plugin
         }
 
         /* Convert shadowExpire for usage */
-        if ($this->shadowExpire == 0) {
+        if ($this->shadowExpire == 0 || $this->shadowExpire == "") {
             $this->shadowExpire = '';
         } else {
             $this->shadowExpire = date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
@@ -1458,14 +1462,14 @@ class posixAccount extends plugin
             ) as $val
         ) {
 
-            if ($this->$val != 0) {
+            if ($this->$val != 0 && $this->$val !== "") {
                 $oval = "activate_" . $val;
                 $this->$oval = "1";
             }
         }
 
         /* Convert shadowExpire for usage */
-        if ($this->shadowExpire == 0) {
+        if ($this->shadowExpire == 0 || $this->shadowExpire == "") {
             $this->shadowExpire = '';
         } else {
             $this->shadowExpire = date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
@@ -1704,7 +1708,7 @@ class posixAccount extends plugin
                 "shadowExpire"
             ) as $val
         ) {
-            if ($this->$val != 0) {
+            if ($this->$val != 0 && $this->$val !== "") {
                 $oval = "activate_" . $val;
                 $this->$oval = "1";
             }
