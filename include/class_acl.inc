@@ -474,7 +474,7 @@ class acl extends plugin
             }
 
             /* Save new acl in case of base edit mode */
-            if ($this->acl_type == 'base' && !$firstedit && !empty($new_acl) && !$aclDialog) {
+            if ($this->acl_type == 'base' && !$firstedit && !empty($new_acl) && $this->aclObject == "") {
                 $this->aclContents = $new_acl;
 
                 if ($this->currentIndex != null && isset($this->gosaAclEntry[$this->currentIndex])) {
