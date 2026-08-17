@@ -1,4 +1,4 @@
-<h3>{$warning}</h3>
+<h3>{t 1=$current_size_limit}The current size limit of %1 entries is exceeded!{/t}</h3>
 <p>
 {t}The size limit option makes LDAP operations faster and saves the LDAP server from getting too much load. The easiest way to handle big databases without long timeouts would be to limit your search to smaller values and use filters to get the entries you are looking for.{/t}
 </p>
@@ -9,7 +9,8 @@
 <p>
 <input type="radio" name="action" value="ignore">{t}ignore this error and show all entries the LDAP server returns{/t}<br>
 <input type="radio" name="action" value="limited" checked>{t}ignore this error and show all entries that fit into the defined size limit{/t}<br>
-<input type="radio" name="action" value="newlimit">{$limit_message}
+<input type="radio" name="action" value="newlimit">
+<input type="text" name="new_limit" maxlength="10" size="5" value="{$current_size_limit + 100}">
 </p>
 <hr>
 <div class="plugin-actions">

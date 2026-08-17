@@ -1323,32 +1323,16 @@ function check_sizelimit()
     /* Eventually show dialog */
     if (session::is_set('limit_exceeded') && session::get('limit_exceeded')) {
         $smarty = get_smarty();
-        $smarty->assign('warning', sprintf(
-            _("The current size limit of %d entries is exceeded!"),
-            session::global_get('size_limit')
-        ));
-        $smarty->assign('limit_message', sprintf(_("Set the size limit to %s"), '<input type="text" name="new_limit" maxlength="10" size="5" value="' . (session::global_get('size_limit') + 100) . '">'));
+        $smarty->assign('current_size_limit', ((int) session::global_get('size_limit')));
         return ($smarty->fetch(get_template_path('sizelimit.tpl')));
     }
 
     return ('');
 }
 
-/*! \brief Print a sizelimit warning */
-function print_sizelimit_warning()
+function shouldShowSizelimitWarning()
 {
-    if (
-        session::global_is_set('size_limit') && session::global_get('size_limit') >= 10000000 ||
-        (session::is_set('limit_exceeded') && session::get('limit_exceeded'))
-    ) {
-        $config = "<button type='submit' name='edit_sizelimit'>" . _("Configure") . "</button>";
-    } else {
-        $config = '';
-    }
-    if (session::is_set('limit_exceeded') && session::get('limit_exceeded')) {
-        return ("(" . _("list is incomplete") . ") $config");
-    }
-    return ('');
+    return session::is_set('limit_exceeded') && session::get('limit_exceeded');
 }
 
 
