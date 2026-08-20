@@ -23,10 +23,6 @@
 /*! \file
  * Common functions and named definitions. */
 
-/* Define globals for revision comparing */
-$svn_path = '$HeadURL$';
-$svn_revision = '$Revision$';
-
 /* Configuration file location */
 if (!isset($_SERVER['CONFIG_DIR'])) {
     define("CONFIG_DIR", "/etc/gosa");
@@ -2101,40 +2097,27 @@ function validate($string)
 }
 
 
-/*! \brief Evaluate the current GOsa version from the build in revision string */
-function get_gosa_version()
+/*! \brief Get the GOsa version */
+function get_gosa_version_raw(): string
 {
-    global $svn_revision, $svn_path;
+    static $version = null;
 
-    /* Extract informations */
-    $revision = preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
-
-    // Extract the relevant part out of the svn url
-    $release = preg_replace('%^.*/gosa/(.*)/include/functions.inc.*$%', '\1', $svn_path);
-
-    // Remove stuff which is not interesting
-    if (preg_match("/gosa-core/i", $release)) $release = preg_replace("/[\/]gosa-core/i", '', $release);
-
-    // A Tagged Version
-    if (preg_match("#/tags/#i", $svn_path)) {
-        $release = preg_replace("/tags[\/]*/i", '', $release);
-        $release = preg_replace("/\//", '', $release);
-        return (sprintf(_("GOsa %s"), $release));
+    if ($version === null) {
+        // Read the version from the version.php file which is generated during the semantic-release workflow
+        $versionFile = __DIR__ . '/version.php';
+        if (file_exists($versionFile)) {
+            require_once $versionFile;
+        }
+        $version = defined('GOSA_VERSION') ? GOSA_VERSION : 'unknown';
     }
 
-    // A Branched Version
-    if (preg_match("#/branches/#i", $svn_path)) {
-        $release = preg_replace("/branches[\/]*/i", '', $release);
-        $release = preg_replace("/\//", '', $release);
-        return (sprintf(_("GOsa %s snapshot (Rev %s)"), $release, bold($revision)));
-    }
+    return $version;
+}
 
-    // The trunk version
-    if (preg_match("#/trunk/#i", $svn_path)) {
-        return (sprintf(_("GOsa development snapshot (Rev %s)"), bold($revision)));
-    }
-
-    return (sprintf(_("GOsa $release"), $revision));
+/*! \brief Get the GOsa version for display */
+function get_gosa_version(): string
+{
+    return sprintf(_("GOsa %s"), get_gosa_version_raw());
 }
 
 
@@ -2207,7 +2190,7 @@ function scan_directory($path, $sort_desc = false)
 /*! \brief Clean the smarty compile dir */
 function clean_smarty_compile_dir($directory)
 {
-    global $svn_revision;
+    $current_version = get_gosa_version_raw();
 
     if (is_dir($directory) && is_readable($directory)) {
         // Set revision filename to REVISION
@@ -2216,11 +2199,11 @@ function clean_smarty_compile_dir($directory)
         /* Is there a stamp containing the current revision? */
         if (!file_exists($revision_file)) {
             // create revision file
-            create_revision($revision_file, $svn_revision);
+            create_revision($revision_file, $current_version);
         } else {
             # check for "$config->...['CONFIG']/revision" and the
             # contents should match the revision number
-            if (!compare_revision($revision_file, $svn_revision)) {
+            if (!compare_revision($revision_file, $current_version)) {
                 // If revision differs, clean compile directory
                 foreach (scan_directory($directory) as $file) {
                     if (($file == ".") || ($file == "..")) continue;
@@ -2273,10 +2256,12 @@ function compare_revision($revision_file, $revision)
     $result = false;
 
     if (file_exists($revision_file) && is_readable($revision_file)) {
+        $size = filesize($revision_file);
+
         // Open file
-        if ($fh = fopen($revision_file, "r")) {
+        if ($size > 0 && ($fh = fopen($revision_file, "r"))) {
             // Compare File contents with current revision
-            if ($revision == fread($fh, filesize($revision_file))) {
+            if ($revision == fread($fh, $size)) {
                 $result = true;
             }
         } else {
