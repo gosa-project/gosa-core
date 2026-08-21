@@ -1,0 +1,21 @@
+{
+  "branches": [
+    "release",
+    "release/+([0-9])?(.{+([0-9]),x}).x",
+    { "name": "freeze/**", "prerelease": "beta" },
+    { "name": "hotfix/**", "prerelease": "${name.split('/').slice(0, 2).join('-').toLowerCase()}" }
+  ],
+  "tagFormat": "${version}",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    ["@semantic-release/exec", {
+    "prepareCmd": "scripts/write-version.sh ${nextRelease.version}"
+    }],
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    ["@semantic-release/git", {
+      "assets": ["include/version.php", "CHANGELOG.md"]
+    }]
+  ]
+}
