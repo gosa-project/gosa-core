@@ -1,4 +1,4 @@
-## [gosa 2.8]
+## gosa 2.8
 
 
 ### Bug Fixes
@@ -20,7 +20,7 @@
 * Modification of visible elements such as buttons etc to improve robustness.
 * Merged .tpl files that were duplicated.
 
-## [gosa 2.7.5]
+## gosa 2.7.5
 
 
 ### Bug Fixes
@@ -34,7 +34,7 @@
 
 * Made samba primary group selectable for users.
 
-## [gosa 2.7.4]
+## gosa 2.7.4
 
 
 ### Bug Fixes
@@ -54,7 +54,7 @@
 * Allow to modfiy the mail address when cyrus is used as mail method and accounts are identified by uid.
 * Added SASL password method.
 
-## [gosa 2.7.3]
+## gosa 2.7.3
 
 
 ### Bug Fixes
@@ -75,7 +75,7 @@
 * Added checks to ensure that valid hostnames/fqdns are created.
 * Re-added statusbar to fai management plugin.
 
-## [gosa 2.7.2]
+## gosa 2.7.2
 
 ### Bug Fixes
 
@@ -94,7 +94,7 @@
 * Updated Kolab tab, to use a sortable list for mynetworks entries.
 * Updated cleansing of FAI object in ldap, thanks to psc.
 
-## [gosa 2.7.1]
+## gosa 2.7.1
 
 
 ### Bug Fixes
@@ -110,7 +110,7 @@
 * Updated account expiration checks.
 * Updated integrated smarty to 3.0.7
 
-## [gosa 2.7]
+## gosa 2.7
 
 
 ### Bug Fixes
@@ -140,7 +140,7 @@ _None documented_
 * Added automatic logout, for security reasons.
 * Allow to use replacements like {%var[n-m]} in pre and post events and user templates.
 
-## [gosa 2.6.9]
+## gosa 2.6.9
 
 
 ### Bug Fixes
@@ -157,7 +157,7 @@ _None documented_
 * Modified sieve behaviour to use sieve-discard for "drop_own_mails"
 * Modified filter descriptions to behave more like former 2.6 releases
 
-## [gosa 2.6.8]
+## gosa 2.6.8
 
 
 ### Bug Fixes
@@ -173,7 +173,7 @@ _None documented_
 * Added wildcard ACLs
 * Improved ACL handling for new lists
 
-## [gosa 2.6.7]
+## gosa 2.6.7
 
 
 ### Bug Fixes
@@ -199,7 +199,7 @@ _None documented_
 * Save list positions
 * Updated integrated smarty to version 3.0b7 to avoid broken templates during further development
 
-## [gosa 2.6.6]
+## gosa 2.6.6
 
 
 ### Bug Fixes
@@ -238,7 +238,7 @@ _None documented_
 * Enhanced addressbook plugin ACL
 * Removed outdated samba 2 mode
 
-## [gosa 2.6.5]
+## gosa 2.6.5
 
 
 ### Bug Fixes
@@ -261,7 +261,7 @@ _None documented_
 * Added brasilian portuguese
 * Updated logging on debian systems
 
-## [gosa 2.6.4]
+## gosa 2.6.4
 
 
 ### Bug Fixes
@@ -287,7 +287,7 @@ _None documented_
 * Added phoneNumber limitations to match asterisk realtime extension tables
 * Updated addressbook permissions
 
-## [gosa 2.6.3]
+## gosa 2.6.3
 
 
 ### Bug Fixes
@@ -302,7 +302,7 @@ _None documented_
 * Added samba domain information to samba tab
 * Removed readonly attributes from samba tab
 
-## [gosa 2.6.2]
+## gosa 2.6.2
 
 
 ### Bug Fixes
@@ -322,7 +322,7 @@ _None documented_
 * Setup cleanups
 * Edit locking improvements, code cleanup
 
-## [gosa 2.6.1]
+## gosa 2.6.1
 
 
 ### Bug Fixes
@@ -347,7 +347,7 @@ _None documented_
 * Simplified FAI management
 * Removed forced dependency on GOsa-SI
 
-## [gosa 2.6]
+## gosa 2.6
 
 
 ### Bug Fixes
@@ -391,7 +391,7 @@ _None documented_
 * Vietnamese translation
 * New manageable objects country, locality, organization and dcObject
 
-## [gosa 2.5.16]
+## gosa 2.5.16
 
 
 ### Bug Fixes
@@ -411,7 +411,7 @@ _None documented_
 * Increased setup performance
 * Added more secure way to save passwords in gosa.conf
 
-## [gosa 2.5.15]
+## gosa 2.5.15
 
 
 ### Bug Fixes
@@ -436,7 +436,7 @@ _None documented_
 * DNS plugin updates
 * DHCP plugin updates
 
-## [gosa 2.5.14]
+## gosa 2.5.14
 
 
 ### Bug Fixes
@@ -466,7 +466,7 @@ _None documented_
 * Added login attributes uid/mail, you can log in via your mail address, too
 * Removed PHP5 dependency in branch 2.5
 
-## [gosa 2.5.13]
+## gosa 2.5.13
 
 
 ### Bug Fixes
@@ -487,7 +487,7 @@ _None documented_
 * Added the ssh plugin
 * Layout fixes
 
-## [gosa 2.5.12]
+## gosa 2.5.12
 
 
 ### Bug Fixes
@@ -517,7 +517,7 @@ _None documented_
 * Added method to highlight tabs
 * Generel translation update for de, es, fr, it, nl, pl, ru, zh
 
-## [gosa 2.5.11a]
+## gosa 2.5.11a
 
 
 ### Bug Fixes
@@ -530,7 +530,7 @@ _None documented_
 
 * Added chinese translation
 
-## [gosa 2.5.11]
+## gosa 2.5.11
 
 
 ### Bug Fixes
@@ -546,7 +546,7 @@ _None documented_
 * Replaced a set of PHP <? short tag occurences
 * Updated locales (de/fr)
 
-## [gosa 2.5.10]
+## gosa 2.5.10
 
 
 ### Bug Fixes
@@ -567,7 +567,7 @@ _None documented_
 * Enabled 9 digits for gid-/uidNumbers
 * Added support for rfc2307bis compliant groups
 
-## [gosa 2.5.9]
+## gosa 2.5.9
 
 
 ### Bug Fixes
@@ -587,7 +587,7 @@ _None documented_
 * Added new mail method "golab" which has some tweaks against the standard kolab mode
 * Enabled non ASCII characters in vacation messages
 
-## [gosa 2.5.8]
+## gosa 2.5.8
 
 
 ### Bug Fixes
@@ -603,7 +603,7 @@ _None documented_
 * Updated user mail account to search for CYRUSUNIXSTYLE in all relevant sections of the config file
 * Added support for sambaLogonHours
 
-## [gosa 2.5.7]
+## gosa 2.5.7
 
 
 ### Bug Fixes
@@ -628,7 +628,7 @@ _None documented_
 * Removed asterisk status view in user display. This was too slow in bigger installations.
 * Re-enabled phone queues. They got optimized for invisibility.
 
-## [gosa 2.5.6]
+## gosa 2.5.6
 
 
 ### Bug Fixes
@@ -654,7 +654,7 @@ _None documented_
 * Avoid removal of shares while they are used by users
 * Added finer grained ACL settings for mail accounts
 
-## [gosa 2.5.5]
+## gosa 2.5.5
 
 
 ### Bug Fixes
@@ -678,7 +678,7 @@ _None documented_
 * Show error messages from password dialog
 * Made %uid, %sn, etc. available in templates using gosaMailAlternateAddress
 
-## [gosa 2.5.4]
+## gosa 2.5.4
 
 
 ### Bug Fixes
@@ -699,7 +699,7 @@ _None documented_
 * Added "uid" to personal plugins for replacement in post events
 * More speed fixes applied, especially for users, objectgroups and generic plugin loading
 
-## [gosa 2.5.3]
+## gosa 2.5.3
 
 
 ### Bug Fixes
@@ -724,7 +724,7 @@ _None documented_
 
 * Added more information to hotplug devices.
 
-## [gosa 2.5.2]
+## gosa 2.5.2
 
 
 ### Bug Fixes
@@ -746,7 +746,7 @@ _None documented_
 * Updated german online help
 * Unified bool values in gosa.conf. true/yes and false/no are valid now in upper and lower case.
 
-## [gosa 2.5.1]
+## gosa 2.5.1
 
 
 ### Bug Fixes
@@ -759,7 +759,7 @@ _None documented_
 
 * Finalized polish translations
 
-## [gosa 2.5]
+## gosa 2.5
 
 
 ### Bug Fixes
@@ -785,7 +785,7 @@ _None documented_
 * Tune LDAP error messages
 * Moved from "guru mediation style" to div-popups
 
-## [gosa 2.4]
+## gosa 2.4
 
 
 ### Bug Fixes
@@ -805,7 +805,7 @@ _None documented_
 * Per user language selector in generic tab
 * New connectivity plugins (PHPscheduleit/PPTP/glpi)
 
-## [gosa 2.4beta3]
+## gosa 2.4beta3
 
 
 ### Bug Fixes
@@ -827,7 +827,7 @@ _None documented_
 * Added intranet account to list of connectivity plugins
 * Increased robustnes for non set fields
 
-## [gosa 2.4beta2]
+## gosa 2.4beta2
 
 
 ### Bug Fixes
@@ -847,7 +847,7 @@ _None documented_
 * Added checks that remove the contents of /var/spool/gosa/*
 * Added postmodify for password change operations
 
-## [gosa 2.4beta1]
+## gosa 2.4beta1
 
 
 ### Bug Fixes
@@ -876,7 +876,7 @@ _None documented_
 * Added sample databases for fax, phone and system logging
 * Added error handler for normal PHP errors
 
-## [gosa 2.3]
+## gosa 2.3
 
 
 ### Bug Fixes
@@ -902,7 +902,7 @@ _None documented_
 * Added global TLS switch for LDAP connections
 * Made departments movable
 
-## [gosa 2.2]
+## gosa 2.2
 
 
 ### Bug Fixes
@@ -927,7 +927,7 @@ _None documented_
 * Improved samba 3 support (terminal server support)
 * Updated translations and added a french one
 
-## [gosa 2.1.3]
+## gosa 2.1.3
 
 
 ### Bug Fixes
@@ -941,7 +941,7 @@ _None documented_
 
 * Increase number in version.inc
 
-## [gosa 2.1.2]
+## gosa 2.1.2
 
 
 ### Bug Fixes
@@ -963,7 +963,7 @@ _None documented_
 * Added complete russian translation contributed by Igor Muratov
 * Migrated phone list to (global) addressbook
 
-## [gosa 2.1.1]
+## gosa 2.1.1
 
 
 ### Bug Fixes
@@ -983,7 +983,7 @@ _None documented_
 * Updated debian control to be aware of apache2 based installations
 * Transferd tab variables in group dialog, so the primary mail address can be checked
 
-## [gosa 2.1]
+## gosa 2.1
 
 
 Bugfix release
@@ -994,7 +994,7 @@ Bugfix release
 * FAQ/README/INSTALL updated
 * spec file updated
 
-## [gosa 2.1rc2]
+## gosa 2.1rc2
 
 
 Bugfix release
@@ -1016,7 +1016,7 @@ Bugfix release
 * Included setup
 * Translation updates
 
-## [gosa 2.1rc1]
+## gosa 2.1rc1
 
 
 Bugfix release
@@ -1038,7 +1038,7 @@ Bugfix release
 * Added schmemacheck hook
 * Started with setup implementation
 
-## [gosa 2.1beta3]
+## gosa 2.1beta3
 
 
 Bugfix release
@@ -1056,7 +1056,7 @@ Bugfix release
 * Massive samba3 updates
 * Made ou=people and ou=groups configurable
 
-## [gosa 2.1beta2]
+## gosa 2.1beta2
 
 
 Bugfix and feature enhancement release.
@@ -1079,7 +1079,7 @@ Bugfix and feature enhancement release.
 * Templatized faxaccount/pureftpd/samba and mail plugins
 * Included calendar.js functionality in samba plugin
 
-## [gosa 2.1beta1]
+## gosa 2.1beta1
 
 
 This release has some feature enhancements and contains many bugfixes and design cleanups
@@ -1104,7 +1104,7 @@ This release has some feature enhancements and contains many bugfixes and design
 * Added external password change hook, so that its possible to synchronize with a non samba PDC via scripts. (Some organizations tend to keep a readable copy of their users password which possible now, too.)
 * Updated FAQ
 
-## [gosa 2.0.1]
+## gosa 2.0.1
 
 
 This release doesn't have feature enhancements (nearly), only bugfixes reported by users are incorporated.
@@ -1128,7 +1128,7 @@ This release doesn't have feature enhancements (nearly), only bugfixes reported 
 
 * As requested by some users, you can now advise GOsa not to create a group for the user, but take an existing group as primary one.
 
-## [gosa 2.0 final]
+## gosa 2.0 final
 
 
 ### Bug Fixes
@@ -1143,7 +1143,7 @@ This release doesn't have feature enhancements (nearly), only bugfixes reported 
 * Updated icons
 * Renamed icons to have more logical names
 
-## [gosa 2.0rc2]
+## gosa 2.0rc2
 
 
 ### Bug Fixes
@@ -1165,7 +1165,7 @@ This release doesn't have feature enhancements (nearly), only bugfixes reported 
 * Made accounts movable between departments
 * Added partial spanish translations
 
-## [gosa 2.0rc1]
+## gosa 2.0rc1
 
 
 ### Bug Fixes
