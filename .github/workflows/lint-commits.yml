@@ -1,0 +1,25 @@
+name: Lint Commits
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint commits
+        uses: wagoid/commitlint-github-action@v6

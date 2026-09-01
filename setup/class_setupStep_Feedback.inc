@@ -73,7 +73,7 @@ class Step_Feedback  extends setup_step
         $this->distribution   = "";
         $this->web_server     = $_SERVER['SERVER_SOFTWARE'];
         $this->php_version    = PHP_VERSION;
-        $this->gosa_version   = get_gosa_version(FALSE);
+        $this->gosa_version   = get_gosa_version();
 
         /* Establish ldap connection */
         $cv = $this->parent->captured_values;

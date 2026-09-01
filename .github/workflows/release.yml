@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - release
+      - 'release/**'
+      - 'freeze/**'
+      - 'hotfix/**'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ steps.get_token.outputs.token }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+        run: npx semantic-release
