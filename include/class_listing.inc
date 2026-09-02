@@ -737,7 +737,7 @@ class listing
         $smarty = get_smarty();
 
         $smarty->assign('FILTER', $this->filter->render());
-        $smarty->assign('SIZELIMIT', print_sizelimit_warning());
+        $smarty->assign('SHOW_SIZELIMIT_WARNING', shouldShowSizelimitWarning());
         $smarty->assign('LIST', $result);
 
         // Assign navigation elements
