@@ -242,6 +242,9 @@ class groupManagement extends management
                         "title" => _("Edit environment properties")
                     )
                 );
+
+                $result .= "<div class='property-wrapper'>";
+
                 // Walk thru map
                 foreach ($map as $oc => $properties) {
                     if (in_array_ics($oc, $classes)) {
@@ -250,6 +253,8 @@ class groupManagement extends management
                         $result .= image("");
                     }
                 }
+
+                $result .= "</div>";
                 break;
         }
 
