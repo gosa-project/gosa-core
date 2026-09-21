@@ -878,6 +878,7 @@ class acl extends plugin
             } else {
                 $option = "<input type='radio' name='selected_role' value='" . base64_encode($dn) . "'>";
             }
+            $option = "<label>" . $option . "<span></span></label>";
             $data[] = postEncode($dn);
             $lData[] = array('data' => array($option, $values['cn'], $values['description']));
         }

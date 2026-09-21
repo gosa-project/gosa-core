@@ -1,4 +1,5 @@
 <body>
+  {$pluginScript}
   {$php_errors}
   <div class='title-bar'>
     <ul>
