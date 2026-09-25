@@ -16,6 +16,9 @@ class workstartup extends plugin
     var $gotoFilesystem       = array();
     var $gotoTerminalPath     = "";
     var $gotoBootKernels      = array();
+    var $faiList              = NULL;
+    var $ldapList             = NULL;
+    var $cn                   = "";
 
     /* attribute list for save action */
     var $attributes           = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", 
