@@ -77,6 +77,7 @@ class userinfo
 
         $this->dn = $userdn;
         $this->uid = $attrs['uid'][0];
+        $this->username = $this->uid;
         $this->ip = $_SERVER['REMOTE_ADDR'];
 
         // Initialize ACL_CACHE
