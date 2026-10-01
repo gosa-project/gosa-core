@@ -75,11 +75,13 @@ function smarty_block_render($params, $text)
 		$from 	= array("/class=['\"]list1nohighlight['\"]/i",
 				"/class=['\"]list0['\"]/i",
 				"/class=['\"]list1['\"]/i",
-				"/class=['\"]sortableListItem[^'\"]*['\"]/i");
+				"/class=['\"]sortableListItem[^'\"]*['\"]/i",
+				"/class=['\"]material-icons( [^'\"]*)?['\"]/i");
 		$to 	= array("class='list1nohighlightdisabled'",
 				"class='list1nohighlightdisabled'",
 				"class='list1nohighlightdisabled'",
-				"class='sortableListItemDisabled'");
+				"class='sortableListItemDisabled'",
+				"class='material-icons md-disabled\\1'");
 				
 		if(!preg_match("/ disabled /",$text)){
 			$from [] = "/name=/i" ;
