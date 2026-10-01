@@ -235,6 +235,7 @@ class baseSelector
                                     <i class='material-icons'>account_tree</i>
                                     <input
                                         type='text'
+                                        name='bs_display_{$this->pid}'
                                         id='autocomplete-input'
                                         class='dropdown-trigger'
                                         data-target='autocomplete'
