@@ -1659,7 +1659,7 @@ class acl extends plugin
 
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($dn) . "*))", array("gosaAclEntry", "dn"));
+        $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($dn) . "*))", array("gosaAclEntry", "objectClass", "dn"));
 
         while ($attrs = $ldap->fetch()) {
             if (!isset($attrs['gosaAclEntry'])) {
@@ -1693,9 +1693,16 @@ class acl extends plugin
             // There should be a modification, so write it back
             $ldap->cd($attrs['dn']);
             $new_attrs = array("gosaAclEntry" => $new_entries);
+
+            // Since gosaAcl requires gosaAclEntry, we need to drop the object class if no entry is left
+            if (!count($new_entries)) {
+                unset($attrs['objectClass']['count']);
+                $new_attrs['objectClass'] = array_values(array_remove_entries_ics(array('gosaAcl'), $attrs['objectClass']));
+            }
+
             $ldap->modify($new_attrs);
             if (!$ldap->success()) {
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, __CLASS__), ERROR_DIALOG);
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $attrs['dn'], LDAP_MOD, __CLASS__), ERROR_DIALOG);
             }
         }
     }
