@@ -1660,12 +1660,14 @@ class acl extends plugin
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
         $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($dn) . "*))", array("gosaAclEntry", "dn"));
-        $new_entries = [];
+
         while ($attrs = $ldap->fetch()) {
             if (!isset($attrs['gosaAclEntry'])) {
                 continue;
             }
             unset($attrs['gosaAclEntry']['count']);
+
+            $new_entries = [];
 
             // Remove entry directly
             foreach ($attrs['gosaAclEntry'] as $id => $entry) {
