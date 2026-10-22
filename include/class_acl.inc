@@ -1672,7 +1672,8 @@ class acl extends plugin
             // Remove entry directly
             foreach ($attrs['gosaAclEntry'] as $id => $entry) {
                 $parts = explode(':', $entry);
-                $members = explode(',', $parts[2]);
+                $member_idx = ($parts[1] == 'role') ? 3 : 2;
+                $members = explode(',', $parts[$member_idx]);
                 $new_members = [];
                 foreach ($members as $member) {
                     if (base64_decode($member) != $dn) {
@@ -1684,7 +1685,7 @@ class acl extends plugin
 
                 /* We can completely remove the entry if there are no members anymore */
                 if (count($new_members)) {
-                    $parts[2] = implode(",", $new_members);
+                    $parts[$member_idx] = implode(",", $new_members);
                     $new_entries[] = implode(":", $parts);
                 }
             }
