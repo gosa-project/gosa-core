@@ -1730,7 +1730,7 @@ class acl extends plugin
                     }
                 }
             }
-            $acl->save();
+            $acl->saveInternal();
         }
     }
 
