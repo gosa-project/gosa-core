@@ -158,8 +158,8 @@ document.querySelectorAll('.toggle-pw').forEach(icon => {
 // Adjustment of the paddings when the control panel is visible
 let listWrapperElem = document.querySelector('.card-content.first-level .list-head-wrapper');
 let cardContentFirstLevelElem = document.querySelector('.card-content.first-level');
-
-if (listWrapperElem && cardContentFirstLevelElem) {
+let hasTabs = cardContentFirstLevelElem && cardContentFirstLevelElem.querySelector('.card-tabs .tab');
+if (listWrapperElem && cardContentFirstLevelElem && !hasTabs) {
     cardContentFirstLevelElem.style.padding = "0";
 }
 
