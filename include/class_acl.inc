@@ -1508,6 +1508,15 @@ class acl extends plugin
 
     function save()
     {
+        if (!$this->acl_is_writeable("")) {
+            return 0;
+        }
+        
+        return $this->saveInternal();
+    }
+
+    function saveInternal()
+    {
         global $config;
 
         /* Assemble ACL's */
