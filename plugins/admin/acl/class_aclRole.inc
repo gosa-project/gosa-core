@@ -173,8 +173,9 @@ class aclrole extends acl
     function updateList()
     {
         if (!$this->list) {
+            $writeable = $this->acl_is_writeable("gosaAclTemplate");
             $this->list = new sortableListing($this->gosaAclTemplate, [], true);
-            $this->list->setDeleteable(true);
+            $this->list->setDeleteable($writeable);
             $this->list->setInstantDelete(true);
             $this->list->setEditable(true);
             $this->list->setColspecs(array('*'));
