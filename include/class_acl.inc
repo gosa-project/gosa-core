@@ -337,8 +337,10 @@ class acl extends plugin
         $tmp = session::global_get('plist');
         $plist = $tmp->info;
 
+        $writeable = $this->acl_is_writeable("");
+
         /* Handle posts */
-        if (isset($_POST['new_acl'])) {
+        if (isset($_POST['new_acl']) && $writeable) {
             $this->dialogState = 'create';
             $this->dialog = TRUE;
             $this->currentIndex = count($this->gosaAclEntry);
@@ -391,7 +393,7 @@ class acl extends plugin
             }
 
             /* Only handle posts, if we allowed to modify ACLs */
-            if (!$this->acl_is_writeable("")) {
+            if (!$writeable) {
                 continue;
             }
 
@@ -445,7 +447,7 @@ class acl extends plugin
             $aclDialog = TRUE;
         }
 
-        if ($this->acl_is_writeable("")) {
+        if ($writeable) {
 
             /* Only be interested in new acl's, if we're in the right _POST place */
             if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])) {
@@ -496,7 +498,7 @@ class acl extends plugin
         }
 
         /* Save common values */
-        if ($this->acl_is_writeable("")) {
+        if ($writeable) {
             foreach (array("acl_type", "aclFilter", "aclObject", "target") as $key) {
                 if (isset($_POST[$key])) {
                     $this->$key = get_post($key);
@@ -505,7 +507,7 @@ class acl extends plugin
         }
 
         /* Store ACL in main object? */
-        if (isset($_POST['submit_new_acl'])) {
+        if (isset($_POST['submit_new_acl']) && $writeable) {
             $this->gosaAclEntry[$this->currentIndex]['type'] = $this->acl_type;
             $this->gosaAclEntry[$this->currentIndex]['members'] = $this->recipients;
             $this->gosaAclEntry[$this->currentIndex]['acl'] = $this->aclContents;
@@ -541,7 +543,7 @@ class acl extends plugin
         }
 
         /* Add to list? */
-        if (isset($_POST['add']) && isset($_POST['source'])) {
+        if (isset($_POST['add']) && isset($_POST['source']) && $writeable) {
             foreach ($_POST['source'] as $key) {
                 if ($this->target == 'user') {
                     $this->recipients[$key] = $this->users[$key];
@@ -554,7 +556,7 @@ class acl extends plugin
         }
 
         /* Remove from list? */
-        if (isset($_POST['del']) && isset($_POST['recipient'])) {
+        if (isset($_POST['del']) && isset($_POST['recipient']) && $writeable) {
             foreach ($_POST['recipient'] as $key) {
                 unset($this->recipients[$key]);
             }
@@ -562,14 +564,14 @@ class acl extends plugin
 
         $this->aclMemberList->save_object();
         $actionL = $this->aclMemberList->getAction();
-        if ($actionL['action'] == "delete") {
+        if ($actionL['action'] == "delete" && $writeable) {
             $key = $this->aclMemberList->getData($actionL['targets'][0]);
             unset($this->recipients[$key]);
             $this->aclMemberList->deleteEntry($actionL['targets'][0]);
         }
 
         /* Adds the 'all-users' pseudo-group to the acl */
-        if (isset($_POST['add_all_users'])) {
+        if (isset($_POST['add_all_users']) && $writeable) {
             if (!isset($this->recipients['G:*'])) {
                 $this->recipients['G:*'] = _("All users");
 
@@ -590,7 +592,7 @@ class acl extends plugin
         }
 
         /* Show User/Group-Add-Dialog */
-        if (isset($_POST['add_user_or_group'])) {
+        if (isset($_POST['add_user_or_group']) && $writeable) {
             $this->dialog = new userGroupSelect($config, get_userinfo());
         }
 
@@ -612,7 +614,7 @@ class acl extends plugin
 
             $users = $this->dialog->detectPostActions();
 
-            if (isset($users['targets']) && $this->acl_is_writeable("")) {
+            if (isset($users['targets']) && $writeable) {
                 $headpage = $this->dialog->getHeadpage();
                 foreach ($users['targets'] as $dn) {
                     $entry = $headpage->getEntry($dn);
@@ -788,11 +790,7 @@ class acl extends plugin
             $smarty->assign('recipients', set_post($this->recipients));
 
             /* Generate ACL member list */
-            if ($this->acl_is_writeable("")) {
-                $this->aclMemberList->setDeleteable(true);
-            } else {
-                $this->aclMemberList->setDeleteable(false);
-            }
+            $this->aclMemberList->setDeleteable($writeable);
 
             $this->aclMemberList->update();
             $smarty->assign("aclMemberList", $this->aclMemberList->render());
@@ -832,7 +830,7 @@ class acl extends plugin
 
         /* Assign acls */
         $smarty->assign("acl_createable", $this->acl_is_createable());
-        $smarty->assign("acl_writeable", $this->acl_is_writeable(""));
+        $smarty->assign("acl_writeable", $writeable);
         $smarty->assign("acl_readable", $this->acl_is_readable(""));
         $smarty->assign("acl_removeable", $this->acl_is_removeable());
 
