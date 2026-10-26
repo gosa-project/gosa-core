@@ -602,7 +602,7 @@ class aclrole extends acl
         if (!count($tmp_acl)) {
             /* Remove attribute */
             if ($this->initially_was_account) {
-                $this->attrs["gosaAclTempalte"] = [];
+                $this->attrs["gosaAclTemplate"] = [];
             } else {
                 if (isset($this->attrs["gosaAclTemplate"])) {
                     unset($this->attrs["gosaAclTemplate"]);
