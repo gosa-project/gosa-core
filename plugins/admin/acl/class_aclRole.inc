@@ -173,8 +173,9 @@ class aclrole extends acl
     function updateList()
     {
         if (!$this->list) {
+            $writeable = $this->acl_is_writeable("gosaAclTemplate");
             $this->list = new sortableListing($this->gosaAclTemplate, [], true);
-            $this->list->setDeleteable(true);
+            $this->list->setDeleteable($writeable);
             $this->list->setInstantDelete(true);
             $this->list->setEditable(true);
             $this->list->setColspecs(array('*'));
@@ -596,18 +597,16 @@ class aclrole extends acl
         plugin::save();
 
         /* Finally (re-)assign it... */
-        $this->attrs["gosaAclTemplate"] = $tmp_acl;
-
-        /* Remove acl from this entry if it is empty... */
-        if (!count($tmp_acl)) {
-            /* Remove attribute */
-            if ($this->initially_was_account) {
-                $this->attrs["gosaAclTempalte"] = [];
-            } else {
-                if (isset($this->attrs["gosaAclTemplate"])) {
-                    unset($this->attrs["gosaAclTemplate"]);
-                }
-            }
+        if (!$this->acl_is_writeable("gosaAclTemplate")) {
+            /* No write permission -> no change */
+            unset($this->attrs["gosaAclTemplate"]);
+        } elseif (count($tmp_acl)) {
+            $this->attrs["gosaAclTemplate"] = $tmp_acl;
+        } elseif ($this->initially_was_account) {
+            /* All entries removed on an existing role -> clear the attribute */
+            $this->attrs["gosaAclTemplate"] = [];
+        } else {
+            unset($this->attrs["gosaAclTemplate"]);
         }
 
         /* Do LDAP modifications */

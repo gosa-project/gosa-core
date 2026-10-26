@@ -663,7 +663,7 @@ class group extends plugin
                     }
                 }
             }
-            $acl->save();
+            $acl->saveInternal();
         }
 
         // Remove ACL dependencies, too 
