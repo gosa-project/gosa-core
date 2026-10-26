@@ -288,8 +288,9 @@ class acl extends plugin
     function updateList()
     {
         if (!$this->list) {
+            $writeable = $this->acl_is_writeable("");
             $this->list = new sortableListing($this->gosaAclEntry, [], TRUE);
-            $this->list->setDeleteable(true);
+            $this->list->setDeleteable($writeable);
             $this->list->setInstantDelete(true);
             $this->list->setEditable(true);
             $this->list->setColspecs(array('*'));
