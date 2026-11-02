@@ -1806,10 +1806,28 @@ abstract class plugin
                 }
             }
 
-            // Now replace the placeholder
-            $command = fillReplacements($command, $addAttrs, TRUE);
+            // Parse the command template from gosa.conf BEFORE any attribute value is substituted.
+            // That way the attacker-controllable attribute content can never change which program runs or add arguments.
+            [$env, $prog, $argTemplates] = parseHookCommand($command);
 
-            if (check_command($command)) {
+            // Substitute placeholders of the program and each argument
+            $argv = array();
+            if ($prog !== null) {
+                $argv[] = fillReplacements($prog, $addAttrs, FALSE);
+                foreach ($argTemplates as $argTemplate) {
+                    $argv[] = fillReplacements($argTemplate, $addAttrs, FALSE);
+                }
+            }
+
+            // Substitute placeholders of the environment variables
+            foreach ($env as $k => $v) {
+                $env[$k] = fillReplacements($v, $addAttrs, FALSE);
+            }
+
+            // Human-readable rendering only for debug/error messages
+            $command = implode(" ", $argv);
+
+            if ($prog !== null && check_command($argv[0])) {
 
                 // Create list of process pipes
                 $descriptorspec = array(
@@ -1820,15 +1838,8 @@ abstract class plugin
 
                 // Try to open the process
                 DEBUG(DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
-                preg_match("/^(.* )?(\/.*)$/", $command, $matches);
-                $command = $matches[2];
-                $env = [];
-                preg_match_all("/ ?([^=]+)=('[^']*')/", $matches[1], $tmp, PREG_SET_ORDER);
-                foreach ($tmp as $e) {
-                    $env[$e[1]] = trim($e[2], "'");
-                }
 
-                $process = proc_open($command, $descriptorspec, $pipes, null, $env);
+                $process = proc_open($argv, $descriptorspec, $pipes, null, $env);
 
                 if (is_resource($process)) {
 
