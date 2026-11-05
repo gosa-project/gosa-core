@@ -2937,8 +2937,9 @@ function change_password ($dn, $password, $mode=FALSE, $hash= "", $old_password 
         // Prepare a special attribute list, which will be used for event hook calls
         $attrsEvent = array();
         foreach($initialAttrs as $name => $value){
-            if(!is_numeric($name))
+            if(!is_numeric($name) && is_array($value)){
                 $attrsEvent[$name] = $value[0];
+            }
         }
         $attrsEvent['dn'] = $initialAttrs['dn'];
         foreach($attrs as $name => $value){
