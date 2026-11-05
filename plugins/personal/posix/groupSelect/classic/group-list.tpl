@@ -1,7 +1,12 @@
 <div id="mainlist">
 
   <div class="mainlist-header">
-   <p>{$HEADLINE}&nbsp;{$SIZELIMIT}</p>
+   <p>
+    {$HEADLINE}
+    {if $SHOW_SIZELIMIT_WARNING}
+      {t}(list is incomplete){/t} <button style="margin-left: 10px" type='submit' name='edit_sizelimit'>{t}Configure{/t}</button>
+    {/if}
+   </p>
    <div class="mainlist-nav">
     <table summary="{$HEADLINE}">
      <tr>
