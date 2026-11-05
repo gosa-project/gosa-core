@@ -234,6 +234,12 @@ class group extends plugin
 
             // Check if list is available, depends on multi- or sinlge- group editing. 
             if($this->$list){
+                // ensure we can delete group members if we have
+                // write permission to the memberUid attribute
+                $mu_acl = $this->getacl("memberUid");
+                if (preg_match("/w/",$mu_acl) && !preg_match("/d/",$mu_acl)) {
+                    $this->$list->setAcl($mu_acl.'d');
+                }
                 $this->$list->save_object();
                 $action = $this->$list->getAction();
                 if($action['action'] == 'delete' && preg_match("/w/",$this->getacl("memberUid"))){
