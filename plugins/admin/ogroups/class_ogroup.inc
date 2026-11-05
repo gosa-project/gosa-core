@@ -22,11 +22,7 @@
 
 class ogroup extends plugin
 {
-<<<<<<< HEAD
     var $typeToClass = array(  
-=======
-    public $typeToClass = array(
->>>>>>> gosa-core_v2.8
             "Y" => "gosaUserTemplate",
             "U" => "gosaAccount",
             "G" => "posixGroup",
@@ -39,49 +35,7 @@ class ogroup extends plugin
             "F" => "goFonHardware",
             "P" => "gotoPrinter");
 
-<<<<<<< HEAD
     var  $typeToImage = array(
-=======
-    public $typeToImage = array();
-            
-
-
-    /* Variables */
-    public $cn= "";
-    public $description= "";
-    public $base= "";
-    public $gosaGroupObjects= "";
-    public $objects= array();
-    public $objcache= array();
-    public $memberList= array();
-    public $member= array();
-    public $orig_dn= "";
-    public $orig_cn= "";
-    public $orig_base= "";
-    public $objectSelect= false;
-    public $view_logged = false;
-
-    public $copyMembers = true;
-    public $wasDyGroup = false;
-    public $baseSelector;
-
-    /* Already assigned Workstations. Will be hidden in selection.
-     */
-    public $used_workstations = array();
-
-    var $theme;
-
-    /* attribute list for save action */
-    public $attributes= array("cn", "description", "gosaGroupObjects","member");
-    public $objectclasses= array("top", "gosaGroupOfNames");
-
-    public function __construct(&$config, $dn= null)
-    {
-        $this->theme = getThemeName();
-        switch ($this->theme) {
-            case 'classic':
-                $this->typeToImage = array(
->>>>>>> gosa-core_v2.8
             "Y" => "plugins/users/images/select_template.png",
             "U" => "plugins/users/images/select_user.png",
             "G" => "plugins/groups/images/select_group.png",
@@ -93,7 +47,6 @@ class ogroup extends plugin
             "T" => "plugins/ogroups/images/terminal.png",
             "F" => "plugins/ogroups/images/phone.png",
             "P" => "plugins/ogroups/images/printer.png",
-<<<<<<< HEAD
             "I" => "images/false.png");
 
 
@@ -129,33 +82,6 @@ class ogroup extends plugin
         plugin::__construct ($config, $dn);
 
         $this->trustModeDialog = new trustModeDialog($this->config, $this->dn,NULL);
-=======
-                    "I" => "images/false.png"
-                );
-                break;
-            
-            default:
-                $this->typeToImage = array(
-                    "Y" => "<i class='material-icons'>web_asset</i>",
-                    "U" => "<i class='material-icons'>person</i>",
-                    "G" => "<i class='material-icons'>groups</i>",
-                    "A" => "<i class='material-icons'>apps</i>",
-                    "D" => "<i class='material-icons'>domain</i>",
-                    "S" => "<i class='material-icons'>dns</i>",
-                    "W" => "<i class='material-icons'>computer</i>",
-                    "O" => "<i class='material-icons'>desktop_windows</i>",
-                    "T" => "<i class='material-icons'>monitor</i>",
-                    "F" => "<i class='material-icons'>phone</i>",
-                    "P" => "<i class='material-icons'>printer</i>",
-                    "I" => "<i class='material-icons'>not_interested</i>"
-                );
-                break;
-        }
-
-        plugin::__construct($config, $dn);
-
-        $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, null);
->>>>>>> gosa-core_v2.8
         $this->trustModeDialog->setAcl('ogroups/ogroup');
 
         $this->orig_dn= $dn;
@@ -171,11 +97,7 @@ class ogroup extends plugin
                 }
             }
         }
-<<<<<<< HEAD
         $this->is_account= TRUE;
-=======
-        $this->is_account= true;
->>>>>>> gosa-core_v2.8
 
         /* Set base */
         if ($this->dn == "new"){
@@ -190,42 +112,17 @@ class ogroup extends plugin
            - Check() will complain if such a system is assigned to this object group.
          */ 
         $base = $this->config->current['BASE'];
-<<<<<<< HEAD
         $res    = get_list("(|(objectClass=gotoWorkstation)(objectClass=gotoTerminal))","none" , 
                 $base, array("dn"),GL_NO_ACL_CHECK|GL_SUBSEARCH);
-=======
-        $res    = get_list(
-            "(|(objectClass=gotoWorkstation)(objectClass=gotoTerminal))",
-            "none",
-            $base,
-            array("dn"),
-            GL_NO_ACL_CHECK|GL_SUBSEARCH
-        );
->>>>>>> gosa-core_v2.8
         $ws_dns = array();
         foreach($res as $data){
             $ws_dns[] = $data['dn'];
         }
-<<<<<<< HEAD
         $res=get_list("(&(member=*)(objectClass=gosaGroupOfNames))","none",
                 $base, array("dn","member", "gosaGroupObjects"),GL_NO_ACL_CHECK|GL_SUBSEARCH);
         $this->used_workstations = array();
         foreach($res as $og){
             if($og['dn'] == $this->dn) continue;
-=======
-        $res=get_list(
-            "(&(member=*)(objectClass=gosaGroupOfNames))",
-            "none",
-            $base,
-            array("dn","member", "gosaGroupObjects"),
-            GL_NO_ACL_CHECK|GL_SUBSEARCH
-        );
-        $this->used_workstations = array();
-        foreach ($res as $og) {
-            if ($og['dn'] == $this->dn) {
-                continue;
-            }
->>>>>>> gosa-core_v2.8
             $test = array_intersect($ws_dns,LDAP::convert($og['member'])); 
             if(($og['gosaGroupObjects'] == "[W]" || $og['gosaGroupObjects'] == "[T]") && count($test)){
                 $this->used_workstations = array_merge($this->used_workstations,$test);
@@ -264,22 +161,14 @@ class ogroup extends plugin
         $this->reload();
     }
 
-<<<<<<< HEAD
     function AddDelMembership($NewMember = false){
 
-=======
-    public function AddDelMembership($NewMember = false)
-    {
->>>>>>> gosa-core_v2.8
         if($NewMember){
 
             // Ensure that we definitely know the new members attributes.
             //  - Fetch unknown objects here. 
             if(!isset($this->memberList[$NewMember])){
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
                 $ldap = $this->config->get_ldap_link();
                 $ldap->cd($this->config->current['BASE']);
                 $ldap->cat($NewMember);
@@ -312,15 +201,9 @@ class ogroup extends plugin
 
 
             /* Add objects to group */
-<<<<<<< HEAD
             if (isset($_POST['objectSelect_save']) && $this->objectSelect instanceOf objectSelect){
                 $objects = $this->objectSelect->save();
                 $skipped = FALSE;
-=======
-            if ((isset($_POST['objectSelect_save']) || isset($_POST['ok-save'])) && $this->objectSelect instanceof objectSelect) {
-                $objects = $this->objectSelect->save();
-                $skipped = false;
->>>>>>> gosa-core_v2.8
                 foreach($objects as $object){
                     $dn = $object['dn'];
 
@@ -347,18 +230,11 @@ class ogroup extends plugin
                     }
 
                     if(preg_match("/T/",$tmp) && $type == "W"){
-<<<<<<< HEAD
                         $skipped =TRUE;
                     }elseif(preg_match("/W/",$tmp) && $type == "T"){
                         $skipped =TRUE;
                     }else{
 
-=======
-                        $skipped =true;
-                    } elseif (preg_match("/W/", $tmp) && $type == "T") {
-                        $skipped =true;
-                    } else {
->>>>>>> gosa-core_v2.8
                         $this->memberList["$dn"]= $object;
                         $this->member["$dn"]= $dn;
                         reset ($this->memberList);
@@ -367,54 +243,28 @@ class ogroup extends plugin
                 if($skipped){
                     msg_dialog::display(_("Information"), _("You cannot combine terminals and workstations in one object group!"), INFO_DIALOG);
                 }
-<<<<<<< HEAD
                 $this->objectSelect= FALSE;
                 $this->dialog= FALSE;
-=======
-                $this->objectSelect= false;
-                $this->dialog= false;
->>>>>>> gosa-core_v2.8
                 $this->reload();
             }
         }
     }
 
-<<<<<<< HEAD
     function execute()
-=======
-    public function execute()
->>>>>>> gosa-core_v2.8
     {
         /* Call parent execute */
         plugin::execute();
 
         if(!$this->view_logged){
-<<<<<<< HEAD
             $this->view_logged = TRUE;
-=======
-            $this->view_logged = true;
->>>>>>> gosa-core_v2.8
             new log("view","ogroups/".get_class($this),$this->dn);
         }
 
 
         /* Do we represent a valid group? */
         if (!$this->is_account){
-<<<<<<< HEAD
             $display= "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
                 msgPool::noValidExtension("object group")."</b>";
-=======
-            switch ($this->theme) {
-                case 'classic':
-                  $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
-                  break;
-                
-                default:
-                  $symbol = "<i class='material-icons'>report</i>";
-                  break;
-            }
-            $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("object group"))."</div>";
->>>>>>> gosa-core_v2.8
             return ($display);
         }
 
@@ -433,17 +283,10 @@ class ogroup extends plugin
          ***********/
 
         // Handle trust mode dialog
-<<<<<<< HEAD
         $this->dialog = FALSE;
         $trustModeDialog = $this->trustModeDialog->execute();
         if($this->trustModeDialog->trustSelect){
             $this->dialog = TRUE;
-=======
-        $this->dialog = false;
-        $trustModeDialog = $this->trustModeDialog->execute();
-        if ($this->trustModeDialog->trustSelect) {
-            $this->dialog = true;
->>>>>>> gosa-core_v2.8
             return($trustModeDialog);
         }
         $smarty->assign("trustModeDialog",$trustModeDialog);
@@ -459,23 +302,14 @@ class ogroup extends plugin
         }
 
         /* Add objects finished? */
-<<<<<<< HEAD
         if (isset($_POST["objectSelect_cancel"])){
             $this->objectSelect= FALSE;
-=======
-        if (isset($_POST["objectSelect_cancel"]) || isset($_POST['cancel-abort'])) {
-            $this->objectSelect= false;
->>>>>>> gosa-core_v2.8
         }
 
         /* Manage object add dialog */
         if ($this->objectSelect){
             session::set('filterBlacklist', array('dn'=> $this->member));
-<<<<<<< HEAD
             $this->dialog= TRUE;
-=======
-            $this->dialog= true;
->>>>>>> gosa-core_v2.8
             return($this->objectSelect->execute());
         }
 
@@ -531,18 +365,11 @@ class ogroup extends plugin
         if($this->isRestrictedByDynGroup()){
             $this->memberListing->setDeleteable(false);
             $smarty->assign("memberACL", preg_replace("/[^r]/", "", $this->getacl("member")));
-<<<<<<< HEAD
             $smarty->assign("isRestrictedByDynGroup", TRUE);
             
         }else{
             $this->memberListing->setDeleteable(true);
             $smarty->assign("isRestrictedByDynGroup", FALSE);
-=======
-            $smarty->assign("isRestrictedByDynGroup", true);
-        } else {
-            $this->memberListing->setDeleteable(true);
-            $smarty->assign("isRestrictedByDynGroup", false);
->>>>>>> gosa-core_v2.8
         }
 
         $this->memberListing->setListData($data,$lData);
@@ -554,7 +381,6 @@ class ogroup extends plugin
             $smarty->assign("$val", set_post($this->$val));
         }
 
-<<<<<<< HEAD
         return ($smarty->fetch (get_template_path('generic.tpl', TRUE)));
     }
 
@@ -562,15 +388,6 @@ class ogroup extends plugin
     function isRestrictedByDynGroup()
     {
         $bool = FALSE;
-=======
-        return ($smarty->fetch(get_template_path('generic.tpl', true)));
-    }
-
-
-    public function isRestrictedByDynGroup()
-    {
-        $bool = false;
->>>>>>> gosa-core_v2.8
         if(isset($this->parent->by_object['DynamicLdapGroup'])){
             $bool = $this->parent->by_object['DynamicLdapGroup']->isAttributeDynamic('member');
         }
@@ -579,11 +396,7 @@ class ogroup extends plugin
     }
 
 
-<<<<<<< HEAD
     function set_acl_base($base)
-=======
-    public function set_acl_base($base)
->>>>>>> gosa-core_v2.8
     {
         plugin::set_acl_base($base);
         $this->trustModeDialog->set_acl_base($base);
@@ -591,18 +404,11 @@ class ogroup extends plugin
 
 
     /* Save data to object */
-<<<<<<< HEAD
     function save_object()
     {
         /* Save additional values for possible next step */
         if (isset($_POST['ogroupedit'])){
 
-=======
-    public function save_object()
-    {
-        /* Save additional values for possible next step */
-        if (isset($_POST['ogroupedit'])) {
->>>>>>> gosa-core_v2.8
             $this->trustModeDialog->save_object();
 
             /* Create a base backup and reset the
@@ -619,26 +425,16 @@ class ogroup extends plugin
                 }
                 if ($this->base != $this->baseSelector->getBase()) {
                     $this->base= $this->baseSelector->getBase();
-<<<<<<< HEAD
                     $this->is_modified= TRUE;
                 }
             }
 
-=======
-                    $this->is_modified= true;
-                }
-            }
->>>>>>> gosa-core_v2.8
         }
     }
 
 
     /* (Re-)Load objects */
-<<<<<<< HEAD
     function reload()
-=======
-    public function reload()
->>>>>>> gosa-core_v2.8
     {
         /*###########
           Variable initialisation 
@@ -697,13 +493,9 @@ class ogroup extends plugin
         }    
 
         foreach($p_f as $post_name => $data){
-<<<<<<< HEAD
 
             if($ogfilter[$post_name] == "checked" && class_available($data['OBJ'])){
 
-=======
-            if ($ogfilter[$post_name] == "checked" && class_available($data['OBJ'])) {
->>>>>>> gosa-core_v2.8
                 if($ogfilter['subtrees']){
                     $base =  $ogfilter['dselect'];
                 }else{
@@ -712,18 +504,8 @@ class ogroup extends plugin
 
 
                 $filter = "(&(objectClass=".$data['CLASS'].")(|(uid=$regex)(cn=$regex)(ou=$regex)))";
-<<<<<<< HEAD
                 $res    = get_list($filter, $data['ACL']  , $base, 
                         array("description", "objectClass", "sn", "givenName", "uid","ou","cn"),$Get_list_flags);
-=======
-                $res    = get_list(
-                    $filter,
-                    $data['ACL']  ,
-                    $base,
-                    array("description", "objectClass", "sn", "givenName", "uid","ou","cn"),
-                    $Get_list_flags
-                );
->>>>>>> gosa-core_v2.8
 
                 /* fetch results and append them to the list */
                 foreach($res as $attrs){
@@ -771,10 +553,7 @@ class ogroup extends plugin
             /* It has failed, add entry with type flag I (Invalid)*/
             if (!$ldap->success()){
                 $this->memberList[$dn]= array('text' => _("Non existing DN:")." ".LDAP::fix($dn),"type" => "I");
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
             } else {
 
                 /* Append this entry to our all object list */
@@ -834,11 +613,7 @@ class ogroup extends plugin
     }
 
 
-<<<<<<< HEAD
     function getObjectType($attrs)
-=======
-    public function getObjectType($attrs)
->>>>>>> gosa-core_v2.8
     {
         $type= "I";
 
@@ -852,11 +627,7 @@ class ogroup extends plugin
     }
 
 
-<<<<<<< HEAD
     function getObjectName($attrs)
-=======
-    public function getObjectName($attrs)
->>>>>>> gosa-core_v2.8
     {
         /* Person? */
         $name =""; 
@@ -878,11 +649,7 @@ class ogroup extends plugin
     }
 
 
-<<<<<<< HEAD
     function check()
-=======
-    public function check()
->>>>>>> gosa-core_v2.8
     {
         /* Call common method to give check the hook */
         $message= plugin::check();
@@ -918,12 +685,7 @@ class ogroup extends plugin
 
         // Check if a wrong base was supplied
         if(!$this->baseSelector->checkLastBaseUpdate()){
-<<<<<<< HEAD
             $message[]= msgPool::check_base();;
-=======
-            $message[]= msgPool::check_base();
-            ;
->>>>>>> gosa-core_v2.8
         } 
 
         /* Set new acl base */
@@ -958,11 +720,7 @@ class ogroup extends plugin
 
 
     /* Save to LDAP */
-<<<<<<< HEAD
     function save()
-=======
-    public function save()
->>>>>>> gosa-core_v2.8
     {
         // Do not save members if we don't want to. 
         // This may be the case if we've copied an ogroup containing systems!
@@ -997,10 +755,7 @@ class ogroup extends plugin
                 $this->attrs['member']= array();
             }
             $mode= "modify";
-<<<<<<< HEAD
 
-=======
->>>>>>> gosa-core_v2.8
         } else {
             $mode= "add";
             $ldap->cd($this->config->current['BASE']);
@@ -1034,11 +789,7 @@ class ogroup extends plugin
         return ($ret);
     }
 
-<<<<<<< HEAD
     function remove_from_parent()
-=======
-    public function remove_from_parent()
->>>>>>> gosa-core_v2.8
     {
         plugin::remove_from_parent();
 
@@ -1055,11 +806,7 @@ class ogroup extends plugin
     }
 
 
-<<<<<<< HEAD
     function PrepareForCopyPaste($source)
-=======
-    public function PrepareForCopyPaste($source)
->>>>>>> gosa-core_v2.8
     {
         plugin::PrepareForCopyPaste($source);
 
@@ -1068,15 +815,9 @@ class ogroup extends plugin
         //  then disable this option by default, to avoid problems with 
         //  inheritance of ogroup values. 
         if (preg_match("/[STW]/", $this->gosaGroupObjects) || !isset($source['member'])) { 
-<<<<<<< HEAD
             $this->copyMembers = FALSE; 
         } else { 
             $this->copyMembers = TRUE; 
-=======
-            $this->copyMembers = false;
-        } else {
-            $this->copyMembers = true;
->>>>>>> gosa-core_v2.8
         } 
 
         /* Reload tabs */
@@ -1098,31 +839,19 @@ class ogroup extends plugin
     }
 
 
-<<<<<<< HEAD
     function getCopyDialog()
-=======
-    public function getCopyDialog()
->>>>>>> gosa-core_v2.8
     {
         $smarty = get_smarty();
         $smarty->assign("cn",  set_post($this->cn));
         $smarty->assign("copyMembers", $this->copyMembers);
-<<<<<<< HEAD
         $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
-=======
-        $str = $smarty->fetch(get_template_path("paste_generic.tpl", true, dirname(__FILE__)));
->>>>>>> gosa-core_v2.8
         $ret = array();
         $ret['string'] = $str;
         $ret['status'] = "";
         return($ret);
     }
 
-<<<<<<< HEAD
     function saveCopyDialog()
-=======
-    public function saveCopyDialog()
->>>>>>> gosa-core_v2.8
     {
         if(isset($_POST['cn'])){
             $this->cn = get_post('cn');
@@ -1131,30 +860,18 @@ class ogroup extends plugin
     }
 
 
-<<<<<<< HEAD
     function IsReleaseManagementActivated()
-=======
-    public function IsReleaseManagementActivated()
->>>>>>> gosa-core_v2.8
     {
         return($this->config->pluginEnabled("faiManagement"));
     }
 
 
-<<<<<<< HEAD
     static function plInfo()
-=======
-    public static function plInfo()
->>>>>>> gosa-core_v2.8
     {
         return (array(
                     "plShortName"   => _("Generic"),
                     "plDescription" => _("Object group generic"),
-<<<<<<< HEAD
                     "plSelfModify"  => FALSE,
-=======
-                    "plSelfModify"  => false,
->>>>>>> gosa-core_v2.8
                     "plDepends"     => array(),
                     "plPriority"    => 1,
                     "plSection"     => array("administration"),
@@ -1175,7 +892,4 @@ class ogroup extends plugin
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-<<<<<<< HEAD
 ?>
-=======
->>>>>>> gosa-core_v2.8

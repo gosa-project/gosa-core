@@ -13,7 +13,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
 
-<<<<<<< HEAD
     <style type="text/css">@import url('themes/default/style.css');</style>
     <link rel="stylesheet" type="text/css" href="themes/default/printer.css" media="print">
 
@@ -30,13 +29,6 @@
       }
     </style>
     <link rel="shortcut icon" href="favicon.ico">
-=======
-    <link rel="stylesheet" href="themes/default/css/materialize.css">
-    <link rel="stylesheet" href="themes/default/css/style.css">
-
-    <link rel="shortcut icon" href="favicon.ico">
-
->>>>>>> gosa-core_v2.8
     <script language="javascript" src="include/prototype.js" type="text/javascript"></script>
     <script language="javascript" src="include/gosa.js" type="text/javascript"></script>
     <script language="javascript" src="include/scriptaculous.js" type="text/javascript"></script>
@@ -45,8 +37,4 @@
     <script language="javascript" src="include/controls.js" type="text/javascript"></script>
     <script language="javascript" src="include/pulldown.js" type="text/javascript"></script>
     <script language="javascript" src="include/datepicker.js" type="text/javascript"></script>
-<<<<<<< HEAD
-=======
-
->>>>>>> gosa-core_v2.8
   </head>

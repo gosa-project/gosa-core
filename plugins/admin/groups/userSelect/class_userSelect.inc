@@ -26,11 +26,7 @@ class userSelect extends management
     protected $skipFooter = TRUE;
     protected $skipHeader = TRUE;
 
-<<<<<<< HEAD
     function __construct($config,$ui,array $dns)
-=======
-    function __construct($config, $ui, array $dns = null)
->>>>>>> gosa-core_v2.8
     {
         $this->config = $config;
         $this->ui = $ui;

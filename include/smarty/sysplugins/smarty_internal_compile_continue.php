@@ -1,10 +1,7 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Continue
-<<<<<<< HEAD
  *
-=======
->>>>>>> gosa-core_v2.8
  * Compiles the {continue} tag
  *
  * @package Smarty
@@ -18,7 +15,6 @@
  * @package Smarty
  * @subpackage Compiler
  */
-<<<<<<< HEAD
 class Smarty_Internal_Compile_Continue extends Smarty_Internal_CompileBase {
 
     /**
@@ -80,14 +76,3 @@ class Smarty_Internal_Compile_Continue extends Smarty_Internal_CompileBase {
 }
 
 ?>
-=======
-class Smarty_Internal_Compile_Continue extends Smarty_Internal_Compile_Break
-{
-    /**
-     * Tag name
-     *
-     * @var string
-     */
-    public $tag = 'continue';
-}
->>>>>>> gosa-core_v2.8

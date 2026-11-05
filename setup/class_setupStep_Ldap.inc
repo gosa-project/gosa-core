@@ -88,7 +88,7 @@ class Step_Ldap extends setup_step
       $base_to_append = substr($base_to_append,0,17)."...";
     }
     $smarty->assign("base_to_append",$base_to_append);
-    return($smarty -> fetch (get_template_path("../setup/".$GLOBALS['theme']."/setup_ldap.tpl")));
+    return($smarty -> fetch (get_template_path("../setup/setup_ldap.tpl")));
   }
 
   function get_connection_status()
@@ -114,7 +114,6 @@ class Step_Ldap extends setup_step
       if(!empty($this->admin)){
         $str = sprintf(_("Bind as user '%s' failed!"),$this->admin,$this->connection);
       }      
-<<<<<<< HEAD
       return("<font color='red'>".$str."</font>");
     }else{
       if(empty($this->admin)){
@@ -123,16 +122,6 @@ class Step_Ldap extends setup_step
       }else{
         $str = sprintf(_("Bind as user '%s' to server '%s' succeeded!"),$this->admin,$this->connection);
         return("<font color='green'>".$str."</font>");
-=======
-      return("<p style='color:red'>".$str."</p>");
-    }else{
-      if(empty($this->admin)){
-        $str = sprintf(_("Anonymous bind to server '%s' succeeded."), $this->connection);
-        return("<p><span style='color:blue'>".$str."</span><br><span style='color:red'>"._("Please specify user and password!")."</span></p>");
-      }else{
-        $str = sprintf(_("Bind as user '%s' to server '%s' succeeded!"),$this->admin,$this->connection);
-        return("<p style='color:green'>".$str."</p>");
->>>>>>> gosa-core_v2.8
       }      
     }
   }

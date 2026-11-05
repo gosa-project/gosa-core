@@ -3,34 +3,21 @@
  * Project:     Smarty: the PHP compiling template engine
  * File:        SmartyBC.class.php
  * SVN:         $Id: $
-<<<<<<< HEAD
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
-=======
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3.0 of the License, or (at your option) any later version.
->>>>>>> gosa-core_v2.8
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
-<<<<<<< HEAD
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
-=======
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
->>>>>>> gosa-core_v2.8
  * For questions, help, comments, discussion, etc., please join the
  * Smarty mailing list. Send a blank e-mail to
  * smarty-discussion-subscribe@googlegroups.com
@@ -45,7 +32,6 @@
 /**
  * @ignore
  */
-<<<<<<< HEAD
 require(dirname(__FILE__) . '/Smarty.class.php');
 
 /**
@@ -57,26 +43,11 @@ class SmartyBC extends Smarty {
 
     /**
      * Smarty 2 BC
-=======
-require_once dirname(__FILE__) . '/Smarty.class.php';
-
-/**
- * Smarty Backward Compatibility Wrapper Class
- *
- * @package Smarty
- */
-class SmartyBC extends Smarty
-{
-    /**
-     * Smarty 2 BC
-     *
->>>>>>> gosa-core_v2.8
      * @var string
      */
     public $_version = self::SMARTY_VERSION;
 
     /**
-<<<<<<< HEAD
      * Initialize new SmartyBC object
      *
      * @param array $options options to set during initialization, e.g. array( 'forceCompile' => false )
@@ -86,20 +57,6 @@ class SmartyBC extends Smarty
         parent::__construct($options);
         // register {php} tag
         $this->registerPlugin('block', 'php', 'smarty_php_tag');
-=======
-     * This is an array of directories where trusted php scripts reside.
-     *
-     * @var array
-     */
-    public $trusted_dir = array();
-
-    /**
-     * Initialize new SmartyBC object
-     */
-    public function __construct()
-    {
-        parent::__construct();
->>>>>>> gosa-core_v2.8
     }
 
     /**
@@ -142,11 +99,6 @@ class SmartyBC extends Smarty
      * @param string $function_impl the name of the PHP function to register
      * @param bool   $cacheable
      * @param mixed  $cache_attrs
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function register_function($function, $function_impl, $cacheable=true, $cache_attrs=null)
     {
@@ -154,11 +106,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters custom function
-=======
-     * Unregister custom function
->>>>>>> gosa-core_v2.8
      *
      * @param string $function name of template function
      */
@@ -174,36 +122,17 @@ class SmartyBC extends Smarty
      * @param object  $object_impl the referenced PHP object to register
      * @param array   $allowed     list of allowed methods (empty = all)
      * @param boolean $smarty_args smarty argument format, else traditional
-<<<<<<< HEAD
      * @param array   $block_functs list of methods that are block format
      */
     public function register_object($object, $object_impl, $allowed = array(), $smarty_args = true, $block_methods = array())
     {
-=======
-     * @param array   $block_methods list of methods that are block format
-     *
-     * @throws   SmartyException
-     * @internal param array $block_functs list of methods that are block format
-     */
-    public function register_object(
-        $object,
-        $object_impl,
-        $allowed = array(),
-        $smarty_args = true,
-        $block_methods = array()
-    ) {
->>>>>>> gosa-core_v2.8
         settype($allowed, 'array');
         settype($smarty_args, 'boolean');
         $this->registerObject($object, $object_impl, $allowed, $smarty_args, $block_methods);
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters object
-=======
-     * Unregister object
->>>>>>> gosa-core_v2.8
      *
      * @param string $object name of template object
      */
@@ -219,11 +148,6 @@ class SmartyBC extends Smarty
      * @param string $block_impl PHP function to register
      * @param bool   $cacheable
      * @param mixed  $cache_attrs
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function register_block($block, $block_impl, $cacheable=true, $cache_attrs=null)
     {
@@ -231,11 +155,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters block function
-=======
-     * Unregister block function
->>>>>>> gosa-core_v2.8
      *
      * @param string $block name of template function
      */
@@ -250,11 +170,6 @@ class SmartyBC extends Smarty
      * @param string $function      name of template function
      * @param string $function_impl name of PHP function to register
      * @param bool   $cacheable
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function register_compiler_function($function, $function_impl, $cacheable=true)
     {
@@ -262,11 +177,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters compiler function
-=======
-     * Unregister compiler function
->>>>>>> gosa-core_v2.8
      *
      * @param string $function name of template function
      */
@@ -280,11 +191,6 @@ class SmartyBC extends Smarty
      *
      * @param string $modifier name of template modifier
      * @param string $modifier_impl name of PHP function to register
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function register_modifier($modifier, $modifier_impl)
     {
@@ -292,11 +198,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters modifier
-=======
-     * Unregister modifier
->>>>>>> gosa-core_v2.8
      *
      * @param string $modifier name of template modifier
      */
@@ -317,11 +219,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters a resource
-=======
-     * Unregister a resource
->>>>>>> gosa-core_v2.8
      *
      * @param string $type name of resource
      */
@@ -335,11 +233,6 @@ class SmartyBC extends Smarty
      * to a template before compiling
      *
      * @param callable $function
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function register_prefilter($function)
     {
@@ -347,11 +240,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters a prefilter function
-=======
-     * Unregister a prefilter function
->>>>>>> gosa-core_v2.8
      *
      * @param callable $function
      */
@@ -365,11 +254,6 @@ class SmartyBC extends Smarty
      * to a compiled template after compilation
      *
      * @param callable $function
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function register_postfilter($function)
     {
@@ -377,11 +261,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters a postfilter function
-=======
-     * Unregister a postfilter function
->>>>>>> gosa-core_v2.8
      *
      * @param callable $function
      */
@@ -395,11 +275,6 @@ class SmartyBC extends Smarty
      * to a template output
      *
      * @param callable $function
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function register_outputfilter($function)
     {
@@ -407,11 +282,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-<<<<<<< HEAD
      * Unregisters an outputfilter function
-=======
-     * Unregister an outputfilter function
->>>>>>> gosa-core_v2.8
      *
      * @param callable $function
      */
@@ -425,11 +296,6 @@ class SmartyBC extends Smarty
      *
      * @param string $type filter type
      * @param string $name filter name
-<<<<<<< HEAD
-=======
-     *
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function load_filter($type, $name)
     {
@@ -443,10 +309,6 @@ class SmartyBC extends Smarty
      * @param string $cache_id   name of cache_id
      * @param string $compile_id name of compile_id
      * @param string $exp_time   expiration time
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
      * @return boolean
      */
     public function clear_cache($tpl_file = null, $cache_id = null, $compile_id = null, $exp_time = null)
@@ -458,10 +320,6 @@ class SmartyBC extends Smarty
      * clear the entire contents of cache (all templates)
      *
      * @param string $exp_time expire time
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
      * @return boolean
      */
     public function clear_all_cache($exp_time = null)
@@ -475,14 +333,7 @@ class SmartyBC extends Smarty
      * @param string $tpl_file name of template file
      * @param string $cache_id
      * @param string $compile_id
-<<<<<<< HEAD
      * @return boolean
-=======
-     *
-     * @return bool
-     * @throws \Exception
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function is_cached($tpl_file, $cache_id = null, $compile_id = null)
     {
@@ -505,10 +356,6 @@ class SmartyBC extends Smarty
      * @param string $tpl_file
      * @param string $compile_id
      * @param string $exp_time
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
      * @return boolean results of {@link smarty_core_rm_auto()}
      */
     public function clear_compiled_tpl($tpl_file = null, $compile_id = null, $exp_time = null)
@@ -520,13 +367,7 @@ class SmartyBC extends Smarty
      * Checks whether requested template exists.
      *
      * @param string $tpl_file
-<<<<<<< HEAD
      * @return boolean
-=======
-     *
-     * @return bool
-     * @throws \SmartyException
->>>>>>> gosa-core_v2.8
      */
     public function template_exists($tpl_file)
     {
@@ -537,10 +378,6 @@ class SmartyBC extends Smarty
      * Returns an array containing template variables
      *
      * @param string $name
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
      * @return array
      */
     public function get_template_vars($name=null)
@@ -552,10 +389,6 @@ class SmartyBC extends Smarty
      * Returns an array containing config variables
      *
      * @param string $name
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
      * @return array
      */
     public function get_config_vars($name=null)
@@ -579,10 +412,6 @@ class SmartyBC extends Smarty
      * return a reference to a registered object
      *
      * @param string $name
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
      * @return object
      */
     public function get_registered_object($name)
@@ -610,7 +439,6 @@ class SmartyBC extends Smarty
     {
         trigger_error("Smarty error: $error_msg", $error_type);
     }
-<<<<<<< HEAD
 
 }
 
@@ -630,6 +458,3 @@ function smarty_php_tag($params, $content, $template, &$repeat)
 }
 
 ?>
-=======
-}
->>>>>>> gosa-core_v2.8

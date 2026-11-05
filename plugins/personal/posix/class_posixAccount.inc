@@ -97,11 +97,6 @@ class posixAccount extends plugin
   var $groupList = null;
   var $groupListData = null;
 
-<<<<<<< HEAD
-=======
-  var $theme;
-
->>>>>>> gosa-core_v2.8
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
   function __construct(&$config, $dn= NULL, $parent =NULL)
@@ -114,21 +109,7 @@ class posixAccount extends plugin
     /* Load bases attributes */
     plugin::__construct($config, $dn, $parent);
 
-<<<<<<< HEAD
     $groupImage = image('plugins/groups/images/select_group.png');
-=======
-    $this->theme = getThemeName();
-
-    switch ($this->theme) {
-      case 'classic':
-        $groupImage = image("plugins/groups/images/select_group.png");
-        break;
-      
-      default:
-        $groupImage = image("<i class='material-icons'>groups</i>");
-        break;
-    }
->>>>>>> gosa-core_v2.8
 
     $this->trustModeDialog = new trustModeDialog($this->config, $this->dn, $parent);
     $this->trustModeDialog->setAcl('users/posixAccount');
@@ -311,25 +292,10 @@ class posixAccount extends plugin
 
       /* Do we represent a valid posixAccount? */
       if (!$this->is_account && $this->parent === NULL ){
-<<<<<<< HEAD
         $display= "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
           msgPool::noValidExtension(_("POSIX"))."</b>";
         $display.= back_to_main();
         return ($display);
-=======
-        switch ($this->theme) {
-          case 'classic':
-            $symbol = "<img alt='' src='images/small-error.png' align='middle'>";
-            break;
-          
-          default:
-            $symbol = "<i class='material-icons'>report</i>";
-            break;
-        }
-        $display = "<div class='valign-wrapper'>".$symbol.msgPool::noValidExtension(_("POSIX"))."</div>";
-        $display.= back_to_main();
-        return $display;
->>>>>>> gosa-core_v2.8
       }
 
 
@@ -364,20 +330,12 @@ class posixAccount extends plugin
     }
 
     // Cancel group dialog
-<<<<<<< HEAD
     if (isset($_POST['add_groups_cancel'])){
-=======
-    if (isset($_POST['add_groups_cancel']) || isset($_POST['cancel-abort'])){
->>>>>>> gosa-core_v2.8
       $this->groupSelect= NULL;
     }
 
     // Add groups selected in groupSelect dialog to ours.
-<<<<<<< HEAD
     if (isset($_POST['add_groups_finish']) && $this->groupSelect){
-=======
-    if ((isset($_POST['add_groups_finish']) || isset($_POST['ok-save'])) && $this->groupSelect){
->>>>>>> gosa-core_v2.8
       $groups = $this->groupSelect->detectPostActions();
       if(isset($groups['targets'])){
         $this->addGroup ($groups['targets']);
@@ -456,11 +414,7 @@ class posixAccount extends plugin
 
     /* Depending on pwmode, currently hardcoded because there are no other methods */
     if ( 1 == 1 ){
-<<<<<<< HEAD
       $smarty->assign("pwmode", dirname(__FILE__)."/posix_shadow");
-=======
-      $smarty->assign("pwmode", dirname(__FILE__).("/".getThemeName()."/posix_shadow"));
->>>>>>> gosa-core_v2.8
 
       $shadowMinACL     =  $this->getacl("shadowMin");
       $smarty->assign("shadowmins", sprintf(_("Password can't be changed up to %s days after last change"), 
@@ -1086,20 +1040,7 @@ class posixAccount extends plugin
   {
     /* include global link_info */
     $ldap= $this->config->get_ldap_link();
-<<<<<<< HEAD
     $groupImage = image("plugins/groups/images/select_group.png");
-=======
-
-    switch ($this->theme) {
-      case 'classic':
-        $groupImage = image("plugins/groups/images/select_group.png");
-        break;
-      
-      default:
-        $groupImage = image("<i class='material-icons'>groups</i>");
-        break;
-    }
->>>>>>> gosa-core_v2.8
 
     /* Walk through groups and add the descriptive entry if not exists */
     foreach ($groups as $value){
@@ -1308,11 +1249,7 @@ class posixAccount extends plugin
 
     /* If the group-add dialog is closed, call execute 
        to ensure that the membership is updatd */
-<<<<<<< HEAD
     if(isset($_POST['add_groups_finish']) || isset($_POST['add_groups_cancel'])){
-=======
-    if((isset($_POST['add_groups_finish']) || isset($_POST['ok-save'])) || (isset($_POST['add_groups_cancel']) || isset($_POST['cancel-abort']))){
->>>>>>> gosa-core_v2.8
       $this->execute();
       $this->groupSelect =NULL;
     }
@@ -1567,20 +1504,7 @@ class posixAccount extends plugin
     $uids        = array();
     $first       = TRUE;
 
-<<<<<<< HEAD
     $groupImage = image('plugins/groups/images/select_group.png');
-=======
-    switch ($this->theme) {
-      case 'classic':
-        $groupImage = image("plugins/groups/images/select_group.png");
-        break;
-      
-      default:
-        $groupImage = image("<i class='material-icons'>groups</i>");
-        break;
-    }
-    
->>>>>>> gosa-core_v2.8
 
     /* Get all groups used by currently edited users */
     $uid_filter="";  

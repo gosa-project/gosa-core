@@ -57,10 +57,10 @@ documentation and additional help.
 * Henning Schmiedehausen <hps@intermeta.de>
   Various fixes, support for user defined people/group base
 
-* Alfred Schrï¿½der <schroeder@gonicus.de>
+* Alfred Schröder <schroeder@gonicus.de>
   German translation
 
-* Thomas Schï¿½ï¿½ler <tulpe@atomar.de>
+* Thomas Schüßler <tulpe@atomar.de>
   debuglib.inc is taken from him
 
 * Jan Wenzel <jan.wenzel@gonicus.de>
@@ -80,10 +80,3 @@ documentation and additional help.
 * pChart has been created by Jean-Damien POGOLOTTI
   Graph rendering classes pChart.
   http://www.sunyday.net
-
-* Lara Suttmann <suttmann@gonicus.de>
-  GOsa 2.8 frontend development.
-
-* Sebastian Sternfeld <sternfeld@gonicus.de>
-  GOsa 2.8 backend development, Varous fixes, 
-  simplified template system for plugins and HTML snippets.

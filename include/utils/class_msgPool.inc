@@ -307,6 +307,7 @@ class msgPool
     return $what == "" ? sprintf(_("Add")): sprintf(_("Add %s"), $what);
   }
 
+
   public static function delButton($what= "")
   {
     return $what == "" ? sprintf(_("Delete")): sprintf(_("Delete %s"), $what);
@@ -560,3 +561,4 @@ class msgPool
 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

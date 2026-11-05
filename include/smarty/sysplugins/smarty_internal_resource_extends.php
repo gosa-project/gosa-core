@@ -10,22 +10,14 @@
 
 /**
 * Smarty Internal Plugin Resource Extends
-<<<<<<< HEAD
 *
-=======
->>>>>>> gosa-core_v2.8
 * Implements the file system as resource for Smarty which {extend}s a chain of template files templates
 *
 * @package Smarty
 * @subpackage TemplateResources
 */
-<<<<<<< HEAD
 class Smarty_Internal_Resource_Extends extends Smarty_Resource {
 
-=======
-class Smarty_Internal_Resource_Extends extends Smarty_Resource
-{
->>>>>>> gosa-core_v2.8
     /**
     * mbstring.overload flag
     *
@@ -38,18 +30,12 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
     *
     * @param Smarty_Template_Source   $source    source object
     * @param Smarty_Internal_Template $_template template object
-<<<<<<< HEAD
-=======
-     *
-     * @throws SmartyException
->>>>>>> gosa-core_v2.8
     */
     public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
         $uid = '';
         $sources = array();
         $components = explode('|', $source->name);
-<<<<<<< HEAD
         $exists = true;
         foreach ($components as $component) {
             $s = Smarty_Resource::source(null, $source->smarty, $component);
@@ -71,29 +57,6 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
         }
         // need the template at getContent()
         $source->template = $_template;
-=======
-        $smarty = &$source->smarty;
-        $exists = true;
-        foreach ($components as $component) {
-            /* @var \Smarty_Template_Source $_s */
-            $_s = Smarty_Template_Source::load(null, $smarty, $component);
-            if ($_s->type === 'php') {
-                throw new SmartyException("Resource type {$_s->type} cannot be used with the extends resource type");
-            }
-            $sources[ $_s->uid ] = $_s;
-            $uid .= $_s->filepath;
-            if ($_template) {
-                $exists = $exists && $_s->exists;
-            }
-        }
-        $source->components = $sources;
-        $source->filepath = $_s->filepath;
-        $source->uid = sha1($uid . $source->smarty->_joined_template_dir);
-        $source->exists = $exists;
-        if ($_template) {
-            $source->timestamp = $_s->timestamp;
-        }
->>>>>>> gosa-core_v2.8
     }
 
     /**
@@ -104,35 +67,22 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
     public function populateTimestamp(Smarty_Template_Source $source)
     {
         $source->exists = true;
-<<<<<<< HEAD
         foreach ($source->components as $s) {
             $source->exists = $source->exists && $s->exists;
         }
         $source->timestamp = $s->timestamp;
-=======
-        /* @var \Smarty_Template_Source $_s */
-        foreach ($source->components as $_s) {
-            $source->exists = $source->exists && $_s->exists;
-        }
-        $source->timestamp = $source->exists ? $_s->getTimeStamp() : false;
->>>>>>> gosa-core_v2.8
     }
 
     /**
     * Load template's source from files into current template object
     *
     * @param Smarty_Template_Source $source source object
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
     * @return string template source
     * @throws SmartyException if source cannot be loaded
     */
     public function getContent(Smarty_Template_Source $source)
     {
         if (!$source->exists) {
-<<<<<<< HEAD
             throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
         }
 
@@ -195,28 +145,11 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
             }
         }
     }
-=======
-            throw new SmartyException("Unable to load template '{$source->type}:{$source->name}'");
-        }
-        $_components = array_reverse($source->components);
-        $_content = '';
-        /* @var \Smarty_Template_Source $_s */
-        foreach ($_components as $_s) {
-            // read content
-            $_content .= $_s->getContent();
-        }
-        return $_content;
-    }
->>>>>>> gosa-core_v2.8
 
     /**
     * Determine basename for compiled filename
     *
     * @param Smarty_Template_Source $source source object
-<<<<<<< HEAD
-=======
-     *
->>>>>>> gosa-core_v2.8
     * @return string resource's basename
     */
     public function getBasename(Smarty_Template_Source $source)
@@ -224,23 +157,6 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
         return str_replace(':', '.', basename($source->filepath));
     }
 
-<<<<<<< HEAD
 }
 
 ?>
-=======
-    /*
-      * Disable timestamp checks for extends resource.
-      * The individual source components will be checked.
-      *
-      * @return bool
-      */
-    /**
-     * @return bool
-     */
-    public function checkTimestamps()
-    {
-        return false;
-    }
-}
->>>>>>> gosa-core_v2.8
