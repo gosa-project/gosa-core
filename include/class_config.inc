@@ -88,7 +88,7 @@ class config
         // $this->parser = xml_parser_create();
         self::$parser = xml_parser_create();
         $this->basedir = $basedir;
-        xml_set_element_handler(self::$parser, [$this, 'tag_open'], [$this, 'tag_close']);
+        xml_set_element_handler(self::$parser, $this->tag_open(...), $this->tag_close(...));
 
         /* Parse config file directly? */
         if ($filename != "") {
@@ -164,12 +164,12 @@ class config
             "SERVICE"   => []
         );
 
-        if(!file_exists($filename)) {
-            die($filename." does not exist! Did you run the installation wizard?");
+        if (!file_exists($filename)) {
+            die($filename . " does not exist! Did you run the installation wizard?");
         }
 
-        if(!is_readable($filename)) {
-            die($filename." is not readable!");
+        if (!is_readable($filename)) {
+            die($filename . " is not readable!");
         }
 
         $this->last_modified = filemtime($filename);

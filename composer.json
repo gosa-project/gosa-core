@@ -16,6 +16,13 @@
         "gonicus/gosa2-plugin-departments": "dev-main",
         "gonicus/gosa2-plugin-ssh": "dev-main"
     },
+    "autoload": {
+        "files": [
+            "./include/CacheInterface.php",
+            "./include/ApcuCache.php",
+            "./include/BruteForceProtector.php"
+        ]
+    },
     "authors": [
         {
             "name": "Benjamin Zapiec",
