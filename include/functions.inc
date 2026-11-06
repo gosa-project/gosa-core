@@ -3879,9 +3879,76 @@ function fillReplacements($str, $attrs, $shellArg = false, $default = '')
         if ($shellArg) $value = escapeshellarg($value);
 
         // Replace the placeholder within the string.
-        $str = preg_replace("/" . preg_quote($match[0], '/') . "/", $value, $str);
+        $str = str_replace($match[0], $value, $str);
     }
     return ($str);
+}
+
+
+/*! \brief  Split a hook command template into environment assignments, the program and its argument templates.
+ *          For example:
+ *            parseHookCommand("USERDN=%userdn /usr/bin/sudo /opt/hook.sh %uid");
+ *            returns: [ 0 => ['USERDN' => '%userdn'],
+ *                       1 => '/usr/bin/sudo',
+ *                       2 => ['/opt/hook.sh', '%uid'] ]
+ * 
+ *  @param  string  The raw command template (may still contain %placeholders).
+ *  @return array   [$env, $prog, $argTemplates] $prog is NULL when the template contains no program.
+ */
+function parseHookCommand($template)
+{
+    $tokens = array();
+    $len    = strlen($template);
+    $cur    = '';
+    $inTok  = false; // are we currently inside a token (i.e. a quoted string or a non-whitespace sequence)
+    $i      = 0; // current position in the $template string
+
+    while ($i < $len) {
+        $c = $template[$i]; // current character
+        if ($c === "'" || $c === '"') {
+            $inTok = true; // everything up to the matching quote is part of the current token
+            $j = strpos($template, $c, $i + 1); // find the matching closing quote
+            if ($j === false) {
+                // No closing quote: take the rest of the string literally
+                $cur .= substr($template, $i + 1);
+                $i = $len;
+            } else {
+                // Append the content between the quotes and jump past the closing quote
+                $cur .= substr($template, $i + 1, $j - $i - 1);
+                $i = $j + 1;
+            }
+        } elseif ($c === ' ' || $c === "\t" || $c === "\n" || $c === "\r") {
+            // Whitespace character: if we're inside a token, it's the end of the token.
+            if ($inTok) {
+                $tokens[] = $cur;
+                $cur = '';
+                $inTok = false;
+            }
+            $i++;
+        } else {
+            // Any ordinary character is appended to the current token.
+            $inTok = true;
+            $cur  .= $c;
+            $i++;
+        }
+    }
+    if ($inTok) {
+        $tokens[] = $cur;
+    }
+
+    // Pull leading environment assignments (NAME=VALUE) off the front.
+    $env = array();
+    while (!empty($tokens) && preg_match('/^([^=\s]+)=(.*)$/s', $tokens[0], $m)) {
+        $env[$m[1]] = $m[2];
+        array_shift($tokens);
+    }
+
+    if (empty($tokens)) {
+        return array($env, null, array());
+    }
+
+    $prog = array_shift($tokens);
+    return array($env, $prog, $tokens);
 }
 
 

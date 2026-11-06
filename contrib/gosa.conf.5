@@ -101,22 +101,35 @@ and
 .PP
 These can be used to perform special actions when a plugins gets
 a create, delete, modify or check request. As a parameter, these
-keywords get a shell script or program to the task.
+keywords get a script or program to the task.
 .PP
-NOTE: Any hook call using data input from users (ie: passwords) should take measures
-to prevent shell injection attacks that could lead to RCE. Specifically with Passwords,
-Gosa has been updated to base64 encode new_password and current_password used for all hook
-calls to mitigate this risk. All other values get escapeShellArg() escaped only, which
-can be exploited in certain conditions. Any hook using a password value needs to base64
-decode the value before using it.
+NOTE: Hooks are run directly, not through a shell. Each attribute value
+is passed to the program as a single argument, so shell constructs in the
+hook command (pipes, redirections, $(...), back ticks, globbing) are not
+interpreted. If you need them, call a wrapper script and pass the values
+as arguments.
+.PP
+The new_password and current_password values are base64 encoded; the hook
+script must decode them itself.
 .PP
 .B Example password hook:
-to run a single command, like gam, to update passwords, in User Password premodify:
+in User Password premodify, pass the (base64 encoded) password through the
+environment so it does not appear in the process list, and let a wrapper
+script decode it:
 .PP
 .RS
-/usr/local/bin/gam update user %uid password $(echo %new_password|base64 -d)
+NEW_PASSWORD=%new_password /usr/local/bin/update_password.sh %uid
 .RE
 .PP
+.RS
+.nf
+#!/bin/sh
+export PATH=/usr/bin:/bin
+# uid in $1, base64 encoded password in $NEW_PASSWORD
+password=$(printf '%s' "$NEW_PASSWORD" | base64 -d)
+/usr/local/bin/gam update user "$1" password "$password"
+.fi
+.RE
 
 .I The
 .B create / delete / modify
