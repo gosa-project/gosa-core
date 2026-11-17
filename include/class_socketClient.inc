@@ -153,7 +153,7 @@ class Socket_Client
     $this->reset_error();
     $str = "";
     $data = "test";
-    socket_set_timeout($this->handle,$this->timeout);			
+    stream_set_timeout($this->handle,$this->timeout);			
     stream_set_blocking($this->handle,0);
     $start = microtime(TRUE);
 
