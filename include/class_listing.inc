@@ -1063,7 +1063,7 @@ class listing
             } else {
                 $value = $config[$attr];
             }
-            $data = preg_replace("/%\{$attr\}/", $value, $data);
+            $data = preg_replace("/%\{$attr\}/", $value ?? '', $data);
         }
 
         // Watch out for filters and prepare to execute them
