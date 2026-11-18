@@ -41,7 +41,7 @@ if (session::global_is_set('ui')) {
   del_user_locks($ui->dn);
 
   /* Write something to log */
-  new log("security", "logout", "", array(), "User \"" . $ui->username . "\" logged out");
+  new log("security", "logout", "", array(), "User \"" . $ui->uid . "\" logged out");
 }
 
 /* Language setup */
