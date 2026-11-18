@@ -878,6 +878,7 @@ class acl extends plugin
             } else {
                 $option = "<input type='radio' name='selected_role' value='" . base64_encode($dn) . "'>";
             }
+            $option = "<label>" . $option . "<span></span></label>";
             $data[] = postEncode($dn);
             $lData[] = array('data' => array($option, $values['cn'], $values['description']));
         }
@@ -1658,18 +1659,21 @@ class acl extends plugin
 
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($dn) . "*))", array("gosaAclEntry", "dn"));
-        $new_entries = [];
+        $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*" . base64_encode($dn) . "*))", array("gosaAclEntry", "objectClass", "dn"));
+
         while ($attrs = $ldap->fetch()) {
             if (!isset($attrs['gosaAclEntry'])) {
                 continue;
             }
             unset($attrs['gosaAclEntry']['count']);
 
+            $new_entries = [];
+
             // Remove entry directly
             foreach ($attrs['gosaAclEntry'] as $id => $entry) {
                 $parts = explode(':', $entry);
-                $members = explode(',', $parts[2]);
+                $member_idx = ($parts[1] == 'role') ? 3 : 2;
+                $members = explode(',', $parts[$member_idx]);
                 $new_members = [];
                 foreach ($members as $member) {
                     if (base64_decode($member) != $dn) {
@@ -1681,7 +1685,7 @@ class acl extends plugin
 
                 /* We can completely remove the entry if there are no members anymore */
                 if (count($new_members)) {
-                    $parts[2] = implode(",", $new_members);
+                    $parts[$member_idx] = implode(",", $new_members);
                     $new_entries[] = implode(":", $parts);
                 }
             }
@@ -1689,9 +1693,16 @@ class acl extends plugin
             // There should be a modification, so write it back
             $ldap->cd($attrs['dn']);
             $new_attrs = array("gosaAclEntry" => $new_entries);
+
+            // Since gosaAcl requires gosaAclEntry, we need to drop the object class if no entry is left
+            if (!count($new_entries)) {
+                unset($attrs['objectClass']['count']);
+                $new_attrs['objectClass'] = array_values(array_remove_entries_ics(array('gosaAcl'), $attrs['objectClass']));
+            }
+
             $ldap->modify($new_attrs);
             if (!$ldap->success()) {
-                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, __CLASS__), ERROR_DIALOG);
+                msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $attrs['dn'], LDAP_MOD, __CLASS__), ERROR_DIALOG);
             }
         }
     }

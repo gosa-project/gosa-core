@@ -140,7 +140,7 @@ class core extends plugin {
                 break;
             case 'theme':
                 $cmd = "cd ../ihtml/themes; find . -name 'img.styles' | sed s/'^[^\/]*\/\([^\/]*\).*'/'\\1'/g";
-                $res = `$cmd`  ; 
+                $res = shell_exec($cmd);
                 $list = array();
                 foreach(preg_split("/\n/",$res) as $entry){
                     if(!empty($entry)){

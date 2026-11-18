@@ -42,6 +42,7 @@ class pluglist
     // Some cache vars to avoid regenration of the menus.
     public $pathMenu = '';
     public $menu = '';
+    public $pluginScript = '';
     public $iconmenu = '';
     public $breadcrumb = '';
 
@@ -234,6 +235,29 @@ class pluglist
         return false;
     }
 
+    /*! \brief    Generate script for opening Plugins from the menu or plugin
+     *            list which prints out warning messages when leaving an
+     *            unsaved form. We do it in here to get the string translated.
+     */
+    public function gen_plugin_script()
+    {
+        if ($this->pluginScript == '') {
+            $this->pluginScript =
+                "\n      <script language='javascript' type='text/javascript'>".
+                "\n        function openPlugin(id, plugin){".
+                "\n          if(plugin){ ".
+                "\n             plugin = '&pluginTab=' +  plugin".
+                "\n          }else{".
+                "\n             plugin = '';".
+                "\n          }".
+                "\n          return question(\""._('You are currently editing a database entry. Do you want to discard the changes?').'",'.
+                "\n            \"main.php?plug=\" + id + \"&reset=1\" + plugin);".
+                "\n        }".
+                "\n      </script>\n";
+        }
+        return $this->pluginScript;
+    }
+
     /*! \brief    Generate the GOsa Main-Menu here (The menu on the left),
      *             this usually only done once during login.
      *            -----------------------------------------------------------------
@@ -343,21 +367,6 @@ class pluglist
                     }
                     break;
             }
-
-            // Add javascript method to print out warning messages while leaving an unsaved form.
-            // We do it in here to get the string translated.
-            $this->menu .=
-                "\n      <script language='javascript' type='text/javascript'>" .
-                "\n        function openPlugin(id, plugin){" .
-                "\n          if(plugin){ " .
-                "\n             plugin = '&pluginTab=' +  plugin" .
-                "\n          }else{" .
-                "\n             plugin = '';" .
-                "\n          }" .
-                "\n          return question(\"" . _('You are currently editing a database entry. Do you want to discard the changes?') . '",' .
-                "\n            \"main.php?plug=\" + id + \"&reset=1\" + plugin);" .
-                "\n        }" .
-                "\n      </script>\n";
         }
 
         // Use javascript to mark the currently selected plugin.

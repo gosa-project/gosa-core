@@ -205,6 +205,7 @@ if (session::global_is_set('plugin_dir')) {
 }
 
 // Generate menus
+$plist->gen_plugin_script();
 $plist->gen_headlines();
 $plist->gen_menu();
 $plist->genPathMenu();
@@ -385,6 +386,7 @@ if ($reload_navigation) {
     $plist->menu = "";
 }
 $smarty->assign("menu", $plist->gen_menu());
+$smarty->assign ("pluginScript", $plist->gen_plugin_script());
 $smarty->assign("plug", "$plug");
 
 

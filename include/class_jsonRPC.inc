@@ -152,16 +152,6 @@ class jsonRPC {
     }
 
 
-    /*! \brief      The class destructor, it destroys open rpc handles if needed.
-     */
-    public function __destruct()
-    {
-        if($this->curlHandler){
-            curl_close($this->curlHandler);
-        }
-    }
-
-
     /*! \brief      This is some kind of catch-all method, all unknown method names will 
      *               will be interpreted as rpc request. 
      *              If you call "$this->blafasel" this method will initiate an rpc request 

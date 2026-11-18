@@ -1407,9 +1407,12 @@ class group extends plugin
     {
         global $config;
         $ldap = $config->get_ldap_link();
-        $gidNumber = $this->gidNumber;
+
+        $gidNumber = (int) $this->gidNumber;
+        $ridBase   = (int) $this->ridBase;
+
         while (true) {
-            $sid = $this->SID . '-' . ($gidNumber * 2 + $this->ridBase + 1);
+            $sid = $this->SID . '-' . ($gidNumber * 2 + $ridBase + 1);
             $ldap->cd($config->current['BASE']);
             $ldap->search("(sambaSID=$sid)", array('sambaSID'));
             if ($ldap->count() == 0) {

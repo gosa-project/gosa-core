@@ -25,7 +25,7 @@ class filter
     public $searches = [];
     public $xmlSearches = [];
     public $attributes = [];
-    public $search;
+    public $search = '';
     public $defaultSearch;
     public $category = '';
     public $objectStorage = [];
@@ -127,7 +127,7 @@ class filter
         $this->setSearch($this->search);
     }
 
-    public function setSearch($method = null)
+    public function setSearch(string $method = '')
     {
         // Maybe our search method has gone?
         if (!isset($this->searches[$method])) {

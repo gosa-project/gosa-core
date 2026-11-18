@@ -1,4 +1,5 @@
 <body>
+    {$pluginScript}
     {$php_errors}
     {$msg_dialogs}
     <nav class="accent">
