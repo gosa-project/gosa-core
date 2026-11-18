@@ -24,7 +24,6 @@ class userinfo
 {
     var $dn;
     var $ip;
-    var $username;
     var $cn;
     var $uid;
     var $restrictions = [];
@@ -77,7 +76,6 @@ class userinfo
 
         $this->dn = $userdn;
         $this->uid = $attrs['uid'][0];
-        $this->username = $this->uid;
         $this->ip = $_SERVER['REMOTE_ADDR'];
 
         // Initialize ACL_CACHE

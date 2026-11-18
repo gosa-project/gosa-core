@@ -213,12 +213,12 @@ $plist->genBreadcrumb();
 /* check if we are using account expiration */
 $smarty->assign("hideMenus", false);
 if ($config->boolValueIsTrue('core', 'handleExpiredAccounts')) {
-    $expired = ldap_expired_account($config, $ui->dn, $ui->username);
+    $expired = ldap_expired_account($config, $ui->dn, $ui->uid);
 
     if ($expired == POSIX_WARN_ABOUT_EXPIRATION && !session::is_set('POSIX_WARN_ABOUT_EXPIRATION__DONE')) {
 
         // The users password is about to xpire soon, display a warning message.
-        new log('security', 'gosa', '', [], 'password for user "' . $ui->username . '" is about to expire');
+        new log('security', 'gosa', '', [], 'password for user "' . $ui->uid . '" is about to expire');
         msg_dialog::display(_('Password change'), _('Your password is about to expire, please change your password!'), INFO_DIALOG);
         session::set('POSIX_WARN_ABOUT_EXPIRATION__DONE', true);
     } elseif ($expired == POSIX_FORCE_PASSWORD_CHANGE) {
@@ -361,13 +361,13 @@ if (session::global_get('js') == false) {
 
 $loggedin = sprintf(
     _("You're logged in as %s"),
-    "<span>" . $ui->cn . " [" . $ui->username . "] / " . $config->current['NAME'] . "</span> &nbsp;"
+    "<span>" . $ui->cn . " [" . $ui->uid . "] / " . $config->current['NAME'] . "</span> &nbsp;"
 );
 if ($ui->ignore_acl_for_current_user()) {
     $loggedin = "<font color='red'>" . _("ACLs are disabled") . "</font>&nbsp;" . $loggedin;
 }
 
-$userName = $ui->username;
+$userName = $ui->uid;
 
 $smarty->assign('loggedin', $loggedin);
 $smarty->assign('userName', $userName);

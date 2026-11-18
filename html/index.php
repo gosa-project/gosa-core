@@ -393,7 +393,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 
             /* are we using accountexpiration */
             if ($config->boolValueIsTrue("core", "handleExpiredAccounts")) {
-                $expired = ldap_expired_account($config, $ui->dn, $ui->username);
+                $expired = ldap_expired_account($config, $ui->dn, $ui->uid);
 
                 if ($expired == POSIX_ACCOUNT_EXPIRED) {
                     $message = _('Account locked. Please contact your system administrator!');
