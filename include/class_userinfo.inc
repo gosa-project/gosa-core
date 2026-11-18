@@ -24,7 +24,6 @@ class userinfo
 {
     var $dn;
     var $ip;
-    var $username;
     var $cn;
     var $uid;
     var $restrictions = [];

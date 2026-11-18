@@ -448,8 +448,8 @@ function gosa_log($message)
 
     /* Replace username if object is present and not false */
     if ($ui) {
-        if ($ui->username != '') {
-            $username = "[$ui->username]";
+        if ($ui->uid != '') {
+            $username = "[$ui->uid]";
         } else {
             $username = "[unknown]";
         }
@@ -569,7 +569,6 @@ function ldap_login_user_htaccess($username)
 
     /* got user dn, fill acl's */
     $ui = new userinfo($ldap->getDN());
-    $ui->username = $attrs['uid'][0];
 
     /* Bail out if we have login restrictions set, for security reasons
      the message is the same than failed user/pw */
@@ -669,7 +668,6 @@ function ldap_login_user($username, $password)
 
     /* got user dn, fill acl's */
     $ui = new userinfo($ldap->getDN());
-    $ui->username = $attrs['uid'][0];
 
     /* Bail out if we have login restrictions set, for security reasons
      the message is the same than failed user/pw */
