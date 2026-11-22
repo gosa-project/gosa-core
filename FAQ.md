@@ -18,18 +18,20 @@ An example snippet from the gosa.conf:
     
     
     <plugin name='User password' class='password'
-        postmodify="NEWPASSWORD=%new_password /usr/bin/sudo /scripts/myScript.sh"
+        postmodify="NEWPASSWORD=%new_password /scripts/myScript.sh"
     
 Another example for the password check hook (The passwordHook is deprecated since GOsa 2.7):
 
     <location
-        passwordHook="CURRENTPWD=%current_password NEWPWD=%new_password /usr/bin/sudo /scripts/myScript.sh"
+        passwordHook="CURRENTPWD=%current_password NEWPWD=%new_password /scripts/myScript.sh"
 
 You can then use the variables like this:
 
     #!/bin/sh
-    echo $CURRENTPWD
-    echo $NEWPWD
+    CURRENTPWD=$(printf '%s' "$CURRENTPWD" | base64 -d)
+    NEWPWD=$(printf '%s' "$NEWPWD" | base64 -d)
+    echo "$CURRENTPWD"
+    echo "$NEWPWD"
 
 ---
 
@@ -151,10 +153,15 @@ A:  There's the possibility to add a hooks in gosa.conf's plugin tags
     * new_password 
     * userPassword
 
+    Pass the plaintext passwords through the environment (not as
+    command-line arguments) so they do not appear in the process list,
+    and base64 decode them in your script as shown in a previous
+    question:
+
     <plugin acl="users/password:self" class="password"
-     premodify="/scripts/prepareForPasswordChange %current_password %new_password %uid"
+     premodify="CURRENT_PASSWORD=%current_password NEW_PASSWORD=%new_password /scripts/prepareForPasswordChange %uid"
      check="/scripts/checkPasswordHash %userPassword %dn"
-     postmodify="/scripts/changePassword %dn %uid %userPassword %current_password %new_password %userPassword"
+     postmodify="CURRENT_PASSWORD=%current_password NEW_PASSWORD=%new_password /scripts/changePassword %dn %uid %userPassword"
     >
 
 For further information about pre- and post hooks search for the premodify and postmodify statements.
