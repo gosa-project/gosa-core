@@ -656,8 +656,6 @@ class LDAP
 
     function mod_add($attrs = [], $dn = "")
     {
-        print($attrs);
-
         if ($this->hascon) {
             if ($this->reconnect) $this->connect();
             if ($dn == "")
