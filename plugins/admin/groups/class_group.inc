@@ -1500,7 +1500,7 @@ class group extends plugin
                 $uid = $member;
             }
 
-            $this->removeUser($member);
+            $this->removeUser($uid);
         }
     }
 
