@@ -107,6 +107,10 @@ function format_stacktrace(array $trace): array {
     return $formatted;
 }
 
+/* Error types handled by gosaRaiseError, deprecations are included so that they
+ * respect the 'displayErrors' setting instead of being printed into the page. */
+define('GOSA_ERROR_TYPES', E_WARNING | E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_DEPRECATED | E_USER_DEPRECATED);
+
 function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
     global $error_collector, $config;
@@ -114,25 +118,26 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     // To avoid recursion - restore original error handler.
     restore_error_handler();
 
-    /* Return if error reporting is set to zero 
-   * Also exclude statements prefixed with @ - Comment out the block below to see suppressed errors. 
+    /* Return if the error is not covered by the current error reporting level.
+   * This also excludes statements prefixed with @ - Comment out the block below to see suppressed errors.
    * e.g. @call_function_but_hide_errors()
+   * Since PHP 8 the @ operator no longer sets error_reporting() to 0, so a bitmask check is required.
    */
-    if (error_reporting() == 0) {
-        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
+    if (!(error_reporting() & $errno)) {
+        set_error_handler('gosaRaiseError', GOSA_ERROR_TYPES);
         return;
     }
 
     /* Workaround for buggy imap_open error outputs */
     if (preg_match('/imap_open/', $errstr)) {
-        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
+        set_error_handler('gosaRaiseError', GOSA_ERROR_TYPES);
         return;
     }
 
     /* Hide ldap size limit messages */
     if (preg_match('/ldap_error/', $errstr)) {
         if (preg_match('/sizelimit/', $errstr)) {
-            set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
+            set_error_handler('gosaRaiseError', GOSA_ERROR_TYPES);
             return;
         }
     }
@@ -145,7 +150,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
             new log("view", "error", "", array(), "PHP error: $errstr ($errfile, line $errline)");
         }
 
-        set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
+        set_error_handler('gosaRaiseError', GOSA_ERROR_TYPES);
         return;
     }
 
@@ -184,6 +189,8 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
         'errline'   => $errline,
         'trace'     => format_stacktrace($trace),
     ];
+
+    set_error_handler('gosaRaiseError', GOSA_ERROR_TYPES);
 }
 
 
@@ -248,7 +255,7 @@ if (!GOSA_SETUP) {
     enforce_ssl_if_forced();
 }
 
-set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE);
+set_error_handler('gosaRaiseError', GOSA_ERROR_TYPES);
 
 $variables_order = 'ES';
 ini_set("display_errors", 1);
