@@ -69,7 +69,7 @@ class password extends plugin
         $check_lower = true;
         $check_upper = true;
         $check_digits = true;
-        $pwLength = $config->get_cfg_value('core', 'passwordMinLength') != '' ?: 8;
+        $pwLength = $config->get_cfg_value("core", "passwordMinLength") ?: 8;
 
         switch ($theme) {
             case 'classic':
@@ -144,7 +144,7 @@ class password extends plugin
             // Get configuration flags for further input checks.
             $check_differ = $config->get_cfg_value('core', "passwordMinDiffer") != '';
             $differ       = $config->get_cfg_value('core', "passwordMinDiffer");
-            $length       = $config->get_cfg_value('core', "passwordMinLength") != '' ?: 8;
+            $length       = $config->get_cfg_value("core", "passwordMinLength") ?: 8;
 
             switch ($theme) {
                 case 'classic':
