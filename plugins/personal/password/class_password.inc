@@ -69,7 +69,7 @@ class password extends plugin
         $check_lower = true;
         $check_upper = true;
         $check_digits = true;
-        $pwLength = $config->get_cfg_value('core', "passwordMinLength") ?: 8;
+        $pwLength = $config->get_cfg_value('core', 'passwordMinLength') ?: 8;
         $smarty->assign('pwLength', $pwLength);
 
         switch ($theme) {
