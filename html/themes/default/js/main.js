@@ -166,6 +166,7 @@ if (listWrapperElem && cardContentFirstLevelElem) {
 // Check password conditions
 var input = document.getElementById("new_password");
 var pwLength = document.getElementById("pw-length");
+var pwMinLength = pwLength ? (parseInt(pwLength.dataset.minLength, 10) || 8) : 8;
 var pwLowercase_eval = document.getElementById("pw-lowercase") != null;
 var pwLowercase = document.getElementById("pw-lowercase");
 var pwUppercase_eval = document.getElementById("pw-uppercase") != null;
@@ -183,7 +184,7 @@ if (input) {
         testPasswordCss(input.value);
 
         // Validate length
-        if (input.value.length >= 8) {
+        if (input.value.length >= pwMinLength) {
             pwLength.innerText = "check";
             pwLength.style.color = "green";
             pwStrength[0] = true;
