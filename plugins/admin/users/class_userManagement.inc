@@ -251,7 +251,7 @@ class userManagement extends management
 
         $smarty = get_smarty();
 
-        $pwLength = $config->get_cfg_value("core", "passwordMinLength") != '' ?: 8;
+        $pwLength = $config->get_cfg_value("core", "passwordMinLength") ?: 8;
         $smarty->assign("pwLength", $pwLength);
         switch ($this->theme) {
             case 'default':
@@ -331,7 +331,7 @@ class userManagement extends management
                 // Get configuration flags for further input checks.
                 $check_differ = $config->get_cfg_value("core", "passwordMinDiffer") != '';
                 $differ       = $config->get_cfg_value("core", "passwordMinDiffer");
-                $length       = $config->get_cfg_value("core", "passwordMinLength") != '' ?: 8;
+                $length       = $config->get_cfg_value("core", "passwordMinLength") ?: 8;
 
                 switch ($this->theme) {
                     case 'default':

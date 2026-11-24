@@ -76,7 +76,7 @@
             <h3>{t}Password requirements{/t}:</h3>
             <ul>
               <li class="condition">
-                <i id="pw-length" class='material-icons'>close</i>
+                <i id="pw-length" class='material-icons' data-min-length="{$pwLength}">close</i>
                 {t}The password must have at least {$pwLength} characters.{/t}
               </li>
               {if $lower}
